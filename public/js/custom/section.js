@@ -1,0 +1,298 @@
+$(function () {
+
+    $('#sectionForm').on('submit', function (e) {
+        e.preventDefault();
+        var form = this;
+        $.ajax({
+            url: $(form).attr('action'),
+            method: $(form).attr('method'),
+            data: new FormData(form),
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            beforeSend: function () {
+                $(form).find('span.error-text').text('');
+            },
+            success: function (data) {
+                console.log("------")
+                console.log(data)
+                if (data.code == 0) {
+                    $.each(data.error, function (prefix, val) {
+                        $(form).find('span.' + prefix + '_error').text(val[0]);
+                    });
+                } else {
+
+                    if (data.code == 200) {
+                        $('#section-table').DataTable().ajax.reload(null, false);
+                        $('.addSection').modal('hide');
+                        $('.addSection').find('form')[0].reset();
+                        toastr.success(data.message);
+                    } else {
+                        $('.addSection').modal('hide');
+                        $('.addSection').find('form')[0].reset();
+                        toastr.error(data.message);
+                    }
+                }
+            }
+        });
+    });
+
+    // get all sections
+    var table = $('#section-table').DataTable({
+        processing: true,
+        info: true,
+        ajax: sectionList,
+        "pageLength": 5,
+        "aLengthMenu": [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"]
+        ],
+        columns: [
+            {
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex'
+            },
+            {
+                data: 'branch_name',
+                name: 'branch_name'
+            },
+            {
+                data: 'name',
+                name: 'name'
+            },
+            {
+                data: 'capacity',
+                name: 'capacity'
+            },
+            {
+                data: 'actions',
+                name: 'actions',
+                orderable: false,
+                searchable: false
+            },
+        ]
+    }).on('draw', function () {
+    });
+
+    // // edit section
+
+    $(document).on('click', '#editSectionBtn', function () {
+        var section_id = $(this).data('id');
+        // alert(section_id);
+        // return false;
+        $('.editSection').find('form')[0].reset();
+        $('.editSection').find('span.error-text').text('');
+        $.post(sectionDetails, { section_id: section_id }, function (data) {
+            console.log("--------")
+            console.log(data)
+            $('.editSection').find('input[name="sid"]').val(data.data.id);
+            $('.editSection').find('input[name="name"]').val(data.data.name);
+            $('.editSection').find('select[name="branch_id"]').val(data.data.branch_id);
+            $('.editSection').find('input[name="capacity"]').val(data.data.capacity);
+            $('.editSection').modal('show');
+        }, 'json');
+    });
+
+    // update section
+    $('#sectionEditForm').on('submit', function (e) {
+        e.preventDefault();
+        var form = this;
+        $.ajax({
+            url: $(form).attr('action'),
+            method: $(form).attr('method'),
+            data: new FormData(form),
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            beforeSend: function () {
+                $(form).find('span.error-text').text('');
+            },
+            success: function (data) {
+                if (data.code == 0) {
+                    $.each(data.error, function (prefix, val) {
+                        $(form).find('span.' + prefix + '_error').text(val[0]);
+                    });
+                } else {
+
+                    if (data.code == 200) {
+                        $('#section-table').DataTable().ajax.reload(null, false);
+                        $('.editSection').modal('hide');
+                        $('.editSection').find('form')[0].reset();
+                        toastr.success(data.message);
+                    } else {
+                        $('.editSection').modal('hide');
+                        $('.editSection').find('form')[0].reset();
+                        toastr.error(data.message);
+                    }
+                }
+            }
+        });
+    });
+
+    // delete section
+    $(document).on('click', '#deleteSectionBtn', function () {
+        var sid = $(this).data('id');
+        swal.fire({
+            title: 'Are you sure?',
+            html: 'You want to <b>delete</b> this section',
+            showCancelButton: true,
+            showCloseButton: true,
+            cancelButtonText: 'Cancel',
+            confirmButtonText: 'Yes, Delete',
+            cancelButtonColor: '#d33',
+            confirmButtonColor: '#556ee6',
+            width: 400,
+            allowOutsideClick: false
+        }).then(function (result) {
+            if (result.value) {
+                $.post(sectionDelete, { sid: sid }, function (data) {
+
+                    if (data.code == 200) {
+                        $('#section-table').DataTable().ajax.reload(null, false);
+                        toastr.success(data.message);
+                    } else {
+                        toastr.error(data.message);
+                    }
+
+                }, 'json');
+            }
+        });
+    });
+
+    // // add section allocation
+
+    // $('#sectionAllocationForm').on('submit', function(e){
+    //     e.preventDefault();
+    //     var form = this;
+    //     $.ajax({
+    //         url:$(form).attr('action'),
+    //         method:$(form).attr('method'),
+    //         data:new FormData(form),
+    //         processData:false,
+    //         dataType:'json',
+    //         contentType:false,
+    //         beforeSend: function(){
+    //              $(form).find('span.error-text').text('');
+    //         },
+    //         success: function(data){
+    //               if(data.code == 0){
+    //                   $.each(data.error, function(prefix, val){
+    //                       $(form).find('span.'+prefix+'_error').text(val[0]);
+    //                   });
+    //               }else{
+    //                   $('#allocation-table').DataTable().ajax.reload(null, false);
+    //                   $('.addSectionAllocationModal').modal('hide');
+    //                   $('.addSectionAllocationModal').find('form')[0].reset();
+    //                   toastr.success(data.msg);
+    //               }
+    //         }
+    //     });
+    // });
+
+    // // get section allocation table
+    // var allocationTable = $('#allocation-table').DataTable({
+    //     processing: true,
+    //     info: true,
+    //     ajax: sectionAllocationList,
+    //     "pageLength": 5,
+    //     "aLengthMenu": [
+    //         [5, 10, 25, 50, -1],
+    //         [5, 10, 25, 50, "All"]
+    //     ],
+    //     columns: [
+    //         {
+    //             data: 'DT_RowIndex',
+    //             name: 'DT_RowIndex'
+    //         },
+    //         {
+    //             data: 'class_name',
+    //             name: 'class_name'
+    //         },
+    //         {
+    //             data: 'section_name',
+    //             name: 'section_name'
+    //         },
+    //         {
+    //             data: 'actions',
+    //             name: 'actions',
+    //             orderable: false,
+    //             searchable: false
+    //         },
+    //     ]
+    // }).on('draw', function () {
+    // });
+
+    // // edit section allocation
+
+    // $(document).on('click','#editSectionAlloBtn', function(){
+    //     var id = $(this).data('id');
+    //     $('.editSectionAllocationModal').find('form')[0].reset();
+    //     $('.editSectionAllocationModal').find('span.error-text').text('');
+    //     $.post(sectionAllocationDetails,{id:id}, function(data){
+
+    //         $('.editSectionAllocationModal').find('input[name="said"]').val(data.details.id);
+    //         $('.editSectionAllocationModal').find('select[name="class_name"]').val(data.details.class_id);
+    //         $('.editSectionAllocationModal').find('select[name="section_name"]').val(data.details.section_id);
+    //         $('.editSectionAllocationModal').modal('show');
+    //     },'json');
+    // });
+
+    // // update section allocation
+
+    // $('#editsectionAllocationForm').on('submit', function(e){
+    //     e.preventDefault();
+    //     var form = this;
+    //     $.ajax({
+    //         url:$(form).attr('action'),
+    //         method:$(form).attr('method'),
+    //         data:new FormData(form),
+    //         processData:false,
+    //         dataType:'json',
+    //         contentType:false,
+    //         beforeSend: function(){
+    //              $(form).find('span.error-text').text('');
+    //         },
+    //         success: function(data){
+    //               if(data.code == 0){
+    //                   $.each(data.error, function(prefix, val){
+    //                       $(form).find('span.'+prefix+'_error').text(val[0]);
+    //                   });
+    //               }else{
+    //                   $('#allocation-table').DataTable().ajax.reload(null, false);
+    //                   $('.editSectionAllocationModal').modal('hide');
+    //                   $('.editSectionAllocationModal').find('form')[0].reset();
+    //                   toastr.success(data.msg);
+    //               }
+    //         }
+    //     });
+    // });
+
+    // // delete section
+    // $(document).on('click','#deleteSectionAlloBtn', function(){
+    //     var id = $(this).data('id');
+    //     swal.fire({
+    //          title:'Are you sure?',
+    //          html:'You want to <b>delete</b> this section allocation',
+    //          showCancelButton:true,
+    //          showCloseButton:true,
+    //          cancelButtonText:'Cancel',
+    //          confirmButtonText:'Yes, Delete',
+    //          cancelButtonColor:'#d33',
+    //          confirmButtonColor:'#556ee6',
+    //          width:400,
+    //          allowOutsideClick:false
+    //     }).then(function(result){
+    //           if(result.value){
+    //               $.post(sectionAllocationDelete,{id:id}, function(data){
+    //                    if(data.code == 1){
+    //                        $('#allocation-table').DataTable().ajax.reload(null, false);
+    //                        toastr.success(data.msg);
+    //                    }else{
+    //                        toastr.error(data.msg);
+    //                    }
+    //               },'json');
+    //           }
+    //     });
+    // });
+
+});
