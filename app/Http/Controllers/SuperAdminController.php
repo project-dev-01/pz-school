@@ -269,4 +269,113 @@ class SuperAdminController extends Controller
         $branchDetails = Branches::all();
         return view('super_admin.class.index', ['branchDetails' => $branchDetails]);
     }
+
+    // section allocations
+    public function showSectionAllocation()
+    {
+        $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+        return view(
+            'super_admin.section_allocation.allocation',
+            [
+                'branches' => $getBranches['data']
+            ]
+        );
+    }
+    // add branch
+    public function addSectionAllocation(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'class_name' => 'required',
+            'section_name' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+
+            $data = [
+                'branch_id' => $request->branch_id,
+                'class_id' => $request->class_name,
+                'section_id' => $request->section_name
+            ];
+            $response = Helper::PostMethod(config('constants.api.allocate_section_add'), $data);
+            return $response;
+        }
+    }
+    // get branch 
+    public function getSectionAllocationList(Request $request)
+    {
+        $sectionAllocation = Helper::GetMethod(config('constants.api.allocate_section_list'));
+        return DataTables::of($sectionAllocation['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editSectionAlloBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteSectionAlloBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    // get getSectionAllocationDetails details
+    public function getSectionAllocationDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.allocate_section_details'), $data);
+        return $response;
+    }
+
+    // update Section Allocations
+    public function updateSectionAllocation(Request $request){
+        $id = $request->said;
+
+        $validator = \Validator::make($request->all(),[
+            'branch_id'=>'required',
+            'class_name'=>'required',
+            'section_name'=>'required'
+        ]);
+
+        if(!$validator->passes()){
+               return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
+        }else{
+            $data = [
+                'id' => $request->said,
+                'branch_id' => $request->branch_id,
+                'class_id' => $request->class_name,
+                'section_id' => $request->section_name
+            ];
+            $response = Helper::PostMethod(config('constants.api.allocate_section_update'), $data);
+            return $response;
+        }
+    }
+
+     // delete deleteSectionAllocation
+    //  public function (Request $request){
+    //     $id = $request->id;
+    //     SectionAllocation::where('id', $id)->delete();
+    //     return response()->json(['code'=>1, 'msg'=>'Section Allocation have been deleted from database']); 
+    // }
+    public function deleteSectionAllocation(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+
+            $data = [
+                'id' => $id,
+            ];
+            $response = Helper::PostMethod(config('constants.api.allocate_section_delete'), $data);
+            return $response;
+        }
+    }
 }

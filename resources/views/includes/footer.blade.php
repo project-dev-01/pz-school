@@ -62,10 +62,20 @@
     // get states
     var getStates = "{{ config('constants.api.states') }}";
     var getCity = "{{ config('constants.api.cities') }}";
+    var branchByClass = "{{ config('constants.api.branch_by_class') }}";
+    var branchBySection = "{{ config('constants.api.branch_by_section') }}";
+
+    var token = "{{ Session::get('token') }}";
+    
     // branch details
     var branchList = "{{ route('branch.list') }}";
     var branchShow = "{{ route('branch.index') }}";
     var deleteBranch = "{{ route('branch.delete') }}";
+    
+    // section allocation routes
+    var sectionAllocationList = "{{ route('section_allocation.list') }}";
+    var sectionAllocationDetails = "{{ route('section_allocation.details') }}";
+    var sectionAllocationDelete = "{{ route('section_allocation.delete') }}";
     
 </script>
 <!-- custom js  -->

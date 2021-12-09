@@ -51,7 +51,15 @@ Route::group(['prefix' => 'super_admin', 'middleware' => ['isSuperAdmin']], func
     // Class routes
     Route::get('class/index', [SuperAdminController::class, 'class'])->name('super_admin.class');
     Route::post('class/add',[SuperAdminController::class,'addClass'])->name('class.add');
-    
+
+    // sections allocations routes
+    Route::get('allocate_section/index', [SuperAdminController::class, 'showSectionAllocation'])->name('super_admin.section_allocation');
+    Route::post('allocate_section/add',[SuperAdminController::class,'addSectionAllocation'])->name('section_allocation.add');
+    Route::get('allocate_section/list', [SuperAdminController::class, 'getSectionAllocationList'])->name('section_allocation.list');
+    Route::post('allocate_section/section_allocation-details',[SuperAdminController::class, 'getSectionAllocationDetails'])->name('section_allocation.details');
+    Route::post('allocate_section/update',[SuperAdminController::class, 'updateSectionAllocation'])->name('section_allocation.update');
+    Route::post('allocate_section/delete', [SuperAdminController::class, 'deleteSectionAllocation'])->name('section_allocation.delete');
+
 });
 
 Route::group(['prefix' => 'staff', 'middleware' => ['isStaff']], function () {

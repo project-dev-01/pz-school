@@ -14,6 +14,7 @@ use App\Models\Branches;
 use App\Models\Section;
 use App\Helpers\Helper;
 use App\Models\Classes;
+use App\Models\SectionAllocation;
 
 class ApiController extends BaseController
 {
@@ -387,6 +388,145 @@ class ApiController extends BaseController
             } else {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             }
+        }
+    }
+    // add section allocations
+    public function addSectionAllocation(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'branch_id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $section = new SectionAllocation();
+            $section->class_id = $request->class_id;
+            $section->section_id = $request->section_id;
+            $section->branch_id = $request->branch_id;
+            $query = $section->save();
+
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Section Allocation has been successfully saved');
+            }
+        }
+    }
+    // get sections allocation
+    public function getSectionAllocationList(Request $request)
+    {
+        $sectionAllocation = DB::table('sections_allocations as sa')
+            ->select('sa.id', 'sa.class_id', 'sa.section_id','s.name as section_name', 'c.name as class_name', 'c.name_numeric','b.name as branch_name')
+            ->join('sections as s', 'sa.section_id', '=', 's.id')
+            ->join('branches as b', 'sa.branch_id', '=', 'b.id')
+            ->join('classes as c', 'sa.class_id', '=', 'c.id')
+            ->get();
+        return $this->successResponse($sectionAllocation, 'Section Allocation record fetch successfully');
+    }
+
+    // get getSectionAllocationDetails details
+    public function getSectionAllocationDetails(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            $SectionAllocation = SectionAllocation::find($id);
+            return $this->successResponse($SectionAllocation, 'Class row fetch successfully');
+        }
+    }
+    // update Section Allocations
+
+    public function updateSectionAllocation(Request $request)
+    {
+        $id = $request->id;
+
+        $validator = \Validator::make($request->all(), [
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'branch_id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+
+            $section = SectionAllocation::find($id);
+            $section->class_id = $request->class_id;
+            $section->section_id = $request->section_id;
+            $section->branch_id = $request->branch_id;
+            $query = $section->save();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Section Allocation Details have Been updated');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+    // delete deleteSectionAllocation
+    public function deleteSectionAllocation(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $query = SectionAllocation::where('id', $id)->delete();
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Section Allocation have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+
+    // branchIdByClass 
+    public function branchIdByClass(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $branch_id = $request->branch_id;
+            $branchBasedClass = Classes::where('branch_id',$branch_id)->get();
+            return $this->successResponse($branchBasedClass, 'Class row fetch successfully');
+        }
+    }
+    // branchIdBySection 
+    public function branchIdBySection(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $branch_id = $request->branch_id;
+            $branchBasedSection = Section::where('branch_id',$branch_id)->get();
+            return $this->successResponse($branchBasedSection, 'Section row fetch successfully');
         }
     }
 }

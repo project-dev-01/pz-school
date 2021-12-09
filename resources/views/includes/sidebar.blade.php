@@ -76,6 +76,11 @@
                                     <span> Class </span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ route('super_admin.section_allocation')}}" class="nav-link {{ (request()->is('super_admin/section_allocation*')) ? 'active' : '' }}">
+                                    <span> Sections Allocation </span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

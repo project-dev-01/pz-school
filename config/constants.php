@@ -20,7 +20,18 @@ return [
         'branch_list' => $url.'/branch/list',
         'branch_details' => $url.'/branch/branch-details',
         'branch_update' => $url.'/branch/update',
-        'branch_delete' => $url.'/branch/delete'
+        'branch_delete' => $url.'/branch/delete',
+         // section allocation url
+        'allocate_section_add' => $url.'/allocate_section/add',
+        'allocate_section_list' => $url.'/allocate_section/list',
+        'allocate_section_details' => $url.'/allocate_section/section_allocation-details',
+        'allocate_section_update' => $url.'/allocate_section/update',
+        'allocate_section_delete' => $url.'/allocate_section/delete',
+
+        'branch_by_class' => $url.'/branch-by-class',
+        'branch_by_section' => $url.'/branch-by-section',
+
+        
     ]
 
 ];

@@ -49,4 +49,17 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('classes/class-details', [ApiController::class, 'getClassDetails']);
     Route::post('classes/update', [ApiController::class, 'updateClassDetails']);
     Route::post('classes/delete', [ApiController::class, 'deleteClass']);
+
+    // sections allocations routes
+    Route::post('allocate_section/add',[ApiController::class,'addSectionAllocation']);
+    Route::get('allocate_section/list', [ApiController::class, 'getSectionAllocationList']);
+    Route::post('allocate_section/section_allocation-details',[ApiController::class, 'getSectionAllocationDetails']);
+    Route::post('allocate_section/update',[ApiController::class, 'updateSectionAllocation']);
+    Route::post('allocate_section/delete', [ApiController::class, 'deleteSectionAllocation']);
+
+    // branch id by class
+    Route::post('branch-by-class', [ApiController::class, 'branchIdByClass']);
+    Route::post('branch-by-section', [ApiController::class, 'branchIdBySection']);
+    
+    
 });

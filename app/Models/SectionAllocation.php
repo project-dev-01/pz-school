@@ -13,6 +13,7 @@ class SectionAllocation extends Model
 
     protected $fillable = [
         'class_id',
-        'section_id'
+        'section_id',
+        'branch_id'
     ];
 }

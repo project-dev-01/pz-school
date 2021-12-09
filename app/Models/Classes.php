@@ -11,6 +11,7 @@ class Classes extends Model
 
     protected $fillable = [
         'name',
-        'name_numeric'
+        'name_numeric',
+        'branch_id'
     ];
 }
