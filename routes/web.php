@@ -51,6 +51,10 @@ Route::group(['prefix' => 'super_admin', 'middleware' => ['isSuperAdmin']], func
     // Class routes
     Route::get('class/index', [SuperAdminController::class, 'class'])->name('super_admin.class');
     Route::post('class/add',[SuperAdminController::class,'addClass'])->name('class.add');
+    Route::get('class/list', [SuperAdminController::class, 'getClassList'])->name('class.list');
+    Route::post('class/class-details', [SuperAdminController::class, 'getClassDetails'])->name('class.details');
+    Route::post('class/update', [SuperAdminController::class, 'updateClassDetails'])->name('class.update');
+    Route::post('class/delete', [SuperAdminController::class, 'deleteClass'])->name('class.delete');
 
     // sections allocations routes
     Route::get('allocate_section/index', [SuperAdminController::class, 'showSectionAllocation'])->name('super_admin.section_allocation');

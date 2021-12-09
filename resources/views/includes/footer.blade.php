@@ -25,6 +25,17 @@
 <!-- Vendor js -->
 <script src="{{ asset('js/vendor.min.js') }}"></script>
 
+<!-- plugin js -->
+<script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
+    <script src="{{ asset('libs/@fullcalendar/core/main.min.js') }}"></script>
+    <script src="{{ asset('libs/@fullcalendar/bootstrap/main.min.js') }}"></script>
+    <script src="{{ asset('libs/@fullcalendar/daygrid/main.min.js') }}"></script>
+    <script src="{{ asset('libs/@fullcalendar/timegrid/main.min.js') }}"></script>
+    <script src="{{ asset('libs/@fullcalendar/list/main.min.js') }}"></script>
+    <script src="{{ asset('libs/@fullcalendar/interaction/main.min.js') }}"></script>
+
+<!-- Calendar init -->
+    <script src="{{ asset('js/pages/calendar.init.js') }}"></script>
 <!-- Plugins js-->
 <script src="{{ asset('libs/flatpickr/flatpickr.min.js') }}"></script>
 <!-- <script src="{{ asset('libs/apexcharts/apexcharts.min.js') }}"></script> -->
@@ -76,7 +87,13 @@
     var sectionAllocationList = "{{ route('section_allocation.list') }}";
     var sectionAllocationDetails = "{{ route('section_allocation.details') }}";
     var sectionAllocationDelete = "{{ route('section_allocation.delete') }}";
+
     
+    // class details
+    var classList = "{{ route('class.list') }}";
+    var classDetails = "{{ route('class.details') }}";
+    var classDelete = "{{ route('class.delete') }}";  
+      
 </script>
 <!-- custom js  -->
 <!-- <script src="{{ asset('js/custom/classes.js') }}"></script>
@@ -84,4 +101,5 @@
 <script src="{{ asset('js/custom/settings.js') }}"></script> -->
 <script src="{{ asset('js/custom/section.js') }}"></script>
 <script src="{{ asset('js/custom/branch.js') }}"></script>
+<script src="{{ asset('js/custom/classes.js') }}"></script>
 <!-- <script src="{{ asset('js/custom/assign_teacher.js') }}"></script> -->

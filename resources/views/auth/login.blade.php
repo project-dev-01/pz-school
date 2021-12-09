@@ -20,10 +20,11 @@
 
     <!-- icons -->
     <link href="{{ asset('css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom/common.css') }}" rel="stylesheet" type="text/css" />
 
 </head>
 
-<body class="loading authentication-bg authentication-bg-pattern">
+<body class="loading authentication-bg-1 authentication-bg-pattern">
 
     <div class="account-pages mt-5 mb-5">
         <div class="container">
@@ -37,13 +38,13 @@
                                 <div class="auth-logo">
                                     <a href="index.html" class="logo logo-dark text-center">
                                         <span class="logo-lg">
-                                            <img src="{{ asset('images/logo-dark.png') }}" alt="" height="22">
+                                            <img src="{{ asset('images/logo-dark.png') }}" alt="" height="50">
                                         </span>
                                     </a>
 
                                     <a href="index.html" class="logo logo-light text-center">
                                         <span class="logo-lg">
-                                            <img src="{{ asset('images/logo-light.png') }}" alt="" height="22">
+                                            <img src="{{ asset('images/logo-light.png') }}" alt="" height="50">
                                         </span>
                                     </a>
                                 </div>
@@ -88,7 +89,7 @@
                                 </div> -->
 
                                 <div class="form-group mb-0 text-center">
-                                    <button class="btn btn-primary btn-block" type="submit"> Log In </button>
+                                    <button class="btn btn-primary-bn btn-block" type="submit"> Log In </button>
                                 </div>
 
                             </form>

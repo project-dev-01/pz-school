@@ -263,12 +263,14 @@ class SuperAdminController extends Controller
             return $response;
         }
     }
+    
     // get class
     public function class()
     {
-        $branchDetails = Branches::all();
-        return view('super_admin.class.index', ['branchDetails' => $branchDetails]);
+        $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+        return view('super_admin.class.index', ['branches' => $getBranches['data']]);
     }
+
 
     // section allocations
     public function showSectionAllocation()
@@ -375,6 +377,106 @@ class SuperAdminController extends Controller
                 'id' => $id,
             ];
             $response = Helper::PostMethod(config('constants.api.allocate_section_delete'), $data);
+            return $response;
+        }
+    }
+
+
+    // add class
+    public function addClass(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'name' => 'required',
+            'name_numeric' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+
+            $data = [
+                'name' => $request->name,
+                'branch_id' => $request->branch_id,
+                'name_numeric' => $request->name_numeric
+            ];
+            $response = Helper::PostMethod(config('constants.api.class_add'), $data);
+
+            return $response;
+        }
+    }
+    // get class 
+    public function getClassList(Request $request)
+    {
+       
+        $response = Helper::GetMethod(config('constants.api.class_list'));
+        
+        return DataTables::of($response['data'])
+        
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editClassBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteClassBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    // get class row details
+    public function getClassDetails(Request $request)
+    {
+        $data = [
+            'class_id' => $request->class_id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.class_details'), $data);
+        return $response;
+    }
+    // update class
+    public function updateClassDetails(Request $request)
+    {
+        $class_id = $request->class_id;
+
+        $validator = \Validator::make($request->all(), [
+            'class_id' => 'required',
+            'branch_id' => 'required',
+            'name' => 'required',
+            'name_numeric' => 'required',
+        ]);
+
+       
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'class_id' => $class_id,
+                'name' => $request->name,
+                'branch_id' => $request->branch_id,
+                'name_numeric' => $request->name_numeric,
+            ];
+            
+            $response = Helper::PostMethod(config('constants.api.class_update'), $data);
+            return $response;
+        }
+    }
+    // delete class
+    public function deleteClass(Request $request)
+    {
+
+        $class_id = $request->class_id;
+        $validator = \Validator::make($request->all(), [
+            'class_id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'class_id' => $class_id
+            ];
+            $response = Helper::PostMethod(config('constants.api.class_delete'), $data);
             return $response;
         }
     }

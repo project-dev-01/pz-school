@@ -105,7 +105,7 @@
         </div>
         <div class="col-md-2"></div>
         <div class="col-8 offset-4" style="margin-left:34%;">
-            <button type="submit" class="btn btn-primary waves-effect waves-light">
+            <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
                 Save
             </button>
 

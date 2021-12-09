@@ -1,0 +1,80 @@
+						#parent
+						{
+						font-weight:bold;font-size:20px;
+						}
+						#hr{
+						margin-top:-1%;margin-left:15%;color:#0ABAB5
+						}
+						#span-parent
+						{
+						font-weight:bold;color:#0ABAB5;
+						}
+						.offset-3 {
+							margin-left: 26%;
+						}
+						.offset-4 {
+							margin-left: 36%;
+						}
+						body.authentication-bg-1 {
+							background-color: #114F55;
+							background-size: cover;
+							background-position: center;
+						}
+						.btn-primary-bn {
+							color: #fff;
+							background-color: #114F55;
+							border-color: #114F55;
+						}
+						
+						
+
+						.btn-primary-bl {
+							color: #fff;
+							background-color: #0ABAB5;
+							border-color: #0ABAB5;
+						}
+
+						#sidebar-menu>ul>li>a:hover {
+							color:#0ABAB5;text-decoration:none
+						}
+						#sidebar-menu>ul>li>a.mm-active {
+							color:#0ABAB5
+						}
+						#sidebar-menu .menuitem-active>a { 
+							color:#0ABAB5
+						}
+						#sidebar-menu .menuitem-active .active {
+							color:#0ABAB5
+						}
+						.nav-second-level li a:hover { 
+							color:#0ABAB5
+						 }
+						.nav-second-level li.active>a {
+							color:#0ABAB5
+						}
+
+						.navbar-custom {
+							background-color: #114F55;
+						}
+						.page-item.active .page-link {
+							z-index: 3;
+							color: #fff;
+							background-color: #0ABAB5;
+							border-color: #0ABAB5;
+						}
+
+						.nav-bordered a.active {
+							border-bottom: 2px solid #0ABAB5!important;
+						}
+
+						.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+							color: #fff;
+							background-color: #0ABAB5;
+						}
+
+						#sidebar-menu>ul>li>a:active, #sidebar-menu>ul>li>a:focus, #sidebar-menu>ul>li>a:hover {
+							color: #0ABAB5;
+							text-decoration: none;
+						}
+
+						

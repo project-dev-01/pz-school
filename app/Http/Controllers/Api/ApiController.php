@@ -306,7 +306,7 @@ class ApiController extends BaseController
         }
     }
 
-    // get class 
+    // get classes 
     public function getClassList(Request $request)
     {
 
@@ -317,8 +317,11 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $success = Classes::all();
-            return $this->successResponse($success, 'Class record fetch successfully');
+            $success = DB::table('classes as cl')
+                ->select('cl.*', 'br.name as branch_name', 'br.branch_code', 'br.school_name')
+                ->join('branches as br', 'cl.branch_id', '=', 'br.id')
+                ->get();            
+                return $this->successResponse($success, 'Class record fetch successfully');
         }
     }
     // get class row details
@@ -345,7 +348,7 @@ class ApiController extends BaseController
 
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
-            'name' => 'required|unique:classs,name,' . $class_id,
+            'name' => 'required|unique:classes,name,' . $class_id,
             'name_numeric' => 'required',
             'branch_id' => 'required'
         ]);

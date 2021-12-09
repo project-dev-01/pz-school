@@ -51,23 +51,13 @@
 
         <!-- LOGO -->
         <div class="logo-box">
-            <a href="index.html" class="logo logo-dark text-center">
-                <span class="logo-sm">
-                    <img src="{{ asset('images/logo-sm.png') }}" alt="" height="22">
-                    <!-- <span class="logo-lg-text-light">UBold</span> -->
-                </span>
-                <span class="logo-lg">
-                    <img src="{{ asset('images/logo-dark.png') }}" alt="" height="20">
-                    <!-- <span class="logo-lg-text-light">U</span> -->
-                </span>
-            </a>
 
             <a href="index.html" class="logo logo-light text-center">
                 <span class="logo-sm">
                     <img src="{{ asset('images/logo-sm.png') }}" alt="" height="22">
                 </span>
                 <span class="logo-lg">
-                    <img src="{{ asset('images/logo-light.png') }}" alt="" height="20">
+                    <img src="{{ asset('images/300x83-3.png') }}" alt="" height="45">
                 </span>
             </a>
         </div>

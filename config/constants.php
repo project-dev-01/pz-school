@@ -30,6 +30,12 @@ return [
 
         'branch_by_class' => $url.'/branch-by-class',
         'branch_by_section' => $url.'/branch-by-section',
+        // class url
+        'class_add' => $url.'/classes/add',
+        'class_list' => $url.'/classes/list',
+        'class_details' => $url.'/classes/class-details',
+        'class_update' => $url.'/classes/update',
+        'class_delete' => $url.'/classes/delete',
 
         
     ]

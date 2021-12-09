@@ -26,7 +26,7 @@
                 <p class="sub-header">
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addClassModal">Add Class</button>
+                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addClassModal">Add Class</button>
                     </div>
                 </div>
                 </p>
@@ -36,7 +36,9 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Branch</th>
                                 <th>Name</th>
+                                <th>Numeric</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -49,6 +51,7 @@
     </div>
     <!--- end row -->
     @include('super_admin.class.add')
+    @include('super_admin.class.edit')
 
 </div>
 <!-- container -->
