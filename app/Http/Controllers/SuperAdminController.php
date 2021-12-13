@@ -480,4 +480,9 @@ class SuperAdminController extends Controller
             return $response;
         }
     }
+    // get department 
+    public function Department()
+    {
+        return view('super_admin.department.index');
+    }
 }

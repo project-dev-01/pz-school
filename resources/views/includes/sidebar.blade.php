@@ -84,6 +84,32 @@
                         </ul>
                     </div>
                 </li>
+                <li>
+                    <a href="#sidebarEmployee" data-toggle="collapse">
+                        <i class="fas fa-users"></i>
+                        <span> Employee </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarEmployee">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('super_admin.department')}}" class="nav-link {{ (request()->is('super_admin/department*')) ? 'active' : '' }}">
+                                    <span> Add Department </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('super_admin.designation')}}" class="nav-link {{ (request()->is('super_admin/designation*')) ? 'active' : '' }}">
+                                    <span>Add Designation </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('super_admin.employee')}}" class="nav-link {{ (request()->is('super_admin/employee*')) ? 'active' : '' }}">
+                                    <span>Add Employee</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                 @endif
                 @endif
 

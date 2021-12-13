@@ -42,4 +42,9 @@ class Helper{
         $response = Http::post($url, $data);
         return $response->json();
     }
+
+    // create api
+    public static function Create($model, $data){
+        
+    }
 }

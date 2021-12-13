@@ -60,6 +60,15 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // branch id by class
     Route::post('branch-by-class', [ApiController::class, 'branchIdByClass']);
     Route::post('branch-by-section', [ApiController::class, 'branchIdBySection']);
-    
+
+    // department routes
+    Route::post('department/add',[ApiController::class,'addDepartment']);
+    Route::get('department/list', [ApiController::class, 'getDepartmentList']);
+    Route::post('department/department-details', [ApiController::class, 'getDepartmentDetails']);
+    Route::post('department/update', [ApiController::class, 'updateDepartment']);
+    Route::post('department/delete', [ApiController::class, 'deleteDepartment']);
+
+
+
     
 });

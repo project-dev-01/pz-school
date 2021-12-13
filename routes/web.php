@@ -64,6 +64,13 @@ Route::group(['prefix' => 'super_admin', 'middleware' => ['isSuperAdmin']], func
     Route::post('allocate_section/update',[SuperAdminController::class, 'updateSectionAllocation'])->name('section_allocation.update');
     Route::post('allocate_section/delete', [SuperAdminController::class, 'deleteSectionAllocation'])->name('section_allocation.delete');
 
+    // department routes
+    Route::get('department/index', [SuperAdminController::class, 'Department'])->name('super_admin.department');
+    // designation routes
+    Route::get('designation/index', [SuperAdminController::class, 'Designation'])->name('super_admin.designation');
+    // Employee routes
+    Route::get('employee/index', [SuperAdminController::class, 'Employee'])->name('super_admin.employee');
+
 });
 
 Route::group(['prefix' => 'staff', 'middleware' => ['isStaff']], function () {

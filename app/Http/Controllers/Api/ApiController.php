@@ -10,11 +10,14 @@ use Symfony\Component\HttpFoundation\Response;
 // base controller add
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Api\BaseController as BaseController;
+use Illuminate\Validation\Rule;
+
 use App\Models\Branches;
 use App\Models\Section;
 use App\Helpers\Helper;
 use App\Models\Classes;
 use App\Models\SectionAllocation;
+use App\Models\StaffDepartments;
 
 class ApiController extends BaseController
 {
@@ -530,6 +533,116 @@ class ApiController extends BaseController
             $branch_id = $request->branch_id;
             $branchBasedSection = Section::where('branch_id',$branch_id)->get();
             return $this->successResponse($branchBasedSection, 'Section row fetch successfully');
+        }
+    }
+
+    // addDepartment
+    public function addDepartment(Request $request){
+
+        $branch_id = $request->branch_id;
+        $validator = \Validator::make($request->all(), [
+            'name' => Rule::unique('staff_departments')->where(function ($query) use ($branch_id) {
+                return $query->where('branch_id', $branch_id);
+            }),
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            $department = new StaffDepartments();
+            $department->branch_id = $request->branch_id;
+            $department->name = $request->name;
+            $query = $department->save();
+
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Department has been successfully saved');
+            }
+
+        }
+    }
+    // getDepartmentList
+    public function getDepartmentList(Request $request)
+    {
+        $Department = DB::table('staff_departments as s')
+            ->select('s.*','b.name as branch_name')
+            ->join('branches as b', 's.branch_id', '=', 'b.id')
+            ->get();
+        return $this->successResponse($Department, 'Department record fetch successfully');
+    }
+    // get department row details
+    public function getDepartmentDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            $deptDetails = StaffDepartments::find($id);
+            return $this->successResponse($deptDetails, 'Department row fetch successfully');
+        }
+    }
+    // update department
+    public function updateDepartment(Request $request)
+    {
+        $id = $request->id;
+
+        $branch_id = $request->branch_id;
+        $validator = \Validator::make($request->all(), [
+            'name' => Rule::unique('staff_departments')->where(function ($query) use ($branch_id,$id) {
+                return $query->where('branch_id', $branch_id)->where('id','!=', $id);
+            }),
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            $department = StaffDepartments::find($id);
+            $department->branch_id = $request->branch_id;
+            $department->name = $request->name;
+            $query = $department->save();
+            
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Department Details have Been updated');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+    // delete Section
+    public function deleteDepartment(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $query = StaffDepartments::find($id)->delete();
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Department have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
         }
     }
 }
