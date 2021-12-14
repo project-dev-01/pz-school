@@ -66,6 +66,12 @@ Route::group(['prefix' => 'super_admin', 'middleware' => ['isSuperAdmin']], func
 
     // department routes
     Route::get('department/index', [SuperAdminController::class, 'Department'])->name('super_admin.department');
+    Route::post('department/add',[SuperAdminController::class,'addDepartment'])->name('department.add');
+    Route::get('department/list', [SuperAdminController::class, 'getDepartmentList'])->name('department.list');
+    Route::post('department/department-details',[SuperAdminController::class, 'getDepartmentDetails'])->name('department.details');
+    Route::post('department/update',[SuperAdminController::class, 'updateDepartment'])->name('department.update');
+    Route::post('department/delete', [SuperAdminController::class, 'deleteDepartment'])->name('department.delete');
+
     // designation routes
     Route::get('designation/index', [SuperAdminController::class, 'Designation'])->name('super_admin.designation');
     // Employee routes

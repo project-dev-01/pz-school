@@ -68,6 +68,12 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('department/update', [ApiController::class, 'updateDepartment']);
     Route::post('department/delete', [ApiController::class, 'deleteDepartment']);
 
+    // designations routes
+    Route::post('designation/add',[ApiController::class,'addDesignation']);
+    Route::get('designation/list', [ApiController::class, 'getDesignationList']);
+    Route::post('designation/designation-details', [ApiController::class, 'getDesignationDetails']);
+    Route::post('designation/update', [ApiController::class, 'updateDesignation']);
+    Route::post('designation/delete', [ApiController::class, 'deleteDesignation']);
 
 
     

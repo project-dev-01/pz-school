@@ -93,6 +93,12 @@
     var classList = "{{ route('class.list') }}";
     var classDetails = "{{ route('class.details') }}";
     var classDelete = "{{ route('class.delete') }}";  
+
+    // department routes
+    var departmentList = "{{ route('department.list') }}";
+    var departmentDetails = "{{ route('department.details') }}";
+    var departmentDelete = "{{ route('department.delete') }}";
+
       
 </script>
 <!-- custom js  -->
@@ -102,4 +108,5 @@
 <script src="{{ asset('js/custom/section.js') }}"></script>
 <script src="{{ asset('js/custom/branch.js') }}"></script>
 <script src="{{ asset('js/custom/classes.js') }}"></script>
+<script src="{{ asset('js/custom/department.js') }}"></script>
 <!-- <script src="{{ asset('js/custom/assign_teacher.js') }}"></script> -->

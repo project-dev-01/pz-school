@@ -26,13 +26,13 @@
                 <p class="sub-header">
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#">Add Department</button>
+                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addDepartmentModal">Add Department</button>
                     </div>
                 </div>
                 </p>
 
                 <div class="table-responsive">
-                    <table class="table mb-0" id="">
+                    <table class="table mb-0" id="department-table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -42,17 +42,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>First Branch</td>
-                                <td>English</td>
-                                <td>
-                                    <div class="button-list">
-                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
-                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
-                                    </div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -61,6 +50,7 @@
     </div>
     <!--- end row -->
     @include('super_admin.department.add')
+    @include('super_admin.department.edit')
 
 </div>
 <!-- container -->

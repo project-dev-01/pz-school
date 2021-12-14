@@ -483,6 +483,101 @@ class SuperAdminController extends Controller
     // get department 
     public function Department()
     {
-        return view('super_admin.department.index');
+        $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+        return view(
+            'super_admin.department.index',
+            [
+                'branches' => $getBranches['data']
+            ]
+        );
+    }
+    //add Department
+    public function addDepartment(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'name' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+
+            $data = [
+                'branch_id' => $request->branch_id,
+                'name' => $request->name
+            ];
+            $response = Helper::PostMethod(config('constants.api.department_add'), $data);
+            return $response;
+        }
+    }
+    // get DepartmentList
+    public function getDepartmentList(Request $request)
+    {
+       
+        $response = Helper::GetMethod(config('constants.api.department_list'));
+        
+        return DataTables::of($response['data'])
+        
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editDepartmentBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteDepartmentBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    // get department row details
+    public function getDepartmentDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.department_details'), $data);
+        return $response;
+    }
+    // update department
+    public function updateDepartment(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'name' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $request->id,
+                'name' => $request->name,
+                'branch_id' => $request->branch_id
+            ];
+            
+            $response = Helper::PostMethod(config('constants.api.department_update'), $data);
+            return $response;
+        }
+    }
+    // delete department
+    public function deleteDepartment(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $id
+            ];
+            $response = Helper::PostMethod(config('constants.api.department_delete'), $data);
+            return $response;
+        }
     }
 }

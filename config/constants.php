@@ -37,6 +37,19 @@ return [
         'class_update' => $url.'/classes/update',
         'class_delete' => $url.'/classes/delete',
 
+        // department url
+        'department_add' => $url.'/department/add',
+        'department_list' => $url.'/department/list',
+        'department_details' => $url.'/department/department-details',
+        'department_update' => $url.'/department/update',
+        'department_delete' => $url.'/department/delete',
+
+        // designation url
+        'designation_add' => $url.'/designation/add',
+        'designation_list' => $url.'/designation/list',
+        'designation_details' => $url.'/designation/designation-details',
+        'designation_update' => $url.'/designation/update',
+        'designation_delete' => $url.'/designation/delete',
         
     ]
 
