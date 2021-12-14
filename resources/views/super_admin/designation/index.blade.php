@@ -32,7 +32,7 @@
                 </p>
 
                 <div class="table-responsive">
-                    <table class="table mb-0" id="">
+                    <table class="table mb-0" id="designation-table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -42,17 +42,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>First Branch</td>
-                                <td>Science Teacher</td>
-                                <td> 
-                                    <div class="button-list">
-                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
-                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
-                                    </div>
-                                </tb>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -61,6 +50,7 @@
     </div>
     <!--- end row -->
     @include('super_admin.designation.add')
+    @include('super_admin.designation.edit')
 
 </div>
 <!-- container -->

@@ -580,4 +580,104 @@ class SuperAdminController extends Controller
             return $response;
         }
     }
+    // get Designation 
+    public function Designation()
+    {
+        $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+        return view(
+            'super_admin.designation.index',
+            [
+                'branches' => $getBranches['data']
+            ]
+        );
+    }
+
+    //add Designation
+    public function addDesignation(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'name' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'branch_id' => $request->branch_id,
+                'name' => $request->name
+            ];
+            $response = Helper::PostMethod(config('constants.api.designation_add'), $data);
+            return $response;
+        }
+    }
+    // get Designation 
+    public function getDesignationList(Request $request)
+    {
+       
+        $response = Helper::GetMethod(config('constants.api.designation_list'));
+        
+        return DataTables::of($response['data'])
+        
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editDesignationBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteDesignationBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    // get designation row details
+    public function getDesignationDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.designation_details'), $data);
+        return $response;
+    }
+    // update designation
+    public function updateDesignation(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'name' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $request->id,
+                'name' => $request->name,
+                'branch_id' => $request->branch_id
+            ];
+            
+            $response = Helper::PostMethod(config('constants.api.designation_update'), $data);
+            return $response;
+        }
+    }
+
+    // delete designation
+    public function deleteDesignation(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $id
+            ];
+            $response = Helper::PostMethod(config('constants.api.designation_delete'), $data);
+            return $response;
+        }
+    }
 }

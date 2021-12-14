@@ -99,6 +99,11 @@
     var departmentDetails = "{{ route('department.details') }}";
     var departmentDelete = "{{ route('department.delete') }}";
 
+    // designation routes
+    var designationList = "{{ route('designation.list') }}";
+    var designationDetails = "{{ route('designation.details') }}";
+    var designationDelete = "{{ route('designation.delete') }}";
+    
       
 </script>
 <!-- custom js  -->
@@ -109,4 +114,5 @@
 <script src="{{ asset('js/custom/branch.js') }}"></script>
 <script src="{{ asset('js/custom/classes.js') }}"></script>
 <script src="{{ asset('js/custom/department.js') }}"></script>
+<script src="{{ asset('js/custom/designation.js') }}"></script>
 <!-- <script src="{{ asset('js/custom/assign_teacher.js') }}"></script> -->
