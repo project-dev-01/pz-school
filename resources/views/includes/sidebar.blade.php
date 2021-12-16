@@ -81,6 +81,32 @@
                                     <span> Sections Allocation </span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ route('super_admin.assign_teacher')}}" class="nav-link {{ (request()->is('super_admin/assign_teacher*')) ? 'active' : '' }}">
+                                    <span> Assign Class Teacher </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#sidebarEvents" data-toggle="collapse">
+                        <i data-feather="map"></i>
+                        <span> Events </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarEvents">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('super_admin.event_type')}}" class="nav-link {{ (request()->is('super_admin/event_type*')) ? 'active' : '' }}">
+                                    <span> Event Type </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('super_admin.event')}}" class="nav-link {{ (request()->is('super_admin/event/*')) ? 'active' : '' }}">
+                                    <span> Events </span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

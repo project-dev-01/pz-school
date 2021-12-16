@@ -6,17 +6,20 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 //
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 // base controller add
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Api\BaseController as BaseController;
 use Illuminate\Validation\Rule;
-
 use App\Models\Branches;
 use App\Models\Section;
 use App\Helpers\Helper;
 use App\Models\Classes;
 use App\Models\SectionAllocation;
+use App\Models\TeacherAllocation;
+use App\Models\EventType;
+use App\Models\Event;
 use App\Models\StaffDepartments;
 use App\Models\StaffDesignation;
 
@@ -504,6 +507,153 @@ class ApiController extends BaseController
         }
     }
 
+    // add TeacherAllocation
+    public function addTeacherAllocation(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_name'=>'required',
+            'section_name'=>'required',
+            'class_teacher'=>'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $teacherAllocation = new TeacherAllocation();
+            $teacherAllocation->class_id = $request->class_name;
+            $teacherAllocation->section_id = $request->section_name;
+            $teacherAllocation->teacher_id = $request->class_teacher;
+            $teacherAllocation->branch_id = $request->branch_id;
+            $query = $teacherAllocation->save();
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Teacher Allocation has been successfully saved');
+            }
+        }
+    }
+
+    // get TeacherAllocation 
+    public function getTeacherAllocationList(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $success = DB::table('teacher_allocations as ta')
+                        ->select('ta.id','ta.class_id','ta.section_id','ta.teacher_id','s.name as section_name','c.name as class_name','u.name as teacher_name','b.name as branch_name')
+                        ->join('sections as s', 'ta.section_id', '=', 's.id')
+                        ->join('branches as b', 'ta.branch_id', '=', 'b.id')
+                        ->join('classes as c', 'ta.class_id', '=', 'c.id')
+                        ->join('users as u', 'ta.teacher_id', '=', 'u.id')
+                        ->get();        
+                return $this->successResponse($success, 'Teacher Allocation record fetch successfully');
+        }
+    }
+    // get TeacherAllocation row details
+    public function getTeacherAllocationDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'teacher_allocation__id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $teacher_allocation__id = $request->teacher_allocation__id;
+            $teacherAllocationDetails = TeacherAllocation::find($teacher_allocation__id);
+            return $this->successResponse($teacherAllocationDetails, 'Teacher Allocation row fetch successfully');
+        }
+    }
+    // update TeacherAllocation
+    public function updateTeacherAllocation(Request $request)
+    {
+        $teacher_allocation__id = $request->teacher_allocation__id;
+
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_name'=>'required',
+            'section_name'=>'required',
+            'class_teacher'=>'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            $teacherAllocation = TeacherAllocation::find($teacher_allocation__id);
+            $teacherAllocation->class_id = $request->class_name;
+            $teacherAllocation->section_id = $request->section_name;
+            $teacherAllocation->teacher_id = $request->class_teacher;
+            $teacherAllocation->branch_id = $request->branch_id;
+            $query = $teacherAllocation->save();
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Teacher Allocation Details have Been updated');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+
+    // delete TeacherAllocation
+    public function deleteTeacherAllocation(Request $request)
+    {
+
+        $teacher_allocation__id = $request->teacher_allocation__id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'teacher_allocation__id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $query = TeacherAllocation::find($teacher_allocation__id)->delete();
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Teacher Allocation have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+
+    // branchIdByTeacherAllocation 
+    public function branchIdByTeacherAllocation(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $branch_id = $request->branch_id;
+            $response=[];
+            $response['class'] = Classes::where('branch_id',$branch_id)->get();
+            $response['teacher'] = DB::table('users as us')
+                                    ->select('us.id', 'us.user_id', 'us.name')
+                                    ->join('staffs as s', 'us.user_id', '=', 's.id')
+                                    ->join('branches as b', 's.branch_id', '=', 'b.id')
+                                    ->where('s.branch_id',$branch_id)
+                                    ->get();
+            return $this->successResponse($response, 'Information fetch successfully');
+        }
+    }
+
     // branchIdByClass 
     public function branchIdByClass(Request $request)
     {
@@ -536,7 +686,302 @@ class ApiController extends BaseController
             return $this->successResponse($branchBasedSection, 'Section row fetch successfully');
         }
     }
+    // SectionByClass 
+    public function SectionByClass(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'class_id' => 'required',
+            'token' => 'required',
+        ]);
 
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $class_id = $request->class_id;
+            $sectionBasedClass = DB::table('sections_allocations as sa')
+                                ->select('s.id','s.name')
+                                ->join('sections as s', 'sa.section_id', '=', 's.id')
+                                ->where('sa.class_id',$class_id)
+                                ->get();
+            return $this->successResponse($sectionBasedClass, 'Section row fetch successfully');
+        }
+    }
+    
+    // add EventType
+    public function addEventType(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'name' => 'required',
+            'branch_id' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            $event_type = new EventType();
+            $event_type->name = $request->name;
+            $event_type->branch_id = $request->branch_id;
+            $query = $event_type->save();
+
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'New Event Type has been successfully saved');
+            }
+        }
+    }
+
+    // get EventTypes 
+    public function getEventTypeList(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $success = DB::table('event_types as et')
+                ->select('et.*', 'br.name as branch_name', 'br.branch_code', 'br.school_name')
+                ->join('branches as br', 'et.branch_id', '=', 'br.id')
+                ->get();            
+                return $this->successResponse($success, 'Event Type record fetch successfully');
+        }
+    }
+    // get EventType row details
+    public function getEventTypeDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'event_type_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $event_type_id = $request->event_type_id;
+            $eventTypeDetails = EventType::find($event_type_id);
+            return $this->successResponse($eventTypeDetails, 'Event Type row fetch successfully');
+        }
+    }
+    // update EventType
+    public function updateEventTypeDetails(Request $request)
+    {
+        $event_type_id = $request->event_type_id;
+
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'name' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            $event_type = EventType::find($event_type_id);
+            $event_type->name = $request->name;
+            $event_type->branch_id = $request->branch_id;
+            $query = $event_type->save();
+            
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Event Type Details have Been updated');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+
+    // delete EventType
+    public function deleteEventType(Request $request)
+    {
+
+        $event_type_id = $request->event_type_id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'event_type_id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $query = EventType::find($event_type_id)->delete();
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Event Type have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+
+    
+    // add Event
+    public function addEvent(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'title' => 'required',
+            'type' => 'required',
+            'audience' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'selected_list' => '',
+            'description' => '',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            $event = new Event();
+            $event->branch_id = $request->branch_id;
+            $event->title = $request->title;
+            $event->type = $request->type;
+            $event->audience = $request->audience;
+            $event->selected_list = $request->selected_list;
+            $event->start_date = $request->start_date;
+            $event->end_date = $request->end_date;
+            $event->remarks = $request->description;
+
+            $user = Auth::id();
+            $event->created_by = $user;
+            $query = $event->save();
+
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'New Event has been successfully saved');
+            }
+        }
+    }
+
+    // get Events 
+    public function getEventList(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            $success = \DB::table("events")
+            ->select("events.*",\DB::raw("GROUP_CONCAT(classes.name) as classname"),'event_types.name as type','users.name as created_by')
+            ->leftjoin("classes",\DB::raw("FIND_IN_SET(classes.id,events.selected_list)"),">",\DB::raw("'0'"))
+            ->leftjoin('event_types','event_types.id','=','events.type')
+            ->leftjoin('users','users.id','=','events.created_by')
+            ->groupBy("events.id")
+            ->get();
+
+            return $this->successResponse($success, 'Event record fetch successfully');
+        }
+    }
+    // get Event row details
+    public function getEventDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'event_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $event_id = $request->event_id;
+            $eventDetails = \DB::table("events")
+            ->select("events.*",\DB::raw("GROUP_CONCAT(classes.name) as classname"),'event_types.name as type','users.name as created_by')
+            ->leftjoin("classes",\DB::raw("FIND_IN_SET(classes.id,events.selected_list)"),">",\DB::raw("'0'"))
+            ->leftjoin('event_types','event_types.id','=','events.type')
+            ->leftjoin('users','users.id','=','events.created_by')
+            ->groupBy("events.id")
+            ->where('events.id',$event_id)->first();
+            return $this->successResponse($eventDetails, 'Event row fetch successfully');
+        }
+    }
+    // delete Event
+    public function deleteEvent(Request $request)
+    {
+
+        $event_id = $request->event_id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'event_id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $query = Event::find($event_id)->delete();
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Event have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+    // publish Event
+    public function publishEvent(Request $request)
+    {
+
+        $event_id = $request->event_id;
+        $validator = \Validator::make($request->all(), [
+        'token' => 'required',
+        'event_id' => 'required',
+        'value' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+        $event = Event::find($request->event_id);
+        $event->status = $request->value;
+        $query = $event->save();
+        $success = [];
+        if ($query) {
+            return $this->successResponse($success, 'Event have been Updated successfully');
+        } else {
+            return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+        }
+        }
+    }
+    // branchIdByEvent 
+    public function branchIdByEvent(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $branch_id = $request->branch_id;
+            $response=[];
+            $response['class'] = Classes::where('branch_id',$branch_id)->get();
+            $response['section'] = DB::table('sections_allocations as sa')
+                                    ->select('sa.id', 'sa.class_id', 'sa.section_id','s.name as section_name', 'c.name as class_name', 'c.name_numeric','b.name as branch_name')
+                                    ->join('sections as s', 'sa.section_id', '=', 's.id')
+                                    ->join('branches as b', 'sa.branch_id', '=', 'b.id')
+                                    ->join('classes as c', 'sa.class_id', '=', 'c.id')
+                                    ->where('sa.branch_id',$branch_id)
+                                    ->get();
+            $response['eventType'] = EventType::where('branch_id',$branch_id)->get();
+            return $this->successResponse($response, 'Information fetch successfully');
+        }
+    }
     // addDepartment
     public function addDepartment(Request $request){
 

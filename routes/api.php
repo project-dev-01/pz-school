@@ -57,9 +57,35 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('allocate_section/update',[ApiController::class, 'updateSectionAllocation']);
     Route::post('allocate_section/delete', [ApiController::class, 'deleteSectionAllocation']);
 
+    // TeacherAllocations routes
+    Route::post('assign_teacher/add',[ApiController::class,'addTeacherAllocation']);
+    Route::get('assign_teacher/list', [ApiController::class, 'getTeacherAllocationList']);
+    Route::post('assign_teacher/assign_teacher-details', [ApiController::class, 'getTeacherAllocationDetails']);
+    Route::post('assign_teacher/update', [ApiController::class, 'updateTeacherAllocation']);
+    Route::post('assign_teacher/delete', [ApiController::class, 'deleteTeacherAllocation']);
+    Route::post('branch-by-assign-teacher', [ApiController::class, 'branchIdByTeacherAllocation']);
+    
+
     // branch id by class
     Route::post('branch-by-class', [ApiController::class, 'branchIdByClass']);
     Route::post('branch-by-section', [ApiController::class, 'branchIdBySection']);
+    Route::post('section-by-class', [ApiController::class, 'SectionByClass']);
+
+    // Event Type routes
+    Route::post('event_type/add', [ApiController::class, 'addEventType']);
+    Route::get('event_type/list', [ApiController::class, 'getEventTypeList']);
+    Route::post('event_type/event_type-details', [ApiController::class, 'getEventTypeDetails']);
+    Route::post('event_type/update', [ApiController::class, 'updateEventTypeDetails']);
+    Route::post('event_type/delete', [ApiController::class, 'deleteEventType']);
+
+    // Event routes
+    Route::post('event/add', [ApiController::class, 'addEvent']);
+    Route::get('event/list', [ApiController::class, 'getEventList']);
+    Route::post('event/event-details', [ApiController::class, 'getEventDetails']);
+    Route::post('event/update', [ApiController::class, 'updateEventDetails']);
+    Route::post('event/delete', [ApiController::class, 'deleteEvent']);
+    Route::post('event/publish', [ApiController::class, 'publishEvent']);
+    Route::post('branch-by-event', [ApiController::class, 'branchIdByEvent']);
 
     // department routes
     Route::post('department/add',[ApiController::class,'addDepartment']);
@@ -74,6 +100,9 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('designation/designation-details', [ApiController::class, 'getDesignationDetails']);
     Route::post('designation/update', [ApiController::class, 'updateDesignation']);
     Route::post('designation/delete', [ApiController::class, 'deleteDesignation']);
+
+    
+
 
 
     
