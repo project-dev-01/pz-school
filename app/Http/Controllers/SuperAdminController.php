@@ -1041,4 +1041,20 @@ public function deleteTeacherAllocation(Request $request)
         }
         
     }
+       // show employee
+       public function showEmployee()
+       {
+           $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+           $data = [
+               'status' => 0
+           ];
+           $roles = Helper::PostMethod(config('constants.api.roles'),$data);
+           return view(
+               'super_admin.employee.index',
+               [
+                   'branches' => $getBranches['data'],
+                   'roles' => $roles['data'],
+               ]
+           );
+       }
 }

@@ -9,6 +9,8 @@ return [
         'countries' => $url.'/get-countries',
         'states' => $url.'/get-states',
         'cities' => $url.'/get-cities',
+        // get roles
+        'roles' => $url.'/roles/list',
         // section url
         'section_add' => $url.'/section/add',
         'section_list' => $url.'/section/list',
@@ -80,6 +82,9 @@ return [
         //teacher url
         
         'teacher_list' => $url.'/teacher/list',
+         // employee url
+         'emp_department' => $url.'/employee/department',
+         'emp_designation' => $url.'/employee/designation',
         
     ]
 

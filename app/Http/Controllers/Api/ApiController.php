@@ -12,10 +12,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Api\BaseController as BaseController;
 use Illuminate\Validation\Rule;
+
 use App\Models\Branches;
 use App\Models\Section;
 use App\Helpers\Helper;
 use App\Models\Classes;
+use App\Models\Role;
 use App\Models\SectionAllocation;
 use App\Models\TeacherAllocation;
 use App\Models\EventType;
@@ -26,6 +28,10 @@ use App\Models\StaffDesignation;
 class ApiController extends BaseController
 {
     //
+    public function getRoles(Request $request){
+        $data = Role::where('status',$request->status)->get();
+        return $this->successResponse($data, 'Section record fetch successfully');
+    }
     // add section
     public function addSection(Request $request)
     {
@@ -1211,4 +1217,34 @@ class ApiController extends BaseController
             }
         }
     }
+        // employee departments
+        public function getEmpDepartment(Request $request)
+        {
+            $validator = \Validator::make($request->all(), [
+                'branch_id' => 'required',
+                'token' => 'required',
+            ]);
+    
+            if (!$validator->passes()) {
+                return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+            } else {
+                $StaffDepartment = StaffDepartments::where('branch_id',$request->branch_id)->get();
+                return $this->successResponse($StaffDepartment, 'Department row fetch successfully');
+            }
+        }
+        // employee designation
+        public function getEmpDesignation(Request $request)
+        {
+            $validator = \Validator::make($request->all(), [
+                'branch_id' => 'required',
+                'token' => 'required',
+            ]);
+    
+            if (!$validator->passes()) {
+                return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+            } else {
+                $StaffDesig = StaffDesignation::where('branch_id',$request->branch_id)->get();
+                return $this->successResponse($StaffDesig, 'Designation row fetch successfully');
+            }
+        }
 }

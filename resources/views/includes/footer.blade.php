@@ -60,6 +60,9 @@
 <script src="{{ asset('toastr/toastr.min.js') }}"></script>
 <!-- Add croptool plugin -->
 <script src="{{ asset('ijaboCropTool/ijaboCropTool.min.js') }}"></script>
+<!-- Add date picker -->
+<!-- <script src="{{ asset('date-picker/jquery-3.6.0.js') }}"></script> -->
+<script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
 
 <!-- <script src="{{ asset('js/validation/validation.js') }}"></script> -->
 <script>
@@ -124,6 +127,9 @@
     var designationDetails = "{{ route('designation.details') }}";
     var designationDelete = "{{ route('designation.delete') }}";
     
+    // employee
+    var empDepartment = "{{ config('constants.api.emp_department') }}";
+    var empDesignation = "{{ config('constants.api.emp_designation') }}";
       
 </script>
 <!-- custom js  -->
@@ -137,4 +143,5 @@
 <script src="{{ asset('js/custom/event_type.js') }}"></script>
 <script src="{{ asset('js/custom/event.js') }}"></script>
 <script src="{{ asset('js/custom/designation.js') }}"></script>
+<script src="{{ asset('js/custom/employee.js') }}"></script>
 <script src="{{ asset('js/custom/assign_teacher.js') }}"></script>
