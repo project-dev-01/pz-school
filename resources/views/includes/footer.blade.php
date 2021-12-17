@@ -24,6 +24,9 @@
 
 <!-- Vendor js -->
 <script src="{{ asset('js/vendor.min.js') }}"></script>
+<script src="{{ asset('libs/mohithg-switchery/switchery.min.js') }}"></script>
+<script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
+
 
 <!-- plugin js -->
 <script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
@@ -35,6 +38,7 @@
     <script src="{{ asset('libs/@fullcalendar/interaction/main.min.js') }}"></script>
 
 <!-- Calendar init -->
+<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
     <script src="{{ asset('js/pages/calendar.init.js') }}"></script>
 <!-- Plugins js-->
 <script src="{{ asset('libs/flatpickr/flatpickr.min.js') }}"></script>
@@ -88,13 +92,29 @@
     var sectionAllocationDetails = "{{ route('section_allocation.details') }}";
     var sectionAllocationDelete = "{{ route('section_allocation.delete') }}";
 
-    
+    // assign teacher routes
+    var assignTeacherList = "{{ route('assign_teacher.list') }}";
+    var assignTeacherDetails = "{{ route('assign_teacher.details') }}";
+    var assignTeacherUpdate = "{{ route('assign_teacher.update') }}";
+    var deleteAssignTeacher = "{{ route('assign_teacher.delete') }}";
+    var branchbyAssignTeacher = "{{ config('constants.api.branch_by_assign_teacher') }}";
+    var getsectionAllocation = "{{ config('constants.api.section_by_class') }}";    
     // class details
     var classList = "{{ route('class.list') }}";
     var classDetails = "{{ route('class.details') }}";
     var classDelete = "{{ route('class.delete') }}";  
+    // Event type details
+    var eventTypeList = "{{ route('event_type.list') }}";
+    var eventTypeDetails = "{{ route('event_type.details') }}";
+    var eventTypeDelete = "{{ route('event_type.delete') }}"; 
 
-    // department routes
+    // Event details
+    var eventList = "{{ route('event.list') }}";
+    var eventDetails = "{{ route('event.details') }}";
+    var eventDelete = "{{ route('event.delete') }}"; 
+    var eventPublish = "{{ route('event.publish') }}"; 
+    var branchByEvent = "{{ config('constants.api.branch_by_event') }}";
+        // department routes
     var departmentList = "{{ route('department.list') }}";
     var departmentDetails = "{{ route('department.details') }}";
     var departmentDelete = "{{ route('department.delete') }}";
@@ -114,5 +134,7 @@
 <script src="{{ asset('js/custom/branch.js') }}"></script>
 <script src="{{ asset('js/custom/classes.js') }}"></script>
 <script src="{{ asset('js/custom/department.js') }}"></script>
+<script src="{{ asset('js/custom/event_type.js') }}"></script>
+<script src="{{ asset('js/custom/event.js') }}"></script>
 <script src="{{ asset('js/custom/designation.js') }}"></script>
 <!-- <script src="{{ asset('js/custom/assign_teacher.js') }}"></script> -->

@@ -63,6 +63,32 @@ Route::group(['prefix' => 'super_admin', 'middleware' => ['isSuperAdmin']], func
     Route::post('allocate_section/section_allocation-details',[SuperAdminController::class, 'getSectionAllocationDetails'])->name('section_allocation.details');
     Route::post('allocate_section/update',[SuperAdminController::class, 'updateSectionAllocation'])->name('section_allocation.update');
     Route::post('allocate_section/delete', [SuperAdminController::class, 'deleteSectionAllocation'])->name('section_allocation.delete');
+  
+    // assign_teacher routes
+   Route::get('assign_teacher/index', [SuperAdminController::class, 'showTeacherAllocation'])->name('super_admin.assign_teacher');
+   Route::post('assign_teacher/get_allocation_section', [SuperAdminController::class, 'getAllocationSection'])->name('assign_teacher.get_allocation_section');
+   Route::post('assign_teacher/add', [SuperAdminController::class, 'addTeacherAllocation'])->name('assign_teacher.add');
+   Route::get('assign_teacher/list', [SuperAdminController::class, 'getTeacherAllocationList'])->name('assign_teacher.list');
+   Route::post('assign_teacher/details', [SuperAdminController::class, 'getTeacherAllocationDetails'])->name('assign_teacher.details');
+   Route::post('assign_teacher/update', [SuperAdminController::class, 'updateTeacherAllocation'])->name('assign_teacher.update');
+   Route::post('assign_teacher/delete', [SuperAdminController::class, 'deleteTeacherAllocation'])->name('assign_teacher.delete');
+
+   // Event Type routes
+   Route::get('event_type/index', [SuperAdminController::class, 'eventType'])->name('super_admin.event_type');
+   Route::get('event_type/list', [SuperAdminController::class, 'getEventTypeList'])->name('event_type.list');
+   Route::post('event_type/add', [SuperAdminController::class, 'addEventType'])->name('event_type.add');
+   Route::post('event_type/event_type-details',[SuperAdminController::class, 'getEventTypeDetails'])->name('event_type.details');
+   Route::post('event_type/update',[SuperAdminController::class, 'updateEventTypeDetails'])->name('event_type.update');
+   Route::post('event_type/delete', [SuperAdminController::class, 'deleteEventType'])->name('event_type.delete');
+
+    
+   // Event routes
+   Route::get('event/index', [SuperAdminController::class, 'event'])->name('super_admin.event');
+   Route::get('event/list', [SuperAdminController::class, 'getEventList'])->name('event.list');
+   Route::post('event/add', [SuperAdminController::class, 'addEvent'])->name('event.add');
+   Route::post('event/event-details',[SuperAdminController::class, 'getEventDetails'])->name('event.details');
+   Route::post('event/delete', [SuperAdminController::class, 'deleteEvent'])->name('event.delete');
+   Route::post('event/event-publish',[SuperAdminController::class, 'publishEvent'])->name('event.publish');
 
     // department routes
     Route::get('department/index', [SuperAdminController::class, 'Department'])->name('super_admin.department');

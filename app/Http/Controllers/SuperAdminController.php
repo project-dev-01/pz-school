@@ -380,7 +380,115 @@ class SuperAdminController extends Controller
             return $response;
         }
     }
+// get TeacherAllocation
+public function showTeacherAllocation()
+{
+    $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+    return view('super_admin.assign_teacher.index', ['branches' => $getBranches['data']]);
+}
+// add TeacherAllocation
+public function addTeacherAllocation(Request $request)
+{
 
+    $validator = \Validator::make($request->all(), [
+        'branch_id' => 'required',
+        'class_name'=>'required',
+        'section_name'=>'required',
+        'class_teacher'=>'required'
+    ]);
+
+    if (!$validator->passes()) {
+        return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+    } else {
+
+        
+        $data = [
+            'branch_id' => $request->branch_id,
+            'class_name'=>$request->class_name,
+            'section_name'=>$request->section_name,
+            'class_teacher'=>$request->class_teacher,            
+        ];
+        $response = Helper::PostMethod(config('constants.api.assign_teacher_add'), $data);
+
+        return $response;
+    }
+}
+// get TeacherAllocation 
+public function getTeacherAllocationList(Request $request)
+{
+   
+    $response = Helper::GetMethod(config('constants.api.assign_teacher_list'));
+    $row = $response['data'];
+    return DataTables::of($row)
+    
+        ->addIndexColumn()
+        ->addColumn('actions', function ($row) {
+            return '<div class="button-list">
+                            <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editTeacherAllocationBtn">Edit</a>
+                            <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteTeacherAllocationBtn">Delete</a>
+                    </div>';
+        })
+
+        ->rawColumns(['status','actions'])
+        ->make(true);
+}
+// get TeacherAllocation row details
+public function getTeacherAllocationDetails(Request $request)
+{
+    $data = [
+        'teacher_allocation__id' => $request->assign_teacher_id,
+    ];
+    $response = Helper::PostMethod(config('constants.api.assign_teacher_details'), $data);
+    return $response;
+}
+// update TeacherAllocation
+public function updateTeacherAllocation(Request $request)
+{
+    $assign_teacher_id = $request->assign_teacher_id;
+
+    $validator = \Validator::make($request->all(), [
+        'assign_teacher_id' => 'required',
+        'branch_id' => 'required',
+        'class_name'=>'required',
+        'section_name'=>'required',
+        'class_teacher'=>'required'
+    ]);
+
+   
+    if (!$validator->passes()) {
+        return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+    } else {
+        $data = [
+            'teacher_allocation__id' => $assign_teacher_id,
+            'branch_id' => $request->branch_id,
+            'class_name'=>$request->class_name,
+            'section_name'=>$request->section_name,
+            'class_teacher'=>$request->class_teacher,      
+        ];
+        
+        $response = Helper::PostMethod(config('constants.api.assign_teacher_update'), $data);
+        return $response;
+    }
+}
+// delete TeacherAllocation
+public function deleteTeacherAllocation(Request $request)
+{
+
+    $assign_teacher_id = $request->assign_teacher_id;
+    $validator = \Validator::make($request->all(), [
+        'assign_teacher_id' => 'required',
+    ]);
+
+    if (!$validator->passes()) {
+        return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+    } else {
+        $data = [
+            'teacher_allocation__id' => $assign_teacher_id
+        ];
+        $response = Helper::PostMethod(config('constants.api.assign_teacher_delete'), $data);
+        return $response;
+    }
+}
 
     // add class
     public function addClass(Request $request)
@@ -679,5 +787,253 @@ class SuperAdminController extends Controller
             $response = Helper::PostMethod(config('constants.api.designation_delete'), $data);
             return $response;
         }
+    }
+
+    // get eventType
+    public function eventType()
+    {
+        $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+        return view('super_admin.event_type.index', ['branches' => $getBranches['data']]);
+    }
+
+    // add eventType
+    public function addEventType(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'name' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+
+            $data = [
+                'name' => $request->name,
+                'branch_id' => $request->branch_id,
+            ];
+            $response = Helper::PostMethod(config('constants.api.event_type_add'), $data);
+
+            return $response;
+        }
+    }
+    // get eventType 
+    public function getEventTypeList(Request $request)
+    {
+       
+        $response = Helper::GetMethod(config('constants.api.event_type_list'));
+        
+        return DataTables::of($response['data'])
+        
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editEventTypeBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteEventTypeBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    // get eventType row details
+    public function getEventTypeDetails(Request $request)
+    {
+        $data = [
+            'event_type_id' => $request->event_type_id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.event_type_details'), $data);
+        return $response;
+    }
+    // update eventType
+    public function updateEventTypeDetails(Request $request)
+    {
+        $event_type_id = $request->event_type_id;
+
+        $validator = \Validator::make($request->all(), [
+            'event_type_id' => 'required',
+            'branch_id' => 'required',
+            'name' => 'required',
+        ]);
+
+       
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'event_type_id' => $event_type_id,
+                'name' => $request->name,
+                'branch_id' => $request->branch_id,
+            ];
+            
+            $response = Helper::PostMethod(config('constants.api.event_type_update'), $data);
+            return $response;
+        }
+    }
+    // delete eventType
+    public function deleteEventType(Request $request)
+    {
+
+        $event_type_id = $request->event_type_id;
+        $validator = \Validator::make($request->all(), [
+            'event_type_id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'event_type_id' => $event_type_id
+            ];
+            $response = Helper::PostMethod(config('constants.api.event_type_delete'), $data);
+            return $response;
+        }
+    }
+    // get event
+    public function event()
+    {
+        $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+        $getEventType = Helper::GetMethod(config('constants.api.event_type_list'));
+        $getClass = Helper::GetMethod(config('constants.api.class_list'));
+        $getSection = Helper::GetMethod(config('constants.api.allocate_section_list'));
+        return view('super_admin.event.index', ['branches' => $getBranches['data'],'type' => $getEventType['data'],'classDetails' => $getClass['data'],'sectionDetails' => $getSection['data']]);
+    }
+    // add event
+    public function addEvent(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'title' => 'required',
+            'type' => 'required',
+            'audience' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'class' => '',
+            'section' => '',
+            'description' => '',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+
+            if($request->audience==2)
+            {
+                $selected_list = json_encode($request->class);
+            }elseif($request->audience==3)
+            {
+                $selected_list = json_encode($request->section);
+            }else{
+                $selected_list = NULL;
+            }
+
+            $data = [
+                'branch_id' => $request->branch_id,
+                'title' => $request->title,
+                'type' => $request->type,
+                'audience' => $request->audience,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'selected_list' => $selected_list,
+                'description' => $request->description,
+            ];
+            
+            $response = Helper::PostMethod(config('constants.api.event_add'), $data);
+
+            return $response;
+        }
+    }
+    // get event 
+    public function getEventList(Request $request)
+    {
+       
+        $response = Helper::GetMethod(config('constants.api.event_list'));
+        $row = $response['data'];
+        return DataTables::of($row)
+        
+            ->addIndexColumn()
+            ->addColumn('classname', function ($row) {
+                $audience = $row['audience'];
+                if($audience==1)
+                {
+                    return "Everyone";
+                }else{
+                    return "Class ".$row['classname'];
+                }
+            })
+            ->addColumn('status', function ($row) {
+                
+                $status = $row['status'];
+                if($status==1)
+                {
+                    $result = "checked";
+                }else{
+                    $result = "";
+                }
+                return '<input type="checkbox" '.$result.' data-id="' . $row['id'] . '"  id="publishEventBtn">';
+            })
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="viewEventBtn">View</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteEventBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['status','actions'])
+            ->make(true);
+    }
+    // get event row details
+    public function getEventDetails(Request $request)
+    {
+        $data = [
+            'event_id' => $request->event_id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.event_details'), $data);
+        return $response;
+    }
+    // delete event
+    public function deleteEvent(Request $request)
+    {
+
+        $event_id = $request->event_id;
+        $validator = \Validator::make($request->all(), [
+            'event_id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'event_id' => $event_id
+            ];
+            $response = Helper::PostMethod(config('constants.api.event_delete'), $data);
+            return $response;
+        }
+    }
+    // Publish Event 
+    public function publishEvent(Request $request){
+
+        
+        $event_id = $request->event_id;
+        $validator = \Validator::make($request->all(), [
+            'event_id' => 'required',
+            'value' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'event_id' => $event_id,
+                'value' => $request->value,
+            ];
+            $response = Helper::PostMethod(config('constants.api.event_publish'), $data);
+            return $response;
+
+           
+        }
+        
     }
 }
