@@ -137,4 +137,4 @@
 <script src="{{ asset('js/custom/event_type.js') }}"></script>
 <script src="{{ asset('js/custom/event.js') }}"></script>
 <script src="{{ asset('js/custom/designation.js') }}"></script>
-<!-- <script src="{{ asset('js/custom/assign_teacher.js') }}"></script> -->
+<script src="{{ asset('js/custom/assign_teacher.js') }}"></script>

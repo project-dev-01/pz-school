@@ -185,6 +185,9 @@ class ApiController extends BaseController
     // get branch 
     public function getBranchList(Request $request)
     {
+        $country_id = $request->country_id;
+        $state_id = $request->state_id;
+        $city_id = $request->city_id;
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
         ]);
@@ -197,6 +200,15 @@ class ApiController extends BaseController
                 ->join('countries as ct', 'br.country_id', '=', 'ct.id')
                 ->join('states as st', 'br.state_id', '=', 'st.id')
                 ->join('cities as ci', 'br.city_id', '=', 'ci.id')
+                ->when($country_id, function ($query, $country_id) {
+                    return $query->where('br.country_id', $country_id);
+                })
+                ->when($state_id, function ($query, $state_id) {
+                    return $query->where('br.state_id', $state_id);
+                })
+                ->when($city_id, function ($query, $city_id) {
+                    return $query->where('br.city_id', $city_id);
+                })
                 ->get();
             return $this->successResponse($success, 'Branch record fetch successfully');
         }

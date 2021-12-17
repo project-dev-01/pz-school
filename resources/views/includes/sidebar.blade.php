@@ -128,11 +128,11 @@
                                     <span>Add Designation </span>
                                 </a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="{{ route('super_admin.employee')}}" class="nav-link {{ (request()->is('super_admin/employee*')) ? 'active' : '' }}">
                                     <span>Add Employee</span>
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </li>

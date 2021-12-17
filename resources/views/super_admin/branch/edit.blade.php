@@ -96,7 +96,7 @@
                                         <div class="form-group row">
                                             <label for="country" class="col-3 col-form-label">Country<span class="text-danger">*</span></label>
                                             <div class="col-9">
-                                                <select id="getCountry" class="form-control" name="country">
+                                                <select id="editGetCountry" class="form-control" name="country">
                                                     <option value="">Select Country</option>
                                                     @foreach($countries as $c)
                                                     @if($branch['country_id'] == $c['id'])
@@ -114,7 +114,7 @@
                                         <div class="form-group row">
                                             <label for="state" class="col-3 col-form-label">State<span class="text-danger">*</span></label>
                                             <div class="col-9">
-                                                <select id="getState" class="form-control" name="state">
+                                                <select id="editGetState" class="form-control" name="state">
                                                     <option value="">Select State</option>
                                                     @foreach($states as $s)
                                                     @if($branch['state_id'] == $s['id'])
@@ -133,7 +133,7 @@
                                         <div class="form-group row">
                                             <label for="city" class="col-3 col-form-label">City<span class="text-danger">*</span></label>
                                             <div class="col-9">
-                                                <select id="getCity" class="form-control" name="city">
+                                                <select id="editGetCity" class="form-control" name="city">
                                                     <option value="">Select City</option>
                                                     @foreach($cities as $c)
                                                     @if($branch['city_id'] == $c['id'])

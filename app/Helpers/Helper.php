@@ -47,4 +47,11 @@ class Helper{
     public static function Create($model, $data){
         
     }
+
+    // get api call
+    public static function DataTableGetMethod($url,$data){
+        $data["token"] = session()->get('token');
+        $response = Http::get($url,$data);
+        return $response->json();
+    }
 }

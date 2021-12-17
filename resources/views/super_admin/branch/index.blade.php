@@ -20,6 +20,62 @@
         </div>
     </div>
     <!-- end page title -->
+    <!-- <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <li class="nav-item">
+                        <h4  class="nav-link">
+                            Branch List
+                        <h4>
+                    </li>
+                </ul><br>								
+                <div class="card-body">										 
+                    <form id="filter">                                         
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="country">Country<span class="text-danger">*</span></label>
+                                    <select id="country" class="form-control" name="country" required="">
+                                        <option value="">Select</option>
+                                        @foreach($countries as $c)
+                                        <option value="{{$c['id']}}">{{$c['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="state">State<span class="text-danger">*</span></label>
+                                    <select id="state" class="form-control" name="state" required="">
+                                    <option value="">Select State</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="city">City<span class="text-danger">*</span></label>
+                                    <select id="city" class="form-control"  required="">
+                                    <option value="">Select City</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group text-right m-b-0">
+                            <button class="btn btn-primary-bl waves-effect waves-light" id="branch-filter" type="button">
+                                Filter
+                            </button>
+                            <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                    
+                    
+                </div> 
+            </div>
+        </div> 
+    </div>  -->
     <div class="row">
         <div class="col-xl-12">
             <div class="card-box">
@@ -35,8 +91,48 @@
                         </a>
                     </li>
                 </ul>
+                
                 <div class="tab-content">
-                    <div class="tab-pane show active" id="branch-list-tab">
+                    <div class="tab-pane show active" id="branch-list-tab">									 
+                        <form id="filter">                                         
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="country">Country<span class="text-danger">*</span></label>
+                                        <select id="country" class="form-control" name="country" required="">
+                                            <option value="">Select</option>
+                                            @foreach($countries as $c)
+                                            <option value="{{$c['id']}}">{{$c['name']}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="state">State<span class="text-danger">*</span></label>
+                                        <select id="state" class="form-control" name="state" required="">
+                                        <option value="">Select State</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="city">City<span class="text-danger">*</span></label>
+                                        <select id="city" class="form-control"  required="">
+                                        <option value="">Select City</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group text-right m-b-0">
+                                <button class="btn btn-primary-bl waves-effect waves-light" id="branch-filter" type="button">
+                                    Filter
+                                </button>
+                                <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                    Cancel
+                                </button>-->
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table class="table mb-0" id="branch-table">
                                 <thead>

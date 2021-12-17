@@ -1,6 +1,30 @@
 $(function () {
 
+    var country_id = "";
+    var state_id = "";
+    var city_id = "";
+    branchTable(country_id,state_id,city_id);
+
+
     // change country
+    $('#country').on('change', function () {
+        var country_id = $(this).val();
+        $("#filter").find("#state").empty();
+        $("#filter").find("#state").append('<option value="">Select State</option>');
+        $("#filter").find("#city").empty();
+        $("#filter").find("#city").append('<option value="">Select City</option>');
+        $.post(getStates, { country_id: country_id }, function (res) {
+            console.log('df',res)
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#filter").find("#state").append('<option value="' + val.id + '">' + val.name + '</option>');
+                });
+                // if(country_id == ''){
+                //     $("#branch-form").find("#getState").append('<option value="">Select State</option>');
+                // }                    
+            }
+        }, 'json');
+    });
     $('#getCountry').on('change', function () {
         var country_id = $(this).val();
         $("#branch-form").find("#getState").empty();
@@ -18,7 +42,40 @@ $(function () {
             }
         }, 'json');
     });
+    $('#editGetCountry').on('change', function () {
+        var country_id = $(this).val();
+        $("#edit-branch-form").find("#editGetState").empty();
+        $("#edit-branch-form").find("#editGetState").append('<option value="">Select State</option>');
+        $("#edit-branch-form").find("#editGetCity").empty();
+        $("#edit-branch-form").find("#editGetCity").append('<option value="">Select City</option>');
+        $.post(getStates, { country_id: country_id }, function (res) {
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#edit-branch-form").find("#editGetState").append('<option value="' + val.id + '">' + val.name + '</option>');
+                });
+                // if(country_id == ''){
+                //     $("#branch-form").find("#getState").append('<option value="">Select State</option>');
+                // }                    
+            }
+        }, 'json');
+    });
     // change state
+    $('#state').on('change', function () {
+        var state_id = $(this).val();
+        $("#filter").find("#city").empty();
+        $("#filter").find("#city").append('<option value="">Select City</option>');
+        $.post(getCity, { state_id: state_id }, function (res) {
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#filter").find("#city").append('<option value="' + val.id + '">' + val.name + '</option>');
+                });
+                // if(country_id == ''){
+                //     $("#branch-form").find("#getCity").append('<option value="">Select State</option>');
+                // }                    
+            }
+        }, 'json');
+    });
+
     $('#getState').on('change', function () {
         var state_id = $(this).val();
         $("#branch-form").find("#getCity").empty();
@@ -35,7 +92,34 @@ $(function () {
         }, 'json');
     });
 
+    $('#editGetState').on('change', function () {
+        var state_id = $(this).val();
+        $("#edit-branch-form").find("#editGetCity").empty();
+        $("#edit-branch-form").find("#editGetCity").append('<option value="">Select City</option>');
+        $.post(getCity, { state_id: state_id }, function (res) {
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#edit-branch-form").find("#editGetCity").append('<option value="' + val.id + '">' + val.name + '</option>');
+                });
+                // if(country_id == ''){
+                //     $("#branch-form").find("#getCity").append('<option value="">Select State</option>');
+                // }                    
+            }
+        }, 'json');
+    });
+
     // save branch-form
+    $('#branch-filter').on('click', function (e) {
+        e.preventDefault();
+        country_id = $("#country").val();
+        state_id = $("#state").val();
+        city_id = $("#city").val();
+
+        console.log('dh',country_id)
+        
+        branchTable(country_id,state_id,city_id);
+    });
+
     $('#branch-form').on('submit', function (e) {
         e.preventDefault();
         var form = this;
@@ -70,71 +154,101 @@ $(function () {
             }
         });
     });
+    
 
     // get all assign teacher table
-    var table = $('#branch-table').DataTable({
-        processing: true,
-        info: true,
-        ajax: branchList,
-        "pageLength": 5,
-        "aLengthMenu": [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"]
-        ],
-        columns: [
-            {
-                data: 'DT_RowIndex',
-                name: 'DT_RowIndex'
+    function branchTable(country,state,city)
+    {
+        $('#branch-table').DataTable({
+            processing: true,
+            bDestroy: true,
+            info: true,
+            "ajax": {
+                url: branchList,
+                cache: false,
+                dataType: "json",
+                // data: { month:getSelectedMonth },
+                // data: formData,
+                data:{country_id:country,state_id:state,city_id:city},
+                type: "GET",
+                // contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+                // processData: true, // NEEDED, DON'T OMIT THIS
+                // headers: {
+                // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                // },
+                "dataSrc": function(json) {
+                console.log("losing json");
+                console.log(json);
+                return json.data;
+                },
+                error: function(error) {
+                console.log("error")
+                console.log(error)
+                // noDataAvailable(error);
+                }
             },
-            {
-                data: 'name',
-                name: 'name'
-            },
-            {
-                data: 'school_name',
-                name: 'school_name'
-            },
-            {
-                data: 'email',
-                name: 'email'
-            },
-            {
-                data: 'mobile_no',
-                name: 'mobile_no'
-            },
-            {
-                data: 'currency',
-                name: 'currency'
-            },
-            {
-                data: 'symbol',
-                name: 'symbol'
-            },
-            {
-                data: 'country_name',
-                name: 'country_name'
-            },
-            {
-                data: 'state_name',
-                name: 'state_name'
-            },
-            {
-                data: 'city_name',
-                name: 'city_name'
-            },
-            {
-                data: 'address',
-                name: 'address'
-            },
-            {
-                data: 'actions',
-                name: 'actions',
-                orderable: false,
-                searchable: false
-            },
-        ]
-    }).on('draw', function () {
-    });
+            
+            "pageLength": 5,
+            "aLengthMenu": [
+                [5, 10, 25, 50, -1],
+                [5, 10, 25, 50, "All"]
+            ],
+            columns: [
+                {
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'school_name',
+                    name: 'school_name'
+                },
+                {
+                    data: 'email',
+                    name: 'email'
+                },
+                {
+                    data: 'mobile_no',
+                    name: 'mobile_no'
+                },
+                {
+                    data: 'currency',
+                    name: 'currency'
+                },
+                {
+                    data: 'symbol',
+                    name: 'symbol'
+                },
+                {
+                    data: 'country_name',
+                    name: 'country_name'
+                },
+                {
+                    data: 'state_name',
+                    name: 'state_name'
+                },
+                {
+                    data: 'city_name',
+                    name: 'city_name'
+                },
+                {
+                    data: 'address',
+                    name: 'address'
+                },
+                {
+                    data: 'actions',
+                    name: 'actions',
+                    orderable: false,
+                    searchable: false
+                },
+            ]
+        }).on('draw', function () {
+        });
+    }
+    
 
     // update branch-form
     $('#edit-branch-form').on('submit', function (e) {
