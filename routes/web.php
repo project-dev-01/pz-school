@@ -108,7 +108,8 @@ Route::group(['prefix' => 'super_admin', 'middleware' => ['isSuperAdmin']], func
 
     
     // Employee routes
-    Route::get('employee/index', [SuperAdminController::class, 'Employee'])->name('super_admin.employee');
+    Route::get('employee/index', [SuperAdminController::class, 'showEmployee'])->name('super_admin.employee');
+    Route::get('employee/add', [SuperAdminController::class, 'addEmployee'])->name('employee.add');
 
 });
 

@@ -134,7 +134,7 @@
                             </div>
                         </form>
                         <div class="table-responsive">
-                            <table class="table mb-0" id="branch-table">
+                            <table class="table w-100 nowrap" id="branch-table">
                                 <thead>
                                     <tr>
                                         <th>#</th>
