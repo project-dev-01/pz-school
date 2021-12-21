@@ -178,6 +178,7 @@ return [
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         // use datatable
         Yajra\DataTables\DataTablesServiceProvider::class,
+        Yajra\DataTables\ButtonsServiceProvider::class,
 
 
     ],

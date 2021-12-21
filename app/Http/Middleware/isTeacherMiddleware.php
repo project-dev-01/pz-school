@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class isStaffMiddleware
+class isTeacherMiddleware
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,7 @@ class isStaffMiddleware
     {
         if (session()->has('role_id')) {
             $role_id = $request->session()->get('role_id');
-            if ($role_id == 3) {
+            if ($role_id == 4) {
                 return $next($request);
             }
         } else {

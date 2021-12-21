@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\ParentController;
+use App\Http\Controllers\StudentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -113,6 +117,24 @@ Route::group(['prefix' => 'super_admin', 'middleware' => ['isSuperAdmin']], func
 
 });
 
+Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin']], function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+});
+
 Route::group(['prefix' => 'staff', 'middleware' => ['isStaff']], function () {
     Route::get('/dashboard', [StaffController::class, 'index'])->name('staff.dashboard');
 });
+
+Route::group(['prefix' => 'teacher', 'middleware' => ['isTeacher']], function () {
+    Route::get('/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
+});
+
+Route::group(['prefix' => 'parent', 'middleware' => ['isParent']], function () {
+    Route::get('/dashboard', [ParentController::class, 'index'])->name('parent.dashboard');
+});
+
+Route::group(['prefix' => 'student', 'middleware' => ['isStudent']], function () {
+    Route::get('/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
+});
+
+

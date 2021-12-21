@@ -71,7 +71,11 @@ class Kernel extends HttpKernel
         'jwt.refresh' => 'Tymon\JWTAuth\Middleware\RefreshToken',
         // middleware
         'isSuperAdmin' => \App\Http\Middleware\isSuperAdminMiddleware::class,
+        'isAdmin' => \App\Http\Middleware\isAdminMiddleware::class,
         'isStaff' => \App\Http\Middleware\isStaffMiddleware::class,
+        'isTeacher' => \App\Http\Middleware\isTeacherMiddleware::class,
+        'isParent' => \App\Http\Middleware\isParentMiddleware::class,
+        'isStudent' => \App\Http\Middleware\isStudentMiddleware::class,
         'guardswitcher' => GuardSwitcher::class
     ];
 }

@@ -15,12 +15,14 @@ class AuthController extends Controller
             if ($role_id == 1) {
                 return redirect()->route('super_admin.dashboard');
             } elseif ($role_id == 2) {
-                return redirect()->route('staff.dashboard');
+                return redirect()->route('admin.dashboard');
             } elseif ($role_id == 3) {
-                return redirect()->route('teacher.dashboard');
+                return redirect()->route('staff.dashboard');
             } elseif ($role_id == 4) {
-                return redirect()->route('parent.dashboard');
+                return redirect()->route('teacher.dashboard');
             } elseif ($role_id == 5) {
+                return redirect()->route('parent.dashboard');
+            } elseif ($role_id == 6) {
                 return redirect()->route('student.dashboard');
             }
         }
@@ -45,12 +47,14 @@ class AuthController extends Controller
             if ($userDetails['data']['user']['role_id'] == 1) {
                 return redirect()->route('super_admin.dashboard');
             } elseif ($userDetails['data']['user']['role_id'] == 2) {
-                return redirect()->route('staff.dashboard');
+                return redirect()->route('admin.dashboard');
             } elseif ($userDetails['data']['user']['role_id'] == 3) {
-                return redirect()->route('teacher.dashboard');
+                return redirect()->route('staff.dashboard');
             } elseif ($userDetails['data']['user']['role_id'] == 4) {
-                return redirect()->route('parent.dashboard');
+                return redirect()->route('teacher.dashboard');
             } elseif ($userDetails['data']['user']['role_id'] == 5) {
+                return redirect()->route('parent.dashboard');
+            } elseif ($userDetails['data']['user']['role_id'] == 6) {
                 return redirect()->route('student.dashboard');
             }
         } else {

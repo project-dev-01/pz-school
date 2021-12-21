@@ -53,10 +53,20 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('branch.index')}}" class="nav-link {{ (request()->is('super_admin/branch*')) ? 'active' : '' }}">
-                        <i data-feather="git-branch" class="icon-dual"></i>
+                    <a href="#sidebarBranch" data-toggle="collapse">
+                        <i class="fas fa-users"></i>
                         <span> Branch </span>
+                        <span class="menu-arrow"></span>
                     </a>
+                    <div class="collapse" id="sidebarBranch">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('branch.index')}}" class="nav-link {{ (request()->is('super_admin/branch*')) ? 'active' : '' }}">
+                                    <span> Branch List </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 <li>
                     <a href="#sidebarAcademic" data-toggle="collapse">

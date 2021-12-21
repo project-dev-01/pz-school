@@ -177,7 +177,10 @@ class SuperAdminController extends Controller
                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteBranchBtn"><i class="fe-trash-2"></i></a>
                         </div>';
             })
-
+            // ->parameters([
+            //     'dom'          => 'Bfrtip',
+            //     'buttons'      => ['excel', 'csv'],
+            // ])
             ->rawColumns(['actions'])
             ->make(true);
     }

@@ -162,6 +162,13 @@ $(function () {
         $('#branch-table').DataTable({
             processing: true,
             bDestroy: true,
+            // dom: 'Bfrtip',
+            // buttons: [
+            //     'copyHtml5',
+            //     'excelHtml5',
+            //     'csvHtml5',
+            //     'pdfHtml5'
+            // ],
             info: true,
             "ajax": {
                 url: branchList,
