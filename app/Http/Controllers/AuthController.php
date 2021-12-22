@@ -43,7 +43,8 @@ class AuthController extends Controller
             $request->session()->put('token', $userDetails['data']['token']);
             $request->session()->put('name', $userDetails['data']['user']['name']);
             $request->session()->put('email', $userDetails['data']['user']['email']);
-
+            $request->session()->put('role_name', $userDetails['data']['role_name']);
+            
             if ($userDetails['data']['user']['role_id'] == 1) {
                 return redirect()->route('super_admin.dashboard');
             } elseif ($userDetails['data']['user']['role_id'] == 2) {
@@ -68,6 +69,7 @@ class AuthController extends Controller
             session()->pull('token');
             session()->pull('name');
             session()->pull('email');
+            session()->pull('role_name');
             $request->session()->flush();
             return redirect()->route('login');
         } else {

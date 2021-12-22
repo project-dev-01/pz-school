@@ -11,4 +11,8 @@ class ParentController extends Controller
     {
         return view('parent.dashboard.index');
     }
+    public function settings()
+    {
+        return view('parent.settings.index');
+    }
 }

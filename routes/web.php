@@ -115,26 +115,53 @@ Route::group(['prefix' => 'super_admin', 'middleware' => ['isSuperAdmin']], func
     Route::get('employee/index', [SuperAdminController::class, 'showEmployee'])->name('super_admin.employee');
     Route::get('employee/add', [SuperAdminController::class, 'addEmployee'])->name('employee.add');
 
+    // Settings
+    Route::get('settings', [SuperAdminController::class, 'settings'])->name('super_admin.settings');
+    Route::post('change-password',[SuperAdminController::class,'changePassword'])->name('changePassword');
+    Route::post('update-profile-info',[SuperAdminController::class,'updateProfileInfo'])->name('updateProfileInfo');
+    Route::post('change-profile-picture',[SuperAdminController::class,'updatePicture'])->name('pictureUpdate');
+
+
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin']], function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
+    // Settings
+    Route::get('settings', [AdminController::class, 'settings'])->name('admin.settings');
+
 });
 
 Route::group(['prefix' => 'staff', 'middleware' => ['isStaff']], function () {
     Route::get('/dashboard', [StaffController::class, 'index'])->name('staff.dashboard');
+
+    // Settings
+    Route::get('settings', [StaffController::class, 'settings'])->name('staff.settings');
+
 });
 
 Route::group(['prefix' => 'teacher', 'middleware' => ['isTeacher']], function () {
     Route::get('/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
+
+    // Settings
+    Route::get('settings', [TeacherController::class, 'settings'])->name('teacher.settings');
+
 });
 
 Route::group(['prefix' => 'parent', 'middleware' => ['isParent']], function () {
     Route::get('/dashboard', [ParentController::class, 'index'])->name('parent.dashboard');
+
+    // Settings
+    Route::get('settings', [SuperAdminController::class, 'settings'])->name('parent.settings');
+
 });
 
 Route::group(['prefix' => 'student', 'middleware' => ['isStudent']], function () {
     Route::get('/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
+
+    // Settings
+    Route::get('settings', [SuperAdminController::class, 'settings'])->name('student.settings');
+
 });
 
 

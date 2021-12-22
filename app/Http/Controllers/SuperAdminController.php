@@ -1045,21 +1045,26 @@ public function deleteTeacherAllocation(Request $request)
         
     }
        // show employee
-       public function showEmployee()
-       {
-           $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
-           
-           $data = [
-               'status' => 0
-           ];
-           $roles = Helper::PostMethod(config('constants.api.roles'),$data);
-        //    dd($roles);
-           return view(
-               'super_admin.employee.index',
-               [
-                   'branches' => $getBranches['data'],
-                   'roles' => $roles['data'],
-               ]
-           );
-       }
+    public function showEmployee()
+    {
+        $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+        
+        $data = [
+            'status' => 0
+        ];
+        $roles = Helper::PostMethod(config('constants.api.roles'),$data);
+    //    dd($roles);
+        return view(
+            'super_admin.employee.index',
+            [
+                'branches' => $getBranches['data'],
+                'roles' => $roles['data'],
+            ]
+        );
+    }
+    // setting show
+    public function settings()
+    {
+        return view('super_admin.settings.index');
+    }
 }

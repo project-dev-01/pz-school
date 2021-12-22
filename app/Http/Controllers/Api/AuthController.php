@@ -40,8 +40,12 @@ class AuthController extends BaseController
             return $credentials;
             return $this->send500Error('Could not create token.', ['error' => 'Could not create token']);
         }
+        $user = auth()->user();
         $success['token'] = $token;
-        $success['user'] = auth()->user();
+        $success['user'] = $user;
+        $success['role_name'] = $user->role->role_name;
+
+        // dd($userDetails->role_id);
         //Token created, return with success response and jwt token
         return $this->successResponse($success, 'User signed in successfully');
     }

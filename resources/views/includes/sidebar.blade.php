@@ -146,7 +146,79 @@
                         </ul>
                     </div>
                 </li>
+                <li>
+                    <a href="{{ route('super_admin.settings')}}" class="nav-link {{ (request()->is('super_admin/settings*')) ? 'active' : '' }}">
+                        <i data-feather="settings" class="icon-dual"></i>
+                        <span> Settings </span>
+                    </a>
+                </li>
+                @elseif(Session::get('role_id') == '2')
+                <li>
+                    <a href="{{ route('admin.dashboard')}}" class="nav-link {{ (request()->is('admin/dashboard*')) ? 'active' : '' }}">
+                        <i data-feather="airplay" class="icon-dual"></i>
+                        <span> Dashboards </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.settings')}}" class="nav-link {{ (request()->is('admin/settings*')) ? 'active' : '' }}">
+                        <i data-feather="settings" class="icon-dual"></i>
+                        <span> Settings </span>
+                    </a>
+                </li>
+                @elseif(Session::get('role_id') == '3')
+                <li>
+                    <a href="{{ route('staff.dashboard')}}" class="nav-link {{ (request()->is('staff/dashboard*')) ? 'active' : '' }}">
+                        <i data-feather="airplay" class="icon-dual"></i>
+                        <span> Dashboards </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('staff.settings')}}" class="nav-link {{ (request()->is('staff/settings*')) ? 'active' : '' }}">
+                        <i data-feather="settings" class="icon-dual"></i>
+                        <span> Settings </span>
+                    </a>
+                </li>
+                @elseif(Session::get('role_id') == '4')
+                <li>
+                    <a href="{{ route('teacher.dashboard')}}" class="nav-link {{ (request()->is('teacher/dashboard*')) ? 'active' : '' }}">
+                        <i data-feather="airplay" class="icon-dual"></i>
+                        <span> Dashboards </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('teacher.settings')}}" class="nav-link {{ (request()->is('teacher/settings*')) ? 'active' : '' }}">
+                        <i data-feather="settings" class="icon-dual"></i>
+                        <span> Settings </span>
+                    </a>
+                </li>
+                @elseif(Session::get('role_id') == '5')
+                <li>
+                    <a href="{{ route('parent.dashboard')}}" class="nav-link {{ (request()->is('parent/dashboard*')) ? 'active' : '' }}">
+                        <i data-feather="airplay" class="icon-dual"></i>
+                        <span> Dashboards </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('parent.settings')}}" class="nav-link {{ (request()->is('parent/settings*')) ? 'active' : '' }}">
+                        <i data-feather="settings" class="icon-dual"></i>
+                        <span> Settings </span>
+                    </a>
+                </li>
+                @elseif(Session::get('role_id') == '6')
+                <li>
+                    <a href="{{ route('student.dashboard')}}" class="nav-link {{ (request()->is('student/dashboard*')) ? 'active' : '' }}">
+                        <i data-feather="airplay" class="icon-dual"></i>
+                        <span> Dashboards </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('student.settings')}}" class="nav-link {{ (request()->is('student/settings*')) ? 'active' : '' }}">
+                        <i data-feather="settings" class="icon-dual"></i>
+                        <span> Settings </span>
+                    </a>
+                </li>
                 @endif
+
                 @endif
 
             </ul>

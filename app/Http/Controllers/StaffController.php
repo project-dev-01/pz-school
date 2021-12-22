@@ -11,4 +11,8 @@ class StaffController extends Controller
     {
         return view('staff.dashboard.index');
     }
+    public function settings()
+    {
+        return view('staff.settings.index');
+    }
 }

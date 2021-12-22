@@ -11,4 +11,8 @@ class TeacherController extends Controller
     {
         return view('teacher.dashboard.index');
     }
+    public function settings()
+    {
+        return view('teacher.settings.index');
+    }
 }

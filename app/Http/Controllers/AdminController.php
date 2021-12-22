@@ -12,4 +12,9 @@ class AdminController extends Controller
     {
         return view('admin.dashboard.index');
     }
+    // setting show
+    public function settings()
+    {
+        return view('admin.settings.index');
+    }
 }

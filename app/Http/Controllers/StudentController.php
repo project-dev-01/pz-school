@@ -11,4 +11,8 @@ class StudentController extends Controller
     {
         return view('student.dashboard.index');
     }
+    public function settings()
+    {
+        return view('student.settings.index');
+    }
 }
