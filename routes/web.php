@@ -122,8 +122,11 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
 
 
         // Employee routes
-        Route::get('employee/index', [SuperAdminController::class, 'showEmployee'])->name('super_admin.employee');
-        Route::get('employee/add', [SuperAdminController::class, 'addEmployee'])->name('employee.add');
+    
+    Route::get('employee/employeelist', [SuperAdminController::class, 'listEmployee'])->name('super_admin.listemployee');
+    Route::get('employee/index', [SuperAdminController::class, 'showEmployee'])->name('super_admin.employee');
+    Route::post('employee/add', [SuperAdminController::class, 'addEmployee'])->name('employee.add');
+    Route::get('employee/list', [SuperAdminController::class, 'getEmployeeList'])->name('employee.list');
 
         // Settings
         Route::get('settings', [SuperAdminController::class, 'settings'])->name('super_admin.settings');

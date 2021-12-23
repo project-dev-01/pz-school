@@ -85,6 +85,8 @@ return [
          // employee url
          'emp_department' => $url.'/employee/department',
          'emp_designation' => $url.'/employee/designation',
+         'employee_add' => $url.'/employee/add',
+         'employee_list' => $url.'/employee/list',
         
     ]
 

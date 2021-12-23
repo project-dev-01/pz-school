@@ -107,6 +107,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // employee routes
     Route::post('employee/department', [ApiController::class, 'getEmpDepartment']);
     Route::post('employee/designation', [ApiController::class, 'getEmpDesignation']);
+    Route::post('employee/add',[ApiController::class,'addEmployee']);
+    Route::get('employee/list', [ApiController::class, 'getEmployeeList']);
     
 
 

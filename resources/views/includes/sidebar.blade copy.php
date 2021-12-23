@@ -65,11 +65,6 @@
                                     <span> Branch List </span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="{{ route('branch.create')}}" class="nav-link {{ (request()->is('super_admin/branch*')) ? 'active' : '' }}">
-                                    <span> Create Branch </span>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </li>
@@ -145,14 +140,14 @@
                             </li>
                             <li>
                                 <a href="{{ route('super_admin.employee')}}" class="nav-link {{ (request()->is('super_admin/employee')) ? 'active' : '' }}">
-                                     <span>Add Employee</span>
+                                    <span>Add Employee</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('super_admin.listemployee')}}" class="nav-link {{ (request()->is('super_admin/listemployee')) ? 'active' : '' }}">
                                     <span>Employee List</span>
                                 </a>
-                            </li>                       
+                            </li>
                         </ul>
                     </div>
                 </li>

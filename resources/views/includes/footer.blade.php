@@ -137,6 +137,8 @@
     // employee
     var empDepartment = "{{ config('constants.api.emp_department') }}";
     var empDesignation = "{{ config('constants.api.emp_designation') }}";
+    var employeeList = "{{ route('employee.list') }}";
+    var employeeShow = "{{ route('super_admin.listemployee') }}";
       
 </script>
 <!-- custom js  -->

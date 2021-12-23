@@ -14,7 +14,7 @@
     <!-- end page title -->
 
     <div class="row">
-        <div class="col-xl-12">
+        <div class="col-xl-12 addEmployeeForm">
             <div class="card">
                 <div class="card-body">
                     <span class=" fas fa-user-circle  " id="parent"></span>
@@ -24,7 +24,8 @@
                     <span class="header-title mb-3" id="span-parent">Academic Details
                         <hr id="hr">
                     </span>
-                    <form id="demo-form" action="{{ route('employee.add') }}" data-parsley-validate="">
+                    <form id="addEmployeeForm"  method="post" action="{{ route('employee.add') }}"  enctype="multipart/form-data" autocomplete="off">
+                    @csrf
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -40,60 +41,55 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Role<span class="text-danger">*</span></label>
+                                    <label for="role">Role<span class="text-danger">*</span></label>
                                     <select class="form-control" name="role">
                                         <option value="">Select Role</option>
                                         @foreach($roles as $r)
-                                        <option value="{{$r['role_id']}}">{{$r['role_name']}}</option>
+                                        <option value="{{$r['id']}}">{{$r['role_name']}}</option>
                                         @endforeach
                                     </select>
-                                    <span class="text-danger error-text branch_id_error"></span>
-                                    <!-- <input type="" id="" class="form-control" name="" data-parsley-trigger="change" required=""> -->
+                                    <span class="text-danger error-text role_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group mb-4">
-                                    <label for="">Joining Date<span class="text-danger">*</span></label>
+                                    <label for="joining_date">Joining Date<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="joiningDate" placeholder="" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" name="joining_date" id="joiningDate" placeholder="" aria-describedby="inputGroupPrepend">
                                     </div>
+                                    <span class="text-danger error-text joining_date_error"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="heard">Designation<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
-                                        <option value="">select</option>
-                                        <option value="press">Press</option>
-                                        <option value="net">Internet</option>
-                                        <option value="mouth">Word of mouth</option>
-                                        <option value="other">Other..</option>
+                                    <label for="designation">Designation<span class="text-danger">*</span></label>
+                                    <select class="form-control"  id="empDesignation" name="designation">
+                                        <option value="">Choose Designation</option>
                                     </select>
+                                    <span class="text-danger error-text designation_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="heard">Department<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
-                                        <option value="">Select</option>
-                                        <option value="press">Press</option>
-                                        <option value="net">Internet</option>
-                                        <option value="mouth">Word of mouth</option>
-                                        <option value="other">Other..</option>
+                                    <label for="department">Department<span class="text-danger">*</span></label>
+                                    <select class="form-control"  id="empDepartment" name="department">
+                                        <option value="">Choose Department</option>
                                     </select>
+                                    <span class="text-danger error-text department_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="heard">Quatification<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="empQuatification" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                    <label for="qualification">Quatification<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="qualification" id="empQuatification" placeholder="" aria-describedby="inputGroupPrepend" >
+                                    <span class="text-danger error-text qualification_error"></span>
                                 </div>
                             </div>
                         </div>
@@ -104,102 +100,118 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">First Name<span class="text-danger">*</span></label>
+                                    <label for="name"> Name<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="fas fa-user-graduate"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" class="form-control"  name="name" placeholder="" aria-describedby="inputGroupPrepend" >
                                     </div>
+                                    <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="heard">Gender</label>
-                                    <select id="heard" class="form-control" required="">
-                                        <option value="">Male</option>
-                                        <option value="press">Female</option>
+                                    <label for="gender">Gender</label>
+                                    <select class="form-control"  name="gender">
+                                        <option value="">Choose..</option>
+                                        <option>Male</option>
+                                        <option>Female</option>
                                     </select>
+                                    <span class="text-danger error-text gender_error"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="heard">Religion</label>
-                                    <select id="heard" class="form-control" required="">
-                                        <option value="">Male</option>
-                                        <option value="press">Female</option>
+                                    <label for="religion">Religion</label>
+                                    <select class="form-control" name="religion">
+                                        <option value="">Choose..</option>
+                                        <option>Hindu</option>
+                                        <option>Muslim</option>
+                                        <option>Christain</option>
+                                        <option>Others</option>
                                     </select>
+                                    <span class="text-danger error-text religion_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="heard">Blood Group</label>
-                                    <select id="heard" class="form-control" required="">
+                                    <label for="blood_group">Blood Group</label>
+                                    <select class="form-control" name="blood_group">
                                         <option value="">Choose..</option>
-                                        <option value="press">Press</option>
-                                        <option value="net">Internet</option>
-                                        <option value="mouth">Word of mouth</option>
-                                        <option value="other">Other..</option>
+                                        <option>A+</option>
+                                        <option>A-</option>
+                                        <option>AB+</option>
+                                        <option>AB-</option>
+                                        <option>B+</option>
+                                        <option>B-</option>
+                                        <option>O+</option>
+                                        <option>O-</option>
                                     </select>
+                                    <span class="text-danger error-text blood_group_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
-                                    <label for="">Date Of Birth</label>
+                                    <label for="birthday">Date Of Birth</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="fas fa-birthday-cake"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="empDOB" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" class="form-control" name="birthday" id="empDOB" placeholder="" aria-describedby="inputGroupPrepend" >
                                     </div>
+                                    <span class="text-danger error-text birthday_error"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <label for="">Mobile No<span class="text-danger">*</span></label>
+                                <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
                                 <div class="input-group input-group-merge">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
                                             <span class="fas fa-phone-volume"></span>
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                    <input type="text" class="form-control" name="mobile_no"  placeholder="" aria-describedby="inputGroupPrepend" >
                                 </div>
+                                <span class="text-danger error-text mobile_no_error"></span>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="message">Present Address</label>
-                                    <textarea id="message" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
-                        </textarea>
+                                    <label for="present_address">Present Address</label>
+                                    <textarea  class="form-control" name="present_address" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                                    </textarea>
+                                    <span class="text-danger error-text present_address_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="message">Permanent Address</label>
-                                    <textarea id="message" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
-                        </textarea>
+                                    <label for="permanent_address">Permanent Address</label>
+                                    <textarea  class="form-control" name="permanent_address" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                                    </textarea>
+                                    <span class="text-danger error-text permanent_address_error"></span>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="message">Profile Picture</label>
-                                    <textarea id="message" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
-                        </textarea>
+                                    <label for="photo">Profile Picture</label>
+                                    <input type="file" name="photo">
+                                    <span class="text-danger error-text photo_error"></span>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <span class="fas fa-user-lock " id="span-parent"></span>
                         <span class="header-title mb-3" id="span-parent"> Login Details
                             <hr id="hr">
@@ -214,34 +226,37 @@
                                                 <span class="far fa-envelope-open"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="email" class="form-control" name="email" placeholder="" aria-describedby="inputGroupPrepend" >
                                     </div>
+                                    <span class="text-danger error-text email_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group mb-3">
-                                    <label for="email">Password<span class="text-danger">*</span></label>
+                                    <label for="password">Password<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="fas fa-unlock"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="password" class="form-control" name="password" placeholder="" aria-describedby="inputGroupPrepend" >
                                     </div>
+                                    <span class="text-danger error-text password_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group mb-3">
-                                    <label for="email">Retype Password<span class="text-danger">*</span></label>
+                                    <label for="confirm_password">Retype Password<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="fas fa-unlock"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="password" class="form-control" name="confirm_password" placeholder="" aria-describedby="inputGroupPrepend" >
                                     </div>
+                                    <span class="text-danger error-text confirm_password_error"></span>
                                 </div>
                             </div>
                         </div>
@@ -252,45 +267,48 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
-                                    <label for="validationCustomUsername">Facebook</label>
+                                    <label for="facebook_url">Facebook</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="fab fa-facebook-f"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" class="form-control" name="facebook_url" placeholder="" aria-describedby="inputGroupPrepend" >
                                     </div>
+                                    <span class="text-danger error-text facebook_url_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
-                                    <label for="validationCustomUsername">Twitter</label>
+                                    <label for="twitter_url">Twitter</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="fab fa-twitter"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" class="form-control" name="twitter_url"  placeholder="" aria-describedby="inputGroupPrepend" >
                                     </div>
+                                    <span class="text-danger error-text twitter_url_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
-                                    <label for="validationCustomUsername">Linkedin</label>
+                                    <label for="linkedin_url">Linkedin</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="fab fa-linkedin-in"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" class="form-control" name="linkedin_url" placeholder="" aria-describedby="inputGroupPrepend" >
                                     </div>
+                                    <span class="text-danger error-text linkedin_url_error"></span>
                                 </div>
                             </div>
                         </div>
-                        <span class="fas fa-university " id="span-parent"></span>
+                        <!-- <span class="fas fa-university " id="span-parent"></span>
                         <span class="header-title mb-3" id="span-parent"> Bank Details
                             <hr id="hr">
                         </span>
@@ -304,19 +322,19 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">Bank Name<span class="text-danger">*</span></label>
-                                    <input type="" id="" class="form-control" name="" data-parsley-trigger="change" required="">
+                                    <input type="text" id="" class="form-control" name="" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">Account Holder<span class="text-danger">*</span></label>
-                                    <input type="" id="" class="form-control" name="" data-parsley-trigger="change" required="">
+                                    <input type="text" id="" class="form-control" name="" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">Bank Branch<span class="text-danger">*</span></label>
-                                    <input type="" id="" class="form-control" name="" data-parsley-trigger="change" required="">
+                                    <input type="text" id="" class="form-control" name="" data-parsley-trigger="change">
                                 </div>
                             </div>
                         </div>
@@ -324,25 +342,25 @@
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="validationCustomUsername">Bank Address</label>
-                                    <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                    <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" >
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="validationCustomUsername">IFSC Code</label>
-                                    <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                    <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" >
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="">Account No<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                    <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend">
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group text-right m-b-0">
-                            <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="save">
                                 Save
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">

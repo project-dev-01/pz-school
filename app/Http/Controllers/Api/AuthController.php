@@ -19,16 +19,21 @@ class AuthController extends BaseController
     public function authenticate(Request $request)
     {
 
+        
         $credentials = $request->only('email', 'password');
         //valid credential
         $validator = Validator::make($credentials, [
             'email' => 'required|email',
             'password' => 'required|string|min:6|max:50'
         ]);
+
+        
         //Send failed response if request is not valid
         if ($validator->fails()) {
             return $this->send422Error('Validation error.', ['error' => $validator->messages()]);
         }
+
+       
         //Request is validated
         //Crean token
         try {
@@ -42,9 +47,10 @@ class AuthController extends BaseController
         }
         $user = auth()->user();
         $success['token'] = $token;
-        $success['user'] = $user;
+        $success['user'] = $user; 
         $success['role_name'] = $user->role->role_name;
-
+       
+       
         // dd($userDetails->role_id);
         //Token created, return with success response and jwt token
         return $this->successResponse($success, 'User signed in successfully');

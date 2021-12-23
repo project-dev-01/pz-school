@@ -121,11 +121,6 @@ class SuperAdminController extends Controller
         $countries = Helper::GetMethod(config('constants.api.countries'));
         return view('super_admin.branch.index', ['countries' => $countries['data']]);
     }
-    public function branchCreate()
-    {
-        $countries = Helper::GetMethod(config('constants.api.countries'));
-        return view('super_admin.branch.create', ['countries' => $countries['data']]);
-    }
     // add branch
     public function addBranch(Request $request)
     {
@@ -178,8 +173,8 @@ class SuperAdminController extends Controller
             ->addColumn('actions', function ($row) {
                 // dd($row);
                 return '<div class="button-list">
-                                <a href="' . route('branch.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
-                                <a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteBranchBtn"><i class="fe-trash-2"></i></a>
+                                <a href="' . route('branch.edit', $row['id']) . '" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteBranchBtn"><i class="fe-trash-2"></i></a>
                         </div>';
             })
             // ->parameters([
@@ -1132,7 +1127,7 @@ public function deleteTeacherAllocation(Request $request)
     {
         return view('super_admin.employee.list');
     }
-
+    
     // setting show
     public function settings()
     {

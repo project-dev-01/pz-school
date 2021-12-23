@@ -22,6 +22,8 @@ use App\Models\SectionAllocation;
 use App\Models\TeacherAllocation;
 use App\Models\EventType;
 use App\Models\Event;
+use App\Models\Staff;
+use App\Models\User;
 use App\Models\StaffDepartments;
 use App\Models\StaffDesignation;
 
@@ -1217,34 +1219,120 @@ class ApiController extends BaseController
             }
         }
     }
-        // employee departments
-        public function getEmpDepartment(Request $request)
-        {
-            $validator = \Validator::make($request->all(), [
-                'branch_id' => 'required',
-                'token' => 'required',
-            ]);
-    
-            if (!$validator->passes()) {
-                return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-            } else {
-                $StaffDepartment = StaffDepartments::where('branch_id',$request->branch_id)->get();
-                return $this->successResponse($StaffDepartment, 'Department row fetch successfully');
-            }
+    // employee departments
+    public function getEmpDepartment(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $StaffDepartment = StaffDepartments::where('branch_id',$request->branch_id)->get();
+            return $this->successResponse($StaffDepartment, 'Department row fetch successfully');
         }
-        // employee designation
-        public function getEmpDesignation(Request $request)
-        {
-            $validator = \Validator::make($request->all(), [
-                'branch_id' => 'required',
-                'token' => 'required',
-            ]);
-    
-            if (!$validator->passes()) {
-                return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-            } else {
-                $StaffDesig = StaffDesignation::where('branch_id',$request->branch_id)->get();
-                return $this->successResponse($StaffDesig, 'Designation row fetch successfully');
-            }
+    }
+    // employee designation
+    public function getEmpDesignation(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $StaffDesig = StaffDesignation::where('branch_id',$request->branch_id)->get();
+            return $this->successResponse($StaffDesig, 'Designation row fetch successfully');
         }
+    }
+
+        // add Employee
+    public function addEmployee(Request $request){
+
+        $branch_id = $request->branch_id;
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+            'role' => 'required',
+            'joining_date' => 'required',
+            'designation' => 'required',
+            'department' => 'required',
+            'qualification' => 'required',
+            'name' => 'required',
+            'gender' => 'required',
+            'religion' => 'required',
+            'blood_group' => 'required',
+            'birthday' => 'required',
+            'mobile_no' => 'required',
+            'present_address' => 'required',
+            'permanent_address' => 'required',
+            'email' => 'required',
+            'password' => 'required|min:6',
+            'confirm_password' => 'required|same:password|min:6',
+            'facebook_url' => 'required',
+            'twitter_url' => 'required',
+            'linkedin_url' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            $employee = new Staff();
+            $employee->branch_id = $request->branch_id;
+            $employee->joining_date = $request->joining_date;
+            $employee->designation = $request->designation;
+            $employee->department = $request->department;
+            $employee->qualification = $request->qualification;
+            $employee->name = $request->name;
+            $employee->gender = $request->gender;
+            $employee->religion = $request->religion;
+            $employee->blood_group = $request->blood_group;
+            $employee->birthday = $request->birthday;
+            $employee->mobile_no = $request->mobile_no;
+            $employee->present_address = $request->present_address;
+            $employee->permanent_address = $request->permanent_address;
+            $employee->email = $request->email;
+            $employee->facebook_url = $request->facebook_url;
+            $employee->twitter_url = $request->twitter_url;
+            $employee->linkedin_url = $request->linkedin_url;
+
+            // $imageName = time().'.'.$request->image->extension();  
+            // $employee->photo = $imageName;
+            //     $request->image->move(public_path('images/staff'), $imageName);
+            $query = $employee->save();
+
+            
+            $user = new User(); 
+            $user->user_id = $employee->id;
+            $user->role_id = $request->role;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->save();
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Employee has been successfully saved');
+            }
+
+        }
+    }
+
+    // getEmployeeList
+    public function getEmployeeList(Request $request)
+    {
+        $Staff = DB::table('staffs as s')
+            ->select('s.*','b.name as branch_name','dp.name as department_name','ds.name as designation_name')
+            ->join('branches as b', 's.branch_id', '=', 'b.id')
+            ->join('staff_departments as dp', 's.department', '=', 'dp.id')
+            ->join('staff_designations as ds', 's.designation', '=', 'ds.id')
+            ->get();
+        return $this->successResponse($Staff, 'Staff record fetch successfully');
+    }
+    
 }
