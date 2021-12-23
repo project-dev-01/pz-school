@@ -22,7 +22,7 @@ class isSuperAdminMiddleware
                 return $next($request);
             }
         } else {
-            return redirect()->route('login');
+            return redirect()->route('super_admin.login');
         }
         abort(403);
     }

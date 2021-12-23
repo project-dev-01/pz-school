@@ -51,7 +51,7 @@
                                 <p class="text-muted mb-4 mt-3">Enter your email address and password to access admin panel.</p>
                             </div>
 
-                            <form id="LoginAuth" action="{{ route('admin.authenticate') }}" method="post">
+                            <form id="LoginAuth" action="{{ route('super_admin.authenticate') }}" method="post">
                                 @if ( Session::get('success'))
                                 <div class="alert alert-success">
                                     {{ Session::get('success') }}

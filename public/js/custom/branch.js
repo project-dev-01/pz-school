@@ -145,7 +145,8 @@ $(function () {
                         $('#branch-table').DataTable().ajax.reload(null, false);
                         $('#branch-form')[0].reset();
                         toastr.success(data.message);
-                        $('[href="#branch-list-tab"]').click();
+                        // $('[href="#branch-list-tab"]').click();
+                        window.location.href = branchShow;
                     } else {
                         toastr.error(data.message);
                     }

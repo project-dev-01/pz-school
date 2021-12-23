@@ -65,6 +65,11 @@
                                     <span> Branch List </span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ route('branch.create')}}" class="nav-link {{ (request()->is('super_admin/branch*')) ? 'active' : '' }}">
+                                    <span> Create Branch </span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

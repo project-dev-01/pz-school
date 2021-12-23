@@ -41,10 +41,15 @@
                         <i class="fe-log-out"></i>
                         <span>Logout</span>
                     </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @if(Session::get('role_id') == '1')
+                    <form id="logout-form" action="{{ route('super_admin.logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
-
+                    @else
+                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                    @endif
                 </div>
             </li>
         </ul>
