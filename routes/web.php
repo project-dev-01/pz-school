@@ -131,9 +131,8 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
 
         // Settings
         Route::get('settings', [SuperAdminController::class, 'settings'])->name('super_admin.settings');
-        Route::post('change-password', [SuperAdminController::class, 'changePassword'])->name('changePassword');
-        Route::post('update-profile-info', [SuperAdminController::class, 'updateProfileInfo'])->name('updateProfileInfo');
-        Route::post('change-profile-picture', [SuperAdminController::class, 'updatePicture'])->name('pictureUpdate');
+        Route::post('change-password', [SuperAdminController::class, 'changePassword'])->name('settings.changePassword');
+        Route::post('update-profile-info', [SuperAdminController::class, 'updateProfileInfo'])->name('settings.updateProfileInfo');
         Route::post('update-setting-session', [CommonController::class, 'updateSettingSession'])->name('settings.updateSettingSession');
 
     });

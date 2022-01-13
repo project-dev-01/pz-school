@@ -89,7 +89,11 @@ return [
          'employee_list' => $url.'/employee/list',
           // settings url
           'change_profile_picture' => $url.'/change-profile-picture',
-        
+          'get_user' => $url.'/get_user',
+          'change_password' => $url.'/change-password',
+          'update_profile_info' => $url.'/update-profile-info',
+          
+          
     ]
 
 ];

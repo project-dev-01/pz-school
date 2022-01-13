@@ -276,7 +276,7 @@ class SuperAdminController extends Controller
             return $response;
         }
     }
-    
+
     // get class
     public function class()
     {
@@ -346,18 +346,19 @@ class SuperAdminController extends Controller
     }
 
     // update Section Allocations
-    public function updateSectionAllocation(Request $request){
+    public function updateSectionAllocation(Request $request)
+    {
         $id = $request->said;
 
-        $validator = \Validator::make($request->all(),[
-            'branch_id'=>'required',
-            'class_name'=>'required',
-            'section_name'=>'required'
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'class_name' => 'required',
+            'section_name' => 'required'
         ]);
 
-        if(!$validator->passes()){
-               return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
-        }else{
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
             $data = [
                 'id' => $request->said,
                 'branch_id' => $request->branch_id,
@@ -369,7 +370,7 @@ class SuperAdminController extends Controller
         }
     }
 
-     // delete deleteSectionAllocation
+    // delete deleteSectionAllocation
     //  public function (Request $request){
     //     $id = $request->id;
     //     SectionAllocation::where('id', $id)->delete();
@@ -393,115 +394,115 @@ class SuperAdminController extends Controller
             return $response;
         }
     }
-// get TeacherAllocation
-public function showTeacherAllocation()
-{
-    $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
-    return view('super_admin.assign_teacher.index', ['branches' => $getBranches['data']]);
-}
-// add TeacherAllocation
-public function addTeacherAllocation(Request $request)
-{
-
-    $validator = \Validator::make($request->all(), [
-        'branch_id' => 'required',
-        'class_name'=>'required',
-        'section_name'=>'required',
-        'class_teacher'=>'required'
-    ]);
-
-    if (!$validator->passes()) {
-        return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
-    } else {
-
-        
-        $data = [
-            'branch_id' => $request->branch_id,
-            'class_name'=>$request->class_name,
-            'section_name'=>$request->section_name,
-            'class_teacher'=>$request->class_teacher,            
-        ];
-        $response = Helper::PostMethod(config('constants.api.assign_teacher_add'), $data);
-
-        return $response;
+    // get TeacherAllocation
+    public function showTeacherAllocation()
+    {
+        $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+        return view('super_admin.assign_teacher.index', ['branches' => $getBranches['data']]);
     }
-}
-// get TeacherAllocation 
-public function getTeacherAllocationList(Request $request)
-{
-   
-    $response = Helper::GetMethod(config('constants.api.assign_teacher_list'));
-    $row = $response['data'];
-    return DataTables::of($row)
-    
-        ->addIndexColumn()
-        ->addColumn('actions', function ($row) {
-            return '<div class="button-list">
+    // add TeacherAllocation
+    public function addTeacherAllocation(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'class_name' => 'required',
+            'section_name' => 'required',
+            'class_teacher' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+
+
+            $data = [
+                'branch_id' => $request->branch_id,
+                'class_name' => $request->class_name,
+                'section_name' => $request->section_name,
+                'class_teacher' => $request->class_teacher,
+            ];
+            $response = Helper::PostMethod(config('constants.api.assign_teacher_add'), $data);
+
+            return $response;
+        }
+    }
+    // get TeacherAllocation 
+    public function getTeacherAllocationList(Request $request)
+    {
+
+        $response = Helper::GetMethod(config('constants.api.assign_teacher_list'));
+        $row = $response['data'];
+        return DataTables::of($row)
+
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
                             <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editTeacherAllocationBtn"><i class="fe-edit"></i></a>
                             <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteTeacherAllocationBtn"><i class="fe-trash-2"></i></a>
                     </div>';
-        })
+            })
 
-        ->rawColumns(['status','actions'])
-        ->make(true);
-}
-// get TeacherAllocation row details
-public function getTeacherAllocationDetails(Request $request)
-{
-    $data = [
-        'teacher_allocation__id' => $request->assign_teacher_id,
-    ];
-    $response = Helper::PostMethod(config('constants.api.assign_teacher_details'), $data);
-    return $response;
-}
-// update TeacherAllocation
-public function updateTeacherAllocation(Request $request)
-{
-    $assign_teacher_id = $request->assign_teacher_id;
-
-    $validator = \Validator::make($request->all(), [
-        'assign_teacher_id' => 'required',
-        'branch_id' => 'required',
-        'class_name'=>'required',
-        'section_name'=>'required',
-        'class_teacher'=>'required'
-    ]);
-
-   
-    if (!$validator->passes()) {
-        return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
-    } else {
+            ->rawColumns(['status', 'actions'])
+            ->make(true);
+    }
+    // get TeacherAllocation row details
+    public function getTeacherAllocationDetails(Request $request)
+    {
         $data = [
-            'teacher_allocation__id' => $assign_teacher_id,
-            'branch_id' => $request->branch_id,
-            'class_name'=>$request->class_name,
-            'section_name'=>$request->section_name,
-            'class_teacher'=>$request->class_teacher,      
+            'teacher_allocation__id' => $request->assign_teacher_id,
         ];
-        
-        $response = Helper::PostMethod(config('constants.api.assign_teacher_update'), $data);
+        $response = Helper::PostMethod(config('constants.api.assign_teacher_details'), $data);
         return $response;
     }
-}
-// delete TeacherAllocation
-public function deleteTeacherAllocation(Request $request)
-{
+    // update TeacherAllocation
+    public function updateTeacherAllocation(Request $request)
+    {
+        $assign_teacher_id = $request->assign_teacher_id;
 
-    $assign_teacher_id = $request->assign_teacher_id;
-    $validator = \Validator::make($request->all(), [
-        'assign_teacher_id' => 'required',
-    ]);
+        $validator = \Validator::make($request->all(), [
+            'assign_teacher_id' => 'required',
+            'branch_id' => 'required',
+            'class_name' => 'required',
+            'section_name' => 'required',
+            'class_teacher' => 'required'
+        ]);
 
-    if (!$validator->passes()) {
-        return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
-    } else {
-        $data = [
-            'teacher_allocation__id' => $assign_teacher_id
-        ];
-        $response = Helper::PostMethod(config('constants.api.assign_teacher_delete'), $data);
-        return $response;
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'teacher_allocation__id' => $assign_teacher_id,
+                'branch_id' => $request->branch_id,
+                'class_name' => $request->class_name,
+                'section_name' => $request->section_name,
+                'class_teacher' => $request->class_teacher,
+            ];
+
+            $response = Helper::PostMethod(config('constants.api.assign_teacher_update'), $data);
+            return $response;
+        }
     }
-}
+    // delete TeacherAllocation
+    public function deleteTeacherAllocation(Request $request)
+    {
+
+        $assign_teacher_id = $request->assign_teacher_id;
+        $validator = \Validator::make($request->all(), [
+            'assign_teacher_id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'teacher_allocation__id' => $assign_teacher_id
+            ];
+            $response = Helper::PostMethod(config('constants.api.assign_teacher_delete'), $data);
+            return $response;
+        }
+    }
 
     // add class
     public function addClass(Request $request)
@@ -530,11 +531,11 @@ public function deleteTeacherAllocation(Request $request)
     // get class 
     public function getClassList(Request $request)
     {
-       
+
         $response = Helper::GetMethod(config('constants.api.class_list'));
-        
+
         return DataTables::of($response['data'])
-        
+
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -567,7 +568,7 @@ public function deleteTeacherAllocation(Request $request)
             'name_numeric' => 'required',
         ]);
 
-       
+
         if (!$validator->passes()) {
             return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
@@ -577,7 +578,7 @@ public function deleteTeacherAllocation(Request $request)
                 'branch_id' => $request->branch_id,
                 'name_numeric' => $request->name_numeric,
             ];
-            
+
             $response = Helper::PostMethod(config('constants.api.class_update'), $data);
             return $response;
         }
@@ -636,11 +637,11 @@ public function deleteTeacherAllocation(Request $request)
     // get DepartmentList
     public function getDepartmentList(Request $request)
     {
-       
+
         $response = Helper::GetMethod(config('constants.api.department_list'));
-        
+
         return DataTables::of($response['data'])
-        
+
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -677,7 +678,7 @@ public function deleteTeacherAllocation(Request $request)
                 'name' => $request->name,
                 'branch_id' => $request->branch_id
             ];
-            
+
             $response = Helper::PostMethod(config('constants.api.department_update'), $data);
             return $response;
         }
@@ -735,11 +736,11 @@ public function deleteTeacherAllocation(Request $request)
     // get Designation 
     public function getDesignationList(Request $request)
     {
-       
+
         $response = Helper::GetMethod(config('constants.api.designation_list'));
-        
+
         return DataTables::of($response['data'])
-        
+
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -776,7 +777,7 @@ public function deleteTeacherAllocation(Request $request)
                 'name' => $request->name,
                 'branch_id' => $request->branch_id
             ];
-            
+
             $response = Helper::PostMethod(config('constants.api.designation_update'), $data);
             return $response;
         }
@@ -834,11 +835,11 @@ public function deleteTeacherAllocation(Request $request)
     // get eventType 
     public function getEventTypeList(Request $request)
     {
-       
+
         $response = Helper::GetMethod(config('constants.api.event_type_list'));
-        
+
         return DataTables::of($response['data'])
-        
+
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -870,7 +871,7 @@ public function deleteTeacherAllocation(Request $request)
             'name' => 'required',
         ]);
 
-       
+
         if (!$validator->passes()) {
             return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
@@ -879,7 +880,7 @@ public function deleteTeacherAllocation(Request $request)
                 'name' => $request->name,
                 'branch_id' => $request->branch_id,
             ];
-            
+
             $response = Helper::PostMethod(config('constants.api.event_type_update'), $data);
             return $response;
         }
@@ -910,7 +911,7 @@ public function deleteTeacherAllocation(Request $request)
         $getEventType = Helper::GetMethod(config('constants.api.event_type_list'));
         $getClass = Helper::GetMethod(config('constants.api.class_list'));
         $getSection = Helper::GetMethod(config('constants.api.allocate_section_list'));
-        return view('super_admin.event.index', ['branches' => $getBranches['data'],'type' => $getEventType['data'],'classDetails' => $getClass['data'],'sectionDetails' => $getSection['data']]);
+        return view('super_admin.event.index', ['branches' => $getBranches['data'], 'type' => $getEventType['data'], 'classDetails' => $getClass['data'], 'sectionDetails' => $getSection['data']]);
     }
     // add event
     public function addEvent(Request $request)
@@ -932,13 +933,11 @@ public function deleteTeacherAllocation(Request $request)
             return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
 
-            if($request->audience==2)
-            {
+            if ($request->audience == 2) {
                 $selected_list = json_encode($request->class);
-            }elseif($request->audience==3)
-            {
+            } elseif ($request->audience == 3) {
                 $selected_list = json_encode($request->section);
-            }else{
+            } else {
                 $selected_list = NULL;
             }
 
@@ -952,7 +951,7 @@ public function deleteTeacherAllocation(Request $request)
                 'selected_list' => $selected_list,
                 'description' => $request->description,
             ];
-            
+
             $response = Helper::PostMethod(config('constants.api.event_add'), $data);
 
             return $response;
@@ -961,31 +960,29 @@ public function deleteTeacherAllocation(Request $request)
     // get event 
     public function getEventList(Request $request)
     {
-       
+
         $response = Helper::GetMethod(config('constants.api.event_list'));
         $row = $response['data'];
         return DataTables::of($row)
-        
+
             ->addIndexColumn()
             ->addColumn('classname', function ($row) {
                 $audience = $row['audience'];
-                if($audience==1)
-                {
+                if ($audience == 1) {
                     return "Everyone";
-                }else{
-                    return "Class ".$row['classname'];
+                } else {
+                    return "Class " . $row['classname'];
                 }
             })
             ->addColumn('status', function ($row) {
-                
+
                 $status = $row['status'];
-                if($status==1)
-                {
+                if ($status == 1) {
                     $result = "checked";
-                }else{
+                } else {
                     $result = "";
                 }
-                return '<input type="checkbox" '.$result.' data-id="' . $row['id'] . '"  id="publishEventBtn">';
+                return '<input type="checkbox" ' . $result . ' data-id="' . $row['id'] . '"  id="publishEventBtn">';
             })
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -994,7 +991,7 @@ public function deleteTeacherAllocation(Request $request)
                         </div>';
             })
 
-            ->rawColumns(['status','actions'])
+            ->rawColumns(['status', 'actions'])
             ->make(true);
     }
     // get event row details
@@ -1026,9 +1023,10 @@ public function deleteTeacherAllocation(Request $request)
         }
     }
     // Publish Event 
-    public function publishEvent(Request $request){
+    public function publishEvent(Request $request)
+    {
 
-        
+
         $event_id = $request->event_id;
         $validator = \Validator::make($request->all(), [
             'event_id' => 'required',
@@ -1044,21 +1042,18 @@ public function deleteTeacherAllocation(Request $request)
             ];
             $response = Helper::PostMethod(config('constants.api.event_publish'), $data);
             return $response;
-
-           
         }
-        
     }
-       // show employee
+    // show employee
     public function showEmployee()
     {
         $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
-        
+
         $data = [
             'status' => 0
         ];
-        $roles = Helper::PostMethod(config('constants.api.roles'),$data);
-    //    dd($roles);
+        $roles = Helper::PostMethod(config('constants.api.roles'), $data);
+        //    dd($roles);
         return view(
             'super_admin.employee.index',
             [
@@ -1094,8 +1089,8 @@ public function deleteTeacherAllocation(Request $request)
             'linkedin_url' => 'required',
         ]);
 
-        
-         // dd($validator);   'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+        // dd($validator);   'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
         if (!$validator->passes()) {
             return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
@@ -1136,18 +1131,24 @@ public function deleteTeacherAllocation(Request $request)
     // setting show
     public function settings()
     {
-        return view('super_admin.settings.index');
+        $getUser = Helper::GetMethod(config('constants.api.get_user'));
+        return view(
+            'super_admin.settings.index',
+            [
+                'user_details' => $getUser['data']['user'],
+            ]
+        );
     }
 
-    
+
     // get Employee 
     public function getEmployeeList(Request $request)
     {
-       
+
         $response = Helper::GetMethod(config('constants.api.employee_list'));
-        
+
         return DataTables::of($response['data'])
-        
+
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -1158,6 +1159,55 @@ public function deleteTeacherAllocation(Request $request)
 
             ->rawColumns(['actions'])
             ->make(true);
+    }
+
+    // change password
+    public function changePassword(Request $request)
+    {
+        //Validate form
+        $validator = \Validator::make($request->all(), [
+            'oldpassword' => "required",
+            'newpassword' => "required",
+            'cnewpassword' => "required"
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $request->id,
+                'oldpassword' => $request->oldpassword,
+                'newpassword' => $request->newpassword,
+                'cnewpassword' => $request->cnewpassword
+            ];
+            // dd($data);
+            $response = Helper::PostMethod(config('constants.api.change_password'), $data);
+            return $response;
+        }
+    }
+    // update te profile
+    public function updateProfileInfo(Request $request)
+    {
+        //Validate form
+        $validator = \Validator::make($request->all(), [
+            'name' => "required",
+            'email' => "required",
+            'address' => "required"
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $request->id,
+                'name' => $request->name,
+                'email' => $request->email,
+                'address' => $request->address
+            ];
+            // dd($data);
+            $response = Helper::PostMethod(config('constants.api.update_profile_info'), $data);
+            return $response;
+        }
     }
     
 }

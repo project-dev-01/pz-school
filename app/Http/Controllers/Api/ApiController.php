@@ -31,8 +31,9 @@ use App\Models\StaffDesignation;
 class ApiController extends BaseController
 {
     //
-    public function getRoles(Request $request){
-        $data = Role::where('status',$request->status)->get();
+    public function getRoles(Request $request)
+    {
+        $data = Role::where('status', $request->status)->get();
         return $this->successResponse($data, 'Section record fetch successfully');
     }
     // add section
@@ -348,8 +349,8 @@ class ApiController extends BaseController
             $success = DB::table('classes as cl')
                 ->select('cl.*', 'br.name as branch_name', 'br.branch_code', 'br.school_name')
                 ->join('branches as br', 'cl.branch_id', '=', 'br.id')
-                ->get();            
-                return $this->successResponse($success, 'Class record fetch successfully');
+                ->get();
+            return $this->successResponse($success, 'Class record fetch successfully');
         }
     }
     // get class row details
@@ -452,7 +453,7 @@ class ApiController extends BaseController
     public function getSectionAllocationList(Request $request)
     {
         $sectionAllocation = DB::table('sections_allocations as sa')
-            ->select('sa.id', 'sa.class_id', 'sa.section_id','s.name as section_name', 'c.name as class_name', 'c.name_numeric','b.name as branch_name')
+            ->select('sa.id', 'sa.class_id', 'sa.section_id', 's.name as section_name', 'c.name as class_name', 'c.name_numeric', 'b.name as branch_name')
             ->join('sections as s', 'sa.section_id', '=', 's.id')
             ->join('branches as b', 'sa.branch_id', '=', 'b.id')
             ->join('classes as c', 'sa.class_id', '=', 'c.id')
@@ -535,9 +536,9 @@ class ApiController extends BaseController
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
             'branch_id' => 'required',
-            'class_name'=>'required',
-            'section_name'=>'required',
-            'class_teacher'=>'required'
+            'class_name' => 'required',
+            'section_name' => 'required',
+            'class_teacher' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -570,13 +571,13 @@ class ApiController extends BaseController
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
             $success = DB::table('teacher_allocations as ta')
-                        ->select('ta.id','ta.class_id','ta.section_id','ta.teacher_id','s.name as section_name','c.name as class_name','u.name as teacher_name','b.name as branch_name')
-                        ->join('sections as s', 'ta.section_id', '=', 's.id')
-                        ->join('branches as b', 'ta.branch_id', '=', 'b.id')
-                        ->join('classes as c', 'ta.class_id', '=', 'c.id')
-                        ->join('users as u', 'ta.teacher_id', '=', 'u.id')
-                        ->get();        
-                return $this->successResponse($success, 'Teacher Allocation record fetch successfully');
+                ->select('ta.id', 'ta.class_id', 'ta.section_id', 'ta.teacher_id', 's.name as section_name', 'c.name as class_name', 'u.name as teacher_name', 'b.name as branch_name')
+                ->join('sections as s', 'ta.section_id', '=', 's.id')
+                ->join('branches as b', 'ta.branch_id', '=', 'b.id')
+                ->join('classes as c', 'ta.class_id', '=', 'c.id')
+                ->join('users as u', 'ta.teacher_id', '=', 'u.id')
+                ->get();
+            return $this->successResponse($success, 'Teacher Allocation record fetch successfully');
         }
     }
     // get TeacherAllocation row details
@@ -604,9 +605,9 @@ class ApiController extends BaseController
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
             'branch_id' => 'required',
-            'class_name'=>'required',
-            'section_name'=>'required',
-            'class_teacher'=>'required'
+            'class_name' => 'required',
+            'section_name' => 'required',
+            'class_teacher' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -663,14 +664,14 @@ class ApiController extends BaseController
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
             $branch_id = $request->branch_id;
-            $response=[];
-            $response['class'] = Classes::where('branch_id',$branch_id)->get();
+            $response = [];
+            $response['class'] = Classes::where('branch_id', $branch_id)->get();
             $response['teacher'] = DB::table('users as us')
-                                    ->select('us.id', 'us.user_id', 'us.name')
-                                    ->join('staffs as s', 'us.user_id', '=', 's.id')
-                                    ->join('branches as b', 's.branch_id', '=', 'b.id')
-                                    ->where('s.branch_id',$branch_id)
-                                    ->get();
+                ->select('us.id', 'us.user_id', 'us.name')
+                ->join('staffs as s', 'us.user_id', '=', 's.id')
+                ->join('branches as b', 's.branch_id', '=', 'b.id')
+                ->where('s.branch_id', $branch_id)
+                ->get();
             return $this->successResponse($response, 'Information fetch successfully');
         }
     }
@@ -687,7 +688,7 @@ class ApiController extends BaseController
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
             $branch_id = $request->branch_id;
-            $branchBasedClass = Classes::where('branch_id',$branch_id)->get();
+            $branchBasedClass = Classes::where('branch_id', $branch_id)->get();
             return $this->successResponse($branchBasedClass, 'Class row fetch successfully');
         }
     }
@@ -703,7 +704,7 @@ class ApiController extends BaseController
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
             $branch_id = $request->branch_id;
-            $branchBasedSection = Section::where('branch_id',$branch_id)->get();
+            $branchBasedSection = Section::where('branch_id', $branch_id)->get();
             return $this->successResponse($branchBasedSection, 'Section row fetch successfully');
         }
     }
@@ -720,14 +721,14 @@ class ApiController extends BaseController
         } else {
             $class_id = $request->class_id;
             $sectionBasedClass = DB::table('sections_allocations as sa')
-                                ->select('s.id','s.name')
-                                ->join('sections as s', 'sa.section_id', '=', 's.id')
-                                ->where('sa.class_id',$class_id)
-                                ->get();
+                ->select('s.id', 's.name')
+                ->join('sections as s', 'sa.section_id', '=', 's.id')
+                ->where('sa.class_id', $class_id)
+                ->get();
             return $this->successResponse($sectionBasedClass, 'Section row fetch successfully');
         }
     }
-    
+
     // add EventType
     public function addEventType(Request $request)
     {
@@ -769,8 +770,8 @@ class ApiController extends BaseController
             $success = DB::table('event_types as et')
                 ->select('et.*', 'br.name as branch_name', 'br.branch_code', 'br.school_name')
                 ->join('branches as br', 'et.branch_id', '=', 'br.id')
-                ->get();            
-                return $this->successResponse($success, 'Event Type record fetch successfully');
+                ->get();
+            return $this->successResponse($success, 'Event Type record fetch successfully');
         }
     }
     // get EventType row details
@@ -809,7 +810,7 @@ class ApiController extends BaseController
             $event_type->name = $request->name;
             $event_type->branch_id = $request->branch_id;
             $query = $event_type->save();
-            
+
             $success = [];
             if ($query) {
                 return $this->successResponse($success, 'Event Type Details have Been updated');
@@ -842,7 +843,7 @@ class ApiController extends BaseController
         }
     }
 
-    
+
     // add Event
     public function addEvent(Request $request)
     {
@@ -899,12 +900,12 @@ class ApiController extends BaseController
         } else {
 
             $success = \DB::table("events")
-            ->select("events.*",\DB::raw("GROUP_CONCAT(classes.name) as classname"),'event_types.name as type','users.name as created_by')
-            ->leftjoin("classes",\DB::raw("FIND_IN_SET(classes.id,events.selected_list)"),">",\DB::raw("'0'"))
-            ->leftjoin('event_types','event_types.id','=','events.type')
-            ->leftjoin('users','users.id','=','events.created_by')
-            ->groupBy("events.id")
-            ->get();
+                ->select("events.*", \DB::raw("GROUP_CONCAT(classes.name) as classname"), 'event_types.name as type', 'users.name as created_by')
+                ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,events.selected_list)"), ">", \DB::raw("'0'"))
+                ->leftjoin('event_types', 'event_types.id', '=', 'events.type')
+                ->leftjoin('users', 'users.id', '=', 'events.created_by')
+                ->groupBy("events.id")
+                ->get();
 
             return $this->successResponse($success, 'Event record fetch successfully');
         }
@@ -923,12 +924,12 @@ class ApiController extends BaseController
         } else {
             $event_id = $request->event_id;
             $eventDetails = \DB::table("events")
-            ->select("events.*",\DB::raw("GROUP_CONCAT(classes.name) as classname"),'event_types.name as type','users.name as created_by')
-            ->leftjoin("classes",\DB::raw("FIND_IN_SET(classes.id,events.selected_list)"),">",\DB::raw("'0'"))
-            ->leftjoin('event_types','event_types.id','=','events.type')
-            ->leftjoin('users','users.id','=','events.created_by')
-            ->groupBy("events.id")
-            ->where('events.id',$event_id)->first();
+                ->select("events.*", \DB::raw("GROUP_CONCAT(classes.name) as classname"), 'event_types.name as type', 'users.name as created_by')
+                ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,events.selected_list)"), ">", \DB::raw("'0'"))
+                ->leftjoin('event_types', 'event_types.id', '=', 'events.type')
+                ->leftjoin('users', 'users.id', '=', 'events.created_by')
+                ->groupBy("events.id")
+                ->where('events.id', $event_id)->first();
             return $this->successResponse($eventDetails, 'Event row fetch successfully');
         }
     }
@@ -960,22 +961,22 @@ class ApiController extends BaseController
 
         $event_id = $request->event_id;
         $validator = \Validator::make($request->all(), [
-        'token' => 'required',
-        'event_id' => 'required',
-        'value' => 'required',
+            'token' => 'required',
+            'event_id' => 'required',
+            'value' => 'required',
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-        $event = Event::find($request->event_id);
-        $event->status = $request->value;
-        $query = $event->save();
-        $success = [];
-        if ($query) {
-            return $this->successResponse($success, 'Event have been Updated successfully');
-        } else {
-            return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-        }
+            $event = Event::find($request->event_id);
+            $event->status = $request->value;
+            $query = $event->save();
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Event have been Updated successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
         }
     }
     // branchIdByEvent 
@@ -990,21 +991,22 @@ class ApiController extends BaseController
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
             $branch_id = $request->branch_id;
-            $response=[];
-            $response['class'] = Classes::where('branch_id',$branch_id)->get();
+            $response = [];
+            $response['class'] = Classes::where('branch_id', $branch_id)->get();
             $response['section'] = DB::table('sections_allocations as sa')
-                                    ->select('sa.id', 'sa.class_id', 'sa.section_id','s.name as section_name', 'c.name as class_name', 'c.name_numeric','b.name as branch_name')
-                                    ->join('sections as s', 'sa.section_id', '=', 's.id')
-                                    ->join('branches as b', 'sa.branch_id', '=', 'b.id')
-                                    ->join('classes as c', 'sa.class_id', '=', 'c.id')
-                                    ->where('sa.branch_id',$branch_id)
-                                    ->get();
-            $response['eventType'] = EventType::where('branch_id',$branch_id)->get();
+                ->select('sa.id', 'sa.class_id', 'sa.section_id', 's.name as section_name', 'c.name as class_name', 'c.name_numeric', 'b.name as branch_name')
+                ->join('sections as s', 'sa.section_id', '=', 's.id')
+                ->join('branches as b', 'sa.branch_id', '=', 'b.id')
+                ->join('classes as c', 'sa.class_id', '=', 'c.id')
+                ->where('sa.branch_id', $branch_id)
+                ->get();
+            $response['eventType'] = EventType::where('branch_id', $branch_id)->get();
             return $this->successResponse($response, 'Information fetch successfully');
         }
     }
     // addDepartment
-    public function addDepartment(Request $request){
+    public function addDepartment(Request $request)
+    {
 
         $branch_id = $request->branch_id;
         $validator = \Validator::make($request->all(), [
@@ -1030,14 +1032,13 @@ class ApiController extends BaseController
             } else {
                 return $this->successResponse($success, 'Department has been successfully saved');
             }
-
         }
     }
     // getDepartmentList
     public function getDepartmentList(Request $request)
     {
         $Department = DB::table('staff_departments as s')
-            ->select('s.*','b.name as branch_name')
+            ->select('s.*', 'b.name as branch_name')
             ->join('branches as b', 's.branch_id', '=', 'b.id')
             ->get();
         return $this->successResponse($Department, 'Department record fetch successfully');
@@ -1066,8 +1067,8 @@ class ApiController extends BaseController
 
         $branch_id = $request->branch_id;
         $validator = \Validator::make($request->all(), [
-            'name' => Rule::unique('staff_departments')->where(function ($query) use ($branch_id,$id) {
-                return $query->where('branch_id', $branch_id)->where('id','!=', $id);
+            'name' => Rule::unique('staff_departments')->where(function ($query) use ($branch_id, $id) {
+                return $query->where('branch_id', $branch_id)->where('id', '!=', $id);
             }),
             'branch_id' => 'required',
             'token' => 'required',
@@ -1081,7 +1082,7 @@ class ApiController extends BaseController
             $department->branch_id = $request->branch_id;
             $department->name = $request->name;
             $query = $department->save();
-            
+
             $success = [];
             if ($query) {
                 return $this->successResponse($success, 'Department Details have Been updated');
@@ -1113,7 +1114,8 @@ class ApiController extends BaseController
         }
     }
     // addDesignation
-    public function addDesignation(Request $request){
+    public function addDesignation(Request $request)
+    {
 
         $branch_id = $request->branch_id;
         $validator = \Validator::make($request->all(), [
@@ -1139,14 +1141,13 @@ class ApiController extends BaseController
             } else {
                 return $this->successResponse($success, 'Designation has been successfully saved');
             }
-
         }
     }
     // getDesignationList
     public function getDesignationList(Request $request)
     {
         $Designation = DB::table('staff_designations as s')
-            ->select('s.*','b.name as branch_name')
+            ->select('s.*', 'b.name as branch_name')
             ->join('branches as b', 's.branch_id', '=', 'b.id')
             ->get();
         return $this->successResponse($Designation, 'Designation record fetch successfully');
@@ -1174,8 +1175,8 @@ class ApiController extends BaseController
 
         $branch_id = $request->branch_id;
         $validator = \Validator::make($request->all(), [
-            'name' => Rule::unique('staff_designations')->where(function ($query) use ($branch_id,$id) {
-                return $query->where('branch_id', $branch_id)->where('id','!=', $id);   
+            'name' => Rule::unique('staff_designations')->where(function ($query) use ($branch_id, $id) {
+                return $query->where('branch_id', $branch_id)->where('id', '!=', $id);
             }),
             'branch_id' => 'required',
             'token' => 'required',
@@ -1189,7 +1190,7 @@ class ApiController extends BaseController
             $designation->branch_id = $request->branch_id;
             $designation->name = $request->name;
             $query = $designation->save();
-            
+
             $success = [];
             if ($query) {
                 return $this->successResponse($success, 'Designation Details have Been updated');
@@ -1231,7 +1232,7 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $StaffDepartment = StaffDepartments::where('branch_id',$request->branch_id)->get();
+            $StaffDepartment = StaffDepartments::where('branch_id', $request->branch_id)->get();
             return $this->successResponse($StaffDepartment, 'Department row fetch successfully');
         }
     }
@@ -1246,13 +1247,14 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $StaffDesig = StaffDesignation::where('branch_id',$request->branch_id)->get();
+            $StaffDesig = StaffDesignation::where('branch_id', $request->branch_id)->get();
             return $this->successResponse($StaffDesig, 'Designation row fetch successfully');
         }
     }
 
-        // add Employee
-    public function addEmployee(Request $request){
+    // add Employee
+    public function addEmployee(Request $request)
+    {
 
         $branch_id = $request->branch_id;
         $validator = \Validator::make($request->all(), [
@@ -1307,8 +1309,8 @@ class ApiController extends BaseController
             //     $request->image->move(public_path('images/staff'), $imageName);
             $query = $employee->save();
 
-            
-            $user = new User(); 
+
+            $user = new User();
             $user->user_id = $employee->id;
             $user->role_id = $request->role;
             $user->email = $request->email;
@@ -1320,7 +1322,6 @@ class ApiController extends BaseController
             } else {
                 return $this->successResponse($success, 'Employee has been successfully saved');
             }
-
         }
     }
 
@@ -1328,7 +1329,7 @@ class ApiController extends BaseController
     public function getEmployeeList(Request $request)
     {
         $Staff = DB::table('staffs as s')
-            ->select('s.*','b.name as branch_name','dp.name as department_name','ds.name as designation_name')
+            ->select('s.*', 'b.name as branch_name', 'dp.name as department_name', 'ds.name as designation_name')
             ->join('branches as b', 's.branch_id', '=', 'b.id')
             ->join('staff_departments as dp', 's.department', '=', 'dp.id')
             ->join('staff_designations as ds', 's.designation', '=', 'ds.id')
@@ -1373,11 +1374,77 @@ class ApiController extends BaseController
                     "file_name" => $new_name
                 ];
                 if (!$upload) {
-                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong, updating picture in db failed.']);
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong, updating picture is failed.']);
                 } else {
                     return $this->successResponse($data, 'Your profile picture has been updated successfully');
                 }
             }
         }
-    
+    }
+    // change password
+    public function changePassword(Request $request)
+    {
+        $dbPass = User::find($request->id)->getAttributes()['password'];
+        //Validate form
+        $validator = \Validator::make($request->all(), [
+            'oldpassword' => [
+                'required', function ($attribute, $value, $fail) use ($dbPass){
+                    if (!\Hash::check($value, $dbPass)) {
+                        return $fail(__('The current password is incorrect'));
+                    }
+                },
+                'min:8',
+                'max:30'
+            ],
+            'newpassword' => 'required|min:8|max:30',
+            'cnewpassword' => 'required|same:newpassword'
+        ], [
+            'oldpassword.required' => 'Enter your current password',
+            'oldpassword.min' => 'Old password must have atleast 8 characters',
+            'oldpassword.max' => 'Old password must not be greater than 30 characters',
+            'newpassword.required' => 'Enter new password',
+            'newpassword.min' => 'New password must have atleast 8 characters',
+            'newpassword.max' => 'New password must not be greater than 30 characters',
+            'cnewpassword.required' => 'ReEnter your new password',
+            'cnewpassword.same' => 'New password and Confirm new password must match'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            $update = User::find($request->id)->update(['password' => \Hash::make($request->newpassword)]);
+
+            if (!$update) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong, Failed to update password.']);
+            } else {
+                return $this->successResponse([], 'Your password has been changed successfully');
+            }
+        }
+    }
+
+    // update profile info
+    public function updateProfileInfo(Request $request){
+ 
+        $validator = \Validator::make($request->all(),[
+            'name'=>'required',
+            'email'=> 'required|email|unique:users,email,'.$request->id,
+            'address'=>'required',
+        ]);
+        if(!$validator->passes()){
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        }else{
+             $query = User::find($request->id)->update([
+                  'name'=>$request->name,
+                  'email'=>$request->email,
+                  'address'=>$request->address,
+             ]);
+
+             if(!$query){
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong, Failed to update profile.']);
+             }else{
+                return $this->successResponse([], 'Your profile info has been update successfuly.');
+             }
+        }
+    }
 }

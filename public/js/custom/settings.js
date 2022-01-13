@@ -19,11 +19,22 @@ $(function () {
                         $('span.' + prefix + '_error').text(val[0]);
                     });
                 } else {
-                    $('.user_name').each(function () {
-                        $(this).html($('#updateProfileInfo').find($('input[name="name"]')).val());
-                    });
-                    toastr.success(data.msg);
+                    // $('.user_name').each(function () {
+                    //     $(this).html($('#updateProfileInfo').find($('input[name="name"]')).val());
+                    // });
+                    // toastr.success(data.msg);
                     // alert(data.msg);
+                    if (data.code == 200) {
+                        // $('.user_name').each(function () {
+                        //     $(this).html($('#updateProfileInfo').find($('input[name="name"]')).val());
+                        // });
+                        toastr.success(data.message);
+                        location.reload();
+                    } else if (data.code == 422) {
+                        toastr.error(data.data.error);
+                    } else {
+                        toastr.error(data.message);
+                    }
                 }
             }
         });
@@ -49,8 +60,29 @@ $(function () {
                         $('span.' + prefix + '_error').text(val[0]);
                     });
                 } else {
-                    $('#changeNewPassword')[0].reset();
-                    toastr.success(data.msg);
+                    if (data.code == 200) {
+                        $('#changeNewPassword')[0].reset();
+                        toastr.success(data.message);
+                    } else if (data.code == 422) {
+                        // $('#changeNewPassword')[0].reset();
+                        if (data.data.error.oldpassword) {
+                            toastr.error(data.data.error.oldpassword[0]);
+                        }
+                        if (data.data.error.newpassword) {
+                            toastr.error(data.data.error.newpassword[0]);
+                        }
+                        if (data.data.error.cnewpassword) {
+                            toastr.error(data.data.error.cnewpassword[0]);
+                        }
+                    } else {
+                        // $('#changeNewPassword')[0].reset();
+                        toastr.error(data.message);
+                    }
+
+                }
+            }, error: function (err) {
+                if (err.responseJSON.code == 422) {
+                    toastr.error(err.responseJSON.data.error.oldpassword[0] ? err.responseJSON.data.error.oldpassword[0] : 'Something went wrong');
                 }
             }
         });

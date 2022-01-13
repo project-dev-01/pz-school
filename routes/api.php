@@ -111,10 +111,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('employee/list', [ApiController::class, 'getEmployeeList']);
     // settings
     Route::post('change-profile-picture',[ApiController::class,'updatePicture']);
-
-    
-
-
+    Route::post('change-password',[ApiController::class,'changePassword']);
+    Route::post('update-profile-info',[ApiController::class,'updateProfileInfo']);
 
     
 });

@@ -48,12 +48,12 @@
                         Hi I'm Johnathn Deo,has been the industry's standard dummy text ever since the
                         1500s, when an unknown printer took a galley of type.
                     </p> -->
-                    <p class="text-muted mb-2 font-13"><strong>Full Name :</strong> <span class="ml-2 user_name">{{ Session::get('name') }}</span></p>
+                    <p class="text-muted mb-2 font-13"><strong>Full Name :</strong> <span class="ml-2 user_name"> {{ $user_details['name'] }} </span></p>
 
                     <!-- <p class="text-muted mb-2 font-13"><strong>Mobile :</strong><span class="ml-2">(123)
                             123 1234</span></p> -->
 
-                    <p class="text-muted mb-2 font-13"><strong>Email :</strong> <span class="ml-2 ">{{ Session::get('email') }}</span></p>
+                    <p class="text-muted mb-2 font-13"><strong>Email :</strong> <span class="ml-2 "> {{ $user_details['email'] }}</span></p>
 
                     <!-- <p class="text-muted mb-1 font-13"><strong>Location :</strong> <span class="ml-2">USA</span></p> -->
                 </div>
@@ -77,20 +77,21 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane show active" id="settings">
-                        <form method="POST" action="#" id="updateProfileInfo">
+                        <form method="POST" action="{{ route('settings.updateProfileInfo') }}" id="updateProfileInfo">
                             <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> Personal Info</h5>
                             <div class="row">
+                            <input type="hidden" name="id" value="{{ $user_details['id'] }}">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">Name</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="" placeholder="Enter name">
+                                        <input type="text" class="form-control" id="name" name="name" value="{{ $user_details['name'] }}" placeholder="Enter name">
                                         <span class="text-danger error-text name_error"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="email">Email Address</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="" placeholder="Enter email">
+                                        <input type="email" class="form-control" id="email" name="email" value="{{ $user_details['email'] }}" placeholder="Enter email">
                                         <span class="text-danger error-text email_error"></span>
                                         <!-- <span class="form-text text-muted"><small>If you want to change email please <a href="javascript: void(0);">click</a> here.</small></span> -->
                                     </div>
@@ -101,7 +102,7 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="address">Address</label>
-                                        <textarea class="form-control" id="address" rows="4" name="address" placeholder="Enter Address..."></textarea>
+                                        <textarea class="form-control" id="address" rows="4" name="address" placeholder="Enter Address...">{{ $user_details['address'] }}</textarea>
                                         <span class="text-danger error-text address_error"></span>
                                     </div>
                                 </div> <!-- end col -->
@@ -116,9 +117,10 @@
                     <div class="tab-pane" id="changePassword">
 
                         <!-- comment box -->
-                        <form action="#" method="POST" id="changeNewPassword" class="comment-area-box mt-2 mb-3">
+                        <form action="{{ route('settings.changePassword') }}" method="POST" id="changeNewPassword" class="comment-area-box mt-2 mb-3">
                             <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> Change Password</h5>
                             <div class="row">
+                                <input type="hidden" name="id" value="{{ $user_details['id'] }}">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="name">Old Passord</label>
