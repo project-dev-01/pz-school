@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\CommonController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,7 +27,7 @@ use App\Http\Controllers\StudentController;
 //     return view('auth.login');
 // });
 Route::get('/', function () {
-    return redirect(route('login'));
+    return redirect(route('super_admin.login'));
 });
 // Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 // Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
@@ -133,10 +134,12 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::post('change-password', [SuperAdminController::class, 'changePassword'])->name('changePassword');
         Route::post('update-profile-info', [SuperAdminController::class, 'updateProfileInfo'])->name('updateProfileInfo');
         Route::post('change-profile-picture', [SuperAdminController::class, 'updatePicture'])->name('pictureUpdate');
+        Route::post('update-setting-session', [CommonController::class, 'updateSettingSession'])->name('settings.updateSettingSession');
+
     });
 });
 
-Route::group(['prefix' => 'schoolcrm', 'namespace' => 'Admin'], function () {
+Route::group(['prefix' => 'schoolcrm'], function () {
 
     // Route::get('login', 'AuthController@login');
     // Route::get('logout', 'AuthController@logout');
@@ -144,39 +147,39 @@ Route::group(['prefix' => 'schoolcrm', 'namespace' => 'Admin'], function () {
     Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('admin.authenticate');
     Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
 
-    Route::group(['middleware' => ['isAdmin']], function () {
+    Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin']], function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    
+
         // Settings
         Route::get('settings', [AdminController::class, 'settings'])->name('admin.settings');
     });
-});
 
+    Route::group(['prefix' => 'staff', 'middleware' => ['isStaff']], function () {
+        Route::get('/dashboard', [StaffController::class, 'index'])->name('staff.dashboard');
 
-Route::group(['prefix' => 'staff', 'middleware' => ['isStaff']], function () {
-    Route::get('/dashboard', [StaffController::class, 'index'])->name('staff.dashboard');
+        // Settings
+        Route::get('settings', [StaffController::class, 'settings'])->name('staff.settings');
+    });
 
-    // Settings
-    Route::get('settings', [StaffController::class, 'settings'])->name('staff.settings');
-});
+    Route::group(['prefix' => 'teacher', 'middleware' => ['isTeacher']], function () {
+        Route::get('/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
 
-Route::group(['prefix' => 'teacher', 'middleware' => ['isTeacher']], function () {
-    Route::get('/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
+        // Settings
+        Route::get('settings', [TeacherController::class, 'settings'])->name('teacher.settings');
+    });
 
-    // Settings
-    Route::get('settings', [TeacherController::class, 'settings'])->name('teacher.settings');
-});
+    Route::group(['prefix' => 'parent', 'middleware' => ['isParent']], function () {
+        Route::get('/dashboard', [ParentController::class, 'index'])->name('parent.dashboard');
+    
+        // Settings
+        Route::get('settings', [SuperAdminController::class, 'settings'])->name('parent.settings');
+    });
 
-Route::group(['prefix' => 'parent', 'middleware' => ['isParent']], function () {
-    Route::get('/dashboard', [ParentController::class, 'index'])->name('parent.dashboard');
-
-    // Settings
-    Route::get('settings', [SuperAdminController::class, 'settings'])->name('parent.settings');
-});
-
-Route::group(['prefix' => 'student', 'middleware' => ['isStudent']], function () {
-    Route::get('/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
-
-    // Settings
-    Route::get('settings', [SuperAdminController::class, 'settings'])->name('student.settings');
+    Route::group(['prefix' => 'student', 'middleware' => ['isStudent']], function () {
+        Route::get('/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
+    
+        // Settings
+        Route::get('settings', [SuperAdminController::class, 'settings'])->name('student.settings');
+    });
+    
 });

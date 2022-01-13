@@ -27,6 +27,7 @@ use App\Models\User;
 use App\Models\StaffDepartments;
 use App\Models\StaffDesignation;
 
+
 class ApiController extends BaseController
 {
     //
@@ -1334,5 +1335,49 @@ class ApiController extends BaseController
             ->get();
         return $this->successResponse($Staff, 'Staff record fetch successfully');
     }
+
+    // updatePicture settings
+    public function updatePicture(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'token' => 'required',
+            'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            $path = 'users/images/';
+            $file = $request->file('profile_image');
+            $new_name = 'UIMG_' . date('Ymd') . uniqid() . '.jpg';
+
+            //Upload new image
+            $upload = $file->move(public_path($path), $new_name);
+
+            if (!$upload) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong, upload new picture failed.']);
+            } else {
+                //Get Old picture
+                $oldPicture = User::find($request->id)->getAttributes()['picture'];
+
+                if ($oldPicture != '') {
+                    if (\File::exists(public_path($path . $oldPicture))) {
+                        \File::delete(public_path($path . $oldPicture));
+                    }
+                }
+                //Update DB
+                $update = User::find($request->id)->update(['picture' => $new_name]);
+                $data = [
+                    "file_name" => $new_name
+                ];
+                if (!$upload) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong, updating picture in db failed.']);
+                } else {
+                    return $this->successResponse($data, 'Your profile picture has been updated successfully');
+                }
+            }
+        }
     
 }

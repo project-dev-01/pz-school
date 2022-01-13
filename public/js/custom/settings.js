@@ -56,25 +56,44 @@ $(function () {
         });
     });
 
-    // change profile image
-    $(document).on('click', '#change_picture_btn', function () {
-        $('#admin_image').click();
-    });
+    $('#upload_form').on('change', '#profile_image', function (event) {
+        event.preventDefault();
+        var formData = new FormData();
+        formData.append('id', userID);
+        formData.append('token', token);
+        // Attach file
+        formData.append('profile_image', $('input[type=file]')[0].files[0]);
+        $.ajax({
+            url: profileUpdateStg,
+            method: "POST",
+            data: formData,
+            dataType: 'JSON',
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                if (data.code == 200) {
+                    toastr.success(data.message);
+                    $('.admin_picture').attr('src', profilePath + "/" + data.data.file_name);
+                    $.ajax({
+                        type: "POST",
+                        url: updateSettingSession,
+                        data: { picture: data.data.file_name },
+                        success: function (res) {
+                            console.log("--------")
+                            console.log(res)
+                        }
+                    });
+                } else {
+                    toastr.error(data.message);
+                }
 
-    $('#admin_image').ijaboCropTool({
-        preview : '.admin_picture',
-        setRatio:1,
-        allowedExtensions: ['jpg', 'jpeg','png'],
-        buttonsText:['CROP','QUIT'],
-        buttonsColor:['#30bf7d','#ee5155', -15],
-        processUrl: pictureUpdateUrl,
-        // withCSRF:['_token','{{ csrf_token() }}'],
-        onSuccess:function(message, element, status){
-           toastr.success(message);
-        },
-        onError:function(message, element, status){
-          toastr.danger(message);
-        }
-     });
+            }, error: function (err) {
+                if (err.responseJSON.code == 422) {
+                    toastr.error(err.responseJSON.data.error.profile_image[0] ? err.responseJSON.data.error.profile_image[0] : 'Something went wrong');
+                }
+            }
+        })
+    });
 
 });

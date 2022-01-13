@@ -48,7 +48,9 @@ class AuthController extends Controller
         if ($userDetails['code'] == 200) {
 
             if ($userDetails['data']['user']['role_id'] != 1) {
+                $request->session()->put('user_id', $userDetails['data']['user']['id']);
                 $request->session()->put('role_id', $userDetails['data']['user']['role_id']);
+                $request->session()->put('picture', $userDetails['data']['user']['picture']);
                 $request->session()->put('token', $userDetails['data']['token']);
                 $request->session()->put('name', $userDetails['data']['user']['name']);
                 $request->session()->put('email', $userDetails['data']['user']['email']);
@@ -85,7 +87,9 @@ class AuthController extends Controller
         if ($userDetails['code'] == 200) {
 
             if ($userDetails['data']['user']['role_id'] == 1) {
+                $request->session()->put('user_id', $userDetails['data']['user']['id']);
                 $request->session()->put('role_id', $userDetails['data']['user']['role_id']);
+                $request->session()->put('picture', $userDetails['data']['user']['picture']);
                 $request->session()->put('token', $userDetails['data']['token']);
                 $request->session()->put('name', $userDetails['data']['user']['name']);
                 $request->session()->put('email', $userDetails['data']['user']['email']);
@@ -107,9 +111,11 @@ class AuthController extends Controller
         if (session()->has('role_id')) {
             session()->pull('role_id');
             session()->pull('token');
+            session()->pull('picture');
             session()->pull('name');
             session()->pull('email');
             session()->pull('role_name');
+            session()->pull('user_id');
             $request->session()->flush();
             return redirect()->route('super_admin.login');
         } else {
@@ -122,9 +128,11 @@ class AuthController extends Controller
         if (session()->has('role_id')) {
             session()->pull('role_id');
             session()->pull('token');
+            session()->pull('picture');
             session()->pull('name');
             session()->pull('email');
             session()->pull('role_name');
+            session()->pull('user_id');
             $request->session()->flush();
             return redirect()->route('admin.login');
         } else {

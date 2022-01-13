@@ -87,6 +87,8 @@ return [
          'emp_designation' => $url.'/employee/designation',
          'employee_add' => $url.'/employee/add',
          'employee_list' => $url.'/employee/list',
+          // settings url
+          'change_profile_picture' => $url.'/change-profile-picture',
         
     ]
 

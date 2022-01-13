@@ -91,7 +91,7 @@
     var branchBySection = "{{ config('constants.api.branch_by_section') }}";
 
     var token = "{{ Session::get('token') }}";
-    
+    var userID = "{{ Session::get('user_id') }}";
     // branch details
     var branchList = "{{ route('branch.list') }}";
     var branchShow = "{{ route('branch.index') }}";
@@ -139,6 +139,10 @@
     var empDesignation = "{{ config('constants.api.emp_designation') }}";
     var employeeList = "{{ route('employee.list') }}";
     var employeeShow = "{{ route('super_admin.listemployee') }}";
+        // settings url
+    var profileUpdateStg = "{{ config('constants.api.change_profile_picture') }}";
+    var updateSettingSession = "{{ route('settings.updateSettingSession') }}";
+    var profilePath = "{{ asset('users/images') }}";
       
 </script>
 <!-- custom js  -->
@@ -154,3 +158,4 @@
 <script src="{{ asset('js/custom/designation.js') }}"></script>
 <script src="{{ asset('js/custom/employee.js') }}"></script>
 <script src="{{ asset('js/custom/assign_teacher.js') }}"></script>
+<script src="{{ asset('js/custom/settings.js') }}"></script>

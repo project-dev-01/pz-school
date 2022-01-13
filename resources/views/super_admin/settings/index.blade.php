@@ -24,13 +24,21 @@
     <div class="row">
         <div class="col-lg-4 col-xl-4">
             <div class="card-box text-center">
-                <img src="{{asset('users/images/default-img.jpg')}}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image">
+                <img src="{{ Session::get('picture') && asset('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image">
+                <!-- <img src="{{ Session::get('picture') && Storage::disk('public')->exists('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image"> -->
+
                 <!-- <img src="{{ asset('images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image"> -->
                 <h4 class="mb-0 user_name">{{ Session::get('role_name') }}</h4>
 
                 <div class="text-left mt-3">
-                    <input type="file" name="admin_image" id="admin_image" style="opacity: 0;height:1px;display:none">
-                    <a href="javascript:void(0)" class="btn btn-primary btn-block" id="change_picture_btn"><b>Change picture</b></a>
+                    <form method="post" id="upload_form" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label class="btn btn-primary btn-block"> <b>Change picture</b>
+                                <input type="file" name="profile_image" id="profile_image" style="opacity: 0;height:1px;display:none" />
+                            </label>
+                        </div>
+                    </form>
                 </div>
                 <!-- <p class="text-muted">@webdesigner</p> -->
 
@@ -69,7 +77,7 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane show active" id="settings">
-                        <form  method="POST" action="#" id="updateProfileInfo">
+                        <form method="POST" action="#" id="updateProfileInfo">
                             <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> Personal Info</h5>
                             <div class="row">
                                 <div class="col-md-6">
@@ -109,7 +117,7 @@
 
                         <!-- comment box -->
                         <form action="#" method="POST" id="changeNewPassword" class="comment-area-box mt-2 mb-3">
-                        <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> Change Password</h5>
+                            <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> Change Password</h5>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
