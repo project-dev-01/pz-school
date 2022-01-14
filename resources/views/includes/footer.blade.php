@@ -143,7 +143,11 @@
     var profileUpdateStg = "{{ config('constants.api.change_profile_picture') }}";
     var updateSettingSession = "{{ route('settings.updateSettingSession') }}";
     var profilePath = "{{ asset('users/images') }}";
-      
+    
+    // users routes
+    var userList = "{{ route('users.user_list') }}";
+    var userShow = "{{ route('users.user') }}";
+    var deleteUser = "{{ route('users.delete') }}";
 </script>
 <!-- custom js  -->
 <!-- <script src="{{ asset('js/custom/classes.js') }}"></script>
@@ -159,3 +163,4 @@
 <script src="{{ asset('js/custom/employee.js') }}"></script>
 <script src="{{ asset('js/custom/assign_teacher.js') }}"></script>
 <script src="{{ asset('js/custom/settings.js') }}"></script>
+<script src="{{ asset('js/custom/user_list.js') }}"></script>

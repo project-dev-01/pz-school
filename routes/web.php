@@ -135,6 +135,65 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::post('update-profile-info', [SuperAdminController::class, 'updateProfileInfo'])->name('settings.updateProfileInfo');
         Route::post('update-setting-session', [CommonController::class, 'updateSettingSession'])->name('settings.updateSettingSession');
 
+        // static page routes start
+
+        // Admission routes
+        Route::get('admission/index', [SuperAdminController::class, 'admission'])->name('super_admin.admission');
+        Route::get('admission/import', [SuperAdminController::class, 'import'])->name('admission.import');
+
+        // Parent routes
+        Route::get('parent/index', [SuperAdminController::class, 'parent'])->name('super_admin.parent');
+
+        // Homework routes
+        Route::get('homework/index', [SuperAdminController::class, 'homework'])->name('super_admin.homework');
+
+        // exam routes
+        Route::get('exam/term', [SuperAdminController::class, 'examIndex'])->name('exam.term');
+        Route::get('exam/hall', [SuperAdminController::class, 'examHall'])->name('exam.hall');
+        Route::get('exam/mark_distribution', [SuperAdminController::class, 'examMarkDistribution'])->name('exam.mark_distribution');
+        Route::get('exam/exam', [SuperAdminController::class, 'exam'])->name('exam.exam');
+
+        // Hostel routes
+        Route::get('hostel/index', [SuperAdminController::class, 'hostel'])->name('super_admin.hostel');
+        Route::get('hostel/category', [SuperAdminController::class, 'getCategory'])->name('hostel.category');
+        Route::get('hostel/room', [SuperAdminController::class, 'getRoom'])->name('hostel.room');
+
+       // Transport routes
+       Route::get('transport/route', [SuperAdminController::class, 'getRoute'])->name('transport.route');
+       Route::get('transport/vehicle', [SuperAdminController::class, 'getVehicle'])->name('transport.vehicle');
+       Route::get('transport/stoppage', [SuperAdminController::class, 'getstoppage'])->name('transport.stoppage');
+       Route::get('transport/assignvehicle', [SuperAdminController::class, 'assignVehicle'])->name('transport.assignvehicle');
+
+       // Library routes
+       Route::get('library/book', [SuperAdminController::class, 'book'])->name('library.book');
+       Route::get('library/book/category', [SuperAdminController::class, 'bookCategory'])->name('library.bookcategory');
+       Route::get('library/issued_book', [SuperAdminController::class, 'issuedBook'])->name('library.issuedbook');
+       Route::get('library/issue_return', [SuperAdminController::class, 'issueReturn'])->name('library.issuereturn');
+
+       Route::get('classes/add_class', [SuperAdminController::class, 'addClasses'])->name('super_admin.add_classes');
+
+        // userlist routes
+        Route::get('users/user', [SuperAdminController::class, 'users'])->name('users.user');
+        Route::get('users/add', [SuperAdminController::class, 'addUsers'])->name('users.add');
+        Route::post('users/add_user', [SuperAdminController::class, 'addRoleUser'])->name('users.add_role_user');
+        Route::get('users/edit/{id}', [SuperAdminController::class, 'editUser'])->name('users.edit');
+        Route::get('users/user_list', [SuperAdminController::class, 'getUserList'])->name('users.user_list');
+        Route::post('users/delete', [SuperAdminController::class, 'deleteUser'])->name('users.delete');
+        // Forum routes
+        Route::get('forum/index', [SuperAdminController::class, 'forumIndex'])->name('forum.index');
+        Route::get('forum/page-single-topic', [SuperAdminController::class, 'forumPageSingleTopic'])->name('forum.page-single-topic');
+        Route::get('forum/page-create-topic', [SuperAdminController::class, 'forumPageCreateTopic'])->name('forum.page-create-topic');
+        Route::get('forum/page-single-user', [SuperAdminController::class, 'forumPageSingleUser'])->name('forum.page-single-user');
+        Route::get('forum/page-single-threads', [SuperAdminController::class, 'forumPageSingleThreads'])->name('forum.page-single-threads');
+        Route::get('forum/page-single-replies', [SuperAdminController::class, 'forumPageSingleReplies'])->name('forum.page-single-replies');
+        Route::get('forum/page-single-followers', [SuperAdminController::class, 'forumPageSingleFollowers'])->name('forum.page-single-followers');
+        Route::get('forum/page-single-categories', [SuperAdminController::class, 'forumPageSingleCategories'])->name('forum.page-single-categories');
+        Route::get('forum/page-categories', [SuperAdminController::class, 'forumPageCategories'])->name('forum.page-categories');
+        Route::get('forum/page-categories-single', [SuperAdminController::class, 'forumPageCategoriesSingle'])->name('forum.page-categories-single');
+        Route::get('forum/page-tabs', [SuperAdminController::class, 'forumPageTabs'])->name('forum.page-tabs');
+        Route::get('forum/page-tabs-guidelines', [SuperAdminController::class, 'forumPageTabGuidelines'])->name('forum.page-tabs-guidelines');
+
+        // static page routes end
     });
 });
 

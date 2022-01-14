@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use DataTables;
 use App\Helpers\Helper;
 use App\Models\Branches;
+use App\Models\User;
 
 class SuperAdminController extends Controller
 {
@@ -1209,5 +1210,215 @@ class SuperAdminController extends Controller
             return $response;
         }
     }
+
+    // static page controller start
+    public function admission()
+    {
+        return view('super_admin.admission.index');
+    }
+
+    public function import()
+    {
+        return view('super_admin.admission.import');
+    }
+    public function parent()
+    {
+        return view('super_admin.parent.index');
+    }
+    public function homework()
+    {
+        return view('super_admin.homework.index');
+    }
+    // exam routes
+    public function examIndex()
+    {
+        return view('super_admin.exam_term.index');
+    }
+    public function examHall()
+    {
+        return view('super_admin.exam_hall.index');
+    }
+    public function examMarkDistribution()
+    {
+        return view('super_admin.exam_mark_distribution.index');
+    }
+    public function exam()
+    {
+        return view('super_admin.exam.index');
+    }
+
+    // get hostel
+    public function hostel()
+    {
+        return view('super_admin.hostel.index');
+    }
+
+    // get Room
+    public function getRoom()
+    {
+        return view('super_admin.hostel.room');
+    }
+    // get Category
+    public function getCategory()
+    {
+        return view('super_admin.hostel.category');
+    }
+    public function getRoute()
+    {
+        return view('super_admin.transport.route');
+    }
+    
+    public function getVehicle()
+    {
+        return view('super_admin.transport.vehicle');
+    }
+
+    public function getstoppage()
+    {
+        return view('super_admin.transport.stoppage');
+    }
+
+    public function assignVehicle()
+    {
+        return view('super_admin.transport.assignvehicle');
+    }
+    public function book()
+    {
+        return view('super_admin.library.book');
+    }
+    public function bookCategory()
+    {
+        return view('super_admin.library.book_category');
+    }
+    public function issuedBook()
+    {
+        return view('super_admin.library.issued_book');
+    }
+    public function issueReturn()
+    {
+        return view('super_admin.library.issue_return');
+    }
+    public function addClasses()
+    {
+        $teacherDetails = User::select('id', 'name')->where('role_id', 3)->get();
+        return view('super_admin.classes.add', ['teacherDetails' => $teacherDetails]);
+    }
+    // users page
+    public function users()
+    {
+        return view('super_admin.users.index');
+    }
+
+    // get users details
+    public function getUserList(Request $request)
+    {
+        $users = User::join('roles', 'users.role_id', '=', 'roles.id')
+            ->where('users.role_id','!=',1)
+            ->get(['users.id','users.name', 'users.role_id', 'roles.role_name', 'roles.role_slug']);
+            // dd($users);
+        return DataTables::of($users)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteUserBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions', 'checkbox'])
+            ->make(true);
+    }
+    // show user page
+    public function addUsers()
+    {
+        $roleDetails = Role::select('role_id', 'role_name')->where('role_id','!=',1)->get();
+        return view('super_admin.users.add', ['roleDetails' => $roleDetails]);
+    }
+    // add roleUser
+    public function addRoleUser(Request $request){
+
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'role_name' => 'required',
+            'password' => 'required',
+            'email' => 'required|unique:users',
+            // 'student_id' => 'unique:users',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $user = new User();
+            $user->name = $request->name;
+            $user->role_id = $request->role_name;
+            $user->password = Hash::make($request->password);
+            $user->email = $request->email;
+            $user->citizenship = $request->citizenship;
+            $user->occupation = $request->occupation;
+            $user->student_id = $request->student_id;
+            $user->address = $request->address;
+            $user->age = $request->age;
+
+            $query = $user->save();
+
+            if (!$query) {
+                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
+            } else {
+                return response()->json(['code' => 1, 'msg' => 'New User has been successfully saved']);
+            }
+        }
+    }
+
+    // DELETE User Details
+    public function deleteUser(Request $request)
+    {
+        $id = $request->id;
+        $query = User::find($id)->delete();
+
+        if ($query) {
+            return response()->json(['code' => 1, 'msg' => 'User has been deleted from database']);
+        } else {
+            return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
+        }
+    }
+    // forum screen pages start
+    public function forumIndex(){
+        return view('super_admin.forum.index');
+    }
+    public function forumPageSingleTopic(){
+        return view('super_admin.forum.page-single-topic');
+    }
+    public function forumPageCreateTopic(){
+        return view('super_admin.forum.page-create-topic');
+    }
+    public function forumPageSingleUser(){
+        return view('super_admin.forum.page-single-user');
+    }
+    public function forumPageSingleThreads(){
+        return view('super_admin.forum.page-single-threads');
+    }
+    public function forumPageSingleReplies(){
+        return view('super_admin.forum.page-single-replies');
+    }
+    public function forumPageSingleFollowers(){
+        return view('super_admin.forum.page-single-followers');
+    }
+    public function forumPageSingleCategories(){
+        return view('super_admin.forum.page-single-categories');
+    }
+    public function forumPageCategories(){
+        return view('super_admin.forum.page-categories');
+    }
+    public function forumPageCategoriesSingle(){
+        return view('super_admin.forum.page-categories-single');
+    }
+    public function forumPageTabs(){
+        return view('super_admin.forum.page-tabs');
+    }
+    public function forumPageTabGuidelines(){
+        return view('super_admin.forum.page-tabs-guidelines');
+    }
+    
+    // forum screen pages end
+    // static page controller end
     
 }

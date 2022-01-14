@@ -74,52 +74,37 @@
                     </div>
                 </li>
                 <li>
-                    <a href="#sidebarAcademic" data-toggle="collapse">
-                        <i data-feather="home"></i>
-                        <span> Academic </span>
+                    <a href="#sidebarAdmission" data-toggle="collapse">
+                        <i class="fe-edit"></i>
+                        <span> Admission </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sidebarAcademic">
+                    <div class="collapse" id="sidebarAdmission">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('super_admin.section')}}" class="nav-link {{ (request()->is('super_admin/section*')) ? 'active' : '' }}">
-                                    <span> Section </span>
+                                <a href="{{ route('super_admin.admission')}}" class="nav-link {{ (request()->is('super_admin/admission/index')) ? 'active' : '' }}">
+                                    <span>Create Admission</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('super_admin.class')}}" class="nav-link {{ (request()->is('super_admin/class*')) ? 'active' : '' }}">
-                                    <span> Class </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('super_admin.section_allocation')}}" class="nav-link {{ (request()->is('super_admin/section_allocation*')) ? 'active' : '' }}">
-                                    <span> Sections Allocation </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('super_admin.assign_teacher')}}" class="nav-link {{ (request()->is('super_admin/assign_teacher*')) ? 'active' : '' }}">
-                                    <span> Assign Class Teacher </span>
+                                <a href="{{ route('admission.import')}}" class="nav-link {{ (request()->is('super_admin/admission/import')) ? 'active' : '' }}">
+                                    <span>Multiple Import</span>
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
                 <li>
-                    <a href="#sidebarEvents" data-toggle="collapse">
-                        <i data-feather="map"></i>
-                        <span> Events </span>
+                    <a href="#sidebarParent" data-toggle="collapse">
+                        <i class="fe-user-plus"></i>
+                        <span> Parents </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sidebarEvents">
+                    <div class="collapse" id="sidebarParent">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('super_admin.event_type')}}" class="nav-link {{ (request()->is('super_admin/event_type*')) ? 'active' : '' }}">
-                                    <span> Event Type </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('super_admin.event')}}" class="nav-link {{ (request()->is('super_admin/event/*')) ? 'active' : '' }}">
-                                    <span> Events </span>
+                                <a href="{{ route('super_admin.parent')}}" class="nav-link {{ (request()->is('super_admin/parent*')) ? 'active' : '' }}">
+                                    <span>Add Parent</span>
                                 </a>
                             </li>
                         </ul>
@@ -155,6 +140,224 @@
                             </li>                       
                         </ul>
                     </div>
+                </li>
+                <li>
+                    <a href="#sidebarAcademic" data-toggle="collapse">
+                        <i data-feather="home"></i>
+                        <span> Academic </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarAcademic">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('super_admin.section')}}" class="nav-link {{ (request()->is('super_admin/section*')) ? 'active' : '' }}">
+                                    <span> Section </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('super_admin.class')}}" class="nav-link {{ (request()->is('super_admin/class*')) ? 'active' : '' }}">
+                                    <span> Class </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('super_admin.section_allocation')}}" class="nav-link {{ (request()->is('super_admin/section_allocation*')) ? 'active' : '' }}">
+                                    <span> Sections Allocation </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('super_admin.assign_teacher')}}" class="nav-link {{ (request()->is('super_admin/assign_teacher*')) ? 'active' : '' }}">
+                                    <span> Assign Class Teacher </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#sidebarHomework" data-toggle="collapse">
+                        <i class="fe-book-open"></i>
+                        <span> Homework </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarHomework">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('super_admin.homework')}}" class="nav-link {{ (request()->is('super_admin/employee*')) ? 'active' : '' }}">
+                                    <span>Add Homework</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#sidebarMultilevel" data-toggle="collapse">
+                        <i data-feather="book"></i>
+                        <span> Exam Master</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarMultilevel">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="#sidebarMultilevel2" data-toggle="collapse">
+                                <i data-feather="book-open" class="icons-xs icon-dual"></i> &nbsp;
+                                    Exam <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarMultilevel2">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('exam.term')}}" class="nav-link {{ (request()->is('super_admin/exam/term')) ? 'active' : '' }}">
+                                                <span>Exam Term</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('exam.hall')}}" class="nav-link {{ (request()->is('super_admin/exam/hall')) ? 'active' : '' }}">
+                                                <span>Exam Hall</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('exam.mark_distribution')}}" class="nav-link {{ (request()->is('super_admin/exam/mark_distribution')) ? 'active' : '' }}">
+                                                <span>Distribution</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('exam.exam')}}" class="nav-link {{ (request()->is('super_admin/exam/exam')) ? 'active' : '' }}">
+                                                <span>Exam Setup</span>
+                                            </a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#sidebarSupervision" data-toggle="collapse">
+                        <i data-feather="share-2"></i>
+                        <span> Supervision </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarSupervision">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="#sidebarHostel" data-toggle="collapse">
+                                    Hostel<span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarHostel">
+                                    <ul class="nav-second-level">
+
+                                        <li>
+                                            <a href="{{ route('super_admin.hostel')}}" class="nav-link {{ (request()->is('super_admin/hostel')) ? 'active' : '' }}">
+                                                <span> Hostel Master </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('hostel.room')}}" class="nav-link {{ (request()->is('super_admin/hostel/room')) ? 'active' : '' }}">
+                                                <span> Hostel Room </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('hostel.category')}}" class="nav-link {{ (request()->is('super_admin/hostel/category')) ? 'active' : '' }}">
+                                                <span> Category </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#sidebarTransport" data-toggle="collapse">
+                                    Transport<span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarTransport">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('transport.route')}}" class="nav-link {{ (request()->is('super_admin/transport/route')) ? 'active' : '' }}">
+                                                <span> Route Master </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('transport.vehicle')}}" class="nav-link {{ (request()->is('super_admin/transport/vehicle')) ? 'active' : '' }}">
+                                                <span> Vehicle Master</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('transport.stoppage')}}" class="nav-link {{ (request()->is('super_admin/transport/stoppage')) ? 'active' : '' }}">
+                                                <span> Stoppage</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('transport.assignvehicle')}}" class="nav-link {{ (request()->is('super_admin/transport/assignvehicle')) ? 'active' : '' }}">
+                                                <span> Assign Vehicle</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#sidebarLibrary" data-toggle="collapse">
+                        <i class="fe-book-open"></i>
+                        <span> Library </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarLibrary">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('library.book')}}" class="nav-link {{ (request()->is('super_admin/book')) ? 'active' : '' }}">
+                                    <span>Book</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('library.bookcategory')}}" class="nav-link {{ (request()->is('super_admin/bookcategory')) ? 'active' : '' }}">
+                                    <span>Book Category</span>
+                                </a>
+                            </li>
+                            <!-- <li>
+                                <a href="{{ route('library.issuedbook')}}" class="nav-link {{ (request()->is('super_admin/issuedbook')) ? 'active' : '' }}">
+                                    <span>My Issued Book</span>
+                                </a>
+                            </li>  -->
+                            <li>
+                                <a href="{{ route('library.issuereturn')}}" class="nav-link {{ (request()->is('super_admin/book')) ? 'active' : '' }}">
+                                    <span>Book Issue/Return</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#sidebarEvents" data-toggle="collapse">
+                        <i data-feather="map"></i>
+                        <span> Events </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarEvents">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('super_admin.event_type')}}" class="nav-link {{ (request()->is('super_admin/event_type*')) ? 'active' : '' }}">
+                                    <span> Event Type </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('super_admin.event')}}" class="nav-link {{ (request()->is('super_admin/event/*')) ? 'active' : '' }}">
+                                    <span> Events </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="{{ route('users.user')}}" class="nav-link {{ (request()->is('super_admin/users*')) ? 'active' : '' }}">
+                        <i data-feather="user" class="icon-dual"></i>
+                        <span> User List </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('super_admin/forum*')) ? 'active' : '' }}">
+                        <i data-feather="external-link" class="icon-dual"></i>
+                        <span> Forum </span>
+                    </a>
                 </li>
                 <li>
                     <a href="{{ route('super_admin.settings')}}" class="nav-link {{ (request()->is('super_admin/settings*')) ? 'active' : '' }}">
