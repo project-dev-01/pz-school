@@ -1431,6 +1431,10 @@ class SuperAdminController extends Controller
     {
         return view('super_admin.attendance.exam');
     }
+    public function studentIndex()
+    {
+        return view('super_admin.student.student');
+    }
     // static page controller end
     
 }

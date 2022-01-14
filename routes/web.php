@@ -45,7 +45,9 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
 
         // dashboard routes
         Route::get('/dashboard', [SuperAdminController::class, 'index'])->name('super_admin.dashboard');
-
+        // student details
+        Route::get('/student', [SuperAdminController::class, 'studentIndex'])->name('student.index');
+        
         // section routes
         Route::get('section/index', [SuperAdminController::class, 'section'])->name('super_admin.section');
         Route::post('section/add', [SuperAdminController::class, 'addSection'])->name('section.add');
@@ -212,6 +214,8 @@ Route::group(['prefix' => 'schoolcrm'], function () {
     // admin routes start
     Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin']], function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+        // student details
+        Route::get('/student', [AdminController::class, 'studentIndex'])->name('admin.student.index');
 
         // section routes
         Route::get('section/index', [AdminController::class, 'section'])->name('admin.section');
@@ -374,9 +378,19 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
     Route::group(['prefix' => 'teacher', 'middleware' => ['isTeacher']], function () {
         Route::get('/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
+        // student details
+        Route::get('/student', [TeacherController::class, 'studentIndex'])->name('teacher.student.index');
+
+        // Parent routes
+        Route::get('parent/index', [TeacherController::class, 'parent'])->name('teacher.parent');
 
         // Admission routes
         Route::get('admission/index', [TeacherController::class, 'admission'])->name('teacher.admission');
+        // Attendance routes
+        Route::get('attendance/student_entry', [TeacherController::class, 'studentEntry'])->name('teacher.attendance.student_entry');
+        Route::get('attendance/exam_entry', [TeacherController::class, 'examEntry'])->name('teacher.attendance.exam_entry');
+        // Homework routes
+        Route::get('homework/index', [TeacherController::class, 'homework'])->name('teacher.homework');
 
         // Settings
         Route::get('settings', [TeacherController::class, 'settings'])->name('teacher.settings');

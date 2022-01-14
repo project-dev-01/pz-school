@@ -962,5 +962,9 @@ class AdminController extends Controller
     {
         return view('admin.attendance.exam');
     }
+    public function studentIndex()
+    {
+        return view('admin.student.student');
+    }
     
 }

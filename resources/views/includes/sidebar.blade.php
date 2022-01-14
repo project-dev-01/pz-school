@@ -95,6 +95,22 @@
                     </div>
                 </li>
                 <li>
+                    <a href="#sidebarStudentDetails" data-toggle="collapse">
+                        <i class="fas fa-users"></i>
+                        <span> Student Details </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarStudentDetails">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('student.index')}}" class="nav-link {{ (request()->is('super_admin/student*')) ? 'active' : '' }}">
+                                    <span> Student List </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
                     <a href="#sidebarParent" data-toggle="collapse">
                         <i class="fe-user-plus"></i>
                         <span> Parents </span>
@@ -420,6 +436,22 @@
                     </div>
                 </li>
                 <li>
+                    <a href="#sidebarStudentDetails" data-toggle="collapse">
+                        <i class="fas fa-users"></i>
+                        <span> Student Details </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarStudentDetails">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('admin.student.index')}}" class="nav-link {{ (request()->is('admin/student*')) ? 'active' : '' }}">
+                                    <span> Student List </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
                     <a href="#sidebarParent" data-toggle="collapse">
                         <i class="fe-user-plus"></i>
                         <span> Parents </span>
@@ -718,22 +750,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#sidebarAdmission" data-toggle="collapse">
-                        <i class="fe-edit"></i>
-                        <span> Admission </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarAdmission">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('teacher.admission')}}" class="nav-link {{ (request()->is('admin/admission/index')) ? 'active' : '' }}">
-                                    <span>Create Admission</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
                     <a href="{{ route('staff.settings')}}" class="nav-link {{ (request()->is('staff/settings*')) ? 'active' : '' }}">
                         <i data-feather="settings" class="icon-dual"></i>
                         <span> Settings </span>
@@ -745,6 +761,91 @@
                         <i data-feather="airplay" class="icon-dual"></i>
                         <span> Dashboards </span>
                     </a>
+                </li>
+                <li>
+                    <a href="#sidebarAdmission" data-toggle="collapse">
+                        <i class="fe-edit"></i>
+                        <span> Admission </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarAdmission">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('teacher.admission')}}" class="nav-link {{ (request()->is('teacher/admission/index')) ? 'active' : '' }}">
+                                    <span>Create Admission</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#sidebarStudentDetails" data-toggle="collapse">
+                        <i class="fas fa-users"></i>
+                        <span> Student Details </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarStudentDetails">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('teacher.student.index')}}" class="nav-link {{ (request()->is('teacher/student*')) ? 'active' : '' }}">
+                                    <span> Student List </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#sidebarParent" data-toggle="collapse">
+                        <i class="fe-user-plus"></i>
+                        <span> Parents </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarParent">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('teacher.parent')}}" class="nav-link {{ (request()->is('teacher/parent*')) ? 'active' : '' }}">
+                                    <span>Add Parent</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#sidebarHomework" data-toggle="collapse">
+                        <i class="fe-book-open"></i>
+                        <span> Homework </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarHomework">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('teacher.homework')}}" class="nav-link {{ (request()->is('teacher/homework*')) ? 'active' : '' }}">
+                                    <span>Add Homework</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#sidebarAttendance" data-toggle="collapse">
+                        <i data-feather="map"></i>
+                        <span> Attendance </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarAttendance">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('teacher.attendance.student_entry')}}" class="nav-link {{ (request()->is('teacher/attendance/student_entry')) ? 'active' : '' }}">
+                                    <span> Student </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('teacher.attendance.exam_entry')}}" class="nav-link {{ (request()->is('teacher/attendance/exam_entry')) ? 'active' : '' }}">
+                                    <span> Exam </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 <li>
                     <a href="{{ route('teacher.settings')}}" class="nav-link {{ (request()->is('teacher/settings*')) ? 'active' : '' }}">

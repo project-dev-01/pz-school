@@ -3,7 +3,7 @@
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
-                        
+
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
@@ -15,14 +15,14 @@
                 <h4 class="page-title">Dashboard</h4>
             </div>
         </div>
-    </div>     
-    <!-- end page title --> 
+    </div>
+    <!-- end page title -->
     <div class="row">
-        <div class="col-12">							
+        <div class="col-12">
             <div class="card-box">
                 <div class="border mt-4 mt-lg-0 rounded">
-                <div class="row">
-                    <div class="col-lg-3" id="top-header">										
+                    <div class="row">
+                        <div class="col-lg-3" id="top-header">
                             <div class="card-box">
                                 <div class="row">
                                     <div class="col-6">
@@ -34,21 +34,21 @@
                                     <div class="col-6">
                                         <div class="text-right">
                                             <h3 class="my-1" style="color:blue"><span data-plugin="counterup">0</span></h3>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mt-3">                                       
+                                <div class="mt-3">
                                     <div class="progress progress-sm m-0">
                                         <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                         </div>
                                     </div>
-                                        <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
+                                    <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
                                 </div>
-                            
-                        </div>
-                    </div><!-- end col-->
-                        <div class="col-lg-3" id="top-header">									
+
+                            </div>
+                        </div><!-- end col-->
+                        <div class="col-lg-3" id="top-header">
                             <div class="card-box">
                                 <div class="row">
                                     <div class="col-6">
@@ -60,21 +60,21 @@
                                     <div class="col-6">
                                         <div class="text-right">
                                             <h3 class="my-1" style="color:blue"><span data-plugin="counterup">0</span></h3>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mt-3">                                       
+                                <div class="mt-3">
                                     <div class="progress progress-sm m-0">
                                         <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                         </div>
                                     </div>
-                                        <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
+                                    <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
                                 </div>
-                            
-                        </div>
-                    </div><!-- end col-->
-                    <div class="col-lg-3" id="top-header">										
+
+                            </div>
+                        </div><!-- end col-->
+                        <div class="col-lg-3" id="top-header">
                             <div class="card-box">
                                 <div class="row">
                                     <div class="col-6">
@@ -86,21 +86,21 @@
                                     <div class="col-6">
                                         <div class="text-right">
                                             <h3 class="my-1" style="color:blue"><span data-plugin="counterup">0</span></h3>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mt-3">                                       
+                                <div class="mt-3">
                                     <div class="progress progress-sm m-0">
                                         <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                         </div>
                                     </div>
-                                        <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
+                                    <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
                                 </div>
-                            
-                        </div>
-                    </div><!-- end col-->
-                        <div class="col-lg-3">										 
+
+                            </div>
+                        </div><!-- end col-->
+                        <div class="col-lg-3">
                             <div class="card-box">
                                 <div class="row">
                                     <div class="col-6">
@@ -112,21 +112,144 @@
                                     <div class="col-6">
                                         <div class="text-right">
                                             <h3 class="my-1" style="color:blue"><span data-plugin="counterup">0</span></h3>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mt-3">                                       
+                                <div class="mt-3">
                                     <div class="progress progress-sm m-0">
                                         <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                            </div>
+                                        </div>
                                     </div>
-                                        <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
+                                    <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
                                 </div>
                             </div> <!-- end card-box-->
                         </div>
                     </div><!-- end col-->
                 </div> <!-- end row -->
+                <!-- tasks panel -->
+                <div class="row">
+                    <div class="col-xl-8">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
+                                            <div class="col">
+                                                <a class="text-dark" data-toggle="collapse" href="#todayTasks" aria-expanded="false" aria-controls="todayTasks">
+                                                    <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> Today <span class="text-muted font-14">(10)</span></h5>
+                                                </a>
+
+                                                <div class="collapse show" id="todayTasks">
+                                                    <div class="card mb-0 shadow-none">
+                                                        <div class="card-body pb-0" id="task-list-one">
+                                                            <!-- task -->
+                                                            <div class="row justify-content-sm-between task-item">
+                                                                <div class="col-lg-6 mb-2">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="task1">
+                                                                        <label class="custom-control-label" for="task1">
+                                                                            Half Yearly Exam
+                                                                        </label>
+                                                                    </div> <!-- end checkbox -->
+                                                                </div> <!-- end col -->
+                                                                <div class="col-lg-6">
+                                                                    <div class="d-sm-flex justify-content-between">
+                                                                        
+                                                                        <div class="mt-3 mt-sm-0">
+                                                                            <ul class="list-inline font-13 text-sm-right">
+                                                                                <li class="list-inline-item pr-1">
+                                                                                    <i class='mdi mdi-calendar-month-outline font-16 mr-1'></i>
+                                                                                    Today 10am
+                                                                                </li>
+                                                                                <!-- <li class="list-inline-item pr-1">
+                                                                                    <i class='mdi mdi-tune font-16 mr-1'></i>
+                                                                                    3/7
+                                                                                </li>
+                                                                                <li class="list-inline-item pr-2">
+                                                                                    <i class='mdi mdi-comment-text-multiple-outline font-16 mr-1'></i>
+                                                                                    21
+                                                                                </li> -->
+                                                                                <li class="list-inline-item">
+                                                                                    <span class="badge badge-soft-danger p-1">High</span>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div> <!-- end .d-flex-->
+                                                                </div> <!-- end col -->
+                                                            </div>
+                                                            <!-- end task -->
+                                                        </div> <!-- end card-body-->
+                                                    </div> <!-- end card -->
+                                                </div> <!-- end .collapse-->
+
+                                                <!-- upcoming tasks -->
+                                                <div class="mt-4">
+                                                    <a class="text-dark" data-toggle="collapse" href="#upcomingTasks" aria-expanded="false" aria-controls="upcomingTasks">
+                                                        <h5 class="mb-0">
+                                                            <i class='mdi mdi-chevron-down font-18'></i> Upcoming <span class="text-muted font-14">(5)</span>
+                                                        </h5>
+                                                    </a>
+
+                                                    <div class="collapse show" id="upcomingTasks">
+                                                        <div class="card mb-0 shadow-none">
+                                                            <div class="card-body pb-0" id="task-list-two">
+                                                                <!-- task -->
+                                                                <div class="row justify-content-sm-between task-item">
+                                                                    <div class="col-lg-6 mb-2">
+                                                                        <div class="custom-control custom-checkbox">
+                                                                            <input type="checkbox" class="custom-control-input" id="task4">
+                                                                            <label class="custom-control-label" for="task4">
+                                                                                Sports Day
+                                                                            </label>
+                                                                        </div> <!-- end checkbox -->
+                                                                    </div> <!-- end col -->
+                                                                    <div class="col-lg-6">
+                                                                        <div class="d-sm-flex justify-content-between">
+                                                                            <div class="mt-3 mt-sm-0">
+                                                                                <ul class="list-inline font-13 text-sm-right">
+                                                                                    <li class="list-inline-item pr-1">
+                                                                                        <i class='mdi mdi-calendar-month-outline font-16 mr-1'></i>
+                                                                                        Tomorrow
+                                                                                        7am
+                                                                                    </li>
+                                                                                    <!-- <li class="list-inline-item pr-1">
+                                                                                        <i class='mdi mdi-tune font-16 mr-1'></i>
+                                                                                        1/12
+                                                                                    </li>
+                                                                                    <li class="list-inline-item pr-2">
+                                                                                        <i class='mdi mdi-comment-text-multiple-outline font-16 mr-1'></i>
+                                                                                        36
+                                                                                    </li> -->
+                                                                                    <li class="list-inline-item">
+                                                                                        <span class="badge badge-soft-danger p-1">High</span>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div> <!-- end .d-flex-->
+                                                                    </div> <!-- end col -->
+                                                                </div>
+                                                                <!-- end task -->
+                                                            </div> <!-- end card-body-->
+                                                        </div> <!-- end card -->
+                                                    </div> <!-- end collapse-->
+                                                </div>
+                                                <!-- end upcoming tasks -->
+
+                                            </div> <!-- end col -->
+                                        </div> <!-- end row -->
+
+
+                                    </div> <!-- end card-body -->
+                                </div> <!-- end card -->
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+                    </div> <!-- end col -->
+
+                    <!-- task details -->
+                </div>
+                <!-- task panel end -->
             </div> <!-- end card-box -->
         </div> <!-- end col-->
     </div>
@@ -137,7 +260,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-3">                                               
+                        <div class="col-lg-3">
                             <div id="external-events" class="m-t-20">
                                 <br>
                             </div>
@@ -148,7 +271,7 @@
                             <div id="calendar"></div>
                         </div> <!-- end col -->
 
-                    </div>  <!-- end row -->
+                    </div> <!-- end row -->
                 </div> <!-- end card body-->
             </div> <!-- end card -->
 
@@ -157,8 +280,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header py-3 px-4 border-bottom-0 d-block">
-                            <button type="button" class="close" data-dismiss="modal"
-                                aria-hidden="true">&times;</button>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h5 class="modal-title" id="modal-title">Event</h5>
                         </div>
                         <div class="modal-body p-4">
@@ -167,16 +289,14 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label class="control-label">Event Name</label>
-                                            <input class="form-control" placeholder="Insert Event Name"
-                                                type="text" name="title" id="event-title" required />
+                                            <input class="form-control" placeholder="Insert Event Name" type="text" name="title" id="event-title" required />
                                             <div class="invalid-feedback">Please provide a valid event name</div>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label class="control-label">Category</label>
-                                            <select class="form-control custom-select" name="category"
-                                                id="event-category" required>
+                                            <select class="form-control custom-select" name="category" id="event-category" required>
                                                 <option value="bg-danger" selected>Danger</option>
                                                 <option value="bg-success">Success</option>
                                                 <option value="bg-primary">Primary</option>
@@ -206,6 +326,6 @@
         </div>
         <!-- end col-12 -->
     </div> <!-- end row -->
-    
+
 </div> <!-- container -->
 @endsection
