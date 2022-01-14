@@ -1419,6 +1419,18 @@ class SuperAdminController extends Controller
     }
     
     // forum screen pages end
+    public function studentEntry()
+    {
+        return view('super_admin.attendance.student');
+    }
+    public function employeeEntry()
+    {
+        return view('super_admin.attendance.employee');
+    }
+    public function examEntry()
+    {
+        return view('super_admin.attendance.exam');
+    }
     // static page controller end
     
 }

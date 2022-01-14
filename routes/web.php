@@ -124,10 +124,10 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
 
         // Employee routes
     
-    Route::get('employee/employeelist', [SuperAdminController::class, 'listEmployee'])->name('super_admin.listemployee');
-    Route::get('employee/index', [SuperAdminController::class, 'showEmployee'])->name('super_admin.employee');
-    Route::post('employee/add', [SuperAdminController::class, 'addEmployee'])->name('employee.add');
-    Route::get('employee/list', [SuperAdminController::class, 'getEmployeeList'])->name('employee.list');
+        Route::get('employee/employeelist', [SuperAdminController::class, 'listEmployee'])->name('super_admin.listemployee');
+        Route::get('employee/index', [SuperAdminController::class, 'showEmployee'])->name('super_admin.employee');
+        Route::post('employee/add', [SuperAdminController::class, 'addEmployee'])->name('employee.add');
+        Route::get('employee/list', [SuperAdminController::class, 'getEmployeeList'])->name('employee.list');
 
         // Settings
         Route::get('settings', [SuperAdminController::class, 'settings'])->name('super_admin.settings');
@@ -139,7 +139,7 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
 
         // Admission routes
         Route::get('admission/index', [SuperAdminController::class, 'admission'])->name('super_admin.admission');
-        Route::get('admission/import', [SuperAdminController::class, 'import'])->name('admission.import');
+        Route::get('admission/import', [SuperAdminController::class, 'import'])->name('admin.admission.import');
 
         // Parent routes
         Route::get('parent/index', [SuperAdminController::class, 'parent'])->name('super_admin.parent');
@@ -192,6 +192,10 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::get('forum/page-categories-single', [SuperAdminController::class, 'forumPageCategoriesSingle'])->name('forum.page-categories-single');
         Route::get('forum/page-tabs', [SuperAdminController::class, 'forumPageTabs'])->name('forum.page-tabs');
         Route::get('forum/page-tabs-guidelines', [SuperAdminController::class, 'forumPageTabGuidelines'])->name('forum.page-tabs-guidelines');
+        // Attendance routes
+        Route::get('attendance/student_entry', [SuperAdminController::class, 'studentEntry'])->name('attendance.student_entry');
+        Route::get('attendance/employee_entry', [SuperAdminController::class, 'employeeEntry'])->name('attendance.employee_entry');
+        Route::get('attendance/exam_entry', [SuperAdminController::class, 'examEntry'])->name('attendance.exam_entry');
 
         // static page routes end
     });
@@ -205,12 +209,161 @@ Route::group(['prefix' => 'schoolcrm'], function () {
     Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('admin.authenticate');
     Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
 
+    // admin routes start
     Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin']], function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
+        // section routes
+        Route::get('section/index', [AdminController::class, 'section'])->name('admin.section');
+        Route::post('section/add', [AdminController::class, 'addSection'])->name('section.add');
+        Route::get('section/list', [AdminController::class, 'getSectionList'])->name('section.list');
+        Route::post('section/section-details', [AdminController::class, 'getSectionDetails'])->name('section.details');
+        Route::post('section/update', [AdminController::class, 'updateSectionDetails'])->name('section.update');
+        Route::post('section/delete', [AdminController::class, 'deleteSection'])->name('section.delete');
+
+        // Class routes
+        // Route::get('class/index', [AdminController::class, 'classes'])->name('admin.class');
+        // Route::post('class/add', [AdminController::class, 'addClass'])->name('class.add');
+        // Route::get('class/list', [AdminController::class, 'getClassList'])->name('class.list');
+        // Route::post('class/class-details', [AdminController::class, 'getClassDetails'])->name('class.details');
+        // Route::post('class/update', [AdminController::class, 'updateClassDetails'])->name('class.update');
+        // Route::post('class/delete', [AdminController::class, 'deleteClass'])->name('class.delete');
+
+        Route::get('classes', [AdminController::class, 'classes'])->name('admin.classes');
+        Route::get('classes/add_class', [AdminController::class, 'addClasses'])->name('admin.add_classes');
+        Route::get('classes/list', [AdminController::class, 'getClassList'])->name('classes.list');
+        Route::post('classes/add', [AdminController::class, 'addClass'])->name('classes.add');
+        Route::get('classes/edit/{id}', [AdminController::class, 'editClass'])->name('classes.edit');
+        Route::post('classes/update', [AdminController::class, 'updateClass'])->name('classes.update');
+        Route::post('classes/delete', [AdminController::class, 'deleteClass'])->name('classes.delete');
+        Route::post('classes/class-details',[AdminController::class, 'getClassDetails'])->name('classes.details');
+
+
+        // sections allocations routes
+        Route::get('allocate_section/index', [AdminController::class, 'showSectionAllocation'])->name('admin.section_allocation');
+        Route::post('allocate_section/add', [AdminController::class, 'addSectionAllocation'])->name('section_allocation.add');
+        Route::get('allocate_section/list', [AdminController::class, 'getSectionAllocationList'])->name('section_allocation.list');
+        Route::post('allocate_section/section_allocation-details', [AdminController::class, 'getSectionAllocationDetails'])->name('section_allocation.details');
+        Route::post('allocate_section/update', [AdminController::class, 'updateSectionAllocation'])->name('section_allocation.update');
+        Route::post('allocate_section/delete', [AdminController::class, 'deleteSectionAllocation'])->name('section_allocation.delete');
+
+        // assign_teacher routes
+        Route::get('assign_teacher/index', [AdminController::class, 'showTeacherAllocation'])->name('admin.assign_teacher');
+        Route::post('assign_teacher/get_allocation_section', [AdminController::class, 'getAllocationSection'])->name('assign_teacher.get_allocation_section');
+        Route::post('assign_teacher/add', [AdminController::class, 'addTeacherAllocation'])->name('assign_teacher.add');
+        Route::get('assign_teacher/list', [AdminController::class, 'getTeacherAllocationList'])->name('assign_teacher.list');
+        Route::post('assign_teacher/details', [AdminController::class, 'getTeacherAllocationDetails'])->name('assign_teacher.details');
+        Route::post('assign_teacher/update', [AdminController::class, 'updateTeacherAllocation'])->name('assign_teacher.update');
+        Route::post('assign_teacher/delete', [AdminController::class, 'deleteTeacherAllocation'])->name('assign_teacher.delete');
+
+        // Event Type routes
+        Route::get('event_type/index', [AdminController::class, 'eventType'])->name('admin.event_type');
+        Route::get('event_type/list', [AdminController::class, 'getEventTypeList'])->name('event_type.list');
+        Route::post('event_type/add', [AdminController::class, 'addEventType'])->name('event_type.add');
+        Route::post('event_type/event_type-details', [AdminController::class, 'getEventTypeDetails'])->name('event_type.details');
+        Route::post('event_type/update', [AdminController::class, 'updateEventTypeDetails'])->name('event_type.update');
+        Route::post('event_type/delete', [AdminController::class, 'deleteEventType'])->name('event_type.delete');
+
+
+        // Event routes
+        Route::get('event/index', [AdminController::class, 'event'])->name('admin.event');
+        Route::get('event/list', [AdminController::class, 'getEventList'])->name('event.list');
+        Route::post('event/add', [AdminController::class, 'addEvent'])->name('event.add');
+        Route::post('event/event-details', [AdminController::class, 'getEventDetails'])->name('event.details');
+        Route::post('event/delete', [AdminController::class, 'deleteEvent'])->name('event.delete');
+        Route::post('event/event-publish', [AdminController::class, 'publishEvent'])->name('event.publish');
+
+        // department routes
+        Route::get('department/index', [AdminController::class, 'Department'])->name('admin.department');
+        Route::post('department/add', [AdminController::class, 'addDepartment'])->name('department.add');
+        Route::get('department/list', [AdminController::class, 'getDepartmentList']);
+        Route::post('department/department-details', [AdminController::class, 'getDepartmentDetails'])->name('department.details');
+        Route::post('department/update', [AdminController::class, 'updateDepartment'])->name('department.update');
+        Route::post('department/delete', [AdminController::class, 'deleteDepartment'])->name('department.delete');
+
+        // designation routes
+        Route::get('designation/index', [AdminController::class, 'Designation'])->name('admin.designation');
+        Route::post('designation/add', [AdminController::class, 'addDesignation'])->name('designation.add');
+        Route::get('designation/list', [AdminController::class, 'getDesignationList']);
+        Route::post('designation/designation-details', [AdminController::class, 'getDesignationDetails'])->name('designation.details');
+        Route::post('designation/update', [AdminController::class, 'updateDesignation'])->name('designation.update');
+        Route::post('designation/delete', [AdminController::class, 'deleteDesignation'])->name('designation.delete');
+
+
+        // Employee routes
+    
+        Route::get('employee/employeelist', [AdminController::class, 'listEmployee'])->name('admin.listemployee');
+        Route::get('employee/index', [AdminController::class, 'showEmployee'])->name('admin.employee');
+        Route::post('employee/add', [AdminController::class, 'addEmployee'])->name('employee.add');
+        Route::get('employee/list', [AdminController::class, 'getEmployeeList']);
+
         // Settings
-        Route::get('settings', [AdminController::class, 'settings'])->name('admin.settings');
+        Route::get('settings', [SuperAdminController::class, 'settings'])->name('admin.settings');
+        Route::post('change-password', [SuperAdminController::class, 'changePassword'])->name('settings.changePassword');
+        Route::post('update-profile-info', [SuperAdminController::class, 'updateProfileInfo'])->name('settings.updateProfileInfo');
+        Route::post('update-setting-session', [CommonController::class, 'updateSettingSession'])->name('settings.updateSettingSession');
+
+        // static page routes start
+
+        // Admission routes
+        Route::get('admission/index', [AdminController::class, 'admission'])->name('admin.admission');
+        Route::get('admission/import', [AdminController::class, 'import'])->name('admission.import');
+
+        // Parent routes
+        Route::get('parent/index', [AdminController::class, 'parent'])->name('admin.parent');
+
+        // Homework routes
+        Route::get('homework/index', [AdminController::class, 'homework'])->name('admin.homework');
+
+        // exam routes
+        Route::get('exam/term', [AdminController::class, 'examIndex'])->name('admin.exam.term');
+        Route::get('exam/hall', [AdminController::class, 'examHall'])->name('admin.exam.hall');
+        Route::get('exam/mark_distribution', [AdminController::class, 'examMarkDistribution'])->name('admin.exam.mark_distribution');
+        Route::get('exam/exam', [AdminController::class, 'exam'])->name('admin.exam.exam');
+
+        // Hostel routes
+        Route::get('hostel/index', [AdminController::class, 'hostel'])->name('admin.hostel');
+        Route::get('hostel/category', [AdminController::class, 'getCategory'])->name('admin.hostel.category');
+        Route::get('hostel/room', [AdminController::class, 'getRoom'])->name('admin.hostel.room');
+
+       // Transport routes
+       Route::get('transport/route', [AdminController::class, 'getRoute'])->name('admin.transport.route');
+       Route::get('transport/vehicle', [AdminController::class, 'getVehicle'])->name('admin.transport.vehicle');
+       Route::get('transport/stoppage', [AdminController::class, 'getstoppage'])->name('admin.transport.stoppage');
+       Route::get('transport/assignvehicle', [AdminController::class, 'assignVehicle'])->name('admin.transport.assignvehicle');
+
+       // Library routes
+       Route::get('library/book', [AdminController::class, 'book'])->name('admin.library.book');
+       Route::get('library/book/category', [AdminController::class, 'bookCategory'])->name('admin.library.bookcategory');
+       Route::get('library/issued_book', [AdminController::class, 'issuedBook'])->name('admin.library.issuedbook');
+       Route::get('library/issue_return', [AdminController::class, 'issueReturn'])->name('admin.library.issuereturn');
+
+       Route::get('classes/add_class', [AdminController::class, 'addClasses'])->name('admin.add_classes');
+
+        // Forum routes
+        Route::get('forum/index', [AdminController::class, 'forumIndex'])->name('admin.forum.index');
+        Route::get('forum/page-single-topic', [AdminController::class, 'forumPageSingleTopic'])->name('forum.page-single-topic');
+        Route::get('forum/page-create-topic', [AdminController::class, 'forumPageCreateTopic'])->name('forum.page-create-topic');
+        Route::get('forum/page-single-user', [AdminController::class, 'forumPageSingleUser'])->name('forum.page-single-user');
+        Route::get('forum/page-single-threads', [AdminController::class, 'forumPageSingleThreads'])->name('forum.page-single-threads');
+        Route::get('forum/page-single-replies', [AdminController::class, 'forumPageSingleReplies'])->name('forum.page-single-replies');
+        Route::get('forum/page-single-followers', [AdminController::class, 'forumPageSingleFollowers'])->name('forum.page-single-followers');
+        Route::get('forum/page-single-categories', [AdminController::class, 'forumPageSingleCategories'])->name('forum.page-single-categories');
+        Route::get('forum/page-categories', [AdminController::class, 'forumPageCategories'])->name('forum.page-categories');
+        Route::get('forum/page-categories-single', [AdminController::class, 'forumPageCategoriesSingle'])->name('forum.page-categories-single');
+        Route::get('forum/page-tabs', [AdminController::class, 'forumPageTabs'])->name('forum.page-tabs');
+        Route::get('forum/page-tabs-guidelines', [AdminController::class, 'forumPageTabGuidelines'])->name('forum.page-tabs-guidelines');
+
+        // Attendance routes
+        Route::get('attendance/student_entry', [AdminController::class, 'studentEntry'])->name('admin.attendance.student_entry');
+        Route::get('attendance/employee_entry', [AdminController::class, 'employeeEntry'])->name('admin.attendance.employee_entry');
+        Route::get('attendance/exam_entry', [AdminController::class, 'examEntry'])->name('admin.attendance.exam_entry');
+
+        // static page routes end
+        // Settings
+        // Route::get('settings', [AdminController::class, 'settings'])->name('admin.settings');
     });
+    // admin routes end
 
     Route::group(['prefix' => 'staff', 'middleware' => ['isStaff']], function () {
         Route::get('/dashboard', [StaffController::class, 'index'])->name('staff.dashboard');
@@ -221,6 +374,9 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
     Route::group(['prefix' => 'teacher', 'middleware' => ['isTeacher']], function () {
         Route::get('/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
+
+        // Admission routes
+        Route::get('admission/index', [TeacherController::class, 'admission'])->name('teacher.admission');
 
         // Settings
         Route::get('settings', [TeacherController::class, 'settings'])->name('teacher.settings');
