@@ -1435,6 +1435,12 @@ class SuperAdminController extends Controller
     {
         return view('super_admin.student.student');
     }
+    
+    public function taskIndex()
+    {
+        return view('super_admin.task.index');
+    }
+    
     // static page controller end
     
 }

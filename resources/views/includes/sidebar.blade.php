@@ -205,6 +205,22 @@
                     </div>
                 </li>
                 <li>
+                    <a href="#sidebarTasks" data-toggle="collapse">
+                    <i data-feather="external-link" class="icon-dual"></i>
+                        <span> Tasks </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarTasks">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('super_admin.task')}}" class="nav-link {{ (request()->is('super_admin/task*')) ? 'active' : '' }}">
+                                    <span>To Do List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
                     <a href="#sidebarAttendance" data-toggle="collapse">
                         <i data-feather="map"></i>
                         <span> Attendance </span>

@@ -155,6 +155,9 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::get('exam/mark_distribution', [SuperAdminController::class, 'examMarkDistribution'])->name('exam.mark_distribution');
         Route::get('exam/exam', [SuperAdminController::class, 'exam'])->name('exam.exam');
 
+        //Task routes
+        Route::get('task/index', [SuperAdminController::class, 'taskIndex'])->name('super_admin.task');
+
         // Hostel routes
         Route::get('hostel/index', [SuperAdminController::class, 'hostel'])->name('super_admin.hostel');
         Route::get('hostel/category', [SuperAdminController::class, 'getCategory'])->name('hostel.category');
