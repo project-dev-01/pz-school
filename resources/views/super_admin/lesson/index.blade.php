@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','To Do List')
+@section('title','Assign Time Table')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">List</li>
                     </ol>
                 </div>
-                <h4 class="page-title">To Do List</h4>
+                <h4 class="page-title">Assign Time Table</h4>
             </div>
         </div>
     </div>
@@ -22,11 +22,11 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card-box">
-                <h4 class="header-title">To Do Task</h4>
+                <h4 class="header-title">Time Table List</h4>
                 <p class="sub-header">
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addToDoTask">Add To Do Task</button>
+                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#timeTableAdd">Assign Time Table</button>
                     </div>
                 </div>
                 </p>
@@ -36,20 +36,24 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Branch</th>
-                                <th>Title</th>
-                                <th>Date & Time</th>
-                                <th>Priority</th>
-                                <th>Description</th>
+                                <th>Class</th>
+                                <th>Section</th>
+                                <th>Teacher</th>
+                                <th>Week Days</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
                                 <th>Action</th>
                             </tr>
+                        </thead>
+                        <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Cuddalore</td>
-                                <td>Sports Day</td>
-                                <td>Tommorrow 10am</td>
-                                <td><span class="badge badge-soft-danger p-1">High</span></td>
-                                <td>All Should wear sports dress</td>
+                                <td>First class</td>
+                                <td>A</td>
+                                <td>xxxx</td>
+                                <td>2</td>
+                                <td>08:00</td>
+                                <td>08:30</td>
                                 <td>
                                     <div class="button-list">
                                         <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id=""><i class="fe-edit"></i></a>
@@ -57,8 +61,6 @@
                                     </div>
                                 </td>
                             </tr>
-                        </thead>
-                        <tbody>
                         </tbody>
                     </table>
                 </div>
@@ -66,7 +68,7 @@
         </div> <!-- end col -->
     </div>
     <!--- end row -->
-    @include('super_admin.task.add')
+    @include('super_admin.lesson.add')
 </div>
 <!-- container -->
 @endsection

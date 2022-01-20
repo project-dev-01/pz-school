@@ -201,7 +201,22 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::get('attendance/student_entry', [SuperAdminController::class, 'studentEntry'])->name('attendance.student_entry');
         Route::get('attendance/employee_entry', [SuperAdminController::class, 'employeeEntry'])->name('attendance.employee_entry');
         Route::get('attendance/exam_entry', [SuperAdminController::class, 'examEntry'])->name('attendance.exam_entry');
+        
+        // LEAVE MANAGEMENT ROUTES start
+        // Leave Apply
+        Route::get('leave_management/applyleave', [SuperAdminController::class, 'applyleave'])->name('super_admin.leave_management.applyleave');
+        // Leave approval
+        Route::get('leave_management/approvalleave', [SuperAdminController::class, 'approvalleave'])->name('super_admin.leave_management.approvalleave');
+        // Leave allLeaves
+        Route::get('leave_management/allleaves', [SuperAdminController::class, 'allleaves'])->name('super_admin.leave_management.allleaves');
 
+        // timetable
+        Route::get('timetable/lesson', [SuperAdminController::class, 'addLesson'])->name('super_admin.timetable.lesson');
+        Route::get('timetable/index', [SuperAdminController::class, 'timeTable'])->name('super_admin.timetable.index');
+        // faq
+        Route::get('faq/index', [SuperAdminController::class, 'faqIndex'])->name('super_admin.faq.index');
+        // exam result
+        Route::get('exam/result', [SuperAdminController::class, 'examResult'])->name('super_admin.exam.result');
         // static page routes end
     });
 });
@@ -365,6 +380,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('attendance/student_entry', [AdminController::class, 'studentEntry'])->name('admin.attendance.student_entry');
         Route::get('attendance/employee_entry', [AdminController::class, 'employeeEntry'])->name('admin.attendance.employee_entry');
         Route::get('attendance/exam_entry', [AdminController::class, 'examEntry'])->name('admin.attendance.exam_entry');
+
 
         // static page routes end
         // Settings

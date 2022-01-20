@@ -164,3 +164,4 @@
 <script src="{{ asset('js/custom/assign_teacher.js') }}"></script>
 <script src="{{ asset('js/custom/settings.js') }}"></script>
 <script src="{{ asset('js/custom/user_list.js') }}"></script>
+<script src="{{ asset('js/custom/dashboard.js') }}"></script>

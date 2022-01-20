@@ -247,6 +247,27 @@
                     </div>
                 </li>
                 <li>
+                    <a href="#sidebartimeTable" data-toggle="collapse">
+                    <i data-feather="external-link" class="icon-dual"></i>
+                        <span> Time Table </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebartimeTable">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('super_admin.timetable.lesson')}}" class="nav-link {{ (request()->is('super_admin/task*')) ? 'active' : '' }}">
+                                    <span>Add Lesson</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('super_admin.timetable.index')}}" class="nav-link {{ (request()->is('super_admin/timetable*')) ? 'active' : '' }}">
+                                    <span> Time Table </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
                     <a href="#sidebarMultilevel" data-toggle="collapse">
                         <i data-feather="book"></i>
                         <span> Exam Master</span>
@@ -285,7 +306,34 @@
                                     </ul>
                                 </div>
                             </li>
+                            <!-- <li>
+                                <a href="#sidebarSchedule" data-toggle="collapse">
+                                <i class="fas fa-dna"></i> &nbsp;
+                                Exam Schedule <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarSchedule">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('exam.term')}}" class="nav-link {{ (request()->is('super_admin/exam/term')) ? 'active' : '' }}">
+                                                <span>Schedule</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('exam.hall')}}" class="nav-link {{ (request()->is('super_admin/exam/hall')) ? 'active' : '' }}">
+                                                <span>Add Schedule</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li> -->
+                            <li>
+                                <a href="{{ route('super_admin.exam.result')}}" class="nav-link {{ (request()->is('super_admin/exam*')) ? 'active' : '' }}">
+                                    <i data-feather="book" class="icons-xs icon-dual"></i>
+                                    <span> Result </span>
+                                </a>
+                            </li>
                         </ul>
+                       
                     </div>
                 </li>
                 <li>
@@ -406,6 +454,32 @@
                     </div>
                 </li>
                 <li>
+                    <a href="#sidebarLeaveManage" data-toggle="collapse">
+                        <i data-feather="map"></i>
+                        <span> Leave Management </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarLeaveManage">
+                        <ul class="nav-second-level">
+                        <li>
+                                <a href="{{ route('super_admin.leave_management.allleaves')}}" class="nav-link {{ (request()->is('super_admin/leave_management*')) ? 'active' : '' }}">
+                                    <span> All Leave</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('super_admin.leave_management.applyleave')}}" class="nav-link {{ (request()->is('super_admin/leave_management*')) ? 'active' : '' }}">
+                                    <span> Leave Apply </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('super_admin.leave_management.approvalleave')}}" class="nav-link {{ (request()->is('super_admin/leave_management*')) ? 'active' : '' }}">
+                                    <span> Leave Approval </span>
+                                </a>
+                            </li>                          
+                        </ul>
+                    </div>
+                </li>
+                <li>
                     <a href="{{ route('users.user')}}" class="nav-link {{ (request()->is('super_admin/users*')) ? 'active' : '' }}">
                         <i data-feather="user" class="icon-dual"></i>
                         <span> User List </span>
@@ -421,6 +495,12 @@
                     <a href="{{ route('super_admin.settings')}}" class="nav-link {{ (request()->is('super_admin/settings*')) ? 'active' : '' }}">
                         <i data-feather="settings" class="icon-dual"></i>
                         <span> Settings </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('super_admin.faq.index')}}" class="nav-link {{ (request()->is('super_admin/settings*')) ? 'active' : '' }}">
+                        <i class="fas fa-question"></i>
+                        <span> FAQs </span>
                     </a>
                 </li>
                 @elseif(Session::get('role_id') == '2')

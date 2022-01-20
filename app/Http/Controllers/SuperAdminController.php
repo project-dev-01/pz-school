@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use DataTables;
 use App\Helpers\Helper;
 use App\Models\Branches;
+use App\Models\Lesson;
 use App\Models\User;
 
 class SuperAdminController extends Controller
@@ -1440,7 +1441,38 @@ class SuperAdminController extends Controller
     {
         return view('super_admin.task.index');
     }
+    public function timeTable()
+    {
+        $weekDays     = Lesson::WEEK_DAYS;
+        return view('super_admin.time_table.index', compact('weekDays'));
+    }
+    public function addLesson()
+    {
+        return view('super_admin.lesson.index');
+    }
+    public function faqIndex()
+    {
+        return view('super_admin.faq.index');
+    }
+    public function examResult()
+    {
+        return view('super_admin.exam.result');
+    }
+    // LEAVE MANAGEMENT START
+    public function applyleave()
+    {
+        return view('super_admin.leave_management.applyleave');
+    }
+    public function approvalleave()
+    {
+        return view('super_admin.leave_management.approvalleave');
+    }
     
+    public function allleaves()
+    {
+        return view('super_admin.leave_management.allleaves');
+    }
+    // LEAVE MANAGEMENT END 
     // static page controller end
     
 }
