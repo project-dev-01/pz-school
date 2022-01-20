@@ -217,6 +217,10 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::get('faq/index', [SuperAdminController::class, 'faqIndex'])->name('super_admin.faq.index');
         // exam result
         Route::get('exam/result', [SuperAdminController::class, 'examResult'])->name('super_admin.exam.result');
+        // exam timrtable
+        Route::get('timetable/viewexam', [SuperAdminController::class, 'timeTableViewExam'])->name('super_admin.timetable.viewexam');
+        Route::get('timetable/set_examwise', [SuperAdminController::class, 'timeTableSetExamWise'])->name('super_admin.timetable.set_examwise');
+
         // static page routes end
     });
 });

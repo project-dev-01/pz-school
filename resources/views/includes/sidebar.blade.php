@@ -306,7 +306,7 @@
                                     </ul>
                                 </div>
                             </li>
-                            <!-- <li>
+                            <li>
                                 <a href="#sidebarSchedule" data-toggle="collapse">
                                 <i class="fas fa-dna"></i> &nbsp;
                                 Exam Schedule <span class="menu-arrow"></span>
@@ -314,18 +314,18 @@
                                 <div class="collapse" id="sidebarSchedule">
                                     <ul class="nav-second-level">
                                         <li>
-                                            <a href="{{ route('exam.term')}}" class="nav-link {{ (request()->is('super_admin/exam/term')) ? 'active' : '' }}">
+                                            <a href="{{ route('super_admin.timetable.viewexam')}}" class="nav-link {{ (request()->is('super_admin/exam/timetable')) ? 'active' : '' }}">
                                                 <span>Schedule</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('exam.hall')}}" class="nav-link {{ (request()->is('super_admin/exam/hall')) ? 'active' : '' }}">
+                                            <a href="{{ route('super_admin.timetable.set_examwise')}}" class="nav-link {{ (request()->is('super_admin/exam/set_examwise')) ? 'active' : '' }}">
                                                 <span>Add Schedule</span>
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
-                            </li> -->
+                            </li>
                             <li>
                                 <a href="{{ route('super_admin.exam.result')}}" class="nav-link {{ (request()->is('super_admin/exam*')) ? 'active' : '' }}">
                                     <i data-feather="book" class="icons-xs icon-dual"></i>
