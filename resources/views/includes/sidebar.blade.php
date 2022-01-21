@@ -327,6 +327,26 @@
                                 </div>
                             </li>
                             <li>
+                                <a href="#sidebarMarks" data-toggle="collapse">
+                                <i class="fas fa-marker"></i> &nbsp;
+                                Marks <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarMarks">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('super_admin.exam.mark_entry')}}" class="nav-link {{ (request()->is('super_admin/exam/timetable')) ? 'active' : '' }}">
+                                                <span>Mark Entries</span>
+                                            </a>
+                                        </li>
+                                        <!-- <li>
+                                            <a href="{{ route('super_admin.timetable.set_examwise')}}" class="nav-link {{ (request()->is('super_admin/exam/set_examwise')) ? 'active' : '' }}">
+                                                <span>Grade Range</span>
+                                            </a>
+                                        </li> -->
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
                                 <a href="{{ route('super_admin.exam.result')}}" class="nav-link {{ (request()->is('super_admin/exam*')) ? 'active' : '' }}">
                                     <i data-feather="book" class="icons-xs icon-dual"></i>
                                     <span> Result </span>

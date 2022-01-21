@@ -51,7 +51,7 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         // section routes
         Route::get('section/index', [SuperAdminController::class, 'section'])->name('super_admin.section');
         Route::post('section/add', [SuperAdminController::class, 'addSection'])->name('section.add');
-        Route::get('section/list', [SuperAdminController::class, 'getSectionList'])->name('section.list');
+        Route::get('section/list', [SuperAdminController::class, 'getSectionList'])->name('super_admin.section.list');
         Route::post('section/section-details', [SuperAdminController::class, 'getSectionDetails'])->name('section.details');
         Route::post('section/update', [SuperAdminController::class, 'updateSectionDetails'])->name('section.update');
         Route::post('section/delete', [SuperAdminController::class, 'deleteSection'])->name('section.delete');
@@ -76,7 +76,7 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         // sections allocations routes
         Route::get('allocate_section/index', [SuperAdminController::class, 'showSectionAllocation'])->name('super_admin.section_allocation');
         Route::post('allocate_section/add', [SuperAdminController::class, 'addSectionAllocation'])->name('section_allocation.add');
-        Route::get('allocate_section/list', [SuperAdminController::class, 'getSectionAllocationList'])->name('section_allocation.list');
+        Route::get('allocate_section/list', [SuperAdminController::class, 'getSectionAllocationList'])->name('super_admin.section_allocation.list');
         Route::post('allocate_section/section_allocation-details', [SuperAdminController::class, 'getSectionAllocationDetails'])->name('section_allocation.details');
         Route::post('allocate_section/update', [SuperAdminController::class, 'updateSectionAllocation'])->name('section_allocation.update');
         Route::post('allocate_section/delete', [SuperAdminController::class, 'deleteSectionAllocation'])->name('section_allocation.delete');
@@ -85,14 +85,14 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::get('assign_teacher/index', [SuperAdminController::class, 'showTeacherAllocation'])->name('super_admin.assign_teacher');
         Route::post('assign_teacher/get_allocation_section', [SuperAdminController::class, 'getAllocationSection'])->name('assign_teacher.get_allocation_section');
         Route::post('assign_teacher/add', [SuperAdminController::class, 'addTeacherAllocation'])->name('assign_teacher.add');
-        Route::get('assign_teacher/list', [SuperAdminController::class, 'getTeacherAllocationList'])->name('assign_teacher.list');
+        Route::get('assign_teacher/list', [SuperAdminController::class, 'getTeacherAllocationList'])->name('super_admin.assign_teacher.list');
         Route::post('assign_teacher/details', [SuperAdminController::class, 'getTeacherAllocationDetails'])->name('assign_teacher.details');
         Route::post('assign_teacher/update', [SuperAdminController::class, 'updateTeacherAllocation'])->name('assign_teacher.update');
         Route::post('assign_teacher/delete', [SuperAdminController::class, 'deleteTeacherAllocation'])->name('assign_teacher.delete');
 
         // Event Type routes
         Route::get('event_type/index', [SuperAdminController::class, 'eventType'])->name('super_admin.event_type');
-        Route::get('event_type/list', [SuperAdminController::class, 'getEventTypeList'])->name('event_type.list');
+        Route::get('event_type/list', [SuperAdminController::class, 'getEventTypeList'])->name('super_admin.event_type.list');
         Route::post('event_type/add', [SuperAdminController::class, 'addEventType'])->name('event_type.add');
         Route::post('event_type/event_type-details', [SuperAdminController::class, 'getEventTypeDetails'])->name('event_type.details');
         Route::post('event_type/update', [SuperAdminController::class, 'updateEventTypeDetails'])->name('event_type.update');
@@ -101,7 +101,7 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
 
         // Event routes
         Route::get('event/index', [SuperAdminController::class, 'event'])->name('super_admin.event');
-        Route::get('event/list', [SuperAdminController::class, 'getEventList'])->name('event.list');
+        Route::get('event/list', [SuperAdminController::class, 'getEventList'])->name('super_admin.event.list');
         Route::post('event/add', [SuperAdminController::class, 'addEvent'])->name('event.add');
         Route::post('event/event-details', [SuperAdminController::class, 'getEventDetails'])->name('event.details');
         Route::post('event/delete', [SuperAdminController::class, 'deleteEvent'])->name('event.delete');
@@ -217,10 +217,11 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::get('faq/index', [SuperAdminController::class, 'faqIndex'])->name('super_admin.faq.index');
         // exam result
         Route::get('exam/result', [SuperAdminController::class, 'examResult'])->name('super_admin.exam.result');
-        // exam timrtable
+        // exam timetable
         Route::get('timetable/viewexam', [SuperAdminController::class, 'timeTableViewExam'])->name('super_admin.timetable.viewexam');
         Route::get('timetable/set_examwise', [SuperAdminController::class, 'timeTableSetExamWise'])->name('super_admin.timetable.set_examwise');
-
+        // exam marks
+        Route::get('exam/mark_entry', [SuperAdminController::class, 'markEntry'])->name('super_admin.exam.mark_entry');
         // static page routes end
     });
 });

@@ -1473,6 +1473,19 @@ class SuperAdminController extends Controller
         return view('super_admin.leave_management.allleaves');
     }
     // LEAVE MANAGEMENT END 
+    public function timeTableViewExam()
+    {
+        return view('super_admin.exam_timetable.schedule');
+    }
+    public function timeTableSetExamWise()
+    {
+        return view('super_admin.exam_timetable.add_schedule');
+    }
+    public function markEntry()
+    {
+        return view('super_admin.exam_marks.mark_entry');
+    }
+    
     // static page controller end
     
 }
