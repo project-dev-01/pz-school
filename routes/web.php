@@ -402,6 +402,8 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
     Route::group(['prefix' => 'teacher', 'middleware' => ['isTeacher']], function () {
         Route::get('/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
+        // Test Result Rotes
+        Route::get('test_result', [TeacherController::class, 'testResult'])->name('teacher.test_result');
         // student details
         Route::get('/student', [TeacherController::class, 'studentIndex'])->name('teacher.student.index');
 

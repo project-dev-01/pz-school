@@ -49,6 +49,8 @@
 <!-- Chart JS -->
 <script src="{{ asset('libs/chart.js/Chart.bundle.min.js') }}"></script>
 
+<script src="{{ asset('libs/morris.js06/morris.min.js') }}"></script>
+<script src="{{ asset('libs/raphael/raphael.min.js') }}"></script>
 <!-- Init  -->
 <!-- <script src="{{ asset('js/pages/chartjs.init.js') }}"></script> -->
 <!-- Dashboar 1 init js-->
@@ -305,4 +307,70 @@
             return "rgb(" + r + ", " + g + ", " + b + ")";
         }
     }
+</script>
+
+<script>
+    ! function(e) {
+    "use strict";
+
+    function a() {}
+    a.prototype.createBarChart = function(a, t, e, o, r, i) {
+        Morris.Bar({
+            element: a,
+            data: t,
+            xkey: e,
+            ykeys: o,
+            labels: r,
+            dataLabels: !1,
+            hideHover: "auto",
+            resize: !0,
+            gridLineColor: "rgba(65, 80, 95, 0.07)",
+            barSizeRatio: .2,
+            barColors: i
+        })
+    }, a.prototype.createDonutChart = function(a, t, e) {
+        Morris.Donut({
+            element: a,
+            data: t,
+            barSize: .2,
+            resize: !0,
+            colors: e,
+            backgroundColor: "transparent"
+        })
+    }, a.prototype.init = function() {
+        var a = ["#02c0ce"];
+        (t = e("#statistics-chart").data("colors")) && (a = t.split(",")), this.createBarChart("statistics-chart", [{
+            y: "50",
+            a: 2
+        }, {
+            y: "60",
+            a: 5
+        }, {
+            y: "70",
+            a: 3
+        }, {
+            y: "80",
+            a: 1
+        }, {
+            y: "90",
+            a: 1
+        }], "y", ["a"], ["Statistics"], a);
+        var t;
+        a = ["#4fc6e1", "#6658dd", "#ebeff2"];
+        (t = e("#lifetime-sales").data("colors")) && (a = t.split(",")), this.createDonutChart("lifetime-sales", [{
+            label: " Pass ",
+            value: 47
+        }, {
+            label: " Fail",
+            value: 4
+        }, {
+            label: "InProgress",
+            value: 23
+        }], a)
+    }, e.Dashboard4 = new a, e.Dashboard4.Constructor = a
+}(window.jQuery),
+function() {
+    "use strict";
+    window.jQuery.Dashboard4.init()
+}();
 </script>

@@ -41,6 +41,11 @@ class TeacherController extends Controller
         return view('teacher.homework.index');
     }
 
+    public function testResult()
+    {
+        return view('teacher.testresult.index');
+    }
+    
     // static page controller end
 
 

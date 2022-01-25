@@ -879,6 +879,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('teacher.test_result')}}" class="nav-link {{ (request()->is('teacher/test_result*')) ? 'active' : '' }}">
+                        <i data-feather="file-text" class="icon-dual"></i>
+                        <span> Test Result </span>
+                    </a>
+                </li>
+                <li>
                     <a href="#sidebarAdmission" data-toggle="collapse">
                         <i class="fe-edit"></i>
                         <span> Admission </span>
