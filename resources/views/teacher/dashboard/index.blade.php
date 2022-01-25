@@ -156,7 +156,7 @@
                                                                 </div> <!-- end col -->
                                                                 <div class="col-lg-6">
                                                                     <div class="d-sm-flex justify-content-between">
-                                                                        
+
                                                                         <div class="mt-3 mt-sm-0">
                                                                             <ul class="list-inline font-13 text-sm-right">
                                                                                 <li class="list-inline-item pr-1">
@@ -326,6 +326,22 @@
         </div>
         <!-- end col-12 -->
     </div> <!-- end row -->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="col-lg-6">
+                        <div class="card-box">
+                            <h4 class="header-title mb-3">Stacked Area Chart</h4>
+
+                            <div id="chart-stacked" style="height: 300px;" data-colors="#44cf9c,#3283f6" dir="ltr"></div>
+                        </div> <!-- end card-->
+                    </div> <!-- end col-->
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
 
 </div> <!-- container -->
 @endsection

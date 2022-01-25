@@ -3,7 +3,7 @@
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
-                        
+
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
@@ -15,14 +15,14 @@
                 <h4 class="page-title">Dashboard</h4>
             </div>
         </div>
-    </div>     
-    <!-- end page title --> 
+    </div>
+    <!-- end page title -->
     <div class="row">
-        <div class="col-12">							
+        <div class="col-12">
             <div class="card-box">
                 <div class="border mt-4 mt-lg-0 rounded">
-                <div class="row">
-                    <div class="col-lg-3" id="top-header">										
+                    <div class="row">
+                        <div class="col-lg-3" id="top-header">
                             <div class="card-box">
                                 <div class="row">
                                     <div class="col-6">
@@ -34,21 +34,21 @@
                                     <div class="col-6">
                                         <div class="text-right">
                                             <h3 class="my-1" style="color:blue"><span data-plugin="counterup">0</span></h3>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mt-3">                                       
+                                <div class="mt-3">
                                     <div class="progress progress-sm m-0">
                                         <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                         </div>
                                     </div>
-                                        <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
+                                    <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
                                 </div>
-                            
-                        </div>
-                    </div><!-- end col-->
-                        <div class="col-lg-3" id="top-header">									
+
+                            </div>
+                        </div><!-- end col-->
+                        <div class="col-lg-3" id="top-header">
                             <div class="card-box">
                                 <div class="row">
                                     <div class="col-6">
@@ -60,21 +60,21 @@
                                     <div class="col-6">
                                         <div class="text-right">
                                             <h3 class="my-1" style="color:blue"><span data-plugin="counterup">0</span></h3>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mt-3">                                       
+                                <div class="mt-3">
                                     <div class="progress progress-sm m-0">
                                         <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                         </div>
                                     </div>
-                                        <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
+                                    <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
                                 </div>
-                            
-                        </div>
-                    </div><!-- end col-->
-                    <div class="col-lg-3" id="top-header">										
+
+                            </div>
+                        </div><!-- end col-->
+                        <div class="col-lg-3" id="top-header">
                             <div class="card-box">
                                 <div class="row">
                                     <div class="col-6">
@@ -86,21 +86,21 @@
                                     <div class="col-6">
                                         <div class="text-right">
                                             <h3 class="my-1" style="color:blue"><span data-plugin="counterup">0</span></h3>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mt-3">                                       
+                                <div class="mt-3">
                                     <div class="progress progress-sm m-0">
                                         <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                         </div>
                                     </div>
-                                        <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
+                                    <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
                                 </div>
-                            
-                        </div>
-                    </div><!-- end col-->
-                        <div class="col-lg-3">										 
+
+                            </div>
+                        </div><!-- end col-->
+                        <div class="col-lg-3">
                             <div class="card-box">
                                 <div class="row">
                                     <div class="col-6">
@@ -112,16 +112,16 @@
                                     <div class="col-6">
                                         <div class="text-right">
                                             <h3 class="my-1" style="color:blue"><span data-plugin="counterup">0</span></h3>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mt-3">                                       
+                                <div class="mt-3">
                                     <div class="progress progress-sm m-0">
                                         <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                            </div>
+                                        </div>
                                     </div>
-                                        <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
+                                    <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
                                 </div>
                             </div> <!-- end card-box-->
                         </div>
@@ -137,7 +137,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-3">                                               
+                        <div class="col-lg-3">
                             <div id="external-events" class="m-t-20">
                                 <br>
                             </div>
@@ -148,7 +148,7 @@
                             <div id="calendar"></div>
                         </div> <!-- end col -->
 
-                    </div>  <!-- end row -->
+                    </div> <!-- end row -->
                 </div> <!-- end card body-->
             </div> <!-- end card -->
 
@@ -157,8 +157,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header py-3 px-4 border-bottom-0 d-block">
-                            <button type="button" class="close" data-dismiss="modal"
-                                aria-hidden="true">&times;</button>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h5 class="modal-title" id="modal-title">Event</h5>
                         </div>
                         <div class="modal-body p-4">
@@ -167,16 +166,14 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label class="control-label">Event Name</label>
-                                            <input class="form-control" placeholder="Insert Event Name"
-                                                type="text" name="title" id="event-title" required />
+                                            <input class="form-control" placeholder="Insert Event Name" type="text" name="title" id="event-title" required />
                                             <div class="invalid-feedback">Please provide a valid event name</div>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label class="control-label">Category</label>
-                                            <select class="form-control custom-select" name="category"
-                                                id="event-category" required>
+                                            <select class="form-control custom-select" name="category" id="event-category" required>
                                                 <option value="bg-danger" selected>Danger</option>
                                                 <option value="bg-success">Success</option>
                                                 <option value="bg-primary">Primary</option>
@@ -206,7 +203,107 @@
         </div>
         <!-- end col-12 -->
     </div> <!-- end row -->
-    
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Report Card</h4>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card-box">
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Subject</th>
+                                                <th>Score</th>
+                                                <th>Grade</th>
+                                                <th>Ranking</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">English</th>
+                                                <td>75</td>
+                                                <td>B</td>
+                                                <td>7</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Maths</th>
+                                                <td>60</td>
+                                                <td>C</td>
+                                                <td>17</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Science</th>
+                                                <td>90</td>
+                                                <td>A</td>
+                                                <td>3</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Physics</th>
+                                                <td>75</td>
+                                                <td>B</td>
+                                                <td>8</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Result</th>
+                                                <td>Pass</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div> <!-- end card-box -->
+                        </div> <!-- end col -->
+                        <div class="col-lg-6">
+                            <div class="card-box">
+                                <a class="btn btn-primary" href="PDFLINK" download>
+                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                        Download Memo </a>
+                                <hr>
+                                <div class="table-responsive">
+                                        <table class="table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="4">Ranking Graph</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>7/36</td>
+                                                    <td>6/36</td>
+                                                    <td>12/36</td>
+                                                    <td>2/36</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                            </div> <!-- end card-box -->
+                        </div> <!-- end col -->
+                    </div>
+                    <!--- end row -->
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Test Score Analysis</h4>
+
+                    <div class="mt-4 chartjs-chart">
+                        <canvas id="radar-chart-test-marks" height="350" data-colors="#39afd1,#a17fe0"></canvas>
+                        <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
+                    </div>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+
 </div> <!-- container -->
 @endsection
-    

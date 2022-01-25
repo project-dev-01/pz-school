@@ -30,25 +30,29 @@
 
 <!-- plugin js -->
 <script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
-    <script src="{{ asset('libs/@fullcalendar/core/main.min.js') }}"></script>
-    <script src="{{ asset('libs/@fullcalendar/bootstrap/main.min.js') }}"></script>
-    <script src="{{ asset('libs/@fullcalendar/daygrid/main.min.js') }}"></script>
-    <script src="{{ asset('libs/@fullcalendar/timegrid/main.min.js') }}"></script>
-    <script src="{{ asset('libs/@fullcalendar/list/main.min.js') }}"></script>
-    <script src="{{ asset('libs/@fullcalendar/interaction/main.min.js') }}"></script>
+<script src="{{ asset('libs/@fullcalendar/core/main.min.js') }}"></script>
+<script src="{{ asset('libs/@fullcalendar/bootstrap/main.min.js') }}"></script>
+<script src="{{ asset('libs/@fullcalendar/daygrid/main.min.js') }}"></script>
+<script src="{{ asset('libs/@fullcalendar/timegrid/main.min.js') }}"></script>
+<script src="{{ asset('libs/@fullcalendar/list/main.min.js') }}"></script>
+<script src="{{ asset('libs/@fullcalendar/interaction/main.min.js') }}"></script>
 
 <!-- Calendar init -->
 <script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
-    <script src="{{ asset('js/pages/calendar.init.js') }}"></script>
+<script src="{{ asset('js/pages/calendar.init.js') }}"></script>
 <!-- Plugins js-->
 <script src="{{ asset('libs/flatpickr/flatpickr.min.js') }}"></script>
 <!-- <script src="{{ asset('libs/apexcharts/apexcharts.min.js') }}"></script> -->
 
 <script src="{{ asset('libs/selectize/js/standalone/selectize.min.js') }}"></script>
 
+<!-- Chart JS -->
+<script src="{{ asset('libs/chart.js/Chart.bundle.min.js') }}"></script>
+
+<!-- Init  -->
+<!-- <script src="{{ asset('js/pages/chartjs.init.js') }}"></script> -->
 <!-- Dashboar 1 init js-->
 <!-- <script src="{{ asset('js/pages/dashboard-1.init.js') }}"></script> -->
-
 <!-- App js-->
 <script src="{{ asset('js/app.min.js') }}"></script>
 
@@ -96,7 +100,7 @@
     var branchList = "{{ route('branch.list') }}";
     var branchShow = "{{ route('branch.index') }}";
     var deleteBranch = "{{ route('branch.delete') }}";
-    
+
     // section allocation routes
     var sectionAllocationList = "{{ route('super_admin.section_allocation.list') }}";
     var sectionAllocationDetails = "{{ route('section_allocation.details') }}";
@@ -108,23 +112,23 @@
     var assignTeacherUpdate = "{{ route('assign_teacher.update') }}";
     var deleteAssignTeacher = "{{ route('assign_teacher.delete') }}";
     var branchbyAssignTeacher = "{{ config('constants.api.branch_by_assign_teacher') }}";
-    var getsectionAllocation = "{{ config('constants.api.section_by_class') }}";    
+    var getsectionAllocation = "{{ config('constants.api.section_by_class') }}";
     // class details
     var classList = "{{ route('class.list') }}";
     var classDetails = "{{ route('class.details') }}";
-    var classDelete = "{{ route('class.delete') }}";  
+    var classDelete = "{{ route('class.delete') }}";
     // Event type details
     var eventTypeList = "{{ route('super_admin.event_type.list') }}";
     var eventTypeDetails = "{{ route('event_type.details') }}";
-    var eventTypeDelete = "{{ route('event_type.delete') }}"; 
+    var eventTypeDelete = "{{ route('event_type.delete') }}";
 
     // Event details
     var eventList = "{{ route('super_admin.event.list') }}";
     var eventDetails = "{{ route('event.details') }}";
-    var eventDelete = "{{ route('event.delete') }}"; 
-    var eventPublish = "{{ route('event.publish') }}"; 
+    var eventDelete = "{{ route('event.delete') }}";
+    var eventPublish = "{{ route('event.publish') }}";
     var branchByEvent = "{{ config('constants.api.branch_by_event') }}";
-        // department routes
+    // department routes
     var departmentList = "{{ route('department.list') }}";
     var departmentDetails = "{{ route('department.details') }}";
     var departmentDelete = "{{ route('department.delete') }}";
@@ -133,17 +137,17 @@
     var designationList = "{{ route('designation.list') }}";
     var designationDetails = "{{ route('designation.details') }}";
     var designationDelete = "{{ route('designation.delete') }}";
-    
+
     // employee
     var empDepartment = "{{ config('constants.api.emp_department') }}";
     var empDesignation = "{{ config('constants.api.emp_designation') }}";
     var employeeList = "{{ route('employee.list') }}";
     var employeeShow = "{{ route('super_admin.listemployee') }}";
-        // settings url
+    // settings url
     var profileUpdateStg = "{{ config('constants.api.change_profile_picture') }}";
     var updateSettingSession = "{{ route('settings.updateSettingSession') }}";
     var profilePath = "{{ asset('users/images') }}";
-    
+
     // users routes
     var userList = "{{ route('users.user_list') }}";
     var userShow = "{{ route('users.user') }}";
@@ -165,3 +169,140 @@
 <script src="{{ asset('js/custom/settings.js') }}"></script>
 <script src="{{ asset('js/custom/user_list.js') }}"></script>
 <script src="{{ asset('js/custom/dashboard.js') }}"></script>
+<script>
+    ! function($) {
+        "use strict";
+
+        var ChartJs = function() {
+            this.$body = $("body"),
+                this.charts = []
+        };
+
+        ChartJs.prototype.respChart = function(selector, type, data, options) {
+
+                // get selector by context
+                var ctx = selector.get(0).getContext("2d");
+                // pointing parent container to make chart js inherit its width
+                var container = $(selector).parent();
+
+                //default config
+                Chart.defaults.global.defaultFontColor = "#8391a2";
+                Chart.defaults.scale.gridLines.color = "#8391a2";
+
+                // this function produce the responsive Chart JS
+                function generateChart() {
+                    // make chart width fit with its container
+                    var ww = selector.attr('width', $(container).width());
+                    var chart;
+                    switch (type) {
+                        case 'Bar':
+                            chart = new Chart(ctx, {
+                                type: 'bar',
+                                data: data,
+                                options: options
+                            });
+                            break;
+                        case 'Radar':
+                            chart = new Chart(ctx, {
+                                type: 'radar',
+                                data: data,
+                                options: options
+                            });
+                            break;
+                        case 'PolarArea':
+                            chart = new Chart(ctx, {
+                                data: data,
+                                type: 'polarArea',
+                                options: options
+                            });
+                            break;
+                    }
+                    return chart;
+                };
+                // run function - render chart at first load
+                return generateChart();
+            },
+            // init various charts and returns
+            ChartJs.prototype.initCharts = function() {
+                var charts = [];
+                var defaultColors = ["#1abc9c", "#f1556c", "#4a81d4", "#e3eaef"];
+
+                if ($('#radar-chart-test-marks').length > 0) {
+                    var dataColors = $("#radar-chart-test-marks").data('colors');
+                    var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
+                    //radar chart
+                    var radarChart = {
+                        labels: ["Physics", "Geography", "Maths", "Computer Science", "Computer", "Biology", "Chemistry"],
+                        datasets: [{
+                                label: "Mid Term",
+                                backgroundColor: hexToRGB(colors[0], 0.3),
+                                borderColor: colors[0],
+                                pointBackgroundColor: colors[0],
+                                pointBorderColor: "#fff",
+                                pointHoverBackgroundColor: "#fff",
+                                pointHoverBorderColor: colors[0],
+                                data: [65, 59, 90, 81, 56, 55, 40]
+                            },
+                            {
+                                label: "Annual",
+                                backgroundColor: hexToRGB(colors[1], 0.3),
+                                borderColor: colors[1],
+                                pointBackgroundColor: colors[1],
+                                pointBorderColor: "#fff",
+                                pointHoverBackgroundColor: "#fff",
+                                pointHoverBorderColor: colors[1],
+                                data: [80, 60, 80, 75, 65, 70, 98]
+                            }
+                        ]
+                    };
+                    var radarOpts = {
+                        maintainAspectRatio: false
+                    };
+                    charts.push(this.respChart($("#radar-chart-test-marks"), 'Radar', radarChart, radarOpts));
+                }
+                return charts;
+            },
+            //initializing various components and plugins
+            ChartJs.prototype.init = function() {
+                var $this = this;
+                // font
+                Chart.defaults.global.defaultFontFamily = 'Nunito,sans-serif';
+
+                // init charts
+                $this.charts = this.initCharts();
+
+                // enable resizing matter
+                $(window).on('resize', function(e) {
+                    $.each($this.charts, function(index, chart) {
+                        try {
+                            chart.destroy();
+                        } catch (err) {}
+                    });
+                    $this.charts = $this.initCharts();
+                });
+            },
+
+            //init flotchart
+            $.ChartJs = new ChartJs, $.ChartJs.Constructor = ChartJs
+    }(window.jQuery),
+
+    //initializing ChartJs
+    function($) {
+        "use strict";
+        $.ChartJs.init()
+    }(window.jQuery);
+
+    /* utility function */
+
+    function hexToRGB(hex, alpha) {
+        var r = parseInt(hex.slice(1, 3), 16),
+            g = parseInt(hex.slice(3, 5), 16),
+            b = parseInt(hex.slice(5, 7), 16);
+
+        if (alpha) {
+            return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
+        } else {
+            return "rgb(" + r + ", " + g + ", " + b + ")";
+        }
+    }
+</script>
