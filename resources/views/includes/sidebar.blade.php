@@ -864,11 +864,39 @@
                         <i data-feather="airplay" class="icon-dual"></i>
                         <span> Dashboards </span>
                     </a>
+                </li>  
+                <li>
+                    <a href="#sidebarLeaveManage" data-toggle="collapse">
+                        <i data-feather="map"></i>
+                        <span> Leave Management </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarLeaveManage">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('staff.leave_management.applyleave')}}" class="nav-link {{ (request()->is('staff/leave_management*')) ? 'active' : '' }}">
+                                    <span> Leave Apply </span>
+                                </a>
+                            </li>                        
+                        </ul>
+                    </div>
+                </li>          
+                <li>
+                <a href="{{ route('staff.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('staff/forum*')) ? 'active' : '' }}">                     
+                        <i data-feather="external-link" class="icon-dual"></i>
+                        <span> Forum </span>
+                    </a>
                 </li>
                 <li>
                     <a href="{{ route('staff.settings')}}" class="nav-link {{ (request()->is('staff/settings*')) ? 'active' : '' }}">
                         <i data-feather="settings" class="icon-dual"></i>
                         <span> Settings </span>
+                    </a>
+                </li>                
+                <li>
+                    <a href="{{ route('staff.faq.Index')}}" class="nav-link {{ (request()->is('staff/faq*')) ? 'active' : '' }}">
+                        <i class="fas fa-question"></i>
+                        <span> FAQs </span>
                     </a>
                 </li>
                 @elseif(Session::get('role_id') == '4')
@@ -970,9 +998,38 @@
                     </div>
                 </li>
                 <li>
+                    <a href="#sidebarLeaveManage" data-toggle="collapse">
+                        <i data-feather="map"></i>
+                        <span> Leave Management </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarLeaveManage">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('teacher.leave_management.applyleave')}}" class="nav-link {{ (request()->is('teacher/leave_management*')) ? 'active' : '' }}">
+                                    <span> Leave Apply </span>
+                                </a>
+                            </li>                        
+                        </ul>
+                    </div>
+                </li>  
+                <li>
+                <a href="{{ route('teacher.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('teacher/forum*')) ? 'active' : '' }}">
+                     
+                        <i data-feather="external-link" class="icon-dual"></i>
+                        <span> Forum </span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('teacher.settings')}}" class="nav-link {{ (request()->is('teacher/settings*')) ? 'active' : '' }}">
                         <i data-feather="settings" class="icon-dual"></i>
                         <span> Settings </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('teacher.faq.Index')}}" class="nav-link {{ (request()->is('teacher/faq*')) ? 'active' : '' }}">
+                        <i class="fas fa-question"></i>
+                        <span> FAQs </span>
                     </a>
                 </li>
                 @elseif(Session::get('role_id') == '5')
@@ -987,6 +1044,12 @@
                         <i data-feather="settings" class="icon-dual"></i>
                         <span> Settings </span>
                     </a>
+                </li>                
+                <li>
+                    <a href="{{ route('parent.faq.Index')}}" class="nav-link {{ (request()->is('parent/faq*')) ? 'active' : '' }}">
+                        <i class="fas fa-question"></i>
+                        <span> FAQs </span>
+                    </a>
                 </li>
                 @elseif(Session::get('role_id') == '6')
                 <li>
@@ -999,6 +1062,12 @@
                     <a href="{{ route('student.settings')}}" class="nav-link {{ (request()->is('student/settings*')) ? 'active' : '' }}">
                         <i data-feather="settings" class="icon-dual"></i>
                         <span> Settings </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('student.faq.Index')}}" class="nav-link {{ (request()->is('student/faq*')) ? 'active' : '' }}">
+                        <i class="fas fa-question"></i>
+                        <span> FAQs </span>
                     </a>
                 </li>
                 @endif

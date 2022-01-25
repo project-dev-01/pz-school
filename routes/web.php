@@ -369,7 +369,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
         // Forum routes
         Route::get('forum/index', [AdminController::class, 'forumIndex'])->name('admin.forum.index');
-        Route::get('forum/page-single-topic', [AdminController::class, 'forumPageSingleTopic'])->name('forum.page-single-topic');
+        Route::get('forum/page-single-topic', [AdminController::class, 'forumPageSingleTopic'])->name('admin.forum.page-single-topic');
         Route::get('forum/page-create-topic', [AdminController::class, 'forumPageCreateTopic'])->name('forum.page-create-topic');
         Route::get('forum/page-single-user', [AdminController::class, 'forumPageSingleUser'])->name('forum.page-single-user');
         Route::get('forum/page-single-threads', [AdminController::class, 'forumPageSingleThreads'])->name('forum.page-single-threads');
@@ -395,11 +395,29 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
     Route::group(['prefix' => 'staff', 'middleware' => ['isStaff']], function () {
         Route::get('/dashboard', [StaffController::class, 'index'])->name('staff.dashboard');
-
+        // Leave Apply
+        Route::get('leave_management/applyleave', [SuperAdminController::class, 'applyleave'])->name('staff.leave_management.applyleave');
+        
+         // Forum routes
+         Route::get('forum/index', [StaffController::class, 'forumIndex'])->name('staff.forum.index');
+         Route::get('forum/page-single-topic', [StaffController::class, 'forumPageSingleTopic'])->name('staff.forum.page-single-topic');
+         Route::get('forum/page-create-topic', [StaffController::class, 'forumPageCreateTopic'])->name('staff.forum.page-create-topic');
+         Route::get('forum/page-single-user', [StaffController::class, 'forumPageSingleUser'])->name('staff.forum.page-single-user');
+         Route::get('forum/page-single-threads', [StaffController::class, 'forumPageSingleThreads'])->name('staff.forum.page-single-threads');
+         Route::get('forum/page-single-replies', [StaffController::class, 'forumPageSingleReplies'])->name('staff.forum.page-single-replies');
+         Route::get('forum/page-single-followers', [StaffController::class, 'forumPageSingleFollowers'])->name('staff.forum.page-single-followers');
+         Route::get('forum/page-single-categories', [StaffController::class, 'forumPageSingleCategories'])->name('staff.forum.page-single-categories');
+         Route::get('forum/page-categories', [StaffController::class, 'forumPageCategories'])->name('staff.forum.page-categories');
+         Route::get('forum/page-categories-single', [StaffController::class, 'forumPageCategoriesSingle'])->name('staff.forum.page-categories-single');
+         Route::get('forum/page-tabs', [StaffController::class, 'forumPageTabs'])->name('staff.forum.page-tabs');
+         Route::get('forum/page-tabs-guidelines', [StaffController::class, 'forumPageTabGuidelines'])->name('staff.forum.page-tabs-guidelines'); 
+         
         // Settings
         Route::get('settings', [StaffController::class, 'settings'])->name('staff.settings');
+         // faq        
+         Route::get('faq/index', [StaffController::class, 'faqIndex'])->name('staff.faq.Index');
     });
-
+// TEACHER CONTROLLER START
     Route::group(['prefix' => 'teacher', 'middleware' => ['isTeacher']], function () {
         Route::get('/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
         // Test Result Rotes
@@ -417,23 +435,57 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('attendance/exam_entry', [TeacherController::class, 'examEntry'])->name('teacher.attendance.exam_entry');
         // Homework routes
         Route::get('homework/index', [TeacherController::class, 'homework'])->name('teacher.homework');
+         // Leave Apply
+         Route::get('leave_management/applyleave', [SuperAdminController::class, 'applyleave'])->name('teacher.leave_management.applyleave');       
+        // Forum routes
+        Route::get('forum/index', [TeacherController::class, 'forumIndex'])->name('teacher.forum.index');
+        Route::get('forum/page-single-topic', [TeacherController::class, 'forumPageSingleTopic'])->name('teacher.forum.page-single-topic');
+        Route::get('forum/page-create-topic', [TeacherController::class, 'forumPageCreateTopic'])->name('teacher.forum.page-create-topic');
+        Route::get('forum/page-single-user', [TeacherController::class, 'forumPageSingleUser'])->name('teacher.forum.page-single-user');
+        Route::get('forum/page-single-threads', [TeacherController::class, 'forumPageSingleThreads'])->name('teacher.forum.page-single-threads');
+        Route::get('forum/page-single-replies', [TeacherController::class, 'forumPageSingleReplies'])->name('teacher.forum.page-single-replies');
+        Route::get('forum/page-single-followers', [TeacherController::class, 'forumPageSingleFollowers'])->name('teacher.forum.page-single-followers');
+        Route::get('forum/page-single-categories', [TeacherController::class, 'forumPageSingleCategories'])->name('teacher.forum.page-single-categories');
+        Route::get('forum/page-categories', [TeacherController::class, 'forumPageCategories'])->name('teacher.forum.page-categories');
+        Route::get('forum/page-categories-single', [TeacherController::class, 'forumPageCategoriesSingle'])->name('teacher.forum.page-categories-single');
+        Route::get('forum/page-tabs', [TeacherController::class, 'forumPageTabs'])->name('teacher.forum.page-tabs');
+        Route::get('forum/page-tabs-guidelines', [TeacherController::class, 'forumPageTabGuidelines'])->name('teacher.forum.page-tabs-guidelines');
+
 
         // Settings
         Route::get('settings', [TeacherController::class, 'settings'])->name('teacher.settings');
+        
+         // faq        
+         Route::get('faq/index', [TeacherController::class, 'faqIndex'])->name('teacher.faq.Index');      
     });
+     
+    // TEACHER CONTROLLER END
 
+    // PARENT CONTROLLER START
     Route::group(['prefix' => 'parent', 'middleware' => ['isParent']], function () {
         Route::get('/dashboard', [ParentController::class, 'index'])->name('parent.dashboard');
     
         // Settings
         Route::get('settings', [SuperAdminController::class, 'settings'])->name('parent.settings');
+         // faq        
+         Route::get('faq/index', [ParentController::class, 'faqIndex'])->name('parent.faq.Index');      
+        
     });
 
+
+    
+    // faq
+    Route::get('faq/index', [ParentController::class, 'faqIndex'])->name('teacher.faq.index');
+        
+    // PARENT CONTROLLER END
     Route::group(['prefix' => 'student', 'middleware' => ['isStudent']], function () {
         Route::get('/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
     
         // Settings
         Route::get('settings', [SuperAdminController::class, 'settings'])->name('student.settings');
+        // faq        
+        Route::get('faq/index', [StudentController::class, 'faqIndex'])->name('student.faq.Index'); 
     });
+    
     
 });

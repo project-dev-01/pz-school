@@ -19,114 +19,7 @@
     <!-- end page title -->
     <div class="row">
         <div class="col-12">
-            <div class="card-box">
-                <div class="border mt-4 mt-lg-0 rounded">
-                    <div class="row">
-                        <div class="col-lg-3" id="top-header">
-                            <div class="card-box">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="">
-                                            <i class=" fas fa-users font-24"></i>
-                                            <p class="text-muted mb-1">Employee</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="text-right">
-                                            <h3 class="my-1" style="color:blue"><span data-plugin="counterup">0</span></h3>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-3">
-                                    <div class="progress progress-sm m-0">
-                                        <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                        </div>
-                                    </div>
-                                    <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
-                                </div>
-
-                            </div>
-                        </div><!-- end col-->
-                        <div class="col-lg-3" id="top-header">
-                            <div class="card-box">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="">
-                                            <i class="fas fa-user-graduate font-24"></i>
-                                            <p class="text-muted mb-1">Students</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="text-right">
-                                            <h3 class="my-1" style="color:blue"><span data-plugin="counterup">0</span></h3>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-3">
-                                    <div class="progress progress-sm m-0">
-                                        <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                        </div>
-                                    </div>
-                                    <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
-                                </div>
-
-                            </div>
-                        </div><!-- end col-->
-                        <div class="col-lg-3" id="top-header">
-                            <div class="card-box">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="">
-                                            <i class="  fas fa-user-tie  font-24"></i>
-                                            <p class="text-muted mb-1">Parents</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="text-right">
-                                            <h3 class="my-1" style="color:blue"><span data-plugin="counterup">0</span></h3>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-3">
-                                    <div class="progress progress-sm m-0">
-                                        <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                        </div>
-                                    </div>
-                                    <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
-                                </div>
-
-                            </div>
-                        </div><!-- end col-->
-                        <div class="col-lg-3">
-                            <div class="card-box">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="">
-                                            <i class="fas fa-chalkboard-teacher font-24"></i>
-                                            <p class="text-muted mb-1">Teachers</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="text-right">
-                                            <h3 class="my-1" style="color:blue"><span data-plugin="counterup">0</span></h3>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-3">
-                                    <div class="progress progress-sm m-0">
-                                        <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                        </div>
-                                    </div>
-                                    <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
-                                </div>
-                            </div> <!-- end card-box-->
-                        </div>
-                    </div><!-- end col-->
-                </div> <!-- end row -->
+            <div class="card-box">              
                 <!-- tasks panel -->
                 <div class="row">
                     <div class="col-xl-8">
@@ -156,7 +49,7 @@
                                                                 </div> <!-- end col -->
                                                                 <div class="col-lg-6">
                                                                     <div class="d-sm-flex justify-content-between">
-
+                                                                        
                                                                         <div class="mt-3 mt-sm-0">
                                                                             <ul class="list-inline font-13 text-sm-right">
                                                                                 <li class="list-inline-item pr-1">

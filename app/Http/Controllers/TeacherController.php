@@ -41,6 +41,55 @@ class TeacherController extends Controller
         return view('teacher.homework.index');
     }
 
+    // static page controller end
+    // forum screen pages start
+    public function forumIndex(){
+        return view('teacher.forum.index');
+    }
+    public function forumPageSingleTopic(){
+        return view('teacher.forum.page-single-topic');
+    }
+    public function forumPageCreateTopic(){
+        return view('teacher.forum.page-create-topic');
+    }
+    public function forumPageSingleUser(){
+        return view('teacher.forum.page-single-user');
+    }
+    public function forumPageSingleThreads(){
+        return view('teacher.forum.page-single-threads');
+    }
+    public function forumPageSingleReplies(){
+        return view('teacher.forum.page-single-replies');
+    }
+    public function forumPageSingleFollowers(){
+        return view('teacher.forum.page-single-followers');
+    }
+    public function forumPageSingleCategories(){
+        return view('teacher.forum.page-single-categories');
+    }
+    public function forumPageCategories(){
+        return view('teacher.forum.page-categories');
+    }
+    public function forumPageCategoriesSingle(){
+        return view('teacher.forum.page-categories-single');
+    }
+    public function forumPageTabs(){
+        return view('teacher.forum.page-tabs');
+    }
+    public function forumPageTabGuidelines(){
+        return view('teacher.forum.page-tabs-guidelines');
+    }    
+    // forum screen pages end
+
+    // faq screen pages start
+
+    public function faqIndex()
+    {
+        return view('teacher.faq.index');
+    }
+    // faq screen pages end
+
+    
     public function testResult()
     {
         return view('teacher.testresult.index');
