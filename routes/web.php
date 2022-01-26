@@ -522,6 +522,15 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('settings', [SuperAdminController::class, 'settings'])->name('student.settings');
         // faq        
         Route::get('faq/index', [StudentController::class, 'faqIndex'])->name('student.faq.Index'); 
+        // Exam
+        Route::get('exam/schedule', [StudentController::class, 'examSchedule'])->name('student.exam.schedule');     
+        // Report card
+        Route::get('report_card', [StudentController::class, 'reportCard'])->name('student.report_card');   
+        // Event
+        Route::get('events', [StudentController::class, 'events'])->name('student.events');    
+        // Library 
+        Route::get('library/books', [StudentController::class, 'bookList'])->name('student.library.books');    
+        Route::get('library/book_issued', [StudentController::class, 'bookIssued'])->name('student.library.book_issued');          
     });
     
     

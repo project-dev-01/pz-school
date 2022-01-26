@@ -28,4 +28,28 @@ class StudentController extends Controller
         return view('student.homework.hmeworklist');
     }
     // Home work screen pages end
+    // Exam schedule
+    public function examSchedule()
+    {
+        return view('student.exam.schedule');
+    }
+    // report card
+    public function reportCard()
+    {
+        return view('student.report_card.index');
+    }
+    // event screen
+    public function events()
+    {
+        return view('student.events.index');
+    }
+    // library screen
+    public function bookList()
+    {
+        return view('student.library.book');
+    }
+    public function bookIssued()
+    {
+        return view('student.library.issued_book');
+    }
 }

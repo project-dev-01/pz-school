@@ -1151,6 +1151,13 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('student.exam.schedule')}}" class="nav-link {{ (request()->is('student/exam*')) ? 'active' : '' }}">
+                        <i class="fas fa-dna"></i> 
+                        
+                        <span> Exam Schedule </span>
+                    </a>
+                </li>  
+                <li>
                     <a href="#sidebarHomework" data-toggle="collapse">
                         <i class="fe-book-open"></i>
                         <span> Homework </span>
@@ -1167,9 +1174,36 @@
                     </div>
                 </li>
                 <li>
-                    <a href="{{ route('student.settings')}}" class="nav-link {{ (request()->is('student/settings*')) ? 'active' : '' }}">
-                        <i data-feather="settings" class="icon-dual"></i>
-                        <span> Settings </span>
+                    <a href="{{ route('student.report_card')}}" class="nav-link {{ (request()->is('student/report_card*')) ? 'active' : '' }}">
+                        <i data-feather="book" class="icons-xs icon-dual"></i>
+                        <span> Report Card </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#sidebarLibrary" data-toggle="collapse">
+                        <i class="fe-book-open"></i>
+                        <span> Library </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarLibrary">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('student.library.books')}}" class="nav-link {{ (request()->is('student/book')) ? 'active' : '' }}">
+                                    <span>Book</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('student.library.book_issued')}}" class="nav-link {{ (request()->is('student/book_issued')) ? 'active' : '' }}">
+                                    <span>Issued Book</span>
+                                </a>
+                            </li> 
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="{{ route('student.events')}}" class="nav-link {{ (request()->is('student/events*')) ? 'active' : '' }}">
+                        <i class="fas fa-map"></i>
+                        <span> Events </span>
                     </a>
                 </li>
                 <li>
