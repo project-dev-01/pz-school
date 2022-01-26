@@ -87,6 +87,10 @@ class TeacherController extends Controller
     {
         return view('teacher.faq.index');
     }
+    public function classroomManagement()
+    {
+        return view('teacher.classroom.management');
+    }
     // faq screen pages end
 
     

@@ -77,7 +77,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script> -->
+<!-- Bootstrap Tables js -->
+<script src="{{ asset('libs/bootstrap-table/bootstrap-table.min.js') }}"></script>
 
+<!-- Init js -->
+<script src="{{ asset('js/pages/bootstrap-tables.init.js') }}"></script>
 <script>
     toastr.options.preventDuplicates = true;
     $.ajaxSetup({
@@ -171,7 +175,10 @@
 <script src="{{ asset('js/custom/settings.js') }}"></script>
 <script src="{{ asset('js/custom/user_list.js') }}"></script>
 <script src="{{ asset('js/custom/dashboard.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="{{ asset('js/apexChart/apexcharts.js') }}"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> -->
+
+
 
 <script>
     ! function($) {

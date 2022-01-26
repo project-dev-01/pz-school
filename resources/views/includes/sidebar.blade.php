@@ -1261,6 +1261,12 @@
                     </div>
                 </li>
                 <li>
+                    <a href="{{ route('teacher.classroom.management')}}" class="nav-link {{ (request()->is('teacher/classroom*')) ? 'active' : '' }}">
+                        <i data-feather="file-text" class="icon-dual"></i>
+                        <span> Classroom Management </span>
+                    </a>
+                </li>
+                <li>
                     <a href="#sidebarParent" data-toggle="collapse">
                         <i class="fe-user-plus"></i>
                         <span> Parents </span>

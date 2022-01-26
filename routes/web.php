@@ -579,6 +579,8 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         
          // faq        
          Route::get('faq/index', [TeacherController::class, 'faqIndex'])->name('teacher.faq.Index');      
+         // class room management    
+         Route::get('classroom/classroom-management', [TeacherController::class, 'classroomManagement'])->name('teacher.classroom.management');
     });
      
     // TEACHER CONTROLLER END
