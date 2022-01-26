@@ -21,5 +21,27 @@ class ParentController extends Controller
      {
          return view('parent.faq.index');
      }
+
+     public function examSchedule()
+    {
+        return view('parent.exam.schedule');
+    }
+    
+    public function reportCard()
+    {
+        return view('parent.report_card.index');
+    }
+    public function events()
+    {
+        return view('parent.events.index');
+    }
+    public function bookList()
+    {
+        return view('parent.library.book');
+    }
+    public function bookIssued()
+    {
+        return view('parent.library.issued_book');
+    }
      // faq screen pages end
 }

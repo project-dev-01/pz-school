@@ -1039,6 +1039,48 @@
                         <span> Dashboards </span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="{{ route('parent.exam.schedule')}}" class="nav-link {{ (request()->is('parent/exam*')) ? 'active' : '' }}">
+                        <i class="fas fa-dna"></i> 
+                        
+                        <span> Exam Schedule </span>
+                    </a>
+                </li>    
+                <li>
+                    <a href="{{ route('parent.report_card')}}" class="nav-link {{ (request()->is('parent/report_card*')) ? 'active' : '' }}">
+                        <i data-feather="book" class="icons-xs icon-dual"></i>
+                        <span> Report Card </span>
+                    </a>
+                </li>       
+                <li>
+                    <a href="#sidebarLibrary" data-toggle="collapse">
+                        <i class="fe-book-open"></i>
+                        <span> Library </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarLibrary">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('parent.library.books')}}" class="nav-link {{ (request()->is('parent/book')) ? 'active' : '' }}">
+                                    <span>Book</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('parent.library.book_issued')}}" class="nav-link {{ (request()->is('parent/book_issued')) ? 'active' : '' }}">
+                                    <span>Issued Book</span>
+                                </a>
+                            </li> 
+                        </ul>
+                    </div>
+                </li>      
+                <li>
+                    <a href="{{ route('parent.events')}}" class="nav-link {{ (request()->is('parent/events*')) ? 'active' : '' }}">
+                        <i class="fas fa-map"></i>
+                        <span> Events </span>
+                    </a>
+                </li>       
+                <li>
                 <li>
                     <a href="{{ route('parent.settings')}}" class="nav-link {{ (request()->is('parent/settings*')) ? 'active' : '' }}">
                         <i data-feather="settings" class="icon-dual"></i>

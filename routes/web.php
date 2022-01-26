@@ -469,7 +469,11 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('settings', [SuperAdminController::class, 'settings'])->name('parent.settings');
          // faq        
          Route::get('faq/index', [ParentController::class, 'faqIndex'])->name('parent.faq.Index');      
-        
+         Route::get('exam/schedule', [ParentController::class, 'examSchedule'])->name('parent.exam.schedule');     
+         Route::get('report_card', [ParentController::class, 'reportCard'])->name('parent.report_card');   
+         Route::get('events', [ParentController::class, 'events'])->name('parent.events');    
+         Route::get('library/books', [ParentController::class, 'bookList'])->name('parent.library.books');    
+         Route::get('library/book_issued', [ParentController::class, 'bookIssued'])->name('parent.library.book_issued');          
     });
 
 
