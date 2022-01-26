@@ -19,7 +19,7 @@
     <!-- end page title -->
     <div class="row">
         <div class="col-12">
-            <div class="card-box">              
+            <div class="card-box">
                 <!-- tasks panel -->
                 <div class="row">
                     <div class="col-xl-8">
@@ -49,7 +49,7 @@
                                                                 </div> <!-- end col -->
                                                                 <div class="col-lg-6">
                                                                     <div class="d-sm-flex justify-content-between">
-                                                                        
+
                                                                         <div class="mt-3 mt-sm-0">
                                                                             <ul class="list-inline font-13 text-sm-right">
                                                                                 <li class="list-inline-item pr-1">
@@ -224,13 +224,237 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="col-lg-6">
-                        <div class="card-box">
-                            <h4 class="header-title mb-3">Stacked Area Chart</h4>
+                    <h4 class="header-title">Top Scoreres of class</h4>
 
-                            <div id="chart-stacked" style="height: 300px;" data-colors="#44cf9c,#3283f6" dir="ltr"></div>
-                        </div> <!-- end card-->
-                    </div> <!-- end col-->
+                    <div class="mt-4 chartjs-chart">
+                        <div id="chart-hor-stack-bar-chart" style="min-height: 365px;"></div>
+                        <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
+                    </div>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Top 10 ranking</h4>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-box">
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Score</th>
+                                                <th>Grade</th>
+                                                <th>Ranking</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Bao</th>
+                                                <td>99</td>
+                                                <td>A</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Baozhai</th>
+                                                <td>85</td>
+                                                <td>B</td>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Bingwen</th>
+                                                <td>75</td>
+                                                <td>C</td>
+                                                <td>3</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Biyu</th>
+                                                <td>60</td>
+                                                <td>D</td>
+                                                <td>4</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div> <!-- end card-box -->
+                        </div> <!-- end col -->
+                    </div>
+                    <!--- end row -->
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Bottom 10 ranking</h4>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-box">
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Score</th>
+                                                <th>Grade</th>
+                                                <th>Ranking</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Biyu</th>
+                                                <td>60</td>
+                                                <td>D</td>
+                                                <td>4</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Bingwen</th>
+                                                <td>75</td>
+                                                <td>C</td>
+                                                <td>3</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Baozhai</th>
+                                                <td>85</td>
+                                                <td>B</td>
+                                                <td>2</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Bao</th>
+                                                <td>99</td>
+                                                <td>A</td>
+                                                <td>1</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div> <!-- end card-box -->
+                        </div> <!-- end col -->
+                    </div>
+                    <!--- end row -->
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Top 10 Improments</h4>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-box">
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Score</th>
+                                                <th>Grade</th>
+                                                <th>Ranking</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Biyu</th>
+                                                <td>60</td>
+                                                <td>D</td>
+                                                <td>4</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Bingwen</th>
+                                                <td>75</td>
+                                                <td>C</td>
+                                                <td>3</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Baozhai</th>
+                                                <td>85</td>
+                                                <td>B</td>
+                                                <td>2</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Bao</th>
+                                                <td>99</td>
+                                                <td>A</td>
+                                                <td>1</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div> <!-- end card-box -->
+                        </div> <!-- end col -->
+                    </div>
+                    <!--- end row -->
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Bottom 10 Deteriorate</h4>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-box">
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Score</th>
+                                                <th>Grade</th>
+                                                <th>Ranking</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Biyu</th>
+                                                <td>60</td>
+                                                <td>D</td>
+                                                <td>4</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Bingwen</th>
+                                                <td>75</td>
+                                                <td>C</td>
+                                                <td>3</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Baozhai</th>
+                                                <td>85</td>
+                                                <td>B</td>
+                                                <td>2</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Bao</th>
+                                                <td>99</td>
+                                                <td>A</td>
+                                                <td>1</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div> <!-- end card-box -->
+                        </div> <!-- end col -->
+                    </div>
+                    <!--- end row -->
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col -->

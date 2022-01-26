@@ -171,6 +171,8 @@
 <script src="{{ asset('js/custom/settings.js') }}"></script>
 <script src="{{ asset('js/custom/user_list.js') }}"></script>
 <script src="{{ asset('js/custom/dashboard.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
 <script>
     ! function($) {
         "use strict";
@@ -311,66 +313,138 @@
 
 <script>
     ! function(e) {
-    "use strict";
+        "use strict";
 
-    function a() {}
-    a.prototype.createBarChart = function(a, t, e, o, r, i) {
-        Morris.Bar({
-            element: a,
-            data: t,
-            xkey: e,
-            ykeys: o,
-            labels: r,
-            dataLabels: !1,
-            hideHover: "auto",
-            resize: !0,
-            gridLineColor: "rgba(65, 80, 95, 0.07)",
-            barSizeRatio: .2,
-            barColors: i
-        })
-    }, a.prototype.createDonutChart = function(a, t, e) {
-        Morris.Donut({
-            element: a,
-            data: t,
-            barSize: .2,
-            resize: !0,
-            colors: e,
-            backgroundColor: "transparent"
-        })
-    }, a.prototype.init = function() {
-        var a = ["#02c0ce"];
-        (t = e("#statistics-chart").data("colors")) && (a = t.split(",")), this.createBarChart("statistics-chart", [{
-            y: "50",
-            a: 2
-        }, {
-            y: "60",
-            a: 5
-        }, {
-            y: "70",
-            a: 3
-        }, {
-            y: "80",
-            a: 1
-        }, {
-            y: "90",
-            a: 1
-        }], "y", ["a"], ["Statistics"], a);
-        var t;
-        a = ["#4fc6e1", "#6658dd", "#ebeff2"];
-        (t = e("#lifetime-sales").data("colors")) && (a = t.split(",")), this.createDonutChart("lifetime-sales", [{
-            label: " Pass ",
-            value: 47
-        }, {
-            label: " Fail",
-            value: 4
-        }, {
-            label: "InProgress",
-            value: 23
-        }], a)
-    }, e.Dashboard4 = new a, e.Dashboard4.Constructor = a
-}(window.jQuery),
-function() {
-    "use strict";
-    window.jQuery.Dashboard4.init()
-}();
+        function a() {}
+        a.prototype.createBarChart = function(a, t, e, o, r, i) {
+            Morris.Bar({
+                element: a,
+                data: t,
+                xkey: e,
+                ykeys: o,
+                labels: r,
+                dataLabels: !1,
+                hideHover: "auto",
+                resize: !0,
+                gridLineColor: "rgba(65, 80, 95, 0.07)",
+                barSizeRatio: .2,
+                barColors: i
+            })
+        }, a.prototype.createDonutChart = function(a, t, e) {
+            Morris.Donut({
+                element: a,
+                data: t,
+                barSize: .2,
+                resize: !0,
+                colors: e,
+                backgroundColor: "transparent"
+            })
+        }, a.prototype.init = function() {
+            var a = ["#02c0ce"];
+            (t = e("#statistics-chart").data("colors")) && (a = t.split(",")), this.createBarChart("statistics-chart", [{
+                y: "50",
+                a: 2
+            }, {
+                y: "60",
+                a: 5
+            }, {
+                y: "70",
+                a: 3
+            }, {
+                y: "80",
+                a: 1
+            }, {
+                y: "90",
+                a: 1
+            }], "y", ["a"], ["Statistics"], a);
+            var t;
+            a = ["#4fc6e1", "#6658dd", "#ebeff2"];
+            (t = e("#lifetime-sales").data("colors")) && (a = t.split(",")), this.createDonutChart("lifetime-sales", [{
+                label: " Pass ",
+                value: 47
+            }, {
+                label: " Fail",
+                value: 4
+            }, {
+                label: "InProgress",
+                value: 23
+            }], a)
+        }, e.Dashboard4 = new a, e.Dashboard4.Constructor = a
+    }(window.jQuery),
+    function() {
+        "use strict";
+        window.jQuery.Dashboard4.init()
+    }();
+</script>
+
+<script>
+    $(document).ready(function() {
+        // console.log("ready!");
+        var options = {
+            series: [{
+                name: 'Maths',
+                data: [44, 55, 41, 37, 22, 43, 21]
+            }, {
+                name: 'English',
+                data: [53, 32, 33, 52, 13, 43, 32]
+            }, {
+                name: 'Physics',
+                data: [12, 17, 11, 9, 15, 11, 20]
+            }, {
+                name: 'Geography',
+                data: [9, 7, 5, 8, 6, 9, 4]
+            }, {
+                name: 'Chemistry',
+                data: [25, 12, 19, 32, 25, 24, 10]
+            }],
+            chart: {
+                type: 'bar',
+                height: 350,
+                stacked: true,
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                },
+            },
+            stroke: {
+                width: 1,
+                colors: ['#fff']
+            },
+            title: {
+                text: 'Toppers'
+            },
+            xaxis: {
+                categories: ["Akihiro", "Akiko", "Amaya", "Amida", "Cho", "Daisuke", "Eichi"],
+                labels: {
+                    formatter: function(val) {
+                        return val;
+                    }
+                }
+            },
+            yaxis: {
+                title: {
+                    text: undefined
+                },
+            },
+            tooltip: {
+                y: {
+                    formatter: function(val) {
+                        return val;
+                    }
+                }
+            },
+            fill: {
+                opacity: 1
+            },
+            legend: {
+                position: 'top',
+                horizontalAlign: 'left',
+                offsetX: 40
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-hor-stack-bar-chart"), options);
+        chart.render();
+    });
 </script>
