@@ -468,12 +468,43 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         // Settings
         Route::get('settings', [SuperAdminController::class, 'settings'])->name('parent.settings');
          // faq        
-         Route::get('faq/index', [ParentController::class, 'faqIndex'])->name('parent.faq.Index');      
-         Route::get('exam/schedule', [ParentController::class, 'examSchedule'])->name('parent.exam.schedule');     
+         Route::get('faq/index', [ParentController::class, 'faqIndex'])->name('parent.faq.Index');    
+         
+        //schedule routes  
+         Route::get('exam/schedule', [ParentController::class, 'examSchedule'])->name('parent.exam.schedule');   
+         
+        //Report Card routes  
          Route::get('report_card', [ParentController::class, 'reportCard'])->name('parent.report_card');   
+         
+        //Event routes
          Route::get('events', [ParentController::class, 'events'])->name('parent.events');    
+         //Library routes
          Route::get('library/books', [ParentController::class, 'bookList'])->name('parent.library.books');    
          Route::get('library/book_issued', [ParentController::class, 'bookIssued'])->name('parent.library.book_issued');          
+         
+        //Task routes
+        Route::get('task/index', [ParentController::class, 'taskIndex'])->name('parent.task');
+        //Time Table routes
+        Route::get('timetable/index', [ParentController::class, 'timeTable'])->name('parent.timetable.index');
+
+        // Forum routes
+        Route::get('forum/index', [ParentController::class, 'forumIndex'])->name('parent.forum.index');
+        Route::get('forum/page-single-topic', [ParentController::class, 'forumPageSingleTopic'])->name('parent.forum.page-single-topic');
+        Route::get('forum/page-create-topic', [ParentController::class, 'forumPageCreateTopic'])->name('parent.forum.page-create-topic');
+        Route::get('forum/page-single-user', [ParentController::class, 'forumPageSingleUser'])->name('parent.forum.page-single-user');
+        Route::get('forum/page-single-threads', [ParentController::class, 'forumPageSingleThreads'])->name('parent.forum.page-single-threads');
+        Route::get('forum/page-single-replies', [ParentController::class, 'forumPageSingleReplies'])->name('parent.forum.page-single-replies');
+        Route::get('forum/page-single-followers', [ParentController::class, 'forumPageSingleFollowers'])->name('parent.forum.page-single-followers');
+        Route::get('forum/page-single-categories', [ParentController::class, 'forumPageSingleCategories'])->name('parent.forum.page-single-categories');
+        Route::get('forum/page-categories', [ParentController::class, 'forumPageCategories'])->name('parent.forum.page-categories');
+        Route::get('forum/page-categories-single', [ParentController::class, 'forumPageCategoriesSingle'])->name('parent.forum.page-categories-single');
+        Route::get('forum/page-tabs', [ParentController::class, 'forumPageTabs'])->name('parent.forum.page-tabs');
+        Route::get('forum/page-tabs-guidelines', [ParentController::class, 'forumPageTabGuidelines'])->name('parent.forum.page-tabs-guidelines');
+
+        //attendance routes
+        Route::get('attendance/index', [ParentController::class, 'attendance'])->name('parent.attendance');
+        // Homework routes
+        Route::get('homework/homeworklist', [ParentController::class, 'homeworklist'])->name('parent.homework');
     });
 
 

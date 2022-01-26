@@ -33,6 +33,37 @@
                 <!-- desctop menu -->
                 <div class="tt-desktop-menu">
                     <nav>
+                        @if(Session::get('role_id') == '5')
+                        <ul>
+                            <li class="{{ (request()->is('parent/forum/page-categories')) ? 'active' : '' }}"><a href="{{ route('parent.forum.page-categories') }}"><span>Categories</span></a></li>
+                            <li class="{{ (request()->is('parent/forum/page-tabs')) ? 'active' : '' }}"><a href="{{ route('parent.forum.page-tabs') }}"><span>Trending</span></a></li>
+                            <li class="{{ (request()->is('parent/forum/page-create-topic')) ? 'active' : '' }}"><a href="{{ route('parent.forum.page-create-topic') }}"><span>New</span></a></li>
+                            <li class="{{ (request()->is('parent/forum/page-single-user')) ? 'active' : '' }}">
+                                <a href="{{ route('parent.forum.page-single-user') }}"><span>Pages</span></a>
+                                <ul>
+                                    <li class="{{ (request()->is('parent/forum/index')) ? 'active' : '' }}"><a href="{{ route('parent.forum.index') }}">Home</a></li>
+                                    <li class="{{ (request()->is('parent/forum/page-single-topic')) ? 'active' : '' }}"><a href="{{ route('parent.forum.page-single-topic') }}">Single Topic</a></li>
+                                    <li><a href="{{ route('parent.forum.page-create-topic') }}">Create Topic</a></li>
+                                    <li><a href="{{ route('parent.forum.page-single-user') }}">Single User Activity</a></li>
+                                    <li><a href="{{ route('parent.forum.page-single-threads') }}">Single User Threads</a></li>
+                                    <li><a href="{{ route('parent.forum.page-single-replies') }}">Single User Replies</a></li>
+                                    <li><a href="{{ route('parent.forum.page-single-followers') }}">Single User Followers</a></li>
+                                    <li><a href="{{ route('parent.forum.page-single-categories') }}">Single User Categories</a></li>
+                                    <!-- <li><a href="page-single_settings.html">Single User Settings</a></li> -->
+                                    <li><a href="{{ route('parent.forum.page-categories') }}">Categories</a></li>
+                                    <li><a href="{{ route('parent.forum.page-categories-single') }}">Single Category</a></li>
+                                    <li><a href="{{ route('parent.forum.page-tabs') }}">About</a></li>
+                                    <li><a href="{{ route('parent.forum.page-tabs-guidelines') }}">Guidelines</a></li>
+                                    <!-- <li><a href="_demo_modal-advancedSearch.html">Advanced Search</a></li> -->
+                                    <!-- <li><a href="error404.html">Error 404</a></li> -->
+                                    <!-- <li><a href="_demo_modal-age-confirmation.html">Age Verification</a></li> -->
+                                    <!-- <li><a href="_demo_modal-level-up.html">Level up Notification</a></li>
+                                        <li><a href="messages-page.html">Message</a></li>
+                                        <li><a href="messages-compose.html">Message Compose</a></li> -->
+                                </ul>
+                            </li>
+                        </ul>
+                        @else
                         <ul>
                             <li class="{{ (request()->is('super_admin/forum/page-categories')) ? 'active' : '' }}"><a href="{{ route('forum.page-categories') }}"><span>Categories</span></a></li>
                             <li class="{{ (request()->is('super_admin/forum/page-tabs')) ? 'active' : '' }}"><a href="{{ route('forum.page-tabs') }}"><span>Trending</span></a></li>
@@ -62,6 +93,7 @@
                                 </ul>
                             </li>
                         </ul>
+                        @endif
                     </nav>
                 </div>
                 <!-- /desctop menu -->

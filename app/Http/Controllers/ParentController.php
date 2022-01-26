@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lesson;
 use Illuminate\Http\Request;
 
 class ParentController extends Controller
@@ -43,5 +44,64 @@ class ParentController extends Controller
     {
         return view('parent.library.issued_book');
     }
+    public function taskIndex()
+    {
+        return view('parent.task.index');
+    }
+    public function timeTable()
+    {
+        $weekDays     = Lesson::WEEK_DAYS;
+        return view('parent.time_table.index', compact('weekDays'));
+    }
+    // forum screen pages start
+    public function forumIndex(){
+        return view('parent.forum.index');
+    }
+    public function forumPageSingleTopic(){
+        return view('parent.forum.page-single-topic');
+    }
+    public function forumPageCreateTopic(){
+        return view('parent.forum.page-create-topic');
+    }
+    public function forumPageSingleUser(){
+        return view('parent.forum.page-single-user');
+    }
+    public function forumPageSingleThreads(){
+        return view('parent.forum.page-single-threads');
+    }
+    public function forumPageSingleReplies(){
+        return view('parent.forum.page-single-replies');
+    }
+    public function forumPageSingleFollowers(){
+        return view('parent.forum.page-single-followers');
+    }
+    public function forumPageSingleCategories(){
+        return view('parent.forum.page-single-categories');
+    }
+    public function forumPageCategories(){
+        return view('parent.forum.page-categories');
+    }
+    public function forumPageCategoriesSingle(){
+        return view('parent.forum.page-categories-single');
+    }
+    public function forumPageTabs(){
+        return view('parent.forum.page-tabs');
+    }
+    public function forumPageTabGuidelines(){
+        return view('parent.forum.page-tabs-guidelines');
+    }
+    
      // faq screen pages end
+
+    //attendance
+     public function attendance()
+    {
+        return view('parent.attendance.index');
+    }
+
+     // Home work screen pages start
+     public function homeworklist()
+     {
+         return view('parent.homework.hmeworklist');
+     }
 }

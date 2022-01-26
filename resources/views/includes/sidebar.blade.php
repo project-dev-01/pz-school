@@ -1082,6 +1082,56 @@
                 </li>       
                 <li>
                 <li>
+                    <a href="#sidebarTasks" data-toggle="collapse">
+                    <i data-feather="external-link" class="icon-dual"></i>
+                        <span> Tasks </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarTasks">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('parent.task')}}" class="nav-link {{ (request()->is('parent/task*')) ? 'active' : '' }}">
+                                    <span>To Do List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#sidebarHomework" data-toggle="collapse">
+                        <i class="fe-book-open"></i>
+                        <span> Homework </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarHomework">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('parent.homework')}}" class="nav-link {{ (request()->is('parent/homework*')) ? 'active' : '' }}">
+                                    <span>Homework List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="{{ route('parent.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('parent/forum*')) ? 'active' : '' }}">
+                        <i data-feather="external-link" class="icon-dual"></i>
+                        <span> Forum </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('parent.attendance')}}" class="nav-link {{ (request()->is('super_admin/attendance/')) ? 'active' : '' }}">
+                        <i data-feather="map"></i>    
+                        <span> Attendance </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('parent.timetable.index')}}" class="nav-link {{ (request()->is('parent/timetable*')) ? 'active' : '' }}">
+                    <i data-feather="external-link" class="icon-dual"></i>
+                        <span> Time Table </span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('parent.settings')}}" class="nav-link {{ (request()->is('parent/settings*')) ? 'active' : '' }}">
                         <i data-feather="settings" class="icon-dual"></i>
                         <span> Settings </span>
