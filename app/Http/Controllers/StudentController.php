@@ -22,4 +22,10 @@ class StudentController extends Controller
         return view('parent.faq.index');
     }
     // faq screen pages end
+    // Home work screen pages start
+    public function homeworklist()
+    {
+        return view('student.homework.hmeworklist');
+    }
+    // Home work screen pages end
 }

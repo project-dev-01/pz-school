@@ -1059,6 +1059,22 @@
                     </a>
                 </li>
                 <li>
+                    <a href="#sidebarHomework" data-toggle="collapse">
+                        <i class="fe-book-open"></i>
+                        <span> Homework </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarHomework">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('student.homework')}}" class="nav-link {{ (request()->is('student/homework*')) ? 'active' : '' }}">
+                                    <span>Homework List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
                     <a href="{{ route('student.settings')}}" class="nav-link {{ (request()->is('student/settings*')) ? 'active' : '' }}">
                         <i data-feather="settings" class="icon-dual"></i>
                         <span> Settings </span>

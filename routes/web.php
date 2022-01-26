@@ -480,7 +480,9 @@ Route::group(['prefix' => 'schoolcrm'], function () {
     // PARENT CONTROLLER END
     Route::group(['prefix' => 'student', 'middleware' => ['isStudent']], function () {
         Route::get('/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
-    
+        // Homework routes
+        Route::get('homework/homeworklist', [StudentController::class, 'homeworklist'])->name('student.homework');
+        
         // Settings
         Route::get('settings', [SuperAdminController::class, 'settings'])->name('student.settings');
         // faq        
