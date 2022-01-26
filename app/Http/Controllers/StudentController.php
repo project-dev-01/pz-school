@@ -52,4 +52,42 @@ class StudentController extends Controller
     {
         return view('student.library.issued_book');
     }
+    // forum screen pages start
+    public function forumIndex(){
+        return view('student.forum.index');
+    }
+    public function forumPageSingleTopic(){
+        return view('student.forum.page-single-topic');
+    }
+    public function forumPageCreateTopic(){
+        return view('student.forum.page-create-topic');
+    }
+    public function forumPageSingleUser(){
+        return view('student.forum.page-single-user');
+    }
+    public function forumPageSingleThreads(){
+        return view('student.forum.page-single-threads');
+    }
+    public function forumPageSingleReplies(){
+        return view('student.forum.page-single-replies');
+    }
+    public function forumPageSingleFollowers(){
+        return view('student.forum.page-single-followers');
+    }
+    public function forumPageSingleCategories(){
+        return view('student.forum.page-single-categories');
+    }
+    public function forumPageCategories(){
+        return view('student.forum.page-categories');
+    }
+    public function forumPageCategoriesSingle(){
+        return view('student.forum.page-categories-single');
+    }
+    public function forumPageTabs(){
+        return view('student.forum.page-tabs');
+    }
+    public function forumPageTabGuidelines(){
+        return view('student.forum.page-tabs-guidelines');
+    }    
+     // faq screen pages end
 }

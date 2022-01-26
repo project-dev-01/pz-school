@@ -1428,13 +1428,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
-                <li>
-                    <a href="{{ route('parent.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('parent/forum*')) ? 'active' : '' }}">
-                        <i data-feather="external-link" class="icon-dual"></i>
-                        <span> Forum </span>
-                    </a>
-                </li>
+                </li>             
                 <li>
                     <a href="{{ route('parent.attendance')}}" class="nav-link {{ (request()->is('super_admin/attendance/')) ? 'active' : '' }}">
                         <i data-feather="map"></i>    
@@ -1445,6 +1439,12 @@
                     <a href="{{ route('parent.timetable.index')}}" class="nav-link {{ (request()->is('parent/timetable*')) ? 'active' : '' }}">
                     <i data-feather="external-link" class="icon-dual"></i>
                         <span> Time Table </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('parent.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('parent/forum*')) ? 'active' : '' }}">
+                        <i data-feather="external-link" class="icon-dual"></i>
+                        <span> Forum </span>
                     </a>
                 </li>
                 <li>
@@ -1488,7 +1488,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li>               
                 <li>
                     <a href="{{ route('student.report_card')}}" class="nav-link {{ (request()->is('student/report_card*')) ? 'active' : '' }}">
                         <i data-feather="book" class="icons-xs icon-dual"></i>
@@ -1520,6 +1520,12 @@
                     <a href="{{ route('student.events')}}" class="nav-link {{ (request()->is('student/events*')) ? 'active' : '' }}">
                         <i class="fas fa-map"></i>
                         <span> Events </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('student.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('student/forum*')) ? 'active' : '' }}">
+                        <i data-feather="external-link" class="icon-dual"></i>
+                        <span> Forum </span>
                     </a>
                 </li>
                 <li>
