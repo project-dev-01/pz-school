@@ -8,8 +8,9 @@ use Illuminate\Http\Request;
 class ParentController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
+        $request->session()->put('children_id', "1");
         return view('parent.dashboard.index');
     }
     public function settings()
@@ -104,4 +105,14 @@ class ParentController extends Controller
      {
          return view('parent.homework.hmeworklist');
      }
+     //Children
+     public function children()
+     {
+
+        if(session()->has('children_id')){
+            session()->pull('children_id');
+        }
+        return view('parent.dashboard.children');
+     }
+     
 }

@@ -185,18 +185,18 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::get('users/user_list', [SuperAdminController::class, 'getUserList'])->name('users.user_list');
         Route::post('users/delete', [SuperAdminController::class, 'deleteUser'])->name('users.delete');
         // Forum routes
-        Route::get('forum/index', [SuperAdminController::class, 'forumIndex'])->name('super_admin.forum.index');
-        Route::get('forum/page-single-topic', [SuperAdminController::class, 'forumPageSingleTopic'])->name('super_admin.forum.page-single-topic');
-        Route::get('forum/page-create-topic', [SuperAdminController::class, 'forumPageCreateTopic'])->name('super_admin.forum.page-create-topic');
-        Route::get('forum/page-single-user', [SuperAdminController::class, 'forumPageSingleUser'])->name('super_admin.forum.page-single-user');
-        Route::get('forum/page-single-threads', [SuperAdminController::class, 'forumPageSingleThreads'])->name('super_admin.forum.page-single-threads');
-        Route::get('forum/page-single-replies', [SuperAdminController::class, 'forumPageSingleReplies'])->name('super_admin.forum.page-single-replies');
-        Route::get('forum/page-single-followers', [SuperAdminController::class, 'forumPageSingleFollowers'])->name('super_admin.forum.page-single-followers');
-        Route::get('forum/page-single-categories', [SuperAdminController::class, 'forumPageSingleCategories'])->name('super_admin.forum.page-single-categories');
-        Route::get('forum/page-categories', [SuperAdminController::class, 'forumPageCategories'])->name('super_admin.forum.page-categories');
-        Route::get('forum/page-categories-single', [SuperAdminController::class, 'forumPageCategoriesSingle'])->name('super_admin.forum.page-categories-single');
-        Route::get('forum/page-tabs', [SuperAdminController::class, 'forumPageTabs'])->name('super_admin.forum.page-tabs');
-        Route::get('forum/page-tabs-guidelines', [SuperAdminController::class, 'forumPageTabGuidelines'])->name('super_admin.forum.page-tabs-guidelines');
+        Route::get('forum/index', [SuperAdminController::class, 'forumIndex'])->name('forum.index');
+        Route::get('forum/page-single-topic', [SuperAdminController::class, 'forumPageSingleTopic'])->name('forum.page-single-topic');
+        Route::get('forum/page-create-topic', [SuperAdminController::class, 'forumPageCreateTopic'])->name('forum.page-create-topic');
+        Route::get('forum/page-single-user', [SuperAdminController::class, 'forumPageSingleUser'])->name('forum.page-single-user');
+        Route::get('forum/page-single-threads', [SuperAdminController::class, 'forumPageSingleThreads'])->name('forum.page-single-threads');
+        Route::get('forum/page-single-replies', [SuperAdminController::class, 'forumPageSingleReplies'])->name('forum.page-single-replies');
+        Route::get('forum/page-single-followers', [SuperAdminController::class, 'forumPageSingleFollowers'])->name('forum.page-single-followers');
+        Route::get('forum/page-single-categories', [SuperAdminController::class, 'forumPageSingleCategories'])->name('forum.page-single-categories');
+        Route::get('forum/page-categories', [SuperAdminController::class, 'forumPageCategories'])->name('forum.page-categories');
+        Route::get('forum/page-categories-single', [SuperAdminController::class, 'forumPageCategoriesSingle'])->name('forum.page-categories-single');
+        Route::get('forum/page-tabs', [SuperAdminController::class, 'forumPageTabs'])->name('forum.page-tabs');
+        Route::get('forum/page-tabs-guidelines', [SuperAdminController::class, 'forumPageTabGuidelines'])->name('forum.page-tabs-guidelines');
         // Attendance routes
         Route::get('attendance/student_entry', [SuperAdminController::class, 'studentEntry'])->name('attendance.student_entry');
         Route::get('attendance/employee_entry', [SuperAdminController::class, 'employeeEntry'])->name('attendance.employee_entry');
@@ -370,16 +370,16 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         // Forum routes
         Route::get('forum/index', [AdminController::class, 'forumIndex'])->name('admin.forum.index');
         Route::get('forum/page-single-topic', [AdminController::class, 'forumPageSingleTopic'])->name('admin.forum.page-single-topic');
-        Route::get('forum/page-create-topic', [AdminController::class, 'forumPageCreateTopic'])->name('admin.forum.page-create-topic');
-        Route::get('forum/page-single-user', [AdminController::class, 'forumPageSingleUser'])->name('admin.forum.page-single-user');
-        Route::get('forum/page-single-threads', [AdminController::class, 'forumPageSingleThreads'])->name('admin.forum.page-single-threads');
-        Route::get('forum/page-single-replies', [AdminController::class, 'forumPageSingleReplies'])->name('admin.forum.page-single-replies');
-        Route::get('forum/page-single-followers', [AdminController::class, 'forumPageSingleFollowers'])->name('admin.forum.page-single-followers');
-        Route::get('forum/page-single-categories', [AdminController::class, 'forumPageSingleCategories'])->name('admin.forum.page-single-categories');
-        Route::get('forum/page-categories', [AdminController::class, 'forumPageCategories'])->name('admin.forum.page-categories');
-        Route::get('forum/page-categories-single', [AdminController::class, 'forumPageCategoriesSingle'])->name('admin.forum.page-categories-single');
-        Route::get('forum/page-tabs', [AdminController::class, 'forumPageTabs'])->name('admin.forum.page-tabs');
-        Route::get('forum/page-tabs-guidelines', [AdminController::class, 'forumPageTabGuidelines'])->name('admin.forum.page-tabs-guidelines');
+        Route::get('forum/page-create-topic', [AdminController::class, 'forumPageCreateTopic'])->name('forum.page-create-topic');
+        Route::get('forum/page-single-user', [AdminController::class, 'forumPageSingleUser'])->name('forum.page-single-user');
+        Route::get('forum/page-single-threads', [AdminController::class, 'forumPageSingleThreads'])->name('forum.page-single-threads');
+        Route::get('forum/page-single-replies', [AdminController::class, 'forumPageSingleReplies'])->name('forum.page-single-replies');
+        Route::get('forum/page-single-followers', [AdminController::class, 'forumPageSingleFollowers'])->name('forum.page-single-followers');
+        Route::get('forum/page-single-categories', [AdminController::class, 'forumPageSingleCategories'])->name('forum.page-single-categories');
+        Route::get('forum/page-categories', [AdminController::class, 'forumPageCategories'])->name('forum.page-categories');
+        Route::get('forum/page-categories-single', [AdminController::class, 'forumPageCategoriesSingle'])->name('forum.page-categories-single');
+        Route::get('forum/page-tabs', [AdminController::class, 'forumPageTabs'])->name('forum.page-tabs');
+        Route::get('forum/page-tabs-guidelines', [AdminController::class, 'forumPageTabGuidelines'])->name('forum.page-tabs-guidelines');
 
         // Attendance routes
         Route::get('attendance/student_entry', [AdminController::class, 'studentEntry'])->name('admin.attendance.student_entry');
@@ -579,8 +579,6 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         
          // faq        
          Route::get('faq/index', [TeacherController::class, 'faqIndex'])->name('teacher.faq.Index');      
-         // class room management    
-         Route::get('classroom/classroom-management', [TeacherController::class, 'classroomManagement'])->name('teacher.classroom.management');
     });
      
     // TEACHER CONTROLLER END
@@ -629,8 +627,8 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('attendance/index', [ParentController::class, 'attendance'])->name('parent.attendance');
         // Homework routes
         Route::get('homework/homeworklist', [ParentController::class, 'homeworklist'])->name('parent.homework');
-         // Children routes
-         Route::get('children', [ParentController::class, 'children'])->name('parent.children');
+        // Children routes
+        Route::get('children', [ParentController::class, 'children'])->name('parent.children');
     });
 
 
@@ -657,20 +655,6 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         // Library 
         Route::get('library/books', [StudentController::class, 'bookList'])->name('student.library.books');    
         Route::get('library/book_issued', [StudentController::class, 'bookIssued'])->name('student.library.book_issued');          
-        // Forum routes
-        Route::get('forum/index', [StudentController::class, 'forumIndex'])->name('student.forum.index');
-        Route::get('forum/page-single-topic', [StudentController::class, 'forumPageSingleTopic'])->name('student.forum.page-single-topic');
-        Route::get('forum/page-create-topic', [StudentController::class, 'forumPageCreateTopic'])->name('student.forum.page-create-topic');
-        Route::get('forum/page-single-user', [StudentController::class, 'forumPageSingleUser'])->name('student.forum.page-single-user');
-        Route::get('forum/page-single-threads', [StudentController::class, 'forumPageSingleThreads'])->name('student.forum.page-single-threads');
-        Route::get('forum/page-single-replies', [StudentController::class, 'forumPageSingleReplies'])->name('student.forum.page-single-replies');
-        Route::get('forum/page-single-followers', [StudentController::class, 'forumPageSingleFollowers'])->name('student.forum.page-single-followers');
-        Route::get('forum/page-single-categories', [StudentController::class, 'forumPageSingleCategories'])->name('student.forum.page-single-categories');
-        Route::get('forum/page-categories', [StudentController::class, 'forumPageCategories'])->name('student.forum.page-categories');
-        Route::get('forum/page-categories-single', [StudentController::class, 'forumPageCategoriesSingle'])->name('student.forum.page-categories-single');
-        Route::get('forum/page-tabs', [StudentController::class, 'forumPageTabs'])->name('student.forum.page-tabs');
-        Route::get('forum/page-tabs-guidelines', [StudentController::class, 'forumPageTabGuidelines'])->name('student.forum.page-tabs-guidelines');
-
     });
     
     

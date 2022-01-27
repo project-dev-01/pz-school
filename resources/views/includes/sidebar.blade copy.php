@@ -506,7 +506,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('super_admin.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('super_admin/forum*')) ? 'active' : '' }}">
+                    <a href="{{ route('forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('super_admin/forum*')) ? 'active' : '' }}">
                         <i data-feather="external-link" class="icon-dual"></i>
                         <span> Forum </span>
                     </a>
@@ -1261,12 +1261,6 @@
                     </div>
                 </li>
                 <li>
-                    <a href="{{ route('teacher.classroom.management')}}" class="nav-link {{ (request()->is('teacher/classroom*')) ? 'active' : '' }}">
-                        <i data-feather="file-text" class="icon-dual"></i>
-                        <span> Classroom Management </span>
-                    </a>
-                </li>
-                <li>
                     <a href="#sidebarParent" data-toggle="collapse">
                         <i class="fe-user-plus"></i>
                         <span> Parents </span>
@@ -1356,7 +1350,7 @@
                 </li>
                 @elseif(Session::get('role_id') == '5')
                 <li>
-                <a href="#dashboard" data-toggle="collapse">
+                    <a href="#dashboard" data-toggle="collapse">
                         <i class="icons icon-grid"></i>
                         <span> Dashboard </span>
                         <span class="menu-arrow"></span>
@@ -1382,7 +1376,7 @@
                         </ul>
                     </div>
                 </li>    
-                @if(Session::get('children_id'))                
+                @if(Session::get('children_id'))
                 <li>
                     <a href="{{ route('parent.exam.schedule')}}" class="nav-link {{ (request()->is('parent/exam*')) ? 'active' : '' }}">
                         <i class="fas fa-dna"></i> 
@@ -1455,7 +1449,13 @@
                             </li>
                         </ul>
                     </div>
-                </li>             
+                </li>
+                <li>
+                    <a href="{{ route('parent.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('parent/forum*')) ? 'active' : '' }}">
+                        <i data-feather="external-link" class="icon-dual"></i>
+                        <span> Forum </span>
+                    </a>
+                </li>
                 <li>
                     <a href="{{ route('parent.attendance')}}" class="nav-link {{ (request()->is('super_admin/attendance/')) ? 'active' : '' }}">
                         <i data-feather="map"></i>    
@@ -1466,12 +1466,6 @@
                     <a href="{{ route('parent.timetable.index')}}" class="nav-link {{ (request()->is('parent/timetable*')) ? 'active' : '' }}">
                     <i data-feather="external-link" class="icon-dual"></i>
                         <span> Time Table </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('parent.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('parent/forum*')) ? 'active' : '' }}">
-                        <i data-feather="external-link" class="icon-dual"></i>
-                        <span> Forum </span>
                     </a>
                 </li>
                 <li>
@@ -1515,7 +1509,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>               
+                </li>
                 <li>
                     <a href="{{ route('student.report_card')}}" class="nav-link {{ (request()->is('student/report_card*')) ? 'active' : '' }}">
                         <i data-feather="book" class="icons-xs icon-dual"></i>
@@ -1550,17 +1544,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('student.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('student/forum*')) ? 'active' : '' }}">
-                        <i data-feather="external-link" class="icon-dual"></i>
-                        <span> Forum </span>
-                    </a>
-                </li>
-                <li>
                     <a href="{{ route('student.faq.Index')}}" class="nav-link {{ (request()->is('student/faq*')) ? 'active' : '' }}">
                         <i class="fas fa-question"></i>
                         <span> FAQs </span>
                     </a>
                 </li>
+                @endif
                 @endif
 
                 @endif
