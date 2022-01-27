@@ -1,5 +1,18 @@
-<a href="{{ route('forum.page-create-topic') }}" class="tt-btn-create-topic">
-    <span class="tt-icon">
+
+@if(Session::get('role_id') == '1')
+<a href="{{ route('super_admin.forum.page-create-topic') }}" class="tt-btn-create-topic">
+@elseif(Session::get('role_id') == '2')
+<a href="{{ route('admin.forum.page-create-topic') }}" class="tt-btn-create-topic">
+@elseif(Session::get('role_id') == '3')
+<a href="{{ route('staff.forum.page-create-topic') }}" class="tt-btn-create-topic">
+@elseif(Session::get('role_id') == '4')
+<a href="{{ route('teacher.forum.page-create-topic') }}" class="tt-btn-create-topic">
+@elseif(Session::get('role_id') == '5')
+<a href="{{ route('parent.forum.page-create-topic') }}" class="tt-btn-create-topic">
+@elseif(Session::get('role_id') == '6')
+<a href="{{ route('student.forum.page-create-topic') }}" class="tt-btn-create-topic">
+@endif
+<span class="tt-icon">
         <svg>
             <use xlink:href="#icon-create_new"></use>
         </svg>

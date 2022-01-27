@@ -30,7 +30,7 @@
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color01 tt-badge">politics</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="{{ route('forum.page-categories-single') }}">Threads - 1,245</a></h6>
+                            <h6 class="tt-title"><a href="{{ route('teacher.forum.page-categories-single') }}">Threads - 1,245</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="innerwrapper">
@@ -60,7 +60,7 @@
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color02 tt-badge">video</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="{{ route('forum.page-categories-single') }}">Threads - 368</a></h6>
+                            <h6 class="tt-title"><a href="{{ route('teacher.forum.page-categories-single') }}">Threads - 368</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="tt-innerwrapper">
@@ -93,7 +93,7 @@
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color03 tt-badge">exchange</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="{{ route('forum.page-categories-single') }}">Threads - 381</a></h6>
+                            <h6 class="tt-title"><a href="{{ route('teacher.forum.page-categories-single') }}">Threads - 381</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="tt-innerwrapper">
@@ -125,7 +125,7 @@
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color04 tt-badge">pets</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="{{ route('forum.page-categories-single') }}">Threads - 98</a></h6>
+                            <h6 class="tt-title"><a href="{{ route('teacher.forum.page-categories-single') }}">Threads - 98</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="tt-innerwrapper">
@@ -157,7 +157,7 @@
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color05 tt-badge">music</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="{{ route('forum.page-categories-single') }}">Threads - 28</a></h6>
+                            <h6 class="tt-title"><a href="{{ route('teacher.forum.page-categories-single') }}">Threads - 28</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="tt-innerwrapper">
@@ -189,7 +189,7 @@
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color06 tt-badge">movies</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="{{ route('forum.page-categories-single') }}">Threads - 74</a></h6>
+                            <h6 class="tt-title"><a href="{{ route('teacher.forum.page-categories-single') }}">Threads - 74</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="tt-innerwrapper">
@@ -221,7 +221,7 @@
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color15 tt-badge">nature</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="{{ route('forum.page-categories-single') }}">Threads - 1,245</a></h6>
+                            <h6 class="tt-title"><a href="{{ route('teacher.forum.page-categories-single') }}">Threads - 1,245</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="tt-innerwrapper">
@@ -253,7 +253,7 @@
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color07 tt-badge">video games</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="{{ route('forum.page-categories-single') }}">Threads - 1,245</a></h6>
+                            <h6 class="tt-title"><a href="{{ route('teacher.forum.page-categories-single') }}">Threads - 1,245</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="tt-innerwrapper">
@@ -285,7 +285,7 @@
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color08 tt-badge">youtube</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="{{ route('forum.page-categories-single') }}">Threads - 1,245</a></h6>
+                            <h6 class="tt-title"><a href="{{ route('teacher.forum.page-categories-single') }}">Threads - 1,245</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="tt-innerwrapper">
@@ -317,7 +317,7 @@
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color09 tt-badge">social</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="{{ route('forum.page-categories-single') }}">Threads - 1,245</a></h6>
+                            <h6 class="tt-title"><a href="{{ route('teacher.forum.page-categories-single') }}">Threads - 1,245</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="tt-innerwrapper">
@@ -349,7 +349,7 @@
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color10 tt-badge">science</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="{{ route('forum.page-categories-single') }}">Threads - 1,245</a></h6>
+                            <h6 class="tt-title"><a href="{{ route('teacher.forum.page-categories-single') }}">Threads - 1,245</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="tt-innerwrapper">
@@ -381,7 +381,7 @@
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color11 tt-badge">entertainment</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="{{ route('forum.page-categories-single') }}">Threads - 1,245</a></h6>
+                            <h6 class="tt-title"><a href="{{ route('teacher.forum.page-categories-single') }}">Threads - 1,245</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="tt-innerwrapper">
@@ -413,7 +413,7 @@
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color04 tt-badge">pets</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="{{ route('forum.page-categories-single') }}">Threads - 1,245</a></h6>
+                            <h6 class="tt-title"><a href="{{ route('teacher.forum.page-categories-single') }}">Threads - 1,245</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="tt-innerwrapper">
@@ -445,7 +445,7 @@
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color05 tt-badge">music</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="{{ route('forum.page-categories-single') }}">Threads - 1,245</a></h6>
+                            <h6 class="tt-title"><a href="{{ route('teacher.forum.page-categories-single') }}">Threads - 1,245</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="tt-innerwrapper">
@@ -477,7 +477,7 @@
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color06 tt-badge">movies</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="{{ route('forum.page-categories-single') }}">Threads - 1,245</a></h6>
+                            <h6 class="tt-title"><a href="{{ route('teacher.forum.page-categories-single') }}">Threads - 1,245</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="tt-innerwrapper">

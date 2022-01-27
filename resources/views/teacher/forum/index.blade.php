@@ -21,7 +21,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('teacher.forum.page-single-topic') }}">
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-pinned"></use>
                             </svg>
@@ -53,7 +53,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('teacher.forum.page-single-topic') }}">
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-locked"></use>
                             </svg>
@@ -83,7 +83,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('teacher.forum.page-single-topic') }}">
                             Web Hosting Packages for ThemeForest WordPress
                         </a></h6>
                     <div class="row align-items-center no-gutters">
@@ -112,7 +112,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('teacher.forum.page-single-topic') }}">
                             Review Queue Changes for VideoHive & PhotoDune
                         </a></h6>
                     <div class="row align-items-center no-gutters">
@@ -141,7 +141,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('teacher.forum.page-single-topic') }}">
                             Does Envato act against the authors of Envato markets?
                         </a></h6>
                     <div class="row align-items-center no-gutters  hide-desktope">
@@ -168,7 +168,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('teacher.forum.page-single-topic') }}">
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-locked"></use>
                             </svg>
@@ -217,7 +217,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('teacher.forum.page-single-topic') }}">
                             Cannot customize my intro
                         </a></h6>
                     <div class="row align-items-center no-gutters">
@@ -246,7 +246,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('teacher.forum.page-single-topic') }}">
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-verified"></use>
                             </svg>
@@ -276,7 +276,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('teacher.forum.page-single-topic') }}">
                             First website template got rejected.
                         </a></h6>
                     <div class="row align-items-center no-gutters  hide-desktope">
@@ -303,7 +303,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('teacher.forum.page-single-topic') }}">
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-pinned"></use>
                             </svg>
@@ -335,7 +335,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('teacher.forum.page-single-topic') }}">
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-locked"></use>
                             </svg>
@@ -365,7 +365,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('teacher.forum.page-single-topic') }}">
                             Why all my affiliate balance is pending?
                         </a></h6>
                     <div class="row align-items-center no-gutters">
@@ -394,7 +394,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('teacher.forum.page-single-topic') }}">
                             Google snippets wordpress plugin
                         </a></h6>
                     <div class="row align-items-center no-gutters">
@@ -423,7 +423,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('teacher.forum.page-single-topic') }}">
                             How to use Team Listing?
                         </a></h6>
                     <div class="row align-items-center no-gutters hide-desktope">
@@ -450,7 +450,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('teacher.forum.page-single-topic') }}">
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-locked"></use>
                             </svg>
@@ -480,7 +480,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('teacher.forum.page-single-topic') }}">
                             Documentation on Glitch package usage?
                         </a></h6>
                     <div class="row align-items-center no-gutters">
@@ -509,7 +509,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('teacher.forum.page-single-topic') }}">
                             Woohoo! You’ve made it. Welcome to the Elite Club
                         </a></h6>
                     <div class="row align-items-center no-gutters">
