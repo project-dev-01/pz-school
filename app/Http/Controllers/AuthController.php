@@ -64,7 +64,7 @@ class AuthController extends Controller
             } elseif ($userDetails['data']['user']['role_id'] == 4) {
                 return redirect()->route('teacher.dashboard');
             } elseif ($userDetails['data']['user']['role_id'] == 5) {
-                return redirect()->route('parent.dashboard');
+                return redirect()->route('parent.children');
             } elseif ($userDetails['data']['user']['role_id'] == 6) {
                 return redirect()->route('student.dashboard');
             }else{
