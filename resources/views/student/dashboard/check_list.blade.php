@@ -14,6 +14,19 @@
                 <!-- <div class="text-center"> -->
                 <div class="row">
                     <div class="col">
+                        <div class="custom-control custom-checkbox float-left">
+                            <input type="checkbox" checked class="custom-control-input" id="completedCheck">
+                            <label class="custom-control-label" for="completedCheck">
+                                Mark as completed
+                            </label>
+                        </div> <!-- end custom-checkbox-->
+                        <div class="clearfix"></div>
+
+                        <hr class="my-2" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
                         <h4>Simple Admin Dashboard Template Design</h4>
 
                         <div class="row">

@@ -148,7 +148,7 @@
                                                             <div class="row justify-content-sm-between task-item">
                                                                 <div class="col-lg-6 mb-2">
                                                                     <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input" id="task1">
+                                                                        <input type="checkbox" class="custom-control-input taskListDashboard" id="task1">
                                                                         <label class="custom-control-label" for="task1">
                                                                             Half Yearly Exam
                                                                         </label>
@@ -199,7 +199,7 @@
                                                                 <div class="row justify-content-sm-between task-item">
                                                                     <div class="col-lg-6 mb-2">
                                                                         <div class="custom-control custom-checkbox">
-                                                                            <input type="checkbox" class="custom-control-input" id="task4">
+                                                                            <input type="checkbox" class="custom-control-input taskListDashboard" id="task4">
                                                                             <label class="custom-control-label" for="task4">
                                                                                 Sports Day
                                                                             </label>
@@ -326,6 +326,7 @@
         </div>
         <!-- end col-12 -->
     </div> <!-- end row -->
+    @include('admin.dashboard.check_list')
 
 </div> <!-- container -->
 @endsection
