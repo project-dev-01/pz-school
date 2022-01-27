@@ -966,5 +966,12 @@ class AdminController extends Controller
     {
         return view('admin.student.student');
     }
-    
+    public function classroomManagement()
+    {
+        return view('admin.classroom.management');
+    }
+    public function faqIndex()
+    {
+        return view('admin.faq.index');
+    }
 }

@@ -568,6 +568,12 @@
                     </div>
                 </li>
                 <li>
+                    <a href="{{ route('admin.classroom.management')}}" class="nav-link {{ (request()->is('admin/classroom*')) ? 'active' : '' }}">
+                        <i data-feather="file-text" class="icon-dual"></i>
+                        <span> Classroom Management </span>
+                    </a>
+                </li>
+                <li>
                     <a href="#sidebarParent" data-toggle="collapse">
                         <i class="fe-user-plus"></i>
                         <span> Parents </span>
@@ -856,6 +862,12 @@
                     <a href="{{ route('admin.settings')}}" class="nav-link {{ (request()->is('admin/settings*')) ? 'active' : '' }}">
                         <i data-feather="settings" class="icon-dual"></i>
                         <span> Settings </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.faq.index')}}" class="nav-link {{ (request()->is('admin/settings*')) ? 'active' : '' }}">
+                        <i class="fas fa-question"></i>
+                        <span> FAQs </span>
                     </a>
                 </li>
                 @elseif(Session::get('role_id') == '3')
@@ -1486,6 +1498,7 @@
                         <span> FAQs </span>
                     </a>
                 </li>
+                @endif
                 @elseif(Session::get('role_id') == '6')
                 <li>
                     <a href="{{ route('student.dashboard')}}" class="nav-link {{ (request()->is('student/dashboard*')) ? 'active' : '' }}">
@@ -1561,7 +1574,6 @@
                         <span> FAQs </span>
                     </a>
                 </li>
-                @endif
                 @endif
 
                 @endif

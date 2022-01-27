@@ -386,6 +386,12 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('attendance/employee_entry', [AdminController::class, 'employeeEntry'])->name('admin.attendance.employee_entry');
         Route::get('attendance/exam_entry', [AdminController::class, 'examEntry'])->name('admin.attendance.exam_entry');
 
+        //class room Routes
+        Route::get('classroom/classroom-management', [AdminController::class, 'classroomManagement'])->name('admin.classroom.management');
+        //faq route
+        
+        // faq        
+        Route::get('faq/index', [AdminController::class, 'faqIndex'])->name('admin.faq.index'); 
 
         // static page routes end
         // Settings
