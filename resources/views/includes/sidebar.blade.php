@@ -567,12 +567,12 @@
                         </ul>
                     </div>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="{{ route('admin.classroom.management')}}" class="nav-link {{ (request()->is('admin/classroom*')) ? 'active' : '' }}">
                         <i data-feather="file-text" class="icon-dual"></i>
                         <span> Classroom Management </span>
                     </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="#sidebarParent" data-toggle="collapse">
                         <i class="fe-user-plus"></i>
