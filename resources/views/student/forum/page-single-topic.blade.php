@@ -18,33 +18,31 @@
                             <a href="#" class="tt-info-time">
                                 <i class="tt-icon"><svg>
                                         <use xlink:href="#icon-time"></use>
-                                    </svg></i>6 Jan,2019
+                                    </svg></i>6 Jan,2022
                             </a>
                         </div>
                         <h3 class="tt-item-title">
-                            <a href="#">Web Hosting Packages for ThemeForest WordPress</a>
+                            <a href="#">Have you got an idea about what you want to do after school? Some do, some don't. Let me know what your plans please are coz I have no idea still and need to start thinking of something.</a>
                         </h3>
                         <div class="tt-item-tag">
                             <ul class="tt-list-badge">
-                                <li><a href="#"><span class="tt-color03 tt-badge">exchange</span></a></li>
-                                <li><a href="#"><span class="tt-badge">themeforest</span></a></li>
-                                <li><a href="#"><span class="tt-badge">elements</span></a></li>
+                                <li><a href="#"><span class="tt-color03 tt-badge">Career Advice</span></a></li>
+                                <li><a href="#"><span class="tt-badge">Help</span></a></li>
+                                <li><a href="#"><span class="tt-badge">Job</span></a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="tt-item-description">
-                        <h6 class="tt-title">Get ready for Movember!</h6>
+                        <h6 class="tt-title">How long do you have until you graduate?</h6>
                         <p>
-                            It’s time to channel your inner Magnum P.I., Ron Swanson or Hercule Poroit! It’s the time that all guys (or gals) love and all our
-                            partners hate It’s Movember!
+                        I literally didn't have a decision for what I wanted to do until about the end of Year 11. In Year 10, I had no idea, and school pretty much expected you have a decision of what you want to do when you graduate. 
                         </p>
                         <p>
-                            Throughout November we will be inviting all community members to help raise awareness and funds for the lives of men affected
-                            by cancer and mental health problems via the Movember Foundation 10.
+                        As a result, I didn't know what subjects to fill in my gaps for Year 11, so I talked to my course coordinator, and after, I filled it in with Human Biology and Accounting and Finance.
                         </p>
-                        <h6 class="tt-title">How Does it Work?</h6>
+                        <h6 class="tt-title">And now I just realised you didn't ask about </h6>
                         <p>
-                            Authors and customers with facial hair unite! Simply grow, groom, and share your facial hair during November! Even females can enter if they desire (be creative, ladies!). Be inspired by checking out last year’s highlights 28.
+                        You can literally do anything after high school tbh, people go to uni, they take gap years (to do jobs, or go travelling) the choices are endless!
                         </p>
                     </div>
                     <div class="tt-item-info info-bottom">
@@ -226,13 +224,13 @@
                             <a href="#" class="tt-info-time">
                                 <i class="tt-icon"><svg>
                                         <use xlink:href="#icon-time"></use>
-                                    </svg></i>6 Jan,2019
+                                    </svg></i>18 Jan,2022
                             </a>
                         </div>
                     </div>
                     <div class="tt-item-description">
                         Finally!<br>
-                        Are there any special recommendations for design or an updated guide that includes new preview sizes, including retina displays?
+                        I'm planning on going to uni and studying Astronomy.
                     </div>
                     <div class="tt-item-info info-bottom">
                         <a href="#" class="tt-icon-btn">
@@ -287,14 +285,13 @@
                             <a href="#" class="tt-info-time">
                                 <i class="tt-icon"><svg>
                                         <use xlink:href="#icon-time"></use>
-                                    </svg></i>6 Jan,2019
+                                    </svg></i>17 Jan,2022
                             </a>
                         </div>
                     </div>
                     <div class="tt-item-description">
                         <p>
-                            It’s too big preview image, it should be smaller even five in row. On one page there are 30 items to 60 pages it is 1800 items in
-                            categories eg in Add-Ons category have 22749 items, why not see all of them but only those 1800 items? This is a bad thing.
+                        I'm going to uni and studying archaeology and studies of religion (like the historical, analytical view of religion, not bible studies)
                         </p>
                         <p>
                             <img class="tt-offset-11" src="images/single-topic-img01.jpg" alt="">
@@ -353,17 +350,14 @@
                             <a href="#" class="tt-info-time">
                                 <i class="tt-icon"><svg>
                                         <use xlink:href="#icon-time"></use>
-                                    </svg></i>6 Jan,2019
+                                    </svg></i>16 Jan,2022
                             </a>
                         </div>
                     </div>
                     <div class="tt-item-description">
                         <p>
-                            I do not like. Choosing a template has become more difficult.<br>Small thumbnails 80x80px were better.
-                        </p>
-                        <div class="video-container">
-                            <iframe title="YouTube video player" src="https://www.youtube.com/embed/BbW8djS7kI4" allowfullscreen></iframe>
-                        </div>
+                        Go join the Royal Australian Air Force, spend a couple of years learning to fly and hopefully fly a fighter jet, (preferred) but if I do fly the other aircrafts, that is fine too. That is if I can even get to such a level!
+                        </p>                      
                     </div>
                     <div class="tt-item-info info-bottom">
                         <a href="#" class="tt-icon-btn">
@@ -418,13 +412,13 @@
                             <a href="#" class="tt-info-time">
                                 <i class="tt-icon"><svg>
                                         <use xlink:href="#icon-time"></use>
-                                    </svg></i>6 Jan,2019
+                                    </svg></i>11 Jan,2022
                             </a>
                         </div>
                     </div>
                     <div class="tt-item-description">
-                        Finally!<br>
-                        Are there any special recommendations for design or an updated guide that includes new preview sizes, including retina displays?
+                        
+                    I've been ping-ponging around the idea of studying, and I always come back top education. Find something you're passionate about
                         <div class="topic-inner-list">
                             <div class="topic-inner">
                                 <div class="topic-inner-title">
@@ -436,8 +430,7 @@
                                     <div class="topic-inner-title"><a href="#">summit92</a></div>
                                 </div>
                                 <div class="topic-inner-description">
-                                    Finally!<br>
-                                    Are there any special recommendations for design or an updated guide that includes new preview sizes, including retina displays?
+                                It is very important to decide early because time passes away very fast. So take your decision when you are studying school.
                                 </div>
                             </div>
                         </div>
@@ -496,13 +489,12 @@
                             <a href="#" class="tt-info-time">
                                 <i class="tt-icon"><svg>
                                         <use xlink:href="#icon-time"></use>
-                                    </svg></i>6 Jan,2019
+                                    </svg></i>6 Jan,2022
                             </a>
                         </div>
                     </div>
                     <div class="tt-item-description">
-                        Finally!<br>
-                        Are there any special recommendations for design or an updated guide that includes new preview sizes, including retina displays?
+                    Go join the Royal Australian Air Force, spend a couple of years learning to fly and hopefully fly a fighter jet, (preferred) but if I do fly the other aircrafts, that is fine too. That is if I can even get to such a level!
                     </div>
                     <div class="tt-item-info info-bottom">
                         <a href="#" class="tt-icon-btn">
@@ -557,12 +549,12 @@
                             <a href="#" class="tt-info-time">
                                 <i class="tt-icon"><svg>
                                         <use xlink:href="#icon-time"></use>
-                                    </svg></i>6 Jan,2019
+                                    </svg></i>9 Jan,2022
                             </a>
                         </div>
                     </div>
                     <div class="tt-item-description">
-                        This post has been flagged by a moderator, received too many downvotes.
+                    I'm going to travel around to places outside of my comfort zone for 6 months to get a better understanding of who I am as a person
                     </div>
                     <div class="row">
                         <div class="col-auto">
@@ -596,13 +588,13 @@
                             <a href="#" class="tt-info-time">
                                 <i class="tt-icon"><svg>
                                         <use xlink:href="#icon-time"></use>
-                                    </svg></i>6 Jan,2019
+                                    </svg></i>10 Jan,2022
                             </a>
                         </div>
                     </div>
                     <div class="tt-item-description">
                         <p>
-                            It’s too big preview image, it should be smaller even five in row. On one page there are 30 items to 60 pages it is 1800 items in categories eg in Add-Ons category have 22749 items, why not see all of them but only those 1800 items? This is a bad thing.
+                        I'm thinking of taking a Gap Year at the ADF and then studying Cyber Security and Criminology.
                         </p>
                         <div class="row tt-offset-37">
                             <div class="col-lg-10">
@@ -671,27 +663,7 @@
         <div class="tt-wrapper-inner">
             <h4 class="tt-title-separator"><span>You’ve reached the end of replies</span></h4>
         </div>
-        <div class="tt-topic-list">
-            <div class="tt-item tt-item-popup">
-                <div class="tt-col-avatar">
-                    <svg class="tt-icon">
-                        <use xlink:href="#icon-ava-f"></use>
-                    </svg>
-                </div>
-                <div class="tt-col-message">
-                    Looks like you are new here. Register for free, learn and contribute.
-                </div>
-                <div class="tt-col-btn">
-                    <button type="button" class="btn btn-primary">Log in</button>
-                    <button type="button" class="btn btn-secondary">Sign up</button>
-                    <button type="button" class="btn-icon">
-                        <svg class="tt-icon">
-                            <use xlink:href="#icon-cancel"></use>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
+ 
         <div class="tt-wrapper-inner">
             <div class="pt-editor form-default">
                 <h6 class="pt-title">Post Your Reply</h6>
@@ -829,12 +801,12 @@
                 </div>
                 <div class="tt-col-description">
                     <h6 class="tt-title"><a href="#">
-                            Does Envato act against the authors of Envato markets?
+                    I want to start studying online either or open colleges and I don’t know which one is better
                         </a></h6>
                     <div class="row align-items-center no-gutters hide-desktope">
                         <div class="col-11">
                             <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color05 tt-badge">music</span></a></li>
+                                <li class="show-mobile"><a href="#"><span class="tt-color05 tt-badge">Higher Studies</span></a></li>
                             </ul>
                         </div>
                         <div class="col-1 ml-auto show-mobile">
@@ -842,7 +814,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color05 tt-badge">music</span></div>
+                <div class="tt-col-category"><span class="tt-color05 tt-badge">Higher Studies</span></div>
                 <div class="tt-col-value hide-mobile">358</div>
                 <div class="tt-col-value tt-color-select hide-mobile">68</div>
                 <div class="tt-col-value hide-mobile">8.3k</div>
@@ -859,12 +831,12 @@
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-locked"></use>
                             </svg>
-                            We Want to Hear From You! What Would You Like?
+                            Best Foreign Languge to Study?
                         </a></h6>
                     <div class="row align-items-center no-gutters hide-desktope">
                         <div class="col-11">
                             <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color06 tt-badge">movies</span></a></li>
+                                <li class="show-mobile"><a href="#"><span class="tt-color06 tt-badge">Languages</span></a></li>
                             </ul>
                         </div>
                         <div class="col-1 ml-auto show-mobile">
@@ -872,7 +844,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color06 tt-badge">movies</span></div>
+                <div class="tt-col-category"><span class="tt-color06 tt-badge">Languages</span></div>
                 <div class="tt-col-value hide-mobile">674</div>
                 <div class="tt-col-value tt-color-select  hide-mobile">29</div>
                 <div class="tt-col-value hide-mobile">1.3k</div>
@@ -886,14 +858,14 @@
                 </div>
                 <div class="tt-col-description">
                     <h6 class="tt-title"><a href="#">
-                            Seeking partner backend developer
+                    First Year at University Experiences?
                         </a></h6>
                     <div class="row align-items-center no-gutters">
                         <div class="col-11">
                             <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color03 tt-badge">exchange</span></a></li>
-                                <li><a href="#"><span class="tt-badge">themeforest</span></a></li>
-                                <li><a href="#"><span class="tt-badge">elements</span></a></li>
+                                <li class="show-mobile"><a href="#"><span class="tt-color03 tt-badge">University Life</span></a></li>
+                                <li><a href="#"><span class="tt-badge">Life</span></a></li>
+                                <li><a href="#"><span class="tt-badge">Events</span></a></li>
                             </ul>
                         </div>
                         <div class="col-1 ml-auto show-mobile">
@@ -901,7 +873,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color13 tt-badge">movies</span></div>
+                <div class="tt-col-category"><span class="tt-color13 tt-badge">University Life</span></div>
                 <div class="tt-col-value hide-mobile">278</div>
                 <div class="tt-col-value tt-color-select  hide-mobile">27</div>
                 <div class="tt-col-value hide-mobile">1.4k</div>
@@ -915,14 +887,14 @@
                 </div>
                 <div class="tt-col-description">
                     <h6 class="tt-title"><a href="#">
-                            Cannot customize my intro
+                            Scholarships
                         </a></h6>
                     <div class="row align-items-center no-gutters">
                         <div class="col-11">
                             <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color07 tt-badge">video games</span></a></li>
-                                <li><a href="#"><span class="tt-badge">videohive</span></a></li>
-                                <li><a href="#"><span class="tt-badge">photodune</span></a></li>
+                                <li class="show-mobile"><a href="#"><span class="tt-color07 tt-badge">Funds</span></a></li>
+                                <li><a href="#"><span class="tt-badge">Study Help</span></a></li>
+                                <li><a href="#"><span class="tt-badge">Recommendations</span></a></li>
                             </ul>
                         </div>
                         <div class="col-1 ml-auto show-mobile">
@@ -930,7 +902,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color07 tt-badge">video games</span></div>
+                <div class="tt-col-category"><span class="tt-color07 tt-badge">Funds</span></div>
                 <div class="tt-col-value hide-mobile">364</div>
                 <div class="tt-col-value tt-color-select  hide-mobile">36</div>
                 <div class="tt-col-value  hide-mobile">982</div>
@@ -947,12 +919,12 @@
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-verified"></use>
                             </svg>
-                            Microsoft Word and Power Point
+                            How do you actually study?
                         </a></h6>
                     <div class="row align-items-center no-gutters hide-desktope">
                         <div class="col-11">
                             <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color08 tt-badge">youtube</span></a></li>
+                                <li class="show-mobile"><a href="#"><span class="tt-color08 tt-badge">Study Advice</span></a></li>
                             </ul>
                         </div>
                         <div class="col-1 ml-auto show-mobile">
@@ -960,7 +932,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color08 tt-badge">youtube</span></div>
+                <div class="tt-col-category"><span class="tt-color08 tt-badge">Study Advice</span></div>
                 <div class="tt-col-value  hide-mobile">698</div>
                 <div class="tt-col-value tt-color-select  hide-mobile">78</div>
                 <div class="tt-col-value  hide-mobile">2.1k</div>

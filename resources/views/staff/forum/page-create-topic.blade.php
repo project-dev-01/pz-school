@@ -224,12 +224,12 @@
                 </div>
                 <div class="tt-col-description">
                     <h6 class="tt-title"><a href="#">
-                            Does Envato act against the authors of Envato markets?
+                            How do you actually study?
                         </a></h6>
                     <div class="row align-items-center no-gutters hide-desktope">
                         <div class="col-auto">
                             <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color05 tt-badge">music</span></a></li>
+                                <li class="show-mobile"><a href="#"><span class="tt-color05 tt-badge">Study Advice</span></a></li>
                             </ul>
                         </div>
                         <div class="col-auto ml-auto show-mobile">
@@ -237,7 +237,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color05 tt-badge">music</span></div>
+                <div class="tt-col-category"><span class="tt-color05 tt-badge">Study Advice</span></div>
                 <div class="tt-col-value hide-mobile">358</div>
                 <div class="tt-col-value tt-color-select hide-mobile">68</div>
                 <div class="tt-col-value hide-mobile">8.3k</div>
@@ -254,12 +254,12 @@
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-locked"></use>
                             </svg>
-                            We Want to Hear From You! What Would You Like?
+                            Scholarships
                         </a></h6>
                     <div class="row align-items-center no-gutters hide-desktope">
                         <div class="col-auto">
                             <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color06 tt-badge">movies</span></a></li>
+                                <li class="show-mobile"><a href="#"><span class="tt-color06 tt-badge">Funds</span></a></li>
                             </ul>
                         </div>
                         <div class="col-auto ml-auto show-mobile">
@@ -267,7 +267,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color06 tt-badge">movies</span></div>
+                <div class="tt-col-category"><span class="tt-color06 tt-badge">Funds</span></div>
                 <div class="tt-col-value hide-mobile">674</div>
                 <div class="tt-col-value tt-color-select  hide-mobile">29</div>
                 <div class="tt-col-value hide-mobile">1.3k</div>
@@ -281,14 +281,14 @@
                 </div>
                 <div class="tt-col-description">
                     <h6 class="tt-title"><a href="#">
-                            Seeking partner backend developer
+                    I want to start studying online either or open colleges and I don’t know which one is better
                         </a></h6>
                     <div class="row align-items-center no-gutters">
                         <div class="col-auto">
                             <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color03 tt-badge">exchange</span></a></li>
-                                <li><a href="#"><span class="tt-badge">themeforest</span></a></li>
-                                <li><a href="#"><span class="tt-badge">elements</span></a></li>
+                                <li class="show-mobile"><a href="#"><span class="tt-color03 tt-badge">Higher Studies</span></a></li>
+                                <li><a href="#"><span class="tt-badge">Study Advice</span></a></li>
+                                <li><a href="#"><span class="tt-badge">High school</span></a></li>
                             </ul>
                         </div>
                         <div class="col-auto ml-auto show-mobile">
@@ -296,7 +296,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color13 tt-badge">movies</span></div>
+                <div class="tt-col-category"><span class="tt-color13 tt-badge">Higher Studies</span></div>
                 <div class="tt-col-value hide-mobile">278</div>
                 <div class="tt-col-value tt-color-select  hide-mobile">27</div>
                 <div class="tt-col-value hide-mobile">1.4k</div>
@@ -310,14 +310,14 @@
                 </div>
                 <div class="tt-col-description">
                     <h6 class="tt-title"><a href="#">
-                            Cannot customize my intro
+                        Exam tips and preparations... the do's and don'ts of surviving exam period
                         </a></h6>
                     <div class="row align-items-center no-gutters">
                         <div class="col-auto">
                             <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color07 tt-badge">video games</span></a></li>
-                                <li><a href="#"><span class="tt-badge">videohive</span></a></li>
-                                <li><a href="#"><span class="tt-badge">photodune</span></a></li>
+                                <li class="show-mobile"><a href="#"><span class="tt-color07 tt-badge">Study Hacks</span></a></li>
+                                <li><a href="#"><span class="tt-badge">Study</span></a></li>
+                                <li><a href="#"><span class="tt-badge">Advice</span></a></li>
                             </ul>
                         </div>
                         <div class="col-auto ml-auto show-mobile">
@@ -325,7 +325,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color07 tt-badge">video games</span></div>
+                <div class="tt-col-category"><span class="tt-color07 tt-badge">Study Hacks</span></div>
                 <div class="tt-col-value hide-mobile">364</div>
                 <div class="tt-col-value tt-color-select  hide-mobile">36</div>
                 <div class="tt-col-value  hide-mobile">982</div>
@@ -342,12 +342,12 @@
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-verified"></use>
                             </svg>
-                            Microsoft Word and Power Point
+                            How to overcome test failure?
                         </a></h6>
                     <div class="row align-items-center no-gutters hide-desktope">
                         <div class="col-auto">
                             <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color08 tt-badge">youtube</span></a></li>
+                                <li class="show-mobile"><a href="#"><span class="tt-color08 tt-badge">Examinations</span></a></li>
                             </ul>
                         </div>
                         <div class="col-auto ml-auto show-mobile">
@@ -355,7 +355,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color08 tt-badge">youtube</span></div>
+                <div class="tt-col-category"><span class="tt-color08 tt-badge">Examinations</span></div>
                 <div class="tt-col-value  hide-mobile">698</div>
                 <div class="tt-col-value tt-color-select  hide-mobile">78</div>
                 <div class="tt-col-value  hide-mobile">2.1k</div>

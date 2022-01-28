@@ -6,7 +6,7 @@
             <div class="tt-innerwrapper tt-row">
                 <div class="tt-col-left">
                     <ul class="tt-list-badge">
-                        <li><a href="#"><span class="tt-color01 tt-badge">politics</span></a></li>
+                        <li><a href="#"><span class="tt-color01 tt-badge">Education</span></a></li>
                     </ul>
                 </div>
                 <div class="ml-left tt-col-right">
@@ -47,20 +47,16 @@
                 </div>
             </div>
             <div class="tt-innerwrapper">
-                Lets discuss about whats happening around the world politics.
+                Scholarships
             </div>
             <div class="tt-innerwrapper">
                 <h6 class="tt-title">Similar TAGS</h6>
                 <ul class="tt-list-badge">
-                    <li><a href="#"><span class="tt-badge">world politics</span></a></li>
-                    <li><a href="#"><span class="tt-badge">human rights</span></a></li>
-                    <li><a href="#"><span class="tt-badge">trump</span></a></li>
-                    <li><a href="#"><span class="tt-badge">climate change</span></a></li>
-                    <li><a href="#"><span class="tt-badge">foreign policy</span></a></li>
-                    <li><a href="#"><span class="tt-badge">world politics</span></a></li>
-                    <li><a href="#"><span class="tt-badge">human rights</span></a></li>
-                    <li><a href="#"><span class="tt-badge">trump</span></a></li>
-                    <li><a href="#"><span class="tt-badge">climate change</span></a></li>
+                    <li><a href="#"><span class="tt-badge">Scholarships</span></a></li>
+                    <li><a href="#"><span class="tt-badge">University Life</span></a></li>
+                    <li><a href="#"><span class="tt-badge">Study Advice</span></a></li>
+                    <li><a href="#"><span class="tt-badge">Study Hacks</span></a></li>
+                    <li><a href="#"><span class="tt-badge">Languages</span></a></li>          
                 </ul>
             </div>
         </div>
@@ -84,14 +80,14 @@
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-pinned"></use>
                             </svg>
-                            Halloween Costume Contest 2018
+                            Universities and courses
                         </a></h6>
                     <div class="row align-items-center no-gutters">
                         <div class="col-11">
                             <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">politics</span></a></li>
-                                <li><a href="#"><span class="tt-badge">contests</span></a></li>
-                                <li><a href="#"><span class="tt-badge">authors</span></a></li>
+                                <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">Education</span></a></li>
+                                <li><a href="#"><span class="tt-badge">Law</span></a></li>
+                                <li><a href="#"><span class="tt-badge">University</span></a></li>
                             </ul>
                         </div>
                         <div class="col-1 ml-auto show-mobile">
@@ -99,7 +95,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color01 tt-badge">politics</span></div>
+                <div class="tt-col-category"><span class="tt-color01 tt-badge">Education</span></div>
                 <div class="tt-col-value hide-mobile">985</div>
                 <div class="tt-col-value tt-color-select hide-mobile">502</div>
                 <div class="tt-col-value hide-mobile">15.1k</div>
@@ -116,12 +112,12 @@
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-locked"></use>
                             </svg>
-                            We’re removing Envato Credits from Market
+                            Moving interstate for University
                         </a></h6>
                     <div class="row align-items-center no-gutters hide-desktope">
                         <div class="col-11">
                             <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">politics</span></a></li>
+                                <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">Education</span></a></li>
                             </ul>
                         </div>
                         <div class="col-1 ml-auto show-mobile">
@@ -129,7 +125,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color01 tt-badge">politics</span></div>
+                <div class="tt-col-category"><span class="tt-color01 tt-badge">Education</span></div>
                 <div class="tt-col-value hide-mobile">584</div>
                 <div class="tt-col-value tt-color-select  hide-mobile">35</div>
                 <div class="tt-col-value hide-mobile">1.3k</div>
@@ -143,14 +139,14 @@
                 </div>
                 <div class="tt-col-description">
                     <h6 class="tt-title"><a href="#">
-                            Web Hosting Packages for ThemeForest WordPress
+                    Different choices for College
                         </a></h6>
                     <div class="row align-items-center no-gutters">
                         <div class="col-11">
                             <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">politics</span></a></li>
-                                <li><a href="#"><span class="tt-badge">themeforest</span></a></li>
-                                <li><a href="#"><span class="tt-badge">elements</span></a></li>
+                                <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">Education</span></a></li>
+                                <li><a href="#"><span class="tt-badge">Genetics</span></a></li>
+                                <li><a href="#"><span class="tt-badge">University</span></a></li>
                             </ul>
                         </div>
                         <div class="col-1 ml-auto show-mobile">
@@ -158,7 +154,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color01 tt-badge">politics</span></div>
+                <div class="tt-col-category"><span class="tt-color01 tt-badge">Education</span></div>
                 <div class="tt-col-value  hide-mobile">401</div>
                 <div class="tt-col-value tt-color-select  hide-mobile">975</div>
                 <div class="tt-col-value  hide-mobile">12.6k</div>
@@ -172,14 +168,14 @@
                 </div>
                 <div class="tt-col-description">
                     <h6 class="tt-title"><a href="#">
-                            Review Queue Changes for VideoHive & PhotoDune
+                    Don't know how to look for University
                         </a></h6>
                     <div class="row align-items-center no-gutters">
                         <div class="col-11">
                             <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">politics</span></a></li>
-                                <li><a href="#"><span class="tt-badge">videohive</span></a></li>
-                                <li><a href="#"><span class="tt-badge">photodune</span></a></li>
+                                <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">Education</span></a></li>
+                                <li><a href="#"><span class="tt-badge">University</span></a></li>
+                                <li><a href="#"><span class="tt-badge">Genetics</span></a></li>
                             </ul>
                         </div>
                         <div class="col-1 ml-auto show-mobile">
@@ -187,7 +183,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color01 tt-badge">politics</span></div>
+                <div class="tt-col-category"><span class="tt-color01 tt-badge">Education</span></div>
                 <div class="tt-col-value  hide-mobile">308</div>
                 <div class="tt-col-value tt-color-select  hide-mobile">660</div>
                 <div class="tt-col-value  hide-mobile">8.3k</div>
@@ -201,12 +197,12 @@
                 </div>
                 <div class="tt-col-description">
                     <h6 class="tt-title"><a href="#">
-                            Does Envato act against the authors of Envato markets?
+                    Should i take a student start up loan?
                         </a></h6>
                     <div class="row align-items-center no-gutters hide-desktope">
                         <div class="col-11">
                             <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">politics</span></a></li>
+                                <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">Education</span></a></li>
                             </ul>
                         </div>
                         <div class="col-1 ml-auto show-mobile">
@@ -214,7 +210,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color01 tt-badge">politics</span></div>
+                <div class="tt-col-category"><span class="tt-color01 tt-badge">Education</span></div>
                 <div class="tt-col-value hide-mobile">358</div>
                 <div class="tt-col-value tt-color-select hide-mobile">68</div>
                 <div class="tt-col-value hide-mobile">8.3k</div>
@@ -231,12 +227,12 @@
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-locked"></use>
                             </svg>
-                            We Want to Hear From You! What Would You Like?
+                            Don't know what to study in university
                         </a></h6>
                     <div class="row align-items-center no-gutters hide-desktope">
                         <div class="col-11">
                             <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">politics</span></a></li>
+                                <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">Education</span></a></li>
                             </ul>
                         </div>
                         <div class="col-1 ml-auto show-mobile">
@@ -244,245 +240,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color01 tt-badge">politics</span></div>
+                <div class="tt-col-category"><span class="tt-color01 tt-badge">Education</span></div>
                 <div class="tt-col-value hide-mobile">671</div>
                 <div class="tt-col-value tt-color-select  hide-mobile">29</div>
                 <div class="tt-col-value hide-mobile">1.3k</div>
                 <div class="tt-col-value hide-mobile">2d</div>
-            </div>
-            <div class="tt-item">
-                <div class="tt-col-avatar">
-                    <svg class="tt-icon">
-                        <use xlink:href="#icon-ava-t"></use>
-                    </svg>
-                </div>
-                <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                            Cannot customize my intro
-                        </a></h6>
-                    <div class="row align-items-center no-gutters">
-                        <div class="col-11">
-                            <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">politics</span></a></li>
-                                <li><a href="#"><span class="tt-badge">videohive</span></a></li>
-                                <li><a href="#"><span class="tt-badge">photodune</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-1 ml-auto show-mobile">
-                            <div class="tt-value">2d</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tt-col-category"><span class="tt-color01 tt-badge">politics</span></div>
-                <div class="tt-col-value hide-mobile">364</div>
-                <div class="tt-col-value tt-color-select  hide-mobile">36</div>
-                <div class="tt-col-value  hide-mobile">982</div>
-                <div class="tt-col-value hide-mobile">2d</div>
-            </div>
-            <div class="tt-item">
-                <div class="tt-col-avatar">
-                    <svg class="tt-icon">
-                        <use xlink:href="#icon-ava-k"></use>
-                    </svg>
-                </div>
-                <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                            <svg class="tt-icon">
-                                <use xlink:href="#icon-verified"></use>
-                            </svg>
-                            Microsoft Word and Power Point
-                        </a></h6>
-                    <div class="row align-items-center no-gutters hide-desktope">
-                        <div class="col-11">
-                            <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">politics</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-1 ml-auto show-mobile">
-                            <div class="tt-value">3d</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tt-col-category"><span class="tt-color01 tt-badge">politics</span></div>
-                <div class="tt-col-value  hide-mobile">698</div>
-                <div class="tt-col-value tt-color-select  hide-mobile">78</div>
-                <div class="tt-col-value  hide-mobile">2.1k</div>
-                <div class="tt-col-value hide-mobile">3d</div>
-            </div>
-            <div class="tt-item">
-                <div class="tt-col-avatar">
-                    <svg class="tt-icon">
-                        <use xlink:href="#icon-ava-v"></use>
-                    </svg>
-                </div>
-                <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                            First website template got rejected.
-                        </a></h6>
-                    <div class="row align-items-center no-gutters hide-desktope">
-                        <div class="col-11">
-                            <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">politics</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-1 ml-auto show-mobile">
-                            <div class="tt-value">3d</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tt-col-category"><span class="tt-color01 tt-badge">politics</span></div>
-                <div class="tt-col-value  hide-mobile">12</div>
-                <div class="tt-col-value tt-color-select  hide-mobile">3</div>
-                <div class="tt-col-value  hide-mobile">268</div>
-                <div class="tt-col-value hide-mobile">3d</div>
-            </div>
-            <div class="tt-item">
-                <div class="tt-col-avatar">
-                    <svg class="tt-icon">
-                        <use xlink:href="#icon-ava-k"></use>
-                    </svg>
-                </div>
-                <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                            <svg class="tt-icon">
-                                <use xlink:href="#icon-pinned"></use>
-                            </svg>
-                            Proform or looking for contacting billing department
-                        </a></h6>
-                    <div class="row align-items-center no-gutters">
-                        <div class="col-11">
-                            <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">politics</span></a></li>
-                                <li><a href="#"><span class="tt-badge">contests</span></a></li>
-                                <li><a href="#"><span class="tt-badge">authors</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-1 ml-auto show-mobile">
-                            <div class="tt-value">3d</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tt-col-category"><span class="tt-color01 tt-badge">politics</span></div>
-                <div class="tt-col-value hide-mobile">274</div>
-                <div class="tt-col-value tt-color-select hide-mobile">114</div>
-                <div class="tt-col-value  hide-mobile">2.3k</div>
-                <div class="tt-col-value hide-mobile">3d</div>
-            </div>
-            <div class="tt-item">
-                <div class="tt-col-avatar">
-                    <svg class="tt-icon">
-                        <use xlink:href="#icon-ava-y"></use>
-                    </svg>
-                </div>
-                <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                            <svg class="tt-icon">
-                                <use xlink:href="#icon-locked"></use>
-                            </svg>
-                            Refund for wrongly purchase HTML template
-                        </a></h6>
-                    <div class="row align-items-center no-gutters hide-desktope">
-                        <div class="col-11">
-                            <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">politics</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-1 ml-auto show-mobile">
-                            <div class="tt-value">3d</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tt-col-category"><span class="tt-color01 tt-badge">politics</span></div>
-                <div class="tt-col-value hide-mobile">657</div>
-                <div class="tt-col-value tt-color-select hide-mobile">177</div>
-                <div class="tt-col-value hide-mobile">2.6k</div>
-                <div class="tt-col-value hide-mobile">3d</div>
-            </div>
-            <div class="tt-item">
-                <div class="tt-col-avatar">
-                    <svg class="tt-icon">
-                        <use xlink:href="#icon-ava-s"></use>
-                    </svg>
-                </div>
-                <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                            Why all my affiliate balance is pending?
-                        </a></h6>
-                    <div class="row align-items-center no-gutters">
-                        <div class="col-11">
-                            <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">politics</span></a></li>
-                                <li><a href="#"><span class="tt-badge">themeforest</span></a></li>
-                                <li><a href="#"><span class="tt-badge">elements</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-1 ml-auto show-mobile">
-                            <div class="tt-value">4d</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tt-col-category"><span class="tt-color01 tt-badge">politics</span></div>
-                <div class="tt-col-value hide-mobile">37</div>
-                <div class="tt-col-value tt-color-select hide-mobile">31</div>
-                <div class="tt-col-value hide-mobile">257</div>
-                <div class="tt-col-value hide-mobile">4d</div>
-            </div>
-            <div class="tt-item">
-                <div class="tt-col-avatar">
-                    <svg class="tt-icon">
-                        <use xlink:href="#icon-ava-l"></use>
-                    </svg>
-                </div>
-                <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                            Google snippets wordpress plugin
-                        </a></h6>
-                    <div class="row align-items-center no-gutters">
-                        <div class="col-11">
-                            <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">politics</span></a></li>
-                                <li><a href="#"><span class="tt-badge">videohive</span></a></li>
-                                <li><a href="#"><span class="tt-badge">photodune</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-1 ml-auto show-mobile">
-                            <div class="tt-value">4d</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tt-col-category"><span class="tt-color01 tt-badge">politics</span></div>
-                <div class="tt-col-value hide-mobile">987</div>
-                <div class="tt-col-value tt-color-select hide-mobile">271</div>
-                <div class="tt-col-value hide-mobile">3.8k</div>
-                <div class="tt-col-value hide-mobile">4d</div>
-            </div>
-            <div class="tt-item">
-                <div class="tt-col-avatar">
-                    <svg class="tt-icon">
-                        <use xlink:href="#icon-ava-n"></use>
-                    </svg>
-                </div>
-                <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                            How to use Team Listing?
-                        </a></h6>
-                    <div class="row align-items-center no-gutters hide-desktope">
-                        <div class="col-11">
-                            <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">politics</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-1 ml-auto show-mobile">
-                            <div class="tt-value">5d</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tt-col-category"><span class="tt-color01 tt-badge">politics</span></div>
-                <div class="tt-col-value hide-mobile">324</div>
-                <div class="tt-col-value tt-color-select hide-mobile">163</div>
-                <div class="tt-col-value hide-mobile">2.3k</div>
-                <div class="tt-col-value hide-mobile">5d</div>
-            </div>
+            </div>          
             <div class="tt-row-btn">
                 <button type="button" class="btn-icon js-topiclist-showmore">
                     <svg class="tt-icon">
