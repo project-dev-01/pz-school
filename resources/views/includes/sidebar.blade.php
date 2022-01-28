@@ -1368,33 +1368,11 @@
                 </li>
                 @elseif(Session::get('role_id') == '5')
                 <li>
-                <a href="#dashboard" data-toggle="collapse">
-                        <i class="icons icon-grid"></i>
-                        <span> Dashboard </span>
-                        <span class="menu-arrow"></span>
+                    <a href="{{ route('parent.dashboard')}}" class="nav-link {{ (request()->is('parent/dashboard')) ? 'active' : '' }}">
+                    <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
                     </a>
-                    <div class="collapse" id="dashboard">
-                        <ul class="nav-second-level">
-                            
-                            <li>
-                                <a href="{{ route('parent.children')}}" class="nav-link {{ (request()->is('parent/children')) ? 'active' : '' }}">
-                                <i class="fab fa-slideshare"></i>
-                                
-                                    <span>My Children</span>
-                                </a>
-                            </li> 
-                            @if(Session::get('children_id'))
-                            <li>
-                                <a href="{{ route('parent.dashboard')}}" class="nav-link {{ (request()->is('parent/dashboard')) ? 'active' : '' }}">
-                                <i class="fas fa-tachometer-alt"></i>
-                                    <span>Dashboard</span>
-                                </a>
-                            </li>
-                            @endif
-                        </ul>
-                    </div>
-                </li>    
-                @if(Session::get('children_id'))                
+                </li>           
                 <li>
                     <a href="{{ route('parent.exam.schedule')}}" class="nav-link {{ (request()->is('parent/exam*')) ? 'active' : '' }}">
                         <i class="fas fa-dna"></i> 
@@ -1498,7 +1476,6 @@
                         <span> FAQs </span>
                     </a>
                 </li>
-                @endif
                 @elseif(Session::get('role_id') == '6')
                 <li>
                     <a href="{{ route('student.dashboard')}}" class="nav-link {{ (request()->is('student/dashboard*')) ? 'active' : '' }}">

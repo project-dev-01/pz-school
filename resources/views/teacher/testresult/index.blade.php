@@ -108,41 +108,48 @@
                                                 </tr>
                                                 
                                             </thead>
+                                            <tbody>
+                                                
                                                 <tr>
                                                     <td>1</td>
                                                     <td>Amirtha</td>
-                                                    <td>90</td>
-                                                    <td>S</td>
+                                                    <td><input type="text" value="90" class="form-control"></td>
+                                                    <td><input type="text" value="S" class="form-control" readonly></td>
                                                     <td>1</td>
-                                                    <td></td>
+                                                    <td><input type="text" value="" class="form-control" readonly></td>
                                                 </tr>
                                                 <tr>
                                                     <td>2</td>
                                                     <td>Vimal</td>
-                                                    <td>85</td>
-                                                    <td>A</td>
+                                                    <td><input type="text" value="85" class="form-control"></td>
+                                                    <td><input type="text" value="A" class="form-control" readonly></td>
                                                     <td>2</td>
-                                                    <td></td>
+                                                    <td><input type="text" value="" class="form-control" readonly></td>
                                                 </tr>
                                                 <tr>
                                                     <td>3</td>
                                                     <td>Krishna</td>
-                                                    <td>78</td>
-                                                    <td>B</td>
+                                                    <td><input type="text" value="78" class="form-control"></td>
+                                                    <td><input type="text" value="B" class="form-control" readonly></td>
                                                     <td>3</td>
-                                                    <td></td>
+                                                    <td><input type="text" value="" class="form-control" readonly></td>
                                                 </tr>
                                                 <tr>
                                                     <td>4</td>
                                                     <td>Vishnu Priya</td>
-                                                    <td>70</td>
-                                                    <td>C</td>
+                                                    <td><input type="text" value="70" class="form-control"></td>
+                                                    <td><input type="text" value="C" class="form-control" readonly></td>
                                                     <td>4</td>
-                                                    <td></td>
+                                                    <td><input type="text" value="" class="form-control" readonly></td>
                                                 </tr>
-                                            <tbody>
                                             </tbody>
                                         </table>
+                                        
+                                        <div class="form-group text-right m-b-0">
+                                            <button class="btn btn-primary-bl waves-effect waves-light" id="branch-filter" type="button">
+                                                Save
+                                            </button>
+                                        </div>
                                     </div> <!-- end table-responsive-->
 
                                 </div> <!-- end card body-->
@@ -201,63 +208,70 @@
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Student Name</th>
-                                                    <th>Test A Score</th>
-                                                    <th>Test B Score</th>
-                                                    <th>Test C Score</th>
-                                                    <th>Test D Score</th>
+                                                    <th>Test A Score(0.2)</th>
+                                                    <th>Test B Score(0.2)</th>
+                                                    <th>Test C Score(0.25)</th>
+                                                    <th>Test D Score(0.35)</th>
                                                     <th>Total Score</th>
                                                     <th>Grade</th>
                                                     <th>Ranking</th>
                                                 </tr>
                                                 
                                             </thead>
+                                                
+                                            <tbody>
                                                 <tr>
                                                     <td>1</td>
                                                     <td>Amirtha</td>
-                                                    <td>90</td>
-                                                    <td>80</td>
-                                                    <td>95</td>
-                                                    <td>85</td>
+                                                    <td><input type="text" value="90" class="form-control"></td>
+                                                    <td><input type="text" value="80" class="form-control"></td>
+                                                    <td><input type="text" value="95" class="form-control"></td>
+                                                    <td><input type="text" value="85" class="form-control"></td>
                                                     <td>350</td>
-                                                    <td>S</td>
+                                                    <td><input type="text" value="S" class="form-control" readonly></td>
                                                     <td>1</td>
                                                 </tr>
                                                 <tr>
                                                     <td>2</td>
                                                     <td>Vimal</td>
-                                                    <td>85</td>
-                                                    <td>80</td>
-                                                    <td>90</td>
-                                                    <td>80</td>
+                                                    <td><input type="text" value="85" class="form-control"></td>
+                                                    <td><input type="text" value="80" class="form-control"></td>
+                                                    <td><input type="text" value="90" class="form-control"></td>
+                                                    <td><input type="text" value="80" class="form-control"></td>
                                                     <td>335</td>
-                                                    <td>A</td>
+                                                    <td><input type="text" value="A" class="form-control" readonly></td>
                                                     <td>2</td>
                                                 </tr>
                                                 <tr>
                                                     <td>3</td>
                                                     <td>Krishna</td>
-                                                    <td>75</td>
-                                                    <td>70</td>
-                                                    <td>75</td>
-                                                    <td>70</td>
+                                                    <td><input type="text" value="75" class="form-control"></td>
+                                                    <td><input type="text" value="70" class="form-control"></td>
+                                                    <td><input type="text" value="75" class="form-control"></td>
+                                                    <td><input type="text" value="70" class="form-control"></td>
                                                     <td>300</td>
-                                                    <td>B</td>
+                                                    <td><input type="text" value="B" class="form-control" readonly></td>
                                                     <td>3</td>
                                                 </tr>
                                                 <tr>
                                                     <td>4</td>
                                                     <td>Vishnu Priya</td>
-                                                    <td>70</td>
-                                                    <td>70</td>
-                                                    <td>70</td>
-                                                    <td>70</td>
+                                                    <td><input type="text" value="70" class="form-control"></td>
+                                                    <td><input type="text" value="70" class="form-control"></td>
+                                                    <td><input type="text" value="70" class="form-control"></td>
+                                                    <td><input type="text" value="70" class="form-control"></td>
                                                     <td>280</td>
-                                                    <td>C</td>
+                                                    <td><input type="text" value="C" class="form-control" readonly></td>
                                                     <td>4</td>
                                                 </tr>
-                                            <tbody>
                                             </tbody>
+                                            
                                         </table>
+                                        <div class="form-group text-right m-b-0">
+                                            <button class="btn btn-primary-bl waves-effect waves-light" id="branch-filter" type="button">
+                                                Save
+                                            </button>
+                                        </div>
                                     </div> <!-- end table-responsive-->
 
                                 </div> <!-- end card body-->

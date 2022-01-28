@@ -3,12 +3,35 @@
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-right mb-0">
 
+            @if(Session::get('role_id') == '5')
+
+            <li class="dropdown notification-list topbar-dropdown">
+                
+                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    
+                    My Children :
+                </a>
+            </li>
+            <li class="dropdown d-none d-lg-inline-block">
+                    <div class="form-group ">
+                        <label class="control-label"></label>
+                        <select class="form-control custom-select" name="category" id="event-category" required>
+                            <!-- <option disabled >Select Children</option> -->
+                            <option Selected>David Jones</option>
+                            <option >Peter Parker</option>
+                        </select>
+                        <div class="invalid-feedback">Please select a valid event category</div>
+                    </div>
+                </li>
+            
+            @endif
             <li class="dropdown d-none d-lg-inline-block">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="fullscreen" href="#">
                     <i class="fe-maximize noti-icon"></i>
                 </a>
             </li>
-
+           
+           
             <li class="dropdown notification-list topbar-dropdown">
                 <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <img src="{{ Session::get('picture') && asset('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" alt="user-image" class="rounded-circle admin_picture">

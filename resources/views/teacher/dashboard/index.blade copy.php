@@ -41,7 +41,7 @@
                                                             <div class="row justify-content-sm-between task-item">
                                                                 <div class="col-lg-6 mb-2">
                                                                     <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input taskListDashboard" id="task1">
+                                                                        <input type="checkbox" class="custom-control-input" id="task1">
                                                                         <label class="custom-control-label" for="task1">
                                                                             Half Yearly Exam
                                                                         </label>
@@ -92,7 +92,7 @@
                                                                 <div class="row justify-content-sm-between task-item">
                                                                     <div class="col-lg-6 mb-2">
                                                                         <div class="custom-control custom-checkbox">
-                                                                            <input type="checkbox" class="custom-control-input taskListDashboard" id="task4">
+                                                                            <input type="checkbox" class="custom-control-input" id="task4">
                                                                             <label class="custom-control-label" for="task4">
                                                                                 Sports Day
                                                                             </label>
@@ -290,6 +290,7 @@
                     </div> <!-- end modal-content-->
                 </div> <!-- end modal dialog-->
             </div>
+            <!-- end modal-->
         </div>
         <!-- end col-12 -->
     </div> <!-- end row -->
@@ -533,7 +534,6 @@
             </div> <!-- end card-->
         </div> <!-- end col -->
     </div>
-    @include('teacher.dashboard.check_list')
 
 </div> <!-- container -->
 @endsection
