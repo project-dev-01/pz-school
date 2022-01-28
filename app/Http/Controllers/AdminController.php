@@ -974,4 +974,8 @@ class AdminController extends Controller
     {
         return view('admin.faq.index');
     }
+    public function taskIndex()
+    {
+        return view('admin.task.index');
+    }
 }

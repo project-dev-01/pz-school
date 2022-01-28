@@ -392,7 +392,8 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         
         // faq        
         Route::get('faq/index', [AdminController::class, 'faqIndex'])->name('admin.faq.index'); 
-
+        //Task routes
+        Route::get('task/index', [AdminController::class, 'taskIndex'])->name('admin.task');
         // static page routes end
         // Settings
         // Route::get('settings', [AdminController::class, 'settings'])->name('admin.settings');
@@ -544,6 +545,9 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('attendance/employee_entry', [StaffController::class, 'employeeEntry'])->name('staff.attendance.employee_entry');
         Route::get('attendance/exam_entry', [StaffController::class, 'examEntry'])->name('staff.attendance.exam_entry');
 
+        //Task routes
+        Route::get('task/index', [StaffController::class, 'taskIndex'])->name('staff.task');
+
     });
 // TEACHER CONTROLLER START
     Route::group(['prefix' => 'teacher', 'middleware' => ['isTeacher']], function () {
@@ -587,6 +591,11 @@ Route::group(['prefix' => 'schoolcrm'], function () {
          Route::get('faq/index', [TeacherController::class, 'faqIndex'])->name('teacher.faq.Index');      
          // class room management    
          Route::get('classroom/classroom-management', [TeacherController::class, 'classroomManagement'])->name('teacher.classroom.management');
+        // chat app    
+        Route::get('chat', [TeacherController::class, 'chatShow'])->name('teacher.chat');
+        //Task routes
+        Route::get('task/index', [TeacherController::class, 'taskIndex'])->name('teacher.task');
+         
     });
      
     // TEACHER CONTROLLER END
@@ -637,6 +646,9 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('homework/homeworklist', [ParentController::class, 'homeworklist'])->name('parent.homework');
          // Children routes
          Route::get('children', [ParentController::class, 'children'])->name('parent.children');
+         // chat app    
+         Route::get('chat', [ParentController::class, 'chatShow'])->name('parent.chat');
+
     });
 
 

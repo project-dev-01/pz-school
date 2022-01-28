@@ -979,5 +979,9 @@ class StaffController extends Controller
     {
         return view('staff.student.student');
     }
+    public function taskIndex()
+    {
+        return view('staff.task.index');
+    }
     // faq screen pages end
 }

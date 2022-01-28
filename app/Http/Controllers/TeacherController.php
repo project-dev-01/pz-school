@@ -98,7 +98,14 @@ class TeacherController extends Controller
     {
         return view('teacher.testresult.index');
     }
-    
+    public function chatShow()
+    {
+        return view('teacher.chat.index');
+    }
+    public function taskIndex()
+    {
+        return view('teacher.task.index');
+    }
     // static page controller end
 
 

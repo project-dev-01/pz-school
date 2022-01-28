@@ -114,5 +114,9 @@ class ParentController extends Controller
         }
         return view('parent.dashboard.children');
      }
+     public function chatShow()
+    {
+        return view('parent.chat.index');
+    }
      
 }
