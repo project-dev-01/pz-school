@@ -222,6 +222,14 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::get('timetable/set_examwise', [SuperAdminController::class, 'timeTableSetExamWise'])->name('super_admin.timetable.set_examwise');
         // exam marks
         Route::get('exam/mark_entry', [SuperAdminController::class, 'markEntry'])->name('super_admin.exam.mark_entry');
+        // exam Result Group 
+        Route::get('exam_results/byclass', [SuperAdminController::class, 'byclasss'])->name('super_admin.exam_results.byclass');
+
+        Route::get('exam_results/bysubject', [SuperAdminController::class, 'bysubject'])->name('super_admin.exam_results.bysubject');
+
+        Route::get('exam_results/overall', [SuperAdminController::class, 'overall'])->name('super_admin.exam_results.overall');
+        
+        
         // static page routes end
     });
 });
@@ -596,6 +604,12 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('chat', [TeacherController::class, 'chatShow'])->name('teacher.chat');
         //Task routes
         Route::get('task/index', [TeacherController::class, 'taskIndex'])->name('teacher.task');
+
+             // exam Result Group 
+        Route::get('exam_results/byclass', [TeacherController::class, 'byclasss'])->name('teacher.exam_results.byclass');
+
+        Route::get('exam_results/bysubject', [TeacherController::class, 'bysubject'])->name('teacher.exam_results.bysubject');
+     
          
     });
      

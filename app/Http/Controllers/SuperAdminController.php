@@ -1485,6 +1485,18 @@ class SuperAdminController extends Controller
     {
         return view('super_admin.exam_marks.mark_entry');
     }
+    public function byclasss()
+    {
+        return view('super_admin.exam_results.byclass');
+    }
+    public function bysubject()
+    {
+        return view('super_admin.exam_results.bysubject');
+    }
+    public function overall()
+    {
+        return view('super_admin.exam_results.overall');
+    }
     
     // static page controller end
     

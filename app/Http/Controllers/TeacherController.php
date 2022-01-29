@@ -112,6 +112,14 @@ class TeacherController extends Controller
     {
         return view('teacher.attendance.index');
     }
+    public function byclasss()
+    {
+        return view('teacher.exam_results.byclass');
+    }
+    public function bysubject()
+    {
+        return view('teacher.exam_results.bysubject');
+    }
     
 
 }
