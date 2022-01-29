@@ -1319,6 +1319,11 @@
                     <div class="collapse" id="sidebarAttendance">
                         <ul class="nav-second-level">
                             <li>
+                                <a href="{{ route('teacher.attendance.list')}}" class="nav-link {{ (request()->is('teacher/attendance/list')) ? 'active' : '' }}">
+                                    <span> List </span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('teacher.attendance.student_entry')}}" class="nav-link {{ (request()->is('teacher/attendance/student_entry')) ? 'active' : '' }}">
                                     <span> Student </span>
                                 </a>

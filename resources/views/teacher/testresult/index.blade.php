@@ -96,15 +96,15 @@
                                         </div>
                                     </form>
                                     <div class="table-responsive">
-                                        <table class="table w-100 nowrap" id="">
+                                        <table class="table table-striped table-centered " WIDTH="100%">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Student Name</th>
-                                                    <th>Score</th>
-                                                    <th>Grade</th>
-                                                    <th>Ranking</th>
-                                                    <th>Memo</th>
+                                                    <th WIDTH="20%">Student Name</th>
+                                                    <th WIDTH="20%">Score</th>
+                                                    <th WIDTH="20%">Grade</th>
+                                                    <th WIDTH="10%">Ranking</th>
+                                                    <th WIDTH="30%">Memo</th>
                                                 </tr>
                                                 
                                             </thead>
@@ -112,39 +112,170 @@
                                                 
                                                 <tr>
                                                     <td>1</td>
-                                                    <td>Amirtha</td>
-                                                    <td><input type="text" value="90" class="form-control"></td>
-                                                    <td><input type="text" value="S" class="form-control" readonly></td>
+                                                    <td><b>William</b></td>
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <input type="text" value="90" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <input type="text" value="S" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                     <td>1</td>
-                                                    <td><input type="text" value="" class="form-control" readonly></td>
+                                                    <td><input type="text" value="Excellent" class="form-control" ></td>
                                                 </tr>
                                                 <tr>
                                                     <td>2</td>
-                                                    <td>Vimal</td>
-                                                    <td><input type="text" value="85" class="form-control"></td>
-                                                    <td><input type="text" value="A" class="form-control" readonly></td>
+                                                    <td><b>James</b></td>
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <input type="text" value="85" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <input type="text" value="A" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                     <td>2</td>
-                                                    <td><input type="text" value="" class="form-control" readonly></td>
+                                                    <td><input type="text" value="Good" class="form-control" ></td>
                                                 </tr>
                                                 <tr>
                                                     <td>3</td>
-                                                    <td>Krishna</td>
-                                                    <td><input type="text" value="78" class="form-control"></td>
-                                                    <td><input type="text" value="B" class="form-control" readonly></td>
+                                                    <td><b>Benjamin</b></td>
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <input type="text" value="78" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <input type="text" value="B" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                     <td>3</td>
-                                                    <td><input type="text" value="" class="form-control" readonly></td>
+                                                    <td><input type="text" value="Better" class="form-control" ></td>
                                                 </tr>
                                                 <tr>
                                                     <td>4</td>
-                                                    <td>Vishnu Priya</td>
-                                                    <td><input type="text" value="70" class="form-control"></td>
-                                                    <td><input type="text" value="C" class="form-control" readonly></td>
+                                                    <td><b>Charlotte Isabella</b></td>
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <input type="text" value="70" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <input type="text" value="C" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                     <td>4</td>
-                                                    <td><input type="text" value="" class="form-control" readonly></td>
+                                                    <td><input type="text" value="Need Improvement" class="form-control" ></td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                         
+                                        <div class="form-group text-right m-b-0">
+                                            <button class="btn btn-primary-bl waves-effect waves-light" id="branch-filter" type="button">
+                                                Save
+                                            </button>
+                                        </div>
+                                    </div> <!-- end table-responsive-->
+                                </div> <!-- end card body-->
+                            </div> <!-- end card -->
+                        </div><!-- end col-->
+                    </div>
+
+                    <span data-feather="book-open" class="icon-dual" id="span-parent"></span>
+                    <span class="header-title mb-3" id="span-parent">Total Marks 
+                    <hr id="hr"></span>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped mb-0 table-centered " >
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Student Name</th>
+                                                    <th>Test A Score(0.2)</th>
+                                                    <th>Test B Score(0.2)</th>
+                                                    <th>Test C Score(0.25)</th>
+                                                    <th>Test D Score(0.35)</th>
+                                                    <th>Total Score</th>
+                                                    <th>Grade</th>
+                                                    <th>Ranking</th>
+                                                </tr>
+                                                
+                                            </thead>
+                                                
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td><b>William</b></td>
+                                                    <td><input type="text" value="90" class="form-control"></td>
+                                                    <td><input type="text" value="80" class="form-control"></td>
+                                                    <td><input type="text" value="95" class="form-control"></td>
+                                                    <td><input type="text" value="85" class="form-control"></td>
+                                                    <td>350</td>
+                                                    <td><input type="text" value="S" class="form-control" readonly></td>
+                                                    <td>1</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td><b>James</b></td>
+                                                    <td><input type="text" value="85" class="form-control"></td>
+                                                    <td><input type="text" value="80" class="form-control"></td>
+                                                    <td><input type="text" value="90" class="form-control"></td>
+                                                    <td><input type="text" value="80" class="form-control"></td>
+                                                    <td>335</td>
+                                                    <td><input type="text" value="A" class="form-control" readonly></td>
+                                                    <td>2</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td><b>Benjamin</b></td>
+                                                    <td><input type="text" value="75" class="form-control"></td>
+                                                    <td><input type="text" value="70" class="form-control"></td>
+                                                    <td><input type="text" value="75" class="form-control"></td>
+                                                    <td><input type="text" value="70" class="form-control"></td>
+                                                    <td>300</td>
+                                                    <td><input type="text" value="B" class="form-control" readonly></td>
+                                                    <td>3</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td><b>Charlotte Isabella</b></td>
+                                                    <td><input type="text" value="70" class="form-control"></td>
+                                                    <td><input type="text" value="70" class="form-control"></td>
+                                                    <td><input type="text" value="70" class="form-control"></td>
+                                                    <td><input type="text" value="70" class="form-control"></td>
+                                                    <td>280</td>
+                                                    <td><input type="text" value="C" class="form-control" readonly></td>
+                                                    <td>4</td>
+                                                </tr>
+                                            </tbody>
+                                            
+                                        </table>
                                         <div class="form-group text-right m-b-0">
                                             <button class="btn btn-primary-bl waves-effect waves-light" id="branch-filter" type="button">
                                                 Save
@@ -156,7 +287,6 @@
                             </div> <!-- end card -->
                         </div><!-- end col-->
                     </div>
-
                     <span data-feather="bar-chart-2" class="icon-dual" id="span-parent"></span>
                     <span class="header-title mb-3" id="span-parent">Scores by Graph
                     <hr id="hr"></span>
@@ -193,91 +323,7 @@
                             </div> <!-- end card-->
                         </div> <!-- end col-->
                     </div> 
-
-                    <span data-feather="book-open" class="icon-dual" id="span-parent"></span>
-                    <span class="header-title mb-3" id="span-parent">Total Marks 
-                    <hr id="hr"></span>
                     
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table w-100 nowrap" id="">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Student Name</th>
-                                                    <th>Test A Score(0.2)</th>
-                                                    <th>Test B Score(0.2)</th>
-                                                    <th>Test C Score(0.25)</th>
-                                                    <th>Test D Score(0.35)</th>
-                                                    <th>Total Score</th>
-                                                    <th>Grade</th>
-                                                    <th>Ranking</th>
-                                                </tr>
-                                                
-                                            </thead>
-                                                
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Amirtha</td>
-                                                    <td><input type="text" value="90" class="form-control"></td>
-                                                    <td><input type="text" value="80" class="form-control"></td>
-                                                    <td><input type="text" value="95" class="form-control"></td>
-                                                    <td><input type="text" value="85" class="form-control"></td>
-                                                    <td>350</td>
-                                                    <td><input type="text" value="S" class="form-control" readonly></td>
-                                                    <td>1</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Vimal</td>
-                                                    <td><input type="text" value="85" class="form-control"></td>
-                                                    <td><input type="text" value="80" class="form-control"></td>
-                                                    <td><input type="text" value="90" class="form-control"></td>
-                                                    <td><input type="text" value="80" class="form-control"></td>
-                                                    <td>335</td>
-                                                    <td><input type="text" value="A" class="form-control" readonly></td>
-                                                    <td>2</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Krishna</td>
-                                                    <td><input type="text" value="75" class="form-control"></td>
-                                                    <td><input type="text" value="70" class="form-control"></td>
-                                                    <td><input type="text" value="75" class="form-control"></td>
-                                                    <td><input type="text" value="70" class="form-control"></td>
-                                                    <td>300</td>
-                                                    <td><input type="text" value="B" class="form-control" readonly></td>
-                                                    <td>3</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Vishnu Priya</td>
-                                                    <td><input type="text" value="70" class="form-control"></td>
-                                                    <td><input type="text" value="70" class="form-control"></td>
-                                                    <td><input type="text" value="70" class="form-control"></td>
-                                                    <td><input type="text" value="70" class="form-control"></td>
-                                                    <td>280</td>
-                                                    <td><input type="text" value="C" class="form-control" readonly></td>
-                                                    <td>4</td>
-                                                </tr>
-                                            </tbody>
-                                            
-                                        </table>
-                                        <div class="form-group text-right m-b-0">
-                                            <button class="btn btn-primary-bl waves-effect waves-light" id="branch-filter" type="button">
-                                                Save
-                                            </button>
-                                        </div>
-                                    </div> <!-- end table-responsive-->
-
-                                </div> <!-- end card body-->
-                            </div> <!-- end card -->
-                        </div><!-- end col-->
-                    </div>
 
                     <span data-feather="activity" class="icon-dual" id="span-parent"></span>
                     <span class="header-title mb-3" id="span-parent">Graphs

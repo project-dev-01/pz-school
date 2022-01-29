@@ -17,8 +17,8 @@
                         <label class="control-label"></label>
                         <select class="form-control custom-select" name="category" id="event-category" required>
                             <!-- <option disabled >Select Children</option> -->
-                            <option Selected>David Jones</option>
-                            <option >Peter Parker</option>
+                            <option Selected>Benjamin</option>
+                            <option >Charlotte Isabella</option>
                         </select>
                         <div class="invalid-feedback">Please select a valid event category</div>
                     </div>

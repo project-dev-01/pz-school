@@ -45,6 +45,8 @@
     <!-- button link  -->
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css"> -->
     
+    <link href="{{ asset('libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css" />
+    
     <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
     

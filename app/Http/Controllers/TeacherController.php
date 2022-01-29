@@ -108,5 +108,10 @@ class TeacherController extends Controller
     }
     // static page controller end
 
+    public function attendanceList()
+    {
+        return view('teacher.attendance.index');
+    }
+    
 
 }

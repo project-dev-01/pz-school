@@ -565,6 +565,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         // Attendance routes
         Route::get('attendance/student_entry', [TeacherController::class, 'studentEntry'])->name('teacher.attendance.student_entry');
         Route::get('attendance/exam_entry', [TeacherController::class, 'examEntry'])->name('teacher.attendance.exam_entry');
+        Route::get('attendance/list', [TeacherController::class, 'attendanceList'])->name('teacher.attendance.list');
         // Homework routes
         Route::get('homework/index', [TeacherController::class, 'homework'])->name('teacher.homework');
          // Leave Apply

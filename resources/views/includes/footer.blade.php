@@ -79,6 +79,13 @@
 <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script> -->
 <!-- Bootstrap Tables js -->
 <script src="{{ asset('libs/bootstrap-table/bootstrap-table.min.js') }}"></script>
+<!-- ApexChart  Js-->
+<script src="{{ asset('js/apexChart/apexcharts.js') }}"></script>
+<!-- ApeDate Picker  Js-->
+<script src="{{ asset('libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+<!-- Table Editable plugin-->
+<script src="{{ asset('libs/jquery-tabledit/jquery.tabledit.min.js') }}"></script>
+
 
 <!-- Init js -->
 <script src="{{ asset('js/pages/bootstrap-tables.init.js') }}"></script>
@@ -175,7 +182,6 @@
 <script src="{{ asset('js/custom/settings.js') }}"></script>
 <script src="{{ asset('js/custom/user_list.js') }}"></script>
 <script src="{{ asset('js/custom/dashboard.js') }}"></script>
-<script src="{{ asset('js/apexChart/apexcharts.js') }}"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> -->
 
 
@@ -453,5 +459,341 @@
 
         var chart = new ApexCharts(document.querySelector("#chart-hor-stack-bar-chart"), options);
         chart.render();
+
+
+        
     });
+
+    
+</script>
+<script>
+    Apex.grid = {
+    padding: {
+        right: 0,
+        left: 0
+    }
+}, Apex.dataLabels = {
+    enabled: !1
+};
+var randomizeArray = function(e) {
+        for (var o, t, a = e.slice(), r = a.length; 0 !== r;) t = Math.floor(Math.random() * r), o = a[--r], a[r] = a[t], a[t] = o;
+        return a
+    },
+    sparklineData = [47, 45, 54, 38, 56, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46],
+    colorPalette = ["#00D8B6", "#008FFB", "#FEB019", "#FF4560", "#775DD0"],
+    colors = ["#6658dd"];
+(dataColors = $("#spark1").data("colors")) && (colors = dataColors.split(","));
+var spark1 = {
+    chart: {
+        type: "area",
+        height: 160,
+        sparkline: {
+            enabled: !0
+        }
+    },
+    stroke: {
+        width: 2,
+        curve: "straight"
+    },
+    fill: {
+        opacity: .2
+    },
+    series: [{
+        name: "UBold Sales ",
+        data: randomizeArray(sparklineData)
+    }],
+    yaxis: {
+        min: 0
+    },
+    colors: colors,
+    title: {
+        text: "$424,652",
+        offsetX: 10,
+        style: {
+            fontSize: "22px"
+        }
+    },
+    subtitle: {
+        text: "Total Sales",
+        offsetX: 10,
+        offsetY: 35,
+        style: {
+            fontSize: "13px"
+        }
+    }
+};
+new ApexCharts(document.querySelector("#spark1"), spark1).render();
+colors = ["#DCE6EC"];
+(dataColors = $("#spark2").data("colors")) && (colors = dataColors.split(","));
+var spark2 = {
+    chart: {
+        type: "area",
+        height: 160,
+        sparkline: {
+            enabled: !0
+        }
+    },
+    stroke: {
+        width: 2,
+        curve: "straight"
+    },
+    fill: {
+        opacity: .2
+    },
+    series: [{
+        name: "UBold Expenses ",
+        data: randomizeArray(sparklineData)
+    }],
+    yaxis: {
+        min: 0
+    },
+    colors: colors,
+    title: {
+        text: "$235,312",
+        offsetX: 10,
+        style: {
+            fontSize: "22px"
+        }
+    },
+    subtitle: {
+        text: "Expenses",
+        offsetX: 10,
+        offsetY: 35,
+        style: {
+            fontSize: "13px"
+        }
+    }
+};
+new ApexCharts(document.querySelector("#spark2"), spark2).render();
+colors = ["#f672a7"];
+(dataColors = $("#spark3").data("colors")) && (colors = dataColors.split(","));
+var spark3 = {
+    chart: {
+        type: "area",
+        height: 160,
+        sparkline: {
+            enabled: !0
+        }
+    },
+    stroke: {
+        width: 2,
+        curve: "straight"
+    },
+    fill: {
+        opacity: .2
+    },
+    series: [{
+        name: "Net Profits ",
+        data: randomizeArray(sparklineData)
+    }],
+    xaxis: {
+        crosshairs: {
+            width: 1
+        }
+    },
+    yaxis: {
+        min: 0
+    },
+    colors: colors,
+    title: {
+        text: "$135,965",
+        offsetX: 10,
+        style: {
+            fontSize: "22px"
+        }
+    },
+    subtitle: {
+        text: "Profits",
+        offsetX: 10,
+        offsetY: 35,
+        style: {
+            fontSize: "13px"
+        }
+    }
+};
+new ApexCharts(document.querySelector("#spark3"), spark3).render();
+colors = ["#f7b84b", "#4a81d4",];
+(dataColors = $("#apex-line-1").data("colors")) && (colors = dataColors.split(","));
+var options = {
+    chart: {
+        height: 380,
+        type: "line",
+        zoom: {
+            enabled: !1
+        },
+        toolbar: {
+            show: !1
+        }
+    },
+    colors: colors,
+    dataLabels: {
+        enabled: !0
+    },
+    stroke: {
+        width: [3, 3, 3, 3],
+        curve: "smooth"
+    },
+    series: [{
+        name: "English",
+        data: [46, 26, 32, 36, 41]
+    },{
+        name: "Maths",
+        data: [27, 29, 33, 27, 32]
+    }],
+    title: {
+        text: "Marks",
+        align: "left",
+        style: {
+            fontSize: "14px",
+            color: "#666"
+        }
+    },
+    grid: {
+        row: {
+            colors: ["transparent", "transparent"],
+            opacity: .2
+        },
+        borderColor: "#f1f3fa"
+    },
+    markers: {
+        style: "inverted",
+        size: 6
+    },
+    xaxis: {
+        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+        title: {
+            text: "Month"
+        }
+    },
+    yaxis: {
+        title: {
+            text: "Subject"
+        },
+        min: 5,
+        max: 40
+    },
+    legend: {
+        position: "top",
+        horizontalAlign: "right",
+        floating: !0,
+        offsetY: -25,
+        offsetX: -5
+    },
+    responsive: [{
+        breakpoint: 600,
+        options: {
+            chart: {
+                toolbar: {
+                    show: !1
+                }
+            },
+            legend: {
+                show: !1
+            }
+        }
+    }]
+};
+(chart = new ApexCharts(document.querySelector("#apex-line-1"), options)).render();
+
+</script>
+<script>
+    ! function(t) {
+    "use strict";
+
+    function o() {}
+    o.prototype.init = function() {
+        t("#inline-editable").Tabledit({
+            inputClass: "form-control form-control-sm",
+            editButton: !1,
+            deleteButton: !1,
+            columns: {
+                identifier: [0, "id"],
+                editable: [
+                    [2, "col2"],
+                    [3, "col3"],
+                    [5, "col5"],
+                ]
+            }
+        }), t("#btn-editable").Tabledit({
+            buttons: {
+                edit: {
+                    class: "btn btn-success",
+                    html: '<span class="mdi mdi-pencil"></span>',
+                    action: "edit"
+                }
+            },
+            inputClass: "form-control form-control-sm",
+            deleteButton: !1,
+            saveButton: !1,
+            autoFocus: !1,
+            columns: {
+                identifier: [0, "id"],
+                editable: [
+                    [2, "col2"],
+                    [3, "col3"],
+                    [4, "col4"],
+                    [5, "col5"],
+                    [6, "col6"]
+                ]
+            }
+        })
+    }, t.EditableTable = new o, t.EditableTable.Constructor = o
+}(window.jQuery),
+function() {
+    "use strict";
+    window.jQuery.EditableTable.init()
+}();
+
+</script>
+
+<script>
+    ! function(t) {
+    "use strict";
+
+    function o() {}
+    o.prototype.init = function() {
+        t("#inline-editable-2").Tabledit({
+            inputClass: "form-control form-control-sm",
+            editButton: !1,
+            deleteButton: !1,
+            columns: {
+                identifier: [0, "id"],
+                editable: [
+                    [1, "col1"],
+                    [2, "col2"],
+                    [3, "col3"],
+                    [4, "col4"],
+                    [6, "col6"]
+                ]
+            }
+        }), t("#btn-editable").Tabledit({
+            buttons: {
+                edit: {
+                    class: "btn btn-success",
+                    html: '<span class="mdi mdi-pencil"></span>',
+                    action: "edit"
+                }
+            },
+            inputClass: "form-control form-control-sm",
+            deleteButton: !1,
+            saveButton: !1,
+            autoFocus: !1,
+            columns: {
+                identifier: [0, "id"],
+                editable: [
+                    [1, "col1"],
+                    [2, "col2"],
+                    [3, "col3"],
+                    [4, "col4"],
+                    [6, "col6"]
+                ]
+            }
+        })
+    }, t.EditableTable = new o, t.EditableTable.Constructor = o
+}(window.jQuery),
+function() {
+    "use strict";
+    window.jQuery.EditableTable.init()
+}();
+
 </script>

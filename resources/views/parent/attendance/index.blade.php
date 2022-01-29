@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Student Attendance')
+@section('title','Children Attendance')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Exam Attendance</h4>
+                <h4 class="page-title">Children Attendance</h4>
             </div>
         </div>
     </div>
@@ -31,6 +31,7 @@
                             <h4>
                     </li>
                 </ul><br>
+                <br>
                 <div class="card-body">
                     <form id="demo-form" data-parsley-validate="" autocomplete="off">
                         <div class="row " >
@@ -39,7 +40,7 @@
                                 <div class="form-group">
                                     <label for="">Date<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge text-center">
-                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" class="form-control" data-provide="datepicker" data-date-format="MM yyyy" Value="February 2022" data-date-min-view-mode="1">   
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="far fa-calendar-alt"></span>
@@ -135,245 +136,76 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Krishna</td>
+                                            <!-- <tr>
+                                                <td>Charlotte Isabella</td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td style="background-color: #ddd; cursor: not-allowed;" ></td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
+                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
                                                 
                                                 <td><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
                                                 <td><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>2</td>
-                                                <td>1</td>
-                                                <td>1</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Mark</td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-ufo"></i> </button></td>
+                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
+                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
+                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
+                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
+                                                <td><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i></button></td>
+                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
                                                 <td><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>18</td>
                                                 <td>2</td>
-                                                <td>1</td>
-                                                <td>1</td>
-                                            </tr>
+                                                <td>2</td>
+                                            </tr> -->
                                             <tr>
-                                                <td>James</td>
+                                                <td>Benjamin</td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
                                                 <td><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
                                                 <td><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>2</td>
-                                                <td>1</td>
-                                                <td>1</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Rocky</td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
+                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
+                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
                                                 <td><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-ufo"></i> </button></td>
+                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
+                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
+                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
+                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
                                                 <td><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td>19</td>
                                                 <td>2</td>
-                                                <td>1</td>
-                                                <td>1</td>
-                                            </tr>
-                                            <tr>
-                                                <td>James</td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
                                                 <td>2</td>
-                                                <td>1</td>
-                                                <td>1</td>
                                             </tr>
-                                            <tr>
-                                                <td>Mani</td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>2</td>
-                                                <td>1</td>
-                                                <td>1</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Dhanush</td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i></button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>2</td>
-                                                <td>1</td>
-                                                <td>1</td>
-                                            </tr>
+                                            
                                         </tbody>
                                     </table>
                                 </div> <!-- end table-responsive-->
