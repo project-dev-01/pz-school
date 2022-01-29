@@ -162,6 +162,7 @@
                         </div> <!-- end col-->
 
                         <div class="col-lg-12">
+                            <!-- <div id="calendar-timeTable"></div> -->
                             <div id="calendar"></div>
                         </div> <!-- end col -->
 
@@ -180,112 +181,63 @@
                         <div class="modal-body p-4">
                             <form class="needs-validation" name="event-form" id="form-event" novalidate>
                                 <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <p><b>Class</b> </p>
-                                            </div>
-                                        </div>
-                                        <!-- end Reported by -->
+                                    <!-- <div class="col-4">
+                                        <div class="col-md-12 font-weight-bold">Timetable List </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <p><b>Subject</b>  </p>
-                                            </div>
-                                        </div>
-                                        <!-- end Reported by -->
+                                    <div class="col-1">
+                                        <div class="col-md-12 font-weight-bold">:</div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <p><b>Timing</b>  </p>
-                                            </div>
-                                        </div>
-                                        <!-- end Reported by -->
+                                    <div class="col-7">
+                                        <div class="col-md-12" id="event-title"></div>
+                                    </div> -->
+                                    <div class="col-4">
+                                        <div class="col-md-12 font-weight-bold">Subject Name </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <p>Action </p>
-                                            </div>
-                                        </div>
-                                        <!-- end Reported by -->
+                                    <div class="col-1">
+                                        <div class="col-md-12 font-weight-bold">:</div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <p>Second-A </p>
-                                            </div>
-                                        </div>
-                                        <!-- end Reported by -->
+                                    <div class="col-7">
+                                        <div class="col-md-12" id="subject-name"></div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <p>Maths </p>
-                                            </div>
-                                        </div>
-                                        <!-- end Reported by -->
+
+                                    <div class="col-4">
+                                        <div class="col-md-12 font-weight-bold">Timing </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <p>10.30 - 11.00 AM </p>
-                                            </div>
-                                        </div>
-                                        <!-- end Reported by -->
+                                    <div class="col-1">
+                                        <div class="col-md-12 font-weight-bold">:</div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <a href="{{ route('teacher.classroom.management')}}" ><button type="button" class="btn btn-primary width-xs waves-effect waves-light">Go to Class</button></a>
-                                                
-                                            </div>
-                                            
-                                        </div>
-                                        <!-- end Reported by -->
+                                    <div class="col-7">
+                                        <div class="col-md-12" id="timing-class"></div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="col-md-12 font-weight-bold">Teacher Name </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="col-md-12 font-weight-bold">:</div>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="col-md-12" id="teacher-name"></div>
+                                    </div>
+                                    <div class="col-12">
+                                        <!-- <div class="form-group"> -->
+                                        <!-- <label class="control-label font-weight-bold">Notes :</label> -->
+                                        <textarea class="form-control" style="margin: 12px;" placeholder="Enter your notes"></textarea>
+                                        <!-- </div> -->
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <p>Sixth-C</p>
-                                            </div>
-                                        </div>
-                                        <!-- end Reported by -->
+                                <div class="row mt-2">
+                                    <!-- <div class="col-6 text-right">
+                                        <a href="{{ route('teacher.classroom.management')}}"><button type="button" class="btn btn-primary width-xs waves-effect waves-light">Go to Class</button></a>
+                                    </div> -->
+                                    <div class="col-6">
+                                        <!-- <button type="button" class="btn btn-danger" id="btn-delete-event">Delete</button> -->
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <p>English </p>
-                                            </div>
-                                        </div>
-                                        <!-- end Reported by -->
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <p>12.00 - 01.00 PM </p>
-                                            </div>
-                                        </div>
-                                        <!-- end Reported by -->
-                                    </div>
-                                    <div class="col-md-3 mt-1" >
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <a href="{{ route('teacher.classroom.management')}}" ><button type="button" class="btn btn-primary width-xs waves-effect waves-light">Go to Class</button></a>
-                                                
-                                            </div>
-                                            
-                                        </div>
-                                        <!-- end Reported by -->
+                                    <div class="col-6 text-right">
+                                        <!-- <button type="button" class="btn btn-light mr-1" data-dismiss="modal">Close</button> -->
+                                        <!-- <button type="submit" class="btn btn-success" id="btn-save-event">Save</button> -->
+                                        <a href="{{ route('teacher.classroom.management')}}"><button type="button" class="btn btn-primary width-xs waves-effect waves-light">Go to Classroom</button></a>
                                     </div>
                                 </div>
-                                
                             </form>
                         </div>
                     </div> <!-- end modal-content-->

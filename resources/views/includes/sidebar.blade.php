@@ -1351,7 +1351,14 @@
                             </li>                        
                         </ul>
                     </div>
-                </li>  
+                </li>
+                <li>
+                <a href="{{ route('teacher.chat')}}" class="nav-link {{ (request()->is('teacher/chat*')) ? 'active' : '' }}">
+                     
+                    <i data-feather="message-square"></i>
+                        <span> Chat </span>
+                    </a>
+                </li> 
                 <li>
                 <a href="{{ route('teacher.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('teacher/forum*')) ? 'active' : '' }}">
                      
@@ -1461,6 +1468,12 @@
                     <a href="{{ route('parent.timetable.index')}}" class="nav-link {{ (request()->is('parent/timetable*')) ? 'active' : '' }}">
                     <i data-feather="external-link" class="icon-dual"></i>
                         <span> Time Table </span>
+                    </a>
+                </li>
+                <li>
+                <a href="{{ route('parent.chat')}}" class="nav-link {{ (request()->is('parent/chat*')) ? 'active' : '' }}">
+                    <i data-feather="message-square"></i>
+                        <span> Chat </span>
                     </a>
                 </li>
                 <li>
