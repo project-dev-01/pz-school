@@ -31,8 +31,9 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Class Name<span class="text-danger">*</span></label>
+                                    <label for="heard">Standard<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
+                                    <option value="">Select Standard</option>
                                         <option value="">All</option>
                                         <option value="">I</option>
                                         <option value="press">II</option>
@@ -47,8 +48,22 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Exam<span class="text-danger"></span></label>
+                                    <label for="heard">Class Room<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
+                                    <option value="">Select Class Room</option>
+                                        <option value="">A</option>
+                                        <option value="">B</option>
+                                        <option value="press">C</option>
+                                        <option value="">D</option>
+                                        <option value="press">E</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="heard">Exam Name<span class="text-danger">*</span></label>
+                                    <select id="heard" class="form-control" required="">
+                                    <option value="">Select Exam</option>
                                         <option value="">Annual</option>
                                         <option value="">Quarterly</option>
                                     </select>
@@ -76,7 +91,7 @@
                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            All Class
+                            Class (All)
                             <h4>
                     </li>
                 </ul><br>

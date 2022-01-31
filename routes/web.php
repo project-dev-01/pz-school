@@ -229,6 +229,7 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
 
         Route::get('exam_results/overall', [SuperAdminController::class, 'overall'])->name('super_admin.exam_results.overall');
         
+        Route::get('exam_results/bystudent', [SuperAdminController::class, 'bystudent'])->name('super_admin.exam_results.bystudent');
         
         // static page routes end
     });
@@ -609,6 +610,8 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('exam_results/byclass', [TeacherController::class, 'byclasss'])->name('teacher.exam_results.byclass');
 
         Route::get('exam_results/bysubject', [TeacherController::class, 'bysubject'])->name('teacher.exam_results.bysubject');
+
+        Route::get('exam_results/bystudent', [TeacherController::class, 'bystudent'])->name('teacher.exam_results.bystudent');
      
          
     });
@@ -703,7 +706,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('forum/page-categories-single', [StudentController::class, 'forumPageCategoriesSingle'])->name('student.forum.page-categories-single');
         Route::get('forum/page-tabs', [StudentController::class, 'forumPageTabs'])->name('student.forum.page-tabs');
         Route::get('forum/page-tabs-guidelines', [StudentController::class, 'forumPageTabGuidelines'])->name('student.forum.page-tabs-guidelines');
-
+        
     });
     
     

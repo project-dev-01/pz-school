@@ -1497,6 +1497,10 @@ class SuperAdminController extends Controller
     {
         return view('super_admin.exam_results.overall');
     }
+    public function bystudent()
+    {
+        return view('super_admin.exam_results.bystudent');
+    }
     
     // static page controller end
     

@@ -120,6 +120,9 @@ class TeacherController extends Controller
     {
         return view('teacher.exam_results.bysubject');
     }
-    
+    public function bystudent()
+    {
+        return view('teacher.exam_results.bystudent');
+    }    
 
 }

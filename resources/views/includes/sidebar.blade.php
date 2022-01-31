@@ -364,6 +364,11 @@
                                             </a>
                                         </li>
                                         <li>
+                                        <a href="{{ route('super_admin.exam_results.bystudent')}}" class="nav-link {{ (request()->is('super_admin/exam_results')) ? 'active' : '' }}">
+                                                <span>By Student</span>
+                                            </a>
+                                        </li>  
+                                        <li>
                                         <a href="{{ route('super_admin.exam_results.overall')}}" class="nav-link {{ (request()->is('super_admin/exam_results')) ? 'active' : '' }}">
                                                 <span>Overall</span>
                                             </a>
@@ -1384,7 +1389,11 @@
                                         <a href="{{ route('teacher.exam_results.bysubject')}}" class="nav-link {{ (request()->is('teacher/exam_results')) ? 'active' : '' }}">
                                                 <span>By Subject</span>
                                             </a>
-                                        </li>                                    
+                                        </li>
+                                        <a href="{{ route('teacher.exam_results.bystudent')}}" class="nav-link {{ (request()->is('teacher/exam_results')) ? 'active' : '' }}">
+                                                <span>By Student</span>
+                                            </a>
+                                        </li>                                                                           
                                     </ul>
                                 </div>
                             </li>                  

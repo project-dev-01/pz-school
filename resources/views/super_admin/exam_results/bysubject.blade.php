@@ -29,26 +29,40 @@
                 <div class="card-body">
                     <form id="demo-form" data-parsley-validate="">
                         <div class="row"> 
-                            <div class="col-md-3">
+                        <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Choose Subject<span class="text-danger">*</span></label>
+                                    <label for="heard">Standard<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="press">All</option>    
-                                        <option value="press">English</option>    
-                                        <option value="">Mathematics</option>
-                                        <option value="press">History</option>
-                                        <option value="">Study of the Environment</option>
-                                        <option value="press">Geography</option>
-                                        <option value="">Natural Sciences</option>
-                                        <option value="press">Civics Education</option>
-                                        <option value="">Arts Education</option>
-                                        
+                                        <option value="">Select Standard</option>
+                                        <option value="">All</option>
+                                        <option value="">I</option>
+                                        <option value="press">II</option>
+                                        <option value="">III</option>
+                                        <option value="press">IV</option>
+                                        <option value="">V</option>
+                                        <option value="press">VI</option>
+                                        <option value="">VII</option>
+                                        <option value="press">VIII</option>
                                     </select>
                                 </div>
-                            </div>                     
+                            </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Exam<span class="text-danger"></span></label>
+                                    <label for="heard">Class Rome<span class="text-danger">*</span></label>
+                                    <select id="heard" class="form-control" required="">
+                                        <option value="">Select Class Rome</option>
+                                        <option value="">A</option>
+                                        <option value="">B</option>
+                                        <option value="press">C</option>
+                                        <option value="">D</option>
+                                        <option value="press">E</option>
+                                        <option value="">F</option>                             
+                                    </select>
+                                </div>
+                            </div>                                                
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="heard">Exam Name<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                         <option value="">Annual</option>
                                         <option value="">Quarterly</option>
@@ -123,16 +137,15 @@
                                     <td class="text-center">%</td>
                                     <td class="text-center">%</td>
                                     <td class="text-center">%</td>
-
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
                                    <td class="text-center" rowspan="2">1</td>
                                    <td class="text-center" rowspan="2">Mathematics</td>
-                                   <td class="text-right" rowspan="2">24</td>  
-                                   <td class="text-right" rowspan="2">0</td>
-                                   <td class="text-right" rowspan="2">24</td>
+                                   <td class="text-right" rowspan="2">255</td>  
+                                   <td class="text-right">40</td>
+                                   <td class="text-right">215</td>
                                    <td class="text-center" rowspan="2">William</td>
                                    <td class="text-right">0</td>
                                    <td class="text-right">10</td>
@@ -148,7 +161,8 @@
                                    <td class="text-right" rowspan="2">2.71</td>
                                    <td class="text-right" rowspan="2">95.83</td>
                                 </tr>
-                                <tr>                                  
+                                <tr>  
+                                    <td class="text-right">0.00</td>                                
                                    <td class="text-right">0.00</td>
                                    <td class="text-right">41.67</td>
                                    <td class="text-right">16.67</td>
@@ -164,9 +178,9 @@
                                 <tr>
                                    <td class="text-center" rowspan="2">2</td>
                                    <td class="text-center" rowspan="2">History</td>
-                                   <td class="text-right" rowspan="2">31</td>  
-                                   <td class="text-right" rowspan="2">1</td>
-                                   <td class="text-right" rowspan="2">30</td>
+                                   <td class="text-right" rowspan="2">87</td>  
+                                   <td class="text-right" >8</td>
+                                   <td class="text-right" >79</td>
                                    <td class="text-center" rowspan="2">Benjamin</td>
                                    <td class="text-right">0</td>
                                    <td class="text-right">0</td>
@@ -198,9 +212,9 @@
                                 <tr>
                                    <td class="text-center" rowspan="2">3</td>
                                    <td class="text-center" rowspan="2">Study of the Environment</td>
-                                   <td class="text-right" rowspan="2">22</td>  
-                                   <td class="text-right" rowspan="2">1</td>
-                                   <td class="text-right" rowspan="2">21</td>
+                                   <td class="text-right" rowspan="2">172</td>  
+                                   <td class="text-right">51</td>
+                                   <td class="text-right">121</td>
                                    <td class="text-center" rowspan="2">James</td>
                                    <td class="text-right">0</td>
                                    <td class="text-right">4</td>
@@ -216,7 +230,9 @@
                                    <td class="text-right" rowspan="2">3.89</td>
                                    <td class="text-right" rowspan="2">100.00</td>
                                 </tr>
-                                <tr>                                  
+                                <tr> 
+                                <td class="text-right">0.00</td>                                
+                                   <td class="text-right">0.00</td>                                 
                                    <td class="text-right">0.00</td>
 
                                    <td class="text-right">19.05</td>
@@ -233,9 +249,9 @@
                                 <tr>
                                    <td class="text-center" rowspan="2">4</td>
                                    <td class="text-center" rowspan="2">Geography</td>
-                                   <td class="text-right" rowspan="2">34</td>  
-                                   <td class="text-right" rowspan="2">2</td>
-                                   <td class="text-right" rowspan="2">32</td>
+                                   <td class="text-right" rowspan="2">254</td>  
+                                   <td class="text-right">50</td>
+                                   <td class="text-right">205</td>
                                    <td class="text-center" rowspan="2">Lucas</td>
                                    <td class="text-right">0</td>
                                    <td class="text-right">2</td>
@@ -268,8 +284,8 @@
                                    <td class="text-center" rowspan="2">5</td>
                                    <td class="text-center" rowspan="2">Natural Sciences</td>
                                    <td class="text-right" rowspan="2">37</td>  
-                                   <td class="text-right" rowspan="2">4</td>
-                                   <td class="text-right" rowspan="2">33</td>
+                                   <td class="text-right">4</td>
+                                   <td class="text-right">33</td>
                                    <td class="text-center" rowspan="2">Charlotte</td>
                                    <td class="text-right">0</td>
                                    <td class="text-right">0</td>
@@ -286,6 +302,8 @@
                                    <td class="text-right" rowspan="2">54.55</td>
                                 </tr>
                                 <tr> 
+                                <td class="text-right">0.00</td>
+                                   <td class="text-right">0.00</td>
                                    <td class="text-right">0.00</td>
                                    <td class="text-right">6.25</td>
                                    <td class="text-right">6.25</td>
@@ -302,8 +320,8 @@
                                    <td class="text-center" rowspan="2">6</td>
                                    <td class="text-center" rowspan="2">Civics Education</td>
                                    <td class="text-right" rowspan="2">35</td>  
-                                   <td class="text-right" rowspan="2">0</td>
-                                   <td class="text-right" rowspan="2">35</td>
+                                   <td class="text-right">0</td>
+                                   <td class="text-right">35</td>
                                    <td class="text-center" rowspan="2">Sophia</td>
                                    <td class="text-right">0</td>
                                    <td class="text-right">0</td>
@@ -320,6 +338,8 @@
                                    <td class="text-right" rowspan="2">22.86</td>
                                 </tr>
                                 <tr> 
+                                <td class="text-right">0.00</td>
+                                   <td class="text-right">0.00</td>
                                    <td class="text-right">0.00</td>
                                    <td class="text-right">6.25</td>
                                    <td class="text-right">6.25</td>
@@ -336,8 +356,8 @@
                                    <td class="text-center" rowspan="2">7</td>
                                    <td class="text-center" rowspan="2">Physical Education</td>
                                    <td class="text-right" rowspan="2">37</td>  
-                                   <td class="text-right" rowspan="2">18</td>
-                                   <td class="text-right" rowspan="2">19</td>
+                                   <td class="text-right">18</td>
+                                   <td class="text-right">19</td>
                                    <td class="text-center" rowspan="2">Amelia</td>
                                    <td class="text-right">0</td>
                                    <td class="text-right">0</td>
@@ -354,6 +374,8 @@
                                    <td class="text-right" rowspan="2">26.32</td>
                                 </tr>
                                 <tr> 
+                                <td class="text-right">0.00</td>
+                                   <td class="text-right">0.00</td>
                                    <td class="text-right">0.00</td>
                                    <td class="text-right">0.00</td>
                                    <td class="text-right">0.00</td>
@@ -370,8 +392,8 @@
                                    <td class="text-center" rowspan="2">8</td>
                                    <td class="text-center" rowspan="2">English</td>
                                    <td class="text-right" rowspan="2">35</td>  
-                                   <td class="text-right" rowspan="2">14</td>
-                                   <td class="text-right" rowspan="2">21</td>
+                                   <td class="text-right">14</td>
+                                   <td class="text-right">21</td>
                                    <td class="text-center" rowspan="2">Isabella</td>
                                    <td class="text-right">0</td>
                                    <td class="text-right">0</td>
@@ -388,6 +410,8 @@
                                    <td class="text-right" rowspan="2">14.29</td>
                                 </tr>
                                 <tr> 
+                                <td class="text-right">0.00</td>
+                                   <td class="text-right">0.00</td>
                                    <td class="text-right">0.00</td>
                                    <td class="text-right">0.00</td>
                                    <td class="text-right">0.00</td>
@@ -403,9 +427,9 @@
                                 <tr>
                                    <td class="text-center" rowspan="2"></td>
                                    <td class="text-center" rowspan="2">Total :</td>
-                                   <td class="text-right" rowspan="2">255</td>  
-                                   <td class="text-right" rowspan="2">40</td>
-                                   <td class="text-right" rowspan="2">215</td>
+                                   <td class="text-right" rowspan="2">912</td>  
+                                   <td class="text-right">255</td>
+                                   <td class="text-right">728</td>
                                    <td class="text-center" rowspan="2"></td>
                                    <td class="text-right">0</td>
                                    <td class="text-right">16</td>
@@ -421,8 +445,9 @@
                                    <td class="text-right" rowspan="2">6.77</td>
                                    <td class="text-right" rowspan="2">15.95</td>
                                 </tr>
-                                <tr>                                 
-                                   <td class="text-right">0.00</td>
+                                <tr>  
+                                <td class="text-right">27.96</td>
+                                   <td class="text-right">79.82</td>                                                                 <td class="text-right">0.00</td>
                                    <td class="text-right">0.00</td>
                                    <td class="text-right">0.00</td>
                                    <td class="text-right">0.00</td>
