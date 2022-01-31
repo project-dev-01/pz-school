@@ -1264,12 +1264,18 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('teacher.classroom.management')}}" class="nav-link {{ (request()->is('teacher/classroom*')) ? 'active' : '' }}">
+                        <i data-feather="file-text" class="icon-dual"></i>
+                        <span> Classroom Management </span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('teacher.test_result')}}" class="nav-link {{ (request()->is('teacher/test_result*')) ? 'active' : '' }}">
                         <i data-feather="file-text" class="icon-dual"></i>
                         <span> Test Result </span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="#sidebarAdmission" data-toggle="collapse">
                         <i class="fe-edit"></i>
                         <span> Admission </span>
@@ -1284,7 +1290,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> -->
                 <li>
                     <a href="#sidebarStudentDetails" data-toggle="collapse">
                         <i class="fas fa-users"></i>
@@ -1301,13 +1307,7 @@
                         </ul>
                     </div>
                 </li>
-                <li>
-                    <a href="{{ route('teacher.classroom.management')}}" class="nav-link {{ (request()->is('teacher/classroom*')) ? 'active' : '' }}">
-                        <i data-feather="file-text" class="icon-dual"></i>
-                        <span> Classroom Management </span>
-                    </a>
-                </li>
-                <li>
+                <!-- <li>
                     <a href="#sidebarParent" data-toggle="collapse">
                         <i class="fe-user-plus"></i>
                         <span> Parents </span>
@@ -1322,7 +1322,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> -->
                 <li>
                     <a href="#sidebarHomework" data-toggle="collapse">
                         <i class="fe-book-open"></i>
@@ -1342,7 +1342,7 @@
                 <li>
                     <a href="#sidebarAttendance" data-toggle="collapse">
                         <i data-feather="map"></i>
-                        <span> Attendance </span>
+                        <span> Attendance Report</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarAttendance">
@@ -1352,7 +1352,7 @@
                                     <span> List </span>
                                 </a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="{{ route('teacher.attendance.student_entry')}}" class="nav-link {{ (request()->is('teacher/attendance/student_entry')) ? 'active' : '' }}">
                                     <span> Student </span>
                                 </a>
@@ -1361,7 +1361,7 @@
                                 <a href="{{ route('teacher.attendance.exam_entry')}}" class="nav-link {{ (request()->is('teacher/attendance/exam_entry')) ? 'active' : '' }}">
                                     <span> Exam </span>
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </li>

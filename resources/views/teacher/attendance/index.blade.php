@@ -159,7 +159,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>Charlotte Isabella</td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
                                                 <td style="background-color: #ddd; cursor: not-allowed;"></td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
@@ -194,7 +194,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Benjamin</td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
                                                 <td style="background-color: #ddd; cursor: not-allowed;"></td>
                                                 <td><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i></button></td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
@@ -228,7 +228,7 @@
                                             </tr>
                                             <tr>
                                                 <td>James</td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
                                                 <td style="background-color: #ddd; cursor: not-allowed;"></td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
@@ -262,7 +262,7 @@
                                             </tr>
                                             <tr>
                                                 <td>William</td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
                                                 <td style="background-color: #ddd; cursor: not-allowed;"></td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
@@ -296,7 +296,7 @@
                                             </tr>
                                             <tr>
                                                 <td>James</td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
                                                 <td style="background-color: #ddd; cursor: not-allowed;"></td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
@@ -330,7 +330,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Sophia</td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
                                                 <td style="background-color: #ddd; cursor: not-allowed;"></td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
@@ -364,7 +364,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Amelia</td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
+                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
                                                 <td style="background-color: #ddd; cursor: not-allowed;"></td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
                                                 <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
