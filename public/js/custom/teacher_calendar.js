@@ -39,7 +39,7 @@
 
             // current date
             var d = new Date();
-     
+            
             var currentD = formatDate(d);
             var currentDPlusOne = formatDate(d.setDate(d.getDate() + 1));
             var currentDPlusTwo = formatDate(d.setDate(d.getDate() + 1));
@@ -57,151 +57,80 @@
                     // start: start.setHours(start.getHours() + 8),
                     // end: new Date(l.now() + 338e6),
                     className: "bg-warning"
-                }, {
-                    title: "Maths-(09:30AM - 10:30AM)",
-                    subject: "Maths",
-                    timing: "09:30 AM - 10:30 AM",
-                    teachername: "Stella",
-                    start: currentD + " 09:30:00",
-                    // start: new Date(l.now() + 158e6),
-                    // end: e,
-                    className: "bg-primary"
                 },
                 {
-                    title: "Maths-(10:30AM - 11:30AM)",
-                    subject: "Maths",
+                    title: "English-(10:30AM - 11:30AM)",
+                    subject: "English",
                     timing: "10:30 AM - 11:30 AM",
-                    teachername: "Stella",
+                    teachername: "Sandy",
                     start: currentD + " 10:30:00",
                     // end: e,
-                    className: "bg-primary"
+                    className: "bg-warning"
                 }, {
-                    title: "Geography-(11:30AM - 12:30PM)",
-                    subject: "Geography",
-                    timing: "11:30AM - 12:30PM",
-                    teachername: "Amelia",
-                    start: currentD + " 11:30:00",
-                    className: "bg-info"
-                }, {
-                    title: "Chemistry -(01:30PM - 02:30PM)-Emma",
-                    subject: "Chemistry",
+                    title: "English -(01:30PM - 02:30PM)-Emma",
+                    subject: "English",
                     timing: "01:30PM - 02:30PM",
-                    teachername: "Emma",
+                    teachername: "Sandy",
                     start: currentD + " 13:30:00",
                     // end: new Date(l.now() + 4056e5),
-                    className: "bg-secondary"
-                }, {
-                    title: "Physics -(02:30PM - 03:30PM)-Emma",
-                    subject: "Physics",
-                    timing: "02:30PM - 03:30PM",
-                    teachername: "Isabella",
-                    start: currentD + " 14:30:00",
-                    // end: new Date(l.now() + 4056e5),
-                    className: "bg-success"
+                    className: "bg-warning"
                 },
                 // tommorrow day 2
+                
                 {
-                    title: "English-(08:30AM - 09:30AM)",
+                    title: "English-(10:30AM - 11:30AM)",
                     subject: "English",
-                    timing: "08:30 AM - 09:30 AM",
+                    timing: "10:30 AM - 11:30 AM",
                     teachername: "Sandy",
-                    start: currentDPlusOne + " 08:30:00",
+                    start: currentDPlusOne + " 10:30:00",
+                    // end: e,
+                    className: "bg-warning"
+                }, {
+                    title: "English -(01:30PM - 02:30PM)-Emma",
+                    subject: "English",
+                    timing: "01:30PM - 02:30PM",
+                    teachername: "Sandy",
+                    start: currentDPlusOne + " 13:30:00",
+                    // end: new Date(l.now() + 4056e5),
+                    className: "bg-warning"
+                },
+                {
+                    title: "English-(02:30AM - 03:30AM)",
+                    subject: "English",
+                    timing: "02:30 AM - 03:30 AM",
+                    teachername: "Sandy",
+                    start: currentDPlusOne + " 14:30:00",
                     // start: start.setHours(start.getHours() + 8),
                     // end: new Date(l.now() + 338e6),
                     className: "bg-warning"
-                }, {
-                    title: "Maths-(09:30AM - 10:30AM)",
-                    subject: "Maths",
-                    timing: "09:30 AM - 10:30 AM",
-                    teachername: "Stella",
-                    start: currentDPlusOne + " 09:30:00",
-                    // start: new Date(l.now() + 158e6),
-                    // end: e,
-                    className: "bg-primary"
-                },
-                {
-                    title: "Maths-(10:30AM - 11:30AM)",
-                    subject: "Maths",
-                    timing: "10:30 AM - 11:30 AM",
-                    teachername: "Stella",
-                    start: currentDPlusOne + " 10:30:00",
-                    // end: e,
-                    className: "bg-primary"
-                }, {
-                    title: "Geography-(11:30AM - 12:30PM)",
-                    subject: "Geography",
-                    timing: "11:30AM - 12:30PM",
-                    teachername: "Amelia",
-                    start: currentDPlusOne + " 11:30:00",
-                    className: "bg-info"
-                }, {
-                    title: "Chemistry -(01:30PM - 02:30PM)-Emma",
-                    subject: "Chemistry",
-                    timing: "01:30PM - 02:30PM",
-                    teachername: "Emma",
-                    start: currentDPlusOne + " 13:30:00",
-                    // end: new Date(l.now() + 4056e5),
-                    className: "bg-secondary"
-                }, {
-                    title: "Physics -(02:30PM - 03:30PM)-Emma",
-                    subject: "Physics",
-                    timing: "02:30PM - 03:30PM",
-                    teachername: "Isabella",
-                    start: currentDPlusOne + " 14:30:00",
-                    // end: new Date(l.now() + 4056e5),
-                    className: "bg-success"
                 },
                 // day 3
                 {
-                    title: "English-(08:30AM - 09:30AM)",
+                    title: "English-(09:30AM - 10:30AM)",
                     subject: "English",
-                    timing: "08:30 AM - 09:30 AM",
+                    timing: "09:30 AM - 10:30 AM",
                     teachername: "Sandy",
-                    start: currentDPlusTwo + " 08:30:00",
+                    start: currentDPlusTwo + " 09:30:00",
                     // start: start.setHours(start.getHours() + 8),
                     // end: new Date(l.now() + 338e6),
                     className: "bg-warning"
-                }, {
-                    title: "Maths-(09:30AM - 10:30AM)",
-                    subject: "Maths",
-                    timing: "09:30 AM - 10:30 AM",
-                    teachername: "Stella",
-                    start: currentDPlusTwo + " 09:30:00",
-                    // start: new Date(l.now() + 158e6),
-                    // end: e,
-                    className: "bg-primary"
                 },
                 {
-                    title: "Maths-(10:30AM - 11:30AM)",
-                    subject: "Maths",
+                    title: "English-(10:30AM - 11:30AM)",
+                    subject: "English",
                     timing: "10:30 AM - 11:30 AM",
-                    teachername: "Stella",
+                    teachername: "Sandy",
                     start: currentDPlusTwo + " 10:30:00",
                     // end: e,
-                    className: "bg-primary"
+                    className: "bg-warning"
                 }, {
-                    title: "Geography-(11:30AM - 12:30PM)",
-                    subject: "Geography",
-                    timing: "11:30AM - 12:30PM",
-                    teachername: "Amelia",
-                    start: currentDPlusTwo + " 11:30:00",
-                    className: "bg-info"
-                }, {
-                    title: "Chemistry -(01:30PM - 02:30PM)-Emma",
-                    subject: "Chemistry",
+                    title: "English -(01:30PM - 02:30PM)-Emma",
+                    subject: "English",
                     timing: "01:30PM - 02:30PM",
-                    teachername: "Emma",
+                    teachername: "Sandy",
                     start: currentDPlusTwo + " 13:30:00",
                     // end: new Date(l.now() + 4056e5),
-                    className: "bg-secondary"
-                }, {
-                    title: "Physics -(02:30PM - 03:30PM)-Emma",
-                    subject: "Physics",
-                    timing: "02:30PM - 03:30PM",
-                    teachername: "Isabella",
-                    start: currentDPlusTwo + " 14:30:00",
-                    // end: new Date(l.now() + 4056e5),
-                    className: "bg-success"
+                    className: "bg-warning"
                 },
                 // day 4
                 {
@@ -213,47 +142,23 @@
                     // start: start.setHours(start.getHours() + 8),
                     // end: new Date(l.now() + 338e6),
                     className: "bg-warning"
-                }, {
-                    title: "Maths-(09:30AM - 10:30AM)",
-                    subject: "Maths",
-                    timing: "09:30 AM - 10:30 AM",
-                    teachername: "Stella",
-                    start: currentDPlusThree + " 09:30:00",
-                    // start: new Date(l.now() + 158e6),
-                    // end: e,
-                    className: "bg-primary"
                 },
                 {
-                    title: "Maths-(10:30AM - 11:30AM)",
-                    subject: "Maths",
-                    timing: "10:30 AM - 11:30 AM",
-                    teachername: "Stella",
-                    start: currentDPlusThree + " 10:30:00",
-                    // end: e,
-                    className: "bg-primary"
-                }, {
-                    title: "Geography-(11:30AM - 12:30PM)",
-                    subject: "Geography",
-                    timing: "11:30AM - 12:30PM",
-                    teachername: "Amelia",
+                    title: "English-(11:30AM - 12:30PM)",
+                    subject: "English",
+                    timing: "11:30 AM - 12:30 PM",
+                    teachername: "Sandy",
                     start: currentDPlusThree + " 11:30:00",
-                    className: "bg-info"
+                    // end: e,
+                    className: "bg-warning"
                 }, {
-                    title: "Chemistry -(01:30PM - 02:30PM)-Emma",
-                    subject: "Chemistry",
+                    title: "English -(01:30PM - 02:30PM)-Emma",
+                    subject: "English",
                     timing: "01:30PM - 02:30PM",
-                    teachername: "Emma",
+                    teachername: "Sandy",
                     start: currentDPlusThree + " 13:30:00",
                     // end: new Date(l.now() + 4056e5),
-                    className: "bg-secondary"
-                }, {
-                    title: "Physics -(02:30PM - 03:30PM)-Emma",
-                    subject: "Physics",
-                    timing: "02:30PM - 03:30PM",
-                    teachername: "Isabella",
-                    start: currentDPlusThree + " 14:30:00",
-                    // end: new Date(l.now() + 4056e5),
-                    className: "bg-success"
+                    className: "bg-warning"
                 },
                 // day 5
                 {
@@ -265,47 +170,23 @@
                     // start: start.setHours(start.getHours() + 8),
                     // end: new Date(l.now() + 338e6),
                     className: "bg-warning"
-                }, {
-                    title: "Maths-(09:30AM - 10:30AM)",
-                    subject: "Maths",
-                    timing: "09:30 AM - 10:30 AM",
-                    teachername: "Stella",
-                    start: currentDPlusFour + " 09:30:00",
-                    // start: new Date(l.now() + 158e6),
-                    // end: e,
-                    className: "bg-primary"
                 },
                 {
-                    title: "Maths-(10:30AM - 11:30AM)",
-                    subject: "Maths",
+                    title: "English-(10:30AM - 11:30AM)",
+                    subject: "English",
                     timing: "10:30 AM - 11:30 AM",
-                    teachername: "Stella",
+                    teachername: "Sandy",
                     start: currentDPlusFour + " 10:30:00",
                     // end: e,
-                    className: "bg-primary"
+                    className: "bg-warning"
                 }, {
-                    title: "Geography-(11:30AM - 12:30PM)",
-                    subject: "Geography",
-                    timing: "11:30AM - 12:30PM",
-                    teachername: "Amelia",
-                    start: currentDPlusFour + " 11:30:00",
-                    className: "bg-info"
-                }, {
-                    title: "Chemistry -(01:30PM - 02:30PM)-Emma",
-                    subject: "Chemistry",
-                    timing: "01:30PM - 02:30PM",
-                    teachername: "Emma",
-                    start: currentDPlusFour + " 13:30:00",
-                    // end: new Date(l.now() + 4056e5),
-                    className: "bg-secondary"
-                }, {
-                    title: "Physics -(02:30PM - 03:30PM)-Emma",
-                    subject: "Physics",
-                    timing: "02:30PM - 03:30PM",
-                    teachername: "Isabella",
+                    title: "English -(02:30PM - 03:30PM)-Emma",
+                    subject: "English",
+                    timing: "02:30 PM - 03:30 PM",
+                    teachername: "Sandy",
                     start: currentDPlusFour + " 14:30:00",
                     // end: new Date(l.now() + 4056e5),
-                    className: "bg-success"
+                    className: "bg-warning"
                 }
             ],
                 a = this;

@@ -24,21 +24,21 @@
             }
         });
         var t = [{
-                title: "Meeting with Mr. Shreyu",
+                title: "Outreach is a volunteer program",
                 start: new Date(l.now() + 158e6),
                 end: new Date(l.now() + 338e6),
                 className: "bg-warning"
             },{
-                title: "Timetable",
+                title: "Sports Day",
                 start: e,
                 end: e,
                 className: "bg-primary"
             }, {
-                title: "Phone Screen - Frontend Engineer",
+                title: "Scouting Jamboree",
                 start: new Date(l.now() + 168e6),
                 className: "bg-info"
             }, {
-                title: "Buy Design Assets",
+                title: "First Communion",
                 start: new Date(l.now() + 338e6),
                 end: new Date(l.now() + 4056e5),
                 className: "bg-primary"

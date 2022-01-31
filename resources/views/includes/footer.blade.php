@@ -36,12 +36,31 @@
 <script src="{{ asset('libs/@fullcalendar/timegrid/main.min.js') }}"></script>
 <script src="{{ asset('libs/@fullcalendar/list/main.min.js') }}"></script>
 <script src="{{ asset('libs/@fullcalendar/interaction/main.min.js') }}"></script>
+<script>
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
 
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
+</script>
 <!-- Calendar init -->
 <script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
 @if(Session::get('role_id'))
 @if(Session::get('role_id') == '4')
-<script src="{{ asset('js/custom/calendar.js') }}"></script>
+<!-- <script src="{{ asset('js/custom/calendar.js') }}"></script> -->
+<script src="{{ asset('js/custom/teacher_calendar.js') }}"></script>
+@elseif(Session::get('role_id') == '5')
+<script src="{{ asset('js/custom/parent_calendar.js') }}"></script>
+@elseif(Session::get('role_id') == '6')
+<script src="{{ asset('js/custom/parent_calendar.js') }}"></script>
 @else
 <script src="{{ asset('js/pages/calendar.init.js') }}"></script>
 @endif
@@ -188,7 +207,7 @@
 <script src="{{ asset('js/custom/settings.js') }}"></script>
 <script src="{{ asset('js/custom/user_list.js') }}"></script>
 <script src="{{ asset('js/custom/dashboard.js') }}"></script>
-<script src="{{ asset('js/apexChart/apexcharts.js') }}"></script>
+<!-- <script src="{{ asset('js/apexChart/apexcharts.js') }}"></script> -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> -->
 
 
@@ -467,7 +486,37 @@
         var chart = new ApexCharts(document.querySelector("#chart-hor-stack-bar-chart"), options);
         chart.render();
 
-
+        // new chart
+        // var ctx = document.getElementById("radar-chart-ranking-graph").getContext("2d");
+        // var data = {
+        //     labels: ["January", "February", "March", "April", "May", "June", "July"],
+        //     datasets: [{
+        //         label: "My First dataset",
+        //         fillColor: "rgba(220,220,220,0.2)",
+        //         strokeColor: "rgba(220,220,220,1)",
+        //         pointColor: "rgba(220,220,220,1)",
+        //         pointStrokeColor: "#fff",
+        //         pointHighlightFill: "#fff",
+        //         pointHighlightStroke: "rgba(220,220,220,1)",
+        //         data: [65, 59, 80, 81, 56, 55, 40]
+        //     }, {
+        //         label: "My Second dataset",
+        //         fillColor: "rgba(151,187,205,0.2)",
+        //         strokeColor: "rgba(151,187,205,1)",
+        //         pointColor: "rgba(151,187,205,1)",
+        //         pointStrokeColor: "#fff",
+        //         pointHighlightFill: "#fff",
+        //         pointHighlightStroke: "rgba(151,187,205,1)",
+        //         data: [28, 48, 40, 19, 86, 27, 90]
+        //     }]
+        // };
+        // var MyNewChart=null;
+        // $('#quarterlyExam').on('shown.bs.collapse', function () {
+        // setTimeout(function() {
+        //     if(MyNewChart == null)
+        //         MyNewChart = new Chart(ctx).Bar(data);
+        // },200);
+        // });
         
     });
 
@@ -701,106 +750,5 @@ var options = {
     }]
 };
 (chart = new ApexCharts(document.querySelector("#apex-line-1"), options)).render();
-
-</script>
-<script>
-    ! function(t) {
-    "use strict";
-
-    function o() {}
-    o.prototype.init = function() {
-        t("#inline-editable").Tabledit({
-            inputClass: "form-control form-control-sm",
-            editButton: !1,
-            deleteButton: !1,
-            columns: {
-                identifier: [0, "id"],
-                editable: [
-                    [2, "col2"],
-                    [3, "col3"],
-                    [5, "col5"],
-                ]
-            }
-        }), t("#btn-editable").Tabledit({
-            buttons: {
-                edit: {
-                    class: "btn btn-success",
-                    html: '<span class="mdi mdi-pencil"></span>',
-                    action: "edit"
-                }
-            },
-            inputClass: "form-control form-control-sm",
-            deleteButton: !1,
-            saveButton: !1,
-            autoFocus: !1,
-            columns: {
-                identifier: [0, "id"],
-                editable: [
-                    [2, "col2"],
-                    [3, "col3"],
-                    [4, "col4"],
-                    [5, "col5"],
-                    [6, "col6"]
-                ]
-            }
-        })
-    }, t.EditableTable = new o, t.EditableTable.Constructor = o
-}(window.jQuery),
-function() {
-    "use strict";
-    window.jQuery.EditableTable.init()
-}();
-
-</script>
-
-<script>
-    ! function(t) {
-    "use strict";
-
-    function o() {}
-    o.prototype.init = function() {
-        t("#inline-editable-2").Tabledit({
-            inputClass: "form-control form-control-sm",
-            editButton: !1,
-            deleteButton: !1,
-            columns: {
-                identifier: [0, "id"],
-                editable: [
-                    [1, "col1"],
-                    [2, "col2"],
-                    [3, "col3"],
-                    [4, "col4"],
-                    [6, "col6"]
-                ]
-            }
-        }), t("#btn-editable").Tabledit({
-            buttons: {
-                edit: {
-                    class: "btn btn-success",
-                    html: '<span class="mdi mdi-pencil"></span>',
-                    action: "edit"
-                }
-            },
-            inputClass: "form-control form-control-sm",
-            deleteButton: !1,
-            saveButton: !1,
-            autoFocus: !1,
-            columns: {
-                identifier: [0, "id"],
-                editable: [
-                    [1, "col1"],
-                    [2, "col2"],
-                    [3, "col3"],
-                    [4, "col4"],
-                    [6, "col6"]
-                ]
-            }
-        })
-    }, t.EditableTable = new o, t.EditableTable.Constructor = o
-}(window.jQuery),
-function() {
-    "use strict";
-    window.jQuery.EditableTable.init()
-}();
 
 </script>

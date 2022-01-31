@@ -144,11 +144,9 @@
                     <!-- task details -->
                 </div>
                 <!-- task panel end -->
-            </div> <!-- end card-box -->
-        </div> <!-- end col-->
+            </div>
+        </div>
     </div>
-    <!-- end row-->
-
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -162,7 +160,6 @@
                         </div> <!-- end col-->
 
                         <div class="col-lg-12">
-                            <!-- <div id="calendar-timeTable"></div> -->
                             <div id="calendar"></div>
                         </div> <!-- end col -->
 
@@ -218,279 +215,121 @@
                                     <div class="col-7">
                                         <div class="col-md-12" id="teacher-name"></div>
                                     </div>
-                                    <div class="col-12">
-                                        <!-- <div class="form-group"> -->
-                                        <!-- <label class="control-label font-weight-bold">Notes :</label> -->
-                                        <textarea class="form-control" style="margin: 12px;" placeholder="Enter Your Notes">Your progress for this term is excellent</textarea>
-                                        <!-- </div> -->
-                                    </div>
-                                    <div class="col-12">
-                                        <button type="button" class="btn btn-success" style="margin: 12px;">Save</button>
-
-                                    </div>
-                                </div>
-                                <div class="row mt-2">
-                                    <!-- <div class="col-6 text-right">
-                                        <a href="{{ route('teacher.classroom.management')}}"><button type="button" class="btn btn-primary width-xs waves-effect waves-light">Go to Class</button></a>
-                                    </div> -->
-                                    <div class="col-6">
-                                        <!-- <button type="button" class="btn btn-danger" id="btn-delete-event">Delete</button> -->
-                                    </div>
-                                    <div class="col-6 text-right">
-                                        <!-- <button type="button" class="btn btn-light mr-1" data-dismiss="modal">Close</button> -->
-                                        <!-- <button type="submit" class="btn btn-success" id="btn-save-event">Save</button> -->
-                                        <a href="{{ route('teacher.classroom.management')}}"><button type="button" class="btn btn-primary width-xs waves-effect waves-light">Go to Classroom</button></a>
-                                    </div>
                                 </div>
                             </form>
                         </div>
                     </div> <!-- end modal-content-->
                 </div> <!-- end modal dialog-->
             </div>
+            <!-- end modal-->
         </div>
         <!-- end col-12 -->
     </div> <!-- end row -->
+
+
+    @include('parent.dashboard.report_card')
 
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">Top Scoreres of class</h4>
+                    <h4 class="header-title">Test Score Analysis</h4>
 
                     <div class="mt-4 chartjs-chart">
-                        <div id="chart-hor-stack-bar-chart" style="min-height: 365px;"></div>
+                        <canvas id="radar-chart-test-marks" height="350" data-colors="#39afd1,#a17fe0"></canvas>
                         <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
                     </div>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col -->
     </div>
-
+    <!--General Details -->
+    <span class="fab fa-audible" id="span-parent"></span>
+    <span class="header-title mb-3" id="span-parent">General Details
+        <hr id="hr">
+    </span>
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-xl-12">
             <div class="card">
+
                 <div class="card-body">
-                    <h4 class="header-title">Top 10 ranking</h4>
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card-box">
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Score</th>
-                                                <th>Grade</th>
-                                                <th>Ranking</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Bao</th>
-                                                <td>99</td>
-                                                <td>A</td>
-                                                <td>1</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Baozhai</th>
-                                                <td>85</td>
-                                                <td>B</td>
-                                                <td>2</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Bingwen</th>
-                                                <td>75</td>
-                                                <td>C</td>
-                                                <td>3</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Biyu</th>
-                                                <td>60</td>
-                                                <td>D</td>
-                                                <td>4</td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
+                    <form id="demo-form" data-parsley-validate="">
+                        <!--1st row-->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="heard">Child Name<span class="text-danger">*</span></label>
+                                    <select id="heard" class="form-control" required="">
+                                        <option value="Davy Jones">David Jones</option>
+                                        <option value="Peter parker">Peter Parker</option>
+                                    </select>
                                 </div>
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
-                    </div>
-                    <!--- end row -->
-                </div> <!-- end card-body-->
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="heard">Leave From<span class="text-danger">*</span></label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="far fa-calendar-alt"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="heard">To<span class="text-danger">*</span></label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="far fa-calendar-alt"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--2st row-->
+                        <div class="row">
+                            <div class="col-md-8">
+                                <label for="message">Reason(s)<span class="text-danger">*</span></label>
+                                <textarea id="message" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                            </textarea>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="heard">Posting Date<span class="text-danger">*</span></label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="far fa-calendar-alt"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--3rd row-->
+                        <br />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button class="btn btn-primary-bl waves-effect waves-light" type="Save">Submit</button>
+                            </div>
+                            <div class="col-md-4">
+
+
+                            </div>
+                        </div>
+                    </form>
+
+                </div> <!-- end card-body -->
             </div> <!-- end card-->
         </div> <!-- end col -->
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title">Bottom 10 ranking</h4>
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card-box">
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Score</th>
-                                                <th>Grade</th>
-                                                <th>Ranking</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Biyu</th>
-                                                <td>60</td>
-                                                <td>D</td>
-                                                <td>4</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Bingwen</th>
-                                                <td>75</td>
-                                                <td>C</td>
-                                                <td>3</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Baozhai</th>
-                                                <td>85</td>
-                                                <td>B</td>
-                                                <td>2</td>
-                                            </tr>
-
-                                            <tr>
-                                                <th>Bao</th>
-                                                <td>99</td>
-                                                <td>A</td>
-                                                <td>1</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
-                    </div>
-                    <!--- end row -->
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title">Top 10 Improments</h4>
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card-box">
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Score</th>
-                                                <th>Grade</th>
-                                                <th>Ranking</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Biyu</th>
-                                                <td>60</td>
-                                                <td>D</td>
-                                                <td>4</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Bingwen</th>
-                                                <td>75</td>
-                                                <td>C</td>
-                                                <td>3</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Baozhai</th>
-                                                <td>85</td>
-                                                <td>B</td>
-                                                <td>2</td>
-                                            </tr>
-
-                                            <tr>
-                                                <th>Bao</th>
-                                                <td>99</td>
-                                                <td>A</td>
-                                                <td>1</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
-                    </div>
-                    <!--- end row -->
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title">Bottom 10 Deteriorate</h4>
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card-box">
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Score</th>
-                                                <th>Grade</th>
-                                                <th>Ranking</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Biyu</th>
-                                                <td>60</td>
-                                                <td>D</td>
-                                                <td>4</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Bingwen</th>
-                                                <td>75</td>
-                                                <td>C</td>
-                                                <td>3</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Baozhai</th>
-                                                <td>85</td>
-                                                <td>B</td>
-                                                <td>2</td>
-                                            </tr>
-
-                                            <tr>
-                                                <th>Bao</th>
-                                                <td>99</td>
-                                                <td>A</td>
-                                                <td>1</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
-                    </div>
-                    <!--- end row -->
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-    </div>
-    @include('teacher.dashboard.check_list')
-
+    @include('parent.dashboard.check_list')
 </div> <!-- container -->
 @endsection

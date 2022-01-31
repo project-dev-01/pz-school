@@ -3,7 +3,7 @@
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
-
+                        
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
@@ -15,13 +15,13 @@
                 <h4 class="page-title">Dashboard</h4>
             </div>
         </div>
-    </div>
-    <!-- end page title -->
+    </div>     
+    <!-- end page title -->    
     <div class="row">
         <div class="col-12">
             <div class="card-box">
-                <!-- tasks panel -->
-                <div class="row">
+                 <!-- tasks panel -->
+                 <div class="row">
                     <div class="col-xl-8">
                         <div class="row">
                             <div class="col">
@@ -50,7 +50,7 @@
                                                                 </div> <!-- end col -->
                                                                 <div class="col-lg-6">
                                                                     <div class="d-sm-flex justify-content-between">
-
+                                                                        
                                                                         <div class="mt-3 mt-sm-0">
                                                                             <ul class="list-inline font-13 text-sm-right">
                                                                                 <li class="list-inline-item pr-1">
@@ -144,17 +144,15 @@
                     <!-- task details -->
                 </div>
                 <!-- task panel end -->
-            </div> <!-- end card-box -->
-        </div> <!-- end col-->
-    </div>
-    <!-- end row-->
-
+            </div>
+        </div>
+    </div>  
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-3">
+                        <div class="col-lg-3">                                               
                             <div id="external-events" class="m-t-20">
                                 <br>
                             </div>
@@ -162,11 +160,10 @@
                         </div> <!-- end col-->
 
                         <div class="col-lg-12">
-                            <!-- <div id="calendar-timeTable"></div> -->
                             <div id="calendar"></div>
                         </div> <!-- end col -->
 
-                    </div> <!-- end row -->
+                    </div>  <!-- end row -->
                 </div> <!-- end card body-->
             </div> <!-- end card -->
 
@@ -218,279 +215,49 @@
                                     <div class="col-7">
                                         <div class="col-md-12" id="teacher-name"></div>
                                     </div>
-                                    <div class="col-12">
-                                        <!-- <div class="form-group"> -->
-                                        <!-- <label class="control-label font-weight-bold">Notes :</label> -->
-                                        <textarea class="form-control" style="margin: 12px;" placeholder="Enter Your Notes">Your progress for this term is excellent</textarea>
-                                        <!-- </div> -->
-                                    </div>
-                                    <div class="col-12">
-                                        <button type="button" class="btn btn-success" style="margin: 12px;">Save</button>
-
-                                    </div>
-                                </div>
-                                <div class="row mt-2">
-                                    <!-- <div class="col-6 text-right">
-                                        <a href="{{ route('teacher.classroom.management')}}"><button type="button" class="btn btn-primary width-xs waves-effect waves-light">Go to Class</button></a>
-                                    </div> -->
-                                    <div class="col-6">
-                                        <!-- <button type="button" class="btn btn-danger" id="btn-delete-event">Delete</button> -->
-                                    </div>
-                                    <div class="col-6 text-right">
-                                        <!-- <button type="button" class="btn btn-light mr-1" data-dismiss="modal">Close</button> -->
-                                        <!-- <button type="submit" class="btn btn-success" id="btn-save-event">Save</button> -->
-                                        <a href="{{ route('teacher.classroom.management')}}"><button type="button" class="btn btn-primary width-xs waves-effect waves-light">Go to Classroom</button></a>
-                                    </div>
                                 </div>
                             </form>
                         </div>
                     </div> <!-- end modal-content-->
                 </div> <!-- end modal dialog-->
             </div>
+            <!-- end modal-->
         </div>
         <!-- end col-12 -->
     </div> <!-- end row -->
+    @include('student.dashboard.report_card')
 
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">Top Scoreres of class</h4>
+                    <h4 class="header-title">Test Score Analysis</h4>
 
                     <div class="mt-4 chartjs-chart">
-                        <div id="chart-hor-stack-bar-chart" style="min-height: 365px;"></div>
+                        <canvas id="radar-chart-test-marks" height="350" data-colors="#39afd1,#a17fe0"></canvas>
                         <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
                     </div>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col -->
-    </div>
-
-    <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">Top 10 ranking</h4>
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card-box">
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Score</th>
-                                                <th>Grade</th>
-                                                <th>Ranking</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Bao</th>
-                                                <td>99</td>
-                                                <td>A</td>
-                                                <td>1</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Baozhai</th>
-                                                <td>85</td>
-                                                <td>B</td>
-                                                <td>2</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Bingwen</th>
-                                                <td>75</td>
-                                                <td>C</td>
-                                                <td>3</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Biyu</th>
-                                                <td>60</td>
-                                                <td>D</td>
-                                                <td>4</td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
+                    <div class="card-widgets">
+                        <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                        <a data-toggle="collapse" href="#cardCollpase2" role="button" aria-expanded="false" aria-controls="cardCollpase2"><i class="mdi mdi-minus"></i></a>
+                        <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
                     </div>
-                    <!--- end row -->
-                </div> <!-- end card-body-->
+                    <h4 class="header-title mb-0">Marks by Subject</h4>
+
+                    <div id="cardCollpase2" class="collapse pt-3 show" dir="ltr">
+                        <div id="apex-line-1" class="apex-charts" data-colors="#6658dd,#1abc9c"></div>
+                    </div> <!-- collapsed end -->
+                </div> <!-- end card-body -->
             </div> <!-- end card-->
-        </div> <!-- end col -->
+        </div> <!-- end col-->
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title">Bottom 10 ranking</h4>
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card-box">
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Score</th>
-                                                <th>Grade</th>
-                                                <th>Ranking</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Biyu</th>
-                                                <td>60</td>
-                                                <td>D</td>
-                                                <td>4</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Bingwen</th>
-                                                <td>75</td>
-                                                <td>C</td>
-                                                <td>3</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Baozhai</th>
-                                                <td>85</td>
-                                                <td>B</td>
-                                                <td>2</td>
-                                            </tr>
-
-                                            <tr>
-                                                <th>Bao</th>
-                                                <td>99</td>
-                                                <td>A</td>
-                                                <td>1</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
-                    </div>
-                    <!--- end row -->
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title">Top 10 Improments</h4>
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card-box">
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Score</th>
-                                                <th>Grade</th>
-                                                <th>Ranking</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Biyu</th>
-                                                <td>60</td>
-                                                <td>D</td>
-                                                <td>4</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Bingwen</th>
-                                                <td>75</td>
-                                                <td>C</td>
-                                                <td>3</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Baozhai</th>
-                                                <td>85</td>
-                                                <td>B</td>
-                                                <td>2</td>
-                                            </tr>
-
-                                            <tr>
-                                                <th>Bao</th>
-                                                <td>99</td>
-                                                <td>A</td>
-                                                <td>1</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
-                    </div>
-                    <!--- end row -->
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title">Bottom 10 Deteriorate</h4>
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card-box">
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Score</th>
-                                                <th>Grade</th>
-                                                <th>Ranking</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Biyu</th>
-                                                <td>60</td>
-                                                <td>D</td>
-                                                <td>4</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Bingwen</th>
-                                                <td>75</td>
-                                                <td>C</td>
-                                                <td>3</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Baozhai</th>
-                                                <td>85</td>
-                                                <td>B</td>
-                                                <td>2</td>
-                                            </tr>
-
-                                            <tr>
-                                                <th>Bao</th>
-                                                <td>99</td>
-                                                <td>A</td>
-                                                <td>1</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
-                    </div>
-                    <!--- end row -->
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-    </div>
-    @include('teacher.dashboard.check_list')
-
+    @include('student.dashboard.check_list')
 </div> <!-- container -->
 @endsection
+    

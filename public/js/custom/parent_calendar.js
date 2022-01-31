@@ -5,11 +5,6 @@
         this.$body = l("body"), this.$modal = l("#event-modal"), this.$calendar = l("#calendar"), this.$formEvent = l("#form-event"), this.$btnNewEvent = l("#btn-new-event"), this.$btnDeleteEvent = l("#btn-delete-event"), this.$btnSaveEvent = l("#btn-save-event"), this.$modalTitle = l("#modal-title"), this.$calendarObj = null, this.$selectedEvent = null, this.$newEventData = null
     }
     e.prototype.onEventClick = function (e) {
-        console.log("event click");
-        console.log(e);
-        console.log(e.event);
-        console.log(e.event.extendedProps.subject);
-
         this.$formEvent[0].reset(), this.$formEvent.removeClass("was-validated"), this.$newEventData = null, this.$btnDeleteEvent.show(), this.$modalTitle.text("Edit Event"), this.$modal.modal({
             backdrop: "static"
         }), this.$selectedEvent = e.event,
@@ -39,7 +34,7 @@
 
             // current date
             var d = new Date();
-     
+
             var currentD = formatDate(d);
             var currentDPlusOne = formatDate(d.setDate(d.getDate() + 1));
             var currentDPlusTwo = formatDate(d.setDate(d.getDate() + 1));

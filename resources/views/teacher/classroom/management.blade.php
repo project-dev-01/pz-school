@@ -604,7 +604,7 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="heard">Report<span class="text-danger">*</span></label>
-                                                <textarea class="form-control" id="product-description" rows="5" placeholder="Please enter description"></textarea>
+                                                <textarea class="form-control" id="product-description" rows="5" placeholder="Enter Your Notes">Your progress for this term is excellent</textarea>
                                             </div>
 											 <div class="row">
 											 <div class="col-md-6">
