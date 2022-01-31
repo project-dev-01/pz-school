@@ -104,9 +104,9 @@
                                         <th class="text-center">C</th>
                                         <th class="text-center">D</th>
                                         <th class="text-center">E</th>
-                                        <th class="text-center">LULUS</th>
+                                        <th class="text-center">PASS</th>
                                         <th class="text-center">G</th>
-                                        <th class="text-center">GPMP</th>
+                                        <th class="text-center">Avg. grade of subject</th>
                                         <th class="text-center">%</th>
                                     </tr>
                                     <tr>
@@ -148,6 +148,7 @@
                                    <td class="text-right" rowspan="2">95.83</td>
                                 </tr>
                                 <tr>  
+                                <td class="text-right">0.00</td>  
                                     <td class="text-right">0.00</td>                                
                                    <td class="text-right">0.00</td>
                                    <td class="text-right">41.67</td>
@@ -175,7 +176,20 @@
         </div> <!-- end col -->
 
     </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Subject Analysis</h4>
 
+                    <div class="mt-4 chartjs-chart">
+                        <canvas id="radar-chart-test-teacher-bystudentmarks" height="350" data-colors="#39afd1,#a17fe0"></canvas>
+                        <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
+                    </div>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
 </div> <!-- container -->
 
 @endsection

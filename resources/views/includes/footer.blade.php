@@ -303,6 +303,238 @@
                     };
                     charts.push(this.respChart($("#radar-chart-test-marks"), 'Radar', radarChart, radarOpts));
                 }
+                if ($('#radar-chart-test-bystudentmarks').length > 0) {
+                    var dataColors = $("#radar-chart-test-bystudentmarks").data('colors');
+                    var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
+                    //radar chart
+                    var radarChart = {
+                        labels: ["Mathematics", "History", "Study of the Environment", "Geography", "Natural Sciences", "Civics Education", "Physical Education","English"],
+                        datasets: [{
+                                label: "Quarterly",
+                                backgroundColor: hexToRGB(colors[0], 0.3),
+                                borderColor: colors[0],
+                                pointBackgroundColor: colors[0],
+                                pointBorderColor: "#fff",
+                                pointHoverBackgroundColor: "#fff",
+                                pointHoverBorderColor: colors[0],
+                                data: [95.83, 53, 100, 68.75, 54.55, 32.86, 26.32,14.29]
+                            },
+                            {
+                                label: "Annual",
+                                backgroundColor: hexToRGB(colors[1], 0.3),
+                                borderColor: colors[1],
+                                pointBackgroundColor: colors[1],
+                                pointBorderColor: "#fff",
+                                pointHoverBackgroundColor: "#fff",
+                                pointHoverBorderColor: colors[1],
+                                data: [90.53, 60.85, 80, 75, 40.25, 50.55, 88.85]
+                            }
+                        ]
+                    };
+                    var radarOpts = {
+                        maintainAspectRatio: false
+                    };
+                    charts.push(this.respChart($("#radar-chart-test-bystudentmarks"), 'Radar', radarChart, radarOpts));
+                }
+                if ($('#radar-chart-test-teacher-bystudentmarks').length > 0) {
+                    var dataColors = $("#radar-chart-test-teacher-bystudentmarks").data('colors');
+                    var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
+                    //radar chart
+                    var radarChart = {
+                        labels: ["A", "A+", "A-", "B+", "B", "C+", "C","D","E","G"],
+                        datasets: [{
+                                label: "Quarterly",
+                                backgroundColor: hexToRGB(colors[0], 0.3),
+                                borderColor: colors[0],
+                                pointBackgroundColor: colors[0],
+                                pointBorderColor: "#fff",
+                                pointHoverBackgroundColor: "#fff",
+                                pointHoverBorderColor: colors[0],
+                                data: [0, 41, 16, 12, 4, 20, 0,0,0]
+                            },
+                            {
+                                label: "Annual",
+                                backgroundColor: hexToRGB(colors[1], 0.3),
+                                borderColor: colors[1],
+                                pointBackgroundColor: colors[1],
+                                pointBorderColor: "#fff",
+                                pointHoverBackgroundColor: "#fff",
+                                pointHoverBorderColor: colors[1],
+                                data: [0, 41, 16, 12, 4, 20, 0,0,0]
+                            }
+                        ]
+                    };
+                    var radarOpts = {
+                        maintainAspectRatio: false
+                    };
+                    charts.push(this.respChart($("#radar-chart-test-teacher-bystudentmarks"), 'Radar', radarChart, radarOpts));
+                }
+                if ($('#radar-chart-test-byclass').length > 0) {
+                    var dataColors = $("#radar-chart-test-byclass").data('colors');
+                    var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
+                    //radar chart
+                    var radarChart = {
+                        labels: ["I", "II", "III", "IV", "V", "VI", "VII","VIII"],
+                        datasets: [{
+                                label: "Quarterly",
+                                backgroundColor: hexToRGB(colors[0], 0.3),
+                                borderColor: colors[0],
+                                pointBackgroundColor: colors[0],
+                                pointBorderColor: "#fff",
+                                pointHoverBackgroundColor: "#fff",
+                                pointHoverBorderColor: colors[0],
+                                data: [95.83, 53, 100, 68.75, 54.55, 32.86, 26.32,14.29]
+                            },
+                            {
+                                label: "Annual",
+                                backgroundColor: hexToRGB(colors[1], 0.3),
+                                borderColor: colors[1],
+                                pointBackgroundColor: colors[1],
+                                pointBorderColor: "#fff",
+                                pointHoverBackgroundColor: "#fff",
+                                pointHoverBorderColor: colors[1],
+                                data: [90.53, 60.85, 80, 75, 40.25, 50.55, 88.85]
+                            }
+                        ]
+                    };
+                    var radarOpts = {
+                        maintainAspectRatio: false
+                    };
+                    charts.push(this.respChart($("#radar-chart-test-byclass"), 'Radar', radarChart, radarOpts));
+                }
+                if ($('#radar-chart-test-teacher-byclass').length > 0) {
+                    var dataColors = $("#radar-chart-test-teacher-byclass").data('colors');
+                    var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
+                    //radar chart
+                    var radarChart = {
+                        labels: ["A", "A+", "A-", "B+", "B", "C+", "C","D","E","G"],
+                        datasets: [{
+                                label: "Quarterly",
+                                backgroundColor: hexToRGB(colors[0], 0.3),
+                                borderColor: colors[0],
+                                pointBackgroundColor: colors[0],
+                                pointBorderColor: "#fff",
+                                pointHoverBackgroundColor: "#fff",
+                                pointHoverBorderColor: colors[0],
+                                data: [0,41,16,12,4,20,0,0,0,4]
+                            },
+                            {
+                                label: "Annual",
+                                backgroundColor: hexToRGB(colors[1], 0.3),
+                                borderColor: colors[1],
+                                pointBackgroundColor: colors[1],
+                                pointBorderColor: "#fff",
+                                pointHoverBackgroundColor: "#fff",
+                                pointHoverBorderColor: colors[1],
+                                data: [2,41,16,12,4,20,0,0,0,4]
+                            }
+                        ]
+                    };
+                    var radarOpts = {
+                        maintainAspectRatio: false
+                    };
+                    charts.push(this.respChart($("#radar-chart-test-teacher-byclass"), 'Radar', radarChart, radarOpts));
+                }
+                if ($('#radar-chart-test-bystudent').length > 0) {
+                    var dataColors = $("#radar-chart-test-bystudent").data('colors');
+                    var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
+                    //radar chart
+                    var radarChart = {
+                        labels: ["Mia", "James", "Benjamin", "Isabella", "Amelia"],
+                        datasets: [{
+                                label: "Mid Term",
+                                backgroundColor: hexToRGB(colors[0], 0.3),
+                                borderColor: colors[0],
+                                pointBackgroundColor: colors[0],
+                                pointBorderColor: "#fff",
+                                pointHoverBackgroundColor: "#fff",
+                                pointHoverBorderColor: colors[0],
+                                data: [85, 79, 70, 68,60]
+                            },
+                            {
+                                label: "Annual",
+                                backgroundColor: hexToRGB(colors[1], 0.3),
+                                borderColor: colors[1],
+                                pointBackgroundColor: colors[1],
+                                pointBorderColor: "#fff",
+                                pointHoverBackgroundColor: "#fff",
+                                pointHoverBorderColor: colors[1],
+                                data: [80, 75, 69, 65, 60]
+                            }
+                        ]
+                    };
+                    var radarOpts = {
+                        maintainAspectRatio: false
+                    };
+                    charts.push(this.respChart($("#radar-chart-test-bystudent"), 'Radar', radarChart, radarOpts));
+                }
+                if ($('#radar-chart-test-teacher-bystudent').length > 0) {
+                    var dataColors = $("#radar-chart-test-teacher-bystudent").data('colors');
+                    var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
+                    //radar chart
+                    var radarChart = {
+                        labels: ["Amelia", "Isabella", "Benjamin", "James", "Sophia"],
+                        datasets: [{
+                                label: "Mid Term",
+                                backgroundColor: hexToRGB(colors[0], 0.3),
+                                borderColor: colors[0],
+                                pointBackgroundColor: colors[0],
+                                pointBorderColor: "#fff",
+                                pointHoverBackgroundColor: "#fff",
+                                pointHoverBorderColor: colors[0],
+                                data: [80, 73, 70, 68,60]
+                            },
+                            {
+                                label: "Annual",
+                                backgroundColor: hexToRGB(colors[1], 0.3),
+                                borderColor: colors[1],
+                                pointBackgroundColor: colors[1],
+                                pointBorderColor: "#fff",
+                                pointHoverBackgroundColor: "#fff",
+                                pointHoverBorderColor: colors[1],
+                                data: [88, 75, 69, 65, 60]
+                            }
+                        ]
+                    };
+                    var radarOpts = {
+                        maintainAspectRatio: false
+                    };
+                    charts.push(this.respChart($("#radar-chart-test-teacher-bystudent"), 'Radar', radarChart, radarOpts));
+                }
+                if ($('#radar-chart-test-overall').length > 0) {
+                    var dataColors = $("#radar-chart-test-overall").data('colors');
+                    var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
+                    //radar chart
+                    var radarChart = {
+                        labels: ["I", "II", "III", "IV", "V", "VI", "VII","VIII"],
+                        datasets: [{
+                                label: "Quarterly",
+                                backgroundColor: hexToRGB(colors[0], 0.3),
+                                borderColor: colors[0],
+                                pointBackgroundColor: colors[0],
+                                pointBorderColor: "#fff",
+                                pointHoverBackgroundColor: "#fff",
+                                pointHoverBorderColor: colors[0],
+                                data: [95, 53, 100, 68, 54, 22, 26,14]
+                            },
+                            {
+                                label: "Annual",
+                                backgroundColor: hexToRGB(colors[1], 0.3),
+                                borderColor: colors[1],
+                                pointBackgroundColor: colors[1],
+                                pointBorderColor: "#fff",
+                                pointHoverBackgroundColor: "#fff",
+                                pointHoverBorderColor: colors[1],
+                                data: [85, 63, 80, 40, 50, 40, 45,30]
+                            }
+                        ]
+                    };
+                    var radarOpts = {
+                        maintainAspectRatio: false
+                    };
+                    charts.push(this.respChart($("#radar-chart-test-overall"), 'Radar', radarChart, radarOpts));
+                }
+
                 return charts;
             },
             //initializing various components and plugins

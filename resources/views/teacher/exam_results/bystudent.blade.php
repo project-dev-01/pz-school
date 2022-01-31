@@ -175,7 +175,20 @@
         </div> <!-- end col -->
 
     </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Student Analysis</h4>
 
+                    <div class="mt-4 chartjs-chart">
+                        <canvas id="radar-chart-test-teacher-bystudent" height="350" data-colors="#39afd1,#a17fe0"></canvas>
+                        <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
+                    </div>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
 </div> <!-- container -->
 
 @endsection

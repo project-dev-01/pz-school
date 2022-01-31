@@ -119,9 +119,9 @@
                                         <th class="text-center">C</th>
                                         <th class="text-center">D</th>
                                         <th class="text-center">E</th>
-                                        <th class="text-center">LULUS</th>
+                                        <th class="text-center">PASS</th>
                                         <th class="text-center">G</th>
-                                        <th class="text-center">GPMP</th>
+                                        <th class="text-center">Avg. grade of subject</th>
                                         <th class="text-center">%</th>
                                     </tr>
                                     <tr>
