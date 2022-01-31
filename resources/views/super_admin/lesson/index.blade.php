@@ -36,8 +36,8 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Standard</th>
                                 <th>Class</th>
-                                <th>Section</th>
                                 <th>Teacher</th>
                                 <th>Week Days</th>
                                 <th>Start Time</th>
@@ -48,12 +48,42 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>First class</td>
+                                <td>I</td>
                                 <td>A</td>
-                                <td>xxxx</td>
+                                <td>Starc</td>
                                 <td>2</td>
                                 <td>08:00</td>
                                 <td>08:30</td>
+                                <td>
+                                    <div class="button-list">
+                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id=""><i class="fe-edit"></i></a>
+                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id=""><i class="fe-trash-2"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>IV</td>
+                                <td>E</td>
+                                <td>Starc</td>
+                                <td>2</td>
+                                <td>11:00</td>
+                                <td>11:30</td>
+                                <td>
+                                    <div class="button-list">
+                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id=""><i class="fe-edit"></i></a>
+                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id=""><i class="fe-trash-2"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>X</td>
+                                <td>C</td>
+                                <td>Smith</td>
+                                <td>5</td>
+                                <td>09:00</td>
+                                <td>10:00</td>
                                 <td>
                                     <div class="button-list">
                                         <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id=""><i class="fe-edit"></i></a>

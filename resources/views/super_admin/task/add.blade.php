@@ -13,7 +13,7 @@
                         <label for="branch_id">Branch<span class="text-danger">*</span></label>
                         <select class="form-control" id="branch_id" name="branch_id">
                             <option value="">Choose Branch</option>
-                            <option value="">Cuddalore</option>
+                            <option value="">Malaysia</option>
                             <option value="press">Singapore</option>
                         </select>
                         <span class="text-danger error-text branch_id_error"></span>

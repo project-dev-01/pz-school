@@ -44,8 +44,30 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Cuddalore</td>
-                                <td>test</td>
+                                <td>Malaysia</td>
+                                <td>NEET</td>
+                                <td>
+                                    <div class="button-list">
+                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
+                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Malaysia</td>
+                                <td>Aibots</td>
+                                <td>
+                                    <div class="button-list">
+                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
+                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Malaysia</td>
+                                <td>JEE</td>
                                 <td>
                                     <div class="button-list">
                                         <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>

@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <h5 class="text-center">Exam : Annual Exam</h5>
-                <h6 class="text-center">Class : 1(A)</h6>
+                <h6 class="text-center">Class : I(A)</h6>
                 <hr>
                 <div class="table-responsive">
                     <table class="table table-bordered mb-0">
@@ -24,8 +24,29 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>English</td>
-                                <td>16.Dec.2021</td>
+                                <td>Maths</td>
+                                <td>16.Feb.2022</td>
+                                <td>3:10 PM</td>
+                                <td>4:10 PM</td>
+                                <td>01</td>
+                            </tr>
+                            <tr>
+                                <td>Physics</td>
+                                <td>17.Feb.2022</td>
+                                <td>3:10 PM</td>
+                                <td>4:10 PM</td>
+                                <td>01</td>
+                            </tr>
+                            <tr>
+                                <td>Chemistry</td>
+                                <td>19.Feb.2022</td>
+                                <td>3:10 PM</td>
+                                <td>4:10 PM</td>
+                                <td>01</td>
+                            </tr>
+                            <tr>
+                                <td>Geography</td>
+                                <td>21.Feb.2022</td>
                                 <td>3:10 PM</td>
                                 <td>4:10 PM</td>
                                 <td>01</td>

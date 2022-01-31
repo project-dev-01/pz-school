@@ -53,12 +53,30 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>First Branch</td>
+                                <td>Malaysia</td>
                                 <td>Block A</td>
-                                <td>Category</td>
+                                <td>Eco</td>
                                 <td>50</td>
                                 <td>5000</td>
                                 <td>Good</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Malaysia</td>
+                                <td>Block B</td>
+                                <td>Cheap</td>
+                                <td>50</td>
+                                <td>3000</td>
+                                <td>Better</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Malaysia</td>
+                                <td>Block C</td>
+                                <td>Party</td>
+                                <td>50</td>
+                                <td>8000</td>
+                                <td>Nice</td>
                             </tr>
                         </tbody>
                     </table>
@@ -74,12 +92,9 @@
                         <label for="inputEmail3" class="col-3 col-form-label">Branch Name<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
-                            <option value="">select</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
-                        </select>
+                            <option value="">Choose Branch</option>
+                            <option value="">Malaysia</option>
+                            <option value="">Singapore</option>
                         </div>
                     </div>
                     </div>
@@ -97,11 +112,10 @@
                         <label for="inputEmail3" class="col-3 col-form-label">Category<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
-                            <option value="">select</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option value="">Select</option>
+                            <option value="net">Eco</option>
+                            <option value="mouth">Cheap</option>
+                            <option value="other">Party</option>
                         </select>
                         </div>
                     </div>

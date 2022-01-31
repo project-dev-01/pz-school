@@ -53,12 +53,30 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>First Branch</td>
-                                <td>Semmandalam</td>
+                                <td>Malaysia</td>
+                                <td>Route 35</td>
                                 <td>10</td>
                                 <td>Bus stand</td>
                                 <td>$50</td>
-                                <td>TN 32-0011</td>
+                                <td>KV 0632</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Malaysia</td>
+                                <td>Route 57</td>
+                                <td>6</td>
+                                <td>Techno Park</td>
+                                <td>$80</td>
+                                <td>SAB 7219</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Malaysia</td>
+                                <td>Route 62</td>
+                                <td>8</td>
+                                <td>Bank</td>
+                                <td>$70</td>
+                                <td>WD 4567</td>
                             </tr>
                         </tbody>
                     </table>
@@ -84,11 +102,11 @@
                         <label for="inputEmail3" class="col-3 col-form-label">Transport Route<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
-                            <option value="">select</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option value="">Select</option>
+                            <option>Route 62</option>
+                            <option>Route 57</option>
+                            <option>Route 43</option>
+                            <option>Route 35</option>
                         </select>
                         </div>
                     </div>
@@ -98,11 +116,10 @@
                         <label for="inputEmail3" class="col-3 col-form-label">Stoppage<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
-                            <option value="">select</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option value="">Select</option>
+                            <option>6</option>
+                            <option>8</option>
+                            <option>10</option>
                         </select>
                         </div>
                     </div>

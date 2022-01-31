@@ -33,7 +33,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="text-right">
-                                            <h3 class="my-1" style="color:blue"><span data-plugin="counterup">0</span></h3>
+                                            <h3 class="my-1" style="color:blue"><span data-plugin="counterup">6</span></h3>
 
                                         </div>
                                     </div>
@@ -59,7 +59,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="text-right">
-                                            <h3 class="my-1" style="color:blue"><span data-plugin="counterup">0</span></h3>
+                                            <h3 class="my-1" style="color:blue"><span data-plugin="counterup">5</span></h3>
 
                                         </div>
                                     </div>
@@ -85,7 +85,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="text-right">
-                                            <h3 class="my-1" style="color:blue"><span data-plugin="counterup">0</span></h3>
+                                            <h3 class="my-1" style="color:blue"><span data-plugin="counterup">2</span></h3>
 
                                         </div>
                                     </div>
@@ -111,7 +111,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="text-right">
-                                            <h3 class="my-1" style="color:blue"><span data-plugin="counterup">0</span></h3>
+                                            <h3 class="my-1" style="color:blue"><span data-plugin="counterup">4</span></h3>
 
                                         </div>
                                     </div>
@@ -149,7 +149,7 @@
                                                             <div class="row justify-content-sm-between task-item">
                                                                 <div class="col-lg-6 mb-2">
                                                                     <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input taskListDashboard" id="task1">
+                                                                        <input type="checkbox" class="custom-control-input taskListDashboard2" id="task1">
                                                                         <label class="custom-control-label" for="task1">
                                                                             Half Yearly Exam
                                                                         </label>

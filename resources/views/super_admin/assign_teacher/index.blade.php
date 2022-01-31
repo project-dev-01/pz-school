@@ -32,18 +32,62 @@
                 </p>
 
                 <div class="table-responsive">
-                    <table class="table mb-0" id="assign-teacher-table">
+                    <table class="table mb-0" id="assign-teacher">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Branch Name</th>
+                                <th>Standard Name</th>
                                 <th>Class Name</th>
-                                <th>Section Name</th>
                                 <th>Teacher Name</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Malaysia</td>
+                                <td>I</td>
+                                <td>A</td>
+                                <td>David</td>
+                                <td><div class="button-list">
+                                <a href="' . route('branch.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteBranchBtn"><i class="fe-trash-2"></i></a>
+                        </div></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Singapore</td>
+                                <td>III</td>
+                                <td>D</td>
+                                <td>Cameron</td>
+                                <td><div class="button-list">
+                                <a href="' . route('branch.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteBranchBtn"><i class="fe-trash-2"></i></a>
+                        </div></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Malaysia</td>
+                                <td>X</td>
+                                <td>E</td>
+                                <td>Starc</td>
+                                <td><div class="button-list">
+                                <a href="' . route('branch.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteBranchBtn"><i class="fe-trash-2"></i></a>
+                        </div></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Singapore</td>
+                                <td>V</td>
+                                <td>C</td>
+                                <td>Smith</td>
+                                <td><div class="button-list">
+                                <a href="' . route('branch.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteBranchBtn"><i class="fe-trash-2"></i></a>
+                        </div></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

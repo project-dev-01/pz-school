@@ -52,11 +52,27 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>First Branch</td>
-                                <td>Semmandalam</td>
+                                <td>Malaysia</td>
+                                <td>Route 62</td>
                                 <td>Bus Stand</td>
                                 <td>Post Office</td>
                                 <td>Good</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Malaysia</td>
+                                <td>Route 57</td>
+                                <td>Tech Park</td>
+                                <td>Museam</td>
+                                <td>Nice</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Malaysia</td>
+                                <td>Route 35</td>
+                                <td>Beach</td>
+                                <td>Bus Stop</td>
+                                <td>Better</td>
                             </tr>
                         </tbody>
                     </table>

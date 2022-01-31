@@ -31,17 +31,16 @@
                     <span class="fas fa-home  " id="span-parent"></span>
                     <span class="header-title mb-3" id="span-parent">Academic Details
                     <hr id="hr"></span>
-                    <form id="demo-form" data-parsley-validate="">                                         
+                    <form id="demo-form" data-parsley-validate="" autocomplete="off">                                         
                     <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                         <label for="heard">Academic Year<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
                             <option value="">2020-2021</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option value="">2021-2022</option>
+                            <option value="">2022-2023</option>
+                            <option value="">2023-2024</option>
                         </select>
                     </div>
                     </div>
@@ -77,25 +76,32 @@
                     <div class="row">
                     <div class="col-md-3">
                     <div class="form-group">
-                        <label for="heard">Class<span class="text-danger">*</span></label>
+                        <label for="heard">Standard<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
                             <option value="">Select</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option>I</option>
+                            <option>II</option>
+                            <option>III</option>
+                            <option>IV</option>
+                            <option>V</option>
+                            <option>VI</option>
+                            <option>VII</option>
+                            <option>VIII</option>
+                            <option>IX</option>
+                            <option>X</option>
                         </select>
                     </div>
                     </div>
                     <div class="col-md-3">
                     <div class="form-group">
-                        <label for="heard">Section<span class="text-danger">*</span></label>
+                        <label for="heard">Class<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
                             <option value="">Choose..</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                            <option>E</option>
                         </select>
                     </div>
                     </div>
@@ -104,10 +110,8 @@
                         <label for="">Category<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
                             <option value="">Choose..</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option>Management</option>
+                            <option>Government</option>
                         </select>
                     </div> 
                     </div>										
@@ -160,10 +164,14 @@
                         <label for="heard">Blood Group<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
                             <option value="">Choose..</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option>A+</option>
+                            <option>A-</option>
+                            <option>B+</option>
+                            <option>B-</option>
+                            <option>O+</option>
+                            <option>O-</option>
+                            <option>AB+</option>
+                            <option>AB-</option>
                         </select>
                     </div>
                     </div>
@@ -475,11 +483,11 @@
                         <div class="form-group">
                         <label for="heard">Transport Route<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">First select the branch</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option value="">Select</option>
+                            <option>Route 62</option>
+                            <option>Route 57</option>
+                            <option>Route 43</option>
+                            <option>Route 35</option>
                         </select>
                     </div>
                     </div>
@@ -487,11 +495,11 @@
                         <div class="form-group">
                         <label for="heard">Vechicle No<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">First select the branch</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option value="">Select</option>
+                            <option>WD 4567</option>
+                            <option>SAB 7219</option>
+                            <option>KV 0632</option>
+                            <option>QAA 8151</option>
                         </select>
                     </div>
                     </div>
@@ -504,23 +512,21 @@
                         <div class="form-group">
                         <label for="heard">Hostel Name</label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">First select the branch</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option value="">Select</option>
+                            <option>Masada Backpacker</option>
+                            <option>Kota Kinabalu</option>
                         </select>
                     </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                        <label for="heard">Room Name</label>
+                        <label for="heard">Room Number</label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">First select the hostel</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option value="">Select</option>
+                            <option>14 </option>
+                            <option>51</option>
+                            <option>76</option>
+                            <option>98</option>
                         </select>
                     </div>
                     </div>

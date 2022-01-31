@@ -130,7 +130,7 @@
             <div class="card">
                 
                 <div class="card-body">
-                    <form id="demo-form" data-parsley-validate="">
+                    <form id="demo-form" data-parsley-validate="" autocomplete="off">
                         <!--1st row-->
                         <div class="row">
                             <div class="col-md-4">
@@ -139,7 +139,7 @@
                                     <select id="heard" class="form-control" required="">
                                     <option value="Ann">Annual</option>
                                     <option value="med">Medical</option>
-                                    <option value="com">Compassionate</option>
+                                    <option value="com">Compensate</option>
                                     <option value="unpaid">Unpaid</option>
                                     <option value="other">Other..</option>      
                                     </select>

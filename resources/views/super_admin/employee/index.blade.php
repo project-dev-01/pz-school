@@ -32,9 +32,8 @@
                                     <label for="name">Branch Name <span class="text-danger">*</span></label>
                                     <select class="form-control" name="branch_id" id="empBranchName">
                                         <option value="">Select Branch</option>
-                                        @foreach($branches as $b)
-                                        <option value="{{$b['id']}}">{{$b['name']}}</option>
-                                        @endforeach
+                                        <option >Malaysia</option>
+                                        <option >Singapore</option>
                                     </select>
                                     <span class="text-danger error-text branch_id_error"></span>
                                 </div>
@@ -72,6 +71,11 @@
                                     <label for="designation">Designation<span class="text-danger">*</span></label>
                                     <select class="form-control"  id="empDesignation" name="designation">
                                         <option value="">Choose Designation</option>
+                                        <option >BEd</option>
+                                        <option >MEd</option>
+                                        <option >BElEd</option>
+                                        <option >DEd </option>
+                                        <option >DLEd </option>
                                     </select>
                                     <span class="text-danger error-text designation_error"></span>
                                 </div>
@@ -81,6 +85,11 @@
                                     <label for="department">Department<span class="text-danger">*</span></label>
                                     <select class="form-control"  id="empDepartment" name="department">
                                         <option value="">Choose Department</option>
+                                        <option >Physics </option>
+                                        <option >Chemistry </option>
+                                        <option >Maths </option>
+                                        <option >Biology </option>
+                                        <option >Geography </option>
                                     </select>
                                     <span class="text-danger error-text department_error"></span>
                                 </div>

@@ -46,10 +46,36 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>First Branch</td>
-                                <td>Category</td>
-                                <td>Type</td>
+                                <td>Malaysia</td>
+                                <td>Eco</td>
+                                <td>2 Persons</td>
                                 <td>Good</td>
+                                <td>
+                                    <div class="button-list">
+                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
+                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Malaysia</td>
+                                <td>Cheap</td>
+                                <td>4 Persons</td>
+                                <td>Nice</td>
+                                <td>
+                                    <div class="button-list">
+                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
+                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Malaysia</td>
+                                <td>Party</td>
+                                <td>1 Person</td>
+                                <td>Better</td>
                                 <td>
                                     <div class="button-list">
                                         <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
@@ -80,6 +106,8 @@
                         <label for="branch_name">Branch Name</label>
                         <select class="form-control" id="branch_name" name="branch_name">
                             <option value="">Choose Branch</option>
+                            <option value="">Malaysia</option>
+                            <option value="">Singapore</option>
                         </select>
                         <span class="text-danger error-text branch_name_error"></span>
                     </div>

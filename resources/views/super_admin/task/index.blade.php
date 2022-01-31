@@ -45,11 +45,39 @@
                             </tr>
                             <tr>
                                 <td>1</td>
-                                <td>Cuddalore</td>
+                                <td>Malaysia</td>
                                 <td>Sports Day</td>
                                 <td>Tommorrow 10am</td>
                                 <td><span class="badge badge-soft-danger p-1">High</span></td>
                                 <td>All Should wear sports dress</td>
+                                <td>
+                                    <div class="button-list">
+                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id=""><i class="fe-edit"></i></a>
+                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id=""><i class="fe-trash-2"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Malaysia</td>
+                                <td>Culturals</td>
+                                <td>Feb 10 - 10am</td>
+                                <td><span class="badge badge-soft-danger p-1">Low</span></td>
+                                <td>All Should Participate</td>
+                                <td>
+                                    <div class="button-list">
+                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id=""><i class="fe-edit"></i></a>
+                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id=""><i class="fe-trash-2"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Singapore</td>
+                                <td>Seminar</td>
+                                <td>Feb 6 - 11am</td>
+                                <td><span class="badge badge-soft-danger p-1">High</span></td>
+                                <td>For all 10th Students</td>
                                 <td>
                                     <div class="button-list">
                                         <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id=""><i class="fe-edit"></i></a>

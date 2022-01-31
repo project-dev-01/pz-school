@@ -44,8 +44,30 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>First Branch</td>
-                                <td>English</td>
+                                <td>Malaysia</td>
+                                <td>Network</td>
+                                <td>
+                                    <div class="button-list">
+                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
+                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Malaysia</td>
+                                <td>Communication</td>
+                                <td>
+                                    <div class="button-list">
+                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
+                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Malaysia</td>
+                                <td>Story</td>
                                 <td>
                                     <div class="button-list">
                                         <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
@@ -76,6 +98,8 @@
                         <label for="branch_name">Branch Name</label>
                         <select class="form-control" id="branch_name" name="branch_name">
                             <option value="">Choose Branch</option>
+                            <option value="">Malaysia</option>
+                            <option value="">Singapore</option>
                         </select>
                         <span class="text-danger error-text branch_name_error"></span>
                     </div>

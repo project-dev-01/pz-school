@@ -43,6 +43,7 @@
                             <tr>
                                 <th>S.No</th>
                                 <th>Branch Name</th>
+                                <th>Route Name</th>
                                 <th>Stoppage</th>
                                 <th>Stop Time</th>
                                 <th>Route Fare</th>
@@ -51,10 +52,27 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>First Branch</td>
+                                <td>Malaysia</td>
+                                <th>Route 62</th>
                                 <td>10</td>
                                 <td>08.00 AM</td>
                                 <td>$50</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Malaysia</td>
+                                <th>Route 35</th>
+                                <td>6</td>
+                                <td>08.00 AM</td>
+                                <td>$70</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Malaysia</td>
+                                <th>Route 57</th>
+                                <td>8</td>
+                                <td>08.00 AM</td>
+                                <td>$90</td>
                             </tr>
                         </tbody>
                     </table>

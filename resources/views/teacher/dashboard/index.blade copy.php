@@ -33,7 +33,8 @@
                                                 <a class="text-dark" data-toggle="collapse" href="#todayTasks" aria-expanded="false" aria-controls="todayTasks">
                                                     <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> Today <span class="text-muted font-14">(10)</span></h5>
                                                 </a>
-
+                                                <!-- Right modal -->
+                                                <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#right-modal">Rightbar Modal</button> -->
                                                 <div class="collapse show" id="todayTasks">
                                                     <div class="card mb-0 shadow-none">
                                                         <div class="card-body pb-0" id="task-list-one">
@@ -41,7 +42,7 @@
                                                             <div class="row justify-content-sm-between task-item">
                                                                 <div class="col-lg-6 mb-2">
                                                                     <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input" id="task1">
+                                                                        <input type="checkbox" class="custom-control-input taskListDashboard2" id="task1">
                                                                         <label class="custom-control-label" for="task1">
                                                                             Half Yearly Exam
                                                                         </label>
@@ -56,14 +57,14 @@
                                                                                     <i class='mdi mdi-calendar-month-outline font-16 mr-1'></i>
                                                                                     Today 10am
                                                                                 </li>
-                                                                                <!-- <li class="list-inline-item pr-1">
+                                                                                <li class="list-inline-item pr-1">
                                                                                     <i class='mdi mdi-tune font-16 mr-1'></i>
                                                                                     3/7
                                                                                 </li>
                                                                                 <li class="list-inline-item pr-2">
                                                                                     <i class='mdi mdi-comment-text-multiple-outline font-16 mr-1'></i>
                                                                                     21
-                                                                                </li> -->
+                                                                                </li>
                                                                                 <li class="list-inline-item">
                                                                                     <span class="badge badge-soft-danger p-1">High</span>
                                                                                 </li>
@@ -92,7 +93,7 @@
                                                                 <div class="row justify-content-sm-between task-item">
                                                                     <div class="col-lg-6 mb-2">
                                                                         <div class="custom-control custom-checkbox">
-                                                                            <input type="checkbox" class="custom-control-input" id="task4">
+                                                                            <input type="checkbox" class="custom-control-input taskListDashboard" id="task4">
                                                                             <label class="custom-control-label" for="task4">
                                                                                 Sports Day
                                                                             </label>
@@ -107,14 +108,14 @@
                                                                                         Tomorrow
                                                                                         7am
                                                                                     </li>
-                                                                                    <!-- <li class="list-inline-item pr-1">
+                                                                                    <li class="list-inline-item pr-1">
                                                                                         <i class='mdi mdi-tune font-16 mr-1'></i>
                                                                                         1/12
                                                                                     </li>
                                                                                     <li class="list-inline-item pr-2">
                                                                                         <i class='mdi mdi-comment-text-multiple-outline font-16 mr-1'></i>
                                                                                         36
-                                                                                    </li> -->
+                                                                                    </li>
                                                                                     <li class="list-inline-item">
                                                                                         <span class="badge badge-soft-danger p-1">High</span>
                                                                                     </li>
@@ -290,7 +291,6 @@
                     </div> <!-- end modal-content-->
                 </div> <!-- end modal dialog-->
             </div>
-            <!-- end modal-->
         </div>
         <!-- end col-12 -->
     </div> <!-- end row -->
@@ -534,6 +534,7 @@
             </div> <!-- end card-->
         </div> <!-- end col -->
     </div>
+    @include('teacher.dashboard.check_list')
 
 </div> <!-- container -->
 @endsection

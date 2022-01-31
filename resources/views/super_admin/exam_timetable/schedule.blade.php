@@ -38,8 +38,25 @@
                                 <div class="form-group">
                                     <label for="heard">Select Branch<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="">Cuddalore</option>
+                                        <option value="">Malysia</option>
                                         <option value="press">Singapore</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="heard">Standard<span class="text-danger">*</span></label>
+                                    <select id="heard" class="form-control" required="">
+                                        <option>I</option>
+                                        <option>II</option>
+                                        <option>III</option>
+                                        <option>IV</option>
+                                        <option>V</option>
+                                        <option>VI</option>
+                                        <option>VII</option>
+                                        <option>VIII</option>
+                                        <option>IX</option>
+                                        <option>X</option>
                                     </select>
                                 </div>
                             </div>
@@ -47,16 +64,12 @@
                                 <div class="form-group">
                                     <label for="heard">Class<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="">1</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="heard">Section<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
                                         <option value="All">All</option>
-                                        <option value="1">A</option>
+                                        <option>A</option>
+                                        <option>B</option>
+                                        <option>C</option>
+                                        <option>D</option>
+                                        <option>E</option>
                                     </select>
                                 </div>
                             </div>

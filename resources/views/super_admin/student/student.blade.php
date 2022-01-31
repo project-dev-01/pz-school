@@ -38,8 +38,25 @@
                                 <div class="form-group">
                                     <label for="heard">Select Branch<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="">Cuddalore</option>
+                                        <option value="">Malaysia</option>
                                         <option value="press">Singapore</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="heard">Standard<span class="text-danger">*</span></label>
+                                    <select id="heard" class="form-control" required="">
+                                        <option>I</option>
+                                        <option>II</option>
+                                        <option>III</option>
+                                        <option>IV</option>
+                                        <option>V</option>
+                                        <option>VI</option>
+                                        <option>VII</option>
+                                        <option>VIII</option>
+                                        <option>IX</option>
+                                        <option>X</option>
                                     </select>
                                 </div>
                             </div>
@@ -47,16 +64,12 @@
                                 <div class="form-group">
                                     <label for="heard">Class<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="">1</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="heard">Section<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
                                         <option value="All">All</option>
-                                        <option value="1">1</option>
+                                        <option>A</option>
+                                        <option>B</option>
+                                        <option>C</option>
+                                        <option>D</option>
+                                        <option>E</option>
                                     </select>
                                 </div>
                             </div>
@@ -110,12 +123,62 @@
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>Ithaya</td>
+                                                <td>William</td>
                                                 <td>PZ-1001</td>
                                                 <td>RSM-00-1</td>
-                                                <td>1</td>
+                                                <td>I</td>
                                                 <td>A</td>
-                                                <td>Anser</td>
+                                                <td>Amelia</td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>James</td>
+                                                <td>PZ-1002</td>
+                                                <td>RSM-00-2</td>
+                                                <td>I</td>
+                                                <td>A</td>
+                                                <td>Isbella</td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Benjamin</td>
+                                                <td>PZ-1003</td>
+                                                <td>RSM-00-3</td>
+                                                <td>I</td>
+                                                <td>A</td>
+                                                <td>Petter</td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>Lucas</td>
+                                                <td>PZ-1004</td>
+                                                <td>RSM-00-4</td>
+                                                <td>I</td>
+                                                <td>A</td>
+                                                <td>Antony</td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>Charlotte</td>
+                                                <td>PZ-1005</td>
+                                                <td>RSM-00-5</td>
+                                                <td>I</td>
+                                                <td>A</td>
+                                                <td>Christopher</td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>Sophia</td>
+                                                <td>PZ-1006</td>
+                                                <td>RSM-00-6</td>
+                                                <td>I</td>
+                                                <td>A</td>
+                                                <td>Mia</td>
                                                 
                                             </tr>
                                         </tbody>

@@ -38,16 +38,25 @@
                                 <div class="form-group">
                                     <label for="heard">Select Branch<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="">Cuddalore</option>
+                                        <option value="">Malaysia</option>
                                         <option value="press">Singapore</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="heard">Exam<span class="text-danger">*</span></label>
+                                    <label for="heard">Standard<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="">Annual</option>
+                                        <option>I</option>
+                                        <option>II</option>
+                                        <option>III</option>
+                                        <option>IV</option>
+                                        <option>V</option>
+                                        <option>VI</option>
+                                        <option>VII</option>
+                                        <option>VIII</option>
+                                        <option>IX</option>
+                                        <option>X</option>
                                     </select>
                                 </div>
                             </div>
@@ -55,16 +64,12 @@
                                 <div class="form-group">
                                     <label for="heard">Class<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="">1</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="heard">Section<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
                                         <option value="All">All</option>
-                                        <option value="1">A</option>
+                                        <option>A</option>
+                                        <option>B</option>
+                                        <option>C</option>
+                                        <option>D</option>
+                                        <option>E</option>
                                     </select>
                                 </div>
                             </div>
@@ -72,7 +77,21 @@
                                 <div class="form-group">
                                     <label for="heard">Subject<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="All">English</option>
+                                        <option>Maths</option>
+                                        <option>Physics</option>
+                                        <option>Chemistry</option>
+                                        <option>Geography</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="heard">Exam<span class="text-danger">*</span></label>
+                                    <select id="heard" class="form-control" required="">
+                                        <option value="">1st term</option>
+                                        <option value="">Half Yearly</option>
+                                        <option value="">Quater Yearly</option>
+                                        <option value="">Annual</option>
                                     </select>
                                 </div>
                             </div>
@@ -117,15 +136,15 @@
                                                 <th>Student Name</th>
                                                 <th>Roll No</th>
                                                 <th>IsAbsent</th>
-                                                <th>xxxName</th>
+                                                <th>Marks</th>
 
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>xxxx</td>
-                                                <td>Pz001</td>
+                                                <td>William</td>
+                                                <td>PZ-1001</td>
                                                 <td>
                                                     <div class="form-group col-md-6">
                                                         <div class="custom-control custom-checkbox">
@@ -142,8 +161,80 @@
                                             </tr>
                                             <tr>
                                                 <td>2</td>
-                                                <td>yyy</td>
-                                                <td>Pz002</td>
+                                                <td>James</td>
+                                                <td>PZ-1002</td>
+                                                <td>
+                                                    <div class="form-group col-md-6">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" checked id="customCheck11">
+                                                            <label class="custom-control-label" for="customCheck11"></label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group col-md-4">
+                                                        <input type="text" class="form-control" id="inputCity">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Benjamin</td>
+                                                <td>PZ-1003</td>
+                                                <td>
+                                                    <div class="form-group col-md-6">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" checked id="customCheck11">
+                                                            <label class="custom-control-label" for="customCheck11"></label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group col-md-4">
+                                                        <input type="text" class="form-control" id="inputCity">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>Lucas</td>
+                                                <td>PZ-1004</td>
+                                                <td>
+                                                    <div class="form-group col-md-6">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" checked id="customCheck11">
+                                                            <label class="custom-control-label" for="customCheck11"></label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group col-md-4">
+                                                        <input type="text" class="form-control" id="inputCity">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>Charlotte</td>
+                                                <td>PZ-1005</td>
+                                                <td>
+                                                    <div class="form-group col-md-6">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" checked id="customCheck11">
+                                                            <label class="custom-control-label" for="customCheck11"></label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group col-md-4">
+                                                        <input type="text" class="form-control" id="inputCity">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>Sophia</td>
+                                                <td>PZ-1006</td>
                                                 <td>
                                                     <div class="form-group col-md-6">
                                                         <div class="custom-control custom-checkbox">

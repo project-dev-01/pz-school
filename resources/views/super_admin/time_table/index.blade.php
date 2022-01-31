@@ -32,7 +32,7 @@
                 </p>
 
                 <div class="table-responsive">
-                    <table class="table mb-0" id="task-table">
+                    <table class="table table-striped mb-0 table-centered" id="task-table">
                         <thead>
                             <th width="125">Time</th>
                             @foreach($weekDays as $day)
@@ -44,93 +44,65 @@
                                 <td>
                                     08:00 - 08:30
                                 </td>
-                                <td rowspan="2" class="align-middle text-center" style="background-color:#f0f0f0">
-                                First class<br>
-                                    Teacher: xxxx
+                                <td>Physics<br>Teacher: David
                                 </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>Maths<br>Teacher: Smith</td>
+                                <td rowspan="6" class="align-middle text-center" style="background-color:#f0f0f0">
+                                 New Year Holiday
+                                </td>
+                                <td>Chemistry<br>Teacher: Taylor</td>
+                                <td>Geography<br>Teacher: Starc</td>
+                                <td rowspan="6" class="align-middle text-center" style="background-color:#f0f0f0">
+                                 Public Holiday
+                                </td>
+                                <td rowspan="6" class="align-middle text-center" style="background-color:#f0f0f0">
+                                 Public Holiday
+                                </td>
                             </tr>
                             <tr>
                                 <td>
                                     08:30 - 09:30
                                 </td>
-                                <td class="align-middle text-center" style="background-color:#f0f0f0">
-                                First class<br>
-                                    Teacher: yyyy
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td rowspan="2" class="align-middle text-center" style="background-color:#f0f0f0">
-                                Second class<br>
-                                    Teacher: yyyy
-                                </td>
-                                <td></td>
-                                <td></td>
+                                <td>Maths<br>Teacher: Smith</td>
+                                <td>Physics<br>Teacher: David</td>
+                                <td>Biology<br>Teacher: Mitcheal</td>
+                                <td>Computer<br>Teacher: Cameron</td>
                             </tr>
                             <tr>
                                 <td>
                                     09:30 - 10:00
                                 </td>
-                                <td class="align-middle text-center" style="background-color:#f0f0f0">
-                                First class<br>
-                                    Teacher: yyyy
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>Chemistry<br>Teacher: Taylor</td>
+                                <td>Biology<br>Teacher: Mitcheal</td>
+                                <td>Computer<br>Teacher: Cameron</td>
+                                <td>Geography<br>Teacher: Starc</td>
                             </tr>
                             <tr>
                                 <td>
                                     10:00 - 10:30
                                 </td>
-                                <td class="align-middle text-center" style="background-color:#f0f0f0">
-                                First class<br>
-                                    Teacher: yyyy
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>Physics<br>Teacher: David</td>
+                                <td>Computer<br>Teacher: Cameron</td>
+                                <td>Geography<br>Teacher: Starc</td>
+                                <td>Maths<br>Teacher: Smith</td>
                             </tr>
                             <tr>
                                 <td>
                                     10:30 - 11:00
                                 </td>
-                                <td class="align-middle text-center" style="background-color:#f0f0f0">
-                                First class<br>
-                                    Teacher: yyyy
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>Geography<br>Teacher: Starc</td>
+                                <td>Biology<br>Teacher: Mitcheal</td>
+                                <td>Chemistry<br>Teacher: Taylor</td>
+                                <td>Computer<br>Teacher: Cameron</td>
                             </tr>
                             <tr>
                                 <td>
                                     11:00 - 11:30
                                 </td>
-                                <td class="align-middle text-center" style="background-color:#f0f0f0">
-                                First class<br>
-                                    Teacher: yyyy
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>Computer<br>Teacher: Cameron</td>
+                                <td>Geography<br>Teacher: Starc</td>
+                                <td>Chemistry<br>Teacher: Taylor</td>
+                                <td>Biology<br>Teacher: Mitcheal</td>
                             </tr>
                         </tbody>
                     </table>

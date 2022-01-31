@@ -40,7 +40,7 @@
                             <div class="table-responsive">
                     <table class="table table-bordered mb-0">
                         <thead>
-                        <tr>
+                            <tr>
                                 <th>S.No</th>
                                 <th>Branch</th>
                                 <th>Book Title</th>
@@ -51,23 +51,45 @@
                                 <th>Date of Expiry</th>
                                 <th>Fine</th>
                                 <th>Status</th>
-                        </tr>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>
-
-                            </td>
+                            <tr>
+                                <td>1</td>
+                                <td>Malaysia</td>
+                                <td>Brilliant</td>
+                                <td>NSP</td>
+                                <td>Teacher</td>
+                                <td>Anish</td>
+                                <td>26-01-2022</td>
+                                <td>28-02-2022</td>
                                 <td></td>
+                                <td>Issued</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Malaysia</td>
+                                <td>Mainframe Computer</td>
+                                <td>MFC</td>
+                                <td>Student</td>
+                                <td>William</td>
+                                <td>21-01-2022</td>
+                                <td>18-02-2022</td>
+                                <td>50</td>
+                                <td>Returned</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Malaysia</td>
+                                <td>Networking</td>
+                                <td>NTW</td>
+                                <td>Student</td>
+                                <td>Mia</td>
+                                <td>26-01-2022</td>
+                                <td>11-03-2022</td>
                                 <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                        </tr>
+                                <td>Issued</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div> <!-- end table-responsive-->
@@ -82,11 +104,9 @@
                         <label for="inputEmail3" class="col-3 col-form-label">Branch<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
-                            <option value="">select</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option value="">Select</option>
+                            <option value="">Malaysia</option>
+                            <option value="">Singapore</option>
                         </select>
                         </div>
                     </div>
@@ -96,11 +116,11 @@
                         <label for="inputEmail3" class="col-3 col-form-label">Book Category<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
-                            <option value="">select</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option value="">Select</option>
+                            <option value="press">Communication</option>
+                            <option value="net">Network</option>
+                            <option value="mouth">Technology</option>
+                            <option value="other">Story</option>
                         </select>
                         </div>
                     </div>
@@ -109,12 +129,8 @@
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-3 col-form-label">Book Title<span class="text-danger">*</span></label>
                         <div class="col-9">
-                            <select id="heard" class="form-control" required="">
-                            <option value="">select</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                        <input type="text" required parsley-type="email" class="form-control"
+                                    id="inputEmail3" placeholder="">
                         </select>
                         </div>
                     </div>

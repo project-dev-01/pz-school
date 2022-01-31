@@ -90,42 +90,42 @@
                                         <tbody>
                                             <tr>
                                                 <td class="text-center">1</td>                                                
-                                                <td>Arun kumar</td>                                                
+                                                <td>Cameron</td>                                                
                                                 <td class="text-center">1</td>
-                                                <td>Festival</td>
+                                                <td>Sick</td>
                                                 <td class="text-success">Approved</td>                                                
                                                 <td class="text-success">Approved</td> 
                                             </tr>
                                             
                                             <tr>
                                                 <td class="text-center">2</td>                                                
-                                                <td>kumar</td>                                                
+                                                <td>Taylor</td>                                                
                                                 <td class="text-center">3</td>
-                                                <td>Festival</td>                                                
+                                                <td>Function</td>                                                
                                                 <td class="text-success">Approved</td>                                                
                                                 <td class="text-success">Approved</td> 
                                             </tr>
                                             <tr>
                                                 <td class="text-center">3</td>                                                
-                                                <td>Mohan</td>                                                
+                                                <td>Smith</td>                                                
                                                 <td class="text-center">2</td>
-                                                <td>Fever</td>                                                
+                                                <td>Personal</td>                                                
                                                 <td class="text-success">Approved</td>                                                
                                                 <td class="text-success">Approved</td> 
                                             </tr>
                                             <tr>
                                                 <td class="text-center">4</td>                                                
-                                                <td>Haja</td>                                                
+                                                <td>David</td>                                                
                                                 <td class="text-center">1</td>
-                                                <td>Festival</td>                                                
+                                                <td>Medical</td>                                                
                                                 <td class="text-danger">Your request is Rejected</td>                                                
                                                 <td class="text-danger">Rejected</td> 
                                             </tr>
                                             <tr>
                                                 <td class="text-center">5</td>                                                
-                                                <td>Karthi</td>                                                
+                                                <td>Starc</td>                                                
                                                 <td class="text-center">1</td>
-                                                <td>Festival</td>                           
+                                                <td>Sick</td>                           
                                                 <td class="text-warning">Waiting for approval</td>                                                                     
                                                 <td class="text-warning">Waiting for approval</td> 
                                             </tr>

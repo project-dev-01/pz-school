@@ -53,25 +53,52 @@
                                 <th>Price</th>
                                 <th>Total Stock</th>
                                 <th>Issued Copies</th>
-                                <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                        </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Malaysia</td>
+                                <td>Genius</td>
+                                <td>NSP</td>
+                                <td>Second Edition</td>
+                                <td>BR-0982</td>
+                                <td>Story</td>
+                                <td>Good</td>
+                                <td>29-01-2022</td>
+                                <td>1100</td>
+                                <td>10</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Malaysia</td>
+                                <td>Mainframe Computer</td>
+                                <td>NSP</td>
+                                <td>Third Edition</td>
+                                <td>MF-123</td>
+                                <td>Technology</td>
+                                <td>Nice</td>
+                                <td>29-01-2022</td>
+                                <td>600</td>
+                                <td>20</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Malaysia</td>
+                                <td>Networking</td>
+                                <td>LHD</td>
+                                <td>Fifth Edition</td>
+                                <td>NTW-7612</td>
+                                <td>Communication</td>
+                                <td>Good</td>
+                                <td>29-01-2022</td>
+                                <td>2000</td>
+                                <td>10</td>
+                                <td>1</td>
+                            </tr>
+                            
                         </tbody>
                     </table>
                 </div> <!-- end table-responsive-->
@@ -86,11 +113,9 @@
                         <label for="inputEmail3" class="col-3 col-form-label">Branch<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
-                            <option value="">select</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option value="">Select</option>
+                            <option value="">Malaysia</option>
+                            <option value="">Singapore</option>
                         </select>
                         </div>
                     </div>
@@ -145,11 +170,11 @@
                         <label for="inputEmail3" class="col-3 col-form-label">Book Category<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
-                            <option value="">select</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option value="">Select</option>
+                            <option value="press">Communication</option>
+                            <option value="net">Network</option>
+                            <option value="mouth">Technology</option>
+                            <option value="other">Story</option>
                         </select>
                         </div>
                     </div>

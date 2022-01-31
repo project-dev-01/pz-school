@@ -54,12 +54,57 @@
                                 <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td>Cuddalore</td>
-                                        <td>Test</td>
-                                        <td>Test</td>
+                                        <td>Malaysia</td>
+                                        <td>Maths</td>
+                                        <td>Internal</td>
                                         <td>1st term</td>
                                         <td>Aibots</td>
-                                        <td>Test</td>
+                                        <td>Good</td>
+                                        <td>
+                                            <div class="button-list">
+                                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
+                                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Malaysia</td>
+                                        <td>Physics</td>
+                                        <td>Internal</td>
+                                        <td>1st term</td>
+                                        <td>JEE</td>
+                                        <td>Better</td>
+                                        <td>
+                                            <div class="button-list">
+                                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
+                                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Malaysia</td>
+                                        <td>Chemistry</td>
+                                        <td>Internal</td>
+                                        <td>1st term</td>
+                                        <td>JEE</td>
+                                        <td>Good</td>
+                                        <td>
+                                            <div class="button-list">
+                                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
+                                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>$</td>
+                                        <td>Malaysia</td>
+                                        <td>Geography</td>
+                                        <td>Internal</td>
+                                        <td>1st term</td>
+                                        <td>NEET</td>
+                                        <td>Nice</td>
                                         <td>
                                             <div class="button-list">
                                                 <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
@@ -82,6 +127,8 @@
                                             <div class="col-9">
                                                 <select id="heard" class="form-control" required="">
                                                     <option value="">Select Branch</option>
+                                                    <option value="">Malaysia</option>
+                                                    <option value="">Singapore</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -99,7 +146,10 @@
                                             <label for="inputEmail3" class="col-3 col-form-label">Term </label>
                                             <div class="col-9">
                                                 <select id="heard" class="form-control" required="">
-                                                    <option value="">Select term</option>
+                                                    <option value="">Select</option>
+                                                    <option value="">Ist Term</option>
+                                                    <option value="">Half Yearly</option>
+                                                    <option value="">Quater Yearly</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -109,7 +159,10 @@
                                             <label for="inputEmail3" class="col-3 col-form-label">Exam Type </label>
                                             <div class="col-9">
                                                 <select id="heard" class="form-control" required="">
-                                                    <option value="">Select term</option>
+                                                    <option value="">Select</option>
+                                                    <option value="">Internal</option>
+                                                    <option value="">Model</option>
+                                                    <option value="">Main</option>
                                                 </select>
                                             </div>
                                         </div>

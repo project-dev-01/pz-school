@@ -13,25 +13,36 @@
                         <label for="branch_id">Branch<span class="text-danger">*</span></label>
                         <select class="form-control" id="branch_id" name="branch_id">
                             <option value="">Choose Branch</option>
-                            <option value="">Cuddalore</option>
+                            <option value="">Malaysia</option>
                             <option value="press">Singapore</option>
                         </select>
                         <span class="text-danger error-text branch_id_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="title">Class<span class="text-danger">*</span></label>
+                        <label for="title">Standard<span class="text-danger">*</span></label>
                         <select id="priority" class="form-control" required="">
                             <option value="selct">Select</option>
-                            <option value="Low">First class</option>
-                            <option value="Medium">First class</option>
+                            <option>I</option>
+                            <option>II</option>
+                            <option>III</option>
+                            <option>IV</option>
+                            <option>V</option>
+                            <option>VI</option>
+                            <option>VII</option>
+                            <option>VIII</option>
+                            <option>IX</option>
+                            <option>X</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="title">Section<span class="text-danger">*</span></label>
+                        <label for="title">Class<span class="text-danger">*</span></label>
                         <select id="priority" class="form-control" required="">
                             <option value="selct">Select</option>
-                            <option value="Low">A</option>
-                            <option value="Medium">B</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                            <option>E</option>
                         </select>
                     </div>
 
@@ -39,8 +50,10 @@
                         <label for="date">Teacher<span class="text-danger">*</span></label>
                         <select id="priority" class="form-control" required="">
                             <option value="selct">Select</option>
-                            <option value="Low">teacher 1</option>
-                            <option value="Medium">teacher 2</option>
+                            <option>Smith</option>
+                            <option>Taylor</option>
+                            <option>David</option>
+                            <option>Starc</option>
                         </select>
                     </div>
                     <div class="form-group">

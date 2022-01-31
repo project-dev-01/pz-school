@@ -38,7 +38,7 @@
                                 <div class="form-group">
                                     <label for="heard">Select Branch<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="">Cuddalore</option>
+                                        <option value="">Malaysia</option>
                                         <option value="press">Singapore</option>
                                     </select>
                                 </div>
@@ -49,7 +49,7 @@
                                     <select id="heard" class="form-control" required="">
                                         <option value="">Teacher</option>
                                         <option value="press">Student</option>
-                                        <option value="net">Internet</option>
+                                        <option value="net">Staff</option>
                                     </select>
                                 </div>
                             </div>
@@ -127,8 +127,83 @@
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>Dhanush</td>
+                                                <td>Cameron</td>
                                                 <td>23c08f</td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-md-3"><input type="radio" id="contactChoice1" name="details" value="present">
+                                                            <label for="contactChoice1">Present</label>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input type="radio" id="contactChoice2" name="details" value="Absent">
+                                                            <label for="contactChoice2">Absent</label>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input type="radio" id="contactChoice3" name="details" value="Holiday">
+                                                            <label for="contactChoice3">Holiday</label>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input type="radio" id="contactChoice3" name="details" value="Late">
+                                                            <label for="contactChoice3">Late</label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td> <input type="remarks" id="query" name="q" class="form-control" placeholder="Remarks"></td>
+
+                                            </tr><tr>
+                                                <td>2</td>
+                                                <td>Taylor</td>
+                                                <td>76G05r</td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-md-3"><input type="radio" id="contactChoice1" name="details" value="present">
+                                                            <label for="contactChoice1">Present</label>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input type="radio" id="contactChoice2" name="details" value="Absent">
+                                                            <label for="contactChoice2">Absent</label>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input type="radio" id="contactChoice3" name="details" value="Holiday">
+                                                            <label for="contactChoice3">Holiday</label>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input type="radio" id="contactChoice3" name="details" value="Late">
+                                                            <label for="contactChoice3">Late</label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td> <input type="remarks" id="query" name="q" class="form-control" placeholder="Remarks"></td>
+
+                                            </tr><tr>
+                                                <td>3</td>
+                                                <td>Pointing</td>
+                                                <td>98c56p</td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-md-3"><input type="radio" id="contactChoice1" name="details" value="present">
+                                                            <label for="contactChoice1">Present</label>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input type="radio" id="contactChoice2" name="details" value="Absent">
+                                                            <label for="contactChoice2">Absent</label>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input type="radio" id="contactChoice3" name="details" value="Holiday">
+                                                            <label for="contactChoice3">Holiday</label>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input type="radio" id="contactChoice3" name="details" value="Late">
+                                                            <label for="contactChoice3">Late</label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td> <input type="remarks" id="query" name="q" class="form-control" placeholder="Remarks"></td>
+
+                                            </tr><tr>
+                                                <td>4</td>
+                                                <td>David</td>
+                                                <td>86r41q</td>
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-md-3"><input type="radio" id="contactChoice1" name="details" value="present">
