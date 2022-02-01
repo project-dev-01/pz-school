@@ -231,6 +231,8 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         
         Route::get('exam_results/bystudent', [SuperAdminController::class, 'bystudent'])->name('super_admin.exam_results.bystudent');
         
+        Route::get('evaluation_report', [SuperAdminController::class, 'evaluationReport'])->name('super_admin.evaluation_report');
+        
         // static page routes end
     });
 });

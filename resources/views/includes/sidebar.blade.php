@@ -197,8 +197,13 @@
                     <div class="collapse" id="sidebarHomework">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('super_admin.homework')}}" class="nav-link {{ (request()->is('super_admin/employee*')) ? 'active' : '' }}">
+                                <a href="{{ route('super_admin.homework')}}" class="nav-link {{ (request()->is('super_admin/homework*')) ? 'active' : '' }}">
                                     <span>Add Homework</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('super_admin.evaluation_report')}}" class="nav-link {{ (request()->is('super_admin/evaluation_report*')) ? 'active' : '' }}">
+                                    <span>Evoluation Report</span>
                                 </a>
                             </li>
                         </ul>

@@ -1502,6 +1502,11 @@ class SuperAdminController extends Controller
         return view('super_admin.exam_results.bystudent');
     }
     
+    public function evaluationReport()
+    {
+        return view('super_admin.homework.evaluation_report');
+    }
+    
     // static page controller end
     
 }
