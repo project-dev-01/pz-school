@@ -116,7 +116,7 @@
                                                     <td>1</td>
                                                     <td class="table-user">
                                                         <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-                                                        <a href="javascript:void(0);" class="text-body font-weight-semibold">William</a>
+                                                        <a href="javascript:void(0);" class="text-body font-weight-semibold" data-toggle="modal" data-target=".reportModal1">William</a>
                                                     </td>
                                                     <td>
                                                         <div class="row">
@@ -133,7 +133,7 @@
                                                     <td>2</td>
                                                     <td class="table-user">
                                                         <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-                                                        <a href="javascript:void(0);" class="text-body font-weight-semibold">James</a>
+                                                        <a href="javascript:void(0);" class="text-body font-weight-semibold" data-toggle="modal" data-target=".reportModal1">James</a>
                                                     </td>
                                                     <td>
                                                         <div class="row">
@@ -150,7 +150,7 @@
                                                     <td>3</td>
                                                     <td class="table-user">
                                                         <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-                                                        <a href="javascript:void(0);" class="text-body font-weight-semibold">Benjamin</a>
+                                                        <a href="javascript:void(0);" class="text-body font-weight-semibold" data-toggle="modal" data-target=".reportModal1">Benjamin</a>
                                                     </td>
                                                     <td>
                                                         <div class="row">
@@ -167,7 +167,7 @@
                                                     <td>4</td>
                                                     <td class="table-user">
                                                         <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-                                                        <a href="javascript:void(0);" class="text-body font-weight-semibold">Lucas</a>
+                                                        <a href="javascript:void(0);" class="text-body font-weight-semibold" data-toggle="modal" data-target=".reportModal1">Lucas</a>
                                                     </td>
                                                     <td>
                                                         <div class="row">
@@ -184,7 +184,7 @@
                                                     <td>5</td>
                                                     <td class="table-user">
                                                         <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-                                                        <a href="javascript:void(0);" class="text-body font-weight-semibold">Charlotte</a>
+                                                        <a href="javascript:void(0);" class="text-body font-weight-semibold" data-toggle="modal" data-target=".reportModal1">Charlotte</a>
                                                     </td>
                                                     <td>
                                                         <div class="row">
@@ -201,7 +201,7 @@
                                                     <td>6</td>
                                                     <td class="table-user">
                                                         <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-                                                        <a href="javascript:void(0);" class="text-body font-weight-semibold">Sophia</a>
+                                                        <a href="javascript:void(0);" class="text-body font-weight-semibold" data-toggle="modal" data-target=".reportModal1">Sophia</a>
                                                     </td>
                                                     <td>
                                                         <div class="row">
@@ -218,7 +218,7 @@
                                                     <td>7</td>
                                                     <td class="table-user">
                                                         <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-                                                        <a href="javascript:void(0);" class="text-body font-weight-semibold">Amelia</a>
+                                                        <a href="javascript:void(0);" class="text-body font-weight-semibold" data-toggle="modal" data-target=".reportModal1">Amelia</a>
                                                     </td>
                                                     <td>
                                                         <div class="row">
@@ -235,7 +235,7 @@
                                                     <td>8</td>
                                                     <td class="table-user">
                                                         <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-                                                        <a href="javascript:void(0);" class="text-body font-weight-semibold">Isabella</a>
+                                                        <a href="javascript:void(0);" class="text-body font-weight-semibold" data-toggle="modal" data-target=".reportModal1">Isabella</a>
                                                     </td>
                                                     <td>
                                                         <div class="row">
@@ -252,7 +252,7 @@
                                                     <td>9</td>
                                                     <td class="table-user">
                                                         <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-                                                        <a href="javascript:void(0);" class="text-body font-weight-semibold">Mia</a>
+                                                        <a href="javascript:void(0);" class="text-body font-weight-semibold" data-toggle="modal" data-target=".reportModal1">Mia</a>
                                                     </td>
                                                     <td>
                                                         <div class="row">
@@ -319,7 +319,7 @@
                                                         <td>1</td>
                                                         <td class="table-user">
                                                             <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-                                                            <a href="javascript:void(0);" class="text-body font-weight-semibold">William</a>
+                                                            <a href="javascript:void(0);" class="text-body font-weight-semibold" data-toggle="modal" data-target=".reportModal">William</a>
                                                         </td>
                                                         <td><input type="text" value="{{ 95*0.2 }}" class="form-control"></td>
                                                         <td><input type="text" value="{{ 95*0.2 }}" class="form-control"></td>
@@ -333,7 +333,7 @@
                                                         <td>2</td>
                                                         <td class="table-user">
                                                             <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-                                                            <a href="javascript:void(0);" class="text-body font-weight-semibold">James</a>
+                                                            <a href="javascript:void(0);" class="text-body font-weight-semibold" data-toggle="modal" data-target=".reportModal">James</a>
                                                         </td>
                                                         <td><input type="text" value="{{ 85*0.2 }}" class="form-control"></td>
                                                         <td><input type="text" value="{{ 80*0.2 }}" class="form-control"></td>
@@ -347,7 +347,7 @@
                                                         <td>3</td>
                                                         <td class="table-user">
                                                             <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-                                                            <a href="javascript:void(0);" class="text-body font-weight-semibold">Benjamin</a>
+                                                            <a href="javascript:void(0);" class="text-body font-weight-semibold" data-toggle="modal" data-target=".reportModal">Benjamin</a>
                                                         </td>
                                                         <td><input type="text" value="{{ 84*0.2 }}" class="form-control"></td>
                                                         <td><input type="text" value="{{ 80*0.2 }}" class="form-control"></td>
@@ -361,7 +361,7 @@
                                                         <td>4</td>
                                                         <td class="table-user">
                                                             <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-                                                            <a href="javascript:void(0);" class="text-body font-weight-semibold">Lucas</a>
+                                                            <a href="javascript:void(0);" class="text-body font-weight-semibold" data-toggle="modal" data-target=".reportModal">Lucas</a>
                                                         </td>
                                                         <td><input type="text" value="{{ 85*0.2 }}" class="form-control"></td>
                                                         <td><input type="text" value="{{ 80*0.2 }}" class="form-control"></td>
@@ -375,7 +375,7 @@
                                                         <td>5</td>
                                                         <td class="table-user">
                                                             <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-                                                            <a href="javascript:void(0);" class="text-body font-weight-semibold">Charlotte</a>
+                                                            <a href="javascript:void(0);" class="text-body font-weight-semibold" data-toggle="modal" data-target=".reportModal">Charlotte</a>
                                                         </td>
                                                         <td><input type="text" value="{{ 84*0.2 }}" class="form-control"></td>
                                                         <td><input type="text" value="{{ 79*0.2 }}" class="form-control"></td>
@@ -389,7 +389,7 @@
                                                         <td>6</td>
                                                         <td class="table-user">
                                                             <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-                                                            <a href="javascript:void(0);" class="text-body font-weight-semibold">Sophia</a>
+                                                            <a href="javascript:void(0);" class="text-body font-weight-semibold" data-toggle="modal" data-target=".reportModal">Sophia</a>
                                                         </td>
                                                         <td><input type="text" value="{{ 83*0.2 }}" class="form-control"></td>
                                                         <td><input type="text" value="{{ 78*0.2 }}" class="form-control"></td>
@@ -403,7 +403,7 @@
                                                         <td>7</td>
                                                         <td class="table-user">
                                                             <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-                                                            <a href="javascript:void(0);" class="text-body font-weight-semibold">Amelia</a>
+                                                            <a href="javascript:void(0);" class="text-body font-weight-semibold" data-toggle="modal" data-target=".reportModal">Amelia</a>
                                                         </td>
                                                         <td><input type="text" value="{{ 70*0.2 }}" class="form-control"></td>
                                                         <td><input type="text" value="{{ 72*0.2 }}" class="form-control"></td>
@@ -417,7 +417,7 @@
                                                         <td>8</td>
                                                         <td class="table-user">
                                                             <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-                                                            <a href="javascript:void(0);" class="text-body font-weight-semibold">Isabella</a>
+                                                            <a href="javascript:void(0);" class="text-body font-weight-semibold" data-toggle="modal" data-target=".reportModal">Isabella</a>
                                                         </td>
                                                         <td><input type="text" value="{{ 65*0.2 }}" class="form-control"></td>
                                                         <td><input type="text" value="{{ 72*0.2 }}" class="form-control"></td>
@@ -431,7 +431,7 @@
                                                         <td>9</td>
                                                         <td class="table-user">
                                                             <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-                                                            <a href="javascript:void(0);" class="text-body font-weight-semibold">Mia</a>
+                                                            <a href="javascript:void(0);" class="text-body font-weight-semibold" data-toggle="modal" data-target=".reportModal">Mia</a>
                                                         </td>
                                                         <td><input type="text" value="{{ 55*0.2 }}" class="form-control"></td>
                                                         <td><input type="text" value="{{ 56*0.2 }}" class="form-control"></td>
@@ -561,4 +561,75 @@
 
 
 </div> <!-- container -->
+
+
+<!-- Center modal content -->
+<div class="modal fade reportModal1" id="modal-1" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-full-width">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h4 class="modal-title" id="myaddClassModalLabel">Add Class</h4> -->
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title">Subject Average</h4>
+                                <div class="mt-4 chartjs-chart">
+                                <div id="line-1" class="apex-charts" data-colors="#4fc6e1"></div>
+                                    <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
+                                </div>
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col -->
+
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!-- Center modal content -->
+<div class="modal fade reportModal" id="addClassModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-full-width">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h4 class="modal-title" id="myaddClassModalLabel">Add Class</h4> -->
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title">Marks by Subject Division</h4>
+                                <div class="mt-4 chartjs-chart">
+                                    <canvas id="radar-chart-2" height="350" data-colors="#39afd1,#a17fe0"></canvas>
+                                    <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
+                                </div>
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col -->
+                    
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title">Marks by Subject </h4>
+                                <div class="mt-4 chartjs-chart">
+                                <div id="line-2" class="apex-charts" data-colors="#f672a7"></div>
+                                    <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
+                                </div>
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col -->
+
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 @endsection
