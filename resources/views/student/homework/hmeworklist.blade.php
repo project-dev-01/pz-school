@@ -31,7 +31,7 @@
                                 <p>
                                 <div>
                                 <a class="list-group-item list-group-item-info btn-block btn-lg" data-toggle="collapse" href="#English" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                <i class="fas fa-caret-square-down"></i> English - 21 Jan 2022 
+                                <i class="fas fa-caret-square-down"></i> English - 21 Jan 2022 (Completed)
                                 </a>
                                 </div>
                                 </p>
@@ -101,8 +101,24 @@
                                         </div>    
                                         </div>
                                         </div>                                   
+                                    </div><br/>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-5 font-weight-bold">Attachment File: </div>
+                                                <div class="col-md-5">
+                                                    <input type="file" class="custom-file-input" id="inputGroupFile04">
+                                                    <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                                                    </div>    
+                                                    </div>
+                                                    </div>                                      
+                                                <div class="col-md-4">
+                                                <button type="submit" class="btn btn-secondary waves-effect waves-light" disabled>
+                                                Submit
+                                                </button>
+                                            </div>                                                          
+                                        </div>                                       
                                     </div>
-                                </div>
                                 </div>
                                 </div>
                             </div>                           
@@ -184,6 +200,23 @@
                                         </div>    
                                         </div>
                                         </div>                                   
+                                    </div> <br/>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-5 font-weight-bold">Attachment File: </div>
+                                                <div class="col-md-5">
+
+                                                    <input type="file" class="custom-file-input" id="inputGroupFile04">
+                                                    <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                                                </div>    
+                                            </div>
+                                            </div>                                      
+                                            <div class="col-md-4">
+                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
+                                                Submit
+                                            </button>
+                                        </div>                                                          
                                     </div>
                                 </div>
                                 </div>
@@ -246,14 +279,14 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                         <div class="row">
-                                        <div class="col-md-5 font-weight-bold">Remarks :</div>
-                                        <div class="col-md-3">N/A</div>    
+                                            <div class="col-md-5 font-weight-bold">Remarks :</div>
+                                            <div class="col-md-3">N/A</div>    
                                         </div>
                                         </div>
                                         <div class="col-md-4">
-                                        <div class="row">
-                                        <div class="col-md-5 font-weight-bold">Rank Out Of 5 :</div>
-                                        <div class="col-md-3">N/A</div>    
+                                            <div class="row">
+                                            <div class="col-md-5 font-weight-bold">Rank Out Of 5 :</div>
+                                            <div class="col-md-3">N/A</div>    
                                         </div>
                                         </div>
                                         <div class="col-md-4">
@@ -267,6 +300,23 @@
                                         </div>    
                                         </div>
                                         </div>                                   
+                                    </div><br/>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-5 font-weight-bold">Attachment File: </div>
+                                                <div class="col-md-5">
+
+                                                    <input type="file" class="custom-file-input" id="inputGroupFile04">
+                                                    <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                                                </div>    
+                                            </div>
+                                            </div>                                      
+                                            <div class="col-md-4">
+                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
+                                                Submit
+                                            </button>
+                                        </div>                                                          
                                     </div>
                                 </div>
                                 </div>
