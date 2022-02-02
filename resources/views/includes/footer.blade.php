@@ -275,16 +275,16 @@
                     var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
                     //radar chart
                     var radarChart = {
-                        labels: ["Physics", "Geography", "Maths", "Computer Science", "Computer", "Biology", "Chemistry"],
+                        labels: ["Test A Score", "Test B Score", "Test C Score", "Test D Score"],
                         datasets: [{
-                                label: "Mid Term",
+                                label: "Mid term",
                                 backgroundColor: hexToRGB(colors[0], 0.3),
                                 borderColor: colors[0],
                                 pointBackgroundColor: colors[0],
                                 pointBorderColor: "#fff",
                                 pointHoverBackgroundColor: "#fff",
                                 pointHoverBorderColor: colors[0],
-                                data: [65, 59, 90, 81, 56, 55, 40]
+                                data: [65, 59, 90, 81]
                             },
                             {
                                 label: "Annual",
@@ -294,7 +294,7 @@
                                 pointBorderColor: "#fff",
                                 pointHoverBackgroundColor: "#fff",
                                 pointHoverBorderColor: colors[1],
-                                data: [80, 60, 80, 75, 65, 70, 98]
+                                data: [80, 60, 80, 75]
                             }
                         ]
                     };
@@ -900,7 +900,7 @@ var spark3 = {
     }
 };
 new ApexCharts(document.querySelector("#spark3"), spark3).render();
-colors = ["#f7b84b", "#4a81d4",];
+colors = ["#f7b84b", "#4a81d4","#f672a7",];
 (dataColors = $("#apex-line-1").data("colors")) && (colors = dataColors.split(","));
 var options = {
     chart: {
@@ -926,6 +926,9 @@ var options = {
         data: [46, 26, 32, 36, 41]
     },{
         name: "Maths",
+        data: [27, 29, 33, 27, 32]
+    },{
+        name: "Geography",
         data: [27, 29, 33, 27, 32]
     }],
     title: {
@@ -957,8 +960,8 @@ var options = {
         title: {
             text: "Subject"
         },
-        min: 5,
-        max: 40
+        min: 0,
+        max: 100
     },
     legend: {
         position: "top",
@@ -983,4 +986,94 @@ var options = {
 };
 (chart = new ApexCharts(document.querySelector("#apex-line-1"), options)).render();
 
+// test result subject wise result
+colors = ["#f672a7"];
+(dataColors = $("#subject-avg-chart").data("colors")) && (colors = dataColors.split(","));
+options = {
+    chart: {
+        height: 380,
+        type: "line",
+        shadow: {
+            enabled: !1,
+            color: "#bbb",
+            top: 3,
+            left: 2,
+            blur: 3,
+            opacity: 1
+        }
+    },
+    stroke: {
+        width: 5,
+        curve: "smooth"
+    },
+    series: [{
+        name: "English",
+        // data: [65,87,65,87]
+        data: [70, 83]
+
+    }],
+    xaxis: {
+        type: "datetime",
+        categories: ["1/11/2022", "2/11/2022", "3/11/2022", "4/11/2022", "5/11/2022", "6/11/2022", "7/11/2022", "8/11/2022", "9/11/2022", "10/11/2022", "11/11/2022", "12/11/2022", "1/11/2022", "2/11/2022", "3/11/2022", "4/11/2022", "5/11/2022", "6/11/2022"]
+    },
+    title: {
+        text: "Subject Average",
+        align: "left",
+        style: {
+            fontSize: "14px",
+            color: "#666"
+        }
+    },
+    fill: {
+        type: "gradient",
+        gradient: {
+            shade: "dark",
+            gradientToColors: colors,
+            shadeIntensity: 1,
+            type: "horizontal",
+            opacityFrom: 1,
+            opacityTo: 1,
+            stops: [0, 100, 100, 100]
+        }
+    },
+    markers: {
+        size: 4,
+        opacity: .9,
+        colors: ["#56c2d6"],
+        strokeColor: "#fff",
+        strokeWidth: 2,
+        style: "inverted",
+        hover: {
+            size: 7
+        }
+    },
+    yaxis: {
+        min: 0,
+        max: 100,
+        title: {
+            text: "Average"
+        }
+    },
+    grid: {
+        row: {
+            colors: ["transparent", "transparent"],
+            opacity: .2
+        },
+        borderColor: "#185a9d"
+    },
+    responsive: [{
+        breakpoint: 600,
+        options: {
+            chart: {
+                toolbar: {
+                    show: !1
+                }
+            },
+            legend: {
+                show: !1
+            }
+        }
+    }]
+};
+(chart = new ApexCharts(document.querySelector("#subject-avg-chart"), options)).render();
 </script>
