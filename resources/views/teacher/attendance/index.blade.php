@@ -159,7 +159,7 @@
                                         <tbody>
                                             <tr>
                                             <td class="text-left">   
-                                                    <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light"  data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                                    <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light"  data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false" >
                                                     <img src="{{ Session::get('picture') && asset('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" alt="user-image" class="rounded-circle admin_picture">                                                
                                                     </a>
                                                    William
