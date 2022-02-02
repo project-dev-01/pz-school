@@ -903,8 +903,9 @@ var spark3 = {
     }
 };
 new ApexCharts(document.querySelector("#spark3"), spark3).render();
-colors = ["#f7b84b", "#4a81d4","#f672a7",];
-(dataColors = $("#apex-line-1").data("colors")) && (colors = dataColors.split(","));
+newcolors = ['#9B59B6', '#E91E63', '#4A6F4B',"#f7b84b", "#4a81d4"];
+
+(dataColors = $("#apex-line-1").data("colors")) && (newcolors = dataColors.split(","));
 var options = {
     chart: {
         height: 380,
@@ -916,7 +917,7 @@ var options = {
             show: !1
         }
     },
-    colors: colors,
+    colors: newcolors,
     dataLabels: {
         enabled: !0
     },
@@ -926,13 +927,24 @@ var options = {
     },
     series: [{
         name: "English",
+        // color:"#9B59B6",
         data: [46, 26, 32, 36, 41]
     },{
         name: "Maths",
-        data: [27, 29, 33, 27, 32]
+        // color:"#E91E63",
+        data: [70, 75, 76, 80, 90]
     },{
         name: "Geography",
+        // color:"#4A6F4B",
         data: [27, 29, 33, 27, 32]
+    },{
+        name: "Physics",
+        // color:"#f7b84b",
+        data: [85, 87, 86, 90, 95]
+    },{
+        name: "Chemistry",
+        // color:"#4a81d4",
+        data: [45, 75, 85, 90, 95]
     }],
     title: {
         text: "Marks",

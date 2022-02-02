@@ -169,47 +169,61 @@
 
             <!-- Add New Event MODAL -->
             <div class="modal fade" id="event-modal" tabindex="-1">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header py-3 px-4 border-bottom-0 d-block">
-                            <button type="button" class="close" data-dismiss="modal"
-                                aria-hidden="true">&times;</button>
-                            <h5 class="modal-title" id="modal-title">Event</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h5 class="modal-title">Schedule</h5>
                         </div>
                         <div class="modal-body p-4">
                             <form class="needs-validation" name="event-form" id="form-event" novalidate>
                                 <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label class="control-label">Event Name</label>
-                                            <input class="form-control" placeholder="Insert Event Name"
-                                                type="text" name="title" id="event-title" required />
-                                            <div class="invalid-feedback">Please provide a valid event name</div>
-                                        </div>
+                                    <!-- <div class="col-4">
+                                        <div class="col-md-12 font-weight-bold">Timetable List </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="col-md-12 font-weight-bold">:</div>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="col-md-12" id="event-title"></div>
+                                    </div> -->
+                                    <div class="col-4">
+                                        <div class="col-md-12 font-weight-bold">Subject Name </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="col-md-12 font-weight-bold">:</div>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="col-md-12" id="subject-name"></div>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div class="col-md-12 font-weight-bold">Timing </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="col-md-12 font-weight-bold">:</div>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="col-md-12" id="timing-class"></div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="col-md-12 font-weight-bold">Teacher Name </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="col-md-12 font-weight-bold">:</div>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="col-md-12" id="teacher-name"></div>
                                     </div>
                                     <div class="col-12">
-                                        <div class="form-group">
-                                            <label class="control-label">Category</label>
-                                            <select class="form-control custom-select" name="category"
-                                                id="event-category" required>
-                                                <option value="bg-danger" selected>Danger</option>
-                                                <option value="bg-success">Success</option>
-                                                <option value="bg-primary">Primary</option>
-                                                <option value="bg-info">Info</option>
-                                                <option value="bg-dark">Dark</option>
-                                                <option value="bg-warning">Warning</option>
-                                            </select>
-                                            <div class="invalid-feedback">Please select a valid event category</div>
-                                        </div>
+                                        <!-- <div class="form-group"> -->
+                                        <!-- <label class="control-label font-weight-bold">Notes :</label> -->
+                                        <textarea class="form-control" style="margin: 12px;" placeholder="Enter Your Notes"></textarea>
+                                        <!-- </div> -->
                                     </div>
-                                </div>
-                                <div class="row mt-2">
-                                    <div class="col-6">
-                                        <button type="button" class="btn btn-danger" id="btn-delete-event">Delete</button>
-                                    </div>
-                                    <div class="col-6 text-right">
-                                        <button type="button" class="btn btn-light mr-1" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-success" style="margin: 12px;">Save</button>
+
                                     </div>
                                 </div>
                             </form>
@@ -221,91 +235,7 @@
         </div>
         <!-- end col-12 -->
     </div> <!-- end row -->
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title">Report Card</h4>
-
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="card-box">
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Subject</th>
-                                                <th>Score</th>
-                                                <th>Grade</th>
-                                                <th>Ranking</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">English</th>
-                                                <td>75</td>
-                                                <td>B</td>
-                                                <td>7</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Maths</th>
-                                                <td>60</td>
-                                                <td>C</td>
-                                                <td>17</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Science</th>
-                                                <td>90</td>
-                                                <td>A</td>
-                                                <td>3</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Physics</th>
-                                                <td>75</td>
-                                                <td>B</td>
-                                                <td>8</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Result</th>
-                                                <td>Pass</td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
-                        <div class="col-lg-6">
-                            <div class="card-box">
-                                <a class="btn btn-primary" href="PDFLINK" download>
-                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                                        Download Memo </a>
-                                <hr>
-                                <div class="table-responsive">
-                                        <table class="table mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th colspan="4">Ranking Graph</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>7/36</td>
-                                                    <td>6/36</td>
-                                                    <td>12/36</td>
-                                                    <td>2/36</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                </div>
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
-                    </div>
-                    <!--- end row -->
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-    </div>
+    @include('student.dashboard.report_card')
 
     <div class="row">
         <div class="col-lg-12">
@@ -331,7 +261,7 @@
                     <h4 class="header-title mb-0">Marks by Subject</h4>
 
                     <div id="cardCollpase2" class="collapse pt-3 show" dir="ltr">
-                        <div id="apex-line-1" class="apex-charts" data-colors="#6658dd,#1abc9c"></div>
+                        <div id="apex-line-1" class="apex-charts" data-colors="#9B59B6,#E91E63,#4A6F4B,#f7b84b,#4a81d4"></div>
                     </div> <!-- collapsed end -->
                 </div> <!-- end card-body -->
             </div> <!-- end card-->

@@ -298,12 +298,10 @@
                                         <div class="form-group">
                                             <label class="control-label">Category</label>
                                             <select class="form-control custom-select" name="category" id="event-category" required>
-                                                <option value="bg-danger" selected>Danger</option>
-                                                <option value="bg-success">Success</option>
-                                                <option value="bg-primary">Primary</option>
-                                                <option value="bg-info">Info</option>
-                                                <option value="bg-dark">Dark</option>
-                                                <option value="bg-warning">Warning</option>
+                                                
+                                                <option value="bg-primary">First Communion</option>
+                                                <option value="bg-info">Scouting Jamboree</option>
+                                                <option value="bg-warning">Outreach is a volunteer program</option>
                                             </select>
                                             <div class="invalid-feedback">Please select a valid event category</div>
                                         </div>
