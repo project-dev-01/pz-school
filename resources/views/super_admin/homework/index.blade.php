@@ -159,16 +159,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-8 offset-3">
-                                        <div class="checkbox checkbox-purple">
-                                            <input id="checkbox6" type="checkbox">
-                                            <label for="checkbox6">
-                                                Send Notification Sms
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
+                               
                             </div>
                             <div class="col-md-1"></div>
                         </div>

@@ -168,7 +168,7 @@
                                                             <tr>
                                                                 <td>1</td>
                                                                 <td>Geography</td>
-                                                                <td>First</td>
+                                                                <td>I</td>
                                                                 <td>A</td>
                                                                 <td>18-02-2022</td>
                                                                 <td>23-02-2022</td>
