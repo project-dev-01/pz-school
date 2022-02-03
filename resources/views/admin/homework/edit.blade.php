@@ -26,7 +26,7 @@
             <div class="card">
                 <div class="card-body">
                     <span class=" fas fa-user-graduate  " id="parent"></span>
-                    <span class="header-title mb-3" id="parent">Add Homework</span>
+                    <span class="header-title mb-3" id="parent">Copy Homework</span>
                     <hr>
 
                     <form id="demo-form" data-parsley-validate="">
@@ -39,7 +39,7 @@
                                         <div class="col-9">
                                             <select id="heard" class="form-control" required="">
                                                 <option value="">Select</option>
-                                                <option>I</option>
+                                                <option Selected>I</option>
                                                 <option>II</option>
                                                 <option>III</option>
                                                 <option>IV</option>
@@ -59,7 +59,7 @@
                                         <div class="col-9">
                                             <select id="heard" class="form-control" required="">
                                                 <option value="">Select</option>
-                                                <option>A</option>
+                                                <option Selected>A</option>
                                                 <option>B</option>
                                                 <option>C</option>
                                                 <option>D</option>
@@ -76,7 +76,7 @@
                                                 <option value="">Select</option>
                                                 <option>Physics </option>
                                                 <option>Chemistry </option>
-                                                <option>Maths </option>
+                                                <option Selected>Maths </option>
                                                 <option>Biology </option>
                                                 <option>Geography </option>
                                             </select>
@@ -93,7 +93,7 @@
                                                         <span class="far fa-calendar-alt"></span>
                                                     </div>
                                                 </div>
-                                                <input type="text" class="form-control homeWorkAdd" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div>
@@ -108,7 +108,7 @@
                                                         <span class="far fa-calendar-alt"></span>
                                                     </div>
                                                 </div>
-                                                <input type="text" class="form-control homeWorkAdd" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div>
@@ -133,7 +133,7 @@
                                                         <span class="far fa-calendar-alt"></span>
                                                     </div>
                                                 </div>
-                                                <input type="text" class="form-control homeWorkAdd" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div>
@@ -142,7 +142,7 @@
                                     <div class="form-group row">
                                         <label for="inputEmail3" class="col-3 col-form-label">Homework<span class="text-danger">*</span></label>
                                         <div class="col-9">
-                                            <textarea class="form-control" id="product-description" rows="5" placeholder="Please enter description"></textarea>
+                                            <textarea class="form-control" id="product-description" rows="5" placeholder="Please enter description">Write 5 Sums in Addition, Subtraction, Multiplication and Divison</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -159,7 +159,16 @@
                                         </div>
                                     </div>
                                 </div>
-                               
+                                <div class="form-group row">
+                                    <div class="col-8 offset-3">
+                                        <div class="checkbox checkbox-purple">
+                                            <input id="checkbox6" type="checkbox">
+                                            <label for="checkbox6">
+                                                Send Notification Sms
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-1"></div>
                         </div>

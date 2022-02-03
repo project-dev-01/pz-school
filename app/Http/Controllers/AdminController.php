@@ -978,4 +978,15 @@ class AdminController extends Controller
     {
         return view('admin.task.index');
     }
+
+    
+    public function evaluationReport()
+    {
+        return view('admin.homework.evaluation_report');
+    }
+    
+    public function homeworkEdit()
+    {
+        return view('admin.homework.edit');
+    }
 }

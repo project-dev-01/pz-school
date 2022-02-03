@@ -354,6 +354,8 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
         // Homework routes
         Route::get('homework/index', [AdminController::class, 'homework'])->name('admin.homework');
+        Route::get('evaluation_report', [AdminController::class, 'evaluationReport'])->name('admin.evaluation_report');
+        Route::get('homework/edit', [AdminController::class, 'homeworkEdit'])->name('admin.homework_edit');
 
         // exam routes
         Route::get('exam/term', [AdminController::class, 'examIndex'])->name('admin.exam.term');
@@ -581,6 +583,8 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('attendance/list', [TeacherController::class, 'attendanceList'])->name('teacher.attendance.list');
         // Homework routes
         Route::get('homework/index', [TeacherController::class, 'homework'])->name('teacher.homework');
+        Route::get('evaluation_report', [TeacherController::class, 'evaluationReport'])->name('teacher.evaluation_report');
+        Route::get('homework/edit', [TeacherController::class, 'homeworkEdit'])->name('teacher.homework_edit');
          // Leave Apply
          Route::get('leave_management/applyleave', [SuperAdminController::class, 'applyleave'])->name('teacher.leave_management.applyleave');       
         // Forum routes

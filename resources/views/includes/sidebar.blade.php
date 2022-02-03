@@ -698,6 +698,11 @@
                                     <span>Add Homework</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ route('admin.evaluation_report')}}" class="nav-link {{ (request()->is('admin/evaluation_report*')) ? 'active' : '' }}">
+                                    <span>Evoluation Report</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -1339,6 +1344,11 @@
                             <li>
                                 <a href="{{ route('teacher.homework')}}" class="nav-link {{ (request()->is('teacher/homework*')) ? 'active' : '' }}">
                                     <span>Add Homework</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('teacher.evaluation_report')}}" class="nav-link {{ (request()->is('teacher/evaluation_report*')) ? 'active' : '' }}">
+                                    <span>Evoluation Report</span>
                                 </a>
                             </li>
                         </ul>

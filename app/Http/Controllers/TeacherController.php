@@ -125,4 +125,15 @@ class TeacherController extends Controller
         return view('teacher.exam_results.bystudent');
     }    
 
+    
+    public function evaluationReport()
+    {
+        return view('teacher.homework.evaluation_report');
+    }
+    
+    public function homeworkEdit()
+    {
+        return view('teacher.homework.edit');
+    }
+
 }
