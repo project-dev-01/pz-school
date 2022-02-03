@@ -221,12 +221,8 @@
                                     <div class="col-12">
                                         <!-- <div class="form-group"> -->
                                         <!-- <label class="control-label font-weight-bold">Notes :</label> -->
-                                        <textarea class="form-control" style="margin: 12px;" placeholder="Enter Your Notes">Your progress for this term is excellent</textarea>
+                                        <textarea class="form-control" style="margin: 12px;" placeholder="Enter your notes"></textarea>
                                         <!-- </div> -->
-                                    </div>
-                                    <div class="col-12">
-                                        <button type="button" class="btn btn-success" style="margin: 12px;">Save</button>
-
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -276,8 +272,8 @@
                         <div class="col-lg-12">
                             <div class="card-box">
                                 <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
+                                    <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
+                                       <thead>
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Score</th>
@@ -287,30 +283,42 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <th>Bao</th>
+                                                <th>William</th>
                                                 <td>99</td>
                                                 <td>A</td>
                                                 <td>1</td>
                                             </tr>
                                             <tr>
-                                                <th>Baozhai</th>
+                                                <th>James</th>
                                                 <td>85</td>
                                                 <td>B</td>
                                                 <td>2</td>
                                             </tr>
                                             <tr>
-                                                <th>Bingwen</th>
+                                                <th>Benjamin</th>
                                                 <td>75</td>
                                                 <td>C</td>
                                                 <td>3</td>
                                             </tr>
                                             <tr>
-                                                <th>Biyu</th>
+                                                <th>Lucas</th>
                                                 <td>60</td>
                                                 <td>D</td>
                                                 <td>4</td>
                                             </tr>
-
+                                            <tr>
+                                                <th>Sophia</th>
+                                                <td>85</td>
+                                                <td>B</td>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Amelia</th>
+                                                <td>75</td>
+                                                <td>C</td>
+                                                <td>3</td>
+                                            </tr>
+                                           
                                         </tbody>
                                     </table>
                                 </div>
@@ -332,8 +340,8 @@
                         <div class="col-lg-12">
                             <div class="card-box">
                                 <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
+                                    <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
+                                       <thead>
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Score</th>
@@ -342,34 +350,27 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th>Biyu</th>
-                                                <td>60</td>
+											<tr>
+                                                <th>Charlotte</th>
+                                                <td>40</td>
                                                 <td>D</td>
-                                                <td>4</td>
+                                                <td>22</td>
                                             </tr>
-                                            <tr>
-                                                <th>Bingwen</th>
-                                                <td>75</td>
-                                                <td>C</td>
-                                                <td>3</td>
+                                             <tr>
+                                                <th>Isabella</th>
+                                                <td>50</td>
+                                                <td>D</td>
+                                                <td>11</td>
                                             </tr>
-                                            <tr>
-                                                <th>Baozhai</th>
-                                                <td>85</td>
-                                                <td>B</td>
-                                                <td>2</td>
-                                            </tr>
-
-                                            <tr>
-                                                <th>Bao</th>
-                                                <td>99</td>
-                                                <td>A</td>
-                                                <td>1</td>
+											<tr>
+                                                <th>Mia</th>
+                                                <td>40</td>
+                                                <td>D</td>
+                                                <td>12</td>
                                             </tr>
                                         </tbody>
                                     </table>
-                                </div>
+								   </div>
                             </div> <!-- end card-box -->
                         </div> <!-- end col -->
                     </div>
@@ -388,8 +389,8 @@
                         <div class="col-lg-12">
                             <div class="card-box">
                                 <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
+                                    <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
+                                       <thead>
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Score</th>
@@ -399,33 +400,45 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <th>Biyu</th>
-                                                <td>60</td>
-                                                <td>D</td>
-                                                <td>4</td>
+                                                <th>William</th>
+                                                <td>99</td>
+                                                <td>A</td>
+                                                <td>1</td>
                                             </tr>
                                             <tr>
-                                                <th>Bingwen</th>
+                                                <th>James</th>
+                                                <td>85</td>
+                                                <td>B</td>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Benjamin</th>
                                                 <td>75</td>
                                                 <td>C</td>
                                                 <td>3</td>
                                             </tr>
                                             <tr>
-                                                <th>Baozhai</th>
+                                                <th>Lucas</th>
+                                                <td>60</td>
+                                                <td>D</td>
+                                                <td>4</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Sophia</th>
                                                 <td>85</td>
                                                 <td>B</td>
                                                 <td>2</td>
                                             </tr>
-
                                             <tr>
-                                                <th>Bao</th>
-                                                <td>99</td>
-                                                <td>A</td>
-                                                <td>1</td>
+                                                <th>Amelia</th>
+                                                <td>75</td>
+                                                <td>C</td>
+                                                <td>3</td>
                                             </tr>
+                                            
                                         </tbody>
                                     </table>
-                                </div>
+								   </div>
                             </div> <!-- end card-box -->
                         </div> <!-- end col -->
                     </div>
@@ -444,8 +457,8 @@
                         <div class="col-lg-12">
                             <div class="card-box">
                                 <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
+									 <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
+                                       <thead>
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Score</th>
@@ -453,35 +466,17 @@
                                                 <th>Ranking</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Biyu</th>
-                                                <td>60</td>
+                                        <tbody> 
+											<tr>
+                                                <th>Charlotte</th>
+                                                <td>40</td>
                                                 <td>D</td>
-                                                <td>4</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Bingwen</th>
-                                                <td>75</td>
-                                                <td>C</td>
-                                                <td>3</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Baozhai</th>
-                                                <td>85</td>
-                                                <td>B</td>
-                                                <td>2</td>
+                                                <td>22</td>
                                             </tr>
 
-                                            <tr>
-                                                <th>Bao</th>
-                                                <td>99</td>
-                                                <td>A</td>
-                                                <td>1</td>
-                                            </tr>
                                         </tbody>
                                     </table>
-                                </div>
+								   </div>
                             </div> <!-- end card-box -->
                         </div> <!-- end col -->
                     </div>
@@ -489,24 +484,6 @@
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col -->
-    </div>
-    <div class="row">
-    <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-widgets">
-                        <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                        <a data-toggle="collapse" href="#cardCollpase2" role="button" aria-expanded="false" aria-controls="cardCollpase2"><i class="mdi mdi-minus"></i></a>
-                        <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
-                    </div>
-                    <h4 class="header-title mb-0">Marks by Subject</h4>
-
-                    <div id="cardCollpase2" class="collapse pt-3 show" dir="ltr">
-                        <div id="apex-line-1" class="apex-charts" data-colors="#9B59B6,#E91E63,#4A6F4B,#f7b84b,#4a81d4"></div>
-                    </div> <!-- collapsed end -->
-                </div> <!-- end card-body -->
-            </div> <!-- end card-->
-        </div> <!-- end col-->
     </div>
     @include('teacher.dashboard.check_list')
 

@@ -20,4 +20,8 @@ $(function () {
         $('#right-modal-dashboard-2').modal('show');
         // $('#myModal').modal('hide');
     });
+
+    $(".homeWorkAdd").datepicker({
+        dateFormat: 'dd-mm-yy'
+    });
 });

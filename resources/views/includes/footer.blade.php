@@ -210,6 +210,7 @@
 <script src="{{ asset('js/custom/test_result.js') }}"></script>
 <script src="{{ asset('js/custom/apex-mixed.js') }}"></script>
 <script src="{{ asset('js/custom/attendance.js') }}"></script>
+<script src="{{ asset('js/custom/homework.js') }}"></script>
 <!-- <script src="{{ asset('js/apexChart/apexcharts.js') }}"></script> -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> -->
 
@@ -689,7 +690,7 @@
                 text: 'Toppers'
             },
             xaxis: {
-                categories: ["Akihiro", "Akiko", "Amaya", "Amida", "Cho", "Daisuke", "Eichi"],
+                categories: ["William", "James", "Benjamin", "Lucas", "Charlotte", "Sophia", "Amelia", "Isabella", "Mia"],
                 labels: {
                     formatter: function(val) {
                         return val;
