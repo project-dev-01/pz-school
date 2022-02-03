@@ -233,6 +233,8 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         
         Route::get('evaluation_report', [SuperAdminController::class, 'evaluationReport'])->name('super_admin.evaluation_report');
         
+        Route::get('homework/edit', [SuperAdminController::class, 'homeworkEdit'])->name('super_admin.homework_edit');
+        
         // static page routes end
     });
 });

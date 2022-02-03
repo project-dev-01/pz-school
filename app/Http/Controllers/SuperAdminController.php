@@ -1507,6 +1507,13 @@ class SuperAdminController extends Controller
         return view('super_admin.homework.evaluation_report');
     }
     
+    public function homeworkEdit()
+    {
+        return view('super_admin.homework.edit');
+    }
+
+    
+    
     // static page controller end
     
 }

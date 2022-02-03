@@ -120,71 +120,161 @@
                 </ul><br>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-sm-12">
+                        <div class="col-xl-12">
+                            <ul class="nav nav-tabs nav-bordered">
+                                <li class="nav-item">
+                                    <a href="#current-b1" data-toggle="tab" aria-expanded="true" class="nav-link active">
+                                        Homework List
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#history-b1" data-toggle="tab" aria-expanded="false" class="nav-link">
+                                        History 
+                                    </a>
+                                </li>
+                            </ul><br>
                             <div class="card-box">
-                                <div class="row">
-                                    <div class="col-md-8"></div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <input type="text"  class="form-control" placeholder="Search">
+                                <div class="tab-content">
+                                    <div class="tab-pane show active" id="current-b1">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-md-8"></div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <input type="text"  class="form-control" placeholder="Search">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped table-bordered mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Subject</th>
+                                                                <th>Standard</th>
+                                                                <th>Class</th>
+                                                                <th>Date of Homework</th>
+                                                                <th>Date of Submission</th>
+                                                                <th>Complete/Incomplete</th>
+                                                                <th>Total Student</th>
+                                                                <th>Action</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>Geography</td>
+                                                                <td>First</td>
+                                                                <td>A</td>
+                                                                <td>18-02-2022</td>
+                                                                <td>23-02-2022</td>
+                                                                <td>1/2</td>
+                                                                <td>3</td>
+                                                                <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-target=".firstModal"><i class="fas fa-bars"></i> Details</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>Physics</td>
+                                                                <td>First</td>
+                                                                <td>A</td>
+                                                                <td>29-01-2022</td>
+                                                                <td>07-02-2022</td>
+                                                                <td>3/1</td>
+                                                                <td>5</td>
+                                                                <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-target=".secondModal"><i class="fas fa-bars"></i> Details</a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div> <!-- end table-responsive-->
+
+                                            </div> <!-- end col-->
                                         </div>
                                     </div>
+                                    <div class="tab-pane" id="history-b1">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-md-8"></div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <input type="text"  class="form-control" placeholder="Search">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-striped mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Subject</th>
+                                                                <th>Standard</th>
+                                                                <th>Class</th>
+                                                                <th>Date of Homework</th>
+                                                                <th>Date of Submission</th>
+                                                                <th>Complete/Incomplete</th>
+                                                                <th>Total Student</th>
+                                                                <th>Action</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>Maths</td>
+                                                                <td>First</td>
+                                                                <td>A</td>
+                                                                <td>07-04-2018</td>
+                                                                <td>21-04-2018</td>
+                                                                <td>10/0</td>
+                                                                <td>10</td>
+                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default" ><i class="fas fa-bars"></i> Copy</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>Chemistry</td>
+                                                                <td>Third</td>
+                                                                <td>B</td>
+                                                                <td>15-08-2020</td>
+                                                                <td>07-09-2020</td>
+                                                                <td>15/0</td>
+                                                                <td>15</td>
+                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default"><i class="fas fa-bars"></i> Copy</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>Biology</td>
+                                                                <td>Second</td>
+                                                                <td>C</td>
+                                                                <td>11-06-2021</td>
+                                                                <td>17-06-2021</td>
+                                                                <td>18/2</td>
+                                                                <td>20</td>
+                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default"><i class="fas fa-bars"></i> Copy</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>4</td>
+                                                                <td>Computer</td>
+                                                                <td>First</td>
+                                                                <td>A</td>
+                                                                <td>04-05-2020</td>
+                                                                <td>19-05-2020</td>
+                                                                <td>25/0</td>
+                                                                <td>25</td>
+                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default"><i class="fas fa-bars"></i> Copy</a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div> <!-- end table-responsive-->
+                                            </div> <!-- end col-->
+                                        </div>
+                                    </div> <!-- end col-->
                                 </div>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Subject</th>
-                                                <th>Standard</th>
-                                                <th>Class</th>
-                                                <th>Date of Homework</th>
-                                                <th>Date of Submission</th>
-                                                <th>Complete/Incomplete</th>
-                                                <th>Total Student</th>
-                                                <th>Action</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Geography</td>
-                                                <td>First</td>
-                                                <td>A</td>
-                                                <td>18-02-2022</td>
-                                                <td>23-02-2022</td>
-                                                <td>1/2</td>
-                                                <td>3</td>
-                                                <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-target=".firstModal"><i class="fas fa-bars"></i> Details</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Physics</td>
-                                                <td>First</td>
-                                                <td>A</td>
-                                                <td>29-01-2022</td>
-                                                <td>07-02-2022</td>
-                                                <td>3/1</td>
-                                                <td>5</td>
-                                                <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-target=".secondModal"><i class="fas fa-bars"></i> Details</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div> <!-- end table-responsive-->
-
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col-->
+                            </div> <!-- end card-box-->
+                        </div> <!-- end col -->
                     </div>
                     <!-- end row-->
-                    <div class="form-group text-right m-b-0">
-                        <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Save
-                        </button>
-                        <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                            Cancel
-                        </button>-->
-                    </div>
 
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
