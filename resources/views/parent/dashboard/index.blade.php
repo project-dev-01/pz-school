@@ -50,7 +50,6 @@
                                                                 </div> <!-- end col -->
                                                                 <div class="col-lg-6">
                                                                     <div class="d-sm-flex justify-content-between">
-
                                                                         <div class="mt-3 mt-sm-0">
                                                                             <ul class="list-inline font-13 text-sm-right">
                                                                                 <li class="list-inline-item pr-1">
@@ -130,6 +129,7 @@
                                                     </div> <!-- end collapse-->
                                                 </div>
                                                 <!-- end upcoming tasks -->
+                                           
 
                                             </div> <!-- end col -->
                                         </div> <!-- end row -->
@@ -147,6 +147,137 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card-box">
+                <!-- tasks panel -->
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card">
+                                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                            HomeWork List
+                            <h4>
+                    </li>
+                </ul><br>
+                                    <div class="card-body">
+
+                                    <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
+                                            <div class="col">
+                                                <a class="text-dark" data-toggle="collapse" href="#hmenv" aria-expanded="false" aria-controls="hmenv">
+                                                    <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> Study of the Environment<span class="text-muted font-14"></span></h5>
+                                                </a>
+                                                <!-- Right modal -->
+                                                <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#right-modal">Rightbar Modal</button> -->
+                                                <div class="collapse show" id="hmenv">
+                                                    <div class="card mb-0 shadow-none">
+                                                        <div class="card-body pb-0" id="task-list-one">
+                                                            <!-- task -->
+                                                            <div class="row">
+                                                                <div class="col-sm-2">
+                                                                <a href="{{ route('parent.homework')}}" >Ecosystems </a>
+                                                                </div> <!-- end col -->
+                                                                <div class="col-sm-6">
+                                                                    <div class="d-sm-flex">
+                                                                        <div>
+                                                                        <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light"  data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="{{ route('parent.homework')}}" role="button" aria-haspopup="false" aria-expanded="false" >
+                                                                        <img src="{{ Session::get('picture') && asset('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" alt="user-image" class="rounded-circle admin_picture">                                                
+                                                                        </a></div>
+                                                                        <div class="mt-3 mt-sm-0">
+                                                                            <ul class="list-inline font-13 text-sm-right">
+                                                                                <li class="list-inline-item pr-1">                                                                                  
+                                                                                   Saran
+                                                                                </li>                                                                             
+                                                                                <li class="list-inline-item">
+                                                                                    <span class="badge badge-soft-danger">InComplete</span>
+                                                                                </li>
+                                                                                <li class="list-inline-item pr-1"> 
+                                                                                <i class='mdi mdi-calendar-month-outline font-16'></i>                                                                            
+                                                                                   Submission Date : 20-01-2022  
+                                                                                </li>  
+                                                                                <li class="list-inline-item text-danger"> 
+                                                                                </li>
+                                                                                                                                                        
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div> <!-- end .d-flex-->
+                                                                </div> <!-- end col -->
+                                                            </div>
+                                                            <!-- end task -->
+                                                        </div> <!-- end card-body-->
+                                                    </div> <!-- end card -->
+                                                </div> <!-- end .collapse-->
+
+                                            </div> <!-- end col -->
+                                        </div> <!-- Maths row -->
+
+                                        <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
+                                            <div class="col">
+                                                <a class="text-dark" data-toggle="collapse" href="#hmmaths" aria-expanded="false" aria-controls="hmmaths">
+                                                    <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> Mathematics<span class="text-muted font-14"></span></h5>
+                                                </a>
+                                                <!-- Right modal -->
+                                                <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#right-modal">Rightbar Modal</button> -->
+                                                <div class="collapse show" id="hmmaths">
+                                                    <div class="card mb-0 shadow-none">
+                                                        <div class="card-body pb-0" id="task-list-one">
+                                                            <!-- task -->
+                                                            <div class="row">
+                                                                <div class="col-sm-2">
+                                                                <a href="{{ route('parent.homework')}}" >Geometry </a>
+                                                                </div> <!-- end col -->
+                                                                <div class="col-sm-">
+                                                                    <div class="d-sm-flex">
+                                                                        <div>
+                                                                        <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light"  data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false" >
+                                                                        <img src="{{ Session::get('picture') && asset('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" alt="user-image" class="rounded-circle admin_picture">                                                
+                                                                        </a></div>
+                                                                        <div class="mt-3 mt-sm-0">
+                                                                            <ul class="list-inline font-13 text-sm-right">
+                                                                                <li class="list-inline-item pr-1">                                                                                    
+                                                                                    Saran
+                                                                                </li>                                                                             
+                                                                                <li class="list-inline-item">
+                                                                                    <span class="badge badge-soft-danger">InComplete</span>
+                                                                                </li>
+                                                                                <li class="list-inline-item">  
+                                                                                <i class='mdi mdi-calendar-month-outline font-16 mr-1'></i>                                                                           
+                                                                                    Submission Date : 23-01-2022
+                                                                                </li>  
+                                                                                <li class="list-inline-item text-danger">                                                                                       
+                                                                                        
+                                                                                    </li>
+                                                                                                                                                        
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div> <!-- end .d-flex-->
+                                                                </div> <!-- end col -->
+                                                            </div>
+                                                            <!-- end task -->
+                                                        </div> <!-- end card-body-->
+                                                    </div> <!-- end card -->
+                                                </div> <!-- end .collapse-->
+
+                                            </div> <!-- end col -->
+                                        </div> <!-- Maths row -->                                   
+
+                                    </div> <!-- end card-body -->
+                                </div> <!-- end card -->
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+                    </div> <!-- end col -->
+
+                    <!-- task details -->
+                </div>
+                <!-- task panel end -->
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-12">
             <div class="card">

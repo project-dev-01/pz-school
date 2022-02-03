@@ -118,5 +118,8 @@ class ParentController extends Controller
     {
         return view('parent.chat.index');
     }
-     
+    public function homeworkredirect()
+    {
+        return view('parent.homework.hmeworklist');
+    }
 }
