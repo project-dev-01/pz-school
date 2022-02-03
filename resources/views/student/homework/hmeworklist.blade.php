@@ -104,11 +104,14 @@
                                     <select id="heard" class="form-control" required="">
                                     <option value="">Select Subject</option> 
                                     <option>All </option>
-                                    <option>Physics </option>
-                                    <option>Chemistry </option>
-                                    <option>Maths </option>
-                                    <option>Biology </option>
-                                    <option>Geography </option>
+                                    <option value="press">English</option>    
+                                    <option value="">Mathematics</option>
+                                    <option value="press">History</option>
+                                    <option value="">Study of the Environment</option>
+                                    <option value="press">Geography</option>
+                                    <option value="">Natural Sciences</option>
+                                    <option value="press">Civics Education</option>
+                                    <option value="">Arts Education</option>
                                     </select>
                                 </div>
                             </div>

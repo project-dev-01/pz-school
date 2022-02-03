@@ -53,10 +53,14 @@
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
                             <option value="">select</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option value="press">English</option>    
+                            <option value="">Mathematics</option>
+                            <option value="press">History</option>
+                            <option value="">Study of the Environment</option>
+                            <option value="press">Geography</option>
+                            <option value="">Natural Sciences</option>
+                            <option value="press">Civics Education</option>
+                            <option value="">Arts Education</option>
                         </select>
                         </div>
                     </div>
