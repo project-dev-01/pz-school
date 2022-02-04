@@ -3,9 +3,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                2015 - <script>
+                2020 - <script>
                     document.write(new Date().getFullYear())
-                </script> &copy; by <a href="https://aibots.my/">Aibots Sdn Bhd</a>
+                    </script> &copy; by <a href="https://paxsuzen.com">Paxsuzen</a>
             </div>
         </div>
     </div>
@@ -1025,7 +1025,7 @@ options = {
     series: [{
         name: "English",
         // data: [65,87,65,87]
-        data: [70, 83]
+        data: [70, 83,65,87,65,87,86,65,90,65,99]
 
     }],
     xaxis: {

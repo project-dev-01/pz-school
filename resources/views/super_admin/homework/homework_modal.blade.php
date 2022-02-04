@@ -26,22 +26,37 @@
                                                     <!-- Portlet card -->
                                                     <div class="card">
                                                         <div class="card-body">
-                                                            <div class="card-widgets">
-                                                                <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                                                                <a data-toggle="collapse" href="#cardCollpase19" role="button" aria-expanded="false" aria-controls="cardCollpase19"><i class="mdi mdi-minus"></i></a>
-                                                                <!-- <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a> -->
-                                                            </div>
-                                                            <h4 class="header-title mb-0">Homework Status</h4>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="card-widgets">
+                                                                        <!-- <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a> -->
+                                                                        <a data-toggle="collapse" href="#cardCollpase19" role="button" aria-expanded="false" aria-controls="cardCollpase19"><i class="mdi mdi-minus"></i></a>
+                                                                        <!-- <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a> -->
+                                                                    </div>
+                                                                    <h4 class="header-title mb-0">Homework Status</h4>
 
-                                                            <div id="cardCollpase19" class="collapse pt-3 show" dir="ltr">
-                                                                <div id="homework-status" class="apex-charts" data-colors="#00b19d,#f1556c"></div>
-                                                            </div> <!-- collapsed end -->
+                                                                    <div id="cardCollpase19" class="collapse pt-3 show" dir="ltr">
+                                                                        <div id="homework-status" class="apex-charts" data-colors="#00b19d,#f1556c"></div>
+                                                                    </div> <!-- collapsed end -->
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="card-widgets">
+                                                                        <!-- <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a> -->
+                                                                        <a data-toggle="collapse" href="#cardCollapseChecked" role="button" aria-expanded="false" aria-controls="cardCollapseChecked"><i class="mdi mdi-minus"></i></a>
+                                                                        <!-- <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a> -->
+                                                                    </div>
+                                                                    <h4 class="header-title mb-0">Checked Status</h4>
+
+                                                                    <div id="cardCollapseChecked" class="collapse pt-3 show" dir="ltr">
+                                                                        <div id="homework-checked-status" class="apex-charts" data-colors="#FEB019,#775DD0"></div>
+                                                                    </div> <!-- collapsed end -->
+                                                                </div>
+                                                            </div>
                                                         </div> <!-- end card-body -->
                                                     </div> <!-- end card-->
                                                 </div> <!-- end col-->
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-12">
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="heard">Status</label>
@@ -52,8 +67,18 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="heard">Checked</label>
+                                                            <select id="heard" class="form-control" required="">
+                                                                <option value="">Choose Filter</option>
+                                                                <option value="">Checked</option>
+                                                                <option value="">Unchecked</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                             </div> <!-- end table-responsive-->
+                                            <div class="row">
                                             <div class="col-md-12">
                                                 <!-- <table class="table table-bordered mb-0"> -->
                                                 <table data-toggle="table" data-page-size="7" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
@@ -167,6 +192,7 @@
                                                     </tbody>
                                                 </table>
                                             </div> <!-- end table-responsive-->
+                                            </div>
                                             <hr>
                                             <div class="row">
                                                 <div class="col-md-12">

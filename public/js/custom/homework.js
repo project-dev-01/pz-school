@@ -51,6 +51,43 @@ $('.firstModal').on('shown.bs.modal', function (event) {
         }
     };
     (chart = new ApexCharts(document.querySelector("#homework-status"), options)).render();
+    // checked and unchecked
+    colors = ["#FEB019", "#775DD0"];
+    (dataColors = $("#homework-checked-status").data("colors")) && (colors = dataColors.split(","));
+    options = {
+        chart: {
+            height: 320,
+            type: "donut"
+        },
+        series: [2, 1],
+        legend: {
+            show: !0,
+            position: "bottom",
+            horizontalAlign: "center",
+            verticalAlign: "middle",
+            floating: !1,
+            fontSize: "14px",
+            offsetX: 0,
+            offsetY: 7
+        },
+        labels: [ "Checked", "Unchecked"],
+        colors: colors,
+        responsive: [{
+            breakpoint: 600,
+            options: {
+                chart: {
+                    height: 240
+                },
+                legend: {
+                    show: !1
+                }
+            }
+        }],
+        fill: {
+            type: "gradient"
+        }
+    };
+    (chart = new ApexCharts(document.querySelector("#homework-checked-status"), options)).render();
 
 
 }).on('hidden.bs.modal', function (event) {

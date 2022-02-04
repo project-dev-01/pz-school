@@ -134,7 +134,7 @@
                             <div class="col">
                                 <div class="card">
                                     <div class="card-body">
-
+                                    <h1 class="header-title mb-0">To Do List</h1>
                                         <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
                                             <div class="col">
                                                 <a class="text-dark" data-toggle="collapse" href="#todayTasks" aria-expanded="false" aria-controls="todayTasks">

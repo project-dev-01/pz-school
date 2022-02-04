@@ -27,7 +27,7 @@
                             <div class="col">
                                 <div class="card">
                                     <div class="card-body">
-
+                                        <h1 class="header-title mb-0">To Do List</h1>
                                         <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
                                             <div class="col">
                                                 <a class="text-dark" data-toggle="collapse" href="#todayTasks" aria-expanded="false" aria-controls="todayTasks">
@@ -250,9 +250,14 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
+                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                            <span data-feather="edit" class="icon-dual" id="span-parent"></span> Top Scoreres of class
+                            <h4>
+                    </li>
+                </ul><br>
                 <div class="card-body">
-                    <h4 class="header-title">Top Scoreres of class</h4>
-
                     <div class="mt-4 chartjs-chart">
                         <div id="chart-hor-stack-bar-chart" style="min-height: 365px;"></div>
                         <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
@@ -265,15 +270,20 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
+                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                            <span data-feather="edit" class="icon-dual" id="span-parent"></span> Top 10 ranking
+                            <h4>
+                    </li>
+                </ul><br>
                 <div class="card-body">
-                    <h4 class="header-title">Top 10 ranking</h4>
-
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card-box">
                                 <div class="table-responsive">
                                     <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
-                                       <thead>
+                                        <thead>
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Score</th>
@@ -318,7 +328,25 @@
                                                 <td>C</td>
                                                 <td>3</td>
                                             </tr>
-                                           
+                                            <tr>
+                                                <th>Charlotte</th>
+                                                <td>40</td>
+                                                <td>D</td>
+                                                <td>22</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Isabella</th>
+                                                <td>50</td>
+                                                <td>D</td>
+                                                <td>11</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Mia</th>
+                                                <td>40</td>
+                                                <td>D</td>
+                                                <td>12</td>
+                                            </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -333,15 +361,20 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
+                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                            <span data-feather="edit" class="icon-dual" id="span-parent"></span> Bottom 10 ranking
+                            <h4>
+                    </li>
+                </ul><br>
                 <div class="card-body">
-                    <h4 class="header-title">Bottom 10 ranking</h4>
-
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card-box">
                                 <div class="table-responsive">
                                     <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
-                                       <thead>
+                                        <thead>
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Score</th>
@@ -350,27 +383,64 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-											<tr>
+                                            <tr>
                                                 <th>Charlotte</th>
                                                 <td>40</td>
                                                 <td>D</td>
                                                 <td>22</td>
                                             </tr>
-                                             <tr>
+                                            <tr>
                                                 <th>Isabella</th>
                                                 <td>50</td>
                                                 <td>D</td>
                                                 <td>11</td>
                                             </tr>
-											<tr>
+                                            <tr>
                                                 <th>Mia</th>
                                                 <td>40</td>
                                                 <td>D</td>
                                                 <td>12</td>
                                             </tr>
+                                            <tr>
+                                                <th>William</th>
+                                                <td>99</td>
+                                                <td>A</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <th>James</th>
+                                                <td>85</td>
+                                                <td>B</td>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Benjamin</th>
+                                                <td>75</td>
+                                                <td>C</td>
+                                                <td>3</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Lucas</th>
+                                                <td>60</td>
+                                                <td>D</td>
+                                                <td>4</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Sophia</th>
+                                                <td>85</td>
+                                                <td>B</td>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Amelia</th>
+                                                <td>75</td>
+                                                <td>C</td>
+                                                <td>3</td>
+                                            </tr>
+
                                         </tbody>
                                     </table>
-								   </div>
+                                </div>
                             </div> <!-- end card-box -->
                         </div> <!-- end col -->
                     </div>
@@ -382,15 +452,20 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
+                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                            <span data-feather="edit" class="icon-dual" id="span-parent"></span> Top 10 Improments
+                            <h4>
+                    </li>
+                </ul><br>
                 <div class="card-body">
-                    <h4 class="header-title">Top 10 Improments</h4>
-
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card-box">
                                 <div class="table-responsive">
                                     <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
-                                       <thead>
+                                        <thead>
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Score</th>
@@ -435,10 +510,10 @@
                                                 <td>C</td>
                                                 <td>3</td>
                                             </tr>
-                                            
+
                                         </tbody>
                                     </table>
-								   </div>
+                                </div>
                             </div> <!-- end card-box -->
                         </div> <!-- end col -->
                     </div>
@@ -450,15 +525,20 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
+                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                            <span data-feather="edit" class="icon-dual" id="span-parent"></span> Bottom 10 Deteriorate
+                            <h4>
+                    </li>
+                </ul><br>
                 <div class="card-body">
-                    <h4 class="header-title">Bottom 10 Deteriorate</h4>
-
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card-box">
                                 <div class="table-responsive">
-									 <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
-                                       <thead>
+                                    <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
+                                        <thead>
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Score</th>
@@ -466,17 +546,66 @@
                                                 <th>Ranking</th>
                                             </tr>
                                         </thead>
-                                        <tbody> 
-											<tr>
+                                        <tbody>
+                                            <tr>
                                                 <th>Charlotte</th>
                                                 <td>40</td>
                                                 <td>D</td>
                                                 <td>22</td>
                                             </tr>
+                                            <tr>
+                                                <th>Isabella</th>
+                                                <td>50</td>
+                                                <td>D</td>
+                                                <td>11</td>
+                                            </tr>
+                                            <tr>
+                                                <th>William</th>
+                                                <td>99</td>
+                                                <td>A</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <th>James</th>
+                                                <td>85</td>
+                                                <td>B</td>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Benjamin</th>
+                                                <td>75</td>
+                                                <td>C</td>
+                                                <td>3</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Lucas</th>
+                                                <td>60</td>
+                                                <td>D</td>
+                                                <td>4</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Sophia</th>
+                                                <td>85</td>
+                                                <td>B</td>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Amelia</th>
+                                                <td>75</td>
+                                                <td>C</td>
+                                                <td>3</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Mia</th>
+                                                <td>40</td>
+                                                <td>D</td>
+                                                <td>12</td>
+                                            </tr>
+
 
                                         </tbody>
                                     </table>
-								   </div>
+                                </div>
                             </div> <!-- end card-box -->
                         </div> <!-- end col -->
                     </div>
