@@ -85,6 +85,12 @@
                                                                         <td>8</td>
                                                                     </tr>
                                                                     <tr>
+                                                                        <th scope="row">Total</th>
+                                                                        <td>300</td>
+                                                                        <th scope="row">Average</th>
+                                                                        <td>60</td>
+                                                                    </tr>
+                                                                    <tr>
                                                                         <th scope="row">Result</th>
                                                                         <td>Pass</td>
                                                                     </tr>
@@ -151,6 +157,11 @@
                                                                         <td>8</td>
                                                                     </tr>
                                                                     <tr>
+                                                                        <th scope="row">Total</th>
+                                                                        <td>310</td>
+                                                                        <th scope="row">Average</th>
+                                                                        <td>60</td>
+                                                                    </tr>
                                                                         <th scope="row">Result</th>
                                                                         <td>Pass</td>
                                                                     </tr>

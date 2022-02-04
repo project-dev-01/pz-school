@@ -90,6 +90,10 @@
                                                                         <th scope="row">Average</th>
                                                                         <td>60</td>
                                                                     </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Result</th>
+                                                                        <td>Pass</td>
+                                                                    </tr>
 
                                                                 </tbody>
                                                             </table>
@@ -157,6 +161,10 @@
                                                                         <td>310</td>
                                                                         <th scope="row">Average</th>
                                                                         <td>65</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Result</th>
+                                                                        <td>Pass</td>
                                                                     </tr>
 
                                                                 </tbody>
