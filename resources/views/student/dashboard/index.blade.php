@@ -179,7 +179,7 @@
                                                             <!-- task -->
                                                             <div class="row">
                                                                 <div class="col-sm-2">
-                                                                <a href="{{ route('parent.homework')}}" >Ecosystems </a>
+                                                                <a href="{{ route('student.homework')}}" >Ecosystems </a>
                                                                 </div> <!-- end col -->
                                                                 <div class="col-sm-6">
                                                                     <div class="d-sm-flex">
@@ -228,7 +228,7 @@
                                                             <!-- task -->
                                                             <div class="row">
                                                                 <div class="col-sm-2">
-                                                                <a href="{{ route('parent.homework')}}" >Geometry </a>
+                                                                <a href="{{ route('student.homework')}}" >Geometry </a>
                                                                 </div> <!-- end col -->
                                                                 <div class="col-sm-">
                                                                     <div class="d-sm-flex">

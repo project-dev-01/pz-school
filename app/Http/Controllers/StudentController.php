@@ -90,4 +90,8 @@ class StudentController extends Controller
         return view('student.forum.page-tabs-guidelines');
     }    
      // faq screen pages end
+     public function homeworkredirect()
+     {
+         return view('student.homework.hmeworklist');
+     }
 }

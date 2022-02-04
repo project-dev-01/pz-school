@@ -444,7 +444,7 @@
                     var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
                     //radar chart
                     var radarChart = {
-                        labels: ["Mia", "James", "Benjamin", "Isabella", "Amelia"],
+                        labels: ["A", "A+", "A-", "B", "B+","C","C+","E","G"],
                         datasets: [{
                                 label: "Mid Term",
                                 backgroundColor: hexToRGB(colors[0], 0.3),
@@ -453,7 +453,7 @@
                                 pointBorderColor: "#fff",
                                 pointHoverBackgroundColor: "#fff",
                                 pointHoverBorderColor: colors[0],
-                                data: [85, 79, 70, 68,60]
+                                data:[90, 30, 35, 70,50,0,30,30,10]
                             },
                             {
                                 label: "Annual",
@@ -463,7 +463,7 @@
                                 pointBorderColor: "#fff",
                                 pointHoverBackgroundColor: "#fff",
                                 pointHoverBorderColor: colors[1],
-                                data: [80, 75, 69, 65, 60]
+                                data: [70, 85, 0, 86,60,0,70,70,10]
                             }
                         ]
                     };
@@ -477,7 +477,7 @@
                     var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
                     //radar chart
                     var radarChart = {
-                        labels: ["Amelia", "Isabella", "Benjamin", "James", "Sophia"],
+                        labels: ["A", "A+", "A-", "B", "B+","C","C+","E","G"],
                         datasets: [{
                                 label: "Mid Term",
                                 backgroundColor: hexToRGB(colors[0], 0.3),
@@ -486,7 +486,7 @@
                                 pointBorderColor: "#fff",
                                 pointHoverBackgroundColor: "#fff",
                                 pointHoverBorderColor: colors[0],
-                                data: [80, 73, 70, 68,60]
+                                data: [70, 85, 0, 86,60,0,70,70]
                             },
                             {
                                 label: "Annual",
@@ -496,7 +496,7 @@
                                 pointBorderColor: "#fff",
                                 pointHoverBackgroundColor: "#fff",
                                 pointHoverBorderColor: colors[1],
-                                data: [88, 75, 69, 65, 60]
+                                data: [75, 90, 20, 80,50,0,65,60]
                             }
                         ]
                     };

@@ -27,7 +27,7 @@ options = {
     series: [{
         name: "PRESENT",
         type: "area",
-        data: [100,100,85.71, 100, 100, 100, 14, 100]
+        data: [100,99,85.71, 99, 99, 99, 14, 99]
     }, {
         name: "LATE",
         type: "line",
@@ -43,15 +43,31 @@ options = {
         size: 0
     },
     yaxis: [{
+        min:0,
+        max:100,
         title: {
             text: "PRESENT"
+            
+        },
+        labels:{
+            formatter: function(val,index) {
+                return val;
+            }
         }
     }, {
+        min:0,
+        max:100,
         opposite: !0,
         title: {
             text: "LATE"
+        },
+        labels:{
+            formatter: function(val,index) {
+                return val;
+            }
         }
-    }],
+    }
+],
     tooltip: {
         shared: !0,
         intersect: !1,
