@@ -154,7 +154,7 @@
                                             <span class="far fa-calendar-alt"></span>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend"
+                                <input type="text" class="form-control homeWorkAdd" id="name" placeholder="" aria-describedby="inputGroupPrepend"
                                     required>
                                 </div>
                                 </div>
@@ -168,7 +168,7 @@
                                             <span class="far fa-calendar-alt"></span>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend"
+                                <input type="text" class="form-control homeWorkAdd" id="name" placeholder="" aria-describedby="inputGroupPrepend"
                                     required>
                                 </div>
                                 </div>
@@ -194,7 +194,7 @@
                                             <span class="far fa-calendar-alt"></span>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend"
+                                <input type="text" class="form-control homeWorkAdd" id="name" placeholder="" aria-describedby="inputGroupPrepend"
                                     required>
                                 </div>
                                 </div>

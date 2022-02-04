@@ -27,6 +27,15 @@
                     <form id="demo-form" data-parsley-validate="">
                         <div class="row">
                             <div class="col-md-12">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="heard">Filter<span class="text-danger">*</span></label>
+                                        <!-- <input class="form-control" id="example-month" type="month" name="month"> -->
+                                        <input type="text" class="form-control" data-provide="datepicker" data-date-format="MM yyyy" value="February 2022" data-date-min-view-mode="1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <p>
                                     <div>
@@ -76,8 +85,10 @@
                                                                         <td>8</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th scope="row">Result</th>
-                                                                        <td>Pass</td>
+                                                                        <th scope="row">Total</th>
+                                                                        <td>300</td>
+                                                                        <th scope="row">Average</th>
+                                                                        <td>60</td>
                                                                     </tr>
 
                                                                 </tbody>
@@ -142,8 +153,10 @@
                                                                         <td>8</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th scope="row">Result</th>
-                                                                        <td>Pass</td>
+                                                                        <th scope="row">Total</th>
+                                                                        <td>310</td>
+                                                                        <th scope="row">Average</th>
+                                                                        <td>65</td>
                                                                     </tr>
 
                                                                 </tbody>

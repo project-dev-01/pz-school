@@ -32,7 +32,7 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="demo-form" data-parsley-validate="">
+                    <form id="demo-form" data-parsley-validate="" autocomplete="off">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -87,7 +87,7 @@
                                 <div class="form-group">
                                     <label for="">Date<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
-                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" class="form-control homeWorkAdd" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="far fa-calendar-alt"></span>

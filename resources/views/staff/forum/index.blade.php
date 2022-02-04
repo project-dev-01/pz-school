@@ -21,7 +21,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('staff.forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('admin.forum.page-single-topic') }}">
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-pinned"></use>
                             </svg>
@@ -53,7 +53,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('staff.forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('admin.forum.page-single-topic') }}">
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-locked"></use>
                             </svg>
@@ -84,7 +84,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('staff.forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('admin.forum.page-single-topic') }}">
                             Best Foreign Languge to Study?
                         </a></h6>
                     <div class="row align-items-center no-gutters">
@@ -113,7 +113,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('staff.forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('admin.forum.page-single-topic') }}">
                     First Year at University Experiences?
                         </a></h6>
                     <div class="row align-items-center no-gutters">
@@ -142,7 +142,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('staff.forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('admin.forum.page-single-topic') }}">
                         Scholarships
                         </a></h6>
                     <div class="row align-items-center no-gutters  hide-desktope">
@@ -169,7 +169,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('staff.forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('admin.forum.page-single-topic') }}">
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-locked"></use>
                             </svg>
@@ -199,7 +199,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('staff.forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('admin.forum.page-single-topic') }}">
                     I want to start studying online either or open colleges and I don’t know which one is better
                         </a></h6>
                     <div class="row align-items-center no-gutters">
@@ -228,7 +228,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('staff.forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('admin.forum.page-single-topic') }}">
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-verified"></use>
                             </svg>
@@ -258,7 +258,7 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="{{ route('staff.forum.page-single-topic') }}">
+                    <h6 class="tt-title"><a href="{{ route('admin.forum.page-single-topic') }}">
                         Exam tips and preparations... the do's and don'ts of surviving exam period
                         </a></h6>
                     <div class="row align-items-center no-gutters  hide-desktope">

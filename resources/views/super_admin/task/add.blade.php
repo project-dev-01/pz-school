@@ -26,7 +26,7 @@
                     
                     <div class="form-group">
                         <label for="date">Date & Time<span class="text-danger">*</span></label>
-                        <input type="text" id="date" name="date" class="form-control" placeholder="Enter Date & Time">
+                        <input type="text" id="date" name="date" class="form-control homeWorkAdd" placeholder="Enter Date & Time">
                         <span class="text-danger error-text date_error"></span>
                     </div>
                     

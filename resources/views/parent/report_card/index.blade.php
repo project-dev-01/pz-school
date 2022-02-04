@@ -27,6 +27,15 @@
                     <form id="demo-form" data-parsley-validate="">
                         <div class="row">
                             <div class="col-md-12">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="heard">Filter<span class="text-danger">*</span></label>
+                                        <!-- <input class="form-control" id="example-month" type="month" name="month"> -->
+                                        <input type="text" class="form-control" data-provide="datepicker" data-date-format="MM yyyy" value="February 2022" data-date-min-view-mode="1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <p>
                                     <div>

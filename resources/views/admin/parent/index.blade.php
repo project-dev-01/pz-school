@@ -31,7 +31,7 @@
                     <span class=" fas fa-user-circle" id="parent" style=""></span>
                     <span class="header-title mb-3" id="parent">Add Parent</span>
                 <hr>						
-                <form id="demo-form" data-parsley-validate="">
+                <form id="demo-form" data-parsley-validate="" autocomplete="off">
                     <span class="fas fa-user-check  " id="span-parent"></span>
                     <span class="header-title mb-3"id="span-parent">Parent Details
                     <hr id="hr"></span>

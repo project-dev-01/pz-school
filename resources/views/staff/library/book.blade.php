@@ -124,7 +124,7 @@
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-3 col-form-label">Purchase Date<span class="text-danger">*</span></label>
                         <div class="col-9">
-                            <input type="email" required parsley-type="email" class="form-control"
+                            <input type="email" required parsley-type="email" class="form-control homeWorkAdd"
                                     id="inputEmail3" placeholder="">
                         </div>
                     </div>
@@ -134,11 +134,10 @@
                         <label for="inputEmail3" class="col-3 col-form-label">Book Category<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
-                            <option value="">select</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option value="" >Select</option>
+                            <option value="press">Story</option>
+                            <option value="net">Communication</option>
+                            <option value="mouth">Network</option>
                         </select>
                         </div>
                     </div>

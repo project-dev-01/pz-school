@@ -31,7 +31,7 @@
                     <span class="fas fa-home  " id="span-parent"></span>
                     <span class="header-title mb-3" id="span-parent">Academic Details
                     <hr id="hr"></span>
-                    <form id="demo-form" data-parsley-validate="">                                         
+                    <form id="demo-form" data-parsley-validate="" autocomplete="off">                                         
                     <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
@@ -68,7 +68,7 @@
                                             <span class="far fa-calendar-alt"></span>
                                     </div>
                             </div>
-                            <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend"
+                            <input type="text" class="form-control homeWorkAdd" id="name" placeholder="" aria-describedby="inputGroupPrepend"
                                     required>
                                 </div>
                         </div> 
@@ -176,7 +176,7 @@
                                             <span class="fas fa-birthday-cake"></span>
                                     </div>
                             </div>
-                            <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend"
+                            <input type="text" class="form-control homeWorkAdd" id="name" placeholder="" aria-describedby="inputGroupPrepend"
                                     required>
                                 </div>
                         </div> 

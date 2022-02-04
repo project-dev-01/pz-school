@@ -29,7 +29,7 @@
                     <span class="header-title mb-3" id="parent">Add Homework</span>
                     <hr>
 
-                    <form id="demo-form" data-parsley-validate="">
+                    <form id="demo-form" data-parsley-validate="" autocomplete="off">
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-9">

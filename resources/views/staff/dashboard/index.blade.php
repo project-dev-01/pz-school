@@ -134,6 +134,7 @@
                             <div class="col">
                                 <div class="card">
                                     <div class="card-body">
+                                        <h1 class="header-title mb-0">To Do List</h1>
 
                                         <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
                                             <div class="col">
@@ -299,7 +300,7 @@
                                             <label class="control-label">Category</label>
                                             <select class="form-control custom-select" name="category" id="event-category" required>
                                                 
-                                                <option value="bg-primary" selected>First Communion</option>
+                                                <option value="bg-primary">First Communion</option>
                                                 <option value="bg-info">Scouting Jamboree</option>
                                                 <option value="bg-warning">Outreach is a volunteer program</option>
                                             </select>

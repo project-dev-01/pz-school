@@ -60,12 +60,12 @@
                     </div>
                     <div class="form-group">
                         <label for="start_date">Start Date</label>
-                        <input class="form-control" id="start_date" type="date" name="start_date">
+                        <input class="form-control homeWorkAdd" id="start_date" type="date" name="start_date">
                         <span class="text-danger error-text start_date_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="end_date">End Date</label>
-                        <input class="form-control" id="end_date" type="date" name="end_date">
+                        <input class="form-control homeWorkAdd" id="end_date" type="date" name="end_date">
                         <span class="text-danger error-text end_date_error"></span>
                     </div> 
                     <div class="form-group">

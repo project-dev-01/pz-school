@@ -184,7 +184,7 @@
                                             <span class="fas fa-birthday-cake"></span>
                                     </div>
                             </div>
-                            <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend"
+                            <input type="text" class="form-control homeWorkAdd"  placeholder="" aria-describedby="inputGroupPrepend"
                                     required>
                                 </div>
                         </div> 
