@@ -1274,6 +1274,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('teacher.analyticrep.analyticreport')}}" class="nav-link {{ (request()->is('teacher/analyticrep*')) ? 'active' : '' }}">                    
+                        <i data-feather="file-text" class="icon-dual"></i>                      
+                        <span> Analytic </span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('teacher.classroom.management')}}" class="nav-link {{ (request()->is('teacher/classroom*')) ? 'active' : '' }}">
                         <i data-feather="file-text" class="icon-dual"></i>
                         <span> Classroom Management </span>

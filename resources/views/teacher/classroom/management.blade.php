@@ -53,7 +53,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="heard">Count Down<span class="text-danger">*</span></label>
-								<input type="text" id="basic-timepicker" class="btn dropdown-toggle btn-light" placeholder="01:00:00" disabled>
+								<input type="text" id="basic-timepicker" class="form-control btn dropdown-toggle btn-light" placeholder="01:00:00" disabled>
                                 
                             </div>
                         </div>
@@ -197,6 +197,11 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="#shortest" data-toggle="tab" aria-expanded="false" class="nav-link">
+                                       Short Test
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="#rp" data-toggle="tab" aria-expanded="false" class="nav-link">
                                         Daily Report
                                     </a>
@@ -322,19 +327,17 @@
                                                                 <th data-field="name">Attentance</th>
                                                                 <th data-field="Remarks">Remarks</th>
 																<th data-field="Reasons">Reasons</th>
-                                                                <th data-field="amount">Rating</th>
-                                                                <th data-field="user-status">Short Test
-                                                                </th>
+                                                                <th data-field="amount">Rating</th>                                                               
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td></td>
+                                                                <td> </td>
 																 <td class="table-user">
 																	<img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
 																	<a href="javascript:void(0);" class="text-body font-weight-semibold">William</a>
 																</td>
-                                                                <td class="text-center">
+                                                                <td class="text-center">                                                                   
                                                                     <div class="dropdown dropdown-action">                                                                        
                                                                         <a href="#" class="dropdown-toggle" id="aa" style="color:blue" data-toggle="dropdown" aria-expanded="false">
                                                                             Mark</a>
@@ -371,19 +374,8 @@
                                                                         <i class=' far fa-thumbs-up' style='font-size:20px;color:blue'></i>
                                                                         <i class='far fa-thumbs-down' style='font-size:20px;color:red'></i>
                                                                     </div>
-                                                                </td>
-                                                          <td>
-													<div class="form-group">
-														<label for="heard">Status</label>
-														<select id="heard" class="form-control" required="">
-															<option value="">Marks</option>
-															<option value="press">Grade</option>
-															<option value="">Text</option>															
-														</select>
-													</div>
-													<input type="text" class="form-control"  id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
-                                                              
-												</td>     </tr>
+                                                                </td>                                                         
+                                                           </tr>
                                                             <tr>
                                                                 <td></td>
 																<td class="table-user">
@@ -427,19 +419,7 @@
                                                                         <i class=' far fa-thumbs-up' style='font-size:20px;color:blue'></i>
                                                                         <i class='far fa-thumbs-down' style='font-size:20px;color:red'></i>
                                                                     </div>
-                                                                </td>
-                                                           <td>
-													<div class="form-group">
-														<label for="heard">Status</label>
-														<select id="heard" class="form-control" required="">
-															<option value="">Marks</option>
-															<option value="press">Grade</option>
-															<option value="">Text</option>															
-														</select>
-													</div>
-													<input type="text" class="form-control"  id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
-                                                              
-												</td>  
+                                                                </td>                                                           
                                                             </tr>
                                                             <tr>
                                                                 <td></td>
@@ -485,18 +465,7 @@
                                                                         <i class='far fa-thumbs-down' style='font-size:20px;color:red'></i>
                                                                     </div>
                                                                 </td>																
-                                                               <td>
-													<div class="form-group">
-														<label for="heard">Status</label>
-														<select id="heard" class="form-control" required="">
-															<option value="">Marks</option>
-															<option value="press">Grade</option>
-															<option value="">Text</option>															
-														</select>
-													</div>
-													<input type="text" class="form-control"  id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                                               
-												</td>
                                                             </tr>
 															<tr>
                                                                 <td></td>
@@ -541,19 +510,7 @@
                                                                         <i class=' far fa-thumbs-up' style='font-size:20px;color:blue'></i>
                                                                         <i class='far fa-thumbs-down' style='font-size:20px;color:red'></i>
                                                                     </div>
-                                                                </td>
-                                                      <td>
-													<div class="form-group">
-														<label for="heard">Status</label>
-														<select id="heard" class="form-control" required="">
-															<option value="">Marks</option>
-															<option value="press">Grade</option>
-															<option value="">Text</option>															
-														</select>
-													</div>
-													<input type="text" class="form-control"  id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
-                                                              
-												</td>       
+                                                                </td>                                                         
                                                             </tr>
 															<tr>
                                                                 <td></td>
@@ -600,18 +557,7 @@
                                                                         <i class='far fa-thumbs-down' style='font-size:20px;color:red'></i>
                                                                     </div>
                                                                 </td>
-                                                               <td>
-													<div class="form-group">
-														<label for="heard">Status</label>
-														<select id="heard" class="form-control" required="">
-															<option value="">Marks</option>
-															<option value="press">Grade</option>
-															<option value="">Text</option>															
-														</select>
-													</div>
-													<input type="text" class="form-control"  id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                                               
-												</td>
                                                             </tr>
 															<tr>
                                                                 <td></td>
@@ -657,18 +603,7 @@
                                                                         <i class='far fa-thumbs-down' style='font-size:20px;color:red'></i>
                                                                     </div>
                                                                 </td>
-                                                          <td>
-													<div class="form-group">
-														<label for="heard">Status</label>
-														<select id="heard" class="form-control" required="">
-															<option value="">Marks</option>
-															<option value="press">Grade</option>
-															<option value="">Text</option>															
-														</select>
-													</div>
-													<input type="text" class="form-control"  id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
-                                                              
-												</td>   
+                                                          
                                                             </tr>
 															<tr>
                                                                 <td></td>
@@ -714,18 +649,7 @@
                                                                         <i class='far fa-thumbs-down' style='font-size:20px;color:red'></i>
                                                                     </div>
                                                                 </td>
-                                                            <td>
-													<div class="form-group">
-														<label for="heard">Status</label>
-														<select id="heard" class="form-control" required="">
-															<option value="">Marks</option>
-															<option value="press">Grade</option>
-															<option value="">Text</option>															
-														</select>
-													</div>
-													<input type="text" class="form-control"  id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
-                                                              
-												</td> </tr>
+                                                             </tr>
 															<tr>
                                                                 <td></td>
 																<td class="table-user">
@@ -770,18 +694,7 @@
                                                                         <i class='far fa-thumbs-down' style='font-size:20px;color:red'></i>
                                                                     </div>
                                                                 </td>
-                                                                 <td>
-													<div class="form-group">
-														<label for="heard">Status</label>
-														<select id="heard" class="form-control" required="">
-															<option value="">Marks</option>
-															<option value="press">Grade</option>
-															<option value="">Text</option>															
-														</select>
-													</div>
-													<input type="text" class="form-control"  id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
-                                                              
-												</td>
+                                                                
                                                             </tr>
 															<tr>
                                                                 <td></td>
@@ -826,20 +739,8 @@
                                                                         <i class=' far fa-thumbs-up' style='font-size:20px;color:blue'></i>
                                                                         <i class='far fa-thumbs-down' style='font-size:20px;color:red'></i>
                                                                     </div>
-                                                                </td>
-                                                                 <td>
-													<div class="form-group">
-														<label for="heard">Status</label>
-														<select id="heard" class="form-control" required="">
-															<option value="">Marks</option>
-															<option value="press">Grade</option>
-															<option value="">Text</option>															
-														</select>
-													</div>
-													<input type="text" class="form-control"  id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
-                                                              
-												</td>
-                                                  </tr>
+                                                                </td>                                                                
+                                                                </tr>
 															
 															</tbody>
                                                     </table>
@@ -924,6 +825,229 @@
 														</tbody>
                                                     </table>
                                                 </div> <!-- end card-box-->
+                                            
+                                    </div>
+
+                                    <div class="tab-pane" id="shortest">
+                                       
+                                        <div class="card my-4 shadow">
+                                        <div class="card-body">
+                                        <form action="" method="post">
+                                            <div id="dynamic-field-1" class="form-group dynamic-field">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                    <label for="field" class="font-weight-bold">Short Test<span class="text-danger">*</span></label>
+                                                    <input type="text" id="field" class="form-control" name="field[]" />
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                         <label for="field" class="font-weight-bold">Status<span class="text-danger">*</span></label>
+                                                        <select id="heard" class="form-control" required="">
+                                                            <option value="press">Marks</option>
+                                                            <option value="">Grade</option>
+                                                            <option value="press">Test</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                        
+                                            </div>
+                                            <div class="clearfix mt-4">
+                                            <button type="button" id="add-button" class="btn btn-secondary float-left text-uppercase shadow-sm"><i class="fas fa-plus fa-fw"></i> Add</button>
+                                            <button type="button" id="remove-button" class="btn btn-secondary float-left text-uppercase ml-1" disabled="disabled"><i class="fas fa-minus fa-fw"></i> Remove</button>
+                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Save</button>
+                                            </div>
+                                        </form>
+                                            <br/>
+                                            <div class="form-group col-md-12">
+                                                    <table data-toggle="table" data-page-size="10" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="text-center">S.no</th>
+                                                                <th class="text-center" data-field="id" data-switchable="false">Short Test Name
+                                                                </th>
+                                                                <th class="text-center" data-field="name">Status</th>                                                           															
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                       	<tr>
+                                                                <td class="text-center">1</td>
+																<td class="table-user text-left">                                                                
+                                                                <label for="heard">Skill</label>
+																</td>
+                                                               <td>
+															   <div class="table-user text-left">                                                               
+																<label for="heard">Grade</label>
+																</div>
+															   </td>															
+                                                            </tr>
+															<tr>
+                                                                <td>2</td>
+																<td class="table-user">
+                                                                <label for="heard">Grammer</label>
+																</td>
+                                                               <td>
+															   <div class="form-group text-left">
+                                                               <label for="heard">Mark</label>
+																</div>
+															   </td>															 
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+																<td class="table-user">
+                                                                <label for="heard">GeoGenius</label>
+																</td>
+                                                               <td>
+															   <div class="form-group text-left">
+                                                               <label for="heard">Mark</label>
+																</div>
+															   </td>															 
+                                                            </tr>
+														</tbody>
+                                                    </table>
+                                                </div> <!-- end card-box-->
+                                                <br/>
+                                           
+                  
+                                        <div class="col-md-12">
+                                                    <table data-toggle="table" data-page-size="7" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="text-center">S.no</th>
+                                                                <th class="text-center" data-field="id" data-switchable="false">Student Name
+                                                                </th>                                                       
+                                                                <th class="text-center" style="width: 100px;" data-field="name">Skill</th>
+                                                                <th class="text-center" data-field="Remarks">Grammer</th>	
+                                                                <th class="text-center">GeoGenius</th>																
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                       	<tr>
+                                                                <td class="text-center">1</td>
+																<td class="table-user">
+																	<img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
+																	<a href="javascript:void(0);" class="text-body font-weight-semibold">William</a>
+																</td>
+                                                               <td>
+															   <div>
+                                                               <input type="text" class="form-control text-center" style="width:100px;" id="name" placeholder="" readonly value="A" aria-describedby="inputGroupPrepend" required>
+																</div>
+															   </td>
+															   <td><input type="text" class="form-control text-right" style="width:100px;" readonly value="75" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                                </td>
+                                                                <td> <input type="text" class="form-control text-right" style="width:100px;" readonly value="45" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                                </td>
+                                                            </tr>
+																<tr>
+                                                                <td class="text-center">2</td>
+																<td class="table-user">
+																	<img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
+																	<a href="javascript:void(0);" class="text-body font-weight-semibold">James</a>
+																</td>
+                                                               <td>
+															   <div>
+                                                               <input type="text" class="form-control text-center" style="width:100px;"  id="name" placeholder="" readonly value="C" aria-describedby="inputGroupPrepend" required>
+																</div>
+															   </td>
+															   <td> <input type="text" class="form-control text-right" style="width:100px;" readonly value="60" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                                </td>
+                                                                <td> <input type="text" class="form-control text-right" style="width:100px;" readonly value="55" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                                </td>
+                                                            </tr>
+                                                            </tr>
+																<tr>
+                                                                <td class="text-center">3</td>
+																<td class="table-user">
+																	<img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
+																	<a href="javascript:void(0);" class="text-body font-weight-semibold">Benjamin</a>
+																</td>
+                                                               <td>
+															
+                                                               <input type="text" class="form-control text-center" style="width:100px;" readonly value="C" placeholder="" required>
+															
+															   </td>
+															   <td>  <input type="text" class="form-control text-right" style="width:100px;" readonly value="44" placeholder="" required>
+                                                                </td>
+                                                                <td> <input type="text" class="form-control text-right" style="width:100px;" readonly value="99" placeholder="" required>
+                                                                </td>
+                                                            </tr>
+                                                            </tr>
+																<tr>
+                                                                <td class="text-center">4</td>
+																<td class="table-user">
+																	<img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
+																	<a class="text-body font-weight-semibold">Lucas</a>
+																</td>
+                                                               <td>
+															   <div>
+                                                               <input type="text" class="form-control text-center" style="width:100px;" value="A">
+																</div>
+															   </td>
+															   <td>  <input type="text" class="form-control text-right" style="width:100px;" value="66">
+                                                                </td>
+                                                                <td> <input type="text" class="form-control text-right" style="width:100px;" value="80">
+                                                                </td>
+                                                            </tr>                                                         
+																<tr>
+                                                                <td class="text-center">5</td>
+																<td class="table-user">
+																	<img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
+																	<a href="javascript:void(0);" class="text-body font-weight-semibold">Charlotte</a>
+																</td>
+                                                               <td>
+															   <div>
+                                                               <input type="text" class="form-control text-center" style="width:100px;"  id="name" readonly value="B+" placeholder="" aria-describedby="inputGroupPrepend" required>
+																</div>
+															   </td>
+															   <td> <input type="text" class="form-control text-right" style="width:100px;"  id="name" readonly value="57" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                                </td>
+                                                                <td> <input type="text" class="form-control text-right" style="width:100px;" readonly value="90" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                                </td>
+                                                            </tr>
+                                                            </tr>
+																<tr>
+                                                                <td class="text-center">6</td>
+																<td class="table-user">
+																	<img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
+																	<a href="javascript:void(0);" class="text-body font-weight-semibold">Sophia</a>
+																</td>
+                                                               <td>
+															   <div>
+                                                               <input type="text" class="form-control text-center" style="width:100px;"  readonly value="D" required>
+																</div>
+															   </td>
+															   <td> <input type="text" class="form-control text-right" style="width:100px;" readonly value="80" required/>
+                                                                </td>
+                                                                <td> <div> <input type="text" class="form-control text-right" style="width:100px;" readonly value="70" required/></div>
+                                                                </td>
+                                                            </tr>
+                                                            </tr>
+																<tr>
+                                                                <td class="text-center">7</td>
+																<td class="table-user">
+																	<img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
+																	<a href="javascript:void(0);" class="text-body font-weight-semibold"> Amelia</a>
+																</td>
+                                                               <td>
+															   <div>
+                                                               <input type="text" class="form-control text-center" style="width:100px;"  id="name" placeholder="" readonly value="G" aria-describedby="inputGroupPrepend" required>
+																</div>
+															   </td>
+															   <td> <input type="text" class="form-control text-right" style="width:100px;"  id="name" placeholder="" readonly value="50" aria-describedby="inputGroupPrepend" required>
+                                                                </td>
+                                                                <td> <input type="text" class="form-control text-right" style="width:100px;" readonly value="70" id="name" placeholder="" required>
+                                                                </td>
+                                                            </tr>
+                                                            </tr>
+														</tbody>
+                                                    </table>
+                                                </div> <!-- end card-box-->
+                                                <div class="clearfix mt-4">
+                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Save</button>
+                                            </div><br/>
+                                        </div>
+                                        </div>
+                                                                        
+                                    </div>
+										
                                             
                                     </div>
                                 </div>

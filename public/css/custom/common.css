@@ -76,5 +76,16 @@
 							color: #0ABAB5;
 							text-decoration: none;
 						}
+						
+						.mbox {   
+							display: inline-block;
+							width: 10px;
+							height: 10px;
+							margin: 10px 55px 10px 25px;
+							padding-left: 4px;
+						}
 
+						.attitude rect {
+							display: none;
+							}
 						

@@ -620,6 +620,8 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('exam_results/bysubject', [TeacherController::class, 'bysubject'])->name('teacher.exam_results.bysubject');
 
         Route::get('exam_results/bystudent', [TeacherController::class, 'bystudent'])->name('teacher.exam_results.bystudent');
+
+        Route::get('/analyticrep', [TeacherController::class, 'analytic'])->name('teacher.analyticrep.analyticreport');
      
          
     });

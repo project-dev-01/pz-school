@@ -135,5 +135,9 @@ class TeacherController extends Controller
     {
         return view('teacher.homework.edit');
     }
+    public function analytic()
+    {
+        return view('teacher.analyticrep.analyticreport');
+    }
 
 }
