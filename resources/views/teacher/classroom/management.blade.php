@@ -212,98 +212,102 @@
                                     <div class="tab-pane show active" id="profile-b1">
 									<div class="row">
 									<div class="col-md-9"></div>								
-									 <div class="col-md-3">
+                                    <div class="col-md-3">
                                             <a href="javascript: void(0);" class="text-reset mb-2 d-block">
-                                               <i class='fas fa-square-full' style='font-size:20px;color:green'></i>
-											   <span class="mb-0 mt-1">Present</span>
-												 <i class='fas fa-square-full' style='font-size:20px;color:red'></i>
-												 <span class="mb-0 mt-1">Absent</span>
-												<i class='fas fa-square-full' style='font-size:20px;color:blue'></i>
+                                               <i class='fas fa-circle' style='font-size:14px;color:#60a05b'></i>
+											   <span class="mb-0 mt-1" style="text-align:center">Present</span>
+											  </a>
+											  <a href="javascript: void(0);" class="text-reset mb-2 d-block">
+												<i class='fas fa-circle' style='font-size:14px;color:#358fde'></i>
 												<span class="mb-0 mt-1">Late</span>
-                                            </a>
+												</a>          
+											  <a href="javascript: void(0);" class="text-reset mb-2 d-block">
+												 <i class='fas fa-circle' style='font-size:14px;color:#de354f'></i>
+												 <span class="mb-0 mt-1">Absent</span>
+												</a>
                                         </div>
 										</div>
                                         <div class="col-md-12">										
                                             <div class="card-body">
-                                                <div class="row">
+                                            <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="card">
-                                                            <div class="card-header" style="background-color:green;color:white;text-align:center">
+                                                            <div class="card-header" style="background-color:#60a05b;color:white;text-align:left">
 															 <img src="{{ asset('images/users/default.jpg') }}"
                                                                 class="mr-2 rounded-circle" height="40"/>
-                                                                William
+																<label style="text-align:center">William</label>
                                                             </div>
                                                         </div> <!-- end card-box-->
                                                     </div> <!-- end col -->
                                                     <div class="col-md-3">
                                                         <div class="card">
-                                                            <div class="card-header" style="background-color:red;color:white;text-align:center">
+                                                            <div class="card-header" style="background-color:#de354f;color:white;text-align:left">
 															 <img src="{{ asset('images/users/default.jpg') }}"
                                                                 class="mr-2 rounded-circle" height="40"/>
-                                                                James
+                                                                <label style="text-align:center">James</label>
                                                             </div>
                                                         </div> <!-- end card-box-->
                                                     </div> <!-- end col -->
                                                     <div class="col-md-3">
                                                         <div class="card">
-                                                            <div class="card-header" style="background-color:green;color:white;text-align:center">
+                                                            <div class="card-header" style="background-color:#60a05b;color:white;text-align:left">
 															 <img src="{{ asset('images/users/default.jpg') }}"
                                                                 class="mr-2 rounded-circle" height="40"/>
-                                                                Benjamin
+                                                               <label style="text-align:center">Benjamin</label> 
                                                             </div>
                                                         </div> <!-- end card-box-->
                                                     </div> <!-- end col -->
                                                     <div class="col-md-3">
                                                         <div class="card">
-                                                            <div class="card-header" style="background-color:green;color:white;text-align:center">
+                                                            <div class="card-header" style="background-color:#60a05b;color:white;text-align:left">
 															 <img src="{{ asset('images/users/default.jpg') }}"
                                                                 class="mr-2 rounded-circle" height="40"/>
-                                                                Lucas
+                                                               <label style="text-align:center">Lucas</label> 
                                                             </div>
                                                         </div> <!-- end card-box-->
                                                     </div> <!-- end col -->
                                                     <div class="col-md-3">
                                                         <div class="card">
-                                                            <div class="card-header" style="background-color:green;color:white;text-align:center">
+                                                            <div class="card-header" style="background-color:#60a05b;color:white;text-align:left">
 															 <img src="{{ asset('images/users/default.jpg') }}"
                                                                 class="mr-2 rounded-circle" height="40"/>
-                                                                Charlotte
+                                                                <label style="text-align:center">Charlotte</label>
                                                             </div>
                                                         </div> <!-- end card-box-->
                                                     </div> <!-- end col -->
                                                     <div class="col-md-3">
                                                         <div class="card">
-                                                            <div class="card-header" style="background-color:blue;color:white;text-align:center">
+                                                            <div class="card-header" style="background-color:#358fde;color:white;text-align:left">
 															 <img src="{{ asset('images/users/default.jpg') }}"
                                                                 class="mr-2 rounded-circle" height="40"/>
-                                                                Sophia
+                                                                <label style="text-align:center">Sophia</label>
                                                             </div>
                                                         </div> <!-- end card-box-->
                                                     </div> <!-- end col -->
                                                     <div class="col-md-3">
                                                         <div class="card">
-                                                            <div class="card-header" style="background-color:green;color:white;text-align:center">
+                                                            <div class="card-header" style="background-color:#60a05b;color:white;text-align:left">
 															 <img src="{{ asset('images/users/default.jpg') }}"
                                                                 class="mr-2 rounded-circle" height="40"/>
-                                                                Amelia
+                                                                <label style="text-align:center">Amelia</label>
                                                             </div>
                                                         </div> <!-- end card-box-->
                                                     </div> <!-- end col -->
                                                     <div class="col-md-3">
                                                         <div class="card">
-                                                            <div class="card-header" style="background-color:blue;color:white;text-align:center">
+                                                            <div class="card-header" style="background-color:#358fde;color:white;text-align:left">
 															 <img src="{{ asset('images/users/default.jpg') }}"
                                                                 class="mr-2 rounded-circle" height="40"/>
-                                                                Isabella
+                                                                 <label style="text-align:center">Isabella</label>
                                                             </div>
                                                         </div> <!-- end card-box-->
                                                     </div> <!-- end col -->
 													 <div class="col-md-3">
                                                         <div class="card">
-                                                            <div class="card-header" style="background-color:blue;color:white;text-align:center">
+                                                            <div class="card-header" style="background-color:#358fde;color:white;text-align:left">
                                                                  <img src="{{ asset('images/users/default.jpg') }}"
                                                                 class="mr-2 rounded-circle" height="40"/>
-																Mia
+																 <label style="text-align:center">Mia</label>
                                                             </div>
                                                         </div> <!-- end card-box-->
                                                     </div> <!-- end col -->

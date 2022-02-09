@@ -1275,7 +1275,7 @@
                 </li>
                 <li>
                     <a href="{{ route('teacher.analyticrep.analyticreport')}}" class="nav-link {{ (request()->is('teacher/analyticrep*')) ? 'active' : '' }}">                    
-                        <i data-feather="file-text" class="icon-dual"></i>                      
+                        <i data-feather="activity" class="icon-dual"></i>.                     
                         <span> Analytic </span>
                     </a>
                 </li>
@@ -1287,7 +1287,7 @@
                 </li>
                 <li>
                     <a href="{{ route('teacher.test_result')}}" class="nav-link {{ (request()->is('teacher/test_result*')) ? 'active' : '' }}">
-                        <i data-feather="file-text" class="icon-dual"></i>
+                        <i data-feather="file-plus" class="icon-dual"></i>
                         <span> Test Result </span>
                     </a>
                 </li>
@@ -1445,12 +1445,19 @@
                     <i data-feather="message-square"></i>
                         <span> Chat </span>
                     </a>
-                </li> 
+                </li>
                 <li>
                 <a href="{{ route('teacher.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('teacher/forum*')) ? 'active' : '' }}">
                      
                         <i data-feather="external-link" class="icon-dual"></i>
                         <span> Forum </span>
+                    </a>
+                </li>
+                <li>
+                <a href="{{ route('schoolcrm.app.form')}}" target=”_blank” class="nav-link {{ (request()->is('application-form')) ? 'active' : '' }}">
+                     
+                        <i data-feather="external-link" class="icon-dual"></i>
+                        <span> Application Form </span>
                     </a>
                 </li>
                 <li>

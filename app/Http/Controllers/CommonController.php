@@ -18,4 +18,9 @@ class CommonController extends Controller
             return false;
         }
     }
+    public function showApplicationForm()
+    {
+        return view('school-application-form');
+    }
+    
 }
