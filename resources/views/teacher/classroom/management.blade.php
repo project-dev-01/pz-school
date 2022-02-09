@@ -844,7 +844,7 @@
                                                         <select id="heard" class="form-control" required="">
                                                             <option value="press">Marks</option>
                                                             <option value="">Grade</option>
-                                                            <option value="press">Test</option>
+                                                            <option value="press">Text</option>
                                                         </select>
                                                     </div>
                                                 </div>
