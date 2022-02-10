@@ -108,11 +108,16 @@
 <script src="{{ asset('js/apexChart/apexcharts.js') }}"></script>
 <!-- ApeDate Picker  Js-->
 <script src="{{ asset('libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+<!-- Datepicker -->
+<!-- <script src="{{ asset('date-picker/jquery-ui.js') }}"></script> -->
 <!-- Table Editable plugin-->
 <script src="{{ asset('libs/jquery-tabledit/jquery.tabledit.min.js') }}"></script>
 <!-- hightcharts js -->
 <script src="{{ asset('js/highcharts/highcharts.js') }}"></script>
-
+<!-- add dateeangepicker -->
+<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script> -->
+<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script> -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <!-- Init js -->
 <script src="{{ asset('js/pages/bootstrap-tables.init.js') }}"></script>
 <script>
@@ -213,6 +218,7 @@
 <script src="{{ asset('js/custom/attendance.js') }}"></script>
 <script src="{{ asset('js/custom/homework.js') }}"></script>
 <script src="{{ asset('js/custom/textbox-dynamic-add.js') }}"></script>
+<script src="{{ asset('js/custom/common.js') }}"></script>
 
 <script src="{{ asset('js/custom/iconchart.js') }}"></script>
 <!-- <script src="{{ asset('js/apexChart/apexcharts.js') }}"></script> -->

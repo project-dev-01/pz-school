@@ -384,17 +384,18 @@
             </div> <!-- end card-->
         </div> <!-- end col -->
     </div>
-    <!--General Details -->
-    <span class="fab fa-audible" id="span-parent"></span>
-    <span class="header-title mb-3" id="span-parent">General Details
-        <hr id="hr">
-    </span>
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-
+                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                        General Details
+                            <h4>
+                    </li>
+                </ul><br>
                 <div class="card-body">
-                    <form id="demo-form" data-parsley-validate="">
+                    <form id="demo-form" autocomplete="off">
                         <!--1st row-->
                         <div class="row">
                             <div class="col-md-4">
@@ -415,7 +416,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" class="form-control" id="leaveFrom" placeholder="" aria-describedby="inputGroupPrepend" required>
                                     </div>
                                 </div>
                             </div>
@@ -428,7 +429,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" class="form-control" id="leaveTo" placeholder="" aria-describedby="inputGroupPrepend" required>
                                     </div>
                                 </div>
                             </div>
@@ -449,7 +450,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" class="form-control" id="postingDate" placeholder="" aria-describedby="inputGroupPrepend" required>
                                     </div>
                                 </div>
                             </div>

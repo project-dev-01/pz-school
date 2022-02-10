@@ -540,6 +540,13 @@
                     </a>
                 </li>
                 <li>
+                <a href="{{ route('super_admin.schoolcrm.app.form')}}" target=”_blank” class="nav-link {{ (request()->is('application-form')) ? 'active' : '' }}">
+                     
+                        <i data-feather="external-link" class="icon-dual"></i>
+                        <span> Application Form </span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('super_admin.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('super_admin/forum*')) ? 'active' : '' }}">
                         <i data-feather="external-link" class="icon-dual"></i>
                         <span> Forum </span>
@@ -1574,6 +1581,13 @@
                 <a href="{{ route('parent.chat')}}" class="nav-link {{ (request()->is('parent/chat*')) ? 'active' : '' }}">
                     <i data-feather="message-square"></i>
                         <span> Chat </span>
+                    </a>
+                </li>
+                <li>
+                <a href="{{ route('schoolcrm.app.form')}}" target=”_blank” class="nav-link {{ (request()->is('application-form')) ? 'active' : '' }}">
+                     
+                        <i data-feather="external-link" class="icon-dual"></i>
+                        <span> Application Form </span>
                     </a>
                 </li>
                 <li>

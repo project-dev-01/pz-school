@@ -59,10 +59,13 @@
     </style>
     
     <!-- date picker -->
-    <link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+    <!-- <link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" /> -->
 
     <!-- Bootstrap Tables css -->
     <link href="{{ asset('libs/bootstrap-table/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- add daterangepicker -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
 
 </head>
