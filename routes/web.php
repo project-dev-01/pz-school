@@ -681,6 +681,8 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
          Route::get('homework/homeworklist', [ParentController::class, 'homeworkredirect'])->name('parent.homework');
 
+         Route::get('/analyticrep', [ParentController::class, 'analytic'])->name('parent.analyticrep.analyticreport');
+
     });
 
 
@@ -721,6 +723,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('forum/page-tabs', [StudentController::class, 'forumPageTabs'])->name('student.forum.page-tabs');
         Route::get('forum/page-tabs-guidelines', [StudentController::class, 'forumPageTabGuidelines'])->name('student.forum.page-tabs-guidelines');
         
+        Route::get('/analyticrep', [StudentController::class, 'analytic'])->name('student.analyticrep.analyticreport');
     });
     
     

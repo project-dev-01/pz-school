@@ -1478,6 +1478,12 @@
                     <i class="fas fa-tachometer-alt"></i>
                         <span>Dashboard</span>
                     </a>
+                </li>
+                <li>
+                    <a href="{{ route('parent.analyticrep.analyticreport')}}" class="nav-link {{ (request()->is('parent/analyticrep*')) ? 'active' : '' }}">                    
+                        <i data-feather="activity" class="icon-dual"></i>.                     
+                        <span> Analytic </span>
+                    </a>
                 </li>           
                 <li>
                     <a href="{{ route('parent.exam.schedule')}}" class="nav-link {{ (request()->is('parent/exam*')) ? 'active' : '' }}">
@@ -1595,6 +1601,12 @@
                         <span> Dashboards </span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('student.analyticrep.analyticreport')}}" class="nav-link {{ (request()->is('student/analyticrep*')) ? 'active' : '' }}">                    
+                        <i data-feather="activity" class="icon-dual"></i>.                     
+                        <span> Analytic </span>
+                    </a>
+                </li> 
                 <li>
                     <a href="{{ route('student.exam.schedule')}}" class="nav-link {{ (request()->is('student/exam*')) ? 'active' : '' }}">
                         <i class="fas fa-dna"></i> 

@@ -94,4 +94,8 @@ class StudentController extends Controller
      {
          return view('student.homework.hmeworklist');
      }
+     public function analytic()
+     {
+         return view('student.analyticrep.analyticreport');
+     }
 }

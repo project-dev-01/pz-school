@@ -29,52 +29,20 @@
                 </ul><br>
                 <div class="card-body">
                     <form id="demo-form" data-parsley-validate="">
-                        <div class="row">                            
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="heard">Standard<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
-                                    <option value="">Select Standard</option>                              
-                                        <option value="">I</option>   
-                                        <option value="">II</option>                                                                   
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="heard">Student<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
-                                    <option value="">Select Student</option>                              
-                                        <option value="">William</option>  
-                                        <option value="">James</option>   
-                                        <option value="">Benjamin</option>                                                                       
-                                        <option value="">Lucas</option>   
-                                        <option value="">Charlotte</option>   
-                                        <option value="">Sophia</option>   
-                                        <option value="">Amelia</option>   
-                                        <option value="">Isabella</option>   
-                                        <option value="">Mia</option>   
-                                    </select>
-                                </div>
-                            </div>
+                        <div class="row">  
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="heard">Subject<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                     <option value="">Select Subject</option> 
-                                    <option value="">English</option> 
-                                    <option value="">Geography</option>                                
-                                                         
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="heard">Class Name<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
-                                    <option value="">Select Student</option>                              
-                                        <option value="">A</option>  
-                                        <option value="">B</option>  
+                                    <option value="press">English</option>
+                                    <option value="">Mathematics</option>
+                                    <option value="press">History</option>
+                                    <option value="">Study of the Environment</option>
+                                    <option value="press">Geography</option>
+                                    <option value="">Natural Sciences</option>
+                                    <option value="press">Civics Education</option>
+                                    <option value="">Arts Education</option>
                                     </select>
                                 </div>
                             </div>
@@ -83,7 +51,7 @@
                     </form>
                     <div class="form-group text-right m-b-0">
                         <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Get
+                            Filter
                         </button>                 
                     </div>
 
@@ -94,10 +62,10 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="card">            
+            <div class="card">
+              
                 <div class="card-body">
-                    
-                <div class="row" style="border-bottom: 2px solid #0ABAB5;">
+                        <div class="row" style="border-bottom: 2px solid #0ABAB5;">
                             <div class="col-md-6 text-center">
                             <h4 class="nav-link">
                             <span data-feather="map" class="icon-dual" id="span-parent"></span> Attendance Report
@@ -110,7 +78,8 @@
                                 <h4>
                             </div>
                         </div>
-                <div class="row">
+
+                    <div class="row">
                             <div class="col-md-6">
                                 <div class="mt-4 chartjs-chart">
                                 <div id="anylitc-attend" style="min-height: 365px;"></div>
@@ -158,7 +127,7 @@
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col -->
-    </div>  
+    </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="card">

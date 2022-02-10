@@ -122,4 +122,8 @@ class ParentController extends Controller
     {
         return view('parent.homework.hmeworklist');
     }
+    public function analytic()
+    {
+        return view('parent.analyticrep.analyticreport');
+    }
 }
