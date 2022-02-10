@@ -53,7 +53,7 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Cuddalore</td>
+                                <td>Malaysia</td>
                                 <td>Time</td>
                                 <td>By Day</td>
                                 <td>First</td>

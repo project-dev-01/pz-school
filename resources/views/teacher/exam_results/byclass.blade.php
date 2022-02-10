@@ -34,17 +34,18 @@
                                     <label for="heard">Standard<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                     <option value="">Select Standard</option>                              
-                                        <option value="">I</option>                                                                      
+                                        <option value="">I</option>   
+                                        <option value="">II</option>                                                                    
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Class Room<span class="text-danger">*</span></label>
+                                    <label for="heard">Class Name<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                    <option value="">Select Class Room</option> 
+                                    <option value="">Select Class Name</option> 
                                     <option value="">A</option>                                  
-                                                            
+                                    <option value="">B</option>                      
                                     </select>
                                 </div>
                             </div>
@@ -52,7 +53,7 @@
                                 <div class="form-group">
                                     <label for="heard">Exam Name<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                    <option value="">Select Exam</option>
+                                    <option value="">Select Exam Name</option>
                                         <option value="">Annual</option>
                                         <option value="">Quarterly</option>
                                     </select>
@@ -93,7 +94,7 @@
                                 <thead>
                                     <tr>
                                         <th class="align-top" rowspan="2">S.no.</th>
-                                        <th class="align-top" rowspan="2">Class</th>
+                                        <th class="align-top" rowspan="2">Standard</th>
                                         <th class="align-top th-sm - 6 rem" rowspan="2">Tot. Students</th>
                                         <th class="align-top" rowspan="2">Absent</th>
                                         <th class="align-top" rowspan="2">Present</th>

@@ -36,27 +36,31 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Select Branch<span class="text-danger">*</span></label>
+                                    <label for="heard">Branch<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="">Cuddalore</option>
+                                    <option value="">Select Branch</option>   
+                                        <option value="">Malaysia</option>
                                         <option value="press">Singapore</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Class<span class="text-danger">*</span></label>
+                                    <label for="heard">Standard<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="">1</option>
+                                        <option value="">Select Standard</option>    
+                                        <option value="press">I</option>
+                                        <option value="">II</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Section<span class="text-danger">*</span></label>
+                                    <label for="heard">Class Name<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="All">All</option>
-                                        <option value="1">1</option>
+                                    <option value="">Select Class Name</option>   
+                                        <option value="">A</option>
+                                        <option value="1">B</option>
                                     </select>
                                 </div>
                             </div>
@@ -110,7 +114,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>Ithaya</td>
+                                                <td>William</td>
                                                 <td>PZ-1001</td>
                                                 <td>RSM-00-1</td>
                                                 <td>1</td>

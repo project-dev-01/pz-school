@@ -40,20 +40,19 @@
                                 <div class="form-group">
                                     <label for="Class">Standard<span class="text-danger">*</span></label>
                                     <select id="Class" class="form-control" required="">
+                                        <option >Select Standard</option> 
                                         <option >I</option>
                                         <option >II</option>
-                                        <option >III</option>
-                                        <option >IV</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="Section">Class Room<span class="text-danger">*</span></label>
+                                    <label for="Section">Class Name<span class="text-danger">*</span></label>
                                     <select id="Section" class="form-control" required="">
+                                        <option >Select Class Name</option> 
                                         <option >A</option>
                                         <option >B</option>
-                                        <option >C</option>
                                     </select>
                                 </div>
                             </div>

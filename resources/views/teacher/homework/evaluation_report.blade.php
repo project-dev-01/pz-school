@@ -42,42 +42,26 @@
                                         <option value="">All</option>
                                         <option value="">I</option>
                                         <option value="press">II</option>
-                                        <option value="">III</option>
-                                        <option value="press">IV</option>
-                                        <option value="">V</option>
-                                        <option value="press">VI</option>
-                                        <option value="">VII</option>
-                                        <option value="press">VIII</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Class <span class="text-danger">*</span></label>
+                                    <label for="heard">Class Name<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="">Select Class </option>
+                                        <option value="">Select Class Name</option>
                                         <option value="">A</option>
                                         <option value="">B</option>
-                                        <option value="press">C</option>
-                                        <option value="">D</option>
-                                        <option value="press">E</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Choose Subject<span class="text-danger">*</span></label>
+                                    <label for="heard">Subject<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                         <option value="">Select Subject</option>
                                         <option value="press">English</option>
-                                        <option value="">Mathematics</option>
-                                        <option value="press">History</option>
-                                        <option value="">Study of the Environment</option>
                                         <option value="press">Geography</option>
-                                        <option value="">Natural Sciences</option>
-                                        <option value="press">Civics Education</option>
-                                        <option value="">Arts Education</option>
-
                                     </select>
                                 </div>
                             </div>
@@ -145,7 +129,7 @@
                                                                 <th>#</th>
                                                                 <th>Subject</th>
                                                                 <th>Standard</th>
-                                                                <th>Class</th>
+                                                                <th>Class Name</th>
                                                                 <th>Date of Homework</th>
                                                                 <th>Date of Submission</th>
                                                                 <th>Complete/Incomplete</th>
@@ -191,7 +175,7 @@
                                                                 <th>#</th>
                                                                 <th>Subject</th>
                                                                 <th>Standard</th>
-                                                                <th>Class</th>
+                                                                <th>Class Name</th>
                                                                 <th>Date of Homework</th>
                                                                 <th>Date of Submission</th>
                                                                 <th>Complete/Incomplete</th>
@@ -203,8 +187,8 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td>1</td>
-                                                                <td>Mathematics</td>
-                                                                <td>III</td>
+                                                                <td>English</td>
+                                                                <td>II</td>
                                                                 <td>A</td>
                                                                 <td>07-04-2018</td>
                                                                 <td>21-04-2018</td>
@@ -214,7 +198,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td>2</td>
-                                                                <td>Study of the Environment</td>
+                                                                <td>Geography</td>
                                                                 <td>I</td>
                                                                 <td>B</td>
                                                                 <td>15-08-2020</td>
@@ -225,9 +209,9 @@
                                                             </tr>
                                                             <tr>
                                                                 <td>3</td>
-                                                                <td>Arts Education</td>
+                                                                <td>Geography</td>
                                                                 <td>II</td>
-                                                                <td>C</td>
+                                                                <td>B</td>
                                                                 <td>11-06-2021</td>
                                                                 <td>17-06-2021</td>
                                                                 <td>18/2</td>
@@ -237,7 +221,7 @@
                                                             <tr>
                                                                 <td>4</td>
                                                                 <td>English</td>
-                                                                <td>VI</td>
+                                                                <td>II</td>
                                                                 <td>A</td>
                                                                 <td>04-05-2020</td>
                                                                 <td>19-05-2020</td>

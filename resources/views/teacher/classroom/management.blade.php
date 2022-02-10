@@ -27,8 +27,9 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="heard">Class name<span class="text-danger">*</span></label>
+                                <label for="heard">Class Name<span class="text-danger">*</span></label>
                                 <select id="heard" class="form-control" required="">
+                                <option value="">Select Class Name</option>
                                     <option value="">I</option>
                                     <option value="press">II</option>
 
@@ -39,8 +40,9 @@
                             <div class="form-group">
                                 <label for="heard">Subject<span class="text-danger">*</span></label>
                                 <select id="heard" class="form-control" required="">
+                                    <option value="">Select Subject</option>
                                     <option value="">English</option>
-                                    <option value="press">Maths</option>
+                                    <option value="press">Geography</option>
                                 </select>
                             </div>
                         </div>

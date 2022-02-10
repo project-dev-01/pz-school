@@ -38,32 +38,21 @@
                                         <label for="inputEmail3" class="col-3 col-form-label">Standard<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <select id="heard" class="form-control" required="">
-                                                <option value="">Select</option>
+                                                <option value="">Select Standard</option>
                                                 <option>I</option>
                                                 <option>II</option>
-                                                <option>III</option>
-                                                <option>IV</option>
-                                                <option>V</option>
-                                                <option>VI</option>
-                                                <option>VII</option>
-                                                <option>VIII</option>
-                                                <option>IX</option>
-                                                <option>X</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group row">
-                                        <label for="inputEmail3" class="col-3 col-form-label">Class<span class="text-danger">*</span></label>
+                                        <label for="inputEmail3" class="col-3 col-form-label">Class Name<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <select id="heard" class="form-control" required="">
-                                                <option value="">Select</option>
+                                                <option value="">Select Class Name</option>
                                                 <option>A</option>
                                                 <option>B</option>
-                                                <option>C</option>
-                                                <option>D</option>
-                                                <option>E</option>n>
                                             </select>
                                         </div>
                                     </div>
@@ -73,12 +62,9 @@
                                         <label for="inputEmail3" class="col-3 col-form-label">Subject<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <select id="heard" class="form-control" required="">
-                                                <option value="">Select</option>
-                                                <option>Physics </option>
-                                                <option>Chemistry </option>
-                                                <option>Maths </option>
-                                                <option>Biology </option>
-                                                <option>Geography </option>
+                                                <option value="">Select Subject</option>
+                                                <option value="press">English</option>
+                                                <option value="press">Geography</option>
                                             </select>
                                         </div>
                                     </div>

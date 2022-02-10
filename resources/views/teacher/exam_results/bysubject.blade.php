@@ -34,15 +34,18 @@
                                     <label for="heard">Standard<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                         <option value="">Select Standard</option>                                   
-                                        <option value="">I</option>                                    
+                                        <option value="">I</option>    
+                                        <option value="">II</option>                                   
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Class Rome<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">                                    
-                                        <option value="">A</option>                                                              
+                                    <label for="heard">Class Name<span class="text-danger">*</span></label>
+                                    <select id="heard" class="form-control" required=""> 
+                                    <option value="">Select Class Name</option>                                        
+                                        <option value="">A</option>  
+                                        <option value="">B</option>                                                              
                                     </select>
                                 </div>
                             </div>                                                
@@ -50,6 +53,7 @@
                                 <div class="form-group">
                                     <label for="heard">Exam Name<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
+                                    <option value="">Select Exam Name</option>  
                                         <option value="">Annual</option>
                                         <option value="">Quarterly</option>
                                     </select>

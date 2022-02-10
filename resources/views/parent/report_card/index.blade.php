@@ -67,22 +67,40 @@
                                                                         <td>7</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th scope="row">Maths</th>
+                                                                        <th scope="row">Mathematics</th>
                                                                         <td>60</td>
                                                                         <td>C</td>
                                                                         <td>17</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th scope="row">Science</th>
+                                                                        <th scope="row">History</th>
                                                                         <td>90</td>
                                                                         <td>A</td>
                                                                         <td>3</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th scope="row">Physics</th>
+                                                                        <th scope="row">Study of the Environment</th>
                                                                         <td>75</td>
                                                                         <td>B</td>
                                                                         <td>8</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Natural Science</th>
+                                                                        <td>90</td>
+                                                                        <td>A</td>
+                                                                        <td>4</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Civics Education</th>
+                                                                        <td>70</td>
+                                                                        <td>B</td>
+                                                                        <td>8</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Arts Education</th>
+                                                                        <td>65</td>
+                                                                        <td>C</td>
+                                                                        <td>9</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th scope="row">Total</th>
@@ -139,22 +157,40 @@
                                                                         <td>7</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th scope="row">Maths</th>
+                                                                        <th scope="row">Mathematics</th>
                                                                         <td>60</td>
                                                                         <td>C</td>
                                                                         <td>17</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th scope="row">Science</th>
+                                                                        <th scope="row">History</th>
                                                                         <td>90</td>
                                                                         <td>A</td>
                                                                         <td>3</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th scope="row">Physics</th>
+                                                                        <th scope="row">Study of the Environment</th>
                                                                         <td>75</td>
                                                                         <td>B</td>
                                                                         <td>8</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Natural Science</th>
+                                                                        <td>90</td>
+                                                                        <td>A</td>
+                                                                        <td>4</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Civics Education</th>
+                                                                        <td>70</td>
+                                                                        <td>B</td>
+                                                                        <td>8</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Arts Education</th>
+                                                                        <td>65</td>
+                                                                        <td>C</td>
+                                                                        <td>9</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th scope="row">Total</th>

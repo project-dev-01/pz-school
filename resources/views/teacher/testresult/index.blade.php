@@ -41,8 +41,7 @@
                                                     <select id="subject" class="form-control" name="subject" required="">
                                                         <option value="">Select Subject</option>
                                                         <option value="">English</option>
-                                                        <option value="">Mathematics</option>
-                                                        <option value="">Science</option>
+                                                        <option value="press">Geography</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -53,19 +52,17 @@
                                                         <option value="">Select Standard</option>
                                                         <option value="">I</option>
                                                         <option value="">II</option>
-                                                        <option value="">III</option>
                                                     </select>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="class_room">Class Room<span class="text-danger">*</span></label>
+                                                    <label for="class_room">Class Name<span class="text-danger">*</span></label>
                                                     <select id="class_room" class="form-control" required="">
-                                                        <option value="">Select Class Room</option>
+                                                        <option value="">Select Class Name</option>
                                                         <option value="">A</option>
                                                         <option value="">B</option>
-                                                        <option value="">C</option>
                                                     </select>
                                                 </div>
                                             </div>
