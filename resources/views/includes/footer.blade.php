@@ -114,10 +114,8 @@
 <script src="{{ asset('libs/jquery-tabledit/jquery.tabledit.min.js') }}"></script>
 <!-- hightcharts js -->
 <script src="{{ asset('js/highcharts/highcharts.js') }}"></script>
-<!-- add dateeangepicker -->
-<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script> -->
-<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script> -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<!-- add date range picker -->
+<script type="text/javascript" src="{{ asset('js/daterangepicker/daterangepicker.min.js') }}"></script>
 <!-- Init js -->
 <script src="{{ asset('js/pages/bootstrap-tables.init.js') }}"></script>
 <script>
