@@ -1,7 +1,6 @@
 @extends('layouts.admin-layout')
 @section('title','Analytic Report')
 @section('content')
-
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -92,55 +91,74 @@
             </div> <!-- end card-->
         </div> <!-- end col -->
     </div>
+
     <div class="row">
-        <div class="col-xl-4 col-md-6">
+        <div class="col-lg-12">
             <div class="card">
-                <h4 class="nav-link" style="border-bottom: 2px solid #0ABAB5;">
-                    <span data-feather="map" class="icon-dual" id="span-parent"></span> Attendance Report
-                </h4>
                 <div class="card-body">
-                    <div class="col-md-12">
-                        <div class="mt-4 chartjs-chart" style="text-align:center">
-                            <div id="anylitc-attend"></div>
-                            <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
+
+                    <div class="row" style="border-bottom: 2px solid #0ABAB5;">
+                        <div class="col-md-6 text-center">
+                            <h4 class="nav-link">
+                                <span data-feather="map" class="icon-dual" id="span-parent"></span> Attendance Report
+                                <h4>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <h4 class="nav-link">
+                                <i class="fe-book-open"></i>
+                                <span class="icon-dual" id="span-parent"></span> HomeWork
+                                <h4>
                         </div>
                     </div>
-                </div> <!-- end card-body -->
-            </div> <!-- end card-->
-        </div> <!-- end col-->
-        <div class="col-xl-4 col-md-6">
-            <div class="card">
-                <h4 class="nav-link" style="border-bottom: 2px solid #0ABAB5;">
-                    <span data-feather="book-open" class="icon-dual" id="span-parent"></span> HomeWork
-                </h4>
-                <div class="card-body">
-                    <div class="col-md-12">
-                        <div id="cardCollpase19" class="collapse pt-4 show" style="text-align:center" dir="ltr">
-                            <div id="homework-status" class="apex-charts" data-colors="#00b19d,#f1556c"></div>
-                        </div> <!-- collapsed end -->
-                    </div>
-                </div> <!-- end card-body -->
-            </div> <!-- end card-->
-        </div> <!-- end col-->
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <h4 class="nav-link" style="border-bottom: 2px solid #0ABAB5;">
-                    <span data-feather="award" class="icon-dual" id="span-parent"></span> Attitude
-                </h4>
-                <div class="card-body">
-                    <div class="col-md-12">
-                        <div class="" style="text-align:center">
-                            <div id="attitude" class="attitude"></div>
-                            <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mt-4 chartjs-chart">
+                                <div id="anylitc-attend" style="min-height: 365px;"></div>
+                                <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="cardCollpase19" class="collapse pt-3 show" dir="ltr">
+                                <div id="homework-status" class="apex-charts" data-colors="#00b19d,#f1556c"></div>
+
+                            </div> <!-- collapsed end -->
                         </div>
                     </div>
-                </div> <!-- end card-body -->
+                </div> <!-- end card-body-->
             </div> <!-- end card-->
-        </div> <!-- end col-->
+        </div> <!-- end col -->
     </div>
 
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                            <span data-feather="fa-app-store-ios" class="icon-dual" id="span-parent"></span> Attitude
+                            <h4>
+                    </li>
+                </ul><br>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-box">
+
+                                <!-- <div id="statistics-dynam" data-colors="#02c0ce" class="morris-chart mt-3"></div>
+                            <div id="legend"></div> 
+
+                            <div id="cardCollpase5" class="collapse pt-3 show" dir="ltr">
+                            <div id="apex-column-1" class="apex-charts" data-colors="#3283f6,#44cf9c,#CED4DC"></div>
+                            </div>  collapsed end -->
+                                <div id="attitude" class="attitude"></div>
+                            </div> <!-- end card-box -->
+                        </div> <!-- end col -->
+                    </div>
+                    <!--- end row -->
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -196,29 +214,39 @@
         </div> <!-- end col -->
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-lg-12">
             <div class="card">
-                <h4 class="nav-link" style="border-bottom: 2px solid #0ABAB5;">
-                    <span data-feather="clipboard" class="icon-dual" id="span-parent"></span> Exam Result
-                </h4>
+                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                            <span data-feather="edit" class="icon-dual" id="span-parent"></span> Exam Result
+                            <h4>
+                    </li>
+                </ul><br>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="radar-analytic" height="400" data-colors="#39afd1,#a17fe0"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mt-4 chartjs-chart">
-                                <div id="line-23" class="apex-charts" data-colors="#f672a7"></div>
-                            </div>
-                        </div>
+                        <div class="col-lg-12">
+                            <div class="card-box">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mt-4 chartjs-chart">
+                                            <canvas id="radar-analytic" height="350" data-colors="#39afd1,#a17fe0"></canvas>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mt-4 chartjs-chart">
+                                            <div id="line-23" class="apex-charts" data-colors="#f672a7"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- end card-box -->
+                        </div> <!-- end col -->
                     </div>
-                </div> <!-- end card-body -->
+                    <!--- end row -->
+                </div> <!-- end card-body-->
             </div> <!-- end card-->
-        </div> <!-- end col-->
+        </div> <!-- end col -->
     </div>
-
     @include('teacher.dashboard.check_list')
 
 </div> <!-- container -->
