@@ -40,7 +40,6 @@
                                     <select id="heard" class="form-control" required="">
                                         <option value="">Teacher</option>
                                         <option value="press">Student</option>
-                                        <option value="net">Internet</option>
                                     </select>
                                 </div>
                             </div>
@@ -67,7 +66,6 @@
                             Cancel
                         </button>-->
                     </div>
-
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
         </div> <!-- end col -->
@@ -118,7 +116,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>Dhanush</td>
+                                                <td>William</td>
                                                 <td>23c08f</td>
                                                 <td>
                                                     <div class="row">

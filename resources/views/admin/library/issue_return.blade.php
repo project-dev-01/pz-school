@@ -55,13 +55,13 @@
                         <tbody>
                         <tr>
                                 <td>1</td>
-                                <td>test</td>
-                                <td>test</td>
-                                <td>test</td>
-                                <td>test</td>
-                                <td>test</td>
-                                <td>test</td>
-                                <td>test</td>
+                                <td>Oxford Dictionary</td>
+                                <td>Oxford Dictionary of English</td>
+                                <td>Dictionary</td>
+                                <td>William</td>
+                                <td>02/02/2022</td>
+                                <td>02/03/2022</td>
+                                <td>0</td>
                                 <td> 
                                     <div class="button-list">
                                         <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>

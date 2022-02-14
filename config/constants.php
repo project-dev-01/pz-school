@@ -1,5 +1,5 @@
 <?php
-$url = "http://localhost/school-management-system/public/api";
+$url = "http://localhost:8080/school-management-system/public/api";
 return [
 
     'api' => [

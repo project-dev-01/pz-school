@@ -53,8 +53,8 @@
                                 <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td>Test</td>
-                                        <td>Test</td>
+                                        <td>Annual</td>
+                                        <td>Internal</td>
                                         <td>1st term</td>
                                         <td>Aibots</td>
                                         <td>Test</td>
@@ -80,6 +80,8 @@
                                             <div class="col-9">
                                                 <select id="heard" class="form-control" required="">
                                                     <option value="">Select Branch</option>
+                                                    <option value="">Malaysia</option>
+                                                    <option value="">Singapore</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -97,7 +99,10 @@
                                             <label for="inputEmail3" class="col-3 col-form-label">Term </label>
                                             <div class="col-9">
                                                 <select id="heard" class="form-control" required="">
-                                                    <option value="">Select term</option>
+                                                    <option value="">Select Term</option>
+                                                    <option value="">Ist Term</option>
+                                                    <option value="">Half Yearly</option>
+                                                    <option value="">Quater Yearly</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -106,8 +111,11 @@
                                         <div class="form-group row">
                                             <label for="inputEmail3" class="col-3 col-form-label">Exam Type </label>
                                             <div class="col-9">
-                                                <select id="heard" class="form-control" required="">
-                                                    <option value="">Select term</option>
+                                                <select id="heard" class="form-control" required="">                                                    
+                                                <option value="">Select Exam Type</option>
+                                                    <option value="">Internal</option>
+                                                    <option value="">Model</option>
+                                                    <option value="">Main</option>
                                                 </select>
                                             </div>
                                         </div>

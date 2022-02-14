@@ -52,7 +52,7 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>Route 62</td>
                                 <td>Bus Stand</td>
                                 <td>Post Office</td>
@@ -60,7 +60,7 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>Route 57</td>
                                 <td>Tech Park</td>
                                 <td>Museam</td>
@@ -68,7 +68,7 @@
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>Malaysia</td>
+                                <td>Johor Bahru</td>
                                 <td>Route 35</td>
                                 <td>Beach</td>
                                 <td>Bus Stop</td>

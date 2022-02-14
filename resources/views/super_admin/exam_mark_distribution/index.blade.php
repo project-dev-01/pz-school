@@ -44,7 +44,7 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>NEET</td>
                                 <td>
                                     <div class="button-list">
@@ -55,7 +55,7 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>Malaysia</td>
+                                <td>Johor Bahru</td>
                                 <td>Aibots</td>
                                 <td>
                                     <div class="button-list">
@@ -66,7 +66,7 @@
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>JEE</td>
                                 <td>
                                     <div class="button-list">

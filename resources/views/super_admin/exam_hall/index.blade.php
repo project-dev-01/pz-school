@@ -47,7 +47,7 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Malaysia</td>
+                                <td>Johor Bahru</td>
                                 <td>101</td>
                                 <td>30</td>
                                 <td>
@@ -59,7 +59,7 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>103</td>
                                 <td>20</td>
                                 <td>
@@ -71,7 +71,7 @@
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>Malaysia</td>
+                                <td>Johor Bahru</td>
                                 <td>106</td>
                                 <td>30</td>
                                 <td>
@@ -83,7 +83,7 @@
                             </tr>
                             <tr>
                                 <td>4</td>
-                                <td>Malaysia</td>
+                                <td>Johor Bahru</td>
                                 <td>115</td>
                                 <td>50</td>
                                 <td>
@@ -95,7 +95,7 @@
                             </tr>
                             <tr>
                                 <td>5</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>118</td>
                                 <td>30</td>
                                 <td>

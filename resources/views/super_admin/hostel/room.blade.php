@@ -53,7 +53,7 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>Block A</td>
                                 <td>Eco</td>
                                 <td>50</td>
@@ -62,16 +62,16 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>Block B</td>
-                                <td>Cheap</td>
+                                <td>Eco</td>
                                 <td>50</td>
                                 <td>3000</td>
                                 <td>Better</td>
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>Block C</td>
                                 <td>Party</td>
                                 <td>50</td>
@@ -92,7 +92,7 @@
                         <label for="inputEmail3" class="col-3 col-form-label">Branch Name<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
-                            <option value="">Choose Branch</option>
+                            <option value="">Select Branch Name</option>
                             <option value="">Malaysia</option>
                             <option value="">Singapore</option>
                         </div>
@@ -112,7 +112,7 @@
                         <label for="inputEmail3" class="col-3 col-form-label">Category<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
-                            <option value="">Select</option>
+                            <option value="">Select Category</option>
                             <option value="net">Eco</option>
                             <option value="mouth">Cheap</option>
                             <option value="other">Party</option>

@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label for="branch_id">Branch<span class="text-danger">*</span></label>
                         <select class="form-control" id="branch_id" name="branch_id">
-                            <option value="">Choose Branch</option>
+                            <option value="">Select Branch</option>
                             <option value="">Malaysia</option>
                             <option value="press">Singapore</option>
                         </select>
@@ -21,7 +21,7 @@
                     <div class="form-group">
                         <label for="title">Standard<span class="text-danger">*</span></label>
                         <select id="priority" class="form-control" required="">
-                            <option value="selct">Select</option>
+                            <option value="selct">Select Standard</option>
                             <option>I</option>
                             <option>II</option>
                             <option>III</option>
@@ -35,9 +35,9 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="title">Class<span class="text-danger">*</span></label>
+                        <label for="title">Class Name<span class="text-danger">*</span></label>
                         <select id="priority" class="form-control" required="">
-                            <option value="selct">Select</option>
+                            <option value="selct">Select Class Name</option>
                             <option>A</option>
                             <option>B</option>
                             <option>C</option>
@@ -49,7 +49,7 @@
                     <div class="form-group">
                         <label for="date">Teacher<span class="text-danger">*</span></label>
                         <select id="priority" class="form-control" required="">
-                            <option value="selct">Select</option>
+                            <option value="selct">Select Teacher</option>
                             <option>Smith</option>
                             <option>Taylor</option>
                             <option>David</option>

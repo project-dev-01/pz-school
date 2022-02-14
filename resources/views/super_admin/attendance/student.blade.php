@@ -36,8 +36,9 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Select Branch<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
+                                    <label for="heard">Branch<span class="text-danger">*</span></label>
+                                    <select id="heard" class="form-control" required="">                                        
+                                        <option value="">Select Branch</option>
                                         <option value="">Malaysia</option>
                                         <option value="press">Singapore</option>
                                     </select>
@@ -47,6 +48,7 @@
                                 <div class="form-group">
                                     <label for="heard">Standard<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
+                                        <option>Select Standard</option>
                                         <option>I</option>
                                         <option>II</option>
                                         <option>III</option>
@@ -62,8 +64,9 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Class<span class="text-danger">*</span></label>
+                                    <label for="heard">Class Name<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
+                                        <option>Select Class Name</option>
                                         <option value="All">All</option>
                                         <option>A</option>
                                         <option>B</option>
@@ -77,7 +80,7 @@
                                 <div class="form-group">
                                     <label for="">Date<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
-                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" class="form-control homeWorkAdd" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="far fa-calendar-alt"></span>

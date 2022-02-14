@@ -52,7 +52,7 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>Block A</td>
                                 <td>Eco</td>
                                 <td>Micheal</td>
@@ -60,7 +60,7 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>Block B</td>
                                 <td>Cheap</td>
                                 <td>Smith</td>
@@ -68,7 +68,7 @@
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>Block C</td>
                                 <td>Party</td>
                                 <td>Starc</td>

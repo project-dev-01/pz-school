@@ -51,7 +51,7 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Semmandalam</td>
+                                <td>Pekeliling</td>
                                 <td>Bus Stand</td>
                                 <td>Post Office</td>
                                 <td>Good</td>

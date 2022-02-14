@@ -52,8 +52,8 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
+                                <td>Men's</td>
                                 <td>Block A</td>
-                                <td>Category</td>
                                 <td>50</td>
                                 <td>5000</td>
                                 <td>Good</td>

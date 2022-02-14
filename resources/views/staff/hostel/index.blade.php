@@ -51,8 +51,8 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
+                                <td>Men's</td>
                                 <td>Block A</td>
-                                <td>Category</td>
                                 <td>Kathir Vel</td>
                                 <td>Good</td>
                             </tr>

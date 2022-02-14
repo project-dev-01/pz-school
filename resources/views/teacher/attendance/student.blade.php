@@ -36,18 +36,33 @@
                     <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                        <label for="heard">Class<span class="text-danger">*</span></label>
-                        <select id="heard" class="form-control" required="">
-                            <option value="">1</option>
+                        <label for="heard">Standard<span class="text-danger">*</span></label>
+                        <select id="heard" class="form-control" required="">                            
+                                    <option value="">Select Standard</option>
+                                    <option value="">All</option>
+                                    <option value="">I</option>
+                                    <option value="press">II</option>
+                                    <option value="">III</option>
+                                    <option value="press">IV</option>
+                                    <option value="">V</option>
+                                    <option value="press">VI</option>
+                                    <option value="">VII</option>
+                                    <option value="press">VIII</option>
+
                         </select>
                     </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                        <label for="heard">Section<span class="text-danger">*</span></label>
-                        <select id="heard" class="form-control" required="">
-                            <option value="All">All</option>
-                            <option value="1">1</option>
+                        <label for="heard">Class Name<span class="text-danger">*</span></label>
+                        <select id="heard" class="form-control" required="">                          
+                                    <option value="">Select Class Name</option>
+                                    <option value="All">All</option>
+                                    <option value="">A</option>
+                                    <option value="">B</option>
+                                    <option value="press">C</option>
+                                    <option value="">D</option>
+                                    <option value="press">E</option>
                         </select>
                     </div>
                     </div>
@@ -55,7 +70,7 @@
                         <div class="form-group">
                             <label for="">Date<span class="text-danger">*</span></label>												
                             <div class="input-group input-group-merge">                                                    
-                            <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend"
+                            <input type="text" class="form-control homeWorkAdd" id="name" placeholder="" aria-describedby="inputGroupPrepend"
                                     required>
                                     <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -127,7 +142,7 @@
                         <tbody>
                         <tr>
                             <td>1</td>
-                                <td>Ithaya</td>
+                                <td>Jhon</td>
                                     <td>1</td>
                                 <td>RSM-00-1</td>
                                     <td> <div class="row"><div class="col-md-3"><input type="radio" id="contactChoice1"

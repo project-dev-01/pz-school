@@ -36,8 +36,9 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Select Branch<span class="text-danger">*</span></label>
+                                    <label for="heard">Branch<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
+                                    <option>Select Branch</option>
                                         <option value="">Malaysia</option>
                                         <option value="press">Singapore</option>
                                     </select>
@@ -47,6 +48,7 @@
                                 <div class="form-group">
                                     <label for="heard">Standard<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
+                                    <option>Select Standard</option>
                                         <option>I</option>
                                         <option>II</option>
                                         <option>III</option>
@@ -62,8 +64,9 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="heard">Class<span class="text-danger">*</span></label>
+                                    <label for="heard">Class Name<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
+                                        <option>Select Class Name</option>
                                         <option value="All">All</option>
                                         <option>A</option>
                                         <option>B</option>
@@ -77,10 +80,15 @@
                                 <div class="form-group">
                                     <label for="heard">Subject<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option>Maths</option>
-                                        <option>Physics</option>
-                                        <option>Chemistry</option>
-                                        <option>Geography</option>
+                                    <option>Select Subject</option>
+                                        <option value="press">English</option>
+                                        <option value="">Mathematics</option>
+                                        <option value="press">History</option>
+                                        <option value="">Study of the Environment</option>
+                                        <option value="press">Geography</option>
+                                        <option value="">Natural Sciences</option>
+                                        <option value="press">Civics Education</option>
+                                        <option value="">Arts Education</option>
                                     </select>
                                 </div>
                             </div>
@@ -88,6 +96,7 @@
                                 <div class="form-group">
                                     <label for="heard">Exam<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
+                                        <option>Select Exam</option>
                                         <option value="">1st term</option>
                                         <option value="">Half Yearly</option>
                                         <option value="">Quater Yearly</option>

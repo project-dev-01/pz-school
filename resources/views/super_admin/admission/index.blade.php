@@ -67,7 +67,7 @@
                                             <span class="far fa-calendar-alt"></span>
                                     </div>
                             </div>
-                            <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend"
+                            <input type="text" class="form-control homeWorkAdd" id="name" placeholder="" aria-describedby="inputGroupPrepend"
                                     required>
                                 </div>
                         </div> 
@@ -78,7 +78,7 @@
                     <div class="form-group">
                         <label for="heard">Standard<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">Select</option>
+                            <option value="">Select Standard</option>
                             <option>I</option>
                             <option>II</option>
                             <option>III</option>
@@ -94,9 +94,9 @@
                     </div>
                     <div class="col-md-3">
                     <div class="form-group">
-                        <label for="heard">Class<span class="text-danger">*</span></label>
+                        <label for="heard">Class Name<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">Choose..</option>
+                            <option value="">Select Class Name</option>
                             <option>A</option>
                             <option>B</option>
                             <option>C</option>
@@ -109,7 +109,7 @@
                         <div class="form-group">
                         <label for="">Category<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">Choose..</option>
+                            <option value="">Select Category</option>
                             <option>Management</option>
                             <option>Government</option>
                         </select>
@@ -163,7 +163,7 @@
                     <div class="form-group">
                         <label for="heard">Blood Group<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">Choose..</option>
+                            <option value="">Select Blood Group</option>
                             <option>A+</option>
                             <option>A-</option>
                             <option>B+</option>

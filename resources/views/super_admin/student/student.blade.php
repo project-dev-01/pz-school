@@ -36,8 +36,9 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Select Branch<span class="text-danger">*</span></label>
+                                    <label for="heard">Branch<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
+                                    <option value="">Select Branch</option>
                                         <option value="">Malaysia</option>
                                         <option value="press">Singapore</option>
                                     </select>
@@ -47,6 +48,7 @@
                                 <div class="form-group">
                                     <label for="heard">Standard<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
+                                    <option value="">Select Standard</option>
                                         <option>I</option>
                                         <option>II</option>
                                         <option>III</option>
@@ -62,8 +64,9 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Class<span class="text-danger">*</span></label>
+                                    <label for="heard">Class Name<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
+                                    <option value="">Select Class Name</option>     
                                         <option value="All">All</option>
                                         <option>A</option>
                                         <option>B</option>

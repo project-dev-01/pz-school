@@ -64,7 +64,7 @@
                                 <div class="form-group">
                                     <label for="">Date<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
-                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" class="form-control homeWorkAdd" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="far fa-calendar-alt"></span>
@@ -135,7 +135,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>Ithaya</td>
+                                                <td>Jhon</td>
                                                 <td>1</td>
                                                 <td>RSM-00-1</td>
                                                 <td>

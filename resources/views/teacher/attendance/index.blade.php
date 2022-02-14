@@ -60,7 +60,7 @@
                                 <div class="form-group">
                                     <label for="">Date<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge text-center">
-                                        <input type="text" class="form-control" data-provide="datepicker" data-date-format="MM yyyy" Value="February 2022" data-date-min-view-mode="1">   
+                                        <input type="text" class="form-control homeWorkAdd" data-provide="datepicker" data-date-format="MM yyyy" Value="February 2022" data-date-min-view-mode="1">   
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="far fa-calendar-alt"></span>

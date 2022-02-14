@@ -50,13 +50,13 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Test</td>
-                                <td>Test</td>
-                                <td>Test</td>
-                                <td>Test</td>
-                                <td>Test</td>
-                                <td>Test</td>
-                                <td>Test</td>
+                                <td>Cricket</td>
+                                <td>Sports</td>
+                                <td>General Audience</td>
+                                <td>10/02/2022</td>
+                                <td>15/02/2022</td>
+                                <td>Admin</td>
+                                <td>-</td>
                                 <td>
                                     <div class="button-list">
                                         <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="#">View</a>

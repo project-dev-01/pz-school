@@ -36,9 +36,10 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="heard">Select Branch<span class="text-danger">*</span></label>
+                                    <label for="heard">Branch<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="">Cuddalore</option>
+                                    <option value="">Select Branch</option>
+                                        <option value="">Malaysia</option>
                                         <option value="press">Singapore</option>
                                     </select>
                                 </div>
@@ -95,18 +96,18 @@
                                         </tr>
                                         <tr>
                                             <td>Name</td>
-                                            <td>xxx</td>
+                                            <td>William</td>
                                         </tr>
                                         <tr>
                                             <td>DOB</td>
                                             <td>01-01-2002</td>
                                         </tr>
                                         <tr>
-                                            <td>Class</td>
-                                            <td>11</td>
+                                            <td>Standard</td>
+                                            <td>XI</td>
                                         </tr>
                                         <tr>
-                                            <td>Section</td>
+                                            <td>Class Name</td>
                                             <td>A</td>
                                         </tr>
                                     </table>
@@ -119,16 +120,16 @@
                                                 <th>Roll No.</th>
                                                 <th>Name</th>
                                                 <th>English</th>
-                                                <th>Maths</th>
-                                                <th>Science</th>
-                                                <th>Computer Science</th>
+                                                <th>Mathematics</th>
+                                                <th>History</th>
+                                                <th>Geography</th>
                                                 <th>Total</th>
                                             <tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>PZ123456</td>
-                                                <td>xxx</td>
+                                                <td>William</td>
                                                 <td>90</td>
                                                 <td>80</td>
                                                 <td>70</td>

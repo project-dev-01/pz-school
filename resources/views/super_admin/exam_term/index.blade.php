@@ -46,7 +46,7 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>1st Term</td>
                                 <td>
                                     <div class="button-list">
@@ -57,7 +57,7 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>Malaysia</td>
+                                <td>Johor Bahru</td>
                                 <td>Half Yearly</td>
                                 <td>
                                     <div class="button-list">
@@ -68,7 +68,7 @@
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>Malaysia</td>
+                                <td>Johor Bahru</td>
                                 <td>Annual</td>
                                 <td>
                                     <div class="button-list">

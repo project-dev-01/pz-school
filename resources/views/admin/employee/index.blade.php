@@ -49,7 +49,7 @@
                                             <span class="far fa-calendar-alt"></span>
                                     </div>
                             </div>
-                            <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend"
+                            <input type="text" class="form-control homeWorkAdd" id="name" placeholder="" aria-describedby="inputGroupPrepend"
                                     required>
                                 </div>
                         </div> 
@@ -58,11 +58,14 @@
                         <div class="form-group">
                         <label for="heard">Designation<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">select</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option value="">select Designation</option>
+                            <option value="press">Academic coordinator</option>
+                            <option value="net">Academic adviser</option>
+                            <option value="mouth">Registrar</option>
+                            <option value="other">Maintenance technician</option>                            
+                            <option value="mouth">Teacher</option>
+                            <option value="other">Teaching assistant</option>                            
+                            <option value="other">Sports coach</option>
                         </select>
                     </div>
                     </div>									
@@ -73,10 +76,10 @@
                     <div class="form-group">
                         <label for="heard">Department<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">Select</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
+                            <option value="">Select Department</option>
+                            <option value="press">Accounting and Finance Department</option>
+                            <option value="net">Human Performance</option>
+                            <option value="mouth">Health Promotion</option>
                             <option value="other">Other..</option>
                         </select>
                     </div>
@@ -111,6 +114,7 @@
                         <div class="form-group">
                         <label for="heard">Gender</label>
                         <select id="heard" class="form-control" required="">
+                            <option value="">Select Gender</option>
                             <option value="">Male</option>
                             <option value="press">Female</option>
                             </select>
@@ -122,20 +126,26 @@
                         <div class="form-group">
                         <label for="heard">Religion</label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">Male</option>
-                            <option value="press">Female</option>
+                            <option value="">Select Religion</option>
+                            <option value="">Christian</option>
+                            <option value="press">Muslim</option>                            
+                            <option value="press">Hindu</option>
                             </select>
                     </div>                                       
                     </div>
                         <div class="col-md-4">
                     <div class="form-group">
-                        <label for="heard">Blood Group</label>
+                        <label for="heard">Blood group</label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">Choose..</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option value="">Select Blood group</option>
+                            <option value="press">O+</option>
+                            <option value="net">A+</option>
+                            <option value="mouth">B+</option>
+                            <option value="other">AB+</option>
+                            <option value="other">O-</option>
+                            <option value="other">A-</option>
+                            <option value="other">B-</option>
+                            <option value="other">AB-</option>
                         </select>
                     </div>
                     </div>
@@ -148,7 +158,7 @@
                                             <span class="fas fa-birthday-cake"></span>
                                     </div>
                             </div>
-                            <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend"
+                            <input type="text" class="form-control homeWorkAdd" id="name" placeholder="" aria-describedby="inputGroupPrepend"
                                     required>
                                 </div>
                         </div> 

@@ -58,16 +58,16 @@
                         <tbody>
                         <tr>
                             <td>1</td>
-                                <td>test</td>
-                                <td>test</td>
-                                <td>test</td>
-                                <td>test</td>
-                                <td>test</td>
-                                <td>test</td>
-                                <td>test</td>
-                                <td>test</td>
-                                <td>test</td>
-                                <td>test</td>
+                                <td>Dictionary</td>
+                                <td>Oxford Dictionary of English</td>
+                                <td>Oxford</td>
+                                <td>0199571130</td>
+                                <td>Dictionary</td>
+                                <td>The English language is full of words that are beyond ..</td>
+                                <td>02/02/2022</td>
+                                <td>2400</td>
+                                <td>5</td>
+                                <td>1</td>
                                 <td> 
                                     <div class="button-list">
                                         <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>

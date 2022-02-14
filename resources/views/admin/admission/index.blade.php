@@ -37,11 +37,12 @@
                         <div class="form-group">
                         <label for="heard">Academic Year<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
+                        <option value="">2021-2022</option>
                             <option value="">2020-2021</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option value="press">2019-2020</option>
+                            <option value="net">2018-2029</option>
+                            <option value="mouth">2017-2018</option>
+                            <option value="other">2016-2017</option>
                         </select>
                     </div>
                     </div>
@@ -74,28 +75,35 @@
                         </div> 
                     </div>										
                     </div>
-                    <div class="row">
+                    <div class="row">                    
                     <div class="col-md-3">
                     <div class="form-group">
-                        <label for="heard">Class<span class="text-danger">*</span></label>
+                        <label for="heard">Standard<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">Select</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option value="">Select Standard</option>                            
+                            <option value="press">I</option>
+                            <option value="net">II</option>
+                            <option value="mouth">III</option>
+                            <option value="other">IV</option>
+                            <option value="other">V</option>
+                            <option value="other">VI</option>
+                            <option value="other">VII</option>
+                            <option value="other">VIII</option>
+                            <option value="other">IX</option>
+                            <option value="other">X</option>
                         </select>
                     </div>
                     </div>
                     <div class="col-md-3">
                     <div class="form-group">
-                        <label for="heard">Section<span class="text-danger">*</span></label>
+                        <label for="heard">Class Name<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">Choose..</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option value="">Select Class Name</option>
+                            <option value="press">A</option>
+                            <option value="net">B</option>
+                            <option value="mouth">C</option>
+                            <option value="other">D</option>
+                            <option value="other">E</option>
                         </select>
                     </div>
                     </div>
@@ -148,6 +156,7 @@
                         <div class="form-group">
                         <label for="heard">Gender<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
+                            <option value="">Select Gender</option>
                             <option value="">Male</option>
                             <option value="press">Female</option>
                             </select>
@@ -159,11 +168,15 @@
                     <div class="form-group">
                         <label for="heard">Blood Group<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">Choose..</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option value="">Select Blood Group</option>
+                            <option value="press">O+</option>
+                            <option value="net">A+</option>
+                            <option value="mouth">B+</option>
+                            <option value="other">AB+</option>
+                            <option value="other">O-</option>
+                            <option value="other">A-</option>
+                            <option value="other">B-</option>
+                            <option value="other">AB-</option>
                         </select>
                     </div>
                     </div>

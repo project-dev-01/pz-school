@@ -52,7 +52,7 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <th>Route 62</th>
                                 <td>10</td>
                                 <td>08.00 AM</td>
@@ -60,7 +60,7 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <th>Route 35</th>
                                 <td>6</td>
                                 <td>08.00 AM</td>
@@ -68,7 +68,7 @@
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <th>Route 57</th>
                                 <td>8</td>
                                 <td>08.00 AM</td>

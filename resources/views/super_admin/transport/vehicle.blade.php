@@ -53,7 +53,7 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Malaysia</td>
+                                <td>Johor Bahru</td>
                                 <td>WD 4567</td>
                                 <td>30</td>
                                 <td>Smith</td>
@@ -62,7 +62,7 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>Malaysia</td>
+                                <td>Johor Bahru</td>
                                 <td>SAB 7219</td>
                                 <td>30</td>
                                 <td>Starc</td>
@@ -71,7 +71,7 @@
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>KV 0632</td>
                                 <td>30</td>
                                 <td>Kieron</td>

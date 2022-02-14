@@ -55,15 +55,15 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group row">
-                                        <label for="inputEmail3" class="col-3 col-form-label">Class<span class="text-danger">*</span></label>
+                                        <label for="inputEmail3" class="col-3 col-form-label">Class Name<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <select id="heard" class="form-control" required="">
-                                                <option value="">Select</option>
+                                                <option value="">Select Class Name</option>
                                                 <option>A</option>
                                                 <option>B</option>
                                                 <option>C</option>
                                                 <option>D</option>
-                                                <option>E</option>n>
+                                                <option>E</option>
                                             </select>
                                         </div>
                                     </div>
@@ -72,13 +72,16 @@
                                     <div class="form-group row">
                                         <label for="inputEmail3" class="col-3 col-form-label">Subject<span class="text-danger">*</span></label>
                                         <div class="col-9">
-                                            <select id="heard" class="form-control" required="">
-                                                <option value="">Select</option>
-                                                <option>Physics </option>
-                                                <option>Chemistry </option>
-                                                <option>Maths </option>
-                                                <option>Biology </option>
-                                                <option>Geography </option>
+                                            <select id="heard" class="form-control" required="">                                       
+                                            <option value="">Select Subject</option>
+                                            <option value="press">English</option>
+                                            <option value="">Mathematics</option>
+                                            <option value="press">History</option>
+                                            <option value="">Study of the Environment</option>
+                                            <option value="press">Geography</option>
+                                            <option value="">Natural Sciences</option>
+                                            <option value="press">Civics Education</option>
+                                            <option value="">Arts Education</option>
                                             </select>
                                         </div>
                                     </div>

@@ -59,7 +59,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="joining_date" id="joiningDate" placeholder="" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control homeWorkAdd" name="joining_date" id="joiningDate" placeholder="" aria-describedby="inputGroupPrepend">
                                     </div>
                                     <span class="text-danger error-text joining_date_error"></span>
                                 </div>
@@ -70,7 +70,7 @@
                                 <div class="form-group">
                                     <label for="designation">Designation<span class="text-danger">*</span></label>
                                     <select class="form-control"  id="empDesignation" name="designation">
-                                        <option value="">Choose Designation</option>
+                                        <option value="">Select Designation</option>
                                         <option >BEd</option>
                                         <option >MEd</option>
                                         <option >BElEd</option>
@@ -84,12 +84,11 @@
                                 <div class="form-group">
                                     <label for="department">Department<span class="text-danger">*</span></label>
                                     <select class="form-control"  id="empDepartment" name="department">
-                                        <option value="">Choose Department</option>
-                                        <option >Physics </option>
-                                        <option >Chemistry </option>
-                                        <option >Maths </option>
-                                        <option >Biology </option>
-                                        <option >Geography </option>
+                                    <option value="">Select Department</option>
+                                    <option value="press">Accounting and Finance Department</option>
+                                    <option value="net">Human Performance</option>
+                                    <option value="mouth">Health Promotion</option>
+                                    <option value="other">Other..</option>
                                     </select>
                                     <span class="text-danger error-text department_error"></span>
                                 </div>

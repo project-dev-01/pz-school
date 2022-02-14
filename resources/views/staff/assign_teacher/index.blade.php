@@ -47,7 +47,7 @@
                                 <td>1</td>
                                 <td>7</td>
                                 <td>A</td>
-                                <td>XXX</td>
+                                <td>Jhon</td>
                                 <td>
                                     <div class="button-list">
                                         <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>

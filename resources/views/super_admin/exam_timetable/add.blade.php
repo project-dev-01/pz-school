@@ -24,21 +24,21 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Maths</td>
+                                <td>Mathematics</td>
                                 <td>16.Feb.2022</td>
                                 <td>3:10 PM</td>
                                 <td>4:10 PM</td>
                                 <td>01</td>
                             </tr>
                             <tr>
-                                <td>Physics</td>
+                                <td>English</td>
                                 <td>17.Feb.2022</td>
                                 <td>3:10 PM</td>
                                 <td>4:10 PM</td>
                                 <td>01</td>
                             </tr>
                             <tr>
-                                <td>Chemistry</td>
+                                <td>History</td>
                                 <td>19.Feb.2022</td>
                                 <td>3:10 PM</td>
                                 <td>4:10 PM</td>

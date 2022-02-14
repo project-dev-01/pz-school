@@ -52,7 +52,7 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Semmandalam</td>
+                                <td>Pekeliling</td>
                                 <td>10</td>
                                 <td>Bus stand</td>
                                 <td>$50</td>

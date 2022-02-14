@@ -54,8 +54,8 @@
                                 <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td>Malaysia</td>
-                                        <td>Maths</td>
+                                        <td>Johor Bahru</td>
+                                        <td>Mathematics</td>
                                         <td>Internal</td>
                                         <td>1st term</td>
                                         <td>Aibots</td>
@@ -69,8 +69,8 @@
                                     </tr>
                                     <tr>
                                         <td>2</td>
-                                        <td>Malaysia</td>
-                                        <td>Physics</td>
+                                        <td>Johor Bahru</td>
+                                        <td>History</td>
                                         <td>Internal</td>
                                         <td>1st term</td>
                                         <td>JEE</td>
@@ -84,8 +84,8 @@
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>Malaysia</td>
-                                        <td>Chemistry</td>
+                                        <td>Johor Bahru</td>
+                                        <td>Geography</td>
                                         <td>Internal</td>
                                         <td>1st term</td>
                                         <td>JEE</td>
@@ -99,8 +99,8 @@
                                     </tr>
                                     <tr>
                                         <td>$</td>
-                                        <td>Malaysia</td>
-                                        <td>Geography</td>
+                                        <td>Johor Bahru</td>
+                                        <td>English</td>
                                         <td>Internal</td>
                                         <td>1st term</td>
                                         <td>NEET</td>

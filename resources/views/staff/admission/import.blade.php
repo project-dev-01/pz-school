@@ -35,28 +35,35 @@
                     <div class="col-md-9">
                     <div class="col-md-12">
                         <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Class<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">Standard<span class="text-danger">*</span></label>
                         <div class="col-9">
-                            <select id="heard" class="form-control" required="">
-                            <option value="">select</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <select id="heard" class="form-control" required="">                                
+                            <option value="">Select Standard</option>                            
+                            <option value="press">I</option>
+                            <option value="net">II</option>
+                            <option value="mouth">III</option>
+                            <option value="other">IV</option>
+                            <option value="other">V</option>
+                            <option value="other">VI</option>
+                            <option value="other">VII</option>
+                            <option value="other">VIII</option>
+                            <option value="other">IX</option>
+                            <option value="other">X</option>
                         </select>
                         </div>
                     </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Section<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">Class Name<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
-                            <option value="">select</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
+                            <option value="">Select Class Name</option>
+                            <option value="press">A</option>
+                            <option value="net">B</option>
+                            <option value="mouth">C</option>
+                            <option value="other">D</option>
+                            <option value="other">E</option>
                         </select>
                         </div>
                     </div>

@@ -56,7 +56,7 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>Brilliant</td>
                                 <td>NSP</td>
                                 <td>Teacher</td>
@@ -68,7 +68,7 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>Mainframe Computer</td>
                                 <td>MFC</td>
                                 <td>Student</td>
@@ -80,7 +80,7 @@
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>Networking</td>
                                 <td>NTW</td>
                                 <td>Student</td>

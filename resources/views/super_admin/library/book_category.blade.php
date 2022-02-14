@@ -44,7 +44,7 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>Network</td>
                                 <td>
                                     <div class="button-list">
@@ -55,7 +55,7 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>Communication</td>
                                 <td>
                                     <div class="button-list">
@@ -66,7 +66,7 @@
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>Story</td>
                                 <td>
                                     <div class="button-list">

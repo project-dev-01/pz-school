@@ -58,7 +58,7 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>Genius</td>
                                 <td>NSP</td>
                                 <td>Second Edition</td>
@@ -72,7 +72,7 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>Mainframe Computer</td>
                                 <td>NSP</td>
                                 <td>Third Edition</td>
@@ -86,7 +86,7 @@
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>Malaysia</td>
+                                <td>Kuala Lumpur</td>
                                 <td>Networking</td>
                                 <td>LHD</td>
                                 <td>Fifth Edition</td>

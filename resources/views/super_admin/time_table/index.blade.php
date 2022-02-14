@@ -44,13 +44,13 @@
                                 <td>
                                     08:00 - 08:30
                                 </td>
-                                <td>Physics<br>Teacher: David
+                                <td>English<br>Teacher: David
                                 </td>
-                                <td>Maths<br>Teacher: Smith</td>
+                                <td>Mathematics<br>Teacher: Smith</td>
                                 <td rowspan="6" class="align-middle text-center" style="background-color:#f0f0f0">
                                  New Year Holiday
                                 </td>
-                                <td>Chemistry<br>Teacher: Taylor</td>
+                                <td>Natural Sciences<br>Teacher: Taylor</td>
                                 <td>Geography<br>Teacher: Starc</td>
                                 <td rowspan="6" class="align-middle text-center" style="background-color:#f0f0f0">
                                  Public Holiday
@@ -63,46 +63,46 @@
                                 <td>
                                     08:30 - 09:30
                                 </td>
-                                <td>Maths<br>Teacher: Smith</td>
-                                <td>Physics<br>Teacher: David</td>
-                                <td>Biology<br>Teacher: Mitcheal</td>
-                                <td>Computer<br>Teacher: Cameron</td>
+                                <td>Mathematics<br>Teacher: Smith</td>
+                                <td>English<br>Teacher: David</td>
+                                <td>Civics Education<br>Teacher: Mitcheal</td>
+                                <td>History<br>Teacher: Cameron</td>
                             </tr>
                             <tr>
                                 <td>
                                     09:30 - 10:00
                                 </td>
-                                <td>Chemistry<br>Teacher: Taylor</td>
-                                <td>Biology<br>Teacher: Mitcheal</td>
-                                <td>Computer<br>Teacher: Cameron</td>
+                                <td>Natural Sciences<br>Teacher: Taylor</td>
+                                <td>Civics Education<br>Teacher: Mitcheal</td>
+                                <td>History<br>Teacher: Cameron</td>
                                 <td>Geography<br>Teacher: Starc</td>
                             </tr>
                             <tr>
                                 <td>
                                     10:00 - 10:30
                                 </td>
-                                <td>Physics<br>Teacher: David</td>
-                                <td>Computer<br>Teacher: Cameron</td>
+                                <td>English<br>Teacher: David</td>
+                                <td>History<br>Teacher: Cameron</td>
                                 <td>Geography<br>Teacher: Starc</td>
-                                <td>Maths<br>Teacher: Smith</td>
+                                <td>Mathematics<br>Teacher: Smith</td>
                             </tr>
                             <tr>
                                 <td>
                                     10:30 - 11:00
                                 </td>
                                 <td>Geography<br>Teacher: Starc</td>
-                                <td>Biology<br>Teacher: Mitcheal</td>
-                                <td>Chemistry<br>Teacher: Taylor</td>
-                                <td>Computer<br>Teacher: Cameron</td>
+                                <td>Civics Education<br>Teacher: Mitcheal</td>
+                                <td>Natural Sciences<br>Teacher: Taylor</td>
+                                <td>History<br>Teacher: Cameron</td>
                             </tr>
                             <tr>
                                 <td>
                                     11:00 - 11:30
                                 </td>
-                                <td>Computer<br>Teacher: Cameron</td>
+                                <td>History<br>Teacher: Cameron</td>
                                 <td>Geography<br>Teacher: Starc</td>
-                                <td>Chemistry<br>Teacher: Taylor</td>
-                                <td>Biology<br>Teacher: Mitcheal</td>
+                                <td>Natural Sciences<br>Teacher: Taylor</td>
+                                <td>Civics Education<br>Teacher: Mitcheal</td>
                             </tr>
                         </tbody>
                     </table>

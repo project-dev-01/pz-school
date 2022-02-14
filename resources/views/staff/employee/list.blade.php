@@ -47,14 +47,14 @@
                                 <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td>Test</td>
-                                        <td>test@gmail.com</td>
-                                        <td>12345678</td>
+                                        <td>John</td>
+                                        <td>John@gmail.com</td>
+                                        <td>+6898562</td>
                                         <td>27/03/2021</td>
                                         <td>01/01/2020</td>
                                         <td>Staff</td>
                                         <td>Teacher</td>
-                                        <td>xxx,yyy</td>
+                                        <td>21,KL</td>
                                         <td>
                                             <div class="button-list">
                                                 <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
