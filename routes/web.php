@@ -27,7 +27,7 @@ use App\Http\Controllers\CommonController;
 //     return view('auth.login');
 // });
 Route::get('/', function () {
-    return redirect(route('super_admin.login'));
+    return redirect(route('admin.login'));
 });
 // Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 // Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');

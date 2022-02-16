@@ -165,4 +165,8 @@
     </div>
     <!-- end row-->
 
-</div> <!-- container -->@endsection
+</div> <!-- container -->
+@endsection
+@section('scripts')
+<script src="{{ asset('js/custom/settings.js') }}"></script>
+@endsection

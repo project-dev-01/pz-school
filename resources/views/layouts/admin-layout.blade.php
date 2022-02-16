@@ -17,8 +17,8 @@
             <div class="content">
                 @yield('content')
             </div> <!-- content -->
-
             @include('includes.footer')
+            @yield('scripts')
 
 </body>
 

@@ -49,6 +49,7 @@ class AuthController extends BaseController
         $success['token'] = $token;
         $success['user'] = $user; 
         $success['role_name'] = $user->role->role_name;
+        $success['subsDetails'] = $user->subsDetails;
        
        
         // dd($userDetails->role_id);

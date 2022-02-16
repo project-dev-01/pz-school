@@ -12,6 +12,7 @@ use App\Models\EventType;
 use App\Models\Event;
 use App\Models\SectionAllocation;
 use App\Models\TeacherAllocation;
+use App\Models\Tenant\User as TenantUser;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -61,6 +62,21 @@ class AdminController extends Controller
     //
     public function index()
     {
+        // $data = TenantUser::all();
+        // dd($data);
+        // config(['database.connections.mysql_new_connection' => [
+        //     'driver'    => 'mysql',
+        //     'host'      => 'localhost',
+        //     'database'  => 'school-management-system-test',
+        //     'username'  => 'root',
+        //     'password'  => '',
+        //     'charset'   => 'utf8',
+        //     'collation' => 'utf8_unicode_ci'
+        // ]]);
+        // $decDB = DB::connection('tenant')->table("branches")->get();
+        // echo "<pre>";
+        // print_r($decDB);
+        // exit;
         return view('admin.dashboard.index');
     }
     public function settings()
@@ -69,6 +85,22 @@ class AdminController extends Controller
     }
     public function classes()
     {
+        // $decDB = DB::connection('tenant')->table("branches")->get();
+        // echo "<pre>";
+        // print_r($decDB);
+        // exit;
+        // config(['database.connections.mysql_new_connection' => [
+        //     'driver'    => 'mysql',
+        //     'host'      => 'localhost',
+        //     'database'  => 'school-management-system-test',
+        //     'username'  => 'root',
+        //     'password'  => '',
+        //     'charset'   => 'utf8',
+        //     'collation' => 'utf8_unicode_ci'
+        // ]]);
+        // $decDB = DB::connection('mysql_new_connection')->table("branches")->get();
+        // print_r($decDB);
+        // exit;
         return view('admin.classes.index');
     }
     public function addClasses()

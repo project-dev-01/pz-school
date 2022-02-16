@@ -76,6 +76,7 @@ class Kernel extends HttpKernel
         'isTeacher' => \App\Http\Middleware\isTeacherMiddleware::class,
         'isParent' => \App\Http\Middleware\isParentMiddleware::class,
         'isStudent' => \App\Http\Middleware\isStudentMiddleware::class,
+        'isTenantConnection' => \App\Http\Middleware\ConfigureTenantConnection::class,
         'guardswitcher' => GuardSwitcher::class
     ];
 }
