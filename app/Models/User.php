@@ -69,6 +69,6 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(Role::class, 'role_id');
     }
     public function subsDetails() {
-        return $this->belongsTo(SubscriptionDBList::class, 'sub_id');
+        return $this->belongsTo(Branches::class, 'branch_id');
     }
 }

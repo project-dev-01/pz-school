@@ -161,34 +161,68 @@ class ApiController extends BaseController
             'state_id' => 'required',
             'city_id' => 'required',
             'address' => 'required',
+            'db_name' => 'required',
+            'db_username' => 'required',
+            'password' => 'required',
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
 
-            $student_name = $request->name;
-            $branch_code = Helper::CodeGenerator(new Branches, 'branch_code', 4, 'PZ');
 
-            $branch = new Branches();
-            $branch->branch_code = $branch_code;
-            $branch->name = $request->name;
-            $branch->school_name = $request->school_name;
-            $branch->email = $request->email;
-            $branch->mobile_no = $request->mobile_no;
-            $branch->currency = $request->currency;
-            $branch->symbol = $request->symbol;
-            $branch->country_id = $request->country_id;
-            $branch->state_id = $request->state_id;
-            $branch->city_id = $request->city_id;
-            $branch->address = $request->address;
-            $query = $branch->save();
+            $existUser = $this->existUser($request->email);
+            if ($existUser) {
+                $existBranch = $this->existBranch($request->email);
+                if ($existBranch) {
+                    $student_name = $request->name;
+                    $db_name = $request->db_name;
+                    $db_username = $request->db_username;
+                    $db_password = $request->db_password;
+                    $branch_code = Helper::CodeGenerator(new Branches, 'branch_code', 4, 'PZ');
+                    // to migrate database structure
+                    $migrate = $this->DBMigrationCall($db_name, $db_username, $db_password);
+                    if ($migrate) {
+                        // create new branches
+                        $branch = new Branches();
+                        $branch->branch_code = $branch_code;
+                        $branch->name = $request->name;
+                        $branch->school_name = $request->school_name;
+                        $branch->email = $request->email;
+                        $branch->mobile_no = $request->mobile_no;
+                        $branch->currency = $request->currency;
+                        $branch->symbol = $request->symbol;
+                        $branch->country_id = $request->country_id;
+                        $branch->state_id = $request->state_id;
+                        $branch->city_id = $request->city_id;
+                        $branch->address = $request->address;
+                        $branch->db_name = $request->db_name;
+                        $branch->db_username = $request->db_username;
+                        $branch->db_password = $request->db_password;
+                        $query = $branch->save();
 
-            $success = [];
-            if (!$query) {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                        $success = [];
+                        if (!$query) {
+                            return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                        } else {
+                            $lastInsertID = $branch->id;
+                            // create admin login users for schoolcrm
+                            $createUser = $this->createUser($request, $lastInsertID);
+                            // prin$createUser;exit;
+                            if ($createUser) {
+                                return $this->successResponse($success, 'New Branch has been successfully saved');
+                            } else {
+                                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong creating user branch']);
+                            }
+                        }
+                    } else {
+                        return $this->send500Error('Error while creating Database', ['error' => 'Error while creating Database']);
+                    }
+                } else {
+                    return $this->send500Error('Branch exist', ['error' => 'Branch exist']);
+                }
             } else {
-                return $this->successResponse($success, 'New Branch has been successfully saved');
+                return $this->send500Error('User exist', ['error' => 'User exist']);
             }
         }
     }
@@ -1388,7 +1422,7 @@ class ApiController extends BaseController
         //Validate form
         $validator = \Validator::make($request->all(), [
             'oldpassword' => [
-                'required', function ($attribute, $value, $fail) use ($dbPass){
+                'required', function ($attribute, $value, $fail) use ($dbPass) {
                     if (!\Hash::check($value, $dbPass)) {
                         return $fail(__('The current password is incorrect'));
                     }
@@ -1424,27 +1458,28 @@ class ApiController extends BaseController
     }
 
     // update profile info
-    public function updateProfileInfo(Request $request){
- 
-        $validator = \Validator::make($request->all(),[
-            'name'=>'required',
-            'email'=> 'required|email|unique:users,email,'.$request->id,
-            'address'=>'required',
-        ]);
-        if(!$validator->passes()){
-            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-        }else{
-             $query = User::find($request->id)->update([
-                  'name'=>$request->name,
-                  'email'=>$request->email,
-                  'address'=>$request->address,
-             ]);
+    public function updateProfileInfo(Request $request)
+    {
 
-             if(!$query){
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $request->id,
+            'address' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $query = User::find($request->id)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'address' => $request->address,
+            ]);
+
+            if (!$query) {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong, Failed to update profile.']);
-             }else{
+            } else {
                 return $this->successResponse([], 'Your profile info has been update successfuly.');
-             }
+            }
         }
     }
 }

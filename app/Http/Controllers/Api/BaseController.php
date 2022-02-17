@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Branches;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class BaseController extends Controller
 {
@@ -87,5 +90,64 @@ class BaseController extends Controller
         }
 
         return response()->json($response, $code);
+    }
+    // create migration file
+    function DBMigrationCall($dbName, $dbUsername, $dbPass)
+    {
+
+        // Artisan::call("migrate", ['name' => 'test', '--fieldsFile' => 'database/migrations/dynamic_migrate']);
+        config(['database.connections.mysql_new_connection' => [
+            'driver'    => 'mysql',
+            'host'      => env('DB_HOST', '127.0.0.1'),
+            'database'  => env('DB_DATABASE', $dbName),
+            'username'  => env('DB_USERNAME', $dbUsername),
+            'password'  => env('DB_PASSWORD', $dbPass),
+            'charset'   => 'utf8',
+            // 'collation' => 'utf8_unicode_ci'
+        ]]);
+
+        Artisan::call(
+            'migrate',
+            array(
+                '--path' => 'database/migrations/dynamic_migrate',
+                '--database' => 'mysql_new_connection',
+                '--force' => true
+            )
+        );
+        return true;
+    }
+    // create users
+    function createUser(Request $request, $lastInsertID)
+    {
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->role_id = 2;
+        $user->password = \Hash::make($request->password);
+        $user->branch_id = $lastInsertID;
+        $query = $user->save();
+        if (!$query) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    // check users email exit 
+    function existUser($email)
+    {
+        if (User::where('email', '=', $email)->count() > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    // check users email exit 
+    function existBranch($email)
+    {
+        if (Branches::where('email', '=', $email)->count() > 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

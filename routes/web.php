@@ -251,6 +251,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
     //school app form
     Route::get('/application-form', [CommonController::class, 'showApplicationForm'])->name('schoolcrm.app.form');
+    Route::get('/DBMigrationCall', [CommonController::class, 'DBMigrationCall']);
 
     // admin routes start
     Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin']], function () {
