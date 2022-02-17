@@ -47,7 +47,7 @@ class AuthController extends Controller
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
             
-            if ($userDetails['data']['user']['role_id'] != 1) {
+            if ($userDetails['data']['user']['role_id'] != 1 && $userDetails['data']) {
                 $request->session()->put('user_id', $userDetails['data']['user']['id']);
                 $request->session()->put('role_id', $userDetails['data']['user']['role_id']);
                 $request->session()->put('picture', $userDetails['data']['user']['picture']);
@@ -136,6 +136,9 @@ class AuthController extends Controller
             session()->pull('email');
             session()->pull('role_name');
             session()->pull('user_id');
+            session()->pull('db_name');
+            session()->pull('db_username');
+            session()->pull('db_password');
             $request->session()->flush();
             return redirect()->route('admin.login');
         } else {
