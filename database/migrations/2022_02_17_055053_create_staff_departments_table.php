@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubscriptionDBListsTable extends Migration
+class CreateStaffDepartmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateSubscriptionDBListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subscription_d_b_lists', function (Blueprint $table) {
+        Schema::create('staff_departments', function (Blueprint $table) {
             $table->id();
-            $table->string('db_name')->unique();
-            $table->string('db_username');
-            $table->string('db_password');
-            $table->enum('status', ['0', '1', '2']);
+            $table->string('name');
+            $table->integer('branch_id');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateSubscriptionDBListsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscription_d_b_lists');
+        Schema::dropIfExists('staff_departments');
     }
 }
