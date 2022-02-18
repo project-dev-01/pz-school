@@ -7,6 +7,8 @@ use App\Models\Branches;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+// db connection
+use App\Helpers\DatabaseConnection;
 
 class BaseController extends Controller
 {
@@ -98,10 +100,10 @@ class BaseController extends Controller
         // Artisan::call("migrate", ['name' => 'test', '--fieldsFile' => 'database/migrations/dynamic_migrate']);
         config(['database.connections.mysql_new_connection' => [
             'driver'    => 'mysql',
-            'host'      => env('DB_HOST', '127.0.0.1'),
-            'database'  => env('DB_DATABASE', $dbName),
-            'username'  => env('DB_USERNAME', $dbUsername),
-            'password'  => env('DB_PASSWORD', $dbPass),
+            'host'      => '127.0.0.1',
+            'database'  => $dbName,
+            'username'  => $dbUsername,
+            'password'  => $dbPass,
             'charset'   => 'utf8',
             // 'collation' => 'utf8_unicode_ci'
         ]]);
@@ -150,4 +152,12 @@ class BaseController extends Controller
             return true;
         }
     }
+    // create new connection
+    function createNewConnection($branch_id)
+    {
+        $params = Branches::find($branch_id);
+        $staffConn = DatabaseConnection::setConnection($params);
+        return $staffConn;
+    }
+    
 }

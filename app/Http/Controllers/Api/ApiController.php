@@ -26,7 +26,9 @@ use App\Models\Staff;
 use App\Models\User;
 use App\Models\StaffDepartments;
 use App\Models\StaffDesignation;
-
+// db connection
+use App\Helpers\DatabaseConnection;
+use App\Models\Tenant\StaffDepartment;
 
 class ApiController extends BaseController
 {
@@ -253,7 +255,7 @@ class ApiController extends BaseController
                 ->when($city_id, function ($query, $city_id) {
                     return $query->where('br.city_id', $city_id);
                 })
-                ->where('status',0)
+                ->where('status', 0)
                 ->get();
             return $this->successResponse($success, 'Branch record fetch successfully');
         }
@@ -332,7 +334,7 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            
+
             $branch = Branches::find($id);
             $branch->status = 2;
             $query = $branch->save();
@@ -1046,11 +1048,8 @@ class ApiController extends BaseController
     public function addDepartment(Request $request)
     {
 
-        $branch_id = $request->branch_id;
         $validator = \Validator::make($request->all(), [
-            'name' => Rule::unique('staff_departments')->where(function ($query) use ($branch_id) {
-                return $query->where('branch_id', $branch_id);
-            }),
+            'name' => 'required',
             'branch_id' => 'required',
             'token' => 'required',
         ]);
@@ -1058,28 +1057,43 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-
-            $department = new StaffDepartments();
-            $department->branch_id = $request->branch_id;
-            $department->name = $request->name;
-            $query = $department->save();
-
-            $success = [];
-            if (!$query) {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($staffConn->table('staff_departments')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
             } else {
-                return $this->successResponse($success, 'Department has been successfully saved');
+                // insert data
+                $query = $staffConn->table('staff_departments')->insert([
+                    'name' => $request->name,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Department has been successfully saved');
+                }
             }
         }
     }
     // getDepartmentList
     public function getDepartmentList(Request $request)
     {
-        $Department = DB::table('staff_departments as s')
-            ->select('s.*', 'b.name as branch_name')
-            ->join('branches as b', 's.branch_id', '=', 'b.id')
-            ->get();
-        return $this->successResponse($Department, 'Department record fetch successfully');
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $Department = $staffConn->table('staff_departments')->get();
+            return $this->successResponse($Department, 'Department record fetch successfully');
+        }
     }
     // get department row details
     public function getDepartmentDetails(Request $request)
@@ -1087,14 +1101,18 @@ class ApiController extends BaseController
 
         $validator = \Validator::make($request->all(), [
             'id' => 'required',
-            'token' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
             $id = $request->id;
-            $deptDetails = StaffDepartments::find($id);
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $deptDetails = $staffConn->table('staff_departments')->where('id', $id)->first();
             return $this->successResponse($deptDetails, 'Department row fetch successfully');
         }
     }
@@ -1102,12 +1120,8 @@ class ApiController extends BaseController
     public function updateDepartment(Request $request)
     {
         $id = $request->id;
-
-        $branch_id = $request->branch_id;
         $validator = \Validator::make($request->all(), [
-            'name' => Rule::unique('staff_departments')->where(function ($query) use ($branch_id, $id) {
-                return $query->where('branch_id', $branch_id)->where('id', '!=', $id);
-            }),
+            'name' => 'required',
             'branch_id' => 'required',
             'token' => 'required',
         ]);
@@ -1116,16 +1130,23 @@ class ApiController extends BaseController
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
 
-            $department = StaffDepartments::find($id);
-            $department->branch_id = $request->branch_id;
-            $department->name = $request->name;
-            $query = $department->save();
-
-            $success = [];
-            if ($query) {
-                return $this->successResponse($success, 'Department Details have Been updated');
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($staffConn->table('staff_departments')->where([['name', '=', $request->name],['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
             } else {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                // update data
+                $query = $staffConn->table('staff_departments')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Department Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
             }
         }
     }
@@ -1136,13 +1157,19 @@ class ApiController extends BaseController
         $id = $request->id;
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
+            'branch_id' => 'required',
             'id' => 'required',
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $query = StaffDepartments::find($id)->delete();
+            // $query = StaffDepartments::find($id)->delete();
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $staffConn->table('staff_departments')->where('id', $id)->delete();
+
             $success = [];
             if ($query) {
                 return $this->successResponse($success, 'Department have been deleted successfully');
