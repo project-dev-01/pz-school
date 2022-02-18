@@ -115,9 +115,9 @@
 
 
     <footer class="footer footer-alt">
-        2015 - <script>
+        2020 - <script>
             document.write(new Date().getFullYear())
-        </script> &copy; by <a href="https://aibots.my/" class="text-white-50">Aibots Sdn Bhd</a>
+        </script> &copy; by <a href="https://paxsuzen.com">Paxsuzen</a>
     </footer>
 
     <!-- Vendor js -->

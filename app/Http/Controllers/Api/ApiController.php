@@ -253,6 +253,7 @@ class ApiController extends BaseController
                 ->when($city_id, function ($query, $city_id) {
                     return $query->where('br.city_id', $city_id);
                 })
+                ->where('status',0)
                 ->get();
             return $this->successResponse($success, 'Branch record fetch successfully');
         }
@@ -331,8 +332,11 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
+            
+            $branch = Branches::find($id);
+            $branch->status = 2;
+            $query = $branch->save();
 
-            $query = Branches::find($id)->delete();
             $success = [];
             if ($query) {
                 return $this->successResponse($success, 'Branch have been deleted successfully');

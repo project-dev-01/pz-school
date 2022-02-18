@@ -22,5 +22,8 @@ class Branches extends Model
         'state_id',
         'city_id',
         'address',
+        'db_name',
+        'db_username',
+        'db_password',
     ];
 }

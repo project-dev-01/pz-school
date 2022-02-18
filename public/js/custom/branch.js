@@ -3,7 +3,7 @@ $(function () {
     var country_id = "";
     var state_id = "";
     var city_id = "";
-    branchTable(country_id,state_id,city_id);
+    branchTable(country_id, state_id, city_id);
 
 
     // change country
@@ -14,7 +14,7 @@ $(function () {
         $("#filter").find("#city").empty();
         $("#filter").find("#city").append('<option value="">Select City</option>');
         $.post(getStates, { country_id: country_id }, function (res) {
-            console.log('df',res)
+            console.log('df', res)
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
                     $("#filter").find("#state").append('<option value="' + val.id + '">' + val.name + '</option>');
@@ -115,34 +115,52 @@ $(function () {
         state_id = $("#state").val();
         city_id = $("#city").val();
 
-        console.log('dh',country_id)
-        
-        branchTable(country_id,state_id,city_id);
+        console.log('dh', country_id)
+
+        branchTable(country_id, state_id, city_id);
     });
 
+    // rules validation
+    $("#branch-form").validate({
+        rules: {
+            name: "required",
+            school_name: "required",
+            email: {
+                required: true,
+                email: true
+            },
+            password: "required",
+            mobile_no: "required",
+            currency: "required",
+
+            symbol: "required",
+            country: "required",
+            state: "required",
+            city: "required",
+            db_name: "required",
+            db_username: "required",
+            // db_password: "required",
+            address: "required"
+        }
+    });
+    //
     $('#branch-form').on('submit', function (e) {
         e.preventDefault();
-        var form = this;
-        $.ajax({
-            url: $(form).attr('action'),
-            method: $(form).attr('method'),
-            data: new FormData(form),
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            beforeSend: function () {
-                $(form).find('span.error-text').text('');
-            },
-            success: function (data) {
-                if (data.code == 0) {
-                    $.each(data.error, function (prefix, val) {
-                        $(form).find('span.' + prefix + '_error').text(val[0]);
-                    });
-                } else {
+        var branchCheck = $("#branch-form").valid();
+        if (branchCheck === true) {
+            var form = this;
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (data) {
                     console.log("------")
                     console.log(data)
                     if (data.code == 200) {
-                        $('#branch-table').DataTable().ajax.reload(null, false);
+                        // $('#branch-table').DataTable().ajax.reload(null, false);
                         $('#branch-form')[0].reset();
                         toastr.success(data.message);
                         // $('[href="#branch-list-tab"]').click();
@@ -150,16 +168,14 @@ $(function () {
                     } else {
                         toastr.error(data.message);
                     }
-
                 }
-            }
-        });
+            });
+        }
     });
-    
+
 
     // get all assign teacher table
-    function branchTable(country,state,city)
-    {
+    function branchTable(country, state, city) {
         $('#branch-table').DataTable({
             processing: true,
             bDestroy: true,
@@ -177,25 +193,25 @@ $(function () {
                 dataType: "json",
                 // data: { month:getSelectedMonth },
                 // data: formData,
-                data:{country_id:country,state_id:state,city_id:city},
+                data: { country_id: country, state_id: state, city_id: city },
                 type: "GET",
                 // contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
                 // processData: true, // NEEDED, DON'T OMIT THIS
                 // headers: {
                 // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 // },
-                "dataSrc": function(json) {
-                console.log("losing json");
-                console.log(json);
-                return json.data;
+                "dataSrc": function (json) {
+                    console.log("losing json");
+                    console.log(json);
+                    return json.data;
                 },
-                error: function(error) {
-                console.log("error")
-                console.log(error)
-                // noDataAvailable(error);
+                error: function (error) {
+                    console.log("error")
+                    console.log(error)
+                    // noDataAvailable(error);
                 }
             },
-            
+
             "pageLength": 5,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
@@ -256,8 +272,20 @@ $(function () {
         }).on('draw', function () {
         });
     }
-    
 
+    // rules validation
+    $("#edit-branch-form").validate({
+        rules: {
+            name: "required",
+            school_name: "required",
+            mobile_no: "required",
+            currency: "required",
+            symbol: "required",
+            country: "required",
+            state: "required",
+            city: "required",
+        }
+    });
     // update branch-form
     $('#edit-branch-form').on('submit', function (e) {
         e.preventDefault();
@@ -269,23 +297,13 @@ $(function () {
             processData: false,
             dataType: 'json',
             contentType: false,
-            beforeSend: function () {
-                $(form).find('span.error-text').text('');
-            },
             success: function (data) {
-                if (data.code == 0) {
-                    $.each(data.error, function (prefix, val) {
-                        $(form).find('span.' + prefix + '_error').text(val[0]);
-                    });
+                if (data.code == 200) {
+                    $('#edit-branch-form')[0].reset();
+                    toastr.success(data.message);
+                    window.location.href = branchShow;
                 } else {
-                    if (data.code == 200) {
-                        $('#edit-branch-form')[0].reset();
-                        toastr.success(data.message);
-                        window.location.href = branchShow;
-                    } else {
-                        toastr.error(data.message);
-                    }
-
+                    toastr.error(data.message);
                 }
             }
         });

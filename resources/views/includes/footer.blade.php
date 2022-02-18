@@ -116,8 +116,11 @@
 <script src="{{ asset('js/highcharts/highcharts.js') }}"></script>
 <!-- add date range picker -->
 <script type="text/javascript" src="{{ asset('js/daterangepicker/daterangepicker.min.js') }}"></script>
-<!-- Init js -->
+
+<!-- add jquery validation -->
 <script src="{{ asset('js/pages/bootstrap-tables.init.js') }}"></script>
+<!-- Init js -->
+<script src="{{ asset('js/validation/validation.js') }}"></script>
 <script>
     toastr.options.preventDuplicates = true;
     $.ajaxSetup({
@@ -200,7 +203,6 @@
 <script src="{{ asset('js/custom/user_list.js') }}"></script>
 <script src="{{ asset('js/custom/settings.js') }}"></script> -->
 <script src="{{ asset('js/custom/section.js') }}"></script>
-<script src="{{ asset('js/custom/branch.js') }}"></script>
 <script src="{{ asset('js/custom/classes.js') }}"></script>
 <script src="{{ asset('js/custom/department.js') }}"></script>
 <script src="{{ asset('js/custom/event_type.js') }}"></script>

@@ -55,7 +55,7 @@
                                             <div class="form-group row">
                                                 <label for="email" class="col-3 col-form-label">Email<span class="text-danger">*</span></label>
                                                 <div class="col-9">
-                                                    <input type="email" class="form-control" id="email" name="email" value="{{$branch['email']}}" placeholder="Enter Email">
+                                                    <input type="email" class="form-control" id="email" readonly name="email" value="{{$branch['email']}}" placeholder="Enter Email">
                                                     <span class="text-danger error-text email_error"></span>
                                                 </div>
                                             </div>
@@ -172,4 +172,7 @@
     <!-- end row -->
 
 </div> <!-- container -->
+@endsection
+@section('scripts')
+<script src="{{ asset('js/custom/branch.js') }}"></script>
 @endsection

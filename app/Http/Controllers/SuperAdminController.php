@@ -143,6 +143,9 @@ class SuperAdminController extends Controller
             'state' => 'required',
             'city' => 'required',
             'address' => 'required',
+            'db_name' => 'required',
+            'db_username' => 'required',
+            'password' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -159,7 +162,11 @@ class SuperAdminController extends Controller
                 'country_id' => $request->country,
                 'state_id' => $request->state,
                 'city_id' => $request->city,
-                'address' => $request->address
+                'address' => $request->address,
+                'db_name' => $request->db_name,
+                'db_username' => $request->db_username,
+                'db_password' => $request->db_password,
+                'password' => $request->password
             ];
             $response = Helper::PostMethod(config('constants.api.branch_add'), $data);
             return $response;
