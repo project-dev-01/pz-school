@@ -288,7 +288,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <span class="fas fa-university " id="span-parent"></span>
+                        <span class="fas fa-university " id="span-parent"></span>
                         <span class="header-title mb-3" id="span-parent"> Bank Details
                             <hr id="hr">
                         </span>
@@ -337,7 +337,7 @@
                                     <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend">
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
 
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">

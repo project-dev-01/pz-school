@@ -1463,11 +1463,12 @@ class ApiController extends BaseController
     // getEmployeeList
     public function getEmployeeList(Request $request)
     {
-        $Staff = DB::table('staffs as s')
-            ->select('s.*', 'b.name as branch_name', 'dp.name as department_name', 'ds.name as designation_name')
-            ->join('branches as b', 's.branch_id', '=', 'b.id')
-            ->join('staff_departments as dp', 's.department', '=', 'dp.id')
-            ->join('staff_designations as ds', 's.designation', '=', 'ds.id')
+        // create new connection
+        $Connection = $this->createNewConnection($request->branch_id);
+        $Staff = $Connection->table('staffs as s')
+            ->select('s.*', 'dp.name as department_name', 'ds.name as designation_name')
+            ->join('staff_departments as dp', 's.department_id', '=', 'dp.id')
+            ->join('staff_designations as ds', 's.designation_id', '=', 'ds.id')
             ->get();
         return $this->successResponse($Staff, 'Staff record fetch successfully');
     }
