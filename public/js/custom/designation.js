@@ -1,41 +1,41 @@
 $(function () {
+
+    // rules validation
+    $("#designation-form").validate({
+        rules: {
+            name: "required",
+        }
+    });
     // add designation
     $('#designation-form').on('submit', function (e) {
         e.preventDefault();
-        var form = this;
-        $.ajax({
-            url: $(form).attr('action'),
-            method: $(form).attr('method'),
-            data: new FormData(form),
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            beforeSend: function () {
-                $(form).find('span.error-text').text('');
-            },
-            success: function (data) {
-                if (data.code == 0) {
-                    $.each(data.error, function (prefix, val) {
-                        $(form).find('span.' + prefix + '_error').text(val[0]);
-                    });
-                } else {
+        var designationCheck = $("#designation-form").valid();
+        if (designationCheck === true) {
+            var form = this;
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (data) {
                     if (data.code == 200) {
                         $('#designation-table').DataTable().ajax.reload(null, false);
-                        $('.addDesignation').modal('hide');
-                        $('.addDesignation').find('form')[0].reset();
+                        $('.editDesignation').modal('hide');
+                        $('.editDesignation').find('form')[0].reset();
                         toastr.success(data.message);
                     } else {
-                        $('.addDesignation').modal('hide');
-                        $('.addDesignation').find('form')[0].reset();
+                        $('.editDesignation').modal('hide');
+                        $('.editDesignation').find('form')[0].reset();
                         toastr.error(data.message);
                     }
-
                 }
-            }
-        });
+            });
+        }
     });
 
-    // get all designation table
+    // get all designation table for admin
     var table = $('#designation-table').DataTable({
         processing: true,
         info: true,
@@ -49,10 +49,6 @@ $(function () {
             {
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex'
-            },
-            {
-                data: 'branch_name',
-                name: 'branch_name'
             },
             {
                 data: 'name',
@@ -81,27 +77,27 @@ $(function () {
             $('.editDesignation').modal('show');
         }, 'json');
     });
+
+     // rules validation
+     $("#edit-designation-form").validate({
+        rules: {
+            name: "required",
+        }
+    });
     // update designation
     $('#edit-designation-form').on('submit', function (e) {
         e.preventDefault();
-        var form = this;
-        $.ajax({
-            url: $(form).attr('action'),
-            method: $(form).attr('method'),
-            data: new FormData(form),
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            beforeSend: function () {
-                $(form).find('span.error-text').text('');
-            },
-            success: function (data) {
-                if (data.code == 0) {
-                    $.each(data.error, function (prefix, val) {
-                        $(form).find('span.' + prefix + '_error').text(val[0]);
-                    });
-                } else {
-
+        var designationCheck = $("#edit-designation-form").valid();
+        if (designationCheck === true) {
+            var form = this;
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (data) {
                     if (data.code == 200) {
                         $('#designation-table').DataTable().ajax.reload(null, false);
                         $('.editDesignation').modal('hide');
@@ -113,8 +109,8 @@ $(function () {
                         toastr.error(data.message);
                     }
                 }
-            }
-        });
+            });
+        }
     });
     // delete DesignationDelete
     $(document).on('click', '#deleteDesignationBtn', function () {

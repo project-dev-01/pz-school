@@ -289,24 +289,27 @@ $(function () {
     // update branch-form
     $('#edit-branch-form').on('submit', function (e) {
         e.preventDefault();
-        var form = this;
-        $.ajax({
-            url: $(form).attr('action'),
-            method: $(form).attr('method'),
-            data: new FormData(form),
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            success: function (data) {
-                if (data.code == 200) {
-                    $('#edit-branch-form')[0].reset();
-                    toastr.success(data.message);
-                    window.location.href = branchShow;
-                } else {
-                    toastr.error(data.message);
+        var branchCheck = $("#edit-branch-form").valid();
+        if (branchCheck === true) {
+            var form = this;
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (data) {
+                    if (data.code == 200) {
+                        $('#edit-branch-form')[0].reset();
+                        toastr.success(data.message);
+                        window.location.href = branchShow;
+                    } else {
+                        toastr.error(data.message);
+                    }
                 }
-            }
-        });
+            });
+        }
     });
 
     // delete branch

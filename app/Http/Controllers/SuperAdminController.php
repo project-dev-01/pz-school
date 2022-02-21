@@ -132,45 +132,24 @@ class SuperAdminController extends Controller
     public function addBranch(Request $request)
     {
 
-        $validator = \Validator::make($request->all(), [
-            'name' => 'required',
-            'school_name' => 'required',
-            'email' => 'required',
-            'mobile_no' => 'required',
-            'currency' => 'required',
-            'symbol' => 'required',
-            'country' => 'required',
-            'state' => 'required',
-            'city' => 'required',
-            'address' => 'required',
-            'db_name' => 'required',
-            'db_username' => 'required',
-            'password' => 'required'
-        ]);
-
-        if (!$validator->passes()) {
-            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
-        } else {
-
-            $data = [
-                'name' => $request->name,
-                'school_name' => $request->school_name,
-                'email' => $request->email,
-                'mobile_no' => $request->mobile_no,
-                'currency' => $request->currency,
-                'symbol' => $request->symbol,
-                'country_id' => $request->country,
-                'state_id' => $request->state,
-                'city_id' => $request->city,
-                'address' => $request->address,
-                'db_name' => $request->db_name,
-                'db_username' => $request->db_username,
-                'db_password' => $request->db_password,
-                'password' => $request->password
-            ];
-            $response = Helper::PostMethod(config('constants.api.branch_add'), $data);
-            return $response;
-        }
+        $data = [
+            'name' => $request->name,
+            'school_name' => $request->school_name,
+            'email' => $request->email,
+            'mobile_no' => $request->mobile_no,
+            'currency' => $request->currency,
+            'symbol' => $request->symbol,
+            'country_id' => $request->country,
+            'state_id' => $request->state,
+            'city_id' => $request->city,
+            'address' => $request->address,
+            'db_name' => $request->db_name,
+            'db_username' => $request->db_username,
+            'db_password' => $request->db_password,
+            'password' => $request->password
+        ];
+        $response = Helper::PostMethod(config('constants.api.branch_add'), $data);
+        return $response;
     }
     //
     // get branch 
@@ -231,39 +210,22 @@ class SuperAdminController extends Controller
     public function updateBranchDetails(Request $request)
     {
 
-        $validator = \Validator::make($request->all(), [
-            'name' => 'required',
-            'school_name' => 'required',
-            'email' => 'required',
-            'mobile_no' => 'required',
-            'currency' => 'required',
-            'symbol' => 'required',
-            'country' => 'required',
-            'state' => 'required',
-            'city' => 'required',
-            'address' => 'required',
-        ]);
 
-        if (!$validator->passes()) {
-            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
-        } else {
-
-            $data = [
-                'id' => $request->id,
-                'name' => $request->name,
-                'school_name' => $request->school_name,
-                'email' => $request->email,
-                'mobile_no' => $request->mobile_no,
-                'currency' => $request->currency,
-                'symbol' => $request->symbol,
-                'country_id' => $request->country,
-                'state_id' => $request->state,
-                'city_id' => $request->city,
-                'address' => $request->address
-            ];
-            $response = Helper::PostMethod(config('constants.api.branch_update'), $data);
-            return $response;
-        }
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name,
+            'school_name' => $request->school_name,
+            'email' => $request->email,
+            'mobile_no' => $request->mobile_no,
+            'currency' => $request->currency,
+            'symbol' => $request->symbol,
+            'country_id' => $request->country,
+            'state_id' => $request->state,
+            'city_id' => $request->city,
+            'address' => $request->address
+        ];
+        $response = Helper::PostMethod(config('constants.api.branch_update'), $data);
+        return $response;
     }
 
     // delete branch

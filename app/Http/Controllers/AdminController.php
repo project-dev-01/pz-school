@@ -889,11 +889,88 @@ class AdminController extends Controller
         return view('admin.department.index');
     }
      
-    // get designation
-    public function designation()
-    {
-        return view('admin.designation.index');
-    }
+     // get Designation 
+     public function Designation()
+     {
+         $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+         return view(
+             'admin.designation.index',
+             [
+                 'branches' => $getBranches['data']
+             ]
+         );
+     }
+ 
+     //add Designation
+     public function addDesignation(Request $request)
+     {
+         
+        $data = [
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.designation_add'), $data);
+        return $response;
+     }
+     // get Designation 
+     public function getDesignationList(Request $request)
+     {
+ 
+         $response = Helper::GetMethod(config('constants.api.designation_list'));
+ 
+         return DataTables::of($response['data'])
+ 
+             ->addIndexColumn()
+             ->addColumn('actions', function ($row) {
+                 return '<div class="button-list">
+                                 <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editDesignationBtn"><i class="fe-edit"></i></a>
+                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteDesignationBtn"><i class="fe-trash-2"></i></a>
+                         </div>';
+             })
+ 
+             ->rawColumns(['actions'])
+             ->make(true);
+     }
+     // get designation row details
+     public function getDesignationDetails(Request $request)
+     {
+         $data = [
+             'id' => $request->id,
+         ];
+         $response = Helper::PostMethod(config('constants.api.designation_details'), $data);
+         return $response;
+     }
+     // update designation
+     public function updateDesignation(Request $request)
+     {
+         
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.designation_update'), $data);
+        return $response;
+     }
+ 
+     // delete designation
+     public function deleteDesignation(Request $request)
+     {
+ 
+         $id = $request->id;
+         $validator = \Validator::make($request->all(), [
+             'id' => 'required',
+         ]);
+ 
+         if (!$validator->passes()) {
+             return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+         } else {
+             $data = [
+                 'id' => $id
+             ];
+             $response = Helper::PostMethod(config('constants.api.designation_delete'), $data);
+             return $response;
+         }
+     }
 
     // get Category
     public function getCategory()
@@ -977,10 +1054,48 @@ class AdminController extends Controller
     {
         return view('admin.employee.list');
     }
+    //add employee
+    public function addEmployee(Request $request)
+    {
+        $data = [
+            'branch_id' => $request->branch_id,
+            'role' => $request->role,
+            'joining_date' => $request->joining_date,
+            'designation' => $request->designation,
+            'department' => $request->department,
+            'qualification' => $request->qualification,
+            'name' => $request->name,
+            'gender' => $request->gender,
+            'religion' => $request->religion,
+            'blood_group' => $request->blood_group,
+            'birthday' => $request->birthday,
+            'mobile_no' => $request->mobile_no,
+            'present_address' => $request->present_address,
+            'permanent_address' => $request->permanent_address,
+            'email' => $request->email,
+            'password' => $request->password,
+            'confirm_password' => $request->confirm_password,
+            'facebook_url' => $request->facebook_url,
+            'twitter_url' => $request->twitter_url,
+            'linkedin_url' => $request->linkedin_url,
+        ];
+        $response = Helper::PostMethod(config('constants.api.employee_add'), $data);
+        return $response;
+    }
     // show employee
     public function showEmployee()
     {
-        return view('admin.employee.index');
+        $data = [
+            'status' => 0
+        ];
+        $roles = Helper::PostMethod(config('constants.api.roles'), $data);
+        //    dd($roles);
+        return view(
+            'admin.employee.index',
+            [
+                'roles' => $roles['data'],
+            ]
+        );
     }
     public function studentEntry()
     {

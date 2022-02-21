@@ -1182,11 +1182,8 @@ class ApiController extends BaseController
     public function addDesignation(Request $request)
     {
 
-        $branch_id = $request->branch_id;
         $validator = \Validator::make($request->all(), [
-            'name' => Rule::unique('staff_designations')->where(function ($query) use ($branch_id) {
-                return $query->where('branch_id', $branch_id);
-            }),
+            'name' => 'required',
             'branch_id' => 'required',
             'token' => 'required',
         ]);
@@ -1194,55 +1191,71 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-
-            $designation = new StaffDesignation();
-            $designation->branch_id = $request->branch_id;
-            $designation->name = $request->name;
-            $query = $designation->save();
-
-            $success = [];
-            if (!$query) {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($staffConn->table('staff_designations')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
             } else {
-                return $this->successResponse($success, 'Designation has been successfully saved');
+                // insert data
+                $query = $staffConn->table('staff_designations')->insert([
+                    'name' => $request->name,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Designation has been successfully saved');
+                }
             }
         }
     }
     // getDesignationList
     public function getDesignationList(Request $request)
     {
-        $Designation = DB::table('staff_designations as s')
-            ->select('s.*', 'b.name as branch_name')
-            ->join('branches as b', 's.branch_id', '=', 'b.id')
-            ->get();
-        return $this->successResponse($Designation, 'Designation record fetch successfully');
-    }
-    // getDesignationDetails row details
-    public function getDesignationDetails(Request $request)
-    {
         $validator = \Validator::make($request->all(), [
-            'id' => 'required',
+            'branch_id' => 'required',
             'token' => 'required',
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $Designation = $staffConn->table('staff_designations')->get();
+            return $this->successResponse($Designation, 'Designation record fetch successfully');
+        }
+    }
+    // getDesignationDetails row details
+    public function getDesignationDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
             $id = $request->id;
-            $designDetails = StaffDesignation::find($id);
-            return $this->successResponse($designDetails, 'Designation row fetch successfully');
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $desDetails = $staffConn->table('staff_designations')->where('id', $id)->first();
+            return $this->successResponse($desDetails, 'Designation row fetch successfully');
         }
     }
     // update updateDesignation
     public function updateDesignation(Request $request)
     {
         $id = $request->id;
-
-        $branch_id = $request->branch_id;
         $validator = \Validator::make($request->all(), [
-            'name' => Rule::unique('staff_designations')->where(function ($query) use ($branch_id, $id) {
-                return $query->where('branch_id', $branch_id)->where('id', '!=', $id);
-            }),
+            'name' => 'required',
             'branch_id' => 'required',
             'token' => 'required',
         ]);
@@ -1251,16 +1264,23 @@ class ApiController extends BaseController
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
 
-            $designation = StaffDesignation::find($id);
-            $designation->branch_id = $request->branch_id;
-            $designation->name = $request->name;
-            $query = $designation->save();
-
-            $success = [];
-            if ($query) {
-                return $this->successResponse($success, 'Designation Details have Been updated');
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($staffConn->table('staff_designations')->where([['name', '=', $request->name],['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
             } else {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                // update data
+                $query = $staffConn->table('staff_designations')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Designation Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
             }
         }
     }
@@ -1271,13 +1291,18 @@ class ApiController extends BaseController
         $id = $request->id;
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
+            'branch_id' => 'required',
             'id' => 'required',
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $query = StaffDesignation::find($id)->delete();
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $staffConn->table('staff_designations')->where('id', $id)->delete();
+
             $success = [];
             if ($query) {
                 return $this->successResponse($success, 'Designation have been deleted successfully');

@@ -329,11 +329,11 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
         // designation routes
         Route::get('designation/index', [AdminController::class, 'Designation'])->name('admin.designation');
-        Route::post('designation/add', [AdminController::class, 'addDesignation'])->name('designation.add');
-        Route::get('designation/list', [AdminController::class, 'getDesignationList']);
-        Route::post('designation/designation-details', [AdminController::class, 'getDesignationDetails'])->name('designation.details');
-        Route::post('designation/update', [AdminController::class, 'updateDesignation'])->name('designation.update');
-        Route::post('designation/delete', [AdminController::class, 'deleteDesignation'])->name('designation.delete');
+        Route::post('designation/add', [AdminController::class, 'addDesignation'])->name('admin.designation.add');
+        Route::get('designation/list', [AdminController::class, 'getDesignationList'])->name('admin.designation.list');
+        Route::post('designation/designation-details', [AdminController::class, 'getDesignationDetails'])->name('admin.designation.details');
+        Route::post('designation/update', [AdminController::class, 'updateDesignation'])->name('admin.designation.update');
+        Route::post('designation/delete', [AdminController::class, 'deleteDesignation'])->name('admin.designation.delete');
 
 
         // Employee routes

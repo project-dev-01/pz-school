@@ -32,7 +32,7 @@
                 </p>
 
                 <div class="table-responsive">
-                    <table class="table mb-0" id="">
+                    <table class="table mb-0" id="designation-table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -40,18 +40,6 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Teacher</td>
-                                <td> 
-                                    <div class="button-list">
-                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
-                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
                     </table>
                 </div>
             </div> <!-- end card-box -->
@@ -59,7 +47,23 @@
     </div>
     <!--- end row -->
     @include('admin.designation.add')
+    @include('admin.designation.edit')
 
 </div>
 <!-- container -->
+@endsection
+@section('scripts')
+<script>
+    toastr.options.preventDuplicates = true;
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+// designation routes
+    var designationList = "{{ route('admin.designation.list') }}";
+    var designationDetails = "{{ route('admin.designation.details') }}";
+    var designationDelete = "{{ route('admin.designation.delete') }}";
+</script>
+<script src="{{ asset('js/custom/designation.js') }}"></script>
 @endsection

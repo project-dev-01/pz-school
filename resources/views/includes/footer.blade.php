@@ -178,11 +178,6 @@
     var departmentDetails = "{{ route('department.details') }}";
     var departmentDelete = "{{ route('department.delete') }}";
 
-    // designation routes
-    var designationList = "{{ route('designation.list') }}";
-    var designationDetails = "{{ route('designation.details') }}";
-    var designationDelete = "{{ route('designation.delete') }}";
-
     // employee
     var empDepartment = "{{ config('constants.api.emp_department') }}";
     var empDesignation = "{{ config('constants.api.emp_designation') }}";
@@ -207,7 +202,6 @@
 <script src="{{ asset('js/custom/department.js') }}"></script>
 <script src="{{ asset('js/custom/event_type.js') }}"></script>
 <script src="{{ asset('js/custom/event.js') }}"></script>
-<script src="{{ asset('js/custom/designation.js') }}"></script>
 <script src="{{ asset('js/custom/employee.js') }}"></script>
 <script src="{{ asset('js/custom/assign_teacher.js') }}"></script>
 <script src="{{ asset('js/custom/settings.js') }}"></script>

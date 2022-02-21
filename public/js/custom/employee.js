@@ -37,35 +37,59 @@ $(function () {
         }, 'json');
     });
 
+    // rules validation
+    $("#addEmployeeForm").validate({
+        rules: {
+            role: "required",
+            joining_date: "required",
+            email: {
+                required: true,
+                email: true
+            },
+            designation: "required",
+            department: "required",
+            qualification: "required",
+
+            name: "required",
+            gender: "required",
+            religion: "required",
+            blood_group: "required",
+            birthday: "required",
+            mobile_no: "required",
+            present_address: "required",
+            permanent_address: "required",
+            password: "required",
+            confirm_password: "required",
+            facebook_url: "required",
+            twitter_url: "required",
+            linkedin_url: "required"
+        }
+    });
     // save assign teacher
     $('#addEmployeeForm').on('submit', function(e){
         e.preventDefault();
+        console.log('id',"chd")
+        var employeeCheck = $("#addEmployeeForm").valid();
+        if (employeeCheck === true) {
         var form = this;
-        $.ajax({
-            url:$(form).attr('action'),
-            method:$(form).attr('method'),
-            data:new FormData(form),
-            processData:false,
-            dataType:'json',
-            contentType:false,
-            beforeSend: function(){
-                 $(form).find('span.error-text').text('');
-            },
-            success: function(data){
-                if (data.code == 0) {
-                    $.each(data.error, function (prefix, val) {
-                        $(form).find('span.' + prefix + '_error').text(val[0]);
-                    });
-                } else {
+            $.ajax({
+                url:$(form).attr('action'),
+                method:$(form).attr('method'),
+                data:new FormData(form),
+                processData:false,
+                dataType:'json',
+                contentType:false,
+                success: function(data){
                     if (data.code == 200) {
                         $('.addEmployeeForm').find('form')[0].reset();
                         toastr.success(data.message);
                         window.location.href = employeeShow;
-                    } 
+                    } else {
+                        toastr.error(data.message);
+                    }
                 }
-                
-            }
-        });
+            });
+        }
     });
 
     // get all Employee table
