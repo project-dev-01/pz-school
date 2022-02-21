@@ -46,7 +46,6 @@ class AuthController extends Controller
         $userDetails = $response->json();
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
-
             if ($userDetails['data']['subsDetails']) {
                 if ($userDetails['data']['user']['role_id'] != 1) {
                     $request->session()->put('user_id', $userDetails['data']['user']['id']);
@@ -56,9 +55,10 @@ class AuthController extends Controller
                     $request->session()->put('name', $userDetails['data']['user']['name']);
                     $request->session()->put('email', $userDetails['data']['user']['email']);
                     $request->session()->put('role_name', $userDetails['data']['role_name']);
-                    $request->session()->put('db_name', $userDetails['data']['subsDetails']['db_name']);
-                    $request->session()->put('db_username', $userDetails['data']['subsDetails']['db_username']);
-                    $request->session()->put('db_password', $userDetails['data']['subsDetails']['db_password']);
+                    $request->session()->put('branch_id', $userDetails['data']['subsDetails']['id']);
+                    // $request->session()->put('db_name', $userDetails['data']['subsDetails']['db_name']);
+                    // $request->session()->put('db_username', $userDetails['data']['subsDetails']['db_username']);
+                    // $request->session()->put('db_password', $userDetails['data']['subsDetails']['db_password']);
                 }
 
                 if ($userDetails['data']['user']['role_id'] == 2) {
@@ -140,9 +140,10 @@ class AuthController extends Controller
             session()->pull('email');
             session()->pull('role_name');
             session()->pull('user_id');
-            session()->pull('db_name');
-            session()->pull('db_username');
-            session()->pull('db_password');
+            session()->pull('branch_id');
+            // session()->pull('db_name');
+            // session()->pull('db_username');
+            // session()->pull('db_password');
             $request->session()->flush();
             return redirect()->route('admin.login');
         } else {

@@ -113,6 +113,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('change-profile-picture',[ApiController::class,'updatePicture']);
     Route::post('change-password',[ApiController::class,'changePassword']);
     Route::post('update-profile-info',[ApiController::class,'updateProfileInfo']);
-
+    // create database_migrate
+    
+    Route::post('database_migrate',[CommonController::class,'databaseMigrate']);
     
 });

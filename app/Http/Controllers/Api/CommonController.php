@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\BaseController as BaseController;
+use App\Models\Branches;
 use App\Models\Cities;
 use App\Models\Countries;
 use App\Models\States;
+// db connection
+use App\Helpers\DatabaseConnection;
 
 class CommonController extends BaseController
 {
@@ -45,5 +48,11 @@ class CommonController extends BaseController
             $success = Cities::where('state_id', $request->state_id)->get();
             return $this->successResponse($success, 'Citites record fetch successfully');
         }
+    }
+    function databaseMigrate(Request $request){
+        $params = Branches::find($request->branch_id);
+        $staffConn = DatabaseConnection::databaseMigrate($params);
+        return $this->successResponse([], 'Migrated successfully');
+
     }
 }

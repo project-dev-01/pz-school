@@ -1,18 +1,33 @@
 @extends('layouts.admin-layout')
-@section('title','LeaveManagement')
+@section('title','Leave Management')
 @section('content')
 
  <!-- Start Content-->
 <div class="container-fluid">
+ <!-- start page title -->
+   <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                </div>
+                <h4 class="page-title">Leave Can Avail</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
     
 <div class="row">
     <div class="col-xl-12">
+	
         <div class="card">
-        <div class="card-body">                
-                <span class="fas fa-cubes" id="span-parent"></span>
-                    <span class="header-title mb-3" id="span-parent">Leave Can Avail
-                    <hr id="hr"></span>
-                    <div class="border mt-4 mt-lg-0 rounded">
+		<ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                             <span data-feather="airplay" class="icon-dual" id="span-parent"></span>  Leave Can Avail
+                            <h4>
+                    </li>
+					</ul><br> 
+        <div class="card-body">
                     <div class="row">
                         <div class="col-lg-3" id="top-header">
                             <div class="card-box">
@@ -69,13 +84,13 @@
                         <div class="col-lg-3" id="top-header">
                             <div class="card-box">
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-8">
                                         <div class="">
                                             <i class="fas fa-compass font-24"></i>
                                             <p class="text-muted mb-1">Compassionate</p>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <div class="text-right">
                                             <h3 class="my-1" style="color:blue"><span data-plugin="counterup">1</span></h3>
 
@@ -119,16 +134,18 @@
                         </div>
                     </div><!-- end col-->
                 </div> <!-- end row -->
-
-
                 <!--General Details -->
-                <span class="fab fa-audible" id="span-parent"></span>
-                    <span class="header-title mb-3" id="span-parent">General Details
-                    <hr id="hr"></span>
-                    <div class="row">
-        <div class="col-xl-12">
-            <div class="card">
+				<hr>
                 
+        <div class="row">
+        <div class="col-xl-12">           
+			<ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                             <span data-feather="folder" class="icon-dual" id="span-parent"></span> General Details
+                            <h4>
+                    </li>
+					</ul><br>                 
                 <div class="card-body">
                     <form id="demo-form" data-parsley-validate="" autocomplete="off">
                         <!--1st row-->
@@ -202,34 +219,29 @@
                         </div>
                          <!--3rd row-->
                          <br/>
-                         <div class="row">
-                            <div class="col-md-4">
-                            <button class="btn btn-primary-bl waves-effect waves-light" type="Save">Submit</button>
-                            </div>
-                            <div class="col-md-4">
-                                
-                              
-                            </div>                          
-                        </div>
+                        <div class="clearfix mt-4">
+                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Save</button>
+                                            </div>
                     </form>                 
 
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
          </div> <!-- end col -->
-        </div>                    
-                    
+		 <hr>
                 <!--Last Leave Taken -->
-                  <span class="fas fa-stream" id="span-parent"></span>
-                    <span class="header-title mb-3" id="span-parent">Leave History
-                    <hr id="hr"></span><br>
-                    <div class="border mt-4 mt-lg-0 rounded">
-                    <div class="row">
+           <div class="row">
         <div class="col-xl-12">
-            <div class="card">               
+		<ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                             <span data-feather="bookmark" class="icon-dual" id="span-parent"></span> Leave History
+                            <h4>
+                    </li>
+					</ul><br>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="card-box">
+                            <div class="">
                                 <div class="table-responsive">
                                     <table class="table table-bordered mb-0">
                                         <thead>
@@ -284,12 +296,7 @@
         </div> <!-- end col -->
     </div>
     </div>
-
+	</div>
     </div>
 
-        </div>
-    </div>
-</div>
-</div>
 @endsection
-
