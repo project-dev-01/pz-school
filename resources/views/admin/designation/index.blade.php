@@ -54,12 +54,6 @@
 @endsection
 @section('scripts')
 <script>
-    toastr.options.preventDuplicates = true;
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
 // designation routes
     var designationList = "{{ route('admin.designation.list') }}";
     var designationDetails = "{{ route('admin.designation.details') }}";

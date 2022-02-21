@@ -4,9 +4,6 @@
 <!-- Start Content-->
 <div class="container-fluid">
 
-    <!-- Start Content-->
-    <div class="container-fluid">
-
         <!-- start page title -->
         <div class="row">
             <div class="col-12">
@@ -29,7 +26,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table w-100 nowrap" id="admin-employee-table">
+                            <table class="table w-100 nowrap" id="employee-table">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -44,25 +41,6 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>James</td>
-                                        <td>James@gmail.com</td>
-                                        <td>+61542125</td>
-                                        <td>27/03/2021</td>
-                                        <td>01/01/2020</td>
-                                        <td>Staff</td>
-                                        <td>Teacher</td>
-                                        <td>12,North..</td>
-                                        <td>
-                                            <div class="button-list">
-                                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
-                                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
-                                            </div>
-                                        </td>
-                                    <tr>
-                                </tbody>
                             </table>
                         </div> <!-- end table-responsive-->
 
@@ -72,8 +50,14 @@
         </div>
         <!-- end row-->
 
-    </div> <!-- container -->
-
     <!-- end row -->
 </div> <!-- container -->
+@endsection
+
+@section('scripts')
+<script>
+// employee
+    var employeeList = "{{ route('admin.employee.list') }}";
+</script>
+<script src="{{ asset('js/custom/employee.js') }}"></script>
 @endsection

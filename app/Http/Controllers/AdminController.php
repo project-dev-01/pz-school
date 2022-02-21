@@ -1082,9 +1082,41 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.employee_add'), $data);
         return $response;
     }
+
+
+     // get Employee 
+     public function getEmpList(Request $request)
+     {
+        $response = Helper::GetMethod(config('constants.api.employee_list'));
+ 
+         return DataTables::of($response['data'])
+ 
+             ->addIndexColumn()
+             ->addColumn('actions', function ($row) {
+                 return '<div class="button-list">
+                                 <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editEmployeeBtn"><i class="fe-edit"></i></a>
+                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteEmployeeBtn"><i class="fe-trash-2"></i></a>
+                         </div>';
+             })
+ 
+             ->rawColumns(['actions'])
+             ->make(true);
+     }
+     // get Employee row details
+     public function getEmployeeDetails(Request $request)
+     {
+         $data = [
+             'id' => $request->id,
+         ];
+         $response = Helper::PostMethod(config('constants.api.employee_details'), $data);
+         return $response;
+     }
+    
     // show employee
     public function showEmployee()
     {
+        $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+
         $data = [
             'status' => 0
         ];
@@ -1093,6 +1125,7 @@ class AdminController extends Controller
         return view(
             'admin.employee.index',
             [
+                'branches' => $getBranches['data'],
                 'roles' => $roles['data'],
             ]
         );

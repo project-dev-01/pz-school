@@ -178,11 +178,7 @@
     var departmentDetails = "{{ route('department.details') }}";
     var departmentDelete = "{{ route('department.delete') }}";
 
-    // employee
-    var empDepartment = "{{ config('constants.api.emp_department') }}";
-    var empDesignation = "{{ config('constants.api.emp_designation') }}";
-    var employeeList = "{{ route('employee.list') }}";
-    var employeeShow = "{{ route('super_admin.listemployee') }}";
+    
     // settings url
     var profileUpdateStg = "{{ config('constants.api.change_profile_picture') }}";
     var updateSettingSession = "{{ route('settings.updateSettingSession') }}";
@@ -202,7 +198,6 @@
 <script src="{{ asset('js/custom/department.js') }}"></script>
 <script src="{{ asset('js/custom/event_type.js') }}"></script>
 <script src="{{ asset('js/custom/event.js') }}"></script>
-<script src="{{ asset('js/custom/employee.js') }}"></script>
 <script src="{{ asset('js/custom/assign_teacher.js') }}"></script>
 <script src="{{ asset('js/custom/settings.js') }}"></script>
 <script src="{{ asset('js/custom/user_list.js') }}"></script>

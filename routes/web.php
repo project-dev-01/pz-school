@@ -340,8 +340,9 @@ Route::group(['prefix' => 'schoolcrm'], function () {
     
         Route::get('employee/employeelist', [AdminController::class, 'listEmployee'])->name('admin.listemployee');
         Route::get('employee/index', [AdminController::class, 'showEmployee'])->name('admin.employee');
-        Route::post('employee/add', [AdminController::class, 'addEmployee'])->name('employee.add');
-        Route::get('employee/list', [AdminController::class, 'getEmployeeList']);
+        Route::post('employee/add', [AdminController::class, 'addEmployee'])->name('admin.employee.add');
+        Route::get('employee/list', [AdminController::class, 'getEmpList'])->name('admin.employee.list');
+        Route::get('employee/employee-details', [AdminController::class, 'getEmployeeDetails'])->name('admin.employee.details');
 
         // Settings
         Route::get('settings', [SuperAdminController::class, 'settings'])->name('admin.settings');

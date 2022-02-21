@@ -68,7 +68,6 @@ $(function () {
     // save assign teacher
     $('#addEmployeeForm').on('submit', function(e){
         e.preventDefault();
-        console.log('id',"chd")
         var employeeCheck = $("#addEmployeeForm").valid();
         if (employeeCheck === true) {
         var form = this;
@@ -92,7 +91,7 @@ $(function () {
         }
     });
 
-    // get all Employee table
+    // get all designation table for admin
     var table = $('#employee-table').DataTable({
         processing: true,
         info: true,
@@ -106,10 +105,6 @@ $(function () {
             {
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex'
-            },
-            {
-                data: 'branch_name',
-                name: 'branch_name'
             },
             {
                 data: 'name',
