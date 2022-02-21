@@ -1133,7 +1133,7 @@ class ApiController extends BaseController
             // create new connection
             $staffConn = $this->createNewConnection($request->branch_id);
             // check exist name
-            if ($staffConn->table('staff_departments')->where([['name', '=', $request->name],['id', '!=', $id]])->count() > 0) {
+            if ($staffConn->table('staff_departments')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
                 return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
             } else {
                 // update data
@@ -1322,8 +1322,11 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $StaffDepartment = StaffDepartments::where('branch_id', $request->branch_id)->get();
-            return $this->successResponse($StaffDepartment, 'Department row fetch successfully');
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $StaffDepartment = $staffConn->table('staff_departments')->get();
+            return $this->successResponse($StaffDepartment, 'Department record fetch successfully');
         }
     }
     // employee designation
@@ -1337,23 +1340,24 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $StaffDesig = StaffDesignation::where('branch_id', $request->branch_id)->get();
-            return $this->successResponse($StaffDesig, 'Designation row fetch successfully');
+            // create new connection
+            $staffDesignation = $this->createNewConnection($request->branch_id);
+            // get data
+            $StaffDesig = $staffDesignation->table('staff_designations')->get();
+            return $this->successResponse($StaffDesig, 'Designation record fetch successfully');
         }
     }
 
     // add Employee
     public function addEmployee(Request $request)
     {
-
-        $branch_id = $request->branch_id;
         $validator = \Validator::make($request->all(), [
             'branch_id' => 'required',
             'token' => 'required',
-            'role' => 'required',
+            'role_id' => 'required',
             'joining_date' => 'required',
-            'designation' => 'required',
-            'department' => 'required',
+            'designation_id' => 'required',
+            'designation_id' => 'required',
             'qualification' => 'required',
             'name' => 'required',
             'gender' => 'required',
@@ -1365,53 +1369,101 @@ class ApiController extends BaseController
             'permanent_address' => 'required',
             'email' => 'required',
             'password' => 'required|min:6',
-            'confirm_password' => 'required|same:password|min:6',
-            'facebook_url' => 'required',
-            'twitter_url' => 'required',
-            'linkedin_url' => 'required',
+            'confirm_password' => 'required|same:password|min:6'
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
 
-            $employee = new Staff();
-            $employee->branch_id = $request->branch_id;
-            $employee->joining_date = $request->joining_date;
-            $employee->designation = $request->designation;
-            $employee->department = $request->department;
-            $employee->qualification = $request->qualification;
-            $employee->name = $request->name;
-            $employee->gender = $request->gender;
-            $employee->religion = $request->religion;
-            $employee->blood_group = $request->blood_group;
-            $employee->birthday = $request->birthday;
-            $employee->mobile_no = $request->mobile_no;
-            $employee->present_address = $request->present_address;
-            $employee->permanent_address = $request->permanent_address;
-            $employee->email = $request->email;
-            $employee->facebook_url = $request->facebook_url;
-            $employee->twitter_url = $request->twitter_url;
-            $employee->linkedin_url = $request->linkedin_url;
+            if ($Connection->table('staffs')->where('email', '=', $request->email)->count() > 0) {
+                return $this->send422Error('Email Already Exist', ['error' => 'Email Already Exist']);
+            } else {
+                // add bank details validation
+                if ($request->skip_bank_details ==1) {
+                    $validator = \Validator::make($request->all(), [
+                        'bank_name' => 'required',
+                        'holder_name' => 'required',
+                        'bank_branch' => 'required',
+                        'bank_address' => 'required',
+                        'ifsc_code' => 'required',
+                        'account_no' => 'required',
+                    ]);
+                    if (!$validator->passes()) {
+                        return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+                    }
+                }
+
+                $picture = null;
+                if (!empty($request->file('photo'))) {
+                    $picture = $this->uploadUserProfile($request);
+                }
+                // update data
+                $Staffid = $Connection->table('staffs')->insertGetId([
+                    // 'staff_id' => $request->staff_id,
+                    'name' => $request->name,
+                    'department_id' => $request->department_id,
+                    'designation_id' => $request->designation_id,
+                    'qualification' => $request->qualification,
+                    'joining_date' => $request->joining_date,
+                    'birthday' => $request->birthday,
+                    'gender' => $request->gender,
+                    'religion' => $request->religion,
+                    'blood_group' => $request->blood_group,
+                    'present_address' => $request->present_address,
+                    'permanent_address' => $request->permanent_address,
+                    'mobile_no' => $request->mobile_no,
+                    'email' => $request->email,
+                    'photo' => $picture,
+                    'facebook_url' => $request->facebook_url,
+                    'linkedin_url' => $request->linkedin_url,
+                    'twitter_url' => $request->twitter_url,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$Staffid) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong add employee']);
+                } else {
+                    // add bank details
+                    if ($request->skip_bank_details ==1) {
+                        $Staffid = $Connection->table('staff_bank_accounts')->insert([
+                            'staff_id' => $Staffid,
+                            'bank_name' => $request->bank_name,
+                            'holder_name' => $request->holder_name,
+                            'bank_branch' => $request->bank_branch,
+                            'bank_address' => $request->bank_address,
+                            'ifsc_code' => $request->ifsc_code,
+                            'account_no' => $request->account_no,
+                            'created_at' => date("Y-m-d H:i:s")
+                        ]);
+                    }
+                    // add picture
+                    $user = new User();
+                    $user->name = $request->name;
+                    $user->user_id = $Staffid;
+                    $user->role_id = $request->role_id;
+                    $user->branch_id = $request->branch_id;
+                    $user->picture = $picture;
+                    $user->email = $request->email;
+                    $user->password = bcrypt($request->password);
+                    $query = $user->save();
+                    $success = [];
+                    if (!$query) {
+                        return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                    } else {
+                        return $this->successResponse($success, 'Employee has been successfully saved');
+                    }
+                }
+            }
+            // get data
+            // $StaffDepartment = $employee->table('staffs')->get();
 
             // $imageName = time().'.'.$request->image->extension();  
             // $employee->photo = $imageName;
             //     $request->image->move(public_path('images/staff'), $imageName);
-            $query = $employee->save();
-
-
-            $user = new User();
-            $user->user_id = $employee->id;
-            $user->role_id = $request->role;
-            $user->email = $request->email;
-            $user->password = bcrypt($request->password);
-            $user->save();
-            $success = [];
-            if (!$query) {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-            } else {
-                return $this->successResponse($success, 'Employee has been successfully saved');
-            }
+            // $query = $employee->save();
         }
     }
 
