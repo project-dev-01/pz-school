@@ -159,5 +159,24 @@ class BaseController extends Controller
         $staffConn = DatabaseConnection::setConnection($params);
         return $staffConn;
     }
-    
+    // upload user profile
+    function uploadUserProfile(Request $request)
+    {
+        $path = 'users/images/';
+        $file = $request->file('photo');
+        $new_name = 'UIMG_' . date('Ymd') . uniqid() . '.jpg';
+
+        //Upload new image
+        $upload = $file->move(public_path($path), $new_name);
+
+        if (!$upload) {
+            return null;
+        } else {
+            if (!$upload) {
+                return null;
+            } else {
+                return $new_name;
+            }
+        }
+    }
 }
