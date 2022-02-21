@@ -1457,13 +1457,6 @@ class ApiController extends BaseController
                     }
                 }
             }
-            // get data
-            // $StaffDepartment = $employee->table('staffs')->get();
-
-            // $imageName = time().'.'.$request->image->extension();  
-            // $employee->photo = $imageName;
-            //     $request->image->move(public_path('images/staff'), $imageName);
-            // $query = $employee->save();
         }
     }
 
