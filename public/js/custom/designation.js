@@ -67,13 +67,9 @@ $(function () {
     $(document).on('click', '#editDesignationBtn', function () {
         var id = $(this).data('id');
         $('.editDesignation').find('form')[0].reset();
-        $('.editDesignation').find('span.error-text').text('');
         $.post(designationDetails, { id: id }, function (data) {
-            console.log("888888888")
-            console.log(data)
             $('.editDesignation').find('input[name="id"]').val(data.data.id);
             $('.editDesignation').find('input[name="name"]').val(data.data.name);
-            $('.editDesignation').find('select[name="branch_id"]').val(data.data.branch_id);
             $('.editDesignation').modal('show');
         }, 'json');
     });

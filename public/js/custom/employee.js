@@ -19,9 +19,9 @@ $(function () {
         }
     });
     // reverse dob
-    function convertDigitIn(str){
+    function convertDigitIn(str) {
         return str.split('-').reverse().join('-');
-     }
+    }
     // empDepartment
     $('#empBranchName').on('change', function (e) {
         e.preventDefault();
@@ -50,70 +50,57 @@ $(function () {
     });
 
     // rules validation
-    // $("#addEmployeeForm").validate({
-    //     rules: {
-    //         role_id: "required",
-    //         joining_date: "required",
-    //         email: {
-    //             required: true,
-    //             email: true
-    //         },
-    //         designation_id: "required",
-    //         department_id: "required",
-    //         qualification: "required",
+    $("#addEmployeeForm").validate({
+        rules: {
+            role_id: "required",
+            joining_date: "required",
+            email: {
+                required: true,
+                email: true
+            },
+            designation_id: "required",
+            department_id: "required",
+            qualification: "required",
 
-    //         name: "required",
-    //         gender: "required",
-    //         religion: "required",
-    //         blood_group: "required",
-    //         birthday: "required",
-    //         mobile_no: "required",
-    //         present_address: "required",
-    //         permanent_address: "required",
-    //         // password : {
-    //         //     minlength : 5
-    //         // },
-    //         // confirm_password : {
-    //         //     minlength : 5,
-    //         //     equalTo : "#password"
-    //         // }
-    //         password: {
-    //             required: true,
-    //             minlength: 5
-    //         },
-    //         confirm_password: {
-    //             required: true,
-    //             minlength: 5
-    //         },
-    //         bank_name:"required",
-    //         holder_name:"required",
-    //         bank_branch:"required",
-    //         bank_address:"required",
-    //         ifsc_code:"required",
-    //         account_no:"required"
-    //     }
-    // });
-    // save assign teacher
+            name: "required",
+            gender: "required",
+            religion: "required",
+            blood_group: "required",
+            birthday: "required",
+            mobile_no: "required",
+            present_address: "required",
+            permanent_address: "required",
+            // password : {
+            //     minlength : 5
+            // },
+            // confirm_password : {
+            //     minlength : 5,
+            //     equalTo : "#password"
+            // }
+            password: {
+                required: true,
+                minlength: 5
+            },
+            confirm_password: {
+                required: true,
+                minlength: 5
+            },
+            bank_name:"required",
+            holder_name:"required",
+            bank_branch:"required",
+            bank_address:"required",
+            ifsc_code:"required",
+            account_no:"required"
+        }
+    });
+    // save employee
     $('#addEmployeeForm').on('submit', function (e) {
         e.preventDefault();
-        console.log('id', "chd")
-        // if($("#skip_bank_details").prop('checked') == false){
-        //     console.log("fdfs")
-        //     $("#addEmployeeForm").validate({
-        //         rules: {
-        //             bank_name: "required",
-        //             holder_name: "required",
-        //             bank_branch: "required",
-        //             bank_address: "required",
-        //             ifsc_code: "required",
-        //             account_no: "required",
-        //         }
-        //     });
-        // }
-        // var employeeCheck = $("#addEmployeeForm").valid();
-        // if (employeeCheck === true) {
+
+        var employeeCheck = $("#addEmployeeForm").valid();
+        if (employeeCheck === true) {
             var skip_bank_details = 1;
-            if($("#skip_bank_details").prop('checked') == true){
+            if ($("#skip_bank_details").prop('checked') == true) {
                 skip_bank_details = 0;
             }
 
@@ -147,12 +134,6 @@ $(function () {
 
             // Attach file
             formData.append('photo', $('input[type=file]')[0].files[0]);
-            // Display the key/value pairs
-            for (var pair of formData.entries()) {
-                console.log(pair[0] + ', ' + pair[1]);
-            }
-            // return false;
-
 
             var form = this;
             $.ajax({
@@ -172,10 +153,10 @@ $(function () {
                     }
                 }
             });
-        // }
+        }
     });
 
-    // get all Employee table
+    // get all designation table for admin
     var table = $('#employee-table').DataTable({
         processing: true,
         info: true,
@@ -189,10 +170,6 @@ $(function () {
             {
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex'
-            },
-            {
-                data: 'branch_name',
-                name: 'branch_name'
             },
             {
                 data: 'name',

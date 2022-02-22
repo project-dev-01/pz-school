@@ -178,11 +178,7 @@
     var departmentDetails = "{{ route('department.details') }}";
     var departmentDelete = "{{ route('department.delete') }}";
 
-    // employee
-    var empDepartment = "{{ config('constants.api.emp_department') }}";
-    var empDesignation = "{{ config('constants.api.emp_designation') }}";
-    var employeeList = "{{ route('employee.list') }}";
-    var employeeShow = "{{ route('super_admin.listemployee') }}";
+    
     // settings url
     var profileUpdateStg = "{{ config('constants.api.change_profile_picture') }}";
     var updateSettingSession = "{{ route('settings.updateSettingSession') }}";

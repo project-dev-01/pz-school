@@ -1,119 +1,125 @@
 $(function () {
+
+    departmentTable();
+    $("#departmentForm").validate({
+        rules: {
+            department_name: "required"
+        }
+    });
+    $("#edit-department-form").validate({
+        rules: {
+            name: "required"
+        }
+    });
     // add department
-    $('#department-form').on('submit', function (e) {
+    $('#departmentForm').on('submit', function (e) {
         e.preventDefault();
-        var form = this;
-        $.ajax({
-            url: $(form).attr('action'),
-            method: $(form).attr('method'),
-            data: new FormData(form),
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            beforeSend: function () {
-                $(form).find('span.error-text').text('');
-            },
-            success: function (data) {
-                if (data.code == 0) {
-                    $.each(data.error, function (prefix, val) {
-                        $(form).find('span.' + prefix + '_error').text(val[0]);
-                    });
-                } else {
+        var deptCheck = $("#departmentForm").valid();
+        if (deptCheck === true) {
+            var form = this;
+
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (data) {
+                    // console.log("------")
+                    console.log(data)
                     if (data.code == 200) {
                         $('#department-table').DataTable().ajax.reload(null, false);
                         $('.addDepartment').modal('hide');
                         $('.addDepartment').find('form')[0].reset();
                         toastr.success(data.message);
                     } else {
-                        $('.addDepartment').modal('hide');
-                        $('.addDepartment').find('form')[0].reset();
                         toastr.error(data.message);
                     }
-
                 }
-            }
-        });
+            });
+        }
     });
 
     // get all department table
-    var table = $('#department-table').DataTable({
-        processing: true,
-        info: true,
-        ajax: departmentList,
-        "pageLength": 5,
-        "aLengthMenu": [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"]
-        ],
-        columns: [
-            {
-                data: 'DT_RowIndex',
-                name: 'DT_RowIndex'
-            },
-            {
-                data: 'branch_name',
-                name: 'branch_name'
-            },
-            {
-                data: 'name',
-                name: 'name'
-            },
-            {
-                data: 'actions',
-                name: 'actions',
-                orderable: false,
-                searchable: false
-            },
-        ]
-    }).on('draw', function () {
-    });
+    function departmentTable() {
+         $('#department-table').DataTable({
+            processing: true,
+            info: true,
+            ajax: departmentList,
+            "pageLength": 5,
+            "aLengthMenu": [
+                [5, 10, 25, 50, -1],
+                [5, 10, 25, 50, "All"]
+            ],
+            columns: [
+                {
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                }
+               ,
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'actions',
+                    name: 'actions',
+                    orderable: false,
+                    searchable: false
+                },
+            ]
+        }).on('draw', function () {
+        });
+    }
     // get row
     $(document).on('click', '#editDepartmentBtn', function () {
         var id = $(this).data('id');
-        $('.editDepartment').find('form')[0].reset();
-        $('.editDepartment').find('span.error-text').text('');
+     
+        $('.editDepartment').find('form')[0].reset();   
         $.post(departmentDetails, { id: id }, function (data) {
             $('.editDepartment').find('input[name="id"]').val(data.data.id);
             $('.editDepartment').find('input[name="name"]').val(data.data.name);
-            $('.editDepartment').find('select[name="branch_id"]').val(data.data.branch_id);
             $('.editDepartment').modal('show');
         }, 'json');
+        console.log(id);
     });
     // update department
     // update section
     $('#edit-department-form').on('submit', function (e) {
         e.preventDefault();
-        var form = this;
-        $.ajax({
-            url: $(form).attr('action'),
-            method: $(form).attr('method'),
-            data: new FormData(form),
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            beforeSend: function () {
-                $(form).find('span.error-text').text('');
-            },
-            success: function (data) {
-                if (data.code == 0) {
-                    $.each(data.error, function (prefix, val) {
-                        $(form).find('span.' + prefix + '_error').text(val[0]);
-                    });
-                } else {
-
-                    if (data.code == 200) {
-                        $('#department-table').DataTable().ajax.reload(null, false);
-                        $('.editDepartment').modal('hide');
-                        $('.editDepartment').find('form')[0].reset();
-                        toastr.success(data.message);
+        var edt_deptCheck = $("#edit-department-form").valid();
+        if (edt_deptCheck === true) {
+      
+            var form = this;
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (data) {
+                    if (data.code == 0) {
+                        $.each(data.error, function (prefix, val) {
+                            $(form).find('span.' + prefix + '_error').text(val[0]);
+                        });
                     } else {
-                        $('.editDepartment').modal('hide');
-                        $('.editDepartment').find('form')[0].reset();
-                        toastr.error(data.message);
+
+                        if (data.code == 200) {
+                            $('#department-table').DataTable().ajax.reload(null, false);
+                            $('.editDepartment').modal('hide');
+                            $('.editDepartment').find('form')[0].reset();
+                            toastr.success(data.message);
+                        } else {
+                            $('.editDepartment').modal('hide');
+                            $('.editDepartment').find('form')[0].reset();
+                            toastr.error(data.message);
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
     });
     // delete departmentDelete
     $(document).on('click', '#deleteDepartmentBtn', function () {

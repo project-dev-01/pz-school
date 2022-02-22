@@ -7,16 +7,9 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <form id="departmentForm" method="post" action="#" autocomplete="off">
-                    @csrf
-                    
-                    <div class="form-group">
-                        <label for="branch_name">Branch Name</label>
-                        <select class="form-control" id="branch_name" name="branch_name">
-                            <option value="">Choose Branch</option>
-                        </select>
-                        <span class="text-danger error-text branch_name_error"></span>
-                    </div>
+                <form id="departmentForm" method="post" action="{{ route('admin.department.add') }}" autocomplete="off">
+                    @csrf                   
+                 
                     <div class="form-group">
                         <label for="department_name">Department Name</label>
                         <input type="text" id="department_name" name="department_name" class="form-control" placeholder="Enter Department name">
@@ -24,7 +17,7 @@
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="button" id="sectionSubmit" class="btn btn-success waves-effect waves-light">Submit</button>
+                        <button type="submit"  class="btn btn-success waves-effect waves-light">Submit</button>
                     </div>
 
                 </form>
