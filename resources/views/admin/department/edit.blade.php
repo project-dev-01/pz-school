@@ -7,19 +7,9 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <form id="edit-department-form" method="post" action="{{ route('department.update') }}" autocomplete="off">
+                <form id="edit-department-form" method="post" action="{{ route('admin.department.update') }}" autocomplete="off">
                     @csrf
-                    <input type="hidden" name="id">
-                    <div class="form-group">
-                        <label for="name">Branch Name <span class="text-danger">*</span></label>
-                        <select class="form-control" name="branch_id">
-                            <option value="">Select Branch</option>
-                            @foreach($branches as $b)
-                            <option value="{{$b['id']}}">{{$b['name']}}</option>
-                            @endforeach
-                        </select>
-                        <span class="text-danger error-text branch_id_error"></span>
-                    </div>
+                    <input type="hidden" name="id">           
                     <div class="form-group">
                         <label for="name">Department Name <span class="text-danger">*</span></label>
                         <input type="text" id="name" name="name" class="form-control" placeholder="Enter Department name">

@@ -21,43 +21,55 @@ use App\Models\User;
 class AdminController extends Controller
 {
     // forum screen pages start
-    public function forumIndex(){
+    public function forumIndex()
+    {
         return view('admin.forum.index');
     }
-    public function forumPageSingleTopic(){
+    public function forumPageSingleTopic()
+    {
         return view('admin.forum.page-single-topic');
     }
-    public function forumPageCreateTopic(){
+    public function forumPageCreateTopic()
+    {
         return view('admin.forum.page-create-topic');
     }
-    public function forumPageSingleUser(){
+    public function forumPageSingleUser()
+    {
         return view('admin.forum.page-single-user');
     }
-    public function forumPageSingleThreads(){
+    public function forumPageSingleThreads()
+    {
         return view('admin.forum.page-single-threads');
     }
-    public function forumPageSingleReplies(){
+    public function forumPageSingleReplies()
+    {
         return view('admin.forum.page-single-replies');
     }
-    public function forumPageSingleFollowers(){
+    public function forumPageSingleFollowers()
+    {
         return view('admin.forum.page-single-followers');
     }
-    public function forumPageSingleCategories(){
+    public function forumPageSingleCategories()
+    {
         return view('admin.forum.page-single-categories');
     }
-    public function forumPageCategories(){
+    public function forumPageCategories()
+    {
         return view('admin.forum.page-categories');
     }
-    public function forumPageCategoriesSingle(){
+    public function forumPageCategoriesSingle()
+    {
         return view('admin.forum.page-categories-single');
     }
-    public function forumPageTabs(){
+    public function forumPageTabs()
+    {
         return view('admin.forum.page-tabs');
     }
-    public function forumPageTabGuidelines(){
+    public function forumPageTabGuidelines()
+    {
         return view('admin.forum.page-tabs-guidelines');
     }
-    
+
     // forum screen pages end
     //
     public function index()
@@ -110,101 +122,104 @@ class AdminController extends Controller
     }
 
     // update profile info
-    public function updateProfileInfo(Request $request){
+    public function updateProfileInfo(Request $request)
+    {
         // dd($request->address);
- 
-        $validator = \Validator::make($request->all(),[
-            'name'=>'required',
-            'email'=> 'required|email|unique:users,email,'.Auth::user()->id,
-            'address'=>'required',
-        ]);
-        if(!$validator->passes()){
-            return response()->json(['status'=>0,'error'=>$validator->errors()->toArray()]);
-        }else{
-             $query = User::find(Auth::user()->id)->update([
-                  'name'=>$request->name,
-                  'email'=>$request->email,
-                  'address'=>$request->address,
-             ]);
 
-             if(!$query){
-                 return response()->json(['status'=>0,'msg'=>'Something went wrong.']);
-             }else{
-                 return response()->json(['status'=>1,'msg'=>'Your profile info has been update successfuly.']);
-             }
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . Auth::user()->id,
+            'address' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $query = User::find(Auth::user()->id)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'address' => $request->address,
+            ]);
+
+            if (!$query) {
+                return response()->json(['status' => 0, 'msg' => 'Something went wrong.']);
+            } else {
+                return response()->json(['status' => 1, 'msg' => 'Your profile info has been update successfuly.']);
+            }
         }
     }
 
     // update profile picture
-    public function updatePicture(Request $request){
-        
+    public function updatePicture(Request $request)
+    {
+
         $path = 'users/images/';
         $file = $request->file('admin_image');
-        $new_name = 'UIMG_'.date('Ymd').uniqid().'.jpg';
+        $new_name = 'UIMG_' . date('Ymd') . uniqid() . '.jpg';
 
         //Upload new image
         $upload = $file->move(public_path($path), $new_name);
-        
-        if( !$upload ){
-            return response()->json(['status'=>0,'msg'=>'Something went wrong, upload new picture failed.']);
-        }else{
+
+        if (!$upload) {
+            return response()->json(['status' => 0, 'msg' => 'Something went wrong, upload new picture failed.']);
+        } else {
             //Get Old picture
             $oldPicture = User::find(Auth::user()->id)->getAttributes()['picture'];
 
-            if( $oldPicture != '' ){
-                if( \File::exists(public_path($path.$oldPicture))){
-                    \File::delete(public_path($path.$oldPicture));
+            if ($oldPicture != '') {
+                if (\File::exists(public_path($path . $oldPicture))) {
+                    \File::delete(public_path($path . $oldPicture));
                 }
             }
 
             //Update DB
-            $update = User::find(Auth::user()->id)->update(['picture'=>$new_name]);
+            $update = User::find(Auth::user()->id)->update(['picture' => $new_name]);
 
-            if( !$upload ){
-                return response()->json(['status'=>0,'msg'=>'Something went wrong, updating picture in db failed.']);
-            }else{
-                return response()->json(['status'=>1,'msg'=>'Your profile picture has been updated successfully']);
+            if (!$upload) {
+                return response()->json(['status' => 0, 'msg' => 'Something went wrong, updating picture in db failed.']);
+            } else {
+                return response()->json(['status' => 1, 'msg' => 'Your profile picture has been updated successfully']);
             }
         }
     }
 
     // change password
-    public function changePassword(Request $request){
+    public function changePassword(Request $request)
+    {
         //Validate form
-        $validator = \Validator::make($request->all(),[
-            'oldpassword'=>[
-                'required', function($attribute, $value, $fail){
-                    if( !\Hash::check($value, Auth::user()->password) ){
+        $validator = \Validator::make($request->all(), [
+            'oldpassword' => [
+                'required', function ($attribute, $value, $fail) {
+                    if (!\Hash::check($value, Auth::user()->password)) {
                         return $fail(__('The current password is incorrect'));
                     }
                 },
                 'min:8',
                 'max:30'
-             ],
-             'newpassword'=>'required|min:8|max:30',
-             'cnewpassword'=>'required|same:newpassword'
-         ],[
-             'oldpassword.required'=>'Enter your current password',
-             'oldpassword.min'=>'Old password must have atleast 8 characters',
-             'oldpassword.max'=>'Old password must not be greater than 30 characters',
-             'newpassword.required'=>'Enter new password',
-             'newpassword.min'=>'New password must have atleast 8 characters',
-             'newpassword.max'=>'New password must not be greater than 30 characters',
-             'cnewpassword.required'=>'ReEnter your new password',
-             'cnewpassword.same'=>'New password and Confirm new password must match'
-         ]);
+            ],
+            'newpassword' => 'required|min:8|max:30',
+            'cnewpassword' => 'required|same:newpassword'
+        ], [
+            'oldpassword.required' => 'Enter your current password',
+            'oldpassword.min' => 'Old password must have atleast 8 characters',
+            'oldpassword.max' => 'Old password must not be greater than 30 characters',
+            'newpassword.required' => 'Enter new password',
+            'newpassword.min' => 'New password must have atleast 8 characters',
+            'newpassword.max' => 'New password must not be greater than 30 characters',
+            'cnewpassword.required' => 'ReEnter your new password',
+            'cnewpassword.same' => 'New password and Confirm new password must match'
+        ]);
 
-        if( !$validator->passes() ){
-            return response()->json(['status'=>0,'error'=>$validator->errors()->toArray()]);
-        }else{
-             
-         $update = User::find(Auth::user()->id)->update(['password'=>\Hash::make($request->newpassword)]);
+        if (!$validator->passes()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
 
-         if( !$update ){
-             return response()->json(['status'=>0,'msg'=>'Something went wrong, Failed to update password in db']);
-         }else{
-             return response()->json(['status'=>1,'msg'=>'Your password has been changed successfully']);
-         }
+            $update = User::find(Auth::user()->id)->update(['password' => \Hash::make($request->newpassword)]);
+
+            if (!$update) {
+                return response()->json(['status' => 0, 'msg' => 'Something went wrong, Failed to update password in db']);
+            } else {
+                return response()->json(['status' => 1, 'msg' => 'Your password has been changed successfully']);
+            }
         }
     }
     //add New Class
@@ -232,17 +247,18 @@ class AdminController extends Controller
     }
 
     // get class row details
-    public function getClassDetails(Request $request){
+    public function getClassDetails(Request $request)
+    {
         $class_id = $request->class_id;
         $classDetails = Classes::find($class_id);
-        return response()->json(['details'=>$classDetails]);
+        return response()->json(['details' => $classDetails]);
     }
 
     // get class details
     public function getClassList(Request $request)
     {
         $classes = Classes::all();
-        
+
         return DataTables::of($classes)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
@@ -289,7 +305,7 @@ class AdminController extends Controller
     {
         $classID = $request->class_id;
         Classes::where('id', $classID)->delete();
-        return response()->json(['code'=>1, 'msg'=>'Class have been deleted from database']); 
+        return response()->json(['code' => 1, 'msg' => 'Class have been deleted from database']);
 
         // if ($query) {
         //     return response()->json(['code' => 1, 'msg' => 'Class has been deleted from database']);
@@ -308,9 +324,9 @@ class AdminController extends Controller
     public function getUserList(Request $request)
     {
         $users = User::join('roles', 'users.role_id', '=', 'roles.role_id')
-            ->where('users.role_id','!=',1)
-            ->get(['users.id','users.name', 'users.role_id', 'roles.role_name', 'roles.role_slug']);
-            // dd($users);
+            ->where('users.role_id', '!=', 1)
+            ->get(['users.id', 'users.name', 'users.role_id', 'roles.role_name', 'roles.role_slug']);
+        // dd($users);
         return DataTables::of($users)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
@@ -325,11 +341,12 @@ class AdminController extends Controller
     // show user page
     public function addUsers()
     {
-        $roleDetails = Role::select('role_id', 'role_name')->where('role_id','!=',1)->get();
+        $roleDetails = Role::select('role_id', 'role_name')->where('role_id', '!=', 1)->get();
         return view('admin.users.add', ['roleDetails' => $roleDetails]);
     }
     // add roleUser
-    public function addRoleUser(Request $request){
+    public function addRoleUser(Request $request)
+    {
 
         $validator = \Validator::make($request->all(), [
             'name' => 'required',
@@ -382,23 +399,24 @@ class AdminController extends Controller
         return view('admin.section.index');
     }
     // add section
-    public function addSection(Request $request){
+    public function addSection(Request $request)
+    {
 
-        $validator = \Validator::make($request->all(),[
-            'name'=>'required|unique:sections'
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required|unique:sections'
         ]);
 
-        if(!$validator->passes()){
-             return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
-        }else{
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
             $section = new Section();
             $section->name = $request->name;
             $query = $section->save();
 
-            if(!$query){
-                return response()->json(['code'=>0,'msg'=>'Something went wrong']);
-            }else{
-                return response()->json(['code'=>1,'msg'=>'New Section has been successfully saved']);
+            if (!$query) {
+                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
+            } else {
+                return response()->json(['code' => 1, 'msg' => 'New Section has been successfully saved']);
             }
         }
     }
@@ -421,68 +439,73 @@ class AdminController extends Controller
     }
 
     // get section row details
-    public function getSectionDetails(Request $request){
+    public function getSectionDetails(Request $request)
+    {
         $section_id = $request->section_id;
         $sectionDetails = Section::find($section_id);
-        return response()->json(['details'=>$sectionDetails]);
+        return response()->json(['details' => $sectionDetails]);
     }
     // update section
-    public function updateSectionDetails(Request $request){
+    public function updateSectionDetails(Request $request)
+    {
         $section_id = $request->sid;
 
-        $validator = \Validator::make($request->all(),[
-            'name'=>'required|unique:sections,name,'.$section_id
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required|unique:sections,name,' . $section_id
         ]);
 
-        if(!$validator->passes()){
-               return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
-        }else{
-             
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+
             $section = Section::find($section_id);
             $section->name = $request->name;
             $query = $section->save();
 
-            if($query){
-                return response()->json(['code'=>1, 'msg'=>'Section Details have Been updated']);
-            }else{
-                return response()->json(['code'=>0, 'msg'=>'Something went wrong']);
+            if ($query) {
+                return response()->json(['code' => 1, 'msg' => 'Section Details have Been updated']);
+            } else {
+                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
             }
         }
     }
     // delete Section
-    public function deleteSection(Request $request){
+    public function deleteSection(Request $request)
+    {
         $section_id = $request->section_id;
         Section::where('id', $section_id)->delete();
-        return response()->json(['code'=>1, 'msg'=>'Section have been deleted from database']); 
+        return response()->json(['code' => 1, 'msg' => 'Section have been deleted from database']);
     }
 
-     // section allocations
-    public function showSectionAllocation(){
+    // section allocations
+    public function showSectionAllocation()
+    {
         $classDetails = Classes::select('id', 'name')->get();
         $sectionDetails = Section::select('id', 'name')->get();
-        return view('admin.section_allocation.allocation', ['classDetails' => $classDetails,'sectionDetails' => $sectionDetails]);
+        return view('admin.section_allocation.allocation', ['classDetails' => $classDetails, 'sectionDetails' => $sectionDetails]);
     }
 
     // add section allocations
-    public function addSectionAllocation(Request $request){
+    public function addSectionAllocation(Request $request)
+    {
 
-        $validator = \Validator::make($request->all(),[
-            'class_name'=>'required',
-            'section_name'=>'required'
+        $validator = \Validator::make($request->all(), [
+            'class_name' => 'required',
+            'section_name' => 'required'
         ]);
 
-        if(!$validator->passes()){
-             return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
-        }else{
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
             $section = new SectionAllocation();
             $section->class_id = $request->class_name;
             $section->section_id = $request->section_name;
             $query = $section->save();
 
-            if(!$query){
-                return response()->json(['code'=>0,'msg'=>'Something went wrong']);
-            }else{
-                return response()->json(['code'=>1,'msg'=>'Section Allocation has been successfully saved']);
+            if (!$query) {
+                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
+            } else {
+                return response()->json(['code' => 1, 'msg' => 'Section Allocation has been successfully saved']);
             }
         }
     }
@@ -490,7 +513,7 @@ class AdminController extends Controller
     public function getSectionAllocationList(Request $request)
     {
         $sectionAllocation = DB::table('sections_allocations as sa')
-            ->select('sa.id','sa.class_id','sa.section_id','s.name as section_name','c.name as class_name','c.name_numeric')
+            ->select('sa.id', 'sa.class_id', 'sa.section_id', 's.name as section_name', 'c.name as class_name', 'c.name_numeric')
             ->join('sections as s', 'sa.section_id', '=', 's.id')
             ->join('classes as c', 'sa.class_id', '=', 'c.id')
             ->get();
@@ -510,65 +533,70 @@ class AdminController extends Controller
 
     // get getSectionAllocationDetails details
 
-    public function getSectionAllocationDetails(Request $request){
+    public function getSectionAllocationDetails(Request $request)
+    {
         $id = $request->id;
         $SectionAllocation = SectionAllocation::find($id);
-        return response()->json(['details'=>$SectionAllocation]);
+        return response()->json(['details' => $SectionAllocation]);
     }
 
     // update Section Allocations
 
-    public function updateSectionAllocation(Request $request){
+    public function updateSectionAllocation(Request $request)
+    {
         $id = $request->said;
 
-        $validator = \Validator::make($request->all(),[
-            'class_name'=>'required',
-            'section_name'=>'required'
+        $validator = \Validator::make($request->all(), [
+            'class_name' => 'required',
+            'section_name' => 'required'
         ]);
 
-        if(!$validator->passes()){
-               return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
-        }else{
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
 
             $section = SectionAllocation::find($id);
             $section->class_id = $request->class_name;
             $section->section_id = $request->section_name;
             $query = $section->save();
 
-            if($query){
-                return response()->json(['code'=>1, 'msg'=>'Section Allocation Details have Been updated']);
-            }else{
-                return response()->json(['code'=>0, 'msg'=>'Something went wrong']);
+            if ($query) {
+                return response()->json(['code' => 1, 'msg' => 'Section Allocation Details have Been updated']);
+            } else {
+                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
             }
         }
     }
 
     // delete deleteSectionAllocation
-    public function deleteSectionAllocation(Request $request){
+    public function deleteSectionAllocation(Request $request)
+    {
         $id = $request->id;
         SectionAllocation::where('id', $id)->delete();
-        return response()->json(['code'=>1, 'msg'=>'Section Allocation have been deleted from database']); 
+        return response()->json(['code' => 1, 'msg' => 'Section Allocation have been deleted from database']);
     }
 
     // show assign teacher
 
-    public function showAssignTeacher(){
+    public function showAssignTeacher()
+    {
         $classDetails = Classes::select('id', 'name')->get();
         $teacherDetails = User::select('id', 'name')->where('role_id', 3)->get();
-        return view('admin.assign_teacher.index', ['classDetails' => $classDetails,'teacherDetails' => $teacherDetails]);
+        return view('admin.assign_teacher.index', ['classDetails' => $classDetails, 'teacherDetails' => $teacherDetails]);
     }
     // get allocation section
 
-    public function getAllocationSection(Request $request){
+    public function getAllocationSection(Request $request)
+    {
         $class_id = $request->class_id;
 
         $classDetails = DB::table('sections_allocations as sa')
-            ->select('sa.id','sa.class_id','sa.section_id','s.name as section_name')
+            ->select('sa.id', 'sa.class_id', 'sa.section_id', 's.name as section_name')
             ->join('sections as s', 'sa.section_id', '=', 's.id')
             ->where('sa.class_id', $class_id)
             ->get();
-            
-        return response()->json(['code'=>1, 'data'=>$classDetails]); 
+
+        return response()->json(['code' => 1, 'data' => $classDetails]);
     }
     // get TeacherAllocation
     public function showTeacherAllocation()
@@ -576,17 +604,18 @@ class AdminController extends Controller
         return view('admin.assign_teacher.index');
     }
     // add section allocations
-    public function addTeacherAllocation(Request $request){
+    public function addTeacherAllocation(Request $request)
+    {
 
-        $validator = \Validator::make($request->all(),[
-            'class_name'=>'required',
-            'section_name'=>'required',
-            'class_teacher'=>'required'
+        $validator = \Validator::make($request->all(), [
+            'class_name' => 'required',
+            'section_name' => 'required',
+            'class_teacher' => 'required'
         ]);
 
-        if(!$validator->passes()){
-             return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
-        }else{
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
 
             $teacherAllocation = new TeacherAllocation();
             $teacherAllocation->class_id = $request->class_name;
@@ -594,10 +623,10 @@ class AdminController extends Controller
             $teacherAllocation->teacher_id = $request->class_teacher;
             $query = $teacherAllocation->save();
 
-            if(!$query){
-                return response()->json(['code'=>0,'msg'=>'Something went wrong']);
-            }else{
-                return response()->json(['code'=>1,'msg'=>'Teacher Allocation has been successfully saved']);
+            if (!$query) {
+                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
+            } else {
+                return response()->json(['code' => 1, 'msg' => 'Teacher Allocation has been successfully saved']);
             }
         }
     }
@@ -607,7 +636,7 @@ class AdminController extends Controller
     public function getTeacherAllocationList(Request $request)
     {
         $teacherAllocation = DB::table('teacher_allocations as ta')
-            ->select('ta.id','ta.class_id','ta.section_id','ta.teacher_id','s.name as section_name','c.name as class_name','u.name as teacher_name')
+            ->select('ta.id', 'ta.class_id', 'ta.section_id', 'ta.teacher_id', 's.name as section_name', 'c.name as class_name', 'u.name as teacher_name')
             ->join('sections as s', 'ta.section_id', '=', 's.id')
             ->join('classes as c', 'ta.class_id', '=', 'c.id')
             ->join('users as u', 'ta.teacher_id', '=', 'u.id')
@@ -626,18 +655,18 @@ class AdminController extends Controller
             ->make(true);
     }
 
-    
+
     public function eventType()
     {
         return view('admin.event_type.index');
     }
 
-    
+
     // get Even Type details
     public function getEventTypeList(Request $request)
     {
         $event_type = EventType::all();
-        
+
         return DataTables::of($event_type)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
@@ -650,7 +679,7 @@ class AdminController extends Controller
             ->rawColumns(['actions'])
             ->make(true);
     }
-    
+
     //add New Event Type
     public function addEventType(Request $request)
     {
@@ -672,96 +701,97 @@ class AdminController extends Controller
             }
         }
     }
-    
+
     // get Event Type row details
-    public function getEventType(Request $request){
+    public function getEventType(Request $request)
+    {
         // dd($request);
         $event_type_id = $request->event_type_id;
         $eventTypeDetails = EventType::find($event_type_id);
-        return response()->json(['details'=>$eventTypeDetails]);
+        return response()->json(['details' => $eventTypeDetails]);
     }
 
     // update Event Type
-    public function updateEventType(Request $request){
+    public function updateEventType(Request $request)
+    {
         $event_type_id = $request->event_type_id;
 
-        $validator = \Validator::make($request->all(),[
-            'name'=>'required|unique:sections,name,'.$event_type_id
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required|unique:sections,name,' . $event_type_id
         ]);
 
-        if(!$validator->passes()){
-               return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
-        }else{
-             
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+
             $event_type = EventType::find($event_type_id);
             $event_type->name = $request->name;
             $query = $event_type->save();
 
-            if($query){
-                return response()->json(['code'=>1, 'msg'=>'Event Type Details have Been updated']);
-            }else{
-                return response()->json(['code'=>0, 'msg'=>'Something went wrong']);
+            if ($query) {
+                return response()->json(['code' => 1, 'msg' => 'Event Type Details have Been updated']);
+            } else {
+                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
             }
         }
     }
 
     // delete Event Type
-    public function deleteEventType(Request $request){
+    public function deleteEventType(Request $request)
+    {
         $event_type_id = $request->event_type_id;
-        EventType::where('id',$event_type_id)->delete();
-        return response()->json(['code'=>1, 'msg'=>'Event Type have been deleted from database']); 
+        EventType::where('id', $event_type_id)->delete();
+        return response()->json(['code' => 1, 'msg' => 'Event Type have been deleted from database']);
     }
 
-      
+
     public function event()
     {
         $classDetails = Classes::select('id', 'name')->get();
-        $sectionDetails = SectionAllocation::select('sections_allocations.id','sections_allocations.class_id', 'sections_allocations.section_id','sections.name')->join('sections','sections.id','=','sections_allocations.section_id')->get();
+        $sectionDetails = SectionAllocation::select('sections_allocations.id', 'sections_allocations.class_id', 'sections_allocations.section_id', 'sections.name')->join('sections', 'sections.id', '=', 'sections_allocations.section_id')->get();
         // dd($docomuntOrders);
-        $type = EventType::select('id','name')->get();
-        return view('admin.event.index', ['type' => $type,'classDetails' => $classDetails,'sectionDetails' => $sectionDetails]);
+        $type = EventType::select('id', 'name')->get();
+        return view('admin.event.index', ['type' => $type, 'classDetails' => $classDetails, 'sectionDetails' => $sectionDetails]);
     }
 
-    
+
     // get Even Type details
     public function getEventList(Request $request)
     {
         $event = \DB::table("events")
-            ->select("events.*",\DB::raw("GROUP_CONCAT(classes.name) as classname"),'event_types.name as type','users.name as created_by')
-            ->leftjoin("classes",\DB::raw("FIND_IN_SET(classes.id,events.selected_list)"),">",\DB::raw("'0'"))
-            ->leftjoin('event_types','event_types.id','=','events.type')
-            ->leftjoin('users','users.id','=','events.created_by')
+            ->select("events.*", \DB::raw("GROUP_CONCAT(classes.name) as classname"), 'event_types.name as type', 'users.name as created_by')
+            ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,events.selected_list)"), ">", \DB::raw("'0'"))
+            ->leftjoin('event_types', 'event_types.id', '=', 'events.type')
+            ->leftjoin('users', 'users.id', '=', 'events.created_by')
             ->groupBy("events.id")
             ->get();
         // $event = Event::select('events.id','events.title','events.audience','event_types.name as type','events.start_date','events.end_date','events.status','users.name as created_by')
         //     ->join('users','users.id','=','events.created_by')
         //     ->join('event_types','event_types.id','=','events.type')
         //     ->get();
-            
+
         // $ch = Event::all(); data-plugin="switchery" data-color="#9261c6"
-    //    dd($teacherAllocation);
+        //    dd($teacherAllocation);
         return DataTables::of($event)
-        
+
             ->addIndexColumn()
             ->addColumn('classname', function ($row) {
                 $audience = $row->audience;
-                if($audience==1)
-                {
+                if ($audience == 1) {
                     return "Everyone";
-                }else{
-                    return "Class ".$row->classname;
+                } else {
+                    return "Class " . $row->classname;
                 }
             })
             ->addColumn('status', function ($row) {
-                
+
                 $status = $row->status;
-                if($status==1)
-                {
+                if ($status == 1) {
                     $result = "checked";
-                }else{
+                } else {
                     $result = "";
                 }
-                return '<input type="checkbox" '.$result.' data-id="' . $row->id . '"  id="publishEventBtn">';
+                return '<input type="checkbox" ' . $result . ' data-id="' . $row->id . '"  id="publishEventBtn">';
             })
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -770,10 +800,10 @@ class AdminController extends Controller
                         </div>';
             })
 
-            ->rawColumns(['status','actions'])
+            ->rawColumns(['status', 'actions'])
             ->make(true);
     }
-    
+
     //add New Event Type
     public function addEvent(Request $request)
     {
@@ -796,13 +826,11 @@ class AdminController extends Controller
             $event->type = $request->type;
             $event->audience = $request->audience;
 
-            if($request->audience==2)
-            {
+            if ($request->audience == 2) {
                 $event->selected_list = json_encode($request->class);
-            }elseif($request->audience==3)
-            {
+            } elseif ($request->audience == 3) {
                 $event->selected_list = json_encode($request->section);
-            }else{
+            } else {
                 $event->selected_list = NULL;
             }
 
@@ -823,39 +851,42 @@ class AdminController extends Controller
     }
 
     // get Event details
-    public function getEvent(Request $request){
+    public function getEvent(Request $request)
+    {
         // dd($request);
         $event_id = $request->event_id;
         $eventDetails = \DB::table("events")
-            ->select("events.*",\DB::raw("GROUP_CONCAT(classes.name) as classname"),'event_types.name as type','users.name as created_by')
-            ->leftjoin("classes",\DB::raw("FIND_IN_SET(classes.id,events.selected_list)"),">",\DB::raw("'0'"))
-            ->leftjoin('event_types','event_types.id','=','events.type')
-            ->leftjoin('users','users.id','=','events.created_by')
+            ->select("events.*", \DB::raw("GROUP_CONCAT(classes.name) as classname"), 'event_types.name as type', 'users.name as created_by')
+            ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,events.selected_list)"), ">", \DB::raw("'0'"))
+            ->leftjoin('event_types', 'event_types.id', '=', 'events.type')
+            ->leftjoin('users', 'users.id', '=', 'events.created_by')
             ->groupBy("events.id")
-            ->where('events.id',$event_id)->first();
+            ->where('events.id', $event_id)->first();
         // $eventDetails = Event::select('events.id','events.title','events.audience','event_types.name as type','events.start_date','events.end_date','events.status','users.name as created_by','events.remarks')
         //     ->join('users','users.id','=','events.created_by')
         //     ->join('event_types','event_types.id','=','events.type')
         //     ->find($event_id);
-        return response()->json(['details'=>$eventDetails]);
+        return response()->json(['details' => $eventDetails]);
     }
 
-      // delete Event 
-    public function deleteEvent(Request $request){
+    // delete Event 
+    public function deleteEvent(Request $request)
+    {
         $event_id = $request->event_id;
-        Event::where('id',$event_id)->delete();
-        return response()->json(['code'=>1, 'msg'=>'Event have been deleted from database']); 
+        Event::where('id', $event_id)->delete();
+        return response()->json(['code' => 1, 'msg' => 'Event have been deleted from database']);
     }
-     // Publish Event 
-    public function publishEvent(Request $request){
+    // Publish Event 
+    public function publishEvent(Request $request)
+    {
 
         $event = Event::find($request->event_id);
         $event->status = $request->value;
         $query = $event->save();
-       
-        return response()->json(['code'=>1, 'msg'=>'Event Updated Successfully']); 
+
+        return response()->json(['code' => 1, 'msg' => 'Event Updated Successfully']);
     }
-    
+
     public function admission()
     {
         return view('admin.admission.index');
@@ -865,7 +896,7 @@ class AdminController extends Controller
     {
         return view('admin.admission.import');
     }
-    
+
     public function parent()
     {
         return view('admin.parent.index');
@@ -875,7 +906,7 @@ class AdminController extends Controller
     {
         return view('admin.employee.index');
     }
-    
+
     public function homework()
     {
         return view('admin.homework.index');
@@ -888,61 +919,61 @@ class AdminController extends Controller
         // echo "nsdds";exit;
         return view('admin.department.index');
     }
-     
-     // get Designation 
-     public function Designation()
-     {
-         $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
-         return view(
-             'admin.designation.index',
-             [
-                 'branches' => $getBranches['data']
-             ]
-         );
-     }
- 
-     //add Designation
-     public function addDesignation(Request $request)
-     {
-         
+
+    // get Designation 
+    public function Designation()
+    {
+        $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+        return view(
+            'admin.designation.index',
+            [
+                'branches' => $getBranches['data']
+            ]
+        );
+    }
+
+    //add Designation
+    public function addDesignation(Request $request)
+    {
+
         $data = [
             'name' => $request->name
         ];
         $response = Helper::PostMethod(config('constants.api.designation_add'), $data);
         return $response;
-     }
-     // get Designation 
-     public function getDesignationList(Request $request)
-     {
- 
-         $response = Helper::GetMethod(config('constants.api.designation_list'));
- 
-         return DataTables::of($response['data'])
- 
-             ->addIndexColumn()
-             ->addColumn('actions', function ($row) {
-                 return '<div class="button-list">
+    }
+    // get Designation 
+    public function getDesignationList(Request $request)
+    {
+
+        $response = Helper::GetMethod(config('constants.api.designation_list'));
+
+        return DataTables::of($response['data'])
+
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
                                  <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editDesignationBtn"><i class="fe-edit"></i></a>
                                  <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteDesignationBtn"><i class="fe-trash-2"></i></a>
                          </div>';
-             })
- 
-             ->rawColumns(['actions'])
-             ->make(true);
-     }
-     // get designation row details
-     public function getDesignationDetails(Request $request)
-     {
-         $data = [
-             'id' => $request->id,
-         ];
-         $response = Helper::PostMethod(config('constants.api.designation_details'), $data);
-         return $response;
-     }
-     // update designation
-     public function updateDesignation(Request $request)
-     {
-         
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    // get designation row details
+    public function getDesignationDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.designation_details'), $data);
+        return $response;
+    }
+    // update designation
+    public function updateDesignation(Request $request)
+    {
+
         $data = [
             'id' => $request->id,
             'name' => $request->name
@@ -950,34 +981,34 @@ class AdminController extends Controller
 
         $response = Helper::PostMethod(config('constants.api.designation_update'), $data);
         return $response;
-     }
- 
-     // delete designation
-     public function deleteDesignation(Request $request)
-     {
- 
-         $id = $request->id;
-         $validator = \Validator::make($request->all(), [
-             'id' => 'required',
-         ]);
- 
-         if (!$validator->passes()) {
-             return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
-         } else {
-             $data = [
-                 'id' => $id
-             ];
-             $response = Helper::PostMethod(config('constants.api.designation_delete'), $data);
-             return $response;
-         }
-     }
+    }
+
+    // delete designation
+    public function deleteDesignation(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $id
+            ];
+            $response = Helper::PostMethod(config('constants.api.designation_delete'), $data);
+            return $response;
+        }
+    }
 
     // get Category
     public function getCategory()
     {
         return view('admin.hostel.category');
     }
-    
+
     // get Branch
     public function branch()
     {
@@ -1000,7 +1031,7 @@ class AdminController extends Controller
     {
         return view('admin.transport.route');
     }
-    
+
     public function getVehicle()
     {
         return view('admin.transport.vehicle');
@@ -1084,34 +1115,34 @@ class AdminController extends Controller
     }
 
 
-     // get Employee 
-     public function getEmpList(Request $request)
-     {
+    // get Employee 
+    public function getEmpList(Request $request)
+    {
         $response = Helper::GetMethod(config('constants.api.employee_list'));
- 
-         return DataTables::of($response['data'])
- 
-             ->addIndexColumn()
-             ->addColumn('actions', function ($row) {
-                 return '<div class="button-list">
+
+        return DataTables::of($response['data'])
+
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
                                  <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editEmployeeBtn"><i class="fe-edit"></i></a>
                                  <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteEmployeeBtn"><i class="fe-trash-2"></i></a>
                          </div>';
-             })
- 
-             ->rawColumns(['actions'])
-             ->make(true);
-     }
-     // get Employee row details
-     public function getEmployeeDetails(Request $request)
-     {
-         $data = [
-             'id' => $request->id,
-         ];
-         $response = Helper::PostMethod(config('constants.api.employee_details'), $data);
-         return $response;
-     }
-    
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    // get Employee row details
+    public function getEmployeeDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.employee_details'), $data);
+        return $response;
+    }
+
     // show employee
     public function showEmployee()
     {
@@ -1159,14 +1190,64 @@ class AdminController extends Controller
         return view('admin.task.index');
     }
 
-    
+
     public function evaluationReport()
     {
         return view('admin.homework.evaluation_report');
     }
-    
+
     public function homeworkEdit()
     {
         return view('admin.homework.edit');
+    }
+    public function addDepartment(Request $request)
+    {
+        $data = [
+            'name' => $request->department_name
+        ];
+        $response = Helper::PostMethod(config('constants.api.department_add'), $data);
+        return $response;
+    }
+    public function getDepartmentList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.department_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editDepartmentBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteDepartmentBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getDepartmentDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.department_details'), $data);
+        return $response;
+    }
+    public function updateDepartment(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.department_update'), $data);
+        return $response;
+    }
+    // DELETE User Details
+    public function deleteDepartment(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.department_delete'), $data);
+        return $response;
     }
 }

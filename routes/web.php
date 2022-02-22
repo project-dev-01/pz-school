@@ -321,11 +321,11 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
         // department routes
         Route::get('department/index', [AdminController::class, 'Department'])->name('admin.department');
-        Route::post('department/add', [AdminController::class, 'addDepartment'])->name('department.add');
-        Route::get('department/list', [AdminController::class, 'getDepartmentList']);
-        Route::post('department/department-details', [AdminController::class, 'getDepartmentDetails'])->name('department.details');
-        Route::post('department/update', [AdminController::class, 'updateDepartment'])->name('department.update');
-        Route::post('department/delete', [AdminController::class, 'deleteDepartment'])->name('department.delete');
+        Route::post('department/add', [AdminController::class, 'addDepartment'])->name('admin.department.add');
+        Route::get('department/list', [AdminController::class, 'getDepartmentList'])->name('admin.department.list');
+        Route::post('department/department-details', [AdminController::class, 'getDepartmentDetails'])->name('admin.department.details');
+        Route::post('department/update', [AdminController::class, 'updateDepartment'])->name('admin.department.update');
+        Route::post('department/delete', [AdminController::class, 'deleteDepartment'])->name('admin.department.delete');
 
         // designation routes
         Route::get('designation/index', [AdminController::class, 'Designation'])->name('admin.designation');

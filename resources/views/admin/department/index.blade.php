@@ -26,13 +26,13 @@
                 <p class="sub-header">
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#">Add Department</button>
+                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addDepartmentModal">Add Department</button>
                     </div>
                 </div>
                 </p>
 
                 <div class="table-responsive">
-                    <table class="table mb-0" id="">
+                    <table class="table mb-0" id="department-table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -40,17 +40,7 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Staff</td>
-                                <td>
-                                    <div class="button-list">
-                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
-                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
-                                    </div>
-                                </td>
-                            </tr>
+                        <tbody>                         
                         </tbody>
                     </table>
                 </div>
@@ -59,7 +49,19 @@
     </div>
     <!--- end row -->
     @include('admin.department.add')
-
+    @include('admin.department.edit')
 </div>
 <!-- container -->
+@endsection
+@section('scripts')
+
+<script>
+  //department routes
+    var departmentList = "{{ route('admin.department.list') }}";
+    var departmentDetails = "{{ route('admin.department.details') }}";
+    var departmentDelete = "{{ route('admin.department.delete') }}";
+</script>
+
+<script src="{{ asset('js/custom/department.js') }}"></script>
+
 @endsection
