@@ -19,15 +19,21 @@
     <!-- end page title -->
     <div class="row">
         <div class="col-12">
-            <div class="card-box">
+            <div class="">
                 <!-- tasks panel -->
                 <div class="row">
                     <div class="col-xl-8">
                         <div class="row">
                             <div class="col">
                                 <div class="card">
+                                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                                        <li class="nav-item">
+                                            <h4 class="nav-link">
+                                                <span data-feather="home" class="icon-dual" id="span-parent"></span> To Do List
+                                                <h4>
+                                        </li>
+                                    </ul>
                                     <div class="card-body">
-                                        <h1 class="header-title mb-0">To Do List</h1>
                                         <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
                                             <div class="col">
                                                 <a class="text-dark" data-toggle="collapse" href="#todayTasks" aria-expanded="false" aria-controls="todayTasks">

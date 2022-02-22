@@ -1058,11 +1058,10 @@ class AdminController extends Controller
     public function addEmployee(Request $request)
     {
         $data = [
-            'branch_id' => $request->branch_id,
-            'role' => $request->role,
+            'role_id' => $request->role_id,
             'joining_date' => $request->joining_date,
-            'designation' => $request->designation,
-            'department' => $request->department,
+            'designation_id' => $request->designation_id,
+            'department_id' => $request->department_id,
             'qualification' => $request->qualification,
             'name' => $request->name,
             'gender' => $request->gender,
@@ -1072,12 +1071,21 @@ class AdminController extends Controller
             'mobile_no' => $request->mobile_no,
             'present_address' => $request->present_address,
             'permanent_address' => $request->permanent_address,
+            'photo' => $request->file('photo'),
             'email' => $request->email,
             'password' => $request->password,
             'confirm_password' => $request->confirm_password,
             'facebook_url' => $request->facebook_url,
             'twitter_url' => $request->twitter_url,
             'linkedin_url' => $request->linkedin_url,
+            'skip_bank_details' => $request->skip_bank_details,
+            'holder_name' => $request->holder_name,
+            'bank_name' => $request->bank_name,
+            'bank_branch' => $request->bank_branch,
+            'bank_address' => $request->bank_address,
+            'ifsc_code' => $request->ifsc_code,
+            'account_no' => $request->account_no
+            
         ];
         $response = Helper::PostMethod(config('constants.api.employee_add'), $data);
         return $response;
@@ -1089,11 +1097,14 @@ class AdminController extends Controller
             'status' => 0
         ];
         $roles = Helper::PostMethod(config('constants.api.roles'), $data);
-        //    dd($roles);
+        $emp_department = Helper::PostMethod(config('constants.api.emp_department'),[]);
+        $emp_designation = Helper::PostMethod(config('constants.api.emp_designation'),[]);
         return view(
             'admin.employee.index',
             [
                 'roles' => $roles['data'],
+                'emp_department' => !empty($emp_department)?$emp_department['data']:$emp_department,
+                'emp_designation' => !empty($emp_designation)?$emp_designation['data']:$emp_designation,
             ]
         );
     }

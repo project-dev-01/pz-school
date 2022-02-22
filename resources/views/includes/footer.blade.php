@@ -107,7 +107,7 @@
 <!-- ApexChart  Js-->
 <script src="{{ asset('js/apexChart/apexcharts.js') }}"></script>
 <!-- ApeDate Picker  Js-->
-<script src="{{ asset('libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+<!-- <script src="{{ asset('libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script> -->
 <!-- Datepicker -->
 <!-- <script src="{{ asset('date-picker/jquery-ui.js') }}"></script> -->
 <!-- Table Editable plugin-->
@@ -202,7 +202,6 @@
 <script src="{{ asset('js/custom/department.js') }}"></script>
 <script src="{{ asset('js/custom/event_type.js') }}"></script>
 <script src="{{ asset('js/custom/event.js') }}"></script>
-<script src="{{ asset('js/custom/employee.js') }}"></script>
 <script src="{{ asset('js/custom/assign_teacher.js') }}"></script>
 <script src="{{ asset('js/custom/settings.js') }}"></script>
 <script src="{{ asset('js/custom/user_list.js') }}"></script>

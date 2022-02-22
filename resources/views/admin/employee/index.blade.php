@@ -24,13 +24,13 @@
                     <span class="header-title mb-3" id="span-parent">Academic Details
                         <hr id="hr">
                     </span>
-                    <form id="addEmployeeForm"  method="post" action="{{ route('employee.add') }}"  enctype="multipart/form-data" autocomplete="off">
-                    @csrf
+                    <form id="addEmployeeForm" method="post" action="{{ route('admin.employee.add') }}" enctype="multipart/form-data" autocomplete="off">
+                        @csrf
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="role">Role<span class="text-danger">*</span></label>
-                                    <select class="form-control" name="role">
+                                    <label for="role_id">Role<span class="text-danger">*</span></label>
+                                    <select class="form-control" name="role_id" id="role_id">
                                         <option value="">Select Role</option>
                                         @foreach($roles as $r)
                                         <option value="{{$r['id']}}">{{$r['role_name']}}</option>
@@ -47,43 +47,44 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control homeWorkAdd" name="joining_date" id="joiningDate" placeholder="" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" name="joining_date" id="joiningDate" >
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="designation">Designation<span class="text-danger">*</span></label>
-                                    <select class="form-control"  id="empDesignation" name="designation">
+                                    <label for="designation_id">Designation<span class="text-danger">*</span></label>
+                                    <select class="form-control" id="empDesignation" name="designation_id">
                                         <option value="">Select Designation</option>
-                                        <option >BEd</option>
-                                        <option >MEd</option>
-                                        <option >BElEd</option>
-                                        <option >DEd </option>
-                                        <option >DLEd </option>
+                                        @if(!empty($emp_designation))
+                                        @foreach($emp_designation as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @endforeach
+                                        @endif
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            
+
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="department">Department<span class="text-danger">*</span></label>
-                                    <select class="form-control"  id="empDepartment" name="department">
-                                    <option value="">Select Department</option>
-                                    <option value="press">Accounting and Finance Department</option>
-                                    <option value="net">Human Performance</option>
-                                    <option value="mouth">Health Promotion</option>
-                                    <option value="other">Other..</option>
+                                    <label for="department_id">Department<span class="text-danger">*</span></label>
+                                    <select class="form-control" id="empDepartment" name="department_id">
+                                        <option value="">Select Department</option>
+                                        @if(!empty($emp_department))
+                                        @foreach($emp_department as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @endforeach
+                                        @endif
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="qualification">Quatification<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="qualification" id="empQuatification" placeholder="" aria-describedby="inputGroupPrepend" >
-                                   
+                                    <input type="text" class="form-control" name="qualification" id="empQuatification" >
+
                                 </div>
                             </div>
                         </div>
@@ -101,17 +102,17 @@
                                                 <span class="fas fa-user-graduate"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control"  name="name" placeholder="" aria-describedby="inputGroupPrepend" >
+                                        <input type="text" class="form-control" name="name" id="userName">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="gender">Gender</label>
-                                    <select class="form-control"  name="gender">
-                                        <option value="">Choose..</option>
-                                        <option>Male</option>
-                                        <option>Female</option>
+                                    <select class="form-control" name="gender" id="gender">
+                                        <option value="">Choose Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
                                     </select>
                                 </div>
                             </div>
@@ -120,28 +121,28 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="religion">Religion</label>
-                                    <select class="form-control" name="religion">
-                                        <option value="">Choose..</option>
-                                        <option>Hindu</option>
-                                        <option>Muslim</option>
-                                        <option>Christain</option>
-                                        <option>Others</option>
+                                    <select class="form-control" name="religion" id="religion">
+                                        <option value="">Choose Religion</option>
+                                        <option value="Hindu">Hindu</option>
+                                        <option value="Muslim">Muslim</option>
+                                        <option value="Christain">Christain</option>
+                                        <option value="Others">Others</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="blood_group">Blood Group</label>
-                                    <select class="form-control" name="blood_group">
-                                        <option value="">Choose..</option>
-                                        <option>A+</option>
-                                        <option>A-</option>
-                                        <option>AB+</option>
-                                        <option>AB-</option>
-                                        <option>B+</option>
-                                        <option>B-</option>
-                                        <option>O+</option>
-                                        <option>O-</option>
+                                    <select class="form-control" name="blood_group" id="blood_group">
+                                        <option value="">Choose Blood Group</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
                                     </select>
                                 </div>
                             </div>
@@ -154,7 +155,7 @@
                                                 <span class="fas fa-birthday-cake"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="birthday" id="empDOB" placeholder="" aria-describedby="inputGroupPrepend" >
+                                        <input type="text" class="form-control" name="birthday" id="empDOB" >
                                     </div>
                                 </div>
                             </div>
@@ -168,7 +169,7 @@
                                             <span class="fas fa-phone-volume"></span>
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control" name="mobile_no"  placeholder="" aria-describedby="inputGroupPrepend" >
+                                    <input type="text" class="form-control" name="mobile_no" id="mobile_no">
                                 </div>
                             </div>
                         </div>
@@ -177,27 +178,26 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="present_address">Present Address</label>
-                                    <textarea  class="form-control" name="present_address" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                                    <textarea class="form-control" name="present_address" id="present_address" data-parsley-trigger="keyup" data-parsley-minlength="10" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                                     </textarea>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="permanent_address">Permanent Address</label>
-                                    <textarea  class="form-control" name="permanent_address" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                                    <textarea class="form-control" name="permanent_address" id="permanent_address" data-parsley-trigger="keyup" data-parsley-minlength="10" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                                     </textarea>
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="row">
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="photo">Profile Picture</label>
-                                    <input type="file" name="photo">
-                                    <span class="text-danger error-text photo_error"></span>
+                                    <input type="file" name="photo" id="photo"/>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                         <span class="fas fa-user-lock " id="span-parent"></span>
                         <span class="header-title mb-3" id="span-parent"> Login Details
                             <hr id="hr">
@@ -212,7 +212,7 @@
                                                 <span class="far fa-envelope-open"></span>
                                             </div>
                                         </div>
-                                        <input type="email" class="form-control" name="email" placeholder="" aria-describedby="inputGroupPrepend" >
+                                        <input type="email" class="form-control" name="email" id="email">
                                     </div>
                                 </div>
                             </div>
@@ -225,7 +225,7 @@
                                                 <span class="fas fa-unlock"></span>
                                             </div>
                                         </div>
-                                        <input type="password" class="form-control" name="password" placeholder="" aria-describedby="inputGroupPrepend" >
+                                        <input type="password" class="form-control" name="password" id="password">
                                     </div>
                                 </div>
                             </div>
@@ -238,7 +238,7 @@
                                                 <span class="fas fa-unlock"></span>
                                             </div>
                                         </div>
-                                        <input type="password" class="form-control" name="confirm_password" placeholder="" aria-describedby="inputGroupPrepend" >
+                                        <input type="password" class="form-control" name="confirm_password" id="confirm_password">
                                     </div>
                                 </div>
                             </div>
@@ -257,7 +257,7 @@
                                                 <span class="fab fa-facebook-f"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="facebook_url" placeholder="" aria-describedby="inputGroupPrepend" >
+                                        <input type="text" class="form-control" name="facebook_url" id="facebook_url">
                                     </div>
                                 </div>
                             </div>
@@ -270,7 +270,7 @@
                                                 <span class="fab fa-twitter"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="twitter_url"  placeholder="" aria-describedby="inputGroupPrepend" >
+                                        <input type="text" class="form-control" name="twitter_url" id="twitter_url">
                                     </div>
                                 </div>
                             </div>
@@ -283,7 +283,7 @@
                                                 <span class="fab fa-linkedin-in"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="linkedin_url" placeholder="" aria-describedby="inputGroupPrepend" >
+                                        <input type="text" class="form-control" name="linkedin_url" id="linkedin_url">
                                     </div>
                                 </div>
                             </div>
@@ -294,49 +294,51 @@
                         </span>
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck11">
-                                <label class="custom-control-label" for="customCheck11">Skipped Bank Details</label>
+                                <input type="checkbox" class="custom-control-input" id="skip_bank_details" name="skip_bank_details">
+                                <label class="custom-control-label" for="skip_bank_details">Skipped Bank Details</label>
                             </div>
                         </div>
+                        <div id="bank_details_form">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Bank Name<span class="text-danger">*</span></label>
-                                    <input type="text" id="" class="form-control" name="" data-parsley-trigger="change">
+                                    <label for="bank_name">Bank Name<span class="text-danger">*</span></label>
+                                    <input type="text" id="bank_name" class="form-control" name="bank_name" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Account Holder<span class="text-danger">*</span></label>
-                                    <input type="text" id="" class="form-control" name="" data-parsley-trigger="change">
+                                    <label for="holder_name">Account Holder<span class="text-danger">*</span></label>
+                                    <input type="text" id="holder_name" class="form-control" name="holder_name" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Bank Branch<span class="text-danger">*</span></label>
-                                    <input type="text" id="" class="form-control" name="" data-parsley-trigger="change">
+                                    <label for="bank_branch">Bank Branch<span class="text-danger">*</span></label>
+                                    <input type="text" id="bank_branch" class="form-control" name="bank_branch" data-parsley-trigger="change">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
-                                    <label for="validationCustomUsername">Bank Address</label>
-                                    <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" >
+                                    <label for="bank_address">Bank Address<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="bank_address" name="bank_address" aria-describedby="inputGroupPrepend">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
-                                    <label for="validationCustomUsername">IFSC Code</label>
-                                    <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" >
+                                    <label for="ifsc_code">IFSC Code<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="ifsc_code" name="ifsc_code" aria-describedby="">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="">Account No<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend">
+                                    <input type="text" class="form-control" id="account_no" name="account_no"  aria-describedby="inputGroupPrepend">
                                 </div>
                             </div>
+                        </div>
                         </div>
 
                         <div class="form-group text-right m-b-0">
@@ -360,4 +362,10 @@
 
 
 </div> <!-- container -->
+@endsection
+@section('scripts')
+<script>
+        var employeeListShow = "{{ route('admin.listemployee') }}";
+</script>
+<script src="{{ asset('js/custom/employee.js') }}"></script>
 @endsection

@@ -19,15 +19,21 @@
     <!-- end page title -->
     <div class="row">
         <div class="col-12">
-            <div class="card-box">
+            <div class="">
                 <!-- tasks panel -->
                 <div class="row">
                     <div class="col-xl-8">
                         <div class="row">
                             <div class="col">
                                 <div class="card">
+								<ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+								<li class="nav-item">
+									<h4 class="nav-link">
+										 <span data-feather="home" class="icon-dual" id="span-parent"></span> To Do List
+										<h4>
+								</li>
+								</ul>
                                     <div class="card-body">
-                                    <h1 class="header-title mb-0">To Do List</h1>
                                         <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
                                             <div class="col">
                                                 <a class="text-dark" data-toggle="collapse" href="#todayTasks" aria-expanded="false" aria-controls="todayTasks">
@@ -150,20 +156,19 @@
 
     <div class="row">
         <div class="col-12">
-            <div class="card-box">
                 <!-- tasks panel -->
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="row">
-                            <div class="col">
+                            <div class="col">							
                                 <div class="card">
-                                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
-                    <li class="nav-item">
-                        <h4 class="nav-link">
-                            HomeWork List
-                            <h4>
-                    </li>
-                </ul><br>
+								<ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+									<li class="nav-item">
+										<h4 class="nav-link">
+											 <span data-feather="book-open" class="icon-dual" id="span-parent"></span>HomeWork List
+											<h4>
+									</li>
+									</ul><br>                                
                                     <div class="card-body">
 
                                     <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
@@ -276,8 +281,6 @@
                 <!-- task panel end -->
             </div>
         </div>
-    </div>
-
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -373,9 +376,14 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
+			<ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                             <span data-feather="map" class="icon-dual" id="span-parent"></span> Test Score Analysis
+                            <h4>
+                    </li>
+					</ul><br> 
                 <div class="card-body">
-                    <h4 class="header-title">Test Score Analysis</h4>
-
                     <div class="mt-4 chartjs-chart">
                         <canvas id="radar-chart-test-marks" height="350" data-colors="#39afd1,#a17fe0"></canvas>
                         <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
@@ -384,18 +392,20 @@
             </div> <!-- end card-->
         </div> <!-- end col -->
     </div>
+    <!--General Details -->
+   
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+				<ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                        General Details
+                             <span data-feather="external-link" class="icon-dual" id="span-parent"></span> General Details
                             <h4>
                     </li>
-                </ul><br>
+					</ul><br> 
                 <div class="card-body">
-                    <form id="demo-form" autocomplete="off">
+                    <form id="demo-form" data-parsley-validate="">
                         <!--1st row-->
                         <div class="row">
                             <div class="col-md-4">
@@ -416,7 +426,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="leaveFrom" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                     </div>
                                 </div>
                             </div>
@@ -429,7 +439,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="leaveTo" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                     </div>
                                 </div>
                             </div>
@@ -437,9 +447,11 @@
                         <!--2st row-->
                         <div class="row">
                             <div class="col-md-8">
+							 <div class="form-group">
                                 <label for="message">Reason(s)<span class="text-danger">*</span></label>
                                 <textarea id="message" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                             </textarea>
+							</div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -450,23 +462,17 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="postingDate" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!--3rd row-->
-                        <br />
-                        <div class="row">
-                            <div class="col-md-4">
-                                <button class="btn btn-primary-bl waves-effect waves-light" type="Save">Submit</button>
-                            </div>
-                            <div class="col-md-4">
-
-
-                            </div>
-                        </div>
+                        <!--3rd row-->                     
+                        
                     </form>
+					<div class="clearfix mt-4">
+                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Submit</button>
+                        </div>
 
                 </div> <!-- end card-body -->
             </div> <!-- end card-->

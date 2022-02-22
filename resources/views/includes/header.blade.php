@@ -45,7 +45,7 @@
     <!-- button link  -->
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css"> -->
     
-    <link href="{{ asset('libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- <link href="{{ asset('libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css" /> -->
     
     <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
@@ -60,8 +60,8 @@
     </style>
     
     <!-- date picker -->
-    <!-- <link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" /> -->
+    <link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
 
     <!-- Bootstrap Tables css -->
     <link href="{{ asset('libs/bootstrap-table/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css" />

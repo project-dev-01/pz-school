@@ -225,6 +225,8 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::get('timetable/set_examwise', [SuperAdminController::class, 'timeTableSetExamWise'])->name('super_admin.timetable.set_examwise');
         // exam marks
         Route::get('exam/mark_entry', [SuperAdminController::class, 'markEntry'])->name('super_admin.exam.mark_entry');
+        // grade range
+        Route::get('exam/grade_range', [SuperAdminController::class, 'gradeRange'])->name('super_admin.exam.grade_range');
         // exam Result Group 
         Route::get('exam_results/byclass', [SuperAdminController::class, 'byclasss'])->name('super_admin.exam_results.byclass');
 
@@ -340,7 +342,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
     
         Route::get('employee/employeelist', [AdminController::class, 'listEmployee'])->name('admin.listemployee');
         Route::get('employee/index', [AdminController::class, 'showEmployee'])->name('admin.employee');
-        Route::post('employee/add', [AdminController::class, 'addEmployee'])->name('employee.add');
+        Route::post('employee/add', [AdminController::class, 'addEmployee'])->name('admin.employee.add');
         Route::get('employee/list', [AdminController::class, 'getEmployeeList']);
 
         // Settings

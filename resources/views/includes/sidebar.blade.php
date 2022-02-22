@@ -343,11 +343,11 @@
                                                 <span>Mark Entries</span>
                                             </a>
                                         </li>
-                                        <!-- <li>
-                                            <a href="{{ route('super_admin.timetable.set_examwise')}}" class="nav-link {{ (request()->is('super_admin/exam/set_examwise')) ? 'active' : '' }}">
+                                        <li>
+                                            <a href="{{ route('super_admin.exam.grade_range')}}" class="nav-link {{ (request()->is('super_admin/exam/set_examwise')) ? 'active' : '' }}">
                                                 <span>Grade Range</span>
                                             </a>
-                                        </li> -->
+                                        </li>
                                     </ul>
                                 </div>
                             </li>

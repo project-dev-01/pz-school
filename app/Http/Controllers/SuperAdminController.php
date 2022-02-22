@@ -1480,8 +1480,10 @@ class SuperAdminController extends Controller
     {
         return view('super_admin.homework.edit');
     }
-
-    
+    public function gradeRange()
+    {
+        return view('super_admin.exam_marks.grades');
+    }
     
     // static page controller end
     
