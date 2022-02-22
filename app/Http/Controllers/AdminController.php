@@ -1133,7 +1133,7 @@ class AdminController extends Controller
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
-                                 <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editEmployeeBtn"><i class="fe-edit"></i></a>
+                <a href="' . route('admin.employee.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
                                  <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteEmployeeBtn"><i class="fe-trash-2"></i></a>
                          </div>';
             })
@@ -1141,15 +1141,38 @@ class AdminController extends Controller
             ->rawColumns(['actions'])
             ->make(true);
     }
-    // get Employee row details
-    public function getEmployeeDetails(Request $request)
-    {
-        $data = [
-            'id' => $request->id,
-        ];
-        $response = Helper::PostMethod(config('constants.api.employee_details'), $data);
-        return $response;
-    }
+
+   // edit Employee row details
+   public function editEmployee(Request $request,$id)
+   {
+      $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+
+      $data = [
+          'status' => 1
+      ];
+      $roles = Helper::PostMethod(config('constants.api.roles'), $data);
+      //    dd($roles);
+      $res = [
+          'id' => $id,
+      ];
+      $department = Helper::PostMethod(config('constants.api.emp_department'),[]);
+      $designation = Helper::PostMethod(config('constants.api.emp_designation'),[]);
+      $staff = Helper::PostMethod(config('constants.api.employee_details'), $res);
+
+      // dd($staff);
+      return view(
+          'admin.employee.edit',
+          [
+              'branches' => $getBranches['data'],
+              'roles' => $roles['data'],
+              'employee' => $staff['data']['staff'],
+              'bank' => $staff['data']['bank'],
+              'department' => $department['data'],
+              'designation' => $designation['data'],
+              'role' => $staff['data']['user']
+          ]
+      );
+   }
 
     // show employee
     public function showEmployee()
@@ -1157,7 +1180,7 @@ class AdminController extends Controller
         $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
 
         $data = [
-            'status' => 0
+            'status' => "0"
         ];
         $roles = Helper::PostMethod(config('constants.api.roles'), $data);
         $emp_department = Helper::PostMethod(config('constants.api.emp_department'),[]);
@@ -1171,6 +1194,61 @@ class AdminController extends Controller
                 'emp_designation' => !empty($emp_designation)?$emp_designation['data']:$emp_designation,
             ]
         );
+    }
+    // update Employee
+    public function updateEmployee(Request $request)
+    {
+        
+        $data = [
+            'id' => $request->id,
+            'role_id' => $request->role_id,
+            'joining_date' => $request->joining_date,
+            'designation_id' => $request->designation_id,
+            'department_id' => $request->department_id,
+            'qualification' => $request->qualification,
+            'name' => $request->name,
+            'gender' => $request->gender,
+            'religion' => $request->religion,
+            'blood_group' => $request->blood_group,
+            'birthday' => $request->birthday,
+            'mobile_no' => $request->mobile_no,
+            'present_address' => $request->present_address,
+            'permanent_address' => $request->permanent_address,
+            'skip_bank_details' => $request->skip_bank_details,
+            'facebook_url' => $request->facebook_url,
+            'twitter_url' => $request->twitter_url,
+            'linkedin_url' => $request->linkedin_url,
+            'holder_name' => $request->holder_name,
+            'bank_name' => $request->bank_name,
+            'bank_branch' => $request->bank_branch,
+            'bank_address' => $request->bank_address,
+            'ifsc_code' => $request->ifsc_code,
+            'account_no' => $request->account_no
+        ];
+
+        // dd($data);
+       $response = Helper::PostMethod(config('constants.api.employee_update'), $data);
+       return $response;
+    }
+
+    // delete Employee
+    public function deleteEmployee(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $id
+            ];
+            $response = Helper::PostMethod(config('constants.api.employee_delete'), $data);
+            return $response;
+        }
     }
     public function studentEntry()
     {

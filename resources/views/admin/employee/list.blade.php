@@ -58,6 +58,7 @@
 <script>
 // employee
     var employeeList = "{{ route('admin.employee.list') }}";
+    var employeeDelete = "{{ route('admin.employee.delete') }}";
 </script>
 <script src="{{ asset('js/custom/employee.js') }}"></script>
 @endsection

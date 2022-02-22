@@ -1428,7 +1428,7 @@ class ApiController extends BaseController
                 } else {
                     // add bank details
                     if ($request->skip_bank_details ==1) {
-                        $Staffid = $Connection->table('staff_bank_accounts')->insert([
+                        $bank = $Connection->table('staff_bank_accounts')->insert([
                             'staff_id' => $Staffid,
                             'bank_name' => $request->bank_name,
                             'holder_name' => $request->holder_name,
@@ -1471,6 +1471,162 @@ class ApiController extends BaseController
             ->join('staff_designations as ds', 's.designation_id', '=', 'ds.id')
             ->get();
         return $this->successResponse($Staff, 'Staff record fetch successfully');
+    }
+
+    // getEmployeeDetails row details
+    public function getEmployeeDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $empDetails['staff'] = $staffConn->table('staffs')->where('id', $id)->first();
+            $empDetails['bank'] = $staffConn->table('staff_bank_accounts')->where('staff_id', $id)->first();
+            $empDetails['user'] = User::where('user_id', $id)->where('branch_id',$request->branch_id)->first();
+            return $this->successResponse($empDetails, 'Employee row fetch successfully');
+        }
+    }
+    // update updateEmployee
+    public function updateEmployee(Request $request)
+    {
+        $id = $request->id;
+        
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+            'role_id' => 'required',
+            'joining_date' => 'required',
+            'designation_id' => 'required',
+            'designation_id' => 'required',
+            'qualification' => 'required',
+            'name' => 'required',
+            'gender' => 'required',
+            'religion' => 'required',
+            'blood_group' => 'required',
+            'birthday' => 'required',
+            'mobile_no' => 'required',
+            'present_address' => 'required',
+            'permanent_address' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+
+            if ($Connection->table('staffs')->where([['email', '=', $request->email],['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Email Already Exist', ['error' => 'Email Already Exist']);
+            } else {
+
+                // dd($request);
+                // add bank details validation
+                if ($request->skip_bank_details ==1) {
+                    $validator = \Validator::make($request->all(), [
+                        'bank_name' => 'required',
+                        'holder_name' => 'required',
+                        'bank_branch' => 'required',
+                        'bank_address' => 'required',
+                        'ifsc_code' => 'required',
+                        'account_no' => 'required',
+                    ]);
+                    if (!$validator->passes()) {
+                        return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+                    }
+                }
+
+                $picture = null;
+                if (!empty($request->file('photo'))) {
+                    $picture = $this->uploadUserProfile($request);
+                }
+                // update data
+                $query = $Connection->table('staffs')->where('id', $id)->update([
+                    // 'staff_id' => $request->staff_id,
+                    'name' => $request->name,
+                    'department_id' => $request->department_id,
+                    'designation_id' => $request->designation_id,
+                    'qualification' => $request->qualification,
+                    'joining_date' => $request->joining_date,
+                    'birthday' => $request->birthday,
+                    'gender' => $request->gender,
+                    'religion' => $request->religion,
+                    'blood_group' => $request->blood_group,
+                    'present_address' => $request->present_address,
+                    'permanent_address' => $request->permanent_address,
+                    'mobile_no' => $request->mobile_no,
+                    'photo' => $picture,
+                    'facebook_url' => $request->facebook_url,
+                    'linkedin_url' => $request->linkedin_url,
+                    'twitter_url' => $request->twitter_url,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong on Update employee']);
+                } else {
+                    // add bank details
+                    if ($request->skip_bank_details ==1) {
+                        $bank = $Connection->table('staff_bank_accounts')->where('staff_id', $id)->update([
+                            'staff_id' => $id,
+                            'bank_name' => $request->bank_name,
+                            'holder_name' => $request->holder_name,
+                            'bank_branch' => $request->bank_branch,
+                            'bank_address' => $request->bank_address,
+                            'ifsc_code' => $request->ifsc_code,
+                            'account_no' => $request->account_no,
+                            'updated_at' => date("Y-m-d H:i:s")
+                        ]);
+                    }
+                    $success = [];
+                    if (!$query) {
+                        return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                    } else {
+                        return $this->successResponse($success, 'Employee Details have Been updated');
+                    }
+                }
+            }
+        }
+    }
+    // delete Employee
+    public function deleteEmployee(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $staffConn->table('staffs')->where('id', $id)->delete();
+            $query = $staffConn->table('staff_bank_accounts')->where('staff_id', $id)->delete();
+            $query = User::where('user_id', $id)->where('branch_id',$request->branch_id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Employee have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
     }
 
     // updatePicture settings

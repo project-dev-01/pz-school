@@ -344,7 +344,9 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('employee/index', [AdminController::class, 'showEmployee'])->name('admin.employee');
         Route::post('employee/add', [AdminController::class, 'addEmployee'])->name('admin.employee.add');
         Route::get('employee/list', [AdminController::class, 'getEmpList'])->name('admin.employee.list');
-        Route::get('employee/employee-details', [AdminController::class, 'getEmployeeDetails'])->name('admin.employee.details');
+        Route::get('employee/edit/{id}', [AdminController::class, 'editEmployee'])->name('admin.employee.edit');
+        Route::post('employee/update', [AdminController::class, 'updatEemployee'])->name('admin.employee.update');
+        Route::post('employee/delete', [AdminController::class, 'deleteEmployee'])->name('admin.employee.delete');
 
         // Settings
         Route::get('settings', [SuperAdminController::class, 'settings'])->name('admin.settings');
