@@ -123,5 +123,9 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('forum/createpost',[ApiController::class,'forumcreatepost']);    
     Route::get('get-category', [CommonController::class, 'categoryList']);
     Route::get('forum/list', [ApiController::class, 'postList']);
+    // classroom management
+    Route::post('teacher_class',[ApiController::class,'getTeachersClassName']);
+    Route::post('teacher_section',[ApiController::class,'getTeachersSectionName']);
+    Route::post('teacher_subject',[ApiController::class,'getTeachersSubjectName']);
     
 });

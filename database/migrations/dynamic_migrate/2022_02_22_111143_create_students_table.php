@@ -33,10 +33,10 @@ class CreateStudentsTable extends Migration
             $table->string('mobile_no');
             $table->integer('category_id');
             $table->string('email');
-            $table->integer('route_id');
-            $table->integer('vehicle_id');
-            $table->integer('hostel_id');
-            $table->integer('room_id');
+            $table->integer('route_id')->nullable();
+            $table->integer('vehicle_id')->nullable();
+            $table->integer('hostel_id')->nullable();
+            $table->integer('room_id')->nullable();
             $table->text('previous_details');
             $table->string('photo');
             $table->timestamps();

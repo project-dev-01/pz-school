@@ -20,6 +20,9 @@ class CreateStudentAttendancesTable extends Migration
             $table->integer('class_id');
             $table->integer('section_id');
             $table->integer('subject_id');
+            $table->string('reasons');
+            $table->string('student_behaviour');
+            $table->string('classroom_behaviour');
             $table->enum('status', ['present', 'absent','holiday', 'late']);
             $table->text('remarks');
             $table->timestamps();

@@ -1793,4 +1793,85 @@ class ApiController extends BaseController
             return $this->successResponse($success, 'Post record fetch successfully');
         }
     }
+        // class room teacher_class
+        function getTeachersClassName(Request $request)
+        {
+    
+            $validator = \Validator::make($request->all(), [
+                'token' => 'required',
+                'branch_id' => 'required',
+                'teacher_id' => 'required',
+            ]);
+            if (!$validator->passes()) {
+                return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+            } else {
+                // create new connection
+                $Connection = $this->createNewConnection($request->branch_id);
+                $getTeachersClassName = $Connection->table('subject_assigns as sa')
+                    ->select('sa.class_id','sa.teacher_id', 'c.name as class_name')
+                    ->join('classes as c', 'sa.class_id', '=', 'c.id')
+                    ->where('sa.teacher_id',$request->teacher_id)
+                    ->groupBy("sa.class_id")
+                    ->get();
+                return $this->successResponse($getTeachersClassName, 'Teachers Class Name record fetch successfully');
+            }
+        }
+        // class room teacher_section
+        function getTeachersSectionName(Request $request)
+        {
+    
+            $validator = \Validator::make($request->all(), [
+                'token' => 'required',
+                'branch_id' => 'required',
+                'teacher_id' => 'required',
+                'class_id' => 'required',
+            ]);
+            if (!$validator->passes()) {
+                return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+            } else {
+                // create new connection
+                $Connection = $this->createNewConnection($request->branch_id);
+                $getTeachersClassName = $Connection->table('subject_assigns as sa')
+                    ->select('sa.class_id','sa.section_id','sa.teacher_id', 's.name as section_name')
+                    ->join('sections as s', 'sa.section_id', '=', 's.id')
+                    // ->where('sa.teacher_id',$request->teacher_id)
+                    ->where([
+                        ['sa.teacher_id', '=', $request->teacher_id],
+                        ['sa.class_id', '=', $request->class_id],
+                    ])
+                    ->groupBy("sa.section_id")
+                    ->get();
+                return $this->successResponse($getTeachersClassName, 'Teachers Section Name record fetch successfully');
+            }
+        }
+        // get subject name getTeachersSubjectName
+        // class room teacher_section
+        function getTeachersSubjectName(Request $request)
+        {
+    
+            $validator = \Validator::make($request->all(), [
+                'token' => 'required',
+                'branch_id' => 'required',
+                'teacher_id' => 'required',
+                'class_id' => 'required',
+                'section_id' => 'required',
+            ]);
+            if (!$validator->passes()) {
+                return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+            } else {
+                // create new connection
+                $Connection = $this->createNewConnection($request->branch_id);
+                $getTeachersClassName = $Connection->table('subject_assigns as sa')
+                    ->select('sa.class_id','sa.subject_id','sa.teacher_id','sa.subject_id', 's.name as subject_name')
+                    ->join('subjects as s', 'sa.subject_id', '=', 's.id')
+                    ->where([
+                        ['sa.teacher_id', '=', $request->teacher_id],
+                        ['sa.class_id', '=', $request->class_id],
+                        ['sa.section_id', '=', $request->section_id],
+                    ])
+                    ->groupBy("sa.subject_id")
+                    ->get();
+                return $this->successResponse($getTeachersClassName, 'Teachers Subject Name record fetch successfully');
+            }
+        }
 }
