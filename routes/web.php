@@ -423,6 +423,9 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         // static page routes end
         // Settings
         // Route::get('settings', [AdminController::class, 'settings'])->name('admin.settings');
+
+        Route::post('form/page-create-topic', [AdminController::class, 'createpost'])->name('admin.forum.create-topic');
+        Route::get('form/post-list', [AdminController::class, 'getpostList'])->name('admin.forum.post-list');
     });
     // admin routes end
 
