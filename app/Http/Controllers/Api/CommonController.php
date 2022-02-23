@@ -11,6 +11,7 @@ use App\Models\Countries;
 use App\Models\States;
 // db connection
 use App\Helpers\DatabaseConnection;
+use App\Models\Category;
 
 class CommonController extends BaseController
 {
@@ -54,5 +55,10 @@ class CommonController extends BaseController
         $staffConn = DatabaseConnection::databaseMigrate($params);
         return $this->successResponse([], 'Migrated successfully');
 
+    }
+    public function categoryList()
+    {
+        $success = Category::all();
+        return $this->successResponse($success, 'category record fetch successfully');
     }
 }

@@ -1339,4 +1339,38 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.department_delete'), $data);
         return $response;
     }
+    // forum create post 
+    public function createpost(Request $request)
+    {          
+        
+        $data = [
+            'user_id'=>$request->category,
+            'user_name'=>$request->inputTopicTitle,
+            'topic_title' => $request->inputTopicTitle,
+            'types'=>$request->topictype,
+            'body_content'=>$request->tpbody,
+            'category'=>$request->category,
+            'tags'=>$request->inputTopicTags,
+            'imagesorvideos'=>$request->inputTopicTitle
+        ];
+        $response = Helper::PostMethod(config('constants.api.forum_cpost'), $data);
+        return $response;
+    }
+    // forum post list 
+    public function getpostList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.forum_list'));
+        dd($response);
+        // return DataTables::of($response['data'])
+        //     ->addIndexColumn()
+        //     ->addColumn('actions', function ($row) {
+        //         return '<div class="button-list">
+        //                         <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editDepartmentBtn">Update</a>
+        //                         <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteDepartmentBtn">Delete</a>
+        //                 </div>';
+        //     })
+
+        //     ->rawColumns(['actions'])
+        //     ->make(true);
+    }
 }

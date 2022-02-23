@@ -2,20 +2,23 @@
 @section('content')
 <main id="tt-pageContent">
     <div class="container">
-        <div class="tt-wrapper-inner">
+        <div class="tt-wrapper-inner" id="createpostForumreset">
             <h1 class="tt-title-border">
                 Create New Topic
             </h1>
-            <form class="form-default form-create-topic">
+            <form class="form-default form-create-topic" id="createpostForum" method="post" action="{{ route('admin.forum.create-topic') }}">
+
+                @csrf
                 <div class="form-group">
                     <label for="inputTopicTitle">Topic Title</label>
                     <div class="tt-value-wrapper">
-                        <input type="text" name="name" class="form-control" id="inputTopicTitle" placeholder="Subject of your topic">
-                        <span class="tt-value-input">99</span>
+                        <input type="text" name="inputTopicTitle" class="form-control" id="inputTopicTitle" placeholder="Subject of your topic">
+                        <span class="tt-value-input"></span>
                     </div>
                     <div class="tt-note">Describe your topic well, while keeping the subject as short as possible.</div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="selectedtpy">
+                    <input type="hidden" id="topictype" name="topictype">
                     <label>Topic Type</label>
                     <div class="tt-js-active-btn tt-wrapper-btnicon">
                         <div class="row tt-w410-col-02">
@@ -157,29 +160,32 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <textarea name="message" class="form-control" rows="5" placeholder="Lets get started"></textarea>
+                        <textarea name="tpbody" id="tpbody" class="form-control" rows="5" placeholder="Lets get started"></textarea>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="inputTopicTitle">Category</label>
-                                <select class="form-control">
-                                    <option value="Select">Select</option>
-                                    <option value="Value 01">Value 01</option>
-                                    <option value="Value 02">Value 02</option>
-                                </select>
+                                <label for="category" class="col-3 col-form-label">Category<span class="text-danger">*</span></label>
+                                <div class="col-9">
+                                    <select id="getCountry" class="form-control" name="category">
+                                        <option value="">Select category</option>
+                                        @foreach($category as $c)
+                                        <option value="{{$c['id']}}">{{$c['category_names']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="inputTopicTags">Tags</label>
-                                <input type="text" name="name" class="form-control" id="inputTopicTags" placeholder="Use comma to separate tags">
+                                <input type="text" name="inputTopicTags" class="form-control" id="inputTopicTags" placeholder="Use comma to separate tags">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-auto ml-md-auto">
-                            <a href="#" class="btn btn-secondary btn-width-lg">Create Post</a>
+                            <button type="submit" class="btn btn-secondary btn-width-lg">Create Post</button>
                         </div>
                     </div>
                 </div>
@@ -216,6 +222,8 @@
                 <div class="tt-col-value hide-mobile">Views</div>
                 <div class="tt-col-value">Activity</div>
             </div>
+            @if(!empty($forum_list))
+            @foreach($forum_list as $value)
             <div class="tt-item">
                 <div class="tt-col-avatar">
                     <svg class="tt-icon">
@@ -223,13 +231,13 @@
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                            How do you actually study?
+                    <h6 class="tt-title"><a href="javascript:void()">
+                            {{ $value['topic_title'] }}
                         </a></h6>
                     <div class="row align-items-center no-gutters hide-desktope">
                         <div class="col-auto">
                             <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color05 tt-badge">Study Advice</span></a></li>
+                                <li class="show-mobile"><a href="#"><span class="tt-color05 tt-badge"></span></a></li>
                             </ul>
                         </div>
                         <div class="col-auto ml-auto show-mobile">
@@ -237,130 +245,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color05 tt-badge">Study Advice</span></div>
+                <div class="tt-col-category"><span class="tt-color05 tt-badge">{{ $value['category'] }}</span></div>
                 <div class="tt-col-value hide-mobile">358</div>
                 <div class="tt-col-value tt-color-select hide-mobile">68</div>
                 <div class="tt-col-value hide-mobile">8.3k</div>
                 <div class="tt-col-value hide-mobile">1d</div>
             </div>
-            <div class="tt-item">
-                <div class="tt-col-avatar">
-                    <svg class="tt-icon">
-                        <use xlink:href="#icon-ava-h"></use>
-                    </svg>
-                </div>
-                <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                            <svg class="tt-icon">
-                                <use xlink:href="#icon-locked"></use>
-                            </svg>
-                            Scholarships
-                        </a></h6>
-                    <div class="row align-items-center no-gutters hide-desktope">
-                        <div class="col-auto">
-                            <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color06 tt-badge">Funds</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-auto ml-auto show-mobile">
-                            <div class="tt-value">2d</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tt-col-category"><span class="tt-color06 tt-badge">Funds</span></div>
-                <div class="tt-col-value hide-mobile">674</div>
-                <div class="tt-col-value tt-color-select  hide-mobile">29</div>
-                <div class="tt-col-value hide-mobile">1.3k</div>
-                <div class="tt-col-value hide-mobile">2d</div>
-            </div>
-            <div class="tt-item">
-                <div class="tt-col-avatar">
-                    <svg class="tt-icon">
-                        <use xlink:href="#icon-ava-j"></use>
-                    </svg>
-                </div>
-                <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                    I want to start studying online either or open colleges and I don’t know which one is better
-                        </a></h6>
-                    <div class="row align-items-center no-gutters">
-                        <div class="col-auto">
-                            <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color03 tt-badge">Higher Studies</span></a></li>
-                                <li><a href="#"><span class="tt-badge">Study Advice</span></a></li>
-                                <li><a href="#"><span class="tt-badge">High school</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-auto ml-auto show-mobile">
-                            <div class="tt-value">2d</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tt-col-category"><span class="tt-color13 tt-badge">Higher Studies</span></div>
-                <div class="tt-col-value hide-mobile">278</div>
-                <div class="tt-col-value tt-color-select  hide-mobile">27</div>
-                <div class="tt-col-value hide-mobile">1.4k</div>
-                <div class="tt-col-value hide-mobile">2d</div>
-            </div>
-            <div class="tt-item">
-                <div class="tt-col-avatar">
-                    <svg class="tt-icon">
-                        <use xlink:href="#icon-ava-t"></use>
-                    </svg>
-                </div>
-                <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                        Exam tips and preparations... the do's and don'ts of surviving exam period
-                        </a></h6>
-                    <div class="row align-items-center no-gutters">
-                        <div class="col-auto">
-                            <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color07 tt-badge">Study Hacks</span></a></li>
-                                <li><a href="#"><span class="tt-badge">Study</span></a></li>
-                                <li><a href="#"><span class="tt-badge">Advice</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-auto ml-auto show-mobile">
-                            <div class="tt-value">2d</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tt-col-category"><span class="tt-color07 tt-badge">Study Hacks</span></div>
-                <div class="tt-col-value hide-mobile">364</div>
-                <div class="tt-col-value tt-color-select  hide-mobile">36</div>
-                <div class="tt-col-value  hide-mobile">982</div>
-                <div class="tt-col-value hide-mobile">2d</div>
-            </div>
-            <div class="tt-item">
-                <div class="tt-col-avatar">
-                    <svg class="tt-icon">
-                        <use xlink:href="#icon-ava-k"></use>
-                    </svg>
-                </div>
-                <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                            <svg class="tt-icon">
-                                <use xlink:href="#icon-verified"></use>
-                            </svg>
-                            How to overcome test failure?
-                        </a></h6>
-                    <div class="row align-items-center no-gutters hide-desktope">
-                        <div class="col-auto">
-                            <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color08 tt-badge">Examinations</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-auto ml-auto show-mobile">
-                            <div class="tt-value">3d</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tt-col-category"><span class="tt-color08 tt-badge">Examinations</span></div>
-                <div class="tt-col-value  hide-mobile">698</div>
-                <div class="tt-col-value tt-color-select  hide-mobile">78</div>
-                <div class="tt-col-value  hide-mobile">2.1k</div>
-                <div class="tt-col-value hide-mobile">3d</div>
-            </div>
+            @endforeach
+            @endif
             <div class="tt-row-btn">
                 <button type="button" class="btn-icon js-topiclist-showmore">
                     <svg class="tt-icon">
@@ -368,7 +260,16 @@
                     </svg>
                 </button>
             </div>
-        </div>
+        </div>  
     </div>
 </main>
+@endsection
+@section('scripts')
+
+<script>
+  //department routes
+    var getpostList = "{{ route('admin.forum.post-list') }}";
+</script>
+
+<script src="{{ asset('js/custom/forum-createpost.js') }}"></script>
 @endsection

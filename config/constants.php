@@ -95,7 +95,12 @@ return [
           'get_user' => $url.'/get_user',
           'change_password' => $url.'/change-password',
           'update_profile_info' => $url.'/update-profile-info',
-          
+
+        // forum url
+        'forum_cpost' => $url.'/forum/createpost',   
+        'forum_list' => $url.'/forum/list',
+        'category' => $url.'/get-category',        
+    
           
     ]
 

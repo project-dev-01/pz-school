@@ -119,5 +119,9 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // create database_migrate
     
     Route::post('database_migrate',[CommonController::class,'databaseMigrate']);
+    //
+    Route::post('forum/createpost',[ApiController::class,'forumcreatepost']);    
+    Route::get('get-category', [CommonController::class, 'categoryList']);
+    Route::get('forum/list', [ApiController::class, 'postList']);
     
 });

@@ -29,6 +29,7 @@ use App\Models\StaffDesignation;
 // db connection
 use App\Helpers\DatabaseConnection;
 use App\Models\Tenant\StaffDepartment;
+use App\Models\Forum_posts;
 
 class ApiController extends BaseController
 {
@@ -1738,6 +1739,58 @@ class ApiController extends BaseController
             } else {
                 return $this->successResponse([], 'Your profile info has been update successfuly.');
             }
+        }
+    }
+    // Forum Create Post
+    public function forumCreatePost(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'user_id' => 'required',
+            'user_name' => 'required',
+            'token' => 'required',
+            'topic_title' => 'required',
+            'types' => 'required',
+            'body_content' => 'required',
+            'category' => 'required',
+            'tags' => 'required',
+            'imagesorvideos' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $class = new Forum_posts();
+            $class->user_id = $request->user_id;
+            $class->user_name = $request->user_name;
+            $class->topic_title = $request->topic_title;
+            $class->types = $request->types;
+            $class->body_content = $request->body_content;
+            $class->category = $request->category;
+            $class->tags = $request->tags;
+            $class->imagesorvideos = $request->imagesorvideos;
+            $class->created_at = date("Y-m-d H:i:s");
+            $query = $class->save();
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'New post has been successfully created');
+            }
+        }
+    }
+    public function postList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $success = DB::table('forum_posts as cl')
+                ->select('cl.*')        
+                ->get();
+            return $this->successResponse($success, 'Post record fetch successfully');
         }
     }
 }
