@@ -11,6 +11,10 @@ class TeacherController extends Controller
     {
         return view('teacher.dashboard.index');
     }
+    public function applyleave()
+    {
+        return view('teacher.leave_management.applyleave');
+    }
     public function settings()
     {
         return view('teacher.settings.index');

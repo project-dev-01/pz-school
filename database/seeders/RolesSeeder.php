@@ -35,7 +35,7 @@ class RolesSeeder extends Seeder
             [
                 'role_name' => 'Staff',
                 'role_slug' => 'staff',
-                'status' => '1'
+                'status' => '0'
             ]
         );
         DB::table('roles')->insert(
@@ -49,14 +49,14 @@ class RolesSeeder extends Seeder
             [
                 'role_name' => 'Parent',
                 'role_slug' => 'parent',
-                'status' => '1'
+                'status' => '2'
             ]
         );
         DB::table('roles')->insert(
             [
                 'role_name' => 'Student',
                 'role_slug' => 'student',
-                'status' => '0'
+                'status' => '2'
             ]
         );
         //

@@ -27,71 +27,71 @@ class UsersSeeder extends Seeder
                 'remember_token' => ''
             ]
         );        
-        DB::table('users')->insert(
-            [
-                'name' => 'Admin',          
-                'user_id' => 0,
-                'branch_id' => 1,
-                'role_id' => 2,
-                'email' => 'admin@gmail.com',
-                'picture' => null,
-                'email_verified_at' => '',
-                'password' => \Hash::make('12345678'),
-                'remember_token' => ''
-            ]
-        ); 
-        DB::table('users')->insert(
-            [
-                'name' => 'teacher',      
-                'user_id' => 0,
-                'branch_id' => null,
-                'role_id' => 4,
-                'email' => 'teacher@gmail.com',
-                'picture' => null,
-                'email_verified_at' => '',
-                'password' => \Hash::make('12345678'),
-                'remember_token' => ''
-            ]
-        ); 
-        DB::table('users')->insert(
-            [
-                'name' => 'parent',        
-                'user_id' => 0,
-                'branch_id' => null,
-                'role_id' => 1,
-                'email' => 'parent@gmail.com',
-                'picture' => null,
-                'email_verified_at' => '',
-                'password' => \Hash::make('12345678'),
-                'remember_token' => ''
-            ]
-        ); 
-        DB::table('users')->insert(
-            [
-                'name' => 'student',               
-                'user_id' => 0,
-                'branch_id' => null,
-                'role_id' => 6,
-                'email' => 'student@gmail.com',
-                'picture' => null,
-                'email_verified_at' => '',
-                'password' => \Hash::make('12345678'),
-                'remember_token' => ''
-            ]
-        );        
-        DB::table('users')->insert(
-            [
-                'name' => 'kthik',
-                'user_id' => 0,
-                'branch_id' => '',
-                'role_id' => 1,
-                'email' => 'kthik@gmail.com',
-                'picture' => null,
-                'email_verified_at' => '',
-                'password' => \Hash::make('12345678'),
-                'remember_token' => ''
-            ]
-        ); 
+        // DB::table('users')->insert(
+        //     [
+        //         'name' => 'Admin',          
+        //         'user_id' => 0,
+        //         'branch_id' => 1,
+        //         'role_id' => 2,
+        //         'email' => 'admin@gmail.com',
+        //         'picture' => null,
+        //         'email_verified_at' => '',
+        //         'password' => \Hash::make('12345678'),
+        //         'remember_token' => ''
+        //     ]
+        // ); 
+        // DB::table('users')->insert(
+        //     [
+        //         'name' => 'teacher',      
+        //         'user_id' => 0,
+        //         'branch_id' => null,
+        //         'role_id' => 4,
+        //         'email' => 'teacher@gmail.com',
+        //         'picture' => null,
+        //         'email_verified_at' => '',
+        //         'password' => \Hash::make('12345678'),
+        //         'remember_token' => ''
+        //     ]
+        // ); 
+        // DB::table('users')->insert(
+        //     [
+        //         'name' => 'parent',        
+        //         'user_id' => 0,
+        //         'branch_id' => null,
+        //         'role_id' => 1,
+        //         'email' => 'parent@gmail.com',
+        //         'picture' => null,
+        //         'email_verified_at' => '',
+        //         'password' => \Hash::make('12345678'),
+        //         'remember_token' => ''
+        //     ]
+        // ); 
+        // DB::table('users')->insert(
+        //     [
+        //         'name' => 'student',               
+        //         'user_id' => 0,
+        //         'branch_id' => null,
+        //         'role_id' => 6,
+        //         'email' => 'student@gmail.com',
+        //         'picture' => null,
+        //         'email_verified_at' => '',
+        //         'password' => \Hash::make('12345678'),
+        //         'remember_token' => ''
+        //     ]
+        // );        
+        // DB::table('users')->insert(
+        //     [
+        //         'name' => 'kthik',
+        //         'user_id' => 0,
+        //         'branch_id' => '',
+        //         'role_id' => 1,
+        //         'email' => 'kthik@gmail.com',
+        //         'picture' => null,
+        //         'email_verified_at' => '',
+        //         'password' => \Hash::make('12345678'),
+        //         'remember_token' => ''
+        //     ]
+        // ); 
         //
     }
 }

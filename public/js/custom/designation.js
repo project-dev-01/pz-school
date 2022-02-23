@@ -22,12 +22,12 @@ $(function () {
                 success: function (data) {
                     if (data.code == 200) {
                         $('#designation-table').DataTable().ajax.reload(null, false);
-                        $('.editDesignation').modal('hide');
-                        $('.editDesignation').find('form')[0].reset();
+                        $('.addDesignation').modal('hide');
+                        $('.addDesignation').find('form')[0].reset();
                         toastr.success(data.message);
                     } else {
-                        $('.editDesignation').modal('hide');
-                        $('.editDesignation').find('form')[0].reset();
+                        $('.addDesignation').modal('hide');
+                        $('.addDesignation').find('form')[0].reset();
                         toastr.error(data.message);
                     }
                 }

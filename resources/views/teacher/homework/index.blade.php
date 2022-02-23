@@ -8,51 +8,61 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <!--<div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                        <li class="breadcrumb-item active">Wizard</li>
-                    </ol>
+                <div class="page-title-right">
                 </div>
-                <h4 class="page-title">Form Wizard</h4>-->
+                <h4 class="page-title">Add Homework</h4>
             </div>
         </div>
     </div>
     <!-- end page title -->
-
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
+                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                            <span data-feather="book-open" class="icon-dual" id="span-parent"></span> Add Homework
+                            <h4>
+                    </li>
+                </ul><br>
+
                 <div class="card-body">
-                    <span class=" fas fa-user-graduate  " id="parent"></span>
-                    <span class="header-title mb-3" id="parent">Add Homework</span>
-                    <hr>
 
                     <form id="demo-form" data-parsley-validate="" autocomplete="off">
                         <div class="row">
-                            <div class="col-md-2"></div>
-                            <div class="col-md-9">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
                                 <div class="col-md-12">
                                     <div class="form-group row">
                                         <label for="inputEmail3" class="col-3 col-form-label">Standard<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <select id="heard" class="form-control" required="">
-                                                <option value="">Select Standard</option>
+                                                <option value="">Select</option>
                                                 <option>I</option>
                                                 <option>II</option>
+                                                <option>III</option>
+                                                <option>IV</option>
+                                                <option>V</option>
+                                                <option>VI</option>
+                                                <option>VII</option>
+                                                <option>VIII</option>
+                                                <option>IX</option>
+                                                <option>X</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group row">
-                                        <label for="inputEmail3" class="col-3 col-form-label">Class Name<span class="text-danger">*</span></label>
+                                        <label for="inputEmail3" class="col-3 col-form-label">Class<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <select id="heard" class="form-control" required="">
-                                                <option value="">Select Class Name</option>
+                                                <option value="">Select</option>
                                                 <option>A</option>
                                                 <option>B</option>
+                                                <option>C</option>
+                                                <option>D</option>
+                                                <option>E</option>
                                             </select>
                                         </div>
                                     </div>
@@ -62,9 +72,12 @@
                                         <label for="inputEmail3" class="col-3 col-form-label">Subject<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <select id="heard" class="form-control" required="">
-                                                <option value="">Select Subject</option>
-                                                <option value="press">English</option>
-                                                <option value="press">Geography</option>
+                                                <option value="">Select</option>
+                                                <option>Physics </option>
+                                                <option>Chemistry </option>
+                                                <option>Maths </option>
+                                                <option>Biology </option>
+                                                <option>Geography </option>
                                             </select>
                                         </div>
                                     </div>
@@ -145,14 +158,14 @@
                                         </div>
                                     </div>
                                 </div>
-                               
+
                             </div>
                             <div class="col-md-1"></div>
                         </div>
 
                     </form>
                     <div class="col-8 offset-4">
-                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
+                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">
                             Save
                         </button>
 

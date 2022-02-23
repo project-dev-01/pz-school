@@ -597,7 +597,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('evaluation_report', [TeacherController::class, 'evaluationReport'])->name('teacher.evaluation_report');
         Route::get('homework/edit', [TeacherController::class, 'homeworkEdit'])->name('teacher.homework_edit');
          // Leave Apply
-         Route::get('leave_management/applyleave', [SuperAdminController::class, 'applyleave'])->name('teacher.leave_management.applyleave');       
+         Route::get('leave_management/applyleave', [TeacherController::class, 'applyleave'])->name('teacher.leave_management.applyleave');       
         // Forum routes
         Route::get('forum/index', [TeacherController::class, 'forumIndex'])->name('teacher.forum.index');
         Route::get('forum/page-single-topic', [TeacherController::class, 'forumPageSingleTopic'])->name('teacher.forum.page-single-topic');
