@@ -169,9 +169,11 @@
                                 <div class="col-9">
                                     <select id="getCountry" class="form-control" name="category">
                                         <option value="">Select category</option>
+                                        @if(!empty($category))
                                         @foreach($category as $c)
                                         <option value="{{$c['id']}}">{{$c['category_names']}}</option>
                                         @endforeach
+                                        @endif
                                     </select>
                                 </div>
                             </div>

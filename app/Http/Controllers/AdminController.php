@@ -34,9 +34,10 @@ class AdminController extends Controller
 
                $category = Helper::GetMethod(config('constants.api.category'));   
         $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
+        // dd($forum_list);
         return view('admin.forum.page-create-topic',[
-            'category' => $category['data'],
-            'forum_list' => $forum_list['data'],
+            'category' => !empty($category['data'])?$category['data']:$category,
+            'forum_list' => !empty($forum_list['data'])?$forum_list['data']:$category,
         ]);
     }
     public function forumPageSingleUser()
