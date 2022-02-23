@@ -31,7 +31,13 @@ class AdminController extends Controller
     }
     public function forumPageCreateTopic()
     {
-        return view('admin.forum.page-create-topic');
+
+               $category = Helper::GetMethod(config('constants.api.category'));   
+        $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
+        return view('admin.forum.page-create-topic',[
+            'category' => $category['data'],
+            'forum_list' => $forum_list['data'],
+        ]);
     }
     public function forumPageSingleUser()
     {
@@ -1355,22 +1361,5 @@ class AdminController extends Controller
         ];
         $response = Helper::PostMethod(config('constants.api.forum_cpost'), $data);
         return $response;
-    }
-    // forum post list 
-    public function getpostList(Request $request)
-    {
-        $response = Helper::GetMethod(config('constants.api.forum_list'));
-        dd($response);
-        // return DataTables::of($response['data'])
-        //     ->addIndexColumn()
-        //     ->addColumn('actions', function ($row) {
-        //         return '<div class="button-list">
-        //                         <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editDepartmentBtn">Update</a>
-        //                         <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteDepartmentBtn">Delete</a>
-        //                 </div>';
-        //     })
-
-        //     ->rawColumns(['actions'])
-        //     ->make(true);
     }
 }

@@ -1,5 +1,4 @@
-$(function () {
-    getpostTable();
+$(function () {   
     var selectedtopic;
     $("#createpostForum").validate({
         rules: {
@@ -35,39 +34,6 @@ $(function () {
             });
         }
     });
-    // get all Forum post table
-    function getpostTable() {
-        $('#forumpostTable').DataTable({
-            processing: true,
-            info: true,
-            ajax: getpostList,
-            "pageLength": 5,
-            "aLengthMenu": [
-                [5, 10, 25, 50, -1],
-                [5, 10, 25, 50, "All"]
-            ],
-            columns: [
-                {
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                }
-                ,
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'actions',
-                    name: 'actions',
-                    orderable: false,
-                    searchable: false
-                },
-            ]
-        }).on('draw', function () {
-        });
-    }
-
-
 });
 (function () {
     var ttJsActiveBtn = $('#tt-pageContent .tt-js-active-btn');

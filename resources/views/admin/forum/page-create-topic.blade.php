@@ -265,11 +265,5 @@
 </main>
 @endsection
 @section('scripts')
-
-<script>
-  //department routes
-    var getpostList = "{{ route('admin.forum.post-list') }}";
-</script>
-
 <script src="{{ asset('js/custom/forum-createpost.js') }}"></script>
 @endsection
