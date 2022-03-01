@@ -117,7 +117,15 @@ return [
         'dislike_countadd' => $url.'/forum-discout',
         'heart_countadd' => $url.'/forum-heartcout',
         'view_countadd' => $url.'/forum-viewcout',
-        'view_countadd_insert'=> $url.'/forum-viewcout-insert'          
+        'view_countadd_insert'=> $url.'/forum-viewcout-insert',
+
+        // classroom management api details
+        // filter api
+        'teacher_class' => $url.'/teacher_class',
+        'teacher_section' => $url.'/teacher_section',
+        'teacher_subject' => $url.'/teacher_subject',
+        'get_student_attendance' => $url.'/get_student_attendance',
+        'add_student_attendance' => $url.'/add_student_attendance'
     ]
 
 ];

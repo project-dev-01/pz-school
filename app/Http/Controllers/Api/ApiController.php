@@ -2161,17 +2161,17 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $success =DB::table('forum_posts')
-            ->select('forum_posts.id','forum_posts.topic_title as topic_title', 'forum_posts.topic_header as topic_header', 'forum_posts.body_content as body_content', 'forum_posts.user_name as user_name', DB::raw('DATE_FORMAT(forum_posts.created_at, "%b %e %Y") as date'), 'forum_count_details.likes as likes', 'forum_count_details.dislikes as dislikes', 'forum_count_details.favorite as favorite', 'forum_count_details.replies as replies', 'forum_count_details.views as views', 'forum_count_details.activity as activity','forum_count_details.id as pkcount_details_id')
-            ->leftJoin('forum_count_details','forum_posts.id','=','forum_count_details.created_post_id')
-            
-            ->where([
-                ['forum_posts.id', '=', $request->id],
-                [
-                    'forum_posts.user_id', '=', $request->user_id
-                ]
-            ])
-            ->get();
+            $success = DB::table('forum_posts')
+                ->select('forum_posts.id', 'forum_posts.topic_title as topic_title', 'forum_posts.topic_header as topic_header', 'forum_posts.body_content as body_content', 'forum_posts.user_name as user_name', DB::raw('DATE_FORMAT(forum_posts.created_at, "%b %e %Y") as date'), 'forum_count_details.likes as likes', 'forum_count_details.dislikes as dislikes', 'forum_count_details.favorite as favorite', 'forum_count_details.replies as replies', 'forum_count_details.views as views', 'forum_count_details.activity as activity', 'forum_count_details.id as pkcount_details_id')
+                ->leftJoin('forum_count_details', 'forum_posts.id', '=', 'forum_count_details.created_post_id')
+
+                ->where([
+                    ['forum_posts.id', '=', $request->id],
+                    [
+                        'forum_posts.user_id', '=', $request->user_id
+                    ]
+                ])
+                ->get();
             return  $this->successResponse($success, 'Post record fetch successfully');
         }
     }
@@ -2257,22 +2257,22 @@ class ApiController extends BaseController
         }
     }
     public function viewcountinsert(Request $request)
-    {       
+    {
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
-            'branch_id'=>'required',
-            'user_id'=>'required',
-            'user_name'=>'required',
-            'create_post_id'=>'required',
-            'views'=>'required'
+            'branch_id' => 'required',
+            'user_id' => 'required',
+            'user_name' => 'required',
+            'create_post_id' => 'required',
+            'views' => 'required'
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $section = new Forum_count_details();  
+            $section = new Forum_count_details();
             $section->user_id = $request->user_id;
-            $section->user_name = $request->user_name; 
+            $section->user_name = $request->user_name;
             $section->created_post_id = $request->create_post_id;
             $section->views = $request->views;
             $section->branch_id = $request->branch_id;
@@ -2283,88 +2283,204 @@ class ApiController extends BaseController
             } else {
                 return $this->successResponse($success, 'New Section has been successfully saved');
             }
-        } 
+        }
     }
     public function viewcountadded(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'id'=>'required',
-            'token' => 'required'       
+            'id' => 'required',
+            'token' => 'required'
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-             DB::table('forum_count_details')
-            ->where('id',$request->id)
-            ->increment('views', 1);                   
-            $success =DB::table('forum_count_details')
-            ->select('views')
-            ->where('id',$request->id)
-            ->get();       
+            DB::table('forum_count_details')
+                ->where('id', $request->id)
+                ->increment('views', 1);
+            $success = DB::table('forum_count_details')
+                ->select('views')
+                ->where('id', $request->id)
+                ->get();
 
             return $this->successResponse($success, 'like successfully');
-        }    
+        }
     }
     public function likescountadded(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'id'=>'required',
-            'token' => 'required'       
+            'id' => 'required',
+            'token' => 'required'
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-             DB::table('forum_count_details')
-            ->where('id',$request->id)
-            ->increment('likes', 1);                   
-            $success =DB::table('forum_count_details')
-            ->select('likes')
-            ->where('id',$request->id)
-            ->get();
-        
+            DB::table('forum_count_details')
+                ->where('id', $request->id)
+                ->increment('likes', 1);
+            $success = DB::table('forum_count_details')
+                ->select('likes')
+                ->where('id', $request->id)
+                ->get();
+
 
             return $this->successResponse($success, 'like successfully');
-        }    
+        }
     }
     public function dislikescountadded(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'token' => 'required'       
+            'token' => 'required'
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
             DB::table('forum_count_details')
-            ->where('id',$request->id)
-            ->increment('dislikes', 1);                   
-            $success =DB::table('forum_count_details')
-            ->select('dislikes')
-            ->where('id',$request->id)
-            ->get();                  
-   
+                ->where('id', $request->id)
+                ->increment('dislikes', 1);
+            $success = DB::table('forum_count_details')
+                ->select('dislikes')
+                ->where('id', $request->id)
+                ->get();
+
             return $this->successResponse($success, 'dislike successfully');
-        }    
+        }
     }
     public function heartcountadded(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'token' => 'required'       
+            'token' => 'required'
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-        } else {                       
+        } else {
             DB::table('forum_count_details')
-            ->where('id',$request->id)
-            ->increment('favorite', 1);                   
-            $success =DB::table('forum_count_details')
-            ->select('favorite')
-            ->where('id',$request->id)
-            ->get();
+                ->where('id', $request->id)
+                ->increment('favorite', 1);
+            $success = DB::table('forum_count_details')
+                ->select('favorite')
+                ->where('id', $request->id)
+                ->get();
             return $this->successResponse($success, 'Heart successfully');
-        }    
-    }  
+        }
+    }
+    // getStudentAttendence
+    function getStudentAttendence(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
+            'date' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            // get attendance details query
+            $date = $request->date;
+            $subject_id = $request->subject_id;
+            $Connection = $this->createNewConnection($request->branch_id);
+            $getTeachersClassName = $Connection->table('enrolls as en')
+                ->select(
+                    'en.student_id',
+                    'en.roll',
+                    'st.first_name',
+                    'st.last_name',
+                    'st.register_no',
+                    'sa.id as att_id',
+                    'sa.status as att_status',
+                    'sa.remarks as att_remark',
+                    'sa.date',
+                    'sa.student_behaviour',
+                    'sa.classroom_behaviour',
+                    'sa.reasons'
+                )
+                ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
+                ->leftJoin('student_attendances as sa', function ($q) use ($date, $subject_id) {
+                    $q->on('sa.student_id', '=', 'st.id')
+                        ->on('sa.date', '=', DB::raw("'$date'")) //second join condition                           
+                        ->on('sa.subject_id', '=', DB::raw("'$subject_id'")); //need to add subject id also later                           
+                })
+                ->where([
+                    ['en.class_id', '=', $request->class_id],
+                    ['en.section_id', '=', $request->section_id]
+                ])
+                ->get();
+
+            return $this->successResponse($getTeachersClassName, 'Attendance record fetch successfully');
+        }
+    }
+    //add attendance
+    function addStudentAttendence(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
+            'date' => 'required',
+            'attendance' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+
+            $attendance = $request->attendance;
+            $date = $request->date;
+            $class_id = $request->class_id;
+            $section_id = $request->section_id;
+            $subject_id = $request->subject_id;
+            $date = $request->date;
+            $data = [];
+            foreach ($attendance as $key => $value) {
+                // dd($value['attendance_id']);
+                $attStatus = (isset($value['att_status']) ? $value['att_status'] : "");
+                $att_remark = (isset($value['att_remark']) ? $value['att_remark'] : "");
+                $reasons = (isset($value['reasons']) ? $value['reasons'] : "");
+                $student_behaviour = (isset($value['student_behaviour']) ? $value['student_behaviour'] : "");
+                $classroom_behaviour = (isset($value['classroom_behaviour']) ? $value['classroom_behaviour'] : "");
+                $arrayAttendance = array(
+                    'student_id' => $value['student_id'],
+                    'status' => $attStatus,
+                    'remarks' => $att_remark,
+                    'reasons' => $reasons,
+                    'student_behaviour' => $student_behaviour,
+                    'classroom_behaviour' => $classroom_behaviour,
+                    'date' => $date,
+                    'class_id' => $class_id,
+                    'section_id' => $section_id,
+                    'subject_id' => $subject_id
+
+                );
+                $returnData = array(
+                    'att_status' => $attStatus,
+                    'first_name' => $value['first_name'],
+                    'last_name' => $value['last_name']
+                );
+                array_push($data, $returnData);
+                if ((empty($value['attendance_id']) || $value['attendance_id'] == "null")) {
+                    $Connection->table('student_attendances')->insert($arrayAttendance);
+                } else {
+                    $Connection->table('student_attendances')->where('id', $value['attendance_id'])->update([
+                        'status' => $attStatus,
+                        'remarks' => $att_remark,
+                        'reasons' => $reasons,
+                        'student_behaviour' => $student_behaviour,
+                        'classroom_behaviour' => $classroom_behaviour,
+                        'updated_at' => date("Y-m-d H:i:s")
+                    ]);
+                }
+            }
+            return $this->successResponse($data, 'Attendance added successfuly.');
+        }
+    }
 }

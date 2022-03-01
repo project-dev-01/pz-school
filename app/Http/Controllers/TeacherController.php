@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Helpers\Helper;
 
 class TeacherController extends Controller
 {
@@ -47,42 +48,54 @@ class TeacherController extends Controller
 
     // static page controller end
     // forum screen pages start
-    public function forumIndex(){
+    public function forumIndex()
+    {
         return view('teacher.forum.index');
     }
-    public function forumPageSingleTopic(){
+    public function forumPageSingleTopic()
+    {
         return view('teacher.forum.page-single-topic');
     }
-    public function forumPageCreateTopic(){
+    public function forumPageCreateTopic()
+    {
         return view('teacher.forum.page-create-topic');
     }
-    public function forumPageSingleUser(){
+    public function forumPageSingleUser()
+    {
         return view('teacher.forum.page-single-user');
     }
-    public function forumPageSingleThreads(){
+    public function forumPageSingleThreads()
+    {
         return view('teacher.forum.page-single-threads');
     }
-    public function forumPageSingleReplies(){
+    public function forumPageSingleReplies()
+    {
         return view('teacher.forum.page-single-replies');
     }
-    public function forumPageSingleFollowers(){
+    public function forumPageSingleFollowers()
+    {
         return view('teacher.forum.page-single-followers');
     }
-    public function forumPageSingleCategories(){
+    public function forumPageSingleCategories()
+    {
         return view('teacher.forum.page-single-categories');
     }
-    public function forumPageCategories(){
+    public function forumPageCategories()
+    {
         return view('teacher.forum.page-categories');
     }
-    public function forumPageCategoriesSingle(){
+    public function forumPageCategoriesSingle()
+    {
         return view('teacher.forum.page-categories-single');
     }
-    public function forumPageTabs(){
+    public function forumPageTabs()
+    {
         return view('teacher.forum.page-tabs');
     }
-    public function forumPageTabGuidelines(){
+    public function forumPageTabGuidelines()
+    {
         return view('teacher.forum.page-tabs-guidelines');
-    }    
+    }
     // forum screen pages end
 
     // faq screen pages start
@@ -93,11 +106,17 @@ class TeacherController extends Controller
     }
     public function classroomManagement()
     {
-        return view('teacher.classroom.management');
+        $data = [
+            'teacher_id' => session()->get('user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        return view('teacher.classroom.management', [
+            'teacher_class' => !empty($response['data']) ? $response['data'] : $$response
+        ]);
     }
     // faq screen pages end
 
-    
+
     public function testResult()
     {
         return view('teacher.testresult.index');
@@ -127,14 +146,14 @@ class TeacherController extends Controller
     public function bystudent()
     {
         return view('teacher.exam_results.bystudent');
-    }    
+    }
 
-    
+
     public function evaluationReport()
     {
         return view('teacher.homework.evaluation_report');
     }
-    
+
     public function homeworkEdit()
     {
         return view('teacher.homework.edit');
@@ -143,5 +162,21 @@ class TeacherController extends Controller
     {
         return view('teacher.analyticrep.analyticreport');
     }
+    function classroomPost(Request $request)
+    {
+        // echo "<pre>";
+        // print_r($request);
 
+        $data = [
+            "attendance" => $request->attendance,
+            "date" => $request->date,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id,
+            "date" => $request->date
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.add_student_attendance'), $data);
+        return $response;
+    }
 }

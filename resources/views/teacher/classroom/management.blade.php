@@ -24,40 +24,58 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="heard">Class name<span class="text-danger">*</span></label>
-                                <select id="heard" class="form-control" required="">
-                                    <option value="">I</option>
-                                    <option value="press">II</option>
+                    <form id="classroomFilter" autocomplete="off">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="changeClassName">Class<span class="text-danger">*</span></label>
+                                    <select id="changeClassName" class="form-control" name="class_id">
+                                        <option value="">Select Class</option>
+                                        @forelse ($teacher_class as $class)
+                                        <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="sectionID">Section<span class="text-danger">*</span></label>
+                                    <select id="sectionID" class="form-control" name="section_id">
+                                        <option value="">Select Section</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="subjectID">Subject<span class="text-danger">*</span></label>
+                                    <select id="subjectID" class="form-control" name="subject_id">
+                                        <option value="">Select Subject</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="class_date">Date<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" value="<?php echo date('d-m-Y'); ?>" name="class_date" id="classDate" require="">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="heard">Count Down<span class="text-danger">*</span></label>
+                                    <input type="text" id="basic-timepicker" class="form-control btn dropdown-toggle btn-light" placeholder="01:00:00" disabled>
 
-                                </select>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="heard">Subject<span class="text-danger">*</span></label>
-                                <select id="heard" class="form-control" required="">
-                                    <option value="">English</option>
-                                    <option value="press">Maths</option>
-                                </select>
+                        <div>
+                            <div class="form-group text-right m-b-0">
+                                <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
+                                    Filter
+                                </button>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="heard">Date<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" value="<?php echo date('d-m-Y'); ?>" name="class_date" id="classDate" require="">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="heard">Count Down<span class="text-danger">*</span></label>
-                                <input type="text" id="basic-timepicker" class="form-control btn dropdown-toggle btn-light" placeholder="01:00:00" disabled>
-
-                            </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="card"><br>
@@ -237,80 +255,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div class="card">
-                                                        <div class="card-header" style="background-color:#60a05b;color:white;text-align:left">
-                                                            <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle" height="40" />
-                                                            <label style="text-align:center">William</label>
-                                                        </div>
-                                                    </div> <!-- end card-box-->
-                                                </div> <!-- end col -->
-                                                <div class="col-md-3">
-                                                    <div class="card">
-                                                        <div class="card-header" style="background-color:#de354f;color:white;text-align:left">
-                                                            <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle" height="40" />
-                                                            <label style="text-align:center">James</label>
-                                                        </div>
-                                                    </div> <!-- end card-box-->
-                                                </div> <!-- end col -->
-                                                <div class="col-md-3">
-                                                    <div class="card">
-                                                        <div class="card-header" style="background-color:#60a05b;color:white;text-align:left">
-                                                            <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle" height="40" />
-                                                            <label style="text-align:center">Benjamin</label>
-                                                        </div>
-                                                    </div> <!-- end card-box-->
-                                                </div> <!-- end col -->
-                                                <div class="col-md-3">
-                                                    <div class="card">
-                                                        <div class="card-header" style="background-color:#60a05b;color:white;text-align:left">
-                                                            <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle" height="40" />
-                                                            <label style="text-align:center">Lucas</label>
-                                                        </div>
-                                                    </div> <!-- end card-box-->
-                                                </div> <!-- end col -->
-                                                <div class="col-md-3">
-                                                    <div class="card">
-                                                        <div class="card-header" style="background-color:#60a05b;color:white;text-align:left">
-                                                            <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle" height="40" />
-                                                            <label style="text-align:center">Charlotte</label>
-                                                        </div>
-                                                    </div> <!-- end card-box-->
-                                                </div> <!-- end col -->
-                                                <div class="col-md-3">
-                                                    <div class="card">
-                                                        <div class="card-header" style="background-color:#358fde;color:white;text-align:left">
-                                                            <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle" height="40" />
-                                                            <label style="text-align:center">Sophia</label>
-                                                        </div>
-                                                    </div> <!-- end card-box-->
-                                                </div> <!-- end col -->
-                                                <div class="col-md-3">
-                                                    <div class="card">
-                                                        <div class="card-header" style="background-color:#60a05b;color:white;text-align:left">
-                                                            <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle" height="40" />
-                                                            <label style="text-align:center">Amelia</label>
-                                                        </div>
-                                                    </div> <!-- end card-box-->
-                                                </div> <!-- end col -->
-                                                <div class="col-md-3">
-                                                    <div class="card">
-                                                        <div class="card-header" style="background-color:#358fde;color:white;text-align:left">
-                                                            <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle" height="40" />
-                                                            <label style="text-align:center">Isabella</label>
-                                                        </div>
-                                                    </div> <!-- end card-box-->
-                                                </div> <!-- end col -->
-                                                <div class="col-md-3">
-                                                    <div class="card">
-                                                        <div class="card-header" style="background-color:#358fde;color:white;text-align:left">
-                                                            <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle" height="40" />
-                                                            <label style="text-align:center">Mia</label>
-                                                        </div>
-                                                    </div> <!-- end card-box-->
-                                                </div> <!-- end col -->
-                                            </div>
+                                            <div id="layoutModeGrid"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -320,452 +265,70 @@
                                     }
                                 </style>
                                 <div class="tab-pane" id="home-b1">
-                                    <div class="col-md-12">
-                                        <table data-toggle="table" data-page-size="7" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
-                                            <thead>
-                                                <tr>
-                                                    <th data-field="state" data-checkbox="true"></th>
-                                                    <th data-field="id" data-switchable="false">Student Name
-                                                    </th>
-                                                    <th data-field="name">Attentance</th>
-                                                    <th data-field="Remarks">Remarks</th>
-                                                    <th data-field="Reasons">Reasons</th>
-                                                    <th data-field="sbehaviour">student behaviour</th>
-                                                    <th data-field="crbehaviour">Class Room behaviour</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td> </td>
-                                                    <td class="table-user">
-                                                        <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-                                                        <a href="javascript:void(0);" class="text-body font-weight-semibold">William</a>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="dropdown dropdown-action">
-                                                            <a href="#" class="dropdown-toggle" id="aa" style="color:blue" data-toggle="dropdown" aria-expanded="false">
-                                                                Mark</a>
-                                                            <div class="dropdown-menu dropdown-menu-center">
-                                                                <a class="dropdown-item" href="#">Present</a>
-                                                                <a class="dropdown-item" href="#">Late</a>
-                                                                <a class="dropdown-item" href="#">Absent</a>
-                                                                <a class="dropdown-item" href="#">Excused</a>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#centermodal">Add Remarks</button>
-                                                    </td>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <label for="heard"></label>
-                                                            <select id="heard" class="form-control" required="">
-                                                                <option value="">Choose</option>
-                                                                <option value="press">Fever</option>
-                                                                <option value="">Bus Breakdown</option>
-                                                                <option value="press">Book Missing</option>
-                                                                <option value="">Others</option>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="text-center">
-                                                            <a href=""><i class="fas fa-star" style="font-size:20px;color: #0ABAB5"></i></a>
-                                                            <a href=""><i class="fas fa-star" style="font-size:20px;color: #0ABAB5"></i></a>
-                                                            <a href=""><i class="fas fa-star" style="font-size:20px;color: #0ABAB5"></i></a>
-                                                            <a href=""><i class="fas fa-star" style="font-size:20px;color: #0ABAB5"></i></a>
-                                                            <a href=""><i class="fas fa-star" style="font-size:20px;color: #0ABAB5"></i></a>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="text-center">
-                                                            <a href=""><i class=' far fa-thumbs-up' style='font-size:20px;color:blue'></i></a>
-                                                            <a href=""><i class='far fa-thumbs-down' style='font-size:20px;color:red'></i></a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <!-- <tr>
-                                                                <td></td>
-																<td class="table-user">
-																	<img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-																	<a href="javascript:void(0);" class="text-body font-weight-semibold">James</a>
-																</td>
-                                                                <td class="text-center">
-                                                                    <div class="dropdown dropdown-action">
-                                                                        <a href="#" class="dropdown-toggle" id="aa" style="color:blue" data-toggle="dropdown" aria-expanded="false">
-                                                                            Late</a>
-                                                                        <div class="dropdown-menu dropdown-menu-center">
-                                                                            <a class="dropdown-item" href="#">Present</a>
-                                                                            <a class="dropdown-item" href="#">Late</a>
-                                                                            <a class="dropdown-item" href="#">Absent</a>
-                                                                            <a class="dropdown-item" href="#">Excused</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-															<td> 
-																 <button type="button" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#centermodal">Add Remarks</button></td>
-                                                              </td> 
-                                                               <td> 
-																<div class="form-group">
-																	<label for="heard"></label>
-																	<select id="heard" class="form-control" required="">
-																		<option value="">Choose</option>
-																		<option value="press">Fever</option>
-																		<option value="">Bus Breakdown</option>
-																		<option value="press">Book Missing</option>
-																		<option value="">Others</option>																		
-																	</select>
-																</div> 
-																</td>
-                                                                <td>
-                                                                    <div class="text-warning mb-2 font-13">
-                                                                        <i class="far fa-star" style='font-size:20px;color:green'></i>
-                                                                        <i class="far fa-star text-danger" style='font-size:20px;'></i>
-                                                                        <i class="far fa-heart" style='font-size:20px;'></i>
-                                                                        <i class='far fa-grin' style='font-size:20px;color:golden'></i>
-                                                                        <i class='far fa-angry' style='font-size:20px;color:red'></i>
-                                                                        <i class=' far fa-thumbs-up' style='font-size:20px;color:blue'></i>
-                                                                        <i class='far fa-thumbs-down' style='font-size:20px;color:red'></i>
-                                                                    </div>
-                                                                </td>                                                           
-                                                            </tr>
-                                                            <tr>
-                                                                <td></td>
-																<td class="table-user">
-																	<img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-																	<a href="javascript:void(0);" class="text-body font-weight-semibold">Benjamin</a>
-																</td>
-                                                                <td class="text-center">
-                                                                    <div class="dropdown dropdown-action">
-                                                                        <a href="#" class="dropdown-toggle" id="aa" style="color:blue" data-toggle="dropdown" aria-expanded="false">
-                                                                            Mark</a>
-                                                                        <div class="dropdown-menu dropdown-menu-center">
-                                                                            <a class="dropdown-item" href="#">Present</a>
-                                                                            <a class="dropdown-item" href="#">Late</a>
-                                                                            <a class="dropdown-item" href="#">Absent</a>
-                                                                            <a class="dropdown-item" href="#">Excused</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-															<td> 
-																 <button type="button" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#centermodal">Add Remarks</button></td>
-                                                              </td> 
-																<td> 
-																<div class="form-group">
-																	<label for="heard"></label>
-																	<select id="heard" class="form-control" required="">
-																		<option value="">Choose</option>
-																		<option value="press">Fever</option>
-																		<option value="">Bus Breakdown</option>
-																		<option value="press">Book Missing</option>
-																		<option value="">Others</option>																		
-																	</select>
-																</div> 
-																</td>
-                                                                <td>
-                                                                    <div class="text-warning mb-2 font-13">
-                                                                        <i class="far fa-star" style='font-size:20px;color:green'></i>
-                                                                        <i class="far fa-star text-danger" style='font-size:20px;'></i>
-                                                                        <i class="far fa-heart" style='font-size:20px;'></i>
-                                                                        <i class='far fa-grin' style='font-size:20px;color:golden'></i>
-                                                                        <i class='far fa-angry' style='font-size:20px;color:red'></i>
-                                                                        <i class=' far fa-thumbs-up' style='font-size:20px;color:blue'></i>
-                                                                        <i class='far fa-thumbs-down' style='font-size:20px;color:red'></i>
-                                                                    </div>
-                                                                </td>																
-                                                              
-                                                            </tr>
-															<tr>
-                                                                <td></td>
-																<td class="table-user">
-																	<img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-																	<a href="javascript:void(0);" class="text-body font-weight-semibold">Lucas</a>
-																</td>
-                                                                <td class="text-center">
-                                                                    <div class="dropdown dropdown-action">
-                                                                        <a href="#" class="dropdown-toggle" id="aa" style="color:blue" data-toggle="dropdown" aria-expanded="false">
-                                                                            Mark</a>
-                                                                        <div class="dropdown-menu dropdown-menu-center">
-                                                                            <a class="dropdown-item" href="#">Present</a>
-                                                                            <a class="dropdown-item" href="#">Late</a>
-                                                                            <a class="dropdown-item" href="#">Absent</a>
-                                                                            <a class="dropdown-item" href="#">Excused</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-																<td> 
-																 <button type="button" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#centermodal">Add Remarks</button></td>
-                                                              </td> 
-																<td> 
-																<div class="form-group">
-																	<label for="heard"></label>
-																	<select id="heard" class="form-control" required="">
-																		<option value="">Choose</option>
-																		<option value="press">Fever</option>
-																		<option value="">Bus Breakdown</option>
-																		<option value="press">Book Missing</option>
-																		<option value="">Others</option>																		
-																	</select>
-																</div> 
-																</td>
-                                                                <td>
-                                                                    <div class="text-warning mb-2 font-13">
-                                                                        <i class="far fa-star" style='font-size:20px;color:green'></i>
-                                                                        <i class="far fa-star text-danger" style='font-size:20px;'></i>
-                                                                        <i class="far fa-heart" style='font-size:20px;'></i>
-                                                                        <i class='far fa-grin' style='font-size:20px;color:golden'></i>
-                                                                        <i class='far fa-angry' style='font-size:20px;color:red'></i>
-                                                                        <i class=' far fa-thumbs-up' style='font-size:20px;color:blue'></i>
-                                                                        <i class='far fa-thumbs-down' style='font-size:20px;color:red'></i>
-                                                                    </div>
-                                                                </td>                                                         
-                                                            </tr>
-															<tr>
-                                                                <td></td>
-																<td class="table-user">
-																	<img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-																	<a href="javascript:void(0);" class="text-body font-weight-semibold">Charlotte</a>
-																</td>
-                                                                <td class="text-center">
-                                                                    <div class="dropdown dropdown-action">
-                                                                        <a href="#" class="dropdown-toggle" id="aa" style="color:blue" data-toggle="dropdown" aria-expanded="false">
-                                                                            Mark</a>
-                                                                        <div class="dropdown-menu dropdown-menu-center">
-                                                                            <a class="dropdown-item" href="#">Present</a>
-                                                                            <a class="dropdown-item" href="#">Late</a>
-                                                                            <a class="dropdown-item" href="#">Absent</a>
-                                                                            <a class="dropdown-item" href="#">Excused</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-																
-                                                               <td> 
-																 <button type="button" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#centermodal">Add Remarks</button></td>
-                                                              </td> 
-																<td> 
-																<div class="form-group">
-																	<label for="heard"></label>
-																	<select id="heard" class="form-control" required="">
-																		<option value="">Choose</option>
-																		<option value="press">Fever</option>
-																		<option value="">Bus Breakdown</option>
-																		<option value="press">Book Missing</option>
-																		<option value="">Others</option>																		
-																	</select>
-																</div> 
-																</td>
-                                                                <td>
-                                                                    <div class="text-warning mb-2 font-13">
-                                                                        <i class="far fa-star" style='font-size:20px;color:green'></i>
-                                                                        <i class="far fa-star text-danger" style='font-size:20px;'></i>
-                                                                        <i class="far fa-heart" style='font-size:20px;'></i>
-                                                                        <i class='far fa-grin' style='font-size:20px;color:golden'></i>
-                                                                        <i class='far fa-angry' style='font-size:20px;color:red'></i>
-                                                                        <i class=' far fa-thumbs-up' style='font-size:20px;color:blue'></i>
-                                                                        <i class='far fa-thumbs-down' style='font-size:20px;color:red'></i>
-                                                                    </div>
-                                                                </td>
-                                                              
-                                                            </tr>
-															<tr>
-                                                                <td></td>
-																<td class="table-user">
-																	<img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-																	<a href="javascript:void(0);" class="text-body font-weight-semibold">Sophia</a>
-																</td>
-                                                                <td class="text-center">
-                                                                    <div class="dropdown dropdown-action">
-                                                                        <a href="#" class="dropdown-toggle" id="aa" style="color:blue" data-toggle="dropdown" aria-expanded="false">
-                                                                            Absent</a>
-                                                                        <div class="dropdown-menu dropdown-menu-center">
-                                                                            <a class="dropdown-item" href="#">Present</a>
-                                                                            <a class="dropdown-item" href="#">Late</a>
-                                                                            <a class="dropdown-item" href="#">Absent</a>
-                                                                            <a class="dropdown-item" href="#">Excused</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-																<td> 
-																 <button type="button" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#centermodal">Add Remarks</button></td>
-                                                              </td> 
-																<td> 
-																<div class="form-group">
-																	<label for="heard"></label>
-																	<select id="heard" class="form-control" required="">
-																		<option value="">Choose</option>
-																		<option value="press">Fever</option>
-																		<option value="">Bus Breakdown</option>
-																		<option value="press">Book Missing</option>
-																		<option value="">Others</option>																		
-																	</select>
-																</div> 
-																</td>
-                                                                <td>
-                                                                    <div class="text-warning mb-2 font-13">
-                                                                        <i class="far fa-star" style='font-size:20px;color:green'></i>
-                                                                        <i class="far fa-star text-danger" style='font-size:20px;'></i>
-                                                                        <i class="far fa-heart" style='font-size:20px;'></i>
-                                                                        <i class='far fa-grin' style='font-size:20px;color:golden'></i>
-                                                                        <i class='far fa-angry' style='font-size:20px;color:red'></i>
-                                                                        <i class=' far fa-thumbs-up' style='font-size:20px;color:blue'></i>
-                                                                        <i class='far fa-thumbs-down' style='font-size:20px;color:red'></i>
-                                                                    </div>
-                                                                </td>
-                                                          
-                                                            </tr>
-															<tr>
-                                                                <td></td>
-																<td class="table-user">
-																	<img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-																	<a href="javascript:void(0);" class="text-body font-weight-semibold">Amelia</a>
-																</td>
-                                                                <td class="text-center">
-                                                                    <div class="dropdown dropdown-action">
-                                                                        <a href="#" class="dropdown-toggle" id="aa" style="color:blue" data-toggle="dropdown" aria-expanded="false">
-                                                                            Mark</a>
-                                                                        <div class="dropdown-menu dropdown-menu-center">
-                                                                            <a class="dropdown-item" href="#">Present</a>
-                                                                            <a class="dropdown-item" href="#">Late</a>
-                                                                            <a class="dropdown-item" href="#">Absent</a>
-                                                                            <a class="dropdown-item" href="#">Excused</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-															<td> 
-																 <button type="button" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#centermodal">Add Remarks</button></td>
-                                                              </td> 
-																<td> 
-																<div class="form-group">
-																	<label for="heard"></label>
-																	<select id="heard" class="form-control" required="">
-																		<option value="">Choose</option>
-																		<option value="press">Fever</option>
-																		<option value="">Bus Breakdown</option>
-																		<option value="press">Book Missing</option>
-																		<option value="">Others</option>																		
-																	</select>
-																</div> 
-																</td>
-                                                                <td>
-                                                                    <div class="text-warning mb-2 font-13">
-                                                                        <i class="far fa-star" style='font-size:20px;color:green'></i>
-                                                                        <i class="far fa-star text-danger" style='font-size:20px;'></i>
-                                                                        <i class="far fa-heart" style='font-size:20px;'></i>
-                                                                        <i class='far fa-grin' style='font-size:20px;color:golden'></i>
-                                                                        <i class='far fa-angry' style='font-size:20px;color:red'></i>
-                                                                        <i class=' far fa-thumbs-up' style='font-size:20px;color:blue'></i>
-                                                                        <i class='far fa-thumbs-down' style='font-size:20px;color:red'></i>
-                                                                    </div>
-                                                                </td>
-                                                             </tr>
-															<tr>
-                                                                <td></td>
-																<td class="table-user">
-																	<img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-																	<a href="javascript:void(0);" class="text-body font-weight-semibold">Isabella</a>
-																</td>
-                                                                <td class="text-center">
-                                                                    <div class="dropdown dropdown-action">
-                                                                        <a href="#" class="dropdown-toggle" id="aa" style="color:blue" data-toggle="dropdown" aria-expanded="false">
-                                                                            Late</a>
-                                                                        <div class="dropdown-menu dropdown-menu-center">
-                                                                            <a class="dropdown-item" href="#">Present</a>
-                                                                            <a class="dropdown-item" href="#">Late</a>
-                                                                            <a class="dropdown-item" href="#">Absent</a>
-                                                                            <a class="dropdown-item" href="#">Excused</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-																<td> 
-																 <button type="button" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#centermodal">Add Remarks</button></td>
-                                                              </td> 
-                                                               <td> 
-																<div class="form-group">
-																	<label for="heard"></label>
-																	<select id="heard" class="form-control" required="">
-																		<option value="">Choose</option>
-																		<option value="press">Fever</option>
-																		<option value="">Bus Breakdown</option>
-																		<option value="press">Book Missing</option>
-																		<option value="">Others</option>																		
-																	</select>
-																</div> 
-																</td>
-                                                                <td>
-                                                                    <div class="text-warning mb-2 font-13">
-                                                                        <i class="far fa-star" style='font-size:20px;color:green'></i>
-                                                                        <i class="far fa-star text-danger" style='font-size:20px;'></i>
-                                                                        <i class="far fa-heart" style='font-size:20px;'></i>
-                                                                        <i class='far fa-grin' style='font-size:20px;color:golden'></i>
-                                                                        <i class='far fa-angry' style='font-size:20px;color:red'></i>
-                                                                        <i class=' far fa-thumbs-up' style='font-size:20px;color:blue'></i>
-                                                                        <i class='far fa-thumbs-down' style='font-size:20px;color:red'></i>
-                                                                    </div>
-                                                                </td>
-                                                                
-                                                            </tr>
-															<tr>
-                                                                <td></td>
-																<td class="table-user">
-																	<img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-																	<a href="javascript:void(0);" class="text-body font-weight-semibold">Mia</a>
-																</td>
-                                                                <td class="text-center">
-                                                                    <div class="dropdown dropdown-action">
-                                                                        <a href="#" class="dropdown-toggle" id="aa" style="color:blue" data-toggle="dropdown" aria-expanded="false">
-                                                                            Late</a>
-                                                                        <div class="dropdown-menu dropdown-menu-center">
-                                                                            <a class="dropdown-item" href="#">Present</a>
-                                                                            <a class="dropdown-item" href="#">Late</a>
-                                                                            <a class="dropdown-item" href="#">Absent</a>
-                                                                            <a class="dropdown-item" href="#">Excused</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-																<td> 
-																 <button type="button" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#centermodal">Add Remarks</button></td>
-                                                              </td> 
-                                                               <td> 
-																<div class="form-group">
-																	<label for="heard"></label>
-																	<select id="heard" class="form-control" required="">
-																		<option value="">Choose</option>
-																		<option value="press">Fever</option>
-																		<option value="">Bus Breakdown</option>
-																		<option value="press">Book Missing</option>
-																		<option value="">Others</option>																		
-																	</select>
-																</div> 
-																</td>
-                                                                <td>
-                                                                    <div class="text-warning mb-2 font-13">
-                                                                        <i class="far fa-star" style='font-size:20px;color:green'></i>
-                                                                        <i class="far fa-star text-danger" style='font-size:20px;'></i>
-                                                                        <i class="far fa-heart" style='font-size:20px;'></i>
-                                                                        <i class='far fa-grin' style='font-size:20px;color:golden'></i>
-                                                                        <i class='far fa-angry' style='font-size:20px;color:red'></i>
-                                                                        <i class=' far fa-thumbs-up' style='font-size:20px;color:blue'></i>
-                                                                        <i class='far fa-thumbs-down' style='font-size:20px;color:red'></i>
-                                                                    </div>
-                                                                </td>                                                                
-                                                                </tr>-->
+                                    <form id="addformdata" method="post" action="{{ route('teacher.classroom.add') }}" autocomplete="off">
+                                        @csrf
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="changeAttendance">Select Attendance</label>
+                                                <select id="changeAttendance" class="form-control">
+                                                    <option value="">Not Selected</option>
+                                                    <option value="present">Present</option>
+                                                    <option value="absent">Absent</option>
+                                                    <option value="late">Late</option>
+                                                    <option value="excused">Excused</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="class_id" id="listModeClassID">
+                                        <input type="hidden" name="section_id" id="listModeSectionID">
+                                        <input type="hidden" name="subject_id" id="listModeSubjectID">
+                                        <input type="hidden" name="date" id="listModeSelectedDate">
+                                        <div class="col-md-12">
+                                            <!-- <table data-toggle="table" data-page-size="3" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable "> -->
+                                            <!-- <table id="listModeClassRoom" class="table table-striped table-nowrap"> -->
+                                            <table id="listModeClassRoom" class="table table-centered table-striped dt-responsive nowrap w-100" width="100%">
+                                                <!-- <table class="display" width="100%"> -->
+                                                <thead>
+                                                    <tr>
+                                                        <th data-field="state" data-checkbox="true"></th>
+                                                        <th data-field="id" data-switchable="false">Student name
+                                                        </th>
+                                                        <th data-field="name">Attentance</th>
+                                                        <th data-field="Remarks">Remarks</th>
+                                                        <th data-field="Reasons">Reasons</th>
+                                                        <th data-field="sbehaviour">Student behaviour</th>
+                                                        <th data-field="crbehaviour">Class Room behaviour</th>
 
-                                            </tbody>
-                                        </table>
-                                    </div> <!-- end card-box-->
+                                                    </tr>
+                                                </thead>
+                                                <!-- <tbody id="listModeClassRoom"> -->
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div> <!-- end card-box-->
+                                        <div class="col-md-12">
+                                            <div class="card-body">
+                                                <div class="form-group text-right m-b-0">
+                                                    <button class="btn btn-primary-bl waves-effect waves-light" id="saveClassRoomAttendance" type="submit">
+                                                        Save
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div> <!-- end col-->
 
-                                <div class="modal fade" id="centermodal" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal fade" id="stuRemarksPopup" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-body">
                                                 <label for="heard">Remarks</label>
-                                                <textarea class="form-control" id="product-description" rows="5" placeholder="Please enter description"></textarea>
+                                                <input type="hidden" id="studenetID" />
+                                                <textarea class="form-control" id="student_remarks" rows="5" placeholder="Enter remarks here" name="student_remarks"></textarea>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save</button>
+                                                <button type="button" id="studentRemarksSave" class="btn btn-primary">Save</button>
                                             </div>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
@@ -1074,4 +637,15 @@
     </div> <!-- end col -->
 
 </div> <!-- container -->
+@endsection
+@section('scripts')
+<script>
+    var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
+    var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";
+    var getStudentAttendance = "{{ config('constants.api.get_student_attendance') }}";
+    // default image test
+    var defaultImg = "{{ asset('images/users/default.jpg') }}";
+</script>
+<script src="{{ asset('js/custom/classroom.js') }}"></script>
+
 @endsection

@@ -140,6 +140,7 @@
     var branchBySection = "{{ config('constants.api.branch_by_section') }}";
 
     var token = "{{ Session::get('token') }}";
+    var branchID = "{{ Session::get('branch_id') }}";
     var userID = "{{ Session::get('user_id') }}";
     // branch details
     var branchList = "{{ route('branch.list') }}";
