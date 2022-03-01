@@ -32,7 +32,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="card-box">
+                            <div class="">
                                 <div class="table-responsive">
                                     <table class="table table-bordered mb-0">
                                         <thead>
@@ -49,7 +49,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            
+
                                             <tr>
                                                 <td>1</td>
                                                 <td>Volley Ball</td>
@@ -61,7 +61,7 @@
                                                 <td>Published</td>
                                                 <td>
                                                     <div class="button-list">
-                                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light"  data-toggle="modal" data-id="" data-target="#viewEvent"><i class="fe-eye"></i></a>
+                                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-toggle="modal" data-id="" data-target="#viewEvent"><i class="fe-eye"></i></a>
                                                         <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id=""><i class="fe-trash-2"></i></a>
                                                     </div>
                                                 </td>

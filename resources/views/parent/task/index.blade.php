@@ -21,40 +21,43 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="card-box">
-                <h4 class="header-title">To Do Task</h4>
-                <p class="sub-header">
-                <div class="form-group pull-right">
-                </div>
-                </p>
-
-                <div class="table-responsive">
-                    <table class="table mb-0" id="task-table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Title</th>
-                                <th>Date & Time</th>
-                                <th>Priority</th>
-                                <th>Description</th>
-                                <th>Action</th>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Sports Day</td>
-                                <td>Tommorrow 10am</td>
-                                <td><span class="badge badge-soft-danger p-1">High</span></td>
-                                <td>All Should wear sports dress</td>
-                                <td>
-                                    <div class="button-list">
-                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id=""><i class="fe-eye"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+            <div class="card">
+                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                            To Do Task
+                            <h4>
+                    </li>
+                </ul><br>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table mb-0" id="task-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Title</th>
+                                    <th>Date & Time</th>
+                                    <th>Priority</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Sports Day</td>
+                                    <td>Tommorrow 10am</td>
+                                    <td><span class="badge badge-soft-danger p-1">High</span></td>
+                                    <td>All Should wear sports dress</td>
+                                    <td>
+                                        <div class="button-list">
+                                            <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id=""><i class="fe-eye"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div> <!-- end card-box -->
         </div> <!-- end col -->

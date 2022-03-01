@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Children Attendance</h4>
+                <h4 class="page-title">Student Attendance</h4>
             </div>
         </div>
     </div>
@@ -27,20 +27,20 @@
                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Select Ground
+                            Attendance
                             <h4>
                     </li>
                 </ul><br>
                 <br>
                 <div class="card-body">
                     <form id="demo-form" data-parsley-validate="" autocomplete="off">
-                        <div class="row " >
-                           
+                        <div class="row ">
+
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="">Date<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge text-center">
-                                        <input type="text" class="form-control" data-provide="datepicker" data-date-format="MM yyyy" Value="February 2022" data-date-min-view-mode="1">   
+                                        <input type="text" class="form-control" data-provide="datepicker" data-date-format="MM yyyy" Value="February 2022" data-date-min-view-mode="1">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="far fa-calendar-alt"></span>
@@ -74,7 +74,7 @@
                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                             Attendance Report
+                            Attendance Report
                             <h4>
                     </li>
                 </ul><br>
@@ -84,19 +84,19 @@
                             <div class="card-box">
                                 <div class="row">
                                     <div class="col-md-8"></div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <table class="table table-bordered mb-0">
-                                                    <tr>
-                                                        <th><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i> Present</button></th>
-                                                        <th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i> Absent</button></th>
-                                                        <th><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-ufo"></i> Holiday</button></th>
-                                                        <th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> Late</button></th>
-                                                    </tr>
-                                                </table>
-                                            </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <table class="">
+                                                <tr>
+                                                    <th><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i> Present</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i> Absent</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-ufo"></i> Holiday</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> Late</button></th>
+                                                </tr>
+                                            </table>
                                         </div>
                                     </div>
+                                </div>
                                 <div class="table-responsive">
                                     <table class="table table-bordered mb-0">
                                         <thead>
@@ -205,7 +205,7 @@
                                                 <td>2</td>
                                                 <td>2</td>
                                             </tr>
-                                            
+
                                         </tbody>
                                     </table>
                                 </div> <!-- end table-responsive-->
