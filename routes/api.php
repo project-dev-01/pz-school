@@ -69,7 +69,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // branch id by class
     Route::post('branch-by-class', [ApiController::class, 'branchIdByClass']);
     Route::post('branch-by-section', [ApiController::class, 'branchIdBySection']);
-    Route::post('section-by-class', [ApiController::class, 'SectionByClass']);
+    Route::post('section-by-class', [ApiController::class, 'sectionByClass']);
+    Route::post('subject-by-class', [ApiController::class, 'subjectByClass']);
 
     // Event Type routes
     Route::post('event_type/add', [ApiController::class, 'addEventType']);
@@ -103,6 +104,12 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
     // get roles
     Route::post('roles/list', [ApiController::class, 'getRoles']);
+    
+     // Timetable
+     Route::post('timetable/add', [ApiController::class, 'addTimetable']);
+     Route::post('timetable/list', [ApiController::class, 'getTimetableList']);
+     Route::post('timetable/edit', [ApiController::class, 'editTimetable']);
+     Route::post('timetable/update', [ApiController::class, 'updateTimetable']);
 
     // employee routes
     Route::post('employee/department', [ApiController::class, 'getEmpDepartment']);
@@ -127,5 +134,10 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('teacher_class',[ApiController::class,'getTeachersClassName']);
     Route::post('teacher_section',[ApiController::class,'getTeachersSectionName']);
     Route::post('teacher_subject',[ApiController::class,'getTeachersSubjectName']);
+
+    
+    Route::post('timetable/student', [ApiController::class, 'studentTimetable']);
+    Route::post('timetable/parent', [ApiController::class, 'parentTimetable']);
+
     
 });

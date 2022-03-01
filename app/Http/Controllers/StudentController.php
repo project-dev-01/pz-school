@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Helpers\Helper;
+use App\Models\User;
 
 class StudentController extends Controller
 {
@@ -98,4 +100,36 @@ class StudentController extends Controller
      {
          return view('student.analyticrep.analyticreport');
      }
+
+    public function timetable(Request $request)
+    {
+
+        $student = User::find($request->session()->get('user_id'));
+        $data = [
+            'student_id' => $student['user_id']
+        ];
+
+        $days = array(
+            'sunday',
+            'monday',
+            'tuesday',
+            'wednesday',
+            'thursday',
+            'friday',
+            'saturday'
+        );
+        // dd($request);
+        $timetable = Helper::PostMethod(config('constants.api.timetable_student'), $data);
+        // dd($timetable);
+        return view(
+            'student.timetable.index',
+            [
+                'timetable' => $timetable['data']['timetable'],
+                'details' => $timetable['data']['details'],
+                'days' => $days,
+                'max' => $timetable['data']['max']
+            ]
+        );
+    }
+     
 }

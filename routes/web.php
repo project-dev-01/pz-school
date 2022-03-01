@@ -337,6 +337,18 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('designation/update', [AdminController::class, 'updateDesignation'])->name('admin.designation.update');
         Route::post('designation/delete', [AdminController::class, 'deleteDesignation'])->name('admin.designation.delete');
 
+        // Time Table
+        
+        Route::post('timetable/add', [AdminController::class, 'addTimetable'])->name('admin.timetable.add');
+        Route::get('timetable/create', [AdminController::class, 'createTimetable'])->name('admin.timetable.create');
+        Route::get('timetable/index', [AdminController::class, 'timetable'])->name('admin.timetable');
+        Route::post('timetable/timetable-details', [AdminController::class, 'getTimetable'])->name('admin.timetable.details');
+        Route::post('timetable/edit', [AdminController::class, 'editTimetable'])->name('admin.timetable.edit');
+        Route::post('timetable/update', [AdminController::class, 'updateTimetable'])->name('admin.timetable.update');
+        Route::post('timetable/subject', [AdminController::class, 'getSubject'])->name('admin.timetable.subject');
+
+        // Section By Class Route
+        Route::post('section-by-class', [AdminController::class, 'sectionByClass'])->name('admin.section_by_class');
 
         // Employee routes
     
@@ -712,7 +724,9 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         // faq        
         Route::get('faq/index', [StudentController::class, 'faqIndex'])->name('student.faq.Index'); 
         // Exam
-        Route::get('exam/schedule', [StudentController::class, 'examSchedule'])->name('student.exam.schedule');     
+        Route::get('exam/schedule', [StudentController::class, 'examSchedule'])->name('student.exam.schedule');    
+        // timetable
+        Route::get('timetable', [StudentController::class, 'timetable'])->name('student.timetable');    
         // Report card
         Route::get('report_card', [StudentController::class, 'reportCard'])->name('student.report_card');   
         // Event

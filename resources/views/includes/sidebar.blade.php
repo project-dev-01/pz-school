@@ -662,6 +662,27 @@
                     </div>
                 </li>
                 <li>
+                    <a href="#sidebartimeTable" data-toggle="collapse">
+                    <i data-feather="external-link" class="icon-dual"></i>
+                        <span> Time Table </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebartimeTable">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('admin.timetable.create')}}" class="nav-link {{ (request()->is('super_admin/timetable*')) ? 'active' : '' }}">
+                                    <span>Class Schedule</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.timetable')}}" class="nav-link {{ (request()->is('super_admin/timetable*')) ? 'active' : '' }}">
+                                    <span> Time Table </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
                     <a href="#sidebarAcademic" data-toggle="collapse">
                         <i data-feather="home"></i>
                         <span> Academic </span>
@@ -1621,6 +1642,12 @@
                         <span> Analytic </span>
                     </a>
                 </li> 
+                <li>
+                    <a href="{{ route('student.timetable')}}" class="nav-link {{ (request()->is('super_admin/timetable*')) ? 'active' : '' }}">
+                        <i data-feather="external-link" class="icon-dual"></i>
+                        <span> Time Table </span>
+                    </a>
+                </li>
                 <li>
                     <a href="{{ route('student.exam.schedule')}}" class="nav-link {{ (request()->is('student/exam*')) ? 'active' : '' }}">
                         <i class="fas fa-dna"></i> 

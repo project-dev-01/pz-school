@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Lesson;
 use Illuminate\Http\Request;
+use App\Helpers\Helper;
+use App\Models\User;
 
 class ParentController extends Controller
 {
@@ -49,10 +51,35 @@ class ParentController extends Controller
     {
         return view('parent.task.index');
     }
-    public function timeTable()
+    public function timeTable(Request $request)
     {
-        $weekDays     = Lesson::WEEK_DAYS;
-        return view('parent.time_table.index', compact('weekDays'));
+        $parent = User::find($request->session()->get('user_id'));
+        // dd($parent);
+        $data = [
+            'parent_id' => $parent['user_id']
+        ];
+
+        $days = array(
+            'sunday',
+            'monday',
+            'tuesday',
+            'wednesday',
+            'thursday',
+            'friday',
+            'saturday'
+        );
+        
+        $timetable = Helper::PostMethod(config('constants.api.timetable_parent'), $data);
+        // dd($timetable);
+        return view(
+            'parent.time_table.index',
+            [
+                'timetable' => $timetable['data']['timetable'],
+                'details' => $timetable['data']['details'],
+                'days' => $days,
+                'max' => $timetable['data']['max']
+            ]
+        );
     }
     // forum screen pages start
     public function forumIndex(){

@@ -1263,6 +1263,188 @@ class AdminController extends Controller
             return $response;
         }
     }
+    // Section by Class
+    public function sectionByClass(Request $request)
+    {
+        $data = [
+            'class_id' => $request->class_id,
+            
+        ];
+        $section = Helper::PostMethod(config('constants.api.section_by_class'),$data);
+        return $section;
+    }
+
+    // get subject and Teacher
+    public function getSubject(Request $request)
+    {
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+        ];
+
+        $subject = Helper::PostMethod(config('constants.api.subject_by_class'),$data);
+        return $subject;
+    }
+    
+    
+    // create Timetable
+    public function createTimetable(Request $request)
+    {
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        return view(
+            'admin.timetable.add',
+            [
+                'class' => $getclass['data'],
+            ]
+        );
+    }
+
+    // add Timetable
+    public function addTimetable(Request $request)
+    {
+
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'day' => $request->day,
+            'timetable' => $request->timetable,
+            
+        ];
+        $response = Helper::PostMethod(config('constants.api.timetable_add'), $data);
+        return $response;
+    }
+
+    // index Timetable
+    public function timetable(Request $request)
+    {
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        return view(
+            'admin.timetable.index',
+            [
+                'class' => $getclass['data'],
+            ]
+        );
+    }
+
+     // get Timetable
+    public function getTimetable(Request $request)
+    {
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+        ];
+
+        
+        $timetable = Helper::PostMethod(config('constants.api.timetable_list'), $data);
+       
+        $days = array(
+            'sunday',
+            'monday',
+            'tuesday',
+            'wednesday',
+            'thursday',
+            'friday',
+            'saturday'
+        );
+
+        if($timetable['code']=="200")
+        {
+            $max = $timetable['data']['max'];
+
+            $response ="";
+            foreach($days as $day)
+            {
+                $response.='<tr><td>'.strtoupper($day).'</td>';
+                $row=0;
+                foreach($timetable['data']['timetable'] as $table)
+                {
+                    if($table['day'] == $day)
+                    {
+                        $response.='<td>';
+                        if($table['break'] == "1")
+                        {
+                            $response.='<b>Break Time</b><br> ';
+                            $response.='('.$table['time_start'] .' - '.$table['time_end'] .' )<br>';
+                            if($table['class_room'])
+                            {
+                                
+                                $response.='Class Room : '.$table['class_room'] .'';
+                            }
+                        }else{
+                            $response.='<b>Subject:'.$table['subject_name'].'</b><br>';
+                            $response.='('.$table['time_start'] .' - '.$table['time_end'] .' )<br>';
+                            $response.='Teacher :  '.$table['teacher_name'] .'<br>';
+                            if($table['class_room'])
+                            {
+                                $response.='Class Room : '.$table['class_room'] .'';
+                            }
+                        }
+                        $response.='</td>';
+                        $row++;
+                    }
+                }
+                while($row<$max)
+                {
+                    $response.='<td class="center">N/A</td>';
+                    $row++;
+                }
+                $response.='</tr>';
+            }
+    
+            $timetable['timetable'] = $response;
+            
+        }
+        $timetable['class_id'] = $request->class_id;
+        $timetable['section_id'] = $request->section_id;
+        return $timetable;
+    }
+
+    // edit Timetable
+    public function editTimetable(Request $request)
+    {
+
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'day' => $request->day
+        ];
+        $timetable = Helper::PostMethod(config('constants.api.timetable_edit'), $data);
+        // 
+        if($timetable['code']=="200")
+        {
+            return view(
+                'admin.timetable.edit',
+                [
+                    'timetable' => $timetable['data']['timetable'],
+                    'details' => $timetable['data']['details'],
+                    'teacher' => $timetable['data']['teacher'],
+                    'subject' => $timetable['data']['subject']
+                ]
+            );
+        }else{
+            return view(
+                'admin.timetable.edit',
+                [
+                    'timetable' => NULL
+                ]
+            );
+        }    
+    }
+     public function updateTimetable(Request $request)
+     {
+ 
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'day' => $request->day,
+            'timetable' => $request->timetable,
+            
+        ];
+        $timetable = Helper::PostMethod(config('constants.api.timetable_update'), $data);
+        
+        return $timetable;
+     }
+    
     public function studentEntry()
     {
         return view('admin.attendance.student');

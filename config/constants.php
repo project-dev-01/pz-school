@@ -41,7 +41,8 @@ return [
         'branch_by_class' => $url.'/branch-by-class',
         'branch_by_section' => $url.'/branch-by-section',
         'section_by_class' => $url.'/section-by-class',
-        
+        'subject_by_class' => $url.'/subject-by-class',  
+
         // class url
         'class_add' => $url.'/classes/add',
         'class_list' => $url.'/classes/list',
@@ -82,6 +83,7 @@ return [
         //teacher url
         
         'teacher_list' => $url.'/teacher/list',
+
          // employee url
          'emp_department' => $url.'/employee/department',
          'emp_designation' => $url.'/employee/designation',
@@ -90,6 +92,16 @@ return [
          'employee_details' => $url.'/employee/employee-details',
          'employee_update' => $url.'/employee/update',
          'employee_delete' => $url.'/employee/delete',
+         
+         // timetable url
+        'timetable_add' => $url.'/timetable/add',
+        'timetable_list' => $url.'/timetable/list',
+        'timetable_edit' => $url.'/timetable/edit',
+        'timetable_update' => $url.'/timetable/update',
+
+        'timetable_student' => $url.'/timetable/student',
+        'timetable_parent' => $url.'/timetable/parent',
+
           // settings url
           'change_profile_picture' => $url.'/change-profile-picture',
           'get_user' => $url.'/get_user',
