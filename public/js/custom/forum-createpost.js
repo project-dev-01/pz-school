@@ -3,6 +3,7 @@ $(function () {
     $("#createpostForum").validate({
         rules: {
             inputTopicTitle: "required",
+            inputTopicHeader:"required",
             tpbody: "required",
             category: "required"
         }
@@ -25,8 +26,9 @@ $(function () {
                     // console.log("------")
                     console.log(data)
                     if (data.code == 200) {
-                        $('#createpostForumreset').find('form')[0].reset();
+                     
                         toastr.success(data.message);
+                        location.reload();
                     } else {
                         toastr.error(data.message);
                     }

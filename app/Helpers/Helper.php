@@ -33,6 +33,13 @@ class Helper{
         ]);
         return $response->json();
     }
+    // get api call
+    public static function GETMethodWithData($url,$data){
+        $data["token"] = session()->get('token');
+        $data["branch_id"] = session()->get('branch_id');
+        $response = Http::get($url, $data);
+        return $response->json();
+    }
     // post api call
     public static function PostMethod($url,$data){
         $data["token"] = session()->get('token');

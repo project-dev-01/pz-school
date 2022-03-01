@@ -112,8 +112,12 @@ return [
         'forum_cpost' => $url.'/forum/createpost',   
         'forum_list' => $url.'/forum/list',
         'category' => $url.'/get-category',        
-    
-          
+        'forum_single_post'=>$url.'/forum/singlepost',
+        'like_countadd' => $url.'/forum-likecout',
+        'dislike_countadd' => $url.'/forum-discout',
+        'heart_countadd' => $url.'/forum-heartcout',
+        'view_countadd' => $url.'/forum-viewcout',
+        'view_countadd_insert'=> $url.'/forum-viewcout-insert'          
     ]
 
 ];

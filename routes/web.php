@@ -437,6 +437,8 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         // Route::get('settings', [AdminController::class, 'settings'])->name('admin.settings');
 
         Route::post('form/page-create-topic', [AdminController::class, 'createpost'])->name('admin.forum.create-topic');
+        Route::get('forum/page-single-topic-val/{id}/{user_id}', [AdminController::class, 'forumPageSingleTopicwithvalue'])->name('admin.forum.page-single-topic-val');
+     
     });
     // admin routes end
 

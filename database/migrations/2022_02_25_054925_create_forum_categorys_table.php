@@ -15,6 +15,7 @@ class CreateForumCategorysTable extends Migration
     {
         Schema::create('forum_categorys', function (Blueprint $table) {
             $table->id();
+            $table->integer('branch_id');
             $table->string('category_names');
             $table->timestamps();
         });

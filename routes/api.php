@@ -126,10 +126,16 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // create database_migrate
     
     Route::post('database_migrate',[CommonController::class,'databaseMigrate']);
-    //
+    // forum 
     Route::post('forum/createpost',[ApiController::class,'forumcreatepost']);    
     Route::get('get-category', [CommonController::class, 'categoryList']);
     Route::get('forum/list', [ApiController::class, 'postList']);
+    Route::get('forum/singlepost', [ApiController::class, 'singlePost']);
+    Route::post('forum-likecout',[ApiController::class,'likescountadded']);
+    Route::post('forum-discout',[ApiController::class,'dislikescountadded']);
+    Route::post('forum-heartcout',[ApiController::class,'heartcountadded']);
+    Route::post('forum-viewcout',[ApiController::class,'viewcountadded']);
+    Route::post('forum-viewcout-insert',[ApiController::class,'viewcountinsert']);
     // classroom management
     Route::post('teacher_class',[ApiController::class,'getTeachersClassName']);
     Route::post('teacher_section',[ApiController::class,'getTeachersSectionName']);

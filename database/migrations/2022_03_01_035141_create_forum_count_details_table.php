@@ -15,10 +15,13 @@ class CreateForumCountDetailsTable extends Migration
     {
         Schema::create('forum_count_details', function (Blueprint $table) {
             $table->id();
+            $table->integer('created_post_id');            
+            $table->integer('branch_id');
             $table->integer('user_id');
             $table->string('user_name');
-            $table->integer('created_post_id');
             $table->integer('likes');
+            $table->integer('dislikes');
+            $table->integer('favorite');
             $table->integer('replies');
             $table->integer('views');
             $table->string('activity');

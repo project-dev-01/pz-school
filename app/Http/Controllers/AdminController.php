@@ -27,24 +27,25 @@ class AdminController extends Controller
     }
     public function forumPageSingleTopic()
     {
+
         return view('admin.forum.page-single-topic');
     }
     public function forumPageCreateTopic()
     {
 
-       // $category = Helper::GetMethod(config('constants.api.category'));   
-      //  $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
+        // $category = Helper::GetMethod(config('constants.api.category'));   
+        //  $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
         // dd($forum_list);
-      //  return view('admin.forum.page-create-topic',[
-      //      'category' => !empty($category['data'])?$category['data']:$category,
-      //      'forum_list' => !empty($forum_list['data'])?$forum_list['data']:$forum_list,
-      //  ]);
-      $category = Helper::GetMethod(config('constants.api.category'));   
-      $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
-      return view('admin.forum.page-create-topic',[
-          'category' => $category['data'],
-          'forum_list' => $forum_list['data'],
-      ]);
+        //  return view('admin.forum.page-create-topic',[
+        //      'category' => !empty($category['data'])?$category['data']:$category,
+        //      'forum_list' => !empty($forum_list['data'])?$forum_list['data']:$forum_list,
+        //  ]);
+        $category = Helper::GetMethod(config('constants.api.category'));
+        $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
+        return view('admin.forum.page-create-topic', [
+            'category' => $category['data'],
+            'forum_list' => $forum_list['data'],
+        ]);
     }
     public function forumPageSingleUser()
     {
@@ -1536,18 +1537,31 @@ class AdminController extends Controller
     }
     // forum create post 
     public function createpost(Request $request)
-    {     
+    {
         $data = [
-            'user_id'=>$request->category,
-            'user_name'=>$request->inputTopicTitle,
+            'user_id' => session()->get('user_id'),
+            'user_name' => session()->get('name'),
             'topic_title' => $request->inputTopicTitle,
-            'types'=>$request->topictype,
-            'body_content'=>$request->tpbody,
-            'category'=>$request->category,
-            'tags'=>$request->inputTopicTags,
-            'imagesorvideos'=>$request->inputTopicTitle
+            'topic_header' => $request->inputTopicHeader,
+            'types' => $request->topictype,
+            'body_content' => $request->tpbody,
+            'category' => $request->category,
+            'tags' => $request->inputTopicTags,
+            'imagesorvideos' => $request->inputTopicTitle
         ];
         $response = Helper::PostMethod(config('constants.api.forum_cpost'), $data);
         return $response;
-    }    
+    }
+    public function forumPageSingleTopicwithvalue($id,$user_id)
+    {  
+        $data = [
+            'id' => $id,
+            'user_id' => $user_id,
+        ];     
+      
+        $forum_singlepost = Helper::GETMethodWithData(config('constants.api.forum_single_post'),$data);
+        return view('admin.forum.page-single-topic', [      
+            'forum_single_post' => !empty($forum_singlepost['data'])?$forum_singlepost['data']:$forum_singlepost,
+        ]); 
+    }
 }

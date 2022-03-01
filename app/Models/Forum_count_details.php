@@ -5,22 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Forum_posts extends Model
+class Forum_count_details extends Model
 {
     use HasFactory;
-    protected $table = 'forum_posts';
+    protected $table = 'forum_count_details';
 
     protected $fillable = [
         'branch_id',
         'user_id',
         'user_name',
-        'topic_title',
-        'topic_header',
-        'types' ,
-        'body_content',
-        'category',
-        'tags',
-        'imagesorvideos',
-        'token'         
+        'created_post_id',
+        'likes',
+        'dislikes' ,
+        'favorite',
+        'replies',
+        'views',
+        'activity'        
     ];
 }

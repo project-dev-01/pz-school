@@ -15,9 +15,11 @@ class CreateForumPostsTable extends Migration
     {
         Schema::create('forum_posts', function (Blueprint $table) {
             $table->id();
+            $table->integer('branch_id');
             $table->integer('user_id')->nullable();
             $table->string('user_name')->nullable();
             $table->string('topic_title');
+            $table->string('topic_header');
             $table->string('types')->nullable();
             $table->text('body_content');
             $table->string('category');

@@ -475,5 +475,17 @@
     });
 </script>
 <script src="{{ asset('js/validation/validation.js') }}"></script>
-
+<script>
+        // forum count
+      
+        var token = "{{ Session::get('token') }}";
+        var user_id ="{{Session::get('user_id')}}"; 
+        var user_name ="{{Session::get('name')}}"; 
+        var branch_id = "{{Session::get('branch_id')}}";
+        var likescount = "{{ config('constants.api.like_countadd') }}";
+        var dislikescount = "{{ config('constants.api.dislike_countadd') }}";
+        var heart = "{{ config('constants.api.heart_countadd') }}";
+        var viewscount="{{ config('constants.api.view_countadd') }}";
+        var insertviewfirstcount="{{ config('constants.api.view_countadd_insert') }}";
+</script>
 

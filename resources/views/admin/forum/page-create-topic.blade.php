@@ -7,7 +7,6 @@
                 Create New Topic
             </h1>
             <form class="form-default form-create-topic" id="createpostForum" method="post" action="{{ route('admin.forum.create-topic') }}">
-
                 @csrf
                 <div class="form-group">
                     <label for="inputTopicTitle">Topic Title</label>
@@ -18,11 +17,11 @@
                     <div class="tt-note">Describe your topic well, while keeping the subject as short as possible.</div>
                 </div>
                 <div class="form-group" id="selectedtpy">
-                    <input type="hidden" id="topictype" name="topictype">
+                    <input type="hidden" id="topictype" name="topictype">                
                     <label>Topic Type</label>
                     <div class="tt-js-active-btn tt-wrapper-btnicon">
                         <div class="row tt-w410-col-02">
-                            <div class="col-4 col-lg-3 col-xl-2">
+                            <div class="col-4 col-lg-3 col-xl-3">
                                 <a href="#" class="tt-button-icon">
                                     <span class="tt-icon">
                                         <svg>
@@ -32,7 +31,7 @@
                                     <span class="tt-text">Discussion</span>
                                 </a>
                             </div>
-                            <div class="col-4 col-lg-3 col-xl-2">
+                            <div class="col-4 col-lg-3 col-xl-3">
                                 <a href="#" class="tt-button-icon">
                                     <span class="tt-icon">
                                         <svg>
@@ -42,7 +41,7 @@
                                     <span class="tt-text">Question</span>
                                 </a>
                             </div>
-                            <div class="col-4 col-lg-3 col-xl-2">
+                            <div class="col-4 col-lg-3 col-xl-3">
                                 <a href="#" class="tt-button-icon">
                                     <span class="tt-icon">
                                         <svg>
@@ -52,7 +51,7 @@
                                     <span class="tt-text">Poll</span>
                                 </a>
                             </div>
-                            <div class="col-4 col-lg-3 col-xl-2">
+                            <!--  <div class="col-4 col-lg-3 col-xl-2">
                                 <a href="#" class="tt-button-icon">
                                     <span class="tt-icon">
                                         <svg>
@@ -71,8 +70,8 @@
                                     </span>
                                     <span class="tt-text">Video</span>
                                 </a>
-                            </div>
-                            <div class="col-4 col-lg-3 col-xl-2">
+                            </div>-->
+                            <div class="col-4 col-lg-3 col-xl-3">
                                 <a href="#" class="tt-button-icon">
                                     <span class="tt-icon">
                                         <svg>
@@ -84,6 +83,14 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputTopicHeader">Topic Header</label>
+                    <div class="tt-value-wrapper">
+                        <input type="text" name="inputTopicHeader" class="form-control" id="inputTopicTitle" placeholder="Header of your topic">
+                        <span class="tt-value-input"></span>
+                    </div>
+                    <div class="tt-note">Describe your topic header..</div>
                 </div>
                 <div class="pt-editor">
                     <h6 class="pt-title">Topic Body</h6>
@@ -228,12 +235,15 @@
             @foreach($forum_list as $value)
             <div class="tt-item">
                 <div class="tt-col-avatar">
-                    <svg class="tt-icon">
+                   <!-- <svg class="tt-icon">
                         <use xlink:href="#icon-ava-n"></use>
-                    </svg>
+                    </svg>-->
+                    <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle" height="40" />
+                    {{ $value['user_name'] }}
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="javascript:void()">
+                    <h6 class="tt-title">
+                    <a href="{{route('admin.forum.page-single-topic-val',[$value['id'],$value['user_id']])}}"> 
                             {{ $value['topic_title'] }}
                         </a></h6>
                     <div class="row align-items-center no-gutters hide-desktope">
@@ -247,11 +257,35 @@
                         </div>
                     </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color05 tt-badge">{{ $value['category'] }}</span></div>
-                <div class="tt-col-value hide-mobile">358</div>
-                <div class="tt-col-value tt-color-select hide-mobile">68</div>
-                <div class="tt-col-value hide-mobile">8.3k</div>
-                <div class="tt-col-value hide-mobile">1d</div>
+                <div class="tt-col-category"><span class="tt-color05 tt-badge">{{$value['category_names'] }}</span></div>
+                <div class="tt-col-value hide-mobile"> 
+                    @if($value['likes']=== null)                
+                    0
+                    @else
+                    {{$value['likes']}}
+                    @endif
+                </div>
+                <div class="tt-col-value hide-mobile">                
+                    @if($value['replies']=== null) 
+                    0
+                    @else
+                    {{$value['replies']}}
+                    @endif
+                </div>
+                <div class="tt-col-value hide-mobile">              
+                    @if($value['views']=== null) 
+                    0
+                    @else
+                    {{$value['views']}}
+                    @endif
+                </div>
+                <div class="tt-col-value hide-mobile"> 
+                     @if($value['views']=== null) 
+                    0
+                    @else
+                    {{$value['activity']}}
+                    @endif   
+                </div>
             </div>
             @endforeach
             @endif
@@ -262,7 +296,7 @@
                     </svg>
                 </button>
             </div>
-        </div>  
+        </div>
     </div>
 </main>
 @endsection
