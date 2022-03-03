@@ -146,5 +146,11 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     //  getStudentAttendence
     Route::post('get_student_attendance',[ApiController::class,'getStudentAttendence']);
     Route::post('add_student_attendance',[ApiController::class,'addStudentAttendence']);
-
+    Route::post('get_short_test',[ApiController::class,'getShortTest']);
+    Route::post('add_short_test',[ApiController::class,'addShortTest']);
+    Route::post('add_daily_report',[ApiController::class,'addDailyReport']);
+    Route::post('get_daily_report_remarks',[ApiController::class,'getDailyReportRemarks']);
+    Route::post('add_daily_report_remarks',[ApiController::class,'addDailyReportRemarks']);
+    Route::post('get_classroom_widget_data',[ApiController::class,'getClassroomWidget']);
+    
 });

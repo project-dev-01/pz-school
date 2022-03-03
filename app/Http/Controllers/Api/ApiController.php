@@ -2483,4 +2483,234 @@ class ApiController extends BaseController
             return $this->successResponse($data, 'Attendance added successfuly.');
         }
     }
+    // getShortTest
+    function getShortTest(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            // get attendance details query
+            $date = $request->date;
+            $subject_id = $request->subject_id;
+            $Connection = $this->createNewConnection($request->branch_id);
+            $getTeachersClassName = $Connection->table('enrolls as en')
+                ->select(
+                    'en.student_id',
+                    'en.roll',
+                    'st.first_name',
+                    'st.last_name'
+                )
+                ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
+                ->where([
+                    ['en.class_id', '=', $request->class_id],
+                    ['en.section_id', '=', $request->section_id]
+                ])
+                ->get();
+
+            return $this->successResponse($getTeachersClassName, 'Short test record fetch successfully');
+        }
+    }
+    // add short test
+    function addShortTest(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
+            'date' => 'required',
+            'short_test' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+
+            $short_test = $request->short_test;
+            $date = $request->date;
+            $class_id = $request->class_id;
+            $section_id = $request->section_id;
+            $subject_id = $request->subject_id;
+            $date = $request->date;
+
+            foreach ($short_test as $key => $value) {
+                // dd($value['attendance_id']);
+                $grade_status = (isset($value['grade_status']) ? $value['grade_status'] : "");
+                $test_marks = (isset($value['test_marks']) ? $value['test_marks'] : "");
+
+                $addShortTest = array(
+                    'student_id' => $value['student_id'],
+                    'test_name' => $value['test_name'],
+                    'grade_status' => $grade_status,
+                    'test_marks' => $test_marks,
+                    'date' => $date,
+                    'class_id' => $class_id,
+                    'section_id' => $section_id,
+                    'subject_id' => $subject_id,
+                    'created_at' => date("Y-m-d H:i:s")
+                );
+                $checkExist = $Connection->table('short_tests')->where([['test_name', '=', $value['test_name']], ['date', '=', $date], ['student_id', '=', $value['student_id']]])->first();
+
+                if ($Connection->table('short_tests')->where([['test_name', '=', $value['test_name']], ['date', '=', $date], ['student_id', '=', $value['student_id']]])->count() > 0) {
+                    $Connection->table('short_tests')->where('id', $checkExist->id)->update([
+                        'grade_status' => $grade_status,
+                        'test_marks' => $test_marks,
+                        'updated_at' => date("Y-m-d H:i:s")
+                    ]);
+                } else {
+                    $Connection->table('short_tests')->insert($addShortTest);
+                }
+            }
+            return $this->successResponse([], 'Short test added successfuly.');
+        }
+    }
+    // addDailyReport
+    function addDailyReport(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
+            'date' => 'required',
+            'daily_report' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // insert data
+            $query = $Connection->table('daily_reports')->insert([
+                'class_id' => $request->class_id,
+                'section_id' => $request->section_id,
+                'subject_id' => $request->subject_id,
+                'date' => $request->date,
+                'report' => $request->daily_report,
+                'created_at' => date("Y-m-d H:i:s")
+            ]);
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Daily report added successfully');
+            }
+        }
+    }
+    // get Daily Report Remarks
+    function getDailyReportRemarks(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $getDailyReportRemarks = $Connection->table('enrolls as en')
+                ->select(
+                    'en.student_id',
+                    'st.first_name',
+                    'st.last_name',
+                    'dr.student_remarks',
+                    'dr.teacher_remarks',
+                    'dr.id'
+                )
+                ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
+                ->join('daily_report_remarks as dr', 'dr.student_id', '=', 'en.student_id')
+                ->where([
+                    ['dr.class_id', '=', $request->class_id],
+                    ['dr.section_id', '=', $request->section_id],
+                    ['dr.subject_id', '=', $request->subject_id],
+                ])
+                ->get();
+
+            return $this->successResponse($getDailyReportRemarks, 'Daily report remarks fetch successfully');
+        }
+    }
+    // addDailyReportRemarks
+    function addDailyReportRemarks(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
+            'daily_report_remarks' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $class_id = $request->class_id;
+            $section_id = $request->section_id;
+            $subject_id = $request->subject_id;
+            $daily_report_remarks = $request->daily_report_remarks;
+
+            $Connection = $this->createNewConnection($request->branch_id);
+            foreach ($daily_report_remarks as $key => $value) {
+                // dd($value['attendance_id']);
+                $teacher_remarks = (isset($value['teacher_remarks']) ? $value['teacher_remarks'] : "");
+                $reportRemarks = array(
+                    'student_id' => $value['student_id'],
+                    'teacher_remarks' => $teacher_remarks,
+                    'class_id' => $class_id,
+                    'section_id' => $section_id,
+                    'subject_id' => $subject_id,
+                    'updated_at' => date("Y-m-d H:i:s")
+                );
+                $Connection->table('daily_report_remarks')->where('id', $value['id'])->update($reportRemarks);
+            }
+            return $this->successResponse([], 'Remarks added successfuly.');
+        }
+    }
+    // get widget details
+    function getClassroomWidget(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
+            'date' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $getWidgetDetails = $Connection->table('student_attendances as sa')
+                ->select(
+                    DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "absent" then 1 ELSE NULL END) as "absentCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "late" then 1 ELSE NULL END) as "lateCount"'),
+                )
+                ->where([
+                    ['sa.class_id', '=', $request->class_id],
+                    ['sa.section_id', '=', $request->section_id],
+                    ['sa.subject_id', '=', $request->subject_id],
+                    ['sa.date', '=', $request->date],
+                ])
+                ->get();
+
+            return $this->successResponse($getWidgetDetails, 'Wigget record fetch successfully');
+        }
+    }
 }

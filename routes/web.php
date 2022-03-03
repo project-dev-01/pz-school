@@ -648,10 +648,12 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
         Route::get('exam_results/bystudent', [TeacherController::class, 'bystudent'])->name('teacher.exam_results.bystudent');
 
-        Route::get('/analyticrep', [TeacherController::class, 'analytic'])->name('teacher.analyticrep.analyticreport');
-        Route::post('/classroomAdd', [TeacherController::class, 'classroomPost'])->name('teacher.classroom.add');
-     
-         
+        Route::get('analyticrep', [TeacherController::class, 'analytic'])->name('teacher.analyticrep.analyticreport');
+        Route::post('classroomAdd', [TeacherController::class, 'classroomPost'])->name('teacher.classroom.add');
+        Route::post('getShortTest', [TeacherController::class, 'getShortTest'])->name('teacher.classroom.get_short_test');
+        Route::post('add_short_test', [TeacherController::class, 'addShortTest'])->name('teacher.classroom.add_short_test');
+        Route::post('add_daily_report', [TeacherController::class, 'addDailyReport'])->name('teacher.classroom.add_daily_report');        
+        Route::post('add_daily_report_remarks', [TeacherController::class, 'addDailyReportRemarks'])->name('teacher.classroom.add_daily_report_remarks');        
     });
      
     // TEACHER CONTROLLER END

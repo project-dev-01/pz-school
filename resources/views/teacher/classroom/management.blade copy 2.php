@@ -1,111 +1,5 @@
 @extends('layouts.admin-layout')
 @section('title','Class Room Management')
-@section('css')
-<style>
-    .rating {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-        overflow: hidden;
-        flex-direction: row-reverse;
-        position: relative;
-    }
-
-    .rating-0 {
-        filter: grayscale(100%);
-    }
-
-    .rating>input {
-        display: none;
-    }
-
-    .rating>label {
-        cursor: pointer;
-        width: 30px;
-        height: 30px;
-        margin-top: auto;
-        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23e3e3e3' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 76%;
-        transition: .3s;
-    }
-
-    .rating>input:checked~label,
-    .rating>input:checked~label~label {
-        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23fcd93a' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
-    }
-
-
-    .rating>input:not(:checked)~label:hover,
-    .rating>input:not(:checked)~label:hover~label {
-        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23d8b11e' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
-    }
-
-    #rating-1:checked~.emoji-wrapper>.emoji {
-        transform: translateY(-100px);
-    }
-
-    #rating-2:checked~.emoji-wrapper>.emoji {
-        transform: translateY(-200px);
-    }
-
-    #rating-3:checked~.emoji-wrapper>.emoji {
-        transform: translateY(-300px);
-    }
-
-    #rating-4:checked~.emoji-wrapper>.emoji {
-        transform: translateY(-400px);
-    }
-
-    #rating-5:checked~.emoji-wrapper>.emoji {
-        transform: translateY(-500px);
-    }
-
-    * {
-        box-sizing: border-box;
-        transition: all .1s ease-in-out;
-    }
-
-    /* thump */
-    .radio_group {
-        width: 40px;
-        height: 53px;
-        margin: 8px;
-        position: relative;
-        text-align: right;
-        font-size: 25px;
-    }
-
-    .radio_group input[type="radio"] {
-        opacity: 0;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        margin: 0;
-        padding: 0;
-        z-index: 1;
-        cursor: pointer;
-    }
-
-    .radio_group input[type="radio"]+label {
-        color: #95a5a6;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-        transform: scale(.8);
-    }
-
-    .radio_group input[type="radio"]:checked+label {
-        color: #3498db;
-        transform: scale(1.1);
-    }
-</style>
-@endsection
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -197,7 +91,7 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="text-right">
-                                        <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="presentCount"></span></h3>
+                                        <h3 class="my-1" style="color:blue"><span data-plugin="counterup">5</span></h3>
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -207,7 +101,7 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="text-right">
-                                        <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="absentCount"></span></h3>
+                                        <h3 class="my-1" style="color:blue"><span data-plugin="counterup">1</span></h3>
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -217,7 +111,7 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="text-right">
-                                        <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="lateCount"></span></h3>
+                                        <h3 class="my-1" style="color:blue"><span data-plugin="counterup">3</span></h3>
                                     </div>
                                 </div>
                             </div>
@@ -371,20 +265,18 @@
                                     }
                                 </style>
                                 <div class="tab-pane" id="home-b1">
-                                    <form id="addListMode" method="post" action="{{ route('teacher.classroom.add') }}" autocomplete="off">
+                                    <form id="addformdata" method="post" action="{{ route('teacher.classroom.add') }}" autocomplete="off">
                                         @csrf
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="changeAttendance">Select Attendance</label>
-                                                    <select id="changeAttendance" class="form-control">
-                                                        <option value="">Not Selected</option>
-                                                        <option value="present">Present</option>
-                                                        <option value="absent">Absent</option>
-                                                        <option value="late">Late</option>
-                                                        <option value="excused">Excused</option>
-                                                    </select>
-                                                </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="changeAttendance">Select Attendance</label>
+                                                <select id="changeAttendance" class="form-control">
+                                                    <option value="">Not Selected</option>
+                                                    <option value="present">Present</option>
+                                                    <option value="absent">Absent</option>
+                                                    <option value="late">Late</option>
+                                                    <option value="excused">Excused</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <input type="hidden" name="class_id" id="listModeClassID">
@@ -398,13 +290,14 @@
                                                 <!-- <table class="display" width="100%"> -->
                                                 <thead>
                                                     <tr>
-                                                        <th>#</th>
-                                                        <th>Student ame</th>
-                                                        <th>Attentance</th>
-                                                        <th>Remarks</th>
-                                                        <th>Reasons</th>
-                                                        <th>Student behaviour</th>
-                                                        <th>Class behaviour</th>
+                                                        <th data-field="state" data-checkbox="true"></th>
+                                                        <th data-field="id" data-switchable="false">Student name
+                                                        </th>
+                                                        <th data-field="name">Attentance</th>
+                                                        <th data-field="Remarks">Remarks</th>
+                                                        <th data-field="Reasons">Reasons</th>
+                                                        <th data-field="sbehaviour">Student behaviour</th>
+                                                        <th data-field="crbehaviour">Class Room behaviour</th>
 
                                                     </tr>
                                                 </thead>
@@ -468,35 +361,50 @@
                                             </button>
                                         </div>
                                     </form>
-                                    <form id="addDailyReportRemarks" method="post" action="{{ route('teacher.classroom.add_daily_report_remarks') }}" autocomplete="off">
-                                        <input type="hidden" name="class_id" id="dailyReportRemarksClassID">
-                                        <input type="hidden" name="section_id" id="dailyReportRemarksSectionID">
-                                        <input type="hidden" name="subject_id" id="dailyReportRemarksSubjectID">
-                                        <div class="col-md-12">
-                                            <table id="dailyReportRemarks" class="table table-centered table-striped dt-responsive nowrap w-100" width="100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Student Name
-                                                        </th>
-                                                        <th>Student Remarks</th>
-                                                        <th>Remarks</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
-                                        </div> <!-- end card-box-->
-                                        <div class="col-md-12">
-                                            <div class="card-body">
-                                                <div class="form-group text-right m-b-0">
-                                                    <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                        Save
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    <div class="col-md-12">
+                                        <table data-toggle="table" data-page-size="7" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
+                                            <thead>
+                                                <tr>
+                                                    <th>S.no</th>
+                                                    <th data-field="id" data-switchable="false">Student Name
+                                                    </th>
+                                                    <th data-field="name">Student Remarks</th>
+                                                    <th data-field="Remarks">Remarks</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td class="table-user">
+                                                        <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
+                                                        <a href="javascript:void(0);" class="text-body font-weight-semibold">Lucas</a>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <label for="heard">English Stories</label>
+                                                        </div>
+                                                    </td>
+                                                    <td> <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td class="table-user">
+                                                        <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
+                                                        <a href="javascript:void(0);" class="text-body font-weight-semibold">Mia</a>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <label for="heard">Articals</label>
+                                                        </div>
+                                                    </td>
+                                                    <td> <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div> <!-- end card-box-->
+
                                 </div>
 
                                 <div class="tab-pane" id="shortest">
@@ -513,7 +421,7 @@
                                                     <div class="row">
                                                         <div class="col-md-3">
                                                             <label for="field" class="font-weight-bold">Short Test<span class="text-danger">*</span></label>
-                                                            <input type="text" id="field" class="form-control shortTestAdd" id="Hours" name="field[]" />
+                                                            <input type="text" id="field" class="form-control" name="field[]" />
                                                             <span id="shortTestError"></span>
                                                         </div>
                                                         <div class="col-md-3">
@@ -560,6 +468,24 @@
                                             @csrf
                                             <div class="col-md-12">
                                                 <div id="shortTestTableAppend"></div>
+                                                <!-- <thead>
+                                                    <tr>
+                                                        <th>S.no</th>
+                                                        <th>Student Name</th>
+                                                        <th>Skill</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>5</td>
+                                                        <td class="table-user">
+                                                            <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
+                                                            <a href="javascript:void(0);" class="text-body font-weight-semibold">Charlotte</a>
+                                                        </td>
+                                                        <td> <input type="text" class="form-control text-right" style="width:100px;" readonly value="90" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                        </td>
+                                                    </tr>
+                                                </tbody> -->
                                             </div> <!-- end card-box-->
                                             <div class="col-md-12">
                                                 <div class="clearfix mt-4">
@@ -589,8 +515,6 @@
     var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
     var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";
     var getStudentAttendance = "{{ config('constants.api.get_student_attendance') }}";
-    var getDailyReportRemarks = "{{ config('constants.api.get_daily_report_remarks') }}";
-    var getClassRoomWidget = "{{ config('constants.api.get_classroom_widget_data') }}";
     // default image test
     var defaultImg = "{{ asset('images/users/default.jpg') }}";
 </script>

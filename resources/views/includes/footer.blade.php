@@ -202,7 +202,6 @@
 <script src="{{ asset('js/custom/apex-mixed.js') }}"></script>
 <script src="{{ asset('js/custom/attendance.js') }}"></script>
 <script src="{{ asset('js/custom/homework.js') }}"></script>
-<script src="{{ asset('js/custom/textbox-dynamic-add.js') }}"></script>
 <script src="{{ asset('js/custom/common.js') }}"></script>
 
 <script src="{{ asset('js/custom/iconchart.js') }}"></script>

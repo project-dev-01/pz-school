@@ -125,7 +125,14 @@ return [
         'teacher_section' => $url.'/teacher_section',
         'teacher_subject' => $url.'/teacher_subject',
         'get_student_attendance' => $url.'/get_student_attendance',
-        'add_student_attendance' => $url.'/add_student_attendance'
+        'add_student_attendance' => $url.'/add_student_attendance',
+        'get_short_test' => $url.'/get_short_test',
+        'add_short_test' => $url.'/add_short_test',
+        'add_daily_report' => $url.'/add_daily_report',
+        'get_daily_report_remarks' => $url.'/get_daily_report_remarks',
+        'add_daily_report_remarks' => $url.'/add_daily_report_remarks',
+        'get_classroom_widget_data' => $url.'/get_classroom_widget_data',
+        
     ]
 
 ];

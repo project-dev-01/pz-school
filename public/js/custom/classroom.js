@@ -1,6 +1,8 @@
 $(function () {
 
     var listTable;
+    // $(".classRoomHideSHow").show("slow");
+    $(".classRoomHideSHow").hide();
 
     $("#classDate").datepicker({
         dateFormat: 'dd-mm-yy',
@@ -14,6 +16,7 @@ $(function () {
     }
     // change classroom
     $('#changeClassName').on('change', function () {
+        $(".classRoomHideSHow").hide();
         var class_id = $(this).val();
         $("#classroomFilter").find("#sectionID").empty();
         $("#classroomFilter").find("#sectionID").append('<option value="">Select Section</option>');
@@ -78,6 +81,7 @@ $(function () {
             formData.append('section_id', sectionID);
             formData.append('subject_id', subjectID);
             formData.append('date', convertDigitIn(classDate));
+            // list mode
             $.ajax({
                 url: getStudentAttendance,
                 method: "post",
@@ -90,10 +94,12 @@ $(function () {
                     var dataSetNew = response.data;
 
                     if (response.code == 200) {
+                        $('#saveClassRoomAttendance').prop('disabled', false);
                         $('#layoutModeGrid').empty();
                         var layoutModeGrid = "";
                         if (response.data.length > 0) {
-
+                            $(".classRoomHideSHow").show("slow");
+                            listMode(dataSetNew);
                             layoutModeGrid += '<div class="row">';
                             response.data.forEach(function (res) {
 
@@ -101,19 +107,78 @@ $(function () {
                                 layoutModeGrid += layoutMode(res);
                                 // layout mode div end
                                 // list mode start
-                                listMode(dataSetNew);
+
+                                // set value in list mode
                                 $("#listModeClassID").val(classID);
                                 $("#listModeSectionID").val(sectionID);
                                 $("#listModeSubjectID").val(subjectID);
                                 $("#listModeSelectedDate").val(convertDigitIn(classDate));
+                                // set value in short test
+                                $("#shortTestClassID").val(classID);
+                                $("#shortTestSectionID").val(sectionID);
+                                $("#shortTestSubjectID").val(subjectID);
+                                $("#shortTestSelectedDate").val(convertDigitIn(classDate));
+                                // set value in daily report
+                                $("#dailyReportClassID").val(classID);
+                                $("#dailyReportSectionID").val(sectionID);
+                                $("#dailyReportSubjectID").val(subjectID);
+                                $("#dailyReportSelectedDate").val(convertDigitIn(classDate));
+                                // set value in dailyReportRemarks
+                                $("#dailyReportRemarksClassID").val(classID);
+                                $("#dailyReportRemarksSectionID").val(sectionID);
+                                $("#dailyReportRemarksSubjectID").val(subjectID);
+
                                 // list mode end
                             });
                             layoutModeGrid += '</div>';
+                        }else{
+                            $(".classRoomHideSHow").hide();
+                            toastr.info('No students are available');
                         }
 
                         $("#layoutModeGrid").append(layoutModeGrid);
                     } else {
                         toastr.error(data.message);
+                    }
+                }
+            });
+            // daily report
+            $.ajax({
+                url: getDailyReportRemarks,
+                method: "post",
+                data: formData,
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (response) {
+                    var dataSetNew = response.data;
+                    if (response.code == 200) {
+                        getReportRemarks(dataSetNew)
+                    } else {
+                        toastr.error(data.message);
+                    }
+                }
+            });
+            // widget show
+            $.ajax({
+                url: getClassRoomWidget,
+                method: "post",
+                data: formData,
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (response) {
+                    var dataSetNew = response.data;
+                    if (response.code == 200) {
+                        $("#presentCount").html(dataSetNew[0].presentCount);
+                        $("#absentCount").html(dataSetNew[0].absentCount);
+                        $("#lateCount").html(dataSetNew[0].lateCount);
+                        // getReportRemarks(dataSetNew)
+                    } else {
+                        $("#presentCount").html(dataSetNew[0].presentCount);
+                        $("#absentCount").html(dataSetNew[0].absentCount);
+                        $("#lateCount").html(dataSetNew[0].lateCount);
+                        // toastr.error(data.message);
                     }
                 }
             });
@@ -212,7 +277,7 @@ $(function () {
                         row.att_status
                         var att_status = '<select class="form-control changeAttendanceSelect" data-style="btn-outline-success" name="attendance[' + meta.row + '][att_status]">' +
                             '<option value="">Choose</option>' +
-                            '<option value="present" ' + (row.att_status == "present" ? "selected" : "") + '>Present</option>' +
+                            '<option value="present" ' + (row.att_status == "present" ? "selected" : "selected") + '>Present</option>' +
                             '<option value="absent" ' + (row.att_status == "absent" ? "selected" : "") + '>Absent</option>' +
                             '<option value="late" ' + (row.att_status == "late" ? "selected" : "") + '>Late</option>' +
                             '<option value="excused" ' + (row.att_status == "excused" ? "selected" : "") + '>Excused</option>' +
@@ -228,7 +293,7 @@ $(function () {
                     "width": "10%",
                     "render": function (data, type, row, meta) {
 
-                        var att_remark = '<textarea style="display:none;" class="addRemarks" data-id="' + row.student_id + '" id="addRemarks' + row.student_id + '" name="attendance[' + meta.row + '][att_remark]">' + row.att_remark + '</textarea>' +
+                        var att_remark = '<textarea style="display:none;" class="addRemarks" data-id="' + row.student_id + '" id="addRemarks' + row.student_id + '" name="attendance[' + meta.row + '][att_remark]">' + (row.att_remark != "null" ? row.att_remark : "") + '</textarea>' +
                             '<button type="button" data-id="' + row.student_id + '" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#stuRemarksPopup" id="editRemarksStudent">Add Remarks</button>';
                         return att_remark;
                     }
@@ -251,13 +316,39 @@ $(function () {
                     "targets": 5,
                     "width": "10%",
                     "render": function (data, type, row, meta) {
-                        var student_behaviour = '<span class="star-rating star-5">' +
-                            '<input type="radio" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "1" ? "checked" : "") + ' value="1"><i></i>' +
-                            '<input type="radio" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "2" ? "checked" : "") + ' value="2"><i></i>' +
-                            '<input type="radio" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "3" ? "checked" : "") + ' value="3"><i></i>' +
-                            '<input type="radio" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "4" ? "checked" : "") + ' value="4"><i></i>' +
-                            '<input type="radio" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "5" ? "checked" : "") + ' value="5"><i></i>' +
-                            '</span>';
+
+                        // var student_behaviour = '<div class="rating">' +
+                        //     '<input type="radio" id="rating-1' + meta.row + '" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "1" ? "checked" : "") + ' value="1">' +
+                        //     '<label for="rating-1' + meta.row + '"></label>' +
+                        //     '<input type="radio" id="rating-2' + meta.row + '" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "2" ? "checked" : "") + ' value="2">' +
+                        //     '<label for="rating-2' + meta.row + '"></label>' +
+                        //     '<input type="radio" id="rating-3' + meta.row + '" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "3" ? "checked" : "") + ' value="3">' +
+                        //     '<label for="rating-3' + meta.row + '"></label>' +
+                        //     '<input type="radio" id="rating-4' + meta.row + '" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "4" ? "checked" : "") + ' value="4">' +
+                        //     '<label for="rating-4' + meta.row + '"></label>' +
+                        //     '<input type="radio" id="rating-5' + meta.row + '" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "5" ? "checked" : "") + ' value="5">' +
+                        //     '<label for="rating-5' + meta.row + '"></label>' +
+                        //     '</div>';
+                        var student_behaviour = '<div class="rating">' +
+                            '<input type="radio" class="checkRadioBtn" id="rating-5' + meta.row + '" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "5" ? "checked" : "") + ' value="5">' +
+                            '<label for="rating-5' + meta.row + '"></label>' +
+                            '<input type="radio" class="checkRadioBtn" id="rating-4' + meta.row + '" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "4" ? "checked" : "") + ' value="4">' +
+                            '<label for="rating-4' + meta.row + '"></label>' +
+                            '<input type="radio" class="checkRadioBtn" id="rating-3' + meta.row + '" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "3" ? "checked" : "") + ' value="3">' +
+                            '<label for="rating-3' + meta.row + '"></label>' +
+                            '<input type="radio" class="checkRadioBtn" id="rating-2' + meta.row + '" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "2" ? "checked" : "") + ' value="2">' +
+                            '<label for="rating-2' + meta.row + '"></label>' +
+                            '<input type="radio" class="checkRadioBtn" id="rating-1' + meta.row + '" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "1" ? "checked" : "") + ' value="1">' +
+                            '<label for="rating-1' + meta.row + '"></label>' +
+                            '</div>';
+
+                        // var student_behaviour = '<span class="rating">' +
+                        //     '<input type="radio" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "1" ? "checked" : "") + ' value="1"><i></i>' +
+                        //     '<input type="radio" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "2" ? "checked" : "") + ' value="2"><i></i>' +
+                        //     '<input type="radio" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "3" ? "checked" : "") + ' value="3"><i></i>' +
+                        //     '<input type="radio" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "4" ? "checked" : "") + ' value="4"><i></i>' +
+                        //     '<input type="radio" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "5" ? "checked" : "") + ' value="5"><i></i>' +
+                        //     '</span>';
                         return student_behaviour;
                     }
                 },
@@ -266,14 +357,31 @@ $(function () {
                     "width": "10%",
                     "render": function (data, type, row, meta) {
 
-                        var classroom_behaviour = '<label>' +
-                            '<input type="radio" value="likes" ' + (row.classroom_behaviour == "likes" ? "checked" : "") + ' name="attendance[' + meta.row + '][classroom_behaviour]">' +
-                            '<i class="far fa-thumbs-up" style="font-size:20px;color:blue"></i>' +
+
+                        var classroom_behaviour = '<div class="row">' +
+                            '<div class="radio_group">' +
+                            '<input type="radio" class="checkRadioBtn" value="likes" ' + (row.classroom_behaviour == "likes" ? "checked" : "") + ' name="attendance[' + meta.row + '][classroom_behaviour]">' +
+                            '<label for="like">' +
+                            '<i class="fas fa-thumbs-up"></i>' +
                             '</label>' +
-                            '<label>' +
-                            '<input type="radio" value="dislikes" ' + (row.classroom_behaviour == "dislikes" ? "checked" : "") + ' name="attendance[' + meta.row + '][classroom_behaviour]">' +
-                            '<i class="far fa-thumbs-down" style="font-size:20px;color:blue"></i>' +
-                            '</label>';
+                            '</div>' +
+                            '<div class="radio_group">' +
+                            '<input type="radio"class="checkRadioBtn" value="dislikes" ' + (row.classroom_behaviour == "dislikes" ? "checked" : "") + ' name="attendance[' + meta.row + '][classroom_behaviour]">' +
+                            '<label for="like">' +
+                            '<i class="fas fa-thumbs-down"></i>' +
+                            '</label>' +
+                            '</div>' +
+                            '</div>';
+
+
+                        // var classroom_behaviour = '<label>' +
+                        //     '<input type="radio" value="likes" ' + (row.classroom_behaviour == "likes" ? "checked" : "") + ' name="attendance[' + meta.row + '][classroom_behaviour]">' +
+                        //     '<i class="far fa-thumbs-up" style="font-size:20px;color:blue"></i>' +
+                        //     '</label>' +
+                        //     '<label>' +
+                        //     '<input type="radio" value="dislikes" ' + (row.classroom_behaviour == "dislikes" ? "checked" : "") + ' name="attendance[' + meta.row + '][classroom_behaviour]">' +
+                        //     '<i class="far fa-thumbs-down" style="font-size:20px;color:blue"></i>' +
+                        //     '</label>';
 
 
                         return classroom_behaviour;
@@ -284,9 +392,10 @@ $(function () {
         });
     }
     //
-    $('#addformdata').on('submit', function (e) {
+    $('#addListMode').on('submit', function (e) {
         e.preventDefault();
         var form = this;
+        $('#saveClassRoomAttendance').prop('disabled', true);
 
         $.ajax({
             url: $(form).attr('action'),
@@ -313,6 +422,9 @@ $(function () {
                     }
 
                     $("#layoutModeGrid").append(layoutModeGrid);
+                    $('#saveClassRoomAttendance').prop('disabled', true);
+                    // $('#listModeClassRoom').DataTable().ajax.reload(null, false);
+                    // $('#addListMode')[0].reset();
                 } else {
                     toastr.error(data.message);
                 }
@@ -339,4 +451,67 @@ $(function () {
     $('#changeAttendance').on('change', function () {
         $(".changeAttendanceSelect").val($(this).val());
     });
+    // get daily report remarks
+    // function list mode
+    function getReportRemarks(dataSetNew) {
+        listTable = $('#dailyReportRemarks').DataTable({
+            processing: true,
+            bDestroy: true,
+            info: true,
+            data: dataSetNew,
+            "pageLength": 10,
+            "aLengthMenu": [
+                [5, 10, 25, 50, -1],
+                [5, 10, 25, 50, "All"]
+            ],
+            columns: [
+                {
+                    data: 'student_id'
+                },
+                {
+                    data: 'first_name'
+                },
+                {
+                    data: 'student_remarks'
+                },
+                {
+                    data: 'teacher_remarks'
+                }
+            ],
+            columnDefs: [
+                {
+                    "targets": 0,
+                    "render": function (data, type, row, meta) {
+                        return meta.row + 1;
+                    }
+                },
+                {
+                    "targets": 1,
+                    "className": "table-user",
+                    "render": function (data, type, row, meta) {
+                        var first_name = '<input type="hidden" name="daily_report_remarks[' + meta.row + '][id]" value="' + row.id + '">' +
+                            '<input type="hidden" name="daily_report_remarks[' + meta.row + '][student_id]" value="' + row.student_id + '">' +
+                            '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
+                            '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
+                        return first_name;
+                    }
+                },
+                {
+                    "targets": 2,
+                    "render": function (data, type, row, meta) {
+                        var student_remarks = '<textarea readonly name="daily_report_remarks[' + meta.row + '][student_remarks]" class="form-control" id="example-textarea" rows="2">' + (data != null ? data : "") + '</textarea>';
+                        return student_remarks;
+                    }
+                },
+                {
+                    "targets": 3,
+                    "render": function (data, type, row, meta) {
+                        var teacher_remarks = '<textarea name="daily_report_remarks[' + meta.row + '][teacher_remarks]" class="form-control" id="example-textarea" rows="2">' + (data != null ? data : "") + '</textarea>';
+                        return teacher_remarks;
+                    }
+                }
+            ]
+        }).on('draw', function () {
+        });
+    }
 });
