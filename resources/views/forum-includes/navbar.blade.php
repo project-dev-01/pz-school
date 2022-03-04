@@ -64,8 +64,8 @@
                                 <a href="{{ route('super_admin.forum.page-single-user') }}"><span>Pages</span></a>
                                 <ul>
                                     <li class="{{ (request()->is('super_admin/forum/index')) ? 'active' : '' }}"><a href="{{ route('super_admin.forum.index') }}">Home</a></li>
-                                    <li class="{{ (request()->is('super_admin/forum/page-single-topic')) ? 'active' : '' }}"><a href="{{ route('super_admin.forum.page-single-topic') }}">Single Topic</a></li>
-                                    <li><a href="{{ route('super_admin.forum.page-create-topic') }}">Create Topic</a></li>
+                                  <!--  <li class="{{ (request()->is('super_admin/forum/page-single-topic')) ? 'active' : '' }}"><a href="{{ route('super_admin.forum.page-single-topic') }}">Single Topic</a></li>
+                                    <li><a href="{{ route('super_admin.forum.page-create-topic') }}">Create Topic</a></li>-->
                                     <li><a href="{{ route('super_admin.forum.page-single-user') }}">Single User Activity</a></li>
                                     <li><a href="{{ route('super_admin.forum.page-single-threads') }}">Single User Threads</a></li>
                                     <li><a href="{{ route('super_admin.forum.page-single-replies') }}">Single User Replies</a></li>
@@ -87,8 +87,8 @@
                                 <a href="{{ route('admin.forum.page-single-user') }}"><span>Pages</span></a>
                                 <ul>
                                     <li class="{{ (request()->is('admin/forum/index')) ? 'active' : '' }}"><a href="{{ route('admin.forum.index') }}">Home</a></li>
-                                    <li class="{{ (request()->is('admin/forum/page-single-topic')) ? 'active' : '' }}"><a href="{{ route('admin.forum.page-single-topic') }}">Single Topic</a></li>
-                                    <li><a href="{{ route('admin.forum.page-create-topic') }}">Create Topic</a></li>
+                                 <!--   <li class="{{ (request()->is('admin/forum/page-single-topic')) ? 'active' : '' }}"><a href="{{ route('admin.forum.page-single-topic') }}">Single Topic</a></li>
+                                    <li><a href="{{ route('admin.forum.page-create-topic') }}">Create Topic</a></li>-->
                                     <li><a href="{{ route('admin.forum.page-single-user') }}">Single User Activity</a></li>
                                     <li><a href="{{ route('admin.forum.page-single-threads') }}">Single User Threads</a></li>
                                     <li><a href="{{ route('admin.forum.page-single-replies') }}">Single User Replies</a></li>
@@ -117,8 +117,8 @@
                                 <a href="{{ route('staff.forum.page-single-user') }}"><span>Pages</span></a>
                                 <ul>
                                     <li class="{{ (request()->is('staff/forum/index')) ? 'active' : '' }}"><a href="{{ route('staff.forum.index') }}">Home</a></li>
-                                    <li class="{{ (request()->is('staff/forum/page-single-topic')) ? 'active' : '' }}"><a href="{{ route('staff.forum.page-single-topic') }}">Single Topic</a></li>
-                                    <li><a href="{{ route('staff.forum.page-create-topic') }}">Create Topic</a></li>
+                                  <!--  <li class="{{ (request()->is('staff/forum/page-single-topic')) ? 'active' : '' }}"><a href="{{ route('staff.forum.page-single-topic') }}">Single Topic</a></li>
+                                    <li><a href="{{ route('staff.forum.page-create-topic') }}">Create Topic</a></li> -->
                                     <li><a href="{{ route('staff.forum.page-single-user') }}">Single User Activity</a></li>
                                     <li><a href="{{ route('staff.forum.page-single-threads') }}">Single User Threads</a></li>
                                     <li><a href="{{ route('staff.forum.page-single-replies') }}">Single User Replies</a></li>
@@ -147,8 +147,8 @@
                                 <a href="{{ route('teacher.forum.page-single-user') }}"><span>Pages</span></a>
                                 <ul>
                                     <li class="{{ (request()->is('teacher/forum/index')) ? 'active' : '' }}"><a href="{{ route('teacher.forum.index') }}">Home</a></li>
-                                    <li class="{{ (request()->is('teacher/forum/page-single-topic')) ? 'active' : '' }}"><a href="{{ route('teacher.forum.page-single-topic') }}">Single Topic</a></li>
-                                    <li><a href="{{ route('teacher.forum.page-create-topic') }}">Create Topic</a></li>
+                                  <!-- <li class="{{ (request()->is('teacher/forum/page-single-topic')) ? 'active' : '' }}"><a href="{{ route('teacher.forum.page-single-topic') }}">Single Topic</a></li>
+                                    <li><a href="{{ route('teacher.forum.page-create-topic') }}">Create Topic</a></li>-->
                                     <li><a href="{{ route('teacher.forum.page-single-user') }}">Single User Activity</a></li>
                                     <li><a href="{{ route('teacher.forum.page-single-threads') }}">Single User Threads</a></li>
                                     <li><a href="{{ route('teacher.forum.page-single-replies') }}">Single User Replies</a></li>
@@ -177,8 +177,8 @@
                                 <a href="{{ route('parent.forum.page-single-user') }}"><span>Pages</span></a>
                                 <ul>
                                     <li class="{{ (request()->is('parent/forum/index')) ? 'active' : '' }}"><a href="{{ route('parent.forum.index') }}">Home</a></li>
-                                    <li class="{{ (request()->is('parent/forum/page-single-topic')) ? 'active' : '' }}"><a href="{{ route('parent.forum.page-single-topic') }}">Single Topic</a></li>
-                                    <li><a href="{{ route('parent.forum.page-create-topic') }}">Create Topic</a></li>
+                                  <!--  <li class="{{ (request()->is('parent/forum/page-single-topic')) ? 'active' : '' }}"><a href="{{ route('parent.forum.page-single-topic') }}">Single Topic</a></li>
+                                    <li><a href="{{ route('parent.forum.page-create-topic') }}">Create Topic</a></li>-->
                                     <li><a href="{{ route('parent.forum.page-single-user') }}">Single User Activity</a></li>
                                     <li><a href="{{ route('parent.forum.page-single-threads') }}">Single User Threads</a></li>
                                     <li><a href="{{ route('parent.forum.page-single-replies') }}">Single User Replies</a></li>
@@ -208,8 +208,8 @@
                                 <a href="{{ route('student.forum.page-single-user') }}"><span>Pages</span></a>
                                 <ul>
                                     <li class="{{ (request()->is('student/forum/index')) ? 'active' : '' }}"><a href="{{ route('student.forum.index') }}">Home</a></li>
-                                    <li class="{{ (request()->is('student/forum/page-single-topic')) ? 'active' : '' }}"><a href="{{ route('student.forum.page-single-topic') }}">Single Topic</a></li>
-                                    <li><a href="{{ route('student.forum.page-create-topic') }}">Create Topic</a></li>
+                                   <!-- <li class="{{ (request()->is('student/forum/page-single-topic')) ? 'active' : '' }}"><a href="{{ route('student.forum.page-single-topic') }}">Single Topic</a></li>
+                                    <li><a href="{{ route('student.forum.page-create-topic') }}">Create Topic</a></li>-->
                                     <li><a href="{{ route('student.forum.page-single-user') }}">Single User Activity</a></li>
                                     <li><a href="{{ route('student.forum.page-single-threads') }}">Single User Threads</a></li>
                                     <li><a href="{{ route('student.forum.page-single-replies') }}">Single User Replies</a></li>

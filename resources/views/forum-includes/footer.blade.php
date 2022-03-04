@@ -487,5 +487,19 @@
         var heart = "{{ config('constants.api.heart_countadd') }}";
         var viewscount="{{ config('constants.api.view_countadd') }}";
         var insertviewfirstcount="{{ config('constants.api.view_countadd_insert') }}";
+        var repliesforpost="{{ config('constants.api.replies_insert') }}";
+
+        var insertrepliesfirst="{{ config('constants.api.replies_firstlikes_insert') }}";
+        var replikescount="{{ config('constants.api.replike_countadd') }}";  
+       
+        var repdislikescount = "{{ config('constants.api.repdislike_countadd') }}";
+       
+        var repheartcount = "{{ config('constants.api.repheart_countadd') }}";
+
+        
+       
+        // default image test
+
+    var defaultImg = "{{ asset('images/users/default.jpg') }}";
 </script>
 

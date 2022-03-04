@@ -406,7 +406,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
        Route::get('classes/add_class', [AdminController::class, 'addClasses'])->name('admin.add_classes');
 
         // Forum routes
-        Route::get('forum/index', [AdminController::class, 'forumIndex'])->name('admin.forum.index');
+        Route::get('forum/index', [AdminController::class, 'forumIndex'])->name('admin.forum.index');        
         Route::get('forum/page-single-topic', [AdminController::class, 'forumPageSingleTopic'])->name('admin.forum.page-single-topic');
         Route::get('forum/page-create-topic', [AdminController::class, 'forumPageCreateTopic'])->name('admin.forum.page-create-topic');
         Route::get('forum/page-single-user', [AdminController::class, 'forumPageSingleUser'])->name('admin.forum.page-single-user');

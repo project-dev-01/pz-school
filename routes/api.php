@@ -129,11 +129,18 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('get-category', [CommonController::class, 'categoryList']);
     Route::get('forum/list', [ApiController::class, 'postList']);
     Route::get('forum/singlepost', [ApiController::class, 'singlePost']);
+    Route::get('forum/singlepost/replies', [ApiController::class, 'singlePostReplies']);
     Route::post('forum-likecout',[ApiController::class,'likescountadded']);
     Route::post('forum-discout',[ApiController::class,'dislikescountadded']);
     Route::post('forum-heartcout',[ApiController::class,'heartcountadded']);
     Route::post('forum-viewcout',[ApiController::class,'viewcountadded']);
     Route::post('forum-viewcout-insert',[ApiController::class,'viewcountinsert']);
+    Route::post('forum-replies-insert',[ApiController::class,'repliesinsert']);
+    Route::post('forum-replies-firstlikes-insert',[ApiController::class,'repliesfirstlikescountinsert']);
+    Route::post('forum-replikecout',[ApiController::class,'replikescountadded']);  
+    Route::post('forum-repdislikecout',[ApiController::class,'repdislikescountadded']);  
+    Route::post('forum-repheartcout',[ApiController::class,'repfavcountadded']);
+
     // classroom management
     Route::post('teacher_class',[ApiController::class,'getTeachersClassName']);
     Route::post('teacher_section',[ApiController::class,'getTeachersSectionName']);

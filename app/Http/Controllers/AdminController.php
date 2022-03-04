@@ -23,8 +23,13 @@ class AdminController extends Controller
     // forum screen pages start
     public function forumIndex()
     {
-        return view('admin.forum.index');
-    }
+        $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
+
+          //dd($forum_list);
+          return view('admin.forum.index', [
+            'forum_list' => $forum_list['data']
+        ]);
+    } 
     public function forumPageSingleTopic()
     {
 
@@ -42,6 +47,7 @@ class AdminController extends Controller
         //  ]);
         $category = Helper::GetMethod(config('constants.api.category'));
         $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
+
         return view('admin.forum.page-create-topic', [
             'category' => $category['data'],
             'forum_list' => $forum_list['data'],
@@ -1130,7 +1136,7 @@ class AdminController extends Controller
             'bank_address' => $request->bank_address,
             'ifsc_code' => $request->ifsc_code,
             'account_no' => $request->account_no
-            
+
         ];
         $response = Helper::PostMethod(config('constants.api.employee_add'), $data);
         return $response;
@@ -1156,37 +1162,37 @@ class AdminController extends Controller
             ->make(true);
     }
 
-   // edit Employee row details
-   public function editEmployee(Request $request,$id)
-   {
-      $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+    // edit Employee row details
+    public function editEmployee(Request $request, $id)
+    {
+        $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
 
-      $data = [
-          'status' => 1
-      ];
-      $roles = Helper::PostMethod(config('constants.api.roles'), $data);
-      //    dd($roles);
-      $res = [
-          'id' => $id,
-      ];
-      $department = Helper::PostMethod(config('constants.api.emp_department'),[]);
-      $designation = Helper::PostMethod(config('constants.api.emp_designation'),[]);
-      $staff = Helper::PostMethod(config('constants.api.employee_details'), $res);
+        $data = [
+            'status' => 1
+        ];
+        $roles = Helper::PostMethod(config('constants.api.roles'), $data);
+        //    dd($roles);
+        $res = [
+            'id' => $id,
+        ];
+        $department = Helper::PostMethod(config('constants.api.emp_department'), []);
+        $designation = Helper::PostMethod(config('constants.api.emp_designation'), []);
+        $staff = Helper::PostMethod(config('constants.api.employee_details'), $res);
 
-      // dd($staff);
-      return view(
-          'admin.employee.edit',
-          [
-              'branches' => $getBranches['data'],
-              'roles' => $roles['data'],
-              'employee' => $staff['data']['staff'],
-              'bank' => $staff['data']['bank'],
-              'department' => $department['data'],
-              'designation' => $designation['data'],
-              'role' => $staff['data']['user']
-          ]
-      );
-   }
+        // dd($staff);
+        return view(
+            'admin.employee.edit',
+            [
+                'branches' => $getBranches['data'],
+                'roles' => $roles['data'],
+                'employee' => $staff['data']['staff'],
+                'bank' => $staff['data']['bank'],
+                'department' => $department['data'],
+                'designation' => $designation['data'],
+                'role' => $staff['data']['user']
+            ]
+        );
+    }
 
     // show employee
     public function showEmployee()
@@ -1197,22 +1203,22 @@ class AdminController extends Controller
             'status' => "0"
         ];
         $roles = Helper::PostMethod(config('constants.api.roles'), $data);
-        $emp_department = Helper::PostMethod(config('constants.api.emp_department'),[]);
-        $emp_designation = Helper::PostMethod(config('constants.api.emp_designation'),[]);
+        $emp_department = Helper::PostMethod(config('constants.api.emp_department'), []);
+        $emp_designation = Helper::PostMethod(config('constants.api.emp_designation'), []);
         return view(
             'admin.employee.index',
             [
                 'branches' => $getBranches['data'],
                 'roles' => $roles['data'],
-                'emp_department' => !empty($emp_department)?$emp_department['data']:$emp_department,
-                'emp_designation' => !empty($emp_designation)?$emp_designation['data']:$emp_designation,
+                'emp_department' => !empty($emp_department) ? $emp_department['data'] : $emp_department,
+                'emp_designation' => !empty($emp_designation) ? $emp_designation['data'] : $emp_designation,
             ]
         );
     }
     // update Employee
     public function updateEmployee(Request $request)
     {
-        
+
         $data = [
             'id' => $request->id,
             'role_id' => $request->role_id,
@@ -1241,8 +1247,8 @@ class AdminController extends Controller
         ];
 
         // dd($data);
-       $response = Helper::PostMethod(config('constants.api.employee_update'), $data);
-       return $response;
+        $response = Helper::PostMethod(config('constants.api.employee_update'), $data);
+        return $response;
     }
 
     // delete Employee
@@ -1269,9 +1275,9 @@ class AdminController extends Controller
     {
         $data = [
             'class_id' => $request->class_id,
-            
+
         ];
-        $section = Helper::PostMethod(config('constants.api.section_by_class'),$data);
+        $section = Helper::PostMethod(config('constants.api.section_by_class'), $data);
         return $section;
     }
 
@@ -1283,11 +1289,11 @@ class AdminController extends Controller
             'section_id' => $request->section_id,
         ];
 
-        $subject = Helper::PostMethod(config('constants.api.subject_by_class'),$data);
+        $subject = Helper::PostMethod(config('constants.api.subject_by_class'), $data);
         return $subject;
     }
-    
-    
+
+
     // create Timetable
     public function createTimetable(Request $request)
     {
@@ -1309,7 +1315,7 @@ class AdminController extends Controller
             'section_id' => $request->section_id,
             'day' => $request->day,
             'timetable' => $request->timetable,
-            
+
         ];
         $response = Helper::PostMethod(config('constants.api.timetable_add'), $data);
         return $response;
@@ -1327,7 +1333,7 @@ class AdminController extends Controller
         );
     }
 
-     // get Timetable
+    // get Timetable
     public function getTimetable(Request $request)
     {
         $data = [
@@ -1335,9 +1341,9 @@ class AdminController extends Controller
             'section_id' => $request->section_id,
         ];
 
-        
+
         $timetable = Helper::PostMethod(config('constants.api.timetable_list'), $data);
-       
+
         $days = array(
             'sunday',
             'monday',
@@ -1348,52 +1354,43 @@ class AdminController extends Controller
             'saturday'
         );
 
-        if($timetable['code']=="200")
-        {
+        if ($timetable['code'] == "200") {
             $max = $timetable['data']['max'];
 
-            $response ="";
-            foreach($days as $day)
-            {
-                $response.='<tr><td>'.strtoupper($day).'</td>';
-                $row=0;
-                foreach($timetable['data']['timetable'] as $table)
-                {
-                    if($table['day'] == $day)
-                    {
-                        $response.='<td>';
-                        if($table['break'] == "1")
-                        {
-                            $response.='<b>Break Time</b><br> ';
-                            $response.='('.$table['time_start'] .' - '.$table['time_end'] .' )<br>';
-                            if($table['class_room'])
-                            {
-                                
-                                $response.='Class Room : '.$table['class_room'] .'';
+            $response = "";
+            foreach ($days as $day) {
+                $response .= '<tr><td>' . strtoupper($day) . '</td>';
+                $row = 0;
+                foreach ($timetable['data']['timetable'] as $table) {
+                    if ($table['day'] == $day) {
+                        $response .= '<td>';
+                        if ($table['break'] == "1") {
+                            $response .= '<b>Break Time</b><br> ';
+                            $response .= '(' . $table['time_start'] . ' - ' . $table['time_end'] . ' )<br>';
+                            if ($table['class_room']) {
+
+                                $response .= 'Class Room : ' . $table['class_room'] . '';
                             }
-                        }else{
-                            $response.='<b>Subject:'.$table['subject_name'].'</b><br>';
-                            $response.='('.$table['time_start'] .' - '.$table['time_end'] .' )<br>';
-                            $response.='Teacher :  '.$table['teacher_name'] .'<br>';
-                            if($table['class_room'])
-                            {
-                                $response.='Class Room : '.$table['class_room'] .'';
+                        } else {
+                            $response .= '<b>Subject:' . $table['subject_name'] . '</b><br>';
+                            $response .= '(' . $table['time_start'] . ' - ' . $table['time_end'] . ' )<br>';
+                            $response .= 'Teacher :  ' . $table['teacher_name'] . '<br>';
+                            if ($table['class_room']) {
+                                $response .= 'Class Room : ' . $table['class_room'] . '';
                             }
                         }
-                        $response.='</td>';
+                        $response .= '</td>';
                         $row++;
                     }
                 }
-                while($row<$max)
-                {
-                    $response.='<td class="center">N/A</td>';
+                while ($row < $max) {
+                    $response .= '<td class="center">N/A</td>';
                     $row++;
                 }
-                $response.='</tr>';
+                $response .= '</tr>';
             }
-    
+
             $timetable['timetable'] = $response;
-            
         }
         $timetable['class_id'] = $request->class_id;
         $timetable['section_id'] = $request->section_id;
@@ -1411,8 +1408,7 @@ class AdminController extends Controller
         ];
         $timetable = Helper::PostMethod(config('constants.api.timetable_edit'), $data);
         // 
-        if($timetable['code']=="200")
-        {
+        if ($timetable['code'] == "200") {
             return view(
                 'admin.timetable.edit',
                 [
@@ -1422,30 +1418,30 @@ class AdminController extends Controller
                     'subject' => $timetable['data']['subject']
                 ]
             );
-        }else{
+        } else {
             return view(
                 'admin.timetable.edit',
                 [
                     'timetable' => NULL
                 ]
             );
-        }    
+        }
     }
-     public function updateTimetable(Request $request)
-     {
- 
+    public function updateTimetable(Request $request)
+    {
+
         $data = [
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
             'day' => $request->day,
             'timetable' => $request->timetable,
-            
+
         ];
         $timetable = Helper::PostMethod(config('constants.api.timetable_update'), $data);
-        
+
         return $timetable;
-     }
-    
+    }
+
     public function studentEntry()
     {
         return view('admin.attendance.student');
@@ -1552,16 +1548,26 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.forum_cpost'), $data);
         return $response;
     }
-    public function forumPageSingleTopicwithvalue($id,$user_id)
-    {  
+    public function forumPageSingleTopicwithvalue($id, $user_id)
+    {
         $data = [
             'id' => $id,
             'user_id' => $user_id,
-        ];     
-      
-        $forum_singlepost = Helper::GETMethodWithData(config('constants.api.forum_single_post'),$data);
-        return view('admin.forum.page-single-topic', [      
-            'forum_single_post' => !empty($forum_singlepost['data'])?$forum_singlepost['data']:$forum_singlepost,
-        ]); 
+        ];
+        $singlepost_repliesData = [
+            'created_post_id' => $id,
+            'user_id' => $user_id,
+        ];
+
+        $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
+        $forum_singlepost = Helper::GETMethodWithData(config('constants.api.forum_single_post'), $data);
+        $forum_singlepost_replies = Helper::GETMethodWithData(config('constants.api.forum_single_post_replies'), $data);
+        //dd($forum_singlepost_replies);
+        return view('admin.forum.page-single-topic', [
+            'forum_single_post' => !empty($forum_singlepost['data']) ? $forum_singlepost['data'] : $forum_singlepost,
+            'forum_singlepost_replies' => $forum_singlepost_replies['data'],
+            'forum_list' => $forum_list['data']
+
+        ]);
     }
 }

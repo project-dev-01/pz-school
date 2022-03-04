@@ -280,7 +280,7 @@
                     @endif
                 </div>
                 <div class="tt-col-value hide-mobile"> 
-                     @if($value['views']=== null) 
+                     @if($value['activity']=== null) 
                     0
                     @else
                     {{$value['activity']}}
