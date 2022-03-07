@@ -1647,6 +1647,32 @@ class ApiController extends BaseController
             'branch_id' => 'required',
             'token' => 'required',
             'class_id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $classConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $class_id = $request->class_id;
+            $class = $classConn->table('subject_assigns as sa')->select('s.id', 's.name')
+                                ->join('subjects as s', 'sa.subject_id', '=', 's.id')
+                                ->where('sa.class_id', $class_id)
+                                ->groupBy('s.id')
+                                ->get();
+            return $this->successResponse($class, 'Class record fetch successfully');
+        }
+    }
+
+    // Timetable Subject 
+    public function timetableSubject(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+            'class_id' => 'required',
             'section_id' => 'required',
         ]);
 
@@ -2940,6 +2966,81 @@ class ApiController extends BaseController
                     ->get();
                 return $this->successResponse($success, 'View has been successfully hit');
             }
+        }
+    }
+
+
+    // addHomework
+    public function addHomework(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
+            'date_of_homework' => 'required',
+            'date_of_submission' => 'required',
+            'schedule_date' => '',
+            'description' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        // return $request;
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            $query = $staffConn->table('homeworks')->insert([
+                'class_id' => $request['class_id'],
+                'section_id' => $request['section_id'],
+                'subject_id' => $request['subject_id'],
+                'date_of_homework' => $request['date_of_homework'],
+                'date_of_submission' => $request['date_of_submission'],
+                'schedule_date' => $request['schedule_date'],
+                'description' => $request['description'],
+                'created_at' => date("Y-m-d H:i:s")
+            ]);
+
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Homework has been successfully saved');
+            }
+        }
+    }
+
+    // get Homework List
+    public function getHomeworkList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required'
+        ]);
+
+        // return 1;
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $con = $this->createNewConnection($request->branch_id);
+            // get data
+            $homework = $con->table('homeworks')->select('homeworks.*','sections.name as section_name','classes.name as class_name','subjects.name as subject_name')
+                                                    ->leftJoin('subjects','homeworks.subject_id','=','subjects.id')
+                                                    ->leftJoin('sections','homeworks.section_id','=','sections.id')
+                                                    ->leftJoin('classes','homeworks.class_id','=','classes.id')
+                                                    ->where('homeworks.class_id',$request->class_id)
+                                                    ->where('homeworks.section_id',$request->section_id)
+                                                    ->where('homeworks.subject_id',$request->subject_id)
+                                                    ->get();
+            
+            return $this->successResponse($homework, 'Homework record fetch successfully');
         }
     }
 }

@@ -32,65 +32,46 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="demo-form" data-parsley-validate="">
+                    <form id="evaluationFilterForm" method="post" action="{{ route('admin.homework.details') }}"  enctype="multipart/form-data" autocomplete="off">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Standard<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
+                                    <label for="class_id">Standard<span class="text-danger">*</span></label>
+                                    <select id="class_id" class="form-control" name="class_id" >                             
                                         <option value="">Select Standard</option>
-                                        <option value="">All</option>
-                                        <option value="">I</option>
-                                        <option value="press">II</option>
-                                        <option value="">III</option>
-                                        <option value="press">IV</option>
-                                        <option value="">V</option>
-                                        <option value="press">VI</option>
-                                        <option value="">VII</option>
-                                        <option value="press">VIII</option>
+                                        @foreach($class as $cla)
+                                            <option value="{{$cla['id']}}">{{$cla['name']}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Class Name<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
+                                    <label for="section_id">Class Name<span class="text-danger">*</span></label>
+                                    <select id="section_id" class="form-control"  name="section_id">                              
                                         <option value="">Select Class Name</option>
-                                        <option value="">A</option>
-                                        <option value="">B</option>
-                                        <option value="press">C</option>
-                                        <option value="">D</option>
-                                        <option value="press">E</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Subject<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
+                                    <label for="subject_id">Subject<span class="text-danger">*</span></label>
+                                    <select id="subject_id" class="form-control" name="subject_id">                                       
                                         <option value="">Select Subject</option>
-                                        <option value="press">English</option>
-                                        <option value="">Mathematics</option>
-                                        <option value="press">History</option>
-                                        <option value="">Study of the Environment</option>
-                                        <option value="press">Geography</option>
-                                        <option value="">Natural Sciences</option>
-                                        <option value="press">Civics Education</option>
-                                        <option value="">Arts Education</option>
-
                                     </select>
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group text-right m-b-0">
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                Filter
+                            </button>
+                            <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                Cancel
+                            </button>-->
+                        </div>
                     </form>
-                    <div class="form-group text-right m-b-0">
-                        <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Filter
-                        </button>
-                        <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                            Cancel
-                        </button>-->
-                    </div>
+                    
 
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
@@ -100,7 +81,7 @@
     <!-- end row -->
 
 
-    <div class="row">
+    <div class="row" id="evaluation" style="display:none;">
         <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
@@ -154,18 +135,7 @@
 
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>1</td>
-                                                                <td>Geography</td>
-                                                                <td>I</td>
-                                                                <td>A</td>
-                                                                <td>18-02-2022</td>
-                                                                <td>23-02-2022</td>
-                                                                <td>1/2</td>
-                                                                <td>3</td>
-                                                                <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-target=".firstModal"><i class="fas fa-bars"></i> Details</a></td>
-                                                            </tr>
+                                                        <tbody id="homework_table">
                                                         </tbody>
                                                     </table>
                                                 </div> <!-- end table-responsive-->
@@ -267,4 +237,15 @@
 </div> <!-- container -->
 
 @include('admin.homework.homework_modal')
+@endsection
+
+
+@section('scripts')
+
+<script>
+    var homeworkList = "{{ route('admin.evaluation_report') }}";
+    var sectionByClass = "{{ route('admin.section_by_class') }}";
+    var subjectByClass = "{{ route('admin.subject_by_class') }}";
+</script>
+<script src="{{ asset('js/custom/homework.js') }}"></script>
 @endsection

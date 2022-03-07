@@ -347,6 +347,9 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('timetable/update', [AdminController::class, 'updateTimetable'])->name('admin.timetable.update');
         Route::post('timetable/subject', [AdminController::class, 'getSubject'])->name('admin.timetable.subject');
 
+        // Subject By Class Route
+        Route::post('subject-by-class', [AdminController::class, 'subjectByClass'])->name('admin.subject_by_class');
+
         // Section By Class Route
         Route::post('section-by-class', [AdminController::class, 'sectionByClass'])->name('admin.section_by_class');
 
@@ -377,6 +380,8 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
         // Homework routes
         Route::get('homework/index', [AdminController::class, 'homework'])->name('admin.homework');
+        Route::post('homework/add', [AdminController::class, 'addHomework'])->name('admin.homework.add');
+        Route::post('homework/homework-details', [AdminController::class, 'getHomework'])->name('admin.homework.details');
         Route::get('evaluation_report', [AdminController::class, 'evaluationReport'])->name('admin.evaluation_report');
         Route::get('homework/edit', [AdminController::class, 'homeworkEdit'])->name('admin.homework_edit');
 

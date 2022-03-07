@@ -929,7 +929,14 @@ class AdminController extends Controller
 
     public function homework()
     {
-        return view('admin.homework.index');
+
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        return view(
+            'admin.homework.index',
+            [
+                'class' => $getclass['data'],
+            ]
+        );
     }
 
 
@@ -1270,6 +1277,18 @@ class AdminController extends Controller
             return $response;
         }
     }
+
+    // subject by Class
+    public function subjectByClass(Request $request)
+    {
+        $data = [
+            'class_id' => $request->class_id,
+            
+        ];
+        $subject = Helper::PostMethod(config('constants.api.subject_by_class'),$data);
+        return $subject;
+    }
+
     // Section by Class
     public function sectionByClass(Request $request)
     {
@@ -1289,7 +1308,7 @@ class AdminController extends Controller
             'section_id' => $request->section_id,
         ];
 
-        $subject = Helper::PostMethod(config('constants.api.subject_by_class'), $data);
+        $subject = Helper::PostMethod(config('constants.api.timetable_subject'), $data);
         return $subject;
     }
 
@@ -1474,8 +1493,70 @@ class AdminController extends Controller
 
     public function evaluationReport()
     {
-        return view('admin.homework.evaluation_report');
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        return view(
+            'admin.homework.evaluation_report',
+            [
+                'class' => $getclass['data'],
+            ]
+        );
     }
+
+    //add Homework
+    public function addHomework(Request $request)
+    {
+
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'subject_id' => $request->subject_id,
+            'date_of_homework' => $request->date_of_homework,
+            'date_of_submission' => $request->date_of_submission,
+            'schedule_date' => $request->schedule_date,
+            'description' => $request->description,
+        ];
+
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.homework_add'), $data);
+        // dd($response);
+        return $response;
+    }
+     // get Homework
+     public function getHomework(Request $request)
+     {
+         $data = [
+             'class_id' => $request->class_id,
+             'section_id' => $request->section_id,
+             'subject_id' => $request->subject_id,
+         ];
+ 
+         $homework = Helper::PostMethod(config('constants.api.homework_list'), $data);
+         if($homework['code']=="200")
+         {
+            $response ="";
+            $row=1;
+            foreach($homework['data'] as $work)
+            {
+                
+                $response.= '<tr>
+                                <td>'.$row.'</td>
+                                <td>'.$work['subject_name'].'</td>
+                                <td>'.$work['class_name'].'</td>
+                                <td>'.$work['section_name'].'</td>
+                                <td>'.$work['date_of_homework'].'</td>
+                                <td>'.$work['date_of_submission'].'</td>
+                                <td>1/2</td>
+                                <td>3</td>
+                                <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-target=".firstModal"><i class="fas fa-bars"></i> Details</a></td>
+                            </tr>';
+                $row++;
+            }
+     
+             $homework['table'] = $response;
+             
+         }
+         return $homework;
+     }
 
     public function homeworkEdit()
     {

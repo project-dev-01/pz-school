@@ -1,3 +1,119 @@
+$(function () {
+
+    $("#evaluationFilterForm").validate({
+        rules: {
+            class_id:"required",
+            section_id:"required",
+            subject_id:"required"
+        }
+    });
+    // get timetable
+    $('#evaluationFilterForm').on('submit', function (e) {
+        e.preventDefault();
+        var filterCheck = $("#evaluationFilterForm").valid();
+        if (filterCheck === true) {
+            var form = this;
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (data) {
+                    
+                    if (data.code == 200) {
+                        $("#evaluation").show("slow");
+                        $("#homework_table").html(data.table);
+                    } else {
+                        $("#evaluation").hide("slow");
+                        toastr.error(data.message);
+                    }
+                }
+            });
+        }
+    });
+
+     // rules validation
+     $("#addHomeworkForm").validate({
+        rules: {
+            class_id: "required",
+            section_id: "required",
+            subject_id: "required",
+            date_of_homework: "required",
+            date_of_submission: "required",
+            description: "required",
+            schedule_date: {
+                required: {
+                    publish_later: true
+                }
+            },
+        }
+    });
+
+    // add Homework
+    $('#addHomeworkForm').on('submit', function (e) {
+        e.preventDefault();
+        console.log('sd',123)
+        var homeworkCheck = $("#addHomeworkForm").valid();
+        if (homeworkCheck === true) {
+            var form = this;
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (data) {
+                        console.log('data',200)
+                    if (data.code == 200) {
+                        $('.addHomeworkForm').find('form')[0].reset();
+                        toastr.success(data.message);
+                        window.location.href = homeworkList;
+                    } else {
+                        toastr.error(data.message);
+                    }
+                }
+            });
+        }
+    });
+
+    // publish later
+    $("#publish_later").on("change", function () {
+        // alert($(this).is(":checked"));
+        if ($(this).is(":checked")) {
+            $("#schedule").show("slow");
+        } else {
+            $("#schedule").hide("slow");
+        }
+    });
+
+
+    $("#class_id").on('change', function (e) {
+        e.preventDefault();
+        var class_id = $(this).val();
+        $("#section_id").empty();
+        $("#section_id").append('<option value="">Select Class Name</option>');
+        $.post(sectionByClass, { class_id: class_id }, function (res) {
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#section_id").append('<option value="' + val.id + '">' + val.name + '</option>');
+                });
+            }
+        }, 'json');
+        $.post(subjectByClass, { class_id: class_id }, function (res) {
+            console.log('data',res)
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#subject_id").append('<option value="' + val.id + '">' + val.name + '</option>');
+                });
+            }
+        }, 'json');
+    });
+});
+
+
 $('.firstModal').on('shown.bs.modal', function (event) {
 
     Apex.grid = {

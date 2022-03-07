@@ -42,6 +42,7 @@ return [
         'branch_by_section' => $url.'/branch-by-section',
         'section_by_class' => $url.'/section-by-class',
         'subject_by_class' => $url.'/subject-by-class',  
+        'timetable_subject' => $url.'/timetable-subject',
 
         // class url
         'class_add' => $url.'/classes/add',
@@ -139,7 +140,14 @@ return [
         'get_daily_report_remarks' => $url.'/get_daily_report_remarks',
         'add_daily_report_remarks' => $url.'/add_daily_report_remarks',
         'get_classroom_widget_data' => $url.'/get_classroom_widget_data',
+
         
+         // homework url
+         'homework_add' => $url.'/homework/add',
+         'homework_list' => $url.'/homework/list',
+         'homework_details' => $url.'/homework/homework-details',
+        
+         
     ]
 
 ];

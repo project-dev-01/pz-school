@@ -7,6 +7,10 @@ $(function () {
         $('#right-modal-dashboard').modal('show');
         // $('#myModal').modal('hide');
     });
+    $("#classDate").datepicker({
+        dateFormat: 'dd-mm-yy'
+    });
+
     
     // add department
     $('.taskListDashboard2').on('click', function (e) {
@@ -18,6 +22,6 @@ $(function () {
     });
 
     $(".homeWorkAdd").datepicker({
-        dateFormat: 'dd-mm-yy'
+        dateFormat: 'yy-mm-dd'
     });
 });
