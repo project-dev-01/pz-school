@@ -17,7 +17,7 @@
                     <div class="tt-note">Describe your topic well, while keeping the subject as short as possible.</div>
                 </div>
                 <div class="form-group" id="selectedtpy">
-                    <input type="hidden" id="topictype" name="topictype">                
+                    <input type="hidden" id="topictype" name="topictype">
                     <label>Topic Type</label>
                     <div class="tt-js-active-btn tt-wrapper-btnicon">
                         <div class="row tt-w410-col-02">
@@ -99,68 +99,68 @@
                             <ul class="pt-edit-btn">
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-quote"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-bold"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-italic"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-share_topic"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-blockquote"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-performatted"></use>
+
                                         </svg>
                                     </button></li>
                                 <li class="hr"></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-upload_files"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-bullet_list"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-heading"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-horizontal_line"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-emoticon"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-settings"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-color_picker"></use>
+
                                         </svg>
                                     </button></li>
                             </ul>
@@ -231,11 +231,21 @@
                 <div class="tt-col-value hide-mobile">Views</div>
                 <div class="tt-col-value">Activity</div>
             </div>
+            
             @if(!empty($forum_list))
+            @php
+            $randomcolor = 1;
+            @endphp
             @foreach($forum_list as $value)
+            @php           
+            if($randomcolor==9)
+            {
+                $randomcolor = 1;
+            }
+            @endphp
             <div class="tt-item">
                 <div class="tt-col-avatar">
-                   <!-- <svg class="tt-icon">
+                    <!-- <svg class="tt-icon">
                         <use xlink:href="#icon-ava-n"></use>
                     </svg>-->
                     <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle" height="40" />
@@ -243,9 +253,10 @@
                 </div>
                 <div class="tt-col-description">
                     <h6 class="tt-title">
-                    <a href="{{route('admin.forum.page-single-topic-val',[$value['id'],$value['user_id']])}}"> 
+                        <a href="{{route('admin.forum.page-single-topic-val',[$value['id'],$value['user_id']])}}">
                             {{ $value['topic_title'] }}
-                        </a></h6>
+                        </a>
+                    </h6>
                     <div class="row align-items-center no-gutters hide-desktope">
                         <div class="col-auto">
                             <ul class="tt-list-badge">
@@ -257,36 +268,42 @@
                         </div>
                     </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color05 tt-badge">{{$value['category_names'] }}</span></div>
-                <div class="tt-col-value hide-mobile"> 
-                    @if($value['likes']=== null)                
+                <div class="tt-col-category"><span class="tt-color0{{$randomcolor}} tt-badge">{{$value['category_names'] }}</span></div>
+                <div class="tt-col-value hide-mobile">
+                    @if($value['likes']=== null)
                     0
                     @else
                     {{$value['likes']}}
                     @endif
                 </div>
-                <div class="tt-col-value hide-mobile">                
-                    @if($value['replies']=== null) 
+                <div class="tt-col-value hide-mobile">
+                    @if($value['replies']=== null)
                     0
                     @else
                     {{$value['replies']}}
                     @endif
                 </div>
-                <div class="tt-col-value hide-mobile">              
-                    @if($value['views']=== null) 
+                <div class="tt-col-value hide-mobile">
+                    @if($value['views']=== null)
                     0
                     @else
                     {{$value['views']}}
                     @endif
                 </div>
-                <div class="tt-col-value hide-mobile"> 
-                     @if($value['activity']=== null) 
+                <div class="tt-col-value hide-mobile">
+                    @php
+                    echo App\Http\Controllers\CommonController::get_timeago(strtotime($value['created_at']));
+                    @endphp
+                    @if($value['activity']=== null)
                     0
                     @else
                     {{$value['activity']}}
-                    @endif   
+                    @endif
                 </div>
             </div>
+            @php
+            $randomcolor++;
+            @endphp
             @endforeach
             @endif
             <div class="tt-row-btn">
@@ -302,4 +319,11 @@
 @endsection
 @section('scripts')
 <script src="{{ asset('js/custom/forum-createpost.js') }}"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#tpbody'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
 @endsection

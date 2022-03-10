@@ -18,6 +18,7 @@ class Forum_post_replie_counts extends Model
         'created_post_replies_id',
         'likes',
         'dislikes',
-        'favorits'
+        'favorits',
+        'flag'
     ];
 }

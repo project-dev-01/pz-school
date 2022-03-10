@@ -2112,7 +2112,7 @@ class ApiController extends BaseController
             }
         }
     }
-    // Forum Create Post
+    // forum Create Post 
     public function forumCreatePost(Request $request)
     {
         $validator = \Validator::make($request->all(), [
@@ -2159,10 +2159,13 @@ class ApiController extends BaseController
             }
         }
     }
+    // forum all post branch id wise
     public function postList(Request $request)
     {
+
         $validator = \Validator::make($request->all(), [
-            'token' => 'required'
+            'token' => 'required',
+            'branch_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -2171,62 +2174,88 @@ class ApiController extends BaseController
             $success = DB::table('forum_posts')
                 ->leftJoin('forum_categorys', 'forum_categorys.id', '=', 'forum_posts.category')
                 ->leftJoin('forum_count_details', function ($join) {
-                    $join->on('forum_count_details.created_post_id', '=', 'forum_posts.id')
-                        ->orWhere('forum_posts.user_id', '`c.user_id`');
+                    $join->on('forum_posts.id', '=', 'forum_count_details.created_post_id');
                 })
-                ->select('forum_posts.id', 'forum_posts.user_id', 'forum_posts.user_name', 'forum_posts.topic_title', 'forum_categorys.category_names', 'forum_count_details.likes', 'forum_count_details.dislikes', 'forum_count_details.favorite', 'forum_count_details.replies', 'forum_count_details.views', 'forum_count_details.activity')
+                ->select('forum_posts.id', 'forum_posts.user_id', 'forum_posts.user_name', 'forum_posts.topic_title', 'forum_categorys.category_names', DB::raw("SUM(forum_count_details.likes) as likes"), DB::raw("SUM(forum_count_details.dislikes)as dislikes"), DB::raw("SUM(forum_count_details.favorite)as favorite"),DB::raw("SUM(forum_count_details.replies)as replies"), DB::raw("SUM(forum_count_details.views)as views"), 'forum_count_details.activity', 'forum_posts.created_at', 'forum_posts.topic_header')
+                ->where('forum_posts.branch_id', '=', $request->branch_id)
+                ->groupBy('forum_count_details.created_post_id')
                 ->get();
-       
+
             return $this->successResponse($success, 'Post record fetch successfully');
         }
     }
+    // forum single post branch id and user id wise
     public function singlePost(Request $request)
     {
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
             'id' => 'required',
-            'user_id' => 'required'
-        ]);
-
+            'branch_id' => 'required'
+        ]);      
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $success = DB::table('forum_posts')
-                ->select('forum_posts.id', 'forum_posts.category as category', 'forum_posts.topic_title as topic_title', 'forum_posts.topic_header as topic_header', 'forum_posts.body_content as body_content', 'forum_posts.user_name as user_name', DB::raw('DATE_FORMAT(forum_posts.created_at, "%b %e %Y") as date'), 'forum_count_details.likes as likes', 'forum_count_details.dislikes as dislikes', 'forum_count_details.favorite as favorite', 'forum_count_details.replies as replies', 'forum_count_details.views as views', 'forum_count_details.activity as activity', 'forum_count_details.id as pkcount_details_id', 'forum_categorys.category_names')
-                ->leftJoin('forum_count_details', 'forum_posts.id', '=', 'forum_count_details.created_post_id')
-                ->leftJoin('forum_categorys', 'forum_categorys.id', '=', 'forum_posts.category')
-                ->where([
-                    ['forum_posts.id', '=', $request->id],
-                    [
-                        'forum_posts.user_id', '=', $request->user_id
-                    ]
-                ])
-                ->get();
-            return  $this->successResponse($success, 'Post record fetch successfully');
+            $success =DB::table('forum_posts')
+            ->select('forum_posts.id','forum_posts.user_id', 'forum_posts.category as category', 'forum_posts.topic_title as topic_title', 'forum_posts.topic_header as topic_header', 'forum_posts.body_content as body_content', 'forum_posts.user_name as user_name', DB::raw('DATE_FORMAT(forum_posts.created_at, "%b %e %Y") as date'), DB::raw("SUM(forum_count_details.likes) as likes"), DB::raw("SUM(forum_count_details.dislikes) as dislikes"), DB::raw("SUM(forum_count_details.favorite) as favorite"), DB::raw("SUM(forum_count_details.replies) as replies"), DB::raw("SUM(forum_count_details.views) as views"), 'forum_count_details.activity as activity', 'forum_count_details.id as pkcount_details_id', 'forum_categorys.category_names', 'forum_posts.created_at')
+            ->leftJoin('forum_count_details','forum_posts.id','=','forum_count_details.created_post_id')
+            ->join('forum_categorys','forum_posts.category','=','forum_categorys.id')
+            ->where('forum_posts.branch_id','=',$request->branch_id)
+            ->where('forum_posts.id','=',$request->id)
+            ->groupBy('forum_count_details.created_post_id')
+            ->get();
+            
+       
+            
+            // DB::table('forum_posts')
+            // ->select('forum_posts.id', 'forum_posts.topic_title as topic_title', 'forum_posts.topic_header as topic_header', 'forum_posts.body_content as body_content', 'forum_posts.user_name as user_name',  DB::raw('DATE_FORMAT(forum_posts.created_at, "%b %e %Y") as date'), 'forum_posts.category as category', 'forum_categorys.category_names as category_names')
+            // ->leftJoin('forum_categorys','forum_posts.category','=','forum_categorys.id')
+            // ->where('forum_posts.id','=',$request->id)
+            // ->where('forum_posts.branch_id','=',$request->branch_id)
+            // ->get();
+            //     //like counts
+            // $success['likescount'] =DB::table('forum_count_details')
+            // ->select('forum_count_details.user_id',DB::raw("SUM('forum_count_details.likes') as likes"), DB::raw("SUM('forum_count_details.dislikes') as dislikes"), DB::raw("SUM('forum_count_details.favorite') as favorite"), DB::raw("SUM('forum_count_details.replies') as replies"), DB::raw("SUM('forum_count_details.views') as views"), 'forum_count_details.activity as activity', 'forum_count_details.id as pkcount_details_id')
+            // ->where('forum_count_details.branch_id','=',$request->branch_id)
+            // ->where('forum_count_details.created_post_id','=',$request->id)
+            // ->groupBy('created_post_id')
+            // ->get();            
+
+            // DB::table('forum_posts')
+            //     ->select('forum_posts.id', 'forum_posts.category as category', 'forum_posts.topic_title as topic_title', 'forum_posts.topic_header as topic_header', 'forum_posts.body_content as body_content', 'forum_posts.user_name as user_name', DB::raw('DATE_FORMAT(forum_posts.created_at, "%b %e %Y") as date'), 'forum_count_details.likes as likes', 'forum_count_details.dislikes as dislikes', 'forum_count_details.favorite as favorite', 'forum_count_details.replies as replies', 'forum_count_details.views as views', 'forum_count_details.activity as activity', 'forum_count_details.id as pkcount_details_id', 'forum_categorys.category_names', 'forum_posts.created_at')
+            //     ->leftJoin('forum_count_details', 'forum_posts.id', '=', 'forum_count_details.created_post_id')
+            //     ->leftJoin('forum_count_details', 'forum_posts.user_id', '=', 'forum_count_details.user_id')
+            //     ->leftJoin('forum_categorys', 'forum_posts.category', '=', 'forum_categorys.id')
+            //     ->where([
+            //         ['forum_posts.branch_id', '=', $request->branch_id],
+            //         ['forum_posts.id', '=', $request->id],
+            //         ['forum_posts.user_id', '=', $request->user_id]
+            //     ])
+            //     ->get();
+            return  $this->successResponse($success, 'Single Post list fetch successfully');
         }
     }
+    // forum post replies branch id and post id wise 
     public function singlePostReplies(Request $request)
     {
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
             'id' => 'required',
-            'user_id' => 'required'
+            'user_id' => 'required',
+            'branch_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
             $success = DB::table('forum_post_replies')
-                ->select('forum_post_replies.id as pk_replies_id', 'forum_post_replies.created_post_id as created_post_id', 'forum_post_replies.branch_id as branch_id', 'forum_post_replies.user_id as user_id', 'forum_post_replies.user_name as user_name', 'replies_com', 'forum_post_replie_counts.id as pk_replies_count_id', 'forum_post_replie_counts.likes as likes', 'forum_post_replie_counts.dislikes as dislikes', 'forum_post_replie_counts.favorits as favorits', DB::raw('DATE_FORMAT(forum_post_replies.created_at, "%b %e %Y") as date'))
+                ->select('forum_post_replies.id as pk_replies_id', 'forum_post_replies.created_at', 'forum_post_replies.created_post_id as created_post_id', 'forum_post_replies.branch_id as branch_id', 'forum_post_replies.user_id as user_id', 'forum_post_replies.user_name as user_name', 'replies_com', 'forum_post_replie_counts.id as pk_replies_count_id', 'forum_post_replie_counts.likes as likes', 'forum_post_replie_counts.dislikes as dislikes', 'forum_post_replie_counts.favorits as favorits', DB::raw('DATE_FORMAT(forum_post_replies.created_at, "%b %e %Y") as date'))
                 ->leftJoin('forum_post_replie_counts', 'forum_post_replies.id', '=', 'forum_post_replie_counts.created_post_replies_id')
-                ->where('forum_post_replies.created_post_id', '=', $request->id)
+                //->where('forum_post_replies.created_post_id', '=', $request->id)
+                ->where([
+                    ['forum_post_replies.branch_id', '=', $request->branch_id],
+                    ['forum_post_replies.created_post_id', '=', $request->id]
+                ])
                 ->get();
-            //    DB::table('forum_post_replies')
-            //   ->select('id as pk_replies_id', 'created_post_id', 'branch_id', 'user_id', 'user_name', 'replies_com',DB::raw('DATE_FORMAT(created_at, "%b %e %Y") as date','forum_post_replie_counts.id as pk_replies_count_id'))
-            //   ->leftJoin('forum_post_replie_counts', 'forum_post_replies.id', '=', 'forum_post_replie_counts.created_post_replies_id')
-            //   ->where('created_post_id','=', $request->id)
-            //   ->get();
-
             return  $this->successResponse($success, 'Post replies fetch successfully');
         }
     }
@@ -2311,6 +2340,7 @@ class ApiController extends BaseController
             return $this->successResponse($getTeachersClassName, 'Teachers Subject Name record fetch successfully');
         }
     }
+    // forum view count insert 
     public function viewcountinsert(Request $request)
     {
         $validator = \Validator::make($request->all(), [
@@ -2331,6 +2361,7 @@ class ApiController extends BaseController
             $section->created_post_id = $request->create_post_id;
             $section->views = $request->views;
             $section->branch_id = $request->branch_id;
+            $section->flag = 1;
             $query = $section->save();
             $success = [];
             if (!$query) {
@@ -2344,6 +2375,7 @@ class ApiController extends BaseController
             }
         }
     }
+    // forum view count add
     public function viewcountadded(Request $request)
     {
         $validator = \Validator::make($request->all(), [
@@ -2364,93 +2396,160 @@ class ApiController extends BaseController
             return $this->successResponse($success, 'views successfully');
         }
     }
+    // forum like count add
     public function likescountadded(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'id' => 'required',
-            'token' => 'required'
+            'token' => 'required',
+            'created_post_id' => 'required',
+            'user_id' => 'required',
+            'user_name' => 'required',
+            'branch_id' => 'required',
+            'likes' => 'required'
         ]);
-
+        
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            // already in this user like this post or not check 
-            $success = DB::table('forum_count_details')
-                ->select('likes')
-                ->where('id', $request->id)
-                ->first();
-            $getlikes = $success->likes;
-            //echo gettype($bodyContent);
-            //dd($bodyContent);
-            if ($getlikes <= 0) {
-                DB::table('forum_count_details')
-                    ->where('id', $request->id)
-                    ->increment('likes', 1);
-                $success = DB::table('forum_count_details')
-                    ->select(DB::raw("SUM(likes) as likes"))
-                    ->where('created_post_id', $request->id)
-                    ->get();
+            //   dd($request);
+            $likesinsert = [
+                "created_post_id" => $request->created_post_id,
+                "user_id" => $request->user_id,
+                "user_name" => $request->user_name,
+                "branch_id" => $request->branch_id,
+                "likes" =>  $request->likes,
+                "flag" => 1,
+                'created_at' => date("Y-m-d H:i:s")
+            ];
+         
+            $checkExist = DB::table('forum_count_details')->where([
+                ['created_post_id', '=', $request->created_post_id],
+                ['user_id', '=', $request->user_id],
+                ['flag', '>', 0]
+            ])->first();
+ 
+            if (empty($checkExist)) {
+                // echo "update";         
+                DB::table('forum_count_details')->insert($likesinsert);
+            } else {
+                $checkdislikecount = $checkExist->likes;
+
+                if ($checkdislikecount <= 0) {
+                    // update data
+                    $query = DB::table('forum_count_details')
+                        ->where('id', $checkExist->id)
+                        ->update([
+                            'likes' => $request->likes,
+                            'updated_at' => date("Y-m-d H:i:s")
+                        ]);
+                }
             }
+            $success = DB::table('forum_count_details')
+                ->select(DB::raw("SUM(likes) as likes"))
+                ->where('created_post_id', $request->created_post_id)
+                ->get();
             return $this->successResponse($success, 'like successfully');
         }
     }
+    // forum dislike count add
     public function dislikescountadded(Request $request)
     {
         $validator = \Validator::make($request->all(), [
             'token' => 'required'
+
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-        } else {
-            // already in this user like this post or not check 
-            $success = DB::table('forum_count_details')
-                ->select('dislikes')
-                ->where('id', $request->id)
-                ->first();
-            $getlikes = $success->dislikes;
-            //echo gettype($bodyContent);
-            //dd($bodyContent);
-            if ($getlikes <= 0) {
-                DB::table('forum_count_details')
-                    ->where('id', $request->id)
-                    ->increment('dislikes', 1);
-                $success = DB::table('forum_count_details')
-                    ->select(DB::raw("SUM(dislikes) as dislikes"))
-                    ->where('created_post_id', $request->id)
-                    ->get();
-            }
+        } else {       
+            $dislikesinsert = [
+                "created_post_id" => $request->created_post_id,            
+                "user_id" => $request->user_id,
+                "user_name" => $request->user_name,
+                "branch_id" => $request->branch_id,
+                "dislikes" =>  $request->dislikes,
+                "flag" => 1,
+                'created_at' => date("Y-m-d H:i:s")
+            ];
+            $checkExist = DB::table('forum_count_details')->where([
+                ['created_post_id', '=', $request->created_post_id],       
+                ['user_id', '=', $request->user_id],
+                ['branch_id', '=', $request->branch_id],
+                ['flag', '>', 0]
+            ])->first();
 
-            return $this->successResponse($success, 'dislike successfully');
+            if (empty($checkExist)) {
+                // echo "insert"; 
+                DB::table('forum_count_details')->insert($dislikesinsert);
+            } else {
+                $checkdislikecount = $checkExist->dislikes;
+                if ($checkdislikecount <= 0) {
+                    // update data
+                    $query = DB::table('forum_count_details')
+                        ->where('id', $checkExist->id)
+                        ->update([
+                            'dislikes' => $request->dislikes,
+                            'updated_at' => date("Y-m-d H:i:s")
+                        ]);
+                }
+            }
+            $success = DB::table('forum_count_details')
+                ->select(DB::raw("SUM(dislikes) as dislikes"))
+                ->where('created_post_id', $request->created_post_id)
+                ->get();
+            return $this->successResponse($success, 'Rep Dislike successfully');
         }
     }
+    // forum heart count add
     public function heartcountadded(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'token' => 'required'
-        ]);
-
+            'token' => 'required',
+            'created_post_id' => 'required',
+            'user_id' => 'required',
+            'user_name' => 'required',
+            'favorite' => 'required'
+        ]);      
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            // already in this user like this post or not check 
-            $success = DB::table('forum_count_details')
-                ->select('favorite')
-                ->where('id', $request->id)
-                ->first();
-            $getlikes = $success->favorite;
-            //echo gettype($bodyContent);
-            //dd($bodyContent);
-            if ($getlikes <= 0) {
-                DB::table('forum_count_details')
-                    ->where('id', $request->id)
-                    ->increment('favorite', 1);
-                $success = DB::table('forum_count_details')
-                    ->select(DB::raw("SUM(favorite) as favorite"))
-                    ->where('created_post_id', $request->id)
-                    ->get();
+         
+            $favoritsinsert = [
+                "created_post_id" => $request->created_post_id,              
+                "user_id" => $request->user_id,
+                "user_name" => $request->user_name,
+                "branch_id" => $request->branch_id,
+                "favorite" =>  $request->favorite,
+                "flag" => 1,
+                'created_at' => date("Y-m-d H:i:s")
+            ];
+            $checkExist = DB::table('forum_count_details')->where([
+                ['created_post_id', '=', $request->created_post_id],           
+                ['user_id', '=', $request->user_id],
+                ['branch_id', '=', $request->branch_id],
+                ['flag', '>', 0]
+            ])->first();
+     
+            if (empty($checkExist)) {
+                // echo "insert";             
+                DB::table('forum_count_details')->insert($favoritsinsert);
+            } else {
+                $checkfavoritscount = $checkExist->favorite;
+                if ($checkfavoritscount <= 0) {
+                    // update data
+                    $query = DB::table('forum_count_details')
+                        ->where('id', $checkExist->id)
+                        ->update([
+                            'favorite' => $request->favorite,
+                            'updated_at' => date("Y-m-d H:i:s")
+                        ]);
+                }
             }
-            return $this->successResponse($success, 'Heart successfully');
+            $success = DB::table('forum_count_details')
+                ->select(DB::raw("SUM(favorite) as favorite"))
+                ->where('created_post_id', $request->created_post_id)
+                ->get();
+            return $this->successResponse($success, 'Rep Favorits successfully');
         }
     }
     // getStudentAttendence
@@ -2799,9 +2898,10 @@ class ApiController extends BaseController
             return $this->successResponse($getWidgetDetails, 'Wigget record fetch successfully');
         }
     }
+    // forum replies likes count add
     public function replikescountadded(Request $request)
     {
-        $validator = \Validator::make($request->all(), [          
+        $validator = \Validator::make($request->all(), [
             'token' => 'required'
 
         ]);
@@ -2810,25 +2910,38 @@ class ApiController extends BaseController
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
             //
-            $addShortTest = [
-                "created_post_id" => $request->create_post_id,
+            $likesinsert = [
+                "created_post_id" => $request->created_post_id,
                 "created_post_replies_id" => $request->created_post_replies_id,
                 "user_id" => $request->user_id,
                 "user_name" => $request->user_name,
                 "branch_id" => $request->branch_id,
                 "likes" =>  $request->likes,
-                "dislikes"=>0,
-                "favorits"=>0
+                "flag" => 1,
+                'created_at' => date("Y-m-d H:i:s")
             ];
             $checkExist = DB::table('forum_post_replie_counts')->where([
-                ['created_post_id', '=', $request->create_post_id],
+                ['created_post_id', '=', $request->created_post_id],
                 ['created_post_replies_id', '=', $request->created_post_replies_id],
-                ['user_id', '=', $request->user_id]
+                ['user_id', '=', $request->user_id],
+                ['flag', '>', 0]
             ])->first();
-            // dd($checkExist);
+
             if (empty($checkExist)) {
-                // echo "update";
-                DB::table('forum_post_replie_counts')->insert($addShortTest);
+                // echo "update";         
+                DB::table('forum_post_replie_counts')->insert($likesinsert);
+            } else {
+                $checkdislikecount = $checkExist->likes;
+
+                if ($checkdislikecount <= 0) {
+                    // update data
+                    $query = DB::table('forum_post_replie_counts')
+                        ->where('id', $checkExist->id)
+                        ->update([
+                            'likes' => $request->likes,
+                            'updated_at' => date("Y-m-d H:i:s")
+                        ]);
+                }
             }
             $success = DB::table('forum_post_replie_counts')
                 ->select(DB::raw("SUM(likes) as likes"))
@@ -2837,66 +2950,116 @@ class ApiController extends BaseController
             return $this->successResponse($success, 'Replike successfully');
         }
     }
+    // forum replies dislikes count add
     public function repdislikescountadded(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'id' => 'required',
             'token' => 'required'
+
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            // already in this user like this post or not check 
-            $success = DB::table('forum_post_replie_counts')
-                ->select('dislikes')
-                ->where('id', $request->id)
-                ->first();
-            $getdislikes = $success->dislikes;
-            //echo gettype($bodyContent);
-            //dd($bodyContent);
-            if ($getdislikes <= 0) {
-                DB::table('forum_post_replie_counts')
-                    ->where('id', $request->id)
-                    ->increment('dislikes', 1);
-                $success = DB::table('forum_post_replie_counts')
-                    ->select(DB::raw("SUM(dislikes) as dislikes"))
-                    ->where('created_post_replies_id', $request->created_post_replies_id)
-                    ->get();
+            //
+            $dislikesinsert = [
+                "created_post_id" => $request->created_post_id,
+                "created_post_replies_id" => $request->created_post_replies_id,
+                "user_id" => $request->user_id,
+                "user_name" => $request->user_name,
+                "branch_id" => $request->branch_id,
+                "dislikes" =>  $request->dislikes,
+                "flag" => 1,
+                'created_at' => date("Y-m-d H:i:s")
+            ];
+            $checkExist = DB::table('forum_post_replie_counts')->where([
+                ['created_post_id', '=', $request->created_post_id],
+                ['created_post_replies_id', '=', $request->created_post_replies_id],
+                ['user_id', '=', $request->user_id],
+                ['branch_id', '=', $request->branch_id],
+                ['flag', '>', 0]
+            ])->first();
+
+            if (empty($checkExist)) {
+                // echo "insert"; 
+                DB::table('forum_post_replie_counts')->insert($dislikesinsert);
+            } else {
+                $checkdislikecount = $checkExist->dislikes;
+                if ($checkdislikecount <= 0) {
+                    // update data
+                    $query = DB::table('forum_post_replie_counts')
+                        ->where('id', $checkExist->id)
+                        ->update([
+                            'dislikes' => $request->dislikes,
+                            'updated_at' => date("Y-m-d H:i:s")
+                        ]);
+                }
             }
-            return $this->successResponse($success, 'Rep dislike successfully');
+            $success = DB::table('forum_post_replie_counts')
+                ->select(DB::raw("SUM(dislikes) as dislikes"))
+                ->where('created_post_replies_id', $request->created_post_replies_id)
+                ->get();
+            return $this->successResponse($success, 'Rep Dislike successfully');
         }
     }
+    // forum heart count add
     public function repfavcountadded(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'id' => 'required',
-            'token' => 'required'
+            'token' => 'required',
+            'created_post_id' => 'required',
+            'created_post_replies_id' => 'required',
+            'user_id' => 'required',
+            'user_name' => 'required',
+            'favorits' => 'required'
+
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            // already in this user like this post or not check 
-            $success = DB::table('forum_post_replie_counts')
-                ->select('favorits')
-                ->where('id', $request->id)
-                ->first();
-            $getfavorits = $success->favorits;
-            //echo gettype($bodyContent);
-            //dd($bodyContent);
-            if ($getfavorits <= 0) {
-                DB::table('forum_post_replie_counts')
-                    ->where('id', $request->id)
-                    ->increment('favorits', 1);
-                $success = DB::table('forum_post_replie_counts')
-                    ->select(DB::raw("SUM(favorits) as favorits"))
-                    ->where('created_post_replies_id', $request->created_post_replies_id)
-                    ->get();
+            //
+            $favoritsinsert = [
+                "created_post_id" => $request->created_post_id,
+                "created_post_replies_id" => $request->created_post_replies_id,
+                "user_id" => $request->user_id,
+                "user_name" => $request->user_name,
+                "branch_id" => $request->branch_id,
+                "favorits" =>  $request->favorits,
+                "flag" => 1,
+                'created_at' => date("Y-m-d H:i:s")
+            ];
+            $checkExist = DB::table('forum_post_replie_counts')->where([
+                ['created_post_id', '=', $request->created_post_id],
+                ['created_post_replies_id', '=', $request->created_post_replies_id],
+                ['user_id', '=', $request->user_id],
+                ['branch_id', '=', $request->branch_id],
+                ['flag', '>', 0]
+            ])->first();
+
+            if (empty($checkExist)) {
+                // echo "insert";             
+                DB::table('forum_post_replie_counts')->insert($favoritsinsert);
+            } else {
+                $checkfavoritscount = $checkExist->favorits;
+                if ($checkfavoritscount <= 0) {
+                    // update data
+                    $query = DB::table('forum_post_replie_counts')
+                        ->where('id', $checkExist->id)
+                        ->update([
+                            'favorits' => $request->favorits,
+                            'updated_at' => date("Y-m-d H:i:s")
+                        ]);
+                }
             }
-            return $this->successResponse($success, 'Rep favorits successfully');
+            $success = DB::table('forum_post_replie_counts')
+                ->select(DB::raw("SUM(favorits) as favorits"))
+                ->where('created_post_replies_id', $request->created_post_replies_id)
+                ->get();
+            return $this->successResponse($success, 'Rep Disfav successfully');
         }
     }
+    // forum replies insert
     public function repliesinsert(Request $request)
     {
         $validator = \Validator::make($request->all(), [
@@ -2911,63 +3074,163 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $section = new Forum_post_replies();
-            $section->user_id = $request->user_id;
-            $section->user_name = $request->user_name;
-            $section->created_post_id = $request->create_post_id;
-            $section->branch_id = $request->branch_id;
-            $section->replies_com = $request->replies_com;
-            $query = $section->save();
-            $success = [];
-            if (!$query) {
+
+            $Creted_post_replies_id = DB::table('forum_post_replies')->insertGetId([
+                'user_id' => $request->user_id,
+                'user_name' => $request->user_name,
+                'created_post_id' => $request->create_post_id,
+                'branch_id' => $request->branch_id,
+                'replies_com' => $request->replies_com,
+                'created_at' => date("Y-m-d H:i:s")
+            ]);
+            if (!$Creted_post_replies_id) {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             } else {
-                $todayDate = Carbon::now();
-                $getval = array($request->user_id, $request->user_name, $request->create_post_id, $request->replies_com);
+
+                $getval = array($request->user_id, $request->user_name, $request->create_post_id, $request->replies_com, $Creted_post_replies_id);
                 return $this->successResponse($getval, 'Command has been successfully saved');
             }
         }
     }
-    public function repliesfirstlikescountinsert(Request $request)
+    // forum post list category wise
+    public function postListCategory(Request $request)
     {
-
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
-            'branch_id' => 'required',
-            'user_id' => 'required',
-            'user_name' => 'required',
-            'create_post_id' => 'required',
-            'created_post_replies_id' => 'required',
-            'likes' => 'required',
-            'dislikes' => 'required',
-            'favorits' => 'required'
+            'branch_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $section = new Forum_post_replie_counts();
-            $section->user_id = $request->user_id;
-            $section->user_name = $request->user_name;
-            $section->created_post_id = $request->create_post_id;
-            $section->created_post_replies_id = $request->created_post_replies_id;
-            $section->likes = $request->likes;
-            $section->dislikes = $request->dislikes;
-            $section->favorits = $request->favorits;
-            $section->branch_id = $request->branch_id;
-            $query = $section->save();
-            $success = [];
-            if (!$query) {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-            } else {
-                $success = DB::table('forum_post_replie_counts')
-                    ->select(DB::raw("SUM(likes) as likes"), DB::raw("SUM(dislikes) as dislikes"), DB::raw("SUM(favorits) as favorits"), 'id')
-                    ->where('created_post_replies_id', $request->created_post_replies_id)
-                    ->get();
-                return $this->successResponse($success, 'View has been successfully hit');
-            }
+            $success = DB::table('forum_posts')
+                ->leftJoin('forum_categorys', 'forum_categorys.id', '=', 'forum_posts.category')
+                ->leftJoin('forum_count_details', function ($join) {
+                    $join->on('forum_count_details.created_post_id', '=', 'forum_posts.id')
+                        ->orWhere('forum_posts.user_id', '`c.user_id`');
+                })
+                ->select('forum_posts.id', 'forum_posts.user_id', 'forum_posts.user_name', 'forum_posts.topic_title', 'forum_categorys.id as categId', 'forum_categorys.category_names', 'forum_count_details.likes', 'forum_count_details.dislikes', 'forum_count_details.favorite', 'forum_count_details.replies', 'forum_count_details.views', 'forum_count_details.activity', 'forum_posts.created_at', 'forum_posts.topic_header')
+                ->where('forum_posts.branch_id', '=', $request->branch_id)
+                ->groupBy('forum_posts.category')
+                ->get();
+
+            return $this->successResponse($success, 'Post List fetch successfully');
         }
     }
+    // forum single category posts
+    public function singleCategoryPosts(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'categId' => 'required',
+            'user_id' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $success = DB::table('forum_posts')
+                ->select('forum_posts.id', 'forum_posts.category as category', 'forum_posts.topic_title as topic_title', 'forum_posts.topic_header as topic_header', 'forum_posts.body_content as body_content', 'forum_posts.user_name as user_name', 'forum_posts.user_id as user_id', DB::raw('DATE_FORMAT(forum_posts.created_at, "%b %e %Y") as date'), 'forum_count_details.likes as likes', 'forum_count_details.dislikes as dislikes', 'forum_count_details.favorite as favorite', 'forum_count_details.replies as replies', 'forum_count_details.views as views', 'forum_count_details.activity as activity', 'forum_count_details.id as pkcount_details_id', 'forum_categorys.category_names', 'forum_posts.created_at')
+                ->leftJoin('forum_count_details', 'forum_posts.id', '=', 'forum_count_details.created_post_id')
+                ->leftJoin('forum_categorys', 'forum_categorys.id', '=', 'forum_posts.category')
+                ->where([
+                    ['forum_posts.branch_id', '=', $request->branch_id],
+                    ['forum_posts.user_id', '=', $request->user_id],
+                    ['forum_posts.category', '=', $request->categId]
+                ])
+                ->groupBy('forum_posts.category')
+                ->get();
+            return  $this->successResponse($success, 'Single Post category vs successfully');
+        }
+    }
+    // forum user created post branch id wise
+    public function postListUserCreatedOnly(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'user_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            $success = DB::table('forum_posts')
+                ->leftJoin('forum_categorys', 'forum_categorys.id', '=', 'forum_posts.category')
+                ->leftJoin('forum_count_details', function ($join) {
+                    $join->on('forum_count_details.created_post_id', '=', 'forum_posts.id')
+                        ->orWhere('forum_posts.user_id', '`c.user_id`');
+                })
+                ->select('forum_posts.id', 'forum_posts.user_id', 'forum_posts.user_name', 'forum_posts.topic_title', 'forum_categorys.category_names', 'forum_count_details.likes', 'forum_count_details.dislikes', 'forum_count_details.favorite', 'forum_count_details.replies', 'forum_count_details.views', 'forum_count_details.activity', 'forum_posts.created_at', 'forum_posts.topic_header')
+                ->where([
+                    ['forum_posts.branch_id', '=', $request->branch_id],
+                    ['forum_posts.user_id', '=', $request->user_id]
+                ])
+                ->groupBy('forum_posts.user_id')
+                ->get();
+
+            return $this->successResponse($success, 'User Created Post List successfully');
+        }
+    }
+    // forum user created category post branch id and user id wise
+    public function categorypostListUserCreatedOnly(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'user_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $success = DB::table('forum_posts')
+                ->leftJoin('forum_categorys', 'forum_categorys.id', '=', 'forum_posts.category')
+                ->leftJoin('forum_count_details', function ($join) {
+                    $join->on('forum_count_details.created_post_id', '=', 'forum_posts.id')
+                        ->orWhere('forum_posts.user_id', '`c.user_id`');
+                })
+                ->select('forum_posts.id', 'forum_posts.user_id', 'forum_posts.user_name', 'forum_posts.topic_title', 'forum_categorys.id as categId', 'forum_categorys.category_names', 'forum_count_details.likes', 'forum_count_details.dislikes', 'forum_count_details.favorite', 'forum_count_details.replies', 'forum_count_details.views', 'forum_count_details.activity', 'forum_posts.created_at', 'forum_posts.topic_header')
+                ->where([
+                    ['forum_posts.branch_id', '=', $request->branch_id],
+                    ['forum_posts.user_id', '=', $request->user_id]
+                ])
+                ->groupBy('forum_posts.category')
+                ->get();
+
+            return $this->successResponse($success, 'user vs category grid data fetch successfully');
+        }
+    }
+    // forum post replies branch id and post id wise 
+    public function userRepliespostall(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'id' => 'required',
+            'user_id' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $success = DB::table('forum_post_replies')
+                ->select('forum_post_replies.id as pk_replies_id', 'forum_post_replies.created_at', 'forum_post_replies.created_post_id as created_post_id', 'forum_post_replies.branch_id as branch_id', 'forum_post_replies.user_id as user_id', 'forum_post_replies.user_name as user_name', 'replies_com', 'forum_post_replie_counts.id as pk_replies_count_id', 'forum_post_replie_counts.likes as likes', 'forum_post_replie_counts.dislikes as dislikes', 'forum_post_replie_counts.favorits as favorits', DB::raw('DATE_FORMAT(forum_post_replies.created_at, "%b %e %Y") as date'))
+                ->leftJoin('forum_post_replie_counts', 'forum_post_replies.id', '=', 'forum_post_replie_counts.created_post_replies_id')
+                //->where('forum_post_replies.created_post_id', '=', $request->id)
+                ->where([
+                    ['forum_post_replies.branch_id', '=', $request->branch_id],
+                    ['forum_post_replies.created_post_id', '=', $request->id]
+                ])
+                ->get();
+            return  $this->successResponse($success, 'Post replies fetch successfully');
+        }
+    }
+
 
 
     // addHomework

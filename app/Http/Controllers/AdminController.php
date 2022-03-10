@@ -17,45 +17,46 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
-
+use Carbon\Carbon;
 class AdminController extends Controller
 {
     // forum screen pages start
     public function forumIndex()
     {
-        $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
-
-          //dd($forum_list);
+        $forum_list = Helper::GetMethod(config('constants.api.forum_list'));    
+        //dd($forum_list);   
           return view('admin.forum.index', [
             'forum_list' => $forum_list['data']
         ]);
     } 
     public function forumPageSingleTopic()
     {
-
         return view('admin.forum.page-single-topic');
     }
     public function forumPageCreateTopic()
     {
-
-        // $category = Helper::GetMethod(config('constants.api.category'));   
-        //  $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
-        // dd($forum_list);
-        //  return view('admin.forum.page-create-topic',[
-        //      'category' => !empty($category['data'])?$category['data']:$category,
-        //      'forum_list' => !empty($forum_list['data'])?$forum_list['data']:$forum_list,
-        //  ]);
         $category = Helper::GetMethod(config('constants.api.category'));
+  
         $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
 
         return view('admin.forum.page-create-topic', [
             'category' => $category['data'],
-            'forum_list' => $forum_list['data'],
+            'forum_list' => $forum_list['data']
         ]);
     }
     public function forumPageSingleUser()
     {
-        return view('admin.forum.page-single-user');
+        $user_id= session()->get('user_id');  
+        $data = [            
+            'user_id' => $user_id
+        ];
+        $forum_post_user_crd = Helper::GETMethodWithData(config('constants.api.forum_post_user_created'), $data);
+        $forum_categorypost_user_crd = Helper::GETMethodWithData(config('constants.api.forum_categorypost_user_created'), $data);
+   
+        return view('admin.forum.page-single-user', [
+            'forum_post_user_crd' => $forum_post_user_crd['data'],
+            'forum_categorypost_user_crd' => $forum_categorypost_user_crd['data']
+        ]);
     }
     public function forumPageSingleThreads()
     {
@@ -70,16 +71,28 @@ class AdminController extends Controller
         return view('admin.forum.page-single-followers');
     }
     public function forumPageSingleCategories()
-    {
+    { 
         return view('admin.forum.page-single-categories');
     }
     public function forumPageCategories()
-    {
-        return view('admin.forum.page-categories');
+    {        
+        $listcategoryvs= Helper::GetMethod(config('constants.api.listcategoryvs'));        
+        return view('admin.forum.page-categories', [
+            'listcategoryvs' => $listcategoryvs['data']]);
+      
     }
-    public function forumPageCategoriesSingle()
-    {
-        return view('admin.forum.page-categories-single');
+    // forum category vs single
+    public function forumPageCategoriesSingle($categId,$user_id,$category_names)
+    {      
+        session()->put('session_category_names', $category_names);  
+        $data = [
+            'categId' => $categId,
+            'user_id' => $user_id
+        ];
+        $forum_category = Helper::GETMethodWithData(config('constants.api.forum_single_categ'), $data);
+  
+        return view('admin.forum.page-categories-single',[
+            'forum_category' => $forum_category['data']]);
     }
     public function forumPageTabs()
     {
@@ -1614,7 +1627,7 @@ class AdminController extends Controller
     }
     // forum create post 
     public function createpost(Request $request)
-    {
+    {     
         $data = [
             'user_id' => session()->get('user_id'),
             'user_name' => session()->get('name'),
@@ -1629,6 +1642,7 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.forum_cpost'), $data);
         return $response;
     }
+    // Forum single topic with value pass
     public function forumPageSingleTopicwithvalue($id, $user_id)
     {
         $data = [
@@ -1638,12 +1652,11 @@ class AdminController extends Controller
         $singlepost_repliesData = [
             'created_post_id' => $id,
             'user_id' => $user_id,
-        ];
-
+        ]; 
         $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
         $forum_singlepost = Helper::GETMethodWithData(config('constants.api.forum_single_post'), $data);
         $forum_singlepost_replies = Helper::GETMethodWithData(config('constants.api.forum_single_post_replies'), $data);
-        //dd($forum_singlepost_replies);
+     
         return view('admin.forum.page-single-topic', [
             'forum_single_post' => !empty($forum_singlepost['data']) ? $forum_singlepost['data'] : $forum_singlepost,
             'forum_singlepost_replies' => $forum_singlepost_replies['data'],
@@ -1651,4 +1664,5 @@ class AdminController extends Controller
 
         ]);
     }
+ 
 }

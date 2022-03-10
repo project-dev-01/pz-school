@@ -112,19 +112,23 @@ return [
         // forum url
         'forum_cpost' => $url.'/forum/createpost',   
         'forum_list' => $url.'/forum/list',
+        'listcategoryvs'=>$url.'/forum/listcategory',
         'category' => $url.'/get-category',        
         'forum_single_post'=>$url.'/forum/singlepost',
+        'forum_single_categ'=>$url.'/forum/singlecateg',
+        'forum_post_user_created'=>$url.'/forum/postlistusercreated',
+        'forum_categorypost_user_created'=>$url.'/forum/listcategoryusercrd',
         'forum_single_post_replies'=>$url.'/forum/singlepost/replies',
         'like_countadd' => $url.'/forum-likecout',
         'dislike_countadd' => $url.'/forum-discout',
         'heart_countadd' => $url.'/forum-heartcout',
         'view_countadd' => $url.'/forum-viewcout',
         'view_countadd_insert'=> $url.'/forum-viewcout-insert', 
-        'replies_insert'=> $url.'/forum-replies-insert',
-        'replies_firstlikes_insert'=>$url.'/forum-replies-firstlikes-insert',
+        'replies_insert'=> $url.'/forum-replies-insert',    
         'replike_countadd' =>$url.'/forum-replikecout',
-
         'repdislike_countadd' =>$url.'/forum-repdislikecout',
+        'repheart_countadd'=>$url.'/forum-repfavorits',
+        
 
 
         // classroom management api details
@@ -140,7 +144,7 @@ return [
         'get_daily_report_remarks' => $url.'/get_daily_report_remarks',
         'add_daily_report_remarks' => $url.'/add_daily_report_remarks',
         'get_classroom_widget_data' => $url.'/get_classroom_widget_data',
-
+        
         
          // homework url
          'homework_add' => $url.'/homework/add',

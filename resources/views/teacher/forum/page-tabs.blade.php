@@ -31,7 +31,7 @@
                             </h2>
                             Forum 19 is a community of creatives who come together to share ideas and help each other succeed.
                             <h3 class="tt-title">
-                                teachers
+                                Admins
                             </h3>
                             <div class="tt-list-avatar">
                                 <div class="row">
@@ -194,9 +194,9 @@
                         <h6 class="tt-title tt-size-lg">
                             The Concept of School Management
                         </h6>
-                        <p> Students attend school in order to receive intellectual and moral education. Teachers, teacheristrators, parents, community and principal all play either a direct or indirect role in affecting such development. These key players need to realize the importance of their influence and responsibilities.</p>
+                        <p> Students attend school in order to receive intellectual and moral education. Teachers, administrators, parents, community and principal all play either a direct or indirect role in affecting such development. These key players need to realize the importance of their influence and responsibilities.</p>
                         <p>
-                        The principal is the head of the school, having to play the role of manager in order to elevate the efficiency of teacheristration, promote the professional growth of teachers, respect the educational choice of parents and bring together all the key players into a cooperative mode. All is done with the aim of fostering student development and growth in every aspect so that they gain essential knowledge and cultivate the concept of lifelong learning.
+                        The principal is the head of the school, having to play the role of manager in order to elevate the efficiency of administration, promote the professional growth of teachers, respect the educational choice of parents and bring together all the key players into a cooperative mode. All is done with the aim of fostering student development and growth in every aspect so that they gain essential knowledge and cultivate the concept of lifelong learning.
                         </p>
                         <dl class="dl-layout-01">
                             <dt>The notion and ways of interaction between schools, teachers, parents, the community and society</dt>
@@ -207,7 +207,7 @@
                             Place students and teaching as top priority
                             </dt>
                             <dd>
-                            Everything done in the school should revolve around the students’ welfare and needs, be it the allocation of resources or the planning of activities and teaching content. Since teaching is the most important agenda in a school, the teacheristration should provide the necessary support, be concerned with teaching and assist the teachers in upgrading the quality of teaching.
+                            Everything done in the school should revolve around the students’ welfare and needs, be it the allocation of resources or the planning of activities and teaching content. Since teaching is the most important agenda in a school, the administration should provide the necessary support, be concerned with teaching and assist the teachers in upgrading the quality of teaching.
                             </dd>                            
                         </dl>
                         <h6 class="tt-title">Principles to Build a active Parent-Teacher Relationship:</h6>
@@ -249,7 +249,7 @@
                         <h6 class="tt-title tt-size-lg">
                             USE OF THE SERVICES.
                         </h6>
-                        <p> The Services are intended to guide high school students in their post-secondary pursuits. The Services enable students to search for and learn about collegiate, scholarship, and career opportunities; to engage with high school counselors and college admissions representatives during the college selection and admissions process; to solicit from high school faculty and teacheristrators the creation and delivery of application-related documents; and to promote and manage their applications to institutions of higher education. </p>
+                        <p> The Services are intended to guide high school students in their post-secondary pursuits. The Services enable students to search for and learn about collegiate, scholarship, and career opportunities; to engage with high school counselors and college admissions representatives during the college selection and admissions process; to solicit from high school faculty and administrators the creation and delivery of application-related documents; and to promote and manage their applications to institutions of higher education. </p>
    
                         <dl class="dl-layout-01">                            
                             <dd>

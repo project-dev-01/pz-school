@@ -12,7 +12,7 @@ use App\Models\States;
 // db connection
 use App\Helpers\DatabaseConnection;
 use App\Models\Category;
-
+use Illuminate\Support\Facades\DB;
 class CommonController extends BaseController
 {
     //
@@ -56,9 +56,20 @@ class CommonController extends BaseController
         return $this->successResponse([], 'Migrated successfully');
 
     }
-    public function categoryList()
+    public function categoryList(Request $request)
     {
-        $success = Category::all();
-        return $this->successResponse($success, 'category record fetch successfully');
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+               // create new connection              
+            $success = DB::table('forum_categorys')->where('branch_id', $request->branch_id)->get();
+            $success = Category::all();
+            return $this->successResponse($success, 'category record fetch successfully');
+        }
+       
     }
 }

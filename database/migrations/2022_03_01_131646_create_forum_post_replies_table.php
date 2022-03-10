@@ -20,6 +20,7 @@ class CreateForumPostRepliesTable extends Migration
             $table->integer('user_id');
             $table->string('user_name');
             $table->string('replies_com');
+            $table->integer('flag');
             $table->timestamps();
         });
     }

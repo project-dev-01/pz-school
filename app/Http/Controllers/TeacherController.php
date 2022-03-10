@@ -50,7 +50,11 @@ class TeacherController extends Controller
     // forum screen pages start
     public function forumIndex()
     {
-        return view('teacher.forum.index');
+        $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
+        return view('teacher.forum.index', [
+            'forum_list' => $forum_list['data']
+        ]);
+        // return view('teacher.forum.index');
     }
     public function forumPageSingleTopic()
     {
@@ -58,11 +62,30 @@ class TeacherController extends Controller
     }
     public function forumPageCreateTopic()
     {
-        return view('teacher.forum.page-create-topic');
+        $category = Helper::GetMethod(config('constants.api.category'));
+
+        $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
+
+        return view('teacher.forum.page-create-topic', [
+            'category' => $category['data'],
+            'forum_list' => $forum_list['data']
+        ]);
+        //return view('teacher.forum.page-create-topic');
     }
     public function forumPageSingleUser()
     {
-        return view('teacher.forum.page-single-user');
+        $user_id = session()->get('user_id');
+        $data = [
+            'user_id' => $user_id
+        ];
+        $forum_post_user_crd = Helper::GETMethodWithData(config('constants.api.forum_post_user_created'), $data);
+        $forum_categorypost_user_crd = Helper::GETMethodWithData(config('constants.api.forum_categorypost_user_created'), $data);
+        //dd($forum_categorypost_user_crd);
+        return view('teacher.forum.page-single-user', [
+            'forum_post_user_crd' => $forum_post_user_crd['data'],
+            'forum_categorypost_user_crd' => $forum_categorypost_user_crd['data']
+        ]);
+        // return view('teacher.forum.page-single-user');
     }
     public function forumPageSingleThreads()
     {
@@ -82,11 +105,25 @@ class TeacherController extends Controller
     }
     public function forumPageCategories()
     {
-        return view('teacher.forum.page-categories');
+        $listcategoryvs = Helper::GetMethod(config('constants.api.listcategoryvs'));
+        return view('teacher.forum.page-categories', [
+            'listcategoryvs' => $listcategoryvs['data']
+        ]);
+        // return view('teacher.forum.page-categories');
     }
-    public function forumPageCategoriesSingle()
+    public function forumPageCategoriesSingle($categId, $user_id, $category_names)
     {
-        return view('teacher.forum.page-categories-single');
+        session()->put('session_category_names', $category_names);
+        $data = [
+            'categId' => $categId,
+            'user_id' => $user_id
+        ];
+        $forum_category = Helper::GETMethodWithData(config('constants.api.forum_single_categ'), $data);
+
+        return view('teacher.forum.page-categories-single', [
+            'forum_category' => $forum_category['data']
+        ]);
+        //  return view('teacher.forum.page-categories-single');
     }
     public function forumPageTabs()
     {
@@ -95,6 +132,45 @@ class TeacherController extends Controller
     public function forumPageTabGuidelines()
     {
         return view('teacher.forum.page-tabs-guidelines');
+    }
+    // forum create post 
+    public function createpost(Request $request)
+    {
+        $data = [
+            'user_id' => session()->get('user_id'),
+            'user_name' => session()->get('name'),
+            'topic_title' => $request->inputTopicTitle,
+            'topic_header' => $request->inputTopicHeader,
+            'types' => $request->topictype,
+            'body_content' => $request->tpbody,
+            'category' => $request->category,
+            'tags' => $request->inputTopicTags,
+            'imagesorvideos' => $request->inputTopicTitle
+        ];
+        $response = Helper::PostMethod(config('constants.api.forum_cpost'), $data);
+        return $response;
+    }
+    // Forum single topic with value pass
+    public function forumPageSingleTopicwithvalue($id, $user_id)
+    {
+        $data = [
+            'id' => $id,
+            'user_id' => $user_id,
+        ];
+        $singlepost_repliesData = [
+            'created_post_id' => $id,
+            'user_id' => $user_id,
+        ];
+        $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
+        $forum_singlepost = Helper::GETMethodWithData(config('constants.api.forum_single_post'), $data);
+        $forum_singlepost_replies = Helper::GETMethodWithData(config('constants.api.forum_single_post_replies'), $data);
+        //dd($forum_singlepost_replies);         
+        return view('teacher.forum.page-single-topic', [
+            'forum_single_post' => !empty($forum_singlepost['data']) ? $forum_singlepost['data'] : $forum_singlepost,
+            'forum_singlepost_replies' => $forum_singlepost_replies['data'],
+            'forum_list' => $forum_list['data']
+
+        ]);
     }
     // forum screen pages end
 
@@ -191,7 +267,7 @@ class TeacherController extends Controller
     }
     function addShortTest(Request $request)
     {
-  
+
         $data = [
             "short_test" => $request->short_test,
             "date" => $request->date,
@@ -228,5 +304,4 @@ class TeacherController extends Controller
         $response = Helper::PostMethod(config('constants.api.add_daily_report_remarks'), $data);
         return $response;
     }
-    
 }

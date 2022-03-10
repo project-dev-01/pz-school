@@ -23,6 +23,7 @@ class CreateForumPostReplieCountsTable extends Migration
             $table->string('likes');
             $table->string('dislikes');
             $table->string('favorits');
+            $table->integer('flag');
             $table->timestamps();
         });
     }

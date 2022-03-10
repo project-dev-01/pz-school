@@ -119,7 +119,6 @@
             @forelse($forum_singlepost_replies as $value)
             <label hidden id="hdpk_replies_id" name="hdpk_replies_id">{{ $value['pk_replies_id'] }}</label>
             <label hidden id="hdpk_replies_count_id" name="hdpk_replies_count_id">{{ $value['pk_replies_count_id'] }}</label>
-
             <div class="tt-item">
                 <div class="tt-single-topic">
                     <div class="tt-item-header pt-noborder">
@@ -155,11 +154,11 @@
                                 @endif
                             </span>
                         </a>
-                        <a href="javescript:void(0)" class="tt-icon-btn">
+                        <a href="javescript:void(0)" class="tt-icon-btn rep-dislikes-iconhit" data-id="{{$value['pk_replies_id']}}">
                             <i class="tt-icon"><svg>
                                     <use xlink:href="#icon-dislike"></use>
                                 </svg></i>
-                            <span class="tt-text">
+                            <span class="tt-text repincdislikes{{$value['pk_replies_id']}}">
                                 @if($value['dislikes']=== null)
                                 0
                                 @else
@@ -167,11 +166,11 @@
                                 @endif
                             </span>
                         </a>
-                        <a href="#" class="tt-icon-btn" id="rep-fav-iconhit">
+                        <a href="#" class="tt-icon-btn rep-favorite-iconhit" data-id="{{$value['pk_replies_id']}}">
                             <i class="tt-icon"><svg>
                                     <use xlink:href="#icon-favorite"></use>
                                 </svg></i>
-                            <span class="tt-text repincfav">
+                            <span class="tt-text repincfav{{$value['pk_replies_id']}}">
                                 @if($value['favorits']=== null)
                                 0
                                 @else
@@ -189,7 +188,7 @@
             <div></div>
             @endif
             <!--Instant Replies data only binded-->
-            <form id="repliesjsvs">
+            <form id="repliesjsvs" class="tt-item">
                 <div id="repliesapply">
                 </div>
             </form>
@@ -204,77 +203,10 @@
                 <h6 class="pt-title">Post Your Reply</h6>
                 <div class="pt-row">
                     <div class="col-left">
-                        <ul class="pt-edit-btn">
-                            <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-quote"></use>
-                                    </svg>
-                                </button></li>
-                            <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-bold"></use>
-                                    </svg>
-                                </button></li>
-                            <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-italic"></use>
-                                    </svg>
-                                </button></li>
-                            <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-share_topic"></use>
-                                    </svg>
-                                </button></li>
-                            <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-blockquote"></use>
-                                    </svg>
-                                </button></li>
-                            <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-performatted"></use>
-                                    </svg>
-                                </button></li>
-                            <li class="hr"></li>
-                            <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-upload_files"></use>
-                                    </svg>
-                                </button></li>
-                            <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-bullet_list"></use>
-                                    </svg>
-                                </button></li>
-                            <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-heading"></use>
-                                    </svg>
-                                </button></li>
-                            <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-horizontal_line"></use>
-                                    </svg>
-                                </button></li>
-                            <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-emoticon"></use>
-                                    </svg>
-                                </button></li>
-                            <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-settings"></use>
-                                    </svg>
-                                </button></li>
-                            <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-color_picker"></use>
-                                    </svg>
-                                </button></li>
-                        </ul>
+                        
                     </div>
                     <div class="col-right tt-hidden-mobile">
-                        <a href="#" class="btn btn-primary">Preview</a>
+              
                     </div>
                 </div>
                 <div class="form-group">
@@ -293,11 +225,11 @@
         <div class="tt-topic-list tt-offset-top-30">
             <div class="tt-list-search">
                 <div class="tt-title">Suggested Topics</div>
-                <!-- tt-search -->
+                <!-- tt-search 
                 <div class="tt-search">
                     <form class="search-wrapper">
                         <div class="search-form">
-                            <input type="text" class="tt-search__input" placeholder="Search for topics">
+                            <input type="text" class="tt-search__input" id="listfilter" placeholder="Search for topics">
                             <button class="tt-search__btn" type="submit">
                                 <svg class="tt-icon">
                                     <use xlink:href="#icon-search"></use>
@@ -310,7 +242,7 @@
                             </button>
                         </div>
                     </form>
-                </div>
+                </div>-->
                 <!-- /tt-search -->
             </div>
             <div class="tt-list-header tt-border-bottom">
@@ -322,62 +254,65 @@
                 <div class="tt-col-value">Activity</div>
             </div>
             @if(!empty($forum_list))
+            @php
+            $randomcolor = 1;
+            @endphp
             @foreach($forum_list as $value)
-            <div class="tt-item">
-                <div class="tt-col-avatar">
+            @php           
+            if($randomcolor==9)
+            {
+                $randomcolor = 1;
+            }
+            @endphp
+            <div class="tt-item"  id="usnames">
+                <div class="tt-col-avatar flvalues">
                     <!-- <svg class="tt-icon">
                         <use xlink:href="#icon-ava-n"></use>
                     </svg>-->
                     <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle" height="40" />
                     {{ $value['user_name'] }}
                 </div>
-                <div class="tt-col-description">
+                <div class="tt-col-description flvalues">
                     <h6 class="tt-title">
                         <a href="{{route('admin.forum.page-single-topic-val',[$value['id'],$value['user_id']])}}">
                             {{ $value['topic_title'] }}
                         </a>
-                    </h6>
-                    <div class="row align-items-center no-gutters hide-desktope">
-                        <div class="col-auto">
-                            <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color05 tt-badge"></span></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-auto ml-auto show-mobile">
-                            <div class="tt-value">1d</div>
-                        </div>
-                    </div>
+                    </h6>                
                 </div>
-                <div class="tt-col-category"><span class="tt-color05 tt-badge">{{$value['category_names'] }}</span></div>
-                <div class="tt-col-value hide-mobile">
+                <div class="tt-col-category flvalues">
+                    <span class="tt-color0{{$randomcolor}} tt-badge">{{$value['category_names'] }}</span>
+                </div>
+                <div class="tt-col-value hide-mobile flvalues">
                     @if($value['likes']=== null)
                     0
                     @else
                     {{$value['likes']}}
                     @endif
                 </div>
-                <div class="tt-col-value hide-mobile">
+                <div class="tt-col-value hide-mobile flvalues">
                     @if($value['replies']=== null)
                     0
                     @else
                     {{$value['replies']}}
                     @endif
                 </div>
-                <div class="tt-col-value hide-mobile">
+                <div class="tt-col-value hide-mobile flvalues">
                     @if($value['views']=== null)
                     0
                     @else
                     {{$value['views']}}
                     @endif
                 </div>
-                <div class="tt-col-value hide-mobile">
-                    @if($value['activity']=== null)
-                    0
-                    @else
-                    {{$value['activity']}}
-                    @endif
-                </div>
+                <div class="tt-col-value hide-mobile flvalues">
+                    @php
+                    echo App\Http\Controllers\CommonController::get_timeago(strtotime($value['created_at']));
+                    @endphp
+                </div> 
+                              
             </div>
+            @php
+            $randomcolor++;
+            @endphp
             @endforeach
             @endif
             <div class="tt-row-btn">
@@ -393,4 +328,11 @@
 @endsection
 @section('scripts')
 <script src="{{ asset('js/custom/forum-post-countsothers.js') }}"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#repliesinput'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
 @endsection

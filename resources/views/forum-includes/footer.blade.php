@@ -466,6 +466,7 @@
 <!-- Init js -->
 <script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('js/custom/ckeditor.js') }}"></script>
 <script>  
   toastr.options.preventDuplicates = true;
     $.ajaxSetup({
@@ -475,6 +476,7 @@
     });
 </script>
 <script src="{{ asset('js/validation/validation.js') }}"></script>
+
 <script>
         // forum count
       
@@ -487,13 +489,9 @@
         var heart = "{{ config('constants.api.heart_countadd') }}";
         var viewscount="{{ config('constants.api.view_countadd') }}";
         var insertviewfirstcount="{{ config('constants.api.view_countadd_insert') }}";
-        var repliesforpost="{{ config('constants.api.replies_insert') }}";
-
-        var insertrepliesfirst="{{ config('constants.api.replies_firstlikes_insert') }}";
-        var replikescount="{{ config('constants.api.replike_countadd') }}";  
-       
-        var repdislikescount = "{{ config('constants.api.repdislike_countadd') }}";
-       
+        var repliesforpost="{{ config('constants.api.replies_insert') }}";   
+        var replikescount="{{ config('constants.api.replike_countadd') }}"; 
+        var repdislikescount = "{{ config('constants.api.repdislike_countadd') }}";       
         var repheartcount = "{{ config('constants.api.repheart_countadd') }}";
 
         

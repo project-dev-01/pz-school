@@ -70,10 +70,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('branch-by-class', [ApiController::class, 'branchIdByClass']);
     Route::post('branch-by-section', [ApiController::class, 'branchIdBySection']);
     Route::post('section-by-class', [ApiController::class, 'sectionByClass']);
-    Route::post('subject-by-class', [ApiController::class, 'subjectByClass']);
-    Route::post('timetable-subject', [ApiController::class, 'timetableSubject']);
-    
-    
     // Event Type routes
     Route::post('event_type/add', [ApiController::class, 'addEventType']);
     Route::get('event_type/list', [ApiController::class, 'getEventTypeList']);
@@ -156,12 +152,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     
     Route::post('timetable/student', [ApiController::class, 'studentTimetable']);
     Route::post('timetable/parent', [ApiController::class, 'parentTimetable']);
-     
-    // Homework routes
-    Route::post('homework/add', [ApiController::class, 'addHomework']);
-    Route::post('homework/list', [ApiController::class, 'getHomeworkList']);
-    Route::post('homework/homework-details', [ApiController::class, 'getHomeworkDetails']);
-
 
     //  getStudentAttendence
     Route::post('get_student_attendance',[ApiController::class,'getStudentAttendence']);
