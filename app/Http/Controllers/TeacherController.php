@@ -209,8 +209,14 @@ class TeacherController extends Controller
 
     public function attendanceList()
     {
-        return view('teacher.attendance.index');
-    }
+        $data = [
+            'teacher_id' => session()->get('user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        return view('teacher.attendance.index', [
+            'teacher_class' => $response['data']
+        ]);
+        }
     public function byclasss()
     {
         return view('teacher.exam_results.byclass');
@@ -304,4 +310,5 @@ class TeacherController extends Controller
         $response = Helper::PostMethod(config('constants.api.add_daily_report_remarks'), $data);
         return $response;
     }
+    
 }

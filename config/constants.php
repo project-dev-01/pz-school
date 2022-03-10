@@ -144,6 +144,12 @@ return [
         'get_daily_report_remarks' => $url.'/get_daily_report_remarks',
         'add_daily_report_remarks' => $url.'/add_daily_report_remarks',
         'get_classroom_widget_data' => $url.'/get_classroom_widget_data',
+        // get attendance list
+        'get_attendance_list' => $url.'/get_attendance_list',
+        'get_child_subjects' => $url.'/get_child_subjects',
+        'get_attendance_list_teacher' => $url.'/get_attendance_list_teacher',
+        'get_reasons_by_student' => $url.'/get_reasons_by_student',
+        
         
         
          // homework url

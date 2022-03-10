@@ -146,6 +146,7 @@ $(function () {
     //
     $('#branch-form').on('submit', function (e) {
         e.preventDefault();
+        $('#saveBranch').prop('disabled', true);
         var branchCheck = $("#branch-form").valid();
         if (branchCheck === true) {
             var form = this;

@@ -12,18 +12,6 @@
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">Late Analysis</h4>
-
-                                <div id="cardCollpase18" class="collapse pt-3 show" dir="ltr">
-                                            <div id="late-pie" class="apex-charts" data-colors="#6658dd,#4fc6e1,#4a81d4,#00b19d,#f1556c"></div>
-                                        </div>
-                               
-                            </div> <!-- end card-body-->
-                        </div> <!-- end card-->
-                    </div> <!-- end col -->
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
                                 <h4 class="header-title">Reasons Count</h4>
                                 <div class="mt-4 chartjs-chart">
                                     <canvas id="reason-chart" data-colors="#39afd1"></canvas>

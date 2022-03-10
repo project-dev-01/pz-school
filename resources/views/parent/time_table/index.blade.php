@@ -2,10 +2,12 @@
 @section('title','Timetable ')
 @section('content')
 <style>
-    .form-control:disabled, .form-control[readonly] {
+    .form-control:disabled,
+    .form-control[readonly] {
         background-color: #eee;
         opacity: 1;
     }
+
     .edit-button {
         float: right !important;
         position: absolute;
@@ -33,15 +35,17 @@
     </div>
 
 
-    <div class="row" id="timetablerow" >
+    <div class="row" id="timetablerow">
         <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                     <li class="nav-item">
                         <h4 class="nav-link"><i class="far fa-clock"></i>
-                            @if($timetable)Class {{ $details['class']['class_name'] }} (Section: {{ $details['section']['section_name'] }}) @endif 	
+                            @if($timetable>0)
+                            @if($timetable)Class {{ $details['class']['class_name'] }} (Section: {{ $details['section']['section_name'] }}) @endif
+                            @endif
                         </h4>
-                        
+
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -50,44 +54,45 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered mb-0 text-center">
                                     <tbody id="timetable">
+                                        @if($timetable>0)
                                         @foreach($days as $day)
                                         <tr>
                                             <td>{{strtoupper($day)}}</td>
                                             @php $row=0; @endphp
                                             @foreach($timetable as $table)
-                                                @if($table['day'] == $day)
-                                                    @if($table['break'] == 1)
-                                                    <td> 
-                                                        <b>Break Time</b><br> 
-                                                        ( {{ $table['time_start']}} - {{$table['time_end']}} )<br>
-                                                        @if($table['class_room'])
-                                                        Class Room : {{$table['class_room']}}
-                                                        @endif
-                                                    </td>
-                                                    @else
-
-                                                    <td> 
-                                                        <b>Subject:{{$table['subject_name']}}</b><br>
-                                                        ( {{ $table['time_start']}} - {{$table['time_end']}} )<br>
-                                                        Teacher :  {{$table['teacher_name'] }}<br>
-                                                        @if($table['class_room'])
-                                                        Class Room : {{$table['class_room']}}
-                                                        @endif
-                                                    </td>
-                                                    
-                                                    @endif 
-                                                    @php $row++; @endphp
+                                            @if($table['day'] == $day)
+                                            @if($table['break'] == 1)
+                                            <td>
+                                                <b>Break Time</b><br>
+                                                ( {{ $table['time_start']}} - {{$table['time_end']}} )<br>
+                                                @if($table['class_room'])
+                                                Class Room : {{$table['class_room']}}
                                                 @endif
+                                            </td>
+                                            @else
+
+                                            <td>
+                                                <b>Subject:{{$table['subject_name']}}</b><br>
+                                                ( {{ $table['time_start']}} - {{$table['time_end']}} )<br>
+                                                Teacher : {{$table['teacher_name'] }}<br>
+                                                @if($table['class_room'])
+                                                Class Room : {{$table['class_room']}}
+                                                @endif
+                                            </td>
+
+                                            @endif
+                                            @php $row++; @endphp
+                                            @endif
                                             @endforeach
-                                            @while($row<$max)
-                                                <td class="center">N/A</td>
+                                            @while($row<$max) <td class="center">N/A</td>
                                                 @php $row++; @endphp
-                                            @endwhile
+                                                @endwhile
                                         </tr>
                                         @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
-                                
+
                             </div> <!-- end table-responsive-->
                         </div> <!-- end col-->
                     </div>

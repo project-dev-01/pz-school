@@ -33,14 +33,13 @@
                 </ul><br>
                 <br>
                 <div class="card-body">
-                    <form id="demo-form" data-parsley-validate="" autocomplete="off">
-                        <div class="row ">
-
+                    <form id="getAttendanceList" autocomplete="off">
+                        <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Date<span class="text-danger">*</span></label>
+                                    <label for="attendanceList">Month Year<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge text-center">
-                                        <input type="text" class="form-control" data-provide="datepicker" data-date-format="MM yyyy" Value="February 2022" data-date-min-view-mode="1">
+                                        <input type="text" id="attendanceList" class="form-control" name="year_month" data-provide="datepicker" data-date-format="MM yyyy" data-date-min-view-mode="1">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="far fa-calendar-alt"></span>
@@ -49,16 +48,25 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="subject_id">Class<span class="text-danger">*</span></label>
+                                    <select id="subject_id" class="form-control" name="subject_id">
+                                        <option value="">Select Subject</option>
+                                        @forelse ($subjects as $sub)
+                                        <option value="{{ $sub['subject_id'] }}">{{ $sub['subject_name'] }}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group text-right m-b-0">
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                Filter
+                            </button>
                         </div>
                     </form>
-                    <div class="form-group text-right m-b-0">
-                        <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Filter
-                        </button>
-                        <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                            Cancel
-                        </button>-->
-                    </div>
 
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
@@ -68,7 +76,7 @@
     <!-- end row -->
 
 
-    <div class="row">
+    <div class="row" id="attendanceReport">
         <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
@@ -97,131 +105,18 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Sat<br>1</th>
-                                                <th>Sun<br>2</th>
-                                                <th>Mon<br>3</th>
-                                                <th>Tue<br>4</th>
-                                                <th>Wed<br>5</th>
-                                                <th>Thu<br>6</th>
-                                                <th>Fri<br>7</th>
-                                                <th>Sat<br>8</th>
-                                                <th>Sun<br>9</th>
-                                                <th>Mon<br>10</th>
-                                                <th>Tue<br>11</th>
-                                                <th>Wed<br>12</th>
-                                                <th>Thu<br>13</th>
-                                                <th>Fri<br>14</th>
-                                                <th>Sat<br>15</th>
-                                                <th>Sun<br>16</th>
-                                                <th>Mon<br>17</th>
-                                                <th>Tue<br>18</th>
-                                                <th>Wed<br>19</th>
-                                                <th>Thu<br>20</th>
-                                                <th>Fri<br>21</th>
-                                                <th>Sat<br>22</th>
-                                                <th>Sun<br>23</th>
-                                                <th>Mon<br>24</th>
-                                                <th>Tue<br>25</th>
-                                                <th>Wed<br>26</th>
-                                                <th>Thu<br>27</th>
-                                                <th>Fri<br>28</th>
-                                                <th>Total<br>Present</th>
-                                                <th>Total<br>Absent</th>
-                                                <th>Total<br>Late</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <!-- <tr>
-                                                <td>Charlotte Isabella</td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td style="background-color: #ddd; cursor: not-allowed;" ></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
-                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                
-                                                <td><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-ufo"></i> </button></td>
-                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
-                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
-                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
-                                                <td><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td>18</td>
-                                                <td>2</td>
-                                                <td>2</td>
-                                            </tr> -->
-                                            <tr>
-                                                <td>Benjamin</td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
-                                                <td><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
-                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-ufo"></i> </button></td>
-                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
-                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
-                                                <td style="background-color: #ddd; cursor: not-allowed;"></td>
-                                                <td><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i></button></td>
-                                                <td>19</td>
-                                                <td>2</td>
-                                                <td>2</td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div> <!-- end table-responsive-->
+                                <div id="attendanceListShow">
+                                </div>
 
                             </div> <!-- end card-box -->
                         </div> <!-- end col-->
                     </div>
                     <!-- end row-->
-                    <div class="form-group text-right m-b-0">
-                        <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Save
+                    <!-- <div class="form-group text-right m-b-0">
+                        <button id="exportAttendance" class="btn btn-primary-bl waves-effect waves-light" type="Save">
+                            Download
                         </button>
-                        <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                            Cancel
-                        </button>-->
-                    </div>
+                    </div> -->
 
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
@@ -232,4 +127,10 @@
 
 </div> <!-- container -->
 
+@endsection
+@section('scripts')
+<script>
+    var getAttendanceList = "{{ config('constants.api.get_attendance_list') }}";
+</script>
+<script src="{{ asset('js/custom/attendance_list.js') }}"></script>
 @endsection

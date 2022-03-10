@@ -124,10 +124,11 @@ class StudentController extends Controller
         return view(
             'student.timetable.index',
             [
-                'timetable' => $timetable['data']['timetable'],
-                'details' => $timetable['data']['details'],
+                'timetable' => isset($timetable['data']['timetable']) ? count($timetable['data']['timetable']) : 0,
+                'details' => isset($timetable['data']['timetable']) ? count($timetable['data']['timetable']) : 0,
                 'days' => $days,
-                'max' => $timetable['data']['max']
+                'max' => isset($timetable['data']['max']) ? count($timetable['data']['max']) : 0
+
             ]
         );
     }

@@ -80,7 +80,7 @@
         <!-- LOGO -->
         <div class="logo-box">
 
-            <a href="index.html" class="logo logo-light text-center">
+            <a href="javascript:void(0)" class="logo logo-light text-center">
                 <span class="logo-sm">
                     <img src="{{ asset('images/logo-sm.png') }}" alt="" height="22">
                 </span>

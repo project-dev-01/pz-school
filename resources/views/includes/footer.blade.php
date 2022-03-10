@@ -140,6 +140,7 @@
     var branchBySection = "{{ config('constants.api.branch_by_section') }}";
 
     var token = "{{ Session::get('token') }}";
+    var ref_user_id = "{{ Session::get('ref_user_id') }}";
     var branchID = "{{ Session::get('branch_id') }}";
     var userID = "{{ Session::get('user_id') }}";
     // branch details
@@ -200,9 +201,7 @@
 <script src="{{ asset('js/custom/dashboard.js') }}"></script>
 <script src="{{ asset('js/custom/test_result.js') }}"></script>
 <script src="{{ asset('js/custom/apex-mixed.js') }}"></script>
-<script src="{{ asset('js/custom/attendance.js') }}"></script>
 <script src="{{ asset('js/custom/common.js') }}"></script>
-
 <script src="{{ asset('js/custom/iconchart.js') }}"></script>
 <!-- <script src="{{ asset('js/apexChart/apexcharts.js') }}"></script> -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> -->

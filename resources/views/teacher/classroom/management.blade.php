@@ -62,10 +62,10 @@
         transform: translateY(-500px);
     }
 
-    * {
+    /* * {
         box-sizing: border-box;
         transition: all .1s ease-in-out;
-    }
+    } */
 
     /* thump */
     .radio_group {
@@ -168,8 +168,14 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="heard">Count Down<span class="text-danger">*</span></label>
-                                    <input type="text" id="basic-timepicker" class="form-control btn dropdown-toggle btn-light" placeholder="01:00:00" disabled>
+                                    <label>Count Down</label>
+                                    <div class="counter" style="display: inline-block;width: 78px;font: bold 15px 'Droid Sans', Arial, sans-serif;text-align: center;text-transform: uppercase;padding-top: 7px;">
+                                        <!-- <span class='e-m-days'>0</span> Days | -->
+                                        <span class='e-m-hours'>00</span> :
+                                        <span class='e-m-minutes'>45</span> :
+                                        <span class='e-m-seconds'>00</span>
+                                    </div>
+                                    <!-- <input type="text" id="basic-timepicker" class="form-control btn dropdown-toggle btn-light" placeholder="01:00:00" disabled> -->
 
                                 </div>
                             </div>
@@ -226,7 +232,7 @@
                                     <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                     </div>
                                 </div>
-                                <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
+                                <h6 class="text-uppercase"><span class="text-muted float-right" id="totalStrength"></span></h6>
                             </div>
 
                         </div>
@@ -242,7 +248,7 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="text-right">
-                                        <h3 class="my-1" style="color:blue"><span data-plugin="counterup">10</span></h3>
+                                        <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="perfectAttendance"></span></h3>
 
                                     </div>
                                 </div>
@@ -252,7 +258,7 @@
                                     <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                     </div>
                                 </div>
-                                <h6 class="text-uppercase"><span class="text-muted float-right">48% of class</span></h6>
+                                <h6 class="text-uppercase"><span class="text-muted float-right">100% of class</span></h6>
                             </div>
 
                         </div>
@@ -268,7 +274,7 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="text-right">
-                                        <h3 class="my-1" style="color:blue"><span data-plugin="counterup">0</span></h3>
+                                        <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="avg_attendance"></span></h3>
 
                                     </div>
                                 </div>
@@ -278,7 +284,7 @@
                                     <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                     </div>
                                 </div>
-                                <h6 class="text-uppercase"><span class="text-muted float-right">72% of class</span></h6>
+                                <h6 class="text-uppercase"><span class="text-muted float-right">100% of class</span></h6>
                             </div>
 
                         </div>
@@ -294,7 +300,7 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="text-right">
-                                        <h3 class="my-1" style="color:blue"><span data-plugin="counterup">1</span></h3>
+                                        <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="belowAttendance"></span></h3>
 
                                     </div>
                                 </div>
@@ -304,7 +310,7 @@
                                     <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                     </div>
                                 </div>
-                                <h6 class="text-uppercase"><span class="text-muted float-right">29% of class</span></h6>
+                                <h6 class="text-uppercase"><span class="text-muted float-right">100% of class</span></h6>
                             </div>
                         </div> <!-- end card-box-->
                     </div>

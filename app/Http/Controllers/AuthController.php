@@ -49,6 +49,7 @@ class AuthController extends Controller
             if ($userDetails['data']['subsDetails']) {
                 if ($userDetails['data']['user']['role_id'] != 1) {
                     $request->session()->put('user_id', $userDetails['data']['user']['id']);
+                    $request->session()->put('ref_user_id', $userDetails['data']['user']['user_id']);
                     $request->session()->put('role_id', $userDetails['data']['user']['role_id']);
                     $request->session()->put('picture', $userDetails['data']['user']['picture']);
                     $request->session()->put('token', $userDetails['data']['token']);
@@ -95,6 +96,7 @@ class AuthController extends Controller
 
             if ($userDetails['data']['user']['role_id'] == 1) {
                 $request->session()->put('user_id', $userDetails['data']['user']['id']);
+                $request->session()->put('ref_user_id', $userDetails['data']['user']['user_id']);
                 $request->session()->put('role_id', $userDetails['data']['user']['role_id']);
                 $request->session()->put('picture', $userDetails['data']['user']['picture']);
                 $request->session()->put('token', $userDetails['data']['token']);
@@ -116,13 +118,14 @@ class AuthController extends Controller
     {
         // dd($request);
         if (session()->has('role_id')) {
-            session()->pull('role_id');
+            session()->pull('role_id');            
             session()->pull('token');
             session()->pull('picture');
             session()->pull('name');
             session()->pull('email');
             session()->pull('role_name');
             session()->pull('user_id');
+            session()->pull('ref_user_id');
             $request->session()->flush();
             return redirect()->route('super_admin.login');
         } else {
@@ -141,6 +144,7 @@ class AuthController extends Controller
             session()->pull('role_name');
             session()->pull('user_id');
             session()->pull('branch_id');
+            session()->pull('ref_user_id');
             // session()->pull('db_name');
             // session()->pull('db_username');
             // session()->pull('db_password');

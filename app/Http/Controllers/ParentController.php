@@ -71,13 +71,15 @@ class ParentController extends Controller
         
         $timetable = Helper::PostMethod(config('constants.api.timetable_parent'), $data);
         // dd($timetable);
+        // dd(isset($timetable['data']['timetable']) ? count($timetable['data']['timetable']) : 0);
+        // isset($etable['data']['timetable']) ? count($etable['data']['timetable']) : 0;
         return view(
             'parent.time_table.index',
             [
-                'timetable' => $timetable['data']['timetable'],
-                'details' => $timetable['data']['details'],
+                'timetable' => isset($timetable['data']['timetable']) ? count($timetable['data']['timetable']) : 0,
+                'details' => isset($timetable['data']['timetable']) ? count($timetable['data']['timetable']) : 0,
                 'days' => $days,
-                'max' => $timetable['data']['max']
+                'max' => isset($timetable['data']['max']) ? count($timetable['data']['max']) : 0
             ]
         );
     }
@@ -124,7 +126,17 @@ class ParentController extends Controller
     //attendance
      public function attendance()
     {
-        return view('parent.attendance.index');
+        $data = [
+            'ref_user_id' => session()->get('ref_user_id')
+        ];
+
+        $subjects = Helper::PostMethod(config('constants.api.get_child_subjects'), $data);
+        return view(
+            'parent.attendance.index',
+            [
+                'subjects' => $subjects['data']
+            ]
+        );
     }
 
      // Home work screen pages start

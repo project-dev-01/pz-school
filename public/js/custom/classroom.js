@@ -9,6 +9,7 @@ $(function () {
         changeMonth: true,
         changeYear: true,
         autoclose: true,
+        maxDate: 0
     });
     // reverse dob
     function convertDigitIn(str) {
@@ -131,7 +132,7 @@ $(function () {
                                 // list mode end
                             });
                             layoutModeGrid += '</div>';
-                        }else{
+                        } else {
                             $(".classRoomHideSHow").hide();
                             toastr.info('No students are available');
                         }
@@ -159,29 +160,7 @@ $(function () {
                     }
                 }
             });
-            // widget show
-            $.ajax({
-                url: getClassRoomWidget,
-                method: "post",
-                data: formData,
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                success: function (response) {
-                    var dataSetNew = response.data;
-                    if (response.code == 200) {
-                        $("#presentCount").html(dataSetNew[0].presentCount);
-                        $("#absentCount").html(dataSetNew[0].absentCount);
-                        $("#lateCount").html(dataSetNew[0].lateCount);
-                        // getReportRemarks(dataSetNew)
-                    } else {
-                        $("#presentCount").html(dataSetNew[0].presentCount);
-                        $("#absentCount").html(dataSetNew[0].absentCount);
-                        $("#lateCount").html(dataSetNew[0].lateCount);
-                        // toastr.error(data.message);
-                    }
-                }
-            });
+            widgetShow(formData);
         }
     });
 
@@ -425,6 +404,20 @@ $(function () {
                     $('#saveClassRoomAttendance').prop('disabled', true);
                     // $('#listModeClassRoom').DataTable().ajax.reload(null, false);
                     // $('#addListMode')[0].reset();
+                    var classID = $("#changeClassName").val();
+                    var sectionID = $("#sectionID").val();
+                    var subjectID = $("#subjectID").val();
+                    var classDate = $("#classDate").val();
+
+                    var formData = new FormData();
+                    formData.append('token', token);
+                    formData.append('branch_id', branchID);
+                    formData.append('class_id', classID);
+                    formData.append('section_id', sectionID);
+                    formData.append('subject_id', subjectID);
+                    formData.append('date', convertDigitIn(classDate));
+                    widgetShow(formData)
+                    
                 } else {
                     toastr.error(data.message);
                 }
@@ -451,6 +444,51 @@ $(function () {
     $('#changeAttendance').on('change', function () {
         $(".changeAttendanceSelect").val($(this).val());
     });
+    // widget function
+    function widgetShow(formData) {
+        // widget show
+        $.ajax({
+            url: getClassRoomWidget,
+            method: "post",
+            data: formData,
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (response) {
+                var dataSetNew = response.data.get_widget_details;
+                var avgAttendance = response.data.avg_attendance;
+
+                if (response.code == 200) {
+                    $("#presentCount").html(dataSetNew[0].presentCount);
+                    $("#absentCount").html(dataSetNew[0].absentCount);
+                    $("#lateCount").html(dataSetNew[0].lateCount);
+                    var totalStudentCount = dataSetNew[0].totalStudentCount;
+                    var presentCount = dataSetNew[0].presentCount;
+                    var absentCount = dataSetNew[0].absentCount;
+                    var attpresentCount = avgAttendance[0].presentCount;
+                    var totalDate = avgAttendance[0].totalDate;
+                    var perfectAttendance = (presentCount / totalStudentCount) * 100;
+                    var belowAttendance = (absentCount / totalStudentCount) * 100;
+                    var avg_attendance = (attpresentCount / totalDate);
+                    $("#perfectAttendance").html(perfectAttendance ? perfectAttendance : 0 + "%");
+                    $("#totalStrength").html("Total Strength: " + totalStudentCount);
+                    $("#belowAttendance").html(belowAttendance ? belowAttendance : 0 + "%");
+                    $("#avg_attendance").html(avg_attendance ? avg_attendance : 0);
+                    // getReportRemarks(dataSetNew)
+                } else {
+                    $("#presentCount").html(dataSetNew[0].presentCount);
+                    $("#absentCount").html(dataSetNew[0].absentCount);
+                    $("#lateCount").html(dataSetNew[0].lateCount);
+                    $("#perfectAttendance").html(0 + "%");
+                    $("#totalStrength").html("Total Strength: " + 0);
+                    $("#belowAttendance").html(0 + "%");
+                    $("#avg_attendance").html(0);
+
+                    // toastr.error(data.message);
+                }
+            }
+        });
+    }
     // get daily report remarks
     // function list mode
     function getReportRemarks(dataSetNew) {
@@ -514,4 +552,45 @@ $(function () {
         }).on('draw', function () {
         });
     }
+    // countdown timer
+    function getCounterData(obj) {
+        // var days = parseInt($('.e-m-days', obj).text());
+        var hours = parseInt($('.e-m-hours', obj).text());
+        var minutes = parseInt($('.e-m-minutes', obj).text());
+        var seconds = parseInt($('.e-m-seconds', obj).text());
+        return seconds + (minutes * 60) + (hours * 3600);
+        // return seconds + (minutes * 60) + (hours * 3600) + (days * 3600 * 24);
+    }
+
+    function setCounterData(s, obj) {
+        // var days = Math.floor(s / (3600 * 24));
+        var hours = Math.floor((s % (60 * 60 * 24)) / (3600));
+        var minutes = Math.floor((s % (60 * 60)) / 60);
+        var seconds = Math.floor(s % 60);
+
+        // console.log(days, hours, minutes, seconds);
+
+        // $('.e-m-days', obj).html(days);
+        $('.e-m-hours', obj).html(hours);
+        $('.e-m-minutes', obj).html(minutes);
+        $('.e-m-seconds', obj).html(seconds);
+    }
+
+    var count = getCounterData($(".counter"));
+
+    var timer = setInterval(function () {
+        count--;
+        // console.log("count" + count);
+        if (count == 0) {
+            clearInterval(timer);
+            $('.e-m-seconds').html(count);
+            return;
+        }
+        setCounterData(count, $(".counter"));
+    }, 1000);
+    // function clearInterval(timer){
+    //     console.log("--")
+    //     console.log(timer)
+    // }   
+
 });

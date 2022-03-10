@@ -1657,10 +1657,10 @@ class ApiController extends BaseController
             // get data
             $class_id = $request->class_id;
             $class = $classConn->table('subject_assigns as sa')->select('s.id', 's.name')
-                                ->join('subjects as s', 'sa.subject_id', '=', 's.id')
-                                ->where('sa.class_id', $class_id)
-                                ->groupBy('s.id')
-                                ->get();
+                ->join('subjects as s', 'sa.subject_id', '=', 's.id')
+                ->where('sa.class_id', $class_id)
+                ->groupBy('s.id')
+                ->get();
             return $this->successResponse($class, 'Class record fetch successfully');
         }
     }
@@ -2176,7 +2176,7 @@ class ApiController extends BaseController
                 ->leftJoin('forum_count_details', function ($join) {
                     $join->on('forum_posts.id', '=', 'forum_count_details.created_post_id');
                 })
-                ->select('forum_posts.id', 'forum_posts.user_id', 'forum_posts.user_name', 'forum_posts.topic_title', 'forum_categorys.category_names', DB::raw("SUM(forum_count_details.likes) as likes"), DB::raw("SUM(forum_count_details.dislikes)as dislikes"), DB::raw("SUM(forum_count_details.favorite)as favorite"),DB::raw("SUM(forum_count_details.replies)as replies"), DB::raw("SUM(forum_count_details.views)as views"), 'forum_count_details.activity', 'forum_posts.created_at', 'forum_posts.topic_header')
+                ->select('forum_posts.id', 'forum_posts.user_id', 'forum_posts.user_name', 'forum_posts.topic_title', 'forum_categorys.category_names', DB::raw("SUM(forum_count_details.likes) as likes"), DB::raw("SUM(forum_count_details.dislikes)as dislikes"), DB::raw("SUM(forum_count_details.favorite)as favorite"), DB::raw("SUM(forum_count_details.replies)as replies"), DB::raw("SUM(forum_count_details.views)as views"), 'forum_count_details.activity', 'forum_posts.created_at', 'forum_posts.topic_header')
                 ->where('forum_posts.branch_id', '=', $request->branch_id)
                 ->groupBy('forum_count_details.created_post_id')
                 ->get();
@@ -2191,21 +2191,21 @@ class ApiController extends BaseController
             'token' => 'required',
             'id' => 'required',
             'branch_id' => 'required'
-        ]);      
+        ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $success =DB::table('forum_posts')
-            ->select('forum_posts.id','forum_posts.user_id', 'forum_posts.category as category', 'forum_posts.topic_title as topic_title', 'forum_posts.topic_header as topic_header', 'forum_posts.body_content as body_content', 'forum_posts.user_name as user_name', DB::raw('DATE_FORMAT(forum_posts.created_at, "%b %e %Y") as date'), DB::raw("SUM(forum_count_details.likes) as likes"), DB::raw("SUM(forum_count_details.dislikes) as dislikes"), DB::raw("SUM(forum_count_details.favorite) as favorite"), DB::raw("SUM(forum_count_details.replies) as replies"), DB::raw("SUM(forum_count_details.views) as views"), 'forum_count_details.activity as activity', 'forum_count_details.id as pkcount_details_id', 'forum_categorys.category_names', 'forum_posts.created_at')
-            ->leftJoin('forum_count_details','forum_posts.id','=','forum_count_details.created_post_id')
-            ->join('forum_categorys','forum_posts.category','=','forum_categorys.id')
-            ->where('forum_posts.branch_id','=',$request->branch_id)
-            ->where('forum_posts.id','=',$request->id)
-            ->groupBy('forum_count_details.created_post_id')
-            ->get();
-            
-       
-            
+            $success = DB::table('forum_posts')
+                ->select('forum_posts.id', 'forum_posts.user_id', 'forum_posts.category as category', 'forum_posts.topic_title as topic_title', 'forum_posts.topic_header as topic_header', 'forum_posts.body_content as body_content', 'forum_posts.user_name as user_name', DB::raw('DATE_FORMAT(forum_posts.created_at, "%b %e %Y") as date'), DB::raw("SUM(forum_count_details.likes) as likes"), DB::raw("SUM(forum_count_details.dislikes) as dislikes"), DB::raw("SUM(forum_count_details.favorite) as favorite"), DB::raw("SUM(forum_count_details.replies) as replies"), DB::raw("SUM(forum_count_details.views) as views"), 'forum_count_details.activity as activity', 'forum_count_details.id as pkcount_details_id', 'forum_categorys.category_names', 'forum_posts.created_at')
+                ->leftJoin('forum_count_details', 'forum_posts.id', '=', 'forum_count_details.created_post_id')
+                ->join('forum_categorys', 'forum_posts.category', '=', 'forum_categorys.id')
+                ->where('forum_posts.branch_id', '=', $request->branch_id)
+                ->where('forum_posts.id', '=', $request->id)
+                ->groupBy('forum_count_details.created_post_id')
+                ->get();
+
+
+
             // DB::table('forum_posts')
             // ->select('forum_posts.id', 'forum_posts.topic_title as topic_title', 'forum_posts.topic_header as topic_header', 'forum_posts.body_content as body_content', 'forum_posts.user_name as user_name',  DB::raw('DATE_FORMAT(forum_posts.created_at, "%b %e %Y") as date'), 'forum_posts.category as category', 'forum_categorys.category_names as category_names')
             // ->leftJoin('forum_categorys','forum_posts.category','=','forum_categorys.id')
@@ -2407,7 +2407,7 @@ class ApiController extends BaseController
             'branch_id' => 'required',
             'likes' => 'required'
         ]);
-        
+
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
@@ -2421,13 +2421,13 @@ class ApiController extends BaseController
                 "flag" => 1,
                 'created_at' => date("Y-m-d H:i:s")
             ];
-         
+
             $checkExist = DB::table('forum_count_details')->where([
                 ['created_post_id', '=', $request->created_post_id],
                 ['user_id', '=', $request->user_id],
                 ['flag', '>', 0]
             ])->first();
- 
+
             if (empty($checkExist)) {
                 // echo "update";         
                 DB::table('forum_count_details')->insert($likesinsert);
@@ -2461,9 +2461,9 @@ class ApiController extends BaseController
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-        } else {       
+        } else {
             $dislikesinsert = [
-                "created_post_id" => $request->created_post_id,            
+                "created_post_id" => $request->created_post_id,
                 "user_id" => $request->user_id,
                 "user_name" => $request->user_name,
                 "branch_id" => $request->branch_id,
@@ -2472,7 +2472,7 @@ class ApiController extends BaseController
                 'created_at' => date("Y-m-d H:i:s")
             ];
             $checkExist = DB::table('forum_count_details')->where([
-                ['created_post_id', '=', $request->created_post_id],       
+                ['created_post_id', '=', $request->created_post_id],
                 ['user_id', '=', $request->user_id],
                 ['branch_id', '=', $request->branch_id],
                 ['flag', '>', 0]
@@ -2509,13 +2509,13 @@ class ApiController extends BaseController
             'user_id' => 'required',
             'user_name' => 'required',
             'favorite' => 'required'
-        ]);      
+        ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-         
+
             $favoritsinsert = [
-                "created_post_id" => $request->created_post_id,              
+                "created_post_id" => $request->created_post_id,
                 "user_id" => $request->user_id,
                 "user_name" => $request->user_name,
                 "branch_id" => $request->branch_id,
@@ -2524,12 +2524,12 @@ class ApiController extends BaseController
                 'created_at' => date("Y-m-d H:i:s")
             ];
             $checkExist = DB::table('forum_count_details')->where([
-                ['created_post_id', '=', $request->created_post_id],           
+                ['created_post_id', '=', $request->created_post_id],
                 ['user_id', '=', $request->user_id],
                 ['branch_id', '=', $request->branch_id],
                 ['flag', '>', 0]
             ])->first();
-     
+
             if (empty($checkExist)) {
                 // echo "insert";             
                 DB::table('forum_count_details')->insert($favoritsinsert);
@@ -2886,6 +2886,7 @@ class ApiController extends BaseController
                     DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
                     DB::raw('COUNT(CASE WHEN sa.status = "absent" then 1 ELSE NULL END) as "absentCount"'),
                     DB::raw('COUNT(CASE WHEN sa.status = "late" then 1 ELSE NULL END) as "lateCount"'),
+                    DB::raw('COUNT(sa.student_id) as "totalStudentCount"')
                 )
                 ->where([
                     ['sa.class_id', '=', $request->class_id],
@@ -2895,7 +2896,30 @@ class ApiController extends BaseController
                 ])
                 ->get();
 
-            return $this->successResponse($getWidgetDetails, 'Wigget record fetch successfully');
+            $query_date = $request->date;
+            // First day of the month.
+            $startDate = date('Y-m-01', strtotime($query_date));
+            // Last day of the month.
+            $endDate = date('Y-m-t', strtotime($query_date));
+
+            $avgAttendance = $Connection->table('student_attendances as sa')
+                ->select(
+                    DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
+                    DB::raw('COUNT(DISTINCT sa.date) as "totalDate"')
+                )
+                ->where([
+                    ['sa.class_id', '=', $request->class_id],
+                    ['sa.section_id', '=', $request->section_id],
+                    ['sa.subject_id', '=', $request->subject_id],
+                ])
+                ->whereBetween(DB::raw('date(date)'), [$startDate, $endDate])
+                ->get();
+
+            $data = [
+                'avg_attendance' => $avgAttendance,
+                'get_widget_details' => $getWidgetDetails
+            ];
+            return $this->successResponse($data, 'Wigget record fetch successfully');
         }
     }
     // forum replies likes count add
@@ -3294,16 +3318,281 @@ class ApiController extends BaseController
             // create new connection
             $con = $this->createNewConnection($request->branch_id);
             // get data
-            $homework = $con->table('homeworks')->select('homeworks.*','sections.name as section_name','classes.name as class_name','subjects.name as subject_name')
-                                                    ->leftJoin('subjects','homeworks.subject_id','=','subjects.id')
-                                                    ->leftJoin('sections','homeworks.section_id','=','sections.id')
-                                                    ->leftJoin('classes','homeworks.class_id','=','classes.id')
-                                                    ->where('homeworks.class_id',$request->class_id)
-                                                    ->where('homeworks.section_id',$request->section_id)
-                                                    ->where('homeworks.subject_id',$request->subject_id)
-                                                    ->get();
-            
+            $homework = $con->table('homeworks')->select('homeworks.*', 'sections.name as section_name', 'classes.name as class_name', 'subjects.name as subject_name')
+                ->leftJoin('subjects', 'homeworks.subject_id', '=', 'subjects.id')
+                ->leftJoin('sections', 'homeworks.section_id', '=', 'sections.id')
+                ->leftJoin('classes', 'homeworks.class_id', '=', 'classes.id')
+                ->where('homeworks.class_id', $request->class_id)
+                ->where('homeworks.section_id', $request->section_id)
+                ->where('homeworks.subject_id', $request->subject_id)
+                ->get();
+
             return $this->successResponse($homework, 'Homework record fetch successfully');
+        }
+    }
+    // getAttendanceList
+    function getAttendanceList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'ref_user_id' => 'required',
+            'subject_id' => 'required',
+            'year_month' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $year_month = explode('-', $request->year_month);
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $getAttendanceList = $Connection->table('students as stud')
+                ->select(
+                    'stud.first_name',
+                    'stud.last_name',
+                    'sa.id',
+                    'sa.date',
+                    'sa.status',
+                )
+                ->join('student_attendances as sa', 'sa.student_id', '=', 'stud.id')
+                ->join('enrolls as en', function ($join) {
+                    $join->on('stud.id', '=', 'en.student_id')
+                        ->on('sa.class_id', '=', 'en.class_id')
+                        ->on('sa.section_id', '=', 'en.section_id');
+                })
+                ->where([
+                    ['stud.parent_id', '=', $request->ref_user_id],
+                    ['sa.subject_id', '=', $request->subject_id]
+                ])
+                ->whereMonth('sa.date', $year_month[0])
+                ->whereYear('sa.date', $year_month[1])
+                ->groupBy('sa.date')
+                ->orderBy('sa.date', 'asc')
+                ->get();
+
+            $getAttendanceCounts = $Connection->table('students as stud')
+                ->select(
+                    DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "absent" then 1 ELSE NULL END) as "absentCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "late" then 1 ELSE NULL END) as "lateCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "excused" then 1 ELSE NULL END) as "excusedCount"'),
+                )
+                // ->join('enrolls as en', 'en.student_id', '=', 'stud.id')
+                ->leftJoin('student_attendances as sa', 'sa.student_id', '=', 'stud.id')
+                ->join('enrolls as en', function ($join) {
+                    $join->on('stud.id', '=', 'en.student_id')
+                        ->on('sa.class_id', '=', 'en.class_id')
+                        ->on('sa.section_id', '=', 'en.section_id');
+                })
+                ->where([
+                    ['stud.parent_id', '=', $request->ref_user_id],
+                    ['sa.subject_id', '=', $request->subject_id]
+                ])
+                ->whereMonth('sa.date', $year_month[0])
+                ->whereYear('sa.date', $year_month[1])
+                ->get();
+            $data = [
+                'get_attendance_list' => $getAttendanceList,
+                'get_attendance_counts' => $getAttendanceCounts,
+            ];
+            return $this->successResponse($data, 'attendance record fetch successfully');
+        }
+    }
+    // getChildSubjects
+    function getChildSubjects(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'ref_user_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $getAttendanceList = $Connection->table('students as stud')
+                ->select('stud.first_name', 'stud.last_name', 'sa.subject_id', 's.name as subject_name', 's.id as subject_id')
+                // ->join('enrolls as en', 'en.student_id', '=', 'stud.id')
+                ->join('enrolls as en', 'en.student_id', '=', 'stud.id')
+                ->join('subject_assigns as sa', function ($join) {
+                    $join->on('en.class_id', '=', 'sa.class_id')
+                        ->on('en.section_id', '=', 'sa.section_id');
+                })
+                ->join('subjects as s', 's.id', '=', 'sa.subject_id')
+                ->where([
+                    ['stud.parent_id', '=', $request->ref_user_id]
+                ])
+                ->get();
+
+            return $this->successResponse($getAttendanceList, 'subjects record fetch successfully');
+        }
+    }
+    // get attendance list teacher
+    function getAttendanceListTeacher(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
+            'year_month' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $year_month = explode('-', $request->year_month);
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $getAttendanceList = $Connection->table('student_attendances as sa')
+                ->select(
+                    'stud.first_name',
+                    'stud.last_name',
+                    'sa.student_id',
+                    'sa.date',
+                    'sa.status',
+                    DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "absent" then 1 ELSE NULL END) as "absentCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "late" then 1 ELSE NULL END) as "lateCount"'),
+
+                )
+                ->join('enrolls as en', 'sa.student_id', '=', 'en.student_id')
+                ->join('students as stud', 'sa.student_id', '=', 'stud.id')
+                ->where([
+                    ['sa.class_id', '=', $request->class_id],
+                    ['sa.section_id', '=', $request->section_id],
+                    ['sa.subject_id', '=', $request->subject_id]
+                ])
+                ->whereMonth('sa.date', $year_month[0])
+                ->whereYear('sa.date', $year_month[1])
+                ->groupBy('sa.student_id')
+                ->get();
+
+            $studentDetails = array();
+            if (!empty($getAttendanceList)) {
+                foreach ($getAttendanceList as $value) {
+                    $object = new \stdClass();
+
+                    $object->first_name = $value->first_name;
+                    $object->last_name = $value->last_name;
+                    $object->student_id = $value->student_id;
+                    $object->presentCount = $value->presentCount;
+                    $object->absentCount = $value->absentCount;
+                    $object->lateCount = $value->lateCount;
+                    $student_id = $value->student_id;
+                    $date = $value->date;
+                    $getStudentsAttData = $this->getAttendanceByDateStudent($request, $student_id, $date);
+                    $object->attendance_details = $getStudentsAttData;
+
+                    array_push($studentDetails, $object);
+                }
+            }
+
+            // date wise late present analysis
+            $getLatePresentData = $Connection->table('student_attendances as sa')
+                ->select(
+
+                    // 'sa.date',
+                    DB::raw('DATE_FORMAT(sa.date, "%b %d") as date'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "absent" then 1 ELSE NULL END) as "absentCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "late" then 1 ELSE NULL END) as "lateCount"')
+                )
+                ->join('enrolls as en', 'sa.student_id', '=', 'en.student_id')
+                ->join('students as stud', 'sa.student_id', '=', 'stud.id')
+                ->where([
+                    ['sa.class_id', '=', $request->class_id],
+                    ['sa.section_id', '=', $request->section_id],
+                    ['sa.subject_id', '=', $request->subject_id]
+                ])
+                ->whereMonth('sa.date', $year_month[0])
+                ->whereYear('sa.date', $year_month[1])
+                ->groupBy('sa.date')
+                ->get();
+            $data = [
+                'student_details' => $studentDetails,
+                'late_present_graph' => $getLatePresentData
+            ];
+
+            return $this->successResponse($data, 'attendance record fetch successfully');
+        }
+    }
+    // by student ,date
+    function getAttendanceByDateStudent($request, $student_id, $date)
+    {
+        // create new connection
+        $Connection = $this->createNewConnection($request->branch_id);
+
+        $query_date = $date;
+        // First day of the month.
+        $startDate = date('Y-m-01', strtotime($query_date));
+        // Last day of the month.
+        $endDate = date('Y-m-t', strtotime($query_date));
+
+        $studentList = $Connection->table('student_attendances as sa')
+            ->select(
+                // 'stud.first_name',
+                // 'stud.last_name',
+                // 'sa.student_id',
+                'sa.date',
+                'sa.status'
+            )
+            ->join('enrolls as en', 'sa.student_id', '=', 'en.student_id')
+            ->join('students as stud', 'sa.student_id', '=', 'stud.id')
+            ->where([
+                ['sa.student_id', '=', $student_id],
+                ['sa.class_id', '=', $request->class_id],
+                ['sa.section_id', '=', $request->section_id],
+                ['sa.subject_id', '=', $request->subject_id]
+            ])
+            ->whereBetween(DB::raw('date(date)'), [$startDate, $endDate])
+            ->groupBy('sa.date')
+            ->orderBy('sa.date', 'asc')
+            ->get();
+        return $studentList;
+    }
+    // getReasonsByStudent
+    function getReasonsByStudent(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
+            'year_month' => 'required',
+            'student_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $year_month = explode('-', $request->year_month);
+
+            $Connection = $this->createNewConnection($request->branch_id);
+
+            $getReasonsByStudent = $Connection->table('student_attendances as sa')
+                ->select(
+                    DB::raw('COUNT(CASE WHEN sa.reasons = "fever" then 1 ELSE NULL END) as "fever"'),
+                    DB::raw('COUNT(CASE WHEN sa.reasons = "breakdown" then 1 ELSE NULL END) as "breakdown"'),
+                    DB::raw('COUNT(CASE WHEN sa.reasons = "book_missing" then 1 ELSE NULL END) as "book_missing"'),
+                    DB::raw('COUNT(CASE WHEN sa.reasons = "others" then 1 ELSE NULL END) as "others"')
+                )
+                ->join('enrolls as en', 'sa.student_id', '=', 'en.student_id')
+                ->join('students as stud', 'sa.student_id', '=', 'stud.id')
+                ->where([
+                    ['sa.class_id', '=', $request->class_id],
+                    ['sa.section_id', '=', $request->section_id],
+                    ['sa.subject_id', '=', $request->subject_id],
+                    ['sa.student_id', '=', $request->student_id]
+                ])
+                ->whereMonth('sa.date', $year_month[0])
+                ->whereYear('sa.date', $year_month[1])
+                ->get();
+
+
+            return $this->successResponse($getReasonsByStudent, 'reasons record fetch successfully');
         }
     }
 }
