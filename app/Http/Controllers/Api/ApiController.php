@@ -48,6 +48,7 @@ class ApiController extends BaseController
     {
 
         $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
             'token' => 'required',
             'name' => 'required'
         ]);
@@ -55,16 +56,24 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $section = new Section();
-            $section->name = $request->name;
-            $section->capacity = $request->capacity;
-            $section->branch_id = $request->branch_id;
-            $query = $section->save();
-            $success = [];
-            if (!$query) {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($createConnection->table('sections')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
             } else {
-                return $this->successResponse($success, 'New Section has been successfully saved');
+                // insert data
+                $query = $createConnection->table('sections')->insert([
+                    'name' => $request->name,
+                    'capacity' => $request->capacity,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'New Section has been successfully saved');
+                }
             }
         }
     }
@@ -75,7 +84,6 @@ class ApiController extends BaseController
             'branch_id' => 'required',
             'token' => 'required',
         ]);
-
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
@@ -93,44 +101,55 @@ class ApiController extends BaseController
         $validator = \Validator::make($request->all(), [
             'section_id' => 'required',
             'token' => 'required',
+            'branch_id' => 'required',
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $section_id = $request->section_id;
-            $sectionDetails = Section::find($section_id);
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // insert data
+            $sectionDetails = $createConnection->table('sections')->where('id', $request->section_id)->get();
             return $this->successResponse($sectionDetails, 'Section row fetch successfully');
         }
     }
     // update section
     public function updateSectionDetails(Request $request)
     {
-        $section_id = $request->sid;
 
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
-            'name' => 'required|unique:sections,name,' . $section_id
+            'name' => 'required',
+            'branch_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
 
-            $section = Section::find($section_id);
-            $section->name = $request->name;
-            $section->capacity = $request->capacity;
-            $section->branch_id = $request->branch_id;
-            $query = $section->save();
-            $success = [];
-            if ($query) {
-                return $this->successResponse($success, 'Section Details have Been updated');
+            $section_id = $request->sid;
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($staffConn->table('sections')->where([['name', '=', $request->name], ['id', '!=', $section_id]])->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
             } else {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                // update data
+                $query = $staffConn->table('sections')->where('id', $section_id)->update([
+                    'name' => $request->name,
+                    'capacity' => $request->capacity,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Section Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
             }
         }
     }
-
     // delete Section
     public function deleteSection(Request $request)
     {
@@ -139,12 +158,17 @@ class ApiController extends BaseController
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
             'sid' => 'required',
+            'branch_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $query = Section::find($section_id)->delete();
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $createConnection->table('sections')->where('id', $section_id)->delete();
+
             $success = [];
             if ($query) {
                 return $this->successResponse($success, 'Section have been deleted successfully');
@@ -366,16 +390,24 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $class = new Classes();
-            $class->name = $request->name;
-            $class->name_numeric = $request->name_numeric;
-            $class->branch_id = $request->branch_id;
-            $query = $class->save();
-            $success = [];
-            if (!$query) {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($createConnection->table('classes')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
             } else {
-                return $this->successResponse($success, 'New Class has been successfully saved');
+                // insert data
+                $query = $createConnection->table('classes')->insert([
+                    'name' => $request->name,
+                    'name_numeric' => $request->name_numeric,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'New Class has been successfully saved');
+                }
             }
         }
     }
@@ -405,25 +437,6 @@ class ApiController extends BaseController
         $validator = \Validator::make($request->all(), [
             'class_id' => 'required',
             'token' => 'required',
-        ]);
-
-        if (!$validator->passes()) {
-            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-        } else {
-            $class_id = $request->class_id;
-            $classDetails = Classes::find($class_id);
-            return $this->successResponse($classDetails, 'Class row fetch successfully');
-        }
-    }
-    // update class
-    public function updateClassDetails(Request $request)
-    {
-        $class_id = $request->class_id;
-
-        $validator = \Validator::make($request->all(), [
-            'token' => 'required',
-            'name' => 'required|unique:classes,name,' . $class_id,
-            'name_numeric' => 'required',
             'branch_id' => 'required'
         ]);
 
@@ -431,16 +444,45 @@ class ApiController extends BaseController
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
 
-            $class = Classes::find($class_id);
-            $class->name = $request->name;
-            $class->name_numeric = $request->name_numeric;
-            $class->branch_id = $request->branch_id;
-            $query = $class->save();
-            $success = [];
-            if ($query) {
-                return $this->successResponse($success, 'Class Details have Been updated');
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // insert data
+            $sectionDetails = $createConnection->table('classes')->where('id', $request->class_id)->get();
+            return $this->successResponse($sectionDetails, 'Class row fetch successfully');
+        }
+    }
+    // update class
+    public function updateClassDetails(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'name' => 'required',
+            'name_numeric' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $class_id = $request->class_id;
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($staffConn->table('classes')->where([['name', '=', $request->name], ['id', '!=', $class_id]])->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
             } else {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                // update data
+                $query = $staffConn->table('classes')->where('id', $class_id)->update([
+                    'name' => $request->name,
+                    'name_numeric' => $request->name_numeric,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Class Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
             }
         }
     }
@@ -449,7 +491,6 @@ class ApiController extends BaseController
     public function deleteClass(Request $request)
     {
 
-        $class_id = $request->class_id;
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
             'class_id' => 'required',
@@ -458,7 +499,12 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $query = Classes::find($class_id)->delete();
+            $class_id = $request->class_id;
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $createConnection->table('classes')->where('id', $class_id)->delete();
+
             $success = [];
             if ($query) {
                 return $this->successResponse($success, 'Class have been deleted successfully');
@@ -474,36 +520,52 @@ class ApiController extends BaseController
         $validator = \Validator::make($request->all(), [
             'class_id' => 'required',
             'section_id' => 'required',
-            'branch_id' => 'required',
+            'branch_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $section = new SectionAllocation();
-            $section->class_id = $request->class_id;
-            $section->section_id = $request->section_id;
-            $section->branch_id = $request->branch_id;
-            $query = $section->save();
-
-            $success = [];
-            if (!$query) {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($createConnection->table('section_allocations')->where([['section_id', $request->section_id], ['class_id', $request->class_id]])->count() > 0) {
+                return $this->send422Error('Already Allocated Section', ['error' => 'Already Allocated Section']);
             } else {
-                return $this->successResponse($success, 'Section Allocation has been successfully saved');
+                // insert data
+                $query = $createConnection->table('section_allocations')->insert([
+                    'class_id' => $request->class_id,
+                    'section_id' => $request->section_id,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Section Allocation has been successfully saved');
+                }
             }
         }
     }
     // get sections allocation
     public function getSectionAllocationList(Request $request)
     {
-        $sectionAllocation = DB::table('sections_allocations as sa')
-            ->select('sa.id', 'sa.class_id', 'sa.section_id', 's.name as section_name', 'c.name as class_name', 'c.name_numeric', 'b.name as branch_name')
-            ->join('sections as s', 'sa.section_id', '=', 's.id')
-            ->join('branches as b', 'sa.branch_id', '=', 'b.id')
-            ->join('classes as c', 'sa.class_id', '=', 'c.id')
-            ->get();
-        return $this->successResponse($sectionAllocation, 'Section Allocation record fetch successfully');
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $secConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $sectionAllocation = $secConn->table('section_allocations as sa')
+                ->select('sa.id', 'sa.class_id', 'sa.section_id', 's.name as section_name', 'c.name as class_name', 'c.name_numeric')
+                ->join('sections as s', 'sa.section_id', '=', 's.id')
+                ->join('classes as c', 'sa.class_id', '=', 'c.id')
+                ->get();
+            return $this->successResponse($sectionAllocation, 'Section Allocation record fetch successfully');
+        }
     }
 
     // get getSectionAllocationDetails details
@@ -511,60 +573,73 @@ class ApiController extends BaseController
     {
         $validator = \Validator::make($request->all(), [
             'id' => 'required',
-            'token' => 'required',
+            'branch_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $id = $request->id;
-            $SectionAllocation = SectionAllocation::find($id);
-            return $this->successResponse($SectionAllocation, 'Class row fetch successfully');
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // insert data
+            $sectionDetails = $createConnection->table('section_allocations')->where('id', $request->id)->get();
+            return $this->successResponse($sectionDetails, 'Section Allocation row fetch successfully');
         }
     }
     // update Section Allocations
 
     public function updateSectionAllocation(Request $request)
     {
-        $id = $request->id;
-
         $validator = \Validator::make($request->all(), [
+            'id' => 'required',
             'class_id' => 'required',
             'section_id' => 'required',
             'branch_id' => 'required',
         ]);
 
         if (!$validator->passes()) {
-            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-
-            $section = SectionAllocation::find($id);
-            $section->class_id = $request->class_id;
-            $section->section_id = $request->section_id;
-            $section->branch_id = $request->branch_id;
-            $query = $section->save();
-
-            $success = [];
-            if ($query) {
-                return $this->successResponse($success, 'Section Allocation Details have Been updated');
+            $id = $request->id;
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($createConnection->table('section_allocations')->where([['section_id', $request->section_id], ['class_id', $request->class_id], ['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Already Allocated Section', ['error' => 'Already Allocated Section']);
             } else {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                // update data
+                $query = $createConnection->table('section_allocations')->where('id', $id)->update([
+                    'class_id' => $request->class_id,
+                    'section_id' => $request->section_id,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Section Allocation Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
             }
         }
     }
     // delete deleteSectionAllocation
     public function deleteSectionAllocation(Request $request)
     {
-        $id = $request->id;
         $validator = \Validator::make($request->all(), [
-            'token' => 'required',
             'id' => 'required',
+            'branch_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $query = SectionAllocation::where('id', $id)->delete();
+
+            $id = $request->id;
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $createConnection->table('section_allocations')->where('id', $id)->delete();
+
             $success = [];
             if ($query) {
                 return $this->successResponse($success, 'Section Allocation have been deleted successfully');
