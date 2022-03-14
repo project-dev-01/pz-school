@@ -51,7 +51,7 @@
                         <div class="tt-item-layout">
                             <div class="innerwrapper">
                                 @php
-                                echo App\Http\Controllers\CommonController::limitedChar(($value['topic_header']));
+                                echo App\Http\Controllers\CommonController::limitedChar(($value['topic_title']));
                                 @endphp
                             </div>
                             <a href="#" class="tt-btn-icon">

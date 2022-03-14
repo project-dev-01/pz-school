@@ -2,24 +2,26 @@
 @section('content')
 <main id="tt-pageContent">
     <div class="container">
-        <div class="tt-wrapper-inner">
+        <div class="tt-wrapper-inner" id="createpostForumreset">
             <h1 class="tt-title-border">
                 Create New Topic
             </h1>
-            <form class="form-default form-create-topic">
+            <form class="form-default form-create-topic" id="createpostForum" method="post" action="{{ route('parent.forum.create-topic') }}">
+                @csrf
                 <div class="form-group">
                     <label for="inputTopicTitle">Topic Title</label>
                     <div class="tt-value-wrapper">
-                        <input type="text" name="name" class="form-control" id="inputTopicTitle" placeholder="Subject of your topic">
-                        <span class="tt-value-input">99</span>
+                        <input type="text" name="inputTopicTitle" class="form-control" id="inputTopicTitle" placeholder="Subject of your topic">
+                        <span class="tt-value-input"></span>
                     </div>
                     <div class="tt-note">Describe your topic well, while keeping the subject as short as possible.</div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="selectedtpy">
+                    <input type="hidden" id="topictype" name="topictype">
                     <label>Topic Type</label>
                     <div class="tt-js-active-btn tt-wrapper-btnicon">
                         <div class="row tt-w410-col-02">
-                            <div class="col-4 col-lg-3 col-xl-2">
+                            <div class="col-4 col-lg-3 col-xl-3">
                                 <a href="#" class="tt-button-icon">
                                     <span class="tt-icon">
                                         <svg>
@@ -29,7 +31,7 @@
                                     <span class="tt-text">Discussion</span>
                                 </a>
                             </div>
-                            <div class="col-4 col-lg-3 col-xl-2">
+                            <div class="col-4 col-lg-3 col-xl-3">
                                 <a href="#" class="tt-button-icon">
                                     <span class="tt-icon">
                                         <svg>
@@ -39,7 +41,7 @@
                                     <span class="tt-text">Question</span>
                                 </a>
                             </div>
-                            <div class="col-4 col-lg-3 col-xl-2">
+                            <div class="col-4 col-lg-3 col-xl-3">
                                 <a href="#" class="tt-button-icon">
                                     <span class="tt-icon">
                                         <svg>
@@ -49,7 +51,7 @@
                                     <span class="tt-text">Poll</span>
                                 </a>
                             </div>
-                            <div class="col-4 col-lg-3 col-xl-2">
+                            <!--  <div class="col-4 col-lg-3 col-xl-2">
                                 <a href="#" class="tt-button-icon">
                                     <span class="tt-icon">
                                         <svg>
@@ -68,8 +70,8 @@
                                     </span>
                                     <span class="tt-text">Video</span>
                                 </a>
-                            </div>
-                            <div class="col-4 col-lg-3 col-xl-2">
+                            </div>-->
+                            <div class="col-4 col-lg-3 col-xl-3">
                                 <a href="#" class="tt-button-icon">
                                     <span class="tt-icon">
                                         <svg>
@@ -82,6 +84,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="inputTopicHeader">Topic Header</label>
+                    <div class="tt-value-wrapper">
+                        <input type="text" name="inputTopicHeader" class="form-control" id="inputTopicTitle" placeholder="Header of your topic">
+                        <span class="tt-value-input"></span>
+                    </div>
+                    <div class="tt-note">Describe your topic header..</div>
+                </div>
                 <div class="pt-editor">
                     <h6 class="pt-title">Topic Body</h6>
                     <div class="pt-row">
@@ -89,97 +99,102 @@
                             <ul class="pt-edit-btn">
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-quote"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-bold"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-italic"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-share_topic"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-blockquote"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-performatted"></use>
+
                                         </svg>
                                     </button></li>
                                 <li class="hr"></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-upload_files"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-bullet_list"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-heading"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-horizontal_line"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-emoticon"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-settings"></use>
+
                                         </svg>
                                     </button></li>
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
-                                            <use xlink:href="#icon-color_picker"></use>
+
                                         </svg>
                                     </button></li>
                             </ul>
                         </div>
                     </div>
                     <div class="form-group">
-                        <textarea name="message" class="form-control" rows="5" placeholder="Lets get started"></textarea>
+                        <textarea name="tpbody" id="tpbody" class="form-control" rows="5" placeholder="Lets get started"></textarea>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="inputTopicTitle">Category</label>
-                                <select class="form-control">
-                                    <option value="Select">Select</option>
-                                    <option value="Value 01">Value 01</option>
-                                    <option value="Value 02">Value 02</option>
-                                </select>
+                                <label for="category" class="col-3 col-form-label">Category<span class="text-danger">*</span></label>
+                                <div class="col-9">
+                                    <select id="getCountry" class="form-control" name="category">
+                                        <option value="">Select category</option>
+                                        @if(!empty($category))
+                                        @foreach($category as $c)
+                                        <option value="{{$c['id']}}">{{$c['category_names']}}</option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="inputTopicTags">Tags</label>
-                                <input type="text" name="name" class="form-control" id="inputTopicTags" placeholder="Use comma to separate tags">
+                                <input type="text" name="inputTopicTags" class="form-control" id="inputTopicTags" placeholder="Use comma to separate tags">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-auto ml-md-auto">
-                            <a href="#" class="btn btn-secondary btn-width-lg">Create Post</a>
+                            <button type="submit" class="btn btn-secondary btn-width-lg">Create Post</button>
                         </div>
                     </div>
                 </div>
@@ -215,21 +230,36 @@
                 <div class="tt-col-value hide-mobile">Replies</div>
                 <div class="tt-col-value hide-mobile">Views</div>
                 <div class="tt-col-value">Activity</div>
-            </div>
+            </div>            
+            @if(!empty($forum_list))
+            @php
+            $randomcolor = 1;
+            @endphp
+            @foreach($forum_list as $value)
+            @php           
+            if($randomcolor==9)
+            {
+                $randomcolor = 1;
+            }
+            @endphp
             <div class="tt-item">
                 <div class="tt-col-avatar">
-                    <svg class="tt-icon">
+                    <!-- <svg class="tt-icon">
                         <use xlink:href="#icon-ava-n"></use>
-                    </svg>
+                    </svg>-->
+                    <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle" height="40" />
+                    {{ $value['user_name'] }}
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                            How do you actually study?
-                        </a></h6>
+                    <h6 class="tt-title">
+                        <a href="{{route('parent.forum.page-single-topic-val',[$value['id'],$value['user_id']])}}">
+                            {{ $value['topic_title'] }}
+                        </a>
+                    </h6>
                     <div class="row align-items-center no-gutters hide-desktope">
                         <div class="col-auto">
                             <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color05 tt-badge">Study Advice</span></a></li>
+                                <li class="show-mobile"><a href="#"><span class="tt-color05 tt-badge"></span></a></li>
                             </ul>
                         </div>
                         <div class="col-auto ml-auto show-mobile">
@@ -237,130 +267,44 @@
                         </div>
                     </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color05 tt-badge">Study Advice</span></div>
-                <div class="tt-col-value hide-mobile">358</div>
-                <div class="tt-col-value tt-color-select hide-mobile">68</div>
-                <div class="tt-col-value hide-mobile">8.3k</div>
-                <div class="tt-col-value hide-mobile">1d</div>
+                <div class="tt-col-category"><span class="tt-color0{{$randomcolor}} tt-badge">{{$value['category_names'] }}</span></div>
+                <div class="tt-col-value hide-mobile">
+                    @if($value['likes']=== null)
+                    0
+                    @else
+                    {{$value['likes']}}
+                    @endif
+                </div>
+                <div class="tt-col-value hide-mobile">
+                    @if($value['replies']=== null)
+                    0
+                    @else
+                    {{$value['replies']}}
+                    @endif
+                </div>
+                <div class="tt-col-value hide-mobile">
+                    @if($value['views']=== null)
+                    0
+                    @else
+                    {{$value['views']}}
+                    @endif
+                </div>
+                <div class="tt-col-value hide-mobile">
+                    @php
+                    echo App\Http\Controllers\CommonController::get_timeago(strtotime($value['created_at']));
+                    @endphp
+                    @if($value['activity']=== null)
+                    0
+                    @else
+                    {{$value['activity']}}
+                    @endif
+                </div>
             </div>
-            <div class="tt-item">
-                <div class="tt-col-avatar">
-                    <svg class="tt-icon">
-                        <use xlink:href="#icon-ava-h"></use>
-                    </svg>
-                </div>
-                <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                            <svg class="tt-icon">
-                                <use xlink:href="#icon-locked"></use>
-                            </svg>
-                            Scholarships
-                        </a></h6>
-                    <div class="row align-items-center no-gutters hide-desktope">
-                        <div class="col-auto">
-                            <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color06 tt-badge">Funds</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-auto ml-auto show-mobile">
-                            <div class="tt-value">2d</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tt-col-category"><span class="tt-color06 tt-badge">Funds</span></div>
-                <div class="tt-col-value hide-mobile">674</div>
-                <div class="tt-col-value tt-color-select  hide-mobile">29</div>
-                <div class="tt-col-value hide-mobile">1.3k</div>
-                <div class="tt-col-value hide-mobile">2d</div>
-            </div>
-            <div class="tt-item">
-                <div class="tt-col-avatar">
-                    <svg class="tt-icon">
-                        <use xlink:href="#icon-ava-j"></use>
-                    </svg>
-                </div>
-                <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                    I want to start studying online either or open colleges and I don’t know which one is better
-                        </a></h6>
-                    <div class="row align-items-center no-gutters">
-                        <div class="col-auto">
-                            <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color03 tt-badge">Higher Studies</span></a></li>
-                                <li><a href="#"><span class="tt-badge">Study Advice</span></a></li>
-                                <li><a href="#"><span class="tt-badge">High school</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-auto ml-auto show-mobile">
-                            <div class="tt-value">2d</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tt-col-category"><span class="tt-color13 tt-badge">Higher Studies</span></div>
-                <div class="tt-col-value hide-mobile">278</div>
-                <div class="tt-col-value tt-color-select  hide-mobile">27</div>
-                <div class="tt-col-value hide-mobile">1.4k</div>
-                <div class="tt-col-value hide-mobile">2d</div>
-            </div>
-            <div class="tt-item">
-                <div class="tt-col-avatar">
-                    <svg class="tt-icon">
-                        <use xlink:href="#icon-ava-t"></use>
-                    </svg>
-                </div>
-                <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                        Exam tips and preparations... the do's and don'ts of surviving exam period
-                        </a></h6>
-                    <div class="row align-items-center no-gutters">
-                        <div class="col-auto">
-                            <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color07 tt-badge">Study Hacks</span></a></li>
-                                <li><a href="#"><span class="tt-badge">Study</span></a></li>
-                                <li><a href="#"><span class="tt-badge">Advice</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-auto ml-auto show-mobile">
-                            <div class="tt-value">2d</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tt-col-category"><span class="tt-color07 tt-badge">Study Hacks</span></div>
-                <div class="tt-col-value hide-mobile">364</div>
-                <div class="tt-col-value tt-color-select  hide-mobile">36</div>
-                <div class="tt-col-value  hide-mobile">982</div>
-                <div class="tt-col-value hide-mobile">2d</div>
-            </div>
-            <div class="tt-item">
-                <div class="tt-col-avatar">
-                    <svg class="tt-icon">
-                        <use xlink:href="#icon-ava-k"></use>
-                    </svg>
-                </div>
-                <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                            <svg class="tt-icon">
-                                <use xlink:href="#icon-verified"></use>
-                            </svg>
-                            How to overcome test failure?
-                        </a></h6>
-                    <div class="row align-items-center no-gutters hide-desktope">
-                        <div class="col-auto">
-                            <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color08 tt-badge">Examinations</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-auto ml-auto show-mobile">
-                            <div class="tt-value">3d</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tt-col-category"><span class="tt-color08 tt-badge">Examinations</span></div>
-                <div class="tt-col-value  hide-mobile">698</div>
-                <div class="tt-col-value tt-color-select  hide-mobile">78</div>
-                <div class="tt-col-value  hide-mobile">2.1k</div>
-                <div class="tt-col-value hide-mobile">3d</div>
-            </div>
+            @php
+            $randomcolor++;
+            @endphp
+            @endforeach
+            @endif
             <div class="tt-row-btn">
                 <button type="button" class="btn-icon js-topiclist-showmore">
                     <svg class="tt-icon">
@@ -371,4 +315,14 @@
         </div>
     </div>
 </main>
+@endsection
+@section('scripts')
+<script src="{{ asset('js/custom/forum-createpost.js') }}"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#tpbody'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
 @endsection

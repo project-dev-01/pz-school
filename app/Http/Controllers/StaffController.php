@@ -34,42 +34,136 @@ class StaffController extends Controller
         return view('staff.leave_management.applyleave');
     }
     // forum screen pages start
-    public function forumIndex(){
-        return view('staff.forum.index');
+    public function forumIndex()
+    {
+        $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
+        //dd($forum_list);
+        return view('staff.forum.index', [
+            'forum_list' => $forum_list['data']
+        ]);
     }
-    public function forumPageSingleTopic(){
+    public function forumPageSingleTopic()
+    {
         return view('staff.forum.page-single-topic');
     }
-    public function forumPageCreateTopic(){
-        return view('staff.forum.page-create-topic');
+    public function forumPageCreateTopic()
+    {
+        $category = Helper::GetMethod(config('constants.api.category'));
+
+        $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
+
+        return view('staff.forum.page-create-topic', [
+            'category' => $category['data'],
+            'forum_list' => $forum_list['data']
+        ]);
     }
-    public function forumPageSingleUser(){
-        return view('staff.forum.page-single-user');
+    public function forumPageSingleUser()
+    {
+        $user_id = session()->get('user_id');
+        $data = [
+            'user_id' => $user_id
+        ];
+
+        $forum_post_user_crd = Helper::GETMethodWithData(config('constants.api.forum_post_user_created'), $data);
+        $forum_categorypost_user_crd = Helper::GETMethodWithData(config('constants.api.forum_categorypost_user_created'), $data);
+        $forum_post_user_allreplies = Helper::GETMethodWithData(config('constants.api.forum_posts_user_repliesall'), $data);
+        //  $forum_threadslist = Helper::GetMethod(config('constants.api.forum_threadslist'));
+        $forum_userthreadslist = Helper::GETMethodWithData(config('constants.api.forum_userthreadslist'), $data);
+
+        return view('staff.forum.page-single-user', [
+            'forum_post_user_crd' => $forum_post_user_crd['data'],
+            'forum_categorypost_user_crd' => $forum_categorypost_user_crd['data'],
+            'forum_post_user_allreplies' => $forum_post_user_allreplies['data'],
+            'forum_userthreadslist' => $forum_userthreadslist['data']
+        ]);
     }
-    public function forumPageSingleThreads(){
+    public function forumPageSingleThreads()
+    {
         return view('staff.forum.page-single-threads');
     }
-    public function forumPageSingleReplies(){
+    public function forumPageSingleReplies()
+    {
         return view('staff.forum.page-single-replies');
     }
-    public function forumPageSingleFollowers(){
+    public function forumPageSingleFollowers()
+    {
         return view('staff.forum.page-single-followers');
     }
-    public function forumPageSingleCategories(){
+    public function forumPageSingleCategories()
+    {
         return view('staff.forum.page-single-categories');
     }
-    public function forumPageCategories(){
-        return view('staff.forum.page-categories');
+    public function forumPageCategories()
+    {
+        $listcategoryvs = Helper::GetMethod(config('constants.api.listcategoryvs'));
+        return view('staff.forum.page-categories', [
+            'listcategoryvs' => $listcategoryvs['data']
+        ]);
     }
-    public function forumPageCategoriesSingle(){
-        return view('staff.forum.page-categories-single');
+
+    public function forumPageCategoriesSingle($categId, $user_id, $category_names)
+    {
+        session()->put('session_category_names', $category_names);
+        $data = [
+            'categId' => $categId,
+            'user_id' => $user_id
+        ];
+        $forum_category = Helper::GETMethodWithData(config('constants.api.forum_user_category_list'), $data);
+
+        return view('staff.forum.page-categories-single', [
+            'forum_category' => $forum_category['data']
+        ]);
+        //  return view('teacher.forum.page-categories-single');
     }
-    public function forumPageTabs(){
+    public function forumPageTabs()
+    {
         return view('staff.forum.page-tabs');
     }
-    public function forumPageTabGuidelines(){
+    public function forumPageTabGuidelines()
+    {
         return view('staff.forum.page-tabs-guidelines');
-    }    
+    }
+
+    // forum create post 
+    public function createpost(Request $request)
+    {
+        $data = [
+            'user_id' => session()->get('user_id'),
+            'user_name' => session()->get('name'),
+            'topic_title' => $request->inputTopicTitle,
+            'topic_header' => $request->inputTopicHeader,
+            'types' => $request->topictype,
+            'body_content' => $request->tpbody,
+            'category' => $request->category,
+            'tags' => $request->inputTopicTags,
+            'imagesorvideos' => $request->inputTopicTitle,
+            'threads_status' => 1
+        ];
+        $response = Helper::PostMethod(config('constants.api.forum_cpost'), $data);
+        return $response;
+    }
+    // Forum single topic with value pass
+    public function forumPageSingleTopicwithvalue($id, $user_id)
+    {
+        $data = [
+            'id' => $id,
+            'user_id' => $user_id,
+        ];
+        $singlepost_repliesData = [
+            'created_post_id' => $id,
+            'user_id' => $user_id,
+        ];
+        $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
+        $forum_singlepost = Helper::GETMethodWithData(config('constants.api.forum_single_post'), $data);
+        $forum_singlepost_replies = Helper::GETMethodWithData(config('constants.api.forum_single_post_replies'), $data);
+        //dd($forum_singlepost_replies);         
+        return view('staff.forum.page-single-topic', [
+            'forum_single_post' => !empty($forum_singlepost['data']) ? $forum_singlepost['data'] : $forum_singlepost,
+            'forum_singlepost_replies' => $forum_singlepost_replies['data'],
+            'forum_list' => $forum_list['data']
+
+        ]);
+    }
     // forum screen pages end
 
     // faq screen pages start
@@ -90,101 +184,104 @@ class StaffController extends Controller
     }
 
     // update profile info
-    public function updateProfileInfo(Request $request){
+    public function updateProfileInfo(Request $request)
+    {
         // dd($request->address);
- 
-        $validator = \Validator::make($request->all(),[
-            'name'=>'required',
-            'email'=> 'required|email|unique:users,email,'.Auth::user()->id,
-            'address'=>'required',
-        ]);
-        if(!$validator->passes()){
-            return response()->json(['status'=>0,'error'=>$validator->errors()->toArray()]);
-        }else{
-             $query = User::find(Auth::user()->id)->update([
-                  'name'=>$request->name,
-                  'email'=>$request->email,
-                  'address'=>$request->address,
-             ]);
 
-             if(!$query){
-                 return response()->json(['status'=>0,'msg'=>'Something went wrong.']);
-             }else{
-                 return response()->json(['status'=>1,'msg'=>'Your profile info has been update successfuly.']);
-             }
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . Auth::user()->id,
+            'address' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $query = User::find(Auth::user()->id)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'address' => $request->address,
+            ]);
+
+            if (!$query) {
+                return response()->json(['status' => 0, 'msg' => 'Something went wrong.']);
+            } else {
+                return response()->json(['status' => 1, 'msg' => 'Your profile info has been update successfuly.']);
+            }
         }
     }
 
     // update profile picture
-    public function updatePicture(Request $request){
-        
+    public function updatePicture(Request $request)
+    {
+
         $path = 'users/images/';
         $file = $request->file('admin_image');
-        $new_name = 'UIMG_'.date('Ymd').uniqid().'.jpg';
+        $new_name = 'UIMG_' . date('Ymd') . uniqid() . '.jpg';
 
         //Upload new image
         $upload = $file->move(public_path($path), $new_name);
-        
-        if( !$upload ){
-            return response()->json(['status'=>0,'msg'=>'Something went wrong, upload new picture failed.']);
-        }else{
+
+        if (!$upload) {
+            return response()->json(['status' => 0, 'msg' => 'Something went wrong, upload new picture failed.']);
+        } else {
             //Get Old picture
             $oldPicture = User::find(Auth::user()->id)->getAttributes()['picture'];
 
-            if( $oldPicture != '' ){
-                if( \File::exists(public_path($path.$oldPicture))){
-                    \File::delete(public_path($path.$oldPicture));
+            if ($oldPicture != '') {
+                if (\File::exists(public_path($path . $oldPicture))) {
+                    \File::delete(public_path($path . $oldPicture));
                 }
             }
 
             //Update DB
-            $update = User::find(Auth::user()->id)->update(['picture'=>$new_name]);
+            $update = User::find(Auth::user()->id)->update(['picture' => $new_name]);
 
-            if( !$upload ){
-                return response()->json(['status'=>0,'msg'=>'Something went wrong, updating picture in db failed.']);
-            }else{
-                return response()->json(['status'=>1,'msg'=>'Your profile picture has been updated successfully']);
+            if (!$upload) {
+                return response()->json(['status' => 0, 'msg' => 'Something went wrong, updating picture in db failed.']);
+            } else {
+                return response()->json(['status' => 1, 'msg' => 'Your profile picture has been updated successfully']);
             }
         }
     }
 
     // change password
-    public function changePassword(Request $request){
+    public function changePassword(Request $request)
+    {
         //Validate form
-        $validator = \Validator::make($request->all(),[
-            'oldpassword'=>[
-                'required', function($attribute, $value, $fail){
-                    if( !\Hash::check($value, Auth::user()->password) ){
+        $validator = \Validator::make($request->all(), [
+            'oldpassword' => [
+                'required', function ($attribute, $value, $fail) {
+                    if (!\Hash::check($value, Auth::user()->password)) {
                         return $fail(__('The current password is incorrect'));
                     }
                 },
                 'min:8',
                 'max:30'
-             ],
-             'newpassword'=>'required|min:8|max:30',
-             'cnewpassword'=>'required|same:newpassword'
-         ],[
-             'oldpassword.required'=>'Enter your current password',
-             'oldpassword.min'=>'Old password must have atleast 8 characters',
-             'oldpassword.max'=>'Old password must not be greater than 30 characters',
-             'newpassword.required'=>'Enter new password',
-             'newpassword.min'=>'New password must have atleast 8 characters',
-             'newpassword.max'=>'New password must not be greater than 30 characters',
-             'cnewpassword.required'=>'ReEnter your new password',
-             'cnewpassword.same'=>'New password and Confirm new password must match'
-         ]);
+            ],
+            'newpassword' => 'required|min:8|max:30',
+            'cnewpassword' => 'required|same:newpassword'
+        ], [
+            'oldpassword.required' => 'Enter your current password',
+            'oldpassword.min' => 'Old password must have atleast 8 characters',
+            'oldpassword.max' => 'Old password must not be greater than 30 characters',
+            'newpassword.required' => 'Enter new password',
+            'newpassword.min' => 'New password must have atleast 8 characters',
+            'newpassword.max' => 'New password must not be greater than 30 characters',
+            'cnewpassword.required' => 'ReEnter your new password',
+            'cnewpassword.same' => 'New password and Confirm new password must match'
+        ]);
 
-        if( !$validator->passes() ){
-            return response()->json(['status'=>0,'error'=>$validator->errors()->toArray()]);
-        }else{
-             
-         $update = User::find(Auth::user()->id)->update(['password'=>\Hash::make($request->newpassword)]);
+        if (!$validator->passes()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
 
-         if( !$update ){
-             return response()->json(['status'=>0,'msg'=>'Something went wrong, Failed to update password in db']);
-         }else{
-             return response()->json(['status'=>1,'msg'=>'Your password has been changed successfully']);
-         }
+            $update = User::find(Auth::user()->id)->update(['password' => \Hash::make($request->newpassword)]);
+
+            if (!$update) {
+                return response()->json(['status' => 0, 'msg' => 'Something went wrong, Failed to update password in db']);
+            } else {
+                return response()->json(['status' => 1, 'msg' => 'Your password has been changed successfully']);
+            }
         }
     }
     //add New Class
@@ -212,17 +309,18 @@ class StaffController extends Controller
     }
 
     // get class row details
-    public function getClassDetails(Request $request){
+    public function getClassDetails(Request $request)
+    {
         $class_id = $request->class_id;
         $classDetails = Classes::find($class_id);
-        return response()->json(['details'=>$classDetails]);
+        return response()->json(['details' => $classDetails]);
     }
 
     // get class details
     public function getClassList(Request $request)
     {
         $classes = Classes::all();
-        
+
         return DataTables::of($classes)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
@@ -269,7 +367,7 @@ class StaffController extends Controller
     {
         $classID = $request->class_id;
         Classes::where('id', $classID)->delete();
-        return response()->json(['code'=>1, 'msg'=>'Class have been deleted from database']); 
+        return response()->json(['code' => 1, 'msg' => 'Class have been deleted from database']);
 
         // if ($query) {
         //     return response()->json(['code' => 1, 'msg' => 'Class has been deleted from database']);
@@ -288,9 +386,9 @@ class StaffController extends Controller
     public function getUserList(Request $request)
     {
         $users = User::join('roles', 'users.role_id', '=', 'roles.role_id')
-            ->where('users.role_id','!=',1)
-            ->get(['users.id','users.name', 'users.role_id', 'roles.role_name', 'roles.role_slug']);
-            // dd($users);
+            ->where('users.role_id', '!=', 1)
+            ->get(['users.id', 'users.name', 'users.role_id', 'roles.role_name', 'roles.role_slug']);
+        // dd($users);
         return DataTables::of($users)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
@@ -305,11 +403,12 @@ class StaffController extends Controller
     // show user page
     public function addUsers()
     {
-        $roleDetails = Role::select('role_id', 'role_name')->where('role_id','!=',1)->get();
+        $roleDetails = Role::select('role_id', 'role_name')->where('role_id', '!=', 1)->get();
         return view('admin.users.add', ['roleDetails' => $roleDetails]);
     }
     // add roleUser
-    public function addRoleUser(Request $request){
+    public function addRoleUser(Request $request)
+    {
 
         $validator = \Validator::make($request->all(), [
             'name' => 'required',
@@ -362,23 +461,24 @@ class StaffController extends Controller
         return view('admin.section.index');
     }
     // add section
-    public function addSection(Request $request){
+    public function addSection(Request $request)
+    {
 
-        $validator = \Validator::make($request->all(),[
-            'name'=>'required|unique:sections'
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required|unique:sections'
         ]);
 
-        if(!$validator->passes()){
-             return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
-        }else{
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
             $section = new Section();
             $section->name = $request->name;
             $query = $section->save();
 
-            if(!$query){
-                return response()->json(['code'=>0,'msg'=>'Something went wrong']);
-            }else{
-                return response()->json(['code'=>1,'msg'=>'New Section has been successfully saved']);
+            if (!$query) {
+                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
+            } else {
+                return response()->json(['code' => 1, 'msg' => 'New Section has been successfully saved']);
             }
         }
     }
@@ -401,68 +501,73 @@ class StaffController extends Controller
     }
 
     // get section row details
-    public function getSectionDetails(Request $request){
+    public function getSectionDetails(Request $request)
+    {
         $section_id = $request->section_id;
         $sectionDetails = Section::find($section_id);
-        return response()->json(['details'=>$sectionDetails]);
+        return response()->json(['details' => $sectionDetails]);
     }
     // update section
-    public function updateSectionDetails(Request $request){
+    public function updateSectionDetails(Request $request)
+    {
         $section_id = $request->sid;
 
-        $validator = \Validator::make($request->all(),[
-            'name'=>'required|unique:sections,name,'.$section_id
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required|unique:sections,name,' . $section_id
         ]);
 
-        if(!$validator->passes()){
-               return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
-        }else{
-             
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+
             $section = Section::find($section_id);
             $section->name = $request->name;
             $query = $section->save();
 
-            if($query){
-                return response()->json(['code'=>1, 'msg'=>'Section Details have Been updated']);
-            }else{
-                return response()->json(['code'=>0, 'msg'=>'Something went wrong']);
+            if ($query) {
+                return response()->json(['code' => 1, 'msg' => 'Section Details have Been updated']);
+            } else {
+                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
             }
         }
     }
     // delete Section
-    public function deleteSection(Request $request){
+    public function deleteSection(Request $request)
+    {
         $section_id = $request->section_id;
         Section::where('id', $section_id)->delete();
-        return response()->json(['code'=>1, 'msg'=>'Section have been deleted from database']); 
+        return response()->json(['code' => 1, 'msg' => 'Section have been deleted from database']);
     }
 
-     // section allocations
-    public function showSectionAllocation(){
+    // section allocations
+    public function showSectionAllocation()
+    {
         $classDetails = Classes::select('id', 'name')->get();
         $sectionDetails = Section::select('id', 'name')->get();
-        return view('admin.section_allocation.allocation', ['classDetails' => $classDetails,'sectionDetails' => $sectionDetails]);
+        return view('admin.section_allocation.allocation', ['classDetails' => $classDetails, 'sectionDetails' => $sectionDetails]);
     }
 
     // add section allocations
-    public function addSectionAllocation(Request $request){
+    public function addSectionAllocation(Request $request)
+    {
 
-        $validator = \Validator::make($request->all(),[
-            'class_name'=>'required',
-            'section_name'=>'required'
+        $validator = \Validator::make($request->all(), [
+            'class_name' => 'required',
+            'section_name' => 'required'
         ]);
 
-        if(!$validator->passes()){
-             return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
-        }else{
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
             $section = new SectionAllocation();
             $section->class_id = $request->class_name;
             $section->section_id = $request->section_name;
             $query = $section->save();
 
-            if(!$query){
-                return response()->json(['code'=>0,'msg'=>'Something went wrong']);
-            }else{
-                return response()->json(['code'=>1,'msg'=>'Section Allocation has been successfully saved']);
+            if (!$query) {
+                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
+            } else {
+                return response()->json(['code' => 1, 'msg' => 'Section Allocation has been successfully saved']);
             }
         }
     }
@@ -470,7 +575,7 @@ class StaffController extends Controller
     public function getSectionAllocationList(Request $request)
     {
         $sectionAllocation = DB::table('sections_allocations as sa')
-            ->select('sa.id','sa.class_id','sa.section_id','s.name as section_name','c.name as class_name','c.name_numeric')
+            ->select('sa.id', 'sa.class_id', 'sa.section_id', 's.name as section_name', 'c.name as class_name', 'c.name_numeric')
             ->join('sections as s', 'sa.section_id', '=', 's.id')
             ->join('classes as c', 'sa.class_id', '=', 'c.id')
             ->get();
@@ -490,65 +595,70 @@ class StaffController extends Controller
 
     // get getSectionAllocationDetails details
 
-    public function getSectionAllocationDetails(Request $request){
+    public function getSectionAllocationDetails(Request $request)
+    {
         $id = $request->id;
         $SectionAllocation = SectionAllocation::find($id);
-        return response()->json(['details'=>$SectionAllocation]);
+        return response()->json(['details' => $SectionAllocation]);
     }
 
     // update Section Allocations
 
-    public function updateSectionAllocation(Request $request){
+    public function updateSectionAllocation(Request $request)
+    {
         $id = $request->said;
 
-        $validator = \Validator::make($request->all(),[
-            'class_name'=>'required',
-            'section_name'=>'required'
+        $validator = \Validator::make($request->all(), [
+            'class_name' => 'required',
+            'section_name' => 'required'
         ]);
 
-        if(!$validator->passes()){
-               return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
-        }else{
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
 
             $section = SectionAllocation::find($id);
             $section->class_id = $request->class_name;
             $section->section_id = $request->section_name;
             $query = $section->save();
 
-            if($query){
-                return response()->json(['code'=>1, 'msg'=>'Section Allocation Details have Been updated']);
-            }else{
-                return response()->json(['code'=>0, 'msg'=>'Something went wrong']);
+            if ($query) {
+                return response()->json(['code' => 1, 'msg' => 'Section Allocation Details have Been updated']);
+            } else {
+                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
             }
         }
     }
 
     // delete deleteSectionAllocation
-    public function deleteSectionAllocation(Request $request){
+    public function deleteSectionAllocation(Request $request)
+    {
         $id = $request->id;
         SectionAllocation::where('id', $id)->delete();
-        return response()->json(['code'=>1, 'msg'=>'Section Allocation have been deleted from database']); 
+        return response()->json(['code' => 1, 'msg' => 'Section Allocation have been deleted from database']);
     }
 
     // show assign teacher
 
-    public function showAssignTeacher(){
+    public function showAssignTeacher()
+    {
         $classDetails = Classes::select('id', 'name')->get();
         $teacherDetails = User::select('id', 'name')->where('role_id', 3)->get();
-        return view('admin.assign_teacher.index', ['classDetails' => $classDetails,'teacherDetails' => $teacherDetails]);
+        return view('admin.assign_teacher.index', ['classDetails' => $classDetails, 'teacherDetails' => $teacherDetails]);
     }
     // get allocation section
 
-    public function getAllocationSection(Request $request){
+    public function getAllocationSection(Request $request)
+    {
         $class_id = $request->class_id;
 
         $classDetails = DB::table('sections_allocations as sa')
-            ->select('sa.id','sa.class_id','sa.section_id','s.name as section_name')
+            ->select('sa.id', 'sa.class_id', 'sa.section_id', 's.name as section_name')
             ->join('sections as s', 'sa.section_id', '=', 's.id')
             ->where('sa.class_id', $class_id)
             ->get();
-            
-        return response()->json(['code'=>1, 'data'=>$classDetails]); 
+
+        return response()->json(['code' => 1, 'data' => $classDetails]);
     }
     // get TeacherAllocation
     public function showTeacherAllocation()
@@ -556,17 +666,18 @@ class StaffController extends Controller
         return view('admin.assign_teacher.index');
     }
     // add section allocations
-    public function addTeacherAllocation(Request $request){
+    public function addTeacherAllocation(Request $request)
+    {
 
-        $validator = \Validator::make($request->all(),[
-            'class_name'=>'required',
-            'section_name'=>'required',
-            'class_teacher'=>'required'
+        $validator = \Validator::make($request->all(), [
+            'class_name' => 'required',
+            'section_name' => 'required',
+            'class_teacher' => 'required'
         ]);
 
-        if(!$validator->passes()){
-             return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
-        }else{
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
 
             $teacherAllocation = new TeacherAllocation();
             $teacherAllocation->class_id = $request->class_name;
@@ -574,10 +685,10 @@ class StaffController extends Controller
             $teacherAllocation->teacher_id = $request->class_teacher;
             $query = $teacherAllocation->save();
 
-            if(!$query){
-                return response()->json(['code'=>0,'msg'=>'Something went wrong']);
-            }else{
-                return response()->json(['code'=>1,'msg'=>'Teacher Allocation has been successfully saved']);
+            if (!$query) {
+                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
+            } else {
+                return response()->json(['code' => 1, 'msg' => 'Teacher Allocation has been successfully saved']);
             }
         }
     }
@@ -587,7 +698,7 @@ class StaffController extends Controller
     public function getTeacherAllocationList(Request $request)
     {
         $teacherAllocation = DB::table('teacher_allocations as ta')
-            ->select('ta.id','ta.class_id','ta.section_id','ta.teacher_id','s.name as section_name','c.name as class_name','u.name as teacher_name')
+            ->select('ta.id', 'ta.class_id', 'ta.section_id', 'ta.teacher_id', 's.name as section_name', 'c.name as class_name', 'u.name as teacher_name')
             ->join('sections as s', 'ta.section_id', '=', 's.id')
             ->join('classes as c', 'ta.class_id', '=', 'c.id')
             ->join('users as u', 'ta.teacher_id', '=', 'u.id')
@@ -606,18 +717,18 @@ class StaffController extends Controller
             ->make(true);
     }
 
-    
+
     public function eventType()
     {
         return view('admin.event_type.index');
     }
 
-    
+
     // get Even Type details
     public function getEventTypeList(Request $request)
     {
         $event_type = EventType::all();
-        
+
         return DataTables::of($event_type)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
@@ -630,7 +741,7 @@ class StaffController extends Controller
             ->rawColumns(['actions'])
             ->make(true);
     }
-    
+
     //add New Event Type
     public function addEventType(Request $request)
     {
@@ -652,96 +763,97 @@ class StaffController extends Controller
             }
         }
     }
-    
+
     // get Event Type row details
-    public function getEventType(Request $request){
+    public function getEventType(Request $request)
+    {
         // dd($request);
         $event_type_id = $request->event_type_id;
         $eventTypeDetails = EventType::find($event_type_id);
-        return response()->json(['details'=>$eventTypeDetails]);
+        return response()->json(['details' => $eventTypeDetails]);
     }
 
     // update Event Type
-    public function updateEventType(Request $request){
+    public function updateEventType(Request $request)
+    {
         $event_type_id = $request->event_type_id;
 
-        $validator = \Validator::make($request->all(),[
-            'name'=>'required|unique:sections,name,'.$event_type_id
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required|unique:sections,name,' . $event_type_id
         ]);
 
-        if(!$validator->passes()){
-               return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
-        }else{
-             
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+
             $event_type = EventType::find($event_type_id);
             $event_type->name = $request->name;
             $query = $event_type->save();
 
-            if($query){
-                return response()->json(['code'=>1, 'msg'=>'Event Type Details have Been updated']);
-            }else{
-                return response()->json(['code'=>0, 'msg'=>'Something went wrong']);
+            if ($query) {
+                return response()->json(['code' => 1, 'msg' => 'Event Type Details have Been updated']);
+            } else {
+                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
             }
         }
     }
 
     // delete Event Type
-    public function deleteEventType(Request $request){
+    public function deleteEventType(Request $request)
+    {
         $event_type_id = $request->event_type_id;
-        EventType::where('id',$event_type_id)->delete();
-        return response()->json(['code'=>1, 'msg'=>'Event Type have been deleted from database']); 
+        EventType::where('id', $event_type_id)->delete();
+        return response()->json(['code' => 1, 'msg' => 'Event Type have been deleted from database']);
     }
 
-      
+
     public function event()
     {
         $classDetails = Classes::select('id', 'name')->get();
-        $sectionDetails = SectionAllocation::select('sections_allocations.id','sections_allocations.class_id', 'sections_allocations.section_id','sections.name')->join('sections','sections.id','=','sections_allocations.section_id')->get();
+        $sectionDetails = SectionAllocation::select('sections_allocations.id', 'sections_allocations.class_id', 'sections_allocations.section_id', 'sections.name')->join('sections', 'sections.id', '=', 'sections_allocations.section_id')->get();
         // dd($docomuntOrders);
-        $type = EventType::select('id','name')->get();
-        return view('admin.event.index', ['type' => $type,'classDetails' => $classDetails,'sectionDetails' => $sectionDetails]);
+        $type = EventType::select('id', 'name')->get();
+        return view('admin.event.index', ['type' => $type, 'classDetails' => $classDetails, 'sectionDetails' => $sectionDetails]);
     }
 
-    
+
     // get Even Type details
     public function getEventList(Request $request)
     {
         $event = \DB::table("events")
-            ->select("events.*",\DB::raw("GROUP_CONCAT(classes.name) as classname"),'event_types.name as type','users.name as created_by')
-            ->leftjoin("classes",\DB::raw("FIND_IN_SET(classes.id,events.selected_list)"),">",\DB::raw("'0'"))
-            ->leftjoin('event_types','event_types.id','=','events.type')
-            ->leftjoin('users','users.id','=','events.created_by')
+            ->select("events.*", \DB::raw("GROUP_CONCAT(classes.name) as classname"), 'event_types.name as type', 'users.name as created_by')
+            ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,events.selected_list)"), ">", \DB::raw("'0'"))
+            ->leftjoin('event_types', 'event_types.id', '=', 'events.type')
+            ->leftjoin('users', 'users.id', '=', 'events.created_by')
             ->groupBy("events.id")
             ->get();
         // $event = Event::select('events.id','events.title','events.audience','event_types.name as type','events.start_date','events.end_date','events.status','users.name as created_by')
         //     ->join('users','users.id','=','events.created_by')
         //     ->join('event_types','event_types.id','=','events.type')
         //     ->get();
-            
+
         // $ch = Event::all(); data-plugin="switchery" data-color="#9261c6"
-    //    dd($teacherAllocation);
+        //    dd($teacherAllocation);
         return DataTables::of($event)
-        
+
             ->addIndexColumn()
             ->addColumn('classname', function ($row) {
                 $audience = $row->audience;
-                if($audience==1)
-                {
+                if ($audience == 1) {
                     return "Everyone";
-                }else{
-                    return "Class ".$row->classname;
+                } else {
+                    return "Class " . $row->classname;
                 }
             })
             ->addColumn('status', function ($row) {
-                
+
                 $status = $row->status;
-                if($status==1)
-                {
+                if ($status == 1) {
                     $result = "checked";
-                }else{
+                } else {
                     $result = "";
                 }
-                return '<input type="checkbox" '.$result.' data-id="' . $row->id . '"  id="publishEventBtn">';
+                return '<input type="checkbox" ' . $result . ' data-id="' . $row->id . '"  id="publishEventBtn">';
             })
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -750,10 +862,10 @@ class StaffController extends Controller
                         </div>';
             })
 
-            ->rawColumns(['status','actions'])
+            ->rawColumns(['status', 'actions'])
             ->make(true);
     }
-    
+
     //add New Event Type
     public function addEvent(Request $request)
     {
@@ -776,13 +888,11 @@ class StaffController extends Controller
             $event->type = $request->type;
             $event->audience = $request->audience;
 
-            if($request->audience==2)
-            {
+            if ($request->audience == 2) {
                 $event->selected_list = json_encode($request->class);
-            }elseif($request->audience==3)
-            {
+            } elseif ($request->audience == 3) {
                 $event->selected_list = json_encode($request->section);
-            }else{
+            } else {
                 $event->selected_list = NULL;
             }
 
@@ -803,40 +913,43 @@ class StaffController extends Controller
     }
 
     // get Event details
-    public function getEvent(Request $request){
+    public function getEvent(Request $request)
+    {
         // dd($request);
         $event_id = $request->event_id;
         $eventDetails = \DB::table("events")
-            ->select("events.*",\DB::raw("GROUP_CONCAT(classes.name) as classname"),'event_types.name as type','users.name as created_by')
-            ->leftjoin("classes",\DB::raw("FIND_IN_SET(classes.id,events.selected_list)"),">",\DB::raw("'0'"))
-            ->leftjoin('event_types','event_types.id','=','events.type')
-            ->leftjoin('users','users.id','=','events.created_by')
+            ->select("events.*", \DB::raw("GROUP_CONCAT(classes.name) as classname"), 'event_types.name as type', 'users.name as created_by')
+            ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,events.selected_list)"), ">", \DB::raw("'0'"))
+            ->leftjoin('event_types', 'event_types.id', '=', 'events.type')
+            ->leftjoin('users', 'users.id', '=', 'events.created_by')
             ->groupBy("events.id")
-            ->where('events.id',$event_id)->first();
+            ->where('events.id', $event_id)->first();
         // $eventDetails = Event::select('events.id','events.title','events.audience','event_types.name as type','events.start_date','events.end_date','events.status','users.name as created_by','events.remarks')
         //     ->join('users','users.id','=','events.created_by')
         //     ->join('event_types','event_types.id','=','events.type')
         //     ->find($event_id);
-        return response()->json(['details'=>$eventDetails]);
+        return response()->json(['details' => $eventDetails]);
     }
 
-      // delete Event 
-    public function deleteEvent(Request $request){
+    // delete Event 
+    public function deleteEvent(Request $request)
+    {
         $event_id = $request->event_id;
-        Event::where('id',$event_id)->delete();
-        return response()->json(['code'=>1, 'msg'=>'Event have been deleted from database']); 
+        Event::where('id', $event_id)->delete();
+        return response()->json(['code' => 1, 'msg' => 'Event have been deleted from database']);
     }
-     // Publish Event 
-    public function publishEvent(Request $request){
+    // Publish Event 
+    public function publishEvent(Request $request)
+    {
 
         $event = Event::find($request->event_id);
         $event->status = $request->value;
         $query = $event->save();
-       
-        return response()->json(['code'=>1, 'msg'=>'Event Updated Successfully']); 
+
+        return response()->json(['code' => 1, 'msg' => 'Event Updated Successfully']);
     }
 
-    
+
     public function admission()
     {
         return view('staff.admission.index');
@@ -846,7 +959,7 @@ class StaffController extends Controller
     {
         return view('staff.admission.import');
     }
-    
+
     public function parent()
     {
         return view('staff.parent.index');
@@ -856,7 +969,7 @@ class StaffController extends Controller
     {
         return view('staff.employee.index');
     }
-    
+
     public function homework()
     {
         return view('staff.homework.index');
@@ -869,7 +982,7 @@ class StaffController extends Controller
         // echo "nsdds";exit;
         return view('staff.department.index');
     }
-     
+
     // get designation
     public function designation()
     {
@@ -881,7 +994,7 @@ class StaffController extends Controller
     {
         return view('staff.hostel.category');
     }
-    
+
     // get Branch
     public function branch()
     {
@@ -904,7 +1017,7 @@ class StaffController extends Controller
     {
         return view('staff.transport.route');
     }
-    
+
     public function getVehicle()
     {
         return view('staff.transport.vehicle');

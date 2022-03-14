@@ -40,7 +40,7 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
     Route::get('/login', [AuthController::class, 'showLoginFormSA'])->name('super_admin.login');
     Route::post('/authenticate', [AuthController::class, 'authenticateSA'])->name('super_admin.authenticate');
     Route::post('/logout', [AuthController::class, 'logoutSA'])->name('super_admin.logout');
-    
+
     //school app form
     Route::get('/application-form', [CommonController::class, 'showApplicationForm'])->name('super_admin.schoolcrm.app.form');
 
@@ -50,7 +50,7 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::get('/dashboard', [SuperAdminController::class, 'index'])->name('super_admin.dashboard');
         // student details
         Route::get('/student', [SuperAdminController::class, 'studentIndex'])->name('student.index');
-        
+
         // section routes
         Route::get('section/index', [SuperAdminController::class, 'section'])->name('super_admin.section');
         Route::post('section/add', [SuperAdminController::class, 'addSection'])->name('section.add');
@@ -128,7 +128,7 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
 
 
         // Employee routes
-    
+
         Route::get('employee/employeelist', [SuperAdminController::class, 'listEmployee'])->name('super_admin.listemployee');
         Route::get('employee/index', [SuperAdminController::class, 'showEmployee'])->name('super_admin.employee');
         Route::post('employee/add', [SuperAdminController::class, 'addEmployee'])->name('employee.add');
@@ -166,19 +166,19 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::get('hostel/category', [SuperAdminController::class, 'getCategory'])->name('hostel.category');
         Route::get('hostel/room', [SuperAdminController::class, 'getRoom'])->name('hostel.room');
 
-       // Transport routes
-       Route::get('transport/route', [SuperAdminController::class, 'getRoute'])->name('transport.route');
-       Route::get('transport/vehicle', [SuperAdminController::class, 'getVehicle'])->name('transport.vehicle');
-       Route::get('transport/stoppage', [SuperAdminController::class, 'getstoppage'])->name('transport.stoppage');
-       Route::get('transport/assignvehicle', [SuperAdminController::class, 'assignVehicle'])->name('transport.assignvehicle');
+        // Transport routes
+        Route::get('transport/route', [SuperAdminController::class, 'getRoute'])->name('transport.route');
+        Route::get('transport/vehicle', [SuperAdminController::class, 'getVehicle'])->name('transport.vehicle');
+        Route::get('transport/stoppage', [SuperAdminController::class, 'getstoppage'])->name('transport.stoppage');
+        Route::get('transport/assignvehicle', [SuperAdminController::class, 'assignVehicle'])->name('transport.assignvehicle');
 
-       // Library routes
-       Route::get('library/book', [SuperAdminController::class, 'book'])->name('library.book');
-       Route::get('library/book/category', [SuperAdminController::class, 'bookCategory'])->name('library.bookcategory');
-       Route::get('library/issued_book', [SuperAdminController::class, 'issuedBook'])->name('library.issuedbook');
-       Route::get('library/issue_return', [SuperAdminController::class, 'issueReturn'])->name('library.issuereturn');
+        // Library routes
+        Route::get('library/book', [SuperAdminController::class, 'book'])->name('library.book');
+        Route::get('library/book/category', [SuperAdminController::class, 'bookCategory'])->name('library.bookcategory');
+        Route::get('library/issued_book', [SuperAdminController::class, 'issuedBook'])->name('library.issuedbook');
+        Route::get('library/issue_return', [SuperAdminController::class, 'issueReturn'])->name('library.issuereturn');
 
-       Route::get('classes/add_class', [SuperAdminController::class, 'addClasses'])->name('super_admin.add_classes');
+        Route::get('classes/add_class', [SuperAdminController::class, 'addClasses'])->name('super_admin.add_classes');
 
         // userlist routes
         Route::get('users/user', [SuperAdminController::class, 'users'])->name('users.user');
@@ -200,11 +200,16 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::get('forum/page-categories-single', [SuperAdminController::class, 'forumPageCategoriesSingle'])->name('super_admin.forum.page-categories-single');
         Route::get('forum/page-tabs', [SuperAdminController::class, 'forumPageTabs'])->name('super_admin.forum.page-tabs');
         Route::get('forum/page-tabs-guidelines', [SuperAdminController::class, 'forumPageTabGuidelines'])->name('super_admin.forum.page-tabs-guidelines');
+
+        Route::post('form/page-create-topic', [SuperAdminController::class, 'createpost'])->name('super_admin.forum.create-topic');
+        Route::get('forum/page-single-topic-val/{id}/{user_id}', [SuperAdminController::class, 'forumPageSingleTopicwithvalue'])->name('super_admin.forum.page-single-topic-val');
+        Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [SuperAdminController::class, 'forumPageCategoriesSingle'])->name('super_admin.forum.page-categories-single-val');
+  
         // Attendance routes
         Route::get('attendance/student_entry', [SuperAdminController::class, 'studentEntry'])->name('attendance.student_entry');
         Route::get('attendance/employee_entry', [SuperAdminController::class, 'employeeEntry'])->name('attendance.employee_entry');
         Route::get('attendance/exam_entry', [SuperAdminController::class, 'examEntry'])->name('attendance.exam_entry');
-        
+
         // LEAVE MANAGEMENT ROUTES start
         // Leave Apply
         Route::get('leave_management/applyleave', [SuperAdminController::class, 'applyleave'])->name('super_admin.leave_management.applyleave');
@@ -233,13 +238,13 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::get('exam_results/bysubject', [SuperAdminController::class, 'bysubject'])->name('super_admin.exam_results.bysubject');
 
         Route::get('exam_results/overall', [SuperAdminController::class, 'overall'])->name('super_admin.exam_results.overall');
-        
+
         Route::get('exam_results/bystudent', [SuperAdminController::class, 'bystudent'])->name('super_admin.exam_results.bystudent');
-        
+
         Route::get('evaluation_report', [SuperAdminController::class, 'evaluationReport'])->name('super_admin.evaluation_report');
-        
+
         Route::get('homework/edit', [SuperAdminController::class, 'homeworkEdit'])->name('super_admin.homework_edit');
-        
+
         // static page routes end
     });
 });
@@ -284,7 +289,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('classes/edit/{id}', [AdminController::class, 'editClass'])->name('classes.edit');
         Route::post('classes/update', [AdminController::class, 'updateClass'])->name('classes.update');
         Route::post('classes/delete', [AdminController::class, 'deleteClass'])->name('classes.delete');
-        Route::post('classes/class-details',[AdminController::class, 'getClassDetails'])->name('classes.details');
+        Route::post('classes/class-details', [AdminController::class, 'getClassDetails'])->name('classes.details');
 
 
         // sections allocations routes
@@ -338,7 +343,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('designation/delete', [AdminController::class, 'deleteDesignation'])->name('admin.designation.delete');
 
         // Time Table
-        
+
         Route::post('timetable/add', [AdminController::class, 'addTimetable'])->name('admin.timetable.add');
         Route::get('timetable/create', [AdminController::class, 'createTimetable'])->name('admin.timetable.create');
         Route::get('timetable/index', [AdminController::class, 'timetable'])->name('admin.timetable');
@@ -354,7 +359,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('section-by-class', [AdminController::class, 'sectionByClass'])->name('admin.section_by_class');
 
         // Employee routes
-    
+
         Route::get('employee/employeelist', [AdminController::class, 'listEmployee'])->name('admin.listemployee');
         Route::get('employee/index', [AdminController::class, 'showEmployee'])->name('admin.employee');
         Route::post('employee/add', [AdminController::class, 'addEmployee'])->name('admin.employee.add');
@@ -396,30 +401,30 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('hostel/category', [AdminController::class, 'getCategory'])->name('admin.hostel.category');
         Route::get('hostel/room', [AdminController::class, 'getRoom'])->name('admin.hostel.room');
 
-       // Transport routes
-       Route::get('transport/route', [AdminController::class, 'getRoute'])->name('admin.transport.route');
-       Route::get('transport/vehicle', [AdminController::class, 'getVehicle'])->name('admin.transport.vehicle');
-       Route::get('transport/stoppage', [AdminController::class, 'getstoppage'])->name('admin.transport.stoppage');
-       Route::get('transport/assignvehicle', [AdminController::class, 'assignVehicle'])->name('admin.transport.assignvehicle');
+        // Transport routes
+        Route::get('transport/route', [AdminController::class, 'getRoute'])->name('admin.transport.route');
+        Route::get('transport/vehicle', [AdminController::class, 'getVehicle'])->name('admin.transport.vehicle');
+        Route::get('transport/stoppage', [AdminController::class, 'getstoppage'])->name('admin.transport.stoppage');
+        Route::get('transport/assignvehicle', [AdminController::class, 'assignVehicle'])->name('admin.transport.assignvehicle');
 
-       // Library routes
-       Route::get('library/book', [AdminController::class, 'book'])->name('admin.library.book');
-       Route::get('library/book/category', [AdminController::class, 'bookCategory'])->name('admin.library.bookcategory');
-       Route::get('library/issued_book', [AdminController::class, 'issuedBook'])->name('admin.library.issuedbook');
-       Route::get('library/issue_return', [AdminController::class, 'issueReturn'])->name('admin.library.issuereturn');
+        // Library routes
+        Route::get('library/book', [AdminController::class, 'book'])->name('admin.library.book');
+        Route::get('library/book/category', [AdminController::class, 'bookCategory'])->name('admin.library.bookcategory');
+        Route::get('library/issued_book', [AdminController::class, 'issuedBook'])->name('admin.library.issuedbook');
+        Route::get('library/issue_return', [AdminController::class, 'issueReturn'])->name('admin.library.issuereturn');
 
-       Route::get('classes/add_class', [AdminController::class, 'addClasses'])->name('admin.add_classes');
+        Route::get('classes/add_class', [AdminController::class, 'addClasses'])->name('admin.add_classes');
 
         // Forum routes
-        Route::get('forum/index', [AdminController::class, 'forumIndex'])->name('admin.forum.index');        
+        Route::get('forum/index', [AdminController::class, 'forumIndex'])->name('admin.forum.index');
         Route::get('forum/page-single-topic', [AdminController::class, 'forumPageSingleTopic'])->name('admin.forum.page-single-topic');
         Route::get('forum/page-create-topic', [AdminController::class, 'forumPageCreateTopic'])->name('admin.forum.page-create-topic');
         Route::get('forum/page-single-user', [AdminController::class, 'forumPageSingleUser'])->name('admin.forum.page-single-user');
         Route::get('forum/page-single-threads', [AdminController::class, 'forumPageSingleThreads'])->name('admin.forum.page-single-threads');
         Route::get('forum/page-single-replies', [AdminController::class, 'forumPageSingleReplies'])->name('admin.forum.page-single-replies');
         Route::get('forum/page-single-followers', [AdminController::class, 'forumPageSingleFollowers'])->name('admin.forum.page-single-followers');
-        Route::get('forum/page-single-categories}', [AdminController::class, 'forumPageSingleCategories'])->name('admin.forum.page-single-categories');
-        
+        Route::get('forum/page-single-categories', [AdminController::class, 'forumPageSingleCategories'])->name('admin.forum.page-single-categories');
+
         Route::get('forum/page-categories', [AdminController::class, 'forumPageCategories'])->name('admin.forum.page-categories');
         Route::get('forum/page-categories-single', [AdminController::class, 'forumPageCategoriesSingle'])->name('admin.forum.page-categories-single');
         Route::get('forum/page-tabs', [AdminController::class, 'forumPageTabs'])->name('admin.forum.page-tabs');
@@ -433,9 +438,9 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         //class room Routes
         Route::get('classroom/classroom-management', [AdminController::class, 'classroomManagement'])->name('admin.classroom.management');
         //faq route
-        
+
         // faq        
-        Route::get('faq/index', [AdminController::class, 'faqIndex'])->name('admin.faq.index'); 
+        Route::get('faq/index', [AdminController::class, 'faqIndex'])->name('admin.faq.index');
         //Task routes
         Route::get('task/index', [AdminController::class, 'taskIndex'])->name('admin.task');
         // static page routes end
@@ -445,7 +450,6 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('form/page-create-topic', [AdminController::class, 'createpost'])->name('admin.forum.create-topic');
         Route::get('forum/page-single-topic-val/{id}/{user_id}', [AdminController::class, 'forumPageSingleTopicwithvalue'])->name('admin.forum.page-single-topic-val');
         Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [AdminController::class, 'forumPageCategoriesSingle'])->name('admin.forum.page-categories-single-val');
-     
     });
     // admin routes end
 
@@ -453,26 +457,30 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('/dashboard', [StaffController::class, 'index'])->name('staff.dashboard');
         // Leave Apply
         Route::get('leave_management/applyleave', [StaffController::class, 'applyleave'])->name('staff.leave_management.applyleave');
-        
-         // Forum routes
-         Route::get('forum/index', [StaffController::class, 'forumIndex'])->name('staff.forum.index');
-         Route::get('forum/page-single-topic', [StaffController::class, 'forumPageSingleTopic'])->name('staff.forum.page-single-topic');
-         Route::get('forum/page-create-topic', [StaffController::class, 'forumPageCreateTopic'])->name('staff.forum.page-create-topic');
-         Route::get('forum/page-single-user', [StaffController::class, 'forumPageSingleUser'])->name('staff.forum.page-single-user');
-         Route::get('forum/page-single-threads', [StaffController::class, 'forumPageSingleThreads'])->name('staff.forum.page-single-threads');
-         Route::get('forum/page-single-replies', [StaffController::class, 'forumPageSingleReplies'])->name('staff.forum.page-single-replies');
-         Route::get('forum/page-single-followers', [StaffController::class, 'forumPageSingleFollowers'])->name('staff.forum.page-single-followers');
-         Route::get('forum/page-single-categories', [StaffController::class, 'forumPageSingleCategories'])->name('staff.forum.page-single-categories');
-         Route::get('forum/page-categories', [StaffController::class, 'forumPageCategories'])->name('staff.forum.page-categories');
-         Route::get('forum/page-categories-single', [StaffController::class, 'forumPageCategoriesSingle'])->name('staff.forum.page-categories-single');
-         Route::get('forum/page-tabs', [StaffController::class, 'forumPageTabs'])->name('staff.forum.page-tabs');
-         Route::get('forum/page-tabs-guidelines', [StaffController::class, 'forumPageTabGuidelines'])->name('staff.forum.page-tabs-guidelines'); 
-         
+
+        // Forum routes
+        Route::get('forum/index', [StaffController::class, 'forumIndex'])->name('staff.forum.index');
+        Route::get('forum/page-single-topic', [StaffController::class, 'forumPageSingleTopic'])->name('staff.forum.page-single-topic');
+        Route::get('forum/page-create-topic', [StaffController::class, 'forumPageCreateTopic'])->name('staff.forum.page-create-topic');
+        Route::get('forum/page-single-user', [StaffController::class, 'forumPageSingleUser'])->name('staff.forum.page-single-user');
+        Route::get('forum/page-single-threads', [StaffController::class, 'forumPageSingleThreads'])->name('staff.forum.page-single-threads');
+        Route::get('forum/page-single-replies', [StaffController::class, 'forumPageSingleReplies'])->name('staff.forum.page-single-replies');
+        Route::get('forum/page-single-followers', [StaffController::class, 'forumPageSingleFollowers'])->name('staff.forum.page-single-followers');
+        Route::get('forum/page-single-categories', [StaffController::class, 'forumPageSingleCategories'])->name('staff.forum.page-single-categories');
+        Route::get('forum/page-categories', [StaffController::class, 'forumPageCategories'])->name('staff.forum.page-categories');
+        Route::get('forum/page-categories-single', [StaffController::class, 'forumPageCategoriesSingle'])->name('staff.forum.page-categories-single');
+        Route::get('forum/page-tabs', [StaffController::class, 'forumPageTabs'])->name('staff.forum.page-tabs');
+        Route::get('forum/page-tabs-guidelines', [StaffController::class, 'forumPageTabGuidelines'])->name('staff.forum.page-tabs-guidelines');
+
+        Route::post('form/page-create-topic', [StaffController::class, 'createpost'])->name('staff.forum.create-topic');
+        Route::get('forum/page-single-topic-val/{id}/{user_id}', [StaffController::class, 'forumPageSingleTopicwithvalue'])->name('staff.forum.page-single-topic-val');
+        Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [StaffController::class, 'forumPageCategoriesSingle'])->name('staff.forum.page-categories-single-val');       
+
         // Settings
         Route::get('settings', [StaffController::class, 'settings'])->name('staff.settings');
-         // faq        
-         Route::get('faq/index', [StaffController::class, 'faqIndex'])->name('staff.faq.Index');
-         // student details
+        // faq        
+        Route::get('faq/index', [StaffController::class, 'faqIndex'])->name('staff.faq.Index');
+        // student details
         Route::get('/student', [StaffController::class, 'studentIndex'])->name('staff.student.index');
 
         // section routes
@@ -490,7 +498,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('classes/edit/{id}', [StaffController::class, 'editClass'])->name('staff.classes.edit');
         Route::post('classes/update', [StaffController::class, 'updateClass'])->name('staff.classes.update');
         Route::post('classes/delete', [StaffController::class, 'deleteClass'])->name('staff.classes.delete');
-        Route::post('classes/class-details',[StaffController::class, 'getClassDetails'])->name('staff.classes.details');
+        Route::post('classes/class-details', [StaffController::class, 'getClassDetails'])->name('staff.classes.details');
 
 
         // sections allocations routes
@@ -545,7 +553,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
 
         // Employee routes
-    
+
         Route::get('employee/employeelist', [StaffController::class, 'listEmployee'])->name('staff.listemployee');
         Route::get('employee/index', [StaffController::class, 'showEmployee'])->name('staff.employee');
         Route::post('employee/add', [StaffController::class, 'addEmployee'])->name('staff.employee.add');
@@ -574,19 +582,19 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('hostel/category', [StaffController::class, 'getCategory'])->name('staff.hostel.category');
         Route::get('hostel/room', [StaffController::class, 'getRoom'])->name('staff.hostel.room');
 
-       // Transport routes
-       Route::get('transport/route', [StaffController::class, 'getRoute'])->name('staff.transport.route');
-       Route::get('transport/vehicle', [StaffController::class, 'getVehicle'])->name('staff.transport.vehicle');
-       Route::get('transport/stoppage', [StaffController::class, 'getstoppage'])->name('staff.transport.stoppage');
-       Route::get('transport/assignvehicle', [StaffController::class, 'assignVehicle'])->name('staff.transport.assignvehicle');
+        // Transport routes
+        Route::get('transport/route', [StaffController::class, 'getRoute'])->name('staff.transport.route');
+        Route::get('transport/vehicle', [StaffController::class, 'getVehicle'])->name('staff.transport.vehicle');
+        Route::get('transport/stoppage', [StaffController::class, 'getstoppage'])->name('staff.transport.stoppage');
+        Route::get('transport/assignvehicle', [StaffController::class, 'assignVehicle'])->name('staff.transport.assignvehicle');
 
-       // Library routes
-       Route::get('library/book', [StaffController::class, 'book'])->name('staff.library.book');
-       Route::get('library/book/category', [StaffController::class, 'bookCategory'])->name('staff.library.bookcategory');
-       Route::get('library/issued_book', [StaffController::class, 'issuedBook'])->name('staff.library.issuedbook');
-       Route::get('library/issue_return', [StaffController::class, 'issueReturn'])->name('staff.library.issuereturn');
+        // Library routes
+        Route::get('library/book', [StaffController::class, 'book'])->name('staff.library.book');
+        Route::get('library/book/category', [StaffController::class, 'bookCategory'])->name('staff.library.bookcategory');
+        Route::get('library/issued_book', [StaffController::class, 'issuedBook'])->name('staff.library.issuedbook');
+        Route::get('library/issue_return', [StaffController::class, 'issueReturn'])->name('staff.library.issuereturn');
 
-       Route::get('classes/add_class', [StaffController::class, 'addClasses'])->name('staff.add_classes');
+        Route::get('classes/add_class', [StaffController::class, 'addClasses'])->name('staff.add_classes');
 
 
         // Attendance routes
@@ -596,9 +604,8 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
         //Task routes
         Route::get('task/index', [StaffController::class, 'taskIndex'])->name('staff.task');
-
     });
-// TEACHER CONTROLLER START
+    // TEACHER CONTROLLER START
     Route::group(['prefix' => 'teacher', 'middleware' => ['isTeacher']], function () {
         Route::get('/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
         // Test Result Rotes
@@ -619,8 +626,8 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('homework/index', [TeacherController::class, 'homework'])->name('teacher.homework');
         Route::get('evaluation_report', [TeacherController::class, 'evaluationReport'])->name('teacher.evaluation_report');
         Route::get('homework/edit', [TeacherController::class, 'homeworkEdit'])->name('teacher.homework_edit');
-         // Leave Apply
-         Route::get('leave_management/applyleave', [TeacherController::class, 'applyleave'])->name('teacher.leave_management.applyleave');       
+        // Leave Apply
+        Route::get('leave_management/applyleave', [TeacherController::class, 'applyleave'])->name('teacher.leave_management.applyleave');
         // Forum routes
         Route::get('forum/index', [TeacherController::class, 'forumIndex'])->name('teacher.forum.index');
         Route::get('forum/page-single-topic', [TeacherController::class, 'forumPageSingleTopic'])->name('teacher.forum.page-single-topic');
@@ -638,20 +645,20 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('form/page-create-topic', [TeacherController::class, 'createpost'])->name('teacher.forum.create-topic');
         Route::get('forum/page-single-topic-val/{id}/{user_id}', [TeacherController::class, 'forumPageSingleTopicwithvalue'])->name('teacher.forum.page-single-topic-val');
         Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [TeacherController::class, 'forumPageCategoriesSingle'])->name('teacher.forum.page-categories-single-val');
-    
+
         // Settings
         Route::get('settings', [TeacherController::class, 'settings'])->name('teacher.settings');
-        
-         // faq        
-         Route::get('faq/index', [TeacherController::class, 'faqIndex'])->name('teacher.faq.Index');      
-         // class room management    
-         Route::get('classroom/classroom-management', [TeacherController::class, 'classroomManagement'])->name('teacher.classroom.management');
+
+        // faq        
+        Route::get('faq/index', [TeacherController::class, 'faqIndex'])->name('teacher.faq.Index');
+        // class room management    
+        Route::get('classroom/classroom-management', [TeacherController::class, 'classroomManagement'])->name('teacher.classroom.management');
         // chat app    
         Route::get('chat', [TeacherController::class, 'chatShow'])->name('teacher.chat');
         //Task routes
         Route::get('task/index', [TeacherController::class, 'taskIndex'])->name('teacher.task');
 
-             // exam Result Group 
+        // exam Result Group 
         Route::get('exam_results/byclass', [TeacherController::class, 'byclasss'])->name('teacher.exam_results.byclass');
 
         Route::get('exam_results/bysubject', [TeacherController::class, 'bysubject'])->name('teacher.exam_results.bysubject');
@@ -662,33 +669,33 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('classroomAdd', [TeacherController::class, 'classroomPost'])->name('teacher.classroom.add');
         Route::post('getShortTest', [TeacherController::class, 'getShortTest'])->name('teacher.classroom.get_short_test');
         Route::post('add_short_test', [TeacherController::class, 'addShortTest'])->name('teacher.classroom.add_short_test');
-        Route::post('add_daily_report', [TeacherController::class, 'addDailyReport'])->name('teacher.classroom.add_daily_report');        
-        Route::post('add_daily_report_remarks', [TeacherController::class, 'addDailyReportRemarks'])->name('teacher.classroom.add_daily_report_remarks');        
+        Route::post('add_daily_report', [TeacherController::class, 'addDailyReport'])->name('teacher.classroom.add_daily_report');
+        Route::post('add_daily_report_remarks', [TeacherController::class, 'addDailyReportRemarks'])->name('teacher.classroom.add_daily_report_remarks');
     });
-     
+
     // TEACHER CONTROLLER END
 
     // PARENT CONTROLLER START
     Route::group(['prefix' => 'parent', 'middleware' => ['isParent']], function () {
         Route::get('/dashboard', [ParentController::class, 'index'])->name('parent.dashboard');
-    
+
         // Settings
         Route::get('settings', [SuperAdminController::class, 'settings'])->name('parent.settings');
-         // faq        
-         Route::get('faq/index', [ParentController::class, 'faqIndex'])->name('parent.faq.Index');    
-         
+        // faq        
+        Route::get('faq/index', [ParentController::class, 'faqIndex'])->name('parent.faq.Index');
+
         //schedule routes  
-         Route::get('exam/schedule', [ParentController::class, 'examSchedule'])->name('parent.exam.schedule');   
-         
+        Route::get('exam/schedule', [ParentController::class, 'examSchedule'])->name('parent.exam.schedule');
+
         //Report Card routes  
-         Route::get('report_card', [ParentController::class, 'reportCard'])->name('parent.report_card');   
-         
+        Route::get('report_card', [ParentController::class, 'reportCard'])->name('parent.report_card');
+
         //Event routes
-         Route::get('events', [ParentController::class, 'events'])->name('parent.events');    
-         //Library routes
-         Route::get('library/books', [ParentController::class, 'bookList'])->name('parent.library.books');    
-         Route::get('library/book_issued', [ParentController::class, 'bookIssued'])->name('parent.library.book_issued');          
-         
+        Route::get('events', [ParentController::class, 'events'])->name('parent.events');
+        //Library routes
+        Route::get('library/books', [ParentController::class, 'bookList'])->name('parent.library.books');
+        Route::get('library/book_issued', [ParentController::class, 'bookIssued'])->name('parent.library.book_issued');
+
         //Task routes
         Route::get('task/index', [ParentController::class, 'taskIndex'])->name('parent.task');
         //Time Table routes
@@ -708,47 +715,51 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('forum/page-tabs', [ParentController::class, 'forumPageTabs'])->name('parent.forum.page-tabs');
         Route::get('forum/page-tabs-guidelines', [ParentController::class, 'forumPageTabGuidelines'])->name('parent.forum.page-tabs-guidelines');
 
+        Route::post('form/page-create-topic', [ParentController::class, 'createpost'])->name('parent.forum.create-topic');
+        Route::get('forum/page-single-topic-val/{id}/{user_id}', [ParentController::class, 'forumPageSingleTopicwithvalue'])->name('parent.forum.page-single-topic-val');
+        Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [ParentController::class, 'forumPageCategoriesSingle'])->name('parent.forum.page-categories-single-val');
+
+
         //attendance routes
         Route::get('attendance/index', [ParentController::class, 'attendance'])->name('parent.attendance');
         // Homework routes
         Route::get('homework/homeworklist', [ParentController::class, 'homeworklist'])->name('parent.homework');
-         // Children routes
-         Route::get('children', [ParentController::class, 'children'])->name('parent.children');
-         // chat app    
-         Route::get('chat', [ParentController::class, 'chatShow'])->name('parent.chat');
+        // Children routes
+        Route::get('children', [ParentController::class, 'children'])->name('parent.children');
+        // chat app    
+        Route::get('chat', [ParentController::class, 'chatShow'])->name('parent.chat');
 
-         Route::get('homework/homeworklist', [ParentController::class, 'homeworkredirect'])->name('parent.homework');
+        Route::get('homework/homeworklist', [ParentController::class, 'homeworkredirect'])->name('parent.homework');
 
-         Route::get('/analyticrep', [ParentController::class, 'analytic'])->name('parent.analyticrep.analyticreport');
-
+        Route::get('/analyticrep', [ParentController::class, 'analytic'])->name('parent.analyticrep.analyticreport');
     });
 
 
-    
+
     // faq
     Route::get('faq/index', [ParentController::class, 'faqIndex'])->name('teacher.faq.index');
-        
+
     // PARENT CONTROLLER END
     Route::group(['prefix' => 'student', 'middleware' => ['isStudent']], function () {
         Route::get('/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
         // Homework routes
         Route::get('homework/homeworklist', [StudentController::class, 'homeworklist'])->name('student.homework');
-        
+
         // Settings
         Route::get('settings', [SuperAdminController::class, 'settings'])->name('student.settings');
         // faq        
-        Route::get('faq/index', [StudentController::class, 'faqIndex'])->name('student.faq.Index'); 
+        Route::get('faq/index', [StudentController::class, 'faqIndex'])->name('student.faq.Index');
         // Exam
-        Route::get('exam/schedule', [StudentController::class, 'examSchedule'])->name('student.exam.schedule');    
+        Route::get('exam/schedule', [StudentController::class, 'examSchedule'])->name('student.exam.schedule');
         // timetable
-        Route::get('timetable', [StudentController::class, 'timetable'])->name('student.timetable');    
+        Route::get('timetable', [StudentController::class, 'timetable'])->name('student.timetable');
         // Report card
-        Route::get('report_card', [StudentController::class, 'reportCard'])->name('student.report_card');   
+        Route::get('report_card', [StudentController::class, 'reportCard'])->name('student.report_card');
         // Event
-        Route::get('events', [StudentController::class, 'events'])->name('student.events');    
+        Route::get('events', [StudentController::class, 'events'])->name('student.events');
         // Library 
-        Route::get('library/books', [StudentController::class, 'bookList'])->name('student.library.books');    
-        Route::get('library/book_issued', [StudentController::class, 'bookIssued'])->name('student.library.book_issued');          
+        Route::get('library/books', [StudentController::class, 'bookList'])->name('student.library.books');
+        Route::get('library/book_issued', [StudentController::class, 'bookIssued'])->name('student.library.book_issued');
         // Forum routes
         Route::get('forum/index', [StudentController::class, 'forumIndex'])->name('student.forum.index');
         Route::get('forum/page-single-topic', [StudentController::class, 'forumPageSingleTopic'])->name('student.forum.page-single-topic');
@@ -762,9 +773,12 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('forum/page-categories-single', [StudentController::class, 'forumPageCategoriesSingle'])->name('student.forum.page-categories-single');
         Route::get('forum/page-tabs', [StudentController::class, 'forumPageTabs'])->name('student.forum.page-tabs');
         Route::get('forum/page-tabs-guidelines', [StudentController::class, 'forumPageTabGuidelines'])->name('student.forum.page-tabs-guidelines');
-        
+
+
+        Route::post('form/page-create-topic', [ParentController::class, 'createpost'])->name('student.forum.create-topic');
+        Route::get('forum/page-single-topic-val/{id}/{user_id}', [ParentController::class, 'forumPageSingleTopicwithvalue'])->name('student.forum.page-single-topic-val');
+        Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [ParentController::class, 'forumPageCategoriesSingle'])->name('student.forum.page-categories-single-val');
+
         Route::get('/analyticrep', [StudentController::class, 'analytic'])->name('student.analyticrep.analyticreport');
     });
-    
-    
 });

@@ -112,10 +112,13 @@ return [
         // forum url
         'forum_cpost' => $url.'/forum/createpost',   
         'forum_list' => $url.'/forum/list',
+        'forum_threadslist'=>$url.'/forum/threadslist',
+        'forum_userthreadslist'=>$url.'/forum/userthreadslist',
         'listcategoryvs'=>$url.'/forum/listcategory',
         'category' => $url.'/get-category',        
         'forum_single_post'=>$url.'/forum/singlepost',
         'forum_single_categ'=>$url.'/forum/singlecateg',
+        'forum_user_category_list'=>$url.'/forum/usersinglecateg',
         'forum_post_user_created'=>$url.'/forum/postlistusercreated',
         'forum_categorypost_user_created'=>$url.'/forum/listcategoryusercrd',
         'forum_single_post_replies'=>$url.'/forum/singlepost/replies',
@@ -128,7 +131,8 @@ return [
         'replike_countadd' =>$url.'/forum-replikecout',
         'repdislike_countadd' =>$url.'/forum-repdislikecout',
         'repheart_countadd'=>$url.'/forum-repfavorits',
-        
+        'forum_posts_user_repliesall'=>$url.'/forum/post/allreplies',
+        'thread_status_update'=>$url.'/forum/threads/status/update',
 
 
         // classroom management api details

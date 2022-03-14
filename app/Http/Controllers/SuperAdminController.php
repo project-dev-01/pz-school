@@ -1352,16 +1352,41 @@ class SuperAdminController extends Controller
     }
     // forum screen pages start
     public function forumIndex(){
-        return view('super_admin.forum.index');
+        $forum_list = Helper::GetMethod(config('constants.api.forum_list')); 
+        dd($forum_list);
+        return view('super_admin.forum.index', [
+          'forum_list' => $forum_list['data']
+      ]);
     }
     public function forumPageSingleTopic(){
         return view('super_admin.forum.page-single-topic');
     }
     public function forumPageCreateTopic(){
-        return view('super_admin.forum.page-create-topic');
+        $category = Helper::GetMethod(config('constants.api.category'));
+  
+        $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
+       // dd($forum_list);
+        return view('super_admin.forum.page-create-topic', [
+            'category' => $category['data'],
+            'forum_list' => $forum_list['data']
+        ]);
     }
     public function forumPageSingleUser(){
-        return view('super_admin.forum.page-single-user');
+        $user_id= session()->get('user_id');  
+        $data = [            
+            'user_id' => $user_id
+        ];
+        $forum_post_user_crd = Helper::GETMethodWithData(config('constants.api.forum_post_user_created'), $data);
+        $forum_categorypost_user_crd = Helper::GETMethodWithData(config('constants.api.forum_categorypost_user_created'), $data);
+        $forum_post_user_allreplies = Helper::GETMethodWithData(config('constants.api.forum_posts_user_repliesall'), $data);
+        $forum_threadslist = Helper::GetMethod(config('constants.api.forum_threadslist'));
+       // dd($forum_threadslist);
+        return view('super_admin.forum.page-single-user', [
+            'forum_post_user_crd' => $forum_post_user_crd['data'],
+            'forum_categorypost_user_crd' => $forum_categorypost_user_crd['data'],
+            'forum_post_user_allreplies' =>$forum_post_user_allreplies['data'],
+            'forum_threadslist' =>$forum_threadslist['data']
+        ]);
     }
     public function forumPageSingleThreads(){
         return view('super_admin.forum.page-single-threads');
@@ -1373,13 +1398,24 @@ class SuperAdminController extends Controller
         return view('super_admin.forum.page-single-followers');
     }
     public function forumPageSingleCategories(){
-        return view('super_admin.forum.page-single-categories');
+        $listcategoryvs= Helper::GetMethod(config('constants.api.listcategoryvs'));  
+        // dd($listcategoryvs);      
+         return view('super_admin.forum.page-categories', [
+             'listcategoryvs' => $listcategoryvs['data']]);
     }
     public function forumPageCategories(){
         return view('super_admin.forum.page-categories');
     }
-    public function forumPageCategoriesSingle(){
-        return view('super_admin.forum.page-categories-single');
+    public function forumPageCategoriesSingle($categId,$user_id,$category_names){
+        session()->put('session_category_names', $category_names);  
+        $data = [
+            'categId' => $categId,
+            'user_id' => $user_id
+        ];
+        $forum_category = Helper::GETMethodWithData(config('constants.api.forum_single_categ'), $data);
+  
+        return view('super_admin.forum.page-categories-single',[
+            'forum_category' => $forum_category['data']]);
     }
     public function forumPageTabs(){
         return view('super_admin.forum.page-tabs');
@@ -1387,7 +1423,46 @@ class SuperAdminController extends Controller
     public function forumPageTabGuidelines(){
         return view('super_admin.forum.page-tabs-guidelines');
     }
-    
+       // forum create post 
+       public function createpost(Request $request)
+       {     
+           $data = [
+               'user_id' => session()->get('user_id'),
+               'user_name' => session()->get('name'),
+               'topic_title' => $request->inputTopicTitle,
+               'topic_header' => $request->inputTopicHeader,
+               'types' => $request->topictype,
+               'body_content' => $request->tpbody,
+               'category' => $request->category,
+               'tags' => $request->inputTopicTags,
+               'imagesorvideos' => $request->inputTopicTitle,
+               'threads_status'=>2
+           ];
+           $response = Helper::PostMethod(config('constants.api.forum_cpost'), $data);
+           return $response;
+       }
+       // Forum single topic with value pass
+       public function forumPageSingleTopicwithvalue($id, $user_id)
+       {
+           $data = [
+               'id' => $id,
+               'user_id' => $user_id,
+           ];
+           $singlepost_repliesData = [
+               'created_post_id' => $id,
+               'user_id' => $user_id,
+           ]; 
+           $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
+           $forum_singlepost = Helper::GETMethodWithData(config('constants.api.forum_single_post'), $data);
+           $forum_singlepost_replies = Helper::GETMethodWithData(config('constants.api.forum_single_post_replies'), $data);
+           //dd($forum_singlepost_replies);
+           return view('admin.forum.page-single-topic', [
+               'forum_single_post' => !empty($forum_singlepost['data']) ? $forum_singlepost['data'] : $forum_singlepost,
+               'forum_singlepost_replies' => $forum_singlepost_replies['data'],
+               'forum_list' => $forum_list['data']
+   
+           ]);
+       }
     // forum screen pages end
     public function studentEntry()
     {

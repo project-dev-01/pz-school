@@ -80,10 +80,15 @@ class TeacherController extends Controller
         ];
         $forum_post_user_crd = Helper::GETMethodWithData(config('constants.api.forum_post_user_created'), $data);
         $forum_categorypost_user_crd = Helper::GETMethodWithData(config('constants.api.forum_categorypost_user_created'), $data);
+        $forum_post_user_allreplies = Helper::GETMethodWithData(config('constants.api.forum_posts_user_repliesall'), $data);
+       // $forum_threadslist = Helper::GetMethod(config('constants.api.forum_threadslist'));
+       $forum_userthreadslist = Helper::GETMethodWithData(config('constants.api.forum_userthreadslist'), $data);
         //dd($forum_categorypost_user_crd);
         return view('teacher.forum.page-single-user', [
             'forum_post_user_crd' => $forum_post_user_crd['data'],
-            'forum_categorypost_user_crd' => $forum_categorypost_user_crd['data']
+            'forum_categorypost_user_crd' => $forum_categorypost_user_crd['data'],
+            'forum_post_user_allreplies' =>$forum_post_user_allreplies['data'],
+            'forum_userthreadslist' =>$forum_userthreadslist['data']
         ]);
         // return view('teacher.forum.page-single-user');
     }
@@ -118,7 +123,7 @@ class TeacherController extends Controller
             'categId' => $categId,
             'user_id' => $user_id
         ];
-        $forum_category = Helper::GETMethodWithData(config('constants.api.forum_single_categ'), $data);
+        $forum_category = Helper::GETMethodWithData(config('constants.api.forum_user_category_list'), $data);
 
         return view('teacher.forum.page-categories-single', [
             'forum_category' => $forum_category['data']
@@ -145,7 +150,8 @@ class TeacherController extends Controller
             'body_content' => $request->tpbody,
             'category' => $request->category,
             'tags' => $request->inputTopicTags,
-            'imagesorvideos' => $request->inputTopicTitle
+            'imagesorvideos' => $request->inputTopicTitle,
+            'threads_status'=>1
         ];
         $response = Helper::PostMethod(config('constants.api.forum_cpost'), $data);
         return $response;

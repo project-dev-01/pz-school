@@ -36,7 +36,7 @@ class Helper{
     // get api call
     public static function GETMethodWithData($url,$data){
         $data["token"] = session()->get('token');
-        $data["branch_id"] = session()->get('branch_id');
+        $data["branch_id"] = session()->get('branch_id');    
         $response = Http::get($url, $data);
         return $response->json();
     }

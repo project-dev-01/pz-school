@@ -463,6 +463,9 @@
         <path d="M56 24.33c-11.97 0-21.67 9.7-21.67 21.67S44.03 67.67 56 67.67c11.97 0 21.67-9.7 21.67-21.67S67.97 24.33 56 24.33zm-2.13 28.8c-1.94 1.03-3.54.07-3.54-2.13V41c0-2.2 1.59-3.16 3.54-2.13l9.93 5.26c1.94 1.03 1.94 2.71 0 3.74l-9.93 5.26z" fill="#b9c2c6"></path>
     </symbol>
 </svg>
+    <!-- icons -->
+    <link href="http://localhost:8080/school-management-system/public/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="http://localhost:8080/school-management-system/public/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
 <!-- Init js -->
 <script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('toastr/toastr.min.js') }}"></script>
@@ -493,6 +496,7 @@
         var replikescount="{{ config('constants.api.replike_countadd') }}"; 
         var repdislikescount = "{{ config('constants.api.repdislike_countadd') }}";       
         var repheartcount = "{{ config('constants.api.repheart_countadd') }}";
+        var threadstatusupd="{{config('constants.api.thread_status_update')}}";
 
         
        

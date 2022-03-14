@@ -21,6 +21,7 @@ class Forum_posts extends Model
         'category',
         'tags',
         'imagesorvideos',
+        'threads_status',
         'token'         
     ];
 }

@@ -131,12 +131,16 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // forum     
     Route::get('get-category', [CommonController::class, 'categoryList']);
     Route::get('forum/list', [ApiController::class, 'postList']);
+    Route::get('forum/threadslist', [ApiController::class, 'ThreadspostList']);
+    Route::get('forum/userthreadslist', [ApiController::class, 'userThreadspostList']);
     Route::get('forum/listcategory', [ApiController::class, 'postListCategory']);
     Route::get('forum/singlepost', [ApiController::class, 'singlePost']);
     Route::get('forum/singlecateg', [ApiController::class, 'singleCategoryPosts']);
+    Route::get('forum/usersinglecateg', [ApiController::class, 'user_singleCategoryPosts']);
     Route::get('forum/postlistusercreated', [ApiController::class, 'postListUserCreatedOnly']);
     Route::get('forum/listcategoryusercrd', [ApiController::class, 'categorypostListUserCreatedOnly']);
     Route::get('forum/singlepost/replies', [ApiController::class, 'singlePostReplies']);
+    Route::get('forum/post/allreplies', [ApiController::class, 'PostAllReplies']);
     Route::post('forum/createpost',[ApiController::class,'forumcreatepost']);
     Route::post('forum-likecout',[ApiController::class,'likescountadded']);
     Route::post('forum-discout',[ApiController::class,'dislikescountadded']);
@@ -147,7 +151,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('forum-replikecout',[ApiController::class,'replikescountadded']);  
     Route::post('forum-repdislikecout',[ApiController::class,'repdislikescountadded']);  
     Route::post('forum-repfavorits',[ApiController::class,'repfavcountadded']);
-
+    Route::post('forum/threads/status/update',[ApiController::class,'threadstatusupdate']);
     // classroom management
     Route::post('teacher_class',[ApiController::class,'getTeachersClassName']);
     Route::post('teacher_section',[ApiController::class,'getTeachersSectionName']);

@@ -58,7 +58,7 @@
                 </ul>
             </div>
             <div class="tab-content">
-                <div class="tab-pane tt-indent-none  show active" id="tt-tab-01" role="tabpanel">
+                <div class="tab-pane tt-indent-none" id="tt-tab-01" role="tabpanel">
                     <div class="tt-topic-list">
                         <div class="tt-list-header">
                             <div class="tt-col-topic">Topic</div>
@@ -179,7 +179,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane tt-indent-none" id="tt-tab-02" role="tabpanel">
+                <div class="tab-pane tt-indent-none show active" id="tt-tab-02" role="tabpanel">
                     <div class="tt-topic-list">
                         <div class="tt-list-header">
                             <div class="tt-col-topic">Topic</div>
@@ -750,7 +750,7 @@
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color04 tt-badge">Study Advice</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="{{ route('super_admin.forum.page-categories-single') }}">Threads - 98</a></h6>
+                            <h6 class="tt-title"><a href="{{ route('admin.forum.page-categories-single') }}">Threads - 98</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="tt-innerwrapper">
@@ -780,7 +780,7 @@
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color05 tt-badge">Study Hacks</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="{{ route('super_admin.forum.page-categories-single') }}">Threads - 28</a></h6>
+                            <h6 class="tt-title"><a href="{{ route('admin.forum.page-categories-single') }}">Threads - 28</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="tt-innerwrapper">
@@ -809,7 +809,7 @@
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color06 tt-badge">Languages</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="{{ route('super_admin.forum.page-categories-single') }}">Threads - 74</a></h6>
+                            <h6 class="tt-title"><a href="{{ route('admin.forum.page-categories-single') }}">Threads - 74</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="tt-innerwrapper">

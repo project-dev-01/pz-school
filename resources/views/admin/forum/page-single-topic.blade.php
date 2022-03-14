@@ -38,9 +38,9 @@
                     </div>
                     <div class="tt-item-description">
                         <h6 class="tt-title">{{ $value['topic_header'] }}</h6> <br>
-                        <p>
-                            {{ $value['body_content'] }}
-                        </p>
+                    
+                            {!! $value['body_content'] !!}
+                      
                     </div>
                     <div class="tt-item-info info-bottom">
                         <a href="#" class="tt-icon-btn" id="likes-iconhit">
@@ -139,20 +139,20 @@
                         </div>
                     </div>
                     <div class="tt-item-description">
-                        {{$value['replies_com']}}
+                        {!! $value['replies_com'] !!}
                     </div>
                     <div class="tt-item-info info-bottom">
                         <a href="javescript:void(0)" class="tt-icon-btn rep-likes-iconhit" data-id="{{$value['pk_replies_id']}}">
                             <i class="tt-icon"><svg>
                                     <use xlink:href="#icon-like"></use>
                                 </svg></i>
-                            <span class="tt-text repinclikes{{$value['pk_replies_id']}}">
+                                <span class="tt-text repinclikes{{$value['pk_replies_id']}}">
                                 @if($value['likes']=== null)
                                 0
                                 @else
                                 {{$value['likes']}}
                                 @endif
-                            </span>
+                                </span>
                         </a>
                         <a href="javescript:void(0)" class="tt-icon-btn rep-dislikes-iconhit" data-id="{{$value['pk_replies_id']}}">
                             <i class="tt-icon"><svg>
@@ -203,23 +203,23 @@
                 <h6 class="pt-title">Post Your Reply</h6>
                 <div class="pt-row">
                     <div class="col-left">
-                        
-                    </div>
-                    <div class="col-right tt-hidden-mobile">
-              
-                    </div>
-                </div>
-                <div class="form-group">
-                    <textarea name="message" class="form-control" rows="5" id="repliesinput" placeholder="Lets get started"></textarea>
-                </div>
-                <div class="pt-row">
-                    <div class="col-auto">
 
                     </div>
-                    <div class="col-auto">
-                        <a href="#" class="btn btn-secondary btn-width-lg" id="postreplie">Reply</a>
+                    <div class="col-right tt-hidden-mobile">
+
                     </div>
                 </div>
+                <form action="" method="POST" id="postreplie">
+                    <div class="form-group">
+                        <textarea name="message" class="form-control" rows="5" id="repliesinput" placeholder="Lets get started"></textarea>
+                    </div>
+                    <div class="pt-row">
+
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-secondary btn-width-lg">Reply</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="tt-topic-list tt-offset-top-30">
@@ -258,13 +258,13 @@
             $randomcolor = 1;
             @endphp
             @foreach($forum_list as $value)
-            @php           
+            @php
             if($randomcolor==9)
             {
-                $randomcolor = 1;
+            $randomcolor = 1;
             }
             @endphp
-            <div class="tt-item"  id="usnames">
+            <div class="tt-item" id="usnames">
                 <div class="tt-col-avatar flvalues">
                     <!-- <svg class="tt-icon">
                         <use xlink:href="#icon-ava-n"></use>
@@ -277,7 +277,7 @@
                         <a href="{{route('admin.forum.page-single-topic-val',[$value['id'],$value['user_id']])}}">
                             {{ $value['topic_title'] }}
                         </a>
-                    </h6>                
+                    </h6>
                 </div>
                 <div class="tt-col-category flvalues">
                     <span class="tt-color0{{$randomcolor}} tt-badge">{{$value['category_names'] }}</span>
@@ -307,8 +307,8 @@
                     @php
                     echo App\Http\Controllers\CommonController::get_timeago(strtotime($value['created_at']));
                     @endphp
-                </div> 
-                              
+                </div>
+
             </div>
             @php
             $randomcolor++;
@@ -327,12 +327,18 @@
 </main>
 @endsection
 @section('scripts')
-<script src="{{ asset('js/custom/forum-post-countsothers.js') }}"></script>
 <script>
+    var myEditor;
+
     ClassicEditor
         .create(document.querySelector('#repliesinput'))
-        .catch(error => {
-            console.error(error);
+        .then(editor => {
+            console.log('Editor was initialized', editor);
+            myEditor = editor;
+        })
+        .catch(err => {
+            console.error(err.stack);
         });
 </script>
+<script src="{{ asset('js/custom/forum-post-countsothers.js') }}"></script>
 @endsection

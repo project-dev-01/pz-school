@@ -42,19 +42,19 @@ $(function () {
     });
 
     // replies command insert 
-    $('#postreplie').on('click', function (e) {
+    $('#postreplie').on('submit', function (e) {
         e.preventDefault();
         var create_post_id = $("#hdpk_post_id").text();
         var replies_com = $("#repliesinput").val();
       //  var desc = CKEDITOR.instances['repliesinput'].getData();
-        var desca = CKEDITOR.instances.repliesinput.getData();
-        console.log(desc);
-        console.log(desca);
-        console.log(replies_com);
+      //  var desca = CKEDITOR.instances.repliesinput.getData();
+      var ckval= myEditor.getData();   
+        console.log(ckval);
         $.post(repliesforpost, { token: token, branch_id: branch_id, user_id: user_id, user_name: user_name, create_post_id: create_post_id, replies_com: replies_com }, function (res) {
             if (res.code == 200) {
                 toastr.success(res.message);
                 console.log(res);
+                $("#repliesinput").val('');
                 let _this = this;
                 $("#repliesjsvs").find("#repliesapply").append(
                     '<div class="tt-item">' +
@@ -118,7 +118,7 @@ $(function () {
                     '</div>'
                 );
 
-                $("#repliesinput").empty();
+               
             } else {
                 toastr.error(res.message);
             }
