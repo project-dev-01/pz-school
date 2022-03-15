@@ -64,6 +64,26 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('assign_teacher/update', [ApiController::class, 'updateTeacherAllocation']);
     Route::post('assign_teacher/delete', [ApiController::class, 'deleteTeacherAllocation']);
     Route::post('branch-by-assign-teacher', [ApiController::class, 'branchIdByTeacherAllocation']);
+    // Add Subjects
+    Route::post('subjects/add',[ApiController::class,'addSubjects']);
+    Route::get('subjects/list', [ApiController::class, 'getSubjectsList']);
+    Route::post('subjects/subjects-details',[ApiController::class, 'getSubjectsDetails']);
+    Route::post('subjects/update',[ApiController::class, 'updateSubjects']);
+    Route::post('subjects/delete', [ApiController::class, 'deleteSubjects']);
+
+    // class assign
+    Route::post('class_assign/add',[ApiController::class,'addClassAssign']);
+    Route::get('class_assign/list', [ApiController::class, 'getClassAssignList']);
+    Route::post('class_assign/class_assign-details',[ApiController::class, 'getClassAssignDetails']);
+    Route::post('class_assign/update',[ApiController::class, 'updateClassAssign']);
+    Route::post('class_assign/delete',[ApiController::class, 'deleteClassAssign']);
+
+    // Teacher subject assign
+    Route::post('teacher_assign/add',[ApiController::class,'addTeacherSubject']);
+    Route::get('teacher_assign/list', [ApiController::class, 'getTeacherListSubject']);
+    Route::post('teacher_assign/teacher_assign-details',[ApiController::class, 'getTeacherDetailsSubject']);
+    Route::post('teacher_assign/update',[ApiController::class, 'updateTeacherSubject']);
+    Route::post('teacher_assign/delete',[ApiController::class, 'deleteTeacherSubject']);
     
 
     // branch id by class

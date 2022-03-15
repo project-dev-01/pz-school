@@ -656,25 +656,41 @@ class ApiController extends BaseController
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
             'branch_id' => 'required',
-            'class_name' => 'required',
-            'section_name' => 'required',
-            'class_teacher' => 'required'
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'teacher_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $teacherAllocation = new TeacherAllocation();
-            $teacherAllocation->class_id = $request->class_name;
-            $teacherAllocation->section_id = $request->section_name;
-            $teacherAllocation->teacher_id = $request->class_teacher;
-            $teacherAllocation->branch_id = $request->branch_id;
-            $query = $teacherAllocation->save();
-            $success = [];
-            if (!$query) {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($createConnection->table('teacher_allocations')->where([['section_id', $request->section_id], ['class_id', $request->class_id], ['teacher_id', $request->teacher_id]])->count() > 0) {
+                return $this->send422Error('Class Teacher Already Assigned', ['error' => 'Class Teacher Already Assigned']);
             } else {
-                return $this->successResponse($success, 'Teacher Allocation has been successfully saved');
+                $arrayData = array(
+                    'class_id' => $request->class_id,
+                    'section_id' => $request->section_id,
+                    'teacher_id' => $request->teacher_id,
+                    'created_at' => date("Y-m-d H:i:s")
+                );
+                // insert data
+                $query = $createConnection->table('teacher_allocations')->insert($arrayData);
+                $success = [];
+                // unset($arrayData['teacher_id']);
+
+                // $createConnection->table('subject_assigns')->where($arrayData)->update([
+                //     'teacher_id' => $request->teacher_id,
+                //     'updated_at' => date("Y-m-d H:i:s")
+                // ]);
+
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Teacher Allocation has been successfully saved');
+                }
             }
         }
     }
@@ -685,17 +701,20 @@ class ApiController extends BaseController
 
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
+            'branch_id' => 'required',
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $success = DB::table('teacher_allocations as ta')
-                ->select('ta.id', 'ta.class_id', 'ta.section_id', 'ta.teacher_id', 's.name as section_name', 'c.name as class_name', 'u.name as teacher_name', 'b.name as branch_name')
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // insert data
+            $success = $createConnection->table('teacher_allocations as ta')
+                ->select('ta.id', 'ta.class_id', 'ta.section_id', 'ta.teacher_id', 's.name as section_name', 'c.name as class_name', 'st.name as teacher_name')
                 ->join('sections as s', 'ta.section_id', '=', 's.id')
-                ->join('branches as b', 'ta.branch_id', '=', 'b.id')
+                ->join('staffs as st', 'ta.teacher_id', '=', 'st.id')
                 ->join('classes as c', 'ta.class_id', '=', 'c.id')
-                ->join('users as u', 'ta.teacher_id', '=', 'u.id')
                 ->get();
             return $this->successResponse($success, 'Teacher Allocation record fetch successfully');
         }
@@ -705,64 +724,87 @@ class ApiController extends BaseController
     {
 
         $validator = \Validator::make($request->all(), [
-            'teacher_allocation__id' => 'required',
+            'id' => 'required',
             'token' => 'required',
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $teacher_allocation__id = $request->teacher_allocation__id;
-            $teacherAllocationDetails = TeacherAllocation::find($teacher_allocation__id);
-            return $this->successResponse($teacherAllocationDetails, 'Teacher Allocation row fetch successfully');
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // insert data
+            $sectionDetails = $createConnection->table('teacher_allocations')->where('id', $request->id)->get();
+            return $this->successResponse($sectionDetails, 'Teacher Allocation row fetch successfully');
+
+            // $teacher_allocation__id = $request->teacher_allocation__id;
+            // $teacherAllocationDetails = TeacherAllocation::find($teacher_allocation__id);
+            // return $this->successResponse($teacherAllocationDetails, 'Teacher Allocation row fetch successfully');
         }
     }
     // update TeacherAllocation
     public function updateTeacherAllocation(Request $request)
     {
-        $teacher_allocation__id = $request->teacher_allocation__id;
-
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
             'branch_id' => 'required',
-            'class_name' => 'required',
-            'section_name' => 'required',
-            'class_teacher' => 'required'
+            'id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'teacher_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-
-            $teacherAllocation = TeacherAllocation::find($teacher_allocation__id);
-            $teacherAllocation->class_id = $request->class_name;
-            $teacherAllocation->section_id = $request->section_name;
-            $teacherAllocation->teacher_id = $request->class_teacher;
-            $teacherAllocation->branch_id = $request->branch_id;
-            $query = $teacherAllocation->save();
-            $success = [];
-            if ($query) {
-                return $this->successResponse($success, 'Teacher Allocation Details have Been updated');
+            $id = $request->id;
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($createConnection->table('teacher_allocations')->where([['section_id', $request->section_id], ['class_id', $request->class_id], ['teacher_id', $request->teacher_id], ['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Class Teacher Already Assigned', ['error' => 'Class Teacher Already Assigned']);
             } else {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                $arrayData = array(
+                    'class_id' => $request->class_id,
+                    'section_id' => $request->section_id,
+                    'teacher_id' => $request->teacher_id,
+                    'updated_at' => date("Y-m-d H:i:s")
+                );
+                // dd($arrayData);
+                // update data
+                $query = $createConnection->table('teacher_allocations')->where('id', $id)->update($arrayData);
+                // unset($arrayData['teacher_id']);
+
+                // $createConnection->table('subject_assigns')->where($arrayData)->update([
+                //     'teacher_id' => $request->teacher_id,
+                //     'updated_at' => date("Y-m-d H:i:s")
+                // ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Teacher Allocation Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
             }
         }
     }
-
     // delete TeacherAllocation
     public function deleteTeacherAllocation(Request $request)
     {
-
-        $teacher_allocation__id = $request->teacher_allocation__id;
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
-            'teacher_allocation__id' => 'required',
+            'id' => 'required',
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $query = TeacherAllocation::find($teacher_allocation__id)->delete();
+            $id = $request->id;
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $createConnection->table('teacher_allocations')->where('id', $id)->delete();
+
             $success = [];
             if ($query) {
                 return $this->successResponse($success, 'Teacher Allocation have been deleted successfully');
@@ -771,7 +813,450 @@ class ApiController extends BaseController
             }
         }
     }
+    // add subjects
+    public function addSubjects(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($createConnection->table('subjects')->where([['name', $request->name]])->count() > 0) {
+                return $this->send422Error('Already Allocated Subjects', ['error' => 'Already Allocated Subjects']);
+            } else {
+                // insert data
+                $query = $createConnection->table('subjects')->insert([
+                    'name' => $request->name,
+                    'subject_code' => $request->subject_code,
+                    'subject_type' => $request->subject_type,
+                    'subject_author' => $request->subject_author,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Subjects has been successfully saved');
+                }
+            }
+        }
+    }
+    // get all subjects data
+    public function getSubjectsList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $secConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $subjectDetails = $secConn->table('subjects')->get();
+            return $this->successResponse($subjectDetails, 'Subject record fetch successfully');
+        }
+    }
+    // get row subjects
+    public function getSubjectsDetails(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required'
+        ]);
 
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            $sectionDetails = $createConnection->table('subjects')->where('id', $request->id)->get();
+            return $this->successResponse($sectionDetails, 'Subject row fetch successfully');
+        }
+    }
+    // update subjects
+    public function updateSubjects(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'name' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($createConnection->table('subjects')->where([['name', $request->name], ['id', '!=', $request->id]])->count() > 0) {
+                return $this->send422Error('Already Allocated Subjects', ['error' => 'Already Allocated Subjects']);
+            } else {
+                // update data
+                $query = $createConnection->table('subjects')->where('id', $request->id)->update([
+                    'name' => $request->name,
+                    'subject_code' => $request->subject_code,
+                    'subject_type' => $request->subject_type,
+                    'subject_author' => $request->subject_author,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Subject Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+            }
+        }
+    }
+    // delete subjects
+    public function deleteSubjects(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            $id = $request->id;
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $createConnection->table('subjects')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Subjects have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+    // add class assign
+    public function addClassAssign(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+
+            $getCount = $createConnection->table('subject_assigns')
+                ->where(
+                    [
+                        ['section_id', $request->section_id],
+                        ['class_id', $request->class_id],
+                        ['subject_id', $request->subject_id]
+                    ]
+                )
+                ->count();
+            if ($getCount > 0) {
+                return $this->send422Error('This class and section is already assigned', ['error' => 'This class and section is already assigned']);
+            } else {
+                $arraySubject = array(
+                    'class_id' =>  $request->class_id,
+                    'section_id' => $request->section_id,
+                    'subject_id' => $request->subject_id,
+                    'teacher_id' => 0,
+                    'created_at' => date("Y-m-d H:i:s")
+                );
+                // insert data
+                $query = $createConnection->table('subject_assigns')->insert($arraySubject);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Class assign has been successfully saved');
+                }
+            }
+        }
+    }
+    // get class assign
+    public function getClassAssignList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            $success = $createConnection->table('subject_assigns as sa')
+                ->select('sa.id', 'sa.class_id', 'sa.section_id', 'sa.subject_id', 'sa.teacher_id', 's.name as section_name', 'sb.name as subject_name', 'c.name as class_name', 'st.name as teacher_name')
+                ->join('sections as s', 'sa.section_id', '=', 's.id')
+                ->join('staffs as st', 'sa.teacher_id', '=', 'st.id')
+                ->join('subjects as sb', 'sa.subject_id', '=', 'sb.id')
+                ->join('classes as c', 'sa.class_id', '=', 'c.id')
+                ->get();
+            return $this->successResponse($success, 'Section Allocation record fetch successfully');
+        }
+    }
+    // get class assign row
+    public function getClassAssignDetails(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // insert data
+            $classAssign = $createConnection->table('subject_assigns')->where('id', $request->id)->get();
+            return $this->successResponse($classAssign, 'Class assign row fetch successfully');
+        }
+    }
+    // update class assign
+    public function updateClassAssign(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+
+            $getCount = $createConnection->table('subject_assigns')
+                ->where(
+                    [
+                        ['section_id', $request->section_id],
+                        ['class_id', $request->class_id],
+                        ['subject_id', $request->subject_id],
+                        ['id', '!=', $request->id]
+                    ]
+                )
+                ->count();
+            if ($getCount > 0) {
+                return $this->send422Error('This class and section is already assigned', ['error' => 'This class and section is already assigned']);
+            } else {
+                $arraySubject = array(
+                    'class_id' =>  $request->class_id,
+                    'section_id' => $request->section_id,
+                    'subject_id' => $request->subject_id,
+                    'updated_at' => date("Y-m-d H:i:s")
+                );
+                // update data
+                $query = $createConnection->table('subject_assigns')->where('id', $request->id)->update($arraySubject);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Class assign details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+            }
+        }
+    }
+    // delete class assign
+    public function deleteClassAssign(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            $id = $request->id;
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $createConnection->table('subject_assigns')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Class assign have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+    // add teacher assign
+    public function addTeacherSubject(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'teacher_id' => 'required',
+            'subject_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+
+            $getCount = $createConnection->table('subject_assigns')
+                ->where(
+                    [
+                        ['section_id', $request->section_id],
+                        ['class_id', $request->class_id],
+                        ['subject_id', $request->subject_id],
+                        ['teacher_id', $request->teacher_id]
+                    ]
+                )
+                ->count();
+            if ($getCount > 0) {
+                return $this->send422Error('This teacher is already assigned to this class and section', ['error' => 'This teacher is already assigned to this class and section']);
+            } else {
+                $arraySubject = array(
+                    'class_id' =>  $request->class_id,
+                    'section_id' => $request->section_id,
+                    'subject_id' => $request->subject_id,
+                    'teacher_id' => $request->teacher_id,
+                    'created_at' => date("Y-m-d H:i:s")
+                );
+                // insert data
+                $query = $createConnection->table('subject_assigns')->insert($arraySubject);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Teacher assign has been successfully saved');
+                }
+            }
+        }
+    }
+    // get assign teacher subject
+    public function getTeacherListSubject(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            $success = $createConnection->table('subject_assigns as sa')
+                ->select('sa.id', 'sa.class_id', 'sa.section_id', 'sa.subject_id', 'sa.teacher_id', 's.name as section_name', 'sb.name as subject_name', 'c.name as class_name', 'st.name as teacher_name')
+                ->join('sections as s', 'sa.section_id', '=', 's.id')
+                ->join('staffs as st', 'sa.teacher_id', '=', 'st.id')
+                ->join('subjects as sb', 'sa.subject_id', '=', 'sb.id')
+                ->join('classes as c', 'sa.class_id', '=', 'c.id')
+                ->get();
+            return $this->successResponse($success, 'Teacher record fetch successfully');
+        }
+    }
+    // get assign teacher subject row
+    public function getTeacherDetailsSubject(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // insert data
+            $classAssign = $createConnection->table('subject_assigns')->where('id', $request->id)->get();
+            return $this->successResponse($classAssign, 'Teacher assign row fetch successfully');
+        }
+    }
+    // update assign teacher subject
+    public function updateTeacherSubject(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
+            'teacher_id' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+
+            $getCount = $createConnection->table('subject_assigns')
+                ->where(
+                    [
+                        ['section_id', $request->section_id],
+                        ['class_id', $request->class_id],
+                        ['subject_id', $request->subject_id],
+                        // ['teacher_id', $request->teacher_id],
+                        ['id', '!=', $request->id]
+                    ]
+                )
+                ->count();
+            if ($getCount > 0) {
+                return $this->send422Error('This subject is already assigned to this class and section', ['error' => 'This subject is already assigned to this class and section']);
+            } else {
+                $arraySubject = array(
+                    'class_id' =>  $request->class_id,
+                    'section_id' => $request->section_id,
+                    'subject_id' => $request->subject_id,
+                    'teacher_id' => $request->teacher_id,
+                    'updated_at' => date("Y-m-d H:i:s")
+                );
+                // update data
+                $query = $createConnection->table('subject_assigns')->where('id', $request->id)->update($arraySubject);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Teacher subject details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+            }
+        }
+    }
+    // delete assign teacher subject
+    public function deleteTeacherSubject(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            $id = $request->id;
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $createConnection->table('subject_assigns')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Subject Teacher been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
     // branchIdByTeacherAllocation 
     public function branchIdByTeacherAllocation(Request $request)
     {
@@ -2321,108 +2806,108 @@ class ApiController extends BaseController
             return $this->successResponse($success, 'Post record fetch successfully');
         }
     }
-        // forum all Threads post branch id wise
-        public function ThreadspostList(Request $request)
-        {
-            $validator = \Validator::make($request->all(), [
-                'token' => 'required',
-                'branch_id' => 'required'
-            ]);
-    
-            if (!$validator->passes()) {
-                return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-            } else {
-    
-                $success = DB::table("forum_posts")
-                    ->select(
-                        'forum_posts.id as id',
-                        'forum_posts.topic_title',
-                        'forum_posts.user_id as user_id',
-                        'forum_posts.user_name',
-                        'forum_categorys.category_names',
-                        'forum_posts.topic_header',
-                        'forum_posts.created_at',
-                        'forum_posts.category',
-                        'forum_count_details.likes',
-                        'forum_count_details.dislikes',
-                        'forum_count_details.views',
-                        'forum_count_details.replies',
-                        'forum_count_details.favorite',
-                        'favorite',
-                        'activity'
-                    )
-    
-                    ->leftjoin(
-                        DB::raw("(SELECT user_id,user_name,created_post_id,SUM(likes) as likes,SUM(dislikes) as dislikes,SUM(views) as views,SUM(replies) as replies ,SUM(favorite) as favorite,activity FROM forum_count_details GROUP BY created_post_id) as forum_count_details"),
-                        function ($join) {
-                            $join->on("forum_count_details.created_post_id", "=", "forum_posts.id");
-                        }
-                    )
-                    ->leftjoin(
-                        DB::raw("(SELECT id as category_id,category_names from forum_categorys) as forum_categorys"),
-                        function ($join) {
-    
-                            $join->on("forum_categorys.category_id", "=", "forum_posts.category");
-                        }
-                    )
-                    ->where('forum_posts.branch_id', '=', $request->branch_id)
-                    ->where('forum_posts.threads_status', '=', 1)
-                    ->get();
-                return $this->successResponse($success, 'Threads Post record fetch successfully');
-            }
+    // forum all Threads post branch id wise
+    public function ThreadspostList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            $success = DB::table("forum_posts")
+                ->select(
+                    'forum_posts.id as id',
+                    'forum_posts.topic_title',
+                    'forum_posts.user_id as user_id',
+                    'forum_posts.user_name',
+                    'forum_categorys.category_names',
+                    'forum_posts.topic_header',
+                    'forum_posts.created_at',
+                    'forum_posts.category',
+                    'forum_count_details.likes',
+                    'forum_count_details.dislikes',
+                    'forum_count_details.views',
+                    'forum_count_details.replies',
+                    'forum_count_details.favorite',
+                    'favorite',
+                    'activity'
+                )
+
+                ->leftjoin(
+                    DB::raw("(SELECT user_id,user_name,created_post_id,SUM(likes) as likes,SUM(dislikes) as dislikes,SUM(views) as views,SUM(replies) as replies ,SUM(favorite) as favorite,activity FROM forum_count_details GROUP BY created_post_id) as forum_count_details"),
+                    function ($join) {
+                        $join->on("forum_count_details.created_post_id", "=", "forum_posts.id");
+                    }
+                )
+                ->leftjoin(
+                    DB::raw("(SELECT id as category_id,category_names from forum_categorys) as forum_categorys"),
+                    function ($join) {
+
+                        $join->on("forum_categorys.category_id", "=", "forum_posts.category");
+                    }
+                )
+                ->where('forum_posts.branch_id', '=', $request->branch_id)
+                ->where('forum_posts.threads_status', '=', 1)
+                ->get();
+            return $this->successResponse($success, 'Threads Post record fetch successfully');
         }
-        public function userThreadspostList(Request $request)
-        {
-            $validator = \Validator::make($request->all(), [
-                'token' => 'required',
-                'branch_id' => 'required',
-                'user_id'=>'required'
-            ]);
-            
-            if (!$validator->passes()) {
-                return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-            } else {
-    
-                $success = DB::table("forum_posts")
-                    ->select(
-                        'forum_posts.id as id',
-                        'forum_posts.topic_title',
-                        'forum_posts.user_id as user_id',
-                        'forum_posts.user_name',
-                        'forum_categorys.category_names',
-                        'forum_posts.topic_header',
-                        'forum_posts.created_at',
-                        'forum_posts.category',
-                        'forum_count_details.likes',
-                        'forum_count_details.dislikes',
-                        'forum_count_details.views',
-                        'forum_count_details.replies',
-                        'forum_count_details.favorite',
-                        'favorite',
-                        'activity',
-                        'forum_posts.threads_status'
-                    )
-    
-                    ->leftjoin(
-                        DB::raw("(SELECT user_id,user_name,created_post_id,SUM(likes) as likes,SUM(dislikes) as dislikes,SUM(views) as views,SUM(replies) as replies ,SUM(favorite) as favorite,activity FROM forum_count_details GROUP BY created_post_id) as forum_count_details"),
-                        function ($join) {
-                            $join->on("forum_count_details.created_post_id", "=", "forum_posts.id");
-                        }
-                    )
-                    ->leftjoin(
-                        DB::raw("(SELECT id as category_id,category_names from forum_categorys) as forum_categorys"),
-                        function ($join) {
-    
-                            $join->on("forum_categorys.category_id", "=", "forum_posts.category");
-                        }
-                    )
-                    ->where('forum_posts.branch_id', '=', $request->branch_id)
-                    ->where('forum_posts.user_id', '=', $request->user_id)
-                    ->get();
-                return $this->successResponse($success, 'Threads Post record fetch successfully');
-            }
+    }
+    public function userThreadspostList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'user_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            $success = DB::table("forum_posts")
+                ->select(
+                    'forum_posts.id as id',
+                    'forum_posts.topic_title',
+                    'forum_posts.user_id as user_id',
+                    'forum_posts.user_name',
+                    'forum_categorys.category_names',
+                    'forum_posts.topic_header',
+                    'forum_posts.created_at',
+                    'forum_posts.category',
+                    'forum_count_details.likes',
+                    'forum_count_details.dislikes',
+                    'forum_count_details.views',
+                    'forum_count_details.replies',
+                    'forum_count_details.favorite',
+                    'favorite',
+                    'activity',
+                    'forum_posts.threads_status'
+                )
+
+                ->leftjoin(
+                    DB::raw("(SELECT user_id,user_name,created_post_id,SUM(likes) as likes,SUM(dislikes) as dislikes,SUM(views) as views,SUM(replies) as replies ,SUM(favorite) as favorite,activity FROM forum_count_details GROUP BY created_post_id) as forum_count_details"),
+                    function ($join) {
+                        $join->on("forum_count_details.created_post_id", "=", "forum_posts.id");
+                    }
+                )
+                ->leftjoin(
+                    DB::raw("(SELECT id as category_id,category_names from forum_categorys) as forum_categorys"),
+                    function ($join) {
+
+                        $join->on("forum_categorys.category_id", "=", "forum_posts.category");
+                    }
+                )
+                ->where('forum_posts.branch_id', '=', $request->branch_id)
+                ->where('forum_posts.user_id', '=', $request->user_id)
+                ->get();
+            return $this->successResponse($success, 'Threads Post record fetch successfully');
         }
-    
+    }
+
     // forum single post branch id and user id wise
     public function singlePost(Request $request)
     {

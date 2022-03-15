@@ -7,9 +7,9 @@ $(function () {
         $('#right-modal-dashboard').modal('show');
         // $('#myModal').modal('hide');
     });
-    $("#classDate").datepicker({
-        dateFormat: 'dd-mm-yy'
-    });
+    // $("#classDate").datepicker({
+    //     dateFormat: 'dd-mm-yy'
+    // });
 
     
     // add department
