@@ -279,7 +279,7 @@ class TeacherController extends Controller
     }
     function addShortTest(Request $request)
     {
-
+        // dd($request);
         $data = [
             "short_test" => $request->short_test,
             "date" => $request->date,

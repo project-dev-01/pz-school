@@ -34,6 +34,7 @@ use App\Models\Forum_count_details;
 use App\Models\Forum_post_replies;
 use Carbon\Carbon;
 use App\Models\Forum_post_replie_counts;
+use Illuminate\Support\Arr;
 
 class ApiController extends BaseController
 {
@@ -3443,7 +3444,9 @@ class ApiController extends BaseController
             'token' => 'required',
             'branch_id' => 'required',
             'class_id' => 'required',
-            'section_id' => 'required'
+            'section_id' => 'required',
+            'date' => 'required',
+            'subject_id' => 'required'
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -3453,21 +3456,45 @@ class ApiController extends BaseController
             $date = $request->date;
             $subject_id = $request->subject_id;
             $Connection = $this->createNewConnection($request->branch_id);
-            $getTeachersClassName = $Connection->table('enrolls as en')
+            // $getTeachersClassName = $Connection->table('enrolls as en')
+            //     ->select(
+            //         'en.student_id',
+            //         'en.roll',
+            //         'st.first_name',
+            //         'st.last_name'
+            //     )
+            //     ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
+            //     ->where([
+            //         ['en.class_id', '=', $request->class_id],
+            //         ['en.section_id', '=', $request->section_id]
+            //     ])
+            //     ->get();
+            $getShortTest = $Connection->table('enrolls as en')
                 ->select(
                     'en.student_id',
                     'en.roll',
                     'st.first_name',
-                    'st.last_name'
+                    'st.last_name',
+                    'st.register_no',
+                    'sht.id as short_test_id',
+                    'sht.test_marks',
+                    'sht.grade_status',
+                    'sht.date',
+                    'sht.test_name'
                 )
                 ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
+                ->leftJoin('short_tests as sht', function ($q) use ($date, $subject_id) {
+                    $q->on('sht.student_id', '=', 'st.id')
+                        ->on('sht.date', '=', DB::raw("'$date'")) //second join condition                           
+                        ->on('sht.subject_id', '=', DB::raw("'$subject_id'")); //need to add subject id also later                           
+                })
                 ->where([
                     ['en.class_id', '=', $request->class_id],
                     ['en.section_id', '=', $request->section_id]
                 ])
+                // ->groupBy('en.student_id')
                 ->get();
-
-            return $this->successResponse($getTeachersClassName, 'Short test record fetch successfully');
+            return $this->successResponse($getShortTest, 'Short test record fetch successfully');
         }
     }
     // add short test
@@ -3496,13 +3523,24 @@ class ApiController extends BaseController
             $date = $request->date;
 
             foreach ($short_test as $key => $value) {
+                // $test_name = (count($value['test_name'][0]) > 0) ? implode(",", $value['test_name'][0]) : "";
+                // $grade_status = (count($value['grade_status'][0]) > 0) ? implode(",", $value['grade_status'][0]) : "";
+                // $test_marks = (count($value['test_marks'][0]) > 0) ? implode(",", $value['test_marks'][0]) : "";
+                $newTestName = $value['test_name'];
+                $newgradeStatus = $value['grade_status'];
+                $newtestMarks = $value['test_marks'];
+                $test_name = (count($value['test_name']) > 0) ? implode(",", $value['test_name']) : "";
+                $grade_status = (count($value['grade_status']) > 0) ? implode(",", $value['grade_status']) : "";
+                $test_marks = (count($value['test_marks']) > 0) ? implode(",", $value['test_marks']) : "";
                 // dd($value['attendance_id']);
-                $grade_status = (isset($value['grade_status']) ? $value['grade_status'] : "");
-                $test_marks = (isset($value['test_marks']) ? $value['test_marks'] : "");
-
+                // $grade_status = (isset($value['grade_status']) ? $value['grade_status'] : "");
+                // $test_marks = (isset($value['test_marks']) ? $value['test_marks'] : "");
+                // foreach($test_name as $key => $value) {
+                //     print_r($value);
+                // }
                 $addShortTest = array(
                     'student_id' => $value['student_id'],
-                    'test_name' => $value['test_name'],
+                    'test_name' => $test_name,
                     'grade_status' => $grade_status,
                     'test_marks' => $test_marks,
                     'date' => $date,
@@ -3511,12 +3549,79 @@ class ApiController extends BaseController
                     'subject_id' => $subject_id,
                     'created_at' => date("Y-m-d H:i:s")
                 );
-                $checkExist = $Connection->table('short_tests')->where([['test_name', '=', $value['test_name']], ['date', '=', $date], ['student_id', '=', $value['student_id']]])->first();
+                // echo $key;
+                // echo gettype($test_name);
+                // print_r($addShortTest);
+                $checkExist = $Connection->table('short_tests')->where([
+                    // ['test_name', '=', $value['test_name']],
+                    ['date', '=', $date],
+                    ['student_id', '=', $value['student_id']]
+                ])->first();
+                // $checkExist = $Connection->table('short_tests')->where([['test_name', '=', $value['test_name']], ['date', '=', $date], ['student_id', '=', $value['student_id']]])->first();
 
-                if ($Connection->table('short_tests')->where([['test_name', '=', $value['test_name']], ['date', '=', $date], ['student_id', '=', $value['student_id']]])->count() > 0) {
+                // if ($Connection->table('short_tests')->where([['test_name', '=', $value['test_name']], ['date', '=', $date], ['student_id', '=', $value['student_id']]])->count() > 0) {
+                if ($Connection->table('short_tests')->where([['date', '=', $date], ['student_id', '=', $value['student_id']]])->count() > 0) {
+                    // print_r($checkExist->test_name);
+                    // print_r($test_name);
+                    $dbTestname = explode(",", $checkExist->test_name);
+                    $dbTestMarks = explode(",", $checkExist->test_marks);
+                    $dbGradeStatus = explode(",", $checkExist->grade_status);
+
+                    // $dbTestMarks = explode(",", $checkExist->test_marks);
+                    $testNames = array();
+                    $gradeStatus = array();
+                    $testMarks = array();
+
+                    if (isset($newTestName)) {
+                        foreach ($newTestName as $key => $val) {
+                            if (in_array($val, $dbTestname)) {
+                                // Match found
+                                array_push($testNames, $val);
+                                array_push($gradeStatus, $newgradeStatus[$key]);
+                                array_push($testMarks, $newtestMarks[$key]);
+                            } else {
+                                // Match not found
+                                array_push($testNames, $newTestName[$key]);
+                                array_push($gradeStatus, $newgradeStatus[$key]);
+                                array_push($testMarks, $newtestMarks[$key]);
+                            }
+                        }
+                    }
+
+                    $dbTestMarks = explode(",", $checkExist->test_marks);
+                    $dbGradeStatus = explode(",", $checkExist->grade_status);
+                    // print_r($gradeStatus);
+                    // print_r($testMarks);
+                    $result = array_diff_assoc($dbTestname, $testNames);
+                    if (isset($result)) {
+                        foreach ($result as $key => $val) {
+                            array_push($testNames, $val);
+                            array_push($gradeStatus, $dbGradeStatus[$key]);
+                            array_push($testMarks, $dbTestMarks[$key]);
+                        }
+                    }
+                    // print_r($testNames);
+                    // print_r($gradeStatus);
+                    // print_r($testMarks);
+
+                    // array_push($testNames, $result);
+
+                    // print_r($testNames);
+                    // $result=array_diff($testNames,$dbTestname);
+                    // print_r($result);
+                    // $currentTestname = explode(",", $test_name);
+                    // $result = array_diff($dbTestname, $currentTestname);
+                    // print_r($value['test_name']);
+                    // echo "<br>";
+                    // print_r($currentTestname);
+                    // echo "<br>";
+                    // print_r($result);
+
+                    // exit;
                     $Connection->table('short_tests')->where('id', $checkExist->id)->update([
-                        'grade_status' => $grade_status,
-                        'test_marks' => $test_marks,
+                        'test_name' => implode(",", $testNames),
+                        'grade_status' => implode(",", $gradeStatus),
+                        'test_marks' => implode(",", $testMarks),
                         'updated_at' => date("Y-m-d H:i:s")
                     ]);
                 } else {
@@ -3568,7 +3673,8 @@ class ApiController extends BaseController
             'branch_id' => 'required',
             'class_id' => 'required',
             'section_id' => 'required',
-            'subject_id' => 'required'
+            'subject_id' => 'required',
+            'date' => 'required'
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -3592,8 +3698,27 @@ class ApiController extends BaseController
                     ['dr.subject_id', '=', $request->subject_id],
                 ])
                 ->get();
-
-            return $this->successResponse($getDailyReportRemarks, 'Daily report remarks fetch successfully');
+            $getDailyReport = $Connection->table('daily_reports as dr')
+                ->select(
+                    'dr.date',
+                    'dr.class_id',
+                    'dr.section_id',
+                    'dr.report',
+                    'dr.subject_id',
+                    'dr.id'
+                )
+                ->where([
+                    ['dr.class_id', '=', $request->class_id],
+                    ['dr.section_id', '=', $request->section_id],
+                    ['dr.subject_id', '=', $request->subject_id],
+                    ['dr.date', '=', $request->date]
+                ])
+                ->first();
+            $data = [
+                'get_daily_report_remarks' => $getDailyReportRemarks,
+                'get_daily_report' => $getDailyReport
+            ];
+            return $this->successResponse($data, 'Daily report remarks fetch successfully');
         }
     }
     // addDailyReportRemarks
@@ -3647,6 +3772,11 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
+            $query_date = $request->date;
+            // First day of the month.
+            $startDate = date('Y-m-01', strtotime($query_date));
+            // Last day of the month.
+            $endDate = date('Y-m-t', strtotime($query_date));
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
             $getWidgetDetails = $Connection->table('student_attendances as sa')
@@ -3654,7 +3784,6 @@ class ApiController extends BaseController
                     DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
                     DB::raw('COUNT(CASE WHEN sa.status = "absent" then 1 ELSE NULL END) as "absentCount"'),
                     DB::raw('COUNT(CASE WHEN sa.status = "late" then 1 ELSE NULL END) as "lateCount"'),
-                    DB::raw('COUNT(sa.student_id) as "totalStudentCount"')
                 )
                 ->where([
                     ['sa.class_id', '=', $request->class_id],
@@ -3664,15 +3793,11 @@ class ApiController extends BaseController
                 ])
                 ->get();
 
-            $query_date = $request->date;
-            // First day of the month.
-            $startDate = date('Y-m-01', strtotime($query_date));
-            // Last day of the month.
-            $endDate = date('Y-m-t', strtotime($query_date));
-
             $avgAttendance = $Connection->table('student_attendances as sa')
                 ->select(
                     DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "absent" then 1 ELSE NULL END) as "absentCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "late" then 1 ELSE NULL END) as "lateCount"'),
                     DB::raw('COUNT(DISTINCT sa.date) as "totalDate"')
                 )
                 ->where([
@@ -3683,9 +3808,38 @@ class ApiController extends BaseController
                 ->whereBetween(DB::raw('date(date)'), [$startDate, $endDate])
                 ->get();
 
+            $getStudentData = $Connection->table('student_attendances as sa')
+                ->select(
+                    DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "absent" then 1 ELSE NULL END) as "absentCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "late" then 1 ELSE NULL END) as "lateCount"'),
+                    DB::raw('COUNT(sa.date) as "totalDaysCount"')
+                )
+                ->where([
+                    ['sa.class_id', '=', $request->class_id],
+                    ['sa.section_id', '=', $request->section_id],
+                    ['sa.subject_id', '=', $request->subject_id],
+                    // ['sa.date', '=', $request->date],
+                ])
+                ->whereBetween(DB::raw('date(date)'), [$startDate, $endDate])
+                ->groupBy('sa.student_id')
+                ->get();
+
+            $totalStudent = $Connection->table('enrolls as en')
+                ->select(
+                    DB::raw('COUNT(en.student_id) as "totalStudentCount"')
+                )
+                ->where([
+                    ['en.class_id', '=', $request->class_id],
+                    ['en.section_id', '=', $request->section_id]
+                ])
+                ->get();
             $data = [
                 'avg_attendance' => $avgAttendance,
-                'get_widget_details' => $getWidgetDetails
+                'get_widget_details' => $getWidgetDetails,
+                'get_student_data' => $getStudentData,
+                'total_student' => $totalStudent,
+
             ];
             return $this->successResponse($data, 'Wigget record fetch successfully');
         }

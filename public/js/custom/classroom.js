@@ -152,15 +152,24 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (response) {
-                    var dataSetNew = response.data;
                     if (response.code == 200) {
-                        getReportRemarks(dataSetNew)
+                        var dataSetNew = response.data.get_daily_report_remarks;
+                        var getDailyReport = response.data.get_daily_report;
+                        if (getDailyReport) {
+                            var daily_report = (getDailyReport.report != null ? getDailyReport.report : "");
+                            $("#daily_report").val(daily_report);
+                        } else {
+                            $("#daily_report").val('');
+                        }
+                        getReportRemarks(dataSetNew);
                     } else {
                         toastr.error(data.message);
                     }
                 }
             });
             widgetShow(formData);
+            getShortTestData(formData);
+
         }
     });
 
@@ -308,18 +317,52 @@ $(function () {
                         //     '<input type="radio" id="rating-5' + meta.row + '" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "5" ? "checked" : "") + ' value="5">' +
                         //     '<label for="rating-5' + meta.row + '"></label>' +
                         //     '</div>';
-                        var student_behaviour = '<div class="rating">' +
-                            '<input type="radio" class="checkRadioBtn" id="rating-5' + meta.row + '" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "5" ? "checked" : "") + ' value="5">' +
-                            '<label for="rating-5' + meta.row + '"></label>' +
-                            '<input type="radio" class="checkRadioBtn" id="rating-4' + meta.row + '" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "4" ? "checked" : "") + ' value="4">' +
-                            '<label for="rating-4' + meta.row + '"></label>' +
-                            '<input type="radio" class="checkRadioBtn" id="rating-3' + meta.row + '" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "3" ? "checked" : "") + ' value="3">' +
-                            '<label for="rating-3' + meta.row + '"></label>' +
-                            '<input type="radio" class="checkRadioBtn" id="rating-2' + meta.row + '" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "2" ? "checked" : "") + ' value="2">' +
-                            '<label for="rating-2' + meta.row + '"></label>' +
-                            '<input type="radio" class="checkRadioBtn" id="rating-1' + meta.row + '" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "1" ? "checked" : "") + ' value="1">' +
-                            '<label for="rating-1' + meta.row + '"></label>' +
+                        // var student_behaviour = '<div class="rating">' +
+                        //     '<input type="radio" class="checkRadioBtn" id="rating-5' + meta.row + '" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "5" ? "checked" : "") + ' value="5">' +
+                        //     '<label for="rating-5' + meta.row + '"></label>' +
+                        //     '<input type="radio" class="checkRadioBtn" id="rating-4' + meta.row + '" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "4" ? "checked" : "") + ' value="4">' +
+                        //     '<label for="rating-4' + meta.row + '"></label>' +
+                        //     '<input type="radio" class="checkRadioBtn" id="rating-3' + meta.row + '" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "3" ? "checked" : "") + ' value="3">' +
+                        //     '<label for="rating-3' + meta.row + '"></label>' +
+                        //     '<input type="radio" class="checkRadioBtn" id="rating-2' + meta.row + '" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "2" ? "checked" : "") + ' value="2">' +
+                        //     '<label for="rating-2' + meta.row + '"></label>' +
+                        //     '<input type="radio" class="checkRadioBtn" id="rating-1' + meta.row + '" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "1" ? "checked" : "") + ' value="1">' +
+                        //     '<label for="rating-1' + meta.row + '"></label>' +
+                        //     '</div>';
+
+                        var student_behaviour = '<div class="row">' +
+                            '<div class="radio_group_1">' +
+                            '<input type="radio" value="smile" title="smile    " ' + (row.student_behaviour == "smile" ? "checked" : "") + ' name="attendance[' + meta.row + '][student_behaviour]">' +
+                            '<label for="smile">' +
+                            '<i class="far fa-smile"></i>' +
+                            '</label>' +
+                            '</div>' +
+                            '<div class="radio_group_1">' +
+                            '<input type="radio" value="angry" title="angry" ' + (row.student_behaviour == "angry" ? "checked" : "") + ' name="attendance[' + meta.row + '][student_behaviour]">' +
+                            '<label for="angry">' +
+                            '<i class="far fa-angry"></i>' +
+                            '</label>' +
+                            '</div>' +
+                            '<div class="radio_group_1">' +
+                            '<input type="radio" value="dizzy" title="dizzy" ' + (row.student_behaviour == "dizzy" ? "checked" : "") + ' name="attendance[' + meta.row + '][student_behaviour]">' +
+                            '<label for="dizzy">' +
+                            '<i class="far fa-dizzy"></i>' +
+                            '</label>' +
+                            '</div>' +
+                            '<div class="radio_group_1">' +
+                            '<input type="radio" value="surprise" title="surprise" ' + (row.student_behaviour == "surprise" ? "checked" : "") + ' name="attendance[' + meta.row + '][student_behaviour]">' +
+                            '<label for="surprise">' +
+                            '<i class="far fa-surprise"></i>' +
+                            '</label>' +
+                            '</div>' +
+                            '<div class="radio_group_1">' +
+                            '<input type="radio" value="tired" title="tired" ' + (row.student_behaviour == "tired" ? "checked" : "") + ' name="attendance[' + meta.row + '][student_behaviour]">' +
+                            '<label for="tired">' +
+                            '<i class="far fa-tired"></i>' +
+                            '</label>' +
+                            '</div>' +
                             '</div>';
+
 
                         // var student_behaviour = '<span class="rating">' +
                         //     '<input type="radio" name="attendance[' + meta.row + '][student_behaviour]" ' + (row.student_behaviour == "1" ? "checked" : "") + ' value="1"><i></i>' +
@@ -345,7 +388,7 @@ $(function () {
                             '</label>' +
                             '</div>' +
                             '<div class="radio_group">' +
-                            '<input type="radio"class="checkRadioBtn" value="dislikes" ' + (row.classroom_behaviour == "dislikes" ? "checked" : "") + ' name="attendance[' + meta.row + '][classroom_behaviour]">' +
+                            '<input type="radio" class="checkRadioBtn" value="dislikes" ' + (row.classroom_behaviour == "dislikes" ? "checked" : "") + ' name="attendance[' + meta.row + '][classroom_behaviour]">' +
                             '<label for="like">' +
                             '<i class="fas fa-thumbs-down"></i>' +
                             '</label>' +
@@ -417,7 +460,7 @@ $(function () {
                     formData.append('subject_id', subjectID);
                     formData.append('date', convertDigitIn(classDate));
                     widgetShow(formData)
-                    
+
                 } else {
                     toastr.error(data.message);
                 }
@@ -457,32 +500,60 @@ $(function () {
             success: function (response) {
                 var dataSetNew = response.data.get_widget_details;
                 var avgAttendance = response.data.avg_attendance;
+                var getStudentData = response.data.get_student_data;
+                var totalStudent = response.data.total_student;
 
+
+                var presentCnt = (dataSetNew[0].presentCount ? dataSetNew[0].presentCount : 0);
+                var absentCnt = (dataSetNew[0].absentCount ? dataSetNew[0].absentCount : 0);
+                var lateCnt = (dataSetNew[0].lateCount ? dataSetNew[0].lateCount : 0);
+                var totalStudentCnt = (totalStudent[0].totalStudentCount ? totalStudent[0].totalStudentCount : 0);
+
+                var perfectAttendance = 0;
                 if (response.code == 200) {
-                    $("#presentCount").html(dataSetNew[0].presentCount);
-                    $("#absentCount").html(dataSetNew[0].absentCount);
-                    $("#lateCount").html(dataSetNew[0].lateCount);
-                    var totalStudentCount = dataSetNew[0].totalStudentCount;
-                    var presentCount = dataSetNew[0].presentCount;
-                    var absentCount = dataSetNew[0].absentCount;
-                    var attpresentCount = avgAttendance[0].presentCount;
+                    // present absent late count start
+                    $("#presentCount").html(presentCnt);
+                    $("#absentCount").html(absentCnt);
+                    $("#lateCount").html(lateCnt);
+                    // present absent late end
+                    if (getStudentData.length > 0) {
+                        $.each(getStudentData, function (key, val) {
+                            // count perfect attendance person
+                            if (val.presentCount && val.totalDaysCount) {
+                                var attenPercent = (val.presentCount / val.totalDaysCount) * 100;
+                                if (attenPercent == 100) {
+                                    perfectAttendance++;
+                                }
+                            }
+                        });
+                    }
+                    // var totalStudentCount = dataSetNew[0].totalStudentCount;
+
+
+                    var attpresentCount = (avgAttendance[0].presentCount + avgAttendance[0].lateCount);
                     var totalDate = avgAttendance[0].totalDate;
-                    var perfectAttendance = (presentCount / totalStudentCount) * 100;
-                    var belowAttendance = (absentCount / totalStudentCount) * 100;
-                    var avg_attendance = (attpresentCount / totalDate);
-                    $("#perfectAttendance").html(perfectAttendance ? perfectAttendance : 0 + "%");
-                    $("#totalStrength").html("Total Strength: " + totalStudentCount);
-                    $("#belowAttendance").html(belowAttendance ? belowAttendance : 0 + "%");
-                    $("#avg_attendance").html(avg_attendance ? avg_attendance : 0);
+                    var absentCount = avgAttendance[0].absentCount;
+
+                    // perfectAttendance / totalStudentCnt
+                    var perfectAttendancePer = (perfectAttendance / totalStudentCnt) * 100;
+
+                    var belowAttendance = (absentCount / (totalDate * totalStudentCnt) * 100);
+
+                    var avg_attendance = (attpresentCount / (totalDate * totalStudentCnt) * 100);
+
+                    $("#perfectAttendance").html(perfectAttendancePer ? perfectAttendancePer.toFixed(2) : 0 + "%");
+                    $("#totalStrength").html("Total Strength: " + totalStudentCnt);
+                    $("#belowAttendance").html(belowAttendance ? belowAttendance.toFixed(2) : 0 + "%");
+                    $("#avg_attendance").html(avg_attendance ? avg_attendance.toFixed(2) : 0 + "%");
                     // getReportRemarks(dataSetNew)
                 } else {
-                    $("#presentCount").html(dataSetNew[0].presentCount);
-                    $("#absentCount").html(dataSetNew[0].absentCount);
-                    $("#lateCount").html(dataSetNew[0].lateCount);
-                    $("#perfectAttendance").html(0 + "%");
-                    $("#totalStrength").html("Total Strength: " + 0);
+                    $("#presentCount").html(presentCnt);
+                    $("#absentCount").html(absentCnt);
+                    $("#lateCount").html(lateCnt);
+                    $("#perfectAttendance").html(perfectAttendance + "%");
+                    $("#totalStrength").html("Total Strength: " + totalStudentCnt);
                     $("#belowAttendance").html(0 + "%");
-                    $("#avg_attendance").html(0);
+                    $("#avg_attendance").html(0 + "%");
 
                     // toastr.error(data.message);
                 }
@@ -576,6 +647,8 @@ $(function () {
         $('.e-m-seconds', obj).html(seconds);
     }
 
+    console.log("counter data")
+    console.log($(".counter"))
     var count = getCounterData($(".counter"));
 
     var timer = setInterval(function () {
@@ -592,5 +665,204 @@ $(function () {
     //     console.log("--")
     //     console.log(timer)
     // }   
+    $("#getShortTest").validate(); //sets up the validator
+    $("input[name*='field']").rules("add", "required");
+    // short test
+    $('#getShortTest').on('submit', function (e) {
+        e.preventDefault();
+        var form = this;
+        var branchCheck = $("#getShortTest").valid();
+
+
+        var field = $("input[name='field[]']")
+            .map(function () { return $(this).val(); }).get();
+        var grade = $("select[name='grade[]']")
+            .map(function () { return $(this).val(); }).get();
+        var testVal = [];
+        for (let i = 0; i < field.length; i++) {
+            // r[keys[i]] = values[i];
+            var r = {};
+            if (field[i] != '' && grade[i] != '') {
+
+                if (testVal.length > 0) {
+                    var index = testVal.findIndex(x => x.test_name === field[i]);
+                    if (index !== -1) {
+                        toastr.info("Short test name already exist");
+                        return false;
+                    }
+                }
+
+                r['test_name'] = field[i];
+                r['status'] = grade[i];
+                testVal.push(r);
+            }
+        }
+
+        if (branchCheck === true) {
+            // return false;
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (response) {
+                    if (response.code == 200) {
+                        var dateSet = response.data;
+                        if (dateSet.length > 0) {
+                            shortTestShow(testVal, dateSet);
+                        }
+
+                    } else {
+                        toastr.error(data.message);
+                    }
+                }
+            });
+        }
+    });
+    // // show short test
+    function shortTestShow(testVal, dateSet) {
+
+        // get value short test
+        var classID = $("#shortTestClassID").val();
+        var sectionID = $("#shortTestSectionID").val();
+        var subjectID = $("#shortTestSubjectID").val();
+        var classDate = $("#shortTestSelectedDate").val();
+
+        // $(".shortTestHideSHow").show();
+        $('#shortTestAppend').empty();
+        $('#shortTestTableAppend').empty();
+
+        var shortTestAppend = "";
+        var shortTestTable = "";
+        var index = 0;
+        shortTestTable += '<table class="table table-striped table-nowrap">' +
+            '<thead>' +
+            '<tr>' +
+            '<th>S.no</th>' +
+            '<th>Student Name</th>';
+        $.each(testVal, function (key, val) {
+            index++;
+            shortTestAppend += '<tr>' +
+                '<td>' + index + '</td>' +
+                '<td class="table-user text-left">' +
+                '<label for="test_name">' + val.test_name + '</label>' +
+                '</td>' +
+                '<td>' +
+                '<div class="table-user text-left">' +
+                '<label for="status">' + val.status + '</label>' +
+                '</div>' +
+                '</td>' +
+                '</tr>';
+            // table add
+            shortTestTable += '<th>' + val.test_name + '</th>';
+        });
+        shortTestTable += '</tr>' +
+            '</thead>' +
+            '<tbody>';
+        var start = 0;
+        var indexStart = 0;
+
+        if (dateSet.length > 0) {
+
+            dateSet.forEach(function (res) {
+                start++;
+                // short test table div start
+                shortTestTable += '<tr>' +
+                    '<td>';
+                if (start == 1) {
+                    shortTestTable += '<input type="hidden" name="date" value="' + classDate + '">' +
+                        '<input type="hidden" name="class_id" value="' + classID + '">' +
+                        '<input type="hidden" name="section_id" value="' + sectionID + '">' +
+                        '<input type="hidden" name="subject_id" value="' + subjectID + '">';
+
+                }
+
+                shortTestTable += start +
+                    '</td>' +
+                    '<td class="table-user">' +
+                    '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
+                    '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + res.first_name + ' ' + res.last_name + '</a>' +
+                    '</td>';
+
+                // short test table div end
+                $.each(testVal, function (key, val) {
+
+                    var marks = "";
+                    if (res.test_name) {
+                        var test_name = res.test_name.split(",");
+                        var test_marks = res.test_marks.split(",");
+                        var grade_status = res.grade_status.split(",");
+                        var index = test_name.findIndex(x => x === val.test_name);
+                        if (index !== -1) {
+                            marks = test_marks[index];
+                        }
+                    }
+
+                    shortTestTable += '<td>' +
+                        '<input type="hidden" name="short_test[' + indexStart + '][student_id]" value="' + res.student_id + '">' +
+                        '<input type="hidden" name="short_test[' + indexStart + '][test_name][]" value="' + val.test_name + '">' +
+                        '<input type="hidden" name="short_test[' + indexStart + '][grade_status][]" value="' + val.status + '">' +
+                        '<input type="text" name="short_test[' + indexStart + '][test_marks][]" value="' + marks + '" class="form-control" style="width:100px;">' +
+                        '</td>';
+                });
+                indexStart++;
+                shortTestTable += '</tr>';
+            });
+
+        }
+
+        $("#shortTestAppend").append(shortTestAppend);
+
+        shortTestTable += '</tbody>' +
+            '</table>';
+        $("#shortTestTableAppend").append(shortTestTable);
+    }
+    // get short test
+    function getShortTestData(formData) {
+        $.ajax({
+            url: getShortTest,
+            method: "post",
+            data: formData,
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (response) {
+
+                if (response.code == 200) {
+                    var dateSet = response.data;
+                    if (dateSet.length > 0) {
+                        var testVal = [];
+                        // empty short test tables
+                        $('#shortTestAppend').empty();
+                        $('#shortTestTableAppend').empty();
+                        $('#getShortTest')[0].reset();
+                        var testname = response.data[0].test_name;
+                        var grade_status = response.data[0].grade_status;
+                        if (testname && grade_status) {
+                            var field = testname.split(",");
+                            var grade = grade_status.split(",");
+
+                            for (let i = 0; i < field.length; i++) {
+                                // r[keys[i]] = values[i];
+                                var r = {};
+                                if (field[i] != '' && grade[i] != '') {
+                                    r['test_name'] = field[i];
+                                    r['status'] = grade[i];
+                                    testVal.push(r);
+                                }
+                            }
+
+                            shortTestShow(testVal, dateSet);
+                        }
+                    }
+
+                } else {
+                    toastr.error(data.message);
+                }
+            }
+        });
+    }
 
 });

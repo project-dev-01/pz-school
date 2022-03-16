@@ -20,9 +20,9 @@ class CreateShortTestsTable extends Migration
             $table->integer('class_id');
             $table->integer('section_id');
             $table->integer('subject_id');
-            $table->string('test_name');
-            $table->string('test_marks');
-            $table->string('grade_status');
+            $table->text('test_name');
+            $table->text('test_marks');
+            $table->text('grade_status');
             $table->text('remarks')->nullable();
             $table->timestamps();
         });
