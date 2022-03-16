@@ -541,10 +541,10 @@ $(function () {
 
                     var avg_attendance = (attpresentCount / (totalDate * totalStudentCnt) * 100);
 
-                    $("#perfectAttendance").html(perfectAttendancePer ? perfectAttendancePer.toFixed(2) : 0 + "%");
+                    $("#perfectAttendance").html((perfectAttendancePer ? Math.round(perfectAttendancePer) : 0) + "%");
                     $("#totalStrength").html("Total Strength: " + totalStudentCnt);
-                    $("#belowAttendance").html(belowAttendance ? belowAttendance.toFixed(2) : 0 + "%");
-                    $("#avg_attendance").html(avg_attendance ? avg_attendance.toFixed(2) : 0 + "%");
+                    $("#belowAttendance").html((belowAttendance ? Math.round(belowAttendance) : 0) + "%");
+                    $("#avg_attendance").html((avg_attendance ? Math.round(avg_attendance) : 0) + "%");
                     // getReportRemarks(dataSetNew)
                 } else {
                     $("#presentCount").html(presentCnt);
