@@ -388,7 +388,10 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('homework/add', [AdminController::class, 'addHomework'])->name('admin.homework.add');
         Route::post('homework/homework-details', [AdminController::class, 'getHomework'])->name('admin.homework.details');
         Route::get('evaluation_report', [AdminController::class, 'evaluationReport'])->name('admin.evaluation_report');
+        Route::post('homework/evaluation', [AdminController::class, 'evaluation'])->name('admin.homework.evaluation');
         Route::get('homework/edit', [AdminController::class, 'homeworkEdit'])->name('admin.homework_edit');
+        
+        Route::post('homework/view', [AdminController::class, 'viewHomework'])->name('admin.homework.view');
 
         // exam routes
         Route::get('exam/term', [AdminController::class, 'examIndex'])->name('admin.exam.term');
@@ -624,8 +627,12 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('attendance/list', [TeacherController::class, 'attendanceList'])->name('teacher.attendance.list');
         // Homework routes
         Route::get('homework/index', [TeacherController::class, 'homework'])->name('teacher.homework');
+        Route::post('homework/add', [TeacherController::class, 'addHomework'])->name('teacher.homework.add');
+        Route::post('homework/homework-details', [TeacherController::class, 'getHomework'])->name('teacher.homework.details');
         Route::get('evaluation_report', [TeacherController::class, 'evaluationReport'])->name('teacher.evaluation_report');
+        Route::post('homework/evaluation', [TeacherController::class, 'evaluation'])->name('teacher.homework.evaluation');
         Route::get('homework/edit', [TeacherController::class, 'homeworkEdit'])->name('teacher.homework_edit');
+        Route::post('homework/view', [TeacherController::class, 'viewHomework'])->name('teacher.homework.view');
         // Leave Apply
         Route::get('leave_management/applyleave', [TeacherController::class, 'applyleave'])->name('teacher.leave_management.applyleave');
         // Forum routes
@@ -671,6 +678,11 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('add_short_test', [TeacherController::class, 'addShortTest'])->name('teacher.classroom.add_short_test');
         Route::post('add_daily_report', [TeacherController::class, 'addDailyReport'])->name('teacher.classroom.add_daily_report');
         Route::post('add_daily_report_remarks', [TeacherController::class, 'addDailyReportRemarks'])->name('teacher.classroom.add_daily_report_remarks');
+        // Subject By Class Route
+        Route::post('subject-by-class', [TeacherController::class, 'subjectByClass'])->name('teacher.subject_by_class');
+
+        // Section By Class Route
+        Route::post('section-by-class', [TeacherController::class, 'sectionByClass'])->name('teacher.section_by_class');
     });
 
     // TEACHER CONTROLLER END
@@ -724,6 +736,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('attendance/index', [ParentController::class, 'attendance'])->name('parent.attendance');
         // Homework routes
         Route::get('homework/homeworklist', [ParentController::class, 'homeworklist'])->name('parent.homework');
+        Route::post('homework/filter', [ParentController::class, 'filterHomework'])->name('parent.homework.filter');
         // Children routes
         Route::get('children', [ParentController::class, 'children'])->name('parent.children');
         // chat app    
@@ -744,7 +757,8 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
         // Homework routes
         Route::get('homework/homeworklist', [StudentController::class, 'homeworklist'])->name('student.homework');
-
+        Route::post('homework/submit', [StudentController::class, 'submitHomework'])->name('student.homework.submit');
+        Route::post('homework/filter', [StudentController::class, 'filterHomework'])->name('student.homework.filter');
         // Settings
         Route::get('settings', [SuperAdminController::class, 'settings'])->name('student.settings');
         // faq        

@@ -35,6 +35,14 @@
                             <div class="col-md-9">
                                 <div class="col-md-12">
                                     <div class="form-group row">
+                                        <label for="title" class="col-3 col-form-label">Homework Title<span class="text-danger">*</span></label>
+                                        <div class="col-9">
+                                        <input type="text" class="form-control" name="title" placeholder="Enter Title" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group row">
                                         <label for="class_id" class="col-3 col-form-label">Standard<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <select id="class_id" class="form-control" name="class_id" >                             
@@ -138,7 +146,7 @@
                                         <div class="col-9">
                                             <div class="input-group">
                                                 <div class="custom-file">
-                                                    <!-- <input type="file" class="custom-file-input" name="document"> -->
+                                                    <input type="file" class="custom-file-input" name="file">
                                                     <label class="custom-file-label" for="document">Choose file</label>
                                                 </div>
                                             </div>

@@ -146,7 +146,7 @@
                     @if($timetable)
                     <input type="hidden" id="form_class_id"  name="class_id" value="{{$details['class']['class_id']}}">
                     <input type="hidden" id="form_section_id" name="section_id" value="{{$details['section']['section_id']}}">
-                    <input type="hidden"  name="day" value="monday" >
+                    <input type="hidden" id="form_day" name="day"  value="{{$details['day']}}">
                     <div class="form-group text-right m-b-0">
                         <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
                             Update

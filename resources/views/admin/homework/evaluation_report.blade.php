@@ -100,11 +100,11 @@
                                         Homework List
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a href="#history-b1" data-toggle="tab" aria-expanded="false" class="nav-link">
                                         History
                                     </a>
-                                </li>
+                                </li> -->
                             </ul><br>
                             <div class="card-box">
                                 <div class="tab-content">
@@ -124,9 +124,7 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
-                                                                <th>Subject</th>
-                                                                <th>Standard</th>
-                                                                <th>Class</th>
+                                                                <th>Title</th>
                                                                 <th>Date of Homework</th>
                                                                 <th>Date of Submission</th>
                                                                 <th>Complete/Incomplete</th>
@@ -155,7 +153,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="table-responsive">
-                                                    <table class="table table-bordered table-striped mb-0">
+                                                    <table class="table table-bordered table-striped mb-0 text-center">
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
@@ -243,6 +241,8 @@
 @section('scripts')
 
 <script>
+    
+    var homeworkView = "{{ route('admin.homework.view') }}";
     var homeworkList = "{{ route('admin.evaluation_report') }}";
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var subjectByClass = "{{ route('admin.subject_by_class') }}";

@@ -53,10 +53,9 @@ class ParentController extends Controller
     }
     public function timeTable(Request $request)
     {
-        $parent = User::find($request->session()->get('user_id'));
-        // dd($parent);
+        $parent = session()->get('ref_user_id');
         $data = [
-            'parent_id' => $parent['user_id']
+            'parent_id' => $parent
         ];
 
         $days = array(
@@ -221,8 +220,183 @@ class ParentController extends Controller
      // Home work screen pages start
      public function homeworklist()
      {
-         return view('parent.homework.hmeworklist');
+         $student = session()->get('children_id');
+         $data = [
+             'student_id' => $student,
+         ];
+         $homework = Helper::PostMethod(config('constants.api.homework_student'), $data);
+         return view(
+             'parent.homework.list',
+             [
+                 'homework' => $homework['data']['homeworks'],
+                 'subject' => $homework['data']['subjects'],
+             ]
+         );
      }
+
+     
+
+    //Filter  Homework
+    public function filterHomework(Request $request)
+    {
+        $student = session()->get('children_id');
+        $data = [
+            'status' => $request->status,
+            'subject' => $request->subject,
+            'student_id' => $student,
+        ];
+
+        
+        $homework = Helper::PostMethod(config('constants.api.homework_student_filter'), $data);
+        if($homework['code']=="200")
+        {
+            $response ="";
+            if($homework['data'])
+            {
+                foreach($homework['data']['homeworks'] as $work)
+                {
+                    if($work['status'] == 1) 
+                    {
+                        $status = "Completed";
+                        $top = "( Completed )";
+                    }else{
+                        $status = "InCompleted";
+                        $top= "";
+                    }
+
+                    
+                    if($work['status'] == 1)
+                    {
+                        $file='<div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-5 font-weight-bold">Attachment File: </div>
+                            <div class="col-md-3">
+                                <a href="~/resources/views/Guide.pdf" download>
+                                    <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>';
+
+                    }else{
+                            $file = '<div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-5 font-weight-bold">Attachment File: </div>
+                                <div class="col-md-5">
+    
+                                    <input type="file" class="custom-file-input" id="">
+                                    <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                                </div>
+                            </div>
+                        </div>';
+                    }
+                    $response.= '<form class="submitHomeworkForm" method="post"   enctype="multipart/form-data" autocomplete="off">
+                    '.csrf_field() .'
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <p>
+                                <div>
+                                    <a class="list-group-item list-group-item-info btn-block btn-lg" data-toggle="collapse" href="#English" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                        <i class="fas fa-caret-square-down"></i>'.$work['subject_name'].' - '. date('j F Y', strtotime($work['date_of_homework'])) .' '.$top.'
+                                    </a>
+                                </div>
+                                </p>
+                                <div class="collapse" id="English">
+                                    <div class="card card-body">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-md-5 font-weight-bold">Title :</div>
+                                                    <div class="col-md-3">'.$work['title'].'</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-md-5 font-weight-bold">Status :</div>
+                                                    <div class="col-md-3">'.$status.'</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-md-5 font-weight-bold">Date Of Homework :</div>
+                                                    <div class="col-md-3">'.date('F j , Y', strtotime($work['date_of_homework'])).'</div>
+                                                </div>
+                                            </div>
+
+                                        </div><br />
+                                        <div class="row">
+                                            
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-md-5 font-weight-bold">Date Of Submission :</div>
+                                                    <div class="col-md-3">'.date('F j , Y', strtotime($work['date_of_submission'])).'</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-md-5 font-weight-bold">Evalution Date :</div>
+                                                    <div class="col-md-3">'.date('F j , Y', strtotime($work['evaluation_date'])).'</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-md-5 font-weight-bold">Remarks :</div>
+                                                    <div class="col-md-3">'.$work['description'].'</div>
+                                                </div>
+                                            </div>
+                                        </div><br />
+                                        <div class="row">
+                                            
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-md-5 font-weight-bold">Rank Out Of 5 :</div>
+                                                    <div class="col-md-3">'.$work['rank'].'</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-md-5 font-weight-bold">Document :</div>
+                                                    <div class="col-md-3">
+                                                        <a href="~/resources/views/Guide.pdf" download>
+                                                            <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><br />
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-12 font-weight-bold">Submission Process Here :- </div>
+
+                                        </div><br>
+                                        <input type="hidden" name="homework_id" value="'.$work['id'].'">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-md-5 font-weight-bold">Note : </div>
+                                                    <div class="col-md-5">
+                                                        <textarea  name="remarks" rows="4" cols="25">'.$work['remarks'].'</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            '.$file.'
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </form>';
+                }
+            }
+            $homework['list'] = $response;
+            $homework['subject'] = $homework['data']['subject'];
+        }
+        
+        return $homework;
+    }
      //Children
      public function children()
      {
@@ -235,10 +409,6 @@ class ParentController extends Controller
      public function chatShow()
     {
         return view('parent.chat.index');
-    }
-    public function homeworkredirect()
-    {
-        return view('parent.homework.hmeworklist');
     }
     public function analytic()
     {

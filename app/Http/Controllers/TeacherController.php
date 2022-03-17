@@ -41,11 +41,7 @@ class TeacherController extends Controller
     {
         return view('teacher.attendance.exam');
     }
-    public function homework()
-    {
-        return view('teacher.homework.index');
-    }
-
+    
     // static page controller end
     // forum screen pages start
     public function forumIndex()
@@ -235,16 +231,259 @@ class TeacherController extends Controller
     {
         return view('teacher.exam_results.bystudent');
     }
-
+    public function homework()
+    {
+        $data = [
+            'teacher_id' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        return view(
+            'teacher.homework.index',
+            [
+                'class' => $response['data'],
+            ]
+        );
+    }
 
     public function evaluationReport()
     {
-        return view('teacher.homework.evaluation_report');
+        
+
+        $data = [
+            'teacher_id' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+
+
+        // dd($response);
+        // $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        return view(
+            'teacher.homework.evaluation_report',
+            [
+                'class' => $response['data'],
+            ]
+        );
     }
+
+    //add Homework
+    public function addHomework(Request $request)
+    {
+        $created_by = session()->get('user_id');
+
+        $file = $request->file('file');
+        $path = $file->path();
+        $data = file_get_contents($path);
+        $base64 = base64_encode($data);
+        $extension = $file->getClientOriginalExtension();
+
+        $data = [
+            'title' => $request->title,
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'subject_id' => $request->subject_id,
+            'date_of_homework' => $request->date_of_homework,
+            'date_of_submission' => $request->date_of_submission,
+            'schedule_date' => $request->schedule_date,
+            'description' => $request->description,
+            'file' => $base64,
+            'file_extension' => $extension,
+            'created_by' => $created_by,
+        ];
+
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.homework_add'), $data);
+        // dd($response);
+        return $response;
+    }
+    
+    // get Homework
+    public function getHomework(Request $request)
+    {
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'subject_id' => $request->subject_id,
+        ];
+
+        $homework = Helper::PostMethod(config('constants.api.homework_list'), $data);
+
+        // dd($homework);
+        if($homework['code']=="200")
+        {
+        $response ="";
+        $row=1;
+        foreach($homework['data']['homework'] as $work)
+        {
+            $total_students = $homework['data']['total_students'];
+            if($work['students_completed']==Null)
+            {
+                $completed = 0;
+                $incompleted = $total_students;
+            }else{
+                $completed = $work['students_completed'];
+                $incompleted = $total_students-$completed;
+            }
+            
+            $response.= '<tr>
+                            <td>'.$row.'</td>
+                            <td>'.$work['title'].'</td>
+                            <td>'.$work['date_of_homework'].'</td>
+                            <td>'.$work['date_of_submission'].'</td>
+                            <td>'.$completed.'/'.$incompleted.'</td>
+                            <td>'.$homework['data']['total_students'].'</td>
+                            <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="'.$work['id'].'" data-target=".firstModal"><i class="fas fa-bars"></i> Details</a></td>
+                        </tr>';
+            $row++;
+        }
+    
+            $homework['table'] = $response;
+            
+        }
+        return $homework;
+    }
+    // view Homework
+    public function viewHomework(Request $request)
+    {
+        $data = [
+            'homework_id' => $request->homework_id,
+        ];
+
+        
+        $homework = Helper::PostMethod(config('constants.api.homework_view'), $data);
+        
+        
+        if($homework['code']=="200")
+        {
+            $response ="";
+            $complete=0;
+            $incomplete=0;
+            $checked = 0;
+            $unchecked = 0;
+            if($homework['data'])
+            {
+                $row=1;
+                foreach($homework['data'] as $work)
+                {
+                    $check = "";
+
+                    if($work['score_name']=="Marks")
+                    {
+                        $score_name = '<select  class="form-control" required="" name="homework['.$row.'][score_name]">
+                                                <option Selected>Marks</option>
+                                                <option>Grade</option>
+                                                <option>Text</option>
+                                            </select>';
+                    }elseif($work['score_name']=="Grade")
+                    {
+                        $score_name = '<select  class="form-control" required="" name="homework['.$row.'][score_name]">
+                                            <option>Marks</option>
+                                            <option Selected>Grade</option>
+                                            <option>Text</option>
+                                        </select>';
+                    }elseif($work['score_name']=="Text")
+                    {
+                        $score_name = '<select  class="form-control" required="" name="homework['.$row.'][score_name]">
+                                                <option>Marks</option>
+                                                <option>Grade</option>
+                                                <option Selected>Text</option>
+                                            </select>';
+                    }else{
+                        $score_name = '<select  class="form-control" required="" name="homework['.$row.'][score_name]">
+                                                <option>Marks</option>
+                                                <option>Grade</option>
+                                                <option>Text</option>
+                                            </select>';
+                    }
+                        
+                    if($work['correction']=="1")
+                    {
+                        $check = "checked";
+                        $checked++;
+
+                    }else{
+                        $unchecked++;
+                    }
+
+                    if($work['status']=="1")
+                    {
+                        $status = '<button type="button" class="btn btn-outline-success btn-rounded waves-effect waves-light">Completed</button>';
+                        $complete++;
+                    }else{
+                        $status= '<button type="button" class="btn btn-outline-danger btn-rounded waves-effect waves-light">Incomplete</button>';
+                        $incomplete++;
+                    }
+                    
+                    
+                    $response.= '<tr>
+                                    <input type="hidden" value="'.$work['id'].'" name="homework['.$row.'][homework_evaluation_id]">
+                                    <td>'.$row.'</td>
+                                    <td>'.$work['first_name'].' '.$work['last_name'].'</td>
+                                    <td>'.$work['register_no'].'</td>
+                                    <td>'.$status.'</td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label for="score_name">Status</label>
+                                            '.$score_name.'
+                                        </div>
+                                        <input type="text" class="form-control" name="homework['.$row.'][score_value]" value="'.$work['score_value'].'" aria-describedby="inputGroupPrepend" >
+
+                                    </td>
+                                    <td><input type="text" class="form-control" name="homework['.$row.'][teacher_remarks]"  value="'.$work['teacher_remarks'].'" aria-describedby="inputGroupPrepend" ></td>
+                                    <td>
+                                        <i data-feather="file-text" class="icon-dual"></i>
+                                        <span class="ml-2 font-weight-semibold"><a  href="'.asset('student/homework/').'/'.$work['file'].'" download class="text-reset">'.$work['file'].'</a></span>
+                                    </td>
+                                    <td>'.$work['remarks'].'</td>
+                                    <td>
+                                        <div class="checkbox checkbox-primary mb-3">
+                                            <input  type="checkbox"  '.$check.'  name="homework['.$row.'][correction]">
+                                            <label for="correction"></label>
+                                        </div>
+                                    </td>
+                                </tr>';
+                    $row++;
+                }
+            }else{
+                    $response.= '<tr>
+                                    <td colspan="9"> No Data Available</td>
+                                </tr>';
+            }
+            $homework['table'] = $response;
+            $homework['complete'] = $complete;
+            $homework['incomplete'] = $incomplete;
+            $homework['checked'] = $checked;
+            $homework['unchecked'] = $unchecked;
+            
+            
+        }
+        // dd($homework);
+        return $homework;
+    }
+
+    //submit Evaluation
+    public function evaluation(Request $request)
+    {
+        $data = [
+            'homework' => $request->homework,
+        ];
+        $response = Helper::PostMethod(config('constants.api.homework_evaluate'), $data);
+        // dd($response);
+        return $response;
+    }
+
+     
 
     public function homeworkEdit()
     {
         return view('teacher.homework.edit');
+    }
+    public function addDepartment(Request $request)
+    {
+        $data = [
+            'name' => $request->department_name
+        ];
+        $response = Helper::PostMethod(config('constants.api.department_add'), $data);
+        return $response;
     }
     public function analytic()
     {
@@ -316,5 +555,28 @@ class TeacherController extends Controller
         $response = Helper::PostMethod(config('constants.api.add_daily_report_remarks'), $data);
         return $response;
     }
+
+     // subject by Class
+     public function subjectByClass(Request $request)
+     {
+        $data = [
+            'section_id' => $request->section_id,
+            'class_id' => $request->class_id,
+            'teacher_id' => session()->get('ref_user_id')
+        ];
+         $subject = Helper::PostMethod(config('constants.api.teacher_subject'),$data);
+         return $subject;
+     }
+ 
+     // Section by Class
+     public function sectionByClass(Request $request)
+     {
+         $data = [
+             'class_id' => $request->class_id,
+             'teacher_id' => session()->get('ref_user_id')
+         ];
+         $section = Helper::PostMethod(config('constants.api.teacher_section'), $data);
+         return $section;
+     }
     
 }

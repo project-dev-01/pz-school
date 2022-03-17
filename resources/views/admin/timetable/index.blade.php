@@ -139,13 +139,13 @@
                         <label for="day">Day<span class="text-danger">*</span></label>
                         <select id="day" class="form-control"  name="day">
                             <option value="">Select Day</option>
-                            <option >Sunday</option>
-                            <option >Monday</option>
-                            <option >Tuesday</option>
-                            <option >Wednesday</option>
-                            <option >Thursday</option>
-                            <option >Friday</option>
-                            <option >Saturday</option>
+                            <option value="sunday">Sunday</option>
+                            <option value="monday">Monday</option>
+                            <option value="tuesday">Tuesday</option>
+                            <option value="wednesday">Wednesday</option>
+                            <option value="thursday">Thursday</option>
+                            <option value="friday">Friday</option>
+                            <option value="saturday">Saturday</option>
                         </select>
                     </div>
                     <div class="form-group">

@@ -32,49 +32,46 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="demo-form" data-parsley-validate="">
+                    <form id="evaluationFilterForm" method="post" action="{{ route('teacher.homework.details') }}"  enctype="multipart/form-data" autocomplete="off">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Standard<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
+                                    <label for="class_id">Standard<span class="text-danger">*</span></label>
+                                    <select id="class_id" class="form-control" name="class_id" >                             
                                         <option value="">Select Standard</option>
-                                        <option value="">All</option>
-                                        <option value="">I</option>
-                                        <option value="press">II</option>
+                                        @foreach($class as $cla)
+                                            <option value="{{$cla['class_id']}}">{{$cla['class_name']}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Class Name<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
+                                    <label for="section_id">Class Name<span class="text-danger">*</span></label>
+                                    <select id="section_id" class="form-control"  name="section_id">                              
                                         <option value="">Select Class Name</option>
-                                        <option value="">A</option>
-                                        <option value="">B</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Subject<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
+                                    <label for="subject_id">Subject<span class="text-danger">*</span></label>
+                                    <select id="subject_id" class="form-control" name="subject_id">                                       
                                         <option value="">Select Subject</option>
-                                        <option value="press">English</option>
-                                        <option value="press">Geography</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group text-right m-b-0">
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                Filter
+                            </button>
+                            <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                Cancel
+                            </button>-->
+                        </div>
                     </form>
-                    <div class="form-group text-right m-b-0">
-                        <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Filter
-                        </button>
-                        <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                            Cancel
-                        </button>-->
-                    </div>
+                    
 
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
@@ -84,7 +81,7 @@
     <!-- end row -->
 
 
-    <div class="row">
+    <div class="row" id="evaluation" style="display:none;">
         <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
@@ -103,11 +100,11 @@
                                         Homework List
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a href="#history-b1" data-toggle="tab" aria-expanded="false" class="nav-link">
                                         History
                                     </a>
-                                </li>
+                                </li> -->
                             </ul><br>
                             <div class="card-box">
                                 <div class="tab-content">
@@ -127,9 +124,7 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
-                                                                <th>Subject</th>
-                                                                <th>Standard</th>
-                                                                <th>Class Name</th>
+                                                                <th>Title</th>
                                                                 <th>Date of Homework</th>
                                                                 <th>Date of Submission</th>
                                                                 <th>Complete/Incomplete</th>
@@ -138,18 +133,7 @@
 
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>1</td>
-                                                                <td>Geography</td>
-                                                                <td>I</td>
-                                                                <td>A</td>
-                                                                <td>18-02-2022</td>
-                                                                <td>23-02-2022</td>
-                                                                <td>1/2</td>
-                                                                <td>3</td>
-                                                                <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-target=".firstModal"><i class="fas fa-bars"></i> Details</a></td>
-                                                            </tr>
+                                                        <tbody id="homework_table">
                                                         </tbody>
                                                     </table>
                                                 </div> <!-- end table-responsive-->
@@ -169,13 +153,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="table-responsive">
-                                                    <table class="table table-bordered table-striped mb-0">
+                                                    <table class="table table-bordered table-striped mb-0 text-center">
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
                                                                 <th>Subject</th>
                                                                 <th>Standard</th>
-                                                                <th>Class Name</th>
+                                                                <th>Class</th>
                                                                 <th>Date of Homework</th>
                                                                 <th>Date of Submission</th>
                                                                 <th>Complete/Incomplete</th>
@@ -187,47 +171,47 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td>1</td>
-                                                                <td>English</td>
-                                                                <td>II</td>
+                                                                <td>Mathematics</td>
+                                                                <td>III</td>
                                                                 <td>A</td>
                                                                 <td>07-04-2018</td>
                                                                 <td>21-04-2018</td>
                                                                 <td>10/0</td>
                                                                 <td>10</td>
-                                                                <td><a href="{{ route('teacher.homework_edit')}}" class="btn btn-circle btn-default"><i class="fas fa-bars"></i> Copy</a></td>
+                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default"><i class="fas fa-bars"></i> Copy</a></td>
                                                             </tr>
                                                             <tr>
                                                                 <td>2</td>
-                                                                <td>Geography</td>
+                                                                <td>Study of the Environment</td>
                                                                 <td>I</td>
                                                                 <td>B</td>
                                                                 <td>15-08-2020</td>
                                                                 <td>07-09-2020</td>
                                                                 <td>15/0</td>
                                                                 <td>15</td>
-                                                                <td><a href="{{ route('teacher.homework_edit')}}" class="btn btn-circle btn-default"><i class="fas fa-bars"></i> Copy</a></td>
+                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default"><i class="fas fa-bars"></i> Copy</a></td>
                                                             </tr>
                                                             <tr>
                                                                 <td>3</td>
-                                                                <td>Geography</td>
+                                                                <td>Arts Education</td>
                                                                 <td>II</td>
-                                                                <td>B</td>
+                                                                <td>C</td>
                                                                 <td>11-06-2021</td>
                                                                 <td>17-06-2021</td>
                                                                 <td>18/2</td>
                                                                 <td>20</td>
-                                                                <td><a href="{{ route('teacher.homework_edit')}}" class="btn btn-circle btn-default"><i class="fas fa-bars"></i> Copy</a></td>
+                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default"><i class="fas fa-bars"></i> Copy</a></td>
                                                             </tr>
                                                             <tr>
                                                                 <td>4</td>
                                                                 <td>English</td>
-                                                                <td>II</td>
+                                                                <td>VI</td>
                                                                 <td>A</td>
                                                                 <td>04-05-2020</td>
                                                                 <td>19-05-2020</td>
                                                                 <td>25/0</td>
                                                                 <td>25</td>
-                                                                <td><a href="{{ route('teacher.homework_edit')}}" class="btn btn-circle btn-default"><i class="fas fa-bars"></i> Copy</a></td>
+                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default"><i class="fas fa-bars"></i> Copy</a></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -251,4 +235,17 @@
 </div> <!-- container -->
 
 @include('teacher.homework.homework_modal')
+@endsection
+
+
+@section('scripts')
+
+<script>
+    
+    var homeworkView = "{{ route('teacher.homework.view') }}";
+    var homeworkList = "{{ route('teacher.evaluation_report') }}";
+    var sectionByClass = "{{ route('teacher.section_by_class') }}";
+    var subjectByClass = "{{ route('teacher.subject_by_class') }}";
+</script>
+<script src="{{ asset('js/custom/homework.js') }}"></script>
 @endsection

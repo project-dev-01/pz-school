@@ -200,7 +200,7 @@
 <script src="{{ asset('js/custom/user_list.js') }}"></script>
 <script src="{{ asset('js/custom/dashboard.js') }}"></script>
 <script src="{{ asset('js/custom/test_result.js') }}"></script>
-<script src="{{ asset('js/custom/apex-mixed.js') }}"></script>
+<!-- <script src="{{ asset('js/custom/apex-mixed.js') }}"></script> -->
 <script src="{{ asset('js/custom/common.js') }}"></script>
 <script src="{{ asset('js/custom/iconchart.js') }}"></script>
 <!-- <script src="{{ asset('js/apexChart/apexcharts.js') }}"></script> -->

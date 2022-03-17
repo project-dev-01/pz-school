@@ -51,6 +51,7 @@ return [
         'class_update' => $url.'/classes/update',
         'class_delete' => $url.'/classes/delete',
 
+        'teacher_class_list' => $url.'teacher/class_list',
         // event type url
         'event_type_add' => $url.'/event_type/add',
         'event_type_list' => $url.'/event_type/list',
@@ -160,6 +161,11 @@ return [
          'homework_add' => $url.'/homework/add',
          'homework_list' => $url.'/homework/list',
          'homework_details' => $url.'/homework/homework-details',
+         'homework_student' => $url.'/homework/student',
+         'homework_student_filter' => $url.'/homework/student/filter',
+         'homework_submit' => $url.'/homework/submit',
+         'homework_view' => $url.'/homework/view',
+         'homework_evaluate' => $url.'/homework/evaluate',
         
          
     ]

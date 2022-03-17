@@ -118,7 +118,7 @@ class AuthController extends Controller
     {
         // dd($request);
         if (session()->has('role_id')) {
-            session()->pull('role_id');            
+            session()->pull('role_id');
             session()->pull('token');
             session()->pull('picture');
             session()->pull('name');

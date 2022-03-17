@@ -50,6 +50,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('classes/update', [ApiController::class, 'updateClassDetails']);
     Route::post('classes/delete', [ApiController::class, 'deleteClass']);
 
+    Route::post('teacher/class_list', [ApiController::class, 'teacherClassList']);
+    
     // sections allocations routes
     Route::post('allocate_section/add',[ApiController::class,'addSectionAllocation']);
     Route::get('allocate_section/list', [ApiController::class, 'getSectionAllocationList']);
@@ -184,8 +186,13 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // Homework routes
     Route::post('homework/add', [ApiController::class, 'addHomework']);
     Route::post('homework/list', [ApiController::class, 'getHomeworkList']);
+    Route::post('homework/view', [ApiController::class, 'viewHomework']);
     Route::post('homework/homework-details', [ApiController::class, 'getHomeworkDetails']);
 
+    Route::post('homework/evaluate', [ApiController::class, 'evaluateHomework']);
+    Route::post('homework/submit', [ApiController::class, 'submitHomework']);
+    Route::post('homework/student', [ApiController::class, 'studentHomework']);
+    Route::post('homework/student/filter', [ApiController::class, 'studentHomeworkFilter']);
 
     //  getStudentAttendence
     Route::post('get_student_attendance',[ApiController::class,'getStudentAttendence']);

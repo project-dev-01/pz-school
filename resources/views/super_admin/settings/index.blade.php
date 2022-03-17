@@ -102,7 +102,6 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="address">Address</label>
-                                        <textarea class="form-control" id="address" rows="4" name="address" placeholder="Enter Address...">{{ $user_details['address'] }}</textarea>
                                         <span class="text-danger error-text address_error"></span>
                                     </div>
                                 </div> <!-- end col -->

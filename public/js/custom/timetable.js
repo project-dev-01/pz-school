@@ -74,10 +74,12 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
+                    console.log('da',data)
                     if (data.code == 200) {
 
                         $("#form_class_id").val(data.data.class_id);
                         $("#form_section_id").val(data.data.section_id);
+                        $("#form_day").val(data.data.day);
                         $("#timetable").show("slow");
                         var subject = data.data.subject;
                         var teacher = data.data.teacher;
@@ -168,11 +170,7 @@ $(function () {
         $(this).parent().parent().parent().remove();
     });
 
-    $(document).on('change', "#timetable_body input[type='checkbox']", function() {
-        $(this).closest('tr').find('select').prop('disabled', this.checked);
-    })
-
-    $(document).on('change', "#timetable_body input[type='checkbox']", function() {
+    $(document).on('change', "#edit_timetable_body input[type='checkbox']", function() {
         $(this).closest('tr').find('select').prop('disabled', this.checked);
     })
     
