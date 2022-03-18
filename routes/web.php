@@ -742,8 +742,6 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         // chat app    
         Route::get('chat', [ParentController::class, 'chatShow'])->name('parent.chat');
 
-        Route::get('homework/homeworklist', [ParentController::class, 'homeworkredirect'])->name('parent.homework');
-
         Route::get('/analyticrep', [ParentController::class, 'analytic'])->name('parent.analyticrep.analyticreport');
     });
 

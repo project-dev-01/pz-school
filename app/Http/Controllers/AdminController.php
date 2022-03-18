@@ -1602,37 +1602,44 @@ class AdminController extends Controller
 
         // dd($homework);
 
-        if($homework['code']=="200")
-        {
-        $response ="";
-        $row=1;
-        foreach($homework['data']['homework'] as $work)
-        {
-            $total_students = $homework['data']['total_students'];
-            if($work['students_completed']==Null)
-            {
-                $completed = 0;
-                $incompleted = $total_students;
+        if($homework['code']=="200") {
+            $response ="";
+            $row=1;
+            if($homework['data']['homework']) {
+                foreach($homework['data']['homework'] as $work)
+                {
+                    $total_students = $homework['data']['total_students'];
+                    if($work['students_completed']==Null)
+                    {
+                        $completed = 0;
+                        $incompleted = $total_students;
+                    }else{
+                        $completed = $work['students_completed'];
+                        $incompleted = $total_students-$completed;
+                    }
+                    
+                    $response.= '<tr>
+                                    <td>'.$row.'</td>
+                                    <td>'.$work['title'].'</td>
+                                    <td>'.$work['date_of_homework'].'</td>
+                                    <td>'.$work['date_of_submission'].'</td>
+                                    <td>'.$completed.'/'.$incompleted.'</td>
+                                    <td>'.$homework['data']['total_students'].'</td>
+                                    <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="'.$work['id'].'" data-target=".firstModal"><i class="fas fa-bars"></i> Details</a></td>
+                                </tr>';
+                    $row++;
+                }
             }else{
-                $completed = $work['students_completed'];
-                $incompleted = $total_students-$completed;
+                    $response.= '<tr>
+                                    <td colspan="7"> No Data Available</td>
+                                </tr>';
             }
-            
-            $response.= '<tr>
-                            <td>'.$row.'</td>
-                            <td>'.$work['title'].'</td>
-                            <td>'.$work['date_of_homework'].'</td>
-                            <td>'.$work['date_of_submission'].'</td>
-                            <td>'.$completed.'/'.$incompleted.'</td>
-                            <td>'.$homework['data']['total_students'].'</td>
-                            <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="'.$work['id'].'" data-target=".firstModal"><i class="fas fa-bars"></i> Details</a></td>
-                        </tr>';
-            $row++;
-        }
     
             $homework['table'] = $response;
             
         }
+
+        // dd($homework);
         return $homework;
     }
     // view Homework
@@ -1640,12 +1647,14 @@ class AdminController extends Controller
     {
         $data = [
             'homework_id' => $request->homework_id,
+            'status' => $request->status,
+            'evaluation' => $request->evaluation,
         ];
-
+        dd($data);
         
         $homework = Helper::PostMethod(config('constants.api.homework_view'), $data);
         
-        // dd($homework);
+        
         if($homework['code']=="200")
         {
             $response ="";
@@ -1660,29 +1669,26 @@ class AdminController extends Controller
                 foreach($homework['data'] as $work)
                 {
                     $check = "";
-
-                    if($work['score_name']=="Marks")
-                    {
+                    $disabled = "";
+                    if($work['score_name']=="Marks") {
                         $score_name = '<select  class="form-control" required="" name="homework['.$row.'][score_name]">
                                                 <option Selected>Marks</option>
                                                 <option>Grade</option>
                                                 <option>Text</option>
                                             </select>';
-                    }elseif($work['score_name']=="Grade")
-                    {
+                    }elseif($work['score_name']=="Grade") {
                         $score_name = '<select  class="form-control" required="" name="homework['.$row.'][score_name]">
                                             <option>Marks</option>
                                             <option Selected>Grade</option>
                                             <option>Text</option>
                                         </select>';
-                    }elseif($work['score_name']=="Text")
-                    {
+                    }elseif($work['score_name']=="Text") {
                         $score_name = '<select  class="form-control" required="" name="homework['.$row.'][score_name]">
                                                 <option>Marks</option>
                                                 <option>Grade</option>
                                                 <option Selected>Text</option>
                                             </select>';
-                    }else{
+                    }else {
                         $score_name = '<select  class="form-control" required="" name="homework['.$row.'][score_name]">
                                                 <option>Marks</option>
                                                 <option>Grade</option>
@@ -1690,27 +1696,28 @@ class AdminController extends Controller
                                             </select>';
                     }
                         
-                    if($work['correction']=="1")
-                    {
+                    if($work['evaluation_id']==Null) {
+                       $disabled = "disabled";
+                    }
+                    
+                    if($work['correction']=="1") {
                         $check = "checked";
                         $checked++;
-
-                    }else{
+                    }else {
                         $unchecked++;
                     }
 
-                    if($work['status']=="1")
-                    {
+                    if($work['status']=="1") {
                         $status = '<button type="button" class="btn btn-outline-success btn-rounded waves-effect waves-light">Completed</button>';
                         $complete++;
-                    }else{
+                    }else {
                         $status= '<button type="button" class="btn btn-outline-danger btn-rounded waves-effect waves-light">Incomplete</button>';
                         $incomplete++;
                     }
                     
                     
                     $response.= '<tr>
-                                    <input type="hidden" value="'.$work['id'].'" name="homework['.$row.'][homework_evaluation_id]">
+                                    <input type="hidden" value="'.$work['evaluation_id'].'" name="homework['.$row.'][homework_evaluation_id]">
                                     <td>'.$row.'</td>
                                     <td>'.$work['first_name'].' '.$work['last_name'].'</td>
                                     <td>'.$work['register_no'].'</td>
@@ -1731,7 +1738,7 @@ class AdminController extends Controller
                                     <td>'.$work['remarks'].'</td>
                                     <td>
                                         <div class="checkbox checkbox-primary mb-3">
-                                            <input  type="checkbox"  '.$check.'  name="homework['.$row.'][correction]">
+                                            <input  type="checkbox"  '.$check.$disabled.'  name="homework['.$row.'][correction]">
                                             <label for="correction"></label>
                                         </div>
                                     </td>

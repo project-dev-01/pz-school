@@ -2192,7 +2192,7 @@ class ApiController extends BaseController
             $classConn = $this->createNewConnection($request->branch_id);
             // get data
             $class_id = $request->class_id;
-            $class = $classConn->table('section_allocations as sa')->select('s.id', 's.name')
+            $class = $classConn->table('section_allocations as sa')->select('s.id as section_id', 's.name as section_name')
                 ->join('sections as s', 'sa.section_id', '=', 's.id')
                 ->where('sa.class_id', $class_id)
                 ->get();
@@ -2217,7 +2217,7 @@ class ApiController extends BaseController
             $classConn = $this->createNewConnection($request->branch_id);
             // get data
             $class_id = $request->class_id;
-            $class = $classConn->table('subject_assigns as sa')->select('s.id', 's.name')
+            $class = $classConn->table('subject_assigns as sa')->select('s.id as subject_id', 's.name as subject_name')
                 ->join('subjects as s', 'sa.subject_id', '=', 's.id')
                 ->where('sa.class_id', $class_id)
                 ->groupBy('s.id')
@@ -4609,8 +4609,25 @@ class ApiController extends BaseController
             // create new connection    
             $con = $this->createNewConnection($request->branch_id);
             // get data
-            $homework = $con->table('homework_evaluation as he')->select('he.*','s.first_name','s.last_name','s.register_no')->leftJoin('students as s', 'he.student_id', '=', 's.id')->where('he.homework_id',$request['homework_id'])->get();
+            // $homework = $con->table('homework_evaluation as he')->select('he.*','s.first_name','s.last_name','s.register_no')->leftJoin('students as s', 'he.student_id', '=', 's.id')->where('he.homework_id',$request['homework_id'])->get();
             
+            $homework_id = $request->homework_id;
+            $status = $request->status;
+            $evaluation = $request->evaluation;
+            $query = $con->table('homeworks as h')->select('s.first_name','s.last_name','s.register_no','h.document','he.id as evaluation_id','he.file','he.remarks','he.status','he.rank','he.score_name','he.correction','he.teacher_remarks','he.score_value')
+                                                    ->leftJoin('enrolls as e', function($q) use ($homework_id){
+                                                        $q->on('h.section_id', '=', 'e.section_id');
+                                                        $q->on('h.class_id', '=', 'e.class_id');
+                                                    })
+                                                    ->leftJoin('students as s', 'e.student_id', '=', 's.id')
+                                                    ->leftJoin('homework_evaluation as he', function($q) use ($homework_id){
+                                                        $q->on('h.id', '=', 'he.homework_id');
+                                                        $q->on('s.id', '=', 'he.student_id');
+                                                        $q->groupBy('he.student_id');
+                                                    })->where('h.id',$request['homework_id']);
+            $homework = $query->get();
+
+
             return $this->successResponse($homework, 'Homework record fetch successfully');
         }
     }
@@ -4756,7 +4773,7 @@ class ApiController extends BaseController
                                             ->where('homeworks.section_id',$student->section_id)
                                             ->orderBy('homeworks.created_at', 'desc');
 
-            $homework['homeworks'] = $query->get();;
+            $homework['homeworks'] = $query->get();
             
             
             if($subject == "All")

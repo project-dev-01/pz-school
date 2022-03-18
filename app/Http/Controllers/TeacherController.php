@@ -365,23 +365,20 @@ class TeacherController extends Controller
                 foreach($homework['data'] as $work)
                 {
                     $check = "";
-
-                    if($work['score_name']=="Marks")
-                    {
+                    $disabled = "";
+                    if($work['score_name']=="Marks") {
                         $score_name = '<select  class="form-control" required="" name="homework['.$row.'][score_name]">
                                                 <option Selected>Marks</option>
                                                 <option>Grade</option>
                                                 <option>Text</option>
                                             </select>';
-                    }elseif($work['score_name']=="Grade")
-                    {
+                    }elseif($work['score_name']=="Grade") {
                         $score_name = '<select  class="form-control" required="" name="homework['.$row.'][score_name]">
                                             <option>Marks</option>
                                             <option Selected>Grade</option>
                                             <option>Text</option>
                                         </select>';
-                    }elseif($work['score_name']=="Text")
-                    {
+                    }elseif($work['score_name']=="Text") {
                         $score_name = '<select  class="form-control" required="" name="homework['.$row.'][score_name]">
                                                 <option>Marks</option>
                                                 <option>Grade</option>
@@ -395,27 +392,28 @@ class TeacherController extends Controller
                                             </select>';
                     }
                         
-                    if($work['correction']=="1")
-                    {
+                    if($work['evaluation_id']==Null) {
+                       $disabled = "disabled";
+                    }
+
+                    if($work['correction']=="1") {
                         $check = "checked";
                         $checked++;
-
-                    }else{
+                    }else {
                         $unchecked++;
                     }
 
-                    if($work['status']=="1")
-                    {
+                    if($work['status']=="1") {
                         $status = '<button type="button" class="btn btn-outline-success btn-rounded waves-effect waves-light">Completed</button>';
                         $complete++;
-                    }else{
+                    }else {
                         $status= '<button type="button" class="btn btn-outline-danger btn-rounded waves-effect waves-light">Incomplete</button>';
                         $incomplete++;
                     }
                     
                     
                     $response.= '<tr>
-                                    <input type="hidden" value="'.$work['id'].'" name="homework['.$row.'][homework_evaluation_id]">
+                                    <input type="hidden" value="'.$work['evaluation_id'].'" name="homework['.$row.'][homework_evaluation_id]">
                                     <td>'.$row.'</td>
                                     <td>'.$work['first_name'].' '.$work['last_name'].'</td>
                                     <td>'.$work['register_no'].'</td>
@@ -436,7 +434,7 @@ class TeacherController extends Controller
                                     <td>'.$work['remarks'].'</td>
                                     <td>
                                         <div class="checkbox checkbox-primary mb-3">
-                                            <input  type="checkbox"  '.$check.'  name="homework['.$row.'][correction]">
+                                            <input  type="checkbox"  '.$check.$disabled.'  name="homework['.$row.'][correction]">
                                             <label for="correction"></label>
                                         </div>
                                     </td>
@@ -456,7 +454,7 @@ class TeacherController extends Controller
             
             
         }
-        // dd($homework);
+        
         return $homework;
     }
 

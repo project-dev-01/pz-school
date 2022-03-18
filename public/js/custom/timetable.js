@@ -26,12 +26,13 @@ $(function () {
     $("#class_id").on('change', function (e) {
         e.preventDefault();
         var class_id = $(this).val();
+        
         $("#section_id").empty();
         $("#section_id").append('<option value="">Select Class Name</option>');
         $.post(sectionByClass, { class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
-                    $("#section_id").append('<option value="' + val.id + '">' + val.name + '</option>');
+                    $("#section_id").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
                 });
             }
         }, 'json');

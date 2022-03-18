@@ -39,6 +39,18 @@
                                                                         <div id="homework-status" class="apex-charts" data-colors="#00b19d,#f1556c"></div>
                                                                     </div> <!-- collapsed end -->
                                                                 </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="card-widgets">
+                                                                        <!-- <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a> -->
+                                                                        <a data-toggle="collapse" href="#cardCollapseChecked" role="button" aria-expanded="false" aria-controls="cardCollapseChecked"><i class="mdi mdi-minus"></i></a>
+                                                                        <!-- <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a> -->
+                                                                    </div>
+                                                                    <h4 class="header-title mb-0">Checked Status</h4>
+
+                                                                    <div id="cardCollapseChecked" class="collapse pt-3 show" dir="ltr">
+                                                                        <div id="homework-checked-status" class="apex-charts" data-colors="#775DD0,#FEB019"></div>
+                                                                    </div> <!-- collapsed end -->
+                                                                </div>
                                                             </div>
                                                         </div> <!-- end card-body -->
                                                     </div> <!-- end card-->

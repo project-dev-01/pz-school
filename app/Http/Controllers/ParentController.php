@@ -230,6 +230,7 @@ class ParentController extends Controller
              [
                  'homework' => $homework['data']['homeworks'],
                  'subject' => $homework['data']['subjects'],
+                 'count' => $homework['data']['count'],
              ]
          );
      }

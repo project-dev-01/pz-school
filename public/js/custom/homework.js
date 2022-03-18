@@ -4,44 +4,6 @@
 
 $(function () {
 
-    var homeworkchart = 0;
-    // colors = ["#00b19d", "#f1556c"];
-    // (dataColors = $("#homework-status").data("colors")) && (colors = dataColors.split(","));
-    // options = {
-    //     chart: {
-    //         height: 320,
-    //         type: "donut"
-    //     },
-    //     series: [],
-    //     legend: {
-    //         show: !0,
-    //         position: "bottom",
-    //         horizontalAlign: "center",
-    //         verticalAlign: "middle",
-    //         floating: !1,
-    //         fontSize: "14px",
-    //         offsetX: 0,
-    //         offsetY: 7
-    //     },
-    //     labels: [ "Complete", "Incomplete"],
-    //     colors: colors,
-    //     responsive: [{
-    //         breakpoint: 600,
-    //         options: {
-    //             chart: {
-    //                 height: 240
-    //             },
-    //             legend: {
-    //                 show: !1
-    //             }
-    //         }
-    //     }],
-    //     fill: {
-    //         type: "gradient"
-    //     }
-    // };
-    // (chart = new ApexCharts(document.querySelector("#homework-status"), options)).render();
-
     $("#evaluationFilterForm").validate({
         rules: {
             class_id:"required",
@@ -216,10 +178,10 @@ $(function () {
         var class_id = $(this).val();
         
         $("#section_id").empty();
-        $("#section_id").append('<option value="">Select Section Name</option>');
+        $("#section_id").append('<option value="">Select Class Name</option>');
         
         $("#subject_id").empty();
-        $("#subject_id").append('<option value="">Select Subject Name</option>');
+        $("#subject_id").append('<option value="">Select Subject</option>');
         $.post(sectionByClass, { class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -235,7 +197,7 @@ $(function () {
         var class_id = $("#class_id").val();
         
         $("#subject_id").empty();
-        $("#subject_id").append('<option value="">Select Subject Name</option>');
+        $("#subject_id").append('<option value="">Select Subject</option>');
         $.post(subjectByClass, { class_id: class_id, section_id: section_id }, function (res) {
             console.log('data',res)
             if (res.code == 200) {
@@ -247,88 +209,137 @@ $(function () {
     });
 
     
+    $('#evaluationModalFilter').on('submit', function (e) {
+        e.preventDefault();
+        var form = this;
+        
+        $.ajax({
+            url: homeworkView,
+            method: $(form).attr('method'),
+            data: new FormData(form),
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (data) {
+                console.log('cs',data)
+                if (res.code == 200) {
+                    $("#homework_modal_table").html(res.table);
+                    var complete = res.complete;
+                    var incomplete = res.incomplete;
+                    var checked = res.checked;
+                    var unchecked = res.unchecked;
+    
+                    callchart(complete,incomplete,checked,unchecked);
+                    homeworkchart.updateSeries([complete,incomplete]);
+                    homeworkevaluationchart.updateSeries([checked,unchecked]);
+                    
+                }
+            }
+        });
+    });
 
     $('.firstModal').on('shown.bs.modal', e => {
         var $button = $(e.relatedTarget);
         var homework_id = $button.attr('data-homework_id');
-
-        
-
+        $("#homework_id").val(homework_id);
         $.post(homeworkView, { homework_id: homework_id }, function (res) {
             console.log('fun',res)
             if (res.code == 200) {
                 $("#homework_modal_table").html(res.table);
-                // var checked = res.checked;
-                // var unchecked = res.unchecked;
-
-                console.log('comp',res.complete)
-                console.log('incom',res.incomplete)
                 var complete = res.complete;
                 var incomplete = res.incomplete;
+                var checked = res.checked;
+                var unchecked = res.unchecked;
 
-                callchart(complete,incomplete);
-                // chart.updateSeries([{
-                //     name: "Complete",
-                //     data: [1]
-                // }, {
-                //     name: "Incomplete",
-                //     data: [3]
-                // }]);
-
+                callchart(complete,incomplete,checked,unchecked);
+                homeworkchart.updateSeries([complete,incomplete]);
+                homeworkevaluationchart.updateSeries([checked,unchecked]);
                 
             }
         }, 'json');
-
-        
-
-
     }).on('hidden.bs.modal', function (event) {
 
     });
 
 
-    function callchart(complete,incomplete){
+    function callchart(complete,incomplete,checked,unchecked){
 
         colors = ["#00b19d", "#f1556c"];
-            (dataColors = $("#homework-status").data("colors")) && (colors = dataColors.split(","));
-            options = {
-                chart: {
-                    height: 320,
-                    type: "donut"
-                },
-                series: [complete,incomplete],
-                legend: {
-                    show: !0,
-                    position: "bottom",
-                    horizontalAlign: "center",
-                    verticalAlign: "middle",
-                    floating: !1,
-                    fontSize: "14px",
-                    offsetX: 0,
-                    offsetY: 7
-                },
-                labels: [ "Complete", "Incomplete"],
-                colors: colors,
-                responsive: [{
-                    breakpoint: 600,
-                    options: {
-                        chart: {
-                            height: 240
-                        },
-                        legend: {
-                            show: !1
-                        }
+        (dataColors = $("#homework-status").data("colors")) && (colors = dataColors.split(","));
+        options = {
+            chart: {
+                height: 320,
+                type: "donut"
+            },
+            series: [complete,incomplete],
+            legend: {
+                show: !0,
+                position: "bottom",
+                horizontalAlign: "center",
+                verticalAlign: "middle",
+                floating: !1,
+                fontSize: "14px",
+                offsetX: 0,
+                offsetY: 7
+            },
+            labels: [ "Complete", "Incomplete"],
+            colors: colors,
+            responsive: [{
+                breakpoint: 600,
+                options: {
+                    chart: {
+                        height: 240
+                    },
+                    legend: {
+                        show: !1
                     }
-                }],
-                fill: {
-                    type: "gradient"
                 }
-            };
-            
-            homeworkchart = new ApexCharts(document.querySelector("#homework-status"), options);
-            homeworkchart.render();
+            }],
+            fill: {
+                type: "gradient"
+            }
+        };
+        
+        homeworkchart = new ApexCharts(document.querySelector("#homework-status"), options);
+        homeworkchart.render();
 
-        console.log('chart',homeworkchart)
+        colors = ["#775DD0", "#FEB019"];
+        (dataColors = $("#homework-checked-status").data("colors")) && (colors = dataColors.split(","));
+        options = {
+            chart: {
+                height: 320,
+                type: "donut"
+            },
+            series: [checked,unchecked],
+            legend: {
+                show: !0,
+                position: "bottom",
+                horizontalAlign: "center",
+                verticalAlign: "middle",
+                floating: !1,
+                fontSize: "14px",
+                offsetX: 0,
+                offsetY: 7
+            },
+            labels: [ "Checked", "Unchecked"],
+            colors: colors,
+            responsive: [{
+                breakpoint: 600,
+                options: {
+                    chart: {
+                        height: 240
+                    },
+                    legend: {
+                        show: !1
+                    }
+                }
+            }],
+            fill: {
+                type: "gradient"
+            }
+        };
+        homeworkevaluationchart = new ApexCharts(document.querySelector("#homework-checked-status"), options);
+        homeworkevaluationchart.render();
         
     }
 });

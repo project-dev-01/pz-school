@@ -39,16 +39,16 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="text-right">
-                                                <h3 class="my-1"><span data-plugin="counterup">98</span></h3>
+                                                <h3 class="my-1"><span data-plugin="counterup">{{$count['ontime']}}</span></h3>
                                                 <p class="text-muted mb-1 text-truncate">On Time Submission</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="mt-3">
-                                        <h6 class="text-uppercase">Target <span class="float-right">98%</span></h6>
+                                        <h6 class="text-uppercase">Target <span class="float-right">{{$count['ontime_percentage']}}%</span></h6>
                                         <div class="progress progress-sm m-0">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100" style="width: 98%">
-                                                <span class="sr-only">98% Complete</span>
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="{{$count['ontime_percentage']}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$count['ontime_percentage']}}%">
+                                                <span class="sr-only">{{$count['ontime_percentage']}}% Complete</span>
                                             </div>
                                         </div>
                                     </div>
@@ -65,16 +65,16 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="text-right">
-                                                <h3 class="my-1"><span data-plugin="counterup">2</span></h3>
+                                                <h3 class="my-1"><span data-plugin="counterup">{{$count['late']}}</span></h3>
                                                 <p class="text-muted mb-1 text-truncate">Late Submission </p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="mt-3">
-                                        <h6 class="text-uppercase">Target <span class="float-right">2%</span></h6>
+                                        <h6 class="text-uppercase">Target <span class="float-right">{{$count['late_percentage']}}%</span></h6>
                                         <div class="progress progress-sm m-0">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="width: 2%">
-                                                <span class="sr-only">2% Complete</span>
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="{{$count['late_percentage']}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$count['late_percentage']}}%">
+                                                <span class="sr-only">{{$count['late_percentage']}}% Complete</span>
                                             </div>
                                         </div>
                                     </div>
