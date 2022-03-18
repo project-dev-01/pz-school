@@ -13,6 +13,8 @@ use App\Models\States;
 use App\Helpers\DatabaseConnection;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr\FuncCall;
+
 class CommonController extends BaseController
 {
     //
@@ -69,7 +71,20 @@ class CommonController extends BaseController
             $success = DB::table('forum_categorys')->where('branch_id', $request->branch_id)->get();
             $success = Category::all();
             return $this->successResponse($success, 'category record fetch successfully');
-        }
-       
+        }       
+    }
+    public function dbnameslist(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+               // create new connection              
+            $success = DB::table('branches')->select('school_name','id')->get();
+            
+            return $this->successResponse($success, 'school db names fetch successfully');
+        }  
     }
 }

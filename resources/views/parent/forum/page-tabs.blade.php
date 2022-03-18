@@ -24,13 +24,18 @@
             </div>
             <div class="tab-content">
                 <div class="tab-pane show fade active" id="tt-tab-01" role="tabpanel">
+                
                     <div class="tt-layout-tab">
                         <div class="tt-wrapper-inner">
                             <h2 class="tt-title">
-                                About Forum 19
+                                About Forum 
                             </h2>
-                            Forum 19 is a community of creatives who come together to share ideas and help each other succeed.
+                            <p> is a community of creatives who come together to share ideas and help each other succeed.</p>
                             <h3 class="tt-title">
+                            As the basis for our educational delivery system
+                            </h3>
+                            <p>Forum paves the path for global, high-impact new and expanded programs. Rather than a one-way conduit for information sharing or a repurposed business conferencing tool, the learning environment offers a deeply engaging digital experience for learners and instructors alike. Its robust features, varied learning modalities, and data gathering and management tools offer capabilities and insights not available in any other platform.</p>
+                            <!-- <h3 class="tt-title">
                                 Admins
                             </h3>
                             <div class="tt-list-avatar">
@@ -73,7 +78,46 @@
                                                 <div class="tt-value">@kevin27</div>
                                             </div>
                                         </a>
-                                    </div>                                   
+                                    </div>
+                                    <div class="col-6 col-md-4 col-lg-3">
+                                        <a href="#" class="tt-avatar">
+                                            <div class="tt-col-icon">
+                                                <svg class="tt-icon">
+                                                    <use xlink:href="#icon-ava-g"></use>
+                                                </svg>
+                                            </div>
+                                            <div class="tt-col-description">
+                                                <h6 class="tt-title">Green</h6>
+                                                <div class="tt-value">@green63</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-6 col-md-4 col-lg-3">
+                                        <a href="#" class="tt-avatar">
+                                            <div class="tt-col-icon">
+                                                <svg class="tt-icon">
+                                                    <use xlink:href="#icon-ava-d"></use>
+                                                </svg>
+                                            </div>
+                                            <div class="tt-col-description">
+                                                <h6 class="tt-title">Dylan</h6>
+                                                <div class="tt-value">@dylan89</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-6 col-md-4 col-lg-3">
+                                        <a href="#" class="tt-avatar">
+                                            <div class="tt-col-icon">
+                                                <svg class="tt-icon">
+                                                    <use xlink:href="#icon-ava-p"></use>
+                                                </svg>
+                                            </div>
+                                            <div class="tt-col-description">
+                                                <h6 class="tt-title">Peterson</h6>
+                                                <div class="tt-value">@dylan89</div>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <h4 class="tt-title">
@@ -132,12 +176,103 @@
                                                 <div class="tt-value">@larry74</div>
                                             </div>
                                         </a>
-                                    </div>                                 
+                                    </div>
+                                    <div class="col-6 col-md-4 col-lg-3">
+                                        <a href="#" class="tt-avatar">
+                                            <div class="tt-col-icon">
+                                                <svg class="tt-icon">
+                                                    <use xlink:href="#icon-ava-j"></use>
+                                                </svg>
+                                            </div>
+                                            <div class="tt-col-description">
+                                                <h6 class="tt-title">Jordan</h6>
+                                                <div class="tt-value">@jordan36</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-6 col-md-4 col-lg-3">
+                                        <a href="#" class="tt-avatar">
+                                            <div class="tt-col-icon">
+                                                <svg class="tt-icon">
+                                                    <use xlink:href="#icon-ava-c"></use>
+                                                </svg>
+                                            </div>
+                                            <div class="tt-col-description">
+                                                <h6 class="tt-title">Clive</h6>
+                                                <div class="tt-value">@clive45</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-6 col-md-4 col-lg-3">
+                                        <a href="#" class="tt-avatar">
+                                            <div class="tt-col-icon">
+                                                <svg class="tt-icon">
+                                                    <use xlink:href="#icon-ava-m"></use>
+                                                </svg>
+                                            </div>
+                                            <div class="tt-col-description">
+                                                <h6 class="tt-title">Mitchell</h6>
+                                                <div class="tt-value">@mitchell73</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-6 col-md-4 col-lg-3">
+                                        <a href="#" class="tt-avatar">
+                                            <div class="tt-col-icon">
+                                                <svg class="tt-icon">
+                                                    <use xlink:href="#icon-ava-v"></use>
+                                                </svg>
+                                            </div>
+                                            <div class="tt-col-description">
+                                                <h6 class="tt-title">Vans</h6>
+                                                <div class="tt-value">@vans49</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-6 col-md-4 col-lg-3">
+                                        <a href="#" class="tt-avatar">
+                                            <div class="tt-col-icon">
+                                                <svg class="tt-icon">
+                                                    <use xlink:href="#icon-ava-p"></use>
+                                                </svg>
+                                            </div>
+                                            <div class="tt-col-description">
+                                                <h6 class="tt-title">Baker</h6>
+                                                <div class="tt-value">@baker65</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-6 col-md-4 col-lg-3">
+                                        <a href="#" class="tt-avatar">
+                                            <div class="tt-col-icon">
+                                                <svg class="tt-icon">
+                                                    <use xlink:href="#icon-ava-f"></use>
+                                                </svg>
+                                            </div>
+                                            <div class="tt-col-description">
+                                                <h6 class="tt-title">Foster</h6>
+                                                <div class="tt-value">@foster87</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-6 col-md-4 col-lg-3">
+                                        <a href="#" class="tt-avatar">
+                                            <div class="tt-col-icon">
+                                                <svg class="tt-icon">
+                                                    <use xlink:href="#icon-ava-o"></use>
+                                                </svg>
+                                            </div>
+                                            <div class="tt-col-description">
+                                                <h6 class="tt-title">Olly</h6>
+                                                <div class="tt-value">@olly39</div>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
-                        <div class="table-responsive-sm tt-indent-top">
-                            <table class="table-01">
+                        
+                            <!-- <table class="table-01">
                                 <caption>Site Statistics</caption>
                                 <thead>
                                     <tr>
@@ -179,8 +314,9 @@
                                         <td>9.2k</td>
                                     </tr>
                                 </tbody>
-                            </table>
-                        </div>
+                            </table> -->
+                           
+                        
                         <div class="tt-wrapper-inner tt-indent-top">
                             <h4 class="tt-title">
                                 Contact Us
@@ -188,6 +324,7 @@
                             Please feel free to leave us a message at sample@sample.com
                         </div>
                     </div>
+               
                 </div>
                 <div class="tab-pane" id="tt-tab-02" role="tabpanel">
                     <div class="tt-wrapper-inner tt-layout-tab">

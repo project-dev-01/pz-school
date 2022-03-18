@@ -39,7 +39,7 @@
                     <div class="tt-item">
                         <div class="tt-item-header">
                             <ul class="tt-list-badge">
-                                <li><a href="{{route('admin.forum.page-categories-single-val',[$value['categId'],$value['user_id'],$value['category_names']])}}">
+                                <li><a href="{{route('super_admin.forum.page-categories-single-val',[$value['categId'],$value['user_id'],$value['category_names']])}}">
                                         <span class="tt-color0{{$randomcolor}} tt-badge">
                                             @php
                                             echo App\Http\Controllers\CommonController::limitedChar_category(($value['category_names']));

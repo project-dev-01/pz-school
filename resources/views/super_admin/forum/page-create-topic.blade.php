@@ -6,7 +6,7 @@
             <h1 class="tt-title-border">
                 Create New Topic
             </h1>
-            <form class="form-default form-create-topic" id="createpostForum" method="post" action="{{ route('admin.forum.create-topic') }}">
+            <form class="form-default form-create-topic" id="createpostForum" method="post" action="{{ route('super_admin.forum.create-topic') }}">
                 @csrf
                 <div class="form-group">
                     <label for="inputTopicTitle">Topic Title</label>
@@ -48,7 +48,7 @@
                                             <use xlink:href="#Poll"></use>
                                         </svg>
                                     </span>
-                                    <span class="tt-text">Poll</span>
+                                    <span class="tt-text">Technology</span>
                                 </a>
                             </div>
                             <!--  <div class="col-4 col-lg-3 col-xl-2">
@@ -185,16 +185,44 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-8" style="width: 800px;margin:0 auto;">
                             <div class="form-group">
-                                <label for="inputTopicTags">Tags</label>
-                                <input type="text" name="inputTopicTags" class="form-control" id="inputTopicTags" placeholder="Use comma to separate tags">
+                                 <label for="inputTopic">User</label>
+                                <select name="states[]" id="selectedusers" class="form-control js-example-basic-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ...">>
+                                    
+                                    <option value=""></option>
+                                        @if(!empty($usernames))
+                                        @foreach($usernames as $c)
+                                        <option value="{{$c['id']}}">{{$c['name']}}</option>
+                                        @endforeach
+                                        @endif
+
+                                </select>
+                                <input type="hidden" id="tags" name="tags">
+                                <!-- <input type="text" id="inputTopicTags" placeholder="" autocomplete="off" class="form-control input-lg" />
+                                <input type="text" name="inputTopicTags" autocomplete="off" class="form-control" id="inputTopicTags" placeholder="Use comma to separate tags"> -->
+
+
+                                <!-- <div id="userlist"></div> -->
+                                <!-- For defining autocomplete -->
+                                <!-- <select class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ...">
+                                    <option value="">Choose Department</option>
+                                    @if(!empty($usernames))
+                                    @foreach($usernames as $value)
+                                    <option value="{{$value['id']}}">{{$value['name']}}</option>
+                                    @endforeach
+                                    @endif
+                                </select>                                -->
+
                             </div>
+
                         </div>
+                        <br>
+                        <span id="grpnames"></span>
                     </div>
                     <div class="row">
                         <div class="col-auto ml-md-auto">
-                            <button type="submit" class="btn btn-secondary btn-width-lg">Create Post</button>
+                            <button type="submit" id="search" class="btn btn-secondary btn-width-lg">Create Post</button>
                         </div>
                     </div>
                 </div>
@@ -231,16 +259,16 @@
                 <div class="tt-col-value hide-mobile">Views</div>
                 <div class="tt-col-value">Activity</div>
             </div>
-            
+
             @if(!empty($forum_list))
             @php
             $randomcolor = 1;
             @endphp
             @foreach($forum_list as $value)
-            @php           
+            @php
             if($randomcolor==9)
             {
-                $randomcolor = 1;
+            $randomcolor = 1;
             }
             @endphp
             <div class="tt-item">
@@ -253,7 +281,7 @@
                 </div>
                 <div class="tt-col-description">
                     <h6 class="tt-title">
-                        <a href="{{route('admin.forum.page-single-topic-val',[$value['id'],$value['user_id']])}}">
+                        <a href="{{route('super_admin.forum.page-single-topic-val',[$value['id'],$value['user_id']])}}">
                             {{ $value['topic_title'] }}
                         </a>
                     </h6>

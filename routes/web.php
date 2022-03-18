@@ -188,7 +188,9 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::get('users/user_list', [SuperAdminController::class, 'getUserList'])->name('users.user_list');
         Route::post('users/delete', [SuperAdminController::class, 'deleteUser'])->name('users.delete');
         // Forum routes
-        Route::get('forum/index', [SuperAdminController::class, 'forumIndex'])->name('super_admin.forum.index');
+        //Route::get('forum/index', [SuperAdminController::class, 'forumIndex'])->name('super_admin.forum.index');
+        Route::post('forum/index', [SuperAdminController::class, 'forumIndex'])->name('super_admin.forum.index');
+        Route::get('forum/rolls-chooseforum', [SuperAdminController::class, 'superadminrollchoose'])->name('super_admin.forum.rolls-chooseforum');
         Route::get('forum/page-single-topic', [SuperAdminController::class, 'forumPageSingleTopic'])->name('super_admin.forum.page-single-topic');
         Route::get('forum/page-create-topic', [SuperAdminController::class, 'forumPageCreateTopic'])->name('super_admin.forum.page-create-topic');
         Route::get('forum/page-single-user', [SuperAdminController::class, 'forumPageSingleUser'])->name('super_admin.forum.page-single-user');
@@ -204,7 +206,8 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::post('form/page-create-topic', [SuperAdminController::class, 'createpost'])->name('super_admin.forum.create-topic');
         Route::get('forum/page-single-topic-val/{id}/{user_id}', [SuperAdminController::class, 'forumPageSingleTopicwithvalue'])->name('super_admin.forum.page-single-topic-val');
         Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [SuperAdminController::class, 'forumPageCategoriesSingle'])->name('super_admin.forum.page-categories-single-val');
-  
+        Route::get('forum/selecteddb', [SuperAdminController::class, 'dbvsgetbranchid'])->name('super_admin.forum.selecteddbname');
+        Route::post('form/postimage', [SuperAdminController::class, 'imagestore'])->name('super_admin.forum.image.store');
         // Attendance routes
         Route::get('attendance/student_entry', [SuperAdminController::class, 'studentEntry'])->name('attendance.student_entry');
         Route::get('attendance/employee_entry', [SuperAdminController::class, 'employeeEntry'])->name('attendance.employee_entry');
@@ -453,6 +456,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('form/page-create-topic', [AdminController::class, 'createpost'])->name('admin.forum.create-topic');
         Route::get('forum/page-single-topic-val/{id}/{user_id}', [AdminController::class, 'forumPageSingleTopicwithvalue'])->name('admin.forum.page-single-topic-val');
         Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [AdminController::class, 'forumPageCategoriesSingle'])->name('admin.forum.page-categories-single-val');
+        Route::post('form/postimage', [AdminController::class, 'imagestore'])->name('admin.forum.image.store');
     });
     // admin routes end
 
@@ -478,7 +482,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('form/page-create-topic', [StaffController::class, 'createpost'])->name('staff.forum.create-topic');
         Route::get('forum/page-single-topic-val/{id}/{user_id}', [StaffController::class, 'forumPageSingleTopicwithvalue'])->name('staff.forum.page-single-topic-val');
         Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [StaffController::class, 'forumPageCategoriesSingle'])->name('staff.forum.page-categories-single-val');       
-
+        Route::post('form/postimage', [StaffController::class, 'imagestore'])->name('staff.forum.image.store');
         // Settings
         Route::get('settings', [StaffController::class, 'settings'])->name('staff.settings');
         // faq        
@@ -652,6 +656,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('form/page-create-topic', [TeacherController::class, 'createpost'])->name('teacher.forum.create-topic');
         Route::get('forum/page-single-topic-val/{id}/{user_id}', [TeacherController::class, 'forumPageSingleTopicwithvalue'])->name('teacher.forum.page-single-topic-val');
         Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [TeacherController::class, 'forumPageCategoriesSingle'])->name('teacher.forum.page-categories-single-val');
+        Route::post('form/postimage', [TeacherController::class, 'imagestore'])->name('teacher.forum.image.store');
 
         // Settings
         Route::get('settings', [TeacherController::class, 'settings'])->name('teacher.settings');
@@ -730,6 +735,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('form/page-create-topic', [ParentController::class, 'createpost'])->name('parent.forum.create-topic');
         Route::get('forum/page-single-topic-val/{id}/{user_id}', [ParentController::class, 'forumPageSingleTopicwithvalue'])->name('parent.forum.page-single-topic-val');
         Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [ParentController::class, 'forumPageCategoriesSingle'])->name('parent.forum.page-categories-single-val');
+        Route::post('form/postimage', [ParentController::class, 'imagestore'])->name('parent.forum.image.store');
 
 
         //attendance routes
@@ -787,9 +793,10 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('forum/page-tabs-guidelines', [StudentController::class, 'forumPageTabGuidelines'])->name('student.forum.page-tabs-guidelines');
 
 
-        Route::post('form/page-create-topic', [ParentController::class, 'createpost'])->name('student.forum.create-topic');
-        Route::get('forum/page-single-topic-val/{id}/{user_id}', [ParentController::class, 'forumPageSingleTopicwithvalue'])->name('student.forum.page-single-topic-val');
-        Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [ParentController::class, 'forumPageCategoriesSingle'])->name('student.forum.page-categories-single-val');
+        Route::post('form/page-create-topic', [StudentController::class, 'createpost'])->name('student.forum.create-topic');
+        Route::get('forum/page-single-topic-val/{id}/{user_id}', [StudentController::class, 'forumPageSingleTopicwithvalue'])->name('student.forum.page-single-topic-val');
+        Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [StudentController::class, 'forumPageCategoriesSingle'])->name('student.forum.page-categories-single-val');
+        Route::post('form/postimage', [StudentController::class, 'imagestore'])->name('student.forum.image.store');
 
         Route::get('/analyticrep', [StudentController::class, 'analytic'])->name('student.analyticrep.analyticreport');
     });

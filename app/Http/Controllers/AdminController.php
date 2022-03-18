@@ -18,13 +18,22 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Carbon\Carbon;
+use PhpParser\Node\Expr\FuncCall;
+use app\Models;
+use App\Models\Task;
+
 class AdminController extends Controller
 {
     // forum screen pages start
     public function forumIndex()
-    {
-        $forum_list = Helper::GetMethod(config('constants.api.forum_list')); 
-
+    {        
+        $user_id= session()->get('user_id');  
+        $data = [            
+            'user_id' => $user_id
+        ];
+        
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$data); 
+        //dd($forum_list);
           return view('admin.forum.index', [
             'forum_list' => $forum_list['data']
         ]);
@@ -35,13 +44,19 @@ class AdminController extends Controller
     }
     public function forumPageCreateTopic()
     {
+        $user_id= session()->get('user_id');  
+        $data = [            
+            'user_id' => $user_id
+        ];
         $category = Helper::GetMethod(config('constants.api.category'));
-  
-        $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
-       // dd($forum_list);
+        $usernames=Helper::GetMethod(config('constants.api.usernames_autocomplete'));
+        //dd($usernames);
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$data);
+        // dd($forum_list);
         return view('admin.forum.page-create-topic', [
             'category' => $category['data'],
-            'forum_list' => $forum_list['data']
+            'forum_list' => $forum_list['data'],
+            'usernames' => $usernames['data']
         ]);
     }
     public function forumPageSingleUser()
@@ -118,7 +133,7 @@ class AdminController extends Controller
            'types' => $request->topictype,
            'body_content' => $request->tpbody,
            'category' => $request->category,
-           'tags' => $request->inputTopicTags,
+           'tags' => $request->tags,
            'imagesorvideos' => $request->inputTopicTitle,
            'threads_status'=>2
        ];
@@ -136,16 +151,31 @@ class AdminController extends Controller
            'created_post_id' => $id,
            'user_id' => $user_id,
        ]; 
-       $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
+       $user_id= session()->get('user_id');  
+       $usdata = [            
+           'user_id' => $user_id
+       ];
+      
+       $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$usdata);
        $forum_singlepost = Helper::GETMethodWithData(config('constants.api.forum_single_post'), $data);
        $forum_singlepost_replies = Helper::GETMethodWithData(config('constants.api.forum_single_post_replies'), $data);
-       //dd($forum_singlepost_replies);
        return view('admin.forum.page-single-topic', [
            'forum_single_post' => !empty($forum_singlepost['data']) ? $forum_singlepost['data'] : $forum_singlepost,
            'forum_singlepost_replies' => $forum_singlepost_replies['data'],
            'forum_list' => $forum_list['data']
 
        ]);
+   }
+   public function imagestore(Request $request)
+   {
+       //dd($request);     
+       $task=new Task();
+       $task->id=0;
+       $task->exists=true;
+       $image = $task->addMediaFromRequest('upload')->toMediaCollection('images');
+       $geturl=$image->getUrl();
+       //  dd($image->getUrl());
+       return response()->json(['url'=>$image->getUrl()]);
    }
     // forum screen pages end
     //

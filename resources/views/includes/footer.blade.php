@@ -186,6 +186,9 @@
     var userList = "{{ route('users.user_list') }}";
     var userShow = "{{ route('users.user') }}";
     var deleteUser = "{{ route('users.delete') }}";
+
+    //forum permission
+    var getuserid="{{config('constants.api.dbvsgetbranchid')}}";
 </script>
 <!-- custom js  -->
 <!-- <script src="{{ asset('js/custom/classes.js') }}"></script>

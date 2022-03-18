@@ -2691,9 +2691,9 @@ class ApiController extends BaseController
             'imagesorvideos' => 'required',
             'threads_status' => 'required'
         ]);
-
+        
         if (!$validator->passes()) {
-            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+            return $this->send422Error('Validation errors.', ['error' => $validator->errors()->toArray()]);
         } else {
             // create new connection
             $class = new Forum_posts();
@@ -2726,10 +2726,10 @@ class ApiController extends BaseController
     // forum all post branch id wise
     public function postList(Request $request)
     {
-
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
-            'branch_id' => 'required'
+            'branch_id' => 'required',
+            'user_id'=>'required'
         ]);
 
         if (!$validator->passes()) {
@@ -2781,6 +2781,7 @@ class ApiController extends BaseController
                 )
                 ->where('forum_posts.branch_id', '=', $request->branch_id)
                 ->where('forum_posts.threads_status', '=', 2)
+                ->whereRaw("find_in_set($request->user_id,forum_posts.tags)")
                 ->get();
 
 
@@ -4249,6 +4250,46 @@ class ApiController extends BaseController
         }
         return  $this->successResponse($success, 'Thread status successfully Updated');
     }
+    public function usernameautocomplete(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+
+            'token' => 'required'
+
+        ]);
+        //dd($validator);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+               // create new connection              
+            $success = DB::table('users')->select('id','name')
+            ->where('id','!=',1)
+            ->get();
+         //   $success = Category::all();
+            return $this->successResponse($success, 'user name record fetch successfully');
+        }
+    }
+    public function getuserid(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id'=>'required'
+
+        ]);
+        //dd($validator);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+               // create new connection              
+            $success = DB::table('users')->select('id','name')
+            ->where('id','!=',$request->branch_id)
+            ->get();
+            dd($success);
+         //   $success = Category::all();
+            return $this->successResponse($success, 'user name record fetch successfully');
+        }
+    }
+
 
 
     // addHomework

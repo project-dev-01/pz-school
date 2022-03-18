@@ -152,6 +152,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('database_migrate',[CommonController::class,'databaseMigrate']);
     // forum     
     Route::get('get-category', [CommonController::class, 'categoryList']);
+    Route::get('get-dbnames', [CommonController::class, 'dbnameslist']);
+    Route::post('get-branchid', [ApiController::class, 'schoolvsbranchid']);
     Route::get('forum/list', [ApiController::class, 'postList']);
     Route::get('forum/threadslist', [ApiController::class, 'ThreadspostList']);
     Route::get('forum/userthreadslist', [ApiController::class, 'userThreadspostList']);
@@ -174,6 +176,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('forum-repdislikecout',[ApiController::class,'repdislikescountadded']);  
     Route::post('forum-repfavorits',[ApiController::class,'repfavcountadded']);
     Route::post('forum/threads/status/update',[ApiController::class,'threadstatusupdate']);
+    Route::get('forum/usernames/autocomplete',[ApiController::class,'usernameautocomplete']);
+    Route::get('forum/getuserid',[ApiController::class,'getuserid']);
     // classroom management
     Route::post('teacher_class',[ApiController::class,'getTeachersClassName']);
     Route::post('teacher_section',[ApiController::class,'getTeachersSectionName']);

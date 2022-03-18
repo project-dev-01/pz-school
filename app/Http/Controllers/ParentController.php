@@ -6,7 +6,7 @@ use App\Models\Lesson;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use App\Models\User;
-
+use App\Models\Task;
 class ParentController extends Controller
 {
     //
@@ -83,64 +83,83 @@ class ParentController extends Controller
         );
     }
     // forum screen pages start
-    public function forumIndex(){
-        $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
+    public function forumIndex()
+    {
+        $user_id = session()->get('user_id');
+        $data = [
+            'user_id' => $user_id
+        ];
+
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'), $data);
         //dd($forum_list);
         return view('parent.forum.index', [
             'forum_list' => $forum_list['data']
         ]);
     }
-    public function forumPageSingleTopic(){
+    public function forumPageSingleTopic()
+    {
         return view('parent.forum.page-single-topic');
     }
-    public function forumPageCreateTopic(){
-        $category = Helper::GetMethod(config('constants.api.category'));
-
-        $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
-
-        return view('parent.forum.page-create-topic', [
-            'category' => $category['data'],
-            'forum_list' => $forum_list['data']
-        ]);
-    }
-    public function forumPageSingleUser(){
+    public function forumPageCreateTopic()
+    {
         $user_id = session()->get('user_id');
         $data = [
+            'user_id' => $user_id
+        ];
+        $category = Helper::GetMethod(config('constants.api.category'));
+        $usernames = Helper::GetMethod(config('constants.api.usernames_autocomplete'));
+        //dd($usernames);
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'), $data);
+        // dd($forum_list);
+        return view('parent.forum.page-create-topic', [
+            'category' => $category['data'],
+            'forum_list' => $forum_list['data'],
+            'usernames' => $usernames['data']
+        ]);
+    }
+    public function forumPageSingleUser()
+    {
+        $user_id= session()->get('user_id');  
+        $data = [            
             'user_id' => $user_id
         ];
         $forum_post_user_crd = Helper::GETMethodWithData(config('constants.api.forum_post_user_created'), $data);
         $forum_categorypost_user_crd = Helper::GETMethodWithData(config('constants.api.forum_categorypost_user_created'), $data);
         $forum_post_user_allreplies = Helper::GETMethodWithData(config('constants.api.forum_posts_user_repliesall'), $data);
-        //$forum_threadslist = Helper::GetMethod(config('constants.api.forum_threadslist'));
-        $forum_userthreadslist = Helper::GETMethodWithData(config('constants.api.forum_userthreadslist'), $data);
-        //dd($forum_categorypost_user_crd);
+        $forum_threadslist = Helper::GetMethod(config('constants.api.forum_threadslist'));
+       // dd($forum_threadslist);
         return view('parent.forum.page-single-user', [
             'forum_post_user_crd' => $forum_post_user_crd['data'],
             'forum_categorypost_user_crd' => $forum_categorypost_user_crd['data'],
             'forum_post_user_allreplies' =>$forum_post_user_allreplies['data'],
-            'forum_userthreadslist' =>$forum_userthreadslist['data']
+            'forum_threadslist' =>$forum_threadslist['data']
         ]);
-     
     }
-    public function forumPageSingleThreads(){
+    public function forumPageSingleThreads()
+    {
         return view('parent.forum.page-single-threads');
     }
-    public function forumPageSingleReplies(){
+    public function forumPageSingleReplies()
+    {
         return view('parent.forum.page-single-replies');
     }
-    public function forumPageSingleFollowers(){
+    public function forumPageSingleFollowers()
+    {
         return view('parent.forum.page-single-followers');
     }
-    public function forumPageSingleCategories(){
+    public function forumPageSingleCategories()
+    {
         return view('parent.forum.page-single-categories');
     }
-    public function forumPageCategories(){
+    public function forumPageCategories()
+    {
         $listcategoryvs = Helper::GetMethod(config('constants.api.listcategoryvs'));
         return view('parent.forum.page-categories', [
             'listcategoryvs' => $listcategoryvs['data']
         ]);
     }
-    public function forumPageCategoriesSingle($categId, $user_id, $category_names){
+    public function forumPageCategoriesSingle($categId, $user_id, $category_names)
+    {
         session()->put('session_category_names', $category_names);
         $data = [
             'categId' => $categId,
@@ -152,10 +171,12 @@ class ParentController extends Controller
             'forum_category' => $forum_category['data']
         ]);
     }
-    public function forumPageTabs(){
+    public function forumPageTabs()
+    {
         return view('parent.forum.page-tabs');
     }
-    public function forumPageTabGuidelines(){
+    public function forumPageTabGuidelines()
+    {
         return view('parent.forum.page-tabs-guidelines');
     }
     // forum create post 
@@ -169,7 +190,7 @@ class ParentController extends Controller
             'types' => $request->topictype,
             'body_content' => $request->tpbody,
             'category' => $request->category,
-            'tags' => $request->inputTopicTags,
+            'tags' => $request->tags,
             'imagesorvideos' => $request->inputTopicTitle,
             'threads_status'=>1
         ];
@@ -187,7 +208,12 @@ class ParentController extends Controller
             'created_post_id' => $id,
             'user_id' => $user_id,
         ];
-        $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
+        $user_id = session()->get('user_id');
+        $usdata = [
+            'user_id' => $user_id
+        ];
+
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'), $usdata);
         $forum_singlepost = Helper::GETMethodWithData(config('constants.api.forum_single_post'), $data);
         $forum_singlepost_replies = Helper::GETMethodWithData(config('constants.api.forum_single_post_replies'), $data);
         //dd($forum_singlepost_replies);         
@@ -198,7 +224,17 @@ class ParentController extends Controller
 
         ]);
     }
-
+    public function imagestore(Request $request)
+    {
+        //dd($request);     
+        $task=new Task();
+        $task->id=0;
+        $task->exists=true;
+        $image = $task->addMediaFromRequest('upload')->toMediaCollection('images');
+        $geturl=$image->getUrl();
+        //  dd($image->getUrl());
+        return response()->json(['url'=>$image->getUrl()]);
+    }
      // faq screen pages end
 
     //attendance

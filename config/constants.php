@@ -116,7 +116,9 @@ return [
         'forum_threadslist'=>$url.'/forum/threadslist',
         'forum_userthreadslist'=>$url.'/forum/userthreadslist',
         'listcategoryvs'=>$url.'/forum/listcategory',
-        'category' => $url.'/get-category',        
+        'category' => $url.'/get-category',  
+        'dbnameslist'=>$url.'/get-dbnames', 
+        'dbvsgetbranchid'=>$url.'/get-branchid',
         'forum_single_post'=>$url.'/forum/singlepost',
         'forum_single_categ'=>$url.'/forum/singlecateg',
         'forum_user_category_list'=>$url.'/forum/usersinglecateg',
@@ -134,8 +136,8 @@ return [
         'repheart_countadd'=>$url.'/forum-repfavorits',
         'forum_posts_user_repliesall'=>$url.'/forum/post/allreplies',
         'thread_status_update'=>$url.'/forum/threads/status/update',
-
-
+        'usernames_autocomplete'=>$url.'/forum/usernames/autocomplete',
+        'getdbid_vsuserid'=>$url.'/forum/getuserid',
         // classroom management api details
         // filter api
         'teacher_class' => $url.'/teacher_class',

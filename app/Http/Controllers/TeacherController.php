@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
-
+use App\Models\Task;
 class TeacherController extends Controller
 {
     //
@@ -46,47 +46,56 @@ class TeacherController extends Controller
     // forum screen pages start
     public function forumIndex()
     {
-        $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
-        return view('teacher.forum.index', [
+        $user_id= session()->get('user_id');  
+        $data = [            
+            'user_id' => $user_id
+        ];
+        
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$data); 
+        //dd($forum_list);
+          return view('teacher.forum.index', [
             'forum_list' => $forum_list['data']
         ]);
-        // return view('teacher.forum.index');
+        
     }
     public function forumPageSingleTopic()
     {
         return view('teacher.forum.page-single-topic');
     }
     public function forumPageCreateTopic()
-    {
+    {        $user_id= session()->get('user_id');  
+        $data = [            
+            'user_id' => $user_id
+        ];
         $category = Helper::GetMethod(config('constants.api.category'));
-
-        $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
-
+        $usernames=Helper::GetMethod(config('constants.api.usernames_autocomplete'));
+        //dd($usernames);
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$data);
+        // dd($forum_list);
         return view('teacher.forum.page-create-topic', [
             'category' => $category['data'],
-            'forum_list' => $forum_list['data']
+            'forum_list' => $forum_list['data'],
+            'usernames' => $usernames['data']
         ]);
-        //return view('teacher.forum.page-create-topic');
+        
     }
     public function forumPageSingleUser()
     {
-        $user_id = session()->get('user_id');
-        $data = [
+        $user_id= session()->get('user_id');  
+        $data = [            
             'user_id' => $user_id
         ];
         $forum_post_user_crd = Helper::GETMethodWithData(config('constants.api.forum_post_user_created'), $data);
         $forum_categorypost_user_crd = Helper::GETMethodWithData(config('constants.api.forum_categorypost_user_created'), $data);
         $forum_post_user_allreplies = Helper::GETMethodWithData(config('constants.api.forum_posts_user_repliesall'), $data);
-       // $forum_threadslist = Helper::GetMethod(config('constants.api.forum_threadslist'));
-       $forum_userthreadslist = Helper::GETMethodWithData(config('constants.api.forum_userthreadslist'), $data);
-        //dd($forum_categorypost_user_crd);
+        $forum_threadslist = Helper::GetMethod(config('constants.api.forum_threadslist'));
+       // dd($forum_threadslist);
         return view('teacher.forum.page-single-user', [
             'forum_post_user_crd' => $forum_post_user_crd['data'],
             'forum_categorypost_user_crd' => $forum_categorypost_user_crd['data'],
             'forum_post_user_allreplies' =>$forum_post_user_allreplies['data'],
-            'forum_userthreadslist' =>$forum_userthreadslist['data']
+            'forum_threadslist' =>$forum_threadslist['data']
         ]);
-        // return view('teacher.forum.page-single-user');
     }
     public function forumPageSingleThreads()
     {
@@ -145,7 +154,7 @@ class TeacherController extends Controller
             'types' => $request->topictype,
             'body_content' => $request->tpbody,
             'category' => $request->category,
-            'tags' => $request->inputTopicTags,
+            'tags' => $request->tags,
             'imagesorvideos' => $request->inputTopicTitle,
             'threads_status'=>1
         ];
@@ -162,18 +171,33 @@ class TeacherController extends Controller
         $singlepost_repliesData = [
             'created_post_id' => $id,
             'user_id' => $user_id,
+        ]; 
+        $user_id= session()->get('user_id');  
+        $usdata = [            
+            'user_id' => $user_id
         ];
-        $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
+       
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$usdata);
         $forum_singlepost = Helper::GETMethodWithData(config('constants.api.forum_single_post'), $data);
         $forum_singlepost_replies = Helper::GETMethodWithData(config('constants.api.forum_single_post_replies'), $data);
-        //dd($forum_singlepost_replies);         
+       
         return view('teacher.forum.page-single-topic', [
             'forum_single_post' => !empty($forum_singlepost['data']) ? $forum_singlepost['data'] : $forum_singlepost,
             'forum_singlepost_replies' => $forum_singlepost_replies['data'],
             'forum_list' => $forum_list['data']
-
         ]);
     }
+    public function imagestore(Request $request)
+   {
+   //dd($request);     
+       $task=new Task();
+       $task->id=0;
+       $task->exists=true;
+       $image = $task->addMediaFromRequest('upload')->toMediaCollection('images');
+       $geturl=$image->getUrl();
+       //  dd($image->getUrl());
+       return response()->json(['url'=>$image->getUrl()]);
+   }
     // forum screen pages end
 
     // faq screen pages start

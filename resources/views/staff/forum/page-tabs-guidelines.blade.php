@@ -27,10 +27,14 @@
                     <div class="tt-layout-tab">
                         <div class="tt-wrapper-inner">
                             <h2 class="tt-title">
-                                About Forum 19
+                                About Forum 
                             </h2>
-                            Forum 19 is a community of creatives who come together to share ideas and help each other succeed.
+                            <p> is a community of creatives who come together to share ideas and help each other succeed.</p>
                             <h3 class="tt-title">
+                            As the basis for our educational delivery system
+                            </h3>
+                            <p>Forum paves the path for global, high-impact new and expanded programs. Rather than a one-way conduit for information sharing or a repurposed business conferencing tool, the learning environment offers a deeply engaging digital experience for learners and instructors alike. Its robust features, varied learning modalities, and data gathering and management tools offer capabilities and insights not available in any other platform.</p>
+                            <!-- <h3 class="tt-title">
                                 Admins
                             </h3>
                             <div class="tt-list-avatar">
@@ -264,10 +268,10 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
-                        <div class="table-responsive-sm tt-indent-top">
-                            <table class="table-01">
+                        
+                            <!-- <table class="table-01">
                                 <caption>Site Statistics</caption>
                                 <thead>
                                     <tr>
@@ -309,8 +313,9 @@
                                         <td>9.2k</td>
                                     </tr>
                                 </tbody>
-                            </table>
-                        </div>
+                            </table> -->
+                           
+                        
                         <div class="tt-wrapper-inner tt-indent-top">
                             <h4 class="tt-title">
                                 Contact Us

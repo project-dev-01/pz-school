@@ -9,7 +9,7 @@ use App\Helpers\Helper;
 use App\Models\Branches;
 use App\Models\Lesson;
 use App\Models\User;
-
+use App\Models\Task;
 class SuperAdminController extends Controller
 {
     //
@@ -1237,7 +1237,7 @@ class SuperAdminController extends Controller
     {
         return view('super_admin.transport.route');
     }
-    
+
     public function getVehicle()
     {
         return view('super_admin.transport.vehicle');
@@ -1283,9 +1283,9 @@ class SuperAdminController extends Controller
     public function getUserList(Request $request)
     {
         $users = User::join('roles', 'users.role_id', '=', 'roles.id')
-            ->where('users.role_id','!=',1)
-            ->get(['users.id','users.name', 'users.role_id', 'roles.role_name', 'roles.role_slug']);
-            // dd($users);
+            ->where('users.role_id', '!=', 1)
+            ->get(['users.id', 'users.name', 'users.role_id', 'roles.role_name', 'roles.role_slug']);
+        // dd($users);
         return DataTables::of($users)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
@@ -1300,11 +1300,12 @@ class SuperAdminController extends Controller
     // show user page
     public function addUsers()
     {
-        $roleDetails = Role::select('role_id', 'role_name')->where('role_id','!=',1)->get();
+        $roleDetails = Role::select('role_id', 'role_name')->where('role_id', '!=', 1)->get();
         return view('super_admin.users.add', ['roleDetails' => $roleDetails]);
     }
     // add roleUser
-    public function addRoleUser(Request $request){
+    public function addRoleUser(Request $request)
+    {
 
         $validator = \Validator::make($request->all(), [
             'name' => 'required',
@@ -1351,27 +1352,60 @@ class SuperAdminController extends Controller
         }
     }
     // forum screen pages start
-    public function forumIndex(){
-        $forum_list = Helper::GetMethod(config('constants.api.forum_list')); 
-        dd($forum_list);
-        return view('super_admin.forum.index', [
-          'forum_list' => $forum_list['data']
-      ]);
+    public function superadminrollchoose()
+    {
+        $dbnames = Helper::GetMethod(config('constants.api.dbnameslist'));
+        //dd($dbnames);
+        return view('super_admin.forum.rolls-chooseforum', [
+            'dbnames' => $dbnames['data']
+        ]);
     }
-    public function forumPageSingleTopic(){
-        return view('super_admin.forum.page-single-topic');
-    }
-    public function forumPageCreateTopic(){
-        $category = Helper::GetMethod(config('constants.api.category'));
-  
-        $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
-       // dd($forum_list);
-        return view('super_admin.forum.page-create-topic', [
-            'category' => $category['data'],
+    public function forumIndex(Request $request)
+    {
+        // $getval = $request->getbranchid;
+        // //$branchidge =  session()->get('branchid');
+        
+        // $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
+        // //dd($forum_list);
+        // return view('super_admin.forum.index', [
+        //     'forum_list' => $forum_list['data']
+        // ]);
+        $branch_id =$request->getbranchid;
+        $user_id=2;
+        $request->session()->put('branch_id', $branch_id);
+        $request->session()->put('user_id', 2);
+        $data = [            
+            'user_id' => $user_id
+        ];        
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$data); 
+        //dd($forum_list);
+          return view('super_admin.forum.index', [
             'forum_list' => $forum_list['data']
         ]);
     }
-    public function forumPageSingleUser(){
+    public function forumPageSingleTopic()
+    {
+        return view('super_admin.forum.page-single-topic');
+    }
+    public function forumPageCreateTopic()
+    {
+        $user_id= session()->get('user_id');  
+        $data = [            
+            'user_id' => $user_id
+        ];
+        $category = Helper::GetMethod(config('constants.api.category'));
+        $usernames=Helper::GetMethod(config('constants.api.usernames_autocomplete'));
+        //dd($usernames);
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$data);
+        // dd($forum_list);
+        return view('super_admin.forum.page-create-topic', [
+            'category' => $category['data'],
+            'forum_list' => $forum_list['data'],
+            'usernames' => $usernames['data']
+        ]);
+    }
+    public function forumPageSingleUser()
+    {
         $user_id= session()->get('user_id');  
         $data = [            
             'user_id' => $user_id
@@ -1388,81 +1422,121 @@ class SuperAdminController extends Controller
             'forum_threadslist' =>$forum_threadslist['data']
         ]);
     }
-    public function forumPageSingleThreads(){
+    public function forumPageSingleThreads()
+    {
         return view('super_admin.forum.page-single-threads');
     }
-    public function forumPageSingleReplies(){
+    public function forumPageSingleReplies()
+    {
         return view('super_admin.forum.page-single-replies');
     }
-    public function forumPageSingleFollowers(){
+    public function forumPageSingleFollowers()
+    {
         return view('super_admin.forum.page-single-followers');
     }
-    public function forumPageSingleCategories(){
+    public function forumPageSingleCategories()
+    {
         $listcategoryvs= Helper::GetMethod(config('constants.api.listcategoryvs'));  
         // dd($listcategoryvs);      
          return view('super_admin.forum.page-categories', [
              'listcategoryvs' => $listcategoryvs['data']]);
     }
-    public function forumPageCategories(){
+    public function forumPageCategories()
+    {
         return view('super_admin.forum.page-categories');
     }
-    public function forumPageCategoriesSingle($categId,$user_id,$category_names){
-        session()->put('session_category_names', $category_names);  
+    public function forumPageCategoriesSingle($categId, $user_id, $category_names)
+    {
+        session()->put('session_category_names', $category_names);
         $data = [
             'categId' => $categId,
             'user_id' => $user_id
         ];
         $forum_category = Helper::GETMethodWithData(config('constants.api.forum_single_categ'), $data);
-  
-        return view('super_admin.forum.page-categories-single',[
-            'forum_category' => $forum_category['data']]);
+
+        return view('super_admin.forum.page-categories-single', [
+            'forum_category' => $forum_category['data']
+        ]);
     }
-    public function forumPageTabs(){
+    public function forumPageTabs()
+    {
         return view('super_admin.forum.page-tabs');
     }
-    public function forumPageTabGuidelines(){
+    public function forumPageTabGuidelines()
+    {
         return view('super_admin.forum.page-tabs-guidelines');
     }
-       // forum create post 
-       public function createpost(Request $request)
-       {     
-           $data = [
-               'user_id' => session()->get('user_id'),
-               'user_name' => session()->get('name'),
-               'topic_title' => $request->inputTopicTitle,
-               'topic_header' => $request->inputTopicHeader,
-               'types' => $request->topictype,
-               'body_content' => $request->tpbody,
-               'category' => $request->category,
-               'tags' => $request->inputTopicTags,
-               'imagesorvideos' => $request->inputTopicTitle,
-               'threads_status'=>2
-           ];
-           $response = Helper::PostMethod(config('constants.api.forum_cpost'), $data);
-           return $response;
-       }
-       // Forum single topic with value pass
-       public function forumPageSingleTopicwithvalue($id, $user_id)
-       {
-           $data = [
-               'id' => $id,
-               'user_id' => $user_id,
-           ];
-           $singlepost_repliesData = [
-               'created_post_id' => $id,
-               'user_id' => $user_id,
-           ]; 
-           $forum_list = Helper::GetMethod(config('constants.api.forum_list'));
-           $forum_singlepost = Helper::GETMethodWithData(config('constants.api.forum_single_post'), $data);
-           $forum_singlepost_replies = Helper::GETMethodWithData(config('constants.api.forum_single_post_replies'), $data);
-           //dd($forum_singlepost_replies);
-           return view('admin.forum.page-single-topic', [
-               'forum_single_post' => !empty($forum_singlepost['data']) ? $forum_singlepost['data'] : $forum_singlepost,
-               'forum_singlepost_replies' => $forum_singlepost_replies['data'],
-               'forum_list' => $forum_list['data']
-   
-           ]);
-       }
+    // forum create post 
+    public function createpost(Request $request)
+    {
+        $data = [
+            'user_id' => session()->get('user_id'),
+            'user_name' => session()->get('name'),
+            'topic_title' => $request->inputTopicTitle,
+            'topic_header' => $request->inputTopicHeader,
+            'types' => $request->topictype,
+            'body_content' => $request->tpbody,
+            'category' => $request->category,
+            'tags' => $request->tags,
+            'imagesorvideos' => $request->inputTopicTitle,
+            'threads_status'=>2
+        ];
+        //dd($data);
+        $response = Helper::PostMethod(config('constants.api.forum_cpost'), $data);
+        return $response;
+    }
+    // Forum single topic with value pass
+    public function forumPageSingleTopicwithvalue($id, $user_id)
+    {
+        $data = [
+            'id' => $id,
+            'user_id' => $user_id,
+        ];
+        $singlepost_repliesData = [
+            'created_post_id' => $id,
+            'user_id' => $user_id,
+        ];
+        $user_id= session()->get('user_id');  
+        $usdata = [            
+            'user_id' => $user_id
+        ];
+        
+
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$usdata);
+        
+        $forum_singlepost = Helper::GETMethodWithData(config('constants.api.forum_single_post'), $data);
+        $forum_singlepost_replies = Helper::GETMethodWithData(config('constants.api.forum_single_post_replies'), $data);
+        //dd($forum_singlepost_replies);
+        return view('super_admin.forum.page-single-topic', [
+            'forum_single_post' => !empty($forum_singlepost['data']) ? $forum_singlepost['data'] : $forum_singlepost,
+            'forum_singlepost_replies' => $forum_singlepost_replies['data'],
+            'forum_list' => $forum_list['data']
+
+        ]);
+    }
+    public function dbvsgetbranchid(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'school_name' => $request->school_name
+        ];
+        session()->put('branch_id', $request->id);
+
+        //$forum_redirect = Helper::GETMethodWithData(config('constants.api.dbvsgetbranchid'),$data);
+        
+    
+    }
+    public function imagestore(Request $request)
+    {
+        //dd($request);     
+        $task=new Task();
+        $task->id=0;
+        $task->exists=true;
+        $image = $task->addMediaFromRequest('upload')->toMediaCollection('images');
+        $geturl=$image->getUrl();
+        //  dd($image->getUrl());
+        return response()->json(['url'=>$image->getUrl()]);
+    }
     // forum screen pages end
     public function studentEntry()
     {
@@ -1480,7 +1554,7 @@ class SuperAdminController extends Controller
     {
         return view('super_admin.student.student');
     }
-    
+
     public function taskIndex()
     {
         return view('super_admin.task.index');
@@ -1511,7 +1585,7 @@ class SuperAdminController extends Controller
     {
         return view('super_admin.leave_management.approvalleave');
     }
-    
+
     public function allleaves()
     {
         return view('super_admin.leave_management.allleaves');
@@ -1545,12 +1619,12 @@ class SuperAdminController extends Controller
     {
         return view('super_admin.exam_results.bystudent');
     }
-    
+
     public function evaluationReport()
     {
         return view('super_admin.homework.evaluation_report');
     }
-    
+
     public function homeworkEdit()
     {
         return view('super_admin.homework.edit');
@@ -1559,7 +1633,7 @@ class SuperAdminController extends Controller
     {
         return view('super_admin.exam_marks.grades');
     }
-    
+
     // static page controller end
-    
+
 }

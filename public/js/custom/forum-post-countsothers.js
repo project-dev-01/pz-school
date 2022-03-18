@@ -6,8 +6,8 @@ $(function () {
         var id = $("#hdpkcount_details_id").text();
         console.log(created_post_id);
         var likes = 1;
-        $.post(likescount, { token: token, created_post_id: created_post_id, user_id: user_id, user_name: user_name, branch_id: branch_id, likes: likes}, function (res) {
-     //   $.post(likescount, { id: id, token: token }, function (res) {
+        $.post(likescount, { token: token, created_post_id: created_post_id, user_id: user_id, user_name: user_name, branch_id: branch_id, likes: likes }, function (res) {
+            //   $.post(likescount, { id: id, token: token }, function (res) {
 
             if (res.code == 200) {
                 $('.inclike').text(res.data[0].likes);
@@ -19,9 +19,9 @@ $(function () {
         e.preventDefault();
         var created_post_id = $("#hdpk_post_id").text();
         var id = $("#hdpkcount_details_id").text();
-        dislikes =1;
+        dislikes = 1;
         $.post(dislikescount, { token: token, created_post_id: created_post_id, user_id: user_id, user_name: user_name, branch_id: branch_id, dislikes: dislikes }, function (res) {
-        //$.post(dislikescount, { id: id, token: token }, function (res) {
+            //$.post(dislikescount, { id: id, token: token }, function (res) {
             if (res.code == 200) {
                 $('.incdislike').text(res.data[0].dislikes);
             }
@@ -32,9 +32,9 @@ $(function () {
         e.preventDefault();
         var created_post_id = $("#hdpk_post_id").text();
         var id = $("#hdpkcount_details_id").text();
-        favorite=1;
+        favorite = 1;
         $.post(heart, { token: token, created_post_id: created_post_id, user_id: user_id, user_name: user_name, branch_id: branch_id, favorite: favorite }, function (res) {
-        //$.post(heart, { id: id, token: token }, function (res) {
+            //$.post(heart, { id: id, token: token }, function (res) {
             if (res.code == 200) {
                 $('.incheart').text(res.data[0].favorite);
             }
@@ -46,15 +46,16 @@ $(function () {
         e.preventDefault();
         var create_post_id = $("#hdpk_post_id").text();
         var replies_com = $("#repliesinput").val();
-      //  var desc = CKEDITOR.instances['repliesinput'].getData();
-      //  var desca = CKEDITOR.instances.repliesinput.getData();
-      var ckval= myEditor.getData();   
+        //  var desc = CKEDITOR.instances['repliesinput'].getData();
+        //  var desca = CKEDITOR.instances.repliesinput.getData();
+        var ckval = myEditor.getData();
         console.log(ckval);
-        $.post(repliesforpost, { token: token, branch_id: branch_id, user_id: user_id, user_name: user_name, create_post_id: create_post_id, replies_com: replies_com }, function (res) {
+        $.post(repliesforpost, { token: token, branch_id: branch_id, user_id: user_id, user_name: user_name, create_post_id: create_post_id, replies_com: ckval }, function (res) {
             if (res.code == 200) {
                 toastr.success(res.message);
-                console.log(res);
-                $("#repliesinput").val('');
+                //$("#repliesinput form")[0].reset();
+                myEditor.setData("");
+               // CKupdate();
                 let _this = this;
                 $("#repliesjsvs").find("#repliesapply").append(
                     '<div class="tt-item">' +
@@ -118,7 +119,7 @@ $(function () {
                     '</div>'
                 );
 
-               
+
             } else {
                 toastr.error(res.message);
             }
@@ -177,14 +178,32 @@ $(function () {
             }
         }, 'json');
     });
-    $( ".target" ).change(function() {
-        alert( "Handler for .change() called." );
-      });
+    $(".target").change(function () {
+        alert("Handler for .change() called.");
+    });
+
+    $('#inputTopicTags').tokenfield({
+        autocomplete :{
+            source: function(request, response)
+            {
+                jQuery.get('groupnamefetch.php', {
+                    query : request.term
+                }, function(data){
+                    data = JSON.parse(data);
+                    response(data);
+                });
+            },
+            delay: 100
+        }
+    });
+
+   
+
 });
 // insert 1st like on particular post
 $(window).on('load', function () {
     var id = $("#hdpkcount_details_id").text();
-    var create_post_id = $("#hdpk_post_id").text();  
+    var create_post_id = $("#hdpk_post_id").text();
     console.log('onloaded');
     if (id === '') {
         var views = "1";
@@ -254,11 +273,20 @@ function getfav(e) {
         }
     }, 'json');
 }
-$(document).ready(function(){
-    $("#listfilter").on("keyup", function() {
-      var value = $(this).val().toLowerCase();
-      $("#usnames").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-      });
+function CKupdate(){
+    for (instance in CKEDITOR.instances){
+        CKEDITOR.instances[instance].updateElement();
+        CKEDITOR.instances[instance].setData('');
+    }
+}
+$(document).ready(function () {
+    $("#listfilter").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#usnames").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
     });
 });
+
+    // ...
+

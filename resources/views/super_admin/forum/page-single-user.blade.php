@@ -71,7 +71,7 @@
                             </div>
                             <div class="tt-col-description">
                                 <h4 class="tt-title">
-                                    <a href="{{route('admin.forum.page-single-topic-val',[$value['id'],$value['user_id']])}}">
+                                    <a href="{{route('super_admin.forum.page-single-topic-val',[$value['id'],$value['user_id']])}}">
                                         {{ $value['topic_title'] }}
                                     </a>
                                 </h4>
@@ -142,7 +142,7 @@
                             </div>
                             <div class="tt-col-description">
                                 <h6 class="tt-title">
-                                <a href="{{route('admin.forum.page-single-topic-val',[$value['id'],$value['user_id']])}}">
+                                <a href="{{route('super_admin.forum.page-single-topic-val',[$value['id'],$value['user_id']])}}">
                                         {{ $value['topic_title'] }}
                                     </a>
                                 </h6>
@@ -215,7 +215,7 @@
                             </div>
                             <div class="tt-col-description">
                                 <h6 class="tt-title">
-                                <a href="{{route('admin.forum.page-single-topic-val',[$value['created_post_id'],$value['user_id']])}}">
+                                <a href="{{route('super_admin.forum.page-single-topic-val',[$value['created_post_id'],$value['user_id']])}}">
                                         {{ $value['topic_title'] }}
                                     </a>
                                  
@@ -276,7 +276,7 @@
                                     <div class="tt-item">
                                         <div class="tt-item-header">
                                             <ul class="tt-list-badge">
-                                                <li><a href="{{route('admin.forum.page-categories-single-val',[$value['categId'],$value['user_id'],$value['category_names']])}}">
+                                                <li><a href="{{route('super_admin.forum.page-categories-single-val',[$value['categId'],$value['user_id'],$value['category_names']])}}">
                                                         <span class="tt-color0{{$randomcolor}} tt-badge">
                                                             @php
                                                             echo App\Http\Controllers\CommonController::limitedChar_category(($value['category_names']));

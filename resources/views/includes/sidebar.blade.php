@@ -547,7 +547,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('super_admin.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('super_admin/forum*')) ? 'active' : '' }}">
+                    <a href="{{ route('super_admin.forum.rolls-chooseforum')}}" target=”_blank” class="nav-link {{ (request()->is('super_admin/forum*')) ? 'active' : '' }}">
                         <i data-feather="external-link" class="icon-dual"></i>
                         <span> Forum </span>
                     </a>

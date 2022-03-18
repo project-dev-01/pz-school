@@ -79,7 +79,7 @@
                 </div>
                 <div class="tt-col-description">
                     <h6 class="tt-title"><a href="#">
-                            <a href="{{route('admin.forum.page-single-topic-val',[$value['id'],$value['user_id']])}}">
+                            <a href="{{route('super_admin.forum.page-single-topic-val',[$value['id'],$value['user_id']])}}">
                                 {{ $value['topic_title'] }}
                             </a>
                         </a></h6>
