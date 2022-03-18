@@ -89,6 +89,9 @@
                                                 @endwhile
                                         </tr>
                                         @endforeach
+                                        @else
+                                        <tr ><td colspan="5">No Data Available</td></tr>
+
                                         @endif
                                     </tbody>
                                 </table>

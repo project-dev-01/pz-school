@@ -75,10 +75,10 @@ class ParentController extends Controller
         return view(
             'parent.time_table.index',
             [
-                'timetable' => isset($timetable['data']['timetable']) ? count($timetable['data']['timetable']) : 0,
-                'details' => isset($timetable['data']['timetable']) ? count($timetable['data']['timetable']) : 0,
+                'timetable' => $timetable['data']['timetable'],
+                'details' => $timetable['data']['details'],
                 'days' => $days,
-                'max' => isset($timetable['data']['max']) ? count($timetable['data']['max']) : 0
+                'max' => $timetable['data']['max']
             ]
         );
     }
@@ -225,6 +225,8 @@ class ParentController extends Controller
              'student_id' => $student,
          ];
          $homework = Helper::PostMethod(config('constants.api.homework_student'), $data);
+
+        //  dd($homework);
          return view(
              'parent.homework.list',
              [

@@ -15,6 +15,7 @@ class CreateHomeworksTable extends Migration
     {
         Schema::create('homeworks', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
             $table->integer('class_id');
             $table->integer('section_id');
             $table->integer('subject_id');
@@ -24,8 +25,6 @@ class CreateHomeworksTable extends Migration
             $table->text('description');
             $table->string('document');
             $table->string('status');
-            $table->date('evaluation_date');
-            $table->string('evaluated_by');
             $table->string('created_by');
             $table->timestamps();
         });

@@ -308,33 +308,38 @@ class TeacherController extends Controller
         $homework = Helper::PostMethod(config('constants.api.homework_list'), $data);
 
         // dd($homework);
-        if($homework['code']=="200")
-        {
-        $response ="";
-        $row=1;
-        foreach($homework['data']['homework'] as $work)
-        {
-            $total_students = $homework['data']['total_students'];
-            if($work['students_completed']==Null)
-            {
-                $completed = 0;
-                $incompleted = $total_students;
+        if($homework['code']=="200") {
+            $response ="";
+            $row=1;
+            if($homework['data']['homework']) {
+                foreach($homework['data']['homework'] as $work)
+                {
+                    $total_students = $homework['data']['total_students'];
+                    if($work['students_completed']==Null)
+                    {
+                        $completed = 0;
+                        $incompleted = $total_students;
+                    }else{
+                        $completed = $work['students_completed'];
+                        $incompleted = $total_students-$completed;
+                    }
+                    
+                    $response.= '<tr>
+                                    <td>'.$row.'</td>
+                                    <td>'.$work['title'].'</td>
+                                    <td>'.$work['date_of_homework'].'</td>
+                                    <td>'.$work['date_of_submission'].'</td>
+                                    <td>'.$completed.'/'.$incompleted.'</td>
+                                    <td>'.$homework['data']['total_students'].'</td>
+                                    <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="'.$work['id'].'" data-target=".firstModal"><i class="fas fa-bars"></i> Details</a></td>
+                                </tr>';
+                    $row++;
+                }
             }else{
-                $completed = $work['students_completed'];
-                $incompleted = $total_students-$completed;
+                    $response.= '<tr>
+                                    <td colspan="7"> No Data Available</td>
+                                </tr>';
             }
-            
-            $response.= '<tr>
-                            <td>'.$row.'</td>
-                            <td>'.$work['title'].'</td>
-                            <td>'.$work['date_of_homework'].'</td>
-                            <td>'.$work['date_of_submission'].'</td>
-                            <td>'.$completed.'/'.$incompleted.'</td>
-                            <td>'.$homework['data']['total_students'].'</td>
-                            <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="'.$work['id'].'" data-target=".firstModal"><i class="fas fa-bars"></i> Details</a></td>
-                        </tr>';
-            $row++;
-        }
     
             $homework['table'] = $response;
             
@@ -346,6 +351,8 @@ class TeacherController extends Controller
     {
         $data = [
             'homework_id' => $request->homework_id,
+            'status' => $request->status,
+            'evaluation' => $request->evaluation,
         ];
 
         
@@ -461,8 +468,10 @@ class TeacherController extends Controller
     //submit Evaluation
     public function evaluation(Request $request)
     {
+        $evaluated_by = session()->get('user_id');
         $data = [
             'homework' => $request->homework,
+            'evaluated_by' => $evaluated_by,
         ];
         $response = Helper::PostMethod(config('constants.api.homework_evaluate'), $data);
         // dd($response);

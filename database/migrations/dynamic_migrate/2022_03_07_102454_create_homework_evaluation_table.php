@@ -18,10 +18,16 @@ class CreateHomeworkEvaluationTable extends Migration
             $table->integer('homework_id');
             $table->integer('student_id');
             $table->text('remarks')->nullable();
-            $table->string('rank');
-            $table->date('date');
+            $table->text('teacher_remarks')->nullable();
+            $table->string('rank')->nullable();
+            $table->string('score_name')->nullable();
+            $table->string('score_value')->nullable();
+            $table->date('date')->nullable();
             $table->string('file');
             $table->string('status');
+            $table->string('correction')->default('0');
+            $table->date('evaluation_date')->nullable();
+            $table->string('evaluated_by')->nullable();
             $table->timestamps();
         });
     }

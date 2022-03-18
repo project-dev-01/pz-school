@@ -56,13 +56,13 @@
                                                     </div> <!-- end card-->
                                                 </div> <!-- end col-->
                                             </div>
-                                            <form id="evaluationModalFilter" method="post"   enctype="multipart/form-data" autocomplete="off">
+                                            <!-- <form id="evaluationModalFilter" method="post"   enctype="multipart/form-data" autocomplete="off">
                                                 <input type="hidden" id="homework_id" name="homework_id">
                                                 <div class="row ml-1">
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="status">Status</label>
-                                                            <select  class="form-control" name="status" >
+                                                            <select  class="form-control" id="evaluation_status" name="status" >
                                                                 <option value="">Choose Filter</option>
                                                                 <option value="1">Complete</option>
                                                                 <option value="0">Incomplete</option>
@@ -72,7 +72,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="evaluation">Checked</label>
-                                                            <select class="form-control" name="evaluation" >
+                                                            <select class="form-control" id="evaluation_check" name="evaluation" >
                                                                 <option value="">Choose Filter</option>
                                                                 <option value="1">Checked</option>
                                                                 <option value="0">Unchecked</option>
@@ -80,12 +80,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group text-right m-b-0">
-                                                    <button class="btn btn-primary-bl waves-effect waves-light" type="Submit">
-                                                        Get
-                                                    </button>
-                                                </div>
-                                            </form>
+                                            </form> -->
                                             <form id="evaluateHomework"  method="post" action="{{ route('admin.homework.evaluation') }}"  enctype="multipart/form-data" autocomplete="off">
                                                 @csrf
                                                 <div class="row">

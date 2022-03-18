@@ -2192,7 +2192,7 @@ class ApiController extends BaseController
             $classConn = $this->createNewConnection($request->branch_id);
             // get data
             $class_id = $request->class_id;
-            $class = $classConn->table('section_allocations as sa')->select('s.id', 's.name')
+            $class = $classConn->table('section_allocations as sa')->select('s.id as section_id', 's.name as section_name')
                 ->join('sections as s', 'sa.section_id', '=', 's.id')
                 ->where('sa.class_id', $class_id)
                 ->get();
@@ -2217,7 +2217,7 @@ class ApiController extends BaseController
             $classConn = $this->createNewConnection($request->branch_id);
             // get data
             $class_id = $request->class_id;
-            $class = $classConn->table('subject_assigns as sa')->select('s.id', 's.name')
+            $class = $classConn->table('subject_assigns as sa')->select('s.id as subject_id', 's.name as subject_name')
                 ->join('subjects as s', 'sa.subject_id', '=', 's.id')
                 ->where('sa.class_id', $class_id)
                 ->groupBy('s.id')
@@ -2235,6 +2235,7 @@ class ApiController extends BaseController
             'token' => 'required',
             'class_id' => 'required',
             'section_id' => 'required',
+            'day' => '',
         ]);
 
         if (!$validator->passes()) {
@@ -3835,29 +3836,11 @@ class ApiController extends BaseController
                     ['en.section_id', '=', $request->section_id]
                 ])
                 ->get();
-                            
-            $day = date('D', strtotime($query_date));
-
-            $timetable_class = $Connection->table('timetable_class as tc')
-                ->select(
-                    'tc.time_start',
-                    'tc.time_end',
-                    'tc.id'
-                )
-                ->where([
-                    ['tc.class_id', '=', $request->class_id],
-                    ['tc.section_id', '=', $request->section_id],
-                    ['tc.section_id', '=', $request->section_id],
-                    ['tc.day', '=', $request->day],
-                ])
-                ->orWhere('tc.day', 'like', '%' . $day . '%')
-                ->first();
             $data = [
                 'avg_attendance' => $avgAttendance,
                 'get_widget_details' => $getWidgetDetails,
                 'get_student_data' => $getStudentData,
                 'total_student' => $totalStudent,
-                'timetable_class' => $timetable_class
 
             ];
             return $this->successResponse($data, 'Wigget record fetch successfully');
@@ -4631,6 +4614,8 @@ class ApiController extends BaseController
             $homework_id = $request->homework_id;
             $status = $request->status;
             $evaluation = $request->evaluation;
+
+
             $query = $con->table('homeworks as h')->select('s.first_name','s.last_name','s.register_no','h.document','he.id as evaluation_id','he.file','he.remarks','he.status','he.rank','he.score_name','he.correction','he.teacher_remarks','he.score_value')
             ->join('enrolls as e', function($q) use ($homework_id){
                 $q->on('h.section_id', '=', 'e.section_id')
@@ -4644,7 +4629,6 @@ class ApiController extends BaseController
             })
             ->where('h.id',$request['homework_id']);
             $homework = $query->get();
-
 
             return $this->successResponse($homework, 'Homework record fetch successfully');
         }
@@ -4668,13 +4652,14 @@ class ApiController extends BaseController
 
             foreach ($request['homework'] as $home) {
 
-                // return $home;
+                // return $request;
                 $correction;
                 if (isset($home['correction'])) {
                     $correction = 1;
                 } else {
                     $correction = 0;
                 }
+
                 if($home['homework_evaluation_id'])
                 {
                     $query = $conn->table('homework_evaluation')->where('id', $home['homework_evaluation_id'])->update([
@@ -4747,6 +4732,8 @@ class ApiController extends BaseController
                 $homework['count']['ontime_percentage'] = round(($count->ontime/$total)*100, 2);
                 $homework['count']['late_percentage'] =  round(($count->late/$total)*100, 2);
             }
+            
+
 
             $homework['subjects'] = $con->table('subjects')->select('subjects.id','subjects.name')->join('subject_assigns', 'subject_assigns.subject_id', '=', 'subjects.id')->groupBy('subjects.id')->get();                        
             return $this->successResponse($homework, 'Homework record fetch successfully');

@@ -1650,10 +1650,11 @@ class AdminController extends Controller
             'status' => $request->status,
             'evaluation' => $request->evaluation,
         ];
-        dd($data);
+
+        
         
         $homework = Helper::PostMethod(config('constants.api.homework_view'), $data);
-        
+        // dd($homework);
         
         if($homework['code']=="200")
         {
@@ -1764,8 +1765,10 @@ class AdminController extends Controller
     //submit Evaluation
     public function evaluation(Request $request)
     {
+        $evaluated_by = session()->get('user_id');
         $data = [
             'homework' => $request->homework,
+            'evaluated_by' => $evaluated_by,
         ];
         $response = Helper::PostMethod(config('constants.api.homework_evaluate'), $data);
         // dd($response);

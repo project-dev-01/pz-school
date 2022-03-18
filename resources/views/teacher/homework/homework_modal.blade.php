@@ -56,28 +56,31 @@
                                                     </div> <!-- end card-->
                                                 </div> <!-- end col-->
                                             </div>
-                                            <div class="row">
+                                            <!-- <form id="evaluationModalFilter" method="post"   enctype="multipart/form-data" autocomplete="off">
+                                                <input type="hidden" id="homework_id" name="homework_id">
+                                                <div class="row ml-1">
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label for="heard">Status</label>
-                                                            <select id="heard" class="form-control" required="">
+                                                            <label for="status">Status</label>
+                                                            <select  class="form-control" id="evaluation_status" name="status" >
                                                                 <option value="">Choose Filter</option>
-                                                                <option value="">Complete</option>
-                                                                <option value="">Incomplete</option>
+                                                                <option value="1">Complete</option>
+                                                                <option value="0">Incomplete</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label for="heard">Checked</label>
-                                                            <select id="heard" class="form-control" required="">
+                                                            <label for="evaluation">Checked</label>
+                                                            <select class="form-control" id="evaluation_check" name="evaluation" >
                                                                 <option value="">Choose Filter</option>
-                                                                <option value="">Checked</option>
-                                                                <option value="">Unchecked</option>
+                                                                <option value="1">Checked</option>
+                                                                <option value="0">Unchecked</option>
                                                             </select>
                                                         </div>
                                                     </div>
-                                            </div> <!-- end table-responsive-->
+                                                </div>
+                                            </form> -->
                                             <form id="evaluateHomework"  method="post" action="{{ route('teacher.homework.evaluation') }}"  enctype="multipart/form-data" autocomplete="off">
                                                 @csrf
                                                 <div class="row">

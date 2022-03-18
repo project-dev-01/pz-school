@@ -209,19 +209,23 @@ $(function () {
     });
 
     
-    $('#evaluationModalFilter').on('submit', function (e) {
+    $('#evaluation_check').on('change', function (e) {
         e.preventDefault();
-        var form = this;
-        
+        var homework_id = $("#homework_id").val();
+        var evaluation = $("#evaluation_check").val();
+
+        var formData = new FormData(); 
+        formData.append('homework_id', homework_id);
+        formData.append('evaluation', evaluation);
         $.ajax({
             url: homeworkView,
-            method: $(form).attr('method'),
-            data: new FormData(form),
+            method: "post",
+            data: formData,
             processData: false,
             dataType: 'json',
             contentType: false,
-            success: function (data) {
-                console.log('cs',data)
+            success: function (res) {
+                console.log('cs',res)
                 if (res.code == 200) {
                     $("#homework_modal_table").html(res.table);
                     var complete = res.complete;

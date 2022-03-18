@@ -42,7 +42,7 @@
                     <li class="nav-item">
                         <h4 class="nav-link"><i class="far fa-clock"></i>
                             @if($timetable>0)
-                            @if($timetable)Class {{ $details['class']['class_name'] }} (Section: {{ $details['section']['section_name'] }}) @endif
+                            Class {{ $details['class']['class_name'] }} (Section: {{ $details['section']['section_name'] }})
                             @endif
                         </h4>
 
@@ -89,6 +89,9 @@
                                                 @endwhile
                                         </tr>
                                         @endforeach
+                                        @else
+                                        <tr ><td colspan="5">No Data Available</td></tr>
+
                                         @endif
                                     </tbody>
                                 </table>
