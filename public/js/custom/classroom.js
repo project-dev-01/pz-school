@@ -502,7 +502,10 @@ $(function () {
                 var avgAttendance = response.data.avg_attendance;
                 var getStudentData = response.data.get_student_data;
                 var totalStudent = response.data.total_student;
+                var timetable_class = response.data.timetable_class;
 
+                // check count down
+                countdownTimeStart(timetable_class);
 
                 var presentCnt = (dataSetNew[0].presentCount ? dataSetNew[0].presentCount : 0);
                 var absentCnt = (dataSetNew[0].absentCount ? dataSetNew[0].absentCount : 0);
@@ -624,47 +627,6 @@ $(function () {
         });
     }
     // countdown timer
-    function getCounterData(obj) {
-        // var days = parseInt($('.e-m-days', obj).text());
-        var hours = parseInt($('.e-m-hours', obj).text());
-        var minutes = parseInt($('.e-m-minutes', obj).text());
-        var seconds = parseInt($('.e-m-seconds', obj).text());
-        return seconds + (minutes * 60) + (hours * 3600);
-        // return seconds + (minutes * 60) + (hours * 3600) + (days * 3600 * 24);
-    }
-
-    function setCounterData(s, obj) {
-        // var days = Math.floor(s / (3600 * 24));
-        var hours = Math.floor((s % (60 * 60 * 24)) / (3600));
-        var minutes = Math.floor((s % (60 * 60)) / 60);
-        var seconds = Math.floor(s % 60);
-
-        // console.log(days, hours, minutes, seconds);
-
-        // $('.e-m-days', obj).html(days);
-        $('.e-m-hours', obj).html(hours);
-        $('.e-m-minutes', obj).html(minutes);
-        $('.e-m-seconds', obj).html(seconds);
-    }
-
-    console.log("counter data")
-    console.log($(".counter"))
-    var count = getCounterData($(".counter"));
-
-    var timer = setInterval(function () {
-        count--;
-        // console.log("count" + count);
-        if (count == 0) {
-            clearInterval(timer);
-            $('.e-m-seconds').html(count);
-            return;
-        }
-        setCounterData(count, $(".counter"));
-    }, 1000);
-    // function clearInterval(timer){
-    //     console.log("--")
-    //     console.log(timer)
-    // }   
     $("#getShortTest").validate(); //sets up the validator
     $("input[name*='field']").rules("add", "required");
     // short test
@@ -864,5 +826,54 @@ $(function () {
             }
         });
     }
+
+    // Set the date we're counting down to
+    var intervalId;
+
+    function countdownTimeStart(timetable_class) {
+
+        var d = new Date();
+        var CountDownID = document.getElementById("classroom_count_down");
+        if (intervalId) {
+            clearInterval(intervalId)
+            intervalId = null
+        }
+        if (timetable_class) {
+            // var time_end = "19:07:10";
+            var time_end = timetable_class.time_end;
+            var edt = moment(time_end, 'HH:mm:ss');
+            var endDate = edt.toDate();
+        } else {
+            // if date null
+            var returned_endate = moment(d).subtract(5, 'minutes');
+            var endDate = returned_endate.toDate();
+        }
+        // its end date time of  countdown
+        var countDownDate = endDate.getTime();
+        // Update the count down every 1 second
+        intervalId = setInterval(function () {
+
+            // Get todays date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now an the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            // Output the result in an element with id
+            CountDownID.innerHTML = hours + "h " +
+                minutes + "m " + seconds + "s ";
+            // If the count down is over, write some text 
+            if (distance < 0) {
+                clearInterval(intervalId);
+                CountDownID.innerHTML = "00:00:00";
+                return;
+            }
+        }, 1000);
+    }
+
 
 });

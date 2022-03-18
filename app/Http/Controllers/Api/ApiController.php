@@ -2192,7 +2192,7 @@ class ApiController extends BaseController
             $classConn = $this->createNewConnection($request->branch_id);
             // get data
             $class_id = $request->class_id;
-            $class = $classConn->table('section_allocations as sa')->select('s.id as section_id', 's.name as section_name')
+            $class = $classConn->table('section_allocations as sa')->select('s.id', 's.name')
                 ->join('sections as s', 'sa.section_id', '=', 's.id')
                 ->where('sa.class_id', $class_id)
                 ->get();
@@ -2217,7 +2217,7 @@ class ApiController extends BaseController
             $classConn = $this->createNewConnection($request->branch_id);
             // get data
             $class_id = $request->class_id;
-            $class = $classConn->table('subject_assigns as sa')->select('s.id as subject_id', 's.name as subject_name')
+            $class = $classConn->table('subject_assigns as sa')->select('s.id', 's.name')
                 ->join('subjects as s', 'sa.subject_id', '=', 's.id')
                 ->where('sa.class_id', $class_id)
                 ->groupBy('s.id')
@@ -2235,7 +2235,6 @@ class ApiController extends BaseController
             'token' => 'required',
             'class_id' => 'required',
             'section_id' => 'required',
-            'day' => '',
         ]);
 
         if (!$validator->passes()) {
@@ -3836,11 +3835,29 @@ class ApiController extends BaseController
                     ['en.section_id', '=', $request->section_id]
                 ])
                 ->get();
+                            
+            $day = date('D', strtotime($query_date));
+
+            $timetable_class = $Connection->table('timetable_class as tc')
+                ->select(
+                    'tc.time_start',
+                    'tc.time_end',
+                    'tc.id'
+                )
+                ->where([
+                    ['tc.class_id', '=', $request->class_id],
+                    ['tc.section_id', '=', $request->section_id],
+                    ['tc.section_id', '=', $request->section_id],
+                    ['tc.day', '=', $request->day],
+                ])
+                ->orWhere('tc.day', 'like', '%' . $day . '%')
+                ->first();
             $data = [
                 'avg_attendance' => $avgAttendance,
                 'get_widget_details' => $getWidgetDetails,
                 'get_student_data' => $getStudentData,
                 'total_student' => $totalStudent,
+                'timetable_class' => $timetable_class
 
             ];
             return $this->successResponse($data, 'Wigget record fetch successfully');

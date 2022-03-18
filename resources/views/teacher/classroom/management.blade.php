@@ -139,12 +139,14 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Count Down</label>
-                                    <div class="counter" style="display: inline-block;width: 78px;font: bold 15px 'Droid Sans', Arial, sans-serif;text-align: center;text-transform: uppercase;padding-top: 7px;">
-                                        <!-- <span class='e-m-days'>0</span> Days | -->
-                                        <span class='e-m-hours'>00</span> :
-                                        <span class='e-m-minutes'>45</span> :
+                                    <div id="classroom_count_down"></div>
+
+                                    <!-- <div class="counter" style="display: inline-block;width: 78px;font: bold 15px 'Droid Sans', Arial, sans-serif;text-align: center;text-transform: uppercase;padding-top: 7px;">
+                                        <span class='e-m-days'>00</span> Days |
+                                        <span class='e-m-hours'>08</span> :
+                                        <span class='e-m-minutes'>00</span> :
                                         <span class='e-m-seconds'>00</span>
-                                    </div>
+                                    </div> -->
                                     <!-- <input type="text" id="basic-timepicker" class="form-control btn dropdown-toggle btn-light" placeholder="01:00:00" disabled> -->
 
                                 </div>
@@ -574,5 +576,4 @@
 </script>
 <script src="{{ asset('js/custom/classroom.js') }}"></script>
 <script src="{{ asset('js/custom/short-test.js') }}"></script>
-
 @endsection
