@@ -45,7 +45,8 @@ class StaffController extends Controller
         
         //dd($forum_list);
         return view('staff.forum.index', [
-            'forum_list' => $forum_list['data']
+            //'forum_list' => $forum_list['data']
+            'forum_list' => !empty($forum_list['data']) ? $forum_list['data'] : []
         ]);
     }
     public function forumPageSingleTopic()
@@ -59,13 +60,14 @@ class StaffController extends Controller
             'user_id' => $user_id
         ];
         $category = Helper::GetMethod(config('constants.api.category'));
-        $usernames=Helper::GetMethod(config('constants.api.usernames_autocomplete'));
+        $usernames = Helper::GETMethodWithData(config('constants.api.usernames_autocomplete'),$data);
         //dd($usernames);
         $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$data);
         // dd($forum_list);
         return view('staff.forum.page-create-topic', [
             'category' => $category['data'],
-            'forum_list' => $forum_list['data'],
+            //'forum_list' => $forum_list['data'],
+            'forum_list' => !empty($forum_list['data']) ? $forum_list['data'] : [],
             'usernames' => $usernames['data']
         ]);
     }
@@ -78,13 +80,18 @@ class StaffController extends Controller
         $forum_post_user_crd = Helper::GETMethodWithData(config('constants.api.forum_post_user_created'), $data);
         $forum_categorypost_user_crd = Helper::GETMethodWithData(config('constants.api.forum_categorypost_user_created'), $data);
         $forum_post_user_allreplies = Helper::GETMethodWithData(config('constants.api.forum_posts_user_repliesall'), $data);
-        $forum_threadslist = Helper::GetMethod(config('constants.api.forum_threadslist'));
+        $forum_userthreadslist = Helper::GETMethodWithData(config('constants.api.forum_userthreadslist'), $data);
        // dd($forum_threadslist);
         return view('staff.forum.page-single-user', [
-            'forum_post_user_crd' => $forum_post_user_crd['data'],
-            'forum_categorypost_user_crd' => $forum_categorypost_user_crd['data'],
-            'forum_post_user_allreplies' =>$forum_post_user_allreplies['data'],
-            'forum_threadslist' =>$forum_threadslist['data']
+            
+            // 'forum_post_user_crd' => $forum_post_user_crd['data'],
+            // 'forum_categorypost_user_crd' => $forum_categorypost_user_crd['data'],
+            // 'forum_post_user_allreplies' => $forum_post_user_allreplies['data'],
+            // 'forum_threadslist' => $forum_threadslist['data']
+            'forum_post_user_crd' => !empty($forum_post_user_crd['data']) ? $forum_post_user_crd['data'] : [],
+            'forum_categorypost_user_crd' => !empty($forum_categorypost_user_crd['data']) ? $forum_categorypost_user_crd['data'] : [],
+            'forum_post_user_allreplies' => !empty($forum_post_user_allreplies['data']) ? $forum_post_user_allreplies['data'] : [],
+            'forum_userthreadslist' => !empty($forum_userthreadslist['data']) ? $forum_userthreadslist['data'] : []
         ]);
     }
     public function forumPageSingleThreads()
@@ -105,7 +112,11 @@ class StaffController extends Controller
     }
     public function forumPageCategories()
     {
-        $listcategoryvs = Helper::GetMethod(config('constants.api.listcategoryvs'));
+        $user_id= session()->get('user_id');  
+        $data = [            
+            'user_id' => $user_id
+        ];
+        $listcategoryvs = Helper::GETMethodWithData(config('constants.api.listcategoryvs'),$data);
         return view('staff.forum.page-categories', [
             'listcategoryvs' => $listcategoryvs['data']
         ]);
@@ -137,6 +148,9 @@ class StaffController extends Controller
     // forum create post 
     public function createpost(Request $request)
     {
+        $current_user=session()->get('user_id');
+        $user_tags=$request->tags;
+        $tags_add_also_currentuser=$user_tags .','.$current_user;        
         $data = [
             'user_id' => session()->get('user_id'),
             'user_name' => session()->get('name'),
@@ -145,7 +159,7 @@ class StaffController extends Controller
             'types' => $request->topictype,
             'body_content' => $request->tpbody,
             'category' => $request->category,
-            'tags' => $request->tags,
+            'tags' => $tags_add_also_currentuser,
             'imagesorvideos' => $request->inputTopicTitle,
             'threads_status' => 1
         ];
@@ -176,7 +190,8 @@ class StaffController extends Controller
         return view('staff.forum.page-single-topic', [
             'forum_single_post' => !empty($forum_singlepost['data']) ? $forum_singlepost['data'] : $forum_singlepost,
             'forum_singlepost_replies' => $forum_singlepost_replies['data'],
-            'forum_list' => $forum_list['data']
+            //'forum_list' => $forum_list['data']
+            'forum_list' => !empty($forum_list['data']) ? $forum_list['data'] : []
         ]);
        
     

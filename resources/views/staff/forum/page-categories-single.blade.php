@@ -12,7 +12,7 @@
                 </div>
                 <div class="ml-left tt-col-right">
                     <div class="tt-col-item">
-                        <h2 class="tt-value">Threads - 1,245</h2>
+                        <h2 class="tt-value"><a href="{{route('staff.forum.page-single-user')}}">Threads</a></h2>
                     </div>
                     <div class="tt-col-item">
                         <a href="#" class="tt-btn-icon">

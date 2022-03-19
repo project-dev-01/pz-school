@@ -48,7 +48,7 @@
                                             <use xlink:href="#Poll"></use>
                                         </svg>
                                     </span>
-                                    <span class="tt-text">Poll</span>
+                                    <span class="tt-text">Technology</span>
                                 </a>
                             </div>
                             <!--  <div class="col-4 col-lg-3 col-xl-2">
@@ -235,7 +235,7 @@
                 <div class="tt-search">
                     <form class="search-wrapper">
                         <div class="search-form">
-                            <input type="text" class="tt-search__input" placeholder="Search for topics">
+                            <!-- <input type="text" class="tt-search__input" placeholder="Search for topics">
                             <button class="tt-search__btn" type="submit">
                                 <svg class="tt-icon">
                                     <use xlink:href="#icon-search"></use>
@@ -245,7 +245,7 @@
                                 <svg class="tt-icon">
                                     <use xlink:href="#icon-cancel"></use>
                                 </svg>
-                            </button>
+                            </button> -->
                         </div>
                     </form>
                 </div>

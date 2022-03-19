@@ -26,55 +26,59 @@ class AdminController extends Controller
 {
     // forum screen pages start
     public function forumIndex()
-    {        
-        $user_id= session()->get('user_id');  
-        $data = [            
+    {
+        $user_id = session()->get('user_id');
+        $data = [
             'user_id' => $user_id
         ];
-        
-        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$data); 
-        //dd($forum_list);
-          return view('admin.forum.index', [
-            'forum_list' => $forum_list['data']
+
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'), $data);
+        return view('admin.forum.index', [
+            'forum_list' => !empty($forum_list['data']) ? $forum_list['data'] : []
         ]);
-    } 
+    }
     public function forumPageSingleTopic()
     {
         return view('admin.forum.page-single-topic');
     }
     public function forumPageCreateTopic()
     {
-        $user_id= session()->get('user_id');  
-        $data = [            
+        $user_id = session()->get('user_id');
+        $data = [
             'user_id' => $user_id
         ];
         $category = Helper::GetMethod(config('constants.api.category'));
-        $usernames=Helper::GetMethod(config('constants.api.usernames_autocomplete'));
+        $usernames = Helper::GETMethodWithData(config('constants.api.usernames_autocomplete'),$data);
         //dd($usernames);
-        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$data);
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'), $data);
         // dd($forum_list);
         return view('admin.forum.page-create-topic', [
             'category' => $category['data'],
-            'forum_list' => $forum_list['data'],
+            //'forum_list' => $forum_list['data'],
+            'forum_list' => !empty($forum_list['data']) ? $forum_list['data'] : [],
             'usernames' => $usernames['data']
         ]);
     }
     public function forumPageSingleUser()
     {
-        $user_id= session()->get('user_id');  
-        $data = [            
+        $user_id = session()->get('user_id');
+        $data = [
             'user_id' => $user_id
         ];
         $forum_post_user_crd = Helper::GETMethodWithData(config('constants.api.forum_post_user_created'), $data);
         $forum_categorypost_user_crd = Helper::GETMethodWithData(config('constants.api.forum_categorypost_user_created'), $data);
         $forum_post_user_allreplies = Helper::GETMethodWithData(config('constants.api.forum_posts_user_repliesall'), $data);
         $forum_threadslist = Helper::GetMethod(config('constants.api.forum_threadslist'));
-       // dd($forum_threadslist);
+        // dd($forum_threadslist);
         return view('admin.forum.page-single-user', [
-            'forum_post_user_crd' => $forum_post_user_crd['data'],
-            'forum_categorypost_user_crd' => $forum_categorypost_user_crd['data'],
-            'forum_post_user_allreplies' =>$forum_post_user_allreplies['data'],
-            'forum_threadslist' =>$forum_threadslist['data']
+            // 'forum_post_user_crd' => $forum_post_user_crd['data'],
+            // 'forum_categorypost_user_crd' => $forum_categorypost_user_crd['data'],
+            // 'forum_post_user_allreplies' => $forum_post_user_allreplies['data'],
+            // 'forum_threadslist' => $forum_threadslist['data']
+            'forum_post_user_crd' => !empty($forum_post_user_crd['data']) ? $forum_post_user_crd['data'] : [],
+            'forum_categorypost_user_crd' => !empty($forum_categorypost_user_crd['data']) ? $forum_categorypost_user_crd['data'] : [],
+            'forum_post_user_allreplies' => !empty($forum_post_user_allreplies['data']) ? $forum_post_user_allreplies['data'] : [],
+            'forum_threadslist' => !empty($forum_threadslist['data']) ? $forum_threadslist['data'] : []
         ]);
     }
     public function forumPageSingleThreads()
@@ -90,29 +94,30 @@ class AdminController extends Controller
         return view('admin.forum.page-single-followers');
     }
     public function forumPageSingleCategories()
-    { 
+    {
         return view('admin.forum.page-single-categories');
     }
     public function forumPageCategories()
-    {        
-        $listcategoryvs= Helper::GetMethod(config('constants.api.listcategoryvs'));  
-       // dd($listcategoryvs);      
+    {
+        $adminlistcategoryvs= Helper::GetMethod(config('constants.api.adminlistcategoryvs'));  
+        // dd($listcategoryvs);      
         return view('admin.forum.page-categories', [
-            'listcategoryvs' => $listcategoryvs['data']]);
-      
+            'adminlistcategoryvs' => $adminlistcategoryvs['data']
+        ]);
     }
     // forum category vs single
-    public function forumPageCategoriesSingle($categId,$user_id,$category_names)
-    {      
-        session()->put('session_category_names', $category_names);  
+    public function forumPageCategoriesSingle($categId, $user_id, $category_names)
+    {
+        session()->put('session_category_names', $category_names);
         $data = [
             'categId' => $categId,
             'user_id' => $user_id
         ];
         $forum_category = Helper::GETMethodWithData(config('constants.api.forum_single_categ'), $data);
-  
-        return view('admin.forum.page-categories-single',[
-            'forum_category' => $forum_category['data']]);
+
+        return view('admin.forum.page-categories-single', [
+            'forum_category' => $forum_category['data']
+        ]);
     }
     public function forumPageTabs()
     {
@@ -122,61 +127,65 @@ class AdminController extends Controller
     {
         return view('admin.forum.page-tabs-guidelines');
     }
-   // forum create post 
-   public function createpost(Request $request)
-   {     
-       $data = [
-           'user_id' => session()->get('user_id'),
-           'user_name' => session()->get('name'),
-           'topic_title' => $request->inputTopicTitle,
-           'topic_header' => $request->inputTopicHeader,
-           'types' => $request->topictype,
-           'body_content' => $request->tpbody,
-           'category' => $request->category,
-           'tags' => $request->tags,
-           'imagesorvideos' => $request->inputTopicTitle,
-           'threads_status'=>2
-       ];
-       $response = Helper::PostMethod(config('constants.api.forum_cpost'), $data);
-       return $response;
-   }
-   // Forum single topic with value pass
-   public function forumPageSingleTopicwithvalue($id, $user_id)
-   {
-       $data = [
-           'id' => $id,
-           'user_id' => $user_id,
-       ];
-       $singlepost_repliesData = [
-           'created_post_id' => $id,
-           'user_id' => $user_id,
-       ]; 
-       $user_id= session()->get('user_id');  
-       $usdata = [            
-           'user_id' => $user_id
-       ];
-      
-       $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$usdata);
-       $forum_singlepost = Helper::GETMethodWithData(config('constants.api.forum_single_post'), $data);
-       $forum_singlepost_replies = Helper::GETMethodWithData(config('constants.api.forum_single_post_replies'), $data);
-       return view('admin.forum.page-single-topic', [
-           'forum_single_post' => !empty($forum_singlepost['data']) ? $forum_singlepost['data'] : $forum_singlepost,
-           'forum_singlepost_replies' => $forum_singlepost_replies['data'],
-           'forum_list' => $forum_list['data']
+    // forum create post 
+    public function createpost(Request $request)
+    {
+        $current_user=session()->get('user_id');
+        $user_tags=$request->tags;
+        $tags_add_also_currentuser=$user_tags .','.$current_user;        
+        $data = [
+            'user_id' => session()->get('user_id'),
+            'user_name' => session()->get('name'),
+            'topic_title' => $request->inputTopicTitle,
+            'topic_header' => $request->inputTopicHeader,
+            'types' => $request->topictype,
+            'body_content' => $request->tpbody,
+            'category' => $request->category,
+            'tags' => $tags_add_also_currentuser,
+            'imagesorvideos' => $request->inputTopicTitle,
+            'threads_status' => 2
+        ];
+        $response = Helper::PostMethod(config('constants.api.forum_cpost'), $data);
+        return $response;
+    }
+    // Forum single topic with value pass
+    public function forumPageSingleTopicwithvalue($id, $user_id)
+    {
+        $data = [
+            'id' => $id,
+            'user_id' => $user_id,
+        ];
+        $singlepost_repliesData = [
+            'created_post_id' => $id,
+            'user_id' => $user_id,
+        ];
+        $user_id = session()->get('user_id');
+        $usdata = [
+            'user_id' => $user_id
+        ];
 
-       ]);
-   }
-   public function imagestore(Request $request)
-   {
-       //dd($request);     
-       $task=new Task();
-       $task->id=0;
-       $task->exists=true;
-       $image = $task->addMediaFromRequest('upload')->toMediaCollection('images');
-       $geturl=$image->getUrl();
-       //  dd($image->getUrl());
-       return response()->json(['url'=>$image->getUrl()]);
-   }
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'), $usdata);
+        $forum_singlepost = Helper::GETMethodWithData(config('constants.api.forum_single_post'), $data);
+        $forum_singlepost_replies = Helper::GETMethodWithData(config('constants.api.forum_single_post_replies'), $data);
+        return view('admin.forum.page-single-topic', [
+            'forum_single_post' => !empty($forum_singlepost['data']) ? $forum_singlepost['data'] : $forum_singlepost,
+            'forum_singlepost_replies' => $forum_singlepost_replies['data'],
+            //'forum_list' => $forum_list['data']
+            'forum_list'=>!empty($forum_list['data']) ? $forum_list['data'] : []
+
+        ]);
+    }
+    public function imagestore(Request $request)
+    {
+        //dd($request);     
+        $task = new Task();
+        $task->id = 0;
+        $task->exists = true;
+        $image = $task->addMediaFromRequest('upload')->toMediaCollection('images');
+        $geturl = $image->getUrl();
+        //  dd($image->getUrl());
+        return response()->json(['url' => $image->getUrl()]);
+    }
     // forum screen pages end
     //
     public function index()
@@ -1370,9 +1379,9 @@ class AdminController extends Controller
     {
         $data = [
             'class_id' => $request->class_id,
-            
+
         ];
-        $subject = Helper::PostMethod(config('constants.api.subject_by_class'),$data);
+        $subject = Helper::PostMethod(config('constants.api.subject_by_class'), $data);
         return $subject;
     }
 
@@ -1632,41 +1641,38 @@ class AdminController extends Controller
 
         // dd($homework);
 
-        if($homework['code']=="200") {
-            $response ="";
-            $row=1;
-            if($homework['data']['homework']) {
-                foreach($homework['data']['homework'] as $work)
-                {
+        if ($homework['code'] == "200") {
+            $response = "";
+            $row = 1;
+            if ($homework['data']['homework']) {
+                foreach ($homework['data']['homework'] as $work) {
                     $total_students = $homework['data']['total_students'];
-                    if($work['students_completed']==Null)
-                    {
+                    if ($work['students_completed'] == Null) {
                         $completed = 0;
                         $incompleted = $total_students;
-                    }else{
+                    } else {
                         $completed = $work['students_completed'];
-                        $incompleted = $total_students-$completed;
+                        $incompleted = $total_students - $completed;
                     }
-                    
-                    $response.= '<tr>
-                                    <td>'.$row.'</td>
-                                    <td>'.$work['title'].'</td>
-                                    <td>'.$work['date_of_homework'].'</td>
-                                    <td>'.$work['date_of_submission'].'</td>
-                                    <td>'.$completed.'/'.$incompleted.'</td>
-                                    <td>'.$homework['data']['total_students'].'</td>
-                                    <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="'.$work['id'].'" data-target=".firstModal"><i class="fas fa-bars"></i> Details</a></td>
+
+                    $response .= '<tr>
+                                    <td>' . $row . '</td>
+                                    <td>' . $work['title'] . '</td>
+                                    <td>' . $work['date_of_homework'] . '</td>
+                                    <td>' . $work['date_of_submission'] . '</td>
+                                    <td>' . $completed . '/' . $incompleted . '</td>
+                                    <td>' . $homework['data']['total_students'] . '</td>
+                                    <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="' . $work['id'] . '" data-target=".firstModal"><i class="fas fa-bars"></i> Details</a></td>
                                 </tr>';
                     $row++;
                 }
-            }else{
-                    $response.= '<tr>
+            } else {
+                $response .= '<tr>
                                     <td colspan="7"> No Data Available</td>
                                 </tr>';
             }
-    
+
             $homework['table'] = $response;
-            
         }
 
         // dd($homework);
@@ -1681,103 +1687,100 @@ class AdminController extends Controller
             'evaluation' => $request->evaluation,
         ];
 
-        
-        
+
+
         $homework = Helper::PostMethod(config('constants.api.homework_view'), $data);
         // dd($homework);
-        
-        if($homework['code']=="200")
-        {
-            $response ="";
-            
-            $complete=0;
-            $incomplete=0;
+
+        if ($homework['code'] == "200") {
+            $response = "";
+
+            $complete = 0;
+            $incomplete = 0;
             $checked = 0;
             $unchecked = 0;
-            if($homework['data'])
-            {
-                $row=1;
-                foreach($homework['data'] as $work)
-                {
+            if ($homework['data']) {
+                $row = 1;
+                foreach ($homework['data'] as $work) {
                     $check = "";
                     $disabled = "";
-                    if($work['score_name']=="Marks") {
-                        $score_name = '<select  class="form-control" required="" name="homework['.$row.'][score_name]">
+                    if ($work['score_name'] == "Marks") {
+                        $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
                                                 <option Selected>Marks</option>
                                                 <option>Grade</option>
                                                 <option>Text</option>
                                             </select>';
-                    }elseif($work['score_name']=="Grade") {
-                        $score_name = '<select  class="form-control" required="" name="homework['.$row.'][score_name]">
+                    } elseif ($work['score_name'] == "Grade") {
+                        $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
                                             <option>Marks</option>
                                             <option Selected>Grade</option>
                                             <option>Text</option>
                                         </select>';
-                    }elseif($work['score_name']=="Text") {
-                        $score_name = '<select  class="form-control" required="" name="homework['.$row.'][score_name]">
+                    } elseif ($work['score_name'] == "Text") {
+                        $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
                                                 <option>Marks</option>
                                                 <option>Grade</option>
                                                 <option Selected>Text</option>
                                             </select>';
-                    }else {
-                        $score_name = '<select  class="form-control" required="" name="homework['.$row.'][score_name]">
+                    } else {
+                        $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
                                                 <option>Marks</option>
                                                 <option>Grade</option>
                                                 <option>Text</option>
                                             </select>';
                     }
-                        
-                    if($work['evaluation_id']==Null) {
-                       $disabled = "disabled";
+
+                    if ($work['evaluation_id'] == Null) {
+                        $disabled = "disabled";
                     }
-                    
-                    if($work['correction']=="1") {
+
+                    if ($work['correction'] == "1") {
                         $check = "checked";
                         $checked++;
-                    }else {
+                    } else {
                         $unchecked++;
                     }
 
-                    if($work['status']=="1") {
+                    if ($work['status'] == "1") {
                         $status = '<button type="button" class="btn btn-outline-success btn-rounded waves-effect waves-light">Completed</button>';
                         $complete++;
-                    }else {
-                        $status= '<button type="button" class="btn btn-outline-danger btn-rounded waves-effect waves-light">Incomplete</button>';
+                    } else {
+                        $status = '<button type="button" class="btn btn-outline-danger btn-rounded waves-effect waves-light">Incomplete</button>';
                         $incomplete++;
                     }
-                    
-                    
-                    $response.= '<tr>
-                                    <input type="hidden" value="'.$work['evaluation_id'].'" name="homework['.$row.'][homework_evaluation_id]">
-                                    <td>'.$row.'</td>
-                                    <td>'.$work['first_name'].' '.$work['last_name'].'</td>
-                                    <td>'.$work['register_no'].'</td>
-                                    <td>'.$status.'</td>
+
+
+                    $response .= '<tr>
+                                    <input type="hidden" value="' . $work['evaluation_id'] . '" name="homework[' . $row . '][homework_evaluation_id]">
+                                    <td>' . $row . '</td>
+                                    <td>' . $work['first_name'] . ' ' . $work['last_name'] . '</td>
+                                    <td>' . $work['register_no'] . '</td>
+                                    <td>' . $status . '</td>
                                     <td>
                                         <div class="form-group">
                                             <label for="score_name">Status</label>
-                                            '.$score_name.'
+                                            ' . $score_name . '
                                         </div>
-                                        <input type="text" class="form-control" name="homework['.$row.'][score_value]" value="'.$work['score_value'].'" aria-describedby="inputGroupPrepend" >
+                                        <input type="text" class="form-control" name="homework[' . $row . '][score_value]" value="' . $work['score_value'] . '" aria-describedby="inputGroupPrepend" >
 
                                     </td>
-                                    <td><input type="text" class="form-control" name="homework['.$row.'][teacher_remarks]"  value="'.$work['teacher_remarks'].'" aria-describedby="inputGroupPrepend" ></td>
+                                    <td><input type="text" class="form-control" name="homework[' . $row . '][teacher_remarks]"  value="' . $work['teacher_remarks'] . '" aria-describedby="inputGroupPrepend" ></td>
                                     <td>
                                         <i data-feather="file-text" class="icon-dual"></i>
-                                        <span class="ml-2 font-weight-semibold"><a  href="'.asset('student/homework/').'/'.$work['file'].'" download class="text-reset">'.$work['file'].'</a></span>
+                                        <span class="ml-2 font-weight-semibold"><a  href="' . asset('student/homework/') . '/' . $work['file'] . '" download class="text-reset">' . $work['file'] . '</a></span>
                                     </td>
-                                    <td>'.$work['remarks'].'</td>
+                                    <td>' . $work['remarks'] . '</td>
                                     <td>
                                         <div class="checkbox checkbox-primary mb-3">
-                                            <input  type="checkbox"  '.$check.$disabled.'  name="homework['.$row.'][correction]">
+                                            <input  type="checkbox"  ' . $check . $disabled . '  name="homework[' . $row . '][correction]">
                                             <label for="correction"></label>
                                         </div>
                                     </td>
                                 </tr>';
                     $row++;
                 }
-            }else{
-                    $response.= '<tr>
+            } else {
+                $response .= '<tr>
                                     <td colspan="9"> No Data Available</td>
                                 </tr>';
             }
@@ -1786,8 +1789,6 @@ class AdminController extends Controller
             $homework['incomplete'] = $incomplete;
             $homework['checked'] = $checked;
             $homework['unchecked'] = $unchecked;
-            
-            
         }
         return $homework;
     }
@@ -1804,7 +1805,7 @@ class AdminController extends Controller
         // dd($response);
         return $response;
     }
-    
+
     public function homeworkEdit()
     {
         return view('admin.homework.edit');
@@ -1859,6 +1860,4 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.department_delete'), $data);
         return $response;
     }
- 
- 
 }

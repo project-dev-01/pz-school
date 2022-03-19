@@ -7,7 +7,7 @@
             <div class="tt-search">
                 <form class="search-wrapper">
                     <div class="search-form">
-                        <input type="text" class="tt-search__input" placeholder="Search Categories">
+                        <!-- <input type="text" class="tt-search__input" placeholder="Search Categories">
                         <button class="tt-search__btn" type="submit">
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-search"></use>
@@ -17,18 +17,18 @@
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-cancel"></use>
                             </svg>
-                        </button>
+                        </button> -->
                     </div>
                 </form>
             </div>
         </div>
         <div class="tt-categories-list">
             <div class="row">
-                @if(!empty($listcategoryvs))
+                @if(!empty($adminlistcategoryvs))
                 @php
                 $randomcolor = 1;
                 @endphp
-                @foreach($listcategoryvs as $value)
+                @foreach($adminlistcategoryvs as $value)
                 @php
                 if($randomcolor==9)
                 {
@@ -46,7 +46,7 @@
                                             @endphp
                                     </a></li>
                             </ul>
-                            <h4 class="tt-title"><a href="page-categories-single.html">Threads-1,245</a></h4>
+                            <h4 class="tt-title"><a href="{{route('admin.forum.page-single-user')}}">Threads</a></h4>
                         </div>
                         <div class="tt-item-layout">
                             <div class="innerwrapper">

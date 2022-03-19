@@ -25,6 +25,7 @@ class CreateForumCountDetailsTable extends Migration
             $table->integer('replies');
             $table->integer('views');
             $table->string('activity');
+            $table->string('flag');
             $table->timestamps();
         });
     }

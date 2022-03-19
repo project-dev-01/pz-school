@@ -116,6 +116,7 @@ return [
         'forum_threadslist'=>$url.'/forum/threadslist',
         'forum_userthreadslist'=>$url.'/forum/userthreadslist',
         'listcategoryvs'=>$url.'/forum/listcategory',
+        'adminlistcategoryvs'=>$url.'/forum/adminlistcategoryvs',
         'category' => $url.'/get-category',  
         'dbnameslist'=>$url.'/get-dbnames', 
         'dbvsgetbranchid'=>$url.'/get-branchid',

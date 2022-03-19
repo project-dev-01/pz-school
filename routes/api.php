@@ -158,6 +158,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('forum/threadslist', [ApiController::class, 'ThreadspostList']);
     Route::get('forum/userthreadslist', [ApiController::class, 'userThreadspostList']);
     Route::get('forum/listcategory', [ApiController::class, 'postListCategory']);
+    Route::get('forum/adminlistcategoryvs', [ApiController::class, 'adminpostListCategory']);
     Route::get('forum/singlepost', [ApiController::class, 'singlePost']);
     Route::get('forum/singlecateg', [ApiController::class, 'singleCategoryPosts']);
     Route::get('forum/usersinglecateg', [ApiController::class, 'user_singleCategoryPosts']);

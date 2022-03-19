@@ -8,6 +8,8 @@ $(function () {
 
             if (res.code == 200) {
                 toastr.success(res.message);
+                console.log(res);
+                location.reload();
             }
         }, 'json');
     });

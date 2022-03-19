@@ -2691,13 +2691,14 @@ class ApiController extends BaseController
             'imagesorvideos' => 'required',
             'threads_status' => 'required'
         ]);
-        
+        //dd($request);
         if (!$validator->passes()) {
             return $this->send422Error('Validation errors.', ['error' => $validator->errors()->toArray()]);
         } else {
             // create new connection
             $class = new Forum_posts();
             $getCount = Forum_posts::where('topic_title', '=', $request->topic_title)->get();
+            //dd($getCount);
             if ($getCount->count() > 0) {
                 return $this->send422Error('Topic Title Already Exist', ['error' => 'Topic Title Already Exist']);
             } else {
@@ -4083,11 +4084,42 @@ class ApiController extends BaseController
                         ->orWhere('forum_posts.user_id', '`c.user_id`');
                 })
                 ->select('forum_posts.id', 'forum_posts.user_id', 'forum_posts.user_name', 'forum_posts.topic_title', 'forum_categorys.id as categId', 'forum_categorys.category_names', 'forum_count_details.likes', 'forum_count_details.dislikes', 'forum_count_details.favorite', 'forum_count_details.replies', 'forum_count_details.views', 'forum_count_details.activity', 'forum_posts.created_at', 'forum_posts.topic_header')
-                ->where('forum_posts.branch_id', '=', $request->branch_id)
+                ->where([
+                    ['forum_posts.branch_id', '=', $request->branch_id],                    
+                    ['forum_posts.threads_status', '=', 2]
+                ])
+                ->whereRaw("find_in_set($request->user_id,forum_posts.tags)")
                 ->groupBy('forum_posts.category')
                 ->get();
-
+               
             return $this->successResponse($success, 'Post List fetch successfully');
+        }
+    }
+    public function adminpostListCategory(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $success = DB::table('forum_posts')
+                ->leftJoin('forum_categorys', 'forum_categorys.id', '=', 'forum_posts.category')
+                ->leftJoin('forum_count_details', function ($join) {
+                    $join->on('forum_count_details.created_post_id', '=', 'forum_posts.id')
+                        ->orWhere('forum_posts.user_id', '`c.user_id`');
+                })
+                ->select('forum_posts.id', 'forum_posts.user_id', 'forum_posts.user_name', 'forum_posts.topic_title', 'forum_categorys.id as categId', 'forum_categorys.category_names', 'forum_count_details.likes', 'forum_count_details.dislikes', 'forum_count_details.favorite', 'forum_count_details.replies', 'forum_count_details.views', 'forum_count_details.activity', 'forum_posts.created_at', 'forum_posts.topic_header')
+                ->where([
+                    ['forum_posts.branch_id', '=', $request->branch_id],                    
+                    ['forum_posts.threads_status', '=', 2]
+                ])                
+                ->groupBy('forum_posts.category')
+                ->get();
+               
+            return $this->successResponse($success, 'Admin Post categ List fetch successfully');
         }
     }
     // forum single category posts
@@ -4252,6 +4284,7 @@ class ApiController extends BaseController
     }
     public function usernameautocomplete(Request $request)
     {
+          
         $validator = \Validator::make($request->all(), [
 
             'token' => 'required'
@@ -4263,7 +4296,8 @@ class ApiController extends BaseController
         } else {
                // create new connection              
             $success = DB::table('users')->select('id','name')
-            ->where('id','!=',1)
+            ->where('id','!=',1)  
+            ->where('id','!=',$request->user_id)           
             ->get();
          //   $success = Category::all();
             return $this->successResponse($success, 'user name record fetch successfully');
@@ -4284,7 +4318,7 @@ class ApiController extends BaseController
             $success = DB::table('users')->select('id','name')
             ->where('id','!=',$request->branch_id)
             ->get();
-            dd($success);
+          //  dd($success);
          //   $success = Category::all();
             return $this->successResponse($success, 'user name record fetch successfully');
         }
