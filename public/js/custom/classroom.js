@@ -24,7 +24,7 @@ $(function () {
         $("#classroomFilter").find("#subjectID").empty();
         $("#classroomFilter").find("#subjectID").append('<option value="">Select Subject</option>');
 
-        $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: userID, class_id: class_id }, function (res) {
+        $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
                     $("#classroomFilter").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
@@ -41,7 +41,7 @@ $(function () {
         $.post(teacherSubjectUrl, {
             token: token,
             branch_id: branchID,
-            teacher_id: userID,
+            teacher_id: ref_user_id,
             class_id: class_id,
             section_id: section_id,
             class_id: class_id
@@ -281,7 +281,7 @@ $(function () {
                     "width": "10%",
                     "render": function (data, type, row, meta) {
 
-                        var att_remark = '<textarea style="display:none;" class="addRemarks" data-id="' + row.student_id + '" id="addRemarks' + row.student_id + '" name="attendance[' + meta.row + '][att_remark]">' + (row.att_remark != "null" ? row.att_remark : "") + '</textarea>' +
+                        var att_remark = '<textarea style="display:none;" class="addRemarks" data-id="' + row.student_id + '" id="addRemarks' + row.student_id + '" name="attendance[' + meta.row + '][att_remark]">' +(row.att_remark !== "null" ? row.att_remark : "") + '</textarea>' +
                             '<button type="button" data-id="' + row.student_id + '" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#stuRemarksPopup" id="editRemarksStudent">Add Remarks</button>';
                         return att_remark;
                     }
@@ -474,8 +474,10 @@ $(function () {
         var $button = $(e.relatedTarget);
         var studentID = $button.attr('data-id');
         var studentRemarks = $button.closest('td').find('textarea').val();
+        var checknullRemarks = (studentRemarks !== "null")?studentRemarks:"";
+        
         $("#studenetID").val(studentID);
-        $("#student_remarks").val(studentRemarks);
+        $("#student_remarks").val(checknullRemarks);
     });
     // save studentRemarksSave
     $('#studentRemarksSave').on('click', function () {
@@ -843,6 +845,11 @@ $(function () {
             var time_end = timetable_class.time_end;
             var edt = moment(time_end, 'HH:mm:ss');
             var endDate = edt.toDate();
+            console.log("----------")
+            console.log(timetable_class)
+            console.log(time_end)
+            console.log(edt)
+            console.log(endDate)
         } else {
             // if date null
             var returned_endate = moment(d).subtract(5, 'minutes');

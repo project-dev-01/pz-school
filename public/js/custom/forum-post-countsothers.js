@@ -55,7 +55,7 @@ $(function () {
                 toastr.success(res.message);
                 //$("#repliesinput form")[0].reset();
                 myEditor.setData("");
-               // CKupdate();
+                // CKupdate();
                 let _this = this;
                 $("#repliesjsvs").find("#repliesapply").append(
                     '<div class="tt-item">' +
@@ -71,7 +71,7 @@ $(function () {
                     '<a href="#" class="tt-info-time">' +
                     '<i class="tt-icon"><svg>' +
                     '<use xlink:href="#icon-time"></use>' +
-                    '</svg></i>18 Jan,2022' +
+                    '</svg></i>'+currentDate()+'' +
                     '</a>' +
                     '</div>' +
                     '</div>' +
@@ -126,6 +126,15 @@ $(function () {
         }, 'json');
     });
 
+    function currentDate() {
+        var dateObj = new Date();
+        var month = dateObj.getUTCMonth() + 1; //months from 1-12
+        var day = dateObj.getUTCDate();
+        var year = dateObj.getUTCFullYear();
+        var monthNameShort = dateObj.toLocaleString("default", { month: "short" });
+        newdate = monthNameShort + ' ' + day + ' ' + year;
+        return newdate;
+    }
     // replies like count
     $('.rep-likes-iconhit').on('click', function (e) {
         e.preventDefault();
@@ -183,12 +192,11 @@ $(function () {
     });
 
     $('#inputTopicTags').tokenfield({
-        autocomplete :{
-            source: function(request, response)
-            {
+        autocomplete: {
+            source: function (request, response) {
                 jQuery.get('groupnamefetch.php', {
-                    query : request.term
-                }, function(data){
+                    query: request.term
+                }, function (data) {
                     data = JSON.parse(data);
                     response(data);
                 });
@@ -197,7 +205,7 @@ $(function () {
         }
     });
 
-   
+
 
 });
 // insert 1st like on particular post
@@ -273,8 +281,8 @@ function getfav(e) {
         }
     }, 'json');
 }
-function CKupdate(){
-    for (instance in CKEDITOR.instances){
+function CKupdate() {
+    for (instance in CKEDITOR.instances) {
         CKEDITOR.instances[instance].updateElement();
         CKEDITOR.instances[instance].setData('');
     }

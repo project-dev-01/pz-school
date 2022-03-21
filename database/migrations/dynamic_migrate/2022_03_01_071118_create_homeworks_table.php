@@ -21,7 +21,7 @@ class CreateHomeworksTable extends Migration
             $table->integer('subject_id');
             $table->date('date_of_homework');
             $table->date('date_of_submission');
-            $table->date('schedule_date');
+            $table->date('schedule_date')->nullable();
             $table->text('description');
             $table->string('document');
             $table->string('status');

@@ -79,7 +79,7 @@ $(function () {
         $("#attendanceFilter").find("#subjectID").empty();
         $("#attendanceFilter").find("#subjectID").append('<option value="">Select Subject</option>');
 
-        $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: userID, class_id: class_id }, function (res) {
+        $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
                     $("#attendanceFilter").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
@@ -96,7 +96,7 @@ $(function () {
         $.post(teacherSubjectUrl, {
             token: token,
             branch_id: branchID,
-            teacher_id: userID,
+            teacher_id: ref_user_id,
             class_id: class_id,
             section_id: section_id,
             class_id: class_id

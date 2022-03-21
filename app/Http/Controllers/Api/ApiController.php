@@ -3851,10 +3851,9 @@ class ApiController extends BaseController
                 ->where([
                     ['tc.class_id', '=', $request->class_id],
                     ['tc.section_id', '=', $request->section_id],
-                    ['tc.section_id', '=', $request->section_id],
-                    ['tc.day', '=', $request->day],
+                    ['tc.subject_id', '=', $request->subject_id],
                 ])
-                ->orWhere('tc.day', 'like', '%' . $day . '%')
+                ->where('tc.day', 'like', '%' . $day . '%')
                 ->first();
             $data = [
                 'avg_attendance' => $avgAttendance,
@@ -4515,6 +4514,7 @@ class ApiController extends BaseController
                 ->where([
                     ['stud.parent_id', '=', $request->ref_user_id]
                 ])
+                ->groupBy('sa.subject_id')
                 ->get();
 
             return $this->successResponse($getAttendanceList, 'subjects record fetch successfully');
@@ -4746,11 +4746,9 @@ class ApiController extends BaseController
             foreach ($request['homework'] as $home) {
 
                 // return $home;
-                $correction;
+                $correction = 0;
                 if (isset($home['correction'])) {
                     $correction = 1;
-                } else {
-                    $correction = 0;
                 }
                 if($home['homework_evaluation_id'])
                 {
@@ -4761,6 +4759,7 @@ class ApiController extends BaseController
                         'correction' => $correction,
                         'evaluated_by' => $request->evaluated_by,
                         'evaluation_date' => date("Y-m-d"),
+                        'updated_at' => date("Y-m-d H:i:s")
                     ]);
                 }
             }
@@ -4852,7 +4851,7 @@ class ApiController extends BaseController
             $status = $request->status;
             $subject = $request->subject;
 
-            $query = $con->table('homeworks')->select('homeworks.*','sections.name as section_name','classes.name as class_name','subjects.name as subject_name','homeworks.document','homework_evaluation.file','homework_evaluation.remarks','homework_evaluation.status','homework_evaluation.rank')
+            $query = $con->table('homeworks')->select('homeworks.*','homework_evaluation.evaluation_date','sections.name as section_name','classes.name as class_name','subjects.name as subject_name','homeworks.document','homework_evaluation.file','homework_evaluation.remarks','homework_evaluation.status','homework_evaluation.rank')
                                             ->leftJoin('subjects','homeworks.subject_id','=','subjects.id')
                                             ->leftJoin('sections','homeworks.section_id','=','sections.id')
                                             ->leftJoin('classes','homeworks.class_id','=','classes.id')

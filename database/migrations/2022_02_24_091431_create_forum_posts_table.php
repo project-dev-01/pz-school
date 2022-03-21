@@ -25,7 +25,7 @@ class CreateForumPostsTable extends Migration
             $table->string('category');
             $table->string('tags')->nullable();
             $table->string('imagesorvideos')->nullable();
-            $table->int('threads_status');
+            $table->integer('threads_status');
             $table->timestamps();
         });
     }

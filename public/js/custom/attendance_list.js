@@ -57,7 +57,7 @@ $(function () {
                 success: function (response) {
                     console.log(response)
                     if (response.code == 200) {
-                        
+
                         $("#attendanceReport").show();
 
                         var get_attendance_list = response.data.get_attendance_list;
@@ -87,7 +87,11 @@ $(function () {
                                 '</thead>' +
                                 '<tbody>' +
                                 '<tr>' +
-                                '<td>' + get_attendance_list[0].first_name + ' ' + get_attendance_list[0].last_name + '</td>';
+                                '<td class="text-left">' +
+                                '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light studentDetails" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">' +
+                                '<img src="' + defaultImg + '" alt="user-image" class="rounded-circle">' +
+                                '</a>' + get_attendance_list[0].first_name + ' ' + get_attendance_list[0].last_name +
+                                '</td>';
 
                             for (var s = firstDayTd; s <= lastDay; s.setDate(s.getDate() + 1)) {
                                 // daysOfYear.push(new Date(d));

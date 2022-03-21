@@ -225,7 +225,7 @@ class TeacherController extends Controller
     public function classroomManagement()
     {
         $data = [
-            'teacher_id' => session()->get('user_id')
+            'teacher_id' => session()->get('ref_user_id')
         ];
         $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         return view('teacher.classroom.management', [
@@ -252,7 +252,7 @@ class TeacherController extends Controller
     public function attendanceList()
     {
         $data = [
-            'teacher_id' => session()->get('user_id')
+            'teacher_id' => session()->get('ref_user_id')
         ];
         $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         return view('teacher.attendance.index', [
@@ -481,8 +481,8 @@ class TeacherController extends Controller
                                     <td>'.$work['remarks'].'</td>
                                     <td>
                                         <div class="checkbox checkbox-primary mb-3">
-                                            <input  type="checkbox"  '.$check.$disabled.'  name="homework['.$row.'][correction]">
-                                            <label for="correction"></label>
+                                            <input  type="checkbox"  '.$check.$disabled.' id="'.$row.'" name="homework['.$row.'][correction]">
+                                            <label for="'.$row.'"></label>
                                         </div>
                                     </td>
                                 </tr>';

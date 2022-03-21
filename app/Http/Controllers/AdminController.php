@@ -1774,8 +1774,8 @@ class AdminController extends Controller
                                     <td>' . $work['remarks'] . '</td>
                                     <td>
                                         <div class="checkbox checkbox-primary mb-3">
-                                            <input  type="checkbox"  ' . $check . $disabled . '  name="homework[' . $row . '][correction]">
-                                            <label for="correction"></label>
+                                            <input  type="checkbox"  ' . $check . $disabled . ' id="'.$row.'" name="homework[' . $row . '][correction]">
+                                            <label for="'.$row.'"></label>
                                         </div>
                                     </td>
                                 </tr>';

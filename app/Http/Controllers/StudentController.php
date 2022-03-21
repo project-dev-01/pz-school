@@ -84,6 +84,7 @@ class StudentController extends Controller
             {
                 foreach($homework['data']['homeworks'] as $work)
                 {
+                    $evaluation_date = (isset($work['evaluation_date'])) ? date('F j , Y', strtotime($work['evaluation_date'])) : "-";
                     if($work['status'] == 1) 
                     {
                         $status = "Completed";
@@ -168,7 +169,7 @@ class StudentController extends Controller
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-5 font-weight-bold">Evalution Date :</div>
-                                                    <div class="col-md-3">'.date('F j , Y', strtotime($work['evaluation_date'])).'</div>
+                                                    <div class="col-md-3">'.$evaluation_date.'</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
