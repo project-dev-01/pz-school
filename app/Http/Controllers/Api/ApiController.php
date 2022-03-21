@@ -2192,7 +2192,7 @@ class ApiController extends BaseController
             $classConn = $this->createNewConnection($request->branch_id);
             // get data
             $class_id = $request->class_id;
-            $class = $classConn->table('section_allocations as sa')->select('s.id', 's.name')
+            $class = $classConn->table('section_allocations as sa')->select('s.id as section_id', 's.name as section_name')
                 ->join('sections as s', 'sa.section_id', '=', 's.id')
                 ->where('sa.class_id', $class_id)
                 ->get();
@@ -2217,7 +2217,7 @@ class ApiController extends BaseController
             $classConn = $this->createNewConnection($request->branch_id);
             // get data
             $class_id = $request->class_id;
-            $class = $classConn->table('subject_assigns as sa')->select('s.id', 's.name')
+            $class = $classConn->table('subject_assigns as sa')->select('s.id as subject_id', 's.name as subject_name')
                 ->join('subjects as s', 'sa.subject_id', '=', 's.id')
                 ->where('sa.class_id', $class_id)
                 ->groupBy('s.id')
@@ -2243,10 +2243,11 @@ class ApiController extends BaseController
             // create new connection
             $classConn = $this->createNewConnection($request->branch_id);
             // get data
-            $output['teacher'] = $classConn->table('teacher_allocations as t')->select('s.id', 's.name')
-                ->join('staffs as s', 't.teacher_id', '=', 's.id')
-                ->where('t.class_id', $request->class_id)
-                ->where('t.section_id', $request->section_id)
+            $output['teacher'] = $classConn->table('subject_assigns as sa')->select('s.id', 's.name')
+                ->join('staffs as s', 'sa.teacher_id', '=', 's.id')
+                ->where('sa.class_id', $request->class_id)
+                ->where('sa.section_id', $request->section_id)
+                ->groupBy('sa.teacher_id')
                 ->get();
             $output['subject'] = $classConn->table('subject_assigns as sa')->select('s.id', 's.name')
                 ->join('subjects as s', 'sa.subject_id', '=', 's.id')
@@ -2393,16 +2394,17 @@ class ApiController extends BaseController
                 $output['details']['class'] = $con->table('classes')->select('classes.id as class_id', 'classes.name as class_name')->where('id', $request->class_id)->first();
                 $output['details']['section'] = $con->table('sections')->select('sections.id as section_id', 'sections.name as section_name')->where('id', $request->section_id)->first();
 
-                $output['teacher'] = $con->table('teacher_allocations as t')->select('s.id', 's.name')
-                    ->join('staffs as s', 't.teacher_id', '=', 's.id')
-                    ->where('t.class_id', $request->class_id)
-                    ->where('t.section_id', $request->section_id)
-                    ->get();
+                $output['teacher'] = $con->table('subject_assigns as sa')->select('s.id', 's.name')
+                                        ->join('staffs as s', 'sa.teacher_id', '=', 's.id')
+                                        ->where('sa.class_id', $request->class_id)
+                                        ->where('sa.section_id', $request->section_id)
+                                        ->groupBy('sa.teacher_id')
+                                        ->get();
                 $output['subject'] = $con->table('subject_assigns as sa')->select('s.id', 's.name')
-                    ->join('subjects as s', 'sa.subject_id', '=', 's.id')
-                    ->where('sa.class_id', $request->class_id)
-                    ->where('sa.section_id', $request->section_id)
-                    ->get();
+                                        ->join('subjects as s', 'sa.subject_id', '=', 's.id')
+                                        ->where('sa.class_id', $request->class_id)
+                                        ->where('sa.section_id', $request->section_id)
+                                        ->get();
 
                 return $this->successResponse($output, 'Timetable record fetch successfully');
             } else {
