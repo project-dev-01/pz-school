@@ -77,7 +77,6 @@ class StudentController extends Controller
             'student_id' => $student,
         ];
         $homework = Helper::PostMethod(config('constants.api.homework_student_filter'), $data);
-        // dd($homework);
         if($homework['code']=="200")
         {
             $response ="";
@@ -113,9 +112,7 @@ class StudentController extends Controller
                             <div class="row">
                                 <div class="col-md-5 font-weight-bold">Attachment File: </div>
                                 <div class="col-md-5">
-    
-                                    <input type="file" class="custom-file-input" name="file">
-                                    <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                                    <input type="file"  name="file">
                                 </div>
                             </div>
                         </div>

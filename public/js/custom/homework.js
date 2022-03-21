@@ -38,6 +38,11 @@ $(function () {
         }
     });
 
+    $('#homework_file').change(function() {
+        // var i = $(this).prev('label').clone();
+        var file = $('#homework_file')[0].files[0].name;
+        $('#file_name').text(file);
+    });
     
     $('#studentHomeworkFilter').on('submit', function (e) {
         e.preventDefault();
