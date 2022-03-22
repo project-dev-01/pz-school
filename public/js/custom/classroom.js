@@ -95,7 +95,7 @@ $(function () {
                     var dataSetNew = response.data;
 
                     if (response.code == 200) {
-                        $('#saveClassRoomAttendance').prop('disabled', false);
+                        // $('#saveClassRoomAttendance').prop('disabled', false);
                         $('#layoutModeGrid').empty();
                         var layoutModeGrid = "";
                         if (response.data.length > 0) {
@@ -187,6 +187,9 @@ $(function () {
         }
         if (res.att_status == "late") {
             bgColor = "#358fde";
+        }
+        if (res.att_status == "excused") {
+            bgColor = "#696969";
         }
         layoutModeGrid += '<div class="card-header" style="background-color:' + bgColor + ';color:white;text-align:left">';
         layoutModeGrid += '<img src="' + defaultImg + '" class="mr-2 rounded-circle" height="40" />' +
@@ -417,7 +420,7 @@ $(function () {
     $('#addListMode').on('submit', function (e) {
         e.preventDefault();
         var form = this;
-        $('#saveClassRoomAttendance').prop('disabled', true);
+        // $('#saveClassRoomAttendance').prop('disabled', true);
 
         $.ajax({
             url: $(form).attr('action'),
@@ -444,7 +447,7 @@ $(function () {
                     }
 
                     $("#layoutModeGrid").append(layoutModeGrid);
-                    $('#saveClassRoomAttendance').prop('disabled', true);
+                    // $('#saveClassRoomAttendance').prop('disabled', true);
                     // $('#listModeClassRoom').DataTable().ajax.reload(null, false);
                     // $('#addListMode')[0].reset();
                     var classID = $("#changeClassName").val();
@@ -505,13 +508,13 @@ $(function () {
                 var getStudentData = response.data.get_student_data;
                 var totalStudent = response.data.total_student;
                 var timetable_class = response.data.timetable_class;
-
                 // check count down
                 countdownTimeStart(timetable_class);
 
                 var presentCnt = (dataSetNew[0].presentCount ? dataSetNew[0].presentCount : 0);
                 var absentCnt = (dataSetNew[0].absentCount ? dataSetNew[0].absentCount : 0);
                 var lateCnt = (dataSetNew[0].lateCount ? dataSetNew[0].lateCount : 0);
+                var excusedCnt = (dataSetNew[0].excusedCount ? dataSetNew[0].excusedCount : 0);
                 var totalStudentCnt = (totalStudent[0].totalStudentCount ? totalStudent[0].totalStudentCount : 0);
 
                 var perfectAttendance = 0;
@@ -520,6 +523,7 @@ $(function () {
                     $("#presentCount").html(presentCnt);
                     $("#absentCount").html(absentCnt);
                     $("#lateCount").html(lateCnt);
+                    $("#excuseCount").html(excusedCnt);
                     // present absent late end
                     if (getStudentData.length > 0) {
                         $.each(getStudentData, function (key, val) {
@@ -533,7 +537,6 @@ $(function () {
                         });
                     }
                     // var totalStudentCount = dataSetNew[0].totalStudentCount;
-
 
                     var attpresentCount = (avgAttendance[0].presentCount + avgAttendance[0].lateCount);
                     var totalDate = avgAttendance[0].totalDate;
@@ -555,6 +558,7 @@ $(function () {
                     $("#presentCount").html(presentCnt);
                     $("#absentCount").html(absentCnt);
                     $("#lateCount").html(lateCnt);
+                    $("#excuseCount").html(excusedCnt);
                     $("#perfectAttendance").html(perfectAttendance + "%");
                     $("#totalStrength").html("Total Strength: " + totalStudentCnt);
                     $("#belowAttendance").html(0 + "%");
@@ -701,7 +705,8 @@ $(function () {
         var shortTestAppend = "";
         var shortTestTable = "";
         var index = 0;
-        shortTestTable += '<table class="table table-striped table-nowrap">' +
+        shortTestTable += '<div class="table-responsive">' +
+            '<table class="table table-striped table-nowrap">' +
             '<thead>' +
             '<tr>' +
             '<th>S.no</th>' +
@@ -780,7 +785,7 @@ $(function () {
         $("#shortTestAppend").append(shortTestAppend);
 
         shortTestTable += '</tbody>' +
-            '</table>';
+            '</table></div>';
         $("#shortTestTableAppend").append(shortTestTable);
     }
     // get short test

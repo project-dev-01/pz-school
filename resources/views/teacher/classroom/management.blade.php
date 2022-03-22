@@ -198,6 +198,16 @@
                                         <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="lateCount"></span></h3>
                                     </div>
                                 </div>
+                                <div class="col-6">
+                                    <div class="">
+                                        <p class="text-muted mb-1">Excused</p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-right">
+                                        <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="excuseCount"></span></h3>
+                                    </div>
+                                </div>
                             </div>
                             <div class="mt-3">
                                 <div class="progress progress-sm m-0">
@@ -324,8 +334,8 @@
                             <div class="tab-content">
                                 <div class="tab-pane show active" id="profile-b1">
                                     <div class="row">
-                                        <div class="col-md-9"></div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-8"></div>
+                                        <div class="col-md-4">
                                             <a href="javascript: void(0);" class="text-reset mb-2 d-block">
                                                 <i class='fas fa-circle' style='font-size:14px;color:#60a05b'></i>
                                                 <span class="mb-0 mt-1" style="text-align:center">Present</span>
@@ -333,6 +343,8 @@
                                                 <span class="mb-0 mt-1">Late</span>
                                                 <i class='fas fa-circle' style='font-size:14px;color:#de354f'></i>
                                                 <span class="mb-0 mt-1">Absent</span>
+                                                <i class='fas fa-circle' style='font-size:14px;color:#696969'></i>
+                                                <span class="mb-0 mt-1">Excused</span>
                                             </a>
 
                                         </div>
@@ -519,6 +531,7 @@
                                     </div>
                                     <div class="row shortTestHideSHow">
                                         <div class="col-md-12">
+                                            <div class="table-responsive">
                                             <table class="table table-striped table-nowrap">
                                                 <thead>
                                                     <tr>
@@ -530,6 +543,7 @@
                                                 <tbody id="shortTestAppend">
                                                 </tbody>
                                             </table>
+                                            </div>
                                         </div> <!-- end card-box-->
                                     </div>
                                     <br />
