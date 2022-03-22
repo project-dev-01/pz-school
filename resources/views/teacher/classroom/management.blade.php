@@ -104,7 +104,7 @@
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="changeClassName">Class<span class="text-danger">*</span></label>
+                                    <label for="changeClassName">Standard<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">Select Class</option>
                                         @forelse ($teacher_class as $class)
@@ -116,7 +116,7 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="sectionID">Section<span class="text-danger">*</span></label>
+                                    <label for="sectionID">Class Name<span class="text-danger">*</span></label>
                                     <select id="sectionID" class="form-control" name="section_id">
                                         <option value="">Select Section</option>
                                     </select>
@@ -382,6 +382,7 @@
                                         <input type="hidden" name="subject_id" id="listModeSubjectID">
                                         <input type="hidden" name="date" id="listModeSelectedDate">
                                         <div class="col-md-12">
+                                        <div class="table-responsive">
                                             <!-- <table data-toggle="table" data-page-size="3" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable "> -->
                                             <!-- <table id="listModeClassRoom" class="table table-striped table-nowrap"> -->
                                             <table id="listModeClassRoom" class="table table-centered table-striped dt-responsive nowrap w-100" width="100%">
@@ -402,6 +403,7 @@
                                                 <tbody>
                                                 </tbody>
                                             </table>
+                                            </div>
                                         </div> <!-- end card-box-->
                                         <div class="col-md-12">
                                             <div class="card-body">
@@ -463,6 +465,7 @@
                                         <input type="hidden" name="section_id" id="dailyReportRemarksSectionID">
                                         <input type="hidden" name="subject_id" id="dailyReportRemarksSubjectID">
                                         <div class="col-md-12">
+                                        <div class="table-responsive">
                                             <table id="dailyReportRemarks" class="table table-centered table-striped dt-responsive nowrap w-100" width="100%">
                                                 <thead>
                                                     <tr>
@@ -476,6 +479,7 @@
                                                 <tbody>
                                                 </tbody>
                                             </table>
+                                            </div>
                                         </div> <!-- end card-box-->
                                         <div class="col-md-12">
                                             <div class="card-body">

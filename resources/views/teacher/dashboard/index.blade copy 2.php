@@ -160,9 +160,19 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
+                        <div class="col-lg-3">
+                            <div id="external-events" class="m-t-20">
+                                <br>
+                            </div>
+
+                        </div> <!-- end col-->
+
                         <div class="col-lg-12">
+                            <!-- <div id="calendar-timeTable"></div> -->
+                            <!-- <div id="calendar"></div> -->
                             <div id="teacher_calendor"></div>
-                        </div>
+                        </div> <!-- end col -->
+
                     </div> <!-- end row -->
                 </div> <!-- end card body-->
             </div> <!-- end card -->
