@@ -1371,11 +1371,11 @@ class SuperAdminController extends Controller
         //     'forum_list' => $forum_list['data']
         // ]);
         $branch_id =$request->getbranchid;
-        $user_id=2;
+        $roll_id=2;
         $request->session()->put('branch_id', $branch_id);
-        $request->session()->put('user_id', 2);
+        $request->session()->put('roll_id', 2);
         $data = [            
-            'user_id' => $user_id
+            'user_id' => $roll_id
         ];        
         $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$data); 
         //dd($forum_list);
@@ -1480,7 +1480,8 @@ class SuperAdminController extends Controller
     {
         $current_user=session()->get('user_id');
         $user_tags=$request->tags;
-        $tags_add_also_currentuser=$user_tags .','.$current_user;        
+        $adminid=2;
+        $tags_add_also_currentroll=$user_tags .','.$current_user.','.$adminid;          
         $data = [
             'user_id' => session()->get('user_id'),
             'user_name' => session()->get('name'),
@@ -1489,7 +1490,7 @@ class SuperAdminController extends Controller
             'types' => $request->topictype,
             'body_content' => $request->tpbody,
             'category' => $request->category,
-            'tags' => $tags_add_also_currentuser,
+            'tags' => $tags_add_also_currentroll,
             'imagesorvideos' => $request->inputTopicTitle,
             'threads_status' => 2
         ];
@@ -1541,14 +1542,41 @@ class SuperAdminController extends Controller
     }
     public function imagestore(Request $request)
     {
-        //dd($request);     
-        $task=new Task();
-        $task->id=0;
-        $task->exists=true;
-        $image = $task->addMediaFromRequest('upload')->toMediaCollection('images');
-        $geturl=$image->getUrl();
-        //  dd($image->getUrl());
-        return response()->json(['url'=>$image->getUrl()]);
+        if ($request->hasFile('upload')) {
+
+            //get filename with extension
+
+            $filenamewithextension = $request->file('upload')->getClientOriginalName();
+
+            //get filename without extension
+
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            //get file extension
+
+            $extension = $request->file('upload')->getClientOriginalExtension();
+
+
+
+            //filename to store
+
+            $filenametostore = $filename . '_' . time() . '.' . $extension;
+
+
+
+            //upload file
+
+            $request->file('upload')->storeAs('public/forumupload', $filenametostore);
+
+
+
+            echo json_encode([
+
+                'default' => asset('storage/forumupload/' . $filenametostore),
+
+                '500' =>  asset('storage/forumupload/' . $filenametostore)
+
+            ]);
+        }
     }
     // forum screen pages end
     public function studentEntry()

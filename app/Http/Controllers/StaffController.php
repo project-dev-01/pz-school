@@ -36,8 +36,12 @@ class StaffController extends Controller
     // forum screen pages start
     public function forumIndex()
     {
-        $user_id= session()->get('user_id');  
-        $data = [            
+        // $user_id= session()->get('user_id');  
+        // $data = [            
+        //     'user_id' => $user_id
+        // ];
+        $user_id = session()->get('role_id');
+        $data = [
             'user_id' => $user_id
         ];
         
@@ -55,8 +59,13 @@ class StaffController extends Controller
     }
     public function forumPageCreateTopic()
     {
-        $user_id= session()->get('user_id');  
-        $data = [            
+        // $user_id = session()->get('user_id');
+        // $data = [
+        //     'user_id' => $user_id
+        // ];
+        $user_id = session()->get('role_id');
+
+        $data = [
             'user_id' => $user_id
         ];
         $category = Helper::GetMethod(config('constants.api.category'));
@@ -148,9 +157,11 @@ class StaffController extends Controller
     // forum create post 
     public function createpost(Request $request)
     {
-        $current_user=session()->get('user_id');
-        $user_tags=$request->tags;
-        $tags_add_also_currentuser=$user_tags .','.$current_user;        
+        $current_user=session()->get('role_id');
+        //dd($current_user);
+        $rollid_tags=$request->tags;
+        $adminid=2;
+        $tags_add_also_currentroll=$rollid_tags .','.$current_user.','.$adminid;        
         $data = [
             'user_id' => session()->get('user_id'),
             'user_name' => session()->get('name'),
@@ -159,7 +170,7 @@ class StaffController extends Controller
             'types' => $request->topictype,
             'body_content' => $request->tpbody,
             'category' => $request->category,
-            'tags' => $tags_add_also_currentuser,
+            'tags' => $tags_add_also_currentroll,
             'imagesorvideos' => $request->inputTopicTitle,
             'threads_status' => 1
         ];
@@ -178,8 +189,12 @@ class StaffController extends Controller
             'created_post_id' => $id,
             'user_id' => $user_id,
         ]; 
-        $user_id= session()->get('user_id');  
-        $usdata = [            
+        // $user_id = session()->get('user_id');
+        // $usdata = [
+        //     'user_id' => $user_id
+        // ];
+        $user_id = session()->get('role_id');
+        $usdata = [
             'user_id' => $user_id
         ];
        
@@ -199,14 +214,41 @@ class StaffController extends Controller
     
    public function imagestore(Request $request)
    {
-       //dd($request);     
-       $task=new Task();
-       $task->id=0;
-       $task->exists=true;
-       $image = $task->addMediaFromRequest('upload')->toMediaCollection('images');
-       $geturl=$image->getUrl();
-       //  dd($image->getUrl());
-       return response()->json(['url'=>$image->getUrl()]);
+    if ($request->hasFile('upload')) {
+
+        //get filename with extension
+
+        $filenamewithextension = $request->file('upload')->getClientOriginalName();
+
+        //get filename without extension
+
+        $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        //get file extension
+
+        $extension = $request->file('upload')->getClientOriginalExtension();
+
+
+
+        //filename to store
+
+        $filenametostore = $filename . '_' . time() . '.' . $extension;
+
+
+
+        //upload file
+
+        $request->file('upload')->storeAs('public/forumupload', $filenametostore);
+
+
+
+        echo json_encode([
+
+            'default' => asset('storage/forumupload/' . $filenametostore),
+
+            '500' =>  asset('storage/forumupload/' . $filenametostore)
+
+        ]);
+    }
    }
     // forum screen pages end
 

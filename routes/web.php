@@ -435,7 +435,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('forum/page-categories-single', [AdminController::class, 'forumPageCategoriesSingle'])->name('admin.forum.page-categories-single');
         Route::get('forum/page-tabs', [AdminController::class, 'forumPageTabs'])->name('admin.forum.page-tabs');
         Route::get('forum/page-tabs-guidelines', [AdminController::class, 'forumPageTabGuidelines'])->name('admin.forum.page-tabs-guidelines');
-
+        
         // Attendance routes
         Route::get('attendance/student_entry', [AdminController::class, 'studentEntry'])->name('admin.attendance.student_entry');
         Route::get('attendance/employee_entry', [AdminController::class, 'employeeEntry'])->name('admin.attendance.employee_entry');
@@ -456,7 +456,8 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('form/page-create-topic', [AdminController::class, 'createpost'])->name('admin.forum.create-topic');
         Route::get('forum/page-single-topic-val/{id}/{user_id}', [AdminController::class, 'forumPageSingleTopicwithvalue'])->name('admin.forum.page-single-topic-val');
         Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [AdminController::class, 'forumPageCategoriesSingle'])->name('admin.forum.page-categories-single-val');
-        Route::post('form/postimage', [AdminController::class, 'imagestore'])->name('admin.forum.image.store');
+       Route::post('form/postimage', [AdminController::class, 'imagestore'])->name('admin.forum.image.store');
+      //  Route::post('form/postimage', [CommonController::class, 'imagestore'])->name('forum.image.store');
     });
     // admin routes end
 

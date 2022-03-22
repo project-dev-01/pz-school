@@ -88,5 +88,5 @@ class CommonController extends Controller
         if (strlen($str) > 8)
         $str = substr($str, 0, 15) . '...';
         return $str;
-    }
+    }   
 }

@@ -474,7 +474,7 @@
                     <script src="{{ asset('toastr/toastr.min.js') }}"></script>
                     <script src="{{ asset('js/custom/ckeditor.js') }}"></script>
                     <script src="{{asset('js/custom/bootstrap-tokenfield.js')}}"></script>
-                                
+
 
 
                     <script>
@@ -485,6 +485,8 @@
                             }
                         });
                     </script>
+                  
+                    
                     <script src="{{ asset('js/validation/validation.js') }}"></script>
 
                     <script>
@@ -505,7 +507,7 @@
                         var repheartcount = "{{ config('constants.api.repheart_countadd') }}";
                         var threadstatusupd = "{{config('constants.api.thread_status_update')}}";
                         var userautocomplete = "{{config('constants.api.usernames_autocomplete')}}";
-                        
+
 
 
                         // default image test

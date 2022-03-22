@@ -11,7 +11,7 @@ $(function () {
     // create post forum
     $("#createpostForum").on('submit', function (e) {
         e.preventDefault();
-
+        console.log('hellosss');
         var cpostCheck = $("#createpostForum").valid();
         if (cpostCheck === true) {
             var form = this;
@@ -26,7 +26,9 @@ $(function () {
                     // console.log("------")
                     console.log(data)
                     if (data.code == 200) {
+
                         toastr.success(data.message);
+                        $('#createpostForum')[0].reset();
                         location.reload();
                     } else {
                         toastr.error(data.message);

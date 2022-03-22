@@ -289,7 +289,7 @@
                                                             @endphp
                                                     </a></li>
                                             </ul>
-                                            <h4 class="tt-title"><a href="page-categories-single.html">Threads-1,245</a></h4>
+                                            <h4 class="tt-title"><a href="{{route('parent.forum.page-single-user')}}">Threads</a></h4>
                                         </div>
                                         <div class="tt-item-layout">
                                             <div class="tt-innerwrapper">

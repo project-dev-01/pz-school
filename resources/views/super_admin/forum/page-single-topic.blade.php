@@ -331,19 +331,7 @@
 </main>
 @endsection
 @section('scripts')
-<!-- <script>
-    var myEditor;
 
-    ClassicEditor
-        .create(document.querySelector('#repliesinput'))
-        .then(editor => {
-            console.log('Editor was initialized', editor);
-            myEditor = editor;
-        })
-        .catch(err => {
-            console.error(err.stack);
-        });
-</script> -->
 <script>
     
     function SimpleUploadAdapterPlugin(editor) {
@@ -431,9 +419,8 @@ class MyUploadAdapter {
             // at least the "default" URL, pointing to the image on the server.
             // This URL will be used to display the image in the content. Learn more in the
             // UploadAdapter#upload documentation.
-            resolve({
-                default: response.url
-            });
+            resolve( response
+            );
         });
 
         // Upload progress when it is supported. The file loader has the #uploadTotal and #uploaded
@@ -464,6 +451,18 @@ class MyUploadAdapter {
         this.xhr.send(data);
     }
 }
+
+</script>
+<script>
+        document.querySelectorAll( 'oembed[url]' ).forEach( element => {
+        // Create the <a href="..." class="embedly-card"></a> element that Embedly uses
+        // to discover the media.
+        const anchor = document.createElement( 'a' );
+        anchor.setAttribute( 'href', element.getAttribute( 'url' ) );
+        anchor.className = 'embedly-card';
+        element.appendChild( anchor );
+
+    } );
 
 </script>
 <script src="{{ asset('js/custom/forum-post-countsothers.js') }}"></script>

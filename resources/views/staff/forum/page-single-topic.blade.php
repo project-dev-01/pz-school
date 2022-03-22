@@ -38,9 +38,9 @@
                     </div>
                     <div class="tt-item-description">
                         <h6 class="tt-title">{{ $value['topic_header'] }}</h6> <br>
-                    
-                            {!! $value['body_content'] !!}
-                      
+
+                        {!! $value['body_content'] !!}
+
                     </div>
                     <div class="tt-item-info info-bottom">
                         <a href="#" class="tt-icon-btn" id="likes-iconhit">
@@ -146,13 +146,13 @@
                             <i class="tt-icon"><svg>
                                     <use xlink:href="#icon-like"></use>
                                 </svg></i>
-                                <span class="tt-text repinclikes{{$value['pk_replies_id']}}">
+                            <span class="tt-text repinclikes{{$value['pk_replies_id']}}">
                                 @if($value['likes']=== null)
                                 0
                                 @else
                                 {{$value['likes']}}
                                 @endif
-                                </span>
+                            </span>
                         </a>
                         <a href="javescript:void(0)" class="tt-icon-btn rep-dislikes-iconhit" data-id="{{$value['pk_replies_id']}}">
                             <i class="tt-icon"><svg>
@@ -327,21 +327,7 @@
 </main>
 @endsection
 @section('scripts')
-<!-- <script>
-    var myEditor;
-
-    ClassicEditor
-        .create(document.querySelector('#repliesinput'))
-        .then(editor => {
-            console.log('Editor was initialized', editor);
-            myEditor = editor;
-        })
-        .catch(err => {
-            console.error(err.stack);
-        });
-</script> -->
-<script>
-    
+<script>    
     function SimpleUploadAdapterPlugin(editor) {
     editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
         // Configure the URL to the upload script in your back-end here!
@@ -427,9 +413,8 @@ class MyUploadAdapter {
             // at least the "default" URL, pointing to the image on the server.
             // This URL will be used to display the image in the content. Learn more in the
             // UploadAdapter#upload documentation.
-            resolve({
-                default: response.url
-            });
+            resolve( response
+            );
         });
 
         // Upload progress when it is supported. The file loader has the #uploadTotal and #uploaded
@@ -460,6 +445,18 @@ class MyUploadAdapter {
         this.xhr.send(data);
     }
 }
+
+</script>
+<script>
+        document.querySelectorAll( 'oembed[url]' ).forEach( element => {
+        // Create the <a href="..." class="embedly-card"></a> element that Embedly uses
+        // to discover the media.
+        const anchor = document.createElement( 'a' );
+        anchor.setAttribute( 'href', element.getAttribute( 'url' ) );
+        anchor.className = 'embedly-card';
+        element.appendChild( anchor );
+    } );
+</script>
 
 </script>
 <script src="{{ asset('js/custom/forum-post-countsothers.js') }}"></script>

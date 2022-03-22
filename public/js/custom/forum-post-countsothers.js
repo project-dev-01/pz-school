@@ -52,89 +52,89 @@ $(function () {
         console.log(ckval);
         $.post(repliesforpost, { token: token, branch_id: branch_id, user_id: user_id, user_name: user_name, create_post_id: create_post_id, replies_com: ckval }, function (res) {
             if (res.code == 200) {
-                toastr.success(res.message);
+                console.log(res);
+                //toastr.success(res.message);
                 //$("#repliesinput form")[0].reset();
                 myEditor.setData("");
-                // CKupdate();
+               // CKupdate();
                 let _this = this;
-                $("#repliesjsvs").find("#repliesapply").append(
-                    '<div class="tt-item">' +
-                    '<div class="tt-single-topic">' +
-                    '<div class="tt-item-header pt-noborder">' +
-                    '<div class="tt-item-info info-top">' +
-                    '<div class="tt-avatar-icon">' +
-                    '<i class="tt-icon"><img src="' + defaultImg + '" class="mr-2 rounded-circle" height="40" /></i>' +
-                    '</div>' +
-                    '<div class="tt-avatar-title">' +
-                    '<a href="#">' + res.data[1] + '</a>' +
-                    '</div>' +
-                    '<a href="#" class="tt-info-time">' +
-                    '<i class="tt-icon"><svg>' +
-                    '<use xlink:href="#icon-time"></use>' +
-                    '</svg></i>'+currentDate()+'' +
-                    '</a>' +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="tt-item-description">' +
-                    '' + res.data[3] + '' +
-                    '</div>' +
-                    '<div class="tt-item-info info-bottom">' +
-                    '<a class="tt-icon-btn" onclick="getlikes(' + res.data[4] + ')">' +
-                    '<i class="tt-icon"><svg>' +
-                    '<use xlink:href="#icon-like"></use>' +
-                    '</svg></i>' +
-                    '<span class="tt-text repinclikes' + res.data[4] + '">0</span>' +
-                    '</a>' +
-                    '<a class="tt-icon-btn" onclick="getdislikes(' + res.data[4] + ')">' +
-                    '<i class="tt-icon"><svg>' +
-                    '<use xlink:href="#icon-dislike"></use>' +
-                    '</svg></i>' +
-                    '<span class="tt-text repincdislikes' + res.data[4] + '">0</span>' +
-                    '</a>' +
-                    '<a class="tt-icon-btn" onclick="getfav(' + res.data[4] + ')">' +
-                    '<i class="tt-icon"><svg>' +
-                    '<use xlink:href="#icon-favorite"></use>' +
-                    '</svg></i>' +
-                    '<span class="tt-text repincfav' + res.data[4] + '">0</span>' +
-                    '</a>' +
-                    '<div class="col-separator"></div>' +
-                    '<a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">' +
-                    '<i class="tt-icon"><svg>' +
-                    '' +
-                    '</svg></i>' +
-                    '</a>' +
-                    '<a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">' +
-                    '<i class="tt-icon"><svg>' +
-                    '' +
-                    '</svg></i>' +
-                    '</a>' +
-                    '<a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">' +
-                    '<i class="tt-icon"><svg>' +
-                    '' +
-                    '</svg></i>' +
-                    '</a>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>'
-                );
-
-
+                location.reload();
+                // $("#repliesjsvs").find("#repliesapply").append(
+                //     '<div class="tt-item">' +
+                //     '<div class="tt-single-topic">' +
+                //     '<div class="tt-item-header pt-noborder">' +
+                //     '<div class="tt-item-info info-top">' +
+                //     '<div class="tt-avatar-icon">' +
+                //     '<i class="tt-icon"><img src="' + defaultImg + '" class="mr-2 rounded-circle" height="40" /></i>' +
+                //     '</div>' +
+                //     '<div class="tt-avatar-title">' +
+                //     '<a href="#">' + res.data[1] + '</a>' +
+                //     '</div>' +
+                //     '<a href="#" class="tt-info-time">' +
+                //     '<i class="tt-icon"><svg>' +
+                //     '<use xlink:href="#icon-time"></use>' +
+                //     '</svg></i>'+currentDate()+'' +
+                //     '</a>' +
+                //     '</div>' +
+                //     '</div>' +
+                //     '<div class="tt-item-description">' +
+                //     '' + res.data[3] + '' +
+                //     '</div>' +
+                //     '<div class="tt-item-info info-bottom">' +
+                //     '<a class="tt-icon-btn" onclick="getlikes(' + res.data[4] + ')">' +
+                //     '<i class="tt-icon"><svg>' +
+                //     '<use xlink:href="#icon-like"></use>' +
+                //     '</svg></i>' +
+                //     '<span class="tt-text repinclikes' + res.data[4] + '">0</span>' +
+                //     '</a>' +
+                //     '<a class="tt-icon-btn" onclick="getdislikes(' + res.data[4] + ')">' +
+                //     '<i class="tt-icon"><svg>' +
+                //     '<use xlink:href="#icon-dislike"></use>' +
+                //     '</svg></i>' +
+                //     '<span class="tt-text repincdislikes' + res.data[4] + '">0</span>' +
+                //     '</a>' +
+                //     '<a class="tt-icon-btn" onclick="getfav(' + res.data[4] + ')">' +
+                //     '<i class="tt-icon"><svg>' +
+                //     '<use xlink:href="#icon-favorite"></use>' +
+                //     '</svg></i>' +
+                //     '<span class="tt-text repincfav' + res.data[4] + '">0</span>' +
+                //     '</a>' +
+                //     '<div class="col-separator"></div>' +
+                //     '<a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">' +
+                //     '<i class="tt-icon"><svg>' +
+                //     '' +
+                //     '</svg></i>' +
+                //     '</a>' +
+                //     '<a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">' +
+                //     '<i class="tt-icon"><svg>' +
+                //     '' +
+                //     '</svg></i>' +
+                //     '</a>' +
+                //     '<a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">' +
+                //     '<i class="tt-icon"><svg>' +
+                //     '' +
+                //     '</svg></i>' +
+                //     '</a>' +
+                //     '</div>' +
+                //     '</div>' +
+                //     '</div>' +
+                //     '</div>'
+                // );
             } else {
                 toastr.error(res.message);
             }
         }, 'json');
     });
 
-    function currentDate() {
-        var dateObj = new Date();
-        var month = dateObj.getUTCMonth() + 1; //months from 1-12
-        var day = dateObj.getUTCDate();
-        var year = dateObj.getUTCFullYear();
-        var monthNameShort = dateObj.toLocaleString("default", { month: "short" });
-        newdate = monthNameShort + ' ' + day + ' ' + year;
-        return newdate;
-    }
+    // function currentDate() {
+    //     var dateObj = new Date();
+    //     var month = dateObj.getUTCMonth() + 1; //months from 1-12
+    //     var day = dateObj.getUTCDate();
+    //     var year = dateObj.getUTCFullYear();
+    //     var monthNameShort = dateObj.toLocaleString("default", { month: "short" });
+    //     newdate = monthNameShort + ' ' + day + ' ' + year;
+    //     return newdate;
+    // }
     // replies like count
     $('.rep-likes-iconhit').on('click', function (e) {
         e.preventDefault();
@@ -192,11 +192,12 @@ $(function () {
     });
 
     $('#inputTopicTags').tokenfield({
-        autocomplete: {
-            source: function (request, response) {
+        autocomplete :{
+            source: function(request, response)
+            {
                 jQuery.get('groupnamefetch.php', {
-                    query: request.term
-                }, function (data) {
+                    query : request.term
+                }, function(data){
                     data = JSON.parse(data);
                     response(data);
                 });
@@ -205,7 +206,7 @@ $(function () {
         }
     });
 
-
+   
 
 });
 // insert 1st like on particular post
@@ -281,8 +282,8 @@ function getfav(e) {
         }
     }, 'json');
 }
-function CKupdate() {
-    for (instance in CKEDITOR.instances) {
+function CKupdate(){
+    for (instance in CKEDITOR.instances){
         CKEDITOR.instances[instance].updateElement();
         CKEDITOR.instances[instance].setData('');
     }

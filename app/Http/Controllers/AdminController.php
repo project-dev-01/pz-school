@@ -27,11 +27,14 @@ class AdminController extends Controller
     // forum screen pages start
     public function forumIndex()
     {
-        $user_id = session()->get('user_id');
+        // $user_id = session()->get('user_id');
+        // $data = [
+        //     'user_id' => $user_id
+        // ];
+        $user_id = session()->get('role_id');
         $data = [
             'user_id' => $user_id
         ];
-
         $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'), $data);
         return view('admin.forum.index', [
             'forum_list' => !empty($forum_list['data']) ? $forum_list['data'] : []
@@ -43,13 +46,17 @@ class AdminController extends Controller
     }
     public function forumPageCreateTopic()
     {
-        $user_id = session()->get('user_id');
+        // $user_id = session()->get('user_id');
+        // $data = [
+        //     'user_id' => $user_id
+        // ];
+        $user_id = session()->get('role_id');
         $data = [
             'user_id' => $user_id
         ];
         $category = Helper::GetMethod(config('constants.api.category'));
-        $usernames = Helper::GETMethodWithData(config('constants.api.usernames_autocomplete'),$data);
-        //dd($usernames);
+        $usernames = Helper::GETMethodWithData(config('constants.api.usernames_autocomplete'), $data);
+        // dd($usernames);
         $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'), $data);
         // dd($forum_list);
         return view('admin.forum.page-create-topic', [
@@ -99,7 +106,7 @@ class AdminController extends Controller
     }
     public function forumPageCategories()
     {
-        $adminlistcategoryvs= Helper::GetMethod(config('constants.api.adminlistcategoryvs'));  
+        $adminlistcategoryvs = Helper::GetMethod(config('constants.api.adminlistcategoryvs'));
         // dd($listcategoryvs);      
         return view('admin.forum.page-categories', [
             'adminlistcategoryvs' => $adminlistcategoryvs['data']
@@ -130,9 +137,10 @@ class AdminController extends Controller
     // forum create post 
     public function createpost(Request $request)
     {
-        $current_user=session()->get('user_id');
-        $user_tags=$request->tags;
-        $tags_add_also_currentuser=$user_tags .','.$current_user;        
+        $current_user = session()->get('role_id');
+        $rollid_tags = $request->tags;
+        $adminid = 2;
+        $tags_add_also_currentroll = $rollid_tags . ',' . $current_user . ',' . $adminid;
         $data = [
             'user_id' => session()->get('user_id'),
             'user_name' => session()->get('name'),
@@ -141,7 +149,7 @@ class AdminController extends Controller
             'types' => $request->topictype,
             'body_content' => $request->tpbody,
             'category' => $request->category,
-            'tags' => $tags_add_also_currentuser,
+            'tags' => $tags_add_also_currentroll,
             'imagesorvideos' => $request->inputTopicTitle,
             'threads_status' => 2
         ];
@@ -159,7 +167,11 @@ class AdminController extends Controller
             'created_post_id' => $id,
             'user_id' => $user_id,
         ];
-        $user_id = session()->get('user_id');
+        // $user_id = session()->get('user_id');
+        // $usdata = [
+        //     'user_id' => $user_id
+        // ];
+        $user_id = session()->get('role_id');
         $usdata = [
             'user_id' => $user_id
         ];
@@ -171,21 +183,88 @@ class AdminController extends Controller
             'forum_single_post' => !empty($forum_singlepost['data']) ? $forum_singlepost['data'] : $forum_singlepost,
             'forum_singlepost_replies' => $forum_singlepost_replies['data'],
             //'forum_list' => $forum_list['data']
-            'forum_list'=>!empty($forum_list['data']) ? $forum_list['data'] : []
+            'forum_list' => !empty($forum_list['data']) ? $forum_list['data'] : []
 
         ]);
     }
     public function imagestore(Request $request)
     {
-        //dd($request);     
-        $task = new Task();
-        $task->id = 0;
-        $task->exists = true;
-        $image = $task->addMediaFromRequest('upload')->toMediaCollection('images');
-        $geturl = $image->getUrl();
-        //  dd($image->getUrl());
-        return response()->json(['url' => $image->getUrl()]);
+
+        if ($request->hasFile('upload')) {
+
+            //get filename with extension
+
+            $filenamewithextension = $request->file('upload')->getClientOriginalName();
+
+            //get filename without extension
+
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            //get file extension
+
+            $extension = $request->file('upload')->getClientOriginalExtension();
+
+
+
+            //filename to store
+
+            $filenametostore = $filename . '_' . time() . '.' . $extension;
+
+
+
+            //upload file
+
+            $request->file('upload')->storeAs('public/forumupload', $filenametostore);
+
+
+
+            echo json_encode([
+
+                'default' => asset('storage/forumupload/' . $filenametostore),
+
+                '500' =>  asset('storage/forumupload/' . $filenametostore)
+
+            ]);
+        }
     }
+    public function crtimgeastore(Request $request)
+    {
+        if ($request->hasFile('upload')) {
+
+            //get filename with extension
+
+            $filenamewithextension = $request->file('upload')->getClientOriginalName();
+
+            //get filename without extension
+
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            //get file extension
+
+            $extension = $request->file('upload')->getClientOriginalExtension();
+
+
+
+            //filename to store
+
+            $filenametostore = $filename . '_' . time() . '.' . $extension;
+
+
+
+            //upload file
+
+            $request->file('upload')->storeAs('public/forumupload', $filenametostore);
+
+
+
+            echo json_encode([
+
+                'default' => asset('storage/forumupload/' . $filenametostore),
+
+                '500' =>  asset('storage/forumupload/' . $filenametostore)
+
+            ]);
+        }
+    }
+
     // forum screen pages end
     //
     public function index()

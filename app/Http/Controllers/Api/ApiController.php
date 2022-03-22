@@ -2732,7 +2732,7 @@ class ApiController extends BaseController
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
             'branch_id' => 'required',
-            'user_id' => 'required'
+            'user_id'=>'required'
         ]);
 
         if (!$validator->passes()) {
@@ -4108,13 +4108,13 @@ class ApiController extends BaseController
                 })
                 ->select('forum_posts.id', 'forum_posts.user_id', 'forum_posts.user_name', 'forum_posts.topic_title', 'forum_categorys.id as categId', 'forum_categorys.category_names', 'forum_count_details.likes', 'forum_count_details.dislikes', 'forum_count_details.favorite', 'forum_count_details.replies', 'forum_count_details.views', 'forum_count_details.activity', 'forum_posts.created_at', 'forum_posts.topic_header')
                 ->where([
-                    ['forum_posts.branch_id', '=', $request->branch_id],
+                    ['forum_posts.branch_id', '=', $request->branch_id],                    
                     ['forum_posts.threads_status', '=', 2]
                 ])
                 ->whereRaw("find_in_set($request->user_id,forum_posts.tags)")
                 ->groupBy('forum_posts.category')
                 ->get();
-
+               
             return $this->successResponse($success, 'Post List fetch successfully');
         }
     }
@@ -4136,12 +4136,12 @@ class ApiController extends BaseController
                 })
                 ->select('forum_posts.id', 'forum_posts.user_id', 'forum_posts.user_name', 'forum_posts.topic_title', 'forum_categorys.id as categId', 'forum_categorys.category_names', 'forum_count_details.likes', 'forum_count_details.dislikes', 'forum_count_details.favorite', 'forum_count_details.replies', 'forum_count_details.views', 'forum_count_details.activity', 'forum_posts.created_at', 'forum_posts.topic_header')
                 ->where([
-                    ['forum_posts.branch_id', '=', $request->branch_id],
+                    ['forum_posts.branch_id', '=', $request->branch_id],                    
                     ['forum_posts.threads_status', '=', 2]
-                ])
+                ])                
                 ->groupBy('forum_posts.category')
                 ->get();
-
+               
             return $this->successResponse($success, 'Admin Post categ List fetch successfully');
         }
     }
@@ -4306,9 +4306,25 @@ class ApiController extends BaseController
         return  $this->successResponse($success, 'Thread status successfully Updated');
     }
     public function usernameautocomplete(Request $request)
-    {
+    {          
+        // $validator = \Validator::make($request->all(), [
 
-        $validator = \Validator::make($request->all(), [
+        //     'token' => 'required'
+
+        // ]);
+        // //dd($validator);
+        // if (!$validator->passes()) {
+        //     return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        // } else {
+        //        // create new connection              
+        //     $success = DB::table('users')->select('id','name')
+        //     ->where('id','!=',1)  
+        //     ->where('id','!=',$request->user_id)           
+        //     ->get();
+        //  //   $success = Category::all();
+        //     return $this->successResponse($success, 'user name record fetch successfully');
+        // }
+                $validator = \Validator::make($request->all(), [
 
             'token' => 'required'
 
@@ -4317,12 +4333,12 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            // create new connection              
-            $success = DB::table('users')->select('id', 'name')
-                ->where('id', '!=', 1)
-                ->where('id', '!=', $request->user_id)
-                ->get();
-            //   $success = Category::all();
+               // create new connection              
+            $success = DB::table('roles')->select('id','role_name as name')
+            ->where('id','!=',1)  
+            ->where('id','!=',$request->user_id)           
+            ->get();
+         //   $success = Category::all();
             return $this->successResponse($success, 'user name record fetch successfully');
         }
     }
@@ -4330,19 +4346,19 @@ class ApiController extends BaseController
     {
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
-            'branch_id' => 'required'
+            'branch_id'=>'required'
 
         ]);
         //dd($validator);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            // create new connection              
-            $success = DB::table('users')->select('id', 'name')
-                ->where('id', '!=', $request->branch_id)
-                ->get();
-            //  dd($success);
-            //   $success = Category::all();
+               // create new connection              
+            $success = DB::table('users')->select('id','name')
+            ->where('id','!=',$request->branch_id)
+            ->get();
+          //  dd($success);
+         //   $success = Category::all();
             return $this->successResponse($success, 'user name record fetch successfully');
         }
     }
