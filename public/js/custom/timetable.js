@@ -45,7 +45,7 @@ $(function () {
             day:"required"
         }
     });
-
+    var count=0;
      // add designation
      $('#addFilter').on('submit', function (e) {
         e.preventDefault();
@@ -66,6 +66,7 @@ $(function () {
                 $("#timetable_body").empty();
             // }
             
+            
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),
@@ -75,16 +76,25 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
-                    console.log('da',data)
+                    
                     if (data.code == 200) {
-
                         $("#form_class_id").val(data.data.class_id);
                         $("#form_section_id").val(data.data.section_id);
                         $("#form_day").val(data.data.day);
                         $("#timetable").show("slow");
                         var subject = data.data.subject;
                         var teacher = data.data.teacher;
-                        callout(subject,teacher,0);
+                        if(data.data.timetable=="")
+                        {
+                            callout(subject,teacher);
+                        }else{
+                            var cd = data.data.length;
+                            count = cd;
+                            console.log('cou',count)
+                            $("#timetable_body").append(data.data.timetable);
+                              
+                        }
+                        
                     }
                 }
             });
@@ -176,8 +186,7 @@ $(function () {
     })
     
     $(document).on('click', "#addMore", function() {
-        var lenght_div = $('#timetable_body .iadd').length;
-
+            
         var class_id = $("#form_class_id").val();
         var section_id = $("#form_section_id").val();
         $.post(subjectByClass, { class_id: class_id , section_id: section_id}, function (res) {
@@ -185,20 +194,20 @@ $(function () {
                 
                 var subject = res.data.subject;
                 var teacher = res.data.teacher;
-                callout(subject,teacher,lenght_div);
+                callout(subject,teacher);
             }
         }, 'json');
     });
 
-    function callout(subject,teacher,value)
+    function callout(subject,teacher)
     {
         var row = "";
         row += '<tr class="iadd">';
         row += '<td ><div class="checkbox-replace"> ';
-        row += '<label class="i-checks"><input type="checkbox" name="timetable[' + value + '][break]" id="' + value + '"><i></i>';
+        row += '<label class="i-checks"><input type="checkbox" name="timetable[' + count + '][break]" id="' + count + '"><i></i>';
         row += '</label></div></td>';
         row += '<td width="20%" ><div class="form-group">';
-        row += '<select  class="form-control subject"  name="timetable[' + value + '][subject]">';
+        row += '<select  class="form-control subject"  name="timetable[' + count + '][subject]">';
         row += '<option value="">Select Subject</option>';
         $.each(subject, function (key, val) {
             row += '<option value="' + val.id + '">' + val.name + '</option>';
@@ -206,7 +215,7 @@ $(function () {
         row += '</select>';
         row += '</div></td>';
         row += '<td width="20%" ><div class="form-group">';
-        row += '<select  class="form-control teacher"  name="timetable[' + value + '][teacher]">';
+        row += '<select  class="form-control teacher"  name="timetable[' + count + '][teacher]">';
         row += '<option value="">Select Teacher</option>';
         $.each(teacher, function (key, val) {
             row += '<option value="' + val.id + '">' + val.name + '</option>';
@@ -214,17 +223,18 @@ $(function () {
         row += '</select>';
         row += '</div></td>';
         row += '<td width="20%"><div class="form-group">';
-        row += '<input class="form-control"  type="time" name="timetable[' + value + '][time_start]" >';
+        row += '<input class="form-control"  type="time" name="timetable[' + count + '][time_start]" >';
         row += '</div></td>';
         row += '<td width="20%"><div class="form-group">';
-        row += '<input class="form-control"  type="time" name="timetable[' + value + '][time_end]" >';
+        row += '<input class="form-control"  type="time" name="timetable[' + count + '][time_end]" >';
         row += '</div></td>';
         row += '<td width="20%"><div class="input-group">';
-        row += '<input type="text"  name="timetable[' + value + '][class_room]" value="" class="form-control" >';
+        row += '<input type="text"  name="timetable[' + count + '][class_room]" value="" class="form-control" >';
         row += '<button type="button" class=" btn btn-danger removeTR"><i class="fas fa-times"></i> </button>';
         row += '</div></td>';
         row += '</tr>';
 
+        count++;
         // console.log('as',row)
         // return row;
         

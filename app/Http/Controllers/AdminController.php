@@ -1484,10 +1484,105 @@ class AdminController extends Controller
             'day' => $request->day,
         ];
 
-        $subject = Helper::PostMethod(config('constants.api.timetable_subject'), $data);
+        $timetable = Helper::PostMethod(config('constants.api.timetable_subject'), $data);
 
-        // dd($subject);
-        return $subject;
+
+        if ($timetable['code'] == "200") {
+
+            
+            $response = "";
+            if($timetable['data']['timetable'])
+            {
+                
+                $row = 0;
+                foreach ($timetable['data']['timetable'] as $table) {
+
+                   
+                    $subject = "";
+                    foreach ($timetable['data']['subject'] as $sub)
+                    {
+                        if($sub['id'] == $table['subject_id'])
+                        {
+                            $subject .= '<option value="'.$sub['id'].'" Selected >'.$sub['name'].'</option>';
+                        }else{
+                            $subject .= '<option value="'.$sub['id'].'"  >'.$sub['name'].'</option>';
+                        }
+                        
+                    }
+
+                    $disabled ="";
+                    $checked ="";
+                    if($table['break'] == "1")
+                    {
+                        $checked="checked";
+                        $disabled="disabled";
+                    }
+
+                    
+
+                    $teacher = "";
+                    foreach ($timetable['data']['teacher'] as $teach)
+                    {
+                        if($teach['id'] == $table['teacher_id'])
+                        {
+                            $teacher .= '<option value="'.$teach['id'].'" Selected>'.$teach['name'].'</option>';
+                        }else{
+                            $teacher .= '<option value="'.$teach['id'].'"   >'.$teach['name'].'</option>';
+                        }
+                        
+                    }
+
+                    // dd($teacher);
+                    $response .=  '<tr class="iadd">';
+                    $response .=  '<input type="hidden"  name="timetable['.$row.'][id]" value="'.$table['id'].'">';
+                    $response .=  '<td>';
+                    $response .=  '<div class="checkbox-replace">';
+                    $response .=  '<label class="i-checks">';
+                    $response .=  '<input type="checkbox" name="timetable['.$row.'][break]" '.$checked.' ><i></i>';
+                    $response .=  '</label>';
+                    $response .=  '</div>';
+                    $response .=  '</td>';
+                    $response .=  '<td width="20%">'; 
+                    $response .=  '<div class="form-group">';
+                    $response .=  '<select class="form-control subject"  name="timetable['.$row.'][subject]" '.$disabled.'>';
+                    $response .=  '<option value="">Select Subject</option>';
+                    $response .=  $subject;
+                    $response .=  '</select>';
+                    $response .=  '</div>';
+                    $response .=  '</td>';
+                    $response .=  '<td width="20%"  > ';
+                    $response .=  '<div class="form-group">';
+                    $response .=  '<select  class="form-control teacher"  name="timetable['.$row.'][teacher]" '.$disabled.'>';
+                    $response .=  '<option value="">Select Teacher</option>';
+                    $response .=  $teacher;
+                    $response .=  '</select>';
+                    $response .=  '</div>';
+                    $response .=  '</td>';
+                    $response .=  '<td width="20%" >';
+                    $response .=  '<div class="form-group">';
+                    $response .=  '<input class="form-control"  type="time" name="timetable['.$row.'][time_start]" value="'.$table['time_start'].'">';
+                    $response .=  '</div></td>';
+                    $response .=  '<td width="20%"  >';
+                    $response .=  '<div class="form-group">';
+                    $response .=  '<input class="form-control"  type="time" name="timetable['.$row.'][time_end]"  value="'.$table['time_end'].'">';
+                    $response .=  '</div>';
+                    $response .=  '</td>';
+                    $response .=  '<td width="20%"> <div class="input-group"><input type="remarks"  name="timetable['.$row.'][class_room]" value="'.$table['class_room'].'" class="form-control" ><button type="button" class=" btn btn-danger removeTR"><i class="fas fa-times"></i> </button></div></td>';
+
+                    $response .=  '</tr>';
+                    $row++;
+                    
+
+                }
+                $timetable['data']['timetable'] = $response;
+                $timetable['data']['length'] = $row;
+            }else{
+                $timetable['data']['timetable'] = $response;
+            }
+        }
+
+        // dd($timetable);
+        return $timetable;
     }
 
 
