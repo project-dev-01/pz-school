@@ -607,5 +607,8 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
+<script>
+var getTimetableCalendor = "{{ config('constants.api.get_timetable_calendor') }}";
+</script>
 <script src="{{ asset('js/custom/teacher_calendor.js') }}"></script>
 @endsection

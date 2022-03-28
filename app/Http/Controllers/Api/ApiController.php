@@ -2230,7 +2230,7 @@ class ApiController extends BaseController
     public function timetableSubject(Request $request)
     {
 
-        
+
         $validator = \Validator::make($request->all(), [
             'branch_id' => 'required',
             'token' => 'required',
@@ -2292,9 +2292,9 @@ class ApiController extends BaseController
 
             $diff = array_diff(array_column($oldest, 'id'), array_column($timetable, 'id'));
 
-            
+
             foreach ($diff as $del) {
-                
+
                 $delete =  $staffConn->table('timetable_class')->where('id', $del)->delete();
             }
 
@@ -2325,7 +2325,7 @@ class ApiController extends BaseController
                         'day' => $request['day'],
                         'updated_at' => date("Y-m-d H:i:s")
                     ]);
-                }else{
+                } else {
                     $query = $staffConn->table('timetable_class')->insert([
                         'class_id' => $request['class_id'],
                         'section_id' => $request['section_id'],
@@ -2339,7 +2339,6 @@ class ApiController extends BaseController
                         'created_at' => date("Y-m-d H:i:s")
                     ]);
                 }
-
             }
             $success = [];
             if (!$query) {
@@ -2420,16 +2419,16 @@ class ApiController extends BaseController
                 $output['details']['section'] = $con->table('sections')->select('sections.id as section_id', 'sections.name as section_name')->where('id', $request->section_id)->first();
 
                 $output['teacher'] = $con->table('subject_assigns as sa')->select('s.id', 's.name')
-                                        ->join('staffs as s', 'sa.teacher_id', '=', 's.id')
-                                        ->where('sa.class_id', $request->class_id)
-                                        ->where('sa.section_id', $request->section_id)
-                                        ->groupBy('sa.teacher_id')
-                                        ->get();
+                    ->join('staffs as s', 'sa.teacher_id', '=', 's.id')
+                    ->where('sa.class_id', $request->class_id)
+                    ->where('sa.section_id', $request->section_id)
+                    ->groupBy('sa.teacher_id')
+                    ->get();
                 $output['subject'] = $con->table('subject_assigns as sa')->select('s.id', 's.name')
-                                        ->join('subjects as s', 'sa.subject_id', '=', 's.id')
-                                        ->where('sa.class_id', $request->class_id)
-                                        ->where('sa.section_id', $request->section_id)
-                                        ->get();
+                    ->join('subjects as s', 'sa.subject_id', '=', 's.id')
+                    ->where('sa.class_id', $request->class_id)
+                    ->where('sa.section_id', $request->section_id)
+                    ->get();
 
                 return $this->successResponse($output, 'Timetable record fetch successfully');
             } else {
@@ -2757,7 +2756,7 @@ class ApiController extends BaseController
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
             'branch_id' => 'required',
-            'user_id'=>'required'
+            'user_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -3459,7 +3458,7 @@ class ApiController extends BaseController
                         ['section_id', '=', $section_id],
                         ['subject_id', '=', $subject_id],
                         ['student_id', '=', $value['student_id']],
-                        
+
                     ])->count() > 0) {
                         $Connection->table('student_attendances')->where('id', $value['attendance_id'])->update([
                             'status' => $attStatus,
@@ -4133,13 +4132,13 @@ class ApiController extends BaseController
                 })
                 ->select('forum_posts.id', 'forum_posts.user_id', 'forum_posts.user_name', 'forum_posts.topic_title', 'forum_categorys.id as categId', 'forum_categorys.category_names', 'forum_count_details.likes', 'forum_count_details.dislikes', 'forum_count_details.favorite', 'forum_count_details.replies', 'forum_count_details.views', 'forum_count_details.activity', 'forum_posts.created_at', 'forum_posts.topic_header')
                 ->where([
-                    ['forum_posts.branch_id', '=', $request->branch_id],                    
+                    ['forum_posts.branch_id', '=', $request->branch_id],
                     ['forum_posts.threads_status', '=', 2]
                 ])
                 ->whereRaw("find_in_set($request->user_id,forum_posts.tags)")
                 ->groupBy('forum_posts.category')
                 ->get();
-               
+
             return $this->successResponse($success, 'Post List fetch successfully');
         }
     }
@@ -4161,12 +4160,12 @@ class ApiController extends BaseController
                 })
                 ->select('forum_posts.id', 'forum_posts.user_id', 'forum_posts.user_name', 'forum_posts.topic_title', 'forum_categorys.id as categId', 'forum_categorys.category_names', 'forum_count_details.likes', 'forum_count_details.dislikes', 'forum_count_details.favorite', 'forum_count_details.replies', 'forum_count_details.views', 'forum_count_details.activity', 'forum_posts.created_at', 'forum_posts.topic_header')
                 ->where([
-                    ['forum_posts.branch_id', '=', $request->branch_id],                    
+                    ['forum_posts.branch_id', '=', $request->branch_id],
                     ['forum_posts.threads_status', '=', 2]
-                ])                
+                ])
                 ->groupBy('forum_posts.category')
                 ->get();
-               
+
             return $this->successResponse($success, 'Admin Post categ List fetch successfully');
         }
     }
@@ -4331,7 +4330,7 @@ class ApiController extends BaseController
         return  $this->successResponse($success, 'Thread status successfully Updated');
     }
     public function usernameautocomplete(Request $request)
-    {          
+    {
         // $validator = \Validator::make($request->all(), [
 
         //     'token' => 'required'
@@ -4349,7 +4348,7 @@ class ApiController extends BaseController
         //  //   $success = Category::all();
         //     return $this->successResponse($success, 'user name record fetch successfully');
         // }
-                $validator = \Validator::make($request->all(), [
+        $validator = \Validator::make($request->all(), [
 
             'token' => 'required'
 
@@ -4358,12 +4357,12 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-               // create new connection              
-            $success = DB::table('roles')->select('id','role_name as name')
-            ->where('id','!=',1)  
-            ->where('id','!=',$request->user_id)           
-            ->get();
-         //   $success = Category::all();
+            // create new connection              
+            $success = DB::table('roles')->select('id', 'role_name as name')
+                ->where('id', '!=', 1)
+                ->where('id', '!=', $request->user_id)
+                ->get();
+            //   $success = Category::all();
             return $this->successResponse($success, 'user name record fetch successfully');
         }
     }
@@ -4371,19 +4370,19 @@ class ApiController extends BaseController
     {
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
-            'branch_id'=>'required'
+            'branch_id' => 'required'
 
         ]);
         //dd($validator);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-               // create new connection              
-            $success = DB::table('users')->select('id','name')
-            ->where('id','!=',$request->branch_id)
-            ->get();
-          //  dd($success);
-         //   $success = Category::all();
+            // create new connection              
+            $success = DB::table('users')->select('id', 'name')
+                ->where('id', '!=', $request->branch_id)
+                ->get();
+            //  dd($success);
+            //   $success = Category::all();
             return $this->successResponse($success, 'user name record fetch successfully');
         }
     }
@@ -4469,17 +4468,17 @@ class ApiController extends BaseController
             // create new connection
             $con = $this->createNewConnection($request->branch_id);
             // get data
-           $homework['homework'] = $con->table('homeworks')->select('homeworks.*','sections.name as section_name','classes.name as class_name','subjects.name as subject_name',DB::raw('SUM(homework_evaluation.status = 1) as students_completed'))
-                                                    ->leftJoin('subjects','homeworks.subject_id','=','subjects.id')
-                                                    ->leftJoin('sections','homeworks.section_id','=','sections.id')
-                                                    ->leftJoin('classes','homeworks.class_id','=','classes.id')
-                                                    ->leftJoin('homework_evaluation','homeworks.id','=','homework_evaluation.homework_id')
-                                                    ->where('homeworks.class_id',$request->class_id)
-                                                    ->where('homeworks.section_id',$request->section_id)
-                                                    ->where('homeworks.subject_id',$request->subject_id)
-                                                    ->groupBy('homeworks.id')
-                                                    ->orderBy('homeworks.created_at', 'desc')
-                                                    ->get();
+            $homework['homework'] = $con->table('homeworks')->select('homeworks.*', 'sections.name as section_name', 'classes.name as class_name', 'subjects.name as subject_name', DB::raw('SUM(homework_evaluation.status = 1) as students_completed'))
+                ->leftJoin('subjects', 'homeworks.subject_id', '=', 'subjects.id')
+                ->leftJoin('sections', 'homeworks.section_id', '=', 'sections.id')
+                ->leftJoin('classes', 'homeworks.class_id', '=', 'classes.id')
+                ->leftJoin('homework_evaluation', 'homeworks.id', '=', 'homework_evaluation.homework_id')
+                ->where('homeworks.class_id', $request->class_id)
+                ->where('homeworks.section_id', $request->section_id)
+                ->where('homeworks.subject_id', $request->subject_id)
+                ->groupBy('homeworks.id')
+                ->orderBy('homeworks.created_at', 'desc')
+                ->get();
             $homework['total_students'] =  $con->table('enrolls')->where('class_id', $request->class_id)->where('section_id', $request->section_id)->count();
             return $this->successResponse($homework, 'Homework record fetch successfully');
         }
@@ -4992,6 +4991,30 @@ class ApiController extends BaseController
             } else {
                 return $this->successResponse($success, 'Homework has been Submitted Successfully ');
             }
+        }
+    }
+    // getTimetableCalendor
+    public function getTimetableCalendor(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'teacher_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $success = $Connection->table('calendors as cl')
+                ->select('cl.id','cl.start','cl.end','s.name as section_name','c.name as class_name', 'cc.name as className', 'sb.name as subject_name','sb.name as title', 'st.name as teacher_name')
+                ->join('classes as c', 'cl.class_id', '=', 'c.id')
+                ->join('sections as s', 'cl.section_id', '=', 's.id')
+                ->join('staffs as st', 'cl.teacher_id', '=', 'st.id')
+                ->join('subjects as sb', 'cl.subject_id', '=', 'sb.id')
+                ->join('calendor_colrs as cc', 'cl.calendor_color_id', '=', 'cc.id')
+                ->where('cl.teacher_id', $request->teacher_id)
+                ->get();
+            return $this->successResponse($success, 'calendor data get successfully');
         }
     }
 }

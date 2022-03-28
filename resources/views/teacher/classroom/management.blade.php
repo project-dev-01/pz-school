@@ -140,15 +140,6 @@
                                 <div class="form-group">
                                     <label>Count Down</label>
                                     <div id="classroom_count_down"></div>
-
-                                    <!-- <div class="counter" style="display: inline-block;width: 78px;font: bold 15px 'Droid Sans', Arial, sans-serif;text-align: center;text-transform: uppercase;padding-top: 7px;">
-                                        <span class='e-m-days'>00</span> Days |
-                                        <span class='e-m-hours'>08</span> :
-                                        <span class='e-m-minutes'>00</span> :
-                                        <span class='e-m-seconds'>00</span>
-                                    </div> -->
-                                    <!-- <input type="text" id="basic-timepicker" class="form-control btn dropdown-toggle btn-light" placeholder="01:00:00" disabled> -->
-
                                 </div>
                             </div>
                         </div>
@@ -163,138 +154,140 @@
                 </div>
             </div>
             <div class="card classRoomHideSHow"><br>
-                <div class="row">
+                <div class="card-body">
+                    <div class="row">
 
-                    <div class="col-lg-3" id="top-header">
-                        <div class="card-box">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="">
-                                        <p class="text-muted mb-1">Present</p>
+                        <div class="col-lg-3" id="top-header">
+                            <div class="card-box">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="">
+                                            <p class="text-muted mb-1">Present</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="text-right">
+                                            <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="presentCount"></span></h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="">
+                                            <p class="text-muted mb-1">Absent</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="text-right">
+                                            <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="absentCount"></span></h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="">
+                                            <p class="text-muted mb-1">Late</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="text-right">
+                                            <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="lateCount"></span></h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="">
+                                            <p class="text-muted mb-1">Excused</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="text-right">
+                                            <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="excuseCount"></span></h3>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="text-right">
-                                        <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="presentCount"></span></h3>
+                                <div class="mt-3">
+                                    <div class="progress progress-sm m-0">
+                                        <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                        </div>
                                     </div>
+                                    <h6 class="text-uppercase"><span class="text-muted float-right" id="totalStrength"></span></h6>
                                 </div>
-                                <div class="col-6">
-                                    <div class="">
-                                        <p class="text-muted mb-1">Absent</p>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-right">
-                                        <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="absentCount"></span></h3>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="">
-                                        <p class="text-muted mb-1">Late</p>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-right">
-                                        <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="lateCount"></span></h3>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="">
-                                        <p class="text-muted mb-1">Excused</p>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-right">
-                                        <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="excuseCount"></span></h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-3">
-                                <div class="progress progress-sm m-0">
-                                    <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                    </div>
-                                </div>
-                                <h6 class="text-uppercase"><span class="text-muted float-right" id="totalStrength"></span></h6>
-                            </div>
 
+                            </div>
+                        </div><!-- end col-->
+                        <div class="col-lg-3" id="top-header">
+                            <div class="card-box" style="height:212px;">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="">
+                                            <i class="fas fa-user-graduate font-24"></i><br><br>
+                                            <p class="text-muted mb-1">Perfect attendance</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="text-right">
+                                            <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="perfectAttendance"></span></h3>
+
+                                        </div>
+                                    </div>
+                                </div><br><br>
+                                <div class="mt-3">
+                                    <div class="progress progress-sm m-0">
+                                        <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                        </div>
+                                    </div>
+                                    <h6 class="text-uppercase"><span class="text-muted float-right">100% of class</span></h6>
+                                </div>
+
+                            </div>
+                        </div><!-- end col-->
+                        <div class="col-lg-3" id="top-header">
+                            <div class="card-box" style="height:212px;">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="">
+                                            <i class="  fas fa-user-tie  font-24"></i><br><br>
+                                            <p class="text-muted mb-1">Average Attendance</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="text-right">
+                                            <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="avg_attendance"></span></h3>
+
+                                        </div>
+                                    </div>
+                                </div><br><br>
+                                <div class="mt-3">
+                                    <div class="progress progress-sm m-0">
+                                        <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                        </div>
+                                    </div>
+                                    <h6 class="text-uppercase"><span class="text-muted float-right">100% of class</span></h6>
+                                </div>
+
+                            </div>
+                        </div><!-- end col-->
+                        <div class="col-lg-3">
+                            <div class="card-box" style="height:212px;">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="">
+                                            <i class="fas fa-chalkboard-teacher font-24"></i><br><br>
+                                            <p class="text-muted mb-1">Below Attendance</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="text-right">
+                                            <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="belowAttendance"></span></h3>
+
+                                        </div>
+                                    </div>
+                                </div><br><br>
+                                <div class="mt-3">
+                                    <div class="progress progress-sm m-0">
+                                        <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                        </div>
+                                    </div>
+                                    <h6 class="text-uppercase"><span class="text-muted float-right">100% of class</span></h6>
+                                </div>
+                            </div> <!-- end card-box-->
                         </div>
-                    </div><!-- end col-->
-                    <div class="col-lg-3" id="top-header">
-                        <div class="card-box">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="">
-                                        <i class="fas fa-user-graduate font-24"></i><br><br>
-                                        <p class="text-muted mb-1">Perfect attendance</p>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-right">
-                                        <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="perfectAttendance"></span></h3>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-3">
-                                <div class="progress progress-sm m-0">
-                                    <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                    </div>
-                                </div>
-                                <h6 class="text-uppercase"><span class="text-muted float-right">100% of class</span></h6>
-                            </div>
-
-                        </div>
-                    </div><!-- end col-->
-                    <div class="col-lg-3" id="top-header">
-                        <div class="card-box">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="">
-                                        <i class="  fas fa-user-tie  font-24"></i><br><br>
-                                        <p class="text-muted mb-1">Average Attendance</p>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-right">
-                                        <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="avg_attendance"></span></h3>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-3">
-                                <div class="progress progress-sm m-0">
-                                    <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                    </div>
-                                </div>
-                                <h6 class="text-uppercase"><span class="text-muted float-right">100% of class</span></h6>
-                            </div>
-
-                        </div>
-                    </div><!-- end col-->
-                    <div class="col-lg-3">
-                        <div class="card-box">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="">
-                                        <i class="fas fa-chalkboard-teacher font-24"></i><br><br>
-                                        <p class="text-muted mb-1">Below Attendance</p>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-right">
-                                        <h3 class="my-1" style="color:blue"><span data-plugin="counterup" id="belowAttendance"></span></h3>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-3">
-                                <div class="progress progress-sm m-0">
-                                    <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                    </div>
-                                </div>
-                                <h6 class="text-uppercase"><span class="text-muted float-right">100% of class</span></h6>
-                            </div>
-                        </div> <!-- end card-box-->
                     </div>
                 </div>
             </div><!-- end col-->
@@ -382,27 +375,27 @@
                                         <input type="hidden" name="subject_id" id="listModeSubjectID">
                                         <input type="hidden" name="date" id="listModeSelectedDate">
                                         <div class="col-md-12">
-                                        <div class="table-responsive">
-                                            <!-- <table data-toggle="table" data-page-size="3" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable "> -->
-                                            <!-- <table id="listModeClassRoom" class="table table-striped table-nowrap"> -->
-                                            <table id="listModeClassRoom" class="table table-centered table-striped dt-responsive nowrap w-100" width="100%">
-                                                <!-- <table class="display" width="100%"> -->
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Student name</th>
-                                                        <th>Attentance</th>
-                                                        <th>Remarks</th>
-                                                        <th>Reasons</th>
-                                                        <th>Student behaviour</th>
-                                                        <th>Class behaviour</th>
+                                            <div class="table-responsive">
+                                                <!-- <table data-toggle="table" data-page-size="3" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable "> -->
+                                                <!-- <table id="listModeClassRoom" class="table table-striped table-nowrap"> -->
+                                                <table id="listModeClassRoom" class="table table-centered table-striped dt-responsive nowrap w-100" width="100%">
+                                                    <!-- <table class="display" width="100%"> -->
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Student name</th>
+                                                            <th>Attentance</th>
+                                                            <th>Remarks</th>
+                                                            <th>Reasons</th>
+                                                            <th>Student behaviour</th>
+                                                            <th>Class behaviour</th>
 
-                                                    </tr>
-                                                </thead>
-                                                <!-- <tbody id="listModeClassRoom"> -->
-                                                <tbody>
-                                                </tbody>
-                                            </table>
+                                                        </tr>
+                                                    </thead>
+                                                    <!-- <tbody id="listModeClassRoom"> -->
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div> <!-- end card-box-->
                                         <div class="col-md-12">
@@ -465,20 +458,20 @@
                                         <input type="hidden" name="section_id" id="dailyReportRemarksSectionID">
                                         <input type="hidden" name="subject_id" id="dailyReportRemarksSubjectID">
                                         <div class="col-md-12">
-                                        <div class="table-responsive">
-                                            <table id="dailyReportRemarks" class="table table-centered table-striped dt-responsive nowrap w-100" width="100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Student Name
-                                                        </th>
-                                                        <th>Student Remarks</th>
-                                                        <th>Remarks</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
+                                            <div class="table-responsive">
+                                                <table id="dailyReportRemarks" class="table table-centered table-striped dt-responsive nowrap w-100" width="100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Student Name
+                                                            </th>
+                                                            <th>Student Remarks</th>
+                                                            <th>Remarks</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div> <!-- end card-box-->
                                         <div class="col-md-12">
@@ -520,14 +513,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group mb-0">
+                                                <div class="form-group">
                                                     <div>
                                                         <button type="button" id="add-button" class="btn btn-secondary text-uppercase shadow-sm">
                                                             <i class="fas fa-plus fa-fw"></i> Add</button>
-                                                        <button type="button" id="remove-button" class="btn btn-secondary text-uppercase ml-1" disabled="disabled">
+                                                        <button type="button" id="remove-button" class="btn btn-secondary text-uppercase" disabled="disabled">
                                                             <i class="fas fa-minus fa-fw"></i> Remove</button>
-                                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light">Save</button>
-
+                                                        <button type="submit" id="save-button" class="btn btn-primary-bl text-uppercase">
+                                                            Save</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -536,33 +529,38 @@
                                     <div class="row shortTestHideSHow">
                                         <div class="col-md-12">
                                             <div class="table-responsive">
-                                            <table class="table table-striped table-nowrap">
-                                                <thead>
-                                                    <tr>
-                                                        <th>S.no</th>
-                                                        <th>Short Test Name</th>
-                                                        <th>Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="shortTestAppend">
-                                                </tbody>
-                                            </table>
+                                                <table class="table table-striped table-nowrap">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S.no</th>
+                                                            <th>Short Test Name</th>
+                                                            <th>Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="shortTestAppend">
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div> <!-- end card-box-->
                                     </div>
                                     <br />
                                     <div class="row shortTestHideSHow">
-                                        <form id="addShortTest" method="post" action="{{ route('teacher.classroom.add_short_test') }}" autocomplete="off">
-                                            @csrf
+                                        <div class="row">
                                             <div class="col-md-12">
-                                                <div id="shortTestTableAppend"></div>
-                                            </div> <!-- end card-box-->
-                                            <div class="col-md-12">
-                                                <div class="clearfix mt-4">
-                                                    <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Save</button>
+                                                <div class="table-responsive">
+                                                    <table id="addShortTest" method="post" action="{{ route('teacher.classroom.add_short_test') }}" autocomplete="off">
+                                                        @csrf
+                                                        <div id="shortTestTableAppend">
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="clearfix mt-4">
+                                                                <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Save</button>
+                                                            </div>
+                                                        </div>
+                                                    </table>
                                                 </div>
                                             </div>
-                                        </form>
+                                        </div> <!-- end card-box-->
                                     </div>
 
                                 </div>

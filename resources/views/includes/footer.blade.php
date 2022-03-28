@@ -55,8 +55,6 @@
 <script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
 @if(Session::get('role_id'))
 @if(Session::get('role_id') == '4')
-<!-- <script src="{{ asset('js/custom/calendar.js') }}"></script> -->
-<script src="{{ asset('js/custom/teacher_calendar.js') }}"></script>
 @elseif(Session::get('role_id') == '5')
 <script src="{{ asset('js/custom/parent_calendar.js') }}"></script>
 @elseif(Session::get('role_id') == '6')

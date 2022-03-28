@@ -169,6 +169,9 @@ return [
          'homework_submit' => $url.'/homework/submit',
          'homework_view' => $url.'/homework/view',
          'homework_evaluate' => $url.'/homework/evaluate',
+         // calendor timetable show
+         'get_timetable_calendor' => $url.'/get_timetable_calendor',
+         
         
          
     ]

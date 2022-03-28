@@ -213,4 +213,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('get_child_subjects',[ApiController::class,'getChildSubjects']);
     Route::post('get_attendance_list_teacher',[ApiController::class,'getAttendanceListTeacher']);
     Route::post('get_reasons_by_student',[ApiController::class,'getReasonsByStudent']);
+    // get calendor data
+    Route::get('get_timetable_calendor',[ApiController::class,'getTimetableCalendor']);
+
+    
 });
