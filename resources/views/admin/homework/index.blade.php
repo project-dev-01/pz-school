@@ -8,28 +8,25 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <!--<div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                        <li class="breadcrumb-item active">Wizard</li>
-                    </ol>
-                </div>
-                <h4 class="page-title">Form Wizard</h4>-->
+
+                <h4 class="page-title">Homework</h4>
             </div>
         </div>
     </div>
     <!-- end page title -->
 
     <div class="row">
-        <div class="col-xl-12 addHomeworkForm" >
+        <div class="col-xl-12 addHomeworkForm">
             <div class="card">
+            <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                            <span data-feather="" class="icon-dual" id="span-parent"></span> Add Homework
+                            <h4>
+                    </li>
+                </ul>
                 <div class="card-body">
-                    <span class=" fas fa-user-graduate  " id="parent"></span>
-                    <span class="header-title mb-3" id="parent">Add Homework</span>
-                    <hr>
-
-                    <form id="addHomeworkForm" method="post" action="{{ route('admin.homework.add') }}"  enctype="multipart/form-data" autocomplete="off">
+                    <form id="addHomeworkForm" method="post" action="{{ route('admin.homework.add') }}" enctype="multipart/form-data" autocomplete="off">
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-9">
@@ -37,7 +34,7 @@
                                     <div class="form-group row">
                                         <label for="title" class="col-3 col-form-label">Homework Title<span class="text-danger">*</span></label>
                                         <div class="col-9">
-                                        <input type="text" class="form-control" name="title" placeholder="Enter Title" >
+                                            <input type="text" class="form-control" name="title" placeholder="Enter Title">
                                         </div>
                                     </div>
                                 </div>
@@ -45,10 +42,10 @@
                                     <div class="form-group row">
                                         <label for="class_id" class="col-3 col-form-label">Standard<span class="text-danger">*</span></label>
                                         <div class="col-9">
-                                            <select id="class_id" class="form-control" name="class_id" >                             
-                                            <option value="">Select Standard</option>
+                                            <select id="class_id" class="form-control" name="class_id">
+                                                <option value="">Select Standard</option>
                                                 @foreach($class as $cla)
-                                                    <option value="{{$cla['id']}}">{{$cla['name']}}</option>
+                                                <option value="{{$cla['id']}}">{{$cla['name']}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -58,7 +55,7 @@
                                     <div class="form-group row">
                                         <label for="section_id" class="col-3 col-form-label">Class Name<span class="text-danger">*</span></label>
                                         <div class="col-9">
-                                            <select id="section_id" class="form-control"  name="section_id">                              
+                                            <select id="section_id" class="form-control" name="section_id">
                                                 <option value="">Select Class Name</option>
                                             </select>
                                         </div>
@@ -68,7 +65,7 @@
                                     <div class="form-group row">
                                         <label for="subject_id" class="col-3 col-form-label">Subject<span class="text-danger">*</span></label>
                                         <div class="col-9">
-                                            <select id="subject_id" class="form-control" name="subject_id">                                       
+                                            <select id="subject_id" class="form-control" name="subject_id">
                                                 <option value="">Select Subject</option>
                                             </select>
                                         </div>
@@ -84,7 +81,7 @@
                                                         <span class="far fa-calendar-alt"></span>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <input type="text" class="form-control homeWorkAdd" name="date_of_homework" placeholder="" aria-describedby="inputGroupPrepend">
                                             </div>
                                         </div>
@@ -154,7 +151,7 @@
                                         </div>
                                     </div>
                                 </div>
-                               
+
                             </div>
                             <div class="col-md-1"></div>
                         </div>

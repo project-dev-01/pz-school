@@ -8,6 +8,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
+            <h4 class="page-title">Add Employee</h4>
             </div>
         </div>
     </div>
@@ -16,14 +17,14 @@
     <div class="row">
         <div class="col-xl-12 addEmployeeForm">
             <div class="card">
+            <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                            <span data-feather="" class="icon-dual" id="span-parent"></span>Academic Details
+                            <h4>
+                    </li>
+                </ul>
                 <div class="card-body">
-                    <span class=" fas fa-user-circle  " id="parent"></span>
-                    <span class="header-title mb-3" id="parent">Add Employee</span>
-                    <hr>
-                    <span class="fas fa-home  " id="span-parent"></span>
-                    <span class="header-title mb-3" id="span-parent">Academic Details
-                        <hr id="hr">
-                    </span>
                     <form id="addEmployeeForm" method="post" action="{{ route('admin.employee.add') }}" enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         <div class="row">
