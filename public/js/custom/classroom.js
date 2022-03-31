@@ -2,6 +2,54 @@ $(function () {
 
     var listTable;
     // $(".classRoomHideSHow").show("slow");
+    // onload show start
+    // classroom details 
+    var classroom_details = sessionStorage.getItem('classroom_details');
+    if (classroom_details) {
+        var classroomDetails = JSON.parse(classroom_details);
+        console.log("classroomDetails")
+        console.log(classroomDetails)
+        if (classroomDetails.length == 1) {
+            var classID, sectionID, subjectID, classDate,sectionName,subjectName;
+            classroomDetails.forEach(function (user) {
+                classID = user.class_id;
+                sectionID = user.section_id;
+                subjectID = user.subject_id;
+                classDate = user.date;
+                sectionName = user.section_name;
+                subjectName = user.subject_name;
+            });
+            var format_date = formatDate(classDate);
+            console.log(formatDate(classDate))
+            var classObj = {
+                classID: classID,
+                sectionID: sectionID,
+                subjectID: subjectID,
+                classDate: format_date
+            };
+            $('#changeClassName').val(classID);
+            $("#classroomFilter").find("#sectionID").append('<option selected value="'+sectionID+'">'+sectionName+'</option>');
+            $("#classroomFilter").find("#subjectID").append('<option selected value="'+subjectID+'">'+subjectName+'</option>');
+            $('#classDate').val(format_date);
+            
+            var formData = new FormData();
+            formData.append('token', token);
+            formData.append('branch_id', branchID);
+            formData.append('class_id', classID);
+            formData.append('section_id', sectionID);
+            formData.append('subject_id', subjectID);
+            formData.append('date', convertDigitIn(format_date));
+            // list mode
+            listModeAjax(formData, classObj);
+            // daily report
+            getDailyReportRemarksAjax(formData);
+            // widget Show
+            widgetShow(formData);
+            // get Short test
+            getShortTestData(formData);
+        }
+    }
+    // onload show start
     $(".classRoomHideSHow").hide();
 
     $("#classDate").datepicker({
@@ -69,12 +117,18 @@ $(function () {
         e.preventDefault();
         var classRoom = $("#classroomFilter").valid();
         if (classRoom === true) {
-
+            // jQuery("body").prepend('<div id="preloader">Loading...</div>');
             var classID = $("#changeClassName").val();
             var sectionID = $("#sectionID").val();
             var subjectID = $("#subjectID").val();
             var classDate = $("#classDate").val();
 
+            var classObj = {
+                classID: classID,
+                sectionID: sectionID,
+                subjectID: subjectID,
+                classDate: classDate
+            };
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
@@ -83,96 +137,112 @@ $(function () {
             formData.append('subject_id', subjectID);
             formData.append('date', convertDigitIn(classDate));
             // list mode
-            $.ajax({
-                url: getStudentAttendance,
-                method: "post",
-                data: formData,
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                success: function (response) {
-
-                    var dataSetNew = response.data;
-
-                    if (response.code == 200) {
-                        // $('#saveClassRoomAttendance').prop('disabled', false);
-                        $('#layoutModeGrid').empty();
-                        var layoutModeGrid = "";
-                        if (response.data.length > 0) {
-                            $(".classRoomHideSHow").show("slow");
-                            listMode(dataSetNew);
-                            layoutModeGrid += '<div class="row">';
-                            response.data.forEach(function (res) {
-
-                                // layout mode div start
-                                layoutModeGrid += layoutMode(res);
-                                // layout mode div end
-                                // list mode start
-
-                                // set value in list mode
-                                $("#listModeClassID").val(classID);
-                                $("#listModeSectionID").val(sectionID);
-                                $("#listModeSubjectID").val(subjectID);
-                                $("#listModeSelectedDate").val(convertDigitIn(classDate));
-                                // set value in short test
-                                $("#shortTestClassID").val(classID);
-                                $("#shortTestSectionID").val(sectionID);
-                                $("#shortTestSubjectID").val(subjectID);
-                                $("#shortTestSelectedDate").val(convertDigitIn(classDate));
-                                // set value in daily report
-                                $("#dailyReportClassID").val(classID);
-                                $("#dailyReportSectionID").val(sectionID);
-                                $("#dailyReportSubjectID").val(subjectID);
-                                $("#dailyReportSelectedDate").val(convertDigitIn(classDate));
-                                // set value in dailyReportRemarks
-                                $("#dailyReportRemarksClassID").val(classID);
-                                $("#dailyReportRemarksSectionID").val(sectionID);
-                                $("#dailyReportRemarksSubjectID").val(subjectID);
-
-                                // list mode end
-                            });
-                            layoutModeGrid += '</div>';
-                        } else {
-                            $(".classRoomHideSHow").hide();
-                            toastr.info('No students are available');
-                        }
-
-                        $("#layoutModeGrid").append(layoutModeGrid);
-                    } else {
-                        toastr.error(data.message);
-                    }
-                }
-            });
+            listModeAjax(formData, classObj);
             // daily report
-            $.ajax({
-                url: getDailyReportRemarks,
-                method: "post",
-                data: formData,
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                success: function (response) {
-                    if (response.code == 200) {
-                        var dataSetNew = response.data.get_daily_report_remarks;
-                        var getDailyReport = response.data.get_daily_report;
-                        if (getDailyReport) {
-                            var daily_report = (getDailyReport.report != null ? getDailyReport.report : "");
-                            $("#daily_report").val(daily_report);
-                        } else {
-                            $("#daily_report").val('');
-                        }
-                        getReportRemarks(dataSetNew);
-                    } else {
-                        toastr.error(data.message);
-                    }
-                }
-            });
+            getDailyReportRemarksAjax(formData);
+            // widget Show
             widgetShow(formData);
+            // get Short test
             getShortTestData(formData);
 
         }
     });
 
+    // function
+    function getDailyReportRemarksAjax(formData) {
+
+        $.ajax({
+            url: getDailyReportRemarks,
+            method: "post",
+            data: formData,
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (response) {
+                console.log("dsfdsfdsff")
+                console.log(response)
+                if (response.code == 200) {
+                    var dataSetNew = response.data.get_daily_report_remarks;
+                    var getDailyReport = response.data.get_daily_report;
+                    if (getDailyReport) {
+                        var daily_report = (getDailyReport.report != null ? getDailyReport.report : "");
+                        $("#daily_report").val(daily_report);
+                    } else {
+                        $("#daily_report").val('');
+                    }
+                    getReportRemarks(dataSetNew);
+                } else {
+                    toastr.error(response.message);
+                }
+            }
+        });
+    }
+    // functionListModeAJax
+    function listModeAjax(formDat, classObj) {
+
+        $.ajax({
+            url: getStudentAttendance,
+            method: "post",
+            data: formDat,
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (response) {
+
+                var dataSetNew = response.data;
+
+                if (response.code == 200) {
+                    // jQuery("#preloader").remove();
+                    // $('#saveClassRoomAttendance').prop('disabled', false);
+                    // remove dashboard temporary session
+                    sessionStorage.removeItem("classroom_details");
+                    $('#layoutModeGrid').empty();
+                    var layoutModeGrid = "";
+                    if (response.data.length > 0) {
+                        $(".classRoomHideSHow").show("slow");
+                        listMode(dataSetNew);
+                        layoutModeGrid += '<div class="row">';
+                        response.data.forEach(function (res) {
+                            // layout mode div start
+                            layoutModeGrid += layoutMode(res);
+                            // layout mode div end
+                            // list mode start
+
+                            // set value in list mode
+                            $("#listModeClassID").val(classObj.classID);
+                            $("#listModeSectionID").val(classObj.sectionID);
+                            $("#listModeSubjectID").val(classObj.subjectID);
+                            $("#listModeSelectedDate").val(convertDigitIn(classObj.classDate));
+                            // set value in short test
+                            $("#shortTestClassID").val(classObj.classID);
+                            $("#shortTestSectionID").val(classObj.sectionID);
+                            $("#shortTestSubjectID").val(classObj.subjectID);
+                            $("#shortTestSelectedDate").val(convertDigitIn(classObj.classDate));
+                            // set value in daily report
+                            $("#dailyReportClassID").val(classObj.classID);
+                            $("#dailyReportSectionID").val(classObj.sectionID);
+                            $("#dailyReportSubjectID").val(classObj.subjectID);
+                            $("#dailyReportSelectedDate").val(convertDigitIn(classObj.classDate));
+                            // set value in dailyReportRemarks
+                            $("#dailyReportRemarksClassID").val(classObj.classID);
+                            $("#dailyReportRemarksSectionID").val(classObj.sectionID);
+                            $("#dailyReportRemarksSubjectID").val(classObj.subjectID);
+
+                            // list mode end
+                        });
+                        layoutModeGrid += '</div>';
+                    } else {
+                        $(".classRoomHideSHow").hide();
+                        toastr.info('No students are available');
+                    }
+
+                    $("#layoutModeGrid").append(layoutModeGrid);
+                } else {
+                    toastr.error(response.message);
+                }
+            }
+        });
+    }
     // function layout mode
     function layoutMode(res) {
         var layoutModeGrid = "";
@@ -284,7 +354,7 @@ $(function () {
                     "width": "10%",
                     "render": function (data, type, row, meta) {
 
-                        var att_remark = '<textarea style="display:none;" class="addRemarks" data-id="' + row.student_id + '" id="addRemarks' + row.student_id + '" name="attendance[' + meta.row + '][att_remark]">' +(row.att_remark !== "null" ? row.att_remark : "") + '</textarea>' +
+                        var att_remark = '<textarea style="display:none;" class="addRemarks" data-id="' + row.student_id + '" id="addRemarks' + row.student_id + '" name="attendance[' + meta.row + '][att_remark]">' + (row.att_remark !== "null" ? row.att_remark : "") + '</textarea>' +
                             '<button type="button" data-id="' + row.student_id + '" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#stuRemarksPopup" id="editRemarksStudent">Add Remarks</button>';
                         return att_remark;
                     }
@@ -465,7 +535,7 @@ $(function () {
                     widgetShow(formData)
 
                 } else {
-                    toastr.error(data.message);
+                    toastr.error(response.message);
                 }
             }
         });
@@ -477,8 +547,8 @@ $(function () {
         var $button = $(e.relatedTarget);
         var studentID = $button.attr('data-id');
         var studentRemarks = $button.closest('td').find('textarea').val();
-        var checknullRemarks = (studentRemarks !== "null")?studentRemarks:"";
-        
+        var checknullRemarks = (studentRemarks !== "null") ? studentRemarks : "";
+
         $("#studenetID").val(studentID);
         $("#student_remarks").val(checknullRemarks);
     });
@@ -564,7 +634,7 @@ $(function () {
                     $("#belowAttendance").html(0 + "%");
                     $("#avg_attendance").html(0 + "%");
 
-                    // toastr.error(data.message);
+                    // toastr.error(response.message);
                 }
             }
         });
@@ -683,7 +753,7 @@ $(function () {
                         }
 
                     } else {
-                        toastr.error(data.message);
+                        toastr.error(response.message);
                     }
                 }
             });
@@ -828,7 +898,7 @@ $(function () {
                     }
 
                 } else {
-                    toastr.error(data.message);
+                    toastr.error(response.message);
                 }
             }
         });
@@ -885,6 +955,20 @@ $(function () {
                 return;
             }
         }, 1000);
+    }
+    // format dd mm yy
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+
+        return [day, month, year].join('-');
     }
 
 

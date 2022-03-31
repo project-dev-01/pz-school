@@ -176,8 +176,31 @@
                             <h5 class="modal-title">Schedule</h5>
                         </div>
                         <div class="modal-body p-4">
-                            <form class="needs-validation" name="event-form" id="form-event" novalidate>
+                        <form id="addDailyReport" method="post" action="{{ route('teacher.classroom.add_daily_report') }}" autocomplete="off">
                                 <div class="row">
+                                    <div class="col-4">
+                                        <div class="col-md-12 font-weight-bold">Standard </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="col-md-12 font-weight-bold">:</div>
+                                    </div>
+                                    <div class="col-7">
+                                    
+                                        <input type="hidden" id="setCurDate" name="date">
+                                        <input type="hidden" id="ttclassID" name="class_id">
+                                        <div class="col-md-12" id="standard-name"></div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="col-md-12 font-weight-bold">Section </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="col-md-12 font-weight-bold">:</div>
+                                    </div>
+                                    <div class="col-7">
+                                        <input type="hidden" id="ttSectionID" name="section_id">
+                                        <div class="col-md-12" id="section-name"></div>
+                                    </div>
+
                                     <div class="col-4">
                                         <div class="col-md-12 font-weight-bold">Subject Name </div>
                                     </div>
@@ -185,6 +208,7 @@
                                         <div class="col-md-12 font-weight-bold">:</div>
                                     </div>
                                     <div class="col-7">
+                                        <input type="hidden" id="ttSubjectID" name="subject_id">
                                         <div class="col-md-12" id="subject-name"></div>
                                     </div>
 
@@ -195,6 +219,7 @@
                                         <div class="col-md-12 font-weight-bold">:</div>
                                     </div>
                                     <div class="col-7">
+                                        <input type="hidden" id="ttDate">
                                         <div class="col-md-12" id="timing-class"></div>
                                     </div>
                                     <div class="col-4">
@@ -209,7 +234,7 @@
                                     <div class="col-12">
                                         <!-- <div class="form-group"> -->
                                         <!-- <label class="control-label font-weight-bold">Notes :</label> -->
-                                        <textarea class="form-control" style="margin: 12px;" placeholder="Enter your notes"></textarea>
+                                        <textarea class="form-control" style="margin: 12px;" placeholder="Enter your notes" id="calNotes" name="daily_report"></textarea>
                                         <!-- </div> -->
                                     </div>
                                 </div>
@@ -217,13 +242,12 @@
                                     <!-- <div class="col-6 text-right">
                                         <a href="{{ route('teacher.classroom.management')}}"><button type="button" class="btn btn-primary width-xs waves-effect waves-light">Go to Class</button></a>
                                     </div> -->
-                                    <div class="col-6">
-                                        <!-- <button type="button" class="btn btn-danger" id="btn-delete-event">Delete</button> -->
+                                    <div class="col-6 text-left">
+                                        <button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
                                     </div>
                                     <div class="col-6 text-right">
                                         <!-- <button type="button" class="btn btn-light mr-1" data-dismiss="modal">Close</button> -->
-                                        <!-- <button type="submit" class="btn btn-success" id="btn-save-event">Save</button> -->
-                                        <a href="{{ route('teacher.classroom.management')}}"><button type="button" class="btn btn-primary width-xs waves-effect waves-light">Go to Classroom</button></a>
+                                        <button type="button" id="goToClassRoom" class="btn btn-primary width-xs waves-effect waves-light">Go to Classroom</button>
                                     </div>
                                 </div>
                             </form>
@@ -608,7 +632,8 @@
 @endsection
 @section('scripts')
 <script>
-var getTimetableCalendor = "{{ config('constants.api.get_timetable_calendor') }}";
+    var getTimetableCalendor = "{{ config('constants.api.get_timetable_calendor') }}";
+    var redirectionURL = "{{ route('teacher.classroom.management')}}";
 </script>
 <script src="{{ asset('js/custom/teacher_calendor.js') }}"></script>
 @endsection

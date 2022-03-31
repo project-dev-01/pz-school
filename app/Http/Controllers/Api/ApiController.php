@@ -12,7 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Api\BaseController as BaseController;
 use Illuminate\Validation\Rule;
-
+use DateTime;
+use DateInterval;
+use DatePeriod;
 use App\Models\Branches;
 use App\Models\Section;
 use App\Helpers\Helper;
@@ -2244,17 +2246,17 @@ class ApiController extends BaseController
             $classConn = $this->createNewConnection($request->branch_id);
 
             $Timetable = $classConn->table('timetable_class')->select('timetable_class.*', 'staffs.name as teacher_name', 'subjects.name as subject_name')
-                    ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
-                    ->where([
-                        ['timetable_class.day', $request->day],
-                        ['timetable_class.class_id', $request->class_id], 
-                        ['timetable_class.semester_id', $request->semester_id], 
-                        ['timetable_class.session_id', $request->session_id],
-                        ['timetable_class.section_id', $request->section_id]
-                    ])
-                    ->orderBy('time_start', 'asc')
-                    ->orderBy('time_end', 'asc')
-                    ->get()->toArray();
+                ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
+                ->where([
+                    ['timetable_class.day', $request->day],
+                    ['timetable_class.class_id', $request->class_id],
+                    ['timetable_class.semester_id', $request->semester_id],
+                    ['timetable_class.session_id', $request->session_id],
+                    ['timetable_class.section_id', $request->section_id]
+                ])
+                ->orderBy('time_start', 'asc')
+                ->orderBy('time_end', 'asc')
+                ->get()->toArray();
             $output['timetable'] = $Timetable;
             $output['teacher'] = $classConn->table('subject_assigns as sa')->select('s.id', 's.name')
                 ->join('staffs as s', 'sa.teacher_id', '=', 's.id')
@@ -2267,11 +2269,6 @@ class ApiController extends BaseController
                 ->where('sa.class_id', $request->class_id)
                 ->where('sa.section_id', $request->section_id)
                 ->get();
-            $output['class_id'] =  $request->class_id;
-            $output['section_id'] =  $request->section_id;
-            $output['day'] =  $request->day;
-            $output['semester_id'] =  $request->semester_id;
-            $output['session_id'] =  $request->session_id;
             return $this->successResponse($output, 'Teacher and Subject record fetch successfully');
         }
     }
@@ -2290,57 +2287,58 @@ class ApiController extends BaseController
             'timetable' => 'required',
         ]);
 
-        
+
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
             // create new connection
             $staffConn = $this->createNewConnection($request->branch_id);
 
-
+            // calendor data populate
+            $getObjRow = $staffConn->table('semester as s')
+                ->select('start_date', 'end_date')
+                ->where('id', $request->semester_id)
+                ->first();
             $timetable = $request->timetable;
-            $oldest = $staffConn->table('timetable_class')->where([['class_id', $request->class_id], ['section_id', $request->section_id],['semester_id', $request->semester_id],['session_id', $request->session_id], ['day', $request->day]])->get()->toArray();
+            $oldest = $staffConn->table('timetable_class')->where([['class_id', $request->class_id], ['section_id', $request->section_id], ['semester_id', $request->semester_id], ['session_id', $request->session_id], ['day', $request->day]])->get()->toArray();
 
             $diff = array_diff(array_column($oldest, 'id'), array_column($timetable, 'id'));
 
-            
+
             foreach ($diff as $del) {
-                
+
                 $delete =  $staffConn->table('timetable_class')->where('id', $del)->delete();
             }
-           
+
             // return $timetable;
 
             foreach ($timetable as $table) {
 
-                
+
                 $session_id = 0;
                 $semester_id = 0;
-                
-                $break;
-                $subject_id;
-                $teacher_id;
 
-                
+                $break = 1;
+                $subject_id = 0;
+                $teacher_id = 0;
+
+
                 if (isset($request['session_id'])) {
                     $session_id = $request['session_id'];
                 }
                 if (isset($request['semester_id'])) {
                     $semester_id = $request['semester_id'];
                 }
-               
-                if (isset($table['break'])) {
-                    $break = 1;
-                    $subject_id = 0;
-                    $teacher_id = 0;
-                } else {
+
+                if (isset($table['subject']) && isset($table['teacher'])) {
                     $break = 0;
                     $subject_id = $table['subject'];
                     $teacher_id = $table['teacher'];
+                    $this->addCalendorTimetable($request, $table, $getObjRow);
                 }
 
                 if (isset($table['id'])) {
-                    
+
                     $query = $staffConn->table('timetable_class')->where('id', $table['id'])->update([
                         'class_id' => $request['class_id'],
                         'section_id' => $request['section_id'],
@@ -2355,7 +2353,7 @@ class ApiController extends BaseController
                         'day' => $request['day'],
                         'updated_at' => date("Y-m-d H:i:s")
                     ]);
-                }else{
+                } else {
                     $query = $staffConn->table('timetable_class')->insert([
                         'class_id' => $request['class_id'],
                         'section_id' => $request['section_id'],
@@ -2401,16 +2399,16 @@ class ApiController extends BaseController
             // get data
             // $Timetable = $con->table('timetable_class')->where('class_id',$request->class_id)->where('section_id',$request->section_id)->orderBy('time_start', 'asc')->orderBy('time_end', 'asc')->get()->toArray();
             $Timetable = $con->table('timetable_class')->select('timetable_class.*', 'staffs.name as teacher_name', 'subjects.name as subject_name')
-                        ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
-                        ->where([
-                            ['timetable_class.class_id', $request->class_id], 
-                            ['timetable_class.semester_id', $request->semester_id], 
-                            ['timetable_class.session_id', $request->session_id],
-                            ['timetable_class.section_id', $request->section_id]
-                        ])
-                        ->orderBy('time_start', 'asc')
-                        ->orderBy('time_end', 'asc')
-                        ->get()->toArray();
+                ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
+                ->where([
+                    ['timetable_class.class_id', $request->class_id],
+                    ['timetable_class.semester_id', $request->semester_id],
+                    ['timetable_class.session_id', $request->session_id],
+                    ['timetable_class.section_id', $request->section_id]
+                ])
+                ->orderBy('time_start', 'asc')
+                ->orderBy('time_end', 'asc')
+                ->get()->toArray();
 
             // return $Timetable;
             if ($Timetable) {
@@ -2447,17 +2445,17 @@ class ApiController extends BaseController
             $con = $this->createNewConnection($request->branch_id);
 
             $Timetable = $con->table('timetable_class')->select('timetable_class.*', 'staffs.name as teacher_name', 'subjects.name as subject_name')
-                        ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')
-                        ->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
-                        ->where([
-                            ['timetable_class.day', $request->day],
-                            ['timetable_class.class_id', $request->class_id], 
-                            ['timetable_class.semester_id', $request->semester_id], 
-                            ['timetable_class.session_id', $request->session_id],
-                            ['timetable_class.section_id', $request->section_id]
-                        ])
-                        ->orderBy('time_start', 'asc')->orderBy('time_end', 'asc')
-                        ->get()->toArray();
+                ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')
+                ->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
+                ->where([
+                    ['timetable_class.day', $request->day],
+                    ['timetable_class.class_id', $request->class_id],
+                    ['timetable_class.semester_id', $request->semester_id],
+                    ['timetable_class.session_id', $request->session_id],
+                    ['timetable_class.section_id', $request->section_id]
+                ])
+                ->orderBy('time_start', 'asc')->orderBy('time_end', 'asc')
+                ->get()->toArray();
 
             // return $Timetable;
             if ($Timetable) {
@@ -2474,34 +2472,32 @@ class ApiController extends BaseController
                 $output['details']['section'] = $con->table('sections')->select('sections.id as section_id', 'sections.name as section_name')->where('id', $request->section_id)->first();
 
                 $semester = $con->table('semester')->select('semester.id as semester_id', 'semester.name as semester_name')->where('id', $request->semester_id)->first();
-                if($semester)
-                {
+                if ($semester) {
                     $semester = $semester;
-                }else{
+                } else {
                     $semester['semester_id'] = 0;
                 }
                 $output['details']['semester'] = $semester;
 
                 $session = $con->table('session')->select('session.id as session_id', 'session.name as session_name')->where('id', $request->session_id)->first();
-                if($session)
-                {
+                if ($session) {
                     $session = $session;
-                }else{
+                } else {
                     $session['session_id'] = 0;
                 }
                 $output['details']['session'] = $session;
 
                 $output['teacher'] = $con->table('subject_assigns as sa')->select('s.id', 's.name')
-                                        ->join('staffs as s', 'sa.teacher_id', '=', 's.id')
-                                        ->where('sa.class_id', $request->class_id)
-                                        ->where('sa.section_id', $request->section_id)
-                                        ->groupBy('sa.teacher_id')
-                                        ->get();
+                    ->join('staffs as s', 'sa.teacher_id', '=', 's.id')
+                    ->where('sa.class_id', $request->class_id)
+                    ->where('sa.section_id', $request->section_id)
+                    ->groupBy('sa.teacher_id')
+                    ->get();
                 $output['subject'] = $con->table('subject_assigns as sa')->select('s.id', 's.name')
-                                        ->join('subjects as s', 'sa.subject_id', '=', 's.id')
-                                        ->where('sa.class_id', $request->class_id)
-                                        ->where('sa.section_id', $request->section_id)
-                                        ->get();
+                    ->join('subjects as s', 'sa.subject_id', '=', 's.id')
+                    ->where('sa.class_id', $request->class_id)
+                    ->where('sa.section_id', $request->section_id)
+                    ->get();
 
                 return $this->successResponse($output, 'Timetable record fetch successfully');
             } else {
@@ -2534,14 +2530,14 @@ class ApiController extends BaseController
             $timetable = $request->timetable;
 
             $oldest = $staffConn->table('timetable_class')
-                                ->where([
-                                    ['timetable_class.day', $request->day],
-                                    ['timetable_class.class_id', $request->class_id], 
-                                    ['timetable_class.semester_id', $request->semester_id], 
-                                    ['timetable_class.session_id', $request->session_id],
-                                    ['timetable_class.section_id', $request->section_id]
-                                ])
-                                ->get()->toArray();
+                ->where([
+                    ['timetable_class.day', $request->day],
+                    ['timetable_class.class_id', $request->class_id],
+                    ['timetable_class.semester_id', $request->semester_id],
+                    ['timetable_class.session_id', $request->session_id],
+                    ['timetable_class.section_id', $request->section_id]
+                ])
+                ->get()->toArray();
 
             $diff = array_diff(array_column($oldest, 'id'), array_column($timetable, 'id'));
 
@@ -2608,7 +2604,7 @@ class ApiController extends BaseController
             'token' => 'required',
             'student_id' => 'required'
         ]);
-        
+
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
@@ -2618,7 +2614,7 @@ class ApiController extends BaseController
             $student = $con->table('students')->join('enrolls', 'students.id', '=', 'students.id')->where('students.id', $request->student_id)->first();
 
             $today = date("Y-m-d");
-            $semester = $con->table('semester')->where('start_date','<=',$today )->where('end_date','>=',$today )->first();
+            $semester = $con->table('semester')->where('start_date', '<=', $today)->where('end_date', '>=', $today)->first();
 
             if (isset($sem)) {
                 $semester_id = $semester->id;
@@ -2626,19 +2622,19 @@ class ApiController extends BaseController
                 $semester_id = 0;
             }
 
-        //    dd($semester_id);
+            //    dd($semester_id);
 
             $Timetable = $con->table('timetable_class')->select('timetable_class.*', 'staffs.name as teacher_name', 'subjects.name as subject_name')
-                                    ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
-                                    ->where('timetable_class.class_id', $student->class_id)
-                                    ->where('timetable_class.section_id', $student->section_id) 
-                                    ->where('timetable_class.session_id', $student->session_id)
-                                    ->where('timetable_class.semester_id', $semester_id)
-                                    ->orderBy('time_start', 'asc')
-                                    ->orderBy('time_end', 'asc')
-                                    ->get()->toArray();
+                ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
+                ->where('timetable_class.class_id', $student->class_id)
+                ->where('timetable_class.section_id', $student->section_id)
+                ->where('timetable_class.session_id', $student->session_id)
+                ->where('timetable_class.semester_id', $semester_id)
+                ->orderBy('time_start', 'asc')
+                ->orderBy('time_end', 'asc')
+                ->get()->toArray();
 
-            
+
             if ($Timetable) {
                 $mapfunction = function ($s) {
                     return $s->day;
@@ -2648,7 +2644,7 @@ class ApiController extends BaseController
 
                 $output['timetable'] = $Timetable;
 
-               
+
                 $output['max'] = $max;
                 $output['details']['class'] = $con->table('classes')->select('classes.id as class_id', 'classes.name as class_name')->where('id', $student->class_id)->first();
                 $output['details']['section'] = $con->table('sections')->select('sections.id as section_id', 'sections.name as section_name')->where('id', $student->section_id)->first();
@@ -2681,7 +2677,7 @@ class ApiController extends BaseController
             $student = $con->table('students')->join('enrolls', 'students.id', '=', 'students.id')->where('enrolls.student_id', $request->children_id)->first();
 
             $today = date("Y-m-d");
-            $semester = $con->table('semester')->where('start_date','<=',$today )->where('end_date','>=',$today )->first();
+            $semester = $con->table('semester')->where('start_date', '<=', $today)->where('end_date', '>=', $today)->first();
 
             if (isset($sem)) {
                 $semester_id = $semester->id;
@@ -2690,15 +2686,15 @@ class ApiController extends BaseController
             }
 
             $Timetable = $con->table('timetable_class')->select('timetable_class.*', 'staffs.name as teacher_name', 'subjects.name as subject_name')
-            ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')
-            ->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
-            ->where('timetable_class.class_id', $student->class_id)
-            ->where('timetable_class.section_id', $student->section_id)
-            ->where('timetable_class.session_id', $student->session_id)
-            ->where('timetable_class.semester_id', $semester_id)
-            ->orderBy('time_start', 'asc')
-            ->orderBy('time_end', 'asc')
-            ->get()->toArray();
+                ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')
+                ->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
+                ->where('timetable_class.class_id', $student->class_id)
+                ->where('timetable_class.section_id', $student->section_id)
+                ->where('timetable_class.session_id', $student->session_id)
+                ->where('timetable_class.semester_id', $semester_id)
+                ->orderBy('time_start', 'asc')
+                ->orderBy('time_end', 'asc')
+                ->get()->toArray();
 
             // return $Timetable;
             if ($Timetable) {
@@ -3828,20 +3824,36 @@ class ApiController extends BaseController
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
             // insert data
-            $query = $Connection->table('daily_reports')->insert([
+            $data = [
                 'class_id' => $request->class_id,
                 'section_id' => $request->section_id,
                 'subject_id' => $request->subject_id,
                 'date' => $request->date,
                 'report' => $request->daily_report,
                 'created_at' => date("Y-m-d H:i:s")
-            ]);
-            $success = [];
-            if (!$query) {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            ];
+            $checkExist = $Connection->table('daily_reports')->where([
+                ['date', '=', $request->date],
+                ['class_id', '=', $request->class_id],
+                ['section_id', '=', $request->section_id],
+                ['subject_id', '=', $request->subject_id]
+            ])->first();
+            // dd($checkExist);
+            if ($Connection->table('daily_reports')->where([
+                ['date', '=', $request->date],
+                ['class_id', '=', $request->class_id],
+                ['section_id', '=', $request->section_id],
+                ['subject_id', '=', $request->subject_id],
+
+            ])->count() > 0) {
+                $Connection->table('daily_reports')->where('id', $checkExist->id)->update([
+                    'report' => $request->daily_report,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
             } else {
-                return $this->successResponse($success, 'Daily report added successfully');
+                $Connection->table('daily_reports')->insert($data);
             }
+            return $this->successResponse([], 'Daily report added successfully');
         }
     }
     // get Daily Report Remarks
@@ -5137,10 +5149,16 @@ class ApiController extends BaseController
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
             $success = $Connection->table('calendors as cl')
-                ->select('cl.id','cl.start','cl.end','s.name as section_name','c.name as class_name', 'cc.name as className', 'sb.name as subject_name','sb.name as title', 'st.name as teacher_name')
+                ->select('cl.id', 'cl.class_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.end', 's.name as section_name', 'c.name as class_name', 'cc.name as className', 'sb.name as subject_name', 'sb.name as title', 'st.name as teacher_name', 'dr.report')
                 ->join('classes as c', 'cl.class_id', '=', 'c.id')
                 ->join('sections as s', 'cl.section_id', '=', 's.id')
                 ->join('staffs as st', 'cl.teacher_id', '=', 'st.id')
+                ->leftJoin('daily_reports as dr', function ($join) {
+                    $join->on('cl.class_id', '=', 'dr.class_id')
+                        ->on('cl.section_id', '=', 'dr.section_id')
+                        ->on('cl.subject_id', '=', 'dr.subject_id')
+                        ->on(DB::raw('date(cl.end)'), '=', 'dr.date');
+                })
                 ->join('subjects as sb', 'cl.subject_id', '=', 'sb.id')
                 ->join('calendor_colrs as cc', 'cl.calendor_color_id', '=', 'cc.id')
                 ->where('cl.teacher_id', $request->teacher_id)
@@ -5148,7 +5166,93 @@ class ApiController extends BaseController
             return $this->successResponse($success, 'calendor data get successfully');
         }
     }
-
+    // addCalendorTimetable
+    // function addCalendorTimetable(Request $request)
+    function addCalendorTimetable($request, $row, $getObjRow)
+    {
+        if ($getObjRow) {
+            $start = $getObjRow->start_date;
+            $end = $getObjRow->end_date;
+            //
+            $startDate = new DateTime($start);
+            $endDate = new DateTime($end);
+            // sunday=0,monday=1,tuesday=2,wednesday=3,thursday=4
+            //friday =5,saturday=6
+            if (isset($request->day)) {
+                if ($request->day == "monday") {
+                    $day = 1;
+                    $colorCode = 1;
+                }
+                if ($request->day == "tuesday") {
+                    $day = 2;
+                    $colorCode = 2;
+                }
+                if ($request->day == "wednesday") {
+                    $day = 3;
+                    $colorCode = 3;
+                }
+                if ($request->day == "thursday") {
+                    $day = 4;
+                    $colorCode = 4;
+                }
+                if ($request->day == "friday") {
+                    $day = 5;
+                    $colorCode = 5;
+                }
+                if ($request->day == "saturday") {
+                    $day = 6;
+                    $colorCode = 6;
+                }
+                if (isset($day)) {
+                    $this->addTimetableCalendor($request, $startDate, $endDate, $day, $colorCode,$row);
+                }
+            }
+        }
+    }
+    // addTimetableCalendor
+    function addTimetableCalendor($request, $startDate, $endDate, $day, $colorCode,$row)
+    {
+        // create new connection
+        $Connection = $this->createNewConnection($request->branch_id);
+        while ($startDate <= $endDate) {
+            if ($startDate->format('w') == $day) {
+                $start = $startDate->format('Y-m-d') . " " . $row['time_start'];
+                $end = $startDate->format('Y-m-d') . " " . $row['time_end'];
+                $arrayInsert = [
+                    "title" => "timetable",
+                    "class_id" => $request['class_id'],
+                    "section_id" => $request['section_id'],
+                    "sem_id" => $request['semester_id'],
+                    "subject_id" => $row['subject'],
+                    "teacher_id" => $row['teacher'],
+                    "start" => $start,
+                    "end" => $end,
+                    "calendor_color_id" => $colorCode,
+                    'created_at' => date("Y-m-d H:i:s")
+                ];
+                $calendors = $Connection->table('calendors')->where([
+                    ['class_id', '=', $request['class_id']],
+                    ['section_id', '=', $request['section_id']],
+                    ['subject_id', '=', $row['subject']],
+                    ['sem_id', '=', $request['semester_id']],
+                    [DB::raw('date(start)'), '=', $startDate->format('Y-m-d')],
+                ])->first();
+                if (isset($calendors->id)) {
+                    $Connection->table('calendors')->where('id', $calendors->id)->update([
+                        "subject_id" => $row['subject'],
+                        "teacher_id" => $row['teacher'],
+                        "sem_id" => $request['semester_id'],
+                        "start" => $start,
+                        "end" => $end,
+                        'updated_at' => date("Y-m-d H:i:s")
+                    ]);
+                } else {
+                    $Connection->table('calendors')->insert($arrayInsert);
+                }
+            }
+            $startDate->modify('+1 day');
+        }
+    }
     // get semester 
     public function getSemesterList(Request $request)
     {
@@ -5479,20 +5583,20 @@ class ApiController extends BaseController
         } else {
             // create new connection
             $con = $this->createNewConnection($request->branch_id);
-                // insert data
-                $query = $con->table('exam')->insert([
-                    'name' => $request->name,
-                    'term_id' => $request->term_id,
-                    'type_id' => $request->type_id,
-                    'remarks' => $request->remarks,
-                    'created_at' => date("Y-m-d H:i:s")
-                ]);
-                $success = [];
-                if (!$query) {
-                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-                } else {
-                    return $this->successResponse($success, 'Exam has been successfully saved');
-                }
+            // insert data
+            $query = $con->table('exam')->insert([
+                'name' => $request->name,
+                'term_id' => $request->term_id,
+                'type_id' => $request->type_id,
+                'remarks' => $request->remarks,
+                'created_at' => date("Y-m-d H:i:s")
+            ]);
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Exam has been successfully saved');
+            }
         }
     }
     // getExamList
@@ -5509,7 +5613,7 @@ class ApiController extends BaseController
             // create new connection
             $con = $this->createNewConnection($request->branch_id);
             // get data
-            $details = $con->table('exam')->select('exam.*','exam_term.name as term_id')->join('exam_term', 'exam.term_id', '=', 'exam_term.id')->get();
+            $details = $con->table('exam')->select('exam.*', 'exam_term.name as term_id')->join('exam_term', 'exam.term_id', '=', 'exam_term.id')->get();
             return $this->successResponse($details, 'Exam record fetch successfully');
         }
     }
@@ -5618,50 +5722,48 @@ class ApiController extends BaseController
             // create new connection
             $con = $this->createNewConnection($request->branch_id);
             $exams = $request['exam'];
-                // insert data
+            // insert data
 
-                foreach($exams as $exam)
-                {
-                    $mark = json_encode($exam['mark']);
-                   
-                    if($exam['timetable_exam_id'])
-                    {
-                        // return $exam;
-                        $query = $con->table('timetable_exam')->where('id',$exam['timetable_exam_id'])->update([
-                            'exam_id' => $request->exam_id,
-                            'class_id' => $request->class_id,
-                            'section_id' => $request->section_id,
-                            'subject_id' => $exam['subject_id'],
-                            'time_start' => $exam['time_start'],
-                            'time_end' => $exam['time_end'],
-                            'marks' => $mark,
-                            'hall_id' => $exam['hall_id'],
-                            'exam_date' => $exam['exam_date'],
-                            'created_at' => date("Y-m-d H:i:s")
-                        ]);
-                    }else{
+            foreach ($exams as $exam) {
+                $mark = json_encode($exam['mark']);
 
-                        $query = $con->table('timetable_exam')->insert([
-                            'exam_id' => $request->exam_id,
-                            'class_id' => $request->class_id,
-                            'section_id' => $request->section_id,
-                            'subject_id' => $exam['subject_id'],
-                            'time_start' => $exam['time_start'],
-                            'time_end' => $exam['time_end'],
-                            'marks' => $mark,
-                            'hall_id' => $exam['hall_id'],
-                            'exam_date' => $exam['exam_date'],
-                            'created_at' => date("Y-m-d H:i:s")
-                        ]);
-                    }
-                }
-
-                $success = [];
-                if (!$query) {
-                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                if ($exam['timetable_exam_id']) {
+                    // return $exam;
+                    $query = $con->table('timetable_exam')->where('id', $exam['timetable_exam_id'])->update([
+                        'exam_id' => $request->exam_id,
+                        'class_id' => $request->class_id,
+                        'section_id' => $request->section_id,
+                        'subject_id' => $exam['subject_id'],
+                        'time_start' => $exam['time_start'],
+                        'time_end' => $exam['time_end'],
+                        'marks' => $mark,
+                        'hall_id' => $exam['hall_id'],
+                        'exam_date' => $exam['exam_date'],
+                        'created_at' => date("Y-m-d H:i:s")
+                    ]);
                 } else {
-                    return $this->successResponse($success, 'Exam Timetable has been successfully saved');
+
+                    $query = $con->table('timetable_exam')->insert([
+                        'exam_id' => $request->exam_id,
+                        'class_id' => $request->class_id,
+                        'section_id' => $request->section_id,
+                        'subject_id' => $exam['subject_id'],
+                        'time_start' => $exam['time_start'],
+                        'time_end' => $exam['time_end'],
+                        'marks' => $mark,
+                        'hall_id' => $exam['hall_id'],
+                        'exam_date' => $exam['exam_date'],
+                        'created_at' => date("Y-m-d H:i:s")
+                    ]);
                 }
+            }
+
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Exam Timetable has been successfully saved');
+            }
         }
     }
     // list Exam Timetable 
@@ -5680,13 +5782,13 @@ class ApiController extends BaseController
             // create new connection
             $con = $this->createNewConnection($request->branch_id);
             // get data
-            $details = $con->table('timetable_exam')->select('exam.name','timetable_exam.exam_id')->leftJoin('exam', 'timetable_exam.exam_id', '=', 'exam.id')
-                        ->where([
-                            ['class_id', $request->class_id], 
-                            ['section_id', $request->section_id]
-                        ])
-                        ->groupBy('timetable_exam.exam_id')
-                        ->get();
+            $details = $con->table('timetable_exam')->select('exam.name', 'timetable_exam.exam_id')->leftJoin('exam', 'timetable_exam.exam_id', '=', 'exam.id')
+                ->where([
+                    ['class_id', $request->class_id],
+                    ['section_id', $request->section_id]
+                ])
+                ->groupBy('timetable_exam.exam_id')
+                ->get();
             return $this->successResponse($details, 'Exam Timetable record fetch successfully');
         }
     }
@@ -5710,26 +5812,26 @@ class ApiController extends BaseController
             // get data
 
             $exam_id = $request->exam_id;
-            $details['exam'] = $con->table('subject_assigns')->select('subjects.name as subject_name','exam_hall.hall_no','classes.name as class_name','sections.name as section_name','exam.name as exam_name','subject_assigns.class_id as class_id','subject_assigns.section_id as section_id','subject_assigns.subject_id as subject_id','timetable_exam.exam_id','timetable_exam.time_start','timetable_exam.time_end','timetable_exam.exam_date','timetable_exam.hall_id','timetable_exam.marks','timetable_exam.id')
-                        ->leftJoin('subjects', 'subject_assigns.subject_id', '=', 'subjects.id')
-                        ->leftJoin('classes', 'subject_assigns.class_id', '=', 'classes.id')
-                        ->leftJoin('sections', 'subject_assigns.section_id', '=', 'sections.id')
-                        ->where([
-                            ['subject_assigns.class_id', $request->class_id], 
-                            ['subject_assigns.section_id', $request->section_id],
-                        ])
-                        ->leftJoin('timetable_exam', function ($join) use($exam_id) {
-                            $join->on('subject_assigns.class_id', '=', 'timetable_exam.class_id')
-                                ->on('subject_assigns.section_id', '=', 'timetable_exam.section_id')
-                                ->on('subject_assigns.subject_id', '=', 'timetable_exam.subject_id')
-                                ->where('timetable_exam.exam_id', $exam_id);
-                        })
-                        ->leftJoin('exam', 'timetable_exam.exam_id', '=', 'exam.id')
-                        ->leftJoin('exam_hall', 'timetable_exam.hall_id', '=', 'exam_hall.id')
-                        ->get();
-            $exam_name = $con->table('exam')->where('id',$exam_id)->first(); 
-            
-        //    dd($exam_name->name);
+            $details['exam'] = $con->table('subject_assigns')->select('subjects.name as subject_name', 'exam_hall.hall_no', 'classes.name as class_name', 'sections.name as section_name', 'exam.name as exam_name', 'subject_assigns.class_id as class_id', 'subject_assigns.section_id as section_id', 'subject_assigns.subject_id as subject_id', 'timetable_exam.exam_id', 'timetable_exam.time_start', 'timetable_exam.time_end', 'timetable_exam.exam_date', 'timetable_exam.hall_id', 'timetable_exam.marks', 'timetable_exam.id')
+                ->leftJoin('subjects', 'subject_assigns.subject_id', '=', 'subjects.id')
+                ->leftJoin('classes', 'subject_assigns.class_id', '=', 'classes.id')
+                ->leftJoin('sections', 'subject_assigns.section_id', '=', 'sections.id')
+                ->where([
+                    ['subject_assigns.class_id', $request->class_id],
+                    ['subject_assigns.section_id', $request->section_id],
+                ])
+                ->leftJoin('timetable_exam', function ($join) use ($exam_id) {
+                    $join->on('subject_assigns.class_id', '=', 'timetable_exam.class_id')
+                        ->on('subject_assigns.section_id', '=', 'timetable_exam.section_id')
+                        ->on('subject_assigns.subject_id', '=', 'timetable_exam.subject_id')
+                        ->where('timetable_exam.exam_id', $exam_id);
+                })
+                ->leftJoin('exam', 'timetable_exam.exam_id', '=', 'exam.id')
+                ->leftJoin('exam_hall', 'timetable_exam.hall_id', '=', 'exam_hall.id')
+                ->get();
+            $exam_name = $con->table('exam')->where('id', $exam_id)->first();
+
+            //    dd($exam_name->name);
             $details['details']['exam_name'] = $exam_name->name;
             // return $details;
             return $this->successResponse($details, 'Exam Timetable record fetch successfully');
@@ -5778,12 +5880,12 @@ class ApiController extends BaseController
                     'st.first_name',
                     'st.last_name',
                     'st.register_no',
-                    'sa.id as att_id',          
+                    'sa.id as att_id',
                     'sa.score',
                     'sa.grade',
                     'sa.ranking',
                     'sa.memo',
-                   // 'sd.subject_division'
+                    // 'sd.subject_division'
                 )
                 ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
                 // ->leftJoin('student_subjectdivision as sd', function ($q) use ($section_id, $subject_id) {
@@ -5800,8 +5902,8 @@ class ApiController extends BaseController
                     ['en.class_id', '=', $request->class_id],
                     ['en.section_id', '=', $request->section_id]
                 ])
-                ->orderBy('sa.score','desc')
-                ->get();           
+                ->orderBy('sa.score', 'desc')
+                ->get();
             return $this->successResponse($getSubjectMarks, 'Subject vs marks record fetch successfully');
         }
     }
@@ -5825,8 +5927,8 @@ class ApiController extends BaseController
             // ->where([
             //     ['min_mark', '>=', $marks_range]             
             // ])
-            $success =$Connection->table('grade_marks')
-            ->select('grade')->where('min_mark','<=',$marks_range)->where('max_mark','>=',$marks_range)->get();
+            $success = $Connection->table('grade_marks')
+                ->select('grade')->where('min_mark', '<=', $marks_range)->where('max_mark', '>=', $marks_range)->get();
 
 
             return $this->successResponse($success, 'marks vs grade record fetch successfully');
@@ -5843,7 +5945,7 @@ class ApiController extends BaseController
             'subjectmarks' => 'required',
             'exam_id' => 'required'
         ]);
- 
+
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
@@ -5854,10 +5956,10 @@ class ApiController extends BaseController
             $section_id = $request->section_id;
             $subject_id = $request->subject_id;
             $exam_id = $request->exam_id;
-            $data = [];     
+            $data = [];
 
             foreach ($subjectmarks as $key => $value) {
-           
+
                 $student_id = (isset($value['student_id']) ? $value['student_id'] : "");
                 $score = (isset($value['score']) ? $value['score'] : "");
                 $grade = (isset($value['grade']) ? $value['grade'] : "");
@@ -5875,7 +5977,7 @@ class ApiController extends BaseController
                     'memo' => $memo,
                     'created_at' => date("Y-m-d H:i:s")
                 );
-              
+
                 if ((empty($value['studentmarks_tbl_pk_id']) || $value['studentmarks_tbl_pk_id'] == "null")) {
                     if ($Connection->table('student_marks')->where([
 

@@ -1621,7 +1621,6 @@ class AdminController extends Controller
             'timetable' => $request->timetable,
 
         ];
-        // dd($data);
         $response = Helper::PostMethod(config('constants.api.timetable_add'), $data);
         // dd($response);
         return $response;

@@ -253,6 +253,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('get_reasons_by_student',[ApiController::class,'getReasonsByStudent']);
     // get calendor data
     Route::get('get_timetable_calendor',[ApiController::class,'getTimetableCalendor']);
-
+    // add timetable schedule
+    Route::post('add_calendor_timetable',[ApiController::class,'addCalendorTimetable']);
     
 });

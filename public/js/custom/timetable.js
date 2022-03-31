@@ -3,30 +3,33 @@ $(function () {
     // add timetable
     $('#addTimetableForm').on('submit', function (e) {
         e.preventDefault();
-            var form = this;
-            $.ajax({
-                url: $(form).attr('action'),
-                method: $(form).attr('method'),
-                data: new FormData(form),
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                success: function (data) {
-                    if (data.code == 200) {
-                        $('.addTimetableForm').find('form')[0].reset();
-                        toastr.success(data.message);
-                        window.location.href = timetableList;
-                    } else {
-                        toastr.error(data.message);
-                    }
+        $("#overlay").fadeIn(300);
+        var form = this;
+        $.ajax({
+            url: $(form).attr('action'),
+            method: $(form).attr('method'),
+            data: new FormData(form),
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (data) {
+                if (data.code == 200) {
+                    $('.addTimetableForm').find('form')[0].reset();
+                    toastr.success(data.message);
+                    window.location.href = timetableList;
+                    $("#overlay").fadeOut(300);
+                } else {
+                    toastr.error(data.message);
+                    $("#overlay").fadeOut(300);
                 }
-            });
+            }
+        });
     });
 
     $("#class_id").on('change', function (e) {
         e.preventDefault();
         var class_id = $(this).val();
-        
+
         $("#section_id").empty();
         $("#section_id").append('<option value="">Select Class Name</option>');
         $.post(sectionByClass, { class_id: class_id }, function (res) {
@@ -38,16 +41,16 @@ $(function () {
         }, 'json');
     });
 
-	$("#addFilter").validate({
+    $("#addFilter").validate({
         rules: {
-            class_id:"required",
-            section_id:"required",
-            day:"required",
+            class_id: "required",
+            section_id: "required",
+            day: "required",
         }
     });
-    var count=0;
-     // add designation
-     $('#addFilter').on('submit', function (e) {
+    var count = 0;
+    // add designation
+    $('#addFilter').on('submit', function (e) {
         e.preventDefault();
         var filterCheck = $("#addFilter").valid();
         if (filterCheck === true) {
@@ -63,10 +66,15 @@ $(function () {
             // console.log('length',length)
             // if(length>1)
             // {
-                $("#timetable_body").empty();
+            $("#timetable_body").empty();
             // }
-            
-            
+            var classID = $("#class_id").val();
+            var sectionID = $("#section_id").val();
+            var semesterID = $("#semester_id").val();
+            var sessionID = $("#session_id").val();
+            var Day = $("#day").val();
+
+
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),
@@ -76,27 +84,25 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
-                    
                     if (data.code == 200) {
-                        $("#form_class_id").val(data.data.class_id);
-                        $("#form_section_id").val(data.data.section_id);
-                        $("#form_semester_id").val(data.data.semester_id);
-                        $("#form_session_id").val(data.data.session_id);
-                        $("#form_day").val(data.data.day);
+                        $("#form_class_id").val(classID);
+                        $("#form_section_id").val(sectionID);
+                        $("#form_semester_id").val(semesterID);
+                        $("#form_session_id").val(sessionID);
+                        $("#form_day").val(Day);
                         $("#timetable").show("slow");
                         var subject = data.data.subject;
                         var teacher = data.data.teacher;
-                        if(data.data.timetable=="")
-                        {
-                            callout(subject,teacher);
-                        }else{
+                        if (data.data.timetable == "") {
+                            callout(subject, teacher);
+                        } else {
                             var cd = data.data.length;
                             count = cd;
-                            console.log('cou',count)
+                            console.log('cou', count)
                             $("#timetable_body").append(data.data.timetable);
-                              
+
                         }
-                        
+
                     }
                 }
             });
@@ -105,21 +111,21 @@ $(function () {
 
     $("#indexFilter").validate({
         rules: {
-            class_id:"required",
-            section_id:"required",
+            class_id: "required",
+            section_id: "required",
         }
     });
 
-    $('#editTimetableModal').on('shown.bs.modal', function() {
+    $('#editTimetableModal').on('shown.bs.modal', function () {
         var class_id = $("#edit-modal").data('class_id');
         var section_id = $("#edit-modal").data('section_id');
         var semester_id = $("#edit-modal").data('semester_id');
         var session_id = $("#edit-modal").data('session_id');
-        $("#edit_class_id").val(class_id); 
-        $("#edit_section_id").val(section_id); 
+        $("#edit_class_id").val(class_id);
+        $("#edit_section_id").val(section_id);
         $("#edit_semester_id").val(semester_id);
         $("#edit_session_id").val(session_id);//value
-    
+
         // use the above data however you want
     })
     // get timetable
@@ -136,7 +142,7 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
-                    
+
                     if (data.code == 200) {
                         $("#edit-modal").attr("data-class_id", data.class_id);
                         $("#edit-modal").attr("data-section_id", data.section_id);
@@ -153,30 +159,30 @@ $(function () {
         }
     });
 
-     // update timetable
-     $('#editTimetableForm').on('submit', function (e) {
+    // update timetable
+    $('#editTimetableForm').on('submit', function (e) {
         e.preventDefault();
-            var form = this;
-            $.ajax({
-                url: $(form).attr('action'),
-                method: $(form).attr('method'),
-                data: new FormData(form),
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                success: function (data) {
-                    if (data.code == 200) {
-                        $('.editTimetableForm').find('form')[0].reset();
-                        toastr.success(data.message);
-                        window.location.href = timetableList;
-                    } else {
-                        toastr.error(data.message);
-                    }
+        var form = this;
+        $.ajax({
+            url: $(form).attr('action'),
+            method: $(form).attr('method'),
+            data: new FormData(form),
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (data) {
+                if (data.code == 200) {
+                    $('.editTimetableForm').find('form')[0].reset();
+                    toastr.success(data.message);
+                    window.location.href = timetableList;
+                } else {
+                    toastr.error(data.message);
                 }
-            });
+            }
+        });
     });
 
-    $(document).on('click', "#timetable_body input[type='checkbox']", function() {
+    $(document).on('click', "#timetable_body input[type='checkbox']", function () {
 
         $(this).closest('tr').find('select').prop('disabled', this.checked);
     })
@@ -189,26 +195,25 @@ $(function () {
         $(this).parent().parent().parent().remove();
     });
 
-    $(document).on('change', "#edit_timetable_body input[type='checkbox']", function() {
+    $(document).on('change', "#edit_timetable_body input[type='checkbox']", function () {
         $(this).closest('tr').find('select').prop('disabled', this.checked);
     })
-    
-    $(document).on('click', "#addMore", function() {
-            
+
+    $(document).on('click', "#addMore", function () {
+
         var class_id = $("#form_class_id").val();
         var section_id = $("#form_section_id").val();
-        $.post(subjectByClass, { class_id: class_id , section_id: section_id}, function (res) {
+        $.post(subjectByClass, { class_id: class_id, section_id: section_id }, function (res) {
             if (res.code == 200) {
-                
+
                 var subject = res.data.subject;
                 var teacher = res.data.teacher;
-                callout(subject,teacher);
+                callout(subject, teacher);
             }
         }, 'json');
     });
 
-    function callout(subject,teacher)
-    {
+    function callout(subject, teacher) {
         var row = "";
         row += '<tr class="iadd">';
         row += '<td ><div class="checkbox-replace"> ';
@@ -245,8 +250,8 @@ $(function () {
         count++;
         // console.log('as',row)
         // return row;
-        
+
         $("#timetable_body").append(row);
     }
-			
+
 });

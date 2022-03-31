@@ -74,6 +74,7 @@
         color: #3498db;
         transform: scale(1.1);
     }
+
 </style>
 @endsection
 @section('content')
@@ -153,7 +154,7 @@
                     </form>
                 </div>
             </div>
-            <div class="card classRoomHideSHow"><br>
+            <div class="card classRoomHideSHow" style="display: none;"><br>
                 <div class="card-body">
                     <div class="row">
 
@@ -291,7 +292,7 @@
                     </div>
                 </div>
             </div><!-- end col-->
-            <div class="row classRoomHideSHow">
+            <div class="row classRoomHideSHow" style="display: none;">
                 <div class="col-xl-12">
                     <div class="card">
                         <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
@@ -547,18 +548,16 @@
                                     <div class="row shortTestHideSHow">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <div class="table-responsive">
-                                                    <table id="addShortTest" method="post" action="{{ route('teacher.classroom.add_short_test') }}" autocomplete="off">
-                                                        @csrf
-                                                        <div id="shortTestTableAppend">
+                                                <form id="addShortTest" method="post" action="{{ route('teacher.classroom.add_short_test') }}" autocomplete="off">
+                                                    @csrf
+                                                    <div id="shortTestTableAppend">
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="clearfix mt-4">
+                                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Save</button>
                                                         </div>
-                                                        <div class="col-md-12">
-                                                            <div class="clearfix mt-4">
-                                                                <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Save</button>
-                                                            </div>
-                                                        </div>
-                                                    </table>
-                                                </div>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div> <!-- end card-box-->
                                     </div>

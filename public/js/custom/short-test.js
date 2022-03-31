@@ -146,7 +146,7 @@ $(document).ready(function () {
             toastr.success(response.message);
             // $('#addDailyReport')[0].reset();
           } else {
-            toastr.error(data.message);
+            toastr.error(response.message);
           }
         }
       });
@@ -170,7 +170,7 @@ $(document).ready(function () {
           toastr.success(response.message);
           // $('#addDailyReport')[0].reset();
         } else {
-          toastr.error(data.message);
+          toastr.error(response.message);
         }
       }
     });
