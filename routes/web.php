@@ -396,11 +396,47 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         
         Route::post('homework/view', [AdminController::class, 'viewHomework'])->name('admin.homework.view');
 
+        // exam Term route
+        Route::get('exam_term/index', [AdminController::class, 'examTerm'])->name('admin.exam_term');
+        Route::post('exam_term/add', [AdminController::class, 'addExamTerm'])->name('admin.exam_term.add');
+        Route::get('exam_term/list', [AdminController::class, 'getExamTermList'])->name('admin.exam_term.list');
+        Route::post('exam_term/exam_term-details', [AdminController::class, 'getExamTermDetails'])->name('admin.exam_term.details');
+        Route::post('exam_term/update', [AdminController::class, 'updateExamTerm'])->name('admin.exam_term.update');
+        Route::post('exam_term/delete', [AdminController::class, 'deleteExamTerm'])->name('admin.exam_term.delete');
+
+        // exam hall route
+        Route::get('exam_hall/index', [AdminController::class, 'examHall'])->name('admin.exam_hall');
+        Route::post('exam_hall/add', [AdminController::class, 'addExamHall'])->name('admin.exam_hall.add');
+        Route::get('exam_hall/list', [AdminController::class, 'getExamHallList'])->name('admin.exam_hall.list');
+        Route::post('exam_hall/exam_hall-details', [AdminController::class, 'getExamHallDetails'])->name('admin.exam_hall.details');
+        Route::post('exam_hall/update', [AdminController::class, 'updateExamHall'])->name('admin.exam_hall.update');
+        Route::post('exam_hall/delete', [AdminController::class, 'deleteExamHall'])->name('admin.exam_hall.delete');
+
+         // exam route
+         Route::get('exam/index', [AdminController::class, 'exam'])->name('admin.exam');
+         Route::post('exam/add', [AdminController::class, 'addExam'])->name('admin.exam.add');
+         Route::get('exam/list', [AdminController::class, 'getExamList'])->name('admin.exam.list');
+         Route::post('exam/exam-details', [AdminController::class, 'getExamDetails'])->name('admin.exam.details');
+         Route::post('exam/update', [AdminController::class, 'updateExam'])->name('admin.exam.update');
+         Route::post('exam/delete', [AdminController::class, 'deleteExam'])->name('admin.exam.delete');
+
         // exam routes
-        Route::get('exam/term', [AdminController::class, 'examIndex'])->name('admin.exam.term');
-        Route::get('exam/hall', [AdminController::class, 'examHall'])->name('admin.exam.hall');
         Route::get('exam/mark_distribution', [AdminController::class, 'examMarkDistribution'])->name('admin.exam.mark_distribution');
-        Route::get('exam/exam', [AdminController::class, 'exam'])->name('admin.exam.exam');
+        // Route::get('exam/exam', [AdminController::class, 'exam'])->name('admin.exam.exam');
+
+        
+        // exam timetable
+        Route::post('timetable/exam', [AdminController::class, 'timetableExam'])->name('admin.exam_timetable');
+        Route::post('timetable/getexam', [AdminController::class, 'getExamTimetable'])->name('admin.exam_timetable.get');
+        Route::post('timetable/viewexam', [AdminController::class, 'viewExamTimetable'])->name('admin.exam_timetable.view');
+        Route::post('timetable/addexam', [AdminController::class, 'addExamTimetable'])->name('admin.exam_timetable.add');
+        
+        Route::get('timetable/viewexam', [AdminController::class, 'timeTableViewExam'])->name('admin.timetable.viewexam');
+        Route::get('timetable/set_examwise', [AdminController::class, 'timeTableSetExamWise'])->name('admin.timetable.set_examwise');
+        // exam marks
+        Route::get('exam/mark_entry', [AdminController::class, 'markEntry'])->name('admin.exam.mark_entry');
+        // grade range
+        Route::get('exam/grade_range', [AdminController::class, 'gradeRange'])->name('admin.exam.grade_range');
 
         // Hostel routes
         Route::get('hostel/index', [AdminController::class, 'hostel'])->name('admin.hostel');

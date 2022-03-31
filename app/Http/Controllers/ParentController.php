@@ -54,8 +54,10 @@ class ParentController extends Controller
     public function timeTable(Request $request)
     {
         $parent = session()->get('ref_user_id');
+        $children_id = session()->get('children_id');
         $data = [
-            'parent_id' => $parent
+            'parent_id' => $parent,
+            'children_id' => $children_id
         ];
 
         $days = array(

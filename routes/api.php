@@ -126,8 +126,40 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('designation/update', [ApiController::class, 'updateDesignation']);
     Route::post('designation/delete', [ApiController::class, 'deleteDesignation']);
 
+    // Exam Term routes 
+    Route::post('exam_term/add',[ApiController::class,'addExamTerm']);
+    Route::get('exam_term/list', [ApiController::class, 'getExamTermList']);
+    Route::post('exam_term/exam_term-details', [ApiController::class, 'getExamTermDetails']);
+    Route::post('exam_term/update', [ApiController::class, 'updateExamTerm']);
+    Route::post('exam_term/delete', [ApiController::class, 'deleteExamTerm']);
+
+    // Exam Hall routes 
+    Route::post('exam_hall/add',[ApiController::class,'addExamHall']);
+    Route::get('exam_hall/list', [ApiController::class, 'getExamHallList']);
+    Route::post('exam_hall/exam_hall-details', [ApiController::class, 'getExamHallDetails']);
+    Route::post('exam_hall/update', [ApiController::class, 'updateExamHall']);
+    Route::post('exam_hall/delete', [ApiController::class, 'deleteExamHall']);
+
+    // Exam routes 
+    Route::post('exam/add',[ApiController::class,'addExam']);
+    Route::get('exam/list', [ApiController::class, 'getExamList']);
+    Route::post('exam/exam-details', [ApiController::class, 'getExamDetails']);
+    Route::post('exam/update', [ApiController::class, 'updateExam']);
+    Route::post('exam/delete', [ApiController::class, 'deleteExam']);
+
+    // Exam Timetable routes 
+    Route::post('exam_timetable/add',[ApiController::class,'addExamTimetable']);
+    Route::post('exam_timetable/list', [ApiController::class, 'listExamTimetable']);
+    Route::post('exam_timetable/get', [ApiController::class, 'getExamTimetable']);
+
     // get roles
     Route::post('roles/list', [ApiController::class, 'getRoles']);
+
+    //get Semester
+    Route::get('semester/list', [ApiController::class, 'getSemesterList']);
+
+    //get Session
+    Route::get('session/list', [ApiController::class, 'getSessionList']);
     
      // Timetable
      Route::post('timetable/add', [ApiController::class, 'addTimetable']);

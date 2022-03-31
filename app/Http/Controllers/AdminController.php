@@ -1270,18 +1270,14 @@ class AdminController extends Controller
     {
         return view('admin.exam_term.index');
     }
-    public function examHall()
-    {
-        return view('admin.exam_hall.index');
-    }
     public function examMarkDistribution()
     {
         return view('admin.exam_mark_distribution.index');
     }
-    public function exam()
-    {
-        return view('admin.exam.index');
-    }
+    // public function exam()
+    // {
+    //     return view('admin.exam.index');
+    // }
     // get Employee
     public function listEmployee()
     {
@@ -1482,11 +1478,13 @@ class AdminController extends Controller
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
             'day' => $request->day,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
         ];
 
         $timetable = Helper::PostMethod(config('constants.api.timetable_subject'), $data);
 
-
+        // dd($timetable);
         if ($timetable['code'] == "200") {
 
             
@@ -1590,10 +1588,15 @@ class AdminController extends Controller
     public function createTimetable(Request $request)
     {
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        // dd($semester);
         return view(
             'admin.timetable.add',
             [
                 'class' => $getclass['data'],
+                'semester' => $semester['data'],
+                'session' => $session['data'],
             ]
         );
     }
@@ -1605,11 +1608,15 @@ class AdminController extends Controller
         $data = [
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
             'day' => $request->day,
             'timetable' => $request->timetable,
 
         ];
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.timetable_add'), $data);
+        // dd($response);
         return $response;
     }
 
@@ -1617,10 +1624,14 @@ class AdminController extends Controller
     public function timetable(Request $request)
     {
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
         return view(
             'admin.timetable.index',
             [
                 'class' => $getclass['data'],
+                'semester' => $semester['data'],
+                'session' => $session['data'],
             ]
         );
     }
@@ -1631,8 +1642,11 @@ class AdminController extends Controller
         $data = [
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
         ];
 
+        // dd($data);
 
         $timetable = Helper::PostMethod(config('constants.api.timetable_list'), $data);
 
@@ -1686,6 +1700,8 @@ class AdminController extends Controller
         }
         $timetable['class_id'] = $request->class_id;
         $timetable['section_id'] = $request->section_id;
+        $timetable['semester_id'] = $request->semester_id;
+        $timetable['session_id'] = $request->session_id;
         return $timetable;
     }
 
@@ -1696,10 +1712,14 @@ class AdminController extends Controller
         $data = [
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
             'day' => $request->day
         ];
+        // dd($data);
         $timetable = Helper::PostMethod(config('constants.api.timetable_edit'), $data);
         // 
+        // dd($timetable);
         if ($timetable['code'] == "200") {
             return view(
                 'admin.timetable.edit',
@@ -1725,6 +1745,8 @@ class AdminController extends Controller
         $data = [
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
             'day' => $request->day,
             'timetable' => $request->timetable,
 
@@ -2036,4 +2058,486 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.department_delete'), $data);
         return $response;
     }
+
+    // get Exam Term
+    public function examTerm()
+    {
+        // $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+        // return 1;
+        return view('admin.exam_term.list');
+    }
+
+    //add examTerm
+    public function addExamTerm(Request $request)
+    {
+
+        $data = [
+            'name' => $request->name,
+        ];
+        $response = Helper::PostMethod(config('constants.api.exam_term_add'), $data);
+        return $response;
+    }
+    // get ExamTerm 
+    public function getExamTermList(Request $request)
+    {
+
+        $response = Helper::GetMethod(config('constants.api.exam_term_list'));
+
+        return DataTables::of($response['data'])
+
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                 <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editExamTermBtn"><i class="fe-edit"></i></a>
+                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteExamTermBtn"><i class="fe-trash-2"></i></a>
+                         </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    // get ExamTerm row details
+    public function getExamTermDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.exam_term_details'), $data);
+        return $response;
+    }
+    // update ExamTerm
+    public function updateExamTerm(Request $request)
+    {
+
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.exam_term_update'), $data);
+        return $response;
+    }
+
+    // delete ExamTerm
+    public function deleteExamTerm(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $id
+            ];
+            $response = Helper::PostMethod(config('constants.api.exam_term_delete'), $data);
+            return $response;
+        }
+    }
+
+    // get Exam Hall
+    public function examHall()
+    {
+        return view('admin.exam_hall.list');
+    }
+
+    //add examHall
+    public function addExamHall(Request $request)
+    {
+
+        $data = [
+            'hall_no' => $request->hall_no,
+            'no_of_seats' => $request->no_of_seats
+        ];
+        $response = Helper::PostMethod(config('constants.api.exam_hall_add'), $data);
+        return $response;
+    }
+    // get ExamHall 
+    public function getExamHallList(Request $request)
+    {
+
+        $response = Helper::GetMethod(config('constants.api.exam_hall_list'));
+        return DataTables::of($response['data'])
+
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                 <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editExamHallBtn"><i class="fe-edit"></i></a>
+                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteExamHallBtn"><i class="fe-trash-2"></i></a>
+                         </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    // get ExamHall row details
+    public function getExamHallDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.exam_hall_details'), $data);
+        return $response;
+    }
+    // update ExamHall
+    public function updateExamHall(Request $request)
+    {
+
+        $data = [
+            'id' => $request->id,
+            'hall_no' => $request->hall_no,
+            'no_of_seats' => $request->no_of_seats
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.exam_hall_update'), $data);
+        return $response;
+    }
+
+    // delete ExamHall
+    public function deleteExamHall(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $id
+            ];
+            $response = Helper::PostMethod(config('constants.api.exam_hall_delete'), $data);
+            return $response;
+        }
+    }
+
+    // get Exam 
+    public function exam()
+    {
+        $term = Helper::GetMethod(config('constants.api.exam_term_list'));
+        // dd($response)
+
+        return view('admin.exam.list',['term' => $term['data']]);
+    }
+
+    //add exam
+    public function addExam(Request $request)
+    {
+        $data = [
+            'name' => $request->name,
+            'term_id' => $request->term_id,
+            'type_id' => $request->type_id,
+            'remarks' => $request->remarks
+        ];
+        $response = Helper::PostMethod(config('constants.api.exam_add'), $data);
+        return $response;
+    }
+    // get Exam 
+    public function getExamList(Request $request)
+    {
+
+        $response = Helper::GetMethod(config('constants.api.exam_list'));
+        // dd($response);
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('type_id', function ($row) {
+                $type = $row['type_id'];
+                if ($type == "1") {
+                    $result = "Marks";
+                } else if ($type == "2")  {
+                    $result = "Grade";
+                }else if ($type == "3")  {
+                    $result = "Marks and Grade";
+                }
+                return $result;
+            })
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                 <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editExamBtn"><i class="fe-edit"></i></a>
+                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteExamBtn"><i class="fe-trash-2"></i></a>
+                         </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    // get Exam row details
+    public function getExamDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.exam_details'), $data);
+        return $response;
+    }
+    // update Exam
+    public function updateExam(Request $request)
+    {
+
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name,
+            'term_id' => $request->term_id,
+            'type_id' => $request->type_id,
+            'remarks' => $request->remarks
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.exam_update'), $data);
+        return $response;
+    }
+
+    // delete Exam
+    public function deleteExam(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $id
+            ];
+            $response = Helper::PostMethod(config('constants.api.exam_delete'), $data);
+            return $response;
+        }
+    }
+
+    public function timeTableViewExam()
+    {
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        return view(
+            'admin.exam_timetable.schedule',
+            [
+                'class' => $getclass['data'],
+            ]
+        );
+    }
+    public function timeTableSetExamWise()
+    {
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $getexam = Helper::GetMethod(config('constants.api.exam_list'));
+        return view(
+            'admin.exam_timetable.add_schedule',
+            [
+                'class' => $getclass['data'],
+                'exam' => $getexam['data'],
+            ]
+        );
+    }
+
+    public function timetableExam(Request $request)
+    {
+        
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.exam_timetable_list'), $data);
+        // dd($response);
+        
+        if ($response['code'] == "200") {
+            $output = "";
+            $row = 1;
+            if ($response['data']) {
+                foreach ($response['data'] as $exam) {
+                    $output .= '<tr>
+                                    <td>' . $row . '</td>
+                                    <td>' . $exam['name'] . '</td>
+                                    <td><div class="button-list"><a href="javascript:void(0)" class="btn btn-blue btn-sm waves-effect waves-light" data-toggle="modal" data-target="#examTimeTable" data-exam_id="' . $exam['exam_id'] . '" id=""><i class="fe-eye"></i></a><a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="" id=""><i class="fe-trash-2"></i></a></div></td>
+                                </tr>';
+                    $row++;
+                }
+            } else {
+                $output .= '<tr>
+                                    <td colspan="7"> No Data Available</td>
+                                </tr>';
+            }
+
+            $response['table'] = $output;
+        }
+
+        // dd($homework);
+        return $response;
+    }
+
+    public function getExamTimetable(Request $request)
+    {
+        
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'exam_id' => $request->exam_id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.exam_timetable_get'), $data);
+        $hall_list = Helper::GetMethod(config('constants.api.exam_hall_list'));
+        $hall="";   
+        if ($response['code'] == "200") {
+            $output = "";
+            $row = 1;
+            if ($response['data']['exam']) {
+                foreach ($response['data']['exam'] as $exam) {
+
+                    // dd($exam['hall_id']);
+                    $hall = "";
+                    foreach($hall_list['data'] as $list)
+                    {
+                        if($list['id'] == $exam['hall_id'])
+                        {
+                            $hall .= '<option value="'.$list['id'].'" selected>'.$list['hall_no'].'</option>';
+                        }else{
+                            $hall .= '<option value="'.$list['id'].'">'.$list['hall_no'].'</option>';
+                        }
+                        
+                    } 
+
+                    if($exam['marks'])
+                    {
+                        $mark = json_decode($exam['marks']);
+                        $full = $mark->full;
+                        $pass = $mark->pass;
+
+                    }else{
+                        $full = NULL;
+                        $pass = NULL;
+                    }
+                    $output .= '<tr>
+                                    <input type="hidden" value="'.$exam['id'].'" name="exam['.$row.'][timetable_exam_id]">
+                                    <td width="20%">
+                                        <div class="input-group mb-2">
+                                            <input type="text" readonly class="form-control"  value="'.$exam['subject_name'].'" >
+                                            <input type="hidden" name="exam['.$row.'][subject_id]"  value="'.$exam['subject_id'].'" >
+                                        </div>
+                                    </td>
+                                    <td width="15%">
+                                        <div class="input-group mb-2">
+                                            <input type="date" class="form-control" name="exam['.$row.'][exam_date]"  value="'.$exam['exam_date'].'">
+                                        </div>
+                                    </td>
+                                    <td width="15%">
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                            </div>
+                                            <input type="time" class="form-control" name="exam['.$row.'][time_start]" value="'.$exam['time_start'].'">
+                                        </div>
+                                    </td>
+                                    <td width="15%">
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                            </div>
+                                            <input type="time" class="form-control" name="exam['.$row.'][time_end]"  value="'.$exam['time_end'].'">
+                                        </div>
+                                    </td>
+                                    <td width="10%">
+                                        <div class="form-group mb-2">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <select class="form-control" name="exam['.$row.'][hall_id]" placeholder="Select">
+                                                        <option value="">Choose Hall</option>'.$hall.'</select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td width="25%">
+                                        <div class="form-group mb-2">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <input type="text" id="example-gridsize" name="exam['.$row.'][mark][full]" class="form-control" value="'.$full.'" placeholder="Full Mark">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input type="text" id="example-gridsize" name="exam['.$row.'][mark][pass]" class="form-control"  value="'.$pass.'" placeholder="Pass Mark">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>';
+                    $row++;
+                }
+            } else {
+                $output .= '<tr>
+                                <td colspan="6"> No Data Available</td>
+                            </tr>';
+            }
+
+            $response['table'] = $output;
+            $response['class_id'] = $request->class_id;
+            $response['section_id'] = $request->section_id;
+            $response['exam_id'] = $request->exam_id;
+        }
+
+        // dd($homework);
+        return $response;
+    }
+
+    public function addExamTimetable(Request $request)
+    {
+        
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'exam_id' => $request->exam_id,
+            'exam' => $request->exam,
+        ];
+        $response = Helper::PostMethod(config('constants.api.exam_timetable_add'), $data);
+        return $response;
+    }
+
+    public function viewExamTimetable(Request $request)
+    {
+       
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'exam_id' => $request->exam_id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.exam_timetable_get'), $data);
+
+        // dd($response);  
+        if ($response['code'] == "200") {
+
+            $output = "";
+            $row = 1;
+            if ($response['data']['exam']) {
+                foreach ($response['data']['exam'] as $exam) {
+                    $output .= '<tr>
+                                    <td>'.$exam['subject_name'].'</td>
+                                    <td>'.$exam['exam_date'].'</td>
+                                    <td>'.$exam['time_start'].'</td>
+                                    <td>'.$exam['time_end'].'</td>
+                                    <td>'.$exam['hall_no'].'</td>
+                                </tr>';
+                    $row++;
+
+                    $class_section = $exam['class_name'].'('.$exam['section_name'].')';
+                }
+            } else {
+                $output .= '<tr>
+                                <td colspan="5"> No Data Available</td>
+                            </tr>';
+            }
+
+            $response['table'] = $output;
+            $response['class_section'] = $class_section;
+        }
+
+        // dd($response);
+        return $response;
+    }
+
+    public function markEntry()
+    {
+        return view('admin.exam_marks.mark_entry');
+    }
+    
 }

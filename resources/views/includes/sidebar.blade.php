@@ -776,26 +776,67 @@
                                 <div class="collapse" id="sidebarMultilevel2">
                                     <ul class="nav-second-level">
                                         <li>
-                                            <a href="{{ route('admin.exam.term')}}" class="nav-link {{ (request()->is('admin/exam/term')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.exam_term')}}" class="nav-link {{ (request()->is('admin/exam_term/index')) ? 'active' : '' }}">
                                                 <span>Exam Term</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('admin.exam.hall')}}" class="nav-link {{ (request()->is('admin/exam/hall')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.exam_hall')}}" class="nav-link {{ (request()->is('admin/exam_hall/index')) ? 'active' : '' }}">
                                                 <span>Exam Hall</span>
                                             </a>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <a href="{{ route('admin.exam.mark_distribution')}}" class="nav-link {{ (request()->is('admin/exam/mark_distribution')) ? 'active' : '' }}">
                                                 <span>Distribution</span>
                                             </a>
-                                        </li>
+                                        </li> -->
                                         <li>
-                                            <a href="{{ route('admin.exam.exam')}}" class="nav-link {{ (request()->is('admin/exam/exam')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.exam')}}" class="nav-link {{ (request()->is('admin/exam/index')) ? 'active' : '' }}">
                                                 <span>Exam Setup</span>
                                             </a>
                                         </li>
                                         
+                                    </ul>
+                                </div>
+                            </li>
+                            
+                            <li>
+                                <a href="#sidebarSchedule" data-toggle="collapse">
+                                <i class="fas fa-dna"></i> &nbsp;
+                                Exam Schedule <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarSchedule">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admin.timetable.viewexam')}}" class="nav-link {{ (request()->is('admin/exam/timetable')) ? 'active' : '' }}">
+                                                <span>Schedule</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.timetable.set_examwise')}}" class="nav-link {{ (request()->is('admin/exam/set_examwise')) ? 'active' : '' }}">
+                                                <span>Add Schedule</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#sidebarMarks" data-toggle="collapse">
+                                <i class="fas fa-marker"></i> &nbsp;
+                                Marks <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarMarks">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admin.exam.mark_entry')}}" class="nav-link {{ (request()->is('admin/exam/timetable')) ? 'active' : '' }}">
+                                                <span>Mark Entries</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.exam.grade_range')}}" class="nav-link {{ (request()->is('admin/exam/set_examwise')) ? 'active' : '' }}">
+                                                <span>Grade Range</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>

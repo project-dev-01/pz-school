@@ -40,7 +40,7 @@
                 <div class="card-body">
                     <form id="addFilter" method="post" action="{{ route('admin.timetable.subject') }}"  enctype="multipart/form-data" autocomplete="off">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="class_id">Standard<span class="text-danger">*</span></label>
                                     <select id="class_id" class="form-control" name="class_id" >                             
@@ -51,7 +51,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="section_id">Class Name<span class="text-danger">*</span></label>
                                     <select id="section_id" class="form-control"  name="section_id">                              
@@ -59,7 +59,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="day">Day<span class="text-danger">*</span></label>
                                     <select id="day" class="form-control"  name="day">
@@ -71,6 +71,30 @@
                                         <option value="thursday">Thursday</option>
                                         <option value="friday">Friday</option>
                                         <option value="saturday">Saturday</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="semester_id">Semester</label>
+                                    <select id="semester_id" class="form-control"  name="semester_id">                              
+                                    <option value="0">Select Semester</option>
+                                        @foreach($semester as $sem)
+                                            <option value="{{$sem['id']}}">{{$sem['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="session_id">Session</label>
+                                    <select id="session_id" class="form-control"  name="session_id">                              
+                                    <option value="0">Select Session</option>
+                                        @foreach($session as $ses)
+                                            <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -167,6 +191,8 @@
                     <!-- end row-->
                     <input type="hidden" id="form_class_id"  name="class_id">
                     <input type="hidden" id="form_section_id" name="section_id">
+                    <input type="hidden" id="form_semester_id" name="semester_id">
+                    <input type="hidden" id="form_session_id" name="session_id">
                     <input type="hidden" id="form_day" name="day"  >
                     <div class="form-group text-right m-b-0">
                         <button class="btn btn-primary-bl waves-effect waves-light" type="Save">

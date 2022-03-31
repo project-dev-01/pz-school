@@ -42,7 +42,7 @@ $(function () {
         rules: {
             class_id:"required",
             section_id:"required",
-            day:"required"
+            day:"required",
         }
     });
     var count=0;
@@ -80,6 +80,8 @@ $(function () {
                     if (data.code == 200) {
                         $("#form_class_id").val(data.data.class_id);
                         $("#form_section_id").val(data.data.section_id);
+                        $("#form_semester_id").val(data.data.semester_id);
+                        $("#form_session_id").val(data.data.session_id);
                         $("#form_day").val(data.data.day);
                         $("#timetable").show("slow");
                         var subject = data.data.subject;
@@ -104,15 +106,19 @@ $(function () {
     $("#indexFilter").validate({
         rules: {
             class_id:"required",
-            section_id:"required"
+            section_id:"required",
         }
     });
 
     $('#editTimetableModal').on('shown.bs.modal', function() {
         var class_id = $("#edit-modal").data('class_id');
         var section_id = $("#edit-modal").data('section_id');
+        var semester_id = $("#edit-modal").data('semester_id');
+        var session_id = $("#edit-modal").data('session_id');
         $("#edit_class_id").val(class_id); 
-        $("#edit_section_id").val(section_id); //value
+        $("#edit_section_id").val(section_id); 
+        $("#edit_semester_id").val(semester_id);
+        $("#edit_session_id").val(session_id);//value
     
         // use the above data however you want
     })
@@ -134,6 +140,8 @@ $(function () {
                     if (data.code == 200) {
                         $("#edit-modal").attr("data-class_id", data.class_id);
                         $("#edit-modal").attr("data-section_id", data.section_id);
+                        $("#edit-modal").attr("data-semester_id", data.semester_id);
+                        $("#edit-modal").attr("data-session_id", data.session_id);
                         $("#timetablerow").show("slow");
                         $("#timetable").html(data.timetable);
                     } else {

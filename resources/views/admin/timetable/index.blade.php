@@ -65,6 +65,29 @@
                                     </select>
                                 </div>
                             </div>
+                            
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="semester_id">Semester</label>
+                                    <select id="semester_id" class="form-control"  name="semester_id">                              
+                                    <option value="0">Select Semester</option>
+                                        @foreach($semester as $sem)
+                                            <option value="{{$sem['id']}}">{{$sem['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="session_id">Session</label>
+                                    <select id="session_id" class="form-control"  name="session_id">                              
+                                    <option value="0">Select Session</option>
+                                        @foreach($session as $ses)
+                                            <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
@@ -135,6 +158,8 @@
                     @csrf
                     <input type="hidden" name="class_id" id="edit_class_id">
                     <input type="hidden" name="section_id" id="edit_section_id">
+                    <input type="hidden" name="semester_id" id="edit_semester_id">
+                    <input type="hidden" name="session_id" id="edit_session_id">
                     <div class="form-group">
                         <label for="day">Day<span class="text-danger">*</span></label>
                         <select id="day" class="form-control"  name="day">

@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Exam Terms')
+@section('title','Exam Term')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -28,13 +28,13 @@
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
                         <!-- <a href="{{ route('admin.add_classes')}}" class="btn btn-primary btn-rounded waves-effect waves-light">Add Class</a> -->
-                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addClassModal">Add Term</button>
+                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addExamTermModal">Add  Term</button>
                     </div>
                 </div>
                 </p>
 
                 <div class="table-responsive">
-                    <table class="table mb-0" id="exam-term">
+                    <table class="table mb-0" id="exam-term-table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -42,25 +42,24 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>1st</td>
-                                <td>
-                                    <div class="button-list">
-                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
-                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
                     </table>
                 </div>
             </div> <!-- end card-box -->
         </div> <!-- end col -->
     </div>
     <!--- end row -->
+    @include('admin.exam_term.add')
+    @include('admin.exam_term.edit')
 
 </div>
 <!-- container -->
+@endsection
+@section('scripts')
+<script>
+// examTerm routes
+    var examTermList = "{{ route('admin.exam_term.list') }}";
+    var examTermDetails = "{{ route('admin.exam_term.details') }}";
+    var examTermDelete = "{{ route('admin.exam_term.delete') }}";
+</script>
+<script src="{{ asset('js/custom/exam_term.js') }}"></script>
 @endsection

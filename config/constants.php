@@ -11,6 +11,11 @@ return [
         'cities' => $url.'/get-cities',
         // get roles
         'roles' => $url.'/roles/list',
+
+        //get semester
+        'semester' => $url.'/semester/list',
+        //get session
+        'session' => $url.'/session/list',
         // section url
         'section_add' => $url.'/section/add',
         'section_list' => $url.'/section/list',
@@ -171,6 +176,34 @@ return [
          'homework_evaluate' => $url.'/homework/evaluate',
          // calendor timetable show
          'get_timetable_calendor' => $url.'/get_timetable_calendor',
+         
+
+         // exam term url
+        'exam_term_add' => $url.'/exam_term/add',
+        'exam_term_list' => $url.'/exam_term/list',
+        'exam_term_details' => $url.'/exam_term/exam_term-details',
+        'exam_term_update' => $url.'/exam_term/update',
+        'exam_term_delete' => $url.'/exam_term/delete',
+
+         // exam hall url
+         'exam_hall_add' => $url.'/exam_hall/add',
+         'exam_hall_list' => $url.'/exam_hall/list',
+         'exam_hall_details' => $url.'/exam_hall/exam_hall-details',
+         'exam_hall_update' => $url.'/exam_hall/update',
+         'exam_hall_delete' => $url.'/exam_hall/delete',
+
+         // exam  url
+         'exam_add' => $url.'/exam/add',
+         'exam_list' => $url.'/exam/list',
+         'exam_details' => $url.'/exam/exam-details',
+         'exam_update' => $url.'/exam/update',
+         'exam_delete' => $url.'/exam/delete',
+
+         // timetable exam  url
+         'exam_timetable_add' => $url.'/exam_timetable/add',
+         'exam_timetable_list' => $url.'/exam_timetable/list',
+         'exam_timetable_get' => $url.'/exam_timetable/get',
+         
          
         
          
