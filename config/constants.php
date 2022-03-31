@@ -157,6 +157,8 @@ return [
         'get_daily_report_remarks' => $url.'/get_daily_report_remarks',
         'add_daily_report_remarks' => $url.'/add_daily_report_remarks',
         'get_classroom_widget_data' => $url.'/get_classroom_widget_data',
+        'get_testresult_exams' => $url.'/get_testresult_exams',
+        'get_testresult_marks_subject_vs' => $url.'/get_testresult_marks_subject_vs',
         // get attendance list
         'get_attendance_list' => $url.'/get_attendance_list',
         'get_child_subjects' => $url.'/get_child_subjects',
@@ -206,7 +208,9 @@ return [
          
          
         
-         
+                 // get_marks_vs_grade
+        'get_marks_vs_grade' => $url.'/get_marks_vs_grade',
+        'add_student_marks'=>$url.'/add_student_marks'
     ]
 
 ];

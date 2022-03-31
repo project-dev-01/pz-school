@@ -5735,4 +5735,178 @@ class ApiController extends BaseController
             return $this->successResponse($details, 'Exam Timetable record fetch successfully');
         }
     }
+    public function examslist(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $getTeachersClassName = $Connection->table('exams')
+                ->select('id', 'names')
+                ->get();
+            return $this->successResponse($getTeachersClassName, 'Exams  list of Name record fetch successfully');
+        }
+    }
+    public function subject_vs_marks(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
+            'exam_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $exam_id = $request->exam_id;
+            $subject_id = $request->subject_id;
+            $class_id = $request->class_id;
+            $section_id = $request->section_id;
+            $Connection = $this->createNewConnection($request->branch_id);
+            $getSubjectMarks = $Connection->table('enrolls as en')
+                ->select(
+                    'en.student_id',
+                    'en.roll',
+                    'st.first_name',
+                    'st.last_name',
+                    'st.register_no',
+                    'sa.id as att_id',          
+                    'sa.score',
+                    'sa.grade',
+                    'sa.ranking',
+                    'sa.memo',
+                   // 'sd.subject_division'
+                )
+                ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
+                // ->leftJoin('student_subjectdivision as sd', function ($q) use ($section_id, $subject_id) {
+                //     $q->on('sd.classid', '=', 'en.class_id')
+                //         ->on('sd.sectionid', '=', DB::raw("'$section_id'")) //second join condition                           
+                //         ->on('sd.subjectid', '=', DB::raw("'$subject_id'")); //need to add subject id also later                           
+                // })
+                ->leftJoin('student_marks as sa', function ($q) use ($exam_id, $subject_id) {
+                    $q->on('sa.student_id', '=', 'st.id')
+                        ->on('sa.exam_id', '=', DB::raw("'$exam_id'")) //second join condition                           
+                        ->on('sa.subject_id', '=', DB::raw("'$subject_id'")); //need to add subject id also later                           
+                })
+                ->where([
+                    ['en.class_id', '=', $request->class_id],
+                    ['en.section_id', '=', $request->section_id]
+                ])
+                ->orderBy('sa.score','desc')
+                ->get();           
+            return $this->successResponse($getSubjectMarks, 'Subject vs marks record fetch successfully');
+        }
+    }
+    public function marks_vs_grade(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'marks_range' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $branch_id =  $request->branch_id;
+            $marks_range =  $request->marks_range;
+
+            $Connection = $this->createNewConnection($branch_id);
+            // $success = $Connection->table('grade_marks')         
+            // ->select('id','grade')
+            // ->where([
+            //     ['min_mark', '>=', $marks_range]             
+            // ])
+            $success =$Connection->table('grade_marks')
+            ->select('grade')->where('min_mark','<=',$marks_range)->where('max_mark','>=',$marks_range)->get();
+
+
+            return $this->successResponse($success, 'marks vs grade record fetch successfully');
+        }
+    }
+    public function addStudentMarks(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
+            'subjectmarks' => 'required',
+            'exam_id' => 'required'
+        ]);
+ 
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection     
+            $Connection = $this->createNewConnection($request->branch_id);
+            $subjectmarks = $request->subjectmarks;
+            $class_id = $request->class_id;
+            $section_id = $request->section_id;
+            $subject_id = $request->subject_id;
+            $exam_id = $request->exam_id;
+            $data = [];     
+
+            foreach ($subjectmarks as $key => $value) {
+           
+                $student_id = (isset($value['student_id']) ? $value['student_id'] : "");
+                $score = (isset($value['score']) ? $value['score'] : "");
+                $grade = (isset($value['grade']) ? $value['grade'] : "");
+                $ranking = (isset($value['ranking']) ? $value['ranking'] : "");
+                $memo = (isset($value['memo']) ? $value['memo'] : "");
+                $arrayStudentMarks = array(
+                    'student_id' => $student_id,
+                    'class_id' => $class_id,
+                    'section_id' => $section_id,
+                    'subject_id' => $subject_id,
+                    'exam_id' => $exam_id,
+                    'score' => $score,
+                    'grade' => $grade,
+                    'ranking' => $ranking,
+                    'memo' => $memo,
+                    'created_at' => date("Y-m-d H:i:s")
+                );
+              
+                if ((empty($value['studentmarks_tbl_pk_id']) || $value['studentmarks_tbl_pk_id'] == "null")) {
+                    if ($Connection->table('student_marks')->where([
+
+                        ['class_id', '=', $class_id],
+                        ['section_id', '=', $section_id],
+                        ['subject_id', '=', $subject_id],
+                        ['student_id', '=', $value['student_id']],
+                        ['exam_id', '=', $exam_id]
+
+                    ])->count() > 0) {
+                        $Connection->table('student_marks')->where('id', $value['studentmarks_tbl_pk_id'])->update([
+                            'score' => $score,
+                            'grade' => $grade,
+                            'ranking' => $ranking,
+                            'memo' => $memo,
+                            'updated_at' => date("Y-m-d H:i:s")
+                        ]);
+                    } else {
+                        $Connection->table('student_marks')->insert($arrayStudentMarks);
+                    }
+                } else {
+                    $Connection->table('student_marks')->where('id', $value['studentmarks_tbl_pk_id'])->update([
+                        'score' => $score,
+                        'grade' => $grade,
+                        'ranking' => $ranking,
+                        'memo' => $memo,
+                        'updated_at' => date("Y-m-d H:i:s")
+                    ]);
+                }
+            }
+            return $this->successResponse([], 'Student Marks added successfuly.');
+        }
+    }
 }

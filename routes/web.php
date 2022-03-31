@@ -370,6 +370,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('employee/edit/{id}', [AdminController::class, 'editEmployee'])->name('admin.employee.edit');
         Route::post('employee/update', [AdminController::class, 'updatEemployee'])->name('admin.employee.update');
         Route::post('employee/delete', [AdminController::class, 'deleteEmployee'])->name('admin.employee.delete');
+        Route::post('admission/add', [AdminController::class, 'addadmission'])->name('admin.admission.add');
 
         // Settings
         Route::get('settings', [SuperAdminController::class, 'settings'])->name('admin.settings');
@@ -706,7 +707,9 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('chat', [TeacherController::class, 'chatShow'])->name('teacher.chat');
         //Task routes
         Route::get('task/index', [TeacherController::class, 'taskIndex'])->name('teacher.task');
-
+        Route::post('subjectmarksAdd', [TeacherController::class, 'subjectmarks'])->name('teacher.subjectmarks.add');
+        Route::post('subjectdivisionAdd', [TeacherController::class, 'subjectdivision'])->name('teacher.subjectdivision.add');
+        
         // exam Result Group 
         Route::get('exam_results/byclass', [TeacherController::class, 'byclasss'])->name('teacher.exam_results.byclass');
 

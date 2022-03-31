@@ -211,6 +211,12 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('forum/threads/status/update',[ApiController::class,'threadstatusupdate']);
     Route::get('forum/usernames/autocomplete',[ApiController::class,'usernameautocomplete']);
     Route::get('forum/getuserid',[ApiController::class,'getuserid']);
+    
+    // Test Result    
+    Route::get('get_testresult_exams',[ApiController::class,'examslist']);
+    Route::get('get_testresult_marks_subject_vs',[ApiController::class,'subject_vs_marks']);
+    Route::post('get_marks_vs_grade',[ApiController::class,'marks_vs_grade']);
+    Route::post('add_student_marks',[ApiController::class,'addStudentMarks']);
     // classroom management
     Route::post('teacher_class',[ApiController::class,'getTeachersClassName']);
     Route::post('teacher_section',[ApiController::class,'getTeachersSectionName']);

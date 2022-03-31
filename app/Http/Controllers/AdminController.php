@@ -1084,7 +1084,14 @@ class AdminController extends Controller
 
     public function admission()
     {
-        return view('admin.admission.index');
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));     
+        return view(
+            'admin.admission.index',
+            [
+                'class' => $getclass['data'],
+            ]
+        );
+       // return view('admin.admission.index');
     }
 
     public function import()

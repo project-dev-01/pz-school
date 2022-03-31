@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use App\Models\Task;
+use PhpParser\Node\Expr\FuncCall;
+
 class TeacherController extends Controller
 {
     //
@@ -217,7 +219,7 @@ class TeacherController extends Controller
         ]);
     }
     public function imagestore(Request $request)
-   {
+    {
     if ($request->hasFile('upload')) {
 
         //get filename with extension
@@ -273,11 +275,17 @@ class TeacherController extends Controller
         ]);
     }
     // faq screen pages end
-
-
     public function testResult()
     {
-        return view('teacher.testresult.index');
+        $data = [
+            'teacher_id' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        $get_exams = Helper::GetMethod(config('constants.api.get_testresult_exams'));           
+        return view('teacher.testresult.index', [
+            'teacher_class' => $response['data'],
+            'get_exams' => $get_exams['data']
+        ]);       
     }
     public function chatShow()
     {
@@ -298,7 +306,7 @@ class TeacherController extends Controller
         return view('teacher.attendance.index', [
             'teacher_class' => $response['data']
         ]);
-        }
+    }
     public function byclasss()
     {
         return view('teacher.exam_results.byclass');
@@ -324,11 +332,8 @@ class TeacherController extends Controller
             ]
         );
     }
-
     public function evaluationReport()
     {
-        
-
         $data = [
             'teacher_id' => session()->get('ref_user_id')
         ];
@@ -664,6 +669,33 @@ class TeacherController extends Controller
          ];
          $section = Helper::PostMethod(config('constants.api.teacher_section'), $data);
          return $section;
+     }
+     public function subjectmarks(Request $request)
+     { 
+         $data = [
+          
+             "subjectmarks" => $request->subjectmarks,        
+             "class_id" => $request->class_id,
+             "section_id" => $request->section_id,
+             "subject_id" => $request->subject_id,
+             "exam_id" => $request->exam_id            
+         ];
+
+         $response = Helper::PostMethod(config('constants.api.add_student_marks'), $data);
+     
+         return $response;
+     }
+     public function subjectdivision(Request $request)
+     {
+        $data = [          
+            "subjectmarks" => $request->subjectmarks,        
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id,
+            "exam_id" => $request->exam_id            
+        ];    
+        $response = Helper::PostMethod(config('constants.api.add_student_marks'), $data);    
+        return $response;
      }
     
 }
