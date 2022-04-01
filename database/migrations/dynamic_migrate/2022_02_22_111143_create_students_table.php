@@ -17,6 +17,7 @@ class CreateStudentsTable extends Migration
             $table->id();
             $table->integer('parent_id');
             $table->string('register_no');
+            $table->string('roll_no');
             $table->date('admission_date');
             $table->string('first_name');
             $table->string('last_name');

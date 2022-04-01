@@ -166,6 +166,13 @@ Route::group(['middleware' => ['jwt.verify']], function () {
      Route::post('timetable/list', [ApiController::class, 'getTimetableList']);
      Route::post('timetable/edit', [ApiController::class, 'editTimetable']);
      Route::post('timetable/update', [ApiController::class, 'updateTimetable']);
+     
+    // Grade routes
+    Route::post('grade/add',[ApiController::class,'addGrade']);
+    Route::get('grade/list', [ApiController::class, 'getGradeList']);
+    Route::post('grade/grade-details', [ApiController::class, 'getGradeDetails']);
+    Route::post('grade/update', [ApiController::class, 'updateGrade']);
+    Route::post('grade/delete', [ApiController::class, 'deleteGrade']);
 
     // employee routes
     Route::post('employee/department', [ApiController::class, 'getEmpDepartment']);
@@ -260,5 +267,17 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     
     // add timetable schedule
     Route::post('add_calendor_timetable',[ApiController::class,'addCalendorTimetable']);
+
+    
+    Route::get('transport/list', [ApiController::class, 'getTransportList']);
+    
+    Route::get('hostel/list', [ApiController::class, 'getHostelList']);
+
+    
+    Route::post('vehicle-by-route', [ApiController::class, 'vehicleByRoute']);
+    Route::post('room-by-hostel', [ApiController::class, 'roomByHostel']);
+
+    // Admission routes
+    Route::post('admission/add',[ApiController::class,'addAdmission']);
     
 });

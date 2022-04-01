@@ -104,10 +104,19 @@
                                         <label for="">Category<span class="text-danger">*</span></label>
                                         <select id="categy" name="categy" class="form-control">
                                             <option value="">Choose..</option>
-                                            <option value="press">Press</option>
-                                            <option value="net">Internet</option>
-                                            <option value="mouth">Word of mouth</option>
-                                            <option value="other">Other..</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="session_id">Session</label>
+                                        <select id="session_id" class="form-control"  name="session_id">                              
+                                            <option value="0">Select Session</option>
+                                            @foreach($session as $ses)
+                                                <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -148,8 +157,8 @@
                                         <label for="gender">Gender<span class="text-danger">*</span></label>
                                         <select id="gender" name="gender" class="form-control">
                                             <option value="">Select Gender</option>
-                                            <option value="">Male</option>
-                                            <option value="press">Female</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
                                         </select>
                                     </div>
                                 </div>
@@ -160,14 +169,14 @@
                                         <label for="blooddgrp">Blood Group<span class="text-danger">*</span></label>
                                         <select id="blooddgrp" name="blooddgrp" class="form-control">
                                             <option value="">Select Blood Group</option>
-                                            <option value="press">O+</option>
-                                            <option value="net">A+</option>
-                                            <option value="mouth">B+</option>
-                                            <option value="other">AB+</option>
-                                            <option value="other">O-</option>
-                                            <option value="other">A-</option>
-                                            <option value="other">B-</option>
-                                            <option value="other">AB-</option>
+                                            <option>O+</option>
+                                            <option>A+</option>
+                                            <option>B+</option>
+                                            <option>AB+</option>
+                                            <option>O-</option>
+                                            <option>A-</option>
+                                            <option>B-</option>
+                                            <option>AB-</option>
                                         </select>
                                     </div>
                                 </div>
@@ -249,7 +258,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="pc">Profile Picture</label>
@@ -257,7 +266,7 @@
                         </textarea>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <span class="fas fa-user-lock " id="span-parent"></span>
                             <span class="header-title mb-3" id="span-parent"> Login Details
                                 <hr id="hr">
@@ -285,7 +294,7 @@
                                                     <span class="fas fa-unlock"></span>
                                                 </div>
                                             </div>
-                                            <input type="txt_pwd" class="form-control" id="txt_pwd" placeholder="" aria-describedby="inputGroupPrepend">
+                                            <input type="text" name="txt_pwd" class="form-control" id="txt_pwd" placeholder="" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                 </div>
@@ -298,7 +307,7 @@
                                                     <span class="fas fa-unlock"></span>
                                                 </div>
                                             </div>
-                                            <input type="txt_retype_pwd" class="form-control" id="txt_retype_pwd" placeholder="" aria-describedby="inputGroupPrepend">
+                                            <input type="text" name="txt_retype_pwd" class="form-control" id="txt_retype_pwd" placeholder="" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                 </div>
@@ -307,17 +316,17 @@
                             <span class="header-title mb-3" id="span-parent">Guardian Details
                                 <hr id="hr">
                             </span>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="customCheck11">
                                     <label class="custom-control-label" for="customCheck11">Skipped Bank Details</label>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="heard">Bank Name<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="txt_banknam" id="txt_banknam" placeholder="" aria-describedby="inputGroupPrepend">
+                                        <label for="heard">Name<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="txt_name" id="txt_name" placeholder="" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -442,12 +451,12 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="drp_transport_route">Transport Route<span class="text-danger">*</span></label>
+                                           
                                         <select id="drp_transport_route" name="drp_transport_route" class="form-control">
-                                            <option value="">First select the branch</option>
-                                            <option value="press">Press</option>
-                                            <option value="net">Internet</option>
-                                            <option value="mouth">Word of mouth</option>
-                                            <option value="other">Other..</option>
+                                            <option value="">Select Transport</option>
+                                            @foreach($transport as $trans)
+                                            <option value="{{$trans['id']}}">{{$trans['name']}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -456,10 +465,6 @@
                                         <label for="drp_transport_vechicleno">Vechicle No<span class="text-danger">*</span></label>
                                         <select id="drp_transport_vechicleno" name="drp_transport_vechicleno" class="form-control">
                                             <option value="">First select the branch</option>
-                                            <option value="press">Press</option>
-                                            <option value="net">Internet</option>
-                                            <option value="mouth">Word of mouth</option>
-                                            <option value="other">Other..</option>
                                         </select>
                                     </div>
                                 </div>
@@ -473,11 +478,10 @@
                                     <div class="form-group">
                                         <label for="drp_hostelnam">Hostel Name</label>
                                         <select id="drp_hostelnam" name="drp_hostelnam" class="form-control">
-                                            <option value="">First select the branch</option>
-                                            <option value="press">Press</option>
-                                            <option value="net">Internet</option>
-                                            <option value="mouth">Word of mouth</option>
-                                            <option value="other">Other..</option>
+                                            <option value="">Select Hostel</option>
+                                            @foreach($hostel as $hos)
+                                            <option value="{{$hos['id']}}">{{$hos['name']}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -486,10 +490,6 @@
                                         <label for="drp_roomname">Room Name</label>
                                         <select id="drp_roomname" name="drp_roomname" class="form-control">
                                             <option value="">First select the hostel</option>
-                                            <option value="press">Press</option>
-                                            <option value="net">Internet</option>
-                                            <option value="mouth">Word of mouth</option>
-                                            <option value="other">Other..</option>
                                         </select>
                                     </div>
                                 </div>
@@ -539,6 +539,9 @@
 @section('scripts')
 <script>
     var sectionByClass = "{{ route('admin.section_by_class') }}";
+    var vehicleByRoute = "{{ route('admin.vehicle_by_route') }}";
+    var roomByHostel = "{{ route('admin.room_by_hostel') }}";
+    var indexAdmission = "{{ route('admin.admission') }}";
 </script>
 <script src="{{ asset('js/custom/admission.js') }}"></script>
 @endsection

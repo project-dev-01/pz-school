@@ -1084,11 +1084,18 @@ class AdminController extends Controller
 
     public function admission()
     {
-        $getclass = Helper::GetMethod(config('constants.api.class_list'));     
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $gettransport = Helper::GetMethod(config('constants.api.transport_list'));     
+        $gethostel = Helper::GetMethod(config('constants.api.hostel_list'));   
+        $session = Helper::GetMethod(config('constants.api.session'));
+        // dd($gethostel);
         return view(
             'admin.admission.index',
             [
                 'class' => $getclass['data'],
+                'transport' => $gettransport['data'],
+                'hostel' => $gethostel['data'],
+                'session' => $session['data'],
             ]
         );
        // return view('admin.admission.index');
@@ -2544,6 +2551,177 @@ class AdminController extends Controller
     public function markEntry()
     {
         return view('admin.exam_marks.mark_entry');
+    }
+
+    // get grade 
+    public function grade()
+    {
+        return view('admin.grade.index',);
+    }
+
+    //add Grade
+    public function addGrade(Request $request)
+    {
+
+        $data = [
+            'min_mark' => $request->min_mark,
+            'max_mark' => $request->max_mark,
+            'grade' => $request->grade,
+            'grade_point' => $request->grade_point
+        ];
+
+       
+        $response = Helper::PostMethod(config('constants.api.grade_add'), $data);
+        // dd($response);
+        return $response;
+    }
+    // get Grade 
+    public function getGradeList(Request $request)
+    {
+
+        $response = Helper::GetMethod(config('constants.api.grade_list'));
+
+        return DataTables::of($response['data'])
+
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                 <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editGradeBtn"><i class="fe-edit"></i></a>
+                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteGradeBtn"><i class="fe-trash-2"></i></a>
+                         </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    // get Grade row details
+    public function getGradeDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.grade_details'), $data);
+        return $response;
+    }
+    // update Grade
+    public function updateGrade(Request $request)
+    {
+
+        $data = [
+            'id' => $request->id,
+            'min_mark' => $request->min_mark,
+            'max_mark' => $request->max_mark,
+            'grade' => $request->grade,
+            'grade_point' => $request->grade_point
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.grade_update'), $data);
+        return $response;
+    }
+
+    // delete Grade
+    public function deleteGrade(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $id
+            ];
+            $response = Helper::PostMethod(config('constants.api.grade_delete'), $data);
+            return $response;
+        }
+    }
+
+    // get Vehicle By Route
+    public function vehicleByRoute(Request $request)
+    {
+        $data = [
+            'route_id' => $request->route_id,
+
+        ];
+        $route = Helper::PostMethod(config('constants.api.vehicle_by_route'), $data);
+
+        // dd($route);
+        return $route;
+    }
+
+    // get Room By Hostel
+    public function roomByHostel(Request $request)
+    {
+        $data = [
+            'hostel_id' => $request->hostel_id,
+
+        ];
+        $hostel = Helper::PostMethod(config('constants.api.room_by_hostel'), $data);
+        return $hostel;
+    }
+
+
+    // add admission
+    public function addAdmission(Request $request)
+    {
+
+        
+        $data = [
+            'register_no' => $request->txt_regiter_no,
+            'roll_no' => $request->txt_roll_no,
+            'admission_date' => $request->admission_date,
+            'category_id' => $request->categy,
+            'first_name' => $request->fname,
+            'last_name' => $request->lname,
+            'gender' => $request->gender,
+            'blood_group' => $request->blooddgrp,
+            'birthday' => $request->dob,
+            'mother_tongue' => $request->txt_mothertongue,
+            'religion' => $request->txt_religion,
+            'caste' => $request->txt_caste,
+            'mobile_no' => $request->txt_mobile_no,
+            'city' => $request->drp_city,
+            'state' => $request->drp_state,
+            'current_address' => $request->txtarea_paddress,
+            'permanent_address' => $request->txtarea_permanent_address,
+            'email' => $request->txt_emailid,
+            'route_id' => $request->drp_transport_route,
+            'vehicle_id' => $request->drp_transport_vechicleno,
+            'hostel_id' => $request->drp_hostelnam,
+            'room_id' => $request->drp_roomname,
+            'school_name' => $request->txt_prev_schname,
+            'qualification' => $request->txt_prev_qualify,
+            'remarks' => $request->txtarea_prev_remarks,
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'session_id' => $request->session_id,
+            'password' => $request->txt_pwd,
+            'confirm_password' => $request->txt_retype_pwd,
+            
+            'parent_name' => $request->txt_name,
+            'relation' => $request->txt_relation,
+            'father_name' => $request->txt_fathernam,
+            'mother_name' => $request->txt_mothernam,
+            'occupation' => $request->txt_occupation,
+            'income' => $request->txt_income,
+            'education' => $request->txt_eduction,
+            'parent_city' => $request->txt_guardian_city,
+            'parent_state' => $request->txt_guardian_state,
+            'parent_mobile_no' => $request->txt_guardian_mobileno,
+            'address' => $request->txt_guardian_address,
+            'parent_email' => $request->txt_guardian_email,
+            'parent_password' => $request->txt_guardian_pwd,
+            'parent_confirm_password' => $request->txt_guardian_retyppwd,
+            
+        ];
+
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.admission_add'), $data);
+        // dd($response);
+        return $response;
     }
     
 }

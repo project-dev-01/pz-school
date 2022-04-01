@@ -370,7 +370,6 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('employee/edit/{id}', [AdminController::class, 'editEmployee'])->name('admin.employee.edit');
         Route::post('employee/update', [AdminController::class, 'updatEemployee'])->name('admin.employee.update');
         Route::post('employee/delete', [AdminController::class, 'deleteEmployee'])->name('admin.employee.delete');
-        Route::post('admission/add', [AdminController::class, 'addadmission'])->name('admin.admission.add');
 
         // Settings
         Route::get('settings', [SuperAdminController::class, 'settings'])->name('admin.settings');
@@ -383,6 +382,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         // Admission routes
         Route::get('admission/index', [AdminController::class, 'admission'])->name('admin.admission');
         Route::get('admission/import', [AdminController::class, 'import'])->name('admission.import');
+        Route::post('admission/add', [AdminController::class, 'addAdmission'])->name('admin.admission.add');
 
         // Parent routes
         Route::get('parent/index', [AdminController::class, 'parent'])->name('admin.parent');
@@ -437,8 +437,15 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         // exam marks
         Route::get('exam/mark_entry', [AdminController::class, 'markEntry'])->name('admin.exam.mark_entry');
         // grade range
-        Route::get('exam/grade_range', [AdminController::class, 'gradeRange'])->name('admin.exam.grade_range');
+        Route::get('exam/grade', [AdminController::class, 'grade'])->name('admin.exam.grade');
 
+        // grade routes
+        Route::get('grade/index', [AdminController::class, 'grade'])->name('admin.grade');
+        Route::post('grade/add', [AdminController::class, 'addGrade'])->name('admin.grade.add');
+        Route::get('grade/list', [AdminController::class, 'getGradeList'])->name('admin.grade.list');
+        Route::post('grade/grade-details', [AdminController::class, 'getGradeDetails'])->name('admin.grade.details');
+        Route::post('grade/update', [AdminController::class, 'updateGrade'])->name('admin.grade.update');
+        Route::post('grade/delete', [AdminController::class, 'deleteGrade'])->name('admin.grade.delete');
         // Hostel routes
         Route::get('hostel/index', [AdminController::class, 'hostel'])->name('admin.hostel');
         Route::get('hostel/category', [AdminController::class, 'getCategory'])->name('admin.hostel.category');
@@ -495,6 +502,12 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [AdminController::class, 'forumPageCategoriesSingle'])->name('admin.forum.page-categories-single-val');
        Route::post('form/postimage', [AdminController::class, 'imagestore'])->name('admin.forum.image.store');
       //  Route::post('form/postimage', [CommonController::class, 'imagestore'])->name('forum.image.store');
+
+      // vehicle By route 
+      Route::post('vehicle-by-route', [AdminController::class, 'vehicleByRoute'])->name('admin.vehicle_by_route');
+
+      // room By hostel Route
+      Route::post('room-by-hostel', [AdminController::class, 'roomByHostel'])->name('admin.room_by_hostel');
     });
     // admin routes end
 

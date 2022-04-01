@@ -828,12 +828,7 @@
                                 <div class="collapse" id="sidebarMarks">
                                     <ul class="nav-second-level">
                                         <li>
-                                            <a href="{{ route('admin.exam.mark_entry')}}" class="nav-link {{ (request()->is('admin/exam/timetable')) ? 'active' : '' }}">
-                                                <span>Mark Entries</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('admin.exam.grade_range')}}" class="nav-link {{ (request()->is('admin/exam/set_examwise')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.exam.grade')}}" class="nav-link {{ (request()->is('admin/exam/set_examwise')) ? 'active' : '' }}">
                                                 <span>Grade Range</span>
                                             </a>
                                         </li>

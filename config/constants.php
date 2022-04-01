@@ -208,11 +208,30 @@ return [
          'exam_timetable_add' => $url.'/exam_timetable/add',
          'exam_timetable_list' => $url.'/exam_timetable/list',
          'exam_timetable_get' => $url.'/exam_timetable/get',
-        
+
+        // grade url
+        'grade_add' => $url.'/grade/add',
+        'grade_list' => $url.'/grade/list',
+        'grade_details' => $url.'/grade/grade-details',
+        'grade_update' => $url.'/grade/update',
+        'grade_delete' => $url.'/grade/delete',
                  // get_marks_vs_grade
         'get_marks_vs_grade' => $url.'/get_marks_vs_grade',
         'add_student_marks'=>$url.'/add_student_marks',
-        'get_subject_division'=>$url.'/get_subject_division'
+        'get_subject_division'=>$url.'/get_subject_division',
+
+        // get transport list
+        'transport_list' => $url.'/transport/list',
+
+        // get hostel list
+        'hostel_list' => $url.'/hostel/list',
+
+        
+        'vehicle_by_route' => $url.'/vehicle-by-route',
+        'room_by_hostel' => $url.'/room-by-hostel',
+
+        // adminssion url
+        'admission_add' => $url.'/admission/add',
     ]
 
 ];
