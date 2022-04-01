@@ -288,23 +288,16 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-3">
-                            <div id="external-events" class="m-t-20">
-                                <br>
-                            </div>
-
-                        </div> <!-- end col-->
-
                         <div class="col-lg-12">
-                            <div id="calendar"></div>
-                        </div> <!-- end col -->
-
+                            <div id="student_calendor"></div>
+                        </div>
                     </div> <!-- end row -->
                 </div> <!-- end card body-->
             </div> <!-- end card -->
 
             <!-- Add New Event MODAL -->
-            <div class="modal fade" id="event-modal" tabindex="-1">
+            <!-- Add New Event MODAL -->
+            <div class="modal fade" id="student-modal" tabindex="-1">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header py-3 px-4 border-bottom-0 d-block">
@@ -312,17 +305,31 @@
                             <h5 class="modal-title">Schedule</h5>
                         </div>
                         <div class="modal-body p-4">
-                            <form class="needs-validation" name="event-form" id="form-event" novalidate>
+                            <form id="addStudentReport" method="post" action="{{ route('student.classroom.add_daily_report_remarks') }}" autocomplete="off">
                                 <div class="row">
-                                    <!-- <div class="col-4">
-                                        <div class="col-md-12 font-weight-bold">Timetable List </div>
+                                    <div class="col-4">
+                                        <div class="col-md-12 font-weight-bold">Standard </div>
                                     </div>
                                     <div class="col-1">
                                         <div class="col-md-12 font-weight-bold">:</div>
                                     </div>
                                     <div class="col-7">
-                                        <div class="col-md-12" id="event-title"></div>
-                                    </div> -->
+
+                                        <input type="hidden" id="setCurDate" name="date">
+                                        <input type="hidden" id="ttclassID" name="class_id">
+                                        <div class="col-md-12" id="standard-name"></div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="col-md-12 font-weight-bold">Section </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="col-md-12 font-weight-bold">:</div>
+                                    </div>
+                                    <div class="col-7">
+                                        <input type="hidden" id="ttSectionID" name="section_id">
+                                        <div class="col-md-12" id="section-name"></div>
+                                    </div>
+
                                     <div class="col-4">
                                         <div class="col-md-12 font-weight-bold">Subject Name </div>
                                     </div>
@@ -330,6 +337,7 @@
                                         <div class="col-md-12 font-weight-bold">:</div>
                                     </div>
                                     <div class="col-7">
+                                        <input type="hidden" id="ttSubjectID" name="subject_id">
                                         <div class="col-md-12" id="subject-name"></div>
                                     </div>
 
@@ -340,6 +348,7 @@
                                         <div class="col-md-12 font-weight-bold">:</div>
                                     </div>
                                     <div class="col-7">
+                                        <input type="hidden" id="ttDate">
                                         <div class="col-md-12" id="timing-class"></div>
                                     </div>
                                     <div class="col-4">
@@ -352,14 +361,12 @@
                                         <div class="col-md-12" id="teacher-name"></div>
                                     </div>
                                     <div class="col-12">
-                                        <!-- <div class="form-group"> -->
-                                        <!-- <label class="control-label font-weight-bold">Notes :</label> -->
-                                        <textarea class="form-control" style="margin: 12px;" placeholder="Enter Your Notes"></textarea>
-                                        <!-- </div> -->
+                                        <textarea class="form-control" style="margin: 12px;" placeholder="Enter your notes" id="calNotes" name="student_remarks"></textarea>
                                     </div>
-                                    <div class="col-12">
-                                        <button type="button" class="btn btn-success" style="margin: 12px;">Save</button>
-
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-6 text-left">
+                                        <button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
                                     </div>
                                 </div>
                             </form>
@@ -417,4 +424,10 @@
     </div>
     @include('student.dashboard.check_list')
 </div> <!-- container -->
+@endsection
+@section('scripts')
+<script>
+    var getTimetableCalendorStudent = "{{ config('constants.api.get_timetable_calendor_student') }}";
+</script>
+<script src="{{ asset('js/custom/student_calendor.js') }}"></script>
 @endsection

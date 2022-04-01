@@ -13,6 +13,19 @@ class StudentController extends Controller
     {
         return view('student.dashboard.index');
     }
+    function addDailyReportRemarks(Request $request)
+    {
+        $data = [
+            "student_remarks" => $request->student_remarks,
+            "student_id" => session()->get('ref_user_id'),
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.add_daily_report_by_student'), $data);
+        return $response;
+    }
     public function settings()
     {
         return view('student.settings.index');

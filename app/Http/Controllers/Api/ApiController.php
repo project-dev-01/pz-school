@@ -3949,6 +3949,49 @@ class ApiController extends BaseController
             return $this->successResponse([], 'Remarks added successfuly.');
         }
     }
+    // addDailyReportByStudent
+    function addDailyReportByStudent(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
+            'student_remarks' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $arrayInsert = [
+                "student_id" => $request->student_id,
+                'student_remarks' => $request->student_remarks,
+                'class_id' => $request->class_id,
+                'section_id' => $request->section_id,
+                'subject_id' =>  $request->subject_id,
+                'created_at' => date("Y-m-d H:i:s")
+            ];
+            $daily_report_remarks = $Connection->table('daily_report_remarks')->where([
+                ['class_id', '=', $request->class_id],
+                ['section_id', '=', $request->section_id],
+                ['subject_id', '=', $request->subject_id]
+            ])->first();
+            if (isset($daily_report_remarks->id)) {
+                $Connection->table('daily_report_remarks')->where('id', $daily_report_remarks->id)->update([
+                    "student_id" => $request->student_id,
+                    'student_remarks' => $request->student_remarks,
+                    'class_id' => $request->class_id,
+                    'section_id' => $request->section_id,
+                    'subject_id' =>  $request->subject_id,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+            } else {
+                $Connection->table('daily_report_remarks')->insert($arrayInsert);
+            }
+            return $this->successResponse([], 'Remarks added successfuly.');
+        }
+    }
     // get widget details
     function getClassroomWidget(Request $request)
     {
@@ -5149,7 +5192,7 @@ class ApiController extends BaseController
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
             $success = $Connection->table('calendors as cl')
-                ->select('cl.id', 'cl.class_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.end', 's.name as section_name', 'c.name as class_name', 'cc.name as className', 'sb.name as subject_name', 'sb.name as title', 'st.name as teacher_name', 'dr.report')
+                ->select('cl.id', 'cl.class_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as className', 'sb.name as subject_name', 'sb.name as title', 'st.name as teacher_name', 'dr.report')
                 ->join('classes as c', 'cl.class_id', '=', 'c.id')
                 ->join('sections as s', 'cl.section_id', '=', 's.id')
                 ->join('staffs as st', 'cl.teacher_id', '=', 'st.id')
@@ -5160,10 +5203,48 @@ class ApiController extends BaseController
                         ->on(DB::raw('date(cl.end)'), '=', 'dr.date');
                 })
                 ->join('subjects as sb', 'cl.subject_id', '=', 'sb.id')
-                ->join('calendor_colrs as cc', 'cl.calendor_color_id', '=', 'cc.id')
                 ->where('cl.teacher_id', $request->teacher_id)
                 ->get();
             return $this->successResponse($success, 'calendor data get successfully');
+        }
+    }
+    // getTimetableCalendor
+    public function getTimetableCalendorStud(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'student_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+
+            $success = $Connection->table('students as stud')
+                ->select('cl.id', 'cl.class_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as className', 'sb.name as subject_name', 'sb.name as title', 'st.name as teacher_name','drr.student_remarks')
+                ->join('enrolls as en', 'en.student_id', '=', 'stud.id')
+                ->join('classes as c', 'en.class_id', '=', 'c.id')
+                ->join('sections as s', 'en.section_id', '=', 's.id')
+                ->leftJoin('subject_assigns as sa', function ($join) {
+                    $join->on('sa.class_id', '=', 'en.class_id')
+                        ->on('sa.section_id', '=', 'en.section_id');
+                })
+                ->leftJoin('calendors as cl', function ($join) {
+                    $join->on('cl.class_id', '=', 'sa.class_id')
+                        ->on('cl.section_id', '=', 'sa.section_id')
+                        ->on('cl.subject_id', '=', 'sa.subject_id');
+                })
+                ->join('subjects as sb', 'sa.subject_id', '=', 'sb.id')
+                ->join('staffs as st', 'sa.teacher_id', '=', 'st.id')
+                ->leftJoin('daily_report_remarks as drr', function ($join) {
+                    $join->on('cl.class_id', '=', 'drr.class_id')
+                        ->on('cl.section_id', '=', 'drr.section_id')
+                        ->on('cl.subject_id', '=', 'drr.subject_id');
+                })
+                ->where('stud.id', $request->student_id)
+                ->get();
+            return $this->successResponse($success, 'student calendor data get successfully');
         }
     }
     // addCalendorTimetable
@@ -5181,36 +5262,30 @@ class ApiController extends BaseController
             if (isset($request->day)) {
                 if ($request->day == "monday") {
                     $day = 1;
-                    $colorCode = 1;
                 }
                 if ($request->day == "tuesday") {
                     $day = 2;
-                    $colorCode = 2;
                 }
                 if ($request->day == "wednesday") {
                     $day = 3;
-                    $colorCode = 3;
                 }
                 if ($request->day == "thursday") {
                     $day = 4;
-                    $colorCode = 4;
                 }
                 if ($request->day == "friday") {
                     $day = 5;
-                    $colorCode = 5;
                 }
                 if ($request->day == "saturday") {
                     $day = 6;
-                    $colorCode = 6;
                 }
                 if (isset($day)) {
-                    $this->addTimetableCalendor($request, $startDate, $endDate, $day, $colorCode,$row);
+                    $this->addTimetableCalendor($request, $startDate, $endDate, $day, $row);
                 }
             }
         }
     }
     // addTimetableCalendor
-    function addTimetableCalendor($request, $startDate, $endDate, $day, $colorCode,$row)
+    function addTimetableCalendor($request, $startDate, $endDate, $day, $row)
     {
         // create new connection
         $Connection = $this->createNewConnection($request->branch_id);
@@ -5227,7 +5302,6 @@ class ApiController extends BaseController
                     "teacher_id" => $row['teacher'],
                     "start" => $start,
                     "end" => $end,
-                    "calendor_color_id" => $colorCode,
                     'created_at' => date("Y-m-d H:i:s")
                 ];
                 $calendors = $Connection->table('calendors')->where([

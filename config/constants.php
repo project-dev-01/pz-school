@@ -159,6 +159,8 @@ return [
         'get_classroom_widget_data' => $url.'/get_classroom_widget_data',
         'get_testresult_exams' => $url.'/get_testresult_exams',
         'get_testresult_marks_subject_vs' => $url.'/get_testresult_marks_subject_vs',
+        'add_daily_report_by_student' => $url.'/add_daily_report_by_student',
+        
         // get attendance list
         'get_attendance_list' => $url.'/get_attendance_list',
         'get_child_subjects' => $url.'/get_child_subjects',
@@ -178,6 +180,7 @@ return [
          'homework_evaluate' => $url.'/homework/evaluate',
          // calendor timetable show
          'get_timetable_calendor' => $url.'/get_timetable_calendor',
+         'get_timetable_calendor_student' => $url.'/get_timetable_calendor_student',
          
 
          // exam term url

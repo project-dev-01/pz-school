@@ -18,6 +18,7 @@ class CreateSubjectsTable extends Migration
             $table->string('name');
             $table->string('subject_code')->nullable();
             $table->string('subject_type')->nullable();
+            $table->string('subject_color_calendor')->nullable();
             $table->string('subject_author')->nullable();
             $table->timestamps();
         });

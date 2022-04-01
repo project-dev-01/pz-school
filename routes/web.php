@@ -799,6 +799,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
     // PARENT CONTROLLER END
     Route::group(['prefix' => 'student', 'middleware' => ['isStudent']], function () {
         Route::get('/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
+        Route::post('add_daily_report_remarks', [StudentController::class, 'addDailyReportRemarks'])->name('student.classroom.add_daily_report_remarks');
         // Homework routes
         Route::get('homework/homeworklist', [StudentController::class, 'homeworklist'])->name('student.homework');
         Route::post('homework/submit', [StudentController::class, 'submitHomework'])->name('student.homework.submit');

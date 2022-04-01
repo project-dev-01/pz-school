@@ -1,30 +1,7 @@
 ! function (l) {
     "use strict";
-    // go to classroom
-    $("#goToClassRoom").on("click", function () {
 
-        var ttclassID = $("#ttclassID").val();
-        var ttSectionID = $("#ttSectionID").val();
-        var ttSubjectID = $("#ttSubjectID").val();
-        var ttDate = $("#ttDate").val();
-        var sectionName = $("#section-name").text();
-        var subjectName = $("#subject-name").text();
-
-        sessionStorage.removeItem("classroom_details");
-        var classDetails = new Object();
-        classDetails.class_id = ttclassID;
-        classDetails.section_id = ttSectionID;
-        classDetails.section_name = sectionName;
-        classDetails.subject_id = ttSubjectID;
-        classDetails.subject_name = subjectName;
-        classDetails.date = ttDate;
-        var classroom_details = [];
-        classroom_details.push(classDetails);
-        sessionStorage.setItem('classroom_details', JSON.stringify(classroom_details));
-        window.location = redirectionURL;
-    });
-    //
-    $('#addDailyReport').on('submit', function (e) {
+    $('#addStudentReport').on('submit', function (e) {
         e.preventDefault();
         var form = this;
         $.ajax({
@@ -37,6 +14,7 @@
             success: function (response) {
                 if (response.code == 200) {
                     toastr.success(response.message);
+                    $("#student-modal").modal("hide");
                 } else {
                     toastr.error(response.message);
                 }
@@ -46,7 +24,7 @@
     });
 
     function e() {
-        this.$body = l("body"), this.$modal = l("#teacher-modal"), this.$calendar = l("#teacher_calendor"), this.$formEvent = l("#addDailyReport"), this.$btnNewEvent = l("#btn-new-event"), this.$btnDeleteEvent = l("#btn-delete-event"), this.$btnSaveEvent = l("#btn-save-event"), this.$modalTitle = l("#modal-title"), this.$calendarObj = null, this.$selectedEvent = null, this.$newEventData = null
+        this.$body = l("body"), this.$modal = l("#student-modal"), this.$calendar = l("#student_calendor"), this.$formEvent = l("#addStudentReport"), this.$btnNewEvent = l("#btn-new-event"), this.$btnDeleteEvent = l("#btn-delete-event"), this.$btnSaveEvent = l("#btn-save-event"), this.$modalTitle = l("#modal-title"), this.$calendarObj = null, this.$selectedEvent = null, this.$newEventData = null
     }
     e.prototype.onEventClick = function (e) {
 
@@ -65,7 +43,7 @@
             l("#ttclassID").val(e.event.extendedProps.class_id),
             l("#ttSectionID").val(e.event.extendedProps.section_id),
             l("#ttSubjectID").val(e.event.extendedProps.subject_id),
-            l("#calNotes").val(e.event.extendedProps.report),
+            l("#calNotes").val(e.event.extendedProps.student_remarks),
             l("#ttDate").val(e.event.end),
             l("#setCurDate").val(setCurDate)
 
@@ -103,7 +81,7 @@
                 },
                 // get events details start
                 eventSources: [{
-                    url: getTimetableCalendor + '?token=' + token + '&branch_id=' + branchID + '&teacher_id=' + ref_user_id,
+                    url: getTimetableCalendorStudent + '?token=' + token + '&branch_id=' + branchID + '&student_id=' + ref_user_id,
                     type: 'get',
                     success: function (response) {
                         t = response.data;

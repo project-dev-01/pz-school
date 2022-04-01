@@ -24,7 +24,6 @@ class CreateCalendorsTable extends Migration
             $table->string('sem_id')->nullable();
             $table->dateTime('start')->nullable();
             $table->dateTime('end')->nullable();
-            $table->integer('calendor_color_id')->nullable();
             $table->timestamps();
         });
     }

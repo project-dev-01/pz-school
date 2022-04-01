@@ -246,13 +246,17 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('get_daily_report_remarks',[ApiController::class,'getDailyReportRemarks']);
     Route::post('add_daily_report_remarks',[ApiController::class,'addDailyReportRemarks']);
     Route::post('get_classroom_widget_data',[ApiController::class,'getClassroomWidget']);
+    Route::post('add_daily_report_by_student',[ApiController::class,'addDailyReportByStudent']);
+    
     // get studenet attenedance list
     Route::post('get_attendance_list',[ApiController::class,'getAttendanceList']);
     Route::post('get_child_subjects',[ApiController::class,'getChildSubjects']);
     Route::post('get_attendance_list_teacher',[ApiController::class,'getAttendanceListTeacher']);
     Route::post('get_reasons_by_student',[ApiController::class,'getReasonsByStudent']);
-    // get calendor data
+    // get calendor data by teacher
     Route::get('get_timetable_calendor',[ApiController::class,'getTimetableCalendor']);
+    Route::get('get_timetable_calendor_student',[ApiController::class,'getTimetableCalendorStud']);
+    
     // add timetable schedule
     Route::post('add_calendor_timetable',[ApiController::class,'addCalendorTimetable']);
     
