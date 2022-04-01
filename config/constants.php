@@ -208,12 +208,11 @@ return [
          'exam_timetable_add' => $url.'/exam_timetable/add',
          'exam_timetable_list' => $url.'/exam_timetable/list',
          'exam_timetable_get' => $url.'/exam_timetable/get',
-         
-         
         
                  // get_marks_vs_grade
         'get_marks_vs_grade' => $url.'/get_marks_vs_grade',
-        'add_student_marks'=>$url.'/add_student_marks'
+        'add_student_marks'=>$url.'/add_student_marks',
+        'get_subject_division'=>$url.'/get_subject_division'
     ]
 
 ];

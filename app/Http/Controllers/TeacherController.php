@@ -685,17 +685,15 @@ class TeacherController extends Controller
      
          return $response;
      }
-     public function subjectdivision(Request $request)
+     public function getsubjectdivision(Request $request)
      {
         $data = [          
             "subjectmarks" => $request->subjectmarks,        
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
-            "subject_id" => $request->subject_id,
-            "exam_id" => $request->exam_id            
+            "subject_id" => $request->subject_id          
         ];    
-        $response = Helper::PostMethod(config('constants.api.add_student_marks'), $data);    
+        $response = Helper::PostMethod(config('constants.api.get_subject_division'), $data);    
         return $response;
-     }
-    
+     }    
 }

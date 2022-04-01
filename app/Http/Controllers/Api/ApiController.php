@@ -5944,8 +5944,6 @@ class ApiController extends BaseController
         } else {
             $exam_id = $request->exam_id;
             $subject_id = $request->subject_id;
-            $class_id = $request->class_id;
-            $section_id = $request->section_id;
             $Connection = $this->createNewConnection($request->branch_id);
             $getSubjectMarks = $Connection->table('enrolls as en')
                 ->select(
@@ -5954,19 +5952,14 @@ class ApiController extends BaseController
                     'st.first_name',
                     'st.last_name',
                     'st.register_no',
-                    'sa.id as att_id',
+                    'sa.id as att_id',          
                     'sa.score',
                     'sa.grade',
                     'sa.ranking',
                     'sa.memo',
-                    // 'sd.subject_division'
+                //    'sd.subject_division'
                 )
                 ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
-                // ->leftJoin('student_subjectdivision as sd', function ($q) use ($section_id, $subject_id) {
-                //     $q->on('sd.classid', '=', 'en.class_id')
-                //         ->on('sd.sectionid', '=', DB::raw("'$section_id'")) //second join condition                           
-                //         ->on('sd.subjectid', '=', DB::raw("'$subject_id'")); //need to add subject id also later                           
-                // })
                 ->leftJoin('student_marks as sa', function ($q) use ($exam_id, $subject_id) {
                     $q->on('sa.student_id', '=', 'st.id')
                         ->on('sa.exam_id', '=', DB::raw("'$exam_id'")) //second join condition                           
@@ -5976,8 +5969,8 @@ class ApiController extends BaseController
                     ['en.class_id', '=', $request->class_id],
                     ['en.section_id', '=', $request->section_id]
                 ])
-                ->orderBy('sa.score', 'desc')
-                ->get();
+                ->orderBy('sa.score','desc')              
+                ->get();           
             return $this->successResponse($getSubjectMarks, 'Subject vs marks record fetch successfully');
         }
     }
@@ -6001,8 +5994,8 @@ class ApiController extends BaseController
             // ->where([
             //     ['min_mark', '>=', $marks_range]             
             // ])
-            $success = $Connection->table('grade_marks')
-                ->select('grade')->where('min_mark', '<=', $marks_range)->where('max_mark', '>=', $marks_range)->get();
+            $success =$Connection->table('grade_marks')
+            ->select('grade')->where('min_mark','<=',$marks_range)->where('max_mark','>=',$marks_range)->get();
 
 
             return $this->successResponse($success, 'marks vs grade record fetch successfully');
@@ -6019,7 +6012,7 @@ class ApiController extends BaseController
             'subjectmarks' => 'required',
             'exam_id' => 'required'
         ]);
-
+ 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
@@ -6030,10 +6023,10 @@ class ApiController extends BaseController
             $section_id = $request->section_id;
             $subject_id = $request->subject_id;
             $exam_id = $request->exam_id;
-            $data = [];
+            $data = [];     
 
             foreach ($subjectmarks as $key => $value) {
-
+           
                 $student_id = (isset($value['student_id']) ? $value['student_id'] : "");
                 $score = (isset($value['score']) ? $value['score'] : "");
                 $grade = (isset($value['grade']) ? $value['grade'] : "");
@@ -6085,4 +6078,62 @@ class ApiController extends BaseController
             return $this->successResponse([], 'Student Marks added successfuly.');
         }
     }
+    public function getsubjectdivision(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required'
+        ]);    
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            // get attendance details query
+            $subject_id = $request->subject_id;
+            $class_id = $request->class_id;
+            $section_id = $request->section_id;
+            $subject_id = $request->subject_id;
+            $Connection = $this->createNewConnection($request->branch_id);
+       
+            $studentdetails = $Connection->table('enrolls as en')
+                ->select(
+                    'en.student_id',
+                    'en.roll',
+                    'st.first_name',
+                    'st.last_name',
+                    'st.register_no'
+                )
+                ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
+                ->where([
+                    ['en.class_id', '=', $request->class_id],
+                    ['en.section_id', '=', $request->section_id]
+                ])
+                // ->groupBy('en.student_id')
+                ->get();
+                $subjectdivision = $Connection->table('student_subjectdivision')
+                ->select(
+                    'class_id',
+                    'section_id',
+                    'subject_id',
+                    'subject_division',
+                    'credit_point'
+                )        
+                ->where([
+                    ['class_id', '=', $request->class_id],
+                    ['section_id', '=', $request->section_id],
+                    ['subject_id', '=', $request->subject_id]
+                ])
+                // ->groupBy('en.student_id')
+                ->get();
+                $data=[
+                    "studentdetails" =>$studentdetails,
+                    "subjectdivision" =>$subjectdivision
+                ];
+            return $this->successResponse($data, 'Subject division record fetch successfully');
+        }
+    }
+    
 }

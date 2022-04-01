@@ -95,12 +95,12 @@
                     </li>
                 </ul><br>
                 <form id="addstudentmarks" method="post" action="{{ route('teacher.subjectmarks.add') }}" autocomplete="off">
-                 @csrf                  
+                    @csrf
                     <div class="row subjectmarks">
-                    <input type="hidden" name="class_id" id="listModeClassID">
-                    <input type="hidden" name="section_id" id="listModeSectionID">
-                    <input type="hidden" name="subject_id" id="listModeSubjectID">
-                    <input type="hidden" name="exam_id" id="listModeexamID">
+                        <input type="hidden" name="class_id" id="listModeClassID">
+                        <input type="hidden" name="section_id" id="listModeSectionID">
+                        <input type="hidden" name="subject_id" id="listModeSubjectID">
+                        <input type="hidden" name="exam_id" id="listModeexamID">
                         <div class="col-md-12">
                             <div class="card-box">
                                 <!-- <table id="stdmarks" data-toggle="table" data-page-size="7" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable "> -->
@@ -121,10 +121,10 @@
                                 </table>
                                 <br>
                                 <div class="form-group text-right m-b-0">
-  
+
                                     <button class="btn btn-primary-bl waves-effect waves-light" id="saveClassRoomAttendance" type="submit">
-                                                        Save
-                                                    </button>
+                                        Save
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -170,7 +170,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card-body">
-                            <table data-toggle="table" data-page-size="7" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
+                            <!-- <table id="tblsubjectdiv" data-toggle="table" data-page-size="7" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -203,12 +203,18 @@
                                     </tr>                               
                                 </tbody>
 
+                            </table> -->
+                            <table id="tblsubjectdiv" method="post" action="{{ route('teacher.subjectdivision.add') }}" autocomplete="off">
+                                @csrf
+                                <div id="subjectdivTableAppend">
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="clearfix mt-4">
+                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Save</button>
+                                    </div>
+                                </div>
                             </table>
-                            <div class="form-group text-right m-b-0">
-                                <button class="btn btn-primary-bl waves-effect waves-light" id="branch-filter" type="button">
-                                    Save
-                                </button>
-                            </div>
+
                         </div> <!-- end table-responsive-->
                     </div>
                     <!-- <div class="row subjectbydivisionhide">
@@ -410,6 +416,7 @@
     var examsList = "{{ config('constants.api.testresult_examslist') }}";
     var getSubjectMarks = "{{ config('constants.api.get_testresult_marks_subject_vs') }}";
     var getMarks_vs_grade = "{{ config('constants.api.get_marks_vs_grade') }}";
+    var getsubjectdivision = "{{ config('constants.api.get_subject_division') }}";
     // default image test
     var defaultImg = "{{ asset('images/users/default.jpg') }}";
 </script>
