@@ -2308,6 +2308,8 @@ class ApiController extends BaseController
             foreach ($diff as $del) {
 
                 $delete =  $staffConn->table('timetable_class')->where('id', $del)->delete();
+                // delete calendor data
+                $staffConn->table('calendors')->where('time_table_id', $del)->delete();
             }
 
             // return $timetable;
@@ -2334,9 +2336,8 @@ class ApiController extends BaseController
                     $break = 0;
                     $subject_id = $table['subject'];
                     $teacher_id = $table['teacher'];
-                    $this->addCalendorTimetable($request, $table, $getObjRow);
                 }
-
+                $insertOrUpdateID = 0;
                 if (isset($table['id'])) {
 
                     $query = $staffConn->table('timetable_class')->where('id', $table['id'])->update([
@@ -2353,8 +2354,9 @@ class ApiController extends BaseController
                         'day' => $request['day'],
                         'updated_at' => date("Y-m-d H:i:s")
                     ]);
+                    $insertOrUpdateID = $table['id'];
                 } else {
-                    $query = $staffConn->table('timetable_class')->insert([
+                    $query = $staffConn->table('timetable_class')->insertGetId([
                         'class_id' => $request['class_id'],
                         'section_id' => $request['section_id'],
                         'break' => $break,
@@ -2368,9 +2370,10 @@ class ApiController extends BaseController
                         'day' => $request['day'],
                         'created_at' => date("Y-m-d H:i:s")
                     ]);
+                    $insertOrUpdateID = $query;
                 }
                 // return $break;
-
+                $this->addCalendorTimetable($request, $table, $getObjRow, $insertOrUpdateID);
             }
             $success = [];
             if (!$query) {
@@ -2528,7 +2531,11 @@ class ApiController extends BaseController
             $staffConn = $this->createNewConnection($request->branch_id);
 
             $timetable = $request->timetable;
-
+            // calendor data populate
+            $getObjRow = $staffConn->table('semester as s')
+                ->select('start_date', 'end_date')
+                ->where('id', $request->semester_id)
+                ->first();
             $oldest = $staffConn->table('timetable_class')
                 ->where([
                     ['timetable_class.day', $request->day],
@@ -2544,6 +2551,8 @@ class ApiController extends BaseController
             foreach ($diff as $del) {
                 // dd($del);
                 $delete =  $staffConn->table('timetable_class')->where('id', $del)->delete();
+                // delete calendor data
+                $staffConn->table('calendors')->where('time_table_id', $del)->delete();
             }
 
             foreach ($timetable as $table) {
@@ -2569,7 +2578,7 @@ class ApiController extends BaseController
                     $subject_id = $table['subject'];
                     $teacher_id = $table['teacher'];
                 }
-
+                $insertOrUpdateID =  $table['id'];
                 $query = $staffConn->table('timetable_class')->where('id', $table['id'])->update([
                     'class_id' => $request['class_id'],
                     'section_id' => $request['section_id'],
@@ -2584,6 +2593,8 @@ class ApiController extends BaseController
                     'day' => $request['day'],
                     'updated_at' => date("Y-m-d H:i:s")
                 ]);
+                // update calendor
+                $this->addCalendorTimetable($request, $table, $getObjRow, $insertOrUpdateID);
             }
 
             $success = [];
@@ -5222,7 +5233,7 @@ class ApiController extends BaseController
             $Connection = $this->createNewConnection($request->branch_id);
 
             $success = $Connection->table('students as stud')
-                ->select('cl.id', 'cl.class_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as className', 'sb.name as subject_name', 'sb.name as title', 'st.name as teacher_name','drr.student_remarks')
+                ->select('cl.id', 'cl.class_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as className', 'sb.name as subject_name', 'sb.name as title', 'st.name as teacher_name', 'drr.student_remarks')
                 ->join('enrolls as en', 'en.student_id', '=', 'stud.id')
                 ->join('classes as c', 'en.class_id', '=', 'c.id')
                 ->join('sections as s', 'en.section_id', '=', 's.id')
@@ -5249,7 +5260,7 @@ class ApiController extends BaseController
     }
     // addCalendorTimetable
     // function addCalendorTimetable(Request $request)
-    function addCalendorTimetable($request, $row, $getObjRow)
+    function addCalendorTimetable($request, $row, $getObjRow, $insertOrUpdateID)
     {
         if ($getObjRow) {
             $start = $getObjRow->start_date;
@@ -5279,13 +5290,13 @@ class ApiController extends BaseController
                     $day = 6;
                 }
                 if (isset($day)) {
-                    $this->addTimetableCalendor($request, $startDate, $endDate, $day, $row);
+                    $this->addTimetableCalendor($request, $startDate, $endDate, $day, $row, $insertOrUpdateID);
                 }
             }
         }
     }
     // addTimetableCalendor
-    function addTimetableCalendor($request, $startDate, $endDate, $day, $row)
+    function addTimetableCalendor($request, $startDate, $endDate, $day, $row, $insertOrUpdateID)
     {
         // create new connection
         $Connection = $this->createNewConnection($request->branch_id);
@@ -5302,16 +5313,22 @@ class ApiController extends BaseController
                     "teacher_id" => $row['teacher'],
                     "start" => $start,
                     "end" => $end,
+                    "time_table_id" => $insertOrUpdateID,
                     'created_at' => date("Y-m-d H:i:s")
                 ];
+                // return $arrayInsert;
+
                 $calendors = $Connection->table('calendors')->where([
                     ['class_id', '=', $request['class_id']],
                     ['section_id', '=', $request['section_id']],
                     ['subject_id', '=', $row['subject']],
+                    ['teacher_id', '=', $row['teacher']],
                     ['sem_id', '=', $request['semester_id']],
+                    ['time_table_id', '=', $insertOrUpdateID],
                     [DB::raw('date(start)'), '=', $startDate->format('Y-m-d')],
                 ])->first();
                 if (isset($calendors->id)) {
+                    // $Connection->table('calendors')->where('id', $calendors->id)->delete();
                     $Connection->table('calendors')->where('id', $calendors->id)->update([
                         "subject_id" => $row['subject'],
                         "teacher_id" => $row['teacher'],
@@ -5952,12 +5969,12 @@ class ApiController extends BaseController
                     'st.first_name',
                     'st.last_name',
                     'st.register_no',
-                    'sa.id as att_id',          
+                    'sa.id as att_id',
                     'sa.score',
                     'sa.grade',
                     'sa.ranking',
                     'sa.memo',
-                //    'sd.subject_division'
+                    //    'sd.subject_division'
                 )
                 ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
                 ->leftJoin('student_marks as sa', function ($q) use ($exam_id, $subject_id) {
@@ -5969,8 +5986,8 @@ class ApiController extends BaseController
                     ['en.class_id', '=', $request->class_id],
                     ['en.section_id', '=', $request->section_id]
                 ])
-                ->orderBy('sa.score','desc')              
-                ->get();           
+                ->orderBy('sa.score', 'desc')
+                ->get();
             return $this->successResponse($getSubjectMarks, 'Subject vs marks record fetch successfully');
         }
     }
@@ -5994,8 +6011,8 @@ class ApiController extends BaseController
             // ->where([
             //     ['min_mark', '>=', $marks_range]             
             // ])
-            $success =$Connection->table('grade_marks')
-            ->select('grade')->where('min_mark','<=',$marks_range)->where('max_mark','>=',$marks_range)->get();
+            $success = $Connection->table('grade_marks')
+                ->select('grade')->where('min_mark', '<=', $marks_range)->where('max_mark', '>=', $marks_range)->get();
 
 
             return $this->successResponse($success, 'marks vs grade record fetch successfully');
@@ -6012,7 +6029,7 @@ class ApiController extends BaseController
             'subjectmarks' => 'required',
             'exam_id' => 'required'
         ]);
- 
+
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
@@ -6023,10 +6040,10 @@ class ApiController extends BaseController
             $section_id = $request->section_id;
             $subject_id = $request->subject_id;
             $exam_id = $request->exam_id;
-            $data = [];     
+            $data = [];
 
             foreach ($subjectmarks as $key => $value) {
-           
+
                 $student_id = (isset($value['student_id']) ? $value['student_id'] : "");
                 $score = (isset($value['score']) ? $value['score'] : "");
                 $grade = (isset($value['grade']) ? $value['grade'] : "");
@@ -6086,7 +6103,7 @@ class ApiController extends BaseController
             'class_id' => 'required',
             'section_id' => 'required',
             'subject_id' => 'required'
-        ]);    
+        ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
@@ -6097,7 +6114,7 @@ class ApiController extends BaseController
             $section_id = $request->section_id;
             $subject_id = $request->subject_id;
             $Connection = $this->createNewConnection($request->branch_id);
-       
+
             $studentdetails = $Connection->table('enrolls as en')
                 ->select(
                     'en.student_id',
@@ -6113,14 +6130,14 @@ class ApiController extends BaseController
                 ])
                 // ->groupBy('en.student_id')
                 ->get();
-                $subjectdivision = $Connection->table('student_subjectdivision')
+            $subjectdivision = $Connection->table('student_subjectdivision')
                 ->select(
                     'class_id',
                     'section_id',
                     'subject_id',
                     'subject_division',
                     'credit_point'
-                )        
+                )
                 ->where([
                     ['class_id', '=', $request->class_id],
                     ['section_id', '=', $request->section_id],
@@ -6128,15 +6145,15 @@ class ApiController extends BaseController
                 ])
                 // ->groupBy('en.student_id')
                 ->get();
-                $data=[
-                    "studentdetails" =>$studentdetails,
-                    "subjectdivision" =>$subjectdivision
-                ];
+            $data = [
+                "studentdetails" => $studentdetails,
+                "subjectdivision" => $subjectdivision
+            ];
             return $this->successResponse($data, 'Subject division record fetch successfully');
         }
     }
 
-    
+
     // addGrade
     public function addGrade(Request $request)
     {
@@ -6150,7 +6167,7 @@ class ApiController extends BaseController
             'token' => 'required',
         ]);
 
-       
+
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -6336,7 +6353,7 @@ class ApiController extends BaseController
             'route_id' => 'required',
         ]);
 
-       
+
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
@@ -6348,7 +6365,7 @@ class ApiController extends BaseController
                 ->join('transport_vehicle', 'transport_assign.vehicle_id', '=', 'transport_vehicle.id')
                 ->where('transport_assign.route_id', $route_id)
                 ->get();
-                // return $route;
+            // return $route;
             return $this->successResponse($route, 'Vehicle record fetch successfully');
         }
     }
@@ -6381,7 +6398,7 @@ class ApiController extends BaseController
     // add Admission
     public function addAdmission(Request $request)
     {
-        
+
         $validator = \Validator::make($request->all(), [
             'register_no' => 'required',
             'roll_no' => 'required',
@@ -6416,7 +6433,7 @@ class ApiController extends BaseController
 
             'branch_id' => 'required',
             'token' => 'required',
-            
+
             'parent_name' => 'required',
             'email' => 'required',
             'relation' => 'required',
@@ -6439,41 +6456,41 @@ class ApiController extends BaseController
         $previous['remarks'] = $request->remarks;
 
 
-        
-       $previous_details = json_encode($previous);
 
-      
+        $previous_details = json_encode($previous);
+
+
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
-                // insert data
-                // return $request['parent_email'];
+            // insert data
+            // return $request['parent_email'];
             // if ($Connection->table('parent')->where('email', '=', $request->parent_email)->count() > 0) {
             //     return $this->send422Error('Parent Email Already Exist', ['error' => 'Parent Email Already Exist']);
             // } else {
-                
-                $parentId = $conn->table('parent')->insertGetId([
-                    'name' => $request->parent_name,
-                    'relation' => $request->relation,
-                    'father_name' => $request->father_name,
-                    'mother_name' => $request->mother_name,
-                    'occupation' => $request->occupation,
-                    'income' => $request->income,
-                    'education' => $request->education,
-                    'city' => $request->parent_city,
-                    'state' => $request->parent_state,
-                    'mobile_no' => $request->parent_mobile_no,
-                    'address' => $request->address,
-                    'email' => $request->parent_email,
-                    'active' => "1",
-                ]);
 
-                // return $parentId;
+            $parentId = $conn->table('parent')->insertGetId([
+                'name' => $request->parent_name,
+                'relation' => $request->relation,
+                'father_name' => $request->father_name,
+                'mother_name' => $request->mother_name,
+                'occupation' => $request->occupation,
+                'income' => $request->income,
+                'education' => $request->education,
+                'city' => $request->parent_city,
+                'state' => $request->parent_state,
+                'mobile_no' => $request->parent_mobile_no,
+                'address' => $request->address,
+                'email' => $request->parent_email,
+                'active' => "1",
+            ]);
+
+            // return $parentId;
             // }
-            
+
 
             if (!$parentId) {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong add Parent']);
@@ -6488,54 +6505,52 @@ class ApiController extends BaseController
                 $userParent->email = $request->parent_email;
                 $userParent->password = bcrypt($request->parent_password);
                 $userParent->save();
-
-                
             }
 
             // if ($Connection->table('students')->where('email', '=', $request->email)->count() > 0) {
             //     return $this->send422Error('Student Email Already Exist', ['error' => 'Student Email Already Exist']);
             // } else {
 
-                $studentId = $conn->table('students')->insertGetId([
-                    'parent_id' => $parentId,
-                    'register_no' => $request->register_no,
-                    'roll_no' => $request->roll_no,
-                    'admission_date' => $request->admission_date,
-                    'category_id' => $request->category_id,
-                    'first_name' => $request->first_name,
-                    'last_name' => $request->last_name,
-                    'gender' => $request->gender,
-                    'blood_group' => $request->blood_group,
-                    'birthday' => $request->birthday,
-                    'mother_tongue' => $request->mother_tongue,
-                    'religion' => $request->religion,
-                    'caste' => $request->caste,
-                    'mobile_no' => $request->mobile_no,
-                    'city' => $request->city,
-                    'state' => $request->state,
-                    'current_address' => $request->current_address,
-                    'permanent_address' => $request->permanent_address,
-                    'photo' => NULL,
-                    'route_id' => $request->route_id,
-                    'vehicle_id' => $request->vehicle_id,
-                    'hostel_id' => $request->hostel_id,
-                    'room_id' => $request->room_id,
-                    'previous_details' => $previous_details,
-                    'created_at' => date("Y-m-d H:i:s")
-                ]);
-               
-                $enroll = $conn->table('enrolls')->insert([
-                    'student_id' => $studentId,
-                    'class_id' => $request->class_id,
-                    'section_id' => $request->section_id,
-                    'session_id' => $request->session_id,
-                    'roll' => $request->roll_no,
-                ]);
+            $studentId = $conn->table('students')->insertGetId([
+                'parent_id' => $parentId,
+                'register_no' => $request->register_no,
+                'roll_no' => $request->roll_no,
+                'admission_date' => $request->admission_date,
+                'category_id' => $request->category_id,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'gender' => $request->gender,
+                'blood_group' => $request->blood_group,
+                'birthday' => $request->birthday,
+                'mother_tongue' => $request->mother_tongue,
+                'religion' => $request->religion,
+                'caste' => $request->caste,
+                'mobile_no' => $request->mobile_no,
+                'city' => $request->city,
+                'state' => $request->state,
+                'current_address' => $request->current_address,
+                'permanent_address' => $request->permanent_address,
+                'photo' => NULL,
+                'route_id' => $request->route_id,
+                'vehicle_id' => $request->vehicle_id,
+                'hostel_id' => $request->hostel_id,
+                'room_id' => $request->room_id,
+                'previous_details' => $previous_details,
+                'created_at' => date("Y-m-d H:i:s")
+            ]);
 
-                
-                $studentName = $request->first_name.' '.$request->last_name;
+            $enroll = $conn->table('enrolls')->insert([
+                'student_id' => $studentId,
+                'class_id' => $request->class_id,
+                'section_id' => $request->section_id,
+                'session_id' => $request->session_id,
+                'roll' => $request->roll_no,
+            ]);
+
+
+            $studentName = $request->first_name . ' ' . $request->last_name;
             // }
-           
+
             // return $request;
             $success = [];
 
@@ -6559,12 +6574,7 @@ class ApiController extends BaseController
                 } else {
                     return $this->successResponse($success, 'Student has been successfully saved');
                 }
-                
             }
-            
         }
     }
-
-    
-    
 }

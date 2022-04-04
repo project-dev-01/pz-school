@@ -146,12 +146,12 @@ $(function () {
     //
     $('#branch-form').on('submit', function (e) {
         e.preventDefault();
-        $('#saveBranch').prop('disabled', true);
+        // $('#saveBranch').prop('disabled', true);
         var branchCheck = $("#branch-form").valid();
         if (branchCheck === true) {
             var form = this;
             $.ajax({
-                url: $(form).attr('action'),
+                url: $(form).attr('action'),    
                 method: $(form).attr('method'),
                 data: new FormData(form),
                 processData: false,
@@ -161,12 +161,16 @@ $(function () {
                     console.log("------")
                     console.log(data)
                     if (data.code == 200) {
+                        // $('#saveBranch').prop('disabled', false);
+
                         // $('#branch-table').DataTable().ajax.reload(null, false);
                         $('#branch-form')[0].reset();
                         toastr.success(data.message);
                         // $('[href="#branch-list-tab"]').click();
                         window.location.href = branchShow;
                     } else {
+                        // $('#saveBranch').prop('disabled', false);
+
                         toastr.error(data.message);
                     }
                 }
