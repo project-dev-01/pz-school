@@ -5932,17 +5932,26 @@ class ApiController extends BaseController
     {
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
-            'branch_id' => 'required'
+            'branch_id' => 'required',
+            'class_id'=> 'required',
+            'section_id'=> 'required',
+            'subject_id'=> 'required',
+            'today'=> 'required'
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
-            $getTeachersClassName = $Connection->table('exams')
-                ->select('id', 'names')
-                ->get();
-            return $this->successResponse($getTeachersClassName, 'Exams  list of Name record fetch successfully');
+            $getExamsName = $Connection->table('timetable_exam')
+                ->select('timetable_exam.exam_id as id', 'exam.name as name', 'timetable_exam.exam_date','timetable_exam.marks')
+                ->leftJoin('exam', 'timetable_exam.exam_id', '=', 'exam.id')
+                ->where('exam_date', '<', $request->today)
+                ->where('class_id', '=', $request->class_id)
+                ->where('section_id', '=', $request->section_id)
+                ->where('subject_id', '=', $request->subject_id)
+                ->get();         
+            return $this->successResponse($getExamsName, 'Exams  list of Name record fetch successfully');
         }
     }
     public function subject_vs_marks(Request $request)

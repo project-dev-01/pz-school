@@ -11,7 +11,6 @@ return [
         'cities' => $url.'/get-cities',
         // get roles
         'roles' => $url.'/roles/list',
-
         //get semester
         'semester' => $url.'/semester/list',
         //get session
