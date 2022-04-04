@@ -5974,6 +5974,7 @@ class ApiController extends BaseController
                     'sa.grade',
                     'sa.ranking',
                     'sa.memo',
+                    DB::raw("RANK() OVER(ORDER BY sa.score DESC) as rank_place")
                     //    'sd.subject_division'
                 )
                 ->leftJoin('students as st', 'st.id', '=', 'en.student_id')

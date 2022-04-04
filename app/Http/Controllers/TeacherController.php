@@ -281,10 +281,11 @@ class TeacherController extends Controller
             'teacher_id' => session()->get('ref_user_id')
         ];
         $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
-        $get_exams = Helper::GetMethod(config('constants.api.get_testresult_exams'));           
+        //$get_exams = Helper::GetMethod(config('constants.api.get_testresult_exams'));
+             
         return view('teacher.testresult.index', [
-            'teacher_class' => $response['data'],
-            'get_exams' => $get_exams['data']
+            'teacher_class' => $response['data']
+         //   'get_exams' => $get_exams['data']
         ]);       
     }
     public function chatShow()

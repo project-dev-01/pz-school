@@ -64,11 +64,7 @@
                                         <div class="form-group">
                                             <label for="examnames">Test Name<span class="text-danger">*</span></label>
                                             <select id="examnames" class="form-control" name="exam_id">
-                                                <option value="">Select Test Name</option>
-                                                @forelse ($get_exams as $exams)
-                                                <option value="{{ $exams['id'] }}">{{ $exams['names'] }}</option>
-                                                @empty
-                                                @endforelse
+                                                <option value="">Select Exams</option>
                                             </select>
                                         </div>
                                     </div>
@@ -101,6 +97,8 @@
                         <input type="hidden" name="section_id" id="listModeSectionID">
                         <input type="hidden" name="subject_id" id="listModeSubjectID">
                         <input type="hidden" name="exam_id" id="listModeexamID">
+                        <input type="hidden" name="fullmark" id="fullmark">
+                        <input type="hidden" name="passmark" id="passmark">
                         <div class="col-md-12">
                             <div class="card-box">
                                 <!-- <table id="stdmarks" data-toggle="table" data-page-size="7" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable "> -->
@@ -159,54 +157,20 @@
                     </div>
                 </div>
             </div>
-            <div class="card">
+            <div class="card" id="subjectdivTableAppend">
                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                     <li class="nav-item">
                         <h4 class="nav-link">
                             <span data-feather="book-open" class="icon-dual" id="span-parent"></span>Marks By Subject Division
-                            <h4>
+                        <h4>
                     </li>
                 </ul><br>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card-body">
-                            <!-- <table id="tblsubjectdiv" data-toggle="table" data-page-size="7" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Student Name</th>
-                                        <th>Test A Score(0.2)</th>
-                                        <th>Test B Score(0.2)</th>
-                                        <th>Test C Score(0.25)</th>
-                                        <th>Test D Score(0.35)</th>
-                                        <th>Total Score</th>
-                                        <th>Grade</th>
-                                        <th>Ranking</th>
-                                    </tr>
-
-                                </thead>
-
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td class="table-user">
-                                            <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle">
-                                            <a href="javascript:void(0);" class="text-body font-weight-semibold" data-toggle="modal" data-target=".reportModal">William</a>
-                                        </td>
-                                        <td><input type="text" value="{{ 95*0.2 }}" class="form-control"></td>
-                                        <td><input type="text" value="{{ 95*0.2 }}" class="form-control"></td>
-                                        <td><input type="text" value="{{ 95*0.25 }}" class="form-control"></td>
-                                        <td><input type="text" value="{{ 97*0.35 }}" class="form-control"></td>
-                                        <td>{{ (95*0.2 + 95*0.2 + 95*0.25 + 97*0.35) }}</td>
-                                        <td>S</td>
-                                        <td>1</td>
-                                    </tr>                               
-                                </tbody>
-
-                            </table> -->
+                        <div class="card-body">                           
                             <table id="tblsubjectdiv" method="post" action="{{ route('teacher.subjectdivision.add') }}" autocomplete="off">
                                 @csrf
-                                <div id="subjectdivTableAppend">
+                                <div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="clearfix mt-4">
@@ -214,22 +178,8 @@
                                     </div>
                                 </div>
                             </table>
-
                         </div> <!-- end table-responsive-->
-                    </div>
-                    <!-- <div class="row subjectbydivisionhide">
-                                        <form id="addsubjectdivision" method="post" action="{{ route('teacher.subjectdivision.add') }}" autocomplete="off">
-                                            @csrf
-                                            <div class="col-md-12">
-                                                <div id="subjectdivisionTableAppend"></div>
-                                            </div> 
-                                            <div class="col-md-12">
-                                                <div class="clearfix mt-4">
-                                                    <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Save</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div> -->
+                    </div>                   
                 </div> <!-- end card body-->
             </div> <!-- end card body-->
         </div> <!-- end card -->
@@ -413,10 +363,10 @@
 <script>
     var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
     var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";
-    var examsList = "{{ config('constants.api.testresult_examslist') }}";
+    var examsList = "{{ config('constants.api.get_testresult_exams') }}";
     var getSubjectMarks = "{{ config('constants.api.get_testresult_marks_subject_vs') }}";
     var getMarks_vs_grade = "{{ config('constants.api.get_marks_vs_grade') }}";
-    var getsubjectdivision = "{{ config('constants.api.get_subject_division') }}";
+    var getsubjectdivision = "{{ config('constants.api.get_subject_division') }}";    
     // default image test
     var defaultImg = "{{ asset('images/users/default.jpg') }}";
 </script>
