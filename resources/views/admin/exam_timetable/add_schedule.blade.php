@@ -59,7 +59,7 @@
                                     <select id="exam_id" class="form-control" name="exam_id">
                                         <option value="">Select Exam</option>
                                             @foreach($exam as $exa)
-                                                <option value="{{$exa['id']}}">{{$exa['name']}}</option>
+                                                <option value="{{$exa['id']}}">{{$exa['name']}} ( {{$exa['term_id']}} )</option>
                                             @endforeach
                                     </select>
                                 </div>
@@ -106,11 +106,13 @@
                                                     <th>Starting Time <span class="text-danger">*</span></th>
                                                     <th>Ending Time <span class="text-danger">*</span></th>
                                                     <th>Hall Room <span class="text-danger">*</span></th>
+                                                    <th>Distributor<span class="text-danger">*</span></th>
                                                     <th>Marks<span class="text-danger">*</span></th>
 
                                                 </tr>
                                             </thead>
                                             <tbody id="subject-schedule">
+                                           
                                             </tbody>
                                         </table>
                                     </div> <!-- end table-responsive-->
@@ -149,6 +151,8 @@
 <script>
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var scheduleList = "{{ route('admin.timetable.viewexam') }}";
+    var getTeacherList = "{{config('constants.api.teacher_list')}}";
+    
     
 </script>
 <script src="{{ asset('js/custom/exam_timetable.js') }}"></script>

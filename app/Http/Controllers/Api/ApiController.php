@@ -5663,7 +5663,6 @@ class ApiController extends BaseController
         $validator = \Validator::make($request->all(), [
             'name' => 'required',
             'term_id' => 'required',
-            'type_id' => 'required',
             'branch_id' => 'required',
             'token' => 'required',
         ]);
@@ -5677,7 +5676,6 @@ class ApiController extends BaseController
             $query = $con->table('exam')->insert([
                 'name' => $request->name,
                 'term_id' => $request->term_id,
-                'type_id' => $request->type_id,
                 'remarks' => $request->remarks,
                 'created_at' => date("Y-m-d H:i:s")
             ]);
@@ -5737,7 +5735,6 @@ class ApiController extends BaseController
             'token' => 'required',
             'name' => 'required',
             'term_id' => 'required',
-            'type_id' => 'required',
         ]);
 
         if (!$validator->passes()) {
@@ -5751,7 +5748,6 @@ class ApiController extends BaseController
             $query = $con->table('exam')->where('id', $id)->update([
                 'term_id' => $request->term_id,
                 'name' => $request->name,
-                'type_id' => $request->type_id,
                 'remarks' => $request->remarks,
                 'updated_at' => date("Y-m-d H:i:s")
             ]);
@@ -5817,6 +5813,18 @@ class ApiController extends BaseController
             foreach ($exams as $exam) {
                 $mark = json_encode($exam['mark']);
 
+                $distributor = $exam['distributor'];
+
+                if ($exam['distributor_type']=="1") {
+
+                    $data = $con->table('staffs as s')->select('s.id', 's.name')
+                                    ->where('id',$exam['distributor'])
+                                    ->first();
+
+                    $distributor = $data->name;
+
+                }
+
                 if ($exam['timetable_exam_id']) {
                     // return $exam;
                     $query = $con->table('timetable_exam')->where('id', $exam['timetable_exam_id'])->update([
@@ -5828,6 +5836,9 @@ class ApiController extends BaseController
                         'time_end' => $exam['time_end'],
                         'marks' => $mark,
                         'hall_id' => $exam['hall_id'],
+                        "distributor_type" => $exam['distributor_type'],
+                        "distributor" => $distributor,
+                        "distributor_id" => $exam['distributor'],
                         'exam_date' => $exam['exam_date'],
                         'created_at' => date("Y-m-d H:i:s")
                     ]);
@@ -5842,6 +5853,9 @@ class ApiController extends BaseController
                         'time_end' => $exam['time_end'],
                         'marks' => $mark,
                         'hall_id' => $exam['hall_id'],
+                        "distributor_type" => $exam['distributor_type'],
+                        "distributor" => $distributor,
+                        "distributor_id" => $exam['distributor'],
                         'exam_date' => $exam['exam_date'],
                         'created_at' => date("Y-m-d H:i:s")
                     ]);
@@ -5902,7 +5916,7 @@ class ApiController extends BaseController
             // get data
 
             $exam_id = $request->exam_id;
-            $details['exam'] = $con->table('subject_assigns')->select('subjects.name as subject_name', 'exam_hall.hall_no', 'classes.name as class_name', 'sections.name as section_name', 'exam.name as exam_name', 'subject_assigns.class_id as class_id', 'subject_assigns.section_id as section_id', 'subject_assigns.subject_id as subject_id', 'timetable_exam.exam_id', 'timetable_exam.time_start', 'timetable_exam.time_end', 'timetable_exam.exam_date', 'timetable_exam.hall_id', 'timetable_exam.marks', 'timetable_exam.id')
+            $details['exam'] = $con->table('subject_assigns')->select('subjects.name as subject_name', 'exam_hall.hall_no', 'classes.name as class_name', 'sections.name as section_name', 'exam.name as exam_name', 'subject_assigns.class_id as class_id', 'subject_assigns.section_id as section_id', 'subject_assigns.subject_id as subject_id', 'timetable_exam.exam_id', 'timetable_exam.time_start', 'timetable_exam.time_end', 'timetable_exam.exam_date', 'timetable_exam.hall_id', 'timetable_exam.marks', 'timetable_exam.distributor_type', 'timetable_exam.distributor', 'timetable_exam.distributor_id', 'timetable_exam.id')
                 ->leftJoin('subjects', 'subject_assigns.subject_id', '=', 'subjects.id')
                 ->leftJoin('classes', 'subject_assigns.class_id', '=', 'classes.id')
                 ->leftJoin('sections', 'subject_assigns.section_id', '=', 'sections.id')
@@ -6715,6 +6729,30 @@ class ApiController extends BaseController
                     return $this->successResponse($success, 'Student has been successfully saved');
                 }
             }
+        }
+    }
+    // get Teacher list 
+    public function getTeacherList(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // insert data
+            $success = $createConnection->table('subject_assigns as sa')->select('s.id', 's.name')
+            ->join('staffs as s', 'sa.teacher_id', '=', 's.id')
+            ->where('sa.class_id', $request->class_id)
+            ->where('sa.section_id', $request->section_id)
+            ->groupBy('sa.teacher_id')
+            ->get();
+            return $this->successResponse($success, 'Teachers record fetch successfully');
         }
     }
 }

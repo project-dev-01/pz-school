@@ -2,7 +2,8 @@ $(function () {
 
     $("#class_id").on('change', function (e) {
         e.preventDefault();
-        var class_id = $(this).val();
+        var class_id = $(this).val(); 
+        console.log("select box",class_id)
         
         $("#section_id").empty();
         $("#section_id").append('<option value="">Select Class Name</option>');
@@ -13,6 +14,48 @@ $(function () {
                 });
             }
         }, 'json');
+    });
+
+    $(document).on('change', '.distributor_type', function (e) {
+        e.preventDefault();
+
+        
+        var dist = "";
+        var distributor_type =  $(this).val(); 
+        
+        var id =  $(this).data('id'); 
+        var distributor = $(this).closest('td').find('.distributor');
+        var class_id = $("#class_id").val();
+        var section_id = $("#section_id").val();
+
+        distributor.empty();
+
+        if (distributor_type=="1") {
+
+            distributor.append('<select  class="form-control" name="exam['+id +'][distributor]">');
+
+            $.post(getTeacherList, { 
+                token: token,
+                branch_id: branchID,
+                class_id: class_id,
+                section_id: section_id 
+            }, function (res) {
+                if (res.code == 200) {
+                    
+                    $.each(res.data, function (key, val) {
+                        distributor.find('select').append('<option value="' + val.id + '">' + val.name + '</option>');
+                    });
+                   
+                }
+                
+            }, 'json');
+
+            distributor.append('</select>');
+        } else {
+            var dist = '<input type="text" name="exam['+id+'][distributor]" class="form-control"   placeholder="Distributor Name">';
+            distributor.append(dist);
+        }
+
     });
 
     $('.examTimeTable').on('shown.bs.modal', e => {
@@ -57,6 +100,7 @@ $(function () {
                 success: function (data) {
                     
                     if (data.code == 200) {
+                                    
                         $("#schedulerow").show("slow");
                         $("#exam-schedule").html(data.table);
                     } else {

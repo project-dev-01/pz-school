@@ -24,15 +24,6 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="type_id" class="col-3 col-form-label">Exam Type </label>
-                        <select  class="form-control" name="type_id">
-                            <option value="">Select Exam Type</option>
-                            <option value="1">Marks</option>
-                            <option value="2">Grade</option>
-                            <option value="3">Marks and Grade</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="remarks"> Remarks</label>
                         <textarea type="text"  name="remarks" class="form-control" placeholder="Enter Remarks"></textarea>
                     </div>

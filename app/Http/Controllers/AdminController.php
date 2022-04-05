@@ -2244,7 +2244,6 @@ class AdminController extends Controller
         $data = [
             'name' => $request->name,
             'term_id' => $request->term_id,
-            'type_id' => $request->type_id,
             'remarks' => $request->remarks
         ];
         $response = Helper::PostMethod(config('constants.api.exam_add'), $data);
@@ -2258,17 +2257,6 @@ class AdminController extends Controller
         // dd($response);
         return DataTables::of($response['data'])
             ->addIndexColumn()
-            ->addColumn('type_id', function ($row) {
-                $type = $row['type_id'];
-                if ($type == "1") {
-                    $result = "Marks";
-                } else if ($type == "2")  {
-                    $result = "Grade";
-                }else if ($type == "3")  {
-                    $result = "Marks and Grade";
-                }
-                return $result;
-            })
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
                                  <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editExamBtn"><i class="fe-edit"></i></a>
@@ -2296,7 +2284,6 @@ class AdminController extends Controller
             'id' => $request->id,
             'name' => $request->name,
             'term_id' => $request->term_id,
-            'type_id' => $request->type_id,
             'remarks' => $request->remarks
         ];
 
@@ -2392,6 +2379,9 @@ class AdminController extends Controller
             'exam_id' => $request->exam_id,
         ];
         $response = Helper::PostMethod(config('constants.api.exam_timetable_get'), $data);
+        $teacher = Helper::PostMethod(config('constants.api.teacher_list'), $data);
+
+        // dd($teacher);
         $hall_list = Helper::GetMethod(config('constants.api.exam_hall_list'));
         $hall="";   
         if ($response['code'] == "200") {
@@ -2402,57 +2392,77 @@ class AdminController extends Controller
 
                     // dd($exam['hall_id']);
                     $hall = "";
-                    foreach($hall_list['data'] as $list)
-                    {
+                    $dist = "";
+                    $dist_type1 = "";
+                    $dist_type2 = "";
+                    foreach ($hall_list['data'] as $list) {
                         if($list['id'] == $exam['hall_id'])
                         {
                             $hall .= '<option value="'.$list['id'].'" selected>'.$list['hall_no'].'</option>';
-                        }else{
+                        }else {
                             $hall .= '<option value="'.$list['id'].'">'.$list['hall_no'].'</option>';
                         }
-                        
                     } 
 
-                    if($exam['marks'])
-                    {
+                    if ($exam['marks']) {
                         $mark = json_decode($exam['marks']);
                         $full = $mark->full;
                         $pass = $mark->pass;
-
-                    }else{
+                    }else {
                         $full = NULL;
                         $pass = NULL;
                     }
+
+                    if ($exam['distributor_type']=="1") {
+                        $dist .= ' <select  class="form-control " name="exam['.$row.'][distributor]">';
+                        foreach ($teacher['data'] as $teach)
+                        {
+                            if ($teach['id'] == $exam['distributor_id'])
+                            {
+                                $dist .= '<option value="'.$teach['id'].'" selected>'.$teach['name'].'</option>';
+                            }else {
+                                $dist .= '<option value="'.$teach['id'].'">'.$teach['name'].'</option>';
+                            }
+                        }
+                        $dist .= ' </select>';
+                    } else {
+                        $dist .= '<input type="text" name="exam['.$row.'][distributor]" class="form-control"  value="'.$exam['distributor'].'" placeholder="Distributor Name">';
+                    }
+
+                    if ($exam['distributor_type']=="1") {
+
+                        $dist_type1 = "Selected";
+
+                    } elseif ($exam['distributor_type']=="2") {
+
+                        $dist_type2 = "Selected";
+                    }
+
+                    // dd($dist);
                     $output .= '<tr>
                                     <input type="hidden" value="'.$exam['id'].'" name="exam['.$row.'][timetable_exam_id]">
-                                    <td width="20%">
+                                    <td>
                                         <div class="input-group mb-2">
                                             <input type="text" readonly class="form-control"  value="'.$exam['subject_name'].'" >
                                             <input type="hidden" name="exam['.$row.'][subject_id]"  value="'.$exam['subject_id'].'" >
                                         </div>
                                     </td>
-                                    <td width="15%">
-                                        <div class="input-group mb-2">
+                                    <td >
+                                        <div class="form-group mb-2">
                                             <input type="date" class="form-control" name="exam['.$row.'][exam_date]"  value="'.$exam['exam_date'].'">
                                         </div>
                                     </td>
-                                    <td width="15%">
-                                        <div class="input-group mb-2">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="far fa-clock"></i></div>
-                                            </div>
+                                    <td>
+                                        <div class="form-group mb-2">
                                             <input type="time" class="form-control" name="exam['.$row.'][time_start]" value="'.$exam['time_start'].'">
                                         </div>
                                     </td>
-                                    <td width="15%">
-                                        <div class="input-group mb-2">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="far fa-clock"></i></div>
-                                            </div>
+                                    <td>
+                                        <div class="form-group mb-2">
                                             <input type="time" class="form-control" name="exam['.$row.'][time_end]"  value="'.$exam['time_end'].'">
                                         </div>
                                     </td>
-                                    <td width="10%">
+                                    <td>
                                         <div class="form-group mb-2">
                                             <div class="row">
                                                 <div class="col-sm-12">
@@ -2462,14 +2472,30 @@ class AdminController extends Controller
                                             </div>
                                         </div>
                                     </td>
-                                    <td width="25%">
+                                    <td>
                                         <div class="form-group mb-2">
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <input type="text" id="example-gridsize" name="exam['.$row.'][mark][full]" class="form-control" value="'.$full.'" placeholder="Full Mark">
+                                                    <select  class="form-control distributor_type" data-id="'.$row.'" name="exam['.$row.'][distributor_type]">
+                                                        <option value="">Select Type</option>
+                                                        <option value="1" '. $dist_type1 .'>Internal</option>
+                                                        <option value="2" '. $dist_type2 .'>External</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-6 distributor">
+                                                    '.$dist.'
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td width="10%">
+                                        <div class="form-group mb-2">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <input type="text" name="exam['.$row.'][mark][full]" class="form-control" value="'.$full.'" placeholder="Full Mark">
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <input type="text" id="example-gridsize" name="exam['.$row.'][mark][pass]" class="form-control"  value="'.$pass.'" placeholder="Pass Mark">
+                                                    <input type="text" name="exam['.$row.'][mark][pass]" class="form-control"  value="'.$pass.'" placeholder="Pass Mark">
                                                 </div>
                                             </div>
                                         </div>
@@ -2502,6 +2528,8 @@ class AdminController extends Controller
             'exam_id' => $request->exam_id,
             'exam' => $request->exam,
         ];
+
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.exam_timetable_add'), $data);
         return $response;
     }
@@ -2523,12 +2551,20 @@ class AdminController extends Controller
             $row = 1;
             if ($response['data']['exam']) {
                 foreach ($response['data']['exam'] as $exam) {
+
+                    if($exam['distributor_type']=="1")
+                    {
+                        $type = "Internal";
+                    }elseif($exam['distributor_type']=="2"){
+                        $type = "External";
+                    }
                     $output .= '<tr>
                                     <td>'.$exam['subject_name'].'</td>
                                     <td>'.$exam['exam_date'].'</td>
                                     <td>'.$exam['time_start'].'</td>
                                     <td>'.$exam['time_end'].'</td>
                                     <td>'.$exam['hall_no'].'</td>
+                                    <td>'.$exam['distributor'].' ('.$type.') '.'</td>
                                 </tr>';
                     $row++;
 

@@ -18,6 +18,7 @@
                                 <th>Date</th>
                                 <th>Starting Time</th>
                                 <th>Ending Time</th>
+                                <th>Distributor</th>
                                 <th>Hall Room</th>
 
                             </tr>

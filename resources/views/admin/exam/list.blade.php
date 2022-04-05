@@ -40,7 +40,6 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Term</th>
-                                <th>Type</th>
                                 <th>Remarks</th>
                                 <th>Action</th>
                             </tr>

@@ -4,7 +4,6 @@ $(function () {
     $("#exam-form").validate({
         rules: {
             name: "required",
-            type_id: "required",
             term_id: "required",
             remarks: "required",
         }
@@ -62,10 +61,6 @@ $(function () {
                 name: 'term_id'
             },
             {
-                data: 'type_id',
-                name: 'type_id'
-            },
-            {
                 data: 'remarks',
                 name: 'remarks'
             },
@@ -86,7 +81,6 @@ $(function () {
             $('.editExam').find('input[name="id"]').val(data.data.id);
             $('.editExam').find('input[name="name"]').val(data.data.name);
             $('.editExam').find('select[name="term_id"]').val(data.data.term_id);
-            $('.editExam').find('select[name="type_id"]').val(data.data.type_id);
             $('.editExam').find('textarea[name="remarks"]').val(data.data.remarks);
             $('.editExam').modal('show');
         }, 'json');
@@ -96,7 +90,6 @@ $(function () {
      $("#edit-exam-form").validate({
         rules: {
             name: "required",
-            type_id: "required",
             term_id: "required",
             remarks: "required",
         }

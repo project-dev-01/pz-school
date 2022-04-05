@@ -280,5 +280,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
     // Admission routes
     Route::post('admission/add',[ApiController::class,'addAdmission']);
+
+    // Techer list by class and section routes
+    Route::post('teacher/list', [ApiController::class, 'getTeacherList']);
     
 });

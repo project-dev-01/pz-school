@@ -23,6 +23,9 @@ class CreateTimetableExamTable extends Migration
             $table->time('time_end');
             $table->string('marks');
             $table->integer('hall_id');
+            $table->string('distributor_type')->nullable();
+            $table->string('distributor')->nullable();
+            $table->string('distributor_id')->nullable();
             $table->date('exam_date');
             $table->timestamps();
         });
