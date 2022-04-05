@@ -3706,8 +3706,7 @@ class ApiController extends BaseController
             $class_id = $request->class_id;
             $section_id = $request->section_id;
             $subject_id = $request->subject_id;
-            $date = $request->date;
-
+            $date = $request->date;            
             foreach ($short_test as $key => $value) {
                 // $test_name = (count($value['test_name'][0]) > 0) ? implode(",", $value['test_name'][0]) : "";
                 // $grade_status = (count($value['grade_status'][0]) > 0) ? implode(",", $value['grade_status'][0]) : "";
@@ -6162,7 +6161,138 @@ class ApiController extends BaseController
             return $this->successResponse($data, 'Subject division record fetch successfully');
         }
     }
+    public function addsubjectdivision(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
+            'date' => 'required',
+            'short_test' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
 
+            $short_test = $request->short_test;
+            $date = $request->date;
+            $class_id = $request->class_id;
+            $section_id = $request->section_id;
+            $subject_id = $request->subject_id;
+            $date = $request->date;            
+            foreach ($short_test as $key => $value) {
+                // $test_name = (count($value['test_name'][0]) > 0) ? implode(",", $value['test_name'][0]) : "";
+                // $grade_status = (count($value['grade_status'][0]) > 0) ? implode(",", $value['grade_status'][0]) : "";
+                // $test_marks = (count($value['test_marks'][0]) > 0) ? implode(",", $value['test_marks'][0]) : "";
+                $newTestName = $value['test_name'];
+                $newgradeStatus = $value['grade_status'];
+                $newtestMarks = $value['test_marks'];
+                $test_name = (count($value['test_name']) > 0) ? implode(",", $value['test_name']) : "";
+                $grade_status = (count($value['grade_status']) > 0) ? implode(",", $value['grade_status']) : "";
+                $test_marks = (count($value['test_marks']) > 0) ? implode(",", $value['test_marks']) : "";
+                // dd($value['attendance_id']);
+                // $grade_status = (isset($value['grade_status']) ? $value['grade_status'] : "");
+                // $test_marks = (isset($value['test_marks']) ? $value['test_marks'] : "");
+                // foreach($test_name as $key => $value) {
+                //     print_r($value);
+                // }
+                $addShortTest = array(
+                    'student_id' => $value['student_id'],
+                    'test_name' => $test_name,
+                    'grade_status' => $grade_status,
+                    'test_marks' => $test_marks,
+                    'date' => $date,
+                    'class_id' => $class_id,
+                    'section_id' => $section_id,
+                    'subject_id' => $subject_id,
+                    'created_at' => date("Y-m-d H:i:s")
+                );
+                // echo $key;
+                // echo gettype($test_name);
+                // print_r($addShortTest);
+                $checkExist = $Connection->table('short_tests')->where([
+                    // ['test_name', '=', $value['test_name']],
+                    ['date', '=', $date],
+                    ['student_id', '=', $value['student_id']]
+                ])->first();
+                // $checkExist = $Connection->table('short_tests')->where([['test_name', '=', $value['test_name']], ['date', '=', $date], ['student_id', '=', $value['student_id']]])->first();
+
+                // if ($Connection->table('short_tests')->where([['test_name', '=', $value['test_name']], ['date', '=', $date], ['student_id', '=', $value['student_id']]])->count() > 0) {
+                if ($Connection->table('short_tests')->where([['date', '=', $date], ['student_id', '=', $value['student_id']]])->count() > 0) {
+                    // print_r($checkExist->test_name);
+                    // print_r($test_name);
+                    $dbTestname = explode(",", $checkExist->test_name);
+                    $dbTestMarks = explode(",", $checkExist->test_marks);
+                    $dbGradeStatus = explode(",", $checkExist->grade_status);
+
+                    // $dbTestMarks = explode(",", $checkExist->test_marks);
+                    $testNames = array();
+                    $gradeStatus = array();
+                    $testMarks = array();
+
+                    if (isset($newTestName)) {
+                        foreach ($newTestName as $key => $val) {
+                            if (in_array($val, $dbTestname)) {
+                                // Match found
+                                array_push($testNames, $val);
+                                array_push($gradeStatus, $newgradeStatus[$key]);
+                                array_push($testMarks, $newtestMarks[$key]);
+                            } else {
+                                // Match not found
+                                array_push($testNames, $newTestName[$key]);
+                                array_push($gradeStatus, $newgradeStatus[$key]);
+                                array_push($testMarks, $newtestMarks[$key]);
+                            }
+                        }
+                    }
+
+                    $dbTestMarks = explode(",", $checkExist->test_marks);
+                    $dbGradeStatus = explode(",", $checkExist->grade_status);
+                    // print_r($gradeStatus);
+                    // print_r($testMarks);
+                    $result = array_diff_assoc($dbTestname, $testNames);
+                    if (isset($result)) {
+                        foreach ($result as $key => $val) {
+                            array_push($testNames, $val);
+                            array_push($gradeStatus, $dbGradeStatus[$key]);
+                            array_push($testMarks, $dbTestMarks[$key]);
+                        }
+                    }
+                    // print_r($testNames);
+                    // print_r($gradeStatus);
+                    // print_r($testMarks);
+
+                    // array_push($testNames, $result);
+
+                    // print_r($testNames);
+                    // $result=array_diff($testNames,$dbTestname);
+                    // print_r($result);
+                    // $currentTestname = explode(",", $test_name);
+                    // $result = array_diff($dbTestname, $currentTestname);
+                    // print_r($value['test_name']);
+                    // echo "<br>";
+                    // print_r($currentTestname);
+                    // echo "<br>";
+                    // print_r($result);
+
+                    // exit;
+                    $Connection->table('short_tests')->where('id', $checkExist->id)->update([
+                        'test_name' => implode(",", $testNames),
+                        'grade_status' => implode(",", $gradeStatus),
+                        'test_marks' => implode(",", $testMarks),
+                        'updated_at' => date("Y-m-d H:i:s")
+                    ]);
+                } else {
+                    $Connection->table('short_tests')->insert($addShortTest);
+                }
+            }
+            return $this->successResponse([], 'Short test added successfuly.');
+        }
+    }
 
     // addGrade
     public function addGrade(Request $request)

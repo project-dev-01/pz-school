@@ -170,7 +170,7 @@
                         <div class="card-body">                           
                             <table id="tblsubjectdiv" method="post" action="{{ route('teacher.subjectdivision.add') }}" autocomplete="off">
                                 @csrf
-                                <div>
+                                <div id="subjectdivTableAppend_text">
                                 </div>
                                 <div class="col-md-12">
                                     <div class="clearfix mt-4">
@@ -245,7 +245,7 @@
                     </div> <!-- end card-body-->
                 </div> <!-- end card-->
             </div> <!-- end col -->
-            <div class="col-lg-6">
+            <div class="col-lg-6" id="testexecution">
                 <!-- Portlet card -->
                 <div class="card">
                     <div class="card-body" dir="ltr">
@@ -371,5 +371,4 @@
     var defaultImg = "{{ asset('images/users/default.jpg') }}";
 </script>
 <script src="{{ asset('js/custom/testresult.js') }}"></script>
-
 @endsection

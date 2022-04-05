@@ -225,6 +225,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('get_marks_vs_grade',[ApiController::class,'marks_vs_grade']);
     Route::post('add_student_marks',[ApiController::class,'addStudentMarks']);
     Route::post('get_subject_division',[ApiController::class,'getsubjectdivision']);
+    Route::post('add_subject_division',[ApiController::class,'addsubjectdivision']);
     // classroom management
     Route::post('teacher_class',[ApiController::class,'getTeachersClassName']);
     Route::post('teacher_section',[ApiController::class,'getTeachersSectionName']);

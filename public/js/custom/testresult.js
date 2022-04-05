@@ -109,9 +109,9 @@ $(function () {
                     var dataSetNew = response.data;
                     if (response.code == 200) {
                         if (response.data.length > 0) {
-
                             $(".subjectmarks").show("slow");
                             bindmarks(dataSetNew);
+                            $("#testexecution").hide();
                             $("#listModeClassID").val(class_id);
                             $("#listModeSectionID").val(section_id);
                             $("#listModeSubjectID").val(subject_id);
@@ -142,10 +142,12 @@ $(function () {
                         var subdiv = response.data.subjectdivision;
                         console.log(stdetails.length);
                         if (subdiv.length > 0) {
+                            $('#subjectdivTableAppend').show();
                             subjectdivisionShow(stdetails, subdiv);
+                            $("#testexecution").show();
                         }
                         else {
-                            $('#subjectdivTableAppend').empty();
+                            $('#subjectdivTableAppend').hide();
                         }
                     } else {
                         toastr.error(data.message);
@@ -174,19 +176,16 @@ $(function () {
                 processData: false,
                 dataType: 'json',
                 contentType: false,
-                success: function (res) {
-                    console.log("------------");
+                success: function (res) {               
                     console.log(res);
-                    if (res.code == 200) {
-                        console.log("-----dsf-------");
+                    if (res.code == 200) {                    
                         $('.lbl_grade' + incre_class).text(res.data[0].grade);
                         $('.lbl_grade' + incre_class).val(res.data[0].grade);
                         console.log(res.data[0].grade);
                     }
                     else {
                         console.log(res.data);
-                    }
-                    // $('.lbl_grade' + incre_class).text(res.data[].grade);
+                    }             
                 }
             });
 
@@ -258,23 +257,16 @@ $(function () {
                 processData: false,
                 dataType: 'json',
                 contentType: false,
-                success: function (res) {
-                    console.log("------------");
+                success: function (res) {                 
                     console.log(res);
-                    if (res.code == 200) {
-                        console.log("-----dsf-------");
-                        // $('.lbl_grade' + incre_class).text(res.data[0].grade);
-                        // $('.lbl_grade' + incre_class).val(res.data[0].grade);
+                    if (res.code == 200) {   
                         $(".lbl_grade" + studentid).text(res.data[0].grade);
                         $('.lbl_grade' + studentid).val(res.data[0].grade);
                         console.log(res.data[0].grade);
-
-
                     }
                     else {
                         console.log(res.data);
                     }
-                    // $('.lbl_grade' + incre_class).text(res.data[].grade);
                 }
             });
 
@@ -288,7 +280,7 @@ $(function () {
         var subjectID = $("#subjectID").val();
         var exam_id = $("#examnames").val();
 
-        $('#subjectdivTableAppend').empty();
+        $('#subjectdivTableAppend_text').empty();
         var shortTestTable = "";
         var index = 0;
         shortTestTable += '<div class="table-responsive">' +
@@ -343,7 +335,7 @@ $(function () {
                     '<label for="grade" class="lbl_grade' + res.student_id + '" data-id="' + res.student_id + '">-</label>' +
                     '</td>';
                 shortTestTable += '<td>' +
-                    '<label for="ranking" class="lbl_ranking" data-id="">-</label>' +
+                    '<label for="ranking" class="lbl_ranking" data-id="">0</label>' +
                     '</td>';
                 // short test table div end
                 // $.each(stdetails, function (key, val) {
@@ -373,7 +365,7 @@ $(function () {
 
         shortTestTable += '</tbody>' +
             '</table></div>';
-        $("#subjectdivTableAppend").append(shortTestTable);
+        $("#subjectdivTableAppend_text").append(shortTestTable);
     }
     // function list mode
     function bindmarks(dataSetNew) {

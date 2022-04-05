@@ -696,5 +696,19 @@ class TeacherController extends Controller
         ];    
         $response = Helper::PostMethod(config('constants.api.get_subject_division'), $data);    
         return $response;
-     }    
+     } 
+     public function subjectdivision(Request $request)
+     {
+       // dd($request);
+        $data = [
+            "short_test" => $request->short_test,
+            "date" => $request->date,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.add_subject_division'), $data);
+        return $response;
+     }   
 }
