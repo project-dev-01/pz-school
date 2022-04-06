@@ -147,7 +147,7 @@
                                     <a data-toggle="collapse" href="#cardCollpase3" role="button" aria-expanded="false" aria-controls="cardCollpase3"><i class="mdi mdi-minus"></i></a>
                                     <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
                                 </div>
-                                <h4 class="header-title mb-0">Subject Average</h4>
+                                <!-- <h4 class="header-title mb-0">Subject Average</h4> -->
 
                                 <div id="cardCollpase3" class="collapse pt-3 show" dir="ltr">
                                     <div id="subject-avg-chart" class="apex-charts" data-colors="#f672a7"></div>
@@ -320,7 +320,7 @@
 
 
 <!-- Center modal content -->
-<div class="modal fade reportModal" id="addClassModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade studentMarkModal" id="studentMarkModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-full-width">
         <div class="modal-content">
             <div class="modal-header">
@@ -329,24 +329,24 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <!-- <div class="col-lg-6">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="header-title">Marks by Subject Division</h4>
                                 <div class="mt-4 chartjs-chart">
                                     <canvas id="radar-chart-2" height="350" data-colors="#39afd1,#a17fe0"></canvas>
-                                    <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
+                                    <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas>
                                 </div>
-                            </div> <!-- end card-body-->
-                        </div> <!-- end card-->
-                    </div> <!-- end col -->
+                            </div> 
+                        </div>
+                    </div> -->
 
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="header-title">Marks by Subject </h4>
                                 <div class="mt-4 chartjs-chart">
-                                    <div id="line-2" class="apex-charts" data-colors="#f672a7"></div>
+                                    <div id="student-subject-mark" class="apex-charts" data-colors="#f672a7"></div>
                                     <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
                                 </div>
                             </div> <!-- end card-body-->
@@ -366,7 +366,10 @@
     var examsList = "{{ config('constants.api.get_testresult_exams') }}";
     var getSubjectMarks = "{{ config('constants.api.get_testresult_marks_subject_vs') }}";
     var getMarks_vs_grade = "{{ config('constants.api.get_marks_vs_grade') }}";
-    var getsubjectdivision = "{{ config('constants.api.get_subject_division') }}";    
+    var getsubjectdivision = "{{ config('constants.api.get_subject_division') }}";  
+    var getSubjectAverage = "{{ config('constants.api.get_subject_average') }}";     
+    var getStudentSubjectMark = "{{ config('constants.api.get_student_subject_mark') }}";     
+    
     // default image test
     var defaultImg = "{{ asset('images/users/default.jpg') }}";
 </script>

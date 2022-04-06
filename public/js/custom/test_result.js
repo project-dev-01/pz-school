@@ -1,4 +1,4 @@
-$('#addClassModal').on('shown.bs.modal',function(event){
+$('#addClassModal1s').on('shown.bs.modal',function(event){
 
     ! function($) {
         "use strict";
@@ -167,7 +167,7 @@ var options = {
         data: [90,65,75,99,84,57]
     }],
     title: {
-        text: "Subject Average",
+        text: "Subject Averages",
         align: "left",
         style: {
             fontSize: "14px",

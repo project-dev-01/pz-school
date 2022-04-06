@@ -6175,6 +6175,8 @@ class ApiController extends BaseController
             return $this->successResponse($data, 'Subject division record fetch successfully');
         }
     }
+
+    
     public function addsubjectdivision(Request $request)
     {
         $validator = \Validator::make($request->all(), [
@@ -6755,4 +6757,95 @@ class ApiController extends BaseController
             return $this->successResponse($success, 'Teachers record fetch successfully');
         }
     }
+
+
+    
+    public function getSubjectAverage(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            // get attendance details query
+            $subject_id = $request->subject_id;
+            $class_id = $request->class_id;
+            $section_id = $request->section_id;
+            $subject_id = $request->subject_id;
+            $Connection = $this->createNewConnection($request->branch_id);
+
+            $studentdetails = $Connection->table('student_marks as sm')->select('sm.exam_id','te.exam_date',DB::raw('round(AVG(sm.score), 2) as average'))
+                                        ->leftJoin('timetable_exam as te', function ($join) {
+                                            $join->on('te.exam_id', '=', 'sm.exam_id')
+                                                ->on('te.class_id', '=', 'sm.class_id')
+                                                ->on('te.section_id', '=', 'sm.section_id')
+                                                ->on('te.subject_id', '=', 'sm.subject_id');
+                                        })
+                                        ->where([
+                                            ['sm.class_id', '=', $request->class_id],
+                                            ['sm.section_id', '=', $request->section_id],
+                                            ['sm.subject_id', '=', $request->subject_id]
+                                        ])
+                                        ->groupBy('sm.exam_id')
+                                        ->orderBy('te.exam_date','ASC')
+                                        ->get();
+
+                                // return $studentdetails;
+            return $this->successResponse($studentdetails, 'Subject division record fetch successfully');
+        }
+    }
+
+
+    
+    public function getStudentSubjectMark(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
+            'student_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            // get attendance details query
+            $subject_id = $request->subject_id;
+            $class_id = $request->class_id;
+            $section_id = $request->section_id;
+            $subject_id = $request->subject_id;
+            $Connection = $this->createNewConnection($request->branch_id);
+
+            $studentdetails = $Connection->table('student_marks as sm')->select('sm.exam_id','te.exam_date','sm.score')
+                                        ->leftJoin('timetable_exam as te', function ($join) {
+                                            $join->on('te.exam_id', '=', 'sm.exam_id')
+                                                ->on('te.class_id', '=', 'sm.class_id')
+                                                ->on('te.section_id', '=', 'sm.section_id')
+                                                ->on('te.subject_id', '=', 'sm.subject_id');
+                                        })
+                                        ->where([
+                                            ['sm.class_id', '=', $request->class_id],
+                                            ['sm.section_id', '=', $request->section_id],
+                                            ['sm.subject_id', '=', $request->subject_id],
+                                            ['sm.student_id', '=', $request->student_id]
+                                        ])
+                                        ->groupBy('sm.exam_id')
+                                        ->orderBy('te.exam_date','ASC')
+                                        ->get();
+
+                                // return $studentdetails;
+            return $this->successResponse($studentdetails, 'Subject division record fetch successfully');
+        }
+    }
+
+
 }

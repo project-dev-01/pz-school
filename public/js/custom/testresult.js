@@ -1,5 +1,257 @@
 $(function () {
 
+    colors = ["#6658dd",];
+        (dataColors = $("#student-subject-mark").data("colors")) && (colors = dataColors.split(","));
+        var options = {
+            chart: {
+                height: 380,
+                type: "line",
+                zoom: {
+                    enabled: !1
+                },
+                toolbar: {
+                    show: !1
+                }
+            },
+            colors: colors,
+            dataLabels: {
+                enabled: !0
+            },
+            stroke: {
+                width: [3, 3],
+                curve: "smooth"
+            },
+            
+            series: [{
+                name: "Mark",
+                data: []
+            }],
+            title: {
+                text: "Subject Mark",
+                align: "left",
+                style: {
+                    fontSize: "14px",
+                    color: "#666"
+                }
+            },
+            grid: {
+                row: {
+                    colors: ["transparent", "transparent"],
+                    opacity: .2
+                },
+                borderColor: "#f1f3fa"
+            },
+            markers: {
+                style: "inverted",
+                size: 6
+            },
+            xaxis: {
+                type: "datetime",
+                categories: []
+            },
+            yaxis: {
+                title: {
+                    text: "Mark"
+                },
+                min: 0,
+                max: 100
+            },
+            legend: {
+                position: "top",
+                horizontalAlign: "right",
+                floating: !0,
+                offsetY: -25,
+                offsetX: -5
+            },
+            responsive: [{
+                breakpoint: 600,
+                options: {
+                    chart: {
+                        toolbar: {
+                            show: !1
+                        }
+                    },
+                    legend: {
+                        show: !1
+                    }
+                }
+            }]
+        };
+    (student_chart = new ApexCharts(document.querySelector("#student-subject-mark"), options)).render();
+
+    // marks by subject Chart
+
+    colors = ["#6658dd",];
+        (dataColors = $("#subject-avg-chart").data("colors")) && (colors = dataColors.split(","));
+        var options = {
+            chart: {
+                height: 380,
+                type: "line",
+                zoom: {
+                    enabled: !1
+                },
+                toolbar: {
+                    show: !1
+                }
+            },
+            colors: colors,
+            dataLabels: {
+                enabled: !0
+            },
+            stroke: {
+                width: [3, 3],
+                curve: "smooth"
+            },
+            
+            series: [{
+                name: "Average",
+                data: []
+            }],
+            title: {
+                text: "Subject Average",
+                align: "left",
+                style: {
+                    fontSize: "14px",
+                    color: "#666"
+                }
+            },
+            grid: {
+                row: {
+                    colors: ["transparent", "transparent"],
+                    opacity: .2
+                },
+                borderColor: "#f1f3fa"
+            },
+            markers: {
+                style: "inverted",
+                size: 6
+            },
+            xaxis: {
+                type: "datetime",
+                categories: []
+            },
+            yaxis: {
+                title: {
+                    text: "Mark"
+                },
+                min: 0,
+                max: 100
+            },
+            legend: {
+                position: "top",
+                horizontalAlign: "right",
+                floating: !0,
+                offsetY: -25,
+                offsetX: -5
+            },
+            responsive: [{
+                breakpoint: 600,
+                options: {
+                    chart: {
+                        toolbar: {
+                            show: !1
+                        }
+                    },
+                    legend: {
+                        show: !1
+                    }
+                }
+            }]
+        };
+    (chart = new ApexCharts(document.querySelector("#subject-avg-chart"), options)).render();
+    // colors = ["#1FAB44", "#FEB019", "#EB5234"];
+    // (dataColors = $("#subject-avg-chart").data("colors")) && (colors = dataColors.split(","));
+    // options = {
+    //     chart: {
+    //         height: 380,
+    //         type: "line"
+    //     },
+    //     stroke: {
+    //         width: 2,
+    //         curve: "smooth"
+    //     },
+    //     series: [],
+    //     colors: colors,
+    //     fill: {
+    //         type: "solid",
+    //         opacity: [.35, 1]
+    //     },
+    //     labels: [],
+    //     markers: {
+    //         size: 0
+    //     },
+    //     yaxis: {
+    //         min: 0,
+    //         max: 100,
+    //         title: {
+    //             text: "Average"
+    //         }
+    //     },
+    //     fill: {
+    //         type: "gradient",
+    //         gradient: {
+    //             shade: "dark",
+    //             gradientToColors: colors,
+    //             shadeIntensity: 1,
+    //             type: "horizontal",
+    //             opacityFrom: 1,
+    //             opacityTo: 1,
+    //             stops: [0, 100, 100, 100]
+    //         }
+    //     },
+    //     markers: {
+    //         size: 4,
+    //         opacity: .9,
+    //         colors: ["#56c2d6"],
+    //         strokeColor: "#fff",
+    //         strokeWidth: 2,
+    //         style: "inverted",
+    //         hover: {
+    //             size: 7
+    //         }
+    //     },
+    //     grid: {
+    //         row: {
+    //             colors: ["transparent", "transparent"],
+    //             opacity: .2
+    //         },
+    //         borderColor: "#185a9d"
+    //     },
+    //     yaxis: [{
+    //         min: 0,
+    //         max: 100,
+    //         labels: {
+    //             formatter: function (val, index) {
+    //                 return val;
+    //             }
+    //         }
+    //     }, {
+    //         min: 0,
+    //         max: 100,
+    //         opposite: !0,
+    //         labels: {
+    //             formatter: function (val, index) {
+    //                 return val;
+    //             }
+    //         }
+    //     }
+    //     ],
+    //     tooltip: {
+    //         shared: !0,
+    //         intersect: !1,
+    //         y: {
+    //             formatter: function (e) {
+    //                 return void 0 !== e ? e.toFixed(0) : e
+    //             }
+    //         }
+    //     },
+    //     legend: {
+    //         offsetY: 7
+    //     }
+    // };
+    // (chart = new ApexCharts(document.querySelector("#subject-avg-chart"), options)).render();
+
+
     // change classroom
     $('#changeClassName').on('change', function () {
         // $(".classRoomHideSHow").hide();
@@ -89,6 +341,17 @@ $(function () {
         $("#fullmark").val(fmark);
         $("#passmark").val(pmark);
         
+        chart.updateOptions( {
+            xaxis: {
+                type: "datetime",
+                format: 'dd/MM',
+              categories: []
+            }
+        });
+        chart.updateSeries([{
+            name: "Average",
+            data: []
+        }]);
         if (classRoom === true) {
 
             var class_id = $("#changeClassName").val();
@@ -149,6 +412,43 @@ $(function () {
                         else {
                             $('#subjectdivTableAppend').hide();
                         }
+                    } else {
+                        toastr.error(data.message);
+                    }
+                }
+            });
+
+            $.ajax({
+                url: getSubjectAverage,
+                method: "post",
+                data: formData,
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (response) {
+                    if (response.code == 200) {
+                        var detail = response.data;
+                        var averageData = [];
+                        var categoryData = [];
+                        if (detail.length > 0) {
+                            // graph data
+                            detail.forEach(function (res) {
+                                averageData.push(res.average);
+                                categoryData.push(res.exam_date);
+                            });
+                        }
+                        chart.updateOptions( {
+                            xaxis: {
+                                type: "datetime",
+                                format: 'dd/MM',
+                              categories: categoryData
+                            }
+                        });
+                        chart.updateSeries([{
+                            name: "Average",
+                            data: averageData
+                        }]);
+
                     } else {
                         toastr.error(data.message);
                     }
@@ -433,7 +733,7 @@ $(function () {
                             '<input type="hidden" name="subjectmarks[' + meta.row + '][first_name]" value="' + row.first_name + '">' +
                             '<input type="hidden" name="subjectmarks[' + meta.row + '][last_name]" value="' + row.last_name + '">' +
                             '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
-                            '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
+                            '<a href=""  data-toggle="modal" data-target=".studentMarkModal" data-id="' + row.student_id + '" class="text-body font-weight-semibold studentChart">' + data + '</a>';
                         return first_name;
                     }
                 },
@@ -493,4 +793,84 @@ $(function () {
             }
           });
     }
+        // test result subject wise result
+        
+
+    $(document).on('click', '.studentChart', function () {
+        var studentID = $(this).data('id');
+        console.log('st',studentID)
+        
+        var class_id = $("#changeClassName").val();
+        var section_id = $("#sectionID").val();
+        var subject_id = $("#subjectID").val();
+
+        var formData = new FormData();
+        formData.append('token', token);
+        formData.append('branch_id', branchID);
+        formData.append('class_id', class_id);
+        formData.append('section_id', section_id);
+        formData.append('subject_id', subject_id);
+        formData.append('student_id', studentID);
+        $("#studentMarkModal").modal('show');
+       
+        
+        // return false;
+        // studentchart();
+        $.ajax({
+            url: getStudentSubjectMark,
+            method: "POST",
+            data: formData,
+            dataType: 'JSON',
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (response) {
+
+               
+                // return false;
+                if (response.code == 200) {
+                    
+                    var mark_details = response.data;
+                    var mark = [];
+                    var date = [];
+                    if (mark_details.length > 0) {
+
+                        mark_details.forEach(function (res) {
+                            mark.push(res.score);
+                            date.push(res.exam_date);
+                        });
+                    }
+                    console.log('res',mark)
+
+                    
+
+                    student_chart.updateOptions( {
+                        xaxis: {
+                            type: "datetime",
+                          categories: date
+                        }
+                    });
+                    student_chart.updateSeries([{
+                        name: "Mark",
+                        data: mark
+                    }]);
+
+                    // chart
+
+                } else {
+                    toastr.error(data.message);
+                }
+
+            }, error: function (err) {
+                if (err.responseJSON.code == 422) {
+                    toastr.error(err.responseJSON.data.error.profile_image[0] ? err.responseJSON.data.error.profile_image[0] : 'Something went wrong');
+                }
+            }
+        })
+
+    });
+    
+    
 });
+
+

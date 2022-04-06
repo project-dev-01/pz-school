@@ -218,6 +218,9 @@ return [
         'get_marks_vs_grade' => $url.'/get_marks_vs_grade',
         'add_student_marks'=>$url.'/add_student_marks',
         'get_subject_division'=>$url.'/get_subject_division',
+        'get_subject_average'=>$url.'/get_subject_average',
+        'get_student_subject_mark'=>$url.'/get_student_subject_mark',
+        
 
         // get transport list
         'transport_list' => $url.'/transport/list',

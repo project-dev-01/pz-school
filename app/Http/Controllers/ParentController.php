@@ -74,15 +74,26 @@ class ParentController extends Controller
         // dd($timetable);
         // dd(isset($timetable['data']['timetable']) ? count($timetable['data']['timetable']) : 0);
         // isset($etable['data']['timetable']) ? count($etable['data']['timetable']) : 0;
-        return view(
-            'parent.time_table.index',
-            [
-                'timetable' => $timetable['data']['timetable'],
-                'details' => $timetable['data']['details'],
-                'days' => $days,
-                'max' => $timetable['data']['max']
-            ]
-        );
+        if($timetable['code']=="200")
+        {
+            return view(
+                'parent.time_table.index',
+                [
+                    'timetable' => $timetable['data']['timetable'],
+                    'details' => $timetable['data']['details'],
+                    'days' => $days,
+                    'max' => $timetable['data']['max']
+    
+                ]
+            );
+        }else{
+            return view(
+                'parent.time_table.index',
+                [
+                    'timetable' => "",
+                ]
+            );
+        }
     }
     // forum screen pages start
     public function forumIndex()

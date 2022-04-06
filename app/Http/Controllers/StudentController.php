@@ -496,16 +496,28 @@ class StudentController extends Controller
         // dd($request);
         $timetable = Helper::PostMethod(config('constants.api.timetable_student'), $data);
         // dd($timetable);
-        return view(
-            'student.timetable.index',
-            [
-                'timetable' => $timetable['data']['timetable'],
-                'details' => $timetable['data']['details'],
-                'days' => $days,
-                'max' => $timetable['data']['max']
 
-            ]
-        );
+        if($timetable['code']=="200")
+        {
+            return view(
+                'student.timetable.index',
+                [
+                    'timetable' => $timetable['data']['timetable'],
+                    'details' => $timetable['data']['details'],
+                    'days' => $days,
+                    'max' => $timetable['data']['max']
+    
+                ]
+            );
+        }else{
+            return view(
+                'student.timetable.index',
+                [
+                    'timetable' => "",
+                ]
+            );
+        }
+        
     }
      
 }
