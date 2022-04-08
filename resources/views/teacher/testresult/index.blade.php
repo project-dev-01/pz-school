@@ -152,6 +152,7 @@
                                 <div id="cardCollpase3" class="collapse pt-3 show" dir="ltr">
                                     <div id="subject-avg-chart" class="apex-charts" data-colors="#f672a7"></div>
                                 </div> <!-- collapsed end -->
+                                
                             </div> <!-- end card-body -->
                         </div> <!-- end card-->
                     </div>
@@ -209,11 +210,11 @@
 
                             <div class="row mt-2">
                                 <div class="col-6">
-                                    <h3 data-plugin="">Frequency of Test Scores</h3>
+                                    <h3 data-plugin="">Number of Student</h3>
                                     <p class="text-muted font-13 mb-0 text-truncate">Y Axis</p>
                                 </div>
                                 <div class="col-6">
-                                    <h3 data-plugin="">Test Scores</h3>
+                                    <h3 data-plugin="">Grade</h3>
                                     <p class="text-muted font-13 mb-0 text-truncate">X Axis</p>
                                 </div>
                             </div> <!-- end row -->
@@ -341,7 +342,7 @@
                         </div>
                     </div> -->
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="header-title">Marks by Subject </h4>
@@ -369,6 +370,7 @@
     var getsubjectdivision = "{{ config('constants.api.get_subject_division') }}";  
     var getSubjectAverage = "{{ config('constants.api.get_subject_average') }}";     
     var getStudentSubjectMark = "{{ config('constants.api.get_student_subject_mark') }}";     
+    var getStudentGrade = "{{ config('constants.api.get_student_grade') }}";     
     
     // default image test
     var defaultImg = "{{ asset('images/users/default.jpg') }}";
