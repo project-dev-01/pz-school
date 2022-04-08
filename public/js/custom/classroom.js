@@ -7,8 +7,6 @@ $(function () {
     var classroom_details = sessionStorage.getItem('classroom_details');
     if (classroom_details) {
         var classroomDetails = JSON.parse(classroom_details);
-        console.log("classroomDetails")
-        console.log(classroomDetails)
         if (classroomDetails.length == 1) {
             var classID, sectionID, subjectID, classDate,sectionName,subjectName;
             classroomDetails.forEach(function (user) {
@@ -20,7 +18,6 @@ $(function () {
                 subjectName = user.subject_name;
             });
             var format_date = formatDate(classDate);
-            console.log(formatDate(classDate))
             var classObj = {
                 classID: classID,
                 sectionID: sectionID,
@@ -159,8 +156,6 @@ $(function () {
             dataType: 'json',
             contentType: false,
             success: function (response) {
-                console.log("dsfdsfdsff")
-                console.log(response)
                 if (response.code == 200) {
                     var dataSetNew = response.data.get_daily_report_remarks;
                     var getDailyReport = response.data.get_daily_report;
@@ -335,7 +330,6 @@ $(function () {
                     "targets": 2,
                     "width": "20%",
                     "render": function (data, type, row, meta) {
-                        row.att_status
                         var att_status = '<select class="form-control changeAttendanceSelect" data-style="btn-outline-success" name="attendance[' + meta.row + '][att_status]">' +
                             '<option value="">Choose</option>' +
                             '<option value="present" ' + (row.att_status == "present" ? "selected" : "selected") + '>Present</option>' +
@@ -920,11 +914,6 @@ $(function () {
             var time_end = timetable_class.time_end;
             var edt = moment(time_end, 'HH:mm:ss');
             var endDate = edt.toDate();
-            console.log("----------")
-            console.log(timetable_class)
-            console.log(time_end)
-            console.log(edt)
-            console.log(endDate)
         } else {
             // if date null
             var returned_endate = moment(d).subtract(5, 'minutes');

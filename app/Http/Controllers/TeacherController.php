@@ -282,7 +282,7 @@ class TeacherController extends Controller
         ];
         $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         //$get_exams = Helper::GetMethod(config('constants.api.get_testresult_exams'));
-             
+        // dd($response);     
         return view('teacher.testresult.index', [
             'teacher_class' => $response['data']
          //   'get_exams' => $get_exams['data']
@@ -697,17 +697,21 @@ class TeacherController extends Controller
         $response = Helper::PostMethod(config('constants.api.get_subject_division'), $data);    
         return $response;
      } 
-     public function subjectdivision(Request $request)
+     public function subjectdivisionAdd(Request $request)
      {
-       // dd($request);
+    //    dd($request);
         $data = [
-            "short_test" => $request->short_test,
-            "date" => $request->date,
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
-            "subject_id" => $request->subject_id
+            "subject_id" => $request->subject_id,
+            "subjectdiv" => $request->subjectdiv,
+            "exam_id" => $request->exam_id,
+            
         ];
         // dd($data);
+        // echo "<pre>";
+        // print_r($data);
+        // exit;
         $response = Helper::PostMethod(config('constants.api.add_subject_division'), $data);
         return $response;
      }   

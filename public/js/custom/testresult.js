@@ -176,7 +176,7 @@ $(function () {
 
     // change classroom
     $('#changeClassName').on('change', function () {
-        // $(".classRoomHideSHow").hide();
+        $(".testResultHideSHow").hide();
         var class_id = $(this).val();
         $("#testresultFilter").find("#sectionID").empty();
         $("#testresultFilter").find("#sectionID").append('<option value="">Select Section</option>');
@@ -308,10 +308,11 @@ $(function () {
                             $(".subjectmarks").hide();
                             toastr.info('No records are available');
                         }
-
+                        $(".testResultHideSHow").show("slow");
                         //$("#layoutModeGrid").append(layoutModeGrid);
                     } else {
-                        toastr.error(data.message);
+                        $(".testResultHideSHow").hide();
+                        toastr.error(response.message);
                     }
                 }
             });
@@ -327,47 +328,22 @@ $(function () {
                     if (response.code == 200) {
                         var stdetails = response.data.studentdetails;
                         var subdiv = response.data.subjectdivision;
-                        console.log(stdetails.length);
                         if (subdiv.length > 0) {
                             $('#subjectdivTableAppend').show();
                             subjectdivisionShow(stdetails, subdiv);
                             $("#testexecution").show();
+                            $(".testResultHideSHow").show("slow");
                         }
                         else {
+                            $(".testResultHideSHow").hide();
                             $('#subjectdivTableAppend').hide();
                         }
                     } else {
-                        toastr.error(data.message);
+                        toastr.error(response.message);
                     }
                 }
             });
 
-            $.ajax({
-                url: getsubjectdivision,
-                method: "post",
-                data: formData,
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                success: function (response) {
-                    if (response.code == 200) {
-                        var stdetails = response.data.studentdetails;
-                        var subdiv = response.data.subjectdivision;
-                        console.log(stdetails.length);
-                        if (subdiv.length > 0) {
-                            $('#subjectdivTableAppend').show();
-                            subjectdivisionShow(stdetails, subdiv);
-                            $("#testexecution").show();
-                        }
-                        else {
-                            $('#subjectdivTableAppend').hide();
-                        }
-                    } else {
-                        toastr.error(data.message);
-                    }
-                }
-            });
-            
             callsubjectaveragechart(formData);
 
             callbarchart(formData);
@@ -442,40 +418,75 @@ $(function () {
             }
         });
     }
-    //Score base grade details bind
-    $(document).on("change", ".basevalidation", function (e) {
-        e.preventDefault();
-        console.log('enter');
-        var marks_range = $(this).val();  
-        if (marks_range != '') {
-            var incre_class = $(this).attr('id');
-            console.log(incre_class)
-            var formData = new FormData();
-            formData.append('token', token);
-            formData.append('marks_range', marks_range);
-            formData.append('branch_id', branchID);
-            $.ajax({
-                url: getMarks_vs_grade,
-                method: "post",
-                data: formData,
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                success: function (res) {               
-                    console.log(res);
-                    if (res.code == 200) {                    
-                        $('.lbl_grade' + incre_class).text(res.data[0].grade);
-                        $('.lbl_grade' + incre_class).val(res.data[0].grade);
-                        console.log(res.data[0].grade);
+        //Score base grade details bind
+        $(document).on("change", ".basevalidation", function (e) {
+            e.preventDefault();
+            var marks_range = $(this).val();
+    
+            var fullMark = $("#fullmark").val();
+            var passMark = $("#passmark").val();
+            // rank
+            //Get all total values, sort and remove duplicates
+            let totalList = $(".basevalidation")
+                .map(function () { return $(this).val() })
+                .get()
+                .sort(function (a, b) { return a - b })
+                .reduce(function (a, b) { if (b != a[0]) a.unshift(b); return a }, [])
+    
+            //assign rank
+            $(".basevalidation").each(function () {
+                let rankVal = $(this).val();
+                let studentID = $(this).attr('id');
+                let rank = totalList.indexOf(rankVal) + 1;
+                $('.lbl_ranking' + studentID).text(rank);
+                $('.lbl_ranking' + studentID).val(rank);
+    
+            })
+            let stuID = $(this).attr('id');
+    
+            // console.log($('.badgeLabel' + stuID))
+            if (parseInt(marks_range) >= parseInt(passMark)) {
+                $('.badgeLabel' + stuID).removeClass('badge-danger');
+                $('.badgeLabel' + stuID).addClass('badge-success');
+                $('.lbl_pass_fail' + stuID).text('pass');
+                $('.lbl_pass_fail' + stuID).val('pass');
+    
+            } else {
+                $('.badgeLabel' + stuID).removeClass('badge-success');
+                $('.badgeLabel' + stuID).addClass('badge-danger');
+                $('.lbl_pass_fail' + stuID).text('fail');
+                $('.lbl_pass_fail' + stuID).val('fail');
+            }
+    
+            if (marks_range != '') {
+                var incre_class = $(this).attr('id');
+                var formData = new FormData();
+                formData.append('token', token);
+                formData.append('marks_range', marks_range);
+                formData.append('branch_id', branchID);
+                $.ajax({
+                    url: getMarks_vs_grade,
+                    method: "post",
+                    data: formData,
+                    processData: false,
+                    dataType: 'json',
+                    contentType: false,
+                    success: function (res) {
+    
+                        if (res.code == 200) {
+                            $('.lbl_grade' + incre_class).text(res.data[0].grade);
+                            $('.lbl_grade' + incre_class).val(res.data[0].grade);
+                        }
+                        else {
+                            $('.lbl_grade' + incre_class).text("");
+                            $('.lbl_grade' + incre_class).val("");
+                        }
                     }
-                    else {
-                        console.log(res.data);
-                    }             
-                }
-            });
-
-        }
-    });
+                });
+    
+            }
+        });
+    
     // Add student marks and update also
     $('#addstudentmarks').on('submit', function (e) {
         e.preventDefault();
@@ -503,7 +514,6 @@ $(function () {
                 if (response.code == 200) {
                     callsubjectaveragechart(formData);
                     toastr.success(response.message);
-                    console.log(response.message);
                 }
                 else {
                     toastr.error(data.message);
@@ -517,35 +527,69 @@ $(function () {
     //subject division cut off value calculation
     $(document).on("change", ".cutoff", function (e) {
         e.preventDefault();
-        console.log('cutoffenter');
-        var get_value = $(this).val();
 
+        var passMark = $("#passmark").val();
 
-        var current_textbox_id = $(this).attr('id');
-        var credit_point = $(this).attr('data-id');
         var studentid = $(this).attr('data-ref-studentid');
-        var current_total_score = $(".tot_score" + studentid).html();
+        var currentMarks = $(".rowcutoff" + studentid)
+            .map(function () { return $(this).val(); }).get();
+        var creditPnt = $(".rowcutoff" + studentid)
+            .map(function () { return $(this).attr('data-id'); }).get();
 
+        var sumOfScore = 0;
+        for (let i = 0; i < creditPnt.length; i++) {
+            if (currentMarks[i] != '' && creditPnt[i] != '') {
+                var sum = (parseFloat(currentMarks[i]) * parseFloat(creditPnt[i]));
+                sumOfScore += sum;
+            }
+        }
+        var dec_sumoff = parseFloat(sumOfScore, 10).toFixed(0);
+        $(".total_score" + studentid).html(dec_sumoff);
+        $('.tot_score' + studentid).val(dec_sumoff);
+        // rank
+        //Get all total values, sort and remove duplicates
+        let totalList = $(".all_score")
+            .map(function () { return $(this).text() })
+            .get()
+            .sort(function (a, b) { return a - b })
+            .reduce(function (a, b) { if (b != a[0]) a.unshift(b); return a }, [])
 
-        var cutoff_value = get_value * credit_point;
-        var sumoff = parseFloat(cutoff_value) + parseFloat(current_total_score);
-        // var dec = parseFloat(cutoff_value, 10).toFixed(2);
-        // $("#" + current_textbox_id).val(dec);
+        //assign rank
+        $(".all_score").each(function () {
+            let studID = $(this).attr('data-id');
+            let rankVal = $('.total_score' + studID).text();
+            // total_score
+            let rank = totalList.indexOf(rankVal) + 1;
+            $('.subdiv_lbl_ranking' + studID).text(rank);
+            $('.subdiv_lbl_ranking' + studID).val(rank);
 
+        })
 
-        var dec_sumoff = parseFloat(sumoff, 10).toFixed(0);
-        $(".tot_score" + studentid).html(dec_sumoff);
+        let marks_range = $('.total_score' + studentid).text();
+
+        // marks range
+        if (parseInt(marks_range) >= parseInt(passMark)) {
+            $('.subdivbadgeLabel' + studentid).removeClass('badge-danger');
+            $('.subdivbadgeLabel' + studentid).addClass('badge-success');
+            $('.sub_lbl_pass_fail' + studentid).text('pass');
+            $('.sub_lbl_pass_fail' + studentid).val('pass');
+
+        } else {
+            $('.subdivbadgeLabel' + studentid).removeClass('badge-success');
+            $('.subdivbadgeLabel' + studentid).addClass('badge-danger');
+            $('.sub_lbl_pass_fail' + studentid).text('fail');
+            $('.sub_lbl_pass_fail' + studentid).val('fail');
+        }
+        //
         subject_division_cutoff_grade(dec_sumoff, studentid);
 
     });
     //subject division base grade details bind
     function subject_division_cutoff_grade(marks_range, studentid) {
 
-        console.log(marks_range, studentid);
 
         if (marks_range != '') {
             var incre_class = $(this).attr('id');
-            console.log(incre_class)
             var formData = new FormData();
             formData.append('token', token);
             formData.append('marks_range', marks_range);
@@ -557,15 +601,14 @@ $(function () {
                 processData: false,
                 dataType: 'json',
                 contentType: false,
-                success: function (res) {                 
-                    console.log(res);
+                success: function (res) {
                     if (res.code == 200) {   
                         $(".lbl_grade" + studentid).text(res.data[0].grade);
                         $('.lbl_grade' + studentid).val(res.data[0].grade);
-                        console.log(res.data[0].grade);
                     }
                     else {
-                        console.log(res.data);
+                        $(".lbl_grade" + studentid).text("");
+                        $('.lbl_grade' + studentid).val("");
                     }
                 }
             });
@@ -581,9 +624,9 @@ $(function () {
         var exam_id = $("#examnames").val();
 
         $('#subjectdivTableAppend_text').empty();
-        var shortTestTable = "";
+        var subjectDivTable = "";
         var index = 0;
-        shortTestTable += '<div class="table-responsive">' +
+        subjectDivTable += '<div class="table-responsive">' +
             '<table class="table table-striped table-nowrap">' +
             '<thead>' +
             '<tr>' +
@@ -592,13 +635,15 @@ $(function () {
         $.each(subdiv, function (key, val) {
             index++;
             // table add
-            shortTestTable += '<th>' + val.subject_division + "(" + val.credit_point + ")" + '</th>';
+            subjectDivTable += '<th>' + val.subject_division + "(" + val.credit_point + ")" + '</th>';
 
         });
-        shortTestTable += '<th>Total Score</th>';
-        shortTestTable += '<th>Grade</th>';
-        shortTestTable += '<th>Ranking</th>';
-        shortTestTable += '</tr>' +
+        subjectDivTable += '<th>Status</th>';
+        subjectDivTable += '<th>Total Score</th>';
+        subjectDivTable += '<th>Grade</th>';
+        subjectDivTable += '<th>Pass/Fail</th>';
+        subjectDivTable += '<th>Ranking</th>';
+        subjectDivTable += '</tr>' +
             '</thead>' +
             '<tbody>';
         var start = 0;
@@ -607,37 +652,78 @@ $(function () {
         if (stdetails.length > 0) {
             stdetails.forEach(function (res) {
                 start++;
-                // short test table div start
-                shortTestTable += '<tr>' +
+                // subject Div Table table div start
+                subjectDivTable += '<tr>' +
                     '<td>';
                 if (start == 1) {
-                    shortTestTable += '<input type="hidden" name="date" value="' + classID + '">' +
+                    subjectDivTable += '<input type="hidden" name="class_id" value="' + classID + '">' +
                         '<input type="hidden" name="section_id" value="' + sectionID + '">' +
-                        '<input type="hidden" name="subject_id" value="' + subjectID + '">';
+                        '<input type="hidden" name="subject_id" value="' + subjectID + '">' +
+                        '<input type="hidden" name="exam_id" value="' + exam_id + '">';
 
                 }
-                shortTestTable += start +
+                subjectDivTable += start +
                     '</td>' +
                     '<td class="table-user">' +
                     '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
                     '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + res.first_name + ' ' + res.last_name + '</a>' +
                     '</td>';
+                // console.log(subdiv.length)
                 $.each(subdiv, function (key, val) {
-                    shortTestTable += '<td>' +
-                        '<input type="text" id="' + val.subject_division + start + '" data-ref-studentid="' + res.student_id + '" data-id="' + val.credit_point + '" class="form-control cutoff" style="width:100px;">' +
 
+                    var marks;
+                    if (res.subject_division) {
+                        var subject_division = res.subject_division.split(",");
+                        var subjectdivision_scores = res.subjectdivision_scores.split(",");
+                        // var grade_status = res.grade_status.split(",");
+                        var index = subject_division.findIndex(x => x === val.subject_division);
+                        if (index !== -1) {
+                            marks = subjectdivision_scores[index];
+                        }
+                    }
+                    // console.log(val.subject_division)
+                    // console.log(indexStart)
+                    subjectDivTable += '<td>' +
+                        '<input type="hidden" name="subjectdiv[' + indexStart + '][student_id]" value="' + res.student_id + '">' +
+                        '<input type="hidden" class="sub_lbl_pass_fail' + res.student_id + '" name="subjectdiv[' + indexStart + '][pass_fail]" value="' + res.pass_fail + '">' +
+                        '<input type="hidden" name="subjectdiv[' + indexStart + '][total_score]" class="tot_score' + res.student_id + '" data-id="' + res.student_id + '" value="' + (res.total_score ? res.total_score : "") + '">' +
+                        '<input type="hidden" name="subjectdiv[' + indexStart + '][grade]" class="lbl_grade' + res.student_id + '" data-id="' + res.student_id + '" value="' + (res.grade ? res.grade : "") + '">' +
+                        '<input type="hidden" class="subdiv_lbl_ranking' + res.student_id + '" name="subjectdiv[' + indexStart + '][ranking]" value="' + res.ranking + '">' +
+                        '<input type="hidden" name="subjectdiv[' + indexStart + '][subject_division][]" value="' + val.subject_division + '">' +
+                        '<input type="text" name="subjectdiv[' + indexStart + '][subjectdivision_scores][]" value="' + (marks ? marks : "") + '" id="' + val.subject_division + indexStart + '" data-ref-studentid="' + res.student_id + '" data-id="' + val.credit_point + '" class="form-control cutoff rowcutoff' + res.student_id + '" style="width:100px;">' +
                         '</td>';
+
                 });
-                shortTestTable += '<td>' +
-                    '<label for="tot_score" class="tot_score' + res.student_id + '" data-id="' + res.student_id + '">0</label>' +
+                subjectDivTable += '<td>' +
+                    '<select class="form-control" data-style="btn-outline-success" name="subjectdiv[' + indexStart + '][status]">' +
+                    '<option value="">Choose</option>' +
+                    '<option value="present" ' + (res.status == "present" ? "selected" : "selected") + '>Present</option>' +
+                    '<option value="absent" ' + (res.status == "absent" ? "selected" : "") + '>Absent</option>' +
+                    '</select>' +
                     '</td>';
-                shortTestTable += '<td>' +
-                    '<label for="grade" class="lbl_grade' + res.student_id + '" data-id="' + res.student_id + '">-</label>' +
+
+                subjectDivTable += '<td>' +
+                    '<label class="all_score total_score' + res.student_id + '" data-id="' + res.student_id + '">' + (res.total_score ? res.total_score : 0) + '</label>' +
                     '</td>';
-                shortTestTable += '<td>' +
-                    '<label for="ranking" class="lbl_ranking" data-id="">0</label>' +
+                subjectDivTable += '<td>' +
+                    '<label for="grade" class="lbl_grade' + res.student_id + '" data-id="' + res.student_id + '">' + (res.grade ? res.grade : "") + '</label>' +
                     '</td>';
-                // short test table div end
+
+                var passTag = "";
+                if (res.pass_fail) {
+                    if (res.pass_fail == "pass") {
+                        passTag = "badge-success";
+                    } else {
+                        passTag = "badge-danger";
+                    }
+                }
+                subjectDivTable += '<td>' +
+                    '<span class="badge subdivbadgeLabel' + res.student_id + ' ' + passTag + ' badge-pill sub_lbl_pass_fail' + res.student_id + '">' + (res.pass_fail != null ? res.pass_fail : "NILL") + '</span>' +
+                    '</td>';
+                subjectDivTable += '<td>' +
+                    '<label for="ranking" class="subdiv_lbl_ranking' + res.student_id + '">' + (res.ranking ? res.ranking : "0") + '</label>' +
+                    '</td>';
+                // subject Div Table table div end
                 // $.each(stdetails, function (key, val) {
 
                 //     var marks = "";
@@ -651,7 +737,7 @@ $(function () {
                 //         }
                 //     }
 
-                //     shortTestTable += '<td>' +
+                //     subjectDivTable += '<td>' +
                 //         '<input type="hidden" name="short_test[' + indexStart + '][student_id]" value="' + res.student_id + '">' +
                 //         '<input type="hidden" name="short_test[' + indexStart + '][test_name][]" value="' + val.test_name + '">' +
                 //         '<input type="hidden" name="short_test[' + indexStart + '][grade_status][]" value="' + val.status + '">' +
@@ -659,16 +745,44 @@ $(function () {
                 //         '</td>';
                 // });
                 indexStart++;
-                shortTestTable += '</tr>';
+                subjectDivTable += '</tr>';
             });
         }
 
-        shortTestTable += '</tbody>' +
+        subjectDivTable += '</tbody>' +
             '</table></div>';
-        $("#subjectdivTableAppend_text").append(shortTestTable);
+        $("#subjectdivTableAppend_text").append(subjectDivTable);
     }
+    // save subject division
+    $('#tblsubjectdivSave').on('submit', function (e) {
+        e.preventDefault();
+        var form = this;
+        $.ajax({
+            url: $(form).attr('action'),
+            method: $(form).attr('method'),
+            data: new FormData(form),
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (response) {
+                console.log(response);
+                if (response.code == 200) {
+                    toastr.success(response.message);
+                    console.log(response.message);
+                }
+                else {
+                    toastr.error(data.message);
+                }
+            }
+        });
+    });
+
     // function list mode
     function bindmarks(dataSetNew) {
+
+        var fullMark = $("#fullmark").val();
+        var passMark = $("#passmark").val();
+
         listTable = $('#stdmarks').DataTable({
             processing: true,
             bDestroy: true,
@@ -678,17 +792,6 @@ $(function () {
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
                 [5, 10, 25, 50, "All"]
-            ],
-            buttons: [
-                {
-                    text: 'Run',
-                    action: function (e, dt, node, config) {
-                        plainArray = listTable.rows({ search: 'applied' }).data().toArray();
-                        for (var x = 0; x < plainArray.length; x++) {
-                            console.log(plainArray[x]);
-                        }
-                    }
-                }
             ],
             columns: [
                 {
@@ -704,7 +807,13 @@ $(function () {
                     data: 'grade'
                 },
                 {
-                    data: 'rank_place'
+                    data: 'pass_fail'
+                },
+                {
+                    data: 'ranking'
+                },
+                {
+                    data: 'status'
                 },
                 {
                     data: 'memo'
@@ -733,7 +842,7 @@ $(function () {
                             '<input type="hidden" name="subjectmarks[' + meta.row + '][first_name]" value="' + row.first_name + '">' +
                             '<input type="hidden" name="subjectmarks[' + meta.row + '][last_name]" value="' + row.last_name + '">' +
                             '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
-                            '<a href=""  data-toggle="modal" data-target=".studentMarkModal" data-id="' + row.student_id + '" class="text-body font-weight-semibold studentChart">' + data + '</a>';
+                            '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
                         return first_name;
                     }
                 },
@@ -742,7 +851,7 @@ $(function () {
                     "width": "10%",
                     "className": "text-center",
                     "render": function (data, type, row, meta) {
-                        var score = '<input type="text" maxlength="3" class="form-control basevalidation" name="subjectmarks[' + meta.row + '][score]" id="' + row.student_id + '" value="' + (data != null ? data : "0") + '">';
+                        var score = '<input type="text" maxlength="3" class="form-control basevalidation" name="subjectmarks[' + meta.row + '][score]" id="' + row.student_id + '" value="' + (data != null ? data : "") + '">';
 
                         return score;
                     }
@@ -762,14 +871,45 @@ $(function () {
                     "width": "15%",
                     "className": "text-center",
                     "render": function (data, type, row, meta) {
-
-                        var ranking = '<label for="ranking" class="lbl_ranking">' + (data != null ? data : "0") + '</label>' +
-                            '<input type="hidden" class="lbl_ranking" name="subjectmarks[' + meta.row + '][ranking]" value="' + row.rank_place + '">';
-                        return ranking;
+                        var passTag = "";
+                        if (data) {
+                            if (data == "pass") {
+                                passTag = "badge-success";
+                            } else {
+                                passTag = "badge-danger";
+                            }
+                        }
+                        var pass_fail = '<span class="badge badgeLabel' + row.student_id + ' ' + passTag + ' badge-pill lbl_pass_fail' + row.student_id + '">' + (data != null ? data : "NILL") + '</span>' +
+                            '<input type="hidden" class="lbl_pass_fail' + row.student_id + '" name="subjectmarks[' + meta.row + '][pass_fail]" value="' + row.pass_fail + '">';
+                        return pass_fail;
                     }
                 },
                 {
                     "targets": 5,
+                    "width": "15%",
+                    "className": "text-center",
+                    "render": function (data, type, row, meta) {
+
+                        var ranking = '<label for="ranking" class="lbl_ranking' + row.student_id + '">' + (data != null ? data : "0") + '</label>' +
+                            '<input type="hidden" class="lbl_ranking' + row.student_id + '" name="subjectmarks[' + meta.row + '][ranking]" value="' + row.ranking + '">';
+
+                        return ranking;
+                    }
+                },
+                {
+                    "targets": 6,
+                    "width": "20%",
+                    "render": function (data, type, row, meta) {
+                        var att_status = '<select class="form-control" data-style="btn-outline-success" name="subjectmarks[' + meta.row + '][status]">' +
+                            '<option value="">Choose</option>' +
+                            '<option value="present" ' + (row.status == "present" ? "selected" : "selected") + '>Present</option>' +
+                            '<option value="absent" ' + (row.status == "absent" ? "selected" : "") + '>Absent</option>' +
+                            '</select>';
+                        return att_status;
+                    }
+                },
+                {
+                    "targets": 7,
                     "width": "30%",
                     "className": "text-center",
                     "render": function (data, type, row, meta) {

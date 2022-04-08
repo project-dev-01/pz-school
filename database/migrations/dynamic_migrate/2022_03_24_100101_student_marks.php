@@ -21,6 +21,8 @@ class StudentMarks extends Migration
             $table->integer('subject_id');
             $table->integer('exam_id');
             $table->integer('score');
+            $table->string('pass_fail')->nullable();
+            $table->string('status')->nullable();
             $table->string('grade');
             $table->integer('ranking');
             $table->string('memo');   

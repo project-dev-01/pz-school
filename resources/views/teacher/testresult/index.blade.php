@@ -109,7 +109,9 @@
                                             <th class="text-center" width="10%">Student Name</th>
                                             <th class="text-center" width="20%">Score</th>
                                             <th class="text-center" width="15%">Grade</th>
+                                            <th class="text-center" width="15%">Pass/Fail</th>
                                             <th class="text-center" width="15%">Ranking</th>
+                                            <th class="text-center" width="15%">Status</th>
                                             <th class="text-center" width="30%">Memo</th>
                                         </tr>
 
@@ -152,7 +154,7 @@
                                 <div id="cardCollpase3" class="collapse pt-3 show" dir="ltr">
                                     <div id="subject-avg-chart" class="apex-charts" data-colors="#f672a7"></div>
                                 </div> <!-- collapsed end -->
-                                
+
                             </div> <!-- end card-body -->
                         </div> <!-- end card-->
                     </div>
@@ -163,13 +165,13 @@
                     <li class="nav-item">
                         <h4 class="nav-link">
                             <span data-feather="book-open" class="icon-dual" id="span-parent"></span>Marks By Subject Division
-                        <h4>
+                            <h4>
                     </li>
                 </ul><br>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card-body">                           
-                            <table id="tblsubjectdiv" method="post" action="{{ route('teacher.subjectdivision.add') }}" autocomplete="off">
+                        <div class="card-body">
+                            <form id="tblsubjectdivSave" method="post" action="{{ route('teacher.subjectdivision.add') }}" autocomplete="off">
                                 @csrf
                                 <div id="subjectdivTableAppend_text">
                                 </div>
@@ -178,9 +180,9 @@
                                         <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Save</button>
                                     </div>
                                 </div>
-                            </table>
+                            </form>
                         </div> <!-- end table-responsive-->
-                    </div>                   
+                    </div>
                 </div> <!-- end card body-->
             </div> <!-- end card body-->
         </div> <!-- end card -->
@@ -321,7 +323,7 @@
 
 
 <!-- Center modal content -->
-<div class="modal fade studentMarkModal" id="studentMarkModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade reportModal" id="addClassModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-full-width">
         <div class="modal-content">
             <div class="modal-header">
@@ -367,11 +369,11 @@
     var examsList = "{{ config('constants.api.get_testresult_exams') }}";
     var getSubjectMarks = "{{ config('constants.api.get_testresult_marks_subject_vs') }}";
     var getMarks_vs_grade = "{{ config('constants.api.get_marks_vs_grade') }}";
-    var getsubjectdivision = "{{ config('constants.api.get_subject_division') }}";  
-    var getSubjectAverage = "{{ config('constants.api.get_subject_average') }}";     
-    var getStudentSubjectMark = "{{ config('constants.api.get_student_subject_mark') }}";     
-    var getStudentGrade = "{{ config('constants.api.get_student_grade') }}";     
-    
+    var getsubjectdivision = "{{ config('constants.api.get_subject_division') }}";
+    var getSubjectAverage = "{{ config('constants.api.get_subject_average') }}";
+    var getStudentSubjectMark = "{{ config('constants.api.get_student_subject_mark') }}";
+    var getStudentGrade = "{{ config('constants.api.get_student_grade') }}";
+
     // default image test
     var defaultImg = "{{ asset('images/users/default.jpg') }}";
 </script>
