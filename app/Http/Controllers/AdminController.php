@@ -1484,6 +1484,15 @@ class AdminController extends Controller
         $section = Helper::PostMethod(config('constants.api.section_by_class'), $data);
         return $section;
     }
+    public function examByClassSec(Request $request)
+    {
+        $data = [
+            'class_id' => $request->class_id,
+
+        ];
+        $section = Helper::PostMethod(config('constants.api.exam_by_classSection'), $data);
+        return $section;
+    }
 
     // get subject and Teacher
     public function getSubject(Request $request)
@@ -2759,5 +2768,34 @@ class AdminController extends Controller
         // dd($response);
         return $response;
     }
-    
+    public function byclasss()
+    {
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+      
+        return view(
+            'admin.exam_results.byclass',
+            [
+                'classnames' => $getclass['data'],
+            ]
+        ); 
+     
+    }
+    // exam master -> exam result start
+    public function bysubject()
+    {
+        return view('admin.exam_results.bysubject');
+    }
+    public function overall()
+    {
+        return view('admin.exam_results.overall');
+    }
+    public function bystudent()
+    {
+        return view('super_admin.exam_results.bystudent');
+    }
+    public function examResult()
+    {
+        return view('super_admin.exam.result');
+    }
+     // exam master -> exam result end
 }

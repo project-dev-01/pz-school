@@ -226,8 +226,6 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::get('timetable/index', [SuperAdminController::class, 'timeTable'])->name('super_admin.timetable.index');
         // faq
         Route::get('faq/index', [SuperAdminController::class, 'faqIndex'])->name('super_admin.faq.index');
-        // exam result
-        Route::get('exam/result', [SuperAdminController::class, 'examResult'])->name('super_admin.exam.result');
         // exam timetable
         Route::get('timetable/viewexam', [SuperAdminController::class, 'timeTableViewExam'])->name('super_admin.timetable.viewexam');
         Route::get('timetable/set_examwise', [SuperAdminController::class, 'timeTableSetExamWise'])->name('super_admin.timetable.set_examwise');
@@ -243,7 +241,9 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::get('exam_results/overall', [SuperAdminController::class, 'overall'])->name('super_admin.exam_results.overall');
 
         Route::get('exam_results/bystudent', [SuperAdminController::class, 'bystudent'])->name('super_admin.exam_results.bystudent');
-
+         
+         Route::get('exam/result', [SuperAdminController::class, 'examResult'])->name('super_admin.exam.result');
+        // exam result end
         Route::get('evaluation_report', [SuperAdminController::class, 'evaluationReport'])->name('super_admin.evaluation_report');
 
         Route::get('homework/edit', [SuperAdminController::class, 'homeworkEdit'])->name('super_admin.homework_edit');
@@ -360,6 +360,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
         // Section By Class Route
         Route::post('section-by-class', [AdminController::class, 'sectionByClass'])->name('admin.section_by_class');
+        Route::get('exam-by-classSection', [AdminController::class, 'examByClassSec'])->name('admin.exam_by_classSection');
 
         // Employee routes
 
@@ -508,6 +509,14 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
       // room By hostel Route
       Route::post('room-by-hostel', [AdminController::class, 'roomByHostel'])->name('admin.room_by_hostel');
+
+      // exam Result Group 
+      Route::get('exam_results/byclass', [AdminController::class, 'byclasss'])->name('admin.exam_results.byclass');
+      Route::get('exam_results/bysubject', [AdminController::class, 'bysubject'])->name('admin.exam_results.bysubject');      
+      Route::get('exam_results/overall', [AdminController::class, 'overall'])->name('admin.exam_results.overall');      
+      Route::get('exam_results/bystudent', [AdminController::class, 'bystudent'])->name('admin.exam_results.bystudent');               
+      Route::get('exam/result', [AdminController::class, 'examResult'])->name('admin.exam.result');
+      // exam result end
     });
     // admin routes end
 
@@ -721,7 +730,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         //Task routes
         Route::get('task/index', [TeacherController::class, 'taskIndex'])->name('teacher.task');
         Route::post('subjectmarksAdd', [TeacherController::class, 'subjectmarks'])->name('teacher.subjectmarks.add');
-        Route::post('subjectdivisionAdd', [TeacherController::class, 'subjectdivisionAdd'])->name('teacher.subjectdivision.add');
+        Route::post('subjectdivisionAdd', [TeacherController::class, 'subjectdivision'])->name('teacher.subjectdivision.add');
         
         // exam Result Group 
         Route::get('exam_results/byclass', [TeacherController::class, 'byclasss'])->name('teacher.exam_results.byclass');

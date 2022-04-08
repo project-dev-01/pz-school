@@ -546,8 +546,9 @@
                                     </div>
                                     <br />
                                     <div class="row shortTestHideSHow">
-                                        <div class="row">
+                                        <!-- <div class="row"> -->
                                             <div class="col-md-12">
+                                            <div class="card-body"> 
                                                 <form id="addShortTest" method="post" action="{{ route('teacher.classroom.add_short_test') }}" autocomplete="off">
                                                     @csrf
                                                     <div id="shortTestTableAppend">
@@ -559,7 +560,8 @@
                                                     </div>
                                                 </form>
                                             </div>
-                                        </div> <!-- end card-box-->
+                                            </div>
+                                        <!-- </div> end card-box -->
                                     </div>
 
                                 </div>

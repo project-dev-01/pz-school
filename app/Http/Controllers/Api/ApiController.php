@@ -2201,6 +2201,95 @@ class ApiController extends BaseController
             return $this->successResponse($class, 'Class record fetch successfully');
         }
     }
+    public function examByClassSec(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'today' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get data           
+            $getExamsName = $Connection->table('timetable_exam')
+                ->select('timetable_exam.exam_id as id', 'exam.name as name', 'timetable_exam.exam_date', 'timetable_exam.marks')
+                ->leftJoin('exam', 'timetable_exam.exam_id', '=', 'exam.id')
+                ->where('exam_date', '<', $request->today)
+                ->where('class_id', '=', $request->class_id)
+                ->where('section_id', '=', $request->section_id)
+                ->groupBy('exam.name')
+                ->get();
+            return $this->successResponse($getExamsName, 'Exams  list of Name record fetch successfully');
+        }
+    }
+    public function totgradeCalcuByClass(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'exam_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get data 
+            $byclassDetails = array();
+            $no_std_and_tech_name = array();
+            $getstudentcount = $Connection->table('enrolls')
+                ->select(
+                    DB::raw('COUNT(student_id) as "totalStudentCount"')
+                )
+                ->leftJoin('classes', 'enrolls.class_id', '=', 'classes.id')
+                ->where('class_id', '=', $request->class_id)
+                ->where('section_id', '=', $request->section_id)
+                ->get();
+            $getmastergrade = $Connection->table('grade_marks')
+                ->select(
+                    'id',
+                    'grade',
+                    'grade_point'
+                )
+                ->get();
+
+            $getteachername = $Connection->table('teacher_allocations')
+                ->select(
+                    'teacher_id',
+                    'class_id',
+                    'staffs.name as teachername'
+                )
+
+                ->leftJoin('staffs', 'teacher_allocations.teacher_id', '=', 'staffs.id')
+                ->where('class_id', '=', $request->class_id)
+                ->where('section_id', '=', $request->section_id)
+                ->get();
+            $getgradecount = $Connection->table('student_marks')
+                ->select('grade as gname', DB::raw('COUNT(*) as "gradecount"'))
+                ->where('class_id', '=', $request->class_id)
+                ->where('section_id', '=', $request->section_id)
+                ->where('exam_id', '=', $request->exam_id)
+                ->groupBy('grade')
+                ->get();
+            $commondetails = [
+                "getstudentcount" => $getstudentcount,
+                "getteachername" => $getteachername,
+                "getmastergrade" => $getmastergrade
+            ];
+            array_push($byclassDetails, $commondetails, $getgradecount);
+
+            return $this->successResponse($byclassDetails, 'Threads Post record fetch successfully');
+        }
+    }
 
     // subjectByClass 
     public function subjectByClass(Request $request)
@@ -5995,9 +6084,7 @@ class ApiController extends BaseController
                     'sa.grade',
                     'sa.ranking',
                     'sa.memo',
-                    'sa.pass_fail',
-                    'sa.status',
-                    // DB::raw("RANK() OVER(ORDER BY sa.score DESC) as rank_place")
+                    DB::raw("RANK() OVER(ORDER BY sa.score DESC) as rank_place")
                     //    'sd.subject_division'
                 )
                 ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
@@ -6073,9 +6160,6 @@ class ApiController extends BaseController
                 $grade = (isset($value['grade']) ? $value['grade'] : "");
                 $ranking = (isset($value['ranking']) ? $value['ranking'] : "");
                 $memo = (isset($value['memo']) ? $value['memo'] : "");
-                $pass_fail = (isset($value['pass_fail']) ? $value['pass_fail'] : "");
-                $status = (isset($value['status']) ? $value['status'] : "");
-
                 $arrayStudentMarks = array(
                     'student_id' => $student_id,
                     'class_id' => $class_id,
@@ -6084,9 +6168,7 @@ class ApiController extends BaseController
                     'exam_id' => $exam_id,
                     'score' => $score,
                     'grade' => $grade,
-                    'pass_fail' => $pass_fail,
                     'ranking' => $ranking,
-                    'status' => $status,
                     'memo' => $memo,
                     'created_at' => date("Y-m-d H:i:s")
                 );
@@ -6105,8 +6187,6 @@ class ApiController extends BaseController
                             'score' => $score,
                             'grade' => $grade,
                             'ranking' => $ranking,
-                            'pass_fail' => $pass_fail,
-                            'status' => $status,
                             'memo' => $memo,
                             'updated_at' => date("Y-m-d H:i:s")
                         ]);
@@ -6118,8 +6198,6 @@ class ApiController extends BaseController
                         'score' => $score,
                         'grade' => $grade,
                         'ranking' => $ranking,
-                        'pass_fail' => $pass_fail,
-                        'status' => $status,
                         'memo' => $memo,
                         'updated_at' => date("Y-m-d H:i:s")
                     ]);
@@ -6135,8 +6213,7 @@ class ApiController extends BaseController
             'branch_id' => 'required',
             'class_id' => 'required',
             'section_id' => 'required',
-            'subject_id' => 'required',
-            'exam_id' => 'required'
+            'subject_id' => 'required'
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -6147,7 +6224,6 @@ class ApiController extends BaseController
             $class_id = $request->class_id;
             $section_id = $request->section_id;
             $subject_id = $request->subject_id;
-            $exam_id = $request->exam_id;
             $Connection = $this->createNewConnection($request->branch_id);
 
             $studentdetails = $Connection->table('enrolls as en')
@@ -6156,28 +6232,15 @@ class ApiController extends BaseController
                     'en.roll',
                     'st.first_name',
                     'st.last_name',
-                    'st.register_no',
-                    'ssdiv.id as subdivision_id',
-                    'ssdiv.subject_division',
-                    'ssdiv.subjectdivision_scores',
-                    'ssdiv.total_score',
-                    'ssdiv.grade',
-                    'ssdiv.ranking',
-                    'ssdiv.pass_fail',
-                    'ssdiv.status',
+                    'st.register_no'
                 )
                 ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
-                ->leftJoin('student_subjectdivision_inst as ssdiv', function ($q) use ($class_id, $subject_id, $exam_id) {
-                    $q->on('ssdiv.student_id', '=', 'st.id')
-                        ->on('ssdiv.exam_id', '=', DB::raw("'$exam_id'")) //second join condition                           
-                        ->on('ssdiv.subject_id', '=', DB::raw("'$subject_id'")); //need to add subject id also later                           
-                })
                 ->where([
                     ['en.class_id', '=', $request->class_id],
                     ['en.section_id', '=', $request->section_id]
                 ])
+                // ->groupBy('en.student_id')
                 ->get();
-
             $subjectdivision = $Connection->table('student_subjectdivision')
                 ->select(
                     'class_id',
@@ -6208,8 +6271,8 @@ class ApiController extends BaseController
             'class_id' => 'required',
             'section_id' => 'required',
             'subject_id' => 'required',
-            'exam_id' => 'required',
-            'subjectdiv' => 'required',
+            'date' => 'required',
+            'short_test' => 'required',
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -6217,59 +6280,119 @@ class ApiController extends BaseController
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
 
-            $subjectdiv = $request->subjectdiv;
+            $short_test = $request->short_test;
+            $date = $request->date;
             $class_id = $request->class_id;
             $section_id = $request->section_id;
             $subject_id = $request->subject_id;
-
-            // $total_score = $request->total_score;
-            // $grade = $request->grade;
-            foreach ($subjectdiv as $key => $value) {
-
-                $subject_division = (count($value['subject_division']) > 0) ? implode(",", $value['subject_division']) : "";
-                $subjectdivision_scores = (count($value['subjectdivision_scores']) > 0) ? implode(",", $value['subjectdivision_scores']) : "";
-
-                $addSubjectDivision = array(
+            $date = $request->date;
+            foreach ($short_test as $key => $value) {
+                // $test_name = (count($value['test_name'][0]) > 0) ? implode(",", $value['test_name'][0]) : "";
+                // $grade_status = (count($value['grade_status'][0]) > 0) ? implode(",", $value['grade_status'][0]) : "";
+                // $test_marks = (count($value['test_marks'][0]) > 0) ? implode(",", $value['test_marks'][0]) : "";
+                $newTestName = $value['test_name'];
+                $newgradeStatus = $value['grade_status'];
+                $newtestMarks = $value['test_marks'];
+                $test_name = (count($value['test_name']) > 0) ? implode(",", $value['test_name']) : "";
+                $grade_status = (count($value['grade_status']) > 0) ? implode(",", $value['grade_status']) : "";
+                $test_marks = (count($value['test_marks']) > 0) ? implode(",", $value['test_marks']) : "";
+                // dd($value['attendance_id']);
+                // $grade_status = (isset($value['grade_status']) ? $value['grade_status'] : "");
+                // $test_marks = (isset($value['test_marks']) ? $value['test_marks'] : "");
+                // foreach($test_name as $key => $value) {
+                //     print_r($value);
+                // }
+                $addShortTest = array(
                     'student_id' => $value['student_id'],
-                    'subjectdivision_scores' => $subjectdivision_scores,
-                    'subject_division' => $subject_division,
+                    'test_name' => $test_name,
+                    'grade_status' => $grade_status,
+                    'test_marks' => $test_marks,
+                    'date' => $date,
                     'class_id' => $class_id,
                     'section_id' => $section_id,
                     'subject_id' => $subject_id,
-                    'total_score' => $value['total_score'],
-                    'exam_id' => $request->exam_id,
-                    'pass_fail' => $value['pass_fail'],
-                    'ranking' => $value['ranking'],
-                    'status' => $value['status'],
-                    'grade' => $value['grade'],
                     'created_at' => date("Y-m-d H:i:s")
                 );
-                // dd($addSubjectDivision);
-                // return "dfdf";
-                $checkExist = $Connection->table('student_subjectdivision_inst')->where([
-                    ['class_id', '=', $request->class_id],
-                    ['section_id', '=', $request->section_id],
-                    ['subject_id', '=', $request->subject_id],
-                    ['student_id', '=', $value['student_id']],
-                    ['exam_id', '=', $request->exam_id],
+                // echo $key;
+                // echo gettype($test_name);
+                // print_r($addShortTest);
+                $checkExist = $Connection->table('short_tests')->where([
+                    // ['test_name', '=', $value['test_name']],
+                    ['date', '=', $date],
+                    ['student_id', '=', $value['student_id']]
                 ])->first();
-                // dd($checkExist);
-                if (isset($checkExist->id)) {
-                    $Connection->table('student_subjectdivision_inst')->where('id', $checkExist->id)->update([
-                        'subjectdivision_scores' => $subjectdivision_scores,
-                        'subject_division' => $subject_division,
-                        'total_score' => $value['total_score'],
-                        'grade' => $value['grade'],
-                        'pass_fail' => $value['pass_fail'],
-                        'ranking' => $value['ranking'],
-                        'status' => $value['status'],
+                // $checkExist = $Connection->table('short_tests')->where([['test_name', '=', $value['test_name']], ['date', '=', $date], ['student_id', '=', $value['student_id']]])->first();
+
+                // if ($Connection->table('short_tests')->where([['test_name', '=', $value['test_name']], ['date', '=', $date], ['student_id', '=', $value['student_id']]])->count() > 0) {
+                if ($Connection->table('short_tests')->where([['date', '=', $date], ['student_id', '=', $value['student_id']]])->count() > 0) {
+                    // print_r($checkExist->test_name);
+                    // print_r($test_name);
+                    $dbTestname = explode(",", $checkExist->test_name);
+                    $dbTestMarks = explode(",", $checkExist->test_marks);
+                    $dbGradeStatus = explode(",", $checkExist->grade_status);
+
+                    // $dbTestMarks = explode(",", $checkExist->test_marks);
+                    $testNames = array();
+                    $gradeStatus = array();
+                    $testMarks = array();
+
+                    if (isset($newTestName)) {
+                        foreach ($newTestName as $key => $val) {
+                            if (in_array($val, $dbTestname)) {
+                                // Match found
+                                array_push($testNames, $val);
+                                array_push($gradeStatus, $newgradeStatus[$key]);
+                                array_push($testMarks, $newtestMarks[$key]);
+                            } else {
+                                // Match not found
+                                array_push($testNames, $newTestName[$key]);
+                                array_push($gradeStatus, $newgradeStatus[$key]);
+                                array_push($testMarks, $newtestMarks[$key]);
+                            }
+                        }
+                    }
+
+                    $dbTestMarks = explode(",", $checkExist->test_marks);
+                    $dbGradeStatus = explode(",", $checkExist->grade_status);
+                    // print_r($gradeStatus);
+                    // print_r($testMarks);
+                    $result = array_diff_assoc($dbTestname, $testNames);
+                    if (isset($result)) {
+                        foreach ($result as $key => $val) {
+                            array_push($testNames, $val);
+                            array_push($gradeStatus, $dbGradeStatus[$key]);
+                            array_push($testMarks, $dbTestMarks[$key]);
+                        }
+                    }
+                    // print_r($testNames);
+                    // print_r($gradeStatus);
+                    // print_r($testMarks);
+
+                    // array_push($testNames, $result);
+
+                    // print_r($testNames);
+                    // $result=array_diff($testNames,$dbTestname);
+                    // print_r($result);
+                    // $currentTestname = explode(",", $test_name);
+                    // $result = array_diff($dbTestname, $currentTestname);
+                    // print_r($value['test_name']);
+                    // echo "<br>";
+                    // print_r($currentTestname);
+                    // echo "<br>";
+                    // print_r($result);
+
+                    // exit;
+                    $Connection->table('short_tests')->where('id', $checkExist->id)->update([
+                        'test_name' => implode(",", $testNames),
+                        'grade_status' => implode(",", $gradeStatus),
+                        'test_marks' => implode(",", $testMarks),
                         'updated_at' => date("Y-m-d H:i:s")
                     ]);
                 } else {
-                    $Connection->table('student_subjectdivision_inst')->insert($addSubjectDivision);
+                    $Connection->table('short_tests')->insert($addShortTest);
                 }
             }
-            return $this->successResponse([], 'Student subjects added successfuly.');
+            return $this->successResponse([], 'Short test added successfuly.');
         }
     }
 
@@ -6718,180 +6841,6 @@ class ApiController extends BaseController
                 ->groupBy('sa.teacher_id')
                 ->get();
             return $this->successResponse($success, 'Teachers record fetch successfully');
-        }
-    }
-
-
-
-    public function getSubjectAverage(Request $request)
-    {
-        $validator = \Validator::make($request->all(), [
-            'token' => 'required',
-            'branch_id' => 'required',
-            'class_id' => 'required',
-            'section_id' => 'required',
-            'subject_id' => 'required'
-        ]);
-        if (!$validator->passes()) {
-            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-        } else {
-            // create new connection
-            // get attendance details query
-            $subject_id = $request->subject_id;
-            $class_id = $request->class_id;
-            $section_id = $request->section_id;
-            $subject_id = $request->subject_id;
-            $Connection = $this->createNewConnection($request->branch_id);
-
-            $studentdetails = $Connection->table('student_marks as sm')->select('sm.exam_id', 'te.exam_date', DB::raw('round(AVG(sm.score), 2) as average'))
-                ->leftJoin('timetable_exam as te', function ($join) {
-                    $join->on('te.exam_id', '=', 'sm.exam_id')
-                        ->on('te.class_id', '=', 'sm.class_id')
-                        ->on('te.section_id', '=', 'sm.section_id')
-                        ->on('te.subject_id', '=', 'sm.subject_id');
-                })
-                ->where([
-                    ['sm.class_id', '=', $request->class_id],
-                    ['sm.section_id', '=', $request->section_id],
-                    ['sm.subject_id', '=', $request->subject_id]
-                ])
-                ->groupBy('sm.exam_id')
-                ->orderBy('te.exam_date', 'ASC')
-                ->get();
-
-            // return $studentdetails;
-            return $this->successResponse($studentdetails, 'Subject division record fetch successfully');
-        }
-    }
-
-
-
-    public function getStudentSubjectMark(Request $request)
-    {
-        $validator = \Validator::make($request->all(), [
-            'token' => 'required',
-            'branch_id' => 'required',
-            'class_id' => 'required',
-            'section_id' => 'required',
-            'subject_id' => 'required',
-            'student_id' => 'required'
-        ]);
-
-        if (!$validator->passes()) {
-            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-        } else {
-            // create new connection
-            // get attendance details query
-            $subject_id = $request->subject_id;
-            $class_id = $request->class_id;
-            $section_id = $request->section_id;
-            $subject_id = $request->subject_id;
-            $Connection = $this->createNewConnection($request->branch_id);
-
-            $studentdetails = $Connection->table('student_marks as sm')->select('sm.exam_id', 'te.exam_date', 'sm.score', DB::raw('round(AVG(sm.score), 2) as average'))
-                ->leftJoin('timetable_exam as te', function ($join) {
-                    $join->on('te.exam_id', '=', 'sm.exam_id')
-                        ->on('te.class_id', '=', 'sm.class_id')
-                        ->on('te.section_id', '=', 'sm.section_id')
-                        ->on('te.subject_id', '=', 'sm.subject_id');
-                })
-                ->where([
-                    ['sm.class_id', '=', $request->class_id],
-                    ['sm.section_id', '=', $request->section_id],
-                    ['sm.subject_id', '=', $request->subject_id],
-                    ['sm.student_id', '=', $request->student_id]
-                ])
-                ->groupBy('sm.exam_id')
-                ->orderBy('te.exam_date', 'ASC')
-                ->get();
-
-            // return $studentdetails;
-            return $this->successResponse($studentdetails, 'Subject division record fetch successfully');
-        }
-    }
-
-    public function getStudentGrade(Request $request)
-    {
-        // return 2;
-        $validator = \Validator::make($request->all(), [
-            'token' => 'required',
-            'branch_id' => 'required',
-            'class_id' => 'required',
-            'section_id' => 'required',
-            'subject_id' => 'required',
-            'exam_id' => 'required'
-        ]);
-
-        if (!$validator->passes()) {
-            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-        } else {
-            // create new connection
-            // get attendance details query
-            $subject_id = $request->subject_id;
-            $class_id = $request->class_id;
-            $section_id = $request->section_id;
-            $subject_id = $request->subject_id;
-            $Connection = $this->createNewConnection($request->branch_id);
-
-            $studentdetails = $Connection->table('student_marks as sm')->select('sm.grade as y', DB::raw('count(sm.grade) as a'))
-                ->leftJoin('timetable_exam as te', function ($join) {
-                    $join->on('te.exam_id', '=', 'sm.exam_id')
-                        ->on('te.class_id', '=', 'sm.class_id')
-                        ->on('te.section_id', '=', 'sm.section_id')
-                        ->on('te.subject_id', '=', 'sm.subject_id');
-                })
-                ->where([
-                    ['sm.class_id', '=', $request->class_id],
-                    ['sm.section_id', '=', $request->section_id],
-                    ['sm.subject_id', '=', $request->subject_id],
-                    ['sm.exam_id', '=', $request->exam_id],
-                ])
-                ->groupBy('sm.grade')
-                ->get();
-
-            // return $studentdetails;
-            return $this->successResponse($studentdetails, 'Subject division record fetch successfully');
-        }
-    }
-
-    public function getSubDivisionMark(Request $request)
-    {
-        // return 2;
-        $validator = \Validator::make($request->all(), [
-            'token' => 'required',
-            'branch_id' => 'required',
-            'class_id' => 'required',
-            'section_id' => 'required',
-            'subject_id' => 'required',
-            'exam_id' => 'required'
-        ]);
-
-        if (!$validator->passes()) {
-            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-        } else {
-            // create new connection
-            // get attendance details query
-            $subject_id = $request->subject_id;
-            $class_id = $request->class_id;
-            $section_id = $request->section_id;
-            $subject_id = $request->subject_id;
-            $Connection = $this->createNewConnection($request->branch_id);
-
-            $studentdetails = $Connection->table('student_marks as sm')->select('sm.score', "ss.subject_division")
-                ->leftJoin('student_subjectdivision as ss', function ($join) {
-                    $join->on('ss.class_id', '=', 'sm.class_id')
-                        ->on('ss.section_id', '=', 'sm.section_id')
-                        ->on('ss.subject_id', '=', 'sm.subject_id');
-                })
-                ->where([
-                    ['sm.class_id', '=', $request->class_id],
-                    ['sm.section_id', '=', $request->section_id],
-                    ['sm.subject_id', '=', $request->subject_id],
-                ])
-                ->get();
-
-            // return $studentdetails;
-            return $this->successResponse($studentdetails, 'Subject division record fetch successfully');
         }
     }
 }

@@ -1,5 +1,5 @@
 <?php
-$url = "http://localhost/school-management-system/public/api";
+$url = "http://localhost:8080/school-management-system/public/api";
 return [
 
     'api' => [
@@ -47,6 +47,8 @@ return [
         'section_by_class' => $url.'/section-by-class',
         'subject_by_class' => $url.'/subject-by-class',  
         'timetable_subject' => $url.'/timetable-subject',
+        'exam_by_classSection'=>$url.'/exam-by-classSection',
+        'tot_grade_calcu_byclass'=>$url.'/tot_grade_calcu_byclass',
 
         // class url
         'class_add' => $url.'/classes/add',
@@ -216,13 +218,8 @@ return [
         'grade_delete' => $url.'/grade/delete',
                  // get_marks_vs_grade
         'get_marks_vs_grade' => $url.'/get_marks_vs_grade',
-        'add_student_marks' => $url.'/add_student_marks',
-        'get_subject_division' => $url.'/get_subject_division',
-        'add_subject_division'=>$url.'/add_subject_division',
-        'get_subject_average' => $url.'/get_subject_average',
-        'get_student_subject_mark' => $url.'/get_student_subject_mark',
-        'get_student_grade' => $url.'/get_student_grade',
-        
+        'add_student_marks'=>$url.'/add_student_marks',
+        'get_subject_division'=>$url.'/get_subject_division',
 
         // get transport list
         'transport_list' => $url.'/transport/list',

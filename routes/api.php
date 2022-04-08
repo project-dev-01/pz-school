@@ -94,7 +94,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('section-by-class', [ApiController::class, 'sectionByClass']);
     Route::post('subject-by-class', [ApiController::class, 'subjectByClass']);
     Route::post('timetable-subject', [ApiController::class, 'timetableSubject']);
-    
+    Route::get('exam-by-classSection', [ApiController::class, 'examByClassSec']);
+    Route::get('tot_grade_calcu_byclass', [ApiController::class, 'totgradeCalcuByClass']);
     
     // Event Type routes
     Route::post('event_type/add', [ApiController::class, 'addEventType']);
@@ -225,11 +226,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('get_marks_vs_grade',[ApiController::class,'marks_vs_grade']);
     Route::post('add_student_marks',[ApiController::class,'addStudentMarks']);
     Route::post('get_subject_division',[ApiController::class,'getsubjectdivision']);
-    Route::post('get_subject_average',[ApiController::class,'getSubjectAverage']);
     Route::post('add_subject_division',[ApiController::class,'addsubjectdivision']);
-    Route::post('get_student_subject_mark',[ApiController::class,'getStudentSubjectMark']);
-    Route::post('get_student_grade',[ApiController::class,'getStudentGrade']);
-    Route::post('get_subject_divison_mark',[ApiController::class,'getSubDivisionMark']);
     // classroom management
     Route::post('teacher_class',[ApiController::class,'getTeachersClassName']);
     Route::post('teacher_section',[ApiController::class,'getTeachersSectionName']);

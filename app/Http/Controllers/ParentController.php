@@ -71,9 +71,6 @@ class ParentController extends Controller
         );
         
         $timetable = Helper::PostMethod(config('constants.api.timetable_parent'), $data);
-        // dd($timetable);
-        // dd(isset($timetable['data']['timetable']) ? count($timetable['data']['timetable']) : 0);
-        // isset($etable['data']['timetable']) ? count($etable['data']['timetable']) : 0;
         if($timetable['code']=="200")
         {
             return view(
@@ -83,7 +80,7 @@ class ParentController extends Controller
                     'details' => $timetable['data']['details'],
                     'days' => $days,
                     'max' => $timetable['data']['max']
-    
+   
                 ]
             );
         }else{

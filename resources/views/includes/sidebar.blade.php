@@ -835,6 +835,41 @@
                                     </ul>
                                 </div>
                             </li>
+                            <li>
+                                <a href="#sidebarResult" data-toggle="collapse">
+                                <i data-feather="book-open" class="icons-xs icon-dual"></i> &nbsp;
+                                    Exam Results<span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarResult">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admin.exam_results.byclass')}}" class="nav-link {{ (request()->is('admin/exam_results')) ? 'active' : '' }}">
+                                                <span>By Class</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                        <a href="{{ route('admin.exam_results.bysubject')}}" class="nav-link {{ (request()->is('admin/exam_results')) ? 'active' : '' }}">
+                                                <span>By Subject</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                        <a href="{{ route('admin.exam_results.bystudent')}}" class="nav-link {{ (request()->is('admin/exam_results')) ? 'active' : '' }}">
+                                                <span>By Student</span>
+                                            </a>
+                                        </li>  
+                                        <li>
+                                        <a href="{{ route('admin.exam_results.overall')}}" class="nav-link {{ (request()->is('admin/exam_results')) ? 'active' : '' }}">
+                                                <span>Overall</span>
+                                            </a>
+                                        </li>                                     
+                                        <li>
+                                             <a href="{{ route('admin.exam.result')}}" class="nav-link {{ (request()->is('admin/exam*')) ? 'active' : '' }}">                                         
+                                            <span>Individual Result </span>
+                                             </a>
+                                         </li>
+                                    </ul>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </li>
