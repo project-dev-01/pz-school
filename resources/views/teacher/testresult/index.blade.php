@@ -82,7 +82,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card">
+            <div class="card" id="mark_by_subject_card" style="display:none">
                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                     <li class="nav-item">
                         <h4 class="nav-link">
@@ -92,7 +92,7 @@
                 </ul><br>
                 <form id="addstudentmarks" method="post" action="{{ route('teacher.subjectmarks.add') }}" autocomplete="off">
                     @csrf
-                    <div class="row subjectmarks">
+                    <div class="row">
                         <input type="hidden" name="class_id" id="listModeClassID">
                         <input type="hidden" name="section_id" id="listModeSectionID">
                         <input type="hidden" name="subject_id" id="listModeSubjectID">
@@ -131,7 +131,33 @@
                     </div>
                 </form>
             </div>
-            <div class="card">
+            
+            <div class="card" id="subjectdivTableAppend" style="display:none">
+                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                            <span data-feather="book-open" class="icon-dual" id="span-parent"></span>Marks By Subject Division
+                            <h4>
+                    </li>
+                </ul><br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            <form id="tblsubjectdivSave" method="post" action="{{ route('teacher.subjectdivision.add') }}" autocomplete="off">
+                                @csrf
+                                <div id="subjectdivTableAppend_text">
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="clearfix mt-4">
+                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Save</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div> <!-- end table-responsive-->
+                    </div>
+                </div> <!-- end card body-->
+            </div>
+            <div class="card" id="subject_average_card" style="display:none">
                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                     <li class="nav-item">
                         <h4 class="nav-link">
@@ -159,120 +185,97 @@
                         </div> <!-- end card-->
                     </div>
                 </div>
-            </div>
-            <div class="card" id="subjectdivTableAppend">
+            </div> <!-- end card body-->
+
+            
+            <div class="card" id="scores_by_graph_card" style="display:none">
                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            <span data-feather="book-open" class="icon-dual" id="span-parent"></span>Marks By Subject Division
+                            <span data-feather="bar-chart-2" class="icon-dual" id="span-parent"></span>Scores by Graph
+                            <h4>
+                    </li>
+                </ul><br>
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card-body" dir="ltr">
+                            <div class="card-widgets">
+                                <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                                <a data-toggle="collapse" href="#cardCollpase3" role="button" aria-expanded="false" aria-controls="cardCollpase3"><i class="mdi mdi-minus"></i></a>
+                                <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                            </div>
+                            <h4 class="header-title mb-0">Statistics</h4>
+
+                            <div id="cardCollpase3" class="collapse pt-3 show">
+                                <div class="text-center">
+
+                                    <div class="row mt-2">
+                                        <div class="col-6">
+                                            <h3 data-plugin="">Number of Student</h3>
+                                            <p class="text-muted font-13 mb-0 text-truncate">Y Axis</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <h3 data-plugin="">Grade</h3>
+                                            <p class="text-muted font-13 mb-0 text-truncate">X Axis</p>
+                                        </div>
+                                    </div> <!-- end row -->
+                                    <div id="statistics-chart" data-colors="#02c0ce" style="height: 270px;" class="morris-chart mt-3"></div>
+
+                                </div>
+                            </div> <!-- end collapse-->
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+            </div>
+            <div class="card" id="graphs_card" style="display:none">
+                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                            <span data-feather="activity" class="icon-dual" id="span-parent"></span>Graphs
                             <h4>
                     </li>
                 </ul><br>
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="card-body">
-                            <form id="tblsubjectdivSave" method="post" action="{{ route('teacher.subjectdivision.add') }}" autocomplete="off">
-                                @csrf
-                                <div id="subjectdivTableAppend_text">
+                    <div class="col-lg-6" id="donut-chart" style="display:none">
+                        <!-- Portlet card -->
+                        <div class="card">
+                            <div class="card-body" dir="ltr">
+                                <div class="card-widgets">
+                                    <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                                    <a data-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
+                                    <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="clearfix mt-4">
-                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Save</button>
+                                <h4 class="header-title mb-0">Test Execution Summary</h4>
+
+                                <div id="cardCollpase1" class="collapse pt-3 show">
+                                    <div class="text-center">
+
+                                        <div id="donut-chart-test-summary" data-colors="#4fc6e1,#6658dd,#ebeff2" style="height: 270px;" class="morris-chart mt-3"></div>
+
                                     </div>
+                                </div> <!-- end collapse-->
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col-->
+                    <div class="col-lg-6" id="radar-chart" style="display:none">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title">Test Score Analysis</h4>
+                                <div class="mt-4 chartjs-chart">
+                                    <canvas id="radar-chart-test-marks" data-colors="#39afd1,#a17fe0"></canvas>
+                                    <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
                                 </div>
-                            </form>
-                        </div> <!-- end table-responsive-->
-                    </div>
-                </div> <!-- end card body-->
-            </div> <!-- end card body-->
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col -->
+                </div>
+
+
+            </div> <!-- end card-body -->
         </div> <!-- end card -->
     </div><!-- end col-->
 
-    <div class="card">
-        <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
-            <li class="nav-item">
-                <h4 class="nav-link">
-                    <span data-feather="bar-chart-2" class="icon-dual" id="span-parent"></span>Scores by Graph
-                    <h4>
-            </li>
-        </ul><br>
-
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="card-body" dir="ltr">
-                    <div class="card-widgets">
-                        <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                        <a data-toggle="collapse" href="#cardCollpase3" role="button" aria-expanded="false" aria-controls="cardCollpase3"><i class="mdi mdi-minus"></i></a>
-                        <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
-                    </div>
-                    <h4 class="header-title mb-0">Statistics</h4>
-
-                    <div id="cardCollpase3" class="collapse pt-3 show">
-                        <div class="text-center">
-
-                            <div class="row mt-2">
-                                <div class="col-6">
-                                    <h3 data-plugin="">Number of Student</h3>
-                                    <p class="text-muted font-13 mb-0 text-truncate">Y Axis</p>
-                                </div>
-                                <div class="col-6">
-                                    <h3 data-plugin="">Grade</h3>
-                                    <p class="text-muted font-13 mb-0 text-truncate">X Axis</p>
-                                </div>
-                            </div> <!-- end row -->
-                            <div id="statistics-chart" data-colors="#02c0ce" style="height: 270px;" class="morris-chart mt-3"></div>
-
-                        </div>
-                    </div> <!-- end collapse-->
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col-->
-    </div>
-    <div class="card">
-        <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
-            <li class="nav-item">
-                <h4 class="nav-link">
-                    <span data-feather="activity" class="icon-dual" id="span-parent"></span>Graphs
-                    <h4>
-            </li>
-        </ul><br>
-        <div class="row">
-            <div class="col-lg-6" id="radar-chart">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="header-title">Test Score Analysis</h4>
-                        <div class="mt-4 chartjs-chart">
-                            <canvas id="radar-chart-test-marks" data-colors="#39afd1,#a17fe0"></canvas>
-                            <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
-                        </div>
-                    </div> <!-- end card-body-->
-                </div> <!-- end card-->
-            </div> <!-- end col -->
-            <div class="col-lg-6" id="testexecution">
-                <!-- Portlet card -->
-                <div class="card">
-                    <div class="card-body" dir="ltr">
-                        <div class="card-widgets">
-                            <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                            <a data-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
-                            <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
-                        </div>
-                        <h4 class="header-title mb-0">Test Execution Summary</h4>
-
-                        <div id="cardCollpase1" class="collapse pt-3 show">
-                            <div class="text-center">
-
-                                <div id="donut-chart-test-summary" data-colors="#4fc6e1,#6658dd,#ebeff2" style="height: 270px;" class="morris-chart mt-3"></div>
-
-                            </div>
-                        </div> <!-- end collapse-->
-                    </div> <!-- end card-body-->
-                </div> <!-- end card-->
-            </div> <!-- end col-->
-        </div>
-
-
-    </div> <!-- end card-body -->
     <!-- container -->
 </div>
 
@@ -308,7 +311,7 @@
 
 
 <!-- Center modal content -->
-<div class="modal fade reportModal" id="addClassModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade studentMarkModal" id="studentMarkModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-full-width">
         <div class="modal-content">
             <div class="modal-header">
@@ -329,7 +332,7 @@
                         </div>
                     </div> -->
 
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="header-title">Marks by Subject </h4>

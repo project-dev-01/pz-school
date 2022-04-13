@@ -215,22 +215,17 @@ $(function () {
                     var dataSetNew = response.data;
                     if (response.code == 200) {
                         if (response.data.length > 0) {
-                            
-                            $(".subjectmarks").show("slow");
+                            $("#mark_by_subject_card").show();
                             bindmarks(dataSetNew);
-                            // $("#testexecution").hide();
                             $("#listModeClassID").val(class_id);
                             $("#listModeSectionID").val(section_id);
                             $("#listModeSubjectID").val(subject_id);
                             $("#listModeexamID").val(exam_id);
                         } else {
-                            $(".subjectmarks").hide();
-                            toastr.info('No records are available');
+                            $("#mark_by_subject_card").hide();
                         }
-                        $(".testResultHideSHow").show("slow");
                         //$("#layoutModeGrid").append(layoutModeGrid);
                     } else {
-                        $(".testResultHideSHow").hide();
                         toastr.error(response.message);
                     }
                 }
@@ -250,11 +245,8 @@ $(function () {
                         if (subdiv.length > 0) {
                             $('#subjectdivTableAppend').show();
                             subjectdivisionShow(stdetails, subdiv);
-                            $("#testexecution").show();
-                            $(".testResultHideSHow").show("slow");
                         }
                         else {
-                            $(".testResultHideSHow").hide();
                             $('#subjectdivTableAppend').hide();
                         }
                     } else {
@@ -285,17 +277,15 @@ $(function () {
             dataType: 'json',
             contentType: false,
             success: function (response) {
-                console.log('res',response)
                 if (response.code == 200) {
-
-                    
                     var detail = response.data;
-                    console.log('detail',detail)
                     var pass = 0;
                     var fail = 0;
                     var inprogress = 0;
                     if (detail.length > 0) {
-                        // graph data
+                        // graph 
+                        $('#graphs_card').show();
+                        $('#donut-chart').show();
                         detail.forEach(function (res) {
                             if (res.status == "pass") {
                                 pass = res.count;
@@ -307,9 +297,12 @@ $(function () {
                                 inprogress = res.count;
                             }
                         });
+                        donutchart(pass,fail,inprogress);
+                        donut_chart.updateSeries([pass,fail,inprogress]);
+                    } else {
+                        $('#graphs_card').hide();
+                        $('#donut-chart').hide();
                     }
-                    donutchart();
-                    donut_chart.updateSeries([pass,fail,inprogress]);
                     
                 } else {
                     toastr.error(data.message);
@@ -330,7 +323,6 @@ $(function () {
             contentType: false,
             success: function (response) {
                 if (response.code == 200) {
-                    
                     var markDetails = response.data.markDetails;
                     var subdiv = response.data.subjectdivision;
                     var data = [];
@@ -339,31 +331,32 @@ $(function () {
                         subdiv.forEach(function (res) {
                             label.push(res.subject_division);
                         });
-                    }
-                    if (markDetails.length > 0) {
-                        $('#radar-chart').show();
-                        markDetails.forEach(function (res) {
-                            var randcol = getRandomColor();
-                            var obj = {};
-                            var avg= [];
-                            obj["label"] = res.exam_name;
-                            obj["backgroundColor"] = hexToRGB(randcol, 0.3);
-                            obj["borderColor"] = randcol;
-                            obj["pointBackgroundColor"] = randcol;
-                            obj["pointBorderColor"] =  "#fff";
-                            obj["pointHoverBackgroundColor"] =  "#fff";
-                            obj["pointHoverBorderColor"] = randcol;
-                            $.each(res.average, function (key, val) {
-                                avg.push(val);
+
+                        if (markDetails.length > 0) {
+                            markDetails.forEach(function (res) {
+                                var randcol = getRandomColor();
+                                var obj = {};
+                                var avg= [];
+                                obj["label"] = res.exam_name;
+                                obj["backgroundColor"] = hexToRGB(randcol, 0.3);
+                                obj["borderColor"] = randcol;
+                                obj["pointBackgroundColor"] = randcol;
+                                obj["pointBorderColor"] =  "#fff";
+                                obj["pointHoverBackgroundColor"] =  "#fff";
+                                obj["pointHoverBorderColor"] = randcol;
+                                $.each(res.average, function (key, val) {
+                                    avg.push(val);
+                                });
+                                obj["data"] = avg;
+                                data.push(obj);
+                                    
                             });
-                            obj["data"] = avg;
-                            data.push(obj);
-                                
-                        });
-                    }else{
-                        $('#radar-chart').hide();
+                            radarChart(label,data);
+                            $('#radar-chart').show();
+                        } else {
+                            $('#radar-chart').hide();
+                        }
                     }
-                    radarChart(label,data);
                     
                 } else {
                     toastr.error(data.message);
@@ -384,7 +377,6 @@ $(function () {
     function callbarchart(formData){
 
         $.ajax({
-                
             url: getStudentGrade,
             method: "POST",
             data: formData,
@@ -393,9 +385,13 @@ $(function () {
             contentType: false,
             success: function (response) {
                 if (response.code == 200) {
-                    
                     var detail = response.data;
-                    barchart.setData(detail);
+                    if (detail.length > 0) {
+                        $('#scores_by_graph_card').show();
+                        barchart.setData(detail);
+                    } else {
+                        $('#scores_by_graph_card').hide();
+                    }
                 } else {
                     toastr.error(data.message);
                 }
@@ -425,19 +421,22 @@ $(function () {
                             averageData.push(res.average);
                             categoryData.push(res.exam_date);
                         });
+                        $('#subject_average_card').show();
+                        subjectavgchart();
+                        chart.updateOptions( {
+                            xaxis: {
+                                type: "datetime",
+                                format: 'dd/MM',
+                            categories: categoryData
+                            }
+                        });
+                        chart.updateSeries([{
+                            name: "Average",
+                            data: averageData
+                        }]);
+                    } else {
+                        $('#subject_average_card').hide();
                     }
-                    subjectavgchart();
-                    chart.updateOptions( {
-                        xaxis: {
-                            type: "datetime",
-                            format: 'dd/MM',
-                          categories: categoryData
-                        }
-                    });
-                    chart.updateSeries([{
-                        name: "Average",
-                        data: averageData
-                    }]);
 
                 } else {
                     toastr.error(data.message);
@@ -870,7 +869,7 @@ $(function () {
                             '<input type="hidden" name="subjectmarks[' + meta.row + '][first_name]" value="' + row.first_name + '">' +
                             '<input type="hidden" name="subjectmarks[' + meta.row + '][last_name]" value="' + row.last_name + '">' +
                             '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
-                            '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
+                            '<a href=""  data-toggle="modal" data-target=".studentMarkModal" data-id="' + row.student_id + '" class="text-body font-weight-semibold studentChart">' + data + '</a>';
                         return first_name;
                     }
                 },
@@ -1160,7 +1159,8 @@ $(function () {
         }
 
     }
-    function donutchart(){
+    
+    function donutchart(pass,fail,inprogress){
 
         colors = ["#00b19d", "#f1556c","#775DD0"];
         options = {
@@ -1168,7 +1168,7 @@ $(function () {
                 height: 320,
                 type: "donut"
             },
-            series: [],
+            series: [pass,fail,inprogress],
             legend: {
                 show: !0,
                 position: "bottom",
