@@ -20,10 +20,13 @@ class StudentSubjectdivisionInst extends Migration
             $table->integer('section_id');
             $table->integer('subject_id');       
             $table->integer('exam_id');  
-            $table->integer('subjectdivision_scores');
+            $table->text('subject_division')->nullable();
+            $table->text('subjectdivision_scores')->nullable();
             $table->integer('total_score');     
+            $table->string('pass_fail')->nullable();
+            $table->string('status')->nullable();
             $table->string('grade');
-            $table->integer('ranking');        
+            $table->integer('ranking');      
             $table->timestamps();
         });
     }

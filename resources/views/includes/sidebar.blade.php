@@ -735,6 +735,22 @@
                     </div>
                 </li>
                 <li>
+                    <a href="#sidebarTasks" data-toggle="collapse">
+                    <i data-feather="external-link" class="icon-dual"></i>
+                        <span> Tasks </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarTasks">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('admin.task')}}" class="nav-link {{ (request()->is('admin/task*')) ? 'active' : '' }}">
+                                    <span>To Do List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
                     <a href="#sidebarAttendance" data-toggle="collapse">
                         <i data-feather="map"></i>
                         <span> Attendance </span>
@@ -1624,23 +1640,6 @@
                         <span> Events </span>
                     </a>
                 </li>       
-                <li>
-                <li>
-                    <a href="#sidebarTasks" data-toggle="collapse">
-                    <i data-feather="external-link" class="icon-dual"></i>
-                        <span> Tasks </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarTasks">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('parent.task')}}" class="nav-link {{ (request()->is('parent/task*')) ? 'active' : '' }}">
-                                    <span>To Do List</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
                 <li>
                     <a href="#sidebarHomework" data-toggle="collapse">
                         <i class="fe-book-open"></i>

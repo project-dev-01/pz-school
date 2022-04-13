@@ -64,7 +64,7 @@
         </div> <!-- end col -->
     </div>
     <!--- end row -->
-    @include('super_admin.task.add')
+    @include('admin.task.add')
 </div>
 <!-- container -->
 @endsection

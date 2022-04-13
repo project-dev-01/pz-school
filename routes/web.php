@@ -775,8 +775,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('library/books', [ParentController::class, 'bookList'])->name('parent.library.books');
         Route::get('library/book_issued', [ParentController::class, 'bookIssued'])->name('parent.library.book_issued');
 
-        //Task routes
-        Route::get('task/index', [ParentController::class, 'taskIndex'])->name('parent.task');
+        
         //Time Table routes
         Route::get('timetable/index', [ParentController::class, 'timeTable'])->name('parent.timetable.index');
 
