@@ -730,7 +730,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         //Task routes
         Route::get('task/index', [TeacherController::class, 'taskIndex'])->name('teacher.task');
         Route::post('subjectmarksAdd', [TeacherController::class, 'subjectmarks'])->name('teacher.subjectmarks.add');
-        Route::post('subjectdivisionAdd', [TeacherController::class, 'subjectdivision'])->name('teacher.subjectdivision.add');
+        Route::post('subjectdivisionAdd', [TeacherController::class, 'subjectdivisionAdd'])->name('teacher.subjectdivision.add');
         
         // exam Result Group 
         Route::get('exam_results/byclass', [TeacherController::class, 'byclasss'])->name('teacher.exam_results.byclass');

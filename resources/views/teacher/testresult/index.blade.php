@@ -237,12 +237,12 @@
             </li>
         </ul><br>
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-6" id="radar-chart">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">Test Score Analysis</h4>
                         <div class="mt-4 chartjs-chart">
-                            <canvas id="radar-chart-test-marks" height="350" data-colors="#39afd1,#a17fe0"></canvas>
+                            <canvas id="radar-chart-test-marks" data-colors="#39afd1,#a17fe0"></canvas>
                             <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
                         </div>
                     </div> <!-- end card-body-->
@@ -261,23 +261,8 @@
 
                         <div id="cardCollpase1" class="collapse pt-3 show">
                             <div class="text-center">
-                                <div class="row mt-2">
-                                    <div class="col-2"></div>
-                                    <div class="col-3">
-                                        <h3>9</h3>
-                                        <p class="text-muted font-13 mb-0 text-truncate">Pass</p>
-                                    </div>
-                                    <div class="col-3">
-                                        <h3>0</h3>
-                                        <p class="text-muted font-13 mb-0 text-truncate">Fail</p>
-                                    </div>
-                                    <div class="col-3">
-                                        <h3>0</h3>
-                                        <p class="text-muted font-13 mb-0 text-truncate">InProgress</p>
-                                    </div>
-                                </div> <!-- end row -->
 
-                                <div id="lifetime-sales" data-colors="#4fc6e1,#6658dd,#ebeff2" style="height: 270px;" class="morris-chart mt-3"></div>
+                                <div id="donut-chart-test-summary" data-colors="#4fc6e1,#6658dd,#ebeff2" style="height: 270px;" class="morris-chart mt-3"></div>
 
                             </div>
                         </div> <!-- end collapse-->
@@ -373,6 +358,8 @@
     var getSubjectAverage = "{{ config('constants.api.get_subject_average') }}";
     var getStudentSubjectMark = "{{ config('constants.api.get_student_subject_mark') }}";
     var getStudentGrade = "{{ config('constants.api.get_student_grade') }}";
+    var getSubjectDivisionMark = "{{ config('constants.api.get_subject_division_mark') }}";
+    var getSubjectMarkStatus = "{{ config('constants.api.get_subject_mark_status') }}";
 
     // default image test
     var defaultImg = "{{ asset('images/users/default.jpg') }}";

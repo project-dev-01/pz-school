@@ -264,40 +264,6 @@
             ChartJs.prototype.initCharts = function() {
                 var charts = [];
                 var defaultColors = ["#1abc9c", "#f1556c", "#4a81d4", "#e3eaef"];
-
-                if ($('#radar-chart-test-marks').length > 0) {
-                    var dataColors = $("#radar-chart-test-marks").data('colors');
-                    var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
-                    //radar chart
-                    var radarChart = {
-                        labels: ["Test A Score", "Test B Score", "Test C Score", "Test D Score"],
-                        datasets: [{
-                                label: "Mid term",
-                                backgroundColor: hexToRGB(colors[0], 0.3),
-                                borderColor: colors[0],
-                                pointBackgroundColor: colors[0],
-                                pointBorderColor: "#fff",
-                                pointHoverBackgroundColor: "#fff",
-                                pointHoverBorderColor: colors[0],
-                                data: [65, 59, 90, 81]
-                            },
-                            {
-                                label: "Annual",
-                                backgroundColor: hexToRGB(colors[1], 0.3),
-                                borderColor: colors[1],
-                                pointBackgroundColor: colors[1],
-                                pointBorderColor: "#fff",
-                                pointHoverBackgroundColor: "#fff",
-                                pointHoverBorderColor: colors[1],
-                                data: [80, 60, 80, 75]
-                            }
-                        ]
-                    };
-                    var radarOpts = {
-                        maintainAspectRatio: false
-                    };
-                    charts.push(this.respChart($("#radar-chart-test-marks"), 'Radar', radarChart, radarOpts));
-                }
                 if ($('#radar-chart-test-bystudentmarks').length > 0) {
                     var dataColors = $("#radar-chart-test-bystudentmarks").data('colors');
                     var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
@@ -1131,68 +1097,68 @@ options = {
                 
 </script>
 <script>
-    ! function(e) {
-        "use strict";    
-        function a() {}
-        a.prototype.createBarChart = function(a, t, e, o, r, i) {
-            Morris.Bar({
-                element: a,
-                data: t,
-                xkey: e,
-                ykeys: o,
-                labels: r,
-                dataLabels: !1,
-                hideHover: "auto",
-                resize: !0,
-                gridLineColor: "rgba(65, 80, 95, 0.07)",
-                barSizeRatio: .2,
-                barColors: i
-            })
-        }, a.prototype.createDonutChart = function(a, t, e) {
-            Morris.Donut({
-                element: a,
-                data: t,
-                barSize: .2,
-                resize: !0,
-                colors: e,
-                backgroundColor: "transparent"
-            })
-        }, a.prototype.init = function() {
-            var a = ["#02c0ce"];
-            (t = e("#statistics-analytic").data("colors")) && (a = t.split(",")), this.createBarChart("statistics-analytic", [{
-                y: "50",
-                a: 2
-            }, {
-                y: "60",
-                a: 5
-            }, {
-                y: "70",
-                a: 3
-            }, {
-                y: "80",
-                a: 1
-            }, {
-                y: "90",
-                a: 1
-            }], "y", ["a"], ["Statistics"], a);
-            var t;
-            a = ["#4fc6e1", "#6658dd", "#ebeff2"];
-            (t = e("#lifetime-sales").data("colors")) && (a = t.split(",")), this.createDonutChart("lifetime-sales", [{
-                label: " Pass ",
-                value: 47
-            }, {
-                label: " Fail",
-                value: 4
-            }, {
-                label: "InProgress",
-                value: 23
-            }], a)
-        }, e.Dashboard4 = new a, e.Dashboard4.Constructor = a
-    }(window.jQuery),
-    function() {
-        "use strict";
-        window.jQuery.Dashboard4.init()
-    }();  
+    // ! function(e) {
+    //     "use strict";    
+    //     function a() {}
+    //     a.prototype.createBarChart = function(a, t, e, o, r, i) {
+    //         Morris.Bar({
+    //             element: a,
+    //             data: t,
+    //             xkey: e,
+    //             ykeys: o,
+    //             labels: r,
+    //             dataLabels: !1,
+    //             hideHover: "auto",
+    //             resize: !0,
+    //             gridLineColor: "rgba(65, 80, 95, 0.07)",
+    //             barSizeRatio: .2,
+    //             barColors: i
+    //         })
+    //     }, a.prototype.createDonutChart = function(a, t, e) {
+    //         Morris.Donut({
+    //             element: a,
+    //             data: t,
+    //             barSize: .2,
+    //             resize: !0,
+    //             colors: e,
+    //             backgroundColor: "transparent"
+    //         })
+    //     }, a.prototype.init = function() {
+    //         var a = ["#02c0ce"];
+    //         (t = e("#statistics-analytic").data("colors")) && (a = t.split(",")), this.createBarChart("statistics-analytic", [{
+    //             y: "50",
+    //             a: 2
+    //         }, {
+    //             y: "60",
+    //             a: 5
+    //         }, {
+    //             y: "70",
+    //             a: 3
+    //         }, {
+    //             y: "80",
+    //             a: 1
+    //         }, {
+    //             y: "90",
+    //             a: 1
+    //         }], "y", ["a"], ["Statistics"], a);
+    //         var t;
+    //         a = ["#4fc6e1", "#6658dd", "#ebeff2"];
+    //         (t = e("#lifetime-sales").data("colors")) && (a = t.split(",")), this.createDonutChart("lifetime-sales", [{
+    //             label: " Pass ",
+    //             value: 47
+    //         }, {
+    //             label: " Fail",
+    //             value: 4
+    //         }, {
+    //             label: "InProgress",
+    //             value: 23
+    //         }], a)
+    //     }, e.Dashboard4 = new a, e.Dashboard4.Constructor = a
+    // }(window.jQuery),
+    // function() {
+    //     "use strict";
+    //     window.jQuery.Dashboard4.init()
+    // }();  
 </script>
 <script>
             $(document).ready(function() {                    

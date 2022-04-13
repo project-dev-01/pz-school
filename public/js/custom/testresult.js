@@ -1,6 +1,6 @@
 $(function () {
 
-    
+    var radar;
 
     // marks by subject Chart
 
@@ -94,85 +94,6 @@ $(function () {
     (chart = new ApexCharts(document.querySelector("#subject-avg-chart"), options)).render();
     }
 
-    // colors = ["#6658dd",];
-    //     (dataColors = $("#subject-avg-chart").data("colors")) && (colors = dataColors.split(","));
-    //     var options = {
-    //         chart: {
-    //             height: 380,
-    //             type: "line",
-    //             zoom: {
-    //                 enabled: !1
-    //             },
-    //             toolbar: {
-    //                 show: !1
-    //             }
-    //         },
-    //         colors: colors,
-    //         dataLabels: {
-    //             enabled: !0
-    //         },
-    //         stroke: {
-    //             width: [3, 3],
-    //             curve: "smooth"
-    //         },
-            
-    //         series: [{
-    //             name: "Average",
-    //             data: []
-    //         }],
-    //         title: {
-    //             text: "Subject Average",
-    //             align: "left",
-    //             style: {
-    //                 fontSize: "14px",
-    //                 color: "#666"
-    //             }
-    //         },
-    //         grid: {
-    //             row: {
-    //                 colors: ["transparent", "transparent"],
-    //                 opacity: .2
-    //             },
-    //             borderColor: "#f1f3fa"
-    //         },
-    //         markers: {
-    //             style: "inverted",
-    //             size: 6
-    //         },
-    //         xaxis: {
-    //             type: "datetime",
-    //             categories: []
-    //         },
-    //         yaxis: {
-    //             title: {
-    //                 text: "Mark"
-    //             },
-    //             min: 0,
-    //             max: 100
-    //         },
-    //         legend: {
-    //             position: "top",
-    //             horizontalAlign: "right",
-    //             floating: !0,
-    //             offsetY: -25,
-    //             offsetX: -5
-    //         },
-    //         responsive: [{
-    //             breakpoint: 600,
-    //             options: {
-    //                 chart: {
-    //                     toolbar: {
-    //                         show: !1
-    //                     }
-    //                 },
-    //                 legend: {
-    //                     show: !1
-    //                 }
-    //             }
-    //         }]
-    //     };
-    // (chart = new ApexCharts(document.querySelector("#subject-avg-chart"), options)).render();
-
 
     // change classroom
     $('#changeClassName').on('change', function () {
@@ -233,7 +154,6 @@ $(function () {
             today:today
         }, function (res) {
             if (res.code == 200) {
-                console.log(res.data);
                 $.each(res.data, function (key, val) {
                     var marks = JSON.parse(val.marks);
                     $("#testresultFilter").find("#examnames").append('<option value="' + val.id + '" data-full="'+marks.full+'" data-pass="'+marks.pass+'">' + val.name + '</option>');
@@ -298,12 +218,11 @@ $(function () {
                             
                             $(".subjectmarks").show("slow");
                             bindmarks(dataSetNew);
-                            $("#testexecution").hide();
+                            // $("#testexecution").hide();
                             $("#listModeClassID").val(class_id);
                             $("#listModeSectionID").val(section_id);
                             $("#listModeSubjectID").val(subject_id);
                             $("#listModeexamID").val(exam_id);
-                            console.log('end');
                         } else {
                             $(".subjectmarks").hide();
                             toastr.info('No records are available');
@@ -348,10 +267,119 @@ $(function () {
 
             callbarchart(formData);
 
-           
+            callradarchart(formData);
+
+            calldonutchart(formData);
             
         };
     });
+
+    function calldonutchart(formData){
+
+        $.ajax({
+                
+            url: getSubjectMarkStatus,
+            method: "POST",
+            data: formData,
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (response) {
+                console.log('res',response)
+                if (response.code == 200) {
+
+                    
+                    var detail = response.data;
+                    console.log('detail',detail)
+                    var pass = 0;
+                    var fail = 0;
+                    var inprogress = 0;
+                    if (detail.length > 0) {
+                        // graph data
+                        detail.forEach(function (res) {
+                            if (res.status == "pass") {
+                                pass = res.count;
+                            }
+                            if (res.status == "fail") {
+                                fail = res.count;
+                            }
+                            if (res.status == "null") {
+                                inprogress = res.count;
+                            }
+                        });
+                    }
+                    donutchart();
+                    donut_chart.updateSeries([pass,fail,inprogress]);
+                    
+                } else {
+                    toastr.error(data.message);
+                }
+            }
+        });
+    }
+
+    function callradarchart(formData){
+
+        $.ajax({
+                
+            url: getSubjectDivisionMark,
+            method: "POST",
+            data: formData,
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (response) {
+                if (response.code == 200) {
+                    
+                    var markDetails = response.data.markDetails;
+                    var subdiv = response.data.subjectdivision;
+                    var data = [];
+                    var label = [];
+                    if (subdiv.length > 0) {
+                        subdiv.forEach(function (res) {
+                            label.push(res.subject_division);
+                        });
+                    }
+                    if (markDetails.length > 0) {
+                        $('#radar-chart').show();
+                        markDetails.forEach(function (res) {
+                            var randcol = getRandomColor();
+                            var obj = {};
+                            var avg= [];
+                            obj["label"] = res.exam_name;
+                            obj["backgroundColor"] = hexToRGB(randcol, 0.3);
+                            obj["borderColor"] = randcol;
+                            obj["pointBackgroundColor"] = randcol;
+                            obj["pointBorderColor"] =  "#fff";
+                            obj["pointHoverBackgroundColor"] =  "#fff";
+                            obj["pointHoverBorderColor"] = randcol;
+                            $.each(res.average, function (key, val) {
+                                avg.push(val);
+                            });
+                            obj["data"] = avg;
+                            data.push(obj);
+                                
+                        });
+                    }else{
+                        $('#radar-chart').hide();
+                    }
+                    radarChart(label,data);
+                    
+                } else {
+                    toastr.error(data.message);
+                }
+            }
+        });
+    }
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
 
     function callbarchart(formData){
 
@@ -364,7 +392,6 @@ $(function () {
             dataType: 'json',
             contentType: false,
             success: function (response) {
-                console.log('res',response)
                 if (response.code == 200) {
                     
                     var detail = response.data;
@@ -443,8 +470,6 @@ $(function () {
     
             })
             let stuID = $(this).attr('id');
-    
-            // console.log($('.badgeLabel' + stuID))
             if (parseInt(marks_range) >= parseInt(passMark)) {
                 $('.badgeLabel' + stuID).removeClass('badge-danger');
                 $('.badgeLabel' + stuID).addClass('badge-success');
@@ -495,6 +520,8 @@ $(function () {
         var class_id = $("#listModeClassID").val();
         var section_id = $("#listModeSectionID").val();
         var subject_id = $("#listModeSubjectID").val();
+        var exam_id = $("#listModeexamID").val();
+        
 
         var formData = new FormData();
         formData.append('token', token);
@@ -502,6 +529,7 @@ $(function () {
         formData.append('class_id', class_id);
         formData.append('section_id', section_id);
         formData.append('subject_id', subject_id);
+        formData.append('exam_id', exam_id);
 
         $.ajax({
             url: $(form).attr('action'),
@@ -513,7 +541,9 @@ $(function () {
             success: function (response) {
                 if (response.code == 200) {
                     callsubjectaveragechart(formData);
-                    toastr.success(response.message);
+                    callbarchart(formData);
+                    callradarchart(formData);
+                    calldonutchart(formData);
                 }
                 else {
                     toastr.error(data.message);
@@ -765,10 +795,8 @@ $(function () {
             dataType: 'json',
             contentType: false,
             success: function (response) {
-                console.log(response);
                 if (response.code == 200) {
                     toastr.success(response.message);
-                    console.log(response.message);
                 }
                 else {
                     toastr.error(data.message);
@@ -923,7 +951,6 @@ $(function () {
     }
     function trcolorchange()
     {
-        console.log('color');
         tables = $('#stdmarks').DataTable({
             "createdRow": function( row, data, dataIndex ) {
                      if ( data[2] == "30" ) {        
@@ -938,7 +965,6 @@ $(function () {
 
     $(document).on('click', '.studentChart', function () {
         var studentID = $(this).data('id');
-        console.log('st',studentID)
         
         var class_id = $("#changeClassName").val();
         var section_id = $("#sectionID").val();
@@ -1110,114 +1136,284 @@ $(function () {
         barColors: ["#02c0ce"]
     
       });
+
+    radarChart();
+    function radarChart(labels, obj) {
+
+        if (radar) {
+            radar.data.labels = labels;
+            radar.data.datasets = obj;
+            radar.update();
+        } else {
+            var ctx = document.getElementById("radar-chart-test-marks").getContext('2d');
+            var defaultColors = ["#1abc9c", "#f1556c", "#4a81d4", "#e3eaef"];
+            var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
+
+            radar = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: labels,
+                    // labels: labels,
+                    datasets: obj
+                },
+            });
+        }
+
+    }
+    function donutchart(){
+
+        colors = ["#00b19d", "#f1556c","#775DD0"];
+        options = {
+            chart: {
+                height: 320,
+                type: "donut"
+            },
+            series: [],
+            legend: {
+                show: !0,
+                position: "bottom",
+                horizontalAlign: "center",
+                verticalAlign: "middle",
+                floating: !1,
+                fontSize: "14px",
+                offsetX: 0,
+                offsetY: 7
+            },
+            labels: [ "Pass", "Fail", "Inprogress"],
+            colors: colors,
+            responsive: [{
+                breakpoint: 600,
+                options: {
+                    chart: {
+                        height: 240
+                    },
+                    legend: {
+                        show: !1
+                    }
+                }
+            }],
+            fill: {
+                type: "gradient"
+            }
+        };
+        
+        donut_chart = new ApexCharts(document.querySelector("#donut-chart-test-summary"), options);
+        donut_chart.render();
+        
+    }
+
+    function hexToRGB(hex, alpha) {
+        var r = parseInt(hex.slice(1, 3), 16),
+            g = parseInt(hex.slice(3, 5), 16),
+            b = parseInt(hex.slice(5, 7), 16);
+
+        if (alpha) {
+            return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
+        } else {
+            return "rgb(" + r + ", " + g + ", " + b + ")";
+        }
+    }
     
 });
 
-    // ! function(e) {
+// ! function(e) {
+//     "use strict";    
+//     function a() {}
+//     a.prototype.createBarChart = function(a, t, e, o, r, i) {
+//         Morris.Bar({
+//             element: a,
+//             data: t,
+//             xkey: e,
+//             ykeys: o,
+//             labels: r,
+//             dataLabels: !1,
+//             hideHover: "auto",
+//             resize: !0,
+//             gridLineColor: "rgba(65, 80, 95, 0.07)",
+//             barSizeRatio: .2,
+//             barColors: i
+//         })
+//     }, a.prototype.createDonutChart = function(a, t, e) {
+//         Morris.Donut({
+//             element: a,
+//             data: t,
+//             barSize: .2,
+//             resize: !0,
+//             colors: e,
+//             backgroundColor: "transparent"
+//         })
+//     }, a.prototype.init = function() {
+//         var a = ["#02c0ce"];
+//         (t = e("#statistics-analytic").data("colors")) && (a = t.split(",")), this.createBarChart("statistics-analytic", [{
+//             y: "50",
+//             a: 2
+//         }, {
+//             y: "60",
+//             a: 5
+//         }, {
+//             y: "70",
+//             a: 3
+//         }, {
+//             y: "80",
+//             a: 1
+//         }, {
+//             y: "90",
+//             a: 1
+//         }], "y", ["a"], ["Statistics"], a);
+//         var t;
+//         a = ["#4fc6e1", "#6658dd", "#ebeff2"];
+//         (t = e("#lifetime-sales").data("colors")) && (a = t.split(",")), this.createDonutChart("lifetime-sales", [{
+//             label: " Pass ",
+//             value: 47
+//         }, {
+//             label: " Fail",
+//             value: 4
+//         }, {
+//             label: "InProgress",
+//             value: 23
+//         }], a)
+//     }, e.Dashboard4 = new a, e.Dashboard4.Constructor = a
+// }(window.jQuery),
+// function() {
+//     "use strict";
+//     window.jQuery.Dashboard4.init()
+// }();  
+
+
+    // ! function($) {
     //     "use strict";
 
-    //     function a() {}
-    //     a.prototype.createBarChart = function(a, t, e, o, r, i) {
-    //         Morris.Bar({
-    //             element: a,
-    //             data: t,
-    //             xkey: e,
-    //             ykeys: o,
-    //             labels: r,
-    //             dataLabels: !1,
-    //             hideHover: "auto",
-    //             resize: !0,
-    //             gridLineColor: "rgba(65, 80, 95, 0.07)",
-    //             barSizeRatio: .2,
-    //             barColors: i
-    //         })
-    //     },a.prototype.init = function() {
-    //         var a = ["#02c0ce"];
-    //         (t = e("#statistics-chart").data("colors")) && (a = t.split(",")), this.createBarChart("statistics-chart", [{
-    //             y: "50",
-    //             a: 2
-    //         }, {
-    //             y: "60",
-    //             a: 5
-    //         }, {
-    //             y: "70",
-    //             a: 3
-    //         }, {
-    //             y: "80",
-    //             a: 1
-    //         }, {
-    //             y: "90",
-    //             a: 1
-    //         }], "y", ["a"], ["Statistics"], a);
-    //         var t;
-    //     }, e.Dashboard4 = new a, e.Dashboard4.Constructor = a
+    //     var ChartJs = function() {
+    //         this.$body = $("body"),
+    //             this.charts = []
+    //     };
+
+    //     ChartJs.prototype.respChart = function(selector, type, data, options) {
+
+    //             // get selector by context
+    //             var ctx = selector.get(0).getContext("2d");
+    //             // pointing parent container to make chart js inherit its width
+    //             var container = $(selector).parent();
+
+    //             //default config
+    //             Chart.defaults.global.defaultFontColor = "#8391a2";
+    //             Chart.defaults.scale.gridLines.color = "#8391a2";
+
+    //             // this function produce the responsive Chart JS
+    //             function generateChart() {
+    //                 // make chart width fit with its container
+    //                 var ww = selector.attr('width', $(container).width());
+    //                 var chart;
+    //                 switch (type) {
+    //                     case 'Bar':
+    //                         chart = new Chart(ctx, {
+    //                             type: 'bar',
+    //                             data: data,
+    //                             options: options
+    //                         });
+    //                         break;
+    //                     case 'Radar':
+    //                         chart = new Chart(ctx, {
+    //                             type: 'radar',
+    //                             data: data,
+    //                             options: options
+    //                         });
+    //                         break;
+    //                     case 'PolarArea':
+    //                         chart = new Chart(ctx, {
+    //                             data: data,
+    //                             type: 'polarArea',
+    //                             options: options
+    //                         });
+    //                         break;
+    //                 }
+    //                 return chart;
+    //             };
+    //             // run function - render chart at first load
+    //             return generateChart();
+    //         },
+    //         // init various charts and returns
+    //         ChartJs.prototype.initCharts = function() {
+    //             var charts = [];
+    //             var defaultColors = ["#1abc9c", "#f1556c", "#4a81d4", "#e3eaef"];
+
+    //             if ($('#radar-chart-test-marks').length > 0) {
+    //                 var dataColors = $("#radar-chart-test-marks").data('colors');
+    //                 var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
+    //                 //radar chart
+    //                 var radarChart = {
+    //                     labels: ["Test A Score", "Test B Score", "Test C Score", "Test D Score"],
+    //                     datasets: [{
+    //                             label: "Mid term",
+    //                             backgroundColor: hexToRGB(colors[0], 0.3),
+    //                             borderColor: colors[0],
+    //                             pointBackgroundColor: colors[0],
+    //                             pointBorderColor: "#fff",
+    //                             pointHoverBackgroundColor: "#fff",
+    //                             pointHoverBorderColor: colors[0],
+    //                             data: [65, 59, 90, 81]
+    //                         },
+    //                         {
+    //                             label: "Annual",
+    //                             backgroundColor: hexToRGB(colors[1], 0.3),
+    //                             borderColor: colors[1],
+    //                             pointBackgroundColor: colors[1],
+    //                             pointBorderColor: "#fff",
+    //                             pointHoverBackgroundColor: "#fff",
+    //                             pointHoverBorderColor: colors[1],
+    //                             data: [80, 60, 80, 75]
+    //                         }
+    //                     ]
+    //                 };
+    //                 var radarOpts = {
+    //                     maintainAspectRatio: false
+    //                 };
+    //                 charts.push(this.respChart($("#radar-chart-test-marks"), 'Radar', radarChart, radarOpts));
+    //             }
+    //             return charts;
+    //         },
+    //         //initializing various components and plugins
+    //         ChartJs.prototype.init = function() {
+    //             var $this = this;
+    //             // font
+    //             Chart.defaults.global.defaultFontFamily = 'Nunito,sans-serif';
+
+    //             // init charts
+    //             $this.charts = this.initCharts();
+
+    //             // enable resizing matter
+    //             $(window).on('resize', function(e) {
+    //                 $.each($this.charts, function(index, chart) {
+    //                     try {
+    //                         chart.destroy();
+    //                     } catch (err) {}
+    //                 });
+    //                 $this.charts = $this.initCharts();
+    //             });
+    //         },
+
+    //         //init flotchart
+    //         $.ChartJs = new ChartJs, $.ChartJs.Constructor = ChartJs
     // }(window.jQuery),
-    // function() {
-    //             "use strict";
-    //             window.jQuery.Dashboard4.init()
-    //             }();
 
+    // //initializing ChartJs
+    // function($) {
+    //     "use strict";
+    //     $.ChartJs.init()
+    // }(window.jQuery);
 
-                // ! function(e) {
-                //     "use strict";
-            
-                //     function a() {}
-                //     a.prototype.createBarChart = function(a, t, e, o, r, i) {
-                //         Morris.Bar({
-                //             element: a,
-                //             data: t,
-                //             xkey: e,
-                //             ykeys: o,
-                //             labels: r,
-                //             dataLabels: !1,
-                //             hideHover: "auto",
-                //             resize: !0,
-                //             gridLineColor: "rgba(65, 80, 95, 0.07)",
-                //             barSizeRatio: .2,
-                //             barColors: i
-                //         })
-                //     }, a.prototype.createDonutChart = function(a, t, e) {
-                //         Morris.Donut({
-                //             element: a,
-                //             data: t,
-                //             barSize: .2,
-                //             resize: !0,
-                //             colors: e,
-                //             backgroundColor: "transparent"
-                //         })
-                //     }, a.prototype.init = function() {
-                //         var a = ["#02c0ce"];
-                //         (t = e("#statistics-chart").data("colors")) && (a = t.split(",")), this.createBarChart("statistics-chart", [{
-                //             y: "50",
-                //             a: 2
-                //         }, {
-                //             y: "60",
-                //             a: 5
-                //         }, {
-                //             y: "70",
-                //             a: 3
-                //         }, {
-                //             y: "80",
-                //             a: 1
-                //         }, {
-                //             y: "90",
-                //             a: 1
-                //         }], "y", ["a"], ["Statistics"], a);
-                //         var t;
-                //         a = ["#4fc6e1", "#6658dd", "#ebeff2"];
-                //         (t = e("#lifetime-sales").data("colors")) && (a = t.split(",")), this.createDonutChart("lifetime-sales", [{
-                //             label: " Pass ",
-                //             value: 47
-                //         }, {
-                //             label: " Fail",
-                //             value: 4
-                //         }, {
-                //             label: "InProgress",
-                //             value: 23
-                //         }], a)
-                //     }, e.Dashboard4 = new a, e.Dashboard4.Constructor = a
-                // }(window.jQuery),
-                // function() {
-                //             "use strict";
-                //             window.jQuery.Dashboard4.init()
-                //             }();
+    // /* utility function */
+
+    // function hexToRGB(hex, alpha) {
+    //     var r = parseInt(hex.slice(1, 3), 16),
+    //         g = parseInt(hex.slice(3, 5), 16),
+    //         b = parseInt(hex.slice(5, 7), 16);
+
+    //     if (alpha) {
+    //         return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
+    //     } else {
+    //         return "rgb(" + r + ", " + g + ", " + b + ")";
+    //     }
+    // }
+
+    
