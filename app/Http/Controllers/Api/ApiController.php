@@ -2274,7 +2274,12 @@ class ApiController extends BaseController
                 ->where('section_id', '=', $request->section_id)
                 ->get();
             $getgradecount = $Connection->table('student_marks')
-                ->select('grade as gname', DB::raw('COUNT(*) as "gradecount"'))
+                ->select('grade as gname', DB::raw('COUNT(*) as "gradecount"'),'grade_id',
+                DB::raw('max(CASE WHEN pass_fail = "pass" THEN 1 ELSE 0 END) AS pass'),
+                DB::raw('max(CASE WHEN pass_fail = "fail" THEN 1 ELSE 0 END) AS fail'),
+                DB::raw('max(CASE WHEN status = "absent" THEN 1 ELSE 0 END) AS absent'),
+                DB::raw('max(CASE WHEN status = "present" THEN 1 ELSE 0 END) AS present'),
+                )
                 ->where('class_id', '=', $request->class_id)
                 ->where('section_id', '=', $request->section_id)
                 ->where('exam_id', '=', $request->exam_id)
@@ -2287,7 +2292,29 @@ class ApiController extends BaseController
             ];
             array_push($byclassDetails, $commondetails, $getgradecount);
 
-            return $this->successResponse($byclassDetails, 'Threads Post record fetch successfully');
+            return $this->successResponse($byclassDetails, 'byclass Post record fetch successfully');
+        }
+    }
+    public function totgrademaster(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+        $getmastergrade = $Connection->table('grade_marks')
+        ->select(
+            'id',
+            'grade',
+            'grade_point'
+        )
+        ->get();
+        return $this->successResponse($getmastergrade, 'grade record fetch successfully');
         }
     }
 

@@ -49,6 +49,7 @@ return [
         'timetable_subject' => $url.'/timetable-subject',
         'exam_by_classSection'=>$url.'/exam-by-classSection',
         'tot_grade_calcu_byclass'=>$url.'/tot_grade_calcu_byclass',
+        'tot_grade_master'=>$url.'/tot_grade_master',
 
         // class url
         'class_add' => $url.'/classes/add',

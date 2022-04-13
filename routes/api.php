@@ -96,6 +96,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('timetable-subject', [ApiController::class, 'timetableSubject']);
     Route::get('exam-by-classSection', [ApiController::class, 'examByClassSec']);
     Route::get('tot_grade_calcu_byclass', [ApiController::class, 'totgradeCalcuByClass']);
+    Route::get('tot_grade_master', [ApiController::class, 'totgrademaster']);
     
     // Event Type routes
     Route::post('event_type/add', [ApiController::class, 'addEventType']);

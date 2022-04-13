@@ -58,13 +58,13 @@
                                         <option value="">Select Exams</option>
                                     </select>
                                 </div>
-                            </div>                          
+                            </div>
                         </div>
                         <div class="form-group text-right m-b-0">
-                                <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                    Filter
-                                </button>
-                            </div>
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
+                                Filter
+                            </button>
+                        </div>
                     </form>
 
 
@@ -95,51 +95,85 @@
                         <input type="hidden" name="passmark" id="passmark">
                         <div class="col-sm-12">
                             <div class="card-box">
+
+                                <!-- <div id="byclassTableAppend">
+
+                                </div> -->
                                 <div class="table-responsive">
-                                <table id="tblbyclass" autocomplete="off">
-                        
-                                <div id="byclassTableAppend">
+                                    <table id="tblbycls" class="table table-striped table-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th class="align-top" rowspan="2">S.no.</th>
+                                                <th class="align-top" rowspan="2">Class</th>
+                                                <th class="align-top th-sm - 6 rem" rowspan="2">Tot. Students</th>
+                                                <th class="align-top" rowspan="2">Absent</th>
+                                                <th class="align-top" rowspan="2">Present</th>
+                                                <th class="align-top" rowspan="2">Class Teacher Name</th>
+                                                @forelse ($allGrades as $val)
+                                                <th class="text-center" data-id="{{$val['id']}}">{{ $val['grade'] }}</th>
+                                                @empty
+                                                <th>0</th>
+                                                @endforelse
+
+                                                <th class="text-center">PASS</th>
+                                                <th class="text-center">G</th>
+                                                <th class="text-center">Avg. grade of subject</th>
+                                                <th class="text-center">%</th>
+                                            </tr>
+                                            <tr>
+                                                @forelse ($allGrades as $val)
+                                                <td class="text-center">%</td>
+                                                @empty
+                                                <th>0</th>
+                                                @endforelse
+                                            </tr>
+                                        </thead>
+                                        <tbody id="byclassTableAppend">
+                                      
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="clearfix mt-4">
                                         <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Save</button>
                                     </div>
-                                </div>
-                            </table>
+
+
                                 </div> <!-- end table-responsive-->
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col-->
-                    </div>
-                    <!-- end row-->
 
-                </div> <!-- end card-body -->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
+                            </div> <!-- end col-->
+                        </div>
+                        <!-- end row-->
 
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title">Class Analysis</h4>
+                    </div> <!-- end card-body -->
+                </div> <!-- end card-->
+            </div> <!-- end col -->
 
-                    <div class="mt-4 chartjs-chart">
-                        <canvas id="radar-chart-test-byclass" height="350" data-colors="#39afd1,#a17fe0"></canvas>
-                        <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
-                    </div>
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-    </div>
-</div> <!-- container -->
-@endsection
-@section('scripts')
-<script>
-    var sectionByClass = "{{ route('admin.section_by_class') }}";
-    var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
-    var getbyClass ="{{ config('constants.api.tot_grade_calcu_byclass') }}";
-    // default image test
-    var defaultImg = "{{ asset('images/users/default.jpg') }}";
-</script>
-<script src="{{ asset('js/custom/byclass.js') }}"></script>
-@endsection
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title">Class Analysis</h4>
+
+                        <div class="mt-4 chartjs-chart">
+                            <canvas id="radar-chart-test-byclass" height="350" data-colors="#39afd1,#a17fe0"></canvas>
+                            <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
+                        </div>
+                    </div> <!-- end card-body-->
+                </div> <!-- end card-->
+            </div> <!-- end col -->
+        </div>
+    </div> <!-- container -->
+    @endsection
+    @section('scripts')
+    <script>
+        var sectionByClass = "{{ route('admin.section_by_class') }}";
+        var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
+        var getbyClass = "{{ config('constants.api.tot_grade_calcu_byclass') }}";
+        var getbyClass_thead="{{ config('constants.api.tot_grade_master') }}";
+        // default image test
+        var defaultImg = "{{ asset('images/users/default.jpg') }}";
+    </script>
+    <script src="{{ asset('js/custom/byclass.js') }}"></script>
+    @endsection
