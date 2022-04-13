@@ -6276,7 +6276,7 @@ class ApiController extends BaseController
                     'ssdiv.id as subdivision_id',
                     'ssdiv.subject_division',
                     'ssdiv.subjectdivision_scores',
-                    'ssdiv.score',
+                    'ssdiv.total_score',
                     'ssdiv.grade',
                     'ssdiv.ranking',
                     'ssdiv.pass_fail',
@@ -6866,7 +6866,7 @@ class ApiController extends BaseController
                                 ])
                                 ->get()->toArray();
             if ($check) {
-                $studentdetails = $Connection->table('student_subjectdivision_inst as ssd')->select('ssd.exam_id', 'te.exam_date', DB::raw('round(AVG(ssd.score), 2) as average'))
+                $studentdetails = $Connection->table('student_subjectdivision_inst as ssd')->select('ssd.exam_id', 'te.exam_date', DB::raw('round(AVG(ssd.total_score), 2) as average'))
                                             ->leftJoin('timetable_exam as te', function ($join) {
                                                 $join->on('te.exam_id', '=', 'ssd.exam_id')
                                                     ->on('te.class_id', '=', 'ssd.class_id')
@@ -7053,7 +7053,7 @@ class ApiController extends BaseController
             $subject_id = $request->subject_id;
             $Connection = $this->createNewConnection($request->branch_id);
             
-            $studentdetails = $Connection->table('student_subjectdivision_inst as ssd')->select('ssd.id','ssd.score','ssd.exam_id', "ssd.subject_division",'ssd.subjectdivision_scores','e.name')
+            $studentdetails = $Connection->table('student_subjectdivision_inst as ssd')->select('ssd.id','ssd.total_score','ssd.exam_id', "ssd.subject_division",'ssd.subjectdivision_scores','e.name')
                                         ->leftJoin('exam as e', 'ssd.exam_id', '=', 'e.id')
                                         ->where([
                                             ['ssd.class_id', '=', $request->class_id],
