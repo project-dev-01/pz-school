@@ -82,7 +82,7 @@
                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Class (All)
+                            Class 
                             <h4>
                     </li>
                 </ul><br>
@@ -100,7 +100,7 @@
 
                                 </div> -->
                                 <div class="table-responsive">
-                                    <table id="tblbycls" class="table table-striped table-nowrap">
+                                    <table id="tblbycls" class="table w-100 nowrap table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th class="align-top" rowspan="2">S.no.</th>
@@ -115,10 +115,10 @@
                                                 <th>0</th>
                                                 @endforelse
 
-                                                <th class="text-center">PASS</th>
-                                                <th class="text-center">G</th>
-                                                <th class="text-center">Avg. grade of subject</th>
-                                                <th class="text-center">%</th>
+                                                <th class="align-middle" rowspan="2">PASS</th>
+                                                <th class="align-middle" rowspan="2">G</th>
+                                                <th class="align-middle" rowspan="2">Avg. grade of subject</th>
+                                                <th class="align-middle" rowspan="2">%</th>
                                             </tr>
                                             <tr>
                                                 @forelse ($allGrades as $val)

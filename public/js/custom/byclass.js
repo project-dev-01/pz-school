@@ -75,10 +75,11 @@ $(function () {
                             var std_count = response.data[0].getstudentcount;
                             var techarary = response.data[0].getteachername;
                             var mastergradelist = response.data[0].getmastergrade;
+                            var examattendance = response.data[0].getexamattendance;
                             var gradecount = response.data[1];
                         
                             console.log(gradecount);
-                            byclassdetails(std_count, techarary, gradecount, Selected_classname, mastergradelist);
+                            byclassdetails(std_count, techarary, gradecount, Selected_classname, mastergradelist,examattendance);
                             $("#testexecution").hide();
                             $("#listModeClassID").val(class_id);
                             $("#listModeSectionID").val(section_id);
@@ -99,7 +100,7 @@ $(function () {
         };
     });
 });
-function byclassdetails(std_count, techarary, gradecount, Selected_classname, mastergradelist) {
+function byclassdetails(std_count, techarary, gradecount, Selected_classname, mastergradelist,examattendance) {
 
 
     $('#byclassTableAppend').empty();
@@ -107,54 +108,27 @@ function byclassdetails(std_count, techarary, gradecount, Selected_classname, ma
     var passcount =0;
     var failcount=0;
     var pass_percentage=0;
-    // byclassTestTable += '<div class="table-responsive">' +
-    //     '<table class="table table-striped table-nowrap" id="dybyclass">' +
-    //     '<thead id="myhed">' +
-    //     '<tr>' +
-    //     '<th class="align-top" rowspan="2">S.no.</th>' +
-    //     '<th class="align-top" rowspan="2">Class</th>' +
-    //     '<th class="align-top th-sm - 6 rem" rowspan="2">Tot. Students</th>' +
-    //     '<th class="align-top" rowspan="2">Absent</th>' +
-    //     '<th class="align-top" rowspan="2">Present</th>' +
-    //     '<th class="align-top" rowspan="2">Class Teacher Name</th>';
-    // if (mastergradelist.length > 0) {
-    //     mastergradelist.forEach(function (res) {
-    //         byclassTestTable += '<th class="text-center" data-id=' + res.id + '>' + res.grade + '</th>'
-    //     });
-    //     byclassTestTable += '<th class="text-center">PASS</th>' +
-    //         '<th class="text-center">G</th>' +
-    //         '<th class="text-center">Avg. grade of subject</th>' +
-    //         '<th class="text-center">%</th>' +
-    //         '</tr>';
-    //     byclassTestTable += '<tr>';
-    //     mastergradelist.forEach(function (res) {
-    //         byclassTestTable += '<td class="text-center">%</td>'
-    //     });
-    //     byclassTestTable += '</tr>';
-    // }
-    // '</thead>';
-    //byclassTestTable += '<tbody>';
+    var fail_percentage=0;   
     byclassTestTable += '<tr>' +
-        '<td rowspan="2">' +
-        '<label for="sno" class="text-center" >1</label>' +
+        '<td class="text-center" rowspan="2">' +
+        '<label for="sno">1</label>' +
         '</td>' +
-        '<td rowspan="2">' +
-        '<label for="clsname" class="text-center" > ' + Selected_classname + '</label>' +
+        '<td class="text-left" rowspan="2">' +
+        '<label for="clsname"  > ' + Selected_classname + '</label>' +
         '</td>' +
-        '<td rowspan="2">' +
-        '<label for="stdcount" class="text-right"> ' + std_count[0].totalStudentCount + '</label>' +
+        '<td class="text-center" rowspan="2">' +
+        '<label for="stdcount"> ' + std_count[0].totalStudentCount + '</label>' +
         '</td>' +
-        '<td rowspan="2">' +
-        '<label for="failcount" class="text-right">'+failcount+'</label>' +
+        '<td class="text-right" rowspan="2">' +
+        '<label for="failcount">'+examattendance[0].absent+'</label>' +
         '</td>' +
-        '<td rowspan="2">' +
-        '<label for="passcount" class="text-right">'+passcount+'</label>' +
+        '<td class="text-right" rowspan="2">' +
+        '<label for="passcount">'+examattendance[0].present+'</label>' +
         '</td>' +
-        '<td rowspan="2">' +
-        '<label for="teachnam" class="text-center">' + techarary[0].teachername + '</label>' +
+        '<td class="text-center" rowspan="2">' +
+        '<label for="teachnam">' + techarary[0].teachername + '</label>' +
         '</td>';
-
-    // gradecount.forEach(function (res) {
+   
     var gradepercentage = [];
     $('#tblbycls > thead  > tr >th').each(function (index, tr) {
         var th = $('#tblbycls  thead  > tr >th').eq($(this).index());
@@ -168,13 +142,13 @@ function byclassdetails(std_count, techarary, gradecount, Selected_classname, ma
                     i++;
                     byclassTestTable += '<td class="text-right">' + res.gradecount + '</td>'+
                     console.log('matched' + i);
-                    passcount += res.pass;
-                    failcount += res.fail;
+                    // passcount += res.pass;
+                    // failcount += res.fail;
                     var getval = res.gradecount / std_count[0].totalStudentCount
                     var gper = getval * 100 ;
                     var gradeper = parseFloat(gper, 10).toFixed(2);
                  
-                                      gradepercentage.push(gradeper); 
+                    gradepercentage.push(gradeper); 
                 }                           
             }); 
             if (i == 0) {            
@@ -182,50 +156,20 @@ function byclassdetails(std_count, techarary, gradecount, Selected_classname, ma
                 gradepercentage.push(0); 
             }
           
-        }
-        // }
-
-        // gradecount.forEach(function (res) {
-        //     var i =0;
-        //     console.log("gname");
-        //     console.log(res.gname);
-        //     console.log(th.text());
-        //     if (res.gname == th.text()) {
-        //         i++;
-        //         byclassTestTable += '<td class="text-center">' + res.gradecount + '</td>'
-        //     console.log(res);
-        //     }
-        //     console.log(i);
-        //     // if(i==0)
-        //     // {
-        //     //     byclassTestTable += '<td class="text-center">0</td>'
-        //     // }
-        // });
-
-
-        // if (index >= 6) {
-
-        // gradecount.forEach(function (res) {
-
-        //     var th = $('#tblbycls  thead  > tr >th').eq($(this).index());
-        //     console.log(index);
-        //     console.log(th.text());
-        //     if (res.gname == th.text()) {
-        //         byclassTestTable += '<td class="text-center">' + res.gradecount + '</td>'
-        //     }
-        //     else {
-        //         byclassTestTable += '<td class="text-center">00</td>'
-        //     }              
-        // });
-        //  }
+        }   
     });
     console.log(gradepercentage);
     console.log(gradepercentage.length);
+    passcount=examattendance[0].pass;
+    failcount=examattendance[0].fail;
     pass_percentage =(passcount /  std_count[0].totalStudentCount) * 100;
+    fail_percentage =(failcount /  std_count[0].totalStudentCount) * 100;
+    pass_percentage = parseFloat(pass_percentage, 10).toFixed(2);
+    fail_percentage = parseFloat(fail_percentage, 10).toFixed(2);
     console.log(pass_percentage);
     byclassTestTable += '<td class="text-center">'+passcount+'</td>'+
     '<td class="text-center">'+failcount+'</td>'+
-    '<td class="text-center" rowspan="2">'+pass_percentage+'</td>'+
+    '<td class="text-center" rowspan="2">-</td>'+
     '<td class="text-center" rowspan="2">'+pass_percentage+'</td>'+
     '</tr>';
     byclassTestTable += '<tr>';
@@ -233,38 +177,8 @@ function byclassdetails(std_count, techarary, gradecount, Selected_classname, ma
     gradepercentage.forEach(function (res) {                             
         byclassTestTable +='<td class="text-right">'+res+'</td>'    
     });
-    '<td class="text-center" rowspan="2">'+pass_percentage+'</td>'
-    byclassTestTable +='</tr>';
-    
-    //  var headerObj = $(this).parents('table').find('#myhed').eq($(this).index());
-    //  var headerObj1 = $(this).siblings('td:first-child');
-    // // A quick test!
-
-    //$('#tblbycls > thead  > tr >th').each(function(index, tr) {
-    // console.log(index);
-
-    // if (std_count.length > 0) {
-    //     std_count.forEach(function (res) {
-    //         start++;
-    //         // short test table div start
-
-    //             '<td>';
-    //         if (start == 1) {
-    //             byclassTestTable += '<input type="hidden" name="date" value="' + Selected_classname + '">' 
-
-    //         byclassTestTable += start +
-    //             '</td>' +
-    //             '<td class="table-user">' +
-    //             '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
-    //             '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + res.first_name + ' ' + res.last_name + '</a>' +
-    //             '</td>'; 
-    //         indexStart++;
-    //         byclassTestTable += '</tr>';
-    //     });
-    // }
-
-    // byclassTestTable += '</tr>';
-    //   '</table>
+    byclassTestTable +='<td class="text-right">'+pass_percentage+'</td>'+
+    '<td class="text-right">'+fail_percentage+'</td>';    
     byclassTestTable += '</tr>';
     $("#byclassTableAppend").append(byclassTestTable);
 }
