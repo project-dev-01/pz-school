@@ -494,6 +494,9 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('faq/index', [AdminController::class, 'faqIndex'])->name('admin.faq.index');
         //Task routes
         Route::get('task/index', [AdminController::class, 'taskIndex'])->name('admin.task');
+        Route::post('task/add', [AdminController::class, 'addToDoList'])->name('admin.task.add');
+        Route::get('task/get', [AdminController::class, 'getToDoList'])->name('admin.task.get');
+
         // static page routes end
         // Settings
         // Route::get('settings', [AdminController::class, 'settings'])->name('admin.settings');

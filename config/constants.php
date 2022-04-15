@@ -241,6 +241,10 @@ return [
 
         // adminssion url
         'admission_add' => $url.'/admission/add',
+        // add_to_do_list
+        'add_to_do_list' => $url.'/add_to_do_list',
+        'get_to_do_list' => $url.'/get_to_do_list'
+        
     ]
 
 ];

@@ -290,5 +290,10 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
     // Techer list by class and section routes
     Route::post('teacher/list', [ApiController::class, 'getTeacherList']);
+    // add to do list
+    Route::post('add_to_do_list', [ApiController::class, 'addToDoList']);
+    Route::get('get_to_do_list', [ApiController::class, 'getToDoList']);
+    
+    
     
 });

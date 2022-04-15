@@ -25,7 +25,6 @@
 <!-- Vendor js -->
 <script src="{{ asset('js/vendor.min.js') }}"></script>
 <script src="{{ asset('libs/mohithg-switchery/switchery.min.js') }}"></script>
-<script src="{{ asset('libs/multiselect/js/jquery.multi-select.js') }}"></script>
 
 <script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
 
@@ -54,7 +53,7 @@
     }
 </script>
 <!-- Calendar init -->
-<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
+<!-- <script src="{{ asset('js/pages/form-advanced.init.js') }}"></script> -->
 @if(Session::get('role_id'))
 @if(Session::get('role_id') == '4')
 @elseif(Session::get('role_id') == '5')

@@ -7,7 +7,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <form id="eventTypeForm" method="post" action="" autocomplete="off">
+                <form id="addToDoList" method="post" action="" autocomplete="off" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="title">Title<span class="text-danger">*</span></label>
@@ -15,90 +15,59 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="date">Due Date & Time<span class="text-danger">*</span></label>
-                        <input type="text" id="date" name="date" class="form-control" placeholder="Enter Date & Time">
+                        <label for="dueDate">Due Date & Time<span class="text-danger">*</span></label>
+                        <input type="text" id="dueDate" name="due_date" class="form-control" placeholder="Enter Date & Time">
                     </div>
                     <div class="form-group">
-                        <label for="priority">Select to<span class="text-danger">*</span></label>
-                        <select class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ...">
-                            <optgroup label="Alaskan/Hawaiian Time Zone">
-                                <option value="AK">Alaska</option>
-                                <option value="HI">Hawaii</option>
-                            </optgroup>
-                            <optgroup label="Pacific Time Zone">
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
-                            </optgroup>
-                            <optgroup label="Mountain Time Zone">
-                                <option value="AZ">Arizona</option>
-                                <option value="CO">Colorado</option>
-                                <option value="ID">Idaho</option>
-                                <option value="MT">Montana</option>
-                                <option value="NE">Nebraska</option>
-                                <option value="NM">New Mexico</option>
-                                <option value="ND">North Dakota</option>
-                                <option value="UT">Utah</option>
-                                <option value="WY">Wyoming</option>
-                            </optgroup>
-                            <optgroup label="Central Time Zone">
-                                <option value="AL">Alabama</option>
-                                <option value="AR">Arkansas</option>
-                                <option value="IL">Illinois</option>
-                                <option value="IA">Iowa</option>
-                                <option value="KS">Kansas</option>
-                                <option value="KY">Kentucky</option>
-                                <option value="LA">Louisiana</option>
-                                <option value="MN">Minnesota</option>
-                                <option value="MS">Mississippi</option>
-                                <option value="MO">Missouri</option>
-                                <option value="OK">Oklahoma</option>
-                                <option value="SD">South Dakota</option>
-                                <option value="TX">Texas</option>
-                                <option value="TN">Tennessee</option>
-                                <option value="WI">Wisconsin</option>
-                            </optgroup>
-                            <optgroup label="Eastern Time Zone">
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="FL">Florida</option>
-                                <option value="GA">Georgia</option>
-                                <option value="IN">Indiana</option>
-                                <option value="ME">Maine</option>
-                                <option value="MD">Maryland</option>
-                                <option value="MA">Massachusetts</option>
-                                <option value="MI">Michigan</option>
-                                <option value="NH">New Hampshire</option>
-                                <option value="NJ">New Jersey</option>
-                                <option value="NY">New York</option>
-                                <option value="NC">North Carolina</option>
-                                <option value="OH">Ohio</option>
-                                <option value="PA">Pennsylvania</option>
-                                <option value="RI">Rhode Island</option>
-                                <option value="SC">South Carolina</option>
-                                <option value="VT">Vermont</option>
-                                <option value="VA">Virginia</option>
-                                <option value="WV">West Virginia</option>
-                            </optgroup>
+                        <label for="assign_to">Assigned To<span class="text-danger">*</span></label>
+                        <select class="form-control select2-multiple" data-toggle="select2" id="assign_to" name="assign_to" multiple="multiple" data-placeholder="Choose ...">
+                            @forelse ($allocate_section_list as $sec)
+                            <option value="{{ $sec['id'] }}">{{ $sec['class_name']  }} ({{$sec['section_name']}})</option>
+                            @empty
+                            @endforelse
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="priority">Priority<span class="text-danger">*</span></label>
-                        <select id="priority" class="form-control" required="">
+                        <select id="priority" class="form-control" name="priority">
                             <option value="Low">Low</option>
                             <option value="Medium">Medium</option>
                             <option value="High">High</option>
                         </select>
                     </div>
-
                     <div class="form-group">
-                        <label for="description">Description<span class="text-danger">*</span></label>
-                        <textarea id="description" rows="description" name="description" class="form-control" placeholder="Enter Description"></textarea>
+                        <label for="check_list">Checklists/Sub-tasks</label>
+                        <input type="text" class="form-control" name="check_list[]" id="addCheckList" placeholder="Add CheckList">
+
+                    </div>
+                    <div class="form-group">
+                        <button id="addBtn" class="btn btn-blue btn-sm waves-effect waves-light">Add</button>
+                        <ul id="taskList"></ul>
+                    </div>
+                    <div class="form-group">
+                        <label for="task_description">Task Description<span class="text-danger">*</span></label>
+                        <textarea id="task_description" rows="task_description" name="task_description" class="form-control" placeholder="Enter Description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="attachment">Attachment</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" name="file[]" class="custom-file-input up" multiple id="attachment">
+                                <label class="custom-file-label" for="attachment">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- <div id="fileNameShow"></div> -->
+                        <p id="files-area">
+                            <span id="filesList">
+                                <span id="files-names"></span>
+                            </span>
+                        </p>
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="submit" id="eventTypeSubmit" class="btn btn-success waves-effect waves-light">Submit</button>
+                        <button type="submit" class="btn btn-success waves-effect waves-light">Submit</button>
                     </div>
 
                 </form>

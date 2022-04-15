@@ -1,5 +1,66 @@
 @extends('layouts.admin-layout')
 @section('title','To Do List')
+@section('css')
+<style>
+    /* checklist css start  */
+    li>p {
+        display: inline-block;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    .done {
+        text-decoration: line-through;
+        color: gray;
+    }
+
+    /* checklist end  */
+    /* files add remove css start  */
+    #files-area {
+        width: 93%;
+        margin: 0 auto;
+    }
+
+    .file-block {
+        border-radius: 10px;
+        background-color: rgba(144, 163, 203, 0.2);
+        margin: 5px;
+        color: initial;
+        display: inline-flex;
+    }
+
+    .file-block>span.name {
+        padding-right: 10px;
+        width: max-content;
+        display: inline-flex;
+    }
+
+    .file-delete {
+        display: flex;
+        width: 24px;
+        color: initial;
+        background-color: #6eb4ff00;
+        font-size: large;
+        justify-content: center;
+        margin-right: 3px;
+        cursor: pointer;
+    }
+
+    .file-delete:hover {
+        background-color: rgba(144, 163, 203, 0.2);
+        border-radius: 10px;
+    }
+
+    .file-delete>span {
+        transform: rotate(45deg);
+    }
+
+    /* files add remove css end  */
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: blue !important;
+    }
+</style>
+@endsection
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -32,7 +93,7 @@
                 </p>
 
                 <div class="table-responsive">
-                    <table class="table mb-0" id="task-table">
+                    <table class="table mb-0" id="to-do-list-table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -41,19 +102,6 @@
                                 <th>Priority</th>
                                 <th>Description</th>
                                 <th>Action</th>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Sports Day</td>
-                                <td>Tommorrow 10am</td>
-                                <td><span class="badge badge-soft-danger p-1">High</span></td>
-                                <td>All Should wear sports dress</td>
-                                <td>
-                                    <div class="button-list">
-                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id=""><i class="fe-edit"></i></a>
-                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id=""><i class="fe-trash-2"></i></a>
-                                    </div>
-                                </td>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,4 +115,13 @@
     @include('admin.task.add')
 </div>
 <!-- container -->
+@endsection
+@section('scripts')
+<script>
+    var toDoListURL = "{{ route('admin.task.add') }}";
+    var gettoDoListURL = "{{ route('admin.task.get') }}";
+</script>
+<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
+<script src="{{ asset('js/custom/to-do-list.js') }}"></script>
+
 @endsection

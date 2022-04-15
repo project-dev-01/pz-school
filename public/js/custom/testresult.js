@@ -215,14 +215,14 @@ $(function () {
                     var dataSetNew = response.data;
                     if (response.code == 200) {
                         if (response.data.length > 0) {
-                            $("#mark_by_subject_card").show();
+                            // $("#mark_by_subject_card").show();
                             bindmarks(dataSetNew);
                             $("#listModeClassID").val(class_id);
                             $("#listModeSectionID").val(section_id);
                             $("#listModeSubjectID").val(subject_id);
                             $("#listModeexamID").val(exam_id);
                         } else {
-                            $("#mark_by_subject_card").hide();
+                            // $("#mark_by_subject_card").hide();
                         }
                         //$("#layoutModeGrid").append(layoutModeGrid);
                     } else {
@@ -242,12 +242,16 @@ $(function () {
                     if (response.code == 200) {
                         var stdetails = response.data.studentdetails;
                         var subdiv = response.data.subjectdivision;
+                        console.log("------")
+                        console.log(subdiv.length)
                         if (subdiv.length > 0) {
                             $('#subjectdivTableAppend').show();
+                            $("#mark_by_subject_card").hide();
                             subjectdivisionShow(stdetails, subdiv);
                         }
                         else {
                             $('#subjectdivTableAppend').hide();
+                            $("#mark_by_subject_card").show();
                         }
                     } else {
                         toastr.error(response.message);
@@ -543,9 +547,10 @@ $(function () {
                     callbarchart(formData);
                     callradarchart(formData);
                     calldonutchart(formData);
+                    toastr.success(response.message);
                 }
                 else {
-                    toastr.error(data.message);
+                    toastr.error(response.message);
                 }
             }
         });

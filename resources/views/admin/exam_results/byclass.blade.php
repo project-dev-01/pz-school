@@ -132,14 +132,7 @@
                                       
                                         </tbody>
                                     </table>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="clearfix mt-4">
-                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Save</button>
-                                    </div>
-
-
-                                </div> <!-- end table-responsive-->
+                                </div><!-- end table-responsive-->
 
                             </div> <!-- end col-->
                         </div>
