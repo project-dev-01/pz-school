@@ -671,48 +671,48 @@ class TeacherController extends Controller
          $section = Helper::PostMethod(config('constants.api.teacher_section'), $data);
          return $section;
      }
-     public function subjectmarks(Request $request)
-     { 
-         $data = [
-          
-             "subjectmarks" => $request->subjectmarks,        
-             "class_id" => $request->class_id,
-             "section_id" => $request->section_id,
-             "subject_id" => $request->subject_id,
-             "exam_id" => $request->exam_id            
-         ];
-
-         $response = Helper::PostMethod(config('constants.api.add_student_marks'), $data);
-     
-         return $response;
-     }
-     public function getsubjectdivision(Request $request)
-     {
-        $data = [          
+    public function subjectmarks(Request $request)
+    { 
+        $data = [
+        
             "subjectmarks" => $request->subjectmarks,        
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
-            "subject_id" => $request->subject_id          
-        ];    
-        $response = Helper::PostMethod(config('constants.api.get_subject_division'), $data);    
-        return $response;
-     } 
-     public function subjectdivisionAdd(Request $request)
-     {
-    //    dd($request);
-        $data = [
-            "class_id" => $request->class_id,
-            "section_id" => $request->section_id,
             "subject_id" => $request->subject_id,
-            "subjectdiv" => $request->subjectdiv,
-            "exam_id" => $request->exam_id,
-            
+            "exam_id" => $request->exam_id            
         ];
-        // dd($data);
-        // echo "<pre>";
-        // print_r($data);
-        // exit;
-        $response = Helper::PostMethod(config('constants.api.add_subject_division'), $data);
+
+        $response = Helper::PostMethod(config('constants.api.add_student_marks'), $data);
+    
         return $response;
-     }   
+    }
+    public function getsubjectdivision(Request $request)
+    {
+    $data = [          
+        "subjectmarks" => $request->subjectmarks,        
+        "class_id" => $request->class_id,
+        "section_id" => $request->section_id,
+        "subject_id" => $request->subject_id          
+    ];    
+    $response = Helper::PostMethod(config('constants.api.get_subject_division'), $data);    
+    return $response;
+    } 
+    public function subjectdivisionAdd(Request $request)
+    {
+//    dd($request);
+    $data = [
+        "class_id" => $request->class_id,
+        "section_id" => $request->section_id,
+        "subject_id" => $request->subject_id,
+        "subjectdiv" => $request->subjectdiv,
+        "exam_id" => $request->exam_id,
+        
+    ];
+    // dd($data);
+    // echo "<pre>";
+    // print_r($data);
+    // exit;
+    $response = Helper::PostMethod(config('constants.api.add_subject_division'), $data);
+    return $response;
+    }   
 }

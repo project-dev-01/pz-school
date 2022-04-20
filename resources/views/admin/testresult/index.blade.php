@@ -36,8 +36,8 @@
                                             <label for="changeClassName">Standard<span class="text-danger">*</span></label>
                                             <select id="changeClassName" class="form-control" name="class_id">
                                                 <option value="">Select Standard</option>
-                                                @forelse ($teacher_class as $class)
-                                                <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
+                                                @forelse ($classes as $class)
+                                                <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
                                                 @empty
                                                 @endforelse
                                             </select>
@@ -90,7 +90,7 @@
                             <h4>
                     </li>
                 </ul><br>
-                <form id="addstudentmarks" method="post" action="{{ route('teacher.subjectmarks.add') }}" autocomplete="off">
+                <form id="addstudentmarks" method="post" action="{{ route('admin.subjectmarks.add') }}" autocomplete="off">
                     @csrf
                     <div class="row">
                         <input type="hidden" name="class_id" id="listModeClassID">
@@ -143,7 +143,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card-body">
-                            <form id="tblsubjectdivSave" method="post" action="{{ route('teacher.subjectdivision.add') }}" autocomplete="off">
+                            <form id="tblsubjectdivSave" method="post" action="{{ route('admin.subjectdivision.add') }}" autocomplete="off">
                                 @csrf
                                 <div id="subjectdivTableAppend_text">
                                 </div>
@@ -363,8 +363,8 @@
 @endsection
 @section('scripts')
 <script>
-    var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
-    var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";
+    var teacherSectionUrl = "{{ config('constants.api.section_by_class') }}";
+    var teacherSubjectUrl = "{{ config('constants.api.subject_by_class') }}";
     var examsList = "{{ config('constants.api.get_testresult_exams') }}";
     var getSubjectMarks = "{{ config('constants.api.get_testresult_marks_subject_vs') }}";
     var getMarks_vs_grade = "{{ config('constants.api.get_marks_vs_grade') }}";

@@ -815,7 +815,6 @@
                                     </ul>
                                 </div>
                             </li>
-                            
                             <li>
                                 <a href="#sidebarSchedule" data-toggle="collapse">
                                 <i class="fas fa-dna"></i> &nbsp;
@@ -850,6 +849,13 @@
                                         </li>
                                     </ul>
                                 </div>
+                            </li>
+                            
+                            <li>
+                                <a href="{{ route('admin.test_result')}}"  class="nav-link {{ (request()->is('admin/test_result*')) ? 'active' : '' }}">
+                                <i class="fas fa-marker"></i> &nbsp;
+                                    <span> Test Result </span>
+                                </a>
                             </li>
                             <li>
                                 <a href="#sidebarResult" data-toggle="collapse">

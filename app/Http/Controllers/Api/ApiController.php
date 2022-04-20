@@ -6943,25 +6943,110 @@ class ApiController extends BaseController
                 ])
                 ->get()->toArray();
 
-            $studentdetails = $Connection->table('student_marks as sm')->select('sm.exam_id', 'te.exam_date', 'sm.score', DB::raw('round(AVG(sm.score), 2) as average'))
-                ->leftJoin('timetable_exam as te', function ($join) {
-                    $join->on('te.exam_id', '=', 'sm.exam_id')
-                        ->on('te.class_id', '=', 'sm.class_id')
-                        ->on('te.section_id', '=', 'sm.section_id')
-                        ->on('te.subject_id', '=', 'sm.subject_id');
-                })
-                ->where([
-                    ['sm.class_id', '=', $request->class_id],
-                    ['sm.section_id', '=', $request->section_id],
-                    ['sm.subject_id', '=', $request->subject_id],
-                    ['sm.student_id', '=', $request->student_id]
-                ])
-                ->groupBy('sm.exam_id')
-                ->orderBy('te.exam_date', 'ASC')
-                ->get();
+            if ($check) {
 
+                $studentdivdetails = $Connection->table('student_subjectdivision_inst as ssd')->select('ssd.id', 'ssd.total_score', 'ssd.exam_id', "ssd.subject_division", 'ssd.subjectdivision_scores', 'e.name')
+                                                ->leftJoin('exam as e', 'ssd.exam_id', '=', 'e.id')
+                                                ->where([
+                                                    ['ssd.class_id', '=', $request->class_id],
+                                                    ['ssd.section_id', '=', $request->section_id],
+                                                    ['ssd.subject_id', '=', $request->subject_id],
+                                                    ['ssd.student_id', '=', $request->student_id]
+                                                ])
+                                                ->orderBy('ssd.id')
+                                                ->get()
+                                                ->groupBy('name');
+
+                $studentdetails = $Connection->table('student_subjectdivision_inst as ssd')->select('ssd.exam_id', 'te.exam_date', 'ssd.total_score')
+                                    ->leftJoin('timetable_exam as te', function ($join) {
+                                        $join->on('te.exam_id', '=', 'ssd.exam_id')
+                                            ->on('te.class_id', '=', 'ssd.class_id')
+                                            ->on('te.section_id', '=', 'ssd.section_id')
+                                            ->on('te.subject_id', '=', 'ssd.subject_id');
+                                    })
+                                    ->where([
+                                        ['ssd.class_id', '=', $request->class_id],
+                                        ['ssd.section_id', '=', $request->section_id],
+                                        ['ssd.subject_id', '=', $request->subject_id],
+                                        ['ssd.student_id', '=', $request->student_id]
+                                    ])
+                                    ->groupBy('ssd.exam_id')
+                                    ->orderBy('te.exam_date', 'ASC')
+                                    ->get();
+
+
+                $markDetails = [];
+                $sl = 0;
+                foreach ($studentdivdetails as $key => $details) {
+                    $markDetails[$sl]['exam_name'] = $key;
+                    // $average = 0;
+                    $divison = [];
+                    $id = 0;
+                    $count = count($details);
+                    foreach ($details as $index => $det) {
+
+                        if ($det->subject_division) {
+                            // dd($det);
+                            $subject_division = explode(',', $det->subject_division);
+                            $subjectdivision_scores = explode(',', $det->subjectdivision_scores);
+                            foreach ($subject_division as $s => $subdiv) {
+
+                                if ($index == 0) {
+                                    $total[$subdiv] = $subjectdivision_scores[$s];
+                                } else {
+                                    $total[$subdiv] += $subjectdivision_scores[$s];
+                                }
+                            }
+                            $id++;
+                        } else {
+                            $total = [];
+                            $average = [];
+                        }
+                    }
+
+                    // dd($total);
+                    $markDetails[$sl]['total'] = $total;
+
+                    $sl++;
+                }
+
+                // dd($data);
+
+                $subjectdivision = $Connection->table('student_subjectdivision')
+                    ->select('subject_division')
+                    ->where([
+                        ['class_id', '=', $request->class_id],
+                        ['section_id', '=', $request->section_id],
+                        ['subject_id', '=', $request->subject_id]
+                    ])->orderBy('id', 'ASC')->get();
+
+                $data = [
+                    'markDetails' => $markDetails,
+                    'subjectdivision' => $subjectdivision,
+                    'studentdetails' => $studentdetails
+                ];
+
+                                                
+            } else {
+                $data = $Connection->table('student_marks as sm')->select('sm.exam_id', 'te.exam_date', 'sm.score')
+                                    ->leftJoin('timetable_exam as te', function ($join) {
+                                        $join->on('te.exam_id', '=', 'sm.exam_id')
+                                            ->on('te.class_id', '=', 'sm.class_id')
+                                            ->on('te.section_id', '=', 'sm.section_id')
+                                            ->on('te.subject_id', '=', 'sm.subject_id');
+                                    })
+                                    ->where([
+                                        ['sm.class_id', '=', $request->class_id],
+                                        ['sm.section_id', '=', $request->section_id],
+                                        ['sm.subject_id', '=', $request->subject_id],
+                                        ['sm.student_id', '=', $request->student_id]
+                                    ])
+                                    ->groupBy('sm.exam_id')
+                                    ->orderBy('te.exam_date', 'ASC')
+                                    ->get();
+            }
             // return $studentdetails;
-            return $this->successResponse($studentdetails, 'Subject division record fetch successfully');
+            return $this->successResponse($data, 'Subject division record fetch successfully');
         }
     }
 

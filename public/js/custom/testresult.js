@@ -1,11 +1,9 @@
 $(function () {
-
-    var radar;
-
     // marks by subject Chart
-
-    // test result subject wise result
     
+    // test result subject wise result
+    var radar;
+    var divradar;
     function subjectavgchart(){
         colors = ["#f672a7"];
     (dataColors = $("#subject-avg-chart").data("colors")) && (colors = dataColors.split(","));
@@ -242,8 +240,6 @@ $(function () {
                     if (response.code == 200) {
                         var stdetails = response.data.studentdetails;
                         var subdiv = response.data.subjectdivision;
-                        console.log("------")
-                        console.log(subdiv.length)
                         if (subdiv.length > 0) {
                             $('#subjectdivTableAppend').show();
                             $("#mark_by_subject_card").hide();
@@ -391,10 +387,12 @@ $(function () {
                 if (response.code == 200) {
                     var detail = response.data;
                     if (detail.length > 0) {
-                        $('#scores_by_graph_card').show();
+                        $('#scores_by_graph_card').css('visibility','visible');
+                        // $('#scores_by_graph_card').show();
                         barchart.setData(detail);
                     } else {
-                        $('#scores_by_graph_card').hide();
+                        $('#scores_by_graph_card').css('visibility','hidden');
+                        // $('#scores_by_graph_card').hide();
                     }
                 } else {
                     toastr.error(data.message);
@@ -700,7 +698,7 @@ $(function () {
                     '</td>' +
                     '<td class="table-user">' +
                     '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
-                    '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + res.first_name + ' ' + res.last_name + '</a>' +
+                    '<a href=""  data-toggle="modal" data-target=".studentSubDivMarkModal" data-id="' + res.student_id + '" class="text-body font-weight-semibold studentSubDivChart">' + res.first_name + ' ' + res.last_name + '</a>'
                     '</td>';
                 // console.log(subdiv.length)
                 $.each(subdiv, function (key, val) {
@@ -791,6 +789,21 @@ $(function () {
     $('#tblsubjectdivSave').on('submit', function (e) {
         e.preventDefault();
         var form = this;
+
+        var class_id = $("#listModeClassID").val();
+        var section_id = $("#listModeSectionID").val();
+        var subject_id = $("#listModeSubjectID").val();
+        var exam_id = $("#listModeexamID").val();
+        
+
+        var formData = new FormData();
+        formData.append('token', token);
+        formData.append('branch_id', branchID);
+        formData.append('class_id', class_id);
+        formData.append('section_id', section_id);
+        formData.append('subject_id', subject_id);
+        formData.append('exam_id', exam_id);
+
         $.ajax({
             url: $(form).attr('action'),
             method: $(form).attr('method'),
@@ -800,6 +813,11 @@ $(function () {
             contentType: false,
             success: function (response) {
                 if (response.code == 200) {
+                    
+                    callsubjectaveragechart(formData);
+                    callbarchart(formData);
+                    callradarchart(formData);
+                    calldonutchart(formData);
                     toastr.success(response.message);
                 }
                 else {
@@ -985,10 +1003,33 @@ $(function () {
         // return false;
         callstudentchart(formData);
     });
+
+    $(document).on('click', '.studentSubDivChart', function () {
+        var studentID = $(this).data('id');
+        
+        var class_id = $("#changeClassName").val();
+        var section_id = $("#sectionID").val();
+        var subject_id = $("#subjectID").val();
+
+        var formData = new FormData();
+        formData.append('token', token);
+        formData.append('branch_id', branchID);
+        formData.append('class_id', class_id);
+        formData.append('section_id', section_id);
+        formData.append('subject_id', subject_id);
+        formData.append('student_id', studentID);
+        $("#studentSubDivMarkModal").modal('show');
+        
+        callstudentradarchart(formData);
+    });
     
     
     $('#studentMarkModal').on('hidden.bs.modal',function(){
         student_chart.destroy();
+    });
+
+    $('#studentSubDivMarkModal').on('hidden.bs.modal',function(){
+        student_div_chart.destroy();
     });
 
     function callstudentchart(formData) {
@@ -1003,7 +1044,7 @@ $(function () {
             success: function (response) {
                 // return false;
                 if (response.code == 200) {
-                    
+                    console.log('res',response)
                     var mark_details = response.data;
                     var mark = [];
                     var date = [];
@@ -1029,6 +1070,93 @@ $(function () {
                     // chart
                     
                     
+
+                } else {
+                    toastr.error(data.message);
+                }
+
+            }, error: function (err) {
+                if (err.responseJSON.code == 422) {
+                    toastr.error(err.responseJSON.data.error.profile_image[0] ? err.responseJSON.data.error.profile_image[0] : 'Something went wrong');
+                }
+            }
+        })
+    }
+
+    function callstudentradarchart(formData) {
+        $.ajax({
+            url: getStudentSubjectMark,
+            method: "POST",
+            data: formData,
+            dataType: 'JSON',
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (response) {
+                // return false;
+                
+                if (response.code == 200) {
+                    
+                    var studentdetails = response.data.studentdetails;
+                    
+                    var mark = [];
+                    var date = [];
+                    if (studentdetails.length > 0) {
+
+                        studentdetails.forEach(function (res) {
+                            mark.push(res.total_score);
+                            date.push(res.exam_date);
+                        });
+                        console.log('mark',mark)
+                        console.log('date',date)
+                    }
+                    studentdivchart();
+                    student_div_chart.updateOptions( {
+                        xaxis: {
+                            type: "datetime",
+                            format: 'dd/MM',
+                            categories: date
+                        }
+                    });
+                    student_div_chart.updateSeries([{
+                        name: "Mark",
+                        data: mark
+                    }]);
+
+                    var markDetails = response.data.markDetails;
+                    var subdiv = response.data.subjectdivision;
+                    var data = [];
+                    var label = [];
+                    
+                    if (subdiv.length > 0) {
+                        subdiv.forEach(function (res) {
+                            label.push(res.subject_division);
+                        });
+
+                        if (markDetails.length > 0) {
+                            markDetails.forEach(function (res) {
+                                var randcol = getRandomColor();
+                                var obj = {};
+                                var avg= [];
+                                obj["label"] = res.exam_name;
+                                obj["backgroundColor"] = hexToRGB(randcol, 0.3);
+                                obj["borderColor"] = randcol;
+                                obj["pointBackgroundColor"] = randcol;
+                                obj["pointBorderColor"] =  "#fff";
+                                obj["pointHoverBackgroundColor"] =  "#fff";
+                                obj["pointHoverBorderColor"] = randcol;
+                                $.each(res.total, function (key, val) {
+                                    avg.push(val);
+                                });
+                                
+                                obj["data"] = avg;
+                                data.push(obj);
+                                    
+                            });
+                        }
+                        
+                        studentradarchart(label,data);
+                    }
 
                 } else {
                     toastr.error(data.message);
@@ -1127,14 +1255,98 @@ $(function () {
         (student_chart = new ApexCharts(document.querySelector("#student-subject-mark"), studentoptions)).render();
     }
 
+    function studentdivchart(){
+        studentcolors = ["#6658dd",];
+        (studentdataColors = $("#student-div-subject-mark").data("colors")) && (studentcolors = studentdataColors.split(","));
+        var studentoptions = {
+            chart: {
+                height: 380,
+                type: "line",
+                zoom: {
+                    enabled: !1
+                },
+                toolbar: {
+                    show: !1
+                },
+                redrawOnParentResize: true
+            },
+            colors: colors,
+            dataLabels: {
+                enabled: !0
+            },
+            stroke: {
+                width: [3, 3],
+                curve: "smooth"
+            },
+            
+            series: [{
+                name: "Mark",
+                data: []
+            }],
+            
+            xaxis: {
+                type: "datetime",
+                format:"dd/MM",
+                categories: []
+            },
+            title: {
+                text: "Subject Mark",
+                align: "left",
+                style: {
+                    fontSize: "14px",
+                    color: "#666"
+                }
+            },
+            grid: {
+                row: {
+                    colors: ["transparent", "transparent"],
+                    opacity: .2
+                },
+                borderColor: "#f1f3fa"
+            },
+            markers: {
+                style: "inverted",
+                size: 6
+            },
+            yaxis: {
+                title: {
+                    text: "Mark"
+                },
+                min: 0,
+                max: 100
+            },
+            legend: {
+                position: "top",
+                horizontalAlign: "right",
+                floating: !0,
+                offsetY: -25,
+                offsetX: -5
+            },
+            responsive: [{
+                breakpoint: 600,
+                options: {
+                    chart: {
+                        toolbar: {
+                            show: !1
+                        }
+                    },
+                    legend: {
+                        show: !1
+                    }
+                }
+            }]
+        };
+        (student_div_chart = new ApexCharts(document.querySelector("#student-div-subject-mark"), studentoptions)).render();
+    }
+
     var barchart = Morris.Bar({
-        element: 'statistics-chart',
+        element: 'test-bar-chart',
         data: [],
         xkey: 'y',
         ykeys: ['a'],
         labels: ['Total'],
         dataLabels: !1,
-        resize: !0,
+        // resize: !0,
         gridLineColor: "rgba(65, 80, 95, 0.07)",
         barSizeRatio: .2,
         barColors: ["#02c0ce"]
@@ -1154,6 +1366,31 @@ $(function () {
             var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
 
             radar = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: labels,
+                    // labels: labels,
+                    datasets: obj
+                },
+            });
+        }
+
+    }
+
+    
+    studentradarchart();
+    function studentradarchart(labels, obj) {
+
+        if (divradar) {
+            divradar.data.labels = labels;
+            divradar.data.datasets = obj;
+            divradar.update();
+        } else {
+            var ctx = document.getElementById("student-radar-chart").getContext('2d');
+            var defaultColors = ["#1abc9c", "#f1556c", "#4a81d4", "#e3eaef"];
+            var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
+
+            divradar = new Chart(ctx, {
                 type: 'radar',
                 data: {
                     labels: labels,

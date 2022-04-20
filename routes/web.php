@@ -520,6 +520,12 @@ Route::group(['prefix' => 'schoolcrm'], function () {
       Route::get('exam_results/bystudent', [AdminController::class, 'bystudent'])->name('admin.exam_results.bystudent');               
       Route::get('exam/result', [AdminController::class, 'examResult'])->name('admin.exam.result');
       // exam result end
+      
+      // Test Result Route
+      Route::get('test_result', [AdminController::class, 'testResult'])->name('admin.test_result');
+      
+      Route::post('subjectmarksAdd', [AdminController::class, 'subjectmarks'])->name('admin.subjectmarks.add');
+      Route::post('subjectdivisionAdd', [AdminController::class, 'subjectdivisionAdd'])->name('admin.subjectdivision.add');
     });
     // admin routes end
 

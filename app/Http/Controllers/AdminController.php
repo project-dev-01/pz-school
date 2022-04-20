@@ -2845,5 +2845,50 @@ class AdminController extends Controller
     {
         return view('super_admin.exam.result');
     }
+
+    public function testResult()
+    {
+       
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        //$get_exams = Helper::GetMethod(config('constants.api.get_testresult_exams'));
+        // dd($response);     
+        return view('admin.testresult.index', [
+            'classes' => $getclass['data']
+        ]);       
+    }
+
+    public function subjectmarks(Request $request)
+    { 
+        $data = [
+        
+            "subjectmarks" => $request->subjectmarks,        
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id,
+            "exam_id" => $request->exam_id            
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.add_student_marks'), $data);
+    
+        return $response;
+    }
+    public function subjectdivisionAdd(Request $request)
+    {
+        //    dd($request);
+        $data = [
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id,
+            "subjectdiv" => $request->subjectdiv,
+            "exam_id" => $request->exam_id,
+            
+        ];
+        // dd($data);
+        // echo "<pre>";
+        // print_r($data);
+        // exit;
+        $response = Helper::PostMethod(config('constants.api.add_subject_division'), $data);
+        return $response;
+    }   
     // exam master -> exam result end
 }
