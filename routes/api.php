@@ -95,9 +95,14 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('subject-by-class', [ApiController::class, 'subjectByClass']);
     Route::post('timetable-subject', [ApiController::class, 'timetableSubject']);
     Route::get('exam-by-classSection', [ApiController::class, 'examByClassSec']);
+    Route::get('exam-by-classSubject', [ApiController::class, 'examByClassSubject']);
     Route::get('tot_grade_calcu_byclass', [ApiController::class, 'totgradeCalcuByClass']);
+    Route::get('tot_grade_calcu_bySubject', [ApiController::class, 'totgradeCalcuBySubject']);
     Route::get('tot_grade_master', [ApiController::class, 'totgrademaster']);
-    
+    Route::post('all_exams_list', [ApiController::class, 'allexamslist']);
+    Route::get('all_std_list', [ApiController::class, 'allstdlist']);
+    Route::get('all_bysubject_list', [ApiController::class, 'allbysubjectlist']);
+    Route::post('get_grade_bysubject', [ApiController::class, 'getGradebysubject']);
     // Event Type routes
     Route::post('event_type/add', [ApiController::class, 'addEventType']);
     Route::get('event_type/list', [ApiController::class, 'getEventTypeList']);

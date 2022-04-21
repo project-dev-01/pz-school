@@ -335,7 +335,7 @@ $(function () {
                             resonsCount.push(value);
                         });
                     }
-
+                    console.log(labels,resonsCount);
                     // chart
                     renderChart(labels, resonsCount);
 

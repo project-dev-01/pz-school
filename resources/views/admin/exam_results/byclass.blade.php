@@ -43,11 +43,11 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3" id="section_drp_div">
                                 <div class="form-group">
-                                    <label for="sectionID">Class Name<span class="text-danger">*</span></label>
+                                    <label for="sectionID" id="lblsectionId">Subject Name<span class="text-danger">*</span></label>
                                     <select id="sectionID" class="form-control" name="section_id">
-                                        <option value="">Select Section</option>
+                                        <option value="">Select Subject</option>
                                     </select>
                                 </div>
                             </div>
@@ -132,7 +132,14 @@
                                       
                                         </tbody>
                                     </table>
-                                </div><!-- end table-responsive-->
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="clearfix mt-4">
+                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Download</button>
+                                    </div>
+
+
+                                </div> <!-- end table-responsive-->
 
                             </div> <!-- end col-->
                         </div>
@@ -143,7 +150,9 @@
             </div> <!-- end col -->
 
         </div>
-        <div class="row">
+     
+    </div> <!-- container -->
+    <div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
@@ -157,14 +166,25 @@
                 </div> <!-- end card-->
             </div> <!-- end col -->
         </div>
-    </div> <!-- container -->
     @endsection
     @section('scripts')
     <script>
         var sectionByClass = "{{ route('admin.section_by_class') }}";
         var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
+        var examsByclassandsubject = "{{ config('constants.api.exam_by_classSubject') }}";
+        
         var getbyClass = "{{ config('constants.api.tot_grade_calcu_byclass') }}";
+        var getbySubjectnames = "{{ config('constants.api.subject_by_class') }}";
         var getbyClass_thead="{{ config('constants.api.tot_grade_master') }}";
+        var Allexams="{{ config('constants.api.all_exams_list') }}";
+        var getbyClassAllstd ="{{ config('constants.api.all_std_list') }}";
+        var getbysubjectnamesall="{{ config('constants.api.class_assign_list') }}";
+
+        //
+        var getbySubject = "{{ config('constants.api.tot_grade_calcu_bySubject') }}";
+
+        var getbySubjectAllstd ="{{ config('constants.api.all_bysubject_list') }}";
+        //
         // default image test
         var defaultImg = "{{ asset('images/users/default.jpg') }}";
     </script>

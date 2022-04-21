@@ -2816,10 +2816,9 @@ class AdminController extends Controller
     }
     public function byclasss()
     {
-        $getclass = Helper::GetMethod(config('constants.api.class_list'));
-        //   $allGrades = Helper::GetMethod(config('constants.api.tot_grade_calcu_byclass'));
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));     
         $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
-
+       
         return view(
             'admin.exam_results.byclass',
             [
@@ -2831,7 +2830,15 @@ class AdminController extends Controller
     // exam master -> exam result start
     public function bysubject()
     {
-        return view('admin.exam_results.bysubject');
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));     
+        $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
+        return view(
+            'admin.exam_results.bysubject',
+            [
+                'classnames' => $getclass['data'],
+                'allGrades' => $allGrades['data']
+            ]
+        ); 
     }
     public function overall()
     {
