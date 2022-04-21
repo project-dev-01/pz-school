@@ -22,7 +22,18 @@ class StaffController extends Controller
     //
     public function index()
     {
-        return view('staff.dashboard.index');
+        $user_id = session()->get('user_id');
+        $data = [
+            'user_id' => $user_id
+        ];
+        $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_list_dashboard'), $data);
+        // dd($get_to_do_list_dashboard);
+        return view(
+            'staff.dashboard.index',
+            [
+                'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
+            ]
+        );
     }
     public function settings()
     {

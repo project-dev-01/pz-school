@@ -223,4 +223,50 @@ $(function () {
         ]
     }).on('draw', function () {
     });
+    // get row
+    $(document).on('click', '#editToDoListBtn', function () {
+        var id = $(this).data('id');
+        console.log(id);
+        $('.editToDoTask').find('form')[0].reset();
+        $.post(getToDORowURL, { id: id, token: token, branch_id: branchID }, function (data) {
+            console.log("---");
+            console.log(data);
+            // $('.editToDoTask').find('input[name="id"]').val(data.data.id);
+            // $('.editToDoTask').find('input[name="name"]').val(data.data.name);
+            $('.editToDoTask').modal('show');
+        }, 'json');
+    });
+    // deleteToDoList
+    $(document).on('click', '#deleteToDoListBtn', function () {
+        var id = $(this).data('id');
+        var url = deleteToDoList;
+        swal.fire({
+            title: 'Are you sure?',
+            html: 'You want to <b>delete</b> this list',
+            showCancelButton: true,
+            showCloseButton: true,
+            cancelButtonText: 'Cancel',
+            confirmButtonText: 'Yes, Delete',
+            cancelButtonColor: '#d33',
+            confirmButtonColor: '#556ee6',
+            width: 400,
+            allowOutsideClick: false
+        }).then(function (result) {
+            if (result.value) {
+                $.post(url, {
+                    id: id,
+                    token: token,
+                    branch_id: branchID
+                }, function (data) {
+                    if (data.code == 200) {
+                        $('#to-do-list-table').DataTable().ajax.reload(null, false);
+                        toastr.success(data.message);
+                    } else {
+                        toastr.error(data.message);
+                    }
+                }, 'json');
+            }
+        });
+    });
+    
 });

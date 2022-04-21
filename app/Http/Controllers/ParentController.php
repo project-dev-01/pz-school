@@ -13,7 +13,20 @@ class ParentController extends Controller
     public function index(Request $request)
     {
         $request->session()->put('children_id', "1");
-        return view('parent.dashboard.index');
+
+        $user_id = session()->get('user_id');
+        $student_id = session()->get('student_id');
+        $data = [
+            'user_id' => $user_id,
+            'student_id' => $student_id
+        ];
+        $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
+        return view(
+            'parent.dashboard.index',
+            [
+                'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
+            ]
+        );
     }
     public function settings()
     {

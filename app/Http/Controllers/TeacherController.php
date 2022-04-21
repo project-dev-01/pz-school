@@ -12,7 +12,19 @@ class TeacherController extends Controller
     //
     public function index()
     {
-        return view('teacher.dashboard.index');
+        $user_id = session()->get('user_id');
+        $teacher_id = session()->get('ref_user_id');
+        $data = [
+            'user_id' => $user_id,
+            'teacher_id' => $teacher_id
+        ];
+        $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
+        return view(
+            'teacher.dashboard.index',
+            [
+                'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
+            ]
+        );
     }
     public function applyleave()
     {
@@ -43,7 +55,7 @@ class TeacherController extends Controller
     {
         return view('teacher.attendance.exam');
     }
-    
+
     // static page controller end
     // forum screen pages start
     public function forumIndex()
@@ -56,21 +68,20 @@ class TeacherController extends Controller
         $data = [
             'user_id' => $user_id
         ];
-        
-        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$data); 
+
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'), $data);
         //dd($forum_list);
-          return view('teacher.forum.index', [
+        return view('teacher.forum.index', [
             //'forum_list' => $forum_list['data']
             'forum_list' => !empty($forum_list['data']) ? $forum_list['data'] : []
         ]);
-        
     }
     public function forumPageSingleTopic()
     {
         return view('teacher.forum.page-single-topic');
     }
     public function forumPageCreateTopic()
-    { 
+    {
         // $user_id = session()->get('user_id');
         // $data = [
         //     'user_id' => $user_id
@@ -80,9 +91,9 @@ class TeacherController extends Controller
             'user_id' => $user_id
         ];
         $category = Helper::GetMethod(config('constants.api.category'));
-        $usernames = Helper::GETMethodWithData(config('constants.api.usernames_autocomplete'),$data);
+        $usernames = Helper::GETMethodWithData(config('constants.api.usernames_autocomplete'), $data);
         //dd($usernames);
-        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$data);
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'), $data);
         // dd($forum_list);
         return view('teacher.forum.page-create-topic', [
             'category' => $category['data'],
@@ -90,12 +101,11 @@ class TeacherController extends Controller
             'forum_list' => !empty($forum_list['data']) ? $forum_list['data'] : [],
             'usernames' => $usernames['data']
         ]);
-        
     }
     public function forumPageSingleUser()
     {
-        $user_id= session()->get('user_id');  
-        $data = [            
+        $user_id = session()->get('user_id');
+        $data = [
             'user_id' => $user_id
         ];
         $forum_post_user_crd = Helper::GETMethodWithData(config('constants.api.forum_post_user_created'), $data);
@@ -103,7 +113,7 @@ class TeacherController extends Controller
         $forum_post_user_allreplies = Helper::GETMethodWithData(config('constants.api.forum_posts_user_repliesall'), $data);
         $forum_userthreadslist = Helper::GETMethodWithData(config('constants.api.forum_userthreadslist'), $data);
         //dd($forum_userthreadslist);
-        return view('teacher.forum.page-single-user', [            
+        return view('teacher.forum.page-single-user', [
             // 'forum_post_user_crd' => $forum_post_user_crd['data'],
             // 'forum_categorypost_user_crd' => $forum_categorypost_user_crd['data'],
             // 'forum_post_user_allreplies' => $forum_post_user_allreplies['data'],
@@ -132,11 +142,11 @@ class TeacherController extends Controller
     }
     public function forumPageCategories()
     {
-        $user_id= session()->get('user_id');  
-        $data = [            
+        $user_id = session()->get('user_id');
+        $data = [
             'user_id' => $user_id
         ];
-        $listcategoryvs = Helper::GETMethodWithData(config('constants.api.listcategoryvs'),$data);
+        $listcategoryvs = Helper::GETMethodWithData(config('constants.api.listcategoryvs'), $data);
         //dd($listcategoryvs);
         return view('teacher.forum.page-categories', [
             'listcategoryvs' => $listcategoryvs['data']
@@ -168,10 +178,10 @@ class TeacherController extends Controller
     // forum create post 
     public function createpost(Request $request)
     {
-        $current_user=session()->get('role_id');
-        $rollid_tags=$request->tags;
-        $adminid=2;
-        $tags_add_also_currentroll=$rollid_tags .','.$current_user.','.$adminid;        
+        $current_user = session()->get('role_id');
+        $rollid_tags = $request->tags;
+        $adminid = 2;
+        $tags_add_also_currentroll = $rollid_tags . ',' . $current_user . ',' . $adminid;
         $data = [
             'user_id' => session()->get('user_id'),
             'user_name' => session()->get('name'),
@@ -197,7 +207,7 @@ class TeacherController extends Controller
         $singlepost_repliesData = [
             'created_post_id' => $id,
             'user_id' => $user_id,
-        ]; 
+        ];
         // $user_id = session()->get('user_id');
         // $usdata = [
         //     'user_id' => $user_id
@@ -206,11 +216,11 @@ class TeacherController extends Controller
         $usdata = [
             'user_id' => $user_id
         ];
-       
-        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$usdata);
+
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'), $usdata);
         $forum_singlepost = Helper::GETMethodWithData(config('constants.api.forum_single_post'), $data);
         $forum_singlepost_replies = Helper::GETMethodWithData(config('constants.api.forum_single_post_replies'), $data);
-       
+
         return view('teacher.forum.page-single-topic', [
             'forum_single_post' => !empty($forum_singlepost['data']) ? $forum_singlepost['data'] : $forum_singlepost,
             'forum_singlepost_replies' => $forum_singlepost_replies['data'],
@@ -220,42 +230,42 @@ class TeacherController extends Controller
     }
     public function imagestore(Request $request)
     {
-    if ($request->hasFile('upload')) {
+        if ($request->hasFile('upload')) {
 
-        //get filename with extension
+            //get filename with extension
 
-        $filenamewithextension = $request->file('upload')->getClientOriginalName();
+            $filenamewithextension = $request->file('upload')->getClientOriginalName();
 
-        //get filename without extension
+            //get filename without extension
 
-        $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        //get file extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            //get file extension
 
-        $extension = $request->file('upload')->getClientOriginalExtension();
-
-
-
-        //filename to store
-
-        $filenametostore = $filename . '_' . time() . '.' . $extension;
+            $extension = $request->file('upload')->getClientOriginalExtension();
 
 
 
-        //upload file
+            //filename to store
 
-        $request->file('upload')->storeAs('public/forumupload', $filenametostore);
+            $filenametostore = $filename . '_' . time() . '.' . $extension;
 
 
 
-        echo json_encode([
+            //upload file
 
-            'default' => asset('storage/forumupload/' . $filenametostore),
+            $request->file('upload')->storeAs('public/forumupload', $filenametostore);
 
-            '500' =>  asset('storage/forumupload/' . $filenametostore)
 
-        ]);
+
+            echo json_encode([
+
+                'default' => asset('storage/forumupload/' . $filenametostore),
+
+                '500' =>  asset('storage/forumupload/' . $filenametostore)
+
+            ]);
+        }
     }
-   }
     // forum screen pages end
 
     // faq screen pages start
@@ -285,8 +295,8 @@ class TeacherController extends Controller
         // dd($response);     
         return view('teacher.testresult.index', [
             'teacher_class' => $response['data']
-         //   'get_exams' => $get_exams['data']
-        ]);       
+            //   'get_exams' => $get_exams['data']
+        ]);
     }
     public function chatShow()
     {
@@ -381,7 +391,7 @@ class TeacherController extends Controller
         // dd($response);
         return $response;
     }
-    
+
     // get Homework
     public function getHomework(Request $request)
     {
@@ -394,41 +404,38 @@ class TeacherController extends Controller
         $homework = Helper::PostMethod(config('constants.api.homework_list'), $data);
 
         // dd($homework);
-        if($homework['code']=="200") {
-            $response ="";
-            $row=1;
-            if($homework['data']['homework']) {
-                foreach($homework['data']['homework'] as $work)
-                {
+        if ($homework['code'] == "200") {
+            $response = "";
+            $row = 1;
+            if ($homework['data']['homework']) {
+                foreach ($homework['data']['homework'] as $work) {
                     $total_students = $homework['data']['total_students'];
-                    if($work['students_completed']==Null)
-                    {
+                    if ($work['students_completed'] == Null) {
                         $completed = 0;
                         $incompleted = $total_students;
-                    }else{
+                    } else {
                         $completed = $work['students_completed'];
-                        $incompleted = $total_students-$completed;
+                        $incompleted = $total_students - $completed;
                     }
-                    
-                    $response.= '<tr>
-                                    <td>'.$row.'</td>
-                                    <td>'.$work['title'].'</td>
-                                    <td>'.$work['date_of_homework'].'</td>
-                                    <td>'.$work['date_of_submission'].'</td>
-                                    <td>'.$completed.'/'.$incompleted.'</td>
-                                    <td>'.$homework['data']['total_students'].'</td>
-                                    <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="'.$work['id'].'" data-target=".firstModal"><i class="fas fa-bars"></i> Details</a></td>
+
+                    $response .= '<tr>
+                                    <td>' . $row . '</td>
+                                    <td>' . $work['title'] . '</td>
+                                    <td>' . $work['date_of_homework'] . '</td>
+                                    <td>' . $work['date_of_submission'] . '</td>
+                                    <td>' . $completed . '/' . $incompleted . '</td>
+                                    <td>' . $homework['data']['total_students'] . '</td>
+                                    <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="' . $work['id'] . '" data-target=".firstModal"><i class="fas fa-bars"></i> Details</a></td>
                                 </tr>';
                     $row++;
                 }
-            }else{
-                    $response.= '<tr>
+            } else {
+                $response .= '<tr>
                                     <td colspan="7"> No Data Available</td>
                                 </tr>';
             }
-    
+
             $homework['table'] = $response;
-            
         }
         return $homework;
     }
@@ -441,101 +448,98 @@ class TeacherController extends Controller
             'evaluation' => $request->evaluation,
         ];
 
-        
+
         $homework = Helper::PostMethod(config('constants.api.homework_view'), $data);
-        
-        
-        if($homework['code']=="200")
-        {
-            $response ="";
-            $complete=0;
-            $incomplete=0;
+
+
+        if ($homework['code'] == "200") {
+            $response = "";
+            $complete = 0;
+            $incomplete = 0;
             $checked = 0;
             $unchecked = 0;
-            if($homework['data'])
-            {
-                $row=1;
-                foreach($homework['data'] as $work)
-                {
+            if ($homework['data']) {
+                $row = 1;
+                foreach ($homework['data'] as $work) {
                     $check = "";
                     $disabled = "";
-                    if($work['score_name']=="Marks") {
-                        $score_name = '<select  class="form-control" required="" name="homework['.$row.'][score_name]">
+                    if ($work['score_name'] == "Marks") {
+                        $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
                                                 <option Selected>Marks</option>
                                                 <option>Grade</option>
                                                 <option>Text</option>
                                             </select>';
-                    }elseif($work['score_name']=="Grade") {
-                        $score_name = '<select  class="form-control" required="" name="homework['.$row.'][score_name]">
+                    } elseif ($work['score_name'] == "Grade") {
+                        $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
                                             <option>Marks</option>
                                             <option Selected>Grade</option>
                                             <option>Text</option>
                                         </select>';
-                    }elseif($work['score_name']=="Text") {
-                        $score_name = '<select  class="form-control" required="" name="homework['.$row.'][score_name]">
+                    } elseif ($work['score_name'] == "Text") {
+                        $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
                                                 <option>Marks</option>
                                                 <option>Grade</option>
                                                 <option Selected>Text</option>
                                             </select>';
-                    }else{
-                        $score_name = '<select  class="form-control" required="" name="homework['.$row.'][score_name]">
+                    } else {
+                        $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
                                                 <option>Marks</option>
                                                 <option>Grade</option>
                                                 <option>Text</option>
                                             </select>';
                     }
-                        
-                    if($work['evaluation_id']==Null) {
-                       $disabled = "disabled";
+
+                    if ($work['evaluation_id'] == Null) {
+                        $disabled = "disabled";
                     }
 
-                    if($work['correction']=="1") {
+                    if ($work['correction'] == "1") {
                         $check = "checked";
                         $checked++;
-                    }else {
+                    } else {
                         $unchecked++;
                     }
 
-                    if($work['status']=="1") {
+                    if ($work['status'] == "1") {
                         $status = '<button type="button" class="btn btn-outline-success btn-rounded waves-effect waves-light">Completed</button>';
                         $complete++;
-                    }else {
-                        $status= '<button type="button" class="btn btn-outline-danger btn-rounded waves-effect waves-light">Incomplete</button>';
+                    } else {
+                        $status = '<button type="button" class="btn btn-outline-danger btn-rounded waves-effect waves-light">Incomplete</button>';
                         $incomplete++;
                     }
-                    
-                    
-                    $response.= '<tr>
-                                    <input type="hidden" value="'.$work['evaluation_id'].'" name="homework['.$row.'][homework_evaluation_id]">
-                                    <td>'.$row.'</td>
-                                    <td>'.$work['first_name'].' '.$work['last_name'].'</td>
-                                    <td>'.$work['register_no'].'</td>
-                                    <td>'.$status.'</td>
+
+
+                    $response .= '<tr>
+                                    <input type="hidden" value="' . $work['evaluation_id'] . '" name="homework[' . $row . '][homework_evaluation_id]">
+                                    <td>' . $row . '</td>
+                                    <td>' . $work['first_name'] . ' ' . $work['last_name'] . '</td>
+                                    <td>' . $work['register_no'] . '</td>
+                                    <td>' . $status . '</td>
                                     <td>
                                         <div class="form-group">
                                             <label for="score_name">Status</label>
-                                            '.$score_name.'
+                                            ' . $score_name . '
                                         </div>
-                                        <input type="text" class="form-control" name="homework['.$row.'][score_value]" value="'.$work['score_value'].'" aria-describedby="inputGroupPrepend" >
+                                        <input type="text" class="form-control" name="homework[' . $row . '][score_value]" value="' . $work['score_value'] . '" aria-describedby="inputGroupPrepend" >
 
                                     </td>
-                                    <td><input type="text" class="form-control" name="homework['.$row.'][teacher_remarks]"  value="'.$work['teacher_remarks'].'" aria-describedby="inputGroupPrepend" ></td>
+                                    <td><input type="text" class="form-control" name="homework[' . $row . '][teacher_remarks]"  value="' . $work['teacher_remarks'] . '" aria-describedby="inputGroupPrepend" ></td>
                                     <td>
                                         <i data-feather="file-text" class="icon-dual"></i>
-                                        <span class="ml-2 font-weight-semibold"><a  href="'.asset('student/homework/').'/'.$work['file'].'" download class="text-reset">'.$work['file'].'</a></span>
+                                        <span class="ml-2 font-weight-semibold"><a  href="' . asset('student/homework/') . '/' . $work['file'] . '" download class="text-reset">' . $work['file'] . '</a></span>
                                     </td>
-                                    <td>'.$work['remarks'].'</td>
+                                    <td>' . $work['remarks'] . '</td>
                                     <td>
                                         <div class="checkbox checkbox-primary mb-3">
-                                            <input  type="checkbox"  '.$check.$disabled.' id="'.$row.'" name="homework['.$row.'][correction]">
-                                            <label for="'.$row.'"></label>
+                                            <input  type="checkbox"  ' . $check . $disabled . ' id="' . $row . '" name="homework[' . $row . '][correction]">
+                                            <label for="' . $row . '"></label>
                                         </div>
                                     </td>
                                 </tr>';
                     $row++;
                 }
-            }else{
-                    $response.= '<tr>
+            } else {
+                $response .= '<tr>
                                     <td colspan="9"> No Data Available</td>
                                 </tr>';
             }
@@ -544,10 +548,8 @@ class TeacherController extends Controller
             $homework['incomplete'] = $incomplete;
             $homework['checked'] = $checked;
             $homework['unchecked'] = $unchecked;
-            
-            
         }
-        
+
         return $homework;
     }
 
@@ -564,7 +566,7 @@ class TeacherController extends Controller
         return $response;
     }
 
-     
+
 
     public function homeworkEdit()
     {
@@ -649,70 +651,70 @@ class TeacherController extends Controller
         return $response;
     }
 
-     // subject by Class
-     public function subjectByClass(Request $request)
-     {
+    // subject by Class
+    public function subjectByClass(Request $request)
+    {
         $data = [
             'section_id' => $request->section_id,
             'class_id' => $request->class_id,
             'teacher_id' => session()->get('ref_user_id')
         ];
-         $subject = Helper::PostMethod(config('constants.api.teacher_subject'),$data);
-         return $subject;
-     }
- 
-     // Section by Class
-     public function sectionByClass(Request $request)
-     {
-         $data = [
-             'class_id' => $request->class_id,
-             'teacher_id' => session()->get('ref_user_id')
-         ];
-         $section = Helper::PostMethod(config('constants.api.teacher_section'), $data);
-         return $section;
-     }
-    public function subjectmarks(Request $request)
-    { 
+        $subject = Helper::PostMethod(config('constants.api.teacher_subject'), $data);
+        return $subject;
+    }
+
+    // Section by Class
+    public function sectionByClass(Request $request)
+    {
         $data = [
-        
-            "subjectmarks" => $request->subjectmarks,        
+            'class_id' => $request->class_id,
+            'teacher_id' => session()->get('ref_user_id')
+        ];
+        $section = Helper::PostMethod(config('constants.api.teacher_section'), $data);
+        return $section;
+    }
+    public function subjectmarks(Request $request)
+    {
+        $data = [
+
+            "subjectmarks" => $request->subjectmarks,
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
             "subject_id" => $request->subject_id,
-            "exam_id" => $request->exam_id            
+            "exam_id" => $request->exam_id
         ];
 
         $response = Helper::PostMethod(config('constants.api.add_student_marks'), $data);
-    
+
         return $response;
     }
     public function getsubjectdivision(Request $request)
     {
-    $data = [          
-        "subjectmarks" => $request->subjectmarks,        
-        "class_id" => $request->class_id,
-        "section_id" => $request->section_id,
-        "subject_id" => $request->subject_id          
-    ];    
-    $response = Helper::PostMethod(config('constants.api.get_subject_division'), $data);    
-    return $response;
-    } 
+        $data = [
+            "subjectmarks" => $request->subjectmarks,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id
+        ];
+        $response = Helper::PostMethod(config('constants.api.get_subject_division'), $data);
+        return $response;
+    }
     public function subjectdivisionAdd(Request $request)
     {
-//    dd($request);
-    $data = [
-        "class_id" => $request->class_id,
-        "section_id" => $request->section_id,
-        "subject_id" => $request->subject_id,
-        "subjectdiv" => $request->subjectdiv,
-        "exam_id" => $request->exam_id,
-        
-    ];
-    // dd($data);
-    // echo "<pre>";
-    // print_r($data);
-    // exit;
-    $response = Helper::PostMethod(config('constants.api.add_subject_division'), $data);
-    return $response;
-    }   
+        //    dd($request);
+        $data = [
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id,
+            "subjectdiv" => $request->subjectdiv,
+            "exam_id" => $request->exam_id,
+
+        ];
+        // dd($data);
+        // echo "<pre>";
+        // print_r($data);
+        // exit;
+        $response = Helper::PostMethod(config('constants.api.add_subject_division'), $data);
+        return $response;
+    }
 }

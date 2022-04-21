@@ -298,7 +298,11 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // add to do list
     Route::post('add_to_do_list', [ApiController::class, 'addToDoList']);
     Route::get('get_to_do_list', [ApiController::class, 'getToDoList']);
-    
-    
-    
+    Route::post('get_to_do_row', [ApiController::class, 'getToDoListRow']);
+    Route::post('delete_to_do_list', [ApiController::class, 'deleteToDoList']);
+    Route::get('get_to_do_list_dashboard', [ApiController::class, 'getToDoListDashboard']);
+    Route::post('read_update_todo', [ApiController::class, 'readUpdateTodo']);
+    Route::post('get_assign_class', [ApiController::class, 'getAssignClass']);
+    Route::post('to_do_comments', [ApiController::class, 'toDoComments']);
+    Route::get('get_to_do_teacher', [ApiController::class, 'getToDoTeacher']);
 });

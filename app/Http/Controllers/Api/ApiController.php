@@ -7985,4 +7985,387 @@ class ApiController extends BaseController
             return $this->successResponse($toDoList, 'To do lists record fetch successfully');
         }
     }
+    // get to do row details
+    public function getToDoListRow(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'token' => 'required',
+            'branch_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // insert data
+            $sectionDetails = $createConnection->table('to_do_lists')->where('id', $request->id)->get();
+            return $this->successResponse($sectionDetails, 'to Do Lists row fetch successfully');
+        }
+    }
+    // deleteToDoList
+    public function deleteToDoList(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'id' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            $getRow = $createConnection->table('to_do_lists')->where('id', $request->id)->first();
+            if (isset($getRow->file)) {
+                $arrayVal = explode(',', $getRow->file);
+                foreach ($arrayVal as $key => $value) {
+                    if ($value) {
+                        $file = base_path() . '/public/images/todolist/' . $value;
+                        if (file_exists($file)) {
+                            unlink($file);
+                        }
+                    }
+                }
+            }
+            // get data
+            $query = $createConnection->table('to_do_lists')->where('id', $request->id)->delete();
+            if ($query) {
+                return $this->successResponse([], 'To Do Lists have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+    // getToDoListDashboard
+    public function getToDoListDashboard(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'user_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $now = Carbon::now()->format('Y-m-d');
+
+            // $dateNow = Carbon::now();
+            // $tmr = $dateNow->addDays(1);
+            // $dateStart = $tmr->format('Y-m-d');
+
+            // $daysToAdd = 7;
+            // $end = $tmr->addDays($daysToAdd);
+            // $dateEnd = $end->format('Y-m-d');
+            // print_r($dateStart);
+            // print_r($dateEnd);
+            // exit;
+            // dd($now);
+            $userID = $request->user_id;
+            $createConnection = $this->createNewConnection($request->branch_id);
+            $today = $createConnection->table('to_do_lists as tdl')
+                ->select(
+                    'tdl.id',
+                    'tdl.title',
+                    'tdl.due_date',
+                    'tdl.priority',
+                    'tdl.priority',
+                    'tdl.mark_as_complete',
+                    'rtd.user_id',
+                    DB::raw('count(tdlc.to_do_list_id) as total_comments')
+                )
+                ->leftJoin('read_to_do_list as rtd', function ($join) use ($userID) {
+                    $join->on('rtd.to_do_list_id', '=', 'tdl.id')
+                        ->on('rtd.user_id', '=', DB::raw("'$userID'"));
+                })
+                ->leftjoin('to_do_list_comments as tdlc', 'tdl.id', '=', 'tdlc.to_do_list_id')
+                ->orderBy('tdl.due_date', 'desc')
+                ->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), $now)
+                ->groupBy('tdl.id')
+                ->get();
+
+            $upcoming = $createConnection->table('to_do_lists as tdl')
+                ->select(
+                    'tdl.id',
+                    'tdl.title',
+                    'tdl.due_date',
+                    'tdl.priority',
+                    'tdl.mark_as_complete',
+                    'rtd.user_id',
+                    DB::raw('count(tdlc.to_do_list_id) as total_comments')
+                )
+                ->leftJoin('read_to_do_list as rtd', function ($join) use ($userID) {
+                    $join->on('rtd.to_do_list_id', '=', 'tdl.id')
+                        ->on('rtd.user_id', '=', DB::raw("'$userID'"));
+                })
+                ->leftjoin('to_do_list_comments as tdlc', 'tdl.id', '=', 'tdlc.to_do_list_id')
+                ->orderBy('tdl.due_date', 'desc')
+                ->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), '>', $now)
+                ->groupBy('tdl.id')
+                ->get();
+            $data = [
+                'today' => $today,
+                'upcoming' => $upcoming
+            ];
+            return $this->successResponse($data, 'To Do List fetch successfully');
+        }
+    }
+    // readUpdateTodo
+    public function readUpdateTodo(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'user_id' => 'required',
+            'to_do_list_id' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $checkExist = $Connection->table('read_to_do_list')->where([
+                ['to_do_list_id', '=', $request->to_do_list_id],
+                ['user_id', '=', $request->user_id]
+            ])->first();
+
+            if (empty($checkExist)) {
+                // echo "update";         
+                $query = $Connection->table('read_to_do_list')->insert([
+                    'to_do_list_id' => $request->to_do_list_id,
+                    'user_id' => $request->user_id,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+            } else {
+                // update data
+                $query = $Connection->table('read_to_do_list')->where('id', $checkExist->id)->update([
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+            }
+            $userID = $request->user_id;
+            $rowData = $Connection->table('to_do_lists as tdl')
+                ->select(
+                    'tdl.id',
+                    'tdl.title',
+                    'tdl.due_date',
+                    'tdl.priority',
+                    'tdl.assign_to',
+                    'tdl.check_list',
+                    'tdl.task_description',
+                    'tdl.file',
+                    'rtd.user_id'
+                )
+                ->leftJoin('read_to_do_list as rtd', function ($join) use ($userID) {
+                    $join->on('rtd.to_do_list_id', '=', 'tdl.id')
+                        ->on('rtd.user_id', '=', DB::raw("'$userID'"));
+                })
+                ->where('tdl.id', $request->to_do_list_id)
+                ->first();
+            // get comments details
+            $commentsData = $Connection->table('to_do_list_comments as tdlc')
+                ->select(
+                    'tdlc.id',
+                    'tdlc.comment',
+                    'tdlc.created_at',
+                    'us.name'
+                )
+                // change superadmin db here
+                // ->leftJoin('school-management-system.users as us', 'us.id', '=', DB::raw("'$userID'"))
+                ->leftJoin('school-management-system.users as us', 'us.id', '=', 'tdlc.user_id')
+                ->where([
+                    ['tdlc.to_do_list_id', '=', $request->to_do_list_id]
+                ])
+                ->get();
+            $data = [
+                "comments" => $commentsData,
+                "to_do_list" => $rowData,
+            ];
+            return $this->successResponse($data, 'Read to Do have Been updated');
+        }
+    }
+    // getAssignClass
+    public function getAssignClass(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'get_assign_class' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // dd($request->get_assign_class);
+            // // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get data
+            $rowData = $Connection->table('section_allocations as sa')
+                ->select('sa.id', 's.name as section_name', 'c.name as class_name')
+                ->join('sections as s', 'sa.section_id', '=', 's.id')
+                ->join('classes as c', 'sa.class_id', '=', 'c.id')
+                ->whereIn('sa.id', $request->get_assign_class)
+                ->get();
+
+            return $this->successResponse($rowData, 'Get Class details');
+        }
+    }
+    // toDoComments
+    public function toDoComments(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'user_id' => 'required',
+            'to_do_list_id' => 'required',
+            'branch_id' => 'required',
+            'comment' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $query = $Connection->table('to_do_list_comments')->insert([
+                'to_do_list_id' => $request->to_do_list_id,
+                'user_id' => $request->user_id,
+                'comment' => $request->comment,
+                'created_at' => date("Y-m-d H:i:s")
+            ]);
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse([], 'Commented successfully');
+            }
+        }
+    }
+    // getToDoTeacher
+    public function getToDoTeacher(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'user_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $userID = $request->user_id;
+            $now = Carbon::now()->format('Y-m-d');
+            // 1st get assign teachers
+            $Connection = $this->createNewConnection($request->branch_id);
+            // any one come 
+            if ($request->student_id) {
+                $getTeachersClassName = $Connection->table('enrolls as en')
+                    ->select('en.class_id', 'en.section_id')
+                    ->where('en.student_id', $request->student_id)
+                    ->groupBy('en.class_id', 'en.section_id')
+                    ->get();
+            }
+            if ($request->teacher_id) {
+                $getTeachersClassName = $Connection->table('subject_assigns as sa')
+                    ->select('sa.class_id', 'sa.section_id')
+                    ->where('sa.teacher_id', $request->teacher_id)
+                    ->groupBy('sa.class_id', 'sa.section_id')
+                    ->get();
+            }
+
+            $todayArray = array();
+            $upcomingArray = array();
+            // 2nd get sections id
+            foreach ($getTeachersClassName as $key => $value) {
+
+                $secAllocation = $Connection->table('section_allocations')
+                    ->select('id')
+                    ->where(
+                        [
+                            ['section_id', $value->section_id],
+                            ['class_id', $value->class_id]
+                        ]
+                    )->first();
+                if (isset($secAllocation->id)) {
+
+                    $secAllID = $secAllocation->id;
+                    $today = $Connection->table('to_do_lists as tdl')
+                        ->select(
+                            'tdl.id'
+                        )
+                        ->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), $now)
+                        ->whereRaw('FIND_IN_SET(?,tdl.assign_to)', [$secAllID])
+                        ->get();
+                    $upcoming = $Connection->table('to_do_lists as tdl')
+                        ->select(
+                            'tdl.id'
+                        )
+                        ->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), '>', $now)
+                        ->whereRaw('FIND_IN_SET(?,tdl.assign_to)', [$secAllID])
+                        ->get();
+                    if ($today->count() > 0) {
+                        foreach ($today as $val) {
+                            array_push($todayArray, $val->id);
+                        }
+                    }
+                    if ($upcoming->count() > 0) {
+                        foreach ($upcoming as $val) {
+                            array_push($upcomingArray, $val->id);
+                        }
+                    }
+                }
+            }
+            $today = $Connection->table('to_do_lists as tdl')
+                ->select(
+                    'tdl.id',
+                    'tdl.title',
+                    'tdl.due_date',
+                    'tdl.priority',
+                    'tdl.assign_to',
+                    'tdl.mark_as_complete',
+                    'rtd.user_id',
+                    DB::raw('count(tdlc.to_do_list_id) as total_comments')
+                )
+                ->leftJoin('read_to_do_list as rtd', function ($join) use ($userID) {
+                    $join->on('rtd.to_do_list_id', '=', 'tdl.id')
+                        ->on('rtd.user_id', '=', DB::raw("'$userID'"));
+                })
+                ->leftjoin('to_do_list_comments as tdlc', 'tdl.id', '=', 'tdlc.to_do_list_id')
+                ->orderBy('tdl.due_date', 'desc')
+                ->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), $now)
+                ->whereIn('tdl.id', $todayArray)
+                ->groupBy('tdl.id')
+                ->get();
+            // get upcoming
+            $upcoming = $Connection->table('to_do_lists as tdl')
+                ->select(
+                    'tdl.id',
+                    'tdl.title',
+                    'tdl.due_date',
+                    'tdl.priority',
+                    'tdl.mark_as_complete',
+                    'rtd.user_id',
+                    DB::raw('count(tdlc.to_do_list_id) as total_comments')
+                )
+                ->leftJoin('read_to_do_list as rtd', function ($join) use ($userID) {
+                    $join->on('rtd.to_do_list_id', '=', 'tdl.id')
+                        ->on('rtd.user_id', '=', DB::raw("'$userID'"));
+                })
+                ->leftjoin('to_do_list_comments as tdlc', 'tdl.id', '=', 'tdlc.to_do_list_id')
+                ->orderBy('tdl.due_date', 'desc')
+                ->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), '>', $now)
+                // ->whereRaw('FIND_IN_SET(?,tdl.assign_to)', [$secAllID])
+                ->whereIn('tdl.id', $upcomingArray)
+                ->groupBy('tdl.id')
+                ->get();
+            $data = [
+                'today' => $today,
+                'upcoming' => $upcoming
+            ];
+            return $this->successResponse($data, 'To Do List fetch successfully');
+        }
+    }
 }

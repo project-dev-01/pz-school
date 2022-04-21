@@ -11,7 +11,19 @@ class StudentController extends Controller
     //
     public function index()
     {
-        return view('student.dashboard.index');
+        $user_id = session()->get('user_id');
+        $student_id = session()->get('ref_user_id');
+        $data = [
+            'user_id' => $user_id,
+            'student_id' => $student_id
+        ];
+        $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
+        return view(
+            'student.dashboard.index',
+            [
+                'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
+            ]
+        );
     }
     function addDailyReportRemarks(Request $request)
     {

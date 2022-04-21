@@ -269,22 +269,19 @@ class AdminController extends Controller
     //
     public function index()
     {
-        // $data = TenantUser::all();
-        // dd($data);
-        // config(['database.connections.mysql_new_connection' => [
-        //     'driver'    => 'mysql',
-        //     'host'      => 'localhost',
-        //     'database'  => 'school-management-system-test',
-        //     'username'  => 'root',
-        //     'password'  => '',
-        //     'charset'   => 'utf8',
-        //     'collation' => 'utf8_unicode_ci'
-        // ]]);
-        // $decDB = DB::connection('tenant')->table("branches")->get();
-        // echo "<pre>";
-        // print_r($decDB);
-        // exit;
-        return view('admin.dashboard.index');
+        $user_id = session()->get('user_id');
+        $data = [
+            'user_id' => $user_id
+        ];
+        $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_list_dashboard'), $data);
+        // dd($get_to_do_list_dashboard);
+        return view(
+            'admin.dashboard.index',
+            [
+                'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
+            ]
+        );
+        // return view('admin.dashboard.index');
     }
     public function settings()
     {
@@ -1851,8 +1848,7 @@ class AdminController extends Controller
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
-                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editDepartmentBtn">Update</a>
-                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteDepartmentBtn">Delete</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteToDoListBtn">Delete</a>
                         </div>';
             })
 
