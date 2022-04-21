@@ -26,32 +26,23 @@
                 <p class="sub-header">
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <!-- <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addSectionModal">Add Section</button> -->
-                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#">Add Section</button>
+                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addSectionModal">Add Section</button>
+                        <!-- <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#">Add Section</button> -->
                     </div>
                 </div>
                 </p>
 
                 <div class="table-responsive">
-                    <table class="table mb-0" id="admin-section-table">
+                    <table class="table mb-0" id="section-table">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
+                                <th>Capacity</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>A</td>
-                                <td> 
-                                    <div class="button-list">
-                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
-                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
-                                    </div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -64,4 +55,19 @@
 
 </div>
 <!-- container -->
+@endsection
+@section('scripts')
+<script>
+    // var toDoListURL = "{{ route('admin.task.add') }}";
+    // var gettoDoListURL = "{{ route('admin.task.get') }}";
+    var sectionAddUrl = "{{ config('constants.api.section_add') }}";
+    var sectionGetRowUrl = "{{ config('constants.api.section_details') }}";
+    var sectionUpdateUrl = "{{ config('constants.api.section_update') }}";
+    var sectionDeleteUrl = "{{ config('constants.api.section_delete') }}";
+    
+    // var deleteToDoList = "{{ config('constants.api.delete_to_do_list') }}";
+    var sectionList = "{{ route('admin.section.list') }}";
+</script>
+<script src="{{ asset('js/custom/sections.js') }}"></script>
+
 @endsection

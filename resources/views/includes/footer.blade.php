@@ -127,9 +127,9 @@
     });
 
     // section routes
-    var sectionList = "{{ route('super_admin.section.list') }}";
-    var sectionDetails = "{{ route('section.details') }}";
-    var sectionDelete = "{{ route('section.delete') }}";
+    // var sectionList = "{{ route('super_admin.section.list') }}";
+    // var sectionDetails = "{{ route('section.details') }}";
+    // var sectionDelete = "{{ route('section.delete') }}";
     // get states
     var getStates = "{{ config('constants.api.states') }}";
     var getCity = "{{ config('constants.api.cities') }}";
@@ -191,15 +191,15 @@
 <!-- <script src="{{ asset('js/custom/classes.js') }}"></script>
 <script src="{{ asset('js/custom/user_list.js') }}"></script>
 <script src="{{ asset('js/custom/settings.js') }}"></script> -->
-<script src="{{ asset('js/custom/section.js') }}"></script>
-<script src="{{ asset('js/custom/classes.js') }}"></script>
+<!-- <script src="{{ asset('js/custom/section.js') }}"></script> -->
+<!-- <script src="{{ asset('js/custom/classes.js') }}"></script> -->
 <script src="{{ asset('js/custom/event_type.js') }}"></script>
 <script src="{{ asset('js/custom/event.js') }}"></script>
 <script src="{{ asset('js/custom/assign_teacher.js') }}"></script>
 <script src="{{ asset('js/custom/settings.js') }}"></script>
 <script src="{{ asset('js/custom/user_list.js') }}"></script>
 <script src="{{ asset('js/custom/dashboard.js') }}"></script>
-<script src="{{ asset('js/custom/test_result.js') }}"></script>
+<!-- <script src="{{ asset('js/custom/test_result.js') }}"></script> -->
 <!-- <script src="{{ asset('js/custom/apex-mixed.js') }}"></script> -->
 <script src="{{ asset('js/custom/common.js') }}"></script>
 <script src="{{ asset('js/custom/iconchart.js') }}"></script>

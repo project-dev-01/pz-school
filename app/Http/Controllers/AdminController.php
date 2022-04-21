@@ -590,34 +590,12 @@ class AdminController extends Controller
     {
         return view('admin.section.index');
     }
-    // add section
-    public function addSection(Request $request)
-    {
-
-        $validator = \Validator::make($request->all(), [
-            'name' => 'required|unique:sections'
-        ]);
-
-        if (!$validator->passes()) {
-            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
-        } else {
-            $section = new Section();
-            $section->name = $request->name;
-            $query = $section->save();
-
-            if (!$query) {
-                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
-            } else {
-                return response()->json(['code' => 1, 'msg' => 'New Section has been successfully saved']);
-            }
-        }
-    }
 
     // get sections 
     public function getSectionList(Request $request)
     {
-        $section = Section::all();
-        return DataTables::of($section)
+        $response = Helper::GetMethod(config('constants.api.section_list'));
+        return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -628,45 +606,6 @@ class AdminController extends Controller
 
             ->rawColumns(['actions'])
             ->make(true);
-    }
-
-    // get section row details
-    public function getSectionDetails(Request $request)
-    {
-        $section_id = $request->section_id;
-        $sectionDetails = Section::find($section_id);
-        return response()->json(['details' => $sectionDetails]);
-    }
-    // update section
-    public function updateSectionDetails(Request $request)
-    {
-        $section_id = $request->sid;
-
-        $validator = \Validator::make($request->all(), [
-            'name' => 'required|unique:sections,name,' . $section_id
-        ]);
-
-        if (!$validator->passes()) {
-            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
-        } else {
-
-            $section = Section::find($section_id);
-            $section->name = $request->name;
-            $query = $section->save();
-
-            if ($query) {
-                return response()->json(['code' => 1, 'msg' => 'Section Details have Been updated']);
-            } else {
-                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
-            }
-        }
-    }
-    // delete Section
-    public function deleteSection(Request $request)
-    {
-        $section_id = $request->section_id;
-        Section::where('id', $section_id)->delete();
-        return response()->json(['code' => 1, 'msg' => 'Section have been deleted from database']);
     }
 
     // section allocations
@@ -1791,7 +1730,7 @@ class AdminController extends Controller
     }
     public function taskIndex()
     {
-        
+
         $allocate_section_list = Helper::GetMethod(config('constants.api.allocate_section_list'));
         return view(
             'admin.task.index',
@@ -2812,9 +2751,9 @@ class AdminController extends Controller
     }
     public function byclasss()
     {
-        $getclass = Helper::GetMethod(config('constants.api.class_list'));     
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
-       
+
         return view(
             'admin.exam_results.byclass',
             [
@@ -2826,7 +2765,7 @@ class AdminController extends Controller
     // exam master -> exam result start
     public function bysubject()
     {
-        $getclass = Helper::GetMethod(config('constants.api.class_list'));     
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
         return view(
             'admin.exam_results.bysubject',
@@ -2834,7 +2773,7 @@ class AdminController extends Controller
                 'classnames' => $getclass['data'],
                 'allGrades' => $allGrades['data']
             ]
-        ); 
+        );
     }
     public function overall()
     {
@@ -2851,28 +2790,28 @@ class AdminController extends Controller
 
     public function testResult()
     {
-       
+
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         //$get_exams = Helper::GetMethod(config('constants.api.get_testresult_exams'));
         // dd($response);     
         return view('admin.testresult.index', [
             'classes' => $getclass['data']
-        ]);       
+        ]);
     }
 
     public function subjectmarks(Request $request)
-    { 
+    {
         $data = [
-        
-            "subjectmarks" => $request->subjectmarks,        
+
+            "subjectmarks" => $request->subjectmarks,
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
             "subject_id" => $request->subject_id,
-            "exam_id" => $request->exam_id            
+            "exam_id" => $request->exam_id
         ];
 
         $response = Helper::PostMethod(config('constants.api.add_student_marks'), $data);
-    
+
         return $response;
     }
     public function subjectdivisionAdd(Request $request)
@@ -2884,7 +2823,7 @@ class AdminController extends Controller
             "subject_id" => $request->subject_id,
             "subjectdiv" => $request->subjectdiv,
             "exam_id" => $request->exam_id,
-            
+
         ];
         // dd($data);
         // echo "<pre>";
@@ -2892,6 +2831,6 @@ class AdminController extends Controller
         // exit;
         $response = Helper::PostMethod(config('constants.api.add_subject_division'), $data);
         return $response;
-    }   
+    }
     // exam master -> exam result end
 }

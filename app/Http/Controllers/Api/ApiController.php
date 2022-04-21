@@ -113,7 +113,7 @@ class ApiController extends BaseController
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
             // insert data
-            $sectionDetails = $createConnection->table('sections')->where('id', $request->section_id)->get();
+            $sectionDetails = $createConnection->table('sections')->where('id', $request->section_id)->first();
             return $this->successResponse($sectionDetails, 'Section row fetch successfully');
         }
     }

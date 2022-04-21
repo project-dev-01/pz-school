@@ -7,12 +7,15 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <form id="sectionForm" method="post" action="{{ route('section.add') }}" autocomplete="off">
+                <form id="sectionForm" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter name">
-                        <span class="text-danger error-text name_error"></span>
+                        <label for="name">Name <span class="text-danger">*</span></label>
+                        <input type="text" id="sectionName" name="name" class="form-control" placeholder="Enter name">
+                    </div>
+                    <div class="form-group">
+                        <label for="capacity">Capacity</label>
+                        <input type="number" id="sectionCapacity" name="capacity" class="form-control" placeholder="Enter capacity">
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
