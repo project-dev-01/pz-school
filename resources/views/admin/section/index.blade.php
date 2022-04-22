@@ -58,14 +58,11 @@
 @endsection
 @section('scripts')
 <script>
-    // var toDoListURL = "{{ route('admin.task.add') }}";
-    // var gettoDoListURL = "{{ route('admin.task.get') }}";
     var sectionAddUrl = "{{ config('constants.api.section_add') }}";
     var sectionGetRowUrl = "{{ config('constants.api.section_details') }}";
     var sectionUpdateUrl = "{{ config('constants.api.section_update') }}";
     var sectionDeleteUrl = "{{ config('constants.api.section_delete') }}";
     
-    // var deleteToDoList = "{{ config('constants.api.delete_to_do_list') }}";
     var sectionList = "{{ route('admin.section.list') }}";
 </script>
 <script src="{{ asset('js/custom/sections.js') }}"></script>

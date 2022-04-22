@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Dashboard')
+@section('title','Classes')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -27,14 +27,13 @@
                 <p class="sub-header">
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <!-- <a href="{{ route('admin.add_classes')}}" class="btn btn-primary btn-rounded waves-effect waves-light">Add Class</a> -->
                         <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addClassModal">Add Class</button>
                     </div>
                 </div>
                 </p>
 
                 <div class="table-responsive">
-                    <table class="table mb-0" id="admin-class-table">
+                    <table class="table mb-0" id="class-table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -44,17 +43,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>7</td>
-                                <td>VII</td>
-                                <td>
-                                    <div class="button-list">
-                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
-                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
-                                    </div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -67,4 +55,15 @@
 
 </div>
 <!-- container -->
+@endsection
+@section('scripts')
+<script>
+    var classesAddUrl = "{{ config('constants.api.class_add') }}";
+    var classesGetRowUrl = "{{ config('constants.api.class_details') }}";
+    var classesUpdateUrl = "{{ config('constants.api.class_update') }}";
+    var classDeleteUrl = "{{ config('constants.api.class_delete') }}";
+    
+    var classList = "{{ route('admin.classes.list') }}";
+</script>
+<script src="{{ asset('js/custom/classes.js') }}"></script>
 @endsection

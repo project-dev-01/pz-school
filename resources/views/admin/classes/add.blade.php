@@ -7,21 +7,19 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <form id="classesForm" method="post" action="{{ route('classes.add') }}" autocomplete="off">
+                <form id="classSubmit" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Class Name</label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter class name">
-                        <span class="text-danger error-text name_error"></span>
+                        <label for="name">Class Name<span class="text-danger">*</span></label>
+                        <input type="text" id="className" name="name" class="form-control" placeholder="Enter class name">
                     </div>
                     <div class="form-group">
                         <label for="name_numeric">Class Numeric</label>
-                        <input type="text" id="name_numeric" name="name_numeric" class="form-control" placeholder="Enter class numeric">
-                        <span class="text-danger error-text name_numeric_error"></span>
+                        <input type="text" id="nameNumeric" name="name_numeric" class="form-control" placeholder="Enter class numeric">
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="submit" id="classSubmit" class="btn btn-success waves-effect waves-light">Submit</button>
+                        <button type="submit" class="btn btn-success waves-effect waves-light">Submit</button>
                     </div>
 
                 </form>

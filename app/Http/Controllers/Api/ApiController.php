@@ -386,7 +386,6 @@ class ApiController extends BaseController
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
             'name' => 'required',
-            'name_numeric' => 'required',
             'branch_id' => 'required'
         ]);
 
@@ -450,7 +449,7 @@ class ApiController extends BaseController
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
             // insert data
-            $sectionDetails = $createConnection->table('classes')->where('id', $request->class_id)->get();
+            $sectionDetails = $createConnection->table('classes')->where('id', $request->class_id)->first();
             return $this->successResponse($sectionDetails, 'Class row fetch successfully');
         }
     }
@@ -460,7 +459,6 @@ class ApiController extends BaseController
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
             'name' => 'required',
-            'name_numeric' => 'required',
             'branch_id' => 'required'
         ]);
 
@@ -585,7 +583,7 @@ class ApiController extends BaseController
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
             // insert data
-            $sectionDetails = $createConnection->table('section_allocations')->where('id', $request->id)->get();
+            $sectionDetails = $createConnection->table('section_allocations')->where('id', $request->id)->first();
             return $this->successResponse($sectionDetails, 'Section Allocation row fetch successfully');
         }
     }

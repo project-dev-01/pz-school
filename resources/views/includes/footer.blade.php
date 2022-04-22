@@ -158,9 +158,9 @@
     var branchbyAssignTeacher = "{{ config('constants.api.branch_by_assign_teacher') }}";
     var getsectionAllocation = "{{ config('constants.api.section_by_class') }}";
     // class details
-    var classList = "{{ route('class.list') }}";
-    var classDetails = "{{ route('class.details') }}";
-    var classDelete = "{{ route('class.delete') }}";
+    // var classList = "{{ route('class.list') }}";
+    // var classDetails = "{{ route('class.details') }}";
+    // var classDelete = "{{ route('class.delete') }}";
     // Event type details
     var eventTypeList = "{{ route('super_admin.event_type.list') }}";
     var eventTypeDetails = "{{ route('event_type.details') }}";

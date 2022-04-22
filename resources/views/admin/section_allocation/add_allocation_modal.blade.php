@@ -7,27 +7,27 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <form id="sectionAllocationForm" method="post" action="{{ route('section_allocation.add') }}" autocomplete="off">
+                <form id="sectionAllocationForm" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="class_name">Class Name</label>
-                        <select class="form-control" id="class_name" name="class_name">
+                        <label for="class_id">Class Name</label>
+                        <select class="form-control" id="classID" name="class_id">
                             <option value="">Choose Class</option>
-                            @foreach($classDetails as $class)
-                            <option value="{{$class->id}}">{{$class->name}}</option>
-                            @endforeach
+                            @forelse($classDetails as $class)
+                            <option value="{{$class['id']}}">{{$class['name']}}</option>
+                            @empty
+                            @endforelse
                         </select>
-                        <span class="text-danger error-text class_name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="section_name">Section Name</label>
-                        <select class="form-control" id="section_name" name="section_name">
+                        <label for="section_id">Section Name</label>
+                        <select class="form-control" id="sectionID" name="section_id">
                             <option value="">Choose Section</option>
-                            @foreach($sectionDetails as $section)
-                            <option value="{{$section->id}}">{{$section->name}}</option>
-                            @endforeach
+                            @forelse($sectionDetails as $section)
+                            <option value="{{$section['id']}}">{{$section['name']}}</option>
+                            @empty
+                            @endforelse
                         </select>
-                        <span class="text-danger error-text section_name_error"></span>
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>

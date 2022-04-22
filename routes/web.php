@@ -274,30 +274,13 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('section/list', [AdminController::class, 'getSectionList'])->name('admin.section.list');
 
         // Class routes
-        // Route::get('class/index', [AdminController::class, 'classes'])->name('admin.class');
-        // Route::post('class/add', [AdminController::class, 'addClass'])->name('class.add');
-        // Route::get('class/list', [AdminController::class, 'getClassList'])->name('class.list');
-        // Route::post('class/class-details', [AdminController::class, 'getClassDetails'])->name('class.details');
-        // Route::post('class/update', [AdminController::class, 'updateClassDetails'])->name('class.update');
-        // Route::post('class/delete', [AdminController::class, 'deleteClass'])->name('class.delete');
-
         Route::get('classes', [AdminController::class, 'classes'])->name('admin.classes');
-        Route::get('classes/add_class', [AdminController::class, 'addClasses'])->name('admin.add_classes');
-        Route::get('classes/list', [AdminController::class, 'getClassList'])->name('classes.list');
-        Route::post('classes/add', [AdminController::class, 'addClass'])->name('classes.add');
-        Route::get('classes/edit/{id}', [AdminController::class, 'editClass'])->name('classes.edit');
-        Route::post('classes/update', [AdminController::class, 'updateClass'])->name('classes.update');
-        Route::post('classes/delete', [AdminController::class, 'deleteClass'])->name('classes.delete');
-        Route::post('classes/class-details', [AdminController::class, 'getClassDetails'])->name('classes.details');
+        Route::get('classes/list', [AdminController::class, 'getClassList'])->name('admin.classes.list');
 
 
         // sections allocations routes
         Route::get('allocate_section/index', [AdminController::class, 'showSectionAllocation'])->name('admin.section_allocation');
-        Route::post('allocate_section/add', [AdminController::class, 'addSectionAllocation'])->name('section_allocation.add');
-        Route::get('allocate_section/list', [AdminController::class, 'getSectionAllocationList'])->name('section_allocation.list');
-        Route::post('allocate_section/section_allocation-details', [AdminController::class, 'getSectionAllocationDetails'])->name('section_allocation.details');
-        Route::post('allocate_section/update', [AdminController::class, 'updateSectionAllocation'])->name('section_allocation.update');
-        Route::post('allocate_section/delete', [AdminController::class, 'deleteSectionAllocation'])->name('section_allocation.delete');
+        Route::get('allocate_section/list', [AdminController::class, 'getSectionAllocationList'])->name('admin.section_allocation.list');
 
         // assign_teacher routes
         Route::get('assign_teacher/index', [AdminController::class, 'showTeacherAllocation'])->name('admin.assign_teacher');

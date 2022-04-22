@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Dashboard')
+@section('title','Section Allocation')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -32,7 +32,7 @@
                 </p>
 
                 <div class="table-responsive">
-                    <table class="table mb-0" id="admin-allocation-table">
+                    <table class="table mb-0" id="section-allocation-table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -42,17 +42,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>7</td>
-                                <td>A</td>
-                                <td>
-                                    <div class="button-list">
-                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
-                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
-                                    </div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -60,7 +49,20 @@
         </div> <!-- end col -->
     </div>
     <!--- end row -->
+    @include('admin.section_allocation.add_allocation_modal')
+    @include('admin.section_allocation.edit_allocation_modal')
 
 </div>
 <!-- container -->
+@endsection
+@section('scripts')
+<script>
+    var secAlloAddUrl = "{{ config('constants.api.allocate_section_add') }}";
+    var secAlloGetRowUrl = "{{ config('constants.api.allocate_section_details') }}";
+    var secAlloUpdateUrl = "{{ config('constants.api.allocate_section_update') }}";
+    var secAlloDeleteUrl = "{{ config('constants.api.allocate_section_delete') }}";
+    
+    var secAlloList = "{{ route('admin.section_allocation.list') }}";
+</script>
+<script src="{{ asset('js/custom/section_allocation.js') }}"></script>
 @endsection

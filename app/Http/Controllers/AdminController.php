@@ -289,28 +289,7 @@ class AdminController extends Controller
     }
     public function classes()
     {
-        // $decDB = DB::connection('tenant')->table("branches")->get();
-        // echo "<pre>";
-        // print_r($decDB);
-        // exit;
-        // config(['database.connections.mysql_new_connection' => [
-        //     'driver'    => 'mysql',
-        //     'host'      => 'localhost',
-        //     'database'  => 'school-management-system-test',
-        //     'username'  => 'root',
-        //     'password'  => '',
-        //     'charset'   => 'utf8',
-        //     'collation' => 'utf8_unicode_ci'
-        // ]]);
-        // $decDB = DB::connection('mysql_new_connection')->table("branches")->get();
-        // print_r($decDB);
-        // exit;
         return view('admin.classes.index');
-    }
-    public function addClasses()
-    {
-        $teacherDetails = User::select('id', 'name')->where('role_id', 3)->get();
-        return view('admin.classes.add', ['teacherDetails' => $teacherDetails]);
     }
 
     // update profile info
@@ -414,44 +393,13 @@ class AdminController extends Controller
             }
         }
     }
-    //add New Class
-    public function addClass(Request $request)
-    {
-        $validator = \Validator::make($request->all(), [
-            'name' => 'required|unique:classes',
-            'name_numeric' => 'required',
-        ]);
 
-        if (!$validator->passes()) {
-            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
-        } else {
-            $class = new Classes();
-            $class->name = $request->name;
-            $class->name_numeric = $request->name_numeric;
-            $query = $class->save();
-
-            if (!$query) {
-                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
-            } else {
-                return response()->json(['code' => 1, 'msg' => 'New Class has been successfully saved']);
-            }
-        }
-    }
-
-    // get class row details
-    public function getClassDetails(Request $request)
-    {
-        $class_id = $request->class_id;
-        $classDetails = Classes::find($class_id);
-        return response()->json(['details' => $classDetails]);
-    }
 
     // get class details
     public function getClassList(Request $request)
     {
-        $classes = Classes::all();
-
-        return DataTables::of($classes)
+        $response = Helper::GetMethod(config('constants.api.class_list'));
+        return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -464,47 +412,6 @@ class AdminController extends Controller
             ->make(true);
     }
 
-    //UPDATE Class DETAILS
-    public function updateClass(Request $request)
-    {
-        // dd($request);
-        $classID = $request->class_id;
-
-        $validator = \Validator::make($request->all(), [
-            'name' => 'required',
-            'name_numeric' => 'required',
-        ]);
-
-        if (!$validator->passes()) {
-            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
-        } else {
-
-            $class = Classes::find($classID);
-            $class->name = $request->name;
-            $class->name_numeric = $request->name_numeric;
-            $query = $class->save();
-
-            if ($query) {
-                return response()->json(['code' => 1, 'msg' => 'Class Details have Been updated']);
-            } else {
-                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
-            }
-        }
-    }
-
-    // DELETE Class Details
-    public function deleteClass(Request $request)
-    {
-        $classID = $request->class_id;
-        Classes::where('id', $classID)->delete();
-        return response()->json(['code' => 1, 'msg' => 'Class have been deleted from database']);
-
-        // if ($query) {
-        //     return response()->json(['code' => 1, 'msg' => 'Class has been deleted from database']);
-        // } else {
-        //     return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
-        // }
-    }
 
     // users page
     public function users()
@@ -611,50 +518,24 @@ class AdminController extends Controller
     // section allocations
     public function showSectionAllocation()
     {
-        $classDetails = Classes::select('id', 'name')->get();
-        $sectionDetails = Section::select('id', 'name')->get();
-        return view('admin.section_allocation.allocation', ['classDetails' => $classDetails, 'sectionDetails' => $sectionDetails]);
+        $getClasses = Helper::GetMethod(config('constants.api.class_list'));
+        $getSections = Helper::GetMethod(config('constants.api.section_list'));
+        return view('admin.section_allocation.allocation', ['classDetails' => $getClasses['data'], 'sectionDetails' => $getSections['data']]);
     }
 
-    // add section allocations
-    public function addSectionAllocation(Request $request)
-    {
-
-        $validator = \Validator::make($request->all(), [
-            'class_name' => 'required',
-            'section_name' => 'required'
-        ]);
-
-        if (!$validator->passes()) {
-            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
-        } else {
-            $section = new SectionAllocation();
-            $section->class_id = $request->class_name;
-            $section->section_id = $request->section_name;
-            $query = $section->save();
-
-            if (!$query) {
-                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
-            } else {
-                return response()->json(['code' => 1, 'msg' => 'Section Allocation has been successfully saved']);
-            }
-        }
-    }
+    
     // get sections allocation
     public function getSectionAllocationList(Request $request)
     {
-        $sectionAllocation = DB::table('sections_allocations as sa')
-            ->select('sa.id', 'sa.class_id', 'sa.section_id', 's.name as section_name', 'c.name as class_name', 'c.name_numeric')
-            ->join('sections as s', 'sa.section_id', '=', 's.id')
-            ->join('classes as c', 'sa.class_id', '=', 'c.id')
-            ->get();
 
-        return DataTables::of($sectionAllocation)
+
+        $response = Helper::GetMethod(config('constants.api.allocate_section_list'));
+        return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
-                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row->id . '" id="editSectionAlloBtn">Update</a>
-                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row->id . '" id="deleteSectionAlloBtn">Delete</a>
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editSectionAlloBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteSectionAlloBtn">Delete</a>
                         </div>';
             })
 
@@ -662,50 +543,6 @@ class AdminController extends Controller
             ->make(true);
     }
 
-    // get getSectionAllocationDetails details
-
-    public function getSectionAllocationDetails(Request $request)
-    {
-        $id = $request->id;
-        $SectionAllocation = SectionAllocation::find($id);
-        return response()->json(['details' => $SectionAllocation]);
-    }
-
-    // update Section Allocations
-
-    public function updateSectionAllocation(Request $request)
-    {
-        $id = $request->said;
-
-        $validator = \Validator::make($request->all(), [
-            'class_name' => 'required',
-            'section_name' => 'required'
-        ]);
-
-        if (!$validator->passes()) {
-            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
-        } else {
-
-            $section = SectionAllocation::find($id);
-            $section->class_id = $request->class_name;
-            $section->section_id = $request->section_name;
-            $query = $section->save();
-
-            if ($query) {
-                return response()->json(['code' => 1, 'msg' => 'Section Allocation Details have Been updated']);
-            } else {
-                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
-            }
-        }
-    }
-
-    // delete deleteSectionAllocation
-    public function deleteSectionAllocation(Request $request)
-    {
-        $id = $request->id;
-        SectionAllocation::where('id', $id)->delete();
-        return response()->json(['code' => 1, 'msg' => 'Section Allocation have been deleted from database']);
-    }
 
     // show assign teacher
 

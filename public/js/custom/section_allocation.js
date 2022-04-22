@@ -1,26 +1,27 @@
 $(function () {
 
     // rules validation
-    $("#sectionForm").validate({
+    $("#sectionAllocationForm").validate({
         rules: {
-            name: "required"
+            class_id: "required",
+            section_id: "required"
         }
     });
     // add section
-    $('#sectionForm').on('submit', function (e) {
+    $('#sectionAllocationForm').on('submit', function (e) {
         e.preventDefault();
-        var sectionValid = $("#sectionForm").valid();
+        var sectionValid = $("#sectionAllocationForm").valid();
         if (sectionValid === true) {
-            var sectionName = $("#sectionName").val();
-            var sectionCapacity = $("#sectionCapacity").val();
+            var classID = $("#classID").val();
+            var sectionID = $("#sectionID").val();
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
-            formData.append('name', sectionName);
-            formData.append('capacity', sectionCapacity);
+            formData.append('class_id', classID);
+            formData.append('section_id', sectionID);
 
             $.ajax({
-                url: sectionAddUrl,
+                url: secAlloAddUrl,
                 method: "post",
                 data: formData,
                 processData: false,
@@ -28,13 +29,13 @@ $(function () {
                 contentType: false,
                 success: function (data) {
                     if (data.code == 200) {
-                        $('#section-table').DataTable().ajax.reload(null, false);
-                        $('.addSection').modal('hide');
-                        $('.addSection').find('form')[0].reset();
+                        $('#section-allocation-table').DataTable().ajax.reload(null, false);
+                        $('.addSectionAllocationModal').modal('hide');
+                        $('.addSectionAllocationModal').find('form')[0].reset();
                         toastr.success(data.message);
                     } else {
-                        $('.addSection').modal('hide');
-                        $('.addSection').find('form')[0].reset();
+                        $('.addSectionAllocationModal').modal('hide');
+                        $('.addSectionAllocationModal').find('form')[0].reset();
                         toastr.error(data.message);
                     }
                 }, error: function (err) {
@@ -46,10 +47,10 @@ $(function () {
 
 
     // get all sections
-    var table = $('#section-table').DataTable({
+    var table = $('#section-allocation-table').DataTable({
         processing: true,
         info: true,
-        ajax: sectionList,
+        ajax: secAlloList,
         "pageLength": 5,
         "aLengthMenu": [
             [5, 10, 25, 50, -1],
@@ -61,12 +62,12 @@ $(function () {
                 name: 'DT_RowIndex'
             },
             {
-                data: 'name',
-                name: 'name'
+                data: 'class_name',
+                name: 'class_name'
             },
             {
-                data: 'capacity',
-                name: 'capacity'
+                data: 'section_name',
+                name: 'section_name'
             },
             {
                 data: 'actions',
@@ -79,43 +80,47 @@ $(function () {
     });
 
     // // edit section
-    $(document).on('click', '#editSectionBtn', function () {
-        var section_id = $(this).data('id');
-        $.post(sectionGetRowUrl, {
-            section_id: section_id,
+    $(document).on('click', '#editSectionAlloBtn', function () {
+        var id = $(this).data('id');
+        $.post(secAlloGetRowUrl, {
+            id: id,
             token: token,
             branch_id: branchID
         }, function (data) {
-            $('.editSection').find('input[name="sid"]').val(data.data.id);
-            $('.editSection').find('input[name="name"]').val(data.data.name);
-            $('.editSection').find('input[name="capacity"]').val(data.data.capacity);
-            $('.editSection').modal('show');
+            console.log(data.data.id)
+            // console.log(sectionAlloID)
+            $('.editSectionAllocationModal').find('#sectionAlloID').val(data.data.id);
+            $('.editSectionAllocationModal').find('select[name="class_id"]').val(data.data.class_id);
+            $('.editSectionAllocationModal').find('select[name="section_id"]').val(data.data.section_id);
+            $('.editSectionAllocationModal').modal('show');
         }, 'json');
     });
 
     // update section
-    $("#sectionEditForm").validate({
+    $("#editsectionAllocationForm").validate({
         rules: {
-            name: "required"
+            class_id: "required",
+            section_id: "required"
         }
     });
     // update section
-    $('#sectionEditForm').on('submit', function (e) {
+    $('#editsectionAllocationForm').on('submit', function (e) {
         e.preventDefault();
-        var sectionValid = $("#sectionEditForm").valid();
+        var sectionValid = $("#editsectionAllocationForm").valid();
         if (sectionValid === true) {
-            var sectionID = $("#sectionID").val();
-            var sectionName = $("#editsectionName").val();
-            var sectionCapacity = $("#editsectionCapacity").val();
+            var sectionAlloID = $("#sectionAlloID").val();
+            var editClassID = $("#editClassID").val();
+            var editSectionID = $("#editSectionID").val();
+           
             var formData = new FormData();
-            formData.append('sid', sectionID);
+            formData.append('id', sectionAlloID);
             formData.append('token', token);
             formData.append('branch_id', branchID);
-            formData.append('name', sectionName);
-            formData.append('capacity', sectionCapacity);
+            formData.append('class_id', editClassID);
+            formData.append('section_id', editSectionID);
 
             $.ajax({
-                url: sectionUpdateUrl,
+                url: secAlloUpdateUrl,
                 method: "post",
                 data: formData,
                 processData: false,
@@ -123,13 +128,13 @@ $(function () {
                 contentType: false,
                 success: function (data) {
                     if (data.code == 200) {
-                        $('#section-table').DataTable().ajax.reload(null, false);
-                        $('.editSection').modal('hide');
-                        $('.editSection').find('form')[0].reset();
+                        $('#section-allocation-table').DataTable().ajax.reload(null, false);
+                        $('.editSectionAllocationModal').modal('hide');
+                        $('.editSectionAllocationModal').find('form')[0].reset();
                         toastr.success(data.message);
                     } else {
-                        $('.editSection').modal('hide');
-                        $('.editSection').find('form')[0].reset();
+                        $('.editSectionAllocationModal').modal('hide');
+                        $('.editSectionAllocationModal').find('form')[0].reset();
                         toastr.error(data.message);
                     }
                 }, error: function (err) {
@@ -140,11 +145,11 @@ $(function () {
     });
 
     // delete section
-    $(document).on('click', '#deleteSectionBtn', function () {
-        var sid = $(this).data('id');
+    $(document).on('click', '#deleteSectionAlloBtn', function () {
+        var id = $(this).data('id');
         swal.fire({
             title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this section',
+            html: 'You want to <b>delete</b> this section allocation',
             showCancelButton: true,
             showCloseButton: true,
             cancelButtonText: 'Cancel',
@@ -155,14 +160,14 @@ $(function () {
             allowOutsideClick: false
         }).then(function (result) {
             if (result.value) {
-                $.post(sectionDeleteUrl, {
-                    sid: sid,
+                $.post(secAlloDeleteUrl, {
+                    id: id,
                     token: token,
                     branch_id: branchID
                 }, function (data) {
 
                     if (data.code == 200) {
-                        $('#section-table').DataTable().ajax.reload(null, false);
+                        $('#section-allocation-table').DataTable().ajax.reload(null, false);
                         toastr.success(data.message);
                     } else {
                         toastr.error(data.message);

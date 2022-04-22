@@ -1,94 +1,115 @@
 $(function () {
 
-    $('#classForm').on('submit', function(e){
+    // rules validation
+    $("#classSubmit").validate({
+        rules: {
+            name: "required"
+        }
+    });
+    // add classes
+    $('#classSubmit').on('submit', function (e) {
         e.preventDefault();
-        var form = this;
-        $.ajax({
-            url:$(form).attr('action'),
-            method:$(form).attr('method'),
-            data:new FormData(form),
-            processData:false,
-            dataType:'json',
-            contentType:false,
-            beforeSend: function(){
-                 $(form).find('span.error-text').text('');
-            },
-            success: function(data){
-                console.log('cj',data)
-                if (data.code == 0) {
-                    $.each(data.error, function (prefix, val) {
-                        $(form).find('span.' + prefix + '_error').text(val[0]);
-                    });
-                } else {
+        var classValid = $("#classSubmit").valid();
+        if (classValid === true) {
+            var className = $("#className").val();
+            var nameNumeric = $("#nameNumeric").val();
+            var formData = new FormData();
+            formData.append('token', token);
+            formData.append('branch_id', branchID);
+            formData.append('name', className);
+            formData.append('name_numeric', nameNumeric);
+            $.ajax({
+                url: classesAddUrl,
+                method: "post",
+                data: formData,
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (data) {
+                    console.log(data)
                     if (data.code == 200) {
                         $('#class-table').DataTable().ajax.reload(null, false);
-                        $('.addClass').modal('hide');
-                        $('.addClass').find('form')[0].reset();
+                        $('.addClassModal').modal('hide');
+                        $('.addClassModal').find('form')[0].reset();
                         toastr.success(data.message);
                     } else {
-                        $('.addClass').modal('hide');
-                        $('.addClass').find('form')[0].reset();
+                        $('.addClassModal').modal('hide');
+                        $('.addClassModal').find('form')[0].reset();
                         toastr.error(data.message);
                     }
+                }, error: function (err) {
+                    toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
                 }
-            }
-        });
+            });
+        }
     });
 
     // edit class
 
-    $(document).on('click','#editClassBtn', function(){
+    $(document).on('click', '#editClassBtn', function () {
         var class_id = $(this).data('id');
-        $('.editClass').find('form')[0].reset();
-        $('.editClass').find('span.error-text').text('');
-        $.post(classDetails,{class_id:class_id}, function(data){
-            $('.editClass').find('input[name="class_id"]').val(data.data.id);
-            $('.editClass').find('input[name="name"]').val(data.data.name);
-            $('.editClass').find('input[name="name_numeric"]').val(data.data.name_numeric);
-            $('.editClass').find('select[name="branch_id"]').val(data.data.branch_id);
-            $('.editClass').modal('show');
-        },'json');
+        $.post(classesGetRowUrl, {
+            class_id: class_id,
+            token: token,
+            branch_id: branchID
+        }, function (data) {
+            $('.editClassModal').find('input[name="class_id"]').val(data.data.id);
+            $('.editClassModal').find('input[name="name"]').val(data.data.name);
+            $('.editClassModal').find('input[name="name_numeric"]').val(data.data.name_numeric);
+            $('.editClassModal').modal('show');
+        }, 'json');
     });
 
     // update class
-    $('#classesUpdateForm').on('submit', function(e){
+    $("#classesUpdateForm").validate({
+        rules: {
+            name: "required"
+        }
+    });
+    // update class
+    $('#classesUpdateForm').on('submit', function (e) {
         e.preventDefault();
-        var form = this;
-        $.ajax({
-            url:$(form).attr('action'),
-            method:$(form).attr('method'),
-            data:new FormData(form),
-            processData:false,
-            dataType:'json',
-            contentType:false,
-            beforeSend: function(){
-                 $(form).find('span.error-text').text('');
-            },
-            success: function(data){
-                if (data.code == 0) {
-                    $.each(data.error, function (prefix, val) {
-                        $(form).find('span.' + prefix + '_error').text(val[0]);
-                    });
-                } else {
+        var sectionValid = $("#classesUpdateForm").valid();
+        if (sectionValid === true) {
+            var classID = $("#classID").val();
+            var editclassName = $("#editclassName").val();
+            var editnameNumeric = $("#editnameNumeric").val();
+            var formData = new FormData();
+            formData.append('class_id', classID);
+            formData.append('token', token);
+            formData.append('branch_id', branchID);
+            formData.append('name', editclassName);
+            formData.append('name_numeric', editnameNumeric);
 
+            $.ajax({
+                url: classesUpdateUrl,
+                method: "post",
+                data: formData,
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (data) {
                     if (data.code == 200) {
                         $('#class-table').DataTable().ajax.reload(null, false);
-                        $('.editClass').modal('hide');
-                        $('.editClass').find('form')[0].reset();
+                        $('.editClassModal').modal('hide');
+                        $('.editClassModal').find('form')[0].reset();
                         toastr.success(data.message);
                     } else {
-                        $('.editClass').modal('hide');
-                        $('.editClass').find('form')[0].reset();
+                        $('.editClassModal').modal('hide');
+                        $('.editClassModal').find('form')[0].reset();
                         toastr.error(data.message);
                     }
+                }, error: function (err) {
+                    toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
                 }
-            }
-        });
+            });
+        }
     });
+
     // delete form
     $(document).on('click', '#deleteClassBtn', function () {
         var class_id = $(this).data('id');
-        var url = classDelete;
+        var url = classDeleteUrl;
         swal.fire({
             title: 'Are you sure?',
             html: 'You want to <b>delete</b> this class',
@@ -103,7 +124,9 @@ $(function () {
         }).then(function (result) {
             if (result.value) {
                 $.post(url, {
-                    class_id: class_id
+                    class_id: class_id,
+                    token: token,
+                    branch_id: branchID
                 }, function (data) {
 
                     if (data.code == 200) {
@@ -138,10 +161,6 @@ $(function () {
             {
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex'
-            },
-            {
-                data: 'branch_name',
-                name: 'branch_name'
             },
             {
                 data: 'name',
