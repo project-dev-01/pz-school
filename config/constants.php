@@ -51,6 +51,7 @@ return [
         'exam_by_classSubject'=>$url.'/exam-by-classSubject',
         'tot_grade_calcu_byclass'=>$url.'/tot_grade_calcu_byclass',
         'tot_grade_calcu_bySubject'=>$url.'/tot_grade_calcu_bySubject',
+        'tot_grade_calcu_byStudent'=>$url.'/tot_grade_calcu_byStudent',
         'tot_grade_master'=>$url.'/tot_grade_master',
         'all_exams_list'=>$url.'/all_exams_list',
         'all_std_list'=>$url.'/all_std_list',

@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="examnames">Test Name<span class="text-danger">*</span></label>
+                                    <label for="examnames">Exam Name<span class="text-danger">*</span></label>
                                     <select id="examnames" class="form-control" name="exam_id">
                                         <option value="">Select Exams</option>
                                     </select>
@@ -62,7 +62,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                Filter
+                                Get
                             </button>
                         </div>
                     </form>

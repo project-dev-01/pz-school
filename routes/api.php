@@ -98,6 +98,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('exam-by-classSubject', [ApiController::class, 'examByClassSubject']);
     Route::get('tot_grade_calcu_byclass', [ApiController::class, 'totgradeCalcuByClass']);
     Route::get('tot_grade_calcu_bySubject', [ApiController::class, 'totgradeCalcuBySubject']);
+    Route::get('tot_grade_calcu_byStudent', [ApiController::class, 'totgradeCalcuByStudent']);
     Route::get('tot_grade_master', [ApiController::class, 'totgrademaster']);
     Route::post('all_exams_list', [ApiController::class, 'allexamslist']);
     Route::get('all_std_list', [ApiController::class, 'allstdlist']);

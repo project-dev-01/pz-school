@@ -229,8 +229,7 @@
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col -->
-    </div>
-    @include('teacher.attendance.lateanalytics')
+    </div> 
 </div> <!-- container -->
 
 @endsection

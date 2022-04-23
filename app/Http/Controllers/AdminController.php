@@ -2609,9 +2609,9 @@ class AdminController extends Controller
     }
     public function byclasss()
     {
-        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));     
         $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
-
+       
         return view(
             'admin.exam_results.byclass',
             [
@@ -2623,7 +2623,7 @@ class AdminController extends Controller
     // exam master -> exam result start
     public function bysubject()
     {
-        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));     
         $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
         return view(
             'admin.exam_results.bysubject',
@@ -2631,16 +2631,25 @@ class AdminController extends Controller
                 'classnames' => $getclass['data'],
                 'allGrades' => $allGrades['data']
             ]
-        );
+        ); 
+    }
+    public function bystudent()
+    {
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));     
+        $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
+        return view(
+            'admin.exam_results.bystudent',
+            [
+                'classnames' => $getclass['data'],
+                'allGrades' => $allGrades['data']
+            ]
+        ); 
     }
     public function overall()
     {
         return view('admin.exam_results.overall');
     }
-    public function bystudent()
-    {
-        return view('super_admin.exam_results.bystudent');
-    }
+
     public function examResult()
     {
         return view('super_admin.exam.result');
@@ -2648,13 +2657,13 @@ class AdminController extends Controller
 
     public function testResult()
     {
-
+       
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         //$get_exams = Helper::GetMethod(config('constants.api.get_testresult_exams'));
         // dd($response);     
         return view('admin.testresult.index', [
             'classes' => $getclass['data']
-        ]);
+        ]);       
     }
 
     public function subjectmarks(Request $request)

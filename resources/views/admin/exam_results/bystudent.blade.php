@@ -27,55 +27,46 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="demo-form" data-parsley-validate="">
+                <form id="bystudentfilter" data-parsley-validate="">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Standard<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
-                                        <option value="">Select Standard</option>
-                                        <option value="">All</option>
-                                        <option value="">I</option>
-                                        <option value="press">II</option>
-                                        <option value="">III</option>
-                                        <option value="press">IV</option>
-                                        <option value="">V</option>
-                                        <option value="press">VI</option>
-                                        <option value="">VII</option>
-                                        <option value="press">VIII</option>
+                                <label for="changeClassName">Standard<span class="text-danger">*</span></label>
+                                    <select id="changeClassName" class="form-control" name="class_id">
+                                        <option value="">Select Class</option>
+                                        <!-- <option value="All">All</option> -->
+                                        @forelse ($classnames as $class)
+
+                                        <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3" id="section_drp_div">
+                                <div class="form-group">
+                                <label for="sectionID" id="lblsectionId">Class Name<span class="text-danger">*</span></label>
+                                    <select id="sectionID" class="form-control" name="section_id">
+                                        <option value="">Select Section</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Class Name<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
-                                    <option value="">Select Class Name</option>
-                                        <option value="">A</option>
-                                        <option value="">B</option>
-                                        <option value="press">C</option>
-                                        <option value="">D</option>
-                                        <option value="press">E</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="heard">Exam Name<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
-                                    <option value="">Select Exam Name</option>
-                                        <option value="">Annual</option>
-                                        <option value="">Quarterly</option>
+                                <label for="examnames">Test Name<span class="text-danger">*</span></label>
+                                    <select id="examnames" class="form-control" name="exam_id">
+                                        <option value="">Select Exams</option>
                                     </select>
                                 </div>
                             </div>                                               
                         </div>
-                    </form>
-                    <div class="form-group text-right m-b-0">
+                        <div class="form-group text-right m-b-0">
                         <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
                             Get
                         </button>                 
                     </div>
+                    </form>
+                 
 
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
@@ -91,7 +82,7 @@
                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Student (All)
+                            Student 
                             <h4>
                     </li>
                 </ul><br>
@@ -100,202 +91,12 @@
                         <div class="col-sm-12">
                             <div class="card-box">
                             <div class="table-responsive">
-                            <table class="table w-100 nowrap table-bordered table-striped" id="">
-                                <thead>
-                                    <tr>
-                                        <th class="align-middle" rowspan="3">S.no.</th>
-                                        <th class="align-middle" rowspan="3">Student Name</th>                                        
-                                        <th class="text-center"colspan="14">Subject Name</th>                                
-                                    </tr>   
-                                    <tr>
-                                        <th colspan="2" class="align-top">English</th>
-                                        <th colspan="2" class="align-top">Mathematics</th>                                        
-                                        <th colspan="2" class="text-center">History</th> 
-                                        <th colspan="2" class="align-top">Study of the Environment</th>
-                                        <th colspan="2" class="align-top">Geography</th>                                        
-                                        <th colspan="2" class="text-center">Natural Sciences</th>      
-                                        <th colspan="2" class="text-center">Civics Education</th>                               
-                                    </tr>      
-                                    <tr>
-                                        <th class="align-top">Mark</th>
-                                        <th class="align-top">Grade</th> 
-                                        <th class="text-center">Mark</th> 
-                                        <th class="align-top">Grade</th>
-                                        <th class="align-top">Mark</th>                                        
-                                        <th class="text-center">Grade</th>
-                                        <th class="text-center">Mark</th>  
-                                        <th class="align-top">Grade</th>                                                                       
-                                        <th class="text-center">Mark</th> 
-                                        <th class="align-top">Grade</th>
-                                        <th class="align-top">Mark</th>  
-                                        <th class="text-center">Grade</th>      
-                                        <th class="text-center">Mark</th>  
-                                        <th class="text-center">Grade</th>                                
-                                    </tr>                           
+                            <table class="table w-100 nowrap table-bordered table-striped" id="tbl_bystudent">
+                                <thead id="bystudent_header">
+                                                            
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                    <td class="text-center">1</td>
-                                   <td class="text-left">William</td>     
-                                   <td class="text-center">40</td>   
-                                   <td class="text-center">E</td>  
-                                   <td class="text-center">80</td>  
-                                   <td class="text-center">A</td>  
-                                   <td class="text-center">23</td>  
-                                   <td class="text-center">G</td>                   
-                                   <td class="text-center">43</td>  
-                                   <td class="text-center">E</td>  
-                                   <td class="text-center">54</td>  
-                                   <td class="text-center">C</td>  
-                                   <td class="text-center">40</td>  
-                                   <td class="text-center">E</td>  
-                                   <td class="text-center">63</td>  
-                                   <td class="text-center">B</td>
-                                    </tr> 
-                                    <tr>
-                                   <td class="text-center">2</td>
-                                   <td class="text-left">James</td>     
-                                   <td class="text-center">68</td>   
-                                   <td class="text-center">B+</td>  
-                                   <td class="text-center">73</td>  
-                                   <td class="text-center">A-</td>  
-                                   <td class="text-center">40</td>  
-                                   <td class="text-center">E</td>                   
-                                   <td class="text-center">71</td>  
-                                   <td class="text-center">A-</td>  
-                                   <td class="text-center">90</td>  
-                                   <td class="text-center">A+</td>  
-                                   <td class="text-center">58</td>  
-                                   <td class="text-center">C+</td>  
-                                   <td class="text-center">95</td>  
-                                   <td class="text-center">A+</td>
-                                    </tr> 
-                                    <tr>                                 
-                                   <td class="text-center">3</td>
-                                   <td class="text-left">Benjamin</td>     
-                                   <td class="text-center">70</td>   
-                                   <td class="text-center">A-</td>  
-                                   <td class="text-center">61</td>  
-                                   <td class="text-center">B</td>  
-                                   <td class="text-center">50</td>  
-                                   <td class="text-center">C</td>                   
-                                   <td class="text-center">80</td>  
-                                   <td class="text-center">A</td>  
-                                   <td class="text-center">78</td>  
-                                   <td class="text-center">A-</td>  
-                                   <td class="text-center">73</td>  
-                                   <td class="text-center">A-</td>  
-                                   <td class="text-center">63</td>  
-                                   <td class="text-center">B</td>
-                                    </tr> 
-                                    <tr> 
-                                   <td class="text-center">4</td>
-                                   <td class="text-left">Lucas</td>     
-                                   <td class="text-center">40</td>   
-                                   <td class="text-center">D</td>  
-                                   <td class="text-center">52</td>  
-                                   <td class="text-center">C</td>  
-                                   <td class="text-center">45</td>  
-                                   <td class="text-center">D</td>                   
-                                   <td class="text-center">50</td>  
-                                   <td class="text-center">C</td>  
-                                   <td class="text-center text-warning font-weight-bold">5</td>  
-                                   <td class="text-center text-warning font-weight-bold">G</td>  
-                                   <td class="text-center">40</td>  
-                                   <td class="text-center">E</td>  
-                                   <td class="text-center">63</td>  
-                                   <td class="text-center">B</td>
-                                    </tr> 
-                                    <tr> 
-                                   <td class="text-center">5</td>
-                                   <td class="text-left">Charlotte</td>     
-                                   <td class="text-center">48</td>   
-                                   <td class="text-center">D</td>  
-                                   <td class="text-center">52</td>  
-                                   <td class="text-center">C</td>  
-                                   <td class="text-center text-warning font-weight-bold">25</td>  
-                                   <td class="text-center text-warning font-weight-bold">G</td>                   
-                                   <td class="text-center">50</td>  
-                                   <td class="text-center">C</td>  
-                                   <td class="text-center">51</td>  
-                                   <td class="text-center">C</td>  
-                                   <td class="text-center">40</td>  
-                                   <td class="text-center">E</td>  
-                                   <td class="text-center text-warning font-weight-bold">20</td>  
-                                   <td class="text-center text-warning font-weight-bold">G</td>
-                                    </tr> 
-                                    <tr> 
-                                   <td class="text-center">6</td>
-                                   <td class="text-left">Sophia</td>     
-                                   <td class="text-center">60</td>   
-                                   <td class="text-center">B+</td>  
-                                   <td class="text-center">68</td>  
-                                   <td class="text-center">B+</td>  
-                                   <td class="text-center">60</td>  
-                                   <td class="text-center">B</td>                   
-                                   <td class="text-center">37</td>  
-                                   <td class="text-center">G</td>  
-                                   <td class="text-center text-warning font-weight-bold">20</td>  
-                                   <td class="text-center text-warning font-weight-bold">G</td>  
-                                   <td class="text-center text-warning font-weight-bold">28</td>  
-                                   <td class="text-center text-warning font-weight-bold">G</td>  
-                                   <td class="text-center text-warning font-weight-bold">20</td>  
-                                   <td class="text-center text-warning font-weight-bold">G</td>
-                                    </tr> 
-                                    <tr>                               
-                                   <td class="text-center">7</td>
-                                   <td class="text-left">Amelia</td>     
-                                   <td class="text-center">80</td>   
-                                   <td class="text-center">A</td>  
-                                   <td class="text-center text-warning font-weight-bold">33</td>  
-                                   <td class="text-center text-warning font-weight-bold">G</td>  
-                                   <td class="text-center">54</td>  
-                                   <td class="text-center">C</td>                   
-                                   <td class="text-center">74</td>  
-                                   <td class="text-center">A-</td>  
-                                   <td class="text-center">80</td>  
-                                   <td class="text-center">A</td>  
-                                   <td class="text-center">55</td>  
-                                   <td class="text-center">C+</td>  
-                                   <td class="text-center">55</td>  
-                                   <td class="text-center">C+</td>
-                                    </tr>
-                                    <tr> 
-                                   <td class="text-center">8</td>
-                                   <td class="text-left">Isabella</td>     
-                                   <td class="text-center">73</td>   
-                                   <td class="text-center">A-</td>  
-                                   <td class="text-center">50</td>  
-                                   <td class="text-center">C</td>  
-                                   <td class="text-center">80</td>  
-                                   <td class="text-center">A</td>                   
-                                   <td class="text-center">43</td>  
-                                   <td class="text-center">E</td>  
-                                   <td class="text-center">87</td>  
-                                   <td class="text-center">A</td>  
-                                   <td class="text-center">69</td>  
-                                   <td class="text-center">B+</td>  
-                                   <td class="text-center">60</td>  
-                                   <td class="text-center">B</td>
-                                    </tr>
-                                    <tr> 
-                                   <td class="text-center">9</td>
-                                   <td class="text-left">Mia</td>     
-                                   <td class="text-center">50</td>   
-                                   <td class="text-center">C</td>  
-                                   <td class="text-center">92</td>  
-                                   <td class="text-center">A+</td>  
-                                   <td class="text-center">90</td>  
-                                   <td class="text-center">A</td>                   
-                                   <td class="text-center">75</td>  
-                                   <td class="text-center">A-</td>  
-                                   <td class="text-center">87</td>  
-                                   <td class="text-center">A</td>  
-                                   <td class="text-center">50</td>  
-                                   <td class="text-center">C</td>  
-                                   <td class="text-center">90</td>  
-                                   <td class="text-center">A</td>
-                                    </tr>
+                                <tbody id="bystudent_body">
+                                    
                                 </tbody>
                             </table>
                         </div> <!-- end table-responsive-->
@@ -326,3 +127,17 @@
 </div> <!-- container -->
 
 @endsection
+    @section('scripts')
+    <script>
+        var sectionByClass = "{{ route('admin.section_by_class') }}";
+        var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
+        var getbyStudent = "{{ config('constants.api.tot_grade_calcu_byStudent') }}";
+        var getbyClass_thead="{{ config('constants.api.tot_grade_master') }}";
+        var Allexams="{{ config('constants.api.all_exams_list') }}";
+        var getbySubjectAllstd ="{{ config('constants.api.all_bysubject_list') }}";
+        var getgradeBysubject = "{{ config('constants.api.get_grade_bysubject') }}";
+        // default image test
+        var defaultImg = "{{ asset('images/users/default.jpg') }}";
+    </script>
+    <script src="{{ asset('js/custom/bystudent.js') }}"></script>
+    @endsection
