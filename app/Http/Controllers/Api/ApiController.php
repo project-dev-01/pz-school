@@ -1696,7 +1696,7 @@ class ApiController extends BaseController
             }
         }
     }
-    // delete Section
+    // delete department
     public function deleteDepartment(Request $request)
     {
 
@@ -7287,52 +7287,28 @@ class ApiController extends BaseController
     {
 
         $validator = \Validator::make($request->all(), [
+            'year' => 'required',
             'register_no' => 'required',
             'roll_no' => 'required',
             'admission_date' => 'required',
             'category_id' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
-            'gender' => 'required',
-            'blood_group' => 'required',
-            'birthday' => 'required',
-            'mother_tongue' => 'required',
-            'religion' => 'required',
-            'caste' => 'required',
             'mobile_no' => 'required',
-            'city' => 'required',
-            'state' => 'required',
-            'current_address' => 'required',
-            'permanent_address' => 'required',
             'email' => 'required',
-            'route_id' => 'required',
-            'vehicle_id' => 'required',
-            'hostel_id' => 'required',
-            'room_id' => 'required',
-            'school_name' => 'required',
-            'qualification' => 'required',
-            'remarks' => 'required',
             'password' => 'required|min:6',
             'confirm_password' => 'required|same:password|min:6',
+
             'class_id' => 'required',
             'section_id' => 'required',
-            'session_id' => 'required',
 
             'branch_id' => 'required',
             'token' => 'required',
 
             'parent_name' => 'required',
-            'email' => 'required',
             'relation' => 'required',
-            'father_name' => 'required',
-            'mother_name' => 'required',
             'occupation' => 'required',
-            'income' => 'required',
-            'education' => 'required',
-            'parent_city' => 'required',
-            'parent_state' => 'required',
             'parent_mobile_no' => 'required',
-            'address' => 'required',
             'parent_email' => 'required',
             'parent_password' => 'required|min:6',
             'parent_confirm_password' => 'required|same:parent_password|min:6',
@@ -7342,11 +7318,9 @@ class ApiController extends BaseController
         $previous['qualification'] = $request->qualification;
         $previous['remarks'] = $request->remarks;
 
-
-
         $previous_details = json_encode($previous);
 
-
+        
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -7355,28 +7329,26 @@ class ApiController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             // insert data
             // return $request['parent_email'];
-            // if ($Connection->table('parent')->where('email', '=', $request->parent_email)->count() > 0) {
-            //     return $this->send422Error('Parent Email Already Exist', ['error' => 'Parent Email Already Exist']);
-            // } else {
+            if ($conn->table('parent')->where('email', '=', $request->parent_email)->count() > 0) {
+                return $this->send422Error('Parent Email Already Exist', ['error' => 'Parent Email Already Exist']);
+            } else {
 
-            $parentId = $conn->table('parent')->insertGetId([
-                'name' => $request->parent_name,
-                'relation' => $request->relation,
-                'father_name' => $request->father_name,
-                'mother_name' => $request->mother_name,
-                'occupation' => $request->occupation,
-                'income' => $request->income,
-                'education' => $request->education,
-                'city' => $request->parent_city,
-                'state' => $request->parent_state,
-                'mobile_no' => $request->parent_mobile_no,
-                'address' => $request->address,
-                'email' => $request->parent_email,
-                'active' => "1",
-            ]);
-
-            // return $parentId;
-            // }
+                $parentId = $conn->table('parent')->insertGetId([
+                    'name' => $request->parent_name,
+                    'relation' => $request->relation,
+                    'father_name' => $request->father_name,
+                    'mother_name' => $request->mother_name,
+                    'occupation' => $request->occupation,
+                    'income' => $request->income,
+                    'education' => $request->education,
+                    'city' => $request->parent_city,
+                    'state' => $request->parent_state,
+                    'mobile_no' => $request->parent_mobile_no,
+                    'address' => $request->address,
+                    'email' => $request->parent_email,
+                    'active' => "1",
+                ]);
+            }
 
 
             if (!$parentId) {
@@ -7394,49 +7366,68 @@ class ApiController extends BaseController
                 $userParent->save();
             }
 
-            // if ($Connection->table('students')->where('email', '=', $request->email)->count() > 0) {
-            //     return $this->send422Error('Student Email Already Exist', ['error' => 'Student Email Already Exist']);
-            // } else {
+            if ($conn->table('students')->where('email', '=', $request->email)->count() > 0) {
+                return $this->send422Error('Student Email Already Exist', ['error' => 'Student Email Already Exist']);
+            } else {
 
-            $studentId = $conn->table('students')->insertGetId([
-                'parent_id' => $parentId,
-                'register_no' => $request->register_no,
-                'roll_no' => $request->roll_no,
-                'admission_date' => $request->admission_date,
-                'category_id' => $request->category_id,
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'gender' => $request->gender,
-                'blood_group' => $request->blood_group,
-                'birthday' => $request->birthday,
-                'mother_tongue' => $request->mother_tongue,
-                'religion' => $request->religion,
-                'caste' => $request->caste,
-                'mobile_no' => $request->mobile_no,
-                'city' => $request->city,
-                'state' => $request->state,
-                'current_address' => $request->current_address,
-                'permanent_address' => $request->permanent_address,
-                'photo' => NULL,
-                'route_id' => $request->route_id,
-                'vehicle_id' => $request->vehicle_id,
-                'hostel_id' => $request->hostel_id,
-                'room_id' => $request->room_id,
-                'previous_details' => $previous_details,
-                'created_at' => date("Y-m-d H:i:s")
-            ]);
+                $extension = $request->file_extension;
+                $fileName = 'UIMG_' . date('Ymd') . uniqid() . $extension;
+        
+                $base64 = base64_decode($request->photo);
+                $file = base_path() . '/public/users/images/' . $fileName;
+                $suc = file_put_contents($file, $base64);
 
-            $enroll = $conn->table('enrolls')->insert([
-                'student_id' => $studentId,
-                'class_id' => $request->class_id,
-                'section_id' => $request->section_id,
-                'session_id' => $request->session_id,
-                'roll' => $request->roll_no,
-            ]);
+                $studentId = $conn->table('students')->insertGetId([
+                    'year' => $request->year,
+                    'parent_id' => $parentId,
+                    'register_no' => $request->register_no,
+                    'roll_no' => $request->roll_no,
+                    'admission_date' => $request->admission_date,
+                    'category_id' => $request->category_id,
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'gender' => $request->gender,
+                    'blood_group' => $request->blood_group,
+                    'birthday' => $request->birthday,
+                    'mother_tongue' => $request->mother_tongue,
+                    'religion' => $request->religion,
+                    'caste' => $request->caste,
+                    'mobile_no' => $request->mobile_no,
+                    'city' => $request->city,
+                    'state' => $request->state,
+                    'current_address' => $request->current_address,
+                    'permanent_address' => $request->permanent_address,
+                    'email' => $request->email,
+                    'photo' => $fileName,
+                    'route_id' => $request->route_id,
+                    'vehicle_id' => $request->vehicle_id,
+                    'hostel_id' => $request->hostel_id,
+                    'room_id' => $request->room_id,
+                    'previous_details' => $previous_details,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+
+                $session_id = 0;
+                if (isset($request->session_id)) {
+                    $session_id = $request->session_id;
+                }
+                $semester_id = 0;
+                if (isset($request->semester_id)) {
+                    $semester_id = $request->semester_id;
+                }
+                
+                $enroll = $conn->table('enrolls')->insert([
+                    'student_id' => $studentId,
+                    'class_id' => $request->class_id,
+                    'section_id' => $request->section_id,
+                    'roll' => $request->roll_no,
+                    'session_id' => $session_id,
+                    'semester_id' => $semester_id,
+                ]);
 
 
-            $studentName = $request->first_name . ' ' . $request->last_name;
-            // }
+                $studentName = $request->first_name . ' ' . $request->last_name;
+            }
 
             // return $request;
             $success = [];
@@ -8364,6 +8355,542 @@ class ApiController extends BaseController
                 'upcoming' => $upcoming
             ];
             return $this->successResponse($data, 'To Do List fetch successfully');
+        }
+    }
+
+     // get Student List
+    public function getStudentList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $con = $this->createNewConnection($request->branch_id);
+            // get data
+            $student = $con->table('enrolls as e')->select('s.id','s.first_name','s.last_name','s.register_no','s.roll_no','s.mobile_no','s.email','s.gender')
+                        ->leftJoin('students as s', 'e.student_id', '=', 's.id')
+                        ->where([
+                            ['e.class_id', $request->class_id],
+                            ['e.semester_id', $request->semester_id],
+                            ['e.session_id', $request->session_id],
+                            ['e.section_id', $request->section_id]
+                        ])
+                        ->get()->toArray();
+
+        return $this->successResponse($student, 'Student record fetch successfully');
+        
+        }
+    }
+
+    // update Student
+    public function updateStudent(Request $request)
+    {
+        
+        $validator = \Validator::make($request->all(), [
+            'student_id' => 'required',
+            'parent_id' => 'required',
+            'year' => 'required',
+            'register_no' => 'required',
+            'roll_no' => 'required',
+            'admission_date' => 'required',
+            'category_id' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'mobile_no' => 'required',
+            'email' => 'required',
+
+            'class_id' => 'required',
+            'section_id' => 'required',
+
+            'branch_id' => 'required',
+            'token' => 'required',
+
+            'parent_name' => 'required',
+            'relation' => 'required',
+            'occupation' => 'required',
+            'parent_mobile_no' => 'required',
+            'parent_email' => 'required',
+        ]);
+
+        $previous['school_name'] = $request->school_name;
+        $previous['qualification'] = $request->qualification;
+        $previous['remarks'] = $request->remarks;
+
+        $previous_details = json_encode($previous);
+
+        // return $request['old_photo'];
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // insert data
+            // return $request['parent_email'];
+            if ($conn->table('parent')->where([['email', '=', $request->parent_email], ['id', '!=', $request->parent_id]])->count() > 0) {
+                return $this->send422Error('Parent Email Already Exist', ['error' => 'Parent Email Already Exist']);
+            } else {
+
+                // $staffConn->table('staff_departments')->where('id', $id)->update([
+                $parentId = $conn->table('parent')->where('id', $request->parent_id)->update([
+                    'name' => $request->parent_name,
+                    'relation' => $request->relation,
+                    'father_name' => $request->father_name,
+                    'mother_name' => $request->mother_name,
+                    'occupation' => $request->occupation,
+                    'income' => $request->income,
+                    'education' => $request->education,
+                    'city' => $request->parent_city,
+                    'state' => $request->parent_state,
+                    'mobile_no' => $request->parent_mobile_no,
+                    'address' => $request->address,
+                    'email' => $request->parent_email,
+                    'active' => "1",
+                ]);
+                
+            }
+
+            // return $parentId;
+            // dd($parentId->id);
+
+            if (!$request->parent_id) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong add Parent']);
+            } else {
+
+                
+                // add User
+                $userParent = User::where([['email', '=', $request->parent_email], ['user_id', '=', $request->parent_id], ['role_id', '=', "5"], ['branch_id', '=', $request->branch_id]])
+                                    ->update([
+                                        'name'=> $request->parent_name,
+                                        'email'=> $request->parent_email
+                                    ]);
+
+                                   
+            }
+
+            // dd($userParent);
+            if ($conn->table('students')->where([['email', '=', $request->email], ['id', '!=', $request->student_id]])->count() > 0) {
+                return $this->send422Error('Student Email Already Exist', ['error' => 'Student Email Already Exist']);
+            } else {
+                
+                if ($request->photo) {
+
+                    $extension = $request->file_extension;
+                    
+                    $fileName = 'UIMG_' . date('Ymd') . uniqid() . $extension;
+
+                    // return $fileName;
+                    $path = '/public/users/images/';
+                    $base64 = base64_decode($request->photo);
+                    $file = base_path() . $path . $fileName;
+                    $suc = file_put_contents($file, $base64);
+
+                   
+                    if ($request->old_photo) {
+                        if (\File::exists(base_path($path . $request->old_photo))) {
+                            \File::delete(base_path($path . $request->old_photo));
+                        }
+                    }
+                } else {
+                    $fileName = $request->old_photo;
+                }
+                
+
+                $studentId = $conn->table('students')->where('id', $request->student_id)->update([
+                    'parent_id' => $request->parent_id,
+                    'register_no' => $request->register_no,
+                    'year' => $request->year,
+                    'roll_no' => $request->roll_no,
+                    'admission_date' => $request->admission_date,
+                    'category_id' => $request->category_id,
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'gender' => $request->gender,
+                    'blood_group' => $request->blood_group,
+                    'birthday' => $request->birthday,
+                    'mother_tongue' => $request->mother_tongue,
+                    'religion' => $request->religion,
+                    'caste' => $request->caste,
+                    'mobile_no' => $request->mobile_no,
+                    'city' => $request->city,
+                    'state' => $request->state,
+                    'current_address' => $request->current_address,
+                    'permanent_address' => $request->permanent_address,
+                    'email' => $request->email,
+                    'photo' => $fileName,
+                    'route_id' => $request->route_id,
+                    'vehicle_id' => $request->vehicle_id,
+                    'hostel_id' => $request->hostel_id,
+                    'room_id' => $request->room_id,
+                    'previous_details' => $previous_details,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+
+                $session_id = 0;
+                if (isset($request->session_id)) {
+                    $session_id = $request->session_id;
+                }
+                $semester_id = 0;
+                if (isset($request->semester_id)) {
+                    $semester_id = $request->semester_id;
+                }
+                
+                $enroll = $conn->table('enrolls')->where('student_id', $request->student_id)->update([
+                    'class_id' => $request->class_id,
+                    'section_id' => $request->section_id,
+                    'roll' => $request->roll_no,
+                    'session_id' => $session_id,
+                    'semester_id' => $semester_id,
+                ]);
+
+
+                $studentName = $request->first_name . ' ' . $request->last_name;
+
+                // return
+            }
+
+            //  return $request;
+            if (!$studentId) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong add Student']);
+            } else {
+                // add User
+
+                $query = User::where([['email', '=', $request->email], ['user_id', '=', $request->student_id], ['role_id', '=', "6"], ['branch_id', '=', $request->branch_id]])
+                                ->update([
+                                    'name'=> $studentName,
+                                    'email'=> $request->email
+                                ]);
+
+               
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Student has been successfully Updated');
+                }
+            }
+        }
+    }
+
+    // get StudentDetails details
+    public function getStudentDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+        // return $request;
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $studentDetail['student'] = $conn->table('students as s')
+                                                    ->select('s.*','c.name as class_name','sec.name as section_name','p.name','p.relation','p.mother_name','p.father_name','p.occupation','p.income','p.education','p.address','p.city as parent_city','p.state as parent_state','p.photo as parent_photo','p.email as parent_email','p.mobile_no as parent_mobile_no','e.class_id','e.section_id','e.session_id','e.semester_id')
+                                                    ->leftJoin('parent as p', 's.parent_id', '=', 'p.id')
+                                                    ->leftJoin('enrolls as e', 's.id', '=', 'e.student_id')
+                                                    ->leftJoin('classes as c', 'e.class_id', '=', 'c.id')
+                                                    ->leftJoin('sections as sec', 'e.section_id', '=', 'sec.id')
+                                                    ->where('s.id', $id)->first();
+
+            $class_id = $studentDetail['student']->class_id;
+            $studentDetail['section'] = $conn->table('section_allocations as sa')->select('s.id as section_id', 's.name as section_name')
+                                                    ->join('sections as s', 'sa.section_id', '=', 's.id')
+                                                    ->where('sa.class_id', $class_id)
+                                                    ->get();   
+                                                    
+            $route_id = $studentDetail['student']->route_id;
+            $studentDetail['vehicle'] = $conn->table('transport_assign')->select('transport_vehicle.id as vehicle_id', 'transport_vehicle.vehicle_no')
+                                                ->join('transport_vehicle', 'transport_assign.vehicle_id', '=', 'transport_vehicle.id')
+                                                ->where('transport_assign.route_id', $route_id)
+                                                ->get();
+
+            $hostel_id = $studentDetail['student']->hostel_id;
+            $studentDetail['room'] = $conn->table('hostel_room')->select('hostel_room.id as room_id', 'hostel_room.name as room_name')
+                                            ->where('hostel_room.hostel_id', $hostel_id)
+                                            ->get();
+
+            return $this->successResponse($studentDetail, 'Designation row fetch successfully');
+        }
+    }
+
+    // // delete Student
+    // public function deleteStudent(Request $request)
+    // {
+    //     $id = $request->id;
+    //     $validator = \Validator::make($request->all(), [
+    //         'token' => 'required',
+    //         'branch_id' => 'required',
+    //         'id' => 'required',
+    //     ]);
+
+    //     if (!$validator->passes()) {
+    //         return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+    //     } else {
+    //         // create new connection
+    //         $conn = $this->createNewConnection($request->branch_id);
+    //         // get data
+    //         $student = User::where([['user_id', '=', $id], ['role_id', '=', "6"], ['branch_id', '=', $request->branch_id]])->delete();
+    //         $enroll = $conn->table('enrolls')->where('student_id', $id)->delete();
+    //         $query = $conn->table('students')->where('id', $id)->delete();
+    //         $success = [];
+    //         if ($query) {
+    //             return $this->successResponse($success, 'Student have been deleted successfully');
+    //         } else {
+    //             return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+    //         }
+    //     }
+    // }
+
+    // addParent
+    public function addParent(Request $request)
+    {
+
+    
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'relation' => 'required',
+            'occupation' => 'required',
+            'mobile_no' => 'required',
+            'email' => 'required',
+            'password' => 'required|min:6',
+            'confirm_password' => 'required|same:password|min:6',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist email
+            if ($conn->table('parent')->where('email', '=', $request->email)->count() > 0) {
+                return $this->send422Error('Email Already Exist', ['error' => 'Email Already Exist']);
+            } else {
+
+                $fileName = "";
+                if ($request->photo) {
+                    $extension = $request->file_extension;
+                    
+                    $fileName = 'UIMG_' . date('Ymd') . uniqid() . $extension;
+    
+                    // return $fileName;
+                    $path = '/public/users/images/';
+                    $base64 = base64_decode($request->photo);
+                    $file = base_path() . $path . $fileName;
+                    $suc = file_put_contents($file, $base64);
+                }
+                
+                
+                
+
+                // insert data
+                $parentId = $conn->table('parent')->insertGetId([
+                    
+                    'name' => $request->name,
+                    'relation' => $request->relation,
+                    'father_name' => $request->father_name,
+                    'mother_name' => $request->mother_name,
+                    'occupation' => $request->occupation,
+                    'income' => $request->income,
+                    'education' => $request->education,
+                    'city' => $request->city,
+                    'state' => $request->state,
+                    'mobile_no' => $request->mobile_no,
+                    'address' => $request->address,
+                    'email' => $request->email,
+                    'photo' => $fileName,
+                    'facebook_url' => $request->facebook_url,
+                    'linkedin_url' => $request->linkedin_url,
+                    'twitter_url' => $request->twitter_url,
+                    'active' => "1",
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+
+            if (!$parentId) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong add Parent']);
+            } else {
+
+                // add User
+                $query = new User();
+                $query->name = $request->name;
+                $query->user_id = $parentId;
+                $query->role_id = "5";
+                $query->branch_id = $request->branch_id;
+                $query->email = $request->email;
+                $query->password = bcrypt($request->parent_password);
+                $query->save();
+            }
+
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Parent has been successfully saved');
+                }
+            }
+        }
+    }
+    // getParentList
+    public function getParentList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $parentDetails = $conn->table('parent')->get();
+            return $this->successResponse($parentDetails, 'Parent record fetch successfully');
+        }
+    }
+    // get Parent row details
+    public function getParentDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $parentDetails = $conn->table('parent')->where('id', $id)->first();
+            return $this->successResponse($parentDetails, 'Parent row fetch successfully');
+        }
+    }
+    // update Parent
+    public function updateParent(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'name' => 'required',
+            'relation' => 'required',
+            'occupation' => 'required',
+            'mobile_no' => 'required',
+            'email' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // check exist email
+            if ($staffConn->table('parent')->where([['email', '=', $request->email], ['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Email Already Exist', ['error' => 'Email Already Exist']);
+            } else {
+
+                if ($request->photo) {
+
+                    $extension = $request->file_extension;
+                    
+                    $fileName = 'UIMG_' . date('Ymd') . uniqid() . $extension;
+
+                    // return $fileName;
+                    $path = '/public/users/images/';
+                    $base64 = base64_decode($request->photo);
+                    $file = base_path() . $path . $fileName;
+                    $suc = file_put_contents($file, $base64);
+
+                   
+                    if ($request->old_photo) {
+                        if (\File::exists(base_path($path . $request->old_photo))) {
+                            \File::delete(base_path($path . $request->old_photo));
+                        }
+                    }
+                } else {
+                    $fileName = $request->old_photo;
+                }
+
+                
+                $parent = User::where([['email', '=', $request->email], ['user_id', '=', $id], ['role_id', '=', "5"], ['branch_id', '=', $request->branch_id]])
+                ->update([
+                    'name'=> $request->name,
+                    'email'=> $request->email
+                ]);
+                // update data
+                $query = $staffConn->table('parent')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'relation' => $request->relation,
+                    'father_name' => $request->father_name,
+                    'mother_name' => $request->mother_name,
+                    'occupation' => $request->occupation,
+                    'income' => $request->income,
+                    'education' => $request->education,
+                    'city' => $request->city,
+                    'state' => $request->state,
+                    'mobile_no' => $request->mobile_no,
+                    'address' => $request->address,
+                    'email' => $request->email,
+                    'photo' => $fileName,
+                    'facebook_url' => $request->facebook_url,
+                    'linkedin_url' => $request->linkedin_url,
+                    'twitter_url' => $request->twitter_url,
+                    'active' => "1",
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Parent Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+            }
+        }
+    }
+    // delete Parent
+    public function deleteParent(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $parent = User::where([['user_id', '=', $id], ['role_id', '=', "5"], ['branch_id', '=', $request->branch_id]])->delete();
+            $query = $conn->table('parent')->where('id', $id)->delete();
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Parent have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
         }
     }
 }

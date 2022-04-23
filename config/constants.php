@@ -257,6 +257,19 @@ return [
         'get_assign_class' => $url.'/get_assign_class',
         'to_do_comments' => $url.'/to_do_comments',
         'get_to_do_teacher' => $url.'/get_to_do_teacher',
+
+        // Student Url
+        'student_list' => $url.'/student/list',
+        'student_details' => $url.'/student/student-details',
+        'student_update' => $url.'/student/update',
+        'student_delete' => $url.'/student/delete',
+
+        //Parent Url
+        'parent_add' => $url.'/parent/add',
+        'parent_list' => $url.'/parent/list',
+        'parent_details' => $url.'/parent/parent-details',
+        'parent_update' => $url.'/parent/update',
+        'parent_delete' => $url.'/parent/delete',
         
         
     ]

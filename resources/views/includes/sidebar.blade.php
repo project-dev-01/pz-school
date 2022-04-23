@@ -623,8 +623,13 @@
                     <div class="collapse" id="sidebarParent">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('admin.parent')}}" class="nav-link {{ (request()->is('admin/parent*')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.parent.create')}}" class="nav-link {{ (request()->is('admin/parent*')) ? 'active' : '' }}">
                                     <span>Add Parent</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.parent')}}" class="nav-link {{ (request()->is('admin/parent*')) ? 'active' : '' }}">
+                                    <span>Parent List</span>
                                 </a>
                             </li>
                         </ul>

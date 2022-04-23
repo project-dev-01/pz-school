@@ -268,6 +268,9 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
         // student details
         Route::get('/student', [AdminController::class, 'studentIndex'])->name('admin.student.index');
+        Route::post('student/list', [AdminController::class, 'studentList'])->name('admin.student.list');
+        Route::get('student/student-details/{id}', [AdminController::class, 'getStudentDetails'])->name('admin.student.details');
+        Route::post('student/update', [AdminController::class, 'updateStudent'])->name('admin.student.update');
 
         // section routes
         Route::get('section/index', [AdminController::class, 'section'])->name('admin.section');
@@ -366,6 +369,12 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
         // Parent routes
         Route::get('parent/index', [AdminController::class, 'parent'])->name('admin.parent');
+        Route::get('parent/create', [AdminController::class, 'createParent'])->name('admin.parent.create');
+        Route::post('parent/add', [AdminController::class, 'addParent'])->name('admin.parent.add');
+        Route::get('parent/list', [AdminController::class, 'getParentList'])->name('admin.parent.list');
+        Route::get('parent/parent-details/{id}', [AdminController::class, 'getParentDetails'])->name('admin.parent.details');
+        Route::post('parent/update', [AdminController::class, 'updateParent'])->name('admin.parent.update');
+        Route::post('parent/delete', [AdminController::class, 'deleteParent'])->name('admin.parent.delete');
 
         // Homework routes
         Route::get('homework/index', [AdminController::class, 'homework'])->name('admin.homework');

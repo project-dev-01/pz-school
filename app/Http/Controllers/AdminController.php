@@ -861,6 +861,7 @@ class AdminController extends Controller
         $gettransport = Helper::GetMethod(config('constants.api.transport_list'));
         $gethostel = Helper::GetMethod(config('constants.api.hostel_list'));
         $session = Helper::GetMethod(config('constants.api.session'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
         // dd($gethostel);
         return view(
             'admin.admission.index',
@@ -869,6 +870,7 @@ class AdminController extends Controller
                 'transport' => $gettransport['data'],
                 'hostel' => $gethostel['data'],
                 'session' => $session['data'],
+                'semester' => $semester['data'],
             ]
         );
         // return view('admin.admission.index');
@@ -1555,7 +1557,17 @@ class AdminController extends Controller
     }
     public function studentIndex()
     {
-        return view('admin.student.student');
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        return view(
+            'admin.student.student',
+            [
+                'classes' => $getclass['data'],
+                'semester' => $semester['data'],
+                'session' => $session['data'],
+            ]
+        );
     }
     public function classroomManagement()
     {
@@ -2531,8 +2543,14 @@ class AdminController extends Controller
     public function addAdmission(Request $request)
     {
 
+        $file = $request->file('photo');
+        $path = $file->path();
+        $data = file_get_contents($path);
+        $base64 = base64_encode($data);
+        $extension = $file->getClientOriginalExtension();
 
         $data = [
+            'year' => $request->year,
             'register_no' => $request->txt_regiter_no,
             'roll_no' => $request->txt_roll_no,
             'admission_date' => $request->admission_date,
@@ -2548,6 +2566,8 @@ class AdminController extends Controller
             'mobile_no' => $request->txt_mobile_no,
             'city' => $request->drp_city,
             'state' => $request->drp_state,
+            'photo' => $base64,
+            'file_extension' => $extension,
             'current_address' => $request->txtarea_paddress,
             'permanent_address' => $request->txtarea_permanent_address,
             'email' => $request->txt_emailid,
@@ -2561,6 +2581,7 @@ class AdminController extends Controller
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
             'session_id' => $request->session_id,
+            'semester_id' => $request->semester_id,
             'password' => $request->txt_pwd,
             'confirm_password' => $request->txt_retype_pwd,
 
@@ -2581,7 +2602,7 @@ class AdminController extends Controller
 
         ];
 
-        // dd($data);
+        // dd($extension);
         $response = Helper::PostMethod(config('constants.api.admission_add'), $data);
         // dd($response);
         return $response;
@@ -2669,5 +2690,304 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.add_subject_division'), $data);
         return $response;
     }
-    // exam master -> exam result end
+    public function studentList(Request $request)
+    {
+        //    dd($request);
+        $data = [
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id,
+            
+        ];
+        // dd($data);
+        $student = Helper::PostMethod(config('constants.api.student_list'), $data);
+        
+       
+        if ($student['code'] == "200") {
+
+            $output = "";
+            $row = 1;
+            if ($student['data']) {
+                foreach ($student['data'] as $stu) {
+
+                    $edit = route('admin.student.details',$stu['id']);
+                    $output .= '<tr>
+                                    <td>' . $row . '</td>
+                                    <td>' . $stu['first_name'] . ' ' . $stu['last_name'] . '</td>
+                                    <td>' . $stu['register_no'] . '</td>
+                                    <td>' . $stu['roll_no'] . '</td>
+                                    <td>' . $stu['gender'] . '</td>
+                                    <td>' . $stu['email'] . '</td>
+                                    <td>' . $stu['mobile_no'] . '</td>
+                                    <td>
+                                        <div class="button-list">
+                                        <a href="'.$edit.'" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
+                                        </div>
+                                    </td>
+
+                                </tr>';
+                    $row++;
+                }
+            } else {
+                $output .= '<tr>
+                                <td colspan="7"> No Data Available</td>
+                            </tr>';
+            }
+            $student['table'] = $output;
+        }
+        // dd($output);  
+        return $student;
+    }   
+
+    // get Student  details
+    public function getStudentDetails($id)
+    {
+
+        $data = [
+            'id' => $id,
+        ];
+
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $gettransport = Helper::GetMethod(config('constants.api.transport_list'));
+        $gethostel = Helper::GetMethod(config('constants.api.hostel_list'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $student = Helper::PostMethod(config('constants.api.student_details'), $data);
+
+        $prev = json_decode($student['data']['student']['previous_details']);
+
+        $student['data']['student']['school_name'] = $prev->school_name;
+        $student['data']['student']['qualification'] = $prev->qualification;
+        $student['data']['student']['remarks'] = $prev->remarks;
+        
+
+        return view(
+            'admin.student.edit',
+            [
+                'class' => $getclass['data'],
+                'transport' => $gettransport['data'],
+                'hostel' => $gethostel['data'],
+                'session' => $session['data'],
+                'semester' => $semester['data'],
+                'student' => $student['data']['student'],
+                'section' => $student['data']['section'],
+                'vehicle' => $student['data']['vehicle'],
+                'room' => $student['data']['room'],
+                
+            ]
+        );
+    }
+
+    
+    // Update Student 
+    public function updateStudent(Request $request)
+    {
+        $base64 = "";
+        $extension = "";
+        $file = $request->file('photo');
+        // dd($file);
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        }
+       
+
+        $data = [
+            'year' => $request->year,
+            'parent_id' => $request->parent_id,
+            'student_id' => $request->student_id,
+            'old_photo' => $request->old_photo,
+            'register_no' => $request->txt_regiter_no,
+            'roll_no' => $request->txt_roll_no,
+            'admission_date' => $request->admission_date,
+            'category_id' => $request->categy,
+            'first_name' => $request->fname,
+            'last_name' => $request->lname,
+            'gender' => $request->gender,
+            'blood_group' => $request->blooddgrp,
+            'birthday' => $request->dob,
+            'mother_tongue' => $request->txt_mothertongue,
+            'religion' => $request->txt_religion,
+            'caste' => $request->txt_caste,
+            'mobile_no' => $request->txt_mobile_no,
+            'city' => $request->drp_city,
+            'state' => $request->drp_state,
+            'photo' => $base64,
+            'file_extension' => $extension,
+            'current_address' => $request->txtarea_paddress,
+            'permanent_address' => $request->txtarea_permanent_address,
+            'email' => $request->txt_emailid,
+            'route_id' => $request->drp_transport_route,
+            'vehicle_id' => $request->drp_transport_vechicleno,
+            'hostel_id' => $request->drp_hostelnam,
+            'room_id' => $request->drp_roomname,
+            'school_name' => $request->txt_prev_schname,
+            'qualification' => $request->txt_prev_qualify,
+            'remarks' => $request->txtarea_prev_remarks,
+            'class_id' => $request->class_id,
+            'section_id' => "1",
+            'session_id' => $request->session_id,
+            'semester_id' => $request->semester_id,
+
+            'parent_name' => $request->txt_name,
+            'relation' => $request->txt_relation,
+            'father_name' => $request->txt_fathernam,
+            'mother_name' => $request->txt_mothernam,
+            'occupation' => $request->txt_occupation,
+            'income' => $request->txt_income,
+            'education' => $request->txt_eduction,
+            'parent_city' => $request->txt_guardian_city,
+            'parent_state' => $request->txt_guardian_state,
+            'parent_mobile_no' => $request->txt_guardian_mobileno,
+            'address' => $request->txt_guardian_address,
+            'parent_email' => $request->txt_guardian_email,
+
+        ];
+
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.student_update'), $data);
+        // dd($response);
+        return $response;
+    }
+
+    // DELETE Student Details
+    // public function deleteStudent(Request $request)
+    // {
+    //     $data = [
+    //         'id' => $request->id
+    //     ];
+
+    //     $response = Helper::PostMethod(config('constants.api.student_delete'), $data);
+    //     return $response;
+    // }
+
+    public function createParent()
+    {
+        return view('admin.parent.add');
+    }
+
+    public function addParent(Request $request)
+    {
+        $base64 = "";
+        $extension = "";
+        $file = $request->file('photo');
+        // dd($file);
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        }
+
+        $data = [
+            'name' => $request->name,
+            'relation' => $request->relation,
+            'father_name' => $request->father_name,
+            'mother_name' => $request->mother_name,
+            'occupation' => $request->occupation,
+            'income' => $request->income,
+            'education' => $request->education,
+            'city' => $request->city,
+            'state' => $request->state,
+            'mobile_no' => $request->mobile_no,
+            'address' => $request->address,
+            'email' => $request->email,
+            'password' => $request->password,
+            'confirm_password' => $request->confirm_password,
+            'photo' => $base64,
+            'file_extension' => $extension,
+            'facebook_url' => $request->facebook_url,
+            'linkedin_url' => $request->linkedin_url,
+            'twitter_url' => $request->twitter_url,
+        ];
+        
+        $response = Helper::PostMethod(config('constants.api.parent_add'), $data);
+        // dd($response);
+        return $response;
+    }
+    public function getParentList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.parent_list'));
+        // dd($response);
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $edit = route('admin.parent.details',$row['id']);
+                return '<div class="button-list">
+                
+                            <a href="'.$edit.'" class="btn btn-blue waves-effect waves-light" ="editParentBtn"><i class="fe-edit"></i></a>
+                            <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteParentBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getParentDetails($id)
+    {
+        $data = [
+            'id' => $id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.parent_details'), $data);
+        return view(
+            'admin.parent.edit',
+            [
+                'parent' => $response['data'],
+            ]
+        );
+    }
+    public function updateParent(Request $request)
+    {
+        // dd($request);
+        $base64 = "";
+        $extension = "";
+        $file = $request->file('photo');
+        
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        }
+        
+        $data = [
+            
+            'id' => $request->id,
+            'name' => $request->name,
+            'relation' => $request->relation,
+            'father_name' => $request->father_name,
+            'mother_name' => $request->mother_name,
+            'occupation' => $request->occupation,
+            'income' => $request->income,
+            'education' => $request->education,
+            'city' => $request->city,
+            'state' => $request->state,
+            'mobile_no' => $request->mobile_no,
+            'address' => $request->address,
+            'email' => $request->email,
+            'password' => $request->password,
+            'confirm_password' => $request->confirm_password,
+            'old_photo' => $request->old_photo,
+            'photo' => $base64,
+            'file_extension' => $extension,
+            'facebook_url' => $request->facebook_url,
+            'linkedin_url' => $request->linkedin_url,
+            'twitter_url' => $request->twitter_url,
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.parent_update'), $data);
+        return $response;
+    }
+    // DELETE Parent Details
+    public function deleteParent(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.parent_delete'), $data);
+        return $response;
+    }
 }

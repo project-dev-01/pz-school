@@ -305,4 +305,18 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('get_assign_class', [ApiController::class, 'getAssignClass']);
     Route::post('to_do_comments', [ApiController::class, 'toDoComments']);
     Route::get('get_to_do_teacher', [ApiController::class, 'getToDoTeacher']);
+
+    // Student routes
+    Route::post('admission/add',[ApiController::class,'addAdmission']);
+    Route::post('student/list', [ApiController::class, 'getStudentList']);
+    Route::post('student/update',[ApiController::class,'updateStudent']);
+    Route::post('student/student-details', [ApiController::class, 'getStudentDetails']);
+    Route::post('student/delete', [ApiController::class, 'deleteStudent']);
+
+    // parent routes
+    Route::post('parent/add',[ApiController::class,'addParent']);
+    Route::get('parent/list', [ApiController::class, 'getParentList']);
+    Route::post('parent/parent-details', [ApiController::class, 'getParentDetails']);
+    Route::post('parent/update', [ApiController::class, 'updateParent']);
+    Route::post('parent/delete', [ApiController::class, 'deleteParent']);
 });

@@ -13,8 +13,7 @@ $(function () {
             classnames: "required",
             categy: "required",
             fname: "required",
-            gender: "required",
-            blooddgrp: "required",
+            lname: "required",
             txt_mobile_no: "required",
             present_address: "required",
             txt_pwd: {

@@ -16,21 +16,22 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->integer('parent_id');
+            $table->string('year');
             $table->string('register_no');
             $table->string('roll_no');
             $table->date('admission_date');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('gender');
-            $table->string('birthday');
-            $table->string('religion');
-            $table->string('caste');
-            $table->string('blood_group');
-            $table->string('mother_tongue');
-            $table->text('current_address');
-            $table->text('permanent_address');
-            $table->string('city');
-            $table->string('state');
+            $table->string('gender')->nullable();
+            $table->string('birthday')->nullable();
+            $table->string('religion')->nullable();
+            $table->string('caste')->nullable();
+            $table->string('blood_group')->nullable();
+            $table->string('mother_tongue')->nullable();
+            $table->text('current_address')->nullable();
+            $table->text('permanent_address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
             $table->string('mobile_no');
             $table->integer('category_id');
             $table->string('email');
@@ -38,8 +39,8 @@ class CreateStudentsTable extends Migration
             $table->integer('vehicle_id')->nullable();
             $table->integer('hostel_id')->nullable();
             $table->integer('room_id')->nullable();
-            $table->text('previous_details');
-            $table->string('photo');
+            $table->text('previous_details')->nullable();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

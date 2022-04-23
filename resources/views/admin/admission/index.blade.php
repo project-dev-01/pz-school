@@ -25,8 +25,7 @@
                     </li>
                 </ul>
                 <div class="card-body">
-                <form id="addadmission" method="post" action="{{ route('admin.admission.add') }}" enctype="multipart/form-data" autocomplete="off">
-        @csrf
+                
         <div class="row">
             <div class="col-xl-12">
                 <div class="card">
@@ -38,34 +37,38 @@
                         <span class="header-title mb-3" id="span-parent">Academic Details
                             <hr id="hr">
                         </span>
-                        <form id="demo-form" data-parsley-validate="" autocomplete="off">
+                        <form id="addadmission" method="post" action="{{ route('admin.admission.add') }}" enctype="multipart/form-data" autocomplete="off">
+                            @csrf
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="btwyears">Academic Year<span class="text-danger">*</span></label>
-                                        <select id="btwyears" class="form-control">
-                                            <option value="">2021-2022</option>
-                                            <option value="">2020-2021</option>
-                                            <option value="press">2019-2020</option>
-                                            <option value="net">2018-2029</option>
-                                            <option value="mouth">2017-2018</option>
-                                            <option value="other">2016-2017</option>
+                                        <select id="btwyears" class="form-control" name="year">
+                                            <option>2021-2022</option>
+                                            <option>2020-2021</option>
+                                            <option>2019-2020</option>
+                                            <option>2018-2019</option>
+                                            <option>2017-2018</option>
+                                            <option>2016-2017</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Register No<span class="text-danger">*</span></label>
                                         <input type="" id="txt_regiter_no" class="form-control" name="txt_regiter_no" data-parsley-trigger="change">
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Roll<span class="text-danger">*</span></label>
                                         <input type="" id="txt_roll_no" class="form-control" name="txt_roll_no" data-parsley-trigger="change">
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                            </div>
+                            <div class="row">
+                                
+                                <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="">Admission Date<span class="text-danger">*</span></label>
                                         <div class="input-group input-group-merge">
@@ -78,9 +81,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="class_id">Standard<span class="text-danger">*</span></label>
                                         <select id="class_id" class="form-control" name="class_id">
@@ -91,15 +92,17 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="section_id">Class Name<span class="text-danger">*</span></label>
-                                    <select id="section_id" class="form-control"  name="section_id">                              
-                                    <option value="">Select Class Name</option>
-                                    </select>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="section_id">Class Name<span class="text-danger">*</span></label>
+                                        <select id="section_id" class="form-control"  name="section_id">                              
+                                        <option value="">Select Class Name</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                                <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Category<span class="text-danger">*</span></label>
                                         <select id="categy" name="categy" class="form-control">
@@ -109,13 +112,24 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="session_id">Session</label>
                                         <select id="session_id" class="form-control"  name="session_id">                              
                                             <option value="0">Select Session</option>
                                             @foreach($session as $ses)
                                                 <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="semester_id">Semester</label>
+                                        <select id="semester_id" class="form-control"  name="semester_id">                              
+                                            <option value="0">Select Semester</option>
+                                            @foreach($semester as $sem)
+                                                <option value="{{$sem['id']}}">{{$sem['name']}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -154,7 +168,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="gender">Gender<span class="text-danger">*</span></label>
+                                        <label for="gender">Gender</label>
                                         <select id="gender" name="gender" class="form-control">
                                             <option value="">Select Gender</option>
                                             <option value="Male">Male</option>
@@ -166,7 +180,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="blooddgrp">Blood Group<span class="text-danger">*</span></label>
+                                        <label for="blooddgrp">Blood Group</label>
                                         <select id="blooddgrp" name="blooddgrp" class="form-control">
                                             <option value="">Select Blood Group</option>
                                             <option>O+</option>
@@ -246,27 +260,39 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="txtarea_paddress">Present Address</label>
-                                        <textarea id="txtarea_paddress" class="form-control" name="txtarea_paddress" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
-                        </textarea>
+                                        <textarea id="txtarea_paddress" class="form-control" name="txtarea_paddress" >
+                                        </textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="txtarea_permanent_address">Permanent Address</label>
-                                        <textarea id="txtarea_permanent_address" class="form-control" name="txtarea_permanent_address" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
-                        </textarea>
+                                        <textarea id="txtarea_permanent_address" class="form-control" name="txtarea_permanent_address" >
+                                        </textarea>
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="row">
+                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="pc">Profile Picture</label>
-                                        <textarea id="pc" class="form-control" name="pc" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
-                        </textarea>
+                                        <label for="document" class="col-form-label">Photo</label>
+                                        <div class="col-12">
+                                                <input type="file"  class="custom-file-input" name="photo">
+                                                <label class="custom-file-label" for="document">Choose file</label>
+                                            <span id="file_name"></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div> -->
+                                <!-- <div class="col-12">
+                                    
+                                    <label for="pc">Profile Picture</label>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <input type="file" data-plugins="dropify" data-height="300" name="photo"/>
+                                        </div>
+                                    </div>>
+                                </div> -->
+                            </div>
                             <span class="fas fa-user-lock " id="span-parent"></span>
                             <span class="header-title mb-3" id="span-parent"> Login Details
                                 <hr id="hr">
@@ -400,7 +426,7 @@
                             <div class="form-group">
                                 <label for="message">Address</label>
                                 <textarea id="txt_guardian_address" class="form-control" name="txt_guardian_address" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
-                        </textarea>
+                                </textarea>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
@@ -450,7 +476,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="drp_transport_route">Transport Route<span class="text-danger">*</span></label>
+                                        <label for="drp_transport_route">Transport Route</label>
                                            
                                         <select id="drp_transport_route" name="drp_transport_route" class="form-control">
                                             <option value="">Select Transport</option>
@@ -462,7 +488,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="drp_transport_vechicleno">Vechicle No<span class="text-danger">*</span></label>
+                                        <label for="drp_transport_vechicleno">Vechicle No</label>
                                         <select id="drp_transport_vechicleno" name="drp_transport_vechicleno" class="form-control">
                                             <option value="">First select the branch</option>
                                         </select>
@@ -515,15 +541,15 @@
                             <div class="form-group">
                                 <label for="message">Remarks</label>
                                 <textarea id="txtarea_prev_remarks" class="form-control" name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
-                        </textarea>
+                                </textarea>
                             </div>
                             <div class="form-group text-right m-b-0">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
                                     Save
                                 </button>
                                 <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                            Cancel
-                        </button>-->
+                                    Cancel
+                                </button>-->
                             </div>
                         </form>
 
