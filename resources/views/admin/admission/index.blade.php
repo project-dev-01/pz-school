@@ -589,7 +589,7 @@
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var vehicleByRoute = "{{ route('admin.vehicle_by_route') }}";
     var roomByHostel = "{{ route('admin.room_by_hostel') }}";
-    var indexAdmission = "{{ route('admin.admission') }}";
+    var indexAdmission = "{{ route('admin.student.index') }}";
 </script>
 <script src="{{ asset('js/custom/admission.js') }}"></script>
 @endsection

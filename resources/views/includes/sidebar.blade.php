@@ -86,11 +86,11 @@
                                     <span>Create Admission</span>
                                 </a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="{{ route('admission.import')}}" class="nav-link {{ (request()->is('super_admin/admission/import')) ? 'active' : '' }}">
                                     <span>Multiple Import</span>
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </li>
@@ -455,7 +455,7 @@
                         </ul>
                     </div>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="#sidebarLibrary" data-toggle="collapse">
                         <i class="fe-book-open"></i>
                         <span> Library </span>
@@ -473,11 +473,11 @@
                                     <span>Book Category</span>
                                 </a>
                             </li>
-                            <!-- <li>
+                            <li>
                                 <a href="{{ route('library.issuedbook')}}" class="nav-link {{ (request()->is('super_admin/issuedbook')) ? 'active' : '' }}">
                                     <span>My Issued Book</span>
                                 </a>
-                            </li>  -->
+                            </li> 
                             <li>
                                 <a href="{{ route('library.issuereturn')}}" class="nav-link {{ (request()->is('super_admin/book')) ? 'active' : '' }}">
                                     <span>Book Issue/Return</span>
@@ -485,7 +485,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> -->
                 <li>
                     <a href="#sidebarEvents" data-toggle="collapse">
                         <i data-feather="map"></i>
@@ -584,11 +584,11 @@
                                     <span>Create Admission</span>
                                 </a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="{{ route('admin.admission.import')}}" class="nav-link {{ (request()->is('admin/admission/import')) ? 'active' : '' }}">
                                     <span>Multiple Import</span>
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </li>
@@ -965,7 +965,7 @@
                         </ul>
                     </div>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="#sidebarLibrary" data-toggle="collapse">
                         <i class="fe-book-open"></i>
                         <span> Library </span>
@@ -983,11 +983,11 @@
                                     <span>Book Category</span>
                                 </a>
                             </li>
-                            <!-- <li>
+                            <li>
                                 <a href="{{ route('admin.library.issuedbook')}}" class="nav-link {{ (request()->is('admin/issuedbook')) ? 'active' : '' }}">
                                     <span>My Issued Book</span>
                                 </a>
-                            </li>  -->
+                            </li> 
                             <li>
                                 <a href="{{ route('admin.library.issuereturn')}}" class="nav-link {{ (request()->is('admin/book')) ? 'active' : '' }}">
                                     <span>Book Issue/Return</span>
@@ -995,7 +995,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> -->
                 <li>
                     <a href="#sidebarEvents" data-toggle="collapse">
                         <i data-feather="map"></i>
@@ -1055,11 +1055,11 @@
                                     <span>Create Admission</span>
                                 </a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="{{ route('staff.admission.import')}}" class="nav-link {{ (request()->is('staff/admission/import')) ? 'active' : '' }}">
                                     <span>Multiple Import</span>
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </li>
@@ -1306,7 +1306,7 @@
                         </ul>
                     </div>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="#sidebarLibrary" data-toggle="collapse">
                         <i class="fe-book-open"></i>
                         <span> Library </span>
@@ -1324,11 +1324,11 @@
                                     <span>Book Category</span>
                                 </a>
                             </li>
-                            <!-- <li>
+                            <li>
                                 <a href="{{ route('staff.library.issuedbook')}}" class="nav-link {{ (request()->is('staff/issuedbook')) ? 'active' : '' }}">
                                     <span>My Issued Book</span>
                                 </a>
-                            </li>  -->
+                            </li> 
                             <li>
                                 <a href="{{ route('staff.library.issuereturn')}}" class="nav-link {{ (request()->is('staff/book')) ? 'active' : '' }}">
                                     <span>Book Issue/Return</span>
@@ -1336,7 +1336,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> -->
                 <li>
                     <a href="#sidebarEvents" data-toggle="collapse">
                         <i data-feather="map"></i>
@@ -1624,7 +1624,7 @@
                         <span> Report Card </span>
                     </a>
                 </li>       
-                <li>
+                <!-- <li>
                     <a href="#sidebarLibrary" data-toggle="collapse">
                         <i class="fe-book-open"></i>
                         <span> Library </span>
@@ -1644,7 +1644,7 @@
                             </li> 
                         </ul>
                     </div>
-                </li>      
+                </li>       -->
                 <li>
                     <a href="{{ route('parent.events')}}" class="nav-link {{ (request()->is('parent/events*')) ? 'active' : '' }}">
                         <i class="fas fa-map"></i>
@@ -1758,7 +1758,7 @@
                         <span> Report Card </span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="#sidebarLibrary" data-toggle="collapse">
                         <i class="fe-book-open"></i>
                         <span> Library </span>
@@ -1778,7 +1778,7 @@
                             </li> 
                         </ul>
                     </div>
-                </li>
+                </li> -->
                 <li>
                     <a href="{{ route('student.events')}}" class="nav-link {{ (request()->is('student/events*')) ? 'active' : '' }}">
                         <i class="fas fa-map"></i>
