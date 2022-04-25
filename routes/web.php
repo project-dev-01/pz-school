@@ -287,12 +287,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
         // assign_teacher routes
         Route::get('assign_teacher/index', [AdminController::class, 'showTeacherAllocation'])->name('admin.assign_teacher');
-        Route::post('assign_teacher/get_allocation_section', [AdminController::class, 'getAllocationSection'])->name('assign_teacher.get_allocation_section');
-        Route::post('assign_teacher/add', [AdminController::class, 'addTeacherAllocation'])->name('assign_teacher.add');
-        Route::get('assign_teacher/list', [AdminController::class, 'getTeacherAllocationList'])->name('assign_teacher.list');
-        Route::post('assign_teacher/details', [AdminController::class, 'getTeacherAllocationDetails'])->name('assign_teacher.details');
-        Route::post('assign_teacher/update', [AdminController::class, 'updateTeacherAllocation'])->name('assign_teacher.update');
-        Route::post('assign_teacher/delete', [AdminController::class, 'deleteTeacherAllocation'])->name('assign_teacher.delete');
+        Route::get('assign_teacher/list', [AdminController::class, 'getTeacherAllocationList'])->name('admin.assign_teacher.list');
 
         // Event Type routes
         Route::get('event_type/index', [AdminController::class, 'eventType'])->name('admin.event_type');

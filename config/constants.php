@@ -271,7 +271,8 @@ return [
         'parent_details' => $url.'/parent/parent-details',
         'parent_update' => $url.'/parent/update',
         'parent_delete' => $url.'/parent/delete',
-        
+        // get_all_teacher_list
+        'get_all_teacher_list' => $url.'/get_all_teacher_list',
         
     ]
 

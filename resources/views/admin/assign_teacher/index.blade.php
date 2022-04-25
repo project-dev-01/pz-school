@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Dashboard')
+@section('title','Assign Teacher')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">List</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Assign Teache</h4>
+                <h4 class="page-title">Assign Teacher</h4>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
                 </p>
 
                 <div class="table-responsive">
-                    <table class="table mb-0" id="admin-assign-teacher-table">
+                    <table class="table mb-0" id="assign-class-teacher-table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -43,18 +43,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>7</td>
-                                <td>A</td>
-                                <td>john</td>
-                                <td>
-                                    <div class="button-list">
-                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
-                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
-                                    </div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -62,7 +50,20 @@
         </div> <!-- end col -->
     </div>
     <!--- end row -->
-
+    @include('admin.assign_teacher.add')
+    @include('admin.assign_teacher.edit')
 </div>
 <!-- container -->
+@endsection
+@section('scripts')
+<script>
+    var assignTeacherAddUrl = "{{ config('constants.api.assign_teacher_add') }}";
+    var assignTeacherDetailsUrl = "{{ config('constants.api.assign_teacher_details') }}";
+    var assignTeacherUpdateUrl = "{{ config('constants.api.assign_teacher_update') }}";
+    var assignTeacherDeleteUrl = "{{ config('constants.api.assign_teacher_delete') }}";
+    var sectionByClassUrl = "{{ config('constants.api.section_by_class') }}";
+
+    var assignTeacherList = "{{ route('admin.assign_teacher.list') }}";
+</script>
+<script src="{{ asset('js/custom/teacher-allocation.js') }}"></script>
 @endsection

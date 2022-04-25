@@ -320,4 +320,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('parent/parent-details', [ApiController::class, 'getParentDetails']);
     Route::post('parent/update', [ApiController::class, 'updateParent']);
     Route::post('parent/delete', [ApiController::class, 'deleteParent']);
+    // get all teacher list
+    Route::get('get_all_teacher_list', [ApiController::class, 'getAllTeacherList']);
+    
 });

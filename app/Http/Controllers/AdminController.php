@@ -523,7 +523,7 @@ class AdminController extends Controller
         return view('admin.section_allocation.allocation', ['classDetails' => $getClasses['data'], 'sectionDetails' => $getSections['data']]);
     }
 
-    
+
     // get sections allocation
     public function getSectionAllocationList(Request $request)
     {
@@ -552,70 +552,29 @@ class AdminController extends Controller
         $teacherDetails = User::select('id', 'name')->where('role_id', 3)->get();
         return view('admin.assign_teacher.index', ['classDetails' => $classDetails, 'teacherDetails' => $teacherDetails]);
     }
-    // get allocation section
 
-    public function getAllocationSection(Request $request)
-    {
-        $class_id = $request->class_id;
-
-        $classDetails = DB::table('sections_allocations as sa')
-            ->select('sa.id', 'sa.class_id', 'sa.section_id', 's.name as section_name')
-            ->join('sections as s', 'sa.section_id', '=', 's.id')
-            ->where('sa.class_id', $class_id)
-            ->get();
-
-        return response()->json(['code' => 1, 'data' => $classDetails]);
-    }
     // get TeacherAllocation
     public function showTeacherAllocation()
     {
-        return view('admin.assign_teacher.index');
+        $getClasses = Helper::GetMethod(config('constants.api.class_list'));
+        $getAllTeacherList = Helper::GetMethod(config('constants.api.get_all_teacher_list'));
+        return view('admin.assign_teacher.index', ['classDetails' => $getClasses['data'], 'getAllTeacherList' => $getAllTeacherList['data']]);
+
     }
-    // add section allocations
-    public function addTeacherAllocation(Request $request)
-    {
 
-        $validator = \Validator::make($request->all(), [
-            'class_name' => 'required',
-            'section_name' => 'required',
-            'class_teacher' => 'required'
-        ]);
-
-        if (!$validator->passes()) {
-            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
-        } else {
-
-            $teacherAllocation = new TeacherAllocation();
-            $teacherAllocation->class_id = $request->class_name;
-            $teacherAllocation->section_id = $request->section_name;
-            $teacherAllocation->teacher_id = $request->class_teacher;
-            $query = $teacherAllocation->save();
-
-            if (!$query) {
-                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
-            } else {
-                return response()->json(['code' => 1, 'msg' => 'Teacher Allocation has been successfully saved']);
-            }
-        }
-    }
 
     // get Teacher Allocation List
 
     public function getTeacherAllocationList(Request $request)
     {
-        $teacherAllocation = DB::table('teacher_allocations as ta')
-            ->select('ta.id', 'ta.class_id', 'ta.section_id', 'ta.teacher_id', 's.name as section_name', 'c.name as class_name', 'u.name as teacher_name')
-            ->join('sections as s', 'ta.section_id', '=', 's.id')
-            ->join('classes as c', 'ta.class_id', '=', 'c.id')
-            ->join('users as u', 'ta.teacher_id', '=', 'u.id')
-            ->get();
 
-        return DataTables::of($teacherAllocation)
+        $response = Helper::GetMethod(config('constants.api.assign_teacher_list'));
+        return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
-                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row->id . '" id="editTeacherAlloBtn">Update</a>
-                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row->id . '" id="deleteTeacherAlloBtn">Delete</a>
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editClsTeacherBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteClsTeacherBtn">Delete</a>
                         </div>';
             })
 
@@ -2609,9 +2568,9 @@ class AdminController extends Controller
     }
     public function byclasss()
     {
-        $getclass = Helper::GetMethod(config('constants.api.class_list'));     
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
-       
+
         return view(
             'admin.exam_results.byclass',
             [
@@ -2623,7 +2582,7 @@ class AdminController extends Controller
     // exam master -> exam result start
     public function bysubject()
     {
-        $getclass = Helper::GetMethod(config('constants.api.class_list'));     
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
         return view(
             'admin.exam_results.bysubject',
@@ -2631,11 +2590,11 @@ class AdminController extends Controller
                 'classnames' => $getclass['data'],
                 'allGrades' => $allGrades['data']
             ]
-        ); 
+        );
     }
     public function bystudent()
     {
-        $getclass = Helper::GetMethod(config('constants.api.class_list'));     
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
         return view(
             'admin.exam_results.bystudent',
@@ -2643,7 +2602,7 @@ class AdminController extends Controller
                 'classnames' => $getclass['data'],
                 'allGrades' => $allGrades['data']
             ]
-        ); 
+        );
     }
     public function overall()
     {
@@ -2657,13 +2616,13 @@ class AdminController extends Controller
 
     public function testResult()
     {
-       
+
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         //$get_exams = Helper::GetMethod(config('constants.api.get_testresult_exams'));
         // dd($response);     
         return view('admin.testresult.index', [
             'classes' => $getclass['data']
-        ]);       
+        ]);
     }
 
     public function subjectmarks(Request $request)
@@ -2707,12 +2666,12 @@ class AdminController extends Controller
             "section_id" => $request->section_id,
             "semester_id" => $request->semester_id,
             "session_id" => $request->session_id,
-            
+
         ];
         // dd($data);
         $student = Helper::PostMethod(config('constants.api.student_list'), $data);
-        
-       
+
+
         if ($student['code'] == "200") {
 
             $output = "";
@@ -2720,7 +2679,7 @@ class AdminController extends Controller
             if ($student['data']) {
                 foreach ($student['data'] as $stu) {
 
-                    $edit = route('admin.student.details',$stu['id']);
+                    $edit = route('admin.student.details', $stu['id']);
                     $output .= '<tr>
                                     <td>' . $row . '</td>
                                     <td>' . $stu['first_name'] . ' ' . $stu['last_name'] . '</td>
@@ -2731,7 +2690,7 @@ class AdminController extends Controller
                                     <td>' . $stu['mobile_no'] . '</td>
                                     <td>
                                         <div class="button-list">
-                                        <a href="'.$edit.'" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
+                                        <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
                                         </div>
                                     </td>
 
@@ -2747,7 +2706,7 @@ class AdminController extends Controller
         }
         // dd($output);  
         return $student;
-    }   
+    }
 
     // get Student  details
     public function getStudentDetails($id)
@@ -2769,7 +2728,7 @@ class AdminController extends Controller
         $student['data']['student']['school_name'] = $prev->school_name;
         $student['data']['student']['qualification'] = $prev->qualification;
         $student['data']['student']['remarks'] = $prev->remarks;
-        
+
 
         return view(
             'admin.student.edit',
@@ -2783,12 +2742,12 @@ class AdminController extends Controller
                 'section' => $student['data']['section'],
                 'vehicle' => $student['data']['vehicle'],
                 'room' => $student['data']['room'],
-                
+
             ]
         );
     }
 
-    
+
     // Update Student 
     public function updateStudent(Request $request)
     {
@@ -2802,7 +2761,7 @@ class AdminController extends Controller
             $base64 = base64_encode($data);
             $extension = $file->getClientOriginalExtension();
         }
-       
+
 
         $data = [
             'year' => $request->year,
@@ -2912,7 +2871,7 @@ class AdminController extends Controller
             'linkedin_url' => $request->linkedin_url,
             'twitter_url' => $request->twitter_url,
         ];
-        
+
         $response = Helper::PostMethod(config('constants.api.parent_add'), $data);
         // dd($response);
         return $response;
@@ -2924,10 +2883,10 @@ class AdminController extends Controller
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
-                $edit = route('admin.parent.details',$row['id']);
+                $edit = route('admin.parent.details', $row['id']);
                 return '<div class="button-list">
                 
-                            <a href="'.$edit.'" class="btn btn-blue waves-effect waves-light" ="editParentBtn"><i class="fe-edit"></i></a>
+                            <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light" ="editParentBtn"><i class="fe-edit"></i></a>
                             <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteParentBtn"><i class="fe-trash-2"></i></a>
                         </div>';
             })
@@ -2953,16 +2912,16 @@ class AdminController extends Controller
         $base64 = "";
         $extension = "";
         $file = $request->file('photo');
-        
+
         if ($file) {
             $path = $file->path();
             $data = file_get_contents($path);
             $base64 = base64_encode($data);
             $extension = $file->getClientOriginalExtension();
         }
-        
+
         $data = [
-            
+
             'id' => $request->id,
             'name' => $request->name,
             'relation' => $request->relation,

@@ -668,7 +668,7 @@ class ApiController extends BaseController
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
             // check exist name
-            if ($createConnection->table('teacher_allocations')->where([['section_id', $request->section_id], ['class_id', $request->class_id], ['teacher_id', $request->teacher_id]])->count() > 0) {
+            if ($createConnection->table('teacher_allocations')->where([['section_id', $request->section_id], ['class_id', $request->class_id]])->count() > 0) {
                 return $this->send422Error('Class Teacher Already Assigned', ['error' => 'Class Teacher Already Assigned']);
             } else {
                 $arrayData = array(
@@ -735,7 +735,7 @@ class ApiController extends BaseController
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
             // insert data
-            $sectionDetails = $createConnection->table('teacher_allocations')->where('id', $request->id)->get();
+            $sectionDetails = $createConnection->table('teacher_allocations')->where('id', $request->id)->first();
             return $this->successResponse($sectionDetails, 'Teacher Allocation row fetch successfully');
 
             // $teacher_allocation__id = $request->teacher_allocation__id;
@@ -762,7 +762,7 @@ class ApiController extends BaseController
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
             // check exist name
-            if ($createConnection->table('teacher_allocations')->where([['section_id', $request->section_id], ['class_id', $request->class_id], ['teacher_id', $request->teacher_id], ['id', '!=', $id]])->count() > 0) {
+            if ($createConnection->table('teacher_allocations')->where([['section_id', $request->section_id], ['class_id', $request->class_id], ['id', '!=', $id]])->count() > 0) {
                 return $this->send422Error('Class Teacher Already Assigned', ['error' => 'Class Teacher Already Assigned']);
             } else {
                 $arrayData = array(
@@ -2815,7 +2815,7 @@ class ApiController extends BaseController
             $Connection = $this->createNewConnection($request->branch_id);
             // get data
             $allbyStudent = array();
-      
+
             $total_sujects_teacher = $Connection->table('subject_assigns')
                 ->select(
                     'subjects.id as subject_id',
@@ -9001,6 +9001,24 @@ class ApiController extends BaseController
             } else {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             }
+        }
+    }
+    // get all teacher list
+    public function getAllTeacherList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get all teachers
+            $allTeachers = User::select('name','user_id')->where([['role_id', '=', "4"], ['branch_id', '=', $request->branch_id]])->get();
+            return $this->successResponse($allTeachers, 'get all record fetch successfully');
         }
     }
 }
