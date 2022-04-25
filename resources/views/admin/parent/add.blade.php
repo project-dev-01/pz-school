@@ -172,7 +172,7 @@
                                                 <span class="fas fa-unlock"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control"  name="password" aria-describedby="inputGroupPrepend" >
+                                        <input type="password" class="form-control"  name="password" aria-describedby="inputGroupPrepend" >
                                     </div>
                                 </div>
                             </div>
@@ -185,7 +185,7 @@
                                                 <span class="fas fa-unlock"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control"  name="confirm_password" aria-describedby="inputGroupPrepend" >
+                                        <input type="password" class="form-control"  name="confirm_password" aria-describedby="inputGroupPrepend" >
                                     </div>
                                 </div>
                             </div>

@@ -271,6 +271,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('student/list', [AdminController::class, 'studentList'])->name('admin.student.list');
         Route::get('student/student-details/{id}', [AdminController::class, 'getStudentDetails'])->name('admin.student.details');
         Route::post('student/update', [AdminController::class, 'updateStudent'])->name('admin.student.update');
+        Route::post('student/delete', [AdminController::class, 'deleteStudent'])->name('admin.student.delete');
 
         // section routes
         Route::get('section/index', [AdminController::class, 'section'])->name('admin.section');

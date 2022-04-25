@@ -320,7 +320,7 @@
                                                     <span class="fas fa-unlock"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" name="txt_pwd" class="form-control" id="txt_pwd" placeholder="" aria-describedby="inputGroupPrepend">
+                                            <input type="password" name="txt_pwd" class="form-control" id="txt_pwd" placeholder="" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                 </div>
@@ -333,7 +333,7 @@
                                                     <span class="fas fa-unlock"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" name="txt_retype_pwd" class="form-control" id="txt_retype_pwd" placeholder="" aria-describedby="inputGroupPrepend">
+                                            <input type="password" name="txt_retype_pwd" class="form-control" id="txt_retype_pwd" placeholder="" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                 </div>
@@ -342,129 +342,151 @@
                             <span class="header-title mb-3" id="span-parent">Guardian Details
                                 <hr id="hr">
                             </span>
+                            
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="check_guardian" name="check_guardian">
+                                    <label class="custom-control-label" for="check_guardian">Guardian Already Exist</label>
+                                </div>
+                            </div>
+                            <div class="row" id="parent_list" style="display:none;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="heard">Guardian<span class="text-danger">*</span></label>
+                                        <select id="parent_id" name="parent_id" class="form-control">
+                                            <option value="">Select Guardian</option>
+                                            @foreach($parent as $par)
+                                            <option value="{{$par['id']}}">{{$par['name']}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- <div class="form-group">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="customCheck11">
                                     <label class="custom-control-label" for="customCheck11">Skipped Bank Details</label>
                                 </div>
                             </div> -->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="heard">Name<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="txt_name" id="txt_name" placeholder="" aria-describedby="inputGroupPrepend">
+                            <div id="guardian_form">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="heard">Name<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="txt_name" id="txt_name" placeholder="" aria-describedby="inputGroupPrepend">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label for="heard">Relation<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="txt_relation" id="txt_relation" placeholder="" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="heard">Father Name</label>
-                                        <input type="text" class="form-control" name="txt_fathernam" id="txt_fathernam" placeholder="" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label for="heard">Mother Name</label>
-                                        <input type="text" class="form-control" name="txt_mothernam" id="txt_mothernam" placeholder="" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Occupation<span class="text-danger">*</span></label>
-                                        <input type="" id="txt_occupation" class="form-control" name="txt_occupation" data-parsley-trigger="change">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Income</label>
-                                        <input type="" id="txt_income" class="form-control" name="txt_income" data-parsley-trigger="change">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Education</label>
-                                        <input type="" id="txt_eduction" class="form-control" name="txt_eduction" data-parsley-trigger="change">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group mb-3">
-                                        <label for="validationCustomUsername">City</label>
-                                        <input type="text" class="form-control" id="txt_guardian_city" name="txt_guardian_city" placeholder="" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group mb-3">
-                                        <label for="validationCustomUsername">State</label>
-                                        <input type="text" class="form-control" id="txt_guardian_state" name="txt_guardian_state" placeholder="" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group mb-3">
-                                        <label for="">Mobile No<span class="text-danger">*</span></label>
-                                        <div class="input-group input-group-merge">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <span class="fas fa-phone-volume"></span>
-                                                </div>
-                                            </div>
-                                            <input type="text" class="form-control" id="txt_guardian_mobileno" name="txt_guardian_mobileno" placeholder="" aria-describedby="inputGroupPrepend">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="heard">Relation<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="txt_relation" id="txt_relation" placeholder="" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Address</label>
-                                <textarea id="txt_guardian_address" class="form-control" name="txt_guardian_address" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
-                                </textarea>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label for="email">Email<span class="text-danger">*</span></label>
-                                        <div class="input-group input-group-merge">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <span class="far fa-envelope-open"></span>
-                                                </div>
-                                            </div>
-                                            <input type="text" class="form-control" id="txt_guardian_email" name="txt_guardian_email" placeholder="" aria-describedby="inputGroupPrepend">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="heard">Father Name</label>
+                                            <input type="text" class="form-control" name="txt_fathernam" id="txt_fathernam" placeholder="" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="heard">Mother Name</label>
+                                            <input type="text" class="form-control" name="txt_mothernam" id="txt_mothernam" placeholder="" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="form-group mb-3">
-                                        <label for="email">Password<span class="text-danger">*</span></label>
-                                        <div class="input-group input-group-merge">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <span class="fas fa-unlock"></span>
-                                                </div>
-                                            </div>
-                                            <input type="text" class="form-control" name="txt_guardian_pwd" id="txt_guardian_pwd" placeholder="" aria-describedby="inputGroupPrepend">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Occupation<span class="text-danger">*</span></label>
+                                            <input type="" id="txt_occupation" class="form-control" name="txt_occupation" data-parsley-trigger="change">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Income</label>
+                                            <input type="" id="txt_income" class="form-control" name="txt_income" data-parsley-trigger="change">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Education</label>
+                                            <input type="" id="txt_eduction" class="form-control" name="txt_eduction" data-parsley-trigger="change">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="form-group mb-3">
-                                        <label for="email">Retype Password<span class="text-danger">*</span></label>
-                                        <div class="input-group input-group-merge">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <span class="fas fa-unlock"></span>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group mb-3">
+                                            <label for="validationCustomUsername">City</label>
+                                            <input type="text" class="form-control" id="txt_guardian_city" name="txt_guardian_city" placeholder="" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group mb-3">
+                                            <label for="validationCustomUsername">State</label>
+                                            <input type="text" class="form-control" id="txt_guardian_state" name="txt_guardian_state" placeholder="" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group mb-3">
+                                            <label for="">Mobile No<span class="text-danger">*</span></label>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <span class="fas fa-phone-volume"></span>
+                                                    </div>
                                                 </div>
+                                                <input type="text" class="form-control" id="txt_guardian_mobileno" name="txt_guardian_mobileno" placeholder="" aria-describedby="inputGroupPrepend">
                                             </div>
-                                            <input type="text" class="form-control" name="txt_guardian_retyppwd" id="txt_guardian_retyppwd" placeholder="" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Address</label>
+                                    <textarea id="txt_guardian_address" class="form-control" name="txt_guardian_address" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                                    </textarea>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="email">Email<span class="text-danger">*</span></label>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <span class="far fa-envelope-open"></span>
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="form-control" id="txt_guardian_email" name="txt_guardian_email" placeholder="" aria-describedby="inputGroupPrepend">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group mb-3">
+                                            <label for="email">Password<span class="text-danger">*</span></label>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <span class="fas fa-unlock"></span>
+                                                    </div>
+                                                </div>
+                                                <input type="password" class="form-control" name="txt_guardian_pwd" id="txt_guardian_pwd" placeholder="" aria-describedby="inputGroupPrepend">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group mb-3">
+                                            <label for="email">Retype Password<span class="text-danger">*</span></label>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <span class="fas fa-unlock"></span>
+                                                    </div>
+                                                </div>
+                                                <input type="password" class="form-control" name="txt_guardian_retyppwd" id="txt_guardian_retyppwd" placeholder="" aria-describedby="inputGroupPrepend">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -628,7 +628,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.parent')}}" class="nav-link {{ (request()->is('admin/parent*')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.parent')}}" class="nav-link {{ (request()->is('admin/parent/*')) ? 'active' : '' }}">
                                     <span>Parent List</span>
                                 </a>
                             </li>

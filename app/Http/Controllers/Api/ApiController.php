@@ -7398,6 +7398,7 @@ class ApiController extends BaseController
     // add Admission
     public function addAdmission(Request $request)
     {
+        $check = $request->check_guardian;
 
         $validator = \Validator::make($request->all(), [
             'year' => 'required',
@@ -7417,15 +7418,10 @@ class ApiController extends BaseController
 
             'branch_id' => 'required',
             'token' => 'required',
-
-            'parent_name' => 'required',
-            'relation' => 'required',
-            'occupation' => 'required',
-            'parent_mobile_no' => 'required',
-            'parent_email' => 'required',
-            'parent_password' => 'required|min:6',
-            'parent_confirm_password' => 'required|same:parent_password|min:6',
         ]);
+            
+
+        
 
         $previous['school_name'] = $request->school_name;
         $previous['qualification'] = $request->qualification;
@@ -7433,7 +7429,7 @@ class ApiController extends BaseController
 
         $previous_details = json_encode($previous);
 
-
+        
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -7446,49 +7442,79 @@ class ApiController extends BaseController
                 return $this->send422Error('Parent Email Already Exist', ['error' => 'Parent Email Already Exist']);
             } else {
 
-                $parentId = $conn->table('parent')->insertGetId([
-                    'name' => $request->parent_name,
-                    'relation' => $request->relation,
-                    'father_name' => $request->father_name,
-                    'mother_name' => $request->mother_name,
-                    'occupation' => $request->occupation,
-                    'income' => $request->income,
-                    'education' => $request->education,
-                    'city' => $request->parent_city,
-                    'state' => $request->parent_state,
-                    'mobile_no' => $request->parent_mobile_no,
-                    'address' => $request->address,
-                    'email' => $request->parent_email,
-                    'active' => "1",
-                ]);
-            }
+                if ($check == "on") {
+                    $parentValidator = \Validator::make($request->all(), [
+                        'parent_id' => 'required',
+                    ]);
 
+                    if (!$parentValidator->passes()) {
+                        return $this->send422Error('Validation error.', ['error' => $parentValidator->errors()->toArray()]);
+                    } else {
+                        $parentId = $request->parent_id;
+                    }
+                } else {
+                    $parentValidator = \Validator::make($request->all(), [
+                        'parent_name' => 'required',
+                        'relation' => 'required',
+                        'occupation' => 'required',
+                        'parent_mobile_no' => 'required',
+                        'parent_email' => 'required',
+                        'parent_password' => 'required|min:6',
+                        'parent_confirm_password' => 'required|same:parent_password|min:6',
+                    ]);
 
-            if (!$parentId) {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong add Parent']);
-            } else {
+                    if (!$parentValidator->passes()) {
+                        return $this->send422Error('Validation error.', ['error' => $parentValidator->errors()->toArray()]);
+                    } else {
+                        $parentId = $conn->table('parent')->insertGetId([
+                            'name' => $request->parent_name,
+                            'relation' => $request->relation,
+                            'father_name' => $request->father_name,
+                            'mother_name' => $request->mother_name,
+                            'occupation' => $request->occupation,
+                            'income' => $request->income,
+                            'education' => $request->education,
+                            'city' => $request->parent_city,
+                            'state' => $request->parent_state,
+                            'mobile_no' => $request->parent_mobile_no,
+                            'address' => $request->address,
+                            'email' => $request->parent_email,
+                            'active' => "1",
+                        ]);
+                    }
 
-                // add User
-                $userParent = new User();
-                $userParent->name = $request->parent_name;
-                $userParent->user_id = $parentId;
-                $userParent->role_id = "5";
-                $userParent->branch_id = $request->branch_id;
-                $userParent->email = $request->parent_email;
-                $userParent->password = bcrypt($request->parent_password);
-                $userParent->save();
+                    if (!$parentId) {
+                        return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong add Parent']);
+                    } else {
+        
+                        // add User
+                        $userParent = new User();
+                        $userParent->name = $request->parent_name;
+                        $userParent->user_id = $parentId;
+                        $userParent->role_id = "5";
+                        $userParent->branch_id = $request->branch_id;
+                        $userParent->email = $request->parent_email;
+                        $userParent->password = bcrypt($request->parent_password);
+                        $userParent->save();
+                    }
+                }
+                
             }
 
             if ($conn->table('students')->where('email', '=', $request->email)->count() > 0) {
                 return $this->send422Error('Student Email Already Exist', ['error' => 'Student Email Already Exist']);
             } else {
 
-                $extension = $request->file_extension;
-                $fileName = 'UIMG_' . date('Ymd') . uniqid() . $extension;
-
-                $base64 = base64_decode($request->photo);
-                $file = base_path() . '/public/users/images/' . $fileName;
-                $suc = file_put_contents($file, $base64);
+                $fileName = "";
+                if ($request->photo) {
+                    $extension = $request->file_extension;
+                    $fileName = 'UIMG_' . date('Ymd') . uniqid() . $extension;
+            
+                    $base64 = base64_decode($request->photo);
+                    $file = base_path() . '/public/users/images/' . $fileName;
+                    $suc = file_put_contents($file, $base64);
+                }
+                
 
                 $studentId = $conn->table('students')->insertGetId([
                     'year' => $request->year,
@@ -7528,7 +7554,7 @@ class ApiController extends BaseController
                 if (isset($request->semester_id)) {
                     $semester_id = $request->semester_id;
                 }
-
+                
                 $enroll = $conn->table('enrolls')->insert([
                     'student_id' => $studentId,
                     'class_id' => $request->class_id,
@@ -8505,7 +8531,7 @@ class ApiController extends BaseController
     // update Student
     public function updateStudent(Request $request)
     {
-
+        
         $validator = \Validator::make($request->all(), [
             'student_id' => 'required',
             'parent_id' => 'required',
@@ -8524,12 +8550,6 @@ class ApiController extends BaseController
 
             'branch_id' => 'required',
             'token' => 'required',
-
-            'parent_name' => 'required',
-            'relation' => 'required',
-            'occupation' => 'required',
-            'parent_mobile_no' => 'required',
-            'parent_email' => 'required',
         ]);
 
         $previous['school_name'] = $request->school_name;
@@ -8546,54 +8566,15 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // insert data
-            // return $request['parent_email'];
-            if ($conn->table('parent')->where([['email', '=', $request->parent_email], ['id', '!=', $request->parent_id]])->count() > 0) {
-                return $this->send422Error('Parent Email Already Exist', ['error' => 'Parent Email Already Exist']);
-            } else {
 
-                // $staffConn->table('staff_departments')->where('id', $id)->update([
-                $parentId = $conn->table('parent')->where('id', $request->parent_id)->update([
-                    'name' => $request->parent_name,
-                    'relation' => $request->relation,
-                    'father_name' => $request->father_name,
-                    'mother_name' => $request->mother_name,
-                    'occupation' => $request->occupation,
-                    'income' => $request->income,
-                    'education' => $request->education,
-                    'city' => $request->parent_city,
-                    'state' => $request->parent_state,
-                    'mobile_no' => $request->parent_mobile_no,
-                    'address' => $request->address,
-                    'email' => $request->parent_email,
-                    'active' => "1",
-                ]);
-            }
-
-            // return $parentId;
-            // dd($parentId->id);
-
-            if (!$request->parent_id) {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong add Parent']);
-            } else {
-
-
-                // add User
-                $userParent = User::where([['email', '=', $request->parent_email], ['user_id', '=', $request->parent_id], ['role_id', '=', "5"], ['branch_id', '=', $request->branch_id]])
-                    ->update([
-                        'name' => $request->parent_name,
-                        'email' => $request->parent_email
-                    ]);
-            }
-
-            // dd($userParent);
             if ($conn->table('students')->where([['email', '=', $request->email], ['id', '!=', $request->student_id]])->count() > 0) {
                 return $this->send422Error('Student Email Already Exist', ['error' => 'Student Email Already Exist']);
             } else {
-
+                
                 if ($request->photo) {
 
                     $extension = $request->file_extension;
-
+                    
                     $fileName = 'UIMG_' . date('Ymd') . uniqid() . $extension;
 
                     // return $fileName;
@@ -8602,7 +8583,7 @@ class ApiController extends BaseController
                     $file = base_path() . $path . $fileName;
                     $suc = file_put_contents($file, $base64);
 
-
+                   
                     if ($request->old_photo) {
                         if (\File::exists(base_path($path . $request->old_photo))) {
                             \File::delete(base_path($path . $request->old_photo));
@@ -8611,7 +8592,7 @@ class ApiController extends BaseController
                 } else {
                     $fileName = $request->old_photo;
                 }
-
+                
 
                 $studentId = $conn->table('students')->where('id', $request->student_id)->update([
                     'parent_id' => $request->parent_id,
@@ -8651,7 +8632,7 @@ class ApiController extends BaseController
                 if (isset($request->semester_id)) {
                     $semester_id = $request->semester_id;
                 }
-
+                
                 $enroll = $conn->table('enrolls')->where('student_id', $request->student_id)->update([
                     'class_id' => $request->class_id,
                     'section_id' => $request->section_id,
@@ -8672,13 +8653,37 @@ class ApiController extends BaseController
             } else {
                 // add User
 
-                $query = User::where([['email', '=', $request->email], ['user_id', '=', $request->student_id], ['role_id', '=', "6"], ['branch_id', '=', $request->branch_id]])
-                    ->update([
-                        'name' => $studentName,
-                        'email' => $request->email
+                $password = $request->password;
+                if ($password) {
+
+                    $passvalidator = \Validator::make($request->all(), [
+                        'password' => 'required|min:6',
+                        'confirm_password' => 'required|same:password|min:6',
                     ]);
 
+                    if (!$passvalidator->passes()) {
+                        return $this->send422Error('Validation error.', ['error' => $passvalidator->errors()->toArray()]);
+                    } else {
 
+                        $query = User::where([['user_id', '=', $request->student_id], ['role_id', '=', "6"], ['branch_id', '=', $request->branch_id]])
+                                        ->update([
+                                            'name'=> $studentName,
+                                            'email'=> $request->email,
+                                            'password'=> bcrypt($request->password)
+                                        ]);
+                }
+                    
+                } else {
+                    $query = User::where([['user_id', '=', $request->student_id], ['role_id', '=', "6"], ['branch_id', '=', $request->branch_id]])
+                                    ->update([
+                                        'name'=> $studentName,
+                                        'email'=> $request->email
+                                    ]);
+                }
+
+                
+
+               
                 $success = [];
                 if (!$query) {
                     return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
@@ -8736,33 +8741,54 @@ class ApiController extends BaseController
         }
     }
 
-    // // delete Student
-    // public function deleteStudent(Request $request)
-    // {
-    //     $id = $request->id;
-    //     $validator = \Validator::make($request->all(), [
-    //         'token' => 'required',
-    //         'branch_id' => 'required',
-    //         'id' => 'required',
-    //     ]);
+    // delete Student
+    public function deleteStudent(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
 
-    //     if (!$validator->passes()) {
-    //         return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-    //     } else {
-    //         // create new connection
-    //         $conn = $this->createNewConnection($request->branch_id);
-    //         // get data
-    //         $student = User::where([['user_id', '=', $id], ['role_id', '=', "6"], ['branch_id', '=', $request->branch_id]])->delete();
-    //         $enroll = $conn->table('enrolls')->where('student_id', $id)->delete();
-    //         $query = $conn->table('students')->where('id', $id)->delete();
-    //         $success = [];
-    //         if ($query) {
-    //             return $this->successResponse($success, 'Student have been deleted successfully');
-    //         } else {
-    //             return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-    //         }
-    //     }
-    // }
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $path = '/public/users/images/';
+            $data = $conn->table('students as s')->select('s.photo','e.*')
+                            ->leftJoin('enrolls as e', 's.id', '=', 'e.student_id')
+                            ->where('s.id', $id)
+                            ->first();
+            $imageDelete = $data->photo;
+            if ($imageDelete) {
+                if (\File::exists(base_path($path . $imageDelete))) {
+                    \File::delete(base_path($path . $imageDelete));
+                }
+            }
+            // $studentDelete = 1;
+            $studentDelete = User::where([['user_id', '=', $id], ['role_id', '=', "6"], ['branch_id', '=', $request->branch_id]])->delete();
+            $enroll = $conn->table('enrolls')->where('student_id', $id)->delete();
+            $query = $conn->table('students')->where('id', $id)->delete();
+
+            $success = $conn->table('enrolls as e')->select('s.id','s.first_name','s.last_name','s.register_no','s.roll_no','s.mobile_no','s.email','s.gender')
+                                                    ->leftJoin('students as s', 'e.student_id', '=', 's.id')
+                                                    ->where([
+                                                        ['e.class_id', $data->class_id],
+                                                        ['e.semester_id', $data->semester_id],
+                                                        ['e.session_id', $data->session_id],
+                                                        ['e.section_id', $data->section_id]
+                                                    ])
+                                                    ->get()->toArray();
+            if ($studentDelete) {
+                return $this->successResponse($success, 'Student have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
 
     // addParent
     public function addParent(Request $request)
@@ -8889,13 +8915,21 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $parentDetails = $conn->table('parent')->where('id', $id)->first();
+            $parentDetails['parent'] = $conn->table('parent')->where('id', $id)->first();
+            $parentDetails['childs'] = $conn->table('students as s')->select('s.id','s.first_name','s.last_name','s.photo','c.name as class_name','sec.name as section_name')
+                                            ->leftJoin('enrolls as e', 'e.student_id', '=', 's.id')
+                                            ->leftJoin('classes as c', 'e.class_id', '=', 'c.id')
+                                            ->leftJoin('sections as sec', 'e.section_id', '=', 'sec.id')
+                                            ->where('parent_id', $id)->get();
+
             return $this->successResponse($parentDetails, 'Parent row fetch successfully');
         }
     }
     // update Parent
     public function updateParent(Request $request)
     {
+
+        // return $request;
         $id = $request->id;
         $validator = \Validator::make($request->all(), [
             'id' => 'required',
@@ -8922,7 +8956,7 @@ class ApiController extends BaseController
                 if ($request->photo) {
 
                     $extension = $request->file_extension;
-
+                    
                     $fileName = 'UIMG_' . date('Ymd') . uniqid() . $extension;
 
                     // return $fileName;
@@ -8931,7 +8965,7 @@ class ApiController extends BaseController
                     $file = base_path() . $path . $fileName;
                     $suc = file_put_contents($file, $base64);
 
-
+                   
                     if ($request->old_photo) {
                         if (\File::exists(base_path($path . $request->old_photo))) {
                             \File::delete(base_path($path . $request->old_photo));
@@ -8941,12 +8975,40 @@ class ApiController extends BaseController
                     $fileName = $request->old_photo;
                 }
 
+                $password = $request->password;
+               
+                if ($password) {
 
-                $parent = User::where([['email', '=', $request->email], ['user_id', '=', $id], ['role_id', '=', "5"], ['branch_id', '=', $request->branch_id]])
-                    ->update([
-                        'name' => $request->name,
-                        'email' => $request->email
+                    
+                    $passvalidator = \Validator::make($request->all(), [
+                        'password' => 'required|min:6',
+                        'confirm_password' => 'required|same:password|min:6',
                     ]);
+
+                    // return $passvalidator;
+
+                    if (!$passvalidator->passes()) {
+                        return $this->send422Error('Validation error.', ['error' => $passvalidator->errors()->toArray()]);
+                    } else {
+
+                        $updatePassword = bcrypt($request->password);
+                        $parent = User::where([['user_id', '=', $id], ['role_id', '=', "5"], ['branch_id', '=', $request->branch_id]])
+                        ->update([
+                            'name'=> $request->name,
+                            'email'=> $request->email,
+                            'password'=> $updatePassword
+                        ]);
+
+                    }
+                } else {
+                    $parent = User::where([['user_id', '=', $id], ['role_id', '=', "5"], ['branch_id', '=', $request->branch_id]])
+                    ->update([
+                        'name'=> $request->name,
+                        'email'=> $request->email
+                    ]);
+                }
+                
+                
                 // update data
                 $query = $staffConn->table('parent')->where('id', $id)->update([
                     'name' => $request->name,

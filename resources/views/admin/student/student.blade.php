@@ -145,6 +145,7 @@
 @section('scripts')
 <script>
     var sectionByClass = "{{ route('admin.section_by_class') }}";
+    var studentDelete = "{{ route('admin.student.delete') }}";
 </script>
 <script src="{{ asset('js/custom/student.js') }}"></script>
 @endsection

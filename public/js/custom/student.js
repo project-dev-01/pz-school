@@ -73,20 +73,7 @@ $(function () {
                 required: true,
                 minlength: 6
             },          
-            txt_name: "required",
-            txt_relation: "required",
-            txt_occupation: "required",            
-            txt_guardian_mobileno: "required",            
-            txt_guardian_email: "required",  
-            
-            txt_guardian_pwd: {
-                required: true,
-                minlength: 6
-            },
-            txt_guardian_retyppwd: {
-                required: true,
-                minlength: 6
-            },          
+            txt_name: "required",      
         }
     });
 
@@ -134,9 +121,11 @@ $(function () {
                 id: id
             }, function (data) {
                 if (data.code == 200) {
-                    $('#student-table').DataTable().ajax.reload(null, false);
+                    $("#student").show("slow");
+                    $("#student_table").html(data.table);
                     toastr.success(data.message);
                 } else {
+                    $("#student").hide("slow");
                     toastr.error(data.message);
                 }
             }, 'json');

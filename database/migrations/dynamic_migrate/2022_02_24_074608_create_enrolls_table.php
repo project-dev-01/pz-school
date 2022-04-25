@@ -20,6 +20,7 @@ class CreateEnrollsTable extends Migration
             $table->integer('section_id');
             $table->integer('roll');
             $table->integer('session_id')->default('0');
+            $table->integer('semester_id')->default('0');
             $table->timestamps();
         });
     }

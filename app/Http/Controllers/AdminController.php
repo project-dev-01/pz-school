@@ -821,6 +821,7 @@ class AdminController extends Controller
         $gethostel = Helper::GetMethod(config('constants.api.hostel_list'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
+        $parent = Helper::GetMethod(config('constants.api.parent_list'));
         // dd($gethostel);
         return view(
             'admin.admission.index',
@@ -830,6 +831,7 @@ class AdminController extends Controller
                 'hostel' => $gethostel['data'],
                 'session' => $session['data'],
                 'semester' => $semester['data'],
+                'parent' => $parent['data'],
             ]
         );
         // return view('admin.admission.index');
@@ -2501,13 +2503,15 @@ class AdminController extends Controller
     // add admission
     public function addAdmission(Request $request)
     {
-
+        $base64 = "";
+        $extension = "";
         $file = $request->file('photo');
-        $path = $file->path();
-        $data = file_get_contents($path);
-        $base64 = base64_encode($data);
-        $extension = $file->getClientOriginalExtension();
-
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        }
         $data = [
             'year' => $request->year,
             'register_no' => $request->txt_regiter_no,
@@ -2544,6 +2548,9 @@ class AdminController extends Controller
             'password' => $request->txt_pwd,
             'confirm_password' => $request->txt_retype_pwd,
 
+            'check_guardian' => $request->check_guardian,
+
+            'parent_id' => $request->parent_id,
             'parent_name' => $request->txt_name,
             'relation' => $request->txt_relation,
             'father_name' => $request->txt_fathernam,
@@ -2666,20 +2673,19 @@ class AdminController extends Controller
             "section_id" => $request->section_id,
             "semester_id" => $request->semester_id,
             "session_id" => $request->session_id,
-
+            
         ];
         // dd($data);
         $student = Helper::PostMethod(config('constants.api.student_list'), $data);
-
-
+        
+       
         if ($student['code'] == "200") {
 
             $output = "";
             $row = 1;
             if ($student['data']) {
                 foreach ($student['data'] as $stu) {
-
-                    $edit = route('admin.student.details', $stu['id']);
+                    $edit = route('admin.student.details',$stu['id']);
                     $output .= '<tr>
                                     <td>' . $row . '</td>
                                     <td>' . $stu['first_name'] . ' ' . $stu['last_name'] . '</td>
@@ -2690,7 +2696,8 @@ class AdminController extends Controller
                                     <td>' . $stu['mobile_no'] . '</td>
                                     <td>
                                         <div class="button-list">
-                                        <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
+                                            <a href="'.$edit.'" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
+                                            <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $stu['id'] . '" id="deleteStudentBtn"><i class="fe-trash-2"></i></a>
                                         </div>
                                     </td>
 
@@ -2699,14 +2706,14 @@ class AdminController extends Controller
                 }
             } else {
                 $output .= '<tr>
-                                <td colspan="7"> No Data Available</td>
+                                <td colspan="8"> No Data Available</td>
                             </tr>';
             }
             $student['table'] = $output;
         }
         // dd($output);  
         return $student;
-    }
+    }   
 
     // get Student  details
     public function getStudentDetails($id)
@@ -2722,6 +2729,7 @@ class AdminController extends Controller
         $session = Helper::GetMethod(config('constants.api.session'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $student = Helper::PostMethod(config('constants.api.student_details'), $data);
+        $parent = Helper::GetMethod(config('constants.api.parent_list'));
 
         $prev = json_decode($student['data']['student']['previous_details']);
 
@@ -2734,6 +2742,7 @@ class AdminController extends Controller
             'admin.student.edit',
             [
                 'class' => $getclass['data'],
+                'parent' => $parent['data'],
                 'transport' => $gettransport['data'],
                 'hostel' => $gethostel['data'],
                 'session' => $session['data'],
@@ -2800,18 +2809,9 @@ class AdminController extends Controller
             'session_id' => $request->session_id,
             'semester_id' => $request->semester_id,
 
-            'parent_name' => $request->txt_name,
-            'relation' => $request->txt_relation,
-            'father_name' => $request->txt_fathernam,
-            'mother_name' => $request->txt_mothernam,
-            'occupation' => $request->txt_occupation,
-            'income' => $request->txt_income,
-            'education' => $request->txt_eduction,
-            'parent_city' => $request->txt_guardian_city,
-            'parent_state' => $request->txt_guardian_state,
-            'parent_mobile_no' => $request->txt_guardian_mobileno,
-            'address' => $request->txt_guardian_address,
-            'parent_email' => $request->txt_guardian_email,
+            'parent_id' => $request->txt_name,
+            'password' => $request->password,
+            'confirm_password' => $request->confirm_password,
 
         ];
 
@@ -2822,15 +2822,50 @@ class AdminController extends Controller
     }
 
     // DELETE Student Details
-    // public function deleteStudent(Request $request)
-    // {
-    //     $data = [
-    //         'id' => $request->id
-    //     ];
+    public function deleteStudent(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
 
-    //     $response = Helper::PostMethod(config('constants.api.student_delete'), $data);
-    //     return $response;
-    // }
+        $student = Helper::PostMethod(config('constants.api.student_delete'), $data);
+
+        // dd($student);
+        if ($student['code'] == "200") {
+
+            $output = "";
+            $row = 1;
+            if ($student['data']) {
+                foreach ($student['data'] as $stu) {
+
+                    $edit = route('admin.student.details',$stu['id']);
+                    $output .= '<tr>
+                                    <td>' . $row . '</td>
+                                    <td>' . $stu['first_name'] . ' ' . $stu['last_name'] . '</td>
+                                    <td>' . $stu['register_no'] . '</td>
+                                    <td>' . $stu['roll_no'] . '</td>
+                                    <td>' . $stu['gender'] . '</td>
+                                    <td>' . $stu['email'] . '</td>
+                                    <td>' . $stu['mobile_no'] . '</td>
+                                    <td>
+                                        <div class="button-list">
+                                        <a href="'.$edit.'" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
+                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $stu['id'] . '" id="deleteStudentBtn"><i class="fe-trash-2"></i></a>
+                                        </div>
+                                    </td>
+
+                                </tr>';
+                    $row++;
+                }
+            } else {
+                $output .= '<tr>
+                                <td colspan="7"> No Data Available</td>
+                            </tr>';
+            }
+            $student['table'] = $output;
+        }
+        return $student;
+    }
 
     public function createParent()
     {
@@ -2902,7 +2937,8 @@ class AdminController extends Controller
         return view(
             'admin.parent.edit',
             [
-                'parent' => $response['data'],
+                'parent' => $response['data']['parent'],
+                'childs' => $response['data']['childs'],
             ]
         );
     }

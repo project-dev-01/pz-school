@@ -48,8 +48,6 @@ $(function () {
             },
             occupation: "required",
             mobile_no: "required",
-            password: "required",
-            confirm_password: "required",
         }
     });
 

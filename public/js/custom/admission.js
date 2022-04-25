@@ -2,6 +2,8 @@ $(function () {
     // rules validation
     $("#addadmission").validate({
         rules: {
+            
+            parent_id: "required",
             btwyears: "required",
             txt_regiter_no: "required",
             txt_emailid: {
@@ -62,6 +64,20 @@ $(function () {
                     }
                 }
             });
+        }
+    });
+
+
+    
+
+    $("#check_guardian").on("change", function () {
+        // alert($(this).is(":checked"));
+        if ($(this).is(":checked")) {
+            $("#parent_list").show("slow");
+            $("#guardian_form").hide("slow");
+        } else {
+            $("#guardian_form").show("slow");
+            $("#parent_list").hide("slow");
         }
     });
 
