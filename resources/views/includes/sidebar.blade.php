@@ -146,14 +146,14 @@
                             </li>
                             <li>
                                 <a href="{{ route('super_admin.employee')}}" class="nav-link {{ (request()->is('super_admin/employee')) ? 'active' : '' }}">
-                                     <span>Add Employee</span>
+                                    <span>Add Employee</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('super_admin.listemployee')}}" class="nav-link {{ (request()->is('super_admin/listemployee')) ? 'active' : '' }}">
                                     <span>Employee List</span>
                                 </a>
-                            </li>                       
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -211,7 +211,7 @@
                 </li>
                 <li>
                     <a href="#sidebarTasks" data-toggle="collapse">
-                    <i data-feather="external-link" class="icon-dual"></i>
+                        <i data-feather="external-link" class="icon-dual"></i>
                         <span> Tasks </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -253,7 +253,7 @@
                 </li>
                 <li>
                     <a href="#sidebartimeTable" data-toggle="collapse">
-                    <i data-feather="external-link" class="icon-dual"></i>
+                        <i data-feather="external-link" class="icon-dual"></i>
                         <span> Time Table </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -282,7 +282,7 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="#sidebarMultilevel2" data-toggle="collapse">
-                                <i data-feather="book-open" class="icons-xs icon-dual"></i> &nbsp;
+                                    <i data-feather="book-open" class="icons-xs icon-dual"></i> &nbsp;
                                     Exam <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarMultilevel2">
@@ -307,14 +307,14 @@
                                                 <span>Exam Setup</span>
                                             </a>
                                         </li>
-                                        
+
                                     </ul>
                                 </div>
                             </li>
                             <li>
                                 <a href="#sidebarSchedule" data-toggle="collapse">
-                                <i class="fas fa-dna"></i> &nbsp;
-                                Exam Schedule <span class="menu-arrow"></span>
+                                    <i class="fas fa-dna"></i> &nbsp;
+                                    Exam Schedule <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarSchedule">
                                     <ul class="nav-second-level">
@@ -333,8 +333,8 @@
                             </li>
                             <li>
                                 <a href="#sidebarMarks" data-toggle="collapse">
-                                <i class="fas fa-marker"></i> &nbsp;
-                                Marks <span class="menu-arrow"></span>
+                                    <i class="fas fa-marker"></i> &nbsp;
+                                    Marks <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarMarks">
                                     <ul class="nav-second-level">
@@ -353,7 +353,7 @@
                             </li>
                             <li>
                                 <a href="#sidebarResult" data-toggle="collapse">
-                                <i data-feather="book-open" class="icons-xs icon-dual"></i> &nbsp;
+                                    <i data-feather="book-open" class="icons-xs icon-dual"></i> &nbsp;
                                     Exam Results<span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarResult">
@@ -364,30 +364,30 @@
                                             </a>
                                         </li>
                                         <li>
-                                        <a href="{{ route('super_admin.exam_results.bysubject')}}" class="nav-link {{ (request()->is('super_admin/exam_results')) ? 'active' : '' }}">
+                                            <a href="{{ route('super_admin.exam_results.bysubject')}}" class="nav-link {{ (request()->is('super_admin/exam_results')) ? 'active' : '' }}">
                                                 <span>By Subject</span>
                                             </a>
                                         </li>
                                         <li>
-                                        <a href="{{ route('super_admin.exam_results.bystudent')}}" class="nav-link {{ (request()->is('super_admin/exam_results')) ? 'active' : '' }}">
+                                            <a href="{{ route('super_admin.exam_results.bystudent')}}" class="nav-link {{ (request()->is('super_admin/exam_results')) ? 'active' : '' }}">
                                                 <span>By Student</span>
                                             </a>
-                                        </li>  
+                                        </li>
                                         <li>
-                                        <a href="{{ route('super_admin.exam_results.overall')}}" class="nav-link {{ (request()->is('super_admin/exam_results')) ? 'active' : '' }}">
+                                            <a href="{{ route('super_admin.exam_results.overall')}}" class="nav-link {{ (request()->is('super_admin/exam_results')) ? 'active' : '' }}">
                                                 <span>Overall</span>
                                             </a>
-                                        </li>                                     
+                                        </li>
                                         <li>
-                                             <a href="{{ route('super_admin.exam.result')}}" class="nav-link {{ (request()->is('super_admin/exam*')) ? 'active' : '' }}">                                         
-                                            <span>Individual Result </span>
-                                             </a>
-                                         </li>
+                                            <a href="{{ route('super_admin.exam.result')}}" class="nav-link {{ (request()->is('super_admin/exam*')) ? 'active' : '' }}">
+                                                <span>Individual Result </span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
                         </ul>
-                       
+
                     </div>
                 </li>
                 <li>
@@ -515,7 +515,7 @@
                     </a>
                     <div class="collapse" id="sidebarLeaveManage">
                         <ul class="nav-second-level">
-                        <li>
+                            <li>
                                 <a href="{{ route('super_admin.leave_management.allleaves')}}" class="nav-link {{ (request()->is('super_admin/leave_management*')) ? 'active' : '' }}">
                                     <span> All Leave</span>
                                 </a>
@@ -529,7 +529,7 @@
                                 <a href="{{ route('super_admin.leave_management.approvalleave')}}" class="nav-link {{ (request()->is('super_admin/leave_management*')) ? 'active' : '' }}">
                                     <span> Leave Approval </span>
                                 </a>
-                            </li>                          
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -540,8 +540,8 @@
                     </a>
                 </li>
                 <li>
-                <a href="{{ route('super_admin.schoolcrm.app.form')}}" target=”_blank” class="nav-link {{ (request()->is('application-form')) ? 'active' : '' }}">
-                     
+                    <a href="{{ route('super_admin.schoolcrm.app.form')}}" target=”_blank” class="nav-link {{ (request()->is('application-form')) ? 'active' : '' }}">
+
                         <i data-feather="external-link" class="icon-dual"></i>
                         <span> Application Form </span>
                     </a>
@@ -655,20 +655,20 @@
                             </li>
                             <li>
                                 <a href="{{ route('admin.employee')}}" class="nav-link {{ (request()->is('admin/employee')) ? 'active' : '' }}">
-                                     <span>Add Employee</span>
+                                    <span>Add Employee</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.listemployee')}}" class="nav-link {{ (request()->is('admin/listemployee')) ? 'active' : '' }}">
                                     <span>Employee List</span>
                                 </a>
-                            </li>                       
+                            </li>
                         </ul>
                     </div>
                 </li>
                 <li>
                     <a href="#sidebartimeTable" data-toggle="collapse">
-                    <i data-feather="external-link" class="icon-dual"></i>
+                        <i data-feather="external-link" class="icon-dual"></i>
                         <span> Time Table </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -688,32 +688,57 @@
                     </div>
                 </li>
                 <li>
-                    <a href="#sidebarAcademic" data-toggle="collapse">
+                    <a href="#sideBarAcademic" data-toggle="collapse">
                         <i data-feather="home"></i>
-                        <span> Academic </span>
+                        <span> Academic</span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sidebarAcademic">
+                    <div class="collapse" id="sideBarAcademic">
                         <ul class="nav-second-level">
-                        <li>
-                                <a href="{{ route('admin.section')}}" class="nav-link {{ (request()->is('admin/section*')) ? 'active' : '' }}">
-                                    <span> Section </span>
+                            <li>
+                                <a href="#sidebarForClassSec" data-toggle="collapse">
+                                    <i class="fe-book-open"></i> &nbsp;
+                                    Class & Sections <span class="menu-arrow"></span>
                                 </a>
+                                <div class="collapse" id="sidebarForClassSec">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admin.section')}}" class="nav-link {{ (request()->is('admin/section*')) ? 'active' : '' }}">
+                                                <span> Section </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.classes')}}" class="nav-link {{ (request()->is('admin/classes*')) ? 'active' : '' }}">
+                                                <span> Classes </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.section_allocation')}}" class="nav-link {{ (request()->is('admin/section_allocation*')) ? 'active' : '' }}">
+                                                <span> Sections Allocation </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.assign_teacher')}}" class="nav-link {{ (request()->is('admin/assign_teacher*')) ? 'active' : '' }}">
+                                                <span> Assign Class Teacher </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
                             <li>
-                                <a href="{{ route('admin.classes')}}" class="nav-link {{ (request()->is('admin/classes*')) ? 'active' : '' }}">
-                                    <span> Classes </span>
+                                <a href="#sidebarForSub" data-toggle="collapse">
+                                    <i class="fe-book-open"></i> &nbsp;
+                                    Subjects <span class="menu-arrow"></span>
                                 </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('admin.section_allocation')}}" class="nav-link {{ (request()->is('admin/section_allocation*')) ? 'active' : '' }}">
-                                    <span> Sections Allocation </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('admin.assign_teacher')}}" class="nav-link {{ (request()->is('admin/assign_teacher*')) ? 'active' : '' }}">
-                                    <span> Assign Class Teacher </span>
-                                </a>
+                                <div class="collapse" id="sidebarForSub">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admin.subjects')}}" class="nav-link {{ (request()->is('admin/subjects*')) ? 'active' : '' }}">
+                                                <span> Subjects </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -741,7 +766,7 @@
                 </li>
                 <li>
                     <a href="#sidebarTasks" data-toggle="collapse">
-                    <i data-feather="external-link" class="icon-dual"></i>
+                        <i data-feather="external-link" class="icon-dual"></i>
                         <span> Tasks </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -791,7 +816,7 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="#sidebarMultilevel2" data-toggle="collapse">
-                                <i data-feather="book-open" class="icons-xs icon-dual"></i> &nbsp;
+                                    <i data-feather="book-open" class="icons-xs icon-dual"></i> &nbsp;
                                     Exam <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarMultilevel2">
@@ -816,14 +841,14 @@
                                                 <span>Exam Setup</span>
                                             </a>
                                         </li>
-                                        
+
                                     </ul>
                                 </div>
                             </li>
                             <li>
                                 <a href="#sidebarSchedule" data-toggle="collapse">
-                                <i class="fas fa-dna"></i> &nbsp;
-                                Exam Schedule <span class="menu-arrow"></span>
+                                    <i class="fas fa-dna"></i> &nbsp;
+                                    Exam Schedule <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarSchedule">
                                     <ul class="nav-second-level">
@@ -842,8 +867,8 @@
                             </li>
                             <li>
                                 <a href="#sidebarMarks" data-toggle="collapse">
-                                <i class="fas fa-marker"></i> &nbsp;
-                                Marks <span class="menu-arrow"></span>
+                                    <i class="fas fa-marker"></i> &nbsp;
+                                    Marks <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarMarks">
                                     <ul class="nav-second-level">
@@ -855,16 +880,16 @@
                                     </ul>
                                 </div>
                             </li>
-                            
+
                             <li>
-                                <a href="{{ route('admin.test_result')}}"  class="nav-link {{ (request()->is('admin/test_result*')) ? 'active' : '' }}">
-                                <i class="fas fa-marker"></i> &nbsp;
+                                <a href="{{ route('admin.test_result')}}" class="nav-link {{ (request()->is('admin/test_result*')) ? 'active' : '' }}">
+                                    <i class="fas fa-marker"></i> &nbsp;
                                     <span> Test Result </span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#sidebarResult" data-toggle="collapse">
-                                <i data-feather="book-open" class="icons-xs icon-dual"></i> &nbsp;
+                                    <i data-feather="book-open" class="icons-xs icon-dual"></i> &nbsp;
                                     Exam Results<span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarResult">
@@ -875,25 +900,25 @@
                                             </a>
                                         </li>
                                         <li>
-                                        <a href="{{ route('admin.exam_results.bysubject')}}" class="nav-link {{ (request()->is('admin/exam_results')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.exam_results.bysubject')}}" class="nav-link {{ (request()->is('admin/exam_results')) ? 'active' : '' }}">
                                                 <span>By Subject</span>
                                             </a>
                                         </li>
                                         <li>
-                                        <a href="{{ route('admin.exam_results.bystudent')}}" class="nav-link {{ (request()->is('admin/exam_results')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.exam_results.bystudent')}}" class="nav-link {{ (request()->is('admin/exam_results')) ? 'active' : '' }}">
                                                 <span>By Student</span>
                                             </a>
-                                        </li>  
+                                        </li>
                                         <li>
-                                        <a href="{{ route('admin.exam_results.overall')}}" class="nav-link {{ (request()->is('admin/exam_results')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.exam_results.overall')}}" class="nav-link {{ (request()->is('admin/exam_results')) ? 'active' : '' }}">
                                                 <span>Overall</span>
                                             </a>
-                                        </li>                                     
+                                        </li>
                                         <li>
-                                             <a href="{{ route('admin.exam.result')}}" class="nav-link {{ (request()->is('admin/exam*')) ? 'active' : '' }}">                                         
-                                            <span>Individual Result </span>
-                                             </a>
-                                         </li>
+                                            <a href="{{ route('admin.exam.result')}}" class="nav-link {{ (request()->is('admin/exam*')) ? 'active' : '' }}">
+                                                <span>Individual Result </span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
@@ -1041,9 +1066,9 @@
                         <i data-feather="airplay" class="icon-dual"></i>
                         <span> Dashboards </span>
                     </a>
-                </li>  
+                </li>
                 <li>
-                <a href="#sidebarAdmission" data-toggle="collapse">
+                    <a href="#sidebarAdmission" data-toggle="collapse">
                         <i class="fe-edit"></i>
                         <span> Admission </span>
                         <span class="menu-arrow"></span>
@@ -1115,14 +1140,14 @@
                             </li>
                             <li>
                                 <a href="{{ route('staff.employee')}}" class="nav-link {{ (request()->is('staff/employee')) ? 'active' : '' }}">
-                                     <span>Add Employee</span>
+                                    <span>Add Employee</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('staff.listemployee')}}" class="nav-link {{ (request()->is('staff/listemployee')) ? 'active' : '' }}">
                                     <span>Employee List</span>
                                 </a>
-                            </li>                       
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -1134,7 +1159,7 @@
                     </a>
                     <div class="collapse" id="sidebarAcademic">
                         <ul class="nav-second-level">
-                        <li>
+                            <li>
                                 <a href="{{ route('staff.section')}}" class="nav-link {{ (request()->is('staff/section*')) ? 'active' : '' }}">
                                     <span> Section </span>
                                 </a>
@@ -1209,7 +1234,7 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="#sidebarMultilevel2" data-toggle="collapse">
-                                <i data-feather="book-open" class="icons-xs icon-dual"></i> &nbsp;
+                                    <i data-feather="book-open" class="icons-xs icon-dual"></i> &nbsp;
                                     Exam <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarMultilevel2">
@@ -1234,7 +1259,7 @@
                                                 <span>Exam Setup</span>
                                             </a>
                                         </li>
-                                        
+
                                     </ul>
                                 </div>
                             </li>
@@ -1370,12 +1395,12 @@
                                 <a href="{{ route('staff.leave_management.applyleave')}}" class="nav-link {{ (request()->is('staff/leave_management*')) ? 'active' : '' }}">
                                     <span> Leave Apply </span>
                                 </a>
-                            </li>                        
+                            </li>
                         </ul>
                     </div>
-                </li>          
+                </li>
                 <li>
-                <a href="{{ route('staff.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('staff/forum*')) ? 'active' : '' }}">                     
+                    <a href="{{ route('staff.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('staff/forum*')) ? 'active' : '' }}">
                         <i data-feather="external-link" class="icon-dual"></i>
                         <span> Forum </span>
                     </a>
@@ -1385,7 +1410,7 @@
                         <i data-feather="settings" class="icon-dual"></i>
                         <span> Settings </span>
                     </a>
-                </li>                
+                </li>
                 <li>
                     <a href="{{ route('staff.faq.Index')}}" class="nav-link {{ (request()->is('staff/faq*')) ? 'active' : '' }}">
                         <i class="fas fa-question"></i>
@@ -1400,8 +1425,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('teacher.analyticrep.analyticreport')}}" class="nav-link {{ (request()->is('teacher/analyticrep*')) ? 'active' : '' }}">                    
-                        <i data-feather="activity" class="icon-dual"></i>.                     
+                    <a href="{{ route('teacher.analyticrep.analyticreport')}}" class="nav-link {{ (request()->is('teacher/analyticrep*')) ? 'active' : '' }}">
+                        <i data-feather="activity" class="icon-dual"></i>.
                         <span> Analytic </span>
                     </a>
                 </li>
@@ -1519,10 +1544,10 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarMultilevel">
-                        <ul class="nav-second-level">                            
+                        <ul class="nav-second-level">
                             <li>
                                 <a href="#sidebarResult" data-toggle="collapse">
-                                <i data-feather="book-open" class="icons-xs icon-dual"></i> &nbsp;
+                                    <i data-feather="book-open" class="icons-xs icon-dual"></i> &nbsp;
                                     Exam Results<span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarResult">
@@ -1533,98 +1558,98 @@
                                             </a>
                                         </li>
                                         <li>
-                                        <a href="{{ route('teacher.exam_results.bysubject')}}" class="nav-link {{ (request()->is('teacher/exam_results')) ? 'active' : '' }}">
+                                            <a href="{{ route('teacher.exam_results.bysubject')}}" class="nav-link {{ (request()->is('teacher/exam_results')) ? 'active' : '' }}">
                                                 <span>By Subject</span>
                                             </a>
                                         </li>
                                         <a href="{{ route('teacher.exam_results.bystudent')}}" class="nav-link {{ (request()->is('teacher/exam_results')) ? 'active' : '' }}">
-                                                <span>By Student</span>
-                                            </a>
-                                        </li>                                                                           
-                                    </ul>
-                                </div>
-                            </li>                  
-                            
-                        </ul>
-                       
-                    </div>
-                </li>
-                <li>
-                    <a href="#sidebarLeaveManage" data-toggle="collapse">
-                        <i data-feather="map"></i>
-                        <span> Leave Management </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarLeaveManage">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('teacher.leave_management.applyleave')}}" class="nav-link {{ (request()->is('teacher/leave_management*')) ? 'active' : '' }}">
-                                    <span> Leave Apply </span>
-                                </a>
-                            </li>                        
+                                            <span>By Student</span>
+                                        </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
-                <li>
-                <a href="{{ route('teacher.chat')}}" class="nav-link {{ (request()->is('teacher/chat*')) ? 'active' : '' }}">
-                     
-                    <i data-feather="message-square"></i>
-                        <span> Chat </span>
-                    </a>
-                </li>
-                <li>
-                <a href="{{ route('teacher.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('teacher/forum*')) ? 'active' : '' }}">
-                     
-                        <i data-feather="external-link" class="icon-dual"></i>
-                        <span> Forum </span>
-                    </a>
-                </li>
-                <li>
-                <a href="{{ route('schoolcrm.app.form')}}" target=”_blank” class="nav-link {{ (request()->is('application-form')) ? 'active' : '' }}">
-                     
-                        <i data-feather="external-link" class="icon-dual"></i>
-                        <span> Application Form </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('teacher.settings')}}" class="nav-link {{ (request()->is('teacher/settings*')) ? 'active' : '' }}">
-                        <i data-feather="settings" class="icon-dual"></i>
-                        <span> Settings </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('teacher.faq.Index')}}" class="nav-link {{ (request()->is('teacher/faq*')) ? 'active' : '' }}">
-                        <i class="fas fa-question"></i>
-                        <span> FAQs </span>
-                    </a>
-                </li>
-                @elseif(Session::get('role_id') == '5')
-                <li>
-                    <a href="{{ route('parent.dashboard')}}" class="nav-link {{ (request()->is('parent/dashboard')) ? 'active' : '' }}">
-                    <i class="fas fa-tachometer-alt"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('parent.analyticrep.analyticreport')}}" class="nav-link {{ (request()->is('parent/analyticrep*')) ? 'active' : '' }}">                    
-                        <i data-feather="activity" class="icon-dual"></i>.                     
-                        <span> Analytic </span>
-                    </a>
-                </li>           
-                <li>
-                    <a href="{{ route('parent.exam.schedule')}}" class="nav-link {{ (request()->is('parent/exam*')) ? 'active' : '' }}">
-                        <i class="fas fa-dna"></i> 
-                        
-                        <span> Exam Schedule </span>
-                    </a>
-                </li>    
-                <li>
-                    <a href="{{ route('parent.report_card')}}" class="nav-link {{ (request()->is('parent/report_card*')) ? 'active' : '' }}">
-                        <i data-feather="book" class="icons-xs icon-dual"></i>
-                        <span> Report Card </span>
-                    </a>
-                </li>       
-                <!-- <li>
+
+            </ul>
+
+        </div>
+        </li>
+        <li>
+            <a href="#sidebarLeaveManage" data-toggle="collapse">
+                <i data-feather="map"></i>
+                <span> Leave Management </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <div class="collapse" id="sidebarLeaveManage">
+                <ul class="nav-second-level">
+                    <li>
+                        <a href="{{ route('teacher.leave_management.applyleave')}}" class="nav-link {{ (request()->is('teacher/leave_management*')) ? 'active' : '' }}">
+                            <span> Leave Apply </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <a href="{{ route('teacher.chat')}}" class="nav-link {{ (request()->is('teacher/chat*')) ? 'active' : '' }}">
+
+                <i data-feather="message-square"></i>
+                <span> Chat </span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('teacher.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('teacher/forum*')) ? 'active' : '' }}">
+
+                <i data-feather="external-link" class="icon-dual"></i>
+                <span> Forum </span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('schoolcrm.app.form')}}" target=”_blank” class="nav-link {{ (request()->is('application-form')) ? 'active' : '' }}">
+
+                <i data-feather="external-link" class="icon-dual"></i>
+                <span> Application Form </span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('teacher.settings')}}" class="nav-link {{ (request()->is('teacher/settings*')) ? 'active' : '' }}">
+                <i data-feather="settings" class="icon-dual"></i>
+                <span> Settings </span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('teacher.faq.Index')}}" class="nav-link {{ (request()->is('teacher/faq*')) ? 'active' : '' }}">
+                <i class="fas fa-question"></i>
+                <span> FAQs </span>
+            </a>
+        </li>
+        @elseif(Session::get('role_id') == '5')
+        <li>
+            <a href="{{ route('parent.dashboard')}}" class="nav-link {{ (request()->is('parent/dashboard')) ? 'active' : '' }}">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('parent.analyticrep.analyticreport')}}" class="nav-link {{ (request()->is('parent/analyticrep*')) ? 'active' : '' }}">
+                <i data-feather="activity" class="icon-dual"></i>.
+                <span> Analytic </span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('parent.exam.schedule')}}" class="nav-link {{ (request()->is('parent/exam*')) ? 'active' : '' }}">
+                <i class="fas fa-dna"></i>
+
+                <span> Exam Schedule </span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('parent.report_card')}}" class="nav-link {{ (request()->is('parent/report_card*')) ? 'active' : '' }}">
+                <i data-feather="book" class="icons-xs icon-dual"></i>
+                <span> Report Card </span>
+            </a>
+        </li>
+        <!-- <li>
                     <a href="#sidebarLibrary" data-toggle="collapse">
                         <i class="fe-book-open"></i>
                         <span> Library </span>
@@ -1645,120 +1670,120 @@
                         </ul>
                     </div>
                 </li>       -->
-                <li>
-                    <a href="{{ route('parent.events')}}" class="nav-link {{ (request()->is('parent/events*')) ? 'active' : '' }}">
-                        <i class="fas fa-map"></i>
-                        <span> Events </span>
-                    </a>
-                </li>       
-                <li>
-                    <a href="#sidebarHomework" data-toggle="collapse">
-                        <i class="fe-book-open"></i>
-                        <span> Homework </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarHomework">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('parent.homework')}}" class="nav-link {{ (request()->is('parent/homework*')) ? 'active' : '' }}">
-                                    <span>Homework List</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>             
-                <li>
-                    <a href="{{ route('parent.attendance')}}" class="nav-link {{ (request()->is('super_admin/attendance/')) ? 'active' : '' }}">
-                        <i data-feather="map"></i>    
-                        <span> Attendance </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('parent.timetable.index')}}" class="nav-link {{ (request()->is('parent/timetable*')) ? 'active' : '' }}">
-                    <i data-feather="external-link" class="icon-dual"></i>
-                        <span> Time Table </span>
-                    </a>
-                </li>
-                <li>
-                <a href="{{ route('parent.chat')}}" class="nav-link {{ (request()->is('parent/chat*')) ? 'active' : '' }}">
-                    <i data-feather="message-square"></i>
-                        <span> Chat </span>
-                    </a>
-                </li>
-                <li>
-                <a href="{{ route('schoolcrm.app.form')}}" target=”_blank” class="nav-link {{ (request()->is('application-form')) ? 'active' : '' }}">
-                     
-                        <i data-feather="external-link" class="icon-dual"></i>
-                        <span> Application Form </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('parent.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('parent/forum*')) ? 'active' : '' }}">
-                        <i data-feather="external-link" class="icon-dual"></i>
-                        <span> Forum </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('parent.settings')}}" class="nav-link {{ (request()->is('parent/settings*')) ? 'active' : '' }}">
-                        <i data-feather="settings" class="icon-dual"></i>
-                        <span> Settings </span>
-                    </a>
-                </li>                
-                <li>
-                    <a href="{{ route('parent.faq.Index')}}" class="nav-link {{ (request()->is('parent/faq*')) ? 'active' : '' }}">
-                        <i class="fas fa-question"></i>
-                        <span> FAQs </span>
-                    </a>
-                </li>
-                @elseif(Session::get('role_id') == '6')
-                <li>
-                    <a href="{{ route('student.dashboard')}}" class="nav-link {{ (request()->is('student/dashboard*')) ? 'active' : '' }}">
-                        <i data-feather="airplay" class="icon-dual"></i>
-                        <span> Dashboards </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('student.analyticrep.analyticreport')}}" class="nav-link {{ (request()->is('student/analyticrep*')) ? 'active' : '' }}">                    
-                        <i data-feather="activity" class="icon-dual"></i>.                     
-                        <span> Analytic </span>
-                    </a>
-                </li> 
-                <li>
-                    <a href="{{ route('student.timetable')}}" class="nav-link {{ (request()->is('super_admin/timetable*')) ? 'active' : '' }}">
-                        <i data-feather="external-link" class="icon-dual"></i>
-                        <span> Time Table </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('student.exam.schedule')}}" class="nav-link {{ (request()->is('student/exam*')) ? 'active' : '' }}">
-                        <i class="fas fa-dna"></i> 
-                        
-                        <span> Exam Schedule </span>
-                    </a>
-                </li>  
-                <li>
-                    <a href="#sidebarHomework" data-toggle="collapse">
-                        <i class="fe-book-open"></i>
-                        <span> Homework </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarHomework">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('student.homework')}}" class="nav-link {{ (request()->is('student/homework*')) ? 'active' : '' }}">
-                                    <span>Homework List</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>               
-                <li>
-                    <a href="{{ route('student.report_card')}}" class="nav-link {{ (request()->is('student/report_card*')) ? 'active' : '' }}">
-                        <i data-feather="book" class="icons-xs icon-dual"></i>
-                        <span> Report Card </span>
-                    </a>
-                </li>
-                <!-- <li>
+        <li>
+            <a href="{{ route('parent.events')}}" class="nav-link {{ (request()->is('parent/events*')) ? 'active' : '' }}">
+                <i class="fas fa-map"></i>
+                <span> Events </span>
+            </a>
+        </li>
+        <li>
+            <a href="#sidebarHomework" data-toggle="collapse">
+                <i class="fe-book-open"></i>
+                <span> Homework </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <div class="collapse" id="sidebarHomework">
+                <ul class="nav-second-level">
+                    <li>
+                        <a href="{{ route('parent.homework')}}" class="nav-link {{ (request()->is('parent/homework*')) ? 'active' : '' }}">
+                            <span>Homework List</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <a href="{{ route('parent.attendance')}}" class="nav-link {{ (request()->is('super_admin/attendance/')) ? 'active' : '' }}">
+                <i data-feather="map"></i>
+                <span> Attendance </span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('parent.timetable.index')}}" class="nav-link {{ (request()->is('parent/timetable*')) ? 'active' : '' }}">
+                <i data-feather="external-link" class="icon-dual"></i>
+                <span> Time Table </span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('parent.chat')}}" class="nav-link {{ (request()->is('parent/chat*')) ? 'active' : '' }}">
+                <i data-feather="message-square"></i>
+                <span> Chat </span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('schoolcrm.app.form')}}" target=”_blank” class="nav-link {{ (request()->is('application-form')) ? 'active' : '' }}">
+
+                <i data-feather="external-link" class="icon-dual"></i>
+                <span> Application Form </span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('parent.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('parent/forum*')) ? 'active' : '' }}">
+                <i data-feather="external-link" class="icon-dual"></i>
+                <span> Forum </span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('parent.settings')}}" class="nav-link {{ (request()->is('parent/settings*')) ? 'active' : '' }}">
+                <i data-feather="settings" class="icon-dual"></i>
+                <span> Settings </span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('parent.faq.Index')}}" class="nav-link {{ (request()->is('parent/faq*')) ? 'active' : '' }}">
+                <i class="fas fa-question"></i>
+                <span> FAQs </span>
+            </a>
+        </li>
+        @elseif(Session::get('role_id') == '6')
+        <li>
+            <a href="{{ route('student.dashboard')}}" class="nav-link {{ (request()->is('student/dashboard*')) ? 'active' : '' }}">
+                <i data-feather="airplay" class="icon-dual"></i>
+                <span> Dashboards </span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('student.analyticrep.analyticreport')}}" class="nav-link {{ (request()->is('student/analyticrep*')) ? 'active' : '' }}">
+                <i data-feather="activity" class="icon-dual"></i>.
+                <span> Analytic </span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('student.timetable')}}" class="nav-link {{ (request()->is('super_admin/timetable*')) ? 'active' : '' }}">
+                <i data-feather="external-link" class="icon-dual"></i>
+                <span> Time Table </span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('student.exam.schedule')}}" class="nav-link {{ (request()->is('student/exam*')) ? 'active' : '' }}">
+                <i class="fas fa-dna"></i>
+
+                <span> Exam Schedule </span>
+            </a>
+        </li>
+        <li>
+            <a href="#sidebarHomework" data-toggle="collapse">
+                <i class="fe-book-open"></i>
+                <span> Homework </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <div class="collapse" id="sidebarHomework">
+                <ul class="nav-second-level">
+                    <li>
+                        <a href="{{ route('student.homework')}}" class="nav-link {{ (request()->is('student/homework*')) ? 'active' : '' }}">
+                            <span>Homework List</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <a href="{{ route('student.report_card')}}" class="nav-link {{ (request()->is('student/report_card*')) ? 'active' : '' }}">
+                <i data-feather="book" class="icons-xs icon-dual"></i>
+                <span> Report Card </span>
+            </a>
+        </li>
+        <!-- <li>
                     <a href="#sidebarLibrary" data-toggle="collapse">
                         <i class="fe-book-open"></i>
                         <span> Library </span>
@@ -1779,37 +1804,37 @@
                         </ul>
                     </div>
                 </li> -->
-                <li>
-                    <a href="{{ route('student.events')}}" class="nav-link {{ (request()->is('student/events*')) ? 'active' : '' }}">
-                        <i class="fas fa-map"></i>
-                        <span> Events </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('student.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('student/forum*')) ? 'active' : '' }}">
-                        <i data-feather="external-link" class="icon-dual"></i>
-                        <span> Forum </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('student.faq.Index')}}" class="nav-link {{ (request()->is('student/faq*')) ? 'active' : '' }}">
-                        <i class="fas fa-question"></i>
-                        <span> FAQs </span>
-                    </a>
-                </li>
-                @endif
+        <li>
+            <a href="{{ route('student.events')}}" class="nav-link {{ (request()->is('student/events*')) ? 'active' : '' }}">
+                <i class="fas fa-map"></i>
+                <span> Events </span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('student.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('student/forum*')) ? 'active' : '' }}">
+                <i data-feather="external-link" class="icon-dual"></i>
+                <span> Forum </span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('student.faq.Index')}}" class="nav-link {{ (request()->is('student/faq*')) ? 'active' : '' }}">
+                <i class="fas fa-question"></i>
+                <span> FAQs </span>
+            </a>
+        </li>
+        @endif
 
-                @endif
+        @endif
 
-            </ul>
-
-        </div>
-        <!-- End Sidebar -->
-
-        <div class="clearfix"></div>
+        </ul>
 
     </div>
-    <!-- Sidebar -left -->
+    <!-- End Sidebar -->
+
+    <div class="clearfix"></div>
+
+</div>
+<!-- Sidebar -left -->
 
 </div>
 <!-- Left Sidebar End -->

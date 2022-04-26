@@ -64,6 +64,12 @@ return [
         'class_details' => $url.'/classes/class-details',
         'class_update' => $url.'/classes/update',
         'class_delete' => $url.'/classes/delete',
+        // subjects url
+        'subject_add' => $url.'/subjects/add',
+        'subject_list' => $url.'/subjects/list',
+        'subject_details' => $url.'/subjects/subjects-details',
+        'subject_update' => $url.'/subjects/update',
+        'subject_delete' => $url.'/subjects/delete',
 
         'teacher_class_list' => $url.'teacher/class_list',
         // event type url

@@ -835,6 +835,8 @@ class ApiController extends BaseController
                     'name' => $request->name,
                     'subject_code' => $request->subject_code,
                     'subject_type' => $request->subject_type,
+                    'short_name' => $request->short_name,
+                    'subject_color_calendor' => $request->subject_color,
                     'subject_author' => $request->subject_author,
                     'created_at' => date("Y-m-d H:i:s")
                 ]);
@@ -876,7 +878,7 @@ class ApiController extends BaseController
         } else {
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
-            $sectionDetails = $createConnection->table('subjects')->where('id', $request->id)->get();
+            $sectionDetails = $createConnection->table('subjects')->where('id', $request->id)->first();
             return $this->successResponse($sectionDetails, 'Subject row fetch successfully');
         }
     }
@@ -903,6 +905,8 @@ class ApiController extends BaseController
                     'name' => $request->name,
                     'subject_code' => $request->subject_code,
                     'subject_type' => $request->subject_type,
+                    'short_name' => $request->short_name,
+                    'subject_color_calendor' => $request->subject_color,
                     'subject_author' => $request->subject_author,
                     'updated_at' => date("Y-m-d H:i:s")
                 ]);

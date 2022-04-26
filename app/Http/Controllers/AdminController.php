@@ -559,7 +559,6 @@ class AdminController extends Controller
         $getClasses = Helper::GetMethod(config('constants.api.class_list'));
         $getAllTeacherList = Helper::GetMethod(config('constants.api.get_all_teacher_list'));
         return view('admin.assign_teacher.index', ['classDetails' => $getClasses['data'], 'getAllTeacherList' => $getAllTeacherList['data']]);
-
     }
 
 
@@ -582,6 +581,31 @@ class AdminController extends Controller
             ->make(true);
     }
 
+    // get showSubjectsIndex
+    public function showSubjectsIndex()
+    {
+        // $getClasses = Helper::GetMethod(config('constants.api.class_list'));
+        // $getAllTeacherList = Helper::GetMethod(config('constants.api.get_all_teacher_list'));
+        // return view('admin.assign_teacher.index', ['classDetails' => $getClasses['data'], 'getAllTeacherList' => $getAllTeacherList['data']]);
+        return view('admin.subjects.index');
+    }
+    // get subjects
+    public function getSubjectsList(Request $request)
+    {
+
+        $response = Helper::GetMethod(config('constants.api.subject_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editSubjectBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteSubjectBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
 
     public function eventType()
     {
@@ -2673,19 +2697,19 @@ class AdminController extends Controller
             "section_id" => $request->section_id,
             "semester_id" => $request->semester_id,
             "session_id" => $request->session_id,
-            
+
         ];
         // dd($data);
         $student = Helper::PostMethod(config('constants.api.student_list'), $data);
-        
-       
+
+
         if ($student['code'] == "200") {
 
             $output = "";
             $row = 1;
             if ($student['data']) {
                 foreach ($student['data'] as $stu) {
-                    $edit = route('admin.student.details',$stu['id']);
+                    $edit = route('admin.student.details', $stu['id']);
                     $output .= '<tr>
                                     <td>' . $row . '</td>
                                     <td>' . $stu['first_name'] . ' ' . $stu['last_name'] . '</td>
@@ -2696,7 +2720,7 @@ class AdminController extends Controller
                                     <td>' . $stu['mobile_no'] . '</td>
                                     <td>
                                         <div class="button-list">
-                                            <a href="'.$edit.'" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
+                                            <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
                                             <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $stu['id'] . '" id="deleteStudentBtn"><i class="fe-trash-2"></i></a>
                                         </div>
                                     </td>
@@ -2713,7 +2737,7 @@ class AdminController extends Controller
         }
         // dd($output);  
         return $student;
-    }   
+    }
 
     // get Student  details
     public function getStudentDetails($id)
@@ -2838,7 +2862,7 @@ class AdminController extends Controller
             if ($student['data']) {
                 foreach ($student['data'] as $stu) {
 
-                    $edit = route('admin.student.details',$stu['id']);
+                    $edit = route('admin.student.details', $stu['id']);
                     $output .= '<tr>
                                     <td>' . $row . '</td>
                                     <td>' . $stu['first_name'] . ' ' . $stu['last_name'] . '</td>
@@ -2849,7 +2873,7 @@ class AdminController extends Controller
                                     <td>' . $stu['mobile_no'] . '</td>
                                     <td>
                                         <div class="button-list">
-                                        <a href="'.$edit.'" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
+                                        <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
                                         <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $stu['id'] . '" id="deleteStudentBtn"><i class="fe-trash-2"></i></a>
                                         </div>
                                     </td>
