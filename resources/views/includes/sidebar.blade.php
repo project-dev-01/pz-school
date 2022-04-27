@@ -737,6 +737,11 @@
                                                 <span> Subjects </span>
                                             </a>
                                         </li>
+                                        <li>
+                                            <a href="{{ route('admin.class_assign_subject')}}" class="nav-link {{ (request()->is('admin/class_assign*')) ? 'active' : '' }}">
+                                                <span> Assign Class Subjects </span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>

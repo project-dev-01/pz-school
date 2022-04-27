@@ -57,7 +57,6 @@ return [
         'all_std_list'=>$url.'/all_std_list',
         'all_bysubject_list'=>$url.'/all_bysubject_list',
         'get_grade_bysubject'=>$url.'/get_grade_bysubject',
-        'class_assign_list'=>$url.'/class_assign/list',
         // class url
         'class_add' => $url.'/classes/add',
         'class_list' => $url.'/classes/list',
@@ -72,6 +71,13 @@ return [
         'subject_delete' => $url.'/subjects/delete',
 
         'teacher_class_list' => $url.'teacher/class_list',
+        // assign class subjects
+        'class_assign_list'=>$url.'/class_assign/list',
+        'class_assign_add' => $url.'/class_assign/add',
+        'class_assign_details' => $url.'/class_assign/class_assign-details',
+        'class_assign_update' => $url.'/class_assign/update',
+        'class_assign_delete' => $url.'/class_assign/delete',
+        
         // event type url
         'event_type_add' => $url.'/event_type/add',
         'event_type_list' => $url.'/event_type/list',

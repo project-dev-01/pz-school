@@ -1004,10 +1004,10 @@ class ApiController extends BaseController
             $success = $createConnection->table('subject_assigns as sa')
                 ->select('sa.id', 'sa.class_id', 'sa.section_id', 'sa.subject_id', 'sa.teacher_id', 's.name as section_name', 'sb.name as subject_name', 'c.name as class_name', 'st.name as teacher_name')
                 ->join('sections as s', 'sa.section_id', '=', 's.id')
-                ->join('staffs as st', 'sa.teacher_id', '=', 'st.id')
+                ->leftJoin('staffs as st', 'sa.teacher_id', '=', 'st.id')
                 ->join('subjects as sb', 'sa.subject_id', '=', 'sb.id')
                 ->join('classes as c', 'sa.class_id', '=', 'c.id')
-                ->groupBy('sa.subject_id')
+                // ->groupBy('sa.subject_id')
                 ->get();
             return $this->successResponse($success, 'Section Allocation record fetch successfully');
         }
@@ -1026,7 +1026,7 @@ class ApiController extends BaseController
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
             // insert data
-            $classAssign = $createConnection->table('subject_assigns')->where('id', $request->id)->get();
+            $classAssign = $createConnection->table('subject_assigns')->where('id', $request->id)->first();
             return $this->successResponse($classAssign, 'Class assign row fetch successfully');
         }
     }

@@ -292,6 +292,9 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         // subjects
         Route::get('subjects/index', [AdminController::class, 'showSubjectsIndex'])->name('admin.subjects');
         Route::get('subjects/list', [AdminController::class, 'getSubjectsList'])->name('admin.subjects.list');
+        // assign class subject
+        Route::get('class_assign/index', [AdminController::class, 'showClassAssignSubIndex'])->name('admin.class_assign_subject');
+        Route::get('class_assign/list', [AdminController::class, 'ClassAssignSubList'])->name('admin.class_assign_subject.list');
 
         // Event Type routes
         Route::get('event_type/index', [AdminController::class, 'eventType'])->name('admin.event_type');

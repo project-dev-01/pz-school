@@ -543,16 +543,6 @@ class AdminController extends Controller
             ->make(true);
     }
 
-
-    // show assign teacher
-
-    public function showAssignTeacher()
-    {
-        $classDetails = Classes::select('id', 'name')->get();
-        $teacherDetails = User::select('id', 'name')->where('role_id', 3)->get();
-        return view('admin.assign_teacher.index', ['classDetails' => $classDetails, 'teacherDetails' => $teacherDetails]);
-    }
-
     // get TeacherAllocation
     public function showTeacherAllocation()
     {
@@ -584,11 +574,9 @@ class AdminController extends Controller
     // get showSubjectsIndex
     public function showSubjectsIndex()
     {
-        // $getClasses = Helper::GetMethod(config('constants.api.class_list'));
-        // $getAllTeacherList = Helper::GetMethod(config('constants.api.get_all_teacher_list'));
-        // return view('admin.assign_teacher.index', ['classDetails' => $getClasses['data'], 'getAllTeacherList' => $getAllTeacherList['data']]);
         return view('admin.subjects.index');
     }
+
     // get subjects
     public function getSubjectsList(Request $request)
     {
@@ -600,6 +588,29 @@ class AdminController extends Controller
                 return '<div class="button-list">
                                 <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editSubjectBtn">Update</a>
                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteSubjectBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    // get showClassAssignSubIndex
+    public function showClassAssignSubIndex()
+    {
+        $getClasses = Helper::GetMethod(config('constants.api.class_list'));
+        $getSubjectList = Helper::GetMethod(config('constants.api.subject_list'));
+        return view('admin.assign_class_subject.index', ['classDetails' => $getClasses['data'], 'getSubjectList' => $getSubjectList['data']]);
+    }
+    public function ClassAssignSubList(Request $request)
+    {
+
+        $response = Helper::GetMethod(config('constants.api.class_assign_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editAssiClassSubBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteAssiClassSubBtn">Delete</a>
                         </div>';
             })
 
