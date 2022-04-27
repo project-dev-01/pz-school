@@ -2648,14 +2648,33 @@ class AdminController extends Controller
     }
     public function overall()
     {
-        return view('admin.exam_results.overall');
+        $data=array();
+        $getclass = Helper::GetMethod(config('constants.api.class_list')); 
+        $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
+        $allexams=Helper::PostMethod(config('constants.api.all_exams_list'),$data);
+
+        return view(
+            'admin.exam_results.overall',
+            [
+                'classnames' => $getclass['data'],
+                'allexams' => $allexams['data'],
+                'allGrades' => $allGrades['data'],
+            ]
+        );
     }
 
     public function examResult()
     {
-        return view('super_admin.exam.result');
+        // data already use this api post so empty var sent
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));    
+      
+        return view(
+            'admin.exam.result',
+            [
+                'classnames' => $getclass['data']
+            ]
+        );     
     }
-
     public function testResult()
     {
 

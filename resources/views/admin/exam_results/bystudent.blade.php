@@ -76,7 +76,7 @@
     <!-- end row -->
 
 
-    <div class="row">
+    <div class="row" style="display: none;" id="bystudent_bodycontent">
         <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
@@ -91,7 +91,7 @@
                         <div class="col-sm-12">
                             <div class="card-box">
                             <div class="table-responsive">
-                            <table class="table w-100 nowrap table-bordered table-striped" id="tbl_bystudent">
+                            <table class="table w-100 nowrap table-bordered table-striped">
                                 <thead id="bystudent_header">
                                                             
                                 </thead>
@@ -104,13 +104,29 @@
                         </div> <!-- end col-->
                     </div>
                     <!-- end row-->
-
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card-box">
+                                
+                            <div class="table-responsive">
+                            <table class="table w-100 nowrap table-bordered table-striped" id="tbl_bystudent">
+                                <thead id="bystudent_subdiv_header">
+                                                            
+                                </thead>
+                                <tbody id="bystudent_subdiv_body">
+                                    
+                                </tbody>
+                            </table>
+                        </div> <!-- end table-responsive-->
+                            </div> <!-- end card-box -->
+                        </div> <!-- end col-->
+                    </div>
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
         </div> <!-- end col -->
         
     </div>
-    <div class="row">
+    <div class="row" id="bystudent_analysis">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
@@ -136,6 +152,7 @@
         var Allexams="{{ config('constants.api.all_exams_list') }}";
         var getbySubjectAllstd ="{{ config('constants.api.all_bysubject_list') }}";
         var getgradeBysubject = "{{ config('constants.api.get_grade_bysubject') }}";
+        var getbyStudent_subjectdivision="{{ config('constants.api.tot_grade_calcu_byStdsubjectdiv') }}";
         // default image test
         var defaultImg = "{{ asset('images/users/default.jpg') }}";
     </script>

@@ -76,7 +76,7 @@
     <!-- end row -->
 
 
-    <div class="row">
+    <div class="row" style="display: none;" id="byclass_bodycontent">
         <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
@@ -152,7 +152,7 @@
         </div>
      
     </div> <!-- container -->
-    <div class="row">
+    <div class="row"  id="byclass_analysis">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">

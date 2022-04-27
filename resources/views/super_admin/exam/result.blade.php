@@ -36,18 +36,13 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="heard">Branch<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
-                                    <option value="">Select Branch</option>
-                                        <option value="">Malaysia</option>
-                                        <option value="press">Singapore</option>
-                                    </select>
+                                <label for="heard">Roll No<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" required="">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="heard">Roll No<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" required="">
+
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -153,4 +148,13 @@
 
 </div> <!-- container -->
 
+
 @endsection
+    @section('scripts')
+    <script>           
+        var Allexams="{{ config('constants.api.all_exams_list') }}";
+        // default image test
+        var defaultImg = "{{ asset('images/users/default.jpg') }}";
+    </script>
+    <script src="{{ asset('js/custom/bysubject.js') }}"></script>
+    @endsection

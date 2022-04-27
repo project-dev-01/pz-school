@@ -1,15 +1,22 @@
 var globel_gradecount = [];
 var reasonChart;
 $(function () {
-
+    // $('#bysubject_body').hide();
+    $('#bysubject_analysis').hide();
     // change classroom
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
         console.log(class_id);
         if (class_id != "All") {
+            console.log('sec');
+            $("#bysubjectfilter").find("#examnames").empty();
+            $("#bysubjectfilter").find("#examnames").append('<option value="">Select Exams</option>');
+           
             $("#bysubjectfilter").find("#sectionID").empty();
+     
             $("#bysubjectfilter").find("#sectionID").append('<option value="">Select Section</option>');
-
+          
+           
             $.post(sectionByClass, { class_id: class_id }, function (res) {
                 if (res.code == 200) {
                     $("#section_drp_div").show();
@@ -20,9 +27,11 @@ $(function () {
             }, 'json');
         }
         else if (class_id == "All") {
-            $("#bysubjectfilter").find("#examnames").empty();
-            $("#bysubjectfilter").find("#examnames").append('<option value="">Select Exam</option>');
-            $.post(Allexams, { token: token, branch_id: branchID }, function (res) {
+          
+            $("#bysubjectfilter").find("#sectionID").empty();
+            $("#bysubjectfilter").find("#sectionID").append('<option value="">Select Section</option>');
+           
+          $.post(Allexams, { token: token, branch_id: branchID }, function (res) {
                 if (res.code == 200) {
                     $("#section_drp_div").hide();
                     $.each(res.data, function (key, val) {
@@ -71,6 +80,7 @@ $(function () {
         e.preventDefault();
         var byclass = $("#bysubjectfilter").valid();
         if (byclass === true) {
+            $("#overlay").fadeIn(300);
             globel_gradecount = [];
 
             var class_id = $("#changeClassName").val();
@@ -85,23 +95,24 @@ $(function () {
                 console.log('enterd');
                 // list mode
                 $.get(getbySubject, { token: token, branch_id: branchID, exam_id: exam_id, class_id: class_id, section_id: section_id }, function (response) {
-                    if (response.code == 200) {
+                   
                         if (response.code == 200) {
                             if (response.data.length > 0) {
                                 var datasetnew = response.data;
                                 bysubjectdetails_class(datasetnew);
                                 console.log(globel_gradecount);
-
-                                //byclass_chart(class_id, section_id, exam_id);
-                                console.log('end');
+                                $("#bysubject_analysis").show();
+                                $("#bysubject_body").show("slow");
+                               
+                                $("#overlay").fadeOut(300);
                             } else {
-
+                                $("#overlay").fadeOut(300);
                                 toastr.info('No records are available');
                             }
                         } else {
                             toastr.error(data.message);
                         }
-                    }
+                
                 });
             }
             else if (class_id == "All") {
@@ -112,10 +123,12 @@ $(function () {
                         if (response.data.length > 0) {
                             var datasetnew = response.data;
                             bysubjectdetails_all(datasetnew);
-
-
+                            $("#bysubject_analysis").show();
+                            $("#bysubject_body").show("slow");
+                         
+                            $("#overlay").fadeOut(300);
                         } else {
-
+                            $("#overlay").fadeOut(300);
                             toastr.info('No records are available');
                         }
                     } else {
@@ -424,7 +437,6 @@ function bysubjectdetails_all(datasetnew) {
 
 // studentDetails
 function byclass_chart(class_id, section_id, exam_id) {
-
 
     $.post(getgradeBysubject, { token: token, branch_id: branchID, exam_id: exam_id, class_id: class_id, section_id: section_id }, function (response) {
         if (response.code == 200) {

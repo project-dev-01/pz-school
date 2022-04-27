@@ -1,5 +1,6 @@
 $(function () {
-
+     $("#byclass_analysis").hide();
+    // $("#byclass_bodycontent").hide();
     // change classroom
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
@@ -7,7 +8,9 @@ $(function () {
         if (class_id != "All") {
             $("#byclassfilter").find("#sectionID").empty();
             $("#byclassfilter").find("#sectionID").append('<option value="">Select Subject</option>');
-
+            $("#byclassfilter").find("#examnames").empty();
+            $("#byclassfilter").find("#examnames").append('<option value="">Select exams</option>');
+            
             $.post(getbySubjectnames, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
                 if (res.code == 200) {
                     $("#section_drp_div").show();
@@ -20,6 +23,9 @@ $(function () {
         else if (class_id == "All") {
             $("#byclassfilter").find("#sectionID").empty();
             $("#byclassfilter").find("#sectionID").append('<option value="">Select Subject</option>');
+            $("#byclassfilter").find("#examnames").empty();
+            $("#byclassfilter").find("#examnames").append('<option value="">Select exams</option>');
+            
             // $.post(Allexams, { token: token, branch_id: branchID }, function (res) {
             //     if (res.code == 200) {
             //       //  $("#section_drp_div").hide();
@@ -92,6 +98,8 @@ $(function () {
 
         var byclass = $("#byclassfilter").valid();
         if (byclass === true) {
+     
+            $("#overlay").fadeIn(300);
             var class_id = $("#changeClassName").val();
             var Selected_classname = $('#changeClassName :selected').text();
             var subject_id = $("#sectionID").val();
@@ -124,9 +132,12 @@ $(function () {
                             // $("#listModeSectionID").val(section_id);
                             // $("#listModeSubjectID").val(subject_id);
                             // $("#listModeexamID").val(exam_id);
-                            console.log('end');
+                            $("#byclass_analysis").show();
+                            $("#byclass_bodycontent").show("slow");
+                        
+                            $("#overlay").fadeOut(300);
                         } else {
-
+                            $("#overlay").fadeOut(300);
                             toastr.info('No records are available');
                         }
                     } else {
@@ -144,15 +155,19 @@ $(function () {
                         if (response.data.length > 0) {
                             //  console.log(response.data);
                             var datasetnew = response.data;
-                            byclass_all_details(datasetnew);
+                            //byclass_all_details(datasetnew);
+                            bysubjectdetails(datasetnew);
                             // $("#testexecution").hide();
                             // $("#listModeClassID").val(class_id);
                             // $("#listModeSectionID").val(section_id);
                             // $("#listModeSubjectID").val(subject_id);
                             // $("#listModeexamID").val(exam_id);
-                            console.log('end');
-                        } else {
-
+                            $("#byclass_analysis").show();
+                            $("#byclass_bodycontent").show("slow");
+                          
+                            $("#overlay").fadeOut(300);
+                        } else {                          
+                            $("#overlay").fadeOut(300);
                             toastr.info('No records are available');
                         }
                     } else {

@@ -54,7 +54,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="examnames">Test Name<span class="text-danger">*</span></label>
-                                    <select id="examnames" class="form-control" name="exam_id">
+                                    <select id="examnames" class="form-control" name="examnames">
                                         <option value="">Select Exams</option>
                                     </select>
                                 </div>
@@ -76,7 +76,7 @@
     <!-- end row -->
 
 
-    <div class="row">
+    <div class="row" style="display: none;" id="bysubject_body">
         <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
@@ -216,7 +216,7 @@
         </div> <!-- end col -->
 
     </div>
-    <div class="row">
+    <div class="row" id="bysubject_analysis">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
@@ -237,8 +237,7 @@
     <script>
         var sectionByClass = "{{ route('admin.section_by_class') }}";
         var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
-        var getbySubject = "{{ config('constants.api.tot_grade_calcu_bySubject') }}";
-        var getbyClass_thead="{{ config('constants.api.tot_grade_master') }}";
+        var getbySubject = "{{ config('constants.api.tot_grade_calcu_bySubject') }}";       
         var Allexams="{{ config('constants.api.all_exams_list') }}";
         var getbySubjectAllstd ="{{ config('constants.api.all_bysubject_list') }}";
         var getgradeBysubject = "{{ config('constants.api.get_grade_bysubject') }}";
