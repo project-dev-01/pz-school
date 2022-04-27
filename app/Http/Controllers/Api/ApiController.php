@@ -1124,12 +1124,12 @@ class ApiController extends BaseController
                         ['section_id', $request->section_id],
                         ['class_id', $request->class_id],
                         ['subject_id', $request->subject_id],
-                        ['teacher_id', $request->teacher_id]
+                        // ['teacher_id', $request->teacher_id]
                     ]
                 )
                 ->count();
             if ($getCount > 0) {
-                return $this->send422Error('This teacher is already assigned to this class and section', ['error' => 'This teacher is already assigned to this class and section']);
+                return $this->send422Error('Teacher is already assigned to this class and section', ['error' => 'Teacher is already assigned to this class and section']);
             } else {
                 $arraySubject = array(
                     'class_id' =>  $request->class_id,
@@ -1184,7 +1184,7 @@ class ApiController extends BaseController
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
             // insert data
-            $classAssign = $createConnection->table('subject_assigns')->where('id', $request->id)->get();
+            $classAssign = $createConnection->table('subject_assigns')->where('id', $request->id)->first();
             return $this->successResponse($classAssign, 'Teacher assign row fetch successfully');
         }
     }

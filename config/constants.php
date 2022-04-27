@@ -80,7 +80,13 @@ return [
         'class_assign_details' => $url.'/class_assign/class_assign-details',
         'class_assign_update' => $url.'/class_assign/update',
         'class_assign_delete' => $url.'/class_assign/delete',
-        
+        // assign class subjects teacher
+        'teacher_assign_sub_list'=>$url.'/teacher_assign/list',
+        'teacher_assign_sub_add' => $url.'/teacher_assign/add',
+        'teacher_assign_sub_details' => $url.'/teacher_assign/teacher_assign-details',
+        'teacher_assign_sub_update' => $url.'/teacher_assign/update',
+        'teacher_assign_sub_delete' => $url.'/teacher_assign/delete',
+
         // event type url
         'event_type_add' => $url.'/event_type/add',
         'event_type_list' => $url.'/event_type/list',

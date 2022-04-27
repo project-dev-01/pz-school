@@ -727,7 +727,7 @@
                             </li>
                             <li>
                                 <a href="#sidebarForSub" data-toggle="collapse">
-                                    <i class="fe-book-open"></i> &nbsp;
+                                    <i class="fe-book"></i> &nbsp;
                                     Subjects <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarForSub">
@@ -739,7 +739,12 @@
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.class_assign_subject')}}" class="nav-link {{ (request()->is('admin/class_assign*')) ? 'active' : '' }}">
-                                                <span> Assign Class Subjects </span>
+                                                <span> Class Assign </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.teacher_assign_subject')}}" class="nav-link {{ (request()->is('admin/teacher_assign*')) ? 'active' : '' }}">
+                                                <span> Teacher Assign </span>
                                             </a>
                                         </li>
                                     </ul>

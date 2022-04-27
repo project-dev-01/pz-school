@@ -617,6 +617,35 @@ class AdminController extends Controller
             ->rawColumns(['actions'])
             ->make(true);
     }
+    // get showClassAssignSubTeacherIndex
+    public function showClassAssignSubTeacherIndex()
+    {
+        $getClasses = Helper::GetMethod(config('constants.api.class_list'));
+        $getSubjectList = Helper::GetMethod(config('constants.api.subject_list'));
+        $getAllTeacherList = Helper::GetMethod(config('constants.api.get_all_teacher_list'));
+
+        return view('admin.assign_class_subject_teacher.index', [
+            'classDetails' => $getClasses['data'],
+            'getSubjectList' => $getSubjectList['data'],
+            'getAllTeacherList' => $getAllTeacherList['data'],
+        ]);
+    }
+    public function ClassAssignSubTeacherList(Request $request)
+    {
+
+        $response = Helper::GetMethod(config('constants.api.teacher_assign_sub_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editAssiClassSubTeacBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteAssiClassSubTeacBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
 
     public function eventType()
     {
@@ -2648,10 +2677,10 @@ class AdminController extends Controller
     }
     public function overall()
     {
-        $data=array();
-        $getclass = Helper::GetMethod(config('constants.api.class_list')); 
+        $data = array();
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
-        $allexams=Helper::PostMethod(config('constants.api.all_exams_list'),$data);
+        $allexams = Helper::PostMethod(config('constants.api.all_exams_list'), $data);
 
         return view(
             'admin.exam_results.overall',
@@ -2666,14 +2695,14 @@ class AdminController extends Controller
     public function examResult()
     {
         // data already use this api post so empty var sent
-        $getclass = Helper::GetMethod(config('constants.api.class_list'));    
-      
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+
         return view(
             'admin.exam.result',
             [
                 'classnames' => $getclass['data']
             ]
-        );     
+        );
     }
     public function testResult()
     {
