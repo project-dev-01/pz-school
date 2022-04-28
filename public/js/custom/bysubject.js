@@ -28,6 +28,8 @@ $(function () {
         }
         else if (class_id == "All") {
           
+            $("#bysubjectfilter").find("#examnames").empty();
+            $("#bysubjectfilter").find("#examnames").append('<option value="">Select Exams</option>');           
             $("#bysubjectfilter").find("#sectionID").empty();
             $("#bysubjectfilter").find("#sectionID").append('<option value="">Select Section</option>');
            

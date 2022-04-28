@@ -318,17 +318,90 @@ class TeacherController extends Controller
             'teacher_class' => $response['data']
         ]);
     }
+     // by classes
     public function byclasss()
     {
-        return view('teacher.exam_results.byclass');
+        $data = [
+            'teacher_id' => session()->get('ref_user_id')
+        ];      
+        $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
+
+        return view(
+            'teacher.exam_results.byclass',
+            [
+                'classnames' => $getclass['data'],
+                'allGrades' => $allGrades['data']
+            ]
+        );
     }
+    // by subject 
     public function bysubject()
     {
-        return view('teacher.exam_results.bysubject');
+        $data = [
+            'teacher_id' => session()->get('ref_user_id')
+        ];      
+        $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
+        return view(
+            'teacher.exam_results.bysubject',
+            [
+                'classnames' => $getclass['data'],
+                'allGrades' => $allGrades['data']
+            ]
+        );
     }
+     // by student
     public function bystudent()
     {
-        return view('teacher.exam_results.bystudent');
+        $data = [
+            'teacher_id' => session()->get('ref_user_id')
+        ];      
+        $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
+        return view(
+            'teacher.exam_results.bystudent',
+            [
+                'classnames' => $getclass['data'],
+                'allGrades' => $allGrades['data']
+            ]
+        );
+    }
+     // overall
+    public function overall()
+    {
+        $datas=array();
+        $data = [
+            'teacher_id' => session()->get('ref_user_id')
+        ];      
+        $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
+        $allexams=Helper::PostMethod(config('constants.api.all_exams_list'),$datas);
+
+        return view(
+            'teacher.exam_results.overall',
+            [
+                'classnames' => $getclass['data'],
+                'allexams' => $allexams['data'],
+                'allGrades' => $allGrades['data'],
+            ]
+        );
+    }
+     // individual result
+    public function examResult()
+    {
+        // data already use this api post so empty var sent
+        $data = [
+            'teacher_id' => session()->get('ref_user_id')
+        ];      
+        $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);   
+      
+        return view(
+            'teacher.exam.result',
+            [
+                'classnames' => $getclass['data']
+            ]
+        );     
     }
     public function homework()
     {

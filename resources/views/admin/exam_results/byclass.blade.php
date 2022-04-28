@@ -46,7 +46,7 @@
                             <div class="col-md-3" id="section_drp_div">
                                 <div class="form-group">
                                     <label for="sectionID" id="lblsectionId">Subject Name<span class="text-danger">*</span></label>
-                                    <select id="sectionID" class="form-control" name="section_id">
+                                    <select id="sectionID" class="form-control" name="sectionID">
                                         <option value="">Select Subject</option>
                                     </select>
                                 </div>

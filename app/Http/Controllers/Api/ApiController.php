@@ -1007,7 +1007,7 @@ class ApiController extends BaseController
                 ->leftJoin('staffs as st', 'sa.teacher_id', '=', 'st.id')
                 ->join('subjects as sb', 'sa.subject_id', '=', 'sb.id')
                 ->join('classes as c', 'sa.class_id', '=', 'c.id')
-                // ->groupBy('sa.subject_id')
+                ->groupBy('sa.subject_id')
                 ->get();
             return $this->successResponse($success, 'Section Allocation record fetch successfully');
         }
@@ -3546,9 +3546,19 @@ class ApiController extends BaseController
             // create new connection
             $classConn = $this->createNewConnection($request->branch_id);
             // get data
+            $teacher_id = "All";
+            if(isset($request->teacher_id))
+            {
+                $teacher_id =$request->teacher_id;
+            }
+        
             $class_id = $request->class_id;
             $class = $classConn->table('subject_assigns as sa')->select('s.id as subject_id', 's.name as subject_name')
                 ->join('subjects as s', 'sa.subject_id', '=', 's.id')
+        
+                ->when($teacher_id != "All", function ($ins)  use ($teacher_id) {
+                    $ins->where('sa.teacher_id', $teacher_id);
+                })
                 ->where('sa.class_id', $class_id)
                 ->groupBy('s.id')
                 ->get();

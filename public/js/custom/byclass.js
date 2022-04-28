@@ -1,5 +1,5 @@
 $(function () {
-     $("#byclass_analysis").hide();
+    $("#byclass_analysis").hide();
     // $("#byclass_bodycontent").hide();
     // change classroom
     $('#changeClassName').on('change', function () {
@@ -10,8 +10,13 @@ $(function () {
             $("#byclassfilter").find("#sectionID").append('<option value="">Select Subject</option>');
             $("#byclassfilter").find("#examnames").empty();
             $("#byclassfilter").find("#examnames").append('<option value="">Select exams</option>');
-            
-            $.post(getbySubjectnames, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
+            var teacher_id_get_rollid=null;
+            if(get_roll_id==4)
+            {
+                teacher_id_get_rollid=ref_user_id;
+            }
+            console.log(teacher_id_get_rollid);
+            $.post(getbySubjectnames, { token: token, branch_id: branchID, class_id: class_id, teacher_id: teacher_id_get_rollid }, function (res) {
                 if (res.code == 200) {
                     $("#section_drp_div").show();
                     $.each(res.data, function (key, val) {
@@ -25,7 +30,7 @@ $(function () {
             $("#byclassfilter").find("#sectionID").append('<option value="">Select Subject</option>');
             $("#byclassfilter").find("#examnames").empty();
             $("#byclassfilter").find("#examnames").append('<option value="">Select exams</option>');
-            
+
             // $.post(Allexams, { token: token, branch_id: branchID }, function (res) {
             //     if (res.code == 200) {
             //       //  $("#section_drp_div").hide();
@@ -75,7 +80,7 @@ $(function () {
         else if (class_id == "All") {
             $("#byclassfilter").find("#examnames").empty();
             $("#byclassfilter").find("#examnames").append('<option value="">Select exams</option>');
-           
+
             $.post(Allexams, { token: token, branch_id: branchID }, function (res) {
                 if (res.code == 200) {
                     //  $("#section_drp_div").hide();
@@ -98,7 +103,7 @@ $(function () {
 
         var byclass = $("#byclassfilter").valid();
         if (byclass === true) {
-     
+
             $("#overlay").fadeIn(300);
             var class_id = $("#changeClassName").val();
             var Selected_classname = $('#changeClassName :selected').text();
@@ -134,7 +139,7 @@ $(function () {
                             // $("#listModeexamID").val(exam_id);
                             $("#byclass_analysis").show();
                             $("#byclass_bodycontent").show("slow");
-                        
+
                             $("#overlay").fadeOut(300);
                         } else {
                             $("#overlay").fadeOut(300);
@@ -148,7 +153,7 @@ $(function () {
             }
             else if (class_id == "All") {
                 console.log(subject_id);
-                $.get(getbyClassAllstd, { token: token, branch_id: branchID, exam_id: exam_id,subject_id:subject_id }, function (response) {
+                $.get(getbyClassAllstd, { token: token, branch_id: branchID, exam_id: exam_id, subject_id: subject_id }, function (response) {
 
                     if (response.code == 200) {
                         //   console.log(response.data);
@@ -164,9 +169,9 @@ $(function () {
                             // $("#listModeexamID").val(exam_id);
                             $("#byclass_analysis").show();
                             $("#byclass_bodycontent").show("slow");
-                          
+
                             $("#overlay").fadeOut(300);
-                        } else {                          
+                        } else {
                             $("#overlay").fadeOut(300);
                             toastr.info('No records are available');
                         }
@@ -227,7 +232,7 @@ function byclass_all_details(datasetnew) {
                                 '</td>';
                             byclassAllTable += '<td class="text-center" rowspan="2">' +
                                 '<label for="stdcount"> ' + att.present + '</label>' +
-                                '</td>';                       
+                                '</td>';
                         });
                         // teacher names
                         var teachers_list = res.teachers_list;
@@ -428,7 +433,7 @@ function bysubjectdetails(datasetnew) {
                         bysubjectAllTable += '<td class="text-right">' + pass_percentage + '</td>' +
                             '<td class="text-right">' + fail_percentage + '</td>';
                         bysubjectAllTable += '</tr>';
-                       
+
                     }
                     else {
                         console.log('else print')

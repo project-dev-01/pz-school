@@ -740,6 +740,10 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('exam_results/bysubject', [TeacherController::class, 'bysubject'])->name('teacher.exam_results.bysubject');
 
         Route::get('exam_results/bystudent', [TeacherController::class, 'bystudent'])->name('teacher.exam_results.bystudent');
+        Route::get('exam_results/overall', [TeacherController::class, 'overall'])->name('teacher.exam_results.overall');      
+        Route::get('exam/result', [TeacherController::class, 'examResult'])->name('teacher.exam.result');
+        Route::post('section-by-class', [AdminController::class, 'sectionByClass'])->name('teacher.section_by_class');
+        
 
         Route::get('analyticrep', [TeacherController::class, 'analytic'])->name('teacher.analyticrep.analyticreport');
         Route::post('classroomAdd', [TeacherController::class, 'classroomPost'])->name('teacher.classroom.add');

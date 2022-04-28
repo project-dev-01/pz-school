@@ -131,6 +131,8 @@
     // var sectionDetails = "{{ route('section.details') }}";
     // var sectionDelete = "{{ route('section.delete') }}";
     // get states
+    var get_roll_id = "{{Session::get('role_id')}}";
+
     var getStates = "{{ config('constants.api.states') }}";
     var getCity = "{{ config('constants.api.cities') }}";
     var branchByClass = "{{ config('constants.api.branch_by_class') }}";

@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <div class="page-title-right">
+                <div class="page-title-right">              
                 </div>
                 <h4 class="page-title">By Student</h4>
             </div>
@@ -27,44 +27,46 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="demo-form" data-parsley-validate="">
+                <form id="bystudentfilter" data-parsley-validate="">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Standard<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
-                                        <option value="">Select Standard</option>
-                                        <option value="">I</option>
+                                <label for="changeClassName">Standard<span class="text-danger">*</span></label>
+                                    <select id="changeClassName" class="form-control" name="class_id">
+                                        <option value="">Select Class</option>
+                                        <!-- <option value="All">All</option> -->
+                                        @forelse ($classnames as $class)
 
+                                        <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3" id="section_drp_div">
+                                <div class="form-group">
+                                <label for="sectionID" id="lblsectionId">Class Name<span class="text-danger">*</span></label>
+                                    <select id="sectionID" class="form-control" name="section_id">
+                                        <option value="">Select Section</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Class Room<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
-                                        <option value="">Select Class Room</option>
-                                        <option value="">A</option>
+                                <label for="examnames">Test Name<span class="text-danger">*</span></label>
+                                    <select id="examnames" class="form-control" name="exam_id">
+                                        <option value="">Select Exams</option>
                                     </select>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="heard">Exam Name<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
-                                        <option value="">Select Exam Name</option>
-                                        <option value="">Annual</option>
-                                        <option value="">Quarterly</option>
-                                    </select>
-                                </div>
-                            </div>
+                            </div>                                               
                         </div>
-                    </form>
-                    <div class="form-group text-right m-b-0">
+                        <div class="form-group text-right m-b-0">
                         <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
                             Get
-                        </button>
+                        </button>                 
                     </div>
+                    </form>
+                 
 
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
@@ -74,13 +76,13 @@
     <!-- end row -->
 
 
-    <div class="row">
+    <div class="row" style="display: none;" id="bystudent_bodycontent">
         <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Student (All)
+                            Student 
                             <h4>
                     </li>
                 </ul><br>
@@ -88,106 +90,50 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card-box">
-                                <div class="table-responsive">
-                                    <table class="table w-100 nowrap table-bordered table-striped" id="">
-                                        <thead>
-                                            <tr>
-                                                <th class="align-middle" rowspan="3">S.no.</th>
-                                                <th class="align-middle" rowspan="3">Student Name</th>
-                                                <th class="text-center" colspan="14">Subject Name</th>
-                                            </tr>
-                                            <tr>
-                                                <th colspan="2" class="text-center">Mathematics</th>
-                                            </tr>
-                                            <tr>
-                                                <th class="text-center">Mark</th>
-                                                <th class="text-center">Grade</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="text-center">1</td>
-                                                <td class="text-left">William</td>
-                                                <td class="text-center">40</td>
-                                                <td class="text-center">E</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">2</td>
-                                                <td class="text-left">James</td>
-                                                <td class="text-center">68</td>
-                                                <td class="text-center">B+</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">3</td>
-                                                <td class="text-left">Benjamin</td>
-                                                <td class="text-center">70</td>
-                                                <td class="text-center">A-</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">4</td>
-                                                <td class="text-left">Lucas</td>
-                                                <td class="text-center">40</td>
-                                                <td class="text-center">E</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">5</td>
-                                                <td class="text-left">Charlotte</td>
-                                                <td class="text-center text-warning font-weight-bold">25</td>
-                                                <td class="text-center text-warning font-weight-bold">G</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">6</td>
-                                                <td class="text-left">Sophia</td>
-                                                <td class="text-center">60</td>
-                                                <td class="text-center">B+</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">7</td>
-                                                <td class="text-left">Amelia</td>
-                                                <td class="text-center">80</td>
-                                                <td class="text-center">A</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">8</td>
-                                                <td class="text-left">Isabella</td>
-                                                <td class="text-center">73</td>
-                                                <td class="text-center">A-</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">9</td>
-                                                <td class="text-left">Mia</td>
-                                                <td class="text-center">50</td>
-                                                <td class="text-center">C</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div> <!-- end table-responsive-->
+                            <div class="table-responsive">
+                            <table class="table w-100 nowrap table-bordered table-striped">
+                                <thead id="bystudent_header">
+                                                            
+                                </thead>
+                                <tbody id="bystudent_body">
+                                    
+                                </tbody>
+                            </table>
+                        </div> <!-- end table-responsive-->
                             </div> <!-- end card-box -->
                         </div> <!-- end col-->
                     </div>
                     <!-- end row-->
-
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card-box">
+                                
+                            <div class="table-responsive">
+                            <table class="table w-100 nowrap table-bordered table-striped" id="tbl_bystudent">
+                                <thead id="bystudent_subdiv_header">
+                                                            
+                                </thead>
+                                <tbody id="bystudent_subdiv_body">
+                                    
+                                </tbody>
+                            </table>
+                        </div> <!-- end table-responsive-->
+                            </div> <!-- end card-box -->
+                        </div> <!-- end col-->
+                    </div>
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
         </div> <!-- end col -->
-
+        
     </div>
-    <div class="row">
+    <div class="row" id="bystudent_analysis">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
-                    <li class="nav-item">
-                        <h4 class="nav-link">
-                            Student Analysis
-                            <h4>
-                    </li>
-                </ul><br>
                 <div class="card-body">
+                    <h4 class="header-title">Student Analysis</h4>
+
                     <div class="mt-4 chartjs-chart">
-                        <canvas id="radar-chart-test-teacher-bystudent" height="350" data-colors="#39afd1,#a17fe0"></canvas>
+                        <canvas id="radar-chart-test-bystudent" height="350" data-colors="#39afd1,#a17fe0"></canvas>
                         <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
                     </div>
                 </div> <!-- end card-body-->
@@ -197,3 +143,18 @@
 </div> <!-- container -->
 
 @endsection
+    @section('scripts')
+    <script>
+        var sectionByClass = "{{ route('teacher.section_by_class') }}";
+        var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
+        var getbyStudent = "{{ config('constants.api.tot_grade_calcu_byStudent') }}";
+        var getbyClass_thead="{{ config('constants.api.tot_grade_master') }}";
+        var Allexams="{{ config('constants.api.all_exams_list') }}";
+        var getbySubjectAllstd ="{{ config('constants.api.all_bysubject_list') }}";
+        var getgradeBysubject = "{{ config('constants.api.get_grade_bysubject') }}";
+        var getbyStudent_subjectdivision="{{ config('constants.api.tot_grade_calcu_byStdsubjectdiv') }}";
+        // default image test
+        var defaultImg = "{{ asset('images/users/default.jpg') }}";
+    </script>
+    <script src="{{ asset('js/custom/bystudent.js') }}"></script>
+    @endsection
