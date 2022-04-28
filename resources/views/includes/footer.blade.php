@@ -142,6 +142,8 @@
     var ref_user_id = "{{ Session::get('ref_user_id') }}";
     var branchID = "{{ Session::get('branch_id') }}";
     var userID = "{{ Session::get('user_id') }}";
+    var studentID = "{{ Session::get('student_id') }}";
+    
     // branch details
     var branchList = "{{ route('branch.list') }}";
     var branchShow = "{{ route('branch.index') }}";

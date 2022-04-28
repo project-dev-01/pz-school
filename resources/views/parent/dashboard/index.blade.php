@@ -314,15 +314,8 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-3">
-                            <div id="external-events" class="m-t-20">
-                                <br>
-                            </div>
-
-                        </div> <!-- end col-->
-
                         <div class="col-lg-12">
-                            <div id="calendar"></div>
+                            <div id="student_calendor"></div>
                         </div> <!-- end col -->
 
                     </div> <!-- end row -->
@@ -511,6 +504,8 @@
 @endsection
 @section('scripts')
 <script>
+    // get timetable list
+    var getTimetableCalendorStudent = "{{ config('constants.api.get_timetable_calendor_student') }}";
     // todo list js
     var readUpdateTodoUrl = "{{ config('constants.api.read_update_todo') }}";
     var getAssignClassUrl = "{{ config('constants.api.get_assign_class') }}";
@@ -521,4 +516,6 @@
 </script>
 <!-- to do list -->
 <script src="{{ asset('js/custom/admin/dashboard.js') }}"></script>
+<!-- get timetable list -->
+<script src="{{ asset('js/custom/student_calendor.js') }}"></script>
 @endsection

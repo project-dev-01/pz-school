@@ -51,6 +51,13 @@
     },
         e.prototype.init = function () {
 
+            var student_id = null;
+            // it come only parent and student
+            if(studentID){
+                student_id = studentID;
+            }else{
+                student_id = ref_user_id;
+            }
             var t = [],
 
                 a = this;
@@ -81,7 +88,7 @@
                 },
                 // get events details start
                 eventSources: [{
-                    url: getTimetableCalendorStudent + '?token=' + token + '&branch_id=' + branchID + '&student_id=' + ref_user_id,
+                    url: getTimetableCalendorStudent + '?token=' + token + '&branch_id=' + branchID + '&student_id=' + student_id,
                     type: 'get',
                     success: function (response) {
                         t = response.data;
