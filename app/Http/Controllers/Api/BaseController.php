@@ -100,7 +100,7 @@ class BaseController extends Controller
         config(['database.connections.mysql_new_connection' => [
             'driver'    => 'mysql',
             'host'      => '127.0.0.1',
-            'database'  => $dbName,
+            'database'  => trim($dbName),
             'username'  => $dbUsername,
             'password'  => $dbPass,
             'charset'   => 'utf8',

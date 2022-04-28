@@ -146,12 +146,13 @@ $(function () {
     //
     $('#branch-form').on('submit', function (e) {
         e.preventDefault();
+        $("#overlay").fadeIn(300);
         // $('#saveBranch').prop('disabled', true);
         var branchCheck = $("#branch-form").valid();
         if (branchCheck === true) {
             var form = this;
             $.ajax({
-                url: $(form).attr('action'),    
+                url: $(form).attr('action'),
                 method: $(form).attr('method'),
                 data: new FormData(form),
                 processData: false,
@@ -165,14 +166,19 @@ $(function () {
 
                         // $('#branch-table').DataTable().ajax.reload(null, false);
                         $('#branch-form')[0].reset();
+                        $("#overlay").fadeOut(300);
                         toastr.success(data.message);
+                        setTimeout(function () {
+                            window.location.href = branchShow;
+                        }, 1000);
                         // $('[href="#branch-list-tab"]').click();
-                        window.location.href = branchShow;
                     } else {
                         // $('#saveBranch').prop('disabled', false);
-
+                        $("#overlay").fadeOut(300);
                         toastr.error(data.message);
                     }
+                }, error: function (err) {
+                    toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
                 }
             });
         }

@@ -20,7 +20,7 @@
             <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            <span data-feather="" class="icon-dual" id="span-parent"></span>Academic Details
+                            <span data-feather="" class="icon-dual" id="span-parent"></span>Employee Details
                             <h4>
                     </li>
                 </ul>

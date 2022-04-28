@@ -256,7 +256,7 @@ class ApiController extends BaseController
                     return $this->send500Error('Branch exist', ['error' => 'Branch exist']);
                 }
             } else {
-                return $this->send500Error('User exist', ['error' => 'User exist']);
+                return $this->send500Error('Users already exist', ['error' => 'Users already exist']);
             }
         }
     }

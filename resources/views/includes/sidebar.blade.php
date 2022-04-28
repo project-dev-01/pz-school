@@ -41,6 +41,15 @@
 
         <!--- Sidemenu -->
         <div id="sidebar-menu">
+            <!-- <ul class="list-unstyled topnav-menu mb-0">
+                <li>
+                    <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                        <img src="{{ asset('images/favicon.ico') }}" alt="user-image" height="50px" width="50px" class="rounded-circle admin_picture">
+                        <span style="color:#0ABAB5"><b> {{ Session::get('school_name') }}</b> </span>
+                    </a>
+                </li>
+
+            </ul><br> -->
 
             <ul id="side-menu">
                 <li class="menu-title">Menu Details</li>
