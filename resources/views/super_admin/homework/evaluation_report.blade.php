@@ -119,7 +119,7 @@
                             Evaluation Report
                             <h4>
                     </li>
-                </ul><br>
+                </ul>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-xl-12">
@@ -134,8 +134,8 @@
                                         History
                                     </a>
                                 </li>
-                            </ul><br>
-                            <div class="card-box">
+                            </ul>
+                            <div class="">
                                 <div class="tab-content">
                                     <div class="tab-pane show active" id="current-b1">
                                         <div class="row">

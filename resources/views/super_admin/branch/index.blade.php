@@ -18,7 +18,7 @@
                             <li class="breadcrumb-item active">Datatables</li> -->
                         </ol>
                     </div>
-                    <h4 class="page-title">Branch List</h4>
+                    <h4 class="page-title">Branch</h4>
                 </div>
             </div>
         </div>
@@ -27,6 +27,13 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
+                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                        <li class="nav-item">
+                            <h4 class="nav-link">
+                                <span data-feather="" class="icon-dual" id="span-parent"></span> Branch List
+                                <h4>
+                        </li>
+                    </ul>
                     <div class="card-body">
                         <form id="filter">
                             <div class="row">
@@ -67,6 +74,17 @@
                                 </button>-->
                             </div>
                         </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                        <li class="nav-item">
+                            <h4 class="nav-link">
+                                <span data-feather="" class="icon-dual" id="span-parent"></span> Branch List
+                                <h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
                         <div class="table-responsive">
                             <table class="table w-100 nowrap" id="branch-table">
                                 <thead>

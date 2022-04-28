@@ -20,11 +20,14 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                            <span data-feather="" class="icon-dual" id="span-parent"></span> Create Branch
+                            <h4>
+                    </li>
+                </ul>
                 <div class="card-body">
-                    <h4 class="header-title">Create Branch</h4>
-                    <p class="sub-header">
-                    </p>
-
                     <div class="row">
                         <div class="col-lg-12">
                             @include('super_admin.branch.add')
@@ -43,4 +46,3 @@
 @section('scripts')
 <script src="{{ asset('js/custom/branch.js') }}"></script>
 @endsection
-

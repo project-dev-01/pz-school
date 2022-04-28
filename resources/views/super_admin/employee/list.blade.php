@@ -29,7 +29,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table w-100 table-centered nowrap" id="">
+                            <table class="table w-100 nowrap" id="branch-table">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -57,10 +57,12 @@
                                         <td>Maths</td>
                                         <td>MEd</td>
                                         <td>No.46, 2nd cross street,Johor</td>
-                                        <td><div class="button-list">
-                                <a href="' . route('branch.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
-                                <a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteBranchBtn"><i class="fe-trash-2"></i></a>
-                        </div></td>
+                                        <td>
+                                            <div class="button-list">
+                                                <a href="' . route('branch.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
+                                                <a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteBranchBtn"><i class="fe-trash-2"></i></a>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
@@ -73,10 +75,12 @@
                                         <td>Biology</td>
                                         <td>MEd</td>
                                         <td>No.12, 3rd Gand street,Johor</td>
-                                        <td><div class="button-list">
-                                <a href="' . route('branch.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
-                                <a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteBranchBtn"><i class="fe-trash-2"></i></a>
-                        </div></td>
+                                        <td>
+                                            <div class="button-list">
+                                                <a href="' . route('branch.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
+                                                <a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteBranchBtn"><i class="fe-trash-2"></i></a>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
@@ -89,10 +93,12 @@
                                         <td>Chemistry</td>
                                         <td>BEd</td>
                                         <td>No.12, 2nd KM street,Johor</td>
-                                        <td><div class="button-list">
-                                <a href="' . route('branch.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
-                                <a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteBranchBtn"><i class="fe-trash-2"></i></a>
-                        </div></td>
+                                        <td>
+                                            <div class="button-list">
+                                                <a href="' . route('branch.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
+                                                <a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteBranchBtn"><i class="fe-trash-2"></i></a>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
@@ -105,10 +111,12 @@
                                         <td>Computer</td>
                                         <td>MEd</td>
                                         <td>No.23, 4th MC street,Johor</td>
-                                        <td><div class="button-list">
-                                <a href="' . route('branch.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
-                                <a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteBranchBtn"><i class="fe-trash-2"></i></a>
-                        </div></td>
+                                        <td>
+                                            <div class="button-list">
+                                                <a href="' . route('branch.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
+                                                <a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteBranchBtn"><i class="fe-trash-2"></i></a>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
