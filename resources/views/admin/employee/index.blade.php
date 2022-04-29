@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-            <h4 class="page-title">Add Employee</h4>
+                <h4 class="page-title">Add Employee</h4>
             </div>
         </div>
     </div>
@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-xl-12 addEmployeeForm">
             <div class="card">
-            <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                     <li class="nav-item">
                         <h4 class="nav-link">
                             <span data-feather="" class="icon-dual" id="span-parent"></span>Employee Details
@@ -48,7 +48,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="joining_date" id="joiningDate" >
+                                        <input type="text" class="form-control" name="joining_date" id="joiningDate">
                                     </div>
                                 </div>
                             </div>
@@ -84,8 +84,42 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="qualification">Quatification<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="qualification" id="empQuatification" >
+                                    <input type="text" class="form-control" name="qualification" id="empQuatification">
 
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="salary_grade">Salary Grade</label>
+                                    <input type="text" class="form-control" name="salary_grade" id="salaryGrade">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="staff_position">Staff Position</label>
+                                    <input type="text" class="form-control" name="staff_position" id="staffPosition">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="staff_category">Staff Category</label>
+                                    <input type="text" class="form-control" name="staff_category" id="staffCategory">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="nric_number">NRIC Number</label>
+                                    <input type="text" class="form-control" name="nric_number" id="nricNumber">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="passport">Passport</label>
+                                    <input type="text" class="form-control" name="passport" id="passport">
                                 </div>
                             </div>
                         </div>
@@ -156,7 +190,7 @@
                                                 <span class="fas fa-birthday-cake"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="birthday" id="empDOB" >
+                                        <input type="text" class="form-control" name="birthday" id="empDOB">
                                     </div>
                                 </div>
                             </div>
@@ -195,7 +229,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="photo">Profile Picture</label>
-                                    <input type="file" name="photo" id="photo"/>
+                                    <input type="file" name="photo" id="photo" />
                                 </div>
                             </div>
                         </div>
@@ -300,46 +334,46 @@
                             </div>
                         </div>
                         <div id="bank_details_form">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="bank_name">Bank Name<span class="text-danger">*</span></label>
-                                    <input type="text" id="bank_name" class="form-control" name="bank_name" data-parsley-trigger="change">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="bank_name">Bank Name<span class="text-danger">*</span></label>
+                                        <input type="text" id="bank_name" class="form-control" name="bank_name" data-parsley-trigger="change">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="holder_name">Account Holder<span class="text-danger">*</span></label>
+                                        <input type="text" id="holder_name" class="form-control" name="holder_name" data-parsley-trigger="change">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="bank_branch">Bank Branch<span class="text-danger">*</span></label>
+                                        <input type="text" id="bank_branch" class="form-control" name="bank_branch" data-parsley-trigger="change">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="holder_name">Account Holder<span class="text-danger">*</span></label>
-                                    <input type="text" id="holder_name" class="form-control" name="holder_name" data-parsley-trigger="change">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group mb-3">
+                                        <label for="bank_address">Bank Address<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="bank_address" name="bank_address" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group mb-3">
+                                        <label for="ifsc_code">IFSC Code<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="ifsc_code" name="ifsc_code" aria-describedby="">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group mb-3">
+                                        <label for="">Account No<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="account_no" name="account_no" aria-describedby="inputGroupPrepend">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="bank_branch">Bank Branch<span class="text-danger">*</span></label>
-                                    <input type="text" id="bank_branch" class="form-control" name="bank_branch" data-parsley-trigger="change">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group mb-3">
-                                    <label for="bank_address">Bank Address<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="bank_address" name="bank_address" aria-describedby="inputGroupPrepend">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group mb-3">
-                                    <label for="ifsc_code">IFSC Code<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="ifsc_code" name="ifsc_code" aria-describedby="">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group mb-3">
-                                    <label for="">Account No<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="account_no" name="account_no"  aria-describedby="inputGroupPrepend">
-                                </div>
-                            </div>
-                        </div>
                         </div>
 
                         <div class="form-group text-right m-b-0">
@@ -366,7 +400,7 @@
 @endsection
 @section('scripts')
 <script>
-        var employeeListShow = "{{ route('admin.listemployee') }}";
+    var employeeListShow = "{{ route('admin.listemployee') }}";
 </script>
 <script src="{{ asset('js/custom/employee.js') }}"></script>
 @endsection

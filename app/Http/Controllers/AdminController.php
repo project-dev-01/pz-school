@@ -1100,6 +1100,18 @@ class AdminController extends Controller
     //add employee
     public function addEmployee(Request $request)
     {
+        $file = $request->file('photo');
+
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        }else{
+            $base64 = null;
+            $extension = null;
+        }
+        
         $data = [
             'role_id' => $request->role_id,
             'joining_date' => $request->joining_date,
@@ -1114,7 +1126,8 @@ class AdminController extends Controller
             'mobile_no' => $request->mobile_no,
             'present_address' => $request->present_address,
             'permanent_address' => $request->permanent_address,
-            'photo' => $request->file('photo'),
+            'photo' => $base64,
+            'file_extension' => $extension,
             'email' => $request->email,
             'password' => $request->password,
             'confirm_password' => $request->confirm_password,
@@ -1127,9 +1140,15 @@ class AdminController extends Controller
             'bank_branch' => $request->bank_branch,
             'bank_address' => $request->bank_address,
             'ifsc_code' => $request->ifsc_code,
-            'account_no' => $request->account_no
+            'account_no' => $request->account_no,
+            'salary_grade' => $request->salary_grade,
+            'staff_position' => $request->staff_position,
+            'staff_category' => $request->staff_category,
+            'nric_number' => $request->nric_number,
+            'passport' => $request->passport,
 
         ];
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.employee_add'), $data);
         return $response;
     }
@@ -1235,7 +1254,12 @@ class AdminController extends Controller
             'bank_branch' => $request->bank_branch,
             'bank_address' => $request->bank_address,
             'ifsc_code' => $request->ifsc_code,
-            'account_no' => $request->account_no
+            'account_no' => $request->account_no,
+            'salary_grade' => $request->salary_grade,
+            'staff_position' => $request->staff_position,
+            'staff_category' => $request->staff_category,
+            'nric_number' => $request->nric_number,
+            'passport' => $request->passport,
         ];
 
         // dd($data);

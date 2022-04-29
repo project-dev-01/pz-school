@@ -33,6 +33,11 @@ class CreateStaffsTable extends Migration
             $table->string('facebook_url')->nullable();
             $table->string('linkedin_url')->nullable();
             $table->string('twitter_url')->nullable();
+            $table->string('salary_grade')->nullable();
+            $table->string('staff_category')->nullable();
+            $table->string('staff_position')->nullable();
+            $table->string('nric_number')->nullable();
+            $table->string('passport')->nullable();
             $table->timestamps();
         });
     }

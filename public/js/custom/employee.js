@@ -75,27 +75,21 @@ $(function () {
             mobile_no: "required",
             present_address: "required",
             permanent_address: "required",
-            // password : {
-            //     minlength : 5
-            // },
-            // confirm_password : {
-            //     minlength : 5,
-            //     equalTo : "#password"
-            // }
             password: {
                 required: true,
                 minlength: 5
             },
             confirm_password: {
                 required: true,
-                minlength: 5
+                minlength: 5,
+                equalTo: "#password"
             },
-            bank_name:"required",
-            holder_name:"required",
-            bank_branch:"required",
-            bank_address:"required",
-            ifsc_code:"required",
-            account_no:"required"
+            bank_name: "required",
+            holder_name: "required",
+            bank_branch: "required",
+            bank_address: "required",
+            ifsc_code: "required",
+            account_no: "required"
         }
     });
     // save employee
@@ -136,11 +130,17 @@ $(function () {
             formData.append('bank_address', $('#bank_address').val());
             formData.append('ifsc_code', $('#ifsc_code').val());
             formData.append('account_no', $('#account_no').val());
-
+            formData.append('salary_grade', $('#salaryGrade').val());
+            formData.append('staff_position', $('#staffPosition').val());
+            formData.append('staff_category', $('#staffCategory').val());
+            formData.append('nric_number', $('#nricNumber').val());
+            formData.append('passport', $('#passport').val());
             // Attach file
             formData.append('photo', $('input[type=file]')[0].files[0]);
 
             var form = this;
+            $("#overlay").fadeIn(300);
+
             $.ajax({
                 url: $(form).attr('action'),
                 method: $(form).attr('method'),
@@ -150,12 +150,19 @@ $(function () {
                 contentType: false,
                 success: function (data) {
                     if (data.code == 200) {
+                        $("#overlay").fadeOut(300);
                         $('.addEmployeeForm').find('form')[0].reset();
                         toastr.success(data.message);
-                        window.location.href = employeeListShow;
+                        setTimeout(function () {
+                            window.location.href = employeeListShow;
+                        }, 1000);
                     } else {
+                        $("#overlay").fadeOut(300);
                         toastr.error(data.message);
                     }
+                }, error: function (err) {
+                    $("#overlay").fadeOut(300);
+                    toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
                 }
             });
         }
@@ -178,16 +185,16 @@ $(function () {
             mobile_no: "required",
             present_address: "required",
             permanent_address: "required",
-            bank_name:"required",
-            holder_name:"required",
-            bank_branch:"required",
-            bank_address:"required",
-            ifsc_code:"required",
-            account_no:"required"
+            bank_name: "required",
+            holder_name: "required",
+            bank_branch: "required",
+            bank_address: "required",
+            ifsc_code: "required",
+            account_no: "required"
         }
     });
     // edit Employee
-    $('#editEmployeeForm').on('submit', function(e){
+    $('#editEmployeeForm').on('submit', function (e) {
         e.preventDefault();
         var employeeCheck = $("#editEmployeeForm").valid();
         if (employeeCheck === true) {
@@ -221,10 +228,16 @@ $(function () {
             formData.append('bank_address', $('#bank_address').val());
             formData.append('ifsc_code', $('#ifsc_code').val());
             formData.append('account_no', $('#account_no').val());
-
+            formData.append('salary_grade', $('#salaryGrade').val());
+            formData.append('staff_position', $('#staffPosition').val());
+            formData.append('staff_category', $('#staffCategory').val());
+            formData.append('nric_number', $('#nricNumber').val());
+            formData.append('passport', $('#passport').val());
             // Attach file
             // formData.append('photo', $('input[type=file]')[0].files[0]);
-
+            // Attach file
+            // formData.append('photo', $('input[type=file]')[0].files[0]);
+            $("#overlay").fadeIn(300);
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),
@@ -235,12 +248,19 @@ $(function () {
                 contentType: false,
                 success: function (data) {
                     if (data.code == 200) {
+                        $("#overlay").fadeOut(300);
                         $('.editEmployeeForm').find('form')[0].reset();
                         toastr.success(data.message);
-                        window.location.href = employeeListShow;
+                        setTimeout(function () {
+                            window.location.href = employeeListShow;
+                        }, 1000);
                     } else {
+                        $("#overlay").fadeOut(300);
                         toastr.error(data.message);
                     }
+                }, error: function (err) {
+                    $("#overlay").fadeOut(300);
+                    toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
                 }
             });
         }
