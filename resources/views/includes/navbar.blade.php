@@ -2,10 +2,11 @@
 <div class="navbar-custom">
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-right mb-0">
+            @if(Session::get('role_id') != '1')
             <li class="dropdown notification-list topbar-dropdown">
                 <form class="app-search">
                     <div class="app-search-box dropdown">
-                    <!-- <img src="{{ Session::get('picture') && asset('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" alt="user-image" class="rounded-circle admin_picture"> -->
+                        <!-- <img src="{{ Session::get('picture') && asset('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" alt="user-image" class="rounded-circle admin_picture"> -->
                         <img class="d-flex mr-2 rounded-circle" src="{{ asset('images/users/default.jpg') }}" alt="Generic placeholder image" height="32">
                     </div>
                     <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">
@@ -13,7 +14,7 @@
                     </a>
                 </form>
             </li>
-
+            @endif
             @if(Session::get('role_id') == '5')
 
             <li class="dropdown notification-list topbar-dropdown">
