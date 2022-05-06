@@ -46,7 +46,14 @@ class ParentController extends Controller
     
     public function reportCard()
     {
-        return view('parent.report_card.index');
+        $datas=array();
+        $allexams=Helper::PostMethod(config('constants.api.all_exams_list'),$datas);
+        return view(
+            'parent.report_card.index',
+            [         
+                'allexams' => $allexams['data']      
+            ]
+        );   
     }
     public function events()
     {

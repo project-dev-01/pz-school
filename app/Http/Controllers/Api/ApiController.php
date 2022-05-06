@@ -1278,7 +1278,7 @@ class ApiController extends BaseController
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
             $success = $createConnection->table('subject_assigns as sa')
-                ->select('sa.id','sa.subject_id','sb.name as subject_name')
+                ->select('sa.id', 'sa.subject_id', 'sb.name as subject_name')
                 ->join('sections as s', 'sa.section_id', '=', 's.id')
                 ->join('subjects as sb', 'sa.subject_id', '=', 'sb.id')
                 ->join('classes as c', 'sa.class_id', '=', 'c.id')
@@ -9628,6 +9628,74 @@ class ApiController extends BaseController
             // get all teachers
             $allTeachers = User::select('name', 'user_id')->where([['role_id', '=', "4"], ['branch_id', '=', $request->branch_id]])->get();
             return $this->successResponse($allTeachers, 'get all record fetch successfully');
+        }
+    }
+    // Report card 
+    public function getreportcard(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+            'exam_id' => 'required',
+            'selected_year' => 'required',
+            'student_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get all teachers
+            $allsubjectreport = array();
+            $object = new \stdClass();
+            $subjectreport_studentmarks = $Connection->table('student_marks')
+                ->select(
+                    'subjects.id as subject_id',
+                    'subjects.name as subject_name',
+                    'student_marks.score',
+                    'student_marks.grade',
+                    'student_marks.ranking',
+                    'student_marks.pass_fail',
+                    'timetable_exam.exam_date'
+                )
+                ->Join('subjects', 'student_marks.subject_id', '=', 'subjects.id')
+                ->leftJoin('timetable_exam', 'student_marks.exam_id', '=', 'timetable_exam.exam_id')
+
+                ->where([
+                    ['student_marks.exam_id', '=', $request->exam_id],
+                    ['student_marks.student_id', '=', $request->student_id]
+                ])
+                ->whereYear('timetable_exam.exam_date', $request->selected_year)
+                ->get();
+            $object->subjectreport = $subjectreport_studentmarks;
+            //  array_push($allsubjectreport, $object);
+
+            // check subject division tbl
+            $subjectreport_subject_division = $Connection->table('student_subjectdivision_inst')
+                ->select(
+                    'subjects.id as subject_id',
+                    'subjects.name as subject_name',
+                    'student_subjectdivision_inst.subject_division',
+                    'student_subjectdivision_inst.subjectdivision_scores',
+                    'student_subjectdivision_inst.total_score',
+                    'student_subjectdivision_inst.grade',
+                    'student_subjectdivision_inst.ranking',
+                    'student_subjectdivision_inst.pass_fail',
+                    'timetable_exam.exam_date'
+                )
+                ->Join('subjects', 'student_subjectdivision_inst.subject_id', '=', 'subjects.id')
+                ->leftJoin('timetable_exam', 'student_subjectdivision_inst.exam_id', '=', 'timetable_exam.exam_id')
+
+                ->where([
+                    ['student_subjectdivision_inst.exam_id', '=', $request->exam_id],
+                    ['student_subjectdivision_inst.student_id', '=', $request->student_id]
+                ])               
+                ->whereYear('timetable_exam.exam_date', $request->selected_year)
+                ->get();                
+                $object->subjectreport_div = $subjectreport_subject_division;
+                array_push($allsubjectreport, $object);
+              //dd($allsubjectreport);
+            return $this->successResponse($allsubjectreport, 'get report for student fetch successfully');
         }
     }
 }

@@ -147,6 +147,8 @@ return [
           'get_user' => $url.'/get_user',
           'change_password' => $url.'/change-password',
           'update_profile_info' => $url.'/update-profile-info',
+        // report card 
+        'get_by_reportcard' => $url.'/get_by_reportcard',
 
         // forum url
         'forum_cpost' => $url.'/forum/createpost',   

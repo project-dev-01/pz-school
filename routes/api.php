@@ -254,7 +254,9 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     
     Route::post('timetable/student', [ApiController::class, 'studentTimetable']);
     Route::post('timetable/parent', [ApiController::class, 'parentTimetable']);
-     
+    // report card 
+    
+    Route::get('get_by_reportcard', [ApiController::class, 'getreportcard']);
     // Homework routes
     Route::post('homework/add', [ApiController::class, 'addHomework']);
     Route::post('homework/list', [ApiController::class, 'getHomeworkList']);

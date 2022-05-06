@@ -265,7 +265,15 @@ class StudentController extends Controller
     // report card
     public function reportCard()
     {
-        return view('student.report_card.index');
+        $datas=array();
+        $allexams=Helper::PostMethod(config('constants.api.all_exams_list'),$datas);
+        //dd($allexams);
+        return view(
+            'student.report_card.index',
+            [         
+                'allexams' => $allexams['data']      
+            ]
+        );  
     }
     // event screen
     public function events()
