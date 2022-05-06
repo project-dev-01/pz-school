@@ -65,7 +65,8 @@
     var classAssignTeacherDeleteUrl = "{{ config('constants.api.teacher_assign_sub_delete') }}";
 
     var sectionByClassUrl = "{{ config('constants.api.section_by_class') }}";
-
+    var getAssignClassSubjUrl = "{{ config('constants.api.get_assign_class_subjects') }}";
+    
     var classAssignTeacherSubList = "{{ route('admin.teacher_assign_subject.list') }}";
 </script>
 <script src="{{ asset('js/custom/assign_class_subject_teacher.js') }}"></script>

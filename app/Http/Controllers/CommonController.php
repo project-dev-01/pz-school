@@ -21,6 +21,17 @@ class CommonController extends Controller
             return false;
         }
     }
+    public function updateSettingSessionLogo(Request $request)
+    {
+        // dd($request);
+        if (session()->has('school_logo') || $request->school_logo) {
+            session()->pull('school_logo');
+            $request->session()->put('school_logo', $request->school_logo);
+            return true;
+        } else {
+            return false;
+        }
+    }
     public function showApplicationForm()
     {
         return view('school-application-form');

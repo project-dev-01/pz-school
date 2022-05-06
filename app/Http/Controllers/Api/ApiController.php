@@ -68,7 +68,6 @@ class ApiController extends BaseController
                 // insert data
                 $query = $createConnection->table('sections')->insert([
                     'name' => $request->name,
-                    'capacity' => $request->capacity,
                     'created_at' => date("Y-m-d H:i:s")
                 ]);
                 $success = [];
@@ -93,7 +92,7 @@ class ApiController extends BaseController
             // create new connection
             $secConn = $this->createNewConnection($request->branch_id);
             // get data
-            $section = $secConn->table('sections')->get();
+            $section = $secConn->table('sections')->orderBy('name', 'asc')->get();
             return $this->successResponse($section, 'Sections record fetch successfully');
         }
     }
@@ -141,7 +140,6 @@ class ApiController extends BaseController
                 // update data
                 $query = $staffConn->table('sections')->where('id', $section_id)->update([
                     'name' => $request->name,
-                    'capacity' => $request->capacity,
                     'updated_at' => date("Y-m-d H:i:s")
                 ]);
                 $success = [];
@@ -428,7 +426,7 @@ class ApiController extends BaseController
             // create new connection
             $classConn = $this->createNewConnection($request->branch_id);
             // get data
-            $class = $classConn->table('classes')->get();
+            $class = $classConn->table('classes')->orderBy('name', 'asc')->get();
             return $this->successResponse($class, 'Class record fetch successfully');
         }
     }
@@ -537,6 +535,7 @@ class ApiController extends BaseController
                 $query = $createConnection->table('section_allocations')->insert([
                     'class_id' => $request->class_id,
                     'section_id' => $request->section_id,
+                    'capacity' => $request->capacity,
                     'created_at' => date("Y-m-d H:i:s")
                 ]);
                 $success = [];
@@ -561,9 +560,10 @@ class ApiController extends BaseController
             $secConn = $this->createNewConnection($request->branch_id);
             // get data
             $sectionAllocation = $secConn->table('section_allocations as sa')
-                ->select('sa.id', 'sa.class_id', 'sa.section_id', 's.name as section_name', 'c.name as class_name', 'c.name_numeric')
+                ->select('sa.id', 'sa.capacity', 'sa.class_id', 'sa.section_id', 's.name as section_name', 'c.name as class_name', 'c.name_numeric')
                 ->join('sections as s', 'sa.section_id', '=', 's.id')
                 ->join('classes as c', 'sa.class_id', '=', 'c.id')
+                ->orderBy('c.name', 'asc')
                 ->get();
             return $this->successResponse($sectionAllocation, 'Section Allocation record fetch successfully');
         }
@@ -612,6 +612,7 @@ class ApiController extends BaseController
                 $query = $createConnection->table('section_allocations')->where('id', $id)->update([
                     'class_id' => $request->class_id,
                     'section_id' => $request->section_id,
+                    'capacity' => $request->capacity,
                     'updated_at' => date("Y-m-d H:i:s")
                 ]);
                 $success = [];
@@ -861,7 +862,7 @@ class ApiController extends BaseController
             // create new connection
             $secConn = $this->createNewConnection($request->branch_id);
             // get data
-            $subjectDetails = $secConn->table('subjects')->get();
+            $subjectDetails = $secConn->table('subjects')->orderBy('name', 'asc')->get();
             return $this->successResponse($subjectDetails, 'Subject record fetch successfully');
         }
     }
@@ -1002,12 +1003,12 @@ class ApiController extends BaseController
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
             $success = $createConnection->table('subject_assigns as sa')
-                ->select('sa.id', 'sa.class_id', 'sa.section_id', 'sa.subject_id', 'sa.teacher_id', 's.name as section_name', 'sb.name as subject_name', 'c.name as class_name', 'st.name as teacher_name')
+                ->select('sa.id', 'sa.class_id', 'sa.section_id', 'sa.subject_id', 'sa.teacher_id', 's.name as section_name', 'sb.name as subject_name', 'c.name as class_name')
                 ->join('sections as s', 'sa.section_id', '=', 's.id')
-                ->leftJoin('staffs as st', 'sa.teacher_id', '=', 'st.id')
+                // ->leftJoin('staffs as st', 'sa.teacher_id', '=', 'st.id')
                 ->join('subjects as sb', 'sa.subject_id', '=', 'sb.id')
                 ->join('classes as c', 'sa.class_id', '=', 'c.id')
-                ->groupBy('sa.subject_id')
+                // ->groupBy('sa.subject_id')
                 ->get();
             return $this->successResponse($success, 'Section Allocation record fetch successfully');
         }
@@ -1261,6 +1262,32 @@ class ApiController extends BaseController
             } else {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             }
+        }
+    }
+    // getAssignClassSubjects
+    public function getAssignClassSubjects(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            $success = $createConnection->table('subject_assigns as sa')
+                ->select('sa.id','sa.subject_id','sb.name as subject_name')
+                ->join('sections as s', 'sa.section_id', '=', 's.id')
+                ->join('subjects as sb', 'sa.subject_id', '=', 'sb.id')
+                ->join('classes as c', 'sa.class_id', '=', 'c.id')
+                ->where([
+                    ['sa.class_id', '=', $request->class_id],
+                    ['sa.section_id', '=', $request->section_id]
+                ])
+                ->get();
+            return $this->successResponse($success, 'Get Assign class subjects fetch successfully');
         }
     }
     // branchIdByTeacherAllocation 
@@ -4122,6 +4149,50 @@ class ApiController extends BaseController
                 $update = User::find($request->id)->update(['picture' => $new_name]);
                 $data = [
                     "file_name" => $new_name
+                ];
+                if (!$upload) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong, updating picture is failed.']);
+                } else {
+                    return $this->successResponse($data, 'Your profile picture has been updated successfully');
+                }
+            }
+        }
+    }
+    // changeLogo settings
+    public function changeLogo(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'token' => 'required',
+            'change_logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            $path = 'images/sub-logo/';
+            $file = $request->file('change_logo');
+            $new_name = 'ULOGO_' . date('Ymd') . uniqid() . '.jpg';
+
+            //Upload new image
+            $upload = $file->move(public_path($path), $new_name);
+
+            if (!$upload) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong, upload new picture failed.']);
+            } else {
+                //Get Old picture
+                $oldPicture = Branches::find($request->id)->getAttributes()['logo'];
+
+                if ($oldPicture != '') {
+                    if (\File::exists(public_path($path . $oldPicture))) {
+                        \File::delete(public_path($path . $oldPicture));
+                    }
+                }
+                //Update DB
+                $update = Branches::find($request->id)->update(['logo' => $new_name]);
+                $data = [
+                    "logo" => $new_name
                 ];
                 if (!$upload) {
                     return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong, updating picture is failed.']);

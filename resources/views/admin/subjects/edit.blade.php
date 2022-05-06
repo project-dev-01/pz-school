@@ -23,10 +23,6 @@
                         <input type="text" id="editsubjectCode" name="subject_code" class="form-control" placeholder="Enter subject code">
                     </div>
                     <div class="form-group">
-                        <label for="subject_author">Subject Author</label>
-                        <input type="text" id="editsubjectAuthor" name="subject_author" class="form-control" placeholder="Enter subject author">
-                    </div>
-                    <div class="form-group">
                         <label for="subjectType">Subject Type</label>
                         <select class="form-control" id="editsubjectType" name="subject_type">
                             <option value="">Choose Subject type</option>
@@ -39,12 +35,12 @@
                     <div class="form-group">
                         <label for="subjectColor">Subject Color</label>
                         <select class="form-control" id="editsubjectColor" name="subject_color_calendor" placeholder="Enter subject color">
-                            <option value="bg-primary">primary</option>
-                            <option value="bg-secondary">secondary</option>
-                            <option value="bg-success">success</option>
-                            <option value="bg-danger">danger</option>
-                            <option value="bg-warning">warning</option>
-                            <option value="bg-info">info</option>
+                            <option value="bg-primary" class="bg-primary">primary</option>
+                            <option value="bg-secondary" class="bg-secondary">secondary</option>
+                            <option value="bg-success" class="bg-success">success</option>
+                            <option value="bg-danger" class="bg-danger">danger</option>
+                            <option value="bg-warning" class="bg-warning">warning</option>
+                            <option value="bg-info" class="bg-info">info</option>
                         </select>
                     </div>
                     <div class="form-group">

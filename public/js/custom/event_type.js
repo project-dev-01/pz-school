@@ -53,6 +53,7 @@ $(function () {
             //     searchable: false
             // },
             {
+                searchable: false,
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex'
             },

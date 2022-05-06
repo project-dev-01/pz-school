@@ -127,5 +127,46 @@ $(function () {
             }
         })
     });
+    // upload logo
+    $('#upload_form').on('change', '#change_logo', function (event) {
+        event.preventDefault();
+        var formData = new FormData();
+        // formData.append('id', userID);
+        formData.append('id', branchID);
+        formData.append('token', token);
+        // Attach file
+        formData.append('change_logo', $('input[type=file]')[0].files[0]);
+        $.ajax({
+            url: changeLogoUrl,
+            method: "POST",
+            data: formData,
+            dataType: 'JSON',
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                console.log(data)
+                if (data.code == 200) {
+                    toastr.success(data.message);
+                    $('.school_logo_picture').attr('src', subLogoPath + "/" + data.data.logo);
+                    $.ajax({
+                        type: "POST",
+                        url: updateLogoSession,
+                        data: { school_logo: data.data.logo },
+                        success: function (res) {
+                            console.log("--------")
+                            console.log(res)
+                        }
+                    });
+                } else {
+                    toastr.error(data.message);
+                }
 
+            }, error: function (err) {
+                if (err.responseJSON.code == 422) {
+                    toastr.error(err.responseJSON.data.error.profile_image[0] ? err.responseJSON.data.error.profile_image[0] : 'Something went wrong');
+                }
+            }
+        })
+    });
 });

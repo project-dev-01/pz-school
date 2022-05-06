@@ -287,6 +287,11 @@ class AdminController extends Controller
     {
         return view('admin.settings.index');
     }
+    public function settingsLogo()
+    {
+        return view('admin.settings.logo');
+    }
+    
     public function classes()
     {
         return view('admin.classes.index');
@@ -621,12 +626,10 @@ class AdminController extends Controller
     public function showClassAssignSubTeacherIndex()
     {
         $getClasses = Helper::GetMethod(config('constants.api.class_list'));
-        $getSubjectList = Helper::GetMethod(config('constants.api.subject_list'));
         $getAllTeacherList = Helper::GetMethod(config('constants.api.get_all_teacher_list'));
 
         return view('admin.assign_class_subject_teacher.index', [
             'classDetails' => $getClasses['data'],
-            'getSubjectList' => $getSubjectList['data'],
             'getAllTeacherList' => $getAllTeacherList['data'],
         ]);
     }

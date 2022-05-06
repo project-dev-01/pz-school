@@ -29,7 +29,8 @@ class CreateBranchesTable extends Migration
             $table->integer('state_id');
             $table->integer('city_id');
             $table->text('address');
-            $table->tinyInteger('status'); 
+            $table->tinyInteger('status');
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }

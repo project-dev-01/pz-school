@@ -1068,10 +1068,25 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.settings')}}" class="nav-link {{ (request()->is('admin/settings*')) ? 'active' : '' }}">
+                    <a href="#sideBarSettings" data-toggle="collapse">
                         <i data-feather="settings" class="icon-dual"></i>
                         <span> Settings </span>
+                        <span class="menu-arrow"></span>
                     </a>
+                    <div class="collapse" id="sideBarSettings">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('admin.settings')}}" class="nav-link {{ (request()->is('admin/settings*')) ? 'active' : '' }}">
+                                    <span> General Settings</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.settings.logo')}}" class="nav-link {{ (request()->is('admin/settings*')) ? 'active' : '' }}">
+                                    <span> Logo </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 <li>
                     <a href="{{ route('admin.faq.index')}}" class="nav-link {{ (request()->is('admin/settings*')) ? 'active' : '' }}">

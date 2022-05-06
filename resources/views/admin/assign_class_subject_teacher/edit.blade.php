@@ -23,7 +23,7 @@
                     </div>
                     <div class="form-group">
                         <label for="sectionID">Section Name<span class="text-danger">*</span></label>
-                        <select class="form-control" id="sectionID" name="section_name">
+                        <select class="form-control editsectionID" id="sectionID" name="section_name">
                             <option value="">Choose Section</option>
                         </select>
                     </div>
@@ -31,10 +31,6 @@
                         <label for="assignSubjects">Subjects<span class="text-danger">*</span></label>
                         <select class="form-control" id="assignSubjects" name="subject_id">
                             <option value="">Choose Subject</option>
-                            @forelse($getSubjectList as $sub)
-                            <option value="{{ $sub['id'] }}">{{$sub['name']}}</option>
-                            @empty
-                            @endforelse
                         </select>
                     </div>
                     <div class="form-group">

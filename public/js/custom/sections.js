@@ -12,12 +12,10 @@ $(function () {
         var sectionValid = $("#sectionForm").valid();
         if (sectionValid === true) {
             var sectionName = $("#sectionName").val();
-            var sectionCapacity = $("#sectionCapacity").val();
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
             formData.append('name', sectionName);
-            formData.append('capacity', sectionCapacity);
 
             $.ajax({
                 url: sectionAddUrl,
@@ -57,16 +55,13 @@ $(function () {
         ],
         columns: [
             {
+                searchable: false,
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex'
             },
             {
                 data: 'name',
                 name: 'name'
-            },
-            {
-                data: 'capacity',
-                name: 'capacity'
             },
             {
                 data: 'actions',
@@ -88,7 +83,6 @@ $(function () {
         }, function (data) {
             $('.editSection').find('input[name="sid"]').val(data.data.id);
             $('.editSection').find('input[name="name"]').val(data.data.name);
-            $('.editSection').find('input[name="capacity"]').val(data.data.capacity);
             $('.editSection').modal('show');
         }, 'json');
     });
@@ -106,13 +100,11 @@ $(function () {
         if (sectionValid === true) {
             var sectionID = $("#sectionID").val();
             var sectionName = $("#editsectionName").val();
-            var sectionCapacity = $("#editsectionCapacity").val();
             var formData = new FormData();
             formData.append('sid', sectionID);
             formData.append('token', token);
             formData.append('branch_id', branchID);
             formData.append('name', sectionName);
-            formData.append('capacity', sectionCapacity);
 
             $.ajax({
                 url: sectionUpdateUrl,

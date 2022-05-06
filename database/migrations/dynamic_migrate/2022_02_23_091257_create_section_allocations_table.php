@@ -17,6 +17,7 @@ class CreateSectionAllocationsTable extends Migration
             $table->id();
             $table->integer('class_id');
             $table->integer('section_id');
+            $table->string('capacity')->nullable();
             $table->timestamps();
         });
     }

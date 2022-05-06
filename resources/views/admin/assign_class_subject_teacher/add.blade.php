@@ -30,10 +30,6 @@
                         <label for="assignSubjects">Subjects<span class="text-danger">*</span></label>
                         <select class="form-control" id="assignSubjects" name="subject_id">
                             <option value="">Choose Subject</option>
-                            @forelse($getSubjectList as $sub)
-                            <option value="{{ $sub['id'] }}">{{$sub['name']}}</option>
-                            @empty
-                            @endforelse
                         </select>
                     </div>
                     <div class="form-group">

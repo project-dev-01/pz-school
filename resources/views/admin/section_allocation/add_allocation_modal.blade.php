@@ -10,7 +10,7 @@
                 <form id="sectionAllocationForm" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="class_id">Class Name</label>
+                        <label for="class_id">Class Name<span class="text-danger">*</span></label>
                         <select class="form-control" id="classID" name="class_id">
                             <option value="">Choose Class</option>
                             @forelse($classDetails as $class)
@@ -20,7 +20,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="section_id">Section Name</label>
+                        <label for="section_id">Section Name<span class="text-danger">*</span></label>
                         <select class="form-control" id="sectionID" name="section_id">
                             <option value="">Choose Section</option>
                             @forelse($sectionDetails as $section)
@@ -28,6 +28,10 @@
                             @empty
                             @endforelse
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="capacity">Capacity</label>
+                        <input type="number" id="sectionCapacity" name="capacity" class="form-control" placeholder="Enter capacity">
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>

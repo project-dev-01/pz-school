@@ -13,6 +13,9 @@ $(function () {
         getSections(class_id, IDnames, section_id);
     });
     function getSections(class_id, IDnames, section_id) {
+
+        $(IDnames).find("#assignSubjects").empty();
+        $(IDnames).find("#assignSubjects").append('<option value="">Choose Subject</option>');
         $(IDnames).find("#sectionID").empty();
         $(IDnames).find("#sectionID").append('<option value="">Select Section</option>');
 
@@ -27,7 +30,41 @@ $(function () {
             }
         }, 'json');
     }
+    //
+    $('#sectionID').on('change', function () {
+        var class_id = $("#changeClassName").val();
+        var section_id = $(this).val();
+        var IDnames = "#addAssignClassSubject";
+        var subject_id = null;
+        getSectionsBySub(class_id, IDnames, section_id, subject_id);
+    });
+    $('.editsectionID').on('change', function () {
+        var class_id = $("#editchangeClassName").val();
+        var section_id = $(this).val();
+        var IDnames = "#updateAssignClassSubject";
+        var subject_id = null;
+        getSectionsBySub(class_id, IDnames, section_id, subject_id);
+    });
+    function getSectionsBySub(class_id, IDnames, section_id, subject_id) {
+        $(IDnames).find("#assignSubjects").empty();
+        $(IDnames).find("#assignSubjects").append('<option value="">Choose Subject</option>');
 
+        $.post(getAssignClassSubjUrl, {
+            token: token,
+            branch_id: branchID,
+            class_id: class_id,
+            section_id: section_id
+        }, function (res) {
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $(IDnames).find("#assignSubjects").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
+                });
+                if (subject_id) {
+                    $(IDnames).find('select[name="subject_id"]').val(subject_id);
+                }
+            }
+        }, 'json');
+    }
     // rules validation
     $("#addAssignClassSubject").validate({
         rules: {
@@ -46,7 +83,7 @@ $(function () {
             var sectionID = $("#sectionID").val();
             var assignSubjects = $("#assignSubjects").val();
             var assignClassTeacher = $("#assignClassTeacher").val();
-            
+
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
@@ -90,11 +127,14 @@ $(function () {
             token: token,
             branch_id: branchID
         }, function (data) {
+            console.log("res " + data.data)
             var class_id = data.data.class_id;
             var section_id = data.data.section_id;
+            var subject_id = data.data.subject_id;
 
             var IDnames = "#updateAssignClassSubject";
             getSections(class_id, IDnames, section_id);
+            getSectionsBySub(class_id, IDnames, section_id, subject_id);
             $('.editAssClassSubjectModel').find('input[name="assign_class_sub_id"]').val(data.data.id);
             $('.editAssClassSubjectModel').find('select[name="class_name"]').val(data.data.class_id);
             $('.editAssClassSubjectModel').find('select[name="subject_id"]').val(data.data.subject_id);
@@ -204,6 +244,7 @@ $(function () {
         ],
         columns: [
             {
+                searchable: false,
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex'
             },

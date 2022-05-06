@@ -6,8 +6,8 @@
             <li class="dropdown notification-list topbar-dropdown">
                 <form class="app-search">
                     <div class="app-search-box dropdown">
-                        <!-- <img src="{{ Session::get('picture') && asset('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" alt="user-image" class="rounded-circle admin_picture"> -->
-                        <img class="d-flex mr-2 rounded-circle" src="{{ asset('images/users/default.jpg') }}" alt="Generic placeholder image" height="32">
+                        <img src="{{ Session::get('school_logo') && asset('images/sub-logo/'.Session::get('school_logo')) ? asset('images/sub-logo/'.Session::get('school_logo')) : asset('images/users/default.jpg') }}" height="32" alt="logo" class="d-flex mr-2 rounded-circle school_logo_picture">
+                        <!-- <img class="d-flex mr-2 rounded-circle school_logo_picture" src="{{ asset('images/users/default.jpg') }}" alt="Generic placeholder image" height="32"> -->
                     </div>
                     <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">
                         <span style="color:#0ABAB5"><b> {{ Session::get('school_name') }} </b>

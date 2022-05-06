@@ -38,7 +38,6 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Capacity</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

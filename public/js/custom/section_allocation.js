@@ -14,12 +14,14 @@ $(function () {
         if (sectionValid === true) {
             var classID = $("#classID").val();
             var sectionID = $("#sectionID").val();
+            var sectionCapacity = $("#sectionCapacity").val();
+
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
             formData.append('class_id', classID);
             formData.append('section_id', sectionID);
-
+            formData.append('capacity', sectionCapacity);
             $.ajax({
                 url: secAlloAddUrl,
                 method: "post",
@@ -58,6 +60,7 @@ $(function () {
         ],
         columns: [
             {
+                searchable: false,
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex'
             },
@@ -68,6 +71,10 @@ $(function () {
             {
                 data: 'section_name',
                 name: 'section_name'
+            },
+            {
+                data: 'capacity',
+                name: 'capacity'
             },
             {
                 data: 'actions',
@@ -92,6 +99,7 @@ $(function () {
             $('.editSectionAllocationModal').find('#sectionAlloID').val(data.data.id);
             $('.editSectionAllocationModal').find('select[name="class_id"]').val(data.data.class_id);
             $('.editSectionAllocationModal').find('select[name="section_id"]').val(data.data.section_id);
+            $('.editSectionAllocationModal').find('input[name="capacity"]').val(data.data.capacity);
             $('.editSectionAllocationModal').modal('show');
         }, 'json');
     });
@@ -111,13 +119,16 @@ $(function () {
             var sectionAlloID = $("#sectionAlloID").val();
             var editClassID = $("#editClassID").val();
             var editSectionID = $("#editSectionID").val();
-           
+            var sectionCapacity = $("#editsectionCapacity").val();
+
             var formData = new FormData();
             formData.append('id', sectionAlloID);
             formData.append('token', token);
             formData.append('branch_id', branchID);
             formData.append('class_id', editClassID);
             formData.append('section_id', editSectionID);
+            formData.append('capacity', sectionCapacity);
+
 
             $.ajax({
                 url: secAlloUpdateUrl,

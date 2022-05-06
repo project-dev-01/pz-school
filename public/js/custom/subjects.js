@@ -3,7 +3,8 @@ $(function () {
     // rules validation
     $("#addSubjectSubmit").validate({
         rules: {
-            name: "required"
+            name: "required",
+            short_name: "required"
         }
     });
     // add 
@@ -13,7 +14,6 @@ $(function () {
         if (classValid === true) {
             var subjectName = $("#subjectName").val();
             var subjectCode = $("#subjectCode").val();
-            var subjectAuthor = $("#subjectAuthor").val();
             var shortName = $("#shortName").val();
             var subjectType = $("#subjectType").val();
             var subjectColor = $("#subjectColor").val();
@@ -24,10 +24,9 @@ $(function () {
             formData.append('name', subjectName);
             formData.append('short_name', shortName);
             formData.append('subject_code', subjectCode);
-            formData.append('subject_author', subjectAuthor);
             formData.append('subject_type', subjectType);
             formData.append('subject_color', subjectColor);
-            
+
             $.ajax({
                 url: subjectsAddUrl,
                 method: "post",
@@ -68,7 +67,6 @@ $(function () {
             $('.editSubjectModel').find('input[name="name"]').val(data.data.name);
             $('.editSubjectModel').find('input[name="short_name"]').val(data.data.short_name);
             $('.editSubjectModel').find('input[name="subject_code"]').val(data.data.subject_code);
-            $('.editSubjectModel').find('input[name="subject_author"]').val(data.data.subject_author);
             $('.editSubjectModel').find('select[name="subject_type"]').val(data.data.subject_type);
             $('.editSubjectModel').find('select[name="subject_color_calendor"]').val(data.data.subject_color_calendor);
             $('.editSubjectModel').modal('show');
@@ -78,7 +76,8 @@ $(function () {
     // update 
     $("#subjectUpdateForm").validate({
         rules: {
-            name: "required"
+            name: "required",
+            short_name:"required"
         }
     });
     // update 
@@ -90,7 +89,6 @@ $(function () {
             var editsubjectID = $("#editsubjectID").val();
             var editsubjectName = $("#editsubjectName").val();
             var editsubjectCode = $("#editsubjectCode").val();
-            var editsubjectAuthor = $("#editsubjectAuthor").val();
             var editshortName = $("#editshortName").val();
             var editsubjectType = $("#editsubjectType").val();
             var editsubjectColor = $("#editsubjectColor").val();
@@ -102,7 +100,6 @@ $(function () {
             formData.append('name', editsubjectName);
             formData.append('short_name', editshortName);
             formData.append('subject_code', editsubjectCode);
-            formData.append('subject_author', editsubjectAuthor);
             formData.append('subject_type', editsubjectType);
             formData.append('subject_color', editsubjectColor);
 
@@ -177,12 +174,17 @@ $(function () {
         ],
         columns: [
             {
+                searchable: false,
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex'
             },
             {
                 data: 'name',
                 name: 'name'
+            },
+            {
+                data: 'short_name',
+                name: 'short_name'
             },
             {
                 data: 'subject_code',

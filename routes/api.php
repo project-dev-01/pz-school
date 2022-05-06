@@ -86,6 +86,9 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('teacher_assign/teacher_assign-details',[ApiController::class, 'getTeacherDetailsSubject']);
     Route::post('teacher_assign/update',[ApiController::class, 'updateTeacherSubject']);
     Route::post('teacher_assign/delete',[ApiController::class, 'deleteTeacherSubject']);
+    // get_assign_class_subjects
+    Route::post('get_assign_class_subjects', [ApiController::class, 'getAssignClassSubjects']);
+
     
 
     // branch id by class
@@ -195,6 +198,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('employee/delete', [ApiController::class, 'deleteEmployee']);
     // settings
     Route::post('change-profile-picture',[ApiController::class,'updatePicture']);
+    Route::post('settings/logo',[ApiController::class,'changeLogo']);
     Route::post('change-password',[ApiController::class,'changePassword']);
     Route::post('update-profile-info',[ApiController::class,'updateProfileInfo']);
     // create database_migrate

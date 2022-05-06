@@ -86,7 +86,9 @@ return [
         'teacher_assign_sub_details' => $url.'/teacher_assign/teacher_assign-details',
         'teacher_assign_sub_update' => $url.'/teacher_assign/update',
         'teacher_assign_sub_delete' => $url.'/teacher_assign/delete',
-
+        // get_assign_class_subjects
+        'get_assign_class_subjects' => $url.'/get_assign_class_subjects',
+        
         // event type url
         'event_type_add' => $url.'/event_type/add',
         'event_type_list' => $url.'/event_type/list',
@@ -141,6 +143,7 @@ return [
 
           // settings url
           'change_profile_picture' => $url.'/change-profile-picture',
+          'change_logo' => $url.'/settings/logo',
           'get_user' => $url.'/get_user',
           'change_password' => $url.'/change-password',
           'update_profile_info' => $url.'/update-profile-info',

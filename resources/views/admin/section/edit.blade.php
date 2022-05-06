@@ -15,10 +15,6 @@
                         <input type="text" id="editsectionName" name="name" class="form-control" placeholder="Enter name">
                     </div>
                     <div class="form-group">
-                        <label for="capacity">Capacity</label>
-                        <input type="number" id="editsectionCapacity" name="capacity" class="form-control" placeholder="Enter capacity">
-                    </div>
-                    <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
                         <button type="submit" id="sectionEditSubmit" class="btn btn-success waves-effect waves-light">Update</button>
                     </div>

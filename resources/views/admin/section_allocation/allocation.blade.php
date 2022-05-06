@@ -38,6 +38,7 @@
                                 <th>#</th>
                                 <th>Class Name</th>
                                 <th>Section Name</th>
+                                <th>Capacity</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

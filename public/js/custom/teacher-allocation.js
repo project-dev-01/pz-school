@@ -192,6 +192,7 @@ $(function () {
         ],
         columns: [
             {
+                searchable: false,
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex'
             },

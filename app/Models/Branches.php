@@ -23,6 +23,7 @@ class Branches extends Model
         'city_id',
         'address',
         'db_name',
+        'logo',
         'db_username',
         'db_password',
     ];

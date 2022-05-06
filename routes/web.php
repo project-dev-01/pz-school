@@ -360,11 +360,13 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('employee/delete', [AdminController::class, 'deleteEmployee'])->name('admin.employee.delete');
 
         // Settings
-        Route::get('settings', [SuperAdminController::class, 'settings'])->name('admin.settings');
+        Route::get('settings', [AdminController::class, 'settings'])->name('admin.settings');
+        Route::get('settings/logo', [AdminController::class, 'settingsLogo'])->name('admin.settings.logo');
         Route::post('change-password', [SuperAdminController::class, 'changePassword'])->name('settings.changePassword');
         Route::post('update-profile-info', [SuperAdminController::class, 'updateProfileInfo'])->name('settings.updateProfileInfo');
         Route::post('update-setting-session', [CommonController::class, 'updateSettingSession'])->name('settings.updateSettingSession');
-
+        Route::post('settings-update-logo', [CommonController::class, 'updateSettingSessionLogo'])->name('settings.update.logo');
+        
         // static page routes start
 
         // Admission routes
