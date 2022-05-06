@@ -299,6 +299,9 @@ return [
         'parent_delete' => $url.'/parent/delete',
         // get_all_teacher_list
         'get_all_teacher_list' => $url.'/get_all_teacher_list',
+
+        'get_homework_list_dashboard' => $url.'/get_homework_list_dashboard',
+        'get_test_score_dashboard' => $url.'/get_test_score_dashboard',
         
     ]
 

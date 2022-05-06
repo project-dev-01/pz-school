@@ -15,16 +15,18 @@ class ParentController extends Controller
         $request->session()->put('children_id', "1");
 
         $user_id = session()->get('user_id');
-        $student_id = session()->get('student_id');
+        $student_id = session()->get('children_id');
         $data = [
             'user_id' => $user_id,
             'student_id' => $student_id
         ];
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
+        $get_homework_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_homework_list_dashboard'), $data);
         return view(
             'parent.dashboard.index',
             [
                 'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
+                'get_homework_list_dashboard' => $get_homework_list_dashboard['data'],
             ]
         );
     }

@@ -1119,35 +1119,41 @@ class ApiController extends BaseController
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
 
-            $getCount = $createConnection->table('subject_assigns')
+            $old = $createConnection->table('subject_assigns')
                 ->where(
                     [
                         ['section_id', $request->section_id],
                         ['class_id', $request->class_id],
                         ['subject_id', $request->subject_id],
-                        // ['teacher_id', $request->teacher_id]
+                        // ['teacher_id', '!=' , '0']
                     ]
                 )
-                ->count();
-            if ($getCount > 0) {
-                return $this->send422Error('Teacher is already assigned to this class and section', ['error' => 'Teacher is already assigned to this class and section']);
+                ->first();
+            // if ($getCount > 0) {
+            //     return $this->send422Error('Teacher is already assigned to this class and section', ['error' => 'Teacher is already assigned to this class and section']);
+            // } else {
+
+            $arraySubject = array(
+                'class_id' =>  $request->class_id,
+                'section_id' => $request->section_id,
+                'subject_id' => $request->subject_id,
+                'teacher_id' => $request->teacher_id,
+            );
+            if (isset($old->id)) {
+                $arraySubject['updated_at'] = date("Y-m-d H:i:s");
+                $query = $createConnection->table('subject_assigns')->where('id', $old->id)->update($arraySubject);
             } else {
-                $arraySubject = array(
-                    'class_id' =>  $request->class_id,
-                    'section_id' => $request->section_id,
-                    'subject_id' => $request->subject_id,
-                    'teacher_id' => $request->teacher_id,
-                    'created_at' => date("Y-m-d H:i:s")
-                );
-                // insert data
+                $arraySubject['created_at'] = date("Y-m-d H:i:s");
                 $query = $createConnection->table('subject_assigns')->insert($arraySubject);
-                $success = [];
-                if (!$query) {
-                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-                } else {
-                    return $this->successResponse($success, 'Teacher assign has been successfully saved');
-                }
             }
+
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Teacher assign has been successfully saved');
+            }
+            // }
         }
     }
     // get assign teacher subject
@@ -9696,6 +9702,90 @@ class ApiController extends BaseController
                 array_push($allsubjectreport, $object);
               //dd($allsubjectreport);
             return $this->successResponse($allsubjectreport, 'get report for student fetch successfully');
+        }
+    }
+    // getHomeworkListDashboard
+    public function getHomeworkListDashboard(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'student_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $student_id = $request->student_id;
+            $con = $this->createNewConnection($request->branch_id);
+            $student = $con->table('enrolls')->where('student_id', $student_id)->first();
+            // return 1;
+
+            $data = $con->table('homeworks')->select('homeworks.title', 'homeworks.date_of_submission', 'subjects.name as subject_name')
+                ->leftJoin('subjects', 'homeworks.subject_id', '=', 'subjects.id')
+                ->leftJoin('homework_evaluation', 'homeworks.id', '=', 'homework_evaluation.homework_id')
+                ->whereNotIn('homeworks.id', function ($q) use ($student_id) {
+                    $q->select('homework_id')->from('homework_evaluation')->where('student_id', $student_id);
+                })
+                ->where('homeworks.class_id', $student->class_id)
+                ->where('homeworks.section_id', $student->section_id)
+                ->orderBy('homeworks.date_of_submission', 'desc')
+                ->get();
+
+            return $this->successResponse($data, 'Student Pending Homework List fetch successfully');
+        }
+    }
+
+    // getTestScoreDashboard
+    public function getTestScoreDashboard(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'student_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $student_id = $request->student_id;
+            $con = $this->createNewConnection($request->branch_id);
+            $student = $con->table('enrolls')->where('student_id', $student_id)->first();
+            // return 1;
+
+            $data['subjects'] = $con->table('subject_assigns')->select('subjects.name as subject_name')
+                ->join('subjects', 'subject_assigns.subject_id', '=', 'subjects.id')
+                ->where('subject_assigns.class_id', $student->class_id)
+                ->where('subject_assigns.section_id', $student->section_id)
+                ->orderBy('subject_name')
+                ->get();
+
+
+            $sub = $con->table('exam')->select('student_marks.score', 'subjects.name as subject_name', 'student_marks.ranking', 'student_marks.pass_fail', 'student_marks.status', 'student_marks.grade', 'exam.name as exam_name',)
+                ->leftJoin('student_marks', 'exam.id', '=', 'student_marks.exam_id')
+                ->join('subjects', 'student_marks.subject_id', '=', 'subjects.id')
+                ->where('student_marks.class_id', $student->class_id)
+                ->where('student_marks.section_id', $student->section_id)
+                ->where('student_marks.student_id', $student_id)
+                ->orderBy('subject_name')
+                ->get()
+                ->groupBy('exam_name')->toArray();
+
+            $sub_div = $con->table('exam')->select('student_subjectdivision_inst.total_score as score', 'subjects.name as subject_name', 'student_subjectdivision_inst.ranking', 'student_subjectdivision_inst.pass_fail', 'student_subjectdivision_inst.status', 'student_subjectdivision_inst.grade', 'exam.name as exam_name',)
+                ->leftJoin('student_subjectdivision_inst', 'exam.id', '=', 'student_subjectdivision_inst.exam_id')
+                ->join('subjects', 'student_subjectdivision_inst.subject_id', '=', 'subjects.id')
+                ->where('student_subjectdivision_inst.class_id', $student->class_id)
+                ->where('student_subjectdivision_inst.section_id', $student->section_id)
+                ->where('student_subjectdivision_inst.student_id', $student_id)
+                ->orderBy('subject_name')
+                ->get()
+                ->groupBy('exam_name')->toArray();
+            $combined = array();
+            foreach ($sub as $key => $val) {
+                $combined[$key] = array_merge($val, $sub_div[$key]);
+            }
+
+            $data['marks'] = $combined;
+
+            return $this->successResponse($data, 'Test Score List fetch successfully');
         }
     }
 }

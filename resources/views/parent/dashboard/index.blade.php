@@ -196,108 +196,56 @@
                                     </li>
                                 </ul><br>
                                 <div class="card-body">
+                                    @forelse ($get_homework_list_dashboard as $homework)
+                                        <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
+                                            <div class="col">
+                                                <a class="text-dark" data-toggle="collapse" href="#hmenv" aria-expanded="false" aria-controls="hmenv">
+                                                    <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> {{$homework['title']}}<span class="text-muted font-14"></span></h5>
+                                                </a>
+                                                <!-- Right modal -->
+                                                <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#right-modal">Rightbar Modal</button> -->
+                                                <div class="collapse show" id="hmenv">
+                                                    <div class="card mb-0 shadow-none">
+                                                        <div class="card-body pb-0" id="task-list-one">
+                                                            <!-- task -->
+                                                            <div class="row">
+                                                                <div class="col-sm-2">
+                                                                    <a href="{{ route('parent.homework')}}">{{$homework['subject_name']}} </a>
+                                                                </div> <!-- end col -->
+                                                                <div class="col-sm-6">
+                                                                    <div class="d-sm-flex">
+                                                                        <!-- <div>
+                                                                            <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="{{ route('parent.homework')}}" role="button" aria-haspopup="false" aria-expanded="false">
+                                                                                <img src="{{ Session::get('picture') && asset('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" alt="user-image" class="rounded-circle admin_picture">
+                                                                            </a>
+                                                                        </div> -->
+                                                                        <div class="mt-3 mt-sm-0">
+                                                                            <ul class="list-inline font-13 text-sm-right">
+                                                                                <li class="list-inline-item">
+                                                                                    <span class="badge badge-soft-danger">InComplete</span>
+                                                                                </li>
+                                                                                <li class="list-inline-item pr-1">
+                                                                                    <i class='mdi mdi-calendar-month-outline font-16'></i>
+                                                                                    Submission Date : {{$homework['date_of_submission']}}
+                                                                                </li>
+                                                                                <li class="list-inline-item text-danger">
+                                                                                </li>
 
-                                    <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
-                                        <div class="col">
-                                            <a class="text-dark" data-toggle="collapse" href="#hmenv" aria-expanded="false" aria-controls="hmenv">
-                                                <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> Study of the Environment<span class="text-muted font-14"></span></h5>
-                                            </a>
-                                            <!-- Right modal -->
-                                            <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#right-modal">Rightbar Modal</button> -->
-                                            <div class="collapse show" id="hmenv">
-                                                <div class="card mb-0 shadow-none">
-                                                    <div class="card-body pb-0" id="task-list-one">
-                                                        <!-- task -->
-                                                        <div class="row">
-                                                            <div class="col-sm-2">
-                                                                <a href="{{ route('parent.homework')}}">Ecosystems </a>
-                                                            </div> <!-- end col -->
-                                                            <div class="col-sm-6">
-                                                                <div class="d-sm-flex">
-                                                                    <div>
-                                                                        <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="{{ route('parent.homework')}}" role="button" aria-haspopup="false" aria-expanded="false">
-                                                                            <img src="{{ Session::get('picture') && asset('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" alt="user-image" class="rounded-circle admin_picture">
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="mt-3 mt-sm-0">
-                                                                        <ul class="list-inline font-13 text-sm-right">
-                                                                            <li class="list-inline-item pr-1">
-                                                                                Saran
-                                                                            </li>
-                                                                            <li class="list-inline-item">
-                                                                                <span class="badge badge-soft-danger">InComplete</span>
-                                                                            </li>
-                                                                            <li class="list-inline-item pr-1">
-                                                                                <i class='mdi mdi-calendar-month-outline font-16'></i>
-                                                                                Submission Date : 20-01-2022
-                                                                            </li>
-                                                                            <li class="list-inline-item text-danger">
-                                                                            </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div> <!-- end .d-flex-->
+                                                                </div> <!-- end col -->
+                                                            </div>
+                                                            <!-- end task -->
+                                                        </div> <!-- end card-body-->
+                                                    </div> <!-- end card -->
+                                                </div> <!-- end .collapse-->
 
-                                                                        </ul>
-                                                                    </div>
-                                                                </div> <!-- end .d-flex-->
-                                                            </div> <!-- end col -->
-                                                        </div>
-                                                        <!-- end task -->
-                                                    </div> <!-- end card-body-->
-                                                </div> <!-- end card -->
-                                            </div> <!-- end .collapse-->
-
-                                        </div> <!-- end col -->
-                                    </div> <!-- Maths row -->
-
-                                    <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
-                                        <div class="col">
-                                            <a class="text-dark" data-toggle="collapse" href="#hmmaths" aria-expanded="false" aria-controls="hmmaths">
-                                                <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> Mathematics<span class="text-muted font-14"></span></h5>
-                                            </a>
-                                            <!-- Right modal -->
-                                            <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#right-modal">Rightbar Modal</button> -->
-                                            <div class="collapse show" id="hmmaths">
-                                                <div class="card mb-0 shadow-none">
-                                                    <div class="card-body pb-0" id="task-list-one">
-                                                        <!-- task -->
-                                                        <div class="row">
-                                                            <div class="col-sm-2">
-                                                                <a href="{{ route('parent.homework')}}">Geometry </a>
-                                                            </div> <!-- end col -->
-                                                            <div class="col-sm-">
-                                                                <div class="d-sm-flex">
-                                                                    <div>
-                                                                        <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                                                            <img src="{{ Session::get('picture') && asset('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" alt="user-image" class="rounded-circle admin_picture">
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="mt-3 mt-sm-0">
-                                                                        <ul class="list-inline font-13 text-sm-right">
-                                                                            <li class="list-inline-item pr-1">
-                                                                                Saran
-                                                                            </li>
-                                                                            <li class="list-inline-item">
-                                                                                <span class="badge badge-soft-danger">InComplete</span>
-                                                                            </li>
-                                                                            <li class="list-inline-item">
-                                                                                <i class='mdi mdi-calendar-month-outline font-16 mr-1'></i>
-                                                                                Submission Date : 23-01-2022
-                                                                            </li>
-                                                                            <li class="list-inline-item text-danger">
-
-                                                                            </li>
-
-                                                                        </ul>
-                                                                    </div>
-                                                                </div> <!-- end .d-flex-->
-                                                            </div> <!-- end col -->
-                                                        </div>
-                                                        <!-- end task -->
-                                                    </div> <!-- end card-body-->
-                                                </div> <!-- end card -->
-                                            </div> <!-- end .collapse-->
-
-                                        </div> <!-- end col -->
-                                    </div> <!-- Maths row -->
-
+                                            </div> <!-- end col -->
+                                        </div> <!-- Maths row -->
+                                    @empty
+                                        <p></p>
+                                    @endforelse
                                 </div> <!-- end card-body -->
                             </div> <!-- end card -->
                         </div> <!-- end col -->
@@ -391,8 +339,6 @@
         <!-- end col-12 -->
     </div> <!-- end row -->
 
-    @include('parent.dashboard.report_card')
-
 
     <div class="row">
         <div class="col-lg-12">
@@ -406,7 +352,7 @@
                 </ul><br>
                 <div class="card-body">
                     <div class="mt-4 chartjs-chart">
-                        <canvas id="radar-chart-test-marks" height="350" data-colors="#39afd1,#a17fe0"></canvas>
+                        <canvas id="radar-chart-test-marks"  data-colors="#39afd1,#a17fe0"></canvas>
                         <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
                     </div>
                 </div> <!-- end card-body-->
@@ -511,10 +457,12 @@
     var getAssignClassUrl = "{{ config('constants.api.get_assign_class') }}";
     var pathDownloadFileUrl = "{{ asset('images/todolist/') }}";
     var toDoCommentsUrl = "{{ config('constants.api.to_do_comments') }}";
-
+    var getTestScore = "{{ config('constants.api.get_test_score_dashboard') }}";
+    
     var UserName = "{{ Session::get('name') }}";
 </script>
 <!-- to do list -->
+<script src="{{ asset('js/custom/parent_dashboard.js') }}"></script>
 <script src="{{ asset('js/custom/admin/dashboard.js') }}"></script>
 <!-- get timetable list -->
 <script src="{{ asset('js/custom/student_calendor.js') }}"></script>

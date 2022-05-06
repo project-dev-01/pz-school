@@ -331,5 +331,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('parent/delete', [ApiController::class, 'deleteParent']);
     // get all teacher list
     Route::get('get_all_teacher_list', [ApiController::class, 'getAllTeacherList']);
+    Route::get('get_homework_list_dashboard', [ApiController::class, 'getHomeworkListDashboard']);
+    Route::post('get_test_score_dashboard', [ApiController::class, 'getTestScoreDashboard']);
     
 });
