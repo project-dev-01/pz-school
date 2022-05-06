@@ -1,4 +1,4 @@
-@extends('layouts.admin-layout')
+extends('layouts.admin-layout')
 @section('title','Admission')
 @section('content')
 <!-- Start Content-->
