@@ -315,7 +315,21 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('event/event-details', [AdminController::class, 'getEventDetails'])->name('event.details');
         Route::post('event/delete', [AdminController::class, 'deleteEvent'])->name('event.delete');
         Route::post('event/event-publish', [AdminController::class, 'publishEvent'])->name('event.publish');
-
+        // Qualifications
+        Route::get('qualification/index', [AdminController::class, 'qualification_view'])->name('admin.qualification');
+        Route::post('qualification/add', [AdminController::class, 'qualification_add'])->name('admin.qualification.add');
+        Route::get('qualification/list', [AdminController::class, 'getqualification_list'])->name('admin.qualification.list');
+        Route::post('qualification/department-details', [AdminController::class, 'getQualificationsDetails'])->name('admin.qualification.details');
+        Route::post('qualification/update', [AdminController::class, 'qualification_update'])->name('admin.qualification.update');
+        Route::post('qualification/delete', [AdminController::class, 'qualification_delete'])->name('admin.qualification.delete');
+        // Staff category
+        Route::get('staffcategory/index', [AdminController::class, 'staffcategories_view'])->name('admin.staffcategory');
+        Route::post('staffcategory/add', [AdminController::class, 'staffcategories_add'])->name('admin.staffcategory.add');
+        Route::get('staffcategory/list', [AdminController::class, 'staffcategories_list'])->name('admin.staffcategory.list');
+        Route::post('staffcategory/staffcategory-details', [AdminController::class, 'getstaffcategoriesDetails'])->name('admin.staffcategory.details');
+        Route::post('staffcategory/update', [AdminController::class, 'staffcategories_edit'])->name('admin.staffcategory.update');
+        Route::post('staffcategory/delete', [AdminController::class, 'staffcategories_delete'])->name('admin.staffcategory.delete');
+       
         // department routes
         Route::get('department/index', [AdminController::class, 'Department'])->name('admin.department');
         Route::post('department/add', [AdminController::class, 'addDepartment'])->name('admin.department.add');

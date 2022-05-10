@@ -51,45 +51,45 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('classes/delete', [ApiController::class, 'deleteClass']);
 
     Route::post('teacher/class_list', [ApiController::class, 'teacherClassList']);
-    
+
     // sections allocations routes
-    Route::post('allocate_section/add',[ApiController::class,'addSectionAllocation']);
+    Route::post('allocate_section/add', [ApiController::class, 'addSectionAllocation']);
     Route::get('allocate_section/list', [ApiController::class, 'getSectionAllocationList']);
-    Route::post('allocate_section/section_allocation-details',[ApiController::class, 'getSectionAllocationDetails']);
-    Route::post('allocate_section/update',[ApiController::class, 'updateSectionAllocation']);
+    Route::post('allocate_section/section_allocation-details', [ApiController::class, 'getSectionAllocationDetails']);
+    Route::post('allocate_section/update', [ApiController::class, 'updateSectionAllocation']);
     Route::post('allocate_section/delete', [ApiController::class, 'deleteSectionAllocation']);
 
     // TeacherAllocations routes
-    Route::post('assign_teacher/add',[ApiController::class,'addTeacherAllocation']);
+    Route::post('assign_teacher/add', [ApiController::class, 'addTeacherAllocation']);
     Route::get('assign_teacher/list', [ApiController::class, 'getTeacherAllocationList']);
     Route::post('assign_teacher/assign_teacher-details', [ApiController::class, 'getTeacherAllocationDetails']);
     Route::post('assign_teacher/update', [ApiController::class, 'updateTeacherAllocation']);
     Route::post('assign_teacher/delete', [ApiController::class, 'deleteTeacherAllocation']);
     Route::post('branch-by-assign-teacher', [ApiController::class, 'branchIdByTeacherAllocation']);
     // Add Subjects
-    Route::post('subjects/add',[ApiController::class,'addSubjects']);
+    Route::post('subjects/add', [ApiController::class, 'addSubjects']);
     Route::get('subjects/list', [ApiController::class, 'getSubjectsList']);
-    Route::post('subjects/subjects-details',[ApiController::class, 'getSubjectsDetails']);
-    Route::post('subjects/update',[ApiController::class, 'updateSubjects']);
+    Route::post('subjects/subjects-details', [ApiController::class, 'getSubjectsDetails']);
+    Route::post('subjects/update', [ApiController::class, 'updateSubjects']);
     Route::post('subjects/delete', [ApiController::class, 'deleteSubjects']);
 
     // class assign
-    Route::post('class_assign/add',[ApiController::class,'addClassAssign']);
+    Route::post('class_assign/add', [ApiController::class, 'addClassAssign']);
     Route::get('class_assign/list', [ApiController::class, 'getClassAssignList']);
-    Route::post('class_assign/class_assign-details',[ApiController::class, 'getClassAssignDetails']);
-    Route::post('class_assign/update',[ApiController::class, 'updateClassAssign']);
-    Route::post('class_assign/delete',[ApiController::class, 'deleteClassAssign']);
+    Route::post('class_assign/class_assign-details', [ApiController::class, 'getClassAssignDetails']);
+    Route::post('class_assign/update', [ApiController::class, 'updateClassAssign']);
+    Route::post('class_assign/delete', [ApiController::class, 'deleteClassAssign']);
 
     // Teacher subject assign
-    Route::post('teacher_assign/add',[ApiController::class,'addTeacherSubject']);
+    Route::post('teacher_assign/add', [ApiController::class, 'addTeacherSubject']);
     Route::get('teacher_assign/list', [ApiController::class, 'getTeacherListSubject']);
-    Route::post('teacher_assign/teacher_assign-details',[ApiController::class, 'getTeacherDetailsSubject']);
-    Route::post('teacher_assign/update',[ApiController::class, 'updateTeacherSubject']);
-    Route::post('teacher_assign/delete',[ApiController::class, 'deleteTeacherSubject']);
+    Route::post('teacher_assign/teacher_assign-details', [ApiController::class, 'getTeacherDetailsSubject']);
+    Route::post('teacher_assign/update', [ApiController::class, 'updateTeacherSubject']);
+    Route::post('teacher_assign/delete', [ApiController::class, 'deleteTeacherSubject']);
     // get_assign_class_subjects
     Route::post('get_assign_class_subjects', [ApiController::class, 'getAssignClassSubjects']);
 
-    
+
 
     // branch id by class
     Route::post('branch-by-class', [ApiController::class, 'branchIdByClass']);
@@ -125,44 +125,55 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('event/delete', [ApiController::class, 'deleteEvent']);
     Route::post('event/publish', [ApiController::class, 'publishEvent']);
     Route::post('branch-by-event', [ApiController::class, 'branchIdByEvent']);
-
+    // qualifications
+    Route::post('qualification/add', [ApiController::class, 'add_qualifications']);
+    Route::get('qualification/list', [ApiController::class, 'getQualificationsList']);
+    Route::post('qualifications/qualifications-details', [ApiController::class, 'getQualifications']);
+    Route::post('qualification/update', [ApiController::class, 'updateQualifications']);
+    Route::post('qualification/delete', [ApiController::class, 'deleteQualifications']);
+    // staff category
+    Route::post('staffcategory/add', [ApiController::class, 'add_staffcategory']);
+    Route::get('staffcategory/list', [ApiController::class, 'getstaffcategory']);
+    Route::post('staffcategory/staffcategory-details', [ApiController::class, 'getstaffcategory_details']);
+    Route::post('staffcategory/update', [ApiController::class, 'updatestaffcategory']);
+    Route::post('staffcategory/delete', [ApiController::class, 'deletestaffcategory']);
     // department routes
-    Route::post('department/add',[ApiController::class,'addDepartment']);
+    Route::post('department/add', [ApiController::class, 'addDepartment']);
     Route::get('department/list', [ApiController::class, 'getDepartmentList']);
     Route::post('department/department-details', [ApiController::class, 'getDepartmentDetails']);
     Route::post('department/update', [ApiController::class, 'updateDepartment']);
     Route::post('department/delete', [ApiController::class, 'deleteDepartment']);
 
     // designations routes
-    Route::post('designation/add',[ApiController::class,'addDesignation']);
+    Route::post('designation/add', [ApiController::class, 'addDesignation']);
     Route::get('designation/list', [ApiController::class, 'getDesignationList']);
     Route::post('designation/designation-details', [ApiController::class, 'getDesignationDetails']);
     Route::post('designation/update', [ApiController::class, 'updateDesignation']);
     Route::post('designation/delete', [ApiController::class, 'deleteDesignation']);
 
     // Exam Term routes 
-    Route::post('exam_term/add',[ApiController::class,'addExamTerm']);
+    Route::post('exam_term/add', [ApiController::class, 'addExamTerm']);
     Route::get('exam_term/list', [ApiController::class, 'getExamTermList']);
     Route::post('exam_term/exam_term-details', [ApiController::class, 'getExamTermDetails']);
     Route::post('exam_term/update', [ApiController::class, 'updateExamTerm']);
     Route::post('exam_term/delete', [ApiController::class, 'deleteExamTerm']);
 
     // Exam Hall routes 
-    Route::post('exam_hall/add',[ApiController::class,'addExamHall']);
+    Route::post('exam_hall/add', [ApiController::class, 'addExamHall']);
     Route::get('exam_hall/list', [ApiController::class, 'getExamHallList']);
     Route::post('exam_hall/exam_hall-details', [ApiController::class, 'getExamHallDetails']);
     Route::post('exam_hall/update', [ApiController::class, 'updateExamHall']);
     Route::post('exam_hall/delete', [ApiController::class, 'deleteExamHall']);
 
     // Exam routes 
-    Route::post('exam/add',[ApiController::class,'addExam']);
+    Route::post('exam/add', [ApiController::class, 'addExam']);
     Route::get('exam/list', [ApiController::class, 'getExamList']);
     Route::post('exam/exam-details', [ApiController::class, 'getExamDetails']);
     Route::post('exam/update', [ApiController::class, 'updateExam']);
     Route::post('exam/delete', [ApiController::class, 'deleteExam']);
 
     // Exam Timetable routes 
-    Route::post('exam_timetable/add',[ApiController::class,'addExamTimetable']);
+    Route::post('exam_timetable/add', [ApiController::class, 'addExamTimetable']);
     Route::post('exam_timetable/list', [ApiController::class, 'listExamTimetable']);
     Route::post('exam_timetable/get', [ApiController::class, 'getExamTimetable']);
 
@@ -174,15 +185,15 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
     //get Session
     Route::get('session/list', [ApiController::class, 'getSessionList']);
-    
-     // Timetable
-     Route::post('timetable/add', [ApiController::class, 'addTimetable']);
-     Route::post('timetable/list', [ApiController::class, 'getTimetableList']);
-     Route::post('timetable/edit', [ApiController::class, 'editTimetable']);
-     Route::post('timetable/update', [ApiController::class, 'updateTimetable']);
-     
+
+    // Timetable
+    Route::post('timetable/add', [ApiController::class, 'addTimetable']);
+    Route::post('timetable/list', [ApiController::class, 'getTimetableList']);
+    Route::post('timetable/edit', [ApiController::class, 'editTimetable']);
+    Route::post('timetable/update', [ApiController::class, 'updateTimetable']);
+
     // Grade routes
-    Route::post('grade/add',[ApiController::class,'addGrade']);
+    Route::post('grade/add', [ApiController::class, 'addGrade']);
     Route::get('grade/list', [ApiController::class, 'getGradeList']);
     Route::post('grade/grade-details', [ApiController::class, 'getGradeDetails']);
     Route::post('grade/update', [ApiController::class, 'updateGrade']);
@@ -191,19 +202,19 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // employee routes
     Route::post('employee/department', [ApiController::class, 'getEmpDepartment']);
     Route::post('employee/designation', [ApiController::class, 'getEmpDesignation']);
-    Route::post('employee/add',[ApiController::class,'addEmployee']);
+    Route::post('employee/add', [ApiController::class, 'addEmployee']);
     Route::get('employee/list', [ApiController::class, 'getEmployeeList']);
     Route::post('employee/employee-details', [ApiController::class, 'getEmployeeDetails']);
     Route::post('employee/update', [ApiController::class, 'updateEmployee']);
     Route::post('employee/delete', [ApiController::class, 'deleteEmployee']);
     // settings
-    Route::post('change-profile-picture',[ApiController::class,'updatePicture']);
-    Route::post('settings/logo',[ApiController::class,'changeLogo']);
-    Route::post('change-password',[ApiController::class,'changePassword']);
-    Route::post('update-profile-info',[ApiController::class,'updateProfileInfo']);
+    Route::post('change-profile-picture', [ApiController::class, 'updatePicture']);
+    Route::post('settings/logo', [ApiController::class, 'changeLogo']);
+    Route::post('change-password', [ApiController::class, 'changePassword']);
+    Route::post('update-profile-info', [ApiController::class, 'updateProfileInfo']);
     // create database_migrate
-    
-    Route::post('database_migrate',[CommonController::class,'databaseMigrate']);
+
+    Route::post('database_migrate', [CommonController::class, 'databaseMigrate']);
     // forum     
     Route::get('get-category', [CommonController::class, 'categoryList']);
     Route::get('get-dbnames', [CommonController::class, 'dbnameslist']);
@@ -220,42 +231,42 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('forum/listcategoryusercrd', [ApiController::class, 'categorypostListUserCreatedOnly']);
     Route::get('forum/singlepost/replies', [ApiController::class, 'singlePostReplies']);
     Route::get('forum/post/allreplies', [ApiController::class, 'PostAllReplies']);
-    Route::post('forum/createpost',[ApiController::class,'forumcreatepost']);
-    Route::post('forum-likecout',[ApiController::class,'likescountadded']);
-    Route::post('forum-discout',[ApiController::class,'dislikescountadded']);
-    Route::post('forum-heartcout',[ApiController::class,'heartcountadded']);
-    Route::post('forum-viewcout',[ApiController::class,'viewcountadded']);
-    Route::post('forum-viewcout-insert',[ApiController::class,'viewcountinsert']);
-    Route::post('forum-replies-insert',[ApiController::class,'repliesinsert']);   
-    Route::post('forum-replikecout',[ApiController::class,'replikescountadded']);  
-    Route::post('forum-repdislikecout',[ApiController::class,'repdislikescountadded']);  
-    Route::post('forum-repfavorits',[ApiController::class,'repfavcountadded']);
-    Route::post('forum/threads/status/update',[ApiController::class,'threadstatusupdate']);
-    Route::get('forum/usernames/autocomplete',[ApiController::class,'usernameautocomplete']);
-    Route::get('forum/getuserid',[ApiController::class,'getuserid']);
-    
-    // Test Result    
-    Route::get('get_testresult_exams',[ApiController::class,'examslist']);
-    Route::get('get_testresult_marks_subject_vs',[ApiController::class,'subject_vs_marks']);
-    Route::post('get_marks_vs_grade',[ApiController::class,'marks_vs_grade']);
-    Route::post('add_student_marks',[ApiController::class,'addStudentMarks']);
-    Route::post('get_subject_division',[ApiController::class,'getsubjectdivision']);
-    Route::post('get_subject_average',[ApiController::class,'getSubjectAverage']);
-    Route::post('add_subject_division',[ApiController::class,'addsubjectdivision']);
-    Route::post('get_student_subject_mark',[ApiController::class,'getStudentSubjectMark']);
-    Route::post('get_student_grade',[ApiController::class,'getStudentGrade']);
-    Route::post('get_subject_division_mark',[ApiController::class,'getSubDivisionMark']);
-    Route::post('get_subject_mark_status',[ApiController::class,'getSubjectMarkStatus']);
-    // classroom management
-    Route::post('teacher_class',[ApiController::class,'getTeachersClassName']);
-    Route::post('teacher_section',[ApiController::class,'getTeachersSectionName']);
-    Route::post('teacher_subject',[ApiController::class,'getTeachersSubjectName']);
+    Route::post('forum/createpost', [ApiController::class, 'forumcreatepost']);
+    Route::post('forum-likecout', [ApiController::class, 'likescountadded']);
+    Route::post('forum-discout', [ApiController::class, 'dislikescountadded']);
+    Route::post('forum-heartcout', [ApiController::class, 'heartcountadded']);
+    Route::post('forum-viewcout', [ApiController::class, 'viewcountadded']);
+    Route::post('forum-viewcout-insert', [ApiController::class, 'viewcountinsert']);
+    Route::post('forum-replies-insert', [ApiController::class, 'repliesinsert']);
+    Route::post('forum-replikecout', [ApiController::class, 'replikescountadded']);
+    Route::post('forum-repdislikecout', [ApiController::class, 'repdislikescountadded']);
+    Route::post('forum-repfavorits', [ApiController::class, 'repfavcountadded']);
+    Route::post('forum/threads/status/update', [ApiController::class, 'threadstatusupdate']);
+    Route::get('forum/usernames/autocomplete', [ApiController::class, 'usernameautocomplete']);
+    Route::get('forum/getuserid', [ApiController::class, 'getuserid']);
 
-    
+    // Test Result    
+    Route::get('get_testresult_exams', [ApiController::class, 'examslist']);
+    Route::get('get_testresult_marks_subject_vs', [ApiController::class, 'subject_vs_marks']);
+    Route::post('get_marks_vs_grade', [ApiController::class, 'marks_vs_grade']);
+    Route::post('add_student_marks', [ApiController::class, 'addStudentMarks']);
+    Route::post('get_subject_division', [ApiController::class, 'getsubjectdivision']);
+    Route::post('get_subject_average', [ApiController::class, 'getSubjectAverage']);
+    Route::post('add_subject_division', [ApiController::class, 'addsubjectdivision']);
+    Route::post('get_student_subject_mark', [ApiController::class, 'getStudentSubjectMark']);
+    Route::post('get_student_grade', [ApiController::class, 'getStudentGrade']);
+    Route::post('get_subject_division_mark', [ApiController::class, 'getSubDivisionMark']);
+    Route::post('get_subject_mark_status', [ApiController::class, 'getSubjectMarkStatus']);
+    // classroom management
+    Route::post('teacher_class', [ApiController::class, 'getTeachersClassName']);
+    Route::post('teacher_section', [ApiController::class, 'getTeachersSectionName']);
+    Route::post('teacher_subject', [ApiController::class, 'getTeachersSubjectName']);
+
+
     Route::post('timetable/student', [ApiController::class, 'studentTimetable']);
     Route::post('timetable/parent', [ApiController::class, 'parentTimetable']);
     // report card 
-    
+
     Route::get('get_by_reportcard', [ApiController::class, 'getreportcard']);
     // Homework routes
     Route::post('homework/add', [ApiController::class, 'addHomework']);
@@ -269,39 +280,39 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('homework/student/filter', [ApiController::class, 'studentHomeworkFilter']);
 
     //  getStudentAttendence
-    Route::post('get_student_attendance',[ApiController::class,'getStudentAttendence']);
-    Route::post('add_student_attendance',[ApiController::class,'addStudentAttendence']);
-    Route::post('get_short_test',[ApiController::class,'getShortTest']);
-    Route::post('add_short_test',[ApiController::class,'addShortTest']);
-    Route::post('add_daily_report',[ApiController::class,'addDailyReport']);
-    Route::post('get_daily_report_remarks',[ApiController::class,'getDailyReportRemarks']);
-    Route::post('add_daily_report_remarks',[ApiController::class,'addDailyReportRemarks']);
-    Route::post('get_classroom_widget_data',[ApiController::class,'getClassroomWidget']);
-    Route::post('add_daily_report_by_student',[ApiController::class,'addDailyReportByStudent']);
-    
-    // get studenet attenedance list
-    Route::post('get_attendance_list',[ApiController::class,'getAttendanceList']);
-    Route::post('get_child_subjects',[ApiController::class,'getChildSubjects']);
-    Route::post('get_attendance_list_teacher',[ApiController::class,'getAttendanceListTeacher']);
-    Route::post('get_reasons_by_student',[ApiController::class,'getReasonsByStudent']);
-    // get calendor data by teacher
-    Route::get('get_timetable_calendor',[ApiController::class,'getTimetableCalendor']);
-    Route::get('get_timetable_calendor_student',[ApiController::class,'getTimetableCalendorStud']);
-    
-    // add timetable schedule
-    Route::post('add_calendor_timetable',[ApiController::class,'addCalendorTimetable']);
+    Route::post('get_student_attendance', [ApiController::class, 'getStudentAttendence']);
+    Route::post('add_student_attendance', [ApiController::class, 'addStudentAttendence']);
+    Route::post('get_short_test', [ApiController::class, 'getShortTest']);
+    Route::post('add_short_test', [ApiController::class, 'addShortTest']);
+    Route::post('add_daily_report', [ApiController::class, 'addDailyReport']);
+    Route::post('get_daily_report_remarks', [ApiController::class, 'getDailyReportRemarks']);
+    Route::post('add_daily_report_remarks', [ApiController::class, 'addDailyReportRemarks']);
+    Route::post('get_classroom_widget_data', [ApiController::class, 'getClassroomWidget']);
+    Route::post('add_daily_report_by_student', [ApiController::class, 'addDailyReportByStudent']);
 
-    
+    // get studenet attenedance list
+    Route::post('get_attendance_list', [ApiController::class, 'getAttendanceList']);
+    Route::post('get_child_subjects', [ApiController::class, 'getChildSubjects']);
+    Route::post('get_attendance_list_teacher', [ApiController::class, 'getAttendanceListTeacher']);
+    Route::post('get_reasons_by_student', [ApiController::class, 'getReasonsByStudent']);
+    // get calendor data by teacher
+    Route::get('get_timetable_calendor', [ApiController::class, 'getTimetableCalendor']);
+    Route::get('get_timetable_calendor_student', [ApiController::class, 'getTimetableCalendorStud']);
+
+    // add timetable schedule
+    Route::post('add_calendor_timetable', [ApiController::class, 'addCalendorTimetable']);
+
+
     Route::get('transport/list', [ApiController::class, 'getTransportList']);
-    
+
     Route::get('hostel/list', [ApiController::class, 'getHostelList']);
 
-    
+
     Route::post('vehicle-by-route', [ApiController::class, 'vehicleByRoute']);
     Route::post('room-by-hostel', [ApiController::class, 'roomByHostel']);
 
     // Admission routes
-    Route::post('admission/add',[ApiController::class,'addAdmission']);
+    Route::post('admission/add', [ApiController::class, 'addAdmission']);
 
     // Techer list by class and section routes
     Route::post('teacher/list', [ApiController::class, 'getTeacherList']);
@@ -317,14 +328,14 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('get_to_do_teacher', [ApiController::class, 'getToDoTeacher']);
 
     // Student routes
-    Route::post('admission/add',[ApiController::class,'addAdmission']);
+    Route::post('admission/add', [ApiController::class, 'addAdmission']);
     Route::post('student/list', [ApiController::class, 'getStudentList']);
-    Route::post('student/update',[ApiController::class,'updateStudent']);
+    Route::post('student/update', [ApiController::class, 'updateStudent']);
     Route::post('student/student-details', [ApiController::class, 'getStudentDetails']);
     Route::post('student/delete', [ApiController::class, 'deleteStudent']);
 
     // parent routes
-    Route::post('parent/add',[ApiController::class,'addParent']);
+    Route::post('parent/add', [ApiController::class, 'addParent']);
     Route::get('parent/list', [ApiController::class, 'getParentList']);
     Route::post('parent/parent-details', [ApiController::class, 'getParentDetails']);
     Route::post('parent/update', [ApiController::class, 'updateParent']);
@@ -333,5 +344,4 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('get_all_teacher_list', [ApiController::class, 'getAllTeacherList']);
     Route::get('get_homework_list_dashboard', [ApiController::class, 'getHomeworkListDashboard']);
     Route::post('get_test_score_dashboard', [ApiController::class, 'getTestScoreDashboard']);
-    
 });

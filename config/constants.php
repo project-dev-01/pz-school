@@ -104,7 +104,20 @@ return [
         'event_delete' => $url.'/event/delete',
         'event_publish' => $url.'/event/publish',
         'branch_by_event' => $url.'/branch-by-event',
-
+        // Qualifications
+        'qualification/index' => $url.'/qualification/index',
+        'qualification_add' => $url.'/qualification/add',
+        'qualification_list' => $url.'/qualification/list',
+        'qualifications_details' => $url.'/qualifications/qualifications-details',
+        'qualifications_update' => $url.'/qualification/update',
+        'qualifications_delete' => $url.'/qualification/delete',
+        // Staff category
+        'staffcategory/index'=> $url.'/staffcategory/index',
+        'staffcategory_add' => $url.'/staffcategory/add',
+        'staffcategory_list' => $url.'/staffcategory/list',
+        'staffcategory_details' => $url.'/staffcategory/staffcategory-details',
+        'staffcategory_update' => $url.'/staffcategory/update',
+        'staffcategory_delete' => $url.'/staffcategory/delete',
         // department url
         'department_add' => $url.'/department/add',
         'department_list' => $url.'/department/list',

@@ -269,12 +269,12 @@ class AdminController extends Controller
     //
     public function index()
     {
-        $user_id = session()->get('user_id');
+        $user_id = session()->get('user_id');     
         $data = [
             'user_id' => $user_id
         ];
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_list_dashboard'), $data);
-        // dd($get_to_do_list_dashboard);
+      //  dd($get_to_do_list_dashboard);
         return view(
             'admin.dashboard.index',
             [
@@ -1967,6 +1967,139 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.department_delete'), $data);
         return $response;
     }
+    // Qualifications
+    public function qualification_view()
+    {    
+        //dd('resp');
+        return view('admin.qualifications.index');
+    }
+    public function getqualification_list()
+    {      
+        $response = Helper::GetMethod(config('constants.api.qualification_list'));
+      
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editqualifyBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deletequalifyBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function qualification_add(Request $request)
+    {        
+        $data = [
+            'name' => $request->name
+        ];
+       
+        $response = Helper::PostMethod(config('constants.api.qualification_add'), $data);
+     
+        return $response;     
+    }
+    public function qualification_update(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.qualifications_update'), $data);
+        return $response;     
+    }
+    public function qualification_delete(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $id
+            ];
+            $response = Helper::PostMethod(config('constants.api.qualifications_delete'), $data);
+            return $response;
+        }
+    }
+    public function getQualificationsDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.qualifications_details'), $data);
+        return $response;
+    }
+    // staff categoryes
+    public function staffcategories_view()
+    {
+        return view('admin.staffCategories.index');
+    }
+    public function staffcategories_add(Request $request)
+    {
+        $data = [
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.staffcategory_add'), $data);
+     
+        return $response; 
+    }
+    public function staffcategories_edit(Request $request)
+    {
+      
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.staffcategory_update'), $data);
+        return $response; 
+    }
+    public function staffcategories_delete(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $id
+            ];
+            $response = Helper::PostMethod(config('constants.api.staffcategory_delete'), $data);
+            return $response;
+        }
+    }
+    public function staffcategories_list()
+    {      
+        $response = Helper::GetMethod(config('constants.api.staffcategory_list'));
+      
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editstaffcategoryBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deletstaffcategoryBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getstaffcategoriesDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.staffcategory_details'), $data);
+        return $response;
+    }
+    //staff category end 
 
     // get Exam Term
     public function examTerm()

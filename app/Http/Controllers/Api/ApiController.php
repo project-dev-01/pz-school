@@ -1627,6 +1627,283 @@ class ApiController extends BaseController
             return $this->successResponse($response, 'Information fetch successfully');
         }
     }
+    // Qualification  start 
+
+    // add qualification
+    public function add_qualifications(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $qulifyConn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($qulifyConn->table('qualifications')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // insert data
+                $query = $qulifyConn->table('qualifications')->insert([
+                    'name' => $request->name,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Qualifications has been successfully saved');
+                }
+            }
+        }
+    }
+    //view list qualification
+    public function getQualificationsList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $Department = $staffConn->table('qualifications')->get();
+
+            return $this->successResponse($Department, 'Qualifications record fetch successfully');
+        }
+    }
+    // update qualification
+    public function updateQualifications(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($staffConn->table('qualifications')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // update data
+                $query = $staffConn->table('qualifications')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Qualifications Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+            }
+        }
+    }
+    // delete qualification
+    public function deleteQualifications(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // $query = StaffDepartments::find($id)->delete();
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $staffConn->table('qualifications')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Qualifications have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+    // get Qualifications row details
+    public function getQualifications(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $deptDetails = $staffConn->table('qualifications')->where('id', $id)->first();
+            return $this->successResponse($deptDetails, 'Qualifications row fetch successfully');
+        }
+    }
+    // Qualifaication end
+
+    // staff category start 
+     // add qualification
+     public function add_staffcategory(Request $request)
+     {
+         $validator = \Validator::make($request->all(), [
+             'name' => 'required',
+             'branch_id' => 'required',
+             'token' => 'required',
+         ]);
+        
+         if (!$validator->passes()) {
+             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+         } else {
+ 
+             // create new connection
+             $qulifyConn = $this->createNewConnection($request->branch_id);
+             // check exist name
+             if ($qulifyConn->table('staff_categories')->where('name', '=', $request->name)->count() > 0) {
+                 return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+             } else {
+                 // insert data
+                 $query = $qulifyConn->table('staff_categories')->insert([
+                     'name' => $request->name,
+                     'created_at' => date("Y-m-d H:i:s")
+                 ]);
+                 $success = [];
+                 if (!$query) {
+                     return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                 } else {
+                     return $this->successResponse($success, 'staff category has been successfully saved');
+                 }
+             }
+         }
+     }
+     //view list staffcategory
+     public function getstaffcategory(Request $request)
+     {
+         $validator = \Validator::make($request->all(), [
+             'branch_id' => 'required',
+             'token' => 'required',
+         ]);
+ 
+         if (!$validator->passes()) {
+             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+         } else {
+             // create new connection
+             $staffConn = $this->createNewConnection($request->branch_id);
+             // get data
+             $Department = $staffConn->table('staff_categories')->get();
+ 
+             return $this->successResponse($Department, 'staff categories record fetch successfully');
+         }
+     }
+     // update staffcategory
+     public function updatestaffcategory(Request $request)
+     {
+         $id = $request->id;
+         $validator = \Validator::make($request->all(), [
+             'name' => 'required',
+             'branch_id' => 'required',
+             'token' => 'required',
+         ]);
+ 
+         if (!$validator->passes()) {
+             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+         } else {
+ 
+             // create new connection
+             $staffConn = $this->createNewConnection($request->branch_id);
+             // check exist name
+             if ($staffConn->table('staff_categories')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
+                 return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+             } else {
+                 // update data
+                 $query = $staffConn->table('staff_categories')->where('id', $id)->update([
+                     'name' => $request->name,
+                     'updated_at' => date("Y-m-d H:i:s")
+                 ]);
+                 $success = [];
+                 if ($query) {
+                     return $this->successResponse($success, 'staff categories Details have Been updated');
+                 } else {
+                     return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                 }
+             }
+         }
+     }
+     // delete staffcategory
+     public function deletestaffcategory(Request $request)
+     {
+ 
+         $id = $request->id;
+         $validator = \Validator::make($request->all(), [
+             'token' => 'required',
+             'branch_id' => 'required',
+             'id' => 'required',
+         ]);
+ 
+         if (!$validator->passes()) {
+             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+         } else {
+             // $query = StaffDepartments::find($id)->delete();
+             // create new connection
+             $staffConn = $this->createNewConnection($request->branch_id);
+             // get data
+             $query = $staffConn->table('staff_categories')->where('id', $id)->delete();
+ 
+             $success = [];
+             if ($query) {
+                 return $this->successResponse($success, 'staff categories have been deleted successfully');
+             } else {
+                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+             }
+         }
+     }
+     // get staffcategory row details
+     public function getstaffcategory_details(Request $request)
+     {
+ 
+         $validator = \Validator::make($request->all(), [
+             'id' => 'required',
+             'branch_id' => 'required',
+             'token' => 'required'
+         ]);
+ 
+         if (!$validator->passes()) {
+             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+         } else {
+             $id = $request->id;
+             // create new connection
+             $staffConn = $this->createNewConnection($request->branch_id);
+             // get data
+             $deptDetails = $staffConn->table('staff_categories')->where('id', $id)->first();
+             return $this->successResponse($deptDetails, 'staff categories row fetch successfully');
+         }
+     }
+  
+    // staff category end
     // addDepartment
     public function addDepartment(Request $request)
     {
@@ -9695,12 +9972,12 @@ class ApiController extends BaseController
                 ->where([
                     ['student_subjectdivision_inst.exam_id', '=', $request->exam_id],
                     ['student_subjectdivision_inst.student_id', '=', $request->student_id]
-                ])               
+                ])
                 ->whereYear('timetable_exam.exam_date', $request->selected_year)
-                ->get();                
-                $object->subjectreport_div = $subjectreport_subject_division;
-                array_push($allsubjectreport, $object);
-              //dd($allsubjectreport);
+                ->get();
+            $object->subjectreport_div = $subjectreport_subject_division;
+            array_push($allsubjectreport, $object);
+            //dd($allsubjectreport);
             return $this->successResponse($allsubjectreport, 'get report for student fetch successfully');
         }
     }

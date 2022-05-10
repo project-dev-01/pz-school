@@ -653,6 +653,16 @@
                     <div class="collapse" id="sidebarEmployee">
                         <ul class="nav-second-level">
                             <li>
+                                <a href="{{ route('admin.qualification')}}" class="nav-link {{ (request()->is('admin/qualification*')) ? 'active' : '' }}">
+                                    <span> Add Qualification </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.staffcategory')}}" class="nav-link {{ (request()->is('admin/staffcategory*')) ? 'active' : '' }}">
+                                    <span> Add Staff Category </span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('admin.department')}}" class="nav-link {{ (request()->is('admin/department*')) ? 'active' : '' }}">
                                     <span> Add Department </span>
                                 </a>
