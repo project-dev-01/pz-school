@@ -2208,7 +2208,7 @@ class ApiController extends BaseController
         }
     }
     // get qualifications
-    public function getQualifications(Request $request)
+    public function getQualificationsLst(Request $request)
     {
         $validator = \Validator::make($request->all(), [
             'branch_id' => 'required'
