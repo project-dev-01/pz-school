@@ -1,9 +1,5 @@
 @extends('layouts.admin-layout')
 @section('title','Employee')
-@section('css')
-<link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
-<link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
-@endsection
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -20,21 +16,19 @@
 
     <div class="row">
         <div class="col-xl-12 addEmployeeForm">
-            <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
-                    <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span data-feather="" class="icon-dual" id="span-parent"></span>Employee Details
-                            <h4>
-                    </li>
-                </ul>
-                <div class="card-body">
-                    <form id="addEmployeeForm" method="post" action="{{ route('admin.employee.add') }}" enctype="multipart/form-data" autocomplete="off">
-                        @csrf
-                        <span class="fas fa-user-check  " id="span-parent"></span>
-                        <span class="header-title mb-3" id="span-parent">Personal details
-                            <hr id="hr">
-                        </span>
+            <form id="addEmployeeForm" method="post" action="{{ route('admin.employee.add') }}" enctype="multipart/form-data" autocomplete="off">
+                @csrf
+
+                <div class="card">
+                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                        <li class="nav-item">
+                            <h4 class="nav-link">
+                                <span data-feather="" class="icon-dual" id="span-parent"></span>Employee Details
+                                <h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
+
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -51,7 +45,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="gender">Gender<span class="text-danger">*</span></label>
+                                    <label for="gender">Gender</label>
                                     <select class="form-control" name="gender" id="gender">
                                         <option value="">Choose Gender</option>
                                         <option value="Male">Male</option>
@@ -63,31 +57,19 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="religion">Religion<span class="text-danger">*</span></label>
+                                    <label for="religion">Religion</label>
                                     <select class="form-control" name="religion" id="religion">
                                         <option value="">Choose Religion</option>
-                                        @forelse($religion as $r)
-                                        <option value="{{$r['id']}}">{{$r['religions_name']}}</option>
-                                        @empty
-                                        @endforelse
+                                        <option value="Hindu">Hindu</option>
+                                        <option value="Muslim">Muslim</option>
+                                        <option value="Christain">Christain</option>
+                                        <option value="Others">Others</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="race">Race<span class="text-danger">*</span></label>
-                                    <select class="form-control" name="race" id="addRace">
-                                        <option value="">Choose race</option>
-                                        @forelse($races as $r)
-                                        <option value="{{$r['id']}}">{{$r['races_name']}}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="blood_group">Blood Group<span class="text-danger">*</span></label>
+                                    <label for="blood_group">Blood Group</label>
                                     <select class="form-control" name="blood_group" id="blood_group">
                                         <option value="">Choose Blood Group</option>
                                         <option value="A+">A+</option>
@@ -101,31 +83,9 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="Qualification">Qualification<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="qualification" id="empQuatification">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="Passport">Passport</label>
-                                    <input type="text" class="form-control" name="passport" id="Passport">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="nric_number">NRIC Number</label>
-                                    <input type="text" class="form-control" name="nric_number" id="nricNumber">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
                                 <div class="form-group mb-3">
-                                    <label for="birthday">Date Of Birth<span class="text-danger">*</span></label>
+                                    <label for="birthday">Date Of Birth</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -136,7 +96,29 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="Qualification">Qualification</label>
+                                    <input type="text" class="form-control" name="Qualification" id="Qualification">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="Passport">Passport</label>
+                                    <input type="text" class="form-control" name="Passport" id="Passport">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="nric_number">NRIC Number</label>
+                                    <input type="text" class="form-control" name="nric_number" id="nricNumber">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
                                 <div class="input-group input-group-merge">
                                     <div class="input-group-prepend">
@@ -152,14 +134,14 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="present_address">Present Address<span class="text-danger">*</span></label>
+                                    <label for="present_address">Present Address</label>
                                     <textarea class="form-control" name="present_address" id="present_address" data-parsley-trigger="keyup" data-parsley-minlength="10" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                                     </textarea>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="permanent_address">Permanent Address<span class="text-danger">*</span></label>
+                                    <label for="permanent_address">Permanent Address</label>
                                     <textarea class="form-control" name="permanent_address" id="permanent_address" data-parsley-trigger="keyup" data-parsley-minlength="10" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                                     </textarea>
                                 </div>
@@ -169,16 +151,21 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="photo">Profile Picture</label>
-                                    <!-- <input type="file" name="photo" id="photo" /> -->
-                                    <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="" />
-
+                                    <input type="file" name="photo" id="photo" />
                                 </div>
                             </div>
                         </div>
-                        <span class="fas fa-user-check  " id="span-parent"></span>
-                        <span class="header-title mb-3" id="span-parent">Employee details
-                            <hr id="hr">
-                        </span>
+                    </div>
+                </div>
+                <div class="card">
+                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                        <li class="nav-item">
+                            <h4 class="nav-link">
+                                <span data-feather="" class="icon-dual" id="span-parent"></span>Employee Details
+                                <h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -207,7 +194,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="designation_id">Designation<span class="text-danger">*</span></label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDesignation" name="designation_id" multiple="multiple" data-placeholder="Choose ...">
+                                    <select class="form-control" id="empDesignation" name="designation_id">
                                         <option value="">Select Designation</option>
                                         @if(!empty($emp_designation))
                                         @foreach($emp_designation as $r)
@@ -223,25 +210,20 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="department_id">Department<span class="text-danger">*</span></label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDepartment" name="department_id" multiple="multiple" data-placeholder="Choose ...">
+                                    <select class="form-control" id="empDepartment" name="department_id">
                                         <option value="">Select Department</option>
-                                        @forelse($emp_department as $r)
+                                        @if(!empty($emp_department))
+                                        @foreach($emp_department as $r)
                                         <option value="{{$r['id']}}">{{$r['name']}}</option>
-                                        @empty
-                                        @endforelse
+                                        @endforeach
+                                        @endif
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="staff_position">Staff Position</label>
-                                    <select class="form-control" id="staffPosition" name="staff_position">
-                                        <option value="">Select Position</option>
-                                        @forelse($staff_positions as $r)
-                                        <option value="{{$r['id']}}">{{$r['staff_positions_name']}}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
+                                    <input type="text" class="form-control" name="staff_position" id="staffPosition">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -256,46 +238,22 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="staff_category">Staff Category</label>
-                                    <select class="form-control" id="staffCategory" name="staff_category">
-                                        <option value="">Select Category</option>
-                                        @forelse($staff_categories as $r)
-                                        <option value="{{$r['id']}}">{{$r['staff_categories_name']}}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="qualifications">Staff Qualification</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" id="staffQualification" name="staff_qualification_id" multiple="multiple" data-placeholder="Choose ...">
-                                        <option value="">Select Qualification</option>
-                                        @forelse($qualifications as $r)
-                                        <option value="{{$r['id']}}">{{$r['qualification_name']}}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="stream_type">Stream Type</label>
-                                    <select class="form-control" id="streamType" name="stream_type">
-                                        <option value="">Select Stream Type</option>
-                                        @forelse($stream_types as $r)
-                                        <option value="{{$r['id']}}">{{$r['stream_types_name']}}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
+                                    <input type="text" class="form-control" name="staff_category" id="staffCategory">
                                 </div>
                             </div>
 
                         </div>
-
-                        <span class="fas fa-user-lock " id="span-parent"></span>
-                        <span class="header-title mb-3" id="span-parent"> Login Details
-                            <hr id="hr">
-                        </span>
+                    </div>
+                </div>
+                <div class="card">
+                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                        <li class="nav-item">
+                            <h4 class="nav-link">
+                                <span data-feather="" class="icon-dual" id="span-parent"></span>Login Details
+                                <h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
@@ -337,10 +295,17 @@
                                 </div>
                             </div>
                         </div>
-                        <span class="fas fa-globe  " id="span-parent"></span>
-                        <span class="header-title mb-3" id="span-parent">Social Links
-                            <hr id="hr">
-                        </span>
+                    </div>
+                </div>
+                <div class="card">
+                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                        <li class="nav-item">
+                            <h4 class="nav-link">
+                                <span data-feather="" class="icon-dual" id="span-parent"></span>Social Links
+                                <h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
@@ -382,10 +347,17 @@
                                 </div>
                             </div>
                         </div>
-                        <span class="fas fa-university " id="span-parent"></span>
-                        <span class="header-title mb-3" id="span-parent"> Bank Details
-                            <hr id="hr">
-                        </span>
+                    </div>
+                </div>
+                <div class="card">
+                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                        <li class="nav-item">
+                            <h4 class="nav-link">
+                                <span data-feather="" class="icon-dual" id="span-parent"></span>Bank Details
+                                <h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="skip_bank_details" name="skip_bank_details">
@@ -443,28 +415,23 @@
                             Cancel
                         </button>-->
                         </div>
-                    </form>
+            </form>
 
 
-                </div> <!-- end card-body -->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
+        </div> <!-- end card-body -->
+    </div> <!-- end card-->
+</div> <!-- end col -->
 
-    </div>
-    <!-- end row -->
+</div>
+<!-- end row -->
 
 
 
 </div> <!-- container -->
 @endsection
 @section('scripts')
-<script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
-<script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
-<script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
-
 <script>
     var employeeListShow = "{{ route('admin.listemployee') }}";
 </script>
-<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
 <script src="{{ asset('js/custom/employee.js') }}"></script>
 @endsection

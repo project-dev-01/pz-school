@@ -66,7 +66,7 @@ $(function () {
             designation_id: "required",
             department_id: "required",
             qualification: "required",
-
+            race: "required",
             name: "required",
             gender: "required",
             religion: "required",
@@ -95,7 +95,6 @@ $(function () {
     // save employee
     $('#addEmployeeForm').on('submit', function (e) {
         e.preventDefault();
-
         var employeeCheck = $("#addEmployeeForm").valid();
         if (employeeCheck === true) {
             var skip_bank_details = 1;
@@ -134,10 +133,15 @@ $(function () {
             formData.append('staff_position', $('#staffPosition').val());
             formData.append('staff_category', $('#staffCategory').val());
             formData.append('nric_number', $('#nricNumber').val());
-            formData.append('passport', $('#passport').val());
+            formData.append('passport', $('#Passport').val());
+            formData.append('staff_qualification_id', $('#staffQualification').val());
+            formData.append('stream_type_id', $('#streamType').val());
+            formData.append('race', $('#addRace').val());
             // Attach file
             formData.append('photo', $('input[type=file]')[0].files[0]);
-
+            // for (var pair of formData.entries()) {
+            //     console.log(pair[0] + ', ' + pair[1]);
+            // }
             var form = this;
             $("#overlay").fadeIn(300);
 
@@ -171,12 +175,36 @@ $(function () {
     // rules validation
     $("#editEmployeeForm").validate({
         rules: {
+            // role_id: "required",
+            // joining_date: "required",
+            // designation_id: "required",
+            // department_id: "required",
+            // qualification: "required",
+
+            // name: "required",
+            // gender: "required",
+            // religion: "required",
+            // blood_group: "required",
+            // birthday: "required",
+            // mobile_no: "required",
+            // present_address: "required",
+            // permanent_address: "required",
+            // bank_name: "required",
+            // holder_name: "required",
+            // bank_branch: "required",
+            // bank_address: "required",
+            // ifsc_code: "required",
+            // account_no: "required"
             role_id: "required",
             joining_date: "required",
+            email: {
+                required: true,
+                email: true
+            },
             designation_id: "required",
             department_id: "required",
             qualification: "required",
-
+            race: "required",
             name: "required",
             gender: "required",
             religion: "required",
@@ -185,6 +213,15 @@ $(function () {
             mobile_no: "required",
             present_address: "required",
             permanent_address: "required",
+            password: {
+                required: true,
+                minlength: 5
+            },
+            confirm_password: {
+                required: true,
+                minlength: 5,
+                equalTo: "#password"
+            },
             bank_name: "required",
             holder_name: "required",
             bank_branch: "required",
@@ -192,6 +229,7 @@ $(function () {
             ifsc_code: "required",
             account_no: "required"
         }
+
     });
     // edit Employee
     $('#editEmployeeForm').on('submit', function (e) {
@@ -232,8 +270,15 @@ $(function () {
             formData.append('staff_position', $('#staffPosition').val());
             formData.append('staff_category', $('#staffCategory').val());
             formData.append('nric_number', $('#nricNumber').val());
-            formData.append('passport', $('#passport').val());
+            formData.append('passport', $('#Passport').val());
+            formData.append('staff_qualification_id', $('#staffQualification').val());
+            formData.append('stream_type_id', $('#streamType').val());
+            formData.append('race', $('#addRace').val());
+            formData.append('old_photo', $('#oldPhoto').val());
+            
             // Attach file
+            formData.append('photo', $('input[type=file]')[0].files[0]);
+
             // formData.append('photo', $('input[type=file]')[0].files[0]);
             // Attach file
             // formData.append('photo', $('input[type=file]')[0].files[0]);

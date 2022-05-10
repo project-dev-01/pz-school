@@ -603,7 +603,7 @@
                 </li>
                 <li>
                     <a href="#sidebarStudentDetails" data-toggle="collapse">
-                        <i class="fas fa-users"></i>
+                        <i class="fas fa-user-graduate"></i>
                         <span> Student Details </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -682,13 +682,13 @@
                                     <span>Stream Type </span>
                                 </a>
                             </li>
-                            
+
                             <li>
                                 <a href="{{ route('admin.religion')}}" class="nav-link {{ (request()->is('admin/religion*')) ? 'active' : '' }}">
                                     <span>Religion </span>
                                 </a>
                             </li>
-                            
+
                             <li>
                                 <a href="{{ route('admin.race')}}" class="nav-link {{ (request()->is('admin/race*')) ? 'active' : '' }}">
                                     <span>Race </span>
@@ -709,7 +709,7 @@
                 </li>
                 <li>
                     <a href="#sidebartimeTable" data-toggle="collapse">
-                        <i data-feather="external-link" class="icon-dual"></i>
+                        <i class="far fa-calendar-alt"></i>
                         <span> Time Table </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -833,7 +833,7 @@
                 </li>
                 <li>
                     <a href="#sidebarAttendance" data-toggle="collapse">
-                        <i data-feather="map"></i>
+                        <i class="fas fa-chalkboard-teacher"></i>
                         <span> Attendance </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -1095,7 +1095,7 @@
                 </li>
                 <li>
                     <a href="{{ route('admin.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('admin/forum*')) ? 'active' : '' }}">
-                        <i data-feather="external-link" class="icon-dual"></i>
+                        <i class="far fa-comments"></i>
                         <span> Forum </span>
                     </a>
                 </li>

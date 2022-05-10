@@ -269,12 +269,12 @@ class AdminController extends Controller
     //
     public function index()
     {
-        $user_id = session()->get('user_id');     
+        $user_id = session()->get('user_id');
         $data = [
             'user_id' => $user_id
         ];
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_list_dashboard'), $data);
-      //  dd($get_to_do_list_dashboard);
+        //  dd($get_to_do_list_dashboard);
         return view(
             'admin.dashboard.index',
             [
@@ -291,7 +291,7 @@ class AdminController extends Controller
     {
         return view('admin.settings.logo');
     }
-    
+
     public function classes()
     {
         return view('admin.classes.index');
@@ -1110,11 +1110,11 @@ class AdminController extends Controller
             $data = file_get_contents($path);
             $base64 = base64_encode($data);
             $extension = $file->getClientOriginalExtension();
-        }else{
+        } else {
             $base64 = null;
             $extension = null;
         }
-        
+
         $data = [
             'role_id' => $request->role_id,
             'joining_date' => $request->joining_date,
@@ -1149,6 +1149,9 @@ class AdminController extends Controller
             'staff_category' => $request->staff_category,
             'nric_number' => $request->nric_number,
             'passport' => $request->passport,
+            'staff_qualification_id' => $request->staff_qualification_id,
+            'stream_type_id' => $request->stream_type_id,
+            'race' => $request->race,
 
         ];
         // dd($data);
@@ -1192,7 +1195,12 @@ class AdminController extends Controller
         $department = Helper::PostMethod(config('constants.api.emp_department'), []);
         $designation = Helper::PostMethod(config('constants.api.emp_designation'), []);
         $staff = Helper::PostMethod(config('constants.api.employee_details'), $res);
-
+        $qualifications = Helper::GetMethod(config('constants.api.get_qualifications'));
+        $staff_categories = Helper::GetMethod(config('constants.api.staff_categories'));
+        $staff_positions = Helper::GetMethod(config('constants.api.staff_positions'));
+        $stream_types = Helper::GetMethod(config('constants.api.stream_types'));
+        $religion = Helper::GetMethod(config('constants.api.religion'));
+        $races = Helper::GetMethod(config('constants.api.races'));
         // dd($staff);
         return view(
             'admin.employee.edit',
@@ -1203,7 +1211,13 @@ class AdminController extends Controller
                 'bank' => $staff['data']['bank'],
                 'department' => $department['data'],
                 'designation' => $designation['data'],
-                'role' => $staff['data']['user']
+                'role' => $staff['data']['user'],
+                'qualifications' => $qualifications['data'],
+                'staff_categories' => $staff_categories['data'],
+                'staff_positions' => $staff_positions['data'],
+                'stream_types' => $stream_types['data'],
+                'religion' => $religion['data'],
+                'races' => $races['data'],
             ]
         );
     }
@@ -1219,6 +1233,12 @@ class AdminController extends Controller
         $roles = Helper::PostMethod(config('constants.api.roles'), $data);
         $emp_department = Helper::PostMethod(config('constants.api.emp_department'), []);
         $emp_designation = Helper::PostMethod(config('constants.api.emp_designation'), []);
+        $qualifications = Helper::GetMethod(config('constants.api.get_qualifications'));
+        $staff_categories = Helper::GetMethod(config('constants.api.staff_categories'));
+        $staff_positions = Helper::GetMethod(config('constants.api.staff_positions'));
+        $stream_types = Helper::GetMethod(config('constants.api.stream_types'));
+        $religion = Helper::GetMethod(config('constants.api.religion'));
+        $races = Helper::GetMethod(config('constants.api.races'));
         return view(
             'admin.employee.index',
             [
@@ -1226,13 +1246,29 @@ class AdminController extends Controller
                 'roles' => $roles['data'],
                 'emp_department' => !empty($emp_department) ? $emp_department['data'] : $emp_department,
                 'emp_designation' => !empty($emp_designation) ? $emp_designation['data'] : $emp_designation,
+                'qualifications' => $qualifications['data'],
+                'staff_categories' => $staff_categories['data'],
+                'staff_positions' => $staff_positions['data'],
+                'stream_types' => $stream_types['data'],
+                'religion' => $religion['data'],
+                'races' => $races['data'],
             ]
         );
     }
     // update Employee
     public function updateEmployee(Request $request)
     {
+        $file = $request->file('photo');
 
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        } else {
+            $base64 = null;
+            $extension = null;
+        }
         $data = [
             'id' => $request->id,
             'role_id' => $request->role_id,
@@ -1248,6 +1284,8 @@ class AdminController extends Controller
             'mobile_no' => $request->mobile_no,
             'present_address' => $request->present_address,
             'permanent_address' => $request->permanent_address,
+            'photo' => $base64,
+            'file_extension' => $extension,
             'skip_bank_details' => $request->skip_bank_details,
             'facebook_url' => $request->facebook_url,
             'twitter_url' => $request->twitter_url,
@@ -1263,8 +1301,11 @@ class AdminController extends Controller
             'staff_category' => $request->staff_category,
             'nric_number' => $request->nric_number,
             'passport' => $request->passport,
+            'staff_qualification_id' => $request->staff_qualification_id,
+            'stream_type_id' => $request->stream_type_id,
+            'race' => $request->race,
+            'old_photo' => $request->old_photo
         ];
-
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.employee_update'), $data);
         return $response;
@@ -1969,14 +2010,14 @@ class AdminController extends Controller
     }
     // Qualifications
     public function qualification_view()
-    {    
+    {
         //dd('resp');
         return view('admin.qualifications.index');
     }
     public function getqualification_list()
-    {      
+    {
         $response = Helper::GetMethod(config('constants.api.qualification_list'));
-      
+
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
@@ -1990,14 +2031,14 @@ class AdminController extends Controller
             ->make(true);
     }
     public function qualification_add(Request $request)
-    {        
+    {
         $data = [
             'name' => $request->name
         ];
-       
+
         $response = Helper::PostMethod(config('constants.api.qualification_add'), $data);
-     
-        return $response;     
+
+        return $response;
     }
     public function qualification_update(Request $request)
     {
@@ -2006,7 +2047,7 @@ class AdminController extends Controller
             'name' => $request->name
         ];
         $response = Helper::PostMethod(config('constants.api.qualifications_update'), $data);
-        return $response;     
+        return $response;
     }
     public function qualification_delete(Request $request)
     {
@@ -2045,18 +2086,18 @@ class AdminController extends Controller
             'name' => $request->name
         ];
         $response = Helper::PostMethod(config('constants.api.staffcategory_add'), $data);
-     
-        return $response; 
+
+        return $response;
     }
     public function staffcategories_edit(Request $request)
     {
-      
+
         $data = [
             'id' => $request->id,
             'name' => $request->name
         ];
         $response = Helper::PostMethod(config('constants.api.staffcategory_update'), $data);
-        return $response; 
+        return $response;
     }
     public function staffcategories_delete(Request $request)
     {
@@ -2076,9 +2117,9 @@ class AdminController extends Controller
         }
     }
     public function staffcategories_list()
-    {      
+    {
         $response = Helper::GetMethod(config('constants.api.staffcategory_list'));
-      
+
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {

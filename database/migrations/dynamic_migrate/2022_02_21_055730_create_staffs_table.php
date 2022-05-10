@@ -17,13 +17,14 @@ class CreateStaffsTable extends Migration
             $table->id();
             $table->string('staff_id');
             $table->string('name');
-            $table->integer('department_id');
-            $table->integer('designation_id');
+            $table->string('department_id');
+            $table->string('designation_id');
             $table->string('qualification');
             $table->string('joining_date');
             $table->string('birthday');
             $table->string('gender');
             $table->string('religion');
+            $table->string('race');
             $table->string('blood_group');
             $table->text('present_address');
             $table->text('permanent_address');
@@ -38,6 +39,8 @@ class CreateStaffsTable extends Migration
             $table->string('staff_position')->nullable();
             $table->string('nric_number')->nullable();
             $table->string('passport')->nullable();
+            $table->string('staff_qualification_id')->nullable();
+            $table->string('stream_type_id')->nullable();
             $table->timestamps();
         });
     }

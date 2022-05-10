@@ -192,6 +192,10 @@
                 opacity: 0;
             }
         }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            background-color: blue !important;
+        }
     </style>
     <!-- date picker -->
     <link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />

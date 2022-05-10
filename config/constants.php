@@ -172,7 +172,13 @@ return [
          'employee_details' => $url.'/employee/employee-details',
          'employee_update' => $url.'/employee/update',
          'employee_delete' => $url.'/employee/delete',
-         
+
+         'get_qualifications' => $url.'/employee/get_qualifications',
+         'staff_categories' => $url.'/employee/staff_categories',
+         'staff_positions' => $url.'/employee/staff_positions',
+         'stream_types' => $url.'/employee/stream_types',
+         'religion' => $url.'/employee/religion',
+         'races' => $url.'/employee/races',
          // timetable url
         'timetable_add' => $url.'/timetable/add',
         'timetable_list' => $url.'/timetable/list',

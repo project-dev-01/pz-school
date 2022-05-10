@@ -152,28 +152,28 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('designation/delete', [ApiController::class, 'deleteDesignation']);
 
     // staff position routes
-    Route::post('staff_position/add',[ApiController::class,'addStaffPosition']);
+    Route::post('staff_position/add', [ApiController::class, 'addStaffPosition']);
     Route::get('staff_position/list', [ApiController::class, 'getStaffPositionList']);
     Route::post('staff_position/staff_position-details', [ApiController::class, 'getStaffPositionDetails']);
     Route::post('staff_position/update', [ApiController::class, 'updateStaffPosition']);
     Route::post('staff_position/delete', [ApiController::class, 'deleteStaffPosition']);
 
     // Stream Type routes
-    Route::post('stream_type/add',[ApiController::class,'addStreamType']);
+    Route::post('stream_type/add', [ApiController::class, 'addStreamType']);
     Route::get('stream_type/list', [ApiController::class, 'getStreamTypeList']);
     Route::post('stream_type/stream_type-details', [ApiController::class, 'getStreamTypeDetails']);
     Route::post('stream_type/update', [ApiController::class, 'updateStreamType']);
     Route::post('stream_type/delete', [ApiController::class, 'deleteStreamType']);
 
     // Religion routes
-    Route::post('religion/add',[ApiController::class,'addReligion']);
+    Route::post('religion/add', [ApiController::class, 'addReligion']);
     Route::get('religion/list', [ApiController::class, 'getReligionList']);
     Route::post('religion/religion-details', [ApiController::class, 'getReligionDetails']);
     Route::post('religion/update', [ApiController::class, 'updateReligion']);
     Route::post('religion/delete', [ApiController::class, 'deleteReligion']);
 
     // race routes
-    Route::post('race/add',[ApiController::class,'addRace']);
+    Route::post('race/add', [ApiController::class, 'addRace']);
     Route::get('race/list', [ApiController::class, 'getRaceList']);
     Route::post('race/race-details', [ApiController::class, 'getRaceDetails']);
     Route::post('race/update', [ApiController::class, 'updateRace']);
@@ -235,6 +235,18 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('employee/employee-details', [ApiController::class, 'getEmployeeDetails']);
     Route::post('employee/update', [ApiController::class, 'updateEmployee']);
     Route::post('employee/delete', [ApiController::class, 'deleteEmployee']);
+    // get_qualifications
+    Route::get('employee/get_qualifications', [ApiController::class, 'getQualifications']);
+    // staff_categories
+    Route::get('employee/staff_categories', [ApiController::class, 'staffCategories']);
+    // staff_positions
+    Route::get('employee/staff_positions', [ApiController::class, 'staffPositions']);
+    // stream_types
+    Route::get('employee/stream_types', [ApiController::class, 'streamTypes']);
+    // stream_types
+    Route::get('employee/religion', [ApiController::class, 'getReligion']);
+    // stream_types
+    Route::get('employee/races', [ApiController::class, 'getRaces']);
     // settings
     Route::post('change-profile-picture', [ApiController::class, 'updatePicture']);
     Route::post('settings/logo', [ApiController::class, 'changeLogo']);

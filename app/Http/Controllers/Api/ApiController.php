@@ -1767,142 +1767,142 @@ class ApiController extends BaseController
     // Qualifaication end
 
     // staff category start 
-     // add qualification
-     public function add_staffcategory(Request $request)
-     {
-         $validator = \Validator::make($request->all(), [
-             'name' => 'required',
-             'branch_id' => 'required',
-             'token' => 'required',
-         ]);
-        
-         if (!$validator->passes()) {
-             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-         } else {
- 
-             // create new connection
-             $qulifyConn = $this->createNewConnection($request->branch_id);
-             // check exist name
-             if ($qulifyConn->table('staff_categories')->where('name', '=', $request->name)->count() > 0) {
-                 return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
-             } else {
-                 // insert data
-                 $query = $qulifyConn->table('staff_categories')->insert([
-                     'name' => $request->name,
-                     'created_at' => date("Y-m-d H:i:s")
-                 ]);
-                 $success = [];
-                 if (!$query) {
-                     return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-                 } else {
-                     return $this->successResponse($success, 'staff category has been successfully saved');
-                 }
-             }
-         }
-     }
-     //view list staffcategory
-     public function getstaffcategory(Request $request)
-     {
-         $validator = \Validator::make($request->all(), [
-             'branch_id' => 'required',
-             'token' => 'required',
-         ]);
- 
-         if (!$validator->passes()) {
-             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-         } else {
-             // create new connection
-             $staffConn = $this->createNewConnection($request->branch_id);
-             // get data
-             $Department = $staffConn->table('staff_categories')->get();
- 
-             return $this->successResponse($Department, 'staff categories record fetch successfully');
-         }
-     }
-     // update staffcategory
-     public function updatestaffcategory(Request $request)
-     {
-         $id = $request->id;
-         $validator = \Validator::make($request->all(), [
-             'name' => 'required',
-             'branch_id' => 'required',
-             'token' => 'required',
-         ]);
- 
-         if (!$validator->passes()) {
-             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-         } else {
- 
-             // create new connection
-             $staffConn = $this->createNewConnection($request->branch_id);
-             // check exist name
-             if ($staffConn->table('staff_categories')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
-                 return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
-             } else {
-                 // update data
-                 $query = $staffConn->table('staff_categories')->where('id', $id)->update([
-                     'name' => $request->name,
-                     'updated_at' => date("Y-m-d H:i:s")
-                 ]);
-                 $success = [];
-                 if ($query) {
-                     return $this->successResponse($success, 'staff categories Details have Been updated');
-                 } else {
-                     return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-                 }
-             }
-         }
-     }
-     // delete staffcategory
-     public function deletestaffcategory(Request $request)
-     {
- 
-         $id = $request->id;
-         $validator = \Validator::make($request->all(), [
-             'token' => 'required',
-             'branch_id' => 'required',
-             'id' => 'required',
-         ]);
- 
-         if (!$validator->passes()) {
-             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-         } else {
-             // $query = StaffDepartments::find($id)->delete();
-             // create new connection
-             $staffConn = $this->createNewConnection($request->branch_id);
-             // get data
-             $query = $staffConn->table('staff_categories')->where('id', $id)->delete();
- 
-             $success = [];
-             if ($query) {
-                 return $this->successResponse($success, 'staff categories have been deleted successfully');
-             } else {
-                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-             }
-         }
-     }
-     // get staffcategory row details
-     public function getstaffcategory_details(Request $request)
-     {
- 
-         $validator = \Validator::make($request->all(), [
-             'id' => 'required',
-             'branch_id' => 'required',
-             'token' => 'required'
-         ]);
- 
-         if (!$validator->passes()) {
-             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-         } else {
-             $id = $request->id;
-             // create new connection
-             $staffConn = $this->createNewConnection($request->branch_id);
-             // get data
-             $deptDetails = $staffConn->table('staff_categories')->where('id', $id)->first();
-             return $this->successResponse($deptDetails, 'staff categories row fetch successfully');
-         }
-     }
-  
+    // add qualification
+    public function add_staffcategory(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $qulifyConn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($qulifyConn->table('staff_categories')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // insert data
+                $query = $qulifyConn->table('staff_categories')->insert([
+                    'name' => $request->name,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'staff category has been successfully saved');
+                }
+            }
+        }
+    }
+    //view list staffcategory
+    public function getstaffcategory(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $Department = $staffConn->table('staff_categories')->get();
+
+            return $this->successResponse($Department, 'staff categories record fetch successfully');
+        }
+    }
+    // update staffcategory
+    public function updatestaffcategory(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($staffConn->table('staff_categories')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // update data
+                $query = $staffConn->table('staff_categories')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'staff categories Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+            }
+        }
+    }
+    // delete staffcategory
+    public function deletestaffcategory(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // $query = StaffDepartments::find($id)->delete();
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $staffConn->table('staff_categories')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'staff categories have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+    // get staffcategory row details
+    public function getstaffcategory_details(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $deptDetails = $staffConn->table('staff_categories')->where('id', $id)->first();
+            return $this->successResponse($deptDetails, 'staff categories row fetch successfully');
+        }
+    }
+
     // staff category end
     // addDepartment
     public function addDepartment(Request $request)
@@ -2207,7 +2207,108 @@ class ApiController extends BaseController
             return $this->successResponse($StaffDesig, 'Designation record fetch successfully');
         }
     }
+    // get qualifications
+    public function getQualifications(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required'
+        ]);
 
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get data
+            $StaffDepartment = $Connection->table('qualifications')->select('id', 'name as qualification_name')->get();
+            return $this->successResponse($StaffDepartment, 'Qualifications record fetch successfully');
+        }
+    }
+    // staffCategories
+    public function staffCategories(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get data
+            $StaffDepartment = $Connection->table('staff_categories')->select('id', 'name as staff_categories_name')->get();
+            return $this->successResponse($StaffDepartment, 'Staff Categories record fetch successfully');
+        }
+    }
+    // staffPositons
+    public function staffPositions(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get data
+            $StaffDepartment = $Connection->table('staff_positions')->select('id', 'name as staff_positions_name')->get();
+            return $this->successResponse($StaffDepartment, 'Staff Positons record fetch successfully');
+        }
+    }
+    // streamTypes
+    public function streamTypes(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get data
+            $StaffDepartment = $Connection->table('stream_types')->select('id', 'name as stream_types_name')->get();
+            return $this->successResponse($StaffDepartment, 'Sream Types record fetch successfully');
+        }
+    }
+    // getReligion
+    public function getReligion(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get data
+            $StaffDepartment = $Connection->table('religions')->select('id', 'name as religions_name')->get();
+            return $this->successResponse($StaffDepartment, 'Religions record fetch successfully');
+        }
+    }
+    // streamTypes
+    public function getRaces(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get data
+            $StaffDepartment = $Connection->table('races')->select('id', 'name as races_name')->get();
+            return $this->successResponse($StaffDepartment, 'Races record fetch successfully');
+        }
+    }
     // add Employee
     public function addEmployee(Request $request)
     {
@@ -2219,6 +2320,7 @@ class ApiController extends BaseController
             'designation_id' => 'required',
             'designation_id' => 'required',
             'qualification' => 'required',
+            'race' => 'required',
             'name' => 'required',
             'gender' => 'required',
             'religion' => 'required',
@@ -2276,14 +2378,17 @@ class ApiController extends BaseController
                         'name' => $request->name,
                         'department_id' => $request->department_id,
                         'designation_id' => $request->designation_id,
+                        'staff_qualification_id' => $request->staff_qualification_id,
+                        'stream_type_id' => $request->stream_type_id,
                         'qualification' => $request->qualification,
+                        'race' => $request->race,
                         'joining_date' => $request->joining_date,
                         'birthday' => $request->birthday,
                         'gender' => $request->gender,
                         'religion' => $request->religion,
                         'blood_group' => $request->blood_group,
-                        'present_address' => $request->present_address,
-                        'permanent_address' => $request->permanent_address,
+                        'present_address' => trim($request->present_address),
+                        'permanent_address' => trim($request->permanent_address),
                         'mobile_no' => $request->mobile_no,
                         'email' => $request->email,
                         'photo' => $fileName,
@@ -2344,9 +2449,15 @@ class ApiController extends BaseController
         // create new connection
         $Connection = $this->createNewConnection($request->branch_id);
         $Staff = $Connection->table('staffs as s')
-            ->select('s.*', 'dp.name as department_name', 'ds.name as designation_name')
-            ->join('staff_departments as dp', 's.department_id', '=', 'dp.id')
-            ->join('staff_designations as ds', 's.designation_id', '=', 'ds.id')
+            ->select(
+                "s.*",
+                DB::raw("GROUP_CONCAT(DISTINCT  dp.name) as department_name"),
+                DB::raw("GROUP_CONCAT(DISTINCT  ds.name) as designation_name")
+            )
+            ->join("staff_departments as dp", DB::raw("FIND_IN_SET(dp.id,s.department_id)"), ">", DB::raw("'0'"))
+            ->join("staff_designations as ds", DB::raw("FIND_IN_SET(ds.id,s.designation_id)"), ">", DB::raw("'0'"))
+            ->orderBy('s.created_at', 'desc')
+            ->groupBy("s.id")
             ->get();
         return $this->successResponse($Staff, 'Staff record fetch successfully');
     }
@@ -2382,7 +2493,7 @@ class ApiController extends BaseController
 
         $validator = \Validator::make($request->all(), [
             'branch_id' => 'required',
-            'token' => 'required',
+            'id' => 'required',
             'role_id' => 'required',
             'joining_date' => 'required',
             'designation_id' => 'required',
@@ -2396,6 +2507,7 @@ class ApiController extends BaseController
             'mobile_no' => 'required',
             'present_address' => 'required',
             'permanent_address' => 'required',
+            'race' => 'required',
         ]);
 
         if (!$validator->passes()) {
@@ -2425,26 +2537,43 @@ class ApiController extends BaseController
                     }
                 }
 
-                $picture = null;
-                if (!empty($request->file('photo'))) {
-                    $picture = $this->uploadUserProfile($request);
+                if (isset($request->old_photo) && empty($request->photo)) {
+                    $fileName = $request->old_photo;
+                } else {
+                    if (isset($request->photo)) {
+                        $now = now();
+                        $name = strtotime($now);
+                        $extension = $request->file_extension;
+                        $fileName = $name . "." . $extension;
+
+                        $base64 = base64_decode($request->photo);
+                        $file = base_path() . '/public/images/staffs/' . $fileName;
+                        $picture = file_put_contents($file, $base64);
+                    } else {
+                        $fileName = null;
+                    }
                 }
+
                 // update data
                 $query = $Connection->table('staffs')->where('id', $id)->update([
                     // 'staff_id' => $request->staff_id,
                     'name' => $request->name,
                     'department_id' => $request->department_id,
                     'designation_id' => $request->designation_id,
+                    'staff_qualification_id' => $request->staff_qualification_id,
+                    'stream_type_id' => $request->stream_type_id,
                     'qualification' => $request->qualification,
+                    'race' => $request->race,
                     'joining_date' => $request->joining_date,
                     'birthday' => $request->birthday,
                     'gender' => $request->gender,
                     'religion' => $request->religion,
                     'blood_group' => $request->blood_group,
-                    'present_address' => $request->present_address,
-                    'permanent_address' => $request->permanent_address,
+                    'present_address' => trim($request->present_address),
+                    'permanent_address' => trim($request->permanent_address),
                     'mobile_no' => $request->mobile_no,
-                    'photo' => $picture,
+                    // 'email' => $request->email,
+                    'photo' => $fileName,
                     'facebook_url' => $request->facebook_url,
                     'linkedin_url' => $request->linkedin_url,
                     'twitter_url' => $request->twitter_url,
@@ -2452,25 +2581,40 @@ class ApiController extends BaseController
                     'staff_position' => $request->staff_position,
                     'staff_category' => $request->staff_category,
                     'nric_number' => $request->nric_number,
-                    'passport' => $request->passport,
+                    'passport' => isset($request->passport) ? $request->passport : "",
                     'updated_at' => date("Y-m-d H:i:s")
                 ]);
+
                 $success = [];
                 if (!$query) {
                     return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong on Update employee']);
                 } else {
                     // add bank details
                     if ($request->skip_bank_details == 1) {
-                        $bank = $Connection->table('staff_bank_accounts')->where('staff_id', $id)->update([
-                            'staff_id' => $id,
-                            'bank_name' => $request->bank_name,
-                            'holder_name' => $request->holder_name,
-                            'bank_branch' => $request->bank_branch,
-                            'bank_address' => $request->bank_address,
-                            'ifsc_code' => $request->ifsc_code,
-                            'account_no' => $request->account_no,
-                            'updated_at' => date("Y-m-d H:i:s")
-                        ]);
+                        $bankRow = $Connection->table('staff_bank_accounts')->where('staff_id', $id)->first();
+                        if (isset($bankRow->id)) {
+                            $bank = $Connection->table('staff_bank_accounts')->where('staff_id', $id)->update([
+                                'staff_id' => $id,
+                                'bank_name' => $request->bank_name,
+                                'holder_name' => $request->holder_name,
+                                'bank_branch' => $request->bank_branch,
+                                'bank_address' => $request->bank_address,
+                                'ifsc_code' => $request->ifsc_code,
+                                'account_no' => $request->account_no,
+                                'updated_at' => date("Y-m-d H:i:s")
+                            ]);
+                        } else {
+                            $bank = $Connection->table('staff_bank_accounts')->insert([
+                                'staff_id' => $id,
+                                'bank_name' => $request->bank_name,
+                                'holder_name' => $request->holder_name,
+                                'bank_branch' => $request->bank_branch,
+                                'bank_address' => $request->bank_address,
+                                'ifsc_code' => $request->ifsc_code,
+                                'account_no' => $request->account_no,
+                                'created_at' => date("Y-m-d H:i:s")
+                            ]);
+                        }
                     }
                     $success = [];
                     if (!$query) {
