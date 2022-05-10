@@ -620,6 +620,21 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('event/delete', [StaffController::class, 'deleteEvent'])->name('staff.event.delete');
         Route::post('event/event-publish', [StaffController::class, 'publishEvent'])->name('staff.event.publish');
 
+        // Qualifications
+        Route::get('qualification/index', [StaffController::class, 'qualification_view'])->name('staff.qualification');
+        Route::post('qualification/add', [StaffController::class, 'qualification_add'])->name('staff.qualification.add');
+        Route::get('qualification/list', [StaffController::class, 'getqualification_list'])->name('staff.qualification.list');
+        Route::post('qualification/department-details', [StaffController::class, 'getQualificationsDetails'])->name('staff.qualification.details');
+        Route::post('qualification/update', [StaffController::class, 'qualification_update'])->name('staff.qualification.update');
+        Route::post('qualification/delete', [StaffController::class, 'qualification_delete'])->name('staff.qualification.delete');
+        // Staff category
+        Route::get('staffcategory/index', [StaffController::class, 'staffcategories_view'])->name('staff.staffcategory');
+        Route::post('staffcategory/add', [StaffController::class, 'staffcategories_add'])->name('staff.staffcategory.add');
+        Route::get('staffcategory/list', [StaffController::class, 'staffcategories_list'])->name('staff.staffcategory.list');
+        Route::post('staffcategory/staffcategory-details', [StaffController::class, 'getstaffcategoriesDetails'])->name('staff.staffcategory.details');
+        Route::post('staffcategory/update', [StaffController::class, 'staffcategories_edit'])->name('staff.staffcategory.update');
+        Route::post('staffcategory/delete', [StaffController::class, 'staffcategories_delete'])->name('staff.staffcategory.delete');
+
         // department routes
         Route::get('department/index', [StaffController::class, 'Department'])->name('staff.department');
         Route::post('department/add', [StaffController::class, 'addDepartment'])->name('staff.department.add');

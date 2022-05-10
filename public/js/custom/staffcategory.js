@@ -84,7 +84,7 @@ $(function () {
             $('.editstaffcatg').find('input[name="name"]').val(data.data.name);
             $('.editstaffcatg').modal('show');
         }, 'json');
-        console.log(data.data.id);
+        console.log(id);
     });
     // update department
     // update section

@@ -1173,6 +1173,16 @@
                     <div class="collapse" id="sidebarEmployee">
                         <ul class="nav-second-level">
                             <li>
+                                <a href="{{ route('staff.qualification')}}" class="nav-link {{ (request()->is('staff/qualification*')) ? 'active' : '' }}">
+                                    <span> Add Qualification </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('staff.staffcategory')}}" class="nav-link {{ (request()->is('staff/staffcategory*')) ? 'active' : '' }}">
+                                    <span> Add Staff Category </span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('staff.department')}}" class="nav-link {{ (request()->is('staff/department*')) ? 'active' : '' }}">
                                     <span> Add Department </span>
                                 </a>
