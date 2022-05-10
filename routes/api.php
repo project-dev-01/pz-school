@@ -151,6 +151,34 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('designation/update', [ApiController::class, 'updateDesignation']);
     Route::post('designation/delete', [ApiController::class, 'deleteDesignation']);
 
+    // staff position routes
+    Route::post('staff_position/add',[ApiController::class,'addStaffPosition']);
+    Route::get('staff_position/list', [ApiController::class, 'getStaffPositionList']);
+    Route::post('staff_position/staff_position-details', [ApiController::class, 'getStaffPositionDetails']);
+    Route::post('staff_position/update', [ApiController::class, 'updateStaffPosition']);
+    Route::post('staff_position/delete', [ApiController::class, 'deleteStaffPosition']);
+
+    // Stream Type routes
+    Route::post('stream_type/add',[ApiController::class,'addStreamType']);
+    Route::get('stream_type/list', [ApiController::class, 'getStreamTypeList']);
+    Route::post('stream_type/stream_type-details', [ApiController::class, 'getStreamTypeDetails']);
+    Route::post('stream_type/update', [ApiController::class, 'updateStreamType']);
+    Route::post('stream_type/delete', [ApiController::class, 'deleteStreamType']);
+
+    // Religion routes
+    Route::post('religion/add',[ApiController::class,'addReligion']);
+    Route::get('religion/list', [ApiController::class, 'getReligionList']);
+    Route::post('religion/religion-details', [ApiController::class, 'getReligionDetails']);
+    Route::post('religion/update', [ApiController::class, 'updateReligion']);
+    Route::post('religion/delete', [ApiController::class, 'deleteReligion']);
+
+    // race routes
+    Route::post('race/add',[ApiController::class,'addRace']);
+    Route::get('race/list', [ApiController::class, 'getRaceList']);
+    Route::post('race/race-details', [ApiController::class, 'getRaceDetails']);
+    Route::post('race/update', [ApiController::class, 'updateRace']);
+    Route::post('race/delete', [ApiController::class, 'deleteRace']);
+
     // Exam Term routes 
     Route::post('exam_term/add', [ApiController::class, 'addExamTerm']);
     Route::get('exam_term/list', [ApiController::class, 'getExamTermList']);

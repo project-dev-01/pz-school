@@ -132,6 +132,34 @@ return [
         'designation_update' => $url.'/designation/update',
         'designation_delete' => $url.'/designation/delete',
 
+        // staff position url
+        'staff_position_add' => $url.'/staff_position/add',
+        'staff_position_list' => $url.'/staff_position/list',
+        'staff_position_details' => $url.'/staff_position/staff_position-details',
+        'staff_position_update' => $url.'/staff_position/update',
+        'staff_position_delete' => $url.'/staff_position/delete',
+
+        // stream type url
+        'stream_type_add' => $url.'/stream_type/add',
+        'stream_type_list' => $url.'/stream_type/list',
+        'stream_type_details' => $url.'/stream_type/stream_type-details',
+        'stream_type_update' => $url.'/stream_type/update',
+        'stream_type_delete' => $url.'/stream_type/delete',
+
+        // religion url
+        'religion_add' => $url.'/religion/add',
+        'religion_list' => $url.'/religion/list',
+        'religion_details' => $url.'/religion/religion-details',
+        'religion_update' => $url.'/religion/update',
+        'religion_delete' => $url.'/religion/delete',
+
+        // race url
+        'race_add' => $url.'/race/add',
+        'race_list' => $url.'/race/list',
+        'race_details' => $url.'/race/race-details',
+        'race_update' => $url.'/race/update',
+        'race_delete' => $url.'/race/delete',
+
         //teacher url
         
         'teacher_list' => $url.'/teacher/list',

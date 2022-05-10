@@ -10065,4 +10065,540 @@ class ApiController extends BaseController
             return $this->successResponse($data, 'Test Score List fetch successfully');
         }
     }
+
+    // addStaffPosition
+    public function addStaffPosition(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('staff_positions')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // insert data
+                $query = $conn->table('staff_positions')->insert([
+                    'name' => $request->name,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Staff Position has been successfully saved');
+                }
+            }
+        }
+    }
+    // getStaffPositionList
+    public function getStaffPositionList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $posDetails = $conn->table('staff_positions')->get();
+            return $this->successResponse($posDetails, 'Staff Position record fetch successfully');
+        }
+    }
+    // get StaffPosition row details
+    public function getStaffPositionDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $posDetails = $conn->table('staff_positions')->where('id', $id)->first();
+            return $this->successResponse($posDetails, 'Staff Position row fetch successfully');
+        }
+    }
+    // update StaffPosition
+    public function updateStaffPosition(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('staff_positions')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // update data
+                $query = $conn->table('staff_positions')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Staff Position Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+            }
+        }
+    }
+    // delete StaffPosition
+    public function deleteStaffPosition(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('staff_positions')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Staff Position have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+
+    // addStreamType
+    public function addStreamType(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('stream_types')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // insert data
+                $query = $conn->table('stream_types')->insert([
+                    'name' => $request->name,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Stream Type has been successfully saved');
+                }
+            }
+        }
+    }
+    // getStreamTypeList
+    public function getStreamTypeList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $streamDetails = $conn->table('stream_types')->get();
+            return $this->successResponse($streamDetails, 'Stream Type record fetch successfully');
+        }
+    }
+    // get StreamType row details
+    public function getStreamTypeDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $streamDetails = $conn->table('stream_types')->where('id', $id)->first();
+            return $this->successResponse($streamDetails, 'Stream Type row fetch successfully');
+        }
+    }
+    // update StreamType
+    public function updateStreamType(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('stream_types')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // update data
+                $query = $conn->table('stream_types')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Stream Type Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+            }
+        }
+    }
+    // delete StreamType
+    public function deleteStreamType(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('stream_types')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Stream Type have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+
+    // addReligion
+    public function addReligion(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('religions')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // insert data
+                $query = $conn->table('religions')->insert([
+                    'name' => $request->name,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Religion has been successfully saved');
+                }
+            }
+        }
+    }
+    // getReligionList
+    public function getReligionList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $religionDetails = $conn->table('religions')->get();
+            return $this->successResponse($religionDetails, 'Religion record fetch successfully');
+        }
+    }
+    // get Religion row details
+    public function getReligionDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $religionDetails = $conn->table('religions')->where('id', $id)->first();
+            return $this->successResponse($religionDetails, 'Religion row fetch successfully');
+        }
+    }
+    // update Religion
+    public function updateReligion(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('religions')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // update data
+                $query = $conn->table('religions')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Religion Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+            }
+        }
+    }
+    // delete Religion
+    public function deleteReligion(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('religions')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Religion have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+
+    // addRace
+    public function addRace(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('races')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // insert data
+                $query = $conn->table('races')->insert([
+                    'name' => $request->name,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Race has been successfully saved');
+                }
+            }
+        }
+    }
+    // getRaceList
+    public function getRaceList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $raceDetails = $conn->table('races')->get();
+            return $this->successResponse($raceDetails, 'Race record fetch successfully');
+        }
+    }
+    // get Race row details
+    public function getRaceDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $raceDetails = $conn->table('races')->where('id', $id)->first();
+            return $this->successResponse($raceDetails, 'Race row fetch successfully');
+        }
+    }
+    // update Race
+    public function updateRace(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('races')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // update data
+                $query = $conn->table('races')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Race Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+            }
+        }
+    }
+    // delete Race
+    public function deleteRace(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('races')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Race have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
 }

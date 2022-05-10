@@ -673,6 +673,28 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('admin.staff_position')}}" class="nav-link {{ (request()->is('admin/staff_position*')) ? 'active' : '' }}">
+                                    <span>Staff Position </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.stream_type')}}" class="nav-link {{ (request()->is('admin/stream_type*')) ? 'active' : '' }}">
+                                    <span>Stream Type </span>
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a href="{{ route('admin.religion')}}" class="nav-link {{ (request()->is('admin/religion*')) ? 'active' : '' }}">
+                                    <span>Religion </span>
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a href="{{ route('admin.race')}}" class="nav-link {{ (request()->is('admin/race*')) ? 'active' : '' }}">
+                                    <span>Race </span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('admin.employee')}}" class="nav-link {{ (request()->is('admin/employee')) ? 'active' : '' }}">
                                     <span>Add Employee</span>
                                 </a>

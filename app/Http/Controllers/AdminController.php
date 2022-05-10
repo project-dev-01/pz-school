@@ -3237,4 +3237,232 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.parent_delete'), $data);
         return $response;
     }
+
+    // index staff Position
+    public function staffPosition()
+    {
+        return view('admin.staff_position.index');
+    }
+
+    public function addStaffPosition(Request $request)
+    {
+        $data = [
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.staff_position_add'), $data);
+        return $response;
+    }
+    public function getStaffPositionList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.staff_position_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editStaffPositionBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteStaffPositionBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getStaffPositionDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.staff_position_details'), $data);
+        return $response;
+    }
+    public function updateStaffPosition(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.staff_position_update'), $data);
+        return $response;
+    }
+    // DELETE staff position Details
+    public function deleteStaffPosition(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.staff_position_delete'), $data);
+        return $response;
+    }
+
+    // index Stream Type
+    public function streamType()
+    {
+        return view('admin.stream_type.index');
+    }
+
+    public function addStreamType(Request $request)
+    {
+        $data = [
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.stream_type_add'), $data);
+        return $response;
+    }
+    public function getStreamTypeList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.stream_type_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editStreamTypeBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteStreamTypeBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getStreamTypeDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.stream_type_details'), $data);
+        return $response;
+    }
+    public function updateStreamType(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.stream_type_update'), $data);
+        return $response;
+    }
+    // DELETE User Details
+    public function deleteStreamType(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.stream_type_delete'), $data);
+        return $response;
+    }
+
+    // index religion
+    public function religion()
+    {
+        return view('admin.religion.index');
+    }
+
+    public function addReligion(Request $request)
+    {
+        $data = [
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.religion_add'), $data);
+        return $response;
+    }
+    public function getReligionList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.religion_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editReligionBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteReligionBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getReligionDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.religion_details'), $data);
+        return $response;
+    }
+    public function updateReligion(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.religion_update'), $data);
+        return $response;
+    }
+    // DELETE User Details
+    public function deleteReligion(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.religion_delete'), $data);
+        return $response;
+    }
+
+    // index race
+    public function race()
+    {
+        return view('admin.race.index');
+    }
+
+    public function addRace(Request $request)
+    {
+        $data = [
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.race_add'), $data);
+        return $response;
+    }
+    public function getRaceList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.race_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editRaceBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteRaceBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getRaceDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.race_details'), $data);
+        return $response;
+    }
+    public function updateRace(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.race_update'), $data);
+        return $response;
+    }
+    // DELETE User Details
+    public function deleteRace(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.race_delete'), $data);
+        return $response;
+    }
 }

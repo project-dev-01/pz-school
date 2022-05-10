@@ -329,7 +329,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('staffcategory/staffcategory-details', [AdminController::class, 'getstaffcategoriesDetails'])->name('admin.staffcategory.details');
         Route::post('staffcategory/update', [AdminController::class, 'staffcategories_edit'])->name('admin.staffcategory.update');
         Route::post('staffcategory/delete', [AdminController::class, 'staffcategories_delete'])->name('admin.staffcategory.delete');
-       
+
         // department routes
         Route::get('department/index', [AdminController::class, 'Department'])->name('admin.department');
         Route::post('department/add', [AdminController::class, 'addDepartment'])->name('admin.department.add');
@@ -345,6 +345,38 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('designation/designation-details', [AdminController::class, 'getDesignationDetails'])->name('admin.designation.details');
         Route::post('designation/update', [AdminController::class, 'updateDesignation'])->name('admin.designation.update');
         Route::post('designation/delete', [AdminController::class, 'deleteDesignation'])->name('admin.designation.delete');
+
+        // staff position routes
+        Route::get('staff_position/index', [AdminController::class, 'staffPosition'])->name('admin.staff_position');
+        Route::post('staff_position/add', [AdminController::class, 'addStaffPosition'])->name('admin.staff_position.add');
+        Route::get('staff_position/list', [AdminController::class, 'getStaffPositionList'])->name('admin.staff_position.list');
+        Route::post('staff_position/staff_position-details', [AdminController::class, 'getStaffPositionDetails'])->name('admin.staff_position.details');
+        Route::post('staff_position/update', [AdminController::class, 'updateStaffPosition'])->name('admin.staff_position.update');
+        Route::post('staff_position/delete', [AdminController::class, 'deleteStaffPosition'])->name('admin.staff_position.delete');
+
+        // Stream Type routes
+        Route::get('stream_type/index', [AdminController::class, 'streamType'])->name('admin.stream_type');
+        Route::post('stream_type/add', [AdminController::class, 'addStreamType'])->name('admin.stream_type.add');
+        Route::get('stream_type/list', [AdminController::class, 'getStreamTypeList'])->name('admin.stream_type.list');
+        Route::post('stream_type/stream_type-details', [AdminController::class, 'getStreamTypeDetails'])->name('admin.stream_type.details');
+        Route::post('stream_type/update', [AdminController::class, 'updateStreamType'])->name('admin.stream_type.update');
+        Route::post('stream_type/delete', [AdminController::class, 'deleteStreamType'])->name('admin.stream_type.delete');
+
+        // Religion routes
+        Route::get('religion/index', [AdminController::class, 'religion'])->name('admin.religion');
+        Route::post('religion/add', [AdminController::class, 'addReligion'])->name('admin.religion.add');
+        Route::get('religion/list', [AdminController::class, 'getReligionList'])->name('admin.religion.list');
+        Route::post('religion/religion-details', [AdminController::class, 'getReligionDetails'])->name('admin.religion.details');
+        Route::post('religion/update', [AdminController::class, 'updateReligion'])->name('admin.religion.update');
+        Route::post('religion/delete', [AdminController::class, 'deleteReligion'])->name('admin.religion.delete');
+
+        // Race routes
+        Route::get('race/index', [AdminController::class, 'race'])->name('admin.race');
+        Route::post('race/add', [AdminController::class, 'addRace'])->name('admin.race.add');
+        Route::get('race/list', [AdminController::class, 'getRaceList'])->name('admin.race.list');
+        Route::post('race/race-details', [AdminController::class, 'getRaceDetails'])->name('admin.race.details');
+        Route::post('race/update', [AdminController::class, 'updateRace'])->name('admin.race.update');
+        Route::post('race/delete', [AdminController::class, 'deleteRace'])->name('admin.race.delete');
 
         // Time Table
 
