@@ -2501,6 +2501,8 @@ class ApiController extends BaseController
             'qualification' => 'required',
             'name' => 'required',
             'gender' => 'required',
+            'email' => 'required',
+            'role_user_id' => 'required',
             'religion' => 'required',
             'blood_group' => 'required',
             'birthday' => 'required',
@@ -2572,7 +2574,7 @@ class ApiController extends BaseController
                     'present_address' => trim($request->present_address),
                     'permanent_address' => trim($request->permanent_address),
                     'mobile_no' => $request->mobile_no,
-                    // 'email' => $request->email,
+                    'email' => $request->email,
                     'photo' => $fileName,
                     'facebook_url' => $request->facebook_url,
                     'linkedin_url' => $request->linkedin_url,
@@ -2589,6 +2591,18 @@ class ApiController extends BaseController
                 if (!$query) {
                     return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong on Update employee']);
                 } else {
+                    // update users
+                    if (isset($request->role_user_id) && isset($request->password)) {
+                        $user = User::find($request->role_user_id);
+                        $user->email = $request->email;
+                        $user->password = bcrypt($request->password);
+                        $updateUser = $user->save();
+                    }
+                    if (isset($request->role_user_id) && isset($request->email)) {
+                        $user = User::find($request->role_user_id);
+                        $user->email = $request->email;
+                        $updateUser = $user->save();
+                    }
                     // add bank details
                     if ($request->skip_bank_details == 1) {
                         $bankRow = $Connection->table('staff_bank_accounts')->where('staff_id', $id)->first();

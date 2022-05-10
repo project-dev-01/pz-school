@@ -325,11 +325,13 @@
 
                         </div>
 
-                        <!-- <span class="fas fa-user-lock " id="span-parent"></span>
+                        <span class="fas fa-user-lock " id="span-parent"></span>
                         <span class="header-title mb-3" id="span-parent"> Login Details
                             <hr id="hr">
                         </span>
                         <div class="row">
+                            <input type="hidden" value="{{$role['id']}}" class="form-control" name="role_user_id" id="role_user_id">
+
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="email">Email<span class="text-danger">*</span></label>
@@ -339,13 +341,13 @@
                                                 <span class="far fa-envelope-open"></span>
                                             </div>
                                         </div>
-                                        <input type="email" class="form-control" name="email" id="email">
+                                        <input type="email" value="{{$role['email']}}" class="form-control" name="email" id="email">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 <div class="form-group mb-3">
-                                    <label for="password">Password<span class="text-danger">*</span></label>
+                                    <label for="password">Password</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -356,9 +358,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <!-- <div class="col-md-3">
                                 <div class="form-group mb-3">
-                                    <label for="confirm_password">Retype Password<span class="text-danger">*</span></label>
+                                    <label for="confirm_password">Retype Password</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -368,8 +370,8 @@
                                         <input type="password" class="form-control" name="confirm_password" id="confirm_password">
                                     </div>
                                 </div>
-                            </div>
-                        </div> -->
+                            </div> -->
+                        </div>
                         <span class="fas fa-globe  " id="span-parent"></span>
                         <span class="header-title mb-3" id="span-parent">Social Links
                             <hr id="hr">

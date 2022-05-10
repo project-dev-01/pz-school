@@ -175,26 +175,6 @@ $(function () {
     // rules validation
     $("#editEmployeeForm").validate({
         rules: {
-            // role_id: "required",
-            // joining_date: "required",
-            // designation_id: "required",
-            // department_id: "required",
-            // qualification: "required",
-
-            // name: "required",
-            // gender: "required",
-            // religion: "required",
-            // blood_group: "required",
-            // birthday: "required",
-            // mobile_no: "required",
-            // present_address: "required",
-            // permanent_address: "required",
-            // bank_name: "required",
-            // holder_name: "required",
-            // bank_branch: "required",
-            // bank_address: "required",
-            // ifsc_code: "required",
-            // account_no: "required"
             role_id: "required",
             joining_date: "required",
             email: {
@@ -213,15 +193,15 @@ $(function () {
             mobile_no: "required",
             present_address: "required",
             permanent_address: "required",
-            password: {
-                required: true,
-                minlength: 5
-            },
-            confirm_password: {
-                required: true,
-                minlength: 5,
-                equalTo: "#password"
-            },
+            // password: {
+            //     required: true,
+            //     minlength: 5
+            // },
+            // confirm_password: {
+            //     required: true,
+            //     minlength: 5,
+            //     equalTo: "#password"
+            // },
             bank_name: "required",
             holder_name: "required",
             bank_branch: "required",
@@ -254,6 +234,9 @@ $(function () {
             formData.append('blood_group', $('#blood_group').val());
             formData.append('birthday', convertDigitIn($('#empDOB').val()));
             formData.append('mobile_no', $('#mobile_no').val());
+            formData.append('email', $('#email').val());
+            formData.append('password', $('#password').val());
+            formData.append('role_user_id', $('#role_user_id').val());
             formData.append('present_address', $('#present_address').val());
             formData.append('permanent_address', $('#permanent_address').val());
             formData.append('facebook_url', $('#facebook_url').val());
