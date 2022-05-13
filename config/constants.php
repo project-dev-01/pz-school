@@ -349,7 +349,19 @@ return [
 
         'get_homework_list_dashboard' => $url.'/get_homework_list_dashboard',
         'get_test_score_dashboard' => $url.'/get_test_score_dashboard',
-        
+
+        // parent id wise get student
+        'get_students_parentdashboard' => $url.'/get_students_parentdashboard',
+        //student leave apply 
+        'std_leave_apply'=> $url.'/std_leave_apply',
+        // get student leaves
+        'get_student_leaves'=> $url.'/get_student_leaves',
+        // get leave reasons
+        'get_leave_reasons'=>$url.'/get_leave_reasons',
+        // get student leave list particular
+        'studentleave_list'=>$url.'/studentleave_list',
+        // teacher leave approve
+        'teacher_leave_approve'=>$url.'/teacher_leave_approve',
     ]
 
 ];

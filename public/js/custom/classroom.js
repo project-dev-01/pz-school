@@ -8,7 +8,7 @@ $(function () {
     if (classroom_details) {
         var classroomDetails = JSON.parse(classroom_details);
         if (classroomDetails.length == 1) {
-            var classID, sectionID, subjectID, classDate,sectionName,subjectName;
+            var classID, sectionID, subjectID, classDate, sectionName, subjectName;
             classroomDetails.forEach(function (user) {
                 classID = user.class_id;
                 sectionID = user.section_id;
@@ -25,10 +25,10 @@ $(function () {
                 classDate: format_date
             };
             $('#changeClassName').val(classID);
-            $("#classroomFilter").find("#sectionID").append('<option selected value="'+sectionID+'">'+sectionName+'</option>');
-            $("#classroomFilter").find("#subjectID").append('<option selected value="'+subjectID+'">'+subjectName+'</option>');
+            $("#classroomFilter").find("#sectionID").append('<option selected value="' + sectionID + '">' + sectionName + '</option>');
+            $("#classroomFilter").find("#subjectID").append('<option selected value="' + subjectID + '">' + subjectName + '</option>');
             $('#classDate').val(format_date);
-            
+
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
@@ -114,6 +114,7 @@ $(function () {
         e.preventDefault();
         var classRoom = $("#classroomFilter").valid();
         if (classRoom === true) {
+            //   $("#overlay").fadeIn(300);
             // jQuery("body").prepend('<div id="preloader">Loading...</div>');
             var classID = $("#changeClassName").val();
             var sectionID = $("#sectionID").val();
@@ -135,6 +136,8 @@ $(function () {
             formData.append('date', convertDigitIn(classDate));
             // list mode
             listModeAjax(formData, classObj);
+            // student leave apply
+            studentleave(formData);
             // daily report
             getDailyReportRemarksAjax(formData);
             // widget Show
@@ -142,6 +145,7 @@ $(function () {
             // get Short test
             getShortTestData(formData);
 
+            //  $("#overlay").fadeOut(300);
         }
     });
 
@@ -222,7 +226,6 @@ $(function () {
                             $("#dailyReportRemarksClassID").val(classObj.classID);
                             $("#dailyReportRemarksSectionID").val(classObj.sectionID);
                             $("#dailyReportRemarksSubjectID").val(classObj.subjectID);
-
                             // list mode end
                         });
                         layoutModeGrid += '</div>';
@@ -238,6 +241,7 @@ $(function () {
             }
         });
     }
+
     // function layout mode
     function layoutMode(res) {
         var layoutModeGrid = "";
@@ -553,7 +557,9 @@ $(function () {
         $('#addRemarks' + studenetID).val(student_remarks);
         $('#stuRemarksPopup').modal('hide');
     });
-    $('#changeAttendance').on('change', function () {
+    
+  
+    $('#changeAttendance').on('change', function () {        
         $(".changeAttendanceSelect").val($(this).val());
     });
     // widget function
@@ -959,6 +965,244 @@ $(function () {
 
         return [day, month, year].join('-');
     }
+    // format yy mm dd 
+    function YerarformatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
 
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
 
+        return [year, day, month].join('-');
+    }
+
+    function studentleave() {
+
+        var classID = $("#changeClassName").val();
+        var sectionID = $("#sectionID").val();
+        var classDate = $("#classDate").val();
+        var format_date = YerarformatDate(classDate);
+        console.log(format_date);
+        $.get(getStudentLeave, {
+            token: token,
+            branch_id: branchID,
+            teacher_id: ref_user_id,
+            class_id: classID,
+            section_id: sectionID,
+            classDate: format_date
+        }, function (response) {
+            var dataSetNew = response.data;
+            if (response.code == 200) {
+                console.log(response);
+                if (response.data.length > 0) {
+                    console.log('response');
+                    StudentLeave_tbl(dataSetNew);
+                } else {
+
+                    toastr.info('No students are available');
+                }
+            } else {
+                toastr.error(response.message);
+            }
+        }
+        );
+    }
+    function StudentLeave_tbl(dataSetNew) {
+        var local= imgurl ;
+        console.log(local);
+        listTable = $('#stdleaves').DataTable({
+            processing: true,
+            bDestroy: true,
+            info: true,
+            data: dataSetNew,
+            "pageLength": 10,
+            "aLengthMenu": [
+                [5, 10, 25, 50, -1],
+                [5, 10, 25, 50, "All"]
+            ],
+            columns: [
+                {
+                    data: 'sno'
+                },
+                {
+                    data: 'first_name'
+                },
+                {
+                    data: 'from_leave'
+                },
+                {
+                    data: 'to_leave'
+                },
+                {
+                    data: 'reason'
+                },
+                {
+                    data: 'document'
+                },
+                {
+                    data: 'status'
+                },
+                {
+                    data: 'addremarks'
+                },
+                {
+                    data: 'submitbtn'
+                }
+            ],
+            columnDefs: [
+                {
+
+                    "targets": 0,
+                    "render": function (data, type, row, meta) {
+                        return meta.row + 1;
+                    }
+                },
+                {
+
+                    "targets": 1,
+                    "className": "table-user",
+                    "render": function (data, type, row, meta) {                       
+                        var first_name = '<input type="hidden" id="student_leave_tbl_rowid[' + meta.row + '][id]" value="' + row.id + '">' +
+                        '<input type="hidden" name="student_leave_upd[' + meta.row + '][student_id]" value="' + row.student_id + '">' +
+                        '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
+                        '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
+                    return first_name;
+                    }
+                },
+                {
+
+                    "targets": 2,
+                    "render": function (data, type, row, meta) {
+                        var from_leave = '<lable name="student_leave_upd[' + meta.row + ']">' + data + '</label>';
+                        return from_leave;
+                    }
+                },
+                {
+
+                    "targets": 3,
+                    "render": function (data, type, row, meta) {
+                        var to_leave = '<lable name="student_leave_upd[' + meta.row + ']">' + data + '</label>';
+                        return to_leave;
+                    }
+                },
+                {
+
+                    "targets": 4,
+                    "render": function (data, type, row, meta) {
+                        var reason = '<lable name="student_leave_upd[' + meta.row + ']">' + data + '</label>';
+                        return reason;
+                    }
+                },
+                {
+
+                    "targets": 5,
+                    "render": function (data, type, row, meta) {
+                        var document = '<a href="'+local+'/'+data+'" download name="student_leave_upd[' + meta.row + ']"><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';                      
+                      
+ 
+                        return document;
+                    }
+                },
+                {
+                    "targets": 6,
+                    "render": function (data, type, row, meta) {                   
+                        var status = '<select class="form-control" id="leavestatus'+row.id+'" data-style="btn-outline-success" name="student_leave_upd[' + meta.row + '][status]">' +
+                        '<option value="">Choose</option>' +
+                        '<option value="Approve"  ' + (data == "Approve" ? "selected" : "") + '>Approve</option>' +
+                        '<option value="Reject"  ' + (data == "Reject" ? "selected" : "") + '>Reject</option>'+
+                        '<option value="Pending"  ' + (data == "Pending" ? "selected" : "") + '>Pending</option>'
+                        '</select>';
+                        // var att_status=
+                        // '<span class="badge badge-pill badge-success">hai</span>' 
+                        return status;
+                    }
+                },
+                {
+                    "targets": 7,
+                    "width": "10%",
+                    "render": function (data, type, row, meta) {
+
+                        var addremarks = '<textarea style="display:none;" class="addRemarks" name="remarks[' + meta.row + '][att_remark]"></textarea>' +                        
+                            '<button type="button" data-id="' + row.id + '" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#stuLeaveRemarksPopup" id="editLeaveRemarksStudent">Add Remarks</button>';
+                        return addremarks;
+                    }
+                },
+                {
+                    "targets": 8,
+                    "width": "10%",
+                    "render": function (data, type, row, meta) {
+                        var submitbtn = '<button type="button" class="btn btn-primary-bl waves-effect waves-light levsub" data-id="'+ row.id+'" id="stdLeave">Update</button>';
+                        return submitbtn;
+                    }
+                }
+            ]
+        }).on('draw', function () {
+        });
+    }
+    $("#stdLeave").validate({
+        rules: {
+            class_id: "required",       
+            exam_id: "required"
+        }
+    });
+    $(document).on('click', '#stdLeave', function () {
+        var student_leave_tbl_id = $(this).data('id');     
+        var student_leave_approve = $("#leavestatus"+student_leave_tbl_id).val(); 
+        
+        var teacher_remarks=$('#addstd_leave_Remarks').val();
+        console.log(student_leave_approve ,teacher_remarks);
+        var formData = new FormData();
+        formData.append('token', token);
+        formData.append('branch_id', branchID);
+        formData.append('student_leave_tbl_id', student_leave_tbl_id);
+        formData.append('student_leave_approve', student_leave_approve);
+        formData.append('teacher_remarks', teacher_remarks);
+        $.ajax({
+            url: teacher_leave_remarks_updated,
+            method: "post",
+            data: formData,
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (res) {               
+                if (res.code == 200) {
+                    studentleave();
+                    toastr.success('Leave Updated sucessfully');
+                }
+                else {
+                    toastr.error(res.message);
+               
+                }
+            }
+        });
+
+    });
+      // student leave remarks 
+      // add remarks model
+      $('#stuLeaveRemarksPopup').on('show.bs.modal', e => {
+        $("#student_leave_remarks").focus();
+        var $button = $(e.relatedTarget);
+        var studentlev_tbl_ID = $button.attr('data-id');
+        var studentlevRemarks = $button.closest('td').find('textarea').val();
+        var checknullRemarks = (studentlevRemarks !== "null") ? studentlevRemarks : "";
+
+        $("#studenet_leave_tbl_id").val(studentlev_tbl_ID);
+        $("#student_remarks").val(checknullRemarks);
+    });
+
+    $('#student_leave_RemarksSave').on('click', function () {
+        var studenetlevtblID = $('#studenet_leave_tbl_id').val();
+        console.log(studenetlevtblID);
+        var student_leave_remarks = $('#student_leave_remarks').val();
+        console.log(student_leave_remarks);
+        var compain_remarks_tblID =student_leave_remarks;
+        $('#addstd_leave_Remarks').val(compain_remarks_tblID);
+  
+        $('#stuLeaveRemarksPopup').modal('hide');
+ 
+    });
 });

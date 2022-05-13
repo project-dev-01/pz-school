@@ -30,15 +30,6 @@ $(function () {
             $("#byclassfilter").find("#sectionID").append('<option value="">Select Subject</option>');
             $("#byclassfilter").find("#examnames").empty();
             $("#byclassfilter").find("#examnames").append('<option value="">Select exams</option>');
-
-            // $.post(Allexams, { token: token, branch_id: branchID }, function (res) {
-            //     if (res.code == 200) {
-            //       //  $("#section_drp_div").hide();
-            //         $.each(res.data, function (key, val) {
-            //             $("#byclassfilter").find("#examnames").append('<option value="' + val.id + '">' + val.name + '</option>');
-            //         });
-            //     }
-            // }, 'json');
             $.get(getbysubjectnamesall, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
                 if (res.code == 200) {
                     $("#section_drp_div").show();

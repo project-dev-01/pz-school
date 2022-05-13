@@ -1,44 +1,46 @@
 $(function () {
     var radar;
+    StudentLeave_tabel();
     callradarchart();
-    function callradarchart(){
+    getstudent_data();
+    function callradarchart() {
 
         $.post(getTestScore, {
             token: token,
             branch_id: branchID,
             student_id: studentID,
         }, function (response) {
-            console.log('res',response)
-                if (response.code == 200) {
-                    var marks = response.data.marks;
-                    var subjects = response.data.subjects;
-                    var data = [];
-                    var label = [];
-                    if (subjects.length > 0) {
-                        subjects.forEach(function (res) {
-                            label.push(res.subject_name);
-                            
+            console.log('res', response)
+            if (response.code == 200) {
+                var marks = response.data.marks;
+                var subjects = response.data.subjects;
+                var data = [];
+                var label = [];
+                if (subjects.length > 0) {
+                    subjects.forEach(function (res) {
+                        label.push(res.subject_name);
+
+                    });
+                    $.each(marks, function (key, value) {
+                        var randcol = getRandomColor();
+                        var obj = {};
+                        var score = [];
+                        obj["label"] = key;
+                        obj["backgroundColor"] = hexToRGB(randcol, 0.3);
+                        obj["borderColor"] = randcol;
+                        obj["pointBackgroundColor"] = randcol;
+                        obj["pointBorderColor"] = "#fff";
+                        obj["pointHoverBackgroundColor"] = "#fff";
+                        obj["pointHoverBorderColor"] = randcol;
+                        $.each(value, function (key, val) {
+                            score.push(val.score);
                         });
-                        $.each(marks, function (key, value) {
-                            var randcol = getRandomColor();
-                            var obj = {};
-                            var score= [];
-                            obj["label"] = key;
-                            obj["backgroundColor"] = hexToRGB(randcol, 0.3);
-                            obj["borderColor"] = randcol;
-                            obj["pointBackgroundColor"] = randcol;
-                            obj["pointBorderColor"] =  "#fff";
-                            obj["pointHoverBackgroundColor"] =  "#fff";
-                            obj["pointHoverBorderColor"] = randcol;
-                            $.each(value, function (key,val) {
-                                score.push(val.score);
-                            });
-                            obj["data"] = score;
-                            data.push(obj);
-                        });
-                        radarChart(label,data);
-                    }
+                        obj["data"] = score;
+                        data.push(obj);
+                    });
+                    radarChart(label, data);
                 }
+            }
         }, 'json');
     }
     radarChart();
@@ -56,7 +58,7 @@ $(function () {
             radar = new Chart(ctx, {
                 type: 'radar',
                 data: {
-                    
+
                     labels: labels,
                     // labels: labels,
                     datasets: obj
@@ -85,4 +87,149 @@ $(function () {
             return "rgb(" + r + ", " + g + ", " + b + ")";
         }
     }
+    // get student names 
+    function getstudent_data() {
+        $.get(get_student, { token: token, branch_id: branchID, parentId: ref_user_id }, function (res) {
+            if (res.code == 200) {
+                $("#section_drp_div").show();
+                $.each(res.data, function (key, val) {
+                    $("#byclassfilter").find("#sectionID").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
+                });
+            }
+        }, 'json');
+    }
+    $("#std_general_details").validate({
+        rules: {
+            std_id: "required",
+            frm_ldate: "required",
+            to_ldate: "required",
+            message: "required"
+        }
+    });
+    $('#std_general_details').on('submit', function (e) {
+        e.preventDefault();
+
+        var std_details = $("#std_general_details").valid();
+        if (std_details === true) {
+            var form = this;
+
+            var class_id = $('option:selected', '#changeStdName').attr('data-classid');
+            var section_id = $('option:selected', '#changeStdName').attr('data-sectionid');
+            var student_id = $("#changeStdName").val();
+            var frm_leavedate = $("#frm_ldate").val();
+            var to_leavedate = $("#to_ldate").val();
+            var reason = $("#changelevReasons").val();
+            var reason_text = $('option:selected', '#changelevReasons').text();
+            var remarks = $("#remarks").val();
+            var file = $("#file").val();
+
+            console.log(reason, reason_text);
+            var formData = new FormData();
+            formData.append('token', token);
+            formData.append('branch_id', branchID);
+            formData.append('class_id', class_id);
+            formData.append('section_id', section_id);
+            formData.append('student_id', student_id);
+            formData.append('frm_leavedate', frm_leavedate);
+            formData.append('to_leavedate', to_leavedate);
+            formData.append('reason', reason);
+            formData.append('remarks', remarks);
+            formData.append('file', file);
+
+            //
+            $("#listModeClassID").val(class_id);
+            $("#listModeSectionID").val(section_id);
+            $("#listModestudentID").val(student_id);
+            $("#listModereason").val(reason);
+            $("#listModereasontext").val(reason_text);
+            //
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (response) {
+                    if (response.code == 200) {
+                        $('#studentleave-table').DataTable().ajax.reload(null, false);
+                        toastr.success('Leave apply sucessfully');
+                        $("#changeStdName").val('');
+                        $("#frm_ldate").val('');
+                        $("#to_ldate").val('');
+                        $("#message").val('');
+                        $("#post_ldate").val('');
+                        $("#remarks").val();
+                        $("#remarks_div").hide();
+                    } else {
+                        toastr.error(data.message);
+                        $("#remarks_div").hide();
+                    }
+                }
+            });
+        };
+    });
+    // student leaves details
+    $('#changelevReasons').on('change', function () {
+        var Reasons = $("#changelevReasons").val();
+        console.log(Reasons);
+        if (Reasons == 3) {
+            $("#remarks_div").show();
+        }
+        else {
+            $("#remarks_div").hide();
+        }
+
+    });
+    $(".datepick").datepicker({
+        dateFormat: 'yy-mm-dd'
+    });
+    // get student leave apply
+    function StudentLeave_tabel() {
+        console.log('hai');
+        $('#studentleave-table').DataTable({
+            processing: true,
+            info: true,
+            ajax: stutdentleaveList,
+            "pageLength": 5,
+            "aLengthMenu": [
+                [5, 10, 25, 50, -1],
+                [5, 10, 25, 50, "All"]
+            ],
+            columns: [
+                {
+                    "targets": 0,
+                    "render": function (data, type, row, meta) {
+                        return meta.row + 1;
+                    }
+                }
+                ,
+                {
+                    data: 'first_name',
+                    name: 'first_name'
+                },
+                {
+                    data: 'from_leave',
+                    name: 'from_leave'
+                },
+                {
+                    data: 'to_leave',
+                    name: 'to_leave'
+                },
+                {
+                    data: 'reason',
+                    name: 'reason'
+                },
+                {
+                    data: 'status',
+                    name: 'status',
+                    orderable: false,
+                    searchable: false
+                }, 
+            ]
+        }).on('draw', function () {
+        });
+    }
+
+
 });

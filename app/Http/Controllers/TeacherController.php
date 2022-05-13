@@ -723,6 +723,20 @@ class TeacherController extends Controller
         $response = Helper::PostMethod(config('constants.api.add_daily_report_remarks'), $data);
         return $response;
     }
+    // student leave update
+    public function getstudentleave_update(Request $request)
+    {
+        $data = [
+            "attendance" => $request->attendance,
+            "date" => $request->date,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id
+        ];
+        
+        $response = Helper::PostMethod(config('constants.api.update_student_leave'), $data);
+        return $response;
+    }
 
     // subject by Class
     public function subjectByClass(Request $request)
@@ -790,4 +804,5 @@ class TeacherController extends Controller
         $response = Helper::PostMethod(config('constants.api.add_subject_division'), $data);
         return $response;
     }
+
 }

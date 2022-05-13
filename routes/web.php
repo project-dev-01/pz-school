@@ -764,6 +764,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('homework/view', [TeacherController::class, 'viewHomework'])->name('teacher.homework.view');
         // Leave Apply
         Route::get('leave_management/applyleave', [TeacherController::class, 'applyleave'])->name('teacher.leave_management.applyleave');
+        
         // Forum routes
         Route::get('forum/index', [TeacherController::class, 'forumIndex'])->name('teacher.forum.index');
         Route::get('forum/page-single-topic', [TeacherController::class, 'forumPageSingleTopic'])->name('teacher.forum.page-single-topic');
@@ -814,11 +815,13 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('add_short_test', [TeacherController::class, 'addShortTest'])->name('teacher.classroom.add_short_test');
         Route::post('add_daily_report', [TeacherController::class, 'addDailyReport'])->name('teacher.classroom.add_daily_report');
         Route::post('add_daily_report_remarks', [TeacherController::class, 'addDailyReportRemarks'])->name('teacher.classroom.add_daily_report_remarks');
+        Route::post('studentleave/update', [TeacherController::class, 'getstudentleave_update'])->name('teacher.studentleave.update');
         // Subject By Class Route
         Route::post('subject-by-class', [TeacherController::class, 'subjectByClass'])->name('teacher.subject_by_class');
 
         // Section By Class Route
         Route::post('section-by-class', [TeacherController::class, 'sectionByClass'])->name('teacher.section_by_class');
+
     });
 
     // TEACHER CONTROLLER END
@@ -879,6 +882,10 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('chat', [ParentController::class, 'chatShow'])->name('parent.chat');
 
         Route::get('/analyticrep', [ParentController::class, 'analytic'])->name('parent.analyticrep.analyticreport');
+        // student leave 
+        Route::post('std_leave_apply/add', [ParentController::class, 'student_applyleave'])->name('parent.studentleave.add');
+        Route::get('qualification/list', [ParentController::class, 'getstudentleave_list'])->name('parent.student_leave.list');
+        
     });
 
 

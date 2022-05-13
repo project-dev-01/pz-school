@@ -10759,4 +10759,201 @@ class ApiController extends BaseController
             }
         }
     }
+    // studnet leave start 
+    // parent dashboard : parent id wise get student
+    public function get_studentsparentdashboard(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'parent_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $parent_id = $request->parent_id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $studentDetails = $conn->table('students as std')
+                ->select('std.id', 'class_id', 'section_id', 'parent_id', 'first_name', 'last_name', 'gender')
+                ->leftJoin('enrolls as en', 'std.id', '=', 'en.student_id')
+                ->where('parent_id', $parent_id)
+                ->get();
+            return $this->successResponse($studentDetails, 'Student details fetch successfully');
+        }
+    }
+    // student leave apply insert 
+    public function student_leaveapply(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'student_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'frm_leavedate' => 'required',
+            'to_leavedate' => 'required',
+            'reasons' => 'required'
+        ]);
+
+        // return $request;
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+
+
+            $now = now();
+            $name = strtotime($now);
+            $extension = $request->file_extension;
+            $fileName = $name . "." . $extension;
+
+            $base64 = base64_decode($request->file);
+            $file = base_path() . '/public/teacher/homework/' . $fileName;
+            $suc = file_put_contents($file, $base64);
+
+            $query = $staffConn->table('student_leaves')->insert([
+                'student_id' => $request['student_id'],
+                'parent_id' => $request['parent_id'],
+                'class_id' => $request['class_id'],
+                'section_id' => $request['section_id'],
+                'from_leave' => $request['frm_leavedate'],
+                'to_leave' => $request['to_leavedate'],
+                'reasonid' => $request['reasons'],
+                'reason' => $request['reason_text'],
+                'remarks' => $request['remarks'],
+                'document' => $fileName,
+                'status' => $request['status'],
+                'created_at' => date("Y-m-d H:i:s")
+            ]);
+
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Waiting for approval');
+            }
+        }
+    }
+    //Class room management : get student leaves
+    function get_studentleaves(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'classDate' => 'required'
+
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $compare_date = $request->classDate;
+            $studentDetails = $conn->table('student_leaves as lev')
+                ->select('lev.id', 'lev.class_id', 'lev.section_id', 'lev.student_id', 'std.first_name', 'std.last_name', DB::raw('DATE_FORMAT(lev.from_leave, "%d-%m-%Y") as from_leave'), DB::raw('DATE_FORMAT(lev.to_leave, "%d-%m-%Y") as to_leave'), 'lev.reason', 'lev.document', 'lev.status')
+                ->leftJoin('students as std', 'lev.student_id', '=', 'std.id')
+                ->where([
+                    ['lev.class_id', '=', $request->class_id],
+                    ['lev.section_id', '=', $request->section_id],
+                    ['lev.status', '!=', 'Approve'],
+                    ['lev.status', '!=', 'Reject']
+                ])
+                ->where(function ($query) use ($compare_date) {
+                    $query->where('lev.from_leave', '<=', $compare_date);
+                    $query->where('lev.to_leave', '>=', $compare_date);
+                })
+                ->orderBy('lev.to_leave', 'desc')
+                ->get();
+            return $this->successResponse($studentDetails, 'Student details fetch successfully');
+        }
+    }
+    public function get_leavereasons(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $reasons = $staffConn->table('reasons')->get();
+
+            return $this->successResponse($reasons, 'Reasons record fetch successfully');
+        }
+    }
+    //get particular student leave 
+    function get_particular_studentleave_list(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'parent_id' => 'required'
+
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+
+            $studentDetails = $conn->table('student_leaves as lev')
+                ->select('lev.class_id', 'lev.section_id', 'student_id', 'std.first_name', 'std.last_name', DB::raw('DATE_FORMAT(lev.from_leave, "%d-%m-%Y") as from_leave'), DB::raw('DATE_FORMAT(lev.to_leave, "%d-%m-%Y") as to_leave'), 'lev.reason', 'lev.status')
+                //->select('lev.class_id','lev.section_id','student_id','std.first_name','std.last_name','lev.from_leave','lev.to_leave','lev.reason','lev.status')
+                ->leftJoin('students as std', 'lev.student_id', '=', 'std.id')
+                ->where([
+                    ['lev.parent_id', '=', $request->parent_id]
+                ])
+                ->orderby('lev.to_leave', 'desc')
+                ->get();
+            return $this->successResponse($studentDetails, 'Student details fetch successfully');
+        }
+    }
+    public function teacher_leaveapprove(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'student_leave_tbl_id' => 'required',
+            'student_leave_approve' => 'required'
+            
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $student_leave_id = $request->student_leave_tbl_id;
+            // create new connection
+            $Conn = $this->createNewConnection($request->branch_id);         
+
+            // update data
+            $query = $Conn->table('student_leaves')->where('id', $student_leave_id)->update([
+                'status' => $request->student_leave_approve,
+                'teacher_remarks' => $request->teacher_remarks,
+                'updated_at' => date("Y-m-d H:i:s")
+            ]);
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Leave Request have Been updated');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+    // studnet leave end 
 }

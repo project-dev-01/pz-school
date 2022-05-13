@@ -197,54 +197,54 @@
                                 </ul><br>
                                 <div class="card-body">
                                     @forelse ($get_homework_list_dashboard as $homework)
-                                        <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
-                                            <div class="col">
-                                                <a class="text-dark" data-toggle="collapse" href="#hmenv" aria-expanded="false" aria-controls="hmenv">
-                                                    <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> {{$homework['title']}}<span class="text-muted font-14"></span></h5>
-                                                </a>
-                                                <!-- Right modal -->
-                                                <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#right-modal">Rightbar Modal</button> -->
-                                                <div class="collapse show" id="hmenv">
-                                                    <div class="card mb-0 shadow-none">
-                                                        <div class="card-body pb-0" id="task-list-one">
-                                                            <!-- task -->
-                                                            <div class="row">
-                                                                <div class="col-sm-2">
-                                                                    <a href="{{ route('parent.homework')}}">{{$homework['subject_name']}} </a>
-                                                                </div> <!-- end col -->
-                                                                <div class="col-sm-6">
-                                                                    <div class="d-sm-flex">
-                                                                        <!-- <div>
+                                    <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
+                                        <div class="col">
+                                            <a class="text-dark" data-toggle="collapse" href="#hmenv" aria-expanded="false" aria-controls="hmenv">
+                                                <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> {{$homework['title']}}<span class="text-muted font-14"></span></h5>
+                                            </a>
+                                            <!-- Right modal -->
+                                            <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#right-modal">Rightbar Modal</button> -->
+                                            <div class="collapse show" id="hmenv">
+                                                <div class="card mb-0 shadow-none">
+                                                    <div class="card-body pb-0" id="task-list-one">
+                                                        <!-- task -->
+                                                        <div class="row">
+                                                            <div class="col-sm-2">
+                                                                <a href="{{ route('parent.homework')}}">{{$homework['subject_name']}} </a>
+                                                            </div> <!-- end col -->
+                                                            <div class="col-sm-6">
+                                                                <div class="d-sm-flex">
+                                                                    <!-- <div>
                                                                             <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="{{ route('parent.homework')}}" role="button" aria-haspopup="false" aria-expanded="false">
                                                                                 <img src="{{ Session::get('picture') && asset('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" alt="user-image" class="rounded-circle admin_picture">
                                                                             </a>
                                                                         </div> -->
-                                                                        <div class="mt-3 mt-sm-0">
-                                                                            <ul class="list-inline font-13 text-sm-right">
-                                                                                <li class="list-inline-item">
-                                                                                    <span class="badge badge-soft-danger">InComplete</span>
-                                                                                </li>
-                                                                                <li class="list-inline-item pr-1">
-                                                                                    <i class='mdi mdi-calendar-month-outline font-16'></i>
-                                                                                    Submission Date : {{$homework['date_of_submission']}}
-                                                                                </li>
-                                                                                <li class="list-inline-item text-danger">
-                                                                                </li>
+                                                                    <div class="mt-3 mt-sm-0">
+                                                                        <ul class="list-inline font-13 text-sm-right">
+                                                                            <li class="list-inline-item">
+                                                                                <span class="badge badge-soft-danger">InComplete</span>
+                                                                            </li>
+                                                                            <li class="list-inline-item pr-1">
+                                                                                <i class='mdi mdi-calendar-month-outline font-16'></i>
+                                                                                Submission Date : {{$homework['date_of_submission']}}
+                                                                            </li>
+                                                                            <li class="list-inline-item text-danger">
+                                                                            </li>
 
-                                                                            </ul>
-                                                                        </div>
-                                                                    </div> <!-- end .d-flex-->
-                                                                </div> <!-- end col -->
-                                                            </div>
-                                                            <!-- end task -->
-                                                        </div> <!-- end card-body-->
-                                                    </div> <!-- end card -->
-                                                </div> <!-- end .collapse-->
+                                                                        </ul>
+                                                                    </div>
+                                                                </div> <!-- end .d-flex-->
+                                                            </div> <!-- end col -->
+                                                        </div>
+                                                        <!-- end task -->
+                                                    </div> <!-- end card-body-->
+                                                </div> <!-- end card -->
+                                            </div> <!-- end .collapse-->
 
-                                            </div> <!-- end col -->
-                                        </div> <!-- Maths row -->
+                                        </div> <!-- end col -->
+                                    </div> <!-- Maths row -->
                                     @empty
-                                        <p></p>
+                                    <p></p>
                                     @endforelse
                                 </div> <!-- end card-body -->
                             </div> <!-- end card -->
@@ -352,7 +352,7 @@
                 </ul><br>
                 <div class="card-body">
                     <div class="mt-4 chartjs-chart">
-                        <canvas id="radar-chart-test-marks"  data-colors="#39afd1,#a17fe0"></canvas>
+                        <canvas id="radar-chart-test-marks" data-colors="#39afd1,#a17fe0"></canvas>
                         <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
                     </div>
                 </div> <!-- end card-body-->
@@ -372,15 +372,27 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="demo-form" data-parsley-validate="">
+                    <form id="std_general_details" method="post" action="{{ route('parent.studentleave.add') }}">
+
+                        <input type="hidden" name="class_id" id="listModeClassID">
+                        <input type="hidden" name="section_id" id="listModeSectionID" />
+                        <input type="hidden" name="student_id" id="listModestudentID" />
+                        <input type="hidden" name="reasons" id="listModereason" />
+                        <input type="hidden" name="reasonstxt" id="listModereasontext" />
                         <!--1st row-->
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="heard">Child Name<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
-                                        <option value="Davy Jones">David Jones</option>
-                                        <option value="Peter parker">Peter Parker</option>
+                                    <label for="changeStdName">Student Name<span class="text-danger">*</span></label>
+                                    <select id="changeStdName" class="form-control" name="changeStdName">
+                                        <option value="">Select Student</option>
+                                        @forelse ($get_std_names_dashboard as $std)
+
+                                        <option value="{{ $std['id'] }}" data-classid="{{ $std['class_id'] }}" data-sectionid="{{ $std['section_id'] }}">{{ $std['first_name'] }}</option>
+
+                                        @empty
+
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -393,7 +405,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" autocomplete="off" name="frm_ldate" class="form-control datepick" id="frm_ldate" placeholder="" aria-describedby="inputGroupPrepend" required>
                                     </div>
                                 </div>
                             </div>
@@ -406,42 +418,80 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" autocomplete="off" name="to_ldate" class="form-control datepick" id="to_ldate" placeholder="" aria-describedby="inputGroupPrepend" required>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!--2st row-->
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="message">Reason(s)<span class="text-danger">*</span></label>
-                                    <textarea id="message" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
-                            </textarea>
+                                    <label for="changelev">Reason(s)<span class="text-danger">*</span></label>
+                                    <select id="changelevReasons" class="form-control" name="changelevReasons">
+                                        <option value="">Select Student</option>
+                                        @forelse ($get_leave_reasons_dashboard as $res)
+                                        <option value="{{ $res['id'] }}">{{ $res['name'] }}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4" id="remarks_div" style="display:none;">
+                                <div class="form-group">
+                                    <label for="heard">Remarks</label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input type="text" name="remarks" class="form-control" id="remarks">
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="heard">Posting Date<span class="text-danger">*</span></label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <span class="far fa-calendar-alt"></span>
-                                            </div>
+                                    <label for="document">Attachment File<span class="text-danger">*</span></label>
+
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" id="homework_file" class="custom-file-input" name="file">
+                                            <label class="custom-file-label" for="document">Choose file</label>
                                         </div>
-                                        <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                     </div>
+                                    <span id="file_name"></span>
+
                                 </div>
                             </div>
                         </div>
-                        <!--3rd row-->
-
+                        <div class="clearfix mt-4">
+                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Apply</button>
+                        </div>
                     </form>
-                    <div class="clearfix mt-4">
-                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Submit</button>
-                    </div>
-
                 </div> <!-- end card-body -->
+                <div class="col-md-12">
+                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                        <li class="nav-item">
+                            <h4 class="nav-link">
+                                <span data-feather="external-link" class="icon-dual" id="span-parent"></span> Leave status
+                                <h4>
+                        </li>
+                    </ul><br>
+                    <div class="card-body">
+                        <table class="table mb-0" id="studentleave-table">
+                            <thead>
+                                <tr>
+                                    <th>S.no</th>
+                                    <th>Student Name</th>
+                                    <th>Leave From</th>
+                                    <th>To From</th>
+                                    <th>Reason</th>
+                                    <th>Status</th>                            
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div> <!-- end card-->
         </div> <!-- end col -->
     </div>
@@ -458,12 +508,18 @@
     var pathDownloadFileUrl = "{{ asset('images/todolist/') }}";
     var toDoCommentsUrl = "{{ config('constants.api.to_do_comments') }}";
     var getTestScore = "{{ config('constants.api.get_test_score_dashboard') }}";
-    
     var UserName = "{{ Session::get('name') }}";
+    // general details get student names
+    var get_student = "{{ config('constants.api.get_test_score_dashboard') }}";
+    var stutdentleaveList = "{{ route('parent.student_leave.list') }}";
+  
+    // leave apply
 </script>
 <!-- to do list -->
 <script src="{{ asset('js/custom/parent_dashboard.js') }}"></script>
 <script src="{{ asset('js/custom/admin/dashboard.js') }}"></script>
+
+
 <!-- get timetable list -->
 <script src="{{ asset('js/custom/student_calendor.js') }}"></script>
 @endsection

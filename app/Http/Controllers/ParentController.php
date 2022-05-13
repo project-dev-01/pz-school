@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use App\Models\User;
 use App\Models\Task;
+
 class ParentController extends Controller
 {
     //
@@ -16,46 +17,106 @@ class ParentController extends Controller
 
         $user_id = session()->get('user_id');
         $student_id = session()->get('children_id');
+        $parent_id = session()->get('ref_user_id');
+
         $data = [
             'user_id' => $user_id,
             'student_id' => $student_id
         ];
+        $parent_ids = [
+            'parent_id' => $parent_id,
+        ];
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
         $get_homework_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_homework_list_dashboard'), $data);
+        $get_std_names_dashboard = Helper::GETMethodWithData(config('constants.api.get_students_parentdashboard'), $parent_ids);
+        $get_leave_reasons_dashboard = Helper::GetMethod(config('constants.api.get_leave_reasons'));
+
         return view(
             'parent.dashboard.index',
             [
                 'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
                 'get_homework_list_dashboard' => $get_homework_list_dashboard['data'],
+                'get_std_names_dashboard' => $get_std_names_dashboard['data'],
+                'get_leave_reasons_dashboard' => $get_leave_reasons_dashboard['data'],
             ]
         );
+    }
+    // student leave 
+    public function student_applyleave(Request $request)
+    {
+        $file = $request->file('file');
+        $path = $file->path();
+        $data = file_get_contents($path);
+        $base64 = base64_encode($data);
+        $extension = $file->getClientOriginalExtension();
+        $status = "Pending";
+        $parent_id = session()->get('ref_user_id');
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'student_id' => $request->student_id,
+            'parent_id' => $parent_id,
+            'frm_leavedate' => $request->frm_ldate,
+            'to_leavedate' => $request->to_ldate,
+            'reasons' => $request->reasons,
+            'remarks' => $request->rem,
+            'status' => $status,
+            'reason_text' => $request->reasonstxt,
+            'file' => $base64,
+            'file_extension' => $extension
+        ];
+        $response = Helper::PostMethod(config('constants.api.std_leave_apply'), $data);
+        return $response;
+    }
+    // student leave list
+    public function getstudentleave_list()
+    {
+        $parentid = session()->get('ref_user_id');
+        $parent_id = [
+            'parent_id' => $parentid,
+        ];
+    
+        $response = Helper::GETMethodWithData(config('constants.api.studentleave_list'),$parent_id);
+    
+        return $response;
+        // return DataTables::of($response['data'])
+        //     ->addIndexColumn()
+        //     ->addColumn('actions', function ($row) {
+        //         return '<div class="button-list">
+        //                             <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editqualifyBtn">Update</a>
+        //                             <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deletequalifyBtn">Delete</a>
+        //                     </div>';
+        //     })
+
+        //     ->rawColumns(['actions'])
+        //     ->make(true);
     }
     public function settings()
     {
         return view('parent.settings.index');
     }
-     // faq screen pages start
+    // faq screen pages start
 
-     public function faqIndex()
-     {
-         return view('parent.faq.index');
-     }
+    public function faqIndex()
+    {
+        return view('parent.faq.index');
+    }
 
-     public function examSchedule()
+    public function examSchedule()
     {
         return view('parent.exam.schedule');
     }
-    
+
     public function reportCard()
     {
-        $datas=array();
-        $allexams=Helper::PostMethod(config('constants.api.all_exams_list'),$datas);
+        $datas = array();
+        $allexams = Helper::PostMethod(config('constants.api.all_exams_list'), $datas);
         return view(
             'parent.report_card.index',
-            [         
-                'allexams' => $allexams['data']      
+            [
+                'allexams' => $allexams['data']
             ]
-        );   
+        );
     }
     public function events()
     {
@@ -91,10 +152,9 @@ class ParentController extends Controller
             'friday',
             'saturday'
         );
-        
+
         $timetable = Helper::PostMethod(config('constants.api.timetable_parent'), $data);
-        if($timetable['code']=="200")
-        {
+        if ($timetable['code'] == "200") {
             return view(
                 'parent.time_table.index',
                 [
@@ -102,10 +162,10 @@ class ParentController extends Controller
                     'details' => $timetable['data']['details'],
                     'days' => $days,
                     'max' => $timetable['data']['max']
-   
+
                 ]
             );
-        }else{
+        } else {
             return view(
                 'parent.time_table.index',
                 [
@@ -147,7 +207,7 @@ class ParentController extends Controller
             'user_id' => $user_id
         ];
         $category = Helper::GetMethod(config('constants.api.category'));
-        $usernames = Helper::GETMethodWithData(config('constants.api.usernames_autocomplete'),$data);
+        $usernames = Helper::GETMethodWithData(config('constants.api.usernames_autocomplete'), $data);
         //dd($usernames);
         $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'), $data);
         // dd($forum_list);
@@ -160,16 +220,16 @@ class ParentController extends Controller
     }
     public function forumPageSingleUser()
     {
-        $user_id= session()->get('user_id');  
-        $data = [            
+        $user_id = session()->get('user_id');
+        $data = [
             'user_id' => $user_id
         ];
         $forum_post_user_crd = Helper::GETMethodWithData(config('constants.api.forum_post_user_created'), $data);
         $forum_categorypost_user_crd = Helper::GETMethodWithData(config('constants.api.forum_categorypost_user_created'), $data);
         $forum_post_user_allreplies = Helper::GETMethodWithData(config('constants.api.forum_posts_user_repliesall'), $data);
         $forum_userthreadslist = Helper::GETMethodWithData(config('constants.api.forum_userthreadslist'), $data);
-       // dd($forum_threadslist);
-        return view('parent.forum.page-single-user', [            
+        // dd($forum_threadslist);
+        return view('parent.forum.page-single-user', [
             // 'forum_post_user_crd' => $forum_post_user_crd['data'],
             // 'forum_categorypost_user_crd' => $forum_categorypost_user_crd['data'],
             // 'forum_post_user_allreplies' => $forum_post_user_allreplies['data'],
@@ -198,11 +258,11 @@ class ParentController extends Controller
     }
     public function forumPageCategories()
     {
-        $user_id= session()->get('user_id');  
-        $data = [            
+        $user_id = session()->get('user_id');
+        $data = [
             'user_id' => $user_id
         ];
-        $listcategoryvs = Helper::GETMethodWithData(config('constants.api.listcategoryvs'),$data);
+        $listcategoryvs = Helper::GETMethodWithData(config('constants.api.listcategoryvs'), $data);
         return view('parent.forum.page-categories', [
             'listcategoryvs' => $listcategoryvs['data']
         ]);
@@ -231,9 +291,9 @@ class ParentController extends Controller
     // forum create post 
     public function createpost(Request $request)
     {
-        $current_user=session()->get('role_id');
-        $rollid_tags=$request->tags;
-        $tags_add_also_currentroll=$rollid_tags .','.$current_user;        
+        $current_user = session()->get('role_id');
+        $rollid_tags = $request->tags;
+        $tags_add_also_currentroll = $rollid_tags . ',' . $current_user;
         $data = [
             'user_id' => session()->get('user_id'),
             'user_name' => session()->get('name'),
@@ -320,10 +380,10 @@ class ParentController extends Controller
             ]);
         }
     }
-     // faq screen pages end
+    // faq screen pages end
 
     //attendance
-     public function attendance()
+    public function attendance()
     {
         $data = [
             'ref_user_id' => session()->get('ref_user_id')
@@ -338,27 +398,27 @@ class ParentController extends Controller
         );
     }
 
-     // Home work screen pages start
-     public function homeworklist()
-     {
-         $student = session()->get('children_id');
-         $data = [
-             'student_id' => $student,
-         ];
-         $homework = Helper::PostMethod(config('constants.api.homework_student'), $data);
+    // Home work screen pages start
+    public function homeworklist()
+    {
+        $student = session()->get('children_id');
+        $data = [
+            'student_id' => $student,
+        ];
+        $homework = Helper::PostMethod(config('constants.api.homework_student'), $data);
 
         //  dd($homework);
-         return view(
-             'parent.homework.list',
-             [
-                 'homework' => $homework['data']['homeworks'],
-                 'subject' => $homework['data']['subjects'],
-                 'count' => $homework['data']['count'],
-             ]
-         );
-     }
+        return view(
+            'parent.homework.list',
+            [
+                'homework' => $homework['data']['homeworks'],
+                'subject' => $homework['data']['subjects'],
+                'count' => $homework['data']['count'],
+            ]
+        );
+    }
 
-     
+
 
     //Filter  Homework
     public function filterHomework(Request $request)
@@ -370,28 +430,23 @@ class ParentController extends Controller
             'student_id' => $student,
         ];
 
-        
+
         $homework = Helper::PostMethod(config('constants.api.homework_student_filter'), $data);
-        if($homework['code']=="200")
-        {
-            $response ="";
-            if($homework['data'])
-            {
-                foreach($homework['data']['homeworks'] as $work)
-                {
-                    if($work['status'] == 1) 
-                    {
+        if ($homework['code'] == "200") {
+            $response = "";
+            if ($homework['data']) {
+                foreach ($homework['data']['homeworks'] as $work) {
+                    if ($work['status'] == 1) {
                         $status = "Completed";
                         $top = "( Completed )";
-                    }else{
+                    } else {
                         $status = "InCompleted";
-                        $top= "";
+                        $top = "";
                     }
 
-                    
-                    if($work['status'] == 1)
-                    {
-                        $file='<div class="col-md-4">
+
+                    if ($work['status'] == 1) {
+                        $file = '<div class="col-md-4">
                         <div class="row">
                             <div class="col-md-5 font-weight-bold">Attachment File: </div>
                             <div class="col-md-3">
@@ -401,9 +456,8 @@ class ParentController extends Controller
                             </div>
                         </div>
                     </div>';
-
-                    }else{
-                            $file = '<div class="col-md-4">
+                    } else {
+                        $file = '<div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-5 font-weight-bold">Attachment File: </div>
                                 <div class="col-md-5">
@@ -414,15 +468,15 @@ class ParentController extends Controller
                             </div>
                         </div>';
                     }
-                    $response.= '<form class="submitHomeworkForm" method="post"   enctype="multipart/form-data" autocomplete="off">
-                    '.csrf_field() .'
+                    $response .= '<form class="submitHomeworkForm" method="post"   enctype="multipart/form-data" autocomplete="off">
+                    ' . csrf_field() . '
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <p>
                                 <div>
                                     <a class="list-group-item list-group-item-info btn-block btn-lg" data-toggle="collapse" href="#English" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                        <i class="fas fa-caret-square-down"></i>'.$work['subject_name'].' - '. date('j F Y', strtotime($work['date_of_homework'])) .' '.$top.'
+                                        <i class="fas fa-caret-square-down"></i>' . $work['subject_name'] . ' - ' . date('j F Y', strtotime($work['date_of_homework'])) . ' ' . $top . '
                                     </a>
                                 </div>
                                 </p>
@@ -432,19 +486,19 @@ class ParentController extends Controller
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-5 font-weight-bold">Title :</div>
-                                                    <div class="col-md-3">'.$work['title'].'</div>
+                                                    <div class="col-md-3">' . $work['title'] . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-5 font-weight-bold">Status :</div>
-                                                    <div class="col-md-3">'.$status.'</div>
+                                                    <div class="col-md-3">' . $status . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-5 font-weight-bold">Date Of Homework :</div>
-                                                    <div class="col-md-3">'.date('F j , Y', strtotime($work['date_of_homework'])).'</div>
+                                                    <div class="col-md-3">' . date('F j , Y', strtotime($work['date_of_homework'])) . '</div>
                                                 </div>
                                             </div>
 
@@ -454,19 +508,19 @@ class ParentController extends Controller
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-5 font-weight-bold">Date Of Submission :</div>
-                                                    <div class="col-md-3">'.date('F j , Y', strtotime($work['date_of_submission'])).'</div>
+                                                    <div class="col-md-3">' . date('F j , Y', strtotime($work['date_of_submission'])) . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-5 font-weight-bold">Evalution Date :</div>
-                                                    <div class="col-md-3">'.date('F j , Y', strtotime($work['evaluation_date'])).'</div>
+                                                    <div class="col-md-3">' . date('F j , Y', strtotime($work['evaluation_date'])) . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-5 font-weight-bold">Remarks :</div>
-                                                    <div class="col-md-3">'.$work['description'].'</div>
+                                                    <div class="col-md-3">' . $work['description'] . '</div>
                                                 </div>
                                             </div>
                                         </div><br />
@@ -475,7 +529,7 @@ class ParentController extends Controller
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-5 font-weight-bold">Rank Out Of 5 :</div>
-                                                    <div class="col-md-3">'.$work['rank'].'</div>
+                                                    <div class="col-md-3">' . $work['rank'] . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -494,17 +548,17 @@ class ParentController extends Controller
                                             <div class="col-md-12 font-weight-bold">Submission Process Here :- </div>
 
                                         </div><br>
-                                        <input type="hidden" name="homework_id" value="'.$work['id'].'">
+                                        <input type="hidden" name="homework_id" value="' . $work['id'] . '">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-5 font-weight-bold">Note : </div>
                                                     <div class="col-md-5">
-                                                        <textarea  name="remarks" rows="4" cols="25">'.$work['remarks'].'</textarea>
+                                                        <textarea  name="remarks" rows="4" cols="25">' . $work['remarks'] . '</textarea>
                                                     </div>
                                                 </div>
                                             </div>
-                                            '.$file.'
+                                            ' . $file . '
                                         </div>
                                     </div>
                                 </div>
@@ -518,19 +572,19 @@ class ParentController extends Controller
             $homework['list'] = $response;
             $homework['subject'] = $homework['data']['subject'];
         }
-        
+
         return $homework;
     }
-     //Children
-     public function children()
-     {
+    //Children
+    public function children()
+    {
 
-        if(session()->has('children_id')){
+        if (session()->has('children_id')) {
             session()->pull('children_id');
         }
         return view('parent.dashboard.children');
-     }
-     public function chatShow()
+    }
+    public function chatShow()
     {
         return view('parent.chat.index');
     }

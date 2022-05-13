@@ -1,0 +1,36 @@
+
+
+SELECT  TestTable.test_name,TestTable.category,TestTable.gender,TestTable.agecondition,TestTable.cost DATE
+   FROM PackageDetailTable
+   LEFT JOIN TestTable
+   ON PackageDetailTable.test_id = TestTable.test_id
+   where TestTable.test_id=1
+
+1.
+
+select * from (select id,icPasspoartNo,Appointment,oldnotes,Breakfast,Historyofdiabetes,Foodhandler from 
+PatientNoteTable where id=1) as a 
+LEFT OUTER JOIN
+(select patientNote_uniqueId,clientid,packId,PackageName,Price,description from PatientNoteGridTable
+ where patientNote_uniqueId=1) as b on a.id = b.patientNote_uniqueId
+LEFT OUTER JOIN 
+(select patientNote_uniqueId,patientname,age,regdate,gender,companyid,companyName,VN 
+from PatientInfoTable where patientNote_uniqueId=1) as c on a.id=c.patientNote_uniqueId
+
+2.
+
+select * from (select id,icPasspoartNo,Appointment,oldnotes,Breakfast,Historyofdiabetes,Foodhandler
+ from PatientNoteTable where id =1) as a LEFT OUTER JOIN  
+ (select patientNote_uniqueId, clientid, packId, PackageName, Price, description from PatientNoteGridTable 
+ where patientNote_uniqueId = 1) as b on a.id = b.patientNote_uniqueId 
+ LEFT OUTER JOIN(select patientNote_uniqueId, patientname, age, regdate, gender, companyid, companyName, VN ,gotfullinfo
+from PatientInfoTable where patientNote_uniqueId = 1) as c on a.id = c.patientNote_uniqueId
+ LEFT OUTER JOIN(select patientNote_uniqueId,lockerno,taken,lreturn,witnesslockerno,witnesstaken,
+ dischargedby,MYSDS,fit,unfit,temufit,nodata,remarks,Enroll_date,UserId from MemoTable 
+ where patientNote_uniqueId = 1) as d on a.id = d.patientNote_uniqueId 
+ LEFT OUTER JOIN(select patientNote_uniqueId,icPasspoartNo,HT,WT,BMI,waist,hip,waisthipratio,bloodPressure,pulserate,temperature,
+SOP2,colorversion,distancevd1R,distancevd1L,distancevd2R,distancevd2L,botheyesd2,radiounCcorrectD2,
+nearveisionR,nearveisionL,radiounCcorrectNV,LMPdate from StaffUseTable where patientNote_uniqueId=1)
+ as e on a.id = e.patientNote_uniqueId;
+ 
+ 

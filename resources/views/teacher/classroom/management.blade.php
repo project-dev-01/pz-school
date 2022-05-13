@@ -74,7 +74,6 @@
         color: #3498db;
         transform: scale(1.1);
     }
-
 </style>
 @endsection
 @section('content')
@@ -409,24 +408,70 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div> <!-- end col-->
+                                    <div class="modal fade" id="stuRemarksPopup" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <label for="heard">Remarks</label>
+                                                    <input type="hidden" id="studenetID" />
+                                                    <textarea class="form-control" id="student_remarks" rows="5" placeholder="Enter remarks here" name="student_remarks"></textarea>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                                                    <button type="button" id="studentRemarksSave" class="btn btn-primary">Save</button>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
+                                    <form id="updatestudentleave" method="post" action="{{ route('teacher.studentleave.update') }}" autocomplete="off">
+                                        <div class="col-md-12">
+                                            <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                                                <li class="nav-item">
+                                                    <h4 class="nav-link">
+                                                        <span data-feather="external-link" class="icon-dual" id="span-parent"></span> Student Leave Request
+                                                        <h4>
+                                                </li>
+                                            </ul><br>
+                                            <div class="table-responsive">
+                                                <table id="stdleaves" class="table table-centered table-striped dt-responsive nowrap w-100" width="100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Student name</th>
+                                                            <th>From Leave</th>
+                                                            <th>To Leave</th>
+                                                            <th>Reason</th>
+                                                            <th>Document</th>
+                                                            <th>Status</th>
+                                                            <th>Remarks</th>
+                                                            <th>Auction</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="stdleaves_body"></tbody>
+                                                </table>
+                                                <input type="hidden" id="addstd_leave_Remarks" />
+                                            </div>
+                                        </div>
 
-                                <div class="modal fade" id="stuRemarksPopup" tabindex="-1" role="dialog" aria-hidden="true">
+                                        </div> <!-- end col-->
+
+                                    </form>
+                                <!-- student leave remarks popup -->
+                                <div class="modal fade" id="stuLeaveRemarksPopup" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-body">
                                                 <label for="heard">Remarks</label>
-                                                <input type="hidden" id="studenetID" />
-                                                <textarea class="form-control" id="student_remarks" rows="5" placeholder="Enter remarks here" name="student_remarks"></textarea>
+                                                <input type="hidden" id="studenet_leave_tbl_id" />
+                                                <textarea class="form-control" id="student_leave_remarks" rows="5" placeholder="Enter remarks here" name="student_leave_remarks"></textarea>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                                                <button type="button" id="studentRemarksSave" class="btn btn-primary">Save</button>
+                                                <button type="button" id="student_leave_RemarksSave" class="btn btn-primary">Save</button>
                                             </div>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
                                 </div><!-- /.modal -->
-
                                 <div class="tab-pane" id="dailyreport">
                                     <form id="addDailyReport" method="post" action="{{ route('teacher.classroom.add_daily_report') }}" autocomplete="off">
                                         <input type="hidden" name="class_id" id="dailyReportClassID">
@@ -464,8 +509,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
-                                                            <th>Student Name
-                                                            </th>
+                                                            <th>Student Name</th>
                                                             <th>Student Remarks</th>
                                                             <th>Remarks</th>
                                                         </tr>
@@ -547,8 +591,8 @@
                                     <br />
                                     <div class="row shortTestHideSHow">
                                         <!-- <div class="row"> -->
-                                            <div class="col-md-12">
-                                            <div class="card-body"> 
+                                        <div class="col-md-12">
+                                            <div class="card-body">
                                                 <form id="addShortTest" method="post" action="{{ route('teacher.classroom.add_short_test') }}" autocomplete="off">
                                                     @csrf
                                                     <div id="shortTestTableAppend">
@@ -560,7 +604,7 @@
                                                     </div>
                                                 </form>
                                             </div>
-                                            </div>
+                                        </div>
                                         <!-- </div> end card-box -->
                                     </div>
 
@@ -587,7 +631,10 @@
     var getDailyReportRemarks = "{{ config('constants.api.get_daily_report_remarks') }}";
     var getClassRoomWidget = "{{ config('constants.api.get_classroom_widget_data') }}";
     var getShortTest = "{{ config('constants.api.get_short_test') }}";
-
+    // student leave apply
+    var getStudentLeave = "{{ config('constants.api.get_student_leaves') }}";
+    var imgurl = "{{ asset('teacher/homework/') }}";
+    var teacher_leave_remarks_updated= "{{ config('constants.api.teacher_leave_approve') }}";
     // default image test
     var defaultImg = "{{ asset('images/users/default.jpg') }}";
 </script>

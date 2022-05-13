@@ -1,0 +1,137 @@
+        Schema::create('student_subjectdivision_ins', function (Blueprint $table) {
+            $table->id();
+            $table->integer('class_id');
+            $table->integer('student_id');
+            $table->integer('section_id');
+            $table->integer('subject_id');       
+            $table->integer('exam_id');  
+            $table->integer('subjectdivision_scores');
+            $table->integer('total_score');     
+            $table->string('grade');
+            $table->integer('ranking');        
+            $table->timestamps();
+        });
+
+
+
+    $("#selectedusers").on('change', function(){
+         $("#selectedusers").val();
+       
+        var del= $("#topictype").val("#selectedusers");
+        console.log(del);
+      });
+
+Today Task : Forum
+1.Bind the data for replies post ( Completed )
+2.home page : list the post datas ( Completed ) 
+3.Replies command : Validation and like ,dislike count increment ( Processing )
+
+     $table->integer('created_post_id');
+            
+            $table->integer('branch_id');
+            $table->integer('user_id');
+            $table->string('user_name');
+            $table->integer('likes');
+            $table->integer('dislikes');
+            $table->integer('favorite');
+            $table->integer('replies');
+            $table->integer('views');
+            $table->string('activity');
+,$value['dislikes'],$value['favorite'],$value['views']
+
+/{dislikes}/{favorite}/{views}
+
+
+
+   <!--hidden values-->
+                    @if($value['dislikes']=== null) 
+                    <label hidden id="hddislike" name="hddislike">0</label>            
+                    @else
+                    <label hidden id="hddislike" name="hddislike">{{$value['dislikes']}}</label>
+                    @endif
+                    @if($value['favorite']=== null) 
+                    <label hidden id="hdheart" name="hdheart"> {{$value['favorite']}}</label>            
+                    @else
+                    <label hidden id="hdheart" name="hdheart"> 0</label>
+                    @endif  
+
+    DB::table('forum_posts')
+            ->leftJoin('forum_categorys','forum_categorys.id','=','forum_posts.category')
+            ->leftJoin('forum_count_details',function($join) {
+                                $join->on('forum_count_details.created_post_id','=','forum_posts.id')
+                                    ->orWhere('forum_posts.user_id','`p.user_id`');
+                            })
+            ->select('forum_posts.user_id','forum_posts.user_name','forum_posts.topic_title','forum_categorys.category_names','forum_count_details.likes','forum_count_details.replies','forum_count_details.views','forum_count_details.activity')
+            ->get();
+
+=============================
+
+
+<a href="javascript:void()">
+
+ if ($tptitle->table('forum_posts')->where('topic_title', '=', $request->tptitle)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {}
+
+    $table->string('category_names');
+
+
+ <div class="tt-col-topic">Topic</div>
+                <div class="tt-col-category">Category</div>
+                <div class="tt-col-value hide-mobile">Likes</div>
+                <div class="tt-col-value hide-mobile">Replies</div>
+                <div class="tt-col-value hide-mobile">Views</div>
+                <div class="tt-col-value">Activity</div>
+
+            $table->integer('user_id')->nullable();
+            $table->string('user_name')->nullable();
+            $table->string('topic_title');
+            $table->string('types')->nullable();
+            $table->text('body_content');
+            $table->string('category');
+            $table->string('tags')->nullable();
+            $table->string('imagesorvideos')->nullable();
+
+<html>
+ <head> 
+<meta name="viewport" content="width=device-width, initial-scale=1"> <title>Add CSV Excel Export Button in Yajra Laravel Datatable</title>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+ <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+ <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script> 
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" /> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
+ <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
+ <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+ </head>
+ <body>
+ <div class="container"> <br /> <h3 align="center">Add CSV Excel Export Button in Yajra Laravel Datatable</h3> <br /> <div class="table-responsive"> <div class="panel panel-default"> <div class="panel-heading">Sample Data</div> <div class="panel-body"> {!! $dataTable->table() !!} {!! $dataTable->scripts() !!} </div> </div> </div> <br /> <br /> </div> </body> </html> 
+
+
+ $table->string('title');
+            $table->string('type');
+            $table->longText('remarks');
+            $table->longText('audience');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->tinyInteger('status');            
+            $table->string('created_by');
+            $table->string('branch_id');
+
+
+  $table->text('branch_code')->nullable();
+            $table->string('name')->nullable();
+            $table->string('db_name');
+            $table->string('db_username');
+            $table->string('db_password');
+            $table->string('school_name');
+            $table->string('email');
+            $table->string('mobile_no');
+            $table->string('currency');
+            $table->string('symbol');
+            $table->integer('country_id');
+            $table->integer('state_id');
+            $table->integer('city_id');
+            $table->text('address');
+            $table->tinyInteger('status'); 
