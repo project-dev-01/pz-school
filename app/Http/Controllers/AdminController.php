@@ -650,18 +650,24 @@ class AdminController extends Controller
             ->make(true);
     }
 
+    // index Event Type
     public function eventType()
     {
         return view('admin.event_type.index');
     }
 
-
-    // get Even Type details
+    public function addEventType(Request $request)
+    {
+        $data = [
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.event_type_add'), $data);
+        return $response;
+    }
     public function getEventTypeList(Request $request)
     {
-        $event_type = EventType::all();
-
-        return DataTables::of($event_type)
+        $response = Helper::GetMethod(config('constants.api.event_type_list'));
+        return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -673,212 +679,135 @@ class AdminController extends Controller
             ->rawColumns(['actions'])
             ->make(true);
     }
-
-    //add New Event Type
-    public function addEventType(Request $request)
+    public function getEventTypeDetails(Request $request)
     {
-        $validator = \Validator::make($request->all(), [
-            'name' => 'required',
-        ]);
-
-        if (!$validator->passes()) {
-            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
-        } else {
-            $event_type = new EventType();
-            $event_type->name = $request->name;
-            $query = $event_type->save();
-
-            if (!$query) {
-                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
-            } else {
-                return response()->json(['code' => 1, 'msg' => 'New Event Type has been successfully saved']);
-            }
-        }
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.event_type_details'), $data);
+        return $response;
     }
-
-    // get Event Type row details
-    public function getEventType(Request $request)
-    {
-        // dd($request);
-        $event_type_id = $request->event_type_id;
-        $eventTypeDetails = EventType::find($event_type_id);
-        return response()->json(['details' => $eventTypeDetails]);
-    }
-
-    // update Event Type
     public function updateEventType(Request $request)
     {
-        $event_type_id = $request->event_type_id;
-
-        $validator = \Validator::make($request->all(), [
-            'name' => 'required|unique:sections,name,' . $event_type_id
-        ]);
-
-        if (!$validator->passes()) {
-            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
-        } else {
-
-            $event_type = EventType::find($event_type_id);
-            $event_type->name = $request->name;
-            $query = $event_type->save();
-
-            if ($query) {
-                return response()->json(['code' => 1, 'msg' => 'Event Type Details have Been updated']);
-            } else {
-                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
-            }
-        }
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name
+        ];
+        
+        $response = Helper::PostMethod(config('constants.api.event_type_update'), $data);
+        return $response;
     }
-
-    // delete Event Type
+    // DELETE event type Details
     public function deleteEventType(Request $request)
     {
-        $event_type_id = $request->event_type_id;
-        EventType::where('id', $event_type_id)->delete();
-        return response()->json(['code' => 1, 'msg' => 'Event Type have been deleted from database']);
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.event_type_delete'), $data);
+        return $response;
     }
 
-
+    // index Event 
     public function event()
     {
-        $classDetails = Classes::select('id', 'name')->get();
-        $sectionDetails = SectionAllocation::select('sections_allocations.id', 'sections_allocations.class_id', 'sections_allocations.section_id', 'sections.name')->join('sections', 'sections.id', '=', 'sections_allocations.section_id')->get();
-        // dd($docomuntOrders);
-        $type = EventType::select('id', 'name')->get();
-        return view('admin.event.index', ['type' => $type, 'classDetails' => $classDetails, 'sectionDetails' => $sectionDetails]);
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $gettype = Helper::GetMethod(config('constants.api.event_type_list'));
+        return view(
+            'admin.event.index',
+            [
+                'class' => $getclass['data'],
+                'type' => $gettype['data'],
+            ]
+        );
     }
 
-
-    // get Even Type details
+    public function addEvent(Request $request)
+    {
+        
+        // if($request->class_id){
+        //     $class = implode(",",$request->class_id);
+        // } else{
+        //     $class = "";
+        // }
+        
+        $data = [
+            'title' => $request->title,
+            'type' => $request->type,
+            'audience' => $request->audience,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'class' => $request->class,
+            'section' => $request->section,
+            'description' => $request->description
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.event_add'), $data);
+        // dd($response);
+        return $response;
+    }
     public function getEventList(Request $request)
     {
-        $event = \DB::table("events")
-            ->select("events.*", \DB::raw("GROUP_CONCAT(classes.name) as classname"), 'event_types.name as type', 'users.name as created_by')
-            ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,events.selected_list)"), ">", \DB::raw("'0'"))
-            ->leftjoin('event_types', 'event_types.id', '=', 'events.type')
-            ->leftjoin('users', 'users.id', '=', 'events.created_by')
-            ->groupBy("events.id")
-            ->get();
-        // $event = Event::select('events.id','events.title','events.audience','event_types.name as type','events.start_date','events.end_date','events.status','users.name as created_by')
-        //     ->join('users','users.id','=','events.created_by')
-        //     ->join('event_types','event_types.id','=','events.type')
-        //     ->get();
-
-        // $ch = Event::all(); data-plugin="switchery" data-color="#9261c6"
-        //    dd($teacherAllocation);
-        return DataTables::of($event)
-
+        $response = Helper::GetMethod(config('constants.api.event_list'));
+        return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('classname', function ($row) {
-                $audience = $row->audience;
+                $audience = $row['audience'];
+
+                
                 if ($audience == 1) {
                     return "Everyone";
                 } else {
-                    return "Class " . $row->classname;
+                    return "<b>Standard </b>: " .$row['class_name'];
                 }
             })
-            ->addColumn('status', function ($row) {
+            ->addColumn('publish', function ($row) {
 
-                $status = $row->status;
+                $status = $row['status'];
                 if ($status == 1) {
                     $result = "checked";
                 } else {
                     $result = "";
                 }
-                return '<input type="checkbox" ' . $result . ' data-id="' . $row->id . '"  id="publishEventBtn">';
+                return '<input type="checkbox" ' . $result . ' data-id="' . $row['id'] . '"  id="publishEventBtn">';
             })
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
-                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row->id . '" id="viewEventBtn">View</a>
-                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row->id . '" id="deleteEventBtn">Delete</a>
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="viewEventBtn">View</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteEventBtn">Delete</a>
                         </div>';
             })
-
-            ->rawColumns(['status', 'actions'])
+            ->rawColumns(['classname', 'publish', 'actions'])
             ->make(true);
     }
-
-    //add New Event Type
-    public function addEvent(Request $request)
+    public function getEventDetails(Request $request)
     {
-        $validator = \Validator::make($request->all(), [
-            'title' => 'required',
-            'type' => 'required',
-            'audience' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'class' => '',
-            'section' => '',
-            'description' => 'required',
-        ]);
-
-        if (!$validator->passes()) {
-            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
-        } else {
-            $event = new Event();
-            $event->title = $request->title;
-            $event->type = $request->type;
-            $event->audience = $request->audience;
-
-            if ($request->audience == 2) {
-                $event->selected_list = json_encode($request->class);
-            } elseif ($request->audience == 3) {
-                $event->selected_list = json_encode($request->section);
-            } else {
-                $event->selected_list = NULL;
-            }
-
-            $event->start_date = $request->start_date;
-            $event->end_date = $request->end_date;
-            $event->remarks = $request->description;
-
-            $user = Auth::id();
-            $event->created_by = $user;
-            $query = $event->save();
-
-            if (!$query) {
-                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
-            } else {
-                return response()->json(['code' => 1, 'msg' => 'New Event has been successfully saved']);
-            }
-        }
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.event_details'), $data);
+        return $response;
     }
-
-    // get Event details
-    public function getEvent(Request $request)
-    {
-        // dd($request);
-        $event_id = $request->event_id;
-        $eventDetails = \DB::table("events")
-            ->select("events.*", \DB::raw("GROUP_CONCAT(classes.name) as classname"), 'event_types.name as type', 'users.name as created_by')
-            ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,events.selected_list)"), ">", \DB::raw("'0'"))
-            ->leftjoin('event_types', 'event_types.id', '=', 'events.type')
-            ->leftjoin('users', 'users.id', '=', 'events.created_by')
-            ->groupBy("events.id")
-            ->where('events.id', $event_id)->first();
-        // $eventDetails = Event::select('events.id','events.title','events.audience','event_types.name as type','events.start_date','events.end_date','events.status','users.name as created_by','events.remarks')
-        //     ->join('users','users.id','=','events.created_by')
-        //     ->join('event_types','event_types.id','=','events.type')
-        //     ->find($event_id);
-        return response()->json(['details' => $eventDetails]);
-    }
-
-    // delete Event 
+    // DELETE event 
     public function deleteEvent(Request $request)
     {
-        $event_id = $request->event_id;
-        Event::where('id', $event_id)->delete();
-        return response()->json(['code' => 1, 'msg' => 'Event have been deleted from database']);
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.event_delete'), $data);
+        return $response;
     }
-    // Publish Event 
+
+    // publish event
     public function publishEvent(Request $request)
     {
-
-        $event = Event::find($request->event_id);
-        $event->status = $request->value;
-        $query = $event->save();
-
-        return response()->json(['code' => 1, 'msg' => 'Event Updated Successfully']);
+        $data = [
+            'id' => $request->id,
+            'status' => $request->status
+        ];
+        $response = Helper::PostMethod(config('constants.api.event_publish'), $data);
+        return $response;
     }
 
     public function admission()

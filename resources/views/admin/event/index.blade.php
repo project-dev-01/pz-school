@@ -33,7 +33,7 @@
                 </div>
                 </p>
                 <div class="table-responsive">
-                    <table class="table mb-0" id="admin-event-table">
+                    <table class="table mb-0" id="event-table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -42,28 +42,11 @@
                                 <th>Audience</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
-                                <th>Created By</th>
                                 <th>Publish</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Cricket</td>
-                                <td>Sports</td>
-                                <td>General Audience</td>
-                                <td>10/02/2022</td>
-                                <td>15/02/2022</td>
-                                <td>Admin</td>
-                                <td>-</td>
-                                <td>
-                                    <div class="button-list">
-                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="#">View</a>
-                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="#">Delete</a>
-                                    </div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -76,5 +59,19 @@
     @include('admin.event.publish')
 </div>
 <!-- container -->
+
+@endsection
+@section('scripts')
+
+<script>
+  //event routes
+    var eventList = "{{ route('admin.event.list') }}";
+    var eventDetails = "{{ route('admin.event.details') }}";
+    var eventDelete = "{{ route('admin.event.delete') }}";
+    var eventPublish = "{{ route('admin.event.publish') }}";
+    
+</script>
+
+<script src="{{ asset('js/custom/type.js') }}"></script>
 
 @endsection

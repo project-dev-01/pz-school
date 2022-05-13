@@ -364,7 +364,7 @@
                         </div> <!-- end col-->
 
                         <div class="col-lg-12">
-                            <div id="calendar"></div>
+                            <div id="admin_calendor"></div>
                         </div> <!-- end col -->
 
                     </div> <!-- end row -->
@@ -372,51 +372,52 @@
             </div> <!-- end card -->
 
             <!-- Add New Event MODAL -->
-            <div class="modal fade" id="event-modal" tabindex="-1">
-                <div class="modal-dialog">
+            <div class="modal fade viewEvent" id="admin-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
-                        <div class="modal-header py-3 px-4 border-bottom-0 d-block">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h5 class="modal-title" id="modal-title">Event</h5>
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myviewEventModalLabel"> <i class="fas fa-info-circle"></i> Event Details </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
-                        <div class="modal-body p-4">
-                            <form class="needs-validation" name="event-form" id="form-event" novalidate>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label class="control-label">Event Name</label>
-                                            <input class="form-control" placeholder="Insert Event Name" type="text" name="title" id="event-title" required />
-                                            <div class="invalid-feedback">Please provide a valid event name</div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-box">
+                                        <div class="table-responsive">
+                                            <table class="table mb-0">
+                                                <tr>
+                                                    <td>Title</td>
+                                                    <td id="title"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Type</td>
+                                                    <td id="type"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Start Date</td>
+                                                    <td id="start_date"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>End Date</td>
+                                                    <td id="end_date"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Audience</td>
+                                                    <td id="audience"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Description</td>
+                                                    <td id="description"></td>
+                                                </tr>
+                                            </table>
                                         </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label class="control-label">Category</label>
-                                            <select class="form-control custom-select" name="category" id="event-category" required>
-
-                                                <option value="bg-primary">First Communion</option>
-                                                <option value="bg-info">Scouting Jamboree</option>
-                                                <option value="bg-warning">Outreach is a volunteer program</option>
-                                            </select>
-                                            <div class="invalid-feedback">Please select a valid event category</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-2">
-                                    <div class="col-6">
-                                        <button type="button" class="btn btn-danger" id="btn-delete-event">Delete</button>
-                                    </div>
-                                    <div class="col-6 text-right">
-                                        <button type="button" class="btn btn-light mr-1" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
-                                    </div>
-                                </div>
-                            </form>
+                                    </div> <!-- end card-box -->
+                                </div> <!-- end col -->
+                            </div>
                         </div>
-                    </div> <!-- end modal-content-->
-                </div> <!-- end modal dialog-->
-            </div>
-            <!-- end modal-->
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
         </div>
         <!-- end col-12 -->
     </div> <!-- end row -->
@@ -426,6 +427,7 @@
 @endsection
 @section('scripts')
 <script>
+    var getEventCalendorAdmin = "{{ config('constants.api.get_event_calendor_admin') }}";
     var readUpdateTodoUrl = "{{ config('constants.api.read_update_todo') }}";
     var getAssignClassUrl = "{{ config('constants.api.get_assign_class') }}";
     var pathDownloadFileUrl = "{{ asset('images/todolist/') }}";
@@ -433,5 +435,6 @@
 
     var UserName = "{{ Session::get('name') }}";
 </script>
+<script src="{{ asset('js/custom/admin_calendor.js') }}"></script>
 <script src="{{ asset('js/custom/admin/dashboard.js') }}"></script>
 @endsection

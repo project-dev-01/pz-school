@@ -334,7 +334,7 @@
             </div> <!-- end card -->
 
             <!-- Add New Event MODAL -->
-            <div class="modal fade" id="event-modal" tabindex="-1">
+            <div class="modal fade" id="student-modal" tabindex="-1">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header py-3 px-4 border-bottom-0 d-block">
@@ -397,6 +397,53 @@
                     </div> <!-- end modal-content-->
                 </div> <!-- end modal dialog-->
             </div>
+
+            <div class="modal fade viewEvent" id="event-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myviewEventModalLabel"> <i class="fas fa-info-circle"></i> Event Details </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-box">
+                                        <div class="table-responsive">
+                                            <table class="table mb-0">
+                                                <tr>
+                                                    <td>Title</td>
+                                                    <td id="title"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Type</td>
+                                                    <td id="type"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Start Date</td>
+                                                    <td id="start_date"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>End Date</td>
+                                                    <td id="end_date"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Audience</td>
+                                                    <td id="audience"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Description</td>
+                                                    <td id="description"></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div> <!-- end card-box -->
+                                </div> <!-- end col -->
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
             <!-- end modal-->
         </div>
         <!-- end col-12 -->
@@ -565,6 +612,7 @@
 <script>
     // get timetable list
     var getTimetableCalendorStudent = "{{ config('constants.api.get_timetable_calendor_student') }}";
+    var getEventCalendorStudent = "{{ config('constants.api.get_event_calendor_student') }}";
     // todo list js
     var readUpdateTodoUrl = "{{ config('constants.api.read_update_todo') }}";
     var getAssignClassUrl = "{{ config('constants.api.get_assign_class') }}";

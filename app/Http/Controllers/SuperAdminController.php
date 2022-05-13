@@ -875,6 +875,7 @@ class SuperAdminController extends Controller
             return $response;
         }
     }
+    
     // get event
     public function event()
     {

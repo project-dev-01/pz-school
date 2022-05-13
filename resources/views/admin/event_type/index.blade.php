@@ -28,13 +28,13 @@
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
                         <!-- <a href="{{ route('admin.add_classes')}}" class="btn btn-primary btn-rounded waves-effect waves-light">Add Class</a> -->
-                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#">Add Event Type</button>
+                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addEventTypeModal">Add Event Type</button>
                     </div>
                 </div>
                 </p>
 
                 <div class="table-responsive">
-                    <table class="table mb-0" id="admin-event-type-table">
+                    <table class="table mb-0" id="event-type-table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -43,16 +43,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Cricket</td>
-                                <td>
-                                    <div class="button-list">
-                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="#">View</a>
-                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="#">Delete</a>
-                                    </div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -64,4 +54,16 @@
     @include('admin.event_type.edit')
 </div>
 <!-- container -->
+@endsection
+@section('scripts')
+
+<script>
+  //eventType routes
+    var eventTypeList = "{{ route('admin.event_type.list') }}";
+    var eventTypeDetails = "{{ route('admin.event_type.details') }}";
+    var eventTypeDelete = "{{ route('admin.event_type.delete') }}";
+</script>
+
+<script src="{{ asset('js/custom/event_type.js') }}"></script>
+
 @endsection

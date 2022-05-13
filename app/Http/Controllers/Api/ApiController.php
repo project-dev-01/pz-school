@@ -1352,49 +1352,56 @@ class ApiController extends BaseController
             return $this->successResponse($branchBasedSection, 'Section row fetch successfully');
         }
     }
-    // add EventType
+    
+    // addEventType
     public function addEventType(Request $request)
     {
 
         $validator = \Validator::make($request->all(), [
-            'token' => 'required',
             'name' => 'required',
             'branch_id' => 'required',
+            'token' => 'required',
         ]);
+
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-
-            $event_type = new EventType();
-            $event_type->name = $request->name;
-            $event_type->branch_id = $request->branch_id;
-            $query = $event_type->save();
-
-            $success = [];
-            if (!$query) {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('event_types')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
             } else {
-                return $this->successResponse($success, 'New Event Type has been successfully saved');
+                // insert data
+                $query = $conn->table('event_types')->insert([
+                    'name' => $request->name,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Event Type has been successfully saved');
+                }
             }
         }
     }
-
-    // get EventTypes 
+    // getEventTypeList
     public function getEventTypeList(Request $request)
     {
-
         $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
             'token' => 'required',
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $success = DB::table('event_types as et')
-                ->select('et.*', 'br.name as branch_name', 'br.branch_code', 'br.school_name')
-                ->join('branches as br', 'et.branch_id', '=', 'br.id')
-                ->get();
-            return $this->successResponse($success, 'Event Type record fetch successfully');
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $eventTypeDetails = $conn->table('event_types')->get();
+            return $this->successResponse($eventTypeDetails, 'Event Type record fetch successfully');
         }
     }
     // get EventType row details
@@ -1402,61 +1409,75 @@ class ApiController extends BaseController
     {
 
         $validator = \Validator::make($request->all(), [
-            'event_type_id' => 'required',
-            'token' => 'required',
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $event_type_id = $request->event_type_id;
-            $eventTypeDetails = EventType::find($event_type_id);
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $eventTypeDetails = $conn->table('event_types')->where('id', $id)->first();
             return $this->successResponse($eventTypeDetails, 'Event Type row fetch successfully');
         }
     }
     // update EventType
-    public function updateEventTypeDetails(Request $request)
+    public function updateEventType(Request $request)
     {
-        $event_type_id = $request->event_type_id;
-
+        $id = $request->id;
         $validator = \Validator::make($request->all(), [
-            'token' => 'required',
             'name' => 'required',
-            'branch_id' => 'required'
+            'branch_id' => 'required',
+            'token' => 'required',
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
 
-            $event_type = EventType::find($event_type_id);
-            $event_type->name = $request->name;
-            $event_type->branch_id = $request->branch_id;
-            $query = $event_type->save();
-
-            $success = [];
-            if ($query) {
-                return $this->successResponse($success, 'Event Type Details have Been updated');
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('event_types')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
             } else {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                // update data
+                $query = $conn->table('event_types')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Event Type Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
             }
         }
     }
-
     // delete EventType
     public function deleteEventType(Request $request)
     {
 
-        $event_type_id = $request->event_type_id;
+        $id = $request->id;
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
-            'event_type_id' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $query = EventType::find($event_type_id)->delete();
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('event_types')->where('id', $id)->delete();
+
             $success = [];
             if ($query) {
                 return $this->successResponse($success, 'Event Type have been deleted successfully');
@@ -1465,12 +1486,11 @@ class ApiController extends BaseController
             }
         }
     }
-
-
     // add Event
     public function addEvent(Request $request)
     {
 
+        
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
             'branch_id' => 'required',
@@ -1483,54 +1503,104 @@ class ApiController extends BaseController
             'description' => '',
         ]);
 
+    //    return $request;
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
 
-            $event = new Event();
-            $event->branch_id = $request->branch_id;
-            $event->title = $request->title;
-            $event->type = $request->type;
-            $event->audience = $request->audience;
-            $event->selected_list = $request->selected_list;
-            $event->start_date = $request->start_date;
-            $event->end_date = $request->end_date;
-            $event->remarks = $request->description;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            if ($request->audience == 2) {
+                $selected_list = json_encode($request->class);
+            } else {
+                $selected_list = NULL;
+            }
 
-            $user = Auth::id();
-            $event->created_by = $user;
-            $query = $event->save();
+            $query = $conn->table('events')->insertGetId([
+                'title' => $request->title,
+                'type' => $request->type,
+                'audience' => $request->audience,
+                'selected_list' => $selected_list,
+                'status' => 1,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'remarks' => $request->description,
+                'created_at' => date("Y-m-d H:i:s")
+            ]);
+            $eventId = $query;
+            $title = $request->title;
+            if ($request->audience == 1) {
+                $classes = $conn->table('classes')->get();
+            } elseif ($request->audience == 2) {
+                $classes = $request->class;
+            }
+            
+            foreach ($classes as $class) {
 
+                if ($request->audience == 1) {
+                    $classId = $class->id;
+                } elseif ($request->audience == 2) {
+                    $classId = $class;
+                }
+                $conn->table('calendors')->insert([
+                        'title' => $title,
+                        'class_id' => $classId,
+                        'start' => $request->start_date,
+                        'end' => $request->end_date,
+                        'event_id' => $eventId,
+                        'created_at' => date("Y-m-d H:i:s")
+                    ]);
+            }
             $success = [];
             if (!$query) {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             } else {
-                return $this->successResponse($success, 'New Event has been successfully saved');
+                return $this->successResponse($success, 'Event has been successfully saved');
             }
         }
     }
-
     // get Events 
     public function getEventList(Request $request)
     {
 
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
+            'branch_id' => 'required',
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
 
-            $success = \DB::table("events")
-                ->select("events.*", \DB::raw("GROUP_CONCAT(classes.name) as classname"), 'event_types.name as type', 'users.name as created_by')
-                ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,events.selected_list)"), ">", \DB::raw("'0'"))
-                ->leftjoin('event_types', 'event_types.id', '=', 'events.type')
-                ->leftjoin('users', 'users.id', '=', 'events.created_by')
-                ->groupBy("events.id")
-                ->get();
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $event = $conn->table('events')
+                                ->select("events.*", 'event_types.name as type')
+                                ->leftjoin('event_types', 'event_types.id', '=', 'events.type')
+                                ->groupBy("events.id")
+                                ->get()->toArray();
 
-            return $this->successResponse($success, 'Event record fetch successfully');
+                                // dd($event);
+            $eventDetails = [];
+            foreach ($event as $eve) {
+                $data = $eve;
+                $class_name = "";
+                if ($eve->audience == "2")   {
+                    $class = json_decode($eve->selected_list);
+                    foreach($class as $cla) {
+                        $name = $conn->table('classes')->where('id', $cla)->first();
+                        $class_name .= $name->name.', ';
+                    }
+                    $cname = rtrim($class_name, ", ");
+                    $data->class_name = $cname;
+                    
+                } else {
+                    $data->class_name = NULL;
+                }
+                array_push($eventDetails, $data);
+            }     
+            return $this->successResponse($eventDetails, 'Event record fetch successfully');
         }
     }
     // get Event row details
@@ -1538,38 +1608,43 @@ class ApiController extends BaseController
     {
 
         $validator = \Validator::make($request->all(), [
-            'event_id' => 'required',
+            'id' => 'required',
+            'branch_id' => 'required',
             'token' => 'required',
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $event_id = $request->event_id;
-            $eventDetails = \DB::table("events")
-                ->select("events.*", \DB::raw("GROUP_CONCAT(classes.name) as classname"), 'event_types.name as type', 'users.name as created_by')
-                ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,events.selected_list)"), ">", \DB::raw("'0'"))
-                ->leftjoin('event_types', 'event_types.id', '=', 'events.type')
-                ->leftjoin('users', 'users.id', '=', 'events.created_by')
-                ->groupBy("events.id")
-                ->where('events.id', $event_id)->first();
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+             // get data
+            $event_id = $request->id;
+            $eventDetails = $conn->table('events')
+                                ->select("events.*", \DB::raw("GROUP_CONCAT(classes.name) as classname"), 'event_types.name as type',)
+                                ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,events.selected_list)"), ">", \DB::raw("'0'"))
+                                ->leftjoin('event_types', 'event_types.id', '=', 'events.type')
+                                ->groupBy("events.id")
+                                ->where('events.id', $event_id)->first();
             return $this->successResponse($eventDetails, 'Event row fetch successfully');
         }
     }
     // delete Event
     public function deleteEvent(Request $request)
     {
-
-        $event_id = $request->event_id;
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
-            'event_id' => 'required',
+            'id' => 'required',
+            'branch_id' => 'required',
         ]);
-
+        $event_id = $request->id;
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $query = Event::find($event_id)->delete();
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('events')->where('id', $event_id)->delete();
             $success = [];
             if ($query) {
                 return $this->successResponse($success, 'Event have been deleted successfully');
@@ -1581,22 +1656,31 @@ class ApiController extends BaseController
     // publish Event
     public function publishEvent(Request $request)
     {
-
-        $event_id = $request->event_id;
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
-            'event_id' => 'required',
-            'value' => 'required',
+            'id' => 'required',
+            'status' => 'required',
+            'branch_id' => 'required',
         ]);
+        $event_id = $request->id;
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $event = Event::find($request->event_id);
-            $event->status = $request->value;
-            $query = $event->save();
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+
+            $query = $conn->table('events')->where('id', $event_id)->update([
+                'status' => $request->status,
+                'updated_at' => date("Y-m-d H:i:s")
+            ]);
+            if ($request->status == "1") {
+                $status = "Published";
+            }  else{
+                $status = "UnPublished";
+            }
             $success = [];
             if ($query) {
-                return $this->successResponse($success, 'Event have been Updated successfully');
+                return $this->successResponse($success, 'Event have been '. $status. ' successfully');
             } else {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             }
@@ -2323,7 +2407,6 @@ class ApiController extends BaseController
             'name' => 'required',
             'gender' => 'required',
             'religion' => 'required',
-            'blood_group' => 'required',
             'birthday' => 'required',
             'mobile_no' => 'required',
             'present_address' => 'required',
@@ -2521,7 +2604,6 @@ class ApiController extends BaseController
             'email' => 'required',
             'role_user_id' => 'required',
             'religion' => 'required',
-            'blood_group' => 'required',
             'birthday' => 'required',
             'mobile_no' => 'required',
             'city' => 'required',
@@ -7114,7 +7196,7 @@ class ApiController extends BaseController
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
             $success = $Connection->table('calendors as cl')
-                ->select('cl.id', 'cl.class_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as color', 'sb.name as subject_name', 'sb.name as title', 'st.name as teacher_name', 'dr.report')
+                ->select('cl.id', 'cl.class_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id','cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as color', 'sb.name as subject_name', 'sb.name as title', 'st.name as teacher_name', 'dr.report')
                 ->join('classes as c', 'cl.class_id', '=', 'c.id')
                 ->join('sections as s', 'cl.section_id', '=', 's.id')
                 ->join('staffs as st', 'cl.teacher_id', '=', 'st.id')
@@ -7130,6 +7212,145 @@ class ApiController extends BaseController
             return $this->successResponse($success, 'calendor data get successfully');
         }
     }
+
+    // getEventCalendor
+    public function getEventCalendor(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'teacher_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+        // ->leftJoin('subject_assigns as s', function ($join) use ($teacherId) {
+        //     $join->on('e.selected_list', '=', 's.class_id')
+        //         ->where('s.teacher_id', $teacherId);
+        // })
+        // // ->when('e.auidence' == "1", function ($q)  use ($teacherId) {
+        // //     $q->where('s.teacher_id', $teacherId);
+        // // })->leftJoin('events as e', 'c.event_id', '=', 'e.id')
+            $Connection = $this->createNewConnection($request->branch_id);
+            $teacherId = $request->teacher_id;
+            $event = $Connection->table('calendors as c')
+                                ->select('c.id','c.title','c.title as subject_name','c.class_id','s.teacher_id', 'c.start', 'c.end','c.event_id','et.name as event_type','e.id as event_id','e.remarks','e.audience','e.selected_list', 'e.start_date', 'e.end_date')
+                                ->leftJoin('subject_assigns as s', 'c.class_id', '=', 's.class_id')
+                                ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
+                                ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
+                                ->whereNotNull('c.event_id')
+                                ->where('s.teacher_id', $teacherId)
+                                ->groupBy('c.event_id')
+                                ->get();
+            $success = [];
+            foreach ($event as $eve) {
+                $data = $eve;
+                $class_name = "";
+                if ($eve->audience == "2")   {
+                    $class = json_decode($eve->selected_list);
+                    foreach($class as $cla) {
+                        $name = $Connection->table('classes')->where('id', $cla)->first();
+                        $class_name .= $name->name.', ';
+                    }
+                    $cname = rtrim($class_name, ", ");
+                    $data->class_name = $cname;
+                    
+                } else {
+                    $data->class_name = "EveryOne";
+                }
+                $data->className = "bg-primary";
+                array_push($success, $data);
+            }     
+            return $this->successResponse($success, 'Event data Fetched successfully');
+        }
+    }
+    // getEventCalendorStud
+    public function getEventCalendorStud(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'student_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $studentId = $request->student_id;
+            $event = $Connection->table('calendors as c')
+                                ->select('c.id','c.title','c.title as subject_name','c.class_id','en.student_id', 'c.start', 'c.end', 'et.name as event_type','e.id as event_id','e.remarks','e.audience','e.selected_list', 'e.start_date', 'e.end_date')
+                                ->leftJoin('enrolls as en', 'c.class_id', '=', 'en.class_id')
+                                ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
+                                ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
+                                ->whereNotNull('c.event_id')
+                                ->where('en.student_id', $studentId)
+                                ->groupBy('c.event_id')
+                                ->get();
+            $success = [];
+            foreach ($event as $eve) {
+                $data = $eve;
+                $class_name = "";
+                if ($eve->audience == "2")   {
+                    $class = json_decode($eve->selected_list);
+                    foreach($class as $cla) {
+                        $name = $Connection->table('classes')->where('id', $cla)->first();
+                        $class_name .= $name->name.', ';
+                    }
+                    $cname = rtrim($class_name, ", ");
+                    $data->class_name = $cname;
+                    
+                    
+                } else {
+                    $data->class_name = "EveryOne";
+                }
+                $data->className = "bg-primary";
+                array_push($success, $data);
+            }    
+            return $this->successResponse($success, 'Event data Fetched successfully');
+        }
+    }
+    // getEventCalendorAdmin
+    public function getEventCalendorAdmin(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $event = $Connection->table('calendors as c')
+                                ->select('c.id','c.title','c.title as subject_name', 'et.name as event_type', 'c.class_id', 'c.start', 'c.end','e.id as event_id','e.remarks','e.audience','e.selected_list', 'e.start_date', 'e.end_date' )
+                                ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
+                                ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
+                                ->whereNotNull('c.event_id')
+                                ->groupBy('c.event_id')
+                                ->get();
+
+            $success = [];
+            foreach ($event as $eve) {
+                $data = $eve;
+                $class_name = "";
+                if ($eve->audience == "2")   {
+                    $class = json_decode($eve->selected_list);
+                    foreach($class as $cla) {
+                        $name = $Connection->table('classes')->where('id', $cla)->first();
+                        $class_name .= $name->name.', ';
+                    }
+                    $cname = rtrim($class_name, ", ");
+                    $data->class_name = $cname;
+                    
+                } else {
+                    $data->class_name = "EveryOne";
+                }
+                $data->className = "bg-primary";
+                array_push($success, $data);
+            }     
+            return $this->successResponse($success, 'Event data Fetched successfully');
+        }
+    }
+
     // getTimetableCalendor
     public function getTimetableCalendorStud(Request $request)
     {
@@ -7209,6 +7430,7 @@ class ApiController extends BaseController
     // addTimetableCalendor
     function addTimetableCalendor($request, $startDate, $endDate, $day, $row, $insertOrUpdateID)
     {
+
         // create new connection
         $Connection = $this->createNewConnection($request->branch_id);
         while ($startDate <= $endDate) {

@@ -255,6 +255,52 @@
                     </div> <!-- end row -->
                 </div> <!-- end card body-->
             </div> <!-- end card -->
+            <div class="modal fade viewEvent" id="event-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myviewEventModalLabel"> <i class="fas fa-info-circle"></i> Event Details </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-box">
+                                        <div class="table-responsive">
+                                            <table class="table mb-0">
+                                                <tr>
+                                                    <td>Title</td>
+                                                    <td id="title"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Type</td>
+                                                    <td id="type"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Start Date</td>
+                                                    <td id="start_date"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>End Date</td>
+                                                    <td id="end_date"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Audience</td>
+                                                    <td id="audience"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Description</td>
+                                                    <td id="description"></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div> <!-- end card-box -->
+                                </div> <!-- end col -->
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
 
             <!-- Add New Event MODAL -->
             <div class="modal fade" id="teacher-modal" tabindex="-1">
@@ -723,6 +769,7 @@
 <script>
     // calendor js
     var getTimetableCalendor = "{{ config('constants.api.get_timetable_calendor') }}";
+    var getEventCalendor = "{{ config('constants.api.get_event_calendor') }}";
     var redirectionURL = "{{ route('teacher.classroom.management')}}";
     // todo list js
     var readUpdateTodoUrl = "{{ config('constants.api.read_update_todo') }}";

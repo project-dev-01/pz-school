@@ -1,5 +1,5 @@
 $(function () {
-
+    eventTable();
     $('#eventForm').on('submit', function(e){
         e.preventDefault();
         var form = this;
@@ -33,91 +33,123 @@ $(function () {
             }
         });
     });
-    //GET ALL Event Type
-    var table = $('#event-table').DataTable({
-        processing: true,
-        info: true,
-        ajax: eventList,
-        "pageLength": 5,
-        "aLengthMenu": [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"]
-        ],
-        columns: [
-            //  {data:'id', name:'id'},
-            // {
-            //     data: 'checkbox',
-            //     name: 'checkbox',
-            //     orderable: false,
-            //     searchable: false
-            // },
-            {
-                searchable: false,
-                data: 'DT_RowIndex',
-                name: 'DT_RowIndex'
-            },
-            {
-                data: 'title',
-                name: 'title'
-            },
-            {
-                data: 'type',
-                name: 'type'
-            },
-            {
-                data: 'classname',
-                name: 'classname'
-            },
-            {
-                data: 'start_date',
-                name: 'start_date'
-            },
-            {
-                data: 'end_date',
-                name: 'end_date'
-            },
-            {
-                data: 'created_by',
-                name: 'created_by'
-            },
-            {
-                data: 'status',
-                name: 'status'
-            },
-            {
-                data: 'actions',
-                name: 'actions',
-                orderable: false,
-                searchable: false
-            },
-        ]
-    }).on('draw', function () {
-    });
+    function eventTable() {
+        $('#event-table').DataTable({
+            processing: true,
+            info: true,
+            ajax: eventList,
+            "pageLength": 5,
+            "aLengthMenu": [
+                [5, 10, 25, 50, -1],
+                [5, 10, 25, 50, "All"]
+            ],
+            columns: [
+                //  {data:'id', name:'id'},
+                // {
+                //     data: 'checkbox',
+                //     name: 'checkbox',
+                //     orderable: false,
+                //     searchable: false
+                // },
+                {
+                    searchable: false,
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'title',
+                    name: 'title'
+                },
+                {
+                    data: 'type',
+                    name: 'type'
+                },
+                {
+                    data: 'classname',
+                    name: 'classname'
+                },
+                {
+                    data: 'start_date',
+                    name: 'start_date'
+                },
+                {
+                    data: 'end_date',
+                    name: 'end_date'
+                },
+                {
+                    data: 'publish',
+                    name: 'publish',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'actions',
+                    name: 'actions',
+                    orderable: false,
+                    searchable: false
+                },
+            ]
+        }).on('draw', function () {
+        });
+   }
 
     
     // Publish Event 
-
     $(document).on('click','#publishEventBtn', function(){
         var event_id = $(this).data('id');
         if($(this).prop('checked') == true){
             var value = 1;
+            var text = "Publish";
         }else{
             var value = 0;
+            var text = "UnPublish";
         }
-        $.post(eventPublish,{event_id:event_id,value:value}, function(data){
-            if(data.code == 200){
-                $('.publishEvent').modal('show');
-            }
-            $('.publishEvent').modal('show');
-        },'json');
+        swal.fire({
+             title:'Are you sure?',
+             html:'You want to <b>'+text+'</b> this Event',
+             showCancelButton:true,
+             showCloseButton:true,
+             cancelButtonText:'Cancel',
+             confirmButtonText:'Yes,'+text,
+             cancelButtonColor:'#d33',
+             confirmButtonColor:'#556ee6',
+             width:400,
+             allowOutsideClick:false
+        }).then(function(result){
+              if(result.value){
+                  $.post(eventPublish,{id:event_id,status:value}, function(data){
+                       if(data.code == 200){
+                           $('#event-table').DataTable().ajax.reload(null, false);
+                           toastr.success(data.message);
+                       }else{
+                           toastr.error(data.message);
+                       }
+                  },'json');
+              }
+        });
     });
+    // $(document).on('click','#publishEventBtn', function(){
+    //     var event_id = $(this).data('id');
+    //     console.log('event_id',event_id);
+    //     if($(this).prop('checked') == true){
+    //         var value = 1;
+    //     }else{
+    //         var value = 0;
+    //     }
+    //     $.post(eventPublish,{id:event_id,status:value}, function(data){
+    //         if(data.code == 200){
+    //             $('.publishEvent').modal('show');
+    //         }
+    //         $('.publishEvent').modal('show');
+    //     },'json');
+    // });
 
     // View Event 
 
     $(document).on('click','#viewEventBtn', function(){
         var event_id = $(this).data('id');
         $('.viewEvent').find('span.error-text').text('');
-        $.post(eventDetails,{event_id:event_id}, function(data){
+        $.post(eventDetails,{id:event_id}, function(data){
             console.log('cc',data)
             $('.viewEvent').find('.title').text(data.data.title);
             $('.viewEvent').find('.type').text(data.data.type);
@@ -151,7 +183,7 @@ $(function () {
              allowOutsideClick:false
         }).then(function(result){
               if(result.value){
-                  $.post(eventDelete,{event_id:event_id}, function(data){
+                  $.post(eventDelete,{id:event_id}, function(data){
                        if(data.code == 200){
                            $('#event-table').DataTable().ajax.reload(null, false);
                            toastr.success(data.message);

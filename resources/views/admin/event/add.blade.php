@@ -1,5 +1,5 @@
 <!-- Center modal content -->
-<div class="modal fade addEventModal" id="addEventModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade addEvent" id="addEventModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,7 +7,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <form id="eventForm" method="post" action="{{ route('event.add') }}" autocomplete="off">
+                <form id="eventForm" method="post" action="{{ route('admin.event.add') }}" autocomplete="off">
                     @csrf
                     <div class="form-group">
                         <label for="title">Title</label>
@@ -19,7 +19,7 @@
                         <select class="form-control" id="type" name="type">
                             <option value="">Select</option>
                             @foreach($type as $typ)
-                            <option value="{{$typ->id}}">{{$typ->name}}</option>
+                            <option value="{{$typ['id']}}">{{$typ['name']}}</option>
                             @endforeach
                         </select>
                         <span class="text-danger error-text type_error"></span>
@@ -37,8 +37,8 @@
                     <div class="form-group" id="class">
                         <label for="class">Class</label>
                         <select class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="class[]">
-                            @foreach($classDetails as $class)
-                                <option value="{{$class->id}}">{{$class->name}}</option>
+                            @foreach($class as $cla)
+                                <option value="{{$cla['id']}}">{{$cla['name']}}</option>
                             @endforeach
                         </select>
                         <span class="text-danger error-text class_error"></span>
@@ -46,15 +46,6 @@
                     <div class="form-group" id="section">
                         <label for="section">Section</label>
                         <select class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="section[]">
-                            @foreach($classDetails as $class)
-                                <optgroup label="Class {{$class->name}}">
-                                    @foreach($sectionDetails as $section)
-                                    @if($section->class_id == $class->id)
-                                    <option value="{{$section->id}}">{{$section->name}}</option>
-                                    @endif
-                                    @endforeach
-                                </optgroup> 
-                            @endforeach
                         </select>
                         <span class="text-danger error-text section_error"></span>
                     </div>

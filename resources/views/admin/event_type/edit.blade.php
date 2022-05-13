@@ -7,17 +7,17 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <form id="eventTypeEditForm" method="post" action="{{ route('event_type.update') }}" autocomplete="off">
+                <form id="edit-event-type-form" method="post" action="{{ route('admin.event_type.update') }}" autocomplete="off">
                     @csrf
-                    <input type="hidden" id="event_type_id" name="event_type_id">
+                    <input type="hidden" name="id">           
                     <div class="form-group">
-                        <label for="name">Event Type Name</label>
+                        <label for="name">Event Type Name <span class="text-danger">*</span></label>
                         <input type="text" id="name" name="name" class="form-control" placeholder="Enter Event Type name">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="submit" id="eventTypeEditSubmit" class="btn btn-success waves-effect waves-light">Update</button>
+                        <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
                     </div>
 
                 </form>

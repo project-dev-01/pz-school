@@ -114,7 +114,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('event_type/add', [ApiController::class, 'addEventType']);
     Route::get('event_type/list', [ApiController::class, 'getEventTypeList']);
     Route::post('event_type/event_type-details', [ApiController::class, 'getEventTypeDetails']);
-    Route::post('event_type/update', [ApiController::class, 'updateEventTypeDetails']);
+    Route::post('event_type/update', [ApiController::class, 'updateEventType']);
     Route::post('event_type/delete', [ApiController::class, 'deleteEventType']);
 
     // Event routes
@@ -337,7 +337,10 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('get_reasons_by_student', [ApiController::class, 'getReasonsByStudent']);
     // get calendor data by teacher
     Route::get('get_timetable_calendor', [ApiController::class, 'getTimetableCalendor']);
+    Route::get('get_event_calendor', [ApiController::class, 'getEventCalendor']);
     Route::get('get_timetable_calendor_student', [ApiController::class, 'getTimetableCalendorStud']);
+    Route::get('get_event_calendor_student', [ApiController::class, 'getEventCalendorStud']);
+    Route::get('get_event_calendor_admin', [ApiController::class, 'getEventCalendorAdmin']);
 
     // add timetable schedule
     Route::post('add_calendor_timetable', [ApiController::class, 'addCalendorTimetable']);

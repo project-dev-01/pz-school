@@ -262,7 +262,10 @@ return [
          'homework_evaluate' => $url.'/homework/evaluate',
          // calendor timetable show
          'get_timetable_calendor' => $url.'/get_timetable_calendor',
+         'get_event_calendor' => $url.'/get_event_calendor',
          'get_timetable_calendor_student' => $url.'/get_timetable_calendor_student',
+         'get_event_calendor_student' => $url.'/get_event_calendor_student',
+         'get_event_calendor_admin' => $url.'/get_event_calendor_admin',
          
 
          // exam term url

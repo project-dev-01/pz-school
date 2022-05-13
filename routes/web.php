@@ -29,6 +29,7 @@ use App\Http\Controllers\CommonController;
 Route::get('/', function () {
     return redirect(route('admin.login'));
 });
+
 // Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 // Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
 // Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -301,20 +302,20 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
         // Event Type routes
         Route::get('event_type/index', [AdminController::class, 'eventType'])->name('admin.event_type');
-        Route::get('event_type/list', [AdminController::class, 'getEventTypeList'])->name('event_type.list');
-        Route::post('event_type/add', [AdminController::class, 'addEventType'])->name('event_type.add');
-        Route::post('event_type/event_type-details', [AdminController::class, 'getEventTypeDetails'])->name('event_type.details');
-        Route::post('event_type/update', [AdminController::class, 'updateEventTypeDetails'])->name('event_type.update');
-        Route::post('event_type/delete', [AdminController::class, 'deleteEventType'])->name('event_type.delete');
+        Route::get('event_type/list', [AdminController::class, 'getEventTypeList'])->name('admin.event_type.list');
+        Route::post('event_type/add', [AdminController::class, 'addEventType'])->name('admin.event_type.add');
+        Route::post('event_type/event_type-details', [AdminController::class, 'getEventTypeDetails'])->name('admin.event_type.details');
+        Route::post('event_type/update', [AdminController::class, 'updateEventType'])->name('admin.event_type.update');
+        Route::post('event_type/delete', [AdminController::class, 'deleteEventType'])->name('admin.event_type.delete');
 
 
         // Event routes
         Route::get('event/index', [AdminController::class, 'event'])->name('admin.event');
-        Route::get('event/list', [AdminController::class, 'getEventList'])->name('event.list');
-        Route::post('event/add', [AdminController::class, 'addEvent'])->name('event.add');
-        Route::post('event/event-details', [AdminController::class, 'getEventDetails'])->name('event.details');
-        Route::post('event/delete', [AdminController::class, 'deleteEvent'])->name('event.delete');
-        Route::post('event/event-publish', [AdminController::class, 'publishEvent'])->name('event.publish');
+        Route::get('event/list', [AdminController::class, 'getEventList'])->name('admin.event.list');
+        Route::post('event/add', [AdminController::class, 'addEvent'])->name('admin.event.add');
+        Route::post('event/event-details', [AdminController::class, 'getEventDetails'])->name('admin.event.details');
+        Route::post('event/delete', [AdminController::class, 'deleteEvent'])->name('admin.event.delete');
+        Route::post('event/event-publish', [AdminController::class, 'publishEvent'])->name('admin.event.publish');
         // Qualifications
         Route::get('qualification/index', [AdminController::class, 'qualification_view'])->name('admin.qualification');
         Route::post('qualification/add', [AdminController::class, 'qualification_add'])->name('admin.qualification.add');

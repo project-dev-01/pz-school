@@ -24,28 +24,46 @@
     });
 
     function e() {
-        this.$body = l("body"), this.$modal = l("#student-modal"), this.$calendar = l("#student_calendor"), this.$formEvent = l("#addStudentReport"), this.$btnNewEvent = l("#btn-new-event"), this.$btnDeleteEvent = l("#btn-delete-event"), this.$btnSaveEvent = l("#btn-save-event"), this.$modalTitle = l("#modal-title"), this.$calendarObj = null, this.$selectedEvent = null, this.$newEventData = null
+        this.$body = l("body"), this.$calendar = l("#student_calendor"), this.$formEvent = l("#addStudentReport"), this.$btnNewEvent = l("#btn-new-event"), this.$btnDeleteEvent = l("#btn-delete-event"), this.$btnSaveEvent = l("#btn-save-event"), this.$modalTitle = l("#modal-title"), this.$calendarObj = null, this.$selectedEvent = null, this.$newEventData = null
     }
     e.prototype.onEventClick = function (e) {
 
-        var start = e.event.start;
-        var end = e.event.end;
-        var setCurDate = formatDate(end);
-        this.$formEvent[0].reset(), this.$formEvent.removeClass("was-validated"), this.$newEventData = null, this.$btnDeleteEvent.show(), this.$modalTitle.text("Edit Event"), this.$modal.modal({
-            backdrop: "static"
-        }), this.$selectedEvent = e.event,
-            l("#event-title").html(this.$selectedEvent.title),
-            l("#subject-name").html(e.event.extendedProps.subject_name),
-            l("#timing-class").html(start.toLocaleTimeString() + ' - ' + end.toLocaleTimeString()),
-            l("#teacher-name").html(e.event.extendedProps.teacher_name)
-        l("#standard-name").html(e.event.extendedProps.class_name)
-        l("#section-name").html(e.event.extendedProps.section_name),
-            l("#ttclassID").val(e.event.extendedProps.class_id),
-            l("#ttSectionID").val(e.event.extendedProps.section_id),
-            l("#ttSubjectID").val(e.event.extendedProps.subject_id),
-            l("#calNotes").val(e.event.extendedProps.student_remarks),
-            l("#ttDate").val(e.event.end),
-            l("#setCurDate").val(setCurDate)
+        if (e.event.extendedProps.event_id){
+            this.$modal = l("#event-modal")
+            var start = e.event.start_date;
+            var end = e.event.end_date;
+            var setCurDate = formatDate(end);
+            this.$newEventData = null, this.$btnDeleteEvent.show(), this.$modalTitle.text("Edit Event"), this.$modal.modal({
+                backdrop: "static"
+            }), this.$selectedEvent = e.event,
+                l("#title").html(this.$selectedEvent.title),
+                l("#type").html(e.event.extendedProps.event_type),
+                l("#start_date").html(e.event.extendedProps.start_date),
+                l("#end_date").html(e.event.extendedProps.end_date),
+                l("#audience").html(e.event.extendedProps.class_name),
+                l("#description").html(e.event.extendedProps.remarks)
+                l("#setCurDate").val(setCurDate)
+        } else{
+            this.$modal = l("#student-modal")
+            var start = e.event.start;
+            var end = e.event.end;
+            var setCurDate = formatDate(end);
+            this.$formEvent[0].reset(), this.$formEvent.removeClass("was-validated"), this.$newEventData = null, this.$btnDeleteEvent.show(), this.$modalTitle.text("Edit Event"), this.$modal.modal({
+                backdrop: "static"
+            }), this.$selectedEvent = e.event,
+                l("#event-title").html(this.$selectedEvent.title),
+                l("#subject-name").html(e.event.extendedProps.subject_name),
+                l("#timing-class").html(start.toLocaleTimeString() + ' - ' + end.toLocaleTimeString()),
+                l("#teacher-name").html(e.event.extendedProps.teacher_name)
+                l("#standard-name").html(e.event.extendedProps.class_name)
+                l("#section-name").html(e.event.extendedProps.section_name),
+                l("#ttclassID").val(e.event.extendedProps.class_id),
+                l("#ttSectionID").val(e.event.extendedProps.section_id),
+                l("#ttSubjectID").val(e.event.extendedProps.subject_id),
+                l("#calNotes").val(e.event.extendedProps.report),
+                l("#ttDate").val(e.event.end),
+                l("#setCurDate").val(setCurDate)
+        }
 
         // l("#event-category").val(this.$selectedEvent.classNames[0])
     },
@@ -58,7 +76,7 @@
             }else{
                 student_id = ref_user_id;
             }
-            var t = [],
+            var t,m = [],
 
                 a = this;
             a.$calendarObj = new FullCalendar.Calendar(a.$calendar[0], {
@@ -93,6 +111,13 @@
                     success: function (response) {
                         t = response.data;
                         return t;
+                    }
+                },{
+                    url: getEventCalendorStudent + '?token=' + token + '&branch_id=' + branchID + '&student_id=' + student_id,
+                    type: 'get',
+                    success: function (response) {
+                        m = response.data;
+                        return m;
                     }
                 }],
                 // get events details start
