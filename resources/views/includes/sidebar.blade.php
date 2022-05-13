@@ -236,7 +236,7 @@
                 </li>
                 <li>
                     <a href="#sidebarAttendance" data-toggle="collapse">
-                        <i data-feather="map"></i>
+                        <i class="fas fa-chalkboard-teacher"></i>
                         <span> Attendance </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -497,7 +497,7 @@
                 </li> -->
                 <li>
                     <a href="#sidebarEvents" data-toggle="collapse">
-                        <i data-feather="map"></i>
+                        <i class="fas fa-map"></i>
                         <span> Events </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -551,13 +551,13 @@
                 <li>
                     <a href="{{ route('super_admin.schoolcrm.app.form')}}" target=”_blank” class="nav-link {{ (request()->is('application-form')) ? 'active' : '' }}">
 
-                        <i data-feather="external-link" class="icon-dual"></i>
+                        <i class="fab fa-wpforms"></i>
                         <span> Application Form </span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('super_admin.forum.rolls-chooseforum')}}" target=”_blank” class="nav-link {{ (request()->is('super_admin/forum*')) ? 'active' : '' }}">
-                        <i data-feather="external-link" class="icon-dual"></i>
+                        <i class="far fa-comments"></i>
                         <span> Forum </span>
                     </a>
                 </li>
@@ -653,46 +653,54 @@
                     <div class="collapse" id="sidebarEmployee">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('admin.qualification')}}" class="nav-link {{ (request()->is('admin/qualification*')) ? 'active' : '' }}">
-                                    <span> Add Qualification </span>
+                                <a href="#sideBarEmpMasters" data-toggle="collapse">
+                                    <i class="fe-book-open"></i> &nbsp;
+                                    Masters <span class="menu-arrow"></span>
                                 </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('admin.staffcategory')}}" class="nav-link {{ (request()->is('admin/staffcategory*')) ? 'active' : '' }}">
-                                    <span> Add Staff Category </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('admin.department')}}" class="nav-link {{ (request()->is('admin/department*')) ? 'active' : '' }}">
-                                    <span> Add Department </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('admin.designation')}}" class="nav-link {{ (request()->is('admin/designation*')) ? 'active' : '' }}">
-                                    <span>Add Designation </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('admin.staff_position')}}" class="nav-link {{ (request()->is('admin/staff_position*')) ? 'active' : '' }}">
-                                    <span>Staff Position </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('admin.stream_type')}}" class="nav-link {{ (request()->is('admin/stream_type*')) ? 'active' : '' }}">
-                                    <span>Stream Type </span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="{{ route('admin.religion')}}" class="nav-link {{ (request()->is('admin/religion*')) ? 'active' : '' }}">
-                                    <span>Religion </span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="{{ route('admin.race')}}" class="nav-link {{ (request()->is('admin/race*')) ? 'active' : '' }}">
-                                    <span>Race </span>
-                                </a>
+                                <div class="collapse" id="sideBarEmpMasters">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admin.qualification')}}" class="nav-link {{ (request()->is('admin/qualification*')) ? 'active' : '' }}">
+                                                <span> Add Qualification </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.staffcategory')}}" class="nav-link {{ (request()->is('admin/staffcategory*')) ? 'active' : '' }}">
+                                                <span> Add Staff Category </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.department')}}" class="nav-link {{ (request()->is('admin/department*')) ? 'active' : '' }}">
+                                                <span> Add Department </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.designation')}}" class="nav-link {{ (request()->is('admin/designation*')) ? 'active' : '' }}">
+                                                <span>Add Designation </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.staff_position')}}" class="nav-link {{ (request()->is('admin/staff_position*')) ? 'active' : '' }}">
+                                                <span>Staff Position </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.stream_type')}}" class="nav-link {{ (request()->is('admin/stream_type*')) ? 'active' : '' }}">
+                                                <span>Stream Type </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.religion')}}" class="nav-link {{ (request()->is('admin/religion*')) ? 'active' : '' }}">
+                                                <span>Religion </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.race')}}" class="nav-link {{ (request()->is('admin/race*')) ? 'active' : '' }}">
+                                                <span>Race </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
                             <li>
                                 <a href="{{ route('admin.employee')}}" class="nav-link {{ (request()->is('admin/employee')) ? 'active' : '' }}">
@@ -1074,7 +1082,7 @@
                 </li> -->
                 <li>
                     <a href="#sidebarEvents" data-toggle="collapse">
-                        <i data-feather="map"></i>
+                        <i class="fas fa-map"></i>
                         <span> Events </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -1276,7 +1284,7 @@
                 </li>
                 <li>
                     <a href="#sidebarAttendance" data-toggle="collapse">
-                        <i data-feather="map"></i>
+                        <i class="fas fa-chalkboard-teacher"></i>
                         <span> Attendance </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -1440,7 +1448,7 @@
                 </li> -->
                 <li>
                     <a href="#sidebarEvents" data-toggle="collapse">
-                        <i data-feather="map"></i>
+                        <i class="fas fa-map"></i>
                         <span> Events </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -1477,7 +1485,7 @@
                 </li>
                 <li>
                     <a href="{{ route('staff.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('staff/forum*')) ? 'active' : '' }}">
-                        <i data-feather="external-link" class="icon-dual"></i>
+                        <i class="far fa-comments"></i>
                         <span> Forum </span>
                     </a>
                 </li>
@@ -1502,7 +1510,7 @@
                 </li>
                 <li>
                     <a href="{{ route('teacher.analyticrep.analyticreport')}}" class="nav-link {{ (request()->is('teacher/analyticrep*')) ? 'active' : '' }}">
-                        <i data-feather="activity" class="icon-dual"></i>.
+                        <i data-feather="activity" class="icon-dual"></i>
                         <span> Analytic </span>
                     </a>
                 </li>
@@ -1514,7 +1522,7 @@
                 </li>
                 <li>
                     <a href="{{ route('teacher.test_result')}}" class="nav-link {{ (request()->is('teacher/test_result*')) ? 'active' : '' }}">
-                        <i data-feather="file-plus" class="icon-dual"></i>
+                        <i class="fas fa-marker"></i>
                         <span> Test Result </span>
                     </a>
                 </li>
@@ -1536,7 +1544,7 @@
                 </li> -->
                 <li>
                     <a href="#sidebarStudentDetails" data-toggle="collapse">
-                        <i class="fas fa-users"></i>
+                        <i class="fas fa-user-graduate"></i>
                         <span> Student Details </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -1589,7 +1597,7 @@
                 </li>
                 <li>
                     <a href="#sidebarAttendance" data-toggle="collapse">
-                        <i data-feather="map"></i>
+                        <i class="fas fa-chalkboard-teacher"></i>
                         <span> Attendance Report</span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -1676,14 +1684,14 @@
         <li>
             <a href="{{ route('teacher.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('teacher/forum*')) ? 'active' : '' }}">
 
-                <i data-feather="external-link" class="icon-dual"></i>
+                <i class="far fa-comments"></i>
                 <span> Forum </span>
             </a>
         </li>
         <li>
             <a href="{{ route('schoolcrm.app.form')}}" target=”_blank” class="nav-link {{ (request()->is('application-form')) ? 'active' : '' }}">
 
-                <i data-feather="external-link" class="icon-dual"></i>
+                <i class="fab fa-wpforms"></i>
                 <span> Application Form </span>
             </a>
         </li>
@@ -1702,13 +1710,13 @@
         @elseif(Session::get('role_id') == '5')
         <li>
             <a href="{{ route('parent.dashboard')}}" class="nav-link {{ (request()->is('parent/dashboard')) ? 'active' : '' }}">
-                <i class="fas fa-tachometer-alt"></i>
+                <i data-feather="airplay" class="icon-dual"></i>
                 <span>Dashboard</span>
             </a>
         </li>
         <li>
             <a href="{{ route('parent.analyticrep.analyticreport')}}" class="nav-link {{ (request()->is('parent/analyticrep*')) ? 'active' : '' }}">
-                <i data-feather="activity" class="icon-dual"></i>.
+                <i data-feather="activity" class="icon-dual"></i>
                 <span> Analytic </span>
             </a>
         </li>
@@ -1721,7 +1729,7 @@
         </li>
         <li>
             <a href="{{ route('parent.report_card')}}" class="nav-link {{ (request()->is('parent/report_card*')) ? 'active' : '' }}">
-                <i data-feather="book" class="icons-xs icon-dual"></i>
+                <i class="far fa-id-card"></i>
                 <span> Report Card </span>
             </a>
         </li>
@@ -1770,13 +1778,13 @@
         </li>
         <li>
             <a href="{{ route('parent.attendance')}}" class="nav-link {{ (request()->is('super_admin/attendance/')) ? 'active' : '' }}">
-                <i data-feather="map"></i>
+                <i class="fas fa-chalkboard-teacher"></i>
                 <span> Attendance </span>
             </a>
         </li>
         <li>
             <a href="{{ route('parent.timetable.index')}}" class="nav-link {{ (request()->is('parent/timetable*')) ? 'active' : '' }}">
-                <i data-feather="external-link" class="icon-dual"></i>
+                <i class="far fa-calendar-alt"></i>
                 <span> Time Table </span>
             </a>
         </li>
@@ -1789,13 +1797,13 @@
         <li>
             <a href="{{ route('schoolcrm.app.form')}}" target=”_blank” class="nav-link {{ (request()->is('application-form')) ? 'active' : '' }}">
 
-                <i data-feather="external-link" class="icon-dual"></i>
+                <i class="fab fa-wpforms"></i>
                 <span> Application Form </span>
             </a>
         </li>
         <li>
             <a href="{{ route('parent.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('parent/forum*')) ? 'active' : '' }}">
-                <i data-feather="external-link" class="icon-dual"></i>
+                <i class="far fa-comments"></i>
                 <span> Forum </span>
             </a>
         </li>
@@ -1820,13 +1828,13 @@
         </li>
         <li>
             <a href="{{ route('student.analyticrep.analyticreport')}}" class="nav-link {{ (request()->is('student/analyticrep*')) ? 'active' : '' }}">
-                <i data-feather="activity" class="icon-dual"></i>.
+                <i data-feather="activity" class="icon-dual"></i>
                 <span> Analytic </span>
             </a>
         </li>
         <li>
             <a href="{{ route('student.timetable')}}" class="nav-link {{ (request()->is('super_admin/timetable*')) ? 'active' : '' }}">
-                <i data-feather="external-link" class="icon-dual"></i>
+                <i class="far fa-calendar-alt"></i>
                 <span> Time Table </span>
             </a>
         </li>
@@ -1855,7 +1863,7 @@
         </li>
         <li>
             <a href="{{ route('student.report_card')}}" class="nav-link {{ (request()->is('student/report_card*')) ? 'active' : '' }}">
-                <i data-feather="book" class="icons-xs icon-dual"></i>
+                <i class="far fa-id-card"></i>
                 <span> Report Card </span>
             </a>
         </li>
@@ -1888,7 +1896,7 @@
         </li>
         <li>
             <a href="{{ route('student.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('student/forum*')) ? 'active' : '' }}">
-                <i data-feather="external-link" class="icon-dual"></i>
+                <i class="far fa-comments"></i>
                 <span> Forum </span>
             </a>
         </li>

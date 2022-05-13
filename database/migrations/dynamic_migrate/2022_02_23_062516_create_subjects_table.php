@@ -19,7 +19,9 @@ class CreateSubjectsTable extends Migration
             $table->string('short_name')->nullable();
             $table->string('subject_code')->nullable();
             $table->string('subject_type')->nullable();
+            $table->string('subject_type_2')->nullable();
             $table->string('subject_color_calendor')->nullable();
+            $table->tinyInteger('exam_exclude');
             $table->timestamps();
         });
     }

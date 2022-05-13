@@ -3,13 +3,8 @@ $(function () {
     // mark as read
     $(".admintaskListDashboard").on('click', function () {
         getOldComCount = 0;
-        // console.log($(this).data("id"))
         var to_do_list_id = $(this).data("id");
         $(this).prop("checked", true);
-        // console.log(to_do_list_id)
-        // console.log(userID)
-        // console.log(branchID)
-        // console.log(token)
         $.post(readUpdateTodoUrl, {
             token: token,
             branch_id: branchID,
@@ -18,10 +13,8 @@ $(function () {
         }, function (res) {
 
             if (res.code == 200) {
-                // console.log(res)
                 var to_do_list = res.data.to_do_list;
                 var allcomments = res.data.comments;
-                // console.log(allcomments)
                 // get assign class 
                 var assign_to = to_do_list.assign_to;
                 var get_assign_class = assign_to.split(",");
@@ -32,15 +25,12 @@ $(function () {
                     branch_id: branchID,
                     get_assign_class: get_assign_class
                 }, function (classes) {
-                    // console.log("---")
-                    // console.log(classes)
                     if (classes.code == 200) {
                         $('#assignClsAppend').empty();
                         var getClases = classes.data;
                         var assignClassDetails = "";
                         var assignCls = [];
                         $.each(getClases, function (key, val) {
-                            // console.log(val)
                             var classsec = val.class_name + ' (' + val.section_name + ')';
                             assignCls.push(classsec);
                         });
@@ -49,8 +39,6 @@ $(function () {
 
                     }
                 }, 'json');
-                // console.log(assign_to)
-                // console.log(get_assign_class)
                 // getAssignClassUrl
                 // title
                 var check_list = to_do_list.check_list;
@@ -75,7 +63,6 @@ $(function () {
                 // checklist start
                 var dashCheckList = '<ol>';
                 $.each(myCheckList, function (key, val) {
-                    // console.log(val)
                     dashCheckList += '<li>' + val + '</li>';
 
                 });
@@ -137,8 +124,6 @@ $(function () {
                     '<h5 class="mb-2 font-size-16">Comments</h5>';
                 if (allcomments.length > 0) {
                     $.each(allcomments, function (key, val) {
-                        console.log("---")
-                        console.log(val)
                         var date = changeFormateDate(val.created_at);
 
                         dashComments += '<div class="media mt-3 p-1">' +
@@ -162,8 +147,6 @@ $(function () {
 
                 // comments end
                 var ComCount = $("#comments" + to_do_list.id).text().trim();
-                console.log("getOldComCount");
-                console.log(getOldComCount);
                 getOldComCount = parseInt(ComCount);
 
                 $('#right-modal-dashboard').modal('show');
@@ -203,13 +186,10 @@ $(function () {
     //
     $('#submitComment').on('submit', function (e) {
         e.preventDefault();
-        // console.log(submitCom)
         var submitCom = $("#submitComment").valid();
         if (submitCom === true) {
             var toDoListId = $("#toDoListId").val();
             var comment = $("textarea#replyComment").val();
-            // console.log(toDoListId)
-            // console.log(comment)
 
             $.post(toDoCommentsUrl, {
                 token: token,
@@ -218,8 +198,6 @@ $(function () {
                 to_do_list_id: toDoListId,
                 user_id: userID
             }, function (res) {
-                // console.log("-----save com-----")
-                // console.log(res)
                 var current = new Date();
                 var date = changeFormateDate(current);
                 var dashComments = '<div class="media mt-3 p-1">' +
@@ -237,8 +215,6 @@ $(function () {
                 $("#dashComments").append(dashComments);
                 // data-comments
                 // var getOldComCount = $("#comments"+toDoListId).text();
-                // console.log("getOldComCount");
-                // console.log(getOldComCount);
                 var commentIcon = "<i class='mdi mdi-comment-text-multiple-outline font-16 mr-1'></i>"+(++getOldComCount);
                 $("#comments" + toDoListId).html(commentIcon);
 

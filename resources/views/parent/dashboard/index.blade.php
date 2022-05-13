@@ -162,7 +162,70 @@
 
                                                 </div>
                                                 <!-- end upcoming tasks -->
+                                                <!-- old tasks -->
+                                                <div class="mt-4">
+                                                    <a class="text-dark" data-toggle="collapse" href="#pastTasks" aria-expanded="false" aria-controls="pastTasks">
+                                                        <h5 class="mb-0">
+                                                            <i class='mdi mdi-chevron-down font-18'></i> Past <span class="text-muted font-14">( {{count($get_to_do_list_dashboard['old'])}} )</span>
+                                                        </h5>
+                                                    </a>
+                                                    @forelse ($get_to_do_list_dashboard['old'] as $old)
+                                                    <div class="collapse show" id="pastTasks">
+                                                        <div class="card mb-0 shadow-none">
+                                                            <div class="card-body pb-0" id="task-list-two">
+                                                                <!-- task -->
+                                                                <div class="row justify-content-sm-between task-item">
+                                                                    <div class="col-lg-6 mb-2">
+                                                                        <div class="custom-control custom-checkbox">
+                                                                            <input type="checkbox" data-id="{{ $old['id'] }}" class="custom-control-input admintaskListDashboard" id="old{{ $old['id'] }}" {{ ($old['user_id']) ? "checked" : "" }}>
+                                                                            <label class="custom-control-label" for="old{{ $old['id'] }}">
+                                                                                {{$old['title']}}
+                                                                            </label>
+                                                                        </div> <!-- end checkbox -->
+                                                                    </div> <!-- end col -->
+                                                                    <div class="col-lg-6">
+                                                                        <div class="d-sm-flex justify-content-between">
+                                                                            <div class="mt-3 mt-sm-0">
+                                                                                <ul class="list-inline font-13 text-sm-right">
+                                                                                    <li class="list-inline-item pr-1">
+                                                                                        <i class='mdi mdi-calendar-month-outline font-16 mr-1'></i>
+                                                                                        {{ date('j F y g a', strtotime($old['due_date']));}}
 
+                                                                                    </li>
+                                                                                    <!-- <li class="list-inline-item pr-1">
+                                                                                    <i class='mdi mdi-tune font-16 mr-1'></i>
+                                                                                    1/12
+                                                                                </li> -->
+                                                                                    <li class="list-inline-item pr-2" id="comments{{ $old['id'] }}">
+                                                                                        <i class='mdi mdi-comment-text-multiple-outline font-16 mr-1'></i>
+                                                                                        {{$old['total_comments']}}
+                                                                                    </li>
+                                                                                    <li class="list-inline-item">
+                                                                                        @if($old['priority'] == "Low")
+                                                                                        <span class="badge badge-soft-success p-1">{{$old['priority']}}</span>
+                                                                                        @endif
+                                                                                        @if($old['priority'] == "Medium")
+                                                                                        <span class="badge badge-soft-info p-1">{{$old['priority']}}</span>
+                                                                                        @endif
+                                                                                        @if($old['priority'] == "High")
+                                                                                        <span class="badge badge-soft-danger p-1">{{$old['priority']}}</span>
+                                                                                        @endif
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div> <!-- end .d-flex-->
+                                                                    </div> <!-- end col -->
+                                                                </div>
+                                                                <!-- end task -->
+                                                            </div> <!-- end card-body-->
+                                                        </div> <!-- end card -->
+                                                    </div> <!-- end collapse-->
+                                                    @empty
+                                                    <p></p>
+                                                    @endforelse
+
+                                                </div>
+                                                <!-- end old tasks -->
                                             </div> <!-- end col -->
                                         </div> <!-- end row -->
 
@@ -372,8 +435,8 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="std_general_details" method="post" action="{{ route('parent.studentleave.add') }}">
-
+                    <form id="stdGeneralDetails" method="post" action="{{ route('parent.studentleave.add') }}" novalidate>
+                        @csrf
                         <input type="hidden" name="class_id" id="listModeClassID">
                         <input type="hidden" name="section_id" id="listModeSectionID" />
                         <input type="hidden" name="student_id" id="listModestudentID" />
@@ -405,7 +468,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" autocomplete="off" name="frm_ldate" class="form-control datepick" id="frm_ldate" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" autocomplete="off" name="frm_ldate" class="form-control" id="frm_ldate">
                                     </div>
                                 </div>
                             </div>
@@ -418,7 +481,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" autocomplete="off" name="to_ldate" class="form-control datepick" id="to_ldate" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" autocomplete="off" name="to_ldate" class="form-control" id="to_ldate">
                                     </div>
                                 </div>
                             </div>
@@ -449,7 +512,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="document">Attachment File<span class="text-danger">*</span></label>
+                                    <label for="document">Attachment File</label>
 
                                     <div class="input-group">
                                         <div class="custom-file">
@@ -479,12 +542,12 @@
                         <table class="table mb-0" id="studentleave-table">
                             <thead>
                                 <tr>
-                                    <th>S.no</th>
+                                    <th>#</th>
                                     <th>Student Name</th>
                                     <th>Leave From</th>
                                     <th>To From</th>
                                     <th>Reason</th>
-                                    <th>Status</th>                            
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -510,9 +573,8 @@
     var getTestScore = "{{ config('constants.api.get_test_score_dashboard') }}";
     var UserName = "{{ Session::get('name') }}";
     // general details get student names
-    var get_student = "{{ config('constants.api.get_test_score_dashboard') }}";
     var stutdentleaveList = "{{ route('parent.student_leave.list') }}";
-  
+
     // leave apply
 </script>
 <!-- to do list -->

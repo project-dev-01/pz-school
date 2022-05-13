@@ -389,7 +389,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('std_leave_apply', [ApiController::class, 'student_leaveapply']);
     Route::get('get_student_leaves', [ApiController::class, 'get_studentleaves']);
     Route::get('get_leave_reasons', [ApiController::class, 'get_leavereasons']);
-    Route::get('studentleave_list', [ApiController::class, 'get_particular_studentleave_list']);
+    Route::post('studentleave_list', [ApiController::class, 'get_particular_studentleave_list']);
     
     Route::post('teacher_leave_approve', [ApiController::class, 'teacher_leaveapprove']);
     

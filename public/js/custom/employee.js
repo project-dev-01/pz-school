@@ -23,6 +23,52 @@ $(function () {
             $("#bank_details_form").show("slow");
         }
     });
+    // skip_medical_history
+    $("#skip_medical_history").on("change", function () {
+        if ($(this).is(":checked")) {
+            $("#medical_history_form").hide("slow");
+        } else {
+            $("#medical_history_form").show("slow");
+        }
+    });
+    // change file
+    // $("#photo").on("change", function () {
+    //     var file = $("input[type=file]").get(0).files[0];
+    //     if (file) {
+    //         var reader = new FileReader();
+    //         reader.onload = function () {
+    //             $("#previewImg").attr("src", reader.result);
+    //         }
+    //         reader.readAsDataURL(file);
+    //     }
+    // });
+    // $('#photo').ijaboCropTool({
+    //     preview: '.image-previewer',
+    //     setRatio: 1,
+    //     allowedExtensions: ['jpg', 'jpeg', 'png'],
+    //     processUrl: ijaboCropTool,
+    //     withCSRF: ['<?= csrf_token() ?>', '<?= csrf_hash() ?>'],
+    //     onSuccess: function (message, element, status) {
+    //         alert(message);
+    //     },
+    //     onError: function (message, element, status) {
+    //         alert(message);
+    //     }
+    // });
+    $('.file-input').change(function () {
+        var curElement = $('.image');
+        console.log(curElement);
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            // get loaded data and render thumbnail.
+            curElement.attr('src', e.target.result);
+        };
+
+        // read the image file as a data URL.
+        reader.readAsDataURL(this.files[0]);
+    });
+
     // reverse dob
     function convertDigitIn(str) {
         return str.split('-').reverse().join('-');
@@ -89,7 +135,11 @@ $(function () {
             bank_branch: "required",
             bank_address: "required",
             ifsc_code: "required",
-            account_no: "required"
+            account_no: "required",
+            city: "required",
+            state: "required",
+            country: "required",
+            post_code: "required"
         }
     });
     // save employee
@@ -101,13 +151,16 @@ $(function () {
             if ($("#skip_bank_details").prop('checked') == true) {
                 skip_bank_details = 0;
             }
+            var skip_medical_history = 1;
+            if ($("#skip_medical_history").prop('checked') == true) {
+                skip_medical_history = 0;
+            }
 
             var formData = new FormData();
             formData.append('role_id', $('#role_id').val());
             formData.append('joining_date', convertDigitIn($('#joiningDate').val()));
             formData.append('designation_id', $('#empDesignation').val());
             formData.append('department_id', $('#empDepartment').val());
-            formData.append('qualification', $('#empQuatification').val());
             formData.append('name', $('#userName').val());
             formData.append('gender', $('#gender').val());
             formData.append('religion', $('#religion').val());
@@ -137,6 +190,14 @@ $(function () {
             formData.append('staff_qualification_id', $('#staffQualification').val());
             formData.append('stream_type_id', $('#streamType').val());
             formData.append('race', $('#addRace').val());
+            formData.append('skip_medical_history', skip_medical_history);
+            formData.append('height', $('#height').val());
+            formData.append('weight', $('#weight').val());
+            formData.append('allergy', $('#allergy').val());
+            formData.append('city', $('#City').val());
+            formData.append('state', $('#State').val());
+            formData.append('country', $('#Country').val());
+            formData.append('post_code', $('#postCode').val());
             // Attach file
             formData.append('photo', $('input[type=file]')[0].files[0]);
             // for (var pair of formData.entries()) {
@@ -207,7 +268,11 @@ $(function () {
             bank_branch: "required",
             bank_address: "required",
             ifsc_code: "required",
-            account_no: "required"
+            account_no: "required",
+            city: "required",
+            state: "required",
+            country: "required",
+            post_code: "required"
         }
 
     });
@@ -220,14 +285,16 @@ $(function () {
             if ($("#skip_bank_details").prop('checked') == true) {
                 skip_bank_details = 0;
             }
-
+            var skip_medical_history = 1;
+            if ($("#skip_medical_history").prop('checked') == true) {
+                skip_medical_history = 0;
+            }
             var formData = new FormData();
             formData.append('id', $('#id').val());
             formData.append('role_id', $('#role_id').val());
             formData.append('joining_date', convertDigitIn($('#joiningDate').val()));
             formData.append('designation_id', $('#empDesignation').val());
             formData.append('department_id', $('#empDepartment').val());
-            formData.append('qualification', $('#empQuatification').val());
             formData.append('name', $('#userName').val());
             formData.append('gender', $('#gender').val());
             formData.append('religion', $('#religion').val());
@@ -258,7 +325,14 @@ $(function () {
             formData.append('stream_type_id', $('#streamType').val());
             formData.append('race', $('#addRace').val());
             formData.append('old_photo', $('#oldPhoto').val());
-            
+            formData.append('skip_medical_history', skip_medical_history);
+            formData.append('height', $('#height').val());
+            formData.append('weight', $('#weight').val());
+            formData.append('allergy', $('#allergy').val());
+            formData.append('city', $('#City').val());
+            formData.append('state', $('#State').val());
+            formData.append('country', $('#Country').val());
+            formData.append('post_code', $('#postCode').val());
             // Attach file
             formData.append('photo', $('input[type=file]')[0].files[0]);
 
@@ -315,20 +389,16 @@ $(function () {
                 name: 'name'
             },
             {
-                data: 'email',
-                name: 'email'
+                data: 'short_name',
+                name: 'short_name'
             },
             {
-                data: 'mobile_no',
-                name: 'mobile_no'
+                data: 'salary_grade',
+                name: 'salary_grade'
             },
             {
-                data: 'birthday',
-                name: 'birthday'
-            },
-            {
-                data: 'joining_date',
-                name: 'joining_date'
+                data: 'stream_type',
+                name: 'stream_type'
             },
             {
                 data: 'department_name',
@@ -339,14 +409,31 @@ $(function () {
                 name: 'designation_name'
             },
             {
-                data: 'present_address',
-                name: 'present_address'
+                data: 'email',
+                name: 'email'
+            },
+            {
+                data: 'mobile_no',
+                name: 'mobile_no'
             },
             {
                 data: 'actions',
                 name: 'actions',
                 orderable: false,
                 searchable: false
+            },
+        ],
+        columnDefs: [
+            {
+                "targets": 1,
+                "className": "table-user",
+                "render": function (data, type, row, meta) {
+                    var img = (row.photo != null) ? employeeImg + '/' + row.photo : defaultImg;
+                    console.log(img)
+                    var first_name = '<img src="' + img + '" class="mr-2 rounded-circle">' +
+                        '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
+                    return first_name;
+                }
             },
         ]
     }).on('draw', function () {

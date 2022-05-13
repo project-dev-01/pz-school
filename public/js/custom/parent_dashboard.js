@@ -1,8 +1,21 @@
 $(function () {
+    $("#frm_ldate").datepicker({
+        dateFormat: 'dd-mm-yy',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        minDate: 0
+    });
+    $("#to_ldate").datepicker({
+        dateFormat: 'dd-mm-yy',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        minDate: 0
+    });
     var radar;
     StudentLeave_tabel();
     callradarchart();
-    getstudent_data();
     function callradarchart() {
 
         $.post(getTestScore, {
@@ -87,32 +100,55 @@ $(function () {
             return "rgb(" + r + ", " + g + ", " + b + ")";
         }
     }
-    // get student names 
-    function getstudent_data() {
-        $.get(get_student, { token: token, branch_id: branchID, parentId: ref_user_id }, function (res) {
-            if (res.code == 200) {
-                $("#section_drp_div").show();
-                $.each(res.data, function (key, val) {
-                    $("#byclassfilter").find("#sectionID").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
-                });
-            }
-        }, 'json');
+    // reverse dob
+    function convertDigitIn(str) {
+        return str.split('-').reverse().join('-');
     }
-    $("#std_general_details").validate({
+    // jQuery.validator.addMethod("greaterThan",
+    //     function (value, element, params) {
+    //         console.log(value);
+    //         if (!/Invalid|NaN/.test(new Date(value))) {
+    //             return new Date(value) >= new Date($(params).val());
+    //         }
+
+    //         return isNaN(value) && isNaN($(params).val())
+    //             || (Number(value) >= Number($(params).val()));
+    //     }, 'Must be greater than leave from.');
+    jQuery.validator.addMethod("greaterThanDt",
+        function (value, element, params) {
+
+            if (!/Invalid|NaN/.test(new Date(value))) {
+                return new Date(value) > new Date($(params).val());
+            }
+
+            return isNaN(value) && isNaN($(params).val())
+                || (Number(value) > Number($(params).val()));
+        }, 'Must be greater than {0}.');
+
+    $("#stdGeneralDetails").validate({
         rules: {
-            std_id: "required",
-            frm_ldate: "required",
+            changeStdName: "required",
             to_ldate: "required",
-            message: "required"
+            frm_ldate: "required",
+            changelevReasons: "required"
         }
     });
-    $('#std_general_details').on('submit', function (e) {
-        e.preventDefault();
 
-        var std_details = $("#std_general_details").valid();
+    $('#stdGeneralDetails').on('submit', function (e) {
+        e.preventDefault();
+        var start = convertDigitIn($("#frm_ldate").val());
+        var end = convertDigitIn($("#to_ldate").val());
+        let startDate = new Date(start);
+        let endDate = new Date(end);
+        if (startDate > endDate) {
+            toastr.error("To date should be greater than leave from");
+            $("to_ldate").val("");
+            return false;
+        }
+        var std_details = $("#stdGeneralDetails").valid();
+
         if (std_details === true) {
             var form = this;
-
             var class_id = $('option:selected', '#changeStdName').attr('data-classid');
             var section_id = $('option:selected', '#changeStdName').attr('data-sectionid');
             var student_id = $("#changeStdName").val();
@@ -123,7 +159,6 @@ $(function () {
             var remarks = $("#remarks").val();
             var file = $("#file").val();
 
-            console.log(reason, reason_text);
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
@@ -135,8 +170,6 @@ $(function () {
             formData.append('reason', reason);
             formData.append('remarks', remarks);
             formData.append('file', file);
-
-            //
             $("#listModeClassID").val(class_id);
             $("#listModeSectionID").val(section_id);
             $("#listModestudentID").val(student_id);
@@ -154,15 +187,17 @@ $(function () {
                     if (response.code == 200) {
                         $('#studentleave-table').DataTable().ajax.reload(null, false);
                         toastr.success('Leave apply sucessfully');
-                        $("#changeStdName").val('');
-                        $("#frm_ldate").val('');
-                        $("#to_ldate").val('');
-                        $("#message").val('');
-                        $("#post_ldate").val('');
-                        $("#remarks").val();
+                        $('#stdGeneralDetails')[0].reset();
+
+                        // $("#changeStdName").val('');
+                        // $("#frm_ldate").val('');
+                        // $("#to_ldate").val('');
+                        // $("#message").val('');
+                        // $("#post_ldate").val('');
+                        // $("#remarks").val();
                         $("#remarks_div").hide();
                     } else {
-                        toastr.error(data.message);
+                        toastr.error(response.message);
                         $("#remarks_div").hide();
                     }
                 }
@@ -186,7 +221,6 @@ $(function () {
     });
     // get student leave apply
     function StudentLeave_tabel() {
-        console.log('hai');
         $('#studentleave-table').DataTable({
             processing: true,
             info: true,
@@ -225,7 +259,26 @@ $(function () {
                     name: 'status',
                     orderable: false,
                     searchable: false
-                }, 
+                },
+            ],
+            columnDefs: [
+                {
+                    "targets": 5,
+                    "render": function (data, type, row, meta) {
+                        var badgeColor = "";
+                        if (data == "Approve") {
+                            badgeColor = "badge-success";
+                        }
+                        if (data == "Reject") {
+                            badgeColor = "badge-danger";
+                        }
+                        if (data == "Pending") {
+                            badgeColor = "badge-warning";
+                        }
+                        var status = '<span class="badge ' + badgeColor + ' badge-pill">' + data + '</span>';
+                        return status;
+                    }
+                },
             ]
         }).on('draw', function () {
         });

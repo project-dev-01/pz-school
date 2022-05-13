@@ -3,6 +3,81 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
 <link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
+<style>
+    .containers-img {
+        height: 270px;
+        position: relative;
+        max-width: 320px;
+        /* margin: auto; */
+    }
+
+    .containers-img .imageWrapper {
+        border: 3px solid #888;
+        width: 70%;
+        padding-bottom: 70%;
+        border-radius: 50%;
+        overflow: hidden;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .containers-img .imageWrapper img {
+        height: 105%;
+        width: initial;
+        max-height: 100%;
+        max-width: initial;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .file-upload {
+        position: relative;
+        overflow: hidden;
+        margin: 10px;
+    }
+
+    .file-upload {
+        position: relative;
+        overflow: hidden;
+        margin: 10px;
+        width: 100%;
+        max-width: 150px;
+        text-align: center;
+        /* color: #fff; */
+        font-size: 1.2em;
+        background: transparent;
+        border: 2px solid #888;
+        padding: 0.85em 1em;
+        display: inline;
+        -ms-transition: all 0.2s ease;
+        -webkit-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+    }
+
+    /* .file-upload:hover {
+        background: #999;
+        -webkit-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
+        -moz-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
+        box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
+    } */
+
+    .file-upload input.file-input {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+        height: 100%;
+    }
+</style>
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -31,12 +106,30 @@
                 <div class="card-body">
                     <form id="addEmployeeForm" method="post" action="{{ route('admin.employee.add') }}" enctype="multipart/form-data" autocomplete="off">
                         @csrf
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="photo">Profile Picture</label>
+                                    <div class="containers-img">
+                                        <div class="imageWrapper">
+                                            <img class="image" src="{{ asset('images/700x500.png') }}">
+                                        </div>
+                                    </div>
+
+                                    <button class="file-upload">
+                                        <input type="file" name="photo" id="photo" class="file-input">Choose File
+                                    </button>
+                                </div>
+
+
+                            </div>
+                        </div>
                         <span class="fas fa-user-check  " id="span-parent"></span>
                         <span class="header-title mb-3" id="span-parent">Personal details
                             <hr id="hr">
                         </span>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="name"> Name<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
@@ -49,7 +142,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="gender">Gender<span class="text-danger">*</span></label>
                                     <select class="form-control" name="gender" id="gender">
@@ -59,8 +152,6 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="religion">Religion<span class="text-danger">*</span></label>
@@ -73,6 +164,8 @@
                                     </select>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="race">Race<span class="text-danger">*</span></label>
@@ -83,30 +176,6 @@
                                         @empty
                                         @endforelse
                                     </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="blood_group">Blood Group<span class="text-danger">*</span></label>
-                                    <select class="form-control" name="blood_group" id="blood_group">
-                                        <option value="">Choose Blood Group</option>
-                                        <option value="A+">A+</option>
-                                        <option value="A-">A-</option>
-                                        <option value="AB+">AB+</option>
-                                        <option value="AB-">AB-</option>
-                                        <option value="B+">B+</option>
-                                        <option value="B-">B-</option>
-                                        <option value="O+">O+</option>
-                                        <option value="O-">O-</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="Qualification">Qualification<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="qualification" id="empQuatification">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -148,30 +217,45 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="present_address">Present Address<span class="text-danger">*</span></label>
-                                    <textarea class="form-control" name="present_address" id="present_address" data-parsley-trigger="keyup" data-parsley-minlength="10" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
-                                    </textarea>
+                                    <label for="city">City<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="city" id="City">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="permanent_address">Permanent Address<span class="text-danger">*</span></label>
-                                    <textarea class="form-control" name="permanent_address" id="permanent_address" data-parsley-trigger="keyup" data-parsley-minlength="10" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
-                                    </textarea>
+                                    <label for="state">State<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="state" id="State">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="country">Country<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="country" id="Country">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="post_code">Post code<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="post_code" id="postCode">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="photo">Profile Picture</label>
-                                    <!-- <input type="file" name="photo" id="photo" /> -->
-                                    <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="" />
-
+                                    <label for="present_address">Address 1<span class="text-danger">*</span></label>
+                                    <textarea class="form-control" name="present_address" id="present_address">
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="permanent_address">Address 2<span class="text-danger">*</span></label>
+                                    <textarea class="form-control" name="permanent_address" id="permanent_address">
+                                    </textarea>
                                 </div>
                             </div>
                         </div>
@@ -378,6 +462,54 @@
                                             </div>
                                         </div>
                                         <input type="text" class="form-control" name="linkedin_url" id="linkedin_url">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="fas fa-briefcase-medical" id="span-parent"></span>
+                        <span class="header-title mb-3" id="span-parent"> Medical History
+                            <hr id="hr">
+                        </span>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="skip_medical_history" name="skip_medical_history">
+                                <label class="custom-control-label" for="skip_medical_history">Skipped Medical History</label>
+                            </div>
+                        </div>
+                        <div id="medical_history_form">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="height">Height</label>
+                                        <input type="text" id="height" class="form-control" name="height" data-parsley-trigger="change">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="weight">Weight</label>
+                                        <input type="text" id="weight" class="form-control" name="weight" data-parsley-trigger="change">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="allergy">Allergy</label>
+                                        <input type="text" id="allergy" class="form-control" name="allergy" data-parsley-trigger="change">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="blood_group">Blood Group<span class="text-danger">*</span></label>
+                                        <select class="form-control" name="blood_group" id="blood_group">
+                                            <option value="">Choose Blood Group</option>
+                                            <option value="A+">A+</option>
+                                            <option value="A-">A-</option>
+                                            <option value="AB+">AB+</option>
+                                            <option value="AB-">AB-</option>
+                                            <option value="B+">B+</option>
+                                            <option value="B-">B-</option>
+                                            <option value="O+">O+</option>
+                                            <option value="O-">O-</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

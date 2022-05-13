@@ -633,7 +633,7 @@
     var getShortTest = "{{ config('constants.api.get_short_test') }}";
     // student leave apply
     var getStudentLeave = "{{ config('constants.api.get_student_leaves') }}";
-    var imgurl = "{{ asset('teacher/homework/') }}";
+    var imgurl = "{{ asset('teacher/student-leaves/') }}";
     var teacher_leave_remarks_updated= "{{ config('constants.api.teacher_leave_approve') }}";
     // default image test
     var defaultImg = "{{ asset('images/users/default.jpg') }}";

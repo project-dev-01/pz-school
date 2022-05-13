@@ -44,11 +44,17 @@ class ParentController extends Controller
     // student leave 
     public function student_applyleave(Request $request)
     {
-        $file = $request->file('file');
-        $path = $file->path();
-        $data = file_get_contents($path);
-        $base64 = base64_encode($data);
-        $extension = $file->getClientOriginalExtension();
+        $file = $request->file('photo');
+
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        } else {
+            $base64 = null;
+            $extension = null;
+        }
         $status = "Pending";
         $parent_id = session()->get('ref_user_id');
         $data = [
@@ -65,6 +71,7 @@ class ParentController extends Controller
             'file' => $base64,
             'file_extension' => $extension
         ];
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.std_leave_apply'), $data);
         return $response;
     }
@@ -75,8 +82,9 @@ class ParentController extends Controller
         $parent_id = [
             'parent_id' => $parentid,
         ];
+        $response = Helper::PostMethod(config('constants.api.studentleave_list'), $parent_id);
     
-        $response = Helper::GETMethodWithData(config('constants.api.studentleave_list'),$parent_id);
+        // $response = Helper::GETMethodWithData(config('constants.api.studentleave_list'),$parent_id);
     
         return $response;
         // return DataTables::of($response['data'])

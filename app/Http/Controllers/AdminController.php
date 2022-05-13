@@ -1120,7 +1120,6 @@ class AdminController extends Controller
             'joining_date' => $request->joining_date,
             'designation_id' => $request->designation_id,
             'department_id' => $request->department_id,
-            'qualification' => $request->qualification,
             'name' => $request->name,
             'gender' => $request->gender,
             'religion' => $request->religion,
@@ -1152,6 +1151,14 @@ class AdminController extends Controller
             'staff_qualification_id' => $request->staff_qualification_id,
             'stream_type_id' => $request->stream_type_id,
             'race' => $request->race,
+            'skip_medical_history' => $request->skip_medical_history,
+            'height' => $request->height,
+            'weight' => $request->weight,
+            'allergy' => $request->allergy,
+            'city' => $request->city,
+            'state' => $request->state,
+            'country' => $request->country,
+            'post_code' => $request->post_code
 
         ];
         // dd($data);
@@ -1275,7 +1282,6 @@ class AdminController extends Controller
             'joining_date' => $request->joining_date,
             'designation_id' => $request->designation_id,
             'department_id' => $request->department_id,
-            'qualification' => $request->qualification,
             'name' => $request->name,
             'gender' => $request->gender,
             'religion' => $request->religion,
@@ -1307,7 +1313,15 @@ class AdminController extends Controller
             'staff_qualification_id' => $request->staff_qualification_id,
             'stream_type_id' => $request->stream_type_id,
             'race' => $request->race,
-            'old_photo' => $request->old_photo
+            'skip_medical_history' => $request->skip_medical_history,
+            'old_photo' => $request->old_photo,
+            'height' => $request->height,
+            'weight' => $request->weight,
+            'allergy' => $request->allergy,
+            'city' => $request->city,
+            'state' => $request->state,
+            'country' => $request->country,
+            'post_code' => $request->post_code
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.employee_update'), $data);

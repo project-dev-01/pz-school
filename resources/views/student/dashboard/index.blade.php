@@ -162,7 +162,70 @@
 
                                                 </div>
                                                 <!-- end upcoming tasks -->
+                                                <!-- old tasks -->
+                                                <div class="mt-4">
+                                                    <a class="text-dark" data-toggle="collapse" href="#pastTasks" aria-expanded="false" aria-controls="pastTasks">
+                                                        <h5 class="mb-0">
+                                                            <i class='mdi mdi-chevron-down font-18'></i> Past <span class="text-muted font-14">( {{count($get_to_do_list_dashboard['old'])}} )</span>
+                                                        </h5>
+                                                    </a>
+                                                    @forelse ($get_to_do_list_dashboard['old'] as $old)
+                                                    <div class="collapse show" id="pastTasks">
+                                                        <div class="card mb-0 shadow-none">
+                                                            <div class="card-body pb-0" id="task-list-two">
+                                                                <!-- task -->
+                                                                <div class="row justify-content-sm-between task-item">
+                                                                    <div class="col-lg-6 mb-2">
+                                                                        <div class="custom-control custom-checkbox">
+                                                                            <input type="checkbox" data-id="{{ $old['id'] }}" class="custom-control-input admintaskListDashboard" id="old{{ $old['id'] }}" {{ ($old['user_id']) ? "checked" : "" }}>
+                                                                            <label class="custom-control-label" for="old{{ $old['id'] }}">
+                                                                                {{$old['title']}}
+                                                                            </label>
+                                                                        </div> <!-- end checkbox -->
+                                                                    </div> <!-- end col -->
+                                                                    <div class="col-lg-6">
+                                                                        <div class="d-sm-flex justify-content-between">
+                                                                            <div class="mt-3 mt-sm-0">
+                                                                                <ul class="list-inline font-13 text-sm-right">
+                                                                                    <li class="list-inline-item pr-1">
+                                                                                        <i class='mdi mdi-calendar-month-outline font-16 mr-1'></i>
+                                                                                        {{ date('j F y g a', strtotime($old['due_date']));}}
 
+                                                                                    </li>
+                                                                                    <!-- <li class="list-inline-item pr-1">
+                                                                                    <i class='mdi mdi-tune font-16 mr-1'></i>
+                                                                                    1/12
+                                                                                </li> -->
+                                                                                    <li class="list-inline-item pr-2" id="comments{{ $old['id'] }}">
+                                                                                        <i class='mdi mdi-comment-text-multiple-outline font-16 mr-1'></i>
+                                                                                        {{$old['total_comments']}}
+                                                                                    </li>
+                                                                                    <li class="list-inline-item">
+                                                                                        @if($old['priority'] == "Low")
+                                                                                        <span class="badge badge-soft-success p-1">{{$old['priority']}}</span>
+                                                                                        @endif
+                                                                                        @if($old['priority'] == "Medium")
+                                                                                        <span class="badge badge-soft-info p-1">{{$old['priority']}}</span>
+                                                                                        @endif
+                                                                                        @if($old['priority'] == "High")
+                                                                                        <span class="badge badge-soft-danger p-1">{{$old['priority']}}</span>
+                                                                                        @endif
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div> <!-- end .d-flex-->
+                                                                    </div> <!-- end col -->
+                                                                </div>
+                                                                <!-- end task -->
+                                                            </div> <!-- end card-body-->
+                                                        </div> <!-- end card -->
+                                                    </div> <!-- end collapse-->
+                                                    @empty
+                                                    <p></p>
+                                                    @endforelse
+
+                                                </div>
+                                                <!-- end old tasks -->
                                             </div> <!-- end col -->
                                         </div> <!-- end row -->
 
@@ -198,54 +261,54 @@
                                 <div class="card-body">
 
                                     @forelse ($get_homework_list_dashboard as $homework)
-                                        <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
-                                            <div class="col">
-                                                <a class="text-dark" data-toggle="collapse" href="#hmenv" aria-expanded="false" aria-controls="hmenv">
-                                                    <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> {{$homework['title']}}<span class="text-muted font-14"></span></h5>
-                                                </a>
-                                                <!-- Right modal -->
-                                                <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#right-modal">Rightbar Modal</button> -->
-                                                <div class="collapse show" id="hmenv">
-                                                    <div class="card mb-0 shadow-none">
-                                                        <div class="card-body pb-0" id="task-list-one">
-                                                            <!-- task -->
-                                                            <div class="row">
-                                                                <div class="col-sm-2">
-                                                                    <a href="{{ route('parent.homework')}}">{{$homework['subject_name']}} </a>
-                                                                </div> <!-- end col -->
-                                                                <div class="col-sm-6">
-                                                                    <div class="d-sm-flex">
-                                                                        <!-- <div>
+                                    <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
+                                        <div class="col">
+                                            <a class="text-dark" data-toggle="collapse" href="#hmenv" aria-expanded="false" aria-controls="hmenv">
+                                                <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> {{$homework['title']}}<span class="text-muted font-14"></span></h5>
+                                            </a>
+                                            <!-- Right modal -->
+                                            <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#right-modal">Rightbar Modal</button> -->
+                                            <div class="collapse show" id="hmenv">
+                                                <div class="card mb-0 shadow-none">
+                                                    <div class="card-body pb-0" id="task-list-one">
+                                                        <!-- task -->
+                                                        <div class="row">
+                                                            <div class="col-sm-2">
+                                                                <a href="{{ route('parent.homework')}}">{{$homework['subject_name']}} </a>
+                                                            </div> <!-- end col -->
+                                                            <div class="col-sm-6">
+                                                                <div class="d-sm-flex">
+                                                                    <!-- <div>
                                                                             <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="{{ route('parent.homework')}}" role="button" aria-haspopup="false" aria-expanded="false">
                                                                                 <img src="{{ Session::get('picture') && asset('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" alt="user-image" class="rounded-circle admin_picture">
                                                                             </a>
                                                                         </div> -->
-                                                                        <div class="mt-3 mt-sm-0">
-                                                                            <ul class="list-inline font-13 text-sm-right">
-                                                                                <li class="list-inline-item">
-                                                                                    <span class="badge badge-soft-danger">InComplete</span>
-                                                                                </li>
-                                                                                <li class="list-inline-item pr-1">
-                                                                                    <i class='mdi mdi-calendar-month-outline font-16'></i>
-                                                                                    Submission Date : {{$homework['date_of_submission']}}
-                                                                                </li>
-                                                                                <li class="list-inline-item text-danger">
-                                                                                </li>
+                                                                    <div class="mt-3 mt-sm-0">
+                                                                        <ul class="list-inline font-13 text-sm-right">
+                                                                            <li class="list-inline-item">
+                                                                                <span class="badge badge-soft-danger">InComplete</span>
+                                                                            </li>
+                                                                            <li class="list-inline-item pr-1">
+                                                                                <i class='mdi mdi-calendar-month-outline font-16'></i>
+                                                                                Submission Date : {{$homework['date_of_submission']}}
+                                                                            </li>
+                                                                            <li class="list-inline-item text-danger">
+                                                                            </li>
 
-                                                                            </ul>
-                                                                        </div>
-                                                                    </div> <!-- end .d-flex-->
-                                                                </div> <!-- end col -->
-                                                            </div>
-                                                            <!-- end task -->
-                                                        </div> <!-- end card-body-->
-                                                    </div> <!-- end card -->
-                                                </div> <!-- end .collapse-->
+                                                                        </ul>
+                                                                    </div>
+                                                                </div> <!-- end .d-flex-->
+                                                            </div> <!-- end col -->
+                                                        </div>
+                                                        <!-- end task -->
+                                                    </div> <!-- end card-body-->
+                                                </div> <!-- end card -->
+                                            </div> <!-- end .collapse-->
 
-                                            </div> <!-- end col -->
-                                        </div> <!-- Maths row -->
+                                        </div> <!-- end col -->
+                                    </div> <!-- Maths row -->
                                     @empty
-                                        <p></p>
+                                    <p></p>
                                     @endforelse
 
                                 </div> <!-- end card-body -->
@@ -367,7 +430,7 @@
                 </ul><br>
                 <div class="card-body">
                     <div class="mt-4 chartjs-chart">
-                        <canvas id="radar-chart-test-marks"  data-colors="#39afd1,#a17fe0"></canvas>
+                        <canvas id="radar-chart-test-marks" data-colors="#39afd1,#a17fe0"></canvas>
                         <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
                     </div>
                 </div> <!-- end card-body-->

@@ -22,25 +22,31 @@
                         <input type="text" id="subjectCode" name="subject_code" class="form-control" placeholder="Enter subject code">
                     </div>
                     <div class="form-group">
-                        <label for="subjectType">Subject Type</label>
+                        <label for="subjectType">Subject Type 1</label>
                         <select class="form-control" id="subjectType" name="subject_type">
-                            <option value="">Choose Subject type</option>
-                            <option value="Theory">Theory</option>
-                            <option value="Practical">Practical</option>
+                            <option value="">Choose Subject type 1</option>
                             <option value="Optional">Optional</option>
                             <option value="Mandatory">Mandatory</option>
+                            <option value="Task">Task</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="subjectType">Subject Type 2</label>
+                        <select class="form-control" id="subjectTypeTwo" name="subject_type_2">
+                            <option value="">Choose Subject type 2</option>
+                            <option value="Theory">Theory</option>
+                            <option value="Practical">Practical</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="subjectColor">Subject Color</label>
-                        <select class="form-control" id="subjectColor" name="subject_color_calendor" placeholder="Enter subject color">
-                            <option value="bg-primary" class="bg-primary">primary</option>
-                            <option value="bg-secondary" class="bg-secondary">secondary</option>
-                            <option value="bg-success" class="bg-success">success</option>
-                            <option value="bg-danger" class="bg-danger">danger</option>
-                            <option value="bg-warning" class="bg-warning">warning</option>
-                            <option value="bg-info" class="bg-info">info</option>
-                        </select>
+                        <input type="text" id="subjectColor" name="subject_color_calendor" class="form-control subjectColor" value="#4a81d4">
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox checkbox-success form-check-inline">
+                            <input type="checkbox" id="excludeExams" name="exam_exclude">
+                            <label for="excludeExams"> Exclude From Exams </label>
+                        </div>
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>

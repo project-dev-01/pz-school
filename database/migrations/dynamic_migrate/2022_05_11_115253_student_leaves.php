@@ -19,8 +19,8 @@ class StudentLeaves extends Migration
             $table->integer('parent_id');
             $table->integer('class_id');
             $table->integer('section_id');
-            $table->string('from_leave');
-            $table->string('to_leave');
+            $table->date('from_leave');
+            $table->date('to_leave');
             $table->string('reasonId')->nullable();   
             $table->string('reason')->nullable();  
             $table->string('remarks')->nullable();            

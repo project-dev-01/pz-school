@@ -2319,7 +2319,6 @@ class ApiController extends BaseController
             'joining_date' => 'required',
             'designation_id' => 'required',
             'designation_id' => 'required',
-            'qualification' => 'required',
             'race' => 'required',
             'name' => 'required',
             'gender' => 'required',
@@ -2330,6 +2329,10 @@ class ApiController extends BaseController
             'present_address' => 'required',
             'permanent_address' => 'required',
             'email' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'country' => 'required',
+            'post_code' => 'required',
             'password' => 'required|min:6',
             'confirm_password' => 'required|same:password|min:6'
         ]);
@@ -2372,15 +2375,21 @@ class ApiController extends BaseController
                     } else {
                         $fileName = null;
                     }
+                    // first letter word
+                    $words = explode(" ", $request->name);
+                    $short_name = "";
+                    foreach ($words as $w) {
+                        $short_name .= $w[0];
+                    }
                     // update data
                     $Staffid = $Connection->table('staffs')->insertGetId([
                         // 'staff_id' => $request->staff_id,
                         'name' => $request->name,
+                        'short_name' => strtoupper($short_name),
                         'department_id' => $request->department_id,
                         'designation_id' => $request->designation_id,
                         'staff_qualification_id' => $request->staff_qualification_id,
                         'stream_type_id' => $request->stream_type_id,
-                        'qualification' => $request->qualification,
                         'race' => $request->race,
                         'joining_date' => $request->joining_date,
                         'birthday' => $request->birthday,
@@ -2395,11 +2404,18 @@ class ApiController extends BaseController
                         'facebook_url' => $request->facebook_url,
                         'linkedin_url' => $request->linkedin_url,
                         'twitter_url' => $request->twitter_url,
-                        'salary_grade' => $request->salary_grade,
+                        'salary_grade' => isset($request->salary_grade) ? $request->salary_grade : "0",
                         'staff_position' => $request->staff_position,
                         'staff_category' => $request->staff_category,
                         'nric_number' => $request->nric_number,
                         'passport' => $request->passport,
+                        'height' => isset($request->height) ? $request->height : "",
+                        'weight' => isset($request->weight) ? $request->weight : "",
+                        'allergy' => isset($request->allergy) ? $request->allergy : "",
+                        'city' => $request->city,
+                        'state' => $request->state,
+                        'country' => $request->country,
+                        'post_code' => $request->post_code,
                         'created_at' => date("Y-m-d H:i:s")
                     ]);
                     $success = [];
@@ -2451,17 +2467,19 @@ class ApiController extends BaseController
         $Staff = $Connection->table('staffs as s')
             ->select(
                 "s.*",
+                'stp.name as stream_type',
                 DB::raw("GROUP_CONCAT(DISTINCT  dp.name) as department_name"),
                 DB::raw("GROUP_CONCAT(DISTINCT  ds.name) as designation_name")
             )
             ->join("staff_departments as dp", DB::raw("FIND_IN_SET(dp.id,s.department_id)"), ">", DB::raw("'0'"))
             ->join("staff_designations as ds", DB::raw("FIND_IN_SET(ds.id,s.designation_id)"), ">", DB::raw("'0'"))
-            ->orderBy('s.created_at', 'desc')
+            ->leftJoin('stream_types as stp', 's.stream_type_id', '=', 'stp.id')
+            ->orderBy('stp.name', 'desc')
+            ->orderBy('s.salary_grade', 'desc')
             ->groupBy("s.id")
             ->get();
         return $this->successResponse($Staff, 'Staff record fetch successfully');
     }
-
     // getEmployeeDetails row details
     public function getEmployeeDetails(Request $request)
     {
@@ -2498,7 +2516,6 @@ class ApiController extends BaseController
             'joining_date' => 'required',
             'designation_id' => 'required',
             'designation_id' => 'required',
-            'qualification' => 'required',
             'name' => 'required',
             'gender' => 'required',
             'email' => 'required',
@@ -2507,6 +2524,10 @@ class ApiController extends BaseController
             'blood_group' => 'required',
             'birthday' => 'required',
             'mobile_no' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'country' => 'required',
+            'post_code' => 'required',
             'present_address' => 'required',
             'permanent_address' => 'required',
             'race' => 'required',
@@ -2555,16 +2576,21 @@ class ApiController extends BaseController
                         $fileName = null;
                     }
                 }
-
+                // short name first letter
+                $words = explode(" ", $request->name);
+                $short_name = "";
+                foreach ($words as $w) {
+                    $short_name .= $w[0];
+                }
                 // update data
                 $query = $Connection->table('staffs')->where('id', $id)->update([
                     // 'staff_id' => $request->staff_id,
                     'name' => $request->name,
+                    'short_name' => strtoupper($short_name),
                     'department_id' => $request->department_id,
                     'designation_id' => $request->designation_id,
                     'staff_qualification_id' => $request->staff_qualification_id,
                     'stream_type_id' => $request->stream_type_id,
-                    'qualification' => $request->qualification,
                     'race' => $request->race,
                     'joining_date' => $request->joining_date,
                     'birthday' => $request->birthday,
@@ -2579,10 +2605,17 @@ class ApiController extends BaseController
                     'facebook_url' => $request->facebook_url,
                     'linkedin_url' => $request->linkedin_url,
                     'twitter_url' => $request->twitter_url,
-                    'salary_grade' => $request->salary_grade,
+                    'salary_grade' => isset($request->salary_grade) ? $request->salary_grade : "0",
                     'staff_position' => $request->staff_position,
                     'staff_category' => $request->staff_category,
                     'nric_number' => $request->nric_number,
+                    'height' => isset($request->height) ? $request->height : "",
+                    'weight' => isset($request->weight) ? $request->weight : "",
+                    'allergy' => isset($request->allergy) ? $request->allergy : "",
+                    'city' => $request->city,
+                    'state' => $request->state,
+                    'country' => $request->country,
+                    'post_code' => $request->post_code,
                     'passport' => isset($request->passport) ? $request->passport : "",
                     'updated_at' => date("Y-m-d H:i:s")
                 ]);
@@ -2595,12 +2628,19 @@ class ApiController extends BaseController
                     if (isset($request->role_user_id) && isset($request->password)) {
                         $user = User::find($request->role_user_id);
                         $user->email = $request->email;
+                        $user->picture = $fileName;
                         $user->password = bcrypt($request->password);
                         $updateUser = $user->save();
                     }
                     if (isset($request->role_user_id) && isset($request->email)) {
                         $user = User::find($request->role_user_id);
                         $user->email = $request->email;
+                        $user->picture = $fileName;
+                        $updateUser = $user->save();
+                    }
+                    if (isset($request->old_photo) && empty($request->photo)) {
+                        $user = User::find($request->role_user_id);
+                        $user->picture = $fileName;
                         $updateUser = $user->save();
                     }
                     // add bank details
@@ -7074,7 +7114,7 @@ class ApiController extends BaseController
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
             $success = $Connection->table('calendors as cl')
-                ->select('cl.id', 'cl.class_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as className', 'sb.name as subject_name', 'sb.name as title', 'st.name as teacher_name', 'dr.report')
+                ->select('cl.id', 'cl.class_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as color', 'sb.name as subject_name', 'sb.name as title', 'st.name as teacher_name', 'dr.report')
                 ->join('classes as c', 'cl.class_id', '=', 'c.id')
                 ->join('sections as s', 'cl.section_id', '=', 's.id')
                 ->join('staffs as st', 'cl.teacher_id', '=', 'st.id')
@@ -9184,28 +9224,47 @@ class ApiController extends BaseController
             // dd($now);
             $userID = $request->user_id;
             $createConnection = $this->createNewConnection($request->branch_id);
-            $today = $createConnection->table('to_do_lists as tdl')
-                ->select(
-                    'tdl.id',
-                    'tdl.title',
-                    'tdl.due_date',
-                    'tdl.priority',
-                    'tdl.priority',
-                    'tdl.mark_as_complete',
-                    'rtd.user_id',
-                    DB::raw('count(tdlc.to_do_list_id) as total_comments')
-                )
-                ->leftJoin('read_to_do_list as rtd', function ($join) use ($userID) {
-                    $join->on('rtd.to_do_list_id', '=', 'tdl.id')
-                        ->on('rtd.user_id', '=', DB::raw("'$userID'"));
-                })
-                ->leftjoin('to_do_list_comments as tdlc', 'tdl.id', '=', 'tdlc.to_do_list_id')
-                ->orderBy('tdl.due_date', 'desc')
-                ->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), $now)
-                ->groupBy('tdl.id')
-                ->get();
+            // $today = $createConnection->table('to_do_lists as tdl')
+            //     ->select(
+            //         'tdl.id',
+            //         'tdl.title',
+            //         'tdl.due_date',
+            //         'tdl.priority',
+            //         'tdl.priority',
+            //         'tdl.mark_as_complete',
+            //         'rtd.user_id',
+            //         DB::raw('count(tdlc.to_do_list_id) as total_comments')
+            //     )
+            //     ->leftJoin('read_to_do_list as rtd', function ($join) use ($userID) {
+            //         $join->on('rtd.to_do_list_id', '=', 'tdl.id')
+            //             ->on('rtd.user_id', '=', DB::raw("'$userID'"));
+            //     })
+            //     ->leftjoin('to_do_list_comments as tdlc', 'tdl.id', '=', 'tdlc.to_do_list_id')
+            //     ->orderBy('tdl.due_date', 'desc')
+            //     ->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), $now)
+            //     ->groupBy('tdl.id')
+            //     ->get();
 
-            $upcoming = $createConnection->table('to_do_lists as tdl')
+            // $upcoming = $createConnection->table('to_do_lists as tdl')
+            //     ->select(
+            //         'tdl.id',
+            //         'tdl.title',
+            //         'tdl.due_date',
+            //         'tdl.priority',
+            //         'tdl.mark_as_complete',
+            //         'rtd.user_id',
+            //         DB::raw('count(tdlc.to_do_list_id) as total_comments')
+            //     )
+            //     ->leftJoin('read_to_do_list as rtd', function ($join) use ($userID) {
+            //         $join->on('rtd.to_do_list_id', '=', 'tdl.id')
+            //             ->on('rtd.user_id', '=', DB::raw("'$userID'"));
+            //     })
+            //     ->leftjoin('to_do_list_comments as tdlc', 'tdl.id', '=', 'tdlc.to_do_list_id')
+            //     ->orderBy('tdl.due_date', 'desc')
+            //     ->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), '>', $now)
+            //     ->groupBy('tdl.id')
+            //     ->get();
+            $query = $createConnection->table('to_do_lists as tdl')
                 ->select(
                     'tdl.id',
                     'tdl.title',
@@ -9220,11 +9279,22 @@ class ApiController extends BaseController
                         ->on('rtd.user_id', '=', DB::raw("'$userID'"));
                 })
                 ->leftjoin('to_do_list_comments as tdlc', 'tdl.id', '=', 'tdlc.to_do_list_id')
-                ->orderBy('tdl.due_date', 'desc')
-                ->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), '>', $now)
-                ->groupBy('tdl.id')
-                ->get();
+                ->orderBy('tdl.due_date', 'desc');
+            // old
+            $old_query = clone $query;
+            $old_query->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), '<', $now);
+            $old = $old_query->groupBy('tdl.id')->get();
+            // today
+            $today_query = clone $query;
+            $today_query->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), $now);
+            $today = $today_query->groupBy('tdl.id')->get();
+            // upcoming
+            $upcoming_query = clone $query;
+            $upcoming_query->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), '>', $now);
+            $upcoming = $upcoming_query->groupBy('tdl.id')->get();
+
             $data = [
+                'old' => $old,
                 'today' => $today,
                 'upcoming' => $upcoming
             ];
@@ -9395,6 +9465,7 @@ class ApiController extends BaseController
                     ->get();
             }
 
+            $oldArray = array();
             $todayArray = array();
             $upcomingArray = array();
             // 2nd get sections id
@@ -9411,6 +9482,13 @@ class ApiController extends BaseController
                 if (isset($secAllocation->id)) {
 
                     $secAllID = $secAllocation->id;
+                    $old = $Connection->table('to_do_lists as tdl')
+                        ->select(
+                            'tdl.id'
+                        )
+                        ->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), '<', $now)
+                        ->whereRaw('FIND_IN_SET(?,tdl.assign_to)', [$secAllID])
+                        ->get();
                     $today = $Connection->table('to_do_lists as tdl')
                         ->select(
                             'tdl.id'
@@ -9425,6 +9503,11 @@ class ApiController extends BaseController
                         ->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), '>', $now)
                         ->whereRaw('FIND_IN_SET(?,tdl.assign_to)', [$secAllID])
                         ->get();
+                    if ($old->count() > 0) {
+                        foreach ($old as $val) {
+                            array_push($oldArray, $val->id);
+                        }
+                    }
                     if ($today->count() > 0) {
                         foreach ($today as $val) {
                             array_push($todayArray, $val->id);
@@ -9437,7 +9520,7 @@ class ApiController extends BaseController
                     }
                 }
             }
-            $today = $Connection->table('to_do_lists as tdl')
+            $query = $Connection->table('to_do_lists as tdl')
                 ->select(
                     'tdl.id',
                     'tdl.title',
@@ -9453,34 +9536,28 @@ class ApiController extends BaseController
                         ->on('rtd.user_id', '=', DB::raw("'$userID'"));
                 })
                 ->leftjoin('to_do_list_comments as tdlc', 'tdl.id', '=', 'tdlc.to_do_list_id')
-                ->orderBy('tdl.due_date', 'desc')
-                ->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), $now)
+                ->orderBy('tdl.due_date', 'desc');
+            // old
+            $old_query = clone $query;
+            $old = $old_query->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), '<', $now)
+                ->whereIn('tdl.id', $oldArray)
+                ->groupBy('tdl.id')
+                ->get();
+            // today
+            $today_query = clone $query;
+            $today = $today_query->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), $now)
                 ->whereIn('tdl.id', $todayArray)
                 ->groupBy('tdl.id')
                 ->get();
-            // get upcoming
-            $upcoming = $Connection->table('to_do_lists as tdl')
-                ->select(
-                    'tdl.id',
-                    'tdl.title',
-                    'tdl.due_date',
-                    'tdl.priority',
-                    'tdl.mark_as_complete',
-                    'rtd.user_id',
-                    DB::raw('count(tdlc.to_do_list_id) as total_comments')
-                )
-                ->leftJoin('read_to_do_list as rtd', function ($join) use ($userID) {
-                    $join->on('rtd.to_do_list_id', '=', 'tdl.id')
-                        ->on('rtd.user_id', '=', DB::raw("'$userID'"));
-                })
-                ->leftjoin('to_do_list_comments as tdlc', 'tdl.id', '=', 'tdlc.to_do_list_id')
-                ->orderBy('tdl.due_date', 'desc')
-                ->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), '>', $now)
-                // ->whereRaw('FIND_IN_SET(?,tdl.assign_to)', [$secAllID])
+            // upcoming
+            $upcoming_query = clone $query;
+            $upcoming = $upcoming_query->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), '>', $now)
                 ->whereIn('tdl.id', $upcomingArray)
                 ->groupBy('tdl.id')
                 ->get();
+
             $data = [
+                'old' => $old,
                 'today' => $today,
                 'upcoming' => $upcoming
             ];
@@ -10806,37 +10883,56 @@ class ApiController extends BaseController
 
             // create new connection
             $staffConn = $this->createNewConnection($request->branch_id);
-
-
-            $now = now();
-            $name = strtotime($now);
-            $extension = $request->file_extension;
-            $fileName = $name . "." . $extension;
-
-            $base64 = base64_decode($request->file);
-            $file = base_path() . '/public/teacher/homework/' . $fileName;
-            $suc = file_put_contents($file, $base64);
-
-            $query = $staffConn->table('student_leaves')->insert([
-                'student_id' => $request['student_id'],
-                'parent_id' => $request['parent_id'],
-                'class_id' => $request['class_id'],
-                'section_id' => $request['section_id'],
-                'from_leave' => $request['frm_leavedate'],
-                'to_leave' => $request['to_leavedate'],
-                'reasonid' => $request['reasons'],
-                'reason' => $request['reason_text'],
-                'remarks' => $request['remarks'],
-                'document' => $fileName,
-                'status' => $request['status'],
-                'created_at' => date("Y-m-d H:i:s")
-            ]);
-
-            $success = [];
-            if (!$query) {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            $from_leave = date('Y-m-d', strtotime($request['frm_leavedate']));
+            $to_leave = date('Y-m-d', strtotime($request['to_leavedate']));
+            // check leave exist
+            $leaveCnt = $staffConn->table('student_leaves as lev')
+                ->where([
+                    ['lev.student_id', '=', $request->student_id],
+                    ['lev.class_id', '=', $request->class_id],
+                    ['lev.section_id', '=', $request->section_id],
+                    ['lev.from_leave', '<=', $from_leave],
+                    ['lev.to_leave', '>=', $to_leave]
+                ])
+                ->count();
+            if ($leaveCnt > 0) {
+                return $this->send422Error('You have already applied for leave between these dates', ['error' => 'You have already applied for leave between these dates']);
             } else {
-                return $this->successResponse($success, 'Waiting for approval');
+                // insert data
+                if (isset($request->file)) {
+                    $now = now();
+                    $name = strtotime($now);
+                    $extension = $request->file_extension;
+                    $fileName = $name . "." . $extension;
+
+                    $base64 = base64_decode($request->file);
+                    $file = base_path() . '/public/teacher/student-leaves/' . $fileName;
+                    $suc = file_put_contents($file, $base64);
+                } else {
+                    $fileName = null;
+                }
+
+                $query = $staffConn->table('student_leaves')->insert([
+                    'student_id' => $request['student_id'],
+                    'parent_id' => $request['parent_id'],
+                    'class_id' => $request['class_id'],
+                    'section_id' => $request['section_id'],
+                    'from_leave' => $from_leave,
+                    'to_leave' => $to_leave,
+                    'reasonid' => $request['reasons'],
+                    'reason' => $request['reason_text'],
+                    'remarks' => $request['remarks'],
+                    'document' => $fileName,
+                    'status' => $request['status'],
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Waiting for approval');
+                }
             }
         }
     }
@@ -10866,13 +10962,11 @@ class ApiController extends BaseController
                     ['lev.class_id', '=', $request->class_id],
                     ['lev.section_id', '=', $request->section_id],
                     ['lev.status', '!=', 'Approve'],
-                    ['lev.status', '!=', 'Reject']
+                    ['lev.status', '!=', 'Reject'],
+                    ['lev.from_leave', '<=', $compare_date],
+                    ['lev.to_leave', '>=', $compare_date]
                 ])
-                ->where(function ($query) use ($compare_date) {
-                    $query->where('lev.from_leave', '<=', $compare_date);
-                    $query->where('lev.to_leave', '>=', $compare_date);
-                })
-                ->orderBy('lev.to_leave', 'desc')
+                ->orderBy('lev.from_leave', 'asc')
                 ->get();
             return $this->successResponse($studentDetails, 'Student details fetch successfully');
         }
@@ -10931,7 +11025,7 @@ class ApiController extends BaseController
             'branch_id' => 'required',
             'student_leave_tbl_id' => 'required',
             'student_leave_approve' => 'required'
-            
+
         ]);
 
         if (!$validator->passes()) {
@@ -10939,7 +11033,7 @@ class ApiController extends BaseController
         } else {
             $student_leave_id = $request->student_leave_tbl_id;
             // create new connection
-            $Conn = $this->createNewConnection($request->branch_id);         
+            $Conn = $this->createNewConnection($request->branch_id);
 
             // update data
             $query = $Conn->table('student_leaves')->where('id', $student_leave_id)->update([

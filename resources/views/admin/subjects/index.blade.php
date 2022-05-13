@@ -1,5 +1,8 @@
 @extends('layouts.admin-layout')
 @section('title','Subjects')
+@section('css')
+<link href="{{ asset('libs/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}" rel="stylesheet" type="text/css" />
+@endsection
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -58,12 +61,15 @@
 <!-- container -->
 @endsection
 @section('scripts')
+<script src="{{ asset('libs/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
+<script src="{{ asset('js/pages/form-pickers.init.js') }}"></script>
+
 <script>
     var subjectsAddUrl = "{{ config('constants.api.subject_add') }}";
     var subjectsGetRowUrl = "{{ config('constants.api.subject_details') }}";
     var subjectsUpdateUrl = "{{ config('constants.api.subject_update') }}";
     var subjectsDeleteUrl = "{{ config('constants.api.subject_delete') }}";
-    
+
     var subjectsList = "{{ route('admin.subjects.list') }}";
 </script>
 <script src="{{ asset('js/custom/subjects.js') }}"></script>

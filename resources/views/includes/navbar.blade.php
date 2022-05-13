@@ -46,7 +46,7 @@
 
             <li class="dropdown notification-list topbar-dropdown">
                 <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <img src="{{ Session::get('picture') && asset('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" alt="user-image" class="rounded-circle admin_picture">
+                    <img src="{{ Session::get('picture') && asset('images/staffs/'.Session::get('picture')) ? asset('images/staffs/'.Session::get('picture')) : asset('images/users/default.jpg') }}" alt="user-image" class="rounded-circle admin_picture">
                     <span class="pro-user-name ml-1 user_name">
                         <i class="mdi mdi-chevron-down"></i>
                     </span>

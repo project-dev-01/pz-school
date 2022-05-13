@@ -44,6 +44,8 @@ $(function () {
             widgetShow(formData);
             // get Short test
             getShortTestData(formData);
+            // student leave apply
+            studentleave(formData);
         }
     }
     // onload show start
@@ -178,7 +180,7 @@ $(function () {
     }
     // functionListModeAJax
     function listModeAjax(formDat, classObj) {
-
+        $("#overlay").fadeIn(300);
         $.ajax({
             url: getStudentAttendance,
             method: "post",
@@ -235,8 +237,10 @@ $(function () {
                     }
 
                     $("#layoutModeGrid").append(layoutModeGrid);
+                    $("#overlay").fadeOut(300);
                 } else {
                     toastr.error(response.message);
+                    $("#overlay").fadeOut(300);
                 }
             }
         });
@@ -965,27 +969,16 @@ $(function () {
 
         return [day, month, year].join('-');
     }
-    // format yy mm dd 
-    function YerarformatDate(date) {
-        var d = new Date(date),
-            month = '' + (d.getMonth() + 1),
-            day = '' + d.getDate(),
-            year = d.getFullYear();
-
-        if (month.length < 2)
-            month = '0' + month;
-        if (day.length < 2)
-            day = '0' + day;
-
-        return [year, day, month].join('-');
-    }
 
     function studentleave() {
 
         var classID = $("#changeClassName").val();
         var sectionID = $("#sectionID").val();
         var classDate = $("#classDate").val();
-        var format_date = YerarformatDate(classDate);
+        var format_date = convertDigitIn(classDate);
+        console.log("---");
+        console.log(classID);
+        console.log(sectionID);
         console.log(format_date);
         $.get(getStudentLeave, {
             token: token,
@@ -998,13 +991,14 @@ $(function () {
             var dataSetNew = response.data;
             if (response.code == 200) {
                 console.log(response);
-                if (response.data.length > 0) {
-                    console.log('response');
-                    StudentLeave_tbl(dataSetNew);
-                } else {
+                StudentLeave_tbl(dataSetNew);
+                // if (response.data.length > 0) {
+                //     console.log('response');
+                //     StudentLeave_tbl(dataSetNew);
+                // } else {
 
-                    toastr.info('No students are available');
-                }
+                //     toastr.info('No students are available');
+                // }
             } else {
                 toastr.error(response.message);
             }
@@ -1115,9 +1109,7 @@ $(function () {
                         '<option value="Approve"  ' + (data == "Approve" ? "selected" : "") + '>Approve</option>' +
                         '<option value="Reject"  ' + (data == "Reject" ? "selected" : "") + '>Reject</option>'+
                         '<option value="Pending"  ' + (data == "Pending" ? "selected" : "") + '>Pending</option>'
-                        '</select>';
-                        // var att_status=
-                        // '<span class="badge badge-pill badge-success">hai</span>' 
+                        '</select>'; 
                         return status;
                     }
                 },

@@ -1,5 +1,7 @@
 $(function () {
-
+    $(".subjectColor").colorpicker({
+        format: "auto"
+    });
     // rules validation
     $("#addSubjectSubmit").validate({
         rules: {
@@ -17,7 +19,12 @@ $(function () {
             var shortName = $("#shortName").val();
             var subjectType = $("#subjectType").val();
             var subjectColor = $("#subjectColor").val();
-
+            var subjectTypeTwo = $("#subjectTypeTwo").val();
+            var exam_exclude = 0;
+            if ($('#excludeExams').is(':checked')) {
+                //I am checked
+                exam_exclude = 1;
+            }
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
@@ -25,8 +32,9 @@ $(function () {
             formData.append('short_name', shortName);
             formData.append('subject_code', subjectCode);
             formData.append('subject_type', subjectType);
+            formData.append('subject_type_2', subjectTypeTwo);
+            formData.append('exam_exclude', exam_exclude);
             formData.append('subject_color', subjectColor);
-
             $.ajax({
                 url: subjectsAddUrl,
                 method: "post",
@@ -68,7 +76,13 @@ $(function () {
             $('.editSubjectModel').find('input[name="short_name"]').val(data.data.short_name);
             $('.editSubjectModel').find('input[name="subject_code"]').val(data.data.subject_code);
             $('.editSubjectModel').find('select[name="subject_type"]').val(data.data.subject_type);
-            $('.editSubjectModel').find('select[name="subject_color_calendor"]').val(data.data.subject_color_calendor);
+            $('.editSubjectModel').find('select[name="subject_type_2"]').val(data.data.subject_type_2);
+            $('.editSubjectModel').find('input[name="subject_color_calendor"]').val(data.data.subject_color_calendor);
+            if (data.data.exam_exclude == "1") {
+                $('.editSubjectModel').find('input[name="exam_exclude"]').prop('checked', true);
+            } else {
+                $('.editSubjectModel').find('input[name="exam_exclude"]').prop('checked', false);
+            }
             $('.editSubjectModel').modal('show');
         }, 'json');
     });
@@ -77,7 +91,7 @@ $(function () {
     $("#subjectUpdateForm").validate({
         rules: {
             name: "required",
-            short_name:"required"
+            short_name: "required"
         }
     });
     // update 
@@ -92,7 +106,12 @@ $(function () {
             var editshortName = $("#editshortName").val();
             var editsubjectType = $("#editsubjectType").val();
             var editsubjectColor = $("#editsubjectColor").val();
-
+            var editsubjectTypeTwo = $("#editsubjectTypeTwo").val();
+            var exam_exclude = 0;
+            if ($('#editexcludeExams').is(':checked')) {
+                //I am checked
+                exam_exclude = 1;
+            }
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
@@ -101,6 +120,8 @@ $(function () {
             formData.append('short_name', editshortName);
             formData.append('subject_code', editsubjectCode);
             formData.append('subject_type', editsubjectType);
+            formData.append('subject_type_2', editsubjectTypeTwo);
+            formData.append('exam_exclude', exam_exclude);
             formData.append('subject_color', editsubjectColor);
 
             $.ajax({
