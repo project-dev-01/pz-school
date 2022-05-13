@@ -7144,7 +7144,7 @@ class ApiController extends BaseController
             $Connection = $this->createNewConnection($request->branch_id);
 
             $success = $Connection->table('students as stud')
-                ->select('cl.id', 'cl.class_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as className', 'sb.name as subject_name', 'sb.name as title', 'st.name as teacher_name', 'drr.student_remarks')
+                ->select('cl.id', 'cl.class_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as color', 'sb.name as subject_name', 'sb.name as title', 'st.name as teacher_name', 'drr.student_remarks')
                 ->join('enrolls as en', 'en.student_id', '=', 'stud.id')
                 ->join('classes as c', 'en.class_id', '=', 'c.id')
                 ->join('sections as s', 'en.section_id', '=', 's.id')
