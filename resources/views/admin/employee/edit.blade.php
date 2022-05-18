@@ -114,7 +114,9 @@
                                     <input type="hidden" name="old_photo" id="oldPhoto" value="{{ $employee['photo'] }}" />
                                     <div class="containers-img">
                                         <div class="imageWrapper">
-                                            <img class="image" src="{{asset('images/staffs/').'/'.$employee['photo']}}">
+                                            <img src="{{ $employee['photo'] && asset('images/staffs/').'/'.$employee['photo'] ? asset('images/staffs/').'/'.$employee['photo'] : asset('images/users/default.jpg') }}" class="image">
+                                            <!-- <img class="image" src="{{asset('images/staffs/').'/'.$employee['photo']}}">
+                                            images/users/default.jpg -->
                                         </div>
                                     </div>
 
@@ -132,22 +134,35 @@
                             <hr id="hr">
                         </span>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="name"> Name<span class="text-danger">*</span></label>
+                                    <label for="first_name"> First name<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="fas fa-user-graduate"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="name" value="{{$employee['name']}}" id="userName">
+                                        <input type="text" class="form-control" value="{{$employee['first_name']}}" name="first_name" id="firstName">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="gender">Gender<span class="text-danger">*</span></label>
+                                    <label for="last_name"> Last name</label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-user-graduate"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{$employee['last_name']}}" name="last_name" id="lastName">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="gender">Gender</label>
                                     <select class="form-control" name="gender" id="gender">
                                         <option value="">Choose Gender</option>
                                         <option value="Male" {{$employee['gender'] =="Male" ? 'selected' : '' }}>Male</option>
@@ -155,9 +170,17 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="religion">Religion<span class="text-danger">*</span></label>
+                                    <label for="short_name">Short name</label>
+                                    <input type="text" value="{{$employee['short_name']}}" class="form-control" name="short_name" id="shortName">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="religion">Religion</label>
                                     <select class="form-control" name="religion" id="religion">
                                         <option value="">Choose Religion</option>
                                         @forelse($religion as $r)
@@ -167,11 +190,9 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="race">Race<span class="text-danger">*</span></label>
+                                    <label for="race">Race</label>
                                     <select class="form-control" name="race" id="addRace">
                                         <option value="">Choose race</option>
                                         @forelse($races as $r)
@@ -181,13 +202,13 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="Passport">Passport</label>
                                     <input type="text" class="form-control" name="passport" value="{{$employee['passport']}}" id="Passport">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="nric_number">NRIC Number</label>
                                     <input type="text" class="form-control" name="nric_number" value="{{$employee['nric_number']}}" id="nricNumber">
@@ -196,9 +217,9 @@
 
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group mb-3">
-                                    <label for="birthday">Date Of Birth<span class="text-danger">*</span></label>
+                                    <label for="birthday">Date Of Birth</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -209,8 +230,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
+                            <div class="col-md-4">
+                                <label for="mobile_no">Mobile No</label>
                                 <div class="input-group input-group-merge">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
@@ -220,29 +241,42 @@
                                     <input type="text" class="form-control" value="{{$employee['mobile_no']}}" name="mobile_no" id="mobile_no">
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="employment_status">Employment status</label>
+                                    <select class="form-control" name="employment_status" id="employment_status">
+                                        <option value="">Choose employment status</option>
+                                        <option value="Under_Probation" {{$employee['employment_status'] =="Under_Probation" ? 'selected' : '' }}>Under Probation</option>
+                                        <option value="Employed" {{$employee['employment_status'] =="Employed" ? 'selected' : '' }}>Employed</option>
+                                        <option value="Transferred" {{$employee['employment_status'] =="Transferred" ? 'selected' : '' }}>Transferred</option>
+                                        <option value="Resign" {{$employee['employment_status'] =="Resign" ? 'selected' : '' }}>Resign</option>
+                                        <option value="Retired" {{$employee['employment_status'] =="Retired" ? 'selected' : '' }}>Retired</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="city">City<span class="text-danger">*</span></label>
-                                    <input type="text" value="{{$employee['city']}}" class="form-control" name="city" id="City">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="state">State<span class="text-danger">*</span></label>
-                                    <input type="text" value="{{$employee['state']}}" class="form-control" name="state" id="State">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="country">Country<span class="text-danger">*</span></label>
+                                    <label for="country">Country</label>
                                     <input type="text" value="{{$employee['country']}}" class="form-control" name="country" id="Country">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="post_code">Post code<span class="text-danger">*</span></label>
+                                    <label for="state">State/Province</label>
+                                    <input type="text" value="{{$employee['state']}}" class="form-control" name="state" id="State">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" value="{{$employee['city']}}" class="form-control" name="city" id="City">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="post_code">Zip/Postal code</label>
                                     <input type="text" value="{{$employee['post_code']}}" class="form-control" name="post_code" id="postCode">
                                 </div>
                             </div>
@@ -250,16 +284,16 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="present_address">Address 1<span class="text-danger">*</span></label>
-                                    <textarea class="form-control" name="present_address" id="present_address">
+                                    <label for="present_address">Address Line 1(Street address)</label>
+                                    <textarea class="form-control" name="present_address" id="present_address" rows="1">
                                     {{$employee['present_address']}}
                                     </textarea>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="permanent_address">Address 2<span class="text-danger">*</span></label>
-                                    <textarea class="form-control" name="permanent_address" id="permanent_address">
+                                    <label for="permanent_address">Address Line 2</label>
+                                    <textarea class="form-control" name="permanent_address" id="permanent_address" rows="1">
                                     {{$employee['permanent_address']}}
                                     </textarea>
                                 </div>
@@ -293,7 +327,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group mb-4">
-                                    <label for="joining_date">Joining Date<span class="text-danger">*</span></label>
+                                    <label for="joining_date">Joining Date</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -306,7 +340,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="designation_id">Designation<span class="text-danger">*</span></label>
+                                    <label for="designation_id">Designation</label>
                                     <select class="form-control select2-multiple" data-toggle="select2" id="empDesignation" name="designation_id[]" multiple="multiple" data-placeholder="Choose ...">
                                         <option value="">Select Designation</option>
                                         @forelse($designation as $des)
@@ -331,7 +365,7 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="department_id">Department<span class="text-danger">*</span></label>
+                                    <label for="department_id">Department</label>
                                     <select class="form-control select2-multiple" data-toggle="select2" id="empDepartment" name="department_id" multiple="multiple" data-placeholder="Choose ...">
                                         <option value="">Select Department</option>
                                         @forelse($department as $dep)
@@ -545,7 +579,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="blood_group">Blood Group<span class="text-danger">*</span></label>
+                                        <label for="blood_group">Blood Group</label>
                                         <select class="form-control" name="blood_group" id="blood_group">
                                             <option value="">Choose Blood Group</option>
                                             <option value="A+" {{$employee['blood_group'] == "A+" ? 'selected' : ''}}>A+</option>

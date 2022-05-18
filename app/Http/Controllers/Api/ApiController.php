@@ -1352,7 +1352,7 @@ class ApiController extends BaseController
             return $this->successResponse($branchBasedSection, 'Section row fetch successfully');
         }
     }
-    
+
     // addEventType
     public function addEventType(Request $request)
     {
@@ -1490,7 +1490,7 @@ class ApiController extends BaseController
     public function addEvent(Request $request)
     {
 
-        
+
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
             'branch_id' => 'required',
@@ -1503,7 +1503,7 @@ class ApiController extends BaseController
             'description' => '',
         ]);
 
-    //    return $request;
+        //    return $request;
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
@@ -1534,7 +1534,7 @@ class ApiController extends BaseController
             } elseif ($request->audience == 2) {
                 $classes = $request->class;
             }
-            
+
             foreach ($classes as $class) {
 
                 if ($request->audience == 1) {
@@ -1543,13 +1543,13 @@ class ApiController extends BaseController
                     $classId = $class;
                 }
                 $conn->table('calendors')->insert([
-                        'title' => $title,
-                        'class_id' => $classId,
-                        'start' => $request->start_date,
-                        'end' => $request->end_date,
-                        'event_id' => $eventId,
-                        'created_at' => date("Y-m-d H:i:s")
-                    ]);
+                    'title' => $title,
+                    'class_id' => $classId,
+                    'start' => $request->start_date,
+                    'end' => $request->end_date,
+                    'event_id' => $eventId,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
             }
             $success = [];
             if (!$query) {
@@ -1576,30 +1576,29 @@ class ApiController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             // get data
             $event = $conn->table('events')
-                                ->select("events.*", 'event_types.name as type')
-                                ->leftjoin('event_types', 'event_types.id', '=', 'events.type')
-                                ->groupBy("events.id")
-                                ->get()->toArray();
+                ->select("events.*", 'event_types.name as type')
+                ->leftjoin('event_types', 'event_types.id', '=', 'events.type')
+                ->groupBy("events.id")
+                ->get()->toArray();
 
-                                // dd($event);
+            // dd($event);
             $eventDetails = [];
             foreach ($event as $eve) {
                 $data = $eve;
                 $class_name = "";
-                if ($eve->audience == "2")   {
+                if ($eve->audience == "2") {
                     $class = json_decode($eve->selected_list);
-                    foreach($class as $cla) {
+                    foreach ($class as $cla) {
                         $name = $conn->table('classes')->where('id', $cla)->first();
-                        $class_name .= $name->name.', ';
+                        $class_name .= $name->name . ', ';
                     }
                     $cname = rtrim($class_name, ", ");
                     $data->class_name = $cname;
-                    
                 } else {
                     $data->class_name = NULL;
                 }
                 array_push($eventDetails, $data);
-            }     
+            }
             return $this->successResponse($eventDetails, 'Event record fetch successfully');
         }
     }
@@ -1618,14 +1617,14 @@ class ApiController extends BaseController
         } else {
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
-             // get data
+            // get data
             $event_id = $request->id;
             $eventDetails = $conn->table('events')
-                                ->select("events.*", \DB::raw("GROUP_CONCAT(classes.name) as classname"), 'event_types.name as type',)
-                                ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,events.selected_list)"), ">", \DB::raw("'0'"))
-                                ->leftjoin('event_types', 'event_types.id', '=', 'events.type')
-                                ->groupBy("events.id")
-                                ->where('events.id', $event_id)->first();
+                ->select("events.*", \DB::raw("GROUP_CONCAT(classes.name) as classname"), 'event_types.name as type',)
+                ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,events.selected_list)"), ">", \DB::raw("'0'"))
+                ->leftjoin('event_types', 'event_types.id', '=', 'events.type')
+                ->groupBy("events.id")
+                ->where('events.id', $event_id)->first();
             return $this->successResponse($eventDetails, 'Event row fetch successfully');
         }
     }
@@ -1675,12 +1674,12 @@ class ApiController extends BaseController
             ]);
             if ($request->status == "1") {
                 $status = "Published";
-            }  else{
+            } else {
                 $status = "UnPublished";
             }
             $success = [];
             if ($query) {
-                return $this->successResponse($success, 'Event have been '. $status. ' successfully');
+                return $this->successResponse($success, 'Event have been ' . $status . ' successfully');
             } else {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             }
@@ -2398,24 +2397,24 @@ class ApiController extends BaseController
     {
         $validator = \Validator::make($request->all(), [
             'branch_id' => 'required',
-            'token' => 'required',
             'role_id' => 'required',
-            'joining_date' => 'required',
-            'designation_id' => 'required',
-            'designation_id' => 'required',
-            'race' => 'required',
-            'name' => 'required',
-            'gender' => 'required',
-            'religion' => 'required',
-            'birthday' => 'required',
-            'mobile_no' => 'required',
-            'present_address' => 'required',
-            'permanent_address' => 'required',
+            'first_name' => 'required',
+            // 'joining_date' => 'required',
+            // 'designation_id' => 'required',
+            // 'designation_id' => 'required',
+            // 'race' => 'required',
+            // 'name' => 'required',
+            // 'gender' => 'required',
+            // 'religion' => 'required',
+            // 'birthday' => 'required',
+            // 'mobile_no' => 'required',
+            // 'present_address' => 'required',
+            // 'permanent_address' => 'required',
             'email' => 'required',
-            'city' => 'required',
-            'state' => 'required',
-            'country' => 'required',
-            'post_code' => 'required',
+            // 'city' => 'required',
+            // 'state' => 'required',
+            // 'country' => 'required',
+            // 'post_code' => 'required',
             'password' => 'required|min:6',
             'confirm_password' => 'required|same:password|min:6'
         ]);
@@ -2459,16 +2458,14 @@ class ApiController extends BaseController
                         $fileName = null;
                     }
                     // first letter word
-                    $words = explode(" ", $request->name);
-                    $short_name = "";
-                    foreach ($words as $w) {
-                        $short_name .= $w[0];
-                    }
                     // update data
                     $Staffid = $Connection->table('staffs')->insertGetId([
                         // 'staff_id' => $request->staff_id,
-                        'name' => $request->name,
-                        'short_name' => strtoupper($short_name),
+                        // 'name' => $request->name,
+                        'first_name' => isset($request->first_name) ? $request->first_name : "",
+                        'last_name' => isset($request->last_name) ? $request->last_name : "",
+                        'short_name' => $request->short_name,
+                        'employment_status' => $request->employment_status,
                         'department_id' => $request->department_id,
                         'designation_id' => $request->designation_id,
                         'staff_qualification_id' => $request->staff_qualification_id,
@@ -2520,7 +2517,8 @@ class ApiController extends BaseController
                         }
                         // add picture
                         $user = new User();
-                        $user->name = $request->name;
+
+                        $user->name = (isset($request->first_name) ? $request->first_name : "") . " " . (isset($request->last_name) ? $request->last_name : "");
                         $user->user_id = $Staffid;
                         $user->role_id = $request->role_id;
                         $user->branch_id = $request->branch_id;
@@ -2549,13 +2547,19 @@ class ApiController extends BaseController
         $Connection = $this->createNewConnection($request->branch_id);
         $Staff = $Connection->table('staffs as s')
             ->select(
-                "s.*",
+                DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"),
+                's.id',
+                's.short_name',
+                's.salary_grade',
+                's.email',
+                's.mobile_no',
+                's.photo',
                 'stp.name as stream_type',
                 DB::raw("GROUP_CONCAT(DISTINCT  dp.name) as department_name"),
                 DB::raw("GROUP_CONCAT(DISTINCT  ds.name) as designation_name")
             )
-            ->join("staff_departments as dp", DB::raw("FIND_IN_SET(dp.id,s.department_id)"), ">", DB::raw("'0'"))
-            ->join("staff_designations as ds", DB::raw("FIND_IN_SET(ds.id,s.designation_id)"), ">", DB::raw("'0'"))
+            ->leftJoin("staff_departments as dp", DB::raw("FIND_IN_SET(dp.id,s.department_id)"), ">", DB::raw("'0'"))
+            ->leftJoin("staff_designations as ds", DB::raw("FIND_IN_SET(ds.id,s.designation_id)"), ">", DB::raw("'0'"))
             ->leftJoin('stream_types as stp', 's.stream_type_id', '=', 'stp.id')
             ->orderBy('stp.name', 'desc')
             ->orderBy('s.salary_grade', 'desc')
@@ -2596,23 +2600,24 @@ class ApiController extends BaseController
             'branch_id' => 'required',
             'id' => 'required',
             'role_id' => 'required',
-            'joining_date' => 'required',
-            'designation_id' => 'required',
-            'designation_id' => 'required',
-            'name' => 'required',
-            'gender' => 'required',
+            'first_name' => 'required',
+            // 'joining_date' => 'required',
+            // 'designation_id' => 'required',
+            // 'designation_id' => 'required',
+            // 'name' => 'required',
+            // 'gender' => 'required',
             'email' => 'required',
             'role_user_id' => 'required',
-            'religion' => 'required',
-            'birthday' => 'required',
-            'mobile_no' => 'required',
-            'city' => 'required',
-            'state' => 'required',
-            'country' => 'required',
-            'post_code' => 'required',
-            'present_address' => 'required',
-            'permanent_address' => 'required',
-            'race' => 'required',
+            // 'religion' => 'required',
+            // 'birthday' => 'required',
+            // 'mobile_no' => 'required',
+            // 'city' => 'required',
+            // 'state' => 'required',
+            // 'country' => 'required',
+            // 'post_code' => 'required',
+            // 'present_address' => 'required',
+            // 'permanent_address' => 'required',
+            // 'race' => 'required',
         ]);
 
         if (!$validator->passes()) {
@@ -2658,17 +2663,14 @@ class ApiController extends BaseController
                         $fileName = null;
                     }
                 }
-                // short name first letter
-                $words = explode(" ", $request->name);
-                $short_name = "";
-                foreach ($words as $w) {
-                    $short_name .= $w[0];
-                }
                 // update data
                 $query = $Connection->table('staffs')->where('id', $id)->update([
                     // 'staff_id' => $request->staff_id,
-                    'name' => $request->name,
-                    'short_name' => strtoupper($short_name),
+                    // 'name' => $request->name,
+                    'first_name' => isset($request->first_name) ? $request->first_name : "",
+                    'last_name' => isset($request->last_name) ? $request->last_name : "",
+                    'short_name' => $request->short_name,
+                    'employment_status' => $request->employment_status,
                     'department_id' => $request->department_id,
                     'designation_id' => $request->designation_id,
                     'staff_qualification_id' => $request->staff_qualification_id,
@@ -2710,18 +2712,21 @@ class ApiController extends BaseController
                     if (isset($request->role_user_id) && isset($request->password)) {
                         $user = User::find($request->role_user_id);
                         $user->email = $request->email;
+                        $user->name = (isset($request->first_name) ? $request->first_name : "") . " " . (isset($request->last_name) ? $request->last_name : "");
                         $user->picture = $fileName;
                         $user->password = bcrypt($request->password);
                         $updateUser = $user->save();
                     }
                     if (isset($request->role_user_id) && isset($request->email)) {
                         $user = User::find($request->role_user_id);
+                        $user->name = (isset($request->first_name) ? $request->first_name : "") . " " . (isset($request->last_name) ? $request->last_name : "");
                         $user->email = $request->email;
                         $user->picture = $fileName;
                         $updateUser = $user->save();
                     }
                     if (isset($request->old_photo) && empty($request->photo)) {
                         $user = User::find($request->role_user_id);
+                        $user->name = (isset($request->first_name) ? $request->first_name : "") . " " . (isset($request->last_name) ? $request->last_name : "");
                         $user->picture = $fileName;
                         $updateUser = $user->save();
                     }
@@ -7196,7 +7201,7 @@ class ApiController extends BaseController
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
             $success = $Connection->table('calendors as cl')
-                ->select('cl.id', 'cl.class_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id','cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as color', 'sb.name as subject_name', 'sb.name as title', 'st.name as teacher_name', 'dr.report')
+                ->select('cl.id', 'cl.class_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id', 'cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as color', 'sb.name as subject_name', 'sb.name as title', 'st.name as teacher_name', 'dr.report')
                 ->join('classes as c', 'cl.class_id', '=', 'c.id')
                 ->join('sections as s', 'cl.section_id', '=', 's.id')
                 ->join('staffs as st', 'cl.teacher_id', '=', 'st.id')
@@ -7224,43 +7229,42 @@ class ApiController extends BaseController
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
             // create new connection
-        // ->leftJoin('subject_assigns as s', function ($join) use ($teacherId) {
-        //     $join->on('e.selected_list', '=', 's.class_id')
-        //         ->where('s.teacher_id', $teacherId);
-        // })
-        // // ->when('e.auidence' == "1", function ($q)  use ($teacherId) {
-        // //     $q->where('s.teacher_id', $teacherId);
-        // // })->leftJoin('events as e', 'c.event_id', '=', 'e.id')
+            // ->leftJoin('subject_assigns as s', function ($join) use ($teacherId) {
+            //     $join->on('e.selected_list', '=', 's.class_id')
+            //         ->where('s.teacher_id', $teacherId);
+            // })
+            // // ->when('e.auidence' == "1", function ($q)  use ($teacherId) {
+            // //     $q->where('s.teacher_id', $teacherId);
+            // // })->leftJoin('events as e', 'c.event_id', '=', 'e.id')
             $Connection = $this->createNewConnection($request->branch_id);
             $teacherId = $request->teacher_id;
             $event = $Connection->table('calendors as c')
-                                ->select('c.id','c.title','c.title as subject_name','c.class_id','s.teacher_id', 'c.start', 'c.end','c.event_id','et.name as event_type','e.id as event_id','e.remarks','e.audience','e.selected_list', 'e.start_date', 'e.end_date')
-                                ->leftJoin('subject_assigns as s', 'c.class_id', '=', 's.class_id')
-                                ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
-                                ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
-                                ->whereNotNull('c.event_id')
-                                ->where('s.teacher_id', $teacherId)
-                                ->groupBy('c.event_id')
-                                ->get();
+                ->select('c.id', 'c.title', 'c.title as subject_name', 'c.class_id', 's.teacher_id', 'c.start', 'c.end', 'c.event_id', 'et.name as event_type', 'e.id as event_id', 'e.remarks', 'e.audience', 'e.selected_list', 'e.start_date', 'e.end_date')
+                ->leftJoin('subject_assigns as s', 'c.class_id', '=', 's.class_id')
+                ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
+                ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
+                ->whereNotNull('c.event_id')
+                ->where('s.teacher_id', $teacherId)
+                ->groupBy('c.event_id')
+                ->get();
             $success = [];
             foreach ($event as $eve) {
                 $data = $eve;
                 $class_name = "";
-                if ($eve->audience == "2")   {
+                if ($eve->audience == "2") {
                     $class = json_decode($eve->selected_list);
-                    foreach($class as $cla) {
+                    foreach ($class as $cla) {
                         $name = $Connection->table('classes')->where('id', $cla)->first();
-                        $class_name .= $name->name.', ';
+                        $class_name .= $name->name . ', ';
                     }
                     $cname = rtrim($class_name, ", ");
                     $data->class_name = $cname;
-                    
                 } else {
                     $data->class_name = "EveryOne";
                 }
                 $data->className = "bg-primary";
                 array_push($success, $data);
-            }     
+            }
             return $this->successResponse($success, 'Event data Fetched successfully');
         }
     }
@@ -7278,34 +7282,32 @@ class ApiController extends BaseController
             $Connection = $this->createNewConnection($request->branch_id);
             $studentId = $request->student_id;
             $event = $Connection->table('calendors as c')
-                                ->select('c.id','c.title','c.title as subject_name','c.class_id','en.student_id', 'c.start', 'c.end', 'et.name as event_type','e.id as event_id','e.remarks','e.audience','e.selected_list', 'e.start_date', 'e.end_date')
-                                ->leftJoin('enrolls as en', 'c.class_id', '=', 'en.class_id')
-                                ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
-                                ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
-                                ->whereNotNull('c.event_id')
-                                ->where('en.student_id', $studentId)
-                                ->groupBy('c.event_id')
-                                ->get();
+                ->select('c.id', 'c.title', 'c.title as subject_name', 'c.class_id', 'en.student_id', 'c.start', 'c.end', 'et.name as event_type', 'e.id as event_id', 'e.remarks', 'e.audience', 'e.selected_list', 'e.start_date', 'e.end_date')
+                ->leftJoin('enrolls as en', 'c.class_id', '=', 'en.class_id')
+                ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
+                ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
+                ->whereNotNull('c.event_id')
+                ->where('en.student_id', $studentId)
+                ->groupBy('c.event_id')
+                ->get();
             $success = [];
             foreach ($event as $eve) {
                 $data = $eve;
                 $class_name = "";
-                if ($eve->audience == "2")   {
+                if ($eve->audience == "2") {
                     $class = json_decode($eve->selected_list);
-                    foreach($class as $cla) {
+                    foreach ($class as $cla) {
                         $name = $Connection->table('classes')->where('id', $cla)->first();
-                        $class_name .= $name->name.', ';
+                        $class_name .= $name->name . ', ';
                     }
                     $cname = rtrim($class_name, ", ");
                     $data->class_name = $cname;
-                    
-                    
                 } else {
                     $data->class_name = "EveryOne";
                 }
                 $data->className = "bg-primary";
                 array_push($success, $data);
-            }    
+            }
             return $this->successResponse($success, 'Event data Fetched successfully');
         }
     }
@@ -7321,32 +7323,31 @@ class ApiController extends BaseController
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
             $event = $Connection->table('calendors as c')
-                                ->select('c.id','c.title','c.title as subject_name', 'et.name as event_type', 'c.class_id', 'c.start', 'c.end','e.id as event_id','e.remarks','e.audience','e.selected_list', 'e.start_date', 'e.end_date' )
-                                ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
-                                ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
-                                ->whereNotNull('c.event_id')
-                                ->groupBy('c.event_id')
-                                ->get();
+                ->select('c.id', 'c.title', 'c.title as subject_name', 'et.name as event_type', 'c.class_id', 'c.start', 'c.end', 'e.id as event_id', 'e.remarks', 'e.audience', 'e.selected_list', 'e.start_date', 'e.end_date')
+                ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
+                ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
+                ->whereNotNull('c.event_id')
+                ->groupBy('c.event_id')
+                ->get();
 
             $success = [];
             foreach ($event as $eve) {
                 $data = $eve;
                 $class_name = "";
-                if ($eve->audience == "2")   {
+                if ($eve->audience == "2") {
                     $class = json_decode($eve->selected_list);
-                    foreach($class as $cla) {
+                    foreach ($class as $cla) {
                         $name = $Connection->table('classes')->where('id', $cla)->first();
-                        $class_name .= $name->name.', ';
+                        $class_name .= $name->name . ', ';
                     }
                     $cname = rtrim($class_name, ", ");
                     $data->class_name = $cname;
-                    
                 } else {
                     $data->class_name = "EveryOne";
                 }
                 $data->className = "bg-primary";
                 array_push($success, $data);
-            }     
+            }
             return $this->successResponse($success, 'Event data Fetched successfully');
         }
     }

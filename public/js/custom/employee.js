@@ -103,24 +103,25 @@ $(function () {
     // rules validation
     $("#addEmployeeForm").validate({
         rules: {
+            first_name: "required",
             role_id: "required",
-            joining_date: "required",
+            // joining_date: "required",
             email: {
                 required: true,
                 email: true
             },
-            designation_id: "required",
-            department_id: "required",
-            qualification: "required",
-            race: "required",
-            name: "required",
-            gender: "required",
-            religion: "required",
-            blood_group: "required",
-            birthday: "required",
-            mobile_no: "required",
-            present_address: "required",
-            permanent_address: "required",
+            // designation_id: "required",
+            // department_id: "required",
+            // qualification: "required",
+            // race: "required",
+            // name: "required",
+            // gender: "required",
+            // religion: "required",
+            // blood_group: "required",
+            // birthday: "required",
+            // mobile_no: "required",
+            // present_address: "required",
+            // permanent_address: "required",
             password: {
                 required: true,
                 minlength: 5
@@ -136,10 +137,10 @@ $(function () {
             bank_address: "required",
             ifsc_code: "required",
             account_no: "required",
-            city: "required",
-            state: "required",
-            country: "required",
-            post_code: "required"
+            // city: "required",
+            // state: "required",
+            // country: "required",
+            // post_code: "required"
         }
     });
     // save employee
@@ -161,7 +162,11 @@ $(function () {
             formData.append('joining_date', convertDigitIn($('#joiningDate').val()));
             formData.append('designation_id', $('#empDesignation').val());
             formData.append('department_id', $('#empDepartment').val());
-            formData.append('name', $('#userName').val());
+            // formData.append('name', $('#userName').val());
+            formData.append('first_name', $('#firstName').val());
+            formData.append('last_name', $('#lastName').val());
+            formData.append('short_name', $('#shortName').val());
+            formData.append('employment_status', $('#employment_status').val());
             formData.append('gender', $('#gender').val());
             formData.append('religion', $('#religion').val());
             formData.append('blood_group', $('#blood_group').val());
@@ -237,23 +242,23 @@ $(function () {
     $("#editEmployeeForm").validate({
         rules: {
             role_id: "required",
-            joining_date: "required",
+            // joining_date: "required",
             email: {
                 required: true,
                 email: true
             },
-            designation_id: "required",
-            department_id: "required",
-            qualification: "required",
-            race: "required",
-            name: "required",
-            gender: "required",
-            religion: "required",
-            blood_group: "required",
-            birthday: "required",
-            mobile_no: "required",
-            present_address: "required",
-            permanent_address: "required",
+            // designation_id: "required",
+            // department_id: "required",
+            // qualification: "required",
+            // race: "required",
+            // name: "required",
+            // gender: "required",
+            // religion: "required",
+            // blood_group: "required",
+            // birthday: "required",
+            // mobile_no: "required",
+            // present_address: "required",
+            // permanent_address: "required",
             // password: {
             //     required: true,
             //     minlength: 5
@@ -269,10 +274,10 @@ $(function () {
             bank_address: "required",
             ifsc_code: "required",
             account_no: "required",
-            city: "required",
-            state: "required",
-            country: "required",
-            post_code: "required"
+            // city: "required",
+            // state: "required",
+            // country: "required",
+            // post_code: "required"
         }
 
     });
@@ -295,7 +300,12 @@ $(function () {
             formData.append('joining_date', convertDigitIn($('#joiningDate').val()));
             formData.append('designation_id', $('#empDesignation').val());
             formData.append('department_id', $('#empDepartment').val());
-            formData.append('name', $('#userName').val());
+            // formData.append('name', $('#userName').val());
+            formData.append('first_name', $('#firstName').val());
+            formData.append('last_name', $('#lastName').val());
+            formData.append('short_name', $('#shortName').val());
+            formData.append('employment_status', $('#employment_status').val());
+
             formData.append('gender', $('#gender').val());
             formData.append('religion', $('#religion').val());
             formData.append('blood_group', $('#blood_group').val());
@@ -429,7 +439,6 @@ $(function () {
                 "className": "table-user",
                 "render": function (data, type, row, meta) {
                     var img = (row.photo != null) ? employeeImg + '/' + row.photo : defaultImg;
-                    console.log(img)
                     var first_name = '<img src="' + img + '" class="mr-2 rounded-circle">' +
                         '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
                     return first_name;
