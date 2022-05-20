@@ -385,6 +385,13 @@ return [
         // teacher leave approve
         'teacher_leave_approve'=>$url.'/teacher_leave_approve',
         'leave_reupload_file'=>$url.'/std_leave_apply/reupload_file',
+
+        // leave type url
+        'leave_type_add' => $url.'/leave_type/add',
+        'leave_type_list' => $url.'/leave_type/list',
+        'leave_type_details' => $url.'/leave_type/leave_type-details',
+        'leave_type_update' => $url.'/leave_type/update',
+        'leave_type_delete' => $url.'/leave_type/delete',
     ]
 
 ];

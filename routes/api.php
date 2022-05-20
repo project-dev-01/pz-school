@@ -418,4 +418,11 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
     Route::get('get_birthday_calendor_teacher', [ApiController::class, 'getBirthdayCalendorTeacher']);
     Route::get('get_birthday_calendor_admin', [ApiController::class, 'getBirthdayCalendorAdmin']);
+
+     // Leave Type routes
+     Route::post('leave_type/add', [ApiController::class, 'addLeaveType']);
+     Route::get('leave_type/list', [ApiController::class, 'getLeaveTypeList']);
+     Route::post('leave_type/leave_type-details', [ApiController::class, 'getLeaveTypeDetails']);
+     Route::post('leave_type/update', [ApiController::class, 'updateLeaveType']);
+     Route::post('leave_type/delete', [ApiController::class, 'deleteLeaveType']);
 });

@@ -7273,6 +7273,70 @@ class ApiController extends BaseController
             return $this->successResponse($success, 'calendor data get successfully');
         }
     }
+    // getBirthdayCalendorTeacher
+    public function getBirthdayCalendorTeacher(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'teacher_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $date = now()->format('Y-m-d');
+            $day = now()->format('d');
+            $month = now()->format('m');
+            $Connection = $this->createNewConnection($request->branch_id);
+            $birthday = $Connection->table('staffs as s')
+                ->select('s.id', 's.name', 's.birthday')
+                ->whereMonth("s.birthday",$month)
+                ->whereDay("s.birthday",$day)
+                ->where('id',$request->teacher_id)
+                ->get();
+            $success = [];
+            foreach ($birthday as $birth) {
+                $data = $birth;
+                $data->title = $birth->name." Birthday";
+                $data->start = $date;
+                $data->end = $date;
+                $data->className = "bg-success";
+                array_push($success, $data);
+            }        
+            return $this->successResponse($success, 'Birthday Calendor data get successfully');
+        }
+    }
+    // getBirthdayCalendorAdmin
+    public function getBirthdayCalendorAdmin(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $date = now()->format('Y-m-d');
+            $day = now()->format('d');
+            $month = now()->format('m');
+            $Connection = $this->createNewConnection($request->branch_id);
+            $birthday = $Connection->table('staffs as s')
+                ->select('s.id', 's.name', 's.birthday')
+                ->whereMonth("s.birthday",$month)
+                ->whereDay("s.birthday",$day)
+                ->get();
+            $success = [];
+            foreach ($birthday as $birth) {
+                $data = $birth;
+                $data->title = $birth->name." Birthday";
+                $data->start = $date;
+                $data->end = $date;
+                $data->className = "bg-success";
+                array_push($success, $data);
+            }        
+            return $this->successResponse($success, 'Birthday Calendor data get successfully');
+        }
+    }
 
     // getEventCalendor
     public function getEventCalendor(Request $request)
@@ -11871,6 +11935,140 @@ class ApiController extends BaseController
                 ->orderBy('lev.from_leave', 'asc')
                 ->get();
             return $this->successResponse($studentDetails, 'Student details fetch successfully');
+        }
+    }
+
+    // addLeaveType
+    public function addLeaveType(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('leave_types')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // insert data
+                $query = $conn->table('leave_types')->insert([
+                    'name' => $request->name,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Leave Type has been successfully saved');
+                }
+            }
+        }
+    }
+    // getLeaveTypeList
+    public function getLeaveTypeList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $leaveTypeDetails = $conn->table('leave_types')->get();
+            return $this->successResponse($leaveTypeDetails, 'Leave Type record fetch successfully');
+        }
+    }
+    // get LeaveType row details
+    public function getLeaveTypeDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $leaveTypeDetails = $conn->table('leave_types')->where('id', $id)->first();
+            return $this->successResponse($leaveTypeDetails, 'Leave Type row fetch successfully');
+        }
+    }
+    // update LeaveType
+    public function updateLeaveType(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('leave_types')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // update data
+                $query = $conn->table('leave_types')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Leave Type Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+            }
+        }
+    }
+    // delete LeaveType
+    public function deleteLeaveType(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('leave_types')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Leave Type have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
         }
     }
 }
