@@ -418,6 +418,28 @@
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
+
+            <div class="modal fade " id="birthday-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myviewBirthdayModalLabel"> <i class="fas fa-info-circle"></i> Birthday </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-box">
+                                        <div class="table-responsive">
+                                            <p class="text-center"> Happy Birthday <span id="name"></span></p>
+                                        </div>
+                                    </div> <!-- end card-box -->
+                                </div> <!-- end col -->
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
         </div>
         <!-- end col-12 -->
     </div> <!-- end row -->
@@ -427,6 +449,7 @@
 @endsection
 @section('scripts')
 <script>
+    var getBirthdayCalendorAdmin = "{{ config('constants.api.get_birthday_calendor_admin') }}";
     var getEventCalendorAdmin = "{{ config('constants.api.get_event_calendor_admin') }}";
     var readUpdateTodoUrl = "{{ config('constants.api.read_update_todo') }}";
     var getAssignClassUrl = "{{ config('constants.api.get_assign_class') }}";

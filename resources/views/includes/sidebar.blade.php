@@ -1011,12 +1011,12 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('admin.hostel.room')}}" class="nav-link {{ (request()->is('admin/hostel/room')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.hostel_room')}}" class="nav-link {{ (request()->is('admin/hostel/room')) ? 'active' : '' }}">
                                                 <span> Hostel Room </span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('admin.hostel.category')}}" class="nav-link {{ (request()->is('admin/hostel/category')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.hostel_category')}}" class="nav-link {{ (request()->is('admin/hostel/category')) ? 'active' : '' }}">
                                                 <span> Category </span>
                                             </a>
                                         </li>

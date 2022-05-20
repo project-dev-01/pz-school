@@ -66,6 +66,16 @@
                 l("#audience").html(e.event.extendedProps.class_name),
                 l("#description").html(e.event.extendedProps.remarks)
                 l("#setCurDate").val(setCurDate)
+        } else if (e.event.extendedProps.birthday){
+            this.$modal = l("#birthday-modal")
+            var start = e.event.start;
+            var end = e.event.end;
+            var setCurDate = formatDate(end);
+            this.$newEventData = null, this.$btnDeleteEvent.show(), this.$modalTitle.text("Edit Event"), this.$modal.modal({
+                backdrop: "static"
+            }), this.$selectedEvent = e.event,
+                l("#name").html(e.event.extendedProps.name),
+                l("#setCurDate").val(setCurDate)
         } else{
             this.$modal = l("#teacher-modal")
             var start = e.event.start;
@@ -96,7 +106,7 @@
     },
         e.prototype.init = function () {
 
-            var t,m = [],
+            var t,m,b = [],
 
                 a = this;
             a.$calendarObj = new FullCalendar.Calendar(a.$calendar[0], {
@@ -138,6 +148,13 @@
                     success: function (response) {
                         m = response.data;
                         return m;
+                    }
+                },{
+                    url: getBirthdayCalendor + '?token=' + token + '&branch_id=' + branchID + '&teacher_id=' + ref_user_id,
+                    type: 'get',
+                    success: function (response) {
+                        b = response.data;
+                        return b;
                     }
                 }],
                 // get events details start

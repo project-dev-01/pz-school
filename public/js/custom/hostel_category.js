@@ -1,20 +1,20 @@
 $(function () {
 
-    eventTypeTable();
-    $("#eventTypeForm").validate({
+    hostelCategoryTable();
+    $("#hostelCategoryForm").validate({
         rules: {
             name: "required"
         }
     });
-    $("#edit-event-type-form").validate({
+    $("#edit-hostel-category-form").validate({
         rules: {
             name: "required"
         }
     });
-    // add eventType
-    $('#eventTypeForm').on('submit', function (e) {
+    // add hostelCategory
+    $('#hostelCategoryForm').on('submit', function (e) {
         e.preventDefault();
-        var eventCheck = $("#eventTypeForm").valid();
+        var eventCheck = $("#hostelCategoryForm").valid();
         if (eventCheck === true) {
             var form = this;
 
@@ -29,9 +29,9 @@ $(function () {
                     // console.log("------")
                     console.log(data)
                     if (data.code == 200) {
-                        $('#event-type-table').DataTable().ajax.reload(null, false);
-                        $('.addEventType').modal('hide');
-                        $('.addEventType').find('form')[0].reset();
+                        $('#hostel-category-table').DataTable().ajax.reload(null, false);
+                        $('.addHostelCategory').modal('hide');
+                        $('.addHostelCategory').find('form')[0].reset();
                         toastr.success(data.message);
                     } else {
                         toastr.error(data.message);
@@ -41,13 +41,13 @@ $(function () {
         }
     });
 
-    // get all eventType table
-    function eventTypeTable() {
-         $('#event-type-table').DataTable({
+    // get all hostelCategory table
+    function hostelCategoryTable() {
+         $('#hostel-category-table').DataTable({
             processing: true,
             info: true,
             bDestroy:true,
-            ajax: eventTypeList,
+            ajax: hostelCategoryList,
             "pageLength": 5,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
@@ -75,21 +75,21 @@ $(function () {
         });
     }
     // get row
-    $(document).on('click', '#editEventTypeBtn', function () {
+    $(document).on('click', '#editHostelCategoryBtn', function () {
         var id = $(this).data('id');
      
-        $('.editEventType').find('form')[0].reset();   
-        $.post(eventTypeDetails, { id: id }, function (data) {
-            $('.editEventType').find('input[name="id"]').val(data.data.id);
-            $('.editEventType').find('input[name="name"]').val(data.data.name);
-            $('.editEventType').modal('show');
+        $('.editHostelCategory').find('form')[0].reset();   
+        $.post(hostelCategoryDetails, { id: id }, function (data) {
+            $('.editHostelCategory').find('input[name="id"]').val(data.data.id);
+            $('.editHostelCategory').find('input[name="name"]').val(data.data.name);
+            $('.editHostelCategory').modal('show');
         }, 'json');
         console.log(id);
     });
-    // update EventType
-    $('#edit-event-type-form').on('submit', function (e) {
+    // update HostelCategory
+    $('#edit-hostel-category-form').on('submit', function (e) {
         e.preventDefault();
-        var edt_eventCheck = $("#edit-event-type-form").valid();
+        var edt_eventCheck = $("#edit-hostel-category-form").valid();
         if (edt_eventCheck === true) {
       
             var form = this;
@@ -108,13 +108,13 @@ $(function () {
                     } else {
 
                         if (data.code == 200) {
-                            $('#event-type-table').DataTable().ajax.reload(null, false);
-                            $('.editEventType').modal('hide');
-                            $('.editEventType').find('form')[0].reset();
+                            $('#hostel-category-table').DataTable().ajax.reload(null, false);
+                            $('.editHostelCategory').modal('hide');
+                            $('.editHostelCategory').find('form')[0].reset();
                             toastr.success(data.message);
                         } else {
-                            $('.editEventType').modal('hide');
-                            $('.editEventType').find('form')[0].reset();
+                            $('.editHostelCategory').modal('hide');
+                            $('.editHostelCategory').find('form')[0].reset();
                             toastr.error(data.message);
                         }
                     }
@@ -122,10 +122,10 @@ $(function () {
             });
         }
     });
-    // delete EventTypeDelete
-    $(document).on('click', '#deleteEventTypeBtn', function () {
+    // delete HostelCategoryDelete
+    $(document).on('click', '#deleteHostelCategoryBtn', function () {
         var id = $(this).data('id');
-        var url = eventTypeDelete;
+        var url = hostelCategoryDelete;
         swal.fire({
             title: 'Are you sure?',
             html: 'You want to <b>delete</b> this Event Type',
@@ -143,7 +143,7 @@ $(function () {
                     id: id
                 }, function (data) {
                     if (data.code == 200) {
-                        $('#event-type-table').DataTable().ajax.reload(null, false);
+                        $('#hostel-category-table').DataTable().ajax.reload(null, false);
                         toastr.success(data.message);
                     } else {
                         toastr.error(data.message);

@@ -1,142 +1,72 @@
 @extends('layouts.admin-layout')
-@section('title','Hostel Master')
+@section('title','Hostel')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
-    
-        <!-- start page title -->
+
+    <!-- start page title -->
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
                 <div class="page-title-right">
-                    <!--<ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                        <li class="breadcrumb-item active">Branch</li>
-                    </ol>-->
-                </div> 
-                <h4 class="page-title">Hostel Master</h4>
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item active">List</li>
+                        <!-- <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li> -->
+                    </ol>
+                </div>
+                <h4 class="page-title">Hostel</h4>
             </div>
         </div>
-    </div>     
+    </div>
     <!-- end page title -->
+
     <div class="row">
-        <div class="col-xl-12">
+        <div class="col-lg-12">
             <div class="card-box">
-                <ul class="nav nav-tabs nav-bordered">
-                    <li class="nav-item">
-                        <a href="#profile-b1" data-toggle="tab" aria-expanded="true" class="nav-link active">
-                            Hostel List
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#home-b1" data-toggle="tab" aria-expanded="false" class="nav-link">
-                            Create Hostel
-                        </a>
-                    </li> 
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane show active" id="profile-b1">
-                            <div class="table-responsive">
-                        <table class="table table-bordered mb-0">
+                <h4 class="header-title">Hostel</h4>
+                <p class="sub-header">
+                <div class="form-group pull-right">
+                    <div class="col-xs-2 col-sm-2">
+                        <!-- <a href="{{ route('admin.add_classes')}}" class="btn btn-primary btn-rounded waves-effect waves-light">Add Class</a> -->
+                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addHostelModal">Add Hostel</button>
+                    </div>
+                </div>
+                </p>
+
+                <div class="table-responsive">
+                    <table class="table mb-0 text-center" id="hostel-table">
                         <thead>
                             <tr>
-                                <th>S.No</th>
+                                <th>#</th>
                                 <th>Hostel Name</th>
                                 <th>Category</th>
-                                <th>Watchman Name</th>
+                                <th>Warden</th>
                                 <th>Remarks</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Men's</td>
-                                <td>Block A</td>
-                                <td>Kathir Vel</td>
-                                <td>Good</td>
-                            </tr>
                         </tbody>
                     </table>
-                </div> <!-- end table-responsive-->
-                    </div>
-                    <div class="tab-pane" id="home-b1">
-                        <form id="demo-form" >                                         
-                    <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8">
-                    <div class="col-md-12">
-                    <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Hostel Name<span class="text-danger">*</span></label>
-                        <div class="col-9">
-                            <input type="email" required parsley-type="email" class="form-control"
-                                    id="inputEmail3" placeholder="">
-                        </div>
-                    </div>
-                    </div>
-                    <div class="col-md-12">
-                    <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Category<span class="text-danger">*</span></label>
-                        <div class="col-9">
-                            <select id="heard" class="form-control" required="">
-                            <option value="">select</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="mouth">Word of mouth</option>
-                            <option value="other">Other..</option>
-                        </select>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="col-md-12">
-                    <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Watchman Name<span class="text-danger">*</span></label>
-                        <div class="col-9">
-                            <input type="email" required parsley-type="email" class="form-control"
-                                    id="inputEmail3" placeholder="">
-                        </div>
-                    </div>
-                    </div>
-                    <div class="col-md-12">
-                    <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Hostel Address<span class="text-danger">*</span></label>
-                        <div class="col-9">
-                            <input type="email" required parsley-type="email" class="form-control"
-                                    id="inputEmail3" placeholder="">
-                        </div>
-                    </div>
-                    </div>
-                    <div class="col-md-12">
-                    <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Remarks<span class="text-danger">*</span></label>
-                        <div class="col-9">
-                            <input type="email" required parsley-type="email" class="form-control"
-                                    id="inputEmail3" placeholder="">
-                        </div>
-                    </div>
-                    </div>
-                   
-                    </div>										
-                    <div class="col-md-2"></div>
-                    </div>										  
-                </form>
-                <div class="col-8 offset-4" style="margin-left:34%;">
-                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
-                                Save
-                            </button>
-                            
-                        </div> 
-                    </div>
                 </div>
-            </div> <!-- end card-box-->
+            </div> <!-- end card-box -->
         </div> <!-- end col -->
-
     </div>
-    <!-- end row -->
-
-        
-</div> <!-- container -->
-
+    <!--- end row -->
+    @include('admin.hostel.add')
+    @include('admin.hostel.edit')
 </div>
 <!-- container -->
+@endsection
+@section('scripts')
+
+<script>
+  //hostel routes
+    var hostelList = "{{ route('admin.hostel.list') }}";
+    var hostelDetails = "{{ route('admin.hostel.details') }}";
+    var hostelDelete = "{{ route('admin.hostel.delete') }}";
+</script>
+
+<script src="{{ asset('js/custom/hostel.js') }}"></script>
+
 @endsection

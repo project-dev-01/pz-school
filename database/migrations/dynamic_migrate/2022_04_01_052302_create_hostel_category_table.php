@@ -16,8 +16,6 @@ class CreateHostelCategoryTable extends Migration
         Schema::create('hostel_category', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description');
-            $table->text('type');
             $table->timestamps();
         });
     }

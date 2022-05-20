@@ -1,21 +1,21 @@
 $(function () {
 
-    eventTypeTable();
-    $("#eventTypeForm").validate({
+    hostelTable();
+    $("#hostelForm").validate({
         rules: {
             name: "required"
         }
     });
-    $("#edit-event-type-form").validate({
+    $("#edit-hostel-form").validate({
         rules: {
             name: "required"
         }
     });
-    // add eventType
-    $('#eventTypeForm').on('submit', function (e) {
+    // add hostel
+    $('#hostelForm').on('submit', function (e) {
         e.preventDefault();
-        var eventCheck = $("#eventTypeForm").valid();
-        if (eventCheck === true) {
+        var hostelCheck = $("#hostelForm").valid();
+        if (hostelCheck === true) {
             var form = this;
 
             $.ajax({
@@ -29,9 +29,9 @@ $(function () {
                     // console.log("------")
                     console.log(data)
                     if (data.code == 200) {
-                        $('#event-type-table').DataTable().ajax.reload(null, false);
-                        $('.addEventType').modal('hide');
-                        $('.addEventType').find('form')[0].reset();
+                        $('#hostel-table').DataTable().ajax.reload(null, false);
+                        $('.addHostel').modal('hide');
+                        $('.addHostel').find('form')[0].reset();
                         toastr.success(data.message);
                     } else {
                         toastr.error(data.message);
@@ -41,13 +41,12 @@ $(function () {
         }
     });
 
-    // get all eventType table
-    function eventTypeTable() {
-         $('#event-type-table').DataTable({
+    // get all hostel table
+    function hostelTable() {
+         $('#hostel-table').DataTable({
             processing: true,
             info: true,
-            bDestroy:true,
-            ajax: eventTypeList,
+            ajax: hostelList,
             "pageLength": 5,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
@@ -59,10 +58,22 @@ $(function () {
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex'
                 }
-                ,
+               ,
                 {
                     data: 'name',
                     name: 'name'
+                },
+                {
+                    data: 'category',
+                    name: 'category'
+                },
+                {
+                    data: 'watchman',
+                    name: 'watchman'
+                },
+                {
+                    data: 'remarks',
+                    name: 'remarks'
                 },
                 {
                     data: 'actions',
@@ -75,22 +86,26 @@ $(function () {
         });
     }
     // get row
-    $(document).on('click', '#editEventTypeBtn', function () {
+    $(document).on('click', '#editHostelBtn', function () {
         var id = $(this).data('id');
      
-        $('.editEventType').find('form')[0].reset();   
-        $.post(eventTypeDetails, { id: id }, function (data) {
-            $('.editEventType').find('input[name="id"]').val(data.data.id);
-            $('.editEventType').find('input[name="name"]').val(data.data.name);
-            $('.editEventType').modal('show');
+        $('.editHostel').find('form')[0].reset();   
+        $.post(hostelDetails, { id: id }, function (data) {
+            $('.editHostel').find('input[name="id"]').val(data.data.id);
+            $('.editHostel').find('input[name="name"]').val(data.data.name);
+            $('.editHostel').find('select[name="category"]').val(data.data.category_id);
+            $('.editHostel').find('input[name="watchman"]').val(data.data.watchman);
+            $('.editHostel').find('input[name="address"]').val(data.data.address);
+            $('.editHostel').find('textarea[name="remarks"]').text(data.data.remarks);
+            $('.editHostel').modal('show');
         }, 'json');
         console.log(id);
     });
-    // update EventType
-    $('#edit-event-type-form').on('submit', function (e) {
+    // update Hostel
+    $('#edit-hostel-form').on('submit', function (e) {
         e.preventDefault();
-        var edt_eventCheck = $("#edit-event-type-form").valid();
-        if (edt_eventCheck === true) {
+        var edt_hostelCheck = $("#edit-hostel-form").valid();
+        if (edt_hostelCheck === true) {
       
             var form = this;
             $.ajax({
@@ -108,13 +123,13 @@ $(function () {
                     } else {
 
                         if (data.code == 200) {
-                            $('#event-type-table').DataTable().ajax.reload(null, false);
-                            $('.editEventType').modal('hide');
-                            $('.editEventType').find('form')[0].reset();
+                            $('#hostel-table').DataTable().ajax.reload(null, false);
+                            $('.editHostel').modal('hide');
+                            $('.editHostel').find('form')[0].reset();
                             toastr.success(data.message);
                         } else {
-                            $('.editEventType').modal('hide');
-                            $('.editEventType').find('form')[0].reset();
+                            $('.editHostel').modal('hide');
+                            $('.editHostel').find('form')[0].reset();
                             toastr.error(data.message);
                         }
                     }
@@ -122,13 +137,13 @@ $(function () {
             });
         }
     });
-    // delete EventTypeDelete
-    $(document).on('click', '#deleteEventTypeBtn', function () {
+    // delete HostelDelete
+    $(document).on('click', '#deleteHostelBtn', function () {
         var id = $(this).data('id');
-        var url = eventTypeDelete;
+        var url = hostelDelete;
         swal.fire({
             title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this Event Type',
+            html: 'You want to <b>delete</b> this Hostel',
             showCancelButton: true,
             showCloseButton: true,
             cancelButtonText: 'Cancel',
@@ -143,7 +158,7 @@ $(function () {
                     id: id
                 }, function (data) {
                     if (data.code == 200) {
-                        $('#event-type-table').DataTable().ajax.reload(null, false);
+                        $('#hostel-table').DataTable().ajax.reload(null, false);
                         toastr.success(data.message);
                     } else {
                         toastr.error(data.message);

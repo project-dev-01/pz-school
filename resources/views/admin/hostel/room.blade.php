@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Branch</li>
                     </ol>-->
                 </div> 
-                <h4 class="page-title">Hostel Room</h4>
+                <h4 class="page-title">Hostel Roomssssssssssssss</h4>
             </div>
         </div>
     </div>     

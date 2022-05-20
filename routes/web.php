@@ -491,8 +491,27 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('grade/delete', [AdminController::class, 'deleteGrade'])->name('admin.grade.delete');
         // Hostel routes
         Route::get('hostel/index', [AdminController::class, 'hostel'])->name('admin.hostel');
-        Route::get('hostel/category', [AdminController::class, 'getCategory'])->name('admin.hostel.category');
-        Route::get('hostel/room', [AdminController::class, 'getRoom'])->name('admin.hostel.room');
+        Route::get('hostel/list', [AdminController::class, 'getHostelList'])->name('admin.hostel.list');
+        Route::post('hostel/add', [AdminController::class, 'addHostel'])->name('admin.hostel.add');
+        Route::post('hostel/hostel-details', [AdminController::class, 'getHostelDetails'])->name('admin.hostel.details');
+        Route::post('hostel/update', [AdminController::class, 'updateHostel'])->name('admin.hostel.update');
+        Route::post('hostel/delete', [AdminController::class, 'deleteHostel'])->name('admin.hostel.delete');
+        
+        // Hostel Room routes
+        Route::get('hostel_room/index', [AdminController::class, 'hostelRoom'])->name('admin.hostel_room');
+        Route::get('hostel_room/list', [AdminController::class, 'getHostelRoomList'])->name('admin.hostel_room.list');
+        Route::post('hostel_room/add', [AdminController::class, 'addHostelRoom'])->name('admin.hostel_room.add');
+        Route::post('hostel_room/hostel_room-details', [AdminController::class, 'getHostelRoomDetails'])->name('admin.hostel_room.details');
+        Route::post('hostel_room/update', [AdminController::class, 'updateHostelRoom'])->name('admin.hostel_room.update');
+        Route::post('hostel_room/delete', [AdminController::class, 'deleteHostelRoom'])->name('admin.hostel_room.delete');
+
+        // Hostel Category routes
+        Route::get('hostel_category/index', [AdminController::class, 'hostelCategory'])->name('admin.hostel_category');
+        Route::get('hostel_category/list', [AdminController::class, 'getHostelCategoryList'])->name('admin.hostel_category.list');
+        Route::post('hostel_category/add', [AdminController::class, 'addHostelCategory'])->name('admin.hostel_category.add');
+        Route::post('hostel_category/hostel_category-details', [AdminController::class, 'getHostelCategoryDetails'])->name('admin.hostel_category.details');
+        Route::post('hostel_category/update', [AdminController::class, 'updateHostelCategory'])->name('admin.hostel_category.update');
+        Route::post('hostel_category/delete', [AdminController::class, 'deleteHostelCategory'])->name('admin.hostel_category.delete');
 
         // Transport routes
         Route::get('transport/route', [AdminController::class, 'getRoute'])->name('admin.transport.route');

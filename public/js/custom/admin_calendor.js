@@ -2,29 +2,43 @@
     "use strict";
 
     function e() {
-        this.$body = l("body"), this.$modal = l("#admin-modal"), this.$calendar = l("#admin_calendor"),  this.$btnNewEvent = l("#btn-new-event"), this.$btnDeleteEvent = l("#btn-delete-event"), this.$btnSaveEvent = l("#btn-save-event"), this.$modalTitle = l("#modal-title"), this.$calendarObj = null, this.$selectedEvent = null, this.$newEventData = null
+        this.$body = l("body"), this.$calendar = l("#admin_calendor"),  this.$btnNewEvent = l("#btn-new-event"), this.$btnDeleteEvent = l("#btn-delete-event"), this.$btnSaveEvent = l("#btn-save-event"), this.$modalTitle = l("#modal-title"), this.$calendarObj = null, this.$selectedEvent = null, this.$newEventData = null
     }
     e.prototype.onEventClick = function (e) {
 
-        var start = e.event.start_date;
-        var end = e.event.end_date;
-        var setCurDate = formatDate(end);
-         this.$newEventData = null, this.$btnDeleteEvent.show(), this.$modalTitle.text("Edit Event"), this.$modal.modal({
-            backdrop: "static"
-        }), this.$selectedEvent = e.event,
-            l("#title").html(this.$selectedEvent.title),
-            l("#type").html(e.event.extendedProps.event_type),
-            l("#start_date").html(e.event.extendedProps.start_date),
-            l("#end_date").html(e.event.extendedProps.end_date),
-            l("#audience").html(e.event.extendedProps.class_name),
-            l("#description").html(e.event.extendedProps.remarks)
-            l("#setCurDate").val(setCurDate)
+        if (e.event.extendedProps.birthday){
+            this.$modal = l("#birthday-modal")
+            var start = e.event.start;
+            var end = e.event.end;
+            var setCurDate = formatDate(end);
+            this.$newEventData = null, this.$btnDeleteEvent.show(), this.$modalTitle.text("Edit Event"), this.$modal.modal({
+                backdrop: "static"
+            }), this.$selectedEvent = e.event,
+                l("#name").html(e.event.extendedProps.name),
+                l("#setCurDate").val(setCurDate)
+        } else {
+            this.$modal = l("#admin-modal")
+            var start = e.event.start_date;
+            var end = e.event.end_date;
+            var setCurDate = formatDate(end);
+             this.$newEventData = null, this.$btnDeleteEvent.show(), this.$modalTitle.text("Edit Event"), this.$modal.modal({
+                backdrop: "static"
+            }), this.$selectedEvent = e.event,
+                l("#title").html(this.$selectedEvent.title),
+                l("#type").html(e.event.extendedProps.event_type),
+                l("#start_date").html(e.event.extendedProps.start_date),
+                l("#end_date").html(e.event.extendedProps.end_date),
+                l("#audience").html(e.event.extendedProps.class_name),
+                l("#description").html(e.event.extendedProps.remarks)
+                l("#setCurDate").val(setCurDate)
+        }
+        
 
         // l("#event-category").val(this.$selectedEvent.classNames[0])
     },
         e.prototype.init = function () {
-            var m = [],
 
+            var m,b = [],
                 a = this;
             a.$calendarObj = new FullCalendar.Calendar(a.$calendar[0], {
                 plugins: ["bootstrap", "interaction", "dayGrid", "timeGrid", "list"],
@@ -58,6 +72,13 @@
                     success: function (response) {
                         m = response.data;
                         return m;
+                    }
+                },{
+                    url: getBirthdayCalendorAdmin + '?token=' + token + '&branch_id=' + branchID,
+                    type: 'get',
+                    success: function (response) {
+                        b = response.data;
+                        return b;
                     }
                 }],
                 // get events details start

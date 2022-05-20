@@ -36,7 +36,7 @@
                     </div>
                     <div class="form-group" id="class">
                         <label for="class">Class</label>
-                        <select class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="class[]">
+                        <select class="form-control select2-multiple" data-toggle="select2"  name="class[]" multiple="multiple" data-placeholder="Choose ...">
                             @foreach($class as $cla)
                                 <option value="{{$cla['id']}}">{{$cla['name']}}</option>
                             @endforeach
@@ -50,15 +50,29 @@
                         <span class="text-danger error-text section_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="start_date">Start Date</label>
-                        <input class="form-control homeWorkAdd" id="start_date" type="date" name="start_date">
-                        <span class="text-danger error-text start_date_error"></span>
+                        <label for="start_date">Start Date<span class="text-danger">*</span></label>
+                        <div class="input-group input-group-merge">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <span class="far fa-calendar-alt"></span>
+                                </div>
+                            </div>
+                            <input type="text" class="form-control" name="start_date" id="start_date">
+                        </div>
                     </div>
+                    
                     <div class="form-group">
-                        <label for="end_date">End Date</label>
-                        <input class="form-control homeWorkAdd" id="end_date" type="date" name="end_date">
-                        <span class="text-danger error-text end_date_error"></span>
-                    </div> 
+                        <label for="end_date">End Date<span class="text-danger">*</span></label>
+                        <div class="input-group input-group-merge">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <span class="far fa-calendar-alt"></span>
+                                </div>
+                            </div>
+                            <input type="text" class="form-control" name="end_date" id="end_date">
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="description">Description</label>
                         <textarea class="form-control" name="description"></textarea>

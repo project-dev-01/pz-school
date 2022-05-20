@@ -197,8 +197,8 @@
 <script src="{{ asset('js/custom/settings.js') }}"></script> -->
 <!-- <script src="{{ asset('js/custom/section.js') }}"></script> -->
 <!-- <script src="{{ asset('js/custom/classes.js') }}"></script> -->
-<script src="{{ asset('js/custom/event_type.js') }}"></script>
-<script src="{{ asset('js/custom/event.js') }}"></script>
+<!-- <script src="{{ asset('js/custom/event_type.js') }}"></script> -->
+<!-- <script src="{{ asset('js/custom/event.js') }}"></script> -->
 <!-- <script src="{{ asset('js/custom/assign_teacher.js') }}"></script> -->
 <script src="{{ asset('js/custom/settings.js') }}"></script>
 <script src="{{ asset('js/custom/user_list.js') }}"></script>

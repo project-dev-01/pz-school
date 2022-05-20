@@ -17,8 +17,9 @@ class CreateHostelRoomTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('hostel_id');
+            $table->string('block');
+            $table->string('floor');
             $table->integer('no_of_beds');
-            $table->integer('category_id');
             $table->string('bed_fee');
             $table->text('remarks');
             $table->timestamps();

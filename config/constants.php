@@ -248,6 +248,8 @@ return [
         'get_child_subjects' => $url.'/get_child_subjects',
         'get_attendance_list_teacher' => $url.'/get_attendance_list_teacher',
         'get_reasons_by_student' => $url.'/get_reasons_by_student',
+        'get_birthday_calendor_teacher' => $url.'/get_birthday_calendor_teacher',
+        'get_birthday_calendor_admin' => $url.'/get_birthday_calendor_admin',
         
         
         
@@ -314,11 +316,27 @@ return [
 
         // get transport list
         'transport_list' => $url.'/transport/list',
-
-        // get hostel list
+        // hostel url
+        'hostel_add' => $url.'/hostel/add',
         'hostel_list' => $url.'/hostel/list',
+        'hostel_details' => $url.'/hostel/hostel-details',
+        'hostel_update' => $url.'/hostel/update',
+        'hostel_delete' => $url.'/hostel/delete',
 
-        
+        // hostel room url
+        'hostel_room_add' => $url.'/hostel_room/add',
+        'hostel_room_list' => $url.'/hostel_room/list',
+        'hostel_room_details' => $url.'/hostel_room/hostel_room-details',
+        'hostel_room_update' => $url.'/hostel_room/update',
+        'hostel_room_delete' => $url.'/hostel_room/delete',
+
+        // hostel category url
+        'hostel_category_add' => $url.'/hostel_category/add',
+        'hostel_category_list' => $url.'/hostel_category/list',
+        'hostel_category_details' => $url.'/hostel_category/hostel_category-details',
+        'hostel_category_update' => $url.'/hostel_category/update',
+        'hostel_category_delete' => $url.'/hostel_category/delete',
+
         'vehicle_by_route' => $url.'/vehicle-by-route',
         'room_by_hostel' => $url.'/room-by-hostel',
 

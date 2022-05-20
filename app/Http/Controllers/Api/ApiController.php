@@ -1651,6 +1651,7 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
+            $delete = $conn->table('calendors')->where('event_id', $event_id)->delete();
             $query = $conn->table('events')->where('id', $event_id)->delete();
             $success = [];
             if ($query) {
@@ -5527,7 +5528,9 @@ class ApiController extends BaseController
                     'sa.date',
                     'sa.student_behaviour',
                     'sa.classroom_behaviour',
-                    'sa.reasons'
+                    'sa.reasons',
+                    'st.birthday',
+                    'st.photo',
                 )
                 ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
                 ->leftJoin('student_attendances as sa', function ($q) use ($date, $subject_id) {
@@ -5540,8 +5543,57 @@ class ApiController extends BaseController
                     ['en.section_id', '=', $request->section_id]
                 ])
                 ->get();
-
             return $this->successResponse($getTeachersClassName, 'Attendance record fetch successfully');
+        }
+    }
+    // getReturnLayoutMode
+    function getReturnLayoutMode(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
+            'date' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            // get attendance details query
+            $date = $request->date;
+            $subject_id = $request->subject_id;
+            $Connection = $this->createNewConnection($request->branch_id);
+            $getTeachersClassName = $Connection->table('enrolls as en')
+                ->select(
+                    'en.student_id',
+                    'en.roll',
+                    'st.first_name',
+                    'st.last_name',
+                    'st.register_no',
+                    'sa.id as att_id',
+                    'sa.status as att_status',
+                    'sa.remarks as att_remark',
+                    'sa.date',
+                    'sa.student_behaviour',
+                    'sa.classroom_behaviour',
+                    'sa.reasons',
+                    'st.birthday',
+                    'st.photo',
+                )
+                ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
+                ->leftJoin('student_attendances as sa', function ($q) use ($date, $subject_id) {
+                    $q->on('sa.student_id', '=', 'st.id')
+                        ->on('sa.date', '=', DB::raw("'$date'")) //second join condition                           
+                        ->on('sa.subject_id', '=', DB::raw("'$subject_id'")); //need to add subject id also later                           
+                })
+                ->where([
+                    ['en.class_id', '=', $request->class_id],
+                    ['en.section_id', '=', $request->section_id]
+                ])
+                ->get();
+            return $getTeachersClassName;
         }
     }
     //add attendance
@@ -5568,7 +5620,7 @@ class ApiController extends BaseController
             $section_id = $request->section_id;
             $subject_id = $request->subject_id;
             $date = $request->date;
-            $data = [];
+            // $data = [];
             foreach ($attendance as $key => $value) {
                 // dd($value['attendance_id']);
                 $attStatus = (isset($value['att_status']) ? $value['att_status'] : "");
@@ -5590,12 +5642,6 @@ class ApiController extends BaseController
                     'created_at' => date("Y-m-d H:i:s")
 
                 );
-                $returnData = array(
-                    'att_status' => $attStatus,
-                    'first_name' => $value['first_name'],
-                    'last_name' => $value['last_name']
-                );
-                array_push($data, $returnData);
                 if ((empty($value['attendance_id']) || $value['attendance_id'] == "null")) {
                     if ($Connection->table('student_attendances')->where([
                         ['date', '=', $date],
@@ -5627,6 +5673,8 @@ class ApiController extends BaseController
                     ]);
                 }
             }
+
+            $data = $this->getReturnLayoutMode($request);
             return $this->successResponse($data, 'Attendance added successfuly.');
         }
     }
@@ -8585,6 +8633,43 @@ class ApiController extends BaseController
         }
     }
 
+    // addHostel
+    public function addHostel(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('hostel')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // insert data
+                $query = $conn->table('hostel')->insert([
+                    'name' => $request->name,
+                    'category_id' => $request->category,
+                    'watchman' => $request->watchman,
+                    'address' => $request->address,
+                    'remarks' => $request->remarks,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Hostel has been successfully saved');
+                }
+            }
+        }
+    }
     // get Hostel List
     public function getHostelList(Request $request)
     {
@@ -8599,11 +8684,387 @@ class ApiController extends BaseController
             // create new connection
             $Conn = $this->createNewConnection($request->branch_id);
             // get data
-            $Hostel = $Conn->table('hostel')->get();
+            $Hostel = $Conn->table('hostel')->select('hostel_category.name as category','hostel.*')->leftJoin('hostel_category', 'hostel.category_id', '=', 'hostel_category.id')->get();
             return $this->successResponse($Hostel, 'Hostel record fetch successfully');
         }
     }
+    // get Hostel row details
+    public function getHostelDetails(Request $request)
+    {
 
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $HostelDetails = $conn->table('hostel')->where('id', $id)->first();
+            return $this->successResponse($HostelDetails, 'Hostel row fetch successfully');
+        }
+    }
+    // update Hostel
+    public function updateHostel(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('hostel')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // update data
+                $query = $conn->table('hostel')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'category_id' => $request->category,
+                    'watchman' => $request->watchman,
+                    'address' => $request->address,
+                    'remarks' => $request->remarks,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Hostel Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+            }
+        }
+    }
+    // delete Hostel
+    public function deleteHostel(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('hostel')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Hostel have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+
+    // addHostelRoom
+    public function addHostelRoom(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'hostel_id' => 'required',
+            'no_of_beds' => 'required',
+            'block' => 'required',
+            'floor' => 'required',
+            'bed_fee' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('hostel_room')->where([['name', $request->name], ['block', $request->block]])->count() > 0) {
+                return $this->send422Error('Room Already Exist', ['error' => 'Room Already Exist']);
+            } else {
+                // insert data
+                $query = $conn->table('hostel_room')->insert([
+                    'name' => $request->name,
+                    'hostel_id' => $request->hostel_id,
+                    'no_of_beds' => $request->no_of_beds,
+                    'block' => $request->block,
+                    'floor' => $request->floor,
+                    'bed_fee' => $request->bed_fee,
+                    'remarks' => $request->remarks,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Hostel Room has been successfully saved');
+                }
+            }
+        }
+    }
+    // getHostelRoomList
+    public function getHostelRoomList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $HostelRoomDetails = $conn->table('hostel_room')->select('hostel_room.*','hostel.name as hostel')->leftJoin('hostel', 'hostel_room.hostel_id', '=', 'hostel.id')->get();
+            return $this->successResponse($HostelRoomDetails, 'Hostel Room record fetch successfully');
+        }
+    }
+    // get HostelRoom row details
+    public function getHostelRoomDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $HostelRoomDetails = $conn->table('hostel_room')->where('id', $id)->first();
+            return $this->successResponse($HostelRoomDetails, 'Hostel Room row fetch successfully');
+        }
+    }
+    // update HostelRoom
+    public function updateHostelRoom(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'hostel_id' => 'required',
+            'no_of_beds' => 'required',
+            'block' => 'required',
+            'floor' => 'required',
+            'bed_fee' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('hostel_room')->where([['name', '=', $request->name], ['block', $request->block], ['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Room Already Exist', ['error' => 'Room Already Exist']);
+            } else {
+                // update data
+                $query = $conn->table('hostel_room')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'hostel_id' => $request->hostel_id,
+                    'no_of_beds' => $request->no_of_beds,
+                    'block' => $request->block,
+                    'floor' => $request->floor,
+                    'bed_fee' => $request->bed_fee,
+                    'remarks' => $request->remarks,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Hostel Room Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+            }
+        }
+    }
+    // delete HostelRoom
+    public function deleteHostelRoom(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('hostel_room')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Hostel Room have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+
+    // addHostelCategory
+    public function addHostelCategory(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('hostel_category')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+
+                // insert data
+                $query = $conn->table('hostel_category')->insert([
+                    'name' => $request->name,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Hostel Category has been successfully saved');
+                }
+            }
+        }
+    }
+    // getHostelCategoryList
+    public function getHostelCategoryList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $HostelCategoryDetails = $conn->table('hostel_category')->get();
+            return $this->successResponse($HostelCategoryDetails, 'Hostel Category record fetch successfully');
+        }
+    }
+    // get HostelCategory row details
+    public function getHostelCategoryDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $HostelCategoryDetails = $conn->table('hostel_category')->where('id', $id)->first();
+            return $this->successResponse($HostelCategoryDetails, 'Hostel Category row fetch successfully');
+        }
+    }
+    // update HostelCategory
+    public function updateHostelCategory(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('hostel_category')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // update data
+                $query = $conn->table('hostel_category')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Hostel Category Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+            }
+        }
+    }
+    // delete HostelCategory
+    public function deleteHostelCategory(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('hostel_category')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Hostel Category have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
 
     // vehicle By Route 
     public function vehicleByRoute(Request $request)

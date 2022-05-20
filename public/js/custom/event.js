@@ -1,4 +1,40 @@
 $(function () {
+
+    // $("body").delegate("#start_date", "focusin", function(){
+    //     $(this).datepicker({
+    //             dateFormat: 'dd-mm-yy',
+    //             changeMonth: true,
+    //             changeYear: true,
+    //             autoclose: true,
+    //         });
+    // });
+
+    
+    $("#start_date").flatpickr();
+
+    $("#end_date").flatpickr();
+
+    // $('#addEventModal').on('shown.bs.modal', function() {
+    //     $('#start_date').datepicker({
+    //         dateFormat: 'dd-mm-yy',
+    //       changeMonth: true,
+    //       changeYear: true,
+    //       autoclose: true,
+    //     });
+    //  });
+    // $("#start_date").datepicker({
+    //     dateFormat: 'dd-mm-yy',
+    //     changeMonth: true,
+    //     changeYear: true,
+    //     autoclose: true,
+    // });
+
+    $("#end_date").datepicker({
+        dateFormat: 'dd-mm-yy',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+    });
     eventTable();
     $('#eventForm').on('submit', function(e){
         e.preventDefault();

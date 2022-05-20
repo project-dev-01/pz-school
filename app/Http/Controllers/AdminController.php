@@ -963,16 +963,209 @@ class AdminController extends Controller
         return view('admin.branch.index');
     }
 
-    // get hostel
+    // index hostel
     public function hostel()
     {
-        return view('admin.hostel.index');
+        $getcategory = Helper::GetMethod(config('constants.api.hostel_category_list'));
+        // dd($gethostel);
+        return view(
+            'admin.hostel.index',
+            [
+                'category' => $getcategory['data'],
+            ]
+        );
     }
 
-    // get Room
-    public function getRoom()
+    public function addHostel(Request $request)
     {
-        return view('admin.hostel.room');
+        $data = [
+            'name' => $request->name,
+            'category' => $request->category,
+            'watchman' => $request->watchman,
+            'address' => $request->address,
+            'remarks' => $request->remarks
+        ];
+        $response = Helper::PostMethod(config('constants.api.hostel_add'), $data);
+        return $response;
+    }
+    public function getHostelList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.hostel_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editHostelBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteHostelBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getHostelDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.hostel_details'), $data);
+        return $response;
+    }
+    public function updateHostel(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name,
+            'category' => $request->category,
+            'watchman' => $request->watchman,
+            'address' => $request->address,
+            'remarks' => $request->remarks
+        ];
+        
+        $response = Helper::PostMethod(config('constants.api.hostel_update'), $data);
+        return $response;
+    }
+    // DELETE hostel Details
+    public function deleteHostel(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.hostel_delete'), $data);
+        return $response;
+    }
+
+    // index Hostel Room
+    public function hostelRoom()
+    {
+        $hostel = Helper::GetMethod(config('constants.api.hostel_list'));
+        return view('admin.hostel_room.index',[ 
+            'hostel' => $hostel['data']
+        ]);
+    }
+    public function addHostelRoom(Request $request)
+    {
+        $data = [
+            'name' => $request->name,
+            'hostel_id' => $request->hostel_id,
+            'no_of_beds' => $request->no_of_beds,
+            'block' => $request->block,
+            'floor' => $request->floor,
+            'bed_fee' => $request->bed_fee,
+            'remarks' => $request->remarks
+        ];
+        $response = Helper::PostMethod(config('constants.api.hostel_room_add'), $data);
+        return $response;
+    }
+    public function getHostelRoomList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.hostel_room_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editHostelRoomBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteHostelRoomBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getHostelRoomDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.hostel_room_details'), $data);
+        return $response;
+    }
+    public function updateHostelRoom(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name,
+            'hostel_id' => $request->hostel_id,
+            'no_of_beds' => $request->no_of_beds,
+            'block' => $request->block,
+            'floor' => $request->floor,
+            'bed_fee' => $request->bed_fee,
+            'remarks' => $request->remarks
+        ];
+        
+        $response = Helper::PostMethod(config('constants.api.hostel_room_update'), $data);
+        return $response;
+    }
+    // DELETE hostel Details
+    public function deleteHostelRoom(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.hostel_room_delete'), $data);
+        return $response;
+    }
+
+    // index Hostel Category
+    public function hostelCategory()
+    {
+        return view('admin.hostel_category.index');
+    }
+
+    public function addHostelCategory(Request $request)
+    {
+        $data = [
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.hostel_category_add'), $data);
+        return $response;
+    }
+    public function getHostelCategoryList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.hostel_category_list'));
+
+        // dd($response);
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editHostelCategoryBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteHostelCategoryBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getHostelCategoryDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.hostel_category_details'), $data);
+        return $response;
+    }
+    public function updateHostelCategory(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name
+        ];
+        
+        $response = Helper::PostMethod(config('constants.api.hostel_category_update'), $data);
+        return $response;
+    }
+    // DELETE event type Details
+    public function deleteHostelCategory(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.hostel_category_delete'), $data);
+        return $response;
     }
 
     public function getRoute()

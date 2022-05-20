@@ -1,12 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Event')
-@section('css')
-<link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
-<link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
-<style>
-    .datepicker{ z-index:99999 !important; }
-</style>
-@endsection
+@section('title','Hostel Room')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -21,7 +14,7 @@
                         <!-- <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li> -->
                     </ol>
                 </div>
-                <h4 class="page-title">Event</h4>
+                <h4 class="page-title">Hostel Room</h4>
             </div>
         </div>
     </div>
@@ -30,27 +23,28 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card-box">
-                <h4 class="header-title">Event</h4>
+                <h4 class="header-title">Hostel Room</h4>
                 <p class="sub-header">
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
                         <!-- <a href="{{ route('admin.add_classes')}}" class="btn btn-primary btn-rounded waves-effect waves-light">Add Class</a> -->
-                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addEventModal">Add Event</button>
+                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addHostelRoomModal">Add Hostel Room</button>
                     </div>
                 </div>
                 </p>
-                
+
                 <div class="table-responsive">
-                    <table class="table mb-0" id="event-table">
+                    <table class="table mb-0 text-center" id="hostel-room-table">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Title</th>
-                                <th>Type</th>
-                                <th>Audience</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Publish</th>
+                                <th>Room Number</th>
+                                <th>Hostel Name</th>
+                                <th>Block</th>
+                                <th>Floor</th>
+                                <th>No of Beds</th>
+                                <th>Cost Per Bed</th>
+                                <th>Remarks</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -62,25 +56,20 @@
         </div> <!-- end col -->
     </div>
     <!--- end row -->
-    @include('admin.event.add')
-    @include('admin.event.view')
-    @include('admin.event.publish')
+    @include('admin.hostel_room.add')
+    @include('admin.hostel_room.edit')
 </div>
 <!-- container -->
-
 @endsection
 @section('scripts')
+
 <script>
-  //event routes
-    var eventList = "{{ route('admin.event.list') }}";
-    var eventDetails = "{{ route('admin.event.details') }}";
-    var eventDelete = "{{ route('admin.event.delete') }}";
-    var eventPublish = "{{ route('admin.event.publish') }}";
-    
+  //hostelRoom routes
+    var hostelRoomList = "{{ route('admin.hostel_room.list') }}";
+    var hostelRoomDetails = "{{ route('admin.hostel_room.details') }}";
+    var hostelRoomDelete = "{{ route('admin.hostel_room.delete') }}";
 </script>
-<script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
-<script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
-<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
-<script src="{{ asset('js/custom/event.js') }}"></script>
+
+<script src="{{ asset('js/custom/hostel_room.js') }}"></script>
 
 @endsection

@@ -637,6 +637,7 @@
     var teacher_leave_remarks_updated= "{{ config('constants.api.teacher_leave_approve') }}";
     // default image test
     var defaultImg = "{{ asset('images/users/default.jpg') }}";
+    var studentImg = "{{ asset('users/images/') }}";
 </script>
 <script src="{{ asset('js/custom/classroom.js') }}"></script>
 <script src="{{ asset('js/custom/short-test.js') }}"></script>

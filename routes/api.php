@@ -348,9 +348,27 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
     Route::get('transport/list', [ApiController::class, 'getTransportList']);
 
+    // Hostel routes
+    Route::post('hostel/add', [ApiController::class, 'addHostel']);
     Route::get('hostel/list', [ApiController::class, 'getHostelList']);
+    Route::post('hostel/hostel-details', [ApiController::class, 'getHostelDetails']);
+    Route::post('hostel/update', [ApiController::class, 'updateHostel']);
+    Route::post('hostel/delete', [ApiController::class, 'deleteHostel']);
 
+    
+    // Hostel Category routes
+    Route::post('hostel_category/add', [ApiController::class, 'addHostelCategory']);
+    Route::get('hostel_category/list', [ApiController::class, 'getHostelCategoryList']);
+    Route::post('hostel_category/hostel_category-details', [ApiController::class, 'getHostelCategoryDetails']);
+    Route::post('hostel_category/update', [ApiController::class, 'updateHostelCategory']);
+    Route::post('hostel_category/delete', [ApiController::class, 'deleteHostelCategory']);
 
+    // Hostel Room routes
+    Route::post('hostel_room/add', [ApiController::class, 'addHostelRoom']);
+    Route::get('hostel_room/list', [ApiController::class, 'getHostelRoomList']);
+    Route::post('hostel_room/hostel_room-details', [ApiController::class, 'getHostelRoomDetails']);
+    Route::post('hostel_room/update', [ApiController::class, 'updateHostelRoom']);
+    Route::post('hostel_room/delete', [ApiController::class, 'deleteHostelRoom']);
     Route::post('vehicle-by-route', [ApiController::class, 'vehicleByRoute']);
     Route::post('room-by-hostel', [ApiController::class, 'roomByHostel']);
 
@@ -397,4 +415,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     
     Route::post('teacher_leave_approve', [ApiController::class, 'teacher_leaveapprove']);
     Route::post('get_all_student_leaves', [ApiController::class, 'getAllStudentLeaves']);
+
+    Route::get('get_birthday_calendor_teacher', [ApiController::class, 'getBirthdayCalendorTeacher']);
+    Route::get('get_birthday_calendor_admin', [ApiController::class, 'getBirthdayCalendorAdmin']);
 });

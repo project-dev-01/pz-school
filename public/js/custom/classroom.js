@@ -1,5 +1,5 @@
 $(function () {
-
+                
     var listTable;
     // $(".classRoomHideSHow").show("slow");
     // onload show start
@@ -136,6 +136,7 @@ $(function () {
             formData.append('section_id', sectionID);
             formData.append('subject_id', subjectID);
             formData.append('date', convertDigitIn(classDate));
+
             // list mode
             listModeAjax(formData, classObj);
             // student leave apply
@@ -190,8 +191,10 @@ $(function () {
             contentType: false,
             success: function (response) {
 
+                
                 var dataSetNew = response.data;
-
+                var currentDate = convertDigitIn($("#classDate").val());
+                var date = birthdayDate(currentDate);
                 if (response.code == 200) {
                     // jQuery("#preloader").remove();
                     // $('#saveClassRoomAttendance').prop('disabled', false);
@@ -201,11 +204,11 @@ $(function () {
                     var layoutModeGrid = "";
                     if (response.data.length > 0) {
                         $(".classRoomHideSHow").show("slow");
-                        listMode(dataSetNew);
+                        listMode(dataSetNew,date);
                         layoutModeGrid += '<div class="row">';
                         response.data.forEach(function (res) {
                             // layout mode div start
-                            layoutModeGrid += layoutMode(res);
+                            layoutModeGrid += layoutMode(res,date);
                             // layout mode div end
                             // list mode start
 
@@ -247,7 +250,10 @@ $(function () {
     }
 
     // function layout mode
-    function layoutMode(res) {
+    function layoutMode(res,date) {
+
+        console.log('layou_dat',date)
+        console.log('res',res)
         var layoutModeGrid = "";
         var bgColor = "#60a05b";
         layoutModeGrid += '<div class="col-md-3">' +
@@ -264,16 +270,30 @@ $(function () {
         if (res.att_status == "excused") {
             bgColor = "#696969";
         }
+
+        var birthday = birthdayDate(res.birthday);
+        var bd = "";
+        if (birthday == date) {
+            bd = '<i class="fas fa-birthday-cake"></i>';
+        }
+
+        var img = "";
+        if (res.photo) {
+            img = studentImg+'/'+res.photo;
+        } else{
+            img = defaultImg;
+        }
+
         layoutModeGrid += '<div class="card-header" style="background-color:' + bgColor + ';color:white;text-align:left">';
-        layoutModeGrid += '<img src="' + defaultImg + '" class="mr-2 rounded-circle" height="40" />' +
-            '<label style="text-align:center">' + res.first_name + ' ' + res.last_name + '</label>' +
+        layoutModeGrid += '<img src="' + img + '" class="mr-2 rounded-circle" height="40" width="40" />' +
+            '<label style="text-align:center" class="mr-1">' + res.first_name + ' ' + res.last_name + '</label>' + bd +
             '</div>' +
             '</div>' +
             '</div>';
         return layoutModeGrid;
     }
     // function list mode
-    function listMode(dataSetNew) {
+    function listMode(dataSetNew,date) {
         listTable = $('#listModeClassRoom').DataTable({
             processing: true,
             bDestroy: true,
@@ -325,12 +345,23 @@ $(function () {
                     "width": "15%",
                     "className": "table-user",
                     "render": function (data, type, row, meta) {
+                        var birthday = birthdayDate(row.birthday);
+                        var bd = "";
+                        if (birthday == date) {
+                            bd = '<i class="fas fa-birthday-cake"></i>';
+                        }
+                        var img = "";
+                        if (row.photo) {
+                            img = studentImg+'/'+row.photo;
+                        } else{
+                            img = defaultImg;
+                        }
                         var first_name = '<input type="hidden" name="attendance[' + meta.row + '][attendance_id]" value="' + row.att_id + '">' +
                             '<input type="hidden" name="attendance[' + meta.row + '][student_id]" value="' + row.student_id + '">' +
                             '<input type="hidden" name="attendance[' + meta.row + '][first_name]" value="' + row.first_name + '">' +
                             '<input type="hidden" name="attendance[' + meta.row + '][last_name]" value="' + row.last_name + '">' +
-                            '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
-                            '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
+                            '<img src="' + img + '" class="mr-2 rounded-circle">' +
+                            '<a href="javascript:void(0);" class="text-body font-weight-semibold mr-2">' + data + '</a>' + bd;
                         return first_name;
                     }
                 },
@@ -506,13 +537,16 @@ $(function () {
                     toastr.success(response.message);
                     $('#layoutModeGrid').empty();
                     var layoutModeGrid = "";
+                    
+                    var currentDate = convertDigitIn($("#classDate").val());
+                    var date = birthdayDate(currentDate);
                     if (response.data.length > 0) {
 
                         layoutModeGrid += '<div class="row">';
                         response.data.forEach(function (res) {
 
                             // layout mode div start
-                            layoutModeGrid += layoutMode(res);
+                            layoutModeGrid += layoutMode(res,date);
                             // layout mode div end
                         });
                         layoutModeGrid += '</div>';
@@ -968,6 +1002,18 @@ $(function () {
             day = '0' + day;
 
         return [day, month, year].join('-');
+    }
+
+    function birthdayDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate();
+
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+        return [day, month].join('-');
     }
 
     function studentleave() {

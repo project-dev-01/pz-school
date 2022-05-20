@@ -21,7 +21,7 @@ class CreateStaffsTable extends Migration
             $table->string('department_id');
             $table->string('designation_id');
             $table->string('joining_date');
-            $table->string('birthday');
+            $table->date('birthday');
             $table->string('gender');
             $table->string('religion');
             $table->string('race');
