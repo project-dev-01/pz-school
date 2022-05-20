@@ -138,7 +138,7 @@
                                                 <span class="fas fa-user-graduate"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="first_name" id="firstName">
+                                        <input type="text" class="form-control shortNameChange" name="first_name" id="firstName">
                                     </div>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@
                                                 <span class="fas fa-user-graduate"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="last_name" id="lastName">
+                                        <input type="text" class="form-control shortNameChange" name="last_name" id="lastName">
                                     </div>
                                 </div>
                             </div>
@@ -280,15 +280,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="present_address">Address Line 1(Street address)</label>
-                                    <textarea class="form-control" name="present_address" id="present_address" rows="1">
-                                    </textarea>
+                                    <input class="form-control" name="present_address" id="present_address">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="permanent_address">Address Line 2</label>
-                                    <textarea class="form-control" name="permanent_address" id="permanent_address" rows="1">
-                                    </textarea>
+                                    <input class="form-control" name="permanent_address" id="permanent_address">
                                 </div>
                             </div>
                         </div>
@@ -364,7 +362,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="salary_grade">Salary Grade</label>
-                                    <input type="text" class="form-control" name="salary_grade" id="salaryGrade">
+                                    <input type="number" class="form-control" name="salary_grade" id="salaryGrade">
                                 </div>
                             </div>
                         </div>

@@ -713,7 +713,15 @@ class ApiController extends BaseController
             $createConnection = $this->createNewConnection($request->branch_id);
             // insert data
             $success = $createConnection->table('teacher_allocations as ta')
-                ->select('ta.id', 'ta.class_id', 'ta.section_id', 'ta.teacher_id', 's.name as section_name', 'c.name as class_name', 'st.name as teacher_name')
+                ->select(
+                    'ta.id',
+                    'ta.class_id',
+                    'ta.section_id',
+                    'ta.teacher_id',
+                    's.name as section_name',
+                    'c.name as class_name',
+                    DB::raw("CONCAT(st.first_name, ' ', st.last_name) as teacher_name")
+                )
                 ->join('sections as s', 'ta.section_id', '=', 's.id')
                 ->join('staffs as st', 'ta.teacher_id', '=', 'st.id')
                 ->join('classes as c', 'ta.class_id', '=', 'c.id')
@@ -11115,6 +11123,8 @@ class ApiController extends BaseController
                     ['lev.class_id', '=', $request->class_id],
                     ['lev.section_id', '=', $request->section_id],
                     ['lev.from_leave', '<=', $from_leave],
+                    ['lev.to_leave', '>=', $from_leave],
+                    ['lev.from_leave', '<=', $to_leave],
                     ['lev.to_leave', '>=', $to_leave]
                 ])
                 ->count();
@@ -11159,6 +11169,57 @@ class ApiController extends BaseController
             }
         }
     }
+    // reupload certificates
+    public function reuploadFileStudent(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'id' => 'required',
+            'document' => 'required',
+            'file' => 'required',
+            'file_extension' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // insert data
+            if (isset($request->file)) {
+                $now = now();
+                $name = strtotime($now);
+                $extension = $request->file_extension;
+                $fileName = $name . "." . $extension;
+
+                $base64 = base64_decode($request->file);
+                $file = base_path() . '/public/teacher/student-leaves/' . $fileName;
+                $suc = file_put_contents($file, $base64);
+                // return $fileName;
+                $path = '/public/teacher/student-leaves/';
+
+                if ($request->document) {
+                    if (\File::exists(base_path($path . $request->document))) {
+                        \File::delete(base_path($path . $request->document));
+                    }
+                }
+            } else {
+                $fileName = $request->document;
+            }
+            $query = $staffConn->table('student_leaves')->where('id', $request->id)->update([
+                'document' => $fileName,
+                'status' => "Pending",
+                'updated_at' => date("Y-m-d H:i:s")
+            ]);
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Document submitted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
     //Class room management : get student leaves
     function get_studentleaves(Request $request)
     {
@@ -11179,13 +11240,28 @@ class ApiController extends BaseController
             // get data
             $compare_date = $request->classDate;
             $studentDetails = $conn->table('student_leaves as lev')
-                ->select('lev.id', 'lev.class_id', 'lev.section_id', 'lev.student_id', 'std.first_name', 'std.last_name', DB::raw('DATE_FORMAT(lev.from_leave, "%d-%m-%Y") as from_leave'), DB::raw('DATE_FORMAT(lev.to_leave, "%d-%m-%Y") as to_leave'), 'lev.reason', 'lev.document', 'lev.status')
+                ->select(
+                    'lev.id',
+                    'lev.class_id',
+                    'lev.section_id',
+                    'lev.student_id',
+                    DB::raw('CONCAT(std.first_name, " ", std.last_name) as name'),
+                    DB::raw('DATE_FORMAT(lev.from_leave, "%d-%m-%Y") as from_leave'),
+                    DB::raw('DATE_FORMAT(lev.to_leave, "%d-%m-%Y") as to_leave'),
+                    DB::raw('DATE_FORMAT(lev.created_at, "%d-%m-%Y") as created_at'),
+                    'lev.reason',
+                    'lev.document',
+                    'lev.status',
+                    'lev.remarks',
+                    'lev.teacher_remarks'
+                )
                 ->leftJoin('students as std', 'lev.student_id', '=', 'std.id')
                 ->where([
                     ['lev.class_id', '=', $request->class_id],
                     ['lev.section_id', '=', $request->section_id],
-                    ['lev.status', '!=', 'Approve'],
-                    ['lev.status', '!=', 'Reject'],
+                    // ['lev.status', '!=', 'Approve'],
+                    // ['lev.status', '!=', 'Reject'],
+                    // ['lev.status', '!=', 'Reject'],
                     ['lev.from_leave', '<=', $compare_date],
                     ['lev.to_leave', '>=', $compare_date]
                 ])
@@ -11230,7 +11306,21 @@ class ApiController extends BaseController
             // get data
 
             $studentDetails = $conn->table('student_leaves as lev')
-                ->select('lev.class_id', 'lev.section_id', 'student_id', 'std.first_name', 'std.last_name', DB::raw('DATE_FORMAT(lev.from_leave, "%d-%m-%Y") as from_leave'), DB::raw('DATE_FORMAT(lev.to_leave, "%d-%m-%Y") as to_leave'), 'lev.reason', 'lev.status')
+                ->select(
+                    'lev.id',
+                    'lev.class_id',
+                    'lev.section_id',
+                    'lev.student_id',
+                    DB::raw("CONCAT(std.first_name, ' ', std.last_name) as name"),
+                    DB::raw('DATE_FORMAT(lev.from_leave, "%d-%m-%Y") as from_leave'),
+                    DB::raw('DATE_FORMAT(lev.to_leave, "%d-%m-%Y") as to_leave'),
+                    DB::raw('DATE_FORMAT(lev.created_at, "%d-%m-%Y") as created_at'),
+                    'lev.reason',
+                    'lev.document',
+                    'lev.status',
+                    'lev.remarks',
+                    'lev.teacher_remarks'
+                )
                 //->select('lev.class_id','lev.section_id','student_id','std.first_name','std.last_name','lev.from_leave','lev.to_leave','lev.reason','lev.status')
                 ->leftJoin('students as std', 'lev.student_id', '=', 'std.id')
                 ->where([
@@ -11273,4 +11363,53 @@ class ApiController extends BaseController
         }
     }
     // studnet leave end 
+    // get all student leave list
+    function getAllStudentLeaves(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            $class_id = $request->class_id;
+            $section_id = $request->section_id;
+            // get data
+            $studentDetails = $conn->table('student_leaves as lev')
+                ->select(
+                    'lev.id',
+                    'lev.class_id',
+                    'lev.section_id',
+                    'lev.student_id',
+                    DB::raw("CONCAT(std.first_name, ' ', std.last_name) as name"),
+                    DB::raw('DATE_FORMAT(lev.from_leave, "%d-%m-%Y") as from_leave'),
+                    DB::raw('DATE_FORMAT(lev.to_leave, "%d-%m-%Y") as to_leave'),
+                    'lev.reason',
+                    'lev.document',
+                    'lev.status',
+                    'lev.remarks',
+                    'lev.teacher_remarks',
+                    'cl.name as class_name',
+                    'sc.name as section_name',
+
+                )
+                ->leftJoin('students as std', 'lev.student_id', '=', 'std.id')
+                ->leftJoin('classes as cl', 'lev.class_id', '=', 'cl.id')
+                ->leftJoin('sections as sc', 'lev.section_id', '=', 'sc.id')
+                // ->leftJoin('students as std', 'lev.student_id', '=', 'std.id')
+                ->when($class_id, function ($query, $class_id) {
+                    return $query->where('lev.class_id', $class_id);
+                })
+                ->when($section_id, function ($query, $section_id) {
+                    return $query->where('lev.section_id', $section_id);
+                })
+                ->orderBy('lev.from_leave', 'asc')
+                ->get();
+            return $this->successResponse($studentDetails, 'Student details fetch successfully');
+        }
+    }
 }

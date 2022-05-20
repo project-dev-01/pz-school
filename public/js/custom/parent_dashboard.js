@@ -157,7 +157,7 @@ $(function () {
             var reason = $("#changelevReasons").val();
             var reason_text = $('option:selected', '#changelevReasons').text();
             var remarks = $("#remarks").val();
-            var file = $("#file").val();
+            // var file = $("#file").val();
 
             var formData = new FormData();
             formData.append('token', token);
@@ -169,7 +169,9 @@ $(function () {
             formData.append('to_leavedate', to_leavedate);
             formData.append('reason', reason);
             formData.append('remarks', remarks);
-            formData.append('file', file);
+            // formData.append('file', file);
+            formData.append('file', $('input[type=file]')[0].files[0]);
+
             $("#listModeClassID").val(class_id);
             $("#listModeSectionID").val(section_id);
             $("#listModestudentID").val(student_id);
@@ -239,8 +241,8 @@ $(function () {
                 }
                 ,
                 {
-                    data: 'first_name',
-                    name: 'first_name'
+                    data: 'name',
+                    name: 'name'
                 },
                 {
                     data: 'from_leave',
@@ -251,19 +253,49 @@ $(function () {
                     name: 'to_leave'
                 },
                 {
+                    data: 'teacher_remarks',
+                    name: 'teacher_remarks'
+                },
+                {
                     data: 'reason',
                     name: 'reason'
                 },
                 {
+                    data: 'document',
+                    name: 'document'
+                },
+                {
                     data: 'status',
                     name: 'status',
+                },
+                {
+                    data: 'created_at',
+                    name: 'created_at',
+                },
+                {
+                    data: 'actions',
+                    name: 'actions',
                     orderable: false,
                     searchable: false
                 },
             ],
             columnDefs: [
                 {
-                    "targets": 5,
+                    "targets": 6,
+                    "render": function (data, type, row, meta) {
+                        if (row.status != "Approve") {
+                            var fileUpload = '<div>' +
+                                '<input type="file" id="reissue_file' + row.id + '" name="file">' +
+                                '</div>';
+                        } else {
+                            fileUpload = "<p style='text-align: center;''>-</p>";
+                        }
+
+                        return fileUpload;
+                    }
+                },
+                {
+                    "targets": 7,
                     "render": function (data, type, row, meta) {
                         var badgeColor = "";
                         if (data == "Approve") {
@@ -283,6 +315,39 @@ $(function () {
         }).on('draw', function () {
         });
     }
+    // updateIssueFile
+    $(document).on('click', '#updateIssueFile', function () {
+        var id = $(this).data('id');
+        var document = $(this).data('document');
 
+        var reissue_file = $("#reissue_file" + id)[0].files[0];
+        // formData.append('file', $('input[type=file]')[0].files[0]);
+
+        console.log(id);
+        console.log(document);
+        console.log(reissue_file);
+
+        var formData = new FormData();
+        formData.append('id', id);
+        formData.append('document', document);
+        formData.append('file', reissue_file);
+        $.ajax({
+            url: reuploadFileUrl,
+            method: "post",
+            data: formData,
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (res) {
+                if (res.code == 200) {
+                    $('#studentleave-table').DataTable().ajax.reload(null, false);
+                    toastr.success(res.message);
+                }
+                else {
+                    toastr.error(res.message);
+                }
+            }
+        });
+    });
 
 });

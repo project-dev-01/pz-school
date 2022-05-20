@@ -527,7 +527,10 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('attendance/student_entry', [AdminController::class, 'studentEntry'])->name('admin.attendance.student_entry');
         Route::get('attendance/employee_entry', [AdminController::class, 'employeeEntry'])->name('admin.attendance.employee_entry');
         Route::get('attendance/exam_entry', [AdminController::class, 'examEntry'])->name('admin.attendance.exam_entry');
-
+        // admin student_leave list
+        Route::get('student-leave/list', [AdminController::class, 'studentLeaveShow'])->name('admin.student_leave.list');
+        // Route::post('all-student-leave/list', [AdminController::class, 'getStudentLeaveList'])->name('admin.all_tudent_leave.list');
+        
         //class room Routes
         Route::get('classroom/classroom-management', [AdminController::class, 'classroomManagement'])->name('admin.classroom.management');
         //faq route
@@ -886,6 +889,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         // student leave 
         Route::post('std_leave_apply/add', [ParentController::class, 'student_applyleave'])->name('parent.studentleave.add');
         Route::get('qualification/list', [ParentController::class, 'getstudentleave_list'])->name('parent.student_leave.list');
+        Route::post('std_leave_apply/reupload_file', [ParentController::class, 'reUploadLeaveFile'])->name('parent.reupload_file.add');
         
     });
 

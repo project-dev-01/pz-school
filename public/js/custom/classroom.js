@@ -561,9 +561,9 @@ $(function () {
         $('#addRemarks' + studenetID).val(student_remarks);
         $('#stuRemarksPopup').modal('hide');
     });
-    
-  
-    $('#changeAttendance').on('change', function () {        
+
+
+    $('#changeAttendance').on('change', function () {
         $(".changeAttendanceSelect").val($(this).val());
     });
     // widget function
@@ -1006,7 +1006,7 @@ $(function () {
         );
     }
     function StudentLeave_tbl(dataSetNew) {
-        var local= imgurl ;
+        var local = imgurl;
         console.log(local);
         listTable = $('#stdleaves').DataTable({
             processing: true,
@@ -1020,10 +1020,13 @@ $(function () {
             ],
             columns: [
                 {
-                    data: 'sno'
+                    "targets": 0,
+                    "render": function (data, type, row, meta) {
+                        return meta.row + 1;
+                    }
                 },
                 {
-                    data: 'first_name'
+                    data: 'name'
                 },
                 {
                     data: 'from_leave'
@@ -1059,12 +1062,12 @@ $(function () {
 
                     "targets": 1,
                     "className": "table-user",
-                    "render": function (data, type, row, meta) {                       
+                    "render": function (data, type, row, meta) {
                         var first_name = '<input type="hidden" id="student_leave_tbl_rowid[' + meta.row + '][id]" value="' + row.id + '">' +
-                        '<input type="hidden" name="student_leave_upd[' + meta.row + '][student_id]" value="' + row.student_id + '">' +
-                        '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
-                        '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
-                    return first_name;
+                            '<input type="hidden" name="student_leave_upd[' + meta.row + '][student_id]" value="' + row.student_id + '">' +
+                            '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
+                            '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
+                        return first_name;
                     }
                 },
                 {
@@ -1095,21 +1098,21 @@ $(function () {
 
                     "targets": 5,
                     "render": function (data, type, row, meta) {
-                        var document = '<a href="'+local+'/'+data+'" download name="student_leave_upd[' + meta.row + ']"><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';                      
-                      
- 
+                        var document = '<a href="' + local + '/' + data + '" download name="student_leave_upd[' + meta.row + ']"><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
+
+
                         return document;
                     }
                 },
                 {
                     "targets": 6,
-                    "render": function (data, type, row, meta) {                   
-                        var status = '<select class="form-control" id="leavestatus'+row.id+'" data-style="btn-outline-success" name="student_leave_upd[' + meta.row + '][status]">' +
-                        '<option value="">Choose</option>' +
-                        '<option value="Approve"  ' + (data == "Approve" ? "selected" : "") + '>Approve</option>' +
-                        '<option value="Reject"  ' + (data == "Reject" ? "selected" : "") + '>Reject</option>'+
-                        '<option value="Pending"  ' + (data == "Pending" ? "selected" : "") + '>Pending</option>'
-                        '</select>'; 
+                    "render": function (data, type, row, meta) {
+                        var status = '<select class="form-control" id="leavestatus' + row.id + '" data-style="btn-outline-success" name="student_leave_upd[' + meta.row + '][status]">' +
+                            '<option value="">Choose</option>' +
+                            '<option value="Approve"  ' + (data == "Approve" ? "selected" : "") + '>Approve</option>' +
+                            '<option value="Reject"  ' + (data == "Reject" ? "selected" : "") + '>Reject</option>' +
+                            '<option value="Pending"  ' + (data == "Pending" ? "selected" : "") + '>Pending</option>'
+                        '</select>';
                         return status;
                     }
                 },
@@ -1118,7 +1121,7 @@ $(function () {
                     "width": "10%",
                     "render": function (data, type, row, meta) {
 
-                        var addremarks = '<textarea style="display:none;" class="addRemarks" name="remarks[' + meta.row + '][att_remark]"></textarea>' +                        
+                        var addremarks = '<textarea style="display:none;" class="addRemarksStudent" data-id="' + row.id + '" id="addRemarksStudent' + row.id + '" >'+ (row.teacher_remarks !== "null" ? row.teacher_remarks : "") +'</textarea>' +
                             '<button type="button" data-id="' + row.id + '" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#stuLeaveRemarksPopup" id="editLeaveRemarksStudent">Add Remarks</button>';
                         return addremarks;
                     }
@@ -1127,7 +1130,7 @@ $(function () {
                     "targets": 8,
                     "width": "10%",
                     "render": function (data, type, row, meta) {
-                        var submitbtn = '<button type="button" class="btn btn-primary-bl waves-effect waves-light levsub" data-id="'+ row.id+'" id="stdLeave">Update</button>';
+                        var submitbtn = '<button type="button" class="btn btn-primary-bl waves-effect waves-light levsub" data-id="' + row.id + '" id="stdLeave">Update</button>';
                         return submitbtn;
                     }
                 }
@@ -1137,16 +1140,16 @@ $(function () {
     }
     $("#stdLeave").validate({
         rules: {
-            class_id: "required",       
+            class_id: "required",
             exam_id: "required"
         }
     });
     $(document).on('click', '#stdLeave', function () {
-        var student_leave_tbl_id = $(this).data('id');     
-        var student_leave_approve = $("#leavestatus"+student_leave_tbl_id).val(); 
-        
-        var teacher_remarks=$('#addstd_leave_Remarks').val();
-        console.log(student_leave_approve ,teacher_remarks);
+        var student_leave_tbl_id = $(this).data('id');
+        var student_leave_approve = $("#leavestatus" + student_leave_tbl_id).val();
+
+        var teacher_remarks = $("#addRemarksStudent" + student_leave_tbl_id).val();
+        console.log(student_leave_approve, teacher_remarks);
         var formData = new FormData();
         formData.append('token', token);
         formData.append('branch_id', branchID);
@@ -1160,41 +1163,36 @@ $(function () {
             processData: false,
             dataType: 'json',
             contentType: false,
-            success: function (res) {               
+            success: function (res) {
                 if (res.code == 200) {
                     studentleave();
                     toastr.success('Leave Updated sucessfully');
                 }
                 else {
                     toastr.error(res.message);
-               
+
                 }
             }
         });
 
     });
-      // student leave remarks 
-      // add remarks model
-      $('#stuLeaveRemarksPopup').on('show.bs.modal', e => {
+    // student leave remarks 
+    // add remarks model
+    $('#stuLeaveRemarksPopup').on('show.bs.modal', e => {
         $("#student_leave_remarks").focus();
         var $button = $(e.relatedTarget);
         var studentlev_tbl_ID = $button.attr('data-id');
         var studentlevRemarks = $button.closest('td').find('textarea').val();
         var checknullRemarks = (studentlevRemarks !== "null") ? studentlevRemarks : "";
-
         $("#studenet_leave_tbl_id").val(studentlev_tbl_ID);
-        $("#student_remarks").val(checknullRemarks);
+        $("#student_leave_remarks").val(checknullRemarks);
     });
 
     $('#student_leave_RemarksSave').on('click', function () {
         var studenetlevtblID = $('#studenet_leave_tbl_id').val();
-        console.log(studenetlevtblID);
         var student_leave_remarks = $('#student_leave_remarks').val();
-        console.log(student_leave_remarks);
-        var compain_remarks_tblID =student_leave_remarks;
-        $('#addstd_leave_Remarks').val(compain_remarks_tblID);
-  
+        var compain_remarks_tblID = student_leave_remarks;
+        $('#addRemarksStudent' + studenetlevtblID).val(compain_remarks_tblID);
         $('#stuLeaveRemarksPopup').modal('hide');
- 
     });
 });

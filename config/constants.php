@@ -363,8 +363,10 @@ return [
         'get_leave_reasons'=>$url.'/get_leave_reasons',
         // get student leave list particular
         'studentleave_list'=>$url.'/studentleave_list',
+        'get_all_student_leaves'=>$url.'/get_all_student_leaves',
         // teacher leave approve
         'teacher_leave_approve'=>$url.'/teacher_leave_approve',
+        'leave_reupload_file'=>$url.'/std_leave_apply/reupload_file',
     ]
 
 ];

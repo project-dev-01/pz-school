@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use App\Models\User;
 use App\Models\Task;
+use DataTables;
 
 class ParentController extends Controller
 {
@@ -43,7 +44,7 @@ class ParentController extends Controller
     // student leave 
     public function student_applyleave(Request $request)
     {
-        $file = $request->file('photo');
+        $file = $request->file('file');
 
         if ($file) {
             $path = $file->path();
@@ -74,6 +75,30 @@ class ParentController extends Controller
         $response = Helper::PostMethod(config('constants.api.std_leave_apply'), $data);
         return $response;
     }
+    // reupload file
+    public function reUploadLeaveFile(Request $request)
+    {
+        $file = $request->file('file');
+
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        } else {
+            $base64 = null;
+            $extension = null;
+        }
+        $data = [
+            'id' => $request->id,
+            'document' => $request->document,
+            'file' => $base64,
+            'file_extension' => $extension
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.leave_reupload_file'), $data);
+        return $response;
+    }
     // student leave list
     public function getstudentleave_list()
     {
@@ -82,21 +107,20 @@ class ParentController extends Controller
             'parent_id' => $parentid,
         ];
         $response = Helper::PostMethod(config('constants.api.studentleave_list'), $parent_id);
-    
-        // $response = Helper::GETMethodWithData(config('constants.api.studentleave_list'),$parent_id);
-    
-        return $response;
-        // return DataTables::of($response['data'])
-        //     ->addIndexColumn()
-        //     ->addColumn('actions', function ($row) {
-        //         return '<div class="button-list">
-        //                             <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editqualifyBtn">Update</a>
-        //                             <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deletequalifyBtn">Delete</a>
-        //                     </div>';
-        //     })
 
-        //     ->rawColumns(['actions'])
-        //     ->make(true);
+        // $response = Helper::GETMethodWithData(config('constants.api.studentleave_list'),$parent_id);
+
+        // return $response;
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">Update</a>
+                            </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
     }
     public function settings()
     {

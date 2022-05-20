@@ -31,6 +31,16 @@ $(function () {
             $("#medical_history_form").show("slow");
         }
     });
+    // 
+    $(".shortNameChange").on("change", function () {
+        var firstName = $("#firstName").val();
+        var lastName = $("#lastName").val();
+        var nameString = firstName + " " + lastName;
+        var matches = nameString.match(/\b(\w)/g); // array
+        var shortname = matches.join(''); // join
+        console.log(shortname)
+        $("#shortName").val(shortname.toUpperCase());
+    });
     // change file
     // $("#photo").on("change", function () {
     //     var file = $("input[type=file]").get(0).files[0];

@@ -693,7 +693,7 @@ class AdminController extends Controller
             'id' => $request->id,
             'name' => $request->name
         ];
-        
+
         $response = Helper::PostMethod(config('constants.api.event_type_update'), $data);
         return $response;
     }
@@ -724,13 +724,13 @@ class AdminController extends Controller
 
     public function addEvent(Request $request)
     {
-        
+
         // if($request->class_id){
         //     $class = implode(",",$request->class_id);
         // } else{
         //     $class = "";
         // }
-        
+
         $data = [
             'title' => $request->title,
             'type' => $request->type,
@@ -754,11 +754,11 @@ class AdminController extends Controller
             ->addColumn('classname', function ($row) {
                 $audience = $row['audience'];
 
-                
+
                 if ($audience == 1) {
                     return "Everyone";
                 } else {
-                    return "<b>Standard </b>: " .$row['class_name'];
+                    return "<b>Standard </b>: " . $row['class_name'];
                 }
             })
             ->addColumn('publish', function ($row) {
@@ -1635,6 +1635,32 @@ class AdminController extends Controller
             ]
         );
     }
+    public function studentLeaveShow()
+    {
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        return view('admin.student_leave.index', [
+            'classes' => $getclass['data']
+        ]);
+    }
+    // public function getStudentLeaveList(Request $request)
+    // {
+    //     $data = [
+    //         'class_id' => $request->class_id,
+    //         'section_id' => $request->section_id
+    //     ];
+    //     // dd($data);
+    //     $response = Helper::PostMethod(config('constants.api.get_all_student_leaves'), $data);
+    //     return DataTables::of($response['data'])
+    //         ->addIndexColumn()
+    //         // ->addColumn('actions', function ($row) {
+    //         //     return '<div class="button-list">
+    //         //                     <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteToDoListBtn">Delete</a>
+    //         //             </div>';
+    //         // })
+
+    //         // ->rawColumns(['actions'])
+    //         ->make(true);
+    // }
     //add todolist
     public function addToDoList(Request $request)
     {

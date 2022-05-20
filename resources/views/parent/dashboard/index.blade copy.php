@@ -597,8 +597,6 @@
                                     <th>Reason</th>
                                     <th>Document</th>
                                     <th>Status</th>
-                                    <th>Apply Date</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -627,7 +625,7 @@
     // general details get student names
     var stutdentleaveList = "{{ route('parent.student_leave.list') }}";
     var reuploadFileUrl = "{{ route('parent.reupload_file.add') }}";
-
+    
     // leave apply
 </script>
 <!-- to do list -->
