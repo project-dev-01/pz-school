@@ -4228,7 +4228,10 @@ class ApiController extends BaseController
                 ->orderBy('time_end', 'asc')
                 ->get()->toArray();
             $output['timetable'] = $Timetable;
-            $output['teacher'] = $classConn->table('subject_assigns as sa')->select('s.id', 's.name')
+            $output['teacher'] = $classConn->table('subject_assigns as sa')->select(
+                's.id',
+                DB::raw('CONCAT(s.first_name, " ", s.last_name) as name')
+            )
                 ->join('staffs as s', 'sa.teacher_id', '=', 's.id')
                 ->where('sa.class_id', $request->class_id)
                 ->where('sa.section_id', $request->section_id)
