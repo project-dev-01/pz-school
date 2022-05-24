@@ -1,27 +1,25 @@
 $(function () {
 
-    hostelTable();
-    $("#hostelForm").validate({
+    transportRouteTable();
+    $("#transportRouteForm").validate({
         rules: {
             name: "required",
-            category: "required",
-            watchman: "required",
-            address: "required",
+            start_place: "required",
+            stop_place: "required",
         }
     });
-    $("#edit-hostel-form").validate({
+    $("#edit-transport-route-form").validate({
         rules: {
             name: "required",
-            category: "required",
-            watchman: "required",
-            address: "required",
+            start_place: "required",
+            stop_place: "required",
         }
     });
-    // add hostel
-    $('#hostelForm').on('submit', function (e) {
+    // add transportRoute
+    $('#transportRouteForm').on('submit', function (e) {
         e.preventDefault();
-        var hostelCheck = $("#hostelForm").valid();
-        if (hostelCheck === true) {
+        var transportCheck = $("#transportRouteForm").valid();
+        if (transportCheck === true) {
             var form = this;
 
             $.ajax({
@@ -32,12 +30,10 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
-                    // console.log("------")
-                    console.log(data)
                     if (data.code == 200) {
-                        $('#hostel-table').DataTable().ajax.reload(null, false);
-                        $('.addHostel').modal('hide');
-                        $('.addHostel').find('form')[0].reset();
+                        $('#transport-route-table').DataTable().ajax.reload(null, false);
+                        $('.addTransportRoute').modal('hide');
+                        $('.addTransportRoute').find('form')[0].reset();
                         toastr.success(data.message);
                     } else {
                         toastr.error(data.message);
@@ -47,12 +43,13 @@ $(function () {
         }
     });
 
-    // get all hostel table
-    function hostelTable() {
-         $('#hostel-table').DataTable({
+    // get all TransportRoute table
+    function transportRouteTable() {
+         $('#transport-route-table').DataTable({
             processing: true,
             info: true,
-            ajax: hostelList,
+            bDestroy:true,
+            ajax: transportRouteList,
             "pageLength": 5,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
@@ -64,18 +61,18 @@ $(function () {
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex'
                 }
-               ,
+                ,
                 {
                     data: 'name',
                     name: 'name'
                 },
                 {
-                    data: 'category',
-                    name: 'category'
+                    data: 'start_place',
+                    name: 'start_place'
                 },
                 {
-                    data: 'watchman',
-                    name: 'watchman'
+                    data: 'stop_place',
+                    name: 'stop_place'
                 },
                 {
                     data: 'remarks',
@@ -92,26 +89,25 @@ $(function () {
         });
     }
     // get row
-    $(document).on('click', '#editHostelBtn', function () {
+    $(document).on('click', '#editTransportRouteBtn', function () {
         var id = $(this).data('id');
      
-        $('.editHostel').find('form')[0].reset();   
-        $.post(hostelDetails, { id: id }, function (data) {
-            $('.editHostel').find('input[name="id"]').val(data.data.id);
-            $('.editHostel').find('input[name="name"]').val(data.data.name);
-            $('.editHostel').find('select[name="category"]').val(data.data.category_id);
-            $('.editHostel').find('input[name="watchman"]').val(data.data.watchman);
-            $('.editHostel').find('input[name="address"]').val(data.data.address);
-            $('.editHostel').find('textarea[name="remarks"]').text(data.data.remarks);
-            $('.editHostel').modal('show');
+        $('.editTransportRoute').find('form')[0].reset();   
+        $.post(transportRouteDetails, { id: id }, function (data) {
+            $('.editTransportRoute').find('input[name="id"]').val(data.data.id);
+            $('.editTransportRoute').find('input[name="name"]').val(data.data.name);
+            $('.editTransportRoute').find('input[name="start_place"]').val(data.data.start_place);
+            $('.editTransportRoute').find('input[name="stop_place"]').val(data.data.stop_place);
+            $('.editTransportRoute').find('textarea[name="remarks"]').text(data.data.remarks);
+            $('.editTransportRoute').modal('show');
         }, 'json');
         console.log(id);
     });
-    // update Hostel
-    $('#edit-hostel-form').on('submit', function (e) {
+    // update TransportRoute
+    $('#edit-transport-route-form').on('submit', function (e) {
         e.preventDefault();
-        var edt_hostelCheck = $("#edit-hostel-form").valid();
-        if (edt_hostelCheck === true) {
+        var edt_transportCheck = $("#edit-transport-route-form").valid();
+        if (edt_transportCheck === true) {
       
             var form = this;
             $.ajax({
@@ -129,13 +125,13 @@ $(function () {
                     } else {
 
                         if (data.code == 200) {
-                            $('#hostel-table').DataTable().ajax.reload(null, false);
-                            $('.editHostel').modal('hide');
-                            $('.editHostel').find('form')[0].reset();
+                            $('#transport-route-table').DataTable().ajax.reload(null, false);
+                            $('.editTransportRoute').modal('hide');
+                            $('.editTransportRoute').find('form')[0].reset();
                             toastr.success(data.message);
                         } else {
-                            $('.editHostel').modal('hide');
-                            $('.editHostel').find('form')[0].reset();
+                            $('.editTransportRoute').modal('hide');
+                            $('.editTransportRoute').find('form')[0].reset();
                             toastr.error(data.message);
                         }
                     }
@@ -143,13 +139,13 @@ $(function () {
             });
         }
     });
-    // delete HostelDelete
-    $(document).on('click', '#deleteHostelBtn', function () {
+    // delete TransportRouteDelete
+    $(document).on('click', '#deleteTransportRouteBtn', function () {
         var id = $(this).data('id');
-        var url = hostelDelete;
+        var url = transportRouteDelete;
         swal.fire({
             title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this Hostel',
+            html: 'You want to <b>delete</b> this Transport Route',
             showCancelButton: true,
             showCloseButton: true,
             cancelButtonText: 'Cancel',
@@ -164,7 +160,7 @@ $(function () {
                     id: id
                 }, function (data) {
                     if (data.code == 200) {
-                        $('#hostel-table').DataTable().ajax.reload(null, false);
+                        $('#transport-route-table').DataTable().ajax.reload(null, false);
                         toastr.success(data.message);
                     } else {
                         toastr.error(data.message);

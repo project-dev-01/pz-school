@@ -813,7 +813,7 @@ class AdminController extends Controller
     public function admission()
     {
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
-        $gettransport = Helper::GetMethod(config('constants.api.transport_list'));
+        $gettransport = Helper::GetMethod(config('constants.api.transport_route_list'));
         $gethostel = Helper::GetMethod(config('constants.api.hostel_list'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
@@ -1167,27 +1167,7 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.hostel_category_delete'), $data);
         return $response;
     }
-
-    public function getRoute()
-    {
-        return view('admin.transport.route');
-    }
-
-    public function getVehicle()
-    {
-        return view('admin.transport.vehicle');
-    }
-
-    public function getstoppage()
-    {
-        return view('admin.transport.stoppage');
-    }
-
-    public function assignVehicle()
-    {
-        return view('admin.transport.assignvehicle');
-    }
-
+    
     public function book()
     {
         return view('admin.library.book');
@@ -3181,7 +3161,7 @@ class AdminController extends Controller
         ];
 
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
-        $gettransport = Helper::GetMethod(config('constants.api.transport_list'));
+        $gettransport = Helper::GetMethod(config('constants.api.transport_route_list'));
         $gethostel = Helper::GetMethod(config('constants.api.hostel_list'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
@@ -3677,6 +3657,128 @@ class AdminController extends Controller
         ];
 
         $response = Helper::PostMethod(config('constants.api.race_delete'), $data);
+        return $response;
+    }
+
+    // index Leave Type
+    public function leaveType()
+    {
+        return view('admin.leave_type.index');
+    }
+
+    public function addLeaveType(Request $request)
+    {
+        $data = [
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.leave_type_add'), $data);
+        return $response;
+    }
+    public function getLeaveTypeList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.leave_type_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editLeaveTypeBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteLeaveTypeBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getLeaveTypeDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.leave_type_details'), $data);
+        return $response;
+    }
+    public function updateLeaveType(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.leave_type_update'), $data);
+        return $response;
+    }
+    // DELETE Leave type Details
+    public function deleteLeaveType(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.leave_type_delete'), $data);
+        return $response;
+    }
+
+    // index Transport Route
+    public function transportRoute()
+    {
+        return view('admin.transport_route.index');
+    }
+
+    public function addTransportRoute(Request $request)
+    {
+        $data = [
+            'name' => $request->name,
+            'start_place' => $request->start_place,
+            'stop_place' => $request->stop_place,
+            'remarks' => $request->remarks
+        ];
+        $response = Helper::PostMethod(config('constants.api.transport_route_add'), $data);
+        return $response;
+    }
+    public function getTransportRouteList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.transport_route_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editTransportRouteBtn">Update</a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteTransportRouteBtn">Delete</a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getTransportRouteDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.transport_route_details'), $data);
+        return $response;
+    }
+    public function updateTransportRoute(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name,
+            'start_place' => $request->start_place,
+            'stop_place' => $request->stop_place,
+            'remarks' => $request->remarks
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.transport_route_update'), $data);
+        return $response;
+    }
+    // DELETE Leave type Details
+    public function deleteTransportRoute(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.transport_route_delete'), $data);
         return $response;
     }
 }

@@ -313,9 +313,6 @@ return [
         'get_subject_division_mark' => $url.'/get_subject_division_mark',
         'get_subject_mark_status' => $url.'/get_subject_mark_status',
         
-
-        // get transport list
-        'transport_list' => $url.'/transport/list',
         // hostel url
         'hostel_add' => $url.'/hostel/add',
         'hostel_list' => $url.'/hostel/list',
@@ -392,6 +389,20 @@ return [
         'leave_type_details' => $url.'/leave_type/leave_type-details',
         'leave_type_update' => $url.'/leave_type/update',
         'leave_type_delete' => $url.'/leave_type/delete',
+
+        // transport route url
+        'transport_route_add' => $url.'/transport_route/add',
+        'transport_route_list' => $url.'/transport_route/list',
+        'transport_route_details' => $url.'/transport_route/transport_route-details',
+        'transport_route_update' => $url.'/transport_route/update',
+        'transport_route_delete' => $url.'/transport_route/delete',
+
+        // transport stoppage url
+        'transport_stoppage_add' => $url.'/transport_stoppage/add',
+        'transport_stoppage_list' => $url.'/transport_stoppage/list',
+        'transport_stoppage_details' => $url.'/transport_stoppage/transport_stoppage-details',
+        'transport_stoppage_update' => $url.'/transport_stoppage/update',
+        'transport_stoppage_delete' => $url.'/transport_stoppage/delete',
     ]
 
 ];

@@ -513,11 +513,6 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('hostel_category/update', [AdminController::class, 'updateHostelCategory'])->name('admin.hostel_category.update');
         Route::post('hostel_category/delete', [AdminController::class, 'deleteHostelCategory'])->name('admin.hostel_category.delete');
 
-        // Transport routes
-        Route::get('transport/route', [AdminController::class, 'getRoute'])->name('admin.transport.route');
-        Route::get('transport/vehicle', [AdminController::class, 'getVehicle'])->name('admin.transport.vehicle');
-        Route::get('transport/stoppage', [AdminController::class, 'getstoppage'])->name('admin.transport.stoppage');
-        Route::get('transport/assignvehicle', [AdminController::class, 'assignVehicle'])->name('admin.transport.assignvehicle');
 
         // Library routes
         Route::get('library/book', [AdminController::class, 'book'])->name('admin.library.book');
@@ -590,6 +585,22 @@ Route::group(['prefix' => 'schoolcrm'], function () {
       
       Route::post('subjectmarksAdd', [AdminController::class, 'subjectmarks'])->name('admin.subjectmarks.add');
       Route::post('subjectdivisionAdd', [AdminController::class, 'subjectdivisionAdd'])->name('admin.subjectdivision.add');
+
+      // Leave Type routes
+      Route::get('leave_type/index', [AdminController::class, 'leaveType'])->name('admin.leave_type');
+      Route::get('leave_type/list', [AdminController::class, 'getLeaveTypeList'])->name('admin.leave_type.list');
+      Route::post('leave_type/add', [AdminController::class, 'addLeaveType'])->name('admin.leave_type.add');
+      Route::post('leave_type/leave_type-details', [AdminController::class, 'getLeaveTypeDetails'])->name('admin.leave_type.details');
+      Route::post('leave_type/update', [AdminController::class, 'updateLeaveType'])->name('admin.leave_type.update');
+      Route::post('leave_type/delete', [AdminController::class, 'deleteLeaveType'])->name('admin.leave_type.delete');
+
+      // Transport Route routes
+      Route::get('transport_route/index', [AdminController::class, 'transportRoute'])->name('admin.transport_route');
+      Route::get('transport_route/list', [AdminController::class, 'getTransportRouteList'])->name('admin.transport_route.list');
+      Route::post('transport_route/add', [AdminController::class, 'addTransportRoute'])->name('admin.transport_route.add');
+      Route::post('transport_route/transport_route-details', [AdminController::class, 'getTransportRouteDetails'])->name('admin.transport_route.details');
+      Route::post('transport_route/update', [AdminController::class, 'updateTransportRoute'])->name('admin.transport_route.update');
+      Route::post('transport_route/delete', [AdminController::class, 'deleteTransportRoute'])->name('admin.transport_route.delete');
     });
     // admin routes end
 

@@ -1,27 +1,21 @@
 $(function () {
 
-    hostelTable();
-    $("#hostelForm").validate({
+    leaveTypeTable();
+    $("#leaveTypeForm").validate({
         rules: {
-            name: "required",
-            category: "required",
-            watchman: "required",
-            address: "required",
+            name: "required"
         }
     });
-    $("#edit-hostel-form").validate({
+    $("#edit-leave-type-form").validate({
         rules: {
-            name: "required",
-            category: "required",
-            watchman: "required",
-            address: "required",
+            name: "required"
         }
     });
-    // add hostel
-    $('#hostelForm').on('submit', function (e) {
+    // add leaveType
+    $('#leaveTypeForm').on('submit', function (e) {
         e.preventDefault();
-        var hostelCheck = $("#hostelForm").valid();
-        if (hostelCheck === true) {
+        var leaveCheck = $("#leaveTypeForm").valid();
+        if (leaveCheck === true) {
             var form = this;
 
             $.ajax({
@@ -32,12 +26,10 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
-                    // console.log("------")
-                    console.log(data)
                     if (data.code == 200) {
-                        $('#hostel-table').DataTable().ajax.reload(null, false);
-                        $('.addHostel').modal('hide');
-                        $('.addHostel').find('form')[0].reset();
+                        $('#leave-type-table').DataTable().ajax.reload(null, false);
+                        $('.addLeaveType').modal('hide');
+                        $('.addLeaveType').find('form')[0].reset();
                         toastr.success(data.message);
                     } else {
                         toastr.error(data.message);
@@ -47,12 +39,13 @@ $(function () {
         }
     });
 
-    // get all hostel table
-    function hostelTable() {
-         $('#hostel-table').DataTable({
+    // get all leaveType table
+    function leaveTypeTable() {
+         $('#leave-type-table').DataTable({
             processing: true,
             info: true,
-            ajax: hostelList,
+            bDestroy:true,
+            ajax: leaveTypeList,
             "pageLength": 5,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
@@ -64,22 +57,10 @@ $(function () {
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex'
                 }
-               ,
+                ,
                 {
                     data: 'name',
                     name: 'name'
-                },
-                {
-                    data: 'category',
-                    name: 'category'
-                },
-                {
-                    data: 'watchman',
-                    name: 'watchman'
-                },
-                {
-                    data: 'remarks',
-                    name: 'remarks'
                 },
                 {
                     data: 'actions',
@@ -92,26 +73,22 @@ $(function () {
         });
     }
     // get row
-    $(document).on('click', '#editHostelBtn', function () {
+    $(document).on('click', '#editLeaveTypeBtn', function () {
         var id = $(this).data('id');
      
-        $('.editHostel').find('form')[0].reset();   
-        $.post(hostelDetails, { id: id }, function (data) {
-            $('.editHostel').find('input[name="id"]').val(data.data.id);
-            $('.editHostel').find('input[name="name"]').val(data.data.name);
-            $('.editHostel').find('select[name="category"]').val(data.data.category_id);
-            $('.editHostel').find('input[name="watchman"]').val(data.data.watchman);
-            $('.editHostel').find('input[name="address"]').val(data.data.address);
-            $('.editHostel').find('textarea[name="remarks"]').text(data.data.remarks);
-            $('.editHostel').modal('show');
+        $('.editLeaveType').find('form')[0].reset();   
+        $.post(leaveTypeDetails, { id: id }, function (data) {
+            $('.editLeaveType').find('input[name="id"]').val(data.data.id);
+            $('.editLeaveType').find('input[name="name"]').val(data.data.name);
+            $('.editLeaveType').modal('show');
         }, 'json');
         console.log(id);
     });
-    // update Hostel
-    $('#edit-hostel-form').on('submit', function (e) {
+    // update LeaveType
+    $('#edit-leave-type-form').on('submit', function (e) {
         e.preventDefault();
-        var edt_hostelCheck = $("#edit-hostel-form").valid();
-        if (edt_hostelCheck === true) {
+        var edt_leaveCheck = $("#edit-leave-type-form").valid();
+        if (edt_leaveCheck === true) {
       
             var form = this;
             $.ajax({
@@ -129,13 +106,13 @@ $(function () {
                     } else {
 
                         if (data.code == 200) {
-                            $('#hostel-table').DataTable().ajax.reload(null, false);
-                            $('.editHostel').modal('hide');
-                            $('.editHostel').find('form')[0].reset();
+                            $('#leave-type-table').DataTable().ajax.reload(null, false);
+                            $('.editLeaveType').modal('hide');
+                            $('.editLeaveType').find('form')[0].reset();
                             toastr.success(data.message);
                         } else {
-                            $('.editHostel').modal('hide');
-                            $('.editHostel').find('form')[0].reset();
+                            $('.editLeaveType').modal('hide');
+                            $('.editLeaveType').find('form')[0].reset();
                             toastr.error(data.message);
                         }
                     }
@@ -143,13 +120,13 @@ $(function () {
             });
         }
     });
-    // delete HostelDelete
-    $(document).on('click', '#deleteHostelBtn', function () {
+    // delete LeaveTypeDelete
+    $(document).on('click', '#deleteLeaveTypeBtn', function () {
         var id = $(this).data('id');
-        var url = hostelDelete;
+        var url = leaveTypeDelete;
         swal.fire({
             title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this Hostel',
+            html: 'You want to <b>delete</b> this Leave Type',
             showCancelButton: true,
             showCloseButton: true,
             cancelButtonText: 'Cancel',
@@ -164,7 +141,7 @@ $(function () {
                     id: id
                 }, function (data) {
                     if (data.code == 200) {
-                        $('#hostel-table').DataTable().ajax.reload(null, false);
+                        $('#leave-type-table').DataTable().ajax.reload(null, false);
                         toastr.success(data.message);
                     } else {
                         toastr.error(data.message);

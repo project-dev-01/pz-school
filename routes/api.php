@@ -345,9 +345,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // add timetable schedule
     Route::post('add_calendor_timetable', [ApiController::class, 'addCalendorTimetable']);
 
-
-    Route::get('transport/list', [ApiController::class, 'getTransportList']);
-
     // Hostel routes
     Route::post('hostel/add', [ApiController::class, 'addHostel']);
     Route::get('hostel/list', [ApiController::class, 'getHostelList']);
@@ -419,10 +416,24 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('get_birthday_calendor_teacher', [ApiController::class, 'getBirthdayCalendorTeacher']);
     Route::get('get_birthday_calendor_admin', [ApiController::class, 'getBirthdayCalendorAdmin']);
 
-     // Leave Type routes
-     Route::post('leave_type/add', [ApiController::class, 'addLeaveType']);
-     Route::get('leave_type/list', [ApiController::class, 'getLeaveTypeList']);
-     Route::post('leave_type/leave_type-details', [ApiController::class, 'getLeaveTypeDetails']);
-     Route::post('leave_type/update', [ApiController::class, 'updateLeaveType']);
-     Route::post('leave_type/delete', [ApiController::class, 'deleteLeaveType']);
+    // Leave Type routes
+    Route::post('leave_type/add', [ApiController::class, 'addLeaveType']);
+    Route::get('leave_type/list', [ApiController::class, 'getLeaveTypeList']);
+    Route::post('leave_type/leave_type-details', [ApiController::class, 'getLeaveTypeDetails']);
+    Route::post('leave_type/update', [ApiController::class, 'updateLeaveType']);
+    Route::post('leave_type/delete', [ApiController::class, 'deleteLeaveType']);
+
+    // Transport Route routes
+    Route::post('transport_route/add', [ApiController::class, 'addTransportRoute']);
+    Route::get('transport_route/list', [ApiController::class, 'getTransportRouteList']);
+    Route::post('transport_route/transport_route-details', [ApiController::class, 'getTransportRouteDetails']);
+    Route::post('transport_route/update', [ApiController::class, 'updateTransportRoute']);
+    Route::post('transport_route/delete', [ApiController::class, 'deleteTransportRoute']);
+
+    // Transport Stoppage routes
+    Route::post('transport_stoppage/add', [ApiController::class, 'addTransportStoppage']);
+    Route::get('transport_stoppage/list', [ApiController::class, 'getTransportStoppageList']);
+    Route::post('transport_stoppage/transport_stoppage-details', [ApiController::class, 'getTransportStoppageDetails']);
+    Route::post('transport_stoppage/update', [ApiController::class, 'updateTransportStoppage']);
+    Route::post('transport_stoppage/delete', [ApiController::class, 'deleteTransportStoppage']);
 });

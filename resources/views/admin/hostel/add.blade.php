@@ -11,12 +11,12 @@
                     @csrf                   
                  
                     <div class="form-group">
-                        <label for="name">Hostel Name</label>
+                        <label for="name">Hostel Name<span class="text-danger">*</span></label>
                         <input type="text"  name="name" class="form-control" placeholder="Enter Hostel name">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="category">Category</label>
+                        <label for="category">Category<span class="text-danger">*</span></label>
                         <select class="form-control" id="category" name="category">
                             <option value="">Select</option>
                             @foreach($category as $cat)
@@ -26,12 +26,12 @@
                         <span class="text-danger error-text category_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="watchman">Warden Name</label>
+                        <label for="watchman">Warden Name<span class="text-danger">*</span></label>
                         <input type="text"  name="watchman" class="form-control" placeholder="Enter Warden name">
                         <span class="text-danger error-text watchman_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="address">Hostel Address</label>
+                        <label for="address">Hostel Address<span class="text-danger">*</span></label>
                         <input type="text"  name="address" class="form-control" placeholder="Enter Hostel Address">
                         <span class="text-danger error-text address_error"></span>
                     </div>

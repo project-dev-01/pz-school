@@ -7257,7 +7257,7 @@ class ApiController extends BaseController
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
             $success = $Connection->table('calendors as cl')
-                ->select('cl.id', 'cl.class_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id', 'cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as color', 'sb.name as subject_name', 'sb.name as title', 'st.name as teacher_name', 'dr.report')
+                ->select('cl.id', 'cl.class_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id', 'cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as color', 'sb.name as subject_name', 'sb.name as title', 'st.first_name as teacher_name', 'dr.report')
                 ->join('classes as c', 'cl.class_id', '=', 'c.id')
                 ->join('sections as s', 'cl.section_id', '=', 's.id')
                 ->join('staffs as st', 'cl.teacher_id', '=', 'st.id')
@@ -7289,7 +7289,7 @@ class ApiController extends BaseController
             $month = now()->format('m');
             $Connection = $this->createNewConnection($request->branch_id);
             $birthday = $Connection->table('staffs as s')
-                ->select('s.id', 's.name', 's.birthday')
+                ->select('s.id', 's.first_name as name', 's.birthday')
                 ->whereMonth("s.birthday",$month)
                 ->whereDay("s.birthday",$day)
                 ->where('id',$request->teacher_id)
@@ -7321,7 +7321,7 @@ class ApiController extends BaseController
             $month = now()->format('m');
             $Connection = $this->createNewConnection($request->branch_id);
             $birthday = $Connection->table('staffs as s')
-                ->select('s.id', 's.name', 's.birthday')
+                ->select('s.id', 's.first_name as name', 's.birthday')
                 ->whereMonth("s.birthday",$month)
                 ->whereDay("s.birthday",$day)
                 ->get();
@@ -8677,26 +8677,6 @@ class ApiController extends BaseController
             }
         }
     }
-
-    // get Transport List
-    public function getTransportList(Request $request)
-    {
-        $validator = \Validator::make($request->all(), [
-            'branch_id' => 'required',
-            'token' => 'required',
-        ]);
-
-        if (!$validator->passes()) {
-            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-        } else {
-            // create new connection
-            $Conn = $this->createNewConnection($request->branch_id);
-            // get data
-            $Transport = $Conn->table('transport_route')->get();
-            return $this->successResponse($Transport, 'Transport record fetch successfully');
-        }
-    }
-
     // addHostel
     public function addHostel(Request $request)
     {
@@ -12066,6 +12046,283 @@ class ApiController extends BaseController
             $success = [];
             if ($query) {
                 return $this->successResponse($success, 'Leave Type have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+
+    // add TransportRoute
+    public function addTransportRoute(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'start_place' => 'required',
+            'stop_place' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('transport_route')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // insert data
+                $query = $conn->table('transport_route')->insert([
+                    'name' => $request->name,
+                    'start_place' => $request->start_place,
+                    'stop_place' => $request->stop_place,
+                    'remarks' => $request->remarks,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Transport Route has been successfully saved');
+                }
+            }
+        }
+    }
+    // getTransportRouteList
+    public function getTransportRouteList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $transportRouteDetails = $conn->table('transport_route')->get();
+            return $this->successResponse($transportRouteDetails, 'Transport Route record fetch successfully');
+        }
+    }
+    // get TransportRoute row details
+    public function getTransportRouteDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $transportRouteDetails = $conn->table('transport_route')->where('id', $id)->first();
+            return $this->successResponse($transportRouteDetails, 'Transport Route row fetch successfully');
+        }
+    }
+    // update TransportRoute
+    public function updateTransportRoute(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'start_place' => 'required',
+            'stop_place' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('transport_route')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // update data
+                $query = $conn->table('transport_route')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'start_place' => $request->start_place,
+                    'stop_place' => $request->stop_place,
+                    'remarks' => $request->remarks,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Transport Route Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+            }
+        }
+    }
+    // delete TransportRoute
+    public function deleteTransportRoute(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('transport_route')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Transport Route have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+
+    // add TransportStoppage
+    public function addTransportStoppage(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'route_fare' => 'required',
+            'stop_position' => 'required',
+            'stop_time' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+
+            // insert data
+            $query = $conn->table('transport_stoppage')->insert([
+                'stop_position' => $request->stop_position,
+                'stop_time' => $request->stop_time,
+                'route_fare' => $request->route_fare,
+                'created_at' => date("Y-m-d H:i:s")
+            ]);
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Transport Stoppage has been successfully saved');
+            }
+        }
+    }
+    // getTransportStoppageList
+    public function getTransportStoppageList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $transportStoppageDetails = $conn->table('transport_stoppage')->get();
+            return $this->successResponse($transportStoppageDetails, 'Transport Stoppage record fetch successfully');
+        }
+    }
+    // get TransportStoppage row details
+    public function getTransportStoppageDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $transportStoppageDetails = $conn->table('transport_stoppage')->where('id', $id)->first();
+            return $this->successResponse($transportStoppageDetails, 'Transport Stoppage row fetch successfully');
+        }
+    }
+    // update TransportStoppage
+    public function updateTransportStoppage(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'route_fare' => 'required',
+            'stop_position' => 'required',
+            'stop_time' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            
+            // update data
+            $query = $conn->table('transport_stoppage')->where('id', $id)->update([
+                'stop_position' => $request->stop_position,
+                'stop_time' => $request->stop_time,
+                'route_fare' => $request->route_fare,
+                'updated_at' => date("Y-m-d H:i:s")
+            ]);
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Transport Stoppage Details have Been updated');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+                
+        }
+    }
+    // delete TransportStoppage
+    public function deleteTransportStoppage(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('transport_stoppage')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Transport Stoppage have been deleted successfully');
             } else {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             }

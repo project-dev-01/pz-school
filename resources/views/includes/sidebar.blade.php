@@ -1030,25 +1030,25 @@
                                 <div class="collapse" id="sidebarTransport">
                                     <ul class="nav-second-level">
                                         <li>
-                                            <a href="{{ route('admin.transport.route')}}" class="nav-link {{ (request()->is('admin/transport/route')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.transport_route')}}" class="nav-link {{ (request()->is('admin/transport_route')) ? 'active' : '' }}">
                                                 <span> Route Master </span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="{{ route('admin.transport.vehicle')}}" class="nav-link {{ (request()->is('admin/transport/vehicle')) ? 'active' : '' }}">
+                                        <!-- <li>
+                                            <a href="" class="nav-link {{ (request()->is('')) ? 'active' : '' }}">
                                                 <span> Vehicle Master</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('admin.transport.stoppage')}}" class="nav-link {{ (request()->is('admin/transport/stoppage')) ? 'active' : '' }}">
+                                            <a href="" class="nav-link {{ (request()->is('')) ? 'active' : '' }}">
                                                 <span> Stoppage</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('admin.transport.assignvehicle')}}" class="nav-link {{ (request()->is('admin/transport/assignvehicle')) ? 'active' : '' }}">
+                                            <a href="" class="nav-link {{ (request()->is('')) ? 'active' : '' }}">
                                                 <span> Assign Vehicle</span>
                                             </a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
                             </li>
@@ -1111,6 +1111,12 @@
                     <a href="{{ route('admin.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('admin/forum*')) ? 'active' : '' }}">
                         <i class="far fa-comments"></i>
                         <span> Forum </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.leave_type')}}" target=”_blank” class="nav-link {{ (request()->is('admin/leave_type*')) ? 'active' : '' }}">
+                        <i class="far fa-comments"></i>
+                        <span> Leave Type </span>
                     </a>
                 </li>
                 <li>
