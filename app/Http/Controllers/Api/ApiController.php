@@ -2915,7 +2915,7 @@ class ApiController extends BaseController
                     'subjects.id as subject_id',
                     'subjects.name as subject_name',
                     'staffs.id as staff_id',
-                    'staffs.name as teacher_name'
+                    DB::raw('CONCAT(staffs.first_name, " ", staffs.last_name) as teacher_name'),
                 )
                 ->leftJoin('staffs', 'subject_assigns.teacher_id', '=', 'staffs.id')
                 ->leftJoin('subjects', 'subject_assigns.subject_id', '=', 'subjects.id')
@@ -3065,7 +3065,7 @@ class ApiController extends BaseController
                     'subjects.id as subject_id',
                     'subjects.name as subject_name',
                     'staffs.id as staff_id',
-                    'staffs.name as teacher_name'
+                    DB::raw('CONCAT(staffs.first_name, " ", staffs.last_name) as teacher_name'),
                 )
                 ->leftJoin('staffs', 'subject_assigns.teacher_id', '=', 'staffs.id')
                 ->leftJoin('subjects', 'subject_assigns.subject_id', '=', 'subjects.id')
@@ -3214,7 +3214,7 @@ class ApiController extends BaseController
                     'subjects.id as subject_id',
                     'subjects.name as subject_name',
                     'staffs.id as staff_id',
-                    'staffs.name as teacher_name'
+                    DB::raw('CONCAT(staffs.first_name, " ", staffs.last_name) as teacher_name')
                 )
                 ->leftJoin('staffs', 'subject_assigns.teacher_id', '=', 'staffs.id')
                 ->leftJoin('subjects', 'subject_assigns.subject_id', '=', 'subjects.id')
@@ -3356,7 +3356,8 @@ class ApiController extends BaseController
                     'subjects.id as subject_id',
                     'subjects.name as subject_name',
                     'staffs.id as staff_id',
-                    'staffs.name as teacher_name'
+                    DB::raw('CONCAT(staffs.first_name, " ", staffs.last_name) as teacher_name'),
+
                 )
                 ->leftJoin('staffs', 'subject_assigns.teacher_id', '=', 'staffs.id')
                 ->leftJoin('subjects', 'subject_assigns.subject_id', '=', 'subjects.id')
@@ -3496,7 +3497,7 @@ class ApiController extends BaseController
                     'subjects.id as subject_id',
                     'subjects.name as subject_name',
                     'staffs.id as staff_id',
-                    'staffs.name as teacher_name'
+                    DB::raw('CONCAT(staffs.first_name, " ", staffs.last_name) as teacher_name'),
                 )
                 ->leftJoin('staffs', 'subject_assigns.teacher_id', '=', 'staffs.id')
                 ->leftJoin('subjects', 'subject_assigns.subject_id', '=', 'subjects.id')
@@ -3674,7 +3675,8 @@ class ApiController extends BaseController
 
                     'subjects.name as subject_name',
                     'staffs.id as staff_id',
-                    'staffs.name as teacher_name'
+                    DB::raw('CONCAT(staffs.first_name, " ", staffs.last_name) as teacher_name'),
+
                 )
                 ->leftJoin('staffs', 'subject_assigns.teacher_id', '=', 'staffs.id')
                 ->leftJoin('subjects', 'subject_assigns.subject_id', '=', 'subjects.id')
@@ -3815,7 +3817,7 @@ class ApiController extends BaseController
                     'subjects.id as subject_id',
                     'subjects.name as subject_name',
                     'staffs.id as staff_id',
-                    'staffs.name as teacher_name'
+                    DB::raw('CONCAT(staffs.first_name, " ", staffs.last_name) as teacher_name')
                 )
                 ->leftJoin('staffs', 'subject_assigns.teacher_id', '=', 'staffs.id')
                 ->leftJoin('subjects', 'subject_assigns.subject_id', '=', 'subjects.id')
@@ -4209,7 +4211,11 @@ class ApiController extends BaseController
             // create new connection
             $classConn = $this->createNewConnection($request->branch_id);
 
-            $Timetable = $classConn->table('timetable_class')->select('timetable_class.*', 'staffs.name as teacher_name', 'subjects.name as subject_name')
+            $Timetable = $classConn->table('timetable_class')->select(
+                'timetable_class.*',
+                DB::raw('CONCAT(staffs.first_name, " ", staffs.last_name) as teacher_name'),
+                'subjects.name as subject_name'
+            )
                 ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
                 ->where([
                     ['timetable_class.day', $request->day],
@@ -4365,7 +4371,11 @@ class ApiController extends BaseController
             $con = $this->createNewConnection($request->branch_id);
             // get data
             // $Timetable = $con->table('timetable_class')->where('class_id',$request->class_id)->where('section_id',$request->section_id)->orderBy('time_start', 'asc')->orderBy('time_end', 'asc')->get()->toArray();
-            $Timetable = $con->table('timetable_class')->select('timetable_class.*', 'staffs.name as teacher_name', 'subjects.name as subject_name')
+            $Timetable = $con->table('timetable_class')->select(
+                'timetable_class.*',
+                DB::raw('CONCAT(staffs.first_name, " ", staffs.last_name) as teacher_name'),
+                'subjects.name as subject_name'
+            )
                 ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
                 ->where([
                     ['timetable_class.class_id', $request->class_id],
@@ -4411,7 +4421,11 @@ class ApiController extends BaseController
             // create new connection
             $con = $this->createNewConnection($request->branch_id);
 
-            $Timetable = $con->table('timetable_class')->select('timetable_class.*', 'staffs.name as teacher_name', 'subjects.name as subject_name')
+            $Timetable = $con->table('timetable_class')->select(
+                'timetable_class.*',
+                DB::raw('CONCAT(staffs.first_name, " ", staffs.last_name) as teacher_name'),
+                'subjects.name as subject_name'
+            )
                 ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')
                 ->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
                 ->where([
@@ -4599,7 +4613,11 @@ class ApiController extends BaseController
 
             //    dd($semester_id);
 
-            $Timetable = $con->table('timetable_class')->select('timetable_class.*', 'staffs.name as teacher_name', 'subjects.name as subject_name')
+            $Timetable = $con->table('timetable_class')->select(
+                'timetable_class.*',
+                DB::raw('CONCAT(staffs.first_name, " ", staffs.last_name) as teacher_name'),
+                'subjects.name as subject_name'
+            )
                 ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
                 ->where('timetable_class.class_id', $student->class_id)
                 ->where('timetable_class.section_id', $student->section_id)
@@ -4660,7 +4678,11 @@ class ApiController extends BaseController
                 $semester_id = 0;
             }
 
-            $Timetable = $con->table('timetable_class')->select('timetable_class.*', 'staffs.name as teacher_name', 'subjects.name as subject_name')
+            $Timetable = $con->table('timetable_class')->select(
+                'timetable_class.*',
+                DB::raw('CONCAT(staffs.first_name, " ", staffs.last_name) as teacher_name'),
+                'subjects.name as subject_name'
+            )
                 ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')
                 ->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
                 ->where('timetable_class.class_id', $student->class_id)
