@@ -7290,19 +7290,19 @@ class ApiController extends BaseController
             $Connection = $this->createNewConnection($request->branch_id);
             $birthday = $Connection->table('staffs as s')
                 ->select('s.id', 's.first_name as name', 's.birthday')
-                ->whereMonth("s.birthday",$month)
-                ->whereDay("s.birthday",$day)
-                ->where('id',$request->teacher_id)
+                ->whereMonth("s.birthday", $month)
+                ->whereDay("s.birthday", $day)
+                ->where('id', $request->teacher_id)
                 ->get();
             $success = [];
             foreach ($birthday as $birth) {
                 $data = $birth;
-                $data->title = $birth->name." Birthday";
+                $data->title = $birth->name . " Birthday";
                 $data->start = $date;
                 $data->end = $date;
                 $data->className = "bg-success";
                 array_push($success, $data);
-            }        
+            }
             return $this->successResponse($success, 'Birthday Calendor data get successfully');
         }
     }
@@ -7322,18 +7322,18 @@ class ApiController extends BaseController
             $Connection = $this->createNewConnection($request->branch_id);
             $birthday = $Connection->table('staffs as s')
                 ->select('s.id', 's.first_name as name', 's.birthday')
-                ->whereMonth("s.birthday",$month)
-                ->whereDay("s.birthday",$day)
+                ->whereMonth("s.birthday", $month)
+                ->whereDay("s.birthday", $day)
                 ->get();
             $success = [];
             foreach ($birthday as $birth) {
                 $data = $birth;
-                $data->title = $birth->name." Birthday";
+                $data->title = $birth->name . " Birthday";
                 $data->start = $date;
                 $data->end = $date;
                 $data->className = "bg-success";
                 array_push($success, $data);
-            }        
+            }
             return $this->successResponse($success, 'Birthday Calendor data get successfully');
         }
     }
@@ -8728,7 +8728,7 @@ class ApiController extends BaseController
             // create new connection
             $Conn = $this->createNewConnection($request->branch_id);
             // get data
-            $Hostel = $Conn->table('hostel')->select('hostel_category.name as category','hostel.*')->leftJoin('hostel_category', 'hostel.category_id', '=', 'hostel_category.id')->get();
+            $Hostel = $Conn->table('hostel')->select('hostel_category.name as category', 'hostel.*')->leftJoin('hostel_category', 'hostel.category_id', '=', 'hostel_category.id')->get();
             return $this->successResponse($Hostel, 'Hostel record fetch successfully');
         }
     }
@@ -8877,7 +8877,7 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $HostelRoomDetails = $conn->table('hostel_room')->select('hostel_room.*','hostel.name as hostel')->leftJoin('hostel', 'hostel_room.hostel_id', '=', 'hostel.id')->get();
+            $HostelRoomDetails = $conn->table('hostel_room')->select('hostel_room.*', 'hostel.name as hostel')->leftJoin('hostel', 'hostel_room.hostel_id', '=', 'hostel.id')->get();
             return $this->successResponse($HostelRoomDetails, 'Hostel Room record fetch successfully');
         }
     }
@@ -11622,18 +11622,23 @@ class ApiController extends BaseController
             $from_leave = date('Y-m-d', strtotime($request['frm_leavedate']));
             $to_leave = date('Y-m-d', strtotime($request['to_leavedate']));
             // check leave exist
-            $leaveCnt = $staffConn->table('student_leaves as lev')
+            $fromLeaveCnt = $staffConn->table('student_leaves as lev')
                 ->where([
                     ['lev.student_id', '=', $request->student_id],
                     ['lev.class_id', '=', $request->class_id],
                     ['lev.section_id', '=', $request->section_id],
                     ['lev.from_leave', '<=', $from_leave],
                     ['lev.to_leave', '>=', $from_leave],
+                ])->count();
+            $toLeaveCnt = $staffConn->table('student_leaves as lev')
+                ->where([
+                    ['lev.student_id', '=', $request->student_id],
+                    ['lev.class_id', '=', $request->class_id],
+                    ['lev.section_id', '=', $request->section_id],
                     ['lev.from_leave', '<=', $to_leave],
                     ['lev.to_leave', '>=', $to_leave]
-                ])
-                ->count();
-            if ($leaveCnt > 0) {
+                ])->count();
+            if ($fromLeaveCnt > 0 || $toLeaveCnt > 0) {
                 return $this->send422Error('You have already applied for leave between these dates', ['error' => 'You have already applied for leave between these dates']);
             } else {
                 // insert data
@@ -11915,6 +11920,22 @@ class ApiController extends BaseController
                 ->orderBy('lev.from_leave', 'asc')
                 ->get();
             return $this->successResponse($studentDetails, 'Student details fetch successfully');
+        }
+    }
+    // getLeaveTypes
+    public function getLeaveTypes(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $getAllTypes = $conn->table('leave_types as lev')->get();
+            return $this->successResponse($getAllTypes, 'Staff leave types fetch successfully');
         }
     }
 
@@ -12284,7 +12305,7 @@ class ApiController extends BaseController
 
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
-            
+
             // update data
             $query = $conn->table('transport_stoppage')->where('id', $id)->update([
                 'stop_position' => $request->stop_position,
@@ -12298,7 +12319,6 @@ class ApiController extends BaseController
             } else {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             }
-                
         }
     }
     // delete TransportStoppage
@@ -12323,6 +12343,149 @@ class ApiController extends BaseController
             $success = [];
             if ($query) {
                 return $this->successResponse($success, 'Transport Stoppage have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+    // staff leave apply
+    public function staffLeaveApply(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'staff_id' => 'required',
+            'from_leave' => 'required',
+            'to_leave' => 'required',
+            'leave_type' => 'required',
+            'reason' => 'required',
+            'status' => 'required',
+            'file_extension' => 'required',
+            'document' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            $from_leave = date('Y-m-d', strtotime($request['from_leave']));
+            $to_leave = date('Y-m-d', strtotime($request['to_leave']));
+            // check leave exist
+            $fromLeaveCnt = $staffConn->table('staff_leaves as lev')
+                ->where([
+                    ['lev.staff_id', '=', $request->staff_id],
+                    ['lev.from_leave', '<=', $from_leave],
+                    ['lev.to_leave', '>=', $from_leave]
+                ])->count();
+            $toLeaveCnt = $staffConn->table('staff_leaves as lev')
+                ->where([
+                    ['lev.staff_id', '=', $request->staff_id],
+                    ['lev.from_leave', '<=', $to_leave],
+                    ['lev.to_leave', '>=', $to_leave]
+                ])->count();
+            if ($fromLeaveCnt > 0 || $toLeaveCnt > 0) {
+                return $this->send422Error('You have already applied for leave between these dates', ['error' => 'You have already applied for leave between these dates']);
+            } else {
+                // insert data
+                if (isset($request->document)) {
+                    $now = now();
+                    $name = strtotime($now);
+                    $extension = $request->file_extension;
+                    $fileName = $name . "." . $extension;
+
+                    $base64 = base64_decode($request->document);
+                    $file = base_path() . '/public/admin-documents/leaves/' . $fileName;
+                    $suc = file_put_contents($file, $base64);
+                } else {
+                    $fileName = null;
+                }
+
+                $query = $staffConn->table('staff_leaves')->insert([
+                    'staff_id' => $request['staff_id'],
+                    'from_leave' => $from_leave,
+                    'to_leave' => $to_leave,
+                    'leave_type' => $request['leave_type'],
+                    'reason_id' => $request['reason'],
+                    'status' => $request['status'],
+                    'document' => $fileName,
+                    'remarks' => $request['remarks'],
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'You have applied for leave');
+                }
+            }
+        }
+    }
+    public function staffLeaveHistory(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $staff_id = $request->staff_id;
+            $leaveDetails = $conn->table('staff_leaves as lev')
+                ->select(
+                    'lev.id',
+                    'lev.staff_id',
+                    DB::raw('CONCAT(stf.first_name, " ", stf.last_name) as name'),
+                    DB::raw('DATE_FORMAT(lev.from_leave, "%d-%m-%Y") as from_leave'),
+                    DB::raw('DATE_FORMAT(lev.to_leave, "%d-%m-%Y") as to_leave'),
+                    DB::raw('DATE_FORMAT(lev.created_at, "%d-%m-%Y") as created_at'),
+                    DB::raw('DATEDIFF(lev.to_leave,lev.from_leave) as date_diff'),
+                    'lt.name as leave_type_name',
+                    'rs.name as reason_name',
+                    'lev.reason_id',
+                    'lev.document',
+                    'lev.status',
+                    'lev.remarks',
+                    'lev.assiner_remarks'
+                )
+                ->join('leave_types as lt', 'lev.leave_type', '=', 'lt.id')
+                ->leftJoin('staffs as stf', 'lev.staff_id', '=', 'stf.id')
+                ->leftJoin('reasons as rs', 'lev.reason_id', '=', 'rs.id')
+                ->when($staff_id, function ($query, $staff_id) {
+                    return $query->where('lev.staff_id', '=', $staff_id);
+                })
+                ->orderBy('lev.from_leave', 'asc')
+                ->get();
+            return $this->successResponse($leaveDetails, 'Staff leave details fetch successfully');
+        }
+    }
+    // staffLeaveApproved
+    public function staffLeaveApproved(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'leave_id' => 'required',
+            'assiner_remarks' => 'required',
+            'status' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $leave_id = $request->leave_id;
+            // create new connection
+            $Conn = $this->createNewConnection($request->branch_id);
+            // update data
+            $query = $Conn->table('staff_leaves')->where('id', $leave_id)->update([
+                'status' => $request->status,
+                'assiner_remarks' => $request->assiner_remarks,
+                'updated_at' => date("Y-m-d H:i:s")
+            ]);
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Leave Request have Been updated');
             } else {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             }

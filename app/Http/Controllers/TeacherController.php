@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use App\Models\Task;
 use PhpParser\Node\Expr\FuncCall;
+use DataTables;
 
 class TeacherController extends Controller
 {
@@ -28,7 +29,59 @@ class TeacherController extends Controller
     }
     public function applyleave()
     {
-        return view('teacher.leave_management.applyleave');
+        $get_leave_types = Helper::GetMethod(config('constants.api.get_leave_types'));
+        $get_leave_reasons = Helper::GetMethod(config('constants.api.get_leave_reasons'));
+
+        return view('teacher.leave_management.applyleave', [
+            'get_leave_types' => $get_leave_types['data'],
+            'get_leave_reasons' => $get_leave_reasons['data']
+        ]);
+    }
+    // student leave 
+    public function staffApplyLeave(Request $request)
+    {
+        $file = $request->file('file');
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        } else {
+            $base64 = null;
+            $extension = null;
+        }
+        $status = "Pending";
+        $data = [
+            'staff_id' => session()->get('ref_user_id'),
+            'leave_type' => $request->leave_type,
+            'from_leave' => $request->from_leave,
+            'to_leave' => $request->to_leave,
+            'reason' => $request->reason,
+            'remarks' => $request->remarks,
+            'status' => $status,
+            'document' => $base64,
+            'file_extension' => $extension
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.staff_apply_leave'), $data);
+        return $response;
+    }
+    public function getStaffLeaveList()
+    {
+        $staff_id = [
+            'staff_id' => session()->get('ref_user_id'),
+        ];
+        $response = Helper::PostMethod(config('constants.api.staff_leave_history'), $staff_id);
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">Update</a>
+                            </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
     }
     public function settings()
     {
@@ -318,12 +371,12 @@ class TeacherController extends Controller
             'teacher_class' => $response['data']
         ]);
     }
-     // by classes
+    // by classes
     public function byclasss()
     {
         $data = [
             'teacher_id' => session()->get('ref_user_id')
-        ];      
+        ];
         $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
 
@@ -340,7 +393,7 @@ class TeacherController extends Controller
     {
         $data = [
             'teacher_id' => session()->get('ref_user_id')
-        ];      
+        ];
         $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
         return view(
@@ -351,12 +404,12 @@ class TeacherController extends Controller
             ]
         );
     }
-     // by student
+    // by student
     public function bystudent()
     {
         $data = [
             'teacher_id' => session()->get('ref_user_id')
-        ];      
+        ];
         $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
         return view(
@@ -367,16 +420,16 @@ class TeacherController extends Controller
             ]
         );
     }
-     // overall
+    // overall
     public function overall()
     {
-        $datas=array();
+        $datas = array();
         $data = [
             'teacher_id' => session()->get('ref_user_id')
-        ];      
+        ];
         $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
-        $allexams=Helper::PostMethod(config('constants.api.all_exams_list'),$datas);
+        $allexams = Helper::PostMethod(config('constants.api.all_exams_list'), $datas);
 
         return view(
             'teacher.exam_results.overall',
@@ -387,21 +440,21 @@ class TeacherController extends Controller
             ]
         );
     }
-     // individual result
+    // individual result
     public function examResult()
     {
         // data already use this api post so empty var sent
         $data = [
             'teacher_id' => session()->get('ref_user_id')
-        ];      
-        $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);   
-      
+        ];
+        $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+
         return view(
             'teacher.exam.result',
             [
                 'classnames' => $getclass['data']
             ]
-        );     
+        );
     }
     public function homework()
     {
@@ -733,7 +786,7 @@ class TeacherController extends Controller
             "section_id" => $request->section_id,
             "subject_id" => $request->subject_id
         ];
-        
+
         $response = Helper::PostMethod(config('constants.api.update_student_leave'), $data);
         return $response;
     }
@@ -804,5 +857,4 @@ class TeacherController extends Controller
         $response = Helper::PostMethod(config('constants.api.add_subject_division'), $data);
         return $response;
     }
-
 }

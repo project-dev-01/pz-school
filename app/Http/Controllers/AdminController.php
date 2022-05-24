@@ -1021,7 +1021,7 @@ class AdminController extends Controller
             'address' => $request->address,
             'remarks' => $request->remarks
         ];
-        
+
         $response = Helper::PostMethod(config('constants.api.hostel_update'), $data);
         return $response;
     }
@@ -1040,7 +1040,7 @@ class AdminController extends Controller
     public function hostelRoom()
     {
         $hostel = Helper::GetMethod(config('constants.api.hostel_list'));
-        return view('admin.hostel_room.index',[ 
+        return view('admin.hostel_room.index', [
             'hostel' => $hostel['data']
         ]);
     }
@@ -1093,7 +1093,7 @@ class AdminController extends Controller
             'bed_fee' => $request->bed_fee,
             'remarks' => $request->remarks
         ];
-        
+
         $response = Helper::PostMethod(config('constants.api.hostel_room_update'), $data);
         return $response;
     }
@@ -1153,7 +1153,7 @@ class AdminController extends Controller
             'id' => $request->id,
             'name' => $request->name
         ];
-        
+
         $response = Helper::PostMethod(config('constants.api.hostel_category_update'), $data);
         return $response;
     }
@@ -1167,7 +1167,7 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.hostel_category_delete'), $data);
         return $response;
     }
-    
+
     public function book()
     {
         return view('admin.library.book');
@@ -3780,5 +3780,33 @@ class AdminController extends Controller
 
         $response = Helper::PostMethod(config('constants.api.transport_route_delete'), $data);
         return $response;
+    }
+    // LEAVE MANAGEMENT START
+    public function applyleave()
+    {
+        return view('admin.leave_management.applyleave');
+    }
+    public function approvalleave()
+    {
+        return view('admin.leave_management.approvalleave');
+    }
+
+    public function allleaves()
+    {
+        return view('admin.leave_management.allleaves');
+    }
+    public function getAllLeaveList()
+    {
+        $response = Helper::PostMethod(config('constants.api.staff_leave_history'), []);
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="approvedLeave">Update</a>
+                            </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
     }
 }

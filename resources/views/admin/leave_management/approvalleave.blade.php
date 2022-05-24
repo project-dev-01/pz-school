@@ -33,10 +33,10 @@
                                         <tbody>
                                             <tr>
                                                 <td class="text-center">1</td>                                                
-                                                <td>Arun kumar</td>
+                                                <td>Cameron</td>
                                                 <td class="text-center">02/01/2022</td>
                                                 <td class="text-center">1</td>
-                                                <td>Festival</td>                                                
+                                                <td>Medical</td>                                                
                                                 <td><div class="button-list">
                                 <a href="" class="btn btn-success btn-sm waves-effect waves-light" data-toggle="tooltip" title="Approved"><i class="far fa-thumbs-up"></i></a>                                
                                 <a href="" data-toggle="modal" data-target="#declineModel" class="btn btn-danger btn-sm waves-effect waves-light" data-toggle="tooltip" title="Decline"><i class="fas fa-eject"></i></a>
@@ -46,10 +46,10 @@
                                             
                                             <tr>
                                                 <td class="text-center">2</td>                                                
-                                                <td>Bala</td>
+                                                <td>Taylor</td>
                                                 <td class="text-center">10/12/2021</td>
                                                 <td class="text-center">1</td>
-                                                <td>Fever</td>                                                
+                                                <td>Personal</td>                                                
                                                 <td><div class="button-list">
                                 <a href="" class="btn btn-success btn-sm waves-effect waves-light" data-toggle="tooltip" title="Approved"><i class="far fa-thumbs-up"></i></a>                                
                                 <a href="" data-toggle="modal" data-target="#declineModel" class="btn btn-danger btn-sm waves-effect waves-light" data-toggle="tooltip" title="Decline"><i class="fas fa-eject"></i></a>
@@ -59,10 +59,10 @@
                                             
                                             <tr>
                                                 <td class="text-center">3</td>                                                
-                                                <td>Haja</td>
+                                                <td>Smith</td>
                                                 <td class="text-center">05/08/2021</td>
                                                 <td class="text-center">3</td>
-                                                <td>Festival</td>  
+                                                <td>Sick</td>  
                                                 <td><div class="button-list">
                                 <a href="" class="btn btn-success btn-sm waves-effect waves-light" data-toggle="tooltip" title="Approved"><i class="far fa-thumbs-up"></i></a>                                
                                 <a href="" data-toggle="modal" data-target="#declineModel" class="btn btn-danger btn-sm waves-effect waves-light" data-toggle="tooltip" title="Decline"><i class="fas fa-eject"></i></a>
@@ -72,10 +72,10 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-center">4</td>                                                
-                                                <td>Mohan</td>
+                                                <td>David</td>
                                                 <td class="text-center">05/05/2021</td>
-                                                <td class="text-center">2</td>
-                                                <td>Festival</td>  
+                                                <td class="text-center">5</td>
+                                                <td>Medical</td>  
                                                 <td><div class="button-list">
                                 <a href="" class="btn btn-success btn-sm waves-effect waves-light" data-toggle="tooltip" title="Approved"><i class="far fa-thumbs-up"></i></a>                                
                                 <a href="" data-toggle="modal" data-target="#declineModel" class="btn btn-danger btn-sm waves-effect waves-light" data-toggle="tooltip" title="Decline"><i class="fas fa-eject"></i></a>
@@ -85,10 +85,10 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-center">5</td>                                                
-                                                <td>Guna</td>
+                                                <td>Starc</td>
                                                 <td class="text-center">05/04/2021</td>
                                                 <td class="text-center">2</td>
-                                                <td>Festival</td>  
+                                                <td>Function</td>  
                                                 <td><div class="button-list">
                                 <a href="" class="btn btn-success btn-sm waves-effect waves-light" data-toggle="tooltip" title="Approved"><i class="far fa-thumbs-up"></i></a>                                
                                 <a href="" data-toggle="modal" data-target="#declineModel" class="btn btn-danger btn-sm waves-effect waves-light" data-toggle="tooltip" title="Decline"><i class="fas fa-eject"></i></a>
@@ -98,10 +98,10 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-center">6</td>                                                
-                                                <td>Karthi</td>
+                                                <td>Mohit</td>
                                                 <td class="text-center">22/02/2021</td>
                                                 <td class="text-center">2</td>
-                                                <td>Festival</td>  
+                                                <td>Sick</td>  
                                                 <td><div class="button-list">
                                 <a href="" class="btn btn-success btn-sm waves-effect waves-light" data-toggle="tooltip" title="Approved"><i class="far fa-thumbs-up"></i></a>                                
                                 <a href="" data-toggle="modal" data-target="#declineModel" class="btn btn-danger btn-sm waves-effect waves-light" data-toggle="tooltip" title="Decline"><i class="fas fa-eject"></i></a>
@@ -111,7 +111,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-center">7</td>                                                
-                                                <td>Kumar</td>
+                                                <td>James</td>
                                                 <td class="text-center">10/01/2021</td>
                                                 <td class="text-center">3</td>
                                                 <td>Festival</td>  

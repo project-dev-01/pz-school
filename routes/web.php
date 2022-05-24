@@ -242,8 +242,8 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::get('exam_results/overall', [SuperAdminController::class, 'overall'])->name('super_admin.exam_results.overall');
 
         Route::get('exam_results/bystudent', [SuperAdminController::class, 'bystudent'])->name('super_admin.exam_results.bystudent');
-         
-         Route::get('exam/result', [SuperAdminController::class, 'examResult'])->name('super_admin.exam.result');
+
+        Route::get('exam/result', [SuperAdminController::class, 'examResult'])->name('super_admin.exam.result');
         // exam result end
         Route::get('evaluation_report', [SuperAdminController::class, 'evaluationReport'])->name('super_admin.evaluation_report');
 
@@ -413,7 +413,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('update-profile-info', [SuperAdminController::class, 'updateProfileInfo'])->name('settings.updateProfileInfo');
         Route::post('update-setting-session', [CommonController::class, 'updateSettingSession'])->name('settings.updateSettingSession');
         Route::post('settings-update-logo', [CommonController::class, 'updateSettingSessionLogo'])->name('settings.update.logo');
-        
+
         // static page routes start
 
         // Admission routes
@@ -437,7 +437,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('evaluation_report', [AdminController::class, 'evaluationReport'])->name('admin.evaluation_report');
         Route::post('homework/evaluation', [AdminController::class, 'evaluation'])->name('admin.homework.evaluation');
         Route::get('homework/edit', [AdminController::class, 'homeworkEdit'])->name('admin.homework_edit');
-        
+
         Route::post('homework/view', [AdminController::class, 'viewHomework'])->name('admin.homework.view');
 
         // exam Term route
@@ -456,25 +456,25 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('exam_hall/update', [AdminController::class, 'updateExamHall'])->name('admin.exam_hall.update');
         Route::post('exam_hall/delete', [AdminController::class, 'deleteExamHall'])->name('admin.exam_hall.delete');
 
-         // exam route
-         Route::get('exam/index', [AdminController::class, 'exam'])->name('admin.exam');
-         Route::post('exam/add', [AdminController::class, 'addExam'])->name('admin.exam.add');
-         Route::get('exam/list', [AdminController::class, 'getExamList'])->name('admin.exam.list');
-         Route::post('exam/exam-details', [AdminController::class, 'getExamDetails'])->name('admin.exam.details');
-         Route::post('exam/update', [AdminController::class, 'updateExam'])->name('admin.exam.update');
-         Route::post('exam/delete', [AdminController::class, 'deleteExam'])->name('admin.exam.delete');
+        // exam route
+        Route::get('exam/index', [AdminController::class, 'exam'])->name('admin.exam');
+        Route::post('exam/add', [AdminController::class, 'addExam'])->name('admin.exam.add');
+        Route::get('exam/list', [AdminController::class, 'getExamList'])->name('admin.exam.list');
+        Route::post('exam/exam-details', [AdminController::class, 'getExamDetails'])->name('admin.exam.details');
+        Route::post('exam/update', [AdminController::class, 'updateExam'])->name('admin.exam.update');
+        Route::post('exam/delete', [AdminController::class, 'deleteExam'])->name('admin.exam.delete');
 
         // exam routes
         Route::get('exam/mark_distribution', [AdminController::class, 'examMarkDistribution'])->name('admin.exam.mark_distribution');
         // Route::get('exam/exam', [AdminController::class, 'exam'])->name('admin.exam.exam');
 
-        
+
         // exam timetable
         Route::post('timetable/exam', [AdminController::class, 'timetableExam'])->name('admin.exam_timetable');
         Route::post('timetable/getexam', [AdminController::class, 'getExamTimetable'])->name('admin.exam_timetable.get');
         Route::post('timetable/viewexam', [AdminController::class, 'viewExamTimetable'])->name('admin.exam_timetable.view');
         Route::post('timetable/addexam', [AdminController::class, 'addExamTimetable'])->name('admin.exam_timetable.add');
-        
+
         Route::get('timetable/viewexam', [AdminController::class, 'timeTableViewExam'])->name('admin.timetable.viewexam');
         Route::get('timetable/set_examwise', [AdminController::class, 'timeTableSetExamWise'])->name('admin.timetable.set_examwise');
         // exam marks
@@ -496,7 +496,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('hostel/hostel-details', [AdminController::class, 'getHostelDetails'])->name('admin.hostel.details');
         Route::post('hostel/update', [AdminController::class, 'updateHostel'])->name('admin.hostel.update');
         Route::post('hostel/delete', [AdminController::class, 'deleteHostel'])->name('admin.hostel.delete');
-        
+
         // Hostel Room routes
         Route::get('hostel_room/index', [AdminController::class, 'hostelRoom'])->name('admin.hostel_room');
         Route::get('hostel_room/list', [AdminController::class, 'getHostelRoomList'])->name('admin.hostel_room.list');
@@ -536,7 +536,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('forum/page-categories-single', [AdminController::class, 'forumPageCategoriesSingle'])->name('admin.forum.page-categories-single');
         Route::get('forum/page-tabs', [AdminController::class, 'forumPageTabs'])->name('admin.forum.page-tabs');
         Route::get('forum/page-tabs-guidelines', [AdminController::class, 'forumPageTabGuidelines'])->name('admin.forum.page-tabs-guidelines');
-        
+
         // Attendance routes
         Route::get('attendance/student_entry', [AdminController::class, 'studentEntry'])->name('admin.attendance.student_entry');
         Route::get('attendance/employee_entry', [AdminController::class, 'employeeEntry'])->name('admin.attendance.employee_entry');
@@ -544,7 +544,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         // admin student_leave list
         Route::get('student-leave/list', [AdminController::class, 'studentLeaveShow'])->name('admin.student_leave.list');
         // Route::post('all-student-leave/list', [AdminController::class, 'getStudentLeaveList'])->name('admin.all_tudent_leave.list');
-        
+
         //class room Routes
         Route::get('classroom/classroom-management', [AdminController::class, 'classroomManagement'])->name('admin.classroom.management');
         //faq route
@@ -563,44 +563,53 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('form/page-create-topic', [AdminController::class, 'createpost'])->name('admin.forum.create-topic');
         Route::get('forum/page-single-topic-val/{id}/{user_id}', [AdminController::class, 'forumPageSingleTopicwithvalue'])->name('admin.forum.page-single-topic-val');
         Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [AdminController::class, 'forumPageCategoriesSingle'])->name('admin.forum.page-categories-single-val');
-       Route::post('form/postimage', [AdminController::class, 'imagestore'])->name('admin.forum.image.store');
-      //  Route::post('form/postimage', [CommonController::class, 'imagestore'])->name('forum.image.store');
+        Route::post('form/postimage', [AdminController::class, 'imagestore'])->name('admin.forum.image.store');
+        //  Route::post('form/postimage', [CommonController::class, 'imagestore'])->name('forum.image.store');
 
-      // vehicle By route 
-      Route::post('vehicle-by-route', [AdminController::class, 'vehicleByRoute'])->name('admin.vehicle_by_route');
+        // vehicle By route 
+        Route::post('vehicle-by-route', [AdminController::class, 'vehicleByRoute'])->name('admin.vehicle_by_route');
 
-      // room By hostel Route
-      Route::post('room-by-hostel', [AdminController::class, 'roomByHostel'])->name('admin.room_by_hostel');
+        // room By hostel Route
+        Route::post('room-by-hostel', [AdminController::class, 'roomByHostel'])->name('admin.room_by_hostel');
 
-      // exam Result Group 
-      Route::get('exam_results/byclass', [AdminController::class, 'byclasss'])->name('admin.exam_results.byclass');
-      Route::get('exam_results/bysubject', [AdminController::class, 'bysubject'])->name('admin.exam_results.bysubject');      
-      Route::get('exam_results/overall', [AdminController::class, 'overall'])->name('admin.exam_results.overall');      
-      Route::get('exam_results/bystudent', [AdminController::class, 'bystudent'])->name('admin.exam_results.bystudent');               
-      Route::get('exam/result', [AdminController::class, 'examResult'])->name('admin.exam.result');
-      // exam result end
-      
-      // Test Result Route
-      Route::get('test_result', [AdminController::class, 'testResult'])->name('admin.test_result');
-      
-      Route::post('subjectmarksAdd', [AdminController::class, 'subjectmarks'])->name('admin.subjectmarks.add');
-      Route::post('subjectdivisionAdd', [AdminController::class, 'subjectdivisionAdd'])->name('admin.subjectdivision.add');
+        // exam Result Group 
+        Route::get('exam_results/byclass', [AdminController::class, 'byclasss'])->name('admin.exam_results.byclass');
+        Route::get('exam_results/bysubject', [AdminController::class, 'bysubject'])->name('admin.exam_results.bysubject');
+        Route::get('exam_results/overall', [AdminController::class, 'overall'])->name('admin.exam_results.overall');
+        Route::get('exam_results/bystudent', [AdminController::class, 'bystudent'])->name('admin.exam_results.bystudent');
+        Route::get('exam/result', [AdminController::class, 'examResult'])->name('admin.exam.result');
+        // exam result end
 
-      // Leave Type routes
-      Route::get('leave_type/index', [AdminController::class, 'leaveType'])->name('admin.leave_type');
-      Route::get('leave_type/list', [AdminController::class, 'getLeaveTypeList'])->name('admin.leave_type.list');
-      Route::post('leave_type/add', [AdminController::class, 'addLeaveType'])->name('admin.leave_type.add');
-      Route::post('leave_type/leave_type-details', [AdminController::class, 'getLeaveTypeDetails'])->name('admin.leave_type.details');
-      Route::post('leave_type/update', [AdminController::class, 'updateLeaveType'])->name('admin.leave_type.update');
-      Route::post('leave_type/delete', [AdminController::class, 'deleteLeaveType'])->name('admin.leave_type.delete');
+        // Test Result Route
+        Route::get('test_result', [AdminController::class, 'testResult'])->name('admin.test_result');
 
-      // Transport Route routes
-      Route::get('transport_route/index', [AdminController::class, 'transportRoute'])->name('admin.transport_route');
-      Route::get('transport_route/list', [AdminController::class, 'getTransportRouteList'])->name('admin.transport_route.list');
-      Route::post('transport_route/add', [AdminController::class, 'addTransportRoute'])->name('admin.transport_route.add');
-      Route::post('transport_route/transport_route-details', [AdminController::class, 'getTransportRouteDetails'])->name('admin.transport_route.details');
-      Route::post('transport_route/update', [AdminController::class, 'updateTransportRoute'])->name('admin.transport_route.update');
-      Route::post('transport_route/delete', [AdminController::class, 'deleteTransportRoute'])->name('admin.transport_route.delete');
+        Route::post('subjectmarksAdd', [AdminController::class, 'subjectmarks'])->name('admin.subjectmarks.add');
+        Route::post('subjectdivisionAdd', [AdminController::class, 'subjectdivisionAdd'])->name('admin.subjectdivision.add');
+
+        // Leave Type routes
+        Route::get('leave_type/index', [AdminController::class, 'leaveType'])->name('admin.leave_type');
+        Route::get('leave_type/list', [AdminController::class, 'getLeaveTypeList'])->name('admin.leave_type.list');
+        Route::post('leave_type/add', [AdminController::class, 'addLeaveType'])->name('admin.leave_type.add');
+        Route::post('leave_type/leave_type-details', [AdminController::class, 'getLeaveTypeDetails'])->name('admin.leave_type.details');
+        Route::post('leave_type/update', [AdminController::class, 'updateLeaveType'])->name('admin.leave_type.update');
+        Route::post('leave_type/delete', [AdminController::class, 'deleteLeaveType'])->name('admin.leave_type.delete');
+
+        // Transport Route routes
+        Route::get('transport_route/index', [AdminController::class, 'transportRoute'])->name('admin.transport_route');
+        Route::get('transport_route/list', [AdminController::class, 'getTransportRouteList'])->name('admin.transport_route.list');
+        Route::post('transport_route/add', [AdminController::class, 'addTransportRoute'])->name('admin.transport_route.add');
+        Route::post('transport_route/transport_route-details', [AdminController::class, 'getTransportRouteDetails'])->name('admin.transport_route.details');
+        Route::post('transport_route/update', [AdminController::class, 'updateTransportRoute'])->name('admin.transport_route.update');
+        Route::post('transport_route/delete', [AdminController::class, 'deleteTransportRoute'])->name('admin.transport_route.delete');
+        // LEAVE MANAGEMENT ROUTES start
+        // Leave Apply
+        Route::get('leave_management/applyleave', [AdminController::class, 'applyleave'])->name('admin.leave_management.applyleave');
+        // Leave approval
+        Route::get('leave_management/approvalleave', [AdminController::class, 'approvalleave'])->name('admin.leave_management.approvalleave');
+        // Leave allLeaves
+        Route::get('leave_management/allleaves', [AdminController::class, 'allleaves'])->name('admin.leave_management.allleaves');
+        Route::get('leave_management/all_leave_list', [AdminController::class, 'getAllLeaveList'])->name('admin.leave_management.list');
+
     });
     // admin routes end
 
@@ -625,7 +634,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
         Route::post('form/page-create-topic', [StaffController::class, 'createpost'])->name('staff.forum.create-topic');
         Route::get('forum/page-single-topic-val/{id}/{user_id}', [StaffController::class, 'forumPageSingleTopicwithvalue'])->name('staff.forum.page-single-topic-val');
-        Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [StaffController::class, 'forumPageCategoriesSingle'])->name('staff.forum.page-categories-single-val');       
+        Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [StaffController::class, 'forumPageCategoriesSingle'])->name('staff.forum.page-categories-single-val');
         Route::post('form/postimage', [StaffController::class, 'imagestore'])->name('staff.forum.image.store');
         // Settings
         Route::get('settings', [StaffController::class, 'settings'])->name('staff.settings');
@@ -798,6 +807,8 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('homework/view', [TeacherController::class, 'viewHomework'])->name('teacher.homework.view');
         // Leave Apply
         Route::get('leave_management/applyleave', [TeacherController::class, 'applyleave'])->name('teacher.leave_management.applyleave');
+        Route::post('leave_management/applyleave_save', [TeacherController::class, 'staffApplyLeave'])->name('teacher.leave_management.add');
+        Route::get('leave_management/applyleave_list', [TeacherController::class, 'getStaffLeaveList'])->name('teacher.leave_management.list');
         
         // Forum routes
         Route::get('forum/index', [TeacherController::class, 'forumIndex'])->name('teacher.forum.index');
@@ -831,17 +842,17 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('task/index', [TeacherController::class, 'taskIndex'])->name('teacher.task');
         Route::post('subjectmarksAdd', [TeacherController::class, 'subjectmarks'])->name('teacher.subjectmarks.add');
         Route::post('subjectdivisionAdd', [TeacherController::class, 'subjectdivisionAdd'])->name('teacher.subjectdivision.add');
-        
+
         // exam Result Group 
         Route::get('exam_results/byclass', [TeacherController::class, 'byclasss'])->name('teacher.exam_results.byclass');
 
         Route::get('exam_results/bysubject', [TeacherController::class, 'bysubject'])->name('teacher.exam_results.bysubject');
 
         Route::get('exam_results/bystudent', [TeacherController::class, 'bystudent'])->name('teacher.exam_results.bystudent');
-        Route::get('exam_results/overall', [TeacherController::class, 'overall'])->name('teacher.exam_results.overall');      
+        Route::get('exam_results/overall', [TeacherController::class, 'overall'])->name('teacher.exam_results.overall');
         Route::get('exam/result', [TeacherController::class, 'examResult'])->name('teacher.exam.result');
         Route::post('section-by-class', [AdminController::class, 'sectionByClass'])->name('teacher.section_by_class');
-        
+
 
         Route::get('analyticrep', [TeacherController::class, 'analytic'])->name('teacher.analyticrep.analyticreport');
         Route::post('classroomAdd', [TeacherController::class, 'classroomPost'])->name('teacher.classroom.add');
@@ -855,7 +866,6 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
         // Section By Class Route
         Route::post('section-by-class', [TeacherController::class, 'sectionByClass'])->name('teacher.section_by_class');
-
     });
 
     // TEACHER CONTROLLER END
@@ -881,7 +891,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('library/books', [ParentController::class, 'bookList'])->name('parent.library.books');
         Route::get('library/book_issued', [ParentController::class, 'bookIssued'])->name('parent.library.book_issued');
 
-        
+
         //Time Table routes
         Route::get('timetable/index', [ParentController::class, 'timeTable'])->name('parent.timetable.index');
 
@@ -920,7 +930,6 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('std_leave_apply/add', [ParentController::class, 'student_applyleave'])->name('parent.studentleave.add');
         Route::get('qualification/list', [ParentController::class, 'getstudentleave_list'])->name('parent.student_leave.list');
         Route::post('std_leave_apply/reupload_file', [ParentController::class, 'reUploadLeaveFile'])->name('parent.reupload_file.add');
-        
     });
 
 

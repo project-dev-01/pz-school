@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Leave Management')
+@section('title','LeaveManagement')
 @section('content')
 
 <!-- Start Content-->
@@ -151,18 +151,18 @@
                             </li>
                         </ul><br>
                         <div class="card-body">
-                            <form id="staffLeaveApply" method="post" action="{{ route('teacher.leave_management.add') }}" autocomplete="off" novalidate>
+                            <form id="demo-form" data-parsley-validate="" autocomplete="off">
                                 <!--1st row-->
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="leave_type">Leave Type<span class="text-danger">*</span></label>
-                                            <select id="leave_type" name="leave_type" class="form-control">
-                                                <option value="">Select Leave Type</option>
-                                                @forelse ($get_leave_types as $res)
-                                                <option value="{{ $res['id'] }}">{{ $res['name'] }}</option>
-                                                @empty
-                                                @endforelse
+                                            <label for="heard">Leave Requested<span class="text-danger">*</span></label>
+                                            <select id="heard" class="form-control" required="">
+                                                <option value="Ann">Annual</option>
+                                                <option value="med">Medical</option>
+                                                <option value="com">Compensate</option>
+                                                <option value="unpaid">Unpaid</option>
+                                                <option value="other">Other..</option>
                                             </select>
                                         </div>
                                     </div>
@@ -175,7 +175,7 @@
                                                         <span class="far fa-calendar-alt"></span>
                                                     </div>
                                                 </div>
-                                                <input type="text" autocomplete="off" name="frm_ldate" class="form-control" id="frm_ldate">
+                                                <input type="text" class="form-control homeWorkAdd" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div>
@@ -188,54 +188,36 @@
                                                         <span class="far fa-calendar-alt"></span>
                                                     </div>
                                                 </div>
-                                                <input type="text" autocomplete="off" name="to_ldate" class="form-control" id="to_ldate">
+                                                <input type="text" class="form-control homeWorkAdd" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <!--2st row-->
                                 <div class="row">
+                                    <div class="col-md-8">
+                                        <label for="message">Reason(s)<span class="text-danger">*</span></label>
+                                        <textarea id="message" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                            </textarea>
+                                    </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="changelev">Reason(s)<span class="text-danger">*</span></label>
-                                            <select id="changelevReasons" class="form-control" name="changelevReasons">
-                                                <option value="">Select Student</option>
-                                                @forelse ($get_leave_reasons as $res)
-                                                <option value="{{ $res['id'] }}">{{ $res['name'] }}</option>
-                                                @empty
-                                                @endforelse
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4" id="remarks_div" style="display:none;">
-                                        <div class="form-group">
-                                            <label for="heard">Remarks</label>
+                                            <label for="heard">Posting Date<span class="text-danger">*</span></label>
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <span class="far fa-calendar-alt"></span>
+                                                    </div>
                                                 </div>
-                                                <input type="text" name="remarks" class="form-control" id="remarks">
+                                                <input type="text" class="form-control homeWorkAdd" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="document">Attachment File</label>
-
-                                            <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" id="homework_file" class="custom-file-input" name="file">
-                                                    <label class="custom-file-label" for="document">Choose file</label>
-                                                </div>
-                                            </div>
-                                            <span id="file_name"></span>
-
                                         </div>
                                     </div>
                                 </div>
                                 <!--3rd row-->
                                 <br />
                                 <div class="clearfix mt-4">
-                                    <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Apply</button>
+                                    <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Save</button>
                                 </div>
                             </form>
 
@@ -259,22 +241,45 @@
                                 <div class="col-sm-12">
                                     <div class="">
                                         <div class="table-responsive">
-                                            <table id="staff-leave-list" class="table table-bordered mb-0">
+                                            <table class="table table-bordered mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th>#</th>
-                                                        <th>Name</th>
-                                                        <th>Leave Type</th>
-                                                        <th>Leave From</th>
-                                                        <th>To From</th>
-                                                        <th>Reason</th>
-                                                        <th>Document</th>
-                                                        <th>Status</th>
-                                                        <th>Apply Date</th>
-                                                        <th>Action</th>
+                                                        <th class="text-center">S.no</th>
+                                                        <th class="text-center">Leave Type</th>
+                                                        <th class="text-center">Date</th>
+                                                        <th class="text-center">Reason(s)</th>
+                                                        <th class="text-center">Admin Remarks</th>
+                                                        <th class="text-center">Leave Status</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    <tr>
+                                                        <td class="text-center">1</td>
+                                                        <td>Annual</td>
+                                                        <td class="text-center">02/01/2022</td>
+                                                        <td>Festival</td>
+                                                        <td class="text-warning">Waiting for approval</td>
+                                                        <td class="text-warning">Waiting for approval</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-center">2</td>
+                                                        <td>Unpaid</td>
+                                                        <td class="text-center">10/12/2021</td>
+                                                        <td>Fever</td>
+                                                        <td class="text-success">Approved</td>
+                                                        <td class="text-success">Approved</td>
+
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-center">3</td>
+                                                        <td>Medical</td>
+                                                        <td class="text-center">05/08/2021</td>
+                                                        <td>Festival</td>
+                                                        <td class="text-danger">your request is Rejected</td>
+                                                        <td class="text-danger">Rejected</td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div> <!-- end table-responsive-->
@@ -292,10 +297,4 @@
     </div>
 </div>
 
-@endsection
-@section('scripts')
-<script>
-    var StaffLeaveList = "{{ route('teacher.leave_management.list') }}";
-</script>
-<script src="{{ asset('js/custom/staff_apply_leave.js') }}"></script>
 @endsection

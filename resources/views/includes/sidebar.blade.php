@@ -866,6 +866,32 @@
                     </div>
                 </li>
                 <li>
+                    <a href="#sidebarLeaveManage" data-toggle="collapse">
+                        <i data-feather="map"></i>
+                        <span> Leave Management </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarLeaveManage">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('admin.leave_management.allleaves')}}" class="nav-link {{ (request()->is('admin/leave_management*')) ? 'active' : '' }}">
+                                    <span> All Leave</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.leave_management.applyleave')}}" class="nav-link {{ (request()->is('admin/leave_management*')) ? 'active' : '' }}">
+                                    <span> Leave Apply </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.leave_management.approvalleave')}}" class="nav-link {{ (request()->is('admin/leave_management*')) ? 'active' : '' }}">
+                                    <span> Leave Approval </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
                     <a href="{{ route('admin.student_leave.list')}}" class="nav-link {{ (request()->is('admin/student_leave*')) ? 'active' : '' }}">
                         <i class="far fa-user"></i>
                         <span> Student Leave Details </span>

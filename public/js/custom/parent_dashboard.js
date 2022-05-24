@@ -168,6 +168,7 @@ $(function () {
             formData.append('frm_leavedate', frm_leavedate);
             formData.append('to_leavedate', to_leavedate);
             formData.append('reason', reason);
+            formData.append('reason_text', reason_text);
             formData.append('remarks', remarks);
             // formData.append('file', file);
             formData.append('file', $('input[type=file]')[0].files[0]);
@@ -181,7 +182,7 @@ $(function () {
             $.ajax({
                 url: $(form).attr('action'),
                 method: $(form).attr('method'),
-                data: new FormData(form),
+                data: formData,
                 processData: false,
                 dataType: 'json',
                 contentType: false,

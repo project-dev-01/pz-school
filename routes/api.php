@@ -352,7 +352,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('hostel/update', [ApiController::class, 'updateHostel']);
     Route::post('hostel/delete', [ApiController::class, 'deleteHostel']);
 
-    
+
     // Hostel Category routes
     Route::post('hostel_category/add', [ApiController::class, 'addHostelCategory']);
     Route::get('hostel_category/list', [ApiController::class, 'getHostelCategoryList']);
@@ -409,7 +409,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('get_leave_reasons', [ApiController::class, 'get_leavereasons']);
     Route::post('studentleave_list', [ApiController::class, 'get_particular_studentleave_list']);
     Route::post('std_leave_apply/reupload_file', [ApiController::class, 'reuploadFileStudent']);
-    
+
     Route::post('teacher_leave_approve', [ApiController::class, 'teacher_leaveapprove']);
     Route::post('get_all_student_leaves', [ApiController::class, 'getAllStudentLeaves']);
 
@@ -436,4 +436,9 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('transport_stoppage/transport_stoppage-details', [ApiController::class, 'getTransportStoppageDetails']);
     Route::post('transport_stoppage/update', [ApiController::class, 'updateTransportStoppage']);
     Route::post('transport_stoppage/delete', [ApiController::class, 'deleteTransportStoppage']);
+    // staff leave apply
+    Route::get('employee-leave/get_leave_types', [ApiController::class, 'getLeaveTypes']);
+    Route::post('employee-leave/apply', [ApiController::class, 'staffLeaveApply']);
+    Route::post('employee-leave/leave_history', [ApiController::class, 'staffLeaveHistory']);
+    Route::post('employee-leave/approved', [ApiController::class, 'staffLeaveApproved']);
 });

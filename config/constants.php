@@ -403,6 +403,11 @@ return [
         'transport_stoppage_details' => $url.'/transport_stoppage/transport_stoppage-details',
         'transport_stoppage_update' => $url.'/transport_stoppage/update',
         'transport_stoppage_delete' => $url.'/transport_stoppage/delete',
+        // employee-leave
+        'get_leave_types'=>$url.'/employee-leave/get_leave_types',
+        'staff_apply_leave'=>$url.'/employee-leave/apply',
+        'staff_leave_history'=>$url.'/employee-leave/leave_history',
+        'staff_leave_approved'=>$url.'/employee-leave/approved'
     ]
 
 ];

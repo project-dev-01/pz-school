@@ -5,7 +5,7 @@
             <div class="col-md-6">
                 2020 - <script>
                     document.write(new Date().getFullYear())
-                    </script> &copy; by <a href="https://paxsuzen.com">Paxsuzen</a>
+                </script> &copy; by <a href="https://paxsuzen.com">Paxsuzen</a>
             </div>
         </div>
     </div>
@@ -44,9 +44,9 @@
             day = '' + d.getDate(),
             year = d.getFullYear();
 
-        if (month.length < 2) 
+        if (month.length < 2)
             month = '0' + month;
-        if (day.length < 2) 
+        if (day.length < 2)
             day = '0' + day;
 
         return [year, month, day].join('-');
@@ -143,7 +143,7 @@
     var branchID = "{{ Session::get('branch_id') }}";
     var userID = "{{ Session::get('user_id') }}";
     var studentID = "{{ Session::get('student_id') }}";
-    
+
     // branch details
     var branchList = "{{ route('branch.list') }}";
     var branchShow = "{{ route('branch.index') }}";
@@ -177,7 +177,7 @@
     var eventPublish = "{{ route('event.publish') }}";
     var branchByEvent = "{{ config('constants.api.branch_by_event') }}";
 
-    
+
     // settings url
     var profileUpdateStg = "{{ config('constants.api.change_profile_picture') }}";
     var updateSettingSession = "{{ route('settings.updateSettingSession') }}";
@@ -189,7 +189,7 @@
     var deleteUser = "{{ route('users.delete') }}";
 
     //forum permission
-    var getuserid="{{config('constants.api.dbvsgetbranchid')}}";
+    var getuserid = "{{config('constants.api.dbvsgetbranchid')}}";
 </script>
 <!-- custom js  -->
 <!-- <script src="{{ asset('js/custom/classes.js') }}"></script>
@@ -274,7 +274,7 @@
                     var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
                     //radar chart
                     var radarChart = {
-                        labels: ["Mathematics", "History", "Study of the Environment", "Geography", "Natural Sciences", "Civics Education", "Physical Education","English"],
+                        labels: ["Mathematics", "History", "Study of the Environment", "Geography", "Natural Sciences", "Civics Education", "Physical Education", "English"],
                         datasets: [{
                                 label: "Quarterly",
                                 backgroundColor: hexToRGB(colors[0], 0.3),
@@ -283,7 +283,7 @@
                                 pointBorderColor: "#fff",
                                 pointHoverBackgroundColor: "#fff",
                                 pointHoverBorderColor: colors[0],
-                                data: [95.83, 53, 100, 68.75, 54.55, 32.86, 26.32,14.29]
+                                data: [95.83, 53, 100, 68.75, 54.55, 32.86, 26.32, 14.29]
                             },
                             {
                                 label: "Annual",
@@ -307,7 +307,7 @@
                     var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
                     //radar chart
                     var radarChart = {
-                        labels: ["A", "A+", "A-", "B+", "B", "C+", "C","D","E","G"],
+                        labels: ["A", "A+", "A-", "B+", "B", "C+", "C", "D", "E", "G"],
                         datasets: [{
                                 label: "Quarterly",
                                 backgroundColor: hexToRGB(colors[0], 0.3),
@@ -316,7 +316,7 @@
                                 pointBorderColor: "#fff",
                                 pointHoverBackgroundColor: "#fff",
                                 pointHoverBorderColor: colors[0],
-                                data: [0, 41, 16, 12, 4, 20, 0,0,0]
+                                data: [0, 41, 16, 12, 4, 20, 0, 0, 0]
                             },
                             {
                                 label: "Annual",
@@ -326,7 +326,7 @@
                                 pointBorderColor: "#fff",
                                 pointHoverBackgroundColor: "#fff",
                                 pointHoverBorderColor: colors[1],
-                                data: [0, 41, 16, 12, 4, 20, 0,0,0]
+                                data: [0, 41, 16, 12, 4, 20, 0, 0, 0]
                             }
                         ]
                     };
@@ -340,7 +340,7 @@
                     var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
                     //radar chart
                     var radarChart = {
-                        labels: ["I", "II", "III", "IV", "V", "VI", "VII","VIII"],
+                        labels: ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"],
                         datasets: [{
                                 label: "Quarterly",
                                 backgroundColor: hexToRGB(colors[0], 0.3),
@@ -349,7 +349,7 @@
                                 pointBorderColor: "#fff",
                                 pointHoverBackgroundColor: "#fff",
                                 pointHoverBorderColor: colors[0],
-                                data: [95.83, 53, 100, 68.75, 54.55, 32.86, 26.32,14.29]
+                                data: [95.83, 53, 100, 68.75, 54.55, 32.86, 26.32, 14.29]
                             },
                             {
                                 label: "Annual",
@@ -373,7 +373,7 @@
                     var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
                     //radar chart
                     var radarChart = {
-                        labels: ["A", "A+", "A-", "B+", "B", "C+", "C","D","E","G"],
+                        labels: ["A", "A+", "A-", "B+", "B", "C+", "C", "D", "E", "G"],
                         datasets: [{
                                 label: "Quarterly",
                                 backgroundColor: hexToRGB(colors[0], 0.3),
@@ -382,7 +382,7 @@
                                 pointBorderColor: "#fff",
                                 pointHoverBackgroundColor: "#fff",
                                 pointHoverBorderColor: colors[0],
-                                data: [0,41,16,12,4,20,0,0,0,4]
+                                data: [0, 41, 16, 12, 4, 20, 0, 0, 0, 4]
                             },
                             {
                                 label: "Annual",
@@ -392,7 +392,7 @@
                                 pointBorderColor: "#fff",
                                 pointHoverBackgroundColor: "#fff",
                                 pointHoverBorderColor: colors[1],
-                                data: [2,41,16,12,4,20,0,0,0,4]
+                                data: [2, 41, 16, 12, 4, 20, 0, 0, 0, 4]
                             }
                         ]
                     };
@@ -406,7 +406,7 @@
                     var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
                     //radar chart
                     var radarChart = {
-                        labels: ["A", "A+", "A-", "B", "B+","C","C+","E","G"],
+                        labels: ["A", "A+", "A-", "B", "B+", "C", "C+", "E", "G"],
                         datasets: [{
                                 label: "Mid Term",
                                 backgroundColor: hexToRGB(colors[0], 0.3),
@@ -415,7 +415,7 @@
                                 pointBorderColor: "#fff",
                                 pointHoverBackgroundColor: "#fff",
                                 pointHoverBorderColor: colors[0],
-                                data:[90, 30, 35, 70,50,0,30,30,10]
+                                data: [90, 30, 35, 70, 50, 0, 30, 30, 10]
                             },
                             {
                                 label: "Annual",
@@ -425,7 +425,7 @@
                                 pointBorderColor: "#fff",
                                 pointHoverBackgroundColor: "#fff",
                                 pointHoverBorderColor: colors[1],
-                                data: [70, 85, 0, 86,60,0,70,70,10]
+                                data: [70, 85, 0, 86, 60, 0, 70, 70, 10]
                             }
                         ]
                     };
@@ -439,7 +439,7 @@
                     var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
                     //radar chart
                     var radarChart = {
-                        labels: ["A", "A+", "A-", "B", "B+","C","C+","E","G"],
+                        labels: ["A", "A+", "A-", "B", "B+", "C", "C+", "E", "G"],
                         datasets: [{
                                 label: "Mid Term",
                                 backgroundColor: hexToRGB(colors[0], 0.3),
@@ -448,7 +448,7 @@
                                 pointBorderColor: "#fff",
                                 pointHoverBackgroundColor: "#fff",
                                 pointHoverBorderColor: colors[0],
-                                data: [70, 85, 0, 86,60,0,70,70]
+                                data: [70, 85, 0, 86, 60, 0, 70, 70]
                             },
                             {
                                 label: "Annual",
@@ -458,7 +458,7 @@
                                 pointBorderColor: "#fff",
                                 pointHoverBackgroundColor: "#fff",
                                 pointHoverBorderColor: colors[1],
-                                data: [75, 90, 20, 80,50,0,65,60]
+                                data: [75, 90, 20, 80, 50, 0, 65, 60]
                             }
                         ]
                     };
@@ -472,7 +472,7 @@
                     var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
                     //radar chart
                     var radarChart = {
-                        labels: ["I", "II", "III", "IV", "V", "VI", "VII","VIII"],
+                        labels: ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"],
                         datasets: [{
                                 label: "Quarterly",
                                 backgroundColor: hexToRGB(colors[0], 0.3),
@@ -481,7 +481,7 @@
                                 pointBorderColor: "#fff",
                                 pointHoverBackgroundColor: "#fff",
                                 pointHoverBorderColor: colors[0],
-                                data: [95, 53, 100, 68, 54, 22, 26,14]
+                                data: [95, 53, 100, 68, 54, 22, 26, 14]
                             },
                             {
                                 label: "Annual",
@@ -491,7 +491,7 @@
                                 pointBorderColor: "#fff",
                                 pointHoverBackgroundColor: "#fff",
                                 pointHoverBorderColor: colors[1],
-                                data: [85, 63, 80, 40, 50, 40, 45,30]
+                                data: [85, 63, 80, 40, 50, 40, 45, 30]
                             }
                         ]
                     };
@@ -532,7 +532,7 @@
                         maintainAspectRatio: false
                     };
                     charts.push(this.respChart($("#radar-analytic"), 'Radar', radarChart, radarOpts));
-                }  
+                }
                 return charts;
             },
             //initializing various components and plugins
@@ -599,11 +599,11 @@
                 barSizeRatio: .2,
                 barColors: i
             });
-            browsersChart.options.labels.forEach(function(label, i){
-    var legendlabel=$('<span style="display: inline-block;">'+label+'</span>')
-    var legendItem = $('<div class="mbox"></div>').css('background-color', browsersChart.options.lineColors[i]).append(legendlabel)
-    $('#legend').append(legendItem)   
-})
+            browsersChart.options.labels.forEach(function(label, i) {
+                var legendlabel = $('<span style="display: inline-block;">' + label + '</span>')
+                var legendItem = $('<div class="mbox"></div>').css('background-color', browsersChart.options.lineColors[i]).append(legendlabel)
+                $('#legend').append(legendItem)
+            })
         }, a.prototype.init = function() {
             var a = ["#02c0ce"];
             (t = e("#statistics-dynam").data("colors")) && (a = t.split(",")), this.createBarChart("statistics-dynam", [{
@@ -628,9 +628,9 @@
         }, e.Dashboard4 = new a, e.Dashboard4.Constructor = a
     }(window.jQuery),
     function() {
-                "use strict";
-                window.jQuery.Dashboard4.init()
-                }();
+        "use strict";
+        window.jQuery.Dashboard4.init()
+    }();
 </script>
 
 <script>
@@ -734,254 +734,252 @@
         //         MyNewChart = new Chart(ctx).Bar(data);
         // },200);
         // });
-        
-    });
 
-    
+    });
 </script>
 <script>
     Apex.grid = {
-    padding: {
-        right: 0,
-        left: 0
-    }
-}, Apex.dataLabels = {
-    enabled: !1
-};
-var randomizeArray = function(e) {
-        for (var o, t, a = e.slice(), r = a.length; 0 !== r;) t = Math.floor(Math.random() * r), o = a[--r], a[r] = a[t], a[t] = o;
-        return a
-    },
-    sparklineData = [47, 45, 54, 38, 56, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46],
-    colorPalette = ["#00D8B6", "#008FFB", "#FEB019", "#FF4560", "#775DD0"],
-    colors = ["#6658dd"];
-(dataColors = $("#spark1").data("colors")) && (colors = dataColors.split(","));
-var spark1 = {
-    chart: {
-        type: "area",
-        height: 160,
-        sparkline: {
-            enabled: !0
+        padding: {
+            right: 0,
+            left: 0
         }
-    },
-    stroke: {
-        width: 2,
-        curve: "straight"
-    },
-    fill: {
-        opacity: .2
-    },
-    series: [{
-        name: "UBold Sales ",
-        data: randomizeArray(sparklineData)
-    }],
-    yaxis: {
-        min: 0
-    },
-    colors: colors,
-    title: {
-        text: "$424,652",
-        offsetX: 10,
-        style: {
-            fontSize: "22px"
-        }
-    },
-    subtitle: {
-        text: "Total Sales",
-        offsetX: 10,
-        offsetY: 35,
-        style: {
-            fontSize: "13px"
-        }
-    }
-};
-new ApexCharts(document.querySelector("#spark1"), spark1).render();
-colors = ["#DCE6EC"];
-(dataColors = $("#spark2").data("colors")) && (colors = dataColors.split(","));
-var spark2 = {
-    chart: {
-        type: "area",
-        height: 160,
-        sparkline: {
-            enabled: !0
-        }
-    },
-    stroke: {
-        width: 2,
-        curve: "straight"
-    },
-    fill: {
-        opacity: .2
-    },
-    series: [{
-        name: "UBold Expenses ",
-        data: randomizeArray(sparklineData)
-    }],
-    yaxis: {
-        min: 0
-    },
-    colors: colors,
-    title: {
-        text: "$235,312",
-        offsetX: 10,
-        style: {
-            fontSize: "22px"
-        }
-    },
-    subtitle: {
-        text: "Expenses",
-        offsetX: 10,
-        offsetY: 35,
-        style: {
-            fontSize: "13px"
-        }
-    }
-};
-new ApexCharts(document.querySelector("#spark2"), spark2).render();
-colors = ["#f672a7"];
-(dataColors = $("#spark3").data("colors")) && (colors = dataColors.split(","));
-var spark3 = {
-    chart: {
-        type: "area",
-        height: 160,
-        sparkline: {
-            enabled: !0
-        }
-    },
-    stroke: {
-        width: 2,
-        curve: "straight"
-    },
-    fill: {
-        opacity: .2
-    },
-    series: [{
-        name: "Net Profits ",
-        data: randomizeArray(sparklineData)
-    }],
-    xaxis: {
-        crosshairs: {
-            width: 1
-        }
-    },
-    yaxis: {
-        min: 0
-    },
-    colors: colors,
-    title: {
-        text: "$135,965",
-        offsetX: 10,
-        style: {
-            fontSize: "22px"
-        }
-    },
-    subtitle: {
-        text: "Profits",
-        offsetX: 10,
-        offsetY: 35,
-        style: {
-            fontSize: "13px"
-        }
-    }
-};
-new ApexCharts(document.querySelector("#spark3"), spark3).render();
-newcolors = ['#9B59B6', '#E91E63', '#4A6F4B',"#f7b84b", "#4a81d4"];
-
-(dataColors = $("#apex-line-1").data("colors")) && (newcolors = dataColors.split(","));
-var options = {
-    chart: {
-        height: 380,
-        type: "line",
-        zoom: {
-            enabled: !1
+    }, Apex.dataLabels = {
+        enabled: !1
+    };
+    var randomizeArray = function(e) {
+            for (var o, t, a = e.slice(), r = a.length; 0 !== r;) t = Math.floor(Math.random() * r), o = a[--r], a[r] = a[t], a[t] = o;
+            return a
         },
-        toolbar: {
-            show: !1
-        }
-    },
-    colors: newcolors,
-    dataLabels: {
-        enabled: !0
-    },
-    stroke: {
-        width: [3, 3, 3, 3],
-        curve: "smooth"
-    },
-    series: [{
-        name: "English",
-        // color:"#9B59B6",
-        data: [46, 26, 32, 36, 41]
-    },{
-        name: "Maths",
-        // color:"#E91E63",
-        data: [70, 75, 76, 80, 90]
-    },{
-        name: "Geography",
-        // color:"#4A6F4B",
-        data: [27, 29, 33, 27, 32]
-    },{
-        name: "Physics",
-        // color:"#f7b84b",
-        data: [85, 87, 86, 90, 95]
-    },{
-        name: "Chemistry",
-        // color:"#4a81d4",
-        data: [45, 75, 85, 90, 95]
-    }],
-    title: {
-        text: "Marks",
-        align: "left",
-        style: {
-            fontSize: "14px",
-            color: "#666"
-        }
-    },
-    grid: {
-        row: {
-            colors: ["transparent", "transparent"],
+        sparklineData = [47, 45, 54, 38, 56, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46],
+        colorPalette = ["#00D8B6", "#008FFB", "#FEB019", "#FF4560", "#775DD0"],
+        colors = ["#6658dd"];
+    (dataColors = $("#spark1").data("colors")) && (colors = dataColors.split(","));
+    var spark1 = {
+        chart: {
+            type: "area",
+            height: 160,
+            sparkline: {
+                enabled: !0
+            }
+        },
+        stroke: {
+            width: 2,
+            curve: "straight"
+        },
+        fill: {
             opacity: .2
         },
-        borderColor: "#f1f3fa"
-    },
-    markers: {
-        style: "inverted",
-        size: 6
-    },
-    xaxis: {
-        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-        title: {
-            text: "Month"
-        }
-    },
-    yaxis: {
-        title: {
-            text: "Subject"
+        series: [{
+            name: "UBold Sales ",
+            data: randomizeArray(sparklineData)
+        }],
+        yaxis: {
+            min: 0
         },
-        min: 0,
-        max: 100
-    },
-    legend: {
-        position: "top",
-        horizontalAlign: "right",
-        floating: !0,
-        offsetY: -25,
-        offsetX: -5
-    },
-    responsive: [{
-        breakpoint: 600,
-        options: {
-            chart: {
-                toolbar: {
-                    show: !1
-                }
-            },
-            legend: {
-                show: !1
+        colors: colors,
+        title: {
+            text: "$424,652",
+            offsetX: 10,
+            style: {
+                fontSize: "22px"
+            }
+        },
+        subtitle: {
+            text: "Total Sales",
+            offsetX: 10,
+            offsetY: 35,
+            style: {
+                fontSize: "13px"
             }
         }
-    }]
-};
-(chart = new ApexCharts(document.querySelector("#apex-line-1"), options)).render();
+    };
+    new ApexCharts(document.querySelector("#spark1"), spark1).render();
+    colors = ["#DCE6EC"];
+    (dataColors = $("#spark2").data("colors")) && (colors = dataColors.split(","));
+    var spark2 = {
+        chart: {
+            type: "area",
+            height: 160,
+            sparkline: {
+                enabled: !0
+            }
+        },
+        stroke: {
+            width: 2,
+            curve: "straight"
+        },
+        fill: {
+            opacity: .2
+        },
+        series: [{
+            name: "UBold Expenses ",
+            data: randomizeArray(sparklineData)
+        }],
+        yaxis: {
+            min: 0
+        },
+        colors: colors,
+        title: {
+            text: "$235,312",
+            offsetX: 10,
+            style: {
+                fontSize: "22px"
+            }
+        },
+        subtitle: {
+            text: "Expenses",
+            offsetX: 10,
+            offsetY: 35,
+            style: {
+                fontSize: "13px"
+            }
+        }
+    };
+    new ApexCharts(document.querySelector("#spark2"), spark2).render();
+    colors = ["#f672a7"];
+    (dataColors = $("#spark3").data("colors")) && (colors = dataColors.split(","));
+    var spark3 = {
+        chart: {
+            type: "area",
+            height: 160,
+            sparkline: {
+                enabled: !0
+            }
+        },
+        stroke: {
+            width: 2,
+            curve: "straight"
+        },
+        fill: {
+            opacity: .2
+        },
+        series: [{
+            name: "Net Profits ",
+            data: randomizeArray(sparklineData)
+        }],
+        xaxis: {
+            crosshairs: {
+                width: 1
+            }
+        },
+        yaxis: {
+            min: 0
+        },
+        colors: colors,
+        title: {
+            text: "$135,965",
+            offsetX: 10,
+            style: {
+                fontSize: "22px"
+            }
+        },
+        subtitle: {
+            text: "Profits",
+            offsetX: 10,
+            offsetY: 35,
+            style: {
+                fontSize: "13px"
+            }
+        }
+    };
+    new ApexCharts(document.querySelector("#spark3"), spark3).render();
+    newcolors = ['#9B59B6', '#E91E63', '#4A6F4B', "#f7b84b", "#4a81d4"];
+
+    (dataColors = $("#apex-line-1").data("colors")) && (newcolors = dataColors.split(","));
+    var options = {
+        chart: {
+            height: 380,
+            type: "line",
+            zoom: {
+                enabled: !1
+            },
+            toolbar: {
+                show: !1
+            }
+        },
+        colors: newcolors,
+        dataLabels: {
+            enabled: !0
+        },
+        stroke: {
+            width: [3, 3, 3, 3],
+            curve: "smooth"
+        },
+        series: [{
+            name: "English",
+            // color:"#9B59B6",
+            data: [46, 26, 32, 36, 41]
+        }, {
+            name: "Maths",
+            // color:"#E91E63",
+            data: [70, 75, 76, 80, 90]
+        }, {
+            name: "Geography",
+            // color:"#4A6F4B",
+            data: [27, 29, 33, 27, 32]
+        }, {
+            name: "Physics",
+            // color:"#f7b84b",
+            data: [85, 87, 86, 90, 95]
+        }, {
+            name: "Chemistry",
+            // color:"#4a81d4",
+            data: [45, 75, 85, 90, 95]
+        }],
+        title: {
+            text: "Marks",
+            align: "left",
+            style: {
+                fontSize: "14px",
+                color: "#666"
+            }
+        },
+        grid: {
+            row: {
+                colors: ["transparent", "transparent"],
+                opacity: .2
+            },
+            borderColor: "#f1f3fa"
+        },
+        markers: {
+            style: "inverted",
+            size: 6
+        },
+        xaxis: {
+            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+            title: {
+                text: "Month"
+            }
+        },
+        yaxis: {
+            title: {
+                text: "Subject"
+            },
+            min: 0,
+            max: 100
+        },
+        legend: {
+            position: "top",
+            horizontalAlign: "right",
+            floating: !0,
+            offsetY: -25,
+            offsetX: -5
+        },
+        responsive: [{
+            breakpoint: 600,
+            options: {
+                chart: {
+                    toolbar: {
+                        show: !1
+                    }
+                },
+                legend: {
+                    show: !1
+                }
+            }
+        }]
+    };
+    (chart = new ApexCharts(document.querySelector("#apex-line-1"), options)).render();
 </script>
 <script>
     colors = ["#F5AA26", "#F1556C", "#4FC6E1"];
@@ -1019,87 +1017,85 @@ var options = {
     (chart = new ApexCharts(document.querySelector("#anylitc-attend"), options)).render();
 </script>
 <script>
-
-//Start of apex-line-2 Chart    
+    //Start of apex-line-2 Chart    
     colors = ["#39afd1"];
-(dataColors = $("#line-23").data("colors")) && (colors = dataColors.split(","));
-options = {
-    chart: {
-        height: 380,
-        type: "line",
-        zoom: {
-            enabled: !1
-        },
-        toolbar: {
-            show: !1
-        }
-    },
-    colors: colors,
-    dataLabels: {
-        enabled: !0
-    },
-    stroke: {
-        width: [3, 3],
-        curve: "smooth"
-    },
-    
-    series: [{       
-        name: "Averages",
-        data: [10,10,75]
-    }],  
-    title: {
-        text: "Subject Average",
-        align: "left",
-        style: {
-            fontSize: "14px",
-            color: "#666"
-        }
-    },
-    grid: {
-        row: {
-            colors: ["transparent", "transparent"],
-            opacity: .2
-        },
-        borderColor: "#f1f3fa"
-    },
-    markers: {
-        style: "inverted",
-        size: 6
-    },
-    xaxis: {
-        type: "datetime",
-        categories: ["1/11/2000", "2/11/2000", "3/11/2000", "4/11/2000", "5/11/2000", "6/11/2000", "7/11/2000" ]
-    },
-    yaxis: {
-        title: {
-            text: "Average"
-        },
-        min: 0,
-        max: 100
-    },
-    legend: {
-        position: "top",
-        horizontalAlign: "right",
-        floating: !0,
-        offsetY: -25,
-        offsetX: -5
-    },
-    responsive: [{
-        breakpoint: 600,
-        options: {
-            chart: {
-                toolbar: {
-                    show: !1
-                }
+    (dataColors = $("#line-23").data("colors")) && (colors = dataColors.split(","));
+    options = {
+        chart: {
+            height: 380,
+            type: "line",
+            zoom: {
+                enabled: !1
             },
-            legend: {
+            toolbar: {
                 show: !1
             }
-        }
-    }]
-};
-   (charts = new ApexCharts(document.querySelector("#line-23"), options)).render(); 
-                
+        },
+        colors: colors,
+        dataLabels: {
+            enabled: !0
+        },
+        stroke: {
+            width: [3, 3],
+            curve: "smooth"
+        },
+
+        series: [{
+            name: "Averages",
+            data: [10, 10, 75]
+        }],
+        title: {
+            text: "Subject Average",
+            align: "left",
+            style: {
+                fontSize: "14px",
+                color: "#666"
+            }
+        },
+        grid: {
+            row: {
+                colors: ["transparent", "transparent"],
+                opacity: .2
+            },
+            borderColor: "#f1f3fa"
+        },
+        markers: {
+            style: "inverted",
+            size: 6
+        },
+        xaxis: {
+            type: "datetime",
+            categories: ["1/11/2000", "2/11/2000", "3/11/2000", "4/11/2000", "5/11/2000", "6/11/2000", "7/11/2000"]
+        },
+        yaxis: {
+            title: {
+                text: "Average"
+            },
+            min: 0,
+            max: 100
+        },
+        legend: {
+            position: "top",
+            horizontalAlign: "right",
+            floating: !0,
+            offsetY: -25,
+            offsetX: -5
+        },
+        responsive: [{
+            breakpoint: 600,
+            options: {
+                chart: {
+                    toolbar: {
+                        show: !1
+                    }
+                },
+                legend: {
+                    show: !1
+                }
+            }
+        }]
+    };
+    (charts = new ApexCharts(document.querySelector("#line-23"), options)).render();
 </script>
 <script>
     // ! function(e) {
@@ -1166,89 +1162,88 @@ options = {
     // }();  
 </script>
 <script>
-            $(document).ready(function() {                    
-            var colors = ['#6658dd','#1abc9c', '#CED4DC'];
-            var dataColors = $("#apex-column-1").data('colors');
-            if (dataColors) {
-                colors = dataColors.split(",");
-            }
-            var options = {
-                chart: {
-                    height: 380,
-                    type: 'bar',
-                    toolbar: {
-                        show: false
-                    }
+    $(document).ready(function() {
+        var colors = ['#6658dd', '#1abc9c', '#CED4DC'];
+        var dataColors = $("#apex-column-1").data('colors');
+        if (dataColors) {
+            colors = dataColors.split(",");
+        }
+        var options = {
+            chart: {
+                height: 380,
+                type: 'bar',
+                toolbar: {
+                    show: false
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    endingShape: 'rounded',
+                    columnWidth: '55%',
                 },
-                plotOptions: {
-                    bar: {
-                        horizontal: false,
-                        endingShape: 'rounded',
-                        columnWidth: '55%',
-                    },
-                },
-                dataLabels: {
-                    enabled: false
-                },
-                stroke: {
-                    show: true,
-                    width: 2,
-                    colors: ['transparent']
-                },
-                colors: colors,
-                series: [{
-                    name: 'Star',
-                    data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
-                }, {
-                    name: 'Heart',
-                    data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
-                }, {
-                    name: 'Smily Happy',
-                    data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
-                },{
-                    name: 'Smily Angry',
-                    data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
-                }],
-                xaxis: {
-                    categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
-                },
-                legend: {
-                    offsetY: 5,
-                },
-                yaxis: {
-                    title: {
-                        text: '$ (thousands)'
-                    }
-                },
-                fill: {
-                    opacity: 1
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            colors: colors,
+            series: [{
+                name: 'Star',
+                data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+            }, {
+                name: 'Heart',
+                data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+            }, {
+                name: 'Smily Happy',
+                data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
+            }, {
+                name: 'Smily Angry',
+                data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
+            }],
+            xaxis: {
+                categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+            },
+            legend: {
+                offsetY: 5,
+            },
+            yaxis: {
+                title: {
+                    text: '$ (thousands)'
+                }
+            },
+            fill: {
+                opacity: 1
 
+            },
+            grid: {
+                row: {
+                    colors: ['transparent', 'transparent'], // takes an array which will be repeated on columns
+                    opacity: 0.2
                 },
-                grid: {
-                    row: {
-                        colors: ['transparent', 'transparent'], // takes an array which will be repeated on columns
-                        opacity: 0.2
-                    },
-                    borderColor: '#f1f3fa',
-                    padding: {
-                        bottom: 10
-                    }
-                },
-                tooltip: {
-                    y: {
-                        formatter: function (val) {
-                            return "$ " + val + " thousands"
-                        }
+                borderColor: '#f1f3fa',
+                padding: {
+                    bottom: 10
+                }
+            },
+            tooltip: {
+                y: {
+                    formatter: function(val) {
+                        return "$ " + val + " thousands"
                     }
                 }
             }
+        }
 
-            var chart = new ApexCharts(
-                document.querySelector("#apex-column-1"),
-                options
-            );
+        var chart = new ApexCharts(
+            document.querySelector("#apex-column-1"),
+            options
+        );
 
-            chart.render();
-        });
+        chart.render();
+    });
 </script>
-

@@ -55,7 +55,33 @@
 
     <link href="{{ asset('css/custom/common.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/custom/Responsive.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom/style.css') }}" rel="stylesheet" type="text/css" />
+
     <style>
+        /*  font size for validation script start*/
+        .badge.badge-custom {
+            font-size: 1.1em;
+        }
+
+        /*  font size for validation script end*/
+
+        /* label form css start*/
+        label {
+            font-weight: 500;
+            font-size: 14px;
+            font-family: 'Poppins';
+            color: black;
+        }
+
+        span {
+            color: black;
+        }
+
+        #sidebar-menu>ul>li>a {
+            color: #000000cf;
+        }
+
+        /* label form css end*/
         .error {
             color: red;
         }

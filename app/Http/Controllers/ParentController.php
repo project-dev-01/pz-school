@@ -62,12 +62,12 @@ class ParentController extends Controller
             'section_id' => $request->section_id,
             'student_id' => $request->student_id,
             'parent_id' => $parent_id,
-            'frm_leavedate' => $request->frm_ldate,
-            'to_leavedate' => $request->to_ldate,
-            'reasons' => $request->reasons,
-            'remarks' => $request->rem,
+            'frm_leavedate' => $request->frm_leavedate,
+            'to_leavedate' => $request->to_leavedate,
+            'reasons' => $request->reason,
+            'reason_text' => $request->reason_text,
+            'remarks' => $request->remarks,
             'status' => $status,
-            'reason_text' => $request->reasonstxt,
             'file' => $base64,
             'file_extension' => $extension
         ];
