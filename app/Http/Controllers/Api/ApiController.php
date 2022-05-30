@@ -1176,7 +1176,17 @@ class ApiController extends BaseController
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
             $success = $createConnection->table('subject_assigns as sa')
-                ->select('sa.id', 'sa.class_id', 'sa.section_id', 'sa.subject_id', 'sa.teacher_id', 's.name as section_name', 'sb.name as subject_name', 'c.name as class_name', 'st.name as teacher_name')
+                ->select(
+                    'sa.id',
+                    'sa.class_id',
+                    DB::raw("CONCAT(st.first_name, ' ', st.last_name) as teacher_name"),
+                    'sa.section_id',
+                    'sa.subject_id',
+                    'sa.teacher_id',
+                    's.name as section_name',
+                    'sb.name as subject_name',
+                    'c.name as class_name'
+                )
                 ->join('sections as s', 'sa.section_id', '=', 's.id')
                 ->join('staffs as st', 'sa.teacher_id', '=', 'st.id')
                 ->join('subjects as sb', 'sa.subject_id', '=', 'sb.id')
@@ -10905,7 +10915,25 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get all teachers
-            $allTeachers = User::select('name', 'user_id')->where([['role_id', '=', "4"], ['branch_id', '=', $request->branch_id]])->get();
+            $allTeachers = $conn->table('staffs as stf')
+                ->select(
+                    'stf.id',
+                    DB::raw("CONCAT(stf.first_name, ' ', stf.last_name) as name"),
+                    'us.role_id',
+                    'us.user_id',
+                    'us.email',
+                    'rol.role_name'
+                )
+                ->join('school-management-system.users as us', 'stf.id', '=', 'us.user_id')
+                ->join('school-management-system.roles as rol', 'rol.id', '=', 'us.role_id')
+                // ->join('paxsuzen_pz-school.users as us', 'stf.id', '=', 'us.user_id')
+                // ->join('paxsuzen_pz-school.roles as rol', 'rol.id', '=', 'us.role_id')
+                ->where([
+                    ['us.branch_id', '=', $request->branch_id]
+                ])
+                ->whereIn('us.role_id', ['2', '3', '4'])
+                ->get();
+            // $allTeachers = User::select('name', 'user_id')->where([['role_id', '=', "4"], ['branch_id', '=', $request->branch_id]])->get();
             return $this->successResponse($allTeachers, 'get all record fetch successfully');
         }
     }
@@ -12383,9 +12411,7 @@ class ApiController extends BaseController
             'to_leave' => 'required',
             'leave_type' => 'required',
             'reason' => 'required',
-            'status' => 'required',
-            'file_extension' => 'required',
-            'document' => 'required',
+            'status' => 'required'
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -12457,8 +12483,218 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
+            $leave_status = "All";
+            if(isset($request->leave_status)){
+                $leave_status = $request->leave_status;
+            }
             $staff_id = $request->staff_id;
             $leaveDetails = $conn->table('staff_leaves as lev')
+                ->select(
+                    'lev.id',
+                    'lev.staff_id',
+                    DB::raw('CONCAT(stf.first_name, " ", stf.last_name) as name'),
+                    DB::raw('DATE_FORMAT(lev.from_leave, "%d-%m-%Y") as from_leave'),
+                    DB::raw('DATE_FORMAT(lev.to_leave, "%d-%m-%Y") as to_leave'),
+                    DB::raw('DATE_FORMAT(lev.created_at, "%d-%m-%Y") as created_at'),
+                    DB::raw('DATEDIFF(lev.to_leave,lev.from_leave) as date_diff'),
+                    'lt.name as leave_type_name',
+                    'rs.name as reason_name',
+                    'lev.reason_id',
+                    'lev.document',
+                    'lev.status',
+                    'lev.remarks',
+                    'lev.assiner_remarks',
+                    DB::raw('CONCAT(appr.first_name, " ", appr.last_name) as approval_name')
+
+                )
+                ->join('leave_types as lt', 'lev.leave_type', '=', 'lt.id')
+                ->leftJoin('staffs as stf', 'lev.staff_id', '=', 'stf.id')
+                ->leftJoin('staffs as appr', 'lev.assiner_id', '=', 'appr.id')
+                ->leftJoin('reasons as rs', 'lev.reason_id', '=', 'rs.id')
+                ->when($staff_id, function ($query, $staff_id) {
+                    return $query->where('lev.staff_id', '=', $staff_id);
+                })
+                ->when($leave_status != "All", function ($ins)  use ($leave_status) {
+                    $ins->where('lev.status', $leave_status);
+                })
+                ->orderBy('lev.from_leave', 'asc')
+                ->get();
+            return $this->successResponse($leaveDetails, 'Staff leave details fetch successfully');
+        }
+    }
+    // staffLeaveApproved
+    public function staffLeaveApproved(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'leave_id' => 'required',
+            'status' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $leave_id = $request->leave_id;
+            // create new connection
+            $Conn = $this->createNewConnection($request->branch_id);
+            // update data
+            $query = $Conn->table('staff_leaves')->where('id', $leave_id)->update([
+                'status' => $request->status,
+                'assiner_remarks' => (isset($request->assiner_remarks) ? $request->assiner_remarks : ""),
+                'assiner_id' => $request->staff_id,
+                'updated_at' => date("Y-m-d H:i:s")
+            ]);
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Leave Request have Been updated');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+    // getAllStaffDetails
+    public function getAllStaffDetails(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $getAllAdmins = $conn->table('staffs as stf')
+                ->select(
+                    'stf.id',
+                    'stf.department_id',
+                    'stf.photo',
+                    'ala.staff_id',
+                    'ala.assigner_staff_id',
+                    DB::raw("GROUP_CONCAT(sdp.name) as department_name"),
+                    DB::raw("CONCAT(stf.first_name, ' ', stf.last_name) as name")
+                )
+                ->join('school-management-system.users as us', 'stf.id', '=', 'us.user_id')
+                // ->join('paxsuzen_pz-school.users as us', 'stf.id', '=', 'us.user_id')
+                // ->join('staff_departments as sdp', 'stf.department_id', '=', 'sdp.id')
+                ->join("staff_departments as sdp", DB::raw("FIND_IN_SET(sdp.id,stf.department_id)"), ">", DB::raw("'0'"))
+                ->leftJoin("assign_leave_approval as ala", 'ala.staff_id', '=', 'stf.id')
+                ->where([
+                    ['us.branch_id', '=', $request->branch_id]
+                ])
+                ->whereIn('us.role_id', ['3', '4'])
+                ->groupBy("stf.id")
+                ->get();
+            return $this->successResponse($getAllAdmins, 'Staffs admin record fetch successfully');
+        }
+    }
+    // assignLeaveApproval
+    public function assignLeaveApproval(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'staff_id' => 'required',
+            'assigner_staff_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            $old = $createConnection->table('assign_leave_approval')
+                ->where(
+                    [
+                        ['staff_id', $request->staff_id]
+                    ]
+                )
+                ->first();
+
+            $arrDetails = array(
+                'staff_id' =>  $request->staff_id,
+                'assigner_staff_id' => $request->assigner_staff_id,
+                'created_by' => isset($request->created_by) ? $request->created_by : 0,
+            );
+            if (isset($old->id)) {
+                $arrDetails['updated_at'] = date("Y-m-d H:i:s");
+                $query = $createConnection->table('assign_leave_approval')->where('id', $old->id)->update($arrDetails);
+            } else {
+                $arrDetails['created_at'] = date("Y-m-d H:i:s");
+                $query = $createConnection->table('assign_leave_approval')->insert($arrDetails);
+            }
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse([], 'Assigning approval for leave has been successfully saved');
+            }
+        }
+    }
+    // leaveApprovalHistoryByStaff
+    public function leaveApprovalHistoryByStaff(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'staff_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $leave_status = "All";
+            if(isset($request->leave_status)){
+                $leave_status = $request->leave_status;
+            }
+            $staff_id = $request->staff_id;
+            $leaveDetails = $conn->table('assign_leave_approval as alp')
+                ->select(
+                    'lev.id',
+                    'lev.staff_id',
+                    DB::raw('CONCAT(stf.first_name, " ", stf.last_name) as name'),
+                    DB::raw('DATE_FORMAT(lev.from_leave, "%d-%m-%Y") as from_leave'),
+                    DB::raw('DATE_FORMAT(lev.to_leave, "%d-%m-%Y") as to_leave'),
+                    DB::raw('DATE_FORMAT(lev.created_at, "%d-%m-%Y") as created_at'),
+                    DB::raw('DATEDIFF(lev.to_leave,lev.from_leave) as date_diff'),
+                    'lt.name as leave_type_name',
+                    'rs.name as reason_name',
+                    'lev.reason_id',
+                    'lev.document',
+                    'lev.status',
+                    'lev.remarks',
+                    'lev.assiner_remarks'
+                )
+                ->join('staffs as stf', 'alp.staff_id', '=', 'stf.id')
+                ->join('staff_leaves as lev', 'alp.staff_id', '=', 'lev.staff_id')
+                ->join('leave_types as lt', 'lev.leave_type', '=', 'lt.id')
+                ->join('reasons as rs', 'lev.reason_id', '=', 'rs.id')
+                ->where('alp.assigner_staff_id', '=', $staff_id)
+                ->when($leave_status != "All", function ($ins)  use ($leave_status) {
+                    $ins->where('lev.status', $leave_status);
+                })
+                ->orderBy('lev.from_leave', 'desc')
+                ->get();
+            return $this->successResponse($leaveDetails, 'Leave Approval History By Staff details fetch successfully');
+        }
+    }
+    // leave details
+    public function staffLeaveDetails(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'leave_id' => 'required',
+            'staff_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $leave_id = $request->leave_id;
+            $staff_id = $request->staff_id;
+            $leaveDetails['leave_details'] = $conn->table('staff_leaves as lev')
                 ->select(
                     'lev.id',
                     'lev.staff_id',
@@ -12476,44 +12712,61 @@ class ApiController extends BaseController
                     'lev.assiner_remarks'
                 )
                 ->join('leave_types as lt', 'lev.leave_type', '=', 'lt.id')
-                ->leftJoin('staffs as stf', 'lev.staff_id', '=', 'stf.id')
-                ->leftJoin('reasons as rs', 'lev.reason_id', '=', 'rs.id')
-                ->when($staff_id, function ($query, $staff_id) {
-                    return $query->where('lev.staff_id', '=', $staff_id);
-                })
-                ->orderBy('lev.from_leave', 'asc')
+                ->join('staffs as stf', 'lev.staff_id', '=', 'stf.id')
+                ->join('reasons as rs', 'lev.reason_id', '=', 'rs.id')
+                ->where('lev.id', '=', $leave_id)
+                ->first();
+            $leaveDetails['leave_type_details'] = $conn->table('staff_leaves as lev')
+                ->select(
+                    'lev.staff_id',
+                    'lt.name as leave_name',
+                    DB::raw('count(leave_type) as total_leave')
+                )
+                ->join('leave_types as lt', 'lev.leave_type', '=', 'lt.id')
+                ->where('lev.staff_id', '=', $staff_id)
+                ->where(
+                    [
+                        ['lev.staff_id', '=', $staff_id],
+                        ['lev.status', '=', 'Approve'],
+                    ]
+                )
+                ->groupBy('lev.leave_type')
                 ->get();
-            return $this->successResponse($leaveDetails, 'Staff leave details fetch successfully');
+            return $this->successResponse($leaveDetails, 'Staff leave row details fetch successfully');
         }
     }
-    // staffLeaveApproved
-    public function staffLeaveApproved(Request $request)
+    // staffLeaveTakenHist
+    public function staffLeaveTakenHist(Request $request)
     {
         $validator = \Validator::make($request->all(), [
             'branch_id' => 'required',
-            'leave_id' => 'required',
-            'assiner_remarks' => 'required',
-            'status' => 'required'
+            'staff_id' => 'required'
         ]);
-
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $leave_id = $request->leave_id;
             // create new connection
-            $Conn = $this->createNewConnection($request->branch_id);
-            // update data
-            $query = $Conn->table('staff_leaves')->where('id', $leave_id)->update([
-                'status' => $request->status,
-                'assiner_remarks' => $request->assiner_remarks,
-                'updated_at' => date("Y-m-d H:i:s")
-            ]);
-            $success = [];
-            if ($query) {
-                return $this->successResponse($success, 'Leave Request have Been updated');
-            } else {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-            }
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $staff_id = $request->staff_id;
+
+            $leave_type_details = $conn->table('staff_leaves as lev')
+                ->select(
+                    'lev.staff_id',
+                    'lt.name as leave_name',
+                    DB::raw('count(leave_type) as total_leave')
+                )
+                ->join('leave_types as lt', 'lev.leave_type', '=', 'lt.id')
+                ->where('lev.staff_id', '=', $staff_id)
+                ->where(
+                    [
+                        ['lev.staff_id', '=', $staff_id],
+                        ['lev.status', '=', 'Approve'],
+                    ]
+                )
+                ->groupBy('lev.leave_type')
+                ->get();
+            return $this->successResponse($leave_type_details, 'Staff leave history details fetch successfully');
         }
     }
 }

@@ -1,18 +1,12 @@
 <!-- Topbar Start -->
-<div class="navbar-custom">
+<div class="navbar-custom" style="background-color:white;">
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-right mb-0">
             @if(Session::get('role_id') != '1')
-            <li class="dropdown notification-list topbar-dropdown">
-                <form class="app-search">
-                    <div class="app-search-box dropdown">
-                        <img src="{{ Session::get('school_logo') && asset('images/sub-logo/'.Session::get('school_logo')) ? asset('images/sub-logo/'.Session::get('school_logo')) : asset('images/users/default.jpg') }}" height="45" alt="logo" class="d-flex mr-2 rounded-circle school_logo_picture">
-                        <!-- <img class="d-flex mr-2 rounded-circle school_logo_picture" src="{{ asset('images/users/default.jpg') }}" alt="Generic placeholder image" height="32"> -->
-                    </div>
-                    <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">
-                        <span style="color:#0ABAB5"><b> {{ Session::get('school_name') }} </b>
-                    </a>
-                </form>
+            <li class="d-none d-lg-block">
+                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">
+                    <span class="header-span"><b> {{ Session::get('school_name') }} </b>
+                </a>
             </li>
             @endif
             @if(Session::get('role_id') == '5')
@@ -24,20 +18,10 @@
                     My Children :
                 </a>
             </li>
-            <li class="dropdown d-none d-lg-inline-block">
-                <div class="form-group ">
-                    <label class="control-label"></label>
-                    <select class="form-control custom-select" name="category" id="event-category" required>
-                        <!-- <option disabled >Select Children</option> -->
-                        <option Selected>Benjamin</option>
-                        <option>Charlotte Isabella</option>
-                    </select>
-                    <div class="invalid-feedback">Please select a valid event category</div>
-                </div>
-            </li>
+
 
             @endif
-            <li class="dropdown d-none d-lg-inline-block">
+            <li class="dropdown d-lg-inline-block">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="fullscreen" href="#">
                     <i class="fe-maximize noti-icon"></i>
                 </a>
@@ -94,10 +78,10 @@
 
             <a href="javascript:void(0)" class="logo logo-light text-center">
                 <span class="logo-sm">
-                    <img src="{{ asset('images/logo-sm.png') }}" alt="" height="22">
+                    <img src="{{ asset('images/Suzen-app-logo.png') }}" alt="" height="22">
                 </span>
                 <span class="logo-lg">
-                    <img src="{{ asset('images/300x83-3.png') }}" alt="" height="45">
+                    <img src="{{ asset('images/Logo.png') }}" alt="" height="45">
                 </span>
             </a>
         </div>
@@ -105,7 +89,7 @@
         <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
             <li>
                 <button class="button-menu-mobile waves-effect waves-light">
-                    <i class="fe-menu"></i>
+                    <i class="fe-menu" style="color:black"></i>
                 </button>
             </li>
         </ul>

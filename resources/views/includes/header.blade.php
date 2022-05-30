@@ -36,7 +36,7 @@
     <link href="{{ asset('css/bootstrap-purple-dark.min.css') }}" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
     <link href="{{ asset('css/app-purple-dark.min.css') }}" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
     <!-- Add croptool plugin -->
-    <link href="{{ asset('ijaboCropTool/ijaboCropTool.min.css') }}" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
+    <!-- <link href="{{ asset('ijaboCropTool/ijaboCropTool.min.css') }}" rel="stylesheet" type="text/css" id="app-dark-stylesheet" /> -->
 
     <!-- icons -->
     <link href="{{ asset('css/icons.min.css') }}" rel="stylesheet" type="text/css" />
@@ -56,32 +56,10 @@
     <link href="{{ asset('css/custom/common.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/custom/Responsive.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/custom/style.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
 
     <style>
-        /*  font size for validation script start*/
-        .badge.badge-custom {
-            font-size: 1.1em;
-        }
-
-        /*  font size for validation script end*/
-
-        /* label form css start*/
-        label {
-            font-weight: 500;
-            font-size: 14px;
-            font-family: 'Poppins';
-            color: black;
-        }
-
-        span {
-            color: black;
-        }
-
-        #sidebar-menu>ul>li>a {
-            color: #000000cf;
-        }
-
-        /* label form css end*/
+        /* navtab form css end*/
         .error {
             color: red;
         }

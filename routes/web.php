@@ -605,10 +605,14 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         // Leave Apply
         Route::get('leave_management/applyleave', [AdminController::class, 'applyleave'])->name('admin.leave_management.applyleave');
         // Leave approval
-        Route::get('leave_management/approvalleave', [AdminController::class, 'approvalleave'])->name('admin.leave_management.approvalleave');
+        Route::post('leave_management/applyleave_save', [AdminController::class, 'staffApplyLeave'])->name('admin.leave_management.add');
+        // Route::get('leave_management/approvalleave', [AdminController::class, 'approvalleave'])->name('admin.leave_management.approvalleave');
         // Leave allLeaves
         Route::get('leave_management/allleaves', [AdminController::class, 'allleaves'])->name('admin.leave_management.allleaves');
         Route::get('leave_management/all_leave_list', [AdminController::class, 'getAllLeaveList'])->name('admin.leave_management.list');
+        Route::get('leave_management/applyleave_list', [AdminController::class, 'getStaffLeaveList'])->name('admin.leave_management.apply_list');
+        Route::get('leave_management/assign_leave_approval', [AdminController::class, 'assignLeaveApprover'])->name('admin.leave_management.assign_leave_approver');
+        // Route::get('leave_management/get_all_staff_details', [AdminController::class, 'getAllStaffDetails'])->name('admin.leave_management.get_all_staff_details');
 
     });
     // admin routes end
@@ -809,7 +813,10 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('leave_management/applyleave', [TeacherController::class, 'applyleave'])->name('teacher.leave_management.applyleave');
         Route::post('leave_management/applyleave_save', [TeacherController::class, 'staffApplyLeave'])->name('teacher.leave_management.add');
         Route::get('leave_management/applyleave_list', [TeacherController::class, 'getStaffLeaveList'])->name('teacher.leave_management.list');
-        
+        // all leaves
+        Route::get('leave_management/allleaves', [TeacherController::class, 'allleaves'])->name('teacher.leave_management.allleaves');
+        Route::get('leave_management/leave_approval_history_by_staff', [TeacherController::class, 'getAllLeaveList'])->name('teacher.leave_management.leave_approval_history_by_staff');
+
         // Forum routes
         Route::get('forum/index', [TeacherController::class, 'forumIndex'])->name('teacher.forum.index');
         Route::get('forum/page-single-topic', [TeacherController::class, 'forumPageSingleTopic'])->name('teacher.forum.page-single-topic');

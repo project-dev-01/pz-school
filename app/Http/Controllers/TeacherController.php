@@ -31,13 +31,18 @@ class TeacherController extends Controller
     {
         $get_leave_types = Helper::GetMethod(config('constants.api.get_leave_types'));
         $get_leave_reasons = Helper::GetMethod(config('constants.api.get_leave_reasons'));
+        $data = [
+            'staff_id' => session()->get('ref_user_id')
+        ];
+        $leave_taken_history = Helper::PostMethod(config('constants.api.leave_taken_history'), $data);
 
         return view('teacher.leave_management.applyleave', [
             'get_leave_types' => $get_leave_types['data'],
-            'get_leave_reasons' => $get_leave_reasons['data']
+            'get_leave_reasons' => $get_leave_reasons['data'],
+            'leave_taken_history' => $leave_taken_history['data'],
         ]);
     }
-    // student leave 
+    // staff leave 
     public function staffApplyLeave(Request $request)
     {
         $file = $request->file('file');
@@ -69,14 +74,40 @@ class TeacherController extends Controller
     public function getStaffLeaveList()
     {
         $staff_id = [
-            'staff_id' => session()->get('ref_user_id'),
+            'staff_id' => session()->get('ref_user_id')
         ];
         $response = Helper::PostMethod(config('constants.api.staff_leave_history'), $staff_id);
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
+                if ($row['status'] != "Approve") {
+                    return '<div class="button-list">
+                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">Update</a>
+            </div>';
+                } else {
+                    return '-';
+                }
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function allleaves()
+    {
+        return view('teacher.leave_management.allleaves');
+    }
+    public function getAllLeaveList(Request $request)
+    {
+        $staff_data = [
+            'staff_id' => $request->staff_id,
+            'leave_status' => $request->leave_status,
+        ];
+        $response = Helper::PostMethod(config('constants.api.leave_approval_history_by_staff'), $staff_data);
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
-                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">Update</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-staff_id="' . $row['staff_id'] . '" id="viewDetails">Details</a>
                             </div>';
             })
 

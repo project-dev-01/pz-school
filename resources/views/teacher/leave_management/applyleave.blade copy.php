@@ -25,28 +25,116 @@
                         <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                             <li class="nav-item">
                                 <h4 class="nav-link">
-                                    <span data-feather="airplay" class="icon-dual" id="span-parent"></span> Already Taken Leave Details
+                                    <span data-feather="airplay" class="icon-dual" id="span-parent"></span> Leave Can Avail
                                     <h4>
                             </li>
                         </ul><br>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="alreadyTakenLeave" class="table table-centered table-borderless table-striped mb-0">
-                                    <tbody>
-                                        @forelse($leave_taken_history as $val)
-                                        <tr>
-                                            <td>{{ $val['leave_name'] }}</td>
-                                            <td>:</td>
-                                            <td>{{ $val['total_leave'] }}</td>
-                                        </tr>
-                                        @empty
-                                        <tr>
-                                            <td colspan="3" style="text-align: center;">No data available</td>
-                                        </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
+                            <div class="row">
+                                <div class="col-lg-3" id="top-header">
+                                    <div class="card-box">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="">
+                                                    <i class="fas fa-hat-wizard font-24"></i>
+                                                    <p class="text-muted mb-1">Annual</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="text-right">
+                                                    <h3 class="my-1" style="color:blue"><span data-plugin="counterup">0</span></h3>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3">
+                                            <div class="progress progress-sm m-0">
+                                                <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                                </div>
+                                            </div>
+                                            <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
+                                        </div>
+
+                                    </div>
+                                </div><!-- end col-->
+                                <div class="col-lg-3" id="top-header">
+                                    <div class="card-box">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="">
+                                                    <i class="fas fa-clinic-medical font-24"></i>
+                                                    <p class="text-muted mb-1">Medical</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="text-right">
+                                                    <h3 class="my-1" style="color:blue"><span data-plugin="counterup">2</span></h3>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3">
+                                            <div class="progress progress-sm m-0">
+                                                <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                                </div>
+                                            </div>
+                                            <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
+                                        </div>
+
+                                    </div>
+                                </div><!-- end col-->
+                                <div class="col-lg-3" id="top-header">
+                                    <div class="card-box">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <div class="">
+                                                    <i class="fas fa-compass font-24"></i>
+                                                    <p class="text-muted mb-1">Compassionate</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="text-right">
+                                                    <h3 class="my-1" style="color:blue"><span data-plugin="counterup">1</span></h3>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3">
+                                            <div class="progress progress-sm m-0">
+                                                <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                                </div>
+                                            </div>
+                                            <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
+                                        </div>
+
+                                    </div>
+                                </div><!-- end col-->
+                                <div class="col-lg-3">
+                                    <div class="card-box">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="">
+                                                    <i class="fas fa-receipt font-24"></i>
+                                                    <p class="text-muted mb-1">Unpaid</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="text-right">
+                                                    <h3 class="my-1" style="color:blue"><span data-plugin="counterup">0</span></h3>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3">
+                                            <div class="progress progress-sm m-0">
+                                                <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                                </div>
+                                            </div>
+                                            <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
+                                        </div>
+                                    </div> <!-- end card-box-->
+                                </div>
+                            </div><!-- end col-->
                         </div> <!-- end row -->
                         <!--General Details -->
                     </div>
@@ -63,7 +151,7 @@
                             </li>
                         </ul><br>
                         <div class="card-body">
-                            <form id="staffLeaveApply" method="post" action="{{ route('admin.leave_management.add') }}" autocomplete="off" novalidate>
+                            <form id="staffLeaveApply" method="post" action="{{ route('teacher.leave_management.add') }}" autocomplete="off" novalidate>
                                 <!--1st row-->
                                 <div class="row">
                                     <div class="col-md-4">
@@ -207,7 +295,7 @@
 @endsection
 @section('scripts')
 <script>
-    var StaffLeaveList = "{{ route('admin.leave_management.apply_list') }}";
+    var StaffLeaveList = "{{ route('teacher.leave_management.list') }}";
 </script>
 <script src="{{ asset('js/custom/staff_apply_leave.js') }}"></script>
 @endsection

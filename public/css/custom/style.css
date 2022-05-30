@@ -1,27 +1,166 @@
-/*kalai 19/5/2022*/
-.navv{
-padding: 0.5rem 1rem;
+body,
+span,
+label,
+select,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #3A4265;
+  font-weight: 600;
+  font-family: Open Sans;
 }
 
-.form-control:focus {
-background-color: #1abc9c0f;
+/*top head line css like dashboard*/
+.page-title-box .page-title {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 44px;
+  letter-spacing: 0.0133em;
+  color: #3A4265;
 }
-input{ 
- border: 1px solid #46645ea8;  
- font-family: 'Poppins';
+
+/*yellow color header css*/
+.mb-0,
+.my-0 {
+  margin-bottom: 0 !important;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 22px;
+  /* identical to box height */
+  color: #3A4265;
 }
+
+/*save button css*/
+.btn-primary-bl {
+  color: #fff;
+  border-color: #0ABAB5;
+  background-color: #6FC6CC;
+  border-radius: 60px;
+  width: 100px;
+}
+
+.float-right {
+  float: right !important;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 14px;
+  /* identical to box height */
+  color: #64647B;
+}
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  /* identical to box height */
+  color: #3A4265;
+
+}
+
+.badge.badge-custom {
+  font-size: 1.1em;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid #dee2e6;
+  background-color: #E9D528;
+  color: #3A4265;
+  border-radius: 5px 5px 0px 0px;
+}
+
+.card {
+  border-radius: 5px;
+}
+
+input,
+select {
+  font-family: Open Sans;
+  font-size: 12px;
+}
+
+input::placeholder {
+  font-family: Open Sans;
+  font-size: 12px;
+  color: #ccc;
+}
+
+/*header css*/
+.header-span {
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  text-align: center;
+  letter-spacing: 0.015em;
+  color: #000000;
+  background-color: #E9D528;
+  padding: 10px;
+  border-radius: 10px 10px 10px 10px;
+  text-transform: uppercase;
+  font-family: 'Open Sans';
+  font-size: 12px;
+}
+
 input:focus {
-  //background-color: #f7f8f9;
-  font-family: 'Poppins';
+  background: #F4F7FC;
+  border: 1px solid #ECECEC;
+  border-radius: 5px;
 }
-select:focus {
-  border: 1px solid #46645ea8; 
-  font-family: 'Poppins';
-  background-color: #1abc9c0f;
+
+.navv {
+  padding: 0.5rem 1rem;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.0133em;
+  color: #3A4265;
+
 }
+
+.fc-row .fc-week .table-bordered .fc-rigid {
+  height: 120px;
+}
+
+.fc-content-skeleton .fc-day-top .fc-day-number {
+  float: right;
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  line-height: 20px;
+  margin: 30px 0px 0px 0px;
+  font-size: 11px;
+  color: black;
+}
+
+.label-font {
+  color: black;
+}
+
+.form-control {
+  background-color: #F4F7FC;
+  border: 1px solid #ECECEC;
+  font-family: Open Sans;
+  font-size: 12px;
+}
+
 .profile-pic-wrapper {
-	width:100%;
+  width: 100%;
   position: relative;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -30,14 +169,9 @@ select:focus {
 .pic-holder {
   text-align: center;
   position: relative;
-  border-radius: 50%;
-  width: 150px;
-  height: 150px;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
 }
 
 .pic-holder .pic {
@@ -55,7 +189,7 @@ select:focus {
   top: 0;
   left: 0;
   height: 100%;
-  width: 100%;
+  width: 60%;
   background-color: rgba(90, 92, 105, 0.7);
   color: #f8f9fc;
   font-size: 12px;
@@ -72,7 +206,7 @@ select:focus {
 }
 
 .pic-holder:hover .upload-file-block,
-.uploadProfileInput:focus ~ .upload-file-block {
+.uploadProfileInput:focus~.upload-file-block {
   opacity: 1;
 }
 
@@ -112,6 +246,7 @@ select:focus {
     bottom: 0;
     opacity: 0;
   }
+
   to {
     bottom: 30px;
     opacity: 1;
@@ -123,6 +258,7 @@ select:focus {
     bottom: 0;
     opacity: 0;
   }
+
   to {
     bottom: 30px;
     opacity: 1;
@@ -134,6 +270,7 @@ select:focus {
     bottom: 30px;
     opacity: 1;
   }
+
   to {
     bottom: 0;
     opacity: 0;
@@ -145,10 +282,9 @@ select:focus {
     bottom: 30px;
     opacity: 1;
   }
+
   to {
     bottom: 0;
     opacity: 0;
   }
 }
-
-							

@@ -38,7 +38,7 @@
                         <select class="form-control" id="assignClassTeacher" name="class_teacher">
                             <option value="">Choose Teacher</option>
                             @forelse($getAllTeacherList as $teacher)
-                            <option value="{{ $teacher['user_id'] }}">{{$teacher['name']}}</option>
+                            <option value="{{ $teacher['id'] }}">{{$teacher['name']}} ({{$teacher['role_name']}})</option>
                             @empty
                             @endforelse
 

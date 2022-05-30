@@ -157,77 +157,6 @@ $(function () {
         $('#addRemarksAdmin' + studenetlevtblID).val(compain_remarks_tblID);
         $('#LeaveRemarksPopup').modal('hide');
     });
-    // approved leave
-    // $(document).on('click', '#approvedLeave', function () {
-    //     var leave_id = $(this).data('id');
-    //     var status = $("#leavestatus" + leave_id).val();
-
-    //     var assiner_remarks = $("#addRemarksAdmin" + leave_id).val();
-
-    //     var formData = new FormData();
-    //     formData.append('token', token);
-    //     formData.append('branch_id', branchID);
-    //     formData.append('leave_id', leave_id);
-    //     formData.append('status', status);
-    //     formData.append('assiner_remarks', assiner_remarks);
-    //     formData.append('staff_id', ref_user_id);
-    //     // for(var pair of formData.entries()){
-    //     //     console.log(pair[0]+ ', ' + pair[1]); 
-    //     // }
-    //     // return false;
-    //     $.ajax({
-    //         url: leaveApprovedUrl,
-    //         method: "post",
-    //         data: formData,
-    //         processData: false,
-    //         dataType: 'json',
-    //         contentType: false,
-    //         success: function (res) {
-    //             if (res.code == 200) {
-    //                 $('#all-leave-list').DataTable().ajax.reload(null, false);
-    //                 toastr.success(res.message);
-    //             }
-    //             else {
-    //                 toastr.error(res.message);
-
-    //             }
-    //         }
-    //     });
-
-    // });
-    $(document).on('click', '#approvedLeave', function () {
-        var leave_id = $("#leave_id").val();
-        var status = $("#leave_status_name").val();
-
-        var assiner_remarks = $("#assiner_remarks").val();
-
-        var formData = new FormData();
-        formData.append('token', token);
-        formData.append('branch_id', branchID);
-        formData.append('leave_id', leave_id);
-        formData.append('status', status);
-        formData.append('assiner_remarks', assiner_remarks);
-        formData.append('staff_id', ref_user_id);
-        $.ajax({
-            url: leaveApprovedUrl,
-            method: "post",
-            data: formData,
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            success: function (res) {
-                if (res.code == 200) {
-                    toastr.success(res.message);
-                    $('#all-leave-list').DataTable().ajax.reload(null, false);
-                    $('#DetailsModal').modal('hide');
-                }
-                else {
-                    toastr.error(res.message);
-                }
-            }
-        });
-
-    });
     //viewDetails
     $(document).on('click', '#viewDetails', function () {
         var leave_id = $(this).data('id');
@@ -238,7 +167,7 @@ $(function () {
         formData.append('branch_id', branchID);
         formData.append('leave_id', leave_id);
         formData.append('staff_id', staff_id);
-
+        
         $.ajax({
             url: staffLeaveDetailsShowUrl,
             method: "post",
@@ -304,6 +233,40 @@ $(function () {
                 }
             }
         });
+    });
+    // approved leave
+    $(document).on('click', '#approvedLeave', function () {
+        var leave_id = $("#leave_id").val();
+        var status = $("#leave_status_name").val();
+
+        var assiner_remarks = $("#assiner_remarks").val();
+
+        var formData = new FormData();
+        formData.append('token', token);
+        formData.append('branch_id', branchID);
+        formData.append('leave_id', leave_id);
+        formData.append('status', status);
+        formData.append('assiner_remarks', assiner_remarks);
+        formData.append('staff_id', ref_user_id);
+        $.ajax({
+            url: leaveApprovedUrl,
+            method: "post",
+            data: formData,
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (res) {
+                if (res.code == 200) {
+                    toastr.success(res.message);
+                    $('#all-leave-list').DataTable().ajax.reload(null, false);
+                    $('#DetailsModal').modal('hide');
+                }
+                else {
+                    toastr.error(res.message);
+                }
+            }
+        });
+
     });
     // all Leave Filter
     $('#allLeaveFilter').on('submit', function (e) {

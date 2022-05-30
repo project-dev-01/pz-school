@@ -44,11 +44,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group text-right m-b-0">
-                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                Filter
-                            </button>
-                        </div>
+                    <div class="form-group text-right m-b-0">
+                        <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                            Filter
+                        </button>
+                    </div>
                     </form>
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
@@ -114,16 +114,29 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-    @include('admin.leave_management.details')
+    @include('teacher.leave_management.details')
 </div> <!-- container -->
 
 @endsection
 @section('scripts')
 <script>
-    var AllLeaveList = "{{ route('admin.leave_management.list') }}";
+    var AllLeaveList = "{{ route('teacher.leave_management.leave_approval_history_by_staff') }}";
     var leaveFilesUrl = "{{ asset('admin-documents/leaves/') }}";
     var leaveApprovedUrl = "{{ config('constants.api.staff_leave_approved') }}";
     var staffLeaveDetailsShowUrl = "{{ config('constants.api.staff_leave_details') }}";
+    // $(function() {
+    //     $(".alloptions").maxlength({
+    //         alwaysShow: !0,
+    //         separator: "/",
+    //         preText: " ",
+    //         postText: " chars available.",
+    //         validate: !0,
+    //         //fontSize:"20%",
+    //         warningClass: "badge badge-success badge-custom",
+    //         limitReachedClass: "badge badge-danger badge-custom",
+    //     })
+
+    // });
 </script>
-<script src="{{ asset('js/custom/admin_all_leave.js') }}"></script>
+<script src="{{ asset('js/custom/staff_all_leave.js') }}"></script>
 @endsection

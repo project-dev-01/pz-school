@@ -440,5 +440,10 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('employee-leave/get_leave_types', [ApiController::class, 'getLeaveTypes']);
     Route::post('employee-leave/apply', [ApiController::class, 'staffLeaveApply']);
     Route::post('employee-leave/leave_history', [ApiController::class, 'staffLeaveHistory']);
+    Route::get('get_all_staff_details', [ApiController::class, 'getAllStaffDetails']);
     Route::post('employee-leave/approved', [ApiController::class, 'staffLeaveApproved']);
+    Route::post('employee-leave/assign_leave_approval', [ApiController::class, 'assignLeaveApproval']);
+    Route::post('employee-leave/leave_approval_history_by_staff', [ApiController::class, 'leaveApprovalHistoryByStaff']);
+    Route::post('employee-leave/leave_details', [ApiController::class, 'staffLeaveDetails']);
+    Route::post('employee-leave/leave_taken_history', [ApiController::class, 'staffLeaveTakenHist']);
 });

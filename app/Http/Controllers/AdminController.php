@@ -3782,9 +3782,24 @@ class AdminController extends Controller
         return $response;
     }
     // LEAVE MANAGEMENT START
+    // public function applyleave()
+    // {
+    //     return view('admin.leave_management.applyleave');
+    // }
     public function applyleave()
     {
-        return view('admin.leave_management.applyleave');
+        $get_leave_types = Helper::GetMethod(config('constants.api.get_leave_types'));
+        $get_leave_reasons = Helper::GetMethod(config('constants.api.get_leave_reasons'));
+        $data = [
+            'staff_id' => session()->get('ref_user_id')
+        ];
+        $leave_taken_history = Helper::PostMethod(config('constants.api.leave_taken_history'), $data);
+        // dd($leave_taken_history);
+        return view('admin.leave_management.applyleave', [
+            'get_leave_types' => $get_leave_types['data'],
+            'get_leave_reasons' => $get_leave_reasons['data'],
+            'leave_taken_history' => $leave_taken_history['data'],
+        ]);
     }
     public function approvalleave()
     {
@@ -3795,18 +3810,91 @@ class AdminController extends Controller
     {
         return view('admin.leave_management.allleaves');
     }
-    public function getAllLeaveList()
+    public function getAllLeaveList(Request $request)
     {
-        $response = Helper::PostMethod(config('constants.api.staff_leave_history'), []);
+        $staff_data = [
+            'leave_status' => $request->leave_status
+        ];
+        $response = Helper::PostMethod(config('constants.api.staff_leave_history'), $staff_data);
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
-                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="approvedLeave">Update</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-staff_id="' . $row['staff_id'] . '" id="viewDetails">Details</a>
                             </div>';
             })
 
             ->rawColumns(['actions'])
             ->make(true);
     }
+    public function getStaffLeaveList()
+    {
+        $staff_id = [
+            'staff_id' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.staff_leave_history'), $staff_id);
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                if ($row['status'] != "Approve") {
+                    return '<div class="button-list">
+                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">Update</a>
+            </div>';
+                }else{
+                    return '-';
+                }
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    // staff leave 
+    public function staffApplyLeave(Request $request)
+    {
+        $file = $request->file('file');
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        } else {
+            $base64 = null;
+            $extension = null;
+        }
+        $status = "Pending";
+        $data = [
+            'staff_id' => session()->get('ref_user_id'),
+            'leave_type' => $request->leave_type,
+            'from_leave' => $request->from_leave,
+            'to_leave' => $request->to_leave,
+            'reason' => $request->reason,
+            'remarks' => $request->remarks,
+            'status' => $status,
+            'document' => $base64,
+            'file_extension' => $extension
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.staff_apply_leave'), $data);
+        return $response;
+    }
+    public function assignLeaveApprover()
+    {
+        $get_all_staff_details = Helper::GetMethod(config('constants.api.get_all_staff_details'));
+        return view('admin.leave_management.assign_leave_approval', [
+            'get_all_staff_details' => $get_all_staff_details['data']
+        ]);
+    }
+    // public function getAllStaffDetails(Request $request)
+    // {
+    //     $response = Helper::GetMethod(config('constants.api.get_all_staff_details'));
+    //     return DataTables::of($response['data'])
+    //         ->addIndexColumn()
+    //         ->addColumn('actions', function ($row) {
+    //             return '<div class="button-list">
+    //                             <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editClassBtn">Update</a>
+    //                     </div>';
+    //         })
+    //         ->rawColumns(['actions'])
+    //         ->make(true);
+    // }
 }

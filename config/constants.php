@@ -407,7 +407,14 @@ return [
         'get_leave_types'=>$url.'/employee-leave/get_leave_types',
         'staff_apply_leave'=>$url.'/employee-leave/apply',
         'staff_leave_history'=>$url.'/employee-leave/leave_history',
-        'staff_leave_approved'=>$url.'/employee-leave/approved'
+        'staff_leave_approved'=>$url.'/employee-leave/approved',
+        'get_all_staff_details'=>$url.'/get_all_staff_details',
+        'assign_leave_approval'=>$url.'/employee-leave/assign_leave_approval',
+        'leave_approval_history_by_staff'=>$url.'/employee-leave/leave_approval_history_by_staff',
+        'staff_leave_details'=>$url.'/employee-leave/leave_details',
+        'leave_taken_history'=>$url.'/employee-leave/leave_taken_history',
+        
+        
     ]
 
 ];
