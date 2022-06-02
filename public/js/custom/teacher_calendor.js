@@ -89,6 +89,7 @@
                 l("#event-title").html(this.$selectedEvent.title),
                 l("#subject-name").html(e.event.extendedProps.subject_name),
                 l("#timing-class").html(start.toLocaleTimeString() + ' - ' + end.toLocaleTimeString()),
+                // l("#timing-class").html(start + ' - ' + end),
                 l("#teacher-name").html(e.event.extendedProps.teacher_name)
                 l("#standard-name").html(e.event.extendedProps.class_name)
                 l("#section-name").html(e.event.extendedProps.section_name),
@@ -135,6 +136,16 @@
                     right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth"
                 },
                 // get events details start
+                // eventSources: [{
+                //     url: getTimetableCalendor + '?token=' + token + '&branch_id=' + branchID + '&teacher_id=' + ref_user_id,
+                //     type: 'get',
+                //     success: function (response) {
+                //         console.log("response")
+                //         console.log(response)
+                //         t = response.data;
+                //         return t;
+                //     }
+                // }],
                 eventSources: [{
                     url: getTimetableCalendor + '?token=' + token + '&branch_id=' + branchID + '&teacher_id=' + ref_user_id,
                     type: 'get',

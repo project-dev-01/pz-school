@@ -20,15 +20,15 @@
 
     <div class="row">
         <div class="col-xl-12 addEmployeeForm">
-            <form id="addEmployeeForm" method="post" action="{{ route('admin.employee.add') }}" enctype="multipart/form-data" autocomplete="off">
-                @csrf
-                <div class="card">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <h4 class="navv">Personal Details<h4>
-                        </li>
-                    </ul>
-                    <div class="card-body">
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">Personal Details<h4>
+                    </li>
+                </ul>
+                <div class="card-body">
+                    <form id="addEmployeeForm" method="post" action="{{ route('admin.employee.add') }}" enctype="multipart/form-data" autocomplete="off">
+                        @csrf
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="col-lg-3">
@@ -38,7 +38,26 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> <!-- end row -->
+                        <!-- <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="photo">Profile Picture</label>
+                                    <div class="containers-img">
+                                        <div class="imageWrapper">
+                                            <img class="image" src="{{ asset('images/700x500.png') }}">
+                                        </div>
+                                    </div>
+
+                                    <button class="file-upload">
+                                        <input type="file" name="photo" id="photo" class="file-input">Choose File
+                                    </button>
+                                </div>
+
+
+                            </div>
+                        </div> -->
+
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -191,7 +210,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="present_address">Address Line 1</label>
+                                    <label for="present_address">Address Line 1(Street address)</label>
                                     <input class="form-control" name="present_address" id="present_address" placeholder="johor">
                                 </div>
                             </div>
@@ -202,15 +221,12 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="card">
+
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
                             <h4 class="navv">Employee Details<h4>
                         </li>
                     </ul>
-                    <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -232,7 +248,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="joining_date" id="joiningDate" placeholder="DD/MM/DDDD">
+                                        <input type="text" class="form-control" name="joining_date" id="joiningDate">
                                     </div>
                                 </div>
                             </div>
@@ -279,7 +295,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="salary_grade">Salary Grade</label>
-                                    <input type="text" class="form-control" name="salary_grade" id="salaryGrade" placeholder="Grade">
+                                    <input type="number" class="form-control" name="salary_grade" id="salaryGrade">
                                 </div>
                             </div>
                         </div>
@@ -323,17 +339,13 @@
                             </div>
 
                         </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <h4 class="navv">Login Details<h4>
-                        </li>
-                    </ul>
-                    <div class="card-body">
+
+                        <span class="fas fa-user-lock " id="span-parent"></span>
+                        <span class="header-title mb-3" id="span-parent"> Login Details
+                            <hr id="hr">
+                        </span>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="email">Email<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
@@ -342,11 +354,11 @@
                                                 <span class="far fa-envelope-open"></span>
                                             </div>
                                         </div>
-                                        <input type="email" class="form-control" name="email" id="email" placeholder="aa@gmail.com">
+                                        <input type="email" class="form-control" name="email" id="email">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group mb-3">
                                     <label for="password">Password<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
@@ -355,11 +367,11 @@
                                                 <span class="fas fa-unlock"></span>
                                             </div>
                                         </div>
-                                        <input type="password" class="form-control" name="password" id="password" placeholder="*********">
+                                        <input type="password" class="form-control" name="password" id="password">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group mb-3">
                                     <label for="confirm_password">Retype Password<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
@@ -368,20 +380,15 @@
                                                 <span class="fas fa-unlock"></span>
                                             </div>
                                         </div>
-                                        <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="*********">
+                                        <input type="password" class="form-control" name="confirm_password" id="confirm_password">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <h4 class="navv">Social Link<h4>
-                        </li>
-                    </ul>
-                    <div class="card-body">
+                        <span class="fas fa-globe  " id="span-parent"></span>
+                        <span class="header-title mb-3" id="span-parent">Social Links
+                            <hr id="hr">
+                        </span>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
@@ -392,7 +399,7 @@
                                                 <span class="fab fa-facebook-f"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="facebook_url" id="facebook_url" placeholder="Fb.com">
+                                        <input type="text" class="form-control" name="facebook_url" id="facebook_url">
                                     </div>
                                 </div>
                             </div>
@@ -405,7 +412,7 @@
                                                 <span class="fab fa-twitter"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="twitter_url" id="twitter_url" placeholder="twitter.com">
+                                        <input type="text" class="form-control" name="twitter_url" id="twitter_url">
                                     </div>
                                 </div>
                             </div>
@@ -418,20 +425,15 @@
                                                 <span class="fab fa-linkedin-in"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="linkedin_url" id="linkedin_url" placeholder="linked.com">
+                                        <input type="text" class="form-control" name="linkedin_url" id="linkedin_url">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <h4 class="navv">Medical History<h4>
-                        </li>
-                    </ul>
-                    <div class="card-body">
+                        <span class="fas fa-briefcase-medical" id="span-parent"></span>
+                        <span class="header-title mb-3" id="span-parent"> Medical History
+                            <hr id="hr">
+                        </span>
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="skip_medical_history" name="skip_medical_history">
@@ -443,19 +445,19 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="height">Height</label>
-                                        <input type="text" id="height" class="form-control" name="height" placeholder="150" data-parsley-trigger="change">
+                                        <input type="text" id="height" class="form-control" name="height" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="weight">Weight</label>
-                                        <input type="text" id="weight" class="form-control" name="weight" placeholder="60" data-parsley-trigger="change">
+                                        <input type="text" id="weight" class="form-control" name="weight" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="allergy">Allergy</label>
-                                        <input type="text" id="allergy" class="form-control" name="allergy" placeholder="allergy" data-parsley-trigger="change">
+                                        <input type="text" id="allergy" class="form-control" name="allergy" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -476,15 +478,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <h4 class="navv">Bank Details<h4>
-                        </li>
-                    </ul>
-                    <div class="card-body">
+                        <span class="fas fa-university " id="span-parent"></span>
+                        <span class="header-title mb-3" id="span-parent"> Bank Details
+                            <hr id="hr">
+                        </span>
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="skip_bank_details" name="skip_bank_details">
@@ -496,19 +493,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="bank_name">Bank Name<span class="text-danger">*</span></label>
-                                        <input type="text" id="bank_name" class="form-control" name="bank_name" placeholder="bank name" data-parsley-trigger="change">
+                                        <input type="text" id="bank_name" class="form-control" name="bank_name" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="holder_name">Account Holder<span class="text-danger">*</span></label>
-                                        <input type="text" id="holder_name" class="form-control" name="holder_name" placeholder="Ali" data-parsley-trigger="change">
+                                        <input type="text" id="holder_name" class="form-control" name="holder_name" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="bank_branch">Bank Branch<span class="text-danger">*</span></label>
-                                        <input type="text" id="bank_branch" class="form-control" name="bank_branch" placeholder="branch name" data-parsley-trigger="change">
+                                        <input type="text" id="bank_branch" class="form-control" name="bank_branch" data-parsley-trigger="change">
                                     </div>
                                 </div>
                             </div>
@@ -516,19 +513,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="bank_address">Bank Address<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="bank_address" name="bank_address" placeholder="address" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" id="bank_address" name="bank_address" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="ifsc_code">IFSC Code<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="ifsc_code" name="ifsc_code" placeholder="code" aria-describedby="">
+                                        <input type="text" class="form-control" id="ifsc_code" name="ifsc_code" aria-describedby="">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="">Account No<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="account_no" name="account_no" placeholder="acc-no" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" id="account_no" name="account_no" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -542,12 +539,18 @@
                             Cancel
                         </button>-->
                         </div>
-                    </div> <!-- end card-body -->
-                </div> <!-- end card-->
-            </form>
+                    </form>
+
+
+                </div> <!-- end card-body -->
+            </div> <!-- end card-->
         </div> <!-- end col -->
+
     </div>
     <!-- end row -->
+
+
+
 </div> <!-- container -->
 @endsection
 @section('scripts')

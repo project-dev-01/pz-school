@@ -4493,10 +4493,12 @@ class ApiController extends BaseController
             // $Timetable = $con->table('timetable_class')->where('class_id',$request->class_id)->where('section_id',$request->section_id)->orderBy('time_start', 'asc')->orderBy('time_end', 'asc')->get()->toArray();
             $Timetable = $con->table('timetable_class')->select(
                 'timetable_class.*',
-                DB::raw('CONCAT(staffs.first_name, " ", staffs.last_name) as teacher_name'),
+                DB::raw('GROUP_CONCAT(staffs.first_name, " ", staffs.last_name) as teacher_name'),
                 'subjects.name as subject_name'
             )
-                ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
+                // ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')
+                ->leftJoin("staffs", DB::raw("FIND_IN_SET(staffs.id,timetable_class.teacher_id)"), ">", DB::raw("'0'"))
+                ->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
                 ->where([
                     ['timetable_class.class_id', $request->class_id],
                     ['timetable_class.semester_id', $request->semester_id],
@@ -4505,6 +4507,7 @@ class ApiController extends BaseController
                 ])
                 ->orderBy('time_start', 'asc')
                 ->orderBy('time_end', 'asc')
+                ->groupBy("timetable_class.id")
                 ->get()->toArray();
 
             // return $Timetable;

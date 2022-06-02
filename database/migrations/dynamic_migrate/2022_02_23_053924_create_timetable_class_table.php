@@ -19,7 +19,7 @@ class CreateTimetableClassTable extends Migration
             $table->integer('section_id');
             $table->string('break');
             $table->integer('subject_id');
-            $table->integer('teacher_id');
+            $table->string('teacher_id');
             $table->integer('semester_id')->nullable();
             $table->integer('session_id')->nullable();
             $table->string('class_room')->nullable();
