@@ -1,5 +1,82 @@
 @extends('layouts.admin-layout')
 @section('title','Admission')
+@section('css')
+<style>
+    .containers-img {
+        height: 270px;
+        position: relative;
+        max-width: 320px;
+        /* margin: auto; */
+    }
+
+    .containers-img .imageWrapper {
+        border: 3px solid #888;
+        width: 70%;
+        padding-bottom: 70%;
+        border-radius: 50%;
+        overflow: hidden;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .containers-img .imageWrapper img {
+        height: 105%;
+        width: initial;
+        max-height: 100%;
+        max-width: initial;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .file-upload {
+        position: relative;
+        overflow: hidden;
+        margin: 10px;
+    }
+
+    .file-upload {
+        position: relative;
+        overflow: hidden;
+        margin: 10px;
+        width: 100%;
+        max-width: 150px;
+        text-align: center;
+        /* color: #fff; */
+        font-size: 1.2em;
+        background: transparent;
+        border: 2px solid #888;
+        padding: 0.85em 1em;
+        display: inline;
+        -ms-transition: all 0.2s ease;
+        -webkit-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+    }
+
+    /* .file-upload:hover {
+        background: #999;
+        -webkit-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
+        -moz-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
+        box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
+    } */
+
+    .file-upload input.file-input {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+        height: 100%;
+    }
+</style>
+@endsection
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -27,7 +104,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="btwyears">Academic Year<span class="text-danger">*</span></label>
-                                    <select id="btwyears" class="form-control" name="year" required>
+                                    <select id="btwyears" class="form-control" name="year" >
                                         <option>2021-2022</option>
                                         <option>2020-2021</option>
                                         <option>2019-2020</option>
@@ -40,13 +117,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="txt_regiter_no">Register No<span class="text-danger">*</span></label>
-                                    <input type="text" id="txt_regiter_no" class="form-control" name="txt_regiter_no" placeholder="Insert the registration number" data-parsley-trigger="change" required>
+                                    <input type="text" id="txt_regiter_no" class="form-control" name="txt_regiter_no" placeholder="Insert the registration number" data-parsley-trigger="change" >
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="txt_roll_no">Roll<span class="text-danger">*</span></label>
-                                    <input type="text" id="txt_roll_no" class="form-control" name="txt_roll_no" placeholder="Input the roll" data-parsley-trigger="change" required>
+                                    <input type="text" id="txt_roll_no" class="form-control" name="txt_roll_no" placeholder="Input the roll" data-parsley-trigger="change" >
                                 </div>
                             </div>
                         </div>
@@ -61,14 +138,14 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control homeWorkAdd" id="admission_date" name="admission_date" placeholder="23 July 2024" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" class="form-control" id="admission_date" name="admission_date" placeholder="23 July 2024" aria-describedby="inputGroupPrepend" >
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="class_id">Standard<span class="text-danger">*</span></label>
-                                    <select id="class_id" class="form-control" name="class_id" required>
+                                    <select id="class_id" class="form-control" name="class_id" >
                                         <option value="">Select Standard</option>
                                         @foreach($class as $cla)
                                         <option value="{{$cla['id']}}">{{$cla['name']}}</option>
@@ -79,7 +156,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="section_id">Class Name<span class="text-danger">*</span></label>
-                                    <select id="section_id" class="form-control" name="section_id" required>
+                                    <select id="section_id" class="form-control" name="section_id" >
                                         <option value="">Select Class Name</option>
                                     </select>
                                 </div>
@@ -89,7 +166,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="categy">Category<span class="text-danger">*</span></label>
-                                    <select id="categy" name="categy" class="form-control" required>
+                                    <select id="categy" name="categy" class="form-control" >
                                         <option value="">Choose the Category</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
@@ -129,13 +206,31 @@
                     </ul>
                     <div class="card-body">
                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="photo">Profile Picture</label>
+                                    <div class="containers-img">
+                                        <div class="imageWrapper">
+                                            <img class="image" src="{{ asset('images/700x500.png') }}">
+                                        </div>
+                                    </div>
+
+                                    <button class="file-upload">
+                                        <input type="file" name="photo" id="photo" class="file-input">Choose File
+                                    </button>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <!-- <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="document" class="col-form-label">Photo</label>
                                     <div class="profile-pic-wrapper">
                                         <div class="pic-holder">
-                                            <!-- uploaded pic shown here -->
-                                            <img id="profilePic" class="pic" src="https://source.unsplash.com/random/150x150?person">
+                                            uploaded pic shown here
+                                            <img id="profilePic" class="pic" src="https://source.unsplash.com/random/150x150?person" name="photo">
 
                                             <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
                                             <label for="newProfilePhoto" class="upload-file-block">
@@ -152,7 +247,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -163,7 +258,7 @@
                                                 <span class="fas fa-user-graduate"></span>
                                             </div>
                                         </div>
-                                        <input type="text" name="fname" class="form-control alloptions" maxlength="50" id="fname" placeholder="Ahmad Ali" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" name="fname" class="form-control alloptions" maxlength="50" id="fname" placeholder="Ahmad Ali" aria-describedby="inputGroupPrepend" >
                                     </div>
                                 </div>
                             </div>
@@ -217,7 +312,7 @@
                                                 <span class="fas fa-birthday-cake"></span>
                                             </div>
                                         </div>
-                                        <input type="text" name="dob" class="form-control homeWorkAdd" id="dob" placeholder="23 July 2024" aria-describedby="inputGroupPrepend">
+                                        <input type="text" name="dob" class="form-control" id="dob" placeholder="23 July 2024" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -230,26 +325,29 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="form-group mb-3">
-                                    <label for="txt_mothertongue">Religion</label>
-                                    <input type="text" maxlength="50" id="txt_mothertongue" class="form-control alloptions" placeholder="Religion" name="txt_mothertongue" data-parsley-trigger="change">
+                                <div class="form-group">
+                                    <label for="txt_religion">Religion</label>
+                                    <select class="form-control" name="txt_religion" id="religion">
+                                        <option value="">Choose Religion</option>
+                                        @forelse($religion as $r)
+                                        <option value="{{$r['id']}}">{{$r['religions_name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="txt_race">Race</label>
-                                    <input type="txt_race" maxlength="50" id="txt_race" class="form-control alloptions" placeholder="Race" name="txt_race" data-parsley-trigger="change">
+                                    <label for="txt_caste">Race</label>
+                                    <select class="form-control" name="txt_race" id="addRace">
+                                        <option value="">Choose race</option>
+                                        @forelse($races as $r)
+                                        <option value="{{$r['id']}}">{{$r['races_name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="txt_caste">Caste</label>
-                                    <input type="text" maxlength="50" id="txt_caste" class="form-control alloptions" placeholder="caste" name="txt_caste" data-parsley-trigger="change">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="txt_mobile_no">Contact Number<span class="text-danger">*</span></label>
@@ -259,14 +357,17 @@
                                                 <span class="fas fa-phone-volume"></span>
                                             </div>
                                         </div>
-                                        <input type="text" name="txt_mobile_no" class="form-control" id="txt_mobile_no" placeholder="(00)00000-00000" data-toggle="input-mask" data-mask-format="(00) 00000-00000" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" name="txt_mobile_no" class="form-control" id="txt_mobile_no" placeholder="(00)00000-00000" data-toggle="input-mask" data-mask-format="(00) 00000-00000" aria-describedby="inputGroupPrepend" >
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="drp_city">City</label>
-                                    <input type="text" maxlength="50" id="drp_city" class="form-control alloptions" placeholder="city" name="drp_city" data-parsley-trigger="change">
+                                    <label for="drp_country">Country</label>
+                                    <input type="text" maxlength="50" id="drp_country" class="form-control alloptions" placeholder="country" name="drp_country" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -275,17 +376,29 @@
                                     <input type="text" maxlength="50" id="drp_state" class="form-control alloptions" placeholder="state" name="drp_state" data-parsley-trigger="change">
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="drp_city">City</label>
+                                    <input type="text" maxlength="50" id="drp_city" class="form-control alloptions" placeholder="city" name="drp_city" data-parsley-trigger="change">
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="txtarea_paddress">Present Address</label>
+                                    <label for="drp_post_code">Zip/Post Code</label>
+                                    <input type="text" maxlength="50" id="drp_post_code" class="form-control alloptions" placeholder="Post Code" name="drp_post_code" data-parsley-trigger="change">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="txtarea_paddress">Address Line 1(Street address)</label>
                                     <textarea maxlength="255" id="txtarea_paddress" class="form-control alloptions" placeholder="Current staying address" name="txtarea_paddress"></textarea>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="txtarea_permanent_address">Permanent Address</label>
+                                    <label for="txtarea_permanent_address">Address Line 2</label>
                                     <textarea maxlength="255" id="txtarea_permanent_address" class="form-control alloptions" placeholder="Address that can be contacted if always migrating from place to place" name="txtarea_permanent_address"></textarea>
                                 </div>
                             </div>
@@ -310,7 +423,7 @@
                                                 <span class="far fa-envelope-open"></span>
                                             </div>
                                         </div>
-                                        <input type="text" name="txt_emailid" class="form-control" id="txt_emailid" placeholder="xxxxx@gmail.com" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" name="txt_emailid" class="form-control" id="txt_emailid" placeholder="xxxxx@gmail.com" aria-describedby="inputGroupPrepend" >
                                     </div>
                                 </div>
                             </div>
@@ -323,7 +436,7 @@
                                                 <span class="fas fa-unlock"></span>
                                             </div>
                                         </div>
-                                        <input type="password" name="txt_pwd" class="form-control" id="txt_pwd" placeholder="********" aria-describedby="inputGroupPrepend" required>
+                                        <input type="password" name="txt_pwd" class="form-control" id="txt_pwd" placeholder="********" aria-describedby="inputGroupPrepend" >
                                     </div>
                                 </div>
                             </div>
@@ -336,7 +449,7 @@
                                                 <span class="fas fa-unlock"></span>
                                             </div>
                                         </div>
-                                        <input type="password" name="txt_retype_pwd" class="form-control" id="txt_retype_pwd" placeholder="*********" aria-describedby="inputGroupPrepend" required>
+                                        <input type="password" name="txt_retype_pwd" class="form-control" id="txt_retype_pwd" placeholder="*********" aria-describedby="inputGroupPrepend" >
                                     </div>
                                 </div>
                             </div>
@@ -346,73 +459,81 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">Guardian Details<h4>
+                            <h4 class="navv">Father Details<h4>
                         </li>
                     </ul>
                     <div class="card-body">
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="check_guardian" name="check_guardian">
-                                <label class="custom-control-label" for="check_guardian">Guardian Already Exist</label>
-                            </div>
-                        </div>
-                        <div class="row" id="parent_list" style="display:none;">
+                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="heard">Guardian<span class="text-danger">*</span></label>
-                                    <select id="parent_id" name="parent_id" class="form-control" required>
-                                        <option value="">Select Guardian</option>
-                                        @foreach($parent as $par)
-                                        <option value="{{$par['id']}}">{{$par['name']}}</option>
-                                        @endforeach
-                                    </select>
+                                    <label for="father_name">Father Name</label>
+                                    <input type="text" class="form-control"  maxlength="50" id="father_name"  aria-describedby="inputGroupPrepend">
+                                    <input type="hidden" name="father_id" id="father_id">
+                                    <div id="father_list">
+                                    </div>
                                 </div>
                             </div>
+                            <div class="col-md-1">
+                            </div>
+                            <div class="col-md-4" id="father_photo" style="display:none;">
+                                
+                            </div> 
                         </div>
-                        <!-- <div class="form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck11">
-                                    <label class="custom-control-label" for="customCheck11">Skipped Bank Details</label>
-                                </div>
-                            </div> -->
-                        <div id="guardian_form">
+                        <div id="father_form"  style="display:none;">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="heard">Name<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control alloptions" name="txt_name" maxlength="50" id="txt_name" placeholder="Ahmad Ali" aria-describedby="inputGroupPrepend" required>
+                                        <label for="heard">First Name<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control"  maxlength="50" id="father_first_name"  aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group mb-3">
-                                        <label for="heard">Relation<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control alloptions" name="txt_relation" maxlength="50" id="txt_relation" placeholder="Brother" aria-describedby="inputGroupPrepend" required>
+                                    <div class="form-group">
+                                        <label for="heard">Last Name<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control"  maxlength="50" id="father_last_name"  aria-describedby="inputGroupPrepend" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="gender">Gender</label>
+                                        <select class="form-control"  id="father_gender" disabled>
+                                            <option value="">Choose Gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="birthday">Date Of Birth</label>
+                                        <div class="input-group input-group-merge">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-birthday-cake"></span>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control"  id="father_date_of_birth" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="Passport">Passport</label>
+                                        <input type="text" class="form-control"id="father_passport" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="heard">NRIC</label>
-                                        <input type="text" maxlength="50" id="txt_nric" class="form-control alloptions" placeholder="Identifaction Number" name="txt_nric" data-parsley-trigger="change">
+                                        <input type="text" maxlength="50" id="father_nric" class="form-control" placeholder="Identifaction Number" data-parsley-trigger="change" readonly>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="heard">Father Name</label>
-                                        <input type="text" class="form-control alloptions" name="txt_fathernam" maxlength="50" id="txt_fathernam" placeholder="Ahmad Ali" aria-describedby="inputGroupPrepend" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group mb-3">
-                                        <label for="heard">Mother Name</label>
-                                        <input type="text" class="form-control alloptions" name="txt_mothernam" maxlength="50" id="txt_mothernam" placeholder="Aida" placeholder="Mother Name" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
                                         <label for="blooddgrp">Blood Group</label>
-                                        <select id="blooddgrp" name="blooddgrp" class="form-control">
+                                        <select  class="form-control" id="father_blooddgrp" disabled>
                                             <option value="">Pick Blood Type</option>
                                             <option>O+</option>
                                             <option>A+</option>
@@ -425,66 +546,79 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="txt_occupation">Occupation<span class="text-danger">*</span></label>
-                                        <input type="text" maxlength="50" id="txt_occupation" class="form-control alloptions" name="txt_occupation" placeholder="Occupation" data-parsley-trigger="change" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="txt_income">Income</label>
-                                        <input type="text" maxlength="50" id="txt_income" class="form-control alloptions" name="txt_income" placeholder="Income" data-parsley-trigger="change" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="txt_eduction">Education</label>
-                                        <input type="text" maxlength="50" id="txt_eduction" class="form-control alloptions" name="txt_eduction" placeholder="Education" data-parsley-trigger="change">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group mb-3">
-                                        <label for="validationCustomUsername">City</label>
-                                        <input type="text" class="form-control alloptions" maxlength="50" id="txt_guardian_city" name="txt_guardian_city" placeholder="city" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group mb-3">
-                                        <label for="validationCustomUsername">State</label>
-                                        <input type="text" class="form-control alloptions" maxlength="50" id="txt_guardian_state" name="txt_guardian_state" placeholder="state" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group mb-3">
-                                        <label for="">Mobile No<span class="text-danger">*</span></label>
+                                        <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
                                         <div class="input-group input-group-merge">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
                                                     <span class="fas fa-phone-volume"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" id="txt_guardian_mobileno" name="txt_guardian_mobileno" placeholder="(00)000000-00000" data-toggle="input-mask" data-mask-format="(00) 00000-00000" aria-describedby="inputGroupPrepend" required>
+                                            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" id="father_mobile_no" readonly>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="education">Education</label>
+                                        <input type="text"  class="form-control" data-parsley-trigger="change" id="father_education" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txt_occupation">Occupation<span class="text-danger">*</span></label>
+                                        <input type="text" maxlength="50" id="father_occupation" class="form-control "  placeholder="Occupation" data-parsley-trigger="change" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txt_income">Income</label>
+                                        <input type="text" maxlength="50" id="father_income" class="form-control "  placeholder="Income" data-parsley-trigger="change" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="country">Country</label>
+                                        <input type="text"  class="form-control" id="father_country" data-parsley-trigger="change" readonly>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
-                                        <label for="txt_guardian_address">Present Address </label>
-                                        <textarea maxlength="255" id="txt_guardian_address" class="form-control alloptions" placeholder="Current staying address" name="txt_guardian_address">
-								   </textarea>
+                                        <label for="validationCustomUsername">State</label>
+                                        <input type="text" class="form-control " maxlength="50" id="father_state"  placeholder="state" aria-describedby="inputGroupPrepend" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustomUsername">City</label>
+                                        <input type="text" class="form-control " maxlength="50" id="father_city"  placeholder="city" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="txt_guardian_paddress">Permanent Address</label>
-                                        <textarea maxlength="255" id="txt_guardian_paddress" class="form-control alloptions" placeholder="Address that can be contacted if always migrating from place to place" name="txt_guardian_paddress"></textarea>
+                                        <label for="father_post_code">Zip/Postal code</label>
+                                        <input type="text" class="form-control" id="father_post_code" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="father_address"> Address </label>
+                                        <textarea maxlength="255" id="father_address" class="form-control " placeholder="Address" readonly>
+								        </textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="father_address_2"> Address </label>
+                                        <textarea maxlength="255" id="father_address_2" class="form-control " placeholder="Address" readonly>
+								        </textarea>
                                     </div>
                                 </div>
 
@@ -495,49 +629,345 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">Guardian Login Details<h4>
+                            <h4 class="navv">Mother Details<h4>
                         </li>
                     </ul>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="form-group mb-3">
-                                    <label for="email">Email<span class="text-danger">*</span></label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <span class="far fa-envelope-open"></span>
+                                <div class="form-group">
+                                    <label for="mother_name">Mother Name</label>
+                                    <input type="text" class="form-control"  maxlength="50" id="mother_name"  aria-describedby="inputGroupPrepend">
+                                    <input type="hidden" name="mother_id" id="mother_id">
+                                    <div id="mother_list">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                            </div>
+                            <div class="col-md-4" id="mother_photo" style="display:none;">
+                                
+                            </div> 
+                        </div>
+                        <div id="mother_form"  style="display:none;">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="heard">First Name<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control"  maxlength="50" id="mother_first_name"  aria-describedby="inputGroupPrepend" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="heard">Last Name<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control"  maxlength="50" id="mother_last_name"  aria-describedby="inputGroupPrepend" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="gender">Gender</label>
+                                        <select class="form-control"  id="mother_gender" disabled>
+                                            <option value="">Choose Gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="birthday">Date Of Birth</label>
+                                        <div class="input-group input-group-merge">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-birthday-cake"></span>
+                                                </div>
                                             </div>
+                                            <input type="text" class="form-control"  id="mother_date_of_birth" readonly>
                                         </div>
-                                        <input type="text" class="form-control" id="txt_guardian_email" placeholder="xxxxx@gmail.com" name="txt_guardian_email" aria-describedby="inputGroupPrepend" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="Passport">Passport</label>
+                                        <input type="text" class="form-control"id="mother_passport" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="heard">NRIC</label>
+                                        <input type="text" maxlength="50" id="mother_nric" class="form-control" placeholder="Identifaction Number" data-parsley-trigger="change" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="blooddgrp">Blood Group</label>
+                                        <select  class="form-control" id="mother_blooddgrp" disabled>
+                                            <option value="">Pick Blood Type</option>
+                                            <option>O+</option>
+                                            <option>A+</option>
+                                            <option>B+</option>
+                                            <option>AB+</option>
+                                            <option>O-</option>
+                                            <option>A-</option>
+                                            <option>B-</option>
+                                            <option>AB-</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
+                                        <div class="input-group input-group-merge">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-phone-volume"></span>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" id="mother_mobile_no" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="education">Education</label>
+                                        <input type="text"  class="form-control" data-parsley-trigger="change" id="mother_education" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txt_occupation">Occupation<span class="text-danger">*</span></label>
+                                        <input type="text" maxlength="50" id="mother_occupation" class="form-control"  placeholder="Occupation" data-parsley-trigger="change" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txt_income">Income</label>
+                                        <input type="text" maxlength="50" id="mother_income" class="form-control"  placeholder="Income" data-parsley-trigger="change" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="country">Country</label>
+                                        <input type="text"  class="form-control" id="mother_country" data-parsley-trigger="change" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustomUsername">State</label>
+                                        <input type="text" class="form-control" maxlength="50" id="mother_state"  placeholder="state" aria-describedby="inputGroupPrepend" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustomUsername">City</label>
+                                        <input type="text" class="form-control" maxlength="50" id="mother_city"  placeholder="city" aria-describedby="inputGroupPrepend" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_post_code">Zip/Postal code</label>
+                                        <input type="text" class="form-control" id="mother_post_code" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="mother_address"> Address </label>
+                                        <textarea maxlength="255" id="mother_address" class="form-control" placeholder="Address" readonly>
+								        </textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="mother_address_2"> Address </label>
+                                        <textarea maxlength="255" id="mother_address_2" class="form-control" placeholder="Address" readonly>
+								        </textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <h4 class="navv">Guardian Details<h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="guardian_name">Guardian Name</label>
+                                    <input type="text" class="form-control"  maxlength="50" id="guardian_name"  aria-describedby="inputGroupPrepend">
+                                    <input type="hidden" name="guardian_id" id="guardian_id">
+                                    <div id="guardian_list">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-group mb-3">
-                                    <label for="email">Password<span class="text-danger">*</span></label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-unlock"></span>
+                                <div class="form-group">
+                                    <label for="relation">Relation</label>
+                                    <input type="text" class="form-control"  maxlength="50" name="relation"  aria-describedby="inputGroupPrepend" >
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                            </div>
+                            <div class="col-md-3" id="guardian_photo" style="display:none;">
+                                
+                            </div> 
+                        </div>
+                        <div id="guardian_form"  style="display:none;">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="heard">First Name<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control"  maxlength="50" id="guardian_first_name"  aria-describedby="inputGroupPrepend" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="heard">Last Name<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control"  maxlength="50" id="guardian_last_name"  aria-describedby="inputGroupPrepend" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="gender">Gender</label>
+                                        <select class="form-control"  id="guardian_gender" disabled>
+                                            <option value="">Choose Gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="birthday">Date Of Birth</label>
+                                        <div class="input-group input-group-merge">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-birthday-cake"></span>
+                                                </div>
                                             </div>
+                                            <input type="text" class="form-control"  id="guardian_date_of_birth" readonly>
                                         </div>
-                                        <input type="password" class="form-control" name="txt_guardian_pwd" placeholder="*********" id="txt_guardian_pwd" aria-describedby="inputGroupPrepend" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="Passport">Passport</label>
+                                        <input type="text" class="form-control"id="guardian_passport" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="heard">NRIC</label>
+                                        <input type="text" maxlength="50" id="guardian_nric" class="form-control" placeholder="Identifaction Number" data-parsley-trigger="change" readonly>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group mb-3">
-                                    <label for="email">Retype Password<span class="text-danger">*</span></label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-unlock"></span>
-                                            </div>
-                                        </div>
-                                        <input type="password" class="form-control" name="txt_guardian_retyppwd" placeholder="********" id="txt_guardian_retyppwd" aria-describedby="inputGroupPrepend" required>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="blooddgrp">Blood Group</label>
+                                        <select  class="form-control" id="guardian_blooddgrp" disabled>
+                                            <option value="">Pick Blood Type</option>
+                                            <option>O+</option>
+                                            <option>A+</option>
+                                            <option>B+</option>
+                                            <option>AB+</option>
+                                            <option>O-</option>
+                                            <option>A-</option>
+                                            <option>B-</option>
+                                            <option>AB-</option>
+                                        </select>
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
+                                        <div class="input-group input-group-merge">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-phone-volume"></span>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" id="guardian_mobile_no" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="education">Education</label>
+                                        <input type="text"  class="form-control" data-parsley-trigger="change" id="guardian_education" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txt_occupation">Occupation<span class="text-danger">*</span></label>
+                                        <input type="text" maxlength="50" id="guardian_occupation" class="form-control"  placeholder="Occupation" data-parsley-trigger="change" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txt_income">Income</label>
+                                        <input type="text" maxlength="50" id="guardian_income" class="form-control"  placeholder="Income" data-parsley-trigger="change" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="country">Country</label>
+                                        <input type="text"  class="form-control" id="guardian_country" data-parsley-trigger="change" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustomUsername">State</label>
+                                        <input type="text" class="form-control" maxlength="50" id="guardian_state"  placeholder="state" aria-describedby="inputGroupPrepend" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustomUsername">City</label>
+                                        <input type="text" class="form-control" maxlength="50" id="guardian_city"  placeholder="city" aria-describedby="inputGroupPrepend" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="guardian_post_code">Zip/Postal code</label>
+                                        <input type="text" class="form-control" id="guardian_post_code" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="guardian_address"> Address </label>
+                                        <textarea maxlength="255" id="guardian_address" class="form-control" placeholder="Address" readonly>
+								        </textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="guardian_address_2"> Address </label>
+                                        <textarea maxlength="255" id="guardian_address_2" class="form-control" placeholder="Address" readonly>
+								        </textarea>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -671,12 +1101,16 @@
     });
 </script>
 <script>
+    var parentImg = "{{ asset('users/images/') }}";
+    var defaultImg = "{{ asset('images/users/default.jpg') }}";
+    var parentName = "{{ config('constants.api.parent_name') }}";
+    var parentDetails = "{{ config('constants.api.parent_details') }}";
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var vehicleByRoute = "{{ route('admin.vehicle_by_route') }}";
     var roomByHostel = "{{ route('admin.room_by_hostel') }}";
     var indexAdmission = "{{ route('admin.student.index') }}";
 </script>
-<script>
+<!-- <script>
     $(document).on("change", ".uploadProfileInput", function() {
         var triggerInput = this;
         var currentImg = $(this).closest(".pic-holder").find(".pic").attr("src");
@@ -739,6 +1173,6 @@
             }, 3000);
         }
     });
-</script>
+</script> -->
 <script src="{{ asset('js/custom/admission.js') }}"></script>
 @endsection

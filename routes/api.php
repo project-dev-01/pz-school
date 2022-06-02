@@ -396,6 +396,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('parent/add', [ApiController::class, 'addParent']);
     Route::get('parent/list', [ApiController::class, 'getParentList']);
     Route::post('parent/parent-details', [ApiController::class, 'getParentDetails']);
+    Route::get('parent/name', [ApiController::class, 'getParentName']);
     Route::post('parent/update', [ApiController::class, 'updateParent']);
     Route::post('parent/delete', [ApiController::class, 'deleteParent']);
     // get all teacher list
@@ -446,4 +447,10 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('employee-leave/leave_approval_history_by_staff', [ApiController::class, 'leaveApprovalHistoryByStaff']);
     Route::post('employee-leave/leave_details', [ApiController::class, 'staffLeaveDetails']);
     Route::post('employee-leave/leave_taken_history', [ApiController::class, 'staffLeaveTakenHist']);
+    
+    //attendance Routes
+    Route::get('attendance/employee_list', [ApiController::class, 'getEmployeeAttendanceList']);
+    Route::post('attendance/employee_add', [ApiController::class, 'addEmployeeAttendance']);
+    Route::post('attendance/employee_report', [ApiController::class, 'getEmployeeAttendanceReport']);
+    
 });

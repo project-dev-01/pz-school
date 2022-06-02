@@ -1,8 +1,80 @@
 @extends('layouts.admin-layout')
 @section('title','Edit Parent')
-@section('content')
 @section('css')
 <style>
+    .containers-img {
+        height: 270px;
+        position: relative;
+        max-width: 320px;
+        /* margin: auto; */
+    }
+
+    .containers-img .imageWrapper {
+        border: 3px solid #888;
+        width: 70%;
+        padding-bottom: 70%;
+        border-radius: 50%;
+        overflow: hidden;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .containers-img .imageWrapper img {
+        height: 105%;
+        width: initial;
+        max-height: 100%;
+        max-width: initial;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .file-upload {
+        position: relative;
+        overflow: hidden;
+        margin: 10px;
+    }
+
+    .file-upload {
+        position: relative;
+        overflow: hidden;
+        margin: 10px;
+        width: 100%;
+        max-width: 150px;
+        text-align: center;
+        /* color: #fff; */
+        font-size: 1.2em;
+        background: transparent;
+        border: 2px solid #888;
+        padding: 0.85em 1em;
+        display: inline;
+        -ms-transition: all 0.2s ease;
+        -webkit-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+    }
+
+    /* .file-upload:hover {
+        background: #999;
+        -webkit-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
+        -moz-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
+        box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
+    } */
+
+    .file-upload input.file-input {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+        height: 100%;
+    }
     .profile {
         
     padding: 5px 0 0;
@@ -11,6 +83,7 @@
     }
 </style>
 @endsection
+@section('content')
 <div class="container-fluid">
     <!-- start page title -->
     <div class="row">
@@ -42,20 +115,10 @@
                     </div> <!-- end col -->
                     <div class="col-lg-7">
                         <div class="pl-xl-3 mt-3 mt-xl-0">                                              
-                            <h1 class="mb-3">{{$parent['name']}}</h5>
+                            <h1 class="mb-3">{{$parent['first_name']}} {{$parent['last_name']}}</h5>
                             <div class="row mb-3">
                                 <div class="col-md-12">
                                     <div>
-                                        <div class="media mb-2">
-                                            <div class="avatar-xs bg-success rounded-circle">
-                                                <span class="avatar-title font-14 font-weight-bold text-white">
-                                                <i class="fas fa-bezier-curve"></i></span>
-                                            </div>
-                                            <div class="media-body pl-2">
-                                                <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                <a href="javascript: void(0);" class="text-reset">{{$parent['relation']}}</a></h5>
-                                            </div>
-                                        </div>
                                         <div class="media mb-2">
                                             <div class="avatar-xs bg-success rounded-circle">
                                                 <span class="avatar-title font-14 font-weight-bold text-white">
@@ -130,252 +193,335 @@
                                     <button type="button" class="btn btn-white btn-rounded waves-effect waves-light mr-1" data-toggle="modal" data-target="#authenticationModal"><i class="fas fa-lock mr-1"></i> Authentication</button>
                             </div> -->
                         </div><!-- end col-->
-                    </div> <!-- end row -->								    
+                    </div> <!-- end row -->				
+                    <br>				    
                     <div class="collapse" id="basic_details">
-                        <div class="card card-body">
-                            <form id="editParent" method="post" action="{{ route('admin.parent.update') }}" enctype="multipart/form-data" autocomplete="off">
-                                @csrf
-                                <input type="hidden" name="id" value="{{$parent['id']}}">
-                                <div class="card">
-                                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
-                                        <li class="nav-item">
-                                            <h4 class="nav-link">
-                                                Parent Details
-                                                <h4>
-                                        </li>
-                                    </ul>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group mb-3">
-                                                    <label for="name">Name<span class="text-danger">*</span></label>
-                                                    <div class="input-group input-group-merge">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text">
-                                                                <span class="far fa-user"></span>
-                                                            </div>
+                        <form id="editParent" method="post" action="{{ route('admin.parent.update') }}" enctype="multipart/form-data" autocomplete="off">
+                            @csrf
+                            <input type="hidden" name="id" value="{{$parent['id']}}">
+                            <div class="card">
+                                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                                    <li class="nav-item">
+                                        <h4 class="nav-link">
+                                            Parent Details
+                                            <h4>
+                                    </li>
+                                </ul>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="photo">Profile Picture</label>
+                                                <div class="containers-img">
+                                                    <div class="imageWrapper">
+                                                    @if($parent['photo'])
+                                                        <img src="{{ asset('users/images//') }}/{{$parent['photo']}}" alt="" class="image">
+                                                    @else
+                                                        <img src="{{ asset('images/users/default.jpg') }}" alt="" class="image">
+                                                    @endif
+                                                    </div>
+                                                </div>
+
+                                                <button class="file-upload">
+                                                    <input type="file" name="photo" id="photo" class="file-input">Choose File
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="first_name">First Name<span class="text-danger">*</span></label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="far fa-user"></span>
                                                         </div>
-                                                        <input type="text" class="form-control" value="{{$parent['name']}}" name="name" aria-describedby="inputGroupPrepend" >
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="relation">Relation<span class="text-danger">*</span></label>
-                                                    <input type="text"  class="form-control" value="{{$parent['relation']}}" name="relation"  data-parsley-trigger="change" >
+                                                    <input type="text" class="form-control" value="{{$parent['first_name']}}" name="first_name" aria-describedby="inputGroupPrepend" >
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="father_name">Father Name</label>
-                                                    <input type="text"  class="form-control" value="{{$parent['father_name']}}" name="father_name" data-parsley-trigger="change" >
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="mother_name">Mother Name</label>
-                                                    <input type="text"  class="form-control" value="{{$parent['mother_name']}}" name="mother_name" data-parsley-trigger="change" >
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group mb-3">
-                                                    <label for="email">Email<span class="text-danger">*</span></label>
-                                                    <div class="input-group input-group-merge">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text">
-                                                                <span class="far fa-envelope-open"></span>
-                                                            </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="last_name">Last Name<span class="text-danger">*</span></label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="far fa-user"></span>
                                                         </div>
-                                                        <input type="text" class="form-control" value="{{$parent['email']}}" name="email" aria-describedby="inputGroupPrepend" >
                                                     </div>
+                                                    <input type="text" class="form-control" value="{{$parent['last_name']}}" name="last_name" aria-describedby="inputGroupPrepend" >
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group mb-3">
-                                                    <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
-                                                    <div class="input-group input-group-merge">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text">
-                                                                <span class="fas fa-phone-volume"></span>
-                                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="gender">Gender</label>
+                                                <select class="form-control" name="gender" >
+                                                    <option value="">Choose Gender</option>
+                                                    <option value="Male" {{$parent['gender'] == "Male" ? "selected" : ""}}>Male</option>
+                                                    <option value="Female" {{$parent['gender'] == "Female" ? "selected" : ""}}>Female</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="birthday">Date Of Birth</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-birthday-cake"></span>
                                                         </div>
-                                                        <input type="text" class="form-control" value="{{$parent['mobile_no']}}" name="mobile_no" aria-describedby="inputGroupPrepend" >
                                                     </div>
+                                                    <input type="text" class="form-control" name="date_of_birth" value="{{$parent['date_of_birth']}}" id="date_of_birth">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="occupation">Occupation<span class="text-danger">*</span></label>
-                                                    <input type="text"  class="form-control" value="{{$parent['occupation']}}" name="occupation" data-parsley-trigger="change" >
-                                                </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="Passport">Passport</label>
+                                                <input type="text" class="form-control" name="passport" value="{{$parent['passport']}}">
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group mb-3">
-                                                    <label for="income">Income</label>
-                                                    <div class="input-group input-group-merge">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text">
-                                                                <span class="fas fa-calculator"></span>
-                                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="nric">NRIC</label>
+                                                <input type="text"  class="form-control" value="{{$parent['nric']}}" name="nric" data-parsley-trigger="change" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="blooddgrp">Blood Group</label>
+                                                <select  class="form-control" name="blood_group" >
+                                                    <option value="">Pick Blood Type</option>
+                                                    <option {{$parent['blood_group'] == "O+" ? "selected" : ""}}>O+</option>
+                                                    <option {{$parent['blood_group'] == "A+" ? "selected" : ""}}>A+</option>
+                                                    <option {{$parent['blood_group'] == "B+" ? "selected" : ""}}>B+</option>
+                                                    <option {{$parent['blood_group'] == "AB+" ? "selected" : ""}}>AB+</option>
+                                                    <option {{$parent['blood_group'] == "O-" ? "selected" : ""}}>O-</option>
+                                                    <option {{$parent['blood_group'] == "A-" ? "selected" : ""}}>A-</option>
+                                                    <option {{$parent['blood_group'] == "B-" ? "selected" : ""}}>B-</option>
+                                                    <option {{$parent['blood_group'] == "AB-" ? "selected" : ""}}>AB-</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="email">Email<span class="text-danger">*</span></label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="far fa-envelope-open"></span>
                                                         </div>
-                                                        <input type="text" class="form-control" value="{{$parent['income']}}" name="income" aria-describedby="inputGroupPrepend" >
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="education">Education</label>
-                                                    <input type="text"  class="form-control" value="{{$parent['education']}}" name="education" data-parsley-trigger="change" >
+                                                    <input type="text" class="form-control" value="{{$parent['email']}}" name="email" aria-describedby="inputGroupPrepend" >
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="city">City</label>
-                                                    <input type="text"  class="form-control" value="{{$parent['city']}}" name="city" data-parsley-trigger="change" >
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="state">State</label>
-                                                    <input type="text"  class="form-control" value="{{$parent['state']}}" name="state" data-parsley-trigger="change" >
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="document">Photo</label>
-                                                    <div class="col-12">
-                                                            <input type="file"  class="custom-file-input" name="photo">
-                                                            <label class="custom-file-label" for="document">Choose file</label>
-                                                            @if($parent['photo'])
-                                                            <a target="_blank"  href="{{asset('users/images/')}}/{{$parent['photo']}}" alt="your Photo">Photo Preview</a>
-                                                            @endif
-                                                            <input type="hidden" name="old_photo" value="{{$parent['photo']}}">
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-phone-volume"></span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="address">Address</label>
-                                                    <textarea  class="form-control"name="address" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
-                                                        {{$parent['address']}}     
-                                                    </textarea>
+                                                    <input type="text" class="form-control" value="{{$parent['mobile_no']}}" name="mobile_no" aria-describedby="inputGroupPrepend" >
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="card">
-                                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
-                                        <li class="nav-item">
-                                            <h4 class="nav-link">
-                                                Social Links
-                                                <h4>
-                                        </li>
-                                    </ul>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group mb-3">
-                                                    <label for="facebook_url">Facebook</label>
-                                                    <div class="input-group input-group-merge">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text">
-                                                                <span class="fab fa-facebook-f"></span>
-                                                            </div>
-                                                        </div>
-                                                        <input type="text" class="form-control" value="{{$parent['facebook_url']}}" name="facebook_url" aria-describedby="inputGroupPrepend" >
-                                                    </div>
-                                                </div>
+                                    <div class="row">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="education">Education</label>
+                                                <input type="text"  class="form-control" value="{{$parent['education']}}" name="education" data-parsley-trigger="change" >
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group mb-3">
-                                                    <label for="twitter_url">Twitter</label>
-                                                    <div class="input-group input-group-merge">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text">
-                                                                <span class="fab fa-twitter"></span>
-                                                            </div>
-                                                        </div>
-                                                        <input type="text" class="form-control" value="{{$parent['twitter_url']}}" name="twitter_url" aria-describedby="inputGroupPrepend" >
-                                                    </div>
-                                                </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="occupation">Occupation<span class="text-danger">*</span></label>
+                                                <input type="text"  class="form-control" value="{{$parent['occupation']}}" name="occupation" data-parsley-trigger="change" >
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group mb-3">
-                                                    <label for="linkedin_url">Linkedin</label>
-                                                    <div class="input-group input-group-merge">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text">
-                                                                <span class="fab fa-linkedin-in"></span>
-                                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="income">Income</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-calculator"></span>
                                                         </div>
-                                                        <input type="text" class="form-control" value="{{$parent['linkedin_url']}}" name="linkedin_url" aria-describedby="inputGroupPrepend" >
                                                     </div>
+                                                    <input type="text" class="form-control" value="{{$parent['income']}}" name="income" aria-describedby="inputGroupPrepend" >
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> <!-- end card-body -->
-                                </div> <!-- end card-->
-                                <div class="card">
-                                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
-                                        <li class="nav-item">
-                                            <h4 class="nav-link">
-                                                Change Password
-                                                <h4>
-                                        </li>
-                                    </ul>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group mb-3">
-                                                    <label for="password">Password</label>
-                                                    <div class="input-group input-group-merge">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text">
-                                                                <span class="fas fa-unlock"></span>
-                                                            </div>
-                                                        </div>
-                                                        <input type="password" class="form-control"  name="password" aria-describedby="inputGroupPrepend" >
-                                                    </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="country">Country</label>
+                                                <input type="text"  class="form-control" value="{{$parent['country']}}" name="country" data-parsley-trigger="change" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="city">City</label>
+                                                <input type="text"  class="form-control" value="{{$parent['city']}}" name="city" data-parsley-trigger="change" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="state">State</label>
+                                                <input type="text"  class="form-control" value="{{$parent['state']}}" name="state" data-parsley-trigger="change" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="post_code">Zip/Postal Code</label>
+                                                <input type="text"  class="form-control" value="{{$parent['post_code']}}" name="post_code" data-parsley-trigger="change" >
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="document">Photo</label>
+                                                <div class="col-12">
+                                                        <input type="file"  class="custom-file-input" name="photo">
+                                                        <label class="custom-file-label" for="document">Choose file</label>
+                                                        @if($parent['photo'])
+                                                        <a target="_blank"  href="{{asset('users/images/')}}/{{$parent['photo']}}" alt="your Photo">Photo Preview</a>
+                                                        @endif
+                                                        <input type="hidden" name="old_photo" value="{{$parent['photo']}}">
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group mb-3">
-                                                    <label for="confirm_password">Retype Password</label>
-                                                    <div class="input-group input-group-merge">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text">
-                                                                <span class="fas fa-unlock"></span>
-                                                            </div>
+                                        </div> -->
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="address">Address Line 1(Street address)</label>
+                                                <input class="form-control" name="address" id="address" value="{{$parent['address']}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="address_2">Address Line 2</label>
+                                                <input class="form-control" name="address_2" id="address_2" value="{{$parent['address_2']}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                                    <li class="nav-item">
+                                        <h4 class="nav-link">
+                                            Social Links
+                                            <h4>
+                                    </li>
+                                </ul>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="facebook_url">Facebook</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fab fa-facebook-f"></span>
                                                         </div>
-                                                        <input type="password" class="form-control"  name="confirm_password" aria-describedby="inputGroupPrepend" >
                                                     </div>
+                                                    <input type="text" class="form-control" value="{{$parent['facebook_url']}}" name="facebook_url" aria-describedby="inputGroupPrepend" >
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> <!-- end card-body -->
-                                </div> <!-- end card-->
-                                <div class="form-group text-right m-b-0">
-                                    <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                        Update
-                                    </button>
-                                    <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                                        Cancel
-                                    </button>-->
-                                </div>
-                            </form>
-                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="twitter_url">Twitter</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fab fa-twitter"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" value="{{$parent['twitter_url']}}" name="twitter_url" aria-describedby="inputGroupPrepend" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="linkedin_url">Linkedin</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fab fa-linkedin-in"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" value="{{$parent['linkedin_url']}}" name="linkedin_url" aria-describedby="inputGroupPrepend" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> <!-- end card-body -->
+                            </div> <!-- end card-->
+                            <div class="card">
+                                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                                    <li class="nav-item">
+                                        <h4 class="nav-link">
+                                            Change Password
+                                            <h4>
+                                    </li>
+                                </ul>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="password">Password</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-unlock"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="password" class="form-control"  name="password" aria-describedby="inputGroupPrepend" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="confirm_password">Retype Password</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-unlock"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="password" class="form-control"  name="confirm_password" aria-describedby="inputGroupPrepend" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> <!-- end card-body -->
+                            </div> <!-- end card-->
+                            <div class="form-group text-right m-b-0">
+                                <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
+                                    Update
+                                </button>
+                                <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                    Cancel
+                                </button>-->
+                            </div>
+                        </form>
                     </div>
                             
                 </div> <!-- end card-body -->

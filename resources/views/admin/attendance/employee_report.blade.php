@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Employee Attendance')
+@section('title','Employee Attendance Report ')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Employee Attendance</h4>
+                <h4 class="page-title">Employee Attendance Report</h4>
             </div>
         </div>
     </div>
@@ -32,12 +32,12 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="employeeAttendanceFilter" method="post" action="{{ route('admin.attendance.employee_list') }}" enctype="multipart/form-data" autocomplete="off">
+                    <form id="employeeAttendanceReport" method="post"  enctype="multipart/form-data" autocomplete="off">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="employee">Employee<span class="text-danger">*</span></label>
-                                    <select class="form-control" name="employee">
+                                    <select class="form-control" name="employee" id="employeeReportEmployee">
                                         <option value="">Select Employee</option>
                                         <option value="All">All</option>
                                         @foreach($employee as $emp)
@@ -55,7 +55,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="date" id="employeeDate">
+                                        <input type="text" class="form-control" name="date" id="employeeReportDate">
                                     </div>
                                 </div>
                             </div>
@@ -76,56 +76,47 @@
 
     </div>
     <!-- end row -->
-    <div class="row" id="employee_attendance" style="display:none;">
-        <div class="col-xl-12 addEmployeeAttendanceForm">
+    <div class="row" id="employee_attendance_report">
+        <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                           Employee List
+                            Attendance Report
                             <h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="addEmployeeAttendanceForm" method="post" action="{{ route('admin.attendance.employee_add') }}" enctype="multipart/form-data" autocomplete="off">
-                        @csrf
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="card-box">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered mb-0 text-center" id="timetable_table">
-                                            <thead>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card-box">
+                                <div class="row">
+                                    <div class="col-md-8"></div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <table class="">
                                                 <tr>
-                                                    <th>Staff Name</th>
-                                                    <th>Department</th>
-                                                    <th>Status</th>
-                                                    <th>Check In</th>
-                                                    <th>Check Out</th>
-                                                    <th>Hours</th>
-                                                    <th>Remarks</th>
+                                                    <th><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i> Present</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i> Absent</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-ufo"></i> Holiday</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> Late</button></th>
                                                 </tr>
-                                            </thead>
-                                            <tbody id="employee_attendance_body">
-                                                
-                                            </tbody>
-                                        </table>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                    </div> <!-- end table-responsive-->
+                                <div id="employeeAttendanceReportListShow"></div>
 
-                                </div> <!-- end card-box -->
-                            </div> <!-- end col-->
-                        </div>
-                        <!-- end row-->
-                        <input type="hidden" id="employee_form_date" name="date">
-                        <div class="form-group text-right m-b-0">
-                            <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                Save
-                            </button>
-                            <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                            Cancel
-                        </button>-->
-                        </div>
-                    </form>
+                            </div> <!-- end card-box -->
+                        </div> <!-- end col-->
+                    </div>
+                    <!-- end row-->
+                    <!-- <div class="form-group text-right m-b-0">
+                        <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
+                            Download
+                        </button>
+                    </div> -->
 
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
@@ -138,6 +129,13 @@
 
 @endsection
 @section('scripts')
+<script>
+    var getEmployeAttendanceReportList = "{{ config('constants.api.employee_attendance_report') }}";
+    // default image test
+    var defaultImg = "{{ asset('images/users/default.jpg') }}";
+    var staffImg = "{{ asset('images/staffs') }}";
+</script>
+
 <script src="{{ asset('js/custom/attendance.js') }}"></script>
 
 @endsection

@@ -3,6 +3,85 @@
 @section('content')
 @section('css')
 <style>
+    .containers-img {
+        height: 270px;
+        position: relative;
+        max-width: 320px;
+        /* margin: auto; */
+    }
+
+    .containers-img .imageWrapper {
+        border: 3px solid #888;
+        width: 70%;
+        padding-bottom: 70%;
+        border-radius: 50%;
+        overflow: hidden;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .containers-img .imageWrapper img {
+        height: 105%;
+        width: initial;
+        max-height: 100%;
+        max-width: initial;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .file-upload {
+        position: relative;
+        overflow: hidden;
+        margin: 10px;
+    }
+
+    .file-upload {
+        position: relative;
+        overflow: hidden;
+        margin: 10px;
+        width: 100%;
+        max-width: 150px;
+        text-align: center;
+        /* color: #fff; */
+        font-size: 1.2em;
+        background: transparent;
+        border: 2px solid #888;
+        padding: 0.85em 1em;
+        display: inline;
+        -ms-transition: all 0.2s ease;
+        -webkit-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+    }
+
+    /* .file-upload:hover {
+        background: #999;
+        -webkit-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
+        -moz-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
+        box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
+    } */
+
+    .file-upload input.file-input {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+        height: 100%;
+    }
+    .profile {
+        
+    padding: 5px 0 0;
+    border-top: 1px dotted #ddd;
+    text-align: right;
+    }
     .user-img {
         position: absolute;
         z-index: 1;
@@ -60,7 +139,7 @@
                                             </div>
                                             <div class="media-body pl-2">
                                                 <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                <a href="javascript: void(0);" class="text-reset">{{$student['name']}}</a></h5>
+                                                <a href="javascript: void(0);" class="text-reset"></a></h5>
                                             </div>
                                         </div>
                                         <div class="media mb-2">
@@ -130,450 +209,995 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-8">                                          
-                            <span class="header-title mb-3" id="span-parent" data-toggle="collapse" href="#basic_detail" role="button" aria-expanded="false" aria-controls="basic_detail"><i class="fas fa-user-edit"></i> Basic Details</span>
+                            <span class="header-title mb-3" id="span-parent" data-toggle="collapse" href="#basic_detail" role="button" aria-expanded="false" aria-controls="basic_detail"><i class="fas fa-user-edit"></i> Student Information</span>
                         </div>
                         <div class="col-lg-4">
                             <!-- <div class="text-lg-right mt-3 mt-lg-0">
                                     <button type="button" class="btn btn-white btn-rounded waves-effect waves-light mr-1"><i class="fas fa-lock mr-1"></i> Authentication</button>
                             </div> -->
                         </div><!-- end col-->
-                    </div> <!-- end row -->								    
+                    </div> <!-- end row -->	
+                    <br>							    
                     <div class="collapse" id="basic_detail">
-                        <div class="card card-body">
-                            <form id="editadmission" method="post" action="{{ route('admin.student.update') }}" enctype="multipart/form-data" autocomplete="off">
-                                @csrf
-                                <input type="hidden" name="student_id" value="{{$student['id']}}">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="btwyears">Academic Year<span class="text-danger">*</span></label>
-                                            <select id="btwyears" class="form-control" name="year">
-                                                <option {{$student['year'] == "2021-2022" ? "Selected" : "" }}>2021-2022</option>
-                                                <option {{$student['year'] == "2020-2021" ? "Selected" : "" }}>2020-2021</option>
-                                                <option {{$student['year'] == "2019-2020" ? "Selected" : "" }}>2019-2020</option>
-                                                <option {{$student['year'] == "2018-2019" ? "Selected" : "" }}>2018-2019</option>
-                                                <option {{$student['year'] == "2017-2018" ? "Selected" : "" }}>2017-2018</option>
-                                                <option {{$student['year'] == "2016-2017" ? "Selected" : "" }}>2016-2017</option>
-                                            </select>
+                        <form id="editadmission" method="post" action="{{ route('admin.student.update') }}" enctype="multipart/form-data" autocomplete="off">
+                            @csrf
+                            <input type="hidden" name="student_id" value="{{$student['id']}}">
+
+                            <div class="card">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <h4 class="navv">Basic Details</h4>
+                                    </li>
+                                </ul>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="btwyears">Academic Year<span class="text-danger">*</span></label>
+                                                <select id="btwyears" class="form-control" name="year">
+                                                    <option {{$student['year'] == "2021-2022" ? "Selected" : "" }}>2021-2022</option>
+                                                    <option {{$student['year'] == "2020-2021" ? "Selected" : "" }}>2020-2021</option>
+                                                    <option {{$student['year'] == "2019-2020" ? "Selected" : "" }}>2019-2020</option>
+                                                    <option {{$student['year'] == "2018-2019" ? "Selected" : "" }}>2018-2019</option>
+                                                    <option {{$student['year'] == "2017-2018" ? "Selected" : "" }}>2017-2018</option>
+                                                    <option {{$student['year'] == "2016-2017" ? "Selected" : "" }}>2016-2017</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="">Register No<span class="text-danger">*</span></label>
-                                            <input type="" id="txt_regiter_no" class="form-control" name="txt_regiter_no" value="{{$student['register_no']}}" data-parsley-trigger="change">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="">Register No<span class="text-danger">*</span></label>
+                                                <input type="" id="txt_regiter_no" class="form-control" name="txt_regiter_no" value="{{$student['register_no']}}" data-parsley-trigger="change">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="">Roll<span class="text-danger">*</span></label>
-                                            <input type="" id="txt_roll_no" class="form-control" name="txt_roll_no" value="{{$student['roll_no']}}" data-parsley-trigger="change">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group mb-3">
-                                            <label for="">Admission Date<span class="text-danger">*</span></label>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="far fa-calendar-alt"></span>
-                                                    </div>
-                                                </div>
-                                                <input type="text" class="form-control homeWorkAdd" id="admission_date" value="{{$student['admission_date']}}" name="admission_date" placeholder="" aria-describedby="inputGroupPrepend">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="">Roll<span class="text-danger">*</span></label>
+                                                <input type="" id="txt_roll_no" class="form-control" name="txt_roll_no" value="{{$student['roll_no']}}" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="class_id">Standard<span class="text-danger">*</span></label>
-                                            <select id="class_id" class="form-control" name="class_id">
-                                                <option value="">Select Standard</option>
-                                                @foreach($class as $cla)
-                                                <option value="{{$cla['id']}}" {{$student['class_id'] == $cla['id'] ? "Selected" : "" }}>{{$cla['name']}}</option>
-                                                @endforeach
-                                            </select>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="">Admission Date<span class="text-danger">*</span></label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="far fa-calendar-alt"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="admission_date" value="{{$student['admission_date']}}" name="admission_date" placeholder="" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="class_id">Standard<span class="text-danger">*</span></label>
+                                                <select id="class_id" class="form-control" name="class_id">
+                                                    <option value="">Select Standard</option>
+                                                    @foreach($class as $cla)
+                                                    <option value="{{$cla['id']}}" {{$student['class_id'] == $cla['id'] ? "Selected" : "" }}>{{$cla['name']}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="section_id">Class Name<span class="text-danger">*</span></label>
+                                                <select id="section_id" class="form-control"  name="section_id">                              
+                                                    <option value="">Select Class Name</option>
+                                                    @foreach($section as $sec)
+                                                    <option value="{{$sec['section_id']}}" {{$student['section_id'] == $sec['section_id'] ? "Selected" : "" }}>{{$sec['section_name']}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="section_id">Class Name<span class="text-danger">*</span></label>
-                                            <select id="section_id" class="form-control"  name="section_id">                              
-                                                <option value="">Select Class Name</option>
-                                                @foreach($section as $sec)
-                                                <option value="{{$sec['section_id']}}" {{$student['section_id'] == $sec['section_id'] ? "Selected" : "" }}>{{$sec['section_name']}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="row">
                                     
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="">Category<span class="text-danger">*</span></label>
-                                            <select id="categy" name="categy" class="form-control">
-                                                <option value="">Choose..</option>
-                                                <option value="1" {{$student['category_id'] == 1 ? "Selected" : "" }}>One</option>
-                                                <option value="2" {{$student['category_id'] == 2 ? "Selected" : "" }}>Two</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="session_id">Session</label>
-                                            <select id="session_id" class="form-control"  name="session_id">                              
-                                                <option value="0">Select Session</option>
-                                                @foreach($session as $ses)
-                                                    <option value="{{$ses['id']}}" {{$student['session_id'] == $ses['id'] ? "Selected" : "" }}>{{$ses['name']}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="semester_id">Semester</label>
-                                            <select id="semester_id" class="form-control"  name="semester_id">                              
-                                                <option value="0">Select Semester</option>
-                                                @foreach($semester as $sem)
-                                                    <option value="{{$sem['id']}}" {{$student['semester_id'] == $sem['id'] ? "Selected" : "" }}>{{$sem['name']}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <span class="fas fa-user-check" id="span-parent"></span>
-                                <span class="header-title mb-3" id="span-parent">Student Details
-                                    <hr id="hr">
-                                </span>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="">First Name<span class="text-danger">*</span></label>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-user-graduate"></span>
-                                                    </div>
-                                                </div>
-                                                <input type="text" name="fname" class="form-control" value="{{$student['first_name']}}" id="fname" placeholder="" aria-describedby="inputGroupPrepend">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group mb-3">
-                                            <label for="">Last Name<span class="text-danger">*</span></label>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-user-graduate"></span>
-                                                    </div>
-                                                </div>
-                                                <input type="text" name="lname" class="form-control" id="lname" value="{{$student['last_name']}}" placeholder="" aria-describedby="inputGroupPrepend">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="gender">Gender</label>
-                                            <select id="gender" name="gender" class="form-control">
-                                                <option value="">Select Gender</option>
-                                                <option value="Male" {{$student['gender'] == "Male" ? "Selected" : "" }}>Male</option>
-                                                <option value="Female" {{$student['gender'] == "Female" ? "Selected" : "" }}>Female</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="email">Email<span class="text-danger">*</span></label>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="far fa-envelope-open"></span>
-                                                    </div>
-                                                </div>
-                                                <input type="text" name="txt_emailid" class="form-control" id="txt_emailid" placeholder="" aria-describedby="inputGroupPrepend" value="{{$student['email']}}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="blooddgrp">Blood Group</label>
-                                            <select id="blooddgrp" name="blooddgrp" class="form-control">
-                                                <option value="">Select Blood Group</option>
-                                                <option {{$student['blood_group'] == "O+" ? "Selected" : "" }}>O+</option>
-                                                <option {{$student['blood_group'] == "A+" ? "Selected" : "" }}>A+</option>
-                                                <option {{$student['blood_group'] == "B+" ? "Selected" : "" }}>B+</option>
-                                                <option {{$student['blood_group'] == "AB+" ? "Selected" : "" }}>AB+</option>
-                                                <option {{$student['blood_group'] == "O-" ? "Selected" : "" }}>O-</option>
-                                                <option {{$student['blood_group'] == "A-" ? "Selected" : "" }}>A-</option>
-                                                <option {{$student['blood_group'] == "B-" ? "Selected" : "" }}>B-</option>
-                                                <option {{$student['blood_group'] == "AB-" ? "Selected" : "" }}>AB-</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group mb-3">
-                                            <label for="">Date Of Birth</label>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-birthday-cake"></span>
-                                                    </div>
-                                                </div>
-                                                <input type="text" name="dob" class="form-control homeWorkAdd" value="{{$student['birthday']}}" id="dob" placeholder="" aria-describedby="inputGroupPrepend">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group mb-3">
-                                            <label for="">Mother Tongue</label>
-                                            <input type="" id="txt_mothertongue" class="form-control" value="{{$student['mother_tongue']}}" name="txt_mothertongue" data-parsley-trigger="change">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="">Religion</label>
-                                            <input type="txt_religion" id="" class="form-control" value="{{$student['religion']}}" name="txt_religion" data-parsley-trigger="change">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="">Caste</label>
-                                            <input type="" id="txt_caste" class="form-control" value="{{$student['caste']}}" name="txt_caste" data-parsley-trigger="change">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group mb-3">
-                                            <label for="">Mobile No<span class="text-danger">*</span></label>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-phone-volume"></span>
-                                                    </div>
-                                                </div>
-                                                <input type="text" name="txt_mobile_no" class="form-control" value="{{$student['mobile_no']}}" id="txt_mobile_no" placeholder="" aria-describedby="inputGroupPrepend">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="">City</label>
-                                            <input type="" id="drp_city" class="form-control" name="drp_city" data-parsley-trigger="change" value="{{$student['city']}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="">State</label>
-                                            <input type="" id="drp_state" class="form-control" name="drp_state" data-parsley-trigger="change" value="{{$student['state']}}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="txtarea_paddress">Present Address</label>
-                                            <textarea id="txtarea_paddress" class="form-control" name="txtarea_paddress">{{$student['current_address']}}
-                                            </textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="txtarea_permanent_address">Permanent Address</label>
-                                            <textarea id="txtarea_permanent_address" class="form-control" name="txtarea_permanent_address">{{$student['permanent_address']}}
-                                            </textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="document">Photo</label>
-                                            <div class="col-12">
-                                                    <input type="file"  class="custom-file-input" name="photo">
-                                                    <label class="custom-file-label" for="document">Choose file</label>
-                                                    @if($student['photo'])
-                                                    <a target="_blank"  href="{{asset('users/images/')}}/{{$student['photo']}}" alt="your Photo">Photo Preview</a>
-                                                    @endif
-                                                    <input type="hidden" name="old_photo" value="{{$student['photo']}}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- <div class="col-12">
+                                    <div class="row">
                                         
-                                        <label for="pc">Profile Picture</label>
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <input type="file" data-plugins="dropify" data-height="300" name="photo" data-default-file="{{asset('users/images')}}/{{$student['photo']}}"/>
-                                                <input type="hidden" name="old_photo" value="{{$student['photo']}}">
-                                            </div> 
-                                        </div> 
-                                    </div> -->
-                                </div>
-                                <span class="fas fa-user-tie" id="span-parent"></span>
-                                <span class="header-title mb-3" id="span-parent">Guardian Details
-                                    <hr id="hr">
-                                </span>
-                                <!-- <div class="form-group">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck11">
-                                        <label class="custom-control-label" for="customCheck11">Skipped Bank Details</label>
-                                    </div>
-                                </div> -->
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="heard">Guardian<span class="text-danger">*</span></label>
-                                            <select id="txt_name" name="txt_name" class="form-control">
-                                                <option value="">Select Guardian</option>
-                                                @foreach($parent as $par)
-                                                <option value="{{$par['id']}}" {{$student['parent_id'] == $par['id'] ? "Selected" : "" }}>{{$par['name']}}</option>
-                                                @endforeach
-                                            </select>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="">Category<span class="text-danger">*</span></label>
+                                                <select id="categy" name="categy" class="form-control">
+                                                    <option value="">Choose..</option>
+                                                    <option value="1" {{$student['category_id'] == 1 ? "Selected" : "" }}>One</option>
+                                                    <option value="2" {{$student['category_id'] == 2 ? "Selected" : "" }}>Two</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="session_id">Session</label>
+                                                <select id="session_id" class="form-control"  name="session_id">                              
+                                                    <option value="0">Select Session</option>
+                                                    @foreach($session as $ses)
+                                                        <option value="{{$ses['id']}}" {{$student['session_id'] == $ses['id'] ? "Selected" : "" }}>{{$ses['name']}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="semester_id">Semester</label>
+                                                <select id="semester_id" class="form-control"  name="semester_id">                              
+                                                    <option value="0">Select Semester</option>
+                                                    @foreach($semester as $sem)
+                                                        <option value="{{$sem['id']}}" {{$student['semester_id'] == $sem['id'] ? "Selected" : "" }}>{{$sem['name']}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <span class="fas fa-bus-alt  " id="span-parent"></span>
-                                <span class="header-title mb-3" id="span-parent">Transport Details
-                                    <hr id="hr">
-                                </span>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="drp_transport_route">Transport Route</label>
-                                            
-                                            <select id="drp_transport_route" name="drp_transport_route" class="form-control">
-                                                <option value="">Select Transport</option>
-                                                @foreach($transport as $trans)
-                                                <option value="{{$trans['id']}}" {{$student['route_id'] == $trans['id'] ? "Selected" : "" }}>{{$trans['name']}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="drp_transport_vechicleno">Vechicle No</label>
-                                            <select id="drp_transport_vechicleno" name="drp_transport_vechicleno" class="form-control">
-                                                <option value="">First select the branch</option>
-                                                
-                                                @foreach($vehicle as $veh)
-                                                <option value="{{$veh['vehicle_id']}}" {{$student['vehicle_id'] == $veh['vehicle_id'] ? "Selected" : "" }}>{{$veh['vehicle_no']}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <span class="fas fa-hotel" id="span-parent"></span>
-                                <span class="header-title mb-3" id="span-parent">Hostel Details
-                                    <hr id="hr">
-                                </span>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="drp_hostelnam">Hostel Name</label>
-                                            <select id="drp_hostelnam" name="drp_hostelnam" class="form-control">
-                                                <option value="">Select Hostel</option>
-                                                @foreach($hostel as $hos)
-                                                <option value="{{$hos['id']}}" {{$student['hostel_id'] == $hos['id'] ? "Selected" : "" }}>{{$hos['name']}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="drp_roomname">Room Name</label>
-                                            <select id="drp_roomname" name="drp_roomname" class="form-control">
-                                                <option value="">First select the hostel</option>
-                                                
-                                                @foreach($room as $roo)
-                                                <option value="{{$roo['room_id']}}" {{$student['room_id'] == $roo['room_id'] ? "Selected" : "" }}>{{$roo['room_name']}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <span class="fas fa-holly-berry" id="span-parent"></span>
-                                <span class="header-title mb-3" id="span-parent">Previous School Details
-                                    <hr style="margin-top:-1%;margin-left:20%;color:blue">
-                                </span>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">School Name</label>
-                                            <input type="" id="txt_prev_schname" class="form-control" name="txt_prev_schname" data-parsley-trigger="change" value="{{$student['school_name']}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Qualification</label>
-                                            <input type="" id="txt_prev_qualify" class="form-control" name="txt_prev_qualify" data-parsley-trigger="change" value="{{$student['qualification']}}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="message">Remarks</label>
-                                    <textarea id="txtarea_prev_remarks" class="form-control" name="txtarea_prev_remarks">{{$student['remarks']}}
-                                    </textarea>
-                                </div>
+                            </div>
 
-                                
-                                <div class="card">
-                                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
-                                        <li class="nav-item">
-                                            <h4 class="nav-link">
-                                                Change Password
-                                                <h4>
-                                        </li>
-                                    </ul>
-                                    <div class="card-body">
+                            <div class="card">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <h4 class="navv">Student Details</h4>
+                                    </li>
+                                </ul>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="photo">Profile Picture</label>
+                                                <div class="containers-img">
+                                                    <div class="imageWrapper">
+                                                        @if($student['photo'])
+                                                            <img src="{{asset('users/images/')}}/{{$student['photo']}}" alt="" class="image">
+                                                        @else
+                                                            <img src="{{ asset('images/users/default.jpg') }}" alt="" class="image">
+                                                        @endif
+                                                        <input type="hidden" name="old_photo" value="{{$student['photo']}}">
+                                                    </div>
+                                                </div>
+                                                <button class="file-upload">
+                                                    <input type="file" name="photo" id="photo" class="file-input">Choose File
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="">First Name<span class="text-danger">*</span></label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-user-graduate"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="fname" class="form-control" value="{{$student['first_name']}}" id="fname" placeholder="" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="">Last Name<span class="text-danger">*</span></label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-user-graduate"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="lname" class="form-control" id="lname" value="{{$student['last_name']}}" placeholder="" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="gender">Gender</label>
+                                                <select id="gender" name="gender" class="form-control">
+                                                    <option value="">Select Gender</option>
+                                                    <option value="Male" {{$student['gender'] == "Male" ? "Selected" : "" }}>Male</option>
+                                                    <option value="Female" {{$student['gender'] == "Female" ? "Selected" : "" }}>Female</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="email">Email<span class="text-danger">*</span></label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="far fa-envelope-open"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="txt_emailid" class="form-control" id="txt_emailid" placeholder="" aria-describedby="inputGroupPrepend" value="{{$student['email']}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="blooddgrp">Blood Group</label>
+                                                <select id="blooddgrp" name="blooddgrp" class="form-control">
+                                                    <option value="">Select Blood Group</option>
+                                                    <option {{$student['blood_group'] == "O+" ? "Selected" : "" }}>O+</option>
+                                                    <option {{$student['blood_group'] == "A+" ? "Selected" : "" }}>A+</option>
+                                                    <option {{$student['blood_group'] == "B+" ? "Selected" : "" }}>B+</option>
+                                                    <option {{$student['blood_group'] == "AB+" ? "Selected" : "" }}>AB+</option>
+                                                    <option {{$student['blood_group'] == "O-" ? "Selected" : "" }}>O-</option>
+                                                    <option {{$student['blood_group'] == "A-" ? "Selected" : "" }}>A-</option>
+                                                    <option {{$student['blood_group'] == "B-" ? "Selected" : "" }}>B-</option>
+                                                    <option {{$student['blood_group'] == "AB-" ? "Selected" : "" }}>AB-</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="">Date Of Birth</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-birthday-cake"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="dob" class="form-control" value="{{$student['birthday']}}" id="dob" placeholder="" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="txt_nric">NRIC</label>
+                                                <input type="text" maxlength="50" id="txt_nric" class="form-control alloptions" placeholder="Identifaction Number" name="txt_nric" data-parsley-trigger="change">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="txt_religion">Religion</label>
+                                                <select class="form-control" name="txt_religion" id="religion">
+                                                    <option value="">Choose Religion</option>
+                                                    @forelse($religion as $r)
+                                                    <option value="{{$r['id']}}" {{$student['religion'] == $r['id'] ? "selected" : ""}}>{{$r['religions_name']}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="txt_caste">Race</label>
+                                                <select class="form-control" name="txt_race" id="addRace">
+                                                    <option value="">Choose race</option>
+                                                    @forelse($races as $r)
+                                                    <option value="{{$r['id']}}" {{$student['race'] == $r['id'] ? "selected" : ""}}>{{$r['races_name']}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="">Contact Number<span class="text-danger">*</span></label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-phone-volume"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="txt_mobile_no" class="form-control" value="{{$student['mobile_no']}}" id="txt_mobile_no" placeholder="" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="drp_country">Country</label>
+                                                <input type="" id="drp_country" class="form-control" name="drp_country" data-parsley-trigger="change" value="{{$student['country']}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="drp_state">State</label>
+                                                <input type="" id="drp_state" class="form-control" name="drp_state" data-parsley-trigger="change" value="{{$student['state']}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="drp_city">City</label>
+                                                <input type="" id="drp_city" class="form-control" name="drp_city" data-parsley-trigger="change" value="{{$student['city']}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="drp_post_code">Zip/Post Code</label>
+                                                <input type="" id="drp_post_code" class="form-control" name="drp_post_code" data-parsley-trigger="change" value="{{$student['post_code']}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="txtarea_paddress">Present Address</label>
+                                                <textarea id="txtarea_paddress" class="form-control" name="txtarea_paddress">{{$student['current_address']}}
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="txtarea_permanent_address">Permanent Address</label>
+                                                <textarea id="txtarea_permanent_address" class="form-control" name="txtarea_permanent_address">{{$student['permanent_address']}}
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <h4 class="navv">Father Details<h4>
+                                    </li>
+                                </ul>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="father_name">Father Name</label>
+                                                <input type="text" class="form-control"  maxlength="50" id="father_name"  aria-describedby="inputGroupPrepend">
+                                                <input type="hidden" name="father_id" id="father_id"  value="{{$student['father_id']}}">
+                                                <div id="father_list">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                        </div>
+                                        <div class="col-md-4" id="father_photo" style="display:none;">
+                                            
+                                        </div> 
+                                    </div>
+                                    <div id="father_form"  style="display:none;">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="heard">First Name<span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control"  maxlength="50" id="father_first_name"  aria-describedby="inputGroupPrepend" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="heard">Last Name<span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control"  maxlength="50" id="father_last_name"  aria-describedby="inputGroupPrepend" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="gender">Gender</label>
+                                                    <select class="form-control"  id="father_gender" disabled>
+                                                        <option value="">Choose Gender</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="birthday">Date Of Birth</label>
+                                                    <div class="input-group input-group-merge">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <span class="fas fa-birthday-cake"></span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" class="form-control"  id="father_date_of_birth" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="Passport">Passport</label>
+                                                    <input type="text" class="form-control"id="father_passport" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="heard">NRIC</label>
+                                                    <input type="text" maxlength="50" id="father_nric" class="form-control" placeholder="Identifaction Number" data-parsley-trigger="change" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="blooddgrp">Blood Group</label>
+                                                    <select  class="form-control" id="father_blooddgrp" disabled>
+                                                        <option value="">Pick Blood Type</option>
+                                                        <option>O+</option>
+                                                        <option>A+</option>
+                                                        <option>B+</option>
+                                                        <option>AB+</option>
+                                                        <option>O-</option>
+                                                        <option>A-</option>
+                                                        <option>B-</option>
+                                                        <option>AB-</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
+                                                    <div class="input-group input-group-merge">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <span class="fas fa-phone-volume"></span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" class="form-control" aria-describedby="inputGroupPrepend" id="father_mobile_no" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="education">Education</label>
+                                                    <input type="text"  class="form-control" data-parsley-trigger="change" id="father_education" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="txt_occupation">Occupation<span class="text-danger">*</span></label>
+                                                    <input type="text" maxlength="50" id="father_occupation" class="form-control "  placeholder="Occupation" data-parsley-trigger="change" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="txt_income">Income</label>
+                                                    <input type="text" maxlength="50" id="father_income" class="form-control "  placeholder="Income" data-parsley-trigger="change" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="country">Country</label>
+                                                    <input type="text"  class="form-control" id="father_country" data-parsley-trigger="change" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group mb-3">
-                                                    <label for="password">Password</label>
-                                                    <div class="input-group input-group-merge">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text">
-                                                                <span class="fas fa-unlock"></span>
-                                                            </div>
-                                                        </div>
-                                                        <input type="password" class="form-control"  name="password" aria-describedby="inputGroupPrepend" >
-                                                    </div>
+                                                    <label for="validationCustomUsername">State</label>
+                                                    <input type="text" class="form-control " maxlength="50" id="father_state"  placeholder="state" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group mb-3">
-                                                    <label for="confirm_password">Retype Password</label>
-                                                    <div class="input-group input-group-merge">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text">
-                                                                <span class="fas fa-unlock"></span>
-                                                            </div>
-                                                        </div>
-                                                        <input type="password" class="form-control"  name="confirm_password" aria-describedby="inputGroupPrepend" >
-                                                    </div>
+                                                    <label for="validationCustomUsername">City</label>
+                                                    <input type="text" class="form-control " maxlength="50" id="father_city"  placeholder="city" aria-describedby="inputGroupPrepend" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="father_post_code">Zip/Postal code</label>
+                                                    <input type="text" class="form-control" id="father_post_code" readonly>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> <!-- end card-body -->
-                                </div> <!-- end card-->
-                                <div class="form-group text-right m-b-0">
-                                    <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                        Update
-                                    </button>
-                                    <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                                        Cancel
-                                    </button>-->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label for="father_address"> Address </label>
+                                                    <textarea maxlength="255" id="father_address" class="form-control " placeholder="Address" readonly>
+                                                    </textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label for="father_address_2"> Address </label>
+                                                    <textarea maxlength="255" id="father_address_2" class="form-control " placeholder="Address" readonly>
+                                                    </textarea>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                            <div class="card">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <h4 class="navv">Mother Details<h4>
+                                    </li>
+                                </ul>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="mother_name">Mother Name</label>
+                                                <input type="text" class="form-control"  maxlength="50" id="mother_name"  aria-describedby="inputGroupPrepend">
+                                                <input type="hidden" name="mother_id" id="mother_id" value="{{$student['mother_id']}}">
+                                                <div id="mother_list">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                        </div>
+                                        <div class="col-md-4" id="mother_photo" style="display:none;">
+                                            
+                                        </div> 
+                                    </div>
+                                    <div id="mother_form"  style="display:none;">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="heard">First Name<span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control"  maxlength="50" id="mother_first_name"  aria-describedby="inputGroupPrepend" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="heard">Last Name<span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control"  maxlength="50" id="mother_last_name"  aria-describedby="inputGroupPrepend" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="gender">Gender</label>
+                                                    <select class="form-control"  id="mother_gender" disabled>
+                                                        <option value="">Choose Gender</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="birthday">Date Of Birth</label>
+                                                    <div class="input-group input-group-merge">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <span class="fas fa-birthday-cake"></span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" class="form-control"  id="mother_date_of_birth" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="Passport">Passport</label>
+                                                    <input type="text" class="form-control"id="mother_passport" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="heard">NRIC</label>
+                                                    <input type="text" maxlength="50" id="mother_nric" class="form-control" placeholder="Identifaction Number" data-parsley-trigger="change" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="blooddgrp">Blood Group</label>
+                                                    <select  class="form-control" id="mother_blooddgrp" disabled>
+                                                        <option value="">Pick Blood Type</option>
+                                                        <option>O+</option>
+                                                        <option>A+</option>
+                                                        <option>B+</option>
+                                                        <option>AB+</option>
+                                                        <option>O-</option>
+                                                        <option>A-</option>
+                                                        <option>B-</option>
+                                                        <option>AB-</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
+                                                    <div class="input-group input-group-merge">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <span class="fas fa-phone-volume"></span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" class="form-control" aria-describedby="inputGroupPrepend" id="mother_mobile_no" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="education">Education</label>
+                                                    <input type="text"  class="form-control" data-parsley-trigger="change" id="mother_education" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="txt_occupation">Occupation<span class="text-danger">*</span></label>
+                                                    <input type="text" maxlength="50" id="mother_occupation" class="form-control"  placeholder="Occupation" data-parsley-trigger="change" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="txt_income">Income</label>
+                                                    <input type="text" maxlength="50" id="mother_income" class="form-control"  placeholder="Income" data-parsley-trigger="change" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="country">Country</label>
+                                                    <input type="text"  class="form-control" id="mother_country" data-parsley-trigger="change" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustomUsername">State</label>
+                                                    <input type="text" class="form-control" maxlength="50" id="mother_state"  placeholder="state" aria-describedby="inputGroupPrepend" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustomUsername">City</label>
+                                                    <input type="text" class="form-control" maxlength="50" id="mother_city"  placeholder="city" aria-describedby="inputGroupPrepend" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="mother_post_code">Zip/Postal code</label>
+                                                    <input type="text" class="form-control" id="mother_post_code" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label for="mother_address"> Address </label>
+                                                    <textarea maxlength="255" id="mother_address" class="form-control" placeholder="Address" readonly>
+                                                    </textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label for="mother_address_2"> Address </label>
+                                                    <textarea maxlength="255" id="mother_address_2" class="form-control" placeholder="Address" readonly>
+                                                    </textarea>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <h4 class="navv">Guardian Details<h4>
+                                    </li>
+                                </ul>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="guardian_name">Guardian Name</label>
+                                                <input type="text" class="form-control"  maxlength="50" id="guardian_name"  aria-describedby="inputGroupPrepend">
+                                                <input type="hidden" name="guardian_id" id="guardian_id" value="{{$student['guardian_id']}}">
+                                                <div id="guardian_list">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="relation">Relation</label>
+                                                <input type="text" class="form-control"  maxlength="50" name="relation"  value="{{$student['relation']}}" aria-describedby="inputGroupPrepend" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                        </div>
+                                        <div class="col-md-3" id="guardian_photo" style="display:none;">
+                                            
+                                        </div> 
+                                    </div>
+                                    <div id="guardian_form"  style="display:none;">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="heard">First Name<span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control"  maxlength="50" id="guardian_first_name"  aria-describedby="inputGroupPrepend" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="heard">Last Name<span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control"  maxlength="50" id="guardian_last_name"  aria-describedby="inputGroupPrepend" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="gender">Gender</label>
+                                                    <select class="form-control"  id="guardian_gender" disabled>
+                                                        <option value="">Choose Gender</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="birthday">Date Of Birth</label>
+                                                    <div class="input-group input-group-merge">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <span class="fas fa-birthday-cake"></span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" class="form-control"  id="guardian_date_of_birth" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="Passport">Passport</label>
+                                                    <input type="text" class="form-control"id="guardian_passport" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="heard">NRIC</label>
+                                                    <input type="text" maxlength="50" id="guardian_nric" class="form-control" placeholder="Identifaction Number" data-parsley-trigger="change" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="blooddgrp">Blood Group</label>
+                                                    <select  class="form-control" id="guardian_blooddgrp" disabled>
+                                                        <option value="">Pick Blood Type</option>
+                                                        <option>O+</option>
+                                                        <option>A+</option>
+                                                        <option>B+</option>
+                                                        <option>AB+</option>
+                                                        <option>O-</option>
+                                                        <option>A-</option>
+                                                        <option>B-</option>
+                                                        <option>AB-</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
+                                                    <div class="input-group input-group-merge">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <span class="fas fa-phone-volume"></span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" class="form-control" aria-describedby="inputGroupPrepend" id="guardian_mobile_no" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="education">Education</label>
+                                                    <input type="text"  class="form-control" data-parsley-trigger="change" id="guardian_education" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="txt_occupation">Occupation<span class="text-danger">*</span></label>
+                                                    <input type="text" maxlength="50" id="guardian_occupation" class="form-control"  placeholder="Occupation" data-parsley-trigger="change" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="txt_income">Income</label>
+                                                    <input type="text" maxlength="50" id="guardian_income" class="form-control"  placeholder="Income" data-parsley-trigger="change" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="country">Country</label>
+                                                    <input type="text"  class="form-control" id="guardian_country" data-parsley-trigger="change" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustomUsername">State</label>
+                                                    <input type="text" class="form-control" maxlength="50" id="guardian_state"  placeholder="state" aria-describedby="inputGroupPrepend" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group mb-3">
+                                                    <label for="validationCustomUsername">City</label>
+                                                    <input type="text" class="form-control" maxlength="50" id="guardian_city"  placeholder="city" aria-describedby="inputGroupPrepend" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="guardian_post_code">Zip/Postal code</label>
+                                                    <input type="text" class="form-control" id="guardian_post_code" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label for="guardian_address"> Address </label>
+                                                    <textarea maxlength="255" id="guardian_address" class="form-control" placeholder="Address" readonly>
+                                                    </textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label for="guardian_address_2"> Address </label>
+                                                    <textarea maxlength="255" id="guardian_address_2" class="form-control" placeholder="Address" readonly>
+                                                    </textarea>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <h4 class="navv">Transport Details</h4>
+                                    </li>
+                                </ul>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="drp_transport_route">Transport Route</label>
+                                                
+                                                <select id="drp_transport_route" name="drp_transport_route" class="form-control">
+                                                    <option value="">Select Transport</option>
+                                                    @foreach($transport as $trans)
+                                                    <option value="{{$trans['id']}}" {{$student['route_id'] == $trans['id'] ? "Selected" : "" }}>{{$trans['name']}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="drp_transport_vechicleno">Vechicle No</label>
+                                                <select id="drp_transport_vechicleno" name="drp_transport_vechicleno" class="form-control">
+                                                    <option value="">First select the branch</option>
+                                                    
+                                                    @foreach($vehicle as $veh)
+                                                    <option value="{{$veh['vehicle_id']}}" {{$student['vehicle_id'] == $veh['vehicle_id'] ? "Selected" : "" }}>{{$veh['vehicle_no']}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <h4 class="navv">Hostel Details</h4>
+                                    </li>
+                                </ul>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="drp_hostelnam">Hostel Name</label>
+                                                <select id="drp_hostelnam" name="drp_hostelnam" class="form-control">
+                                                    <option value="">Select Hostel</option>
+                                                    @foreach($hostel as $hos)
+                                                    <option value="{{$hos['id']}}" {{$student['hostel_id'] == $hos['id'] ? "Selected" : "" }}>{{$hos['name']}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="drp_roomname">Room Name</label>
+                                                <select id="drp_roomname" name="drp_roomname" class="form-control">
+                                                    <option value="">First select the hostel</option>
+                                                    
+                                                    @foreach($room as $roo)
+                                                    <option value="{{$roo['room_id']}}" {{$student['room_id'] == $roo['room_id'] ? "Selected" : "" }}>{{$roo['room_name']}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <h4 class="navv">Previous School Details</h4>
+                                    </li>
+                                </ul>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">School Name</label>
+                                                <input type="" id="txt_prev_schname" class="form-control" name="txt_prev_schname" data-parsley-trigger="change" value="{{$student['school_name']}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Qualification</label>
+                                                <input type="" id="txt_prev_qualify" class="form-control" name="txt_prev_qualify" data-parsley-trigger="change" value="{{$student['qualification']}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="message">Remarks</label>
+                                                <textarea id="txtarea_prev_remarks" class="form-control" name="txtarea_prev_remarks">{{$student['remarks']}}
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                            <div class="card">
+                                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                                    <li class="nav-item">
+                                        <h4 class="nav-link">
+                                            Change Password
+                                            <h4>
+                                    </li>
+                                </ul>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="password">Password</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-unlock"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="password" class="form-control"  name="password" aria-describedby="inputGroupPrepend" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="confirm_password">Retype Password</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-unlock"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="password" class="form-control"  name="confirm_password" aria-describedby="inputGroupPrepend" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> <!-- end card-body -->
+                            </div> <!-- end card-->
+                            <div class="form-group text-right m-b-0">
+                                <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
+                                    Update
+                                </button>
+                                <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                    Cancel
+                                </button>-->
+                            </div>
+                        </form>
                     </div>
                             
                 </div> <!-- end card-body -->
@@ -587,45 +1211,195 @@
                     <span class="header-title mb-3" id="span-parent" data-toggle="collapse" href="#parent_detail" role="button" aria-expanded="false" aria-controls="parent_detail"><i class="fas fa-users"></i> Parent Information</span>
                     <br><br>
                     <div class="collapse" id="parent_detail">
-                        <div class="">
-                        <div class="table-responsive mt-md mb-md">
-							<table class="table table-striped table-bordered table-condensed mb-none">
-								<tbody>
-									<tr>
-										<th>Name</th>
-										<td>{{$student['name']}}</td>
-										<th>Relation</th>
-										<td>{{$student['relation']}}</td>
-									</tr>
-									<tr>
-										<th>Occupation</th>
-										<td>{{$student['occupation']}}</td>
-										<th>Income</th>
-										<td>{{$student['income']}}</td>
-									</tr>
-									<tr>
-										<th>Education</th>
-										<td>{{$student['education']}}</td>
-										<th>City</th>
-										<td>{{$student['parent_city']}}</td>
-									</tr>
-									<tr>
-										<th>State</th>
-										<td>{{$student['parent_state']}}</td>
-										<th>Mobile No</th>
-										<td>{{$student['parent_mobile_no']}}</td>
-									</tr>
-									<tr>
-										<th>Email</th>
-										<td colspan="3">{{$student['parent_email']}}</td>
-									</tr>
-									<tr class="quick-address">
-										<th>Address</th>
-										<td colspan="3" height="80px;">{{$student['address']}}</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
+
+                        <div class="card" id="father_info" style="display:none">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <h4 class="navv">Father Details</h4>
+                                </li>
+                            </ul>
+                            <div class="card-body">
+                                <div class="table-responsive mt-md mb-md">
+                                    <table class="table table-striped table-bordered table-condensed mb-none">
+                                        <tbody>
+                                            <tr>
+                                                <th width="25%">Name</th>
+                                                <td width="25%" class="father_name"></td>
+                                                <th width="25%">Date of Birth</th>
+                                                <td width="25%" class="father_date_of_birth"></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="25%">Passport</th>
+                                                <td width="25%" class="father_passport"></td>
+                                                <th width="25%">NRIC</th>
+                                                <td width="25%" class="father_nric"></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="25%">Email</th>
+                                                <td width="25%" class="father_email"></td>
+                                                <th width="25%">Mobile No</th>
+                                                <td width="25%" class="father_mobile_no"></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="25%">Blood Group</th>
+                                                <td width="25%" class="father_blood_group"></td>
+                                                <th width="25%">Education</th>
+                                                <td width="25%" class="father_education"></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="25%">Occupation</th>
+                                                <td width="25%" class="father_occupation"></td>
+                                                <th width="25%">Income</th>
+                                                <td width="25%" class="father_income"></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="25%">Country</th>
+                                                <td width="25%" class="father_country"></td>
+                                                <th width="25%">State</th>
+                                                <td width="25%"  class="father_state"></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="25%">City</th>
+                                                <td width="25%" class="father_city"></td>
+                                                <th width="25%">Zip/Postal Code</th>
+                                                <td width="25%" class="father_postal_code"></td>
+                                            </tr>
+                                            <tr class="quick-address">
+                                                <th width="25%">Address Line 1</th>
+                                                <td width="25%" class="father_address"></td>
+                                                <th width="25%">Address Line 2</th>
+                                                <td width="25%" colspan="3" height="80px;" class="father_address_2"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" id="mother_info" style="display:none">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <h4 class="navv">Mother Details</h4>
+                                </li>
+                            </ul>
+                            <div class="card-body">
+                                <div class="table-responsive mt-md mb-md">
+                                    <table class="table table-striped table-bordered table-condensed mb-none">
+                                        <tbody>
+                                            <tr>
+                                                <th width="25%">Name</th>
+                                                <td width="25%" class="mother_name"></td>
+                                                <th width="25%">Date of Birth</th>
+                                                <td width="25%" class="mother_date_of_birth"></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="25%">Passport</th>
+                                                <td width="25%" class="mother_passport"></td>
+                                                <th width="25%">NRIC</th>
+                                                <td width="25%" class="mother_nric"></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="25%">Email</th>
+                                                <td width="25%" class="mother_email"></td>
+                                                <th width="25%">Mobile No</th>
+                                                <td width="25%" class="mother_mobile_no"></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="25%">Blood Group</th>
+                                                <td width="25%" class="mother_blood_group"></td>
+                                                <th width="25%">Education</th>
+                                                <td width="25%" class="mother_education"></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="25%">Occupation</th>
+                                                <td width="25%" class="mother_occupation"></td>
+                                                <th width="25%">Income</th>
+                                                <td width="25%" class="mother_income"></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="25%">Country</th>
+                                                <td width="25%" class="mother_country"></td>
+                                                <th width="25%">State</th>
+                                                <td width="25%"  class="mother_state"></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="25%">City</th>
+                                                <td width="25%" class="mother_city"></td>
+                                                <th width="25%">Zip/Postal Code</th>
+                                                <td width="25%" class="mother_postal_code"></td>
+                                            </tr>
+                                            <tr class="quick-address">
+                                                <th width="25%">Address Line 1</th>
+                                                <td width="25%" class="mother_address"></td>
+                                                <th width="25%">Address Line 2</th>
+                                                <td width="25%" colspan="3" height="80px;" class="mother_address_2"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" id="guardian_info" style="display:none">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <h4 class="navv">Guardian Details ({{$student['relation']}})</h4>
+                                </li>
+                            </ul>
+                            <div class="card-body">
+                                <div class="table-responsive mt-md mb-md">
+                                    <table class="table table-striped table-bordered table-condensed mb-none">
+                                        <tbody>
+                                            <tr>
+                                                <th width="25%">Name</th>
+                                                <td width="25%" class="guardian_name"></td>
+                                                <th width="25%">Date of Birth</th>
+                                                <td width="25%" class="guardian_date_of_birth"></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="25%">Passport</th>
+                                                <td width="25%" class="guardian_passport"></td>
+                                                <th width="25%">NRIC</th>
+                                                <td width="25%" class="guardian_nric"></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="25%">Email</th>
+                                                <td width="25%" class="guardian_email"></td>
+                                                <th width="25%">Mobile No</th>
+                                                <td width="25%" class="guardian_mobile_no"></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="25%">Blood Group</th>
+                                                <td width="25%" class="guardian_blood_group"></td>
+                                                <th width="25%">Education</th>
+                                                <td width="25%" class="guardian_education"></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="25%">Occupation</th>
+                                                <td width="25%" class="guardian_occupation"></td>
+                                                <th width="25%">Income</th>
+                                                <td width="25%" class="guardian_income"></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="25%">Country</th>
+                                                <td width="25%" class="guardian_country"></td>
+                                                <th width="25%">State</th>
+                                                <td width="25%"  class="guardian_state"></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="25%">City</th>
+                                                <td width="25%" class="guardian_city"></td>
+                                                <th width="25%">Zip/Postal Code</th>
+                                                <td width="25%" class="guardian_postal_code"></td>
+                                            </tr>
+                                            <tr class="quick-address">
+                                                <th width="25%">Address Line 1</th>
+                                                <td width="25%" class="guardian_address"></td>
+                                                <th width="25%">Address Line 2</th>
+                                                <td width="25%" colspan="3" height="80px;" class="guardian_address_2"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div> <!-- end card-body -->
@@ -636,6 +1410,10 @@
 @endsection
 @section('scripts')
 <script>
+    var parentImg = "{{ asset('users/images/') }}";
+    var defaultImg = "{{ asset('images/users/default.jpg') }}";
+    var parentName = "{{ config('constants.api.parent_name') }}";
+    var parentDetails = "{{ config('constants.api.parent_details') }}";
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var vehicleByRoute = "{{ route('admin.vehicle_by_route') }}";
     var roomByHostel = "{{ route('admin.room_by_hostel') }}";

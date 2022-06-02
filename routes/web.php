@@ -541,6 +541,9 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('attendance/student_entry', [AdminController::class, 'studentEntry'])->name('admin.attendance.student_entry');
         Route::get('attendance/employee_entry', [AdminController::class, 'employeeEntry'])->name('admin.attendance.employee_entry');
         Route::get('attendance/exam_entry', [AdminController::class, 'examEntry'])->name('admin.attendance.exam_entry');
+        Route::post('attendance/employee_list', [AdminController::class, 'getEmployeeAttendanceList'])->name('admin.attendance.employee_list');
+        Route::post('attendance/employee_add', [AdminController::class, 'addEmployeeAttendance'])->name('admin.attendance.employee_add');
+        Route::get('attendance/employee/report', [AdminController::class, 'reportEmployeeAttendance'])->name('admin.attendance.employee_report');
         // admin student_leave list
         Route::get('student-leave/list', [AdminController::class, 'studentLeaveShow'])->name('admin.student_leave.list');
         // Route::post('all-student-leave/list', [AdminController::class, 'getStudentLeaveList'])->name('admin.all_tudent_leave.list');

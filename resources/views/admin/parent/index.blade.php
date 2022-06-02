@@ -40,8 +40,8 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Name</th>
-                                                <th>Relation</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
                                                 <th>Occupation</th>
                                                 <th>Mobile No</th>
                                                 <th>Email</th>

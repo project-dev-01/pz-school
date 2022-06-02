@@ -9324,7 +9324,6 @@ class ApiController extends BaseController
     // add Admission
     public function addAdmission(Request $request)
     {
-        $check = $request->check_guardian;
 
         $validator = \Validator::make($request->all(), [
             'year' => 'required',
@@ -9363,68 +9362,6 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // insert data
-            // return $request['parent_email'];
-            if ($conn->table('parent')->where('email', '=', $request->parent_email)->count() > 0) {
-                return $this->send422Error('Parent Email Already Exist', ['error' => 'Parent Email Already Exist']);
-            } else {
-
-                if ($check == "on") {
-                    $parentValidator = \Validator::make($request->all(), [
-                        'parent_id' => 'required',
-                    ]);
-
-                    if (!$parentValidator->passes()) {
-                        return $this->send422Error('Validation error.', ['error' => $parentValidator->errors()->toArray()]);
-                    } else {
-                        $parentId = $request->parent_id;
-                    }
-                } else {
-                    $parentValidator = \Validator::make($request->all(), [
-                        'parent_name' => 'required',
-                        'relation' => 'required',
-                        'occupation' => 'required',
-                        'parent_mobile_no' => 'required',
-                        'parent_email' => 'required',
-                        'parent_password' => 'required|min:6',
-                        'parent_confirm_password' => 'required|same:parent_password|min:6',
-                    ]);
-
-                    if (!$parentValidator->passes()) {
-                        return $this->send422Error('Validation error.', ['error' => $parentValidator->errors()->toArray()]);
-                    } else {
-                        $parentId = $conn->table('parent')->insertGetId([
-                            'name' => $request->parent_name,
-                            'relation' => $request->relation,
-                            'father_name' => $request->father_name,
-                            'mother_name' => $request->mother_name,
-                            'occupation' => $request->occupation,
-                            'income' => $request->income,
-                            'education' => $request->education,
-                            'city' => $request->parent_city,
-                            'state' => $request->parent_state,
-                            'mobile_no' => $request->parent_mobile_no,
-                            'address' => $request->address,
-                            'email' => $request->parent_email,
-                            'active' => "1",
-                        ]);
-                    }
-
-                    if (!$parentId) {
-                        return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong add Parent']);
-                    } else {
-
-                        // add User
-                        $userParent = new User();
-                        $userParent->name = $request->parent_name;
-                        $userParent->user_id = $parentId;
-                        $userParent->role_id = "5";
-                        $userParent->branch_id = $request->branch_id;
-                        $userParent->email = $request->parent_email;
-                        $userParent->password = bcrypt($request->parent_password);
-                        $userParent->save();
-                    }
-                }
-            }
 
             if ($conn->table('students')->where('email', '=', $request->email)->count() > 0) {
                 return $this->send422Error('Student Email Already Exist', ['error' => 'Student Email Already Exist']);
@@ -9443,7 +9380,11 @@ class ApiController extends BaseController
 
                 $studentId = $conn->table('students')->insertGetId([
                     'year' => $request->year,
-                    'parent_id' => $parentId,
+                    'father_id' => $request->father_id,
+                    'mother_id' => $request->mother_id,
+                    'guardian_id' => $request->guardian_id,
+                    'nric' => $request->nric,
+                    'relation' => $request->relation,
                     'register_no' => $request->register_no,
                     'roll_no' => $request->roll_no,
                     'admission_date' => $request->admission_date,
@@ -9455,7 +9396,9 @@ class ApiController extends BaseController
                     'birthday' => $request->birthday,
                     'mother_tongue' => $request->mother_tongue,
                     'religion' => $request->religion,
-                    'caste' => $request->caste,
+                    'race' => $request->race,
+                    'country' => $request->country,
+                    'post_code' => $request->post_code,
                     'mobile_no' => $request->mobile_no,
                     'city' => $request->city,
                     'state' => $request->state,
@@ -10496,7 +10439,6 @@ class ApiController extends BaseController
 
         $validator = \Validator::make($request->all(), [
             'student_id' => 'required',
-            'parent_id' => 'required',
             'year' => 'required',
             'register_no' => 'required',
             'roll_no' => 'required',
@@ -10557,7 +10499,11 @@ class ApiController extends BaseController
 
 
                 $studentId = $conn->table('students')->where('id', $request->student_id)->update([
-                    'parent_id' => $request->parent_id,
+                    'father_id' => $request->father_id,
+                    'mother_id' => $request->mother_id,
+                    'guardian_id' => $request->guardian_id,
+                    'relation' => $request->relation,
+                    'nric' => $request->nric,
                     'register_no' => $request->register_no,
                     'year' => $request->year,
                     'roll_no' => $request->roll_no,
@@ -10570,7 +10516,9 @@ class ApiController extends BaseController
                     'birthday' => $request->birthday,
                     'mother_tongue' => $request->mother_tongue,
                     'religion' => $request->religion,
-                    'caste' => $request->caste,
+                    'race' => $request->race,
+                    'country' => $request->country,
+                    'post_code' => $request->post_code,
                     'mobile_no' => $request->mobile_no,
                     'city' => $request->city,
                     'state' => $request->state,
@@ -10674,8 +10622,7 @@ class ApiController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             // get data
             $studentDetail['student'] = $conn->table('students as s')
-                ->select('s.*', 'c.name as class_name', 'sec.name as section_name', 'p.name', 'p.relation', 'p.mother_name', 'p.father_name', 'p.occupation', 'p.income', 'p.education', 'p.address', 'p.city as parent_city', 'p.state as parent_state', 'p.photo as parent_photo', 'p.email as parent_email', 'p.mobile_no as parent_mobile_no', 'e.class_id', 'e.section_id', 'e.session_id', 'e.semester_id')
-                ->leftJoin('parent as p', 's.parent_id', '=', 'p.id')
+                ->select('s.*', 'c.name as class_name', 'sec.name as section_name', 's.relation', 'e.class_id', 'e.section_id', 'e.session_id', 'e.semester_id')
                 ->leftJoin('enrolls as e', 's.id', '=', 'e.student_id')
                 ->leftJoin('classes as c', 'e.class_id', '=', 'c.id')
                 ->leftJoin('sections as sec', 'e.section_id', '=', 'sec.id')
@@ -10755,10 +10702,9 @@ class ApiController extends BaseController
     public function addParent(Request $request)
     {
 
-
         $validator = \Validator::make($request->all(), [
-            'name' => 'required',
-            'relation' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
             'occupation' => 'required',
             'mobile_no' => 'required',
             'email' => 'required',
@@ -10793,21 +10739,27 @@ class ApiController extends BaseController
 
 
 
-
+                $name = $request->first_name." ".$request->last_name;
                 // insert data
                 $parentId = $conn->table('parent')->insertGetId([
 
-                    'name' => $request->name,
-                    'relation' => $request->relation,
-                    'father_name' => $request->father_name,
-                    'mother_name' => $request->mother_name,
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'gender' => $request->gender,
+                    'date_of_birth' => $request->date_of_birth,
+                    'passport' => $request->passport,
+                    'nric' => $request->nric,
+                    'blood_group' => $request->blood_group,
                     'occupation' => $request->occupation,
                     'income' => $request->income,
                     'education' => $request->education,
+                    'country' => $request->country,
+                    'post_code' => $request->post_code,
                     'city' => $request->city,
                     'state' => $request->state,
                     'mobile_no' => $request->mobile_no,
                     'address' => $request->address,
+                    'address_2' => $request->address_2,
                     'email' => $request->email,
                     'photo' => $fileName,
                     'facebook_url' => $request->facebook_url,
@@ -10823,7 +10775,7 @@ class ApiController extends BaseController
 
                     // add User
                     $query = new User();
-                    $query->name = $request->name;
+                    $query->name = $name;
                     $query->user_id = $parentId;
                     $query->role_id = "5";
                     $query->branch_id = $request->branch_id;
@@ -10881,9 +10833,50 @@ class ApiController extends BaseController
                 ->leftJoin('enrolls as e', 'e.student_id', '=', 's.id')
                 ->leftJoin('classes as c', 'e.class_id', '=', 'c.id')
                 ->leftJoin('sections as sec', 'e.section_id', '=', 'sec.id')
-                ->where('parent_id', $id)->get();
+                ->where('father_id', $id)
+                ->orWhere('mother_id', $id)
+                ->orWhere('guardian_id', $id)->get();
 
             return $this->successResponse($parentDetails, 'Parent row fetch successfully');
+        }
+    }
+    // get Parent Name
+    public function getParentName(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $data = $conn->table('parent')
+                                ->select("id",DB::raw("CONCAT(first_name, ' ', last_name) as name"))
+                                ->where("first_name","LIKE","%{$request->name}%")
+                                ->orWhere("last_name","LIKE","%{$request->name}%")
+                                ->get();
+
+            $output = '';
+            if($request->name) {
+                if(!$data->isEmpty()){
+                $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1">';
+                foreach ($data as $row){
+                    
+                    $output .= '<li class="list-group-item" value="'.$row->id.'">'.$row->name.'</li>';
+                }
+                $output .= '</ul>';
+                }else{
+                    $output .= '<li class="list-group-item">'.'No results Found'.'</li>';
+                }
+            }
+            else {
+                $output .= '<li class="list-group-item">'.'No results Found'.'</li>';
+            }
+            return $output;    
         }
     }
     // update Parent
@@ -10894,8 +10887,8 @@ class ApiController extends BaseController
         $id = $request->id;
         $validator = \Validator::make($request->all(), [
             'id' => 'required',
-            'name' => 'required',
-            'relation' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
             'occupation' => 'required',
             'mobile_no' => 'required',
             'email' => 'required',
@@ -10937,9 +10930,10 @@ class ApiController extends BaseController
                 }
 
                 $password = $request->password;
+                $name = $request->first_name." ".$request->last_name;
+                
 
                 if ($password) {
-
 
                     $passvalidator = \Validator::make($request->all(), [
                         'password' => 'required|min:6',
@@ -10955,7 +10949,7 @@ class ApiController extends BaseController
                         $updatePassword = bcrypt($request->password);
                         $parent = User::where([['user_id', '=', $id], ['role_id', '=', "5"], ['branch_id', '=', $request->branch_id]])
                             ->update([
-                                'name' => $request->name,
+                                'name' => $name,
                                 'email' => $request->email,
                                 'password' => $updatePassword
                             ]);
@@ -10963,7 +10957,7 @@ class ApiController extends BaseController
                 } else {
                     $parent = User::where([['user_id', '=', $id], ['role_id', '=', "5"], ['branch_id', '=', $request->branch_id]])
                         ->update([
-                            'name' => $request->name,
+                            'name' => $name,
                             'email' => $request->email
                         ]);
                 }
@@ -10971,17 +10965,23 @@ class ApiController extends BaseController
 
                 // update data
                 $query = $staffConn->table('parent')->where('id', $id)->update([
-                    'name' => $request->name,
-                    'relation' => $request->relation,
-                    'father_name' => $request->father_name,
-                    'mother_name' => $request->mother_name,
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'gender' => $request->gender,
+                    'date_of_birth' => $request->date_of_birth,
+                    'passport' => $request->passport,
+                    'nric' => $request->nric,
+                    'blood_group' => $request->blood_group,
                     'occupation' => $request->occupation,
                     'income' => $request->income,
                     'education' => $request->education,
+                    'country' => $request->country,
+                    'post_code' => $request->post_code,
                     'city' => $request->city,
                     'state' => $request->state,
                     'mobile_no' => $request->mobile_no,
                     'address' => $request->address,
+                    'address_2' => $request->address_2,
                     'email' => $request->email,
                     'photo' => $fileName,
                     'facebook_url' => $request->facebook_url,
@@ -12892,5 +12892,206 @@ class ApiController extends BaseController
                 ->get();
             return $this->successResponse($leave_type_details, 'Staff leave history details fetch successfully');
         }
+    }
+
+    // get Employee Attendance List
+    public function getEmployeeAttendanceList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+            'employee' => 'required',
+            'date' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+
+            $employee = $request->employee;
+            $date = $request->date;
+            // get data
+            $attendance = $Connection->table('staffs as s')
+                    ->select(
+                        'sa.id',
+                        's.id as staff_id',
+                        'sa.check_in',
+                        'sa.check_out',
+                        'sa.status',
+                        'sa.hours',
+                        's.photo',
+                        'sa.remarks',
+                        DB::raw("CONCAT(s.first_name, ' ', s.last_name) as staff_name"),
+                        DB::raw("GROUP_CONCAT(DISTINCT  dp.name) as department_name")
+                    )
+                    ->leftJoin('staff_attendances as sa', function ($join) use ($date) {
+                        $join->on('s.id', '=', 'sa.staff_id')
+                            ->on('sa.date', '=', DB::raw("'$date'"));
+                    })
+                    ->leftJoin("staff_departments as dp", DB::raw("FIND_IN_SET(dp.id,s.department_id)"), ">", DB::raw("'0'"))
+                    ->when($employee != "All", function ($q)  use ($employee) {
+                        $q->where('s.id', $employee);
+                    })
+                    ->groupBy("s.id")
+                    ->get();
+            if ($attendance) {
+                return $this->successResponse($attendance, 'Attendance record fetch successfully');
+            } else {
+                return $this->send404Error('No Data Found.', ['error' => 'No Data Found']);
+            }
+        }
+    }
+
+    //  add Employee Attendance
+    public function addEmployeeAttendance(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'date' => 'required',
+            'attendance' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+
+            // insert data
+            $attendance = $request->attendance;
+            foreach ($attendance as $att) {
+                if (isset($att['id'])) {
+                    $query = $conn->table('staff_attendances')->where('id', $att['id'])->update([
+                        'date' => $request->date,
+                        'check_in' => $att['check_in'],
+                        'check_out' => $att['check_out'],
+                        'status' => $att['status'],
+                        'hours' => $att['hours'],
+                        'remarks' => $att['remarks'],
+                        'staff_id' => $att['staff_id'],
+                        'updated_at' => date("Y-m-d H:i:s")
+                    ]);
+                } else {
+                    $query = $conn->table('staff_attendances')->insert([
+                        'date' => $request->date,
+                        'check_in' => $att['check_in'],
+                        'check_out' => $att['check_out'],
+                        'status' => $att['status'],
+                        'hours' => $att['hours'],
+                        'remarks' => $att['remarks'],
+                        'staff_id' => $att['staff_id'],
+                        'created_at' => date("Y-m-d H:i:s")
+                    ]);
+                }
+
+            }
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Attendance has been successfully saved');
+            }
+        }
+    }
+
+    //get Employee Attendance Report
+    function getEmployeeAttendanceReport(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'date' => 'required',
+            'employee' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $date = explode('-', $request->date);
+            $employee = $request->employee;
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $getAttendanceList = $Connection->table('staff_attendances as sa')
+                ->select(
+                    'st.first_name',
+                    'st.last_name',
+                    'sa.staff_id',
+                    'sa.date',
+                    'st.photo',
+                    'sa.status',
+                    DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "absent" then 1 ELSE NULL END) as "absentCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "holiday" then 1 ELSE NULL END) as "lateCount"'),
+
+                )
+                ->join('staffs as st', 'sa.staff_id', '=', 'st.id')
+                ->when($employee != "All", function ($q)  use ($employee) {
+                    $q->where('sa.staff_id', $employee);
+                })
+                ->whereMonth('sa.date', $date[0])
+                ->whereYear('sa.date', $date[1])
+                ->groupBy('sa.staff_id')
+                ->get();
+            $staffDetails = array();
+            if (!empty($getAttendanceList)) {
+                foreach ($getAttendanceList as $value) {
+                    $object = new \stdClass();
+
+                    $object->first_name = $value->first_name;
+                    $object->last_name = $value->last_name;
+                    $object->staff_id = $value->staff_id;
+                    $object->photo = $value->photo;
+                    $object->presentCount = $value->presentCount;
+                    $object->absentCount = $value->absentCount;
+                    $object->lateCount = $value->lateCount;
+                    $staff_id = $value->staff_id;
+                    $date = $value->date;
+                    $getStaffsAttData = $this->getAttendanceByDateStaff($request, $staff_id, $date);
+                    $object->attendance_details = $getStaffsAttData;
+
+                    array_push($staffDetails, $object);
+                }
+            }
+
+            
+
+            // dd($staffDetails);
+            $data = [
+                'staff_details' => $staffDetails,
+            ];
+
+            return $this->successResponse($data, 'Attendance record fetch successfully');
+        }
+    }
+
+    function getAttendanceByDateStaff($request, $staff_id, $date)
+    {
+        // create new connection
+        $Connection = $this->createNewConnection($request->branch_id);
+
+        $query_date = $date;
+        // First day of the month.
+        $startDate = date('Y-m-01', strtotime($query_date));
+        // Last day of the month.
+        $endDate = date('Y-m-t', strtotime($query_date));
+
+        $staffList = $Connection->table('staff_attendances as sa')
+            ->select(
+                'sa.date',
+                'sa.status'
+            )
+            ->join('staffs as st', 'sa.staff_id', '=', 'st.id')
+            ->where([
+                ['sa.staff_id', '=', $staff_id],
+            ])
+            ->whereBetween(DB::raw('date(date)'), [$startDate, $endDate])
+            ->groupBy('sa.date')
+            ->orderBy('sa.date', 'asc')
+            ->whereNotNull('sa.status')
+            ->get();
+        return $staffList;
     }
 }

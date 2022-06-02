@@ -818,6 +818,8 @@ class AdminController extends Controller
         $session = Helper::GetMethod(config('constants.api.session'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $parent = Helper::GetMethod(config('constants.api.parent_list'));
+        $religion = Helper::GetMethod(config('constants.api.religion'));
+        $races = Helper::GetMethod(config('constants.api.races'));
         // dd($gethostel);
         return view(
             'admin.admission.index',
@@ -828,6 +830,8 @@ class AdminController extends Controller
                 'session' => $session['data'],
                 'semester' => $semester['data'],
                 'parent' => $parent['data'],
+                'religion' => $religion['data'],
+                'races' => $races['data'],
             ]
         );
         // return view('admin.admission.index');
@@ -1795,7 +1799,13 @@ class AdminController extends Controller
     }
     public function employeeEntry()
     {
-        return view('admin.attendance.employee');
+        $getemployee = Helper::GetMethod(config('constants.api.employee_list'));
+        return view(
+            'admin.attendance.employee',
+            [
+                'employee' => $getemployee['data']
+            ]
+        );
     }
     public function examEntry()
     {
@@ -2964,12 +2974,18 @@ class AdminController extends Controller
             'category_id' => $request->categy,
             'first_name' => $request->fname,
             'last_name' => $request->lname,
+            'father_id' => $request->father_id,
+            'mother_id' => $request->mother_id,
+            'guardian_id' => $request->guardian_id,
+            'relation' => $request->relation,
+            'nric' => $request->txt_nric,
             'gender' => $request->gender,
             'blood_group' => $request->blooddgrp,
             'birthday' => $request->dob,
-            'mother_tongue' => $request->txt_mothertongue,
             'religion' => $request->txt_religion,
-            'caste' => $request->txt_caste,
+            'race' => $request->txt_race,
+            'country' => $request->drp_country,
+            'post_code' => $request->drp_post_code,
             'mobile_no' => $request->txt_mobile_no,
             'city' => $request->drp_city,
             'state' => $request->drp_state,
@@ -2991,24 +3007,6 @@ class AdminController extends Controller
             'semester_id' => $request->semester_id,
             'password' => $request->txt_pwd,
             'confirm_password' => $request->txt_retype_pwd,
-
-            'check_guardian' => $request->check_guardian,
-
-            'parent_id' => $request->parent_id,
-            'parent_name' => $request->txt_name,
-            'relation' => $request->txt_relation,
-            'father_name' => $request->txt_fathernam,
-            'mother_name' => $request->txt_mothernam,
-            'occupation' => $request->txt_occupation,
-            'income' => $request->txt_income,
-            'education' => $request->txt_eduction,
-            'parent_city' => $request->txt_guardian_city,
-            'parent_state' => $request->txt_guardian_state,
-            'parent_mobile_no' => $request->txt_guardian_mobileno,
-            'address' => $request->txt_guardian_address,
-            'parent_email' => $request->txt_guardian_email,
-            'parent_password' => $request->txt_guardian_pwd,
-            'parent_confirm_password' => $request->txt_guardian_retyppwd,
 
         ];
 
@@ -3193,14 +3191,13 @@ class AdminController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $student = Helper::PostMethod(config('constants.api.student_details'), $data);
         $parent = Helper::GetMethod(config('constants.api.parent_list'));
+        $religion = Helper::GetMethod(config('constants.api.religion'));
+        $races = Helper::GetMethod(config('constants.api.races'));
 
         $prev = json_decode($student['data']['student']['previous_details']);
-
         $student['data']['student']['school_name'] = $prev->school_name;
         $student['data']['student']['qualification'] = $prev->qualification;
         $student['data']['student']['remarks'] = $prev->remarks;
-
-
         return view(
             'admin.student.edit',
             [
@@ -3214,6 +3211,8 @@ class AdminController extends Controller
                 'section' => $student['data']['section'],
                 'vehicle' => $student['data']['vehicle'],
                 'room' => $student['data']['room'],
+                'religion' => $religion['data'],
+                'races' => $races['data'],
 
             ]
         );
@@ -3242,16 +3241,23 @@ class AdminController extends Controller
             'old_photo' => $request->old_photo,
             'register_no' => $request->txt_regiter_no,
             'roll_no' => $request->txt_roll_no,
+            'nric' => $request->txt_nric,
             'admission_date' => $request->admission_date,
             'category_id' => $request->categy,
             'first_name' => $request->fname,
             'last_name' => $request->lname,
+            'father_id' => $request->father_id,
+            'mother_id' => $request->mother_id,
+            'guardian_id' => $request->guardian_id,
+            'relation' => $request->relation,
             'gender' => $request->gender,
             'blood_group' => $request->blooddgrp,
             'birthday' => $request->dob,
             'mother_tongue' => $request->txt_mothertongue,
             'religion' => $request->txt_religion,
-            'caste' => $request->txt_caste,
+            'race' => $request->txt_race,
+            'country' => $request->drp_country,
+            'post_code' => $request->drp_post_code,
             'mobile_no' => $request->txt_mobile_no,
             'city' => $request->drp_city,
             'state' => $request->drp_state,
@@ -3337,6 +3343,7 @@ class AdminController extends Controller
 
     public function addParent(Request $request)
     {
+        // dd($request->file('photo'));
         $base64 = "";
         $extension = "";
         $file = $request->file('photo');
@@ -3349,17 +3356,23 @@ class AdminController extends Controller
         }
 
         $data = [
-            'name' => $request->name,
-            'relation' => $request->relation,
-            'father_name' => $request->father_name,
-            'mother_name' => $request->mother_name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'date_of_birth' => $request->date_of_birth,
+            'passport' => $request->passport,
+            'nric' => $request->nric,
+            'blood_group' => $request->blood_group,
             'occupation' => $request->occupation,
             'income' => $request->income,
             'education' => $request->education,
+            'country' => $request->country,
+            'post_code' => $request->post_code,
             'city' => $request->city,
             'state' => $request->state,
             'mobile_no' => $request->mobile_no,
             'address' => $request->address,
+            'address_2' => $request->address_2,
             'email' => $request->email,
             'password' => $request->password,
             'confirm_password' => $request->confirm_password,
@@ -3369,7 +3382,6 @@ class AdminController extends Controller
             'linkedin_url' => $request->linkedin_url,
             'twitter_url' => $request->twitter_url,
         ];
-
         $response = Helper::PostMethod(config('constants.api.parent_add'), $data);
         // dd($response);
         return $response;
@@ -3422,17 +3434,23 @@ class AdminController extends Controller
         $data = [
 
             'id' => $request->id,
-            'name' => $request->name,
-            'relation' => $request->relation,
-            'father_name' => $request->father_name,
-            'mother_name' => $request->mother_name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'date_of_birth' => $request->date_of_birth,
+            'passport' => $request->passport,
+            'nric' => $request->nric,
+            'blood_group' => $request->blood_group,
             'occupation' => $request->occupation,
             'income' => $request->income,
             'education' => $request->education,
+            'country' => $request->country,
+            'post_code' => $request->post_code,
             'city' => $request->city,
             'state' => $request->state,
             'mobile_no' => $request->mobile_no,
             'address' => $request->address,
+            'address_2' => $request->address_2,
             'email' => $request->email,
             'password' => $request->password,
             'confirm_password' => $request->confirm_password,
@@ -3923,4 +3941,40 @@ class AdminController extends Controller
     //         ->rawColumns(['actions'])
     //         ->make(true);
     // }
+
+    // get Employee Attendance List
+    public function getEmployeeAttendanceList(Request $request)
+    {
+        $data = [
+            'employee' => $request->employee,
+            'date' => $request->date,
+        ];
+
+        $attendance = Helper::GETMethodWithData(config('constants.api.employee_attendance_list'), $data);
+        return $attendance;
+    }
+
+    // add Employee Attendance 
+    public function addEmployeeAttendance(Request $request)
+    {
+        $data = [
+            'date' => $request->date,
+            'attendance' => $request->attendance,
+        ];
+
+
+        $attendance = Helper::PostMethod(config('constants.api.employee_attendance_add'), $data);
+        return $attendance;
+    }
+
+    public function reportEmployeeAttendance()
+    {
+        $getemployee = Helper::GetMethod(config('constants.api.employee_list'));
+        return view(
+            'admin.attendance.employee_report',
+            [
+                'employee' => $getemployee['data']
+            ]
+        );
+    }
 }

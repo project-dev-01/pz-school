@@ -1,8 +1,31 @@
 $(function () {
+
+    
+    $('.file-input').change(function () {
+        var curElement = $('.image');
+        console.log(curElement);
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            // get loaded data and render thumbnail.
+            curElement.attr('src', e.target.result);
+        };
+
+        // read the image file as a data URL.
+        reader.readAsDataURL(this.files[0]);
+    });
+
+
+    $("#date_of_birth").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+    });
     $("#addparent").validate({
         rules: {
-            name: "required",
-            relation: "required",
+            first_name: "required",
+            last_name: "required",
             email: {
                 required: true,
                 email: true
@@ -40,8 +63,8 @@ $(function () {
 
     $("#editParent").validate({
         rules: {
-            name: "required",
-            relation: "required",
+            first_name: "required",
+            last_name: "required",
             email: {
                 required: true,
                 email: true
@@ -97,12 +120,12 @@ $(function () {
                 }
                 ,
                 {
-                    data: 'name',
-                    name: 'name'
+                    data: 'first_name',
+                    name: 'first_name'
                 },
                 {
-                    data: 'relation',
-                    name: 'relation'
+                    data: 'last_name',
+                    name: 'last_name'
                 },
                 {
                     data: 'occupation',

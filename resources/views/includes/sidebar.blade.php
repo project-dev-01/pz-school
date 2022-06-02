@@ -982,6 +982,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('admin.attendance.employee_report')}}" class="nav-link {{ (request()->is('admin/attendance/employee/report')) ? 'active' : '' }}">
+                                    <span> Employee Report</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('admin.attendance.exam_entry')}}" class="nav-link {{ (request()->is('admin/attendance/exam_entry')) ? 'active' : '' }}">
                                     <span> Exam </span>
                                 </a>

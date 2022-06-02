@@ -359,6 +359,7 @@ return [
         //Parent Url
         'parent_add' => $url.'/parent/add',
         'parent_list' => $url.'/parent/list',
+        'parent_name' => $url.'/parent/name',
         'parent_details' => $url.'/parent/parent-details',
         'parent_update' => $url.'/parent/update',
         'parent_delete' => $url.'/parent/delete',
@@ -414,7 +415,9 @@ return [
         'staff_leave_details'=>$url.'/employee-leave/leave_details',
         'leave_taken_history'=>$url.'/employee-leave/leave_taken_history',
         
-        
+        'employee_attendance_list'=>$url.'/attendance/employee_list',
+        'employee_attendance_add'=>$url.'/attendance/employee_add',
+        'employee_attendance_report'=>$url.'/attendance/employee_report'
     ]
 
 ];
