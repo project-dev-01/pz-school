@@ -1,14 +1,15 @@
 @extends('layouts.admin-layout')
 @section('title','Dashboard')
+
 @section('content')
 <!-- Start Content-->
 <style>
-    #calendar {
+    #admin_calendor {
         max-width: 900px;
         margin: 40px auto;
     }
 
-    ..fc-unthemed thead {
+    .fc-unthemed thead {
         border: 1px solid #346aa1;
     }
 
@@ -74,6 +75,7 @@
     }
 </style>
 <div class="container-fluid">
+
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
@@ -457,9 +459,8 @@
 
                         </div> <!-- end col-->
 
-
                         <div class="col-lg-12">
-                            <div id="calendar"></div>
+                            <div id="admin_calendor"></div>
                         </div> <!-- end col -->
 
                     </div> <!-- end row -->
@@ -513,6 +514,28 @@
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
+
+            <div class="modal fade " id="birthday-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myviewBirthdayModalLabel"> <i class="fas fa-info-circle"></i> Birthday </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-box">
+                                        <div class="table-responsive">
+                                            <p class="text-center"> Happy Birthday <span id="name"></span></p>
+                                        </div>
+                                    </div> <!-- end card-box -->
+                                </div> <!-- end col -->
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
         </div>
         <!-- end col-12 -->
     </div> <!-- end row -->
@@ -522,76 +545,7 @@
 @endsection
 @section('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-
-        function handleDatesRender(arg) {
-            console.log('viewType:', arg.view.calendar.state.viewType);
-        }
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
-            defaultView: 'dayGridMonth',
-            datesRender: handleDatesRender,
-            defaultDate: '2022-05-31',
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-            },
-            events: [{
-                    title: 'All Day Event',
-                    start: '2022-05-31'
-                },
-                {
-                    title: 'Long Event',
-                    start: '2022-05-31',
-                    end: '2030-08-10'
-                },
-                {
-                    groupId: '999',
-                    title: 'Repeating Event',
-                    start: '2019-08-09T16:00:00'
-                },
-                {
-                    groupId: '999',
-                    title: 'Repeating Event',
-                    start: '2019-08-16T16:00:00'
-                },
-                {
-                    title: 'Conference',
-                    start: '2019-08-11',
-                    end: '2019-08-13'
-                },
-                {
-                    title: 'Meeting',
-                    start: '2019-08-12T10:30:00',
-                    end: '2019-08-12T12:30:00'
-                },
-                {
-                    title: 'Lunch',
-                    start: '2019-08-12T12:00:00'
-                },
-                {
-                    title: 'Meeting',
-                    start: '2019-08-12T14:30:00'
-                },
-                {
-                    title: 'Birthday Party',
-                    start: '2019-08-13T07:00:00'
-                },
-                {
-                    title: 'Click for Google',
-                    url: 'http://google.com/',
-                    start: '2019-08-28'
-                }
-            ]
-        });
-
-        calendar.render();
-    });
-</script>
-
-<script>
+    var getBirthdayCalendorAdmin = "{{ config('constants.api.get_birthday_calendor_admin') }}";
     var getEventCalendorAdmin = "{{ config('constants.api.get_event_calendor_admin') }}";
     var readUpdateTodoUrl = "{{ config('constants.api.read_update_todo') }}";
     var getAssignClassUrl = "{{ config('constants.api.get_assign_class') }}";

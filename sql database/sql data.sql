@@ -22,3 +22,10 @@ ALTER TABLE `staffs` CHANGE `birthday` `birthday` DATE NOT NULL;
 ALTER TABLE `hostel_category` DROP `description`, DROP `type`;
 ALTER TABLE `hostel_room` DROP `category_id`;
 ALTER TABLE `hostel_room` ADD `block` VARCHAR(255) NULL AFTER `hostel_id`, ADD `floor` VARCHAR(255) NULL AFTER `block`;
+
+-- 30-05-2022
+ALTER TABLE `subject_assigns` ADD `type` ENUM('0','1') NOT NULL AFTER `teacher_id`;
+ALTER TABLE `teacher_allocations` ADD `type` ENUM('0','1','2') NOT NULL AFTER `teacher_id`;
+-- 1-6-2022
+ALTER TABLE `timetable_class` CHANGE `teacher_id` `teacher_id` VARCHAR(255) NOT NULL;
+ALTER TABLE `calendors` CHANGE `teacher_id` `teacher_id` VARCHAR(255) NULL DEFAULT NULL;

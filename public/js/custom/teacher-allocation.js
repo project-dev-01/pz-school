@@ -32,7 +32,8 @@ $(function () {
         rules: {
             class_name: "required",
             section_name: "required",
-            class_teacher: "required"
+            class_teacher: "required",
+            type: "required"
         }
     });
     // add 
@@ -43,12 +44,16 @@ $(function () {
             var changeClassName = $("#changeClassName").val();
             var sectionID = $("#sectionID").val();
             var assignClassTeacher = $("#assignClassTeacher").val();
+            var subjectType = $("#subjectType").val();
+
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
             formData.append('class_id', changeClassName);
             formData.append('section_id', sectionID);
             formData.append('teacher_id', assignClassTeacher);
+            formData.append('type', subjectType);
+
             $.ajax({
                 url: assignTeacherAddUrl,
                 method: "post",
@@ -90,6 +95,7 @@ $(function () {
             $('.editAssignTeacherModal').find('input[name="assign_teacher_id"]').val(data.data.id);
             $('.editAssignTeacherModal').find('select[name="class_name"]').val(data.data.class_id);
             $('.editAssignTeacherModal').find('select[name="class_teacher"]').val(data.data.teacher_id);
+            $('.editAssignTeacherModal').find('select[name="type"]').val(data.data.type);
             $('.editAssignTeacherModal').modal('show');
         }, 'json');
     });
@@ -99,7 +105,8 @@ $(function () {
         rules: {
             class_name: "required",
             section_name: "required",
-            class_teacher: "required"
+            class_teacher: "required",
+            type: "required"
         }
     });
     // update 
@@ -112,7 +119,8 @@ $(function () {
             var className = $("#editAssignTeacherForm").find("select[name=class_name]").val();
             var sectionName = $("#editAssignTeacherForm").find("select[name=section_name]").val();
             var classTeacher = $("#editAssignTeacherForm").find("select[name=class_teacher]").val();
-            
+            var type = $("#editAssignTeacherForm").find("select[name=type]").val();
+
             var formData = new FormData();
             formData.append('id', id);
             formData.append('token', token);
@@ -120,6 +128,8 @@ $(function () {
             formData.append('class_id', className);
             formData.append('section_id', sectionName);
             formData.append('teacher_id', classTeacher);
+            formData.append('type', type);
+
             // return false;
             $.ajax({
                 url: assignTeacherUpdateUrl,
@@ -209,11 +219,39 @@ $(function () {
                 name: 'teacher_name'
             },
             {
+                data: 'type',
+                name: 'type'
+            },
+            {
                 data: 'actions',
                 name: 'actions',
                 orderable: false,
                 searchable: false
             },
+        ], columnDefs: [
+
+            {
+                "targets": 4,
+                "className": "text-center",
+                "render": function (data, type, row, meta) {
+                    var passTag = "";
+                    var type = "";
+                    if (data == "0") {
+                        passTag = "badge-success";
+                        type = "Main";
+                    }
+                    if (data == "1") {
+                        passTag = "badge-warning";
+                        type = "Sub";
+                    }
+                    if (data == "2") {
+                        passTag = "badge-warning";
+                        type = "Alternative";
+                    }
+                    var pass_fail = '<span class="badge badgeLabel ' + passTag + ' badge-pill ">' + type + '</span>';
+                    return pass_fail;
+                }
+            }
         ]
     }).on('draw', function () {
     });

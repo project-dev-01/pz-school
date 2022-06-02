@@ -660,7 +660,8 @@ class ApiController extends BaseController
             'branch_id' => 'required',
             'class_id' => 'required',
             'section_id' => 'required',
-            'teacher_id' => 'required'
+            'teacher_id' => 'required',
+            'type' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -668,14 +669,30 @@ class ApiController extends BaseController
         } else {
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
-            // check exist name
-            if ($createConnection->table('teacher_allocations')->where([['section_id', $request->section_id], ['class_id', $request->class_id]])->count() > 0) {
-                return $this->send422Error('Class Teacher Already Assigned', ['error' => 'Class Teacher Already Assigned']);
+            // check exist
+            if ($request->type == "0") {
+                $old = $createConnection->table('teacher_allocations')
+                    ->where(
+                        [
+                            ['section_id', $request->section_id],
+                            ['class_id', $request->class_id],
+                            ['type', '0']
+                        ]
+                    )
+                    ->first();
+            }
+
+            // dd($arraySubject);
+            if (isset($old->id)) {
+                return $this->send422Error('Main Class Teacher Already Assigned', ['error' => 'Main Class Teacher Already Assigned']);
+                // $arraySubject['updated_at'] = date("Y-m-d H:i:s");
+                // $query = $createConnection->table('subject_assigns')->where('id', $old->id)->update($arraySubject);
             } else {
                 $arrayData = array(
                     'class_id' => $request->class_id,
                     'section_id' => $request->section_id,
                     'teacher_id' => $request->teacher_id,
+                    'type' => $request->type,
                     'created_at' => date("Y-m-d H:i:s")
                 );
                 // insert data
@@ -694,6 +711,14 @@ class ApiController extends BaseController
                     return $this->successResponse($success, 'Teacher Allocation has been successfully saved');
                 }
             }
+            // if ($createConnection->table('teacher_allocations')->where([['section_id', $request->section_id], ['class_id', $request->class_id]])->count() > 0) {
+            //     return $this->send422Error('Class Teacher Already Assigned', ['error' => 'Class Teacher Already Assigned']);
+            // } else {
+
+
+            // }
+
+
         }
     }
 
@@ -718,6 +743,7 @@ class ApiController extends BaseController
                     'ta.class_id',
                     'ta.section_id',
                     'ta.teacher_id',
+                    'ta.type',
                     's.name as section_name',
                     'c.name as class_name',
                     DB::raw("CONCAT(st.first_name, ' ', st.last_name) as teacher_name")
@@ -761,7 +787,8 @@ class ApiController extends BaseController
             'id' => 'required',
             'class_id' => 'required',
             'section_id' => 'required',
-            'teacher_id' => 'required'
+            'teacher_id' => 'required',
+            'type' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -771,8 +798,26 @@ class ApiController extends BaseController
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
             // check exist name
-            if ($createConnection->table('teacher_allocations')->where([['section_id', $request->section_id], ['class_id', $request->class_id], ['id', '!=', $id]])->count() > 0) {
-                return $this->send422Error('Class Teacher Already Assigned', ['error' => 'Class Teacher Already Assigned']);
+            // if ($createConnection->table('teacher_allocations')->where([['section_id', $request->section_id], ['class_id', $request->class_id], ['id', '!=', $id]])->count() > 0) {
+            //     return $this->send422Error('Class Teacher Already Assigned', ['error' => 'Class Teacher Already Assigned']);
+            // } else {
+            // }
+
+            $getCount = 0;
+            if ($request->type == "0") {
+                $getCount = $createConnection->table('teacher_allocations')
+                    ->where(
+                        [
+                            ['section_id', $request->section_id],
+                            ['class_id', $request->class_id],
+                            ['type', $request->type],
+                            ['id', '!=', $request->id]
+                        ]
+                    )
+                    ->count();
+            }
+            if ($getCount > 0) {
+                return $this->send422Error('Main Class Teacher Already Assigned', ['error' => 'Main Class Teacher Already Assigned']);
             } else {
                 $arrayData = array(
                     'class_id' => $request->class_id,
@@ -1017,6 +1062,9 @@ class ApiController extends BaseController
                 ->join('subjects as sb', 'sa.subject_id', '=', 'sb.id')
                 ->join('classes as c', 'sa.class_id', '=', 'c.id')
                 // ->groupBy('sa.subject_id')
+                ->where([
+                    ['sa.type', '=', '0']
+                ])
                 ->get();
             return $this->successResponse($success, 'Section Allocation record fetch successfully');
         }
@@ -1119,7 +1167,8 @@ class ApiController extends BaseController
             'class_id' => 'required',
             'section_id' => 'required',
             'teacher_id' => 'required',
-            'subject_id' => 'required'
+            'subject_id' => 'required',
+            'type' => 'required'
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -1127,27 +1176,37 @@ class ApiController extends BaseController
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
 
-            $old = $createConnection->table('subject_assigns')
-                ->where(
-                    [
-                        ['section_id', $request->section_id],
-                        ['class_id', $request->class_id],
-                        ['subject_id', $request->subject_id],
-                        // ['teacher_id', '!=' , '0']
-                    ]
-                )
-                ->first();
+            if ($request->type == "0") {
+                $old = $createConnection->table('subject_assigns')
+                    ->where(
+                        [
+                            ['section_id', $request->section_id],
+                            ['class_id', $request->class_id],
+                            ['subject_id', $request->subject_id],
+                            // ['teacher_id', '!=', '0'],
+                            // ['teacher_id','0'],
+                            ['type', $request->type]
+                        ]
+                    )
+                    ->first();
+            }
+
             // if ($getCount > 0) {
             //     return $this->send422Error('Teacher is already assigned to this class and section', ['error' => 'Teacher is already assigned to this class and section']);
             // } else {
-
             $arraySubject = array(
                 'class_id' =>  $request->class_id,
                 'section_id' => $request->section_id,
                 'subject_id' => $request->subject_id,
                 'teacher_id' => $request->teacher_id,
+                'type' => $request->type
             );
+            // dd($arraySubject);
             if (isset($old->id)) {
+                // if($old->teacher_id == "0"){
+
+                // }
+                // // return $this->send422Error('Main teacher is already assigned to this class and section', ['error' => 'Main teacher is already assigned to this class and section']);
                 $arraySubject['updated_at'] = date("Y-m-d H:i:s");
                 $query = $createConnection->table('subject_assigns')->where('id', $old->id)->update($arraySubject);
             } else {
@@ -1183,6 +1242,7 @@ class ApiController extends BaseController
                     'sa.section_id',
                     'sa.subject_id',
                     'sa.teacher_id',
+                    'sa.type',
                     's.name as section_name',
                     'sb.name as subject_name',
                     'c.name as class_name'
@@ -1223,34 +1283,50 @@ class ApiController extends BaseController
             'section_id' => 'required',
             'subject_id' => 'required',
             'teacher_id' => 'required',
+            'type' => 'required'
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
-
-            $getCount = $createConnection->table('subject_assigns')
-                ->where(
-                    [
-                        ['section_id', $request->section_id],
-                        ['class_id', $request->class_id],
-                        ['subject_id', $request->subject_id],
-                        // ['teacher_id', $request->teacher_id],
-                        ['id', '!=', $request->id]
-                    ]
-                )
-                ->count();
+            $getCount = 0;
+            if ($request->type == "0") {
+                $getCount = $createConnection->table('subject_assigns')
+                    ->where(
+                        [
+                            ['section_id', $request->section_id],
+                            ['class_id', $request->class_id],
+                            ['subject_id', $request->subject_id],
+                            ['type', $request->type],
+                            ['id', '!=', $request->id]
+                        ]
+                    )
+                    ->count();
+            }
+            // $getCount = $createConnection->table('subject_assigns')
+            //     ->where(
+            //         [
+            //             ['section_id', $request->section_id],
+            //             ['class_id', $request->class_id],
+            //             ['subject_id', $request->subject_id],
+            //             // ['teacher_id', $request->teacher_id],
+            //             ['id', '!=', $request->id]
+            //         ]
+            //     )
+            //     ->count();
             if ($getCount > 0) {
-                return $this->send422Error('This subject is already assigned to this class and section', ['error' => 'This subject is already assigned to this class and section']);
+                return $this->send422Error('Main subject is already assigned to this class and section', ['error' => 'Main subject is already assigned to this class and section']);
             } else {
                 $arraySubject = array(
                     'class_id' =>  $request->class_id,
                     'section_id' => $request->section_id,
                     'subject_id' => $request->subject_id,
                     'teacher_id' => $request->teacher_id,
+                    'type' => $request->type,
                     'updated_at' => date("Y-m-d H:i:s")
                 );
+                // dd($arraySubject);
                 // update data
                 $query = $createConnection->table('subject_assigns')->where('id', $request->id)->update($arraySubject);
                 $success = [];
@@ -1308,7 +1384,8 @@ class ApiController extends BaseController
                 ->join('classes as c', 'sa.class_id', '=', 'c.id')
                 ->where([
                     ['sa.class_id', '=', $request->class_id],
-                    ['sa.section_id', '=', $request->section_id]
+                    ['sa.section_id', '=', $request->section_id],
+                    ['sa.type', '=', '0']
                 ])
                 ->get();
             return $this->successResponse($success, 'Get Assign class subjects fetch successfully');
@@ -4245,13 +4322,18 @@ class ApiController extends BaseController
                 ->join('staffs as s', 'sa.teacher_id', '=', 's.id')
                 ->where('sa.class_id', $request->class_id)
                 ->where('sa.section_id', $request->section_id)
+                // type zero mean main
+                ->where('sa.type', '=', '0')
                 ->groupBy('sa.teacher_id')
                 ->get();
             $output['subject'] = $classConn->table('subject_assigns as sa')->select('s.id', 's.name')
                 ->join('subjects as s', 'sa.subject_id', '=', 's.id')
                 ->where('sa.class_id', $request->class_id)
                 ->where('sa.section_id', $request->section_id)
+                ->where('sa.type', '=', '0')
                 ->get();
+            $output['exam_hall'] = $classConn->table('exam_hall')->get();
+
             return $this->successResponse($output, 'Teacher and Subject record fetch successfully');
         }
     }
@@ -4282,17 +4364,31 @@ class ApiController extends BaseController
                 ->select('start_date', 'end_date')
                 ->where('id', $request->semester_id)
                 ->first();
+            // dd($getObjRow);
             $timetable = $request->timetable;
             $oldest = $staffConn->table('timetable_class')->where([['class_id', $request->class_id], ['section_id', $request->section_id], ['semester_id', $request->semester_id], ['session_id', $request->session_id], ['day', $request->day]])->get()->toArray();
 
             $diff = array_diff(array_column($oldest, 'id'), array_column($timetable, 'id'));
 
+            if (isset($diff)) {
+                foreach ($diff as $del) {
 
-            foreach ($diff as $del) {
-
-                $delete =  $staffConn->table('timetable_class')->where('id', $del)->delete();
-                // delete calendor data
-                $staffConn->table('calendors')->where('time_table_id', $del)->delete();
+                    // $delete =  $staffConn->table('timetable_class')->where('id', $del)->delete();
+                    // // delete calendor data
+                    // $staffConn->table('calendors')->where('time_table_id', $del)->delete();
+                    if ($staffConn->table('timetable_class')->where('id', '=', $del)->count() > 0) {
+                        // record found
+                        // echo "time table" . $del;
+                        $delete =  $staffConn->table('timetable_class')->where('id', $del)->delete();
+                    }
+                    // delete calendor data
+                    if ($staffConn->table('calendors')->where('time_table_id', '=', $del)->count() > 0) {
+                        // record found
+                        // dd($del);
+                        // echo "calendor" . $del;
+                        $staffConn->table('calendors')->where('time_table_id', $del)->delete();
+                    }
+                }
             }
 
             // return $timetable;
@@ -4318,11 +4414,20 @@ class ApiController extends BaseController
                 if (isset($table['subject']) && isset($table['teacher'])) {
                     $break = 0;
                     $subject_id = $table['subject'];
-                    $teacher_id = $table['teacher'];
+                    if (!empty($table['teacher'])) {
+                        // dd($table['teacher']);
+                        // dd(gettype($table['teacher']));
+                        $teacher_id =  implode(",", $table['teacher']);
+                    }
+                    // $teacher_id = $table['teacher'];
+
+                    // dd($teacher_id);
+
                 }
                 $insertOrUpdateID = 0;
                 if (isset($table['id'])) {
-
+                    // echo "<pre>";
+                    // echo $teacher_id;
                     $query = $staffConn->table('timetable_class')->where('id', $table['id'])->update([
                         'class_id' => $request['class_id'],
                         'section_id' => $request['section_id'],
@@ -4339,6 +4444,8 @@ class ApiController extends BaseController
                     ]);
                     $insertOrUpdateID = $table['id'];
                 } else {
+                    // echo "<pre>";
+                    // echo $teacher_id;
                     $query = $staffConn->table('timetable_class')->insertGetId([
                         'class_id' => $request['class_id'],
                         'section_id' => $request['section_id'],
@@ -4450,7 +4557,7 @@ class ApiController extends BaseController
                 ])
                 ->orderBy('time_start', 'asc')->orderBy('time_end', 'asc')
                 ->get()->toArray();
-
+            // dd($Timetable);
             // return $Timetable;
             if ($Timetable) {
                 $mapfunction = function ($s) {
@@ -4481,7 +4588,10 @@ class ApiController extends BaseController
                 }
                 $output['details']['session'] = $session;
 
-                $output['teacher'] = $con->table('subject_assigns as sa')->select('s.id', 's.name')
+                $output['teacher'] = $con->table('subject_assigns as sa')->select(
+                    's.id',
+                    DB::raw('CONCAT(s.first_name, " ", s.last_name) as name')
+                )
                     ->join('staffs as s', 'sa.teacher_id', '=', 's.id')
                     ->where('sa.class_id', $request->class_id)
                     ->where('sa.section_id', $request->section_id)
@@ -4492,6 +4602,7 @@ class ApiController extends BaseController
                     ->where('sa.class_id', $request->class_id)
                     ->where('sa.section_id', $request->section_id)
                     ->get();
+                $output['exam_hall'] = $con->table('exam_hall')->get();
 
                 return $this->successResponse($output, 'Timetable record fetch successfully');
             } else {
@@ -4499,7 +4610,6 @@ class ApiController extends BaseController
             }
         }
     }
-
 
     // update Timetable
     public function updateTimetable(Request $request)
@@ -4527,6 +4637,7 @@ class ApiController extends BaseController
                 ->select('start_date', 'end_date')
                 ->where('id', $request->semester_id)
                 ->first();
+            // dd($getObjRow);
             $oldest = $staffConn->table('timetable_class')
                 ->where([
                     ['timetable_class.day', $request->day],
@@ -4536,23 +4647,36 @@ class ApiController extends BaseController
                     ['timetable_class.section_id', $request->section_id]
                 ])
                 ->get()->toArray();
-
+            // dd($oldest);
             $diff = array_diff(array_column($oldest, 'id'), array_column($timetable, 'id'));
-
-            foreach ($diff as $del) {
-                // dd($del);
-                $delete =  $staffConn->table('timetable_class')->where('id', $del)->delete();
-                // delete calendor data
-                $staffConn->table('calendors')->where('time_table_id', $del)->delete();
+            // dd($diff);
+            if (isset($diff)) {
+                foreach ($diff as $del) {
+                    // dd($del);
+                    if ($staffConn->table('timetable_class')->where('id', '=', $del)->count() > 0) {
+                        // record found
+                        // echo "time table" . $del;
+                        $delete =  $staffConn->table('timetable_class')->where('id', $del)->delete();
+                    }
+                    // delete calendor data
+                    if ($staffConn->table('calendors')->where('time_table_id', '=', $del)->count() > 0) {
+                        // record found
+                        // dd($del);
+                        // echo "calendor" . $del;
+                        $staffConn->table('calendors')->where('time_table_id', $del)->delete();
+                    }
+                }
             }
+
+            // exit;
 
             foreach ($timetable as $table) {
 
                 $session_id = 0;
                 $semester_id = 0;
-                $break;
-                $subject_id;
-                $teacher_id;
+                // $break;
+                // $subject_id;
+                // $teacher_id;
                 if (isset($request['session_id'])) {
                     $session_id = $request['session_id'];
                 }
@@ -4567,7 +4691,9 @@ class ApiController extends BaseController
                 } else {
                     $break = 0;
                     $subject_id = $table['subject'];
-                    $teacher_id = $table['teacher'];
+                    if (!empty($table['teacher'])) {
+                        $teacher_id =  implode(",", $table['teacher']);
+                    }
                 }
                 $insertOrUpdateID =  $table['id'];
                 $query = $staffConn->table('timetable_class')->where('id', $table['id'])->update([
@@ -4589,11 +4715,12 @@ class ApiController extends BaseController
             }
 
             $success = [];
-            if (!$query) {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-            } else {
-                return $this->successResponse($success, 'TimeTable has been Update Successfully');
-            }
+            return $this->successResponse($success, 'TimeTable has been Update Successfully');
+            // if (!$query) {
+            //     return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            // } else {
+            //     return $this->successResponse($success, 'TimeTable has been Update Successfully');
+            // }
         }
     }
 
@@ -7589,48 +7716,45 @@ class ApiController extends BaseController
 
         // create new connection
         $Connection = $this->createNewConnection($request->branch_id);
-        while ($startDate <= $endDate) {
-            if ($startDate->format('w') == $day) {
-                $start = $startDate->format('Y-m-d') . " " . $row['time_start'];
-                $end = $startDate->format('Y-m-d') . " " . $row['time_end'];
-                $arrayInsert = [
-                    "title" => "timetable",
-                    "class_id" => $request['class_id'],
-                    "section_id" => $request['section_id'],
-                    "sem_id" => $request['semester_id'],
-                    "subject_id" => $row['subject'],
-                    "teacher_id" => $row['teacher'],
-                    "start" => $start,
-                    "end" => $end,
-                    "time_table_id" => $insertOrUpdateID,
-                    'created_at' => date("Y-m-d H:i:s")
-                ];
-                // return $arrayInsert;
-
-                $calendors = $Connection->table('calendors')->where([
-                    ['class_id', '=', $request['class_id']],
-                    ['section_id', '=', $request['section_id']],
-                    ['subject_id', '=', $row['subject']],
-                    ['teacher_id', '=', $row['teacher']],
-                    ['sem_id', '=', $request['semester_id']],
-                    ['time_table_id', '=', $insertOrUpdateID],
-                    [DB::raw('date(start)'), '=', $startDate->format('Y-m-d')],
-                ])->first();
-                if (isset($calendors->id)) {
-                    // $Connection->table('calendors')->where('id', $calendors->id)->delete();
-                    $Connection->table('calendors')->where('id', $calendors->id)->update([
-                        "subject_id" => $row['subject'],
-                        "teacher_id" => $row['teacher'],
+        // delete existing calendor data
+        $calendors = $Connection->table('calendors')->where([
+            ['time_table_id', '=', $insertOrUpdateID]
+        ])->count();
+        if ($calendors > 0) {
+            $Connection->table('calendors')->where('time_table_id', $insertOrUpdateID)->delete();
+            // $Connection->table('calendors')->where('id', $calendors->id)->update([
+            //     "subject_id" => $row['subject'],
+            //     "teacher_id" => $row['teacher'],
+            //     "sem_id" => $request['semester_id'],
+            //     "start" => $start,
+            //     "end" => $end,
+            //     'updated_at' => date("Y-m-d H:i:s")
+            // ]);
+        }
+        if (isset($row['subject']) && isset($row['teacher'])) {
+            while ($startDate <= $endDate) {
+                if ($startDate->format('w') == $day) {
+                    $start = $startDate->format('Y-m-d') . " " . $row['time_start'];
+                    $end = $startDate->format('Y-m-d') . " " . $row['time_end'];
+                    $arrayInsert = [
+                        "title" => "timetable",
+                        "class_id" => $request['class_id'],
+                        "section_id" => $request['section_id'],
                         "sem_id" => $request['semester_id'],
+                        "subject_id" => $row['subject'],
+                        // "teacher_id" => $row['teacher'],
+                        "teacher_id" => implode(",", $row['teacher']),
                         "start" => $start,
                         "end" => $end,
-                        'updated_at' => date("Y-m-d H:i:s")
-                    ]);
-                } else {
+                        "time_table_id" => $insertOrUpdateID,
+                        'created_at' => date("Y-m-d H:i:s")
+                    ];
+                    // return $arrayInsert;
+
                     $Connection->table('calendors')->insert($arrayInsert);
                 }
+                $startDate->modify('+1 day');
             }
-            $startDate->modify('+1 day');
         }
     }
     // get semester 
@@ -12484,7 +12608,7 @@ class ApiController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             // get data
             $leave_status = "All";
-            if(isset($request->leave_status)){
+            if (isset($request->leave_status)) {
                 $leave_status = $request->leave_status;
             }
             $staff_id = $request->staff_id;
@@ -12644,7 +12768,7 @@ class ApiController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             // get data
             $leave_status = "All";
-            if(isset($request->leave_status)){
+            if (isset($request->leave_status)) {
                 $leave_status = $request->leave_status;
             }
             $staff_id = $request->staff_id;

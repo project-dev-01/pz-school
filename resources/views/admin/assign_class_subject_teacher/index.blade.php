@@ -40,6 +40,7 @@
                                 <th>Section Name</th>
                                 <th>Subject Name</th>
                                 <th>Teacher Name</th>
+                                <th>Type</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

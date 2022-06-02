@@ -74,13 +74,13 @@
                         </div> <!-- end card-box -->
                     </div><!-- end col-->
                 </div>
-                <!-- <script>
+                <script>
                     $('#employee-table').DataTable({
                         "paging": false,
                         "searching": false,
                         "ordering": false
                     });
-                </script> -->
+                </script>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered nowrap" data-mdb-paging="false" id="employee-table">

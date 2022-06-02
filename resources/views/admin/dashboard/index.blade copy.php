@@ -8,7 +8,7 @@
         margin: 40px auto;
     }
 
-    ..fc-unthemed thead {
+    .fc-unthemed thead {
         border: 1px solid #346aa1;
     }
 

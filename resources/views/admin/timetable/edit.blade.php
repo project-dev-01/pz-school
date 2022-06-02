@@ -2,7 +2,8 @@
 @section('title','Edit Schedule')
 @section('content')
 <style>
-    .form-control:disabled, .form-control[readonly] {
+    .form-control:disabled,
+    .form-control[readonly] {
         background-color: #eee;
         opacity: 1;
     }
@@ -34,20 +35,20 @@
                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                     <li class="nav-item">
                         <h4 class="nav-link"><i class="far fa-clock"></i>
-                            @if($timetable)Class {{ $details['class']['class_name'] }} (Section: {{ $details['section']['section_name'] }}) - {{ $details['day'] }} - @endif Schedule Edit		
+                            @if($timetable)Class {{ $details['class']['class_name'] }} (Section: {{ $details['section']['section_name'] }}) - {{ $details['day'] }} - @endif Schedule Edit
                         </h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="editTimetableForm"  method="post" action="{{ route('admin.timetable.update') }}"  enctype="multipart/form-data" autocomplete="off">
+                    <form id="editTimetableForm" method="post" action="{{ route('admin.timetable.update') }}" enctype="multipart/form-data" autocomplete="off">
                         @csrf
-                    <div class="row">
-                        <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-12">
                                 <div class="table-responsive">
                                     <table class="table table-bordered mb-0 text-center" id="edit_timetable_table">
                                         @if($timetable)
                                         <thead>
-                                            <tr >
+                                            <tr>
                                                 <th>Break</th>
                                                 <th>Subject</th>
                                                 <th>Teacher</th>
@@ -57,107 +58,130 @@
                                             </tr>
                                         </thead>
                                         <tbody id="edit_timetable_body">
-                                            
-                                                @php $row = 0; @endphp
-                                                @foreach($timetable as $table)
-                                                    <tr class="iadd">
 
-                                                        <input type="hidden"  name="timetable[{{$row}}][id]" value="{{$table['id']}}">
-                                                        <td >
-                                                            <div class="checkbox-replace"> 
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" name="timetable[{{$row}}][break]"  {{$table['break'] == "1" ? 'checked' : ''}}><i></i>
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        @if($table['break'] == "1")
-                                                        <td width="20%" > 
-                                                            <div class="form-group">
-                                                                <select  class="form-control subject"  name="timetable[{{$row}}][subject]" disabled>
-                                                                    <option value="">Select Subject</option>
-                                                                    @foreach($subject as $sub)
-                                                                        <option value="{{$sub['id']}}" >{{$sub['name']}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </td>
-                                                        <td width="20%"  > 
-                                                            <div class="form-group">
-                                                                <select  class="form-control teacher"  name="timetable[{{$row}}][teacher]" disabled>
-                                                                    <option value="">Select Teacher</option>
-                                                                    @foreach($teacher as $teach)
-                                                                        <option value="{{$teach['id']}}">{{$teach['name']}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </td>
-                                                        @else
-                                                        <td width="20%" > 
-                                                            <div class="form-group">
-                                                                <select  class="form-control subject"  name="timetable[{{$row}}][subject]" >
-                                                                    <option value="">Select Subject</option>
-                                                                    @foreach($subject as $sub)
-                                                                        <option value="{{$sub['id']}}" {{ $sub['id'] == $table['subject_id'] ? 'selected' : ''}}>{{$sub['name']}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </td>
-                                                        <td width="20%"  > 
-                                                            <div class="form-group">
-                                                                <select  class="form-control teacher"  name="timetable[{{$row}}][teacher]">
-                                                                    <option value="">Select Teacher</option>
-                                                                    @foreach($teacher as $teach)
-                                                                        <option value="{{$teach['id']}}" {{ $teach['id'] == $table['teacher_id'] ? 'selected' : ''}}>{{$teach['name']}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </td>
-                                                        @endif
-                                                        <td width="20%" >
-                                                            <div class="form-group">
-                                                                <input class="form-control"  type="time" name="timetable[{{$row}}][time_start]" value="{{$table['time_start']}}">
-                                                            </div></td>
-                                                        <td width="20%"  >
-                                                            <div class="form-group">
-                                                                <input class="form-control"  type="time" name="timetable[{{$row}}][time_end]"  value="{{$table['time_end']}}">
-                                                            </div>
-                                                        </td>
-                                                        <td width="20%"> <div class="input-group"><input type="remarks"  name="timetable[{{$row}}][class_room]" value="{{$table['class_room']}}" class="form-control" ><button type="button" class=" btn btn-danger removeTR"><i class="fas fa-times"></i> </button></div></td>
+                                            @php $row = 0; @endphp
+                                            @foreach($timetable as $table)
+                                            <tr class="iadd">
 
-                                                    </tr>
-                                                    @php $row++; @endphp
-                                                @endforeach
-                                            
+                                                <input type="hidden" name="timetable[{{$row}}][id]" value="{{$table['id']}}">
+                                                <td>
+                                                    <div class="checkbox-replace">
+                                                        <label class="i-checks">
+                                                            <input type="checkbox" name="timetable[{{$row}}][break]" {{$table['break'] == "1" ? 'checked' : ''}}><i></i>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                @if($table['break'] == "1")
+                                                <td width="20%">
+                                                    <div class="form-group">
+                                                        <select class="form-control subject" name="timetable[{{$row}}][subject]" disabled>
+                                                            <option value="">Select Subject</option>
+                                                            @foreach($subject as $sub)
+                                                            <option value="{{$sub['id']}}">{{$sub['name']}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td width="20%">
+                                                    <div class="form-group">
+                                                        <select class="form-control teacher select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="timetable[{{$row}}][teacher]" disabled>
+                                                            <option value="">Select Teacher</option>
+                                                            @foreach($teacher as $teach)
+                                                            <option value="{{$teach['id']}}">{{$teach['name']}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                @else
+                                                <td width="20%">
+                                                    <div class="form-group">
+                                                        <select class="form-control subject" name="timetable[{{$row}}][subject]">
+                                                            <option value="">Select Subject</option>
+                                                            @foreach($subject as $sub)
+                                                            <option value="{{$sub['id']}}" {{ $sub['id'] == $table['subject_id'] ? 'selected' : ''}}>{{$sub['name']}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td width="20%">
+                                                    <div class="form-group">
+                                                        <select class="form-control teacher teacher select2-multiple-plus" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="timetable[{{$row}}][teacher][]">
+                                                            <option value="">Select Teacher</option>
+                                                            @forelse($teacher as $teach)
+                                                            @php
+                                                            $selected = "";
+                                                            @endphp
+                                                            @foreach(explode(',', $table['teacher_id']) as $info)
+                                                            @if($teach['id'] == $info)
+                                                            @php
+                                                            $selected = "Selected";
+                                                            @endphp
+                                                            @endif
+                                                            @endforeach
+                                                            <option value="{{$teach['id']}}" {{ $selected }}>{{$teach['name']}}</option>
+                                                            @empty
+                                                            @endforelse
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                @endif
+                                                <td width="20%">
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="time" name="timetable[{{$row}}][time_start]" value="{{$table['time_start']}}">
+                                                    </div>
+                                                </td>
+                                                <td width="20%">
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="time" name="timetable[{{$row}}][time_end]" value="{{$table['time_end']}}">
+                                                    </div>
+                                                </td>
+                                                <td width="20%">
+                                                    <div class="form-group">
+                                                        <select class="form-control" name="timetable[{{$row}}][class_room]">
+                                                            @forelse($hall_list as $list)
+                                                            <option value="{{$list['id']}}" {{ $list['id'] == $table['class_room'] ? 'selected' : ''}}>{{ $list['hall_no'] }}</option>
+                                                            @empty
+                                                            @endforelse
+                                                        </select>
+                                                    </div><button type="button" class=" btn btn-danger removeTR"><i class="fas fa-times"></i> </button>
+
+                                                    <!-- <div class="input-group"><input type="remarks" name="timetable[{{$row}}][class_room]" value="{{$table['class_room']}}" class="form-control"><button type="button" class=" btn btn-danger removeTR"><i class="fas fa-times"></i> </button></div> -->
+                                                </td>
+
+                                            </tr>
+                                            @php $row++; @endphp
+                                            @endforeach
+
                                         </tbody>
                                         @else
-                                        <tbody >
-                                        <td   >No Data Found </td>
+                                        <tbody>
+                                            <td>No Data Found </td>
                                         </tbody>
-                                        @endif    
+                                        @endif
                                     </table>
-                                    
+
                                 </div> <!-- end table-responsive-->
-                        </div> <!-- end col-->
-                    </div>
-                    <br>
-                    <!-- <button type="button" class="btn btn-soft-secondary waves-effect" id="addMore" >
+                            </div> <!-- end col-->
+                        </div>
+                        <br>
+                        <!-- <button type="button" class="btn btn-soft-secondary waves-effect" id="addMore" >
 					<i class="fas fa-plus-circle"></i> Add More				</button> -->
-                    <!-- end row-->
-                    @if($timetable)
-                    <input type="hidden" id="form_class_id"  name="class_id" value="{{$details['class']['class_id']}}">
-                    <input type="hidden" id="form_section_id" name="section_id" value="{{$details['section']['section_id']}}">
-                    <input type="hidden" id="form_semester_id"  name="semester_id" value="{{$details['semester']['semester_id']}}">
-                    <input type="hidden" id="form_session_id" name="session_id" value="{{$details['session']['session_id']}}">
-                    <input type="hidden" id="form_day" name="day"  value="{{$details['day']}}">
-                    <div class="form-group text-right m-b-0">
-                        <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Update
-                        </button>
-                        <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                        <!-- end row-->
+                        @if($timetable)
+                        <input type="hidden" id="form_class_id" name="class_id" value="{{$details['class']['class_id']}}">
+                        <input type="hidden" id="form_section_id" name="section_id" value="{{$details['section']['section_id']}}">
+                        <input type="hidden" id="form_semester_id" name="semester_id" value="{{$details['semester']['semester_id']}}">
+                        <input type="hidden" id="form_session_id" name="session_id" value="{{$details['session']['session_id']}}">
+                        <input type="hidden" id="form_day" name="day" value="{{$details['day']}}">
+                        <div class="form-group text-right m-b-0">
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
+                                Update
+                            </button>
+                            <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                             Cancel
                         </button>-->
-                    </div>
-                    @endif
+                        </div>
+                        @endif
                     </form>
 
                 </div> <!-- end card-body -->

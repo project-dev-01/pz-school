@@ -19,6 +19,7 @@ class CreateSubjectAssignsTable extends Migration
             $table->integer('section_id');
             $table->integer('subject_id');
             $table->integer('teacher_id');
+            $table->enum('type', ['0', '1']);
             $table->timestamps();
         });
     }

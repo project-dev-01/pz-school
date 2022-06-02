@@ -8,283 +8,248 @@ h3,
 h4,
 h5,
 h6 {
-  color: #3A4265;
-  font-weight: 600;
-  font-family: Open Sans;
+	color: #3A4265;
+	font-weight: 600;
+	font-family: Open Sans;
 }
 
 /*top head line css like dashboard*/
 .page-title-box .page-title {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 44px;
-  letter-spacing: 0.0133em;
-  color: #3A4265;
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 44px;
+	letter-spacing: 0.0133em;
+	color: #3A4265;
 }
-
 /*yellow color header css*/
-.mb-0,
-.my-0 {
-  margin-bottom: 0 !important;
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 22px;
-  /* identical to box height */
-  color: #3A4265;
+.mb-0, .my-0 {
+    margin-bottom: 0!important;
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 22px;
+	/* identical to box height */
+	color: #3A4265;
 }
-
 /*save button css*/
-.btn-primary-bl {
-  color: #fff;
-  border-color: #0ABAB5;
-  background-color: #6FC6CC;
-  border-radius: 60px;
-  width: 100px;
+	.btn-primary-bl {
+    color: #fff;
+    border-color: #0ABAB5;
+	background-color: #6FC6CC;
+	border-radius: 60px;
+	width:100px;
 }
-
 .float-right {
-  float: right !important;
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 14px;
-  /* identical to box height */
-  color: #64647B;
+    float: right!important;
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 14px;
+	/* identical to box height */
+	color: #64647B;
 }
-
 .text-truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 22px;
-  /* identical to box height */
-  color: #3A4265;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 22px;
+	/* identical to box height */
+	color: #3A4265;
 
 }
-
 .badge.badge-custom {
-  font-size: 1.1em;
-}
-
+     font-size: 1.1em;
+}	
 .nav-tabs {
-  border-bottom: 1px solid #dee2e6;
-  background-color: #E9D528;
-  color: #3A4265;
-  border-radius: 5px 5px 0px 0px;
+    border-bottom: 1px solid #dee2e6;
+    background-color: #E9D528;
+    color: #3A4265;
+	border-radius: 5px 5px 0px 0px;
 }
-
-.card {
-  border-radius: 5px;
+.card{
+	 border-radius: 5px;
 }
-
-input,
-select {
-  font-family: Open Sans;
-  font-size: 12px;
+input, select {
+	 font-family: Open Sans;
+	 font-size:12px;
 }
-
 input::placeholder {
-  font-family: Open Sans;
-  font-size: 12px;
-  color: #ccc;
+	font-family: Open Sans;
+	font-size:12px;
+    color: #ccc;
 }
-
 /*header css*/
-.header-span {
-  font-style: normal;
-  font-weight: 700;
-  line-height: 16px;
-  text-align: center;
-  letter-spacing: 0.015em;
-  color: #000000;
-  background-color: #E9D528;
-  padding: 10px;
-  border-radius: 10px 10px 10px 10px;
-  text-transform: uppercase;
-  font-family: 'Open Sans';
-  font-size: 12px;
+.header-span{	
+		font-style: normal;
+		font-weight: 700;
+		line-height: 16px;
+		text-align: center;
+		letter-spacing: 0.015em;
+		color: #000000;
+		background-color: #E9D528;
+		padding: 10px;
+		border-radius: 10px 10px 10px 10px;
+		text-transform: uppercase;
+		font-family: 'Open Sans';
+		font-size:12px;
 }
-
-input:focus {
-  background: #F4F7FC;
-  border: 1px solid #ECECEC;
-  border-radius: 5px;
+input:focus{	
+		background: #F4F7FC;
+		border: 1px solid #ECECEC;
+		border-radius: 5px;
 }
-
-.navv {
-  padding: 0.5rem 1rem;
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  letter-spacing: 0.0133em;
-  color: #3A4265;
+.navv{
+		padding: 0.5rem 1rem;
+		font-family: 'Open Sans';
+		font-style: normal;
+		font-weight: 600;
+		font-size: 16px;
+		letter-spacing: 0.0133em;
+		color: #3A4265;
 
 }
-
-.fc-row .fc-week .table-bordered .fc-rigid {
-  height: 120px;
+.label-font{
+		color:black;
 }
-
-.fc-content-skeleton .fc-day-top .fc-day-number {
-  float: right;
-  height: 20px;
-  width: 20px;
-  text-align: center;
-  line-height: 20px;
-  margin: 30px 0px 0px 0px;
-  font-size: 11px;
-  color: black;
-}
-
-.label-font {
-  color: black;
-}
-
 .form-control {
-  background-color: #F4F7FC;
-  border: 1px solid #ECECEC;
-  font-family: Open Sans;
-  font-size: 12px;
+		 background-color: #F4F7FC;
+		 border: 1px solid #ECECEC;  
+		 font-family: Open Sans;
+		 font-size:12px;
 }
 
 .profile-pic-wrapper {
-  width: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	  width: 100%;
+	  position: relative;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	  align-items: center;
 }
-
 .pic-holder {
-  text-align: center;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	  text-align: center;
+	  position: relative;  
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
 }
 
 .pic-holder .pic {
-  height: 100%;
-  width: 100%;
-  -o-object-fit: cover;
-  object-fit: cover;
-  -o-object-position: center;
-  object-position: center;
+	  height: 100%;
+	  width: 100%;
+	  -o-object-fit: cover;
+	  object-fit: cover;
+	  -o-object-position: center;
+	  object-position: center;
 }
 
 .pic-holder .upload-file-block,
 .pic-holder .upload-loader {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 60%;
-  background-color: rgba(90, 92, 105, 0.7);
-  color: #f8f9fc;
-  font-size: 12px;
-  font-weight: 600;
-  opacity: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  height: 100%;
+	  width: 60%;
+	  background-color: rgba(90, 92, 105, 0.7);
+	  color: #f8f9fc;
+	  font-size: 12px;
+	  font-weight: 600;
+	  opacity: 0;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  transition: all 0.2s;
 }
 
 .pic-holder .upload-file-block {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .pic-holder:hover .upload-file-block,
-.uploadProfileInput:focus~.upload-file-block {
-  opacity: 1;
+.uploadProfileInput:focus ~ .upload-file-block {
+	opacity: 1;
 }
 
 .pic-holder.uploadInProgress .upload-file-block {
-  display: none;
+	display: none;
 }
 
 .pic-holder.uploadInProgress .upload-loader {
-  opacity: 1;
+	opacity: 1;
 }
 
 /* Snackbar css */
 .snackbar {
-  visibility: hidden;
-  min-width: 250px;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  border-radius: 2px;
-  padding: 16px;
-  position: fixed;
-  z-index: 1;
-  left: 50%;
-  bottom: 30px;
-  font-size: 14px;
-  transform: translateX(-50%);
+	  visibility: hidden;
+	  min-width: 250px;
+	  background-color: #333;
+	  color: #fff;
+	  text-align: center;
+	  border-radius: 2px;
+	  padding: 16px;
+	  position: fixed;
+	  z-index: 1;
+	  left: 50%;
+	  bottom: 30px;
+	  font-size: 14px;
+	  transform: translateX(-50%);
 }
 
 .snackbar.show {
-  visibility: visible;
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	  visibility: visible;
+	  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	  animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
 @-webkit-keyframes fadein {
   from {
-    bottom: 0;
-    opacity: 0;
+		bottom: 0;
+		opacity: 0;
   }
-
   to {
-    bottom: 30px;
-    opacity: 1;
+		bottom: 30px;
+		opacity: 1;
   }
 }
 
 @keyframes fadein {
   from {
-    bottom: 0;
-    opacity: 0;
+		bottom: 0;
+		opacity: 0;
   }
-
   to {
-    bottom: 30px;
-    opacity: 1;
+		bottom: 30px;
+		opacity: 1;
   }
 }
 
 @-webkit-keyframes fadeout {
   from {
-    bottom: 30px;
-    opacity: 1;
+		bottom: 30px;
+		opacity: 1;
   }
-
   to {
-    bottom: 0;
-    opacity: 0;
+		bottom: 0;
+		opacity: 0;
   }
 }
 
 @keyframes fadeout {
   from {
-    bottom: 30px;
-    opacity: 1;
+		bottom: 30px;
+		opacity: 1;
   }
-
   to {
-    bottom: 0;
-    opacity: 0;
+		bottom: 0;
+		opacity: 0;
   }
 }
+

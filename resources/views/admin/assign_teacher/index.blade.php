@@ -39,6 +39,7 @@
                                 <th>Class Name</th>
                                 <th>Section Name</th>
                                 <th>Teacher Name</th>
+                                <th>Type</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

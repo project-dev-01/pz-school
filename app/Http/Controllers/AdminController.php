@@ -1501,7 +1501,7 @@ class AdminController extends Controller
         ];
 
         $timetable = Helper::PostMethod(config('constants.api.timetable_subject'), $data);
-
+        $hall_list = Helper::GetMethod(config('constants.api.exam_hall_list'));
         // dd($timetable);
         if ($timetable['code'] == "200") {
 
@@ -1533,11 +1533,19 @@ class AdminController extends Controller
 
                     $teacher = "";
                     foreach ($timetable['data']['teacher'] as $teach) {
-                        if ($teach['id'] == $table['teacher_id']) {
-                            $teacher .= '<option value="' . $teach['id'] . '" Selected>' . $teach['name'] . '</option>';
-                        } else {
-                            $teacher .= '<option value="' . $teach['id'] . '"   >' . $teach['name'] . '</option>';
+                        $selected = "";
+                        foreach (explode(',', $table['teacher_id']) as $info) {
+                            if ($teach['id'] == $info) {
+                                $selected = "Selected";
+                            }
                         }
+
+                        // if ($teach['id'] == $table['teacher_id']) {
+                        //     $teacher .= '<option value="' . $teach['id'] . '" Selected>' . $teach['name'] . '</option>';
+                        // } else {
+                        //     $teacher .= '<option value="' . $teach['id'] . '"   >' . $teach['name'] . '</option>';
+                        // }
+                        $teacher .= '<option value="' . $teach['id'] . '"   ' . $selected . '>' . $teach['name'] . '</option>';
                     }
 
                     // dd($teacher);
@@ -1546,7 +1554,7 @@ class AdminController extends Controller
                     $response .=  '<td>';
                     $response .=  '<div class="checkbox-replace">';
                     $response .=  '<label class="i-checks">';
-                    $response .=  '<input type="checkbox" name="timetable[' . $row . '][break]" ' . $checked . ' ><i></i>';
+                    $response .=  '<input type="checkbox"  name="timetable[' . $row . '][break]" ' . $checked . ' ><i></i>';
                     $response .=  '</label>';
                     $response .=  '</div>';
                     $response .=  '</td>';
@@ -1560,7 +1568,7 @@ class AdminController extends Controller
                     $response .=  '</td>';
                     $response .=  '<td width="20%"  > ';
                     $response .=  '<div class="form-group">';
-                    $response .=  '<select  class="form-control teacher"  name="timetable[' . $row . '][teacher]" ' . $disabled . '>';
+                    $response .=  '<select  class="form-control select2-multiple teacher"  data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="timetable[' . $row . '][teacher][]" ' . $disabled . '>';
                     $response .=  '<option value="">Select Teacher</option>';
                     $response .=  $teacher;
                     $response .=  '</select>';
@@ -1568,14 +1576,28 @@ class AdminController extends Controller
                     $response .=  '</td>';
                     $response .=  '<td width="20%" >';
                     $response .=  '<div class="form-group">';
-                    $response .=  '<input class="form-control"  type="time" name="timetable[' . $row . '][time_start]" value="' . $table['time_start'] . '">';
+                    $response .=  '<input class="form-control" required type="time" name="timetable[' . $row . '][time_start]" value="' . $table['time_start'] . '">';
                     $response .=  '</div></td>';
                     $response .=  '<td width="20%"  >';
                     $response .=  '<div class="form-group">';
-                    $response .=  '<input class="form-control"  type="time" name="timetable[' . $row . '][time_end]"  value="' . $table['time_end'] . '">';
+                    $response .=  '<input class="form-control" required type="time" name="timetable[' . $row . '][time_end]"  value="' . $table['time_end'] . '">';
                     $response .=  '</div>';
                     $response .=  '</td>';
-                    $response .=  '<td width="20%"> <div class="input-group"><input type="remarks"  name="timetable[' . $row . '][class_room]" value="' . $table['class_room'] . '" class="form-control" ><button type="button" class=" btn btn-danger removeTR"><i class="fas fa-times"></i> </button></div></td>';
+                    $response .=  '<td width="20%"  >';
+                    $response .=  '<div class="form-group">';
+                    $response .=  '<select class="form-control"  name="timetable[' . $row . '][class_room]" ' . $disabled . '>';
+                    $response .=  '<option value="">Select Hall</option>';
+                    foreach ($hall_list['data'] as $list) {
+                        if ($list['id'] == $table['class_room']) {
+                            $response .= '<option value="' . $list['id'] . '" selected>' . $list['hall_no'] . '</option>';
+                        } else {
+                            $response .= '<option value="' . $list['id'] . '">' . $list['hall_no'] . '</option>';
+                        }
+                    }
+                    $response .=  '</select>';
+                    $response .=  '</div><button type="button" class=" btn btn-danger removeTR"><i class="fas fa-times"></i> </button>';
+                    $response .=  '</td>';
+                    // $response .=  '<td width="20%"> <div class="input-group"><input type="remarks"  name="timetable[' . $row . '][class_room]" value="' . $table['class_room'] . '" class="form-control" ><button type="button" class=" btn btn-danger removeTR"><i class="fas fa-times"></i> </button></div></td>';
 
                     $response .=  '</tr>';
                     $row++;
@@ -1598,6 +1620,7 @@ class AdminController extends Controller
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
+        $hall_list = Helper::GetMethod(config('constants.api.exam_hall_list'));
         // dd($semester);
         return view(
             'admin.timetable.add',
@@ -1605,6 +1628,7 @@ class AdminController extends Controller
                 'class' => $getclass['data'],
                 'semester' => $semester['data'],
                 'session' => $session['data'],
+                'hall_list' => $hall_list['data']
             ]
         );
     }
@@ -1656,6 +1680,7 @@ class AdminController extends Controller
         // dd($data);
 
         $timetable = Helper::PostMethod(config('constants.api.timetable_list'), $data);
+        // dd($timetable);
 
         $days = array(
             'sunday',
@@ -1734,7 +1759,8 @@ class AdminController extends Controller
                     'timetable' => $timetable['data']['timetable'],
                     'details' => $timetable['data']['details'],
                     'teacher' => $timetable['data']['teacher'],
-                    'subject' => $timetable['data']['subject']
+                    'subject' => $timetable['data']['subject'],
+                    'hall_list' => $timetable['data']['exam_hall']
                 ]
             );
         } else {
@@ -3840,7 +3866,7 @@ class AdminController extends Controller
                     return '<div class="button-list">
                     <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">Update</a>
             </div>';
-                }else{
+                } else {
                     return '-';
                 }
             })

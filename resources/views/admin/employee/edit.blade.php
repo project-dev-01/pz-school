@@ -107,7 +107,7 @@
                 <div class="card-body">
                     <form id="editEmployeeForm" method="post" action="{{ route('admin.employee.update') }}" enctype="multipart/form-data" autocomplete="off">
                         @csrf
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="photo">Profile Picture</label>
@@ -115,8 +115,8 @@
                                     <div class="containers-img">
                                         <div class="imageWrapper">
                                             <img src="{{ $employee['photo'] && asset('images/staffs/').'/'.$employee['photo'] ? asset('images/staffs/').'/'.$employee['photo'] : asset('images/users/default.jpg') }}" class="image">
-                                            <!-- <img class="image" src="{{asset('images/staffs/').'/'.$employee['photo']}}">
-                                            images/users/default.jpg -->
+                                            <img class="image" src="{{asset('images/staffs/').'/'.$employee['photo']}}">
+                                            images/users/default.jpg
                                         </div>
                                     </div>
 
@@ -127,7 +127,18 @@
 
 
                             </div>
-                        </div>
+                        </div> -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-lg-3">
+                                    <div class="mt-3">
+                                        <input type="hidden" name="old_photo" id="oldPhoto" value="{{ $employee['photo'] }}" />
+                                        <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ $employee['photo'] && asset('images/staffs/').'/'.$employee['photo'] ? asset('images/staffs/').'/'.$employee['photo'] : asset('images/users/default.jpg') }}" />
+                                        <p class="text-muted text-center mt-2 mb-0">Photo</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- end row -->
                         <input type="hidden" class="form-control" id="id" name="id" value="{{$employee['id']}}">
                         <span class="fas fa-user-check  " id="span-parent"></span>
                         <span class="header-title mb-3" id="span-parent">Personal details
@@ -284,13 +295,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="present_address">Address Line 1(Street address)</label>
+                                    <label for="present_address">Address 1</label>
                                     <input class="form-control" name="present_address" id="present_address" value="{{$employee['present_address']}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="permanent_address">Address Line 2</label>
+                                    <label for="permanent_address">Address 2</label>
                                     <input class="form-control" name="permanent_address" id="permanent_address" value="{{$employee['permanent_address']}}">
                                 </div>
                             </div>

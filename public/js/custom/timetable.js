@@ -1,5 +1,17 @@
 $(function () {
 
+    // function selectRefresh() {
+    //     console.log("sdsd")
+    //     $('.main .select2-multiple').select2({
+    //         //-^^^^^^^^--- update here
+    //         tags: true,
+    //         placeholder: "Select an Option",
+    //         allowClear: true,
+    //         width: '100%'
+    //     });
+    // }
+    // $('.select2-multiple').select2();
+    $('.select2-multiple-plus').select2();
     // add timetable
     $('#addTimetableForm').on('submit', function (e) {
         e.preventDefault();
@@ -93,14 +105,17 @@ $(function () {
                         $("#timetable").show("slow");
                         var subject = data.data.subject;
                         var teacher = data.data.teacher;
+                        var exam_hall = data.data.exam_hall;
+                        
 
                         if (data.data.timetable == "") {
-                            callout(subject, teacher);
+                            callout(subject, teacher,exam_hall);
                         } else {
                             var cd = data.data.length;
                             count = cd;
                             console.log('cou', count)
                             $("#timetable_body").append(data.data.timetable);
+                            $('.select2-multiple').select2();
 
                         }
 
@@ -192,11 +207,11 @@ $(function () {
     })
 
     $("#timetable_body").on('click', '.removeTR', function () {
-        $(this).parent().parent().parent().remove();
+        $(this).parent().parent().remove();
     });
 
     $("#edit_timetable_body").on('click', '.removeTR', function () {
-        $(this).parent().parent().parent().remove();
+        $(this).parent().parent().remove();
     });
 
     $(document).on('change', "#edit_timetable_body input[type='checkbox']", function () {
@@ -212,12 +227,29 @@ $(function () {
 
                 var subject = res.data.subject;
                 var teacher = res.data.teacher;
-                callout(subject, teacher);
+                var exam_hall = res.data.exam_hall;
+                callout(subject, teacher,exam_hall);
             }
         }, 'json');
     });
 
-    function callout(subject, teacher) {
+    function callout(subject, teacher,exam_hall) {
+        console.log("sdfsdfsdfsdfdsf");
+
+        // let i = 0;
+        // var test = "";
+        // test += '<select class="form-control select2-multiple-test" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." ><option   selected="selected">Cat</option><option selected="selected">Dog</option> </select>';
+        // $(".boxss").append(test);
+        // if(i == 0){
+        //     console.log("---");
+        //     console.log(i);
+        //     $('.select2-multiple-test').select2();
+        // }
+        // i++;
+        // var newtest = "<select class='form-control select2-multiple' data-toggle='select2' multiple='multiple' data-placeholder='Choose ...' ><option   selected='selected'>Cat</option><option selected='selected'>Dog</option> </select>";
+        // $("#boxss").append(newtest);
+        // $(".boxss").append('<select class="form-control select2-multiple-test" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." ><option   selected="selected">Cat</option><option selected="selected">Dog</option> </select>');
+        // $('.select2-multiple-test').select2();
         var row = "";
         row += '<tr class="iadd">';
         row += '<td ><div class="checkbox-replace"> ';
@@ -231,8 +263,8 @@ $(function () {
         });
         row += '</select>';
         row += '</div></td>';
-        row += '<td width="20%" ><div class="form-group">';
-        row += '<select  class="form-control teacher"  name="timetable[' + count + '][teacher]">';
+        row += '<td width="20%" ><div class="form-group main">';
+        row += '<select  class="form-control select2-multiple teacher" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="timetable[' + count + '][teacher][]">';
         row += '<option value="">Select Teacher</option>';
         $.each(teacher, function (key, val) {
             row += '<option value="' + val.id + '">' + val.name + '</option>';
@@ -245,10 +277,18 @@ $(function () {
         row += '<td width="20%"><div class="form-group">';
         row += '<input class="form-control"  type="time" name="timetable[' + count + '][time_end]" >';
         row += '</div></td>';
-        row += '<td width="20%"><div class="input-group">';
-        row += '<input type="text"  name="timetable[' + count + '][class_room]" value="" class="form-control" >';
-        row += '<button type="button" class=" btn btn-danger removeTR"><i class="fas fa-times"></i> </button>';
-        row += '</div></td>';
+        row += '<td width="20%" ><div class="form-group">';
+        row += '<select  class="form-control class_room"  name="timetable[' + count + '][class_room]" class="form-control">';
+        row += '<option value="">Select Hall</option>';
+        $.each(exam_hall, function (key, val) {
+            row += '<option value="' + val.id + '">' + val.hall_no + '</option>';
+        });
+        row += '</select>';
+        row += '</div><button type="button" class=" btn btn-danger removeTR"><i class="fas fa-times"></i> </button></td>';
+        // row += '<td width="20%"><div class="input-group">';
+        // row += '<input type="text"  name="timetable[' + count + '][class_room]" value="" class="form-control" >';
+        // row += '<button type="button" class=" btn btn-danger removeTR"><i class="fas fa-times"></i> </button>';
+        // row += '</div></td>';
         row += '</tr>';
 
         count++;
@@ -256,6 +296,7 @@ $(function () {
         // return row;
 
         $("#timetable_body").append(row);
+        $('.select2-multiple').select2();
     }
 
 });

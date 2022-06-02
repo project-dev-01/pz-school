@@ -14,6 +14,22 @@ $(function () {
         autoclose: true,
 
     });
+    //
+    function selectRefresh() {
+        $('.main .select2').select2({
+            //-^^^^^^^^--- update here
+            tags: true,
+            placeholder: "Select an Option",
+            allowClear: true,
+            width: '100%'
+        });
+    }
+    $('.add').click(function () {
+        $('.main').append($('.new-wrap').html());
+        selectRefresh();
+    });
+    selectRefresh();
+
     // skipped employee bank details
     $("#skip_bank_details").on("change", function () {
         // alert($(this).is(":checked"));
@@ -215,10 +231,11 @@ $(function () {
             formData.append('post_code', $('#postCode').val());
             // Attach file
             formData.append('photo', $('input[type=file]')[0].files[0]);
+
             // for (var pair of formData.entries()) {
             //     console.log(pair[0] + ', ' + pair[1]);
             // }
-            var form = this;
+            // return false;
             $("#overlay").fadeIn(300);
 
             $.ajax({
@@ -393,6 +410,9 @@ $(function () {
         processing: true,
         info: true,
         ajax: employeeList,
+        // "paging": false,
+        "searching": false,
+        "ordering": false,
         "pageLength": 5,
         "aLengthMenu": [
             [5, 10, 25, 50, -1],

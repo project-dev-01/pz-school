@@ -116,10 +116,9 @@
 
     </div>
     <!-- end row -->
-
-
     <div class="row" id="timetable" style="display:none;">
         <div class="col-xl-12 addTimetableForm">
+
             <div class="card">
                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                     <li class="nav-item">
@@ -177,7 +176,17 @@
                                                             <input class="form-control" type="time" name="timetable[0][time_end]">
                                                         </div>
                                                     </td>
-                                                    <td width="20%"> <input type="remarks" name="timetable[0][class_room]" class="form-control"></td>
+                                                    <td width="20%">
+                                                        <div class="form-group">
+                                                            <select class="form-control" name="timetable[0][class_room]">
+                                                                @forelse($hall_list as $list)
+                                                                <option value="{{$list['id']}}">{{ $list['hall_no'] }}</option>
+                                                                @empty
+                                                                @endforelse
+                                                            </select>
+                                                        </div><button type="button" class=" btn btn-danger removeTR"><i class="fas fa-times"></i> </button>
+
+                                                    </td>
 
                                                 </tr>
                                             </tbody>
