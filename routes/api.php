@@ -205,6 +205,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('exam_timetable/list', [ApiController::class, 'listExamTimetable']);
     Route::post('exam_timetable/get', [ApiController::class, 'getExamTimetable']);
 
+    
+    Route::get('relation/list', [ApiController::class, 'getRelationList']);
     // get roles
     Route::post('roles/list', [ApiController::class, 'getRoles']);
 

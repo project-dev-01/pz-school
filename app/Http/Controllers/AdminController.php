@@ -820,6 +820,7 @@ class AdminController extends Controller
         $parent = Helper::GetMethod(config('constants.api.parent_list'));
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $races = Helper::GetMethod(config('constants.api.races'));
+        $relation = Helper::GetMethod(config('constants.api.relation_list'));
         // dd($gethostel);
         return view(
             'admin.admission.index',
@@ -832,6 +833,7 @@ class AdminController extends Controller
                 'parent' => $parent['data'],
                 'religion' => $religion['data'],
                 'races' => $races['data'],
+                'relation' => $relation['data'],
             ]
         );
         // return view('admin.admission.index');
@@ -3193,6 +3195,7 @@ class AdminController extends Controller
         $parent = Helper::GetMethod(config('constants.api.parent_list'));
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $races = Helper::GetMethod(config('constants.api.races'));
+        $relation = Helper::GetMethod(config('constants.api.relation_list'));
 
         $prev = json_decode($student['data']['student']['previous_details']);
         $student['data']['student']['school_name'] = $prev->school_name;
@@ -3213,6 +3216,7 @@ class AdminController extends Controller
                 'room' => $student['data']['room'],
                 'religion' => $religion['data'],
                 'races' => $races['data'],
+                'relation' => $relation['data'],
 
             ]
         );
@@ -3419,7 +3423,6 @@ class AdminController extends Controller
     }
     public function updateParent(Request $request)
     {
-        // dd($request);
         $base64 = "";
         $extension = "";
         $file = $request->file('photo');

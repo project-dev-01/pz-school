@@ -355,7 +355,8 @@ return [
         'student_details' => $url.'/student/student-details',
         'student_update' => $url.'/student/update',
         'student_delete' => $url.'/student/delete',
-
+        
+        'relation_list' => $url.'/relation/list',
         //Parent Url
         'parent_add' => $url.'/parent/add',
         'parent_list' => $url.'/parent/list',

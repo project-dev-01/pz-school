@@ -1,87 +1,8 @@
 @extends('layouts.admin-layout')
 @section('title','Edit Parent')
 @section('css')
-<style>
-    .containers-img {
-        height: 270px;
-        position: relative;
-        max-width: 320px;
-        /* margin: auto; */
-    }
-
-    .containers-img .imageWrapper {
-        border: 3px solid #888;
-        width: 70%;
-        padding-bottom: 70%;
-        border-radius: 50%;
-        overflow: hidden;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .containers-img .imageWrapper img {
-        height: 105%;
-        width: initial;
-        max-height: 100%;
-        max-width: initial;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .file-upload {
-        position: relative;
-        overflow: hidden;
-        margin: 10px;
-    }
-
-    .file-upload {
-        position: relative;
-        overflow: hidden;
-        margin: 10px;
-        width: 100%;
-        max-width: 150px;
-        text-align: center;
-        /* color: #fff; */
-        font-size: 1.2em;
-        background: transparent;
-        border: 2px solid #888;
-        padding: 0.85em 1em;
-        display: inline;
-        -ms-transition: all 0.2s ease;
-        -webkit-transition: all 0.2s ease;
-        transition: all 0.2s ease;
-    }
-
-    /* .file-upload:hover {
-        background: #999;
-        -webkit-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
-        -moz-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
-        box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
-    } */
-
-    .file-upload input.file-input {
-        position: absolute;
-        top: 0;
-        right: 0;
-        margin: 0;
-        padding: 0;
-        font-size: 20px;
-        cursor: pointer;
-        opacity: 0;
-        filter: alpha(opacity=0);
-        height: 100%;
-    }
-    .profile {
-        
-    padding: 5px 0 0;
-    border-top: 1px dotted #ddd;
-    text-align: right;
-    }
-</style>
+<link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
+<link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
 @endsection
 @section('content')
 <div class="container-fluid">
@@ -210,6 +131,17 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-12">
+                                            <div class="col-lg-3">
+                                                <div class="mt-3">
+                                                    <input type="hidden" name="old_photo" id="oldPhoto" value="{{ $parent['photo'] }}" />
+                                                    <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ $parent['photo'] && asset('users/images/').'/'.$parent['photo'] ? asset('users/images/').'/'.$parent['photo'] : asset('images/users/default.jpg') }}" />
+                                                    <p class="text-muted text-center mt-2 mb-0">Photo</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <!-- <div class="row">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="photo">Profile Picture</label>
                                                 <div class="containers-img">
@@ -227,7 +159,7 @@
                                                 </button>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
@@ -288,7 +220,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="nric">NRIC</label>
+                                                <label for="nric">NRIC Number</label>
                                                 <input type="text"  class="form-control" value="{{$parent['nric']}}" name="nric" data-parsley-trigger="change" >
                                             </div>
                                         </div>
@@ -382,7 +314,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="state">State</label>
+                                                <label for="state">State/Province</label>
                                                 <input type="text"  class="form-control" value="{{$parent['state']}}" name="state" data-parsley-trigger="change" >
                                             </div>
                                         </div>
@@ -409,13 +341,13 @@
                                         </div> -->
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="address">Address Line 1(Street address)</label>
+                                                <label for="address">Address 1</label>
                                                 <input class="form-control" name="address" id="address" value="{{$parent['address']}}">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="address_2">Address Line 2</label>
+                                                <label for="address_2">Address 2</label>
                                                 <input class="form-control" name="address_2" id="address_2" value="{{$parent['address_2']}}">
                                             </div>
                                         </div>
@@ -581,5 +513,10 @@
     var roomByHostel = "{{ route('admin.room_by_hostel') }}";
     var indexAdmission = "{{ route('admin.admission') }}";
 </script>
+
+<script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
+<script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
+<script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
+<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
 <script src="{{ asset('js/custom/parent.js') }}"></script>
 @endsection

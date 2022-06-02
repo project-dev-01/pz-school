@@ -1,81 +1,8 @@
 @extends('layouts.admin-layout')
 @section('title','Parent')
 @section('css')
-<style>
-    .containers-img {
-        height: 270px;
-        position: relative;
-        max-width: 320px;
-        /* margin: auto; */
-    }
-
-    .containers-img .imageWrapper {
-        border: 3px solid #888;
-        width: 70%;
-        padding-bottom: 70%;
-        border-radius: 50%;
-        overflow: hidden;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .containers-img .imageWrapper img {
-        height: 105%;
-        width: initial;
-        max-height: 100%;
-        max-width: initial;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .file-upload {
-        position: relative;
-        overflow: hidden;
-        margin: 10px;
-    }
-
-    .file-upload {
-        position: relative;
-        overflow: hidden;
-        margin: 10px;
-        width: 100%;
-        max-width: 150px;
-        text-align: center;
-        /* color: #fff; */
-        font-size: 1.2em;
-        background: transparent;
-        border: 2px solid #888;
-        padding: 0.85em 1em;
-        display: inline;
-        -ms-transition: all 0.2s ease;
-        -webkit-transition: all 0.2s ease;
-        transition: all 0.2s ease;
-    }
-
-    /* .file-upload:hover {
-        background: #999;
-        -webkit-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
-        -moz-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
-        box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
-    } */
-
-    .file-upload input.file-input {
-        position: absolute;
-        top: 0;
-        right: 0;
-        margin: 0;
-        padding: 0;
-        font-size: 20px;
-        cursor: pointer;
-        opacity: 0;
-        filter: alpha(opacity=0);
-        height: 100%;
-    }
-</style>
+<link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
+<link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -106,7 +33,18 @@
                         </li>
                     </ul>
                     <div class="card-body">
+                        
                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-lg-3">
+                                    <div class="mt-3">
+                                        <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ asset('images/700x500.png') }}" />
+                                        <p class="text-muted text-center mt-2 mb-0">Photo</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        <!-- <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="photo">Profile Picture</label>
@@ -123,7 +61,7 @@
 
 
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -184,7 +122,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="nric">NRIC</label>
+                                    <label for="nric">NRIC Number</label>
                                     <input type="text"  class="form-control" name="nric" data-parsley-trigger="change" >
                                 </div>
                             </div>
@@ -276,13 +214,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="address">Address Line 1(Street address)</label>
+                                    <label for="address">Address 1</label>
                                     <input class="form-control" name="address" id="address">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="address_2">Address Line 2</label>
+                                    <label for="address_2">Address 2</label>
                                     <input class="form-control" name="address_2" id="address_2">
                                 </div>
                             </div>
@@ -414,69 +352,9 @@
     var indexParent = "{{ route('admin.parent') }}";
 </script>
 
-<script>
-    $(document).on("change", ".uploadProfileInput", function() {
-        var triggerInput = this;
-        var currentImg = $(this).closest(".pic-holder").find(".pic").attr("src");
-        var holder = $(this).closest(".pic-holder");
-        var wrapper = $(this).closest(".profile-pic-wrapper");
-        $(wrapper).find('[role="alert"]').remove();
-        triggerInput.blur();
-        var files = !!this.files ? this.files : [];
-        if (!files.length || !window.FileReader) {
-            return;
-        }
-        if (/^image/.test(files[0].type)) {
-            // only image file
-            var reader = new FileReader(); // instance of the FileReader
-            reader.readAsDataURL(files[0]); // read the local file
-
-            reader.onloadend = function() {
-                $(holder).addClass("uploadInProgress");
-                $(holder).find(".pic").attr("src", this.result);
-                $(holder).append(
-                    '<div class="upload-loader"><div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div></div>'
-                );
-
-                // Dummy timeout; call API or AJAX below
-                setTimeout(() => {
-                    $(holder).removeClass("uploadInProgress");
-                    $(holder).find(".upload-loader").remove();
-                    // If upload successful
-                    if (Math.random() < 0.9) {
-                        $(wrapper).append(
-                            '<div class="snackbar show" role="alert"><i class="fa fa-check-circle text-success"></i> Profile image updated successfully</div>'
-                        );
-
-                        // Clear input after upload
-                        $(triggerInput).val("");
-
-                        setTimeout(() => {
-                            $(wrapper).find('[role="alert"]').remove();
-                        }, 3000);
-                    } else {
-                        $(holder).find(".pic").attr("src", currentImg);
-                        $(wrapper).append(
-                            '<div class="snackbar show" role="alert"><i class="fa fa-times-circle text-danger"></i> There is an error while uploading! Please try again later.</div>'
-                        );
-
-                        // Clear input after upload
-                        $(triggerInput).val("");
-                        setTimeout(() => {
-                            $(wrapper).find('[role="alert"]').remove();
-                        }, 3000);
-                    }
-                }, 1500);
-            };
-        } else {
-            $(wrapper).append(
-                '<div class="alert alert-danger d-inline-block p-2 small" role="alert">Please choose the valid image.</div>'
-            );
-            setTimeout(() => {
-                $(wrapper).find('role="alert"').remove();
-            }, 3000);
-        }
-    });
-</script>
+<script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
+<script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
+<script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
+<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
 <script src="{{ asset('js/custom/parent.js') }}"></script>
 @endsection

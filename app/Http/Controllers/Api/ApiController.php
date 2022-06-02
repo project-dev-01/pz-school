@@ -9370,7 +9370,7 @@ class ApiController extends BaseController
                 $fileName = "";
                 if ($request->photo) {
                     $extension = $request->file_extension;
-                    $fileName = 'UIMG_' . date('Ymd') . uniqid() . $extension;
+                    $fileName = 'UIMG_' . date('Ymd') . uniqid() . '.' . $extension;
 
                     $base64 = base64_decode($request->photo);
                     $file = base_path() . '/public/users/images/' . $fileName;
@@ -10479,7 +10479,7 @@ class ApiController extends BaseController
 
                     $extension = $request->file_extension;
 
-                    $fileName = 'UIMG_' . date('Ymd') . uniqid() . $extension;
+                    $fileName = 'UIMG_' . date('Ymd') . uniqid() . '.' . $extension;
 
                     // return $fileName;
                     $path = '/public/users/images/';
@@ -10728,7 +10728,7 @@ class ApiController extends BaseController
                 if ($request->photo) {
                     $extension = $request->file_extension;
 
-                    $fileName = 'UIMG_' . date('Ymd') . uniqid() . $extension;
+                    $fileName = 'UIMG_' . date('Ymd') . uniqid() . '.' . $extension;
 
                     // return $fileName;
                     $path = '/public/users/images/';
@@ -10911,7 +10911,7 @@ class ApiController extends BaseController
 
                     $extension = $request->file_extension;
 
-                    $fileName = 'UIMG_' . date('Ymd') . uniqid() . $extension;
+                    $fileName = 'UIMG_' . date('Ymd') . uniqid() . '.' . $extension;
 
                     // return $fileName;
                     $path = '/public/users/images/';
@@ -13093,5 +13093,24 @@ class ApiController extends BaseController
             ->whereNotNull('sa.status')
             ->get();
         return $staffList;
+    }
+
+    // getRelationList
+    public function getRelationList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $relationDetails = $conn->table('relations')->get();
+            return $this->successResponse($relationDetails, 'Relation record fetch successfully');
+        }
     }
 }
