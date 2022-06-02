@@ -20,17 +20,15 @@
 
     <div class="row">
         <div class="col-xl-12 addEmployeeForm">
-            <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
-                    <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span data-feather="" class="icon-dual" id="span-parent"></span>Employee Details
-                            <h4>
-                    </li>
-                </ul>
-                <div class="card-body">
-                    <form id="addEmployeeForm" method="post" action="{{ route('admin.employee.add') }}" enctype="multipart/form-data" autocomplete="off">
-                        @csrf
+            <form id="addEmployeeForm" method="post" action="{{ route('admin.employee.add') }}" enctype="multipart/form-data" autocomplete="off">
+                @csrf
+                <div class="card">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <h4 class="navv">Personal Details<h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="col-lg-3">
@@ -41,13 +39,16 @@
                                 </div>
                             </div>
                         </div>
+<<<<<<< HEAD
 
                         <span class="fas fa-user-check  " id="span-parent"></span>
                         <span class="header-title mb-3" id="span-parent">Personal details
                             <hr id="hr">
                         </span>
+=======
+>>>>>>> bc4389bd4a0e190f0e9d5f54e152b1f693dbb99b
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="first_name"> First name<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
@@ -56,11 +57,11 @@
                                                 <span class="fas fa-user-graduate"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control shortNameChange" name="first_name" id="firstName">
+                                        <input type="text" class="form-control shortNameChange" name="first_name" placeholder="Ahmad Ali" id="firstName">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="last_name"> Last name</label>
                                     <div class="input-group input-group-merge">
@@ -69,11 +70,11 @@
                                                 <span class="fas fa-user-graduate"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control shortNameChange" name="last_name" id="lastName">
+                                        <input type="text" class="form-control shortNameChange" name="last_name" placeholder="Ali" id="lastName">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="gender">Gender</label>
                                     <select class="form-control" name="gender" id="gender">
@@ -83,16 +84,15 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="short_name">Short name</label>
-                                    <input type="text" class="form-control" name="short_name" id="shortName">
-                                </div>
-                            </div>
-
                         </div>
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="short_name">Short name</label>
+                                    <input type="text" class="form-control" name="short_name" placeholder="aa" id="shortName">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="religion">Religion</label>
                                     <select class="form-control" name="religion" id="religion">
@@ -104,7 +104,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="race">Race</label>
                                     <select class="form-control" name="race" id="addRace">
@@ -116,20 +116,20 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="Passport">Passport</label>
-                                    <input type="text" class="form-control" name="passport" id="Passport">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="nric_number">NRIC Number</label>
-                                    <input type="text" class="form-control" name="nric_number" id="nricNumber">
-                                </div>
-                            </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="Passport">Passport</label>
+                                    <input type="text" class="form-control" placeholder="passport number" name="passport" id="Passport">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="nric_number">NRIC Number</label>
+                                    <input type="text" class="form-control" name="nric_number" placeholder="nric number" id="nricNumber">
+                                </div>
+                            </div>
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="birthday">Date Of Birth</label>
@@ -139,10 +139,12 @@
                                                 <span class="fas fa-birthday-cake"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="birthday" id="empDOB">
+                                        <input type="text" class="form-control" name="birthday" placeholder="DD/MM/YYYY" id="empDOB">
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-4">
                                 <label for="mobile_no">Mobile No</label>
                                 <div class="input-group input-group-merge">
@@ -151,7 +153,7 @@
                                             <span class="fas fa-phone-volume"></span>
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control" name="mobile_no" id="mobile_no">
+                                    <input type="text" class="form-control" name="mobile_no" placeholder="(xx)-00000-0000" id="mobile_no">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -167,51 +169,56 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="country">Country</label>
-                                    <input type="text" class="form-control" name="country" id="Country">
+                                    <input type="text" class="form-control" placeholder="malaysia" name="country" id="Country">
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="state">State/Province</label>
-                                    <input type="text" class="form-control" name="state" id="State">
+                                    <input type="text" class="form-control" name="state" id="State" placeholder="state">
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="city">City</label>
-                                    <input type="text" class="form-control" name="city" id="City">
+                                    <input type="text" class="form-control" name="city" id="City" placeholder="city">
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="post_code">Zip/Postal code</label>
-                                    <input type="text" class="form-control" name="post_code" id="postCode">
+                                    <input type="text" class="form-control" name="post_code" id="postCode" placeholder="000000">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="present_address">Address 1</label>
-                                    <input class="form-control" name="present_address" id="present_address">
+                                    <label for="present_address">Address Line 1</label>
+                                    <input class="form-control" name="present_address" id="present_address" placeholder="johor">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="permanent_address">Address 2</label>
-                                    <input class="form-control" name="permanent_address" id="permanent_address">
+                                    <label for="permanent_address">Address Line 2</label>
+                                    <input class="form-control" name="permanent_address" id="permanent_address" placeholder="johor">
                                 </div>
                             </div>
                         </div>
-                        <span class="fas fa-user-check  " id="span-parent"></span>
-                        <span class="header-title mb-3" id="span-parent">Employee details
-                            <hr id="hr">
-                        </span>
+                    </div>
+                </div>
+                <div class="card">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <h4 class="navv">Employee Details<h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -233,7 +240,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="joining_date" id="joiningDate">
+                                        <input type="text" class="form-control" name="joining_date" id="joiningDate" placeholder="DD/MM/DDDD">
                                     </div>
                                 </div>
                             </div>
@@ -280,7 +287,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="salary_grade">Salary Grade</label>
-                                    <input type="number" class="form-control" name="salary_grade" id="salaryGrade">
+                                    <input type="text" class="form-control" name="salary_grade" id="salaryGrade" placeholder="Grade">
                                 </div>
                             </div>
                         </div>
@@ -324,13 +331,17 @@
                             </div>
 
                         </div>
-
-                        <span class="fas fa-user-lock " id="span-parent"></span>
-                        <span class="header-title mb-3" id="span-parent"> Login Details
-                            <hr id="hr">
-                        </span>
+                    </div>
+                </div>
+                <div class="card">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <h4 class="navv">Login Details<h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="email">Email<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
@@ -339,11 +350,11 @@
                                                 <span class="far fa-envelope-open"></span>
                                             </div>
                                         </div>
-                                        <input type="email" class="form-control" name="email" id="email">
+                                        <input type="email" class="form-control" name="email" id="email" placeholder="aa@gmail.com">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="password">Password<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
@@ -352,11 +363,11 @@
                                                 <span class="fas fa-unlock"></span>
                                             </div>
                                         </div>
-                                        <input type="password" class="form-control" name="password" id="password">
+                                        <input type="password" class="form-control" name="password" id="password" placeholder="*********">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="confirm_password">Retype Password<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
@@ -365,15 +376,20 @@
                                                 <span class="fas fa-unlock"></span>
                                             </div>
                                         </div>
-                                        <input type="password" class="form-control" name="confirm_password" id="confirm_password">
+                                        <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="*********">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <span class="fas fa-globe  " id="span-parent"></span>
-                        <span class="header-title mb-3" id="span-parent">Social Links
-                            <hr id="hr">
-                        </span>
+                    </div>
+                </div>
+                <div class="card">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <h4 class="navv">Social Link<h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
@@ -384,7 +400,7 @@
                                                 <span class="fab fa-facebook-f"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="facebook_url" id="facebook_url">
+                                        <input type="text" class="form-control" name="facebook_url" id="facebook_url" placeholder="Fb.com">
                                     </div>
                                 </div>
                             </div>
@@ -397,7 +413,7 @@
                                                 <span class="fab fa-twitter"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="twitter_url" id="twitter_url">
+                                        <input type="text" class="form-control" name="twitter_url" id="twitter_url" placeholder="twitter.com">
                                     </div>
                                 </div>
                             </div>
@@ -410,15 +426,20 @@
                                                 <span class="fab fa-linkedin-in"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="linkedin_url" id="linkedin_url">
+                                        <input type="text" class="form-control" name="linkedin_url" id="linkedin_url" placeholder="linked.com">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <span class="fas fa-briefcase-medical" id="span-parent"></span>
-                        <span class="header-title mb-3" id="span-parent"> Medical History
-                            <hr id="hr">
-                        </span>
+                    </div>
+                </div>
+                <div class="card">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <h4 class="navv">Medical History<h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="skip_medical_history" name="skip_medical_history">
@@ -430,19 +451,19 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="height">Height</label>
-                                        <input type="text" id="height" class="form-control" name="height" data-parsley-trigger="change">
+                                        <input type="text" id="height" class="form-control" name="height" placeholder="150" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="weight">Weight</label>
-                                        <input type="text" id="weight" class="form-control" name="weight" data-parsley-trigger="change">
+                                        <input type="text" id="weight" class="form-control" name="weight" placeholder="60" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="allergy">Allergy</label>
-                                        <input type="text" id="allergy" class="form-control" name="allergy" data-parsley-trigger="change">
+                                        <input type="text" id="allergy" class="form-control" name="allergy" placeholder="allergy" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -463,10 +484,15 @@
                                 </div>
                             </div>
                         </div>
-                        <span class="fas fa-university " id="span-parent"></span>
-                        <span class="header-title mb-3" id="span-parent"> Bank Details
-                            <hr id="hr">
-                        </span>
+                    </div>
+                </div>
+                <div class="card">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <h4 class="navv">Bank Details<h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="skip_bank_details" name="skip_bank_details">
@@ -478,19 +504,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="bank_name">Bank Name<span class="text-danger">*</span></label>
-                                        <input type="text" id="bank_name" class="form-control" name="bank_name" data-parsley-trigger="change">
+                                        <input type="text" id="bank_name" class="form-control" name="bank_name" placeholder="bank name" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="holder_name">Account Holder<span class="text-danger">*</span></label>
-                                        <input type="text" id="holder_name" class="form-control" name="holder_name" data-parsley-trigger="change">
+                                        <input type="text" id="holder_name" class="form-control" name="holder_name" placeholder="Ali" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="bank_branch">Bank Branch<span class="text-danger">*</span></label>
-                                        <input type="text" id="bank_branch" class="form-control" name="bank_branch" data-parsley-trigger="change">
+                                        <input type="text" id="bank_branch" class="form-control" name="bank_branch" placeholder="branch name" data-parsley-trigger="change">
                                     </div>
                                 </div>
                             </div>
@@ -498,19 +524,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="bank_address">Bank Address<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="bank_address" name="bank_address" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" id="bank_address" name="bank_address" placeholder="address" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="ifsc_code">IFSC Code<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="ifsc_code" name="ifsc_code" aria-describedby="">
+                                        <input type="text" class="form-control" id="ifsc_code" name="ifsc_code" placeholder="code" aria-describedby="">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="">Account No<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="account_no" name="account_no" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" id="account_no" name="account_no" placeholder="acc-no" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -524,18 +550,12 @@
                             Cancel
                         </button>-->
                         </div>
-                    </form>
-
-
-                </div> <!-- end card-body -->
-            </div> <!-- end card-->
+                    </div> <!-- end card-body -->
+                </div> <!-- end card-->
+            </form>
         </div> <!-- end col -->
-
     </div>
     <!-- end row -->
-
-
-
 </div> <!-- container -->
 @endsection
 @section('scripts')

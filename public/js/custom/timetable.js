@@ -106,10 +106,10 @@ $(function () {
                         var subject = data.data.subject;
                         var teacher = data.data.teacher;
                         var exam_hall = data.data.exam_hall;
-                        
+
 
                         if (data.data.timetable == "") {
-                            callout(subject, teacher,exam_hall);
+                            callout(subject, teacher, exam_hall);
                         } else {
                             var cd = data.data.length;
                             count = cd;
@@ -228,12 +228,35 @@ $(function () {
                 var subject = res.data.subject;
                 var teacher = res.data.teacher;
                 var exam_hall = res.data.exam_hall;
-                callout(subject, teacher,exam_hall);
+                callout(subject, teacher, exam_hall);
+            }
+        }, 'json');
+    });
+    $(document).on('change', ".subByTeacher", function () {
+
+        var teacher_id = $(this).data('id');
+        var class_id = $("#form_class_id").val();
+        var section_id = $("#form_section_id").val();
+        console.log(teacher_id);
+        console.log(class_id);
+        console.log(section_id);
+        $.post(teacherSubjectUrl, {
+            token: token,
+            branch_id: class_id,
+            class_id: branchID,
+            section_id: section_id,
+            teacher_id: teacher_id
+        }, function (res) {
+            console.log("------------")
+            console.log(res)
+            if (res.code == 200) {
+
             }
         }, 'json');
     });
 
-    function callout(subject, teacher,exam_hall) {
+
+    function callout(subject, teacher, exam_hall) {
         console.log("sdfsdfsdfsdfdsf");
 
         // let i = 0;

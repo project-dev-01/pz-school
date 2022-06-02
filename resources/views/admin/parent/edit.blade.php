@@ -245,19 +245,6 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
-                                                <label for="email">Email<span class="text-danger">*</span></label>
-                                                <div class="input-group input-group-merge">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <span class="far fa-envelope-open"></span>
-                                                        </div>
-                                                    </div>
-                                                    <input type="text" class="form-control" value="{{$parent['email']}}" name="email" aria-describedby="inputGroupPrepend" >
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group mb-3">
                                                 <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
@@ -269,16 +256,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                    </div>
-                                    <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="education">Education</label>
                                                 <input type="text"  class="form-control" value="{{$parent['education']}}" name="education" data-parsley-trigger="change" >
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="occupation">Occupation<span class="text-danger">*</span></label>
@@ -298,14 +283,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="country">Country</label>
                                                 <input type="text"  class="form-control" value="{{$parent['country']}}" name="country" data-parsley-trigger="change" >
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="city">City</label>
@@ -318,37 +303,61 @@
                                                 <input type="text"  class="form-control" value="{{$parent['state']}}" name="state" data-parsley-trigger="change" >
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="post_code">Zip/Postal Code</label>
                                                 <input type="text"  class="form-control" value="{{$parent['post_code']}}" name="post_code" data-parsley-trigger="change" >
                                             </div>
                                         </div>
-                                        <!-- <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="document">Photo</label>
-                                                <div class="col-12">
-                                                        <input type="file"  class="custom-file-input" name="photo">
-                                                        <label class="custom-file-label" for="document">Choose file</label>
-                                                        @if($parent['photo'])
-                                                        <a target="_blank"  href="{{asset('users/images/')}}/{{$parent['photo']}}" alt="your Photo">Photo Preview</a>
-                                                        @endif
-                                                        <input type="hidden" name="old_photo" value="{{$parent['photo']}}">
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                        <div class="col-md-4">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="address">Address 1</label>
                                                 <input class="form-control" name="address" id="address" value="{{$parent['address']}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="address_2">Address 2</label>
                                                 <input class="form-control" name="address_2" id="address_2" value="{{$parent['address_2']}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                                    <li class="nav-item">
+                                        <h4 class="nav-link">
+                                            Login Details
+                                        <h4>
+                                    </li>
+                                </ul>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group mb-3">
+                                                <label for="email">Email<span class="text-danger">*</span></label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="far fa-envelope-open"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" value="{{$parent['email']}}" name="email" aria-describedby="inputGroupPrepend" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <div class="form-group">
+                                                <label for="email">Authentication</label>
+                                                @if($employee['status'] == "0")
+                                                    <div class="dark fas fa-lock-open mb-2" id="edit_authentication"></div>
+                                                @else
+                                                    <div class="dark fas fa-lock mb-2" id="edit_authentication"></div>
+                                                @endif
+                                                <input id="edit_status" name="status" type="checkbox" value="{{$employee['status']}}" style="display:none">
                                             </div>
                                         </div>
                                     </div>

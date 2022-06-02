@@ -232,6 +232,8 @@
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var subjectByClass = "{{ route('admin.timetable.subject') }}";
     var timetableList = "{{ route('admin.timetable') }}";
+    var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";
+
 </script>
 <script src="{{ asset('js/custom/timetable.js') }}"></script>
 @endsection

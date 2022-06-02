@@ -3,6 +3,7 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
 <link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
+<style></style>
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -309,7 +310,9 @@
                     </ul>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
                                 <div class="form-group mb-3">
                                     <label for="email">Email<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
@@ -346,6 +349,13 @@
                                         </div>
                                         <input type="password" name="txt_retype_pwd" class="form-control" id="txt_retype_pwd" placeholder="*********" aria-describedby="inputGroupPrepend" >
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="email">Authentication</label>
+                                    <div class="dark fas fa-lock-open" id="authentication"></div>
+                                    <input id="status" name="status" type="checkbox">
                                 </div>
                             </div>
                         </div>

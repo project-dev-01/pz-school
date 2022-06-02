@@ -1566,7 +1566,7 @@ class AdminController extends Controller
                     $response .=  '</td>';
                     $response .=  '<td width="20%">';
                     $response .=  '<div class="form-group">';
-                    $response .=  '<select class="form-control subject"  name="timetable[' . $row . '][subject]" ' . $disabled . '>';
+                    $response .=  '<select class="form-control subject subByTeacher" data-id="' . $row . '" name="timetable[' . $row . '][subject]" ' . $disabled . '>';
                     $response .=  '<option value="">Select Subject</option>';
                     $response .=  $subject;
                     $response .=  '</select>';
@@ -1574,7 +1574,7 @@ class AdminController extends Controller
                     $response .=  '</td>';
                     $response .=  '<td width="20%"  > ';
                     $response .=  '<div class="form-group">';
-                    $response .=  '<select  class="form-control select2-multiple teacher"  data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="timetable[' . $row . '][teacher][]" ' . $disabled . '>';
+                    $response .=  '<select  class="form-control select2-multiple teacher" id="teacher' . $row . '" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="timetable[' . $row . '][teacher][]" ' . $disabled . '>';
                     $response .=  '<option value="">Select Teacher</option>';
                     $response .=  $teacher;
                     $response .=  '</select>';

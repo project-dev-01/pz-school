@@ -232,13 +232,13 @@
                         <li class="nav-item">
                             <h4 class="nav-link">
                                 Login Details
-                                <h4>
+                            <h4>
                         </li>
                     </ul>
                     <div class="card-body">
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="email">Email<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
@@ -275,6 +275,13 @@
                                         </div>
                                         <input type="password" class="form-control"  name="confirm_password" aria-describedby="inputGroupPrepend" >
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="email">Authentication</label>
+                                    <div class="dark fas fa-lock-open" id="authentication"></div>
+                                    <input id="status" name="status" type="checkbox">
                                 </div>
                             </div>
                         </div>

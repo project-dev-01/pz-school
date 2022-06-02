@@ -191,19 +191,6 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="email">Email<span class="text-danger">*</span></label>
-                                                <div class="input-group input-group-merge">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <span class="far fa-envelope-open"></span>
-                                                        </div>
-                                                    </div>
-                                                    <input type="text" name="txt_emailid" class="form-control" id="txt_emailid" placeholder="" aria-describedby="inputGroupPrepend" value="{{$student['email']}}">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
                                                 <label for="blooddgrp">Blood Group</label>
                                                 <select id="blooddgrp" name="blooddgrp" class="form-control">
                                                     <option value="">Select Blood Group</option>
@@ -231,15 +218,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="txt_nric">NRIC Number</label>
                                                 <input type="text" maxlength="50" id="txt_nric" class="form-control alloptions" value="{{$student['nric']}}" placeholder="Identifaction Number" name="txt_nric" data-parsley-trigger="change">
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="txt_religion">Religion</label>
@@ -264,9 +250,6 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
                                                 <label for="">Contact Number<span class="text-danger">*</span></label>
@@ -280,6 +263,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="drp_country">Country</label>
@@ -292,14 +278,14 @@
                                                 <input type="" id="drp_state" class="form-control" name="drp_state" data-parsley-trigger="change" value="{{$student['state']}}">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="drp_city">City</label>
                                                 <input type="" id="drp_city" class="form-control" name="drp_city" data-parsley-trigger="change" value="{{$student['city']}}">
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="drp_post_code">Zip/Postal Code</label>
@@ -425,6 +411,43 @@
                                                         <option value="{{$sem['id']}}" {{$student['semester_id'] == $sem['id'] ? "Selected" : "" }}>{{$sem['name']}}</option>
                                                     @endforeach
                                                 </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <h4 class="navv">Student Login Details
+                                        <h4>
+                                    </li>
+                                </ul>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label for="email">Email<span class="text-danger">*</span></label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="far fa-envelope-open"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="txt_emailid" class="form-control" id="txt_emailid" placeholder="" aria-describedby="inputGroupPrepend" value="{{$student['email']}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <div class="form-group">
+                                                <label for="email">Authentication</label>
+                                                @if($employee['status'] == "0")
+                                                    <div class="dark fas fa-lock-open mb-2" id="edit_authentication"></div>
+                                                @else
+                                                    <div class="dark fas fa-lock mb-2" id="edit_authentication"></div>
+                                                @endif
+                                                <input id="edit_status" name="status" type="checkbox" value="{{$employee['status']}}" style="display:none">
                                             </div>
                                         </div>
                                     </div>

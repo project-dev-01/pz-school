@@ -19,6 +19,7 @@ class CreateStudentsTable extends Migration
             $table->integer('father_id')->nullable();
             $table->integer('mother_id')->nullable();
             $table->integer('guardian_id')->nullable();
+            $table->integer('relation')->nullable();
             $table->string('year');
             $table->string('register_no');
             $table->string('roll_no');
@@ -28,13 +29,15 @@ class CreateStudentsTable extends Migration
             $table->string('gender')->nullable();
             $table->string('birthday')->nullable();
             $table->string('religion')->nullable();
-            $table->string('caste')->nullable();
+            $table->string('race')->nullable();
             $table->string('blood_group')->nullable();
             $table->string('mother_tongue')->nullable();
             $table->text('current_address')->nullable();
             $table->text('permanent_address')->nullable();
-            $table->string('city')->nullable();
+            $table->string('country')->nullable();
             $table->string('state')->nullable();
+            $table->string('city')->nullable();
+            $table->string('post_code')->nullable();
             $table->string('mobile_no');
             $table->integer('category_id');
             $table->string('email');
@@ -43,7 +46,8 @@ class CreateStudentsTable extends Migration
             $table->integer('hostel_id')->nullable();
             $table->integer('room_id')->nullable();
             $table->text('previous_details')->nullable();
-            $table->string('photo')->nullable();
+            $table->string('photo')->nullable();    
+            $table->enum('status', ['0', '1']);
             $table->timestamps();
         });
     }

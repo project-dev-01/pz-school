@@ -80,26 +80,26 @@ $(function () {
         }, 'json');
     });
     // change section
-    $('#sectionID').on('change', function () {
-        var section_id = $(this).val();
-        var class_id = $("#changeClassName").val();
-        $("#classroomFilter").find("#subjectID").empty();
-        $("#classroomFilter").find("#subjectID").append('<option value="">Select Subject</option>');
-        $.post(teacherSubjectUrl, {
-            token: token,
-            branch_id: branchID,
-            teacher_id: ref_user_id,
-            class_id: class_id,
-            section_id: section_id,
-            class_id: class_id
-        }, function (res) {
-            if (res.code == 200) {
-                $.each(res.data, function (key, val) {
-                    $("#classroomFilter").find("#subjectID").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
-                });
-            }
-        }, 'json');
-    });
+    // $('#sectionID').on('change', function () {
+    //     var section_id = $(this).val();
+    //     var class_id = $("#changeClassName").val();
+    //     $("#classroomFilter").find("#subjectID").empty();
+    //     $("#classroomFilter").find("#subjectID").append('<option value="">Select Subject</option>');
+    //     $.post(teacherSubjectUrl, {
+    //         token: token,
+    //         branch_id: branchID,
+    //         teacher_id: ref_user_id,
+    //         class_id: class_id,
+    //         section_id: section_id,
+    //         class_id: class_id
+    //     }, function (res) {
+    //         if (res.code == 200) {
+    //             $.each(res.data, function (key, val) {
+    //                 $("#classroomFilter").find("#subjectID").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
+    //             });
+    //         }
+    //     }, 'json');
+    // });
 
     // applyFilter
     // rules validation

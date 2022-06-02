@@ -15,23 +15,29 @@ class CreateParentTable extends Migration
     {
         Schema::create('parent', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('relation');
-            $table->string('father_name')->nullable();
-            $table->string('mother_name')->nullable();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('gender')->nullable();
+            $table->string('date_of_birth')->nullable();
+            $table->string('passport')->nullable();
+            $table->string('nric')->nullable();
+            $table->string('blood_group')->nullable();
             $table->string('occupation');
             $table->string('income')->nullable();
             $table->string('education')->nullable();
             $table->string('email');
             $table->string('mobile_no');
             $table->text('address')->nullable();
+            $table->text('address_2')->nullable();
+            $table->string('country')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
+            $table->string('post_code')->nullable();
             $table->string('photo')->nullable();
             $table->string('facebook_url')->nullable();
             $table->string('linkedin_url')->nullable();
-            $table->string('twitter_url')->nullable();
-            $table->boolean('active')->default('1');
+            $table->string('twitter_url')->nullable();    
+            $table->enum('status', ['0', '1']);
             $table->timestamps();
         });
     }

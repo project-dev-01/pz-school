@@ -464,12 +464,12 @@
 
                         <span class="fas fa-user-lock " id="span-parent"></span>
                         <span class="header-title mb-3" id="span-parent"> Login Details
+                           
                             <hr id="hr">
                         </span>
                         <div class="row">
                             <input type="hidden" value="{{$role['id']}}" class="form-control" name="role_user_id" id="role_user_id">
-
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <div class="form-group mb-3">
                                     <label for="email">Email<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
@@ -482,17 +482,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label for="password">Password</label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-unlock"></span>
-                                            </div>
-                                        </div>
-                                        <input type="password" class="form-control" name="password" id="password">
-                                    </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="email">Authentication</label>
+                                    @if($employee['status'] == "0")
+                                        <div class="dark fas fa-lock-open mb-2" id="edit_authentication"></div>
+                                    @else
+                                        <div class="dark fas fa-lock mb-2" id="edit_authentication"></div>
+                                    @endif
+                                    <input id="edit_status" name="status" type="checkbox" value="{{$employee['status']}}" style="display:none">
                                 </div>
                             </div>
                             <!-- <div class="col-md-3">

@@ -816,7 +816,7 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('admin.timetable.create')}}" class="nav-link {{ (request()->is('super_admin/timetable*')) ? 'active' : '' }}">
-                                    <span>Class Schedule</span>
+                                    <span>Add Schedule</span>
                                 </a>
                             </li>
                             <li>
