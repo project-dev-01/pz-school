@@ -36,7 +36,7 @@
     <div class="row">
         <div class="col-xl-12 timetableForm">
             <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                             Select Ground
@@ -109,7 +109,7 @@
     <div class="row" id="timetablerow" style="display:none;">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <div class="edit-button">
                             <a class="edit_modal btn btn-soft-secondary waves-effect" id="edit-modal" data-toggle="modal" data-target="#editTimetableModal">

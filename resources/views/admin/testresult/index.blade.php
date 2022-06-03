@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                        <ul class="nav nav-tabs" >
                             <li class="nav-item">
                                 <h4 class="nav-link">
                                     <span data-feather="file-text" class="icon-dual" id="span-parent"></span> Test Result
@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div class="card" id="mark_by_subject_card" style="display:none">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                             <span data-feather="book" class="icon-dual" id="span-parent"></span> Marks By Subject
@@ -133,7 +133,7 @@
             </div>
             
             <div class="card" id="subjectdivTableAppend" style="display:none">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                             <span data-feather="book-open" class="icon-dual" id="span-parent"></span>Marks By Subject Division
@@ -158,7 +158,7 @@
                 </div> <!-- end card body-->
             </div>
             <div class="card" id="subject_average_card" style="display:none">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                             <span data-feather="edit" class="icon-dual" id="span-parent"></span>Subject Average
@@ -189,7 +189,7 @@
 
             
             <div class="card" id="scores_by_graph_card" style="visibility: hidden;">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                             <span data-feather="bar-chart-2" class="icon-dual" id="span-parent"></span>Scores by Graph
@@ -229,7 +229,7 @@
                 </div> <!-- end col-->
             </div>
             <div class="card" id="graphs_card" style="display:none">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                             <span data-feather="activity" class="icon-dual" id="span-parent"></span>Graphs

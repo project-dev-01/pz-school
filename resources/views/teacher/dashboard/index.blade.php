@@ -26,7 +26,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="card">
-                                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                                    <ul class="nav nav-tabs" >
                                         <li class="nav-item">
                                             <h4 class="nav-link">
                                                 <span data-feather="home" class="icon-dual" id="span-parent"></span> To Do List
@@ -418,7 +418,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                             <span data-feather="edit" class="icon-dual" id="span-parent"></span> Top Scoreres of class
@@ -438,7 +438,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                             <span data-feather="edit" class="icon-dual" id="span-parent"></span> Top 10 ranking
@@ -529,7 +529,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                             <span data-feather="edit" class="icon-dual" id="span-parent"></span> Bottom 10 ranking
@@ -620,7 +620,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                             <span data-feather="edit" class="icon-dual" id="span-parent"></span> Top 10 Improments
@@ -693,7 +693,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                             <span data-feather="edit" class="icon-dual" id="span-parent"></span> Bottom 10 Deteriorate

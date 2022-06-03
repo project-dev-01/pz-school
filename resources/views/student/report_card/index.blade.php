@@ -70,7 +70,7 @@
     <div class="row" style="display: none;" id="reportlist">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                             Report Card List
@@ -161,7 +161,7 @@
     <div class="row" style="display: none;" id="reportlist_norecords">
     <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                             Report Card List

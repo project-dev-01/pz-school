@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                             <span data-feather="edit" class="icon-dual" id="span-parent"></span> Select Ground
@@ -97,7 +97,7 @@
             <div class="card">
                 <div class="card-body">
 
-                    <div class="row" style="border-bottom: 2px solid #0ABAB5;">
+                    <div class="row" >
                         <div class="col-md-6 text-center">
                             <h4 class="nav-link">
                                 <span data-feather="map" class="icon-dual" id="span-parent"></span> Attendance Report
@@ -132,7 +132,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                             <span data-feather="fa-app-store-ios" class="icon-dual" id="span-parent"></span> Attitude
@@ -162,7 +162,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                             <span data-feather="edit" class="icon-dual" id="span-parent"></span> Short Test
@@ -216,7 +216,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                             <span data-feather="edit" class="icon-dual" id="span-parent"></span> Exam Result

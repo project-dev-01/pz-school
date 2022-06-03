@@ -20,7 +20,7 @@
      <div class="row">
         <div class="col-xl-12">
             <div class="card">
-            <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+            <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                         <span class="fab fa-audible" id="span-parent"></span>
@@ -63,7 +63,7 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-            <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+            <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                         <span class="fas fa-stream" id="span-parent"></span>

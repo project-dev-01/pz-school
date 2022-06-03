@@ -92,7 +92,7 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                             <span data-feather="file-text" class="icon-dual" id="span-parent"></span> Classroom
@@ -294,7 +294,7 @@
             <div class="row classRoomHideSHow" style="display: none;">
                 <div class="col-xl-12">
                     <div class="card">
-                        <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                        <ul class="nav nav-tabs" >
                             <li class="nav-item">
                                 <h4 class="nav-link">
                                     <span data-feather="file-text" class="icon-dual" id="span-parent"></span> Classroom details
@@ -425,7 +425,7 @@
                                     </div><!-- /.modal -->
                                     <form id="updatestudentleave" method="post" action="{{ route('teacher.studentleave.update') }}" autocomplete="off">
                                         <div class="col-md-12">
-                                            <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                                            <ul class="nav nav-tabs" >
                                                 <li class="nav-item">
                                                     <h4 class="nav-link">
                                                         <span data-feather="external-link" class="icon-dual" id="span-parent"></span> Student Leave Request

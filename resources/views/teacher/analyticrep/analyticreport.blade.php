@@ -21,7 +21,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                             <span data-feather="edit" class="icon-dual" id="span-parent"></span> Select Ground
@@ -95,7 +95,7 @@
     <div class="row">
         <div class="col-xl-4 col-md-6">
             <div class="card">
-                <h4 class="nav-link" style="border-bottom: 2px solid #0ABAB5;">
+                <h4 class="nav-link" >
                     <span data-feather="map" class="icon-dual" id="span-parent"></span> Attendance Report
                 </h4>
                 <div class="card-body">
@@ -110,7 +110,7 @@
         </div> <!-- end col-->
         <div class="col-xl-4 col-md-6">
             <div class="card">
-                <h4 class="nav-link" style="border-bottom: 2px solid #0ABAB5;">
+                <h4 class="nav-link" >
                     <span data-feather="book-open" class="icon-dual" id="span-parent"></span> HomeWork
                 </h4>
                 <div class="card-body">
@@ -126,7 +126,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <h4 class="nav-link" style="border-bottom: 2px solid #0ABAB5;">
+                <h4 class="nav-link" >
                     <span data-feather="award" class="icon-dual" id="span-parent"></span> Attitude
                 </h4>
                 <div class="card-body">
@@ -144,7 +144,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
                             <span data-feather="edit" class="icon-dual" id="span-parent"></span> Short Test
@@ -198,7 +198,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <h4 class="nav-link" style="border-bottom: 2px solid #0ABAB5;">
+                <h4 class="nav-link" >
                     <span data-feather="clipboard" class="icon-dual" id="span-parent"></span> Exam Result
                 </h4>
                 <div class="card-body">

@@ -62,7 +62,7 @@
                         </div>
                         <h3 class="text-center" style="color:#596368">Student Application Form</h3>
                     </div>
-                    <hr style="border-bottom: 2px solid #0ABAB5;">
+                    <hr >
                     <div class="card-body">
                         <form>
                             <div class="row">
@@ -166,7 +166,7 @@
                                 </div>
                                 <div class="col-md-6"></div>
                             </div>
-                            <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                            <ul class="nav nav-tabs" >
                                 <li class="nav-item">
                                     <h4 class="nav-link">
                                         <span class="icon-dual" id="span-parent"></span>School Information
@@ -242,7 +242,7 @@
                                 </div>
                                 <div class="col-md-6"></div>
                             </div>
-                            <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                            <ul class="nav nav-tabs" >
                                 <li class="nav-item">
                                     <h4 class="nav-link">
                                         <span class="icon-dual" id="span-parent"></span>Parent /Guardian's Information
@@ -341,7 +341,7 @@
                                 </div>
                             </div>
                             <hr>
-                            <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                            <ul class="nav nav-tabs" >
                                 <li class="nav-item">
                                     <h4 class="nav-link">
                                         <span class="icon-dual" id="span-parent"></span>Emergency Contact Details

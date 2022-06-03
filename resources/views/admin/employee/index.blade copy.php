@@ -20,7 +20,7 @@
                 @csrf
 
                 <div class="card">
-                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <ul class="nav nav-tabs" >
                         <li class="nav-item">
                             <h4 class="nav-link">
                                 <span data-feather="" class="icon-dual" id="span-parent"></span>Employee Details
@@ -158,7 +158,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <ul class="nav nav-tabs" >
                         <li class="nav-item">
                             <h4 class="nav-link">
                                 <span data-feather="" class="icon-dual" id="span-parent"></span>Employee Details
@@ -246,7 +246,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <ul class="nav nav-tabs" >
                         <li class="nav-item">
                             <h4 class="nav-link">
                                 <span data-feather="" class="icon-dual" id="span-parent"></span>Login Details
@@ -298,7 +298,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <ul class="nav nav-tabs" >
                         <li class="nav-item">
                             <h4 class="nav-link">
                                 <span data-feather="" class="icon-dual" id="span-parent"></span>Social Links
@@ -350,7 +350,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <ul class="nav nav-tabs" >
                         <li class="nav-item">
                             <h4 class="nav-link">
                                 <span data-feather="" class="icon-dual" id="span-parent"></span>Bank Details

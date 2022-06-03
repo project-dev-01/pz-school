@@ -17,7 +17,7 @@ extends('layouts.admin-layout')
             <form id="addadmission" method="post" action="{{ route('admin.admission.add') }}" enctype="multipart/form-data" autocomplete="off">
                 @csrf
                 <div class="card">
-                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <ul class="nav nav-tabs" >
                         <li class="nav-item">
                             <h4 class="nav-link">
                                 <span data-feather="" class="icon-dual" id="span-parent"></span>Academic Details
@@ -124,7 +124,7 @@ extends('layouts.admin-layout')
                     </div>
                 </div>
                 <div class="card">
-                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <ul class="nav nav-tabs" >
                         <li class="nav-item">
                             <h4 class="nav-link">
                                 <span data-feather="" class="icon-dual" id="span-parent"></span>Student Details
@@ -289,7 +289,7 @@ extends('layouts.admin-layout')
                     </div>
                 </div>
                 <div class="card">
-                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <ul class="nav nav-tabs" >
                         <li class="nav-item">
                             <h4 class="nav-link">
                                 <span data-feather="" class="icon-dual" id="span-parent"></span>Login Details
@@ -341,7 +341,7 @@ extends('layouts.admin-layout')
                     </div>
                 </div>
                 <div class="card">
-                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <ul class="nav nav-tabs" >
                         <li class="nav-item">
                             <h4 class="nav-link">
                                 <span data-feather="" class="icon-dual" id="span-parent"></span>Guardian Details
@@ -500,7 +500,7 @@ extends('layouts.admin-layout')
                     </div>
                 </div>
                 <div class="card">
-                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <ul class="nav nav-tabs" >
                         <li class="nav-item">
                             <h4 class="nav-link">
                                 <span data-feather="" class="icon-dual" id="span-parent"></span>Transport Details
@@ -534,7 +534,7 @@ extends('layouts.admin-layout')
                     </div>
                 </div>
                 <div class="card">
-                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <ul class="nav nav-tabs" >
                         <li class="nav-item">
                             <h4 class="nav-link">
                                 <span data-feather="" class="icon-dual" id="span-parent"></span>Hostel Details
@@ -566,7 +566,7 @@ extends('layouts.admin-layout')
                     </div>
                 </div>
                 <div class="card">
-                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <ul class="nav nav-tabs" >
                         <li class="nav-item">
                             <h4 class="nav-link">
                                 <span data-feather="" class="icon-dual" id="span-parent"></span>Previous School Details

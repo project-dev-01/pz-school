@@ -32,7 +32,7 @@
     <div class="row" id="edit_timetable">
         <div class="col-xl-12 editTimetableForm">
             <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link"><i class="far fa-clock"></i>
                             @if($timetable)Class {{ $details['class']['class_name'] }} (Section: {{ $details['section']['section_name'] }}) - {{ $details['day'] }} - @endif Schedule Edit
