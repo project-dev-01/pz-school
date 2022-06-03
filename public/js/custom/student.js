@@ -378,6 +378,7 @@ $(function () {
                 success: function (data) {
                     if (data.code == 200) {
                         toastr.success(data.message);
+                        window.location.href = indexStudent;
                     } else {
                         toastr.error(data.message);
                     }

@@ -1496,6 +1496,7 @@
 @endsection
 @section('scripts')
 <script>
+    
     var parentImg = "{{ asset('users/images/') }}";
     var defaultImg = "{{ asset('images/users/default.jpg') }}";
     var parentName = "{{ config('constants.api.parent_name') }}";
@@ -1503,6 +1504,7 @@
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var vehicleByRoute = "{{ route('admin.vehicle_by_route') }}";
     var roomByHostel = "{{ route('admin.room_by_hostel') }}";
+    var indexStudent = "{{ route('admin.student.index') }}";
     var indexAdmission = "{{ route('admin.admission') }}";
 </script>
 

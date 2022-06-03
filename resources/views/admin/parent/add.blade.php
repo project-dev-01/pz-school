@@ -403,7 +403,7 @@
                     </ul>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="email">Email<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
@@ -442,16 +442,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <div class="form-group mb-3">
-                                    <label class="switch">Authentication
-                                    
+                                    <label for="status">Authentication</label>
+                                    <div class="switch">
                                         <input id="status" name="status"  type="checkbox">
                                         <span>
                                             <em></em>
                                             <strong></strong>
                                         </span>
-                                    </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
