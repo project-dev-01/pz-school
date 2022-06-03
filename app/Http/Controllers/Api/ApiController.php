@@ -7438,7 +7438,7 @@ class ApiController extends BaseController
                         ->on(DB::raw('date(cl.end)'), '=', 'dr.date');
                 })
                 ->join('subjects as sb', 'cl.subject_id', '=', 'sb.id')
-                ->where('cl.teacher_id', $request->teacher_id)
+                ->whereRaw("find_in_set($request->teacher_id,cl.teacher_id)")
                 ->get();
             return $this->successResponse($success, 'calendor data get successfully');
         }

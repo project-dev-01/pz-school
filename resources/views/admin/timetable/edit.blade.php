@@ -32,7 +32,7 @@
     <div class="row" id="edit_timetable">
         <div class="col-xl-12 editTimetableForm">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link"><i class="far fa-clock"></i>
                             @if($timetable)Class {{ $details['class']['class_name'] }} (Section: {{ $details['section']['section_name'] }}) - {{ $details['day'] }} - @endif Schedule Edit
@@ -138,6 +138,7 @@
                                                 <td width="20%">
                                                     <div class="form-group">
                                                         <select class="form-control" name="timetable[{{$row}}][class_room]">
+                                                            <option value="">Select Hall</option>
                                                             @forelse($hall_list as $list)
                                                             <option value="{{$list['id']}}" {{ $list['id'] == $table['class_room'] ? 'selected' : ''}}>{{ $list['hall_no'] }}</option>
                                                             @empty

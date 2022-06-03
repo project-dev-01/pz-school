@@ -31,7 +31,7 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
                             Select Ground
@@ -120,7 +120,7 @@
         <div class="col-xl-12 addTimetableForm">
 
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
                             Add Schedule
@@ -179,6 +179,7 @@
                                                     <td width="20%">
                                                         <div class="form-group">
                                                             <select class="form-control" name="timetable[0][class_room]">
+                                                                <option value="">Select Hall</option>
                                                                 @forelse($hall_list as $list)
                                                                 <option value="{{$list['id']}}">{{ $list['hall_no'] }}</option>
                                                                 @empty
@@ -233,7 +234,6 @@
     var subjectByClass = "{{ route('admin.timetable.subject') }}";
     var timetableList = "{{ route('admin.timetable') }}";
     var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";
-
 </script>
 <script src="{{ asset('js/custom/timetable.js') }}"></script>
 @endsection

@@ -10,10 +10,12 @@
         position: relative;
         cursor: pointer;
     }
+
     .switch input {
         display: none;
     }
-    .switch input + span {
+
+    .switch input+span {
         padding-left: 50px;
         min-height: 24px;
         line-height: 24px;
@@ -24,13 +26,16 @@
         white-space: nowrap;
         transition: color 0.3s ease;
     }
-    .switch input + span:before, .switch input + span:after {
+
+    .switch input+span:before,
+    .switch input+span:after {
         content: '';
         display: block;
         position: absolute;
         border-radius: 12px;
     }
-    .switch input + span:before {
+
+    .switch input+span:before {
         top: 0;
         left: 0;
         width: 42px;
@@ -38,7 +43,8 @@
         background: #e4ecfa;
         transition: all 0.3s ease;
     }
-    .switch input + span:after {
+
+    .switch input+span:after {
         width: 18px;
         height: 18px;
         background: #fff;
@@ -47,7 +53,8 @@
         box-shadow: 0 1px 3px rgba(18, 22, 33, .1);
         transition: all 0.45s ease;
     }
-    .switch input + span em {
+
+    .switch input+span em {
         width: 8px;
         height: 7px;
         background: #99a3ba;
@@ -59,7 +66,8 @@
         z-index: 1;
         transition: all 0.45s ease;
     }
-    .switch input + span em:before {
+
+    .switch input+span em:before {
         content: '';
         width: 2px;
         height: 2px;
@@ -71,7 +79,8 @@
         top: 50%;
         margin: -1px 0 0 -1px;
     }
-    .switch input + span em:after {
+
+    .switch input+span em:after {
         content: '';
         display: block;
         border-top-left-radius: 4px;
@@ -88,24 +97,29 @@
         transition: all 0.45s ease;
         transform: rotate(-35deg) translate(0, 1px);
     }
-    .switch input + span strong {
+
+    .switch input+span strong {
         font-weight: normal;
         position: relative;
         display: block;
         top: 1px;
     }
-    .switch input + span strong:before, .switch input + span strong:after {
+
+    .switch input+span strong:before,
+    .switch input+span strong:after {
         font-size: 14px;
         font-weight: 500;
         display: block;
         font-family: 'Mukta Malar', Arial;
         -webkit-backface-visibility: hidden;
     }
-    .switch input + span strong:before {
+
+    .switch input+span strong:before {
         content: 'Unlock';
         transition: all 0.3s ease 0.2s;
     }
-    .switch input + span strong:after {
+
+    .switch input+span strong:after {
         content: 'Lock';
         opacity: 0;
         visibility: hidden;
@@ -116,58 +130,70 @@
         transition: all 0.3s ease;
         transform: translate(2px, 0);
     }
-    .switch input:checked + span:before {
+
+    .switch input:checked+span:before {
         background: rgba(0, 123, 255, .35);
     }
-    .switch input:checked + span:after {
+
+    .switch input:checked+span:after {
         background: #fff;
         transform: translate(18px, 0);
     }
-    .switch input:checked + span em {
+
+    .switch input:checked+span em {
         transform: translate(18px, 0);
         background: #007bff;
     }
-    .switch input:checked + span em:after {
+
+    .switch input:checked+span em:after {
         border-color: #007bff;
         transform: rotate(0deg) translate(0, 0);
     }
-    .switch input:checked + span strong:before {
+
+    .switch input:checked+span strong:before {
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
         transform: translate(-2px, 0);
     }
-    .switch input:checked + span strong:after {
+
+    .switch input:checked+span strong:after {
         opacity: 1;
         visibility: visible;
         transform: translate(0, 0);
         transition: all 0.3s ease 0.2s;
     }
+
     html {
         -webkit-font-smoothing: antialiased;
     }
+
     * {
         box-sizing: border-box;
     }
-    *:before, *:after {
+
+    *:before,
+    *:after {
         box-sizing: border-box;
     }
+
     .switch {
         display: table;
         margin: 12px auto;
         min-width: 118px;
     }
+
     .dribbble {
         position: fixed;
         display: block;
         right: 20px;
         bottom: 20px;
     }
+
     .dribbble img {
         display: block;
         height: 28px;
     }
-    
 </style>
 @endsection
 @section('content')
@@ -184,11 +210,11 @@
     </div>
 
     <!-- end page title -->
-    
+
     <div class="row">
         <div class="col-xl-12 editEmployeeForm">
             <form id="editEmployeeForm" method="post" action="{{ route('admin.employee.update') }}" enctype="multipart/form-data" autocomplete="off">
-            @csrf
+                @csrf
                 <div class="card">
                     <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                         <li class="nav-item">
@@ -537,7 +563,7 @@
                     <div class="card-body">
                         <div class="row">
                             <input type="hidden" value="{{$role['id']}}" class="form-control" name="role_user_id" id="role_user_id">
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <div class="form-group mb-3">
                                     <label for="email">Email<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
@@ -550,11 +576,24 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-5">
+                                <div class="form-group mb-3">
+                                    <label for="password">Password</label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-unlock"></span>
+                                            </div>
+                                        </div>
+                                        <input type="password" class="form-control" name="password" id="password">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-2">
                                 <div class="form-group mb-3">
                                     <label class="switch">Authentication
-                                    
-                                        <input id="edit_status" name="status"  type="checkbox" {{ $employee['status'] == "1" ? "checked" : "" }}>
+
+                                        <input id="edit_status" name="status" type="checkbox" {{ $employee['status'] == "1" ? "checked" : "" }}>
                                         <span>
                                             <em></em>
                                             <strong></strong>
