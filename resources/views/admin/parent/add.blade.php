@@ -3,6 +3,172 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
 <link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
+<style>
+    .switch {
+        height: 24px;
+        display: block;
+        position: relative;
+        cursor: pointer;
+    }
+    .switch input {
+        display: none;
+    }
+    .switch input + span {
+        padding-left: 50px;
+        min-height: 24px;
+        line-height: 24px;
+        display: block;
+        color: #99a3ba;
+        position: relative;
+        vertical-align: middle;
+        white-space: nowrap;
+        transition: color 0.3s ease;
+    }
+    .switch input + span:before, .switch input + span:after {
+        content: '';
+        display: block;
+        position: absolute;
+        border-radius: 12px;
+    }
+    .switch input + span:before {
+        top: 0;
+        left: 0;
+        width: 42px;
+        height: 24px;
+        background: #e4ecfa;
+        transition: all 0.3s ease;
+    }
+    .switch input + span:after {
+        width: 18px;
+        height: 18px;
+        background: #fff;
+        top: 3px;
+        left: 3px;
+        box-shadow: 0 1px 3px rgba(18, 22, 33, .1);
+        transition: all 0.45s ease;
+    }
+    .switch input + span em {
+        width: 8px;
+        height: 7px;
+        background: #99a3ba;
+        position: absolute;
+        left: 8px;
+        bottom: 7px;
+        border-radius: 2px;
+        display: block;
+        z-index: 1;
+        transition: all 0.45s ease;
+    }
+    .switch input + span em:before {
+        content: '';
+        width: 2px;
+        height: 2px;
+        border-radius: 1px;
+        background: #fff;
+        position: absolute;
+        display: block;
+        left: 50%;
+        top: 50%;
+        margin: -1px 0 0 -1px;
+    }
+    .switch input + span em:after {
+        content: '';
+        display: block;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        border: 1px solid #99a3ba;
+        border-bottom: 0;
+        width: 6px;
+        height: 4px;
+        left: 1px;
+        bottom: 6px;
+        position: absolute;
+        z-index: 1;
+        transform-origin: 0 100%;
+        transition: all 0.45s ease;
+        transform: rotate(-35deg) translate(0, 1px);
+    }
+    .switch input + span strong {
+        font-weight: normal;
+        position: relative;
+        display: block;
+        top: 1px;
+    }
+    .switch input + span strong:before, .switch input + span strong:after {
+        font-size: 14px;
+        font-weight: 500;
+        display: block;
+        font-family: 'Mukta Malar', Arial;
+        -webkit-backface-visibility: hidden;
+    }
+    .switch input + span strong:before {
+        content: 'Unlock';
+        transition: all 0.3s ease 0.2s;
+    }
+    .switch input + span strong:after {
+        content: 'Lock';
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: #007bff;
+        transition: all 0.3s ease;
+        transform: translate(2px, 0);
+    }
+    .switch input:checked + span:before {
+        background: rgba(0, 123, 255, .35);
+    }
+    .switch input:checked + span:after {
+        background: #fff;
+        transform: translate(18px, 0);
+    }
+    .switch input:checked + span em {
+        transform: translate(18px, 0);
+        background: #007bff;
+    }
+    .switch input:checked + span em:after {
+        border-color: #007bff;
+        transform: rotate(0deg) translate(0, 0);
+    }
+    .switch input:checked + span strong:before {
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        transform: translate(-2px, 0);
+    }
+    .switch input:checked + span strong:after {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(0, 0);
+        transition: all 0.3s ease 0.2s;
+    }
+    html {
+        -webkit-font-smoothing: antialiased;
+    }
+    * {
+        box-sizing: border-box;
+    }
+    *:before, *:after {
+        box-sizing: border-box;
+    }
+    .switch {
+        display: table;
+        margin: 12px auto;
+        min-width: 118px;
+    }
+    .dribbble {
+        position: fixed;
+        display: block;
+        right: 20px;
+        bottom: 20px;
+    }
+    .dribbble img {
+        display: block;
+        height: 28px;
+    }
+    
+</style>
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -236,7 +402,6 @@
                         </li>
                     </ul>
                     <div class="card-body">
-
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="form-group">
@@ -278,10 +443,15 @@
                                 </div>
                             </div>
                             <div class="col-md-1">
-                                <div class="form-group">
-                                    <label for="email">Authentication</label>
-                                    <div class="dark fas fa-lock-open" id="authentication"></div>
-                                    <input id="status" name="status" type="checkbox">
+                                <div class="form-group mb-3">
+                                    <label class="switch">Authentication
+                                    
+                                        <input id="status" name="status"  type="checkbox">
+                                        <span>
+                                            <em></em>
+                                            <strong></strong>
+                                        </span>
+                                    </label>
                                 </div>
                             </div>
                         </div>

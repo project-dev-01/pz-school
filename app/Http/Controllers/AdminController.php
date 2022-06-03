@@ -1211,6 +1211,11 @@ class AdminController extends Controller
     //add employee
     public function addEmployee(Request $request)
     {
+        $status = "0";
+        if ($request->status) {
+            $status = "1";
+        }
+
         $file = $request->file('photo');
 
         if ($file) {
@@ -1251,6 +1256,7 @@ class AdminController extends Controller
             'skip_bank_details' => $request->skip_bank_details,
             'holder_name' => $request->holder_name,
             'bank_name' => $request->bank_name,
+            'status' => $status,
             'bank_branch' => $request->bank_branch,
             'bank_address' => $request->bank_address,
             'ifsc_code' => $request->ifsc_code,
@@ -1377,6 +1383,11 @@ class AdminController extends Controller
     // update Employee
     public function updateEmployee(Request $request)
     {
+        $status = "0";
+        if ($request->status) {
+            $status = "1";
+        }
+
         $file = $request->file('photo');
 
         if ($file) {
@@ -1407,6 +1418,7 @@ class AdminController extends Controller
             'present_address' => $request->present_address,
             'permanent_address' => $request->permanent_address,
             'photo' => $base64,
+            'status' => $status,
             'file_extension' => $extension,
             'email' => $request->email,
             'password' => $request->password,
@@ -1508,7 +1520,6 @@ class AdminController extends Controller
 
         $timetable = Helper::PostMethod(config('constants.api.timetable_subject'), $data);
         $hall_list = Helper::GetMethod(config('constants.api.exam_hall_list'));
-        // dd($timetable);
         if ($timetable['code'] == "200") {
 
 
@@ -1686,7 +1697,6 @@ class AdminController extends Controller
         // dd($data);
 
         $timetable = Helper::PostMethod(config('constants.api.timetable_list'), $data);
-        // dd($timetable);
 
         $days = array(
             'sunday',
@@ -2959,6 +2969,11 @@ class AdminController extends Controller
     // add admission
     public function addAdmission(Request $request)
     {
+        $status = "0";
+        if ($request->status) {
+            $status = "1";
+        }
+
         $base64 = "";
         $extension = "";
         $file = $request->file('photo');
@@ -2980,6 +2995,7 @@ class AdminController extends Controller
             'mother_id' => $request->mother_id,
             'guardian_id' => $request->guardian_id,
             'relation' => $request->relation,
+            'status' => $status,
             'nric' => $request->txt_nric,
             'gender' => $request->gender,
             'blood_group' => $request->blooddgrp,
@@ -3138,9 +3154,7 @@ class AdminController extends Controller
             "session_id" => $request->session_id,
 
         ];
-        // dd($data);
         $student = Helper::PostMethod(config('constants.api.student_list'), $data);
-
 
         if ($student['code'] == "200") {
 
@@ -3226,6 +3240,11 @@ class AdminController extends Controller
     // Update Student 
     public function updateStudent(Request $request)
     {
+        $status = "0";
+        if ($request->status) {
+            $status = "1";
+        }
+
         $base64 = "";
         $extension = "";
         $file = $request->file('photo');
@@ -3246,6 +3265,7 @@ class AdminController extends Controller
             'register_no' => $request->txt_regiter_no,
             'roll_no' => $request->txt_roll_no,
             'nric' => $request->txt_nric,
+            'status' => $status,
             'admission_date' => $request->admission_date,
             'category_id' => $request->categy,
             'first_name' => $request->fname,
@@ -3290,7 +3310,6 @@ class AdminController extends Controller
 
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.student_update'), $data);
-        // dd($response);
         return $response;
     }
 
@@ -3348,10 +3367,15 @@ class AdminController extends Controller
     public function addParent(Request $request)
     {
         // dd($request->file('photo'));
+
+        $status = "0";
+        if ($request->status) {
+            $status = "1";
+        }
+
         $base64 = "";
         $extension = "";
         $file = $request->file('photo');
-        // dd($file);
         if ($file) {
             $path = $file->path();
             $data = file_get_contents($path);
@@ -3366,6 +3390,7 @@ class AdminController extends Controller
             'date_of_birth' => $request->date_of_birth,
             'passport' => $request->passport,
             'nric' => $request->nric,
+            'status' => $status,
             'blood_group' => $request->blood_group,
             'occupation' => $request->occupation,
             'income' => $request->income,
@@ -3423,6 +3448,12 @@ class AdminController extends Controller
     }
     public function updateParent(Request $request)
     {
+        // dd($request);
+        $status = "0";
+        if ($request->status) {
+            $status = "1";
+        }
+
         $base64 = "";
         $extension = "";
         $file = $request->file('photo');
@@ -3443,6 +3474,7 @@ class AdminController extends Controller
             'date_of_birth' => $request->date_of_birth,
             'passport' => $request->passport,
             'nric' => $request->nric,
+            'status' => $status,
             'blood_group' => $request->blood_group,
             'occupation' => $request->occupation,
             'income' => $request->income,

@@ -1,4 +1,5 @@
 $(function () {
+
     // joining date
     $("#joiningDate").datepicker({
         dateFormat: 'dd-mm-yy',
@@ -229,6 +230,7 @@ $(function () {
             formData.append('state', $('#State').val());
             formData.append('country', $('#Country').val());
             formData.append('post_code', $('#postCode').val());
+            formData.append('status', $('#status').val());
             // Attach file
             formData.append('photo', $('input[type=file]')[0].files[0]);
 
@@ -370,6 +372,7 @@ $(function () {
             formData.append('state', $('#State').val());
             formData.append('country', $('#Country').val());
             formData.append('post_code', $('#postCode').val());
+            formData.append('status', $('#edit_status').val());
             // Attach file
             formData.append('photo', $('input[type=file]')[0].files[0]);
 

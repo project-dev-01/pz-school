@@ -1,20 +1,5 @@
 $(function () {
 
-    $('#authentication').click(function() {
-
-        if ($("#status").prop('checked') == true) {
-            $("#status").prop('checked',false);
-            $("#status").val("0");
-            $("#authentication").addClass("fa-lock-open");
-            $("#authentication").removeClass("fa-lock");
-        } else {
-            $("#status").prop('checked',true);
-            $("#status").val("1");
-            $("#authentication").removeClass("fa-lock-open");
-            $("#authentication").addClass("fa-lock");
-        }
-    });
-
     $("#admission_date").datepicker({
         dateFormat: 'yy-mm-dd',
         changeMonth: true,
@@ -28,39 +13,39 @@ $(function () {
         autoclose: true,
     });
     // rules validation
-    // $("#addadmission").validate({
-    //     rules: {
+    $("#addadmission").validate({
+        rules: {
             
-    //         parent_id: "required",
-    //         btwyears: "required",
-    //         txt_regiter_no: "required",
-    //         txt_emailid: {
-    //             required: true,
-    //             email: true
-    //         },
-    //         txt_roll_no: "required",
-    //         admission_date: "required",
-    //         classnames: "required",
-    //         categy: "required",
-    //         fname: "required",
-    //         lname: "required",
-    //         txt_mobile_no: "required",
-    //         present_address: "required",
-    //         txt_pwd: {
-    //             required: true,
-    //             minlength: 6
-    //         },
-    //         txt_retype_pwd: {
-    //             required: true,
-    //             minlength: 6
-    //         },       
-    //     }
-    // });
+            parent_id: "required",
+            btwyears: "required",
+            txt_regiter_no: "required",
+            txt_emailid: {
+                required: true,
+                email: true
+            },
+            txt_roll_no: "required",
+            admission_date: "required",
+            classnames: "required",
+            categy: "required",
+            fname: "required",
+            lname: "required",
+            txt_mobile_no: "required",
+            present_address: "required",
+            txt_pwd: {
+                required: true,
+                minlength: 6
+            },
+            txt_retype_pwd: {
+                required: true,
+                minlength: 6
+            },       
+        }
+    });
 
     $('#addadmission').on('submit', function (e) {
         e.preventDefault();
-        // var admissionCheck = $("#addadmission").valid();
-        // if (admissionCheck === true) {
+        var admissionCheck = $("#addadmission").valid();
+        if (admissionCheck === true) {
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),
@@ -78,7 +63,7 @@ $(function () {
                     }
                 }
             });
-        // }
+        }
     });
 
     $('#guardian_name').keyup(function(){ 

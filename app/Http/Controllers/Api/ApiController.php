@@ -2592,6 +2592,7 @@ class ApiController extends BaseController
                         'state' => $request->state,
                         'country' => $request->country,
                         'post_code' => $request->post_code,
+                        'status' => $request->status,
                         'created_at' => date("Y-m-d H:i:s")
                     ]);
                     $success = [];
@@ -2620,6 +2621,7 @@ class ApiController extends BaseController
                         $user->branch_id = $request->branch_id;
                         $user->picture = $fileName;
                         $user->email = $request->email;
+                        $user->status = $request->status;
                         $user->password = bcrypt($request->password);
                         $query = $user->save();
                         $success = [];
@@ -2797,6 +2799,7 @@ class ApiController extends BaseController
                     'country' => $request->country,
                     'post_code' => $request->post_code,
                     'passport' => isset($request->passport) ? $request->passport : "",
+                    'status' => $request->status,
                     'updated_at' => date("Y-m-d H:i:s")
                 ]);
 
@@ -2811,6 +2814,7 @@ class ApiController extends BaseController
                         $user->name = (isset($request->first_name) ? $request->first_name : "") . " " . (isset($request->last_name) ? $request->last_name : "");
                         $user->picture = $fileName;
                         $user->password = bcrypt($request->password);
+                        $user->status = $request->status;
                         $updateUser = $user->save();
                     }
                     if (isset($request->role_user_id) && isset($request->email)) {
@@ -2818,12 +2822,14 @@ class ApiController extends BaseController
                         $user->name = (isset($request->first_name) ? $request->first_name : "") . " " . (isset($request->last_name) ? $request->last_name : "");
                         $user->email = $request->email;
                         $user->picture = $fileName;
+                        $user->status = $request->status;
                         $updateUser = $user->save();
                     }
                     if (isset($request->old_photo) && empty($request->photo)) {
                         $user = User::find($request->role_user_id);
                         $user->name = (isset($request->first_name) ? $request->first_name : "") . " " . (isset($request->last_name) ? $request->last_name : "");
                         $user->picture = $fileName;
+                        $user->status = $request->status;
                         $updateUser = $user->save();
                     }
                     // add bank details
@@ -4510,7 +4516,6 @@ class ApiController extends BaseController
                 ->groupBy("timetable_class.id")
                 ->get()->toArray();
 
-            // return $Timetable;
             if ($Timetable) {
                 $mapfunction = function ($s) {
                     return $s->day;
@@ -4640,7 +4645,7 @@ class ApiController extends BaseController
                 ->select('start_date', 'end_date')
                 ->where('id', $request->semester_id)
                 ->first();
-            // dd($getObjRow);
+            // return $getObjRow;
             $oldest = $staffConn->table('timetable_class')
                 ->where([
                     ['timetable_class.day', $request->day],
@@ -9414,6 +9419,7 @@ class ApiController extends BaseController
                     'hostel_id' => $request->hostel_id,
                     'room_id' => $request->room_id,
                     'previous_details' => $previous_details,
+                    'status' => $request->status,
                     'created_at' => date("Y-m-d H:i:s")
                 ]);
 
@@ -9452,6 +9458,7 @@ class ApiController extends BaseController
                 $user->role_id = "6";
                 $user->branch_id = $request->branch_id;
                 $user->email = $request->email;
+                $user->status = $request->status;
                 $user->password = bcrypt($request->password);
                 $query = $user->save();
 
@@ -10534,6 +10541,7 @@ class ApiController extends BaseController
                     'hostel_id' => $request->hostel_id,
                     'room_id' => $request->room_id,
                     'previous_details' => $previous_details,
+                    'status' => $request->status,
                     'created_at' => date("Y-m-d H:i:s")
                 ]);
 
@@ -10560,7 +10568,7 @@ class ApiController extends BaseController
                 // return
             }
 
-            //  return $request;
+            
             if (!$studentId) {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong add Student']);
             } else {
@@ -10582,6 +10590,7 @@ class ApiController extends BaseController
                             ->update([
                                 'name' => $studentName,
                                 'email' => $request->email,
+                                'status' => $request->status,
                                 'password' => bcrypt($request->password)
                             ]);
                     }
@@ -10589,7 +10598,8 @@ class ApiController extends BaseController
                     $query = User::where([['user_id', '=', $request->student_id], ['role_id', '=', "6"], ['branch_id', '=', $request->branch_id]])
                         ->update([
                             'name' => $studentName,
-                            'email' => $request->email
+                            'email' => $request->email,
+                            'status' => $request->status
                         ]);
                 }
 
@@ -10768,7 +10778,7 @@ class ApiController extends BaseController
                     'facebook_url' => $request->facebook_url,
                     'linkedin_url' => $request->linkedin_url,
                     'twitter_url' => $request->twitter_url,
-                    'active' => "1",
+                    'status' => $request->status,
                     'created_at' => date("Y-m-d H:i:s")
                 ]);
 
@@ -10783,6 +10793,7 @@ class ApiController extends BaseController
                     $query->role_id = "5";
                     $query->branch_id = $request->branch_id;
                     $query->email = $request->email;
+                    $query->status = $request->status;
                     $query->password = bcrypt($request->parent_password);
                     $query->save();
                 }
@@ -10886,7 +10897,7 @@ class ApiController extends BaseController
     public function updateParent(Request $request)
     {
 
-        // return $request;
+       
         $id = $request->id;
         $validator = \Validator::make($request->all(), [
             'id' => 'required',
@@ -10931,11 +10942,8 @@ class ApiController extends BaseController
                 } else {
                     $fileName = $request->old_photo;
                 }
-
                 $password = $request->password;
                 $name = $request->first_name." ".$request->last_name;
-                
-
                 if ($password) {
 
                     $passvalidator = \Validator::make($request->all(), [
@@ -10954,6 +10962,7 @@ class ApiController extends BaseController
                             ->update([
                                 'name' => $name,
                                 'email' => $request->email,
+                                'status' => $request->status,
                                 'password' => $updatePassword
                             ]);
                     }
@@ -10961,10 +10970,10 @@ class ApiController extends BaseController
                     $parent = User::where([['user_id', '=', $id], ['role_id', '=', "5"], ['branch_id', '=', $request->branch_id]])
                         ->update([
                             'name' => $name,
-                            'email' => $request->email
+                            'email' => $request->email,
+                            'status' => $request->status
                         ]);
                 }
-
 
                 // update data
                 $query = $staffConn->table('parent')->where('id', $id)->update([
@@ -10990,7 +10999,7 @@ class ApiController extends BaseController
                     'facebook_url' => $request->facebook_url,
                     'linkedin_url' => $request->linkedin_url,
                     'twitter_url' => $request->twitter_url,
-                    'active' => "1",
+                    'status' => $request->status,
                     'updated_at' => date("Y-m-d H:i:s")
                 ]);
                 $success = [];

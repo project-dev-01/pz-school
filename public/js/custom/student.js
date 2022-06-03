@@ -1,20 +1,4 @@
 $(function () {
-
-
-    $('#edit_authentication').click(function() {
-
-        if ($("#edit_status").prop('checked') == true) {
-            $("#edit_status").prop('checked',false);
-            $("#edit_status").val("0");
-            $("#edit_authentication").addClass("fa-lock-open");
-            $("#edit_authentication").removeClass("fa-lock");
-        } else {
-            $("#edit_status").prop('checked',true);
-            $("#edit_status").val("1");
-            $("#edit_authentication").removeClass("fa-lock-open");
-            $("#edit_authentication").addClass("fa-lock");
-        }
-    });
     
     var father_id = $("#father_id").val();
     if (father_id) {
@@ -314,7 +298,6 @@ $(function () {
     // get student list
     $('#indexFilter').on('submit', function (e) {
         e.preventDefault();
-        console.log('id',123)
         var filterCheck = $("#indexFilter").valid();
         if (filterCheck === true) {
             var form = this;

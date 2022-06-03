@@ -1,82 +1,173 @@
 @extends('layouts.admin-layout')
-@section('title','Employee')
+@section('title','Edit Employee')
 @section('css')
 <link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
 <link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
 <style>
-    .containers-img {
-        height: 270px;
+    .switch {
+        height: 24px;
+        display: block;
         position: relative;
-        max-width: 320px;
-        /* margin: auto; */
-    }
-
-    .containers-img .imageWrapper {
-        border: 3px solid #888;
-        width: 70%;
-        padding-bottom: 70%;
-        border-radius: 50%;
-        overflow: hidden;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .containers-img .imageWrapper img {
-        height: 105%;
-        width: initial;
-        max-height: 100%;
-        max-width: initial;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .file-upload {
-        position: relative;
-        overflow: hidden;
-        margin: 10px;
-    }
-
-    .file-upload {
-        position: relative;
-        overflow: hidden;
-        margin: 10px;
-        width: 100%;
-        max-width: 150px;
-        text-align: center;
-        /* color: #fff; */
-        font-size: 1.2em;
-        background: transparent;
-        border: 2px solid #888;
-        padding: 0.85em 1em;
-        display: inline;
-        -ms-transition: all 0.2s ease;
-        -webkit-transition: all 0.2s ease;
-        transition: all 0.2s ease;
-    }
-
-    /* .file-upload:hover {
-        background: #999;
-        -webkit-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
-        -moz-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
-        box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
-    } */
-
-    .file-upload input.file-input {
-        position: absolute;
-        top: 0;
-        right: 0;
-        margin: 0;
-        padding: 0;
-        font-size: 20px;
         cursor: pointer;
-        opacity: 0;
-        filter: alpha(opacity=0);
-        height: 100%;
     }
+    .switch input {
+        display: none;
+    }
+    .switch input + span {
+        padding-left: 50px;
+        min-height: 24px;
+        line-height: 24px;
+        display: block;
+        color: #99a3ba;
+        position: relative;
+        vertical-align: middle;
+        white-space: nowrap;
+        transition: color 0.3s ease;
+    }
+    .switch input + span:before, .switch input + span:after {
+        content: '';
+        display: block;
+        position: absolute;
+        border-radius: 12px;
+    }
+    .switch input + span:before {
+        top: 0;
+        left: 0;
+        width: 42px;
+        height: 24px;
+        background: #e4ecfa;
+        transition: all 0.3s ease;
+    }
+    .switch input + span:after {
+        width: 18px;
+        height: 18px;
+        background: #fff;
+        top: 3px;
+        left: 3px;
+        box-shadow: 0 1px 3px rgba(18, 22, 33, .1);
+        transition: all 0.45s ease;
+    }
+    .switch input + span em {
+        width: 8px;
+        height: 7px;
+        background: #99a3ba;
+        position: absolute;
+        left: 8px;
+        bottom: 7px;
+        border-radius: 2px;
+        display: block;
+        z-index: 1;
+        transition: all 0.45s ease;
+    }
+    .switch input + span em:before {
+        content: '';
+        width: 2px;
+        height: 2px;
+        border-radius: 1px;
+        background: #fff;
+        position: absolute;
+        display: block;
+        left: 50%;
+        top: 50%;
+        margin: -1px 0 0 -1px;
+    }
+    .switch input + span em:after {
+        content: '';
+        display: block;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        border: 1px solid #99a3ba;
+        border-bottom: 0;
+        width: 6px;
+        height: 4px;
+        left: 1px;
+        bottom: 6px;
+        position: absolute;
+        z-index: 1;
+        transform-origin: 0 100%;
+        transition: all 0.45s ease;
+        transform: rotate(-35deg) translate(0, 1px);
+    }
+    .switch input + span strong {
+        font-weight: normal;
+        position: relative;
+        display: block;
+        top: 1px;
+    }
+    .switch input + span strong:before, .switch input + span strong:after {
+        font-size: 14px;
+        font-weight: 500;
+        display: block;
+        font-family: 'Mukta Malar', Arial;
+        -webkit-backface-visibility: hidden;
+    }
+    .switch input + span strong:before {
+        content: 'Unlock';
+        transition: all 0.3s ease 0.2s;
+    }
+    .switch input + span strong:after {
+        content: 'Lock';
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: #007bff;
+        transition: all 0.3s ease;
+        transform: translate(2px, 0);
+    }
+    .switch input:checked + span:before {
+        background: rgba(0, 123, 255, .35);
+    }
+    .switch input:checked + span:after {
+        background: #fff;
+        transform: translate(18px, 0);
+    }
+    .switch input:checked + span em {
+        transform: translate(18px, 0);
+        background: #007bff;
+    }
+    .switch input:checked + span em:after {
+        border-color: #007bff;
+        transform: rotate(0deg) translate(0, 0);
+    }
+    .switch input:checked + span strong:before {
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        transform: translate(-2px, 0);
+    }
+    .switch input:checked + span strong:after {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(0, 0);
+        transition: all 0.3s ease 0.2s;
+    }
+    html {
+        -webkit-font-smoothing: antialiased;
+    }
+    * {
+        box-sizing: border-box;
+    }
+    *:before, *:after {
+        box-sizing: border-box;
+    }
+    .switch {
+        display: table;
+        margin: 12px auto;
+        min-width: 118px;
+    }
+    .dribbble {
+        position: fixed;
+        display: block;
+        right: 20px;
+        bottom: 20px;
+    }
+    .dribbble img {
+        display: block;
+        height: 28px;
+    }
+    
 </style>
 @endsection
 @section('content')
@@ -93,41 +184,20 @@
     </div>
 
     <!-- end page title -->
-
+    
     <div class="row">
         <div class="col-xl-12 editEmployeeForm">
-            <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
-                    <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span data-feather="" class="icon-dual" id="span-parent"></span>Personal details
-                            <h4>
-                    </li>
-                </ul>
-                <div class="card-body">
-                    <form id="editEmployeeForm" method="post" action="{{ route('admin.employee.update') }}" enctype="multipart/form-data" autocomplete="off">
-                        @csrf
-                        <!-- <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="photo">Profile Picture</label>
-                                    <input type="hidden" name="old_photo" id="oldPhoto" value="{{ $employee['photo'] }}" />
-                                    <div class="containers-img">
-                                        <div class="imageWrapper">
-                                            <img src="{{ $employee['photo'] && asset('images/staffs/').'/'.$employee['photo'] ? asset('images/staffs/').'/'.$employee['photo'] : asset('images/users/default.jpg') }}" class="image">
-                                            <img class="image" src="{{asset('images/staffs/').'/'.$employee['photo']}}">
-                                            images/users/default.jpg
-                                        </div>
-                                    </div>
-
-                                    <button class="file-upload">
-                                        <input type="file" name="photo" id="photo" class="file-input">Choose File
-                                    </button>
-                                </div>
-
-
-                            </div>
-                        </div> -->
+            <form id="editEmployeeForm" method="post" action="{{ route('admin.employee.update') }}" enctype="multipart/form-data" autocomplete="off">
+            @csrf
+                <div class="card">
+                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                        <li class="nav-item">
+                            <h4 class="nav-link">
+                                <span data-feather="" class="icon-dual" id="span-parent"></span>Personal details
+                                <h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="col-lg-3">
@@ -140,10 +210,6 @@
                             </div>
                         </div> <!-- end row -->
                         <input type="hidden" class="form-control" id="id" name="id" value="{{$employee['id']}}">
-                        <span class="fas fa-user-check  " id="span-parent"></span>
-                        <span class="header-title mb-3" id="span-parent">Personal details
-                            <hr id="hr">
-                        </span>
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -306,20 +372,17 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="photo">Profile Picture</label>
-                                    <input type="hidden" name="old_photo" id="oldPhoto" value="{{ $employee['photo'] }}" />
-                                    <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="{{asset('images/staffs/').'/'.$employee['photo']}}" />
-
-                                </div>
-                            </div>
-                        </div> -->
-                        <span class="fas fa-user-check  " id="span-parent"></span>
-                        <span class="header-title mb-3" id="span-parent">Employee details
-                            <hr id="hr">
-                        </span>
+                    </div>
+                </div>
+                <div class="card">
+                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                        <li class="nav-item">
+                            <h4 class="nav-link">
+                                <span data-feather="" class="icon-dual" id="span-parent"></span>Employee details
+                                <h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -461,12 +524,17 @@
                             </div>
 
                         </div>
-
-                        <span class="fas fa-user-lock " id="span-parent"></span>
-                        <span class="header-title mb-3" id="span-parent"> Login Details
-                           
-                            <hr id="hr">
-                        </span>
+                    </div>
+                </div>
+                <div class="card">
+                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                        <li class="nav-item">
+                            <h4 class="nav-link">
+                                <span data-feather="" class="icon-dual" id="span-parent"></span>Login details
+                                <h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
                         <div class="row">
                             <input type="hidden" value="{{$role['id']}}" class="form-control" name="role_user_id" id="role_user_id">
                             <div class="col-md-5">
@@ -483,14 +551,15 @@
                                 </div>
                             </div>
                             <div class="col-md-1">
-                                <div class="form-group">
-                                    <label for="email">Authentication</label>
-                                    @if($employee['status'] == "0")
-                                        <div class="dark fas fa-lock-open mb-2" id="edit_authentication"></div>
-                                    @else
-                                        <div class="dark fas fa-lock mb-2" id="edit_authentication"></div>
-                                    @endif
-                                    <input id="edit_status" name="status" type="checkbox" value="{{$employee['status']}}" style="display:none">
+                                <div class="form-group mb-3">
+                                    <label class="switch">Authentication
+                                    
+                                        <input id="edit_status" name="status"  type="checkbox" {{ $employee['status'] == "1" ? "checked" : "" }}>
+                                        <span>
+                                            <em></em>
+                                            <strong></strong>
+                                        </span>
+                                    </label>
                                 </div>
                             </div>
                             <!-- <div class="col-md-3">
@@ -507,10 +576,17 @@
                                 </div>
                             </div> -->
                         </div>
-                        <span class="fas fa-globe  " id="span-parent"></span>
-                        <span class="header-title mb-3" id="span-parent">Social Links
-                            <hr id="hr">
-                        </span>
+                    </div>
+                </div>
+                <div class="card">
+                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                        <li class="nav-item">
+                            <h4 class="nav-link">
+                                <span data-feather="" class="icon-dual" id="span-parent"></span>Social Links
+                                <h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
@@ -552,10 +628,17 @@
                                 </div>
                             </div>
                         </div>
-                        <span class="fas fa-briefcase-medical" id="span-parent"></span>
-                        <span class="header-title mb-3" id="span-parent"> Medical History
-                            <hr id="hr">
-                        </span>
+                    </div>
+                </div>
+                <div class="card">
+                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                        <li class="nav-item">
+                            <h4 class="nav-link">
+                                <span data-feather="" class="icon-dual" id="span-parent"></span>Medical History
+                                <h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="skip_medical_history" name="skip_medical_history">
@@ -600,10 +683,17 @@
                                 </div>
                             </div>
                         </div>
-                        <span class="fas fa-university " id="span-parent"></span>
-                        <span class="header-title mb-3" id="span-parent"> Bank Details
-                            <hr id="hr">
-                        </span>
+                    </div>
+                </div>
+                <div class="card">
+                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                        <li class="nav-item">
+                            <h4 class="nav-link">
+                                <span data-feather="" class="icon-dual" id="span-parent"></span>Bank Details
+                                <h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="skip_bank_details" name="skip_bank_details">
@@ -652,7 +742,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
                                 Update
@@ -661,19 +750,12 @@
                                 Back
                             </a>
                         </div>
-                    </form>
-
-
-                </div> <!-- end card-body -->
-            </div> <!-- end card-->
+                    </div>
+                </div>
+            </form>
         </div> <!-- end col -->
-
-    </div>
-    <!-- end row -->
-
-
-
-</div> <!-- container -->
+    </div> <!-- end row-->
+</div><!-- container -->
 @endsection
 @section('scripts')
 <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
