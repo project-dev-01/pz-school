@@ -2996,6 +2996,7 @@ class AdminController extends Controller
             'guardian_id' => $request->guardian_id,
             'relation' => $request->relation,
             'status' => $status,
+            'passport' => $request->txt_passport,
             'nric' => $request->txt_nric,
             'gender' => $request->gender,
             'blood_group' => $request->blooddgrp,
@@ -3146,50 +3147,62 @@ class AdminController extends Controller
     }
     public function studentList(Request $request)
     {
-        //    dd($request);
         $data = [
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
-            "semester_id" => $request->semester_id,
+            "student_name" => $request->student_name,
             "session_id" => $request->session_id,
 
         ];
-        $student = Helper::PostMethod(config('constants.api.student_list'), $data);
+        $response = Helper::PostMethod(config('constants.api.student_list'), $data);
 
-        if ($student['code'] == "200") {
+        return DataTables::of($response['data'])
 
-            $output = "";
-            $row = 1;
-            if ($student['data']) {
-                foreach ($student['data'] as $stu) {
-                    $edit = route('admin.student.details', $stu['id']);
-                    $output .= '<tr>
-                                    <td>' . $row . '</td>
-                                    <td>' . $stu['first_name'] . ' ' . $stu['last_name'] . '</td>
-                                    <td>' . $stu['register_no'] . '</td>
-                                    <td>' . $stu['roll_no'] . '</td>
-                                    <td>' . $stu['gender'] . '</td>
-                                    <td>' . $stu['email'] . '</td>
-                                    <td>' . $stu['mobile_no'] . '</td>
-                                    <td>
-                                        <div class="button-list">
-                                            <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $stu['id'] . '" id="deleteStudentBtn"><i class="fe-trash-2"></i></a>
-                                        </div>
-                                    </td>
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $edit = route('admin.student.details', $row['id']);
+                return '<div class="button-list">
+                                 <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light" id="editStudentBtn"><i class="fe-edit"></i></a>
+                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteStudentBtn"><i class="fe-trash-2"></i></a>
+                         </div>';
+            })
 
-                                </tr>';
-                    $row++;
-                }
-            } else {
-                $output .= '<tr>
-                                <td colspan="8"> No Data Available</td>
-                            </tr>';
-            }
-            $student['table'] = $output;
-        }
+            ->rawColumns(['actions'])
+            ->make(true);
+        // if ($student['code'] == "200") {
+
+        //     $output = "";
+        //     $row = 1;
+        //     if ($student['data']) {
+        //         foreach ($student['data'] as $stu) {
+        //             $edit = route('admin.student.details', $stu['id']);
+        //             $output .= '<tr>
+        //                             <td>' . $row . '</td>
+        //                             <td>' . $stu['first_name'] . ' ' . $stu['last_name'] . '</td>
+        //                             <td>' . $stu['register_no'] . '</td>
+        //                             <td>' . $stu['roll_no'] . '</td>
+        //                             <td>' . $stu['gender'] . '</td>
+        //                             <td>' . $stu['email'] . '</td>
+        //                             <td>' . $stu['mobile_no'] . '</td>
+        //                             <td>
+        //                                 <div class="button-list">
+        //                                     <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
+        //                                     <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $stu['id'] . '" id="deleteStudentBtn"><i class="fe-trash-2"></i></a>
+        //                                 </div>
+        //                             </td>
+
+        //                         </tr>';
+        //             $row++;
+        //         }
+        //     } else {
+        //         $output .= '<tr>
+        //                         <td colspan="8"> No Data Available</td>
+        //                     </tr>';
+        //     }
+        //     $student['table'] = $output;
+        // }
         // dd($output);  
-        return $student;
+        // return $student;
     }
 
     // get Student  details
@@ -3264,6 +3277,7 @@ class AdminController extends Controller
             'old_photo' => $request->old_photo,
             'register_no' => $request->txt_regiter_no,
             'roll_no' => $request->txt_roll_no,
+            'passport' => $request->txt_passport,
             'nric' => $request->txt_nric,
             'status' => $status,
             'admission_date' => $request->admission_date,
@@ -3361,12 +3375,23 @@ class AdminController extends Controller
 
     public function createParent()
     {
-        return view('admin.parent.add');
+        
+        $religion = Helper::GetMethod(config('constants.api.religion'));
+        $races = Helper::GetMethod(config('constants.api.races'));
+        $education = Helper::GetMethod(config('constants.api.education_list'));
+        
+        return view(
+            'admin.parent.add',
+            [
+                'religion' => $religion['data'],
+                'races' => $races['data'],
+                'education' => $education['data'],
+            ]
+        );
     }
 
     public function addParent(Request $request)
     {
-        // dd($request->file('photo'));
 
         $status = "0";
         if ($request->status) {
@@ -3389,6 +3414,8 @@ class AdminController extends Controller
             'gender' => $request->gender,
             'date_of_birth' => $request->date_of_birth,
             'passport' => $request->passport,
+            'race' => $request->race,
+            'religion' => $request->religion,
             'nric' => $request->nric,
             'status' => $status,
             'blood_group' => $request->blood_group,
@@ -3437,10 +3464,17 @@ class AdminController extends Controller
         $data = [
             'id' => $id,
         ];
+        $religion = Helper::GetMethod(config('constants.api.religion'));
+        $races = Helper::GetMethod(config('constants.api.races'));
+        $education = Helper::GetMethod(config('constants.api.education_list'));
         $response = Helper::PostMethod(config('constants.api.parent_details'), $data);
+
         return view(
             'admin.parent.edit',
             [
+                'religion' => $religion['data'],
+                'races' => $races['data'],
+                'education' => $education['data'],
                 'parent' => $response['data']['parent'],
                 'childs' => $response['data']['childs'],
             ]
@@ -3473,6 +3507,8 @@ class AdminController extends Controller
             'gender' => $request->gender,
             'date_of_birth' => $request->date_of_birth,
             'passport' => $request->passport,
+            'race' => $request->race,
+            'religion' => $request->religion,
             'nric' => $request->nric,
             'status' => $status,
             'blood_group' => $request->blood_group,
@@ -4011,5 +4047,62 @@ class AdminController extends Controller
                 'employee' => $getemployee['data']
             ]
         );
+    }
+
+    // index Education
+    public function education()
+    {
+        return view('admin.education.index');
+    }
+
+    public function addEducation(Request $request)
+    {
+        $data = [
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.education_add'), $data);
+        return $response;
+    }
+    public function getEducationList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.education_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editEducationBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteEducationBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getEducationDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.education_details'), $data);
+        return $response;
+    }
+    public function updateEducation(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.education_update'), $data);
+        return $response;
+    }
+    // DELETE education Details
+    public function deleteEducation(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.education_delete'), $data);
+        return $response;
     }
 }

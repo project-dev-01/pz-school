@@ -9396,6 +9396,7 @@ class ApiController extends BaseController
                     'father_id' => $request->father_id,
                     'mother_id' => $request->mother_id,
                     'guardian_id' => $request->guardian_id,
+                    'passport' => $request->passport,
                     'nric' => $request->nric,
                     'relation' => $request->relation,
                     'register_no' => $request->register_no,
@@ -10424,10 +10425,12 @@ class ApiController extends BaseController
         $validator = \Validator::make($request->all(), [
             'branch_id' => 'required',
             'token' => 'required',
-            'class_id' => 'required',
-            'section_id' => 'required',
         ]);
 
+        $class_id = $request->class_id;
+        $session_id = $request->session_id;
+        $section_id = $request->section_id;
+        $name = $request->student_name;
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
@@ -10436,12 +10439,18 @@ class ApiController extends BaseController
             // get data
             $student = $con->table('enrolls as e')->select('s.id', 's.first_name', 's.last_name', 's.register_no', 's.roll_no', 's.mobile_no', 's.email', 's.gender')
                 ->leftJoin('students as s', 'e.student_id', '=', 's.id')
-                ->where([
-                    ['e.class_id', $request->class_id],
-                    ['e.semester_id', $request->semester_id],
-                    ['e.session_id', $request->session_id],
-                    ['e.section_id', $request->section_id]
-                ])
+                ->when($class_id, function ($query, $class_id) {
+                    return $query->where('e.class_id', $class_id);
+                })
+                ->when($session_id, function ($query, $session_id) {
+                    return $query->where('e.session_id', $session_id);
+                })
+                ->when($section_id, function ($query, $section_id) {
+                    return $query->where('e.section_id', $section_id);
+                })
+                ->when($name, function ($query, $name) {
+                    return $query->where('s.first_name', 'like', '%' . $name . '%')->orWhere('s.last_name', 'like', '%' . $name . '%');
+                })
                 ->get()->toArray();
 
             return $this->successResponse($student, 'Student record fetch successfully');
@@ -10518,6 +10527,7 @@ class ApiController extends BaseController
                     'mother_id' => $request->mother_id,
                     'guardian_id' => $request->guardian_id,
                     'relation' => $request->relation,
+                    'passport' => $request->passport,
                     'nric' => $request->nric,
                     'register_no' => $request->register_no,
                     'year' => $request->year,
@@ -10573,7 +10583,7 @@ class ApiController extends BaseController
                 // return
             }
 
-
+            
             if (!$studentId) {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong add Student']);
             } else {
@@ -10766,6 +10776,8 @@ class ApiController extends BaseController
                     'gender' => $request->gender,
                     'date_of_birth' => $request->date_of_birth,
                     'passport' => $request->passport,
+                    'race' => $request->race,
+                    'religion' => $request->religion,
                     'nric' => $request->nric,
                     'blood_group' => $request->blood_group,
                     'occupation' => $request->occupation,
@@ -10986,6 +10998,8 @@ class ApiController extends BaseController
                     'gender' => $request->gender,
                     'date_of_birth' => $request->date_of_birth,
                     'passport' => $request->passport,
+                    'race' => $request->race,
+                    'religion' => $request->religion,
                     'nric' => $request->nric,
                     'blood_group' => $request->blood_group,
                     'occupation' => $request->occupation,
@@ -13003,6 +13017,7 @@ class ApiController extends BaseController
                         'created_at' => date("Y-m-d H:i:s")
                     ]);
                 }
+
             }
             $success = [];
             if (!$query) {
@@ -13071,7 +13086,7 @@ class ApiController extends BaseController
                 }
             }
 
-
+            
 
             // dd($staffDetails);
             $data = [
@@ -13185,6 +13200,139 @@ class ApiController extends BaseController
                 ->where('login_id', '=', $request->login_id)
                 ->get();
             return $this->successResponse($section, 'calendors tast details fetch successfully');
+        }
+    }
+    // add Education
+    public function addEducation(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('educations')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // insert data
+                $query = $conn->table('educations')->insert([
+                    'name' => $request->name,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Education has been successfully saved');
+                }
+            }
+        }
+    }
+    // get Education List
+    public function getEducationList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $educationDetails = $conn->table('educations')->get();
+            return $this->successResponse($educationDetails, 'Education record fetch successfully');
+        }
+    }
+    // get Education row details
+    public function getEducationDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $educationDetails = $conn->table('educations')->where('id', $id)->first();
+            return $this->successResponse($educationDetails, 'Education row fetch successfully');
+        }
+    }
+    // update Education
+    public function updateEducation(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('educations')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // update data
+                $query = $conn->table('educations')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Education Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+            }
+        }
+    }
+    // delete Education
+    public function deleteEducation(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('educations')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Education have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
         }
     }
 }

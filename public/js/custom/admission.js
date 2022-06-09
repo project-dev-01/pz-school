@@ -108,6 +108,7 @@ $(function () {
                     $("#guardian_photo").html('<img src="' + src + '" class="img-fluid d-block rounded" style="width:100px" />');
                     $("#guardian_first_name").val(data.first_name);
                     $("#guardian_last_name").val(data.last_name);
+                    $("#guardian_email").val(data.email);
                     $("#guardian_nric").val(data.nric);
                     $("#guardian_gender").val(data.gender);
                     $("#guardian_date_of_birth").val(data.date_of_birth);
@@ -170,6 +171,7 @@ $(function () {
                     $("#father_photo").html('<img src="' + src + '" class="img-fluid d-block rounded" style="width:100px" />');
                     $("#father_first_name").val(data.first_name);
                     $("#father_last_name").val(data.last_name);
+                    $("#father_email").val(data.email);
                     $("#father_gender").val(data.gender);
                     $("#father_date_of_birth").val(data.date_of_birth);
                     $("#father_passport").val(data.passport);
@@ -233,6 +235,7 @@ $(function () {
                     $("#mother_photo").html('<img src="' + src + '" class="img-fluid d-block rounded" style="width:100px" />');
                     $("#mother_first_name").val(data.first_name);
                     $("#mother_last_name").val(data.last_name);
+                    $("#mother_email").val(data.email);
                     $("#mother_gender").val(data.gender);
                     $("#mother_date_of_birth").val(data.date_of_birth);
                     $("#mother_passport").val(data.passport);

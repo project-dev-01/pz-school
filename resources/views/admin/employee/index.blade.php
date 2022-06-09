@@ -3,6 +3,8 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
 <link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
+<link rel="stylesheet" href="{{ asset('mobile-country/css/intlTelInput.css') }}">
+<link rel="stylesheet" href="{{ asset('country/css/countrySelect.css') }}">
 <style>
     .switch {
         height: 24px;
@@ -278,8 +280,8 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="Passport">Passport</label>
-                                    <input type="text" class="form-control" placeholder="passport number" name="passport" id="Passport">
+                                    <label for="Passport">Passport Number</label>
+                                    <input type="text" class="form-control" placeholder="Passport Number"  name="passport" id="Passport">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -303,15 +305,11 @@
                             </div>
                         </div>
                         <div class="row">
+                            
                             <div class="col-md-4">
-                                <label for="mobile_no">Mobile No</label>
-                                <div class="input-group input-group-merge">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-phone-volume"></span>
-                                        </div>
-                                    </div>
-                                    <input type="text" class="form-control" name="mobile_no" placeholder="(xx)-00000-0000" id="mobile_no">
+                                <div class="form-group">
+                                    <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
+                                    <input type="tel"  class="form-control"  name="mobile_no" id="mobile_no"  data-parsley-trigger="change" >
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -729,6 +727,29 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
+<script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
+<script src="{{ asset('country/js/countrySelect.js') }}"></script>
+<script>
+    var input = document.querySelector("#mobile_no");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        //preferredCountries: ['cn', 'jp'],
+        preventInvalidNumbers: true,
+        utilsScript: "js/utils.js"
+    });
+
+    $("#Country").countrySelect({
+        responsiveDropdown:true
+    });
+</script>
 <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
 <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
 <script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>

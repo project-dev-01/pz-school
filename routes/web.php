@@ -269,7 +269,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
         // student details
         Route::get('/student', [AdminController::class, 'studentIndex'])->name('admin.student.index');
-        Route::post('student/list', [AdminController::class, 'studentList'])->name('admin.student.list');
+        Route::get('student/list', [AdminController::class, 'studentList'])->name('admin.student.list');
         Route::get('student/student-details/{id}', [AdminController::class, 'getStudentDetails'])->name('admin.student.details');
         Route::post('student/update', [AdminController::class, 'updateStudent'])->name('admin.student.update');
         Route::post('student/delete', [AdminController::class, 'deleteStudent'])->name('admin.student.delete');
@@ -616,6 +616,14 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('leave_management/applyleave_list', [AdminController::class, 'getStaffLeaveList'])->name('admin.leave_management.apply_list');
         Route::get('leave_management/assign_leave_approval', [AdminController::class, 'assignLeaveApprover'])->name('admin.leave_management.assign_leave_approver');
         // Route::get('leave_management/get_all_staff_details', [AdminController::class, 'getAllStaffDetails'])->name('admin.leave_management.get_all_staff_details');
+
+         // Education routes
+         Route::get('education/index', [AdminController::class, 'education'])->name('admin.education');
+         Route::post('education/add', [AdminController::class, 'addEducation'])->name('admin.education.add');
+         Route::get('education/list', [AdminController::class, 'getEducationList'])->name('admin.education.list');
+         Route::post('education/education-details', [AdminController::class, 'getEducationDetails'])->name('admin.education.details');
+         Route::post('education/update', [AdminController::class, 'updateEducation'])->name('admin.education.update');
+         Route::post('education/delete', [AdminController::class, 'deleteEducation'])->name('admin.education.delete');
 
     });
     // admin routes end

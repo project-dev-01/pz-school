@@ -664,7 +664,6 @@
                                     </ul>
                                 </div>
                             </li>
-                            
                             <li>
                                 <a href="#sidebarParent" data-toggle="collapse">
                                     <!--<i class="fe-user-plus"></i>-->
@@ -680,19 +679,19 @@
                                             </clipPath>
                                         </defs>
                                     </svg>
-                                    <span> Parent Details </span>
+                                    <span> Guardian Details </span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarParent">
                                     <ul class="nav-second-level">
                                         <li>
                                             <a href="{{ route('admin.parent.create')}}" class="nav-link {{ (request()->is('admin/parent*')) ? 'active' : '' }}">
-                                                <span>Add Parent</span>
+                                                <span>Add Guardian</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.parent')}}" class="nav-link {{ (request()->is('admin/parent/*')) ? 'active' : '' }}">
-                                                <span>Parent List</span>
+                                                <span>Guardian List</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -765,16 +764,6 @@
                                         <li>
                                             <a href="{{ route('admin.stream_type')}}" class="nav-link {{ (request()->is('admin/stream_type*')) ? 'active' : '' }}">
                                                 <span>Stream Type </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('admin.religion')}}" class="nav-link {{ (request()->is('admin/religion*')) ? 'active' : '' }}">
-                                                <span>Religion </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('admin.race')}}" class="nav-link {{ (request()->is('admin/race*')) ? 'active' : '' }}">
-                                                <span>Race </span>
                                             </a>
                                         </li>
                                     </ul>
@@ -1335,6 +1324,31 @@
                     </a>
                     <div class="collapse" id="sideBarSettings">
                         <ul class="nav-second-level">
+                        <li>
+                                <a href="#sideBarSettingMasters" data-toggle="collapse">
+                                    <i class="fe-book-open"></i> &nbsp;
+                                    Masters <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sideBarSettingMasters">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admin.education')}}" class="nav-link {{ (request()->is('admin/education/index')) ? 'active' : '' }}">
+                                                <span>Education</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.religion')}}" class="nav-link {{ (request()->is('admin/religion*')) ? 'active' : '' }}">
+                                                <span>Religion </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.race')}}" class="nav-link {{ (request()->is('admin/race*')) ? 'active' : '' }}">
+                                                <span>Race </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
                             <li>
                                 <a href="{{ route('admin.settings')}}" class="nav-link {{ (request()->is('admin/settings*')) ? 'active' : '' }}">
                                     <span> General Settings</span>

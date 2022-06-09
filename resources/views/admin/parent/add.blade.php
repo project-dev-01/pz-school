@@ -1,8 +1,10 @@
 @extends('layouts.admin-layout')
-@section('title','Parent')
+@section('title','Add Guardian')
 @section('css')
 <link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
 <link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
+<link rel="stylesheet" href="{{ asset('mobile-country/css/intlTelInput.css') }}">
+<link rel="stylesheet" href="{{ asset('country/css/countrySelect.css') }}">
 <style>
     .switch {
         height: 24px;
@@ -178,7 +180,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title">Add Parent / Guardian</h4>
+                <h4 class="page-title">Add Guardian</h4>
             </div>
         </div>
     </div>
@@ -194,8 +196,8 @@
                     <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                         <li class="nav-item">
                             <h4 class="nav-link">
-                                Parent / Guardian Details
-                                <h4>
+                                Guardian Details
+                            <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -282,8 +284,8 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="Passport">Passport</label>
-                                    <input type="text" class="form-control" name="passport">
+                                    <label for="Passport">Passport Number</label>
+                                    <input type="text" class="form-control" placeholder="Passport Number" name="passport">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -313,30 +315,55 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-phone-volume"></span>
-                                            </div>
-                                        </div>
-                                        <input type="text" class="form-control"  name="mobile_no" aria-describedby="inputGroupPrepend" >
-                                    </div>
+                                    <input type="tel"  class="form-control"  name="mobile_no" id="mobile_no" data-parsley-trigger="change" >
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="education">Education</label>
-                                    <input type="text"  class="form-control" name="education" data-parsley-trigger="change" >
+                                    <label for="religion">Religion</label>
+                                    <select class="form-control" name="religion" >
+                                        <option value="">Choose Religion</option>
+                                        @forelse($religion as $r)
+                                        <option value="{{$r['id']}}">{{$r['religions_name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label for="race">Race</label>
+                                    <select class="form-control" name="race">
+                                        <option value="">Choose race</option>
+                                        @forelse($races as $r)
+                                        <option value="{{$r['id']}}">{{$r['races_name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="education">Education</label>
+                                    <select class="form-control" name="education" >
+                                        <option value="">Choose Education</option>
+                                        @forelse($education as $e)
+                                        <option value="{{$e['id']}}">{{$e['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label for="occupation">Occupation<span class="text-danger">*</span></label>
                                     <input type="text"  class="form-control" name="occupation" data-parsley-trigger="change" >
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="income">Income</label>
@@ -353,17 +380,17 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="country">Country</label>
-                                    <input type="text"  class="form-control" name="country" data-parsley-trigger="change" >
+                                    <input type="text"  class="form-control" name="country" id="country" data-parsley-trigger="change" >
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="state">State/Province</label>
                                     <input type="text"  class="form-control" name="state" data-parsley-trigger="change" >
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="city">City</label>
@@ -376,15 +403,13 @@
                                     <input type="text" class="form-control" name="post_code" id="postCode">
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="address">Address 1</label>
                                     <input class="form-control" name="address" id="address">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="address_2">Address 2</label>
                                     <input class="form-control" name="address_2" id="address_2">
@@ -525,10 +550,32 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
+<script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
+<script src="{{ asset('country/js/countrySelect.js') }}"></script>
+
 <script>
     var indexParent = "{{ route('admin.parent') }}";
-</script>
 
+    var input = document.querySelector("#mobile_no");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        //preferredCountries: ['cn', 'jp'],
+        preventInvalidNumbers: true,
+        utilsScript: "js/utils.js"
+    });
+
+    $("#country").countrySelect({
+        responsiveDropdown:true
+    });
+</script>
 <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
 <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
 <script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>

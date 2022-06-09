@@ -1,8 +1,10 @@
 @extends('layouts.admin-layout')
-@section('title','Edit Parent')
+@section('title','Edit Guardian')
 @section('css')
 <link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
 <link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
+<link rel="stylesheet" href="{{ asset('mobile-country/css/intlTelInput.css') }}">
+<link rel="stylesheet" href="{{ asset('country/css/countrySelect.css') }}">
 <style>
     .switch {
         height: 24px;
@@ -183,7 +185,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Parent Profile</h4>
+                <h4 class="page-title">Guardian Profile</h4>
             </div>
         </div>
     </div>     
@@ -290,8 +292,8 @@
                                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                                     <li class="nav-item">
                                         <h4 class="nav-link">
-                                            Parent Details
-                                            <h4>
+                                            Guardian Details
+                                        <h4>
                                     </li>
                                 </ul>
                                 <div class="card-body">
@@ -380,8 +382,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="Passport">Passport</label>
-                                                <input type="text" class="form-control" name="passport" value="{{$parent['passport']}}">
+                                                <label for="Passport">Passport Number</label>
+                                                <input type="text" class="form-control" name="passport" placeholder="Passport Number" value="{{$parent['passport']}}">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -412,30 +414,55 @@
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
                                                 <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
-                                                <div class="input-group input-group-merge">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <span class="fas fa-phone-volume"></span>
-                                                        </div>
-                                                    </div>
-                                                    <input type="text" class="form-control" value="{{$parent['mobile_no']}}" name="mobile_no" aria-describedby="inputGroupPrepend" >
-                                                </div>
+                                                <input type="tel"  class="form-control"  name="mobile_no" id="mobile_no" value="{{$parent['mobile_no']}}" data-parsley-trigger="change" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="education">Education</label>
-                                                <input type="text"  class="form-control" value="{{$parent['education']}}" name="education" data-parsley-trigger="change" >
+                                                <label for="religion">Religion</label>
+                                                <select class="form-control" name="religion">
+                                                    <option value="">Choose Religion</option>
+                                                    @forelse($religion as $r)
+                                                    <option value="{{$r['id']}}" {{$parent['religion'] == $r['id'] ? "selected" : ""}}>{{$r['religions_name']}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
+                                                <label for="race">Race</label>
+                                                <select class="form-control" name="race">
+                                                    <option value="">Choose race</option>
+                                                    @forelse($races as $r)
+                                                    <option value="{{$r['id']}}" {{$parent['race'] == $r['id'] ? "selected" : ""}}>{{$r['races_name']}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="education">Education</label>
+                                                <select class="form-control" name="education" >
+                                                    <option value="">Choose Education</option>
+                                                    @forelse($education as $e)
+                                                    <option value="{{$e['id']}}" {{$parent['education'] == $e['id'] ? "selected" : ""}}>{{$e['name']}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
                                                 <label for="occupation">Occupation<span class="text-danger">*</span></label>
                                                 <input type="text"  class="form-control" value="{{$parent['occupation']}}" name="occupation" data-parsley-trigger="change" >
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
                                                 <label for="income">Income</label>
@@ -452,7 +479,13 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="country">Country</label>
-                                                <input type="text"  class="form-control" value="{{$parent['country']}}" name="country" data-parsley-trigger="change" >
+                                                <input type="text"  class="form-control" value="{{$parent['country']}}" name="country" id="country" data-parsley-trigger="change" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="state">State/Province</label>
+                                                <input type="text"  class="form-control" value="{{$parent['state']}}" name="state" data-parsley-trigger="change" >
                                             </div>
                                         </div>
                                     </div>
@@ -465,25 +498,17 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="state">State/Province</label>
-                                                <input type="text"  class="form-control" value="{{$parent['state']}}" name="state" data-parsley-trigger="change" >
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
                                                 <label for="post_code">Zip/Postal Code</label>
                                                 <input type="text"  class="form-control" value="{{$parent['post_code']}}" name="post_code" data-parsley-trigger="change" >
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="address">Address 1</label>
                                                 <input class="form-control" name="address" id="address" value="{{$parent['address']}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="address_2">Address 2</label>
                                                 <input class="form-control" name="address_2" id="address_2" value="{{$parent['address_2']}}">
@@ -683,6 +708,30 @@
 
 @endsection
 @section('scripts')
+
+<script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
+<script src="{{ asset('country/js/countrySelect.js') }}"></script>
+<script>
+    var input = document.querySelector("#mobile_no");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        //preferredCountries: ['cn', 'jp'],
+        preventInvalidNumbers: true,
+        utilsScript: "js/utils.js"
+    });
+
+    $("#country").countrySelect({
+        responsiveDropdown:true
+    });
+</script>
 <script>
     var indexParent = "{{ route('admin.parent') }}";
     var sectionByClass = "{{ route('admin.section_by_class') }}";
@@ -690,7 +739,6 @@
     var roomByHostel = "{{ route('admin.room_by_hostel') }}";
     var indexAdmission = "{{ route('admin.admission') }}";
 </script>
-
 <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
 <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
 <script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>

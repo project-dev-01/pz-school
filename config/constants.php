@@ -422,7 +422,14 @@ return [
 
         // add task in calendor
         'calendor_add_task_calendor'=>$url.'/calendor/add-task-calendor',
-        'calendor_list_task_calendor'=>$url.'/calendor/list-task-calendor'
+        'calendor_list_task_calendor'=>$url.'/calendor/list-task-calendor',
+        
+        // education url
+        'education_add' => $url.'/education/add',
+        'education_list' => $url.'/education/list',
+        'education_details' => $url.'/education/education-details',
+        'education_update' => $url.'/education/update',
+        'education_delete' => $url.'/education/delete',
     ]
 
 ];

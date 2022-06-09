@@ -1,5 +1,6 @@
 $(function () {
     
+    $("#student").hide();
     var father_id = $("#father_id").val();
     if (father_id) {
         father(father_id);
@@ -78,6 +79,7 @@ $(function () {
                 $("#guardian_photo").html('<img src="' + src + '" class="img-fluid d-block rounded" style="width:100px" />');
                 $("#guardian_first_name").val(data.first_name);
                 $("#guardian_last_name").val(data.last_name);
+                $("#guardian_email").val(data.email);
                 $("#guardian_nric").val(data.nric);
                 $("#guardian_gender").val(data.gender);
                 $("#guardian_date_of_birth").val(data.date_of_birth);
@@ -163,6 +165,7 @@ $(function () {
                 $("#father_photo").html('<img src="' + src + '" class="img-fluid d-block rounded" style="width:100px" />');
                 $("#father_first_name").val(data.first_name);
                 $("#father_last_name").val(data.last_name);
+                $("#father_email").val(data.email);
                 $("#father_gender").val(data.gender);
                 $("#father_date_of_birth").val(data.date_of_birth);
                 $("#father_passport").val(data.passport);
@@ -251,6 +254,7 @@ $(function () {
                 $("#mother_photo").html('<img src="' + src + '" class="img-fluid d-block rounded" style="width:100px" />');
                 $("#mother_first_name").val(data.first_name);
                 $("#mother_last_name").val(data.last_name);
+                $("#mother_email").val(data.email);
                 $("#mother_gender").val(data.gender);
                 $("#mother_date_of_birth").val(data.date_of_birth);
                 $("#mother_passport").val(data.passport);
@@ -288,37 +292,71 @@ $(function () {
     }
 
 
-    $("#indexFilter").validate({
-        rules: {
-            class_id: "required",
-            section_id: "required",
-        }
-    });
-
     // get student list
-    $('#indexFilter').on('submit', function (e) {
+    $('#indexSubmit').on('click', function (e) {
         e.preventDefault();
-        var filterCheck = $("#indexFilter").valid();
-        if (filterCheck === true) {
-            var form = this;
-            $.ajax({
-                url: $(form).attr('action'),
-                method: $(form).attr('method'),
-                data: new FormData(form),
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                success: function (data) {
-                    if (data.code == 200) {
-                        $("#student").show("slow");
-                        $("#student_table").html(data.table);
-                    } else {
-                        $("#student").hide("slow");
-                        toastr.error(data.message);
-                    }
+        $("#student").show("slow");
+        $('#student-table').DataTable({
+            processing: true,
+            info: true,
+            serverSide: true,
+            ajax: {
+                url: studentList,
+                data: function (d) {
+                    d.student_name = $('#student_name').val(),
+                    d.class_id = $('#class_id').val(),
+                    d.section_id = $('#section_id').val(),
+                    d.session_id = $('#session_id').val()
                 }
-            });
-        }
+            },
+            "pageLength": 5,
+            "aLengthMenu": [
+                [5, 10, 25, 50, -1],
+                [5, 10, 25, 50, "All"]
+            ],
+            columns: [
+                {
+                    searchable: false,
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                }
+                ,
+                {
+                    data: 'first_name',
+                    name: 'first_name'
+                },
+                {
+                    data: 'last_name',
+                    name: 'last_name'
+                },
+                {
+                    data: 'register_no',
+                    name: 'register_no'
+                },
+                {
+                    data: 'roll_no',
+                    name: 'roll_no'
+                },
+                {
+                    data: 'gender',
+                    name: 'gender'
+                },
+                {
+                    data: 'email',
+                    name: 'email'
+                },
+                {
+                    data: 'mobile_no',
+                    name: 'mobile_no'
+                },
+                {
+                    data: 'actions',
+                    name: 'actions',
+                    orderable: false,
+                    searchable: false
+                },
+            ]
+        });
     });
 
     $("#class_id").on('change', function (e) {
@@ -409,7 +447,7 @@ $(function () {
             }, function (data) {
                 if (data.code == 200) {
                     $("#student").show("slow");
-                    $("#student_table").html(data.table);
+                    $('#student_table').DataTable().ajax.reload(null, false);
                     toastr.success(data.message);
                 } else {
                     $("#student").hide("slow");

@@ -1,5 +1,7 @@
 $(function () {
 
+    
+
     $("#date_of_birth").datepicker({
         dateFormat: 'yy-mm-dd',
         changeMonth: true,
@@ -133,7 +135,7 @@ $(function () {
             ]
        }).on('draw', function () {
        });
-   }
+    }
 
    // delete Parent 
    $(document).on('click', '#deleteParentBtn', function () {

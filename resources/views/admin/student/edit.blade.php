@@ -4,6 +4,8 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
 <link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
+<link rel="stylesheet" href="{{ asset('mobile-country/css/intlTelInput.css') }}">
+<link rel="stylesheet" href="{{ asset('country/css/countrySelect.css') }}">
 <style>
     .switch {
         height: 24px;
@@ -385,12 +387,18 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="txt_nric">NRIC Number</label>
-                                                <input type="text" maxlength="50" id="txt_nric" class="form-control alloptions" value="{{$student['nric']}}" placeholder="Identifaction Number" name="txt_nric" data-parsley-trigger="change">
+                                                <label for="Passport">Passport Number</label>
+                                                <input type="text" class="form-control" name="txt_passport" placeholder="Passport Number" value="{{$student['passport']}}">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="txt_nric">NRIC Number</label>
+                                                <input type="text" maxlength="50" id="txt_nric" class="form-control alloptions" value="{{$student['nric']}}" placeholder="Identifaction Number" name="txt_nric" data-parsley-trigger="change">
+                                            </div>
+                                        </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="txt_religion">Religion</label>
@@ -415,22 +423,15 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="">Contact Number<span class="text-danger">*</span></label>
-                                                <div class="input-group input-group-merge">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <span class="fas fa-phone-volume"></span>
-                                                        </div>
-                                                    </div>
-                                                    <input type="text" name="txt_mobile_no" class="form-control" value="{{$student['mobile_no']}}" id="txt_mobile_no" placeholder="" aria-describedby="inputGroupPrepend">
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
 
                                     <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
+                                                <input type="tel"  class="form-control"  name="txt_mobile_no" id="txt_mobile_no" value="{{$student['mobile_no']}}" data-parsley-trigger="change" >
+                                            </div>
+                                        </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="drp_country">Country</label>
@@ -443,14 +444,14 @@
                                                 <input type="" id="drp_state" class="form-control" name="drp_state" data-parsley-trigger="change" value="{{$student['state']}}">
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="drp_city">City</label>
                                                 <input type="" id="drp_city" class="form-control" name="drp_city" data-parsley-trigger="change" value="{{$student['city']}}">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="drp_post_code">Zip/Postal Code</label>
@@ -591,7 +592,7 @@
                                 </ul>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-2">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="email">Email<span class="text-danger">*</span></label>
                                                 <div class="input-group input-group-merge">
@@ -681,18 +682,31 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="Passport">Passport</label>
+                                                    <label for="email">Email<span class="text-danger">*</span></label>
+                                                    <div class="input-group input-group-merge">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <span class="far fa-envelope-open"></span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" class="form-control"  id="father_email" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="Passport">Passport Number</label>
                                                     <input type="text" class="form-control"id="father_passport" readonly>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="heard">NRIC Number</label>
                                                     <input type="text" maxlength="50" id="father_nric" class="form-control" placeholder="Identifaction Number" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="blooddgrp">Blood Group</label>
@@ -722,14 +736,14 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="education">Education</label>
                                                     <input type="text"  class="form-control" data-parsley-trigger="change" id="father_education" readonly>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="txt_occupation">Occupation<span class="text-danger">*</span></label>
@@ -742,14 +756,14 @@
                                                     <input type="text" maxlength="50" id="father_income" class="form-control "  placeholder="Income" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="country">Country</label>
                                                     <input type="text"  class="form-control" id="father_country" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group mb-3">
                                                     <label for="validationCustomUsername">State/Province</label>
@@ -762,21 +776,21 @@
                                                     <input type="text" class="form-control " maxlength="50" id="father_city"  placeholder="city" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="father_post_code">Zip/Postal code</label>
                                                     <input type="text" class="form-control" id="father_post_code" readonly>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group mb-3">
                                                     <label for="father_address"> Address 1</label>
                                                     <input type="text" class="form-control" id="father_address" readonly>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group mb-3">
                                                     <label for="father_address_2"> Address 2</label>
                                                     <input type="text" class="form-control" id="father_address_2" readonly>
@@ -849,18 +863,31 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="Passport">Passport</label>
+                                                    <label for="email">Email<span class="text-danger">*</span></label>
+                                                    <div class="input-group input-group-merge">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <span class="far fa-envelope-open"></span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" class="form-control"  id="mother_email" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="Passport">Passport Number</label>
                                                     <input type="text" class="form-control"id="mother_passport" readonly>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="heard">NRIC Number</label>
                                                     <input type="text" maxlength="50" id="mother_nric" class="form-control" placeholder="Identifaction Number" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="blooddgrp">Blood Group</label>
@@ -890,14 +917,14 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="education">Education</label>
                                                     <input type="text"  class="form-control" data-parsley-trigger="change" id="mother_education" readonly>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="txt_occupation">Occupation<span class="text-danger">*</span></label>
@@ -910,14 +937,14 @@
                                                     <input type="text" maxlength="50" id="mother_income" class="form-control"  placeholder="Income" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="country">Country</label>
                                                     <input type="text"  class="form-control" id="mother_country" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group mb-3">
                                                     <label for="validationCustomUsername">State/Province</label>
@@ -930,21 +957,21 @@
                                                     <input type="text" class="form-control" maxlength="50" id="mother_city"  placeholder="city" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="mother_post_code">Zip/Postal code</label>
                                                     <input type="text" class="form-control" id="mother_post_code" readonly>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group mb-3">
                                                     <label for="mother_address"> Address 1</label>
                                                     <input type="text" class="form-control" id="mother_address" readonly>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group mb-3">
                                                     <label for="mother_address_2"> Address 2</label>
                                                     <input type="text" class="form-control" id="mother_address_2" readonly>
@@ -1029,18 +1056,31 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="Passport">Passport</label>
+                                                    <label for="email">Email<span class="text-danger">*</span></label>
+                                                    <div class="input-group input-group-merge">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <span class="far fa-envelope-open"></span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" class="form-control"  id="guardian_email" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="Passport">Passport Number</label>
                                                     <input type="text" class="form-control"id="guardian_passport" readonly>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="heard">NRIC Number</label>
                                                     <input type="text" maxlength="50" id="guardian_nric" class="form-control" placeholder="Identifaction Number" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="blooddgrp">Blood Group</label>
@@ -1070,14 +1110,14 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="education">Education</label>
                                                     <input type="text"  class="form-control" data-parsley-trigger="change" id="guardian_education" readonly>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="txt_occupation">Occupation<span class="text-danger">*</span></label>
@@ -1090,14 +1130,14 @@
                                                     <input type="text" maxlength="50" id="guardian_income" class="form-control"  placeholder="Income" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="country">Country</label>
                                                     <input type="text"  class="form-control" id="guardian_country" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group mb-3">
                                                     <label for="validationCustomUsername">State/Province</label>
@@ -1110,27 +1150,26 @@
                                                     <input type="text" class="form-control" maxlength="50" id="guardian_city"  placeholder="city" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="guardian_post_code">Zip/Postal code</label>
                                                     <input type="text" class="form-control" id="guardian_post_code" readonly>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group mb-3">
                                                     <label for="guardian_address"> Address 1</label>
                                                     <input type="text" class="form-control" id="guardian_address" readonly>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group mb-3">
                                                     <label for="guardian_address_2"> Address 2</label>
                                                     <input type="text" class="form-control" id="guardian_address_2" readonly>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -1315,7 +1354,7 @@
                                                 <td width="25%" class="father_date_of_birth"></td>
                                             </tr>
                                             <tr>
-                                                <th width="25%">Passport</th>
+                                                <th width="25%">Passport Number</th>
                                                 <td width="25%" class="father_passport"></td>
                                                 <th width="25%">NRIC Number</th>
                                                 <td width="25%" class="father_nric"></td>
@@ -1378,7 +1417,7 @@
                                                 <td width="25%" class="mother_date_of_birth"></td>
                                             </tr>
                                             <tr>
-                                                <th width="25%">Passport</th>
+                                                <th width="25%">Passport Number</th>
                                                 <td width="25%" class="mother_passport"></td>
                                                 <th width="25%">NRIC Number</th>
                                                 <td width="25%" class="mother_nric"></td>
@@ -1441,7 +1480,7 @@
                                                 <td width="25%" class="guardian_date_of_birth"></td>
                                             </tr>
                                             <tr>
-                                                <th width="25%">Passport</th>
+                                                <th width="25%">Passport Number</th>
                                                 <td width="25%" class="guardian_passport"></td>
                                                 <th width="25%">NRIC Number</th>
                                                 <td width="25%" class="guardian_nric"></td>
@@ -1495,6 +1534,29 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
+<script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
+<script src="{{ asset('country/js/countrySelect.js') }}"></script>
+<script>
+    var input = document.querySelector("#txt_mobile_no");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        //preferredCountries: ['cn', 'jp'],
+        preventInvalidNumbers: true,
+        utilsScript: "js/utils.js"
+    });
+
+    $("#drp_country").countrySelect({
+        responsiveDropdown:true
+    });
+</script>
 <script>
     
     var parentImg = "{{ asset('users/images/') }}";
