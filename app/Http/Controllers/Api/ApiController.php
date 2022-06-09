@@ -7454,7 +7454,7 @@ class ApiController extends BaseController
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
             // create new connection
-            $date = now()->format('Y-m-d');
+            $date = now()->format('Y-m-d h:i:s');
             $day = now()->format('d');
             $month = now()->format('m');
             $Connection = $this->createNewConnection($request->branch_id);
@@ -7466,8 +7466,10 @@ class ApiController extends BaseController
                 ->get();
             $success = [];
             foreach ($birthday as $birth) {
-                $data = $birth;
-                $data->title = $birth->name . " Birthday";
+                $data = new \stdClass();
+                $data->id = $birth->id;
+                $data->birthday = $birth->birthday;
+                $data->title = $birth->name . "Happy Birthday";
                 $data->start = $date;
                 $data->end = $date;
                 $data->className = "bg-success";
@@ -7661,7 +7663,21 @@ class ApiController extends BaseController
             $Connection = $this->createNewConnection($request->branch_id);
 
             $success = $Connection->table('students as stud')
-                ->select('cl.id', 'cl.class_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as color', 'sb.name as subject_name', 'sb.name as title', 'st.name as teacher_name', 'drr.student_remarks')
+                ->select(
+                    'cl.id',
+                    'cl.class_id',
+                    'cl.section_id',
+                    'cl.subject_id',
+                    'cl.start',
+                    'cl.end',
+                    's.name as section_name',
+                    'c.name as class_name',
+                    'sb.subject_color_calendor as color',
+                    'sb.name as subject_name',
+                    'sb.name as title',
+                    DB::raw("CONCAT(st.first_name, ' ', st.last_name) as teacher_name"),
+                    'drr.student_remarks'
+                )
                 ->join('enrolls as en', 'en.student_id', '=', 'stud.id')
                 ->join('classes as c', 'en.class_id', '=', 'c.id')
                 ->join('sections as s', 'en.section_id', '=', 's.id')
@@ -10583,7 +10599,7 @@ class ApiController extends BaseController
                 // return
             }
 
-            
+
             if (!$studentId) {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong add Student']);
             } else {
@@ -13017,7 +13033,6 @@ class ApiController extends BaseController
                         'created_at' => date("Y-m-d H:i:s")
                     ]);
                 }
-
             }
             $success = [];
             if (!$query) {
@@ -13086,7 +13101,7 @@ class ApiController extends BaseController
                 }
             }
 
-            
+
 
             // dd($staffDetails);
             $data = [
@@ -13172,8 +13187,8 @@ class ApiController extends BaseController
             ]);
             // get insert row
             $success = $createConnection->table('calendors')
-            ->select('id', 'title', 'start', 'end','description','task_color as className')
-            ->where('id', $ids)->first();
+                ->select('id', 'title', 'start', 'end', 'description', 'task_color as className')
+                ->where('id', $ids)->first();
             // dd($success);
 
             if (!$ids) {
@@ -13196,7 +13211,7 @@ class ApiController extends BaseController
             $secConn = $this->createNewConnection($request->branch_id);
             // get data
             $section = $secConn->table('calendors')
-                ->select('id', 'title', 'start', 'end','description','task_color as className')
+                ->select('id', 'title', 'start', 'end', 'description', 'task_color as className')
                 ->where('login_id', '=', $request->login_id)
                 ->get();
             return $this->successResponse($section, 'calendors tast details fetch successfully');

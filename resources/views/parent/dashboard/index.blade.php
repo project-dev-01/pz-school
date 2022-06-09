@@ -1,6 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Dashboard')
 @section('content')
+<link href="{{ asset('css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -636,5 +637,6 @@
 
 
 <!-- get timetable list -->
-<script src="{{ asset('js/custom/student_calendor.js') }}"></script>
+<!-- <script src="{{ asset('js/custom/student_calendor.js') }}"></script> -->
+<script src="{{ asset('js/custom/student_calendor_new.js') }}"></script>
 @endsection

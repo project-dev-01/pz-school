@@ -1,5 +1,6 @@
 @extends('layouts.admin-layout')
 @section('title','Dashboard')
+
 @section('content')
 <link href="{{ asset('css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
@@ -240,104 +241,92 @@
                     <!-- task details -->
                 </div>
                 <!-- task panel end -->
-            </div>
-        </div>
+            </div> <!-- end card-box -->
+        </div> <!-- end col-->
     </div>
+    <!-- end row-->
 
-    <div class="row">
-        <div class="col-12">
-            <!-- tasks panel -->
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="row">
-                        <div class="col">
-                            <div class="card">
-                                <ul class="nav nav-tabs" >
-                                    <li class="nav-item">
-                                        <h4 class="nav-link">
-                                            <span data-feather="file-text" class="icon-dual" id="span-parent"></span> Homework List
-                                            <h4>
-                                    </li>
-                                </ul><br>
-                                <div class="card-body">
-
-                                    @forelse ($get_homework_list_dashboard as $homework)
-                                    <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
-                                        <div class="col">
-                                            <a class="text-dark" data-toggle="collapse" href="#hmenv" aria-expanded="false" aria-controls="hmenv">
-                                                <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> {{$homework['title']}}<span class="text-muted font-14"></span></h5>
-                                            </a>
-                                            <!-- Right modal -->
-                                            <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#right-modal">Rightbar Modal</button> -->
-                                            <div class="collapse show" id="hmenv">
-                                                <div class="card mb-0 shadow-none">
-                                                    <div class="card-body pb-0" id="task-list-one">
-                                                        <!-- task -->
-                                                        <div class="row">
-                                                            <div class="col-sm-2">
-                                                                <a href="{{ route('parent.homework')}}">{{$homework['subject_name']}} </a>
-                                                            </div> <!-- end col -->
-                                                            <div class="col-sm-6">
-                                                                <div class="d-sm-flex">
-                                                                    <!-- <div>
-                                                                            <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="{{ route('parent.homework')}}" role="button" aria-haspopup="false" aria-expanded="false">
-                                                                                <img src="{{ Session::get('picture') && asset('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" alt="user-image" class="rounded-circle admin_picture">
-                                                                            </a>
-                                                                        </div> -->
-                                                                    <div class="mt-3 mt-sm-0">
-                                                                        <ul class="list-inline font-13 text-sm-right">
-                                                                            <li class="list-inline-item">
-                                                                                <span class="badge badge-soft-danger">InComplete</span>
-                                                                            </li>
-                                                                            <li class="list-inline-item pr-1">
-                                                                                <i class='mdi mdi-calendar-month-outline font-16'></i>
-                                                                                Submission Date : {{$homework['date_of_submission']}}
-                                                                            </li>
-                                                                            <li class="list-inline-item text-danger">
-                                                                            </li>
-
-                                                                        </ul>
-                                                                    </div>
-                                                                </div> <!-- end .d-flex-->
-                                                            </div> <!-- end col -->
-                                                        </div>
-                                                        <!-- end task -->
-                                                    </div> <!-- end card-body-->
-                                                </div> <!-- end card -->
-                                            </div> <!-- end .collapse-->
-
-                                        </div> <!-- end col -->
-                                    </div> <!-- Maths row -->
-                                    @empty
-                                    <p></p>
-                                    @endforelse
-
-                                </div> <!-- end card-body -->
-                            </div> <!-- end card -->
-                        </div> <!-- end col -->
-                    </div> <!-- end row -->
-                </div> <!-- end col -->
-
-                <!-- task details -->
-            </div>
-            <!-- task panel end -->
-        </div>
-    </div>
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div id="student_calendor"></div>
+                            <div id="teacher_calendor"></div>
                         </div>
                     </div> <!-- end row -->
                 </div> <!-- end card body-->
             </div> <!-- end card -->
+            <div class="modal fade viewEvent" id="event-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myviewEventModalLabel"> <i class="fas fa-info-circle"></i> Event Details </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-box">
+                                        <div class="table-responsive">
+                                            <table class="table mb-0">
+                                                <tr>
+                                                    <td>Title</td>
+                                                    <td id="title"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Type</td>
+                                                    <td id="type"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Start Date</td>
+                                                    <td id="start_date"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>End Date</td>
+                                                    <td id="end_date"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Audience</td>
+                                                    <td id="audience"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Description</td>
+                                                    <td id="description"></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div> <!-- end card-box -->
+                                </div> <!-- end col -->
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
 
+            <div class="modal fade " id="birthday-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myviewBirthdayModalLabel"> <i class="fas fa-info-circle"></i> Birthday </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-box">
+                                        <div class="table-responsive">
+                                            <p class="text-center"> Happy Birthday <span id="name"></span></p>
+                                        </div>
+                                    </div> <!-- end card-box -->
+                                </div> <!-- end col -->
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
             <!-- Add New Event MODAL -->
-            <!-- Add New Event MODAL -->
-            <div class="modal fade" id="student-modal" tabindex="-1">
+            <div class="modal fade" id="teacher-modal" tabindex="-1">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header py-3 px-4 border-bottom-0 d-block">
@@ -345,7 +334,7 @@
                             <h5 class="modal-title">Schedule</h5>
                         </div>
                         <div class="modal-body p-4">
-                            <form id="addStudentReport" method="post" action="{{ route('student.classroom.add_daily_report_remarks') }}" autocomplete="off">
+                            <form id="addDailyReport" method="post" action="{{ route('teacher.classroom.add_daily_report') }}" autocomplete="off">
                                 <div class="row">
                                     <div class="col-4">
                                         <div class="col-md-12 font-weight-bold">Standard </div>
@@ -401,12 +390,22 @@
                                         <div class="col-md-12" id="teacher-name"></div>
                                     </div>
                                     <div class="col-12">
-                                        <textarea class="form-control" style="margin: 12px;" placeholder="Enter your notes" id="calNotes" name="student_remarks"></textarea>
+                                        <!-- <div class="form-group"> -->
+                                        <!-- <label class="control-label font-weight-bold">Notes :</label> -->
+                                        <textarea class="form-control" style="margin: 12px;" placeholder="Enter your notes" id="calNotes" name="daily_report"></textarea>
+                                        <!-- </div> -->
                                     </div>
                                 </div>
                                 <div class="row mt-2">
+                                    <!-- <div class="col-6 text-right">
+                                        <a href="{{ route('teacher.classroom.management')}}"><button type="button" class="btn btn-primary width-xs waves-effect waves-light">Go to Class</button></a>
+                                    </div> -->
                                     <div class="col-6 text-left">
                                         <button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <!-- <button type="button" class="btn btn-light mr-1" data-dismiss="modal">Close</button> -->
+                                        <button type="button" id="goToClassRoom" class="btn btn-primary width-xs waves-effect waves-light">Go to Classroom</button>
                                     </div>
                                 </div>
                             </form>
@@ -414,53 +413,6 @@
                     </div> <!-- end modal-content-->
                 </div> <!-- end modal dialog-->
             </div>
-            <div class="modal fade viewEvent" id="event-modal" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myviewEventModalLabel"> <i class="fas fa-info-circle"></i> Event Details </h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="card-box">
-                                        <div class="table-responsive">
-                                            <table class="table mb-0">
-                                                <tr>
-                                                    <td>Title</td>
-                                                    <td id="title"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Type</td>
-                                                    <td id="type"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Start Date</td>
-                                                    <td id="start_date"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>End Date</td>
-                                                    <td id="end_date"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Audience</td>
-                                                    <td id="audience"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Description</td>
-                                                    <td id="description"></td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div> <!-- end card-box -->
-                                </div> <!-- end col -->
-                            </div>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-            <!-- end modal-->
         </div>
         <!-- end col-12 -->
     </div> <!-- end row -->
@@ -471,61 +423,390 @@
                 <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            <span data-feather="book" class="icon-dual" id="span-parent"></span> Test Score Analysis
+                            <span data-feather="edit" class="icon-dual" id="span-parent"></span> Top Scoreres of class
                             <h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
                     <div class="mt-4 chartjs-chart">
-                        <canvas id="radar-chart-test-marks" data-colors="#39afd1,#a17fe0"></canvas>
+                        <div id="chart-hor-stack-bar-chart" style="min-height: 365px;"></div>
                         <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
                     </div>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col -->
+    </div>
+
+    <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            <span data-feather="book-open" class="icon-dual" id="span-parent"></span> Marks by Subject
+                            <span data-feather="edit" class="icon-dual" id="span-parent"></span> Top 10 ranking
                             <h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <div class="card-widgets">
-                        <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                        <a data-toggle="collapse" href="#cardCollpase2" role="button" aria-expanded="false" aria-controls="cardCollpase2"><i class="mdi mdi-minus"></i></a>
-                        <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
-                    </div>
-                    <h4 class="header-title mb-0">Marks by Subject</h4>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-box">
+                                <div class="table-responsive">
+                                    <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Score</th>
+                                                <th>Grade</th>
+                                                <th>Ranking</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>William</th>
+                                                <td>99</td>
+                                                <td>A</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <th>James</th>
+                                                <td>85</td>
+                                                <td>B</td>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Benjamin</th>
+                                                <td>75</td>
+                                                <td>C</td>
+                                                <td>3</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Lucas</th>
+                                                <td>60</td>
+                                                <td>D</td>
+                                                <td>4</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Sophia</th>
+                                                <td>85</td>
+                                                <td>B</td>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Amelia</th>
+                                                <td>75</td>
+                                                <td>C</td>
+                                                <td>3</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Charlotte</th>
+                                                <td>40</td>
+                                                <td>D</td>
+                                                <td>22</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Isabella</th>
+                                                <td>50</td>
+                                                <td>D</td>
+                                                <td>11</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Mia</th>
+                                                <td>40</td>
+                                                <td>D</td>
+                                                <td>12</td>
+                                            </tr>
 
-                    <div id="cardCollpase2" class="collapse pt-3 show" dir="ltr">
-                        <div id="apex-line-1" class="apex-charts" data-colors="#9B59B6,#E91E63,#4A6F4B,#f7b84b,#4a81d4"></div>
-                    </div> <!-- collapsed end -->
-                </div> <!-- end card-body -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div> <!-- end card-box -->
+                        </div> <!-- end col -->
+                    </div>
+                    <!--- end row -->
+                </div> <!-- end card-body-->
             </div> <!-- end card-->
-        </div> <!-- end col-->
+        </div> <!-- end col -->
     </div>
-    @include('student.dashboard.check_list')
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <ul class="nav nav-tabs" >
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                            <span data-feather="edit" class="icon-dual" id="span-parent"></span> Bottom 10 ranking
+                            <h4>
+                    </li>
+                </ul><br>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-box">
+                                <div class="table-responsive">
+                                    <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Score</th>
+                                                <th>Grade</th>
+                                                <th>Ranking</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Charlotte</th>
+                                                <td>40</td>
+                                                <td>D</td>
+                                                <td>22</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Isabella</th>
+                                                <td>50</td>
+                                                <td>D</td>
+                                                <td>11</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Mia</th>
+                                                <td>40</td>
+                                                <td>D</td>
+                                                <td>12</td>
+                                            </tr>
+                                            <tr>
+                                                <th>William</th>
+                                                <td>99</td>
+                                                <td>A</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <th>James</th>
+                                                <td>85</td>
+                                                <td>B</td>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Benjamin</th>
+                                                <td>75</td>
+                                                <td>C</td>
+                                                <td>3</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Lucas</th>
+                                                <td>60</td>
+                                                <td>D</td>
+                                                <td>4</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Sophia</th>
+                                                <td>85</td>
+                                                <td>B</td>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Amelia</th>
+                                                <td>75</td>
+                                                <td>C</td>
+                                                <td>3</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div> <!-- end card-box -->
+                        </div> <!-- end col -->
+                    </div>
+                    <!--- end row -->
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <ul class="nav nav-tabs" >
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                            <span data-feather="edit" class="icon-dual" id="span-parent"></span> Top 10 Improments
+                            <h4>
+                    </li>
+                </ul><br>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-box">
+                                <div class="table-responsive">
+                                    <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Score</th>
+                                                <th>Grade</th>
+                                                <th>Ranking</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>William</th>
+                                                <td>99</td>
+                                                <td>A</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <th>James</th>
+                                                <td>85</td>
+                                                <td>B</td>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Benjamin</th>
+                                                <td>75</td>
+                                                <td>C</td>
+                                                <td>3</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Lucas</th>
+                                                <td>60</td>
+                                                <td>D</td>
+                                                <td>4</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Sophia</th>
+                                                <td>85</td>
+                                                <td>B</td>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Amelia</th>
+                                                <td>75</td>
+                                                <td>C</td>
+                                                <td>3</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div> <!-- end card-box -->
+                        </div> <!-- end col -->
+                    </div>
+                    <!--- end row -->
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <ul class="nav nav-tabs" >
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                            <span data-feather="edit" class="icon-dual" id="span-parent"></span> Bottom 10 Deteriorate
+                            <h4>
+                    </li>
+                </ul><br>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-box">
+                                <div class="table-responsive">
+                                    <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Score</th>
+                                                <th>Grade</th>
+                                                <th>Ranking</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Charlotte</th>
+                                                <td>40</td>
+                                                <td>D</td>
+                                                <td>22</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Isabella</th>
+                                                <td>50</td>
+                                                <td>D</td>
+                                                <td>11</td>
+                                            </tr>
+                                            <tr>
+                                                <th>William</th>
+                                                <td>99</td>
+                                                <td>A</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <th>James</th>
+                                                <td>85</td>
+                                                <td>B</td>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Benjamin</th>
+                                                <td>75</td>
+                                                <td>C</td>
+                                                <td>3</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Lucas</th>
+                                                <td>60</td>
+                                                <td>D</td>
+                                                <td>4</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Sophia</th>
+                                                <td>85</td>
+                                                <td>B</td>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Amelia</th>
+                                                <td>75</td>
+                                                <td>C</td>
+                                                <td>3</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Mia</th>
+                                                <td>40</td>
+                                                <td>D</td>
+                                                <td>12</td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div> <!-- end card-box -->
+                        </div> <!-- end col -->
+                    </div>
+                    <!--- end row -->
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+    @include('teacher.dashboard.check_list')
+
 </div> <!-- container -->
 @endsection
 @section('scripts')
 <script>
-    var getTimetableCalendorStudent = "{{ config('constants.api.get_timetable_calendor_student') }}";
-    var getEventCalendorStudent = "{{ config('constants.api.get_event_calendor_student') }}";
+    // calendor js
+    
+    var getBirthdayCalendor = "{{ config('constants.api.get_birthday_calendor_teacher') }}";
+    var getTimetableCalendor = "{{ config('constants.api.get_timetable_calendor') }}";
+    var getEventCalendor = "{{ config('constants.api.get_event_calendor') }}";
+    var redirectionURL = "{{ route('teacher.classroom.management')}}";
     // todo list js
     var readUpdateTodoUrl = "{{ config('constants.api.read_update_todo') }}";
     var getAssignClassUrl = "{{ config('constants.api.get_assign_class') }}";
     var pathDownloadFileUrl = "{{ asset('images/todolist/') }}";
     var toDoCommentsUrl = "{{ config('constants.api.to_do_comments') }}";
-    var getTestScore = "{{ config('constants.api.get_test_score_dashboard') }}";
 
     var UserName = "{{ Session::get('name') }}";
 </script>
-<script src="{{ asset('js/custom/student_calendor.js') }}"></script>
-<!-- <script src="{{ asset('js/custom/student_dashboard.js') }}"></script> -->
-<script src="{{ asset('js/custom/student_calendor_new.js') }}"></script>
+<!-- to calendor  -->
+<script src="{{ asset('js/custom/teacher_calendor.js') }}"></script>
 <!-- to do list -->
 <script src="{{ asset('js/custom/admin/dashboard.js') }}"></script>
+
 @endsection
