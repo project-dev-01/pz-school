@@ -2,6 +2,77 @@
 @section('title','Dashboard')
 
 @section('content')
+<style>
+    #calendar {
+        max-width: 900px;
+        margin: 40px auto;
+    }
+
+    ..fc-unthemed thead {
+        border: 1px solid #346aa1;
+    }
+
+    .fc-content-skeleton .fc-day-top .fc-day-number {
+        float: right;
+        height: 20px;
+        width: 20px;
+        text-align: center;
+        line-height: 20px;
+        border-radius: 50%;
+        margin: 50px 10px 0px 0px;
+        font-size: 11px;
+        color: black;
+        background-color: white;
+    }
+
+    .fc-dayGrid-view .fc-day-number,
+    .fc-dayGrid-view .fc-week-number {
+        padding: 0px;
+    }
+
+    .fc th.fc-widget-header {
+        background: white;
+        font-size: 13px;
+        line-height: 20px;
+        padding: 10px 0;
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+
+    .fc-button {
+        background: white;
+        border: 1px solid #6FC6CC;
+        color: #101b26;
+        box-shadow: none;
+        border-radius: 3px;
+
+    }
+
+    .fc-button-primary:not(:disabled).fc-button-active,
+    .fc-button-primary:not(:disabled):active {
+        background: white;
+        border: 1px solid #6FC6CC;
+        color: #101b26;
+    }
+
+    .fc-button-primary:disabled {
+        background: white;
+        border: 1px solid #6FC6CC;
+        color: #101b26;
+    }
+
+    /* .fc-unthemed td {
+        border: 1px solid #6FC6CC;
+    } */
+
+    .fc-event {
+        background-color: #E9D528;
+    }
+
+    .fc-title {
+        color: black;
+    }
+</style>
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -389,7 +460,8 @@
                         </div> <!-- end col-->
 
                         <div class="col-lg-12">
-                            <div id="admin_calendor"></div>
+                            <!-- <div id="admin_calendor"></div> -->
+                            <div id="new_calendor"></div>
                         </div> <!-- end col -->
 
                     </div> <!-- end row -->
@@ -469,7 +541,9 @@
         <!-- end col-12 -->
     </div> <!-- end row -->
     @include('admin.dashboard.check_list')
-
+    @include('admin.dashboard.task')
+    @include('admin.dashboard.task-show')
+    
 </div> <!-- container -->
 @endsection
 @section('scripts')
@@ -482,7 +556,11 @@
     var toDoCommentsUrl = "{{ config('constants.api.to_do_comments') }}";
 
     var UserName = "{{ Session::get('name') }}";
+    // task all url
+    var calendorAddTaskCalendor = "{{ config('constants.api.calendor_add_task_calendor') }}";
+    var calendorListTaskCalendor = "{{ config('constants.api.calendor_list_task_calendor') }}";
 </script>
-<script src="{{ asset('js/custom/admin_calendor.js') }}"></script>
+<!-- <script src="{{ asset('js/custom/admin_calendor.js') }}"></script> -->
+<script src="{{ asset('js/custom/admin_calendor_new.js') }}"></script>
 <script src="{{ asset('js/custom/admin/dashboard.js') }}"></script>
 @endsection

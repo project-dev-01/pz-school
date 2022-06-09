@@ -454,5 +454,9 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('attendance/employee_list', [ApiController::class, 'getEmployeeAttendanceList']);
     Route::post('attendance/employee_add', [ApiController::class, 'addEmployeeAttendance']);
     Route::post('attendance/employee_report', [ApiController::class, 'getEmployeeAttendanceReport']);
+    // add-task-calendor
+    Route::post('calendor/add-task-calendor', [ApiController::class, 'calendorAddTask']);
+    Route::get('calendor/list-task-calendor', [ApiController::class, 'calendorListTask']);
     
+
 });

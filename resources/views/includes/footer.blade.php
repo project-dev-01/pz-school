@@ -31,12 +31,22 @@
 
 <!-- plugin js -->
 <script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
+
+@if(Session::get('role_id') == '2' || Session::get('role_id') == '3')
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" /> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" /> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script> -->
+<script src="{{ asset('js/fullcalendar/fullcalendar.js') }}"></script>
+@else
 <script src="{{ asset('libs/@fullcalendar/core/main.min.js') }}"></script>
 <script src="{{ asset('libs/@fullcalendar/bootstrap/main.min.js') }}"></script>
 <script src="{{ asset('libs/@fullcalendar/daygrid/main.min.js') }}"></script>
 <script src="{{ asset('libs/@fullcalendar/timegrid/main.min.js') }}"></script>
 <script src="{{ asset('libs/@fullcalendar/list/main.min.js') }}"></script>
 <script src="{{ asset('libs/@fullcalendar/interaction/main.min.js') }}"></script>
+@endif
 <script>
     function formatDate(date) {
         var d = new Date(date),
@@ -59,7 +69,7 @@
 @elseif(Session::get('role_id') == '5')
 <script src="{{ asset('js/custom/parent_calendar.js') }}"></script>
 @else
-<script src="{{ asset('js/pages/calendar.init.js') }}"></script>
+<!-- <script src="{{ asset('js/pages/calendar.init.js') }}"></script> -->
 @endif
 @endif
 <!-- Plugins js-->

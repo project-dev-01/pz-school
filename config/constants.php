@@ -418,7 +418,11 @@ return [
         
         'employee_attendance_list'=>$url.'/attendance/employee_list',
         'employee_attendance_add'=>$url.'/attendance/employee_add',
-        'employee_attendance_report'=>$url.'/attendance/employee_report'
+        'employee_attendance_report'=>$url.'/attendance/employee_report',
+
+        // add task in calendor
+        'calendor_add_task_calendor'=>$url.'/calendor/add-task-calendor',
+        'calendor_list_task_calendor'=>$url.'/calendor/list-task-calendor'
     ]
 
 ];

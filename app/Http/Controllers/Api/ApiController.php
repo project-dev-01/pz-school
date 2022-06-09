@@ -7486,7 +7486,7 @@ class ApiController extends BaseController
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
             // create new connection
-            $date = now()->format('Y-m-d');
+            $date = now()->format('Y-m-d h:i:s');
             $day = now()->format('d');
             $month = now()->format('m');
             $Connection = $this->createNewConnection($request->branch_id);
@@ -7497,13 +7497,18 @@ class ApiController extends BaseController
                 ->get();
             $success = [];
             foreach ($birthday as $birth) {
-                $data = $birth;
-                $data->title = $birth->name . " Birthday";
+                // $data = $birth;
+                $data = new \stdClass();
+                $data->id = $birth->id;
+                $data->birthday = $birth->birthday;
+                $data->title = $birth->name . "Happy Birthday";
                 $data->start = $date;
                 $data->end = $date;
                 $data->className = "bg-success";
                 array_push($success, $data);
             }
+            // dd($success);
+
             return $this->successResponse($success, 'Birthday Calendor data get successfully');
         }
     }
@@ -10568,7 +10573,7 @@ class ApiController extends BaseController
                 // return
             }
 
-            
+
             if (!$studentId) {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong add Student']);
             } else {
@@ -10752,7 +10757,7 @@ class ApiController extends BaseController
 
 
 
-                $name = $request->first_name." ".$request->last_name;
+                $name = $request->first_name . " " . $request->last_name;
                 // insert data
                 $parentId = $conn->table('parent')->insertGetId([
 
@@ -10869,35 +10874,34 @@ class ApiController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             // get data
             $data = $conn->table('parent')
-                                ->select("id",DB::raw("CONCAT(first_name, ' ', last_name) as name"))
-                                ->where("first_name","LIKE","%{$request->name}%")
-                                ->orWhere("last_name","LIKE","%{$request->name}%")
-                                ->get();
+                ->select("id", DB::raw("CONCAT(first_name, ' ', last_name) as name"))
+                ->where("first_name", "LIKE", "%{$request->name}%")
+                ->orWhere("last_name", "LIKE", "%{$request->name}%")
+                ->get();
 
             $output = '';
-            if($request->name) {
-                if(!$data->isEmpty()){
-                $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1">';
-                foreach ($data as $row){
-                    
-                    $output .= '<li class="list-group-item" value="'.$row->id.'">'.$row->name.'</li>';
+            if ($request->name) {
+                if (!$data->isEmpty()) {
+                    $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1">';
+                    foreach ($data as $row) {
+
+                        $output .= '<li class="list-group-item" value="' . $row->id . '">' . $row->name . '</li>';
+                    }
+                    $output .= '</ul>';
+                } else {
+                    $output .= '<li class="list-group-item">' . 'No results Found' . '</li>';
                 }
-                $output .= '</ul>';
-                }else{
-                    $output .= '<li class="list-group-item">'.'No results Found'.'</li>';
-                }
+            } else {
+                $output .= '<li class="list-group-item">' . 'No results Found' . '</li>';
             }
-            else {
-                $output .= '<li class="list-group-item">'.'No results Found'.'</li>';
-            }
-            return $output;    
+            return $output;
         }
     }
     // update Parent
     public function updateParent(Request $request)
     {
 
-       
+
         $id = $request->id;
         $validator = \Validator::make($request->all(), [
             'id' => 'required',
@@ -10943,7 +10947,7 @@ class ApiController extends BaseController
                     $fileName = $request->old_photo;
                 }
                 $password = $request->password;
-                $name = $request->first_name." ".$request->last_name;
+                $name = $request->first_name . " " . $request->last_name;
                 if ($password) {
 
                     $passvalidator = \Validator::make($request->all(), [
@@ -12927,28 +12931,28 @@ class ApiController extends BaseController
             $date = $request->date;
             // get data
             $attendance = $Connection->table('staffs as s')
-                    ->select(
-                        'sa.id',
-                        's.id as staff_id',
-                        'sa.check_in',
-                        'sa.check_out',
-                        'sa.status',
-                        'sa.hours',
-                        's.photo',
-                        'sa.remarks',
-                        DB::raw("CONCAT(s.first_name, ' ', s.last_name) as staff_name"),
-                        DB::raw("GROUP_CONCAT(DISTINCT  dp.name) as department_name")
-                    )
-                    ->leftJoin('staff_attendances as sa', function ($join) use ($date) {
-                        $join->on('s.id', '=', 'sa.staff_id')
-                            ->on('sa.date', '=', DB::raw("'$date'"));
-                    })
-                    ->leftJoin("staff_departments as dp", DB::raw("FIND_IN_SET(dp.id,s.department_id)"), ">", DB::raw("'0'"))
-                    ->when($employee != "All", function ($q)  use ($employee) {
-                        $q->where('s.id', $employee);
-                    })
-                    ->groupBy("s.id")
-                    ->get();
+                ->select(
+                    'sa.id',
+                    's.id as staff_id',
+                    'sa.check_in',
+                    'sa.check_out',
+                    'sa.status',
+                    'sa.hours',
+                    's.photo',
+                    'sa.remarks',
+                    DB::raw("CONCAT(s.first_name, ' ', s.last_name) as staff_name"),
+                    DB::raw("GROUP_CONCAT(DISTINCT  dp.name) as department_name")
+                )
+                ->leftJoin('staff_attendances as sa', function ($join) use ($date) {
+                    $join->on('s.id', '=', 'sa.staff_id')
+                        ->on('sa.date', '=', DB::raw("'$date'"));
+                })
+                ->leftJoin("staff_departments as dp", DB::raw("FIND_IN_SET(dp.id,s.department_id)"), ">", DB::raw("'0'"))
+                ->when($employee != "All", function ($q)  use ($employee) {
+                    $q->where('s.id', $employee);
+                })
+                ->groupBy("s.id")
+                ->get();
             if ($attendance) {
                 return $this->successResponse($attendance, 'Attendance record fetch successfully');
             } else {
@@ -12999,7 +13003,6 @@ class ApiController extends BaseController
                         'created_at' => date("Y-m-d H:i:s")
                     ]);
                 }
-
             }
             $success = [];
             if (!$query) {
@@ -13068,7 +13071,7 @@ class ApiController extends BaseController
                 }
             }
 
-            
+
 
             // dd($staffDetails);
             $data = [
@@ -13123,6 +13126,65 @@ class ApiController extends BaseController
             // get data
             $relationDetails = $conn->table('relations')->get();
             return $this->successResponse($relationDetails, 'Relation record fetch successfully');
+        }
+    }
+    // calendorAddTask
+    public function calendorAddTask(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+            'title' => 'required',
+            'start' => 'required',
+            'end' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // insert data
+            $ids = $createConnection->table('calendors')->insertGetId([
+                'title' => $request->title,
+                'start' => $request->start,
+                'end' => $request->end,
+                'description' => isset($request->description) ? $request->description : "",
+                'login_id' => $request->login_id,
+                'task_color' => "bg-info",
+                'created_at' => date("Y-m-d H:i:s")
+            ]);
+            // get insert row
+            $success = $createConnection->table('calendors')
+            ->select('id', 'title', 'start', 'end','description','task_color as className')
+            ->where('id', $ids)->first();
+            // dd($success);
+
+            if (!$ids) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'New Task has been successfully saved');
+            }
+        }
+    }
+    // calendorListTask
+    public function calendorListTask(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $secConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $section = $secConn->table('calendors')
+                ->select('id', 'title', 'start', 'end','description','task_color as className')
+                ->where('login_id', '=', $request->login_id)
+                ->get();
+            return $this->successResponse($section, 'calendors tast details fetch successfully');
         }
     }
 }

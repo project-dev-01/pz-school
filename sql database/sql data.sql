@@ -29,3 +29,8 @@ ALTER TABLE `teacher_allocations` ADD `type` ENUM('0','1','2') NOT NULL AFTER `t
 -- 1-6-2022
 ALTER TABLE `timetable_class` CHANGE `teacher_id` `teacher_id` VARCHAR(255) NOT NULL;
 ALTER TABLE `calendors` CHANGE `teacher_id` `teacher_id` VARCHAR(255) NULL DEFAULT NULL;
+
+-- 06-01-2022
+ALTER TABLE `calendors` ADD `description` TEXT NULL AFTER `end`;
+ALTER TABLE `calendors` ADD `login_id` INT NULL AFTER `description`;
+ALTER TABLE `calendors` ADD `task_color` VARCHAR(255) NULL AFTER `description`;
