@@ -24,23 +24,23 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
+                        <h4 class="navv">
                             Select Ground
                             <h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="evaluationFilterForm" method="post" action="{{ route('admin.homework.details') }}"  enctype="multipart/form-data" autocomplete="off">
+                    <form id="evaluationFilterForm" method="post" action="{{ route('admin.homework.details') }}" enctype="multipart/form-data" autocomplete="off">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="class_id">Standard<span class="text-danger">*</span></label>
-                                    <select id="class_id" class="form-control" name="class_id" >                             
+                                    <select id="class_id" class="form-control" name="class_id">
                                         <option value="">Select Standard</option>
                                         @foreach($class as $cla)
-                                            <option value="{{$cla['id']}}">{{$cla['name']}}</option>
+                                        <option value="{{$cla['id']}}">{{$cla['name']}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -48,7 +48,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="section_id">Class Name<span class="text-danger">*</span></label>
-                                    <select id="section_id" class="form-control"  name="section_id">                              
+                                    <select id="section_id" class="form-control" name="section_id">
                                         <option value="">Select Class Name</option>
                                     </select>
                                 </div>
@@ -56,7 +56,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="subject_id">Subject<span class="text-danger">*</span></label>
-                                    <select id="subject_id" class="form-control" name="subject_id">                                       
+                                    <select id="subject_id" class="form-control" name="subject_id">
                                         <option value="">Select Subject</option>
                                     </select>
                                 </div>
@@ -71,7 +71,7 @@
                             </button>-->
                         </div>
                     </form>
-                    
+
 
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
@@ -84,28 +84,28 @@
     <div class="row" id="evaluation" style="display:none;">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            Evaluation Report
+                        <h4 class="navv">
+                            Homework List
                             <h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-xl-12">
-                            <ul class="nav nav-tabs nav-bordered">
+                            <!-- <ul class="nav nav-tabs nav-bordered">
                                 <li class="nav-item">
                                     <a href="#current-b1" data-toggle="tab" aria-expanded="true" class="nav-link active">
                                         Homework List
                                     </a>
                                 </li>
-                                <!-- <li class="nav-item">
+                                <li class="nav-item">
                                     <a href="#history-b1" data-toggle="tab" aria-expanded="false" class="nav-link">
                                         History
                                     </a>
-                                </li> -->
-                            </ul><br>
+                                </li>
+                            </ul><br> -->
                             <div class="card-box">
                                 <div class="tab-content">
                                     <div class="tab-pane show active" id="current-b1">
@@ -241,7 +241,6 @@
 @section('scripts')
 
 <script>
-    
     var homeworkView = "{{ route('admin.homework.view') }}";
     var homeworkList = "{{ route('admin.evaluation_report') }}";
     var sectionByClass = "{{ route('admin.section_by_class') }}";

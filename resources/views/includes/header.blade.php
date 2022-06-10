@@ -67,6 +67,10 @@
     <link href="{{ asset('css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
 
     <style>
+        /* .table {
+            width: 1200px;
+        } */
+
         /* navtab form css end*/
         .error {
             color: red;

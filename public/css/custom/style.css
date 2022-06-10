@@ -18,6 +18,13 @@ table>thead>tr>th {
 	background-color: #E9D528;
 	font-weight: bold;
 	font-family: Open Sans;
+	font-size: 12px;
+}
+
+.table {
+	font-size: 12px;
+	width: 1200px !important;
+	font-family: Open Sans;
 }
 
 /*table action button code*/

@@ -20,12 +20,9 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span class="fab fa-audible" id="span-parent"></span>
-                            Select Ground
-                            <h4>
+                        <h4 class="navv">Select Ground <h4>
                     </li>
                 </ul><br>
 
@@ -58,11 +55,9 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span class="fas fa-stream" id="span-parent"></span>
-                            Leave List
+                        <h4 class="navv"> Leave List
                             <h4>
                     </li>
                 </ul><br>

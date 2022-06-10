@@ -22,10 +22,10 @@
                 <div class="col-12">
 
                     <div class="card">
-                        <ul class="nav nav-tabs" >
+                        <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="nav-link">
-                                    <span data-feather="airplay" class="icon-dual" id="span-parent"></span> Already Taken Leave Details
+                                <h4 class="navv">
+                                    Already Taken Leave Details
                                     <h4>
                             </li>
                         </ul><br>
@@ -55,10 +55,10 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card">
-                        <ul class="nav nav-tabs" >
+                        <ul class="nav nav-tabs">
                             <li class="nav-item">
                                 <h4 class="nav-link">
-                                    <span data-feather="folder" class="icon-dual" id="span-parent"></span> General Details
+                                    General Details
                                     <h4>
                             </li>
                         </ul><br>
@@ -157,21 +157,20 @@
             </div>
             <!--Last Leave Taken -->
             <div class="row">
-                <div class="col-xl-12">
+                <div class="col-md-12">
                     <div class="card">
-                        <ul class="nav nav-tabs" >
+                        <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="nav-link">
-                                    <span data-feather="bookmark" class="icon-dual" id="span-parent"></span> Leave History
+                                <h4 class="navv">Leave History
                                     <h4>
                             </li>
                         </ul><br>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-md-12">
                                     <div class="">
                                         <div class="table-responsive">
-                                            <table id="staff-leave-list" class="table table-bordered mb-0">
+                                            <table id="staff-leave-list" class="table">
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>

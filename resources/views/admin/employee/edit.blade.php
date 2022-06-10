@@ -218,11 +218,9 @@
             <form id="editEmployeeForm" method="post" action="{{ route('admin.employee.update') }}" enctype="multipart/form-data" autocomplete="off">
                 @csrf
                 <div class="card">
-                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="nav-link">
-                                <span data-feather="" class="icon-dual" id="span-parent"></span>Personal details
-                                <h4>
+                            <h4 class="nav-link">Personal details<h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -248,7 +246,7 @@
                                                 <span class="fas fa-user-graduate"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control shortNameChange" value="{{$employee['first_name']}}" name="first_name" id="firstName">
+                                        <input type="text" class="form-control shortNameChange" value="{{$employee['first_name']}}" name="first_name" id="firstName" placeholder="AHMAD">
                                     </div>
                                 </div>
                             </div>
@@ -261,7 +259,7 @@
                                                 <span class="fas fa-user-graduate"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control shortNameChange" value="{{$employee['last_name']}}" name="last_name" id="lastName">
+                                        <input type="text" class="form-control shortNameChange" value="{{$employee['last_name']}}" name="last_name" id="lastName" placeholder="ABDULLAH">
                                     </div>
                                 </div>
                             </div>
@@ -278,7 +276,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="short_name">Short name</label>
-                                    <input type="text" value="{{$employee['short_name']}}" class="form-control" name="short_name" id="shortName">
+                                    <input type="text" value="{{$employee['short_name']}}" class="form-control" name="short_name" id="shortName" placeholder="AHMAD ABDULLAH">
                                 </div>
                             </div>
                         </div>
@@ -310,13 +308,13 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="Passport">Passport Number</label>
-                                    <input type="text" class="form-control" name="passport" placeholder="Passport Number" value="{{$employee['passport']}}" id="Passport">
+                                    <input type="text" class="form-control" name="passport" value="{{$employee['passport']}}" id="Passport" placeholder="********">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="nric_number">NRIC Number</label>
-                                    <input type="text" class="form-control" name="nric_number" value="{{$employee['nric_number']}}" id="nricNumber">
+                                    <input type="text" class="form-control" name="nric_number" value="{{$employee['nric_number']}}" id="nricNumber" placeholder="00000000">
                                 </div>
                             </div>
 
@@ -331,14 +329,19 @@
                                                 <span class="fas fa-birthday-cake"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="birthday" value="{{$employee['birthday']}}" id="empDOB">
+                                        <input type="text" class="form-control" name="birthday" value="{{$employee['birthday']}}" placeholder="DD/MM/YYYY" id="empDOB">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-group mb-3">
-                                    <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
-                                    <input type="tel"  class="form-control"  name="mobile_no" id="mobile_no" value="{{$employee['mobile_no']}}" data-parsley-trigger="change" >
+                                <label for="mobile_no">Mobile No</label>
+                                <div class="input-group input-group-merge">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-phone-volume"></span>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" value="{{$employee['mobile_no']}}" placeholder="(xx)-00000-0000" name="mobile_no" id="mobile_no">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -359,25 +362,25 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="country">Country</label>
-                                    <input type="text" value="{{$employee['country']}}" class="form-control" name="country" id="Country">
+                                    <input type="text" value="{{$employee['country']}}" class="form-control" name="country" id="Country" placeholder="malaysia">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="state">State/Province</label>
-                                    <input type="text" value="{{$employee['state']}}" class="form-control" name="state" id="State">
+                                    <input type="text" value="{{$employee['state']}}" class="form-control" name="state" id="State" placeholder="state">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="city">City</label>
-                                    <input type="text" value="{{$employee['city']}}" class="form-control" name="city" id="City">
+                                    <input type="text" value="{{$employee['city']}}" class="form-control" name="city" id="City" placeholder="city">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="post_code">Zip/Postal code</label>
-                                    <input type="text" value="{{$employee['post_code']}}" class="form-control" name="post_code" id="postCode">
+                                    <input type="text" value="{{$employee['post_code']}}" class="form-control" name="post_code" id="postCode" placeholder="000000">
                                 </div>
                             </div>
                         </div>
@@ -385,24 +388,22 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="present_address">Address 1</label>
-                                    <input class="form-control" name="present_address" id="present_address" value="{{$employee['present_address']}}">
+                                    <input class="form-control" name="present_address" id="present_address" value="{{$employee['present_address']}}" placeholder="johor">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="permanent_address">Address 2</label>
-                                    <input class="form-control" name="permanent_address" id="permanent_address" value="{{$employee['permanent_address']}}">
+                                    <input class="form-control" name="permanent_address" id="permanent_address" value="{{$employee['permanent_address']}}" placeholder="johor">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="card">
-                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="nav-link">
-                                <span data-feather="" class="icon-dual" id="span-parent"></span>Employee details
-                                <h4>
+                            <h4 class="navv">Employee Details<h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -427,7 +428,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" value="{{$employee['joining_date']}}" name="joining_date" id="joiningDate">
+                                        <input type="text" class="form-control" value="{{$employee['joining_date']}}" name="joining_date" id="joiningDate" placeholder="DD/MM/DDDD">
                                     </div>
                                 </div>
                             </div>
@@ -493,7 +494,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="salary_grade">Salary Grade</label>
-                                    <input type="number" value="{{$employee['salary_grade']}}" class="form-control" name="salary_grade" id="salaryGrade">
+                                    <input type="number" value="{{$employee['salary_grade']}}" class="form-control" name="salary_grade" id="salaryGrade" placeholder="Grade">
                                 </div>
                             </div>
                         </div>
@@ -550,11 +551,9 @@
                     </div>
                 </div>
                 <div class="card">
-                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="nav-link">
-                                <span data-feather="" class="icon-dual" id="span-parent"></span>Login details
-                                <h4>
+                            <h4 class="navv">Login Details<h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -569,7 +568,7 @@
                                                 <span class="far fa-envelope-open"></span>
                                             </div>
                                         </div>
-                                        <input type="email" value="{{$role['email']}}" class="form-control" name="email" id="email">
+                                        <input type="email" value="{{$role['email']}}" class="form-control" name="email" id="email" placeholder="aa@gmail.com">
                                     </div>
                                 </div>
                             </div>
@@ -582,7 +581,7 @@
                                                 <span class="fas fa-unlock"></span>
                                             </div>
                                         </div>
-                                        <input type="password" class="form-control" name="password" id="password">
+                                        <input type="password" class="form-control" name="password" id="password" placeholder="*********">
                                     </div>
                                 </div>
                             </div>
@@ -615,11 +614,9 @@
                     </div>
                 </div>
                 <div class="card">
-                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="nav-link">
-                                <span data-feather="" class="icon-dual" id="span-parent"></span>Social Links
-                                <h4>
+                            <h4 class="navv">Social Link<h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -633,7 +630,7 @@
                                                 <span class="fab fa-facebook-f"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="facebook_url" value="{{$employee['facebook_url']}}" id="facebook_url">
+                                        <input type="text" class="form-control" name="facebook_url" value="{{$employee['facebook_url']}}" id="facebook_url" placeholder="Fb.com">
                                     </div>
                                 </div>
                             </div>
@@ -646,7 +643,7 @@
                                                 <span class="fab fa-twitter"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="twitter_url" value="{{$employee['twitter_url']}}" id="twitter_url">
+                                        <input type="text" class="form-control" name="twitter_url" value="{{$employee['twitter_url']}}" id="twitter_url" placeholder="twitter.com">
                                     </div>
                                 </div>
                             </div>
@@ -659,7 +656,7 @@
                                                 <span class="fab fa-linkedin-in"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="linkedin_url" value="{{$employee['linkedin_url']}}" id="linkedin_url">
+                                        <input type="text" class="form-control" name="linkedin_url" value="{{$employee['linkedin_url']}}" id="linkedin_url" placeholder="linked.com">
                                     </div>
                                 </div>
                             </div>
@@ -667,11 +664,9 @@
                     </div>
                 </div>
                 <div class="card">
-                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="nav-link">
-                                <span data-feather="" class="icon-dual" id="span-parent"></span>Medical History
-                                <h4>
+                            <h4 class="navv">Medical History<h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -686,19 +681,19 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="height">Height</label>
-                                        <input type="text" id="height" class="form-control" value="{{$employee['height']}}" name="height" data-parsley-trigger="change">
+                                        <input type="text" id="height" class="form-control" value="{{$employee['height']}}" name="height" placeholder="150" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="weight">Weight</label>
-                                        <input type="text" id="weight" class="form-control" value="{{$employee['weight']}}" name="weight" data-parsley-trigger="change">
+                                        <input type="text" id="weight" class="form-control" value="{{$employee['weight']}}" name="weight" placeholder="60" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="allergy">Allergy</label>
-                                        <input type="text" id="allergy" class="form-control" value="{{$employee['allergy']}}" name="allergy" data-parsley-trigger="change">
+                                        <input type="text" id="allergy" class="form-control" value="{{$employee['allergy']}}" name="allergy" placeholder="allergy" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -722,11 +717,9 @@
                     </div>
                 </div>
                 <div class="card">
-                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                    <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="nav-link">
-                                <span data-feather="" class="icon-dual" id="span-parent"></span>Bank Details
-                                <h4>
+                            <h4 class="navv">Bank Details<h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -741,19 +734,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="bank_name">Bank Name<span class="text-danger">*</span></label>
-                                        <input type="text" id="bank_name" value="{{ isset($bank['bank_name']) ? $bank['bank_name']:' ' }}" class="form-control" name="bank_name" data-parsley-trigger="change">
+                                        <input type="text" id="bank_name" value="{{ isset($bank['bank_name']) ? $bank['bank_name']:' ' }}" class="form-control" name="bank_name" placeholder="bank name" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="holder_name">Account Holder<span class="text-danger">*</span></label>
-                                        <input type="text" id="holder_name" value="{{ isset($bank['holder_name']) ? $bank['holder_name']:''}}" class="form-control" name="holder_name" data-parsley-trigger="change">
+                                        <input type="text" id="holder_name" value="{{ isset($bank['holder_name']) ? $bank['holder_name']:''}}" class="form-control" name="holder_name" placeholder="Ali" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="bank_branch">Bank Branch<span class="text-danger">*</span></label>
-                                        <input type="text" id="bank_branch" value="{{ isset($bank['bank_branch']) ? $bank['bank_branch']:'' }}" class="form-control" name="bank_branch" data-parsley-trigger="change">
+                                        <input type="text" id="bank_branch" value="{{ isset($bank['bank_branch']) ? $bank['bank_branch']:'' }}" class="form-control" name="bank_branch" placeholder="branch name" data-parsley-trigger="change">
                                     </div>
                                 </div>
                             </div>
@@ -761,19 +754,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="bank_address">Bank Address<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" value="{{ isset($bank['bank_address']) ? $bank['bank_address']:'' }}" id="bank_address" name="bank_address" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" value="{{ isset($bank['bank_address']) ? $bank['bank_address']:'' }}" id="bank_address" name="bank_address" placeholder="address" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="ifsc_code">IFSC Code<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" value="{{ isset($bank['ifsc_code']) ? $bank['ifsc_code']:''}}" id="ifsc_code" name="ifsc_code" aria-describedby="">
+                                        <input type="text" class="form-control" value="{{ isset($bank['ifsc_code']) ? $bank['ifsc_code']:''}}" id="ifsc_code" name="ifsc_code" placeholder="code" aria-describedby="">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="">Account No<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" value="{{ isset($bank['account_no']) ? $bank['account_no']:'' }}" id="account_no" name="account_no" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" value="{{ isset($bank['account_no']) ? $bank['account_no']:'' }}" id="account_no" name="account_no" placeholder="acc-no" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -782,7 +775,7 @@
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
                                 Update
                             </button>
-                            <a href="{{ route('admin.listemployee') }}" class="btn btn-secondary waves-effect m-l-5">
+                            <a href="{{ route('admin.listemployee') }}" class="btn btn-primary-bl waves-effect waves-light">
                                 Back
                             </a>
                         </div>
@@ -814,7 +807,7 @@
     });
 
     $("#Country").countrySelect({
-        responsiveDropdown:true
+        responsiveDropdown: true
     });
 </script>
 <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>

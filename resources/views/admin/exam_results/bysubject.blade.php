@@ -19,9 +19,9 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
+                        <h4 class="navv">
                             Select Ground
                             <h4>
                     </li>
@@ -61,12 +61,12 @@
                             </div>
                         </div>
                         <div class="form-group text-right m-b-0">
-                        <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Get
-                        </button>
-                    </div>
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
+                                Get
+                            </button>
+                        </div>
                     </form>
-                  
+
 
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
@@ -79,9 +79,9 @@
     <div class="row" style="display: none;" id="bysubject_body">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
+                        <h4 class="navv">
                             Subject
                             <h4>
                     </li>
@@ -89,9 +89,9 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="card-box">
+                            <div class="">
                                 <div class="table-responsive">
-                                <table id="tblbycls" class="table w-100 nowrap table-bordered table-striped">
+                                    <table id="tblbycls" class="table w-100 nowrap table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th class="align-top" rowspan="2">S.no.</th>
@@ -121,7 +121,7 @@
                                             </tr>
                                         </thead>
                                         <tbody id="bysubjectTableAppend">
-                                      
+
                                         </tbody>
                                     </table>
                                     <!-- <table class="table w-100 nowrap table-bordered table-striped" id="">
@@ -229,20 +229,20 @@
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col -->
-    </div> 
+    </div>
 </div> <!-- container -->
 
 @endsection
-    @section('scripts')
-    <script>
-        var sectionByClass = "{{ route('admin.section_by_class') }}";
-        var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
-        var getbySubject = "{{ config('constants.api.tot_grade_calcu_bySubject') }}";       
-        var Allexams="{{ config('constants.api.all_exams_list') }}";
-        var getbySubjectAllstd ="{{ config('constants.api.all_bysubject_list') }}";
-        var getgradeBysubject = "{{ config('constants.api.get_grade_bysubject') }}";
-        // default image test
-        var defaultImg = "{{ asset('images/users/default.jpg') }}";
-    </script>
-    <script src="{{ asset('js/custom/bysubject.js') }}"></script>
-    @endsection
+@section('scripts')
+<script>
+    var sectionByClass = "{{ route('admin.section_by_class') }}";
+    var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
+    var getbySubject = "{{ config('constants.api.tot_grade_calcu_bySubject') }}";
+    var Allexams = "{{ config('constants.api.all_exams_list') }}";
+    var getbySubjectAllstd = "{{ config('constants.api.all_bysubject_list') }}";
+    var getgradeBysubject = "{{ config('constants.api.get_grade_bysubject') }}";
+    // default image test
+    var defaultImg = "{{ asset('images/users/default.jpg') }}";
+</script>
+<script src="{{ asset('js/custom/bysubject.js') }}"></script>
+@endsection

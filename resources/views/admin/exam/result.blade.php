@@ -19,9 +19,9 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
+                        <h4 class="navv">
                             Exam
                             <h4>
                     </li>
@@ -33,7 +33,7 @@
                                 <div class="form-group">
                                     <label for="changeClassName">Standard<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
-                                        <option value="">Select Class</option>                    
+                                        <option value="">Select Class</option>
                                         @forelse ($classnames as $class)
 
                                         <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
@@ -59,86 +59,86 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="heard">Roll No<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="registerno" name="registerno">
+                                <div class="form-group">
+                                    <label for="heard">Roll No<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="registerno" name="registerno">
+                                </div>
                             </div>
-                            </div>
-                        </div>                   
+                        </div>
 
                         <div class="form-group text-right m-b-0">
-                        <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Get
-                        </button>  
-                </div>
-                </form>
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
+                                Get
+                            </button>
+                        </div>
+                    </form>
 
-            </div> <!-- end card-body -->
-        </div> <!-- end card-->
-    </div> <!-- end col -->
+                </div> <!-- end card-body -->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
 
-</div>
-<!-- end row -->
+    </div>
+    <!-- end row -->
 
 
-<div class="row" id="exam_details_div">
-    <div class="col-xl-12">
-        <div class="card">
-            <ul class="nav nav-tabs" >
-                <li class="nav-item">
-                    <h4 class="nav-link">
-                        Exam Result
-                        <h4>
-                </li>
-            </ul><br>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="card-box">
-                            <div class="table-responsive">
-                            <header><b>Student General Details</b></header>
-                                <table class="table table-bordered mb-0" id="tbl_general_details">
-                                    <thead id="tbl_general_details_header"></thead>                                   
-                                </table>
-                            </div> <!-- end table-responsive-->
-                         
-                                                 
-                            <div class="table-responsive">
-                            <hr>
-                            <header><b>Individual Subject</b></header>
-                                <table class="table table-bordered mb-0" id="tbl_std_subject_marks">
-                                    <thead id="tbl_std_subject_marks_header">
-                                       
-                                    </thead>
-                                    <tbody id="tbl_std_subject_marks_body">
-                                       
-                                    </tbody>
-                                </table>
-                            </div> <!-- end table-responsive-->
-                            
-                            <div class="table-responsive" id="tbl_std_subject_marks_division">
-                           
-                            <hr>
-                            <header><b>Subject Division</b></header>
-                                <table class="table table-bordered mb-0">
-                                    <thead id="tbl_std_subject_marks_division_header">
-                                       
-                                    </thead>
-                                    <tbody id="tbl_std_subject_marks_division_body">
-                                       
-                                    </tbody>
-                                </table>
-                            </div> <!-- end table-responsive-->
-                        </div> <!-- end card-box -->
-                    </div> <!-- end col-->
-                </div>
-                <!-- end row-->
-            </div> <!-- end card-body -->
-        </div> <!-- end card-->
-    </div> <!-- end col -->
+    <div class="row" id="exam_details_div">
+        <div class="col-xl-12">
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">
+                            Exam Result
+                            <h4>
+                    </li>
+                </ul><br>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card-box">
+                                <div class="table-responsive">
+                                    <header><b>Student General Details</b></header>
+                                    <table class="table table-bordered mb-0" id="tbl_general_details">
+                                        <thead id="tbl_general_details_header"></thead>
+                                    </table>
+                                </div> <!-- end table-responsive-->
 
-</div>
-<!-- end row -->
+
+                                <div class="table-responsive">
+                                    <hr>
+                                    <header><b>Individual Subject</b></header>
+                                    <table class="table table-bordered mb-0" id="tbl_std_subject_marks">
+                                        <thead id="tbl_std_subject_marks_header">
+
+                                        </thead>
+                                        <tbody id="tbl_std_subject_marks_body">
+
+                                        </tbody>
+                                    </table>
+                                </div> <!-- end table-responsive-->
+
+                                <div class="table-responsive" id="tbl_std_subject_marks_division">
+
+                                    <hr>
+                                    <header><b>Subject Division</b></header>
+                                    <table class="table table-bordered mb-0">
+                                        <thead id="tbl_std_subject_marks_division_header">
+
+                                        </thead>
+                                        <tbody id="tbl_std_subject_marks_division_body">
+
+                                        </tbody>
+                                    </table>
+                                </div> <!-- end table-responsive-->
+                            </div> <!-- end card-box -->
+                        </div> <!-- end col-->
+                    </div>
+                    <!-- end row-->
+                </div> <!-- end card-body -->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+
+    </div>
+    <!-- end row -->
 
 </div> <!-- container -->
 
@@ -148,7 +148,7 @@
 <script>
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
-    var getbyresult = "{{ config('constants.api.student_result') }}";  
+    var getbyresult = "{{ config('constants.api.student_result') }}";
     var getgradeBysubject = "{{ config('constants.api.get_grade_bysubject') }}";
     // default image test
     var defaultImg = "{{ asset('images/users/default.jpg') }}";

@@ -21,10 +21,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <ul class="nav nav-tabs" >
+                        <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="nav-link">
-                                    <span data-feather="file-text" class="icon-dual" id="span-parent"></span> Test Result
+                                <h4 class="navv">Test Result
                                     <h4>
                             </li>
                         </ul><br>
@@ -83,10 +82,9 @@
                 </div>
             </div>
             <div class="card" id="mark_by_subject_card" style="display:none">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span data-feather="book" class="icon-dual" id="span-parent"></span> Marks By Subject
+                        <h4 class="navv"> Marks By Subject
                             <h4>
                     </li>
                 </ul><br>
@@ -131,12 +129,11 @@
                     </div>
                 </form>
             </div>
-            
+
             <div class="card" id="subjectdivTableAppend" style="display:none">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span data-feather="book-open" class="icon-dual" id="span-parent"></span>Marks By Subject Division
+                        <h4 class="navv">Marks By Subject Division
                             <h4>
                     </li>
                 </ul><br>
@@ -158,10 +155,9 @@
                 </div> <!-- end card body-->
             </div>
             <div class="card" id="subject_average_card" style="display:none">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span data-feather="edit" class="icon-dual" id="span-parent"></span>Subject Average
+                        <h4 class="navv">Subject Average
                             <h4>
                     </li>
                 </ul><br>
@@ -187,12 +183,11 @@
                 </div>
             </div> <!-- end card body-->
 
-            
+
             <div class="card" id="scores_by_graph_card" style="visibility: hidden;">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span data-feather="bar-chart-2" class="icon-dual" id="span-parent"></span>Scores by Graph
+                        <h4 class="navv">Scores by Graph
                             <h4>
                     </li>
                 </ul><br>
@@ -220,7 +215,7 @@
                                             <p class="text-muted font-13 mb-0 text-truncate">X Axis</p>
                                         </div>
                                     </div> <!-- end row -->
-                                    <div id="test-bar-chart"  style="height: 270px;" class="morris-chart mt-3"></div>
+                                    <div id="test-bar-chart" style="height: 270px;" class="morris-chart mt-3"></div>
 
                                 </div>
                             </div> <!-- end collapse-->
@@ -229,10 +224,9 @@
                 </div> <!-- end col-->
             </div>
             <div class="card" id="graphs_card" style="display:none">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span data-feather="activity" class="icon-dual" id="span-parent"></span>Graphs
+                        <h4 class="navv">Graphs
                             <h4>
                     </li>
                 </ul><br>

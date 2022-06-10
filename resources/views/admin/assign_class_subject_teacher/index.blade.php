@@ -8,11 +8,11 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <div class="page-title-right">
+                <!-- <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item active">List</li>
                     </ol>
-                </div>
+                </div> -->
                 <h4 class="page-title">Assign Subjects Teacher</h4>
             </div>
         </div>
@@ -21,35 +21,38 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="card-box">
-                <h4 class="header-title">Assign Subjects Teacher</h4>
-                <p class="sub-header">
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">Assign Subjects Teacher<h4>
+                    </li>
+                </ul><br>
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
                         <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addAssignClassSubjectModal">Add</button>
                     </div>
                 </div>
-                </p>
-
-                <div class="table-responsive">
-                    <table class="table mb-0" id="class-assign-subjects-teacher-table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Class Name</th>
-                                <th>Section Name</th>
-                                <th>Subject Name</th>
-                                <th>Teacher Name</th>
-                                <th>Type</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div> <!-- end card-box -->
-        </div> <!-- end col -->
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table" id="class-assign-subjects-teacher-table" style="font-size:12px;width: 1200px;">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Class Name</th>
+                                    <th>Section Name</th>
+                                    <th>Subject Name</th>
+                                    <th>Teacher Name</th>
+                                    <th>Type</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div> <!-- end card-box -->
+            </div> <!-- end col -->
+        </div>
     </div>
     <!--- end row -->
     @include('admin.assign_class_subject_teacher.add')
@@ -67,7 +70,7 @@
 
     var sectionByClassUrl = "{{ config('constants.api.section_by_class') }}";
     var getAssignClassSubjUrl = "{{ config('constants.api.get_assign_class_subjects') }}";
-    
+
     var classAssignTeacherSubList = "{{ route('admin.teacher_assign_subject.list') }}";
 </script>
 <script src="{{ asset('js/custom/assign_class_subject_teacher.js') }}"></script>
