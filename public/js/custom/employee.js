@@ -414,7 +414,10 @@ $(function () {
         info: true,
         ajax: employeeList,
         // "paging": false,
-        "searching": false,
+        // "searching": false,
+        // language: {
+        //     searchPlaceholder: "Search..."
+        // },
         "ordering": false,
         "pageLength": 5,
         "aLengthMenu": [

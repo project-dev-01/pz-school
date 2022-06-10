@@ -4337,6 +4337,8 @@ class ApiController extends BaseController
                 ->where('sa.class_id', $request->class_id)
                 ->where('sa.section_id', $request->section_id)
                 ->where('sa.type', '=', '0')
+                // get teacher 
+                // ->where('sa.teacher_id', '!=', '0')
                 ->get();
             $output['exam_hall'] = $classConn->table('exam_hall')->get();
 

@@ -23,7 +23,7 @@ table>thead>tr>th {
 
 .table {
 	font-size: 12px;
-	width: 1200px !important;
+	/* width: 1200px !important; */
 	font-family: Open Sans;
 }
 
@@ -48,7 +48,7 @@ table>thead>tr>th {
 }
 
 /*table tr hover code*/
-tr:hover {
+.table tr:hover {
 	background-color: #D1E9EF;
 }
 
@@ -329,4 +329,25 @@ input:focus {
 		bottom: 0;
 		opacity: 0;
 	}
+}
+
+.fc-view {
+	border: #0abab5;
+}
+
+.fc-unthemed td {
+	border-color: #0abab5;
+}
+
+.fc-unthemed th {
+	border-color: #0abab5;
+}
+
+.fc-event {
+	background-color: #E9D528 !important;
+}
+
+.fc-state-active {
+	background-color: #0abab5 !important;
+	color: #fff;
 }

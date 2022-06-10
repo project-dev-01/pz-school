@@ -299,6 +299,7 @@ $(function () {
         $('#student-table').DataTable({
             processing: true,
             info: true,
+            bDestroy: true,
             serverSide: true,
             ajax: {
                 url: studentList,
