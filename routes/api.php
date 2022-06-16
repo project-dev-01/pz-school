@@ -464,4 +464,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('education/education-details', [ApiController::class, 'getEducationDetails']);
     Route::post('education/update', [ApiController::class, 'updateEducation']);
     Route::post('education/delete', [ApiController::class, 'deleteEducation']);
+
+    
+    Route::post('employee_by_department', [ApiController::class, 'getEmployeeByDepartment']);
 });

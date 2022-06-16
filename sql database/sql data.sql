@@ -34,3 +34,8 @@ ALTER TABLE `calendors` CHANGE `teacher_id` `teacher_id` VARCHAR(255) NULL DEFAU
 ALTER TABLE `calendors` ADD `description` TEXT NULL AFTER `end`;
 ALTER TABLE `calendors` ADD `login_id` INT NULL AFTER `description`;
 ALTER TABLE `calendors` ADD `task_color` VARCHAR(255) NULL AFTER `description`;
+
+-- 09-01-2022
+ALTER TABLE `students` ADD `passport` TEXT NULL AFTER `birthday`;
+ALTER TABLE `parent` ADD `race` INT NULL AFTER `mobile_no`;
+ALTER TABLE `parent` ADD `religion` INT NULL AFTER `race`;

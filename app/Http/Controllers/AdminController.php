@@ -1811,11 +1811,12 @@ class AdminController extends Controller
     }
     public function employeeEntry()
     {
-        $getemployee = Helper::GetMethod(config('constants.api.employee_list'));
+        
+        $getdepartment = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.attendance.employee',
             [
-                'employee' => $getemployee['data']
+                'department' => $getdepartment['data']
             ]
         );
     }
@@ -4017,6 +4018,9 @@ class AdminController extends Controller
     public function getEmployeeAttendanceList(Request $request)
     {
         $data = [
+            'department' => $request->department,
+            'firstDay' => $request->firstDay,
+            'lastDay' => $request->lastDay,
             'employee' => $request->employee,
             'date' => $request->date,
         ];
@@ -4029,7 +4033,7 @@ class AdminController extends Controller
     public function addEmployeeAttendance(Request $request)
     {
         $data = [
-            'date' => $request->date,
+            'employee' => $request->employee,
             'attendance' => $request->attendance,
         ];
 
@@ -4040,11 +4044,11 @@ class AdminController extends Controller
 
     public function reportEmployeeAttendance()
     {
-        $getemployee = Helper::GetMethod(config('constants.api.employee_list'));
+        $getdepartment = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.attendance.employee_report',
             [
-                'employee' => $getemployee['data']
+                'department' => $getdepartment['data']
             ]
         );
     }

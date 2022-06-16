@@ -10601,7 +10601,6 @@ class ApiController extends BaseController
                 // return
             }
 
-
             if (!$studentId) {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong add Student']);
             } else {
@@ -12949,9 +12948,7 @@ class ApiController extends BaseController
             'branch_id' => 'required',
             'token' => 'required',
             'employee' => 'required',
-            'date' => 'required',
         ]);
-
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
@@ -12961,32 +12958,34 @@ class ApiController extends BaseController
 
             $employee = $request->employee;
             $date = $request->date;
+            $output = array();
             // get data
-            $attendance = $Connection->table('staffs as s')
+            $begin = new DateTime( $request->firstDay );
+            $end   = new DateTime( $request->lastDay );
+            for($i = $begin; $i <= $end; $i->modify('+1 day')){
+                
+                $date = $i->format("Y-m-d");
+                $attendance['date'] = $date;
+                $attendance['details'] = $Connection->table('staffs as s')
                 ->select(
                     'sa.id',
-                    's.id as staff_id',
                     'sa.check_in',
                     'sa.check_out',
                     'sa.status',
                     'sa.hours',
-                    's.photo',
                     'sa.remarks',
-                    DB::raw("CONCAT(s.first_name, ' ', s.last_name) as staff_name"),
-                    DB::raw("GROUP_CONCAT(DISTINCT  dp.name) as department_name")
                 )
                 ->leftJoin('staff_attendances as sa', function ($join) use ($date) {
                     $join->on('s.id', '=', 'sa.staff_id')
                         ->on('sa.date', '=', DB::raw("'$date'"));
                 })
-                ->leftJoin("staff_departments as dp", DB::raw("FIND_IN_SET(dp.id,s.department_id)"), ">", DB::raw("'0'"))
-                ->when($employee != "All", function ($q)  use ($employee) {
-                    $q->where('s.id', $employee);
-                })
-                ->groupBy("s.id")
-                ->get();
-            if ($attendance) {
-                return $this->successResponse($attendance, 'Attendance record fetch successfully');
+                ->where('s.id', $employee)
+                ->first();
+                array_push($output, $attendance);
+            }
+
+            if ($output) {
+                return $this->successResponse($output, 'Attendance record fetch successfully');
             } else {
                 return $this->send404Error('No Data Found.', ['error' => 'No Data Found']);
             }
@@ -12998,11 +12997,11 @@ class ApiController extends BaseController
     {
 
         $validator = \Validator::make($request->all(), [
-            'date' => 'required',
             'attendance' => 'required',
             'branch_id' => 'required',
             'token' => 'required',
         ]);
+
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
@@ -13011,30 +13010,39 @@ class ApiController extends BaseController
 
             // insert data
             $attendance = $request->attendance;
+            $employee = $request->employee;
+            
             foreach ($attendance as $att) {
+                
+                // return $att;
                 if (isset($att['id'])) {
                     $query = $conn->table('staff_attendances')->where('id', $att['id'])->update([
-                        'date' => $request->date,
+                        'date' => $att['date'],
                         'check_in' => $att['check_in'],
                         'check_out' => $att['check_out'],
                         'status' => $att['status'],
                         'hours' => $att['hours'],
                         'remarks' => $att['remarks'],
-                        'staff_id' => $att['staff_id'],
+                        'staff_id' => $employee,
                         'updated_at' => date("Y-m-d H:i:s")
                     ]);
                 } else {
-                    $query = $conn->table('staff_attendances')->insert([
-                        'date' => $request->date,
-                        'check_in' => $att['check_in'],
-                        'check_out' => $att['check_out'],
-                        'status' => $att['status'],
-                        'hours' => $att['hours'],
-                        'remarks' => $att['remarks'],
-                        'staff_id' => $att['staff_id'],
-                        'created_at' => date("Y-m-d H:i:s")
-                    ]);
+                   
+                    if($att['status'])
+                    {
+                        $query = $conn->table('staff_attendances')->insert([
+                            'date' => $att['date'],
+                            'check_in' => $att['check_in'],
+                            'check_out' => $att['check_out'],
+                            'status' => $att['status'],
+                            'hours' => $att['hours'],
+                            'remarks' => $att['remarks'],
+                            'staff_id' => $employee,
+                            'created_at' => date("Y-m-d H:i:s")
+                        ]);
+                    }
                 }
+
             }
             $success = [];
             if (!$query) {
@@ -13054,13 +13062,19 @@ class ApiController extends BaseController
             'date' => 'required',
             'employee' => 'required',
         ]);
+        
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
             $date = explode('-', $request->date);
             $employee = $request->employee;
+            $department = $request->department;
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
+            if (!isset($department) ){
+                $dep = $Connection->table('staffs')->select('department_id')->where('id',$employee)->first();
+                $department = $dep->department_id;
+            }
             $getAttendanceList = $Connection->table('staff_attendances as sa')
                 ->select(
                     'st.first_name',
@@ -13071,13 +13085,14 @@ class ApiController extends BaseController
                     'sa.status',
                     DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
                     DB::raw('COUNT(CASE WHEN sa.status = "absent" then 1 ELSE NULL END) as "absentCount"'),
-                    DB::raw('COUNT(CASE WHEN sa.status = "holiday" then 1 ELSE NULL END) as "lateCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "late" then 1 ELSE NULL END) as "lateCount"'),
 
                 )
                 ->join('staffs as st', 'sa.staff_id', '=', 'st.id')
                 ->when($employee != "All", function ($q)  use ($employee) {
                     $q->where('sa.staff_id', $employee);
                 })
+                ->where('st.department_id', $department)
                 ->whereMonth('sa.date', $date[0])
                 ->whereYear('sa.date', $date[1])
                 ->groupBy('sa.staff_id')
@@ -13103,7 +13118,7 @@ class ApiController extends BaseController
                 }
             }
 
-
+            
 
             // dd($staffDetails);
             $data = [
@@ -13350,6 +13365,26 @@ class ApiController extends BaseController
             } else {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             }
+        }
+    }
+
+    // get employee by department
+    public function getEmployeeByDepartment(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'department_id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $Staffs = $staffConn->table('staffs')->where('department_id',$request->department_id)->get();
+            return $this->successResponse($Staffs, 'Department Staffs record fetch successfully');
         }
     }
 }

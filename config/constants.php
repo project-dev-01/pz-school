@@ -430,6 +430,9 @@ return [
         'education_details' => $url.'/education/education-details',
         'education_update' => $url.'/education/update',
         'education_delete' => $url.'/education/delete',
+
+        
+        'employee_by_department' => $url.'/employee_by_department',
     ]
 
 ];

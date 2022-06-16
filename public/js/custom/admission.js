@@ -259,7 +259,6 @@ $(function () {
     $("#class_id").on('change', function (e) {
         e.preventDefault(); 
         var class_id = $(this).val();
-        console.log(class_id);
         $("#section_id").empty();
         $("#section_id").append('<option value="">Select Class Name</option>');
         $.post(sectionByClass, { class_id: class_id }, function (res) {

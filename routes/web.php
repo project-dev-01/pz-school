@@ -809,6 +809,10 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         // Admission routes
         Route::get('admission/index', [TeacherController::class, 'admission'])->name('teacher.admission');
         // Attendance routes
+        Route::get('attendance/employee_entry', [TeacherController::class, 'employeeEntry'])->name('teacher.attendance.employee_entry');
+        Route::post('attendance/employee_list', [TeacherController::class, 'getEmployeeAttendanceList'])->name('teacher.attendance.employee_list');
+        Route::post('attendance/employee_add', [TeacherController::class, 'addEmployeeAttendance'])->name('teacher.attendance.employee_add');
+        Route::get('attendance/employee/report', [TeacherController::class, 'reportEmployeeAttendance'])->name('teacher.attendance.employee_report');
         Route::get('attendance/student_entry', [TeacherController::class, 'studentEntry'])->name('teacher.attendance.student_entry');
         Route::get('attendance/exam_entry', [TeacherController::class, 'examEntry'])->name('teacher.attendance.exam_entry');
         Route::get('attendance/list', [TeacherController::class, 'attendanceList'])->name('teacher.attendance.list');

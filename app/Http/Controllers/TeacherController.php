@@ -888,4 +888,51 @@ class TeacherController extends Controller
         $response = Helper::PostMethod(config('constants.api.add_subject_division'), $data);
         return $response;
     }
+
+    
+    public function employeeEntry()
+    {
+        $employee = session()->get('ref_user_id');
+        return view(
+            'teacher.attendance.employee',
+            [
+                'employee' => $employee
+            ]
+        );
+    }
+    public function getEmployeeAttendanceList(Request $request)
+    {
+        $data = [
+            'firstDay' => $request->firstDay,
+            'lastDay' => $request->lastDay,
+            'employee' => $request->employee,
+            'date' => $request->date,
+        ];
+
+        $attendance = Helper::GETMethodWithData(config('constants.api.employee_attendance_list'), $data);
+        return $attendance;
+    }
+
+    // add Employee Attendance 
+    public function addEmployeeAttendance(Request $request)
+    {
+        $data = [
+            'employee' => $request->employee,
+            'attendance' => $request->attendance,
+        ];
+
+        $attendance = Helper::PostMethod(config('constants.api.employee_attendance_add'), $data);
+        return $attendance;
+    }
+
+    public function reportEmployeeAttendance()
+    {
+        $employee = session()->get('ref_user_id');
+        return view(
+            'teacher.attendance.employee_report',
+            [
+                'employee' => $employee
+            ]
+        );
+    }
 }

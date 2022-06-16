@@ -1758,6 +1758,13 @@
                         <span> Classroom Management </span>
                     </a>
                 </li>
+                
+                <li>
+                    <a href="{{ route('teacher.attendance.employee_entry')}}" class="nav-link {{ (request()->is('teacher/attendance/entry')) ? 'active' : '' }}">
+                        <i data-feather="file-text" class="icon-dual"></i>
+                        <span> Teaher Attendance </span>
+                    </a>
+                </li>
                 <li>
                     <a href="{{ route('teacher.test_result')}}" class="nav-link {{ (request()->is('teacher/test_result*')) ? 'active' : '' }}">
                         <i class="fas fa-marker"></i>
@@ -1843,7 +1850,12 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('teacher.attendance.list')}}" class="nav-link {{ (request()->is('teacher/attendance/list')) ? 'active' : '' }}">
-                                    <span> List </span>
+                                    <span> Student </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('teacher.attendance.employee_report')}}" class="nav-link {{ (request()->is('teacher/attendance/employee_report')) ? 'active' : '' }}">
+                                    <span> Employee </span>
                                 </a>
                             </li>
                             <!-- <li>

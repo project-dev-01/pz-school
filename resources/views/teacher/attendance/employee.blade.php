@@ -34,25 +34,7 @@
                 <div class="card-body">
                     <form id="employeeAttendanceFilter" method="post" enctype="multipart/form-data" autocomplete="off">
                         <div class="row">
-                            
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="department">Department<span class="text-danger">*</span></label>
-                                    <select class="form-control" name="department" id="department">
-                                        <option value="">Select Department</option>
-                                        @foreach($department as $dep)
-                                        <option value="{{$dep['id']}}">{{$dep['name']}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="employee">Employee<span class="text-danger">*</span></label>
-                                    <select class="form-control" name="employee" id="employee">
-                                    </select>
-                                </div>
-                            </div>
+                            <input type="hidden" id="employee" name="employee" value="{{$employee}}">
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="date">Date<span class="text-danger">*</span></label>
@@ -94,7 +76,7 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="addEmployeeAttendanceForm" method="post" action="{{ route('admin.attendance.employee_add') }}" enctype="multipart/form-data" autocomplete="off">
+                    <form id="addEmployeeAttendanceForm" method="post" action="{{ route('teacher.attendance.employee_add') }}" enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         <div class="row">
                             <div class="col-sm-12">
@@ -145,9 +127,9 @@
 @endsection
 @section('scripts')
 <script>
-    var getEmployeAttendanceList = "{{ route('admin.attendance.employee_list') }}";
+    var getEmployeAttendanceList = "{{ route('teacher.attendance.employee_list') }}";
     var employeeByDepartment = "{{ config('constants.api.employee_by_department') }}";
 </script>
-<script src="{{ asset('js/custom/attendance.js') }}"></script>
+<script src="{{ asset('js/custom/teacher_attendance_list.js') }}"></script>
 
 @endsection
