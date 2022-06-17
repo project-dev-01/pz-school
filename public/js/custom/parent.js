@@ -18,8 +18,15 @@ $(function () {
             },
             occupation: "required",
             mobile_no: "required",
-            password: "required",
-            confirm_password: "required",
+            password: {
+                required: true,
+                minlength: 6
+            },
+            confirm_password: {
+                required: true,
+                minlength: 6,
+                equalTo: "password"
+            },  
         }
     });
 

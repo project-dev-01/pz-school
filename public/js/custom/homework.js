@@ -154,9 +154,22 @@ $(function () {
             $("#schedule").hide("slow");
         }
     });
+    function formvalidate(formid){
+        $("#"+formid).validate({
+            rules: {
+                file: "required",
+                remarks: "required",
+            }
+        });
+    }
+    
 
     $(document).on('submit','.submitHomeworkForm', function (e) {
         e.preventDefault();
+        var formid = $(this).attr("id")
+        formvalidate(formid)
+        var homeWork = $("#"+formid).valid();
+        if (homeWork === true) {
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),
@@ -175,6 +188,7 @@ $(function () {
                     }
                 }
             });
+        }
     });
 
 

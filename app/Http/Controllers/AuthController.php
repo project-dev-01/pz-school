@@ -43,7 +43,9 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ]);
+
         $userDetails = $response->json();
+        // dd($userDetails);
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
             if ($userDetails['data']['subsDetails']) {
@@ -87,7 +89,7 @@ class AuthController extends Controller
                 return redirect()->route('admin.login')->with('error', 'Access denied please contact admin');
             }
         } else {
-            return redirect()->route('admin.login')->with('error', 'Email and password are wrong');
+            return redirect()->route('admin.login')->with('error', $userDetails['message']);
         }
     }
     // authenticate sa
@@ -165,5 +167,47 @@ class AuthController extends Controller
             return redirect()->route('admin.login');
         }
     }
+    public function forgotPassword(Request $request)
+    {
+        return view('auth.forgot-password');
+    }
+
+    public function resetPassword (Request $request){
+
+        $response = Http::post(config('constants.api.reset_password'), [
+            'email' => $request->email,
+        ]);
+
+        $userDetails = $response->json();
+        if ($userDetails['code'] == 200) {
+            return redirect()->back()->with('success','A reset link has been sent to your email address.');
+        } else {
+            return redirect()->back()->with('error', $userDetails['message']);
+        }
+    }
+
+    public function passwordrest($token)
+    {
+        return view('auth.password-reset', ['token' => $token]);
+    }
+
+    public function resetPasswordValidation(Request $request)
+    {
+        $response = Http::post(config('constants.api.reset_password_validation'), [
+            'email' => $request->email,
+            'password' => $request->password,
+            'password_confirmation' => $request->password_confirmation,
+            'token' => $request->token
+        ]);
+        $userDetails = $response->json();
+        if ($userDetails['code'] == 200) {
+            return redirect('schoolcrm/login')->with('success', 'Your password has been changed!');
+        } else {
+            return redirect()->back()->with('error', $userDetails['message']);
+        }
+
+    }
+
+    
     
 }

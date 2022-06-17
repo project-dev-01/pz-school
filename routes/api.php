@@ -21,6 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('login', [AuthController::class, 'authenticate']);
+Route::post('reset_password', [AuthController::class, 'resetPassword']);
+Route::post('reset_password_validation', [AuthController::class, 'resetPasswordValidation']);
 Route::get('get-countries', [CommonController::class, 'countryList']);
 Route::post('get-states', [CommonController::class, 'getStateByIdList']);
 Route::post('get-cities', [CommonController::class, 'getCityByIdList']);

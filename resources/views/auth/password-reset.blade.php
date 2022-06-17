@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Log In</title>
+    <title>Forgot Password</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -48,10 +48,10 @@
                                         </span>
                                     </a>
                                 </div>
-                                <p class="text-muted mb-4 mt-3">Enter your email address and password to access admin panel.</p>
+                                <p class="text-muted mb-4 mt-3">Enter your email address and we'll send you an email with instructions to reset your password.</p>
                             </div>
 
-                            <form id="LoginAuth" action="{{ route('admin.authenticate') }}" method="post">
+                            <form id="LoginAuth" action="{{ route('reset_password_validation') }}" method="post">
                                 @if ( Session::get('success'))
                                 <div class="alert alert-success">
                                     {{ Session::get('success') }}
@@ -63,33 +63,22 @@
                                 </div>
                                 @endif
                                 @csrf
-                                <div class="form-group mb-3">
-                                    <label for="email">Email address</label>
-                                    <input class="form-control" type="email" id="email" name="email" required="" placeholder="Enter your email">
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label for="password">Password</label>
-                                    <div class="input-group input-group-merge">
-                                        <input type="password" id="password" class="form-control" name="password" placeholder="Enter your password">
-                                        <div class="input-group-append" data-password="false">
-                                            <div class="input-group-text">
-                                                <span class="password-eye"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- <div class="form-group mb-3">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                        <label class="custom-control-label" for="checkbox-signin">Remember me</label>
-                                       
-                                    </div>
-                                </div> -->
+                                <input type="hidden" name="token" value="{{ $token }}">
+                                <div class="form-group">
+									<label>Email Address</label>
+									<input class="form-control" type="email" name="email">
+								</div>
+                                <div class="form-group">
+									<label>Password</label>
+									<input class="form-control" type="password" name="password">
+								</div>
+                                <div class="form-group">
+									<label>Confirm Password</label>
+									<input class="form-control" type="password" name="password_confirmation">
+								</div>
 
                                 <div class="form-group mb-0 text-center">
-                                    <button class="btn btn-primary-bn btn-block" type="submit"> Log In </button>
+                                    <button class="btn btn-primary-bn btn-block" type="submit">  Reset Password </button>
                                 </div>
 
                             </form>
@@ -97,11 +86,10 @@
                         </div> <!-- end card-body -->
                     </div>
                     <!-- end card -->
-
                     <div class="row mt-3">
                         <div class="col-12 text-center">
-                            <p> <a href="{{route('forgot_password')}}" class="text-white-50 ml-1">Forgot your password?</a></p>
-                        </div>
+                            <p class="text-white-50">Back to <a href="{{route('admin.login')}}" class="text-white ml-1"><b>Log in</b></a></p>
+                        </div> <!-- end col -->
                     </div>
                     <!-- end row -->
 
@@ -127,5 +115,4 @@
     <script src="{{ asset('js/app.min.js') }}"></script>
     <!-- <script src="{{ asset('js/custom/login.js') }}"></script> -->
 </body>
-
 </html>

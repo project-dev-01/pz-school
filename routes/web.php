@@ -260,6 +260,12 @@ Route::group(['prefix' => 'schoolcrm'], function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
     Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('admin.authenticate');
     Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
+
+    Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgot_password');
+    Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('reset_password');
+    Route::get('/password/reset/{token}', [AuthController::class, 'passwordRest'])->name('password_reset');
+    Route::post('/reset-password-validation', [AuthController::class, 'resetPasswordValidation'])->name('reset_password_validation');
+
     //school app form
     Route::get('/application-form', [CommonController::class, 'showApplicationForm'])->name('schoolcrm.app.form');
     Route::get('/DBMigrationCall', [CommonController::class, 'DBMigrationCall']);
@@ -550,6 +556,11 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
         //class room Routes
         Route::get('classroom/classroom-management', [AdminController::class, 'classroomManagement'])->name('admin.classroom.management');
+        Route::post('classroomAdd', [AdminController::class, 'classroomPost'])->name('admin.classroom.add');
+        Route::post('getShortTest', [AdminController::class, 'getShortTest'])->name('admin.classroom.get_short_test');
+        Route::post('add_short_test', [AdminController::class, 'addShortTest'])->name('admin.classroom.add_short_test');
+        Route::post('add_daily_report', [AdminController::class, 'addDailyReport'])->name('admin.classroom.add_daily_report');
+        Route::post('add_daily_report_remarks', [AdminController::class, 'addDailyReportRemarks'])->name('admin.classroom.add_daily_report_remarks');
         //faq route
 
         // faq        

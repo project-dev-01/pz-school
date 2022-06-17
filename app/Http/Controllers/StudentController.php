@@ -59,7 +59,6 @@ class StudentController extends Controller
             'student_id' => $student,
         ];
         $homework = Helper::PostMethod(config('constants.api.homework_student'), $data);
-        // dd($homework);
         return view(
             'student.homework.list',
             [

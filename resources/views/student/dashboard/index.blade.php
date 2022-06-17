@@ -275,7 +275,7 @@
                                                         <!-- task -->
                                                         <div class="row">
                                                             <div class="col-sm-2">
-                                                                <a href="{{ route('parent.homework')}}">{{$homework['subject_name']}} </a>
+                                                                <a href="{{ route('student.homework')}}">{{$homework['subject_name']}} </a>
                                                             </div> <!-- end col -->
                                                             <div class="col-sm-6">
                                                                 <div class="d-sm-flex">

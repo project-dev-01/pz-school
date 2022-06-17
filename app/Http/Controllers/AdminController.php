@@ -1838,10 +1838,6 @@ class AdminController extends Controller
             ]
         );
     }
-    public function classroomManagement()
-    {
-        return view('admin.classroom.management');
-    }
     public function faqIndex()
     {
         return view('admin.faq.index');
@@ -3313,7 +3309,7 @@ class AdminController extends Controller
             'qualification' => $request->txt_prev_qualify,
             'remarks' => $request->txtarea_prev_remarks,
             'class_id' => $request->class_id,
-            'section_id' => "1",
+            'section_id' => $request->section_id,
             'session_id' => $request->session_id,
             'semester_id' => $request->semester_id,
 
@@ -3323,7 +3319,6 @@ class AdminController extends Controller
 
         ];
 
-        // dd($data);
         $response = Helper::PostMethod(config('constants.api.student_update'), $data);
         return $response;
     }
@@ -4107,6 +4102,80 @@ class AdminController extends Controller
         ];
 
         $response = Helper::PostMethod(config('constants.api.education_delete'), $data);
+        return $response;
+    }
+    public function classroomManagement()
+    {
+        $response = Helper::GetMethod(config('constants.api.class_list'));
+        return view('admin.classroom.management', [
+            'class' => $response['data']
+        ]);
+    }
+
+    function classroomPost(Request $request)
+    {
+        // echo "<pre>";
+        // print_r($request);
+
+        $data = [
+            "attendance" => $request->attendance,
+            "date" => $request->date,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.add_student_attendance'), $data);
+        return $response;
+    }
+    function getShortTest(Request $request)
+    {
+        $data = [
+            "date" => $request->date,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.get_short_test'), $data);
+        return $response;
+    }
+    function addShortTest(Request $request)
+    {
+        // dd($request);
+        $data = [
+            "short_test" => $request->short_test,
+            "date" => $request->date,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.add_short_test'), $data);
+        return $response;
+    }
+    function addDailyReport(Request $request)
+    {
+        $data = [
+            "daily_report" => $request->daily_report,
+            "date" => $request->date,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.add_daily_report'), $data);
+        return $response;
+    }
+    function addDailyReportRemarks(Request $request)
+    {
+        $data = [
+            "daily_report_remarks" => $request->daily_report_remarks,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.add_daily_report_remarks'), $data);
         return $response;
     }
 }

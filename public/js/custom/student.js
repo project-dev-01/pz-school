@@ -403,12 +403,11 @@ $(function () {
             txt_mobile_no: "required",
             present_address: "required",
             txt_pwd: {
-                required: true,
                 minlength: 6
             },
             txt_retype_pwd: {
-                required: true,
-                minlength: 6
+                minlength: 6,
+                equalTo: "txt_pwd"
             },             
         }
     });
