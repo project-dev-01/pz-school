@@ -20,10 +20,9 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span class="fab fa-audible" id="span-parent"></span>
+                        <h4 class="navv">
                             Select Ground
                             <h4>
                     </li>
@@ -44,11 +43,11 @@
                                 </div>
                             </div>
                         </div>
-                    <div class="form-group text-right m-b-0">
-                        <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                            Filter
-                        </button>
-                    </div>
+                        <div class="form-group text-right m-b-0">
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                Filter
+                            </button>
+                        </div>
                     </form>
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
@@ -58,10 +57,9 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span class="fas fa-stream" id="span-parent"></span>
+                        <h4 class="navv">
                             Leave List
                             <h4>
                     </li>

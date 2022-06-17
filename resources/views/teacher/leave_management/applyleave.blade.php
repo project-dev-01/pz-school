@@ -22,10 +22,9 @@
                 <div class="col-12">
 
                     <div class="card">
-                        <ul class="nav nav-tabs" >
+                        <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="nav-link">
-                                    <span data-feather="airplay" class="icon-dual" id="span-parent"></span> Already Taken Leave Details
+                                <h4 class="navv">Already Taken Leave Details
                                     <h4>
                             </li>
                         </ul><br>
@@ -55,10 +54,9 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card">
-                        <ul class="nav nav-tabs" >
+                        <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="nav-link">
-                                    <span data-feather="folder" class="icon-dual" id="span-parent"></span> General Details
+                                <h4 class="navv"> General Details
                                     <h4>
                             </li>
                         </ul><br>
@@ -146,8 +144,10 @@
                                 </div>
                                 <!--3rd row-->
                                 <br />
-                                <div class="clearfix mt-4">
-                                    <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Apply</button>
+                                <div class="form-group text-right m-b-0">
+                                    <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
+                                        Apply
+                                    </button>
                                 </div>
                             </form>
 
@@ -159,10 +159,9 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card">
-                        <ul class="nav nav-tabs" >
+                        <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="nav-link">
-                                    <span data-feather="bookmark" class="icon-dual" id="span-parent"></span> Leave History
+                                <h4 class="navv"> Leave History
                                     <h4>
                             </li>
                         </ul><br>

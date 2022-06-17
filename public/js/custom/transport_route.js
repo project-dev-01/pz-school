@@ -49,6 +49,17 @@ $(function () {
             processing: true,
             info: true,
             bDestroy:true,
+            dom: 'lBfrtip',
+            buttons: [
+                {
+                    extend: 'csv',
+                    text: 'Download CSV',
+                    extension: '.csv',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+                }
+            ],
             ajax: transportRouteList,
             "pageLength": 5,
             "aLengthMenu": [

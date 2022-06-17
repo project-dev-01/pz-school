@@ -105,6 +105,17 @@ $(function () {
     $('#staff-leave-list').DataTable({
         processing: true,
         info: true,
+        dom: 'lBfrtip',
+        buttons: [
+            {
+                extend: 'csv',
+                text: 'Download CSV',
+                extension: '.csv',
+                exportOptions: {
+                    columns: 'th:not(:last-child)'
+                }
+            }
+        ],
         ajax: StaffLeaveList,
         "pageLength": 5,
         "aLengthMenu": [

@@ -18,13 +18,14 @@ table>thead>tr>th {
 	background-color: #E9D528;
 	font-weight: bold;
 	font-family: Open Sans;
-	font-size: 12px;
+	font-size: 13px;
+	color: black;
 }
 
 .table {
 	font-size: 12px;
-	/* width: 1200px !important; */
 	font-family: Open Sans;
+	color: #3A4265;
 }
 
 /*table action button code*/
@@ -87,7 +88,7 @@ div.dataTables_wrapper div.dataTables_filter input {
 	font-family: 'Open Sans';
 	font-style: normal;
 	font-weight: 600;
-	font-size: 14px;
+	font-size: 12px;
 	line-height: 22px;
 	/* identical to box height */
 	color: #3A4265;
@@ -184,7 +185,7 @@ input:focus {
 	font-weight: 600;
 	font-size: 16px;
 	letter-spacing: 0.0133em;
-	color: #3A4265;
+	color: #131314;
 
 }
 
@@ -194,7 +195,7 @@ input:focus {
 
 .form-control {
 	background-color: #F4F7FC;
-	border: 1px solid #ECECEC;
+	/* border: 1px solid #ECECEC; */
 	font-family: Open Sans;
 	font-size: 12px;
 }
@@ -350,4 +351,15 @@ input:focus {
 .fc-state-active {
 	background-color: #0abab5 !important;
 	color: #fff;
+}
+
+button.dt-button {
+	border-radius: 22px;
+	background: white;
+	color: #4fc6e1;
+	border: 1px solid #4fc6e1;
+}
+
+.nav-item.nav-link {
+	color: black;
 }

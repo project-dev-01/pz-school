@@ -4502,11 +4502,13 @@ class ApiController extends BaseController
             $Timetable = $con->table('timetable_class')->select(
                 'timetable_class.*',
                 DB::raw('GROUP_CONCAT(staffs.first_name, " ", staffs.last_name) as teacher_name'),
-                'subjects.name as subject_name'
+                'subjects.name as subject_name',
+                'exam_hall.hall_no'
             )
                 // ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')
                 ->leftJoin("staffs", DB::raw("FIND_IN_SET(staffs.id,timetable_class.teacher_id)"), ">", DB::raw("'0'"))
                 ->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
+                ->leftJoin('exam_hall', 'timetable_class.class_room', '=', 'exam_hall.id')
                 ->where([
                     ['timetable_class.class_id', $request->class_id],
                     ['timetable_class.semester_id', $request->semester_id],
@@ -9511,7 +9513,7 @@ class ApiController extends BaseController
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
             // insert data
-            $success = $createConnection->table('subject_assigns as sa')->select('s.id', 's.name')
+            $success = $createConnection->table('subject_assigns as sa')->select('s.id', DB::raw("CONCAT(first_name, ' ', last_name) as name"))
                 ->join('staffs as s', 'sa.teacher_id', '=', 's.id')
                 ->where('sa.class_id', $request->class_id)
                 ->where('sa.section_id', $request->section_id)
@@ -12960,27 +12962,27 @@ class ApiController extends BaseController
             $date = $request->date;
             $output = array();
             // get data
-            $begin = new DateTime( $request->firstDay );
-            $end   = new DateTime( $request->lastDay );
-            for($i = $begin; $i <= $end; $i->modify('+1 day')){
-                
+            $begin = new DateTime($request->firstDay);
+            $end   = new DateTime($request->lastDay);
+            for ($i = $begin; $i <= $end; $i->modify('+1 day')) {
+
                 $date = $i->format("Y-m-d");
                 $attendance['date'] = $date;
                 $attendance['details'] = $Connection->table('staffs as s')
-                ->select(
-                    'sa.id',
-                    'sa.check_in',
-                    'sa.check_out',
-                    'sa.status',
-                    'sa.hours',
-                    'sa.remarks',
-                )
-                ->leftJoin('staff_attendances as sa', function ($join) use ($date) {
-                    $join->on('s.id', '=', 'sa.staff_id')
-                        ->on('sa.date', '=', DB::raw("'$date'"));
-                })
-                ->where('s.id', $employee)
-                ->first();
+                    ->select(
+                        'sa.id',
+                        'sa.check_in',
+                        'sa.check_out',
+                        'sa.status',
+                        'sa.hours',
+                        'sa.remarks',
+                    )
+                    ->leftJoin('staff_attendances as sa', function ($join) use ($date) {
+                        $join->on('s.id', '=', 'sa.staff_id')
+                            ->on('sa.date', '=', DB::raw("'$date'"));
+                    })
+                    ->where('s.id', $employee)
+                    ->first();
                 array_push($output, $attendance);
             }
 
@@ -13011,9 +13013,9 @@ class ApiController extends BaseController
             // insert data
             $attendance = $request->attendance;
             $employee = $request->employee;
-            
+
             foreach ($attendance as $att) {
-                
+
                 // return $att;
                 if (isset($att['id'])) {
                     $query = $conn->table('staff_attendances')->where('id', $att['id'])->update([
@@ -13027,9 +13029,8 @@ class ApiController extends BaseController
                         'updated_at' => date("Y-m-d H:i:s")
                     ]);
                 } else {
-                   
-                    if($att['status'])
-                    {
+
+                    if ($att['status']) {
                         $query = $conn->table('staff_attendances')->insert([
                             'date' => $att['date'],
                             'check_in' => $att['check_in'],
@@ -13042,7 +13043,6 @@ class ApiController extends BaseController
                         ]);
                     }
                 }
-
             }
             $success = [];
             if (!$query) {
@@ -13062,7 +13062,7 @@ class ApiController extends BaseController
             'date' => 'required',
             'employee' => 'required',
         ]);
-        
+
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
@@ -13071,8 +13071,8 @@ class ApiController extends BaseController
             $department = $request->department;
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
-            if (!isset($department) ){
-                $dep = $Connection->table('staffs')->select('department_id')->where('id',$employee)->first();
+            if (!isset($department)) {
+                $dep = $Connection->table('staffs')->select('department_id')->where('id', $employee)->first();
                 $department = $dep->department_id;
             }
             $getAttendanceList = $Connection->table('staff_attendances as sa')
@@ -13118,7 +13118,7 @@ class ApiController extends BaseController
                 }
             }
 
-            
+
 
             // dd($staffDetails);
             $data = [
@@ -13383,8 +13383,331 @@ class ApiController extends BaseController
             // create new connection
             $staffConn = $this->createNewConnection($request->branch_id);
             // get data
-            $Staffs = $staffConn->table('staffs')->where('department_id',$request->department_id)->get();
+            $Staffs = $staffConn->table('staffs')->where('department_id', $request->department_id)->get();
             return $this->successResponse($Staffs, 'Department Staffs record fetch successfully');
+        }
+    }
+    // get student list by entrolls
+    public function getStudListByClassSec(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $Connection = $this->createNewConnection($request->branch_id);
+            $getSubjectMarks = $Connection->table('enrolls as en')
+                ->select(
+                    'en.student_id',
+                    'en.class_id',
+                    'en.section_id',
+                    DB::raw("CONCAT(st.first_name, ' ', st.last_name) as name"),
+                    'st.id as id'
+                )
+                ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
+                ->where([
+                    ['en.class_id', '=', $request->class_id],
+                    ['en.section_id', '=', $request->section_id]
+                ])
+                ->orderBy('st.first_name', 'asc')
+                ->get();
+            return $this->successResponse($getSubjectMarks, 'Students record fetch successfully');
+        }
+    }
+    // get attendance report graph
+    function getAttendanceReportGraph(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
+            'student_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $month = date('m');
+            $year = date('Y');
+            // date wise late present analysis
+            $getLatePresentData = $Connection->table('student_attendances as sa')
+                ->select(
+                    // 'sa.date',
+                    DB::raw('DATE_FORMAT(sa.date, "%b") as month'),
+                    // DB::raw('DATE_FORMAT(sa.date, "%b %d") as date'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "absent" then 1 ELSE NULL END) as "absentCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "late" then 1 ELSE NULL END) as "lateCount"')
+                )
+                // ->join('enrolls as en', 'sa.student_id', '=', 'en.student_id')
+                // ->join('students as stud', 'sa.student_id', '=', 'stud.id')
+                ->where([
+                    ['sa.class_id', '=', $request->class_id],
+                    ['sa.section_id', '=', $request->section_id],
+                    ['sa.subject_id', '=', $request->subject_id],
+                    ['sa.student_id', '=', $request->student_id]
+                ])
+                ->whereMonth('sa.date', $month)
+                ->whereYear('sa.date', $year)
+                // ->groupBy('sa.date')
+                ->get();
+
+            return $this->successResponse($getLatePresentData, 'attendance record fetch successfully');
+        }
+    }
+    // view Homework submission
+    public function viewHomeworkGraphByStudent(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
+            'student_id' => 'required'
+        ]);
+        $student_id = $request->student_id;
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection    
+            $con = $this->createNewConnection($request->branch_id);
+            // get data
+            $homework = $con->table('homeworks as h')->select(
+                'h.id',
+                'h.document',
+                'h.date_of_homework',
+                'h.date_of_submission',
+                'he.student_id',
+                'he.date',
+                'he.status',
+                'he.correction'
+            )->leftJoin('homework_evaluation as he', function ($q) use ($student_id) {
+                $q->on('h.id', '=', 'he.homework_id')
+                    ->on('he.student_id', '=', DB::raw("'$student_id'"));
+            })->where([
+                ['h.class_id', '=', $request->class_id],
+                ['h.section_id', '=', $request->section_id],
+                ['h.subject_id', '=', $request->subject_id]
+            ])->get();
+
+            $complete  = 0;
+            $inComplete  = 0;
+            $lateSubmission  = 0;
+
+            if (!empty($homework)) {
+                foreach ($homework as $home) {
+                    // dd($home);
+                    if (isset($home->date)) {
+                        $submitDate = $home->date;
+                        $submitDate = date('Y-m-d', strtotime($submitDate));
+                        // echo $submitDate; // echos today! 
+                        // $date_of_homework = date('Y-m-d', strtotime($home->date_of_homework));
+                        $date_of_submission = date('Y-m-d', strtotime($home->date_of_submission));
+                        // echo $date_of_submission; // echos today! 
+
+                        if ($submitDate > $date_of_submission) {
+                            $lateSubmission++; // late submited
+                        } else {
+                            if ($home->correction == "1") {
+                                $complete++;
+                            } else {
+                                $inComplete++;
+                            }
+                        }
+                    } else {
+                        if (isset($home->correction)) {
+                            if ($home->correction == "1") {
+                                $complete++; // late submited
+                            } else {
+                                $inComplete++;
+                            }
+                        } else {
+                            $inComplete++;
+                        }
+                    }
+                }
+            }
+
+            $data = [
+                'complete' => $complete,
+                'in_complete' => $inComplete,
+                'late_submission' => $lateSubmission,
+            ];
+            return $this->successResponse($data, 'Homework record fetch successfully');
+        }
+    }
+    // get attendance report graph
+    function getAttitudeGraphByStudent(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
+            'student_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $month = date('m');
+            $year = date('Y');
+
+            $getStudBehaviour = $Connection->table('student_attendances as sa')
+                ->select(
+                    DB::raw('COUNT(sa.date) as "total_no_of_days_date_count"'),
+                    // DB::raw('DATE_FORMAT(sa.date, "%b %d") as date'),
+                    DB::raw('COUNT(CASE WHEN sa.student_behaviour = "smile" then 1 ELSE NULL END) as "smileCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.student_behaviour = "angry" then 1 ELSE NULL END) as "angryCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.student_behaviour = "dizzy" then 1 ELSE NULL END) as "dizzyCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.student_behaviour = "surprise" then 1 ELSE NULL END) as "surpriseCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.student_behaviour = "tired" then 1 ELSE NULL END) as "tiredCount"')
+                )
+                // ->join('enrolls as en', 'sa.student_id', '=', 'en.student_id')
+                // ->join('students as stud', 'sa.student_id', '=', 'stud.id')
+                ->where([
+                    ['sa.class_id', '=', $request->class_id],
+                    ['sa.section_id', '=', $request->section_id],
+                    ['sa.subject_id', '=', $request->subject_id],
+                    ['sa.student_id', '=', $request->student_id]
+                ])
+                ->whereMonth('sa.date', $month)
+                ->whereYear('sa.date', $year)
+                // ->groupBy('sa.date')
+                ->get();
+
+            return $this->successResponse($getStudBehaviour, 'attitude record fetch successfully');
+        }
+    }
+    // getShortTestByStudent
+    function getShortTestByStudent(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'student_id' => 'required',
+            'subject_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+
+            $getShortTest = $Connection->table('short_tests as sht')
+                ->select(
+                    'sht.id',
+                    // DB::raw("group_concat(sht.test_marks,'|',sht.grade_status) as scoremarks"),
+                    'sht.test_name',
+                    'sht.test_marks',
+                    'sht.grade_status',
+                    'sht.date'
+                )
+                ->where([
+                    ['sht.class_id', '=', $request->class_id],
+                    ['sht.section_id', '=', $request->section_id],
+                    ['sht.subject_id', '=', $request->subject_id],
+                    ['sht.student_id', '=', $request->student_id]
+                ])
+                // ->groupBy('sht.date')
+                ->get();
+            // dd($getShortTest);
+            // if (!empty($getShortTest)) {
+            //     foreach ($getShortTest as $test) {
+            //         // dd($home);
+            //         $testnames = explode(",", $test->test_name);
+            //         print_r($testnames);
+            //         if (!empty($testnames)) {
+            //             foreach ($testnames as $names) {
+            //                 echo $names;
+            //             }
+            //         }
+            //         // echo $test->id;
+            //         // echo $test->test_name;
+            //         // echo $test->test_marks;
+            //         // echo $test->grade_status;
+            //         // echo $test->date;
+            //         // echo "<pre>";
+            //     }
+            // }
+            // exit;
+            return $this->successResponse($getShortTest, 'Short test record fetch successfully');
+        }
+    }
+    public function getSubjectAverageByStudent(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            // get attendance details query
+            $subject_id = $request->subject_id;
+            $class_id = $request->class_id;
+            $section_id = $request->section_id;
+            $subject_id = $request->subject_id;
+            $Connection = $this->createNewConnection($request->branch_id);
+
+
+            $check = $Connection->table('student_subjectdivision')
+                ->where([
+                    ['class_id', '=', $request->class_id],
+                    ['section_id', '=', $request->section_id],
+                    ['subject_id', '=', $request->subject_id]
+                ])
+                ->get()->toArray();
+            if ($check) {
+                $studentdetails = $Connection->table('student_subjectdivision_inst as ssd')->select('ssd.exam_id', 'te.exam_date', DB::raw('round(AVG(ssd.total_score), 2) as average'))
+                    ->leftJoin('timetable_exam as te', function ($join) {
+                        $join->on('te.exam_id', '=', 'ssd.exam_id')
+                            ->on('te.class_id', '=', 'ssd.class_id')
+                            ->on('te.section_id', '=', 'ssd.section_id')
+                            ->on('te.subject_id', '=', 'ssd.subject_id');
+                    })
+                    ->where([
+                        ['ssd.class_id', '=', $request->class_id],
+                        ['ssd.section_id', '=', $request->section_id],
+                        ['ssd.subject_id', '=', $request->subject_id],
+                        ['ssd.student_id', '=', $request->student_id]
+                    ])
+                    ->groupBy('ssd.exam_id')
+                    ->orderBy('te.exam_date', 'ASC')
+                    ->get();
+            } else {
+                $studentdetails = $Connection->table('student_marks as sm')->select('sm.exam_id', 'te.exam_date', DB::raw('round(AVG(sm.score), 2) as average'))
+                    ->leftJoin('timetable_exam as te', function ($join) {
+                        $join->on('te.exam_id', '=', 'sm.exam_id')
+                            ->on('te.class_id', '=', 'sm.class_id')
+                            ->on('te.section_id', '=', 'sm.section_id')
+                            ->on('te.subject_id', '=', 'sm.subject_id');
+                    })
+                    ->where([
+                        ['sm.class_id', '=', $request->class_id],
+                        ['sm.section_id', '=', $request->section_id],
+                        ['sm.subject_id', '=', $request->subject_id],
+                        ['sm.student_id', '=', $request->student_id]
+                    ])
+                    ->groupBy('sm.exam_id')
+                    ->orderBy('te.exam_date', 'ASC')
+                    ->get();
+            }
+
+            return $this->successResponse($studentdetails, 'Subject average by student fetch successfully');
         }
     }
 }

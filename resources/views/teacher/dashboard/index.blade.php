@@ -10,10 +10,10 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <div class="page-title-right">
+                <!-- <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                     </ol>
-                </div>
+                </div> -->
                 <h4 class="page-title">Dashboard</h4>
             </div>
         </div>
@@ -410,9 +410,9 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col">
-                                    <div class="card-box">
+                                    <div class="card-body">
                                         <div class="table-responsive">
-                                            <table class="table mb-0">
+                                            <table class="table">
                                                 <tr>
                                                     <td>Title</td>
                                                     <td id="title"></td>
@@ -565,8 +565,8 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span data-feather="edit" class="icon-dual" id="span-parent"></span> Top Scoreres of class
+                        <h4 class="navv">
+                            Top Scoreres of class
                             <h4>
                     </li>
                 </ul><br>
@@ -585,17 +585,16 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span data-feather="edit" class="icon-dual" id="span-parent"></span> Top 10 ranking
+                        <h4 class="navv"> Top 10 ranking
                             <h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="card-box">
+                            <div class="card-body">
                                 <div class="table-responsive">
-                                    <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
+                                    <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
@@ -676,8 +675,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span data-feather="edit" class="icon-dual" id="span-parent"></span> Bottom 10 ranking
+                        <h4 class="navv"> Bottom 10 ranking
                             <h4>
                     </li>
                 </ul><br>
@@ -686,7 +684,7 @@
                         <div class="col-lg-12">
                             <div class="card-box">
                                 <div class="table-responsive">
-                                    <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
+                                    <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table dt-responsive nowrap w-100">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
@@ -767,8 +765,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span data-feather="edit" class="icon-dual" id="span-parent"></span> Top 10 Improments
+                        <h4 class="navv">Top 10 Improments
                             <h4>
                     </li>
                 </ul><br>
@@ -777,7 +774,7 @@
                         <div class="col-lg-12">
                             <div class="card-box">
                                 <div class="table-responsive">
-                                    <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
+                                    <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
@@ -840,8 +837,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span data-feather="edit" class="icon-dual" id="span-parent"></span> Bottom 10 Deteriorate
+                        <h4 class="navv"> Bottom 10 Deteriorate
                             <h4>
                     </li>
                 </ul><br>
@@ -850,7 +846,7 @@
                         <div class="col-lg-12">
                             <div class="card-box">
                                 <div class="table-responsive">
-                                    <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
+                                    <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>

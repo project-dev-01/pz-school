@@ -19,9 +19,9 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
+                        <h4 class="navv">
                             Select Ground
                             <h4>
                     </li>
@@ -74,9 +74,9 @@
     <div class="row" style="display:none;" id="body_content">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
+                        <h4 class="navv">
                             Class
                             <h4>
                     </li>
@@ -89,7 +89,7 @@
                                     <table class="table w-100 nowrap table-bordered table-striped" id="tab_overall">
                                         <thead id="overall_header">
                                             <tr>
-                                                <th class="align-top" rowspan="2">S.no.</th>                                                                    
+                                                <th class="align-top" rowspan="2">S.no.</th>
                                                 <th class="align-top" rowspan="2">Subject Name</th>
                                                 <th class="align-top th-sm - 6 rem" rowspan="2">Tot. Students</th>
                                                 <th class="align-top" rowspan="2">Absent</th>
@@ -150,7 +150,7 @@
         </div> <!-- end col -->
 
     </div>
-    <div class="row"  id="analysis_graph">
+    <div class="row" id="analysis_graph">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">

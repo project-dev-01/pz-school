@@ -27,7 +27,12 @@
 <script src="{{ asset('libs/mohithg-switchery/switchery.min.js') }}"></script>
 
 <script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
+<script src="{{ asset('libs/apexcharts/apexcharts.min.js') }}"></script>
+<script src="https://apexcharts.com/samples/assets/irregular-data-series.js"></script>
+<script src="https://apexcharts.com/samples/assets/ohlc.js"></script>
 
+<!-- init js -->
+<!-- <script src="{{ asset('js/pages/apexcharts.init.js') }}"></script> -->
 
 <!-- plugin js -->
 <script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
@@ -104,15 +109,15 @@
 
 <!-- <script src="{{ asset('js/validation/validation.js') }}"></script> -->
 <!-- test js for datatable download -->
-<!-- <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script> -->
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
 <!-- Bootstrap Tables js -->
 <script src="{{ asset('libs/bootstrap-table/bootstrap-table.min.js') }}"></script>
 <!-- ApexChart  Js-->
-<script src="{{ asset('js/apexChart/apexcharts.js') }}"></script>
+<!-- <script src="{{ asset('js/apexChart/apexcharts.js') }}"></script> -->
 <!-- ApeDate Picker  Js-->
 <!-- <script src="{{ asset('libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script> -->
 <!-- Datepicker -->
@@ -120,7 +125,7 @@
 <!-- Table Editable plugin-->
 <script src="{{ asset('libs/jquery-tabledit/jquery.tabledit.min.js') }}"></script>
 <!-- hightcharts js -->
-<script src="{{ asset('js/highcharts/highcharts.js') }}"></script>
+<!-- <script src="{{ asset('js/highcharts/highcharts.js') }}"></script> -->
 <!-- add date range picker -->
 <script type="text/javascript" src="{{ asset('js/daterangepicker/daterangepicker.min.js') }}"></script>
 
@@ -214,9 +219,9 @@
 <script src="{{ asset('js/custom/user_list.js') }}"></script>
 <script src="{{ asset('js/custom/dashboard.js') }}"></script>
 <!-- <script src="{{ asset('js/custom/test_result.js') }}"></script> -->
-<!-- <script src="{{ asset('js/custom/apex-mixed.js') }}"></script> -->
+<script src="{{ asset('js/custom/apex-mixed.js') }}"></script>
 <script src="{{ asset('js/custom/common.js') }}"></script>
-<script src="{{ asset('js/custom/iconchart.js') }}"></script>
+<!-- <script src="{{ asset('js/custom/iconchart.js') }}"></script> -->
 <!-- <script src="{{ asset('js/apexChart/apexcharts.js') }}"></script> -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> -->
 
@@ -510,38 +515,38 @@
                     };
                     charts.push(this.respChart($("#radar-chart-test-overall"), 'Radar', radarChart, radarOpts));
                 }
-                if ($('#radar-analytic').length > 0) {
-                    var dataColors = $("#radar-analytic").data('colors');
-                    var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
-                    //radar chart
-                    var radarChart = {
-                        labels: ["Skill", "Grammer", "GeoGenius"],
-                        datasets: [{
-                                label: "Mid term",
-                                backgroundColor: hexToRGB(colors[0], 0.3),
-                                borderColor: colors[0],
-                                pointBackgroundColor: colors[0],
-                                pointBorderColor: "#fff",
-                                pointHoverBackgroundColor: "#fff",
-                                pointHoverBorderColor: colors[0],
-                                data: [95, 45, 45]
-                            },
-                            {
-                                label: "Annual",
-                                backgroundColor: hexToRGB(colors[1], 0.3),
-                                borderColor: colors[1],
-                                pointBackgroundColor: colors[1],
-                                pointBorderColor: "#fff",
-                                pointHoverBackgroundColor: "#fff",
-                                pointHoverBorderColor: colors[1],
-                                data: [65, 75, 70]
-                            }
-                        ]
-                    };
-                    var radarOpts = {
-                        maintainAspectRatio: false
-                    };
-                    charts.push(this.respChart($("#radar-analytic"), 'Radar', radarChart, radarOpts));
+                // if ($('#radar-analytic').length > 0) {
+                //     var dataColors = $("#radar-analytic").data('colors');
+                //     var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
+                //     //radar chart
+                //     var radarChart = {
+                //         labels: ["Skill", "Grammer", "GeoGenius"],
+                //         datasets: [{
+                //                 label: "Mid term",
+                //                 backgroundColor: hexToRGB(colors[0], 0.3),
+                //                 borderColor: colors[0],
+                //                 pointBackgroundColor: colors[0],
+                //                 pointBorderColor: "#fff",
+                //                 pointHoverBackgroundColor: "#fff",
+                //                 pointHoverBorderColor: colors[0],
+                //                 data: [95, 45, 45]
+                //             },
+                //             {
+                //                 label: "Annual",
+                //                 backgroundColor: hexToRGB(colors[1], 0.3),
+                //                 borderColor: colors[1],
+                //                 pointBackgroundColor: colors[1],
+                //                 pointBorderColor: "#fff",
+                //                 pointHoverBackgroundColor: "#fff",
+                //                 pointHoverBorderColor: colors[1],
+                //                 data: [65, 75, 70]
+                //             }
+                //         ]
+                //     };
+                //     var radarOpts = {
+                //         maintainAspectRatio: false
+                //     };
+                //     charts.push(this.respChart($("#radar-analytic"), 'Radar', radarChart, radarOpts));
                 }
                 return charts;
             },
@@ -644,108 +649,108 @@
 </script>
 
 <script>
-    $(document).ready(function() {
-        // console.log("ready!");
-        var options = {
-            series: [{
-                name: 'Maths',
-                data: [44, 55, 41, 37, 22, 43, 21]
-            }, {
-                name: 'English',
-                data: [53, 32, 33, 52, 13, 43, 32]
-            }, {
-                name: 'Physics',
-                data: [12, 17, 11, 9, 15, 11, 20]
-            }, {
-                name: 'Geography',
-                data: [9, 7, 5, 8, 6, 9, 4]
-            }, {
-                name: 'Chemistry',
-                data: [25, 12, 19, 32, 25, 24, 10]
-            }],
-            chart: {
-                type: 'bar',
-                height: 350,
-                stacked: true,
-            },
-            plotOptions: {
-                bar: {
-                    horizontal: true,
-                },
-            },
-            stroke: {
-                width: 1,
-                colors: ['#fff']
-            },
-            title: {
-                text: 'Toppers'
-            },
-            xaxis: {
-                categories: ["William", "James", "Benjamin", "Lucas", "Charlotte", "Sophia", "Amelia", "Isabella", "Mia"],
-                labels: {
-                    formatter: function(val) {
-                        return val;
-                    }
-                }
-            },
-            yaxis: {
-                title: {
-                    text: undefined
-                },
-            },
-            tooltip: {
-                y: {
-                    formatter: function(val) {
-                        return val;
-                    }
-                }
-            },
-            fill: {
-                opacity: 1
-            },
-            legend: {
-                position: 'top',
-                horizontalAlign: 'left',
-                offsetX: 40
-            }
-        };
+    // $(document).ready(function() {
+    //     // console.log("ready!");
+    //     var options = {
+    //         series: [{
+    //             name: 'Maths',
+    //             data: [44, 55, 41, 37, 22, 43, 21]
+    //         }, {
+    //             name: 'English',
+    //             data: [53, 32, 33, 52, 13, 43, 32]
+    //         }, {
+    //             name: 'Physics',
+    //             data: [12, 17, 11, 9, 15, 11, 20]
+    //         }, {
+    //             name: 'Geography',
+    //             data: [9, 7, 5, 8, 6, 9, 4]
+    //         }, {
+    //             name: 'Chemistry',
+    //             data: [25, 12, 19, 32, 25, 24, 10]
+    //         }],
+    //         chart: {
+    //             type: 'bar',
+    //             height: 350,
+    //             stacked: true,
+    //         },
+    //         plotOptions: {
+    //             bar: {
+    //                 horizontal: true,
+    //             },
+    //         },
+    //         stroke: {
+    //             width: 1,
+    //             colors: ['#fff']
+    //         },
+    //         title: {
+    //             text: 'Toppers'
+    //         },
+    //         xaxis: {
+    //             categories: ["William", "James", "Benjamin", "Lucas", "Charlotte", "Sophia", "Amelia", "Isabella", "Mia"],
+    //             labels: {
+    //                 formatter: function(val) {
+    //                     return val;
+    //                 }
+    //             }
+    //         },
+    //         yaxis: {
+    //             title: {
+    //                 text: undefined
+    //             },
+    //         },
+    //         tooltip: {
+    //             y: {
+    //                 formatter: function(val) {
+    //                     return val;
+    //                 }
+    //             }
+    //         },
+    //         fill: {
+    //             opacity: 1
+    //         },
+    //         legend: {
+    //             position: 'top',
+    //             horizontalAlign: 'left',
+    //             offsetX: 40
+    //         }
+    //     };
 
-        var chart = new ApexCharts(document.querySelector("#chart-hor-stack-bar-chart"), options);
-        chart.render();
+    //     var chart = new ApexCharts(document.querySelector("#chart-hor-stack-bar-chart"), options);
+    //     chart.render();
 
-        // new chart
-        // var ctx = document.getElementById("radar-chart-ranking-graph").getContext("2d");
-        // var data = {
-        //     labels: ["January", "February", "March", "April", "May", "June", "July"],
-        //     datasets: [{
-        //         label: "My First dataset",
-        //         fillColor: "rgba(220,220,220,0.2)",
-        //         strokeColor: "rgba(220,220,220,1)",
-        //         pointColor: "rgba(220,220,220,1)",
-        //         pointStrokeColor: "#fff",
-        //         pointHighlightFill: "#fff",
-        //         pointHighlightStroke: "rgba(220,220,220,1)",
-        //         data: [65, 59, 80, 81, 56, 55, 40]
-        //     }, {
-        //         label: "My Second dataset",
-        //         fillColor: "rgba(151,187,205,0.2)",
-        //         strokeColor: "rgba(151,187,205,1)",
-        //         pointColor: "rgba(151,187,205,1)",
-        //         pointStrokeColor: "#fff",
-        //         pointHighlightFill: "#fff",
-        //         pointHighlightStroke: "rgba(151,187,205,1)",
-        //         data: [28, 48, 40, 19, 86, 27, 90]
-        //     }]
-        // };
-        // var MyNewChart=null;
-        // $('#quarterlyExam').on('shown.bs.collapse', function () {
-        // setTimeout(function() {
-        //     if(MyNewChart == null)
-        //         MyNewChart = new Chart(ctx).Bar(data);
-        // },200);
-        // });
+    //     // new chart
+    //     // var ctx = document.getElementById("radar-chart-ranking-graph").getContext("2d");
+    //     // var data = {
+    //     //     labels: ["January", "February", "March", "April", "May", "June", "July"],
+    //     //     datasets: [{
+    //     //         label: "My First dataset",
+    //     //         fillColor: "rgba(220,220,220,0.2)",
+    //     //         strokeColor: "rgba(220,220,220,1)",
+    //     //         pointColor: "rgba(220,220,220,1)",
+    //     //         pointStrokeColor: "#fff",
+    //     //         pointHighlightFill: "#fff",
+    //     //         pointHighlightStroke: "rgba(220,220,220,1)",
+    //     //         data: [65, 59, 80, 81, 56, 55, 40]
+    //     //     }, {
+    //     //         label: "My Second dataset",
+    //     //         fillColor: "rgba(151,187,205,0.2)",
+    //     //         strokeColor: "rgba(151,187,205,1)",
+    //     //         pointColor: "rgba(151,187,205,1)",
+    //     //         pointStrokeColor: "#fff",
+    //     //         pointHighlightFill: "#fff",
+    //     //         pointHighlightStroke: "rgba(151,187,205,1)",
+    //     //         data: [28, 48, 40, 19, 86, 27, 90]
+    //     //     }]
+    //     // };
+    //     // var MyNewChart=null;
+    //     // $('#quarterlyExam').on('shown.bs.collapse', function () {
+    //     // setTimeout(function() {
+    //     //     if(MyNewChart == null)
+    //     //         MyNewChart = new Chart(ctx).Bar(data);
+    //     // },200);
+    //     // });
 
-    });
+    // });
 </script>
 <script>
     Apex.grid = {
@@ -992,268 +997,83 @@
     (chart = new ApexCharts(document.querySelector("#apex-line-1"), options)).render();
 </script>
 <script>
-    colors = ["#F5AA26", "#F1556C", "#4FC6E1"];
-    (dataColors = $("#late-pie").data("colors")) && (colors = dataColors.split(","));
-    options = {
-        chart: {
-            height: 320,
-            type: "pie"
-        },
-        series: [18, 2, 2],
-        labels: ["Present", "Absent", "Late"],
-        colors: colors,
-        legend: {
-            show: !0,
-            position: "bottom",
-            horizontalAlign: "center",
-            verticalAlign: "middle",
-            floating: !1,
-            fontSize: "14px",
-            offsetX: 0,
-            offsetY: 7
-        },
-        responsive: [{
-            breakpoint: 600,
-            options: {
-                chart: {
-                    height: 240
-                },
-                legend: {
-                    show: !1
-                }
-            }
-        }]
-    };
-    (chart = new ApexCharts(document.querySelector("#anylitc-attend"), options)).render();
-</script>
-<script>
     //Start of apex-line-2 Chart    
-    colors = ["#39afd1"];
-    (dataColors = $("#line-23").data("colors")) && (colors = dataColors.split(","));
-    options = {
-        chart: {
-            height: 380,
-            type: "line",
-            zoom: {
-                enabled: !1
-            },
-            toolbar: {
-                show: !1
-            }
-        },
-        colors: colors,
-        dataLabels: {
-            enabled: !0
-        },
-        stroke: {
-            width: [3, 3],
-            curve: "smooth"
-        },
+    // colors = ["#39afd1"];
+    // (dataColors = $("#line-23").data("colors")) && (colors = dataColors.split(","));
+    // options = {
+    //     chart: {
+    //         height: 380,
+    //         type: "line",
+    //         zoom: {
+    //             enabled: !1
+    //         },
+    //         toolbar: {
+    //             show: !1
+    //         }
+    //     },
+    //     colors: colors,
+    //     dataLabels: {
+    //         enabled: !0
+    //     },
+    //     stroke: {
+    //         width: [3, 3],
+    //         curve: "smooth"
+    //     },
 
-        series: [{
-            name: "Averages",
-            data: [10, 10, 75]
-        }],
-        title: {
-            text: "Subject Average",
-            align: "left",
-            style: {
-                fontSize: "14px",
-                color: "#666"
-            }
-        },
-        grid: {
-            row: {
-                colors: ["transparent", "transparent"],
-                opacity: .2
-            },
-            borderColor: "#f1f3fa"
-        },
-        markers: {
-            style: "inverted",
-            size: 6
-        },
-        xaxis: {
-            type: "datetime",
-            categories: ["1/11/2000", "2/11/2000", "3/11/2000", "4/11/2000", "5/11/2000", "6/11/2000", "7/11/2000"]
-        },
-        yaxis: {
-            title: {
-                text: "Average"
-            },
-            min: 0,
-            max: 100
-        },
-        legend: {
-            position: "top",
-            horizontalAlign: "right",
-            floating: !0,
-            offsetY: -25,
-            offsetX: -5
-        },
-        responsive: [{
-            breakpoint: 600,
-            options: {
-                chart: {
-                    toolbar: {
-                        show: !1
-                    }
-                },
-                legend: {
-                    show: !1
-                }
-            }
-        }]
-    };
-    (charts = new ApexCharts(document.querySelector("#line-23"), options)).render();
-</script>
-<script>
-    // ! function(e) {
-    //     "use strict";    
-    //     function a() {}
-    //     a.prototype.createBarChart = function(a, t, e, o, r, i) {
-    //         Morris.Bar({
-    //             element: a,
-    //             data: t,
-    //             xkey: e,
-    //             ykeys: o,
-    //             labels: r,
-    //             dataLabels: !1,
-    //             hideHover: "auto",
-    //             resize: !0,
-    //             gridLineColor: "rgba(65, 80, 95, 0.07)",
-    //             barSizeRatio: .2,
-    //             barColors: i
-    //         })
-    //     }, a.prototype.createDonutChart = function(a, t, e) {
-    //         Morris.Donut({
-    //             element: a,
-    //             data: t,
-    //             barSize: .2,
-    //             resize: !0,
-    //             colors: e,
-    //             backgroundColor: "transparent"
-    //         })
-    //     }, a.prototype.init = function() {
-    //         var a = ["#02c0ce"];
-    //         (t = e("#statistics-analytic").data("colors")) && (a = t.split(",")), this.createBarChart("statistics-analytic", [{
-    //             y: "50",
-    //             a: 2
-    //         }, {
-    //             y: "60",
-    //             a: 5
-    //         }, {
-    //             y: "70",
-    //             a: 3
-    //         }, {
-    //             y: "80",
-    //             a: 1
-    //         }, {
-    //             y: "90",
-    //             a: 1
-    //         }], "y", ["a"], ["Statistics"], a);
-    //         var t;
-    //         a = ["#4fc6e1", "#6658dd", "#ebeff2"];
-    //         (t = e("#lifetime-sales").data("colors")) && (a = t.split(",")), this.createDonutChart("lifetime-sales", [{
-    //             label: " Pass ",
-    //             value: 47
-    //         }, {
-    //             label: " Fail",
-    //             value: 4
-    //         }, {
-    //             label: "InProgress",
-    //             value: 23
-    //         }], a)
-    //     }, e.Dashboard4 = new a, e.Dashboard4.Constructor = a
-    // }(window.jQuery),
-    // function() {
-    //     "use strict";
-    //     window.jQuery.Dashboard4.init()
-    // }();  
-</script>
-<script>
-    $(document).ready(function() {
-        var colors = ['#6658dd', '#1abc9c', '#CED4DC'];
-        var dataColors = $("#apex-column-1").data('colors');
-        if (dataColors) {
-            colors = dataColors.split(",");
-        }
-        var options = {
-            chart: {
-                height: 380,
-                type: 'bar',
-                toolbar: {
-                    show: false
-                }
-            },
-            plotOptions: {
-                bar: {
-                    horizontal: false,
-                    endingShape: 'rounded',
-                    columnWidth: '55%',
-                },
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                show: true,
-                width: 2,
-                colors: ['transparent']
-            },
-            colors: colors,
-            series: [{
-                name: 'Star',
-                data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
-            }, {
-                name: 'Heart',
-                data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
-            }, {
-                name: 'Smily Happy',
-                data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
-            }, {
-                name: 'Smily Angry',
-                data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
-            }],
-            xaxis: {
-                categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
-            },
-            legend: {
-                offsetY: 5,
-            },
-            yaxis: {
-                title: {
-                    text: '$ (thousands)'
-                }
-            },
-            fill: {
-                opacity: 1
-
-            },
-            grid: {
-                row: {
-                    colors: ['transparent', 'transparent'], // takes an array which will be repeated on columns
-                    opacity: 0.2
-                },
-                borderColor: '#f1f3fa',
-                padding: {
-                    bottom: 10
-                }
-            },
-            tooltip: {
-                y: {
-                    formatter: function(val) {
-                        return "$ " + val + " thousands"
-                    }
-                }
-            }
-        }
-
-        var chart = new ApexCharts(
-            document.querySelector("#apex-column-1"),
-            options
-        );
-
-        chart.render();
-    });
+    //     series: [{
+    //         name: "Averages",
+    //         data: [10, 10, 75]
+    //     }],
+    //     title: {
+    //         text: "Subject Average",
+    //         align: "left",
+    //         style: {
+    //             fontSize: "14px",
+    //             color: "#666"
+    //         }
+    //     },
+    //     grid: {
+    //         row: {
+    //             colors: ["transparent", "transparent"],
+    //             opacity: .2
+    //         },
+    //         borderColor: "#f1f3fa"
+    //     },
+    //     markers: {
+    //         style: "inverted",
+    //         size: 6
+    //     },
+    //     xaxis: {
+    //         type: "datetime",
+    //         categories: ["1/11/2000", "2/11/2000", "3/11/2000", "4/11/2000", "5/11/2000", "6/11/2000", "7/11/2000"]
+    //     },
+    //     yaxis: {
+    //         title: {
+    //             text: "Average"
+    //         },
+    //         min: 0,
+    //         max: 100
+    //     },
+    //     legend: {
+    //         position: "top",
+    //         horizontalAlign: "right",
+    //         floating: !0,
+    //         offsetY: -25,
+    //         offsetX: -5
+    //     },
+    //     responsive: [{
+    //         breakpoint: 600,
+    //         options: {
+    //             chart: {
+    //                 toolbar: {
+    //                     show: !1
+    //                 }
+    //             },
+    //             legend: {
+    //                 show: !1
+    //             }
+    //         }
+    //     }]
+    // };
+    // (charts = new ApexCharts(document.querySelector("#line-23"), options)).render();
 </script>

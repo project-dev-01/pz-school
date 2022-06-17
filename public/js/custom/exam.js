@@ -41,6 +41,17 @@ $(function () {
     var table = $('#exam-table').DataTable({
         processing: true,
         info: true,
+        dom: 'lBfrtip',
+        buttons: [
+            {
+                extend: 'csv',
+                text: 'Download CSV',
+                extension: '.csv',
+                exportOptions: {
+                    columns: 'th:not(:last-child)'
+                }
+            }
+        ],
         ajax: examList,
         "pageLength": 5,
         "aLengthMenu": [
@@ -87,8 +98,8 @@ $(function () {
         }, 'json');
     });
 
-     // rules validation
-     $("#edit-exam-form").validate({
+    // rules validation
+    $("#edit-exam-form").validate({
         rules: {
             name: "required",
             term_id: "required",

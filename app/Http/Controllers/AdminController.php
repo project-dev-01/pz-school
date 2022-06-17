@@ -1721,16 +1721,16 @@ class AdminController extends Controller
                         if ($table['break'] == "1") {
                             $response .= '<b>Break Time</b><br> ';
                             $response .= '(' . $table['time_start'] . ' - ' . $table['time_end'] . ' )<br>';
-                            if ($table['class_room']) {
+                            if (isset($table['hall_no'])) {
 
-                                $response .= 'Class Room : ' . $table['class_room'] . '';
+                                $response .= 'Class Room : ' . $table['hall_no'] . '';
                             }
                         } else {
                             $response .= '<b>Subject:' . $table['subject_name'] . '</b><br>';
                             $response .= '(' . $table['time_start'] . ' - ' . $table['time_end'] . ' )<br>';
                             $response .= 'Teacher :  ' . $table['teacher_name'] . '<br>';
-                            if ($table['class_room']) {
-                                $response .= 'Class Room : ' . $table['class_room'] . '';
+                            if (isset($table['hall_no'])) {
+                                $response .= 'Class Room : ' . $table['hall_no'] . '';
                             }
                         }
                         $response .= '</td>';
@@ -1811,7 +1811,7 @@ class AdminController extends Controller
     }
     public function employeeEntry()
     {
-        
+
         $getdepartment = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.attendance.employee',
@@ -3376,11 +3376,11 @@ class AdminController extends Controller
 
     public function createParent()
     {
-        
+
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $races = Helper::GetMethod(config('constants.api.races'));
         $education = Helper::GetMethod(config('constants.api.education_list'));
-        
+
         return view(
             'admin.parent.add',
             [

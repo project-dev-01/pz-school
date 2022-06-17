@@ -46,6 +46,17 @@ $(function () {
          $('#race-table').DataTable({
             processing: true,
             info: true,
+            dom: 'lBfrtip',
+            buttons: [
+                {
+                    extend: 'csv',
+                    text: 'Download CSV',
+                    extension: '.csv',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+                }
+            ],
             ajax: raceList,
             "pageLength": 5,
             "aLengthMenu": [

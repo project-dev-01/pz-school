@@ -54,7 +54,7 @@
     <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap4.min.css') }}">
     <!-- button link  -->
-    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
 
     <!-- <link href="{{ asset('libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css" /> -->
 
@@ -67,10 +67,6 @@
     <link href="{{ asset('css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
 
     <style>
-        /* .table {
-            width: 1200px;
-        } */
-
         /* navtab form css end*/
         .error {
             color: red;

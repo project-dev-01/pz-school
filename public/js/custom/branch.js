@@ -198,6 +198,17 @@ $(function () {
             //     'pdfHtml5'
             // ],
             info: true,
+            dom: 'lBfrtip',
+            buttons: [
+                {
+                    extend: 'csv',
+                    text: 'Download CSV',
+                    extension: '.csv',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+                }
+            ],
             "ajax": {
                 url: branchList,
                 cache: false,

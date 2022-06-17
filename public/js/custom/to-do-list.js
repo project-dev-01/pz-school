@@ -187,6 +187,17 @@ $(function () {
     var table = $('#to-do-list-table').DataTable({
         processing: true,
         info: true,
+        dom: 'lBfrtip',
+        buttons: [
+            {
+                extend: 'csv',
+                text: 'Download CSV',
+                extension: '.csv',
+                exportOptions: {
+                    columns: 'th:not(:last-child)'
+                }
+            }
+        ],
         ajax: gettoDoListURL,
         "pageLength": 5,
         "aLengthMenu": [
@@ -269,5 +280,5 @@ $(function () {
             }
         });
     });
-    
+
 });

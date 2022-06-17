@@ -52,6 +52,17 @@ $(function () {
     var table = $('#section-allocation-table').DataTable({
         processing: true,
         info: true,
+        dom: 'lBfrtip',
+        buttons: [
+            {
+                extend: 'csv',
+                text: 'Download CSV',
+                extension: '.csv',
+                exportOptions: {
+                    columns: 'th:not(:last-child)'
+                }
+            }
+        ],
         ajax: secAlloList,
         "pageLength": 5,
         "aLengthMenu": [

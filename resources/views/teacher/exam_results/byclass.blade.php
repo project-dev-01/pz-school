@@ -19,9 +19,9 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
+                        <h4 class="navv">
                             Select Ground
                             <h4>
                     </li>
@@ -79,10 +79,10 @@
     <div class="row" style="display: none;" id="byclass_bodycontent">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            Class 
+                        <h4 class="navv">
+                            Class
                             <h4>
                     </li>
                 </ul><br>
@@ -94,7 +94,7 @@
                         <input type="hidden" name="fullmark" id="fullmark">
                         <input type="hidden" name="passmark" id="passmark">
                         <div class="col-sm-12">
-                            <div class="card-box">
+                            <div class="card-body">
 
                                 <!-- <div id="byclassTableAppend">
 
@@ -129,17 +129,15 @@
                                             </tr>
                                         </thead>
                                         <tbody id="byclassTableAppend">
-                                      
+
                                         </tbody>
                                     </table>
+                                </div><br>
+                                <div class="form-group text-right m-b-0">
+                                    <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                        Download
+                                    </button>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="clearfix mt-4">
-                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Download</button>
-                                    </div>
-
-
-                                </div> <!-- end table-responsive-->
 
                             </div> <!-- end col-->
                         </div>
@@ -150,43 +148,48 @@
             </div> <!-- end col -->
 
         </div>
-     
-    </div> <!-- container -->
-    <div class="row"  id="byclass_analysis">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="header-title">Class Analysis</h4>
 
-                        <div class="mt-4 chartjs-chart">
-                            <canvas id="radar-chart-test-byclass" height="350" data-colors="#39afd1,#a17fe0"></canvas>
-                            <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
-                        </div>
-                    </div> <!-- end card-body-->
-                </div> <!-- end card-->
-            </div> <!-- end col -->
-        </div>
+    </div> <!-- container -->
+    <div class="row" id="byclass_analysis">
+        <div class="col-lg-12">
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">
+                            Class Analysis
+                            <h4>
+                    </li>
+                </ul><br>
+                <div class="card-body">
+                    <div class="mt-4 chartjs-chart">
+                        <canvas id="radar-chart-test-byclass" height="350" data-colors="#39afd1,#a17fe0"></canvas>
+                        <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
+                    </div>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
     @endsection
     @section('scripts')
     <script>
         var sectionByClass = "{{ route('teacher.section_by_class') }}";
         var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";
-    var examsList = "{{ config('constants.api.get_testresult_exams') }}";
+        var examsList = "{{ config('constants.api.get_testresult_exams') }}";
 
         var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
         var examsByclassandsubject = "{{ config('constants.api.exam_by_classSubject') }}";
-        
+
         var getbyClass = "{{ config('constants.api.tot_grade_calcu_byclass') }}";
         var getbySubjectnames = "{{ config('constants.api.subject_by_class') }}";
-        var getbyClass_thead="{{ config('constants.api.tot_grade_master') }}";
-        var Allexams="{{ config('constants.api.all_exams_list') }}";
-        var getbyClassAllstd ="{{ config('constants.api.all_std_list') }}";
-        var getbysubjectnamesall="{{ config('constants.api.class_assign_list') }}";
+        var getbyClass_thead = "{{ config('constants.api.tot_grade_master') }}";
+        var Allexams = "{{ config('constants.api.all_exams_list') }}";
+        var getbyClassAllstd = "{{ config('constants.api.all_std_list') }}";
+        var getbysubjectnamesall = "{{ config('constants.api.class_assign_list') }}";
 
         //
         var getbySubject = "{{ config('constants.api.tot_grade_calcu_bySubject') }}";
 
-        var getbySubjectAllstd ="{{ config('constants.api.all_bysubject_list') }}";
+        var getbySubjectAllstd = "{{ config('constants.api.all_bysubject_list') }}";
         //
         // default image test
         var defaultImg = "{{ asset('images/users/default.jpg') }}";

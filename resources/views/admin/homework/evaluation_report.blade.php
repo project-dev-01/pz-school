@@ -3,7 +3,12 @@
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
+    <style>
+        .btn {
+            background-color: #6FC6CC;
 
+        }
+    </style>
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
@@ -120,7 +125,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="table-responsive">
-                                                    <table class="table table-striped table-bordered mb-0  text-center">
+                                                    <table class="table mb-0  text-center">
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
@@ -153,7 +158,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="table-responsive">
-                                                    <table class="table table-bordered table-striped mb-0 text-center">
+                                                    <table class="table mb-0 text-center">
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
@@ -178,7 +183,7 @@
                                                                 <td>21-04-2018</td>
                                                                 <td>10/0</td>
                                                                 <td>10</td>
-                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default"><i class="fas fa-bars"></i> Copy</a></td>
+                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default"> Copy</a></td>
                                                             </tr>
                                                             <tr>
                                                                 <td>2</td>
@@ -189,7 +194,7 @@
                                                                 <td>07-09-2020</td>
                                                                 <td>15/0</td>
                                                                 <td>15</td>
-                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default"><i class="fas fa-bars"></i> Copy</a></td>
+                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default"> Copy</a></td>
                                                             </tr>
                                                             <tr>
                                                                 <td>3</td>
@@ -200,7 +205,7 @@
                                                                 <td>17-06-2021</td>
                                                                 <td>18/2</td>
                                                                 <td>20</td>
-                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default"><i class="fas fa-bars"></i> Copy</a></td>
+                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default">Copy</a></td>
                                                             </tr>
                                                             <tr>
                                                                 <td>4</td>
@@ -211,7 +216,7 @@
                                                                 <td>19-05-2020</td>
                                                                 <td>25/0</td>
                                                                 <td>25</td>
-                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default"><i class="fas fa-bars"></i> Copy</a></td>
+                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default"> Copy</a></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>

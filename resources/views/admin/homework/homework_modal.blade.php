@@ -10,9 +10,9 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="card">
-                            <ul class="nav nav-tabs" >
+                            <ul class="nav nav-tabs">
                                 <li class="nav-item">
-                                    <h4 class="nav-link">
+                                    <h4 class="navv">
                                         View Homework Details
                                         <h4>
                                 </li>
@@ -20,7 +20,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="card-box">
+                                        <div class="">
                                             <div class="row">
                                                 <div class="col-xl-4">
                                                     <!-- Portlet card -->
@@ -81,7 +81,7 @@
                                                     </div>
                                                 </div>
                                             </form> -->
-                                            <form id="evaluateHomework"  method="post" action="{{ route('admin.homework.evaluation') }}"  enctype="multipart/form-data" autocomplete="off">
+                                            <form id="evaluateHomework" method="post" action="{{ route('admin.homework.evaluation') }}" enctype="multipart/form-data" autocomplete="off">
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-12">
@@ -101,7 +101,7 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody id="homework_modal_table">
-                                                                
+
                                                             </tbody>
                                                         </table>
                                                     </div> <!-- end table-responsive-->
@@ -110,7 +110,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group text-right m-b-0">
-                                                            <button class="btn btn-primary waves-effect waves-light" type="Save">
+                                                            <button class="btn btn-primary-b1 waves-effect waves-light" type="button">
                                                                 Save
                                                             </button>
                                                         </div>

@@ -51,7 +51,7 @@ $(function () {
             formData.append('class_id', changeClassName);
             formData.append('section_id', sectionID);
             formData.append('subject_id', assignSubjects);
-            
+
             $.ajax({
                 url: classAssignAddUrl,
                 method: "post",
@@ -60,7 +60,7 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
-                    
+
                     if (data.code == 200) {
                         $('#class-assign-subjects-table').DataTable().ajax.reload(null, false);
                         $('.addAssignClassSubjectModal').modal('hide');
@@ -89,7 +89,7 @@ $(function () {
         }, function (data) {
             var class_id = data.data.class_id;
             var section_id = data.data.section_id;
-            
+
             var IDnames = "#updateAssignClassSubject";
             getSections(class_id, IDnames, section_id);
             $('.editAssClassSubjectModel').find('input[name="assign_class_sub_id"]').val(data.data.id);
@@ -189,6 +189,17 @@ $(function () {
     var table = $('#class-assign-subjects-table').DataTable({
         processing: true,
         info: true,
+        dom: 'lBfrtip',
+        buttons: [
+            {
+                extend: 'csv',
+                text: 'Download CSV',
+                extension: '.csv',
+                exportOptions: {
+                    columns: 'th:not(:last-child)'
+                }
+            }
+        ],
         ajax: classAssignSubList,
         "pageLength": 5,
         "aLengthMenu": [

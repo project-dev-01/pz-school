@@ -194,6 +194,17 @@ $(function () {
     var table = $('#assign-class-teacher-table').DataTable({
         processing: true,
         info: true,
+        dom: 'lBfrtip',
+        buttons: [
+            {
+                extend: 'csv',
+                text: 'Download CSV',
+                extension: '.csv',
+                exportOptions: {
+                    columns: 'th:not(:last-child)'
+                }
+            }
+        ],
         ajax: assignTeacherList,
         "pageLength": 5,
         "aLengthMenu": [

@@ -1,5 +1,5 @@
 $(function () {
-                
+
     var listTable;
     // $(".classRoomHideSHow").show("slow");
     // onload show start
@@ -80,26 +80,26 @@ $(function () {
         }, 'json');
     });
     // change section
-    // $('#sectionID').on('change', function () {
-    //     var section_id = $(this).val();
-    //     var class_id = $("#changeClassName").val();
-    //     $("#classroomFilter").find("#subjectID").empty();
-    //     $("#classroomFilter").find("#subjectID").append('<option value="">Select Subject</option>');
-    //     $.post(teacherSubjectUrl, {
-    //         token: token,
-    //         branch_id: branchID,
-    //         teacher_id: ref_user_id,
-    //         class_id: class_id,
-    //         section_id: section_id,
-    //         class_id: class_id
-    //     }, function (res) {
-    //         if (res.code == 200) {
-    //             $.each(res.data, function (key, val) {
-    //                 $("#classroomFilter").find("#subjectID").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
-    //             });
-    //         }
-    //     }, 'json');
-    // });
+    $('#sectionID').on('change', function () {
+        var section_id = $(this).val();
+        var class_id = $("#changeClassName").val();
+        $("#classroomFilter").find("#subjectID").empty();
+        $("#classroomFilter").find("#subjectID").append('<option value="">Select Subject</option>');
+        $.post(teacherSubjectUrl, {
+            token: token,
+            branch_id: branchID,
+            teacher_id: ref_user_id,
+            class_id: class_id,
+            section_id: section_id,
+            class_id: class_id
+        }, function (res) {
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#classroomFilter").find("#subjectID").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
+                });
+            }
+        }, 'json');
+    });
 
     // applyFilter
     // rules validation
@@ -191,7 +191,7 @@ $(function () {
             contentType: false,
             success: function (response) {
 
-                
+
                 var dataSetNew = response.data;
                 var currentDate = convertDigitIn($("#classDate").val());
                 var date = birthdayDate(currentDate);
@@ -204,11 +204,11 @@ $(function () {
                     var layoutModeGrid = "";
                     if (response.data.length > 0) {
                         $(".classRoomHideSHow").show("slow");
-                        listMode(dataSetNew,date);
+                        listMode(dataSetNew, date);
                         layoutModeGrid += '<div class="row">';
                         response.data.forEach(function (res) {
                             // layout mode div start
-                            layoutModeGrid += layoutMode(res,date);
+                            layoutModeGrid += layoutMode(res, date);
                             // layout mode div end
                             // list mode start
 
@@ -250,10 +250,10 @@ $(function () {
     }
 
     // function layout mode
-    function layoutMode(res,date) {
+    function layoutMode(res, date) {
 
-        console.log('layou_dat',date)
-        console.log('res',res)
+        console.log('layou_dat', date)
+        console.log('res', res)
         var layoutModeGrid = "";
         var bgColor = "#60a05b";
         layoutModeGrid += '<div class="col-md-3">' +
@@ -279,25 +279,36 @@ $(function () {
 
         var img = "";
         if (res.photo) {
-            img = studentImg+'/'+res.photo;
-        } else{
+            img = studentImg + '/' + res.photo;
+        } else {
             img = defaultImg;
         }
 
         layoutModeGrid += '<div class="card-header" style="background-color:' + bgColor + ';color:white;text-align:left">';
         layoutModeGrid += '<img src="' + img + '" class="mr-2 rounded-circle" height="40" width="40" />' +
-            '<label style="text-align:center" class="mr-1">' + res.first_name + ' ' + res.last_name + '</label>' + bd +
+            '<label style="text-align:center;color:white" class="mr-1">' + res.first_name + ' ' + res.last_name + '</label>' + bd +
             '</div>' +
             '</div>' +
             '</div>';
         return layoutModeGrid;
     }
     // function list mode
-    function listMode(dataSetNew,date) {
+    function listMode(dataSetNew, date) {
         listTable = $('#listModeClassRoom').DataTable({
             processing: true,
             bDestroy: true,
             info: true,
+            dom: 'lBfrtip',
+            buttons: [
+                {
+                    extend: 'csv',
+                    text: 'Download CSV',
+                    extension: '.csv',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+                }
+            ],
             data: dataSetNew,
             "pageLength": 10,
             "aLengthMenu": [
@@ -352,8 +363,8 @@ $(function () {
                         }
                         var img = "";
                         if (row.photo) {
-                            img = studentImg+'/'+row.photo;
-                        } else{
+                            img = studentImg + '/' + row.photo;
+                        } else {
                             img = defaultImg;
                         }
                         var first_name = '<input type="hidden" name="attendance[' + meta.row + '][attendance_id]" value="' + row.att_id + '">' +
@@ -440,31 +451,31 @@ $(function () {
                             '<div class="radio_group_1">' +
                             '<input type="radio" value="smile" title="smile    " ' + (row.student_behaviour == "smile" ? "checked" : "") + ' name="attendance[' + meta.row + '][student_behaviour]">' +
                             '<label for="smile">' +
-                            '<i class="far fa-smile"></i>' +
+                            '<i class="far fa-smile" style="color:yellow;font-size:22px"></i>' +
                             '</label>' +
                             '</div>' +
                             '<div class="radio_group_1">' +
                             '<input type="radio" value="angry" title="angry" ' + (row.student_behaviour == "angry" ? "checked" : "") + ' name="attendance[' + meta.row + '][student_behaviour]">' +
                             '<label for="angry">' +
-                            '<i class="far fa-angry"></i>' +
+                            '<i class="far fa-angry" style="color:red;font-size:22px"></i>' +
                             '</label>' +
                             '</div>' +
                             '<div class="radio_group_1">' +
                             '<input type="radio" value="dizzy" title="dizzy" ' + (row.student_behaviour == "dizzy" ? "checked" : "") + ' name="attendance[' + meta.row + '][student_behaviour]">' +
                             '<label for="dizzy">' +
-                            '<i class="far fa-dizzy"></i>' +
+                            '<i class="far fa-dizzy" style="color:orange;font-size:22px"></i>' +
                             '</label>' +
                             '</div>' +
                             '<div class="radio_group_1">' +
                             '<input type="radio" value="surprise" title="surprise" ' + (row.student_behaviour == "surprise" ? "checked" : "") + ' name="attendance[' + meta.row + '][student_behaviour]">' +
                             '<label for="surprise">' +
-                            '<i class="far fa-surprise"></i>' +
+                            '<i class="far fa-surprise" style="color:green;font-size:22px"></i>' +
                             '</label>' +
                             '</div>' +
                             '<div class="radio_group_1">' +
                             '<input type="radio" value="tired" title="tired" ' + (row.student_behaviour == "tired" ? "checked" : "") + ' name="attendance[' + meta.row + '][student_behaviour]">' +
                             '<label for="tired">' +
-                            '<i class="far fa-tired"></i>' +
+                            '<i class="far fa-tired" style="color:purple;font-size:22px"></i>' +
                             '</label>' +
                             '</div>' +
                             '</div>';
@@ -490,13 +501,13 @@ $(function () {
                             '<div class="radio_group">' +
                             '<input type="radio" class="checkRadioBtn" value="likes" ' + (row.classroom_behaviour == "likes" ? "checked" : "") + ' name="attendance[' + meta.row + '][classroom_behaviour]">' +
                             '<label for="like">' +
-                            '<i class="fas fa-thumbs-up"></i>' +
+                            '<i class="fas fa-thumbs-up" style="color:blue;font-size:22px"></i>' +
                             '</label>' +
                             '</div>' +
                             '<div class="radio_group">' +
                             '<input type="radio" class="checkRadioBtn" value="dislikes" ' + (row.classroom_behaviour == "dislikes" ? "checked" : "") + ' name="attendance[' + meta.row + '][classroom_behaviour]">' +
                             '<label for="like">' +
-                            '<i class="fas fa-thumbs-down"></i>' +
+                            '<i class="fas fa-thumbs-down" style="color:red;font-size:22px"></i>' +
                             '</label>' +
                             '</div>' +
                             '</div>';
@@ -537,7 +548,7 @@ $(function () {
                     toastr.success(response.message);
                     $('#layoutModeGrid').empty();
                     var layoutModeGrid = "";
-                    
+
                     var currentDate = convertDigitIn($("#classDate").val());
                     var date = birthdayDate(currentDate);
                     if (response.data.length > 0) {
@@ -546,7 +557,7 @@ $(function () {
                         response.data.forEach(function (res) {
 
                             // layout mode div start
-                            layoutModeGrid += layoutMode(res,date);
+                            layoutModeGrid += layoutMode(res, date);
                             // layout mode div end
                         });
                         layoutModeGrid += '</div>';
@@ -1058,6 +1069,17 @@ $(function () {
             processing: true,
             bDestroy: true,
             info: true,
+            dom: 'lBfrtip',
+            buttons: [
+                {
+                    extend: 'csv',
+                    text: 'Download CSV',
+                    extension: '.csv',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+                }
+            ],
             data: dataSetNew,
             "pageLength": 10,
             "aLengthMenu": [
@@ -1167,7 +1189,7 @@ $(function () {
                     "width": "10%",
                     "render": function (data, type, row, meta) {
 
-                        var addremarks = '<textarea style="display:none;" class="addRemarksStudent" data-id="' + row.id + '" id="addRemarksStudent' + row.id + '" >'+ (row.teacher_remarks !== "null" ? row.teacher_remarks : "") +'</textarea>' +
+                        var addremarks = '<textarea style="display:none;" class="addRemarksStudent" data-id="' + row.id + '" id="addRemarksStudent' + row.id + '" >' + (row.teacher_remarks !== "null" ? row.teacher_remarks : "") + '</textarea>' +
                             '<button type="button" data-id="' + row.id + '" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#stuLeaveRemarksPopup" id="editLeaveRemarksStudent">Add Remarks</button>';
                         return addremarks;
                     }

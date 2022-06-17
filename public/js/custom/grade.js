@@ -42,6 +42,17 @@ $(function () {
     var table = $('#grade-table').DataTable({
         processing: true,
         info: true,
+        dom: 'lBfrtip',
+        buttons: [
+            {
+                extend: 'csv',
+                text: 'Download CSV',
+                extension: '.csv',
+                exportOptions: {
+                    columns: 'th:not(:last-child)'
+                }
+            }
+        ],
         ajax: gradeList,
         "pageLength": 5,
         "aLengthMenu": [
@@ -93,8 +104,8 @@ $(function () {
         }, 'json');
     });
 
-     // rules validation
-     $("#edit-grade-form").validate({
+    // rules validation
+    $("#edit-grade-form").validate({
         rules: {
             grade: "required",
             grade_point: "required",

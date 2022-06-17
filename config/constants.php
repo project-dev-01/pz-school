@@ -430,9 +430,15 @@ return [
         'education_details' => $url.'/education/education-details',
         'education_update' => $url.'/education/update',
         'education_delete' => $url.'/education/delete',
-
         
         'employee_by_department' => $url.'/employee_by_department',
+         // analytics url
+         'get_student_list_by_class_section' => $url.'/get_student_list/by_class_section',
+         'get_attendance_late_graph' => $url.'/get_attendance_late_graph',
+         'get_homework_graph_by_student' => $url.'/get_homework_graph_by_student',
+         'get_attitude_graph_by_student' => $url.'/get_attitude_graph_by_student',
+         'get_short_test_by_student' => $url.'/get_short_test_by_student',
+         'get_subject_average_by_student' => $url.'/get_subject_average_by_student'
     ]
 
 ];

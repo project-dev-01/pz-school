@@ -467,4 +467,12 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
     
     Route::post('employee_by_department', [ApiController::class, 'getEmployeeByDepartment']);
+    // analytics routes
+    Route::post('get_student_list/by_class_section', [ApiController::class, 'getStudListByClassSec']);
+    Route::post('get_attendance_late_graph', [ApiController::class, 'getAttendanceReportGraph']);
+    Route::post('get_homework_graph_by_student', [ApiController::class, 'viewHomeworkGraphByStudent']);
+    Route::post('get_attitude_graph_by_student', [ApiController::class, 'getAttitudeGraphByStudent']);
+    Route::post('get_short_test_by_student', [ApiController::class, 'getShortTestByStudent']);
+    Route::post('get_subject_average_by_student', [ApiController::class, 'getSubjectAverageByStudent']);
+    
 });

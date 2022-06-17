@@ -46,6 +46,17 @@ $(function () {
          $('#department-table').DataTable({
             processing: true,
             info: true,
+            dom: 'lBfrtip',
+            buttons: [
+                {
+                    extend: 'csv',
+                    text: 'Download CSV',
+                    extension: '.csv',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+                }
+            ],
             ajax: departmentList,
             "pageLength": 5,
             "aLengthMenu": [

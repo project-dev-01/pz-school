@@ -39,6 +39,17 @@ $(function () {
     var table = $('#exam-term-table').DataTable({
         processing: true,
         info: true,
+        dom: 'lBfrtip',
+        buttons: [
+            {
+                extend: 'csv',
+                text: 'Download CSV',
+                extension: '.csv',
+                exportOptions: {
+                    columns: 'th:not(:last-child)'
+                }
+            }
+        ],
         ajax: examTermList,
         "pageLength": 5,
         "aLengthMenu": [
@@ -75,8 +86,8 @@ $(function () {
         }, 'json');
     });
 
-     // rules validation
-     $("#edit-exam-term-form").validate({
+    // rules validation
+    $("#edit-exam-term-form").validate({
         rules: {
             name: "required",
         }

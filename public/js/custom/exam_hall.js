@@ -40,6 +40,17 @@ $(function () {
     var table = $('#exam-hall-table').DataTable({
         processing: true,
         info: true,
+        dom: 'lBfrtip',
+        buttons: [
+            {
+                extend: 'csv',
+                text: 'Download CSV',
+                extension: '.csv',
+                exportOptions: {
+                    columns: 'th:not(:last-child)'
+                }
+            }
+        ],
         ajax: examHallList,
         "pageLength": 5,
         "aLengthMenu": [
@@ -81,8 +92,8 @@ $(function () {
         }, 'json');
     });
 
-     // rules validation
-     $("#edit-exam-hall-form").validate({
+    // rules validation
+    $("#edit-exam-hall-form").validate({
         rules: {
             hall_no: "required",
             no_of_seats: "required",

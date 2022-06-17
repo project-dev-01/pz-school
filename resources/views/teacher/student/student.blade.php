@@ -24,9 +24,9 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
+                        <h4 class="navv">
                             Select Ground
                             <h4>
                     </li>
@@ -38,7 +38,7 @@
                                 <div class="form-group">
                                     <label for="heard">Branch<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                    <option value="">Select Branch</option>   
+                                        <option value="">Select Branch</option>
                                         <option value="">Malaysia</option>
                                         <option value="press">Singapore</option>
                                     </select>
@@ -48,7 +48,7 @@
                                 <div class="form-group">
                                     <label for="heard">Standard<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="">Select Standard</option>    
+                                        <option value="">Select Standard</option>
                                         <option value="press">I</option>
                                         <option value="">II</option>
                                     </select>
@@ -58,7 +58,7 @@
                                 <div class="form-group">
                                     <label for="heard">Class Name<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                    <option value="">Select Class Name</option>   
+                                        <option value="">Select Class Name</option>
                                         <option value="">A</option>
                                         <option value="1">B</option>
                                     </select>
@@ -86,9 +86,9 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
+                        <h4 class="navv">
                             Student Lists
                             <h4>
                     </li>
@@ -96,9 +96,9 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="card-box">
+                            <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered mb-0">
+                                    <table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -120,7 +120,7 @@
                                                 <td>1</td>
                                                 <td>A</td>
                                                 <td>Anser</td>
-                                                
+
                                             </tr>
                                         </tbody>
                                     </table>

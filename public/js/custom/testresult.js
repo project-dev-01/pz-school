@@ -1,95 +1,96 @@
 $(function () {
     // marks by subject Chart
-    
+
     // test result subject wise result
     var radar;
     var divradar;
-    function subjectavgchart(){
+    subjectavgchart();
+    function subjectavgchart() {
         colors = ["#f672a7"];
-    (dataColors = $("#subject-avg-chart").data("colors")) && (colors = dataColors.split(","));
-    options = {
-        chart: {
-            height: 380,
-            type: "line",
-            shadow: {
-                enabled: !1,
-                color: "#bbb",
-                top: 3,
-                left: 2,
-                blur: 3,
-                opacity: 1
-            }
-        },
-        stroke: {
-            width: 5,
-            curve: "smooth"
-        },
-        series: [{
-            name: "Average",
-            // data: [65,87,65,87]
-            data: []
-
-        }],
-        title: {
-            text: "Subject Average",
-            align: "left",
-            style: {
-                fontSize: "14px",
-                color: "#666"
-            }
-        },
-        fill: {
-            type: "gradient",
-            gradient: {
-                shade: "dark",
-                gradientToColors: colors,
-                shadeIntensity: 1,
-                type: "horizontal",
-                opacityFrom: 1,
-                opacityTo: 1,
-                stops: [0, 100, 100, 100]
-            }
-        },
-        markers: {
-            size: 4,
-            opacity: .9,
-            colors: ["#56c2d6"],
-            strokeColor: "#fff",
-            strokeWidth: 2,
-            style: "inverted",
-            hover: {
-                size: 7
-            }
-        },
-        yaxis: {
-            min: 0,
-            max: 100,
-            title: {
-                text: "Average"
-            }
-        },
-        grid: {
-            row: {
-                colors: ["transparent", "transparent"],
-                opacity: .2
+        (dataColors = $("#subject-avg-chart").data("colors")) && (colors = dataColors.split(","));
+        options = {
+            chart: {
+                height: 380,
+                type: "line",
+                shadow: {
+                    enabled: !1,
+                    color: "#bbb",
+                    top: 3,
+                    left: 2,
+                    blur: 3,
+                    opacity: 1
+                }
             },
-            borderColor: "#185a9d"
-        },
-        responsive: [{
-            breakpoint: 600,
-            options: {
-                chart: {
-                    toolbar: {
+            stroke: {
+                width: 5,
+                curve: "smooth"
+            },
+            series: [{
+                name: "Average",
+                // data: [65,87,65,87]
+                data: []
+
+            }],
+            title: {
+                text: "Subject Average",
+                align: "left",
+                style: {
+                    fontSize: "14px",
+                    color: "#666"
+                }
+            },
+            fill: {
+                type: "gradient",
+                gradient: {
+                    shade: "dark",
+                    gradientToColors: colors,
+                    shadeIntensity: 1,
+                    type: "horizontal",
+                    opacityFrom: 1,
+                    opacityTo: 1,
+                    stops: [0, 100, 100, 100]
+                }
+            },
+            markers: {
+                size: 4,
+                opacity: .9,
+                colors: ["#56c2d6"],
+                strokeColor: "#fff",
+                strokeWidth: 2,
+                style: "inverted",
+                hover: {
+                    size: 7
+                }
+            },
+            yaxis: {
+                min: 0,
+                max: 100,
+                title: {
+                    text: "Average"
+                }
+            },
+            grid: {
+                row: {
+                    colors: ["transparent", "transparent"],
+                    opacity: .2
+                },
+                borderColor: "#185a9d"
+            },
+            responsive: [{
+                breakpoint: 600,
+                options: {
+                    chart: {
+                        toolbar: {
+                            show: !1
+                        }
+                    },
+                    legend: {
                         show: !1
                     }
-                },
-                legend: {
-                    show: !1
                 }
-            }
-        }]
-    };
-    (chart = new ApexCharts(document.querySelector("#subject-avg-chart"), options)).render();
+            }]
+        };
+        (chart = new ApexCharts(document.querySelector("#subject-avg-chart"), options)).render();
     }
 
 
@@ -149,13 +150,13 @@ $(function () {
             class_id: class_id,
             section_id: section_id,
             subject_id: subject_id,
-            today:today
+            today: today
         }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
                     var marks = JSON.parse(val.marks);
-                    $("#testresultFilter").find("#examnames").append('<option value="' + val.id + '" data-full="'+marks.full+'" data-pass="'+marks.pass+'">' + val.name + '</option>');
-                    
+                    $("#testresultFilter").find("#examnames").append('<option value="' + val.id + '" data-full="' + marks.full + '" data-pass="' + marks.pass + '">' + val.name + '</option>');
+
                 });
             }
         }, 'json');
@@ -175,23 +176,23 @@ $(function () {
         e.preventDefault();
         var form = this;
         var classRoom = $("#testresultFilter").valid();
-        
+
         var fmark = $('option:selected', '#examnames').attr('data-full');
         var pmark = $('option:selected', '#examnames').attr('data-pass');
         $("#fullmark").val(fmark);
         $("#passmark").val(pmark);
-        
-        chart.updateOptions( {
-            xaxis: {
-                type: "datetime",
-                format: 'dd/MM',
-              categories: []
-            }
-        });
-        chart.updateSeries([{
-            name: "Average",
-            data: []
-        }]);
+
+        // chart.updateOptions( {
+        //     xaxis: {
+        //         type: "datetime",
+        //         format: 'dd/MM',
+        //       categories: []
+        //     }
+        // });
+        // chart.updateSeries([{
+        //     name: "Average",
+        //     data: []
+        // }]);
         if (classRoom === true) {
 
             var class_id = $("#changeClassName").val();
@@ -262,14 +263,14 @@ $(function () {
             callradarchart(formData);
 
             calldonutchart(formData);
-            
+
         };
     });
 
-    function calldonutchart(formData){
+    function calldonutchart(formData) {
 
         $.ajax({
-                
+
             url: getSubjectMarkStatus,
             method: "POST",
             data: formData,
@@ -297,13 +298,13 @@ $(function () {
                                 inprogress = res.count;
                             }
                         });
-                        donutchart(pass,fail,inprogress);
-                        donut_chart.updateSeries([pass,fail,inprogress]);
+                        donutchart(pass, fail, inprogress);
+                        donut_chart.updateSeries([pass, fail, inprogress]);
                     } else {
                         $('#graphs_card').hide();
                         $('#donut-chart').hide();
                     }
-                    
+
                 } else {
                     toastr.error(data.message);
                 }
@@ -311,10 +312,10 @@ $(function () {
         });
     }
 
-    function callradarchart(formData){
+    function callradarchart(formData) {
 
         $.ajax({
-                
+
             url: getSubjectDivisionMark,
             method: "POST",
             data: formData,
@@ -336,28 +337,28 @@ $(function () {
                             markDetails.forEach(function (res) {
                                 var randcol = getRandomColor();
                                 var obj = {};
-                                var avg= [];
+                                var avg = [];
                                 obj["label"] = res.exam_name;
                                 obj["backgroundColor"] = hexToRGB(randcol, 0.3);
                                 obj["borderColor"] = randcol;
                                 obj["pointBackgroundColor"] = randcol;
-                                obj["pointBorderColor"] =  "#fff";
-                                obj["pointHoverBackgroundColor"] =  "#fff";
+                                obj["pointBorderColor"] = "#fff";
+                                obj["pointHoverBackgroundColor"] = "#fff";
                                 obj["pointHoverBorderColor"] = randcol;
                                 $.each(res.average, function (key, val) {
                                     avg.push(val);
                                 });
                                 obj["data"] = avg;
                                 data.push(obj);
-                                    
+
                             });
-                            radarChart(label,data);
+                            radarChart(label, data);
                             $('#radar-chart').show();
                         } else {
                             $('#radar-chart').hide();
                         }
                     }
-                    
+
                 } else {
                     toastr.error(data.message);
                 }
@@ -369,12 +370,12 @@ $(function () {
         var letters = '0123456789ABCDEF';
         var color = '#';
         for (var i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
+            color += letters[Math.floor(Math.random() * 16)];
         }
         return color;
-      }
+    }
 
-    function callbarchart(formData){
+    function callbarchart(formData) {
 
         $.ajax({
             url: getStudentGrade,
@@ -387,11 +388,11 @@ $(function () {
                 if (response.code == 200) {
                     var detail = response.data;
                     if (detail.length > 0) {
-                        $('#scores_by_graph_card').css('visibility','visible');
+                        $('#scores_by_graph_card').css('visibility', 'visible');
                         // $('#scores_by_graph_card').show();
                         barchart.setData(detail);
                     } else {
-                        $('#scores_by_graph_card').css('visibility','hidden');
+                        $('#scores_by_graph_card').css('visibility', 'hidden');
                         // $('#scores_by_graph_card').hide();
                     }
                 } else {
@@ -399,12 +400,12 @@ $(function () {
                 }
             }
         });
-        
-        
+
+
     }
 
 
-    function callsubjectaveragechart(formData){
+    function callsubjectaveragechart(formData) {
         $.ajax({
             url: getSubjectAverage,
             method: "post",
@@ -424,12 +425,12 @@ $(function () {
                             categoryData.push(res.exam_date);
                         });
                         $('#subject_average_card').show();
-                        subjectavgchart();
-                        chart.updateOptions( {
+                        // subjectavgchart();
+                        chart.updateOptions({
                             xaxis: {
                                 type: "datetime",
                                 format: 'dd/MM',
-                            categories: categoryData
+                                categories: categoryData
                             }
                         });
                         chart.updateSeries([{
@@ -446,73 +447,73 @@ $(function () {
             }
         });
     }
-        //Score base grade details bind
-        $(document).on("change", ".basevalidation", function (e) {
-            e.preventDefault();
-            var marks_range = $(this).val();
-    
-            var fullMark = $("#fullmark").val();
-            var passMark = $("#passmark").val();
-            // rank
-            //Get all total values, sort and remove duplicates
-            let totalList = $(".basevalidation")
-                .map(function () { return $(this).val() })
-                .get()
-                .sort(function (a, b) { return a - b })
-                .reduce(function (a, b) { if (b != a[0]) a.unshift(b); return a }, [])
-    
-            //assign rank
-            $(".basevalidation").each(function () {
-                let rankVal = $(this).val();
-                let studentID = $(this).attr('id');
-                let rank = totalList.indexOf(rankVal) + 1;
-                $('.lbl_ranking' + studentID).text(rank);
-                $('.lbl_ranking' + studentID).val(rank);
-    
-            })
-            let stuID = $(this).attr('id');
-            if (parseInt(marks_range) >= parseInt(passMark)) {
-                $('.badgeLabel' + stuID).removeClass('badge-danger');
-                $('.badgeLabel' + stuID).addClass('badge-success');
-                $('.lbl_pass_fail' + stuID).text('pass');
-                $('.lbl_pass_fail' + stuID).val('pass');
-    
-            } else {
-                $('.badgeLabel' + stuID).removeClass('badge-success');
-                $('.badgeLabel' + stuID).addClass('badge-danger');
-                $('.lbl_pass_fail' + stuID).text('fail');
-                $('.lbl_pass_fail' + stuID).val('fail');
-            }
-    
-            if (marks_range != '') {
-                var incre_class = $(this).attr('id');
-                var formData = new FormData();
-                formData.append('token', token);
-                formData.append('marks_range', marks_range);
-                formData.append('branch_id', branchID);
-                $.ajax({
-                    url: getMarks_vs_grade,
-                    method: "post",
-                    data: formData,
-                    processData: false,
-                    dataType: 'json',
-                    contentType: false,
-                    success: function (res) {
-    
-                        if (res.code == 200) {
-                            $('.lbl_grade' + incre_class).text(res.data[0].grade);
-                            $('.lbl_grade' + incre_class).val(res.data[0].grade);
-                        }
-                        else {
-                            $('.lbl_grade' + incre_class).text("");
-                            $('.lbl_grade' + incre_class).val("");
-                        }
+    //Score base grade details bind
+    $(document).on("change", ".basevalidation", function (e) {
+        e.preventDefault();
+        var marks_range = $(this).val();
+
+        var fullMark = $("#fullmark").val();
+        var passMark = $("#passmark").val();
+        // rank
+        //Get all total values, sort and remove duplicates
+        let totalList = $(".basevalidation")
+            .map(function () { return $(this).val() })
+            .get()
+            .sort(function (a, b) { return a - b })
+            .reduce(function (a, b) { if (b != a[0]) a.unshift(b); return a }, [])
+
+        //assign rank
+        $(".basevalidation").each(function () {
+            let rankVal = $(this).val();
+            let studentID = $(this).attr('id');
+            let rank = totalList.indexOf(rankVal) + 1;
+            $('.lbl_ranking' + studentID).text(rank);
+            $('.lbl_ranking' + studentID).val(rank);
+
+        })
+        let stuID = $(this).attr('id');
+        if (parseInt(marks_range) >= parseInt(passMark)) {
+            $('.badgeLabel' + stuID).removeClass('badge-danger');
+            $('.badgeLabel' + stuID).addClass('badge-success');
+            $('.lbl_pass_fail' + stuID).text('pass');
+            $('.lbl_pass_fail' + stuID).val('pass');
+
+        } else {
+            $('.badgeLabel' + stuID).removeClass('badge-success');
+            $('.badgeLabel' + stuID).addClass('badge-danger');
+            $('.lbl_pass_fail' + stuID).text('fail');
+            $('.lbl_pass_fail' + stuID).val('fail');
+        }
+
+        if (marks_range != '') {
+            var incre_class = $(this).attr('id');
+            var formData = new FormData();
+            formData.append('token', token);
+            formData.append('marks_range', marks_range);
+            formData.append('branch_id', branchID);
+            $.ajax({
+                url: getMarks_vs_grade,
+                method: "post",
+                data: formData,
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (res) {
+
+                    if (res.code == 200) {
+                        $('.lbl_grade' + incre_class).text(res.data[0].grade);
+                        $('.lbl_grade' + incre_class).val(res.data[0].grade);
                     }
-                });
-    
-            }
-        });
-    
+                    else {
+                        $('.lbl_grade' + incre_class).text("");
+                        $('.lbl_grade' + incre_class).val("");
+                    }
+                }
+            });
+
+        }
+    });
+
     // Add student marks and update also
     $('#addstudentmarks').on('submit', function (e) {
         e.preventDefault();
@@ -522,7 +523,7 @@ $(function () {
         var section_id = $("#listModeSectionID").val();
         var subject_id = $("#listModeSubjectID").val();
         var exam_id = $("#listModeexamID").val();
-        
+
 
         var formData = new FormData();
         formData.append('token', token);
@@ -553,8 +554,8 @@ $(function () {
             }
         });
 
-        
-        
+
+
     });
     //subject division cut off value calculation
     $(document).on("change", ".cutoff", function (e) {
@@ -634,7 +635,7 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (res) {
-                    if (res.code == 200) {   
+                    if (res.code == 200) {
                         $(".lbl_grade" + studentid).text(res.data[0].grade);
                         $('.lbl_grade' + studentid).val(res.data[0].grade);
                     }
@@ -699,7 +700,7 @@ $(function () {
                     '<td class="table-user">' +
                     '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
                     '<a href=""  data-toggle="modal" data-target=".studentSubDivMarkModal" data-id="' + res.student_id + '" class="text-body font-weight-semibold studentSubDivChart">' + res.first_name + ' ' + res.last_name + '</a>'
-                    '</td>';
+                '</td>';
                 // console.log(subdiv.length)
                 $.each(subdiv, function (key, val) {
 
@@ -794,7 +795,7 @@ $(function () {
         var section_id = $("#listModeSectionID").val();
         var subject_id = $("#listModeSubjectID").val();
         var exam_id = $("#listModeexamID").val();
-        
+
 
         var formData = new FormData();
         formData.append('token', token);
@@ -813,7 +814,7 @@ $(function () {
             contentType: false,
             success: function (response) {
                 if (response.code == 200) {
-                    
+
                     callsubjectaveragechart(formData);
                     callbarchart(formData);
                     callradarchart(formData);
@@ -837,6 +838,17 @@ $(function () {
             processing: true,
             bDestroy: true,
             info: true,
+            dom: 'lBfrtip',
+            buttons: [
+                {
+                    extend: 'csv',
+                    text: 'Download CSV',
+                    extension: '.csv',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+                }
+            ],
             data: dataSetNew,
             "pageLength": 10,
             "aLengthMenu": [
@@ -971,23 +983,22 @@ $(function () {
         }).on('draw', function () {
         });
     }
-    function trcolorchange()
-    {
+    function trcolorchange() {
         tables = $('#stdmarks').DataTable({
-            "createdRow": function( row, data, dataIndex ) {
-                     if ( data[2] == "30" ) {        
-                 $(row).addClass('red');             
-               }             
-        
+            "createdRow": function (row, data, dataIndex) {
+                if (data[2] == "30") {
+                    $(row).addClass('red');
+                }
+
             }
-          });
+        });
     }
-        // test result subject wise result
-        
+    // test result subject wise result
+
 
     $(document).on('click', '.studentChart', function () {
         var studentID = $(this).data('id');
-        
+
         var class_id = $("#changeClassName").val();
         var section_id = $("#sectionID").val();
         var subject_id = $("#subjectID").val();
@@ -1006,7 +1017,7 @@ $(function () {
 
     $(document).on('click', '.studentSubDivChart', function () {
         var studentID = $(this).data('id');
-        
+
         var class_id = $("#changeClassName").val();
         var section_id = $("#sectionID").val();
         var subject_id = $("#subjectID").val();
@@ -1019,16 +1030,16 @@ $(function () {
         formData.append('subject_id', subject_id);
         formData.append('student_id', studentID);
         $("#studentSubDivMarkModal").modal('show');
-        
+
         callstudentradarchart(formData);
     });
-    
-    
-    $('#studentMarkModal').on('hidden.bs.modal',function(){
+
+
+    $('#studentMarkModal').on('hidden.bs.modal', function () {
         student_chart.destroy();
     });
 
-    $('#studentSubDivMarkModal').on('hidden.bs.modal',function(){
+    $('#studentSubDivMarkModal').on('hidden.bs.modal', function () {
         student_div_chart.destroy();
     });
 
@@ -1044,7 +1055,7 @@ $(function () {
             success: function (response) {
                 // return false;
                 if (response.code == 200) {
-                    console.log('res',response)
+                    console.log('res', response)
                     var mark_details = response.data;
                     var mark = [];
                     var date = [];
@@ -1056,7 +1067,7 @@ $(function () {
                         });
                     }
                     studentchart();
-                    student_chart.updateOptions( {
+                    student_chart.updateOptions({
                         xaxis: {
                             type: "datetime",
                             format: 'dd/MM',
@@ -1068,8 +1079,8 @@ $(function () {
                         data: mark
                     }]);
                     // chart
-                    
-                    
+
+
 
                 } else {
                     toastr.error(data.message);
@@ -1094,11 +1105,11 @@ $(function () {
             processData: false,
             success: function (response) {
                 // return false;
-                
+
                 if (response.code == 200) {
-                    
+
                     var studentdetails = response.data.studentdetails;
-                    
+
                     var mark = [];
                     var date = [];
                     if (studentdetails.length > 0) {
@@ -1107,11 +1118,11 @@ $(function () {
                             mark.push(res.total_score);
                             date.push(res.exam_date);
                         });
-                        console.log('mark',mark)
-                        console.log('date',date)
+                        console.log('mark', mark)
+                        console.log('date', date)
                     }
                     studentdivchart();
-                    student_div_chart.updateOptions( {
+                    student_div_chart.updateOptions({
                         xaxis: {
                             type: "datetime",
                             format: 'dd/MM',
@@ -1127,7 +1138,7 @@ $(function () {
                     var subdiv = response.data.subjectdivision;
                     var data = [];
                     var label = [];
-                    
+
                     if (subdiv.length > 0) {
                         subdiv.forEach(function (res) {
                             label.push(res.subject_division);
@@ -1137,25 +1148,25 @@ $(function () {
                             markDetails.forEach(function (res) {
                                 var randcol = getRandomColor();
                                 var obj = {};
-                                var avg= [];
+                                var avg = [];
                                 obj["label"] = res.exam_name;
                                 obj["backgroundColor"] = hexToRGB(randcol, 0.3);
                                 obj["borderColor"] = randcol;
                                 obj["pointBackgroundColor"] = randcol;
-                                obj["pointBorderColor"] =  "#fff";
-                                obj["pointHoverBackgroundColor"] =  "#fff";
+                                obj["pointBorderColor"] = "#fff";
+                                obj["pointHoverBackgroundColor"] = "#fff";
                                 obj["pointHoverBorderColor"] = randcol;
                                 $.each(res.total, function (key, val) {
                                     avg.push(val);
                                 });
-                                
+
                                 obj["data"] = avg;
                                 data.push(obj);
-                                    
+
                             });
                         }
-                        
-                        studentradarchart(label,data);
+
+                        studentradarchart(label, data);
                     }
 
                 } else {
@@ -1171,7 +1182,7 @@ $(function () {
     }
 
 
-    function studentchart(){
+    function studentchart() {
         studentcolors = ["#6658dd",];
         (studentdataColors = $("#student-subject-mark").data("colors")) && (studentcolors = studentdataColors.split(","));
         var studentoptions = {
@@ -1194,15 +1205,15 @@ $(function () {
                 width: [3, 3],
                 curve: "smooth"
             },
-            
+
             series: [{
                 name: "Mark",
                 data: []
             }],
-            
+
             xaxis: {
                 type: "datetime",
-                format:"dd/MM",
+                format: "dd/MM",
                 categories: []
             },
             title: {
@@ -1255,7 +1266,7 @@ $(function () {
         (student_chart = new ApexCharts(document.querySelector("#student-subject-mark"), studentoptions)).render();
     }
 
-    function studentdivchart(){
+    function studentdivchart() {
         studentcolors = ["#6658dd",];
         (studentdataColors = $("#student-div-subject-mark").data("colors")) && (studentcolors = studentdataColors.split(","));
         var studentoptions = {
@@ -1278,15 +1289,15 @@ $(function () {
                 width: [3, 3],
                 curve: "smooth"
             },
-            
+
             series: [{
                 name: "Mark",
                 data: []
             }],
-            
+
             xaxis: {
                 type: "datetime",
-                format:"dd/MM",
+                format: "dd/MM",
                 categories: []
             },
             title: {
@@ -1350,8 +1361,8 @@ $(function () {
         gridLineColor: "rgba(65, 80, 95, 0.07)",
         barSizeRatio: .2,
         barColors: ["#02c0ce"]
-    
-      });
+
+    });
 
     radarChart();
     function radarChart(labels, obj) {
@@ -1377,7 +1388,7 @@ $(function () {
 
     }
 
-    
+
     studentradarchart();
     function studentradarchart(labels, obj) {
 
@@ -1401,16 +1412,16 @@ $(function () {
         }
 
     }
-    
-    function donutchart(pass,fail,inprogress){
 
-        colors = ["#00b19d", "#f1556c","#775DD0"];
+    function donutchart(pass, fail, inprogress) {
+
+        colors = ["#00b19d", "#f1556c", "#775DD0"];
         options = {
             chart: {
                 height: 320,
                 type: "donut"
             },
-            series: [pass,fail,inprogress],
+            series: [pass, fail, inprogress],
             legend: {
                 show: !0,
                 position: "bottom",
@@ -1421,7 +1432,7 @@ $(function () {
                 offsetX: 0,
                 offsetY: 7
             },
-            labels: [ "Pass", "Fail", "Inprogress"],
+            labels: ["Pass", "Fail", "Inprogress"],
             colors: colors,
             responsive: [{
                 breakpoint: 600,
@@ -1438,10 +1449,10 @@ $(function () {
                 type: "gradient"
             }
         };
-        
+
         donut_chart = new ApexCharts(document.querySelector("#donut-chart-test-summary"), options);
         donut_chart.render();
-        
+
     }
 
     function hexToRGB(hex, alpha) {
@@ -1455,11 +1466,11 @@ $(function () {
             return "rgb(" + r + ", " + g + ", " + b + ")";
         }
     }
-    
+
 });
 
 // ! function(e) {
-//     "use strict";    
+//     "use strict";
 //     function a() {}
 //     a.prototype.createBarChart = function(a, t, e, o, r, i) {
 //         Morris.Bar({
@@ -1519,7 +1530,7 @@ $(function () {
 // function() {
 //     "use strict";
 //     window.jQuery.Dashboard4.init()
-// }();  
+// }();
 
 
     // ! function($) {
@@ -1658,4 +1669,3 @@ $(function () {
     //     }
     // }
 
-    

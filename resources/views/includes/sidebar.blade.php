@@ -23,10 +23,10 @@
             }
 
             /*svg for icons*/
-            svg {
+            /* svg {
                 width: 12px;
                 height: 15px;
-            }
+            } */
         </style>
         <!-- User box -->
         <div class="user-box text-center">
