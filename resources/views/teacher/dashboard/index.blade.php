@@ -2,7 +2,20 @@
 @section('title','Dashboard')
 
 @section('content')
-<link href="{{ asset('css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
+<!-- <link href="{{ asset('css/custom/calendar.css') }}" rel="stylesheet" type="text/css" /> -->
+<style>
+    /* body {
+        margin: 40px 10px;
+        padding: 0;
+        font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+        font-size: 14px;
+    } */
+
+    #teacher_calendor {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+</style>
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -950,7 +963,9 @@
 </script>
 <!-- to calendor  -->
 <!-- <script src="{{ asset('js/custom/teacher_calendor.js') }}"></script> -->
-<script src="{{ asset('js/custom/teacher_calendor_new.js') }}"></script>
+<!-- <script src="{{ asset('js/custom/teacher_calendor_new.js') }}"></script> -->
+<script src="{{ asset('js/custom/teacher_calendor_new_cal.js') }}"></script>
+
 <!-- to do list -->
 <script src="{{ asset('js/custom/admin/dashboard.js') }}"></script>
 

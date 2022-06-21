@@ -7431,7 +7431,7 @@ class ApiController extends BaseController
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
             $success = $Connection->table('calendors as cl')
-                ->select('cl.id', 'cl.class_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id', 'cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as color', 'sb.name as subject_name', 'sb.name as title', 'st.first_name as teacher_name', 'dr.report')
+                ->select('cl.id', 'cl.class_id','cl.time_table_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id', 'cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as color', 'sb.name as subject_name', 'sb.name as title', 'st.first_name as teacher_name', 'dr.report')
                 ->join('classes as c', 'cl.class_id', '=', 'c.id')
                 ->join('sections as s', 'cl.section_id', '=', 's.id')
                 ->join('staffs as st', 'cl.teacher_id', '=', 'st.id')
@@ -7473,7 +7473,7 @@ class ApiController extends BaseController
                 $data = new \stdClass();
                 $data->id = $birth->id;
                 $data->birthday = $birth->birthday;
-                $data->title = $birth->name . "Happy Birthday";
+                $data->title = $birth->name . " Happy Birthday";
                 $data->start = $date;
                 $data->end = $date;
                 $data->className = "bg-success";
@@ -7507,7 +7507,7 @@ class ApiController extends BaseController
                 $data = new \stdClass();
                 $data->id = $birth->id;
                 $data->birthday = $birth->birthday;
-                $data->title = $birth->name . "Happy Birthday";
+                $data->title = $birth->name . " Happy Birthday";
                 $data->start = $date;
                 $data->end = $date;
                 $data->className = "bg-success";
@@ -7670,6 +7670,7 @@ class ApiController extends BaseController
                 ->select(
                     'cl.id',
                     'cl.class_id',
+                    'cl.time_table_id',
                     'cl.section_id',
                     'cl.subject_id',
                     'cl.start',
