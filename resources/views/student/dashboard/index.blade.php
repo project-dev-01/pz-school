@@ -1,7 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Dashboard')
 @section('content')
-<link href="{{ asset('css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
+<!-- <link href="{{ asset('css/custom/calendar.css') }}" rel="stylesheet" type="text/css" /> -->
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -9,10 +9,10 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <div class="page-title-right">
+                <!-- <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                     </ol>
-                </div>
+                </div> -->
                 <h4 class="page-title">Dashboard</h4>
             </div>
         </div>
@@ -27,10 +27,9 @@
                         <div class="row">
                             <div class="col">
                                 <div class="card">
-                                    <ul class="nav nav-tabs" >
+                                    <ul class="nav nav-tabs">
                                         <li class="nav-item">
-                                            <h4 class="nav-link">
-                                                <span data-feather="home" class="icon-dual" id="span-parent"></span> To Do List
+                                            <h4 class="navv"> To Do List
                                                 <h4>
                                         </li>
                                     </ul>
@@ -252,10 +251,9 @@
                     <div class="row">
                         <div class="col">
                             <div class="card">
-                                <ul class="nav nav-tabs" >
+                                <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="nav-link">
-                                            <span data-feather="file-text" class="icon-dual" id="span-parent"></span> Homework List
+                                        <h4 class="navv"> Homework List
                                             <h4>
                                     </li>
                                 </ul><br>
@@ -468,10 +466,9 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span data-feather="book" class="icon-dual" id="span-parent"></span> Test Score Analysis
+                        <h4 class="navv"> Test Score Analysis
                             <h4>
                     </li>
                 </ul><br>
@@ -485,10 +482,9 @@
         </div> <!-- end col -->
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span data-feather="book-open" class="icon-dual" id="span-parent"></span> Marks by Subject
+                        <h4 class="navv">Marks by Subject
                             <h4>
                     </li>
                 </ul><br>
@@ -523,9 +519,10 @@
 
     var UserName = "{{ Session::get('name') }}";
 </script>
-<script src="{{ asset('js/custom/student_calendor.js') }}"></script>
+<!-- <script src="{{ asset('js/custom/student_calendor.js') }}"></script> -->
 <!-- <script src="{{ asset('js/custom/student_dashboard.js') }}"></script> -->
-<script src="{{ asset('js/custom/student_calendor_new.js') }}"></script>
+<!-- <script src="{{ asset('js/custom/student_calendor_new.js') }}"></script> -->
+<script src="{{ asset('js/custom/student_calendor_new_cal.js') }}"></script>
 <!-- to do list -->
 <script src="{{ asset('js/custom/admin/dashboard.js') }}"></script>
 @endsection

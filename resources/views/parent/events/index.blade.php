@@ -8,11 +8,11 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <div class="page-title-right">
+                <!-- <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <!-- <li class="breadcrumb-item active">List</li> -->
+                        <li class="breadcrumb-item active">List</li>
                     </ol>
-                </div>
+                </div> -->
                 <h4 class="page-title">Events</h4>
             </div>
         </div>
@@ -22,9 +22,9 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
+                        <h4 class="navv">
                             Event List
                             <h4>
                     </li>
@@ -32,7 +32,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="card-box">
+                            <div class="">
                                 <div class="table-responsive">
                                     <table class="table table-bordered mb-0">
                                         <thead>
@@ -49,7 +49,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            
+
                                             <tr>
                                                 <td>1</td>
                                                 <td>Volley Ball</td>
@@ -61,7 +61,7 @@
                                                 <td>Published</td>
                                                 <td>
                                                     <div class="button-list">
-                                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light"  data-toggle="modal" data-id="" data-target="#viewEvent"><i class="fe-eye"></i></a>
+                                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-toggle="modal" data-id="" data-target="#viewEvent"><i class="fe-eye"></i></a>
                                                         <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id=""><i class="fe-trash-2"></i></a>
                                                     </div>
                                                 </td>

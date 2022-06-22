@@ -44,7 +44,12 @@
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script> -->
 <!-- <script src="{{ asset('js/fullcalendar/fullcalendar.js') }}"></script> -->
-<script src="{{ asset('full-calendor/lib/main.js') }}"></script>
+<script src="{{ asset('libs/@fullcalendar/core/main.min.js') }}"></script>
+<script src="{{ asset('libs/@fullcalendar/bootstrap/main.min.js') }}"></script>
+<script src="{{ asset('libs/@fullcalendar/daygrid/main.min.js') }}"></script>
+<script src="{{ asset('libs/@fullcalendar/timegrid/main.min.js') }}"></script>
+<script src="{{ asset('libs/@fullcalendar/list/main.min.js') }}"></script>
+<script src="{{ asset('libs/@fullcalendar/interaction/main.min.js') }}"></script>
 @else
 <script src="{{ asset('libs/@fullcalendar/core/main.min.js') }}"></script>
 <script src="{{ asset('libs/@fullcalendar/bootstrap/main.min.js') }}"></script>

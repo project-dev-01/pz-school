@@ -8,10 +8,10 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <div class="page-title-right">
+                <!-- <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                     </ol>
-                </div>
+                </div> -->
                 <h4 class="page-title">Analytic Report</h4>
             </div>
         </div>
@@ -20,10 +20,9 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span data-feather="edit" class="icon-dual" id="span-parent"></span> Select Ground
+                        <h4 class="navv"> Select Ground
                             <h4>
                     </li>
                 </ul><br>
@@ -64,9 +63,12 @@
     <div class="row">
         <div class="col-xl-4 col-md-6">
             <div class="card">
-                <h4 class="nav-link" >
-                    <span data-feather="map" class="icon-dual" id="span-parent"></span> Attendance Report
-                </h4>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv"> Attendance Report
+                            <h4>
+                    </li>
+                </ul><br>
                 <div class="card-body">
                     <div class="col-md-12">
                         <div class="mt-4 chartjs-chart" style="text-align:center">
@@ -79,9 +81,12 @@
         </div> <!-- end col-->
         <div class="col-xl-4 col-md-6">
             <div class="card">
-                <h4 class="nav-link" >
-                    <span data-feather="book-open" class="icon-dual" id="span-parent"></span> HomeWork
-                </h4>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv"> HomeWork Report
+                            <h4>
+                    </li>
+                </ul><br>
                 <div class="card-body">
                     <div class="col-md-12">
                         <div id="cardCollpase19" class="collapse pt-4 show" style="text-align:center" dir="ltr">
@@ -95,10 +100,9 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span data-feather="fa-app-store-ios" class="icon-dual" id="span-parent"></span> Attitude
+                        <h4 class="navv"> Attitude
                             <h4>
                     </li>
                 </ul><br>
@@ -125,10 +129,9 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span data-feather="edit" class="icon-dual" id="span-parent"></span> Short Test
+                        <h4 class="navv">Short Test
                             <h4>
                     </li>
                 </ul><br>
@@ -179,9 +182,12 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <h4 class="nav-link" >
-                    <span data-feather="clipboard" class="icon-dual" id="span-parent"></span> Exam Result
-                </h4>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv"> Exam Result
+                            <h4>
+                    </li>
+                </ul><br>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">

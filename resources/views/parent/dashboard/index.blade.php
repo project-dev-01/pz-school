@@ -9,10 +9,10 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <div class="page-title-right">
+                <!-- <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                     </ol>
-                </div>
+                </div> -->
                 <h4 class="page-title">Dashboard</h4>
             </div>
         </div>
@@ -27,10 +27,9 @@
                         <div class="row">
                             <div class="col">
                                 <div class="card">
-                                    <ul class="nav nav-tabs" >
+                                    <ul class="nav nav-tabs">
                                         <li class="nav-item">
-                                            <h4 class="nav-link">
-                                                <span data-feather="home" class="icon-dual" id="span-parent"></span> To Do List
+                                            <h4 class="navv"> To Do List
                                                 <h4>
                                         </li>
                                     </ul>
@@ -252,10 +251,9 @@
                     <div class="row">
                         <div class="col">
                             <div class="card">
-                                <ul class="nav nav-tabs" >
+                                <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="nav-link">
-                                            <span data-feather="book-open" class="icon-dual" id="span-parent"></span>HomeWork List
+                                        <h4 class="navv">HomeWork List
                                             <h4>
                                     </li>
                                 </ul><br>
@@ -279,7 +277,7 @@
                                                             <div class="col-sm-6">
                                                                 <div class="d-sm-flex">
                                                                     <!-- <div>
-                                                                            <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="{{ route('parent.homework')}}" role="button" aria-haspopup="false" aria-expanded="false">
+                                                                            <a class="navv dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="{{ route('parent.homework')}}" role="button" aria-haspopup="false" aria-expanded="false">
                                                                                 <img src="{{ Session::get('picture') && asset('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" alt="user-image" class="rounded-circle admin_picture">
                                                                             </a>
                                                                         </div> -->
@@ -454,10 +452,9 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span data-feather="map" class="icon-dual" id="span-parent"></span> Test Score Analysis
+                        <h4 class="navv">Test Score Analysis
                             <h4>
                     </li>
                 </ul><br>
@@ -475,10 +472,9 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span data-feather="external-link" class="icon-dual" id="span-parent"></span> General Details
+                        <h4 class="navv"> General Details
                             <h4>
                     </li>
                 </ul><br>
@@ -573,21 +569,32 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="clearfix mt-4">
-                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Apply</button>
+                        <div class="form-group text-right m-b-0">
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                Apply
+                            </button>
+                            <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                    Cancel
+                                </button>-->
                         </div>
+
                     </form>
                 </div> <!-- end card-body -->
-                <div class="col-md-12">
-                    <ul class="nav nav-tabs" >
-                        <li class="nav-item">
-                            <h4 class="nav-link">
-                                <span data-feather="external-link" class="icon-dual" id="span-parent"></span> Leave status
-                                <h4>
-                        </li>
-                    </ul><br>
-                    <div class="card-body">
-                        <table class="table mb-0" id="studentleave-table">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">Leave status
+                            <h4>
+                    </li>
+                </ul><br>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table" id="studentleave-table">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -607,9 +614,9 @@
                         </table>
                     </div>
                 </div>
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-    </div>
+            </div>
+        </div> <!-- end card-->
+    </div> <!-- end col -->
     @include('parent.dashboard.check_list')
 </div> <!-- container -->
 @endsection
@@ -638,5 +645,7 @@
 
 <!-- get timetable list -->
 <!-- <script src="{{ asset('js/custom/student_calendor.js') }}"></script> -->
-<script src="{{ asset('js/custom/student_calendor_new.js') }}"></script>
+<!-- <script src="{{ asset('js/custom/student_calendor_new.js') }}"></script> -->
+<script src="{{ asset('js/custom/student_calendor_new_cal.js') }}"></script>
+
 @endsection

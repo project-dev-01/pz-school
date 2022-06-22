@@ -1,33 +1,7 @@
 <!-- ========== Left Sidebar Start ========== -->
 <div class="left-side-menu" style="background-color:#2F2F8F">
     <div class="h-100" data-simplebar>
-        <style>
-            /*sidebar span code*/
-            span,
-            i {
-                font-family: 'Open Sans';
-                font-style: normal;
-                font-weight: 400;
-                font-size: 14px;
-                line-height: 22px;
-                letter-spacing: 0.0133em;
-                color: #C4C7D2;
-            }
 
-            span:hover {
-                color: #6FC6CC;
-            }
-
-            li>a>svg:hover {
-                color: #6FC6CC;
-            }
-
-            /*svg for icons*/
-            /* svg {
-                width: 12px;
-                height: 15px;
-            } */
-        </style>
         <!-- User box -->
         <div class="user-box text-center">
             <img src="{{ asset('images/users/default.jpg') }}" alt="user-img" title="Mat Helme" class="rounded-circle avatar-md">
@@ -1324,7 +1298,7 @@
                     </a>
                     <div class="collapse" id="sideBarSettings">
                         <ul class="nav-second-level">
-                        <li>
+                            <li>
                                 <a href="#sideBarSettingMasters" data-toggle="collapse">
                                     <i class="fe-book-open"></i> &nbsp;
                                     Masters <span class="menu-arrow"></span>
@@ -1758,7 +1732,7 @@
                         <span> Classroom Management </span>
                     </a>
                 </li>
-                
+
                 <li>
                     <a href="{{ route('teacher.attendance.employee_entry')}}" class="nav-link {{ (request()->is('teacher/attendance/entry')) ? 'active' : '' }}">
                         <i data-feather="file-text" class="icon-dual"></i>

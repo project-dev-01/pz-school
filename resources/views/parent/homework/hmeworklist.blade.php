@@ -20,9 +20,9 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
+                        <h4 class="navv">
                             HomeWork List
                             <h4>
                     </li>
@@ -147,9 +147,9 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
+                        <h4 class="navv">
                             HomeWork List (All Subjects)
                             <h4>
                     </li>
@@ -172,60 +172,60 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Created By : </div>
-                                                        <div class="ml-2">Kumar</div>
+                                                        <div class="col-md-6 font-weight-bold">Created By : </div>
+                                                        <div class="col-md-6">Kumar</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Details :</div>
-                                                        <div class="ml-2">poem </div>
+                                                        <div class="col-md-6 font-weight-bold">Details :</div>
+                                                        <div class="col-md-6">poem </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Status :</div>
-                                                        <div class="ml-2">Complete</div>
-                                                    </div>
-                                                </div>
-                                            </div><br />
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Date Of Homework :</div>
-                                                        <div class="ml-2">20 Jan 2022</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Date Of Submission :</div>
-                                                        <div class="ml-2">22 Jan 2022</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Evalution Date :</div>
-                                                        <div class="ml-2">23 Jan 2022</div>
+                                                        <div class="col-md-6 font-weight-bold">Status :</div>
+                                                        <div class="col-md-6">Complete</div>
                                                     </div>
                                                 </div>
                                             </div><br />
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Remarks :</div>
-                                                        <div class="ml-2">N/A</div>
+                                                        <div class="col-md-6 font-weight-bold">Date Of Homework :</div>
+                                                        <div class="col-md-6">20 Jan 2022</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Rank Out Of 5 :</div>
-                                                        <div class="ml-2">N/A</div>
+                                                        <div class="col-md-6 font-weight-bold">Date Of Submission :</div>
+                                                        <div class="col-md-6">22 Jan 2022</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Document :</div>
-                                                        <div class="ml-2">
+                                                        <div class="col-md-6 font-weight-bold">Evalution Date :</div>
+                                                        <div class="col-md-6">23 Jan 2022</div>
+                                                    </div>
+                                                </div>
+                                            </div><br />
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <div class="col-md-6 font-weight-bold">Remarks :</div>
+                                                        <div class="col-md-6">N/A</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <div class="col-md-6 font-weight-bold">Rank Out Of 5 :</div>
+                                                        <div class="col-md-6">N/A</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <div class="col-md-6 font-weight-bold">Document :</div>
+                                                        <div class="col-md-6">
                                                             <a href="~/resources/views/Guide.pdf" download>
                                                                 <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
                                                             </a>
@@ -240,18 +240,18 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label for="inputEmail3" class="mb-2 col-form-label">Note :</label>
+                                                        <label for="inputEmail3" class="col-md-6 col-form-label">Note :</label>
                                                         <div class="col-9">
-                                                            <textarea class="ml-2 form-control" id="product-description" rows="5">
+                                                            <textarea class="col-md-6 form-control" id="product-description" rows="5">
 														 I am most respectfully writing this in regard to the Homework </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label for="inputEmail3" class="mb-2 col-form-label">Attachment File:</label>
+                                                        <label for="inputEmail3" class="col-md-6 col-form-label">Attachment File:</label>
                                                         <div class="col-9">
-                                                            <input type="file" class="ml-2 custom-file-input" id="inputGroupFile04" disabled>
+                                                            <input type="file" class="col-md-6 custom-file-input" id="inputGroupFile04" disabled>
                                                             <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
                                                         </div>
                                                     </div>

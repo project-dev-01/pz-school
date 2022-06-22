@@ -16,10 +16,10 @@
     </div>
     <!-- end page title -->
 
-    <div class="row" >
+    <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
                             HomeWork List
@@ -27,61 +27,61 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="card-box">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="avatar-sm bg-primary rounded">
-                                                <i class="fe-bar-chart-2 avatar-title font-22 text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="text-right">
-                                                <h3 class="my-1"><span data-plugin="counterup">{{$count['ontime']}}</span></h3>
-                                                <p class="text-muted mb-1 text-truncate">On Time Submission</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3">
-                                        <h6 class="text-uppercase">Target <span class="float-right">{{$count['ontime_percentage']}}%</span></h6>
-                                        <div class="progress progress-sm m-0">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="{{$count['ontime_percentage']}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$count['ontime_percentage']}}%">
-                                                <span class="sr-only">{{$count['ontime_percentage']}}% Complete</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> <!-- end card-box-->
-                            </div> <!-- end col -->
 
-                            <div class="col-md-6">
-                                <div class="card-box">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="avatar-sm bg-blue rounded">
-                                                <i class="fe-aperture avatar-title font-22 text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="text-right">
-                                                <h3 class="my-1"><span data-plugin="counterup">{{$count['late']}}</span></h3>
-                                                <p class="text-muted mb-1 text-truncate">Late Submission </p>
-                                            </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card-box">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="avatar-sm bg-primary rounded">
+                                            <i class="fe-bar-chart-2 avatar-title font-22 text-white"></i>
                                         </div>
                                     </div>
-                                    <div class="mt-3">
-                                        <h6 class="text-uppercase">Target <span class="float-right">{{$count['late_percentage']}}%</span></h6>
-                                        <div class="progress progress-sm m-0">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="{{$count['late_percentage']}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$count['late_percentage']}}%">
-                                                <span class="sr-only">{{$count['late_percentage']}}% Complete</span>
-                                            </div>
+                                    <div class="col-6">
+                                        <div class="text-right">
+                                            <h3 class="my-1"><span data-plugin="counterup">{{$count['ontime']}}</span></h3>
+                                            <p class="text-muted mb-1 text-truncate">On Time Submission</p>
                                         </div>
                                     </div>
-                                </div> <!-- end card-box-->
-                            </div> <!-- end col -->
-                        </div>
-                        <form id="studentHomeworkFilter" method="post" action="{{ route('parent.homework.filter') }}"  enctype="multipart/form-data" autocomplete="off">
+                                </div>
+                                <div class="mt-3">
+                                    <h6 class="text-uppercase">Target <span class="float-right">{{$count['ontime_percentage']}}%</span></h6>
+                                    <div class="progress progress-sm m-0">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="{{$count['ontime_percentage']}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$count['ontime_percentage']}}%">
+                                            <span class="sr-only">{{$count['ontime_percentage']}}% Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- end card-box-->
+                        </div> <!-- end col -->
+
+                        <div class="col-md-6">
+                            <div class="card-box">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="avatar-sm bg-blue rounded">
+                                            <i class="fe-aperture avatar-title font-22 text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="text-right">
+                                            <h3 class="my-1"><span data-plugin="counterup">{{$count['late']}}</span></h3>
+                                            <p class="text-muted mb-1 text-truncate">Late Submission </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <h6 class="text-uppercase">Target <span class="float-right">{{$count['late_percentage']}}%</span></h6>
+                                    <div class="progress progress-sm m-0">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="{{$count['late_percentage']}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$count['late_percentage']}}%">
+                                            <span class="sr-only">{{$count['late_percentage']}}% Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- end card-box-->
+                        </div> <!-- end col -->
+                    </div>
+                    <form id="studentHomeworkFilter" method="post" action="{{ route('parent.homework.filter') }}" enctype="multipart/form-data" autocomplete="off">
                         <div class="row ml-1">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -89,11 +89,11 @@
 
                                     <div class="row">
                                         <div class="form-check ">
-                                            <input type="radio" class="form-check-input"  name="status" value="1">
+                                            <input type="radio" class="form-check-input" name="status" value="1">
                                             <label class="form-check-label font-weight-bold" for="materialInline1">Completed</label>
                                         </div> &nbsp;&nbsp;
                                         <div class="form-check col-md-offset-4">
-                                            <input type="radio" class="form-check-input"  name="status" value="0">
+                                            <input type="radio" class="form-check-input" name="status" value="0">
                                             <label class="form-check-label font-weight-bold" for="materialInline2">Incompleted</label>
                                         </div>
                                     </div>
@@ -106,7 +106,7 @@
                                         <option value="">Select Subject</option>
                                         <option value="All">All</option>
                                         @foreach($subject as $sub)
-                                            <option value="{{$sub['id']}}">{{$sub['name']}}</option>
+                                        <option value="{{$sub['id']}}">{{$sub['name']}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -144,16 +144,16 @@
     <div class="row" id="homeworks">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link" id="title">
                             HomeWork List (All Subjects)
-                        <h4>
+                            <h4>
                     </li>
                 </ul><br>
                 <div class="card-body" id="homework_list">
                     @foreach($homework as $key=>$work)
-                    <form class="submitHomeworkForm" id="form{{$key}}" method="post"  enctype="multipart/form-data" autocomplete="off">
+                    <form class="submitHomeworkForm" id="form{{$key}}" method="post" enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
@@ -170,57 +170,57 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="col-md-5 font-weight-bold">Title :</div>
-                                                        <div class="col-md-3">{{$work['title']}}</div>
+                                                        <div class="col-md-6 font-weight-bold">Title :</div>
+                                                        <div class="col-md-6">{{$work['title']}}</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="col-md-5 font-weight-bold">Status :</div>
-                                                        <div class="col-md-3">@if($work['status'] == 1) Completed @else Incomplete @endif</div>
+                                                        <div class="col-md-6 font-weight-bold">Status :</div>
+                                                        <div class="col-md-6">@if($work['status'] == 1) Completed @else Incomplete @endif</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="col-md-5 font-weight-bold">Date Of Homework :</div>
-                                                        <div class="col-md-3">{{ date('F j , Y', strtotime($work['date_of_homework'])) }}</div>
+                                                        <div class="col-md-6 font-weight-bold">Date Of Homework :</div>
+                                                        <div class="col-md-6">{{ date('F j , Y', strtotime($work['date_of_homework'])) }}</div>
                                                     </div>
                                                 </div>
 
                                             </div><br />
                                             <div class="row">
-                                                
+
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="col-md-5 font-weight-bold">Date Of Submission :</div>
-                                                        <div class="col-md-3">{{ date('F j , Y', strtotime($work['date_of_submission'])) }}</div>
+                                                        <div class="col-md-6 font-weight-bold">Date Of Submission :</div>
+                                                        <div class="col-md-6">{{ date('F j , Y', strtotime($work['date_of_submission'])) }}</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="col-md-5 font-weight-bold">Evalution Date :</div>
-                                                        <div class="col-md-3">@if($work['evaluation_date']){{ date('F j , Y', strtotime($work['evaluation_date'])) }}@endif</div>
+                                                        <div class="col-md-6 font-weight-bold">Evalution Date :</div>
+                                                        <div class="col-md-6">@if($work['evaluation_date']){{ date('F j , Y', strtotime($work['evaluation_date'])) }}@endif</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="col-md-5 font-weight-bold">Remarks :</div>
-                                                        <div class="col-md-3">{{$work['description']}}</div>
+                                                        <div class="col-md-6 font-weight-bold">Remarks :</div>
+                                                        <div class="col-md-6">{{$work['description']}}</div>
                                                     </div>
                                                 </div>
                                             </div><br />
                                             <div class="row">
-                                                
+
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="col-md-5 font-weight-bold">Rank Out Of 5 :</div>
-                                                        <div class="col-md-3">@if($work['remarks']) {{$work['rank']}} @endif</div>
+                                                        <div class="col-md-6 font-weight-bold">Rank Out Of 5 :</div>
+                                                        <div class="col-md-6">@if($work['remarks']) {{$work['rank']}} @endif</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="col-md-5 font-weight-bold">Document :</div>
-                                                        <div class="col-md-3">
+                                                        <div class="col-md-6 font-weight-bold">Document :</div>
+                                                        <div class="col-md-6">
                                                             <a href="{{asset('teacher/homework/')}}/{{$work['document']}}" download>
                                                                 <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
                                                             </a>
@@ -236,35 +236,28 @@
                                             <input type="hidden" name="homework_id" value="{{$work['id']}}">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <div class="row">
-                                                        <div class="col-md-5 font-weight-bold">Note : </div>
-                                                        <div class="col-md-5">
-                                                            <textarea  name="remarks" rows="4" cols="25">@if($work['remarks']) {{$work['remarks']}} @endif</textarea>
-                                                        </div>
+                                                    <div class="col-md-6 font-weight-bold">Note : </div>
+                                                    <div class="col-md-6">
+                                                        <textarea name="remarks" rows="4" cols="25">@if($work['remarks']) {{$work['remarks']}} @endif</textarea>
                                                     </div>
                                                 </div>
-                                                
                                                 @if($work['file'])
 
-                                                    <div class="col-md-4">
-                                                        <div class="row">
-                                                            <div class="col-md-5 font-weight-bold">Attachment File: </div>
-                                                            <div class="col-md-3">
-                                                                <a href="{{asset('student/homework/')}}/{{$work['file']}}" download>
-                                                                    <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
+                                                <div class="col-md-4">
+                                                    <div class="col-md-6 font-weight-bold">Attachment File: </div>
+                                                    <div class="col-md-6">
+                                                        <a href="{{asset('student/homework/')}}/{{$work['file']}}" download>
+                                                            <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
+                                                        </a>
                                                     </div>
+                                                </div>
                                                 @else
-                                                    <div class="col-md-4">
-                                                        <div class="row">
-                                                            <div class="col-md-5 font-weight-bold">Attachment File: </div>
-                                                            <div class="col-md-5">
-                                                                None
-                                                            </div>
-                                                        </div>
+                                                <div class="col-md-4">
+                                                    <div class="col-md-6 font-weight-bold">Attachment File: </div>
+                                                    <div class="col-md-6">
+                                                        None
                                                     </div>
+                                                </div>
                                                 @endif
                                             </div>
                                         </div>
@@ -272,7 +265,7 @@
                                 </div>
                             </div>
                         </div>
-                       
+
                     </form>
                     @endforeach
                     <div class="form-group text-right m-b-0">

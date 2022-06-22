@@ -25,9 +25,9 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
+                        <h4 class="navv">
                             Schedule List
                             <h4>
                     </li>
@@ -35,7 +35,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="card-box">
+                            <div class="">
                                 <div class="table-responsive">
                                     <table class="table table-bordered mb-0">
                                         <thead>

@@ -1,4 +1,3 @@
-body,
 span,
 label,
 select,
@@ -8,7 +7,6 @@ h3,
 h4,
 h5,
 h6 {
-	color: #3A4265;
 	font-weight: 600;
 	font-family: Open Sans;
 }
@@ -50,7 +48,8 @@ table>thead>tr>th {
 
 /*table tr hover code*/
 .table tr:hover {
-	background-color: #D1E9EF;
+	/* background-color: #D1E9EF; */
+	background-color: #60d2ee;
 }
 
 /*table search button*/
@@ -332,7 +331,7 @@ input:focus {
 	}
 }
 
-.fc-view {
+/* .fc-view {
 	border: #0abab5;
 }
 
@@ -351,7 +350,7 @@ input:focus {
 .fc-state-active {
 	background-color: #0abab5 !important;
 	color: #fff;
-}
+} */
 
 button.dt-button {
 	border-radius: 22px;
@@ -362,4 +361,48 @@ button.dt-button {
 
 .nav-item.nav-link {
 	color: black;
+}
+div.dt-buttons {
+	display: inherit;
+}
+
+.icon-dual {
+	color: #f2f5f7;
+}
+
+#sidebar-menu>ul>li>a {
+	color: #f2f5f7;
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 22px;
+	letter-spacing: 0.0133em;
+}
+
+#sidebar-menu .menu-title {
+	color: #f2f5f7;
+	font-family: Open Sans;
+}
+
+.navbar-custom .topnav-menu .nav-link {
+	color: black;
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+}
+
+.nav-second-level li a {
+	color: #c4c9d7;
+}
+
+.fab
+{
+font-family: 'Font Awesome 5 Brands' !important;
+}
+
+.fas, .far, .fa
+{
+font-family: 'Font Awesome 5 Free' !important;
 }

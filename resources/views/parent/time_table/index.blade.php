@@ -38,9 +38,9 @@
     <div class="row" id="timetablerow">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link"><i class="far fa-clock"></i>
+                        <h4 class="navv">Timetable
                             @if($timetable>0)
                             @if($timetable)Class {{ $details['class']['class_name'] }} (Section: {{ $details['section']['section_name'] }}) @endif
                             @endif
@@ -90,7 +90,9 @@
                                         </tr>
                                         @endforeach
                                         @else
-                                        <tr ><td colspan="5">No Data Available</td></tr>
+                                        <tr>
+                                            <td colspan="5">No Data Available</td>
+                                        </tr>
 
                                         @endif
                                     </tbody>
