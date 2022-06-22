@@ -362,6 +362,7 @@ button.dt-button {
 .nav-item.nav-link {
 	color: black;
 }
+
 div.dt-buttons {
 	display: inherit;
 }
@@ -374,8 +375,6 @@ div.dt-buttons {
 	color: #f2f5f7;
 	font-family: 'Open Sans';
 	font-style: normal;
-	font-weight: 400;
-	font-size: 14px;
 	line-height: 22px;
 	letter-spacing: 0.0133em;
 }
@@ -397,12 +396,16 @@ div.dt-buttons {
 	color: #c4c9d7;
 }
 
-.fab
-{
-font-family: 'Font Awesome 5 Brands' !important;
+.fab {
+	font-family: 'Font Awesome 5 Brands' !important;
 }
 
-.fas, .far, .fa
-{
-font-family: 'Font Awesome 5 Free' !important;
+.fas,
+.far,
+.fa {
+	font-family: 'Font Awesome 5 Free' !important;
+}
+
+.navbar-custom .button-menu-mobile {
+	color: black;
 }
