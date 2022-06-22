@@ -48,8 +48,8 @@ table>thead>tr>th {
 
 /*table tr hover code*/
 .table tr:hover {
-	/* background-color: #D1E9EF; */
-	background-color: #60d2ee;
+	background-color: #D1E9EF;
+	/* background-color: #60d2ee; */
 }
 
 /*table search button*/
