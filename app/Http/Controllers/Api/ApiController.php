@@ -7431,7 +7431,7 @@ class ApiController extends BaseController
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
             $success = $Connection->table('calendors as cl')
-                ->select('cl.id', 'cl.class_id','cl.time_table_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id', 'cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as color', 'sb.name as subject_name', 'sb.name as title', 'st.first_name as teacher_name', 'dr.report')
+                ->select('cl.id', 'cl.class_id', 'cl.time_table_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id', 'cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as color', 'sb.name as subject_name', 'sb.name as title', 'st.first_name as teacher_name', 'dr.report')
                 ->join('classes as c', 'cl.class_id', '=', 'c.id')
                 ->join('sections as s', 'cl.section_id', '=', 's.id')
                 ->join('staffs as st', 'cl.teacher_id', '=', 'st.id')
@@ -13709,6 +13709,43 @@ class ApiController extends BaseController
             }
 
             return $this->successResponse($studentdetails, 'Subject average by student fetch successfully');
+        }
+    }
+    // get exam marks by report graph
+    function getExamMarksByStudent(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
+            'student_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $getStudBehaviour = $Connection->table('student_marks as sm')
+                ->select(
+                    'sm.score',
+                    'ex.name as exam_name',
+                    'sb.name as subject_name'
+                    // DB::raw('group_concat(sm.score) as scores'),
+                    // DB::raw('group_concat(sb.name) as subject_name')
+                )
+                ->join('subjects as sb', 'sm.subject_id', '=', 'sb.id')
+                ->join('exam as ex', 'sm.exam_id', '=', 'ex.id')
+                ->where([
+                    ['sm.class_id', '=', $request->class_id],
+                    ['sm.section_id', '=', $request->section_id],
+                    ['sm.subject_id', '=', $request->subject_id],
+                    ['sm.student_id', '=', $request->student_id]
+                ])
+                // ->groupBy('sm.exam_id')
+                ->get();
+
+            return $this->successResponse($getStudBehaviour, 'exam result record fetch successfully');
         }
     }
 }

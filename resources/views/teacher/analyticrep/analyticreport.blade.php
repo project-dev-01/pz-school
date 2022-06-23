@@ -81,7 +81,7 @@
         </div> <!-- end col -->
     </div>
     <div class="row">
-        <div class="col-xl-6 col-md-6">
+        <div class="col-xl-6 col-md-6" id="attendance_card" style="display:none">
             <!-- Portlet card -->
             <div class="card">
                 <h4 class="navv"> Attendance Report
@@ -95,7 +95,7 @@
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
         </div> <!-- end col-->
-        <div class="col-xl-6 col-md-6">
+        <div class="col-xl-6 col-md-6" id="homework_card" style="display:none">
             <div class="card">
                 <h4 class="navv">HomeWork
                 </h4>
@@ -109,7 +109,7 @@
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
-    <div class="row">
+    <div class="row" id="attitude_card" style="display:none">
         <div class="col-md-12">
             <div class="card">
                 <h4 class="navv"> Attitude
@@ -126,7 +126,7 @@
         </div> <!-- end col-->
     </div>
 
-    <div class="row">
+    <div class="row" id="short_test_card" style="display:none">
         <div class="col-lg-12">
             <div class="card">
                 <ul class="nav nav-tabs">
@@ -149,40 +149,45 @@
             </div> <!-- end card-->
         </div> <!-- end col -->
     </div>
-    <div class="row">
+    <div class="row" id="exam_result_card" style="display:none">
         <div class="col-md-12">
             <div class="card">
                 <h4 class="navv"> Exam Result
                 </h4>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="radar-analytic" height="400" data-colors="#39afd1,#a17fe0,#FF4560,#775DD0"></canvas>
-                            </div>
+                    <div class="col-md-12">
+                        <div class="mt-4 chartjs-chart">
+                            <canvas id="exam-result-analytic" height="400" ></canvas>
                         </div>
-                        <div class="col-xl-6">
-                            <!-- Portlet card -->
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-widgets">
-                                        <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                                        <a data-toggle="collapse" href="#cardCollpase3" role="button" aria-expanded="false" aria-controls="cardCollpase3"><i class="mdi mdi-minus"></i></a>
-                                        <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
-                                    </div>
-
-                                    <div id="cardCollpase3" class="collapse pt-3 show" dir="ltr">
-                                        <div id="subject-avg-chart-student" class="apex-charts" data-colors="#f672a7"></div>
-                                    </div> <!-- collapsed end -->
-                                </div> <!-- end card-body -->
-                            </div> <!-- end card-->
-                        </div> <!-- end col-->
                     </div>
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
+    <div class="row" id="subject_average_card" style="display:none">
+        <div class="col-md-12">
+            <div class="card">
+                <h4 class="navv"> Subject Average
+                </h4>
+                <div class="col-xl-12">
+                    <!-- Portlet card -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-widgets">
+                                <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                                <a data-toggle="collapse" href="#cardCollpase3" role="button" aria-expanded="false" aria-controls="cardCollpase3"><i class="mdi mdi-minus"></i></a>
+                                <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                            </div>
 
+                            <div id="cardCollpase3" class="collapse pt-3 show" dir="ltr">
+                                <div id="subject-avg-chart-student" class="apex-charts" data-colors="#f672a7"></div>
+                            </div> <!-- collapsed end -->
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+            </div> <!-- end card-->
+        </div> <!-- end col-->
+    </div>
     @include('teacher.dashboard.check_list')
 
 </div> <!-- container -->
@@ -199,6 +204,7 @@
     var getAttitudeGraphByStudent = "{{ config('constants.api.get_attitude_graph_by_student') }}";
     var getShortTestGraphByStudent = "{{ config('constants.api.get_short_test_by_student') }}";
     var getSubjectAbgGraphByStudent = "{{ config('constants.api.get_subject_average_by_student') }}";
+    var getExamMarksGraphByStudent = "{{ config('constants.api.get_exam_marks_by_student') }}";
 
 
 

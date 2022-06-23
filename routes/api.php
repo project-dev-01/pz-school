@@ -476,5 +476,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('get_attitude_graph_by_student', [ApiController::class, 'getAttitudeGraphByStudent']);
     Route::post('get_short_test_by_student', [ApiController::class, 'getShortTestByStudent']);
     Route::post('get_subject_average_by_student', [ApiController::class, 'getSubjectAverageByStudent']);
+    Route::post('get_exam_marks_by_student', [ApiController::class, 'getExamMarksByStudent']);
     
 });

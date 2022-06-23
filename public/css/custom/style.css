@@ -409,3 +409,50 @@ div.dt-buttons {
 .navbar-custom .button-menu-mobile {
 	color: black;
 }
+
+/*timetable css code*/
+.fc-title {
+	color: white;
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+}
+
+.fc-list-item-title {
+	color: white;
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+}
+
+.fc-list-item :hover {
+	color: black;
+}
+
+.fc-list-item {
+	background: #536050;
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+}
+
+.btn-primary {
+	color: black;
+	background-color: white;
+	border-color: #0ca99a;
+}
+
+.btn-primary:disabled {
+	color: black;
+	background-color: white;
+	border-color: #0ca99a;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active {
+	color: #fff;
+	background-color: #0ca99a;
+	border-color: #0ca99a;
+}

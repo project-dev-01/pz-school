@@ -439,6 +439,7 @@ return [
          'get_attitude_graph_by_student' => $url.'/get_attitude_graph_by_student',
          'get_short_test_by_student' => $url.'/get_short_test_by_student',
          'get_subject_average_by_student' => $url.'/get_subject_average_by_student',
+         'get_exam_marks_by_student' => $url.'/get_exam_marks_by_student',
 
          
         'reset_password' => $url.'/reset_password',

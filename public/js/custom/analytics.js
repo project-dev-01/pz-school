@@ -1,5 +1,7 @@
 $(function () {
     var attitudeChart;
+    var examResultChart;
+
     // monthly present,late,absent start
     // attendance report start
     colors = ["#1FAB44", "#FEB019", "#EB5234"];
@@ -110,23 +112,6 @@ $(function () {
                 return '<b>' + this.point.name + '</b>: ' + this.percentage + ' %';
             }
         },
-        // plotOptions: {
-        //     pie: {
-        //         startAngle: 0,
-        //         allowPointSelect: false,
-        //         dataLabels: {
-        //             softConnector: false,
-        //             enabled: true,
-        //             connectorWidth: 0,
-        //             formatter: function () {
-        //                 return Math.round((this.percentage * 100) / 100) + ' %';
-        //             },
-        //             distance: -30,
-        //             color: 'white'
-        //         },
-        //         showInLegend: true
-        //     }
-        // },
         plotOptions: {
             pie: {
                 allowPointSelect: true,
@@ -153,23 +138,6 @@ $(function () {
             itemMarginTop: 7,
             itemMarginBottom: 7,
         },
-        // series: [{
-        //     type: 'pie',
-        //     name: 'Browser share',
-        //     data: [
-        //         ['Firefox', 45.0],
-        //         ['IE', 26.8],
-        //         {
-        //             name: 'Chrome',
-        //             y: 12.8,
-        //             sliced: true,
-        //             selected: true
-        //         },
-        //         ['Safari', 8.5],
-        //         ['Opera', 6.2],
-        //         ['Others', 0.7]
-        //     ]
-        // }],
         series: [{
             type: 'pie',
             name: 'Attitude',
@@ -277,55 +245,6 @@ $(function () {
     };
     (subAvgChart = new ApexCharts(document.querySelector("#subject-avg-chart-student"), options)).render();
     // subject avg chart end
-    // exam result radar chart start
-    console.log("dfdsdf")
-    console.log($('#radar-analytic').length);
-    var ctx = document.getElementById("radar-analytic").getContext('2d');
-    var defaultColors = ["#1abc9c", "#f1556c", "#4a81d4", "#e3eaef"];
-    var newdataColors = $("#radar-analytic").data('colors');
-    var radarColors = newdataColors ? newdataColors.split(",") : defaultColors.concat();
-    // console.log("radarColors")
-    // console.log(radarColors)
-    var radarChart = new Chart(ctx, {
-        type: 'radar',
-        data: {
-            labels: ["Skill", "Grammer", "GeoGenius"],
-            // labels: ["Fever", "Bus Breakdown", "Book Missing", "Others"],
-            // labels: labels,
-            // datasets: [{
-            //     label: "Reasons",
-            //     backgroundColor: hexToRGB(colors[0], 0.3),
-            //     borderColor: colors[0],
-            //     pointBackgroundColor: colors[0],
-            //     pointBorderColor: "#fff",
-            //     pointHoverBackgroundColor: "#fff",
-            //     pointHoverBorderColor: colors[0],
-            //     data: resonsCount
-            // }]
-            datasets: [{
-                label: "Mid term",
-                backgroundColor: hexToRGB(radarColors[0], 0.3),
-                borderColor: radarColors[0],
-                pointBackgroundColor: radarColors[0],
-                pointBorderColor: "#fff",
-                pointHoverBackgroundColor: "#fff",
-                pointHoverBorderColor: radarColors[0],
-                data: [95, 45, 45]
-            },
-            {
-                label: "Annual",
-                backgroundColor: hexToRGB(radarColors[1], 0.3),
-                borderColor: radarColors[1],
-                pointBackgroundColor: radarColors[1],
-                pointBorderColor: "#fff",
-                pointHoverBackgroundColor: "#fff",
-                pointHoverBorderColor: radarColors[1],
-                data: [65, 75, 70]
-            }
-            ]
-        },
-    });
-    // exam result radar chart end
     // change class name
     $('#changeClassName').on('change', function () {
         // $(".classRoomHideSHow").hide();
@@ -394,6 +313,7 @@ $(function () {
         e.preventDefault();
         var analyticCrip = $("#analyticCrepFilter").valid();
         if (analyticCrip === true) {
+            $("#overlay").fadeIn(300);
             //   $("#overlay").fadeIn(300);
             // jQuery("body").prepend('<div id="preloader">Loading...</div>');
             var classID = $("#changeClassName").val();
@@ -418,6 +338,11 @@ $(function () {
             getShortTestReport(formData);
             // subject avg report chart
             getSubjectAvgReport(formData);
+            // exam result radar chart start
+            getExamResultReport(formData);
+            // exam result radar chart end
+            $("#overlay").fadeOut(300);
+
         }
     });
     // attendance report chart ajax
@@ -435,6 +360,7 @@ $(function () {
                     // analytics chart update series start
                     var newLabels = [];
                     var seriesData = [];
+                    $('#attendance_card').show();
                     if (late_present_graph.length > 0) {
                         // graph data
                         newLabels.push(late_present_graph[0].month);
@@ -467,6 +393,7 @@ $(function () {
                     // analytics chart update series start
                     var newLabels = [];
                     var seriesData = [];
+                    $('#homework_card').show();
                     // graph data
                     seriesData.push(homework.complete);
                     seriesData.push(homework.in_complete);
@@ -476,7 +403,6 @@ $(function () {
                         // labels: newLabels
                     })
                     // analytics chart update series end
-
                 }
             }
         });
@@ -495,6 +421,7 @@ $(function () {
                     var attitude = response.data;
                     // attitude chart update series start
                     if (attitude.length > 0) {
+                        $('#attitude_card').show();
                         // graph data
                         var total_no_of_days_date_count = attitude[0].total_no_of_days_date_count;
                         var smileCount = attitude[0].smileCount;
@@ -524,6 +451,8 @@ $(function () {
                             ['<i class="far fa-surprise" style="font-size:20px;color:#4960c4"> surprise</i> ', surpriseCount],
                             ['<i class="far fa-tired" style="font-size:20px;color:#ea2522"> tired</i> ', tiredCount]
                         ], true);
+                    } else {
+                        $('#attitude_card').hide();
                     }
                 }
             }
@@ -545,6 +474,7 @@ $(function () {
                 if (response.code == 200) {
                     var shorttest = response.data;
                     $('#shortTest').empty();
+                    $('#short_test_card').show();
                     var newRowContent = "";
                     var index = 1;
                     var marks = "marks";
@@ -611,39 +541,106 @@ $(function () {
                     var subjectAvgData = response.data;
                     var averageData = [];
                     var categoryData = [];
-                    // subject avg chart update series start
-                    subjectAvgData.forEach(function (res) {
-                        averageData.push(res.average);
-                        categoryData.push(res.exam_date);
-                    });
-                    // $('#subject_average_card').show();
-                    subAvgChart.updateOptions({
-                        xaxis: {
-                            type: "datetime",
-                            format: 'dd/MM',
-                            categories: categoryData
-                        }
-                    });
-                    subAvgChart.updateSeries([{
-                        name: "Average",
-                        data: averageData
-                    }]);
-                    // subject avg chart update series end
+                    if (subjectAvgData.length > 0) {
+                        // subject avg chart update series start
+                        subjectAvgData.forEach(function (res) {
+                            averageData.push(res.average);
+                            categoryData.push(res.exam_date);
+                        });
+                        $('#subject_average_card').show();
+                        // $('#subject_average_card').show();
+                        subAvgChart.updateOptions({
+                            xaxis: {
+                                type: "datetime",
+                                format: 'dd/MM',
+                                categories: categoryData
+                            }
+                        });
+                        subAvgChart.updateSeries([{
+                            name: "Average",
+                            data: averageData
+                        }]);
+                        // subject avg chart update series end
+                    } else {
+                        $('#subject_average_card').hide();
+                    }
+
 
                 }
             }
         });
     }
-    function hexToRGB(hex, alpha) {
-        var r = parseInt(hex.slice(1, 3), 16),
-            g = parseInt(hex.slice(3, 5), 16),
-            b = parseInt(hex.slice(5, 7), 16);
+    // exam result radar chart ajax
+    function getExamResultReport(formData) {
+        $.ajax({
+            url: getExamMarksGraphByStudent,
+            method: 'post',
+            data: formData,
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (response) {
+                if (response.code == 200) {
+                    console.log("response")
+                    console.log(response)
+                    var exam_details = response.data;
+                    var labels = [];
+                    var examMarks = [];
+                    var marks = [];
+                    if (exam_details.length > 0) {
+                        labels.push(exam_details[0].subject_name);
+                        $('#exam_result_card').show();
+                        $.each(exam_details, function (key, value) {
 
-        if (alpha) {
-            return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
+                            var obj = {};
+                            obj.label = value.exam_name;
+                            obj.backgroundColor = getRandomColor();
+                            marks.push(value.score);
+                            obj.data = marks;
+                            marks = [];
+                            examMarks.push(obj);
+                        });
+                        // chart
+                        renderChart(labels, examMarks);
+                    } else {
+                        $('#exam_result_card').hide();
+
+                    }
+
+
+                }
+            }
+        });
+    }
+
+    function renderChart(labels, examMarks) {
+
+        if (examResultChart) {
+            examResultChart.data.labels = labels;
+            examResultChart.data.datasets = examMarks;
+            examResultChart.update();
         } else {
-            return "rgb(" + r + ", " + g + ", " + b + ")";
+            var ctx = document.getElementById("exam-result-analytic").getContext('2d');
+            examResultChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: labels,
+                    datasets: examMarks
+                },
+            });
         }
+
+
+    }
+
+    // random color
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
     }
 
 

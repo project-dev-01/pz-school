@@ -38,7 +38,7 @@ $(function () {
             txt_retype_pwd: {
                 required: true,
                 minlength: 6,
-                equalTo: "txt_pwd"
+                equalTo: "#txt_pwd"
             },       
         }
     });
