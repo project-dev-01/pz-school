@@ -57,7 +57,14 @@ class AuthController extends BaseController
             if ($user->role->id == 5) {
                 $branch_id = $user->subsDetails->id;
                 $Connection = $this->createNewConnection($branch_id);
-                $StudentID = $Connection->table('students')->select('id')->where('id', $user->user_id)->first();
+                $StudentID = $Connection->table('students')
+                    ->select(
+                        'id',
+                        DB::raw("CONCAT(first_name, ' ', last_name) as name")
+                    )
+                    ->where('father_id', '=', $user->user_id)
+                    ->orWhere('mother_id', '=', $user->user_id)
+                    ->get();
                 $success['StudentID'] = $StudentID;
             }
 
@@ -66,8 +73,6 @@ class AuthController extends BaseController
         } else {
             return $this->send500Error('Your Account Locked, Please Contact Admin', ['error' => 'Your Account Locked, Please Contact Admin']);
         }
-        
-        
     }
 
     public function logout(Request $request)
@@ -104,9 +109,10 @@ class AuthController extends BaseController
         return $this->successResponse($success, 'Get User details');
     }
 
-    public function resetPassword (Request $request) {
+    public function resetPassword(Request $request)
+    {
 
-        $credentials = $request->only('email', 'password','password_confirmation');
+        $credentials = $request->only('email', 'password', 'password_confirmation');
         $validator = Validator::make($credentials, [
             'email' => 'required|email',
         ]);
@@ -117,7 +123,7 @@ class AuthController extends BaseController
         }
 
         $user = User::where('email', '=', $request->email)->first();
-        if($user === null){
+        if ($user === null) {
             return $this->send400Error('Email does not Exist.', ['error' => 'Email does not Exist']);
         }
 
@@ -127,67 +133,64 @@ class AuthController extends BaseController
             'token' => Str::random(60),
             'created_at' => Carbon::now()
         ]);
-        
+
         //Get the token just created above
         $tokenData = DB::table('password_resets')->where('email', $request->email)->first();
 
         if ($this->sendResetEmail($request->email, $tokenData->token)) {
-            return $this->successResponse('success','A reset link has been sent to your email address.');
+            return $this->successResponse('success', 'A reset link has been sent to your email address.');
         } else {
             return $this->send500Error('A Network Error occurred. Please try again.', ['error' => 'A Network Error occurred. Please try again.']);
         }
-        
     }
 
-    private function sendResetEmail($email, $token){
+    private function sendResetEmail($email, $token)
+    {
 
         //Retrieve the user from the database
-        $user = DB::table('users')->where('email', $email)->select('name','email')->first();
+        $user = DB::table('users')->where('email', $email)->select('name', 'email')->first();
 
         //Generate, the password reset link. The token generated is embedded in the link
-        $link = url('schoolcrm/password/reset').'/'.$token;
-        if($email){
-            $data = array('link'=>$link,'name'=> $user->name); 
-            
-            Mail::send('auth.mail', $data, function($message) use($email) {
-            $message->to('rajesh@aibots.my', 'members')->subject
-                ('Password Reset');
-            $message->from('rajesh@aibots.my','Password Reset');
-            });  
+        $link = url('schoolcrm/password/reset') . '/' . $token;
+        if ($email) {
+            $data = array('link' => $link, 'name' => $user->name);
+
+            Mail::send('auth.mail', $data, function ($message) use ($email) {
+                $message->to('rajesh@aibots.my', 'members')->subject('Password Reset');
+                $message->from('rajesh@aibots.my', 'Password Reset');
+            });
             return true;
-        }else{
+        } else {
             return false;
-        } 
+        }
     }
 
     public function resetPasswordValidation(Request $request)
     {
-        $credentials = $request->only('email', 'password','password_confirmation');
+        $credentials = $request->only('email', 'password', 'password_confirmation');
         $validator = Validator::make($credentials, [
             'email' => 'required|email|exists:users',
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required',
-    
+
         ]);
 
         if ($validator->fails()) {
             return $this->send422Error('Validation error.', ['error' => $validator->messages()]);
         }
-            
-        $updatePassword = DB::table('password_resets')
-                            ->where(['email' => $request->email, 'token' => $request->token])
-                            ->first();   
-                            //  dd($updatePassword);
-        if($updatePassword)
-        {
-            $user = User::where('email', $request->email)
-                        ->update(['password' => bcrypt($request->password)]);
-    
-            DB::table('password_resets')->where(['email'=> $request->email])->delete();
 
-            return $this->successResponse('success','Your password has been changed!');
-    
-        }else{
+        $updatePassword = DB::table('password_resets')
+            ->where(['email' => $request->email, 'token' => $request->token])
+            ->first();
+        //  dd($updatePassword);
+        if ($updatePassword) {
+            $user = User::where('email', $request->email)
+                ->update(['password' => bcrypt($request->password)]);
+
+            DB::table('password_resets')->where(['email' => $request->email])->delete();
+
+            return $this->successResponse('success', 'Your password has been changed!');
+        } else {
             return $this->send500Error('Invalid token!', ['error' => 'Invalid token!']);
         }
     }

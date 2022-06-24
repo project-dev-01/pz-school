@@ -440,7 +440,9 @@ return [
          'get_short_test_by_student' => $url.'/get_short_test_by_student',
          'get_subject_average_by_student' => $url.'/get_subject_average_by_student',
          'get_exam_marks_by_student' => $url.'/get_exam_marks_by_student',
-
+         'get_student_by_all_subjects' => $url.'/get_student_by_all_subjects',
+         'get_class_section_by_student' => $url.'/get_class_section_by_student',
+         
          
         'reset_password' => $url.'/reset_password',
         'reset_password_validation' => $url.'/reset_password_validation',

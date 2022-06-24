@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use App\Models\User;
 use App\Models\Task;
+
 class StudentController extends Controller
 {
     //
@@ -87,9 +88,9 @@ class StudentController extends Controller
             'file' => $base64,
             'file_extension' => $extension,
         ];
-        
+
         $response = Helper::PostMethod(config('constants.api.homework_submit'), $data);
-        
+
         return $response;
     }
 
@@ -104,39 +105,33 @@ class StudentController extends Controller
         ];
         $homework = Helper::PostMethod(config('constants.api.homework_student_filter'), $data);
         // dd($homework);
-        if($homework['code']=="200")
-        {
-            $response ="";
-            if($homework['data'])
-            {
-                foreach($homework['data']['homeworks'] as $work)
-                {
+        if ($homework['code'] == "200") {
+            $response = "";
+            if ($homework['data']) {
+                foreach ($homework['data']['homeworks'] as $work) {
                     $evaluation_date = (isset($work['evaluation_date'])) ? date('F j , Y', strtotime($work['evaluation_date'])) : "-";
-                    if($work['status'] == 1) 
-                    {
+                    if ($work['status'] == 1) {
                         $status = "Completed";
                         $top = "( Completed )";
-                    }else{
+                    } else {
                         $status = "InCompleted";
-                        $top= "";
+                        $top = "";
                     }
 
-                    
-                    if($work['status'] == 1)
-                    {
-                        $file='<div class="col-md-4">
+
+                    if ($work['status'] == 1) {
+                        $file = '<div class="col-md-4">
                         <div class="row">
                             <div class="col-md-5 font-weight-bold">Attachment File: </div>
                             <div class="col-md-3">
-                                <a href="'.asset('student/homework/').'/'.$work['file'].'" download>
+                                <a href="' . asset('student/homework/') . '/' . $work['file'] . '" download>
                                     <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
                                 </a>
                             </div>
                         </div>
                     </div>';
-
-                    }else{
-                            $file = '<div class="col-md-4">
+                    } else {
+                        $file = '<div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-5 font-weight-bold">Attachment File: </div>
                                 <div class="col-md-5">
@@ -150,15 +145,15 @@ class StudentController extends Controller
                             </button>
                         </div>';
                     }
-                    $response.= '<form class="submitHomeworkForm" action="'.route('student.homework.submit').'" method="post"   enctype="multipart/form-data" autocomplete="off">
-                    '.csrf_field() .'
+                    $response .= '<form class="submitHomeworkForm" action="' . route('student.homework.submit') . '" method="post"   enctype="multipart/form-data" autocomplete="off">
+                    ' . csrf_field() . '
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <p>
                                 <div>
                                     <a class="list-group-item list-group-item-info btn-block btn-lg" data-toggle="collapse" href="#English" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                        <i class="fas fa-caret-square-down"></i>'.$work['subject_name'].' - '. date('j F Y', strtotime($work['date_of_homework'])) .' '.$top.'
+                                        <i class="fas fa-caret-square-down"></i>' . $work['subject_name'] . ' - ' . date('j F Y', strtotime($work['date_of_homework'])) . ' ' . $top . '
                                     </a>
                                 </div>
                                 </p>
@@ -168,19 +163,19 @@ class StudentController extends Controller
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-5 font-weight-bold">Title :</div>
-                                                    <div class="col-md-3">'.$work['title'].'</div>
+                                                    <div class="col-md-3">' . $work['title'] . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-5 font-weight-bold">Status :</div>
-                                                    <div class="col-md-3">'.$status.'</div>
+                                                    <div class="col-md-3">' . $status . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-5 font-weight-bold">Date Of Homework :</div>
-                                                    <div class="col-md-3">'.date('F j , Y', strtotime($work['date_of_homework'])).'</div>
+                                                    <div class="col-md-3">' . date('F j , Y', strtotime($work['date_of_homework'])) . '</div>
                                                 </div>
                                             </div>
 
@@ -190,19 +185,19 @@ class StudentController extends Controller
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-5 font-weight-bold">Date Of Submission :</div>
-                                                    <div class="col-md-3">'.date('F j , Y', strtotime($work['date_of_submission'])).'</div>
+                                                    <div class="col-md-3">' . date('F j , Y', strtotime($work['date_of_submission'])) . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-5 font-weight-bold">Evalution Date :</div>
-                                                    <div class="col-md-3">'.$evaluation_date.'</div>
+                                                    <div class="col-md-3">' . $evaluation_date . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-5 font-weight-bold">Remarks :</div>
-                                                    <div class="col-md-3">'.$work['description'].'</div>
+                                                    <div class="col-md-3">' . $work['description'] . '</div>
                                                 </div>
                                             </div>
                                         </div><br />
@@ -211,14 +206,14 @@ class StudentController extends Controller
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-5 font-weight-bold">Rank Out Of 5 :</div>
-                                                    <div class="col-md-3">'.$work['rank'].'</div>
+                                                    <div class="col-md-3">' . $work['rank'] . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-5 font-weight-bold">Document :</div>
                                                     <div class="col-md-3">
-                                                        <a href="'.asset('teacher/homework/').'/'.$work['document'].'" download>
+                                                        <a href="' . asset('teacher/homework/') . '/' . $work['document'] . '" download>
                                                             <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
                                                         </a>
                                                     </div>
@@ -230,17 +225,17 @@ class StudentController extends Controller
                                             <div class="col-md-12 font-weight-bold">Submission Process Here :- </div>
 
                                         </div><br>
-                                        <input type="hidden" name="homework_id" value="'.$work['id'].'">
+                                        <input type="hidden" name="homework_id" value="' . $work['id'] . '">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-5 font-weight-bold">Note : </div>
                                                     <div class="col-md-5">
-                                                        <textarea  name="remarks" rows="4" cols="25">'.$work['remarks'].'</textarea>
+                                                        <textarea  name="remarks" rows="4" cols="25">' . $work['remarks'] . '</textarea>
                                                     </div>
                                                 </div>
                                             </div>
-                                            '.$file.'
+                                            ' . $file . '
                                         </div>
                                     </div>
                                 </div>
@@ -254,7 +249,7 @@ class StudentController extends Controller
             $homework['list'] = $response;
             $homework['subject'] = $homework['data']['subject'];
         }
-        
+
         return $homework;
     }
     // Home work screen pages end
@@ -266,15 +261,15 @@ class StudentController extends Controller
     // report card
     public function reportCard()
     {
-        $datas=array();
-        $allexams=Helper::PostMethod(config('constants.api.all_exams_list'),$datas);
+        $datas = array();
+        $allexams = Helper::PostMethod(config('constants.api.all_exams_list'), $datas);
         //dd($allexams);
         return view(
             'student.report_card.index',
-            [         
-                'allexams' => $allexams['data']      
+            [
+                'allexams' => $allexams['data']
             ]
-        );  
+        );
     }
     // event screen
     public function events()
@@ -291,7 +286,8 @@ class StudentController extends Controller
         return view('student.library.issued_book');
     }
     // forum screen pages start
-    public function forumIndex(){
+    public function forumIndex()
+    {
         // $user_id= session()->get('user_id');  
         // $data = [            
         //     'user_id' => $user_id
@@ -300,15 +296,15 @@ class StudentController extends Controller
         $data = [
             'user_id' => $user_id
         ];
-        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$data); 
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'), $data);
         //dd($forum_list);
-          return view('student.forum.index', [
+        return view('student.forum.index', [
             //'forum_list' => $forum_list['data']
             'forum_list' => !empty($forum_list['data']) ? $forum_list['data'] : []
         ]);
-       
     }
-    public function forumPageSingleTopic(){
+    public function forumPageSingleTopic()
+    {
         return view('student.forum.page-single-topic');
     }
     public function forumPageCreateTopic()
@@ -322,29 +318,29 @@ class StudentController extends Controller
             'user_id' => $user_id
         ];
         $category = Helper::GetMethod(config('constants.api.category'));
-        $usernames = Helper::GETMethodWithData(config('constants.api.usernames_autocomplete'),$data);
+        $usernames = Helper::GETMethodWithData(config('constants.api.usernames_autocomplete'), $data);
         //dd($usernames);
-        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$data);
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'), $data);
         // dd($forum_list);
         return view('student.forum.page-create-topic', [
             'category' => $category['data'],
             //'forum_list' => $forum_list['data'],
             'forum_list' => !empty($forum_list['data']) ? $forum_list['data'] : [],
             'usernames' => $usernames['data']
-        ]);  
+        ]);
     }
     public function forumPageSingleUser()
     {
-        $user_id= session()->get('user_id');  
-        $data = [            
+        $user_id = session()->get('user_id');
+        $data = [
             'user_id' => $user_id
         ];
         $forum_post_user_crd = Helper::GETMethodWithData(config('constants.api.forum_post_user_created'), $data);
         $forum_categorypost_user_crd = Helper::GETMethodWithData(config('constants.api.forum_categorypost_user_created'), $data);
         $forum_post_user_allreplies = Helper::GETMethodWithData(config('constants.api.forum_posts_user_repliesall'), $data);
         $forum_userthreadslist = Helper::GETMethodWithData(config('constants.api.forum_userthreadslist'), $data);
-       // dd($forum_threadslist);
-        return view('student.forum.page-single-user', [            
+        // dd($forum_threadslist);
+        return view('student.forum.page-single-user', [
             // 'forum_post_user_crd' => $forum_post_user_crd['data'],
             // 'forum_categorypost_user_crd' => $forum_categorypost_user_crd['data'],
             // 'forum_post_user_allreplies' => $forum_post_user_allreplies['data'],
@@ -355,29 +351,35 @@ class StudentController extends Controller
             'forum_userthreadslist' => !empty($forum_userthreadslist['data']) ? $forum_userthreadslist['data'] : []
         ]);
     }
-    public function forumPageSingleThreads(){
+    public function forumPageSingleThreads()
+    {
         return view('student.forum.page-single-threads');
     }
-    public function forumPageSingleReplies(){
+    public function forumPageSingleReplies()
+    {
         return view('student.forum.page-single-replies');
     }
-    public function forumPageSingleFollowers(){
+    public function forumPageSingleFollowers()
+    {
         return view('student.forum.page-single-followers');
     }
-    public function forumPageSingleCategories(){
+    public function forumPageSingleCategories()
+    {
         return view('student.forum.page-single-categories');
     }
-    public function forumPageCategories(){
-        $user_id= session()->get('user_id');  
-        $data = [            
+    public function forumPageCategories()
+    {
+        $user_id = session()->get('user_id');
+        $data = [
             'user_id' => $user_id
         ];
-        $listcategoryvs = Helper::GETMethodWithData(config('constants.api.listcategoryvs'),$data);
+        $listcategoryvs = Helper::GETMethodWithData(config('constants.api.listcategoryvs'), $data);
         return view('student.forum.page-categories', [
             'listcategoryvs' => $listcategoryvs['data']
         ]);
     }
-    public function forumPageCategoriesSingle($categId, $user_id, $category_names){
+    public function forumPageCategoriesSingle($categId, $user_id, $category_names)
+    {
         session()->put('session_category_names', $category_names);
         $data = [
             'categId' => $categId,
@@ -389,19 +391,21 @@ class StudentController extends Controller
             'forum_category' => $forum_category['data']
         ]);
     }
-    public function forumPageTabs(){
+    public function forumPageTabs()
+    {
         return view('student.forum.page-tabs');
     }
-    public function forumPageTabGuidelines(){
+    public function forumPageTabGuidelines()
+    {
         return view('student.forum.page-tabs-guidelines');
     }
     // forum create post 
     public function createpost(Request $request)
     {
-        $current_user=session()->get('role_id');
-        $rollid_tags=$request->tags;
-        $adminid=2;
-        $tags_add_also_currentroll=$rollid_tags .','.$current_user.','.$adminid;        
+        $current_user = session()->get('role_id');
+        $rollid_tags = $request->tags;
+        $adminid = 2;
+        $tags_add_also_currentroll = $rollid_tags . ',' . $current_user . ',' . $adminid;
         $data = [
             'user_id' => session()->get('user_id'),
             'user_name' => session()->get('name'),
@@ -427,7 +431,7 @@ class StudentController extends Controller
         $singlepost_repliesData = [
             'created_post_id' => $id,
             'user_id' => $user_id,
-        ]; 
+        ];
         // $user_id = session()->get('user_id');
         // $usdata = [
         //     'user_id' => $user_id
@@ -436,8 +440,8 @@ class StudentController extends Controller
         $usdata = [
             'user_id' => $user_id
         ];
-       
-        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$usdata);
+
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'), $usdata);
         $forum_singlepost = Helper::GETMethodWithData(config('constants.api.forum_single_post'), $data);
         $forum_singlepost_replies = Helper::GETMethodWithData(config('constants.api.forum_single_post_replies'), $data);
         //dd($forum_singlepost_replies);         
@@ -487,15 +491,28 @@ class StudentController extends Controller
             ]);
         }
     }
-     // faq screen pages end
-     public function homeworkredirect()
-     {
-         return view('student.homework.hmeworklist');
-     }
-     public function analytic()
-     {
-         return view('student.analyticrep.analyticreport');
-     }
+    // faq screen pages end
+    public function homeworkredirect()
+    {
+        return view('student.homework.hmeworklist');
+    }
+    public function analytic()
+    {
+        $data = [
+            'student_id' => session()->get('ref_user_id')
+        ];
+        $get_student_by_all_subjects = Helper::PostMethod(config('constants.api.get_student_by_all_subjects'), $data);
+        $get_class_section_by_student = Helper::PostMethod(config('constants.api.get_class_section_by_student'), $data);
+
+        // dd($get_class_section_by_student['data']['student_id']);
+        return view(
+            'student.analyticrep.analyticreport',
+            [
+                'get_student_by_all_subjects' => $get_student_by_all_subjects['data'],
+                'get_class_section_by_student' => $get_class_section_by_student['data']
+            ]
+        );
+    }
 
     public function timetable(Request $request)
     {
@@ -516,8 +533,7 @@ class StudentController extends Controller
         );
         // dd($request);
         $timetable = Helper::PostMethod(config('constants.api.timetable_student'), $data);
-        if($timetable['code']=="200")
-        {
+        if ($timetable['code'] == "200") {
             return view(
                 'student.timetable.index',
                 [
@@ -525,10 +541,10 @@ class StudentController extends Controller
                     'details' => $timetable['data']['details'],
                     'days' => $days,
                     'max' => $timetable['data']['max']
-   
+
                 ]
             );
-        }else{
+        } else {
             return view(
                 'student.timetable.index',
                 [
@@ -537,5 +553,4 @@ class StudentController extends Controller
             );
         }
     }
-     
 }

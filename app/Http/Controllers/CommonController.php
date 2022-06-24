@@ -32,6 +32,18 @@ class CommonController extends Controller
             return false;
         }
     }
+    // update child id
+    public function updateStudentID(Request $request)
+    {
+        // dd($request);
+        if (session()->has('student_id') || $request->student_id) {
+            session()->pull('student_id');
+            $request->session()->put('student_id', $request->student_id);
+            return true;
+        } else {
+            return false;
+        }
+    }
     public function showApplicationForm()
     {
         return view('school-application-form');

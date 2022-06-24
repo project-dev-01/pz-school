@@ -84,11 +84,16 @@
         <div class="col-xl-6 col-md-6" id="attendance_card" style="display:none">
             <!-- Portlet card -->
             <div class="card">
-                <h4 class="navv"> Attendance Report
-                </h4>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">
+                            Attendance Report
+                            <h4>
+                    </li>
+                </ul><br>
                 <div class="card-body">
                     <div class="col-md-12">
-                        <div id="cardCollpaseAttrep" class="collapse pt-3 show" dir="ltr">
+                        <div id="cardCollpaseAttrep" class="collapse pt-4 show" dir="ltr">
                             <div id="anylitc-attend" class="apex-charts" data-colors="#F5AA26,#F1556C,#4FC6E1"></div>
                         </div> <!-- collapsed end -->
                     </div>
@@ -97,8 +102,13 @@
         </div> <!-- end col-->
         <div class="col-xl-6 col-md-6" id="homework_card" style="display:none">
             <div class="card">
-                <h4 class="navv">HomeWork
-                </h4>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">
+                            HomeWork Report
+                            <h4>
+                    </li>
+                </ul><br>
                 <div class="card-body">
                     <div class="col-md-12">
                         <div id="cardCollpase19" class="collapse pt-4 show" style="text-align:center" dir="ltr">
@@ -110,12 +120,18 @@
         </div> <!-- end col-->
     </div>
     <div class="row" id="attitude_card" style="display:none">
-        <div class="col-md-12">
+        <div class="col-lg-12">
             <div class="card">
-                <h4 class="navv"> Attitude
-                </h4>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">
+                            Attitude
+                            <h4>
+                    </li>
+                </ul><br>
+
                 <div class="card-body">
-                    <div class="col-md-12">
+                    <div class="col-lg-12">
                         <div class="" style="text-align:center">
                             <div id="attitude" class="attitude"></div>
                             <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
@@ -139,11 +155,9 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="card-box">
-                                <div id="shortTest"></div>
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
-                    </div>
+                            <div id="shortTest"></div>
+                        </div> <!-- end card-box -->
+                    </div> <!-- end col -->
                     <!--- end row -->
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
@@ -152,12 +166,17 @@
     <div class="row" id="exam_result_card" style="display:none">
         <div class="col-md-12">
             <div class="card">
-                <h4 class="navv"> Exam Result
-                </h4>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">
+                            Exam Result
+                            <h4>
+                    </li>
+                </ul><br>
                 <div class="card-body">
                     <div class="col-md-12">
                         <div class="mt-4 chartjs-chart">
-                            <canvas id="exam-result-analytic" height="400" ></canvas>
+                            <canvas id="exam-result-analytic"></canvas>
                         </div>
                     </div>
                 </div> <!-- end card-body -->
@@ -167,27 +186,30 @@
     <div class="row" id="subject_average_card" style="display:none">
         <div class="col-md-12">
             <div class="card">
-                <h4 class="navv"> Subject Average
-                </h4>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">
+                            Subject Average
+                            <h4>
+                    </li>
+                </ul><br>
                 <div class="col-xl-12">
                     <!-- Portlet card -->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-widgets">
-                                <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                                <a data-toggle="collapse" href="#cardCollpase3" role="button" aria-expanded="false" aria-controls="cardCollpase3"><i class="mdi mdi-minus"></i></a>
-                                <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
-                            </div>
+                    <div class="card-body">
+                        <div class="card-widgets">
+                            <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                            <a data-toggle="collapse" href="#cardCollpase3" role="button" aria-expanded="false" aria-controls="cardCollpase3"><i class="mdi mdi-minus"></i></a>
+                            <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                        </div>
+                        <div id="cardCollpase3" class="collapse pt-3 show" dir="ltr">
+                            <div id="subject-avg-chart-student" class="apex-charts" data-colors="#f672a7"></div>
+                        </div> <!-- collapsed end -->
+                    </div> <!-- end card-body -->
+                </div> <!-- end card-->
+            </div> <!-- end col-->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
 
-                            <div id="cardCollpase3" class="collapse pt-3 show" dir="ltr">
-                                <div id="subject-avg-chart-student" class="apex-charts" data-colors="#f672a7"></div>
-                            </div> <!-- collapsed end -->
-                        </div> <!-- end card-body -->
-                    </div> <!-- end card-->
-                </div> <!-- end col-->
-            </div> <!-- end card-->
-        </div> <!-- end col-->
-    </div>
     @include('teacher.dashboard.check_list')
 
 </div> <!-- container -->

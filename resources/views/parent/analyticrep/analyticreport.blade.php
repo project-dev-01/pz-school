@@ -22,190 +22,196 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv"> Select Ground
+                        <h4 class="navv">
+                            Select Ground
                             <h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="demo-form" data-parsley-validate="">
+                    <form id="analyticCrepFilter" autocomplete="off">
+                        <input type="hidden" id="studentID" class="form-control" name="student_id" value="{{ $get_class_section_by_student['student_id'] }}">
+                        <input type="hidden" id="changeClassName" class="form-control" name="class_id" value="{{ $get_class_section_by_student['class_id'] }}">
+                        <input type="hidden" id="sectionID" class="form-control" name="section_id" value="{{ $get_class_section_by_student['section_id'] }}">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="heard">Subject<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
+                                    <label for="subjectID">Subject<span class="text-danger">*</span></label>
+                                    <select id="subjectID" class="form-control" name="subject_id">
                                         <option value="">Select Subject</option>
-                                        <option value="press">All</option>
-                                        <option value="press">English</option>
-                                        <option value="">Mathematics</option>
-                                        <option value="press">History</option>
-                                        <option value="">Study of the Environment</option>
-                                        <option value="press">Geography</option>
-                                        <option value="">Natural Sciences</option>
-                                        <option value="press">Civics Education</option>
-                                        <option value="">Arts Education</option>
-
+                                        @forelse ($get_student_by_all_subjects as $subject)
+                                        <option value="{{ $subject['subject_id'] }}">{{ $subject['subject_name'] }}</option>
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
 
                         </div>
+                        <div>
+                            <div class="form-group text-right m-b-0">
+                                <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                    Filter
+                                </button>
+                            </div>
+                        </div>
                     </form>
-                    <div class="form-group text-right m-b-0">
-                        <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Filter
-                        </button>
-                    </div>
-
-                </div> <!-- end card-body -->
+                </div>
             </div> <!-- end card-->
         </div> <!-- end col -->
     </div>
     <div class="row">
-        <div class="col-xl-4 col-md-6">
+        <div class="col-xl-6 col-md-6" id="attendance_card" style="display:none">
+            <!-- Portlet card -->
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv"> Attendance Report
+                        <h4 class="navv">
+                            Attendance Report
                             <h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
                     <div class="col-md-12">
-                        <div class="mt-4 chartjs-chart" style="text-align:center">
-                            <div id="anylitc-attend" style="min-height: 365px;"></div>
-                            <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
-                        </div>
+                        <div id="cardCollpaseAttrep" class="collapse pt-4 show" dir="ltr">
+                            <div id="anylitc-attend" class="apex-charts" data-colors="#F5AA26,#F1556C,#4FC6E1"></div>
+                        </div> <!-- collapsed end -->
                     </div>
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
         </div> <!-- end col-->
-        <div class="col-xl-4 col-md-6">
+        <div class="col-xl-6 col-md-6" id="homework_card" style="display:none">
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv"> HomeWork Report
+                        <h4 class="navv">
+                            HomeWork Report
                             <h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
                     <div class="col-md-12">
                         <div id="cardCollpase19" class="collapse pt-4 show" style="text-align:center" dir="ltr">
-                            <div id="homework-status" class="apex-charts" data-colors="#00b19d,#f1556c"></div>
+                            <div id="homework-status" class="apex-charts" data-colors="#1FAB44,#f1556c,#4FC6E1"></div>
                         </div> <!-- collapsed end -->
                     </div>
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
-    <div class="row">
+    <div class="row" id="attitude_card" style="display:none">
         <div class="col-lg-12">
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv"> Attitude
+                        <h4 class="navv">
+                            Attitude
                             <h4>
                     </li>
                 </ul><br>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="">
 
-                                <!-- <div id="statistics-dynam" data-colors="#02c0ce" class="morris-chart mt-3"></div>
-                            <div id="legend"></div> 
-
-                            <div id="cardCollpase5" class="collapse pt-3 show" dir="ltr">
-                            <div id="apex-column-1" class="apex-charts" data-colors="#3283f6,#44cf9c,#CED4DC"></div>
-                            </div>  collapsed end -->
-                                <div id="attitude" class="attitude"></div>
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
-                    </div>
-                    <!--- end row -->
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">Short Test
-                            <h4>
-                    </li>
-                </ul><br>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="">
-                                <div class="table-responsive">
-                                    <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable ">
-                                        <thead>
-                                            <tr>
-                                                <th>S.no</th>
-                                                <th>Short Test Name</th>
-                                                <th>Grade</th>
-                                                <th>Mark</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>1</th>
-                                                <th>Skill</th>
-                                                <td>A</td>
-                                                <td>-</td>
-                                            </tr>
-                                            <tr>
-                                                <th>2</th>
-                                                <th>Grammer</th>
-                                                <td>-</td>
-                                                <td>45</td>
-                                            </tr>
-                                            <tr>
-                                                <th>3</th>
-                                                <th>GeoGenius</th>
-                                                <td>-</td>
-                                                <td>45</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
-                    </div>
-                    <!--- end row -->
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv"> Exam Result
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="radar-analytic" height="400" data-colors="#39afd1,#a17fe0"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mt-4 chartjs-chart">
-                                <div id="line-23" class="apex-charts" data-colors="#f672a7"></div>
-                            </div>
+                    <div class="col-lg-12">
+                        <div class="" style="text-align:center">
+                            <div id="attitude" class="attitude"></div>
+                            <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
                         </div>
                     </div>
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
+
+    <div class="row" id="short_test_card" style="display:none">
+        <div class="col-lg-12">
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">
+                            Short Test
+                            <h4>
+                    </li>
+                </ul><br>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="shortTest"></div>
+                        </div> <!-- end card-box -->
+                    </div> <!-- end col -->
+                    <!--- end row -->
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+    <div class="row" id="exam_result_card" style="display:none">
+        <div class="col-md-12">
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">
+                            Exam Result
+                            <h4>
+                    </li>
+                </ul><br>
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <div class="mt-4 chartjs-chart">
+                            <canvas id="exam-result-analytic"></canvas>
+                        </div>
+                    </div>
+                </div> <!-- end card-body -->
+            </div> <!-- end card-->
+        </div> <!-- end col-->
+    </div>
+    <div class="row" id="subject_average_card" style="display:none">
+        <div class="col-md-12">
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">
+                            Subject Average
+                            <h4>
+                    </li>
+                </ul><br>
+                <div class="col-xl-12">
+                    <!-- Portlet card -->
+                    <div class="card-body">
+                        <div class="card-widgets">
+                            <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                            <a data-toggle="collapse" href="#cardCollpase3" role="button" aria-expanded="false" aria-controls="cardCollpase3"><i class="mdi mdi-minus"></i></a>
+                            <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                        </div>
+                        <div id="cardCollpase3" class="collapse pt-3 show" dir="ltr">
+                            <div id="subject-avg-chart-student" class="apex-charts" data-colors="#f672a7"></div>
+                        </div> <!-- collapsed end -->
+                    </div> <!-- end card-body -->
+                </div> <!-- end card-->
+            </div> <!-- end col-->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+
     @include('teacher.dashboard.check_list')
 
 </div> <!-- container -->
+@endsection
+@section('scripts')
+<!-- hightcharts js -->
+<script src="{{ asset('js/highcharts/highcharts.js') }}"></script>
+<script>
+    var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
+    var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";
+    var getStudentListByClassSection = "{{ config('constants.api.get_student_list_by_class_section') }}";
+    var getAttendanceLateGraph = "{{ config('constants.api.get_attendance_late_graph') }}";
+    var getHomeworkGraphByStudent = "{{ config('constants.api.get_homework_graph_by_student') }}";
+    var getAttitudeGraphByStudent = "{{ config('constants.api.get_attitude_graph_by_student') }}";
+    var getShortTestGraphByStudent = "{{ config('constants.api.get_short_test_by_student') }}";
+    var getSubjectAbgGraphByStudent = "{{ config('constants.api.get_subject_average_by_student') }}";
+    var getExamMarksGraphByStudent = "{{ config('constants.api.get_exam_marks_by_student') }}";
+
+
+
+    // default image test
+    var defaultImg = "{{ asset('images/users/default.jpg') }}";
+    var studentImg = "{{ asset('users/images/') }}";
+</script>
+<script src="{{ asset('js/custom/analytics_parent_student.js') }}"></script>
 @endsection

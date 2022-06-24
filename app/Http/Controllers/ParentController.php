@@ -14,10 +14,10 @@ class ParentController extends Controller
     //
     public function index(Request $request)
     {
-        $request->session()->put('children_id', "1");
+        // $request->session()->put('children_id', "1");
 
         $user_id = session()->get('user_id');
-        $student_id = session()->get('children_id');
+        $student_id = session()->get('student_id');
         $parent_id = session()->get('ref_user_id');
 
         $data = [
@@ -168,7 +168,7 @@ class ParentController extends Controller
     public function timeTable(Request $request)
     {
         $parent = session()->get('ref_user_id');
-        $children_id = session()->get('children_id');
+        $children_id = session()->get('student_id');
         $data = [
             'parent_id' => $parent,
             'children_id' => $children_id
@@ -432,7 +432,7 @@ class ParentController extends Controller
     // Home work screen pages start
     public function homeworklist()
     {
-        $student = session()->get('children_id');
+        $student = session()->get('student_id');
         $data = [
             'student_id' => $student,
         ];
@@ -454,7 +454,7 @@ class ParentController extends Controller
     //Filter  Homework
     public function filterHomework(Request $request)
     {
-        $student = session()->get('children_id');
+        $student = session()->get('student_id');
         $data = [
             'status' => $request->status,
             'subject' => $request->subject,
@@ -610,8 +610,8 @@ class ParentController extends Controller
     public function children()
     {
 
-        if (session()->has('children_id')) {
-            session()->pull('children_id');
+        if (session()->has('student_id')) {
+            session()->pull('student_id');
         }
         return view('parent.dashboard.children');
     }
@@ -621,6 +621,19 @@ class ParentController extends Controller
     }
     public function analytic()
     {
-        return view('parent.analyticrep.analyticreport');
+        $data = [
+            'student_id' => session()->get('student_id')
+        ];
+        $get_student_by_all_subjects = Helper::PostMethod(config('constants.api.get_student_by_all_subjects'), $data);
+        $get_class_section_by_student = Helper::PostMethod(config('constants.api.get_class_section_by_student'), $data);
+        
+        // dd($get_class_section_by_student['data']['student_id']);
+        return view(
+            'parent.analyticrep.analyticreport',
+            [
+                'get_student_by_all_subjects' => $get_student_by_all_subjects['data'],
+                'get_class_section_by_student' => $get_class_section_by_student['data']
+            ]
+        );
     }
 }

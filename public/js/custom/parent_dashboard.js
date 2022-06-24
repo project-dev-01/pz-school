@@ -226,6 +226,7 @@ $(function () {
     function StudentLeave_tabel() {
         $('#studentleave-table').DataTable({
             processing: true,
+            bDestroy: true,
             info: true,
             dom: 'lBfrtip',
             buttons: [

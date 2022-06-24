@@ -33,12 +33,36 @@ $(function () {
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
             year = d.getFullYear();
-    
-        if (month.length < 2) 
+
+        if (month.length < 2)
             month = '0' + month;
-        if (day.length < 2) 
+        if (day.length < 2)
             day = '0' + day;
-    
+
         return [year, month, day].join('-');
     }
+    // change child
+    $('.allChild').on('change', '#changeChildren', function (event) {
+        event.preventDefault();
+        var childID = $(this).val();
+        console.log("childID");
+        console.log(childID);
+        $.ajax({
+            type: "POST",
+            url: updateChildSessionID,
+            data: { student_id: childID },
+            success: function (res) {
+                // console.log("--------")
+                // console.log(res)
+                location.reload();
+            }
+            // , error: function (err) {
+            //     console.log("--------")
+            //     console.log(err)
+            // }
+        });
+
+    });
+
+
 });

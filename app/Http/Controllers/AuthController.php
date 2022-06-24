@@ -61,10 +61,13 @@ class AuthController extends Controller
                     $request->session()->put('branch_id', $userDetails['data']['subsDetails']['id']);
                     $request->session()->put('school_name', $userDetails['data']['subsDetails']['school_name']);
                     $request->session()->put('school_logo', $userDetails['data']['subsDetails']['logo']);
+                    // dd($userDetails['data']['StudentID'][0]['id']);
                     if(isset($userDetails['data']['StudentID'])){
-                        $request->session()->put('student_id', $userDetails['data']['StudentID']['id']);
+                        $request->session()->put('student_id', $userDetails['data']['StudentID'][0]['id']);
+                        $request->session()->put('all_child', $userDetails['data']['StudentID']);
                     }else{
                         $request->session()->put('student_id', null);
+                        $request->session()->put('all_child', null);
                     }
                     
                     // $request->session()->put('db_name', $userDetails['data']['subsDetails']['db_name']);
@@ -158,6 +161,7 @@ class AuthController extends Controller
             session()->pull('student_id');
             session()->pull('school_name');
             session()->pull('school_logo');
+            session()->pull('all_child');
             // session()->pull('db_name');
             // session()->pull('db_username');
             // session()->pull('db_password');

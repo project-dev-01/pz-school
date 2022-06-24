@@ -13748,4 +13748,64 @@ class ApiController extends BaseController
             return $this->successResponse($getStudBehaviour, 'exam result record fetch successfully');
         }
     }
+    // get student by all subjects
+    function getStudentByAllSubjects(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'student_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $getStudentAllSubjects = $Connection->table('enrolls as en')
+                ->select(
+                    // 'en.student_id',
+                    // 'en.class_id',
+                    // 'en.section_id',
+                    'sa.subject_id',
+                    'sb.name as subject_name'
+                )
+                ->join('subject_assigns as sa', function ($q) {
+                    $q->on('sa.class_id', '=', 'en.class_id')
+                        ->on('sa.section_id', '=', 'en.section_id');
+                })
+                ->join('subjects as sb', 'sb.id', '=', 'sa.subject_id')
+                ->where([
+                    ['en.student_id', '=', $request->student_id],
+                    ['sa.type', '=', '0']
+                ])
+                ->groupBy('sa.subject_id')
+                ->get();
+
+            return $this->successResponse($getStudentAllSubjects, 'get all subjects fetch successfully');
+        }
+    }
+    // get class section by student
+    function getClassSectionByStudent(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'student_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $getStudentClassSection = $Connection->table('enrolls as en')
+                ->select(
+                    'en.student_id',
+                    'en.class_id',
+                    'en.section_id'
+                )
+                ->where([
+                    ['en.student_id', '=', $request->student_id]
+                ])
+                ->first();
+            return $this->successResponse($getStudentClassSection, 'get class and section record successfully');
+        }
+    }
 }
