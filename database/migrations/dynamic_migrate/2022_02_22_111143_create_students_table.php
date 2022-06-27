@@ -25,7 +25,7 @@ class CreateStudentsTable extends Migration
             $table->string('roll_no');
             $table->date('admission_date');
             $table->string('first_name');
-            $table->string('last_name');
+            $table->string('last_name')->nullable();
             $table->string('gender')->nullable();
             $table->string('birthday')->nullable();
             $table->string('religion')->nullable();

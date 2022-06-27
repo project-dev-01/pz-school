@@ -28,7 +28,6 @@ $(function () {
             classnames: "required",
             categy: "required",
             fname: "required",
-            lname: "required",
             txt_mobile_no: "required",
             present_address: "required",
             txt_pwd: {

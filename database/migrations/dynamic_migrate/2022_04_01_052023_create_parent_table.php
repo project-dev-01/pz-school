@@ -16,7 +16,7 @@ class CreateParentTable extends Migration
         Schema::create('parent', function (Blueprint $table) {
             $table->id();
             $table->string('first_name');
-            $table->string('last_name');
+            $table->string('last_name')->nullable();
             $table->string('gender')->nullable();
             $table->string('date_of_birth')->nullable();
             $table->string('passport')->nullable();

@@ -313,9 +313,9 @@ $(function () {
                 url: studentList,
                 data: function (d) {
                     d.student_name = $('#student_name').val(),
-                        d.class_id = $('#class_id').val(),
-                        d.section_id = $('#section_id').val(),
-                        d.session_id = $('#session_id').val()
+                    d.class_id = $('#class_id').val(),
+                    d.section_id = $('#section_id').val(),
+                    d.session_id = $('#session_id').val()
                 }
             },
             "pageLength": 5,
@@ -331,12 +331,8 @@ $(function () {
                 }
                 ,
                 {
-                    data: 'first_name',
-                    name: 'first_name'
-                },
-                {
-                    data: 'last_name',
-                    name: 'last_name'
+                    data: 'name',
+                    name: 'name'
                 },
                 {
                     data: 'register_no',
@@ -363,6 +359,18 @@ $(function () {
                     name: 'actions',
                     orderable: false,
                     searchable: false
+                },
+            ],
+            columnDefs: [
+                {
+                    "targets": 1,
+                    "className": "table-user",
+                    "render": function (data, type, row, meta) {
+                        var img = (row.photo != null) ? studentImg + '/' + row.photo : defaultImg;
+                        var first_name = '<img src="' + img + '" class="mr-2 rounded-circle">' +
+                            '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
+                        return first_name;
+                    }
                 },
             ]
         });
@@ -396,7 +404,6 @@ $(function () {
             classnames: "required",
             categy: "required",
             fname: "required",
-            lname: "required",
             txt_mobile_no: "required",
             present_address: "required",
             // txt_pwd: {
@@ -407,11 +414,11 @@ $(function () {
             //     equalTo: "txt_pwd"
             // },  
             password: {
-                required: $("#password").val().length > 0,
+                // required: $("#password").val().length > 0,
                 minlength: 6
             },
             confirm_password: {
-                required: $("#confirm_password").val().length > 0,
+                // required: $("#confirm_password").val().length > 0,
                 minlength: 6,
                 equalTo: "#password"
             }           

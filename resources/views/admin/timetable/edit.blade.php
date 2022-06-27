@@ -74,22 +74,13 @@
                                                 @if($table['break'] == "1")
                                                 <td width="20%">
                                                     <div class="form-group">
-                                                        <select class="form-control subject" name="timetable[{{$row}}][subject]" disabled>
+                                                        <select class="form-control subject" name="timetable[{{$row}}][subject]" disabled hidden="hidden">
                                                             <option value="">Select Subject</option>
                                                             @foreach($subject as $sub)
                                                             <option value="{{$sub['id']}}">{{$sub['name']}}</option>
                                                             @endforeach
                                                         </select>
-                                                    </div>
-                                                </td>
-                                                <td width="20%">
-                                                    <div class="form-group">
-                                                        <select class="form-control teacher select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="timetable[{{$row}}][teacher]" disabled>
-                                                            <option value="">Select Teacher</option>
-                                                            @foreach($teacher as $teach)
-                                                            <option value="{{$teach['id']}}">{{$teach['name']}}</option>
-                                                            @endforeach
-                                                        </select>
+                                                        <input class="form-control break_type"  type="text" name="timetable[{{$row}}][break_type]" value="{{$table['break_type']}}"></input>
                                                     </div>
                                                 </td>
                                                 @else
@@ -101,8 +92,10 @@
                                                             <option value="{{$sub['id']}}" {{ $sub['id'] == $table['subject_id'] ? 'selected' : ''}}>{{$sub['name']}}</option>
                                                             @endforeach
                                                         </select>
+                                                        <input class="form-control break_type"  type="text" name="timetable[{{$row}}][break_type]" disabled hidden="hidden"></input>
                                                     </div>
                                                 </td>
+                                                @endif
                                                 <td width="20%">
                                                     <div class="form-group">
                                                         <select class="form-control teacher teacher select2-multiple-plus" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="timetable[{{$row}}][teacher][]">
@@ -111,20 +104,21 @@
                                                             @php
                                                             $selected = "";
                                                             @endphp
-                                                            @foreach(explode(',', $table['teacher_id']) as $info)
-                                                            @if($teach['id'] == $info)
-                                                            @php
-                                                            $selected = "Selected";
-                                                            @endphp
+                                                            @if($table['teacher_id'] || $table['teacher_id'] == "0")
+                                                                @foreach(explode(',', $table['teacher_id']) as $info)
+                                                                    @if($teach['id'] == $info)
+                                                                        @php
+                                                                            $selected = "Selected";
+                                                                        @endphp
+                                                                    @endif
+                                                                @endforeach
                                                             @endif
-                                                            @endforeach
                                                             <option value="{{$teach['id']}}" {{ $selected }}>{{$teach['name']}}</option>
                                                             @empty
                                                             @endforelse
                                                         </select>
                                                     </div>
                                                 </td>
-                                                @endif
                                                 <td width="20%">
                                                     <div class="form-group">
                                                         <input class="form-control" type="time" name="timetable[{{$row}}][time_start]" value="{{$table['time_start']}}">

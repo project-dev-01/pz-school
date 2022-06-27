@@ -395,6 +395,11 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('timetable/update', [AdminController::class, 'updateTimetable'])->name('admin.timetable.update');
         Route::post('timetable/subject', [AdminController::class, 'getSubject'])->name('admin.timetable.subject');
 
+        // Time Table Bulk
+        Route::post('timetable/bulk/add', [AdminController::class, 'addBulkTimetable'])->name('admin.timetable.bulk.add');
+        Route::get('timetable/bulk/create', [AdminController::class, 'createBulkTimetable'])->name('admin.timetable.bulk.create');
+        Route::post('timetable/bulk/subject', [AdminController::class, 'getBulkSubject'])->name('admin.timetable.bulk.subject');
+
         // Subject By Class Route
         Route::post('subject-by-class', [AdminController::class, 'subjectByClass'])->name('admin.subject_by_class');
 

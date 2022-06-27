@@ -108,8 +108,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
+                                            <th>Name</th>
                                             <th>Register No</th>
                                             <th>Roll No</th>
                                             <th>Gender</th>
@@ -137,6 +136,9 @@
 @endsection
 @section('scripts')
 <script>
+    
+    var studentImg = "{{ asset('users/images/') }}";
+    var defaultImg = "{{ asset('images/users/default.jpg') }}";
     
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var studentDelete = "{{ route('admin.student.delete') }}";

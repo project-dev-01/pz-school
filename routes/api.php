@@ -223,6 +223,10 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('timetable/list', [ApiController::class, 'getTimetableList']);
     Route::post('timetable/edit', [ApiController::class, 'editTimetable']);
     Route::post('timetable/update', [ApiController::class, 'updateTimetable']);
+    
+    // Timetable Bulk
+    Route::post('timetable-subject-bulk', [ApiController::class, 'timetableSubjectBulk']);
+    Route::post('timetable/add/bulk', [ApiController::class, 'addBulkTimetable']);
 
     // Grade routes
     Route::post('grade/add', [ApiController::class, 'addGrade']);

@@ -11,7 +11,6 @@ $(function () {
     $("#addparent").validate({
         rules: {
             first_name: "required",
-            last_name: "required",
             email: {
                 required: true,
                 email: true
@@ -25,8 +24,8 @@ $(function () {
             confirm_password: {
                 required: true,
                 minlength: 6,
-                equalTo: "password"
-            },  
+                equalTo: "#password"
+            },   
         }
     });
 
@@ -57,13 +56,19 @@ $(function () {
     $("#editParent").validate({
         rules: {
             first_name: "required",
-            last_name: "required",
             email: {
                 required: true,
                 email: true
             },
             occupation: "required",
             mobile_no: "required",
+            password: {
+                minlength: 6
+            },
+            confirm_password: {
+                minlength: 6,
+                equalTo: "#password"
+            },  
         }
     });
 
@@ -125,12 +130,8 @@ $(function () {
                 }
                 ,
                 {
-                    data: 'first_name',
-                    name: 'first_name'
-                },
-                {
-                    data: 'last_name',
-                    name: 'last_name'
+                    data: 'name',
+                    name: 'name'
                 },
                 {
                     data: 'occupation',
@@ -149,6 +150,18 @@ $(function () {
                     name: 'actions',
                     orderable: false,
                     searchable: false
+                },
+            ],
+            columnDefs: [
+                {
+                    "targets": 1,
+                    "className": "table-user",
+                    "render": function (data, type, row, meta) {
+                        var img = (row.photo != null) ? parentImg + '/' + row.photo : defaultImg;
+                        var first_name = '<img src="' + img + '" class="mr-2 rounded-circle">' +
+                            '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
+                        return first_name;
+                    }
                 },
             ]
        }).on('draw', function () {

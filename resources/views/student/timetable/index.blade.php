@@ -63,7 +63,7 @@
                                             @if($table['day'] == $day)
                                             @if($table['break'] == 1)
                                             <td>
-                                                <b>Break Time</b><br>
+                                                <b>{{ $table['break_type']}}</b><br>
                                                 ( {{ $table['time_start']}} - {{$table['time_end']}} )<br>
                                                 @if($table['class_room'])
                                                 Class Room : {{$table['class_room']}}
@@ -72,7 +72,12 @@
                                             @else
 
                                             <td>
+                                                
+                                                @if($table['subject_name'])
                                                 <b>Subject:{{$table['subject_name']}}</b><br>
+                                                @else
+                                                <b>Subject:{{$table['break_type']}}</b><br>
+                                                @endif
                                                 ( {{ $table['time_start']}} - {{$table['time_end']}} )<br>
                                                 Teacher : {{$table['teacher_name'] }}<br>
                                                 @if($table['class_room'])

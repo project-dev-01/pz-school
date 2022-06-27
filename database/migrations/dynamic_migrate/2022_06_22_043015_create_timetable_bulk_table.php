@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTimetableClassTable extends Migration
+class CreateTimetableBulkTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateTimetableClassTable extends Migration
      */
     public function up()
     {
-        Schema::create('timetable_class', function (Blueprint $table) {
+        Schema::create('timetable_bulk', function (Blueprint $table) {
             $table->id();
-            $table->integer('class_id');
-            $table->integer('section_id');
-            $table->string('break')->nullable();
-            $table->string('break_type')->nullable();
-            $table->integer('subject_id')->nullable();
+            $table->string('class_id');
+            $table->string('break');
             $table->string('teacher_id')->nullable();
             $table->integer('semester_id')->nullable();
             $table->integer('session_id')->nullable();
@@ -27,8 +24,6 @@ class CreateTimetableClassTable extends Migration
             $table->time('time_start');
             $table->time('time_end');
             $table->string('day');
-            $table->integer('bulk_id')->nullable();
-            $table->string('type')->nullable();
             $table->timestamps();
         });
     }
@@ -40,6 +35,6 @@ class CreateTimetableClassTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('timetable_class');
+        Schema::dropIfExists('timetable_bulk');
     }
 }

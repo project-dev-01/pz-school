@@ -65,12 +65,11 @@
                         <div class="col-sm-12">
                             <div class="">
                                 <div class="table-responsive">
-                                    <table class="table w-100 nowrap" id="parent-table">
+                                    <table class="table w-100 nowrap text-center" id="parent-table">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
+                                                <th>Name</th>
                                                 <th>Occupation</th>
                                                 <th>Mobile No</th>
                                                 <th>Email</th>
@@ -98,6 +97,9 @@
 @endsection
 @section('scripts')
 <script>
+    
+    var parentImg = "{{ asset('users/images/') }}";
+    var defaultImg = "{{ asset('images/users/default.jpg') }}";
     var parentList = "{{ route('admin.parent.list') }}";
     var parentDelete = "{{ route('admin.parent.delete') }}";
 </script>

@@ -188,6 +188,10 @@ return [
         'timetable_student' => $url.'/timetable/student',
         'timetable_parent' => $url.'/timetable/parent',
 
+        //timetable bulk url
+        'timetable_subject_bulk' => $url.'/timetable-subject-bulk',
+        'timetable_add_bulk' => $url.'/timetable/add/bulk',
+
           // settings url
           'change_profile_picture' => $url.'/change-profile-picture',
           'change_logo' => $url.'/settings/logo',
