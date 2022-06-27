@@ -1649,7 +1649,7 @@ class AdminController extends Controller
         ];
 
         $timetable = Helper::PostMethod(config('constants.api.timetable_subject_bulk'), $data);
-        // dd($data);
+        // dd($timetable);
         $hall_list = Helper::GetMethod(config('constants.api.exam_hall_list'));
         if ($timetable['code'] == "200") {
 
@@ -1774,6 +1774,7 @@ class AdminController extends Controller
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.timetable_add'), $data);
+        dd($response);
         return $response;
     }
 

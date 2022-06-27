@@ -4424,8 +4424,9 @@ class ApiController extends BaseController
                 ->first();
             // dd($getObjRow);
             $timetable = $request->timetable;
-            $oldest = $staffConn->table('timetable_class')->where([['class_id', $request->class_id], ['section_id', $request->section_id], ['semester_id', $request->semester_id], ['session_id', $request->session_id], ['day', $request->day]])->get()->toArray();
+            $oldest = $staffConn->table('timetable_class')->where([['class_id', $request->class_id], ['section_id', $request->section_id], ['semester_id', $request->semester_id], ['session_id', $request->session_id], ['day', $request->day]])->WhereNull('bulk_id')->get()->toArray();
 
+            // return $oldest;
             $diff = array_diff(array_column($oldest, 'id'), array_column($timetable, 'id'));
 
             if (isset($diff)) {
@@ -4899,6 +4900,7 @@ class ApiController extends BaseController
                     ['timetable_class.session_id', $request->session_id],
                     ['timetable_class.section_id', $request->section_id]
                 ])
+                ->WhereNull('bulk_id')
                 ->get()->toArray();
             // dd($oldest);
             $diff = array_diff(array_column($oldest, 'id'), array_column($timetable, 'id'));
