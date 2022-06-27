@@ -31,6 +31,7 @@ class ParentController extends Controller
         $get_homework_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_homework_list_dashboard'), $data);
         $get_std_names_dashboard = Helper::GETMethodWithData(config('constants.api.get_students_parentdashboard'), $parent_ids);
         $get_leave_reasons_dashboard = Helper::GetMethod(config('constants.api.get_leave_reasons'));
+        // dd($get_homework_list_dashboard);
         return view(
             'parent.dashboard.index',
             [

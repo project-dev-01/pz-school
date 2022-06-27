@@ -9424,8 +9424,8 @@ class ApiController extends BaseController
                     'roll_no' => $request->roll_no,
                     'admission_date' => $request->admission_date,
                     'category_id' => $request->category_id,
-                    'first_name' => $request->first_name,
-                    'last_name' => $request->last_name,
+                    'first_name' => isset($request->first_name) ? $request->first_name : "",
+                    'last_name' => isset($request->last_name) ? $request->last_name : "",
                     'gender' => $request->gender,
                     'blood_group' => $request->blood_group,
                     'birthday' => $request->birthday,
@@ -10555,8 +10555,8 @@ class ApiController extends BaseController
                     'roll_no' => $request->roll_no,
                     'admission_date' => $request->admission_date,
                     'category_id' => $request->category_id,
-                    'first_name' => $request->first_name,
-                    'last_name' => $request->last_name,
+                    'first_name' => isset($request->first_name) ? $request->first_name : "",
+                    'last_name' => isset($request->last_name) ? $request->last_name : "",
                     'gender' => $request->gender,
                     'blood_group' => $request->blood_group,
                     'birthday' => $request->birthday,
@@ -10791,8 +10791,8 @@ class ApiController extends BaseController
                 // insert data
                 $parentId = $conn->table('parent')->insertGetId([
 
-                    'first_name' => $request->first_name,
-                    'last_name' => $request->last_name,
+                    'first_name' => isset($request->first_name) ? $request->first_name : "",
+                    'last_name' => isset($request->last_name) ? $request->last_name : "",
                     'gender' => $request->gender,
                     'date_of_birth' => $request->date_of_birth,
                     'passport' => $request->passport,
@@ -11013,8 +11013,8 @@ class ApiController extends BaseController
 
                 // update data
                 $query = $staffConn->table('parent')->where('id', $id)->update([
-                    'first_name' => $request->first_name,
-                    'last_name' => $request->last_name,
+                    'first_name' => isset($request->first_name) ? $request->first_name : "",
+                    'last_name' => isset($request->last_name) ? $request->last_name : "",
                     'gender' => $request->gender,
                     'date_of_birth' => $request->date_of_birth,
                     'passport' => $request->passport,

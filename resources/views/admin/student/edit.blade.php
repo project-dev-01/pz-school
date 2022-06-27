@@ -13,10 +13,12 @@
         position: relative;
         cursor: pointer;
     }
+
     .switch input {
         display: none;
     }
-    .switch input + span {
+
+    .switch input+span {
         padding-left: 50px;
         min-height: 24px;
         line-height: 24px;
@@ -27,13 +29,16 @@
         white-space: nowrap;
         transition: color 0.3s ease;
     }
-    .switch input + span:before, .switch input + span:after {
+
+    .switch input+span:before,
+    .switch input+span:after {
         content: '';
         display: block;
         position: absolute;
         border-radius: 12px;
     }
-    .switch input + span:before {
+
+    .switch input+span:before {
         top: 0;
         left: 0;
         width: 42px;
@@ -41,7 +46,8 @@
         background: #e4ecfa;
         transition: all 0.3s ease;
     }
-    .switch input + span:after {
+
+    .switch input+span:after {
         width: 18px;
         height: 18px;
         background: #fff;
@@ -50,7 +56,8 @@
         box-shadow: 0 1px 3px rgba(18, 22, 33, .1);
         transition: all 0.45s ease;
     }
-    .switch input + span em {
+
+    .switch input+span em {
         width: 8px;
         height: 7px;
         background: #99a3ba;
@@ -62,7 +69,8 @@
         z-index: 1;
         transition: all 0.45s ease;
     }
-    .switch input + span em:before {
+
+    .switch input+span em:before {
         content: '';
         width: 2px;
         height: 2px;
@@ -74,7 +82,8 @@
         top: 50%;
         margin: -1px 0 0 -1px;
     }
-    .switch input + span em:after {
+
+    .switch input+span em:after {
         content: '';
         display: block;
         border-top-left-radius: 4px;
@@ -91,24 +100,29 @@
         transition: all 0.45s ease;
         transform: rotate(-35deg) translate(0, 1px);
     }
-    .switch input + span strong {
+
+    .switch input+span strong {
         font-weight: normal;
         position: relative;
         display: block;
         top: 1px;
     }
-    .switch input + span strong:before, .switch input + span strong:after {
+
+    .switch input+span strong:before,
+    .switch input+span strong:after {
         font-size: 14px;
         font-weight: 500;
         display: block;
         font-family: 'Mukta Malar', Arial;
         -webkit-backface-visibility: hidden;
     }
-    .switch input + span strong:before {
+
+    .switch input+span strong:before {
         content: 'Unlock';
         transition: all 0.3s ease 0.2s;
     }
-    .switch input + span strong:after {
+
+    .switch input+span strong:after {
         content: 'Lock';
         opacity: 0;
         visibility: hidden;
@@ -119,53 +133,66 @@
         transition: all 0.3s ease;
         transform: translate(2px, 0);
     }
-    .switch input:checked + span:before {
+
+    .switch input:checked+span:before {
         background: rgba(0, 123, 255, .35);
     }
-    .switch input:checked + span:after {
+
+    .switch input:checked+span:after {
         background: #fff;
         transform: translate(18px, 0);
     }
-    .switch input:checked + span em {
+
+    .switch input:checked+span em {
         transform: translate(18px, 0);
         background: #007bff;
     }
-    .switch input:checked + span em:after {
+
+    .switch input:checked+span em:after {
         border-color: #007bff;
         transform: rotate(0deg) translate(0, 0);
     }
-    .switch input:checked + span strong:before {
+
+    .switch input:checked+span strong:before {
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
         transform: translate(-2px, 0);
     }
-    .switch input:checked + span strong:after {
+
+    .switch input:checked+span strong:after {
         opacity: 1;
         visibility: visible;
         transform: translate(0, 0);
         transition: all 0.3s ease 0.2s;
     }
+
     html {
         -webkit-font-smoothing: antialiased;
     }
+
     * {
         box-sizing: border-box;
     }
-    *:before, *:after {
+
+    *:before,
+    *:after {
         box-sizing: border-box;
     }
+
     .switch {
         display: table;
         margin: 12px auto;
         min-width: 118px;
     }
+
     .dribbble {
         position: fixed;
         display: block;
         right: 20px;
         bottom: 20px;
     }
+
     .dribbble img {
         display: block;
         height: 28px;
@@ -187,7 +214,7 @@
                 <h4 class="page-title">Student Profile</h4>
             </div>
         </div>
-    </div>     
+    </div>
     <!-- end page title -->
     <div class="row">
         <div class="col-12">
@@ -195,19 +222,19 @@
                 <div class="row">
                     <div class="col-xl-3">
                         @if($student['photo'])
-                            <img src="{{ asset('users/images//') }}/{{$student['photo']}}" alt="" class="img-fluid mx-auto d-block rounded user-img">
+                        <img src="{{ asset('users/images//') }}/{{$student['photo']}}" alt="" class="img-fluid mx-auto d-block rounded user-img">
                         @else
-                            <img src="{{ asset('images/users/default.jpg') }}" alt="" class="img-fluid mx-auto d-block rounded">
+                        <img src="{{ asset('images/users/default.jpg') }}" alt="" class="img-fluid mx-auto d-block rounded">
                         @endif
-                        
+
                     </div> <!-- end col -->
                     <div class="col-lg-7">
-                        <div class="pl-xl-3 mt-3 mt-xl-0">                                              
+                        <div class="pl-xl-3 mt-3 mt-xl-0">
                             <h1 class="mb-3">{{$student['first_name']}} {{$student['last_name']}}</h5>
-                            <div class="row mb-3">
-                                <div class="col-md-12">
-                                    <div>
-                                        <!-- <div class="media mb-2">
+                                <div class="row mb-3">
+                                    <div class="col-md-12">
+                                        <div>
+                                            <!-- <div class="media mb-2">
                                             <div class="avatar-xs bg-success rounded-circle">
                                                 <span class="avatar-title font-14 font-weight-bold text-white">
                                                 <i class="fas fa-users"></i></span>
@@ -217,60 +244,65 @@
                                                 <a href="javascript: void(0);" class="text-reset"></a></h5>
                                             </div>
                                         </div> -->
-                                        <div class="media mb-2">
-                                            <div class="avatar-xs bg-success rounded-circle">
-                                                <span class="avatar-title font-14 font-weight-bold text-white">
-                                                <i class="fas fa-birthday-cake"></i></span>
+                                            <div class="media mb-2">
+                                                <div class="avatar-xs bg-success rounded-circle">
+                                                    <span class="avatar-title font-14 font-weight-bold text-white">
+                                                        <i class="fas fa-birthday-cake"></i></span>
+                                                </div>
+                                                <div class="media-body pl-2">
+                                                    <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
+                                                        <a href="javascript: void(0);" class="text-reset">{{$student['birthday']}}</a>
+                                                    </h5>
+                                                </div>
                                             </div>
-                                            <div class="media-body pl-2">
-                                                <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                <a href="javascript: void(0);" class="text-reset">{{$student['birthday']}}</a></h5>
+                                            <div class="media mb-2">
+                                                <div class="avatar-xs bg-success rounded-circle">
+                                                    <span class="avatar-title font-14 font-weight-bold text-white">
+                                                        <i class="fas fa-school"></i></span>
+                                                </div>
+                                                <div class="media-body pl-2">
+                                                    <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
+                                                        <a href="javascript: void(0);" class="text-reset">{{$student['class_name']}} ({{$student['section_name']}})</a>
+                                                    </h5>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="media mb-2">
-                                            <div class="avatar-xs bg-success rounded-circle">
-                                                <span class="avatar-title font-14 font-weight-bold text-white">
-                                                <i class="fas fa-school"></i></span>
+
+                                            <div class="media mb-2">
+                                                <div class="avatar-xs bg-success rounded-circle">
+                                                    <span class="avatar-title font-14 font-weight-bold text-white">
+                                                        <i class="fas fa-phone-volume"></i></span>
+                                                </div>
+                                                <div class="media-body pl-2">
+                                                    <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
+                                                        <a href="javascript: void(0);" class="text-reset">{{$student['mobile_no']}}</a>
+                                                    </h5>
+                                                </div>
                                             </div>
-                                            <div class="media-body pl-2">
-                                                <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                <a href="javascript: void(0);" class="text-reset">{{$student['class_name']}} ({{$student['section_name']}})</a></h5>
+                                            <div class="media mb-2">
+                                                <div class="avatar-xs bg-success rounded-circle">
+                                                    <span class="avatar-title font-14 font-weight-bold text-white">
+                                                        <i class="far fa-envelope"></i></span>
+                                                </div>
+                                                <div class="media-body pl-2">
+                                                    <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
+                                                        <a href="javascript: void(0);" class="text-reset">{{$student['email']}}</a>
+                                                    </h5>
+                                                </div>
                                             </div>
-                                        </div>
-                                    
-                                        <div class="media mb-2">
-                                            <div class="avatar-xs bg-success rounded-circle">
-                                                <span class="avatar-title font-14 font-weight-bold text-white">
-                                                <i class="fas fa-phone-volume"></i></span>
-                                            </div>
-                                            <div class="media-body pl-2">
-                                                <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                <a href="javascript: void(0);" class="text-reset">{{$student['mobile_no']}}</a></h5>
-                                            </div>
-                                        </div>
-                                        <div class="media mb-2">
-                                            <div class="avatar-xs bg-success rounded-circle">
-                                                <span class="avatar-title font-14 font-weight-bold text-white">
-                                                <i class="far fa-envelope"></i></span>
-                                            </div>
-                                            <div class="media-body pl-2">
-                                                <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                <a href="javascript: void(0);" class="text-reset">{{$student['email']}}</a></h5>
-                                            </div>
-                                        </div>
-                                        <div class="media mb-2">
-                                            <div class="avatar-xs bg-success rounded-circle">
-                                                <span class="avatar-title font-14 font-weight-bold text-white">
-                                                <i class="fas fa-home"></i></span>
-                                            </div>
-                                            <div class="media-body pl-2">
-                                                <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                <a href="javascript: void(0);" class="text-reset">{{$student['current_address']}}</a></h5>
+                                            <div class="media mb-2">
+                                                <div class="avatar-xs bg-success rounded-circle">
+                                                    <span class="avatar-title font-14 font-weight-bold text-white">
+                                                        <i class="fas fa-home"></i></span>
+                                                </div>
+                                                <div class="media-body pl-2">
+                                                    <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
+                                                        <a href="javascript: void(0);" class="text-reset">{{$student['current_address']}}</a>
+                                                    </h5>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         </div>
                     </div> <!-- end col -->
                 </div><!-- end row -->
@@ -283,7 +315,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-8">                                          
+                        <div class="col-lg-8">
                             <span class="header-title mb-3" id="span-parent" data-toggle="collapse" href="#basic_detail" role="button" aria-expanded="false" aria-controls="basic_detail"><i class="fas fa-user-edit"></i> Student Information</span>
                         </div>
                         <div class="col-lg-4">
@@ -291,8 +323,8 @@
                                     <button type="button" class="btn btn-white btn-rounded waves-effect waves-light mr-1"><i class="fas fa-lock mr-1"></i> Authentication</button>
                             </div> -->
                         </div><!-- end col-->
-                    </div> <!-- end row -->	
-                    <br>							    
+                    </div> <!-- end row -->
+                    <br>
                     <div class="collapse" id="basic_detail">
                         <form id="editadmission" method="post" action="{{ route('admin.student.update') }}" enctype="multipart/form-data" autocomplete="off">
                             @csrf
@@ -316,7 +348,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -429,7 +461,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
-                                                <input type="tel"  class="form-control"  name="txt_mobile_no" id="txt_mobile_no" value="{{$student['mobile_no']}}" data-parsley-trigger="change" >
+                                                <input type="tel" class="form-control" name="txt_mobile_no" id="txt_mobile_no" value="{{$student['mobile_no']}}" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -535,7 +567,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="section_id">Class Name<span class="text-danger">*</span></label>
-                                                <select id="section_id" class="form-control"  name="section_id">                              
+                                                <select id="section_id" class="form-control" name="section_id">
                                                     <option value="">Select Class Name</option>
                                                     @foreach($section as $sec)
                                                     <option value="{{$sec['section_id']}}" {{$student['section_id'] == $sec['section_id'] ? "Selected" : "" }}>{{$sec['section_name']}}</option>
@@ -544,9 +576,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="row">
-                                        
+
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="">Category<span class="text-danger">*</span></label>
@@ -560,10 +592,10 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="session_id">Session</label>
-                                                <select id="session_id" class="form-control"  name="session_id">                              
+                                                <select id="session_id" class="form-control" name="session_id">
                                                     <option value="0">Select Session</option>
                                                     @foreach($session as $ses)
-                                                        <option value="{{$ses['id']}}" {{$student['session_id'] == $ses['id'] ? "Selected" : "" }}>{{$ses['name']}}</option>
+                                                    <option value="{{$ses['id']}}" {{$student['session_id'] == $ses['id'] ? "Selected" : "" }}>{{$ses['name']}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -571,10 +603,10 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="semester_id">Semester</label>
-                                                <select id="semester_id" class="form-control"  name="semester_id">                              
+                                                <select id="semester_id" class="form-control" name="semester_id">
                                                     <option value="0">Select Semester</option>
                                                     @foreach($semester as $sem)
-                                                        <option value="{{$sem['id']}}" {{$student['semester_id'] == $sem['id'] ? "Selected" : "" }}>{{$sem['name']}}</option>
+                                                    <option value="{{$sem['id']}}" {{$student['semester_id'] == $sem['id'] ? "Selected" : "" }}>{{$sem['name']}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -582,12 +614,12 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="card">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <h4 class="navv">Student Login Details
-                                        <h4>
+                                            <h4>
                                     </li>
                                 </ul>
                                 <div class="card-body">
@@ -608,8 +640,8 @@
                                         <div class="col-md-2">
                                             <div class="form-group mb-3">
                                                 <label class="switch">Authentication
-                                                
-                                                    <input id="edit_status" name="status"  type="checkbox" {{ $student['status'] == "1" ? "checked" : "" }}>
+
+                                                    <input id="edit_status" name="status" type="checkbox" {{ $student['status'] == "1" ? "checked" : "" }}>
                                                     <span>
                                                         <em></em>
                                                         <strong></strong>
@@ -631,8 +663,8 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="father_name">Father Name</label>
-                                                <input type="text" class="form-control"  maxlength="50" id="father_name"  aria-describedby="inputGroupPrepend">
-                                                <input type="hidden" name="father_id" id="father_id"  value="{{$student['father_id']}}">
+                                                <input type="text" class="form-control" maxlength="50" id="father_name" aria-describedby="inputGroupPrepend">
+                                                <input type="hidden" name="father_id" id="father_id" value="{{$student['father_id']}}">
                                                 <div id="father_list">
                                                 </div>
                                             </div>
@@ -640,27 +672,27 @@
                                         <div class="col-md-1">
                                         </div>
                                         <div class="col-md-4" id="father_photo" style="display:none;">
-                                            
-                                        </div> 
+
+                                        </div>
                                     </div>
-                                    <div id="father_form"  style="display:none;">
+                                    <div id="father_form" style="display:none;">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="heard">First Name<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control"  maxlength="50" id="father_first_name"  aria-describedby="inputGroupPrepend" readonly>
+                                                    <input type="text" class="form-control" maxlength="50" id="father_first_name" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="heard">Last Name<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control"  maxlength="50" id="father_last_name"  aria-describedby="inputGroupPrepend" readonly>
+                                                    <input type="text" class="form-control" maxlength="50" id="father_last_name" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="gender">Gender</label>
-                                                    <select class="form-control"  id="father_gender" disabled>
+                                                    <select class="form-control" id="father_gender" disabled>
                                                         <option value="">Choose Gender</option>
                                                         <option value="Male">Male</option>
                                                         <option value="Female">Female</option>
@@ -676,7 +708,7 @@
                                                                 <span class="fas fa-birthday-cake"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" class="form-control"  id="father_date_of_birth" readonly>
+                                                        <input type="text" class="form-control" id="father_date_of_birth" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -689,14 +721,14 @@
                                                                 <span class="far fa-envelope-open"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" class="form-control"  id="father_email" readonly>
+                                                        <input type="text" class="form-control" id="father_email" readonly>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="Passport">Passport Number</label>
-                                                    <input type="text" class="form-control"id="father_passport" readonly>
+                                                    <input type="text" class="form-control" id="father_passport" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -710,7 +742,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="blooddgrp">Blood Group</label>
-                                                    <select  class="form-control" id="father_blooddgrp" disabled>
+                                                    <select class="form-control" id="father_blooddgrp" disabled>
                                                         <option value="">Pick Blood Type</option>
                                                         <option>O+</option>
                                                         <option>A+</option>
@@ -741,19 +773,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="education">Education</label>
-                                                    <input type="text"  class="form-control" data-parsley-trigger="change" id="father_education" readonly>
+                                                    <input type="text" class="form-control" data-parsley-trigger="change" id="father_education" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="txt_occupation">Occupation<span class="text-danger">*</span></label>
-                                                    <input type="text" maxlength="50" id="father_occupation" class="form-control "  placeholder="Occupation" data-parsley-trigger="change" readonly>
+                                                    <input type="text" maxlength="50" id="father_occupation" class="form-control " placeholder="Occupation" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="txt_income">Income</label>
-                                                    <input type="text" maxlength="50" id="father_income" class="form-control "  placeholder="Income" data-parsley-trigger="change" readonly>
+                                                    <input type="text" maxlength="50" id="father_income" class="form-control " placeholder="Income" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -761,19 +793,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="country">Country</label>
-                                                    <input type="text"  class="form-control" id="father_country" data-parsley-trigger="change" readonly>
+                                                    <input type="text" class="form-control" id="father_country" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group mb-3">
                                                     <label for="validationCustomUsername">State/Province</label>
-                                                    <input type="text" class="form-control " maxlength="50" id="father_state"  placeholder="state" aria-describedby="inputGroupPrepend" readonly>
+                                                    <input type="text" class="form-control " maxlength="50" id="father_state" placeholder="state" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group mb-3">
                                                     <label for="validationCustomUsername">City</label>
-                                                    <input type="text" class="form-control " maxlength="50" id="father_city"  placeholder="city" aria-describedby="inputGroupPrepend" readonly>
+                                                    <input type="text" class="form-control " maxlength="50" id="father_city" placeholder="city" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -812,7 +844,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="mother_name">Mother Name</label>
-                                                <input type="text" class="form-control"  maxlength="50" id="mother_name"  aria-describedby="inputGroupPrepend">
+                                                <input type="text" class="form-control" maxlength="50" id="mother_name" aria-describedby="inputGroupPrepend">
                                                 <input type="hidden" name="mother_id" id="mother_id" value="{{$student['mother_id']}}">
                                                 <div id="mother_list">
                                                 </div>
@@ -821,27 +853,27 @@
                                         <div class="col-md-1">
                                         </div>
                                         <div class="col-md-4" id="mother_photo" style="display:none;">
-                                            
-                                        </div> 
+
+                                        </div>
                                     </div>
-                                    <div id="mother_form"  style="display:none;">
+                                    <div id="mother_form" style="display:none;">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="heard">First Name<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control"  maxlength="50" id="mother_first_name"  aria-describedby="inputGroupPrepend" readonly>
+                                                    <input type="text" class="form-control" maxlength="50" id="mother_first_name" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="heard">Last Name<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control"  maxlength="50" id="mother_last_name"  aria-describedby="inputGroupPrepend" readonly>
+                                                    <input type="text" class="form-control" maxlength="50" id="mother_last_name" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="gender">Gender</label>
-                                                    <select class="form-control"  id="mother_gender" disabled>
+                                                    <select class="form-control" id="mother_gender" disabled>
                                                         <option value="">Choose Gender</option>
                                                         <option value="Male">Male</option>
                                                         <option value="Female">Female</option>
@@ -857,7 +889,7 @@
                                                                 <span class="fas fa-birthday-cake"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" class="form-control"  id="mother_date_of_birth" readonly>
+                                                        <input type="text" class="form-control" id="mother_date_of_birth" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -870,14 +902,14 @@
                                                                 <span class="far fa-envelope-open"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" class="form-control"  id="mother_email" readonly>
+                                                        <input type="text" class="form-control" id="mother_email" readonly>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="Passport">Passport Number</label>
-                                                    <input type="text" class="form-control"id="mother_passport" readonly>
+                                                    <input type="text" class="form-control" id="mother_passport" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -891,7 +923,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="blooddgrp">Blood Group</label>
-                                                    <select  class="form-control" id="mother_blooddgrp" disabled>
+                                                    <select class="form-control" id="mother_blooddgrp" disabled>
                                                         <option value="">Pick Blood Type</option>
                                                         <option>O+</option>
                                                         <option>A+</option>
@@ -922,19 +954,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="education">Education</label>
-                                                    <input type="text"  class="form-control" data-parsley-trigger="change" id="mother_education" readonly>
+                                                    <input type="text" class="form-control" data-parsley-trigger="change" id="mother_education" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="txt_occupation">Occupation<span class="text-danger">*</span></label>
-                                                    <input type="text" maxlength="50" id="mother_occupation" class="form-control"  placeholder="Occupation" data-parsley-trigger="change" readonly>
+                                                    <input type="text" maxlength="50" id="mother_occupation" class="form-control" placeholder="Occupation" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="txt_income">Income</label>
-                                                    <input type="text" maxlength="50" id="mother_income" class="form-control"  placeholder="Income" data-parsley-trigger="change" readonly>
+                                                    <input type="text" maxlength="50" id="mother_income" class="form-control" placeholder="Income" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -942,19 +974,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="country">Country</label>
-                                                    <input type="text"  class="form-control" id="mother_country" data-parsley-trigger="change" readonly>
+                                                    <input type="text" class="form-control" id="mother_country" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group mb-3">
                                                     <label for="validationCustomUsername">State/Province</label>
-                                                    <input type="text" class="form-control" maxlength="50" id="mother_state"  placeholder="state" aria-describedby="inputGroupPrepend" readonly>
+                                                    <input type="text" class="form-control" maxlength="50" id="mother_state" placeholder="state" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group mb-3">
                                                     <label for="validationCustomUsername">City</label>
-                                                    <input type="text" class="form-control" maxlength="50" id="mother_city"  placeholder="city" aria-describedby="inputGroupPrepend" readonly>
+                                                    <input type="text" class="form-control" maxlength="50" id="mother_city" placeholder="city" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -993,7 +1025,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="guardian_name">Guardian Name</label>
-                                                <input type="text" class="form-control"  maxlength="50" id="guardian_name"  aria-describedby="inputGroupPrepend">
+                                                <input type="text" class="form-control" maxlength="50" id="guardian_name" aria-describedby="inputGroupPrepend">
                                                 <input type="hidden" name="guardian_id" id="guardian_id" value="{{$student['guardian_id']}}">
                                                 <div id="guardian_list">
                                                 </div>
@@ -1014,27 +1046,27 @@
                                         <div class="col-md-1">
                                         </div>
                                         <div class="col-md-3" id="guardian_photo" style="display:none;">
-                                            
-                                        </div> 
+
+                                        </div>
                                     </div>
-                                    <div id="guardian_form"  style="display:none;">
+                                    <div id="guardian_form" style="display:none;">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="heard">First Name<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control"  maxlength="50" id="guardian_first_name"  aria-describedby="inputGroupPrepend" readonly>
+                                                    <input type="text" class="form-control" maxlength="50" id="guardian_first_name" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="heard">Last Name<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control"  maxlength="50" id="guardian_last_name"  aria-describedby="inputGroupPrepend" readonly>
+                                                    <input type="text" class="form-control" maxlength="50" id="guardian_last_name" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="gender">Gender</label>
-                                                    <select class="form-control"  id="guardian_gender" disabled>
+                                                    <select class="form-control" id="guardian_gender" disabled>
                                                         <option value="">Choose Gender</option>
                                                         <option value="Male">Male</option>
                                                         <option value="Female">Female</option>
@@ -1050,7 +1082,7 @@
                                                                 <span class="fas fa-birthday-cake"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" class="form-control"  id="guardian_date_of_birth" readonly>
+                                                        <input type="text" class="form-control" id="guardian_date_of_birth" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1063,14 +1095,14 @@
                                                                 <span class="far fa-envelope-open"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" class="form-control"  id="guardian_email" readonly>
+                                                        <input type="text" class="form-control" id="guardian_email" readonly>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="Passport">Passport Number</label>
-                                                    <input type="text" class="form-control"id="guardian_passport" readonly>
+                                                    <input type="text" class="form-control" id="guardian_passport" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -1084,7 +1116,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="blooddgrp">Blood Group</label>
-                                                    <select  class="form-control" id="guardian_blooddgrp" disabled>
+                                                    <select class="form-control" id="guardian_blooddgrp" disabled>
                                                         <option value="">Pick Blood Type</option>
                                                         <option>O+</option>
                                                         <option>A+</option>
@@ -1115,19 +1147,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="education">Education</label>
-                                                    <input type="text"  class="form-control" data-parsley-trigger="change" id="guardian_education" readonly>
+                                                    <input type="text" class="form-control" data-parsley-trigger="change" id="guardian_education" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="txt_occupation">Occupation<span class="text-danger">*</span></label>
-                                                    <input type="text" maxlength="50" id="guardian_occupation" class="form-control"  placeholder="Occupation" data-parsley-trigger="change" readonly>
+                                                    <input type="text" maxlength="50" id="guardian_occupation" class="form-control" placeholder="Occupation" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="txt_income">Income</label>
-                                                    <input type="text" maxlength="50" id="guardian_income" class="form-control"  placeholder="Income" data-parsley-trigger="change" readonly>
+                                                    <input type="text" maxlength="50" id="guardian_income" class="form-control" placeholder="Income" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -1135,19 +1167,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="country">Country</label>
-                                                    <input type="text"  class="form-control" id="guardian_country" data-parsley-trigger="change" readonly>
+                                                    <input type="text" class="form-control" id="guardian_country" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group mb-3">
                                                     <label for="validationCustomUsername">State/Province</label>
-                                                    <input type="text" class="form-control" maxlength="50" id="guardian_state"  placeholder="state" aria-describedby="inputGroupPrepend" readonly>
+                                                    <input type="text" class="form-control" maxlength="50" id="guardian_state" placeholder="state" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group mb-3">
                                                     <label for="validationCustomUsername">City</label>
-                                                    <input type="text" class="form-control" maxlength="50" id="guardian_city"  placeholder="city" aria-describedby="inputGroupPrepend" readonly>
+                                                    <input type="text" class="form-control" maxlength="50" id="guardian_city" placeholder="city" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -1185,7 +1217,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="drp_transport_route">Transport Route</label>
-                                                
+
                                                 <select id="drp_transport_route" name="drp_transport_route" class="form-control">
                                                     <option value="">Select Transport</option>
                                                     @foreach($transport as $trans)
@@ -1199,7 +1231,7 @@
                                                 <label for="drp_transport_vechicleno">Vechicle No</label>
                                                 <select id="drp_transport_vechicleno" name="drp_transport_vechicleno" class="form-control">
                                                     <option value="">First select the branch</option>
-                                                    
+
                                                     @foreach($vehicle as $veh)
                                                     <option value="{{$veh['vehicle_id']}}" {{$student['vehicle_id'] == $veh['vehicle_id'] ? "Selected" : "" }}>{{$veh['vehicle_no']}}</option>
                                                     @endforeach
@@ -1233,7 +1265,7 @@
                                                 <label for="drp_roomname">Room Name</label>
                                                 <select id="drp_roomname" name="drp_roomname" class="form-control">
                                                     <option value="">First select the hostel</option>
-                                                    
+
                                                     @foreach($room as $roo)
                                                     <option value="{{$roo['room_id']}}" {{$student['room_id'] == $roo['room_id'] ? "Selected" : "" }}>{{$roo['room_name']}}</option>
                                                     @endforeach
@@ -1274,7 +1306,7 @@
                                 </div>
                             </div>
 
-                            
+
                             <div class="card">
                                 <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                                     <li class="nav-item">
@@ -1287,27 +1319,27 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
-                                                <label for="password">Password</label>
+                                                <label for="email">Password</label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
                                                             <span class="fas fa-unlock"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="password" class="form-control"  name="password" aria-describedby="inputGroupPrepend" >
+                                                    <input type="password" name="password" class="form-control" id="password" placeholder="********" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
-                                                <label for="confirm_password">Retype Password</label>
+                                                <label for="email">Retype Password</label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
                                                             <span class="fas fa-unlock"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="password" class="form-control"  name="confirm_password" aria-describedby="inputGroupPrepend" >
+                                                    <input type="password" name="confirm_password" class="form-control" id="confirm_password" placeholder="*********" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -1324,7 +1356,7 @@
                             </div>
                         </form>
                     </div>
-                            
+
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
         </div> <!-- end col -->
@@ -1381,7 +1413,7 @@
                                                 <th width="25%">Country</th>
                                                 <td width="25%" class="father_country"></td>
                                                 <th width="25%">State/Province</th>
-                                                <td width="25%"  class="father_state"></td>
+                                                <td width="25%" class="father_state"></td>
                                             </tr>
                                             <tr>
                                                 <th width="25%">City</th>
@@ -1444,7 +1476,7 @@
                                                 <th width="25%">Country</th>
                                                 <td width="25%" class="mother_country"></td>
                                                 <th width="25%">State/Province</th>
-                                                <td width="25%"  class="mother_state"></td>
+                                                <td width="25%" class="mother_state"></td>
                                             </tr>
                                             <tr>
                                                 <th width="25%">City</th>
@@ -1507,7 +1539,7 @@
                                                 <th width="25%">Country</th>
                                                 <td width="25%" class="guardian_country"></td>
                                                 <th width="25%">State/Province</th>
-                                                <td width="25%"  class="guardian_state"></td>
+                                                <td width="25%" class="guardian_state"></td>
                                             </tr>
                                             <tr>
                                                 <th width="25%">City</th>
@@ -1554,11 +1586,10 @@
     });
 
     $("#drp_country").countrySelect({
-        responsiveDropdown:true
+        responsiveDropdown: true
     });
 </script>
 <script>
-    
     var parentImg = "{{ asset('users/images/') }}";
     var defaultImg = "{{ asset('images/users/default.jpg') }}";
     var parentName = "{{ config('constants.api.parent_name') }}";

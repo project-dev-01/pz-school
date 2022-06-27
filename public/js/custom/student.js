@@ -1,5 +1,5 @@
 $(function () {
-    
+
     $("#student").hide();
     var father_id = $("#father_id").val();
     if (father_id) {
@@ -29,32 +29,31 @@ $(function () {
         autoclose: true,
     });
 
-    $('#guardian_name').keyup(function(){ 
+    $('#guardian_name').keyup(function () {
         var name = $(this).val();
-        if(name != '')
-        {
+        if (name != '') {
             $.ajax({
-            url:parentName,
-            method:"GET",
-            data:{token: token, branch_id: branchID, name: name },
-            success:function(data){
-                $('#guardian_list').fadeIn();  
-                $('#guardian_list').html(data);
-            }
+                url: parentName,
+                method: "GET",
+                data: { token: token, branch_id: branchID, name: name },
+                success: function (data) {
+                    $('#guardian_list').fadeIn();
+                    $('#guardian_list').html(data);
+                }
             });
         }
     });
 
-    $('#guardian_list').on('click','li', function(){
-        
-        $('#guardian_name').val($(this).text());  
-        $('#guardian_list').fadeOut();  
+    $('#guardian_list').on('click', 'li', function () {
+
+        $('#guardian_name').val($(this).text());
+        $('#guardian_list').fadeOut();
         var value = $(this).text();
-        if(value=="No results Found") {
-            $('#guardian_name').val("");  
+        if (value == "No results Found") {
+            $('#guardian_name').val("");
             $("#guardian_form").hide("slow");
             $("#guardian_photo").hide();
-         
+
         } else {
             var id = $(this).val();
             guardian(id);
@@ -62,7 +61,7 @@ $(function () {
     });
 
     function guardian(id) {
-        $('#guardian_id').val(id);  
+        $('#guardian_id').val(id);
         $("#guardian_form").show("slow");
         $("#guardian_info").show();
         $("#guardian_photo").show();
@@ -74,8 +73,8 @@ $(function () {
                 } else {
                     var src = defaultImg;
                 }
-                var name = data.first_name + " " +  data.last_name;
-                $('#guardian_name').val(name);  
+                var name = data.first_name + " " + data.last_name;
+                $('#guardian_name').val(name);
                 $("#guardian_photo").html('<img src="' + src + '" class="img-fluid d-block rounded" style="width:100px" />');
                 $("#guardian_first_name").val(data.first_name);
                 $("#guardian_last_name").val(data.last_name);
@@ -115,32 +114,31 @@ $(function () {
             }
         }, 'json');
     }
-    $('#father_name').keyup(function(){ 
+    $('#father_name').keyup(function () {
         var name = $(this).val();
-        if(name != '')
-        {
+        if (name != '') {
             $.ajax({
-            url:parentName,
-            method:"GET",
-            data:{token: token, branch_id: branchID, name: name },
-            success:function(data){
-                $('#father_list').fadeIn();  
-                $('#father_list').html(data);
-            }
+                url: parentName,
+                method: "GET",
+                data: { token: token, branch_id: branchID, name: name },
+                success: function (data) {
+                    $('#father_list').fadeIn();
+                    $('#father_list').html(data);
+                }
             });
         }
     });
 
-    $('#father_list').on('click','li', function(){
-        
-        $('#father_name').val($(this).text());  
-        $('#father_list').fadeOut();  
+    $('#father_list').on('click', 'li', function () {
+
+        $('#father_name').val($(this).text());
+        $('#father_list').fadeOut();
         var value = $(this).text();
-        if(value=="No results Found") {
-            $('#father_name').val("");  
+        if (value == "No results Found") {
+            $('#father_name').val("");
             $("#father_form").hide("slow");
             $("#father_photo").hide();
-         
+
         } else {
             var id = $(this).val();
             father(id);
@@ -160,8 +158,8 @@ $(function () {
                 } else {
                     var src = defaultImg;
                 }
-                var name = data.first_name + " " +  data.last_name;
-                $('#father_name').val(name); 
+                var name = data.first_name + " " + data.last_name;
+                $('#father_name').val(name);
                 $("#father_photo").html('<img src="' + src + '" class="img-fluid d-block rounded" style="width:100px" />');
                 $("#father_first_name").val(data.first_name);
                 $("#father_last_name").val(data.last_name);
@@ -182,8 +180,8 @@ $(function () {
                 $("#father_city").val(data.city);
                 $("#father_address").val(data.address);
 
-                
-                
+
+
                 $(".father_name").html(name);
                 $(".father_date_of_birth").html(data.date_of_birth);
                 $(".father_email").html(data.email);
@@ -204,32 +202,31 @@ $(function () {
         }, 'json');
     }
 
-    $('#mother_name').keyup(function(){ 
+    $('#mother_name').keyup(function () {
         var name = $(this).val();
-        if(name != '')
-        {
+        if (name != '') {
             $.ajax({
-            url:parentName,
-            method:"GET",
-            data:{token: token, branch_id: branchID, name: name },
-            success:function(data){
-                $('#mother_list').fadeIn();  
-                $('#mother_list').html(data);
-            }
+                url: parentName,
+                method: "GET",
+                data: { token: token, branch_id: branchID, name: name },
+                success: function (data) {
+                    $('#mother_list').fadeIn();
+                    $('#mother_list').html(data);
+                }
             });
         }
     });
 
-    $('#mother_list').on('click','li', function(){
-        
-        $('#mother_name').val($(this).text());  
-        $('#mother_list').fadeOut();  
+    $('#mother_list').on('click', 'li', function () {
+
+        $('#mother_name').val($(this).text());
+        $('#mother_list').fadeOut();
         var value = $(this).text();
-        if(value=="No results Found") {
-            $('#mother_name').val("");  
+        if (value == "No results Found") {
+            $('#mother_name').val("");
             $("#mother_form").hide("slow");
             $("#mother_photo").hide();
-         
+
         } else {
             var id = $(this).val();
             mother(id);
@@ -249,8 +246,8 @@ $(function () {
                 } else {
                     var src = defaultImg;
                 }
-                var name = data.first_name + " " +  data.last_name;
-                $('#mother_name').val(name); 
+                var name = data.first_name + " " + data.last_name;
+                $('#mother_name').val(name);
                 $("#mother_photo").html('<img src="' + src + '" class="img-fluid d-block rounded" style="width:100px" />');
                 $("#mother_first_name").val(data.first_name);
                 $("#mother_last_name").val(data.last_name);
@@ -316,9 +313,9 @@ $(function () {
                 url: studentList,
                 data: function (d) {
                     d.student_name = $('#student_name').val(),
-                    d.class_id = $('#class_id').val(),
-                    d.section_id = $('#section_id').val(),
-                    d.session_id = $('#session_id').val()
+                        d.class_id = $('#class_id').val(),
+                        d.section_id = $('#section_id').val(),
+                        d.session_id = $('#session_id').val()
                 }
             },
             "pageLength": 5,
@@ -402,13 +399,22 @@ $(function () {
             lname: "required",
             txt_mobile_no: "required",
             present_address: "required",
-            txt_pwd: {
+            // txt_pwd: {
+            //     minlength: 6
+            // },
+            // txt_retype_pwd: {
+            //     minlength: 6,
+            //     equalTo: "txt_pwd"
+            // },  
+            password: {
+                required: $("#password").val().length > 0,
                 minlength: 6
             },
-            txt_retype_pwd: {
+            confirm_password: {
+                required: $("#confirm_password").val().length > 0,
                 minlength: 6,
-                equalTo: "txt_pwd"
-            },             
+                equalTo: "#password"
+            }           
         }
     });
 
@@ -437,35 +443,35 @@ $(function () {
     });
 
     // delete Student 
-   $(document).on('click', '#deleteStudentBtn', function () {
-    var id = $(this).data('id');
-    var url = studentDelete;
-    swal.fire({
-        title: 'Are you sure?',
-        html: 'You want to <b>delete</b> this Student',
-        showCancelButton: true,
-        showCloseButton: true,
-        cancelButtonText: 'Cancel',
-        confirmButtonText: 'Yes, Delete',
-        cancelButtonColor: '#d33',
-        confirmButtonColor: '#556ee6',
-        width: 400,
-        allowOutsideClick: false
-    }).then(function (result) {
-        if (result.value) {
-            $.post(url, {
-                id: id
-            }, function (data) {
-                if (data.code == 200) {
-                    $("#student").show("slow");
-                    $('#student_table').DataTable().ajax.reload(null, false);
-                    toastr.success(data.message);
-                } else {
-                    $("#student").hide("slow");
-                    toastr.error(data.message);
-                }
-            }, 'json');
-        }
+    $(document).on('click', '#deleteStudentBtn', function () {
+        var id = $(this).data('id');
+        var url = studentDelete;
+        swal.fire({
+            title: 'Are you sure?',
+            html: 'You want to <b>delete</b> this Student',
+            showCancelButton: true,
+            showCloseButton: true,
+            cancelButtonText: 'Cancel',
+            confirmButtonText: 'Yes, Delete',
+            cancelButtonColor: '#d33',
+            confirmButtonColor: '#556ee6',
+            width: 400,
+            allowOutsideClick: false
+        }).then(function (result) {
+            if (result.value) {
+                $.post(url, {
+                    id: id
+                }, function (data) {
+                    if (data.code == 200) {
+                        $("#student").show("slow");
+                        $('#student_table').DataTable().ajax.reload(null, false);
+                        toastr.success(data.message);
+                    } else {
+                        $("#student").hide("slow");
+                        toastr.error(data.message);
+                    }
+                }, 'json');
+            }
+        });
     });
-});
 });
