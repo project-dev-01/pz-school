@@ -74,6 +74,13 @@ $(document).ready(function () {
                 m = response.data;
                 return m;
             }
+        }, {
+            url: getBulkCalendor + '?token=' + token + '&branch_id=' + branchID + '&student_id=' + student_id,
+            type: 'get',
+            success: function (response) {
+                c = response.data;
+                return c;
+            }
         }],
         // selectable: true,
         selectHelper: true,
@@ -91,6 +98,13 @@ $(document).ready(function () {
                 $("#end_date").html(e.event.extendedProps.end_date);
                 $("#audience").html(e.event.extendedProps.class_name);
                 $("#description").html(e.event.extendedProps.remarks);
+                $("#setCurDate").val(setCurDate);
+            } else if (e.event.extendedProps.bulk_id) {
+                $('#bulk-modal').modal('toggle');
+                var start = e.event.start;
+                var end = e.event.end;
+                var setCurDate = formatDate(end);
+                $("#bulk_name").html(e.event.extendedProps.name);
                 $("#setCurDate").val(setCurDate);
             } else if (e.event.extendedProps.time_table_id) {
                 $('#student-modal').modal('toggle');

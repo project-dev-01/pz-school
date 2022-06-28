@@ -1537,9 +1537,19 @@ class AdminController extends Controller
                             $subject .= '<option value="' . $sub['id'] . '"  >' . $sub['name'] . '</option>';
                         }
                     }
+                    $teacher = "";
                     $bulk = "";
                     if ($table['bulk_id']) {
+                        
                         $bulk = "disabled";
+                        
+                        $all = "";
+                        foreach (explode(',', $table['teacher_id']) as $info) {
+                            if($info == "0") {
+                                $all =  "Selected";
+                            } 
+                        }
+                        $teacher .= '<option value="0" '.$all.'> All </option>';
                     }
                         
 
@@ -1548,19 +1558,15 @@ class AdminController extends Controller
                         $checked = "checked";
                     }
 
-                    $teacher = "";
                     foreach ($timetable['data']['teacher'] as $teach) {
                         $selected = "";
                         foreach (explode(',', $table['teacher_id']) as $info) {
-                            if($table['teacher_id'] || $table['teacher_id'] == "0") {
-                                if ($teach['id'] == $info) {
-                                    $selected = "Selected";
-                                }   
-                            }
+                            if ($teach['id'] == $info) {
+                                $selected = "Selected";
+                            }  
+                            $teacher .= '<option value="' . $teach['id'] . '"   ' . $selected . '>' . $teach['name'] . '</option>';
                         }
-                        $teacher .= '<option value="' . $teach['id'] . '"   ' . $selected . '>' . $teach['name'] . '</option>';
                     }
-
                     // dd($teacher);
                     $response .=  '<tr class="iadd">';
                     $response .=  '<input type="hidden"  name="timetable[' . $row . '][id]" value="' . $table['id'] . '" ' . $bulk . '>';
@@ -1649,7 +1655,6 @@ class AdminController extends Controller
         ];
 
         $timetable = Helper::PostMethod(config('constants.api.timetable_subject_bulk'), $data);
-        // dd($timetable);
         $hall_list = Helper::GetMethod(config('constants.api.exam_hall_list'));
         if ($timetable['code'] == "200") {
 
@@ -1666,19 +1671,22 @@ class AdminController extends Controller
                     }
 
                     $teacher = "";
-                   
-                        foreach ($timetable['data']['teacher'] as $teach) {
-                            $selected = "";
-                            foreach (explode(',', $table['teacher_id']) as $info) {
-                                if($table['teacher_id'] || $table['teacher_id'] == "0") {
-                                    if ($teach['id'] == $info) {
-                                        $selected = "Selected";
-                                    }   
-                                }
-                            }
+                    $all = "";
+                    foreach (explode(',', $table['teacher_id']) as $info) {
+                        if($info == "0") {
+                            $all =  "Selected";
+                        } 
+                    }
+                    $teacher .= '<option value="0" '.$all.'> All </option>';
+                    foreach ($timetable['data']['teacher'] as $teach) {
+                        $selected = "";
+                        foreach (explode(',', $table['teacher_id']) as $info) {
+                            if ($teach['id'] == $info) {
+                                $selected = "Selected";
+                            }  
                             $teacher .= '<option value="' . $teach['id'] . '"   ' . $selected . '>' . $teach['name'] . '</option>';
                         }
-                    // dd($teacher);
+                    }
                     $response .=  '<tr class="iadd">';
                     $response .=  '<input type="hidden"  name="timetable[' . $row . '][id]" value="' . $table['id'] . '">';
                     $response .=  '<td>';
@@ -1883,7 +1891,9 @@ class AdminController extends Controller
                                 }
                                 $response .= '<b>Subject:' . $subject . '</b><br>';
                                 $response .= '(' . $table['time_start'] . ' - ' . $table['time_end'] . ' )<br>';
-                                $response .= 'Teacher :  ' . $table['teacher_name'] . '<br>';
+                                if($table['teacher_name']) {
+                                    $response .= 'Teacher :  ' . $table['teacher_name'] . '<br>';
+                                }
                                 if (isset($table['hall_no'])) {
                                     $response .= 'Class Room : ' . $table['hall_no'] . '';
                                 }
@@ -1958,6 +1968,7 @@ class AdminController extends Controller
             'timetable' => $request->timetable,
 
         ];
+        // dd($data);
         $timetable = Helper::PostMethod(config('constants.api.timetable_update'), $data);
 
         return $timetable;

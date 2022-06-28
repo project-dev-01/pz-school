@@ -1281,8 +1281,8 @@
                                                 <span> Route Master </span>
                                             </a>
                                         </li>
-                                        <!-- <li>
-                                            <a href="" class="nav-link {{ (request()->is('')) ? 'active' : '' }}">
+                                        <li>
+                                            <a href="{{ route('admin.transport_route')}}" class="nav-link {{ (request()->is('')) ? 'active' : '' }}">
                                                 <span> Vehicle Master</span>
                                             </a>
                                         </li>
@@ -1295,7 +1295,7 @@
                                             <a href="" class="nav-link {{ (request()->is('')) ? 'active' : '' }}">
                                                 <span> Assign Vehicle</span>
                                             </a>
-                                        </li> -->
+                                        </li>
                                     </ul>
                                 </div>
                             </li>

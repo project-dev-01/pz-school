@@ -55,6 +55,13 @@ $(document).ready(function () {
                 m = response.data;
                 return m;
             }
+        }, {
+            url: getBulkCalendor + '?token=' + token + '&branch_id=' + branchID,
+            type: 'get',
+            success: function (response) {
+                c = response.data;
+                return c;
+            }
         }],
         selectable: true,
         selectHelper: true,
@@ -143,7 +150,14 @@ $(document).ready(function () {
                 var setCurDate = formatDate(end);
                 $("#name").html(e.event.extendedProps.name);
                 $("#setCurDate").val(setCurDate);
-            } else {
+            } else if (e.event.extendedProps.bulk_id) {
+                $('#bulk-modal').modal('toggle');
+                var start = e.event.start;
+                var end = e.event.end;
+                var setCurDate = formatDate(end);
+                $("#bulk_name").html(e.event.extendedProps.name);
+                $("#setCurDate").val(setCurDate);
+            }  else {
                 console.log(e)
                 console.log(e.event)
                 $('#showTasksModal').modal('toggle');

@@ -620,6 +620,15 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('transport_route/transport_route-details', [AdminController::class, 'getTransportRouteDetails'])->name('admin.transport_route.details');
         Route::post('transport_route/update', [AdminController::class, 'updateTransportRoute'])->name('admin.transport_route.update');
         Route::post('transport_route/delete', [AdminController::class, 'deleteTransportRoute'])->name('admin.transport_route.delete');
+
+        // TransportVehicle Route 
+
+        Route::get('transport_vehicle/index', [AdminController::class, 'transportVehicle'])->name('admin.transport_vehicle');
+        Route::get('transport_vehicle/list', [AdminController::class, 'getTransportVehicleList'])->name('admin.transport_vehicle.list');
+        Route::post('transport_vehicle/add', [AdminController::class, 'addTransportVehicle'])->name('admin.transport_vehicle.add');
+        Route::post('transport_vehicle/transport_vehicle-details', [AdminController::class, 'getTransportVehicleDetails'])->name('admin.transport_vehicle.details');
+        Route::post('transport_vehicle/update', [AdminController::class, 'updateTransportVehicle'])->name('admin.transport_vehicle.update');
+        Route::post('transport_vehicle/delete', [AdminController::class, 'deleteTransportVehicle'])->name('admin.transport_vehicle.delete');
         // LEAVE MANAGEMENT ROUTES start
         // Leave Apply
         Route::get('leave_management/applyleave', [AdminController::class, 'applyleave'])->name('admin.leave_management.applyleave');

@@ -39,3 +39,10 @@ ALTER TABLE `calendors` ADD `task_color` VARCHAR(255) NULL AFTER `description`;
 ALTER TABLE `students` ADD `passport` TEXT NULL AFTER `birthday`;
 ALTER TABLE `parent` ADD `race` INT NULL AFTER `mobile_no`;
 ALTER TABLE `parent` ADD `religion` INT NULL AFTER `race`;
+
+
+ALTER TABLE `timetable_class` ADD `type` TEXT NULL AFTER `bulk_id`;
+ALTER TABLE `timetable_class` ADD `bulk_id` INT NULL AFTER `day`;
+
+
+ALTER TABLE `calendors` ADD `bulk_id` INT NULL AFTER `time_table_id`;

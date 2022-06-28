@@ -256,6 +256,7 @@ $(function () {
         row += '<td width="20%" ><div class="form-group main">';
         row += '<select  class="form-control select2-multiple teacher" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="timetable[' + count + '][teacher][]">';
         row += '<option value="">Select Teacher</option>';
+        row += '<option value="0">All</option>';
         $.each(teacher, function (key, val) {
             row += '<option value="' + val.id + '">' + val.name + '</option>';
         });

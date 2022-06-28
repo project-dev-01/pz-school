@@ -7674,6 +7674,8 @@ class ApiController extends BaseController
         } else {
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
+
+            
             $success = $Connection->table('calendors as cl')
                 ->select('cl.id', 'cl.class_id', 'cl.time_table_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id', 'cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as color', 'sb.name as subject_name', 'sb.name as title', 'st.first_name as teacher_name', 'dr.report')
                 ->join('classes as c', 'cl.class_id', '=', 'c.id')
@@ -14075,4 +14077,249 @@ class ApiController extends BaseController
             return $this->successResponse($getStudentClassSection, 'get class and section record successfully');
         }
     }
+
+     // add TransportVehicle
+     public function addTransportVehicle(Request $request)
+     {
+ 
+         $validator = \Validator::make($request->all(), [
+            'vehicle_no' => 'required',
+            'capacity' => 'required',
+            'insurance_renewal' => 'required',
+            'driver_phone' => 'required',
+            'driver_name' => 'required',
+            'driver_license' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+         ]);
+         if (!$validator->passes()) {
+             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+         } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // insert data
+            $query = $conn->table('transport_vehicle')->insert([
+                'vehicle_no' => $request->vehicle_no,
+                'capacity' => $request->capacity,
+                'insurance_renewal' => $request->insurance_renewal,
+                'driver_phone' => $request->driver_phone,
+                'driver_name' => $request->driver_name,
+                'driver_license' => $request->driver_license,
+                'created_at' => date("Y-m-d H:i:s")
+            ]);
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Transport Vehicle has been successfully saved');
+            }
+         }
+     }
+     // getTransportVehicleList
+     public function getTransportVehicleList(Request $request)
+     {
+         $validator = \Validator::make($request->all(), [
+             'branch_id' => 'required',
+             'token' => 'required',
+         ]);
+ 
+         if (!$validator->passes()) {
+             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+         } else {
+             // create new connection
+             $conn = $this->createNewConnection($request->branch_id);
+             // get data
+             $transportVehicleDetails = $conn->table('transport_vehicle')->get();
+             return $this->successResponse($transportVehicleDetails, 'Transport Vehicle record fetch successfully');
+         }
+     }
+     // get TransportVehicle row details
+     public function getTransportVehicleDetails(Request $request)
+     {
+ 
+         $validator = \Validator::make($request->all(), [
+             'id' => 'required',
+             'branch_id' => 'required',
+             'token' => 'required'
+         ]);
+ 
+         if (!$validator->passes()) {
+             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+         } else {
+             $id = $request->id;
+             // create new connection
+             $conn = $this->createNewConnection($request->branch_id);
+             // get data
+             $transportVehicleDetails = $conn->table('transport_vehicle')->where('id', $id)->first();
+             return $this->successResponse($transportVehicleDetails, 'Transport Vehicle row fetch successfully');
+         }
+     }
+     // update TransportVehicle
+     public function updateTransportVehicle(Request $request)
+     {
+         $id = $request->id;
+         $validator = \Validator::make($request->all(), [
+            'vehicle_no' => 'required',
+            'capacity' => 'required',
+            'insurance_renewal' => 'required',
+            'driver_phone' => 'required',
+            'driver_name' => 'required',
+            'driver_license' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+         ]);
+ 
+         if (!$validator->passes()) {
+             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+         } else {
+ 
+             // create new connection
+             $conn = $this->createNewConnection($request->branch_id);
+            // update data
+            $query = $conn->table('transport_vehicle')->where('id', $id)->update([
+                'vehicle_no' => $request->vehicle_no,
+                'capacity' => $request->capacity,
+                'insurance_renewal' => $request->insurance_renewal,
+                'driver_phone' => $request->driver_phone,
+                'driver_name' => $request->driver_name,
+                'driver_license' => $request->driver_license,
+                'updated_at' => date("Y-m-d H:i:s")
+            ]);
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Transport Vehicle Details have Been updated');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+         }
+     }
+     // delete TransportVehicle
+     public function deleteTransportVehicle(Request $request)
+     {
+ 
+         $id = $request->id;
+         $validator = \Validator::make($request->all(), [
+             'token' => 'required',
+             'branch_id' => 'required',
+             'id' => 'required',
+         ]);
+ 
+         if (!$validator->passes()) {
+             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+         } else {
+             // create new connection
+             $conn = $this->createNewConnection($request->branch_id);
+             // get data
+             $query = $conn->table('transport_vehicle')->where('id', $id)->delete();
+ 
+             $success = [];
+             if ($query) {
+                 return $this->successResponse($success, 'Transport Vehicle have been deleted successfully');
+             } else {
+                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+             }
+         }
+     }
+
+    // getBulkCalendorTeacher
+    public function getBulkCalendorTeacher(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'teacher_id'=> 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $success = $Connection->table('calendors as cl')
+                ->select('cl.id', 'cl.class_id', 'cl.title','cl.title as name','cl.time_table_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id', 'cl.end',"cl.teacher_id","bulk_id")
+                ->join('subject_assigns as sa', function ($q) {
+                    $q->on('cl.class_id', '=', 'sa.class_id')
+                        ->on('cl.section_id', '=', 'sa.section_id');
+                })
+                ->where('sa.teacher_id',$request->teacher_id)
+                ->where("cl.teacher_id","0")
+                ->orWhere("cl.teacher_id",$request->teacher_id)
+                ->whereNotNull('cl.bulk_id')
+                ->groupBy('cl.start')
+                ->get();
+
+                // dd($success);
+                $output=[];
+                foreach($success as $suc) {
+                    $data = $suc;
+                    $data->color = "bg-success";
+                    array_push($output, $data);
+                }
+                // dd($success);
+            return $this->successResponse($output, 'calendor data get successfully');
+        }
+    }
+
+    // getBulkCalendorAdmin
+    public function getBulkCalendorAdmin(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $success = $Connection->table('calendors as cl')
+                ->select('cl.id', 'cl.class_id', 'cl.title','cl.title as name','cl.time_table_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id', 'cl.end',"cl.teacher_id","bulk_id")
+                ->where("cl.teacher_id","0")
+                ->whereNotNull('cl.bulk_id')
+                ->groupBy('cl.start')
+                ->get();
+
+                // dd($success);
+                $output=[];
+                foreach($success as $suc) {
+                    $data = $suc;
+                    $data->color = "bg-success";
+                    array_push($output, $data);
+                }
+                // dd($success);
+            return $this->successResponse($output, 'calendor data get successfully');
+        }
+    }
+
+     // getBulkCalendorStudent
+     public function getBulkCalendorStudent(Request $request)
+     {
+         $validator = \Validator::make($request->all(), [
+             'branch_id' => 'required',
+             'student_id' => 'required',
+         ]);
+         if (!$validator->passes()) {
+             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+         } else {
+             // create new connection
+             $Connection = $this->createNewConnection($request->branch_id);
+             $success = $Connection->table('calendors as cl')
+                            ->select('cl.id', 'cl.class_id', 'cl.title','cl.title as name','cl.time_table_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id', 'cl.end',"cl.teacher_id","bulk_id")
+                            ->join('enrolls as e', function ($q) {
+                                $q->on('cl.class_id', '=', 'e.class_id')
+                                    ->on('cl.section_id', '=', 'e.section_id');
+                            })
+                            ->where('e.student_id',$request->student_id)
+                            ->whereNotNull('cl.bulk_id')
+                            ->groupBy('cl.start')
+                            ->get();
+ 
+                 // dd($success);
+                 $output=[];
+                 foreach($success as $suc) {
+                     $data = $suc;
+                     $data->color = "bg-success";
+                     array_push($output, $data);
+                 }
+                 // dd($success);
+             return $this->successResponse($output, 'calendor data get successfully');
+         }
+     }
 }

@@ -350,6 +350,11 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('get_event_calendor_student', [ApiController::class, 'getEventCalendorStud']);
     Route::get('get_event_calendor_admin', [ApiController::class, 'getEventCalendorAdmin']);
 
+    
+    Route::get('get_bulk_calendor_teacher', [ApiController::class, 'getBulkCalendorTeacher']);
+    Route::get('get_bulk_calendor_admin', [ApiController::class, 'getBulkCalendorAdmin']);
+    Route::get('get_bulk_calendor_student', [ApiController::class, 'getBulkCalendorStudent']);
+
     // add timetable schedule
     Route::post('add_calendor_timetable', [ApiController::class, 'addCalendorTimetable']);
 
@@ -438,6 +443,13 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('transport_route/transport_route-details', [ApiController::class, 'getTransportRouteDetails']);
     Route::post('transport_route/update', [ApiController::class, 'updateTransportRoute']);
     Route::post('transport_route/delete', [ApiController::class, 'deleteTransportRoute']);
+
+    // Vehicle Master routes
+    Route::post('transport_vehicle/add', [ApiController::class, 'addTransportVehicle']);
+    Route::get('transport_vehicle/list', [ApiController::class, 'getTransportVehicleList']);
+    Route::post('transport_vehicle/transport_vehicle-details', [ApiController::class, 'getTransportVehicleDetails']);
+    Route::post('transport_vehicle/update', [ApiController::class, 'updateTransportVehicle']);
+    Route::post('transport_vehicle/delete', [ApiController::class, 'deleteTransportVehicle']);
 
     // Transport Stoppage routes
     Route::post('transport_stoppage/add', [ApiController::class, 'addTransportStoppage']);

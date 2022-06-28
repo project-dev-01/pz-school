@@ -332,6 +332,27 @@
                 </div> <!-- end card body-->
             </div> <!-- end card -->
 
+            <div class="modal fade " id="bulk-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myviewBulkModalLabel"> <i class="fas fa-info-circle"></i> Details </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-box">
+                                        <div class="table-responsive">
+                                            <p class="text-center"> Name :<span id="bulk_name"></span></p><br>
+                                        </div>
+                                    </div> <!-- end card-box -->
+                                </div> <!-- end col -->
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
             <!-- Add New Event MODAL -->
             <div class="modal fade" id="student-modal" tabindex="-1">
                 <div class="modal-dialog modal-lg">
@@ -625,6 +646,7 @@
     // get timetable list
     var getTimetableCalendorStudent = "{{ config('constants.api.get_timetable_calendor_student') }}";
     var getEventCalendorStudent = "{{ config('constants.api.get_event_calendor_student') }}";
+    var getBulkCalendor = "{{ config('constants.api.get_bulk_calendor_student') }}";
     // todo list js
     var readUpdateTodoUrl = "{{ config('constants.api.read_update_todo') }}";
     var getAssignClassUrl = "{{ config('constants.api.get_assign_class') }}";

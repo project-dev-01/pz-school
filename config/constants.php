@@ -273,6 +273,10 @@ return [
          'get_event_calendor_student' => $url.'/get_event_calendor_student',
          'get_event_calendor_admin' => $url.'/get_event_calendor_admin',
          
+         
+        'get_bulk_calendor_teacher' => $url.'/get_bulk_calendor_teacher',
+        'get_bulk_calendor_admin' => $url.'/get_bulk_calendor_admin',
+        'get_bulk_calendor_student' => $url.'/get_bulk_calendor_student',
 
          // exam term url
         'exam_term_add' => $url.'/exam_term/add',

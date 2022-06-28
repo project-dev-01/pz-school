@@ -179,7 +179,7 @@ $(function () {
     $('#editTimetableForm').on('submit', function (e) {
         e.preventDefault();
         var form = this;
-        $("#overlay").fadeIn(300);
+        // $("#overlay").fadeIn(300);
         $.ajax({
             url: $(form).attr('action'),
             method: $(form).attr('method'),
@@ -192,10 +192,10 @@ $(function () {
                     $('.editTimetableForm').find('form')[0].reset();
                     toastr.success(data.message);
                     window.location.href = timetableList;
-                    $("#overlay").fadeOut(300);
+                    // $("#overlay").fadeOut(300);
                 } else {
                     toastr.error(data.message);
-                    $("#overlay").fadeOut(300);
+                    // $("#overlay").fadeOut(300);
                 }
             }
         });

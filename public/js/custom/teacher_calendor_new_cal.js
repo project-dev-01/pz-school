@@ -262,6 +262,13 @@ $(document).ready(function () {
                 b = response.data;
                 return b;
             }
+        }, {
+            url: getBulkCalendor + '?token=' + token + '&branch_id=' + branchID + '&teacher_id=' + ref_user_id,
+            type: 'get',
+            success: function (response) {
+                c = response.data;
+                return c;
+            }
         }],
         // selectable: true,
         selectHelper: true,
@@ -349,6 +356,13 @@ $(document).ready(function () {
                 var end = e.event.end;
                 var setCurDate = formatDate(end);
                 $("#name").html(e.event.extendedProps.name);
+                $("#setCurDate").val(setCurDate);
+            } else if (e.event.extendedProps.bulk_id) {
+                $('#bulk-modal').modal('toggle');
+                var start = e.event.start;
+                var end = e.event.end;
+                var setCurDate = formatDate(end);
+                $("#bulk_name").html(e.event.extendedProps.name);
                 $("#setCurDate").val(setCurDate);
             } else if (e.event.extendedProps.time_table_id) {
                 $('#teacher-modal').modal('toggle');
