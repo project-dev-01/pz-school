@@ -1782,7 +1782,7 @@ class AdminController extends Controller
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.timetable_add'), $data);
-        dd($response);
+        // dd($response);
         return $response;
     }
 
