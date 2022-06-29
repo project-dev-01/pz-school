@@ -15,7 +15,7 @@ $(function () {
     // add timetable
     $('#addTimetableForm').on('submit', function (e) {
         e.preventDefault();
-        // $("#overlay").fadeIn(300);
+        $("#overlay").fadeIn(300);
         var form = this;
         $.ajax({
             url: $(form).attr('action'),
@@ -29,10 +29,10 @@ $(function () {
                     $('.addTimetableForm').find('form')[0].reset();
                     toastr.success(data.message);
                     window.location.href = timetableList;
-                    // $("#overlay").fadeOut(300);
+                    $("#overlay").fadeOut(300);
                 } else {
                     toastr.error(data.message);
-                    // $("#overlay").fadeOut(300);
+                    $("#overlay").fadeOut(300);
                 }
             }
         });

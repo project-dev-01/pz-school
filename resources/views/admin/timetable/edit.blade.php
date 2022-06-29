@@ -106,15 +106,17 @@
                                                     <div class="form-group">
                                                         <select class="form-control teacher teacher select2-multiple-plus" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="timetable[{{$row}}][teacher][]" {{$bulk}}>
                                                             <option value="">Select Teacher</option>
-                                                            @php
-                                                                $all = "";
-                                                                foreach (explode(',', $table['teacher_id']) as $info) {
-                                                                    if($info == "0") {
-                                                                        $all =  "Selected";
-                                                                    } 
-                                                                }
-                                                            @endphp
-                                                            <option value="0" {{ $all }}>All</option>
+                                                            @if($table['bulk_id'])
+                                                                @php
+                                                                    $all = "";
+                                                                    foreach (explode(',', $table['teacher_id']) as $info) {
+                                                                        if($info == "0") {
+                                                                            $all =  "Selected";
+                                                                        } 
+                                                                    }
+                                                                @endphp
+                                                                <option value="0" {{ $all }}>All</option>
+                                                            @endif
                                                             @forelse($teacher as $teach)
                                                             @php
                                                             $selected = "";

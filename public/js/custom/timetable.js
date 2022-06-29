@@ -15,7 +15,7 @@ $(function () {
     // add timetable
     $('#addTimetableForm').on('submit', function (e) {
         e.preventDefault();
-        // $("#overlay").fadeIn(300);
+        $("#overlay").fadeIn(300);
         var form = this;
         $.ajax({
             url: $(form).attr('action'),
@@ -29,10 +29,10 @@ $(function () {
                     $('.addTimetableForm').find('form')[0].reset();
                     toastr.success(data.message);
                     window.location.href = timetableList;
-                    // $("#overlay").fadeOut(300);
+                    $("#overlay").fadeOut(300);
                 } else {
                     toastr.error(data.message);
-                    // $("#overlay").fadeOut(300);
+                    $("#overlay").fadeOut(300);
                 }
             }
         });
@@ -179,7 +179,7 @@ $(function () {
     $('#editTimetableForm').on('submit', function (e) {
         e.preventDefault();
         var form = this;
-        // $("#overlay").fadeIn(300);
+        $("#overlay").fadeIn(300);
         $.ajax({
             url: $(form).attr('action'),
             method: $(form).attr('method'),
@@ -192,10 +192,10 @@ $(function () {
                     $('.editTimetableForm').find('form')[0].reset();
                     toastr.success(data.message);
                     window.location.href = timetableList;
-                    // $("#overlay").fadeOut(300);
+                    $("#overlay").fadeOut(300);
                 } else {
                     toastr.error(data.message);
-                    // $("#overlay").fadeOut(300);
+                    $("#overlay").fadeOut(300);
                 }
             }
         });
@@ -224,7 +224,16 @@ $(function () {
     });
 
     $(document).on('change', "#edit_timetable_body input[type='checkbox']", function () {
-        $(this).closest('tr').find('select').prop('disabled', this.checked);
+        var fal = true;
+        if(this.checked==true)
+        {
+            fal = false;
+        }
+        $(this).closest('tr').find('.subject').prop('disabled', this.checked);
+        $(this).closest('tr').find('.subject').attr('hidden', this.checked);
+
+        $(this).closest('tr').find('.break_type').prop('disabled', fal);
+        $(this).closest('tr').find('.break_type').attr('hidden', fal);
     })
 
     $(document).on('click', "#addMore", function () {

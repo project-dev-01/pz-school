@@ -155,6 +155,7 @@ $(function () {
     
     $('#addScheduleForm').on('submit', function (e) {
         e.preventDefault();
+        $("#overlay").fadeIn(300);
         var form = this;
         $.ajax({
             url: $(form).attr('action'),
@@ -167,8 +168,10 @@ $(function () {
                 if (data.code == 200) {
                     window.location.href = scheduleList;
                     toastr.success(data.message);
+                    $("#overlay").fadeOut(300);
                 } else {
                     toastr.error(data.message);
+                    $("#overlay").fadeOut(300);
                 }
             }
         });

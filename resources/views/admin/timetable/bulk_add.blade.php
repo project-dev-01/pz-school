@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Add Bulk')
+@section('title','Add Bulk Schedule')
 @section('content')
 <style>
     .form-control:disabled,
@@ -22,7 +22,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Add Bulk</h4>
+                <h4 class="page-title">Add Bulk Schedule</h4>
             </div>
         </div>
     </div>
@@ -116,7 +116,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Add Schedule
+                            Add Bulk Schedule
                             <h4>
                     </li>
                 </ul><br>

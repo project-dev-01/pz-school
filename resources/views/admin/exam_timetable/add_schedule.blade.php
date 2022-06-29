@@ -98,16 +98,16 @@
                             <div class="col-sm-12">
                                 <div class="card-box">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered mb-0 text-center">
+                                        <table class="table table-bordered mb-0 text-center table-responsive">
                                             <thead>
                                                 <tr>
-                                                    <th>Subject <span class="text-danger">*</span></th>
-                                                    <th>Date <span class="text-danger">*</span></th>
-                                                    <th>Starting Time <span class="text-danger">*</span></th>
-                                                    <th>Ending Time <span class="text-danger">*</span></th>
-                                                    <th>Hall Room <span class="text-danger">*</span></th>
-                                                    <th>Distributor<span class="text-danger">*</span></th>
-                                                    <th>Marks<span class="text-danger">*</span></th>
+                                                    <th width="25%">Subject <span class="text-danger">*</span></th>
+                                                    <th width="10%">Date <span class="text-danger">*</span></th>
+                                                    <th width="5%">Starting Time <span class="text-danger">*</span></th>
+                                                    <th width="5%">Ending Time <span class="text-danger">*</span></th>
+                                                    <th width="10%">Hall Room <span class="text-danger">*</span></th>
+                                                    <th width="30%">Distributor<span class="text-danger">*</span></th>
+                                                    <th width="15%">Marks<span class="text-danger">*</span></th>
 
                                                 </tr>
                                             </thead>

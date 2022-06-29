@@ -8521,7 +8521,7 @@ class ApiController extends BaseController
             'token' => 'required',
         ]);
 
-        // return $request;
+        
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -8531,22 +8531,22 @@ class ApiController extends BaseController
             $exams = $request['exam'];
             // insert data
 
+            // return $exams;
             foreach ($exams as $exam) {
                 $mark = json_encode($exam['mark']);
 
                 $distributor = $exam['distributor'];
 
+
                 if ($exam['distributor_type'] == "1") {
 
-                    $data = $con->table('staffs as s')->select('s.id', 's.name')
+                    $data = $con->table('staffs as s')->select('s.id',  DB::raw('CONCAT(s.first_name, " ", s.last_name) as name'),)
                         ->where('id', $exam['distributor'])
                         ->first();
 
                     $distributor = $data->name;
                 }
-
                 if ($exam['timetable_exam_id']) {
-                    // return $exam;
                     $query = $con->table('timetable_exam')->where('id', $exam['timetable_exam_id'])->update([
                         'exam_id' => $request->exam_id,
                         'class_id' => $request->class_id,
@@ -8564,24 +8564,37 @@ class ApiController extends BaseController
                     ]);
                 } else {
 
-                    $query = $con->table('timetable_exam')->insert([
-                        'exam_id' => $request->exam_id,
-                        'class_id' => $request->class_id,
-                        'section_id' => $request->section_id,
-                        'subject_id' => $exam['subject_id'],
-                        'time_start' => $exam['time_start'],
-                        'time_end' => $exam['time_end'],
-                        'marks' => $mark,
-                        'hall_id' => $exam['hall_id'],
-                        "distributor_type" => $exam['distributor_type'],
-                        "distributor" => $distributor,
-                        "distributor_id" => $exam['distributor'],
-                        'exam_date' => $exam['exam_date'],
-                        'created_at' => date("Y-m-d H:i:s")
+                    $insertValidator = \Validator::make($exam, [
+                        'subject_id' => 'required',
+                        'time_start' => 'required',
+                        'time_end' => 'required',
+                        'hall_id' => 'required',
+                        'distributor_type' => 'required',
+                        'distributor' => 'required',
+                        'exam_date' => 'required',
                     ]);
+
+                    // return $insertValidator;
+                    if ($insertValidator->passes()) {
+                        // return $exam;
+                        $query = $con->table('timetable_exam')->insert([
+                            'exam_id' => $request->exam_id,
+                            'class_id' => $request->class_id,
+                            'section_id' => $request->section_id,
+                            'subject_id' => $exam['subject_id'],
+                            'time_start' => $exam['time_start'],
+                            'time_end' => $exam['time_end'],
+                            'marks' => $mark,
+                            'hall_id' => $exam['hall_id'],
+                            "distributor_type" => $exam['distributor_type'],
+                            "distributor" => $distributor,
+                            "distributor_id" => $exam['distributor'],
+                            'exam_date' => $exam['exam_date'],
+                            'created_at' => date("Y-m-d H:i:s")
+                        ]);
+                    }
                 }
             }
-
             $success = [];
             if (!$query) {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);

@@ -955,7 +955,7 @@
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.timetable.bulk.create')}}" class="nav-link {{ (request()->is('super_admin/timetable*')) ? 'active' : '' }}">
-                                                <span>Add Bulk</span>
+                                                <span>Add Bulk Schedule</span>
                                             </a>
                                         </li>
                                     </ul>
