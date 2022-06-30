@@ -493,7 +493,8 @@
     @include('admin.dashboard.check_list')
     @include('admin.dashboard.task')
     @include('admin.dashboard.task-show')
-    
+    @include('admin.dashboard.exam-schedule')
+
 </div> <!-- container -->
 @endsection
 @section('scripts')
@@ -505,6 +506,7 @@
     var getAssignClassUrl = "{{ config('constants.api.get_assign_class') }}";
     var pathDownloadFileUrl = "{{ asset('images/todolist/') }}";
     var toDoCommentsUrl = "{{ config('constants.api.to_do_comments') }}";
+    var getScheduleExamDetailsUrl = "{{ config('constants.api.get_schedule_exam_details') }}";
 
     var UserName = "{{ Session::get('name') }}";
     // task all url

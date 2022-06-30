@@ -429,7 +429,7 @@ $(function () {
         // language: {
         //     searchPlaceholder: "Search..."
         // },
-        "ordering": false,
+        // "ordering": false,
         "pageLength": 5,
         "aLengthMenu": [
             [5, 10, 25, 50, -1],

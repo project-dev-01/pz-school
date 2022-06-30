@@ -207,7 +207,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('exam_timetable/list', [ApiController::class, 'listExamTimetable']);
     Route::post('exam_timetable/get', [ApiController::class, 'getExamTimetable']);
 
-    
+
     Route::get('relation/list', [ApiController::class, 'getRelationList']);
     // get roles
     Route::post('roles/list', [ApiController::class, 'getRoles']);
@@ -223,7 +223,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('timetable/list', [ApiController::class, 'getTimetableList']);
     Route::post('timetable/edit', [ApiController::class, 'editTimetable']);
     Route::post('timetable/update', [ApiController::class, 'updateTimetable']);
-    
+
     // Timetable Bulk
     Route::post('timetable-subject-bulk', [ApiController::class, 'timetableSubjectBulk']);
     Route::post('timetable/add/bulk', [ApiController::class, 'addBulkTimetable']);
@@ -350,7 +350,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('get_event_calendor_student', [ApiController::class, 'getEventCalendorStud']);
     Route::get('get_event_calendor_admin', [ApiController::class, 'getEventCalendorAdmin']);
 
-    
+
     Route::get('get_bulk_calendor_teacher', [ApiController::class, 'getBulkCalendorTeacher']);
     Route::get('get_bulk_calendor_admin', [ApiController::class, 'getBulkCalendorAdmin']);
     Route::get('get_bulk_calendor_student', [ApiController::class, 'getBulkCalendorStudent']);
@@ -467,7 +467,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('employee-leave/leave_approval_history_by_staff', [ApiController::class, 'leaveApprovalHistoryByStaff']);
     Route::post('employee-leave/leave_details', [ApiController::class, 'staffLeaveDetails']);
     Route::post('employee-leave/leave_taken_history', [ApiController::class, 'staffLeaveTakenHist']);
-    
+
     //attendance Routes
     Route::get('attendance/employee_list', [ApiController::class, 'getEmployeeAttendanceList']);
     Route::post('attendance/employee_add', [ApiController::class, 'addEmployeeAttendance']);
@@ -475,7 +475,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // add-task-calendor
     Route::post('calendor/add-task-calendor', [ApiController::class, 'calendorAddTask']);
     Route::get('calendor/list-task-calendor', [ApiController::class, 'calendorListTask']);
-    
+
     // Education routes
     Route::post('education/add', [ApiController::class, 'addEducation']);
     Route::get('education/list', [ApiController::class, 'getEducationList']);
@@ -483,7 +483,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('education/update', [ApiController::class, 'updateEducation']);
     Route::post('education/delete', [ApiController::class, 'deleteEducation']);
 
-    
+
     Route::post('employee_by_department', [ApiController::class, 'getEmployeeByDepartment']);
     // analytics routes
     Route::post('get_student_list/by_class_section', [ApiController::class, 'getStudListByClassSec']);
@@ -495,5 +495,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('get_exam_marks_by_student', [ApiController::class, 'getExamMarksByStudent']);
     Route::post('get_student_by_all_subjects', [ApiController::class, 'getStudentByAllSubjects']);
     Route::post('get_class_section_by_student', [ApiController::class, 'getClassSectionByStudent']);
-    
+    // get schedule exam details
+    Route::get('get_schedule_exam_details', [ApiController::class, 'getScheduleExamDetails']);
+    Route::get('get_schedule_exam_details_by_teacher', [ApiController::class, 'getScheduleExamDetailsBYTeacher']);
+    Route::get('get_schedule_exam_details_by_student', [ApiController::class, 'getScheduleExamDetailsBYStudent']);
 });

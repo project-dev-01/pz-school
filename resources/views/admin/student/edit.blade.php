@@ -197,6 +197,14 @@
         display: block;
         height: 28px;
     }
+
+    .iti {
+        display: block;
+    }
+
+    .country-select {
+        display: block;
+    }
 </style>
 @endsection
 <div class="container-fluid">
@@ -669,13 +677,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-1">
-                                        </div>
-                                        <div class="col-md-4" id="father_photo" style="display:none;">
-
-                                        </div>
                                     </div>
                                     <div id="father_form" style="display:none;">
+                                        <div class="row">
+                                            <div class="col-md-4" id="father_photo" style="display:none;">
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
@@ -850,13 +857,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-1">
-                                        </div>
-                                        <div class="col-md-4" id="mother_photo" style="display:none;">
 
-                                        </div>
                                     </div>
                                     <div id="mother_form" style="display:none;">
+                                        <div class="row">
+                                            <div class="col-md-4" id="mother_photo" style="display:none;">
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
@@ -1043,13 +1050,14 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-1">
-                                        </div>
-                                        <div class="col-md-3" id="guardian_photo" style="display:none;">
 
-                                        </div>
                                     </div>
                                     <div id="guardian_form" style="display:none;">
+                                        <div class="row">
+                                            <div class="col-md-3" id="guardian_photo" style="display:none;">
+
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
@@ -1308,38 +1316,36 @@
 
 
                             <div class="card">
-                                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                                <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="nav-link">
-                                            Change Password
-                                            <h4>
+                                        <h4 class="navv">Change Password<h4>
                                     </li>
                                 </ul>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
-                                                <label for="email">Password</label>
+                                                <label for="password">Password</label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
                                                             <span class="fas fa-unlock"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="password" name="password" class="form-control" id="password" placeholder="********" aria-describedby="inputGroupPrepend">
+                                                    <input type="password" class="form-control" name="password" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
-                                                <label for="email">Retype Password</label>
+                                                <label for="confirm_password">Retype Password</label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
                                                             <span class="fas fa-unlock"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="password" name="confirm_password" class="form-control" id="confirm_password" placeholder="*********" aria-describedby="inputGroupPrepend">
+                                                    <input type="password" class="form-control" name="confirm_password" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>

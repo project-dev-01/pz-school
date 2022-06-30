@@ -12,10 +12,12 @@
         position: relative;
         cursor: pointer;
     }
+
     .switch input {
         display: none;
     }
-    .switch input + span {
+
+    .switch input+span {
         padding-left: 50px;
         min-height: 24px;
         line-height: 24px;
@@ -26,13 +28,16 @@
         white-space: nowrap;
         transition: color 0.3s ease;
     }
-    .switch input + span:before, .switch input + span:after {
+
+    .switch input+span:before,
+    .switch input+span:after {
         content: '';
         display: block;
         position: absolute;
         border-radius: 12px;
     }
-    .switch input + span:before {
+
+    .switch input+span:before {
         top: 0;
         left: 0;
         width: 42px;
@@ -40,7 +45,8 @@
         background: #e4ecfa;
         transition: all 0.3s ease;
     }
-    .switch input + span:after {
+
+    .switch input+span:after {
         width: 18px;
         height: 18px;
         background: #fff;
@@ -49,7 +55,8 @@
         box-shadow: 0 1px 3px rgba(18, 22, 33, .1);
         transition: all 0.45s ease;
     }
-    .switch input + span em {
+
+    .switch input+span em {
         width: 8px;
         height: 7px;
         background: #99a3ba;
@@ -61,7 +68,8 @@
         z-index: 1;
         transition: all 0.45s ease;
     }
-    .switch input + span em:before {
+
+    .switch input+span em:before {
         content: '';
         width: 2px;
         height: 2px;
@@ -73,7 +81,8 @@
         top: 50%;
         margin: -1px 0 0 -1px;
     }
-    .switch input + span em:after {
+
+    .switch input+span em:after {
         content: '';
         display: block;
         border-top-left-radius: 4px;
@@ -90,24 +99,29 @@
         transition: all 0.45s ease;
         transform: rotate(-35deg) translate(0, 1px);
     }
-    .switch input + span strong {
+
+    .switch input+span strong {
         font-weight: normal;
         position: relative;
         display: block;
         top: 1px;
     }
-    .switch input + span strong:before, .switch input + span strong:after {
+
+    .switch input+span strong:before,
+    .switch input+span strong:after {
         font-size: 14px;
         font-weight: 500;
         display: block;
         font-family: 'Mukta Malar', Arial;
         -webkit-backface-visibility: hidden;
     }
-    .switch input + span strong:before {
+
+    .switch input+span strong:before {
         content: 'Unlock';
         transition: all 0.3s ease 0.2s;
     }
-    .switch input + span strong:after {
+
+    .switch input+span strong:after {
         content: 'Lock';
         opacity: 0;
         visibility: hidden;
@@ -118,58 +132,78 @@
         transition: all 0.3s ease;
         transform: translate(2px, 0);
     }
-    .switch input:checked + span:before {
+
+    .switch input:checked+span:before {
         background: rgba(0, 123, 255, .35);
     }
-    .switch input:checked + span:after {
+
+    .switch input:checked+span:after {
         background: #fff;
         transform: translate(18px, 0);
     }
-    .switch input:checked + span em {
+
+    .switch input:checked+span em {
         transform: translate(18px, 0);
         background: #007bff;
     }
-    .switch input:checked + span em:after {
+
+    .switch input:checked+span em:after {
         border-color: #007bff;
         transform: rotate(0deg) translate(0, 0);
     }
-    .switch input:checked + span strong:before {
+
+    .switch input:checked+span strong:before {
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
         transform: translate(-2px, 0);
     }
-    .switch input:checked + span strong:after {
+
+    .switch input:checked+span strong:after {
         opacity: 1;
         visibility: visible;
         transform: translate(0, 0);
         transition: all 0.3s ease 0.2s;
     }
+
     html {
         -webkit-font-smoothing: antialiased;
     }
+
     * {
         box-sizing: border-box;
     }
-    *:before, *:after {
+
+    *:before,
+    *:after {
         box-sizing: border-box;
     }
+
     .switch {
         display: table;
         margin: 12px auto;
         min-width: 118px;
     }
+
     .dribbble {
         position: fixed;
         display: block;
         right: 20px;
         bottom: 20px;
     }
+
     .dribbble img {
         display: block;
         height: 28px;
     }
-    
+
+    .iti {
+        display: block;
+    }
+
+    .country-select {
+        display: block;
+    }
 </style>
 @endsection
 @section('content')
@@ -183,12 +217,13 @@
             </div>
         </div>
     </div>
+
     <!-- end page title -->
     <div class="row">
         <div class="col-xl-12">
             <form id="addadmission" method="post" action="{{ route('admin.admission.add') }}" enctype="multipart/form-data" autocomplete="off">
                 @csrf
-                
+
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
@@ -205,7 +240,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -216,7 +251,7 @@
                                                 <span class="fas fa-user-graduate"></span>
                                             </div>
                                         </div>
-                                        <input type="text" name="fname" class="form-control alloptions" maxlength="50" id="fname" placeholder="Ahmad Ali" aria-describedby="inputGroupPrepend" >
+                                        <input type="text" name="fname" class="form-control alloptions" maxlength="50" id="fname" placeholder="Ahmad Ali" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -315,11 +350,11 @@
                         </div>
 
                         <div class="row">
-                            
+
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="txt_mobile_no">Mobile No<span class="text-danger">*</span></label>
-                                    <input type="tel"  class="form-control"  name="txt_mobile_no" id="txt_mobile_no" data-parsley-trigger="change" >
+                                    <input type="tel" class="form-control" name="txt_mobile_no" id="txt_mobile_no" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -375,7 +410,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="btwyears">Academic Year<span class="text-danger">*</span></label>
-                                    <select id="btwyears" class="form-control" name="year" >
+                                    <select id="btwyears" class="form-control" name="year">
                                         <option>2021-2022</option>
                                         <option>2020-2021</option>
                                         <option>2019-2020</option>
@@ -388,13 +423,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="txt_regiter_no">Register No<span class="text-danger">*</span></label>
-                                    <input type="text" id="txt_regiter_no" class="form-control" name="txt_regiter_no" placeholder="Insert the registration number" data-parsley-trigger="change" >
+                                    <input type="text" id="txt_regiter_no" class="form-control" name="txt_regiter_no" placeholder="Insert the registration number" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="txt_roll_no">Roll<span class="text-danger">*</span></label>
-                                    <input type="text" id="txt_roll_no" class="form-control" name="txt_roll_no" placeholder="Input the roll" data-parsley-trigger="change" >
+                                    <input type="text" id="txt_roll_no" class="form-control" name="txt_roll_no" placeholder="Input the roll" data-parsley-trigger="change">
                                 </div>
                             </div>
                         </div>
@@ -409,14 +444,14 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="admission_date" name="admission_date" placeholder="23 July 2024" aria-describedby="inputGroupPrepend" >
+                                        <input type="text" class="form-control" id="admission_date" name="admission_date" placeholder="23 July 2024" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="class_id">Standard<span class="text-danger">*</span></label>
-                                    <select id="class_id" class="form-control" name="class_id" >
+                                    <select id="class_id" class="form-control" name="class_id">
                                         <option value="">Select Standard</option>
                                         @foreach($class as $cla)
                                         <option value="{{$cla['id']}}">{{$cla['name']}}</option>
@@ -427,7 +462,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="section_id">Class Name<span class="text-danger">*</span></label>
-                                    <select id="section_id" class="form-control" name="section_id" >
+                                    <select id="section_id" class="form-control" name="section_id">
                                         <option value="">Select Class Name</option>
                                     </select>
                                 </div>
@@ -437,7 +472,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="categy">Category<span class="text-danger">*</span></label>
-                                    <select id="categy" name="categy" class="form-control" >
+                                    <select id="categy" name="categy" class="form-control">
                                         <option value="">Choose the Category</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
@@ -488,7 +523,7 @@
                                                 <span class="far fa-envelope-open"></span>
                                             </div>
                                         </div>
-                                        <input type="text" name="txt_emailid" class="form-control" id="txt_emailid" placeholder="xxxxx@gmail.com" aria-describedby="inputGroupPrepend" >
+                                        <input type="text" name="txt_emailid" class="form-control" id="txt_emailid" placeholder="xxxxx@gmail.com" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -501,7 +536,7 @@
                                                 <span class="fas fa-unlock"></span>
                                             </div>
                                         </div>
-                                        <input type="password" name="txt_pwd" class="form-control" id="txt_pwd" placeholder="********" aria-describedby="inputGroupPrepend" >
+                                        <input type="password" name="txt_pwd" class="form-control" id="txt_pwd" placeholder="********" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -514,14 +549,14 @@
                                                 <span class="fas fa-unlock"></span>
                                             </div>
                                         </div>
-                                        <input type="password" name="txt_retype_pwd" class="form-control" id="txt_retype_pwd" placeholder="*********" aria-describedby="inputGroupPrepend" >
+                                        <input type="password" name="txt_retype_pwd" class="form-control" id="txt_retype_pwd" placeholder="*********" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group mb-3">
                                     <label class="switch">Authentication
-                                        <input id="status" name="status"  type="checkbox">
+                                        <input id="status" name="status" type="checkbox">
                                         <span>
                                             <em></em>
                                             <strong></strong>
@@ -543,7 +578,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="father_name">Father Name</label>
-                                    <input type="text" class="form-control"  maxlength="50" id="father_name"  aria-describedby="inputGroupPrepend">
+                                    <input type="text" class="form-control" maxlength="50" id="father_name" placeholder="John Leo" aria-describedby="inputGroupPrepend">
                                     <input type="hidden" name="father_id" id="father_id">
                                     <div id="father_list">
                                     </div>
@@ -552,27 +587,27 @@
                             <div class="col-md-1">
                             </div>
                             <div class="col-md-4" id="father_photo" style="display:none;">
-                                
-                            </div> 
+
+                            </div>
                         </div>
-                        <div id="father_form"  style="display:none;">
+                        <div id="father_form" style="display:none;">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="heard">First Name<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control"  maxlength="50" id="father_first_name"  aria-describedby="inputGroupPrepend" readonly>
+                                        <label for="">First Name<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" maxlength="50" id="father_first_name" placeholder="John" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="heard">Last Name<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control"  maxlength="50" id="father_last_name"  aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control" maxlength="50" id="father_last_name" placeholder="Leo" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="gender">Gender</label>
-                                        <select class="form-control"  id="father_gender" disabled>
+                                        <select class="form-control" id="father_gender" disabled>
                                             <option value="">Choose Gender</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
@@ -588,7 +623,7 @@
                                                     <span class="fas fa-birthday-cake"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control"  id="father_date_of_birth" readonly>
+                                            <input type="text" class="form-control" id="father_date_of_birth" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -601,14 +636,14 @@
                                                     <span class="far fa-envelope-open"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control"  id="father_email" readonly>
+                                            <input type="text" class="form-control" placeholder="XXXX@gmail.com" id="father_email" readonly>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="Passport">Passport Number</label>
-                                        <input type="text" class="form-control"id="father_passport" readonly>
+                                        <input type="text" class="form-control" id="father_passport" placeholder="Passport number" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -622,7 +657,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="blooddgrp">Blood Group</label>
-                                        <select  class="form-control" id="father_blooddgrp" disabled>
+                                        <select class="form-control" id="father_blooddgrp" disabled>
                                             <option value="">Pick Blood Type</option>
                                             <option>O+</option>
                                             <option>A+</option>
@@ -644,7 +679,7 @@
                                                     <span class="fas fa-phone-volume"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" id="father_mobile_no" readonly>
+                                            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="mobile number" id="father_mobile_no" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -653,19 +688,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="education">Education</label>
-                                        <input type="text"  class="form-control" data-parsley-trigger="change" id="father_education" readonly>
+                                        <input type="text" class="form-control" data-parsley-trigger="change" placeholder="B.tech" id="father_education" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="txt_occupation">Occupation<span class="text-danger">*</span></label>
-                                        <input type="text" maxlength="50" id="father_occupation" class="form-control "  placeholder="Occupation" data-parsley-trigger="change" readonly>
+                                        <input type="text" maxlength="50" id="father_occupation" class="form-control " placeholder="Manager" placeholder="Occupation" data-parsley-trigger="change" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="txt_income">Income</label>
-                                        <input type="text" maxlength="50" id="father_income" class="form-control "  placeholder="Income" data-parsley-trigger="change" readonly>
+                                        <input type="text" maxlength="50" id="father_income" class="form-control " placeholder="Income" data-parsley-trigger="change" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -673,19 +708,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="country">Country</label>
-                                        <input type="text"  class="form-control" id="father_country" data-parsley-trigger="change" readonly>
+                                        <input type="text" class="form-control" id="father_country" placeholder="malaysia" data-parsley-trigger="change" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="validationCustomUsername">State/Province</label>
-                                        <input type="text" class="form-control " maxlength="50" id="father_state"  placeholder="state" aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control " maxlength="50" id="father_state" placeholder="state" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="validationCustomUsername">City</label>
-                                        <input type="text" class="form-control " maxlength="50" id="father_city"  placeholder="city" aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control " maxlength="50" id="father_city" placeholder="city" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -693,21 +728,21 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="father_post_code">Zip/Postal code</label>
-                                        <input type="text" class="form-control" id="father_post_code" readonly>
+                                        <input type="text" class="form-control" placeholder="postal code" id="father_post_code" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="father_address"> Address 1</label>
-                                        <input type="text" class="form-control" id="father_address" readonly>
-								        </textarea>
+                                        <input type="text" class="form-control" id="father_address" placeholder="Address 1" readonly>
+                                        </textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="father_address_2"> Address 2</label>
-                                        <input type="text" class="form-control" id="father_address_2" readonly>
-								        </textarea>
+                                        <input type="text" class="form-control" id="father_address_2" placeholder="Address 2" readonly>
+                                        </textarea>
                                     </div>
                                 </div>
 
@@ -726,7 +761,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="mother_name">Mother Name</label>
-                                    <input type="text" class="form-control"  maxlength="50" id="mother_name"  aria-describedby="inputGroupPrepend">
+                                    <input type="text" class="form-control" maxlength="50" id="mother_name" placeholder="Aisha mal" aria-describedby="inputGroupPrepend">
                                     <input type="hidden" name="mother_id" id="mother_id">
                                     <div id="mother_list">
                                     </div>
@@ -735,27 +770,27 @@
                             <div class="col-md-1">
                             </div>
                             <div class="col-md-4" id="mother_photo" style="display:none;">
-                                
-                            </div> 
+
+                            </div>
                         </div>
-                        <div id="mother_form"  style="display:none;">
+                        <div id="mother_form" style="display:none;">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="heard">First Name<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control"  maxlength="50" id="mother_first_name"  aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control" maxlength="50" id="mother_first_name" placeholder="Aisha" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="heard">Last Name<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control"  maxlength="50" id="mother_last_name"  aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control" maxlength="50" id="mother_last_name" placeholder="mal" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="gender">Gender</label>
-                                        <select class="form-control"  id="mother_gender" disabled>
+                                        <select class="form-control" id="mother_gender" disabled>
                                             <option value="">Choose Gender</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
@@ -771,7 +806,7 @@
                                                     <span class="fas fa-birthday-cake"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control"  id="mother_date_of_birth" readonly>
+                                            <input type="text" class="form-control" id="mother_date_of_birth" placeholder="DD/MM/YYYY" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -784,14 +819,14 @@
                                                     <span class="far fa-envelope-open"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control"  id="mother_email" readonly>
+                                            <input type="text" class="form-control" placeholder="aaaa@gmail.com" id="mother_email" readonly>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="Passport">Passport Number</label>
-                                        <input type="text" class="form-control"id="mother_passport" readonly>
+                                        <input type="text" class="form-control" id="mother_passport" placeholder="Passport number" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -805,7 +840,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="blooddgrp">Blood Group</label>
-                                        <select  class="form-control" id="mother_blooddgrp" disabled>
+                                        <select class="form-control" id="mother_blooddgrp" disabled>
                                             <option value="">Pick Blood Type</option>
                                             <option>O+</option>
                                             <option>A+</option>
@@ -827,7 +862,7 @@
                                                     <span class="fas fa-phone-volume"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" id="mother_mobile_no" readonly>
+                                            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="Mobile number" id="mother_mobile_no" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -836,19 +871,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="education">Education</label>
-                                        <input type="text"  class="form-control" data-parsley-trigger="change" id="mother_education" readonly>
+                                        <input type="text" class="form-control" data-parsley-trigger="change" placeholder="B.sc" id="mother_education" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="txt_occupation">Occupation<span class="text-danger">*</span></label>
-                                        <input type="text" maxlength="50" id="mother_occupation" class="form-control"  placeholder="Occupation" data-parsley-trigger="change" readonly>
+                                        <input type="text" maxlength="50" id="mother_occupation" class="form-control" placeholder="Developer" placeholder="Occupation" data-parsley-trigger="change" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="txt_income">Income</label>
-                                        <input type="text" maxlength="50" id="mother_income" class="form-control"  placeholder="Income" data-parsley-trigger="change" readonly>
+                                        <input type="text" maxlength="50" id="mother_income" class="form-control" placeholder="Income" data-parsley-trigger="change" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -856,19 +891,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="country">Country</label>
-                                        <input type="text"  class="form-control" id="mother_country" data-parsley-trigger="change" readonly>
+                                        <input type="text" class="form-control" id="mother_country" data-parsley-trigger="change" placeholder="country" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="validationCustomUsername">State/Province</label>
-                                        <input type="text" class="form-control" maxlength="50" id="mother_state"  placeholder="state" aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control" maxlength="50" id="mother_state" placeholder="state" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="validationCustomUsername">City</label>
-                                        <input type="text" class="form-control" maxlength="50" id="mother_city"  placeholder="city" aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control" maxlength="50" id="mother_city" placeholder="city" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -876,19 +911,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="mother_post_code">Zip/Postal code</label>
-                                        <input type="text" class="form-control" id="mother_post_code" readonly>
+                                        <input type="text" class="form-control" id="mother_post_code" placeholder="Postal" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="mother_address"> Address 1</label>
-                                        <input type="text" class="form-control" id="mother_address" readonly>
+                                        <input type="text" class="form-control" id="mother_address" placeholder="Address 1" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="mother_address_2"> Address 2</label>
-                                        <input type="text" class="form-control" id="mother_address_2" readonly>
+                                        <input type="text" class="form-control" id="mother_address_2" placeholder="Address 2" readonly>
                                     </div>
                                 </div>
 
@@ -907,7 +942,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="guardian_name">Guardian Name</label>
-                                    <input type="text" class="form-control"  maxlength="50" id="guardian_name"  aria-describedby="inputGroupPrepend">
+                                    <input type="text" class="form-control" maxlength="50" id="guardian_name" placeholder="Amir shan" aria-describedby="inputGroupPrepend">
                                     <input type="hidden" name="guardian_id" id="guardian_id">
                                     <div id="guardian_list">
                                     </div>
@@ -928,27 +963,27 @@
                             <div class="col-md-1">
                             </div>
                             <div class="col-md-3" id="guardian_photo" style="display:none;">
-                                
-                            </div> 
+
+                            </div>
                         </div>
-                        <div id="guardian_form"  style="display:none;">
+                        <div id="guardian_form" style="display:none;">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="heard">First Name<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control"  maxlength="50" id="guardian_first_name"  aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control" maxlength="50" id="guardian_first_name" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="heard">Last Name<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control"  maxlength="50" id="guardian_last_name"  aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control" maxlength="50" id="guardian_last_name" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="gender">Gender</label>
-                                        <select class="form-control"  id="guardian_gender" disabled>
+                                        <select class="form-control" id="guardian_gender" disabled>
                                             <option value="">Choose Gender</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
@@ -964,7 +999,7 @@
                                                     <span class="fas fa-birthday-cake"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control"  id="guardian_date_of_birth" readonly>
+                                            <input type="text" class="form-control" id="guardian_date_of_birth" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -977,14 +1012,14 @@
                                                     <span class="far fa-envelope-open"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control"  id="guardian_email" readonly>
+                                            <input type="text" class="form-control" id="guardian_email" readonly>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="Passport">Passport Number</label>
-                                        <input type="text" class="form-control"id="guardian_passport" readonly>
+                                        <input type="text" class="form-control" id="guardian_passport" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -998,7 +1033,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="blooddgrp">Blood Group</label>
-                                        <select  class="form-control" id="guardian_blooddgrp" disabled>
+                                        <select class="form-control" id="guardian_blooddgrp" disabled>
                                             <option value="">Pick Blood Type</option>
                                             <option>O+</option>
                                             <option>A+</option>
@@ -1029,19 +1064,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="education">Education</label>
-                                        <input type="text"  class="form-control" data-parsley-trigger="change" id="guardian_education" readonly>
+                                        <input type="text" class="form-control" data-parsley-trigger="change" id="guardian_education" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="txt_occupation">Occupation<span class="text-danger">*</span></label>
-                                        <input type="text" maxlength="50" id="guardian_occupation" class="form-control"  placeholder="Occupation" data-parsley-trigger="change" readonly>
+                                        <input type="text" maxlength="50" id="guardian_occupation" class="form-control" placeholder="Occupation" data-parsley-trigger="change" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="txt_income">Income</label>
-                                        <input type="text" maxlength="50" id="guardian_income" class="form-control"  placeholder="Income" data-parsley-trigger="change" readonly>
+                                        <input type="text" maxlength="50" id="guardian_income" class="form-control" placeholder="Income" data-parsley-trigger="change" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -1049,19 +1084,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="country">Country</label>
-                                        <input type="text"  class="form-control" id="guardian_country" data-parsley-trigger="change" readonly>
+                                        <input type="text" class="form-control" id="guardian_country" data-parsley-trigger="change" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="validationCustomUsername">State/Province</label>
-                                        <input type="text" class="form-control" maxlength="50" id="guardian_state"  placeholder="state" aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control" maxlength="50" id="guardian_state" placeholder="state" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="validationCustomUsername">City</label>
-                                        <input type="text" class="form-control" maxlength="50" id="guardian_city"  placeholder="city" aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control" maxlength="50" id="guardian_city" placeholder="city" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -1076,14 +1111,14 @@
                                     <div class="form-group mb-3">
                                         <label for="guardian_address"> Address 1</label>
                                         <input type="text" class="form-control" id="guardian_address" readonly>
-								        </textarea>
+                                        </textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="guardian_address_2"> Address 2</label>
                                         <input type="text" class="form-control" id="guardian_address_2" readonly>
-								        </textarea>
+                                        </textarea>
                                     </div>
                                 </div>
 
@@ -1224,7 +1259,7 @@
     });
 
     $("#drp_country").countrySelect({
-        responsiveDropdown:true
+        responsiveDropdown: true
     });
 </script>
 <script>

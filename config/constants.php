@@ -450,6 +450,10 @@ return [
          'get_exam_marks_by_student' => $url.'/get_exam_marks_by_student',
          'get_student_by_all_subjects' => $url.'/get_student_by_all_subjects',
          'get_class_section_by_student' => $url.'/get_class_section_by_student',
+         // get schedule exam details calendar
+         'get_schedule_exam_details' => $url.'/get_schedule_exam_details',
+         'get_schedule_exam_details_by_teacher' => $url.'/get_schedule_exam_details_by_teacher',
+         'get_schedule_exam_details_by_student' => $url.'/get_schedule_exam_details_by_student',
          
          
         'reset_password' => $url.'/reset_password',

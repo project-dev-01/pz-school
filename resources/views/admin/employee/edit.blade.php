@@ -196,6 +196,14 @@
         display: block;
         height: 28px;
     }
+
+    .iti {
+        display: block;
+    }
+
+    .country-select {
+        display: block;
+    }
 </style>
 @endsection
 @section('content')
@@ -237,7 +245,7 @@
                         </div> <!-- end row -->
                         <input type="hidden" class="form-control" id="id" name="id" value="{{$employee['id']}}">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="first_name"> First name<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
@@ -250,7 +258,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="last_name"> Last name</label>
                                     <div class="input-group input-group-merge">
@@ -263,7 +271,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="gender">Gender</label>
                                     <select class="form-control" name="gender" id="gender">
@@ -273,15 +281,16 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="short_name">Short name</label>
                                     <input type="text" value="{{$employee['short_name']}}" class="form-control" name="short_name" id="shortName" placeholder="AHMAD ABDULLAH">
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="religion">Religion</label>
                                     <select class="form-control" name="religion" id="religion">
@@ -293,7 +302,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="race">Race</label>
                                     <select class="form-control" name="race" id="addRace">
@@ -305,21 +314,22 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="Passport">Passport Number</label>
                                     <input type="text" class="form-control" name="passport" value="{{$employee['passport']}}" id="Passport" placeholder="********">
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="nric_number">NRIC Number</label>
                                     <input type="text" class="form-control" name="nric_number" value="{{$employee['nric_number']}}" id="nricNumber" placeholder="00000000">
                                 </div>
                             </div>
 
-                        </div>
-                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="birthday">Date Of Birth</label>
@@ -333,6 +343,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-4">
                                 <label for="mobile_no">Mobile No</label>
                                 <div class="input-group input-group-merge">
@@ -357,27 +369,27 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="country">Country</label>
                                     <input type="text" value="{{$employee['country']}}" class="form-control" name="country" id="Country" placeholder="malaysia">
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="state">State/Province</label>
                                     <input type="text" value="{{$employee['state']}}" class="form-control" name="state" id="State" placeholder="state">
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="city">City</label>
                                     <input type="text" value="{{$employee['city']}}" class="form-control" name="city" id="City" placeholder="city">
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="post_code">Zip/Postal code</label>
                                     <input type="text" value="{{$employee['post_code']}}" class="form-control" name="post_code" id="postCode" placeholder="000000">

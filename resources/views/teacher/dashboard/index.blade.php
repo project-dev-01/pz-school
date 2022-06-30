@@ -961,6 +961,7 @@
     @include('teacher.dashboard.check_list')
     @include('teacher.dashboard.task')
     @include('teacher.dashboard.task-show')
+    @include('teacher.dashboard.exam-schedule')
 
 </div> <!-- container -->
 @endsection
@@ -978,6 +979,7 @@
     var getAssignClassUrl = "{{ config('constants.api.get_assign_class') }}";
     var pathDownloadFileUrl = "{{ asset('images/todolist/') }}";
     var toDoCommentsUrl = "{{ config('constants.api.to_do_comments') }}";
+    var getScheduleExamDetailsUrl = "{{ config('constants.api.get_schedule_exam_details_by_teacher') }}";
 
     var UserName = "{{ Session::get('name') }}";
     // task all url

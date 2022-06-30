@@ -892,6 +892,8 @@ class ApiController extends BaseController
                     'short_name' => $request->short_name,
                     'subject_color_calendor' => $request->subject_color,
                     'subject_author' => $request->subject_author,
+                    'subject_type_2' => $request->subject_type_2,
+                    'exam_exclude' => $request->exam_exclude,
                     'created_at' => date("Y-m-d H:i:s")
                 ]);
                 $success = [];
@@ -962,6 +964,8 @@ class ApiController extends BaseController
                     'short_name' => $request->short_name,
                     'subject_color_calendor' => $request->subject_color,
                     'subject_author' => $request->subject_author,
+                    'subject_type_2' => $request->subject_type_2,
+                    'exam_exclude' => $request->exam_exclude,
                     'updated_at' => date("Y-m-d H:i:s")
                 ]);
                 $success = [];
@@ -4382,14 +4386,14 @@ class ApiController extends BaseController
                 's.id',
                 DB::raw('CONCAT(s.first_name, " ", s.last_name) as name')
             )
-            ->join('staffs as s', 'sa.teacher_id', '=', 's.id')
-            ->when($class_id != "All", function ($q)  use ($class_id) {
-                $q->where('sa.class_id', $class_id);
-            })
-            // type zero mean main
-            ->where('sa.type', '=', '0')
-            ->groupBy('sa.teacher_id')
-            ->get();
+                ->join('staffs as s', 'sa.teacher_id', '=', 's.id')
+                ->when($class_id != "All", function ($q)  use ($class_id) {
+                    $q->where('sa.class_id', $class_id);
+                })
+                // type zero mean main
+                ->where('sa.type', '=', '0')
+                ->groupBy('sa.teacher_id')
+                ->get();
             $output['exam_hall'] = $classConn->table('exam_hall')->get();
 
             return $this->successResponse($output, 'Teacher and Subject record fetch successfully');
@@ -4568,11 +4572,11 @@ class ApiController extends BaseController
 
             if (isset($diff)) {
                 foreach ($diff as $del) {
-                   
+
                     if ($staffConn->table('timetable_class')->where('bulk_id', '=', $del)->count() > 0) {
                         $delete =  $staffConn->table('timetable_class')->where('bulk_id', $del)->get();
                         // delete calendor data
-                        foreach($delete as $d) {
+                        foreach ($delete as $d) {
                             if ($staffConn->table('calendors')->where('time_table_id', '=', $d->id)->count() > 0) {
                                 $staffConn->table('calendors')->where('time_table_id', $d->id)->delete();
                             }
@@ -4581,7 +4585,7 @@ class ApiController extends BaseController
                         // delete timetable data
                         $staffConn->table('timetable_class')->where('bulk_id', $del)->delete();
                     }
-                    
+
                     if ($staffConn->table('timetable_bulk')->where('id', '=', $del)->count() > 0) {
                         // record found
                         $staffConn->table('timetable_bulk')->where('id', $del)->delete();
@@ -4642,20 +4646,20 @@ class ApiController extends BaseController
                         'type' => "All",
                         'updated_at' => date("Y-m-d H:i:s")
                     ]);
-                    
+
                     $bulkID = $table['id'];
                     $class = $staffConn->table('timetable_class')->where('bulk_id', $bulkID)->get();
-                    if($class) {
-                        foreach($class as $cla) {
+                    if ($class) {
+                        foreach ($class as $cla) {
                             $timeTableID = $cla->id;
                             $request['section_id'] = "$cla->section_id";
                             // update calendor
                             $this->addCalendorTimetable($request, $table, $getObjRow, $timeTableID, $bulkID);
                         }
                     }
-                    
+
                     // $calendorUpdate = $staffConn->table('calendors')->where('bulk_id', $table['id'])->update([
-                        
+
                     //     "title" =>  $break_type,
                     //     'teacher_id' => $teacher_id,
                     //     'updated_at' => date("Y-m-d H:i:s"),
@@ -4678,15 +4682,15 @@ class ApiController extends BaseController
                     ]);
                     $bulkID = $query;
 
-                    $class=[];
+                    $class = [];
                     // fetch class and section
-                    if($request['class_id'] == "All") {
-                        $class = $staffConn->table('section_allocations')->select('class_id','section_id')->get();
+                    if ($request['class_id'] == "All") {
+                        $class = $staffConn->table('section_allocations')->select('class_id', 'section_id')->get();
                     } else {
-                        $class = $staffConn->table('section_allocations')->select('class_id','section_id')->where('class_id',$request['class_id'])->get();
+                        $class = $staffConn->table('section_allocations')->select('class_id', 'section_id')->where('class_id', $request['class_id'])->get();
                     }
-                    if($class) {
-                        foreach($class as $cla) {
+                    if ($class) {
+                        foreach ($class as $cla) {
                             $timeTableID = $staffConn->table('timetable_class')->insertGetId([
                                 'class_id' => $cla->class_id,
                                 'section_id' => $cla->section_id,
@@ -4710,8 +4714,6 @@ class ApiController extends BaseController
                         }
                     }
                 }
-                
-                
             }
             $success = [];
             if (!$query) {
@@ -7675,7 +7677,7 @@ class ApiController extends BaseController
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
 
-            
+
             $success = $Connection->table('calendors as cl')
                 ->select('cl.id', 'cl.class_id', 'cl.time_table_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id', 'cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as color', 'sb.name as subject_name', 'sb.name as title', 'st.first_name as teacher_name', 'dr.report')
                 ->join('classes as c', 'cl.class_id', '=', 'c.id')
@@ -7957,7 +7959,7 @@ class ApiController extends BaseController
     // function addCalendorTimetable(Request $request)
     function addCalendorTimetable($request, $row, $getObjRow, $insertOrUpdateID, $bulkID)
     {
-        
+
         if ($getObjRow) {
             $start = $getObjRow->start_date;
             $end = $getObjRow->end_date;
@@ -8053,7 +8055,7 @@ class ApiController extends BaseController
                         "teacher_id" => implode(",", $row['teacher']),
                         "start" => $start,
                         "end" => $end,
-                        "time_table_id"=>$insertOrUpdateID,
+                        "time_table_id" => $insertOrUpdateID,
                         "bulk_id" => $bulkID,
                         'created_at' => date("Y-m-d H:i:s")
                     ];
@@ -8521,7 +8523,7 @@ class ApiController extends BaseController
             'token' => 'required',
         ]);
 
-        
+
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -8650,12 +8652,13 @@ class ApiController extends BaseController
 
             $exam_id = $request->exam_id;
             $details['exam'] = $con->table('subject_assigns')->select('subjects.name as subject_name', 'exam_hall.hall_no', 'classes.name as class_name', 'sections.name as section_name', 'exam.name as exam_name', 'subject_assigns.class_id as class_id', 'subject_assigns.section_id as section_id', 'subject_assigns.subject_id as subject_id', 'timetable_exam.exam_id', 'timetable_exam.time_start', 'timetable_exam.time_end', 'timetable_exam.exam_date', 'timetable_exam.hall_id', 'timetable_exam.marks', 'timetable_exam.distributor_type', 'timetable_exam.distributor', 'timetable_exam.distributor_id', 'timetable_exam.id')
-                ->leftJoin('subjects', 'subject_assigns.subject_id', '=', 'subjects.id')
-                ->leftJoin('classes', 'subject_assigns.class_id', '=', 'classes.id')
-                ->leftJoin('sections', 'subject_assigns.section_id', '=', 'sections.id')
+                ->join('subjects', 'subject_assigns.subject_id', '=', 'subjects.id')
+                ->join('classes', 'subject_assigns.class_id', '=', 'classes.id')
+                ->join('sections', 'subject_assigns.section_id', '=', 'sections.id')
                 ->where([
                     ['subject_assigns.class_id', $request->class_id],
                     ['subject_assigns.section_id', $request->section_id],
+                    ['subjects.exam_exclude', '=', '0']
                 ])
                 ->leftJoin('timetable_exam', function ($join) use ($exam_id) {
                     $join->on('subject_assigns.class_id', '=', 'timetable_exam.class_id')
@@ -10523,7 +10526,6 @@ class ApiController extends BaseController
                     'us.name'
                 )
                 // change superadmin db here
-                // ->leftJoin('school-management-system.users as us', 'us.id', '=', DB::raw("'$userID'"))
                 ->leftJoin('school-management-system.users as us', 'us.id', '=', 'tdlc.user_id')
                 // ->leftJoin('paxsuzen_pz-school.users as us', 'us.id', '=', 'tdlc.user_id')
                 ->where([
@@ -13032,7 +13034,6 @@ class ApiController extends BaseController
                 )
                 ->join('school-management-system.users as us', 'stf.id', '=', 'us.user_id')
                 // ->join('paxsuzen_pz-school.users as us', 'stf.id', '=', 'us.user_id')
-                // ->join('staff_departments as sdp', 'stf.department_id', '=', 'sdp.id')
                 ->join("staff_departments as sdp", DB::raw("FIND_IN_SET(sdp.id,stf.department_id)"), ">", DB::raw("'0'"))
                 ->leftJoin("assign_leave_approval as ala", 'ala.staff_id', '=', 'stf.id')
                 ->where([
@@ -14090,12 +14091,128 @@ class ApiController extends BaseController
             return $this->successResponse($getStudentClassSection, 'get class and section record successfully');
         }
     }
+    // get schedule exam details
+    function getScheduleExamDetails(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $getTimeTableCalendor = $Connection->table('timetable_exam as tex')
+                ->select(
+                    'tex.id as schedule_id',
+                    'tex.time_start',
+                    'tex.time_end',
+                    'cl.name as class_name',
+                    'sc.name as section_name',
+                    'ex.name as exam_name',
+                    DB::raw("CONCAT('Exam Name: ',ex.name, ' - ', sbj.name) as title"),
+                    'sbj.name as subject_name',
+                    'sbj.subject_color_calendor as color',
+                    'tex.exam_date as start'
+                )
+                ->join('classes as cl', 'tex.class_id', '=', 'cl.id')
+                ->join('sections as sc', 'tex.section_id', '=', 'sc.id')
+                ->join('subjects as sbj', 'tex.subject_id', '=', 'sbj.id')
+                ->join('exam as ex', 'tex.exam_id', '=', 'ex.id')
+                // ->where([
+                //     ['en.student_id', '=', $request->student_id]
+                // ])
+                ->get();
+            return $this->successResponse($getTimeTableCalendor, 'get schedule exam details record successfully');
+        }
+    }
+    // get schedule exam details by teacher
+    function getScheduleExamDetailsBYTeacher(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'teacher_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $getTimeTableCalendor = $Connection->table('subject_assigns as sa')
+                ->select(
+                    'tex.id as schedule_id',
+                    'tex.time_start',
+                    'tex.time_end',
+                    'cl.name as class_name',
+                    'sc.name as section_name',
+                    'ex.name as exam_name',
+                    DB::raw("CONCAT('Exam Name: ',ex.name, ' - ', sbj.name) as title"),
+                    'sbj.name as subject_name',
+                    'sbj.subject_color_calendor as color',
+                    'tex.exam_date as start'
+                )
+                ->join('timetable_exam as tex', function ($q) {
+                    $q->on('tex.class_id', '=', 'sa.class_id')
+                        ->on('tex.section_id', '=', 'sa.section_id') //second join condition                           
+                        ->on('tex.subject_id', '=', 'sa.subject_id'); //need to add subject id also later                           
+                })
+                ->join('classes as cl', 'tex.class_id', '=', 'cl.id')
+                ->join('sections as sc', 'tex.section_id', '=', 'sc.id')
+                ->join('subjects as sbj', 'tex.subject_id', '=', 'sbj.id')
+                ->join('exam as ex', 'tex.exam_id', '=', 'ex.id')
+                ->where([
+                    ['sa.teacher_id', '=', $request->teacher_id]
+                ])
+                ->get();
+            return $this->successResponse($getTimeTableCalendor, 'get schedule exam details record successfully');
+        }
+    }
+    // get schedule exam details by student
+    function getScheduleExamDetailsBYStudent(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'student_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $getStudentExamSchedule = $Connection->table('enrolls as en')
+                ->select(
+                    'tex.id as schedule_id',
+                    'tex.time_start',
+                    'tex.time_end',
+                    'cl.name as class_name',
+                    'sc.name as section_name',
+                    'ex.name as exam_name',
+                    DB::raw("CONCAT('Exam Name: ',ex.name, ' - ', sbj.name) as title"),
+                    'sbj.name as subject_name',
+                    'sbj.subject_color_calendor as color',
+                    'tex.exam_date as start'
+                )
+                ->join('timetable_exam as tex', function ($q) {
+                    $q->on('tex.class_id', '=', 'en.class_id')
+                        ->on('tex.section_id', '=', 'en.section_id');
+                })
+                ->join('classes as cl', 'tex.class_id', '=', 'cl.id')
+                ->join('sections as sc', 'tex.section_id', '=', 'sc.id')
+                ->join('subjects as sbj', 'tex.subject_id', '=', 'sbj.id')
+                ->join('exam as ex', 'tex.exam_id', '=', 'ex.id')
+                ->where([
+                    ['en.student_id', '=', $request->student_id]
+                ])
+                ->get();
+            return $this->successResponse($getStudentExamSchedule, 'get schedule exam details record successfully');
+        }
+    }
 
-     // add TransportVehicle
-     public function addTransportVehicle(Request $request)
-     {
- 
-         $validator = \Validator::make($request->all(), [
+    // add TransportVehicle
+    public function addTransportVehicle(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
             'vehicle_no' => 'required',
             'capacity' => 'required',
             'insurance_renewal' => 'required',
@@ -14104,10 +14221,10 @@ class ApiController extends BaseController
             'driver_license' => 'required',
             'branch_id' => 'required',
             'token' => 'required',
-         ]);
-         if (!$validator->passes()) {
-             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-         } else {
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // insert data
@@ -14126,52 +14243,52 @@ class ApiController extends BaseController
             } else {
                 return $this->successResponse($success, 'Transport Vehicle has been successfully saved');
             }
-         }
-     }
-     // getTransportVehicleList
-     public function getTransportVehicleList(Request $request)
-     {
-         $validator = \Validator::make($request->all(), [
-             'branch_id' => 'required',
-             'token' => 'required',
-         ]);
- 
-         if (!$validator->passes()) {
-             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-         } else {
-             // create new connection
-             $conn = $this->createNewConnection($request->branch_id);
-             // get data
-             $transportVehicleDetails = $conn->table('transport_vehicle')->get();
-             return $this->successResponse($transportVehicleDetails, 'Transport Vehicle record fetch successfully');
-         }
-     }
-     // get TransportVehicle row details
-     public function getTransportVehicleDetails(Request $request)
-     {
- 
-         $validator = \Validator::make($request->all(), [
-             'id' => 'required',
-             'branch_id' => 'required',
-             'token' => 'required'
-         ]);
- 
-         if (!$validator->passes()) {
-             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-         } else {
-             $id = $request->id;
-             // create new connection
-             $conn = $this->createNewConnection($request->branch_id);
-             // get data
-             $transportVehicleDetails = $conn->table('transport_vehicle')->where('id', $id)->first();
-             return $this->successResponse($transportVehicleDetails, 'Transport Vehicle row fetch successfully');
-         }
-     }
-     // update TransportVehicle
-     public function updateTransportVehicle(Request $request)
-     {
-         $id = $request->id;
-         $validator = \Validator::make($request->all(), [
+        }
+    }
+    // getTransportVehicleList
+    public function getTransportVehicleList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $transportVehicleDetails = $conn->table('transport_vehicle')->get();
+            return $this->successResponse($transportVehicleDetails, 'Transport Vehicle record fetch successfully');
+        }
+    }
+    // get TransportVehicle row details
+    public function getTransportVehicleDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $transportVehicleDetails = $conn->table('transport_vehicle')->where('id', $id)->first();
+            return $this->successResponse($transportVehicleDetails, 'Transport Vehicle row fetch successfully');
+        }
+    }
+    // update TransportVehicle
+    public function updateTransportVehicle(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
             'vehicle_no' => 'required',
             'capacity' => 'required',
             'insurance_renewal' => 'required',
@@ -14180,14 +14297,14 @@ class ApiController extends BaseController
             'driver_license' => 'required',
             'branch_id' => 'required',
             'token' => 'required',
-         ]);
- 
-         if (!$validator->passes()) {
-             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-         } else {
- 
-             // create new connection
-             $conn = $this->createNewConnection($request->branch_id);
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
             // update data
             $query = $conn->table('transport_vehicle')->where('id', $id)->update([
                 'vehicle_no' => $request->vehicle_no,
@@ -14204,42 +14321,42 @@ class ApiController extends BaseController
             } else {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             }
-         }
-     }
-     // delete TransportVehicle
-     public function deleteTransportVehicle(Request $request)
-     {
- 
-         $id = $request->id;
-         $validator = \Validator::make($request->all(), [
-             'token' => 'required',
-             'branch_id' => 'required',
-             'id' => 'required',
-         ]);
- 
-         if (!$validator->passes()) {
-             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-         } else {
-             // create new connection
-             $conn = $this->createNewConnection($request->branch_id);
-             // get data
-             $query = $conn->table('transport_vehicle')->where('id', $id)->delete();
- 
-             $success = [];
-             if ($query) {
-                 return $this->successResponse($success, 'Transport Vehicle have been deleted successfully');
-             } else {
-                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-             }
-         }
-     }
+        }
+    }
+    // delete TransportVehicle
+    public function deleteTransportVehicle(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('transport_vehicle')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Transport Vehicle have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
 
     // getBulkCalendorTeacher
     public function getBulkCalendorTeacher(Request $request)
     {
         $validator = \Validator::make($request->all(), [
             'branch_id' => 'required',
-            'teacher_id'=> 'required',
+            'teacher_id' => 'required',
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -14247,26 +14364,26 @@ class ApiController extends BaseController
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
             $success = $Connection->table('calendors as cl')
-                ->select('cl.id', 'cl.class_id', 'cl.title','cl.title as name','cl.time_table_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id', 'cl.end',"cl.teacher_id","bulk_id")
+                ->select('cl.id', 'cl.class_id', 'cl.title', 'cl.title as name', 'cl.time_table_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id', 'cl.end', "cl.teacher_id", "bulk_id")
                 ->join('subject_assigns as sa', function ($q) {
                     $q->on('cl.class_id', '=', 'sa.class_id')
                         ->on('cl.section_id', '=', 'sa.section_id');
                 })
-                ->where('sa.teacher_id',$request->teacher_id)
-                ->where("cl.teacher_id","0")
-                ->orWhere("cl.teacher_id",$request->teacher_id)
+                ->where('sa.teacher_id', $request->teacher_id)
+                ->where("cl.teacher_id", "0")
+                ->orWhere("cl.teacher_id", $request->teacher_id)
                 ->whereNotNull('cl.bulk_id')
                 ->groupBy('cl.start')
                 ->get();
 
-                // dd($success);
-                $output=[];
-                foreach($success as $suc) {
-                    $data = $suc;
-                    $data->color = "bg-success";
-                    array_push($output, $data);
-                }
-                // dd($success);
+            // dd($success);
+            $output = [];
+            foreach ($success as $suc) {
+                $data = $suc;
+                $data->color = "bg-success";
+                array_push($output, $data);
+            }
+            // dd($success);
             return $this->successResponse($output, 'calendor data get successfully');
         }
     }
@@ -14283,56 +14400,56 @@ class ApiController extends BaseController
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
             $success = $Connection->table('calendors as cl')
-                ->select('cl.id', 'cl.class_id', 'cl.title','cl.title as name','cl.time_table_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id', 'cl.end',"cl.teacher_id","bulk_id")
-                ->where("cl.teacher_id","0")
+                ->select('cl.id', 'cl.class_id', 'cl.title', 'cl.title as name', 'cl.time_table_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id', 'cl.end', "cl.teacher_id", "bulk_id")
+                ->where("cl.teacher_id", "0")
                 ->whereNotNull('cl.bulk_id')
                 ->groupBy('cl.start')
                 ->get();
 
-                // dd($success);
-                $output=[];
-                foreach($success as $suc) {
-                    $data = $suc;
-                    $data->color = "bg-success";
-                    array_push($output, $data);
-                }
-                // dd($success);
+            // dd($success);
+            $output = [];
+            foreach ($success as $suc) {
+                $data = $suc;
+                $data->color = "bg-success";
+                array_push($output, $data);
+            }
+            // dd($success);
             return $this->successResponse($output, 'calendor data get successfully');
         }
     }
 
-     // getBulkCalendorStudent
-     public function getBulkCalendorStudent(Request $request)
-     {
-         $validator = \Validator::make($request->all(), [
-             'branch_id' => 'required',
-             'student_id' => 'required',
-         ]);
-         if (!$validator->passes()) {
-             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-         } else {
-             // create new connection
-             $Connection = $this->createNewConnection($request->branch_id);
-             $success = $Connection->table('calendors as cl')
-                            ->select('cl.id', 'cl.class_id', 'cl.title','cl.title as name','cl.time_table_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id', 'cl.end',"cl.teacher_id","bulk_id")
-                            ->join('enrolls as e', function ($q) {
-                                $q->on('cl.class_id', '=', 'e.class_id')
-                                    ->on('cl.section_id', '=', 'e.section_id');
-                            })
-                            ->where('e.student_id',$request->student_id)
-                            ->whereNotNull('cl.bulk_id')
-                            ->groupBy('cl.start')
-                            ->get();
- 
-                 // dd($success);
-                 $output=[];
-                 foreach($success as $suc) {
-                     $data = $suc;
-                     $data->color = "bg-success";
-                     array_push($output, $data);
-                 }
-                 // dd($success);
-             return $this->successResponse($output, 'calendor data get successfully');
-         }
-     }
+    // getBulkCalendorStudent
+    public function getBulkCalendorStudent(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'student_id' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $success = $Connection->table('calendors as cl')
+                ->select('cl.id', 'cl.class_id', 'cl.title', 'cl.title as name', 'cl.time_table_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id', 'cl.end', "cl.teacher_id", "bulk_id")
+                ->join('enrolls as e', function ($q) {
+                    $q->on('cl.class_id', '=', 'e.class_id')
+                        ->on('cl.section_id', '=', 'e.section_id');
+                })
+                ->where('e.student_id', $request->student_id)
+                ->whereNotNull('cl.bulk_id')
+                ->groupBy('cl.start')
+                ->get();
+
+            // dd($success);
+            $output = [];
+            foreach ($success as $suc) {
+                $data = $suc;
+                $data->color = "bg-success";
+                array_push($output, $data);
+            }
+            // dd($success);
+            return $this->successResponse($output, 'calendor data get successfully');
+        }
+    }
 }

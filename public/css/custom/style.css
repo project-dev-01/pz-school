@@ -61,14 +61,14 @@ div.dataTables_wrapper div.dataTables_filter input {
 }
 
 /*table arrows hover color*/
-.sorting_asc:hover {
+/*.sorting_asc:hover {
 	color: black;
 }
 
 .sorting_desc:hover {
 	color: black;
 }
-
+*/
 /*top head line css like dashboard*/
 .page-title-box .page-title {
 	font-family: 'Open Sans';
@@ -455,4 +455,13 @@ div.dt-buttons {
 	color: #fff;
 	background-color: #0ca99a;
 	border-color: #0ca99a;
+}
+
+.form-control[readonly] {
+	background-color: #F4F7FC;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+	background-color: #F4F7FC;
 }

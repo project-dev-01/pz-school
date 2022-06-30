@@ -1,7 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Analytic Report')
 @section('content')
-
+<meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=no">
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -131,7 +131,7 @@
                 </ul><br>
 
                 <div class="card-body">
-                    <div class="col-lg-12">
+                    <div class="col-xl-12">
                         <div class="" style="text-align:center">
                             <div id="attitude" class="attitude"></div>
                             <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->

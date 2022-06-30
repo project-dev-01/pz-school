@@ -1540,18 +1540,18 @@ class AdminController extends Controller
                     $teacher = "";
                     $bulk = "";
                     if ($table['bulk_id']) {
-                        
+
                         $bulk = "disabled";
-                        
+
                         $all = "";
                         foreach (explode(',', $table['teacher_id']) as $info) {
-                            if($info == "0") {
+                            if ($info == "0") {
                                 $all =  "Selected";
-                            } 
+                            }
                         }
-                        $teacher .= '<option value="0" '.$all.'> All </option>';
+                        $teacher .= '<option value="0" ' . $all . '> All </option>';
                     }
-                        
+
 
                     $checked = "";
                     if ($table['break'] == "1") {
@@ -1563,7 +1563,7 @@ class AdminController extends Controller
                         foreach (explode(',', $table['teacher_id']) as $info) {
                             if ($teach['id'] == $info) {
                                 $selected = "Selected";
-                            }  
+                            }
                             $teacher .= '<option value="' . $teach['id'] . '"   ' . $selected . '>' . $teach['name'] . '</option>';
                         }
                     }
@@ -1592,7 +1592,7 @@ class AdminController extends Controller
                         $response .=  '</select>';
                         $response .= '<input class="form-control break_type"  type="text" name="timetable[' . $row . '][break_type]" value="' . $table['break_type'] . '" disabled hidden="hidden" ' . $bulk . '></input> ';
                     }
-                   
+
                     $response .=  '</div>';
                     $response .=  '</td>';
                     $response .=  '<td width="20%"  > ';
@@ -1625,7 +1625,7 @@ class AdminController extends Controller
                     }
                     $response .=  '</select>';
                     $response .=  '</div>';
-                    if($bulk == ""){
+                    if ($bulk == "") {
                         $response .=  '<button type="button" class=" btn btn-danger removeTR"><i class="fas fa-times"></i> </button>';
                     }
                     $response .=  '</td>';
@@ -1673,17 +1673,17 @@ class AdminController extends Controller
                     $teacher = "";
                     $all = "";
                     foreach (explode(',', $table['teacher_id']) as $info) {
-                        if($info == "0") {
+                        if ($info == "0") {
                             $all =  "Selected";
-                        } 
+                        }
                     }
-                    $teacher .= '<option value="0" '.$all.'> All </option>';
+                    $teacher .= '<option value="0" ' . $all . '> All </option>';
                     foreach ($timetable['data']['teacher'] as $teach) {
                         $selected = "";
                         foreach (explode(',', $table['teacher_id']) as $info) {
                             if ($teach['id'] == $info) {
                                 $selected = "Selected";
-                            }  
+                            }
                             $teacher .= '<option value="' . $teach['id'] . '"   ' . $selected . '>' . $teach['name'] . '</option>';
                         }
                     }
@@ -1867,9 +1867,8 @@ class AdminController extends Controller
             $response = "";
             foreach ($days as $day) {
 
-                if(!isset($timetable['data']['week'][$day]) && ($day == "saturday" || $day=="sunday")) {
-
-                }else {
+                if (!isset($timetable['data']['week'][$day]) && ($day == "saturday" || $day == "sunday")) {
+                } else {
 
                     $response .= '<tr><td>' . strtoupper($day) . '</td>';
                     $row = 0;
@@ -1877,21 +1876,21 @@ class AdminController extends Controller
                         if ($table['day'] == $day) {
                             $response .= '<td>';
                             if ($table['break'] == "1") {
-                                $response .= '<b>'. $table['break_type'] .'</b><br> ';
+                                $response .= '<b>' . $table['break_type'] . '</b><br> ';
                                 $response .= '(' . $table['time_start'] . ' - ' . $table['time_end'] . ' )<br>';
                                 if (isset($table['hall_no'])) {
 
                                     $response .= 'Class Room : ' . $table['hall_no'] . '';
                                 }
                             } else {
-                                if($table['subject_name']) {
+                                if ($table['subject_name']) {
                                     $subject = $table['subject_name'];
                                 } else {
                                     $subject = $table['break_type'];
                                 }
                                 $response .= '<b>Subject:' . $subject . '</b><br>';
                                 $response .= '(' . $table['time_start'] . ' - ' . $table['time_end'] . ' )<br>';
-                                if($table['teacher_name']) {
+                                if ($table['teacher_name']) {
                                     $response .= 'Teacher :  ' . $table['teacher_name'] . '<br>';
                                 }
                                 if (isset($table['hall_no'])) {
@@ -1907,9 +1906,7 @@ class AdminController extends Controller
                         $row++;
                     }
                     $response .= '</tr>';
-
                 }
-                    
             }
 
             $timetable['timetable'] = $response;
@@ -2990,6 +2987,8 @@ class AdminController extends Controller
                         $type = "Internal";
                     } elseif ($exam['distributor_type'] == "2") {
                         $type = "External";
+                    } else {
+                        $type = "NILL";
                     }
                     $output .= '<tr>
                                     <td>' . $exam['subject_name'] . '</td>

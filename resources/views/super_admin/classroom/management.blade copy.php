@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-xl-6">
             <div class="card">
-                <ul class="nav nav-tabs" style="border-bottom: 2px solid blue;">
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4  class="nav-link">
                             Classroom details

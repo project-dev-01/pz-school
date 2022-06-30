@@ -12,10 +12,12 @@
         position: relative;
         cursor: pointer;
     }
+
     .switch input {
         display: none;
     }
-    .switch input + span {
+
+    .switch input+span {
         padding-left: 50px;
         min-height: 24px;
         line-height: 24px;
@@ -26,13 +28,16 @@
         white-space: nowrap;
         transition: color 0.3s ease;
     }
-    .switch input + span:before, .switch input + span:after {
+
+    .switch input+span:before,
+    .switch input+span:after {
         content: '';
         display: block;
         position: absolute;
         border-radius: 12px;
     }
-    .switch input + span:before {
+
+    .switch input+span:before {
         top: 0;
         left: 0;
         width: 42px;
@@ -40,7 +45,8 @@
         background: #e4ecfa;
         transition: all 0.3s ease;
     }
-    .switch input + span:after {
+
+    .switch input+span:after {
         width: 18px;
         height: 18px;
         background: #fff;
@@ -49,7 +55,8 @@
         box-shadow: 0 1px 3px rgba(18, 22, 33, .1);
         transition: all 0.45s ease;
     }
-    .switch input + span em {
+
+    .switch input+span em {
         width: 8px;
         height: 7px;
         background: #99a3ba;
@@ -61,7 +68,8 @@
         z-index: 1;
         transition: all 0.45s ease;
     }
-    .switch input + span em:before {
+
+    .switch input+span em:before {
         content: '';
         width: 2px;
         height: 2px;
@@ -73,7 +81,8 @@
         top: 50%;
         margin: -1px 0 0 -1px;
     }
-    .switch input + span em:after {
+
+    .switch input+span em:after {
         content: '';
         display: block;
         border-top-left-radius: 4px;
@@ -90,24 +99,29 @@
         transition: all 0.45s ease;
         transform: rotate(-35deg) translate(0, 1px);
     }
-    .switch input + span strong {
+
+    .switch input+span strong {
         font-weight: normal;
         position: relative;
         display: block;
         top: 1px;
     }
-    .switch input + span strong:before, .switch input + span strong:after {
+
+    .switch input+span strong:before,
+    .switch input+span strong:after {
         font-size: 14px;
         font-weight: 500;
         display: block;
         font-family: 'Mukta Malar', Arial;
         -webkit-backface-visibility: hidden;
     }
-    .switch input + span strong:before {
+
+    .switch input+span strong:before {
         content: 'Unlock';
         transition: all 0.3s ease 0.2s;
     }
-    .switch input + span strong:after {
+
+    .switch input+span strong:after {
         content: 'Lock';
         opacity: 0;
         visibility: hidden;
@@ -118,59 +132,79 @@
         transition: all 0.3s ease;
         transform: translate(2px, 0);
     }
-    .switch input:checked + span:before {
+
+    .switch input:checked+span:before {
         background: rgba(0, 123, 255, .35);
     }
-    .switch input:checked + span:after {
+
+    .switch input:checked+span:after {
         background: #fff;
         transform: translate(18px, 0);
     }
-    .switch input:checked + span em {
+
+    .switch input:checked+span em {
         transform: translate(18px, 0);
         background: #007bff;
     }
-    .switch input:checked + span em:after {
+
+    .switch input:checked+span em:after {
         border-color: #007bff;
         transform: rotate(0deg) translate(0, 0);
     }
-    .switch input:checked + span strong:before {
+
+    .switch input:checked+span strong:before {
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
         transform: translate(-2px, 0);
     }
-    .switch input:checked + span strong:after {
+
+    .switch input:checked+span strong:after {
         opacity: 1;
         visibility: visible;
         transform: translate(0, 0);
         transition: all 0.3s ease 0.2s;
     }
+
     html {
         -webkit-font-smoothing: antialiased;
     }
+
     * {
         box-sizing: border-box;
     }
-    *:before, *:after {
+
+    *:before,
+    *:after {
         box-sizing: border-box;
     }
+
     .switch {
         display: table;
         margin: 12px auto;
         min-width: 118px;
     }
+
     .dribbble {
         position: fixed;
         display: block;
         right: 20px;
         bottom: 20px;
     }
+
     .dribbble img {
         display: block;
         height: 28px;
     }
- 
-    </style>
+
+    .iti {
+        display: block;
+    }
+
+    .country-select {
+        display: block;
+    }
+</style>
 @endsection
 @section('content')
 <div class="container-fluid">
@@ -188,7 +222,7 @@
                 <h4 class="page-title">Guardian Profile</h4>
             </div>
         </div>
-    </div>     
+    </div>
     <!-- end page title -->
     <div class="row">
         <div class="col-12">
@@ -196,72 +230,77 @@
                 <div class="row">
                     <div class="col-xl-3">
                         @if($parent['photo'])
-                            <img src="{{ asset('users/images//') }}/{{$parent['photo']}}" alt="" class="img-fluid mx-auto d-block rounded user-img">
+                        <img src="{{ asset('users/images//') }}/{{$parent['photo']}}" alt="" class="img-fluid mx-auto d-block rounded user-img">
                         @else
-                            <img src="{{ asset('images/users/default.jpg') }}" alt="" class="img-fluid mx-auto d-block rounded">
+                        <img src="{{ asset('images/users/default.jpg') }}" alt="" class="img-fluid mx-auto d-block rounded">
                         @endif
-                        
+
                     </div> <!-- end col -->
                     <div class="col-lg-7">
-                        <div class="pl-xl-3 mt-3 mt-xl-0">                                              
+                        <div class="pl-xl-3 mt-3 mt-xl-0">
                             <h1 class="mb-3">{{$parent['first_name']}} {{$parent['last_name']}}</h5>
-                            <div class="row mb-3">
-                                <div class="col-md-12">
-                                    <div>
-                                        <div class="media mb-2">
-                                            <div class="avatar-xs bg-success rounded-circle">
-                                                <span class="avatar-title font-14 font-weight-bold text-white">
-                                                <i class="fas fa-user-tag"></i></span>
+                                <div class="row mb-3">
+                                    <div class="col-md-12">
+                                        <div>
+                                            <div class="media mb-2">
+                                                <div class="avatar-xs bg-success rounded-circle">
+                                                    <span class="avatar-title font-14 font-weight-bold text-white">
+                                                        <i class="fas fa-user-tag"></i></span>
+                                                </div>
+                                                <div class="media-body pl-2">
+                                                    <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
+                                                        <a href="javascript: void(0);" class="text-reset">{{$parent['occupation']}}</a>
+                                                    </h5>
+                                                </div>
                                             </div>
-                                            <div class="media-body pl-2">
-                                                <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                <a href="javascript: void(0);" class="text-reset">{{$parent['occupation']}}</a></h5>
+                                            <div class="media mb-2">
+                                                <div class="avatar-xs bg-success rounded-circle">
+                                                    <span class="avatar-title font-14 font-weight-bold text-white">
+                                                        <i class="fas fa-dollar-sign"></i></span>
+                                                </div>
+                                                <div class="media-body pl-2">
+                                                    <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
+                                                        <a href="javascript: void(0);" class="text-reset">{{$parent['income']}}</a>
+                                                    </h5>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="media mb-2">
-                                            <div class="avatar-xs bg-success rounded-circle">
-                                                <span class="avatar-title font-14 font-weight-bold text-white">
-                                                <i class="fas fa-dollar-sign"></i></span>
+
+                                            <div class="media mb-2">
+                                                <div class="avatar-xs bg-success rounded-circle">
+                                                    <span class="avatar-title font-14 font-weight-bold text-white">
+                                                        <i class="fas fa-phone"></i></span>
+                                                </div>
+                                                <div class="media-body pl-2">
+                                                    <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
+                                                        <a href="javascript: void(0);" class="text-reset">{{$parent['mobile_no']}}</a>
+                                                    </h5>
+                                                </div>
                                             </div>
-                                            <div class="media-body pl-2">
-                                                <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                <a href="javascript: void(0);" class="text-reset">{{$parent['income']}}</a></h5>
+                                            <div class="media mb-2">
+                                                <div class="avatar-xs bg-success rounded-circle">
+                                                    <span class="avatar-title font-14 font-weight-bold text-white">
+                                                        <i class="far fa-envelope"></i></span>
+                                                </div>
+                                                <div class="media-body pl-2">
+                                                    <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
+                                                        <a href="javascript: void(0);" class="text-reset">{{$parent['email']}}</a>
+                                                    </h5>
+                                                </div>
                                             </div>
-                                        </div>
-                                    
-                                        <div class="media mb-2">
-                                            <div class="avatar-xs bg-success rounded-circle">
-                                                <span class="avatar-title font-14 font-weight-bold text-white">
-                                                <i class="fas fa-phone"></i></span>
-                                            </div>
-                                            <div class="media-body pl-2">
-                                                <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                <a href="javascript: void(0);" class="text-reset">{{$parent['mobile_no']}}</a></h5>
-                                            </div>
-                                        </div>
-                                        <div class="media mb-2">
-                                            <div class="avatar-xs bg-success rounded-circle">
-                                                <span class="avatar-title font-14 font-weight-bold text-white">
-                                                <i class="far fa-envelope"></i></span>
-                                            </div>
-                                            <div class="media-body pl-2">
-                                                <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                <a href="javascript: void(0);" class="text-reset">{{$parent['email']}}</a></h5>
-                                            </div>
-                                        </div>
-                                        <div class="media mb-2">
-                                            <div class="avatar-xs bg-success rounded-circle">
-                                                <span class="avatar-title font-14 font-weight-bold text-white">
-                                                <i class="fas fa-home"></i></span>
-                                            </div>
-                                            <div class="media-body pl-2">
-                                                <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                <a href="javascript: void(0);" class="text-reset">{{$parent['address']}}</a></h5>
+                                            <div class="media mb-2">
+                                                <div class="avatar-xs bg-success rounded-circle">
+                                                    <span class="avatar-title font-14 font-weight-bold text-white">
+                                                        <i class="fas fa-home"></i></span>
+                                                </div>
+                                                <div class="media-body pl-2">
+                                                    <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
+                                                        <a href="javascript: void(0);" class="text-reset">{{$parent['address']}}</a>
+                                                    </h5>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         </div>
                     </div> <!-- end col -->
                 </div><!-- end row -->
@@ -274,7 +313,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-8">                                          
+                        <div class="col-lg-8">
                             <span class="header-title mb-3" id="span-parent" data-toggle="collapse" href="#basic_details" role="button" aria-expanded="false" aria-controls="basic_details"><i class="fas fa-user-edit"></i> Basic Details</span>
                         </div>
                         <div class="col-lg-4">
@@ -282,18 +321,18 @@
                                     <button type="button" class="btn btn-white btn-rounded waves-effect waves-light mr-1" data-toggle="modal" data-target="#authenticationModal"><i class="fas fa-lock mr-1"></i> Authentication</button>
                             </div> -->
                         </div><!-- end col-->
-                    </div> <!-- end row -->				
-                    <br>				    
+                    </div> <!-- end row -->
+                    <br>
                     <div class="collapse" id="basic_details">
                         <form id="editParent" method="post" action="{{ route('admin.parent.update') }}" enctype="multipart/form-data" autocomplete="off">
                             @csrf
                             <input type="hidden" name="id" value="{{$parent['id']}}">
                             <div class="card">
-                                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                                <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="nav-link">
+                                        <h4 class="navv">
                                             Guardian Details
-                                        <h4>
+                                            <h4>
                                     </li>
                                 </ul>
                                 <div class="card-body">
@@ -307,7 +346,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                     <!-- <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -338,27 +377,27 @@
                                                             <span class="far fa-user"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" value="{{$parent['first_name']}}" name="first_name" aria-describedby="inputGroupPrepend" >
+                                                    <input type="text" class="form-control" value="{{$parent['first_name']}}" name="first_name" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
-                                                <label for="last_name">Last Name</label>
+                                                <label for="last_name">Last Name<span class="text-danger">*</span></label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
                                                             <span class="far fa-user"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" value="{{$parent['last_name']}}" name="last_name" aria-describedby="inputGroupPrepend" >
+                                                    <input type="text" class="form-control" value="{{$parent['last_name']}}" name="last_name" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="gender">Gender</label>
-                                                <select class="form-control" name="gender" >
+                                                <select class="form-control" name="gender">
                                                     <option value="">Choose Gender</option>
                                                     <option value="Male" {{$parent['gender'] == "Male" ? "selected" : ""}}>Male</option>
                                                     <option value="Female" {{$parent['gender'] == "Female" ? "selected" : ""}}>Female</option>
@@ -389,16 +428,16 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="nric">NRIC Number</label>
-                                                <input type="text"  class="form-control" value="{{$parent['nric']}}" name="nric" data-parsley-trigger="change" >
+                                                <input type="text" class="form-control" value="{{$parent['nric']}}" name="nric" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="blooddgrp">Blood Group</label>
-                                                <select  class="form-control" name="blood_group" >
+                                                <select class="form-control" name="blood_group">
                                                     <option value="">Pick Blood Type</option>
                                                     <option {{$parent['blood_group'] == "O+" ? "selected" : ""}}>O+</option>
                                                     <option {{$parent['blood_group'] == "A+" ? "selected" : ""}}>A+</option>
@@ -414,7 +453,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
                                                 <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
-                                                <input type="tel"  class="form-control"  name="mobile_no" id="mobile_no" value="{{$parent['mobile_no']}}" data-parsley-trigger="change" >
+                                                <input type="tel" class="form-control" name="mobile_no" id="mobile_no" value="{{$parent['mobile_no']}}" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -446,7 +485,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="education">Education</label>
-                                                <select class="form-control" name="education" >
+                                                <select class="form-control" name="education">
                                                     <option value="">Choose Education</option>
                                                     @forelse($education as $e)
                                                     <option value="{{$e['id']}}" {{$parent['education'] == $e['id'] ? "selected" : ""}}>{{$e['name']}}</option>
@@ -458,7 +497,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="occupation">Occupation<span class="text-danger">*</span></label>
-                                                <input type="text"  class="form-control" value="{{$parent['occupation']}}" name="occupation" data-parsley-trigger="change" >
+                                                <input type="text" class="form-control" value="{{$parent['occupation']}}" name="occupation" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                     </div>
@@ -472,20 +511,20 @@
                                                             <span class="fas fa-calculator"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" value="{{$parent['income']}}" name="income" aria-describedby="inputGroupPrepend" >
+                                                    <input type="text" class="form-control" value="{{$parent['income']}}" name="income" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="country">Country</label>
-                                                <input type="text"  class="form-control" value="{{$parent['country']}}" name="country" id="country" data-parsley-trigger="change" >
+                                                <input type="text" class="form-control" value="{{$parent['country']}}" name="country" id="country" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="state">State/Province</label>
-                                                <input type="text"  class="form-control" value="{{$parent['state']}}" name="state" data-parsley-trigger="change" >
+                                                <input type="text" class="form-control" value="{{$parent['state']}}" name="state" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                     </div>
@@ -493,13 +532,13 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="city">City</label>
-                                                <input type="text"  class="form-control" value="{{$parent['city']}}" name="city" data-parsley-trigger="change" >
+                                                <input type="text" class="form-control" value="{{$parent['city']}}" name="city" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="post_code">Zip/Postal Code</label>
-                                                <input type="text"  class="form-control" value="{{$parent['post_code']}}" name="post_code" data-parsley-trigger="change" >
+                                                <input type="text" class="form-control" value="{{$parent['post_code']}}" name="post_code" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -518,11 +557,11 @@
                                 </div>
                             </div>
                             <div class="card">
-                                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                                <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="nav-link">
+                                        <h4 class="navv">
                                             Login Details
-                                        <h4>
+                                            <h4>
                                     </li>
                                 </ul>
                                 <div class="card-body">
@@ -536,15 +575,15 @@
                                                             <span class="far fa-envelope-open"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" value="{{$parent['email']}}" name="email" aria-describedby="inputGroupPrepend" >
+                                                    <input type="text" class="form-control" value="{{$parent['email']}}" name="email" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group mb-3">
                                                 <label class="switch">Authentication
-                                                
-                                                    <input id="edit_status" name="status"  type="checkbox" {{ $parent['status'] == "1" ? "checked" : "" }}>
+
+                                                    <input id="edit_status" name="status" type="checkbox" {{ $parent['status'] == "1" ? "checked" : "" }}>
                                                     <span>
                                                         <em></em>
                                                         <strong></strong>
@@ -556,9 +595,9 @@
                                 </div>
                             </div>
                             <div class="card">
-                                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                                <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="nav-link">
+                                        <h4 class="navv">
                                             Social Links
                                             <h4>
                                     </li>
@@ -574,7 +613,7 @@
                                                             <span class="fab fa-facebook-f"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" value="{{$parent['facebook_url']}}" name="facebook_url" aria-describedby="inputGroupPrepend" >
+                                                    <input type="text" class="form-control" value="{{$parent['facebook_url']}}" name="facebook_url" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -587,7 +626,7 @@
                                                             <span class="fab fa-twitter"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" value="{{$parent['twitter_url']}}" name="twitter_url" aria-describedby="inputGroupPrepend" >
+                                                    <input type="text" class="form-control" value="{{$parent['twitter_url']}}" name="twitter_url" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -600,7 +639,7 @@
                                                             <span class="fab fa-linkedin-in"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" value="{{$parent['linkedin_url']}}" name="linkedin_url" aria-describedby="inputGroupPrepend" >
+                                                    <input type="text" class="form-control" value="{{$parent['linkedin_url']}}" name="linkedin_url" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -608,9 +647,9 @@
                                 </div> <!-- end card-body -->
                             </div> <!-- end card-->
                             <div class="card">
-                                <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
+                                <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="nav-link">
+                                        <h4 class="navv">
                                             Change Password
                                             <h4>
                                     </li>
@@ -626,7 +665,7 @@
                                                             <span class="fas fa-unlock"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="password" class="form-control" id="password"  name="password" aria-describedby="inputGroupPrepend" >
+                                                    <input type="password" class="form-control" name="password" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -639,7 +678,7 @@
                                                             <span class="fas fa-unlock"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="password" class="form-control"  name="confirm_password" aria-describedby="inputGroupPrepend" >
+                                                    <input type="password" class="form-control" name="confirm_password" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -656,7 +695,7 @@
                             </div>
                         </form>
                     </div>
-                            
+
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
         </div> <!-- end col -->
@@ -670,32 +709,32 @@
                     <div class="collapse" id="child_detail">
                         <div class="row">
                             @forelse($childs as $child)
-                                <div class="col-md-12 col-lg-6 col-xl-4">
-                                    <div class="card text-xs-center">
-                                        <div class="card-body ">
-                                            <div class="row">
-                                                <div class="col-sm-4 text-center">
-                                                    @if($child['photo'])
-                                                        <img src="{{ asset('users/images//') }}/{{$child['photo']}}" alt="" class="rounded-circle img-thumbnail avatar-xl">
-                                                    @else
-                                                        <img src="{{ asset('images/users/default.jpg') }}" alt="" class="rounded-circle img-thumbnail avatar-xl">
-                                                    @endif
+                            <div class="col-md-12 col-lg-6 col-xl-4">
+                                <div class="card text-xs-center">
+                                    <div class="card-body ">
+                                        <div class="row">
+                                            <div class="col-sm-4 text-center">
+                                                @if($child['photo'])
+                                                <img src="{{ asset('users/images//') }}/{{$child['photo']}}" alt="" class="avatar-xl">
+                                                @else
+                                                <img src="{{ asset('images/users/default.jpg') }}" alt="" class="avatar-xl">
+                                                @endif
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <h4 class="title">{{$child['first_name']}} {{$child['last_name']}}</h4>
+                                                <div class="info">
+                                                    <span> Class: {{$child['class_name']}} ({{$child['section_name']}})</span>
                                                 </div>
-                                                <div class="col-sm-8">
-                                                    <h4 class="title">{{$child['first_name']}} {{$child['last_name']}}</h4>
-                                                    <div class="info">
-                                                        <span> Class: {{$child['class_name']}} ({{$child['section_name']}})</span>
-                                                    </div>
-                                                    <br>
-                                                    <div class="profile">
-                                                        <a class="text-muted mail-subj" href="{{route('admin.student.details',$child['id'])}}" target="_blank">Profile</a>
-                                                    </div>
+                                                <br>
+                                                <div class="profile">
+                                                    <a class="text-muted mail-subj" href="{{route('admin.student.details',$child['id'])}}" target="_blank">Profile</a>
                                                 </div>
-                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            @empty    
+                            </div>
+                            @empty
                             <div class="alert alert-subl mt-md text-center text-danger">No Childs Available !</div>
                             @endforelse
                         </div>
@@ -729,7 +768,7 @@
     });
 
     $("#country").countrySelect({
-        responsiveDropdown:true
+        responsiveDropdown: true
     });
 </script>
 <script>

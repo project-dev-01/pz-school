@@ -3,9 +3,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                2020 - <script>
-                    document.write(new Date().getFullYear())
-                </script> &copy; by <a href="https://paxsuzen.com">Paxsuzen</a>
+                2020 - {{ now()->year }} &copy; by <a href="https://paxsuzen.com">Paxsuzen</a>
             </div>
         </div>
     </div>

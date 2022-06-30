@@ -525,6 +525,7 @@
         </div> <!-- end col-->
     </div>
     @include('student.dashboard.check_list')
+    @include('student.dashboard.exam-schedule')
 </div> <!-- container -->
 @endsection
 @section('scripts')
@@ -540,6 +541,7 @@
     var getTestScore = "{{ config('constants.api.get_test_score_dashboard') }}";
 
     var UserName = "{{ Session::get('name') }}";
+    var getScheduleExamDetailsUrl = "{{ config('constants.api.get_schedule_exam_details_by_student') }}";
 </script>
 <!-- <script src="{{ asset('js/custom/student_calendor.js') }}"></script> -->
 <!-- <script src="{{ asset('js/custom/student_dashboard.js') }}"></script> -->

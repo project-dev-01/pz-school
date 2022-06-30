@@ -473,6 +473,7 @@
     @include('staff.dashboard.check_list')
     @include('staff.dashboard.task')
     @include('staff.dashboard.task-show')
+    @include('staff.dashboard.exam-schedule')
 
 </div> <!-- container -->
 @endsection
@@ -484,6 +485,7 @@
     var getAssignClassUrl = "{{ config('constants.api.get_assign_class') }}";
     var pathDownloadFileUrl = "{{ asset('images/todolist/') }}";
     var toDoCommentsUrl = "{{ config('constants.api.to_do_comments') }}";
+    var getScheduleExamDetailsUrl = "{{ config('constants.api.get_schedule_exam_details') }}";
 
     var UserName = "{{ Session::get('name') }}";
     // task all url
@@ -491,6 +493,7 @@
     var calendorListTaskCalendor = "{{ config('constants.api.calendor_list_task_calendor') }}";
 </script>
 <!-- <script src="{{ asset('js/custom/admin_calendor.js') }}"></script> -->
-<script src="{{ asset('js/custom/admin_calendor_new.js') }}"></script>
+<!-- <script src="{{ asset('js/custom/admin_calendor_new.js') }}"></script> -->
+<script src="{{ asset('js/custom/admin_calendor_new_cal.js') }}"></script>
 <script src="{{ asset('js/custom/admin/dashboard.js') }}"></script>
 @endsection

@@ -639,6 +639,8 @@
         </div> <!-- end card-->
     </div> <!-- end col -->
     @include('parent.dashboard.check_list')
+    @include('parent.dashboard.exam-schedule')
+
 </div> <!-- container -->
 @endsection
 @section('scripts')
@@ -654,6 +656,8 @@
     var toDoCommentsUrl = "{{ config('constants.api.to_do_comments') }}";
     var getTestScore = "{{ config('constants.api.get_test_score_dashboard') }}";
     var UserName = "{{ Session::get('name') }}";
+    var getScheduleExamDetailsUrl = "{{ config('constants.api.get_schedule_exam_details_by_student') }}";
+
     // general details get student names
     var stutdentleaveList = "{{ route('parent.student_leave.list') }}";
     var reuploadFileUrl = "{{ route('parent.reupload_file.add') }}";

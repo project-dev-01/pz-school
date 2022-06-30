@@ -81,6 +81,13 @@ $(document).ready(function () {
                 c = response.data;
                 return c;
             }
+        }, {
+            url: getScheduleExamDetailsUrl + '?token=' + token + '&branch_id=' + branchID + '&student_id=' + student_id,
+            type: 'get',
+            success: function (response) {
+                dd = response.data;
+                return dd;
+            }
         }],
         // selectable: true,
         selectHelper: true,
@@ -124,10 +131,33 @@ $(document).ready(function () {
                 $("#calNotes").val(e.event.extendedProps.report);
                 $("#ttDate").val(e.event.end);
                 $("#setCurDate").val(setCurDate);
+            } else if (e.event.extendedProps.schedule_id) {
+                $('#examScheduleModal').modal('toggle');
+                var time_start = e.event.extendedProps.time_start;
+                var time_end = e.event.extendedProps.time_end;
+                console.log(time_start)
+                console.log(time_end)
+                // var setCurDate = formatDate(end);
+                $("#examName").html(e.event.extendedProps.exam_name);
+                $("#examStandard").html(e.event.extendedProps.class_name);
+                $("#examClass").html(e.event.extendedProps.section_name);
+                $("#examSubject").html(e.event.extendedProps.subject_name);
+                $("#examTiming").html(tConvert(time_start) + ' - ' + tConvert(time_end));
             } else {
                 console.log("else")
             }
         }
     });
     calendar.render();
+    function tConvert(time) {
+        // Check correct time format and split into components
+        time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+        if (time.length > 1) { // If time format correct
+            time = time.slice(1);  // Remove full string match value
+            time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+            time[0] = +time[0] % 12 || 12; // Adjust hours
+        }
+        return time.join(''); // return adjusted time or original string
+    }
 });
