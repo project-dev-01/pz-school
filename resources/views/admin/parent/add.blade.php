@@ -12,10 +12,12 @@
         position: relative;
         cursor: pointer;
     }
+
     .switch input {
         display: none;
     }
-    .switch input + span {
+
+    .switch input+span {
         padding-left: 50px;
         min-height: 24px;
         line-height: 24px;
@@ -26,13 +28,16 @@
         white-space: nowrap;
         transition: color 0.3s ease;
     }
-    .switch input + span:before, .switch input + span:after {
+
+    .switch input+span:before,
+    .switch input+span:after {
         content: '';
         display: block;
         position: absolute;
         border-radius: 12px;
     }
-    .switch input + span:before {
+
+    .switch input+span:before {
         top: 0;
         left: 0;
         width: 42px;
@@ -40,7 +45,8 @@
         background: #e4ecfa;
         transition: all 0.3s ease;
     }
-    .switch input + span:after {
+
+    .switch input+span:after {
         width: 18px;
         height: 18px;
         background: #fff;
@@ -49,7 +55,8 @@
         box-shadow: 0 1px 3px rgba(18, 22, 33, .1);
         transition: all 0.45s ease;
     }
-    .switch input + span em {
+
+    .switch input+span em {
         width: 8px;
         height: 7px;
         background: #99a3ba;
@@ -61,7 +68,8 @@
         z-index: 1;
         transition: all 0.45s ease;
     }
-    .switch input + span em:before {
+
+    .switch input+span em:before {
         content: '';
         width: 2px;
         height: 2px;
@@ -73,7 +81,8 @@
         top: 50%;
         margin: -1px 0 0 -1px;
     }
-    .switch input + span em:after {
+
+    .switch input+span em:after {
         content: '';
         display: block;
         border-top-left-radius: 4px;
@@ -90,24 +99,29 @@
         transition: all 0.45s ease;
         transform: rotate(-35deg) translate(0, 1px);
     }
-    .switch input + span strong {
+
+    .switch input+span strong {
         font-weight: normal;
         position: relative;
         display: block;
         top: 1px;
     }
-    .switch input + span strong:before, .switch input + span strong:after {
+
+    .switch input+span strong:before,
+    .switch input+span strong:after {
         font-size: 14px;
         font-weight: 500;
         display: block;
         font-family: 'Mukta Malar', Arial;
         -webkit-backface-visibility: hidden;
     }
-    .switch input + span strong:before {
+
+    .switch input+span strong:before {
         content: 'Unlock';
         transition: all 0.3s ease 0.2s;
     }
-    .switch input + span strong:after {
+
+    .switch input+span strong:after {
         content: 'Lock';
         opacity: 0;
         visibility: hidden;
@@ -118,58 +132,78 @@
         transition: all 0.3s ease;
         transform: translate(2px, 0);
     }
-    .switch input:checked + span:before {
+
+    .switch input:checked+span:before {
         background: rgba(0, 123, 255, .35);
     }
-    .switch input:checked + span:after {
+
+    .switch input:checked+span:after {
         background: #fff;
         transform: translate(18px, 0);
     }
-    .switch input:checked + span em {
+
+    .switch input:checked+span em {
         transform: translate(18px, 0);
         background: #007bff;
     }
-    .switch input:checked + span em:after {
+
+    .switch input:checked+span em:after {
         border-color: #007bff;
         transform: rotate(0deg) translate(0, 0);
     }
-    .switch input:checked + span strong:before {
+
+    .switch input:checked+span strong:before {
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
         transform: translate(-2px, 0);
     }
-    .switch input:checked + span strong:after {
+
+    .switch input:checked+span strong:after {
         opacity: 1;
         visibility: visible;
         transform: translate(0, 0);
         transition: all 0.3s ease 0.2s;
     }
+
     html {
         -webkit-font-smoothing: antialiased;
     }
+
     * {
         box-sizing: border-box;
     }
-    *:before, *:after {
+
+    *:before,
+    *:after {
         box-sizing: border-box;
     }
+
     .switch {
         display: table;
         margin: 12px auto;
         min-width: 118px;
     }
+
     .dribbble {
         position: fixed;
         display: block;
         right: 20px;
         bottom: 20px;
     }
+
     .dribbble img {
         display: block;
         height: 28px;
     }
-    
+
+    .iti {
+        display: block;
+    }
+
+    .country-select {
+        display: block;
+    }
 </style>
 @endsection
 @section('content')
@@ -197,11 +231,11 @@
                         <li class="nav-item">
                             <h4 class="nav-link">
                                 Guardian Details
-                            <h4>
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
-                        
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="col-lg-3">
@@ -211,7 +245,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                         <!-- <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -240,27 +274,27 @@
                                                 <span class="far fa-user"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="first_name" aria-describedby="inputGroupPrepend" >
+                                        <input type="text" class="form-control" name="first_name" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="last_name"> Last Name</label>
+                                    <label for="last_name"> Last Name<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="far fa-user"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="last_name" aria-describedby="inputGroupPrepend" >
+                                        <input type="text" class="form-control" name="last_name" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="gender">Gender</label>
-                                    <select class="form-control" name="gender" >
+                                    <select class="form-control" name="gender">
                                         <option value="">Choose Gender</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
@@ -278,7 +312,7 @@
                                                 <span class="fas fa-birthday-cake"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="date_of_birth"  id="date_of_birth" >
+                                        <input type="text" class="form-control" name="date_of_birth" id="date_of_birth">
                                     </div>
                                 </div>
                             </div>
@@ -291,7 +325,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="nric">NRIC Number</label>
-                                    <input type="text"  class="form-control" name="nric" data-parsley-trigger="change" >
+                                    <input type="text" class="form-control" name="nric" data-parsley-trigger="change">
                                 </div>
                             </div>
                         </div>
@@ -299,7 +333,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="blooddgrp">Blood Group</label>
-                                    <select  class="form-control" name="blood_group" >
+                                    <select class="form-control" name="blood_group">
                                         <option value="">Pick Blood Type</option>
                                         <option>O+</option>
                                         <option>A+</option>
@@ -315,13 +349,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
-                                    <input type="tel"  class="form-control"  name="mobile_no" id="mobile_no" data-parsley-trigger="change" >
+                                    <input type="tel" class="form-control" name="mobile_no" id="mobile_no" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="religion">Religion</label>
-                                    <select class="form-control" name="religion" >
+                                    <select class="form-control" name="religion">
                                         <option value="">Choose Religion</option>
                                         @forelse($religion as $r)
                                         <option value="{{$r['id']}}">{{$r['religions_name']}}</option>
@@ -347,7 +381,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="education">Education</label>
-                                    <select class="form-control" name="education" >
+                                    <select class="form-control" name="education">
                                         <option value="">Choose Education</option>
                                         @forelse($education as $e)
                                         <option value="{{$e['id']}}">{{$e['name']}}</option>
@@ -359,7 +393,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="occupation">Occupation<span class="text-danger">*</span></label>
-                                    <input type="text"  class="form-control" name="occupation" data-parsley-trigger="change" >
+                                    <input type="text" class="form-control" name="occupation" data-parsley-trigger="change">
                                 </div>
                             </div>
                         </div>
@@ -373,20 +407,20 @@
                                                 <span class="fas fa-calculator"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control"  name="income" aria-describedby="inputGroupPrepend" >
+                                        <input type="text" class="form-control" name="income" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="country">Country</label>
-                                    <input type="text"  class="form-control" name="country" id="country" data-parsley-trigger="change" >
+                                    <input type="text" class="form-control" name="country" id="country" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="state">State/Province</label>
-                                    <input type="text"  class="form-control" name="state" data-parsley-trigger="change" >
+                                    <input type="text" class="form-control" name="state" data-parsley-trigger="change">
                                 </div>
                             </div>
                         </div>
@@ -394,7 +428,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="city">City</label>
-                                    <input type="text"  class="form-control" name="city" data-parsley-trigger="change" >
+                                    <input type="text" class="form-control" name="city" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -419,11 +453,11 @@
                     </div>
                 </div>
                 <div class="card">
-                    <ul class="nav nav-tabs">
+                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                         <li class="nav-item">
                             <h4 class="nav-link">
                                 Login Details
-                            <h4>
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -437,7 +471,7 @@
                                                 <span class="far fa-envelope-open"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control"  name="email" aria-describedby="inputGroupPrepend" >
+                                        <input type="text" class="form-control" name="email" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -450,7 +484,7 @@
                                                 <span class="fas fa-unlock"></span>
                                             </div>
                                         </div>
-                                        <input type="password" class="form-control"  id="password" name="password" aria-describedby="inputGroupPrepend" >
+                                        <input type="password" class="form-control" name="password" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -463,7 +497,7 @@
                                                 <span class="fas fa-unlock"></span>
                                             </div>
                                         </div>
-                                        <input type="password" class="form-control"  name="confirm_password" aria-describedby="inputGroupPrepend" >
+                                        <input type="password" class="form-control" name="confirm_password" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -471,7 +505,7 @@
                                 <div class="form-group mb-3">
                                     <label for="status">Authentication</label>
                                     <div class="switch">
-                                        <input id="status" name="status"  type="checkbox">
+                                        <input id="status" name="status" type="checkbox">
                                         <span>
                                             <em></em>
                                             <strong></strong>
@@ -483,7 +517,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <ul class="nav nav-tabs">
+                    <ul class="nav nav-tabs" style="border-bottom: 2px solid #0ABAB5;">
                         <li class="nav-item">
                             <h4 class="nav-link">
                                 Social Links
@@ -501,7 +535,7 @@
                                                 <span class="fab fa-facebook-f"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control"  name="facebook_url" aria-describedby="inputGroupPrepend" >
+                                        <input type="text" class="form-control" name="facebook_url" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -514,7 +548,7 @@
                                                 <span class="fab fa-twitter"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control"  name="twitter_url" aria-describedby="inputGroupPrepend" >
+                                        <input type="text" class="form-control" name="twitter_url" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -527,14 +561,14 @@
                                                 <span class="fab fa-linkedin-in"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control"  name="linkedin_url" aria-describedby="inputGroupPrepend" >
+                                        <input type="text" class="form-control" name="linkedin_url" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div> <!-- end card-body -->
                 </div> <!-- end card-->
-                
+
                 <div class="form-group text-right m-b-0">
                     <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
                         Save
@@ -573,7 +607,7 @@
     });
 
     $("#country").countrySelect({
-        responsiveDropdown:true
+        responsiveDropdown: true
     });
 </script>
 <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
