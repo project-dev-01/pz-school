@@ -431,6 +431,7 @@ return [
         // add task in calendor
         'calendor_add_task_calendor'=>$url.'/calendor/add-task-calendor',
         'calendor_list_task_calendor'=>$url.'/calendor/list-task-calendor',
+        'calendor_delete_task_calendor'=>$url.'/calendor/delete-task-calendor',
         
         // education url
         'education_add' => $url.'/education/add',
@@ -458,6 +459,10 @@ return [
          
         'reset_password' => $url.'/reset_password',
         'reset_password_validation' => $url.'/reset_password_validation',
+        // notifications
+        'unread_notifications' => $url.'/unread_notifications',
+        'mark_as_read' => $url.'/mark_as_read',
+        
     ]
 
 ];

@@ -114,8 +114,6 @@ $(document).ready(function () {
             url: getScheduleExamDetailsUrl + '?token=' + token + '&branch_id=' + branchID + '&teacher_id=' + ref_user_id,
             type: 'get',
             success: function (response) {
-                console.log("response")
-                console.log(response)
                 dd = response.data;
                 return dd;
             }
@@ -126,6 +124,12 @@ $(document).ready(function () {
             // var title = prompt('Event Title:');
             $('#addTasksModal').modal('toggle');
             $('.addTasks').find('form')[0].reset();
+            var start_dt = moment(e.start).format('DD-MM-YYYY dddd hh:mm A');
+            var subonesec = moment(e.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
+            // var end_dt = moment(e.end).format('DD-MM-YYYY dddd hh:mm A');
+            $("#startDate").html(start_dt);
+            $("#endDate").html(subonesec);
+
             $('#saveBtn').click(function () {
                 var title = $('#taskTitle').val();
                 // var start_date = moment(start).format('YYYY-MM-DD');
@@ -154,15 +158,6 @@ $(document).ready(function () {
                             var newData = response.data;
                             $('#addTasksModal').modal('hide')
                             $('.addTasks').find('form')[0].reset();
-                            // $('#teacher_calendor').fullCalendar('renderEvent', {
-                            //     'id': newData.id,
-                            //     'title': newData.title,
-                            //     'start': newData.start,
-                            //     'end': newData.end,
-                            //     'description': newData.description,
-                            //     'className': newData.className
-                            //     // 'color': newData.color
-                            // });
                             var eventObject = {
                                 id: newData.id,
                                 title: newData.title,
@@ -172,9 +167,6 @@ $(document).ready(function () {
                                 className: newData.className
                             };
                             calendar.addEvent(eventObject);
-                            // $('#teacher_calendor').fullCalendar('renderEvent', eventObject, true);
-                            // calendar.render();
-                            // calendar.fullCalendar('refetchEvents');
                         }
                     });
                 } else {
@@ -236,8 +228,6 @@ $(document).ready(function () {
                 $('#examScheduleModal').modal('toggle');
                 var time_start = e.event.extendedProps.time_start;
                 var time_end = e.event.extendedProps.time_end;
-                console.log(time_start)
-                console.log(time_end)
                 // var setCurDate = formatDate(end);
                 $("#examName").html(e.event.extendedProps.exam_name);
                 $("#examStandard").html(e.event.extendedProps.class_name);
@@ -245,9 +235,56 @@ $(document).ready(function () {
                 $("#examSubject").html(e.event.extendedProps.subject_name);
                 $("#examTiming").html(tConvert(time_start) + ' - ' + tConvert(time_end));
             } else {
+                var start_dt = moment(e.event.start).format('DD-MM-YYYY dddd hh:mm A');
+                var subonesec = moment(e.event.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
+
                 $('#showTasksModal').modal('toggle');
+                $("#calendorID").val(e.event.id);
+                $("#startDateDetails").html(start_dt);
+                $("#endDateDetails").html(subonesec);
                 $("#taskShowTit").html(e.event.title);
                 $("#taskShowDesc").html(e.event.extendedProps.description);
+                // delete
+                $('#deleteEventBtn').click(function () {
+                    // $(document).on('click', '#deleteEventBtn', function () {
+                    var id = $("#calendorID").val();
+                    swal.fire({
+                        title: 'Are you sure?',
+                        html: 'You want to <b>delete</b> this',
+                        showCancelButton: true,
+                        showCloseButton: true,
+                        cancelButtonText: 'Cancel',
+                        confirmButtonText: 'Yes, Delete',
+                        cancelButtonColor: '#d33',
+                        confirmButtonColor: '#556ee6',
+                        width: 400,
+                        allowOutsideClick: false
+                    }).then(function (result) {
+                        if (result.value) {
+                            $.ajax({
+                                url: calendorDeleteTaskCalendor,
+                                type: "POST",
+                                dataType: 'json',
+                                data: {
+                                    token: token,
+                                    branch_id: branchID,
+                                    id: id
+                                },
+                                success: function (response) {
+                                    if (response.code == 200) {
+                                        toastr.success(response.message);
+                                        $('#showTasksModal').modal('hide');
+                                        e.event.remove(); // try this instead
+                                    } else {
+                                        toastr.error(response.message);
+                                    }
+                                }, error: function (err) {
+                                    toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
+                                }
+                            });
+                        }
+                    });
+                });
             }
         }
     });

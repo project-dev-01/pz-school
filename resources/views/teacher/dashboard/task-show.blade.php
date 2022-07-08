@@ -19,8 +19,23 @@
                                     <tr>
                                         <td>Description</td>
                                         <td id="taskShowDesc"></td>
+                                        <td><input type="hidden" id="calendorID" value=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Start Date</td>
+                                        <td id="startDateDetails"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>End Date</td>
+                                        <td id="endDateDetails"></td>
                                     </tr>
                                 </table>
+                            </div>
+                            <br>
+                            <div class="form-group text-right m-b-0">
+                                <button class="btn btn-danger" id="deleteEventBtn" type="button">
+                                    Delete
+                                </button>
                             </div>
                         </div> <!-- end card-box -->
                     </div> <!-- end col -->

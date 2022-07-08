@@ -2,20 +2,7 @@
 @section('title','Dashboard')
 
 @section('content')
-<!-- <link href="{{ asset('css/custom/calendar.css') }}" rel="stylesheet" type="text/css" /> -->
-<style>
-    /* body {
-        margin: 40px 10px;
-        padding: 0;
-        font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-        font-size: 14px;
-    } */
-
-    #teacher_calendor {
-        max-width: 1100px;
-        margin: 0 auto;
-    }
-</style>
+<link href="{{ asset('css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -985,6 +972,7 @@
     // task all url
     var calendorAddTaskCalendor = "{{ config('constants.api.calendor_add_task_calendor') }}";
     var calendorListTaskCalendor = "{{ config('constants.api.calendor_list_task_calendor') }}";
+    var calendorDeleteTaskCalendor = "{{ config('constants.api.calendor_delete_task_calendor') }}";
 </script>
 <!-- to calendor  -->
 <!-- <script src="{{ asset('js/custom/teacher_calendor.js') }}"></script> -->

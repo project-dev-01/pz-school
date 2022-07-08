@@ -211,6 +211,9 @@
     var getuserid = "{{config('constants.api.dbvsgetbranchid')}}";
     // update child session
     var updateChildSessionID = "{{ route('navbar.update.child_id') }}";
+    // notifications
+    var readNotifications = "{{ config('constants.api.mark_as_read') }}";
+    var allNotifications = "{{ route('unread_notifications') }}";
 </script>
 <!-- custom js  -->
 <script src="{{ asset('js/custom/settings.js') }}"></script>
@@ -222,3 +225,54 @@
 <!-- <script src="{{ asset('js/custom/iconchart.js') }}"></script> -->
 <!-- <script src="{{ asset('js/apexChart/apexcharts.js') }}"></script> -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> -->
+<script>
+    function sendMarkRequest(id = null) {
+        console.log("id")
+        console.log(id)
+        return $.ajax(readNotifications, {
+            method: 'POST',
+            data: {
+                token,
+                id
+            }
+        });
+
+    }
+    $(document).ready(function() {
+
+        // $('.notification-list-show').css('display', 'none');
+
+        // var sTimeOut = setInterval(function() {
+        //     getNotifications();
+        // }, 2000);
+        getNotifications();
+        function getNotifications() {
+            $.ajax({
+                type: 'GET',
+                url: allNotifications,
+                success: function(res) {
+                    $(".notification-list-show").html(res.notificationlist);
+                    $(".badge-count").text(res.count);
+                },
+                error: function(err) {
+                    // console.log("eror")
+                    // console.log(err)
+                }
+            });
+        }
+        // martk as to read
+        $(document).on('click', '.mark-as-read', function() {
+            let request = sendMarkRequest($(this).data('id'));
+            request.done(() => {
+                getNotifications();
+            });
+        });
+        // martk all read
+        $(document).on('click', '#mark-all-read', function() {
+            let request = sendMarkRequest();
+            request.done(() => {
+                getNotifications();
+            })
+        });
+    });
+</script>

@@ -475,7 +475,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // add-task-calendor
     Route::post('calendor/add-task-calendor', [ApiController::class, 'calendorAddTask']);
     Route::get('calendor/list-task-calendor', [ApiController::class, 'calendorListTask']);
-
+    Route::post('calendor/delete-task-calendor', [ApiController::class, 'calendorDeleteTask']);
+    
     // Education routes
     Route::post('education/add', [ApiController::class, 'addEducation']);
     Route::get('education/list', [ApiController::class, 'getEducationList']);
@@ -499,4 +500,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('get_schedule_exam_details', [ApiController::class, 'getScheduleExamDetails']);
     Route::get('get_schedule_exam_details_by_teacher', [ApiController::class, 'getScheduleExamDetailsBYTeacher']);
     Route::get('get_schedule_exam_details_by_student', [ApiController::class, 'getScheduleExamDetailsBYStudent']);
+    // get unread notifications
+    Route::get('unread_notifications', [ApiController::class, 'unreadNotifications']);
+    Route::post('mark_as_read', [ApiController::class, 'markAsRead']);
 });

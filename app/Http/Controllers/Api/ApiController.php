@@ -37,6 +37,9 @@ use App\Models\Forum_post_replies;
 use Carbon\Carbon;
 use App\Models\Forum_post_replie_counts;
 use Illuminate\Support\Arr;
+// notifications
+use App\Notifications\LeaveApply;
+use Illuminate\Support\Facades\Notification;
 
 class ApiController extends BaseController
 {
@@ -12877,6 +12880,7 @@ class ApiController extends BaseController
 
             // create new connection
             $staffConn = $this->createNewConnection($request->branch_id);
+            $branch_id = $request->branch_id;
             $from_leave = date('Y-m-d', strtotime($request['from_leave']));
             $to_leave = date('Y-m-d', strtotime($request['to_leave']));
             // check leave exist
@@ -12908,8 +12912,8 @@ class ApiController extends BaseController
                 } else {
                     $fileName = null;
                 }
-
-                $query = $staffConn->table('staff_leaves')->insert([
+                $fileName = null;
+                $data = [
                     'staff_id' => $request['staff_id'],
                     'from_leave' => $from_leave,
                     'to_leave' => $to_leave,
@@ -12919,8 +12923,42 @@ class ApiController extends BaseController
                     'document' => $fileName,
                     'remarks' => $request['remarks'],
                     'created_at' => date("Y-m-d H:i:s")
-                ]);
-
+                ];
+                $query = $staffConn->table('staff_leaves')->insert($data);
+                // send notifications to assign staff and admin
+                $getAssignStaff = $staffConn->table('assign_leave_approval')
+                    ->where([
+                        ['staff_id', '=', $request->staff_id]
+                    ])->get();
+                $assignerID = [];
+                if (isset($getAssignStaff)) {
+                    foreach ($getAssignStaff as $key => $value) {
+                        array_push($assignerID, $value->assigner_staff_id);
+                    }
+                }
+                // send leave notifications
+                $getAssiger = User::whereIn('user_id', $assignerID)->where([
+                    ['branch_id', '=', $request->branch_id]
+                ])->where(function ($q) {
+                    $q->where('role_id', 2)
+                        ->orWhere('role_id', 3)
+                        ->orWhere('role_id', 4);
+                })->get();
+                $allAdmin = User::where([
+                    ['branch_id', '=', $request->branch_id],
+                    ['role_id', '=', 2]
+                ])->get();
+                $merged = $allAdmin->merge($getAssiger);
+                $user = $merged->all();
+                // get staff name
+                $staff_name = $staffConn->table('staffs')
+                    ->select(
+                        DB::raw('CONCAT(staffs.first_name, " ", staffs.last_name) as staff_name')
+                    )
+                    ->where([
+                        ['id', '=', $request->staff_id]
+                    ])->first();
+                Notification::send($user, new LeaveApply($data, $branch_id, $staff_name->staff_name));
                 $success = [];
                 if (!$query) {
                     return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
@@ -13516,6 +13554,32 @@ class ApiController extends BaseController
                 ->where('login_id', '=', $request->login_id)
                 ->get();
             return $this->successResponse($section, 'calendors tast details fetch successfully');
+        }
+    }
+    // delete calendor row
+    public function calendorDeleteTask(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('calendors')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Calendor Event have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
         }
     }
     // add Education
@@ -14451,5 +14515,41 @@ class ApiController extends BaseController
             // dd($success);
             return $this->successResponse($output, 'calendor data get successfully');
         }
+    }
+    // unread Notifications
+    public function unreadNotifications(Request $request)
+    {
+
+        $id = auth()->user()->id;
+        // $notifications = auth()->user()->unreadnotifications()
+        $res = [
+            'unread' => auth()->user()->unreadnotifications,
+            'unread_count' => auth()->user()->unreadnotifications->count(),
+            'read' => auth()->user()->notifications()
+                ->whereNotNull('read_at')
+                ->orderBy('read_at', 'asc')
+                ->orderBy('created_at', 'desc')
+                ->where('notifiable_id', $id)
+                ->get()
+        ];
+
+        // $notifications = auth()->user()->notifications()
+        //     ->orderBy('read_at', 'asc')
+        //     ->orderBy('created_at', 'desc')
+        //     ->where('notifiable_id', $id)
+        //     ->get();
+        return $this->successResponse($res, 'get notifications data get successfully');
+    }
+    // markAsRead
+    public function markAsRead(Request $request)
+    {
+
+        auth()->user()
+            ->unreadNotifications
+            ->when($request->input('id'), function ($query) use ($request) {
+                return $query->where('id', $request->input('id'));
+            })
+            ->markAsRead();
+        return $this->successResponse(response()->noContent(), 'mark as read');
     }
 }

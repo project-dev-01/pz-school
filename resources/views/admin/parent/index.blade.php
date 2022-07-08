@@ -35,7 +35,7 @@
                         <div class="col-sm-12">
                             <div class="">
                                 <div class="table-responsive">
-                                    <table class="table w-100 nowrap text-center" id="parent-table">
+                                    <table class="table w-100 nowrap" id="parent-table">
                                         <thead>
                                             <tr>
                                                 <th>#</th>

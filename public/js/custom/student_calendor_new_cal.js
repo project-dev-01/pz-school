@@ -93,7 +93,6 @@ $(document).ready(function () {
         selectHelper: true,
         editable: true,
         eventClick: function (e) {
-            console.log("event details");
             if (e.event.extendedProps.event_id) {
                 $('#event-modal').modal('toggle');
                 var start = e.event.start_date;
@@ -135,8 +134,6 @@ $(document).ready(function () {
                 $('#examScheduleModal').modal('toggle');
                 var time_start = e.event.extendedProps.time_start;
                 var time_end = e.event.extendedProps.time_end;
-                console.log(time_start)
-                console.log(time_end)
                 // var setCurDate = formatDate(end);
                 $("#examName").html(e.event.extendedProps.exam_name);
                 $("#examStandard").html(e.event.extendedProps.class_name);
@@ -144,7 +141,7 @@ $(document).ready(function () {
                 $("#examSubject").html(e.event.extendedProps.subject_name);
                 $("#examTiming").html(tConvert(time_start) + ' - ' + tConvert(time_end));
             } else {
-                console.log("else")
+                // console.log("else")
             }
         }
     });

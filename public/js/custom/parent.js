@@ -1,6 +1,6 @@
 $(function () {
 
-    
+
 
     $("#date_of_birth").datepicker({
         dateFormat: 'yy-mm-dd',
@@ -25,7 +25,7 @@ $(function () {
                 required: true,
                 minlength: 6,
                 equalTo: "#password"
-            },   
+            },
         }
     });
 
@@ -68,7 +68,7 @@ $(function () {
             confirm_password: {
                 minlength: 6,
                 equalTo: "#password"
-            },  
+            },
         }
     });
 
@@ -97,7 +97,7 @@ $(function () {
         }
     });
 
-    
+
     parentTable();
 
     // get all parent table
@@ -157,19 +157,22 @@ $(function () {
                     "targets": 1,
                     "className": "table-user",
                     "render": function (data, type, row, meta) {
+                        // var currentImg = parentImg + '/' + row.photo;
+                        // var existUrl = UrlExists(currentImg);
+                        // console.log(existUrl);
                         var img = (row.photo != null) ? parentImg + '/' + row.photo : defaultImg;
-                        var first_name = '<img src="' + img + '" class="mr-2 rounded-circle">' +
+                        var first_name = '<img src="' + img + '" class="mr-2 rounded-circle" alt="No Image">' +
                             '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
                         return first_name;
                     }
-                },
+                }
             ]
-       }).on('draw', function () {
-       });
+        }).on('draw', function () {
+        });
     }
 
-   // delete Parent 
-   $(document).on('click', '#deleteParentBtn', function () {
+    // delete Parent 
+    $(document).on('click', '#deleteParentBtn', function () {
         var id = $(this).data('id');
         var url = parentDelete;
         swal.fire({
@@ -198,4 +201,23 @@ $(function () {
             }
         });
     });
+
+    function UrlExists(url) {
+        // var http = new XMLHttpRequest();
+        // http.open('HEAD', url, false);
+        // http.send();
+        // return http.status != 404;
+        $.ajax({
+            url: url,
+            type: 'HEAD',
+            error: function () {
+                //file not exists
+                return '404';
+            },
+            success: function () {
+                //file exists
+                return '200';
+            }
+        });
+    }
 });

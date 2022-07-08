@@ -19,6 +19,14 @@
                         <textarea id="taskDescription" name="description" rows="3" class="form-control" placeholder="Enter description"></textarea>
                     </div>
                     <div class="form-group">
+                        <label for="startEndDate">Start Date</label>
+                        <p id="startDate"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate">End Date</label>
+                        <p id="endDate"></p>
+                    </div>
+                    <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
                         <button type="button" id="saveBtn" class="btn btn-success waves-effect waves-light">Save</button>
                     </div>

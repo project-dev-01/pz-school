@@ -269,6 +269,8 @@ Route::group(['prefix' => 'schoolcrm'], function () {
     //school app form
     Route::get('/application-form', [CommonController::class, 'showApplicationForm'])->name('schoolcrm.app.form');
     Route::get('/DBMigrationCall', [CommonController::class, 'DBMigrationCall']);
+    // notifications
+    Route::get('unread_notifications', [CommonController::class, 'unreadNotifications'])->name('unread_notifications');
 
     // admin routes start
     Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin']], function () {
@@ -642,14 +644,13 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('leave_management/assign_leave_approval', [AdminController::class, 'assignLeaveApprover'])->name('admin.leave_management.assign_leave_approver');
         // Route::get('leave_management/get_all_staff_details', [AdminController::class, 'getAllStaffDetails'])->name('admin.leave_management.get_all_staff_details');
 
-         // Education routes
-         Route::get('education/index', [AdminController::class, 'education'])->name('admin.education');
-         Route::post('education/add', [AdminController::class, 'addEducation'])->name('admin.education.add');
-         Route::get('education/list', [AdminController::class, 'getEducationList'])->name('admin.education.list');
-         Route::post('education/education-details', [AdminController::class, 'getEducationDetails'])->name('admin.education.details');
-         Route::post('education/update', [AdminController::class, 'updateEducation'])->name('admin.education.update');
-         Route::post('education/delete', [AdminController::class, 'deleteEducation'])->name('admin.education.delete');
-
+        // Education routes
+        Route::get('education/index', [AdminController::class, 'education'])->name('admin.education');
+        Route::post('education/add', [AdminController::class, 'addEducation'])->name('admin.education.add');
+        Route::get('education/list', [AdminController::class, 'getEducationList'])->name('admin.education.list');
+        Route::post('education/education-details', [AdminController::class, 'getEducationDetails'])->name('admin.education.details');
+        Route::post('education/update', [AdminController::class, 'updateEducation'])->name('admin.education.update');
+        Route::post('education/delete', [AdminController::class, 'deleteEducation'])->name('admin.education.delete');
     });
     // admin routes end
 
@@ -913,6 +914,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
         // Section By Class Route
         Route::post('section-by-class', [TeacherController::class, 'sectionByClass'])->name('teacher.section_by_class');
+        
     });
 
     // TEACHER CONTROLLER END
@@ -979,7 +981,6 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('std_leave_apply/reupload_file', [ParentController::class, 'reUploadLeaveFile'])->name('parent.reupload_file.add');
         // update child session
         Route::post('navbar-update-child_id', [CommonController::class, 'updateStudentID'])->name('navbar.update.child_id');
-
     });
 
 

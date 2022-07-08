@@ -159,16 +159,15 @@ input::placeholder {
 .header-span {
 	font-style: normal;
 	font-weight: 700;
-	line-height: 16px;
+	line-height: 10px;
 	text-align: center;
-	letter-spacing: 0.015em;
 	color: #000000;
 	background-color: #E9D528;
-	padding: 10px;
+	padding: 5px;
 	border-radius: 10px 10px 10px 10px;
 	text-transform: uppercase;
 	font-family: 'Open Sans';
-	font-size: 12px;
+	font-size: 10px;
 }
 
 input:focus {
@@ -385,6 +384,7 @@ div.dt-buttons {
 }
 
 .navbar-custom .topnav-menu .nav-link {
+	padding: 0 7px;
 	color: black;
 	font-family: 'Open Sans';
 	font-style: normal;
@@ -464,4 +464,10 @@ div.dt-buttons {
 .form-control:disabled,
 .form-control[readonly] {
 	background-color: #F4F7FC;
+}
+
+/* notification-icon-badge responsive(red)*/
+.notification-list .noti-icon-badge {
+	top: 17px;
+	right: 4px;
 }

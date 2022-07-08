@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     var calendarEl = document.getElementById('new_calendor');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -35,9 +34,6 @@ $(document).ready(function () {
             url: calendorListTaskCalendor + '?token=' + token + '&branch_id=' + branchID + '&login_id=' + userID,
             type: 'get',
             success: function (response) {
-                // console.log(userID);
-                // console.log("jsdfdsfj");
-                // console.log(response)
                 m = response.data;
                 return m;
             }
@@ -76,6 +72,12 @@ $(document).ready(function () {
             // var title = prompt('Event Title:');
             $('#addTasksModal').modal('toggle');
             $('.addTasks').find('form')[0].reset();
+            var start_dt = moment(e.start).format('DD-MM-YYYY dddd hh:mm A');
+            var subonesec = moment(e.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
+            // var end_dt = moment(e.end).format('DD-MM-YYYY dddd hh:mm A');
+            $("#startDate").html(start_dt);
+            $("#endDate").html(subonesec);
+            // save
             $('#saveBtn').click(function () {
                 var title = $('#taskTitle').val();
                 // var start_date = moment(start).format('YYYY-MM-DD');
@@ -104,15 +106,6 @@ $(document).ready(function () {
                             var newData = response.data;
                             $('#addTasksModal').modal('hide')
                             $('.addTasks').find('form')[0].reset();
-                            // $('#teacher_calendor').fullCalendar('renderEvent', {
-                            //     'id': newData.id,
-                            //     'title': newData.title,
-                            //     'start': newData.start,
-                            //     'end': newData.end,
-                            //     'description': newData.description,
-                            //     'className': newData.className
-                            //     // 'color': newData.color
-                            // });
                             var eventObject = {
                                 id: newData.id,
                                 title: newData.title,
@@ -122,9 +115,6 @@ $(document).ready(function () {
                                 className: newData.className
                             };
                             calendar.addEvent(eventObject);
-                            // $('#teacher_calendor').fullCalendar('renderEvent', eventObject, true);
-                            // calendar.render();
-                            // calendar.fullCalendar('refetchEvents');
                         }
                     });
                 } else {
@@ -133,6 +123,7 @@ $(document).ready(function () {
                 calendar.unselect();
 
             });
+
 
         },
         // editable: true,
@@ -175,12 +166,57 @@ $(document).ready(function () {
                 $("#examSubject").html(e.event.extendedProps.subject_name);
                 $("#examTiming").html(tConvert(time_start) + ' - ' + tConvert(time_end));
             } else {
-                console.log(e)
-                console.log(e.event)
+                var start_dt = moment(e.event.start).format('DD-MM-YYYY dddd hh:mm A');
+                var subonesec = moment(e.event.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
+                
                 $('#showTasksModal').modal('toggle');
+                $("#calendorID").val(e.event.id);
+                $("#startDateDetails").html(start_dt);
+                $("#endDateDetails").html(subonesec);
                 $("#taskShowTit").html(e.event.title);
                 $("#taskShowDesc").html(e.event.extendedProps.description);
             }
+            // delete
+            $('#deleteEventBtn').click(function () {
+                // $(document).on('click', '#deleteEventBtn', function () {
+                var id = $("#calendorID").val();
+                swal.fire({
+                    title: 'Are you sure?',
+                    html: 'You want to <b>delete</b> this',
+                    showCancelButton: true,
+                    showCloseButton: true,
+                    cancelButtonText: 'Cancel',
+                    confirmButtonText: 'Yes, Delete',
+                    cancelButtonColor: '#d33',
+                    confirmButtonColor: '#556ee6',
+                    width: 400,
+                    allowOutsideClick: false
+                }).then(function (result) {
+                    if (result.value) {
+                        $.ajax({
+                            url: calendorDeleteTaskCalendor,
+                            type: "POST",
+                            dataType: 'json',
+                            data: {
+                                token: token,
+                                branch_id: branchID,
+                                id: id
+                            },
+                            success: function (response) {
+                                if (response.code == 200) {
+                                    toastr.success(response.message);
+                                    $('#showTasksModal').modal('hide');
+                                    e.event.remove(); // try this instead
+                                } else {
+                                    toastr.error(response.message);
+                                }
+                            }, error: function (err) {
+                                toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
+                            }
+                        });
+                    }
+                });
+            });
         }
     });
 
@@ -189,6 +225,7 @@ $(document).ready(function () {
     $("#addTasksModal").on("hidden.bs.modal", function () {
         $('#saveBtn').unbind();
     });
+
     function tConvert(time) {
         // Check correct time format and split into components
         time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];

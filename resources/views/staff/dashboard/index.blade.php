@@ -445,7 +445,27 @@
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
-
+            <div class="modal fade " id="bulk-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myviewBulkModalLabel"> <i class="fas fa-info-circle"></i> Details </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-box">
+                                        <div class="table-responsive">
+                                            <p class="text-center"> Name :<span id="bulk_name"></span></p><br>
+                                        </div>
+                                    </div> <!-- end card-box -->
+                                </div> <!-- end col -->
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
             <div class="modal fade " id="birthday-modal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -481,6 +501,7 @@
 <script>
     var getBirthdayCalendorAdmin = "{{ config('constants.api.get_birthday_calendor_admin') }}";
     var getEventCalendorAdmin = "{{ config('constants.api.get_event_calendor_admin') }}";
+    var getBulkCalendor = "{{ config('constants.api.get_bulk_calendor_admin') }}";
     var readUpdateTodoUrl = "{{ config('constants.api.read_update_todo') }}";
     var getAssignClassUrl = "{{ config('constants.api.get_assign_class') }}";
     var pathDownloadFileUrl = "{{ asset('images/todolist/') }}";
@@ -491,6 +512,8 @@
     // task all url
     var calendorAddTaskCalendor = "{{ config('constants.api.calendor_add_task_calendor') }}";
     var calendorListTaskCalendor = "{{ config('constants.api.calendor_list_task_calendor') }}";
+    var calendorDeleteTaskCalendor = "{{ config('constants.api.calendor_delete_task_calendor') }}";
+
 </script>
 <!-- <script src="{{ asset('js/custom/admin_calendor.js') }}"></script> -->
 <!-- <script src="{{ asset('js/custom/admin_calendor_new.js') }}"></script> -->
