@@ -44,13 +44,30 @@
                     </div>
             </li>
             @if(Session::get('role_id') != '1')
-            <li class="d-lg-inline-block">
+            <li class="d-lg-inline-block" style="white-space: nowrap;width: 100px;overflow: hidden;text-overflow: ellipsis;">
                 <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">
                     <span class="header-span"><b> {{ Session::get('school_name') }} </b>
                 </a>
             </li>
             @endif
+            @if(Session::get('role_id') == '5')
+            <li class="dropdown d-none d-lg-inline-block allChild">
+                <div class="form-group ">
+                    <label class="control-label"></label>
+                    <select class="form-control custom-select" name="all_child" id="changeChildren" required>
+                        <!-- <option disabled >Select Children</option> -->
+                        @if(Session::get('all_child'))
+                        @forelse (Session::get('all_child') as $child)
+                        <option value="{{ $child['id'] }}" {{ Session::get('student_id') == $child['id'] ? 'selected' : ''}}>{{ $child['name'] }}</option>
+                        @empty
+                        @endforelse
+                        @endif
+                    </select>
+                    <div class="invalid-feedback">Please select a valid event category</div>
+                </div>
+            </li>
 
+            @endif
             <li class="dropdown d-lg-inline-block">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="fullscreen" href="#">
                     <i class="fe-maximize noti-icon"></i>

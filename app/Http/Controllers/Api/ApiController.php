@@ -4267,6 +4267,7 @@ class ApiController extends BaseController
             'branch_id' => 'required',
             'token' => 'required',
             'class_id' => 'required',
+            'section_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -4275,22 +4276,27 @@ class ApiController extends BaseController
             // create new connection
             $classConn = $this->createNewConnection($request->branch_id);
             // get data
-            $teacher_id = "All";
-            if (isset($request->teacher_id)) {
-                $teacher_id = $request->teacher_id;
-            }
+            // $teacher_id = "All";
+            // if (isset($request->teacher_id)) {
+            //     $teacher_id = $request->teacher_id;
+            // }
 
             $class_id = $request->class_id;
             $class = $classConn->table('subject_assigns as sa')->select('s.id as subject_id', 's.name as subject_name')
                 ->join('subjects as s', 'sa.subject_id', '=', 's.id')
 
-                ->when($teacher_id != "All", function ($ins)  use ($teacher_id) {
-                    $ins->where('sa.teacher_id', $teacher_id);
-                })
-                ->where('sa.class_id', $class_id)
-                ->groupBy('s.id')
+                // ->when($teacher_id != "All", function ($ins)  use ($teacher_id) {
+                //     $ins->where('sa.teacher_id', $teacher_id);
+                // })
+                // ->where('sa.class_id', $class_id)
+                ->where([
+                    ['sa.type', '=', '0'],
+                    ['sa.class_id', '=', $request->class_id],
+                    ['sa.section_id', '=', $request->section_id]
+                ])
+                // ->groupBy('s.id')
                 ->get();
-            return $this->successResponse($class, 'Class record fetch successfully');
+            return $this->successResponse($class, 'Subject Name fetch successfully');
         }
     }
 
@@ -6046,11 +6052,14 @@ class ApiController extends BaseController
             // $data = [];
             foreach ($attendance as $key => $value) {
                 // dd($value['attendance_id']);
+                // dd($value);
                 $attStatus = (isset($value['att_status']) ? $value['att_status'] : "");
                 $att_remark = (isset($value['att_remark']) ? $value['att_remark'] : "");
                 $reasons = (isset($value['reasons']) ? $value['reasons'] : "");
                 $student_behaviour = (isset($value['student_behaviour']) ? $value['student_behaviour'] : "");
                 $classroom_behaviour = (isset($value['classroom_behaviour']) ? $value['classroom_behaviour'] : "");
+                // $student_behaviour = $value['student_behaviour'];
+                // $classroom_behaviour = $value['classroom_behaviour'];
                 $arrayAttendance = array(
                     'student_id' => $value['student_id'],
                     'status' => $attStatus,
@@ -6066,15 +6075,24 @@ class ApiController extends BaseController
 
                 );
                 if ((empty($value['attendance_id']) || $value['attendance_id'] == "null")) {
+                    // echo "sdjfsjfsjs";exit;
+                    // return "fjsdjfsdjf";
                     if ($Connection->table('student_attendances')->where([
                         ['date', '=', $date],
                         ['class_id', '=', $class_id],
                         ['section_id', '=', $section_id],
                         ['subject_id', '=', $subject_id],
-                        ['student_id', '=', $value['student_id']],
-
+                        ['student_id', '=', $value['student_id']]
                     ])->count() > 0) {
-                        $Connection->table('student_attendances')->where('id', $value['attendance_id'])->update([
+
+                        $row = $Connection->table('student_attendances')->select('id')->where([
+                            ['date', '=', $date],
+                            ['class_id', '=', $class_id],
+                            ['section_id', '=', $section_id],
+                            ['subject_id', '=', $subject_id],
+                            ['student_id', '=', $value['student_id']]
+                        ])->first();
+                        $Connection->table('student_attendances')->where('id', $row->id)->update([
                             'status' => $attStatus,
                             'remarks' => $att_remark,
                             'reasons' => $reasons,
@@ -6086,6 +6104,8 @@ class ApiController extends BaseController
                         $Connection->table('student_attendances')->insert($arrayAttendance);
                     }
                 } else {
+                    // return "sdd";
+
                     $Connection->table('student_attendances')->where('id', $value['attendance_id'])->update([
                         'status' => $attStatus,
                         'remarks' => $att_remark,
@@ -12103,10 +12123,22 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
+            // $studentDetails = $conn->table('students as std')
+            //     ->select('std.id', 'class_id', 'section_id', 'parent_id', 'first_name', 'last_name', 'gender')
+            //     ->leftJoin('enrolls as en', 'std.id', '=', 'en.student_id')
+            //     ->where('parent_id', $parent_id)
+            //     ->get();
             $studentDetails = $conn->table('students as std')
-                ->select('std.id', 'class_id', 'section_id', 'parent_id', 'first_name', 'last_name', 'gender')
-                ->leftJoin('enrolls as en', 'std.id', '=', 'en.student_id')
-                ->where('parent_id', $parent_id)
+                ->select(
+                    'std.id',
+                    'en.class_id',
+                    'en.section_id',
+                    DB::raw("CONCAT(first_name, ' ', last_name) as name"),
+                    'std.gender'
+                )
+                ->join('enrolls as en', 'std.id', '=', 'en.student_id')
+                ->where('std.father_id', '=', $parent_id)
+                ->orWhere('std.mother_id', '=', $parent_id)
                 ->get();
             return $this->successResponse($studentDetails, 'Student details fetch successfully');
         }
@@ -12168,8 +12200,7 @@ class ApiController extends BaseController
                 } else {
                     $fileName = null;
                 }
-
-                $query = $staffConn->table('student_leaves')->insert([
+                $data = [
                     'student_id' => $request['student_id'],
                     'parent_id' => $request['parent_id'],
                     'class_id' => $request['class_id'],
@@ -12182,7 +12213,44 @@ class ApiController extends BaseController
                     'document' => $fileName,
                     'status' => $request['status'],
                     'created_at' => date("Y-m-d H:i:s")
-                ]);
+                ];
+
+                $query = $staffConn->table('student_leaves')->insert($data);
+                // send notifications to assign staff
+                $getAssignStaff = $staffConn->table('subject_assigns')
+                    ->select('teacher_id')
+                    ->where([
+                        ['class_id', '=', $request->class_id],
+                        ['type', '=', '0'],
+                        ['teacher_id', '!=', '0'],
+                        ['section_id', '=', $request->section_id]
+                    ])->groupBy("teacher_id")->get();
+                // dd($getAssignStaff);
+                $assignerID = [];
+                if (isset($getAssignStaff)) {
+                    foreach ($getAssignStaff as $key => $value) {
+                        array_push($assignerID, $value->teacher_id);
+                    }
+                }
+                // dd($assignerID);
+                // send leave notifications
+                $user = User::whereIn('user_id', $assignerID)->where([
+                    ['branch_id', '=', $request->branch_id]
+                ])->where(function ($q) {
+                    $q->where('role_id', 3)
+                        ->orWhere('role_id', 4);
+                })->get();
+                // get staff name
+                $student_name = $staffConn->table('students')
+                    ->select(
+                        DB::raw('CONCAT(students.first_name, " ", students.last_name) as name')
+                    )
+                    ->where([
+                        ['id', '=', $request->student_id]
+                    ])->first();
+                // dd($student_name->name);
+                // notifications sent
+                Notification::send($user, new LeaveApply($data, $request->branch_id, $student_name->name));
 
                 $success = [];
                 if (!$query) {

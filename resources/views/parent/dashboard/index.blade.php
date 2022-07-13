@@ -500,7 +500,7 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="stdGeneralDetails" method="post" action="{{ route('parent.studentleave.add') }}" novalidate>
+                    <form id="stdGeneralDetails" method="post" action="{{ route('parent.studentleave.add') }}">
                         @csrf
                         <input type="hidden" name="class_id" id="listModeClassID">
                         <input type="hidden" name="section_id" id="listModeSectionID" />
@@ -515,11 +515,8 @@
                                     <select id="changeStdName" class="form-control" name="changeStdName">
                                         <option value="">Select Student</option>
                                         @forelse ($get_std_names_dashboard as $std)
-
-                                        <option value="{{ $std['id'] }}" data-classid="{{ $std['class_id'] }}" data-sectionid="{{ $std['section_id'] }}">{{ $std['first_name'] }}</option>
-
+                                        <option value="{{ $std['id'] }}" data-classid="{{ $std['class_id'] }}" data-sectionid="{{ $std['section_id'] }}" {{ Session::get('student_id') == $std['id'] ? 'selected' : ''}}>{{ $std['name'] }}</option>
                                         @empty
-
                                         @endforelse
                                     </select>
                                 </div>
@@ -600,6 +597,7 @@
                         </div>
 
                     </form>
+
                 </div> <!-- end card-body -->
             </div>
         </div>

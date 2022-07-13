@@ -90,8 +90,7 @@ $(function () {
             branch_id: branchID,
             teacher_id: ref_user_id,
             class_id: class_id,
-            section_id: section_id,
-            class_id: class_id
+            section_id: section_id
         }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -286,7 +285,7 @@ $(function () {
 
         layoutModeGrid += '<div class="card-header" style="background-color:' + bgColor + ';color:white;text-align:left">';
         layoutModeGrid += '<img src="' + img + '" class="mr-2 rounded-circle" height="40" width="40" />' +
-            '<label style="text-align:center;color:white" class="mr-1">' + res.first_name + ' ' + res.last_name + '</label>' + bd +
+            '<label style="text-align:center;color:white;width:100px;font-size:12px;margin-bottom:-6px;" class="mr-1 text-truncate">' + res.first_name + ' ' + res.last_name + '</label>' + bd +
             '</div>' +
             '</div>' +
             '</div>';
@@ -341,7 +340,7 @@ $(function () {
             columnDefs: [
                 {
                     "targets": 0,
-                    "width": "10%",
+                    // "width": "10%",
                     "render": function (data, type, row) {
                         if (!data) {
                             return '-';
@@ -353,7 +352,7 @@ $(function () {
                 },
                 {
                     "targets": 1,
-                    "width": "15%",
+                    // "width": "15%",
                     "className": "table-user",
                     "render": function (data, type, row, meta) {
                         var birthday = birthdayDate(row.birthday);
@@ -378,7 +377,7 @@ $(function () {
                 },
                 {
                     "targets": 2,
-                    "width": "20%",
+                    // "width": "20%",
                     "render": function (data, type, row, meta) {
                         var att_status = '<select class="form-control changeAttendanceSelect" data-style="btn-outline-success" name="attendance[' + meta.row + '][att_status]">' +
                             '<option value="">Choose</option>' +
@@ -395,7 +394,7 @@ $(function () {
                 },
                 {
                     "targets": 3,
-                    "width": "10%",
+                    // "width": "10%",
                     "render": function (data, type, row, meta) {
 
                         var att_remark = '<textarea style="display:none;" class="addRemarks" data-id="' + row.student_id + '" id="addRemarks' + row.student_id + '" name="attendance[' + meta.row + '][att_remark]">' + (row.att_remark !== "null" ? row.att_remark : "") + '</textarea>' +
@@ -405,7 +404,7 @@ $(function () {
                 },
                 {
                     "targets": 4,
-                    "width": "15%",
+                    // "width": "15%",
                     "render": function (data, type, row, meta) {
                         var reasons = '<select id="reasons" class="form-control" name="attendance[' + meta.row + '][reasons]">' +
                             '<option value="">Choose</option>' +
@@ -419,7 +418,7 @@ $(function () {
                 },
                 {
                     "targets": 5,
-                    "width": "10%",
+                    // "width": "10%",
                     "render": function (data, type, row, meta) {
 
                         // var student_behaviour = '<div class="rating">' +
@@ -493,7 +492,7 @@ $(function () {
                 },
                 {
                     "targets": 6,
-                    "width": "10%",
+                    // "width": "10%",
                     "render": function (data, type, row, meta) {
 
 
@@ -1186,7 +1185,7 @@ $(function () {
                 },
                 {
                     "targets": 7,
-                    "width": "10%",
+                    // "width": "10%",
                     "render": function (data, type, row, meta) {
 
                         var addremarks = '<textarea style="display:none;" class="addRemarksStudent" data-id="' + row.id + '" id="addRemarksStudent' + row.id + '" >' + (row.teacher_remarks !== "null" ? row.teacher_remarks : "") + '</textarea>' +
@@ -1196,7 +1195,7 @@ $(function () {
                 },
                 {
                     "targets": 8,
-                    "width": "10%",
+                    // "width": "10%",
                     "render": function (data, type, row, meta) {
                         var submitbtn = '<button type="button" class="btn btn-primary-bl waves-effect waves-light levsub" data-id="' + row.id + '" id="stdLeave">Update</button>';
                         return submitbtn;

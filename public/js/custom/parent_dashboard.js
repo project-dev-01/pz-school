@@ -56,7 +56,9 @@ $(function () {
             }
         }, 'json');
     }
-    radarChart();
+    // var labelsss = [];
+    // var objss = [];
+    // radarChart();
     function radarChart(labels, obj) {
 
         if (radar) {
@@ -114,16 +116,16 @@ $(function () {
     //         return isNaN(value) && isNaN($(params).val())
     //             || (Number(value) >= Number($(params).val()));
     //     }, 'Must be greater than leave from.');
-    jQuery.validator.addMethod("greaterThanDt",
-        function (value, element, params) {
+    // jQuery.validator.addMethod("greaterThanDt",
+    //     function (value, element, params) {
 
-            if (!/Invalid|NaN/.test(new Date(value))) {
-                return new Date(value) > new Date($(params).val());
-            }
+    //         if (!/Invalid|NaN/.test(new Date(value))) {
+    //             return new Date(value) > new Date($(params).val());
+    //         }
 
-            return isNaN(value) && isNaN($(params).val())
-                || (Number(value) > Number($(params).val()));
-        }, 'Must be greater than {0}.');
+    //         return isNaN(value) && isNaN($(params).val())
+    //             || (Number(value) > Number($(params).val()));
+    //     }, 'Must be greater than {0}.');
 
     $("#stdGeneralDetails").validate({
         rules: {

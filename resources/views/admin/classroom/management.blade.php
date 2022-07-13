@@ -641,6 +641,10 @@
 <script>
     var teacherSectionUrl = "{{ config('constants.api.section_by_class') }}";
     var teacherSubjectUrl = "{{ config('constants.api.subject_by_class') }}";
+
+    // var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
+    // var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";
+
     var getStudentAttendance = "{{ config('constants.api.get_student_attendance') }}";
     var getDailyReportRemarks = "{{ config('constants.api.get_daily_report_remarks') }}";
     var getClassRoomWidget = "{{ config('constants.api.get_classroom_widget_data') }}";
