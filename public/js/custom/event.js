@@ -73,7 +73,10 @@ $(function () {
         $('#event-table').DataTable({
             processing: true,
             info: true,
-            dom: 'lBfrtip',
+            // dom: 'lBfrtip',
+            dom:"<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             buttons: [
                 {
                     extend: 'csv',

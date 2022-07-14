@@ -233,16 +233,37 @@ class ApiController extends BaseController
                         $branch->address = $request->address;
                         $branch->db_name = $request->db_name;
                         $branch->db_username = $request->db_username;
-                        $branch->db_password = $request->db_password;
+                        $branch->db_password = isset($request->db_password) ? $request->db_password : "";
                         $query = $branch->save();
 
                         $success = [];
                         if (!$query) {
-                            return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                            return $this->send500Error('Error while creating branch', ['error' => 'Error while creating branch']);
                         } else {
-                            $lastInsertID = $branch->id;
+                            $branchID = $branch->id;
+                            // create new connection
+                            $Connection = $this->createNewConnection($branchID);
+                            $Staffid = $Connection->table('staffs')->insertGetId([
+                                // 'staff_id' => $request->staff_id,
+                                // 'name' => $request->name,
+                                'first_name' => isset($request->name) ? $request->name : "",
+                                'last_name' => "",
+
+                                'present_address' => trim($request->address),
+                                // 'permanent_address' => trim($request->permanent_address),
+                                'mobile_no' => $request->mobile_no,
+                                'email' => $request->email,
+                                // 'nric_number' => $request->nric_number,
+                                // 'passport' => $request->passport,
+                                'city' => $request->city_id,
+                                'state' => $request->state_id,
+                                'country' => $request->country_id,
+                                // 'post_code' => $request->post_code,
+                                'status' => "1",
+                                'created_at' => date("Y-m-d H:i:s")
+                            ]);
                             // create admin login users for schoolcrm
-                            $createUser = $this->createUser($request, $lastInsertID);
+                            $createUser = $this->createUser($request, $branchID, $Staffid);
                             // prin$createUser;exit;
                             if ($createUser) {
                                 return $this->successResponse($success, 'New Branch has been successfully saved');
@@ -288,7 +309,7 @@ class ApiController extends BaseController
                 ->when($city_id, function ($query, $city_id) {
                     return $query->where('br.city_id', $city_id);
                 })
-                ->where('status', 0)
+                ->where('br.status', 0)
                 ->get();
             return $this->successResponse($success, 'Branch record fetch successfully');
         }

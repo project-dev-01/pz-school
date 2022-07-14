@@ -287,93 +287,107 @@ $(function () {
             }
         }, 'json');
     }
-
-
+    // rules validation
+    $("#StudentFilter").validate({
+        rules: {
+            session_id: "required"
+        }
+    });
+    
     // get student list
-    $('#indexSubmit').on('click', function (e) {
+    $('#StudentFilter').on('submit', function (e) {
         e.preventDefault();
-        $("#student").show("slow");
-        $('#student-table').DataTable({
-            processing: true,
-            info: true,
-            bDestroy: true,
-            dom: 'lBfrtip',
-            buttons: [
-                {
-                    extend: 'csv',
-                    text: 'Download CSV',
-                    extension: '.csv',
-                    exportOptions: {
-                        columns: 'th:not(:last-child)'
+        var StudentFilter = $("#StudentFilter").valid();
+        if (StudentFilter === true) {
+            $("#student").show("slow");
+            $('#student-table').DataTable({
+                processing: true,
+                info: true,
+                bDestroy: true,
+                // dom: 'lBfrtip',
+                dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+                buttons: [
+                    {
+                        extend: 'csv',
+                        text: 'Download CSV',
+                        extension: '.csv',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        }
                     }
-                }
-            ],
-            serverSide: true,
-            ajax: {
-                url: studentList,
-                data: function (d) {
-                    d.student_name = $('#student_name').val(),
-                    d.class_id = $('#class_id').val(),
-                    d.section_id = $('#section_id').val(),
-                    d.session_id = $('#session_id').val()
-                }
-            },
-            "pageLength": 5,
-            "aLengthMenu": [
-                [5, 10, 25, 50, -1],
-                [5, 10, 25, 50, "All"]
-            ],
-            columns: [
-                {
-                    searchable: false,
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                }
-                ,
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'register_no',
-                    name: 'register_no'
-                },
-                {
-                    data: 'roll_no',
-                    name: 'roll_no'
-                },
-                {
-                    data: 'gender',
-                    name: 'gender'
-                },
-                {
-                    data: 'email',
-                    name: 'email'
-                },
-                {
-                    data: 'mobile_no',
-                    name: 'mobile_no'
-                },
-                {
-                    data: 'actions',
-                    name: 'actions',
-                    orderable: false,
-                    searchable: false
-                },
-            ],
-            columnDefs: [
-                {
-                    "targets": 1,
-                    "className": "table-user",
-                    "render": function (data, type, row, meta) {
-                        var img = (row.photo != null) ? studentImg + '/' + row.photo : defaultImg;
-                        var first_name = '<img src="' + img + '" class="mr-2 rounded-circle">' +
-                            '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
-                        return first_name;
+                ],
+                serverSide: true,
+                ajax: {
+                    url: studentList,
+                    data: function (d) {
+                        d.student_name = $('#student_name').val(),
+                            d.class_id = $('#class_id').val(),
+                            d.section_id = $('#section_id').val(),
+                            d.session_id = $('#session_id').val()
                     }
                 },
-            ]
-        });
+                "pageLength": 5,
+                "aLengthMenu": [
+                    [5, 10, 25, 50, -1],
+                    [5, 10, 25, 50, "All"]
+                ],
+                columns: [
+                    {
+                        searchable: false,
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex'
+                    }
+                    ,
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'register_no',
+                        name: 'register_no'
+                    },
+                    {
+                        data: 'roll_no',
+                        name: 'roll_no'
+                    },
+                    {
+                        data: 'gender',
+                        name: 'gender'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'mobile_no',
+                        name: 'mobile_no'
+                    },
+                    {
+                        data: 'actions',
+                        name: 'actions',
+                        orderable: false,
+                        searchable: false
+                    },
+                ],
+                columnDefs: [
+                    {
+                        "targets": 1,
+                        "className": "table-user",
+                        "render": function (data, type, row, meta) {
+                            var img = (row.photo != null) ? studentImg + '/' + row.photo : defaultImg;
+                            var first_name = '<img src="' + img + '" class="mr-2 rounded-circle">' +
+                                '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
+                            return first_name;
+                        }
+                    },
+                ]
+            });
+        }else{
+            $("#student").hide("slow");
+        }
+
     });
 
     $("#class_id").on('change', function (e) {
@@ -421,7 +435,7 @@ $(function () {
                 // required: $("#confirm_password").val().length > 0,
                 minlength: 6,
                 equalTo: "#password"
-            }           
+            }
         }
     });
 

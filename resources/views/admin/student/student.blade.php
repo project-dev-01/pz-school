@@ -32,7 +32,7 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form enctype="multipart/form-data" autocomplete="off">
+                    <form id="StudentFilter" autocomplete="off">
                         <div class="row">      
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -62,9 +62,9 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="session_id">Session</label>
+                                    <label for="session_id">Session <span class="text-danger">*</span></label>
                                     <select id="session_id" class="form-control"  name="session_id">                              
-                                    <option value="0">Select Session</option>
+                                    <option value="">Select Session</option>
                                         @foreach($session as $ses)
                                             <option value="{{$ses['id']}}">{{$ses['name']}}</option>
                                         @endforeach
@@ -73,7 +73,10 @@
                             </div>
                         </div>
                         <div class="form-group text-right m-b-0">
-                            <button class="btn btn-primary-bl waves-effect waves-light" id="indexSubmit" type="submit">
+                            <!-- <button class="btn btn-primary-bl waves-effect waves-light" id="indexSubmit" type="submit">
+                                Filter
+                            </button> -->
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
                                 Filter
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">

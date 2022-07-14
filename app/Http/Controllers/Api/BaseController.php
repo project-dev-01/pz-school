@@ -118,12 +118,13 @@ class BaseController extends Controller
         return true;
     }
     // create users
-    function createUser(Request $request, $lastInsertID)
+    function createUser(Request $request, $lastInsertID, $Staffid)
     {
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->role_id = 2;
+        $user->user_id = $Staffid;
         $user->password = \Hash::make($request->password);
         $user->branch_id = $lastInsertID;
         $query = $user->save();

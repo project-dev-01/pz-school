@@ -45,7 +45,7 @@
             </li>
             @if(Session::get('role_id') != '1')
             <li class="d-lg-inline-block" style="white-space: nowrap;width: 100px;overflow: hidden;text-overflow: ellipsis;">
-                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">
+                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" title="{{ Session::get('school_name') }}" data-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">
                     <span class="header-span"><b> {{ Session::get('school_name') }} </b>
                 </a>
             </li>
