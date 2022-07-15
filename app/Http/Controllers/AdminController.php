@@ -1481,7 +1481,7 @@ class AdminController extends Controller
     {
         $data = [
             'class_id' => $request->class_id,
-
+            'section_id' => $request->section_id
         ];
         $subject = Helper::PostMethod(config('constants.api.subject_by_class'), $data);
         return $subject;

@@ -836,6 +836,7 @@ class TeacherController extends Controller
             'class_id' => $request->class_id,
             'teacher_id' => session()->get('ref_user_id')
         ];
+        // dd($data);
         $subject = Helper::PostMethod(config('constants.api.teacher_subject'), $data);
         return $subject;
     }

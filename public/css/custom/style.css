@@ -167,7 +167,7 @@ input::placeholder {
 	/* border-radius: 10px 10px 10px 10px; */
 	text-transform: uppercase;
 	font-family: 'Open Sans';
-	font-size: 10px;
+	font-size: 12px;
 }
 
 input:focus {
@@ -195,7 +195,7 @@ input:focus {
 	background-color: #F4F7FC;
 	/* border: 1px solid #ECECEC; */
 	font-family: Open Sans;
-	font-size: 12px;
+	/* font-size: 12px; */
 }
 
 .profile-pic-wrapper {

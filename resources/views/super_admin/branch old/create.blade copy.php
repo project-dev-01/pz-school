@@ -9,6 +9,9 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
+                        <!-- <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                            <li class="breadcrumb-item active">Datatables</li> -->
                     </ol>
                 </div>
                 <h4 class="page-title">Create Branch</h4>
@@ -17,21 +20,15 @@
     </div>
     <!-- end page title -->
 
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            @include('super_admin.branch.add')
-                        </div> <!-- end col -->
-                    </div>
-                    <!-- end row-->
 
-                </div> <!-- end card-body -->
-            </div> <!-- end card -->
-        </div><!-- end col -->
+    <div class="row">
+        <div class="col-lg-12">
+            @include('super_admin.branch.add')
+        </div> <!-- end col -->
     </div>
+    <!-- end row-->
+
+
     <!-- end row -->
 
 </div> <!-- container -->

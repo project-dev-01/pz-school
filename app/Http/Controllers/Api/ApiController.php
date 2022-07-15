@@ -5696,6 +5696,7 @@ class ApiController extends BaseController
                 ->join('sections as s', 'sa.section_id', '=', 's.id')
                 // ->where('sa.teacher_id',$request->teacher_id)
                 ->where([
+                    ['sa.type', '=', '0'],
                     ['sa.teacher_id', '=', $request->teacher_id],
                     ['sa.class_id', '=', $request->class_id],
                 ])
@@ -5725,9 +5726,10 @@ class ApiController extends BaseController
                 ->select('sa.class_id', 'sa.subject_id', 'sa.teacher_id', 'sa.subject_id', 's.name as subject_name')
                 ->join('subjects as s', 'sa.subject_id', '=', 's.id')
                 ->where([
-                    ['sa.teacher_id', '=', $request->teacher_id],
+                    ['sa.type', '=', '0'],
                     ['sa.class_id', '=', $request->class_id],
                     ['sa.section_id', '=', $request->section_id],
+                    ['sa.teacher_id', '=', $request->teacher_id]
                 ])
                 ->groupBy("sa.subject_id")
                 ->get();

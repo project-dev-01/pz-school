@@ -136,7 +136,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Count Down</label>
-                                    <div id="classroom_count_down"></div>
+                                    <div id="classroom_count_down" class="counter"></div>
                                 </div>
                             </div>
                         </div>
