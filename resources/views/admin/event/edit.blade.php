@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Add Event')
+@section('title','Edit Event')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -19,18 +19,18 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Add Event
+                        <h4 class="navv">Edit Event
                             <h4>
                     </li>
                 </ul>
                 <div class="card-body">
-                    <form id="eventForm" method="post" action="{{ route('admin.event.add') }}" autocomplete="off">
-                        @csrf
+                    <form id="eventEditForm" method="post" action="{{ route('admin.event.update') }}" autocomplete="off">
+                        @csrf<input type="hidden" name="id" value="{{$event['id']}}">   
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="title">Title<span class="text-danger">*</span></label>
-                                    <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title name">
+                                    <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title name" value="{{$event['title']}}">
                                     <span class="text-danger error-text title_error"></span>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                                     <select class="form-control" id="type" name="type">
                                         <option value="">Select</option>
                                         @foreach($type as $typ)
-                                        <option value="{{$typ['id']}}">{{$typ['name']}}</option>
+                                        <option value="{{$typ['id']}}"  {{$event['type'] == $typ['id'] ? 'Selected':''}}>{{$typ['name']}}</option>
                                         @endforeach
                                     </select>
                                     <span class="text-danger error-text type_error"></span>
@@ -49,22 +49,38 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="audience">Audience<span class="text-danger">*</span></label>
-                                    <select class="form-control" id="audience" name="audience">
+                                    <select class="form-control" id="edit_audience" name="audience">
                                         <option value="">Select</option>
-                                        <option value="1">EveryBody</option>
-                                        <option value="2">Selected Class</option>
+                                        <option value="1" {{$event['audience'] == "1" ? 'Selected':''}}>EveryBody</option>
+                                        <option value="2" {{$event['audience'] == "2" ? 'Selected':''}}>Selected Class</option>
                                         <!-- <option value="3">Selected Section</option> -->
                                     </select>
                                     <span class="text-danger error-text audience_error"></span>
                                 </div>
                             </div>
-                            <div class="col-md-4" id="class">
+                            @php $aud = 'style=display:none'; @endphp
+                            @if($event['audience']=="2")
+                                @php $aud = ''; @endphp
+                            @endif
+                            
+                            <div class="col-md-4" id="edit_class" {{$aud}}>
                                 <div class="form-group">
                                     <label for="class">Class</label>
                                     <select class="form-control select2-multiple" data-toggle="select2"  name="class[]" multiple="multiple" data-placeholder="Choose ...">
-                                        @foreach($class as $cla)
-                                            <option value="{{$cla['id']}}">{{$cla['name']}}</option>
-                                        @endforeach
+                                        @forelse($class as $cla)
+                                            @php
+                                            $selected = "";
+                                            @endphp
+                                            @foreach(explode(',', $event['selected_list']) as $info)
+                                            @if($cla['id'] == $info)
+                                            @php
+                                            $selected = "Selected";
+                                            @endphp
+                                            @endif
+                                            @endforeach
+                                            <option value="{{$cla['id']}}" {{ $selected }}>{{$cla['name']}}</option>
+                                            @empty
+                                        @endforelse
                                     </select>
                                     <span class="text-danger error-text class_error"></span>
                                 </div>
@@ -84,7 +100,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="start_date" id="event_start_date" placeholder="YYYY/MM/DD">
+                                        <input type="text" placeholder="YYYY/MM/DD" class="form-control" name="start_date" id="edit_event_start_date" value="{{$event['start_date']}}" placeholder="YYYY/MM/DD">
                                     </div>
                                 </div>
                             </div>
@@ -97,14 +113,14 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="end_date" id="event_end_date" placeholder="YYYY/MM/DD">
+                                        <input type="text" placeholder="YYYY/MM/DD" class="form-control" name="end_date" id="edit_event_end_date" value="{{$event['end_date']}}"value="{{$event['title']}}">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <textarea class="form-control" name="description"></textarea>
+                                    <textarea class="form-control" name="description">{{$event['remarks']}}</textarea>
                                     <span class="text-danger error-text description_error"></span>
                                 </div> 
                             </div>
@@ -112,7 +128,7 @@
                         
                         <div class="form-group text-right m-b-0">
                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
-                                Save
+                                Update
                             </button>
                         </div>
                     </form>

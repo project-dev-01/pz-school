@@ -659,7 +659,8 @@ class AdminController extends Controller
     public function addEventType(Request $request)
     {
         $data = [
-            'name' => $request->name
+            'name' => $request->name,
+            'color' => $request->color,
         ];
         $response = Helper::PostMethod(config('constants.api.event_type_add'), $data);
         return $response;
@@ -691,7 +692,8 @@ class AdminController extends Controller
     {
         $data = [
             'id' => $request->id,
-            'name' => $request->name
+            'name' => $request->name,
+            'color' => $request->color,
         ];
 
         $response = Helper::PostMethod(config('constants.api.event_type_update'), $data);
@@ -711,25 +713,56 @@ class AdminController extends Controller
     // index Event 
     public function event()
     {
+        return view('admin.event.index');
+    }
+    // create Event 
+    public function createEvent()
+    {
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $gettype = Helper::GetMethod(config('constants.api.event_type_list'));
+
+        // dd($gettype);
         return view(
-            'admin.event.index',
+            'admin.event.add',
             [
                 'class' => $getclass['data'],
                 'type' => $gettype['data'],
             ]
         );
     }
+    // edit Event 
+    public function editEvent($id)
+    {
+
+        $data = [
+            'id' => $id,
+        ];
+        $event = Helper::PostMethod(config('constants.api.event_details'), $data);
+
+        // dd($event);
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $gettype = Helper::GetMethod(config('constants.api.event_type_list'));
+
+        // dd($gettype);
+        return view(
+            'admin.event.edit',
+            [
+                'class' => $getclass['data'],
+                'type' => $gettype['data'],
+                'event' => $event['data'],
+            ]
+        );
+    }
+
 
     public function addEvent(Request $request)
     {
 
-        // if($request->class_id){
-        //     $class = implode(",",$request->class_id);
-        // } else{
-        //     $class = "";
-        // }
+        if($request->class){
+            $class = implode(",",$request->class);
+        } else{
+            $class = "";
+        }
 
         $data = [
             'title' => $request->title,
@@ -737,15 +770,15 @@ class AdminController extends Controller
             'audience' => $request->audience,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
+            'event_class' => $class,
             'class' => $request->class,
             'section' => $request->section,
             'description' => $request->description
         ];
-        // dd($data);
         $response = Helper::PostMethod(config('constants.api.event_add'), $data);
-        // dd($response);
         return $response;
     }
+
     public function getEventList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.event_list'));
@@ -774,6 +807,7 @@ class AdminController extends Controller
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
                                 <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="viewEventBtn"><i class="fe-eye"></i></a>
+                                <a href="' . route('admin.event.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteEventBtn"><i class="fe-trash-2"></i></a>
                         </div>';
             })
@@ -786,6 +820,32 @@ class AdminController extends Controller
             'id' => $request->id,
         ];
         $response = Helper::PostMethod(config('constants.api.event_details'), $data);
+        return $response;
+    }
+    // Update event 
+    public function updateEvent(Request $request)
+    {
+
+        
+        if($request->class){
+            $class = implode(",",$request->class);
+        } else{
+            $class = "";
+        }
+
+        $data = [
+            'id' => $request->id,
+            'title' => $request->title,
+            'type' => $request->type,
+            'audience' => $request->audience,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'event_class' => $class,
+            'class' => $request->class,
+            'section' => $request->section,
+            'description' => $request->description
+        ];
+        $response = Helper::PostMethod(config('constants.api.event_update'), $data);
         return $response;
     }
     // DELETE event 
@@ -4345,6 +4405,343 @@ class AdminController extends Controller
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.add_daily_report_remarks'), $data);
+        return $response;
+    }
+
+    // index Transport Vehicle
+    public function transportVehicle()
+    {
+        return view('admin.transport_vehicle.index');
+    }
+
+    public function addTransportVehicle(Request $request)
+    {
+        $data = [
+            'vehicle_no' => $request->vehicle_no,
+            'capacity' => $request->capacity,
+            'insurance_renewal' => $request->insurance_renewal,
+            'driver_phone' => $request->driver_phone,
+            'driver_name' => $request->driver_name,
+            'driver_license' => $request->driver_license,
+        ];
+        $response = Helper::PostMethod(config('constants.api.transport_vehicle_add'), $data);
+        return $response;
+    }
+    public function getTransportVehicleList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.transport_vehicle_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editTransportVehicleBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteTransportVehicleBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getTransportVehicleDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.transport_vehicle_details'), $data);
+        return $response;
+    }
+    public function updateTransportVehicle(Request $request)
+    {
+        $data = [
+            "id" => $request->id,
+            'vehicle_no' => $request->vehicle_no,
+            'capacity' => $request->capacity,
+            'insurance_renewal' => $request->insurance_renewal,
+            'driver_phone' => $request->driver_phone,
+            'driver_name' => $request->driver_name,
+            'driver_license' => $request->driver_license,
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.transport_vehicle_update'), $data);
+        return $response;
+    }
+    // DELETE Leave type Details
+    public function deleteTransportVehicle(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.transport_vehicle_delete'), $data);
+        return $response;
+    }
+
+    // index Transport Stoppage
+    public function transportStoppage()
+    {
+        return view('admin.transport_stoppage.index');
+    }
+
+    public function addTransportStoppage(Request $request)
+    {
+        $data = [
+            'stop_position' => $request->stop_position,
+            'stop_time' => $request->stop_time,
+            'route_fare' => $request->route_fare,
+        ];
+        $response = Helper::PostMethod(config('constants.api.transport_stoppage_add'), $data);
+        return $response;
+    }
+    public function getTransportStoppageList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.transport_stoppage_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editTransportStoppageBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteTransportStoppageBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getTransportStoppageDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.transport_stoppage_details'), $data);
+        return $response;
+    }
+    public function updateTransportStoppage(Request $request)
+    {
+        $data = [
+            "id" => $request->id,
+            'stop_position' => $request->stop_position,
+            'stop_time' => $request->stop_time,
+            'route_fare' => $request->route_fare,
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.transport_stoppage_update'), $data);
+        return $response;
+    }
+    // DELETE Leave type Details
+    public function deleteTransportStoppage(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.transport_stoppage_delete'), $data);
+        return $response;
+    }
+
+    // index Transport Assign
+    public function transportAssign()
+    {
+        $vehicle = Helper::GetMethod(config('constants.api.transport_vehicle_list'));
+        $route = Helper::GetMethod(config('constants.api.transport_route_list'));
+        $stoppage = Helper::GetMethod(config('constants.api.transport_stoppage_list'));
+
+        return view(
+            'admin.transport_assign.index',
+            [
+                'vehicle' => $vehicle['data'],
+                'route' => $route['data'],
+                'stoppage' => $stoppage['data'],
+            ]
+        );
+    }
+
+    public function addTransportAssign(Request $request)
+    {
+        $data = [
+            'route_id' => $request->route_id,
+            'stoppage_id' => $request->stoppage_id,
+            'vehicle_id' => $request->vehicle_id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.transport_assign_add'), $data);
+        return $response;
+    }
+    public function getTransportAssignList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.transport_assign_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editTransportAssignBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteTransportAssignBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getTransportAssignDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.transport_assign_details'), $data);
+        return $response;
+    }
+    public function updateTransportAssign(Request $request)
+    {
+        $data = [
+            "id" => $request->id,
+            'route_id' => $request->route_id,
+            'stoppage_id' => $request->stoppage_id,
+            'vehicle_id' => $request->vehicle_id,
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.transport_assign_update'), $data);
+        return $response;
+    }
+    // DELETE Leave type Details
+    public function deleteTransportAssign(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.transport_assign_delete'), $data);
+        return $response;
+    }
+
+    // index Hostel Block
+    public function hostelBlock()
+    {
+        return view('admin.hostel_block.index');
+    }
+
+    public function addHostelBlock(Request $request)
+    {
+        $data = [
+            'block_name' => $request->block_name,
+            'block_warden' => $request->block_warden,
+            'total_floor' => $request->total_floor,
+            'block_leader' => $request->block_leader
+        ];
+        $response = Helper::PostMethod(config('constants.api.hostel_block_add'), $data);
+        return $response;
+    }
+    public function getHostelBlockList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.hostel_block_list'));
+
+        // dd($response);
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editHostelBlockBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteHostelBlockBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getHostelBlockDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.hostel_block_details'), $data);
+        return $response;
+    }
+    public function updateHostelBlock(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'block_name' => $request->block_name,
+            'block_warden' => $request->block_warden,
+            'total_floor' => $request->total_floor,
+            'block_leader' => $request->block_leader
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.hostel_block_update'), $data);
+        return $response;
+    }
+    // DELETE event type Details
+    public function deleteHostelBlock(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.hostel_block_delete'), $data);
+        return $response;
+    }
+
+    // index Hostel Floor
+    public function hostelFloor()
+    {
+        return view('admin.hostel_floor.index');
+    }
+
+    public function addHostelFloor(Request $request)
+    {
+        $data = [
+            'floor_name' => $request->floor_name,
+            'block_id' => $request->block_id,
+            'floor_warden' => $request->floor_warden,
+            'floor_leader' => $request->floor_leader,
+            'total_room' => $request->total_room
+        ];
+        $response = Helper::PostMethod(config('constants.api.hostel_floor_add'), $data);
+        return $response;
+    }
+    public function getHostelFloorList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.hostel_floor_list'));
+
+        // dd($response);
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editHostelFloorBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteHostelFloorBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getHostelFloorDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.hostel_floor_details'), $data);
+        return $response;
+    }
+    public function updateHostelFloor(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'floor_name' => $request->floor_name,
+            'block_id' => $request->block_id,
+            'floor_warden' => $request->floor_warden,
+            'floor_leader' => $request->floor_leader,
+            'total_room' => $request->total_room
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.hostel_floor_update'), $data);
+        return $response;
+    }
+    // DELETE event type Details
+    public function deleteHostelFloor(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.hostel_floor_delete'), $data);
         return $response;
     }
 }

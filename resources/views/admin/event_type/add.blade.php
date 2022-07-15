@@ -11,9 +11,13 @@
                     @csrf                   
                  
                     <div class="form-group">
-                        <label for="name">Event Type Name</label>
+                        <label for="name">Event Type Name <span class="text-danger">*</span></label>
                         <input type="text" id="name" name="name" class="form-control" placeholder="Enter Event Type name">
                         <span class="text-danger error-text name_error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="color"> Color <span class="text-danger">*</span></label>
+                        <input type="text" id="color" name="color" class="form-control color" value="#4a81d4">
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>

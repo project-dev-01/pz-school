@@ -1,17 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Event Type')
-@section('css')
-<style>
-.dot {
-  height: 25px;
-  width: 25px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-}
-</style>
-<link href="{{ asset('libs/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}" rel="stylesheet" type="text/css" />
-@endsection
+@section('title','Vehicle')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -26,7 +14,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Event Types</h4>
+                <h4 class="page-title">Vehicle</h4>
             </div>
         </div>
     </div>
@@ -37,23 +25,28 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Event Type
-                            <h4>
+                        <h4 class="navv">Vehicle<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
                         <!-- <a href="{{ route('admin.add_classes')}}" class="btn btn-primary btn-rounded waves-effect waves-light">Add Class</a> -->
-                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addEventTypeModal">Add Event Type</button>
+                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addTransportVehicleModal">Add Vehicle</button>
                     </div>
                 </div>
+
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table" id="event-type-table">
+                        <table class="table" id="transport-vehicle-table">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Event Type Name</th>
+                                    <th>Vehicle Number</th>
+                                    <th>Capacity</th>
+                                    <th>Insurance Renewal</th>
+                                    <th>Driver Name</th>
+                                    <th>Driver Phone</th>
+                                    <th>Driver License Number</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -65,23 +58,21 @@
             </div> <!-- end col -->
         </div>
         <!--- end row -->
-        @include('admin.event_type.add')
-        @include('admin.event_type.edit')
+        @include('admin.transport_vehicle.add')
+        @include('admin.transport_vehicle.edit')
     </div>
 </div>
 <!-- container -->
 @endsection
 @section('scripts')
-<script src="{{ asset('libs/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
-<script src="{{ asset('js/pages/form-pickers.init.js') }}"></script>
 
 <script>
-    //eventType routes
-    var eventTypeList = "{{ route('admin.event_type.list') }}";
-    var eventTypeDetails = "{{ route('admin.event_type.details') }}";
-    var eventTypeDelete = "{{ route('admin.event_type.delete') }}";
+    //transportVehicle vehicles
+    var transportVehicleList = "{{ route('admin.transport_vehicle.list') }}";
+    var transportVehicleDetails = "{{ route('admin.transport_vehicle.details') }}";
+    var transportVehicleDelete = "{{ route('admin.transport_vehicle.delete') }}";
 </script>
 
-<script src="{{ asset('js/custom/event_type.js') }}"></script>
+<script src="{{ asset('js/custom/transport_vehicle.js') }}"></script>
 
 @endsection

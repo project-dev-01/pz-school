@@ -1,25 +1,25 @@
 $(function () {
 
-    $(".color").colorpicker({
-        format: "auto"
-    });
-
-    eventTypeTable();
-    $("#eventTypeForm").validate({
+    transportStoppageTable();
+    $("#transportStoppageForm").validate({
         rules: {
-            name: "required"
+            stop_position: "required",
+            stop_time: "required",
+            route_fare: "required",
         }
     });
-    $("#edit-event-type-form").validate({
+    $("#edit-transport-stoppage-form").validate({
         rules: {
-            name: "required"
+            stop_position: "required",
+            stop_time: "required",
+            route_fare: "required",
         }
     });
-    // add eventType
-    $('#eventTypeForm').on('submit', function (e) {
+    // add transportStoppage
+    $('#transportStoppageForm').on('submit', function (e) {
         e.preventDefault();
-        var eventCheck = $("#eventTypeForm").valid();
-        if (eventCheck === true) {
+        var transportCheck = $("#transportStoppageForm").valid();
+        if (transportCheck === true) {
             var form = this;
 
             $.ajax({
@@ -30,12 +30,10 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
-                    // console.log("------")
-                    console.log(data)
                     if (data.code == 200) {
-                        $('#event-type-table').DataTable().ajax.reload(null, false);
-                        $('.addEventType').modal('hide');
-                        $('.addEventType').find('form')[0].reset();
+                        $('#transport-stoppage-table').DataTable().ajax.reload(null, false);
+                        $('.addTransportStoppage').modal('hide');
+                        $('.addTransportStoppage').find('form')[0].reset();
                         toastr.success(data.message);
                     } else {
                         toastr.error(data.message);
@@ -45,16 +43,13 @@ $(function () {
         }
     });
 
-    // get all eventType table
-    function eventTypeTable() {
-         $('#event-type-table').DataTable({
+    // get all TransportStoppage table
+    function transportStoppageTable() {
+         $('#transport-stoppage-table').DataTable({
             processing: true,
             info: true,
             bDestroy:true,
-            // dom: 'lBfrtip',
-            dom:"<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            dom: 'lBfrtip',
             buttons: [
                 {
                     extend: 'csv',
@@ -65,7 +60,7 @@ $(function () {
                     }
                 }
             ],
-            ajax: eventTypeList,
+            ajax: transportStoppageList,
             "pageLength": 5,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
@@ -79,8 +74,16 @@ $(function () {
                 }
                 ,
                 {
-                    data: 'name',
-                    name: 'name'
+                    data: 'stop_position',
+                    name: 'stop_position'
+                },
+                {
+                    data: 'stop_time',
+                    name: 'stop_time'
+                },
+                {
+                    data: 'route_fare',
+                    name: 'route_fare'
                 },
                 {
                     data: 'actions',
@@ -93,23 +96,24 @@ $(function () {
         });
     }
     // get row
-    $(document).on('click', '#editEventTypeBtn', function () {
+    $(document).on('click', '#editTransportStoppageBtn', function () {
         var id = $(this).data('id');
      
-        $('.editEventType').find('form')[0].reset();   
-        $.post(eventTypeDetails, { id: id }, function (data) {
-            $('.editEventType').find('input[name="id"]').val(data.data.id);
-            $('.editEventType').find('input[name="name"]').val(data.data.name);
-            $('.editEventType').find('select[name="color"]').val(data.data.color);
-            $('.editEventType').modal('show');
+        $('.editTransportStoppage').find('form')[0].reset();   
+        $.post(transportStoppageDetails, { id: id }, function (data) {
+            $('.editTransportStoppage').find('input[name="id"]').val(data.data.id);
+            $('.editTransportStoppage').find('input[name="stop_position"]').val(data.data.stop_position);
+            $('.editTransportStoppage').find('input[name="stop_time"]').val(data.data.stop_time);
+            $('.editTransportStoppage').find('input[name="route_fare"]').val(data.data.route_fare);
+            $('.editTransportStoppage').modal('show');
         }, 'json');
         console.log(id);
     });
-    // update EventType
-    $('#edit-event-type-form').on('submit', function (e) {
+    // update TransportStoppage
+    $('#edit-transport-stoppage-form').on('submit', function (e) {
         e.preventDefault();
-        var edt_eventCheck = $("#edit-event-type-form").valid();
-        if (edt_eventCheck === true) {
+        var edt_transportCheck = $("#edit-transport-stoppage-form").valid();
+        if (edt_transportCheck === true) {
       
             var form = this;
             $.ajax({
@@ -127,13 +131,13 @@ $(function () {
                     } else {
 
                         if (data.code == 200) {
-                            $('#event-type-table').DataTable().ajax.reload(null, false);
-                            $('.editEventType').modal('hide');
-                            $('.editEventType').find('form')[0].reset();
+                            $('#transport-stoppage-table').DataTable().ajax.reload(null, false);
+                            $('.editTransportStoppage').modal('hide');
+                            $('.editTransportStoppage').find('form')[0].reset();
                             toastr.success(data.message);
                         } else {
-                            $('.editEventType').modal('hide');
-                            $('.editEventType').find('form')[0].reset();
+                            $('.editTransportStoppage').modal('hide');
+                            $('.editTransportStoppage').find('form')[0].reset();
                             toastr.error(data.message);
                         }
                     }
@@ -141,13 +145,13 @@ $(function () {
             });
         }
     });
-    // delete EventTypeDelete
-    $(document).on('click', '#deleteEventTypeBtn', function () {
+    // delete TransportStoppageDelete
+    $(document).on('click', '#deleteTransportStoppageBtn', function () {
         var id = $(this).data('id');
-        var url = eventTypeDelete;
+        var url = transportStoppageDelete;
         swal.fire({
             title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this Event Type',
+            html: 'You want to <b>delete</b> this Transport Stoppage',
             showCancelButton: true,
             showCloseButton: true,
             cancelButtonText: 'Cancel',
@@ -162,7 +166,7 @@ $(function () {
                     id: id
                 }, function (data) {
                     if (data.code == 200) {
-                        $('#event-type-table').DataTable().ajax.reload(null, false);
+                        $('#transport-stoppage-table').DataTable().ajax.reload(null, false);
                         toastr.success(data.message);
                     } else {
                         toastr.error(data.message);

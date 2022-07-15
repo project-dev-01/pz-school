@@ -926,7 +926,7 @@
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.timetable.bulk.create')}}" class="nav-link {{ (request()->is('super_admin/timetable*')) ? 'active' : '' }}">
-                                                <span>Add Bulk</span>
+                                                <span>Add Bulk Schedule</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -1238,6 +1238,18 @@
                                                 <span> Hostel Room </span>
                                             </a>
                                         </li>
+                                        
+                                        <li>
+                                            <a href="{{ route('admin.hostel_block')}}" class="nav-link {{ (request()->is('admin/hostel/block')) ? 'active' : '' }}">
+                                                <span> Hostel Block </span>
+                                            </a>
+                                        </li>
+                                        
+                                        <li>
+                                            <a href="{{ route('admin.hostel_floor')}}" class="nav-link {{ (request()->is('admin/hostel/floor')) ? 'active' : '' }}">
+                                                <span> Hostel Floor </span>
+                                            </a>
+                                        </li>
                                         <li>
                                             <a href="{{ route('admin.hostel_category')}}" class="nav-link {{ (request()->is('admin/hostel/category')) ? 'active' : '' }}">
                                                 <span> Category </span>
@@ -1258,17 +1270,17 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('admin.transport_route')}}" class="nav-link {{ (request()->is('')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.transport_vehicle')}}" class="nav-link {{ (request()->is('')) ? 'active' : '' }}">
                                                 <span> Vehicle Master</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="" class="nav-link {{ (request()->is('')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.transport_stoppage')}}" class="nav-link {{ (request()->is('')) ? 'active' : '' }}">
                                                 <span> Stoppage</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="" class="nav-link {{ (request()->is('')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.transport_assign')}}" class="nav-link {{ (request()->is('')) ? 'active' : '' }}">
                                                 <span> Assign Vehicle</span>
                                             </a>
                                         </li>

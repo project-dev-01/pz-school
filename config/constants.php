@@ -342,6 +342,20 @@ return [
         'hostel_category_update' => $url.'/hostel_category/update',
         'hostel_category_delete' => $url.'/hostel_category/delete',
 
+        // hostel block url
+        'hostel_block_add' => $url.'/hostel_block/add',
+        'hostel_block_list' => $url.'/hostel_block/list',
+        'hostel_block_details' => $url.'/hostel_block/hostel_block-details',
+        'hostel_block_update' => $url.'/hostel_block/update',
+        'hostel_block_delete' => $url.'/hostel_block/delete',
+
+        // hostel floor url
+        'hostel_floor_add' => $url.'/hostel_floor/add',
+        'hostel_floor_list' => $url.'/hostel_floor/list',
+        'hostel_floor_details' => $url.'/hostel_floor/hostel_floor-details',
+        'hostel_floor_update' => $url.'/hostel_floor/update',
+        'hostel_floor_delete' => $url.'/hostel_floor/delete',
+
         'vehicle_by_route' => $url.'/vehicle-by-route',
         'room_by_hostel' => $url.'/room-by-hostel',
 
@@ -413,6 +427,13 @@ return [
         'transport_stoppage_details' => $url.'/transport_stoppage/transport_stoppage-details',
         'transport_stoppage_update' => $url.'/transport_stoppage/update',
         'transport_stoppage_delete' => $url.'/transport_stoppage/delete',
+
+        // transport assign url
+        'transport_assign_add' => $url.'/transport_assign/add',
+        'transport_assign_list' => $url.'/transport_assign/list',
+        'transport_assign_details' => $url.'/transport_assign/transport_assign-details',
+        'transport_assign_update' => $url.'/transport_assign/update',
+        'transport_assign_delete' => $url.'/transport_assign/delete',
         // employee-leave
         'get_leave_types'=>$url.'/employee-leave/get_leave_types',
         'staff_apply_leave'=>$url.'/employee-leave/apply',
@@ -462,7 +483,13 @@ return [
         // notifications
         'unread_notifications' => $url.'/unread_notifications',
         'mark_as_read' => $url.'/mark_as_read',
-        
+
+        // transport vehicle url
+        'transport_vehicle_add' => $url.'/transport_vehicle/add',
+        'transport_vehicle_list' => $url.'/transport_vehicle/list',
+        'transport_vehicle_details' => $url.'/transport_vehicle/transport_vehicle-details',
+        'transport_vehicle_update' => $url.'/transport_vehicle/update',
+        'transport_vehicle_delete' => $url.'/transport_vehicle/delete',
     ]
 
 ];

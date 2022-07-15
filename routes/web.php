@@ -319,9 +319,12 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
         // Event routes
         Route::get('event/index', [AdminController::class, 'event'])->name('admin.event');
+        Route::get('event/create', [AdminController::class, 'createEvent'])->name('admin.event.create');
+        Route::get('event/edit/{id}', [AdminController::class, 'editEvent'])->name('admin.event.edit');
         Route::get('event/list', [AdminController::class, 'getEventList'])->name('admin.event.list');
         Route::post('event/add', [AdminController::class, 'addEvent'])->name('admin.event.add');
         Route::post('event/event-details', [AdminController::class, 'getEventDetails'])->name('admin.event.details');
+        Route::post('even/update', [AdminController::class, 'updateEvent'])->name('admin.event.update');
         Route::post('event/delete', [AdminController::class, 'deleteEvent'])->name('admin.event.delete');
         Route::post('event/event-publish', [AdminController::class, 'publishEvent'])->name('admin.event.publish');
         // Qualifications
@@ -526,6 +529,22 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('hostel_category/update', [AdminController::class, 'updateHostelCategory'])->name('admin.hostel_category.update');
         Route::post('hostel_category/delete', [AdminController::class, 'deleteHostelCategory'])->name('admin.hostel_category.delete');
 
+        // Hostel Block routes
+        Route::get('hostel_block/index', [AdminController::class, 'hostelBlock'])->name('admin.hostel_block');
+        Route::get('hostel_block/list', [AdminController::class, 'getHostelBlockList'])->name('admin.hostel_block.list');
+        Route::post('hostel_block/add', [AdminController::class, 'addHostelBlock'])->name('admin.hostel_block.add');
+        Route::post('hostel_block/hostel_block-details', [AdminController::class, 'getHostelBlockDetails'])->name('admin.hostel_block.details');
+        Route::post('hostel_block/update', [AdminController::class, 'updateHostelBlock'])->name('admin.hostel_block.update');
+        Route::post('hostel_block/delete', [AdminController::class, 'deleteHostelBlock'])->name('admin.hostel_block.delete');
+
+        // Hostel Floor routes
+        Route::get('hostel_floor/index', [AdminController::class, 'hostelFloor'])->name('admin.hostel_floor');
+        Route::get('hostel_floor/list', [AdminController::class, 'getHostelFloorList'])->name('admin.hostel_floor.list');
+        Route::post('hostel_floor/add', [AdminController::class, 'addHostelFloor'])->name('admin.hostel_floor.add');
+        Route::post('hostel_floor/hostel_floor-details', [AdminController::class, 'getHostelFloorDetails'])->name('admin.hostel_floor.details');
+        Route::post('hostel_floor/update', [AdminController::class, 'updateHostelFloor'])->name('admin.hostel_floor.update');
+        Route::post('hostel_floor/delete', [AdminController::class, 'deleteHostelFloor'])->name('admin.hostel_floor.delete');
+
 
         // Library routes
         Route::get('library/book', [AdminController::class, 'book'])->name('admin.library.book');
@@ -631,6 +650,22 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('transport_vehicle/transport_vehicle-details', [AdminController::class, 'getTransportVehicleDetails'])->name('admin.transport_vehicle.details');
         Route::post('transport_vehicle/update', [AdminController::class, 'updateTransportVehicle'])->name('admin.transport_vehicle.update');
         Route::post('transport_vehicle/delete', [AdminController::class, 'deleteTransportVehicle'])->name('admin.transport_vehicle.delete');
+
+        // Transport Stoppage Route 
+        Route::get('transport_stoppage/index', [AdminController::class, 'transportStoppage'])->name('admin.transport_stoppage');
+        Route::get('transport_stoppage/list', [AdminController::class, 'getTransportStoppageList'])->name('admin.transport_stoppage.list');
+        Route::post('transport_stoppage/add', [AdminController::class, 'addTransportStoppage'])->name('admin.transport_stoppage.add');
+        Route::post('transport_stoppage/transport_stoppage-details', [AdminController::class, 'getTransportStoppageDetails'])->name('admin.transport_stoppage.details');
+        Route::post('transport_stoppage/update', [AdminController::class, 'updateTransportStoppage'])->name('admin.transport_stoppage.update');
+        Route::post('transport_stoppage/delete', [AdminController::class, 'deleteTransportStoppage'])->name('admin.transport_stoppage.delete');
+
+        // Transport Assign Route 
+        Route::get('transport_assign/index', [AdminController::class, 'transportAssign'])->name('admin.transport_assign');
+        Route::get('transport_assign/list', [AdminController::class, 'getTransportAssignList'])->name('admin.transport_assign.list');
+        Route::post('transport_assign/add', [AdminController::class, 'addTransportAssign'])->name('admin.transport_assign.add');
+        Route::post('transport_assign/transport_assign-details', [AdminController::class, 'getTransportAssignDetails'])->name('admin.transport_assign.details');
+        Route::post('transport_assign/update', [AdminController::class, 'updateTransportAssign'])->name('admin.transport_assign.update');
+        Route::post('transport_assign/delete', [AdminController::class, 'deleteTransportAssign'])->name('admin.transport_assign.delete');
         // LEAVE MANAGEMENT ROUTES start
         // Leave Apply
         Route::get('leave_management/applyleave', [AdminController::class, 'applyleave'])->name('admin.leave_management.applyleave');

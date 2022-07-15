@@ -3,6 +3,11 @@
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
+<style>
+.w-100 {
+    width: 150%!important;
+}
+</style>
 
     <!-- start page title -->
     <div class="row">
@@ -86,7 +91,7 @@
             <div class="card">
                 <ul class="nav nav-tabs" >
                     <li class="nav-item">
-                        <h4 class="nav-link">
+                        <h4 class="navv">
                             Add Schedule
                             <h4>
                     </li>
@@ -95,19 +100,18 @@
                     <form id="addScheduleForm"  method="post" action="{{ route('admin.exam_timetable.add') }}"  enctype="multipart/form-data" autocomplete="off">
                     @csrf
                         <div class="row">
-                            <div class="col-sm-12">
-                                <div class="card-box">
+                            <div class="col-lg-12">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered mb-0 text-center table-responsive">
+                                        <table class="table table-bordered table-centered dt-responsive nowrap w-100" width="100%">
                                             <thead>
                                                 <tr>
-                                                    <th width="25%">Subject <span class="text-danger">*</span></th>
-                                                    <th width="10%">Date <span class="text-danger">*</span></th>
-                                                    <th width="5%">Starting Time <span class="text-danger">*</span></th>
-                                                    <th width="5%">Ending Time <span class="text-danger">*</span></th>
-                                                    <th width="10%">Hall Room <span class="text-danger">*</span></th>
-                                                    <th width="30%">Distributor<span class="text-danger">*</span></th>
-                                                    <th width="15%">Marks<span class="text-danger">*</span></th>
+                                                    <th>Subject <span class="text-danger">*</span></th>
+                                                    <th>Date <span class="text-danger">*</span></th>
+                                                    <th>Starting Time <span class="text-danger">*</span></th>
+                                                    <th>Ending Time <span class="text-danger">*</span></th>
+                                                    <th>Hall Room <span class="text-danger">*</span></th>
+                                                    <th>Distributor<span class="text-danger">*</span></th>
+                                                    <th>Marks<span class="text-danger">*</span></th>
 
                                                 </tr>
                                             </thead>
@@ -115,13 +119,10 @@
                                            
                                             </tbody>
                                         </table>
-                                    </div> <!-- end table-responsive-->
-
-                                </div> <!-- end card-box -->
-                            </div> <!-- end col-->
+                                    </div> <!-- end table-responsive-->                             
                         </div>
 
-                        
+                        </div>
                         <input type="hidden" id="form_class_id"  name="class_id">
                         <input type="hidden" id="form_section_id" name="section_id">
                         <input type="hidden" id="form_exam_id" name="exam_id">

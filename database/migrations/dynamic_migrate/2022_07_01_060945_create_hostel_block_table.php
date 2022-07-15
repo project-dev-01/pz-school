@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEventTypesTable extends Migration
+class CreateHostelBlockTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateEventTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('event_types', function (Blueprint $table) {
+        Schema::create('hostel_block', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('color');
+            $table->string('block_name');
+            $table->string('block_warden');
+            $table->integer('total_floor');
+            $table->integer('block_leader')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateEventTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('event_types');
+        Schema::dropIfExists('hostel_block');
     }
 }

@@ -1,25 +1,25 @@
 $(function () {
 
-    $(".color").colorpicker({
-        format: "auto"
-    });
-
-    eventTypeTable();
-    $("#eventTypeForm").validate({
+    transportAssignTable();
+    $("#transportAssignForm").validate({
         rules: {
-            name: "required"
+            route_id: "required",
+            stoppage_id: "required",
+            vehicle_id: "required",
         }
     });
-    $("#edit-event-type-form").validate({
+    $("#edit-transport-assign-form").validate({
         rules: {
-            name: "required"
+            route_id: "required",
+            stoppage_id: "required",
+            vehicle_id: "required",
         }
     });
-    // add eventType
-    $('#eventTypeForm').on('submit', function (e) {
+    // add transportAssign
+    $('#transportAssignForm').on('submit', function (e) {
         e.preventDefault();
-        var eventCheck = $("#eventTypeForm").valid();
-        if (eventCheck === true) {
+        var transportCheck = $("#transportAssignForm").valid();
+        if (transportCheck === true) {
             var form = this;
 
             $.ajax({
@@ -30,12 +30,10 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
-                    // console.log("------")
-                    console.log(data)
                     if (data.code == 200) {
-                        $('#event-type-table').DataTable().ajax.reload(null, false);
-                        $('.addEventType').modal('hide');
-                        $('.addEventType').find('form')[0].reset();
+                        $('#transport-assign-table').DataTable().ajax.reload(null, false);
+                        $('.addTransportAssign').modal('hide');
+                        $('.addTransportAssign').find('form')[0].reset();
                         toastr.success(data.message);
                     } else {
                         toastr.error(data.message);
@@ -45,16 +43,13 @@ $(function () {
         }
     });
 
-    // get all eventType table
-    function eventTypeTable() {
-         $('#event-type-table').DataTable({
+    // get all TransportAssign table
+    function transportAssignTable() {
+         $('#transport-assign-table').DataTable({
             processing: true,
             info: true,
             bDestroy:true,
-            // dom: 'lBfrtip',
-            dom:"<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            dom: 'lBfrtip',
             buttons: [
                 {
                     extend: 'csv',
@@ -65,7 +60,7 @@ $(function () {
                     }
                 }
             ],
-            ajax: eventTypeList,
+            ajax: transportAssignList,
             "pageLength": 5,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
@@ -79,8 +74,16 @@ $(function () {
                 }
                 ,
                 {
-                    data: 'name',
-                    name: 'name'
+                    data: 'route_name',
+                    name: 'route_name'
+                },
+                {
+                    data: 'stop_position',
+                    name: 'stop_position'
+                },
+                {
+                    data: 'vehicle_no',
+                    name: 'vehicle_no'
                 },
                 {
                     data: 'actions',
@@ -93,23 +96,24 @@ $(function () {
         });
     }
     // get row
-    $(document).on('click', '#editEventTypeBtn', function () {
+    $(document).on('click', '#editTransportAssignBtn', function () {
         var id = $(this).data('id');
      
-        $('.editEventType').find('form')[0].reset();   
-        $.post(eventTypeDetails, { id: id }, function (data) {
-            $('.editEventType').find('input[name="id"]').val(data.data.id);
-            $('.editEventType').find('input[name="name"]').val(data.data.name);
-            $('.editEventType').find('select[name="color"]').val(data.data.color);
-            $('.editEventType').modal('show');
+        $('.editTransportAssign').find('form')[0].reset();   
+        $.post(transportAssignDetails, { id: id }, function (data) {
+            $('.editTransportAssign').find('input[name="id"]').val(data.data.id);
+            $('.editTransportAssign').find('input[name="route_id"]').val(data.data.route_id);
+            $('.editTransportAssign').find('input[name="stoppage_id"]').val(data.data.stoppage_id);
+            $('.editTransportAssign').find('input[name="vehicle_id"]').val(data.data.vehicle_id);
+            $('.editTransportAssign').modal('show');
         }, 'json');
         console.log(id);
     });
-    // update EventType
-    $('#edit-event-type-form').on('submit', function (e) {
+    // update TransportAssign
+    $('#edit-transport-assign-form').on('submit', function (e) {
         e.preventDefault();
-        var edt_eventCheck = $("#edit-event-type-form").valid();
-        if (edt_eventCheck === true) {
+        var edt_transportCheck = $("#edit-transport-assign-form").valid();
+        if (edt_transportCheck === true) {
       
             var form = this;
             $.ajax({
@@ -127,13 +131,13 @@ $(function () {
                     } else {
 
                         if (data.code == 200) {
-                            $('#event-type-table').DataTable().ajax.reload(null, false);
-                            $('.editEventType').modal('hide');
-                            $('.editEventType').find('form')[0].reset();
+                            $('#transport-assign-table').DataTable().ajax.reload(null, false);
+                            $('.editTransportAssign').modal('hide');
+                            $('.editTransportAssign').find('form')[0].reset();
                             toastr.success(data.message);
                         } else {
-                            $('.editEventType').modal('hide');
-                            $('.editEventType').find('form')[0].reset();
+                            $('.editTransportAssign').modal('hide');
+                            $('.editTransportAssign').find('form')[0].reset();
                             toastr.error(data.message);
                         }
                     }
@@ -141,13 +145,13 @@ $(function () {
             });
         }
     });
-    // delete EventTypeDelete
-    $(document).on('click', '#deleteEventTypeBtn', function () {
+    // delete TransportAssignDelete
+    $(document).on('click', '#deleteTransportAssignBtn', function () {
         var id = $(this).data('id');
-        var url = eventTypeDelete;
+        var url = transportAssignDelete;
         swal.fire({
             title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this Event Type',
+            html: 'You want to <b>delete</b> this Transport Assign',
             showCancelButton: true,
             showCloseButton: true,
             cancelButtonText: 'Cancel',
@@ -162,7 +166,7 @@ $(function () {
                     id: id
                 }, function (data) {
                     if (data.code == 200) {
-                        $('#event-type-table').DataTable().ajax.reload(null, false);
+                        $('#transport-assign-table').DataTable().ajax.reload(null, false);
                         toastr.success(data.message);
                     } else {
                         toastr.error(data.message);

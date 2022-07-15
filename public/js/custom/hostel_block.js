@@ -1,25 +1,25 @@
 $(function () {
 
-    $(".color").colorpicker({
-        format: "auto"
-    });
-
-    eventTypeTable();
-    $("#eventTypeForm").validate({
+    hostelBlockTable();
+    $("#hostelBlockForm").validate({
         rules: {
-            name: "required"
+            block_name: "required",
+            block_warden: "required",
+            total_floor: "required",
         }
     });
-    $("#edit-event-type-form").validate({
+    $("#edit-hostel-block-form").validate({
         rules: {
-            name: "required"
+            block_name: "required",
+            block_warden: "required",
+            total_floor: "required",
         }
     });
-    // add eventType
-    $('#eventTypeForm').on('submit', function (e) {
+    // add hostelBlock
+    $('#hostelBlockForm').on('submit', function (e) {
         e.preventDefault();
-        var eventCheck = $("#eventTypeForm").valid();
-        if (eventCheck === true) {
+        var hostelCheck = $("#hostelBlockForm").valid();
+        if (hostelCheck === true) {
             var form = this;
 
             $.ajax({
@@ -30,12 +30,10 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
-                    // console.log("------")
-                    console.log(data)
                     if (data.code == 200) {
-                        $('#event-type-table').DataTable().ajax.reload(null, false);
-                        $('.addEventType').modal('hide');
-                        $('.addEventType').find('form')[0].reset();
+                        $('#hostel-block-table').DataTable().ajax.reload(null, false);
+                        $('.addHostelBlock').modal('hide');
+                        $('.addHostelBlock').find('form')[0].reset();
                         toastr.success(data.message);
                     } else {
                         toastr.error(data.message);
@@ -45,16 +43,13 @@ $(function () {
         }
     });
 
-    // get all eventType table
-    function eventTypeTable() {
-         $('#event-type-table').DataTable({
+    // get all HostelBlock table
+    function hostelBlockTable() {
+         $('#hostel-block-table').DataTable({
             processing: true,
             info: true,
             bDestroy:true,
-            // dom: 'lBfrtip',
-            dom:"<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            dom: 'lBfrtip',
             buttons: [
                 {
                     extend: 'csv',
@@ -65,7 +60,7 @@ $(function () {
                     }
                 }
             ],
-            ajax: eventTypeList,
+            ajax: hostelBlockList,
             "pageLength": 5,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
@@ -79,8 +74,20 @@ $(function () {
                 }
                 ,
                 {
-                    data: 'name',
-                    name: 'name'
+                    data: 'block_name',
+                    name: 'block_name'
+                },
+                {
+                    data: 'block_warden',
+                    name: 'block_warden'
+                },
+                {
+                    data: 'total_floor',
+                    name: 'total_floor'
+                },
+                {
+                    data: 'block_leader',
+                    name: 'block_leader'
                 },
                 {
                     data: 'actions',
@@ -93,23 +100,25 @@ $(function () {
         });
     }
     // get row
-    $(document).on('click', '#editEventTypeBtn', function () {
+    $(document).on('click', '#editHostelBlockBtn', function () {
         var id = $(this).data('id');
      
-        $('.editEventType').find('form')[0].reset();   
-        $.post(eventTypeDetails, { id: id }, function (data) {
-            $('.editEventType').find('input[name="id"]').val(data.data.id);
-            $('.editEventType').find('input[name="name"]').val(data.data.name);
-            $('.editEventType').find('select[name="color"]').val(data.data.color);
-            $('.editEventType').modal('show');
+        $('.editHostelBlock').find('form')[0].reset();   
+        $.post(hostelBlockDetails, { id: id }, function (data) {
+            $('.editHostelBlock').find('input[name="id"]').val(data.data.id);
+            $('.editHostelBlock').find('input[name="block_name"]').val(data.data.block_name);
+            $('.editHostelBlock').find('input[name="block_warden"]').val(data.data.block_warden);
+            $('.editHostelBlock').find('input[name="total_floor"]').val(data.data.total_floor);
+            $('.editHostelBlock').find('input[name="block_leader"]').val(data.data.block_leader);
+            $('.editHostelBlock').modal('show');
         }, 'json');
         console.log(id);
     });
-    // update EventType
-    $('#edit-event-type-form').on('submit', function (e) {
+    // update HostelBlock
+    $('#edit-hostel-block-form').on('submit', function (e) {
         e.preventDefault();
-        var edt_eventCheck = $("#edit-event-type-form").valid();
-        if (edt_eventCheck === true) {
+        var edt_hostelCheck = $("#edit-hostel-block-form").valid();
+        if (edt_hostelCheck === true) {
       
             var form = this;
             $.ajax({
@@ -127,13 +136,13 @@ $(function () {
                     } else {
 
                         if (data.code == 200) {
-                            $('#event-type-table').DataTable().ajax.reload(null, false);
-                            $('.editEventType').modal('hide');
-                            $('.editEventType').find('form')[0].reset();
+                            $('#hostel-block-table').DataTable().ajax.reload(null, false);
+                            $('.editHostelBlock').modal('hide');
+                            $('.editHostelBlock').find('form')[0].reset();
                             toastr.success(data.message);
                         } else {
-                            $('.editEventType').modal('hide');
-                            $('.editEventType').find('form')[0].reset();
+                            $('.editHostelBlock').modal('hide');
+                            $('.editHostelBlock').find('form')[0].reset();
                             toastr.error(data.message);
                         }
                     }
@@ -141,13 +150,13 @@ $(function () {
             });
         }
     });
-    // delete EventTypeDelete
-    $(document).on('click', '#deleteEventTypeBtn', function () {
+    // delete HostelBlockDelete
+    $(document).on('click', '#deleteHostelBlockBtn', function () {
         var id = $(this).data('id');
-        var url = eventTypeDelete;
+        var url = hostelBlockDelete;
         swal.fire({
             title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this Event Type',
+            html: 'You want to <b>delete</b> this Hostel Block',
             showCancelButton: true,
             showCloseButton: true,
             cancelButtonText: 'Cancel',
@@ -162,7 +171,7 @@ $(function () {
                     id: id
                 }, function (data) {
                     if (data.code == 200) {
-                        $('#event-type-table').DataTable().ajax.reload(null, false);
+                        $('#hostel-block-table').DataTable().ajax.reload(null, false);
                         toastr.success(data.message);
                     } else {
                         toastr.error(data.message);

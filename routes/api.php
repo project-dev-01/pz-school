@@ -123,7 +123,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('event/add', [ApiController::class, 'addEvent']);
     Route::get('event/list', [ApiController::class, 'getEventList']);
     Route::post('event/event-details', [ApiController::class, 'getEventDetails']);
-    Route::post('event/update', [ApiController::class, 'updateEventDetails']);
+    Route::post('event/update', [ApiController::class, 'updateEvent']);
     Route::post('event/delete', [ApiController::class, 'deleteEvent']);
     Route::post('event/publish', [ApiController::class, 'publishEvent']);
     Route::post('branch-by-event', [ApiController::class, 'branchIdByEvent']);
@@ -382,6 +382,20 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('vehicle-by-route', [ApiController::class, 'vehicleByRoute']);
     Route::post('room-by-hostel', [ApiController::class, 'roomByHostel']);
 
+    // Hostel Block routes
+    Route::post('hostel_block/add', [ApiController::class, 'addHostelBlock']);
+    Route::get('hostel_block/list', [ApiController::class, 'getHostelBlockList']);
+    Route::post('hostel_block/hostel_block-details', [ApiController::class, 'getHostelBlockDetails']);
+    Route::post('hostel_block/update', [ApiController::class, 'updateHostelBlock']);
+    Route::post('hostel_block/delete', [ApiController::class, 'deleteHostelBlock']);
+
+    // Hostel Floor routes
+    Route::post('hostel_floor/add', [ApiController::class, 'addHostelFloor']);
+    Route::get('hostel_floor/list', [ApiController::class, 'getHostelFloorList']);
+    Route::post('hostel_floor/hostel_floor-details', [ApiController::class, 'getHostelFloorDetails']);
+    Route::post('hostel_floor/update', [ApiController::class, 'updateHostelFloor']);
+    Route::post('hostel_floor/delete', [ApiController::class, 'deleteHostelFloor']);
+
     // Admission routes
     Route::post('admission/add', [ApiController::class, 'addAdmission']);
 
@@ -457,6 +471,13 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('transport_stoppage/transport_stoppage-details', [ApiController::class, 'getTransportStoppageDetails']);
     Route::post('transport_stoppage/update', [ApiController::class, 'updateTransportStoppage']);
     Route::post('transport_stoppage/delete', [ApiController::class, 'deleteTransportStoppage']);
+
+    // Transport Assign routes
+    Route::post('transport_assign/add', [ApiController::class, 'addTransportAssign']);
+    Route::get('transport_assign/list', [ApiController::class, 'getTransportAssignList']);
+    Route::post('transport_assign/transport_assign-details', [ApiController::class, 'getTransportAssignDetails']);
+    Route::post('transport_assign/update', [ApiController::class, 'updateTransportAssign']);
+    Route::post('transport_assign/delete', [ApiController::class, 'deleteTransportAssign']);
     // staff leave apply
     Route::get('employee-leave/get_leave_types', [ApiController::class, 'getLeaveTypes']);
     Route::post('employee-leave/apply', [ApiController::class, 'staffLeaveApply']);

@@ -1,82 +1,153 @@
 $(function () {
 
-    // $("body").delegate("#start_date", "focusin", function(){
-    //     $(this).datepicker({
-    //             dateFormat: 'dd-mm-yy',
-    //             changeMonth: true,
-    //             changeYear: true,
-    //             autoclose: true,
-    //         });
-    // });
-
-    
-    $("#start_date").flatpickr();
-
-    $("#end_date").flatpickr();
-
-    // $('#addEventModal').on('shown.bs.modal', function() {
-    //     $('#start_date').datepicker({
-    //         dateFormat: 'dd-mm-yy',
-    //       changeMonth: true,
-    //       changeYear: true,
-    //       autoclose: true,
-    //     });
-    //  });
-    // $("#start_date").datepicker({
-    //     dateFormat: 'dd-mm-yy',
-    //     changeMonth: true,
-    //     changeYear: true,
-    //     autoclose: true,
-    // });
-
-    $("#end_date").datepicker({
-        dateFormat: 'dd-mm-yy',
+    $("#event_start_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+    }); 
+    $("#event_end_date").datepicker({
+        dateFormat: 'yy-mm-dd',
         changeMonth: true,
         changeYear: true,
         autoclose: true,
     });
+
+    $('#event_start_date').change(function(){ 
+        var name = $(this).val();
+        $("#event_end_date").val(name);
+    });
+    
+
+
+    $("#edit_event_start_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+    }); 
+    $("#edit_event_end_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+    });
+
+    $('#edit_event_start_date').change(function(){ 
+        var name = $(this).val();
+        $("#edit_event_end_date").val(name);
+    });
+    
     eventTable();
+    
+    $("#eventForm").validate({
+        rules: {
+            title: "required",
+            type: "required",
+            audience: "required",
+            start_date: "required",
+            end_date: "required",
+        }
+    });
     $('#eventForm').on('submit', function(e){
         e.preventDefault();
         var form = this;
-        $.ajax({
-            url:$(form).attr('action'),
-            method:$(form).attr('method'),
-            data:new FormData(form),
-            processData:false,
-            dataType:'json',
-            contentType:false,
-            beforeSend: function(){
-                 $(form).find('span.error-text').text('');
-            },
-            success: function(data){
-                if (data.code == 0) {
-                    $.each(data.error, function (prefix, val) {
-                        $(form).find('span.' + prefix + '_error').text(val[0]);
-                    });
-                } else {
+
+        let startDate = $("#event_start_date").val();
+        let endDate = $("#event_end_date").val();
+        if (startDate > endDate) {
+            toastr.error("To date should be greater than leave from");
+            $("end_date").val("");
+            
+            return false;
+        }
+        if($("#audience").val()=="2"){
+            $(form).find('span.class_error').text("This field is required");
+        }
+        var eventCheck = $("#eventForm").valid();
+        if (eventCheck === true) {
+            $.ajax({
+                url:$(form).attr('action'),
+                method:$(form).attr('method'),
+                data:new FormData(form),
+                processData:false,
+                dataType:'json',
+                contentType:false,
+                beforeSend: function(){
+                    $(form).find('span.error-text').text('');
+                },
+                success: function(data){
                     if (data.code == 200) {
                         $('#event-table').DataTable().ajax.reload(null, false);
-                        $('.addEvent').modal('hide');
-                        $('.addEvent').find('form')[0].reset();
                         toastr.success(data.message);
+                        window.location.href = eventList;
                     } else {
-                        $('.addEvent').modal('hide');
-                        $('.addEvent').find('form')[0].reset();
                         toastr.error(data.message);
                     }
                 }
-            }
-        });
+            });
+        }
+    });
+    $("#eventEditForm").validate({
+        rules: {
+            title: "required",
+            type: "required",
+            audience: "required",
+            start_date: "required",
+            end_date: "required",
+        }
+    });
+    $('#eventEditForm').on('submit', function(e){
+        e.preventDefault();
+
+        // return false;
+        let startDate = $("#edit_event_start_date").val();
+        let endDate = $("#edit_event_end_date").val();
+        if (startDate > endDate) {
+            toastr.error("To date should be greater than leave from");
+            $("end_date").val("");
+            
+            return false;
+        }
+        if($("#edit_audience").val()=="2"){
+            $(form).find('span.class_error').text("This field is required");
+        }
+        var eventCheck = $("#eventEditForm").valid();
+        if (eventCheck === true) {
+            var form = this;
+            $.ajax({
+                url:$(form).attr('action'),
+                method:$(form).attr('method'),
+                data:new FormData(form),
+                processData:false,
+                dataType:'json',
+                contentType:false,
+                beforeSend: function(){
+                    $(form).find('span.error-text').text('');
+                },
+                success: function(data){
+                    if (data.code == 0) {
+                        $.each(data.error, function (prefix, val) {
+                            $(form).find('span.' + prefix + '_error').text(val[0]);
+                        });
+                    } else {
+                        if (data.code == 200) {
+                            $('#event-table').DataTable().ajax.reload(null, false);
+                            window.location.href = eventList;
+                            toastr.success(data.message);
+                        } else {
+                            toastr.error(data.message);
+                        }
+                    }
+                }
+            });
+        }
     });
     function eventTable() {
         $('#event-table').DataTable({
             processing: true,
             info: true,
-            // dom: 'lBfrtip',
-            dom:"<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            dom: 'lBfrtip',
             buttons: [
                 {
                     extend: 'csv',
@@ -178,23 +249,29 @@ $(function () {
               }
         });
     });
-    // $(document).on('click','#publishEventBtn', function(){
-    //     var event_id = $(this).data('id');
-    //     console.log('event_id',event_id);
-    //     if($(this).prop('checked') == true){
-    //         var value = 1;
-    //     }else{
-    //         var value = 0;
-    //     }
-    //     $.post(eventPublish,{id:event_id,status:value}, function(data){
-    //         if(data.code == 200){
-    //             $('.publishEvent').modal('show');
-    //         }
-    //         $('.publishEvent').modal('show');
-    //     },'json');
-    // });
 
-    // View Event 
+     // get row
+     $(document).on('click', '#editEventBtn', function () {
+        var id = $(this).data('id');
+     console.log('123',id)
+    //  return false;
+        $('.editEvent').find('form')[0].reset();
+        $.post(eventDetails, { id: id }, function (data) {
+            $('.editEvent').find('input[name="id"]').val(data.data.id);
+            $('.editEvent').find('input[name="title"]').val(data.data.title);
+            $('.editEvent').find('select[name="type"]').val(data.data.type);
+            $('.editEvent').find('input[name="start_date"]').val(data.data.start_date);
+            $('.editEvent').find('input[name="end_date"]').val(data.data.end_date);
+            $('.editEvent').find('select[name="audience"]').val(data.data.audience);
+            if(data.data.audience==2)
+            {
+                $('#edit_class').css("display", "Block");
+                $('.editEvent').find('select[name="class"]').val(data.data.class);
+            }
+            $('.editEvent').find('input[name="description"]').val(data.data.description);
+            $('.editEvent').modal('show');
+        }, 'json');
+    });
 
     $(document).on('click','#viewEventBtn', function(){
         var event_id = $(this).data('id');
@@ -202,7 +279,7 @@ $(function () {
         $.post(eventDetails,{id:event_id}, function(data){
             console.log('cc',data)
             $('.viewEvent').find('.title').text(data.data.title);
-            $('.viewEvent').find('.type').text(data.data.type);
+            $('.viewEvent').find('.type').text(data.data.type_name);
             $('.viewEvent').find('.start_date').text(data.data.start_date);
             $('.viewEvent').find('.end_date').text(data.data.end_date);
             if(data.data.audience==1)
@@ -249,7 +326,6 @@ $(function () {
     $('#section').css("display", "none");
     $('select[name=audience]').change(function() {
         var a = $('select[name=audience]').val()
-        console.log("select box",a)
 
         if ( a == "1") {
             $('#class').css("display", "none");
@@ -265,6 +341,21 @@ $(function () {
         }
     });
 
+
+    $('select[name=audience]').change(function() {
+        var a = $('select[name=audience]').val();
+        console.log("select box",a)
+
+        if ( a == "1") {
+            $('#edit_class').css("display", "none");
+        }
+        if ( a == "2") {
+            $('#edit_class').css("display", "BLOCK");
+        }
+        if ( a == "3") {
+            $('#edit_class').css("display", "none");
+        }
+    });
 
     // change branch id in add class,section and type in evvent 
     $("#branch_id").on('change', function (e) {
