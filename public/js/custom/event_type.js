@@ -83,6 +83,10 @@ $(function () {
                     name: 'name'
                 },
                 {
+                    data: 'color',
+                    name: 'color'
+                },
+                {
                     data: 'actions',
                     name: 'actions',
                     orderable: false,
@@ -100,7 +104,7 @@ $(function () {
         $.post(eventTypeDetails, { id: id }, function (data) {
             $('.editEventType').find('input[name="id"]').val(data.data.id);
             $('.editEventType').find('input[name="name"]').val(data.data.name);
-            $('.editEventType').find('select[name="color"]').val(data.data.color);
+            $('.editEventType').find('input[name="color"]').val(data.data.color);
             $('.editEventType').modal('show');
         }, 'json');
         console.log(id);

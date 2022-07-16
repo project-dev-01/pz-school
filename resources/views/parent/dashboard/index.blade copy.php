@@ -427,6 +427,14 @@
                                                     <td>End Date</td>
                                                     <td id="end_date"></td>
                                                 </tr>
+                                                <tr id="start_time_row" style="display:none">
+                                                    <td>Start Time</td>
+                                                    <td id="start_time"></td>
+                                                </tr>
+                                                <tr id="end_time_row" style="display:none">
+                                                    <td>End Time</td>
+                                                    <td id="end_time"></td>
+                                                </tr>
                                                 <tr>
                                                     <td>Audience</td>
                                                     <td id="audience"></td>

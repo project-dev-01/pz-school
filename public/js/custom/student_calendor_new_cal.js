@@ -102,6 +102,16 @@ $(document).ready(function () {
                 $("#type").html(e.event.extendedProps.event_type);
                 $("#start_date").html(e.event.extendedProps.start_date);
                 $("#end_date").html(e.event.extendedProps.end_date);
+                if(e.event.extendedProps.all_day == null) {
+                    $("#start_time").html(e.event.extendedProps.start_time);
+                    $("#end_time").html(e.event.extendedProps.end_time);
+                    $("#start_time_row").show();
+                    $("#end_time_row").show();
+                    console.log('not')
+                } else {
+                    $("#start_time_row").hide();
+                    $("#end_time_row").hide();
+                }
                 $("#audience").html(e.event.extendedProps.class_name);
                 $("#description").html(e.event.extendedProps.remarks);
                 $("#setCurDate").val(setCurDate);

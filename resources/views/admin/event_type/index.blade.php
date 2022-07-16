@@ -54,6 +54,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Event Type Name</th>
+                                    <th>Color</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

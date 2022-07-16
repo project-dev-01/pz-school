@@ -17,7 +17,7 @@
                     </div>
                     <div class="form-group">
                         <label for="color"> Color <span class="text-danger">*</span></label>
-                        <input type="text" id="color" name="color" class="form-control color" value="#4a81d4">
+                        <input type="text" id="color" name="color" class="form-control color" >
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>

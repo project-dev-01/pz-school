@@ -1,5 +1,35 @@
 $(function () {
 
+    $(".timepicker").flatpickr({
+        enableTime:!0,
+        noCalendar:!0,
+        dateFormat:"H:i",
+        time_24hr:!0,
+        defaultDate:"08:30"
+    });
+
+    $(".edittimepicker").flatpickr({
+        enableTime:!0,
+        noCalendar:!0,
+        dateFormat:"H:i",
+        time_24hr:!0,
+    });
+
+    
+
+    // all day checkbox
+    $("#allDay").on("change", function () {
+        if ($(this).is(":checked")) {
+            // $(".time").hide("slow");
+            
+            $('.time').css("display", "none");
+        } else {
+            
+            $('.time').css("display", "block");
+            // $(".time").show("slow");
+        }
+    });
+
     $("#event_start_date").datepicker({
         dateFormat: 'yy-mm-dd',
         changeMonth: true,
@@ -33,6 +63,8 @@ $(function () {
         autoclose: true,
     });
 
+     
+
     $('#edit_event_start_date').change(function(){ 
         var name = $(this).val();
         $("#edit_event_end_date").val(name);
@@ -47,23 +79,52 @@ $(function () {
             audience: "required",
             start_date: "required",
             end_date: "required",
+            start_time: "required",
+            end_time: "required",
         }
     });
     $('#eventForm').on('submit', function(e){
         e.preventDefault();
         var form = this;
 
-        let startDate = $("#event_start_date").val();
-        let endDate = $("#event_end_date").val();
-        if (startDate > endDate) {
-            toastr.error("To date should be greater than leave from");
-            $("end_date").val("");
-            
-            return false;
-        }
         if($("#audience").val()=="2"){
-            $(form).find('span.class_error').text("This field is required");
+            var classes=($("#classes").val()).length;
+            if(classes == 0){
+                $(form).find('span.class_error').text("This field is required.");
+                return false;
+            } else {
+                $(form).find('span.class_error').text("");
+            }
         }
+
+        //Date validate
+        var startDate = $("#event_start_date").val();
+        var endDate = $("#event_end_date").val();
+        if (startDate > endDate) {
+            $(form).find('span.end_date_error').text("End Date should be greater than Start Date.");
+            $("#event_end_date").val("");
+            return false;
+        } else {
+            $(form).find('span.end_date_error').text("");
+        }
+
+        //Time Validation
+        if ($('#allDay').is(":checked")) {
+            $(form).find('span.end_time_error').text("");
+        } else {
+            var startTime = $("#add_start_time").val();
+            var endTime = $("#add_end_time").val();
+            if (startTime > endTime) {
+                $(form).find('span.end_time_error').text("End Time should be greater than Start Time.");
+                $("#add_end_time").val("");
+                return false;
+            } else {
+                $(form).find('span.end_time_error').text("");
+            }
+        }
+        
+
+        
         var eventCheck = $("#eventForm").valid();
         if (eventCheck === true) {
             $.ajax({
@@ -95,22 +156,48 @@ $(function () {
             audience: "required",
             start_date: "required",
             end_date: "required",
+            start_time: "required",
+            end_time: "required",
         }
     });
     $('#eventEditForm').on('submit', function(e){
         e.preventDefault();
 
-        // return false;
-        let startDate = $("#edit_event_start_date").val();
-        let endDate = $("#edit_event_end_date").val();
-        if (startDate > endDate) {
-            toastr.error("To date should be greater than leave from");
-            $("end_date").val("");
-            
-            return false;
-        }
+
         if($("#edit_audience").val()=="2"){
-            $(form).find('span.class_error').text("This field is required");
+            var classes=($("#edit_classes").val()).length;
+            if(classes == 0){
+                $(form).find('span.class_error').text("This field is required.");
+                return false;
+            } else {
+                $(form).find('span.class_error').text("");
+            }
+        }
+
+        //Date validate
+        var startDate = $("#edit_event_start_date").val();
+        var endDate = $("#edit_event_end_date").val();
+        if (startDate > endDate) {
+            $(form).find('span.end_date_error').text("End Date should be greater than Start Date.");
+            $("#edit_event_end_date").val("");
+            return false;
+        } else {
+            $(form).find('span.end_date_error').text("");
+        }
+
+        //Time Validation
+        if ($('#allDay').is(":checked")) {
+            $(form).find('span.end_time_error').text("");
+        } else {
+            var startTime = $("#edit_start_time").val();
+            var endTime = $("#edit_end_time").val();
+            if (startTime > endTime) {
+                $(form).find('span.end_time_error').text("End Time should be greater than Start Time.");
+                $("#edit_end_time").val("");
+                return false;
+            } else {
+                $(form).find('span.end_time_error').text("");
+            }
         }
         var eventCheck = $("#eventEditForm").valid();
         if (eventCheck === true) {
@@ -253,7 +340,6 @@ $(function () {
      // get row
      $(document).on('click', '#editEventBtn', function () {
         var id = $(this).data('id');
-     console.log('123',id)
     //  return false;
         $('.editEvent').find('form')[0].reset();
         $.post(eventDetails, { id: id }, function (data) {

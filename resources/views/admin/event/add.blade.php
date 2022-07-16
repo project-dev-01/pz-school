@@ -61,7 +61,7 @@
                             <div class="col-md-4" id="class">
                                 <div class="form-group">
                                     <label for="class">Class</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2"  name="class[]" multiple="multiple" data-placeholder="Choose ...">
+                                    <select class="form-control select2-multiple" data-toggle="select2"  name="class[]" id="classes" multiple="multiple" data-placeholder="Choose ...">
                                         @foreach($class as $cla)
                                             <option value="{{$cla['id']}}">{{$cla['name']}}</option>
                                         @endforeach
@@ -86,6 +86,7 @@
                                         </div>
                                         <input type="text" class="form-control" name="start_date" id="event_start_date" placeholder="YYYY/MM/DD">
                                     </div>
+                                    <span class="text-danger error-text start_date_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -99,6 +100,29 @@
                                         </div>
                                         <input type="text" class="form-control" name="end_date" id="event_end_date" placeholder="YYYY/MM/DD">
                                     </div>
+                                    <span class="text-danger error-text end_date_error"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group mt-3">
+                                    <div class="custom-control custom-checkbox form-check">
+                                        <input type="checkbox" class="custom-control-input" name="all_day" id="allDay" checked>
+                                        <label class="custom-control-label" for="allDay">All Day</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 time" style="display:none">
+                                <div class="form-group">
+                                    <label>Start Time</label>
+                                    <input type="text"  class="form-control timepicker" name="start_time" id="add_start_time">
+                                        <span class="text-danger error-text start_time_error"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3 time" style="display:none">
+                                <div class="form-group">
+                                    <label>End Time</label>
+                                    <input type="text"  class="form-control timepicker" name="end_time" id="add_end_time">
+                                        <span class="text-danger error-text end_time_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">

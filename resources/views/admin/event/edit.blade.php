@@ -66,7 +66,7 @@
                             <div class="col-md-4" id="edit_class" {{$aud}}>
                                 <div class="form-group">
                                     <label for="class">Class</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2"  name="class[]" multiple="multiple" data-placeholder="Choose ...">
+                                    <select class="form-control select2-multiple" data-toggle="select2"  name="class[]" id="edit_classes" multiple="multiple" data-placeholder="Choose ...">
                                         @forelse($class as $cla)
                                             @php
                                             $selected = "";
@@ -103,6 +103,7 @@
                                         <input type="text" placeholder="YYYY/MM/DD" class="form-control" name="start_date" id="edit_event_start_date" value="{{$event['start_date']}}" placeholder="YYYY/MM/DD">
                                     </div>
                                 </div>
+                                <span class="text-danger error-text start_date_error"></span>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -113,8 +114,31 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" placeholder="YYYY/MM/DD" class="form-control" name="end_date" id="edit_event_end_date" value="{{$event['end_date']}}"value="{{$event['title']}}">
+                                        <input type="text" placeholder="YYYY/MM/DD" class="form-control" name="end_date" id="edit_event_end_date" value="{{$event['end_date']}}">
                                     </div>
+                                    <span class="text-danger error-text end_date_error"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group mt-3">
+                                    <div class="custom-control custom-checkbox form-check">
+                                        <input type="checkbox" class="custom-control-input" name="all_day" id="allDay" {{$event['all_day'] == "on" ? 'checked':''}}>
+                                        <label class="custom-control-label" for="allDay">All Day</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 time" {{$event['all_day'] == "on" ? 'style=display:none':''}}>
+                                <div class="form-group">
+                                    <label>Start Time</label>
+                                    <input type="text"  class="form-control edittimepicker" name="start_time" id="edit_start_time" value="{{$event['end_time']}}">
+                                        <span class="text-danger error-text start_time_error"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3 time" {{$event['all_day'] == "on" ? 'style=display:none':''}}>
+                                <div class="form-group">
+                                    <label>End Time</label>
+                                    <input type="text"  class="form-control edittimepicker" name="end_time" id="edit_end_time" value="{{$event['end_time']}}">
+                                        <span class="text-danger error-text end_time_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">

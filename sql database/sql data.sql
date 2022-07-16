@@ -46,3 +46,6 @@ ALTER TABLE `timetable_class` ADD `bulk_id` INT NULL AFTER `day`;
 
 
 ALTER TABLE `calendors` ADD `bulk_id` INT NULL AFTER `time_table_id`;
+
+
+ALTER TABLE `event_types` ADD `color` VARCHAR(255) NOT NULL AFTER `name`;

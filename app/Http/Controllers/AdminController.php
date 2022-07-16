@@ -670,6 +670,9 @@ class AdminController extends Controller
         $response = Helper::GetMethod(config('constants.api.event_type_list'));
         return DataTables::of($response['data'])
             ->addIndexColumn()
+            ->addColumn('color', function ($row) {
+                return '<span style="color:' . $row['color'] . '" >' . $row['color'] . '</span>';
+            })
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
                                 <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editEventTypeBtn"><i class="fe-edit"></i></a>
@@ -677,7 +680,7 @@ class AdminController extends Controller
                         </div>';
             })
 
-            ->rawColumns(['actions'])
+            ->rawColumns(['color','actions'])
             ->make(true);
     }
     public function getEventTypeDetails(Request $request)
@@ -773,9 +776,13 @@ class AdminController extends Controller
             'event_class' => $class,
             'class' => $request->class,
             'section' => $request->section,
+            'all_day' => $request->all_day,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
             'description' => $request->description
         ];
         $response = Helper::PostMethod(config('constants.api.event_add'), $data);
+        // dd($response);
         return $response;
     }
 
@@ -843,6 +850,9 @@ class AdminController extends Controller
             'event_class' => $class,
             'class' => $request->class,
             'section' => $request->section,
+            'all_day' => $request->all_day,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
             'description' => $request->description
         ];
         $response = Helper::PostMethod(config('constants.api.event_update'), $data);
