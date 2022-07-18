@@ -24,6 +24,7 @@ class CreateEventsTable extends Migration
             $table->date('end_date');
             $table->time('start_time')->nullable();
             $table->time('end_time')->nullable();
+            $table->string('all_day')->nullable();
             $table->tinyInteger('status');            
             $table->string('created_by');
             $table->timestamps();

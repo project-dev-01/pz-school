@@ -49,3 +49,8 @@ ALTER TABLE `calendors` ADD `bulk_id` INT NULL AFTER `time_table_id`;
 
 
 ALTER TABLE `event_types` ADD `color` VARCHAR(255) NOT NULL AFTER `name`;
+
+
+ALTER TABLE `events` ADD `start_time` TIME NULL AFTER `end_date`;
+ALTER TABLE `events` ADD `end_time` TIME NULL AFTER `start_time`;
+ALTER TABLE `events` ADD `all_day` VARCHAR(255) NULL AFTER `end_time`;
