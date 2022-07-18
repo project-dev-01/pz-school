@@ -1,7 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Dashboard')
 @section('content')
-<!-- <link href="{{ asset('css/custom/calendar.css') }}" rel="stylesheet" type="text/css" /> -->
+<!-- <link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" /> -->
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -279,7 +279,7 @@
                                                                 <div class="d-sm-flex">
                                                                     <!-- <div>
                                                                             <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="{{ route('parent.homework')}}" role="button" aria-haspopup="false" aria-expanded="false">
-                                                                                <img src="{{ Session::get('picture') && asset('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" alt="user-image" class="rounded-circle admin_picture">
+                                                                                <img src="{{ Session::get('picture') && asset('public/users/images/'.Session::get('picture')) ? asset('public/users/images/'.Session::get('picture')) : asset('public/images/users/default.jpg') }}" alt="user-image" class="rounded-circle admin_picture">
                                                                             </a>
                                                                         </div> -->
                                                                     <div class="mt-3 mt-sm-0">
@@ -544,17 +544,17 @@
     // todo list js
     var readUpdateTodoUrl = "{{ config('constants.api.read_update_todo') }}";
     var getAssignClassUrl = "{{ config('constants.api.get_assign_class') }}";
-    var pathDownloadFileUrl = "{{ asset('images/todolist/') }}";
+    var pathDownloadFileUrl = "{{ asset('public/images/todolist/') }}";
     var toDoCommentsUrl = "{{ config('constants.api.to_do_comments') }}";
     var getTestScore = "{{ config('constants.api.get_test_score_dashboard') }}";
 
     var UserName = "{{ Session::get('name') }}";
     var getScheduleExamDetailsUrl = "{{ config('constants.api.get_schedule_exam_details_by_student') }}";
 </script>
-<!-- <script src="{{ asset('js/custom/student_calendor.js') }}"></script> -->
-<!-- <script src="{{ asset('js/custom/student_dashboard.js') }}"></script> -->
-<!-- <script src="{{ asset('js/custom/student_calendor_new.js') }}"></script> -->
-<script src="{{ asset('js/custom/student_calendor_new_cal.js') }}"></script>
+<!-- <script src="{{ asset('public/js/custom/student_calendor.js') }}"></script> -->
+<!-- <script src="{{ asset('public/js/custom/student_dashboard.js') }}"></script> -->
+<!-- <script src="{{ asset('public/js/custom/student_calendor_new.js') }}"></script> -->
+<script src="{{ asset('public/js/custom/student_calendor_new_cal.js') }}"></script>
 <!-- to do list -->
-<script src="{{ asset('js/custom/admin/dashboard.js') }}"></script>
+<script src="{{ asset('public/js/custom/admin/dashboard.js') }}"></script>
 @endsection

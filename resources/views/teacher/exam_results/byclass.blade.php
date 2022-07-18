@@ -192,7 +192,7 @@
         var getbySubjectAllstd = "{{ config('constants.api.all_bysubject_list') }}";
         //
         // default image test
-        var defaultImg = "{{ asset('images/users/default.jpg') }}";
+        var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
     </script>
-    <script src="{{ asset('js/custom/byclass.js') }}"></script>
+    <script src="{{ asset('public/js/custom/byclass.js') }}"></script>
     @endsection

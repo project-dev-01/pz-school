@@ -61,5 +61,5 @@
     var designationDetails = "{{ route('admin.designation.details') }}";
     var designationDelete = "{{ route('admin.designation.delete') }}";
 </script>
-<script src="{{ asset('js/custom/designation.js') }}"></script>
+<script src="{{ asset('public/js/custom/designation.js') }}"></script>
 @endsection

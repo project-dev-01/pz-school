@@ -132,7 +132,7 @@
 <script>
     var getAttendanceList = "{{ config('constants.api.get_attendance_list') }}";
     // default image test
-    var defaultImg = "{{ asset('images/users/default.jpg') }}";
+    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
 </script>
-<script src="{{ asset('js/custom/attendance_list.js') }}"></script>
+<script src="{{ asset('public/js/custom/attendance_list.js') }}"></script>
 @endsection

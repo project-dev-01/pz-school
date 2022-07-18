@@ -28,28 +28,28 @@
                 <!-- logo -->
                 @if(Session::get('role_id') == '1')
                 <div class="tt-logo">
-                    <!-- <a href="{{ route('super_admin.forum.index') }}"><img src="{{ asset('forum/build/images/logo-sm-dark.png') }}" alt=""></a> -->
-                    <a href="{{ route('super_admin.forum.rolls-chooseforum') }}"><img src="{{ asset('forum/build/images/logo-sm-dark.png') }}" alt=""></a>
+                    <!-- <a href="{{ route('super_admin.forum.index') }}"><img src="{{ asset('public/forum/build/images/logo-sm-dark.png') }}" alt=""></a> -->
+                    <a href="{{ route('super_admin.forum.rolls-chooseforum') }}"><img src="{{ asset('public/forum/build/images/logo-sm-dark.png') }}" alt=""></a>
                 </div>
                 @elseif(Session::get('role_id') == '2')
                 <div class="tt-logo">
-                    <a href="{{ route('admin.forum.index') }}"><img src="{{ asset('forum/build/images/logo-sm-dark.png') }}" alt=""></a>
+                    <a href="{{ route('admin.forum.index') }}"><img src="{{ asset('public/forum/build/images/logo-sm-dark.png') }}" alt=""></a>
                 </div>
                 @elseif(Session::get('role_id') == '3')
                 <div class="tt-logo">
-                    <a href="{{ route('staff.forum.index') }}"><img src="{{ asset('forum/build/images/logo-sm-dark.png') }}" alt=""></a>
+                    <a href="{{ route('staff.forum.index') }}"><img src="{{ asset('public/forum/build/images/logo-sm-dark.png') }}" alt=""></a>
                 </div>
                 @elseif(Session::get('role_id') == '4')
                 <div class="tt-logo">
-                    <a href="{{ route('teacher.forum.index') }}"><img src="{{ asset('forum/build/images/logo-sm-dark.png') }}" alt=""></a>
+                    <a href="{{ route('teacher.forum.index') }}"><img src="{{ asset('public/forum/build/images/logo-sm-dark.png') }}" alt=""></a>
                 </div>
                 @elseif(Session::get('role_id') == '5')
                 <div class="tt-logo">
-                    <a href="{{ route('parent.forum.index') }}"><img src="{{ asset('forum/build/images/logo-sm-dark.png') }}" alt=""></a>
+                    <a href="{{ route('parent.forum.index') }}"><img src="{{ asset('public/forum/build/images/logo-sm-dark.png') }}" alt=""></a>
                 </div>
                 @elseif(Session::get('role_id') == '6')
                 <div class="tt-logo">
-                    <a href="{{ route('student.forum.index') }}"><img src="{{ asset('forum/build/images/logo-sm-dark.png') }}" alt=""></a>
+                    <a href="{{ route('student.forum.index') }}"><img src="{{ asset('public/forum/build/images/logo-sm-dark.png') }}" alt=""></a>
                 </div>
                 @endif
                 <!-- /logo -->

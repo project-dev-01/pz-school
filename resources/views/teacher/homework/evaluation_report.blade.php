@@ -247,5 +247,5 @@
     var sectionByClass = "{{ route('teacher.section_by_class') }}";
     var subjectByClass = "{{ route('teacher.subject_by_class') }}";
 </script>
-<script src="{{ asset('js/custom/homework.js') }}"></script>
+<script src="{{ asset('public/js/custom/homework.js') }}"></script>
 @endsection

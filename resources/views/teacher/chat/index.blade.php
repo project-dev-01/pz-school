@@ -25,7 +25,7 @@
                 <div class="card-body">
 
                     <div class="media mb-3">
-                        <img src="{{ asset('images/users/user-1.jpg') }}" class="mr-2 rounded-circle" height="42" alt="Brandon Smith">
+                        <img src="{{ asset('public/images/users/user-1.jpg') }}" class="mr-2 rounded-circle" height="42" alt="Brandon Smith">
                         <div class="media-body">
                             <h5 class="mt-0 mb-0 font-15">
                                 <a href="javascript: void(0);" class="text-reset">Geneva McKnight</a>(Teacher)
@@ -71,7 +71,7 @@
                             <div data-simplebar style="max-height: 375px">
                                 <a href="javascript:void(0);" class="text-body">
                                     <div class="media p-2">
-                                        <img src="{{ asset('images/users/user-2.jpg') }}" class="mr-2 rounded-circle" height="42" alt="Brandon Smith" />
+                                        <img src="{{ asset('public/images/users/user-2.jpg') }}" class="mr-2 rounded-circle" height="42" alt="Brandon Smith" />
                                         <div class="media-body">
                                             <h5 class="mt-0 mb-0 font-14">
                                                 <span class="float-right text-muted font-weight-normal font-12">4:30am</span>
@@ -87,7 +87,7 @@
 
                                 <a href="javascript:void(0);" class="text-body">
                                     <div class="media p-2">
-                                        <img src="{{ asset('images/users/user-5.jpg') }}" class="mr-2 rounded-circle" height="42" alt="James Z" />
+                                        <img src="{{ asset('public/images/users/user-5.jpg') }}" class="mr-2 rounded-circle" height="42" alt="James Z" />
                                         <div class="media-body">
                                             <h5 class="mt-0 mb-0 font-14">
                                                 <span class="float-right text-muted font-weight-normal font-12">5:30am</span>
@@ -102,7 +102,7 @@
 
                                 <a href="javascript:void(0);" class="text-body">
                                     <div class="media p-2">
-                                        <img src="{{ asset('images/users/user-7.jpg') }}" class="mr-2 rounded-circle" height="42" alt="Maria C" />
+                                        <img src="{{ asset('public/images/users/user-7.jpg') }}" class="mr-2 rounded-circle" height="42" alt="Maria C" />
                                         <div class="media-body">
                                             <h5 class="mt-0 mb-0 font-14">
                                                 <span class="float-right text-muted font-weight-normal font-12">Thu</span>
@@ -130,7 +130,7 @@
             <div class="card">
                 <div class="card-body py-2 px-3 border-bottom border-light">
                     <div class="media py-1">
-                        <img src="{{ asset('images/users/user-5.jpg') }}" class="mr-2 rounded-circle" height="36" alt="Brandon Smith">
+                        <img src="{{ asset('public/images/users/user-5.jpg') }}" class="mr-2 rounded-circle" height="36" alt="Brandon Smith">
                         <div class="media-body">
                             <h5 class="mt-0 mb-0 font-15">
                                 <a href="javascript: void(0);" class="text-reset">James Zavel</a>(Parent)
@@ -150,7 +150,7 @@
                     <ul class="conversation-list" data-simplebar style="max-height: 460px">
                         <li class="clearfix">
                             <div class="chat-avatar">
-                                <img src="{{ asset('images/users/user-5.jpg') }}" class="rounded" alt="James Z" />
+                                <img src="{{ asset('public/images/users/user-5.jpg') }}" class="rounded" alt="James Z" />
                                 <i>10:00</i>
                             </div>
                             <div class="conversation-text">
@@ -173,7 +173,7 @@
                         </li>
                         <li class="clearfix odd">
                             <div class="chat-avatar">
-                                <img src="{{ asset('images/users/user-1.jpg') }}" class="rounded" alt="Geneva M" />
+                                <img src="{{ asset('public/images/users/user-1.jpg') }}" class="rounded" alt="Geneva M" />
                                 <i>10:01</i>
                             </div>
                             <div class="conversation-text">
@@ -196,7 +196,7 @@
                         </li>
                         <li class="clearfix">
                             <div class="chat-avatar">
-                                <img src="{{ asset('images/users/user-5.jpg') }}" class="rounded" alt="James Z" />
+                                <img src="{{ asset('public/images/users/user-5.jpg') }}" class="rounded" alt="James Z" />
                                 <i>10:01</i>
                             </div>
                             <div class="conversation-text">
@@ -219,7 +219,7 @@
                         </li>
                         <li class="clearfix odd">
                             <div class="chat-avatar">
-                                <img src="{{ asset('images/users/user-1.jpg') }}" class="rounded" alt="Geneva M" />
+                                <img src="{{ asset('public/images/users/user-1.jpg') }}" class="rounded" alt="Geneva M" />
                                 <i>10:02</i>
                             </div>
                             <div class="conversation-text">
@@ -242,7 +242,7 @@
                         </li>
                         <li class="clearfix">
                             <div class="chat-avatar">
-                                <img src="{{ asset('images/users/user-5.jpg') }}" alt="James Z" class="rounded" />
+                                <img src="{{ asset('public/images/users/user-5.jpg') }}" alt="James Z" class="rounded" />
                                 <i>10:02</i>
                             </div>
                             <div class="conversation-text">
@@ -265,7 +265,7 @@
                         </li>
                         <li class="clearfix odd">
                             <div class="chat-avatar">
-                                <img src="{{ asset('images/users/user-1.jpg') }}" alt="Geneva M" class="rounded" />
+                                <img src="{{ asset('public/images/users/user-1.jpg') }}" alt="Geneva M" class="rounded" />
                                 <i>10:03</i>
                             </div>
                             <div class="conversation-text">
@@ -288,7 +288,7 @@
                         </li>
                         <li class="clearfix">
                             <div class="chat-avatar">
-                                <img src="{{ asset('images/users/user-5.jpg') }}" alt="James Z" class="rounded" />
+                                <img src="{{ asset('public/images/users/user-5.jpg') }}" alt="James Z" class="rounded" />
                                 <i>10:04</i>
                             </div>
                             <div class="conversation-text">
@@ -311,7 +311,7 @@
                         </li>
                         <li class="clearfix">
                             <div class="chat-avatar">
-                                <img src="{{ asset('images/users/user-5.jpg') }}" alt="James Z" class="rounded" />
+                                <img src="{{ asset('public/images/users/user-5.jpg') }}" alt="James Z" class="rounded" />
                                 <i>10:04</i>
                             </div>
                             <div class="conversation-text">

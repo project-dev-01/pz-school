@@ -17,7 +17,7 @@
                             </svg>
                         </span>
                     </a>
-                    <script src="{{ asset('forum/build/js/bundle.js') }}"></script>
+                    <script src="{{ asset('public/forum/build/js/bundle.js') }}"></script>
                     <svg width="0" height="0" class="hidden">
                         <symbol aria-hidden="true" data-prefix="fab" data-icon="facebook-f" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 512" id="facebook-f-brands">
                             <path fill="currentColor" d="M215.8 85H264V3.6C255.7 2.5 227.1 0 193.8 0 124.3 0 76.7 42.4 76.7 120.3V192H0v91h76.7v229h94V283h73.6l11.7-91h-85.3v-62.7c0-26.3 7.3-44.3 45.1-44.3z"></path>
@@ -468,12 +468,12 @@
               -->
                     <!-- Init js -->
                     <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
-                    <script src="{{ asset('js/custom/select2.min.js')}}"></script>
+                    <script src="{{ asset('public/js/custom/select2.min.js')}}"></script>
 
-                    <script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
-                    <script src="{{ asset('toastr/toastr.min.js') }}"></script>
-                    <script src="{{ asset('js/custom/ckeditor.js') }}"></script>
-                    <script src="{{asset('js/custom/bootstrap-tokenfield.js')}}"></script>
+                    <script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+                    <script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+                    <script src="{{ asset('public/js/custom/ckeditor.js') }}"></script>
+                    <script src="{{asset('public/js/custom/bootstrap-tokenfield.js')}}"></script>
 
 
 
@@ -487,7 +487,7 @@
                     </script>
                   
                     
-                    <script src="{{ asset('js/validation/validation.js') }}"></script>
+                    <script src="{{ asset('public/js/validation/validation.js') }}"></script>
 
                     <script>
                         // forum count
@@ -512,5 +512,5 @@
 
                         // default image test
 
-                        var defaultImg = "{{ asset('images/users/default.jpg') }}";
+                        var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
                     </script>

@@ -1,7 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Subjects')
 @section('css')
-<link href="{{ asset('libs/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/libs/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -63,8 +63,8 @@
 <!-- container -->
 @endsection
 @section('scripts')
-<script src="{{ asset('libs/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
-<script src="{{ asset('js/pages/form-pickers.init.js') }}"></script>
+<script src="{{ asset('public/libs/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
+<script src="{{ asset('public/js/pages/form-pickers.init.js') }}"></script>
 
 <script>
     var subjectsAddUrl = "{{ config('constants.api.subject_add') }}";
@@ -74,5 +74,5 @@
 
     var subjectsList = "{{ route('admin.subjects.list') }}";
 </script>
-<script src="{{ asset('js/custom/subjects.js') }}"></script>
+<script src="{{ asset('public/js/custom/subjects.js') }}"></script>
 @endsection

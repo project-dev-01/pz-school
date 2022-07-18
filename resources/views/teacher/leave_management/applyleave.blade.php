@@ -208,5 +208,5 @@
 <script>
     var StaffLeaveList = "{{ route('teacher.leave_management.list') }}";
 </script>
-<script src="{{ asset('js/custom/staff_apply_leave.js') }}"></script>
+<script src="{{ asset('public/js/custom/staff_apply_leave.js') }}"></script>
 @endsection

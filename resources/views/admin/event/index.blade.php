@@ -1,8 +1,8 @@
 @extends('layouts.admin-layout')
 @section('title','Event')
 @section('css')
-<link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
-<link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/libs/dropzone/min/dropzone.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/libs/dropify/css/dropify.min.css') }}">
 <style>
     .datepicker{ z-index:99999 !important; }
 </style>
@@ -77,9 +77,9 @@
     var eventPublish = "{{ route('admin.event.publish') }}";
     
 </script>
-<script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
-<script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
-<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
-<script src="{{ asset('js/custom/event.js') }}"></script>
+<script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>
+<script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>
+<script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
+<script src="{{ asset('public/js/custom/event.js') }}"></script>
 
 @endsection

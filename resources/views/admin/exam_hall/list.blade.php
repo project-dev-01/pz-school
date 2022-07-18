@@ -65,5 +65,5 @@
     var examHallDetails = "{{ route('admin.exam_hall.details') }}";
     var examHallDelete = "{{ route('admin.exam_hall.delete') }}";
 </script>
-<script src="{{ asset('js/custom/exam_hall.js') }}"></script>
+<script src="{{ asset('public/js/custom/exam_hall.js') }}"></script>
 @endsection

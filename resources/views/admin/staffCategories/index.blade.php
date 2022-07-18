@@ -66,6 +66,6 @@
     var staffcategoryDelete = "{{ route('admin.staffcategory.delete') }}";
 </script>
 
-<script src="{{ asset('js/custom/staffcategory.js') }}"></script>
+<script src="{{ asset('public/js/custom/staffcategory.js') }}"></script>
 
 @endsection

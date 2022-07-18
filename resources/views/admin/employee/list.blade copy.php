@@ -116,9 +116,9 @@
     // employee
     var employeeList = "{{ route('admin.employee.list') }}";
     var employeeDelete = "{{ route('admin.employee.delete') }}";
-    var employeeImg = "{{ asset('images/staffs/') }}";
+    var employeeImg = "{{ asset('public/images/staffs/') }}";
     // default image test
-    var defaultImg = "{{ asset('images/users/default.jpg') }}";
+    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
 </script>
-<script src="{{ asset('js/custom/employee.js') }}"></script>
+<script src="{{ asset('public/js/custom/employee.js') }}"></script>
 @endsection

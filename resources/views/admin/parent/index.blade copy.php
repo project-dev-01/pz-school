@@ -102,5 +102,5 @@
     var parentList = "{{ route('admin.parent.list') }}";
     var parentDelete = "{{ route('admin.parent.delete') }}";
 </script>
-<script src="{{ asset('js/custom/parent.js') }}"></script>
+<script src="{{ asset('public/js/custom/parent.js') }}"></script>
 @endsection

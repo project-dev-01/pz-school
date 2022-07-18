@@ -370,7 +370,7 @@
     var getSubjectMarkStatus = "{{ config('constants.api.get_subject_mark_status') }}";
 
     // default image test
-    var defaultImg = "{{ asset('images/users/default.jpg') }}";
+    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
 </script>
-<script src="{{ asset('js/custom/testresult.js') }}"></script>
+<script src="{{ asset('public/js/custom/testresult.js') }}"></script>
 @endsection

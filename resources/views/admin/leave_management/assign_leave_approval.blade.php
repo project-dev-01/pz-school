@@ -102,13 +102,13 @@
     <!-- container -->
     @endsection
     @section('scripts')
-    <script src="{{ asset('libs/footable/footable.all.min.js') }}"></script>
-    <script src="{{ asset('js/pages/foo-tables.init.js') }}"></script>
+    <script src="{{ asset('public/libs/footable/footable.all.min.js') }}"></script>
+    <script src="{{ asset('public/js/pages/foo-tables.init.js') }}"></script>
 
     <script>
         var assignLeaveApprovalUrl = "{{ config('constants.api.assign_leave_approval') }}";
     </script>
-    <!-- <script src="{{ asset('js/custom/sections.js') }}"></script> -->
-    <script src="{{ asset('js/custom/assign_leave_approval.js') }}"></script>
+    <!-- <script src="{{ asset('public/js/custom/sections.js') }}"></script> -->
+    <script src="{{ asset('public/js/custom/assign_leave_approval.js') }}"></script>
 
     @endsection

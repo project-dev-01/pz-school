@@ -647,12 +647,12 @@
     var getShortTest = "{{ config('constants.api.get_short_test') }}";
     // student leave apply
     var getStudentLeave = "{{ config('constants.api.get_student_leaves') }}";
-    var imgurl = "{{ asset('teacher/student-leaves/') }}";
+    var imgurl = "{{ asset('public/teacher/student-leaves/') }}";
     var teacher_leave_remarks_updated = "{{ config('constants.api.teacher_leave_approve') }}";
     // default image test
-    var defaultImg = "{{ asset('images/users/default.jpg') }}";
-    var studentImg = "{{ asset('users/images/') }}";
+    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+    var studentImg = "{{ asset('public/users/images/') }}";
 </script>
-<script src="{{ asset('js/custom/classroom.js') }}"></script>
-<script src="{{ asset('js/custom/short-test.js') }}"></script>
+<script src="{{ asset('public/js/custom/classroom.js') }}"></script>
+<script src="{{ asset('public/js/custom/short-test.js') }}"></script>
 @endsection

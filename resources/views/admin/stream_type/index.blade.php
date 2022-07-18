@@ -65,6 +65,6 @@
     var streamTypeDelete = "{{ route('admin.stream_type.delete') }}";
 </script>
 
-<script src="{{ asset('js/custom/stream_type.js') }}"></script>
+<script src="{{ asset('public/js/custom/stream_type.js') }}"></script>
 
 @endsection

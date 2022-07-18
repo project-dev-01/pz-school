@@ -276,7 +276,7 @@
                     <!-- <svg class="tt-icon">
                         <use xlink:href="#icon-ava-n"></use>
                     </svg>-->
-                    <img src="{{ asset('images/users/default.jpg') }}" class="mr-2 rounded-circle" height="40" />
+                    <img src="{{ asset('public/images/users/default.jpg') }}" class="mr-2 rounded-circle" height="40" />
                     {{ $value['user_name'] }}
                 </div>
                 <div class="tt-col-description">
@@ -346,7 +346,7 @@
 </main>
 @endsection
 @section('scripts')
-<script src="{{ asset('js/custom/forum-createpost.js') }}"></script>
+<script src="{{ asset('public/js/custom/forum-createpost.js') }}"></script>
 <script>
     
     function SimpleUploadAdapterPlugin(editor) {

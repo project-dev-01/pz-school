@@ -68,5 +68,5 @@
 
     var classList = "{{ route('admin.classes.list') }}";
 </script>
-<script src="{{ asset('js/custom/classes.js') }}"></script>
+<script src="{{ asset('public/js/custom/classes.js') }}"></script>
 @endsection

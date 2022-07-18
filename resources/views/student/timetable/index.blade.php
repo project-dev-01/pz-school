@@ -121,6 +121,6 @@
 <script>
     var sectionByClass = "{{ route('admin.section_by_class') }}";
 </script>
-<script src="{{ asset('js/custom/timetable.js') }}"></script>
+<script src="{{ asset('public/js/custom/timetable.js') }}"></script>
 
 @endsection

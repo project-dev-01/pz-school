@@ -433,5 +433,5 @@
 <script>
     var employeeListShow = "{{ route('admin.listemployee') }}";
 </script>
-<script src="{{ asset('js/custom/employee.js') }}"></script>
+<script src="{{ asset('public/js/custom/employee.js') }}"></script>
 @endsection

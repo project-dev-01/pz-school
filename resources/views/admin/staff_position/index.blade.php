@@ -65,6 +65,6 @@
     var staffPositionDelete = "{{ route('admin.staff_position.delete') }}";
 </script>
 
-<script src="{{ asset('js/custom/staff_position.js') }}"></script>
+<script src="{{ asset('public/js/custom/staff_position.js') }}"></script>
 
 @endsection

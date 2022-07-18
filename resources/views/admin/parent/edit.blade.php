@@ -1,10 +1,10 @@
 @extends('layouts.admin-layout')
 @section('title','Edit Guardian')
 @section('css')
-<link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
-<link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
-<link rel="stylesheet" href="{{ asset('mobile-country/css/intlTelInput.css') }}">
-<link rel="stylesheet" href="{{ asset('country/css/countrySelect.css') }}">
+<link rel="stylesheet" href="{{ asset('public/libs/dropzone/min/dropzone.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/libs/dropify/css/dropify.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/mobile-country/css/intlTelInput.css') }}">
+<link rel="stylesheet" href="{{ asset('public/country/css/countrySelect.css') }}">
 <style>
     .switch {
         height: 24px;
@@ -230,9 +230,9 @@
                 <div class="row">
                     <div class="col-xl-3">
                         @if($parent['photo'])
-                        <img src="{{ asset('users/images//') }}/{{$parent['photo']}}" alt="" class="img-fluid mx-auto d-block rounded user-img">
+                        <img src="{{ asset('public/users/images//') }}/{{$parent['photo']}}" alt="" class="img-fluid mx-auto d-block rounded user-img">
                         @else
-                        <img src="{{ asset('images/users/default.jpg') }}" alt="" class="img-fluid mx-auto d-block rounded">
+                        <img src="{{ asset('public/images/users/default.jpg') }}" alt="" class="img-fluid mx-auto d-block rounded">
                         @endif
 
                     </div> <!-- end col -->
@@ -341,7 +341,7 @@
                                             <div class="col-lg-3">
                                                 <div class="mt-3">
                                                     <input type="hidden" name="old_photo" id="oldPhoto" value="{{ $parent['photo'] }}" />
-                                                    <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ $parent['photo'] && asset('users/images/').'/'.$parent['photo'] ? asset('users/images/').'/'.$parent['photo'] : asset('images/users/default.jpg') }}" />
+                                                    <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ $parent['photo'] && asset('public/users/images/').'/'.$parent['photo'] ? asset('public/users/images/').'/'.$parent['photo'] : asset('public/images/users/default.jpg') }}" />
                                                     <p class="text-muted text-center mt-2 mb-0">Photo</p>
                                                 </div>
                                             </div>
@@ -354,9 +354,9 @@
                                                 <div class="containers-img">
                                                     <div class="imageWrapper">
                                                     @if($parent['photo'])
-                                                        <img src="{{ asset('users/images//') }}/{{$parent['photo']}}" alt="" class="image">
+                                                        <img src="{{ asset('public/users/images//') }}/{{$parent['photo']}}" alt="" class="image">
                                                     @else
-                                                        <img src="{{ asset('images/users/default.jpg') }}" alt="" class="image">
+                                                        <img src="{{ asset('public/images/users/default.jpg') }}" alt="" class="image">
                                                     @endif
                                                     </div>
                                                 </div>
@@ -715,9 +715,9 @@
                                         <div class="row">
                                             <div class="col-sm-4 text-center">
                                                 @if($child['photo'])
-                                                <img src="{{ asset('users/images//') }}/{{$child['photo']}}" alt="" class="avatar-xl">
+                                                <img src="{{ asset('public/users/images//') }}/{{$child['photo']}}" alt="" class="avatar-xl">
                                                 @else
-                                                <img src="{{ asset('images/users/default.jpg') }}" alt="" class="avatar-xl">
+                                                <img src="{{ asset('public/images/users/default.jpg') }}" alt="" class="avatar-xl">
                                                 @endif
                                             </div>
                                             <div class="col-sm-8">
@@ -748,8 +748,8 @@
 @endsection
 @section('scripts')
 
-<script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
-<script src="{{ asset('country/js/countrySelect.js') }}"></script>
+<script src="{{ asset('public/mobile-country/js/intlTelInput.js') }}"></script>
+<script src="{{ asset('public/country/js/countrySelect.js') }}"></script>
 <script>
     var input = document.querySelector("#mobile_no");
     intlTelInput(input, {
@@ -778,9 +778,9 @@
     var roomByHostel = "{{ route('admin.room_by_hostel') }}";
     var indexAdmission = "{{ route('admin.admission') }}";
 </script>
-<script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
-<script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
-<script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
-<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
-<script src="{{ asset('js/custom/parent.js') }}"></script>
+<script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>
+<script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>
+<script src="{{ asset('public/js/pages/form-fileuploads.init.js') }}"></script>
+<script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
+<script src="{{ asset('public/js/custom/parent.js') }}"></script>
 @endsection

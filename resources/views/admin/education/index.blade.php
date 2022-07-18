@@ -62,6 +62,6 @@
     var educationDelete = "{{ route('admin.education.delete') }}";
 </script>
 
-<script src="{{ asset('js/custom/education.js') }}"></script>
+<script src="{{ asset('public/js/custom/education.js') }}"></script>
 
 @endsection

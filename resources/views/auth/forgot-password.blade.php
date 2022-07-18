@@ -9,18 +9,18 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('public/images/favicon.ico') }}">
 
     <!-- App css -->
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-    <link href="{{ asset('css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+    <link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
 
-    <link href="{{ asset('css/bootstrap-dark.min.css') }}" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
-    <link href="{{ asset('css/app-dark.min.css') }}" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
+    <link href="{{ asset('public/css/bootstrap-dark.min.css') }}" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
+    <link href="{{ asset('public/css/app-dark.min.css') }}" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
 
     <!-- icons -->
-    <link href="{{ asset('css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/custom/common.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/custom/common.css') }}" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -38,13 +38,13 @@
                                 <div class="auth-logo">
                                     <a href="index.html" class="logo logo-dark text-center">
                                         <span class="logo-lg">
-                                            <img src="{{ asset('images/logo-dark.png') }}" alt="" height="50">
+                                            <img src="{{ asset('public/images/logo-dark.png') }}" alt="" height="50">
                                         </span>
                                     </a>
 
                                     <a href="index.html" class="logo logo-light text-center">
                                         <span class="logo-lg">
-                                            <img src="{{ asset('images/logo-light.png') }}" alt="" height="50">
+                                            <img src="{{ asset('public/images/logo-light.png') }}" alt="" height="50">
                                         </span>
                                     </a>
                                 </div>
@@ -100,10 +100,10 @@
     </footer>
 
     <!-- Vendor js -->
-    <script src="{{ asset('js/vendor.min.js') }}"></script>
+    <script src="{{ asset('public/js/vendor.min.js') }}"></script>
 
     <!-- App js -->
-    <script src="{{ asset('js/app.min.js') }}"></script>
-    <!-- <script src="{{ asset('js/custom/login.js') }}"></script> -->
+    <script src="{{ asset('public/js/app.min.js') }}"></script>
+    <!-- <script src="{{ asset('public/js/custom/login.js') }}"></script> -->
 </body>
 </html>

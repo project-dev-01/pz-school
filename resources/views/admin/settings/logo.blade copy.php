@@ -1,8 +1,8 @@
 @extends('layouts.admin-layout')
 @section('title','Settings')
 @section('css')
-<link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
-<link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/libs/dropzone/min/dropzone.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/libs/dropify/css/dropify.min.css') }}">
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -28,12 +28,12 @@
     <div class="row">
         <div class="col-lg-4 col-xl-4">
             <div class="card-box text-center">
-                <img src="{{ Session::get('school_logo') && asset('images/sub-logo/'.Session::get('school_logo')) ? asset('images/sub-logo/'.Session::get('school_logo')) : asset('images/users/default.jpg') }}" alt="logo" class="rounded-circle avatar-lg img-thumbnail school_logo_picture">
+                <img src="{{ Session::get('school_logo') && asset('public/images/sub-logo/'.Session::get('school_logo')) ? asset('public/images/sub-logo/'.Session::get('school_logo')) : asset('public/images/users/default.jpg') }}" alt="logo" class="rounded-circle avatar-lg img-thumbnail school_logo_picture">
 
-                <!-- <img src="{{ Session::get('school_logo') && asset('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail school_logo_picture" alt="profile-image"> -->
-                <!-- <img src="{{ Session::get('picture') && Storage::disk('public')->exists('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image"> -->
+                <!-- <img src="{{ Session::get('school_logo') && asset('public/users/images/'.Session::get('picture')) ? asset('public/users/images/'.Session::get('picture')) : asset('public/images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail school_logo_picture" alt="profile-image"> -->
+                <!-- <img src="{{ Session::get('picture') && Storage::disk('public')->exists('users/images/'.Session::get('picture')) ? asset('public/users/images/'.Session::get('picture')) : asset('public/images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image"> -->
 
-                <!-- <img src="{{ asset('images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image"> -->
+                <!-- <img src="{{ asset('public/images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image"> -->
                 <h4 class="mb-0 user_name">{{ Session::get('school_name') }}</h4>
 
                 <div class="text-left mt-3">
@@ -87,7 +87,7 @@
                                             <input type="file" name="change_logo" id="change_logo" style="opacity: 0;height:1px;display:none" />
                                         </label>
                                     </div> -->
-                                    <input type="file" name="change_logo" id="change_logo" data-plugins="dropify" data-default-file="{{ Session::get('school_logo') && asset('images/sub-logo/'.Session::get('school_logo')) ? asset('images/sub-logo/'.Session::get('school_logo')) : asset('images/users/default.jpg') }}" />
+                                    <input type="file" name="change_logo" id="change_logo" data-plugins="dropify" data-default-file="{{ Session::get('school_logo') && asset('public/images/sub-logo/'.Session::get('school_logo')) ? asset('public/images/sub-logo/'.Session::get('school_logo')) : asset('public/images/users/default.jpg') }}" />
                                     <p class="text-muted text-center mt-2 mb-0">{{ Session::get('school_name') }}</p>
                                 </form>
 
@@ -103,14 +103,14 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
-<script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
-<script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
-<script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
+<script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>
+<script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>
+<script src="{{ asset('public/js/pages/form-fileuploads.init.js') }}"></script>
 
 <script>
-    var subLogoPath = "{{ asset('images/sub-logo') }}";
+    var subLogoPath = "{{ asset('public/images/sub-logo') }}";
     var changeLogoUrl = "{{ config('constants.api.change_logo') }}";
     var updateLogoSession = "{{ route('settings.update.logo') }}";
 </script>
-<script src="{{ asset('js/custom/settings.js') }}"></script>
+<script src="{{ asset('public/js/custom/settings.js') }}"></script>
 @endsection

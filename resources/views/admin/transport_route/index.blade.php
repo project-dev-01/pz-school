@@ -71,6 +71,6 @@
     var transportRouteDelete = "{{ route('admin.transport_route.delete') }}";
 </script>
 
-<script src="{{ asset('js/custom/transport_route.js') }}"></script>
+<script src="{{ asset('public/js/custom/transport_route.js') }}"></script>
 
 @endsection

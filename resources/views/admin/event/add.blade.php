@@ -152,10 +152,10 @@
     var eventList = "{{ route('admin.event') }}";
     
 </script>
-<script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
-<script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
-<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
-<script src="{{ asset('js/custom/event.js') }}"></script>
+<script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>
+<script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>
+<script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
+<script src="{{ asset('public/js/custom/event.js') }}"></script>
 
 @endsection
 

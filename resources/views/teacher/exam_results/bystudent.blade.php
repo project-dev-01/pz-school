@@ -159,7 +159,7 @@
     var getgradeBysubject = "{{ config('constants.api.get_grade_bysubject') }}";
     var getbyStudent_subjectdivision = "{{ config('constants.api.tot_grade_calcu_byStdsubjectdiv') }}";
     // default image test
-    var defaultImg = "{{ asset('images/users/default.jpg') }}";
+    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
 </script>
-<script src="{{ asset('js/custom/bystudent.js') }}"></script>
+<script src="{{ asset('public/js/custom/bystudent.js') }}"></script>
 @endsection

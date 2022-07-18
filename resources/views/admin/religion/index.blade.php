@@ -65,6 +65,6 @@
     var religionDelete = "{{ route('admin.religion.delete') }}";
 </script>
 
-<script src="{{ asset('js/custom/religion.js') }}"></script>
+<script src="{{ asset('public/js/custom/religion.js') }}"></script>
 
 @endsection

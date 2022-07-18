@@ -2,7 +2,7 @@
 @section('title','Dashboard')
 
 @section('content')
-<link href="{{ asset('css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -517,7 +517,7 @@
     var getBulkCalendor = "{{ config('constants.api.get_bulk_calendor_admin') }}";
     var readUpdateTodoUrl = "{{ config('constants.api.read_update_todo') }}";
     var getAssignClassUrl = "{{ config('constants.api.get_assign_class') }}";
-    var pathDownloadFileUrl = "{{ asset('images/todolist/') }}";
+    var pathDownloadFileUrl = "{{ asset('public/images/todolist/') }}";
     var toDoCommentsUrl = "{{ config('constants.api.to_do_comments') }}";
     var getScheduleExamDetailsUrl = "{{ config('constants.api.get_schedule_exam_details') }}";
 
@@ -527,7 +527,7 @@
     var calendorListTaskCalendor = "{{ config('constants.api.calendor_list_task_calendor') }}";
     var calendorDeleteTaskCalendor = "{{ config('constants.api.calendor_delete_task_calendor') }}";
 </script>
-<!-- <script src="{{ asset('js/custom/admin_calendor.js') }}"></script> -->
-<script src="{{ asset('js/custom/admin_calendor_new_cal.js') }}"></script>
-<script src="{{ asset('js/custom/admin/dashboard.js') }}"></script>
+<!-- <script src="{{ asset('public/js/custom/admin_calendor.js') }}"></script> -->
+<script src="{{ asset('public/js/custom/admin_calendor_new_cal.js') }}"></script>
+<script src="{{ asset('public/js/custom/admin/dashboard.js') }}"></script>
 @endsection

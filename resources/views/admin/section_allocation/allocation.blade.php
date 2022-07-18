@@ -68,5 +68,5 @@
 
     var secAlloList = "{{ route('admin.section_allocation.list') }}";
 </script>
-<script src="{{ asset('js/custom/section_allocation.js') }}"></script>
+<script src="{{ asset('public/js/custom/section_allocation.js') }}"></script>
 @endsection

@@ -65,6 +65,6 @@
     var departmentDelete = "{{ route('admin.department.delete') }}";
 </script>
 
-<script src="{{ asset('js/custom/department.js') }}"></script>
+<script src="{{ asset('public/js/custom/department.js') }}"></script>
 
 @endsection

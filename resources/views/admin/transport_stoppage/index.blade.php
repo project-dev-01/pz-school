@@ -70,6 +70,6 @@
     var transportStoppageDelete = "{{ route('admin.transport_stoppage.delete') }}";
 </script>
 
-<script src="{{ asset('js/custom/transport_stoppage.js') }}"></script>
+<script src="{{ asset('public/js/custom/transport_stoppage.js') }}"></script>
 
 @endsection

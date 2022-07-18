@@ -228,5 +228,5 @@
     var timetableList = "{{ route('admin.timetable') }}";
     var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";
 </script>
-<script src="{{ asset('js/custom/timetable_bulk.js') }}"></script>
+<script src="{{ asset('public/js/custom/timetable_bulk.js') }}"></script>
 @endsection

@@ -130,6 +130,6 @@
     var getEmployeAttendanceList = "{{ route('teacher.attendance.employee_list') }}";
     var employeeByDepartment = "{{ config('constants.api.employee_by_department') }}";
 </script>
-<script src="{{ asset('js/custom/teacher_attendance_list.js') }}"></script>
+<script src="{{ asset('public/js/custom/teacher_attendance_list.js') }}"></script>
 
 @endsection

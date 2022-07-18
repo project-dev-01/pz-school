@@ -65,6 +65,6 @@
     var qualifyDelete = "{{ route('admin.qualification.delete') }}";
 </script>
 
-<script src="{{ asset('js/custom/qualification.js') }}"></script>
+<script src="{{ asset('public/js/custom/qualification.js') }}"></script>
 
 @endsection

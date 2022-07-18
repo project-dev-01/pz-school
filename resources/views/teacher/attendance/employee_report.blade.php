@@ -232,11 +232,11 @@
 <script>
     var getEmployeAttendanceReportList = "{{ config('constants.api.employee_attendance_report') }}";
     // default image test
-    var defaultImg = "{{ asset('images/users/default.jpg') }}";
-    var staffImg = "{{ asset('images/staffs') }}";
+    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+    var staffImg = "{{ asset('public/images/staffs') }}";
     var employeeByDepartment = "{{ config('constants.api.employee_by_department') }}";
 </script>
 
-<script src="{{ asset('js/custom/teacher_attendance_list.js') }}"></script>
+<script src="{{ asset('public/js/custom/teacher_attendance_list.js') }}"></script>
 
 @endsection

@@ -27,7 +27,7 @@
                 <!-- /toggle mobile menu -->
                 <!-- logo -->
                 <div class="tt-logo">
-                    <a href="{{ route('forum.index') }}"><img src="{{ asset('forum/build/images/logo-sm-dark.png') }}" alt=""></a>
+                    <a href="{{ route('forum.index') }}"><img src="{{ asset('public/forum/build/images/logo-sm-dark.png') }}" alt=""></a>
                 </div>
                 <!-- /logo -->
                 <!-- desctop menu -->

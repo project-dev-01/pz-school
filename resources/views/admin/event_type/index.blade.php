@@ -10,7 +10,7 @@
   display: inline-block;
 }
 </style>
-<link href="{{ asset('libs/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/libs/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -73,8 +73,8 @@
 <!-- container -->
 @endsection
 @section('scripts')
-<script src="{{ asset('libs/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
-<script src="{{ asset('js/pages/form-pickers.init.js') }}"></script>
+<script src="{{ asset('public/libs/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
+<script src="{{ asset('public/js/pages/form-pickers.init.js') }}"></script>
 
 <script>
     //eventType routes
@@ -83,6 +83,6 @@
     var eventTypeDelete = "{{ route('admin.event_type.delete') }}";
 </script>
 
-<script src="{{ asset('js/custom/event_type.js') }}"></script>
+<script src="{{ asset('public/js/custom/event_type.js') }}"></script>
 
 @endsection

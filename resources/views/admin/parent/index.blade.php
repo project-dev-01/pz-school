@@ -68,10 +68,10 @@
 @section('scripts')
 <script>
     
-    var parentImg = "{{ asset('users/images/') }}";
-    var defaultImg = "{{ asset('images/users/default.jpg') }}";
+    var parentImg = "{{ asset('public/users/images/') }}";
+    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
     var parentList = "{{ route('admin.parent.list') }}";
     var parentDelete = "{{ route('admin.parent.delete') }}";
 </script>
-<script src="{{ asset('js/custom/parent.js') }}"></script>
+<script src="{{ asset('public/js/custom/parent.js') }}"></script>
 @endsection

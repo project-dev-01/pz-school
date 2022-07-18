@@ -195,7 +195,7 @@
 @endsection
 @section('scripts')
 <!-- hightcharts js -->
-<script src="{{ asset('js/highcharts/highcharts.js') }}"></script>
+<script src="{{ asset('public/js/highcharts/highcharts.js') }}"></script>
 <script>
     var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
     var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";
@@ -210,8 +210,8 @@
 
 
     // default image test
-    var defaultImg = "{{ asset('images/users/default.jpg') }}";
-    var studentImg = "{{ asset('users/images/') }}";
+    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+    var studentImg = "{{ asset('public/users/images/') }}";
 </script>
-<script src="{{ asset('js/custom/analytics_parent_student.js') }}"></script>
+<script src="{{ asset('public/js/custom/analytics_parent_student.js') }}"></script>
 @endsection

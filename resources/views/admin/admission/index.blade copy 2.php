@@ -617,5 +617,5 @@ extends('layouts.admin-layout')
     var roomByHostel = "{{ route('admin.room_by_hostel') }}";
     var indexAdmission = "{{ route('admin.student.index') }}";
 </script>
-<script src="{{ asset('js/custom/admission.js') }}"></script>
+<script src="{{ asset('public/js/custom/admission.js') }}"></script>
 @endsection

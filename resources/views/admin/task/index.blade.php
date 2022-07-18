@@ -126,7 +126,7 @@
     var getToDORowURL = "{{ config('constants.api.get_to_do_row') }}";
     var deleteToDoList = "{{ config('constants.api.delete_to_do_list') }}";
 </script>
-<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
-<script src="{{ asset('js/custom/to-do-list.js') }}"></script>
+<script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
+<script src="{{ asset('public/js/custom/to-do-list.js') }}"></script>
 
 @endsection

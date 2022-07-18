@@ -69,5 +69,5 @@
 
     var assignTeacherList = "{{ route('admin.assign_teacher.list') }}";
 </script>
-<script src="{{ asset('js/custom/teacher-allocation.js') }}"></script>
+<script src="{{ asset('public/js/custom/teacher-allocation.js') }}"></script>
 @endsection

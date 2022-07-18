@@ -67,6 +67,6 @@
     var hostelCategoryDelete = "{{ route('admin.hostel_category.delete') }}";
 </script>
 
-<script src="{{ asset('js/custom/hostel_category.js') }}"></script>
+<script src="{{ asset('public/js/custom/hostel_category.js') }}"></script>
 
 @endsection

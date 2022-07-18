@@ -73,6 +73,6 @@
     var transportVehicleDelete = "{{ route('admin.transport_vehicle.delete') }}";
 </script>
 
-<script src="{{ asset('js/custom/transport_vehicle.js') }}"></script>
+<script src="{{ asset('public/js/custom/transport_vehicle.js') }}"></script>
 
 @endsection

@@ -1,10 +1,10 @@
 @extends('layouts.admin-layout')
 @section('title','Add Guardian')
 @section('css')
-<link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
-<link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
-<link rel="stylesheet" href="{{ asset('mobile-country/css/intlTelInput.css') }}">
-<link rel="stylesheet" href="{{ asset('country/css/countrySelect.css') }}">
+<link rel="stylesheet" href="{{ asset('public/libs/dropzone/min/dropzone.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/libs/dropify/css/dropify.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/mobile-country/css/intlTelInput.css') }}">
+<link rel="stylesheet" href="{{ asset('public/country/css/countrySelect.css') }}">
 <style>
     .switch {
         height: 24px;
@@ -240,7 +240,7 @@
                             <div class="col-md-12">
                                 <div class="col-lg-3">
                                     <div class="mt-3">
-                                        <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ asset('images/700x500.png') }}" />
+                                        <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ asset('public/images/700x500.png') }}" />
                                         <p class="text-muted text-center mt-2 mb-0">Photo</p>
                                     </div>
                                 </div>
@@ -252,7 +252,7 @@
                                     <label for="photo">Profile Picture</label>
                                     <div class="containers-img">
                                         <div class="imageWrapper">
-                                            <img class="image" src="{{ asset('images/700x500.png') }}">
+                                            <img class="image" src="{{ asset('public/images/700x500.png') }}">
                                         </div>
                                     </div>
 
@@ -584,8 +584,8 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
-<script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
-<script src="{{ asset('country/js/countrySelect.js') }}"></script>
+<script src="{{ asset('public/mobile-country/js/intlTelInput.js') }}"></script>
+<script src="{{ asset('public/country/js/countrySelect.js') }}"></script>
 
 <script>
     var indexParent = "{{ route('admin.parent') }}";
@@ -610,9 +610,9 @@
         responsiveDropdown: true
     });
 </script>
-<script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
-<script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
-<script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
-<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
-<script src="{{ asset('js/custom/parent.js') }}"></script>
+<script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>
+<script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>
+<script src="{{ asset('public/js/pages/form-fileuploads.init.js') }}"></script>
+<script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
+<script src="{{ asset('public/js/custom/parent.js') }}"></script>
 @endsection

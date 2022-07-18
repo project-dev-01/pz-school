@@ -1,8 +1,8 @@
 @extends('layouts.admin-layout')
 @section('title','Employee')
 @section('css')
-<link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
-<link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/libs/dropzone/min/dropzone.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/libs/dropify/css/dropify.min.css') }}">
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -488,14 +488,14 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
-<script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
-<script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
-<script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
+<script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>
+<script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>
+<script src="{{ asset('public/js/pages/form-fileuploads.init.js') }}"></script>
 
 <script>
     var employeeListShow = "{{ route('admin.listemployee') }}";
     var processImgUrl = "{{ route('admin.employee.processImg') }}";
 </script>
-<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
-<script src="{{ asset('js/custom/employee.js') }}"></script>
+<script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
+<script src="{{ asset('public/js/custom/employee.js') }}"></script>
 @endsection

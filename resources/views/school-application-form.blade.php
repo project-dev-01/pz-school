@@ -9,18 +9,18 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('images/favicon.ico')}}">
+    <link rel="shortcut icon" href="{{ asset('public/images/favicon.ico')}}">
 
     <!-- App css -->
-    <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-    <link href="{{ asset('css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+    <link href="{{ asset('public/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+    <link href="{{ asset('public/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
 
-    <link href="{{ asset('css/bootstrap-dark.min.css')}}" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
-    <link href="{{ asset('css/app-dark.min.css')}}" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
+    <link href="{{ asset('public/css/bootstrap-dark.min.css')}}" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
+    <link href="{{ asset('public/css/app-dark.min.css')}}" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
 
     <!-- icons -->
-    <link href="{{ asset('css/icons.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/common.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/common.css')}}" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -56,7 +56,7 @@
                         <div class="auth-logo">
                             <a href="" class="logo logo-dark text-center">
                                 <span class="logo-lg">
-                                    <img src="{{ asset('images/logo-dark.png')}}" alt="" height="50">
+                                    <img src="{{ asset('public/images/logo-dark.png')}}" alt="" height="50">
                                 </span>
                             </a>
                         </div>
@@ -405,16 +405,16 @@
         <div class="rightbar-overlay"></div>
 
         <!-- Vendor js -->
-        <script src="{{ asset('js/vendor.min.js')}}"></script>
+        <script src="{{ asset('public/js/vendor.min.js')}}"></script>
 
         <!-- Plugins js-->
-        <script src="{{ asset('libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js')}}"></script>
+        <script src="{{ asset('public/libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js')}}"></script>
 
         <!-- Init js-->
-        <script src="{{ asset('js/pages/form-wizard.init.js')}}"></script>
+        <script src="{{ asset('public/js/pages/form-wizard.init.js')}}"></script>
 
         <!-- App js -->
-        <script src="{{ asset('js/app.min.js')}}"></script>
+        <script src="{{ asset('public/js/app.min.js')}}"></script>
 
 </body>
 

@@ -73,6 +73,6 @@
     var hostelRoomDelete = "{{ route('admin.hostel_room.delete') }}";
 </script>
 
-<script src="{{ asset('js/custom/hostel_room.js') }}"></script>
+<script src="{{ asset('public/js/custom/hostel_room.js') }}"></script>
 
 @endsection

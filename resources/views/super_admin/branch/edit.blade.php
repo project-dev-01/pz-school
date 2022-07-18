@@ -480,5 +480,5 @@
         </div> <!-- container -->
         @endsection
         @section('scripts')
-        <script src="{{ asset('js/custom/branch.js') }}"></script>
+        <script src="{{ asset('public/js/custom/branch.js') }}"></script>
         @endsection

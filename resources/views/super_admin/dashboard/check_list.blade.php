@@ -156,7 +156,7 @@
                                 <h5 class="mb-2 font-size-16">Comments</h5>
 
                                 <div class="media mt-3 p-1">
-                                    <!-- <img src="{{ asset('images/users/user-9.jpg') }}" class="mr-2 rounded-circle" height="36" alt="Arya Stark" /> -->
+                                    <!-- <img src="{{ asset('public/images/users/user-9.jpg') }}" class="mr-2 rounded-circle" height="36" alt="Arya Stark" /> -->
                                     <div class="media-body">
                                         <h5 class="mt-0 mb-0 font-size-14">
                                             <span class="float-right text-muted font-12">4:30am</span>
@@ -371,7 +371,7 @@
                                 <h5 class="mb-2 font-size-16">Comments</h5>
 
                                 <div class="media mt-3 p-1">
-                                    <!-- <img src="{{ asset('images/users/user-9.jpg') }}" class="mr-2 rounded-circle" height="36" alt="Arya Stark" /> -->
+                                    <!-- <img src="{{ asset('public/images/users/user-9.jpg') }}" class="mr-2 rounded-circle" height="36" alt="Arya Stark" /> -->
                                     <div class="media-body">
                                         <h5 class="mt-0 mb-0 font-size-14">
                                             <span class="float-right text-muted font-12">4:30am</span>

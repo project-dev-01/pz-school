@@ -73,5 +73,5 @@
 
     var classAssignTeacherSubList = "{{ route('admin.teacher_assign_subject.list') }}";
 </script>
-<script src="{{ asset('js/custom/assign_class_subject_teacher.js') }}"></script>
+<script src="{{ asset('public/js/custom/assign_class_subject_teacher.js') }}"></script>
 @endsection

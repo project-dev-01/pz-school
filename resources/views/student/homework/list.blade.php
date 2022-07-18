@@ -221,7 +221,7 @@
                                                     <div class="row">
                                                         <div class="col-md-6 font-weight-bold">Document :</div>
                                                         <div class="col-md-6">
-                                                            <a href="{{asset('teacher/homework/')}}/{{$work['document']}}" download>
+                                                            <a href="{{asset('public/teacher/homework/')}}/{{$work['document']}}" download>
                                                                 <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
                                                             </a>
                                                         </div>
@@ -247,7 +247,7 @@
                                                 <div class="col-md-4">
                                                     <div class="col-md-6 font-weight-bold">Attachment File: </div>
                                                     <div class="col-md-6">
-                                                        <a href="{{asset('student/homework/')}}/{{$work['file']}}" download>
+                                                        <a href="{{asset('public/student/homework/')}}/{{$work['file']}}" download>
                                                             <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
                                                         </a>
                                                     </div>
@@ -296,5 +296,5 @@
 <script>
     var homeworkList = "{{ route('student.homework') }}";
 </script>
-<script src="{{ asset('js/custom/homework.js') }}"></script>
+<script src="{{ asset('public/js/custom/homework.js') }}"></script>
 @endsection

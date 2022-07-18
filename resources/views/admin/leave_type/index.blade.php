@@ -68,6 +68,6 @@
     var leaveTypeDelete = "{{ route('admin.leave_type.delete') }}";
 </script>
 
-<script src="{{ asset('js/custom/leave_type.js') }}"></script>
+<script src="{{ asset('public/js/custom/leave_type.js') }}"></script>
 
 @endsection

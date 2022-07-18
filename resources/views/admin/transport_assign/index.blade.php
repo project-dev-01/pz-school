@@ -70,6 +70,6 @@
     var transportAssignDelete = "{{ route('admin.transport_assign.delete') }}";
 </script>
 
-<script src="{{ asset('js/custom/transport_assign.js') }}"></script>
+<script src="{{ asset('public/js/custom/transport_assign.js') }}"></script>
 
 @endsection

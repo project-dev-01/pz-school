@@ -21,19 +21,19 @@
 <!-- END wrapper -->
 
 <!-- Vendor js -->
-<script src="{{ asset('js/vendor.min.js') }}"></script>
-<script src="{{ asset('libs/mohithg-switchery/switchery.min.js') }}"></script>
+<script src="{{ asset('public/js/vendor.min.js') }}"></script>
+<script src="{{ asset('public/libs/mohithg-switchery/switchery.min.js') }}"></script>
 
-<script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
-<script src="{{ asset('libs/apexcharts/apexcharts.min.js') }}"></script>
+<script src="{{ asset('public/libs/select2/js/select2.min.js') }}"></script>
+<script src="{{ asset('public/libs/apexcharts/apexcharts.min.js') }}"></script>
 <script src="https://apexcharts.com/samples/assets/irregular-data-series.js"></script>
 <script src="https://apexcharts.com/samples/assets/ohlc.js"></script>
 
 <!-- init js -->
-<!-- <script src="{{ asset('js/pages/apexcharts.init.js') }}"></script> -->
+<!-- <script src="{{ asset('public/js/pages/apexcharts.init.js') }}"></script> -->
 
 <!-- plugin js -->
-<script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
 
 @if(Session::get('role_id') != '1')
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" /> -->
@@ -41,20 +41,20 @@
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" /> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script> -->
-<!-- <script src="{{ asset('js/fullcalendar/fullcalendar.js') }}"></script> -->
-<script src="{{ asset('libs/@fullcalendar/core/main.min.js') }}"></script>
-<script src="{{ asset('libs/@fullcalendar/bootstrap/main.min.js') }}"></script>
-<script src="{{ asset('libs/@fullcalendar/daygrid/main.min.js') }}"></script>
-<script src="{{ asset('libs/@fullcalendar/timegrid/main.min.js') }}"></script>
-<script src="{{ asset('libs/@fullcalendar/list/main.min.js') }}"></script>
-<script src="{{ asset('libs/@fullcalendar/interaction/main.min.js') }}"></script>
+<!-- <script src="{{ asset('public/js/fullcalendar/fullcalendar.js') }}"></script> -->
+<script src="{{ asset('public/libs/@fullcalendar/core/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/bootstrap/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/daygrid/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/timegrid/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/list/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/interaction/main.min.js') }}"></script>
 @else
-<script src="{{ asset('libs/@fullcalendar/core/main.min.js') }}"></script>
-<script src="{{ asset('libs/@fullcalendar/bootstrap/main.min.js') }}"></script>
-<script src="{{ asset('libs/@fullcalendar/daygrid/main.min.js') }}"></script>
-<script src="{{ asset('libs/@fullcalendar/timegrid/main.min.js') }}"></script>
-<script src="{{ asset('libs/@fullcalendar/list/main.min.js') }}"></script>
-<script src="{{ asset('libs/@fullcalendar/interaction/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/core/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/bootstrap/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/daygrid/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/timegrid/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/list/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/interaction/main.min.js') }}"></script>
 @endif
 <script>
     function formatDate(date) {
@@ -72,46 +72,46 @@
     }
 </script>
 <!-- Calendar init -->
-<!-- <script src="{{ asset('js/pages/form-advanced.init.js') }}"></script> -->
+<!-- <script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script> -->
 @if(Session::get('role_id'))
 @if(Session::get('role_id') == '4')
 @elseif(Session::get('role_id') == '5')
-<script src="{{ asset('js/custom/parent_calendar.js') }}"></script>
+<script src="{{ asset('public/js/custom/parent_calendar.js') }}"></script>
 @else
-<!-- <script src="{{ asset('js/pages/calendar.init.js') }}"></script> -->
+<!-- <script src="{{ asset('public/js/pages/calendar.init.js') }}"></script> -->
 @endif
 @endif
 <!-- Plugins js-->
-<script src="{{ asset('libs/flatpickr/flatpickr.min.js') }}"></script>
-<!-- <script src="{{ asset('libs/apexcharts/apexcharts.min.js') }}"></script> -->
+<script src="{{ asset('public/libs/flatpickr/flatpickr.min.js') }}"></script>
+<!-- <script src="{{ asset('public/libs/apexcharts/apexcharts.min.js') }}"></script> -->
 
-<script src="{{ asset('libs/selectize/js/standalone/selectize.min.js') }}"></script>
+<script src="{{ asset('public/libs/selectize/js/standalone/selectize.min.js') }}"></script>
 
 <!-- Chart JS -->
-<script src="{{ asset('libs/chart.js/Chart.bundle.min.js') }}"></script>
+<script src="{{ asset('public/libs/chart.js/Chart.bundle.min.js') }}"></script>
 
-<script src="{{ asset('libs/morris.js06/morris.min.js') }}"></script>
-<script src="{{ asset('libs/raphael/raphael.min.js') }}"></script>
+<script src="{{ asset('public/libs/morris.js06/morris.min.js') }}"></script>
+<script src="{{ asset('public/libs/raphael/raphael.min.js') }}"></script>
 <!-- Init  -->
-<!-- <script src="{{ asset('js/pages/chartjs.init.js') }}"></script> -->
+<!-- <script src="{{ asset('public/js/pages/chartjs.init.js') }}"></script> -->
 <!-- Dashboar 1 init js-->
-<!-- <script src="{{ asset('js/pages/dashboard-1.init.js') }}"></script> -->
+<!-- <script src="{{ asset('public/js/pages/dashboard-1.init.js') }}"></script> -->
 <!-- App js-->
-<script src="{{ asset('js/app.min.js') }}"></script>
+<script src="{{ asset('public/js/app.min.js') }}"></script>
 
-<script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('datatable/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('datatable/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('public/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('public/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('public/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('public/datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
 <!-- Add croptool plugin -->
-<!-- <script src="{{ asset('ijaboCropTool/ijaboCropTool.min.js') }}"></script> -->
+<!-- <script src="{{ asset('public/ijaboCropTool/ijaboCropTool.min.js') }}"></script> -->
 <!-- Add date picker -->
-<!-- <script src="{{ asset('date-picker/jquery-3.6.0.js') }}"></script> -->
-<script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
+<!-- <script src="{{ asset('public/date-picker/jquery-3.6.0.js') }}"></script> -->
+<script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
 
-<!-- <script src="{{ asset('js/validation/validation.js') }}"></script> -->
+<!-- <script src="{{ asset('public/js/validation/validation.js') }}"></script> -->
 <!-- test js for datatable download -->
 <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -119,24 +119,24 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
 <!-- Bootstrap Tables js -->
-<script src="{{ asset('libs/bootstrap-table/bootstrap-table.min.js') }}"></script>
+<script src="{{ asset('public/libs/bootstrap-table/bootstrap-table.min.js') }}"></script>
 <!-- ApexChart  Js-->
-<!-- <script src="{{ asset('js/apexChart/apexcharts.js') }}"></script> -->
+<!-- <script src="{{ asset('public/js/apexChart/apexcharts.js') }}"></script> -->
 <!-- ApeDate Picker  Js-->
-<!-- <script src="{{ asset('libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script> -->
+<!-- <script src="{{ asset('public/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script> -->
 <!-- Datepicker -->
-<!-- <script src="{{ asset('date-picker/jquery-ui.js') }}"></script> -->
+<!-- <script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script> -->
 <!-- Table Editable plugin-->
-<script src="{{ asset('libs/jquery-tabledit/jquery.tabledit.min.js') }}"></script>
+<script src="{{ asset('public/libs/jquery-tabledit/jquery.tabledit.min.js') }}"></script>
 <!-- hightcharts js -->
-<!-- <script src="{{ asset('js/highcharts/highcharts.js') }}"></script> -->
+<!-- <script src="{{ asset('public/js/highcharts/highcharts.js') }}"></script> -->
 <!-- add date range picker -->
-<script type="text/javascript" src="{{ asset('js/daterangepicker/daterangepicker.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/js/daterangepicker/daterangepicker.min.js') }}"></script>
 
 <!-- add jquery validation -->
-<!-- <script src="{{ asset('js/pages/bootstrap-tables.init.js') }}"></script> -->
+<!-- <script src="{{ asset('public/js/pages/bootstrap-tables.init.js') }}"></script> -->
 <!-- Init js -->
-<script src="{{ asset('js/validation/validation.js') }}"></script>
+<script src="{{ asset('public/js/validation/validation.js') }}"></script>
 <script>
     toastr.options.preventDuplicates = true;
     $.ajaxSetup({
@@ -200,7 +200,7 @@
     // settings url
     var profileUpdateStg = "{{ config('constants.api.change_profile_picture') }}";
     var updateSettingSession = "{{ route('settings.updateSettingSession') }}";
-    var profilePath = "{{ asset('users/images') }}";
+    var profilePath = "{{ asset('public/users/images') }}";
 
     // users routes
     var userList = "{{ route('users.user_list') }}";
@@ -216,14 +216,14 @@
     var allNotifications = "{{ route('unread_notifications') }}";
 </script>
 <!-- custom js  -->
-<script src="{{ asset('js/custom/settings.js') }}"></script>
-<script src="{{ asset('js/custom/user_list.js') }}"></script>
-<script src="{{ asset('js/custom/dashboard.js') }}"></script>
-<!-- <script src="{{ asset('js/custom/test_result.js') }}"></script> -->
-<!-- <script src="{{ asset('js/custom/apex-mixed.js') }}"></script> -->
-<script src="{{ asset('js/custom/common.js') }}"></script>
-<!-- <script src="{{ asset('js/custom/iconchart.js') }}"></script> -->
-<!-- <script src="{{ asset('js/apexChart/apexcharts.js') }}"></script> -->
+<script src="{{ asset('public/js/custom/settings.js') }}"></script>
+<script src="{{ asset('public/js/custom/user_list.js') }}"></script>
+<script src="{{ asset('public/js/custom/dashboard.js') }}"></script>
+<!-- <script src="{{ asset('public/js/custom/test_result.js') }}"></script> -->
+<!-- <script src="{{ asset('public/js/custom/apex-mixed.js') }}"></script> -->
+<script src="{{ asset('public/js/custom/common.js') }}"></script>
+<!-- <script src="{{ asset('public/js/custom/iconchart.js') }}"></script> -->
+<!-- <script src="{{ asset('public/js/apexChart/apexcharts.js') }}"></script> -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> -->
 <script>
     function sendMarkRequest(id = null) {

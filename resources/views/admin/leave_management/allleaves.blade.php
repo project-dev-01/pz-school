@@ -116,9 +116,9 @@
 @section('scripts')
 <script>
     var AllLeaveList = "{{ route('admin.leave_management.list') }}";
-    var leaveFilesUrl = "{{ asset('admin-documents/leaves/') }}";
+    var leaveFilesUrl = "{{ asset('public/admin-documents/leaves/') }}";
     var leaveApprovedUrl = "{{ config('constants.api.staff_leave_approved') }}";
     var staffLeaveDetailsShowUrl = "{{ config('constants.api.staff_leave_details') }}";
 </script>
-<script src="{{ asset('js/custom/admin_all_leave.js') }}"></script>
+<script src="{{ asset('public/js/custom/admin_all_leave.js') }}"></script>
 @endsection

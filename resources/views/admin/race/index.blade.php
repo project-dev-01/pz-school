@@ -65,6 +65,6 @@
     var raceDelete = "{{ route('admin.race.delete') }}";
 </script>
 
-<script src="{{ asset('js/custom/race.js') }}"></script>
+<script src="{{ asset('public/js/custom/race.js') }}"></script>
 
 @endsection

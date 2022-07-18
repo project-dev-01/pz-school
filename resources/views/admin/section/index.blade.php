@@ -67,6 +67,6 @@
 
     var sectionList = "{{ route('admin.section.list') }}";
 </script>
-<script src="{{ asset('js/custom/sections.js') }}"></script>
+<script src="{{ asset('public/js/custom/sections.js') }}"></script>
 
 @endsection

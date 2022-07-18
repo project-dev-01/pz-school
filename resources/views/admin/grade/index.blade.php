@@ -62,5 +62,5 @@
     var gradeDetails = "{{ route('admin.grade.details') }}";
     var gradeDelete = "{{ route('admin.grade.delete') }}";
 </script>
-<script src="{{ asset('js/custom/grade.js') }}"></script>
+<script src="{{ asset('public/js/custom/grade.js') }}"></script>
 @endsection

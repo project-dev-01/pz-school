@@ -214,5 +214,5 @@
     var subjectByClass = "{{ route('admin.timetable.subject') }}";
     var timetableList = "{{ route('admin.timetable') }}";
 </script>
-<script src="{{ asset('js/custom/timetable.js') }}"></script>
+<script src="{{ asset('public/js/custom/timetable.js') }}"></script>
 @endsection

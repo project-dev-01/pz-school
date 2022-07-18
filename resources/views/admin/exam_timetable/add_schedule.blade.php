@@ -156,6 +156,6 @@
     
     
 </script>
-<script src="{{ asset('js/custom/exam_timetable.js') }}"></script>
+<script src="{{ asset('public/js/custom/exam_timetable.js') }}"></script>
 
 @endsection

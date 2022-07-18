@@ -140,12 +140,12 @@
 @section('scripts')
 <script>
     
-    var studentImg = "{{ asset('users/images/') }}";
-    var defaultImg = "{{ asset('images/users/default.jpg') }}";
+    var studentImg = "{{ asset('public/users/images/') }}";
+    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
     
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var studentDelete = "{{ route('admin.student.delete') }}";
     var studentList = "{{ route('admin.student.list') }}";
 </script>
-<script src="{{ asset('js/custom/student.js') }}"></script>
+<script src="{{ asset('public/js/custom/student.js') }}"></script>
 @endsection

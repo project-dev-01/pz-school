@@ -119,7 +119,7 @@
 @section('scripts')
 <script>
     var AllLeaveList = "{{ route('teacher.leave_management.leave_approval_history_by_staff') }}";
-    var leaveFilesUrl = "{{ asset('admin-documents/leaves/') }}";
+    var leaveFilesUrl = "{{ asset('public/admin-documents/leaves/') }}";
     var leaveApprovedUrl = "{{ config('constants.api.staff_leave_approved') }}";
     var staffLeaveDetailsShowUrl = "{{ config('constants.api.staff_leave_details') }}";
     // $(function() {
@@ -136,5 +136,5 @@
 
     // });
 </script>
-<script src="{{ asset('js/custom/staff_all_leave.js') }}"></script>
+<script src="{{ asset('public/js/custom/staff_all_leave.js') }}"></script>
 @endsection

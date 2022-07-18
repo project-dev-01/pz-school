@@ -107,9 +107,9 @@
 <script>
     var sectionByClassUrl = "{{ config('constants.api.section_by_class') }}";
     var allStutdentLeaveList = "{{ config('constants.api.get_all_student_leaves') }}";
-    var studentDocUrl = "{{ asset('teacher/student-leaves/') }}";
+    var studentDocUrl = "{{ asset('public/teacher/student-leaves/') }}";
     // default image test
-    var defaultImg = "{{ asset('images/users/default.jpg') }}";
+    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
 </script>
-<script src="{{ asset('js/custom/student_leave_list.js') }}"></script>
+<script src="{{ asset('public/js/custom/student_leave_list.js') }}"></script>
 @endsection
