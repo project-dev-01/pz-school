@@ -1,7 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Dashboard')
 @section('content')
-<link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
+<!-- <link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" /> -->
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -253,7 +253,7 @@
                             <div class="card">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="navv">HomeWork List
+                                        <h4 class="navv"> Homework List
                                             <h4>
                                     </li>
                                 </ul><br>
@@ -306,7 +306,7 @@
                                         </div> <!-- end col -->
                                     </div> <!-- Maths row -->
                                     @empty
-                                    <p></p>
+                                    <p class="text-center">No Homework data available</p>
                                     @endforelse
                                 </div> <!-- end card-body -->
                             </div> <!-- end card -->
@@ -362,17 +362,33 @@
                             <h5 class="modal-title">Schedule</h5>
                         </div>
                         <div class="modal-body p-4">
-                            <form class="needs-validation" name="event-form" id="form-event" novalidate>
+                            <form id="addStudentReport">
                                 <div class="row">
-                                    <!-- <div class="col-4">
-                                        <div class="col-md-12 font-weight-bold">Timetable List </div>
+                                    <div class="col-4">
+                                        <div class="col-md-12 font-weight-bold">Standard </div>
                                     </div>
                                     <div class="col-1">
                                         <div class="col-md-12 font-weight-bold">:</div>
                                     </div>
                                     <div class="col-7">
-                                        <div class="col-md-12" id="event-title"></div>
-                                    </div> -->
+
+                                        <input type="hidden" id="setCurDate" name="date">
+                                        <input type="hidden" id="ttclassID" name="class_id">
+                                        <input type="hidden" id="ttsemesterID" name="semester_id">
+                                        <input type="hidden" id="ttsessionID" name="session_id">
+                                        <div class="col-md-12" id="standard-name"></div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="col-md-12 font-weight-bold">Section </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="col-md-12 font-weight-bold">:</div>
+                                    </div>
+                                    <div class="col-7">
+                                        <input type="hidden" id="ttSectionID" name="section_id">
+                                        <div class="col-md-12" id="section-name"></div>
+                                    </div>
+
                                     <div class="col-4">
                                         <div class="col-md-12 font-weight-bold">Subject Name </div>
                                     </div>
@@ -380,6 +396,7 @@
                                         <div class="col-md-12 font-weight-bold">:</div>
                                     </div>
                                     <div class="col-7">
+                                        <input type="hidden" id="ttSubjectID" name="subject_id">
                                         <div class="col-md-12" id="subject-name"></div>
                                     </div>
 
@@ -390,6 +407,7 @@
                                         <div class="col-md-12 font-weight-bold">:</div>
                                     </div>
                                     <div class="col-7">
+                                        <input type="hidden" id="ttDate">
                                         <div class="col-md-12" id="timing-class"></div>
                                     </div>
                                     <div class="col-4">
@@ -402,14 +420,7 @@
                                         <div class="col-md-12" id="teacher-name"></div>
                                     </div>
                                     <div class="col-12">
-                                        <!-- <div class="form-group"> -->
-                                        <!-- <label class="control-label font-weight-bold">Notes :</label> -->
-                                        <textarea class="form-control" style="margin: 12px;" placeholder="Enter Your Notes"></textarea>
-                                        <!-- </div> -->
-                                    </div>
-                                    <div class="col-12">
-                                        <button type="button" class="btn btn-success" style="margin: 12px;">Save</button>
-
+                                        <textarea class="form-control" disabled style="margin: 12px;" placeholder="Enter your notes" id="calNotes" name="student_remarks"></textarea>
                                     </div>
                                 </div>
                             </form>
@@ -446,6 +457,14 @@
                                                 <tr>
                                                     <td>End Date</td>
                                                     <td id="end_date"></td>
+                                                </tr>
+                                                <tr id="start_time_row" style="display:none">
+                                                    <td>Start Time</td>
+                                                    <td id="start_time"></td>
+                                                </tr>
+                                                <tr id="end_time_row" style="display:none">
+                                                    <td>End Time</td>
+                                                    <td id="end_time"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Audience</td>

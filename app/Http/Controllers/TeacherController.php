@@ -364,8 +364,12 @@ class TeacherController extends Controller
             'teacher_id' => session()->get('ref_user_id')
         ];
         $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
         return view('teacher.classroom.management', [
-            'teacher_class' => $response['data']
+            'teacher_class' => $response['data'],
+            'semester' => $semester['data'],
+            'session' => $session['data']
         ]);
     }
     // faq screen pages end
@@ -757,7 +761,9 @@ class TeacherController extends Controller
             "date" => $request->date,
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
-            "subject_id" => $request->subject_id
+            "subject_id" => $request->subject_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.add_student_attendance'), $data);
@@ -770,7 +776,10 @@ class TeacherController extends Controller
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
             "subject_id" => $request->subject_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id
         ];
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.get_short_test'), $data);
         return $response;
     }
@@ -782,7 +791,9 @@ class TeacherController extends Controller
             "date" => $request->date,
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
-            "subject_id" => $request->subject_id
+            "subject_id" => $request->subject_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.add_short_test'), $data);
@@ -795,7 +806,9 @@ class TeacherController extends Controller
             "date" => $request->date,
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
-            "subject_id" => $request->subject_id
+            "subject_id" => $request->subject_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.add_daily_report'), $data);
@@ -807,7 +820,9 @@ class TeacherController extends Controller
             "daily_report_remarks" => $request->daily_report_remarks,
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
-            "subject_id" => $request->subject_id
+            "subject_id" => $request->subject_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.add_daily_report_remarks'), $data);
@@ -896,7 +911,7 @@ class TeacherController extends Controller
         return $response;
     }
 
-    
+
     public function employeeEntry()
     {
         $employee = session()->get('ref_user_id');

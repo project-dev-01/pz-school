@@ -680,7 +680,7 @@ class AdminController extends Controller
                         </div>';
             })
 
-            ->rawColumns(['color','actions'])
+            ->rawColumns(['color', 'actions'])
             ->make(true);
     }
     public function getEventTypeDetails(Request $request)
@@ -765,15 +765,15 @@ class AdminController extends Controller
     public function addEvent(Request $request)
     {
 
-        if($request->class){
-            $class = implode(",",$request->class);
-        } else{
+        if ($request->class) {
+            $class = implode(",", $request->class);
+        } else {
             $class = "";
         }
 
-        if($request->group){
-            $group = implode(",",$request->group);
-        } else{
+        if ($request->group) {
+            $group = implode(",", $request->group);
+        } else {
             $group = "";
         }
 
@@ -845,15 +845,15 @@ class AdminController extends Controller
     public function updateEvent(Request $request)
     {
 
-        
-        if($request->class){
-            $class = implode(",",$request->class);
-        } else{
+
+        if ($request->class) {
+            $class = implode(",", $request->class);
+        } else {
             $class = "";
         }
-        if($request->group){
-            $group = implode(",",$request->group);
-        } else{
+        if ($request->group) {
+            $group = implode(",", $request->group);
+        } else {
             $group = "";
         }
 
@@ -1836,7 +1836,7 @@ class AdminController extends Controller
         return $timetable;
     }
 
-    
+
 
     // create Timetable
     public function createTimetable(Request $request)
@@ -4372,8 +4372,12 @@ class AdminController extends Controller
     public function classroomManagement()
     {
         $response = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
         return view('admin.classroom.management', [
-            'class' => $response['data']
+            'class' => $response['data'],
+            'semester' => $semester['data'],
+            'session' => $session['data']
         ]);
     }
 
@@ -4387,7 +4391,9 @@ class AdminController extends Controller
             "date" => $request->date,
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
-            "subject_id" => $request->subject_id
+            "subject_id" => $request->subject_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.add_student_attendance'), $data);
@@ -4400,6 +4406,8 @@ class AdminController extends Controller
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
             "subject_id" => $request->subject_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id
         ];
         $response = Helper::PostMethod(config('constants.api.get_short_test'), $data);
         return $response;
@@ -4412,7 +4420,9 @@ class AdminController extends Controller
             "date" => $request->date,
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
-            "subject_id" => $request->subject_id
+            "subject_id" => $request->subject_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.add_short_test'), $data);
@@ -4425,7 +4435,9 @@ class AdminController extends Controller
             "date" => $request->date,
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
-            "subject_id" => $request->subject_id
+            "subject_id" => $request->subject_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.add_daily_report'), $data);
@@ -4437,7 +4449,9 @@ class AdminController extends Controller
             "daily_report_remarks" => $request->daily_report_remarks,
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
-            "subject_id" => $request->subject_id
+            "subject_id" => $request->subject_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.add_daily_report_remarks'), $data);

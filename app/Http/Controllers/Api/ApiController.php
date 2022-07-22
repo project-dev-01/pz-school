@@ -1616,7 +1616,7 @@ class ApiController extends BaseController
     // add Event
     public function addEvent(Request $request)
     {
-        
+
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
             'branch_id' => 'required',
@@ -1645,7 +1645,7 @@ class ApiController extends BaseController
             }
 
             $allDay = $request->all_day;
-            if($allDay==NULL){
+            if ($allDay == NULL) {
                 $eventSt = $request->start_time;
                 $eventEt = $request->end_time;
             } else {
@@ -1667,7 +1667,7 @@ class ApiController extends BaseController
                 'remarks' => $request->description,
                 'created_at' => date("Y-m-d H:i:s")
             ]);
-            
+
             $eventId = $query;
             $title = $request->title;
             if ($request->audience == 1) {
@@ -1677,7 +1677,7 @@ class ApiController extends BaseController
             }
 
             $allDay = $request->all_day;
-            if($allDay==NULL){
+            if ($allDay == NULL) {
                 $begin = new DateTime($request->start_date);
                 $end = new DateTime($request->end_date);
 
@@ -1686,15 +1686,15 @@ class ApiController extends BaseController
 
                 $date = [];
                 foreach ($period as $dt) {
-                    $fd['start_date'] = $dt->format('Y-m-d').' '.$request->start_time;
-                    $fd['end_date'] = $dt->format("Y-m-d").' '.$request->end_time;
+                    $fd['start_date'] = $dt->format('Y-m-d') . ' ' . $request->start_time;
+                    $fd['end_date'] = $dt->format("Y-m-d") . ' ' . $request->end_time;
                     array_push($date, $fd);
                 }
-                $final['start_date'] = $request->end_date.' '.$request->start_time;
-                $final['end_date'] = $request->end_date.' '.$request->end_time;
+                $final['start_date'] = $request->end_date . ' ' . $request->start_time;
+                $final['end_date'] = $request->end_date . ' ' . $request->end_time;
                 array_push($date, $final);
 
-                foreach($date as $d) {
+                foreach ($date as $d) {
                     $start_date = $d['start_date'];
                     $end_date = $d['end_date'];
                     if ($request->audience == 3) {
@@ -1709,7 +1709,6 @@ class ApiController extends BaseController
                                 'created_at' => date("Y-m-d H:i:s")
                             ]);
                         }
-
                     } else {
                         foreach ($classes as $class) {
                             if ($request->audience == 1) {
@@ -1727,7 +1726,6 @@ class ApiController extends BaseController
                             ]);
                         }
                     }
-                    
                 }
             } else {
                 // date converted into timestamp
@@ -1746,7 +1744,6 @@ class ApiController extends BaseController
                             'created_at' => date("Y-m-d H:i:s")
                         ]);
                     }
-
                 } else {
                     foreach ($classes as $class) {
 
@@ -1766,7 +1763,7 @@ class ApiController extends BaseController
                     }
                 }
             }
-            
+
             $success = [];
             if (!$query) {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
@@ -1792,13 +1789,13 @@ class ApiController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             // get data
             $eventDetails = $conn->table('events')
-                    ->select("events.*", DB::raw("GROUP_CONCAT(DISTINCT  classes.name) as class_name"), 'event_types.name as type', DB::raw("GROUP_CONCAT(DISTINCT  groups.name) as group_name"))
-                    ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,events.selected_list)"), ">", \DB::raw("'0'"))
-                    ->leftjoin("groups", \DB::raw("FIND_IN_SET(groups.id,events.selected_list)"), ">", \DB::raw("'0'"))
-                    ->leftjoin('event_types', 'event_types.id', '=', 'events.type')
-                    ->groupBy("events.id")
-                    ->orderBy('events.id', 'desc')
-                    ->get()->toArray();
+                ->select("events.*", DB::raw("GROUP_CONCAT(DISTINCT  classes.name) as class_name"), 'event_types.name as type', DB::raw("GROUP_CONCAT(DISTINCT  groups.name) as group_name"))
+                ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,events.selected_list)"), ">", \DB::raw("'0'"))
+                ->leftjoin("groups", \DB::raw("FIND_IN_SET(groups.id,events.selected_list)"), ">", \DB::raw("'0'"))
+                ->leftjoin('event_types', 'event_types.id', '=', 'events.type')
+                ->groupBy("events.id")
+                ->orderBy('events.id', 'desc')
+                ->get()->toArray();
             return $this->successResponse($eventDetails, 'Event record fetch successfully');
         }
     }
@@ -1821,7 +1818,7 @@ class ApiController extends BaseController
 
             $event_id = $request->id;
             $eventDetails = $conn->table('events')
-                ->select("events.*", DB::raw("GROUP_CONCAT(DISTINCT  classes.name) as classname"),'event_types.name as type_name')
+                ->select("events.*", DB::raw("GROUP_CONCAT(DISTINCT  classes.name) as classname"), 'event_types.name as type_name')
                 ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,events.selected_list)"), ">", \DB::raw("'0'"))
                 ->leftjoin('event_types', 'event_types.id', '=', 'events.type')
                 ->groupBy("events.id")
@@ -1861,7 +1858,7 @@ class ApiController extends BaseController
             }
 
             $allDay = $request->all_day;
-            if($allDay==NULL){
+            if ($allDay == NULL) {
                 $eventSt = $request->start_time;
                 $eventEt = $request->end_time;
             } else {
@@ -1889,7 +1886,7 @@ class ApiController extends BaseController
 
             //delete old calendors
             $conn->table('calendors')->where('event_id', $id)->delete();
-            
+
             $eventId = $id;
             $title = $request->title;
             if ($request->audience == 1) {
@@ -1899,7 +1896,7 @@ class ApiController extends BaseController
             }
 
             $allDay = $request->all_day;
-            if($allDay==NULL){
+            if ($allDay == NULL) {
                 $begin = new DateTime($request->start_date);
                 $end = new DateTime($request->end_date);
 
@@ -1908,12 +1905,12 @@ class ApiController extends BaseController
 
                 $date = [];
                 foreach ($period as $dt) {
-                    $fd['start_date'] = $dt->format('Y-m-d').' '.$request->start_time;
-                    $fd['end_date'] = $dt->format("Y-m-d").' '.$request->end_time;
+                    $fd['start_date'] = $dt->format('Y-m-d') . ' ' . $request->start_time;
+                    $fd['end_date'] = $dt->format("Y-m-d") . ' ' . $request->end_time;
                     array_push($date, $fd);
                 }
-                $final['start_date'] = $request->end_date.' '.$request->start_time;
-                $final['end_date'] = $request->end_date.' '.$request->end_time;
+                $final['start_date'] = $request->end_date . ' ' . $request->start_time;
+                $final['end_date'] = $request->end_date . ' ' . $request->end_time;
                 array_push($date, $final);
 
                 if ($request->audience == 3) {
@@ -1928,10 +1925,9 @@ class ApiController extends BaseController
                             'created_at' => date("Y-m-d H:i:s")
                         ]);
                     }
-
                 } else {
 
-                    foreach($date as $d) {
+                    foreach ($date as $d) {
                         $start_date = $d['start_date'];
                         $end_date = $d['end_date'];
                         foreach ($classes as $class) {
@@ -1968,7 +1964,6 @@ class ApiController extends BaseController
                             'created_at' => date("Y-m-d H:i:s")
                         ]);
                     }
-
                 } else {
                     foreach ($classes as $class) {
 
@@ -2957,14 +2952,14 @@ class ApiController extends BaseController
             $staffConn = $this->createNewConnection($request->branch_id);
             // get data
             $empDetails['staff'] = $staffConn->table('staffs as s')
-                                    ->select(
-                                        's.*',
-                                        DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"),
-                                        DB::raw("GROUP_CONCAT(DISTINCT  dp.name) as department_name")
-                                    )
-                                    ->leftJoin("staff_departments as dp", DB::raw("FIND_IN_SET(dp.id,s.department_id)"), ">", DB::raw("'0'"))
-                                    ->where('s.id', $id)
-                                    ->first();
+                ->select(
+                    's.*',
+                    DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"),
+                    DB::raw("GROUP_CONCAT(DISTINCT  dp.name) as department_name")
+                )
+                ->leftJoin("staff_departments as dp", DB::raw("FIND_IN_SET(dp.id,s.department_id)"), ">", DB::raw("'0'"))
+                ->where('s.id', $id)
+                ->first();
             $empDetails['bank'] = $staffConn->table('staff_bank_accounts')->where('staff_id', $id)->first();
             $empDetails['user'] = User::where('user_id', $id)->where('branch_id', $request->branch_id)->first();
             return $this->successResponse($empDetails, 'Employee row fetch successfully');
@@ -6219,13 +6214,14 @@ class ApiController extends BaseController
             // get attendance details query
             $date = $request->date;
             $subject_id = $request->subject_id;
+            $semester_id = $request->semester_id;
+            $session_id = $request->session_id;
             $Connection = $this->createNewConnection($request->branch_id);
             $getTeachersClassName = $Connection->table('enrolls as en')
                 ->select(
                     'en.student_id',
                     'en.roll',
-                    'st.first_name',
-                    'st.last_name',
+                    DB::raw('CONCAT(st.first_name, " ", st.last_name) as name'),
                     'st.register_no',
                     'sa.id as att_id',
                     'sa.status as att_status',
@@ -6235,17 +6231,21 @@ class ApiController extends BaseController
                     'sa.classroom_behaviour',
                     'sa.reasons',
                     'st.birthday',
-                    'st.photo',
+                    'st.photo'
                 )
                 ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
-                ->leftJoin('student_attendances as sa', function ($q) use ($date, $subject_id) {
+                ->leftJoin('student_attendances as sa', function ($q) use ($date, $subject_id, $semester_id, $session_id) {
                     $q->on('sa.student_id', '=', 'st.id')
-                        ->on('sa.date', '=', DB::raw("'$date'")) //second join condition                           
-                        ->on('sa.subject_id', '=', DB::raw("'$subject_id'")); //need to add subject id also later                           
+                        ->on('sa.date', '=', DB::raw("'$date'"))
+                        ->on('sa.subject_id', '=', DB::raw("'$subject_id'"))
+                        ->on('sa.semester_id', '=', DB::raw("'$semester_id'"))
+                        ->on('sa.session_id', '=', DB::raw("'$session_id'"));
                 })
                 ->where([
                     ['en.class_id', '=', $request->class_id],
-                    ['en.section_id', '=', $request->section_id]
+                    ['en.section_id', '=', $request->section_id],
+                    ['en.semester_id', '=', $request->semester_id],
+                    ['en.session_id', '=', $request->session_id]
                 ])
                 ->get();
             return $this->successResponse($getTeachersClassName, 'Attendance record fetch successfully');
@@ -6269,13 +6269,14 @@ class ApiController extends BaseController
             // get attendance details query
             $date = $request->date;
             $subject_id = $request->subject_id;
+            $semester_id = $request->semester_id;
+            $session_id = $request->session_id;
             $Connection = $this->createNewConnection($request->branch_id);
             $getTeachersClassName = $Connection->table('enrolls as en')
                 ->select(
                     'en.student_id',
                     'en.roll',
-                    'st.first_name',
-                    'st.last_name',
+                    DB::raw('CONCAT(st.first_name, " ", st.last_name) as name'),
                     'st.register_no',
                     'sa.id as att_id',
                     'sa.status as att_status',
@@ -6288,14 +6289,18 @@ class ApiController extends BaseController
                     'st.photo',
                 )
                 ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
-                ->leftJoin('student_attendances as sa', function ($q) use ($date, $subject_id) {
+                ->leftJoin('student_attendances as sa', function ($q) use ($date, $subject_id, $semester_id, $session_id) {
                     $q->on('sa.student_id', '=', 'st.id')
-                        ->on('sa.date', '=', DB::raw("'$date'")) //second join condition                           
-                        ->on('sa.subject_id', '=', DB::raw("'$subject_id'")); //need to add subject id also later                           
+                        ->on('sa.date', '=', DB::raw("'$date'"))
+                        ->on('sa.subject_id', '=', DB::raw("'$subject_id'"))
+                        ->on('sa.semester_id', '=', DB::raw("'$semester_id'"))
+                        ->on('sa.session_id', '=', DB::raw("'$session_id'"));
                 })
                 ->where([
                     ['en.class_id', '=', $request->class_id],
-                    ['en.section_id', '=', $request->section_id]
+                    ['en.section_id', '=', $request->section_id],
+                    ['en.semester_id', '=', $request->semester_id],
+                    ['en.session_id', '=', $request->session_id]
                 ])
                 ->get();
             return $getTeachersClassName;
@@ -6324,6 +6329,8 @@ class ApiController extends BaseController
             $class_id = $request->class_id;
             $section_id = $request->section_id;
             $subject_id = $request->subject_id;
+            $semester_id = $request->semester_id;
+            $session_id = $request->session_id;
             $date = $request->date;
             // $data = [];
             foreach ($attendance as $key => $value) {
@@ -6347,6 +6354,8 @@ class ApiController extends BaseController
                     'class_id' => $class_id,
                     'section_id' => $section_id,
                     'subject_id' => $subject_id,
+                    'semester_id' => $semester_id,
+                    'session_id' => $session_id,
                     'created_at' => date("Y-m-d H:i:s")
 
                 );
@@ -6358,6 +6367,8 @@ class ApiController extends BaseController
                         ['class_id', '=', $class_id],
                         ['section_id', '=', $section_id],
                         ['subject_id', '=', $subject_id],
+                        ['semester_id', '=', $semester_id],
+                        ['session_id', '=', $session_id],
                         ['student_id', '=', $value['student_id']]
                     ])->count() > 0) {
 
@@ -6366,6 +6377,8 @@ class ApiController extends BaseController
                             ['class_id', '=', $class_id],
                             ['section_id', '=', $section_id],
                             ['subject_id', '=', $subject_id],
+                            ['semester_id', '=', $semester_id],
+                            ['session_id', '=', $session_id],
                             ['student_id', '=', $value['student_id']]
                         ])->first();
                         $Connection->table('student_attendances')->where('id', $row->id)->update([
@@ -6415,6 +6428,8 @@ class ApiController extends BaseController
             // get attendance details query
             $date = $request->date;
             $subject_id = $request->subject_id;
+            $semester_id = $request->semester_id;
+            $session_id = $request->session_id;
             $Connection = $this->createNewConnection($request->branch_id);
             // $getTeachersClassName = $Connection->table('enrolls as en')
             //     ->select(
@@ -6433,24 +6448,28 @@ class ApiController extends BaseController
                 ->select(
                     'en.student_id',
                     'en.roll',
-                    'st.first_name',
-                    'st.last_name',
+                    DB::raw('CONCAT(st.first_name, " ", st.last_name) as name'),
                     'st.register_no',
                     'sht.id as short_test_id',
                     'sht.test_marks',
                     'sht.grade_status',
                     'sht.date',
-                    'sht.test_name'
+                    'sht.test_name',
+                    'st.photo'
                 )
                 ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
-                ->leftJoin('short_tests as sht', function ($q) use ($date, $subject_id) {
+                ->leftJoin('short_tests as sht', function ($q) use ($date, $subject_id, $semester_id, $session_id) {
                     $q->on('sht.student_id', '=', 'st.id')
-                        ->on('sht.date', '=', DB::raw("'$date'")) //second join condition                           
-                        ->on('sht.subject_id', '=', DB::raw("'$subject_id'")); //need to add subject id also later                           
+                        ->on('sht.date', '=', DB::raw("'$date'"))
+                        ->on('sht.subject_id', '=', DB::raw("'$subject_id'"))
+                        ->on('sht.semester_id', '=', DB::raw("'$semester_id'"))
+                        ->on('sht.session_id', '=', DB::raw("'$session_id'"));
                 })
                 ->where([
                     ['en.class_id', '=', $request->class_id],
-                    ['en.section_id', '=', $request->section_id]
+                    ['en.section_id', '=', $request->section_id],
+                    ['en.semester_id', '=', $request->semester_id],
+                    ['en.session_id', '=', $request->session_id]
                 ])
                 // ->groupBy('en.student_id')
                 ->get();
@@ -6480,6 +6499,8 @@ class ApiController extends BaseController
             $class_id = $request->class_id;
             $section_id = $request->section_id;
             $subject_id = $request->subject_id;
+            $semester_id = $request->semester_id;
+            $session_id = $request->session_id;
             $date = $request->date;
             foreach ($short_test as $key => $value) {
                 // $test_name = (count($value['test_name'][0]) > 0) ? implode(",", $value['test_name'][0]) : "";
@@ -6506,6 +6527,8 @@ class ApiController extends BaseController
                     'class_id' => $class_id,
                     'section_id' => $section_id,
                     'subject_id' => $subject_id,
+                    'semester_id' => $semester_id,
+                    'session_id' => $session_id,
                     'created_at' => date("Y-m-d H:i:s")
                 );
                 // echo $key;
@@ -6612,6 +6635,8 @@ class ApiController extends BaseController
                 'class_id' => $request->class_id,
                 'section_id' => $request->section_id,
                 'subject_id' => $request->subject_id,
+                'semester_id' => $request->semester_id,
+                'session_id' => $request->session_id,
                 'date' => $request->date,
                 'report' => $request->daily_report,
                 'created_at' => date("Y-m-d H:i:s")
@@ -6620,7 +6645,9 @@ class ApiController extends BaseController
                 ['date', '=', $request->date],
                 ['class_id', '=', $request->class_id],
                 ['section_id', '=', $request->section_id],
-                ['subject_id', '=', $request->subject_id]
+                ['subject_id', '=', $request->subject_id],
+                ['semester_id', '=', $request->semester_id],
+                ['session_id', '=', $request->session_id]
             ])->first();
             // dd($checkExist);
             if ($Connection->table('daily_reports')->where([
@@ -6628,6 +6655,8 @@ class ApiController extends BaseController
                 ['class_id', '=', $request->class_id],
                 ['section_id', '=', $request->section_id],
                 ['subject_id', '=', $request->subject_id],
+                ['semester_id', '=', $request->semester_id],
+                ['session_id', '=', $request->session_id]
 
             ])->count() > 0) {
                 $Connection->table('daily_reports')->where('id', $checkExist->id)->update([
@@ -6659,11 +6688,11 @@ class ApiController extends BaseController
             $getDailyReportRemarks = $Connection->table('enrolls as en')
                 ->select(
                     'en.student_id',
-                    'st.first_name',
-                    'st.last_name',
+                    DB::raw('CONCAT(st.first_name, " ", st.last_name) as name'),
                     'dr.student_remarks',
                     'dr.teacher_remarks',
-                    'dr.id'
+                    'dr.id',
+                    'st.photo'
                 )
                 ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
                 ->join('daily_report_remarks as dr', 'dr.student_id', '=', 'en.student_id')
@@ -6671,6 +6700,8 @@ class ApiController extends BaseController
                     ['dr.class_id', '=', $request->class_id],
                     ['dr.section_id', '=', $request->section_id],
                     ['dr.subject_id', '=', $request->subject_id],
+                    ['dr.semester_id', '=', $request->semester_id],
+                    ['dr.session_id', '=', $request->session_id]
                 ])
                 ->get();
             $getDailyReport = $Connection->table('daily_reports as dr')
@@ -6686,6 +6717,8 @@ class ApiController extends BaseController
                     ['dr.class_id', '=', $request->class_id],
                     ['dr.section_id', '=', $request->section_id],
                     ['dr.subject_id', '=', $request->subject_id],
+                    ['dr.semester_id', '=', $request->semester_id],
+                    ['dr.session_id', '=', $request->session_id],
                     ['dr.date', '=', $request->date]
                 ])
                 ->first();
@@ -6714,6 +6747,8 @@ class ApiController extends BaseController
             $class_id = $request->class_id;
             $section_id = $request->section_id;
             $subject_id = $request->subject_id;
+            $semester_id = $request->semester_id;
+            $session_id = $request->session_id;
             $daily_report_remarks = $request->daily_report_remarks;
 
             $Connection = $this->createNewConnection($request->branch_id);
@@ -6726,6 +6761,8 @@ class ApiController extends BaseController
                     'class_id' => $class_id,
                     'section_id' => $section_id,
                     'subject_id' => $subject_id,
+                    'semester_id' => $semester_id,
+                    'session_id' => $session_id,
                     'updated_at' => date("Y-m-d H:i:s")
                 );
                 $Connection->table('daily_report_remarks')->where('id', $value['id'])->update($reportRemarks);
@@ -6754,12 +6791,18 @@ class ApiController extends BaseController
                 'class_id' => $request->class_id,
                 'section_id' => $request->section_id,
                 'subject_id' =>  $request->subject_id,
+                'semester_id' =>  $request->semester_id,
+                'session_id' =>  $request->session_id,
+                'date' =>  $request->date,
                 'created_at' => date("Y-m-d H:i:s")
             ];
             $daily_report_remarks = $Connection->table('daily_report_remarks')->where([
                 ['class_id', '=', $request->class_id],
                 ['section_id', '=', $request->section_id],
-                ['subject_id', '=', $request->subject_id]
+                ['subject_id', '=', $request->subject_id],
+                ['semester_id', '=', $request->semester_id],
+                ['date', '=', $request->date],
+                ['session_id', '=', $request->session_id]
             ])->first();
             if (isset($daily_report_remarks->id)) {
                 $Connection->table('daily_report_remarks')->where('id', $daily_report_remarks->id)->update([
@@ -6768,6 +6811,9 @@ class ApiController extends BaseController
                     'class_id' => $request->class_id,
                     'section_id' => $request->section_id,
                     'subject_id' =>  $request->subject_id,
+                    'semester_id' =>  $request->semester_id,
+                    'session_id' =>  $request->session_id,
+                    'date' =>  $request->date,
                     'updated_at' => date("Y-m-d H:i:s")
                 ]);
             } else {
@@ -6808,8 +6854,11 @@ class ApiController extends BaseController
                     ['sa.class_id', '=', $request->class_id],
                     ['sa.section_id', '=', $request->section_id],
                     ['sa.subject_id', '=', $request->subject_id],
-                    ['sa.date', '=', $request->date],
+                    ['sa.semester_id', '=', $request->semester_id],
+                    ['sa.session_id', '=', $request->session_id]
+                    // ['sa.date', '=', $request->date]
                 ])
+                ->whereBetween(DB::raw('date(date)'), [$startDate, $endDate])
                 ->get();
 
             $avgAttendance = $Connection->table('student_attendances as sa')
@@ -6824,6 +6873,8 @@ class ApiController extends BaseController
                     ['sa.class_id', '=', $request->class_id],
                     ['sa.section_id', '=', $request->section_id],
                     ['sa.subject_id', '=', $request->subject_id],
+                    ['sa.semester_id', '=', $request->semester_id],
+                    ['sa.session_id', '=', $request->session_id]
                 ])
                 ->whereBetween(DB::raw('date(date)'), [$startDate, $endDate])
                 ->get();
@@ -6840,6 +6891,8 @@ class ApiController extends BaseController
                     ['sa.class_id', '=', $request->class_id],
                     ['sa.section_id', '=', $request->section_id],
                     ['sa.subject_id', '=', $request->subject_id],
+                    ['sa.semester_id', '=', $request->semester_id],
+                    ['sa.session_id', '=', $request->session_id]
                     // ['sa.date', '=', $request->date],
                 ])
                 ->whereBetween(DB::raw('date(date)'), [$startDate, $endDate])
@@ -6852,7 +6905,9 @@ class ApiController extends BaseController
                 )
                 ->where([
                     ['en.class_id', '=', $request->class_id],
-                    ['en.section_id', '=', $request->section_id]
+                    ['en.section_id', '=', $request->section_id],
+                    ['en.semester_id', '=', $request->semester_id],
+                    ['en.session_id', '=', $request->session_id]
                 ])
                 ->get();
 
@@ -6868,6 +6923,8 @@ class ApiController extends BaseController
                     ['tc.class_id', '=', $request->class_id],
                     ['tc.section_id', '=', $request->section_id],
                     ['tc.subject_id', '=', $request->subject_id],
+                    ['tc.semester_id', '=', $request->semester_id],
+                    ['tc.session_id', '=', $request->session_id]
                 ])
                 ->where('tc.day', 'like', '%' . $day . '%')
                 ->first();
@@ -7978,10 +8035,32 @@ class ApiController extends BaseController
 
 
             $success = $Connection->table('calendors as cl')
-                ->select('cl.id', 'cl.class_id', 'cl.time_table_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id', 'cl.end', 's.name as section_name', 'c.name as class_name', 'sb.subject_color_calendor as color', 'sb.name as subject_name', 'sb.name as title', 'st.first_name as teacher_name', 'dr.report')
+                ->select(
+                    'cl.id',
+                    'cl.class_id',
+                    'cl.time_table_id',
+                    'cl.section_id',
+                    'cl.subject_id',
+                    'cl.start',
+                    'cl.event_id',
+                    'cl.end',
+                    's.name as section_name',
+                    'c.name as class_name',
+                    'sb.subject_color_calendor as color',
+                    'sb.name as subject_name',
+                    'sb.name as title',
+                    'st.first_name as teacher_name',
+                    'dr.report'
+                    // 'en.session_id',
+                    // 'en.semester_id'
+                )
                 ->join('classes as c', 'cl.class_id', '=', 'c.id')
                 ->join('sections as s', 'cl.section_id', '=', 's.id')
                 ->join('staffs as st', 'cl.teacher_id', '=', 'st.id')
+                // ->join('enrolls as en', function ($join) {
+                //     $join->on('en.class_id', '=', 'c.id')
+                //         ->on('en.section_id', '=', 's.id');
+                // })
                 ->leftJoin('daily_reports as dr', function ($join) {
                     $join->on('cl.class_id', '=', 'dr.class_id')
                         ->on('cl.section_id', '=', 'dr.section_id')
@@ -8087,14 +8166,14 @@ class ApiController extends BaseController
             $Connection = $this->createNewConnection($request->branch_id);
             $teacherId = $request->teacher_id;
             $event = $Connection->table('calendors as c')
-                ->select('c.id', DB::raw("GROUP_CONCAT(DISTINCT  classes.name) as class_name"), 'et.color', 'c.title', 'c.title as subject_name', 'c.class_id', 's.teacher_id', 'c.start', 'c.end', 'c.event_id', 'et.name as event_type', 'e.id as event_id', 'e.remarks', 'e.audience', 'e.selected_list','e.all_day','e.start_time','e.end_time', 'e.start_date', 'e.end_date')
+                ->select('c.id', DB::raw("GROUP_CONCAT(DISTINCT  classes.name) as class_name"), 'et.color', 'c.title', 'c.title as subject_name', 'c.class_id', 's.teacher_id', 'c.start', 'c.end', 'c.event_id', 'et.name as event_type', 'e.id as event_id', 'e.remarks', 'e.audience', 'e.selected_list', 'e.all_day', 'e.start_time', 'e.end_time', 'e.start_date', 'e.end_date')
                 ->leftJoin('subject_assigns as s', 'c.class_id', '=', 's.class_id')
                 ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
                 ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
                 ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,e.selected_list)"), ">", \DB::raw("'0'"))
                 ->whereNotNull('c.event_id')
                 ->whereNull('c.group_id')
-                ->where('e.status',1)
+                ->where('e.status', 1)
                 ->where('s.teacher_id', $teacherId)
                 ->groupBy('c.event_id')
                 ->groupBy('c.start')
@@ -8124,7 +8203,7 @@ class ApiController extends BaseController
             $Connection = $this->createNewConnection($request->branch_id);
             $studentId = $request->student_id;
             $event = $Connection->table('calendors as c')
-                ->select('c.id', DB::raw("GROUP_CONCAT(DISTINCT  classes.name) as class_name"), 'et.color', 'c.title', 'c.title as subject_name', 'c.class_id', 'en.student_id', 'c.start', 'c.end', 'et.name as event_type', 'e.id as event_id', 'e.remarks', 'e.audience', 'e.selected_list','e.all_day','e.start_time','e.end_time', 'e.start_date', 'e.end_date')
+                ->select('c.id', DB::raw("GROUP_CONCAT(DISTINCT  classes.name) as class_name"), 'et.color', 'c.title', 'c.title as subject_name', 'c.class_id', 'en.student_id', 'c.start', 'c.end', 'et.name as event_type', 'e.id as event_id', 'e.remarks', 'e.audience', 'e.selected_list', 'e.all_day', 'e.start_time', 'e.end_time', 'e.start_date', 'e.end_date')
                 ->leftJoin('enrolls as en', 'c.class_id', '=', 'en.class_id')
                 ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
                 ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
@@ -8132,7 +8211,7 @@ class ApiController extends BaseController
                 ->whereNotNull('c.event_id')
                 ->whereNull('c.group_id')
                 ->where('en.student_id', $studentId)
-                ->where('e.status',1)
+                ->where('e.status', 1)
                 ->groupBy('c.event_id')
                 ->groupBy('c.start')
                 ->get();
@@ -8159,18 +8238,18 @@ class ApiController extends BaseController
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
             $event = $Connection->table('calendors as c')
-                ->select('c.id', DB::raw("GROUP_CONCAT(DISTINCT  classes.name) as class_name"), 'et.color', 'c.title', 'c.title as subject_name', 'et.name as event_type', 'c.class_id', 'c.start', 'c.end', 'e.id as event_id', 'e.remarks', 'e.audience', 'e.selected_list','e.all_day','e.start_time','e.end_time','e.start_date', 'e.end_date')
+                ->select('c.id', DB::raw("GROUP_CONCAT(DISTINCT  classes.name) as class_name"), 'et.color', 'c.title', 'c.title as subject_name', 'et.name as event_type', 'c.class_id', 'c.start', 'c.end', 'e.id as event_id', 'e.remarks', 'e.audience', 'e.selected_list', 'e.all_day', 'e.start_time', 'e.end_time', 'e.start_date', 'e.end_date')
                 ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
                 ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
                 ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,e.selected_list)"), ">", \DB::raw("'0'"))
                 ->whereNotNull('c.event_id')
                 ->whereNull('c.group_id')
-                ->where('e.status',1)
+                ->where('e.status', 1)
                 ->groupBy('c.event_id')
                 ->groupBy('c.start')
                 ->get();
 
-               
+
             $success = [];
             foreach ($event as $eve) {
                 $data = $eve;
@@ -8204,19 +8283,19 @@ class ApiController extends BaseController
             $Connection = $this->createNewConnection($request->branch_id);
             $teacherId = $request->teacher_id;
 
-                $event = $Connection->table('calendors as c')
-                                    ->select('c.id', DB::raw("GROUP_CONCAT(DISTINCT  g.name) as class_name"), 'et.color', 'c.title', 'c.title as subject_name', 'et.name as event_type', 'c.class_id', 'c.start', 'c.end', 'e.id as event_id', 'e.remarks', 'e.audience', 'e.selected_list','e.all_day','e.start_time','e.end_time','e.start_date', 'e.end_date')
-                                    // ->leftJoin('groups as g', 'c.group_id', '=', 'g.id')
-                                    ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
-                                    ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
-                                    ->leftjoin("groups as g", \DB::raw("FIND_IN_SET( g.id,e.selected_list)"), ">", \DB::raw("'0'"))
-                                    ->leftjoin("staffs as s", \DB::raw("FIND_IN_SET(s.id,g.staff)"), ">", \DB::raw("'0'"))
-                                    ->whereNotNull('c.group_id')
-                                    ->where('s.id', $teacherId)
-                                    ->where('e.status',1)
-                                    ->groupBy('c.event_id')
-                                    ->groupBy('c.start')
-                                    ->get();
+            $event = $Connection->table('calendors as c')
+                ->select('c.id', DB::raw("GROUP_CONCAT(DISTINCT  g.name) as class_name"), 'et.color', 'c.title', 'c.title as subject_name', 'et.name as event_type', 'c.class_id', 'c.start', 'c.end', 'e.id as event_id', 'e.remarks', 'e.audience', 'e.selected_list', 'e.all_day', 'e.start_time', 'e.end_time', 'e.start_date', 'e.end_date')
+                // ->leftJoin('groups as g', 'c.group_id', '=', 'g.id')
+                ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
+                ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
+                ->leftjoin("groups as g", \DB::raw("FIND_IN_SET( g.id,e.selected_list)"), ">", \DB::raw("'0'"))
+                ->leftjoin("staffs as s", \DB::raw("FIND_IN_SET(s.id,g.staff)"), ">", \DB::raw("'0'"))
+                ->whereNotNull('c.group_id')
+                ->where('s.id', $teacherId)
+                ->where('e.status', 1)
+                ->groupBy('c.event_id')
+                ->groupBy('c.start')
+                ->get();
 
 
             $success = [];
@@ -8245,18 +8324,18 @@ class ApiController extends BaseController
             $Connection = $this->createNewConnection($request->branch_id);
             $studentId = $request->student_id;
             $event = $Connection->table('calendors as c')
-                        ->select('c.id',DB::raw("GROUP_CONCAT(DISTINCT g.name) as class_name"),DB::raw("GROUP_CONCAT(DISTINCT en.student_id) as stud_id"), 'et.color', 'c.title', 'c.title as subject_name', 'c.class_id', 'c.start', 'c.end', 'et.name as event_type', 'e.id as event_id', 'e.remarks', 'e.audience', 'e.selected_list','e.all_day','e.start_time','e.end_time', 'e.start_date', 'e.end_date')
-                        // ->leftJoin('groups as g', 'c.group_id', '=', 'g.id')
-                        ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
-                        ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
-                        ->leftJoin('groups as g', DB::raw("FIND_IN_SET(g.id,e.selected_list)"), ">", \DB::raw("'0'"))   
-                        ->leftJoin('enrolls as en', \DB::raw("FIND_IN_SET(en.student_id,g.student)"), ">", \DB::raw("'0'"))
-                        ->whereNotNull('c.group_id')
-                        ->where('en.student_id', $studentId)
-                        ->where('e.status',1)
-                        ->groupBy('c.event_id')
-                        ->groupBy('c.start')
-                        ->get();
+                ->select('c.id', DB::raw("GROUP_CONCAT(DISTINCT g.name) as class_name"), DB::raw("GROUP_CONCAT(DISTINCT en.student_id) as stud_id"), 'et.color', 'c.title', 'c.title as subject_name', 'c.class_id', 'c.start', 'c.end', 'et.name as event_type', 'e.id as event_id', 'e.remarks', 'e.audience', 'e.selected_list', 'e.all_day', 'e.start_time', 'e.end_time', 'e.start_date', 'e.end_date')
+                // ->leftJoin('groups as g', 'c.group_id', '=', 'g.id')
+                ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
+                ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
+                ->leftJoin('groups as g', DB::raw("FIND_IN_SET(g.id,e.selected_list)"), ">", \DB::raw("'0'"))
+                ->leftJoin('enrolls as en', \DB::raw("FIND_IN_SET(en.student_id,g.student)"), ">", \DB::raw("'0'"))
+                ->whereNotNull('c.group_id')
+                ->where('en.student_id', $studentId)
+                ->where('e.status', 1)
+                ->groupBy('c.event_id')
+                ->groupBy('c.start')
+                ->get();
             $success = [];
             foreach ($event as $eve) {
                 $data = $eve;
@@ -8269,39 +8348,39 @@ class ApiController extends BaseController
         }
     }
 
-     // getEventGroupCalendorAdmin
-     public function getEventGroupCalendorAdmin(Request $request)
-     {
-         $validator = \Validator::make($request->all(), [
-             'branch_id' => 'required',
-         ]);
-         if (!$validator->passes()) {
-             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-         } else {
-             // create new connection
-             $Connection = $this->createNewConnection($request->branch_id);
-             $event = $Connection->table('calendors as c')
-                 ->select('c.id', DB::raw("GROUP_CONCAT(DISTINCT  groups.name) as class_name"),'c.group_id', 'et.color', 'c.title', 'c.title as subject_name', 'et.name as event_type', 'c.class_id', 'c.start', 'c.end', 'e.id as event_id', 'e.remarks', 'e.audience', 'e.selected_list','e.all_day','e.start_time','e.end_time','e.start_date', 'e.end_date')
-                 ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
-                 ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
-                 ->leftjoin("groups", \DB::raw("FIND_IN_SET(groups.id,e.selected_list)"), ">", \DB::raw("'0'"))
-                 ->whereNotNull('c.group_id')
-                 ->where('e.status',1)
-                 ->groupBy('c.event_id')
-                 ->groupBy('c.start')
-                 ->get();
- 
-                
-             $success = [];
-             foreach ($event as $eve) {
-                 $data = $eve;
-                 if ($eve->audience == "1") {
-                     $data->class_name = "EveryOne";
-                 }
-                 array_push($success, $data);
-             }
-             return $this->successResponse($success, 'Event data Fetched successfully');
-         }
+    // getEventGroupCalendorAdmin
+    public function getEventGroupCalendorAdmin(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $event = $Connection->table('calendors as c')
+                ->select('c.id', DB::raw("GROUP_CONCAT(DISTINCT  groups.name) as class_name"), 'c.group_id', 'et.color', 'c.title', 'c.title as subject_name', 'et.name as event_type', 'c.class_id', 'c.start', 'c.end', 'e.id as event_id', 'e.remarks', 'e.audience', 'e.selected_list', 'e.all_day', 'e.start_time', 'e.end_time', 'e.start_date', 'e.end_date')
+                ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
+                ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
+                ->leftjoin("groups", \DB::raw("FIND_IN_SET(groups.id,e.selected_list)"), ">", \DB::raw("'0'"))
+                ->whereNotNull('c.group_id')
+                ->where('e.status', 1)
+                ->groupBy('c.event_id')
+                ->groupBy('c.start')
+                ->get();
+
+
+            $success = [];
+            foreach ($event as $eve) {
+                $data = $eve;
+                if ($eve->audience == "1") {
+                    $data->class_name = "EveryOne";
+                }
+                array_push($success, $data);
+            }
+            return $this->successResponse($success, 'Event data Fetched successfully');
+        }
     }
 
     // getEventGroupCalendorParent
@@ -8318,19 +8397,19 @@ class ApiController extends BaseController
             $Connection = $this->createNewConnection($request->branch_id);
             $parentId = $request->parent_id;
 
-                $event = $Connection->table('calendors as c')
-                                    ->select('c.id', DB::raw("GROUP_CONCAT(DISTINCT  g.name) as class_name"),'c.group_id', 'et.color', 'c.title', 'c.title as subject_name', 'et.name as event_type', 'c.class_id', 'c.start', 'c.end', 'e.id as event_id', 'e.remarks', 'e.audience', 'e.selected_list','e.all_day','e.start_time','e.end_time','e.start_date', 'e.end_date')
-                                    // ->leftJoin('groups as g', 'c.group_id', '=', 'g.id')
-                                    ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
-                                    ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
-                                    ->leftjoin("groups as g", \DB::raw("FIND_IN_SET( g.id,e.selected_list)"), ">", \DB::raw("'0'"))
-                                    ->leftjoin("parent as p", \DB::raw("FIND_IN_SET(p.id,g.parent)"), ">", \DB::raw("'0'"))
-                                    ->where('p.id', $parentId)
-                                    ->whereNotNull('c.group_id')
-                                    ->where('e.status',1)
-                                    ->groupBy('c.event_id')
-                                    ->groupBy('c.start')
-                                    ->get();
+            $event = $Connection->table('calendors as c')
+                ->select('c.id', DB::raw("GROUP_CONCAT(DISTINCT  g.name) as class_name"), 'c.group_id', 'et.color', 'c.title', 'c.title as subject_name', 'et.name as event_type', 'c.class_id', 'c.start', 'c.end', 'e.id as event_id', 'e.remarks', 'e.audience', 'e.selected_list', 'e.all_day', 'e.start_time', 'e.end_time', 'e.start_date', 'e.end_date')
+                // ->leftJoin('groups as g', 'c.group_id', '=', 'g.id')
+                ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
+                ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
+                ->leftjoin("groups as g", \DB::raw("FIND_IN_SET( g.id,e.selected_list)"), ">", \DB::raw("'0'"))
+                ->leftjoin("parent as p", \DB::raw("FIND_IN_SET(p.id,g.parent)"), ">", \DB::raw("'0'"))
+                ->where('p.id', $parentId)
+                ->whereNotNull('c.group_id')
+                ->where('e.status', 1)
+                ->groupBy('c.event_id')
+                ->groupBy('c.start')
+                ->get();
 
 
             $success = [];
@@ -8357,7 +8436,7 @@ class ApiController extends BaseController
         } else {
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
-
+            $studentID = $request->student_id;
             $success = $Connection->table('students as stud')
                 ->select(
                     'cl.id',
@@ -8367,6 +8446,8 @@ class ApiController extends BaseController
                     'cl.subject_id',
                     'cl.start',
                     'cl.end',
+                    'en.semester_id',
+                    'en.session_id',
                     's.name as section_name',
                     'c.name as class_name',
                     'sb.subject_color_calendor as color',
@@ -8382,17 +8463,19 @@ class ApiController extends BaseController
                     $join->on('sa.class_id', '=', 'en.class_id')
                         ->on('sa.section_id', '=', 'en.section_id');
                 })
-                ->leftJoin('calendors as cl', function ($join) {
+                ->join('calendors as cl', function ($join) {
                     $join->on('cl.class_id', '=', 'sa.class_id')
                         ->on('cl.section_id', '=', 'sa.section_id')
                         ->on('cl.subject_id', '=', 'sa.subject_id');
                 })
                 ->join('subjects as sb', 'sa.subject_id', '=', 'sb.id')
                 ->join('staffs as st', 'sa.teacher_id', '=', 'st.id')
-                ->leftJoin('daily_report_remarks as drr', function ($join) {
+                ->leftJoin('daily_report_remarks as drr', function ($join) use ($studentID) {
                     $join->on('cl.class_id', '=', 'drr.class_id')
                         ->on('cl.section_id', '=', 'drr.section_id')
-                        ->on('cl.subject_id', '=', 'drr.subject_id');
+                        ->on('cl.subject_id', '=', 'drr.subject_id')
+                        ->on(DB::raw('DATE(cl.start)'), '=', 'drr.date')
+                        ->on('drr.student_id', '=', DB::raw("'$studentID'"));
                 })
                 ->where('stud.id', $request->student_id)
                 ->get();
@@ -11189,7 +11272,7 @@ class ApiController extends BaseController
             // create new connection
             $con = $this->createNewConnection($request->branch_id);
             // get data
-            $student = $con->table('enrolls as e')->select('s.id', DB::raw('CONCAT(s.first_name, " ", s.last_name) as name'), 's.register_no', 's.roll_no', 's.mobile_no', 's.email', 's.gender','s.photo')
+            $student = $con->table('enrolls as e')->select('s.id', DB::raw('CONCAT(s.first_name, " ", s.last_name) as name'), 's.register_no', 's.roll_no', 's.mobile_no', 's.email', 's.gender', 's.photo')
                 ->leftJoin('students as s', 'e.student_id', '=', 's.id')
                 ->when($class_id, function ($query, $class_id) {
                     return $query->where('e.class_id', $class_id);
@@ -11609,7 +11692,7 @@ class ApiController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             // get data
             $parentDetails['parent'] = $conn->table('parent')->select('*', DB::raw("CONCAT(first_name, ' ', last_name) as name"))->where('id', $id)->first();
-            $parentDetails['childs'] = $conn->table('students as s')->select('s.id','s.first_name', 's.last_name', 's.photo', 'c.name as class_name', 'sec.name as section_name')
+            $parentDetails['childs'] = $conn->table('students as s')->select('s.id', 's.first_name', 's.last_name', 's.photo', 'c.name as class_name', 'sec.name as section_name')
                 ->leftJoin('enrolls as e', 'e.student_id', '=', 's.id')
                 ->leftJoin('classes as c', 'e.class_id', '=', 'c.id')
                 ->leftJoin('sections as sec', 'e.section_id', '=', 'sec.id')
@@ -11635,7 +11718,7 @@ class ApiController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             // get data
             $data = $conn->table('parent')
-                ->select("id", DB::raw("CONCAT(first_name, ' ', last_name) as name"),'email')
+                ->select("id", DB::raw("CONCAT(first_name, ' ', last_name) as name"), 'email')
                 ->where("first_name", "LIKE", "%{$request->name}%")
                 ->orWhere("last_name", "LIKE", "%{$request->name}%")
                 ->get();
@@ -12766,7 +12849,8 @@ class ApiController extends BaseController
                     'lev.document',
                     'lev.status',
                     'lev.remarks',
-                    'lev.teacher_remarks'
+                    'lev.teacher_remarks',
+                    'std.photo'
                 )
                 ->leftJoin('students as std', 'lev.student_id', '=', 'std.id')
                 ->where([
@@ -15089,10 +15173,10 @@ class ApiController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             // get data
             $transportAssignDetails = $conn->table('transport_assign as ta')
-                                            ->select('ta.*','tr.name as route_name','tv.vehicle_no','ts.stop_position')
-                                            ->join('transport_route as tr', 'ta.route_id', '=', 'tr.id')
-                                            ->join('transport_vehicle as tv', 'ta.vehicle_id', '=', 'tv.id')
-                                            ->join('transport_stoppage as ts', 'ta.stoppage_id', '=', 'ts.id')->get();
+                ->select('ta.*', 'tr.name as route_name', 'tv.vehicle_no', 'ts.stop_position')
+                ->join('transport_route as tr', 'ta.route_id', '=', 'tr.id')
+                ->join('transport_vehicle as tv', 'ta.vehicle_id', '=', 'tv.id')
+                ->join('transport_stoppage as ts', 'ta.stoppage_id', '=', 'ts.id')->get();
             return $this->successResponse($transportAssignDetails, 'Transport Assign record fetch successfully');
         }
     }
@@ -15452,7 +15536,36 @@ class ApiController extends BaseController
             }
         }
     }
-
+    // get absent late excuse classroom
+    public function getAbsentLateExcuse(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'attendance_type' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $secConn = $this->createNewConnection($request->branch_id);
+            $data = [];
+            if ($request->attendance_type == "absent") {
+                $table_name = 'absent_reasons';
+            }
+            if ($request->attendance_type == "late") {
+                $table_name = 'late_reasons';
+            }
+            if ($request->attendance_type == "excused") {
+                $table_name = 'excused_reasons';
+            }
+            if (isset($table_name)) {
+                $data = $secConn->table($table_name)
+                    ->select('id', 'name')
+                    ->get();
+            }
+            return $this->successResponse($data, 'reasons details fetch successfully');
+        }
+    }
     // add Group
     public function addGroup(Request $request)
     {
@@ -15539,19 +15652,19 @@ class ApiController extends BaseController
 
             $id = $request->id;
             $group = $conn->table('groups')->where('id', $id)->first();
-            
+
             $staff = NULL;
             $parent = NULL;
             $student = NULL;
-            
+
             if ($group->staff) {
                 $group_staff = explode(",", $group->staff);
                 $staff = [];
-                foreach($group_staff as $gs) {
+                foreach ($group_staff as $gs) {
                     $data = $conn->table('staffs as s')
-                            ->select("s.id", DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"),DB::raw("GROUP_CONCAT(DISTINCT  dp.name) as department_name"))
-                            ->leftJoin("staff_departments as dp", DB::raw("FIND_IN_SET(dp.id,s.department_id)"), ">", DB::raw("'0'"))
-                            ->where('s.id', $gs)->first();
+                        ->select("s.id", DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"), DB::raw("GROUP_CONCAT(DISTINCT  dp.name) as department_name"))
+                        ->leftJoin("staff_departments as dp", DB::raw("FIND_IN_SET(dp.id,s.department_id)"), ">", DB::raw("'0'"))
+                        ->where('s.id', $gs)->first();
                     array_push($staff, $data);
                 }
             }
@@ -15559,13 +15672,13 @@ class ApiController extends BaseController
             if ($group->student) {
                 $group_student = explode(",", $group->student);
                 $student = [];
-                foreach($group_student as $gs) {
+                foreach ($group_student as $gs) {
                     $data = $conn->table('students as s')
-                                ->select("s.id", DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"),'c.name as class_name','sc.name as section_name')
-                                ->leftJoin('enrolls as e', 'e.student_id', '=', 's.id')
-                                ->leftJoin('classes as c', 'e.class_id', '=', 'c.id')
-                                ->leftJoin('sections as sc', 'e.section_id', '=', 'sc.id')
-                                ->where('s.id', $gs)->first();
+                        ->select("s.id", DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"), 'c.name as class_name', 'sc.name as section_name')
+                        ->leftJoin('enrolls as e', 'e.student_id', '=', 's.id')
+                        ->leftJoin('classes as c', 'e.class_id', '=', 'c.id')
+                        ->leftJoin('sections as sc', 'e.section_id', '=', 'sc.id')
+                        ->where('s.id', $gs)->first();
                     array_push($student, $data);
                 }
             }
@@ -15573,12 +15686,12 @@ class ApiController extends BaseController
             if ($group->parent) {
                 $group_parent = explode(",", $group->parent);
                 $parent = [];
-                foreach($group_parent as $gp) {
-                    $data = $conn->table('parent')->select("id", DB::raw("CONCAT(first_name, ' ', last_name) as name"),'email')->where('id', $gp)->first();
+                foreach ($group_parent as $gp) {
+                    $data = $conn->table('parent')->select("id", DB::raw("CONCAT(first_name, ' ', last_name) as name"), 'email')->where('id', $gp)->first();
                     array_push($parent, $data);
                 }
             }
-            
+
             $groupDetails['group'] = $group;
             $groupDetails['staff'] = $staff;
             $groupDetails['student'] = $student;
@@ -15675,7 +15788,7 @@ class ApiController extends BaseController
             // get data
 
             $data = $conn->table('students as s')
-                ->select("s.id", DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"),'c.name as class_name','sc.name as section_name')
+                ->select("s.id", DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"), 'c.name as class_name', 'sc.name as section_name')
                 ->leftJoin('enrolls as e', 'e.student_id', '=', 's.id')
                 ->leftJoin('classes as c', 'e.class_id', '=', 'c.id')
                 ->leftJoin('sections as sc', 'e.section_id', '=', 'sc.id')
@@ -15688,7 +15801,7 @@ class ApiController extends BaseController
                     $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1">';
                     foreach ($data as $row) {
 
-                        $output .= '<li class="list-group-item" value="' . $row->id . '">' . $row->name . ' ( '. $row->class_name . ' - ' .  $row->section_name .' )</li>';
+                        $output .= '<li class="list-group-item" value="' . $row->id . '">' . $row->name . ' ( ' . $row->class_name . ' - ' .  $row->section_name . ' )</li>';
                     }
                     $output .= '</ul>';
                 } else {
@@ -15716,18 +15829,18 @@ class ApiController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             // get data
             $data = $conn->table('staffs as s')
-                    ->select("s.id", DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"),DB::raw("GROUP_CONCAT(DISTINCT  dp.name) as department_name"))
-                    ->where("s.first_name", "LIKE", "%{$request->name}%")
-                    ->orWhere("s.last_name", "LIKE", "%{$request->name}%")
-                    ->leftJoin("staff_departments as dp", DB::raw("FIND_IN_SET(dp.id,s.department_id)"), ">", DB::raw("'0'"))
-                    ->groupBy("s.id")
-                    ->get();
+                ->select("s.id", DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"), DB::raw("GROUP_CONCAT(DISTINCT  dp.name) as department_name"))
+                ->where("s.first_name", "LIKE", "%{$request->name}%")
+                ->orWhere("s.last_name", "LIKE", "%{$request->name}%")
+                ->leftJoin("staff_departments as dp", DB::raw("FIND_IN_SET(dp.id,s.department_id)"), ">", DB::raw("'0'"))
+                ->groupBy("s.id")
+                ->get();
             $output = '';
             if ($request->name) {
                 if (!$data->isEmpty()) {
                     $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1">';
                     foreach ($data as $row) {
-                        $output .= '<li class="list-group-item" value="' . $row->id . '">' . $row->name . '( '. $row->department_name . ' ) </li>';
+                        $output .= '<li class="list-group-item" value="' . $row->id . '">' . $row->name . '( ' . $row->department_name . ' ) </li>';
                     }
                     $output .= '</ul>';
                 } else {
@@ -15757,7 +15870,7 @@ class ApiController extends BaseController
             $success['semester'] = $conn->table('semester')->whereRaw('(now() between start_date and end_date)')->first();
             $hour = Carbon::now()->format('H');
 
-            if($hour < 13) {
+            if ($hour < 13) {
                 $session = 1;
             } else {
                 $session = 2;

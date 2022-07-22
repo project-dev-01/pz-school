@@ -19,6 +19,8 @@ class CreateDailyReportRemarksTable extends Migration
             $table->integer('class_id');
             $table->integer('section_id');
             $table->integer('subject_id');
+            $table->integer('semester_id');
+            $table->integer('session_id');
             $table->text('student_remarks')->nullable();
             $table->text('teacher_remarks')->nullable();
             $table->timestamps();

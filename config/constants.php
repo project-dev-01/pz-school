@@ -490,6 +490,9 @@ return [
         'transport_vehicle_details' => $url.'/transport_vehicle/transport_vehicle-details',
         'transport_vehicle_update' => $url.'/transport_vehicle/update',
         'transport_vehicle_delete' => $url.'/transport_vehicle/delete',
+        // get absent late excuse
+        'get_absent_late_excuse' => $url.'/get_absent_late_excuse',
+
         
         //group calendor url
         'get_event_group_calendor' => $url.'/get_event_group_calendor',
@@ -512,7 +515,7 @@ return [
         'student_name' => $url.'/student/name',
 
         
-        'get_semester_session' => $url.'/get_semester_session',
+        'get_semester_session' => $url.'/get_semester_session'
     ]
 
 ];

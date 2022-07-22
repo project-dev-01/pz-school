@@ -519,6 +519,8 @@
 
                                         <input type="hidden" id="setCurDate" name="date">
                                         <input type="hidden" id="ttclassID" name="class_id">
+                                        <input type="hidden" id="ttsemesterID" name="semester_id">
+                                        <input type="hidden" id="ttsessionID" name="session_id">
                                         <div class="col-md-12" id="standard-name"></div>
                                     </div>
                                     <div class="col-4">

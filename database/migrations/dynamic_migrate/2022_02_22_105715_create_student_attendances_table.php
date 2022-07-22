@@ -20,6 +20,8 @@ class CreateStudentAttendancesTable extends Migration
             $table->integer('class_id');
             $table->integer('section_id');
             $table->integer('subject_id');
+            $table->integer('semester_id');
+            $table->integer('session_id');
             $table->string('reasons');
             $table->string('student_behaviour');
             $table->string('classroom_behaviour');

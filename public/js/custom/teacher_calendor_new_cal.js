@@ -246,6 +246,8 @@ $(document).ready(function () {
                 $("#ttclassID").val(e.event.extendedProps.class_id);
                 $("#ttSectionID").val(e.event.extendedProps.section_id);
                 $("#ttSubjectID").val(e.event.extendedProps.subject_id);
+                $("#ttsemesterID").val(e.event.extendedProps.semester_id);
+                $("#ttsessionID").val(e.event.extendedProps.session_id);
                 $("#calNotes").val(e.event.extendedProps.report);
                 $("#ttDate").val(e.event.end);
                 $("#setCurDate").val(setCurDate);

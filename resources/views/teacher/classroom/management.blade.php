@@ -3,12 +3,13 @@
 @section('css')
 <style>
     .radio_group {
-        width: 40px;
-        height: 53px;
-        margin: 8px;
+        width: 35px;
+        height: 35px;
+        margin: 0px 3px 0px 0px;
         position: relative;
         text-align: right;
         font-size: 25px;
+        background-color: #08b9e133;
     }
 
     .radio_group_1 {
@@ -75,6 +76,32 @@
         transform: scale(1.1);
     }
 </style>
+<style>
+    /* #countdown {
+        width: 100%;
+    } */
+
+    /* label {
+        clear: both;
+        display: block;
+    } */
+
+    /* #countdown span {
+        background: #313233;
+        color: #FFF;
+        font-size: 26px;
+        font-weight: normal;
+        text-align: center;
+        width: 25%;
+        dispaly: block;
+        float: left;
+        border-right: 1px solid #FFF;
+    }
+
+    #countdown span:last-child {
+        border-right: 1px solid #313233;
+    } */
+</style>
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -99,7 +126,7 @@
                 <div class="card-body">
                     <form id="classroomFilter" autocomplete="off">
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="changeClassName">Standard<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
@@ -111,7 +138,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="sectionID">Class Name<span class="text-danger">*</span></label>
                                     <select id="sectionID" class="form-control" name="section_id">
@@ -133,7 +160,31 @@
                                     <input type="text" class="form-control" value="<?php echo date('d-m-Y'); ?>" name="class_date" id="classDate" require="">
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="semester_id">Semester</label>
+                                    <select id="semester_id" class="form-control" name="semester_id">
+                                        <option value="0">Select Semester</option>
+                                        @foreach($semester as $sem)
+                                        <option value="{{$sem['id']}}">{{$sem['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="session_id">Session</label>
+                                    <select id="session_id" class="form-control" name="session_id">
+                                        <option value="0">Select Session</option>
+                                        @foreach($session as $ses)
+                                        <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Count Down</label>
                                     <div id="classroom_count_down" class="counter"></div>
@@ -371,6 +422,8 @@
                                                 <input type="hidden" name="class_id" id="listModeClassID">
                                                 <input type="hidden" name="section_id" id="listModeSectionID">
                                                 <input type="hidden" name="subject_id" id="listModeSubjectID">
+                                                <input type="hidden" name="semester_id" id="listModeSemesterID">
+                                                <input type="hidden" name="session_id" id="listModeSessionID">
                                                 <input type="hidden" name="date" id="listModeSelectedDate">
                                             </div>
                                         </div>
@@ -379,7 +432,7 @@
                                                 <div class="table-responsive">
                                                     <!-- <table data-toggle="table" data-page-size="3" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable "> -->
                                                     <!-- <table id="listModeClassRoom" class="table table-striped table-nowrap"> -->
-                                                    <table id="listModeClassRoom" class="table" style="width:150%">
+                                                    <table id="listModeClassRoom" class="table dt-responsive nowrap w-100">
                                                         <!-- <table class="display" width="100%"> -->
                                                         <thead>
                                                             <tr>
@@ -432,7 +485,7 @@
                                             <form id="updatestudentleave" method="post" action="{{ route('teacher.studentleave.update') }}" autocomplete="off">
                                                 <div class="col-md-12">
                                                     <div class="table-responsive">
-                                                        <table id="stdleaves" class="table" width="150%">
+                                                        <table id="stdleaves" class="table w-100 nowrap" width="100%">
                                                             <thead>
                                                                 <tr>
                                                                     <th>#</th>
@@ -478,6 +531,8 @@
                                         <input type="hidden" name="class_id" id="dailyReportClassID">
                                         <input type="hidden" name="section_id" id="dailyReportSectionID">
                                         <input type="hidden" name="subject_id" id="dailyReportSubjectID">
+                                        <input type="hidden" name="semester_id" id="dailyReportSemesterID">
+                                        <input type="hidden" name="session_id" id="dailyReportSessionID">
                                         <input type="hidden" name="date" id="dailyReportSelectedDate">
                                         <div class="card">
                                             <div class="card-body">
@@ -507,11 +562,13 @@
                                         <input type="hidden" name="class_id" id="dailyReportRemarksClassID">
                                         <input type="hidden" name="section_id" id="dailyReportRemarksSectionID">
                                         <input type="hidden" name="subject_id" id="dailyReportRemarksSubjectID">
+                                        <input type="hidden" name="semester_id" id="dailyReportRemarksSemesterID">
+                                        <input type="hidden" name="session_id" id="dailyReportRemarksSessionID">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="col-md-12">
                                                     <div class="table-responsive">
-                                                        <table id="dailyReportRemarks" class="table" width="100%">
+                                                        <table id="dailyReportRemarks" class="table dt-responsive nowrap w-100">
                                                             <thead>
                                                                 <tr>
                                                                     <th>#</th>
@@ -547,6 +604,8 @@
                                                 <input type="hidden" name="class_id" id="shortTestClassID">
                                                 <input type="hidden" name="section_id" id="shortTestSectionID">
                                                 <input type="hidden" name="subject_id" id="shortTestSubjectID">
+                                                <input type="hidden" name="semester_id" id="shortTestSemesterID">
+                                                <input type="hidden" name="session_id" id="shortTestSessionID">
                                                 <input type="hidden" name="date" id="shortTestSelectedDate">
 
                                                 <div id="dynamic-field-1" class="form-group dynamic-field">
@@ -568,9 +627,9 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div>
-                                                        <button type="button" id="add-button" class="btn btn-secondary text-uppercase shadow-sm">
+                                                        <button type="button" id="add-button" class="btn btn-success text-uppercase shadow-sm">
                                                             <i class="fe-plus-circle"></i> Add</button>
-                                                        <button type="button" id="remove-button" class="btn btn-secondary text-uppercase" disabled="disabled">
+                                                        <button type="button" id="remove-button" class="btn btn-danger text-uppercase" disabled="disabled">
                                                             <i class="fe-minus-circle"></i> Remove</button>
                                                         <button type="submit" id="save-button" class="btn btn-info waves-effect waves-light text-uppercase">
                                                             <i class="fe-save"></i> Save</button>
@@ -584,7 +643,7 @@
                                             <div class="card">
                                                 <div class="card-body">
                                                     <div class="table-responsive">
-                                                        <table class="table">
+                                                        <table class="table dt-responsive nowrap w-100">
                                                             <thead>
                                                                 <tr>
                                                                     <th>S.no</th>
@@ -649,6 +708,8 @@
     var getStudentLeave = "{{ config('constants.api.get_student_leaves') }}";
     var imgurl = "{{ asset('public/teacher/student-leaves/') }}";
     var teacher_leave_remarks_updated = "{{ config('constants.api.teacher_leave_approve') }}";
+    var getAbsentLateExcuse = "{{ config('constants.api.get_absent_late_excuse') }}";
+
     // default image test
     var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
     var studentImg = "{{ asset('public/users/images/') }}";

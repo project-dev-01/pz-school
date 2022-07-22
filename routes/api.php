@@ -349,8 +349,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('get_timetable_calendor_student', [ApiController::class, 'getTimetableCalendorStud']);
     Route::get('get_event_calendor_student', [ApiController::class, 'getEventCalendorStud']);
     Route::get('get_event_calendor_admin', [ApiController::class, 'getEventCalendorAdmin']);
-    
-    
+
+
     Route::get('get_event_group_calendor', [ApiController::class, 'getEventGroupCalendor']);
     Route::get('get_event_group_calendor_student', [ApiController::class, 'getEventGroupCalendorStud']);
     Route::get('get_event_group_calendor_parent', [ApiController::class, 'getEventGroupCalendorParent']);
@@ -503,7 +503,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('calendor/add-task-calendor', [ApiController::class, 'calendorAddTask']);
     Route::get('calendor/list-task-calendor', [ApiController::class, 'calendorListTask']);
     Route::post('calendor/delete-task-calendor', [ApiController::class, 'calendorDeleteTask']);
-    
+
     // Education routes
     Route::post('education/add', [ApiController::class, 'addEducation']);
     Route::get('education/list', [ApiController::class, 'getEducationList']);
@@ -530,6 +530,9 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // get unread notifications
     Route::get('unread_notifications', [ApiController::class, 'unreadNotifications']);
     Route::post('mark_as_read', [ApiController::class, 'markAsRead']);
+    // get absent late excuse classroom
+    Route::post('get_absent_late_excuse', [ApiController::class, 'getAbsentLateExcuse']);
+
 
     // Group routes
     Route::post('group/add', [ApiController::class, 'addGroup']);
@@ -539,7 +542,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('group/delete', [ApiController::class, 'deleteGroup']);
 
     // Name routes
-    
+
     Route::get('student/name', [ApiController::class, 'getStudentName']);
     Route::get('staff/name', [ApiController::class, 'getStaffName']);
 

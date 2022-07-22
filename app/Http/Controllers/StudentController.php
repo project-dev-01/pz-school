@@ -35,7 +35,10 @@ class StudentController extends Controller
             "student_id" => session()->get('ref_user_id'),
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
-            "subject_id" => $request->subject_id
+            "subject_id" => $request->subject_id,
+            "date" => $request->date,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.add_daily_report_by_student'), $data);

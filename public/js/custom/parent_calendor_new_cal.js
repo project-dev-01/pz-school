@@ -13,6 +13,7 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.code == 200) {
                     toastr.success(response.message);
+                    calendar.refetchEvents();
                     $("#student-modal").modal("hide");
                 } else {
                     toastr.error(response.message);
@@ -83,7 +84,7 @@ $(document).ready(function () {
                 g = response.data;
                 return g;
             }
-        },  {
+        }, {
             url: getEventGroupCalendorParent + '?token=' + token + '&branch_id=' + branchID + '&parent_id=' + parent_id,
             type: 'get',
             success: function (response) {
@@ -118,7 +119,7 @@ $(document).ready(function () {
                 $("#type").html(e.event.extendedProps.event_type);
                 $("#start_date").html(e.event.extendedProps.start_date);
                 $("#end_date").html(e.event.extendedProps.end_date);
-                if(e.event.extendedProps.all_day == null) {
+                if (e.event.extendedProps.all_day == null) {
                     $("#start_time").html(e.event.extendedProps.start_time);
                     $("#end_time").html(e.event.extendedProps.end_time);
                     $("#start_time_row").show();
@@ -160,7 +161,9 @@ $(document).ready(function () {
                 $("#ttclassID").val(e.event.extendedProps.class_id);
                 $("#ttSectionID").val(e.event.extendedProps.section_id);
                 $("#ttSubjectID").val(e.event.extendedProps.subject_id);
-                $("#calNotes").val(e.event.extendedProps.report);
+                $("#ttsemesterID").val(e.event.extendedProps.semester_id);
+                $("#ttsessionID").val(e.event.extendedProps.session_id);
+                $("#calNotes").val(e.event.extendedProps.student_remarks);
                 $("#ttDate").val(e.event.end);
                 $("#setCurDate").val(setCurDate);
             } else if (e.event.extendedProps.schedule_id) {
