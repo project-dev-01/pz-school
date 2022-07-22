@@ -497,6 +497,8 @@ return [
         'get_event_group_calendor_parent' => $url.'/get_event_group_calendor_parent',
         'get_event_group_calendor_admin' => $url.'/get_event_group_calendor_admin',
 
+        
+
         // group url
         'group_add' => $url.'/group/add',
         'group_list' => $url.'/group/list',
@@ -508,6 +510,9 @@ return [
         
         'staff_name' => $url.'/staff/name',
         'student_name' => $url.'/student/name',
+
+        
+        'get_semester_session' => $url.'/get_semester_session',
     ]
 
 ];

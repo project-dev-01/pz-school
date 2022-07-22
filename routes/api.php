@@ -542,4 +542,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     
     Route::get('student/name', [ApiController::class, 'getStudentName']);
     Route::get('staff/name', [ApiController::class, 'getStaffName']);
+
+    Route::get('get_semester_session', [ApiController::class, 'getSemesterSession']);
 });

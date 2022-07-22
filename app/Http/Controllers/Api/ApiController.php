@@ -15739,4 +15739,32 @@ class ApiController extends BaseController
             return $output;
         }
     }
+
+    // get Semester and Session
+    public function getSemesterSession(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+
+            // get data
+            $success['semester'] = $conn->table('semester')->whereRaw('(now() between start_date and end_date)')->first();
+            $hour = Carbon::now()->format('H');
+
+            if($hour < 13) {
+                $session = 1;
+            } else {
+                $session = 2;
+            }
+            $success['session'] = $session;
+
+            return $this->successResponse($success, 'Semester and Session Fetched successfully');
+        }
+    }
 }

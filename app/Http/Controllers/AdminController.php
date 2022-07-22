@@ -1836,6 +1836,7 @@ class AdminController extends Controller
         return $timetable;
     }
 
+    
 
     // create Timetable
     public function createTimetable(Request $request)
@@ -1844,6 +1845,7 @@ class AdminController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $hall_list = Helper::GetMethod(config('constants.api.exam_hall_list'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         // dd($semester);
         return view(
             'admin.timetable.add',
@@ -1851,7 +1853,9 @@ class AdminController extends Controller
                 'class' => $getclass['data'],
                 'semester' => $semester['data'],
                 'session' => $session['data'],
-                'hall_list' => $hall_list['data']
+                'hall_list' => $hall_list['data'],
+                'current_semester' => $sem['data']['semester']['id'],
+                'current_session' => $sem['data']['session']
             ]
         );
     }
@@ -1882,6 +1886,7 @@ class AdminController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $hall_list = Helper::GetMethod(config('constants.api.exam_hall_list'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         // dd($semester);
         return view(
             'admin.timetable.bulk_add',
@@ -1889,7 +1894,9 @@ class AdminController extends Controller
                 'class' => $getclass['data'],
                 'semester' => $semester['data'],
                 'session' => $session['data'],
-                'hall_list' => $hall_list['data']
+                'hall_list' => $hall_list['data'],
+                'current_semester' => $sem['data']['semester']['id'],
+                'current_session' => $sem['data']['session']
             ]
         );
     }
