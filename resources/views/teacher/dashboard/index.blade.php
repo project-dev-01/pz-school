@@ -968,6 +968,7 @@
     var getTimetableCalendor = "{{ config('constants.api.get_timetable_calendor') }}";
     var getBulkCalendor = "{{ config('constants.api.get_bulk_calendor_teacher') }}";
     var getEventCalendor = "{{ config('constants.api.get_event_calendor') }}";
+    var getEventGroupCalendor = "{{ config('constants.api.get_event_group_calendor') }}";
     var redirectionURL = "{{ route('teacher.classroom.management')}}";
     // todo list js
     var readUpdateTodoUrl = "{{ config('constants.api.read_update_todo') }}";

@@ -490,6 +490,24 @@ return [
         'transport_vehicle_details' => $url.'/transport_vehicle/transport_vehicle-details',
         'transport_vehicle_update' => $url.'/transport_vehicle/update',
         'transport_vehicle_delete' => $url.'/transport_vehicle/delete',
+        
+        //group calendor url
+        'get_event_group_calendor' => $url.'/get_event_group_calendor',
+        'get_event_group_calendor_student' => $url.'/get_event_group_calendor_student',
+        'get_event_group_calendor_parent' => $url.'/get_event_group_calendor_parent',
+        'get_event_group_calendor_admin' => $url.'/get_event_group_calendor_admin',
+
+        // group url
+        'group_add' => $url.'/group/add',
+        'group_list' => $url.'/group/list',
+        'group_details' => $url.'/group/group-details',
+        'group_update' => $url.'/group/update',
+        'group_delete' => $url.'/group/delete',
+
+        //  Name url
+        
+        'staff_name' => $url.'/staff/name',
+        'student_name' => $url.'/student/name',
     ]
 
 ];

@@ -1413,6 +1413,11 @@
                                 </div>
                             </li>
                             <li>
+                                <a href="{{ route('admin.group')}}" class="nav-link {{ (request()->is('admin/group*')) ? 'active' : '' }}">
+                                    <span> Group </span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('admin.settings')}}" class="nav-link {{ (request()->is('admin/settings*')) ? 'active' : '' }}">
                                     <span> General Settings</span>
                                 </a>

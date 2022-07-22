@@ -53,7 +53,7 @@
                                         <option value="">Select</option>
                                         <option value="1">EveryBody</option>
                                         <option value="2">Selected Class</option>
-                                        <!-- <option value="3">Selected Section</option> -->
+                                        <option value="3">Selected Group</option>
                                     </select>
                                     <span class="text-danger error-text audience_error"></span>
                                 </div>
@@ -69,12 +69,17 @@
                                     <span class="text-danger error-text class_error"></span>
                                 </div>
                             </div>
-                                <!-- <div class="form-group" id="section">
-                                    <label for="section">Section</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="section[]">
+                            <div class="col-md-4" id="group_row">
+                                <div class="form-group">
+                                    <label for="group">Group</label>
+                                    <select class="form-control select2-multiple" data-toggle="select2"  name="group[]" id="group" multiple="multiple" data-placeholder="Choose ...">
+                                        @foreach($group as $gro)
+                                            <option value="{{$gro['id']}}">{{$gro['name']}}</option>
+                                        @endforeach
                                     </select>
-                                    <span class="text-danger error-text section_error"></span>
-                                </div> -->
+                                    <span class="text-danger error-text group_error"></span>
+                                </div>
+                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="start_date">Start Date<span class="text-danger">*</span></label>

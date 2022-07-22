@@ -52,6 +52,13 @@ $(document).ready(function () {
                 return m;
             }
         }, {
+            url: getEventGroupCalendorAdmin + '?token=' + token + '&branch_id=' + branchID,
+            type: 'get',
+            success: function (response) {
+                g = response.data;
+                return g;
+            }
+        },  {
             url: getBulkCalendor + '?token=' + token + '&branch_id=' + branchID,
             type: 'get',
             success: function (response) {
@@ -143,12 +150,18 @@ $(document).ready(function () {
                     $("#end_time").html(e.event.extendedProps.end_time);
                     $("#start_time_row").show();
                     $("#end_time_row").show();
-                    console.log('not')
                 } else {
                     $("#start_time_row").hide();
                     $("#end_time_row").hide();
                 }
-                $("#audience").html(e.event.extendedProps.class_name);
+                if (e.event.extendedProps.audience == "1") {
+                    var aud = e.event.extendedProps.class_name;
+                } else if (e.event.extendedProps.audience == "2") {
+                    var aud = "<b>Standard  :</b> " + e.event.extendedProps.class_name;
+                } else if (e.event.extendedProps.audience == "3") {
+                    var aud = "<b>Group  :</b> " + e.event.extendedProps.class_name;
+                }
+                $("#audience").html(aud);
                 $("#description").html(e.event.extendedProps.remarks);
                 $("#setCurDate").val(setCurDate);
             } else if (e.event.extendedProps.birthday) {

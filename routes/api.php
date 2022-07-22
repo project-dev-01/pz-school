@@ -349,6 +349,12 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('get_timetable_calendor_student', [ApiController::class, 'getTimetableCalendorStud']);
     Route::get('get_event_calendor_student', [ApiController::class, 'getEventCalendorStud']);
     Route::get('get_event_calendor_admin', [ApiController::class, 'getEventCalendorAdmin']);
+    
+    
+    Route::get('get_event_group_calendor', [ApiController::class, 'getEventGroupCalendor']);
+    Route::get('get_event_group_calendor_student', [ApiController::class, 'getEventGroupCalendorStud']);
+    Route::get('get_event_group_calendor_parent', [ApiController::class, 'getEventGroupCalendorParent']);
+    Route::get('get_event_group_calendor_admin', [ApiController::class, 'getEventGroupCalendorAdmin']);
 
 
     Route::get('get_bulk_calendor_teacher', [ApiController::class, 'getBulkCalendorTeacher']);
@@ -524,4 +530,16 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // get unread notifications
     Route::get('unread_notifications', [ApiController::class, 'unreadNotifications']);
     Route::post('mark_as_read', [ApiController::class, 'markAsRead']);
+
+    // Group routes
+    Route::post('group/add', [ApiController::class, 'addGroup']);
+    Route::get('group/list', [ApiController::class, 'getGroupList']);
+    Route::post('group/group-details', [ApiController::class, 'getGroupDetails']);
+    Route::post('group/update', [ApiController::class, 'updateGroup']);
+    Route::post('group/delete', [ApiController::class, 'deleteGroup']);
+
+    // Name routes
+    
+    Route::get('student/name', [ApiController::class, 'getStudentName']);
+    Route::get('staff/name', [ApiController::class, 'getStaffName']);
 });

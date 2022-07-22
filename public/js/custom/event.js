@@ -409,21 +409,21 @@ $(function () {
     });
 
     $('#class').css("display", "none");
-    $('#section').css("display", "none");
+    $('#group_row').css("display", "none");
     $('select[name=audience]').change(function() {
         var a = $('select[name=audience]').val()
 
         if ( a == "1") {
             $('#class').css("display", "none");
-            $('#section').css("display", "none");
+            $('#group_row').css("display", "none");
         }
         if ( a == "2") {
             $('#class').css("display", "BLOCK");
-            $('#section').css("display", "none");
+            $('#group_row').css("display", "none");
         }
         if ( a == "3") {
             $('#class').css("display", "none");
-            $('#section').css("display", "BLOCK");
+            $('#group_row').css("display", "BLOCK");
         }
     });
 

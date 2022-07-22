@@ -723,6 +723,7 @@ class AdminController extends Controller
     {
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $gettype = Helper::GetMethod(config('constants.api.event_type_list'));
+        $getgroup = Helper::GetMethod(config('constants.api.group_list'));
 
         // dd($gettype);
         return view(
@@ -730,6 +731,7 @@ class AdminController extends Controller
             [
                 'class' => $getclass['data'],
                 'type' => $gettype['data'],
+                'group' => $getgroup['data'],
             ]
         );
     }
@@ -745,6 +747,7 @@ class AdminController extends Controller
         // dd($event);
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $gettype = Helper::GetMethod(config('constants.api.event_type_list'));
+        $getgroup = Helper::GetMethod(config('constants.api.group_list'));
 
         // dd($gettype);
         return view(
@@ -753,6 +756,7 @@ class AdminController extends Controller
                 'class' => $getclass['data'],
                 'type' => $gettype['data'],
                 'event' => $event['data'],
+                'group' => $getgroup['data'],
             ]
         );
     }
@@ -767,6 +771,12 @@ class AdminController extends Controller
             $class = "";
         }
 
+        if($request->group){
+            $group = implode(",",$request->group);
+        } else{
+            $group = "";
+        }
+
         $data = [
             'title' => $request->title,
             'type' => $request->type,
@@ -775,6 +785,8 @@ class AdminController extends Controller
             'end_date' => $request->end_date,
             'event_class' => $class,
             'class' => $request->class,
+            'event_group' => $group,
+            'group' => $request->group,
             'section' => $request->section,
             'all_day' => $request->all_day,
             'start_time' => $request->start_time,
@@ -793,12 +805,12 @@ class AdminController extends Controller
             ->addIndexColumn()
             ->addColumn('classname', function ($row) {
                 $audience = $row['audience'];
-
-
                 if ($audience == 1) {
                     return "Everyone";
-                } else {
+                } else if ($audience == 2) {
                     return "<b>Standard </b>: " . $row['class_name'];
+                } else if ($audience == 3) {
+                    return "<b>Group </b>: " . $row['group_name'];
                 }
             })
             ->addColumn('publish', function ($row) {
@@ -839,6 +851,11 @@ class AdminController extends Controller
         } else{
             $class = "";
         }
+        if($request->group){
+            $group = implode(",",$request->group);
+        } else{
+            $group = "";
+        }
 
         $data = [
             'id' => $request->id,
@@ -849,6 +866,8 @@ class AdminController extends Controller
             'end_date' => $request->end_date,
             'event_class' => $class,
             'class' => $request->class,
+            'event_group' => $group,
+            'group' => $request->group,
             'section' => $request->section,
             'all_day' => $request->all_day,
             'start_time' => $request->start_time,
@@ -4752,6 +4771,115 @@ class AdminController extends Controller
         ];
 
         $response = Helper::PostMethod(config('constants.api.hostel_floor_delete'), $data);
+        return $response;
+    }
+
+    // index Group 
+    public function group()
+    {
+        return view('admin.group.index');
+    }
+    // create Group 
+    public function createGroup()
+    {
+        return view('admin.group.add');
+    }
+    // edit Group 
+    public function editGroup($id)
+    {
+
+        $data = [
+            'id' => $id,
+        ];
+        $group = Helper::PostMethod(config('constants.api.group_details'), $data);
+
+        // dd($group);
+        return view(
+            'admin.group.edit',
+            [
+                'group' => $group['data']['group'],
+                'parent' => $group['data']['parent'],
+                'student' => $group['data']['student'],
+                'staff' => $group['data']['staff'],
+            ]
+        );
+    }
+    public function addGroup(Request $request)
+    {
+        $data = [
+            'name' => $request->name,
+            'description' => $request->description,
+            'staff' => $request->staff_id,
+            'student' => $request->student_id,
+            'parent' => $request->parent_id
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.group_add'), $data);
+        // dd($response);
+        return $response;
+    }
+
+    public function getGroupList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.group_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('no_of_members', function ($row) {
+                $group_staff = 0;
+                $group_student = 0;
+                $group_parent = 0;
+                if ($row['staff']) {
+                    $group_staff = count(explode(",", $row['staff']));
+                }
+                if ($row['student']) {
+                    $group_student = count(explode(",", $row['student']));
+                }
+                if ($row['parent']) {
+                    $group_parent = count(explode(",", $row['parent']));
+                }
+                $total = $group_staff + $group_student + $group_parent;
+                return $total;
+            })
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="' . route('admin.group.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteGroupBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+            ->rawColumns(['classname', 'publish', 'actions'])
+            ->make(true);
+    }
+    public function getGroupDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.group_details'), $data);
+        return $response;
+    }
+    // Update group 
+    public function updateGroup(Request $request)
+    {
+
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name,
+            'description' => $request->description,
+            'staff' => $request->staff_id,
+            'student' => $request->student_id,
+            'parent' => $request->parent_id
+        ];
+        $response = Helper::PostMethod(config('constants.api.group_update'), $data);
+        return $response;
+    }
+    // DELETE group 
+    public function deleteGroup(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.group_delete'), $data);
         return $response;
     }
 }

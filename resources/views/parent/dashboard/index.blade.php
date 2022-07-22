@@ -646,6 +646,8 @@
     // get timetable list
     var getTimetableCalendorStudent = "{{ config('constants.api.get_timetable_calendor_student') }}";
     var getEventCalendorStudent = "{{ config('constants.api.get_event_calendor_student') }}";
+    var getEventGroupCalendorStudent = "{{ config('constants.api.get_event_group_calendor_student') }}";
+    var getEventGroupCalendorParent = "{{ config('constants.api.get_event_group_calendor_parent') }}";
     var getBulkCalendor = "{{ config('constants.api.get_bulk_calendor_student') }}";
     // todo list js
     var readUpdateTodoUrl = "{{ config('constants.api.read_update_todo') }}";
@@ -670,6 +672,6 @@
 <!-- get timetable list -->
 <!-- <script src="{{ asset('public/js/custom/student_calendor.js') }}"></script> -->
 <!-- <script src="{{ asset('public/js/custom/student_calendor_new.js') }}"></script> -->
-<script src="{{ asset('public/js/custom/student_calendor_new_cal.js') }}"></script>
+<script src="{{ asset('public/js/custom/parent_calendor_new_cal.js') }}"></script>
 
 @endsection

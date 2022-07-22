@@ -324,9 +324,21 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::get('event/list', [AdminController::class, 'getEventList'])->name('admin.event.list');
         Route::post('event/add', [AdminController::class, 'addEvent'])->name('admin.event.add');
         Route::post('event/event-details', [AdminController::class, 'getEventDetails'])->name('admin.event.details');
-        Route::post('even/update', [AdminController::class, 'updateEvent'])->name('admin.event.update');
+        Route::post('event/update', [AdminController::class, 'updateEvent'])->name('admin.event.update');
         Route::post('event/delete', [AdminController::class, 'deleteEvent'])->name('admin.event.delete');
         Route::post('event/event-publish', [AdminController::class, 'publishEvent'])->name('admin.event.publish');
+
+        // Group routes
+        Route::get('group/index', [AdminController::class, 'group'])->name('admin.group');
+        Route::get('group/create', [AdminController::class, 'createGroup'])->name('admin.group.create');
+        Route::get('group/edit/{id}', [AdminController::class, 'editGroup'])->name('admin.group.edit');
+        Route::get('group/list', [AdminController::class, 'getGroupList'])->name('admin.group.list');
+        Route::post('group/add', [AdminController::class, 'addGroup'])->name('admin.group.add');
+        Route::post('group/group-details', [AdminController::class, 'getGroupDetails'])->name('admin.group.details');
+        Route::post('even/update', [AdminController::class, 'updateGroup'])->name('admin.group.update');
+        Route::post('group/delete', [AdminController::class, 'deleteGroup'])->name('admin.group.delete');
+
+
         // Qualifications
         Route::get('qualification/index', [AdminController::class, 'qualification_view'])->name('admin.qualification');
         Route::post('qualification/add', [AdminController::class, 'qualification_add'])->name('admin.qualification.add');

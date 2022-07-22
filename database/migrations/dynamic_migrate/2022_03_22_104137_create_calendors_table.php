@@ -25,6 +25,7 @@ class CreateCalendorsTable extends Migration
             $table->integer('time_table_id')->nullable();
             $table->integer('bulk_id')->nullable();
             $table->integer('event_id')->nullable();
+            $table->integer('group_id')->nullable();
             $table->dateTime('start')->nullable();
             $table->dateTime('end')->nullable();
             $table->text('description')->nullable();

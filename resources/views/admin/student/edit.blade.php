@@ -1238,7 +1238,7 @@
                                             <div class="form-group">
                                                 <label for="drp_transport_vechicleno">Vechicle No</label>
                                                 <select id="drp_transport_vechicleno" name="drp_transport_vechicleno" class="form-control">
-                                                    <option value="">First select the branch</option>
+                                                    <option value="">First select the Transport</option>
 
                                                     @foreach($vehicle as $veh)
                                                     <option value="{{$veh['vehicle_id']}}" {{$student['vehicle_id'] == $veh['vehicle_id'] ? "Selected" : "" }}>{{$veh['vehicle_no']}}</option>
@@ -1332,7 +1332,7 @@
                                                             <span class="fas fa-unlock"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="password" class="form-control" name="password" aria-describedby="inputGroupPrepend">
+                                                    <input type="password" class="form-control" name="password"  id="password" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>

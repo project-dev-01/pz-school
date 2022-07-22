@@ -29,6 +29,8 @@ $(document).ready(function () {
         student_id = ref_user_id;
     }
 
+    var parent_id = ref_user_id;
+
     var calendarEl = document.getElementById('student_calendor');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -80,6 +82,13 @@ $(document).ready(function () {
             success: function (response) {
                 g = response.data;
                 return g;
+            }
+        },  {
+            url: getEventGroupCalendorParent + '?token=' + token + '&branch_id=' + branchID + '&parent_id=' + parent_id,
+            type: 'get',
+            success: function (response) {
+                p = response.data;
+                return p;
             }
         }, {
             url: getBulkCalendor + '?token=' + token + '&branch_id=' + branchID + '&student_id=' + student_id,

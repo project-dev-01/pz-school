@@ -376,6 +376,9 @@ $(function () {
                         "targets": 1,
                         "className": "table-user",
                         "render": function (data, type, row, meta) {
+                            var currentImg = studentImg + '/' + row.photo;
+                        // var existUrl = UrlExists(currentImg);
+                        console.log(currentImg);
                             var img = (row.photo != null) ? studentImg + '/' + row.photo : defaultImg;
                             var first_name = '<img src="' + img + '" class="mr-2 rounded-circle">' +
                                 '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
@@ -494,5 +497,35 @@ $(function () {
                 }, 'json');
             }
         });
+    });
+
+    $("#drp_transport_route").on('change', function (e) {
+        e.preventDefault(); 
+        var route_id = $(this).val();
+        $("#drp_transport_vechicleno").empty();
+        $("#drp_transport_vechicleno").append('<option value="">Select Vehicle</option>');
+        $.post(vehicleByRoute, { route_id: route_id }, function (res) {
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#drp_transport_vechicleno").append('<option value="' + val.vehicle_id + '">' + val.vehicle_no + '</option>');
+                });
+            }
+        }, 'json');
+    });
+
+
+
+    $("#drp_hostelnam").on('change', function (e) {
+        e.preventDefault(); 
+        var hostel_id = $(this).val();
+        $("#drp_roomname").empty();
+        $("#drp_roomname").append('<option value="">Select Room</option>');
+        $.post(roomByHostel, { hostel_id: hostel_id }, function (res) {
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#drp_roomname").append('<option value="' + val.room_id + '">' + val.room_name + '</option>');
+                });
+            }
+        }, 'json');
     });
 });

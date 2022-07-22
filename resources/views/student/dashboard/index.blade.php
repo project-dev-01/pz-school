@@ -540,6 +540,7 @@
 <script>
     var getTimetableCalendorStudent = "{{ config('constants.api.get_timetable_calendor_student') }}";
     var getEventCalendorStudent = "{{ config('constants.api.get_event_calendor_student') }}";
+    var getEventGroupCalendorStudent = "{{ config('constants.api.get_event_group_calendor_student') }}";
     var getBulkCalendor = "{{ config('constants.api.get_bulk_calendor_student') }}";
     // todo list js
     var readUpdateTodoUrl = "{{ config('constants.api.read_update_todo') }}";

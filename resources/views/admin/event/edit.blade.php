@@ -53,17 +53,22 @@
                                         <option value="">Select</option>
                                         <option value="1" {{$event['audience'] == "1" ? 'Selected':''}}>EveryBody</option>
                                         <option value="2" {{$event['audience'] == "2" ? 'Selected':''}}>Selected Class</option>
+                                        <option value="3" {{$event['audience'] == "3" ? 'Selected':''}}>Selected Group</option>
                                         <!-- <option value="3">Selected Section</option> -->
                                     </select>
                                     <span class="text-danger error-text audience_error"></span>
                                 </div>
                             </div>
-                            @php $aud = 'style=display:none'; @endphp
-                            @if($event['audience']=="2")
-                                @php $aud = ''; @endphp
+                            @php $cla = 'style=display:none'; $gro = 'style=display:none'; @endphp
+                            @if($event['audience']==2)
+                                @php $cla = ''; @endphp
+                            @endif
+
+                            @if($event['audience']==3)
+                                @php $gro = ''; @endphp
                             @endif
                             
-                            <div class="col-md-4" id="edit_class" {{$aud}}>
+                            <div class="col-md-4" id="edit_class" {{$cla}}>
                                 <div class="form-group">
                                     <label for="class">Class</label>
                                     <select class="form-control select2-multiple" data-toggle="select2"  name="class[]" id="edit_classes" multiple="multiple" data-placeholder="Choose ...">
@@ -85,12 +90,28 @@
                                     <span class="text-danger error-text class_error"></span>
                                 </div>
                             </div>
-                                <!-- <div class="form-group" id="section">
-                                    <label for="section">Section</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="section[]">
+                            <div class="col-md-4" id="edit_group_row" {{$gro}}>
+                                <div class="form-group">
+                                    <label for="group">Group</label>
+                                    <select class="form-control select2-multiple" data-toggle="select2"  name="group[]" id="edit_group" multiple="multiple" data-placeholder="Choose ...">
+                                        @forelse($group as $gro)
+                                            @php
+                                            $selected = "";
+                                            @endphp
+                                            @foreach(explode(',', $event['selected_list']) as $info)
+                                            @if($gro['id'] == $info)
+                                            @php
+                                            $selected = "Selected";
+                                            @endphp
+                                            @endif
+                                            @endforeach
+                                            <option value="{{$gro['id']}}" {{ $selected }}>{{$gro['name']}}</option>
+                                            @empty
+                                        @endforelse
                                     </select>
-                                    <span class="text-danger error-text section_error"></span>
-                                </div> -->
+                                    <span class="text-danger error-text group_error"></span>
+                                </div>
+                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="start_date">Start Date<span class="text-danger">*</span></label>

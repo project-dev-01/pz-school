@@ -514,6 +514,7 @@
 <script>
     var getBirthdayCalendorAdmin = "{{ config('constants.api.get_birthday_calendor_admin') }}";
     var getEventCalendorAdmin = "{{ config('constants.api.get_event_calendor_admin') }}";
+    var getEventGroupCalendorAdmin = "{{ config('constants.api.get_event_group_calendor_admin') }}";
     var getBulkCalendor = "{{ config('constants.api.get_bulk_calendor_admin') }}";
     var readUpdateTodoUrl = "{{ config('constants.api.read_update_todo') }}";
     var getAssignClassUrl = "{{ config('constants.api.get_assign_class') }}";

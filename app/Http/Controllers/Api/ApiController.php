@@ -1616,32 +1616,18 @@ class ApiController extends BaseController
     // add Event
     public function addEvent(Request $request)
     {
-        if($request->audience == "2") {
-            $validator = \Validator::make($request->all(), [
-                'token' => 'required',
-                'branch_id' => 'required',
-                'title' => 'required',
-                'type' => 'required',
-                'audience' => 'required',
-                'class' => 'required',
-                'start_date' => 'required',
-                'end_date' => 'required',
-                'selected_list' => '',
-                'description' => '',
-            ]);
-        } else {
-            $validator = \Validator::make($request->all(), [
-                'token' => 'required',
-                'branch_id' => 'required',
-                'title' => 'required',
-                'type' => 'required',
-                'audience' => 'required',
-                'start_date' => 'required',
-                'end_date' => 'required',
-                'selected_list' => '',
-                'description' => '',
-            ]);
-        }
+        
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'title' => 'required',
+            'type' => 'required',
+            'audience' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'selected_list' => '',
+            'description' => '',
+        ]);
 
         //    return $request;
         if (!$validator->passes()) {
@@ -1652,6 +1638,8 @@ class ApiController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             if ($request->audience == 2) {
                 $selected_list = $request->event_class;
+            } else if ($request->audience == 3) {
+                $selected_list = $request->event_group;
             } else {
                 $selected_list = NULL;
             }
@@ -1709,7 +1697,59 @@ class ApiController extends BaseController
                 foreach($date as $d) {
                     $start_date = $d['start_date'];
                     $end_date = $d['end_date'];
+                    if ($request->audience == 3) {
+                        $group = $request->group;
+                        foreach ($group as $gro) {
+                            $conn->table('calendors')->insert([
+                                'title' => $title,
+                                'start' => $start_date,
+                                'end' => $end_date,
+                                'group_id' => $gro,
+                                'event_id' => $eventId,
+                                'created_at' => date("Y-m-d H:i:s")
+                            ]);
+                        }
+
+                    } else {
+                        foreach ($classes as $class) {
+                            if ($request->audience == 1) {
+                                $classId = $class->id;
+                            } elseif ($request->audience == 2) {
+                                $classId = $class;
+                            }
+                            $conn->table('calendors')->insert([
+                                'title' => $title,
+                                'class_id' => $classId,
+                                'start' => $start_date,
+                                'end' => $end_date,
+                                'event_id' => $eventId,
+                                'created_at' => date("Y-m-d H:i:s")
+                            ]);
+                        }
+                    }
+                    
+                }
+            } else {
+                // date converted into timestamp
+                $start_date = Carbon::createFromFormat('Y-m-d', $request->start_date)->startOfDay()->toDateTimeString();
+                $end_date = Carbon::createFromFormat('Y-m-d', $request->end_date)->endOfDay()->toDateTimeString();
+
+                if ($request->audience == 3) {
+                    $group = $request->group;
+                    foreach ($group as $gro) {
+                        $conn->table('calendors')->insert([
+                            'title' => $title,
+                            'start' => $start_date,
+                            'end' => $end_date,
+                            'group_id' => $gro,
+                            'event_id' => $eventId,
+                            'created_at' => date("Y-m-d H:i:s")
+                        ]);
+                    }
+
+                } else {
                     foreach ($classes as $class) {
+
                         if ($request->audience == 1) {
                             $classId = $class->id;
                         } elseif ($request->audience == 2) {
@@ -1724,27 +1764,6 @@ class ApiController extends BaseController
                             'created_at' => date("Y-m-d H:i:s")
                         ]);
                     }
-                }
-            } else {
-                // date converted into timestamp
-                $start_date = Carbon::createFromFormat('Y-m-d', $request->start_date)->startOfDay()->toDateTimeString();
-                $end_date = Carbon::createFromFormat('Y-m-d', $request->end_date)->endOfDay()->toDateTimeString();
-
-                foreach ($classes as $class) {
-
-                    if ($request->audience == 1) {
-                        $classId = $class->id;
-                    } elseif ($request->audience == 2) {
-                        $classId = $class;
-                    }
-                    $conn->table('calendors')->insert([
-                        'title' => $title,
-                        'class_id' => $classId,
-                        'start' => $start_date,
-                        'end' => $end_date,
-                        'event_id' => $eventId,
-                        'created_at' => date("Y-m-d H:i:s")
-                    ]);
                 }
             }
             
@@ -1773,8 +1792,9 @@ class ApiController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             // get data
             $eventDetails = $conn->table('events')
-                    ->select("events.*", DB::raw("GROUP_CONCAT(DISTINCT  classes.name) as class_name"), 'event_types.name as type',)
+                    ->select("events.*", DB::raw("GROUP_CONCAT(DISTINCT  classes.name) as class_name"), 'event_types.name as type', DB::raw("GROUP_CONCAT(DISTINCT  groups.name) as group_name"))
                     ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,events.selected_list)"), ">", \DB::raw("'0'"))
+                    ->leftjoin("groups", \DB::raw("FIND_IN_SET(groups.id,events.selected_list)"), ">", \DB::raw("'0'"))
                     ->leftjoin('event_types', 'event_types.id', '=', 'events.type')
                     ->groupBy("events.id")
                     ->orderBy('events.id', 'desc')
@@ -1813,32 +1833,17 @@ class ApiController extends BaseController
     public function updateEvent(Request $request)
     {
         $id = $request->id;
-        if($request->audience == "2") {
-            $validator = \Validator::make($request->all(), [
-                'token' => 'required',
-                'branch_id' => 'required',
-                'title' => 'required',
-                'type' => 'required',
-                'audience' => 'required',
-                'class' => 'required',
-                'start_date' => 'required',
-                'end_date' => 'required',
-                'selected_list' => '',
-                'description' => '',
-            ]);
-        } else {
-            $validator = \Validator::make($request->all(), [
-                'token' => 'required',
-                'branch_id' => 'required',
-                'title' => 'required',
-                'type' => 'required',
-                'audience' => 'required',
-                'start_date' => 'required',
-                'end_date' => 'required',
-                'selected_list' => '',
-                'description' => '',
-            ]);
-        }
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'title' => 'required',
+            'type' => 'required',
+            'audience' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'selected_list' => '',
+            'description' => '',
+        ]);
 
         //    return $request;
         if (!$validator->passes()) {
@@ -1849,6 +1854,8 @@ class ApiController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             if ($request->audience == 2) {
                 $selected_list = $request->event_class;
+            } else if ($request->audience == 3) {
+                $selected_list = $request->event_group;
             } else {
                 $selected_list = NULL;
             }
@@ -1909,10 +1916,62 @@ class ApiController extends BaseController
                 $final['end_date'] = $request->end_date.' '.$request->end_time;
                 array_push($date, $final);
 
-                foreach($date as $d) {
-                    $start_date = $d['start_date'];
-                    $end_date = $d['end_date'];
+                if ($request->audience == 3) {
+                    $group = $request->group;
+                    foreach ($group as $gro) {
+                        $conn->table('calendors')->insert([
+                            'title' => $title,
+                            'start' => $start_date,
+                            'end' => $end_date,
+                            'group_id' => $gro,
+                            'event_id' => $eventId,
+                            'created_at' => date("Y-m-d H:i:s")
+                        ]);
+                    }
+
+                } else {
+
+                    foreach($date as $d) {
+                        $start_date = $d['start_date'];
+                        $end_date = $d['end_date'];
+                        foreach ($classes as $class) {
+                            if ($request->audience == 1) {
+                                $classId = $class->id;
+                            } elseif ($request->audience == 2) {
+                                $classId = $class;
+                            }
+                            $conn->table('calendors')->insert([
+                                'title' => $title,
+                                'class_id' => $classId,
+                                'start' => $start_date,
+                                'end' => $end_date,
+                                'event_id' => $eventId,
+                                'created_at' => date("Y-m-d H:i:s")
+                            ]);
+                        }
+                    }
+                }
+            } else {
+                // date converted into timestamp
+                $start_date = Carbon::createFromFormat('Y-m-d', $request->start_date)->startOfDay()->toDateTimeString();
+                $end_date = Carbon::createFromFormat('Y-m-d', $request->end_date)->endOfDay()->toDateTimeString();
+
+                if ($request->audience == 3) {
+                    $group = $request->group;
+                    foreach ($group as $gro) {
+                        $conn->table('calendors')->insert([
+                            'title' => $title,
+                            'start' => $start_date,
+                            'end' => $end_date,
+                            'group_id' => $gro,
+                            'event_id' => $eventId,
+                            'created_at' => date("Y-m-d H:i:s")
+                        ]);
+                    }
+
+                } else {
                     foreach ($classes as $class) {
+
                         if ($request->audience == 1) {
                             $classId = $class->id;
                         } elseif ($request->audience == 2) {
@@ -1927,27 +1986,6 @@ class ApiController extends BaseController
                             'created_at' => date("Y-m-d H:i:s")
                         ]);
                     }
-                }
-            } else {
-                // date converted into timestamp
-                $start_date = Carbon::createFromFormat('Y-m-d', $request->start_date)->startOfDay()->toDateTimeString();
-                $end_date = Carbon::createFromFormat('Y-m-d', $request->end_date)->endOfDay()->toDateTimeString();
-
-                foreach ($classes as $class) {
-
-                    if ($request->audience == 1) {
-                        $classId = $class->id;
-                    } elseif ($request->audience == 2) {
-                        $classId = $class;
-                    }
-                    $conn->table('calendors')->insert([
-                        'title' => $title,
-                        'class_id' => $classId,
-                        'start' => $start_date,
-                        'end' => $end_date,
-                        'event_id' => $eventId,
-                        'created_at' => date("Y-m-d H:i:s")
-                    ]);
                 }
             }
             $success = [];
@@ -2918,7 +2956,15 @@ class ApiController extends BaseController
             // create new connection
             $staffConn = $this->createNewConnection($request->branch_id);
             // get data
-            $empDetails['staff'] = $staffConn->table('staffs')->where('id', $id)->first();
+            $empDetails['staff'] = $staffConn->table('staffs as s')
+                                    ->select(
+                                        's.*',
+                                        DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"),
+                                        DB::raw("GROUP_CONCAT(DISTINCT  dp.name) as department_name")
+                                    )
+                                    ->leftJoin("staff_departments as dp", DB::raw("FIND_IN_SET(dp.id,s.department_id)"), ">", DB::raw("'0'"))
+                                    ->where('s.id', $id)
+                                    ->first();
             $empDetails['bank'] = $staffConn->table('staff_bank_accounts')->where('staff_id', $id)->first();
             $empDetails['user'] = User::where('user_id', $id)->where('branch_id', $request->branch_id)->first();
             return $this->successResponse($empDetails, 'Employee row fetch successfully');
@@ -8047,6 +8093,7 @@ class ApiController extends BaseController
                 ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
                 ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,e.selected_list)"), ">", \DB::raw("'0'"))
                 ->whereNotNull('c.event_id')
+                ->whereNull('c.group_id')
                 ->where('e.status',1)
                 ->where('s.teacher_id', $teacherId)
                 ->groupBy('c.event_id')
@@ -8083,6 +8130,7 @@ class ApiController extends BaseController
                 ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
                 ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,e.selected_list)"), ">", \DB::raw("'0'"))
                 ->whereNotNull('c.event_id')
+                ->whereNull('c.group_id')
                 ->where('en.student_id', $studentId)
                 ->where('e.status',1)
                 ->groupBy('c.event_id')
@@ -8116,6 +8164,7 @@ class ApiController extends BaseController
                 ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
                 ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,e.selected_list)"), ">", \DB::raw("'0'"))
                 ->whereNotNull('c.event_id')
+                ->whereNull('c.group_id')
                 ->where('e.status',1)
                 ->groupBy('c.event_id')
                 ->groupBy('c.start')
@@ -8131,6 +8180,168 @@ class ApiController extends BaseController
                 array_push($success, $data);
             }
             return $this->successResponse($success, 'Event data Fetched successfully');
+        }
+    }
+
+    // getEventGroupCalendor
+    public function getEventGroupCalendor(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'teacher_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            // ->leftJoin('subject_assigns as s', function ($join) use ($teacherId) {
+            //     $join->on('e.selected_list', '=', 's.class_id')
+            //         ->where('s.teacher_id', $teacherId);
+            // })
+            // // ->when('e.auidence' == "1", function ($q)  use ($teacherId) {
+            // //     $q->where('s.teacher_id', $teacherId);
+            // // })->leftJoin('events as e', 'c.event_id', '=', 'e.id')
+            $Connection = $this->createNewConnection($request->branch_id);
+            $teacherId = $request->teacher_id;
+
+                $event = $Connection->table('calendors as c')
+                                    ->select('c.id', DB::raw("GROUP_CONCAT(DISTINCT  g.name) as class_name"), 'et.color', 'c.title', 'c.title as subject_name', 'et.name as event_type', 'c.class_id', 'c.start', 'c.end', 'e.id as event_id', 'e.remarks', 'e.audience', 'e.selected_list','e.all_day','e.start_time','e.end_time','e.start_date', 'e.end_date')
+                                    // ->leftJoin('groups as g', 'c.group_id', '=', 'g.id')
+                                    ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
+                                    ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
+                                    ->leftjoin("groups as g", \DB::raw("FIND_IN_SET( g.id,e.selected_list)"), ">", \DB::raw("'0'"))
+                                    ->leftjoin("staffs as s", \DB::raw("FIND_IN_SET(s.id,g.staff)"), ">", \DB::raw("'0'"))
+                                    ->whereNotNull('c.group_id')
+                                    ->where('s.id', $teacherId)
+                                    ->where('e.status',1)
+                                    ->groupBy('c.event_id')
+                                    ->groupBy('c.start')
+                                    ->get();
+
+
+            $success = [];
+            foreach ($event as $eve) {
+                $data = $eve;
+                if ($eve->audience == "1") {
+                    $data->class_name = "EveryOne";
+                }
+                array_push($success, $data);
+            }
+            return $this->successResponse($event, 'Event data Fetched successfully');
+        }
+    }
+
+    // getEventGroupCalendorStud
+    public function getEventGroupCalendorStud(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'student_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $studentId = $request->student_id;
+            $event = $Connection->table('calendors as c')
+                        ->select('c.id',DB::raw("GROUP_CONCAT(DISTINCT g.name) as class_name"),DB::raw("GROUP_CONCAT(DISTINCT en.student_id) as stud_id"), 'et.color', 'c.title', 'c.title as subject_name', 'c.class_id', 'c.start', 'c.end', 'et.name as event_type', 'e.id as event_id', 'e.remarks', 'e.audience', 'e.selected_list','e.all_day','e.start_time','e.end_time', 'e.start_date', 'e.end_date')
+                        // ->leftJoin('groups as g', 'c.group_id', '=', 'g.id')
+                        ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
+                        ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
+                        ->leftJoin('groups as g', DB::raw("FIND_IN_SET(g.id,e.selected_list)"), ">", \DB::raw("'0'"))   
+                        ->leftJoin('enrolls as en', \DB::raw("FIND_IN_SET(en.student_id,g.student)"), ">", \DB::raw("'0'"))
+                        ->whereNotNull('c.group_id')
+                        ->where('en.student_id', $studentId)
+                        ->where('e.status',1)
+                        ->groupBy('c.event_id')
+                        ->groupBy('c.start')
+                        ->get();
+            $success = [];
+            foreach ($event as $eve) {
+                $data = $eve;
+                if ($eve->audience == "1") {
+                    $data->class_name = "EveryOne";
+                }
+                array_push($success, $data);
+            }
+            return $this->successResponse($event, 'Event data Fetched successfully');
+        }
+    }
+
+     // getEventGroupCalendorAdmin
+     public function getEventGroupCalendorAdmin(Request $request)
+     {
+         $validator = \Validator::make($request->all(), [
+             'branch_id' => 'required',
+         ]);
+         if (!$validator->passes()) {
+             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+         } else {
+             // create new connection
+             $Connection = $this->createNewConnection($request->branch_id);
+             $event = $Connection->table('calendors as c')
+                 ->select('c.id', DB::raw("GROUP_CONCAT(DISTINCT  groups.name) as class_name"),'c.group_id', 'et.color', 'c.title', 'c.title as subject_name', 'et.name as event_type', 'c.class_id', 'c.start', 'c.end', 'e.id as event_id', 'e.remarks', 'e.audience', 'e.selected_list','e.all_day','e.start_time','e.end_time','e.start_date', 'e.end_date')
+                 ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
+                 ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
+                 ->leftjoin("groups", \DB::raw("FIND_IN_SET(groups.id,e.selected_list)"), ">", \DB::raw("'0'"))
+                 ->whereNotNull('c.group_id')
+                 ->where('e.status',1)
+                 ->groupBy('c.event_id')
+                 ->groupBy('c.start')
+                 ->get();
+ 
+                
+             $success = [];
+             foreach ($event as $eve) {
+                 $data = $eve;
+                 if ($eve->audience == "1") {
+                     $data->class_name = "EveryOne";
+                 }
+                 array_push($success, $data);
+             }
+             return $this->successResponse($success, 'Event data Fetched successfully');
+         }
+    }
+
+    // getEventGroupCalendorParent
+    public function getEventGroupCalendorParent(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'parent_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $parentId = $request->parent_id;
+
+                $event = $Connection->table('calendors as c')
+                                    ->select('c.id', DB::raw("GROUP_CONCAT(DISTINCT  g.name) as class_name"),'c.group_id', 'et.color', 'c.title', 'c.title as subject_name', 'et.name as event_type', 'c.class_id', 'c.start', 'c.end', 'e.id as event_id', 'e.remarks', 'e.audience', 'e.selected_list','e.all_day','e.start_time','e.end_time','e.start_date', 'e.end_date')
+                                    // ->leftJoin('groups as g', 'c.group_id', '=', 'g.id')
+                                    ->leftJoin('events as e', 'c.event_id', '=', 'e.id')
+                                    ->leftJoin('event_types as et', 'e.type', '=', 'et.id')
+                                    ->leftjoin("groups as g", \DB::raw("FIND_IN_SET( g.id,e.selected_list)"), ">", \DB::raw("'0'"))
+                                    ->leftjoin("parent as p", \DB::raw("FIND_IN_SET(p.id,g.parent)"), ">", \DB::raw("'0'"))
+                                    ->where('p.id', $parentId)
+                                    ->whereNotNull('c.group_id')
+                                    ->where('e.status',1)
+                                    ->groupBy('c.event_id')
+                                    ->groupBy('c.start')
+                                    ->get();
+
+
+            $success = [];
+            foreach ($event as $eve) {
+                $data = $eve;
+                if ($eve->audience == "1") {
+                    $data->class_name = "EveryOne";
+                }
+                array_push($success, $data);
+            }
+            return $this->successResponse($event, 'Event data Fetched successfully');
         }
     }
 
@@ -10978,7 +11189,7 @@ class ApiController extends BaseController
             // create new connection
             $con = $this->createNewConnection($request->branch_id);
             // get data
-            $student = $con->table('enrolls as e')->select('s.id', DB::raw('CONCAT(s.first_name, " ", s.last_name) as name'), 's.register_no', 's.roll_no', 's.mobile_no', 's.email', 's.gender')
+            $student = $con->table('enrolls as e')->select('s.id', DB::raw('CONCAT(s.first_name, " ", s.last_name) as name'), 's.register_no', 's.roll_no', 's.mobile_no', 's.email', 's.gender','s.photo')
                 ->leftJoin('students as s', 'e.student_id', '=', 's.id')
                 ->when($class_id, function ($query, $class_id) {
                     return $query->where('e.class_id', $class_id);
@@ -11189,7 +11400,7 @@ class ApiController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             // get data
             $studentDetail['student'] = $conn->table('students as s')
-                ->select('s.*', 'c.name as class_name', 'sec.name as section_name', 's.relation', 'e.class_id', 'e.section_id', 'e.session_id', 'e.semester_id')
+                ->select('s.*', DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"), 'c.name as class_name', 'sec.name as section_name', 's.relation', 'e.class_id', 'e.section_id', 'e.session_id', 'e.semester_id')
                 ->leftJoin('enrolls as e', 's.id', '=', 'e.student_id')
                 ->leftJoin('classes as c', 'e.class_id', '=', 'c.id')
                 ->leftJoin('sections as sec', 'e.section_id', '=', 'sec.id')
@@ -11397,8 +11608,8 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $parentDetails['parent'] = $conn->table('parent')->where('id', $id)->first();
-            $parentDetails['childs'] = $conn->table('students as s')->select('s.id', 's.first_name', 's.last_name', 's.photo', 'c.name as class_name', 'sec.name as section_name')
+            $parentDetails['parent'] = $conn->table('parent')->select('*', DB::raw("CONCAT(first_name, ' ', last_name) as name"))->where('id', $id)->first();
+            $parentDetails['childs'] = $conn->table('students as s')->select('s.id','s.first_name', 's.last_name', 's.photo', 'c.name as class_name', 'sec.name as section_name')
                 ->leftJoin('enrolls as e', 'e.student_id', '=', 's.id')
                 ->leftJoin('classes as c', 'e.class_id', '=', 'c.id')
                 ->leftJoin('sections as sec', 'e.section_id', '=', 'sec.id')
@@ -11424,7 +11635,7 @@ class ApiController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             // get data
             $data = $conn->table('parent')
-                ->select("id", DB::raw("CONCAT(first_name, ' ', last_name) as name"))
+                ->select("id", DB::raw("CONCAT(first_name, ' ', last_name) as name"),'email')
                 ->where("first_name", "LIKE", "%{$request->name}%")
                 ->orWhere("last_name", "LIKE", "%{$request->name}%")
                 ->get();
@@ -11435,7 +11646,7 @@ class ApiController extends BaseController
                     $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1">';
                     foreach ($data as $row) {
 
-                        $output .= '<li class="list-group-item" value="' . $row->id . '">' . $row->name . '</li>';
+                        $output .= '<li class="list-group-item" value="' . $row->id . '">' . $row->name . ' ( ' . $row->email . ' ) </li>';
                     }
                     $output .= '</ul>';
                 } else {
@@ -15239,6 +15450,293 @@ class ApiController extends BaseController
             } else {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             }
+        }
+    }
+
+    // add Group
+    public function addGroup(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'name' => 'required',
+        ]);
+
+        //    return $request;
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+
+            $staff = NULL;
+            $parent = NULL;
+            $student = NULL;
+            if (!empty($request->staff)) {
+                $staff =  implode(",", $request->staff);
+            }
+            if (!empty($request->parent)) {
+                $parent =  implode(",", $request->parent);
+            }
+            if (!empty($request->student)) {
+                $student =  implode(",", $request->student);
+            }
+            $query = $conn->table('groups')->insertGetId([
+                'name' => $request->name,
+                'description' => $request->description,
+                'staff' => $staff,
+                'parent' => $parent,
+                'student' => $student,
+                'created_at' => date("Y-m-d H:i:s")
+            ]);
+
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Group has been successfully saved');
+            }
+        }
+    }
+    // get Groups 
+    public function getGroupList(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $groupDetails = $conn->table('groups')->get()->toArray();
+            return $this->successResponse($groupDetails, 'Group record fetch successfully');
+        }
+    }
+    // get Group row details
+    public function getGroupDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+
+
+            $id = $request->id;
+            $group = $conn->table('groups')->where('id', $id)->first();
+            
+            $staff = NULL;
+            $parent = NULL;
+            $student = NULL;
+            
+            if ($group->staff) {
+                $group_staff = explode(",", $group->staff);
+                $staff = [];
+                foreach($group_staff as $gs) {
+                    $data = $conn->table('staffs as s')
+                            ->select("s.id", DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"),DB::raw("GROUP_CONCAT(DISTINCT  dp.name) as department_name"))
+                            ->leftJoin("staff_departments as dp", DB::raw("FIND_IN_SET(dp.id,s.department_id)"), ">", DB::raw("'0'"))
+                            ->where('s.id', $gs)->first();
+                    array_push($staff, $data);
+                }
+            }
+
+            if ($group->student) {
+                $group_student = explode(",", $group->student);
+                $student = [];
+                foreach($group_student as $gs) {
+                    $data = $conn->table('students as s')
+                                ->select("s.id", DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"),'c.name as class_name','sc.name as section_name')
+                                ->leftJoin('enrolls as e', 'e.student_id', '=', 's.id')
+                                ->leftJoin('classes as c', 'e.class_id', '=', 'c.id')
+                                ->leftJoin('sections as sc', 'e.section_id', '=', 'sc.id')
+                                ->where('s.id', $gs)->first();
+                    array_push($student, $data);
+                }
+            }
+
+            if ($group->parent) {
+                $group_parent = explode(",", $group->parent);
+                $parent = [];
+                foreach($group_parent as $gp) {
+                    $data = $conn->table('parent')->select("id", DB::raw("CONCAT(first_name, ' ', last_name) as name"),'email')->where('id', $gp)->first();
+                    array_push($parent, $data);
+                }
+            }
+            
+            $groupDetails['group'] = $group;
+            $groupDetails['staff'] = $staff;
+            $groupDetails['student'] = $student;
+            $groupDetails['parent'] = $parent;
+            return $this->successResponse($groupDetails, 'Group row fetch successfully');
+        }
+    }
+    // update Group
+    public function updateGroup(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'name' => 'required',
+        ]);
+
+        //    return $request;
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+
+            $staff = NULL;
+            $parent = NULL;
+            $student = NULL;
+            if (!empty($request->staff)) {
+                $staff =  implode(",", $request->staff);
+            }
+            if (!empty($request->parent)) {
+                $parent =  implode(",", $request->parent);
+            }
+            if (!empty($request->student)) {
+                $student =  implode(",", $request->student);
+            }
+
+            $query = $conn->table('groups')->where('id', $id)->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'staff' => $staff,
+                'parent' => $parent,
+                'student' => $student,
+                'updated_at' => date("Y-m-d H:i:s")
+            ]);
+
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Group has been successfully Updated');
+            }
+        }
+    }
+    // delete Group
+    public function deleteGroup(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'id' => 'required',
+            'branch_id' => 'required',
+        ]);
+        $group_id = $request->id;
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('groups')->where('id', $group_id)->delete();
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Group have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+
+    // get Student Name
+    public function getStudentName(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+
+            $data = $conn->table('students as s')
+                ->select("s.id", DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"),'c.name as class_name','sc.name as section_name')
+                ->leftJoin('enrolls as e', 'e.student_id', '=', 's.id')
+                ->leftJoin('classes as c', 'e.class_id', '=', 'c.id')
+                ->leftJoin('sections as sc', 'e.section_id', '=', 'sc.id')
+                ->where("s.first_name", "LIKE", "%{$request->name}%")
+                ->orWhere("s.last_name", "LIKE", "%{$request->name}%")
+                ->get();
+            $output = '';
+            if ($request->name) {
+                if (!$data->isEmpty()) {
+                    $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1">';
+                    foreach ($data as $row) {
+
+                        $output .= '<li class="list-group-item" value="' . $row->id . '">' . $row->name . ' ( '. $row->class_name . ' - ' .  $row->section_name .' )</li>';
+                    }
+                    $output .= '</ul>';
+                } else {
+                    $output .= '<li class="list-group-item">' . 'No results Found' . '</li>';
+                }
+            } else {
+                $output .= '<li class="list-group-item">' . 'No results Found' . '</li>';
+            }
+            return $output;
+        }
+    }
+
+    // get Staff Name
+    public function getStaffName(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $data = $conn->table('staffs as s')
+                    ->select("s.id", DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"),DB::raw("GROUP_CONCAT(DISTINCT  dp.name) as department_name"))
+                    ->where("s.first_name", "LIKE", "%{$request->name}%")
+                    ->orWhere("s.last_name", "LIKE", "%{$request->name}%")
+                    ->leftJoin("staff_departments as dp", DB::raw("FIND_IN_SET(dp.id,s.department_id)"), ">", DB::raw("'0'"))
+                    ->groupBy("s.id")
+                    ->get();
+            $output = '';
+            if ($request->name) {
+                if (!$data->isEmpty()) {
+                    $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1">';
+                    foreach ($data as $row) {
+                        $output .= '<li class="list-group-item" value="' . $row->id . '">' . $row->name . '( '. $row->department_name . ' ) </li>';
+                    }
+                    $output .= '</ul>';
+                } else {
+                    $output .= '<li class="list-group-item">' . 'No results Found' . '</li>';
+                }
+            } else {
+                $output .= '<li class="list-group-item">' . 'No results Found' . '</li>';
+            }
+            return $output;
         }
     }
 }
