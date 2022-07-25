@@ -32,7 +32,7 @@
                 </p>
 
                 <div class="table-responsive">
-                    <table class="table mb-0" id="task-table">
+                    <table class="table w-100 nowrap" id="task-table">
                         <thead>
                             <tr>
                                 <th>#</th>

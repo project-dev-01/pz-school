@@ -34,7 +34,7 @@
                 </p>
 
                 <div class="table-responsive">
-                    <table class="table mb-0" id="exam-Hall">
+                    <table class="table w-100 nowrap" id="exam-Hall">
                         <thead>
                             <tr>
                                 <th>#</th>

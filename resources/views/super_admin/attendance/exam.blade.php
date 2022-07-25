@@ -147,7 +147,7 @@
                                     </div>
                                 </div>
                                 <div class="table-responsive">
-                                    <table class="table table-bordered mb-0">
+                                    <table class="table w-100 nowrap">
                                         <thead>
                                             <tr>
                                                 <th>#</th>

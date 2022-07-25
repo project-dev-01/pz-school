@@ -32,7 +32,7 @@
                 </p>
 
                 <div class="table-responsive">
-                    <table class="table mb-0" id="allocation-table">
+                    <table class="table w-100 nowrap" id="allocation-table">
                         <thead>
                             <tr>
                                 <th>#</th>
