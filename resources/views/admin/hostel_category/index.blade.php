@@ -36,7 +36,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table" id="hostel-category-table">
+                        <table class="table dt-responsive nowrap w-100" id="hostel-category-table">
                             <thead>
                                 <tr>
                                     <th>#</th>

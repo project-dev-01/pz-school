@@ -126,7 +126,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="table-responsive">
-                                <table class="table table-bordered mb-0 text-center">
+                                <table class="table dt-responsive nowrap w-100 text-center">
                                     <tbody id="timetable">
                                         
                                         

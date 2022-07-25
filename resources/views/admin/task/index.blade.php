@@ -95,7 +95,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table" id="to-do-list-table">
+                        <table class="table w-100 nowrap" id="to-do-list-table">
                             <thead>
                                 <tr>
                                     <th>#</th>

@@ -45,7 +45,7 @@
                 </ul><br>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table w-100 nowrap" id="employee-table">
+                        <table class="table dt-responsive nowrap w-100" id="employee-table">
                             <thead>
                                 <tr>
                                     <th>#</th>

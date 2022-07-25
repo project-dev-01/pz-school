@@ -11,7 +11,7 @@
                 <h6 class="text-center" id="class-section"></h6>
                 <hr>
                 <div class="table-responsive">
-                    <table class="table table-bordered mb-0">
+                    <table class="table table-bordered table-centered dt-responsive nowrap w-100" width="100%">
                         <thead>
                             <tr style="background-color:#0ABAB5">
                                 <th>Subject</th>

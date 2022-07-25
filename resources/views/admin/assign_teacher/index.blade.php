@@ -34,7 +34,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table" id="assign-class-teacher-table">
+                        <table class="table w-100 nowrap" id="assign-class-teacher-table">
                             <thead>
                                 <tr>
                                     <th>#</th>

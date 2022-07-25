@@ -170,7 +170,7 @@
                                 <div class="col-md-12">
                                     <div class="">
                                         <div class="table-responsive">
-                                            <table id="staff-leave-list" class="table">
+                                            <table id="staff-leave-list" class="table w-100 nowrap">
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>

@@ -107,7 +107,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="table-responsive">
-                                <table class="table table-bordered mb-0 " id="student-table">
+                                <table class="table table-bordered mb-0 text-center" id="student-table">
                                     <thead>
                                         <tr>
                                             <th>#</th>

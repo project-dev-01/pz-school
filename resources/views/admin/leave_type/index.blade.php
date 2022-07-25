@@ -37,7 +37,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table" id="leave-type-table">
+                        <table class="table dt-responsive nowrap w-100" id="leave-type-table">
                             <thead>
                                 <tr>
                                     <th>#</th>

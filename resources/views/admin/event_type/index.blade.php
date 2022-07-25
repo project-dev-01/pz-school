@@ -49,7 +49,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table" id="event-type-table">
+                        <table class="table dt-responsive nowrap w-100" id="event-type-table">
                             <thead>
                                 <tr>
                                     <th>#</th>

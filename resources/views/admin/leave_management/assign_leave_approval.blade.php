@@ -41,7 +41,7 @@
                     </label>
 
                     <div class="table-responsive">
-                        <table id="demo-foo-pagination" class="table" data-page-size="5">
+                        <table id="demo-foo-pagination" class="table w-100 nowrap" data-page-size="5">
                             <thead>
                                 <tr>
                                     <th>#</th>

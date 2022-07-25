@@ -88,7 +88,7 @@
                         <div class="col-sm-12">
                             <div class="card-box">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered mb-0 text-center">
+                                    <table class="table table-bordered mb-0">
                                         <thead>
                                             <tr>
                                                 <th>#</th>

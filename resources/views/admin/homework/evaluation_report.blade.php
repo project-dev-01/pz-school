@@ -125,7 +125,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="table-responsive">
-                                                    <table class="table mb-0  text-center">
+                                                    <table class="table w-100 nowrap  text-center">
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
@@ -158,7 +158,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="table-responsive">
-                                                    <table class="table mb-0 text-center">
+                                                    <table class="table w-100 nowrap  text-center">
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>

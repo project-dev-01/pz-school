@@ -11,7 +11,7 @@
                     <div class="col">
                         <div class="card-box">
                             <div class="table-responsive">
-                                <table class="table mb-0">
+                                <table class="table w-100 nowrap">
                                     <tr>
                                         <td>Title</td>
                                         <td class="title"></td>

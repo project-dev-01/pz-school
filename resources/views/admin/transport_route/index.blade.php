@@ -37,7 +37,7 @@
 
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table" id="transport-route-table">
+                        <table class="table w-100 nowrap" id="transport-route-table">
                             <thead>
                                 <tr>
                                     <th>#</th>

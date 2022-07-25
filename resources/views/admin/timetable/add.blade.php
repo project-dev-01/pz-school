@@ -134,7 +134,7 @@
                             <div class="col-sm-12">
                                 <div class="card-box">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered mb-0 text-center" id="timetable_table">
+                                        <table class="table w-100 nowrap" id="timetable_table">
                                             <thead>
                                                 <tr>
                                                     <th>Break</th>

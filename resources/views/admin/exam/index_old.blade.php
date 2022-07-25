@@ -38,7 +38,7 @@
                 <div class="tab-content">
                     <div class="tab-pane show active" id="profile-b1">
                         <div class="table-responsive">
-                            <table class="table table-bordered mb-0">
+                            <table class="table dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>
                                         <th>S.No</th>

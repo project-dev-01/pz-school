@@ -37,7 +37,7 @@
 
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table mb-0" id="exam-hall-table">
+                        <table class="table nowrap w-100" id="exam-hall-table">
                             <thead>
                                 <tr>
                                     <th>#</th>
