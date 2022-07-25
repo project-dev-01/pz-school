@@ -632,7 +632,7 @@
                 </ul><br>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table" id="studentleave-table">
+                        <table class="table w-100 nowrap" id="studentleave-table">
                             <thead>
                                 <tr>
                                     <th>#</th>

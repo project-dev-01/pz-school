@@ -93,7 +93,7 @@
                                     <div class="col-lg-12">
                                         <div class="">
                                             <div class="table-responsive">
-                                                <table class="table w-100 nowrap table-bordered table-striped">
+                                                <table class="table dt-responsive nowrap w-100">
                                                     <thead>
                                                         <tr>
                                                             <th>Subject</th>
@@ -131,7 +131,7 @@
                                             <div class="col-lg-12">
                                                 <div class="">
                                                     <div class="table-responsive">
-                                                        <table class="table mb-0">
+                                                        <table class="table dt-responsive nowrap w-100">
                                                             <thead>
                                                                 <tr>
                                                                     <th>Subject</th>
