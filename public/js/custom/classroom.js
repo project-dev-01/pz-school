@@ -2,7 +2,10 @@ $(function () {
 
     var listTable;
     var addStudentID = [];
-
+    var sTextColor = '#FFFFFF';
+    var sBackColor = '#0abab5;';
+    var sLabelColor = '#white';
+    var sBorderColor = 'white';
     // $(".classRoomHideSHow").show("slow");
     // onload show start
     // classroom details 
@@ -1079,59 +1082,6 @@ $(function () {
         });
     }
 
-    // Set the date we're counting down to
-    var intervalId;
-
-    function countdownTimeStart(timetable_class) {
-
-        var d = new Date();
-        var CountDownID = document.getElementById("classroom_count_down");
-        if (intervalId) {
-            clearInterval(intervalId)
-            intervalId = null
-        }
-        if (timetable_class) {
-            // var time_end = "19:07:10";
-            var time_end = timetable_class.time_end;
-            var edt = moment(time_end, 'HH:mm:ss');
-            var endDate = edt.toDate();
-        } else {
-            // if date null
-            var returned_endate = moment(d).subtract(5, 'minutes');
-            var endDate = returned_endate.toDate();
-        }
-        // its end date time of  countdown
-        var countDownDate = endDate.getTime();
-        // Update the count down every 1 second
-        intervalId = setInterval(function () {
-
-            // Get todays date and time
-            var now = new Date().getTime();
-
-            // Find the distance between now an the count down date
-            var distance = countDownDate - now;
-
-            // Time calculations for days, hours, minutes and seconds
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            // Output the result in an element with id
-            CountDownID.innerHTML = hours + "h " +
-                minutes + "m " + seconds + "s ";
-
-            // CountDownID.innerHTML = '</span> <span class="hours">' + hours + ' <label></label></span> <span class="minutes">'
-            //     + minutes + ' <label></label></span> <span class="seconds">' + seconds + ' <label></label></span>';
-
-            // If the count down is over, write some text 
-            if (distance < 0) {
-                clearInterval(intervalId);
-                CountDownID.innerHTML = "00:00:00";
-                // CountDownID.innerHTML = '</span> <span class="hours">00:<label></label></span> <span class="minutes">00:<label></label></span> <span class="seconds">00<label></label></span>';
-
-                return;
-            }
-        }, 1000);
-    }
     // format dd mm yy
     function formatDate(date) {
         var d = new Date(date),
@@ -1398,4 +1348,228 @@ $(function () {
         $('#addRemarksStudent' + studenetlevtblID).val(compain_remarks_tblID);
         $('#stuLeaveRemarksPopup').modal('hide');
     });
+
+    // classroom clock coundown start
+
+    var intervalId;
+    $('#classroom_count_down .countdown-dot').css({
+        'background-color': sBackColor
+    });
+
+    $('#classroom_count_down .countdown-number-top').css({
+        'background-color': sBackColor
+    });
+
+    $('#classroom_count_down .countdown-number-bottom').css({
+        'background-color': sBackColor
+    });
+
+    $('#classroom_count_down .countdown-number-next').css({
+        'background-color': sBackColor
+    });
+
+    $('#classroom_count_down .countdown-number-next').css({
+        'color': sTextColor
+    });
+
+    $('#classroom_count_down .countdown-number-top').css({
+        'color': sTextColor
+    });
+
+    $('#classroom_count_down .countdown-number-bottom').css({
+        'color': sTextColor
+    });
+
+    $('#classroom_count_down .countdown-dot').css({
+        'border-color': sBorderColor
+    });
+
+    $('#classroom_count_down .countdown-number-top').css({
+        'border-color': sBorderColor
+    });
+
+    $('#classroom_count_down .countdown-number-bottom').css({
+        'border-color': sBorderColor
+    });
+
+    $('#classroom_count_down .countdown-number-next').css({
+        'border-color': sBorderColor
+    });
+
+    $('#classroom_count_down .countdown-label-container').css({
+        'color': sLabelColor
+    });
+
+    var days = 24 * 60 * 60,
+        hours = 60 * 60,
+        minutes = 60;
+
+    var left, d, h, m, s, positions;
+
+    function countdownTimeStart(timetable_class) {
+
+        var curDate = new Date();
+        // var CountDownID = document.getElementById("classroom_count_down");
+        if (intervalId) {
+            clearInterval(intervalId)
+            intervalId = null
+        }
+        if (timetable_class) {
+            // var time_end = "19:07:10";
+            var time_end = timetable_class.time_end;
+            var edt = moment(time_end, 'HH:mm:ss');
+            var endDate = edt.toDate();
+        } else {
+            // if date null
+            var returned_endate = moment(curDate).subtract(5, 'minutes');
+            var endDate = returned_endate.toDate();
+        }
+        // console.log(endDate);
+
+        // its end date time of  countdown
+        var countDownDate = endDate.getTime();
+        // Update the count down every 1 second
+        intervalId = setInterval(function () {
+            // Get todays date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now an the count down date
+            var distance = countDownDate - now;
+            // Time left
+            left = Math.floor((endDate - (new Date())) / 1000);
+
+            if (left < 0) {
+                left = 0;
+            }
+
+            // days left
+            d = Math.floor(left / days);
+            updateNumbers(1, 2, d, 0, distance);
+            left -= d * days;
+
+            // hours left
+            h = Math.floor(left / hours);
+            updateNumbers(3, 4, h, 999, distance);
+            left -= h * hours;
+
+            // minutes left
+            m = Math.floor(left / minutes);
+            updateNumbers(5, 6, m, 999, distance);
+            left -= m * minutes;
+
+            // seconds left
+            s = left;
+            updateNumbers(7, 8, s, 999, distance);
+            // If the count down is over, write some text 
+            if (distance < 0) {
+                clearInterval(intervalId);
+                return;
+            }
+        }, 1000);
+    }
+
+
+    function updateNumbers(minor, major, value, forDays, distance) {
+        if (forDays == 0) {
+            var forDaysClass = '.position-' + parseInt(forDays);
+            switchDigit(forDaysClass, Math.floor(value / 100));
+        }
+        var minorClass = '.position-' + parseInt(minor);
+        var majorClass = '.position-' + parseInt(major);
+
+        switchDigit(minorClass, Math.floor(value / 10) % 10);
+        switchDigit(majorClass, value % 10);
+
+    }
+
+    function switchDigit(sPosition, iNumber) {
+        var oDigit = $(sPosition);
+        var oTarget1 = oDigit.parents('.countdown-number-top');
+        var iNextNumber = iNumber - 1;
+        var sNextPosition = sPosition + '-next';
+
+        if (oDigit.is(':animated') || $(oDigit).html() == iNumber || oTarget1.is(':animated')) {
+            return false;
+        }
+
+        if (((sPosition == '.position-0' || sPosition == '.position-1' || sPosition == '.position-2' || sPosition == '.position-4' || sPosition == '.position-6' || sPosition == '.position-8') && iNextNumber < 0)) {
+            iNextNumber = 9;
+        } else if ((sPosition == '.position-3' && iNextNumber < 0)) {
+            iNextNumber = 2;
+        } else if ((sPosition == '.position-5' || sPosition == '.position-7') && iNextNumber < 0) {
+            iNextNumber = 5;
+        }
+
+        $(oTarget1).animate({
+            borderSpacing: -90
+        }, {
+            step: function (now, fx) {
+                $(this).css('-webkit-transform', 'rotateX(' + now + 'deg)');
+                $(this).css('-moz-transform', 'rotateX(' + now + 'deg)');
+                $(this).css('transform', 'rotateX(' + now + 'deg)');
+            },
+            duration: 750,
+            complete: function () {
+                $(sPosition).each(function () {
+                    $(this).html(iNumber);
+                });
+                $(sNextPosition).each(function () {
+                    $(this).html(iNextNumber);
+                });
+
+                $(this).css('-webkit-transform', '');
+                $(this).css('-moz-transform', '');
+                $(this).css('transform', '');
+            }
+        });
+
+        $('.countdown-number-top .countdown-number-inner ' + sPosition).animate({
+            borderSpacing: -90
+        }, {
+            step: function (now, fx) {
+                $(this).css('-webkit-transform', 'rotateX(' + now + 'deg)');
+                $(this).css('-moz-transform', 'rotateX(' + now + 'deg)');
+                $(this).css('transform', 'rotateX(' + now + 'deg)');
+            },
+            duration: 750,
+            complete: function () {
+                $(this).css('-webkit-transform', 'rotateX(180deg)');
+                $(this).css('-moz-transform', 'rotateX(180deg)');
+                $(this).css('transform', 'rotateX(180deg)');
+            }
+        });
+    }
+
+    resizeClockFonts();
+
+    $(window).resize(function () {
+        resizeClockFonts();
+    });
+
+    // resize fonts based on container width
+    function resizeClockFonts() {
+
+        var numContainerHeight = $('#classroom_count_down .countdown-number-container').height();
+        var labelContainerHeight = $('#classroom_count_down .countdown-label-container').height();
+
+        var numFontSize = parseInt(numContainerHeight * .9) + 'px';
+        var labelFontsize = parseInt(labelContainerHeight * .9) + 'px';
+
+        $("#classroom_count_down .countdown-number-inner").css({
+            'font-size': numFontSize,
+            'line-height': parseInt(numContainerHeight) + 'px'
+        });
+
+        $('#classroom_count_down .countdown-number-next').css({
+            'font-size': numFontSize,
+            'line-height': parseInt(numContainerHeight) + 'px'
+        });
+
+        $("#classroom_count_down .countdown-label-container").css({
+            'font-size': labelFontsize,
+            'line-height': parseInt(labelContainerHeight) + 'px'
+        });
+
+    }
+    // classroom clock coundown end
 });

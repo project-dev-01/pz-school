@@ -75,6 +75,191 @@
         color: #3498db;
         transform: scale(1.1);
     }
+    
+    /*start counter Code*/
+    #classroom_count_down .countdown-wrapper {
+        width: 100%;
+        display: inline-block;
+        position: relative;
+    }
+
+    #classroom_count_down .countdown-wrapper:after {
+        padding-top: 17%;
+        display: block;
+        content: '';
+    }
+
+    #classroom_count_down .countdown-main {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+    }
+
+    #classroom_count_down .countdown-section-days {
+        display: inline;
+        height: 100%;
+        width: 30%;
+        float: left;
+    }
+
+    #classroom_count_down .countdown-section-other {
+        display: inline;
+        height: 100%;
+        width: 20%;
+        float: left;
+    }
+
+    #classroom_count_down .countdown-separator {
+        display: inline;
+        height: 100%;
+        width: 3.33%;
+        float: left;
+    }
+
+    #classroom_count_down .countdown-separator-top {
+        height: 85%;
+        width: 100%;
+        text-align: center;
+    }
+
+    #classroom_count_down .countdown-dot {
+        width: 60%;
+        height: 14%;
+        border-radius: 75%;
+        border: 1px solid #000000;
+        background-color: #404040;
+        margin: auto;
+        margin-top: 107%;
+
+    }
+
+    #classroom_count_down .countdown-number-container {
+        width: 100%;
+        height: 85%;
+        position: relative;
+    }
+
+    #classroom_count_down .countdown-number-days {
+        width: 33.33%;
+        height: 100%;
+        float: left;
+        display: inline;
+        border-radius: 7%;
+        -webkit-perspective: 1000px;
+        /* Chrome, Safari, Opera  */
+        perspective: 1000px;
+        position: relative;
+
+    }
+
+    #classroom_count_down .countdown-number-other {
+        width: 50%;
+        height: 100%;
+        float: left;
+        display: inline;
+        border-radius: 7%;
+        -webkit-perspective: 1000px;
+        /* Chrome, Safari, Opera  */
+        perspective: 1000px;
+        position: relative;
+    }
+
+
+    #classroom_count_down .countdown-number-top {
+        width: 100%;
+        height: 50%;
+        border-top-left-radius: 7%;
+        border-top-right-radius: 7%;
+        border: 1px solid #000000;
+        overflow: hidden;
+        background-color: #404040;
+        color: #FFFFFF;
+        transform-origin: bottom left;
+    }
+
+    #classroom_count_down .countdown-number-bottom {
+        width: 100%;
+        height: 50%;
+        border-bottom-left-radius: 7%;
+        border-bottom-right-radius: 7%;
+        border: 1px solid #000000;
+        background-color: #404040;
+        color: #FFFFFF;
+        overflow: hidden;
+
+        background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 1%, rgba(0, 0, 0, 0) 100%);
+        /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 1%, rgba(0, 0, 0, 0) 100%);
+        /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 1%, rgba(0, 0, 0, 0) 100%);
+        /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#59000000', GradientType=0);
+        /* IE6-9 */
+    }
+
+    #classroom_count_down .countdown-number-inner {
+        width: 100%;
+        height: 200%;
+        vertical-align: middle;
+        text-align: center;
+        font-weight: bold;
+        transform-origin: top;
+    }
+
+    #classroom_count_down .countdown-number-next {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        vertical-align: middle;
+        text-align: center;
+        font-weight: bold;
+        z-index: -9999;
+        border-radius: 7%;
+        color: #FFFFFF;
+        border: 1px solid #000000;
+        background-color: #404040;
+    }
+
+
+    #classroom_count_down .countdown-number-top .countdown-number-inner {
+        transform-origin: bottom left;
+    }
+
+    #classroom_count_down .shadow {
+        z-index: 999;
+        height: 100%;
+        width: 100%;
+        background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 99%, rgba(0, 0, 0, 0.2) 100%);
+        /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 99%, rgba(0, 0, 0, 0.2) 100%);
+        /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 99%, rgba(0, 0, 0, 0.2) 100%);
+        /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#59000000', GradientType=0);
+        /* IE6-9 */
+    }
+
+    #classroom_count_down .countdown-number-bottom .countdown-number-inner {
+        transform: translateY(-52.5%);
+    }
+
+    #classroom_count_down .countdown-label-container {
+        height: 15%;
+        width: 100%;
+        vertical-align: middle;
+        text-align: center;
+        color: #000000;
+        padding-top: 5px;
+        font-size: 12px;
+    }
+
+    #classroom_count_down .countdown-number-container .ready {
+        display: none;
+    }
+
+    /*End counter Code*/
 </style>
 @endsection
 @section('content')
@@ -161,7 +346,154 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Count Down</label>
-                                    <div id="classroom_count_down" class="counter"></div>
+                                    <div>
+                                        <!-- #classroom_count_down is always 100% responsive to it's container-->
+
+                                        <div id="classroom_count_down">
+                                            <div class="countdown-wrapper">
+                                                <div class="countdown-main">
+                                                    <div class="countdown-section-days days">
+                                                        <div class="countdown-number-container">
+                                                            <div class="countdown-number-days">
+                                                                <div class="countdown-number-next position-0-next">0</div>
+                                                                <div class="countdown-number-top">
+                                                                    <div class="shadow">
+                                                                        <div class="countdown-number-inner position-0">0</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="countdown-number-bottom">
+                                                                    <div class="countdown-number-inner position-0">0</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="countdown-number-days">
+                                                                <div class="countdown-number-next position-1-next">0</div>
+                                                                <div class="countdown-number-top">
+                                                                    <div class="shadow">
+                                                                        <div class="countdown-number-inner position-1">0</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="countdown-number-bottom">
+                                                                    <div class="countdown-number-inner position-1">0</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="countdown-number-days">
+                                                                <div class="countdown-number-next position-2-next">0</div>
+                                                                <div class="countdown-number-top">
+                                                                    <div class="shadow">
+                                                                        <div class="countdown-number-inner position-2">0</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="countdown-number-bottom">
+                                                                    <div class="countdown-number-inner position-2">0</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="countdown-label-container">DAYS</div>
+                                                    </div>
+                                                    <div class="countdown-separator">
+                                                        <div class="countdown-separator-top">
+                                                            <div class="countdown-dot"></div>
+                                                            <div class="countdown-dot"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="countdown-section-other hours">
+                                                        <div class="countdown-number-container">
+                                                            <div class="countdown-number-other">
+                                                                <div class="countdown-number-next position-3-next">0</div>
+                                                                <div class="countdown-number-top">
+                                                                    <div class="shadow">
+                                                                        <div class="countdown-number-inner position-3">0</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="countdown-number-bottom">
+                                                                    <div class="countdown-number-inner position-3">0</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="countdown-number-other">
+                                                                <div class="countdown-number-next position-4-next">0</div>
+                                                                <div class="countdown-number-top">
+                                                                    <div class="shadow">
+                                                                        <div class="countdown-number-inner position-4">0</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="countdown-number-bottom">
+                                                                    <div class="countdown-number-inner position-4">0</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="countdown-label-container">HOURS</div>
+                                                    </div>
+                                                    <div class="countdown-separator">
+                                                        <div class="countdown-separator-top">
+                                                            <div class="countdown-dot"></div>
+                                                            <div class="countdown-dot"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="countdown-section-other minutes">
+                                                        <div class="countdown-number-container">
+                                                            <div class="countdown-number-other">
+                                                                <div class="countdown-number-next position-5-next">0</div>
+                                                                <div class="countdown-number-top">
+                                                                    <div class="shadow">
+                                                                        <div class="countdown-number-inner position-5">0</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="countdown-number-bottom">
+                                                                    <div class="countdown-number-inner position-5">0</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="countdown-number-other">
+                                                                <div class="countdown-number-next position-6-next">0</div>
+                                                                <div class="countdown-number-top">
+                                                                    <div class="shadow">
+                                                                        <div class="countdown-number-inner position-6">0</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="countdown-number-bottom">
+                                                                    <div class="countdown-number-inner position-6">0</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="countdown-label-container">MINUTES</div>
+                                                    </div>
+                                                    <div class="countdown-separator">
+                                                        <div class="countdown-separator-top">
+                                                            <div class="countdown-dot"></div>
+                                                            <div class="countdown-dot"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="countdown-section-other seconds">
+                                                        <div class="countdown-number-container">
+                                                            <div class="countdown-number-other">
+                                                                <div class="countdown-number-next position-7-next">0</div>
+                                                                <div class="countdown-number-top">
+                                                                    <div class="shadow">
+                                                                        <div class="countdown-number-inner position-7">0</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="countdown-number-bottom">
+                                                                    <div class="countdown-number-inner position-7">0</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="countdown-number-other">
+                                                                <div class="countdown-number-next position-8-next">0</div>
+                                                                <div class="countdown-number-top">
+                                                                    <div class="shadow">
+                                                                        <div class="countdown-number-inner position-8">0</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="countdown-number-bottom">
+                                                                    <div class="countdown-number-inner position-8">0</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="countdown-label-container">SECONDS</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
