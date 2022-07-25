@@ -100,7 +100,7 @@
 
                                 </div> -->
                                 <div class="table-responsive">
-                                    <table id="tblbycls" class="table w-100 nowrap table-bordered table-striped">
+                                    <table id="tblbycls" class="table w-100 nowrap">
                                         <thead>
                                             <tr>
                                                 <th class="align-top" rowspan="2">S.no.</th>

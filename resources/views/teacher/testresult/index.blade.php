@@ -100,7 +100,7 @@
                         <div class="col-md-12">
                             <div class="card-box">
                                 <!-- <table id="stdmarks" data-toggle="table" data-page-size="7" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable "> -->
-                                <table id="stdmarks" class="table" width="100%">
+                                <table id="stdmarks" class="table w-100 nowrap" width="100%">
                                     <thead>
                                         <tr>
                                             <th width="10%">#</th>

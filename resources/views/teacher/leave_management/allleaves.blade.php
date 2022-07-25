@@ -68,7 +68,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="table-responsive">
-                            <table id="all-leave-list" class="table dt-responsive nowrap w-100">
+                            <table id="all-leave-list" class="table w-100 nowrap">
                                 <thead>
                                     <tr>
                                         <th>#</th>
