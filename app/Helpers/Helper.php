@@ -1,6 +1,9 @@
 <?php
 namespace App\Helpers;
 use Illuminate\Support\Facades\Http;
+// encrypt and decrypt
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class Helper{
     
@@ -48,16 +51,20 @@ class Helper{
         return $response->json();
     }
 
-    // create api
-    public static function Create($model, $data){
-        
-    }
-
     // get api call
     public static function DataTableGetMethod($url,$data){
         $data["token"] = session()->get('token');
         $data["branch_id"] = session()->get('branch_id');
         $response = Http::get($url,$data);
         return $response->json();
+    }
+    // decrypt string
+    public static function decryptStringData($string){
+        try {
+            $data = Crypt::decryptString($string);
+        } catch (DecryptException $e) {
+            $data = "";
+        }
+        return $data;
     }
 }

@@ -484,7 +484,7 @@
                                                 <span class="fas fa-unlock"></span>
                                             </div>
                                         </div>
-                                        <input type="password" class="form-control" name="password" aria-describedby="inputGroupPrepend">
+                                        <input type="password" class="form-control" name="password" id="password" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>

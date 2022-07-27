@@ -56,7 +56,6 @@
                                     <th>Department</th>
                                     <th>Designation</th>
                                     <th>Email</th>
-                                    <th>Mobile No</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

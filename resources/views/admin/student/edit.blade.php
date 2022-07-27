@@ -1293,19 +1293,19 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">School Name</label>
-                                                <input type="" id="txt_prev_schname" class="form-control" name="txt_prev_schname" data-parsley-trigger="change" value="{{$student['school_name']}}">
+                                                <label for="txt_prev_schname">School Name</label>
+                                                <input type="text" id="txt_prev_schname" class="form-control" name="txt_prev_schname" data-parsley-trigger="change" value="{{$student['school_name']}}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Qualification</label>
-                                                <input type="" id="txt_prev_qualify" class="form-control" name="txt_prev_qualify" data-parsley-trigger="change" value="{{$student['qualification']}}">
+                                                <label for="txt_prev_qualify">Qualification</label>
+                                                <input type="text" id="txt_prev_qualify" class="form-control" name="txt_prev_qualify" data-parsley-trigger="change" value="{{$student['qualification']}}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="message">Remarks</label>
+                                                <label for="txtarea_prev_remarks">Remarks</label>
                                                 <textarea id="txtarea_prev_remarks" class="form-control" name="txtarea_prev_remarks">{{$student['remarks']}}
                                                 </textarea>
                                             </div>
@@ -1332,7 +1332,7 @@
                                                             <span class="fas fa-unlock"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="password" class="form-control" name="password"  id="password" aria-describedby="inputGroupPrepend">
+                                                    <input type="password" class="form-control" name="password" id="password" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -1356,6 +1356,9 @@
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
                                     Update
                                 </button>
+                                <a href="{{ route('admin.student.index') }}" class="btn btn-primary-bl waves-effect waves-light">
+                                    Back
+                                </a>
                                 <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                     Cancel
                                 </button>-->

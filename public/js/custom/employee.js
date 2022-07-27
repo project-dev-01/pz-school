@@ -473,10 +473,6 @@ $(function () {
                 name: 'email'
             },
             {
-                data: 'mobile_no',
-                name: 'mobile_no'
-            },
-            {
                 data: 'actions',
                 name: 'actions',
                 orderable: false,

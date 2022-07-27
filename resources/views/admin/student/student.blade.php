@@ -107,7 +107,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="table-responsive">
-                                <table class="table table-bordered mb-0 text-center" id="student-table">
+                                <table class="table w-100 nowrap " id="student-table">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -116,7 +116,6 @@
                                             <th>Roll No</th>
                                             <th>Gender</th>
                                             <th>Email</th>
-                                            <th>Mobile No</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>

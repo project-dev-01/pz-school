@@ -141,10 +141,6 @@ $(function () {
                     name: 'occupation'
                 },
                 {
-                    data: 'mobile_no',
-                    name: 'mobile_no'
-                },
-                {
                     data: 'email',
                     name: 'email'
                 },

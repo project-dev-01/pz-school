@@ -689,6 +689,9 @@
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
                                     Update
                                 </button>
+                                <a href="{{ route('admin.parent') }}" class="btn btn-primary-bl waves-effect waves-light">
+                                    Back
+                                </a>
                                 <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                     Cancel
                                 </button>-->

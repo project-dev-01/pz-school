@@ -41,7 +41,6 @@
                                                 <th>#</th>
                                                 <th>Name</th>
                                                 <th>Occupation</th>
-                                                <th>Mobile No</th>
                                                 <th>Email</th>
                                                 <th>Actions</th>
                                             </tr>

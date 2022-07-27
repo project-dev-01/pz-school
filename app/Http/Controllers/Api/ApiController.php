@@ -20,17 +20,9 @@ use App\Models\Section;
 use App\Helpers\Helper;
 use App\Models\Classes;
 use App\Models\Role;
-use App\Models\SectionAllocation;
-use App\Models\TeacherAllocation;
 use App\Models\EventType;
-use App\Models\Event;
-use App\Models\Staff;
 use App\Models\User;
-use App\Models\StaffDepartments;
-use App\Models\StaffDesignation;
 // db connection
-use App\Helpers\DatabaseConnection;
-use App\Models\Tenant\StaffDepartment;
 use App\Models\Forum_posts;
 use App\Models\Forum_count_details;
 use App\Models\Forum_post_replies;
@@ -40,6 +32,9 @@ use Illuminate\Support\Arr;
 // notifications
 use App\Notifications\LeaveApply;
 use Illuminate\Support\Facades\Notification;
+// encrypt and decrypt
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class ApiController extends BaseController
 {
@@ -2821,7 +2816,11 @@ class ApiController extends BaseController
                     } else {
                         $fileName = null;
                     }
-                    // first letter word
+                    $present_address = isset($request->present_address) ? Crypt::encryptString($request->present_address) : "";
+                    $permanent_address = isset($request->permanent_address) ? Crypt::encryptString($request->permanent_address) : "";
+                    $nric_number = isset($request->nric_number) ? Crypt::encryptString($request->nric_number) : "";
+                    $passport = isset($request->passport) ? Crypt::encryptString($request->passport) : "";
+                    $mobile_no = isset($request->mobile_no) ? Crypt::encryptString($request->mobile_no) : "";
                     // update data
                     $Staffid = $Connection->table('staffs')->insertGetId([
                         // 'staff_id' => $request->staff_id,
@@ -2840,9 +2839,9 @@ class ApiController extends BaseController
                         'gender' => $request->gender,
                         'religion' => $request->religion,
                         'blood_group' => $request->blood_group,
-                        'present_address' => trim($request->present_address),
-                        'permanent_address' => trim($request->permanent_address),
-                        'mobile_no' => $request->mobile_no,
+                        'present_address' => $present_address,
+                        'permanent_address' => $permanent_address,
+                        'mobile_no' => $mobile_no,
                         'email' => $request->email,
                         'photo' => $fileName,
                         'facebook_url' => $request->facebook_url,
@@ -2851,8 +2850,8 @@ class ApiController extends BaseController
                         'salary_grade' => isset($request->salary_grade) ? $request->salary_grade : "0",
                         'staff_position' => $request->staff_position,
                         'staff_category' => $request->staff_category,
-                        'nric_number' => $request->nric_number,
-                        'passport' => $request->passport,
+                        'nric_number' => $nric_number,
+                        'passport' => $passport,
                         'height' => isset($request->height) ? $request->height : "",
                         'weight' => isset($request->weight) ? $request->weight : "",
                         'allergy' => isset($request->allergy) ? $request->allergy : "",
@@ -2951,15 +2950,62 @@ class ApiController extends BaseController
             // create new connection
             $staffConn = $this->createNewConnection($request->branch_id);
             // get data
-            $empDetails['staff'] = $staffConn->table('staffs as s')
+            $getEmpDetails = $staffConn->table('staffs as s')
                 ->select(
-                    's.*',
+                    's.id',
+                    's.first_name',
+                    's.last_name',
+                    's.employment_status',
+                    's.short_name',
+                    's.department_id',
+                    's.designation_id',
+                    's.staff_qualification_id',
+                    's.stream_type_id',
+                    's.race',
+                    's.joining_date',
+                    's.birthday',
+                    's.gender',
+                    's.religion',
+                    's.height',
+                    's.weight',
+                    's.allergy',
+                    's.blood_group',
+                    's.city',
+                    's.state',
+                    's.country',
+                    's.post_code',
+                    's.present_address',
+                    's.permanent_address',
+                    's.mobile_no',
+                    's.email',
+                    's.photo',
+                    's.facebook_url',
+                    's.linkedin_url',
+                    's.twitter_url',
+                    's.salary_grade',
+                    's.staff_category',
+                    's.staff_position',
+                    's.nric_number',
+                    's.passport',
+                    's.status',
                     DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"),
                     DB::raw("GROUP_CONCAT(DISTINCT  dp.name) as department_name")
                 )
                 ->leftJoin("staff_departments as dp", DB::raw("FIND_IN_SET(dp.id,s.department_id)"), ">", DB::raw("'0'"))
                 ->where('s.id', $id)
-                ->first();
+                ->get();
+            $staffObj = new \stdClass();
+            if (!empty($getEmpDetails)) {
+                foreach ($getEmpDetails as $suc) {
+                    $staffObj = $suc;
+                    $staffObj->present_address = Helper::decryptStringData($suc->present_address);
+                    $staffObj->permanent_address = Helper::decryptStringData($suc->permanent_address);
+                    $staffObj->mobile_no = Helper::decryptStringData($suc->mobile_no);
+                    $staffObj->nric_number = Helper::decryptStringData($suc->nric_number);
+                    $staffObj->passport = Helper::decryptStringData($suc->passport);
+                }
+            }
+            $empDetails['staff'] = $staffObj;
             $empDetails['bank'] = $staffConn->table('staff_bank_accounts')->where('staff_id', $id)->first();
             $empDetails['user'] = User::where('user_id', $id)->where('branch_id', $request->branch_id)->first();
             return $this->successResponse($empDetails, 'Employee row fetch successfully');
@@ -3038,6 +3084,12 @@ class ApiController extends BaseController
                     }
                 }
                 // update data
+                $present_address = isset($request->present_address) ? Crypt::encryptString($request->present_address) : "";
+                $permanent_address = isset($request->permanent_address) ? Crypt::encryptString($request->permanent_address) : "";
+                $nric_number = isset($request->nric_number) ? Crypt::encryptString($request->nric_number) : "";
+                $passport = isset($request->passport) ? Crypt::encryptString($request->passport) : "";
+                $mobile_no = isset($request->mobile_no) ? Crypt::encryptString($request->mobile_no) : "";
+
                 $query = $Connection->table('staffs')->where('id', $id)->update([
                     // 'staff_id' => $request->staff_id,
                     // 'name' => $request->name,
@@ -3055,9 +3107,9 @@ class ApiController extends BaseController
                     'gender' => $request->gender,
                     'religion' => $request->religion,
                     'blood_group' => $request->blood_group,
-                    'present_address' => trim($request->present_address),
-                    'permanent_address' => trim($request->permanent_address),
-                    'mobile_no' => $request->mobile_no,
+                    'present_address' => $present_address,
+                    'permanent_address' => $permanent_address,
+                    'mobile_no' => $mobile_no,
                     'email' => $request->email,
                     'photo' => $fileName,
                     'facebook_url' => $request->facebook_url,
@@ -3066,7 +3118,7 @@ class ApiController extends BaseController
                     'salary_grade' => isset($request->salary_grade) ? $request->salary_grade : "0",
                     'staff_position' => $request->staff_position,
                     'staff_category' => $request->staff_category,
-                    'nric_number' => $request->nric_number,
+                    'nric_number' => $nric_number,
                     'height' => isset($request->height) ? $request->height : "",
                     'weight' => isset($request->weight) ? $request->weight : "",
                     'allergy' => isset($request->allergy) ? $request->allergy : "",
@@ -3074,7 +3126,7 @@ class ApiController extends BaseController
                     'state' => $request->state,
                     'country' => $request->country,
                     'post_code' => $request->post_code,
-                    'passport' => isset($request->passport) ? $request->passport : "",
+                    'passport' => $passport,
                     'status' => $request->status,
                     'updated_at' => date("Y-m-d H:i:s")
                 ]);
@@ -10226,14 +10278,19 @@ class ApiController extends BaseController
                     $suc = file_put_contents($file, $base64);
                 }
 
+                $passport = isset($request->passport) ? Crypt::encryptString($request->passport) : "";
+                $nric = isset($request->nric) ? Crypt::encryptString($request->nric) : "";
+                $mobile_no = isset($request->mobile_no) ? Crypt::encryptString($request->mobile_no) : "";
+                $current_address = isset($request->current_address) ? Crypt::encryptString($request->current_address) : "";
+                $permanent_address = isset($request->permanent_address) ? Crypt::encryptString($request->permanent_address) : "";
 
                 $studentId = $conn->table('students')->insertGetId([
                     'year' => $request->year,
                     'father_id' => $request->father_id,
                     'mother_id' => $request->mother_id,
                     'guardian_id' => $request->guardian_id,
-                    'passport' => $request->passport,
-                    'nric' => $request->nric,
+                    'passport' => $passport,
+                    'nric' => $nric,
                     'relation' => $request->relation,
                     'register_no' => $request->register_no,
                     'roll_no' => $request->roll_no,
@@ -10249,11 +10306,11 @@ class ApiController extends BaseController
                     'race' => $request->race,
                     'country' => $request->country,
                     'post_code' => $request->post_code,
-                    'mobile_no' => $request->mobile_no,
+                    'mobile_no' => $mobile_no,
                     'city' => $request->city,
                     'state' => $request->state,
-                    'current_address' => $request->current_address,
-                    'permanent_address' => $request->permanent_address,
+                    'current_address' => $current_address,
+                    'permanent_address' => $permanent_address,
                     'email' => $request->email,
                     'photo' => $fileName,
                     'route_id' => $request->route_id,
@@ -11355,14 +11412,19 @@ class ApiController extends BaseController
                     $fileName = $request->old_photo;
                 }
 
+                $passport = isset($request->passport) ? Crypt::encryptString($request->passport) : "";
+                $nric = isset($request->nric) ? Crypt::encryptString($request->nric) : "";
+                $mobile_no = isset($request->mobile_no) ? Crypt::encryptString($request->mobile_no) : "";
+                $current_address = isset($request->current_address) ? Crypt::encryptString($request->current_address) : "";
+                $permanent_address = isset($request->permanent_address) ? Crypt::encryptString($request->permanent_address) : "";
 
                 $studentId = $conn->table('students')->where('id', $request->student_id)->update([
                     'father_id' => $request->father_id,
                     'mother_id' => $request->mother_id,
                     'guardian_id' => $request->guardian_id,
                     'relation' => $request->relation,
-                    'passport' => $request->passport,
-                    'nric' => $request->nric,
+                    'passport' => $passport,
+                    'nric' => $nric,
                     'register_no' => $request->register_no,
                     'year' => $request->year,
                     'roll_no' => $request->roll_no,
@@ -11378,11 +11440,11 @@ class ApiController extends BaseController
                     'race' => $request->race,
                     'country' => $request->country,
                     'post_code' => $request->post_code,
-                    'mobile_no' => $request->mobile_no,
+                    'mobile_no' => $mobile_no,
                     'city' => $request->city,
                     'state' => $request->state,
-                    'current_address' => $request->current_address,
-                    'permanent_address' => $request->permanent_address,
+                    'current_address' => $current_address,
+                    'permanent_address' => $permanent_address,
                     'email' => $request->email,
                     'photo' => $fileName,
                     'route_id' => $request->route_id,
@@ -11482,12 +11544,42 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $studentDetail['student'] = $conn->table('students as s')
-                ->select('s.*', DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"), 'c.name as class_name', 'sec.name as section_name', 's.relation', 'e.class_id', 'e.section_id', 'e.session_id', 'e.semester_id')
+            // $studentDetail['student'] = $conn->table('students as s')
+            //     ->select('s.*', DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"), 'c.name as class_name', 'sec.name as section_name', 's.relation', 'e.class_id', 'e.section_id', 'e.session_id', 'e.semester_id')
+            //     ->leftJoin('enrolls as e', 's.id', '=', 'e.student_id')
+            //     ->leftJoin('classes as c', 'e.class_id', '=', 'c.id')
+            //     ->leftJoin('sections as sec', 'e.section_id', '=', 'sec.id')
+            //     ->where('s.id', $id)->first();
+
+            $getStudentDetail = $conn->table('students as s')
+                ->select(
+                    's.*',
+                    DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"),
+                    'c.name as class_name',
+                    'sec.name as section_name',
+                    'e.class_id',
+                    'e.section_id',
+                    'e.session_id',
+                    'e.semester_id'
+                )
                 ->leftJoin('enrolls as e', 's.id', '=', 'e.student_id')
                 ->leftJoin('classes as c', 'e.class_id', '=', 'c.id')
                 ->leftJoin('sections as sec', 'e.section_id', '=', 'sec.id')
-                ->where('s.id', $id)->first();
+                ->where('s.id', $id)
+                ->get();
+                // dd($getStudentDetail);
+            $studentObj = new \stdClass();
+            if (!empty($getStudentDetail)) {
+                foreach ($getStudentDetail as $suc) {
+                    $studentObj = $suc;
+                    $studentObj->current_address = Helper::decryptStringData($suc->current_address);
+                    $studentObj->permanent_address = Helper::decryptStringData($suc->permanent_address);
+                    $studentObj->mobile_no = Helper::decryptStringData($suc->mobile_no);
+                    $studentObj->nric = Helper::decryptStringData($suc->nric);
+                    $studentObj->passport = Helper::decryptStringData($suc->passport);
+                }
+            }
+            $studentDetail['student'] = $studentObj;
 
             $class_id = $studentDetail['student']->class_id;
             $studentDetail['section'] = $conn->table('section_allocations as sa')->select('s.id as section_id', 's.name as section_name')
@@ -11601,16 +11693,22 @@ class ApiController extends BaseController
 
                 $name = $request->first_name . " " . $request->last_name;
                 // insert data
+                $passport = isset($request->passport) ? Crypt::encryptString($request->passport) : "";
+                $nric = isset($request->nric) ? Crypt::encryptString($request->nric) : "";
+                $mobile_no = isset($request->mobile_no) ? Crypt::encryptString($request->mobile_no) : "";
+                $address = isset($request->address) ? Crypt::encryptString($request->address) : "";
+                $address_2 = isset($request->address_2) ? Crypt::encryptString($request->address_2) : "";
+
                 $parentId = $conn->table('parent')->insertGetId([
 
                     'first_name' => isset($request->first_name) ? $request->first_name : "",
                     'last_name' => isset($request->last_name) ? $request->last_name : "",
                     'gender' => $request->gender,
                     'date_of_birth' => $request->date_of_birth,
-                    'passport' => $request->passport,
+                    'passport' => $passport,
                     'race' => $request->race,
                     'religion' => $request->religion,
-                    'nric' => $request->nric,
+                    'nric' => $nric,
                     'blood_group' => $request->blood_group,
                     'occupation' => $request->occupation,
                     'income' => $request->income,
@@ -11619,9 +11717,9 @@ class ApiController extends BaseController
                     'post_code' => $request->post_code,
                     'city' => $request->city,
                     'state' => $request->state,
-                    'mobile_no' => $request->mobile_no,
-                    'address' => $request->address,
-                    'address_2' => $request->address_2,
+                    'mobile_no' => $mobile_no,
+                    'address' => $address,
+                    'address_2' => $address_2,
                     'email' => $request->email,
                     'photo' => $fileName,
                     'facebook_url' => $request->facebook_url,
@@ -11691,7 +11789,28 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $parentDetails['parent'] = $conn->table('parent')->select('*', DB::raw("CONCAT(first_name, ' ', last_name) as name"))->where('id', $id)->first();
+            // $parentDetails['parent'] = $conn->table('parent')->select('*', DB::raw("CONCAT(first_name, ' ', last_name) as name"))->where('id', $id)->first();
+
+            $getparentDetails = $conn->table('parent as s')
+                ->select(
+                    's.*',
+                    DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name")
+                )
+                ->where('s.id', $id)
+                ->get();
+            $parentObj = new \stdClass();
+            if (!empty($getparentDetails)) {
+                foreach ($getparentDetails as $suc) {
+                    $parentObj = $suc;
+                    $parentObj->address = Helper::decryptStringData($suc->address);
+                    $parentObj->address_2 = Helper::decryptStringData($suc->address_2);
+                    $parentObj->mobile_no = Helper::decryptStringData($suc->mobile_no);
+                    $parentObj->nric = Helper::decryptStringData($suc->nric);
+                    $parentObj->passport = Helper::decryptStringData($suc->passport);
+                }
+            }
+            $parentDetails['parent'] = $parentObj;
+
             $parentDetails['childs'] = $conn->table('students as s')->select('s.id', 's.first_name', 's.last_name', 's.photo', 'c.name as class_name', 'sec.name as section_name')
                 ->leftJoin('enrolls as e', 'e.student_id', '=', 's.id')
                 ->leftJoin('classes as c', 'e.class_id', '=', 'c.id')
@@ -11823,15 +11942,21 @@ class ApiController extends BaseController
                 }
 
                 // update data
+                $passport = isset($request->passport) ? Crypt::encryptString($request->passport) : "";
+                $nric = isset($request->nric) ? Crypt::encryptString($request->nric) : "";
+                $mobile_no = isset($request->mobile_no) ? Crypt::encryptString($request->mobile_no) : "";
+                $address = isset($request->address) ? Crypt::encryptString($request->address) : "";
+                $address_2 = isset($request->address_2) ? Crypt::encryptString($request->address_2) : "";
+
                 $query = $staffConn->table('parent')->where('id', $id)->update([
                     'first_name' => isset($request->first_name) ? $request->first_name : "",
                     'last_name' => isset($request->last_name) ? $request->last_name : "",
                     'gender' => $request->gender,
                     'date_of_birth' => $request->date_of_birth,
-                    'passport' => $request->passport,
+                    'passport' => $passport,
                     'race' => $request->race,
                     'religion' => $request->religion,
-                    'nric' => $request->nric,
+                    'nric' => $nric,
                     'blood_group' => $request->blood_group,
                     'occupation' => $request->occupation,
                     'income' => $request->income,
@@ -11840,9 +11965,9 @@ class ApiController extends BaseController
                     'post_code' => $request->post_code,
                     'city' => $request->city,
                     'state' => $request->state,
-                    'mobile_no' => $request->mobile_no,
-                    'address' => $request->address,
-                    'address_2' => $request->address_2,
+                    'mobile_no' => $mobile_no,
+                    'address' => $address,
+                    'address_2' => $address_2,
                     'email' => $request->email,
                     'photo' => $fileName,
                     'facebook_url' => $request->facebook_url,
