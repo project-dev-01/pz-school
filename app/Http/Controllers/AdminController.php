@@ -5,22 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use DataTables;
-use App\Models\Classes;
 use App\Models\Role;
-use App\Models\Section;
-use App\Models\EventType;
-use App\Models\Event;
-use App\Models\SectionAllocation;
-use App\Models\TeacherAllocation;
-use App\Models\Tenant\User as TenantUser;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use App\Models\User;
-use Carbon\Carbon;
-use PhpParser\Node\Expr\FuncCall;
-use app\Models;
-use App\Models\Task;
 
 class AdminController extends Controller
 {
@@ -269,6 +257,7 @@ class AdminController extends Controller
     //
     public function index()
     {
+        // dd(session('school_name_url'));
         $user_id = session()->get('user_id');
         $data = [
             'user_id' => $user_id

@@ -350,7 +350,47 @@ input:focus {
 	background-color: #0abab5 !important;
 	color: #fff;
 } */
+/*start calender css*/
+.btn-primary {
+	color: #fff;
+	background-color: #1abc9c;
+	border-color: #eceff1;
+}
 
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show>.btn-primary.dropdown-toggle {
+	color: #fff;
+	background-color: #10a084;
+	border-color: #e5ecf2;
+}
+
+.btn-primary.disabled,
+.btn-primary:disabled {
+	color: #fff;
+	background-color: #55a595;
+	border-color: #f7f8f9;
+}
+
+.fc-time-grid .fc-slats td {
+	height: 5em;
+	border-bottom: 0;
+}
+
+.modal-header {
+	border-bottom: 1px solid #10a084;
+}
+
+.modal-body {
+	padding: 2rem;
+}
+
+.close {
+	color: #1abc9c;
+	opacity: 1.5;
+}
+
+/*end calender css*/
 button.dt-button {
 	border-radius: 22px;
 	background: white;

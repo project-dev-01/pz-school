@@ -12,16 +12,17 @@ class AuthController extends Controller
     {
         if (session()->has('role_id')) {
             $role_id = session()->get('role_id');
+            $school_name_url = session()->get('school_name_url');
             if ($role_id == 2) {
-                return redirect()->route('admin.dashboard');
+                return redirect()->route('admin.dashboard', ['school_name_url' => $school_name_url]);
             } elseif ($role_id == 3) {
-                return redirect()->route('staff.dashboard');
+                return redirect()->route('staff.dashboard', ['school_name_url' => $school_name_url]);
             } elseif ($role_id == 4) {
-                return redirect()->route('teacher.dashboard');
+                return redirect()->route('teacher.dashboard', ['school_name_url' => $school_name_url]);
             } elseif ($role_id == 5) {
-                return redirect()->route('parent.dashboard');
+                return redirect()->route('parent.dashboard', ['school_name_url' => $school_name_url]);
             } elseif ($role_id == 6) {
-                return redirect()->route('student.dashboard');
+                return redirect()->route('student.dashboard', ['school_name_url' => $school_name_url]);
             }
         }
         return view('auth.login');
@@ -46,6 +47,7 @@ class AuthController extends Controller
 
         $userDetails = $response->json();
         // dd($userDetails);
+        $school_name_url = "";
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
             if ($userDetails['data']['subsDetails']) {
@@ -61,30 +63,34 @@ class AuthController extends Controller
                     $request->session()->put('branch_id', $userDetails['data']['subsDetails']['id']);
                     $request->session()->put('school_name', $userDetails['data']['subsDetails']['school_name']);
                     $request->session()->put('school_logo', $userDetails['data']['subsDetails']['logo']);
+                    // space remove school name
+                    $string = preg_replace('/\s+/', '-', $userDetails['data']['subsDetails']['school_name']);
+                    $request->session()->put('school_name_url', $string);
+                    $school_name_url = $string;
                     // dd($userDetails['data']['StudentID'][0]['id']);
-                    if(isset($userDetails['data']['StudentID'])){
+                    if (isset($userDetails['data']['StudentID'])) {
                         $request->session()->put('student_id', $userDetails['data']['StudentID'][0]['id']);
                         $request->session()->put('all_child', $userDetails['data']['StudentID']);
-                    }else{
+                    } else {
                         $request->session()->put('student_id', null);
                         $request->session()->put('all_child', null);
                     }
-                    
+
                     // $request->session()->put('db_name', $userDetails['data']['subsDetails']['db_name']);
                     // $request->session()->put('db_username', $userDetails['data']['subsDetails']['db_username']);
                     // $request->session()->put('db_password', $userDetails['data']['subsDetails']['db_password']);
                 }
 
                 if ($userDetails['data']['user']['role_id'] == 2) {
-                    return redirect()->route('admin.dashboard');
+                    return redirect()->route('admin.dashboard', ['school_name_url' => $school_name_url]);
                 } elseif ($userDetails['data']['user']['role_id'] == 3) {
-                    return redirect()->route('staff.dashboard');
+                    return redirect()->route('staff.dashboard', ['school_name_url' => $school_name_url]);
                 } elseif ($userDetails['data']['user']['role_id'] == 4) {
-                    return redirect()->route('teacher.dashboard');
+                    return redirect()->route('teacher.dashboard', ['school_name_url' => $school_name_url]);
                 } elseif ($userDetails['data']['user']['role_id'] == 5) {
-                    return redirect()->route('parent.dashboard');
+                    return redirect()->route('parent.dashboard', ['school_name_url' => $school_name_url]);
                 } elseif ($userDetails['data']['user']['role_id'] == 6) {
-                    return redirect()->route('student.dashboard');
+                    return redirect()->route('student.dashboard', ['school_name_url' => $school_name_url]);
                 } else {
                     return redirect()->route('admin.login')->with('error', 'Invalid Credential');
                 }
@@ -176,7 +182,8 @@ class AuthController extends Controller
         return view('auth.forgot-password');
     }
 
-    public function resetPassword (Request $request){
+    public function resetPassword(Request $request)
+    {
 
         $response = Http::post(config('constants.api.reset_password'), [
             'email' => $request->email,
@@ -184,7 +191,7 @@ class AuthController extends Controller
 
         $userDetails = $response->json();
         if ($userDetails['code'] == 200) {
-            return redirect()->back()->with('success','A reset link has been sent to your email address.');
+            return redirect()->back()->with('success', 'A reset link has been sent to your email address.');
         } else {
             return redirect()->back()->with('error', $userDetails['message']);
         }
@@ -209,9 +216,5 @@ class AuthController extends Controller
         } else {
             return redirect()->back()->with('error', $userDetails['message']);
         }
-
     }
-
-    
-    
 }

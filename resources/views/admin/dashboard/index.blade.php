@@ -2,7 +2,7 @@
 @section('title','Dashboard')
 
 @section('content')
-<link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
+<!-- <link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" /> -->
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -417,6 +417,11 @@
                                     <div class="card-box">
                                         <div class="table-responsive">
                                             <table class="table mb-0">
+                                                <style>
+                                                    .table td {
+                                                        border-top: none;
+                                                    }
+                                                </style>
                                                 <tr>
                                                     <td>Title</td>
                                                     <td id="title"></td>

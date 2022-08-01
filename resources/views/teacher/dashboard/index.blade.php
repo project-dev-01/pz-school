@@ -2,7 +2,7 @@
 @section('title','Dashboard')
 
 @section('content')
-<link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
+<!-- <link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" /> -->
 <!-- Start Content-->
 <div class="container-fluid">
 
