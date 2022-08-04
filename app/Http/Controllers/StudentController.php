@@ -20,11 +20,13 @@ class StudentController extends Controller
         ];
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
         $get_homework_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_homework_list_dashboard'), $data);
+        $greetings = Helper::greetingMessage();
         return view(
             'student.dashboard.index',
             [
                 'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
-                'get_homework_list_dashboard' => $get_homework_list_dashboard['data']
+                'get_homework_list_dashboard' => $get_homework_list_dashboard['data'],
+                'greetings' => $greetings
             ]
         );
     }

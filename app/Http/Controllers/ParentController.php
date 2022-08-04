@@ -31,6 +31,8 @@ class ParentController extends Controller
         $get_homework_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_homework_list_dashboard'), $data);
         $get_std_names_dashboard = Helper::GETMethodWithData(config('constants.api.get_students_parentdashboard'), $parent_ids);
         $get_leave_reasons_dashboard = Helper::GetMethod(config('constants.api.get_leave_reasons'));
+        $greetings = Helper::greetingMessage();
+
         // dd($get_std_names_dashboard);
         return view(
             'parent.dashboard.index',
@@ -39,6 +41,7 @@ class ParentController extends Controller
                 'get_homework_list_dashboard' => $get_homework_list_dashboard['data'],
                 'get_std_names_dashboard' => $get_std_names_dashboard['data'],
                 'get_leave_reasons_dashboard' => $get_leave_reasons_dashboard['data'],
+                'greetings' => $greetings
             ]
         );
     }
@@ -108,7 +111,6 @@ class ParentController extends Controller
             'parent_id' => $parentid,
         ];
         $response = Helper::PostMethod(config('constants.api.studentleave_list'), $parent_id);
-
         // $response = Helper::GETMethodWithData(config('constants.api.studentleave_list'),$parent_id);
 
         // return $response;

@@ -201,6 +201,8 @@
     var profileUpdateStg = "{{ config('constants.api.change_profile_picture') }}";
     var updateSettingSession = "{{ route('settings.updateSettingSession') }}";
     var profilePath = "{{ asset('public/users/images') }}";
+    // greeding
+    var updateGreddingSession = "{{ route('greetting.session') }}";
 
     // users routes
     var userList = "{{ route('users.user_list') }}";

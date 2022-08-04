@@ -67,6 +67,8 @@ class AuthController extends Controller
                     $string = preg_replace('/\s+/', '-', $userDetails['data']['subsDetails']['school_name']);
                     $request->session()->put('school_name_url', $string);
                     $school_name_url = $string;
+                    // greeting session 
+                    $request->session()->put('greetting_id', 1);
                     // dd($userDetails['data']['StudentID'][0]['id']);
                     if (isset($userDetails['data']['StudentID'])) {
                         $request->session()->put('student_id', $userDetails['data']['StudentID'][0]['id']);

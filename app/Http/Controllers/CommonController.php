@@ -156,4 +156,16 @@ class CommonController extends Controller
         }
         return array('count' => $count, 'notificationlist' => $notificationlist);
     }
+    // update child id
+    public function greettingSession(Request $request)
+    {
+        // dd($request);
+        if (session()->has('greetting_id') || $request->greetting_id) {
+            session()->pull('greetting_id');
+            $request->session()->put('greetting_id', $request->greetting_id);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

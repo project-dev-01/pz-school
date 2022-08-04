@@ -20,10 +20,12 @@ class TeacherController extends Controller
             'teacher_id' => $teacher_id
         ];
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
+        $greetings = Helper::greetingMessage();
         return view(
             'teacher.dashboard.index',
             [
                 'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
+                'greetings' => $greetings
             ]
         );
     }

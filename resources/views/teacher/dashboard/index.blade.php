@@ -2,7 +2,7 @@
 @section('title','Dashboard')
 
 @section('content')
-<!-- <link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" /> -->
+<link href="{{ asset('public/css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -19,6 +19,32 @@
         </div>
     </div>
     <!-- end page title -->
+    @if(Session::get('greetting_id') == '1')
+    <div class="row" id="hideGreeting">
+        <div class="col-md-6 col-xl-6">
+            <div class="widget-rounded-circle card-box">
+                <div class="card-widgets">
+                    <!-- <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a> -->
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p class="greetingText">
+                            {{ $greetings }}
+                        </p>
+                        <h3 class="greetingName">{{ Session::get('name') }}</h3>
+                    </div>
+                    <div class="col-6">
+                        <div class="float-right">
+                            <div class="greetingCntRing">
+                                <span id="greetingRingCnt">5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end row-->
+            </div> <!-- end widget-rounded-circle-->
+        </div> <!-- end col-->
+    </div>
+    @endif
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -992,5 +1018,6 @@
 
 <!-- to do list -->
 <script src="{{ asset('public/js/custom/admin/dashboard.js') }}"></script>
+<script src="{{ asset('public/js/custom/greeting.js') }}"></script>
 
 @endsection

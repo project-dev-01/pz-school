@@ -44,6 +44,7 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
 
     //school app form
     Route::get('/application-form', [CommonController::class, 'showApplicationForm'])->name('super_admin.schoolcrm.app.form');
+    Route::post('/gretting', [CommonController::class, 'greettingSession'])->name('greetting.session');
 
     Route::group(['middleware' => ['isSuperAdmin']], function () {
 

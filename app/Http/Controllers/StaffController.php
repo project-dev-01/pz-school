@@ -27,11 +27,13 @@ class StaffController extends Controller
             'user_id' => $user_id
         ];
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_list_dashboard'), $data);
+        $greetings = Helper::greetingMessage();
         // dd($get_to_do_list_dashboard);
         return view(
             'staff.dashboard.index',
             [
                 'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
+                'greetings' => $greetings
             ]
         );
     }

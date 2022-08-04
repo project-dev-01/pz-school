@@ -263,11 +263,13 @@ class AdminController extends Controller
             'user_id' => $user_id
         ];
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_list_dashboard'), $data);
+        $greetings = Helper::greetingMessage();
         //  dd($get_to_do_list_dashboard);
         return view(
             'admin.dashboard.index',
             [
                 'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
+                'greetings' => $greetings
             ]
         );
         // return view('admin.dashboard.index');
