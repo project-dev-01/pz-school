@@ -219,266 +219,193 @@
 
     <div class="row">
         <div class="col-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="nav-link">
-                            <span data-feather="" class="icon-dual" id="span-parent"></span> Edit Branch
-                            <h4>
-                    </li>
-                </ul>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="">First Name<span class="text-danger">*</span></label>
-                                <div class="input-group input-group-merge">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-user-graduate"></span>
+            <form id="edit-branch-form" method="post" action="{{ route('branch.update') }}" autocomplete="off">
+                @csrf
+                <input type="hidden" class="form-control" name="id" value="{{$id}}">
+                <div class="card">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <h4 class="navv">Edit Branch <h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="first_name"> First name<span class="text-danger">*</span></label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-user-graduate"></span>
+                                            </div>
                                         </div>
+                                        <input type="text" class="form-control shortNameChange" name="first_name" value="{{$branch['first_name']}}" placeholder="Ahmad Ali" id="firstName">
                                     </div>
-                                    <input type="text" name="fname" class="form-control" maxlength="50" id="fname" placeholder="Ahmad Ali" aria-describedby="inputGroupPrepend">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="last_name"> Last name</label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-user-graduate"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control shortNameChange" name="last_name" value="{{$branch['last_name']}}" placeholder="Ali" id="lastName">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="gender">Gender</label>
+                                    <select class="form-control" name="gender" id="gender">
+                                        <option value="">Choose Gender</option>
+                                        <option value="Male" {{$branch['gender'] =="Male" ? 'selected' : '' }}>Male</option>
+                                        <option value="Female" {{$branch['gender'] =="Male" ? 'selected' : '' }}>Female</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group mb-3">
-                                <label for="">Last Name<span class="text-danger">*</span></label>
-                                <div class="input-group input-group-merge">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-user-graduate"></span>
-                                        </div>
-                                    </div>
-                                    <input type="text" name="lname" class="form-control" maxlength="50" id="lname" placeholder="Muhammad Jaafar" aria-describedby="inputGroupPrepend">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="branch_name">Branch Name</label>
+                                    <input type="text" maxlength="50" name="branch_name" value="{{$branch['branch_name']}}" class="form-control" placeholder="Enter Branch Name" name="txt_branchname">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="school_name">School Name<span class="text-danger">*</span></label>
+                                    <input type="text" maxlength="50" name="school_name" value="{{$branch['school_name']}}" class="form-control" placeholder="Enter School Name">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="school_code">School Code</label>
+                                    <input type="text" maxlength="50" name="school_code" value="{{$branch['school_code']}}" class="form-control" placeholder="Enter School Code">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="gender">Gender<span class="text-danger">*</span></label>
-                                <select id="gender" name="gender" class="form-control">
-                                    <option value="">Select Gender</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="passport">Passport Number<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" value="{{$branch['passport']}}" placeholder="Passport Number" name="passport" id="Passport">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="nric_number">NRIC Number<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" value="{{$branch['nric_number']}}" name="nric_number" placeholder="nric number" id="nricNumber">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" value="{{$branch['mobile_no']}}" name="mobile_no" id="mobile_no" data-parsley-trigger="change">
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="currency">Currency<span class="text-danger">*</span></label>
+                                    <input type="text" maxlength="50" value="{{$branch['currency']}}" name="currency" class="form-control" placeholder="Enter Currency" data-parsley-trigger="change">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="symbol">Currency Symbol<span class="text-danger">*</span></label>
+                                    <input type="text" maxlength="50" value="{{$branch['symbol']}}" name="symbol" class="form-control" placeholder="Enter Currency Symbol" data-parsley-trigger="change">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="country">Country</label>
+                                    <select id="editGetCountry" class="form-control" name="country">
+                                        <option value="">Select Country</option>
+                                        @foreach($countries as $c)
+                                        @if($branch['country_id'] == $c['id'])
+                                        <option value="{{$c['id']}}" selected>{{$c['name']}}</option>
+                                        @else
+                                        <option value="{{$c['id']}}">{{$c['name']}}</option>
+                                        @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="Branchname">Branch Name<span class="text-danger">*</span></label>
-                                <input type="text" maxlength="50" class="form-control" placeholder="Enter Branch Name" name="txt_branchname">
-                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="Schoolname">School Name<span class="text-danger">*</span></label>
-                                <input type="text" maxlength="50" class="form-control" placeholder="Enter School Name" name="txt_schoolname">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="Schoolcode">School Code</label>
-                                <input type="text" maxlength="50" class="form-control" placeholder="Enter School Code" name="txt_schoolcode">
-                            </div>
-                        </div>
-                    </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="state">State/Province</label>
+                                    <select id="editGetState" class="form-control" name="state">
+                                        <option value="">Select State</option>
+                                        @foreach($states as $s)
+                                        @if($branch['state_id'] == $s['id'])
+                                        <option value="{{$s['id']}}" selected>{{$s['name']}}</option>
+                                        @else
+                                        <option value="{{$s['id']}}">{{$s['name']}}</option>
+                                        @endif
+                                        @endforeach
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="Passport">Passport Number<span class="text-danger">*</span></label>
-                                <input type="text" maxlength="50" class="form-control" placeholder="Passport Number" name="txt_passport">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <select id="editGetCity" class="form-control" name="city">
+                                        <option value="">Select City</option>
+                                        @foreach($cities as $c)
+                                        @if($branch['city_id'] == $c['id'])
+                                        <option value="{{$c['id']}}" selected>{{$c['name']}}</option>
+                                        @else
+                                        <option value="{{$c['id']}}">{{$c['name']}}</option>
+                                        @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="post_code">Zip/Postal code</label>
+                                    <input type="text" class="form-control" value="{{$branch['post_code']}}" name="post_code" id="postCode" placeholder="000000">
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="txt_nric">NRIC Number<span class="text-danger">*</span></label>
-                                <input type="text" maxlength="50" id="txt_nric" class="form-control" placeholder="NRIC Number" name="txt_nricnumber" data-parsley-trigger="change">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="address">Address Line 1<span class="text-danger">*</span></label>
+                                    <input class="form-control" name="address" value="{{$branch['address']}}" id="address" placeholder="johor">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="txt_mobile_no">Mobile No<span class="text-danger">*</span></label>
-                                <input type="tel" class="form-control" name="txt_mobile_no" placeholder="Enter your number" id="txt_mobile_no" data-parsley-trigger="change">
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="txt_currency">Currency<span class="text-danger">*</span></label>
-                                <input type="text" maxlength="50" id="Currency" class="form-control" placeholder="Enter Currency" name="txt_currency" data-parsley-trigger="change">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="txt_currencysymbol">Currency Symbol<span class="text-danger">*</span></label>
-                                <input type="text" maxlength="50" id="Symbol" class="form-control" placeholder="Enter Currency Symbol" name="txt_currencysymbol" data-parsley-trigger="change">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="drp_country">Country<span class="text-danger">*</span></label>
-                                <input type="text" maxlength="50" id="drp_country" class="form-control" placeholder="Country" name="drp_country" data-parsley-trigger="change">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="drp_state">State/Province<span class="text-danger">*</span></label>
-                                <input type="text" maxlength="50" id="drp_state" class="form-control" placeholder="state" name="drp_state" data-parsley-trigger="change">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="drp_city">City<span class="text-danger">*</span></label>
-                                <input type="text" maxlength="50" id="drp_city" class="form-control" placeholder="City" name="drp_city" data-parsley-trigger="change">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="drp_post_code">Zip/Postal Code<span class="text-danger">*</span></label>
-                                <input type="text" maxlength="50" id="drp_post_code" class="form-control" placeholder="Post Code" name="drp_post_code" data-parsley-trigger="change">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="txtarea_paddress">Address 1<span class="text-danger">*</span></label>
-                                <input type="text" maxlength="50" id="txtarea_paddress" class="form-control" placeholder="Address" name="txtarea_paddress" data-parsley-trigger="change">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="txtarea_permanent_address">Address 2<span class="text-danger">*</span></label>
-                                <input type="text" maxlength="50" id="txtarea_permanent_address" class="form-control" placeholder="Address" name="txtarea_permanent_address" data-parsley-trigger="change">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="address1">Address Line 2</label>
+                                    <input class="form-control" name="address1" value="{{$branch['address1']}}" id="address1" placeholder="johor">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-            </div>
-
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">Login Details<h4>
-                    </li>
-                </ul>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group mb-3">
-                                <label for="email">Email<span class="text-danger">*</span></label>
-                                <div class="input-group input-group-merge">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <span class="far fa-envelope-open"></span>
-                                        </div>
-                                    </div>
-                                    <input type="text" name="txt_emailid" class="form-control" id="txt_emailid" placeholder="xxxxx@gmail.com" aria-describedby="inputGroupPrepend">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group mb-3">
-                                <label for="email">Password<span class="text-danger">*</span></label>
-                                <div class="input-group input-group-merge">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-unlock"></span>
-                                        </div>
-                                    </div>
-                                    <input type="password" name="txt_pwd" class="form-control" id="txt_pwd" placeholder="********" aria-describedby="inputGroupPrepend">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group mb-3">
-                                <label for="email">Confirm Password<span class="text-danger">*</span></label>
-                                <div class="input-group input-group-merge">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-unlock"></span>
-                                        </div>
-                                    </div>
-                                    <input type="confirmpassword" name="txt_retype_pwd" class="form-control" id="txt_retype_pwd" placeholder="*********" aria-describedby="inputGroupPrepend">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group mb-3">
-                                <label class="switch">Authentication
-                                    <input id="status" name="status" type="checkbox">
-                                    <span>
-                                        <em></em>
-                                        <strong></strong>
-                                    </span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
+                <div class="form-group text-right m-b-0">
+                    <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
+                        Update
+                    </button>
+                    <a href="{{ route('branch.index') }}" class="btn btn-primary-bl waves-effect waves-light">
+                        Back
+                    </a>
                 </div>
-            </div>
-
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">Database Details<h4>
-                    </li>
-                </ul>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group mb-3">
-                                <label for="Databasename">Database Name<span class="text-danger">*</span></label>
-                                <input type="text" maxlength="50" class="form-control" placeholder="Enter Database Name" name="txt_databasename">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group mb-3">
-                                <label for="Databaseusername">Database User Name<span class="text-danger">*</span></label>
-                                <input type="text" maxlength="50" class="form-control" placeholder="Enter Database User Name" name="txt_databaseusername">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group mb-3">
-                                <label for="databasepassword">Database Password<span class="text-danger">*</span></label>
-                                <div class="input-group input-group-merge">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-unlock"></span>
-                                        </div>
-                                    </div>
-                                    <input type="databasepassword" name="txt_type_pwd" class="form-control" id="txt_type_pwd" placeholder="*********" aria-describedby="inputGroupPrepend">
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="form-group text-right m-b-0">
-                        <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Update
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <!-- end row -->
+            </form>
 
         </div> <!-- container -->
-        @endsection
-        @section('scripts')
-        <script src="{{ asset('public/js/custom/branch.js') }}"></script>
-        @endsection
+    </div>
+</div>
+@endsection
+@section('scripts')
+<script src="{{ asset('public/js/custom/branch.js') }}"></script>
+@endsection

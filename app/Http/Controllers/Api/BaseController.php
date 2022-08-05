@@ -121,7 +121,7 @@ class BaseController extends Controller
     function createUser(Request $request, $lastInsertID, $Staffid)
     {
         $user = new User();
-        $user->name = $request->name;
+        $user->name = $request->first_name ." ".$request->last_name;
         $user->email = $request->email;
         $user->role_id = 2;
         $user->user_id = $Staffid;

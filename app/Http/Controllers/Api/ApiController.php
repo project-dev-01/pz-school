@@ -181,8 +181,10 @@ class ApiController extends BaseController
     {
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
-            'name' => 'required',
+            'first_name' => 'required',
             'school_name' => 'required',
+            'passport' => 'required',
+            'nric_number' => 'required',
             'email' => 'required',
             'mobile_no' => 'required',
             'currency' => 'required',
@@ -205,7 +207,6 @@ class ApiController extends BaseController
             if ($existUser) {
                 $existBranch = $this->existBranch($request->email);
                 if ($existBranch) {
-                    $student_name = $request->name;
                     $db_name = $request->db_name;
                     $db_username = $request->db_username;
                     $db_password = $request->db_password;
@@ -217,7 +218,14 @@ class ApiController extends BaseController
                         $branch = new Branches();
                         $branch->branch_code = $branch_code;
                         $branch->name = $request->name;
+                        $branch->first_name = $request->first_name;
+                        $branch->last_name = isset($request->last_name) ? $request->last_name : "";
+                        $branch->gender = isset($request->gender) ? $request->gender : "";
                         $branch->school_name = $request->school_name;
+                        $branch->branch_name = isset($request->branch_name) ? $request->branch_name : "";
+                        $branch->school_code = isset($request->school_code) ? $request->school_code : "";
+                        $branch->passport = $request->passport;
+                        $branch->nric_number = $request->nric_number;
                         $branch->email = $request->email;
                         $branch->mobile_no = $request->mobile_no;
                         $branch->currency = $request->currency;
@@ -225,7 +233,10 @@ class ApiController extends BaseController
                         $branch->country_id = $request->country_id;
                         $branch->state_id = $request->state_id;
                         $branch->city_id = $request->city_id;
+                        $branch->status = isset($request->status) ? 1 : 0;
+                        $branch->post_code = isset($request->post_code) ? $request->post_code : "";
                         $branch->address = $request->address;
+                        $branch->address1 = isset($request->address1) ? $request->address1 : "";
                         $branch->db_name = $request->db_name;
                         $branch->db_username = $request->db_username;
                         $branch->db_password = isset($request->db_password) ? $request->db_password : "";
@@ -241,19 +252,18 @@ class ApiController extends BaseController
                             $Staffid = $Connection->table('staffs')->insertGetId([
                                 // 'staff_id' => $request->staff_id,
                                 // 'name' => $request->name,
-                                'first_name' => isset($request->name) ? $request->name : "",
-                                'last_name' => "",
-
+                                'first_name' => isset($request->first_name) ? $request->first_name : "",
+                                'last_name' => isset($request->last_name) ? $request->last_name : "",
                                 'present_address' => trim($request->address),
-                                // 'permanent_address' => trim($request->permanent_address),
+                                'permanent_address' => isset($request->address1) ? $request->address1 : "",
                                 'mobile_no' => $request->mobile_no,
                                 'email' => $request->email,
-                                // 'nric_number' => $request->nric_number,
-                                // 'passport' => $request->passport,
+                                'nric_number' => $request->nric_number,
+                                'passport' => $request->passport,
                                 'city' => $request->city_id,
                                 'state' => $request->state_id,
                                 'country' => $request->country_id,
-                                // 'post_code' => $request->post_code,
+                                'post_code' => $request->post_code,
                                 'status' => "1",
                                 'created_at' => date("Y-m-d H:i:s")
                             ]);
@@ -304,7 +314,7 @@ class ApiController extends BaseController
                 ->when($city_id, function ($query, $city_id) {
                     return $query->where('br.city_id', $city_id);
                 })
-                ->where('br.status', 0)
+                // ->where('br.status', 0)
                 ->get();
             return $this->successResponse($success, 'Branch record fetch successfully');
         }
@@ -332,8 +342,10 @@ class ApiController extends BaseController
         $validator = \Validator::make($request->all(), [
             'id' => 'required',
             'token' => 'required',
-            'name' => 'required',
+            'first_name' => 'required',
             'school_name' => 'required',
+            'passport' => 'required',
+            'nric_number' => 'required',
             'email' => 'required',
             'mobile_no' => 'required',
             'currency' => 'required',
@@ -347,10 +359,16 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            // $query = Branches::find($id)->update($request->all());
+            
             $branch = Branches::find($id);
-            $branch->name = $request->name;
+            $branch->first_name = $request->first_name;
+            $branch->last_name = isset($request->last_name) ? $request->last_name : "";
+            $branch->gender = isset($request->gender) ? $request->gender : "";
             $branch->school_name = $request->school_name;
+            $branch->branch_name = isset($request->branch_name) ? $request->branch_name : "";
+            $branch->school_code = isset($request->school_code) ? $request->school_code : "";
+            $branch->passport = $request->passport;
+            $branch->nric_number = $request->nric_number;
             $branch->email = $request->email;
             $branch->mobile_no = $request->mobile_no;
             $branch->currency = $request->currency;
@@ -358,7 +376,10 @@ class ApiController extends BaseController
             $branch->country_id = $request->country_id;
             $branch->state_id = $request->state_id;
             $branch->city_id = $request->city_id;
+            $branch->status = isset($request->status) ? 1 : 0;
+            $branch->post_code = isset($request->post_code) ? $request->post_code : "";
             $branch->address = $request->address;
+            $branch->address1 = isset($request->address1) ? $request->address1 : "";
             $query = $branch->save();
 
             $success = [];
@@ -11567,7 +11588,7 @@ class ApiController extends BaseController
                 ->leftJoin('sections as sec', 'e.section_id', '=', 'sec.id')
                 ->where('s.id', $id)
                 ->get();
-                // dd($getStudentDetail);
+            // dd($getStudentDetail);
             $studentObj = new \stdClass();
             if (!empty($getStudentDetail)) {
                 foreach ($getStudentDetail as $suc) {

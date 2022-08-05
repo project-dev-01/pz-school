@@ -133,21 +133,32 @@ class SuperAdminController extends Controller
     {
 
         $data = [
-            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'branch_name' => $request->branch_name,
             'school_name' => $request->school_name,
-            'email' => $request->email,
+            'school_code' => $request->school_code,
+            'passport' => $request->passport,
+            'nric_number' => $request->nric_number,
             'mobile_no' => $request->mobile_no,
             'currency' => $request->currency,
             'symbol' => $request->symbol,
             'country_id' => $request->country,
             'state_id' => $request->state,
             'city_id' => $request->city,
+            'post_code' => $request->post_code,
             'address' => $request->address,
+            'address1' => $request->address1,
+            'email' => $request->email,
+            'password' => $request->password,
+            'confirm_password' => $request->confirm_password,
+            'status' => $request->status,
             'db_name' => $request->db_name,
             'db_username' => $request->db_username,
-            'db_password' => $request->db_password,
-            'password' => $request->password
+            'db_password' => $request->db_password
         ];
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.branch_add'), $data);
         return $response;
     }
@@ -209,21 +220,44 @@ class SuperAdminController extends Controller
     // update branch
     public function updateBranchDetails(Request $request)
     {
-
-
+        // $data = [
+        //     'id' => $request->id,
+        //     'name' => $request->name,
+        //     'school_name' => $request->school_name,
+        //     'email' => $request->email,
+        //     'mobile_no' => $request->mobile_no,
+        //     'currency' => $request->currency,
+        //     'symbol' => $request->symbol,
+        //     'country_id' => $request->country,
+        //     'state_id' => $request->state,
+        //     'city_id' => $request->city,
+        //     'address' => $request->address
+        // ];
         $data = [
             'id' => $request->id,
-            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'branch_name' => $request->branch_name,
             'school_name' => $request->school_name,
-            'email' => $request->email,
+            'school_code' => $request->school_code,
+            'passport' => $request->passport,
+            'nric_number' => $request->nric_number,
             'mobile_no' => $request->mobile_no,
             'currency' => $request->currency,
             'symbol' => $request->symbol,
             'country_id' => $request->country,
             'state_id' => $request->state,
             'city_id' => $request->city,
-            'address' => $request->address
+            'post_code' => $request->post_code,
+            'address' => $request->address,
+            'address1' => $request->address1,
+            'email' => $request->email,
+            'password' => $request->password,
+            'confirm_password' => $request->confirm_password,
+            'status' => $request->status
         ];
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.branch_update'), $data);
         return $response;
     }

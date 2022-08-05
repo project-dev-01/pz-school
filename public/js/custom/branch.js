@@ -123,33 +123,41 @@ $(function () {
     // rules validation
     $("#branch-form").validate({
         rules: {
-            name: "required",
+            first_name: "required",
             school_name: "required",
             email: {
                 required: true,
                 email: true
             },
-            password: "required",
+            passport: "required",
+            nric_number: "required",
             mobile_no: "required",
             currency: "required",
-
             symbol: "required",
             country: "required",
             state: "required",
+            password: {
+                required: true,
+                minlength: 5
+            },
+            confirm_password: {
+                required: true,
+                minlength: 5,
+                equalTo: "#password"
+            },
             city: "required",
             db_name: "required",
             db_username: "required",
-            // db_password: "required",
             address: "required"
         }
     });
     //
     $('#branch-form').on('submit', function (e) {
         e.preventDefault();
-        $("#overlay").fadeIn(300);
         // $('#saveBranch').prop('disabled', true);
         var branchCheck = $("#branch-form").valid();
         if (branchCheck === true) {
+            $("#overlay").fadeIn(300);
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),
@@ -178,6 +186,7 @@ $(function () {
                         toastr.error(data.message);
                     }
                 }, error: function (err) {
+                    $("#overlay").fadeOut(300);
                     toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
                 }
             });
@@ -199,9 +208,9 @@ $(function () {
             // ],
             info: true,
             // dom: 'lBfrtip',
-            dom:"<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             buttons: [
                 {
                     extend: 'csv',
@@ -249,10 +258,6 @@ $(function () {
                     name: 'DT_RowIndex'
                 },
                 {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
                     data: 'school_name',
                     name: 'school_name'
                 },
@@ -285,10 +290,6 @@ $(function () {
                     name: 'city_name'
                 },
                 {
-                    data: 'address',
-                    name: 'address'
-                },
-                {
                     data: 'actions',
                     name: 'actions',
                     orderable: false,
@@ -302,14 +303,27 @@ $(function () {
     // rules validation
     $("#edit-branch-form").validate({
         rules: {
-            name: "required",
+            first_name: "required",
             school_name: "required",
+            email: {
+                required: true,
+                email: true
+            },
+            passport: "required",
+            nric_number: "required",
             mobile_no: "required",
             currency: "required",
             symbol: "required",
             country: "required",
             state: "required",
-            city: "required",
+            password: {
+                minlength: 5
+            },
+            confirm_password: {
+                minlength: 5,
+                equalTo: "#password"
+            },
+            city: "required"
         }
     });
     // update branch-form

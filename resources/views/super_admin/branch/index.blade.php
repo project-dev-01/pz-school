@@ -90,7 +90,6 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Branch Name</th>
                                         <th>School Name</th>
                                         <th>Email</th>
                                         <th>Mobile No</th>
@@ -99,7 +98,6 @@
                                         <th>Country</th>
                                         <th>State</th>
                                         <th>City</th>
-                                        <th>Address</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
