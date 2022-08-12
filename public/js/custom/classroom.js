@@ -201,8 +201,19 @@ $(function () {
             contentType: false,
             success: function (response) {
 
-
-                var dataSetNew = response.data;
+                // console.log("response")
+                // console.log(response)
+                // console.log(response.data.get_student_attendence)
+                // console.log(response.data.taken_attentance_status.status)
+                var dataSetNew = response.data.get_student_attendence;
+                if (response.data.taken_attentance_status) {
+                    var taken_attentance_status = response.data.taken_attentance_status.status;
+                    if (taken_attentance_status) {
+                        $("#attendaceTakenSts").html("Taken");
+                    } else {
+                        $("#attendaceTakenSts").html("Untaken");
+                    }
+                }
                 var currentDate = convertDigitIn($("#classDate").val());
                 var date = birthdayDate(currentDate);
                 if (response.code == 200) {
@@ -214,11 +225,11 @@ $(function () {
                     sessionStorage.removeItem("classroom_details");
                     $('#layoutModeGrid').empty();
                     var layoutModeGrid = "";
-                    if (response.data.length > 0) {
+                    if (dataSetNew.length > 0) {
                         $(".classRoomHideSHow").show("slow");
                         listMode(dataSetNew, date);
                         layoutModeGrid += '<div class="row">';
-                        response.data.forEach(function (res) {
+                        dataSetNew.forEach(function (res) {
                             // layout mode div start
                             layoutModeGrid += layoutMode(res, date);
                             // layout mode div end
@@ -304,7 +315,7 @@ $(function () {
 
         layoutModeGrid += '<div class="card-header" style="background-color:' + bgColor + ';color:white;text-align:left">';
         layoutModeGrid += '<img src="' + img + '" class="mr-2 rounded-circle" height="40" width="40" />' +
-            '<label style="text-align:center;color:white;position: absolute;;font-size:12px;margin-bottom:-6px;overflow-wrap: break-word; margin-top: 10px;">' + res.name + '</label>' + bd +
+            '<label style="color:white;position: absolute;margin-bottom:-6px;overflow-wrap: break-word;">' + res.name + '</label>' + bd +
             '</div>' +
             '</div>' +
             '</div>';
@@ -320,10 +331,13 @@ $(function () {
             processing: true,
             bDestroy: true,
             info: true,
-            // dom: 'lBfrtip',
-            dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            // scrollY: '500px',
+            // scrollCollapse: true,
+            paging: false,
+            dom: 'lBfrtip',
+            // dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
+            //     "<'row'<'col-sm-12'tr>>" +
+            //     "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             buttons: [
                 {
                     extend: 'csv',
@@ -366,11 +380,13 @@ $(function () {
             columnDefs: [
                 {
                     "targets": 0,
+                    "width": "10%",
                     "render": function (data, type, row, meta) {
                         return meta.row + 1;
                     }
                 },
                 {
+                    "width": "15%",
                     "targets": 1,
                     "className": "table-user",
                     "render": function (data, type, row, meta) {
@@ -395,19 +411,57 @@ $(function () {
                 },
                 {
                     "targets": 2,
+                    "width": "20%",
                     "render": function (data, type, row, meta) {
+                        // current_old_att_status
+                        var status = "";
+                        if (row.att_status) {
+                            status = row.att_status;
+                        } else if (row.current_old_att_status) {
+                            status = row.current_old_att_status;
+                        } else {
+                            status = row.att_status;
+                        }
+                        // if (row.att_status) {
+                        //     var att_status = '<select class="form-control changeAttendanceSelect" data-id="' + row.student_id + '" id="attendance' + row.student_id + '" data-style="btn-outline-success" name="attendance[' + meta.row + '][att_status]">' +
+                        //         '<option value="">Choose</option>' +
+                        //         '<option value="present" ' + (row.current_old_att_status == "present" ? "selected" : "selected") + '>Present</option>' +
+                        //         '<option value="absent" ' + (row.current_old_att_status == "absent" ? "selected" : "") + '>Absent</option>' +
+                        //         '<option value="late" ' + (row.current_old_att_status == "late" ? "selected" : "") + '>Late</option>' +
+                        //         '<option value="excused" ' + (row.current_old_att_status == "excused" ? "selected" : "") + '>Excused</option>' +
+                        //         '</select>';
+                        // } else {
+                        //     if (row.current_old_att_status) {
+                        //         var att_status = '<select class="form-control changeAttendanceSelect" data-id="' + row.student_id + '" id="attendance' + row.student_id + '" data-style="btn-outline-success" name="attendance[' + meta.row + '][att_status]">' +
+                        //             '<option value="">Choose</option>' +
+                        //             '<option value="present" ' + (row.current_old_att_status == "present" ? "selected" : "selected") + '>Present</option>' +
+                        //             '<option value="absent" ' + (row.current_old_att_status == "absent" ? "selected" : "") + '>Absent</option>' +
+                        //             '<option value="late" ' + (row.current_old_att_status == "late" ? "selected" : "") + '>Late</option>' +
+                        //             '<option value="excused" ' + (row.current_old_att_status == "excused" ? "selected" : "") + '>Excused</option>' +
+                        //             '</select>';
+                        //     } else {
+                        //         var att_status = '<select class="form-control changeAttendanceSelect" data-id="' + row.student_id + '" id="attendance' + row.student_id + '" data-style="btn-outline-success" name="attendance[' + meta.row + '][att_status]">' +
+                        //             '<option value="">Choose</option>' +
+                        //             '<option value="present" ' + (row.att_status == "present" ? "selected" : "selected") + '>Present</option>' +
+                        //             '<option value="absent" ' + (row.att_status == "absent" ? "selected" : "") + '>Absent</option>' +
+                        //             '<option value="late" ' + (row.att_status == "late" ? "selected" : "") + '>Late</option>' +
+                        //             '<option value="excused" ' + (row.att_status == "excused" ? "selected" : "") + '>Excused</option>' +
+                        //             '</select>';
+                        //     }
+                        // }
                         var att_status = '<select class="form-control changeAttendanceSelect" data-id="' + row.student_id + '" id="attendance' + row.student_id + '" data-style="btn-outline-success" name="attendance[' + meta.row + '][att_status]">' +
                             '<option value="">Choose</option>' +
-                            '<option value="present" ' + (row.att_status == "present" ? "selected" : "selected") + '>Present</option>' +
-                            '<option value="absent" ' + (row.att_status == "absent" ? "selected" : "") + '>Absent</option>' +
-                            '<option value="late" ' + (row.att_status == "late" ? "selected" : "") + '>Late</option>' +
-                            '<option value="excused" ' + (row.att_status == "excused" ? "selected" : "") + '>Excused</option>' +
+                            '<option value="present" ' + (status == "present" ? "selected" : "selected") + '>Present</option>' +
+                            '<option value="absent" ' + (status == "absent" ? "selected" : "") + '>Absent</option>' +
+                            '<option value="late" ' + (status == "late" ? "selected" : "") + '>Late</option>' +
+                            '<option value="excused" ' + (status == "excused" ? "selected" : "") + '>Excused</option>' +
                             '</select>';
                         return att_status;
                     }
                 },
                 {
                     "targets": 3,
+                    "width": "10%",
                     "render": function (data, type, row, meta) {
 
                         var att_remark = '<textarea style="display:none;" class="addRemarks" data-id="' + row.student_id + '" id="addRemarks' + row.student_id + '" name="attendance[' + meta.row + '][att_remark]">' + (row.att_remark !== "null" ? row.att_remark : "") + '</textarea>' +
@@ -417,6 +471,7 @@ $(function () {
                 },
                 {
                     "targets": 4,
+                    "width": "20%",
                     "render": function (data, type, row, meta) {
                         if (row.att_status != "present") {
                             onLoadReasons(row, meta);
@@ -429,6 +484,7 @@ $(function () {
                 },
                 {
                     "targets": 5,
+                    "width": "15%",
                     "render": function (data, type, row, meta) {
 
                         // var student_behaviour = '<div class="row">' +
@@ -500,7 +556,7 @@ $(function () {
                 },
                 {
                     "targets": 6,
-                    // "width": "10%",
+                    "width": "10%",
                     "render": function (data, type, row, meta) {
 
 
@@ -580,7 +636,8 @@ $(function () {
                     formData.append('semester_id', semesterID);
                     formData.append('session_id', sessionID);
                     formData.append('date', convertDigitIn(classDate));
-                    widgetShow(formData)
+                    widgetShow(formData);
+                    $("#attendaceTakenSts").html("Taken");
 
                 } else {
                     toastr.error(response.message);
@@ -783,13 +840,17 @@ $(function () {
     // get daily report remarks
     // function list mode
     function getReportRemarks(dataSetNew) {
+        $('#dailyReportRemarks').DataTable().clear().destroy();
+        $('#dailyReportRemarks td').empty();
         listTable = $('#dailyReportRemarks').DataTable({
             processing: true,
             bDestroy: true,
             info: true,
-            dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            dom: 'lBfrtip',
+            paging: false,
+            // dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
+            //     "<'row'<'col-sm-12'tr>>" +
+            //     "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             buttons: [
                 {
                     extend: 'csv',
@@ -1142,14 +1203,18 @@ $(function () {
     }
     function StudentLeave_tbl(dataSetNew) {
         var local = imgurl;
+        $('#stdleaves').DataTable().clear().destroy();
+        $('#stdleaves td').empty();
         listTable = $('#stdleaves').DataTable({
             processing: true,
             bDestroy: true,
             info: true,
+            dom: 'lBfrtip',
+            paging: false,
             // dom: 'lBfrtip',
-            dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            // dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
+            //     "<'row'<'col-sm-12'tr>>" +
+            //     "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             buttons: [
                 {
                     extend: 'csv',
@@ -1443,9 +1508,9 @@ $(function () {
             }
 
             // days left
-            d = Math.floor(left / days);
-            updateNumbers(1, 2, d, 0, distance);
-            left -= d * days;
+            // d = Math.floor(left / days);
+            // updateNumbers(1, 2, d, 0, distance);
+            // left -= d * days;
 
             // hours left
             h = Math.floor(left / hours);

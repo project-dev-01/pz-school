@@ -8,6 +8,8 @@
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('public/images/favicon.ico') }}">
     <!-- App css -->
@@ -123,9 +125,17 @@
 
     <!-- Vendor js -->
     <script src="{{ asset('public/js/vendor.min.js') }}"></script>
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
 
     <!-- App js -->
     <script src="{{ asset('public/js/app.min.js') }}"></script>
+    <!-- <script src="{{ asset('public/js/custom/login.js') }}"></script> -->
 
 </body>
 

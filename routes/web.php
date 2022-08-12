@@ -259,7 +259,8 @@ Route::group(['prefix' => 'schoolcrm'], function () {
     // Route::get('login', 'AuthController@login');
     // Route::get('logout', 'AuthController@logout');
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
-    Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('admin.authenticate');
+    Route::get('/loading', [AuthController::class, 'showLoadingForm'])->name('admin.loading');
+    Route::any('/authenticate', [AuthController::class, 'authenticate'])->name('admin.authenticate');
     Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
 
     Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgot_password');
@@ -273,7 +274,7 @@ Route::group(['prefix' => 'schoolcrm'], function () {
     // notifications
     Route::get('unread_notifications', [CommonController::class, 'unreadNotifications'])->name('unread_notifications');
 
-    Route::group(['prefix' => '{school_name_url}'], function () {
+    // Route::group(['prefix' => '{school_name_url}'], function () {
         // admin routes start
         Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin']], function () {
             Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -1077,5 +1078,5 @@ Route::group(['prefix' => 'schoolcrm'], function () {
 
             Route::get('/analyticrep', [StudentController::class, 'analytic'])->name('student.analyticrep.analyticreport');
         });
-    });
+    // });
 });

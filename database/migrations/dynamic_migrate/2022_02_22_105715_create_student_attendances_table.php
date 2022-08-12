@@ -27,6 +27,7 @@ class CreateStudentAttendancesTable extends Migration
             $table->string('classroom_behaviour');
             $table->enum('status', ['present', 'absent','excused', 'late']);
             $table->text('remarks');
+            $table->enum('day_recent_flag', ['0', '1']);
             $table->timestamps();
         });
     }

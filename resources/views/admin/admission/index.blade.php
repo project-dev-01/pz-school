@@ -386,13 +386,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="txtarea_paddress">Address 1</label>
-                                    <input type="text" maxlength="50" id="txtarea_paddress" class="form-control alloptions" placeholder="Address" name="txtarea_paddress" data-parsley-trigger="change">
+                                    <input type="text" maxlength="255" id="txtarea_paddress" class="form-control alloptions" placeholder="Address" name="txtarea_paddress" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="txtarea_permanent_address">Address 2</label>
-                                    <input type="text" maxlength="50" id="txtarea_permanent_address" class="form-control alloptions" placeholder="Address" name="txtarea_permanent_address" data-parsley-trigger="change">
+                                    <input type="text" maxlength="255" id="txtarea_permanent_address" class="form-control alloptions" placeholder="Address" name="txtarea_permanent_address" data-parsley-trigger="change">
                                 </div>
                             </div>
                         </div>

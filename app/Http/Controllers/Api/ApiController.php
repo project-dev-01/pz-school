@@ -359,7 +359,7 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            
+
             $branch = Branches::find($id);
             $branch->first_name = $request->first_name;
             $branch->last_name = isset($request->last_name) ? $request->last_name : "";
@@ -6290,7 +6290,7 @@ class ApiController extends BaseController
             $semester_id = $request->semester_id;
             $session_id = $request->session_id;
             $Connection = $this->createNewConnection($request->branch_id);
-            $getTeachersClassName = $Connection->table('enrolls as en')
+            $getStudentAttendence = $Connection->table('enrolls as en')
                 ->select(
                     'en.student_id',
                     'en.roll',
@@ -6303,10 +6303,99 @@ class ApiController extends BaseController
                     'sa.student_behaviour',
                     'sa.classroom_behaviour',
                     'sa.reasons',
+                    'sapre.status as current_old_att_status',
                     'st.birthday',
                     'st.photo'
                 )
-                ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
+                ->join('students as st', 'st.id', '=', 'en.student_id')
+                ->leftJoin('student_attendances as sa', function ($q) use ($date, $subject_id, $semester_id, $session_id) {
+                    $q->on('sa.student_id', '=', 'st.id')
+                        ->on('sa.date', '=', DB::raw("'$date'"))
+                        ->on('sa.subject_id', '=', DB::raw("'$subject_id'"))
+                        ->on('sa.semester_id', '=', DB::raw("'$semester_id'"))
+                        ->on('sa.session_id', '=', DB::raw("'$session_id'"));
+                })
+                // if already take attendance for the date
+                ->leftJoin('student_attendances as sapre', function ($q) use ($date, $semester_id, $session_id) {
+                    $q->on('sapre.student_id', '=', 'st.id')
+                        ->on('sapre.date', '=', DB::raw("'$date'"))
+                        ->on('sapre.semester_id', '=', DB::raw("'$semester_id'"))
+                        ->on('sapre.session_id', '=', DB::raw("'$session_id'"))
+                        ->on('sapre.day_recent_flag', '=', DB::raw("'1'"));
+                })
+                ->where([
+                    ['en.class_id', '=', $request->class_id],
+                    ['en.section_id', '=', $request->section_id],
+                    ['en.semester_id', '=', $request->semester_id],
+                    ['en.session_id', '=', $request->session_id]
+                ])
+                ->groupBy('en.student_id')
+                ->get();
+
+            // $getOldAttendance = $Connection->table('enrolls as en')
+            //     ->select(
+            //         'sapre.id',
+            //         'sapre.student_id',
+            //         // DB::raw('MAX(sapre.created_at)'),
+            //         'sapre.created_at',
+            //         'sapre.status as current_old_att_status'
+            //     )
+            //     ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
+            //     // if already take attendance for the date
+            //     ->leftJoin('student_attendances as sapre', function ($q) use ($date, $semester_id, $session_id) {
+            //         $q->on('sapre.student_id', '=', 'st.id')
+            //             ->on('sapre.date', '=', DB::raw("'$date'"))
+            //             ->on('sapre.semester_id', '=', DB::raw("'$semester_id'"))
+            //             ->on('sapre.session_id', '=', DB::raw("'$session_id'"));
+            //         // ->groupBy('sapre.student_id');
+            //         // ->where('sapre.id', DB::raw("(select max(`id`) from student_attendances WHERE sapre.student_id = st.id)"));
+            //         // ->on('sapre.day_recent_flag', '=', DB::raw("'1'"));
+            //     })
+            //     ->where([
+            //         ['en.class_id', '=', $request->class_id],
+            //         ['en.section_id', '=', $request->section_id],
+            //         ['en.semester_id', '=', $request->semester_id],
+            //         ['en.session_id', '=', $request->session_id]
+            //     ])
+            //     ->get();
+            // dd($getOldAttendance);
+            // $data = users::leftJoin('orders', function ($join) {
+            //     $join->on('orders.user_id', '=', 'users.id')
+            //         ->on('orders.id', '=', DB::raw("(SELECT max(id) from orders WHERE orders.user_id = users.id)"));
+            // })
+            //     ->select('*');
+            // $result = $Connection->table("enrolls as en")
+            //     ->select(
+            //         'sul.id',
+            //         'sul.student_id',
+            //         DB::raw('MAX(sul.created_at)'),
+            //         'sul.status as current_old_att_status'
+            //     )
+            //     ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
+            //     ->leftJoin('student_attendances as sul', function ($join) use ($date) {
+            //         $join->on('sul.student_id', '=', 'st.id')
+            //             ->where('sul.date', $date);
+            //     })
+            //     // ->orderBy('sul.created_at')
+            //     ->groupBy('en.student_id')
+            //     ->get();
+            // $data = $Connection->table('enrolls')
+            //     ->leftJoin('student_attendances', function ($join) {
+            //         $join->on('student_attendances.student_id', '=', 'enrolls.student_id')
+            //             ->on('student_attendances.id', '=', DB::raw("(SELECT max(id) from student_attendances WHERE student_attendances.student_id = enrolls.student_id)"));
+            //     })
+            //     ->select(
+            //         'student_attendances.id',
+            //         'student_attendances.student_id',
+            //         'student_attendances.status'
+            //     );
+            // dd($getOldAttendance);
+            $taken_attentance_status = $Connection->table('enrolls as en')
+                ->select(
+                    'sa.status'
+                )
+                ->join('students as st', 'st.id', '=', 'en.student_id')
+                // if already take attendance for the date and subjects
                 ->leftJoin('student_attendances as sa', function ($q) use ($date, $subject_id, $semester_id, $session_id) {
                     $q->on('sa.student_id', '=', 'st.id')
                         ->on('sa.date', '=', DB::raw("'$date'"))
@@ -6320,8 +6409,13 @@ class ApiController extends BaseController
                     ['en.semester_id', '=', $request->semester_id],
                     ['en.session_id', '=', $request->session_id]
                 ])
-                ->get();
-            return $this->successResponse($getTeachersClassName, 'Attendance record fetch successfully');
+                ->first();
+            $data = [
+                "get_student_attendence" => $getStudentAttendence,
+                "taken_attentance_status" => $taken_attentance_status
+            ];
+            // dd($getTeachersClassName);
+            return $this->successResponse($data, 'Attendance record fetch successfully');
         }
     }
     // getReturnLayoutMode
@@ -6405,6 +6499,29 @@ class ApiController extends BaseController
             $semester_id = $request->semester_id;
             $session_id = $request->session_id;
             $date = $request->date;
+             // if already take attendance for the date
+            $checkAlreadyTakenAttendance = $Connection->table('student_attendances')->select('id')->where([
+                ['date', '=', $date],
+                ['class_id', '=', $class_id],
+                ['section_id', '=', $section_id],
+                ['semester_id', '=', $semester_id],
+                ['session_id', '=', $session_id],
+                ['day_recent_flag', '=', "1"]
+            ])->first();
+             // update flag
+            if (isset($checkAlreadyTakenAttendance->id)) {
+                $Connection->table('student_attendances')->where([
+                    ['date', '=', $date],
+                    ['class_id', '=', $class_id],
+                    ['section_id', '=', $section_id],
+                    ['semester_id', '=', $semester_id],
+                    ['session_id', '=', $session_id],
+                    ['day_recent_flag', '=', "1"]
+                ])->update([
+                    'day_recent_flag' => "0",
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+            }
             // $data = [];
             foreach ($attendance as $key => $value) {
                 // dd($value['attendance_id']);
@@ -6429,13 +6546,14 @@ class ApiController extends BaseController
                     'subject_id' => $subject_id,
                     'semester_id' => $semester_id,
                     'session_id' => $session_id,
+                    'day_recent_flag' => "1",
                     'created_at' => date("Y-m-d H:i:s")
 
                 );
                 if ((empty($value['attendance_id']) || $value['attendance_id'] == "null")) {
                     // echo "sdjfsjfsjs";exit;
                     // return "fjsdjfsdjf";
-                    if ($Connection->table('student_attendances')->where([
+                    $row = $Connection->table('student_attendances')->select('id')->where([
                         ['date', '=', $date],
                         ['class_id', '=', $class_id],
                         ['section_id', '=', $section_id],
@@ -6443,23 +6561,15 @@ class ApiController extends BaseController
                         ['semester_id', '=', $semester_id],
                         ['session_id', '=', $session_id],
                         ['student_id', '=', $value['student_id']]
-                    ])->count() > 0) {
-
-                        $row = $Connection->table('student_attendances')->select('id')->where([
-                            ['date', '=', $date],
-                            ['class_id', '=', $class_id],
-                            ['section_id', '=', $section_id],
-                            ['subject_id', '=', $subject_id],
-                            ['semester_id', '=', $semester_id],
-                            ['session_id', '=', $session_id],
-                            ['student_id', '=', $value['student_id']]
-                        ])->first();
+                    ])->first();
+                    if (isset($row->id)) {
                         $Connection->table('student_attendances')->where('id', $row->id)->update([
                             'status' => $attStatus,
                             'remarks' => $att_remark,
                             'reasons' => $reasons,
                             'student_behaviour' => $student_behaviour,
                             'classroom_behaviour' => $classroom_behaviour,
+                            'day_recent_flag' => "1",
                             'updated_at' => date("Y-m-d H:i:s")
                         ]);
                     } else {
@@ -6474,6 +6584,7 @@ class ApiController extends BaseController
                         'reasons' => $reasons,
                         'student_behaviour' => $student_behaviour,
                         'classroom_behaviour' => $classroom_behaviour,
+                        'day_recent_flag' => "1",
                         'updated_at' => date("Y-m-d H:i:s")
                     ]);
                 }
@@ -6928,10 +7039,10 @@ class ApiController extends BaseController
                     ['sa.section_id', '=', $request->section_id],
                     ['sa.subject_id', '=', $request->subject_id],
                     ['sa.semester_id', '=', $request->semester_id],
-                    ['sa.session_id', '=', $request->session_id]
-                    // ['sa.date', '=', $request->date]
+                    ['sa.session_id', '=', $request->session_id],
+                    ['sa.date', '=', $request->date]
                 ])
-                ->whereBetween(DB::raw('date(date)'), [$startDate, $endDate])
+                // ->whereBetween(DB::raw('date(date)'), [$startDate, $endDate])
                 ->get();
 
             $avgAttendance = $Connection->table('student_attendances as sa')

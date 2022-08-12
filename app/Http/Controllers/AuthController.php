@@ -14,18 +14,22 @@ class AuthController extends Controller
             $role_id = session()->get('role_id');
             $school_name_url = session()->get('school_name_url');
             if ($role_id == 2) {
-                return redirect()->route('admin.dashboard', ['school_name_url' => $school_name_url]);
+                return redirect()->route('admin.dashboard');
             } elseif ($role_id == 3) {
-                return redirect()->route('staff.dashboard', ['school_name_url' => $school_name_url]);
+                return redirect()->route('staff.dashboard');
             } elseif ($role_id == 4) {
-                return redirect()->route('teacher.dashboard', ['school_name_url' => $school_name_url]);
+                return redirect()->route('teacher.dashboard');
             } elseif ($role_id == 5) {
-                return redirect()->route('parent.dashboard', ['school_name_url' => $school_name_url]);
+                return redirect()->route('parent.dashboard');
             } elseif ($role_id == 6) {
-                return redirect()->route('student.dashboard', ['school_name_url' => $school_name_url]);
+                return redirect()->route('student.dashboard');
             }
         }
         return view('auth.login');
+    }
+    public function showLoadingForm(Request $request)
+    {
+        return view('auth.loading');
     }
     public function showLoginFormSA(Request $request)
     {
@@ -48,6 +52,7 @@ class AuthController extends Controller
         $userDetails = $response->json();
         // dd($userDetails);
         $school_name_url = "";
+        $user_name = "";
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
             if ($userDetails['data']['subsDetails']) {
@@ -77,22 +82,43 @@ class AuthController extends Controller
                         $request->session()->put('student_id', null);
                         $request->session()->put('all_child', null);
                     }
-
+                    $user_name = $userDetails['data']['user']['name'];
                     // $request->session()->put('db_name', $userDetails['data']['subsDetails']['db_name']);
                     // $request->session()->put('db_username', $userDetails['data']['subsDetails']['db_username']);
                     // $request->session()->put('db_password', $userDetails['data']['subsDetails']['db_password']);
                 }
-
+                // $response = [
+                //     'code' => 200,
+                //     'success' => true,
+                //     'message' => "success"
+                // ];
+                // return response()->json($response, 200);
+                // return "dashboard";
                 if ($userDetails['data']['user']['role_id'] == 2) {
-                    return redirect()->route('admin.dashboard', ['school_name_url' => $school_name_url]);
+                    // return redirect()->route('admin.dashboard', ['school_name_url' => $school_name_url]);
+                    $redirect_route = route('admin.dashboard');
+                    echo "<script>setTimeout(function(){ window.location.href = '" . $redirect_route . "'; }, 3000);</script>";
+                    return view('auth.loading', ['user_name' => $user_name]);
                 } elseif ($userDetails['data']['user']['role_id'] == 3) {
-                    return redirect()->route('staff.dashboard', ['school_name_url' => $school_name_url]);
+                    // return redirect()->route('staff.dashboard');
+                    $redirect_route = route('staff.dashboard');
+                    echo "<script>setTimeout(function(){ window.location.href = '" . $redirect_route . "'; }, 3000);</script>";
+                    return view('auth.loading', ['user_name' => $user_name]);
                 } elseif ($userDetails['data']['user']['role_id'] == 4) {
-                    return redirect()->route('teacher.dashboard', ['school_name_url' => $school_name_url]);
+                    // return redirect()->route('teacher.dashboard');
+                    $redirect_route = route('teacher.dashboard');
+                    echo "<script>setTimeout(function(){ window.location.href = '" . $redirect_route . "'; }, 3000);</script>";
+                    return view('auth.loading', ['user_name' => $user_name]);
                 } elseif ($userDetails['data']['user']['role_id'] == 5) {
-                    return redirect()->route('parent.dashboard', ['school_name_url' => $school_name_url]);
+                    // return redirect()->route('parent.dashboard');
+                    $redirect_route = route('parent.dashboard');
+                    echo "<script>setTimeout(function(){ window.location.href = '" . $redirect_route . "'; }, 3000);</script>";
+                    return view('auth.loading', ['user_name' => $user_name]);
                 } elseif ($userDetails['data']['user']['role_id'] == 6) {
-                    return redirect()->route('student.dashboard', ['school_name_url' => $school_name_url]);
+                    // return redirect()->route('student.dashboard');
+                    $redirect_route = route('student.dashboard');
+                    echo "<script>setTimeout(function(){ window.location.href = '" . $redirect_route . "'; }, 3000);</script>";
+                    return view('auth.loading', ['user_name' => $user_name]);
                 } else {
                     return redirect()->route('admin.login')->with('error', 'Invalid Credential');
                 }

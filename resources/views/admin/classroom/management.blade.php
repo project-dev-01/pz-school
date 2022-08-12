@@ -3,13 +3,12 @@
 @section('css')
 <style>
     .radio_group {
-        width: 35px;
-        height: 35px;
+        width: 30px;
+        height: 53px;
         margin: 0px 3px 0px 0px;
         position: relative;
         text-align: right;
         font-size: 25px;
-        background-color: #08b9e133;
     }
 
     .radio_group_1 {
@@ -75,7 +74,7 @@
         color: #3498db;
         transform: scale(1.1);
     }
-    
+
     /*start counter Code*/
     #classroom_count_down .countdown-wrapper {
         width: 100%;
@@ -327,7 +326,7 @@
                                     <select id="semester_id" class="form-control" name="semester_id">
                                         <option value="0">Select Semester</option>
                                         @foreach($semester as $sem)
-                                        <option value="{{$sem['id']}}">{{$sem['name']}}</option>
+                                        <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -338,7 +337,7 @@
                                     <select id="session_id" class="form-control" name="session_id">
                                         <option value="0">Select Session</option>
                                         @foreach($session as $ses)
-                                        <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                        <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{$ses['name']}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -352,7 +351,7 @@
                                         <div id="classroom_count_down">
                                             <div class="countdown-wrapper">
                                                 <div class="countdown-main">
-                                                    <div class="countdown-section-days days">
+                                                    <!-- <div class="countdown-section-days days">
                                                         <div class="countdown-number-container">
                                                             <div class="countdown-number-days">
                                                                 <div class="countdown-number-next position-0-next">0</div>
@@ -395,7 +394,7 @@
                                                             <div class="countdown-dot"></div>
                                                             <div class="countdown-dot"></div>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="countdown-section-other hours">
                                                         <div class="countdown-number-container">
                                                             <div class="countdown-number-other">
@@ -658,6 +657,10 @@
                             .nav-tabs .nav-link.active {
                                 border-color: #328eeb #328eeb #fff;
                             }
+
+                            .green.active {
+                                color: red;
+                            }
                         </style>
                         <ul class="nav nav-tabs" style="border-bottom: 1px solid #328eeb;background-color: #F4F7FC;">
                             <li class="nav-item">
@@ -722,6 +725,14 @@
                                                                 <option value="late">Late</option>
                                                                 <option value="excused">Excused</option>
                                                             </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="changeAttendance">Attendance Status</label>
+                                                            <p id="attendaceTakenSts"></p>
                                                         </div>
                                                     </div>
                                                 </div>

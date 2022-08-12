@@ -368,10 +368,13 @@ class TeacherController extends Controller
         $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view('teacher.classroom.management', [
             'teacher_class' => $response['data'],
             'semester' => $semester['data'],
-            'session' => $session['data']
+            'session' => $session['data'],
+            'current_semester' => $sem['data']['semester']['id'],
+            'current_session' => $sem['data']['session']
         ]);
     }
     // faq screen pages end
