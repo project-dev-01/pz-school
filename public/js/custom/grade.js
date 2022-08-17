@@ -7,6 +7,7 @@ $(function () {
             grade_point: "required",
             min_mark: "required",
             max_mark: "required",
+            grade_category: "required"
         }
     });
     // add grade
@@ -69,6 +70,14 @@ $(function () {
                 name: 'DT_RowIndex'
             },
             {
+                data: 'grade_category_name',
+                name: 'grade_category_name'
+            },
+            {
+                data: 'notes',
+                name: 'notes'
+            },
+            {
                 data: 'grade',
                 name: 'grade'
             },
@@ -103,6 +112,8 @@ $(function () {
             $('.editGrade').find('input[name="grade_point"]').val(data.data.grade_point);
             $('.editGrade').find('input[name="min_mark"]').val(data.data.min_mark);
             $('.editGrade').find('input[name="max_mark"]').val(data.data.max_mark);
+            $('.editGrade').find('select[name="grade_category"]').val(data.data.grade_category);
+            $('.editGrade').find('input[name="notes"]').val(data.data.notes);
             $('.editGrade').modal('show');
         }, 'json');
     });
@@ -114,6 +125,7 @@ $(function () {
             grade_point: "required",
             min_mark: "required",
             max_mark: "required",
+            grade_category: "required"
         }
     });
     // update grade

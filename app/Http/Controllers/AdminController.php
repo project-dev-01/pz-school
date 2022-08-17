@@ -3111,7 +3111,10 @@ class AdminController extends Controller
     // get grade 
     public function grade()
     {
-        return view('admin.grade.index',);
+        $grade_category = Helper::GetMethod(config('constants.api.grade_category'));
+        // dd($grade_category);
+
+        return view('admin.grade.index', ['grade_category' => $grade_category['data']]);
     }
 
     //add Grade
@@ -3122,7 +3125,9 @@ class AdminController extends Controller
             'min_mark' => $request->min_mark,
             'max_mark' => $request->max_mark,
             'grade' => $request->grade,
-            'grade_point' => $request->grade_point
+            'grade_point' => $request->grade_point,
+            'grade_category' => $request->grade_category,
+            'notes' => $request->notes
         ];
 
 
@@ -3167,7 +3172,9 @@ class AdminController extends Controller
             'min_mark' => $request->min_mark,
             'max_mark' => $request->max_mark,
             'grade' => $request->grade,
-            'grade_point' => $request->grade_point
+            'grade_point' => $request->grade_point,
+            'grade_category' => $request->grade_category,
+            'notes' => $request->notes
         ];
 
         $response = Helper::PostMethod(config('constants.api.grade_update'), $data);
@@ -4897,4 +4904,55 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.group_delete'), $data);
         return $response;
     }
+    // get Exam 
+    public function examPaper()
+    {
+        // $term = Helper::GetMethod(config('constants.api.exam_term_list'));
+        // dd($response)
+        $getClasses = Helper::GetMethod(config('constants.api.class_list'));
+        $grade_category = Helper::GetMethod(config('constants.api.grade_category'));
+        return view('admin.exam_paper.list', [
+            'classDetails' => $getClasses['data'],
+            'grade_category' => $grade_category['data']
+        ]);
+        // return view('admin.exam.list', ['term' => $term['data']]);
+    }
+    // get Exam paper list
+    public function getExamPaperList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.exam_paper_list'));
+        // dd($response);
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                 <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editExamPaperBtn"><i class="fe-edit"></i></a>
+                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteExamPaperBtn"><i class="fe-trash-2"></i></a>
+                         </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    // get grade category
+    public function gradeCategory()
+    {
+        return view('admin.grade_category.list');
+    }
+     // get grade category
+     public function getGradeCategoryList(Request $request)
+     {
+         $response = Helper::GetMethod(config('constants.api.grade_category_list'));
+         return DataTables::of($response['data'])
+             ->addIndexColumn()
+             ->addColumn('actions', function ($row) {
+                 return '<div class="button-list">
+                                  <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editGradeCategoryBtn"><i class="fe-edit"></i></a>
+                                  <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteGradeCategoryBtn"><i class="fe-trash-2"></i></a>
+                          </div>';
+             })
+ 
+             ->rawColumns(['actions'])
+             ->make(true);
+     }
 }

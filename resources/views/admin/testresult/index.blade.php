@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Test Result')
+@section('title','Exam Marks')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -10,7 +10,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                 </div>
-                <h4 class="page-title">Test Result</h4>
+                <h4 class="page-title">Exam Marks</h4>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
                     <div class="card">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="navv">Test Result
+                                <h4 class="navv">Exam Marks
                                     <h4>
                             </li>
                         </ul><br>

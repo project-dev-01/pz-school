@@ -6499,7 +6499,7 @@ class ApiController extends BaseController
             $semester_id = $request->semester_id;
             $session_id = $request->session_id;
             $date = $request->date;
-             // if already take attendance for the date
+            // if already take attendance for the date
             $checkAlreadyTakenAttendance = $Connection->table('student_attendances')->select('id')->where([
                 ['date', '=', $date],
                 ['class_id', '=', $class_id],
@@ -6508,7 +6508,7 @@ class ApiController extends BaseController
                 ['session_id', '=', $session_id],
                 ['day_recent_flag', '=', "1"]
             ])->first();
-             // update flag
+            // update flag
             if (isset($checkAlreadyTakenAttendance->id)) {
                 $Connection->table('student_attendances')->where([
                     ['date', '=', $date],
@@ -9730,6 +9730,7 @@ class ApiController extends BaseController
             'max_mark' => 'required',
             'grade' => 'required',
             'grade_point' => 'required',
+            'grade_category' => 'required',
             'branch_id' => 'required',
             'token' => 'required',
         ]);
@@ -9742,7 +9743,7 @@ class ApiController extends BaseController
             // create new connection
             $grade = $this->createNewConnection($request->branch_id);
             // check exist grade
-            if ($grade->table('grade_marks')->where('grade', '=', $request->grade)->count() > 0) {
+            if ($grade->table('grade_marks')->where([['grade', '=', $request->grade], ['grade_category', '=', $request->grade_category]])->count() > 0) {
                 return $this->send422Error('Grade Already Exist', ['error' => 'Grade Already Exist']);
             } else {
                 // insert data
@@ -9753,6 +9754,8 @@ class ApiController extends BaseController
                     'min_mark' => $request->min_mark,
                     'max_mark' => $request->max_mark,
                     'grade_point' => $request->grade_point,
+                    'grade_category' => $request->grade_category,
+                    'notes' => isset($request->notes) ? $request->notes : "",
                     'created_at' => date("Y-m-d H:i:s")
                 ]);
                 $success = [];
@@ -9778,7 +9781,19 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $Grade = $conn->table('grade_marks')->get();
+            $Grade = $conn->table('grade_marks as gm')
+                ->select(
+                    'gm.id',
+                    'gm.min_mark',
+                    'gm.max_mark',
+                    'gm.grade',
+                    'gm.grade_point',
+                    'gm.grade_category',
+                    'gm.notes',
+                    'gc.name as grade_category_name',
+                )
+                ->leftJoin('grade_category as gc', 'gm.grade_category', '=', 'gc.id')
+                ->get();
             return $this->successResponse($Grade, 'Grade record fetch successfully');
         }
     }
@@ -9812,6 +9827,7 @@ class ApiController extends BaseController
             'max_mark' => 'required',
             'grade' => 'required',
             'grade_point' => 'required',
+            'grade_category' => 'required',
             'branch_id' => 'required',
             'token' => 'required',
         ]);
@@ -9832,6 +9848,8 @@ class ApiController extends BaseController
                     'min_mark' => $request->min_mark,
                     'max_mark' => $request->max_mark,
                     'grade_point' => $request->grade_point,
+                    'grade_category' => $request->grade_category,
+                    'notes' => isset($request->notes) ? $request->notes : "",
                     'updated_at' => date("Y-m-d H:i:s")
                 ]);
                 $success = [];
@@ -16135,6 +16153,184 @@ class ApiController extends BaseController
             $success['session'] = $session;
 
             return $this->successResponse($success, 'Semester and Session Fetched successfully');
+        }
+    }
+
+    // grade category
+    public function gradeCategory(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $Grade = $conn->table('grade_category')->get();
+            return $this->successResponse($Grade, 'Grade Category fetch successfully');
+        }
+    }
+    // addExam Paper
+    public function addExamPaper(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+            "class_id" => "required",
+            "subject_id" => "required",
+            "paper_name" => "required",
+            "grade_category" => "required"
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // check exist name
+            // insert data
+            $data = [
+                "class_id" => $request->class_id,
+                "subject_id" => $request->subject_id,
+                "paper_name" => $request->paper_name,
+                "paper_type" => isset($request->paper_type) ? $request->paper_type : "",
+                "grade_category" => $request->grade_category,
+                "subject_weightage" => isset($request->subject_weightage) ? $request->subject_weightage : "",
+                "notes" => isset($request->notes) ? $request->notes : "",
+                "created_at" => date("Y-m-d H:i:s")
+            ];
+            $query = $Connection->table('exam_papers')->insert($data);
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Exam Paper has been successfully saved');
+            }
+        }
+    }
+    // get Exam Paper List
+    public function getExamPaperList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get data
+            $Department = $Connection->table('exam_papers as exp')
+                ->select(
+                    'cl.name as class_name',
+                    'gct.name as grade_category_name',
+                    'sbj.name as subject_name',
+                    'exp.id',
+                    'exp.class_id',
+                    'exp.paper_name',
+                    'exp.paper_type',
+                    'exp.grade_category',
+                    'exp.subject_weightage',
+                    'exp.notes',
+                )
+                ->leftJoin('classes as cl', 'exp.class_id', '=', 'cl.id')
+                ->leftJoin('subjects as sbj', 'exp.subject_id', '=', 'sbj.id')
+                ->leftJoin('grade_category as gct', 'exp.grade_category', '=', 'gct.id')
+                ->get();
+            return $this->successResponse($Department, 'Exam Paper record fetch successfully');
+        }
+    }
+    // get exam paper row details
+    public function getExamPaperDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get data
+            $deptDetails = $Connection->table('exam_papers')->where('id', $id)->first();
+            return $this->successResponse($deptDetails, 'Exam Paper row fetch successfully');
+        }
+    }
+    // update exam paper
+    public function updateExamPaper(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            "id" => "required",
+            "class_id" => "required",
+            "subject_id" => "required",
+            "paper_name" => "required",
+            "grade_category" => "required"
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // update data
+            $data = [
+                "class_id" => $request->class_id,
+                "subject_id" => $request->subject_id,
+                "paper_name" => $request->paper_name,
+                "paper_type" => isset($request->paper_type) ? $request->paper_type : "",
+                "grade_category" => $request->grade_category,
+                "subject_weightage" => isset($request->subject_weightage) ? $request->subject_weightage : "",
+                "notes" => isset($request->notes) ? $request->notes : "",
+                "updated_at" => date("Y-m-d H:i:s")
+            ];
+            // dd($data);
+            $query = $Connection->table('exam_papers')->where('id', $id)->update($data);
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Exam Paper Details have Been updated');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+    // delete exam paper
+    public function deleteExamPaper(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $Connection->table('exam_papers')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Exam Paper have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
         }
     }
 }

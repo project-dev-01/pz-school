@@ -32,10 +32,12 @@
                 </p>
 
                 <div class="table-responsive">
-                    <table class="table mb-0" id="grade-table">
+                    <table class="table dt-responsive nowrap w-100" id="grade-table">
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Grade Category</th>
+                                <th>Notes</th>
                                 <th>Grade Name</th>
                                 <th>Grade Point</th>
                                 <th>Min Percentage</th>

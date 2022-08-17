@@ -310,6 +310,8 @@ return [
         'grade_details' => $url.'/grade/grade-details',
         'grade_update' => $url.'/grade/update',
         'grade_delete' => $url.'/grade/delete',
+        // grade_category
+        'grade_category' => $url.'/grade/category',
                  // get_marks_vs_grade
         'get_marks_vs_grade' => $url.'/get_marks_vs_grade',
         'add_student_marks' => $url.'/add_student_marks',
@@ -515,7 +517,23 @@ return [
         'student_name' => $url.'/student/name',
 
         
-        'get_semester_session' => $url.'/get_semester_session'
+        'get_semester_session' => $url.'/get_semester_session',
+        // exam paper
+        'exam_paper_add' => $url.'/exam_paper/add',
+        'exam_paper_list' => $url.'/exam_paper/list',
+        'exam_paper_details' => $url.'/exam_paper/exam-paper-details',
+        'exam_paper_update' => $url.'/exam_paper/update',
+        'exam_paper_delete' => $url.'/exam_paper/delete',
+        // exam paper
+        'grade_category_add' => $url.'/grade_category/add',
+        'grade_category_list' => $url.'/grade_category/list',
+        'grade_category_details' => $url.'/grade_category/grade-category-details',
+        'grade_category_update' => $url.'/grade_category/update',
+        'grade_category_delete' => $url.'/grade_category/delete',
+        // get class by all subjects
+        'classes_by_all_subjects' => $url.'/classes/all_subjects'
+
+        
     ]
 
 ];

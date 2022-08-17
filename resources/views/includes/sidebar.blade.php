@@ -552,7 +552,11 @@
                                                 <span>Exam Setup</span>
                                             </a>
                                         </li>
-
+                                        <li>
+                                            <a href="{{ route('admin.exam_paper')}}" class="nav-link {{ (request()->is('admin/exam_paper/index')) ? 'active' : '' }}">
+                                                <span>Exam Paper</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
@@ -586,13 +590,18 @@
                                                 <span>Grade Range</span>
                                             </a>
                                         </li>
+                                        <li>
+                                            <a href="{{ route('admin.grade_category')}}" class="nav-link {{ (request()->is('admin/grade_category/*')) ? 'active' : '' }}">
+                                                <span>Gade Category</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
 
                             <li>
                                 <a href="{{ route('admin.test_result')}}" class="nav-link {{ (request()->is('admin/test_result*')) ? 'active' : '' }}">
-                                    <span> Test Result </span>
+                                    <span> Exam Marks </span>
                                 </a>
                             </li>
                             <li>
@@ -675,13 +684,13 @@
                                                 <span> Hostel Room </span>
                                             </a>
                                         </li>
-                                        
+
                                         <li>
                                             <a href="{{ route('admin.hostel_block')}}" class="nav-link {{ (request()->is('admin/hostel/block')) ? 'active' : '' }}">
                                                 <span> Hostel Block </span>
                                             </a>
                                         </li>
-                                        
+
                                         <li>
                                             <a href="{{ route('admin.hostel_floor')}}" class="nav-link {{ (request()->is('admin/hostel/floor')) ? 'active' : '' }}">
                                                 <span> Hostel Floor </span>
@@ -1380,7 +1389,7 @@
                 <li>
                     <a href="{{ route('teacher.test_result')}}" class="nav-link {{ (request()->is('teacher/test_result*')) ? 'active' : '' }}">
                         <i class="fas fa-marker"></i>
-                        <span> Test Result </span>
+                        <span> Exam Marks </span>
                     </a>
                 </li>
                 <!-- <li>

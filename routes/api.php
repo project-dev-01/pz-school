@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\Api\ApiControllerOne;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CommonController;
 /*
@@ -145,7 +146,12 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('department/department-details', [ApiController::class, 'getDepartmentDetails']);
     Route::post('department/update', [ApiController::class, 'updateDepartment']);
     Route::post('department/delete', [ApiController::class, 'deleteDepartment']);
-
+    // exam papers routes
+    Route::post('exam_paper/add', [ApiController::class, 'addExamPaper']);
+    Route::get('exam_paper/list', [ApiController::class, 'getExamPaperList']);
+    Route::post('exam_paper/exam-paper-details', [ApiController::class, 'getExamPaperDetails']);
+    Route::post('exam_paper/update', [ApiController::class, 'updateExamPaper']);
+    Route::post('exam_paper/delete', [ApiController::class, 'deleteExamPaper']);
     // designations routes
     Route::post('designation/add', [ApiController::class, 'addDesignation']);
     Route::get('designation/list', [ApiController::class, 'getDesignationList']);
@@ -234,6 +240,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('grade/grade-details', [ApiController::class, 'getGradeDetails']);
     Route::post('grade/update', [ApiController::class, 'updateGrade']);
     Route::post('grade/delete', [ApiController::class, 'deleteGrade']);
+    // Grade category routes
+    Route::get('grade/category', [ApiController::class, 'gradeCategory']);
 
     // employee routes
     Route::post('employee/department', [ApiController::class, 'getEmpDepartment']);
@@ -547,4 +555,14 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('staff/name', [ApiController::class, 'getStaffName']);
 
     Route::get('get_semester_session', [ApiController::class, 'getSemesterSession']);
+
+    // grade category routes
+    Route::post('grade_category/add', [ApiControllerOne::class, 'addGradeCategory']);
+    Route::get('grade_category/list', [ApiControllerOne::class, 'getGradeCategoryList']);
+    Route::post('grade_category/grade-category-details', [ApiControllerOne::class, 'getGradeCategoryDetails']);
+    Route::post('grade_category/update', [ApiControllerOne::class, 'updateGradeCategory']);
+    Route::post('grade_category/delete', [ApiControllerOne::class, 'deleteGadeCategory']);
+    // get class by all subjects
+    Route::post('classes/all_subjects', [ApiControllerOne::class, 'classByAllSubjects']);
+
 });

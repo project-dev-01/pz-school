@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class GradeMarks extends Migration
+class CreateGradeCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,9 @@ class GradeMarks extends Migration
      */
     public function up()
     {
-        Schema::create('grade_marks', function (Blueprint $table) {
+        Schema::create('grade_category', function (Blueprint $table) {
             $table->id();
-            $table->integer('branch_id');
-            $table->integer('min_mark');
-            $table->integer('max_mark');
-            $table->string('grade');
-            $table->integer('grade_point');
-            $table->integer('grade_category');
-            $table->string('notes')->nullable();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -33,6 +27,6 @@ class GradeMarks extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('grade_category');
     }
 }
