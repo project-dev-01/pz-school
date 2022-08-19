@@ -1,6 +1,40 @@
 $(function () {
 
     hostelRoomTable();
+
+    $('#block').on('change', function () {
+        var block_id = $(this).val();
+        console.log('b',block_id)
+        $("#hostelRoomForm").find("#floor").empty();
+        $("#hostelRoomForm").find("#floor").append('<option value="">Select Floor</option>');
+
+        $.post(floorByBlock, { token: token, branch_id: branchID, block_id: block_id }, function (res) {
+            console.log('r',res)
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#hostelRoomForm").find("#floor").append('<option value="' + val.id + '">' + val.floor_name + '</option>');
+                });
+            }
+        }, 'json');
+    });
+
+    $('#edit_block').on('change', function () {
+        var block_id = $(this).val();
+        console.log('b',block_id)
+        $("#edit-hostel-room-form").find("#edit_floor").empty();
+        $("#edit-hostel-room-form").find("#edit_floor").append('<option value="">Select Floor</option>');
+
+        $.post(floorByBlock, { token: token, branch_id: branchID, block_id: block_id }, function (res) {
+            console.log('r',res)
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#edit-hostel-room-form").find("#edit_floor").append('<option value="' + val.id + '">' + val.floor_name + '</option>');
+                });
+            }
+        }, 'json');
+    });
+
+
     $("#hostelRoomForm").validate({
         rules: {
             name: "required",

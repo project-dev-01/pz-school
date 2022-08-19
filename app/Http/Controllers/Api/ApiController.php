@@ -9907,11 +9907,16 @@ class ApiController extends BaseController
             if ($conn->table('hostel')->where('name', '=', $request->name)->count() > 0) {
                 return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
             } else {
+                
+                $watchman = NULL;
+                if (!empty($request->watchman)) {
+                    $watchman =  implode(",", $request->watchman);
+                }
                 // insert data
                 $query = $conn->table('hostel')->insert([
                     'name' => $request->name,
                     'category_id' => $request->category,
-                    'watchman' => $request->watchman,
+                    'watchman' => $watchman,
                     'address' => $request->address,
                     'remarks' => $request->remarks,
                     'created_at' => date("Y-m-d H:i:s")
@@ -9939,7 +9944,10 @@ class ApiController extends BaseController
             // create new connection
             $Conn = $this->createNewConnection($request->branch_id);
             // get data
-            $Hostel = $Conn->table('hostel')->select('hostel_category.name as category', 'hostel.*')->leftJoin('hostel_category', 'hostel.category_id', '=', 'hostel_category.id')->get();
+            $Hostel = $Conn->table('hostel')->select('hostel_category.name as category', 'hostel.*',DB::raw("GROUP_CONCAT(DISTINCT  s.first_name, ' ', s.last_name) as watchman"))
+                                        ->leftJoin('hostel_category', 'hostel.category_id', '=', 'hostel_category.id')
+                                        ->leftJoin("staffs as s", DB::raw("FIND_IN_SET(s.id,hostel.watchman)"), ">", DB::raw("'0'"))
+                                        ->get();
             return $this->successResponse($Hostel, 'Hostel record fetch successfully');
         }
     }
@@ -10088,7 +10096,11 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $HostelRoomDetails = $conn->table('hostel_room')->select('hostel_room.*', 'hostel.name as hostel')->leftJoin('hostel', 'hostel_room.hostel_id', '=', 'hostel.id')->get();
+            $HostelRoomDetails = $conn->table('hostel_room')->select('hostel_room.*', 'hostel.name as hostel', 'hostel_block.block_name as block', 'hostel_floor.floor_name as floor')
+                                        ->leftJoin('hostel', 'hostel_room.hostel_id', '=', 'hostel.id')
+                                        ->leftJoin('hostel_block', 'hostel_room.block', '=', 'hostel_block.id')
+                                        ->leftJoin('hostel_floor', 'hostel_room.floor', '=', 'hostel_floor.id')
+                                        ->get();
             return $this->successResponse($HostelRoomDetails, 'Hostel Room record fetch successfully');
         }
     }
@@ -10318,6 +10330,32 @@ class ApiController extends BaseController
             } else {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             }
+        }
+    }
+
+    // floor By Block 
+    public function floorByBlock(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+            'block_id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $block_id = $request->block_id;
+            $floor = $Conn->table('hostel_floor as hf')->select('hf.id', 'hf.floor_name')
+                ->join('hostel_block as hb', 'hf.block_id', '=', 'hb.id')
+                ->where('hf.block_id', $block_id)
+                ->get();
+            // return $floor;
+            return $this->successResponse($floor, 'Floor record fetched successfully');
         }
     }
 
@@ -15555,12 +15593,24 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
 
+            
+            $block_warden = NULL;
+            if (!empty($request->block_warden)) {
+                $block_warden =  implode(",", $request->block_warden);
+            }
+
+            
+            $block_leader = NULL;
+            if (!empty($request->block_leader)) {
+                $block_leader =  implode(",", $request->block_leader);
+            }
+
             // insert data
             $query = $conn->table('hostel_block')->insert([
                 'block_name' => $request->block_name,
-                'block_warden' => $request->block_warden,
+                'block_warden' => $block_warden,
                 'total_floor' => $request->total_floor,
-                'block_leader' => $request->block_leader,
+                'block_leader' => $block_leader,
                 'created_at' => date("Y-m-d H:i:s")
             ]);
             $success = [];
@@ -15585,7 +15635,11 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $hostelBlockDetails = $conn->table('hostel_block')->get();
+                                        
+            $hostelBlockDetails = $conn->table('hostel_block as hb')->select('hb.*',DB::raw("GROUP_CONCAT(DISTINCT  s.first_name, ' ', s.last_name) as block_warden"),DB::raw("GROUP_CONCAT(DISTINCT  st.first_name, ' ', st.last_name) as block_leader"))
+                                                                ->leftJoin("staffs as s", DB::raw("FIND_IN_SET(s.id,hb.block_warden)"), ">", DB::raw("'0'"))
+                                                                ->leftJoin("students as st", DB::raw("FIND_IN_SET(st.id,hb.block_leader)"), ">", DB::raw("'0'"))
+                                                                ->get();
             return $this->successResponse($hostelBlockDetails, 'Hostel Block record fetch successfully');
         }
     }
@@ -15628,13 +15682,23 @@ class ApiController extends BaseController
 
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
+            
+            $block_warden = NULL;
+            if (!empty($request->block_warden)) {
+                $block_warden =  implode(",", $request->block_warden);
+            }
 
+            
+            $block_leader = NULL;
+            if (!empty($request->block_leader)) {
+                $block_leader =  implode(",", $request->block_leader);
+            }
             // update data
             $query = $conn->table('hostel_block')->where('id', $id)->update([
                 'block_name' => $request->block_name,
-                'block_warden' => $request->block_warden,
+                'block_warden' => $block_warden,
                 'total_floor' => $request->total_floor,
-                'block_leader' => $request->block_leader,
+                'block_leader' => $block_leader,
                 'updated_at' => date("Y-m-d H:i:s")
             ]);
             $success = [];
@@ -15691,12 +15755,22 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
 
+            $floor_warden = NULL;
+            if (!empty($request->floor_warden)) {
+                $floor_warden =  implode(",", $request->floor_warden);
+            }
+
+            $floor_leader = NULL;
+            if (!empty($request->floor_leader)) {
+                $floor_leader =  implode(",", $request->floor_leader);
+            }
+
             // insert data
             $query = $conn->table('hostel_floor')->insert([
                 'floor_name' => $request->floor_name,
                 'block_id' => $request->block_id,
-                'floor_warden' => $request->floor_warden,
-                'floor_leader' => $request->floor_leader,
+                'floor_warden' => $floor_warden,
+                'floor_leader' => $floor_leader,
                 'total_room' => $request->total_room,
                 'created_at' => date("Y-m-d H:i:s")
             ]);
@@ -15722,7 +15796,12 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $hostelFloorDetails = $conn->table('hostel_floor')->get();
+            $hostelFloorDetails = $conn->table('hostel_floor as hf')
+                                        ->select('hf.*','b.block_name as block_id',DB::raw("GROUP_CONCAT(DISTINCT  s.first_name, ' ', s.last_name) as floor_warden"),DB::raw("GROUP_CONCAT(DISTINCT  st.first_name, ' ', st.last_name) as floor_leader"))
+                                        ->leftJoin("staffs as s", DB::raw("FIND_IN_SET(s.id,hf.floor_warden)"), ">", DB::raw("'0'"))
+                                        ->leftJoin("students as st", DB::raw("FIND_IN_SET(st.id,hf.floor_leader)"), ">", DB::raw("'0'"))
+                                        ->leftJoin('hostel_block as b', 'hf.block_id', '=', 'b.id')
+                                        ->get();
             return $this->successResponse($hostelFloorDetails, 'Hostel Floor record fetch successfully');
         }
     }
@@ -15767,12 +15846,22 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
 
+            $floor_warden = NULL;
+            if (!empty($request->floor_warden)) {
+                $floor_warden =  implode(",", $request->floor_warden);
+            }
+
+            $floor_leader = NULL;
+            if (!empty($request->floor_leader)) {
+                $floor_leader =  implode(",", $request->floor_leader);
+            }
+
             // update data
             $query = $conn->table('hostel_floor')->where('id', $id)->update([
                 'floor_name' => $request->floor_name,
                 'block_id' => $request->block_id,
-                'floor_warden' => $request->floor_warden,
-                'floor_leader' => $request->floor_leader,
+                'floor_warden' => $floor_warden,
+                'floor_leader' => $floor_leader,
                 'total_room' => $request->total_room,
                 'updated_at' => date("Y-m-d H:i:s")
             ]);
@@ -16328,6 +16417,163 @@ class ApiController extends BaseController
             $success = [];
             if ($query) {
                 return $this->successResponse($success, 'Exam Paper have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+    // add HostelGroup
+    public function addHostelGroup(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'name' => 'required',
+        ]);
+
+        //    return $request;
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+
+           
+            $student = NULL;
+            if (!empty($request->student)) {
+                $student =  implode(",", $request->student);
+            }
+            // return $student;
+            $query = $conn->table('hostel_groups')->insert([
+                'name' => $request->name,
+                'color' => $request->color,
+                'incharge_staff' => $request->incharge_staff,
+                'incharge_student' => $request->incharge_student,
+                'student' => $student,
+                'created_at' => date("Y-m-d H:i:s")
+            ]);
+
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Hostel Group has been successfully saved');
+            }
+        }
+    }
+    // get HostelGroups 
+    public function getHostelGroupList(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $groupDetails = $conn->table('hostel_groups')->get()->toArray();
+            return $this->successResponse($groupDetails, 'Hostel Group record fetch successfully');
+        }
+    }
+    // get HostelGroup row details
+    public function getHostelGroupDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+
+
+            $id = $request->id;
+            $groupDetails = $conn->table('hostel_groups as hg')
+                ->select(
+                    'hg.*',
+                    DB::raw("GROUP_CONCAT( DISTINCT s.first_name, ' ', s.last_name) as name"),
+                )
+                ->leftJoin('staffs as s', 'hg.incharge_staff', '=', 's.id')
+                ->leftJoin('students as st', 'hg.incharge_student', '=', 'st.id')
+                ->leftJoin("students as s", DB::raw("FIND_IN_SET(s.id,hg.student)"), ">", DB::raw("'0'"))
+                ->where('hg.id', $id)
+                ->first();
+
+            return $this->successResponse($groupDetails, 'Hostel Group row fetch successfully');
+        }
+    }
+    // update HostelGroup
+    public function updateHostelGroup(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'name' => 'required',
+        ]);
+
+        //    return $request;
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+
+            $student = NULL;
+            if (!empty($request->student)) {
+                $student =  implode(",", $request->student);
+            }
+
+            $query = $conn->table('hostel_groups')->where('id', $id)->update([
+                'name' => $request->name,
+                'color' => $request->color,
+                'incharge_staff' => $request->incharge_staff,
+                'incharge_student' => $request->incharge_student,
+                'student' => $student,
+                'updated_at' => date("Y-m-d H:i:s")
+            ]);
+
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Hostel Group has been successfully Updated');
+            }
+        }
+    }
+    // delete HostelGroup
+    public function deleteHostelGroup(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'id' => 'required',
+            'branch_id' => 'required',
+        ]);
+        $group_id = $request->id;
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('hostel_groups')->where('id', $group_id)->delete();
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Hostel Group have been deleted successfully');
             } else {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             }

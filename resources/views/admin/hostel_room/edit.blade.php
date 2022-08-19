@@ -26,13 +26,20 @@
                         <span class="text-danger error-text hostel_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="block">Block</label>
-                        <input type="text"  name="block" class="form-control" placeholder="Enter Block">
+                        <label for="block">Select Block</label>
+                        <select class="form-control" id="edit_block" name="block">
+                            <option value="">Select Block</option>
+                            @foreach($block as $blo)
+                            <option value="{{$blo['id']}}">{{$blo['block_name']}}</option>
+                            @endforeach
+                        </select>
                         <span class="text-danger error-text block_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="floor">Floor</label>
-                        <input type="text"  name="floor" class="form-control" placeholder="Enter Floor">
+                        <select class="form-control" id="edit_floor" name="floor">
+                            <option value="">Select Floor</option>
+                        </select>
                         <span class="text-danger error-text floor_error"></span>
                     </div>
                     <div class="form-group">

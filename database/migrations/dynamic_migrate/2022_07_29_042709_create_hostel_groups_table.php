@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHostelTable extends Migration
+class CreateHostelGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateHostelTable extends Migration
      */
     public function up()
     {
-        Schema::create('hostel', function (Blueprint $table) {
+        Schema::create('hostel_groups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('category_id');
-            $table->text('address');
-            $table->string('watchman');
-            $table->text('remarks')->nullable();
+            $table->string('incharge_staff')->nullable();
+            $table->string('incharge_student')->nullable();
+            $table->string('student')->nullable();
+            $table->string('color')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateHostelTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hostel');
+        Schema::dropIfExists('hostel_groups');
     }
 }

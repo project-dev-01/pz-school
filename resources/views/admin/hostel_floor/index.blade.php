@@ -73,5 +73,6 @@
 </script>
 
 <script src="{{ asset('public/js/custom/hostel_floor.js') }}"></script>
+<script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
 
 @endsection

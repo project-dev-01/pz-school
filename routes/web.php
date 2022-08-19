@@ -341,6 +341,15 @@ Route::group(['prefix' => 'schoolcrm'], function () {
         Route::post('even/update', [AdminController::class, 'updateGroup'])->name('admin.group.update');
         Route::post('group/delete', [AdminController::class, 'deleteGroup'])->name('admin.group.delete');
 
+        // Hostel Group routes
+        Route::get('hostel_group/index', [AdminController::class, 'hostelGroup'])->name('admin.hostel_group');
+        Route::get('hostel_group/create', [AdminController::class, 'createHostelGroup'])->name('admin.hostel_group.create');
+        Route::get('hostel_group/edit/{id}', [AdminController::class, 'editHostelGroup'])->name('admin.hostel_group.edit');
+        Route::get('hostel_group/list', [AdminController::class, 'getHostelGroupList'])->name('admin.hostel_group.list');
+        Route::post('hostel_group/add', [AdminController::class, 'addHostelGroup'])->name('admin.hostel_group.add');
+        Route::post('hostel_group/hostel_group-details', [AdminController::class, 'getHostelGroupDetails'])->name('admin.hostel_group.details');
+        Route::post('even/update', [AdminController::class, 'updateHostelGroup'])->name('admin.hostel_group.update');
+        Route::post('hostel_group/delete', [AdminController::class, 'deleteHostelGroup'])->name('admin.hostel_group.delete');
 
         // Qualifications
         Route::get('qualification/index', [AdminController::class, 'qualification_view'])->name('admin.qualification');

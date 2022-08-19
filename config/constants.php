@@ -358,6 +358,7 @@ return [
         'hostel_floor_update' => $url.'/hostel_floor/update',
         'hostel_floor_delete' => $url.'/hostel_floor/delete',
 
+        'floor_by_block' => $url.'/floor-by-block',
         'vehicle_by_route' => $url.'/vehicle-by-route',
         'room_by_hostel' => $url.'/room-by-hostel',
 
@@ -510,6 +511,13 @@ return [
         'group_details' => $url.'/group/group-details',
         'group_update' => $url.'/group/update',
         'group_delete' => $url.'/group/delete',
+
+        // hostel group url
+        'hostel_group_add' => $url.'/hostel_group/add',
+        'hostel_group_list' => $url.'/hostel_group/list',
+        'hostel_group_details' => $url.'/hostel_group/hostel_group-details',
+        'hostel_group_update' => $url.'/hostel_group/update',
+        'hostel_group_delete' => $url.'/hostel_group/delete',
 
         //  Name url
         

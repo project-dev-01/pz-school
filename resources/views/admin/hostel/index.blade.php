@@ -1,5 +1,9 @@
 @extends('layouts.admin-layout')
 @section('title','Hostel')
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('public/country/css/countrySelect.css') }}">
+@endsection
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -71,5 +75,7 @@
 </script>
 
 <script src="{{ asset('public/js/custom/hostel.js') }}"></script>
+<script src="{{ asset('public/country/js/countrySelect.js') }}"></script>
+<script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
 
 @endsection

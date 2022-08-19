@@ -71,6 +71,7 @@
     var hostelRoomList = "{{ route('admin.hostel_room.list') }}";
     var hostelRoomDetails = "{{ route('admin.hostel_room.details') }}";
     var hostelRoomDelete = "{{ route('admin.hostel_room.delete') }}";
+    var floorByBlock = "{{ config('constants.api.floor_by_block') }}";
 </script>
 
 <script src="{{ asset('public/js/custom/hostel_room.js') }}"></script>

@@ -864,6 +864,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('admin.hostel_group')}}" class="nav-link {{ (request()->is('admin/hostel_group*')) ? 'active' : '' }}">
+                                    <span> Hostel Group </span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('admin.settings')}}" class="nav-link {{ (request()->is('admin/settings*')) ? 'active' : '' }}">
                                     <span> General Settings</span>
                                 </a>

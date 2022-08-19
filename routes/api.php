@@ -395,6 +395,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('hostel_room/delete', [ApiController::class, 'deleteHostelRoom']);
     Route::post('vehicle-by-route', [ApiController::class, 'vehicleByRoute']);
     Route::post('room-by-hostel', [ApiController::class, 'roomByHostel']);
+    
+    Route::post('floor-by-block', [ApiController::class, 'floorByBlock']);
 
     // Hostel Block routes
     Route::post('hostel_block/add', [ApiController::class, 'addHostelBlock']);
@@ -548,6 +550,13 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('group/group-details', [ApiController::class, 'getGroupDetails']);
     Route::post('group/update', [ApiController::class, 'updateGroup']);
     Route::post('group/delete', [ApiController::class, 'deleteGroup']);
+
+    // Hostel Group routes
+    Route::post('hostel_group/add', [ApiController::class, 'addHostelGroup']);
+    Route::get('hostel_group/list', [ApiController::class, 'getHostelGroupList']);
+    Route::post('hostel_group/hostel_group-details', [ApiController::class, 'getHostelGroupDetails']);
+    Route::post('hostel_group/update', [ApiController::class, 'updateHostelGroup']);
+    Route::post('hostel_group/delete', [ApiController::class, 'deleteHostelGroup']);
 
     // Name routes
 
