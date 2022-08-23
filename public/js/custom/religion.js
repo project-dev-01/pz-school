@@ -43,13 +43,13 @@ $(function () {
 
     // get all Religion table
     function religionTable() {
-         $('#religion-table').DataTable({
+        $('#religion-table').DataTable({
             processing: true,
             info: true,
             // dom: 'lBfrtip',
-            dom:"<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             buttons: [
                 {
                     extend: 'csv',
@@ -71,8 +71,11 @@ $(function () {
                     searchable: false,
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex'
-                }
-               ,
+                },
+                {
+                    data: 'id',
+                    name: 'id'
+                },
                 {
                     data: 'name',
                     name: 'name'
@@ -90,8 +93,8 @@ $(function () {
     // get row
     $(document).on('click', '#editReligionBtn', function () {
         var id = $(this).data('id');
-     
-        $('.editReligion').find('form')[0].reset();   
+
+        $('.editReligion').find('form')[0].reset();
         $.post(religionDetails, { id: id }, function (data) {
             $('.editReligion').find('input[name="id"]').val(data.data.id);
             $('.editReligion').find('input[name="name"]').val(data.data.name);
@@ -104,7 +107,7 @@ $(function () {
         e.preventDefault();
         var edt_religionCheck = $("#edit-religion-form").valid();
         if (edt_religionCheck === true) {
-      
+
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),

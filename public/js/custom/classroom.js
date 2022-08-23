@@ -405,7 +405,7 @@ $(function () {
                             '<input type="hidden" name="attendance[' + meta.row + '][student_id]" value="' + row.student_id + '">' +
                             '<input type="hidden" name="attendance[' + meta.row + '][name]" value="' + row.name + '">' +
                             '<img src="' + img + '" class="mr-2 rounded-circle">' +
-                            '<a href="javascript:void(0);" class="text-body font-weight-semibold mr-2">' + data + '</a>' + bd;
+                            '<a href="javascript:void(0);" class="text-body font-weight-semibold mr-2 width ellipse two-lines">' + data + '</a>' + bd;
                         return first_name;
                     }
                 },
@@ -449,7 +449,7 @@ $(function () {
                         //             '</select>';
                         //     }
                         // }
-                        var att_status = '<select class="form-control changeAttendanceSelect" data-id="' + row.student_id + '" id="attendance' + row.student_id + '" data-style="btn-outline-success" name="attendance[' + meta.row + '][att_status]">' +
+                        var att_status = '<select class="form-control changeAttendanceSelect list-mode-table" data-id="' + row.student_id + '" id="attendance' + row.student_id + '" data-style="btn-outline-success" name="attendance[' + meta.row + '][att_status]">' +
                             '<option value="">Choose</option>' +
                             '<option value="present" ' + (status == "present" ? "selected" : "selected") + '>Present</option>' +
                             '<option value="absent" ' + (status == "absent" ? "selected" : "") + '>Absent</option>' +
@@ -465,7 +465,7 @@ $(function () {
                     "render": function (data, type, row, meta) {
 
                         var att_remark = '<textarea style="display:none;" class="addRemarks" data-id="' + row.student_id + '" id="addRemarks' + row.student_id + '" name="attendance[' + meta.row + '][att_remark]">' + (row.att_remark !== "null" ? row.att_remark : "") + '</textarea>' +
-                            '<button type="button" data-id="' + row.student_id + '" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#stuRemarksPopup" id="editRemarksStudent">Add Remarks</button>';
+                            '<button type="button" data-id="' + row.student_id + '" class="btn btn-outline-info waves-effect waves-light list-mode-btn" data-toggle="modal" data-target="#stuRemarksPopup" id="editRemarksStudent">Add Remarks</button>';
                         return att_remark;
                     }
                 },
@@ -476,7 +476,7 @@ $(function () {
                         if (row.att_status != "present") {
                             onLoadReasons(row, meta);
                         }
-                        var reasons = '<select id="reasons' + row.student_id + '" class="form-control" name="attendance[' + meta.row + '][reasons]">' +
+                        var reasons = '<select id="reasons' + row.student_id + '" class="form-control list-mode-table" name="attendance[' + meta.row + '][reasons]">' +
                             '<option value="">Choose</option>' +
                             '</select>';
                         return reasons;
@@ -564,13 +564,13 @@ $(function () {
                             '<div class="radio_group">' +
                             '<input type="radio" class="checkRadioBtn" value="likes" ' + (row.classroom_behaviour == "likes" ? "checked" : "") + ' name="attendance[' + meta.row + '][classroom_behaviour]">' +
                             '<label for="like">' +
-                            '<i class="fas fa-thumbs-up" style="color:green;font-size:22px"></i>' +
+                            '<i class="fas fa-thumbs-up"></i>' +
                             '</label>' +
                             '</div>' +
                             '<div class="radio_group">' +
                             '<input type="radio" class="checkRadioBtn" value="dislikes" ' + (row.classroom_behaviour == "dislikes" ? "checked" : "") + ' name="attendance[' + meta.row + '][classroom_behaviour]">' +
                             '<label for="like">' +
-                            '<i class="fas fa-thumbs-down rr" style="color:red;font-size:22px"></i>' +
+                            '<i class="fas fa-thumbs-down rr"></i>' +
                             '</label>' +
                             '</div>' +
                             '</div>';

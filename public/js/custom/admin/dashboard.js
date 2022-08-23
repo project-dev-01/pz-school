@@ -137,7 +137,7 @@ $(function () {
                             '</p>' +
                             '</div>' +
                             '</div>' +
-                            '<hr />';
+                            ' <hr style="border-top: 2px dotted #1abc9c;"/>';
                     });
 
                 }
@@ -215,7 +215,7 @@ $(function () {
                 $("#dashComments").append(dashComments);
                 // data-comments
                 // var getOldComCount = $("#comments"+toDoListId).text();
-                var commentIcon = "<i class='mdi mdi-comment-text-multiple-outline font-16 mr-1'></i>"+(++getOldComCount);
+                var commentIcon = "<i class='mdi mdi-comment-text-multiple-outline font-16 mr-1'></i>" + (++getOldComCount);
                 $("#comments" + toDoListId).html(commentIcon);
 
                 $('#submitComment')[0].reset();

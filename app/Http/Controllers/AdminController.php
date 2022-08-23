@@ -1053,8 +1053,8 @@ class AdminController extends Controller
     public function hostel()
     {
         $getcategory = Helper::GetMethod(config('constants.api.hostel_category_list'));
-        
-        $getEmployee= Helper::GetMethod(config('constants.api.employee_list'), []);
+
+        $getEmployee = Helper::GetMethod(config('constants.api.employee_list'), []);
         // dd($getEmployee);
         return view(
             'admin.hostel.index',
@@ -3420,7 +3420,6 @@ class AdminController extends Controller
 
         ];
         $response = Helper::PostMethod(config('constants.api.student_list'), $data);
-
         return DataTables::of($response['data'])
 
             ->addIndexColumn()
@@ -3490,9 +3489,9 @@ class AdminController extends Controller
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
 
         $prev = json_decode($student['data']['student']['previous_details']);
-        $student['data']['student']['school_name'] = $prev->school_name;
-        $student['data']['student']['qualification'] = $prev->qualification;
-        $student['data']['student']['remarks'] = $prev->remarks;
+        $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
+        $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
+        $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
         return view(
             'admin.student.edit',
             [
@@ -4670,8 +4669,8 @@ class AdminController extends Controller
     // index Hostel Block
     public function hostelBlock()
     {
-        $getEmployee= Helper::GetMethod(config('constants.api.employee_list'), []);
-        
+        $getEmployee = Helper::GetMethod(config('constants.api.employee_list'), []);
+
         $student = Helper::PostMethod(config('constants.api.student_list'), []);
         // dd($getEmployee);
         return view(
@@ -4746,7 +4745,7 @@ class AdminController extends Controller
     // index Hostel Floor
     public function hostelFloor()
     {
-        $getEmployee= Helper::GetMethod(config('constants.api.employee_list'), []);
+        $getEmployee = Helper::GetMethod(config('constants.api.employee_list'), []);
         $block = Helper::GetMethod(config('constants.api.hostel_block_list'));
         $student = Helper::PostMethod(config('constants.api.student_list'), []);
         // dd($getEmployee);
@@ -4965,22 +4964,22 @@ class AdminController extends Controller
     {
         return view('admin.grade_category.list');
     }
-     // get grade category
-     public function getGradeCategoryList(Request $request)
-     {
-         $response = Helper::GetMethod(config('constants.api.grade_category_list'));
-         return DataTables::of($response['data'])
-             ->addIndexColumn()
-             ->addColumn('actions', function ($row) {
-                 return '<div class="button-list">
+    // get grade category
+    public function getGradeCategoryList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.grade_category_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
                                   <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editGradeCategoryBtn"><i class="fe-edit"></i></a>
                                   <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteGradeCategoryBtn"><i class="fe-trash-2"></i></a>
                           </div>';
-             })
- 
-             ->rawColumns(['actions'])
-             ->make(true);
-     }
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
     // index Hostel Group 
     public function hostelGroup()
     {
@@ -4989,7 +4988,7 @@ class AdminController extends Controller
     // create HostelGroup 
     public function createHostelGroup()
     {
-        
+
         $staff = Helper::GetMethod(config('constants.api.employee_list'));
         $student = Helper::PostMethod(config('constants.api.student_list'), []);
         // dd($staff);
@@ -5002,7 +5001,7 @@ class AdminController extends Controller
         );
     }
     // edit HostelGroup 
-    public function editHostelGroup(Request $request,$id)
+    public function editHostelGroup(Request $request, $id)
     {
 
         $data = [

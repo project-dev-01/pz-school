@@ -182,6 +182,10 @@ $(function () {
                 name: 'name'
             },
             {
+                data: 'id',
+                name: 'id'
+            },
+            {
                 data: 'name_numeric',
                 name: 'name_numeric'
             },

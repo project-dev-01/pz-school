@@ -40,6 +40,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Class Name</th>
+                                    <th>Standard ID</th>
                                     <th>Name Numeric</th>
                                     <th>Action</th>
                                 </tr>

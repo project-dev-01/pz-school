@@ -592,7 +592,7 @@
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.grade_category')}}" class="nav-link {{ (request()->is('admin/grade_category/*')) ? 'active' : '' }}">
-                                                <span>Gade Category</span>
+                                                <span>Grade Category</span>
                                             </a>
                                         </li>
                                     </ul>

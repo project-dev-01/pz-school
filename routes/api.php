@@ -573,5 +573,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('grade_category/delete', [ApiControllerOne::class, 'deleteGadeCategory']);
     // get class by all subjects
     Route::post('classes/all_subjects', [ApiControllerOne::class, 'classByAllSubjects']);
-
+    // import parent details in csv
+    Route::post('importcsv/parents', [ApiControllerOne::class, 'importCsvParents']);
+    // import parent students in csv
+    Route::post('importcsv/students', [ApiControllerOne::class, 'importCsvStudents']);
 });

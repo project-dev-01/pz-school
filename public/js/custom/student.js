@@ -374,7 +374,7 @@ $(function () {
                         "render": function (data, type, row, meta) {
                             var currentImg = studentImg + '/' + row.photo;
                         // var existUrl = UrlExists(currentImg);
-                        console.log(currentImg);
+                        // console.log(currentImg);
                             var img = (row.photo != null) ? studentImg + '/' + row.photo : defaultImg;
                             var first_name = '<img src="' + img + '" class="mr-2 rounded-circle">' +
                                 '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';

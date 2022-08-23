@@ -16,9 +16,9 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->integer('parent_id');
-            $table->integer('father_id')->nullable();
-            $table->integer('mother_id')->nullable();
-            $table->integer('guardian_id')->nullable();
+            $table->string('father_id')->nullable();
+            $table->string('mother_id')->nullable();
+            $table->string('guardian_id')->nullable();
             $table->integer('relation')->nullable();
             $table->string('year');
             $table->string('register_no');
@@ -28,6 +28,8 @@ class CreateStudentsTable extends Migration
             $table->string('last_name')->nullable();
             $table->string('gender')->nullable();
             $table->string('birthday')->nullable();
+            $table->text('passport')->nullable();
+            $table->text('nric')->nullable();
             $table->string('religion')->nullable();
             $table->string('race')->nullable();
             $table->string('blood_group')->nullable();
@@ -38,7 +40,7 @@ class CreateStudentsTable extends Migration
             $table->string('state')->nullable();
             $table->string('city')->nullable();
             $table->string('post_code')->nullable();
-            $table->string('mobile_no');
+            $table->text('mobile_no');
             $table->integer('category_id');
             $table->string('email');
             $table->integer('route_id')->nullable();

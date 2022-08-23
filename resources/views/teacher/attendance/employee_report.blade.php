@@ -21,10 +21,10 @@
     </div>
     <!-- end page title -->
 
-    <div class="row" >
+    <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
                             Select Ground
@@ -32,7 +32,7 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="employeeAttendanceReport" method="post"  enctype="multipart/form-data" autocomplete="off">
+                    <form id="employeeAttendanceReport" method="post" enctype="multipart/form-data" autocomplete="off">
                         <div class="row">
                             <!-- <input type="hidden" id="employeeReportDepartment" name="department" value="1"> -->
                             <input type="hidden" id="employeeReportEmployee" name="employee" value="{{$employee}}">
@@ -58,7 +58,7 @@
                                 Cancel
                             </button>-->
                         </div>
-                    
+
                     </form>
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
@@ -68,15 +68,15 @@
     <!-- end row -->
     <div class="row" id="employee_attendance_widget">
         <div class="col-12">
-            <div class="card">
-                <div class="card-body">
+            <div class="">
+                <div class="">
                     <div class="row">
                         <div class="col-md-4 col-xl-4">
                             <div class="card-box">
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="">
-                                            <svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg width="24" height="24" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <g clip-path="url(#clip0_59_2322)">
                                                     <path d="M6.34223 7.23056C5.7425 7.23007 5.15636 7.01747 4.65793 6.61967C4.15949 6.22186 3.77115 5.65671 3.54202 4.99567C3.3129 4.33464 3.25328 3.60741 3.37069 2.90596C3.4881 2.20451 3.77727 1.56033 4.20165 1.05489C4.62602 0.549454 5.16654 0.205456 5.75483 0.0663959C6.34313 -0.0726644 6.95278 -0.000540423 7.5067 0.273649C8.06063 0.547838 8.53395 1.01177 8.8668 1.60679C9.19965 2.20181 9.3771 2.9012 9.37668 3.61649C9.37446 4.57506 9.0539 5.49353 8.4852 6.17087C7.91649 6.84821 7.14595 7.22924 6.34223 7.23056Z" fill="#3A4265" />
                                                     <path d="M10.0811 11.9834H2.55917V11.873C2.55917 11.3388 2.55917 10.8071 2.55917 10.2754C2.5522 9.95066 2.60508 9.62803 2.71409 9.33031C2.8231 9.03259 2.98556 8.76704 3.19003 8.5524C3.4986 8.2185 3.89473 8.02261 4.31086 7.99813C4.50222 7.98559 4.69569 7.99813 4.88705 7.99813H8.18223C8.42962 7.99216 8.67545 8.04597 8.90494 8.15631C9.13442 8.26665 9.34282 8.43125 9.51756 8.64018C9.69556 8.84315 9.83698 9.08729 9.93315 9.35768C10.0293 9.62806 10.0782 9.91901 10.0769 10.2127C10.0769 10.7871 10.0769 11.3614 10.0769 11.9383C10.0853 11.9458 10.0832 11.9583 10.0811 11.9834Z" fill="#3A4265" />
@@ -114,7 +114,7 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="">
-                                            <svg width="24" height="19" viewBox="0 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg width="24" height="24" viewBox="0 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <g clip-path="url(#clip0_59_2318)">
                                                     <path d="M0 18.6667C0.0521565 18.2957 0.0962869 17.9247 0.148443 17.5798C0.294192 16.5919 0.537261 15.6184 0.874621 14.6714C1.23927 13.5946 1.81449 12.5887 2.57172 11.7038C3.46053 10.6593 4.72431 9.94343 6.13441 9.68573C7.69185 9.36207 9.32112 9.51976 10.7723 10.1346C11.53 10.4746 12.2045 10.9543 12.7543 11.5442C13.2132 12.0305 13.6028 12.569 13.9137 13.1468L13.9779 13.2581C14.284 12.9197 14.6359 12.6192 15.0251 12.3641C15.7892 11.8787 16.6865 11.6035 17.6128 11.5702C18.3739 11.5193 19.1385 11.6063 19.8636 11.8262C20.7852 12.1257 21.5877 12.6751 22.1665 13.4028C22.7898 14.195 23.2433 15.0903 23.5025 16.0403C23.7288 16.8147 23.8858 17.605 23.9719 18.4033C23.9719 18.4886 23.992 18.5739 24 18.6629L0 18.6667Z" fill="#3A4265" />
                                                     <path d="M7.7633 8.3132C6.87327 8.31466 6.00277 8.07193 5.26202 7.61572C4.52127 7.15952 3.94357 6.51034 3.60206 5.7504C3.26054 4.99045 3.17056 4.15391 3.34352 3.34666C3.51647 2.53941 3.94458 1.79775 4.57365 1.21559C5.20272 0.633425 6.00445 0.236927 6.87736 0.0762895C7.75027 -0.0843483 8.65509 -0.00190527 9.4773 0.313188C10.2995 0.628281 11.0021 1.16186 11.4962 1.84636C11.9903 2.53086 12.2536 3.33551 12.2528 4.15845C12.2517 5.25941 11.7785 6.31506 10.9369 7.0939C10.0953 7.87275 8.95402 8.31123 7.7633 8.3132Z" fill="#3A4265" />
@@ -175,12 +175,12 @@
                 </div> <!-- end row -->
                 <!-- tasks panel -->
             </div>
-        </div> 
+        </div>
     </div><!-- end row -->
     <div class="row" id="employee_attendance_report">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
                             Attendance Report

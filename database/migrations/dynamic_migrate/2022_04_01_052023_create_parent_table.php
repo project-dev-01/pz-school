@@ -15,6 +15,9 @@ class CreateParentTable extends Migration
     {
         Schema::create('parent', function (Blueprint $table) {
             $table->id();
+            $table->string('ref_father_id')->nullable();
+            $table->string('ref_mother_id')->nullable();
+            $table->string('ref_guardian_id')->nullable();
             $table->string('first_name');
             $table->string('last_name')->nullable();
             $table->string('gender')->nullable();
@@ -26,7 +29,9 @@ class CreateParentTable extends Migration
             $table->string('income')->nullable();
             $table->string('education')->nullable();
             $table->string('email');
-            $table->string('mobile_no');
+            $table->text('mobile_no');
+            $table->integer('race')->nullable();
+            $table->integer('religion')->nullable();
             $table->text('address')->nullable();
             $table->text('address_2')->nullable();
             $table->string('country')->nullable();

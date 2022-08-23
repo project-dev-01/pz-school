@@ -9907,7 +9907,7 @@ class ApiController extends BaseController
             if ($conn->table('hostel')->where('name', '=', $request->name)->count() > 0) {
                 return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
             } else {
-                
+
                 $watchman = NULL;
                 if (!empty($request->watchman)) {
                     $watchman =  implode(",", $request->watchman);
@@ -9944,10 +9944,10 @@ class ApiController extends BaseController
             // create new connection
             $Conn = $this->createNewConnection($request->branch_id);
             // get data
-            $Hostel = $Conn->table('hostel')->select('hostel_category.name as category', 'hostel.*',DB::raw("GROUP_CONCAT(DISTINCT  s.first_name, ' ', s.last_name) as watchman"))
-                                        ->leftJoin('hostel_category', 'hostel.category_id', '=', 'hostel_category.id')
-                                        ->leftJoin("staffs as s", DB::raw("FIND_IN_SET(s.id,hostel.watchman)"), ">", DB::raw("'0'"))
-                                        ->get();
+            $Hostel = $Conn->table('hostel')->select('hostel_category.name as category', 'hostel.*', DB::raw("GROUP_CONCAT(DISTINCT  s.first_name, ' ', s.last_name) as watchman"))
+                ->leftJoin('hostel_category', 'hostel.category_id', '=', 'hostel_category.id')
+                ->leftJoin("staffs as s", DB::raw("FIND_IN_SET(s.id,hostel.watchman)"), ">", DB::raw("'0'"))
+                ->get();
             return $this->successResponse($Hostel, 'Hostel record fetch successfully');
         }
     }
@@ -10097,10 +10097,10 @@ class ApiController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             // get data
             $HostelRoomDetails = $conn->table('hostel_room')->select('hostel_room.*', 'hostel.name as hostel', 'hostel_block.block_name as block', 'hostel_floor.floor_name as floor')
-                                        ->leftJoin('hostel', 'hostel_room.hostel_id', '=', 'hostel.id')
-                                        ->leftJoin('hostel_block', 'hostel_room.block', '=', 'hostel_block.id')
-                                        ->leftJoin('hostel_floor', 'hostel_room.floor', '=', 'hostel_floor.id')
-                                        ->get();
+                ->leftJoin('hostel', 'hostel_room.hostel_id', '=', 'hostel.id')
+                ->leftJoin('hostel_block', 'hostel_room.block', '=', 'hostel_block.id')
+                ->leftJoin('hostel_floor', 'hostel_room.floor', '=', 'hostel_floor.id')
+                ->get();
             return $this->successResponse($HostelRoomDetails, 'Hostel Room record fetch successfully');
         }
     }
@@ -11403,97 +11403,99 @@ class ApiController extends BaseController
             $todayArray = array();
             $upcomingArray = array();
             // 2nd get sections id
-            foreach ($getTeachersClassName as $key => $value) {
+            if (isset($getTeachersClassName)) {
+                foreach ($getTeachersClassName as $key => $value) {
 
-                $secAllocation = $Connection->table('section_allocations')
-                    ->select('id')
-                    ->where(
-                        [
-                            ['section_id', $value->section_id],
-                            ['class_id', $value->class_id]
-                        ]
-                    )->first();
-                if (isset($secAllocation->id)) {
+                    $secAllocation = $Connection->table('section_allocations')
+                        ->select('id')
+                        ->where(
+                            [
+                                ['section_id', $value->section_id],
+                                ['class_id', $value->class_id]
+                            ]
+                        )->first();
+                    if (isset($secAllocation->id)) {
 
-                    $secAllID = $secAllocation->id;
-                    $old = $Connection->table('to_do_lists as tdl')
-                        ->select(
-                            'tdl.id'
-                        )
-                        ->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), '<', $now)
-                        ->whereRaw('FIND_IN_SET(?,tdl.assign_to)', [$secAllID])
-                        ->get();
-                    $today = $Connection->table('to_do_lists as tdl')
-                        ->select(
-                            'tdl.id'
-                        )
-                        ->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), $now)
-                        ->whereRaw('FIND_IN_SET(?,tdl.assign_to)', [$secAllID])
-                        ->get();
-                    $upcoming = $Connection->table('to_do_lists as tdl')
-                        ->select(
-                            'tdl.id'
-                        )
-                        ->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), '>', $now)
-                        ->whereRaw('FIND_IN_SET(?,tdl.assign_to)', [$secAllID])
-                        ->get();
-                    if ($old->count() > 0) {
-                        foreach ($old as $val) {
-                            array_push($oldArray, $val->id);
+                        $secAllID = $secAllocation->id;
+                        $old = $Connection->table('to_do_lists as tdl')
+                            ->select(
+                                'tdl.id'
+                            )
+                            ->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), '<', $now)
+                            ->whereRaw('FIND_IN_SET(?,tdl.assign_to)', [$secAllID])
+                            ->get();
+                        $today = $Connection->table('to_do_lists as tdl')
+                            ->select(
+                                'tdl.id'
+                            )
+                            ->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), $now)
+                            ->whereRaw('FIND_IN_SET(?,tdl.assign_to)', [$secAllID])
+                            ->get();
+                        $upcoming = $Connection->table('to_do_lists as tdl')
+                            ->select(
+                                'tdl.id'
+                            )
+                            ->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), '>', $now)
+                            ->whereRaw('FIND_IN_SET(?,tdl.assign_to)', [$secAllID])
+                            ->get();
+                        if ($old->count() > 0) {
+                            foreach ($old as $val) {
+                                array_push($oldArray, $val->id);
+                            }
                         }
-                    }
-                    if ($today->count() > 0) {
-                        foreach ($today as $val) {
-                            array_push($todayArray, $val->id);
+                        if ($today->count() > 0) {
+                            foreach ($today as $val) {
+                                array_push($todayArray, $val->id);
+                            }
                         }
-                    }
-                    if ($upcoming->count() > 0) {
-                        foreach ($upcoming as $val) {
-                            array_push($upcomingArray, $val->id);
+                        if ($upcoming->count() > 0) {
+                            foreach ($upcoming as $val) {
+                                array_push($upcomingArray, $val->id);
+                            }
                         }
                     }
                 }
+                $query = $Connection->table('to_do_lists as tdl')
+                    ->select(
+                        'tdl.id',
+                        'tdl.title',
+                        'tdl.due_date',
+                        'tdl.priority',
+                        'tdl.assign_to',
+                        'tdl.mark_as_complete',
+                        'rtd.user_id',
+                        DB::raw('count(tdlc.to_do_list_id) as total_comments')
+                    )
+                    ->leftJoin('read_to_do_list as rtd', function ($join) use ($userID) {
+                        $join->on('rtd.to_do_list_id', '=', 'tdl.id')
+                            ->on('rtd.user_id', '=', DB::raw("'$userID'"));
+                    })
+                    ->leftjoin('to_do_list_comments as tdlc', 'tdl.id', '=', 'tdlc.to_do_list_id')
+                    ->orderBy('tdl.due_date', 'desc');
+                // old
+                $old_query = clone $query;
+                $old = $old_query->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), '<', $now)
+                    ->whereIn('tdl.id', $oldArray)
+                    ->groupBy('tdl.id')
+                    ->get();
+                // today
+                $today_query = clone $query;
+                $today = $today_query->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), $now)
+                    ->whereIn('tdl.id', $todayArray)
+                    ->groupBy('tdl.id')
+                    ->get();
+                // upcoming
+                $upcoming_query = clone $query;
+                $upcoming = $upcoming_query->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), '>', $now)
+                    ->whereIn('tdl.id', $upcomingArray)
+                    ->groupBy('tdl.id')
+                    ->get();
             }
-            $query = $Connection->table('to_do_lists as tdl')
-                ->select(
-                    'tdl.id',
-                    'tdl.title',
-                    'tdl.due_date',
-                    'tdl.priority',
-                    'tdl.assign_to',
-                    'tdl.mark_as_complete',
-                    'rtd.user_id',
-                    DB::raw('count(tdlc.to_do_list_id) as total_comments')
-                )
-                ->leftJoin('read_to_do_list as rtd', function ($join) use ($userID) {
-                    $join->on('rtd.to_do_list_id', '=', 'tdl.id')
-                        ->on('rtd.user_id', '=', DB::raw("'$userID'"));
-                })
-                ->leftjoin('to_do_list_comments as tdlc', 'tdl.id', '=', 'tdlc.to_do_list_id')
-                ->orderBy('tdl.due_date', 'desc');
-            // old
-            $old_query = clone $query;
-            $old = $old_query->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), '<', $now)
-                ->whereIn('tdl.id', $oldArray)
-                ->groupBy('tdl.id')
-                ->get();
-            // today
-            $today_query = clone $query;
-            $today = $today_query->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), $now)
-                ->whereIn('tdl.id', $todayArray)
-                ->groupBy('tdl.id')
-                ->get();
-            // upcoming
-            $upcoming_query = clone $query;
-            $upcoming = $upcoming_query->where(DB::raw("(DATE_FORMAT(tdl.due_date,'%Y-%m-%d'))"), '>', $now)
-                ->whereIn('tdl.id', $upcomingArray)
-                ->groupBy('tdl.id')
-                ->get();
 
             $data = [
-                'old' => $old,
-                'today' => $today,
-                'upcoming' => $upcoming
+                'old' => isset($old) ? $old : [],
+                'today' => isset($today) ? $today : [],
+                'upcoming' => isset($upcoming) ? $upcoming : []
             ];
             return $this->successResponse($data, 'To Do List fetch successfully');
         }
@@ -15593,13 +15595,13 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
 
-            
+
             $block_warden = NULL;
             if (!empty($request->block_warden)) {
                 $block_warden =  implode(",", $request->block_warden);
             }
 
-            
+
             $block_leader = NULL;
             if (!empty($request->block_leader)) {
                 $block_leader =  implode(",", $request->block_leader);
@@ -15635,11 +15637,11 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-                                        
-            $hostelBlockDetails = $conn->table('hostel_block as hb')->select('hb.*',DB::raw("GROUP_CONCAT(DISTINCT  s.first_name, ' ', s.last_name) as block_warden"),DB::raw("GROUP_CONCAT(DISTINCT  st.first_name, ' ', st.last_name) as block_leader"))
-                                                                ->leftJoin("staffs as s", DB::raw("FIND_IN_SET(s.id,hb.block_warden)"), ">", DB::raw("'0'"))
-                                                                ->leftJoin("students as st", DB::raw("FIND_IN_SET(st.id,hb.block_leader)"), ">", DB::raw("'0'"))
-                                                                ->get();
+
+            $hostelBlockDetails = $conn->table('hostel_block as hb')->select('hb.*', DB::raw("GROUP_CONCAT(DISTINCT  s.first_name, ' ', s.last_name) as block_warden"), DB::raw("GROUP_CONCAT(DISTINCT  st.first_name, ' ', st.last_name) as block_leader"))
+                ->leftJoin("staffs as s", DB::raw("FIND_IN_SET(s.id,hb.block_warden)"), ">", DB::raw("'0'"))
+                ->leftJoin("students as st", DB::raw("FIND_IN_SET(st.id,hb.block_leader)"), ">", DB::raw("'0'"))
+                ->get();
             return $this->successResponse($hostelBlockDetails, 'Hostel Block record fetch successfully');
         }
     }
@@ -15682,13 +15684,13 @@ class ApiController extends BaseController
 
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
-            
+
             $block_warden = NULL;
             if (!empty($request->block_warden)) {
                 $block_warden =  implode(",", $request->block_warden);
             }
 
-            
+
             $block_leader = NULL;
             if (!empty($request->block_leader)) {
                 $block_leader =  implode(",", $request->block_leader);
@@ -15797,11 +15799,11 @@ class ApiController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             // get data
             $hostelFloorDetails = $conn->table('hostel_floor as hf')
-                                        ->select('hf.*','b.block_name as block_id',DB::raw("GROUP_CONCAT(DISTINCT  s.first_name, ' ', s.last_name) as floor_warden"),DB::raw("GROUP_CONCAT(DISTINCT  st.first_name, ' ', st.last_name) as floor_leader"))
-                                        ->leftJoin("staffs as s", DB::raw("FIND_IN_SET(s.id,hf.floor_warden)"), ">", DB::raw("'0'"))
-                                        ->leftJoin("students as st", DB::raw("FIND_IN_SET(st.id,hf.floor_leader)"), ">", DB::raw("'0'"))
-                                        ->leftJoin('hostel_block as b', 'hf.block_id', '=', 'b.id')
-                                        ->get();
+                ->select('hf.*', 'b.block_name as block_id', DB::raw("GROUP_CONCAT(DISTINCT  s.first_name, ' ', s.last_name) as floor_warden"), DB::raw("GROUP_CONCAT(DISTINCT  st.first_name, ' ', st.last_name) as floor_leader"))
+                ->leftJoin("staffs as s", DB::raw("FIND_IN_SET(s.id,hf.floor_warden)"), ">", DB::raw("'0'"))
+                ->leftJoin("students as st", DB::raw("FIND_IN_SET(st.id,hf.floor_leader)"), ">", DB::raw("'0'"))
+                ->leftJoin('hostel_block as b', 'hf.block_id', '=', 'b.id')
+                ->get();
             return $this->successResponse($hostelFloorDetails, 'Hostel Floor record fetch successfully');
         }
     }
@@ -16439,7 +16441,7 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
 
-           
+
             $student = NULL;
             if (!empty($request->student)) {
                 $student =  implode(",", $request->student);

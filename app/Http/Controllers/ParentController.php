@@ -27,13 +27,15 @@ class ParentController extends Controller
         $parent_ids = [
             'parent_id' => $parent_id,
         ];
+        // dd($data);
+
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
         $get_homework_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_homework_list_dashboard'), $data);
         $get_std_names_dashboard = Helper::GETMethodWithData(config('constants.api.get_students_parentdashboard'), $parent_ids);
         $get_leave_reasons_dashboard = Helper::GetMethod(config('constants.api.get_leave_reasons'));
         $greetings = Helper::greetingMessage();
 
-        // dd($get_std_names_dashboard);
+        // dd($get_leave_reasons_dashboard);
         return view(
             'parent.dashboard.index',
             [
