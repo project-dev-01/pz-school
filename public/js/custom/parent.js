@@ -106,9 +106,9 @@ $(function () {
             processing: true,
             info: true,
             // dom: 'lBfrtip',
-            dom:"<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             buttons: [
                 {
                     extend: 'csv',
@@ -156,10 +156,21 @@ $(function () {
                     "targets": 1,
                     "className": "table-user",
                     "render": function (data, type, row, meta) {
-                        // var currentImg = parentImg + '/' + row.photo;
+                        console.log("--")
+                        console.log(typeof row.photo)
+                        console.log(row.photo)
+                        console.log(defaultImg)
+                        if ((row.photo != null) || (row.photo != "")) {
+                            var currentImg = parentImg + '/' + row.photo;
+                        }else{
+                            var currentImg = defaultImg;
+                        }
+                        // console.log(currentImg)
+
+                        // 
                         // var existUrl = UrlExists(currentImg);
                         // console.log(existUrl);
-                        var img = (row.photo != null) ? parentImg + '/' + row.photo : defaultImg;
+                        var img = currentImg;
                         var first_name = '<img src="' + img + '" class="mr-2 rounded-circle" alt="No Image">' +
                             '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
                         return first_name;

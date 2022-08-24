@@ -1,6 +1,5 @@
 @extends('layouts.admin-layout')
 @section('title','Dashboard')
-
 @section('content')
 <link href="{{ asset('public/css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
 <style>

@@ -48,7 +48,7 @@ $(document).ready(function () {
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
         plugins: ["bootstrap", "interaction", "dayGrid", "timeGrid", "list"],
-        slotDuration: "00:05:00",
+        slotDuration: "00:15:00",
         // minTime: "08:00:00",
         // maxTime: "19:00:00",
         themeSystem: "bootstrap",
@@ -63,6 +63,7 @@ $(document).ready(function () {
             next: "Next"
         },
         defaultView: "dayGridMonth",
+        displayEventTime: false,
         handleWindowResize: !0,
         // height: (window).height() - 200,
         header: {

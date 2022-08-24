@@ -26,8 +26,8 @@
 
 <body class="loading auth-fluid-pages pb-0">
     <div class="auth-fluid">
-        <div class="col-md-6 teacherlogin">
-            <div class="auth-fluid-right text-center">
+        <div class="col-md-6 ">
+            <div class="auth-fluid-right text-center teacherlogin">
                 <div class="">
                     <!--Auth fluid left content -->
                     <div class="auth-user-testimonial bg">
