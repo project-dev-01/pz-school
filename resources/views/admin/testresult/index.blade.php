@@ -1,6 +1,24 @@
 @extends('layouts.admin-layout')
 @section('title','Exam Marks')
 @section('content')
+<style>
+    .ellipse {
+        white-space: nowrap;
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .two-lines {
+        -webkit-line-clamp: 2;
+        display: inline-grid;
+        white-space: normal;
+    }
+
+    .width {
+        width: 130px;
+    }
+</style>
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -52,18 +70,47 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
+                                            <label for="examnames">Test Name<span class="text-danger">*</span></label>
+                                            <select id="examnames" class="form-control" name="exam_id">
+                                                <option value="">Select Exams</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
                                             <label for="subjectID">Subject<span class="text-danger">*</span></label>
                                             <select id="subjectID" class="form-control" name="subject_id">
                                                 <option value="">Select Subject</option>
                                             </select>
                                         </div>
                                     </div>
-
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="examnames">Test Name<span class="text-danger">*</span></label>
-                                            <select id="examnames" class="form-control" name="exam_id">
-                                                <option value="">Select Exams</option>
+                                            <label for="paperID">Paper Name</label>
+                                            <select id="paperID" class="form-control" name="paper_id">
+                                                <option value="">Select Paper</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="semester_id">Semester</label>
+                                            <select id="semester_id" class="form-control" name="semester_id">
+                                                <option value="0">Select Semester</option>
+                                                @foreach($semester as $sem)
+                                                <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="session_id">Session</label>
+                                            <select id="session_id" class="form-control" name="session_id">
+                                                <option value="0">Select Session</option>
+                                                @foreach($session as $ses)
+                                                <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{$ses['name']}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -95,34 +142,41 @@
                         <input type="hidden" name="section_id" id="listModeSectionID">
                         <input type="hidden" name="subject_id" id="listModeSubjectID">
                         <input type="hidden" name="exam_id" id="listModeexamID">
+                        <input type="hidden" name="paper_id" id="listModePaperID">
+                        <input type="hidden" name="semester_id" id="listModeSemesterID">
+                        <input type="hidden" name="session_id" id="listModeSessionID">
                         <input type="hidden" name="fullmark" id="fullmark">
                         <input type="hidden" name="passmark" id="passmark">
+                        <input type="hidden" name="grade_category" id="grade_category">
                         <div class="col-md-12">
-                            <div class="card-box">
-                                <!-- <table id="stdmarks" data-toggle="table" data-page-size="7" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable "> -->
-                                <table id="stdmarks" class="table table-centered table-striped dt-responsive nowrap w-100" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th width="10%">#</th>
-                                            <th class="text-center" width="10%">Student Name</th>
-                                            <th class="text-center" width="20%">Score</th>
-                                            <th class="text-center" width="15%">Grade</th>
-                                            <th class="text-center" width="15%">Pass/Fail</th>
-                                            <th class="text-center" width="15%">Ranking</th>
-                                            <th class="text-center" width="15%">Status</th>
-                                            <th class="text-center" width="30%">Memo</th>
-                                        </tr>
+                            <div class="table-responsive">
+                                <div class="card-box">
+                                    <!-- <table id="stdmarks" data-toggle="table" data-page-size="7" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable "> -->
+                                    <!-- <table id="stdmarks" class="table table-centered table-striped dt-responsive nowrap w-100" width="100%"> -->
+                                    <table id="stdmarks" class="table w-100 nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th width="10%">#</th>
+                                                <th class="text-center" width="10%">Student Name</th>
+                                                <th class="text-center" width="20%">Score</th>
+                                                <th class="text-center" width="15%">Grade</th>
+                                                <th class="text-center" width="15%">Pass/Fail</th>
+                                                <th class="text-center" width="15%">Ranking</th>
+                                                <th class="text-center" width="15%">Status</th>
+                                                <th class="text-center" width="30%">Memo</th>
+                                            </tr>
 
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                                <br>
-                                <div class="form-group text-right m-b-0">
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <br>
+                                    <div class="form-group text-right m-b-0">
 
-                                    <button class="btn btn-primary-bl waves-effect waves-light" id="saveClassRoomAttendance" type="submit">
-                                        Save
-                                    </button>
+                                        <button class="btn btn-primary-bl waves-effect waves-light" id="saveClassRoomAttendance" type="submit">
+                                            Save
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -358,8 +412,14 @@
 @section('scripts')
 <script>
     var teacherSectionUrl = "{{ config('constants.api.section_by_class') }}";
-    var teacherSubjectUrl = "{{ config('constants.api.subject_by_class') }}";
+    // var teacherSubjectUrl = "{{ config('constants.api.subject_by_class') }}";
+    var subjectByExamNames = "{{ config('constants.api.subject_by_exam_names') }}";
+    var examBySubjects = "{{ config('constants.api.exam_by_subjects') }}";
+    var subjectByPapers = "{{ config('constants.api.subject_by_papers') }}";
+
     var examsList = "{{ config('constants.api.get_testresult_exams') }}";
+    var paperList = "{{ config('constants.api.get_paper_list') }}";
+
     var getSubjectMarks = "{{ config('constants.api.get_testresult_marks_subject_vs') }}";
     var getMarks_vs_grade = "{{ config('constants.api.get_marks_vs_grade') }}";
     var getsubjectdivision = "{{ config('constants.api.get_subject_division') }}";

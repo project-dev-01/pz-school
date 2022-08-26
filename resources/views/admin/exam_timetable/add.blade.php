@@ -15,10 +15,11 @@
                         <thead>
                             <tr style="background-color:#0ABAB5">
                                 <th>Subject</th>
+                                <th>Paper Name</th>
                                 <th>Date</th>
                                 <th>Starting Time</th>
                                 <th>Ending Time</th>
-                                <th>Hall Room</th>
+                                <th>Location</th>
                                 <th>Distributor</th>
                             </tr>
                         </thead>

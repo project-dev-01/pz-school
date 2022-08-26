@@ -34,11 +34,10 @@
                         <label for="paper_type">Paper Type<span class="text-danger">*</span></label>
                         <select class="form-control" id="paper_type" name="paper_type">
                             <option value="">Select Paper Type</option>
-                            <option value="Objective">Objective</option>
-                            <option value="Subjective">Subjective</option>
-                            <option value="Presentation">Presentation</option>
-                            <option value="Objective + Subjective">Objective + Subjective</option>
-                            <option value="Oral">Oral</option>
+                            @forelse($get_paper_type as $gpt)
+                            <option value="{{$gpt['id']}}">{{$gpt['name']}}</option>
+                            @empty
+                            @endforelse
                         </select>
                     </div>
                     <div class="form-group">

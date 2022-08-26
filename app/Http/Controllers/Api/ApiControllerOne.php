@@ -171,6 +171,7 @@ class ApiControllerOne extends BaseController
                 ->join('subjects as sb', 'sa.subject_id', '=', 'sb.id')
                 ->where([
                     ['sa.type', '=', '0'],
+                    ['sb.exam_exclude', '=', '0'],
                     ['sa.class_id', '=', $request->class_id]
                 ])
                 ->groupBy('sa.subject_id')
@@ -409,7 +410,7 @@ class ApiControllerOne extends BaseController
                             ->where('ref_guardian_id', $importData[24])
                             ->where('ref_guardian_id', '!=', '')
                             ->orderBy('created_at', 'desc')->first();
-                        
+
                         // dd($ref_guardian_id);
 
                         if (isset($email)) {
@@ -477,6 +478,24 @@ class ApiControllerOne extends BaseController
             } else {
                 return $this->send422Error('Validation error.', ['error' => 'Invalid File Extension']);
             }
+        }
+    }
+    // get all paper types
+    public function getPaperTypeList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get data
+            $GradeCategory = $Connection->table('paper_type')->get();
+            return $this->successResponse($GradeCategory, 'Paper type record fetch successfully');
         }
     }
 }

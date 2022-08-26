@@ -134,8 +134,8 @@ $(function () {
                 name: 'paper_name'
             },
             {
-                data: 'paper_type',
-                name: 'paper_type'
+                data: 'paper_type_name',
+                name: 'paper_type_name'
             },
             {
                 data: 'subject_weightage',

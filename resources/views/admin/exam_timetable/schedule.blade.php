@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
                             Select Ground
@@ -32,29 +32,51 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="examTimetableFilter" method="post" action="{{ route('admin.exam_timetable') }}"  enctype="multipart/form-data" autocomplete="off">
+                    <form id="examTimetableFilter" method="post" action="{{ route('admin.exam_timetable') }}" enctype="multipart/form-data" autocomplete="off">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="class_id">Standard<span class="text-danger">*</span></label>
-                                    <select id="class_id" class="form-control" name="class_id" >                             
+                                    <select id="class_id" class="form-control" name="class_id">
                                         <option value="">Select Standard</option>
-                                            @foreach($class as $cla)
-                                                <option value="{{$cla['id']}}">{{$cla['name']}}</option>
-                                            @endforeach
+                                        @foreach($class as $cla)
+                                        <option value="{{$cla['id']}}">{{$cla['name']}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="section_id">Class Name<span class="text-danger">*</span></label>
-                                    <select id="section_id" class="form-control"  name="section_id">                              
+                                    <select id="section_id" class="form-control" name="section_id">
                                         <option value="">Select Class Name</option>
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="semester_id">Semester</label>
+                                    <select id="semester_id" class="form-control" name="semester_id">
+                                        <option value="0">Select Semester</option>
+                                        @foreach($semester as $sem)
+                                        <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="session_id">Session</label>
+                                    <select id="session_id" class="form-control" name="session_id">
+                                        <option value="0">Select Session</option>
+                                        @foreach($session as $ses)
+                                        <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{$ses['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        
+
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
                                 Filter
@@ -76,7 +98,7 @@
     <div class="row" id="schedulerow" style="display:none">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
                             Schedule List

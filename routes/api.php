@@ -99,6 +99,9 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('branch-by-section', [ApiController::class, 'branchIdBySection']);
     Route::post('section-by-class', [ApiController::class, 'sectionByClass']);
     Route::post('subject-by-class', [ApiController::class, 'subjectByClass']);
+    Route::post('exam-by-subjects', [ApiController::class, 'examBySubjects']);
+    Route::post('subject-by-papers', [ApiController::class, 'getSubjectByPaper']);
+    Route::post('subject-by-exam-names', [ApiController::class, 'getsubjectByAssignTest']);
     Route::post('timetable-subject', [ApiController::class, 'timetableSubject']);
     Route::get('exam-by-classSection', [ApiController::class, 'examByClassSec']);
     Route::get('exam-by-classSubject', [ApiController::class, 'examByClassSubject']);
@@ -303,7 +306,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
     // Test Result    
     Route::get('get_testresult_exams', [ApiController::class, 'examslist']);
-    Route::get('get_testresult_marks_subject_vs', [ApiController::class, 'subject_vs_marks']);
+    Route::post('get_paper_list', [ApiController::class, 'paperlist']);
+    Route::post('get_testresult_marks_subject_vs', [ApiController::class, 'subject_vs_marks']);
     Route::post('get_marks_vs_grade', [ApiController::class, 'marks_vs_grade']);
     Route::post('add_student_marks', [ApiController::class, 'addStudentMarks']);
     Route::post('get_subject_division', [ApiController::class, 'getsubjectdivision']);
@@ -573,6 +577,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('grade_category/delete', [ApiControllerOne::class, 'deleteGadeCategory']);
     // get class by all subjects
     Route::post('classes/all_subjects', [ApiControllerOne::class, 'classByAllSubjects']);
+    Route::get('paper_type/list', [ApiControllerOne::class, 'getPaperTypeList']);
     // import parent details in csv
     Route::post('importcsv/parents', [ApiControllerOne::class, 'importCsvParents']);
     // import parent students in csv

@@ -19,6 +19,7 @@ $(document).ready(function () {
             next: "Next"
         },
         defaultView: "dayGridMonth",
+        displayEventTime: false,
         handleWindowResize: !0,
         // height: (window).height() - 200,
         header: {

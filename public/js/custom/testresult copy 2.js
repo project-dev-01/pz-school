@@ -100,12 +100,10 @@ $(function () {
         var class_id = $(this).val();
         $("#testresultFilter").find("#sectionID").empty();
         $("#testresultFilter").find("#sectionID").append('<option value="">Select Section</option>');
+        // $("#testresultFilter").find("#subjectID").empty();
+        // $("#testresultFilter").find("#subjectID").append('<option value="">Select Subject</option>');
         $("#testresultFilter").find("#examnames").empty();
         $("#testresultFilter").find("#examnames").append('<option value="">Select Exams</option>');
-        $("#testresultFilter").find("#subjectID").empty();
-        $("#testresultFilter").find("#subjectID").append('<option value="">Select Subject</option>');
-        $("#testresultFilter").find("#paperID").empty();
-        $("#testresultFilter").find("#paperID").append('<option value="">Select Paper</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -125,12 +123,10 @@ $(function () {
         var yyyy = today.getFullYear();
 
         today = yyyy + '/' + mm + '/' + dd;
+        // $("#testresultFilter").find("#subjectID").empty();
+        // $("#testresultFilter").find("#subjectID").append('<option value="">Select Subject</option>');
         $("#testresultFilter").find("#examnames").empty();
         $("#testresultFilter").find("#examnames").append('<option value="">Select Exams</option>');
-        $("#testresultFilter").find("#subjectID").empty();
-        $("#testresultFilter").find("#subjectID").append('<option value="">Select Subject</option>');
-        $("#testresultFilter").find("#paperID").empty();
-        $("#testresultFilter").find("#paperID").append('<option value="">Select Paper</option>');
 
         $.post(subjectByExamNames, {
             token: token,
@@ -143,6 +139,7 @@ $(function () {
                 $.each(res.data, function (key, val) {
                     var marks = JSON.parse(val.marks);
                     $("#testresultFilter").find("#examnames").append('<option value="' + val.id + '" data-full="' + marks.full + '" data-pass="' + marks.pass + '">' + val.name + '</option>');
+                    // $("#testresultFilter").find("#subjectID").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
                 });
             }
         }, 'json');
@@ -154,8 +151,8 @@ $(function () {
         var class_id = $("#changeClassName").val();
         $("#testresultFilter").find("#subjectID").empty();
         $("#testresultFilter").find("#subjectID").append('<option value="">Select Subject</option>');
-        $("#testresultFilter").find("#paperID").empty();
-        $("#testresultFilter").find("#paperID").append('<option value="">Select Paper</option>');
+        // $("#testresultFilter").find("#paperID").empty();
+        // $("#testresultFilter").find("#paperID").append('<option value="">Select Paper</option>');
         $.post(examBySubjects, {
             token: token,
             branch_id: branchID,
@@ -169,12 +166,28 @@ $(function () {
                 });
             }
         }, 'json');
+        // paper list
+        // $.post(paperList, {
+        //     token: token,
+        //     branch_id: branchID,
+        //     class_id: class_id,
+        //     section_id: section_id,
+        //     subject_id: subject_id
+        // }, function (res) {
+        //     if (res.code == 200) {
+        //         $.each(res.data, function (key, val) {
+        //             $("#testresultFilter").find("#paperID").append('<option value="' + val.paper_id + '">' + val.paper_name + '</option>');
+        //         });
+        //     }
+        // }, 'json');
     });
     $('#subjectID').on('change', function () {
         var subject_id = $(this).val();
         var section_id = $("#sectionID").val();
         var class_id = $("#changeClassName").val();
         var exam_id = $("#examnames").val();
+        // $("#testresultFilter").find("#subjectID").empty();
+        // $("#testresultFilter").find("#subjectID").append('<option value="">Select Subject</option>');
         $("#testresultFilter").find("#paperID").empty();
         $("#testresultFilter").find("#paperID").append('<option value="">Select Paper</option>');
         // paper list
@@ -187,10 +200,8 @@ $(function () {
             exam_id: exam_id
         }, function (res) {
             if (res.code == 200) {
-                console.log("category id by papername")
-                console.log(res)
                 $.each(res.data, function (key, val) {
-                    $("#testresultFilter").find("#paperID").append('<option value="' + val.paper_id + '" data-grade_category="' + val.grade_category + '">' + val.paper_name + '</option>');
+                    $("#testresultFilter").find("#paperID").append('<option value="' + val.paper_id + '">' + val.paper_name + '</option>');
                 });
             }
         }, 'json');
@@ -213,11 +224,8 @@ $(function () {
 
         var fmark = $('option:selected', '#examnames').attr('data-full');
         var pmark = $('option:selected', '#examnames').attr('data-pass');
-        var grade_category = $('option:selected', '#paperID').attr('data-grade_category');
-        console.log(grade_category)
         $("#fullmark").val(fmark);
         $("#passmark").val(pmark);
-        $("#grade_category").val(grade_category);
 
         // chart.updateOptions( {
         //     xaxis: {
@@ -237,8 +245,6 @@ $(function () {
             var subject_id = $("#subjectID").val();
             var exam_id = $("#examnames").val();
             var paper_id = $("#paperID").val();
-            var semester_id = $("#semester_id").val();
-            var session_id = $("#session_id").val();
 
             var formData = new FormData();
             formData.append('token', token);
@@ -248,79 +254,69 @@ $(function () {
             formData.append('subject_id', subject_id);
             formData.append('exam_id', exam_id);
             formData.append('paper_id', paper_id);
-            formData.append('semester_id', semester_id);
-            formData.append('session_id', session_id);
 
             // list mode
+            $.get(getSubjectMarks, {
+                token: token,
+                branch_id: branchID,
+                exam_id: exam_id,
+                class_id: class_id,
+                section_id: section_id,
+                subject_id: subject_id,
+                paper_id: paper_id
+            }, function (response) {
+                if (response.code == 200) {
+                    var dataSetNew = response.data;
+                    if (response.code == 200) {
+                        if (response.data.length > 0) {
+                            // $("#mark_by_subject_card").show();
+                            bindmarks(dataSetNew);
+                            $("#listModeClassID").val(class_id);
+                            $("#listModeSectionID").val(section_id);
+                            $("#listModeSubjectID").val(subject_id);
+                            $("#listModeexamID").val(exam_id);
+                            $("#listModePaperID").val(paper_id);
+
+                        } else {
+                            // $("#mark_by_subject_card").hide();
+                        }
+                        //$("#layoutModeGrid").append(layoutModeGrid);
+                    } else {
+                        toastr.error(response.message);
+                    }
+                }
+            });
+            // subject division
             $.ajax({
-                url: getSubjectMarks,
+                url: getsubjectdivision,
                 method: "post",
                 data: formData,
                 processData: false,
                 dataType: 'json',
                 contentType: false,
                 success: function (response) {
-                    console.log("response");
-                    console.log(response);
                     if (response.code == 200) {
-                        var dataSetNew = response.data;
-                        if (response.code == 200) {
-                            if (response.data.length > 0) {
-                                $("#mark_by_subject_card").show();
-                                bindmarks(dataSetNew);
-                                $("#listModeClassID").val(class_id);
-                                $("#listModeSectionID").val(section_id);
-                                $("#listModeSubjectID").val(subject_id);
-                                $("#listModeexamID").val(exam_id);
-                                $("#listModePaperID").val(paper_id);
-                                $("#listModeSemesterID").val(semester_id);
-                                $("#listModeSessionID").val(session_id);
-                            } else {
-                                $("#mark_by_subject_card").hide();
-                            }
-                        } else {
+                        var stdetails = response.data.studentdetails;
+                        var subdiv = response.data.subjectdivision;
+                        if (subdiv.length > 0) {
+                            $('#subjectdivTableAppend').show();
                             $("#mark_by_subject_card").hide();
-                            toastr.error(response.message);
+                            subjectdivisionShow(stdetails, subdiv);
                         }
+                        else {
+                            $('#subjectdivTableAppend').hide();
+                            $("#mark_by_subject_card").show();
+                        }
+                    } else {
+                        toastr.error(response.message);
                     }
-                }, error: function (err) {
-                    $("#mark_by_subject_card").hide();
-                    toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
                 }
             });
-            // subject division
-            // $.ajax({
-            //     url: getsubjectdivision,
-            //     method: "post",
-            //     data: formData,
-            //     processData: false,
-            //     dataType: 'json',
-            //     contentType: false,
-            //     success: function (response) {
-            //         console.log("subject division")
-            //         console.log(response)
-            //         if (response.code == 200) {
-            //             var stdetails = response.data.studentdetails;
-            //             var subdiv = response.data.subjectdivision;
-            //             if (subdiv.length > 0) {
-            //                 $('#subjectdivTableAppend').show();
-            //                 $("#mark_by_subject_card").hide();
-            //                 subjectdivisionShow(stdetails, subdiv);
-            //             }
-            //             else {
-            //                 $('#subjectdivTableAppend').hide();
-            //                 $("#mark_by_subject_card").show();
-            //             }
-            //         } else {
-            //             toastr.error(response.message);
-            //         }
-            //     }
-            // });
 
             callsubjectaveragechart(formData);
 
             callbarchart(formData);
-            // division chart
+
             callradarchart(formData);
 
             calldonutchart(formData);
@@ -515,7 +511,6 @@ $(function () {
 
         var fullMark = $("#fullmark").val();
         var passMark = $("#passmark").val();
-        var grade_category = $("#grade_category").val();
         // rank
         //Get all total values, sort and remove duplicates
         let totalList = $(".basevalidation")
@@ -552,7 +547,6 @@ $(function () {
             var formData = new FormData();
             formData.append('token', token);
             formData.append('marks_range', marks_range);
-            formData.append('grade_category', grade_category);
             formData.append('branch_id', branchID);
             $.ajax({
                 url: getMarks_vs_grade,
@@ -893,8 +887,7 @@ $(function () {
 
     // function list mode
     function bindmarks(dataSetNew) {
-        console.log("dataSetNew")
-        console.log(dataSetNew)
+
         var fullMark = $("#fullmark").val();
         var passMark = $("#passmark").val();
 
@@ -902,12 +895,10 @@ $(function () {
             processing: true,
             bDestroy: true,
             info: true,
-            dom: 'lBfrtip',
-            paging: false,
             // dom: 'lBfrtip',
-            // dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
-            //     "<'row'<'col-sm-12'tr>>" +
-            //     "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             buttons: [
                 {
                     extend: 'csv',
@@ -953,12 +944,19 @@ $(function () {
             columnDefs: [
                 {
                     "targets": 0,
-                    "render": function (data, type, row, meta) {
-                        return meta.row + 1;
+                    "width": "10%",
+                    "render": function (data, type, row) {
+                        if (!data) {
+                            return '-';
+                        } else {
+                            var restaurant_id = data;
+                            return restaurant_id;
+                        }
                     }
                 },
                 {
                     "targets": 1,
+                    "width": "20%",
                     "className": "table-user text-left tdcolor",
                     "render": function (data, type, row, meta) {
                         var first_name = '<input type="hidden" name="subjectmarks[' + meta.row + '][studentmarks_tbl_pk_id]" value="' + row.att_id + '">' +
@@ -966,12 +964,13 @@ $(function () {
                             '<input type="hidden" name="subjectmarks[' + meta.row + '][first_name]" value="' + row.first_name + '">' +
                             '<input type="hidden" name="subjectmarks[' + meta.row + '][last_name]" value="' + row.last_name + '">' +
                             '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
-                            '<a href=""  data-toggle="modal" data-target=".studentMarkModal" data-id="' + row.student_id + '" class="text-body font-weight-semibold studentChart width ellipse two-lines">' + data + '</a>';
+                            '<a href=""  data-toggle="modal" data-target=".studentMarkModal" data-id="' + row.student_id + '" class="text-body font-weight-semibold studentChart">' + data + '</a>';
                         return first_name;
                     }
                 },
                 {
                     "targets": 2,
+                    "width": "10%",
                     "className": "text-center",
                     "render": function (data, type, row, meta) {
                         var score = '<input type="text" maxlength="3" class="form-control basevalidation" name="subjectmarks[' + meta.row + '][score]" id="' + row.student_id + '" value="' + (data != null ? data : "") + '">';
@@ -981,6 +980,7 @@ $(function () {
                 },
                 {
                     "targets": 3,
+                    "width": "15%",
                     "className": "text-center",
                     "render": function (data, type, row, meta) {
                         var grade = '<label for="grade" class="lbl_grade' + row.student_id + ' tt-color02 tt-badge" data-id="' + row.student_id + '">' + (data != null ? data : "-") + '</label>' +
@@ -990,6 +990,7 @@ $(function () {
                 },
                 {
                     "targets": 4,
+                    "width": "15%",
                     "className": "text-center",
                     "render": function (data, type, row, meta) {
                         var passTag = "";
@@ -1007,6 +1008,7 @@ $(function () {
                 },
                 {
                     "targets": 5,
+                    "width": "15%",
                     "className": "text-center",
                     "render": function (data, type, row, meta) {
 
@@ -1018,6 +1020,7 @@ $(function () {
                 },
                 {
                     "targets": 6,
+                    "width": "20%",
                     "render": function (data, type, row, meta) {
                         var att_status = '<select class="form-control" data-style="btn-outline-success" name="subjectmarks[' + meta.row + '][status]">' +
                             '<option value="">Choose</option>' +
@@ -1029,6 +1032,7 @@ $(function () {
                 },
                 {
                     "targets": 7,
+                    "width": "30%",
                     "className": "text-center",
                     "render": function (data, type, row, meta) {
                         var memo = '<input type="text" maxlength="45" class="form-control" name="subjectmarks[' + meta.row + '][memo]" id="' + row.student_id + '" class="form-control" value="' + (data != null ? data : "") + '">';

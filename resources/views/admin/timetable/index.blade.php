@@ -21,21 +21,15 @@
         border-bottom: 1px solid #dee2e6;
     }
 
-    .ellipse {
-        white-space: nowrap;
-        display: inline-block;
-        overflow: hidden;
-        text-overflow: ellipsis;
+    .dt-responsive {
+        width: 300%;
     }
 
-    .two-lines {
-        -webkit-line-clamp: 2;
-        display: inline-grid;
-        white-space: normal;
-    }
+    @media only screen and (min-device-width: 280px) and (max-device-width: 1200px) {
+        .dt-responsive {
+            width: 1000%;
+        }
 
-    .width {
-        width: 100px;
     }
 </style>
 <!-- Start Content-->
@@ -126,10 +120,8 @@
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
         </div> <!-- end col -->
-
     </div>
     <!-- end row -->
-
 
     <div class="row" id="timetablerow" style="display:none;">
         <div class="col-xl-12">
@@ -144,17 +136,14 @@
                         <h4 class="nav-link">
                             Schedule List
                         </h4>
-
                     </li>
                 </ul><br>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="table-responsive">
-                                <table class="table table-bordered dt-responsive" style="width:300%;">
+                                <table class="table table-bordered dt-responsive">
                                     <tbody id="timetable">
-
-
                                     </tbody>
                                 </table>
 

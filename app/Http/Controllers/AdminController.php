@@ -2840,10 +2840,17 @@ class AdminController extends Controller
     public function timeTableViewExam()
     {
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'admin.exam_timetable.schedule',
             [
                 'class' => $getclass['data'],
+                'semester' => $semester['data'],
+                'session' => $session['data'],
+                'current_semester' => $sem['data']['semester']['id'],
+                'current_session' => $sem['data']['session']
             ]
         );
     }
@@ -2851,11 +2858,20 @@ class AdminController extends Controller
     {
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $getexam = Helper::GetMethod(config('constants.api.exam_list'));
+
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+
         return view(
             'admin.exam_timetable.add_schedule',
             [
                 'class' => $getclass['data'],
                 'exam' => $getexam['data'],
+                'semester' => $semester['data'],
+                'session' => $session['data'],
+                'current_semester' => $sem['data']['semester']['id'],
+                'current_session' => $sem['data']['session']
             ]
         );
     }
@@ -2866,6 +2882,8 @@ class AdminController extends Controller
         $data = [
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id
         ];
 
         $response = Helper::PostMethod(config('constants.api.exam_timetable_list'), $data);
@@ -2902,11 +2920,14 @@ class AdminController extends Controller
         $data = [
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
             'exam_id' => $request->exam_id,
         ];
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.exam_timetable_get'), $data);
         $teacher = Helper::PostMethod(config('constants.api.teacher_list'), $data);
-
+        // dd($response);
         // dd($teacher);
         $hall_list = Helper::GetMethod(config('constants.api.exam_hall_list'));
         $hall = "";
@@ -2917,15 +2938,33 @@ class AdminController extends Controller
                 foreach ($response['data']['exam'] as $exam) {
 
                     // dd($exam['hall_id']);
+                    // dd($exam['paper_id']);
+                    // dd($exam['paper_name']);
+
                     $hall = "";
                     $dist = "";
                     $dist_type1 = "";
                     $dist_type2 = "";
+                    $paperList = "";
                     foreach ($hall_list['data'] as $list) {
                         if ($list['id'] == $exam['hall_id']) {
                             $hall .= '<option value="' . $list['id'] . '" selected>' . $list['hall_no'] . '</option>';
                         } else {
                             $hall .= '<option value="' . $list['id'] . '">' . $list['hall_no'] . '</option>';
+                        }
+                    }
+                    if (isset($exam['paper_id'])) {
+                        $paper_ids = explode(',', $exam['paper_id']);
+                        $paper_names = explode(',', $exam['paper_name']);
+                        if (!empty($paper_ids)) {
+                            // timetable_paper_id
+                            foreach ($paper_ids as $key => $val) {
+                                if ($val == $exam['timetable_paper_id']) {
+                                    $paperList .= '<option value="' . $val . '" selected>' . $paper_names[$key] . '</option>';
+                                } else {
+                                    $paperList .= '<option value="' . $val . '">' . $paper_names[$key] . '</option>';
+                                }
+                            }
                         }
                     }
 
@@ -2968,8 +3007,18 @@ class AdminController extends Controller
                                             <input type="text" readonly class="form-control"  value="' . $exam['subject_name'] . '" >
                                             <input type="hidden" name="exam[' . $row . '][subject_id]"  value="' . $exam['subject_id'] . '" >
                                         </div>
-                                    </td>
-                                    <td >
+                                    </td>';
+                    $output .= '<td>
+                                        <div class="form-group mb-2">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <select class="form-control" name="exam[' . $row . '][paper_id]" placeholder="Select">
+                                                        <option value="">Choose paper</option>' . $paperList . '</select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>';
+                    $output .= '<td >
                                         <div class="form-group mb-2">
                                             <input type="date" class="form-control" name="exam[' . $row . '][exam_date]"  value="' . $exam['exam_date'] . '">
                                         </div>
@@ -3035,6 +3084,8 @@ class AdminController extends Controller
             $response['class_id'] = $request->class_id;
             $response['section_id'] = $request->section_id;
             $response['exam_id'] = $request->exam_id;
+            $response['semester_id'] = $request->semester_id;
+            $response['session_id'] = $request->session_id;
         }
 
         // dd($homework);
@@ -3048,10 +3099,11 @@ class AdminController extends Controller
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
             'exam_id' => $request->exam_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
             'exam' => $request->exam,
         ];
 
-        // dd($data);
         $response = Helper::PostMethod(config('constants.api.exam_timetable_add'), $data);
         // dd($response);
         return $response;
@@ -3064,6 +3116,8 @@ class AdminController extends Controller
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
             'exam_id' => $request->exam_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id
         ];
         $response = Helper::PostMethod(config('constants.api.exam_timetable_get'), $data);
 
@@ -3084,6 +3138,7 @@ class AdminController extends Controller
                     }
                     $output .= '<tr>
                                     <td>' . $exam['subject_name'] . '</td>
+                                    <td>' . $exam['exam_paper_name'] . '</td>
                                     <td>' . $exam['exam_date'] . '</td>
                                     <td>' . $exam['time_start'] . '</td>
                                     <td>' . $exam['time_end'] . '</td>
@@ -3371,9 +3426,16 @@ class AdminController extends Controller
 
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         //$get_exams = Helper::GetMethod(config('constants.api.get_testresult_exams'));
-        // dd($response);     
+        // dd($response);
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view('admin.testresult.index', [
-            'classes' => $getclass['data']
+            'classes' => $getclass['data'],
+            'semester' => $semester['data'],
+            'session' => $session['data'],
+            'current_semester' => $sem['data']['semester']['id'],
+            'current_session' => $sem['data']['session']
         ]);
     }
 
@@ -3385,6 +3447,10 @@ class AdminController extends Controller
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
             "subject_id" => $request->subject_id,
+            "paper_id" => $request->paper_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id,
+            "grade_category" => $request->grade_category,
             "exam_id" => $request->exam_id
         ];
 
@@ -4936,11 +5002,13 @@ class AdminController extends Controller
         // dd($response)
         $getClasses = Helper::GetMethod(config('constants.api.class_list'));
         $grade_category = Helper::GetMethod(config('constants.api.grade_category'));
+        $get_paper_type = Helper::GetMethod(config('constants.api.get_paper_type'));
+
         return view('admin.exam_paper.list', [
             'classDetails' => $getClasses['data'],
-            'grade_category' => $grade_category['data']
+            'grade_category' => $grade_category['data'],
+            'get_paper_type' => $get_paper_type['data']
         ]);
-        // return view('admin.exam.list', ['term' => $term['data']]);
     }
     // get Exam paper list
     public function getExamPaperList(Request $request)

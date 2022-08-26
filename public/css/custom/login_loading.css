@@ -139,6 +139,7 @@
     width: 100%;
     padding-left: 10px;
 }
+
 .login-email {
     box-sizing: border-box;
     border: 1px solid #D3D8DE;
@@ -398,4 +399,149 @@
     background-color: #E9D528;
     ;
     transition: width .6s ease;
+}
+
+/* loading responsive */
+@media only screen and (min-device-width: 280px) and (max-device-width: 653px) {
+    .loadtext {
+        left: 20px;
+    }
+
+    .loadsa {
+        inline-size: 235px;
+        left: 22px;
+    }
+
+    .progress {
+        width: 235px;
+        left: 22px;
+    }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 660px) {
+    .loadtext {
+        left: 39px;
+    }
+
+    .loadsa {
+        inline-size: 270px;
+        left: 28px;
+    }
+
+    .progress {
+        width: 276px;
+        left: 28px;
+    }
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    .loadtext {
+        left: 50px;
+    }
+
+    .loadsa {
+        inline-size: 270px;
+        left: 45px;
+    }
+
+    .progress {
+        width: 276px;
+        left: 43px;
+    }
+}
+
+@media only screen and (min-device-width: 390px) and (max-device-width: 844px) {
+    .loadtext {
+        left: 70px;
+    }
+
+    .loadsa {
+        inline-size: 285px;
+        left: 60px;
+    }
+
+    .progress {
+        width: 275px;
+        left: 65px;
+    }
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 740px) {
+    .loadtext {
+        left: 55px;
+    }
+
+    .loadsa {
+        inline-size: 285px;
+        left: 45px;
+    }
+
+    .progress {
+        width: 275px;
+        left: 48px;
+    }
+}
+
+@media only screen and (min-device-width: 414px) and (max-device-width: 896px) {
+    .loadtext {
+        left: 80px;
+    }
+
+    .loadsa {
+        inline-size: 270px;
+        left: 70px;
+    }
+
+    .progress {
+        width: 276px;
+        left: 68px;
+    }
+}
+
+@media only screen and (min-device-width: 412px) and (max-device-width: 914px) {
+    .loadtext {
+        left: 71px;
+    }
+
+    .loadsa {
+        inline-size: 280px;
+        left: 60px;
+    }
+
+    .progress {
+        width: 276px;
+        left: 65px;
+    }
+}
+
+@media only screen and (min-device-width: 540px) and (max-device-width: 720px) {
+    .loadtext {
+        left: 135px;
+    }
+
+    .loadsa {
+        inline-size: 280px;
+        left: 125px;
+    }
+
+    .progress {
+        width: 276px;
+        left: 125px;
+    }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    .loadtext {
+        left: 220px;
+    }
+
+    .loadsa {
+        inline-size: 350px;
+        left: 175px;
+    }
+
+    .progress {
+        width: 350px;
+        left: 185px;
+    }
 }

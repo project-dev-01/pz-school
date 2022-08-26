@@ -3,11 +3,11 @@
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
-<style>
-.w-100 {
-    width: 150%!important;
-}
-</style>
+    <style>
+        .w-100 {
+            width: 150% !important;
+        }
+    </style>
 
     <!-- start page title -->
     <div class="row">
@@ -29,7 +29,7 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
                             Select Ground
@@ -37,24 +37,46 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="addScheduleFilter" method="post" action="{{ route('admin.exam_timetable.get') }}"  enctype="multipart/form-data" autocomplete="off">
+                    <form id="addScheduleFilter" method="post" action="{{ route('admin.exam_timetable.get') }}" enctype="multipart/form-data" autocomplete="off">
                         <div class="row">
-                        <div class="col-md-3">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="class_id">Standard<span class="text-danger">*</span></label>
-                                    <select id="class_id" class="form-control" name="class_id" >                             
+                                    <select id="class_id" class="form-control" name="class_id">
                                         <option value="">Select Standard</option>
-                                            @foreach($class as $cla)
-                                                <option value="{{$cla['id']}}">{{$cla['name']}}</option>
-                                            @endforeach
+                                        @foreach($class as $cla)
+                                        <option value="{{$cla['id']}}">{{$cla['name']}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="section_id">Class Name<span class="text-danger">*</span></label>
-                                    <select id="section_id" class="form-control"  name="section_id">                              
+                                    <select id="section_id" class="form-control" name="section_id">
                                         <option value="">Select Class Name</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="semester_id">Semester</label>
+                                    <select id="semester_id" class="form-control" name="semester_id">
+                                        <option value="0">Select Semester</option>
+                                        @foreach($semester as $sem)
+                                        <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="session_id">Session</label>
+                                    <select id="session_id" class="form-control" name="session_id">
+                                        <option value="0">Select Session</option>
+                                        @foreach($session as $ses)
+                                        <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{$ses['name']}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -63,14 +85,14 @@
                                     <label for="exam_id">Exam<span class="text-danger">*</span></label>
                                     <select id="exam_id" class="form-control" name="exam_id">
                                         <option value="">Select Exam</option>
-                                            @foreach($exam as $exa)
-                                                <option value="{{$exa['id']}}">{{$exa['name']}} ( {{$exa['term_id']}} )</option>
-                                            @endforeach
+                                        @foreach($exam as $exa)
+                                        <option value="{{$exa['id']}}">{{$exa['name']}} ( {{$exa['term_id']}} )</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
                                 Filter
@@ -86,10 +108,10 @@
     <!-- end row -->
 
 
-    <div class="row" id="listrow"  style="display:none">
+    <div class="row" id="listrow" style="display:none">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
                             Add Schedule
@@ -97,35 +119,38 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="addScheduleForm"  method="post" action="{{ route('admin.exam_timetable.add') }}"  enctype="multipart/form-data" autocomplete="off">
-                    @csrf
+                    <form id="addScheduleForm" method="post" action="{{ route('admin.exam_timetable.add') }}" enctype="multipart/form-data" autocomplete="off">
+                        @csrf
                         <div class="row">
                             <div class="col-lg-12">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-centered dt-responsive nowrap w-100" width="100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>Subject <span class="text-danger">*</span></th>
-                                                    <th>Date <span class="text-danger">*</span></th>
-                                                    <th>Starting Time <span class="text-danger">*</span></th>
-                                                    <th>Ending Time <span class="text-danger">*</span></th>
-                                                    <th>Hall Room <span class="text-danger">*</span></th>
-                                                    <th>Distributor<span class="text-danger">*</span></th>
-                                                    <th>Marks<span class="text-danger">*</span></th>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-centered dt-responsive nowrap w-100" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Subject <span class="text-danger">*</span></th>
+                                                <th>Paper Name</th>
+                                                <th>Date <span class="text-danger">*</span></th>
+                                                <th>Starting Time <span class="text-danger">*</span></th>
+                                                <th>Ending Time <span class="text-danger">*</span></th>
+                                                <th>Location <span class="text-danger">*</span></th>
+                                                <th>Distributor<span class="text-danger">*</span></th>
+                                                <th>Marks<span class="text-danger">*</span></th>
 
-                                                </tr>
-                                            </thead>
-                                            <tbody id="subject-schedule">
-                                           
-                                            </tbody>
-                                        </table>
-                                    </div> <!-- end table-responsive-->                             
-                        </div>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="subject-schedule">
+
+                                        </tbody>
+                                    </table>
+                                </div> <!-- end table-responsive-->
+                            </div>
 
                         </div>
-                        <input type="hidden" id="form_class_id"  name="class_id">
+                        <input type="hidden" id="form_class_id" name="class_id">
                         <input type="hidden" id="form_section_id" name="section_id">
                         <input type="hidden" id="form_exam_id" name="exam_id">
+                        <input type="hidden" id="form_session_id" name="session_id">
+                        <input type="hidden" id="form_semester_id" name="semester_id">
                         <!-- end row-->
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
@@ -153,8 +178,6 @@
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var scheduleList = "{{ route('admin.timetable.viewexam') }}";
     var getTeacherList = "{{config('constants.api.teacher_list')}}";
-    
-    
 </script>
 <script src="{{ asset('public/js/custom/exam_timetable.js') }}"></script>
 

@@ -2,9 +2,9 @@ $(function () {
 
     $("#class_id").on('change', function (e) {
         e.preventDefault();
-        var class_id = $(this).val(); 
-        console.log("select box",class_id)
-        
+        var class_id = $(this).val();
+        console.log("select box", class_id)
+
         $("#section_id").empty();
         $("#section_id").append('<option value="">Select Class Name</option>');
         $.post(sectionByClass, { class_id: class_id }, function (res) {
@@ -19,40 +19,40 @@ $(function () {
     $(document).on('change', '.distributor_type', function (e) {
         e.preventDefault();
 
-        
+
         var dist = "";
-        var distributor_type =  $(this).val(); 
-        
-        var id =  $(this).data('id'); 
+        var distributor_type = $(this).val();
+
+        var id = $(this).data('id');
         var distributor = $(this).closest('td').find('.distributor');
         var class_id = $("#class_id").val();
         var section_id = $("#section_id").val();
 
         distributor.empty();
 
-        if (distributor_type=="1") {
+        if (distributor_type == "1") {
 
-            distributor.append('<select  class="form-control" name="exam['+id +'][distributor]">');
+            distributor.append('<select  class="form-control" name="exam[' + id + '][distributor]">');
 
-            $.post(getTeacherList, { 
+            $.post(getTeacherList, {
                 token: token,
                 branch_id: branchID,
                 class_id: class_id,
-                section_id: section_id 
+                section_id: section_id
             }, function (res) {
                 if (res.code == 200) {
-                    
+
                     $.each(res.data, function (key, val) {
                         distributor.find('select').append('<option value="' + val.id + '">' + val.name + '</option>');
                     });
-                   
+
                 }
-                
+
             }, 'json');
 
             distributor.append('</select>');
         } else {
-            var dist = '<input type="text" name="exam['+id+'][distributor]" class="form-control"   placeholder="Distributor Name">';
+            var dist = '<input type="text" name="exam[' + id + '][distributor]" class="form-control"   placeholder="Distributor Name">';
             distributor.append(dist);
         }
 
@@ -63,11 +63,16 @@ $(function () {
         var exam_id = $button.attr('data-exam_id');
         var class_id = $("#class_id").val();
         var section_id = $("#section_id").val();
+        var semester_id = $("#semester_id").val();
+        var session_id = $("#session_id").val();
         // return false;
-        $.post(viewExamTimetable, { exam_id: exam_id,class_id: class_id,section_id: section_id }, function (res) {
+        $.post(viewExamTimetable, {
+            exam_id: exam_id, class_id: class_id, section_id: section_id,
+            semester_id: semester_id, session_id: session_id
+        }, function (res) {
             if (res.code == 200) {
-                var exam_name = "Exam : "+res.data.details.exam_name;
-                var class_section = "Class : "+res.class_section;
+                var exam_name = "Exam : " + res.data.details.exam_name;
+                var class_section = "Class : " + res.class_section;
                 $("#class-section").html(class_section);
                 $("#exam").html(exam_name);
                 $("#exam-timetable").html(res.table);
@@ -79,8 +84,8 @@ $(function () {
 
     $("#examTimetableFilter").validate({
         rules: {
-            class_id:"required",
-            section_id:"required",
+            class_id: "required",
+            section_id: "required",
         }
     });
 
@@ -98,9 +103,9 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
-                    
+
                     if (data.code == 200) {
-                                    
+
                         $("#schedulerow").show("slow");
                         $("#exam-schedule").html(data.table);
                     } else {
@@ -114,9 +119,9 @@ $(function () {
 
     $("#addScheduleFilter").validate({
         rules: {
-            class_id:"required",
-            section_id:"required",
-            exam_id:"required",
+            class_id: "required",
+            section_id: "required",
+            exam_id: "required",
         }
     });
 
@@ -135,12 +140,15 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
-                    
+                    // console.log("___________")
+                    // console.log(data)
                     if (data.code == 200) {
-                        
+
                         $("#form_class_id").val(data.class_id);
                         $("#form_section_id").val(data.section_id);
                         $("#form_exam_id").val(data.exam_id);
+                        $("#form_session_id").val(data.session_id);
+                        $("#form_semester_id").val(data.semester_id);
                         $("#listrow").show("slow");
                         $("#subject-schedule").html(data.table);
                     } else {
@@ -152,7 +160,7 @@ $(function () {
         }
     });
 
-    
+
     $('#addScheduleForm').on('submit', function (e) {
         e.preventDefault();
         $("#overlay").fadeIn(300);

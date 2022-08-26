@@ -18,7 +18,10 @@ class CreateTimetableExamTable extends Migration
             $table->integer('exam_id');
             $table->integer('class_id');
             $table->integer('section_id');
+            $table->integer('semester_id');
+            $table->integer('session_id');
             $table->integer('subject_id');
+            $table->string('paper_id')->nullable();
             $table->time('time_start');
             $table->time('time_end');
             $table->string('marks');

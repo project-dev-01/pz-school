@@ -46,6 +46,9 @@ return [
         'branch_by_section' => $url.'/branch-by-section',
         'section_by_class' => $url.'/section-by-class',
         'subject_by_class' => $url.'/subject-by-class',  
+        'subject_by_exam_names' => $url.'/subject-by-exam-names',  
+        'exam_by_subjects' => $url.'/exam-by-subjects', 
+        'subject_by_papers' => $url.'/subject-by-papers', 
         'timetable_subject' => $url.'/timetable-subject',
         'exam_by_classSection'=>$url.'/exam-by-classSection',
         'exam_by_classSubject'=>$url.'/exam-by-classSubject',
@@ -60,6 +63,8 @@ return [
         'all_std_list'=>$url.'/all_std_list',
         'all_bysubject_list'=>$url.'/all_bysubject_list',
         'get_grade_bysubject'=>$url.'/get_grade_bysubject',
+        'get_paper_list'=>$url.'/get_paper_list',
+        
         // class url
         'class_add' => $url.'/classes/add',
         'class_list' => $url.'/classes/list',
@@ -539,8 +544,11 @@ return [
         'grade_category_update' => $url.'/grade_category/update',
         'grade_category_delete' => $url.'/grade_category/delete',
         // get class by all subjects
-        'classes_by_all_subjects' => $url.'/classes/all_subjects'
+        'classes_by_all_subjects' => $url.'/classes/all_subjects',
+        // paper type list
+        'get_paper_type' => $url.'/paper_type/list'
 
+        
         
     ]
 

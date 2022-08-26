@@ -19,6 +19,10 @@ class StudentMarks extends Migration
             $table->integer('class_id');
             $table->integer('section_id');
             $table->integer('subject_id');
+            $table->integer('paper_id');
+            $table->integer('grade_category');
+            $table->integer('semester_id');
+            $table->integer('session_id');
             $table->integer('exam_id');
             $table->integer('score');
             $table->string('pass_fail')->nullable();

@@ -54,7 +54,8 @@
             <li class="dropdown d-none d-lg-inline-block allChild">
                 <div class="form-group ">
                     <label class="control-label"></label>
-                    <select class="form-control custom-select" name="all_child" id="changeChildren" required>
+                    <select class="form-control custom-select" style="white-space: nowrap; text-overflow: ellipsis; margin-top: 20px;
+			  margin-left:4px; max-height: 30px; padding-top: 5px; -webkit-line-clamp: 2; display: inline-grid; width:150px;" name="all_child" id="changeChildren" required>
                         <!-- <option disabled >Select Children</option> -->
                         @if(Session::get('all_child'))
                         @forelse (Session::get('all_child') as $child)
