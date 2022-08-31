@@ -55,7 +55,7 @@ class CommonController extends Controller
         config(['database.connections.mysql_new_connection' => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST', 'localhost'),
-            'database'  => env('DB_DATABASE', 'school-management-system-01'),
+            'database'  => env('DB_DATABASE', 'paxsuzen_pz-school'),
             'username'  => env('DB_USERNAME', 'root'),
             'password'  => env('DB_PASSWORD', ''),
             'charset'   => 'utf8',

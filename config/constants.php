@@ -308,6 +308,7 @@ return [
          'exam_timetable_add' => $url.'/exam_timetable/add',
          'exam_timetable_list' => $url.'/exam_timetable/list',
          'exam_timetable_get' => $url.'/exam_timetable/get',
+         'exam_timetable_delete' => $url.'/exam_timetable/delete',
 
         // grade url
         'grade_add' => $url.'/grade/add',
@@ -546,9 +547,11 @@ return [
         // get class by all subjects
         'classes_by_all_subjects' => $url.'/classes/all_subjects',
         // paper type list
-        'get_paper_type' => $url.'/paper_type/list'
+        'get_paper_type' => $url.'/paper_type/list',
 
         
+        'employee_punchcard' => $url.'/employee/punchcard',
+        'employee_punchcard_check' => $url.'/employee/punchcard/check',
         
     ]
 

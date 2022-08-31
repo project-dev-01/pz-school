@@ -2898,7 +2898,7 @@ class AdminController extends Controller
                     $output .= '<tr>
                                     <td>' . $row . '</td>
                                     <td>' . $exam['name'] . '</td>
-                                    <td><div class="button-list"><a href="javascript:void(0)" class="btn btn-blue btn-sm waves-effect waves-light" data-toggle="modal" data-target="#examTimeTable" data-exam_id="' . $exam['exam_id'] . '" id=""><i class="fe-eye"></i></a><a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="" id=""><i class="fe-trash-2"></i></a></div></td>
+                                    <td><div class="button-list"><a href="javascript:void(0)" class="btn btn-blue btn-sm waves-effect waves-light" data-toggle="modal" data-target="#examTimeTable" data-exam_id="' . $exam['exam_id'] . '" id=""><i class="fe-eye"></i></a><a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="' . $exam['exam_id'] . '" id="deleteExamTimetableBtn"><i class="fe-trash-2"></i></a></div></td>
                                 </tr>';
                     $row++;
                 }
@@ -3157,6 +3157,45 @@ class AdminController extends Controller
         }
 
         // dd($response);
+        return $response;
+    }
+
+    public function deleteExamTimetable(Request $request)
+    {
+
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
+            'exam_id' => $request->exam_id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.exam_timetable_delete'), $data);
+        // dd($response);
+
+        if ($response['code'] == "200") {
+            $output = "";
+            $row = 1;
+            if ($response['data']) {
+                foreach ($response['data'] as $exam) {
+                    $output .= '<tr>
+                                    <td>' . $row . '</td>
+                                    <td>' . $exam['name'] . '</td>
+                                    <td><div class="button-list"><a href="javascript:void(0)" class="btn btn-blue btn-sm waves-effect waves-light" data-toggle="modal" data-target="#examTimeTable" data-exam_id="' . $exam['exam_id'] . '" id=""><i class="fe-eye"></i></a><a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="' . $exam['exam_id'] . '" id="deleteExamBtn"><i class="fe-trash-2"></i></a></div></td>
+                                </tr>';
+                    $row++;
+                }
+            } else {
+                $output .= '<tr>
+                                    <td colspan="7"> No Data Available</td>
+                                </tr>';
+            }
+
+            $response['table'] = $output;
+        }
+
+        // dd($homework);
         return $response;
     }
 

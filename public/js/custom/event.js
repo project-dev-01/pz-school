@@ -97,6 +97,17 @@ $(function () {
             }
         }
 
+        if($("#audience").val()=="3"){
+            var group=($("#group_row").val()).length;
+            if(group == 0){
+                $(form).find('span.group_error').text("This field is required.");
+                return false;
+            } else {
+                $(form).find('span.group_error').text("");
+            }
+        }
+
+
         //Date validate
         var startDate = $("#event_start_date").val();
         var endDate = $("#event_end_date").val();
@@ -171,6 +182,15 @@ $(function () {
                 return false;
             } else {
                 $(form).find('span.class_error').text("");
+            }
+        }
+        if($("#edit_audience").val()=="3"){
+            var group=($("#edit_group_row").val()).length;
+            if(group == 0){
+                $(form).find('span.group_error').text("This field is required.");
+                return false;
+            } else {
+                $(form).find('span.group_error').text("");
             }
         }
 
@@ -434,12 +454,15 @@ $(function () {
 
         if ( a == "1") {
             $('#edit_class').css("display", "none");
+            $('#edit_group_row').css("display", "none");
         }
         if ( a == "2") {
             $('#edit_class').css("display", "BLOCK");
+            $('#edit_group_row').css("display", "none");
         }
         if ( a == "3") {
             $('#edit_class').css("display", "none");
+            $('#edit_group_row').css("display", "BLOCK");
         }
     });
 

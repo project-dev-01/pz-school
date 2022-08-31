@@ -257,6 +257,9 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
 // Route::get('login', 'AuthController@login');
 // Route::get('logout', 'AuthController@logout');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
+Route::get('/employee/punchcard/{branch}', [AuthController::class, 'employeePunchCardLogin'])->name('employee.punchcard.login');
+Route::post('/employee/punchcard/', [AuthController::class, 'employeePunchCard'])->name('employee.punchcard');
+Route::post('/punchcarddetails', [AuthController::class, 'punchCardDetails'])->name('employee.punchcarddetails');
 Route::get('/loading', [AuthController::class, 'showLoadingForm'])->name('admin.loading');
 Route::any('/authenticate', [AuthController::class, 'authenticate'])->name('admin.authenticate');
 Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
@@ -516,6 +519,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin']], function () {
     Route::post('timetable/getexam', [AdminController::class, 'getExamTimetable'])->name('admin.exam_timetable.get');
     Route::post('timetable/viewexam', [AdminController::class, 'viewExamTimetable'])->name('admin.exam_timetable.view');
     Route::post('timetable/addexam', [AdminController::class, 'addExamTimetable'])->name('admin.exam_timetable.add');
+    Route::post('timetable/deleteexam', [AdminController::class, 'deleteExamTimetable'])->name('admin.exam_timetable.delete');
 
     Route::get('timetable/viewexam', [AdminController::class, 'timeTableViewExam'])->name('admin.timetable.viewexam');
     Route::get('timetable/set_examwise', [AdminController::class, 'timeTableSetExamWise'])->name('admin.timetable.set_examwise');

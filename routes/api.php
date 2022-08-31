@@ -24,6 +24,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('login', [AuthController::class, 'authenticate']);
 Route::post('reset_password', [AuthController::class, 'resetPassword']);
 Route::post('reset_password_validation', [AuthController::class, 'resetPasswordValidation']);
+
+
+Route::post('employee/punchcard', [AuthController::class, 'employeePunchCard']);
+Route::post('employee/punchcard/check', [AuthController::class, 'employeePunchCardCheck']);
 Route::get('get-countries', [CommonController::class, 'countryList']);
 Route::post('get-states', [CommonController::class, 'getStateByIdList']);
 Route::post('get-cities', [CommonController::class, 'getCityByIdList']);
@@ -215,6 +219,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('exam_timetable/add', [ApiController::class, 'addExamTimetable']);
     Route::post('exam_timetable/list', [ApiController::class, 'listExamTimetable']);
     Route::post('exam_timetable/get', [ApiController::class, 'getExamTimetable']);
+    Route::post('exam_timetable/delete', [ApiController::class, 'deleteExamTimetable']);
 
 
     Route::get('relation/list', [ApiController::class, 'getRelationList']);

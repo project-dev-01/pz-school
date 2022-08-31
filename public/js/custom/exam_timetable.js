@@ -184,4 +184,40 @@ $(function () {
             }
         });
     });
+
+    
+    // delete Exam Timetable
+    $(document).on('click','#deleteExamTimetableBtn', function(){
+        var class_id = $("#class_id").val();
+        var section_id = $("#section_id").val();
+        var semester_id = $("#semester_id").val();
+        var session_id = $("#session_id").val();
+        var exam_id = $(this).data('id');
+        swal.fire({
+             title:'Are you sure?',
+             html:'You want to <b>delete</b> this Exam Timetable',
+             showCancelButton:true,
+             showCloseButton:true,
+             cancelButtonText:'Cancel',
+             confirmButtonText:'Yes, Delete',
+             cancelButtonColor:'#d33',
+             confirmButtonColor:'#556ee6',
+             width:400,
+             allowOutsideClick:false
+        }).then(function(result){
+              if(result.value){
+                  $.post(examDelete,{exam_id:exam_id,class_id: class_id, section_id: section_id,
+                    semester_id: semester_id, session_id: session_id}, function(data){
+                        if (data.code == 200) {
+                            $("#schedulerow").show("slow");
+                            $("#exam-schedule").html(data.table);
+                            toastr.success(data.message);
+                        } else {
+                            $("#schedulerow").hide("slow");
+                            toastr.error(data.message);
+                        }
+                  },'json');
+              }
+        });
+    });
 });

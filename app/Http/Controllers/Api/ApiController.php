@@ -9545,6 +9545,51 @@ class ApiController extends BaseController
             return $this->successResponse($details, 'Exam Timetable record fetch successfully');
         }
     }
+    
+    // delete Exam Timetable
+    public function deleteExamTimetable(Request $request)
+    {
+
+        $id = $request->exam_id;
+        // return $request;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $con = $this->createNewConnection($request->branch_id);
+            // delete 
+            $query = $con->table('timetable_exam')->where([
+                ['exam_id', $request->exam_id],
+                ['class_id', $request->class_id],
+                ['section_id', $request->section_id],
+                ['semester_id', $request->semester_id],
+                ['session_id', $request->session_id]
+            ])->delete();
+            
+            // get data
+            $details = $con->table('timetable_exam')->select('exam.name', 'timetable_exam.exam_id')->leftJoin('exam', 'timetable_exam.exam_id', '=', 'exam.id')
+            ->where([
+                ['class_id', $request->class_id],
+                ['section_id', $request->section_id],
+                ['semester_id', $request->semester_id],
+                ['session_id', $request->session_id]
+            ])
+            ->groupBy('timetable_exam.exam_id')
+            ->get();
+
+            if ($query) {
+                return $this->successResponse($details, 'Exam Timetable have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+
     public function examslist(Request $request)
     {
         $validator = \Validator::make($request->all(), [

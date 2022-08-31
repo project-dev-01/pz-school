@@ -146,6 +146,7 @@
 <script>
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var viewExamTimetable = "{{ route('admin.exam_timetable.view') }}";
+    var examDelete  = "{{ route('admin.exam_timetable.delete') }}";
 </script>
 <script src="{{ asset('public/js/custom/exam_timetable.js') }}"></script>
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cookie;
 
 class AuthController extends Controller
 {
@@ -31,6 +33,76 @@ class AuthController extends Controller
     {
         return view('auth.loading');
     }
+    
+    public function employeePunchCardLogin(Request $request, $branch)
+    {
+        
+      
+        // $minutes = 60;
+        // $response = new Response('Set Cookie');
+        // $response->withCookie(cookie('name', 'MyValue', $minutes));
+        
+    //   return $response;
+        // $data = [
+        //     'branch_id' => $branch,
+        //     'id' => $id
+        // ];
+        // $response = Http::post(config('constants.api.employee_punchcard'), $data);
+        // return view('auth.punch-card',['response' => $response['data']]);
+        // dd($response->json());
+        return view('auth.punch-card-login');
+    }
+    public function employeePunchCard(Request $request)
+    {
+        
+        $branch = $request->cookie('branch_id');
+        $user = $request->cookie('user_id');
+        // dd($value);
+        $data = [
+                'branch_id' => $branch,
+                'id' => $user
+            ];
+        $response = Http::post(config('constants.api.employee_punchcard'), $data);
+    }
+    public function punchCardDetails(Request $request)
+    {
+        #luvupqvyc
+        $minutes = 600000;
+        $email = $request->email;
+        $password = $request->password;
+        $check = Http::post(config('constants.api.login'), [
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+
+        $user_id = "";
+        $branch_id = "";
+        $userDetails = $check->json();
+        if ($userDetails['code'] == 200) {
+            if ($userDetails['data']['subsDetails']) {
+                if ($userDetails['data']['user']['role_id'] != 1) {
+                    $branch_id = $userDetails['data']['user']['branch_id'];
+                    $user_id = $userDetails['data']['user']['user_id'];
+                    Cookie::queue(Cookie::make('email', $email, $minutes));
+                    Cookie::queue(Cookie::make('password', $password, $minutes));
+                    Cookie::queue(Cookie::make('branch_id', $branch_id, $minutes));
+                    Cookie::queue(Cookie::make('user_id', $user_id, $minutes));
+                }
+            }
+        }
+        $data = [
+            'branch_id' => $branch_id,
+            'id' => $user_id
+        ];
+        $response = Http::post(config('constants.api.employee_punchcard_check'), $data);
+        $output = $response->json();
+        return view('auth.punch-card',
+            [
+                'punchcard' => $output['data']
+            ]
+        );
+    }
+    
     public function showLoginFormSA(Request $request)
     {
         if (session()->has('role_id')) {

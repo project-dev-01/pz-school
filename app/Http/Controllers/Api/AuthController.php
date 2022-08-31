@@ -194,4 +194,120 @@ class AuthController extends BaseController
             return $this->send500Error('Invalid token!', ['error' => 'Invalid token!']);
         }
     }
+
+    
+    // employee punchcard check
+    public function employeePunchCardCheck(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        //    return $request;
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+
+            $success = [];
+            $check_out = NULL;
+            $check_in = NULL;
+            $hours = NULL;
+            $id = $request->id;
+            $conn = $this->createNewConnection($request->branch_id);
+            $date = Carbon::now()->format('Y-m-d');
+            $time = Carbon::now()->format('H:i:s');
+            if ($conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id]])->count() > 0) {
+
+                $validate = $conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id]])->first();
+                if ($validate->check_in && !$validate->check_out) {
+                    $success = "Check Out";
+                }
+            }else {
+                $success['check_in'] = "Check In";
+                $success['check_out'] = "Check Out";
+                $success['check_in_status'] = "";
+                $success['check_out_status'] = "hidden";
+            }
+            // return $now;
+            return $this->successResponse($success, 'Status');
+        }
+    }
+    
+    // employee punchcard
+    public function employeePunchCard(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        //    return $request;
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+
+            $success = [];
+            $check_out = NULL;
+            $check_in = NULL;
+            $hours = NULL;
+            $id = $request->id;
+            $conn = $this->createNewConnection($request->branch_id);
+            $date = Carbon::now()->format('Y-m-d');
+            $time = Carbon::now()->format('H:i:s');
+            if ($conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id]])->count() > 0) {
+
+                $validate = $conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id]])->first();
+               
+                
+                if ($validate->check_in && !$validate->check_out) {
+                    $check_in = $validate->check_in;
+                    $check_out = $time;
+                    $loginTime = strtotime($check_in);
+                    $logoutTime = strtotime($check_out);
+                    $diff = $logoutTime - $loginTime;
+                    $hours = date('H:i', $diff);
+                    $success = "Checked Out";
+                } else if ($validate->check_in && $validate->check_out) {
+                    $check_in = $validate->check_in;
+                    $check_out = $validate->check_out;
+                    $hours = $validate->hours;
+                    $success = "Already Checked Out";
+                }else {
+                    $check_in = $time;
+                    $success = "Checked In";
+                }
+                // dd($success);
+                // dd($check_out);
+                $query = $conn->table('staff_attendances')->where('id', $validate->id)->update([
+                    'date' => $date,
+                    'check_in' => $check_in,
+                    'check_out' => $check_out,
+                    'status' => "present",
+                    'hours' => $hours,
+                    'staff_id' => $id,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+            }else {
+                $success = "Checked In";
+                $query = $conn->table('staff_attendances')->insert([
+                    'date' => $date,
+                    'check_in' => $time,
+                    'status' => "present",
+                    'staff_id' => $id,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+            }
+            // return $now;
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Attendance has been successfully saved');
+            }
+        }
+    }
 }
