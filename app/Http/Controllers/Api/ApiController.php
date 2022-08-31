@@ -4753,6 +4753,8 @@ class ApiController extends BaseController
             'token' => 'required',
             'class_id' => 'required',
             'section_id' => 'required',
+            'semester_id' => 'required',
+            'session_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -4767,7 +4769,8 @@ class ApiController extends BaseController
                 DB::raw('CONCAT(staffs.first_name, " ", staffs.last_name) as teacher_name'),
                 'subjects.name as subject_name'
             )
-                ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
+                ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')
+                ->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
                 ->where([
                     ['timetable_class.day', $request->day],
                     ['timetable_class.class_id', $request->class_id],
@@ -4795,6 +4798,7 @@ class ApiController extends BaseController
                 ->where('sa.class_id', $request->class_id)
                 ->where('sa.section_id', $request->section_id)
                 ->where('sa.type', '=', '0')
+                // ->where('sa.exam_exclude', '=', '0')
                 // get teacher 
                 // ->where('sa.teacher_id', '!=', '0')
                 ->get();
@@ -4951,7 +4955,7 @@ class ApiController extends BaseController
                         'break' => $break,
                         'break_type' => $break_type,
                         'subject_id' => $subject_id,
-                        'teacher_id' => $teacher_id,
+                        'teacher_id' => (isset($teacher_id) ? $teacher_id : 0),
                         'class_room' => $table['class_room'],
                         'time_start' => $table['time_start'],
                         'time_end' => $table['time_end'],
@@ -4964,13 +4968,14 @@ class ApiController extends BaseController
                 } else {
                     // echo "<pre>";
                     // echo $teacher_id;
+                    // exit;
                     $query = $staffConn->table('timetable_class')->insertGetId([
                         'class_id' => $request['class_id'],
                         'section_id' => $request['section_id'],
                         'break' => $break,
                         'break_type' => $break_type,
                         'subject_id' => $subject_id,
-                        'teacher_id' => $teacher_id,
+                        'teacher_id' => (isset($teacher_id) ? $teacher_id : 0),
                         'class_room' => $table['class_room'],
                         'time_start' => $table['time_start'],
                         'time_end' => $table['time_end'],
@@ -9462,6 +9467,11 @@ class ApiController extends BaseController
         $validator = \Validator::make($request->all(), [
             'branch_id' => 'required',
             'token' => 'required',
+            'exam_id' => 'required',
+            'session_id' => 'required',
+            'semester_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required'
         ]);
 
         // return $request;
@@ -9476,67 +9486,62 @@ class ApiController extends BaseController
             $exam_id = $request->exam_id;
             $session_id = $request->session_id;
             $semester_id = $request->semester_id;
-            $details['exam'] = $con->table('subject_assigns')
+            $details['exam'] = $con->table('subject_assigns as sa')
                 ->select(
-                    'subjects.name as subject_name',
-                    'exam_hall.hall_no',
-                    'classes.name as class_name',
-                    'sections.name as section_name',
-                    'exam.name as exam_name',
-                    'ep.paper_name as exam_paper_name',
-                    'subject_assigns.class_id as class_id',
-                    'subject_assigns.section_id as section_id',
-                    'subject_assigns.subject_id as subject_id',
-                    'timetable_exam.exam_id',
-                    'timetable_exam.semester_id',
-                    'timetable_exam.session_id',
-                    'timetable_exam.paper_id as timetable_paper_id',
-                    'timetable_exam.time_start',
-                    'timetable_exam.time_end',
-                    'timetable_exam.exam_date',
-                    'timetable_exam.hall_id',
-                    'timetable_exam.marks',
-                    'timetable_exam.distributor_type',
-                    'timetable_exam.distributor',
-                    'timetable_exam.distributor_id',
-                    'timetable_exam.id',
-                    DB::raw("GROUP_CONCAT(DISTINCT  exam_papers.id) as paper_id"),
-                    DB::raw("GROUP_CONCAT(DISTINCT  exam_papers.paper_name) as paper_name")
+                    'sbj.name as subject_name',
+                    'eh.hall_no',
+                    'cl.name as class_name',
+                    'sec.name as section_name',
+                    'ex.name as exam_name',
+                    'ep.paper_name as paper_name',
+                    'ep.id as paper_id',
+                    'sa.class_id as class_id',
+                    'sa.section_id as section_id',
+                    'sa.subject_id as subject_id',
+                    'ttex.exam_id',
+                    'ttex.semester_id',
+                    'ttex.session_id',
+                    'ttex.paper_id as timetable_paper_id',
+                    'ttex.time_start',
+                    'ttex.time_end',
+                    'ttex.exam_date',
+                    'ttex.hall_id',
+                    'ttex.marks',
+                    'ttex.distributor_type',
+                    'ttex.distributor',
+                    'ttex.distributor_id',
+                    'ttex.id',
+                    // DB::raw("GROUP_CONCAT(DISTINCT  exp.id) as paper_id"),
+                    // DB::raw("GROUP_CONCAT(DISTINCT  exp.paper_name) as paper_name")
                 )
-                ->join('subjects', 'subject_assigns.subject_id', '=', 'subjects.id')
-                ->join('classes', 'subject_assigns.class_id', '=', 'classes.id')
-                ->join('sections', 'subject_assigns.section_id', '=', 'sections.id')
-                ->leftJoin('exam_papers', function ($join) use ($exam_id) {
-                    $join->on('subject_assigns.class_id', '=', 'exam_papers.class_id')
-                        ->on('subject_assigns.subject_id', '=', 'exam_papers.subject_id')
-                        ->groupBy('exam_papers.subject_id');
+                ->join('subjects as sbj', 'sa.subject_id', '=', 'sbj.id')
+                ->join('classes as cl', 'sa.class_id', '=', 'cl.id')
+                ->join('sections as sec', 'sa.section_id', '=', 'sec.id')
+                ->join('exam_papers as ep', function ($join) use ($exam_id) {
+                    $join->on('sa.class_id', '=', 'ep.class_id')
+                        ->on('sa.subject_id', '=', 'ep.subject_id');
                 })
                 ->where([
-                    ['subject_assigns.class_id', $request->class_id],
-                    ['subject_assigns.section_id', $request->section_id],
-                    ['subject_assigns.type', '=', '0'],
-                    ['subjects.exam_exclude', '=', '0']
+                    ['sa.class_id', $request->class_id],
+                    ['sa.section_id', $request->section_id],
+                    ['sa.type', '=', '0'],
+                    ['sbj.exam_exclude', '=', '0']
                 ])
-                ->leftJoin('timetable_exam', function ($join) use ($exam_id, $semester_id, $session_id) {
-                    $join->on('subject_assigns.class_id', '=', 'timetable_exam.class_id')
-                        ->on('subject_assigns.section_id', '=', 'timetable_exam.section_id')
-                        ->on('subject_assigns.subject_id', '=', 'timetable_exam.subject_id')
-                        ->on('timetable_exam.semester_id', '=', DB::raw("'$semester_id'"))
-                        ->on('timetable_exam.session_id', '=', DB::raw("'$session_id'"))
-                        ->where('timetable_exam.exam_id', $exam_id);
+                ->leftJoin('timetable_exam as ttex', function ($join) use ($exam_id, $semester_id, $session_id) {
+                    $join->on('sa.class_id', '=', 'ttex.class_id')
+                        ->on('sa.section_id', '=', 'ttex.section_id')
+                        ->on('sa.subject_id', '=', 'ttex.subject_id')
+                        ->on('ttex.semester_id', '=', DB::raw("'$semester_id'"))
+                        ->on('ttex.session_id', '=', DB::raw("'$session_id'"))
+                        ->on('ttex.paper_id', '=', 'ep.id')
+                        ->where('ttex.exam_id', $exam_id);
                 })
-                ->leftJoin('exam', 'timetable_exam.exam_id', '=', 'exam.id')
-                ->leftJoin('exam_hall', 'timetable_exam.hall_id', '=', 'exam_hall.id')
-                ->leftJoin('exam_papers as ep', 'timetable_exam.paper_id', '=', 'ep.id')
-                ->groupBy('subject_assigns.id')
-                ->groupBy('subject_assigns.subject_id')
+                ->leftJoin('exam as ex', 'ttex.exam_id', '=', 'ex.id')
+                ->leftJoin('exam_hall as eh', 'ttex.hall_id', '=', 'eh.id')
+                ->orderBy('sa.id', 'asc')
                 ->get();
-            // dd($details['exam']);
             $exam_name = $con->table('exam')->where('id', $exam_id)->first();
-
-            //    dd($exam_name->name);
             $details['details']['exam_name'] = $exam_name->name;
-            // return $details;
             return $this->successResponse($details, 'Exam Timetable record fetch successfully');
         }
     }
@@ -10904,7 +10909,10 @@ class ApiController extends BaseController
             'class_id' => 'required',
             'section_id' => 'required',
             'subject_id' => 'required',
-            'student_id' => 'required'
+            'student_id' => 'required',
+            'paper_id' => 'required',
+            'semester_id' => 'required',
+            'session_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -11014,13 +11022,19 @@ class ApiController extends BaseController
                         $join->on('te.exam_id', '=', 'sm.exam_id')
                             ->on('te.class_id', '=', 'sm.class_id')
                             ->on('te.section_id', '=', 'sm.section_id')
-                            ->on('te.subject_id', '=', 'sm.subject_id');
+                            ->on('te.subject_id', '=', 'sm.subject_id')
+                            ->on('te.semester_id', '=', 'sm.semester_id')
+                            ->on('te.session_id', '=', 'sm.session_id')
+                            ->on('te.paper_id', '=', 'sm.paper_id');
                     })
                     ->where([
                         ['sm.class_id', '=', $request->class_id],
                         ['sm.section_id', '=', $request->section_id],
                         ['sm.subject_id', '=', $request->subject_id],
-                        ['sm.student_id', '=', $request->student_id]
+                        ['sm.student_id', '=', $request->student_id],
+                        ['sm.semester_id', '=', $request->semester_id],
+                        ['sm.session_id', '=', $request->session_id],
+                        ['sm.paper_id', '=', $request->paper_id]
                     ])
                     ->groupBy('sm.exam_id')
                     ->orderBy('te.exam_date', 'ASC')

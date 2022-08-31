@@ -1058,7 +1058,13 @@ $(function () {
         var class_id = $("#changeClassName").val();
         var section_id = $("#sectionID").val();
         var subject_id = $("#subjectID").val();
-
+        var paper_id = $("#paperID").val();
+        var semester_id = $("#semester_id").val();
+        var session_id = $("#session_id").val();
+        console.log("student click");
+        console.log(paper_id);
+        console.log(semester_id);
+        console.log(session_id);
         var formData = new FormData();
         formData.append('token', token);
         formData.append('branch_id', branchID);
@@ -1066,6 +1072,9 @@ $(function () {
         formData.append('section_id', section_id);
         formData.append('subject_id', subject_id);
         formData.append('student_id', studentID);
+        formData.append('paper_id', paper_id);
+        formData.append('semester_id', semester_id);
+        formData.append('session_id', session_id);
         $("#studentMarkModal").modal('show');
         // return false;
         callstudentchart(formData);

@@ -2,7 +2,7 @@
 @section('title','Dashboard')
 @section('content')
 <link href="{{ asset('public/css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
-<!-- <link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" /> -->
+<link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
 <style>
     .badge-soft-success {
         background-color: #77D9B0;
@@ -127,7 +127,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="">
-                            <svg width="24" height="19" viewBox="0 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="24" height="21" viewBox="0 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_59_2318)">
                                     <path d="M0 18.6667C0.0521565 18.2957 0.0962869 17.9247 0.148443 17.5798C0.294192 16.5919 0.537261 15.6184 0.874621 14.6714C1.23927 13.5946 1.81449 12.5887 2.57172 11.7038C3.46053 10.6593 4.72431 9.94343 6.13441 9.68573C7.69185 9.36207 9.32112 9.51976 10.7723 10.1346C11.53 10.4746 12.2045 10.9543 12.7543 11.5442C13.2132 12.0305 13.6028 12.569 13.9137 13.1468L13.9779 13.2581C14.284 12.9197 14.6359 12.6192 15.0251 12.3641C15.7892 11.8787 16.6865 11.6035 17.6128 11.5702C18.3739 11.5193 19.1385 11.6063 19.8636 11.8262C20.7852 12.1257 21.5877 12.6751 22.1665 13.4028C22.7898 14.195 23.2433 15.0903 23.5025 16.0403C23.7288 16.8147 23.8858 17.605 23.9719 18.4033C23.9719 18.4886 23.992 18.5739 24 18.6629L0 18.6667Z" fill="#3A4265" />
                                     <path d="M7.7633 8.3132C6.87327 8.31466 6.00277 8.07193 5.26202 7.61572C4.52127 7.15952 3.94357 6.51034 3.60206 5.7504C3.26054 4.99045 3.17056 4.15391 3.34352 3.34666C3.51647 2.53941 3.94458 1.79775 4.57365 1.21559C5.20272 0.633425 6.00445 0.236927 6.87736 0.0762895C7.75027 -0.0843483 8.65509 -0.00190527 9.4773 0.313188C10.2995 0.628281 11.0021 1.16186 11.4962 1.84636C11.9903 2.53086 12.2536 3.33551 12.2528 4.15845C12.2517 5.25941 11.7785 6.31506 10.9369 7.0939C10.0953 7.87275 8.95402 8.31123 7.7633 8.3132Z" fill="#3A4265" />
@@ -164,7 +164,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="">
-                            <svg width="24" height="18.6667" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="24" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M5.242 13.769L0 9.5L12 0L24 9.5L18.758 13.769C17.548 11.249 14.978 9.5 12 9.5C9.023 9.5 6.452 11.248 5.242 13.769ZM12 10C10.1435 10 8.36301 10.7375 7.05025 12.0503C5.7375 13.363 5 15.1435 5 17C5 18.8565 5.7375 20.637 7.05025 21.9497C8.36301 23.2625 10.1435 24 12 24C13.8565 24 15.637 23.2625 16.9497 21.9497C18.2625 20.637 19 18.8565 19 17C19 15.1435 18.2625 13.363 16.9497 12.0503C15.637 10.7375 13.8565 10 12 10Z" fill="#3A4265" />
                             </svg>
 
@@ -193,7 +193,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="">
-                            <svg width="24" height="18.6667" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="24" height="21" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M15.67 9.13C17.04 10.06 18 11.32 18 13V16H22V13C22 10.82 18.43 9.53 15.67 9.13Z" fill="#3A4265" />
                                 <path d="M8 8C10.2091 8 12 6.20914 12 4C12 1.79086 10.2091 0 8 0C5.79086 0 4 1.79086 4 4C4 6.20914 5.79086 8 8 8Z" fill="#3A4265" />
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M14 8C16.21 8 18 6.21 18 4C18 1.79 16.21 0 14 0C13.53 0 13.09 0.0999998 12.67 0.24C13.5 1.27 14 2.58 14 4C14 5.42 13.5 6.73 12.67 7.76C13.09 7.9 13.53 8 14 8Z" fill="#3A4265" />
@@ -674,350 +674,6 @@
                         <div id="chart-hor-stack-bar-chart" style="min-height: 365px;"></div>
                         <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
                     </div>
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-    </div>
-
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv"> Top 10 ranking
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Score</th>
-                                                <th>Grade</th>
-                                                <th>Ranking</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>William</th>
-                                                <td>99</td>
-                                                <td>A</td>
-                                                <td>1</td>
-                                            </tr>
-                                            <tr>
-                                                <th>James</th>
-                                                <td>85</td>
-                                                <td>B</td>
-                                                <td>2</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Benjamin</th>
-                                                <td>75</td>
-                                                <td>C</td>
-                                                <td>3</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Lucas</th>
-                                                <td>60</td>
-                                                <td>D</td>
-                                                <td>4</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Sophia</th>
-                                                <td>85</td>
-                                                <td>B</td>
-                                                <td>2</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Amelia</th>
-                                                <td>75</td>
-                                                <td>C</td>
-                                                <td>3</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Charlotte</th>
-                                                <td>40</td>
-                                                <td>D</td>
-                                                <td>22</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Isabella</th>
-                                                <td>50</td>
-                                                <td>D</td>
-                                                <td>11</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Mia</th>
-                                                <td>40</td>
-                                                <td>D</td>
-                                                <td>12</td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
-                    </div>
-                    <!--- end row -->
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv"> Bottom 10 ranking
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card-box">
-                                <div class="table-responsive">
-                                    <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table dt-responsive nowrap w-100">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Score</th>
-                                                <th>Grade</th>
-                                                <th>Ranking</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Charlotte</th>
-                                                <td>40</td>
-                                                <td>D</td>
-                                                <td>22</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Isabella</th>
-                                                <td>50</td>
-                                                <td>D</td>
-                                                <td>11</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Mia</th>
-                                                <td>40</td>
-                                                <td>D</td>
-                                                <td>12</td>
-                                            </tr>
-                                            <tr>
-                                                <th>William</th>
-                                                <td>99</td>
-                                                <td>A</td>
-                                                <td>1</td>
-                                            </tr>
-                                            <tr>
-                                                <th>James</th>
-                                                <td>85</td>
-                                                <td>B</td>
-                                                <td>2</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Benjamin</th>
-                                                <td>75</td>
-                                                <td>C</td>
-                                                <td>3</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Lucas</th>
-                                                <td>60</td>
-                                                <td>D</td>
-                                                <td>4</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Sophia</th>
-                                                <td>85</td>
-                                                <td>B</td>
-                                                <td>2</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Amelia</th>
-                                                <td>75</td>
-                                                <td>C</td>
-                                                <td>3</td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
-                    </div>
-                    <!--- end row -->
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">Top 10 Improments
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card-box">
-                                <div class="table-responsive">
-                                    <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Score</th>
-                                                <th>Grade</th>
-                                                <th>Ranking</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>William</th>
-                                                <td>99</td>
-                                                <td>A</td>
-                                                <td>1</td>
-                                            </tr>
-                                            <tr>
-                                                <th>James</th>
-                                                <td>85</td>
-                                                <td>B</td>
-                                                <td>2</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Benjamin</th>
-                                                <td>75</td>
-                                                <td>C</td>
-                                                <td>3</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Lucas</th>
-                                                <td>60</td>
-                                                <td>D</td>
-                                                <td>4</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Sophia</th>
-                                                <td>85</td>
-                                                <td>B</td>
-                                                <td>2</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Amelia</th>
-                                                <td>75</td>
-                                                <td>C</td>
-                                                <td>3</td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
-                    </div>
-                    <!--- end row -->
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv"> Bottom 10 Deteriorate
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card-box">
-                                <div class="table-responsive">
-                                    <table data-toggle="table" data-page-size="5" data-buttons-class="xs btn-light" data-pagination="true" class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Score</th>
-                                                <th>Grade</th>
-                                                <th>Ranking</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Charlotte</th>
-                                                <td>40</td>
-                                                <td>D</td>
-                                                <td>22</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Isabella</th>
-                                                <td>50</td>
-                                                <td>D</td>
-                                                <td>11</td>
-                                            </tr>
-                                            <tr>
-                                                <th>William</th>
-                                                <td>99</td>
-                                                <td>A</td>
-                                                <td>1</td>
-                                            </tr>
-                                            <tr>
-                                                <th>James</th>
-                                                <td>85</td>
-                                                <td>B</td>
-                                                <td>2</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Benjamin</th>
-                                                <td>75</td>
-                                                <td>C</td>
-                                                <td>3</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Lucas</th>
-                                                <td>60</td>
-                                                <td>D</td>
-                                                <td>4</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Sophia</th>
-                                                <td>85</td>
-                                                <td>B</td>
-                                                <td>2</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Amelia</th>
-                                                <td>75</td>
-                                                <td>C</td>
-                                                <td>3</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Mia</th>
-                                                <td>40</td>
-                                                <td>D</td>
-                                                <td>12</td>
-                                            </tr>
-
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
-                    </div>
-                    <!--- end row -->
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col -->

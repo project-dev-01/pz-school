@@ -449,6 +449,10 @@ $(function () {
                 name: 'name'
             },
             {
+                data: 'id',
+                name: 'id'
+            },
+            {
                 data: 'short_name',
                 name: 'short_name'
             },

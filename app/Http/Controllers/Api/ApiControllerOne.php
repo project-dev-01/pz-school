@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\BaseController as BaseController;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use App\Models\User;
+use DateTime;
 
 class ApiControllerOne extends BaseController
 {
@@ -496,6 +497,232 @@ class ApiControllerOne extends BaseController
             // get data
             $GradeCategory = $Connection->table('paper_type')->get();
             return $this->successResponse($GradeCategory, 'Paper type record fetch successfully');
+        }
+    }
+    // import csv timetable
+    // import Csv Parents
+    public function importCsvTimetable(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'file' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $branchID = $request->branch_id;
+            $Connection = $this->createNewConnection($request->branch_id);
+
+            $file = $request->file('file');
+            // File Details 
+            $filename = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $tempPath = $file->getRealPath();
+            $fileSize = $file->getSize();
+            $mimeType = $file->getMimeType();
+            header('Content-type: text/plain; charset=utf-8');
+            // Valid File Extensions
+            $valid_extension = array("csv");
+            // 2MB in Bytes
+            $maxFileSize = 2097152;
+            // Check file extension
+            if (in_array(strtolower($extension), $valid_extension)) {
+                // Check file size
+                if ($fileSize <= $maxFileSize) {
+                    // File upload location
+                    $location = 'uploads';
+                    // Upload file
+                    $file->move($location, $filename);
+                    // Import CSV to Database
+                    // $filepath = public_path($location."/".$filename);
+                    $filepath = $location . "/" . $filename;
+                    // $file = fopen($filename, "r");
+                    // Reading file
+                    $file = fopen($filepath, "r");
+                    $importData_arr = array();
+                    $i = 0;
+                    while (($filedata = fgetcsv($file, 1000, ",")) !== FALSE) {
+                        $num = count($filedata);
+                        // Skip first row (Remove below comment if you want to skip the first row)
+                        if ($i == 0) {
+                            $i++;
+                            continue;
+                        }
+                        for ($c = 0; $c < $num; $c++) {
+                            $importData_arr[$i][] = $filedata[$c];
+                        }
+                        $i++;
+                    }
+                    // exit();
+                    fclose($file);
+                    // dummyemail
+                    $dummyInc = 1;
+                    // Insert to MySQL database
+                    foreach ($importData_arr as $importData) {
+                        $dummyInc++;
+                        // dd($importData);
+                        // echo "<pre>";
+                        // print_r($importData);
+                        $class_id = 0;
+                        $section_id = 0;
+                        $session_id = 0;
+                        $semester_id = 0;
+                        $break = 0;
+                        $subject_id = 0;
+                        $teacher_id = NULL;
+
+                        $class_id = $importData[0];
+                        $section_id = $importData[1];
+                        $semester_id = $importData[3];
+                        $session_id = $importData[4];
+                        $day = strtolower($importData[2]);
+                        // echo "------";
+                        // print_r($class_id);
+                        // print_r($section_id);
+                        // print_r($semester_id);
+                        // print_r($session_id);
+                        // print_r($day);
+                        // echo "------";
+
+                        // calendor data populate
+                        $getObjRow = $Connection->table('semester as s')
+                            ->select('start_date', 'end_date')
+                            ->where('id', $semester_id)
+                            ->first();
+                        // print_r($getObjRow);
+                        if (isset($importData[0])) {
+                            $class_id = $importData[0];
+                        }
+                        if (isset($importData[1])) {
+                            $section_id = $importData[1];
+                        }
+                        if (isset($importData[4])) {
+                            $session_id = $importData[4];
+                        }
+                        if (isset($importData[3])) {
+                            $semester_id = $importData[3];
+                        }
+                        if (isset($importData[6])) {
+                            $teacher_id =  $importData[6];
+                        }
+                        if (isset($importData[5])) {
+                            if($importData[5] == "" || trim($importData[5]) == "Rehat"){
+                                $break = 1;
+                            }else{
+                                $subject_id =  $importData[5];
+                            }
+                        }
+                        $time_start = date("H:i:s", strtotime($importData[7]));
+                        $time_end = date("H:i:s", strtotime($importData[8]));
+                        
+                        $data = [
+                            'class_id' => $class_id,
+                            'section_id' => $section_id,
+                            'break' => $break,
+                            'subject_id' => $subject_id,
+                            'teacher_id' => $teacher_id,
+                            'class_room' => $importData[9],
+                            'time_start' => $time_start,
+                            'time_end' => $time_end,
+                            'semester_id' => $semester_id,
+                            'session_id' => $session_id,
+                            'day' => $day,
+                            'created_at' => date("Y-m-d H:i:s")
+                        ];
+                        $insertOrUpdateID = 0;
+                        $insertOrUpdateID = $Connection->table('timetable_class')->insertGetId($data);
+
+                        $bulkID = NuLL;
+                        // return $break;
+                        $this->addCalendorTimetable($branchID, $data, $getObjRow, $insertOrUpdateID, $bulkID);
+                    }
+                    // exit;
+                    return $this->successResponse([], 'Import TimeTable Successful');
+                } else {
+                    return $this->send422Error('Validation error.', ['error' => 'File too large. File must be less than 2MB.']);
+                }
+            } else {
+                return $this->send422Error('Validation error.', ['error' => 'Invalid File Extension']);
+            }
+        }
+    }
+
+    function addCalendorTimetable($branchID, $row, $getObjRow, $insertOrUpdateID, $bulkID)
+    {
+        if ($getObjRow) {
+            $start = $getObjRow->start_date;
+            $end = $getObjRow->end_date;
+            //
+            $startDate = new DateTime($start);
+            $endDate = new DateTime($end);
+            // sunday=0,monday=1,tuesday=2,wednesday=3,thursday=4
+            //friday =5,saturday=6
+            if (isset($row['day'])) {
+                if ($row['day'] == "monday") {
+                    $day = 1;
+                }
+                if ($row['day'] == "tuesday") {
+                    $day = 2;
+                }
+                if ($row['day'] == "wednesday") {
+                    $day = 3;
+                }
+                if ($row['day'] == "thursday") {
+                    $day = 4;
+                }
+                if ($row['day'] == "friday") {
+                    $day = 5;
+                }
+                if ($row['day'] == "saturday") {
+                    $day = 6;
+                }
+                if (isset($day)) {
+                    $this->addTimetableCalendor($branchID, $startDate, $endDate, $day, $row, $insertOrUpdateID, $bulkID);
+                }
+            }
+        }
+    }
+    // addTimetableCalendor
+    function addTimetableCalendor($branchID, $startDate, $endDate, $day, $row, $insertOrUpdateID, $bulkID)
+    {
+        // create new connection
+        $Connection = $this->createNewConnection($branchID);
+        // delete existing calendor data
+        $calendors = $Connection->table('calendors')->where([
+            ['time_table_id', '=', $insertOrUpdateID]
+        ])->count();
+
+        if ($calendors > 0) {
+            $Connection->table('calendors')->where('time_table_id', $insertOrUpdateID)->delete();
+        }
+
+        if (isset($row['subject_id']) && isset($row['teacher_id'])) {
+            while ($startDate <= $endDate) {
+                if ($startDate->format('w') == $day) {
+                    $start = $startDate->format('Y-m-d') . " " . $row['time_start'];
+                    $end = $startDate->format('Y-m-d') . " " . $row['time_end'];
+                    $arrayInsert = [
+                        "title" => "timetable",
+                        "class_id" => $row['class_id'],
+                        "section_id" => $row['section_id'],
+                        "sem_id" => $row['semester_id'],
+                        "subject_id" => $row['subject_id'],
+                        // "teacher_id" => $row['teacher'],
+                        "teacher_id" => $row['teacher_id'],
+                        "start" => $start,
+                        "end" => $end,
+                        "time_table_id" => $insertOrUpdateID,
+                        'created_at' => date("Y-m-d H:i:s")
+                    ];
+
+                    // return $arrayInsert;
+
+                    $Connection->table('calendors')->insert($arrayInsert);
+                }
+                $startDate->modify('+1 day');
+            }
         }
     }
 }

@@ -1,78 +1,33 @@
-/* #calendar {
-    max-width: 900px;
-    margin: 40px auto;
-} */
+/*start calender css*/
 
-.fc-unthemed thead {
-    border: 1px solid #346aa1;
+.fc-list-item-time,
+.fc-list-item-title {
+    color: #852d2d;
 }
 
-.fc-content-skeleton .fc-day-top .fc-day-number {
-    float: right;
-    height: 20px;
-    width: 20px;
-    text-align: center;
-    line-height: 20px;
-    border-radius: 50%;
-    margin: 50px 10px 0px 0px;
-    font-size: 11px;
+.btn-primary {
+    color: #fff;
+    border-color: #0ABAB5;
+    background-color: #6FC6CC;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #108b92;
+    border-color: #6cc7d0;
+}
+
+.btn-primary.disabled,
+.btn-primary:disabled {
     color: black;
-    background-color: white;
+    background-color: #95dfd0;
+    border-color: #6cc7d0;
 }
 
-.fc-dayGrid-view .fc-day-number,
-.fc-dayGrid-view .fc-week-number {
-    padding: 0px;
-}
-
-.fc th.fc-widget-header {
-    background: white;
-    font-size: 13px;
-    line-height: 20px;
-    padding: 10px 0;
-    text-transform: uppercase;
-    font-weight: 500;
-}
-
-.fc-button {
-    background: white;
-    border: 1px solid #6FC6CC;
-    color: #101b26;
-    box-shadow: none;
-    border-radius: 3px;
-
-}
-
-.fc-button-primary:not(:disabled).fc-button-active,
-.fc-button-primary:not(:disabled):active {
-    background: white;
-    border: 1px solid #6FC6CC;
-    color: #101b26;
-}
-
-.fc-button-primary:disabled {
-    background: white;
-    border: 1px solid #6FC6CC;
-    color: #101b26;
-}
-
-/* .fc-unthemed td {
-    border: 1px solid #6FC6CC;
-} */
-
-.fc-event {
-    background-color: #E9D528;
-}
-
-.fc-title {
-    color: black;
-}
-
-
-.fc-list-item {
-    background: #536050;
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
+.btn-primary:hover {
+    color: #fff;
+    background-color: #108b92;
+    border-color: #6cc7d0;
 }

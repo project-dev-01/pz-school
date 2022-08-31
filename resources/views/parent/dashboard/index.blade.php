@@ -2,6 +2,44 @@
 @section('title','Dashboard')
 @section('content')
 <link href="{{ asset('public/css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
+
+<style>
+    .badge-soft-success {
+        background-color: #77D9B0;
+        color: black;
+        display: inline-block;
+        padding: 8px 30px;
+        width: 97px;
+        height: 24px;
+        border-radius: 5px;
+    }
+
+    .badge-soft-info {
+        background-color: #E2C181;
+        color: black;
+        display: inline-block;
+        padding: 8px 30px;
+        width: 97px;
+        height: 24px;
+        border-radius: 5px;
+    }
+
+    .badge-soft-danger {
+        background-color: #E45555;
+        color: black;
+        display: inline-block;
+        padding: 8px 30px;
+        width: 97px;
+        height: 24px;
+        border-radius: 5px;
+    }
+
+    .pr-2 {
+        width: 150px;
+    }
+</style>
+
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -78,11 +116,10 @@
                                                         </div> <!-- end checkbox -->
                                                     </div> <!-- end col -->
                                                     <div class="col-lg-6">
-                                                        <div class="justify-content-between">
-
-                                                            <div class="">
-                                                                <ul class="font-13">
-                                                                    <li class="list-inline-item">
+                                                        <div class="d-sm-flex justify-content-between">
+                                                            <div class="mt-3 mt-sm-0">
+                                                                <ul class="list-inline font-13 text-sm-right">
+                                                                    <li class="list-inline-item pr-1">
                                                                         <i class='mdi mdi-calendar-month-outline font-16 mr-1'></i>
                                                                         <!-- Today 10am -->
                                                                         {{ date('j F y g a', strtotime($today['due_date']));}}
@@ -95,15 +132,15 @@
                                                                         <i class='mdi mdi-comment-text-multiple-outline font-16 mr-1'></i>
                                                                         {{$today['total_comments']}}
                                                                     </li>
-                                                                    <li class="list-inline-item">
+                                                                    <li class="list-inline-item mt-3 mt-sm-0">
                                                                         @if($today['priority'] == "Low")
-                                                                        <span class="badge badge-soft-success p-1" style="background-color:#77D9B0;color:black;padding: 8px 30px;font-size: 12px;">{{$today['priority']}}</span>
+                                                                        <span class="badge badge-soft-success p-1">{{$today['priority']}}</span>
                                                                         @endif
                                                                         @if($today['priority'] == "Medium")
-                                                                        <span class="badge badge-soft-info p-1" style="background-color:#77D9B0;color:black;padding: 8px 30px;font-size: 12px;">{{$today['priority']}}</span>
+                                                                        <span class="badge badge-soft-info p-1">{{$today['priority']}}</span>
                                                                         @endif
                                                                         @if($today['priority'] == "High")
-                                                                        <span class="badge badge-soft-danger p-1" style="background-color:#77D9B0;color:black;padding: 8px 30px;font-size: 12px;">{{$today['priority']}}</span>
+                                                                        <span class="badge badge-soft-danger p-1">{{$today['priority']}}</span>
                                                                         @endif
                                                                     </li>
                                                                 </ul>
@@ -142,10 +179,11 @@
                                                             </div> <!-- end checkbox -->
                                                         </div> <!-- end col -->
                                                         <div class="col-lg-6">
-                                                            <div class="justify-content-between">
-                                                                <div class="">
-                                                                    <ul class="font-13">
-                                                                        <li class="list-inline-item">
+                                                            <div class="d-sm-flex justify-content-between">
+
+                                                                <div class="mt-3 mt-sm-0">
+                                                                    <ul class="list-inline font-13 text-sm-right">
+                                                                        <li class="list-inline-item pr-1">
                                                                             <i class='mdi mdi-calendar-month-outline font-16 mr-1'></i>
                                                                             {{ date('j F y g a', strtotime($upcoming['due_date']));}}
 
@@ -158,15 +196,15 @@
                                                                             <i class='mdi mdi-comment-text-multiple-outline font-16 mr-1'></i>
                                                                             {{$upcoming['total_comments']}}
                                                                         </li>
-                                                                        <li class="list-inline-item">
+                                                                        <li class="list-inline-item mt-3 mt-sm-0">
                                                                             @if($upcoming['priority'] == "Low")
-                                                                            <span class="badge badge-soft-success p-1" style="background-color:#77D9B0;color:black;padding: 8px 30px;font-size: 12px;">{{$upcoming['priority']}}</span>
+                                                                            <span class="badge badge-soft-success p-1">{{$upcoming['priority']}}</span>
                                                                             @endif
                                                                             @if($upcoming['priority'] == "Medium")
-                                                                            <span class="badge badge-soft-info p-1" style="background-color:#77D9B0;color:black;padding: 8px 30px;font-size: 12px;">{{$upcoming['priority']}}</span>
+                                                                            <span class="badge badge-soft-info p-1">{{$upcoming['priority']}}</span>
                                                                             @endif
                                                                             @if($upcoming['priority'] == "High")
-                                                                            <span class="badge badge-soft-danger p-1" style="background-color:#77D9B0;color:black;padding: 8px 30px;font-size: 12px;">{{$upcoming['priority']}}</span>
+                                                                            <span class="badge badge-soft-danger p-1">{{$upcoming['priority']}}</span>
                                                                             @endif
                                                                         </li>
                                                                     </ul>
@@ -194,11 +232,11 @@
                                         </a>
                                         @forelse ($get_to_do_list_dashboard['old'] as $old)
                                         <div class="collapse show" id="pastTasks">
-                                            <div class="card shadow-none">
-                                                <div class="card-body" id="task-list-two" style="padding-top: 1px;padding-bottom:0px">
+                                            <div class="card mb-0 shadow-none">
+                                                <div class="card-body pb-0" id="task-list-two">
                                                     <!-- task -->
                                                     <div class="row justify-content-sm-between task-item">
-                                                        <div class="col-lg-6">
+                                                        <div class="col-lg-6 mb-2">
                                                             <div class="custom-control custom-checkbox">
                                                                 <input type="checkbox" data-id="{{ $old['id'] }}" class="custom-control-input admintaskListDashboard" id="old{{ $old['id'] }}" {{ ($old['user_id']) ? "checked" : "" }}>
                                                                 <label class="custom-control-label" for="old{{ $old['id'] }}">
@@ -207,15 +245,17 @@
                                                             </div> <!-- end checkbox -->
                                                         </div> <!-- end col -->
                                                         <div class="col-lg-6">
-                                                            <div class="justify-content-between float-right">
-                                                                <div class="">
-                                                                    <ul class="font-13" style="font-weight: 600;">
-
-                                                                        <li class="list-inline-item" id="comments{{ $old['id'] }}">
+                                                            <div class="d-sm-flex justify-content-between">
+                                                                <div>
+                                                                    <img src="../assets/images/users/user-9.jpg" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="Assigned to Arya S" />
+                                                                </div>
+                                                                <div class="mt-3 mt-sm-0">
+                                                                    <ul class="list-inline font-13 text-sm-center">
+                                                                        <li class="list-inline-item pr-1" id="comments{{ $old['id'] }}">
                                                                             <i class='mdi mdi-comment-text-multiple-outline font-16'></i>
                                                                             {{$old['total_comments']}}
                                                                         </li>
-                                                                        <li class="list-inline-item">
+                                                                        <li class="list-inline-item pr-2">
                                                                             <i class='mdi mdi-calendar-month-outline font-16'></i>
                                                                             {{ date('j F y g a', strtotime($old['due_date']));}}
 
@@ -225,15 +265,15 @@
                                                                                     1/12
                                                                                 </li> -->
 
-                                                                        <li class="list-inline-item">
+                                                                        <li class="list-inline-item mt-3 mt-sm-0">
                                                                             @if($old['priority'] == "Low")
-                                                                            <span class="badge badge-soft-success" style="background-color:#77D9B0;color:black;padding: 8px 30px;font-size: 12px;">{{$old['priority']}}</span>
+                                                                            <span class="badge badge-soft-success p-1">{{$old['priority']}}</span>
                                                                             @endif
                                                                             @if($old['priority'] == "Medium")
-                                                                            <span class="badge badge-soft-info" style="background-color:#E2C181;color:black;padding: 8px 20px;font-size: 12px;">{{$old['priority']}}</span>
+                                                                            <span class="badge badge-soft-info p-1">{{$old['priority']}}</span>
                                                                             @endif
                                                                             @if($old['priority'] == "High")
-                                                                            <span class="badge badge-soft-danger" style="background-color:#E45555;;color:black;padding: 8px 20px;font-size: 12px;">{{$old['priority']}}</span>
+                                                                            <span class="badge badge-soft-danger p-1">{{$old['priority']}}</span>
                                                                             @endif
                                                                         </li>
                                                                     </ul>
@@ -265,7 +305,6 @@
         <!-- task details -->
         <!-- task panel end -->
     </div> <!-- end card-box -->
-
     <div class="row">
         <div class="col-12">
             <!-- tasks panel -->

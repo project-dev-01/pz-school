@@ -24,9 +24,9 @@ class CreateTimetableClassTable extends Migration
             $table->integer('semester_id')->nullable();
             $table->integer('session_id')->nullable();
             $table->string('class_room')->nullable();
-            $table->time('time_start');
-            $table->time('time_end');
-            $table->string('day');
+            $table->time('time_start')->nullable();
+            $table->time('time_end')->nullable();
+            $table->string('day')->nullable();
             $table->integer('bulk_id')->nullable();
             $table->string('type')->nullable();
             $table->timestamps();

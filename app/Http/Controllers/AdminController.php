@@ -1637,7 +1637,6 @@ class AdminController extends Controller
                         $teacher .= '<option value="0" ' . $all . '> All </option>';
                     }
 
-
                     $checked = "";
                     if ($table['break'] == "1") {
                         $checked = "checked";
@@ -1652,7 +1651,7 @@ class AdminController extends Controller
                             $teacher .= '<option value="' . $teach['id'] . '"   ' . $selected . '>' . $teach['name'] . '</option>';
                         }
                     }
-                    // dd($teacher);
+                    // dd($table);
                     $response .=  '<tr class="iadd">';
                     $response .=  '<input type="hidden"  name="timetable[' . $row . '][id]" value="' . $table['id'] . '" ' . $bulk . '>';
                     $response .=  '<td>';
@@ -1664,18 +1663,18 @@ class AdminController extends Controller
                     $response .=  '</td>';
                     $response .=  '<td width="20%">';
                     $response .=  '<div class="form-group">';
-                    if ($table['break_type']) {
+                    if (isset($table['break_type'])) {
                         $response .=  '<select class="form-control subject subByTeacher" data-id="' . $row . '" name="timetable[' . $row . '][subject]" disabled hidden="hidden" ' . $bulk . '>';
                         $response .=  '<option value="">Select Subject</option>';
                         $response .=  $subject;
                         $response .=  '</select>';
-                        $response .= '<input class="form-control break_type"  type="text" name="timetable[' . $row . '][break_type]" value="' . $table['break_type'] . '" ' . $bulk . '></input> ';
+                        $response .= '<input class="form-control break_type"  type="text" name="timetable[' . $row . '][break_type]" value="' . (isset($table['break_type']) ? $table['break_type'] : "") . '" ' . $bulk . '></input> ';
                     } else {
                         $response .=  '<select class="form-control subject subByTeacher" data-id="' . $row . '" name="timetable[' . $row . '][subject]" ' . $bulk . '>';
                         $response .=  '<option value="">Select Subject</option>';
                         $response .=  $subject;
                         $response .=  '</select>';
-                        $response .= '<input class="form-control break_type"  type="text" name="timetable[' . $row . '][break_type]" value="' . $table['break_type'] . '" disabled hidden="hidden" ' . $bulk . '></input> ';
+                        $response .= '<input class="form-control break_type"  type="text" name="timetable[' . $row . '][break_type]" value="' . (isset($table['break_type']) ? $table['break_type'] : "") . '" disabled hidden="hidden" ' . $bulk . '></input> ';
                     }
 
                     $response .=  '</div>';
@@ -1783,7 +1782,7 @@ class AdminController extends Controller
                     $response .=  '</td>';
                     $response .=  '<td width="20%">';
                     $response .=  '<div class="form-group">';
-                    $response .= '<input class="form-control break_type"  type="text" name="timetable[' . $row . '][break_type]" value="' . $table['break_type'] . '" ></input> ';
+                    $response .= '<input class="form-control break_type"  type="text" name="timetable[' . $row . '][break_type]" value="' . (isset($table['break_type']) ? $table['break_type'] : "") . '" ></input> ';
                     $response .=  '</div>';
                     $response .=  '</td>';
                     $response .=  '<td width="20%"  > ';
@@ -1966,10 +1965,12 @@ class AdminController extends Controller
                     $row = 0;
                     foreach ($timetable['data']['timetable'] as $table) {
                         if ($table['day'] == $day) {
+                            $start_time = date('H:i', strtotime($table['time_start']));
+                            $end_time = date('H:i', strtotime($table['time_end']));
                             $response .= '<td>';
                             if ($table['break'] == "1") {
-                                $response .= '<b>' . $table['break_type'] . '</b><br> ';
-                                $response .= '(' . $table['time_start'] . ' - ' . $table['time_end'] . ' )<br>';
+                                $response .= '<b>' . (isset($table['break_type']) ? $table['break_type'] : "") . '</b><br> ';
+                                $response .= '(' . $start_time . ' - ' . $end_time . ' )<br>';
                                 if (isset($table['hall_no'])) {
 
                                     $response .= 'Class Room : ' . $table['hall_no'] . '';
@@ -1978,10 +1979,10 @@ class AdminController extends Controller
                                 if ($table['subject_name']) {
                                     $subject = $table['subject_name'];
                                 } else {
-                                    $subject = $table['break_type'];
+                                    $subject = (isset($table['break_type']) ? $table['break_type'] : "");
                                 }
                                 $response .= '<b>Subject:' . $subject . '</b><br>';
-                                $response .= '(' . $table['time_start'] . ' - ' . $table['time_end'] . ' )<br>';
+                                $response .= '(' . $start_time . ' - ' . $end_time . ' )<br>';
                                 if ($table['teacher_name']) {
                                     $response .= 'Teacher :  ' . $table['teacher_name'] . '<br>';
                                 }
@@ -2953,20 +2954,20 @@ class AdminController extends Controller
                             $hall .= '<option value="' . $list['id'] . '">' . $list['hall_no'] . '</option>';
                         }
                     }
-                    if (isset($exam['paper_id'])) {
-                        $paper_ids = explode(',', $exam['paper_id']);
-                        $paper_names = explode(',', $exam['paper_name']);
-                        if (!empty($paper_ids)) {
-                            // timetable_paper_id
-                            foreach ($paper_ids as $key => $val) {
-                                if ($val == $exam['timetable_paper_id']) {
-                                    $paperList .= '<option value="' . $val . '" selected>' . $paper_names[$key] . '</option>';
-                                } else {
-                                    $paperList .= '<option value="' . $val . '">' . $paper_names[$key] . '</option>';
-                                }
-                            }
-                        }
-                    }
+                    // if (isset($exam['paper_id'])) {
+                    //     $paper_ids = explode(',', $exam['paper_id']);
+                    //     $paper_names = explode(',', $exam['paper_name']);
+                    //     if (!empty($paper_ids)) {
+                    //         // timetable_paper_id
+                    //         foreach ($paper_ids as $key => $val) {
+                    //             if ($val == $exam['timetable_paper_id']) {
+                    //                 $paperList .= '<option value="' . $val . '" selected>' . $paper_names[$key] . '</option>';
+                    //             } else {
+                    //                 $paperList .= '<option value="' . $val . '">' . $paper_names[$key] . '</option>';
+                    //             }
+                    //         }
+                    //     }
+                    // }
 
                     if ($exam['marks']) {
                         $mark = json_decode($exam['marks']);
@@ -3009,13 +3010,9 @@ class AdminController extends Controller
                                         </div>
                                     </td>';
                     $output .= '<td>
-                                        <div class="form-group mb-2">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <select class="form-control" name="exam[' . $row . '][paper_id]" placeholder="Select">
-                                                        <option value="">Choose paper</option>' . $paperList . '</select>
-                                                </div>
-                                            </div>
+                                        <div class="input-group mb-2">
+                                            <input type="text" readonly class="form-control"  value="' . $exam['paper_name'] . '" >
+                                            <input type="hidden" name="exam[' . $row . '][paper_id]"  value="' . $exam['paper_id'] . '" >
                                         </div>
                                     </td>';
                     $output .= '<td >
@@ -3138,7 +3135,7 @@ class AdminController extends Controller
                     }
                     $output .= '<tr>
                                     <td>' . $exam['subject_name'] . '</td>
-                                    <td>' . $exam['exam_paper_name'] . '</td>
+                                    <td>' . $exam['paper_name'] . '</td>
                                     <td>' . $exam['exam_date'] . '</td>
                                     <td>' . $exam['time_start'] . '</td>
                                     <td>' . $exam['time_end'] . '</td>

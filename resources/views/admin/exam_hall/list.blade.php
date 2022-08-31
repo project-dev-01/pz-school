@@ -42,6 +42,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Hall No</th>
+                                    <th>Hall ID</th>
                                     <th>No Of Seats</th>
                                     <th>Action</th>
                                 </tr>

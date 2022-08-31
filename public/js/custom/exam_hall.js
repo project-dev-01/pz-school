@@ -71,6 +71,10 @@ $(function () {
                 name: 'hall_no'
             },
             {
+                data: 'id',
+                name: 'id'
+            },
+            {
                 data: 'no_of_seats',
                 name: 'no_of_seats'
             },

@@ -580,6 +580,10 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('paper_type/list', [ApiControllerOne::class, 'getPaperTypeList']);
     // import parent details in csv
     Route::post('importcsv/parents', [ApiControllerOne::class, 'importCsvParents']);
-    // import parent students in csv
+    // import students details in csv
     Route::post('importcsv/students', [ApiControllerOne::class, 'importCsvStudents']);
+    // import timetable details in csv
+    Route::post('importcsv/timetable', [ApiControllerOne::class, 'importCsvTimetable']);
+
+
 });
