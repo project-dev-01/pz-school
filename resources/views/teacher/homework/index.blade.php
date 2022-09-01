@@ -107,10 +107,9 @@
                                 </div>
                             </div>
                         </div><br>
-                        <div id="schedule" style="display:none">
-
+                        <div >
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-4" id="schedule" style="display:none">
                                     <label for="schedule_date">Schedule Date<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
@@ -123,10 +122,6 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="description">Homework<span class="text-danger">*</span></label>
-                                    <textarea class="form-control" name="description" rows="1" placeholder="Please enter Description"></textarea>
-                                </div>
-                                <div class="col-md-4">
                                     <label for="document">Attachment File<span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <div class="custom-file">
@@ -135,6 +130,10 @@
                                         </div>
                                     </div>
                                     <span id="file_name"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="description">Description<span class="text-danger">*</span></label>
+                                    <textarea class="form-control" name="description" rows="1" placeholder="Please enter Description"></textarea>
                                 </div>
                             </div>
                         </div><br>

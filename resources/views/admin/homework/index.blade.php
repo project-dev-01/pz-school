@@ -103,24 +103,20 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div id="schedule" style="display:none">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="schedule_date">Schedule Date<span class="text-danger">*</span></label>
-                                        <div class="input-group input-group-merge">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <span class="far fa-calendar-alt"></span>
-                                                </div>
+                            <div class="col-md-4" id="schedule" style="display:none">
+                                <div class="form-group">
+                                    <label for="schedule_date">Schedule Date<span class="text-danger">*</span></label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="far fa-calendar-alt"></span>
                                             </div>
-                                            <input type="text" class="form-control homeWorkAdd" name="schedule_date" placeholder="" aria-describedby="inputGroupPrepend">
                                         </div>
+                                        <input type="text" class="form-control homeWorkAdd" name="schedule_date" placeholder="" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="document">Attachment File<span class="text-danger">*</span></label>
                                     <div class="input-group">
@@ -132,9 +128,9 @@
                                     <span id="file_name"></span>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="description">Homework<span class="text-danger">*</span></label>
+                                    <label for="description">Description<span class="text-danger">*</span></label>
                                     <textarea class="form-control" name="description" placeholder="Please enter Description"></textarea>
                                 </div>
                             </div>

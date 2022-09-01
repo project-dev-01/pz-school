@@ -86,7 +86,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <!-- <table class="table table-bordered mb-0"> -->
-                                                        <table data-toggle="table" data-page-size="7" data-buttons-class="xs btn-light" data-pagination="true" class="table  text-center table-striped table-nowrap custom-table mb-0 datatable ">
+                                                        <table  data-page-size="7" data-buttons-class="xs btn-light" data-pagination="true" class="table  text-center table-striped table-nowrap custom-table mb-0 datatable ">
                                                             <thead>
                                                                 <tr>
                                                                     <th>#</th>
