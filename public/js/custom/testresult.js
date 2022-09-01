@@ -250,7 +250,7 @@ $(function () {
             formData.append('paper_id', paper_id);
             formData.append('semester_id', semester_id);
             formData.append('session_id', session_id);
-
+            $("#overlay").fadeIn(300);
             // list mode
             $.ajax({
                 url: getSubjectMarks,
@@ -278,13 +278,16 @@ $(function () {
                             } else {
                                 $("#mark_by_subject_card").hide();
                             }
+                            $("#overlay").fadeOut(300);
                         } else {
                             $("#mark_by_subject_card").hide();
+                            $("#overlay").fadeOut(300);
                             toastr.error(response.message);
                         }
                     }
                 }, error: function (err) {
                     $("#mark_by_subject_card").hide();
+                    $("#overlay").fadeOut(300);
                     toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
                 }
             });
