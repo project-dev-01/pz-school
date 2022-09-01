@@ -1,265 +1,8 @@
 @extends('layouts.admin-layout')
 @section('title','Class Room Management')
 @section('css')
-<style>
-    .radio_group {
-        width: 30px;
-        height: 53px;
-        margin: 0px 3px 0px 0px;
-        position: relative;
-        text-align: right;
-        font-size: 25px;
-    }
+<link href="{{ asset('public/css/custom/classroom.css') }}" rel="stylesheet" type="text/css" />
 
-    .radio_group_1 {
-        width: 30px;
-        height: 53px;
-        position: relative;
-        text-align: right;
-        font-size: 25px;
-    }
-
-    .radio_group_1 input[type="radio"] {
-        opacity: 0;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        margin: 0;
-        padding: 0;
-        z-index: 1;
-        cursor: pointer;
-    }
-
-    .radio_group_1 input[type="radio"]+label {
-        color: #95a5a6;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-        transform: scale(.8);
-    }
-
-    .radio_group_1 input[type="radio"]:checked+label {
-        color: #FFD700;
-        transform: scale(1.1);
-    }
-
-    .radio_group input[type="radio"] {
-        opacity: 0;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        margin: 0;
-        padding: 0;
-        z-index: 1;
-        cursor: pointer;
-    }
-
-    .radio_group input[type="radio"]+label {
-        color: #95a5a6;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-        transform: scale(.8);
-    }
-
-    .radio_group input[type="radio"]:checked+label {
-        color: #3498db;
-        transform: scale(1.1);
-    }
-
-    /*start counter Code*/
-    #classroom_count_down .countdown-wrapper {
-        width: 100%;
-        display: inline-block;
-        position: relative;
-    }
-
-    #classroom_count_down .countdown-wrapper:after {
-        padding-top: 17%;
-        display: block;
-        content: '';
-    }
-
-    #classroom_count_down .countdown-main {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 0;
-    }
-
-    #classroom_count_down .countdown-section-days {
-        display: inline;
-        height: 100%;
-        width: 30%;
-        float: left;
-    }
-
-    #classroom_count_down .countdown-section-other {
-        display: inline;
-        height: 100%;
-        width: 20%;
-        float: left;
-    }
-
-    #classroom_count_down .countdown-separator {
-        display: inline;
-        height: 100%;
-        width: 3.33%;
-        float: left;
-    }
-
-    #classroom_count_down .countdown-separator-top {
-        height: 85%;
-        width: 100%;
-        text-align: center;
-    }
-
-    #classroom_count_down .countdown-dot {
-        width: 60%;
-        height: 14%;
-        border-radius: 75%;
-        border: 1px solid #000000;
-        background-color: #404040;
-        margin: auto;
-        margin-top: 107%;
-
-    }
-
-    #classroom_count_down .countdown-number-container {
-        width: 100%;
-        height: 85%;
-        position: relative;
-    }
-
-    #classroom_count_down .countdown-number-days {
-        width: 33.33%;
-        height: 100%;
-        float: left;
-        display: inline;
-        border-radius: 7%;
-        -webkit-perspective: 1000px;
-        /* Chrome, Safari, Opera  */
-        perspective: 1000px;
-        position: relative;
-
-    }
-
-    #classroom_count_down .countdown-number-other {
-        width: 50%;
-        height: 100%;
-        float: left;
-        display: inline;
-        border-radius: 7%;
-        -webkit-perspective: 1000px;
-        /* Chrome, Safari, Opera  */
-        perspective: 1000px;
-        position: relative;
-    }
-
-
-    #classroom_count_down .countdown-number-top {
-        width: 100%;
-        height: 50%;
-        border-top-left-radius: 7%;
-        border-top-right-radius: 7%;
-        border: 1px solid #000000;
-        overflow: hidden;
-        background-color: #404040;
-        color: #FFFFFF;
-        transform-origin: bottom left;
-    }
-
-    #classroom_count_down .countdown-number-bottom {
-        width: 100%;
-        height: 50%;
-        border-bottom-left-radius: 7%;
-        border-bottom-right-radius: 7%;
-        border: 1px solid #000000;
-        background-color: #404040;
-        color: #FFFFFF;
-        overflow: hidden;
-
-        background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 1%, rgba(0, 0, 0, 0) 100%);
-        /* FF3.6-15 */
-        background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 1%, rgba(0, 0, 0, 0) 100%);
-        /* Chrome10-25,Safari5.1-6 */
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 1%, rgba(0, 0, 0, 0) 100%);
-        /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#59000000', GradientType=0);
-        /* IE6-9 */
-    }
-
-    #classroom_count_down .countdown-number-inner {
-        width: 100%;
-        height: 200%;
-        vertical-align: middle;
-        text-align: center;
-        font-weight: bold;
-        transform-origin: top;
-    }
-
-    #classroom_count_down .countdown-number-next {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        vertical-align: middle;
-        text-align: center;
-        font-weight: bold;
-        z-index: -9999;
-        border-radius: 7%;
-        color: #FFFFFF;
-        border: 1px solid #000000;
-        background-color: #404040;
-    }
-
-
-    #classroom_count_down .countdown-number-top .countdown-number-inner {
-        transform-origin: bottom left;
-    }
-
-    #classroom_count_down .shadow {
-        z-index: 999;
-        height: 100%;
-        width: 100%;
-        background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 99%, rgba(0, 0, 0, 0.2) 100%);
-        /* FF3.6-15 */
-        background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 99%, rgba(0, 0, 0, 0.2) 100%);
-        /* Chrome10-25,Safari5.1-6 */
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 99%, rgba(0, 0, 0, 0.2) 100%);
-        /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#59000000', GradientType=0);
-        /* IE6-9 */
-    }
-
-    #classroom_count_down .countdown-number-bottom .countdown-number-inner {
-        transform: translateY(-52.5%);
-    }
-
-    #classroom_count_down .countdown-label-container {
-        height: 15%;
-        width: 100%;
-        vertical-align: middle;
-        text-align: center;
-        color: #000000;
-        padding-top: 5px;
-        font-size: 12px;
-    }
-
-    #classroom_count_down .countdown-number-container .ready {
-        display: none;
-    }
-
-    /*End counter Code*/
-</style>
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -506,11 +249,10 @@
                     </form>
                 </div>
             </div>
-            <div class="card classRoomHideSHow" style="display: none;"><br>
-                <div class="card-body">
+            <div class="classRoomHideSHow" style="display: none;">
+                <div class="">
                     <div class="row">
-
-                        <div class="col-lg-3" id="top-header">
+                        <div class="col-md-6 col-xl-3" id="top-header">
                             <div class="card-box">
                                 <div class="row">
                                     <div class="col-6">
@@ -564,13 +306,13 @@
 
                             </div>
                         </div><!-- end col-->
-                        <div class="col-lg-3" id="top-header">
+                        <div class="col-md-6 col-xl-3" id="top-header">
                             <div class="card-box">
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="">
                                             <i class="fas fa-user-graduate font-24"></i><br><br>
-                                            <p class="mb-1">Perfect attendance</p>
+                                            <p class="mb-1">Perfect<br>attendance</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -590,13 +332,13 @@
 
                             </div>
                         </div><!-- end col-->
-                        <div class="col-lg-3" id="top-header">
+                        <div class="col-md-6 col-xl-3" id="top-header">
                             <div class="card-box">
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="">
                                             <i class="  fas fa-user-tie  font-24"></i><br><br>
-                                            <p class="mb-1">Average Attendance</p>
+                                            <p class="mb-1">Average<br>Attendance</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -616,13 +358,13 @@
 
                             </div>
                         </div><!-- end col-->
-                        <div class="col-lg-3">
+                        <div class="col-md-6 col-xl-3" id="top-header">
                             <div class="card-box">
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="">
                                             <i class="fas fa-chalkboard-teacher font-24"></i><br><br>
-                                            <p class="mb-1">Below Attendance</p>
+                                            <p class="mb-1">Below<br>Attendance</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -653,16 +395,7 @@
                                     <h4>
                             </li>
                         </ul><br>
-                        <style>
-                            .nav-tabs .nav-link.active {
-                                border-color: #328eeb #328eeb #fff;
-                            }
-
-                            .green.active {
-                                color: red;
-                            }
-                        </style>
-                        <ul class="nav nav-tabs" style="border-bottom: 1px solid #328eeb;background-color: #F4F7FC;">
+                        <ul class="nav nav-pills navtab-bg nav-justified">
                             <li class="nav-item">
                                 <a href="#profile-b1" data-toggle="tab" aria-expanded="true" class="nav-link active">
                                     Layout Mode
@@ -689,7 +422,7 @@
                                 <div class="tab-pane show active" id="profile-b1">
                                     <div class="row">
                                         <div class="col-md-8"></div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-4 form-group text-right m-b-0">
                                             <a href="javascript: void(0);" class="text-reset mb-2 d-block">
                                                 <i class='fas fa-circle' style='font-size:14px;color:#60a05b'></i>
                                                 <span class="mb-0 mt-1" style="text-align:center">Present</span>
@@ -751,6 +484,7 @@
                                                     <!-- <table id="listModeClassRoom" class="table table-striped table-nowrap"> -->
                                                     <table id="listModeClassRoom" class="table dt-responsive nowrap w-100">
                                                         <!-- <table class="display" width="100%"> -->
+                                                        <!-- <table id="listModeClassRoom" class="display" style="width:100%"> -->
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
@@ -760,14 +494,14 @@
                                                                 <th>Reasons</th>
                                                                 <th>Student behaviour</th>
                                                                 <th>Class behaviour</th>
-
                                                             </tr>
                                                         </thead>
                                                         <!-- <tbody id="listModeClassRoom"> -->
                                                         <tbody>
                                                         </tbody>
                                                     </table>
-                                                </div><br>
+                                                </div>
+                                                <br>
                                                 <div class="form-group text-right m-b-0">
                                                     <button class="btn btn-primary-bl waves-effect waves-light" id="saveClassRoomAttendance" type="submit">
                                                         Save

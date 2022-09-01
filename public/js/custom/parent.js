@@ -156,22 +156,15 @@ $(function () {
                     "targets": 1,
                     "className": "table-user",
                     "render": function (data, type, row, meta) {
-                        console.log("--")
-                        console.log(typeof row.photo)
-                        console.log(row.photo)
-                        console.log(defaultImg)
-                        if ((row.photo != null) || (row.photo != "")) {
+
+                        // if ((row.photo != null) || (row.photo != "")) {
+                        if (row.photo) {
                             var currentImg = parentImg + '/' + row.photo;
-                        }else{
+                        } else {
                             var currentImg = defaultImg;
                         }
-                        // console.log(currentImg)
-
-                        // 
-                        // var existUrl = UrlExists(currentImg);
-                        // console.log(existUrl);
                         var img = currentImg;
-                        var first_name = '<img src="' + img + '" class="mr-2 rounded-circle" alt="No Image">' +
+                        var first_name = '<img src="' + defaultImg + '" class="mr-2 rounded-circle" alt="No Image">' +
                             '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
                         return first_name;
                     }

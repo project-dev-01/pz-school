@@ -180,12 +180,12 @@
                                 <div class="collapse" id="sidebarParent">
                                     <ul class="nav-second-level">
                                         <li>
-                                            <a href="{{ route('admin.parent.create')}}" class="nav-link {{ (request()->is('admin/parent*')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.parent.create')}}" class="nav-link {{ (request()->is('admin/parent/create')) ? 'active' : '' }}">
                                                 <span>Add Guardian</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('admin.parent')}}" class="nav-link {{ (request()->is('admin/parent/*')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.parent')}}" class="nav-link {{ (request()->is('admin/parent')) ? 'active' : '' }}">
                                                 <span>Guardian List</span>
                                             </a>
                                         </li>
@@ -482,17 +482,17 @@
                     <div class="collapse" id="sidebarLeaveManage">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('admin.leave_management.allleaves')}}" class="nav-link {{ (request()->is('admin/leave_management*')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.leave_management.allleaves')}}" class="nav-link {{ (request()->is('admin/leave_management/allleaves')) ? 'active' : '' }}">
                                     <span> All Leave</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.leave_management.applyleave')}}" class="nav-link {{ (request()->is('admin/leave_management*')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.leave_management.applyleave')}}" class="nav-link {{ (request()->is('admin/leave_management/applyleave')) ? 'active' : '' }}">
                                     <span> Leave Apply </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.leave_management.assign_leave_approver')}}" class="nav-link {{ (request()->is('admin/leave_management*')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.leave_management.assign_leave_approver')}}" class="nav-link {{ (request()->is('admin/leave_management/assign_leave_approver')) ? 'active' : '' }}">
                                     <span> Assign Leave Approval </span>
                                 </a>
                             </li>
@@ -1576,12 +1576,12 @@
             <div class="collapse" id="sidebarLeaveManage">
                 <ul class="nav-second-level">
                     <li>
-                        <a href="{{ route('teacher.leave_management.allleaves')}}" class="nav-link {{ (request()->is('teacher/leave_management*')) ? 'active' : '' }}">
+                        <a href="{{ route('teacher.leave_management.allleaves')}}" class="nav-link {{ (request()->is('teacher/leave_management/allleaves')) ? 'active' : '' }}">
                             <span> Leave Approval</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('teacher.leave_management.applyleave')}}" class="nav-link {{ (request()->is('teacher/leave_management*')) ? 'active' : '' }}">
+                        <a href="{{ route('teacher.leave_management.applyleave')}}" class="nav-link {{ (request()->is('teacher/leave_management/applyleave')) ? 'active' : '' }}">
                             <span> Leave Apply </span>
                         </a>
                     </li>

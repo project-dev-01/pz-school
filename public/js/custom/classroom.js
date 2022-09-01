@@ -13,11 +13,13 @@ $(function () {
     if (classroom_details) {
         var classroomDetails = JSON.parse(classroom_details);
         if (classroomDetails.length == 1) {
-            var classID, sectionID, subjectID, classDate, sectionName, subjectName;
+            var classID, sectionID, subjectID, classDate, sectionName, subjectName,semesterID,sessionID;
             classroomDetails.forEach(function (user) {
                 classID = user.class_id;
                 sectionID = user.section_id;
                 subjectID = user.subject_id;
+                semesterID = user.semester_id;
+                sessionID = user.session_id;
                 classDate = user.date;
                 sectionName = user.section_name;
                 subjectName = user.subject_name;
@@ -27,11 +29,15 @@ $(function () {
                 classID: classID,
                 sectionID: sectionID,
                 subjectID: subjectID,
+                semesterID : semesterID,
+                sessionID : sessionID,
                 classDate: format_date
             };
             $('#changeClassName').val(classID);
             $("#classroomFilter").find("#sectionID").append('<option selected value="' + sectionID + '">' + sectionName + '</option>');
             $("#classroomFilter").find("#subjectID").append('<option selected value="' + subjectID + '">' + subjectName + '</option>');
+            $("#classroomFilter").find("#semester_id").val(semesterID);
+            $("#classroomFilter").find("#session_id").val(sessionID);
             $('#classDate').val(format_date);
 
             var formData = new FormData();

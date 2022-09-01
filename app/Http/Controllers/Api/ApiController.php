@@ -8333,6 +8333,8 @@ class ApiController extends BaseController
                     'cl.time_table_id',
                     'cl.section_id',
                     'cl.subject_id',
+                    'cl.sem_id as semester_id',
+                    'cl.session_id',
                     'cl.start',
                     'cl.event_id',
                     'cl.end',
@@ -8844,6 +8846,7 @@ class ApiController extends BaseController
                         "class_id" => $request['class_id'],
                         "section_id" => $request['section_id'],
                         "sem_id" => $request['semester_id'],
+                        "session_id" => $row['session_id'],
                         "subject_id" => $row['subject'],
                         // "teacher_id" => $row['teacher'],
                         "teacher_id" => implode(",", $row['teacher']),
@@ -8870,6 +8873,7 @@ class ApiController extends BaseController
                         "class_id" => $request['class_id'],
                         "section_id" => $request['section_id'],
                         "sem_id" => $request['semester_id'],
+                        "session_id" => $row['session_id'],
                         // "teacher_id" => $row['teacher'],
                         "teacher_id" => implode(",", $row['teacher']),
                         "start" => $start,
@@ -9358,16 +9362,17 @@ class ApiController extends BaseController
             foreach ($exams as $exam) {
                 $mark = json_encode($exam['mark']);
 
-                $distributor = $exam['distributor'];
+                $distributor = (isset($exam['distributor'])?$exam['distributor']:null);
 
+                if(isset($exam['distributor'])){
+                    if ($exam['distributor_type'] == "1") {
 
-                if ($exam['distributor_type'] == "1") {
-
-                    $data = $con->table('staffs as s')->select('s.id',  DB::raw('CONCAT(s.first_name, " ", s.last_name) as name'),)
-                        ->where('id', $exam['distributor'])
-                        ->first();
-
-                    $distributor = $data->name;
+                        $data = $con->table('staffs as s')->select('s.id',  DB::raw('CONCAT(s.first_name, " ", s.last_name) as name'),)
+                            ->where('id', $exam['distributor'])
+                            ->first();
+    
+                        $distributor = $data->name;
+                    }
                 }
                 if ($exam['timetable_exam_id']) {
                     $query = $con->table('timetable_exam')->where('id', $exam['timetable_exam_id'])->update([
@@ -9538,7 +9543,9 @@ class ApiController extends BaseController
                 })
                 ->leftJoin('exam as ex', 'ttex.exam_id', '=', 'ex.id')
                 ->leftJoin('exam_hall as eh', 'ttex.hall_id', '=', 'eh.id')
-                ->orderBy('sa.id', 'asc')
+                ->orderBy('sbj.id', 'asc')
+                ->orderBy('ttex.exam_date', 'desc')
+                ->orderBy('sbj.name', 'asc')
                 ->get();
             $exam_name = $con->table('exam')->where('id', $exam_id)->first();
             $details['details']['exam_name'] = $exam_name->name;
@@ -9703,10 +9710,13 @@ class ApiController extends BaseController
                         //    'sd.subject_division'
                     )
                     ->join('students as st', 'st.id', '=', 'en.student_id')
-                    ->leftJoin('student_marks as sa', function ($q) use ($exam_id, $subject_id, $semester_id, $session_id) {
+                    ->leftJoin('student_marks as sa', function ($q) use ($class_id, $section_id,$paper_id, $exam_id, $subject_id, $semester_id, $session_id) {
                         $q->on('sa.student_id', '=', 'st.id')
                             ->on('sa.exam_id', '=', DB::raw("'$exam_id'"))
+                            ->on('sa.class_id', '=', DB::raw("'$class_id'"))
+                            ->on('sa.section_id', '=', DB::raw("'$section_id'"))
                             ->on('sa.semester_id', '=', DB::raw("'$semester_id'"))
+                            ->on('sa.paper_id', '=', DB::raw("'$paper_id'"))
                             ->on('sa.session_id', '=', DB::raw("'$session_id'"))
                             ->on('sa.subject_id', '=', DB::raw("'$subject_id'"));
                     })
@@ -10856,8 +10866,8 @@ class ApiController extends BaseController
             // insert data
             $success = $createConnection->table('subject_assigns as sa')->select('s.id', DB::raw("CONCAT(first_name, ' ', last_name) as name"))
                 ->join('staffs as s', 'sa.teacher_id', '=', 's.id')
-                ->where('sa.class_id', $request->class_id)
-                ->where('sa.section_id', $request->section_id)
+                // ->where('sa.class_id', $request->class_id)
+                // ->where('sa.section_id', $request->section_id)
                 ->groupBy('sa.teacher_id')
                 ->get();
             return $this->successResponse($success, 'Teachers record fetch successfully');

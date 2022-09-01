@@ -22,35 +22,38 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="card-box">
-                <h4 class="header-title"> Hostel Group</h4>
-                <p class="sub-header">
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="nav-link">Hostel Group<h4>
+                    </li>
+                </ul><br>
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <a type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" href="{{ route('admin.hostel_group.create')}}">Add Hostel Group</a>
+                        <a type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" href="{{ route('admin.hostel_group.create')}}" style="width: 100%;">Add Hostel Group</a>
                     </div>
                 </div>
-                </p>
-                
-                <div class="table-responsive">
-                    <table class="table mb-0" id="hostel-group-table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Group Name</th>
-                                <th>Incharge Staff</th>
-                                <th>Incharge Student</th>
-                                <th>Student</th>
-                                <th>Color</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div> <!-- end card-box -->
-        </div> <!-- end col -->
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table mb-0" id="hostel-group-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Group Name</th>
+                                    <th>Incharge Staff</th>
+                                    <th>Incharge Student</th>
+                                    <th>Student</th>
+                                    <th>Color</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div> <!-- end card-box -->
+            </div> <!-- end col -->
+        </div>
     </div>
 </div>
 <!-- container -->
@@ -58,12 +61,10 @@
 @endsection
 @section('scripts')
 <script>
-  //HostelGroup routes
+    //HostelGroup routes
     var hostelGroupList = "{{ route('admin.hostel_group.list') }}";
     var hostelGroupDetails = "{{ route('admin.hostel_group.details') }}";
     var hostelGroupDelete = "{{ route('admin.hostel_group.delete') }}";
-    
-    
 </script>
 
 <script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>

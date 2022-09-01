@@ -386,7 +386,7 @@
                                                         <div class="col-lg-6">
                                                             <div class="d-sm-flex justify-content-between">
                                                                 <div>
-                                                                    <img src="../assets/images/users/user-9.jpg" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="Assigned to Arya S" />
+                                                                    <img src="{{ asset('public/images/users/12.jpg') }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                                 </div>
                                                                 <div class="mt-3 mt-sm-0">
                                                                     <ul class="list-inline font-13 text-sm-center">
@@ -570,10 +570,10 @@
         </div>
         <!-- end col-12 -->
     </div> <!-- end row -->
-    @include('staff.dashboard.check_list')
-    @include('staff.dashboard.task')
-    @include('staff.dashboard.task-show')
-    @include('staff.dashboard.exam-schedule')
+    @include('admin.dashboard.check_list')
+    @include('admin.dashboard.task')
+    @include('admin.dashboard.task-show')
+    @include('admin.dashboard.exam-schedule')
 
 </div> <!-- container -->
 @endsection

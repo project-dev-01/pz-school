@@ -6,6 +6,8 @@ $(document).ready(function () {
         var ttclassID = $("#ttclassID").val();
         var ttSectionID = $("#ttSectionID").val();
         var ttSubjectID = $("#ttSubjectID").val();
+        var ttsemesterID = $("#ttsemesterID").val();
+        var ttsessionID = $("#ttsessionID").val();
         var ttDate = $("#ttDate").val();
         var sectionName = $("#section-name").text();
         var subjectName = $("#subject-name").text();
@@ -16,6 +18,8 @@ $(document).ready(function () {
         classDetails.section_id = ttSectionID;
         classDetails.section_name = sectionName;
         classDetails.subject_id = ttSubjectID;
+        classDetails.semester_id = ttsemesterID;
+        classDetails.session_id = ttsessionID;
         classDetails.subject_name = subjectName;
         classDetails.date = ttDate;
         var classroom_details = [];

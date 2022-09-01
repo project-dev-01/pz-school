@@ -2898,7 +2898,7 @@ class AdminController extends Controller
                     $output .= '<tr>
                                     <td>' . $row . '</td>
                                     <td>' . $exam['name'] . '</td>
-                                    <td><div class="button-list"><a href="javascript:void(0)" class="btn btn-blue btn-sm waves-effect waves-light" data-toggle="modal" data-target="#examTimeTable" data-exam_id="' . $exam['exam_id'] . '" id=""><i class="fe-eye"></i></a><a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="' . $exam['exam_id'] . '" id="deleteExamTimetableBtn"><i class="fe-trash-2"></i></a></div></td>
+                                    <td><div class="button-list"><a href="javascript:void(0)" class="btn btn-blue btn-sm waves-effect waves-light" data-toggle="modal" data-target="#examTimeTable" data-exam_id="' . $exam['exam_id'] . '" id=""><i class="fe-eye"></i></a><a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="" id=""><i class="fe-trash-2"></i></a></div></td>
                                 </tr>';
                     $row++;
                 }
@@ -2981,6 +2981,7 @@ class AdminController extends Controller
                     if ($exam['distributor_type'] == "1") {
                         $dist .= ' <select  class="form-control " name="exam[' . $row . '][distributor]">';
                         foreach ($teacher['data'] as $teach) {
+                            $dist .= '<option value="">Select Teacher</option>';
                             if ($teach['id'] == $exam['distributor_id']) {
                                 $dist .= '<option value="' . $teach['id'] . '" selected>' . $teach['name'] . '</option>';
                             } else {
@@ -2988,8 +2989,15 @@ class AdminController extends Controller
                             }
                         }
                         $dist .= ' </select>';
-                    } else {
+                    } elseif ($exam['distributor_type'] == "2") {
                         $dist .= '<input type="text" name="exam[' . $row . '][distributor]" class="form-control"  value="' . $exam['distributor'] . '" placeholder="Distributor Name">';
+                    } else {
+                        $dist .= ' <select  class="form-control " name="exam[' . $row . '][distributor]">';
+                        $dist .= '<option value="">Select Teacher</option>';
+                        foreach ($teacher['data'] as $teach) {
+                            $dist .= '<option value="' . $teach['id'] . '">' . $teach['name'] . '</option>';
+                        }
+                        $dist .= ' </select>';
                     }
 
                     if ($exam['distributor_type'] == "1") {
@@ -3045,7 +3053,6 @@ class AdminController extends Controller
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <select  class="form-control distributor_type" data-id="' . $row . '" name="exam[' . $row . '][distributor_type]">
-                                                        <option value="">Select Type</option>
                                                         <option value="1" ' . $dist_type1 . '>Internal</option>
                                                         <option value="2" ' . $dist_type2 . '>External</option>
                                                     </select>
@@ -3058,14 +3065,14 @@ class AdminController extends Controller
                                     </td>
                                     <td width="10%">
                                         <div class="form-group mb-2">
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <input type="text" name="exam[' . $row . '][mark][full]" class="form-control" value="' . $full . '" placeholder="Full Mark">
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <input type="text" name="exam[' . $row . '][mark][pass]" class="form-control"  value="' . $pass . '" placeholder="Pass Mark">
-                                                </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <input type="text" name="exam[' . $row . '][mark][full]" class="form-control" value="' . (isset($full) ? $full : 100) . '" placeholder="Full Mark">
                                             </div>
+                                            <div class="col-sm-6">
+                                                <input type="text" name="exam[' . $row . '][mark][pass]" class="form-control"  value="' . (isset($pass) ? $pass : 40) . '" placeholder="Pass Mark">
+                                            </div>
+                                        </div>
                                         </div>
                                     </td>
                                 </tr>';

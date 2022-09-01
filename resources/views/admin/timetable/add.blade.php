@@ -143,6 +143,7 @@
                                                     <th>Starting Time</th>
                                                     <th>Ending Time</th>
                                                     <th>Class Room</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="timetable_body">

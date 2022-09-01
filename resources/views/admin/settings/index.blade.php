@@ -113,7 +113,7 @@
                         <form action="#" method="POST" id="changeNewPassword" class="comment-area-box mt-2 mb-3">
                             <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> Change Password</h5>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">Old Passord</label>
                                         <input type="password" class="form-control" id="oldpassword" name="oldpassword" placeholder="Enter current password">
