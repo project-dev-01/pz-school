@@ -145,9 +145,9 @@
                         <input type="hidden" name="paper_id" id="listModePaperID">
                         <input type="hidden" name="semester_id" id="listModeSemesterID">
                         <input type="hidden" name="session_id" id="listModeSessionID">
-                        <input type="text" name="fullmark" id="fullmark">
-                        <input type="text" name="passmark" id="passmark">
-                        <input type="text" name="grade_category" id="grade_category">
+                        <input type="hidden" name="fullmark" id="fullmark">
+                        <input type="hidden" name="passmark" id="passmark">
+                        <input type="hidden" name="grade_category" id="grade_category">
                         <div class="col-md-12">
                             <div class="table-responsive">
                                 <div class="card-box">
