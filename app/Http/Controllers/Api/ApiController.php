@@ -6420,8 +6420,8 @@ class ApiController extends BaseController
                     $q->on('sa.student_id', '=', 'st.id')
                         ->on('sa.date', '=', DB::raw("'$date'"))
                         ->on('sa.subject_id', '=', DB::raw("'$subject_id'"));
-                        // ->on('sa.semester_id', '=', DB::raw("'$semester_id'"))
-                        // ->on('sa.session_id', '=', DB::raw("'$session_id'"));
+                    // ->on('sa.semester_id', '=', DB::raw("'$semester_id'"))
+                    // ->on('sa.session_id', '=', DB::raw("'$session_id'"));
                 })
                 // if already take attendance for the date
                 ->leftJoin('student_attendances as sapre', function ($q) use ($date, $semester_id, $session_id) {
@@ -6508,8 +6508,8 @@ class ApiController extends BaseController
                     $q->on('sa.student_id', '=', 'st.id')
                         ->on('sa.date', '=', DB::raw("'$date'"))
                         ->on('sa.subject_id', '=', DB::raw("'$subject_id'"));
-                        // ->on('sa.semester_id', '=', DB::raw("'$semester_id'"))
-                        // ->on('sa.session_id', '=', DB::raw("'$session_id'"))
+                    // ->on('sa.semester_id', '=', DB::raw("'$semester_id'"))
+                    // ->on('sa.session_id', '=', DB::raw("'$session_id'"))
                 })
                 ->where([
                     ['en.class_id', '=', $request->class_id],
@@ -6568,8 +6568,8 @@ class ApiController extends BaseController
                     $q->on('sa.student_id', '=', 'st.id')
                         ->on('sa.date', '=', DB::raw("'$date'"))
                         ->on('sa.subject_id', '=', DB::raw("'$subject_id'"));
-                        // ->on('sa.semester_id', '=', DB::raw("'$semester_id'"))
-                        // ->on('sa.session_id', '=', DB::raw("'$session_id'"));
+                    // ->on('sa.semester_id', '=', DB::raw("'$semester_id'"))
+                    // ->on('sa.session_id', '=', DB::raw("'$session_id'"));
                 })
                 ->where([
                     ['en.class_id', '=', $request->class_id],
@@ -6754,8 +6754,8 @@ class ApiController extends BaseController
                     $q->on('sht.student_id', '=', 'st.id')
                         ->on('sht.date', '=', DB::raw("'$date'"))
                         ->on('sht.subject_id', '=', DB::raw("'$subject_id'"));
-                        // ->on('sht.semester_id', '=', DB::raw("'$semester_id'"))
-                        // ->on('sht.session_id', '=', DB::raw("'$session_id'"));
+                    // ->on('sht.semester_id', '=', DB::raw("'$semester_id'"))
+                    // ->on('sht.session_id', '=', DB::raw("'$session_id'"));
                 })
                 ->where([
                     ['en.class_id', '=', $request->class_id],
@@ -9362,15 +9362,15 @@ class ApiController extends BaseController
             foreach ($exams as $exam) {
                 $mark = json_encode($exam['mark']);
 
-                $distributor = (isset($exam['distributor'])?$exam['distributor']:null);
+                $distributor = (isset($exam['distributor']) ? $exam['distributor'] : null);
 
-                if(isset($exam['distributor'])){
+                if (isset($exam['distributor'])) {
                     if ($exam['distributor_type'] == "1") {
 
                         $data = $con->table('staffs as s')->select('s.id',  DB::raw('CONCAT(s.first_name, " ", s.last_name) as name'),)
                             ->where('id', $exam['distributor'])
                             ->first();
-    
+
                         $distributor = $data->name;
                     }
                 }
@@ -9552,7 +9552,7 @@ class ApiController extends BaseController
             return $this->successResponse($details, 'Exam Timetable record fetch successfully');
         }
     }
-    
+
     // delete Exam Timetable
     public function deleteExamTimetable(Request $request)
     {
@@ -9577,17 +9577,17 @@ class ApiController extends BaseController
                 ['semester_id', $request->semester_id],
                 ['session_id', $request->session_id]
             ])->delete();
-            
+
             // get data
             $details = $con->table('timetable_exam')->select('exam.name', 'timetable_exam.exam_id')->leftJoin('exam', 'timetable_exam.exam_id', '=', 'exam.id')
-            ->where([
-                ['class_id', $request->class_id],
-                ['section_id', $request->section_id],
-                ['semester_id', $request->semester_id],
-                ['session_id', $request->session_id]
-            ])
-            ->groupBy('timetable_exam.exam_id')
-            ->get();
+                ->where([
+                    ['class_id', $request->class_id],
+                    ['section_id', $request->section_id],
+                    ['semester_id', $request->semester_id],
+                    ['session_id', $request->session_id]
+                ])
+                ->groupBy('timetable_exam.exam_id')
+                ->get();
 
             if ($query) {
                 return $this->successResponse($details, 'Exam Timetable have been deleted successfully');
@@ -9689,7 +9689,7 @@ class ApiController extends BaseController
                     ['session_id', '=', $session_id]
                 ])
                 ->count();
-                // dd($examResultexist);
+            // dd($examResultexist);
             if ($examResultexist == 0) {
                 return $this->send422Error('Timetables for exams will not be available', ['error' => 'Timetables for exams will not be available']);
             } else {
@@ -9711,7 +9711,7 @@ class ApiController extends BaseController
                         //    'sd.subject_division'
                     )
                     ->join('students as st', 'st.id', '=', 'en.student_id')
-                    ->leftJoin('student_marks as sa', function ($q) use ($class_id, $section_id,$paper_id, $exam_id, $subject_id, $semester_id, $session_id) {
+                    ->leftJoin('student_marks as sa', function ($q) use ($class_id, $section_id, $paper_id, $exam_id, $subject_id, $semester_id, $session_id) {
                         $q->on('sa.student_id', '=', 'st.id')
                             ->on('sa.exam_id', '=', DB::raw("'$exam_id'"))
                             ->on('sa.class_id', '=', DB::raw("'$class_id'"))
@@ -9729,7 +9729,26 @@ class ApiController extends BaseController
                     ])
                     ->orderBy('sa.score', 'desc')
                     ->get();
-                return $this->successResponse($getSubjectMarks, 'Subject vs marks record fetch successfully');
+
+                $getExamMarks = $Connection->table('timetable_exam as tex')
+                    ->select(
+                        'tex.marks'
+                    )
+                    ->where([
+                        ['tex.class_id', $request->class_id],
+                        ['tex.section_id', $request->section_id],
+                        ['tex.subject_id', $request->subject_id],
+                        ['tex.exam_id', $request->exam_id],
+                        ['tex.paper_id', $request->paper_id],
+                        ['tex.semester_id', $request->semester_id],
+                        ['tex.session_id', $request->session_id]
+                    ])
+                    ->first();
+                    $data =[
+                        'get_subject_marks' =>$getSubjectMarks,
+                        'get_exam_marks' =>$getExamMarks
+                    ];
+                return $this->successResponse($data, 'Subject vs marks record fetch successfully');
             }
         }
     }
@@ -16562,9 +16581,12 @@ class ApiController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
 
             // get data
-            $success['semester'] = $conn->table('semester')->whereRaw('(now() between start_date and end_date)')->first();
+            $currentDate = date('Y-m-d');
+            $success['semester'] = $conn->table('semester')
+            // ->whereRaw('(now() between start_date and end_date)')
+            ->whereRaw('"'.$currentDate.'" between `start_date` and `end_date`')
+            ->first();
             $hour = Carbon::now()->format('H');
-
             if ($hour < 13) {
                 $session = 1;
             } else {

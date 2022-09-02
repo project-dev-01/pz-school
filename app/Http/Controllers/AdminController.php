@@ -3473,6 +3473,7 @@ class AdminController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        // dd($sem);
         return view('admin.testresult.index', [
             'classes' => $getclass['data'],
             'semester' => $semester['data'],

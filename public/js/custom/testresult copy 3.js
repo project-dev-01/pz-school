@@ -141,7 +141,8 @@ $(function () {
         }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
-                    $("#testresultFilter").find("#examnames").append('<option value="' + val.id + '" >' + val.name + '</option>');
+                    var marks = JSON.parse(val.marks);
+                    $("#testresultFilter").find("#examnames").append('<option value="' + val.id + '" data-full="' + marks.full + '" data-pass="' + marks.pass + '">' + val.name + '</option>');
                 });
             }
         }, 'json');
@@ -209,6 +210,15 @@ $(function () {
         e.preventDefault();
         var form = this;
         var classRoom = $("#testresultFilter").valid();
+
+        var fmark = $('option:selected', '#examnames').attr('data-full');
+        var pmark = $('option:selected', '#examnames').attr('data-pass');
+        var grade_category = $('option:selected', '#paperID').attr('data-grade_category');
+        console.log(grade_category)
+        $("#fullmark").val(fmark);
+        $("#passmark").val(pmark);
+        $("#grade_category").val(grade_category);
+
         // chart.updateOptions( {
         //     xaxis: {
         //         type: "datetime",
@@ -230,10 +240,6 @@ $(function () {
             var semester_id = $("#semester_id").val();
             var session_id = $("#session_id").val();
 
-            // var fmark = $('option:selected', '#examnames').attr('data-full');
-            // var pmark = $('option:selected', '#examnames').attr('data-pass');
-            var grade_category = $('option:selected', '#paperID').attr('data-grade_category');
-
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
@@ -245,6 +251,7 @@ $(function () {
             formData.append('semester_id', semester_id);
             formData.append('session_id', session_id);
             $("#overlay").fadeIn(300);
+            // list mode
             $.ajax({
                 url: getSubjectMarks,
                 method: "post",
@@ -256,40 +263,27 @@ $(function () {
                     console.log("response");
                     console.log(response);
                     if (response.code == 200) {
-                        var dataSetNew = response.data.get_subject_marks;
-                        var get_exam_marks = response.data.get_exam_marks;
-                        if (get_exam_marks) {
-                            var marks = JSON.parse(get_exam_marks.marks);
-                            if (marks.full && marks.pass && grade_category) {
-                                $("#fullmark").val(marks.full);
-                                $("#passmark").val(marks.pass);
-                                $("#grade_category").val(grade_category);
-                                if (dataSetNew.length > 0) {
-                                    $("#mark_by_subject_card").show();
-                                    bindmarks(dataSetNew);
-                                    $("#listModeClassID").val(class_id);
-                                    $("#listModeSectionID").val(section_id);
-                                    $("#listModeSubjectID").val(subject_id);
-                                    $("#listModeexamID").val(exam_id);
-                                    $("#listModePaperID").val(paper_id);
-                                    $("#listModeSemesterID").val(semester_id);
-                                    $("#listModeSessionID").val(session_id);
-                                } else {
-                                    $("#mark_by_subject_card").hide();
-                                }
+                        var dataSetNew = response.data;
+                        if (response.code == 200) {
+                            if (response.data.length > 0) {
+                                $("#mark_by_subject_card").show();
+                                bindmarks(dataSetNew);
+                                $("#listModeClassID").val(class_id);
+                                $("#listModeSectionID").val(section_id);
+                                $("#listModeSubjectID").val(subject_id);
+                                $("#listModeexamID").val(exam_id);
+                                $("#listModePaperID").val(paper_id);
+                                $("#listModeSemesterID").val(semester_id);
+                                $("#listModeSessionID").val(session_id);
                             } else {
-                                toastr.error("Marks details are not available");
                                 $("#mark_by_subject_card").hide();
                             }
+                            $("#overlay").fadeOut(300);
                         } else {
-                            toastr.error("Pass and Fail marks are not given");
                             $("#mark_by_subject_card").hide();
+                            $("#overlay").fadeOut(300);
+                            toastr.error(response.message);
                         }
-                        $("#overlay").fadeOut(300);
-                    } else {
-                        $("#mark_by_subject_card").hide();
-                        $("#overlay").fadeOut(300);
-                        toastr.error(response.message);
                     }
                 }, error: function (err) {
                     $("#mark_by_subject_card").hide();
@@ -297,6 +291,34 @@ $(function () {
                     toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
                 }
             });
+            // subject division
+            // $.ajax({
+            //     url: getsubjectdivision,
+            //     method: "post",
+            //     data: formData,
+            //     processData: false,
+            //     dataType: 'json',
+            //     contentType: false,
+            //     success: function (response) {
+            //         console.log("subject division")
+            //         console.log(response)
+            //         if (response.code == 200) {
+            //             var stdetails = response.data.studentdetails;
+            //             var subdiv = response.data.subjectdivision;
+            //             if (subdiv.length > 0) {
+            //                 $('#subjectdivTableAppend').show();
+            //                 $("#mark_by_subject_card").hide();
+            //                 subjectdivisionShow(stdetails, subdiv);
+            //             }
+            //             else {
+            //                 $('#subjectdivTableAppend').hide();
+            //                 $("#mark_by_subject_card").show();
+            //             }
+            //         } else {
+            //             toastr.error(response.message);
+            //         }
+            //     }
+            // });
 
             callsubjectaveragechart(formData);
 
@@ -305,8 +327,10 @@ $(function () {
             callradarchart(formData);
 
             calldonutchart(formData);
+
         };
     });
+
     function calldonutchart(formData) {
 
         $.ajax({
@@ -1225,6 +1249,7 @@ $(function () {
         })
     }
 
+
     function studentchart() {
         studentcolors = ["#6658dd",];
         (studentdataColors = $("#student-subject-mark").data("colors")) && (studentcolors = studentdataColors.split(","));
@@ -1511,3 +1536,204 @@ $(function () {
     }
 
 });
+
+// ! function(e) {
+//     "use strict";
+//     function a() {}
+//     a.prototype.createBarChart = function(a, t, e, o, r, i) {
+//         Morris.Bar({
+//             element: a,
+//             data: t,
+//             xkey: e,
+//             ykeys: o,
+//             labels: r,
+//             dataLabels: !1,
+//             hideHover: "auto",
+//             resize: !0,
+//             gridLineColor: "rgba(65, 80, 95, 0.07)",
+//             barSizeRatio: .2,
+//             barColors: i
+//         })
+//     }, a.prototype.createDonutChart = function(a, t, e) {
+//         Morris.Donut({
+//             element: a,
+//             data: t,
+//             barSize: .2,
+//             resize: !0,
+//             colors: e,
+//             backgroundColor: "transparent"
+//         })
+//     }, a.prototype.init = function() {
+//         var a = ["#02c0ce"];
+//         (t = e("#statistics-analytic").data("colors")) && (a = t.split(",")), this.createBarChart("statistics-analytic", [{
+//             y: "50",
+//             a: 2
+//         }, {
+//             y: "60",
+//             a: 5
+//         }, {
+//             y: "70",
+//             a: 3
+//         }, {
+//             y: "80",
+//             a: 1
+//         }, {
+//             y: "90",
+//             a: 1
+//         }], "y", ["a"], ["Statistics"], a);
+//         var t;
+//         a = ["#4fc6e1", "#6658dd", "#ebeff2"];
+//         (t = e("#lifetime-sales").data("colors")) && (a = t.split(",")), this.createDonutChart("lifetime-sales", [{
+//             label: " Pass ",
+//             value: 47
+//         }, {
+//             label: " Fail",
+//             value: 4
+//         }, {
+//             label: "InProgress",
+//             value: 23
+//         }], a)
+//     }, e.Dashboard4 = new a, e.Dashboard4.Constructor = a
+// }(window.jQuery),
+// function() {
+//     "use strict";
+//     window.jQuery.Dashboard4.init()
+// }();
+
+
+    // ! function($) {
+    //     "use strict";
+
+    //     var ChartJs = function() {
+    //         this.$body = $("body"),
+    //             this.charts = []
+    //     };
+
+    //     ChartJs.prototype.respChart = function(selector, type, data, options) {
+
+    //             // get selector by context
+    //             var ctx = selector.get(0).getContext("2d");
+    //             // pointing parent container to make chart js inherit its width
+    //             var container = $(selector).parent();
+
+    //             //default config
+    //             Chart.defaults.global.defaultFontColor = "#8391a2";
+    //             Chart.defaults.scale.gridLines.color = "#8391a2";
+
+    //             // this function produce the responsive Chart JS
+    //             function generateChart() {
+    //                 // make chart width fit with its container
+    //                 var ww = selector.attr('width', $(container).width());
+    //                 var chart;
+    //                 switch (type) {
+    //                     case 'Bar':
+    //                         chart = new Chart(ctx, {
+    //                             type: 'bar',
+    //                             data: data,
+    //                             options: options
+    //                         });
+    //                         break;
+    //                     case 'Radar':
+    //                         chart = new Chart(ctx, {
+    //                             type: 'radar',
+    //                             data: data,
+    //                             options: options
+    //                         });
+    //                         break;
+    //                     case 'PolarArea':
+    //                         chart = new Chart(ctx, {
+    //                             data: data,
+    //                             type: 'polarArea',
+    //                             options: options
+    //                         });
+    //                         break;
+    //                 }
+    //                 return chart;
+    //             };
+    //             // run function - render chart at first load
+    //             return generateChart();
+    //         },
+    //         // init various charts and returns
+    //         ChartJs.prototype.initCharts = function() {
+    //             var charts = [];
+    //             var defaultColors = ["#1abc9c", "#f1556c", "#4a81d4", "#e3eaef"];
+
+    //             if ($('#radar-chart-test-marks').length > 0) {
+    //                 var dataColors = $("#radar-chart-test-marks").data('colors');
+    //                 var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
+    //                 //radar chart
+    //                 var radarChart = {
+    //                     labels: ["Test A Score", "Test B Score", "Test C Score", "Test D Score"],
+    //                     datasets: [{
+    //                             label: "Mid term",
+    //                             backgroundColor: hexToRGB(colors[0], 0.3),
+    //                             borderColor: colors[0],
+    //                             pointBackgroundColor: colors[0],
+    //                             pointBorderColor: "#fff",
+    //                             pointHoverBackgroundColor: "#fff",
+    //                             pointHoverBorderColor: colors[0],
+    //                             data: [65, 59, 90, 81]
+    //                         },
+    //                         {
+    //                             label: "Annual",
+    //                             backgroundColor: hexToRGB(colors[1], 0.3),
+    //                             borderColor: colors[1],
+    //                             pointBackgroundColor: colors[1],
+    //                             pointBorderColor: "#fff",
+    //                             pointHoverBackgroundColor: "#fff",
+    //                             pointHoverBorderColor: colors[1],
+    //                             data: [80, 60, 80, 75]
+    //                         }
+    //                     ]
+    //                 };
+    //                 var radarOpts = {
+    //                     maintainAspectRatio: false
+    //                 };
+    //                 charts.push(this.respChart($("#radar-chart-test-marks"), 'Radar', radarChart, radarOpts));
+    //             }
+    //             return charts;
+    //         },
+    //         //initializing various components and plugins
+    //         ChartJs.prototype.init = function() {
+    //             var $this = this;
+    //             // font
+    //             Chart.defaults.global.defaultFontFamily = 'Nunito,sans-serif';
+
+    //             // init charts
+    //             $this.charts = this.initCharts();
+
+    //             // enable resizing matter
+    //             $(window).on('resize', function(e) {
+    //                 $.each($this.charts, function(index, chart) {
+    //                     try {
+    //                         chart.destroy();
+    //                     } catch (err) {}
+    //                 });
+    //                 $this.charts = $this.initCharts();
+    //             });
+    //         },
+
+    //         //init flotchart
+    //         $.ChartJs = new ChartJs, $.ChartJs.Constructor = ChartJs
+    // }(window.jQuery),
+
+    // //initializing ChartJs
+    // function($) {
+    //     "use strict";
+    //     $.ChartJs.init()
+    // }(window.jQuery);
+
+    // /* utility function */
+
+    // function hexToRGB(hex, alpha) {
+    //     var r = parseInt(hex.slice(1, 3), 16),
+    //         g = parseInt(hex.slice(3, 5), 16),
+    //         b = parseInt(hex.slice(5, 7), 16);
+
+    //     if (alpha) {
+    //         return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
+    //     } else {
+    //         return "rgb(" + r + ", " + g + ", " + b + ")";
+    //     }
+    // }
+

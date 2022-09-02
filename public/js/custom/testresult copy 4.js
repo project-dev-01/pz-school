@@ -246,46 +246,31 @@ $(function () {
             formData.append('session_id', session_id);
             $("#overlay").fadeIn(300);
             $.ajax({
-                url: getSubjectMarks,
+                url: getPassFailMarks,
                 method: "post",
                 data: formData,
                 processData: false,
                 dataType: 'json',
                 contentType: false,
                 success: function (response) {
-                    console.log("response");
-                    console.log(response);
+                    console.log("********");
+                    console.log(response.data);
+                    // 
+
                     if (response.code == 200) {
-                        var dataSetNew = response.data.get_subject_marks;
-                        var get_exam_marks = response.data.get_exam_marks;
-                        if (get_exam_marks) {
-                            var marks = JSON.parse(get_exam_marks.marks);
+                        if (response.data) {
+                            var marks = JSON.parse(response.data.marks);
+                            $("#fullmark").val(marks.full);
+                            $("#passmark").val(marks.pass);
+                            $("#grade_category").val(grade_category);
                             if (marks.full && marks.pass && grade_category) {
-                                $("#fullmark").val(marks.full);
-                                $("#passmark").val(marks.pass);
-                                $("#grade_category").val(grade_category);
-                                if (dataSetNew.length > 0) {
-                                    $("#mark_by_subject_card").show();
-                                    bindmarks(dataSetNew);
-                                    $("#listModeClassID").val(class_id);
-                                    $("#listModeSectionID").val(section_id);
-                                    $("#listModeSubjectID").val(subject_id);
-                                    $("#listModeexamID").val(exam_id);
-                                    $("#listModePaperID").val(paper_id);
-                                    $("#listModeSemesterID").val(semester_id);
-                                    $("#listModeSessionID").val(session_id);
-                                } else {
-                                    $("#mark_by_subject_card").hide();
-                                }
+                                getstudentDetails(formData);
                             } else {
                                 toastr.error("Marks details are not available");
-                                $("#mark_by_subject_card").hide();
                             }
                         } else {
                             toastr.error("Pass and Fail marks are not given");
-                            $("#mark_by_subject_card").hide();
                         }
-                        $("#overlay").fadeOut(300);
                     } else {
                         $("#mark_by_subject_card").hide();
                         $("#overlay").fadeOut(300);
@@ -297,16 +282,55 @@ $(function () {
                     toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
                 }
             });
-
-            callsubjectaveragechart(formData);
-
-            callbarchart(formData);
-            // division chart
-            callradarchart(formData);
-
-            calldonutchart(formData);
         };
     });
+    function getstudentDetails(formData) {
+        $.ajax({
+            url: getSubjectMarks,
+            method: "post",
+            data: formData,
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (response) {
+                console.log("response");
+                console.log(response);
+                if (response.code == 200) {
+                    var dataSetNew = response.data;
+                    if (response.data.length > 0) {
+                        $("#mark_by_subject_card").show();
+                        bindmarks(dataSetNew);
+                        $("#listModeClassID").val(class_id);
+                        $("#listModeSectionID").val(section_id);
+                        $("#listModeSubjectID").val(subject_id);
+                        $("#listModeexamID").val(exam_id);
+                        $("#listModePaperID").val(paper_id);
+                        $("#listModeSemesterID").val(semester_id);
+                        $("#listModeSessionID").val(session_id);
+                    } else {
+                        $("#mark_by_subject_card").hide();
+                    }
+                    $("#overlay").fadeOut(300);
+                } else {
+                    $("#mark_by_subject_card").hide();
+                    $("#overlay").fadeOut(300);
+                    toastr.error(response.message);
+                }
+            }, error: function (err) {
+                $("#mark_by_subject_card").hide();
+                $("#overlay").fadeOut(300);
+                toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
+            }
+        });
+
+        callsubjectaveragechart(formData);
+
+        callbarchart(formData);
+        // division chart
+        callradarchart(formData);
+
+        calldonutchart(formData);
+    }
     function calldonutchart(formData) {
 
         $.ajax({

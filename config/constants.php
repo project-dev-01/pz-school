@@ -46,7 +46,7 @@ return [
         'branch_by_section' => $url.'/branch-by-section',
         'section_by_class' => $url.'/section-by-class',
         'subject_by_class' => $url.'/subject-by-class',  
-        'subject_by_exam_names' => $url.'/subject-by-exam-names',  
+        'subject_by_exam_names' => $url.'/subject-by-exam-names',
         'exam_by_subjects' => $url.'/exam-by-subjects', 
         'subject_by_papers' => $url.'/subject-by-papers', 
         'timetable_subject' => $url.'/timetable-subject',
