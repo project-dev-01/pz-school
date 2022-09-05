@@ -184,30 +184,6 @@
                 </form>
             </div>
 
-            <div class="card" id="subjectdivTableAppend" style="display:none">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">Marks By Subject Division
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card-body">
-                            <form id="tblsubjectdivSave" method="post" action="{{ route('admin.subjectdivision.add') }}" autocomplete="off">
-                                @csrf
-                                <div id="subjectdivTableAppend_text">
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="clearfix mt-4">
-                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Save</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div> <!-- end table-responsive-->
-                    </div>
-                </div> <!-- end card body-->
-            </div>
             <div class="card" id="subject_average_card" style="display:none">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
@@ -222,12 +198,12 @@
                             <div class="card-body">
                                 <div class="card-widgets">
                                     <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                                    <a data-toggle="collapse" href="#cardCollpase3" role="button" aria-expanded="false" aria-controls="cardCollpase3"><i class="mdi mdi-minus"></i></a>
+                                    <a data-toggle="collapse" href="#cardCollpase4" role="button" aria-expanded="false" aria-controls="cardCollpase4"><i class="mdi mdi-minus"></i></a>
                                     <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
                                 </div>
-                                <!-- <h4 class="header-title mb-0">Subject Average</h4> -->
+                                <h4 class="header-title mb-0">Subject Average</h4>
 
-                                <div id="cardCollpase3" class="collapse pt-3 show" dir="ltr">
+                                <div id="cardCollpase4" class="collapse pt-3 show" dir="ltr">
                                     <div id="subject-avg-chart" class="apex-charts" data-colors="#f672a7"></div>
                                 </div> <!-- collapsed end -->
 
@@ -327,48 +303,6 @@
     <!-- container -->
 </div>
 
-
-<!-- Center modal content -->
-<div class="modal fade studentSubDivMarkModal" id="studentSubDivMarkModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-full-width">
-        <div class="modal-content">
-            <div class="modal-header">
-                <!-- <h4 class="modal-title" id="myaddClassModalLabel">Add Class</h4> -->
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="header-title">Subject Average</h4>
-                                <div class="mt-4 chartjs-chart">
-                                    <div id="student-div-subject-mark" class="apex-charts" data-colors="#4fc6e1"></div>
-                                    <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
-                                </div>
-                            </div> <!-- end card-body-->
-                        </div> <!-- end card-->
-                    </div> <!-- end col -->
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="header-title">Student Divison Mark</h4>
-                                <div class="mt-4 chartjs-chart">
-                                    <canvas id="student-radar-chart" data-colors="#39afd1,#a17fe0"></canvas>
-                                    <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
-                                </div>
-                            </div> <!-- end card-body-->
-                        </div> <!-- end card-->
-                    </div> <!-- end col -->
-
-                </div>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
 <!-- Center modal content -->
 <div class="modal fade studentMarkModal" id="studentMarkModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-full-width">
@@ -404,6 +338,22 @@
                     </div> <!-- end col -->
 
                 </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="stuRemarksPopup" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <label for="heard">Remarks</label>
+                <input type="hidden" id="studenetID" />
+                <textarea class="form-control" id="student_remarks" maxlength="50" rows="5" placeholder="Enter memo here" name="student_remarks"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                <button type="button" id="studentRemarksSave" class="btn btn-primary">Save</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

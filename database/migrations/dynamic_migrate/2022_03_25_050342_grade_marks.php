@@ -21,6 +21,7 @@ class GradeMarks extends Migration
             $table->string('grade_point')->nullable();
             $table->integer('grade_category');
             $table->string('notes')->nullable();
+            $table->string('status');
             $table->timestamps();
         });
     }

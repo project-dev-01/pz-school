@@ -26,6 +26,17 @@
                         <input type="text" name="max_mark" class="form-control" placeholder="Enter Maximum Percentage">
                     </div>
                     <div class="form-group">
+                        <label for="status">Status<span class="text-danger">*</span></label>
+                        <select class="form-control" name="status">
+                            <option value="Pass">Pass</option>
+                            <option value="Fail">Fail</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="grade_point">Grade Point <span class="text-danger">*</span></label>
+                        <input type="text" name="grade_point" class="form-control" placeholder="Enter Grade Point">
+                    </div>
+                    <div class="form-group">
                         <label for="grade_category">Grade Category<span class="text-danger">*</span></label>
                         <select class="form-control" name="grade_category">
                             <option value="">Select Grade Category</option>

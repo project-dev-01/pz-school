@@ -3230,7 +3230,8 @@ class AdminController extends Controller
             'grade' => $request->grade,
             'grade_point' => $request->grade_point,
             'grade_category' => $request->grade_category,
-            'notes' => $request->notes
+            'notes' => $request->notes,
+            'status' => $request->status
         ];
 
 
@@ -3277,7 +3278,8 @@ class AdminController extends Controller
             'grade' => $request->grade,
             'grade_point' => $request->grade_point,
             'grade_category' => $request->grade_category,
-            'notes' => $request->notes
+            'notes' => $request->notes,
+            'status' => $request->status
         ];
 
         $response = Helper::PostMethod(config('constants.api.grade_update'), $data);

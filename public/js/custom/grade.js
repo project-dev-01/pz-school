@@ -7,6 +7,7 @@ $(function () {
             grade_point: "required",
             min_mark: "required",
             max_mark: "required",
+            status: "required",
             grade_category: "required"
         }
     });
@@ -94,6 +95,10 @@ $(function () {
                 name: 'max_mark'
             },
             {
+                data: 'status',
+                name: 'status'
+            },
+            {
                 data: 'actions',
                 name: 'actions',
                 orderable: false,
@@ -112,6 +117,7 @@ $(function () {
             $('.editGrade').find('input[name="grade_point"]').val(data.data.grade_point);
             $('.editGrade').find('input[name="min_mark"]').val(data.data.min_mark);
             $('.editGrade').find('input[name="max_mark"]').val(data.data.max_mark);
+            $('.editGrade').find('select[name="status"]').val(data.data.status);
             $('.editGrade').find('select[name="grade_category"]').val(data.data.grade_category);
             $('.editGrade').find('input[name="notes"]').val(data.data.notes);
             $('.editGrade').modal('show');
@@ -125,6 +131,7 @@ $(function () {
             grade_point: "required",
             min_mark: "required",
             max_mark: "required",
+            status: "required",
             grade_category: "required"
         }
     });

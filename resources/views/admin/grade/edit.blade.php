@@ -12,19 +12,26 @@
                     <input type="hidden" name="id">
                     <div class="form-group">
                         <label for="grade">Grade Name<span class="text-danger">*</span></label>
-                        <input type="text"  id="grade" name="grade" class="form-control" placeholder="Enter Grade name">
+                        <input type="text" id="grade" name="grade" class="form-control" placeholder="Enter Grade name">
                     </div>
                     <div class="form-group">
                         <label for="grade_point">Grade Point <span class="text-danger">*</span></label>
-                        <input type="text"  id="grade_point" name="grade_point" class="form-control" placeholder="Enter Grade Point">
+                        <input type="text" id="grade_point" name="grade_point" class="form-control" placeholder="Enter Grade Point">
                     </div>
                     <div class="form-group">
                         <label for="min_mark">Minimun Percentage<span class="text-danger">*</span></label>
-                        <input type="text"  id="min_mark" name="min_mark" class="form-control" placeholder="Enter Minimun Percentage">
+                        <input type="text" id="min_mark" name="min_mark" class="form-control" placeholder="Enter Minimun Percentage">
                     </div>
                     <div class="form-group">
                         <label for="max_mark">Maximum Percentage<span class="text-danger">*</span></label>
-                        <input type="text"  id="max_mark" name="max_mark" class="form-control" placeholder="Enter Maximum Percentage">
+                        <input type="text" id="max_mark" name="max_mark" class="form-control" placeholder="Enter Maximum Percentage">
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status<span class="text-danger">*</span></label>
+                        <select class="form-control" name="status">
+                            <option value="Pass">Pass</option>
+                            <option value="Fail">Fail</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="grade_category">Grade Category<span class="text-danger">*</span></label>

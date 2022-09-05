@@ -42,6 +42,7 @@
                                 <th>Grade Point</th>
                                 <th>Min Percentage</th>
                                 <th>Max Percentage</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

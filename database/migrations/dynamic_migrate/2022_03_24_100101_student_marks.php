@@ -24,12 +24,12 @@ class StudentMarks extends Migration
             $table->integer('semester_id');
             $table->integer('session_id');
             $table->integer('exam_id');
-            $table->integer('score');
+            $table->string('score')->nullable();
             $table->string('pass_fail')->nullable();
             $table->string('status')->nullable();
             $table->string('grade');
-            $table->integer('ranking');
-            $table->string('memo');   
+            $table->string('ranking')->nullable();
+            $table->text('memo')->nullable();   
             $table->timestamps();
         });
     }
