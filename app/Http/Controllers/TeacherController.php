@@ -385,10 +385,19 @@ class TeacherController extends Controller
             'teacher_id' => session()->get('ref_user_id')
         ];
         $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+
         //$get_exams = Helper::GetMethod(config('constants.api.get_testresult_exams'));
         // dd($response);     
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        // dd($sem);
         return view('teacher.testresult.index', [
-            'teacher_class' => $response['data']
+            'teacher_class' => $response['data'],
+            'semester' => $semester['data'],
+            'session' => $session['data'],
+            'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+            'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             //   'get_exams' => $get_exams['data']
         ]);
     }
@@ -880,6 +889,10 @@ class TeacherController extends Controller
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
             "subject_id" => $request->subject_id,
+            "paper_id" => $request->paper_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id,
+            "grade_category" => $request->grade_category,
             "exam_id" => $request->exam_id
         ];
 
