@@ -1849,8 +1849,8 @@ class AdminController extends Controller
                 'semester' => $semester['data'],
                 'session' => $session['data'],
                 'hall_list' => $hall_list['data'],
-                'current_semester' => $sem['data']['semester']['id'],
-                'current_session' => $sem['data']['session']
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -1890,8 +1890,8 @@ class AdminController extends Controller
                 'semester' => $semester['data'],
                 'session' => $session['data'],
                 'hall_list' => $hall_list['data'],
-                'current_semester' => $sem['data']['semester']['id'],
-                'current_session' => $sem['data']['session']
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -2850,8 +2850,8 @@ class AdminController extends Controller
                 'class' => $getclass['data'],
                 'semester' => $semester['data'],
                 'session' => $session['data'],
-                'current_semester' => $sem['data']['semester']['id'],
-                'current_session' => $sem['data']['session']
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -2871,8 +2871,8 @@ class AdminController extends Controller
                 'exam' => $getexam['data'],
                 'semester' => $semester['data'],
                 'session' => $session['data'],
-                'current_semester' => $sem['data']['semester']['id'],
-                'current_session' => $sem['data']['session']
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -3480,8 +3480,8 @@ class AdminController extends Controller
             'classes' => $getclass['data'],
             'semester' => $semester['data'],
             'session' => $session['data'],
-            'current_semester' => $sem['data']['semester']['id'],
-            'current_session' => $sem['data']['session']
+            'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+            'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
         ]);
     }
 
@@ -4493,8 +4493,8 @@ class AdminController extends Controller
             'class' => $response['data'],
             'semester' => $semester['data'],
             'session' => $session['data'],
-            'current_semester' => $sem['data']['semester']['id'],
-            'current_session' => $sem['data']['session']
+            'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+            'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
         ]);
     }
 
