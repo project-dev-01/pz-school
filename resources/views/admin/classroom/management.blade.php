@@ -464,8 +464,8 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label for="changeAttendance">Attendance Status</label>
-                                                            <p id="attendaceTakenSts"></p>
+                                                            <label>Attendance Status</label><br>
+                                                            <div id="attendaceTakenSts"></div>
                                                         </div>
                                                     </div>
                                                 </div>

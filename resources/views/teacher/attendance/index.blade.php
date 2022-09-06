@@ -1,6 +1,23 @@
 @extends('layouts.admin-layout')
 @section('title','Student Attendance')
 @section('content')
+<style>
+    @media only screen and (min-device-width: 320px) and (max-device-width: 660px) {
+        .btn-xs {
+            padding: 0px 5px;
+            border-radius: 0.15rem;
+        }
+
+    }
+
+    @media only screen and (min-device-width: 280px) and (max-device-width: 653px) {
+        .btn-xs {
+            padding: 0px 0px;
+            border-radius: 0.15rem;
+        }
+
+    }
+</style>
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -24,7 +41,7 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
                             Select Ground
@@ -90,7 +107,7 @@
     <div class="row attendanceReport">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
                             Attendance Report
@@ -140,7 +157,7 @@
     <div class="row attendanceReport">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
                             Daily Present and Late Analysis
@@ -158,7 +175,7 @@
 
                                         <div id="cardCollpase7" class="collapse pt-3 show" dir="ltr">
                                             <div id="late-present-absent" class="apex-mixed-1" data-colors="#1FAB44,#FEB019,#EB5234"></div>
-                                        </div> 
+                                        </div>
                                     </div> <!-- end card-body-->
                                 </div> <!-- end card-->
                             </div> <!-- end col -->
@@ -181,7 +198,7 @@
     var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";
     var getAttendanceListTeacher = "{{ config('constants.api.get_attendance_list_teacher') }}";
     var getReasonsByStudent = "{{ config('constants.api.get_reasons_by_student') }}";
-    
+
     // default image test
     var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
 </script>

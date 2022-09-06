@@ -27,7 +27,7 @@
 
     @media only screen and (min-device-width: 280px) and (max-device-width: 1200px) {
         .dt-responsive {
-            width: 1000%;
+            width: max-content;
         }
 
     }

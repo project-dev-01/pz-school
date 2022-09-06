@@ -397,12 +397,12 @@
                         </ul><br>
                         <ul class="nav nav-pills navtab-bg nav-justified">
                             <li class="nav-item">
-                                <a href="#profile-b1" data-toggle="tab" aria-expanded="true" class="nav-link active">
+                                <a href="#profile-b1" data-toggle="tab" aria-expanded="true" class="nav-link">
                                     Layout Mode
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#home-b1" data-toggle="tab" aria-expanded="false" class="nav-link">
+                                <a href="#home-b1" data-toggle="tab" aria-expanded="false" class="nav-link active">
                                     List Mode
                                 </a>
                             </li>
@@ -419,7 +419,7 @@
                         </ul><br>
                         <div class="card-body">
                             <div class="tab-content">
-                                <div class="tab-pane show active" id="profile-b1">
+                                <div class="tab-pane" id="profile-b1">
                                     <div class="row">
                                         <div class="col-md-8"></div>
                                         <div class="col-md-4 form-group text-right m-b-0">
@@ -442,7 +442,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="home-b1">
+                                <div class="tab-pane show active" id="home-b1">
                                     <form id="addListMode" method="post" action="{{ route('teacher.classroom.add') }}" autocomplete="off">
                                         @csrf
                                         <div class="card">
@@ -460,12 +460,12 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-6">
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label for="changeAttendance">Attendance Status</label>
-                                                            <p id="attendaceTakenSts"></p>
+                                                            <label>Attendance Status</label><br>
+                                                            <div id="attendaceTakenSts"></div>
                                                         </div>
                                                     </div>
                                                 </div>

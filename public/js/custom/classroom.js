@@ -13,7 +13,7 @@ $(function () {
     if (classroom_details) {
         var classroomDetails = JSON.parse(classroom_details);
         if (classroomDetails.length == 1) {
-            var classID, sectionID, subjectID, classDate, sectionName, subjectName,semesterID,sessionID;
+            var classID, sectionID, subjectID, classDate, sectionName, subjectName, semesterID, sessionID;
             classroomDetails.forEach(function (user) {
                 classID = user.class_id;
                 sectionID = user.section_id;
@@ -29,8 +29,8 @@ $(function () {
                 classID: classID,
                 sectionID: sectionID,
                 subjectID: subjectID,
-                semesterID : semesterID,
-                sessionID : sessionID,
+                semesterID: semesterID,
+                sessionID: sessionID,
                 classDate: format_date
             };
             $('#changeClassName').val(classID);
@@ -212,12 +212,15 @@ $(function () {
                 // console.log(response.data.get_student_attendence)
                 // console.log(response.data.taken_attentance_status.status)
                 var dataSetNew = response.data.get_student_attendence;
+                $("#attendaceTakenSts").empty();
                 if (response.data.taken_attentance_status) {
                     var taken_attentance_status = response.data.taken_attentance_status.status;
                     if (taken_attentance_status) {
-                        $("#attendaceTakenSts").html("Taken");
+                        var taken = '<p class="badge bg-soft-success text-success" style="padding: 1.00em 3.4em;font-size: 85%;">Taken</p>';
+                        $("#attendaceTakenSts").append(taken);
                     } else {
-                        $("#attendaceTakenSts").html("Untaken");
+                        var unTaken = '<p class="badge bg-soft-danger text-danger" style="padding: 1.00em 3.4em;font-size: 85%;">Untaken</p>';
+                        $("#attendaceTakenSts").append(unTaken);
                     }
                 }
                 var currentDate = convertDigitIn($("#classDate").val());
@@ -643,7 +646,9 @@ $(function () {
                     formData.append('session_id', sessionID);
                     formData.append('date', convertDigitIn(classDate));
                     widgetShow(formData);
-                    $("#attendaceTakenSts").html("Taken");
+                    $("#attendaceTakenSts").empty();
+                    var taken = '<p class="badge bg-soft-success text-success" style="padding: 1.00em 3.4em;font-size: 85%;">Taken</p>';
+                    $("#attendaceTakenSts").append(taken);
 
                 } else {
                     toastr.error(response.message);

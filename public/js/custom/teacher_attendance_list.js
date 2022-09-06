@@ -190,7 +190,7 @@ $(function () {
                             // add functions tr start
                             get_attendance_list.forEach(function (res) {
                                 attendanceListShow += '<tr>' +
-                                    '<td class="text-left studentRow">' +
+                                    '<td class="text-left studentRow" style="display:grid;">' +
                                     // '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light studentDetails" data-toggle="modal" data-id="' + res.student_id + '" data-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">' +
                                     '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light studentDetails" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">' +
                                     '<input type="hidden" value="' + res.student_id + '">' +
@@ -303,7 +303,7 @@ $(function () {
 
         var date = new Date(classDate)
         var year_month = ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
-        
+
         var formData = new FormData();
         formData.append('token', token);
         formData.append('branch_id', branchID);
@@ -324,18 +324,18 @@ $(function () {
             processData: false,
             success: function (response) {
                 if (response.code == 200) {
-                    
+
                     var late_details = response.data;
                     var labels = [];
                     var resonsCount = [];
                     if (late_details.length > 0) {
                         $.each(late_details[0], function (key, value) {
-                            
+
                             labels.push(key);
                             resonsCount.push(value);
                         });
                     }
-                    console.log(labels,resonsCount);
+                    console.log(labels, resonsCount);
                     // chart
                     renderChart(labels, resonsCount);
 
@@ -404,12 +404,12 @@ $(function () {
     $(document).on('change', ".status", function (e) {
         e.preventDefault();
         var status = $(this).val();
-        console.log('cv',status)
-        if ( status == "absent" ) {
+        console.log('cv', status)
+        if (status == "absent") {
             $(this).closest('tr').find('.checkin').val("");
             $(this).closest('tr').find('.checkout').val("");
             $(this).closest('tr').find('.hours').val("");
-            
+
             $(this).closest('tr').find('.checkin').prop('readonly', true);
             $(this).closest('tr').find('.checkout').prop('readonly', true);
             $(this).closest('tr').find('.hours').prop('readonly', true);
@@ -424,10 +424,10 @@ $(function () {
         e.preventDefault();
         var checkin = $(this).val();
         var checkout = $(this).closest('tr').find('.checkout').val();
-        
-        if(checkout){
-            var valuein  = moment.duration(checkin, 'HH:mm');
-            var valueout  = moment.duration(checkout, 'HH:mm');
+
+        if (checkout) {
+            var valuein = moment.duration(checkin, 'HH:mm');
+            var valueout = moment.duration(checkout, 'HH:mm');
             if (valuein < valueout) {
                 var difference = valueout.subtract(valuein);
 
@@ -438,7 +438,7 @@ $(function () {
                 $(this).closest('tr').find('.hours').val("");
                 alert('Check In Value Must be Lesser Than Check Out')
             }
-            
+
         }
     });
 
@@ -446,22 +446,21 @@ $(function () {
         e.preventDefault();
         var checkout = $(this).val();
         var checkin = $(this).closest('tr').find('.checkin').val();
-        
-        if(checkin){
-            var valuein  = moment.duration(checkin, 'HH:mm');
-            var valueout  = moment.duration(checkout, 'HH:mm');
-            if(valuein < valueout)
-            {
+
+        if (checkin) {
+            var valuein = moment.duration(checkin, 'HH:mm');
+            var valueout = moment.duration(checkout, 'HH:mm');
+            if (valuein < valueout) {
                 var difference = valueout.subtract(valuein);
 
                 var hours = ("0" + difference.hours()).slice(-2) + ":" + ("0" + difference.minutes()).slice(-2);
                 $(this).closest('tr').find('.hours').val(hours);
-            }else{
+            } else {
                 $(this).closest('tr').find('.checkout').val("");
                 $(this).closest('tr').find('.hours').val("");
                 alert('Check Out Value Must be Greater Than Check In')
             }
-            
+
         }
     });
 
@@ -536,7 +535,7 @@ $(function () {
             var reportDate = $("#employeeReportDate").val();
             var employee = $("#employeeReportEmployee").val();
             // var department = $("#employeeReportDepartment").val();
-            
+
             var date = new Date(reportDate)
             var year_month = ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
 
@@ -603,13 +602,13 @@ $(function () {
                                     '<td class="text-left staffRow">' +
                                     '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light staffDetails" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">' +
                                     '<input type="hidden" value="' + res.staff_id + '">';
-                                    // '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">' +
-                                    if(res.photo) {
-                                        attendanceListShow +=  '<img src="' + staffImg + '/' +res.photo + '" alt="user-image" class="rounded-circle">';
-                                    }else{
-                                        attendanceListShow +=  '<img src="' + defaultImg + '" alt="user-image" class="rounded-circle">';
-                                    }
-                                attendanceListShow +=  '</a>' + res.first_name + ' ' + res.last_name + '</td>';
+                                // '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">' +
+                                if (res.photo) {
+                                    attendanceListShow += '<img src="' + staffImg + '/' + res.photo + '" alt="user-image" class="rounded-circle">';
+                                } else {
+                                    attendanceListShow += '<img src="' + defaultImg + '" alt="user-image" class="rounded-circle">';
+                                }
+                                attendanceListShow += '</a>' + res.first_name + ' ' + res.last_name + '</td>';
 
                                 var attendance_details = res.attendance_details;
 
@@ -650,7 +649,7 @@ $(function () {
                                     '<td>' + res.absentCount + '</td>' +
                                     '<td>' + res.lateCount + '</td>' +
                                     '</tr>';
-                                
+
                                 widgetpresent += res.presentCount;
                                 widgetabsent += res.absentCount;
                                 widgetlate += res.lateCount;
@@ -731,18 +730,18 @@ $(function () {
 
             var reportDate = $("#employeeDate").val();
             var employee = $("#employee").val();
-            
+
 
             var date = new Date(reportDate);
 
             var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
             var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-            
+
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
             formData.append('employee', employee);
-            
+
             formData.append('firstDay', formatDate(new Date(firstDay)));
             formData.append('lastDay', formatDate(new Date(lastDay)));
 
@@ -792,43 +791,39 @@ $(function () {
     });
 
     function callout(data) {
-        
+
         $.each(data, function (key, val) {
             var row = "";
             var disabled = "";
-            row += '<tr id="row'+count+'"> ';
-            if(val.details.id)
-            {
-                row += '<input type="hidden" name="attendance[' + count + '][id]" value="' + val.details.id +'">';
-            }else{
+            row += '<tr id="row' + count + '"> ';
+            if (val.details.id) {
+                row += '<input type="hidden" name="attendance[' + count + '][id]" value="' + val.details.id + '">';
+            } else {
                 row += '<input type="hidden" name="attendance[' + count + '][id]" value="">';
             }
             row += '<td width="15%">';
             row += '<div class="form-group">';
-            row += '<input type="text" name="attendance[' + count + '][date]" class="form-control" value="' + val.date +'">';
+            row += '<input type="text" name="attendance[' + count + '][date]" class="form-control" value="' + val.date + '">';
             row += '</div>';
             row += '</td>';
             row += '<td width="20%">';
             row += '<div class="form-group">';
             row += '<select  class="form-control status"  name="attendance[' + count + '][status]">';
             row += '<option value="">Select Status</option>';
-            if(val.details.status == "present")
-            {
+            if (val.details.status == "present") {
                 row += '<option value="present" Selected>Present</option>';
                 row += '<option value="absent">Absent</option>';
                 row += '<option value="late">Late</option>';
-            }else if(val.details.status == "absent")
-            {
+            } else if (val.details.status == "absent") {
                 row += '<option value="present">Present</option>';
                 row += '<option value="absent" Selected>Absent</option>';
                 row += '<option value="late">Late</option>';
                 disabled = "readonly";
-            }else if(val.details.status == "late")
-            {
+            } else if (val.details.status == "late") {
                 row += '<option value="present">Present</option>';
                 row += '<option value="absent">Absent</option>';
                 row += '<option value="late" Selected>Late</option>';
-            }else{
+            } else {
                 row += '<option value="present">Present</option>';
                 row += '<option value="absent">Absent</option>';
                 row += '<option value="holiday">Late</option>';
@@ -838,7 +833,7 @@ $(function () {
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
-            row += '<input class="form-control checkin" type="time" name="attendance[' + count + '][check_in]"  value="' + val.details.check_in + '" ' + disabled + '> ' ;
+            row += '<input class="form-control checkin" type="time" name="attendance[' + count + '][check_in]"  value="' + val.details.check_in + '" ' + disabled + '> ';
             row += '</div>';
             row += '</td>';
             row += '<td width="10%">';
@@ -848,19 +843,17 @@ $(function () {
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
-            if(val.details.hours)
-            {
+            if (val.details.hours) {
                 row += '<input type="text" name="attendance[' + count + '][hours]" class="form-control hours" value="' + val.details.hours + '" ' + disabled + ' >';
-            }else{
+            } else {
                 row += '<input type="text" name="attendance[' + count + '][hours]" class="form-control hours" value="" ' + disabled + '>';
             }
             row += '</div>';
             row += '</td>';
-            row += '<td width="20%">'; 
-            if(val.details.remarks)
-            {
+            row += '<td width="20%">';
+            if (val.details.remarks) {
                 row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="' + val.details.remarks + '">';
-            }else{
+            } else {
                 row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="">';
             }
             row += '</td>';

@@ -1961,7 +1961,7 @@ class AdminController extends Controller
                 if (!isset($timetable['data']['week'][$day]) && ($day == "saturday" || $day == "sunday")) {
                 } else {
 
-                    $response .= '<tr><td>' . strtoupper($day) . '</td>';
+                    $response .= '<tr><td class="center" style="color:#6d6dcb;">' . strtoupper($day) . '</td>';
                     $row = 0;
                     foreach ($timetable['data']['timetable'] as $table) {
                         if ($table['day'] == $day) {
@@ -1981,13 +1981,13 @@ class AdminController extends Controller
                                 } else {
                                     $subject = (isset($table['break_type']) ? $table['break_type'] : "");
                                 }
-                                $response .= '<b>Subject:' . $subject . '</b><br>';
+                                $response .= '<b><div style="color:#3dacae;display:inline-block;">Subject : </div>' . $subject . '</b><br>';
                                 $response .= '(' . $start_time . ' - ' . $end_time . ' )<br>';
                                 if ($table['teacher_name']) {
-                                    $response .= 'Teacher :  ' . $table['teacher_name'] . '<br>';
+                                    $response .= '<b><div style="color:#3dacae;display:inline-block;">Teacher :  </div>' . $table['teacher_name'] . '</b><br>';
                                 }
                                 if (isset($table['hall_no'])) {
-                                    $response .= 'Class Room : ' . $table['hall_no'] . '';
+                                    $response .= '<b><div style="color:#3dacae;display:inline-block;">Class Room : </div>' . $table['hall_no'] . '</b><br>';
                                 }
                             }
                             $response .= '</td>';
@@ -2267,7 +2267,7 @@ class AdminController extends Controller
                                     <td>' . $work['date_of_submission'] . '</td>
                                     <td>' . $completed . '/' . $incompleted . '</td>
                                     <td>' . $homework['data']['total_students'] . '</td>
-                                    <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="' . $work['id'] . '" data-target=".firstModal"><i class="fas fa-bars"></i> Details</a></td>
+                                    <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="' . $work['id'] . '" data-target=".firstModal"><i class="fas fa-bars"></i> <span style="color: white">Details</span></a></td>
                                 </tr>';
                     $row++;
                 }
@@ -2347,10 +2347,10 @@ class AdminController extends Controller
                     }
 
                     if ($work['status'] == "1") {
-                        $status = '<button type="button" class="btn btn-outline-success btn-rounded waves-effect waves-light">Completed</button>';
+                        $status = '<button type="button" class="btn btn-success btn-rounded waves-effect waves-light" style="border:none;">Completed</button>';
                         $complete++;
                     } else {
-                        $status = '<button type="button" class="btn btn-outline-danger btn-rounded waves-effect waves-light">Incomplete</button>';
+                        $status = '<button type="button" class="btn btn-danger btn-rounded waves-effect waves-light" style="border:none;">Incomplete</button>';
                         $incomplete++;
                     }
 
@@ -2362,15 +2362,26 @@ class AdminController extends Controller
                                     <td>' . $work['register_no'] . '</td>
                                     <td>' . $status . '</td>
                                     <td>
-                                        <div class="form-group">
-                                            <label for="score_name">Status</label>
-                                            ' . $score_name . '
+                                        <div class="form-group mb-2">
+                                        <div class="row">
+                                            <div class="col-sm-6"> 
+                                            ' . $score_name . '                                       
+										</div>
+                                            <div class="col-sm-6">                                                
+												<input type="text" class="form-control" name="homework[' . $row . '][score_value]" value="' . $work['score_value'] . '" aria-describedby="inputGroupPrepend" >
+											</div>
                                         </div>
-                                        <input type="text" class="form-control" name="homework[' . $row . '][score_value]" value="' . $work['score_value'] . '" aria-describedby="inputGroupPrepend" >
-
+                                        </div>
                                     </td>
-                                    <td><input type="text" class="form-control" name="homework[' . $row . '][teacher_remarks]"  value="' . $work['teacher_remarks'] . '" aria-describedby="inputGroupPrepend" ></td>
                                     <td>
+									<div class="form-group mb-2">
+                                        <div class="row">
+										 <div class="col-sm-12"> 
+										<input type="text" class="form-control" name="homework[' . $row . '][teacher_remarks]"  value="' . $work['teacher_remarks'] . '" aria-describedby="inputGroupPrepend" ></td>
+                                    </div>
+									</div>
+									</div>
+									<td>
                                         <i data-feather="file-text" class="icon-dual"></i>
                                         <span class="ml-2 font-weight-semibold"><a  href="' . asset('student/homework/') . '/' . $work['file'] . '" download class="text-reset">' . $work['file'] . '</a></span>
                                     </td>
