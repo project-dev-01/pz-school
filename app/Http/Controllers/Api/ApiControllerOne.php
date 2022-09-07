@@ -614,6 +614,7 @@ class ApiControllerOne extends BaseController
                                 $subject_id =  $importData[5];
                             }
                         }
+                        $breakType = ($break == 1 ? "Break" : null);
                         $time_start = date("H:i:s", strtotime($importData[7]));
                         $time_end = date("H:i:s", strtotime($importData[8]));
                         
@@ -621,7 +622,7 @@ class ApiControllerOne extends BaseController
                             'class_id' => $class_id,
                             'section_id' => $section_id,
                             'break' => $break,
-                            'break_type' => "Break",
+                            'break_type' => $breakType,
                             'subject_id' => $subject_id,
                             'teacher_id' => $teacher_id,
                             'class_room' => $importData[9],

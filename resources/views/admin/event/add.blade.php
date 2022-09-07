@@ -61,9 +61,9 @@
                             <div class="col-md-4" id="class">
                                 <div class="form-group">
                                     <label for="class">Class</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2"  name="class[]" id="classes" multiple="multiple" data-placeholder="Choose ...">
+                                    <select class="form-control select2-multiple" data-toggle="select2" name="class[]" id="classes" multiple="multiple" data-placeholder="Choose ...">
                                         @foreach($class as $cla)
-                                            <option value="{{$cla['id']}}">{{$cla['name']}}</option>
+                                        <option value="{{$cla['id']}}">{{$cla['name']}}</option>
                                         @endforeach
                                     </select>
                                     <span class="text-danger error-text class_error"></span>
@@ -72,9 +72,9 @@
                             <div class="col-md-4" id="group_row">
                                 <div class="form-group">
                                     <label for="group">Group</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2"  name="group[]" id="group" multiple="multiple" data-placeholder="Choose ...">
+                                    <select class="form-control select2-multiple" data-toggle="select2" name="group[]" id="group" multiple="multiple" data-placeholder="Choose ...">
                                         @foreach($group as $gro)
-                                            <option value="{{$gro['id']}}">{{$gro['name']}}</option>
+                                        <option value="{{$gro['id']}}">{{$gro['name']}}</option>
                                         @endforeach
                                     </select>
                                     <span class="text-danger error-text group_error"></span>
@@ -116,18 +116,26 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-2">
+                                <div class="form-group mt-3">
+                                    <div class="custom-control custom-checkbox form-check">
+                                        <input type="checkbox" class="custom-control-input" name="holiday" id="holiday" checked>
+                                        <label class="custom-control-label" for="holiday">Holiday</label>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-3 time" style="display:none">
                                 <div class="form-group">
                                     <label>Start Time</label>
-                                    <input type="text"  class="form-control timepicker" name="start_time" id="add_start_time">
-                                        <span class="text-danger error-text start_time_error"></span>
+                                    <input type="text" class="form-control timepicker" name="start_time" id="add_start_time">
+                                    <span class="text-danger error-text start_time_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-3 time" style="display:none">
                                 <div class="form-group">
                                     <label>End Time</label>
-                                    <input type="text"  class="form-control timepicker" name="end_time" id="add_end_time">
-                                        <span class="text-danger error-text end_time_error"></span>
+                                    <input type="text" class="form-control timepicker" name="end_time" id="add_end_time">
+                                    <span class="text-danger error-text end_time_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -135,10 +143,10 @@
                                     <label for="description">Description</label>
                                     <textarea class="form-control" name="description"></textarea>
                                     <span class="text-danger error-text description_error"></span>
-                                </div> 
+                                </div>
                             </div>
                         </div>
-                        
+
                         <div class="form-group text-right m-b-0">
                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
                                 Save
@@ -153,9 +161,8 @@
 @endsection
 @section('scripts')
 <script>
-  //event routes
+    //event routes
     var eventList = "{{ route('admin.event') }}";
-    
 </script>
 <script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>
 <script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>
@@ -163,4 +170,3 @@
 <script src="{{ asset('public/js/custom/event.js') }}"></script>
 
 @endsection
-

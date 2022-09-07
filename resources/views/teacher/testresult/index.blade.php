@@ -358,7 +358,7 @@
 @endsection
 @section('scripts')
 <script>
-    var teacherSectionUrl = "{{ config('constants.api.section_by_class') }}";
+    var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
     // var teacherSubjectUrl = "{{ config('constants.api.subject_by_class') }}";
     var subjectByExamNames = "{{ config('constants.api.subject_by_exam_names') }}";
     var examBySubjects = "{{ config('constants.api.exam_by_subjects') }}";

@@ -134,7 +134,7 @@
                                                 <th>Ending Time <span class="text-danger">*</span></th>
                                                 <th>Location <span class="text-danger">*</span></th>
                                                 <th>Distributor<span class="text-danger">*</span></th>
-                                                <th>Marks<span class="text-danger">*</span></th>
+                                                <!-- <th>Marks<span class="text-danger">*</span></th> -->
 
                                             </tr>
                                         </thead>

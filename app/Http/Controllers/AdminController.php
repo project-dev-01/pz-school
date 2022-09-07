@@ -782,6 +782,7 @@ class AdminController extends Controller
             'all_day' => $request->all_day,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
+            'holiday' => $request->holiday,
             'description' => $request->description
         ];
         $response = Helper::PostMethod(config('constants.api.event_add'), $data);
@@ -861,6 +862,7 @@ class AdminController extends Controller
             'group' => $request->group,
             'section' => $request->section,
             'all_day' => $request->all_day,
+            'holiday' => $request->holiday,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
             'description' => $request->description
@@ -1679,7 +1681,7 @@ class AdminController extends Controller
 
                     $response .=  '</div>';
                     $response .=  '</td>';
-                    $response .=  '<td width="20%"  > ';
+                    $response .=  '<td width="20%" >';
                     $response .=  '<div class="form-group">';
                     $response .=  '<select  class="form-control select2-multiple teacher" id="teacher' . $row . '" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="timetable[' . $row . '][teacher][]" ' . $bulk . '>';
                     $response .=  '<option value="">Select Teacher</option>';
@@ -1713,6 +1715,14 @@ class AdminController extends Controller
                         $response .=  '<button type="button" class=" btn btn-danger removeTR"><i class="fas fa-times"></i> </button>';
                     }
                     $response .=  '</td>';
+                    // $response .=  '<td width="20%"  >';
+                    // $response .=  '<div class="form-group">';
+                    // if ($bulk == "") {
+                    //     $response .=  '<button type="button" class=" btn btn-danger removeTR"><i class="fas fa-times"></i> </button>';
+                    // }
+                    // $response .=  '</div>';
+
+                    // $response .=  '</td>';
                     // $response .=  '<td width="20%"> <div class="input-group"><input type="remarks"  name="timetable[' . $row . '][class_room]" value="' . $table['class_room'] . '" class="form-control" ><button type="button" class=" btn btn-danger removeTR"><i class="fas fa-times"></i> </button></div></td>';
 
                     $response .=  '</tr>';
@@ -1961,7 +1971,7 @@ class AdminController extends Controller
                 if (!isset($timetable['data']['week'][$day]) && ($day == "saturday" || $day == "sunday")) {
                 } else {
 
-                    $response .= '<tr><td class="center" style="color:#6d6dcb;">' . strtoupper($day) . '</td>';
+                    $response .= '<tr><td class="center" style="color:#ed1833;">' . strtoupper($day) . '</td>';
                     $row = 0;
                     foreach ($timetable['data']['timetable'] as $table) {
                         if ($table['day'] == $day) {
@@ -1969,11 +1979,10 @@ class AdminController extends Controller
                             $end_time = date('H:i', strtotime($table['time_end']));
                             $response .= '<td>';
                             if ($table['break'] == "1") {
-                                $response .= '<b>' . (isset($table['break_type']) ? $table['break_type'] : "") . '</b><br> ';
-                                $response .= '(' . $start_time . ' - ' . $end_time . ' )<br>';
+                                $response .= '<b><div style="color:#2d28e9;display:inline-block;padding-right:10px;"> <i class="dripicons-bell"></i></div>' . (isset($table['break_type']) ? $table['break_type'] : "") . '</b><br>';
+                                $response .= '<b><div style="color:#179614;display:inline-block;padding-right:10px;"><i class="icon-speedometer"></i></div>(' . $start_time . ' - ' . $end_time . ' )<b><br>';
                                 if (isset($table['hall_no'])) {
-
-                                    $response .= 'Class Room : ' . $table['hall_no'] . '';
+                                    $response .= '<b><div style="color:#ff0000;display:inline-block;padding-right:10px;"> <i class="icon-location-pin"></i> </div>' . $table['hall_no'] . '</b><br>';
                                 }
                             } else {
                                 if ($table['subject_name']) {
@@ -1981,13 +1990,13 @@ class AdminController extends Controller
                                 } else {
                                     $subject = (isset($table['break_type']) ? $table['break_type'] : "");
                                 }
-                                $response .= '<b><div style="color:#3dacae;display:inline-block;">Subject : </div>' . $subject . '</b><br>';
-                                $response .= '(' . $start_time . ' - ' . $end_time . ' )<br>';
+                                $response .= '<b><div style="color:#2d28e9;display:inline-block;padding-right:10px;"> <i class="icon-book-open"></i></div>' . $subject . '</b><br>';
+                                $response .= '<b><div style="color:#179614;display:inline-block;padding-right:10px;"><i class="icon-speedometer"></i></div>(' . $start_time . ' - ' . $end_time . ' )<b><br>';
                                 if ($table['teacher_name']) {
-                                    $response .= '<b><div style="color:#3dacae;display:inline-block;">Teacher :  </div>' . $table['teacher_name'] . '</b><br>';
+                                    $response .= '<b><div style="color:#28dfe9;display:inline-block;padding-right:10px;"> <i class=" fas fa-book-reader"></i></div>' . $table['teacher_name'] . '</b><br>';
                                 }
                                 if (isset($table['hall_no'])) {
-                                    $response .= '<b><div style="color:#3dacae;display:inline-block;">Class Room : </div>' . $table['hall_no'] . '</b><br>';
+                                    $response .= '<b><div style="color:#ff0000;display:inline-block;padding-right:10px;"> <i class="icon-location-pin"></i> </div>' . $table['hall_no'] . '</b><br>';
                                 }
                             }
                             $response .= '</td>';
@@ -2980,15 +2989,6 @@ class AdminController extends Controller
                     //     }
                     // }
 
-                    if ($exam['marks']) {
-                        $mark = json_decode($exam['marks']);
-                        $full = $mark->full;
-                        $pass = $mark->pass;
-                    } else {
-                        $full = NULL;
-                        $pass = NULL;
-                    }
-
                     if ($exam['distributor_type'] == "1") {
                         $dist .= ' <select  class="form-control " name="exam[' . $row . '][distributor]">';
                         foreach ($teacher['data'] as $teach) {
@@ -3072,18 +3072,6 @@ class AdminController extends Controller
                                                     ' . $dist . '
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td width="10%">
-                                        <div class="form-group mb-2">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <input type="text" name="exam[' . $row . '][mark][full]" class="form-control" value="' . (isset($full) ? $full : 100) . '" placeholder="Full Mark">
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <input type="text" name="exam[' . $row . '][mark][pass]" class="form-control"  value="' . (isset($pass) ? $pass : 40) . '" placeholder="Pass Mark">
-                                            </div>
-                                        </div>
                                         </div>
                                     </td>
                                 </tr>';

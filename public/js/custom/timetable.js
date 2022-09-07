@@ -222,7 +222,13 @@ $(function () {
     $("#edit_timetable_body").on('click', '.removeTR', function () {
         $(this).parent().parent().remove();
     });
+    // $("#timetable_body").on('click', '.removeTR', function () {
+    //     $(this).parent().parent().parent().remove();
+    // });
 
+    // $("#edit_timetable_body").on('click', '.removeTR', function () {
+    //     $(this).parent().parent().parent().remove();
+    // });
     $(document).on('change', "#edit_timetable_body input[type='checkbox']", function () {
         var fal = true;
         if(this.checked==true)

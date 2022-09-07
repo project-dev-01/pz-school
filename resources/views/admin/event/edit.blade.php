@@ -162,6 +162,14 @@
                                         <span class="text-danger error-text end_time_error"></span>
                                 </div>
                             </div>
+                            <div class="col-md-2">
+                                <div class="form-group mt-3">
+                                    <div class="custom-control custom-checkbox form-check">
+                                        <input type="checkbox" class="custom-control-input" name="holiday" id="holiday" {{$event['holiday'] == "0" ? 'checked':''}}>
+                                        <label class="custom-control-label" for="holiday">Holiday</label>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="description">Description</label>

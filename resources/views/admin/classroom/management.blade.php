@@ -489,7 +489,7 @@
                                                             <tr>
                                                                 <th>#</th>
                                                                 <th>Student name</th>
-                                                                <th>Attentance</th>
+                                                                <th>Attendance</th>
                                                                 <th>Remarks</th>
                                                                 <th>Reasons</th>
                                                                 <th>Student behaviour</th>

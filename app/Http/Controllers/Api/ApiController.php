@@ -1680,6 +1680,7 @@ class ApiController extends BaseController
                 'start_time' => $eventSt,
                 'end_time' => $eventEt,
                 'all_day' => $request->all_day,
+                'holiday' => isset($request->holiday) ? 0 : 1,
                 'remarks' => $request->description,
                 'created_at' => date("Y-m-d H:i:s")
             ]);
@@ -1892,6 +1893,7 @@ class ApiController extends BaseController
                 'start_time' => $eventSt,
                 'end_time' => $eventEt,
                 'all_day' => $request->all_day,
+                'holiday' => isset($request->holiday) ? 0 : 1,
                 'remarks' => $request->description,
                 'updated_at' => date("Y-m-d H:i:s")
             ]);
@@ -8345,7 +8347,8 @@ class ApiController extends BaseController
                     'sb.name as subject_name',
                     'sb.name as title',
                     'st.first_name as teacher_name',
-                    'dr.report'
+                    'dr.report',
+                    'ev.id as event_holiday_id'
                 )
                 ->join('classes as c', 'cl.class_id', '=', 'c.id')
                 ->join('sections as s', 'cl.section_id', '=', 's.id')
@@ -8356,10 +8359,18 @@ class ApiController extends BaseController
                         ->on('cl.subject_id', '=', 'dr.subject_id')
                         ->on(DB::raw('date(cl.end)'), '=', 'dr.date');
                 })
+                ->leftJoin('events as ev', function ($join) {
+                    $join->where([
+                        [DB::raw('date(cl.end)'), '>=', DB::raw('date(ev.start_date)')],
+                        [DB::raw('date(cl.end)'), '<=', DB::raw('date(ev.end_date)')],
+                        ['ev.holiday', '=', '0']
+                    ]);
+                })
                 ->join('subjects as sb', 'cl.subject_id', '=', 'sb.id')
                 ->whereRaw("find_in_set($request->teacher_id,cl.teacher_id)")
                 ->where('cl.start', '>=', $start)
                 ->where('cl.end', '<=', $end)
+                ->whereNull('ev.id')
                 ->get();
             return $this->successResponse($success, 'calendor data get successfully');
         }
@@ -8783,7 +8794,8 @@ class ApiController extends BaseController
                     'sb.name as subject_name',
                     'sb.name as title',
                     DB::raw("CONCAT(st.first_name, ' ', st.last_name) as teacher_name"),
-                    'drr.student_remarks'
+                    'drr.student_remarks',
+                    'ev.id as event_holiday_id'
                 )
                 ->join('enrolls as en', 'en.student_id', '=', 'stud.id')
                 ->join('classes as c', 'en.class_id', '=', 'c.id')
@@ -8806,9 +8818,17 @@ class ApiController extends BaseController
                         ->on(DB::raw('DATE(cl.start)'), '=', 'drr.date')
                         ->on('drr.student_id', '=', DB::raw("'$studentID'"));
                 })
+                ->leftJoin('events as ev', function ($join) {
+                    $join->where([
+                        [DB::raw('date(cl.end)'), '>=', DB::raw('date(ev.start_date)')],
+                        [DB::raw('date(cl.end)'), '<=', DB::raw('date(ev.end_date)')],
+                        ['ev.holiday', '=', '0']
+                    ]);
+                })
                 ->where('stud.id', $request->student_id)
                 ->where('cl.start', '>=', $start)
                 ->where('cl.end', '<=', $end)
+                ->whereNull('ev.id')
                 ->get();
             return $this->successResponse($success, 'student calendor data get successfully');
         }
@@ -9397,7 +9417,6 @@ class ApiController extends BaseController
 
             // return $exams;
             foreach ($exams as $exam) {
-                $mark = json_encode($exam['mark']);
 
                 $distributor = (isset($exam['distributor']) ? $exam['distributor'] : null);
 
@@ -9422,7 +9441,6 @@ class ApiController extends BaseController
                         'paper_id' => $exam['paper_id'],
                         'time_start' => $exam['time_start'],
                         'time_end' => $exam['time_end'],
-                        'marks' => $mark,
                         'hall_id' => $exam['hall_id'],
                         "distributor_type" => $exam['distributor_type'],
                         "distributor" => $distributor,
@@ -9455,7 +9473,6 @@ class ApiController extends BaseController
                             'paper_id' => $exam['paper_id'],
                             'time_start' => $exam['time_start'],
                             'time_end' => $exam['time_end'],
-                            'marks' => $mark,
                             'hall_id' => $exam['hall_id'],
                             "distributor_type" => $exam['distributor_type'],
                             "distributor" => $distributor,
@@ -9548,7 +9565,6 @@ class ApiController extends BaseController
                     'ttex.time_end',
                     'ttex.exam_date',
                     'ttex.hall_id',
-                    'ttex.marks',
                     'ttex.distributor_type',
                     'ttex.distributor',
                     'ttex.distributor_id',
