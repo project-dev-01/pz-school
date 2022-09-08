@@ -131,10 +131,10 @@
                     <form id="addTimetableForm" method="post" action="{{ route('admin.timetable.add') }}" enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         <div class="row">
-                            <div class="col-sm-12">
-                                <div class="card-box">
+                            <div class="col-md-12">
+                                <div class="">
                                     <div class="table-responsive">
-                                        <table class="table w-100 nowrap" id="timetable_table">
+                                        <table class="table nowrap" id="timetable_table" style="width: max-content;">
                                             <thead>
                                                 <tr>
                                                     <th>Break</th>

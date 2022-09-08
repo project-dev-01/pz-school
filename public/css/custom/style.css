@@ -330,28 +330,8 @@ input:focus {
 	}
 }
 
-/* .fc-view {
-	border: #0abab5;
-}
-
-.fc-unthemed td {
-	border-color: #0abab5;
-}
-
-.fc-unthemed th {
-	border-color: #0abab5;
-}
-
-.fc-event {
-	background-color: #E9D528 !important;
-}
-
-.fc-state-active {
-	background-color: #0abab5 !important;
-	color: #fff;
-} */
 /*start calender css*/
-.btn-primary {
+/* .btn-primary {
 	color: #fff;
 	background-color: #1abc9c;
 	border-color: #eceff1;
@@ -376,7 +356,7 @@ input:focus {
 	height: 5em;
 	border-bottom: 0;
 }
-
+*/
 .modal-header {
 	border-bottom: 1px solid #10a084;
 }
@@ -388,7 +368,7 @@ input:focus {
 .close {
 	color: #1abc9c;
 	opacity: 1.5;
-}
+} 
 
 /*end calender css*/
 button.dt-button {

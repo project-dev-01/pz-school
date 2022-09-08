@@ -601,7 +601,7 @@ class TeacherController extends Controller
                                     <td>' . $work['date_of_submission'] . '</td>
                                     <td>' . $completed . '/' . $incompleted . '</td>
                                     <td>' . $homework['data']['total_students'] . '</td>
-                                    <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="' . $work['id'] . '" data-target=".firstModal"><i class="fas fa-bars"></i> Details</a></td>
+                                    <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="' . $work['id'] . '" data-target=".firstModal"><i class="fas fa-bars"></i> <span style="color: white">Details</span></a></td>
                                 </tr>';
                     $row++;
                 }
@@ -677,10 +677,10 @@ class TeacherController extends Controller
                     }
 
                     if ($work['status'] == "1") {
-                        $status = '<button type="button" class="btn btn-outline-success btn-rounded waves-effect waves-light">Completed</button>';
+                        $status = '<button type="button" class="btn btn-success btn-rounded waves-effect waves-light" style="border:none;">Completed</button>';
                         $complete++;
                     } else {
-                        $status = '<button type="button" class="btn btn-outline-danger btn-rounded waves-effect waves-light">Incomplete</button>';
+                        $status = '<button type="button" class="btn btn-danger btn-rounded waves-effect waves-light" style="border:none;">Incomplete</button>';
                         $incomplete++;
                     }
 
@@ -691,15 +691,26 @@ class TeacherController extends Controller
                                     <td>' . $work['first_name'] . ' ' . $work['last_name'] . '</td>
                                     <td>' . $work['register_no'] . '</td>
                                     <td>' . $status . '</td>
-                                    <td>
-                                        <div class="form-group">
-                                            <label for="score_name">Status</label>
-                                            ' . $score_name . '
+									 <td>
+                                        <div class="form-group mb-2">
+                                        <div class="row">
+                                            <div class="col-sm-6"> 
+                                            ' . $score_name . '                                       
+										</div>
+                                            <div class="col-sm-6">                                                
+											 <input type="text" class="form-control" name="homework[' . $row . '][score_value]" value="' . $work['score_value'] . '" aria-describedby="inputGroupPrepend" >
+											</div>
                                         </div>
-                                        <input type="text" class="form-control" name="homework[' . $row . '][score_value]" value="' . $work['score_value'] . '" aria-describedby="inputGroupPrepend" >
-
+                                        </div>
                                     </td>
-                                    <td><input type="text" class="form-control" name="homework[' . $row . '][teacher_remarks]"  value="' . $work['teacher_remarks'] . '" aria-describedby="inputGroupPrepend" ></td>
+                                    <td>
+									<div class="form-group mb-2">
+                                        <div class="row">
+										 <div class="col-sm-12"> 
+										<input type="text" class="form-control" name="homework[' . $row . '][teacher_remarks]"  value="' . $work['teacher_remarks'] . '" aria-describedby="inputGroupPrepend" >
+                                    </div>
+									</div>
+									</div>
                                     <td>
                                         <i data-feather="file-text" class="icon-dual"></i>
                                         <span class="ml-2 font-weight-semibold"><a  href="' . asset('student/homework/') . '/' . $work['file'] . '" download class="text-reset">' . $work['file'] . '</a></span>
