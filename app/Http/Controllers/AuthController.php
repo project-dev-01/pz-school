@@ -143,7 +143,6 @@ class AuthController extends Controller
                     // space remove school name
                     $string = preg_replace('/\s+/', '-', $userDetails['data']['subsDetails']['school_name']);
                     $request->session()->put('school_name_url', $string);
-                    $school_name_url = $string;
                     // greeting session 
                     $request->session()->put('greetting_id', 1);
                     // dd($userDetails['data']['StudentID'][0]['id']);

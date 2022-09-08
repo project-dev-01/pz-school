@@ -53,13 +53,6 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         // student details
         Route::get('/student', [SuperAdminController::class, 'studentIndex'])->name('student.index');
 
-        // section routes
-        Route::get('section/index', [SuperAdminController::class, 'section'])->name('super_admin.section');
-        Route::post('section/add', [SuperAdminController::class, 'addSection'])->name('section.add');
-        Route::get('section/list', [SuperAdminController::class, 'getSectionList'])->name('super_admin.section.list');
-        Route::post('section/section-details', [SuperAdminController::class, 'getSectionDetails'])->name('section.details');
-        Route::post('section/update', [SuperAdminController::class, 'updateSectionDetails'])->name('section.update');
-        Route::post('section/delete', [SuperAdminController::class, 'deleteSection'])->name('section.delete');
 
         // branch routes
         Route::get('branch/index', [SuperAdminController::class, 'branchIndex'])->name('branch.index');
@@ -70,117 +63,12 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::post('branch/update', [SuperAdminController::class, 'updateBranchDetails'])->name('branch.update');
         Route::post('branch/delete', [SuperAdminController::class, 'deleteBranch'])->name('branch.delete');
 
-        // Class routes
-        Route::get('class/index', [SuperAdminController::class, 'class'])->name('super_admin.class');
-        Route::post('class/add', [SuperAdminController::class, 'addClass'])->name('class.add');
-        Route::get('class/list', [SuperAdminController::class, 'getClassList'])->name('class.list');
-        Route::post('class/class-details', [SuperAdminController::class, 'getClassDetails'])->name('class.details');
-        Route::post('class/update', [SuperAdminController::class, 'updateClassDetails'])->name('class.update');
-        Route::post('class/delete', [SuperAdminController::class, 'deleteClass'])->name('class.delete');
-
-        // sections allocations routes
-        Route::get('allocate_section/index', [SuperAdminController::class, 'showSectionAllocation'])->name('super_admin.section_allocation');
-        Route::post('allocate_section/add', [SuperAdminController::class, 'addSectionAllocation'])->name('section_allocation.add');
-        Route::get('allocate_section/list', [SuperAdminController::class, 'getSectionAllocationList'])->name('super_admin.section_allocation.list');
-        Route::post('allocate_section/section_allocation-details', [SuperAdminController::class, 'getSectionAllocationDetails'])->name('section_allocation.details');
-        Route::post('allocate_section/update', [SuperAdminController::class, 'updateSectionAllocation'])->name('section_allocation.update');
-        Route::post('allocate_section/delete', [SuperAdminController::class, 'deleteSectionAllocation'])->name('section_allocation.delete');
-
-        // assign_teacher routes
-        Route::get('assign_teacher/index', [SuperAdminController::class, 'showTeacherAllocation'])->name('super_admin.assign_teacher');
-        Route::post('assign_teacher/get_allocation_section', [SuperAdminController::class, 'getAllocationSection'])->name('assign_teacher.get_allocation_section');
-        Route::post('assign_teacher/add', [SuperAdminController::class, 'addTeacherAllocation'])->name('assign_teacher.add');
-        Route::get('assign_teacher/list', [SuperAdminController::class, 'getTeacherAllocationList'])->name('super_admin.assign_teacher.list');
-        Route::post('assign_teacher/details', [SuperAdminController::class, 'getTeacherAllocationDetails'])->name('assign_teacher.details');
-        Route::post('assign_teacher/update', [SuperAdminController::class, 'updateTeacherAllocation'])->name('assign_teacher.update');
-        Route::post('assign_teacher/delete', [SuperAdminController::class, 'deleteTeacherAllocation'])->name('assign_teacher.delete');
-
-        // Event Type routes
-        Route::get('event_type/index', [SuperAdminController::class, 'eventType'])->name('super_admin.event_type');
-        Route::get('event_type/list', [SuperAdminController::class, 'getEventTypeList'])->name('super_admin.event_type.list');
-        Route::post('event_type/add', [SuperAdminController::class, 'addEventType'])->name('event_type.add');
-        Route::post('event_type/event_type-details', [SuperAdminController::class, 'getEventTypeDetails'])->name('event_type.details');
-        Route::post('event_type/update', [SuperAdminController::class, 'updateEventTypeDetails'])->name('event_type.update');
-        Route::post('event_type/delete', [SuperAdminController::class, 'deleteEventType'])->name('event_type.delete');
-
-
-        // Event routes
-        Route::get('event/index', [SuperAdminController::class, 'event'])->name('super_admin.event');
-        Route::get('event/list', [SuperAdminController::class, 'getEventList'])->name('super_admin.event.list');
-        Route::post('event/add', [SuperAdminController::class, 'addEvent'])->name('event.add');
-        Route::post('event/event-details', [SuperAdminController::class, 'getEventDetails'])->name('event.details');
-        Route::post('event/delete', [SuperAdminController::class, 'deleteEvent'])->name('event.delete');
-        Route::post('event/event-publish', [SuperAdminController::class, 'publishEvent'])->name('event.publish');
-
-        // department routes
-        Route::get('department/index', [SuperAdminController::class, 'Department'])->name('super_admin.department');
-        Route::post('department/add', [SuperAdminController::class, 'addDepartment'])->name('department.add');
-        Route::get('department/list', [SuperAdminController::class, 'getDepartmentList'])->name('department.list');
-        Route::post('department/department-details', [SuperAdminController::class, 'getDepartmentDetails'])->name('department.details');
-        Route::post('department/update', [SuperAdminController::class, 'updateDepartment'])->name('department.update');
-        Route::post('department/delete', [SuperAdminController::class, 'deleteDepartment'])->name('department.delete');
-
-        // designation routes
-        Route::get('designation/index', [SuperAdminController::class, 'Designation'])->name('super_admin.designation');
-        Route::post('designation/add', [SuperAdminController::class, 'addDesignation'])->name('designation.add');
-        Route::get('designation/list', [SuperAdminController::class, 'getDesignationList'])->name('designation.list');
-        Route::post('designation/designation-details', [SuperAdminController::class, 'getDesignationDetails'])->name('designation.details');
-        Route::post('designation/update', [SuperAdminController::class, 'updateDesignation'])->name('designation.update');
-        Route::post('designation/delete', [SuperAdminController::class, 'deleteDesignation'])->name('designation.delete');
-
-
-        // Employee routes
-
-        Route::get('employee/employeelist', [SuperAdminController::class, 'listEmployee'])->name('super_admin.listemployee');
-        Route::get('employee/index', [SuperAdminController::class, 'showEmployee'])->name('super_admin.employee');
-        Route::post('employee/add', [SuperAdminController::class, 'addEmployee'])->name('employee.add');
-        Route::get('employee/list', [SuperAdminController::class, 'getEmployeeList'])->name('employee.list');
 
         // Settings
         Route::get('settings', [SuperAdminController::class, 'settings'])->name('super_admin.settings');
         Route::post('change-password', [SuperAdminController::class, 'changePassword'])->name('settings.changePassword');
         Route::post('update-profile-info', [SuperAdminController::class, 'updateProfileInfo'])->name('settings.updateProfileInfo');
         Route::post('update-setting-session', [CommonController::class, 'updateSettingSession'])->name('settings.updateSettingSession');
-
-        // static page routes start
-
-        // Admission routes
-        Route::get('admission/index', [SuperAdminController::class, 'admission'])->name('super_admin.admission');
-        Route::get('admission/import', [SuperAdminController::class, 'import'])->name('admin.admission.import');
-
-        // Parent routes
-        Route::get('parent/index', [SuperAdminController::class, 'parent'])->name('super_admin.parent');
-
-        // Homework routes
-        Route::get('homework/index', [SuperAdminController::class, 'homework'])->name('super_admin.homework');
-
-        // exam routes
-        Route::get('exam/term', [SuperAdminController::class, 'examIndex'])->name('exam.term');
-        Route::get('exam/hall', [SuperAdminController::class, 'examHall'])->name('exam.hall');
-        Route::get('exam/mark_distribution', [SuperAdminController::class, 'examMarkDistribution'])->name('exam.mark_distribution');
-        Route::get('exam/exam', [SuperAdminController::class, 'exam'])->name('exam.exam');
-
-        //Task routes
-        Route::get('task/index', [SuperAdminController::class, 'taskIndex'])->name('super_admin.task');
-
-        // Hostel routes
-        Route::get('hostel/index', [SuperAdminController::class, 'hostel'])->name('super_admin.hostel');
-        Route::get('hostel/category', [SuperAdminController::class, 'getCategory'])->name('hostel.category');
-        Route::get('hostel/room', [SuperAdminController::class, 'getRoom'])->name('hostel.room');
-
-        // Transport routes
-        Route::get('transport/route', [SuperAdminController::class, 'getRoute'])->name('transport.route');
-        Route::get('transport/vehicle', [SuperAdminController::class, 'getVehicle'])->name('transport.vehicle');
-        Route::get('transport/stoppage', [SuperAdminController::class, 'getstoppage'])->name('transport.stoppage');
-        Route::get('transport/assignvehicle', [SuperAdminController::class, 'assignVehicle'])->name('transport.assignvehicle');
-
-        // Library routes
-        Route::get('library/book', [SuperAdminController::class, 'book'])->name('library.book');
-        Route::get('library/book/category', [SuperAdminController::class, 'bookCategory'])->name('library.bookcategory');
-        Route::get('library/issued_book', [SuperAdminController::class, 'issuedBook'])->name('library.issuedbook');
-        Route::get('library/issue_return', [SuperAdminController::class, 'issueReturn'])->name('library.issuereturn');
-
-        Route::get('classes/add_class', [SuperAdminController::class, 'addClasses'])->name('super_admin.add_classes');
 
         // userlist routes
         Route::get('users/user', [SuperAdminController::class, 'users'])->name('users.user');
@@ -210,47 +98,16 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [SuperAdminController::class, 'forumPageCategoriesSingle'])->name('super_admin.forum.page-categories-single-val');
         Route::get('forum/selecteddb', [SuperAdminController::class, 'dbvsgetbranchid'])->name('super_admin.forum.selecteddbname');
         Route::post('form/postimage', [SuperAdminController::class, 'imagestore'])->name('super_admin.forum.image.store');
-        // Attendance routes
-        Route::get('attendance/student_entry', [SuperAdminController::class, 'studentEntry'])->name('attendance.student_entry');
-        Route::get('attendance/employee_entry', [SuperAdminController::class, 'employeeEntry'])->name('attendance.employee_entry');
-        Route::get('attendance/exam_entry', [SuperAdminController::class, 'examEntry'])->name('attendance.exam_entry');
-
-        // LEAVE MANAGEMENT ROUTES start
-        // Leave Apply
-        Route::get('leave_management/applyleave', [SuperAdminController::class, 'applyleave'])->name('super_admin.leave_management.applyleave');
-        // Leave approval
-        Route::get('leave_management/approvalleave', [SuperAdminController::class, 'approvalleave'])->name('super_admin.leave_management.approvalleave');
-        // Leave allLeaves
-        Route::get('leave_management/allleaves', [SuperAdminController::class, 'allleaves'])->name('super_admin.leave_management.allleaves');
-
-        // timetable
-        Route::get('timetable/lesson', [SuperAdminController::class, 'addLesson'])->name('super_admin.timetable.lesson');
-        Route::get('timetable/index', [SuperAdminController::class, 'timeTable'])->name('super_admin.timetable.index');
         // faq
         Route::get('faq/index', [SuperAdminController::class, 'faqIndex'])->name('super_admin.faq.index');
-        // exam timetable
-        Route::get('timetable/viewexam', [SuperAdminController::class, 'timeTableViewExam'])->name('super_admin.timetable.viewexam');
-        Route::get('timetable/set_examwise', [SuperAdminController::class, 'timeTableSetExamWise'])->name('super_admin.timetable.set_examwise');
-        // exam marks
-        Route::get('exam/mark_entry', [SuperAdminController::class, 'markEntry'])->name('super_admin.exam.mark_entry');
-        // grade range
-        Route::get('exam/grade_range', [SuperAdminController::class, 'gradeRange'])->name('super_admin.exam.grade_range');
+       
         // exam Result Group 
         Route::get('exam_results/byclass', [SuperAdminController::class, 'byclasss'])->name('super_admin.exam_results.byclass');
-
         Route::get('exam_results/bysubject', [SuperAdminController::class, 'bysubject'])->name('super_admin.exam_results.bysubject');
-
         Route::get('exam_results/overall', [SuperAdminController::class, 'overall'])->name('super_admin.exam_results.overall');
-
         Route::get('exam_results/bystudent', [SuperAdminController::class, 'bystudent'])->name('super_admin.exam_results.bystudent');
-
         Route::get('exam/result', [SuperAdminController::class, 'examResult'])->name('super_admin.exam.result');
-        // exam result end
-        Route::get('evaluation_report', [SuperAdminController::class, 'evaluationReport'])->name('super_admin.evaluation_report');
 
-        Route::get('homework/edit', [SuperAdminController::class, 'homeworkEdit'])->name('super_admin.homework_edit');
-
-        // static page routes end
     });
 });
 

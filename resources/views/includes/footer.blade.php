@@ -145,10 +145,6 @@
         }
     });
 
-    // section routes
-    // var sectionList = "{{ route('super_admin.section.list') }}";
-    // var sectionDetails = "{{ route('section.details') }}";
-    // var sectionDelete = "{{ route('section.delete') }}";
     // get states
     var get_roll_id = "{{Session::get('role_id')}}";
 
@@ -168,32 +164,11 @@
     var branchShow = "{{ route('branch.index') }}";
     var deleteBranch = "{{ route('branch.delete') }}";
 
-    // section allocation routes
-    var sectionAllocationList = "{{ route('super_admin.section_allocation.list') }}";
-    var sectionAllocationDetails = "{{ route('section_allocation.details') }}";
-    var sectionAllocationDelete = "{{ route('section_allocation.delete') }}";
-
     // assign teacher routes
-    var assignTeacherList = "{{ route('super_admin.assign_teacher.list') }}";
-    var assignTeacherDetails = "{{ route('assign_teacher.details') }}";
-    var assignTeacherUpdate = "{{ route('assign_teacher.update') }}";
-    var deleteAssignTeacher = "{{ route('assign_teacher.delete') }}";
     var branchbyAssignTeacher = "{{ config('constants.api.branch_by_assign_teacher') }}";
     var getsectionAllocation = "{{ config('constants.api.section_by_class') }}";
-    // class details
-    // var classList = "{{ route('class.list') }}";
-    // var classDetails = "{{ route('class.details') }}";
-    // var classDelete = "{{ route('class.delete') }}";
-    // Event type details
-    var eventTypeList = "{{ route('super_admin.event_type.list') }}";
-    var eventTypeDetails = "{{ route('event_type.details') }}";
-    var eventTypeDelete = "{{ route('event_type.delete') }}";
 
     // Event details
-    var eventList = "{{ route('super_admin.event.list') }}";
-    var eventDetails = "{{ route('event.details') }}";
-    var eventDelete = "{{ route('event.delete') }}";
-    var eventPublish = "{{ route('event.publish') }}";
     var branchByEvent = "{{ config('constants.api.branch_by_event') }}";
 
 

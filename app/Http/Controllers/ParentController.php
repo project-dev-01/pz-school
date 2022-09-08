@@ -174,6 +174,7 @@ class ParentController extends Controller
     {
         $parent = session()->get('ref_user_id');
         $children_id = session()->get('student_id');
+        // dd($children_id);
         $data = [
             'parent_id' => $parent,
             'children_id' => $children_id

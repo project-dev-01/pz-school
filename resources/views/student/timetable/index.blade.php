@@ -14,6 +14,23 @@
         right: 13px;
         top: 5px;
     }
+
+    .table td,
+    .table th {
+        padding: .85rem;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .dt-responsive {
+        width: max-content;
+    }
+
+    @media only screen and (min-device-width: 280px) and (max-device-width: 1200px) {
+        .dt-responsive {
+            width: max-content;
+        }
+
+    }
 </style>
 <!-- Start Content-->
 <div class="container-fluid">
@@ -72,7 +89,7 @@
                                             @else
 
                                             <td>
-                                                
+
                                                 @if($table['subject_name'])
                                                 <b>Subject:{{$table['subject_name']}}</b><br>
                                                 @else

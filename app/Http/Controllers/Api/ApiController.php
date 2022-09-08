@@ -5459,16 +5459,31 @@ class ApiController extends BaseController
             // create new connection
             $con = $this->createNewConnection($request->branch_id);
             // get data
-            $student = $con->table('students')->join('enrolls', 'students.id', '=', 'students.id')->where('students.id', $request->student_id)->first();
+            // $student = $con->table('students')->join('enrolls', 'students.id', '=', 'students.id')->where('students.id', $request->student_id)->first();
+            $student = $con->table('enrolls as en')
+                ->select(
+                    'en.student_id',
+                    'en.class_id',
+                    'en.section_id',
+                    'en.session_id',
+                    'en.semester_id'
+                )
+                ->join('students as st', 'st.id', '=', 'en.student_id')
+                ->where([
+                    ['en.student_id', '=', $request->student_id]
+                ])
+                ->groupBy('en.student_id')
+                ->first();
 
-            $today = date("Y-m-d");
-            $semester = $con->table('semester')->where('start_date', '<=', $today)->where('end_date', '>=', $today)->first();
-
-            if (isset($sem)) {
-                $semester_id = $semester->id;
-            } else {
-                $semester_id = 0;
-            }
+            // dd($student->class_id);
+            // $today = date("Y-m-d");
+            // $semester = $con->table('semester')->where('start_date', '<=', $today)->where('end_date', '>=', $today)->first();
+            // dd($semester);
+            // if (isset($sem)) {
+            //     $semester_id = $semester->id;
+            // } else {
+            //     $semester_id = 0;
+            // }
 
             //    dd($semester_id);
 
@@ -5481,7 +5496,7 @@ class ApiController extends BaseController
                 ->where('timetable_class.class_id', $student->class_id)
                 ->where('timetable_class.section_id', $student->section_id)
                 ->where('timetable_class.session_id', $student->session_id)
-                ->where('timetable_class.semester_id', $semester_id)
+                ->where('timetable_class.semester_id', $student->semester_id)
                 ->orderBy('time_start', 'asc')
                 ->orderBy('time_end', 'asc')
                 ->get()->toArray();
@@ -5526,16 +5541,30 @@ class ApiController extends BaseController
             // create new connection
             $con = $this->createNewConnection($request->branch_id);
             // get data
-            $student = $con->table('students')->join('enrolls', 'students.id', '=', 'students.id')->where('enrolls.student_id', $request->children_id)->first();
+            // $student = $con->table('students')->join('enrolls', 'students.id', '=', 'students.id')->where('enrolls.student_id', $request->children_id)->first();
 
-            $today = date("Y-m-d");
-            $semester = $con->table('semester')->where('start_date', '<=', $today)->where('end_date', '>=', $today)->first();
+            // $today = date("Y-m-d");
+            // $semester = $con->table('semester')->where('start_date', '<=', $today)->where('end_date', '>=', $today)->first();
 
-            if (isset($sem)) {
-                $semester_id = $semester->id;
-            } else {
-                $semester_id = 0;
-            }
+            // if (isset($sem)) {
+            //     $semester_id = $semester->id;
+            // } else {
+            //     $semester_id = 0;
+            // }
+            $student = $con->table('enrolls as en')
+            ->select(
+                'en.student_id',
+                'en.class_id',
+                'en.section_id',
+                'en.session_id',
+                'en.semester_id'
+            )
+            ->join('students as st', 'st.id', '=', 'en.student_id')
+            ->where([
+                ['en.student_id', '=', $request->children_id]
+            ])
+            ->groupBy('en.student_id')
+            ->first();
 
             $Timetable = $con->table('timetable_class')->select(
                 'timetable_class.*',
@@ -5547,7 +5576,7 @@ class ApiController extends BaseController
                 ->where('timetable_class.class_id', $student->class_id)
                 ->where('timetable_class.section_id', $student->section_id)
                 ->where('timetable_class.session_id', $student->session_id)
-                ->where('timetable_class.semester_id', $semester_id)
+                ->where('timetable_class.semester_id', $student->semester_id)
                 ->orderBy('time_start', 'asc')
                 ->orderBy('time_end', 'asc')
                 ->get()->toArray();

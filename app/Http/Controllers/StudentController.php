@@ -522,9 +522,9 @@ class StudentController extends Controller
     public function timetable(Request $request)
     {
 
-        $student = User::find($request->session()->get('user_id'));
+        // dd($student);
         $data = [
-            'student_id' => $student['user_id']
+            'student_id' => session()->get('ref_user_id')
         ];
 
         $days = array(
@@ -538,6 +538,7 @@ class StudentController extends Controller
         );
         // dd($request);
         $timetable = Helper::PostMethod(config('constants.api.timetable_student'), $data);
+        // dd($timetable);
         if ($timetable['code'] == "200") {
             return view(
                 'student.timetable.index',
