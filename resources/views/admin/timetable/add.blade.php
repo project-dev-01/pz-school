@@ -143,7 +143,7 @@
                                                     <th>Starting Time</th>
                                                     <th>Ending Time</th>
                                                     <th>Class Room</th>
-                                                    <!-- <th>Action</th> -->
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="timetable_body">
@@ -208,7 +208,7 @@
                         <input type="hidden" id="form_session_id" name="session_id">
                         <input type="hidden" id="form_day" name="day">
                         <div class="form-group text-right m-b-0">
-                            <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
                                 Save
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">

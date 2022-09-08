@@ -1711,18 +1711,18 @@ class AdminController extends Controller
                     }
                     $response .=  '</select>';
                     $response .=  '</div>';
-                    if ($bulk == "") {
-                        $response .=  '<button type="button" class=" btn btn-danger removeTR"><i class="fas fa-times"></i> </button>';
-                    }
-                    $response .=  '</td>';
-                    // $response .=  '<td width="20%"  >';
-                    // $response .=  '<div class="form-group">';
                     // if ($bulk == "") {
                     //     $response .=  '<button type="button" class=" btn btn-danger removeTR"><i class="fas fa-times"></i> </button>';
                     // }
-                    // $response .=  '</div>';
+                    $response .=  '</td>';
+                    $response .=  '<td width="20%"  >';
+                    $response .=  '<div class="form-group">';
+                    if ($bulk == "") {
+                        $response .=  '<button type="button" class=" btn btn-danger removeTR"><i class="fas fa-times"></i> </button>';
+                    }
+                    $response .=  '</div>';
 
-                    // $response .=  '</td>';
+                    $response .=  '</td>';
                     // $response .=  '<td width="20%"> <div class="input-group"><input type="remarks"  name="timetable[' . $row . '][class_room]" value="' . $table['class_room'] . '" class="form-control" ><button type="button" class=" btn btn-danger removeTR"><i class="fas fa-times"></i> </button></div></td>';
 
                     $response .=  '</tr>';

@@ -55,18 +55,19 @@
                                                 <th>Starting Time</th>
                                                 <th>Ending Time</th>
                                                 <th>Class Room</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody id="edit_timetable_body">
 
                                             @php $row = 0; @endphp
                                             @foreach($timetable as $table)
-                                                @php
-                                                    $bulk = "";
-                                                    if($table['bulk_id']) {
-                                                        $bulk = "disabled";
-                                                    }
-                                                @endphp
+                                            @php
+                                            $bulk = "";
+                                            if($table['bulk_id']) {
+                                            $bulk = "disabled";
+                                            }
+                                            @endphp
                                             <tr class="iadd">
 
                                                 <input type="hidden" name="timetable[{{$row}}][id]" value="{{$table['id']}}" {{$bulk}}>
@@ -86,19 +87,19 @@
                                                             <option value="{{$sub['id']}}">{{$sub['name']}}</option>
                                                             @endforeach
                                                         </select>
-                                                        <input class="form-control break_type"  type="text" name="timetable[{{$row}}][break_type]" value="{{$table['break_type']}}" {{$bulk}}></input>
+                                                        <input class="form-control break_type" type="text" name="timetable[{{$row}}][break_type]" value="{{$table['break_type']}}" {{$bulk}}></input>
                                                     </div>
                                                 </td>
                                                 @else
                                                 <td width="20%">
                                                     <div class="form-group">
                                                         <select class="form-control subject" name="timetable[{{$row}}][subject]" {{$bulk}}>
-                                                            <option value="">Select Subject</option >
+                                                            <option value="">Select Subject</option>
                                                             @foreach($subject as $sub)
                                                             <option value="{{$sub['id']}}" {{ $sub['id'] == $table['subject_id'] ? 'selected' : ''}}>{{$sub['name']}}</option>
                                                             @endforeach
                                                         </select>
-                                                        <input class="form-control break_type"  type="text" name="timetable[{{$row}}][break_type]" disabled hidden="hidden" {{$bulk}}></input>
+                                                        <input class="form-control break_type" type="text" name="timetable[{{$row}}][break_type]" disabled hidden="hidden" {{$bulk}}></input>
                                                     </div>
                                                 </td>
                                                 @endif
@@ -107,28 +108,28 @@
                                                         <select class="form-control teacher teacher select2-multiple-plus" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="timetable[{{$row}}][teacher][]" {{$bulk}}>
                                                             <option value="">Select Teacher</option>
                                                             @if($table['bulk_id'])
-                                                                @php
-                                                                    $all = "";
-                                                                    foreach (explode(',', $table['teacher_id']) as $info) {
-                                                                        if($info == "0") {
-                                                                            $all =  "Selected";
-                                                                        } 
-                                                                    }
-                                                                @endphp
-                                                                <option value="0" {{ $all }}>All</option>
+                                                            @php
+                                                            $all = "";
+                                                            foreach (explode(',', $table['teacher_id']) as $info) {
+                                                            if($info == "0") {
+                                                            $all = "Selected";
+                                                            }
+                                                            }
+                                                            @endphp
+                                                            <option value="0" {{ $all }}>All</option>
                                                             @endif
                                                             @forelse($teacher as $teach)
                                                             @php
                                                             $selected = "";
                                                             @endphp
                                                             @if($table['teacher_id'])
-                                                                @foreach(explode(',', $table['teacher_id']) as $info)
-                                                                    @if($teach['id'] == $info)
-                                                                        @php
-                                                                            $selected = "Selected";
-                                                                        @endphp
-                                                                    @endif
-                                                                @endforeach
+                                                            @foreach(explode(',', $table['teacher_id']) as $info)
+                                                            @if($teach['id'] == $info)
+                                                            @php
+                                                            $selected = "Selected";
+                                                            @endphp
+                                                            @endif
+                                                            @endforeach
                                                             @endif
                                                             <option value="{{$teach['id']}}" {{ $selected }}>{{$teach['name']}}</option>
                                                             @empty
@@ -155,11 +156,15 @@
                                                             @empty
                                                             @endforelse
                                                         </select>
-                                                    </div><button type="button" class=" btn btn-danger removeTR" {{$bulk}}><i class="fas fa-times" ></i> </button>
-
+                                                    </div>
                                                     <!-- <div class="input-group"><input type="remarks" name="timetable[{{$row}}][class_room]" value="{{$table['class_room']}}" class="form-control"><button type="button" class=" btn btn-danger removeTR"><i class="fas fa-times"></i> </button></div> -->
                                                 </td>
-
+                                                <td width="20%">
+                                                    <div class="form-group">
+                                                        <button type="button" class=" btn btn-danger removeTR" {{$bulk}}><i class="fas fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             @php $row++; @endphp
                                             @endforeach
@@ -189,9 +194,15 @@
                             <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
                                 Update
                             </button>
-                            <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                            Cancel
-                        </button>-->
+                            <a href="{{ route('admin.timetable') }}" class="btn btn-primary-bl waves-effect waves-light">
+                                Back
+                            </a>
+                        </div>
+                        @else
+                        <div class="form-group text-right m-b-0">
+                            <a href="{{ route('admin.timetable') }}" class="btn btn-primary-bl waves-effect waves-light">
+                                Back
+                            </a>
                         </div>
                         @endif
                     </form>
