@@ -14,22 +14,8 @@ $(document).ready(function () {
 
   function addNewField() {
     count = totalFields() + 1;
-    // field = $("#dynamic-field-1").clone();
     field = $("#dynamic-field-1").clone();
     field.attr("id", "dynamic-field-" + count);
-    // field = $("#dynamic-field-1").clone().insertBefore(this)
-    //   .find("form").attr("id", "dynamic-field-" + count)
-    //   .find("input").each(function () {
-    //     this.name = this.name.replace(/\d+/, cnt);
-    //   });
-    field.find("input").each(function () {
-      this.name = this.name.replace(/\d+/, count);
-    });
-    field.find("select").each(function () {
-      this.name = this.name.replace(/\d+/, count);
-    });
-    // field.attr("name", "grade" + count);
-
     field.children("label").text("Short Test " + count);
     field.find("input").val("");
     $(className + ":last").after($(field));

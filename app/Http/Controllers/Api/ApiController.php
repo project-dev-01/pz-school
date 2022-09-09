@@ -15360,7 +15360,7 @@ class ApiController extends BaseController
                     'cl.name as class_name',
                     'sc.name as section_name',
                     'ex.name as exam_name',
-                    DB::raw("CONCAT('Exam Name: ',ex.name, ' - ', sbj.name) as title"),
+                    DB::raw("CONCAT('Exam: ',ex.name, ' - ', sbj.name) as title"),
                     'sbj.name as subject_name',
                     'sbj.subject_color_calendor as color',
                     'tex.exam_date as start'
@@ -15400,7 +15400,7 @@ class ApiController extends BaseController
                     'cl.name as class_name',
                     'sc.name as section_name',
                     'ex.name as exam_name',
-                    DB::raw("CONCAT('Exam Name: ',ex.name, ' - ', sbj.name) as title"),
+                    DB::raw("CONCAT('Exam: ',ex.name, ' - ', sbj.name) as title"),
                     'sbj.name as subject_name',
                     'sbj.subject_color_calendor as color',
                     'tex.exam_date as start'
@@ -15445,7 +15445,7 @@ class ApiController extends BaseController
                     'cl.name as class_name',
                     'sc.name as section_name',
                     'ex.name as exam_name',
-                    DB::raw("CONCAT('Exam Name: ',ex.name, ' - ', sbj.name) as title"),
+                    DB::raw("CONCAT('Exam: ',ex.name, ' - ', sbj.name) as title"),
                     'sbj.name as subject_name',
                     'sbj.subject_color_calendor as color',
                     'tex.exam_date as start'

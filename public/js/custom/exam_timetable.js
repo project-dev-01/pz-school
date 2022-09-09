@@ -94,6 +94,7 @@ $(function () {
         e.preventDefault();
         var filterCheck = $("#examTimetableFilter").valid();
         if (filterCheck === true) {
+            $("#overlay").fadeIn(300);
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),
@@ -112,6 +113,7 @@ $(function () {
                         $("#schedulerow").hide("slow");
                         toastr.error(data.message);
                     }
+                    $("#overlay").fadeOut(300);
                 }
             });
         }

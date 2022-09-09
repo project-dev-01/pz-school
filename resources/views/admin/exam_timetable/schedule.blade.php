@@ -122,7 +122,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Exam Name</th>
-                                                <th>Remarks</th>
+                                                <th>Action</th>
 
                                             </tr>
                                         </thead>

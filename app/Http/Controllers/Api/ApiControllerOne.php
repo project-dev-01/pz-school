@@ -608,16 +608,16 @@ class ApiControllerOne extends BaseController
                             $teacher_id =  $importData[6];
                         }
                         if (isset($importData[5])) {
-                            if($importData[5] == "" || trim($importData[5]) == "Rehat"){
+                            if ($importData[5] == "" || trim($importData[5]) == "Rehat") {
                                 $break = 1;
-                            }else{
+                            } else {
                                 $subject_id =  $importData[5];
                             }
                         }
                         $breakType = ($break == 1 ? "Break" : null);
                         $time_start = date("H:i:s", strtotime($importData[7]));
                         $time_end = date("H:i:s", strtotime($importData[8]));
-                        
+
                         $data = [
                             'class_id' => $class_id,
                             'section_id' => $section_id,
@@ -728,4 +728,144 @@ class ApiControllerOne extends BaseController
             }
         }
     }
+
+    // exam Schedule List
+    public function examScheduleList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'student_id' => 'required'
+        ]);
+
+        // dd($request);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $con = $this->createNewConnection($request->branch_id);
+            // get data
+            $getStudentDetails = $con->table('enrolls as en')
+                ->select(
+                    'en.student_id',
+                    'en.class_id',
+                    'en.section_id',
+                    'en.semester_id',
+                    'en.session_id'
+                )
+                ->where([
+                    ['en.student_id', '=', $request->student_id]
+                ])
+                ->first();
+            $details = $con->table('timetable_exam')->select('exam.name', 'timetable_exam.exam_id')
+                ->leftJoin('exam', 'timetable_exam.exam_id', '=', 'exam.id')
+                ->where([
+                    ['class_id', $getStudentDetails->class_id],
+                    ['section_id', $getStudentDetails->section_id],
+                    ['semester_id', $getStudentDetails->semester_id],
+                    ['session_id', $getStudentDetails->session_id]
+                ])
+                ->groupBy('timetable_exam.exam_id')
+                ->orderBy('timetable_exam.exam_date', 'desc')
+                ->get();
+            return $this->successResponse($details, 'Exam Timetable record fetch successfully');
+        }
+    }
+    // get Exam Timetable 
+    public function getExamTimetableList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'exam_id' => 'required',
+            'student_id' => 'required'
+        ]);
+
+        // return $request;
+        // dd($request);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $con = $this->createNewConnection($request->branch_id);
+            // get data
+
+            $getStudentDetails = $con->table('enrolls as en')
+                ->select(
+                    'en.student_id',
+                    'en.class_id',
+                    'en.section_id',
+                    'en.semester_id',
+                    'en.session_id'
+                )
+                ->where([
+                    ['en.student_id', '=', $request->student_id]
+                ])
+                ->first();
+            // dd($getStudentDetails);
+            $exam_id = $request->exam_id;
+            $class_id = $getStudentDetails->class_id;
+            $section_id = $getStudentDetails->section_id;
+            $session_id = $getStudentDetails->session_id;
+            $semester_id = $getStudentDetails->semester_id;
+            // dd($session_id);
+            $details['exam'] = $con->table('subject_assigns as sa')
+                ->select(
+                    'sbj.name as subject_name',
+                    'eh.hall_no',
+                    'cl.name as class_name',
+                    'sec.name as section_name',
+                    'ex.name as exam_name',
+                    'ep.paper_name as paper_name',
+                    'ep.id as paper_id',
+                    'sa.class_id as class_id',
+                    'sa.section_id as section_id',
+                    'sa.subject_id as subject_id',
+                    'ttex.exam_id',
+                    'ttex.semester_id',
+                    'ttex.session_id',
+                    'ttex.paper_id as timetable_paper_id',
+                    'ttex.time_start',
+                    'ttex.time_end',
+                    'ttex.exam_date',
+                    'ttex.hall_id',
+                    'ttex.distributor_type',
+                    'ttex.distributor',
+                    'ttex.distributor_id',
+                    'ttex.id'
+                )
+                ->join('subjects as sbj', 'sa.subject_id', '=', 'sbj.id')
+                ->join('classes as cl', 'sa.class_id', '=', 'cl.id')
+                ->join('sections as sec', 'sa.section_id', '=', 'sec.id')
+                ->join('exam_papers as ep', function ($join) {
+                    $join->on('sa.class_id', '=', 'ep.class_id')
+                        ->on('sa.subject_id', '=', 'ep.subject_id');
+                })
+                ->where([
+                    ['sa.class_id', $class_id],
+                    ['sa.section_id', $section_id],
+                    ['sa.type', '=', '0'],
+                    ['sbj.exam_exclude', '=', '0']
+                ])
+                ->leftJoin('timetable_exam as ttex', function ($join) use ($exam_id, $semester_id, $session_id) {
+                    $join->on('sa.class_id', '=', 'ttex.class_id')
+                        ->on('sa.section_id', '=', 'ttex.section_id')
+                        ->on('sa.subject_id', '=', 'ttex.subject_id')
+                        ->on('ttex.semester_id', '=', DB::raw("'$semester_id'"))
+                        ->on('ttex.session_id', '=', DB::raw("'$session_id'"))
+                        ->on('ttex.paper_id', '=', 'ep.id')
+                        ->where('ttex.exam_id', $exam_id);
+                })
+                ->leftJoin('exam as ex', 'ttex.exam_id', '=', 'ex.id')
+                ->leftJoin('exam_hall as eh', 'ttex.hall_id', '=', 'eh.id')
+                ->orderBy('sbj.id', 'asc')
+                ->orderBy('ttex.exam_date', 'desc')
+                ->orderBy('sbj.name', 'asc')
+                ->get();
+            $exam_name = $con->table('exam')->where('id', $exam_id)->first();
+            $details['details']['exam_name'] = $exam_name->name;
+            return $this->successResponse($details, 'Exam Timetable record fetch successfully');
+        }
+    }
+    
 }

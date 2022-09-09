@@ -7,29 +7,24 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <h5 class="text-center">Exam : Annual Exam</h5>
-                <h6 class="text-center">Class : 1(A)</h6>
+                <h5 class="text-center" id="exam"></h5>
+                <h6 class="text-center" id="class-section"></h6>
                 <hr>
                 <div class="table-responsive">
-                    <table class="table table-bordered mb-0">
+                    <table class="table table-bordered table-centered dt-responsive nowrap w-100" width="100%">
                         <thead>
                             <tr style="background-color:#0ABAB5">
                                 <th>Subject</th>
+                                <th>Paper Name</th>
                                 <th>Date</th>
                                 <th>Starting Time</th>
                                 <th>Ending Time</th>
-                                <th>Hall Room</th>
-
+                                <th>Location</th>
+                                <th>Distributor</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>English</td>
-                                <td>16.Dec.2021</td>
-                                <td>3:10 PM</td>
-                                <td>4:10 PM</td>
-                                <td>01</td>
-                            </tr>
+                        <tbody id="exam-timetable">
+
                         </tbody>
                     </table>
                 </div> <!-- end table-responsive-->

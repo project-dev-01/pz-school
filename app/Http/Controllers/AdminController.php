@@ -2918,13 +2918,18 @@ class AdminController extends Controller
                     $output .= '<tr>
                                     <td>' . $row . '</td>
                                     <td>' . $exam['name'] . '</td>
-                                    <td><div class="button-list"><a href="javascript:void(0)" class="btn btn-blue btn-sm waves-effect waves-light" data-toggle="modal" data-target="#examTimeTable" data-exam_id="' . $exam['exam_id'] . '" id=""><i class="fe-eye"></i></a><a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="" id=""><i class="fe-trash-2"></i></a></div></td>
+                                    <td>
+                                    <div class="button-list">
+                                    <a href="javascript:void(0)" class="btn btn-blue btn-sm waves-effect waves-light" data-toggle="modal" data-target="#examTimeTable" data-exam_id="' . $exam['exam_id'] . '" id=""><i class="fe-eye"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="' . $exam['exam_id'] . '" id="deleteExamTimetableBtn"><i class="fe-trash-2"></i></a>
+                                    </div>
+                                    </td>
                                 </tr>';
                     $row++;
                 }
             } else {
                 $output .= '<tr>
-                                    <td colspan="7"> No Data Available</td>
+                                    <td colspan="3" class="text-center"> No Data Available</td>
                                 </tr>';
             }
 
@@ -3188,13 +3193,18 @@ class AdminController extends Controller
                     $output .= '<tr>
                                     <td>' . $row . '</td>
                                     <td>' . $exam['name'] . '</td>
-                                    <td><div class="button-list"><a href="javascript:void(0)" class="btn btn-blue btn-sm waves-effect waves-light" data-toggle="modal" data-target="#examTimeTable" data-exam_id="' . $exam['exam_id'] . '" id=""><i class="fe-eye"></i></a><a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="' . $exam['exam_id'] . '" id="deleteExamBtn"><i class="fe-trash-2"></i></a></div></td>
+                                    <td>
+                                    <div class="button-list">
+                                    <a href="javascript:void(0)" class="btn btn-blue btn-sm waves-effect waves-light" data-toggle="modal" data-target="#examTimeTable" data-exam_id="' . $exam['exam_id'] . '" id=""><i class="fe-eye"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="' . $exam['exam_id'] . '" id="deleteExamTimetableBtn"><i class="fe-trash-2"></i></a>
+                                    </div>
+                                    </td>
                                 </tr>';
                     $row++;
                 }
             } else {
                 $output .= '<tr>
-                                    <td colspan="7"> No Data Available</td>
+                                    <td colspan="3" class="text-center"> No Data Available</td>
                                 </tr>';
             }
 

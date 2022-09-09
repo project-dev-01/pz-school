@@ -9,10 +9,6 @@
         <div class="col-12">
             <div class="page-title-box">
                 <div class="page-title-right">
-                    <!--<ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                        <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
                 <h4 class="page-title">Exam Schedule</h4>
@@ -20,12 +16,10 @@
         </div>
     </div>
     <!-- end page title -->
-
-
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
                             Schedule List
@@ -35,28 +29,35 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="">
+                            <div class="card-box">
                                 <div class="table-responsive">
-                                    <table class="table dt-responsive nowrap w-100">
+                                    <table class="table table-bordered mb-0">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
                                                 <th>Exam Name</th>
-                                                <th>Remarks</th>
+                                                <th>Action</th>
 
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @php $row=0; @endphp
+                                            @forelse($schedule_exam_list as $exam)
+                                            @php $row++; @endphp
                                             <tr>
-                                                <td>1</td>
-                                                <td>Annual Exam</td>
+                                                <td>{{$row}}</td>
+                                                <td>{{$exam['name']}}</td>
                                                 <td>
                                                     <div class="button-list">
-                                                        <a href="javascript:void(0)" class="btn btn-blue btn-sm waves-effect waves-light" data-toggle="modal" data-target="#examTimeTable" data-id="" id=""><i class="fe-eye"></i></a>
-                                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-light" data-id="" id=""><i class="fe-trash-2"></i></a>
+                                                        <a href="javascript:void(0)" class="btn btn-blue btn-sm waves-effect waves-light" data-toggle="modal" data-target="#examTimeTable" data-exam_id="{{$exam['exam_id']}}" id="{{$exam['exam_id']}}"><i class="fe-eye"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
+                                            @empty
+                                            <tr>
+                                                <td colspan="3" class="text-center"> No Data Available</td>
+                                            </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div> <!-- end table-responsive-->
@@ -73,7 +74,12 @@
     </div>
     <!-- end row -->
     @include('parent.exam.view')
-
 </div> <!-- container -->
+@endsection
+@section('scripts')
+<script>
+    var viewExamTimetable = "{{ route('parent.exam_timetable.view') }}";
+</script>
+<script src="{{ asset('public/js/custom/exam_timetable_schedule.js') }}"></script>
 
 @endsection

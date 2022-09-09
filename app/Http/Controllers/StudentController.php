@@ -261,7 +261,67 @@ class StudentController extends Controller
     // Exam schedule
     public function examSchedule()
     {
-        return view('student.exam.schedule');
+        $data = [
+            'student_id' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.exam_timetable_student_parent'), $data);
+        return view(
+            'student.exam.schedule',
+            [
+                'schedule_exam_list' => $response['data']
+            ]
+        );
+    }
+
+    public function viewExamTimetable(Request $request)
+    {
+
+        $data = [
+            'student_id' => session()->get('ref_user_id'),
+            'exam_id' => $request->exam_id
+        ];
+        $response = Helper::PostMethod(config('constants.api.exam_timetable_get_student_parent'), $data);
+
+        // dd($response);  
+        if ($response['code'] == "200") {
+
+            $output = "";
+            $row = 1;
+            if ($response['data']['exam']) {
+                foreach ($response['data']['exam'] as $exam) {
+
+                    if ($exam['distributor_type'] == "1") {
+                        $type = "Internal";
+                    } elseif ($exam['distributor_type'] == "2") {
+                        $type = "External";
+                    } else {
+                        $type = "NILL";
+                    }
+                    $output .= '<tr>
+                                    <td>' . $exam['subject_name'] . '</td>
+                                    <td>' . $exam['paper_name'] . '</td>
+                                    <td>' . $exam['exam_date'] . '</td>
+                                    <td>' . $exam['time_start'] . '</td>
+                                    <td>' . $exam['time_end'] . '</td>
+                                    <td>' . $exam['hall_no'] . '</td>
+                                    <td>' . $exam['distributor'] . ' (' . $type . ') ' . '</td>
+                                </tr>';
+                    $row++;
+
+                    $class_section = $exam['class_name'] . '(' . $exam['section_name'] . ')';
+                }
+            } else {
+                $output .= '<tr>
+                                <td colspan="7" class="text-center"> No Data Available</td>
+                            </tr>';
+            }
+
+            $response['table'] = $output;
+            $response['class_section'] = $class_section;
+        }
+
+        // dd($response);
+        return $response;
     }
     // report card
     public function reportCard()
@@ -538,7 +598,6 @@ class StudentController extends Controller
         );
         // dd($request);
         $timetable = Helper::PostMethod(config('constants.api.timetable_student'), $data);
-        // dd($timetable);
         if ($timetable['code'] == "200") {
             return view(
                 'student.timetable.index',

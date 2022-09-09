@@ -221,8 +221,10 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('exam_timetable/list', [ApiController::class, 'listExamTimetable']);
     Route::post('exam_timetable/get', [ApiController::class, 'getExamTimetable']);
     Route::post('exam_timetable/delete', [ApiController::class, 'deleteExamTimetable']);
-
-
+    // Exam Timetable routes for parent,student
+    Route::post('exam_timetable/student_parent', [ApiControllerOne::class, 'examScheduleList']);
+    Route::post('exam_timetable/get_student_parent', [ApiControllerOne::class, 'getExamTimetableList']);
+    
     Route::get('relation/list', [ApiController::class, 'getRelationList']);
     // get roles
     Route::post('roles/list', [ApiController::class, 'getRoles']);

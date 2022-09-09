@@ -140,9 +140,68 @@ class ParentController extends Controller
 
     public function examSchedule()
     {
-        return view('parent.exam.schedule');
+        $data = [
+            'student_id' => session()->get('student_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.exam_timetable_student_parent'), $data);
+        return view(
+            'parent.exam.schedule',
+            [
+                'schedule_exam_list' => $response['data']
+            ]
+        );
     }
 
+    public function viewExamTimetable(Request $request)
+    {
+
+        $data = [
+            'student_id' => session()->get('student_id'),
+            'exam_id' => $request->exam_id
+        ];
+        $response = Helper::PostMethod(config('constants.api.exam_timetable_get_student_parent'), $data);
+
+        // dd($response);  
+        if ($response['code'] == "200") {
+
+            $output = "";
+            $row = 1;
+            if ($response['data']['exam']) {
+                foreach ($response['data']['exam'] as $exam) {
+
+                    if ($exam['distributor_type'] == "1") {
+                        $type = "Internal";
+                    } elseif ($exam['distributor_type'] == "2") {
+                        $type = "External";
+                    } else {
+                        $type = "NILL";
+                    }
+                    $output .= '<tr>
+                                    <td>' . $exam['subject_name'] . '</td>
+                                    <td>' . $exam['paper_name'] . '</td>
+                                    <td>' . $exam['exam_date'] . '</td>
+                                    <td>' . $exam['time_start'] . '</td>
+                                    <td>' . $exam['time_end'] . '</td>
+                                    <td>' . $exam['hall_no'] . '</td>
+                                    <td>' . $exam['distributor'] . ' (' . $type . ') ' . '</td>
+                                </tr>';
+                    $row++;
+
+                    $class_section = $exam['class_name'] . '(' . $exam['section_name'] . ')';
+                }
+            } else {
+                $output .= '<tr>
+                                <td colspan="7" class="text-center"> No Data Available</td>
+                            </tr>';
+            }
+
+            $response['table'] = $output;
+            $response['class_section'] = $class_section;
+        }
+
+        // dd($response);
+        return $response;
+    }
     public function reportCard()
     {
         $datas = array();
@@ -632,7 +691,7 @@ class ParentController extends Controller
         ];
         $get_student_by_all_subjects = Helper::PostMethod(config('constants.api.get_student_by_all_subjects'), $data);
         $get_class_section_by_student = Helper::PostMethod(config('constants.api.get_class_section_by_student'), $data);
-        
+
         // dd($get_class_section_by_student['data']['student_id']);
         return view(
             'parent.analyticrep.analyticreport',

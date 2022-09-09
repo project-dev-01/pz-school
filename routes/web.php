@@ -864,6 +864,7 @@ Route::group(['prefix' => 'parent', 'middleware' => ['isParent']], function () {
 
     //Time Table routes
     Route::get('timetable/index', [ParentController::class, 'timeTable'])->name('parent.timetable.index');
+    Route::post('timetable/viewexam', [ParentController::class, 'viewExamTimetable'])->name('parent.exam_timetable.view');
 
     // Forum routes
     Route::get('forum/index', [ParentController::class, 'forumIndex'])->name('parent.forum.index');
@@ -918,8 +919,11 @@ Route::group(['prefix' => 'student', 'middleware' => ['isStudent']], function ()
     Route::get('faq/index', [StudentController::class, 'faqIndex'])->name('student.faq.Index');
     // Exam
     Route::get('exam/schedule', [StudentController::class, 'examSchedule'])->name('student.exam.schedule');
+    Route::post('timetable/viewexam', [StudentController::class, 'viewExamTimetable'])->name('student.exam_timetable.view');
     // timetable
     Route::get('timetable', [StudentController::class, 'timetable'])->name('student.timetable');
+    Route::post('timetable/timetable-details', [StudentController::class, 'getTimetable'])->name('student.timetable.details');
+
     // Report card
     Route::get('report_card', [StudentController::class, 'reportCard'])->name('student.report_card');
     // Event

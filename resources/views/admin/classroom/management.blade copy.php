@@ -663,12 +663,12 @@
                                                     <div class="row">
                                                         <div class="col-md-3">
                                                             <label for="field" class="font-weight-bold">Short Test<span class="text-danger">*</span></label>
-                                                            <input type="text" id="field" class="form-control shortTestAdd" name="field[]" />
-                                                            <span id="shortTestError"></span>
+                                                            <input type="text" id="field" class="form-control shortTestAdd short_test_name" name="field1" />
+                                                            <!-- <span id="shortTestError"></span> -->
                                                         </div>
                                                         <div class="col-md-3">
                                                             <label for="grade" class="font-weight-bold">Status<span class="text-danger">*</span></label>
-                                                            <select id="grade" class="form-control" name="grade[]">
+                                                            <select id="grade" class="form-control grade_status_name" name="grade1">
                                                                 <option value="marks">Marks</option>
                                                                 <option value="grade">Grade</option>
                                                                 <option value="text">Text</option>

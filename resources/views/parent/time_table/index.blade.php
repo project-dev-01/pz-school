@@ -14,6 +14,23 @@
         right: 13px;
         top: 5px;
     }
+
+    .table td,
+    .table th {
+        padding: .85rem;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .dt-responsive {
+        width: max-content;
+    }
+
+    @media only screen and (min-device-width: 280px) and (max-device-width: 1200px) {
+        .dt-responsive {
+            width: max-content;
+        }
+
+    }
 </style>
 <!-- Start Content-->
 <div class="container-fluid">
@@ -23,11 +40,6 @@
         <div class="col-12">
             <div class="page-title-box">
                 <div class="page-title-right">
-                    <!--<ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                        <li class="breadcrumb-item active">Wizard</li>
-                    </ol>-->
                 </div>
                 <h4 class="page-title">View Timetable</h4>
             </div>
@@ -40,9 +52,9 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Timetable
+                        <h4 class="navv">
                             @if($timetable>0)
-                            @if($timetable)Class {{ $details['class']['class_name'] }} (Section: {{ $details['section']['section_name'] }}) @endif
+                            Class {{ $details['class']['class_name'] }} (Section: {{ $details['section']['section_name'] }})
                             @endif
                         </h4>
 
@@ -52,36 +64,60 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="table-responsive">
-                                <table class="table table-bordered mb-0 text-center">
+                                <table class="table table-bordered mb-0" style="width:max-content;">
                                     <tbody id="timetable">
                                         @if($timetable>0)
                                         @foreach($days as $day)
+                                        @if (!isset($timetable['data']['week'][$day]) && ($day == "saturday" || $day == "sunday"))
+                                        @else
                                         <tr>
-                                            <td>{{strtoupper($day)}}</td>
+                                            <td class="center" style="color:#ed1833;">{{strtoupper($day)}}</td>
                                             @php $row=0; @endphp
                                             @foreach($timetable as $table)
                                             @if($table['day'] == $day)
+                                            @php
+                                            $start_time = date('H:i', strtotime($table['time_start']));
+                                            $end_time = date('H:i', strtotime($table['time_end']));
+                                            @endphp
                                             @if($table['break'] == 1)
                                             <td>
-                                                <b>{{ $table['break_type']}}</b><br>
-                                                ( {{ $table['time_start']}} - {{$table['time_end']}} )<br>
-                                                @if($table['class_room'])
-                                                Class Room : {{$table['class_room']}}
-                                                @endif
+                                                <b>
+                                                    <div style="color:#2d28e9;display:inline-block;padding-right:10px;"> <i class="dripicons-bell"></i></div>{{ isset($table['break_type']) ? $table['break_type'] : "" }}
+                                                </b><br>
+                                                <b>
+                                                    <div style="color:#179614;display:inline-block;padding-right:10px;"><i class="icon-speedometer"></i></div>( {{ $start_time }} - {{$end_time}} )
+                                                    <b><br>
+                                                        @if(isset($table['class_room']))
+                                                        <b>
+                                                            <div style="color:#ff0000;display:inline-block;padding-right:10px;"> <i class="icon-location-pin"></i> </div>{{$table['class_room']}}
+                                                        </b><br>
+                                                        @endif
+
                                             </td>
                                             @else
 
                                             <td>
                                                 @if($table['subject_name'])
-                                                <b>Subject:{{$table['subject_name']}}</b><br>
+                                                @php $subject = $table['subject_name']; @endphp
                                                 @else
-                                                <b>Subject:{{$table['break_type']}}</b><br>
+                                                @php $subject = isset($table['break_type']) ? $table['break_type'] : ""; @endphp
                                                 @endif
-                                                ( {{ $table['time_start']}} - {{$table['time_end']}} )<br>
-                                                Teacher : {{$table['teacher_name'] }}<br>
-                                                @if($table['class_room'])
-                                                Class Room : {{$table['class_room']}}
-                                                @endif
+                                                <b>
+                                                    <div style="color:#2d28e9;display:inline-block;padding-right:10px;"> <i class="icon-book-open"></i></div>{{$table['subject_name']}}
+                                                </b><br>
+                                                <b>
+                                                    <div style="color:#179614;display:inline-block;padding-right:10px;"><i class="icon-speedometer"></i></div>( {{ $start_time }} - {{$end_time}} )
+                                                    <b><br>
+                                                        @if($table['teacher_name'])
+                                                        <b>
+                                                            <div style="color:#28dfe9;display:inline-block;padding-right:10px;"> <i class=" fas fa-book-reader"></i></div>{{$table['teacher_name'] }}
+                                                        </b><br>
+                                                        @endif
+                                                        @if($table['class_room'])
+                                                        <b>
+                                                            <div style="color:#ff0000;display:inline-block;padding-right:10px;"> <i class="icon-location-pin"></i> </div>{{$table['class_room']}}
+                                                        </b><br>
+                                                        @endif
                                             </td>
 
                                             @endif
@@ -92,12 +128,13 @@
                                                 @php $row++; @endphp
                                                 @endwhile
                                         </tr>
+                                        @endif
+
                                         @endforeach
                                         @else
                                         <tr>
-                                            <td colspan="5">No Data Available</td>
+                                            <td class="text-center">No timetable Available</td>
                                         </tr>
-
                                         @endif
                                     </tbody>
                                 </table>
@@ -113,13 +150,5 @@
     <!-- end row -->
 
 </div> <!-- container -->
-
-@endsection
-
-@section('scripts')
-<script>
-    var sectionByClass = "{{ route('admin.section_by_class') }}";
-</script>
-<script src="{{ asset('public/js/custom/timetable.js') }}"></script>
 
 @endsection
