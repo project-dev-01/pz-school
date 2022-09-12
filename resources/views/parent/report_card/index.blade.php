@@ -100,6 +100,7 @@
                                                             <th>Score</th>
                                                             <th>Grade</th>
                                                             <th>Ranking</th>
+                                                            <th>Status</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tbl_bdy_reportcard">
@@ -114,45 +115,6 @@
                         </div>
                     </div>
 
-                    
-                    <div class="row" style="display: none;" id="tbl_subject_division">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <p>
-                                <div>
-                                    <a class="list-group-item list-group-item-info btn-block btn-lg" data-toggle="collapse" href="#annualExam" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                        <i class="fas fa-caret-square-down"></i>&nbsp;<span id="exam_name_header_div"></span>
-                                    </a>
-                                </div>
-                                </p>
-                                <div class="collapse" id="annualExam">
-                                    <div class="card card-body">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="">
-                                                    <div class="table-responsive">
-                                                        <table class="table dt-responsive nowrap w-100">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Subject</th>
-                                                                    <th>Score</th>
-                                                                    <th>Grade</th>
-                                                                    <th>Ranking</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody id="tbl_subjectdivision_body">
-                                                               
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div> <!-- end card-box -->
-                                            </div> <!-- end col -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col -->

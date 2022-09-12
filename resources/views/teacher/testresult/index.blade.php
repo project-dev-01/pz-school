@@ -361,7 +361,7 @@
     var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
     // var teacherSubjectUrl = "{{ config('constants.api.subject_by_class') }}";
     var subjectByExamNames = "{{ config('constants.api.subject_by_exam_names') }}";
-    var examBySubjects = "{{ config('constants.api.exam_by_subjects') }}";
+    var examBySubjects = "{{ config('constants.api.exam_by_teacher_subjects') }}";
     var subjectByPapers = "{{ config('constants.api.subject_by_papers') }}";
 
     var examsList = "{{ config('constants.api.get_testresult_exams') }}";
@@ -375,7 +375,7 @@
     var getStudentGrade = "{{ config('constants.api.get_student_grade') }}";
     var getSubjectDivisionMark = "{{ config('constants.api.get_subject_division_mark') }}";
     var getSubjectMarkStatus = "{{ config('constants.api.get_subject_mark_status') }}";
-
+    var teacherID = ref_user_id;
     // default image test
     var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
 </script>

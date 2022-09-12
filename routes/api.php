@@ -104,8 +104,10 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('section-by-class', [ApiController::class, 'sectionByClass']);
     Route::post('subject-by-class', [ApiController::class, 'subjectByClass']);
     Route::post('exam-by-subjects', [ApiController::class, 'examBySubjects']);
+    Route::post('exam-by-teacher-subjects', [ApiController::class, 'examByTeacherSubjects']);
     Route::post('subject-by-papers', [ApiController::class, 'getSubjectByPaper']);
     Route::post('subject-by-exam-names', [ApiController::class, 'getsubjectByAssignTest']);
+    Route::post('subject-by-papers-analytics', [ApiController::class, 'getSubjectByPaperAnalytics']);
     
     Route::post('timetable-subject', [ApiController::class, 'timetableSubject']);
     Route::get('exam-by-classSection', [ApiController::class, 'examByClassSec']);

@@ -1,3 +1,9 @@
+<style>
+    .modal-lg,
+    .modal-xl {
+        max-width: max-content;
+    }
+</style>
 <!-- Center modal content -->
 <div class="modal fade examTimeTable" id="examTimeTable" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -11,7 +17,7 @@
                 <h6 class="text-center" id="class-section"></h6>
                 <hr>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-centered dt-responsive nowrap w-100" width="100%">
+                    <table class="table table-bordered dt-responsive">
                         <thead>
                             <tr style="background-color:#0ABAB5">
                                 <th>Subject</th>

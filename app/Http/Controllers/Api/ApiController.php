@@ -4665,8 +4665,7 @@ class ApiController extends BaseController
                 ->select(
                     'tex.exam_id as id',
                     'ex.name as name',
-                    'tex.exam_date',
-                    'tex.marks'
+                    'tex.exam_date'
                 )
                 ->leftJoin('exam as ex', 'tex.exam_id', '=', 'ex.id')
                 ->where('tex.exam_date', '<', $today)
@@ -4711,6 +4710,49 @@ class ApiController extends BaseController
             return $this->successResponse($getTimetableSubjects, 'get Subjects fetch successfully');
         }
     }
+    //
+    public function examByTeacherSubjects(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'exam_id' => 'required',
+            'teacher_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $teacher_id = $request->teacher_id;
+            $getTimetableSubjects = $Connection->table('timetable_exam as tex')
+                ->select(
+                    'tex.id as id',
+                    's.id as subject_id',
+                    's.name as subject_name'
+                )
+                ->join('subjects as s', 'tex.subject_id', '=', 's.id')
+                // ->join('subject_assigns as sa', 'tex.teacher_id', '=', 'sa.id')
+                ->join('subject_assigns as sa', function ($join) use ($teacher_id) {
+                    $join->on('sa.subject_id', '=', 's.id')
+                        ->on('sa.teacher_id', '=', DB::raw("'$teacher_id'"));
+                })
+                ->where([
+                    ['tex.class_id', $request->class_id],
+                    ['tex.section_id', $request->section_id],
+                    ['tex.exam_id', $request->exam_id],
+                    ['s.exam_exclude', '=', '0'],
+                    ['sa.type', '=', '0']
+                ])
+                ->groupBy('s.id')
+                ->get();
+            return $this->successResponse($getTimetableSubjects, 'get Subjects fetch successfully');
+        }
+    }
     public function getSubjectByPaper(Request $request)
     {
 
@@ -4743,6 +4785,35 @@ class ApiController extends BaseController
                     ['tex.exam_id', $request->exam_id]
                 ])
                 ->groupBy('exp.id')
+                ->get();
+            return $this->successResponse($examPapers, 'get papers fetch successfully');
+        }
+    }
+    public function getSubjectByPaperAnalytics(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+            'class_id' => 'required',
+            'subject_id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            $examPapers = $Connection->table('exam_papers as exp')
+                ->select(
+                    'exp.id as paper_id',
+                    'exp.paper_name',
+                    'exp.grade_category'
+                )
+                ->where([
+                    ['exp.class_id', $request->class_id],
+                    ['exp.subject_id', $request->subject_id]
+                ])
                 ->get();
             return $this->successResponse($examPapers, 'get papers fetch successfully');
         }
@@ -9698,8 +9769,7 @@ class ApiController extends BaseController
                 ->select(
                     'tex.exam_id as id',
                     'ex.name as name',
-                    'tex.exam_date',
-                    'tex.marks'
+                    'tex.exam_date'
                 )
                 ->leftJoin('exam as ex', 'tex.exam_id', '=', 'ex.id')
                 ->where('tex.exam_date', '<', $request->today)
@@ -9812,20 +9882,6 @@ class ApiController extends BaseController
                     ->orderBy('sa.score', 'desc')
                     ->get();
 
-                // $getExamMarks = $Connection->table('timetable_exam as tex')
-                //     ->select(
-                //         'tex.marks'
-                //     )
-                //     ->where([
-                //         ['tex.class_id', $request->class_id],
-                //         ['tex.section_id', $request->section_id],
-                //         ['tex.subject_id', $request->subject_id],
-                //         ['tex.exam_id', $request->exam_id],
-                //         ['tex.paper_id', $request->paper_id],
-                //         ['tex.semester_id', $request->semester_id],
-                //         ['tex.session_id', $request->session_id]
-                //     ])
-                //     ->first();
                 $data = [
                     'get_subject_marks' => $getSubjectMarks
                 ];
@@ -12555,11 +12611,20 @@ class ApiController extends BaseController
                     'student_marks.grade',
                     'student_marks.ranking',
                     'student_marks.pass_fail',
-                    'timetable_exam.exam_date'
+                    'timetable_exam.exam_date',
+                    'exam_papers.paper_name'
                 )
                 ->Join('subjects', 'student_marks.subject_id', '=', 'subjects.id')
-                ->leftJoin('timetable_exam', 'student_marks.exam_id', '=', 'timetable_exam.exam_id')
-
+                ->Join('exam_papers', 'student_marks.paper_id', '=', 'exam_papers.id')
+                ->join('timetable_exam', function ($join) {
+                    $join->on('student_marks.exam_id', '=', 'timetable_exam.exam_id')
+                        ->on('student_marks.class_id', '=', 'timetable_exam.class_id')
+                        ->on('student_marks.section_id', '=', 'timetable_exam.section_id')
+                        ->on('student_marks.subject_id', '=', 'timetable_exam.subject_id')
+                        ->on('student_marks.semester_id', '=', 'timetable_exam.semester_id')
+                        ->on('student_marks.session_id', '=', 'timetable_exam.session_id')
+                        ->on('student_marks.paper_id', '=', 'timetable_exam.paper_id');
+                })
                 ->where([
                     ['student_marks.exam_id', '=', $request->exam_id],
                     ['student_marks.student_id', '=', $request->student_id]
@@ -12570,28 +12635,28 @@ class ApiController extends BaseController
             //  array_push($allsubjectreport, $object);
 
             // check subject division tbl
-            $subjectreport_subject_division = $Connection->table('student_subjectdivision_inst')
-                ->select(
-                    'subjects.id as subject_id',
-                    'subjects.name as subject_name',
-                    'student_subjectdivision_inst.subject_division',
-                    'student_subjectdivision_inst.subjectdivision_scores',
-                    'student_subjectdivision_inst.total_score',
-                    'student_subjectdivision_inst.grade',
-                    'student_subjectdivision_inst.ranking',
-                    'student_subjectdivision_inst.pass_fail',
-                    'timetable_exam.exam_date'
-                )
-                ->Join('subjects', 'student_subjectdivision_inst.subject_id', '=', 'subjects.id')
-                ->leftJoin('timetable_exam', 'student_subjectdivision_inst.exam_id', '=', 'timetable_exam.exam_id')
+            // $subjectreport_subject_division = $Connection->table('student_subjectdivision_inst')
+            //     ->select(
+            //         'subjects.id as subject_id',
+            //         'subjects.name as subject_name',
+            //         'student_subjectdivision_inst.subject_division',
+            //         'student_subjectdivision_inst.subjectdivision_scores',
+            //         'student_subjectdivision_inst.total_score',
+            //         'student_subjectdivision_inst.grade',
+            //         'student_subjectdivision_inst.ranking',
+            //         'student_subjectdivision_inst.pass_fail',
+            //         'timetable_exam.exam_date'
+            //     )
+            //     ->Join('subjects', 'student_subjectdivision_inst.subject_id', '=', 'subjects.id')
+            //     ->leftJoin('timetable_exam', 'student_subjectdivision_inst.exam_id', '=', 'timetable_exam.exam_id')
 
-                ->where([
-                    ['student_subjectdivision_inst.exam_id', '=', $request->exam_id],
-                    ['student_subjectdivision_inst.student_id', '=', $request->student_id]
-                ])
-                ->whereYear('timetable_exam.exam_date', $request->selected_year)
-                ->get();
-            $object->subjectreport_div = $subjectreport_subject_division;
+            //     ->where([
+            //         ['student_subjectdivision_inst.exam_id', '=', $request->exam_id],
+            //         ['student_subjectdivision_inst.student_id', '=', $request->student_id]
+            //     ])
+            //     ->whereYear('timetable_exam.exam_date', $request->selected_year)
+            //     ->get();
+            // $object->subjectreport_div = $subjectreport_subject_division;
             array_push($allsubjectreport, $object);
             //dd($allsubjectreport);
             return $this->successResponse($allsubjectreport, 'get report for student fetch successfully');
@@ -12643,11 +12708,13 @@ class ApiController extends BaseController
             $con = $this->createNewConnection($request->branch_id);
             $student = $con->table('enrolls')->where('student_id', $student_id)->first();
             // return 1;
-
             $data['subjects'] = $con->table('subject_assigns')->select('subjects.name as subject_name')
                 ->join('subjects', 'subject_assigns.subject_id', '=', 'subjects.id')
-                ->where('subject_assigns.class_id', $student->class_id)
-                ->where('subject_assigns.section_id', $student->section_id)
+                ->where([
+                    ['subject_assigns.class_id', '=', $student->class_id],
+                    ['subject_assigns.section_id', '=', $student->section_id],
+                    ['subject_assigns.type', '=', '0']
+                ])
                 ->orderBy('subject_name')
                 ->get();
 
@@ -12662,21 +12729,23 @@ class ApiController extends BaseController
                 ->get()
                 ->groupBy('exam_name')->toArray();
 
-            $sub_div = $con->table('exam')->select('student_subjectdivision_inst.total_score as score', 'subjects.name as subject_name', 'student_subjectdivision_inst.ranking', 'student_subjectdivision_inst.pass_fail', 'student_subjectdivision_inst.status', 'student_subjectdivision_inst.grade', 'exam.name as exam_name',)
-                ->leftJoin('student_subjectdivision_inst', 'exam.id', '=', 'student_subjectdivision_inst.exam_id')
-                ->join('subjects', 'student_subjectdivision_inst.subject_id', '=', 'subjects.id')
-                ->where('student_subjectdivision_inst.class_id', $student->class_id)
-                ->where('student_subjectdivision_inst.section_id', $student->section_id)
-                ->where('student_subjectdivision_inst.student_id', $student_id)
-                ->orderBy('subject_name')
-                ->get()
-                ->groupBy('exam_name')->toArray();
-            $combined = array();
-            foreach ($sub as $key => $val) {
-                $combined[$key] = array_merge($val, $sub_div[$key]);
-            }
 
-            $data['marks'] = $combined;
+            // $sub_div = $con->table('exam')->select('student_subjectdivision_inst.total_score as score', 'subjects.name as subject_name', 'student_subjectdivision_inst.ranking', 'student_subjectdivision_inst.pass_fail', 'student_subjectdivision_inst.status', 'student_subjectdivision_inst.grade', 'exam.name as exam_name',)
+            //     ->leftJoin('student_subjectdivision_inst', 'exam.id', '=', 'student_subjectdivision_inst.exam_id')
+            //     ->join('subjects', 'student_subjectdivision_inst.subject_id', '=', 'subjects.id')
+            //     ->where('student_subjectdivision_inst.class_id', $student->class_id)
+            //     ->where('student_subjectdivision_inst.section_id', $student->section_id)
+            //     ->where('student_subjectdivision_inst.student_id', $student_id)
+            //     ->orderBy('subject_name')
+            //     ->get()
+            //     ->groupBy('exam_name')->toArray();
+
+            // $combined = array();
+            // foreach ($sub as $key => $val) {
+            //     $combined[$key] = array_merge($val, $sub_div[$key]);
+            // }
+
+            $data['marks'] = $sub;
 
             return $this->successResponse($data, 'Test Score List fetch successfully');
         }
@@ -15096,11 +15165,11 @@ class ApiController extends BaseController
                 ->select(
                     DB::raw('COUNT(sa.date) as "total_no_of_days_date_count"'),
                     // DB::raw('DATE_FORMAT(sa.date, "%b %d") as date'),
-                    DB::raw('COUNT(CASE WHEN sa.student_behaviour = "smile" then 1 ELSE NULL END) as "smileCount"'),
-                    DB::raw('COUNT(CASE WHEN sa.student_behaviour = "angry" then 1 ELSE NULL END) as "angryCount"'),
-                    DB::raw('COUNT(CASE WHEN sa.student_behaviour = "dizzy" then 1 ELSE NULL END) as "dizzyCount"'),
-                    DB::raw('COUNT(CASE WHEN sa.student_behaviour = "surprise" then 1 ELSE NULL END) as "surpriseCount"'),
-                    DB::raw('COUNT(CASE WHEN sa.student_behaviour = "tired" then 1 ELSE NULL END) as "tiredCount"')
+                    DB::raw('COUNT(CASE WHEN sa.student_behaviour = "Engaging" then 1 ELSE NULL END) as "EngagingCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.student_behaviour = "Hyperactive" then 1 ELSE NULL END) as "HyperactiveCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.student_behaviour = "Quiet" then 1 ELSE NULL END) as "QuietCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.student_behaviour = "Sleepy" then 1 ELSE NULL END) as "SleepyCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.student_behaviour = "Uninterested" then 1 ELSE NULL END) as "UninterestedCount"')
                 )
                 // ->join('enrolls as en', 'sa.student_id', '=', 'en.student_id')
                 // ->join('students as stud', 'sa.student_id', '=', 'stud.id')

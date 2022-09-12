@@ -1,15 +1,20 @@
+<style>
+    .table td {
+        border-top: none;
+    }
+</style>
 <!-- Center modal content -->
 <div class="modal fade viewEvent" id="viewEvent" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myviewEventModalLabel"> <i class="fas fa-info-circle"></i> Event Details </h4>
+                <h4 class="modal-title" id="myviewEventModalLabel" style="color: #6FC6CC"> <i class="fas fa-info-circle"></i> Event Details </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col">
-                        <div class="card-box">
+                        <div class="card-box" style="background-color: #8adfee14;">
                             <div class="table-responsive">
                                 <table class="table mb-0">
                                     <tr>

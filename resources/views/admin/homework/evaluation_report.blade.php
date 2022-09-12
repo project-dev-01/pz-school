@@ -99,18 +99,6 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-xl-12">
-                            <!-- <ul class="nav nav-tabs nav-bordered">
-                                <li class="nav-item">
-                                    <a href="#current-b1" data-toggle="tab" aria-expanded="true" class="nav-link active">
-                                        Homework List
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#history-b1" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                        History
-                                    </a>
-                                </li>
-                            </ul><br> -->
                             <div class="card-box">
                                 <div class="tab-content">
                                     <div class="tab-pane show active" id="current-b1">
@@ -146,84 +134,6 @@
                                             </div> <!-- end col-->
                                         </div>
                                     </div>
-                                    <div class="tab-pane" id="history-b1">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="row">
-                                                    <div class="col-md-8"></div>
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Search">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="table-responsive">
-                                                    <table class="table w-100 nowrap  text-center">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>#</th>
-                                                                <th>Subject</th>
-                                                                <th>Standard</th>
-                                                                <th>Class</th>
-                                                                <th>Date of Homework</th>
-                                                                <th>Date of Submission</th>
-                                                                <th>Complete/Incomplete</th>
-                                                                <th>Total Student</th>
-                                                                <th>Action</th>
-
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>1</td>
-                                                                <td>Mathematics</td>
-                                                                <td>III</td>
-                                                                <td>A</td>
-                                                                <td>07-04-2018</td>
-                                                                <td>21-04-2018</td>
-                                                                <td>10/0</td>
-                                                                <td>10</td>
-                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default"> Copy</a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>2</td>
-                                                                <td>Study of the Environment</td>
-                                                                <td>I</td>
-                                                                <td>B</td>
-                                                                <td>15-08-2020</td>
-                                                                <td>07-09-2020</td>
-                                                                <td>15/0</td>
-                                                                <td>15</td>
-                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default"> Copy</a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>3</td>
-                                                                <td>Arts Education</td>
-                                                                <td>II</td>
-                                                                <td>C</td>
-                                                                <td>11-06-2021</td>
-                                                                <td>17-06-2021</td>
-                                                                <td>18/2</td>
-                                                                <td>20</td>
-                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default">Copy</a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>4</td>
-                                                                <td>English</td>
-                                                                <td>VI</td>
-                                                                <td>A</td>
-                                                                <td>04-05-2020</td>
-                                                                <td>19-05-2020</td>
-                                                                <td>25/0</td>
-                                                                <td>25</td>
-                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default"> Copy</a></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div> <!-- end table-responsive-->
-                                            </div> <!-- end col-->
-                                        </div>
-                                    </div> <!-- end col-->
                                 </div>
                             </div> <!-- end card-box-->
                         </div> <!-- end col -->

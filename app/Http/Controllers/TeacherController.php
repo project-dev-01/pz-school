@@ -772,6 +772,7 @@ class TeacherController extends Controller
         $data = [
             'teacher_id' => session()->get('ref_user_id')
         ];
+        // dd(session()->get('ref_user_id'));
         $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         return view('teacher.analyticrep.analyticreport', [
             'teacher_class' => $response['data']

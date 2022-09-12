@@ -378,7 +378,7 @@
     var getStudentGrade = "{{ config('constants.api.get_student_grade') }}";
     var getSubjectDivisionMark = "{{ config('constants.api.get_subject_division_mark') }}";
     var getSubjectMarkStatus = "{{ config('constants.api.get_subject_mark_status') }}";
-
+    var teacherID = null;
     // default image test
     var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
 </script>

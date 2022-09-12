@@ -29,6 +29,8 @@ $(function () {
                 var subjects = response.data.subjects;
                 var data = [];
                 var label = [];
+                console.log(marks);
+                console.log(subjects);
                 if (subjects.length > 0) {
                     subjects.forEach(function (res) {
                         label.push(res.subject_name);
@@ -68,7 +70,7 @@ $(function () {
         } else {
             var ctx = document.getElementById("radar-chart-test-marks").getContext('2d');
             var defaultColors = ["#1abc9c", "#f1556c", "#4a81d4", "#e3eaef"];
-            var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
+            // var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
 
             radar = new Chart(ctx, {
                 type: 'radar',

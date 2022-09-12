@@ -431,32 +431,25 @@ $(function () {
                         $('#attitude_card').show();
                         // graph data
                         var total_no_of_days_date_count = attitude[0].total_no_of_days_date_count;
-                        var smileCount = attitude[0].smileCount;
-                        var angryCount = attitude[0].angryCount;
-                        var dizzyCount = attitude[0].dizzyCount;
-                        var surpriseCount = attitude[0].surpriseCount;
-                        var tiredCount = attitude[0].tiredCount;
+                        var EngagingCount = attitude[0].EngagingCount;
+                        var HyperactiveCount = attitude[0].HyperactiveCount;
+                        var QuietCount = attitude[0].QuietCount;
+                        var SleepyCount = attitude[0].SleepyCount;
+                        var UninterestedCount = attitude[0].UninterestedCount;
 
-                        smileCount = ((smileCount / total_no_of_days_date_count) * 100);
-                        angryCount = ((angryCount / total_no_of_days_date_count) * 100);
-                        dizzyCount = ((dizzyCount / total_no_of_days_date_count) * 100);
-                        surpriseCount = ((surpriseCount / total_no_of_days_date_count) * 100);
-                        tiredCount = ((tiredCount / total_no_of_days_date_count) * 100);
+                        EngagingCount = ((EngagingCount / total_no_of_days_date_count) * 100);
+                        HyperactiveCount = ((HyperactiveCount / total_no_of_days_date_count) * 100);
+                        QuietCount = ((QuietCount / total_no_of_days_date_count) * 100);
+                        SleepyCount = ((SleepyCount / total_no_of_days_date_count) * 100);
+                        UninterestedCount = ((UninterestedCount / total_no_of_days_date_count) * 100);
 
                         // based on order we push
-                        // attitudeChart.series[0].setData([
-                        //     ['smile',smileCount],
-                        //     ['angry',angryCount],
-                        //     ['dizzy',dizzyCount],
-                        //     ['surprise',surpriseCount],
-                        //     ['tired',tiredCount]
-                        // ], true);
                         attitudeChart.series[0].setData([
-                            ['<i class="far fa-smile" style="font-size:20px;color:#87e680"> smile</i> ', smileCount],
-                            ['<i class="far fa-angry" style="font-size:20px;color:#ee4947"> angry</i> ', angryCount],
-                            ['<i class="far fa-dizzy" style="font-size:20px;color:#c2bd11"> dizzy</i> ', dizzyCount],
-                            ['<i class="far fa-surprise" style="font-size:20px;color:#4960c4"> surprise</i> ', surpriseCount],
-                            ['<i class="far fa-tired" style="font-size:20px;color:#ea2522"> tired</i> ', tiredCount]
+                            ['Engaging', EngagingCount],
+                            ['Hyperactive', HyperactiveCount],
+                            ['Quiet', QuietCount],
+                            ['Sleepy', SleepyCount],
+                            ['Uninterested', UninterestedCount]
                         ], true);
                     } else {
                         $('#attitude_card').hide();

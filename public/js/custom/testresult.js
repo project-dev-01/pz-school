@@ -161,6 +161,7 @@ $(function () {
         var exam_id = $(this).val();
         var section_id = $("#sectionID").val();
         var class_id = $("#changeClassName").val();
+        var teacher_id = teacherID;
         $("#testresultFilter").find("#subjectID").empty();
         $("#testresultFilter").find("#subjectID").append('<option value="">Select Subject</option>');
         $("#testresultFilter").find("#paperID").empty();
@@ -169,6 +170,7 @@ $(function () {
             token: token,
             branch_id: branchID,
             class_id: class_id,
+            teacher_id: teacher_id,
             section_id: section_id,
             exam_id: exam_id
         }, function (res) {

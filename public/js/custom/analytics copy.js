@@ -253,8 +253,8 @@ $(function () {
         $("#analyticCrepFilter").find("#sectionID").append('<option value="">Select Section</option>');
         $("#analyticCrepFilter").find("#subjectID").empty();
         $("#analyticCrepFilter").find("#subjectID").append('<option value="">Select Subject</option>');
-        // $("#analyticCrepFilter").find("#paperID").empty();
-        // $("#analyticCrepFilter").find("#paperID").append('<option value="">Select Paper</option>');
+        $("#analyticCrepFilter").find("#paperID").empty();
+        $("#analyticCrepFilter").find("#paperID").append('<option value="">Select Paper</option>');
         $("#analyticCrepFilter").find("#studentID").empty();
         $("#analyticCrepFilter").find("#studentID").append('<option value="">Select Student</option>');
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
@@ -300,25 +300,25 @@ $(function () {
         }, 'json');
     });
 
-    // $('#subjectID').on('change', function () {
-    //     var subject_id = $(this).val();
-    //     var class_id = $("#changeClassName").val();
-    //     $("#analyticCrepFilter").find("#paperID").empty();
-    //     $("#analyticCrepFilter").find("#paperID").append('<option value="">Select Paper</option>');
-    //     // paper list
-    //     $.post(subjectByPapers, {
-    //         token: token,
-    //         branch_id: branchID,
-    //         class_id: class_id,
-    //         subject_id: subject_id
-    //     }, function (res) {
-    //         if (res.code == 200) {
-    //             $.each(res.data, function (key, val) {
-    //                 $("#analyticCrepFilter").find("#paperID").append('<option value="' + val.paper_id + '" data-grade_category="' + val.grade_category + '">' + val.paper_name + '</option>');
-    //             });
-    //         }
-    //     }, 'json');
-    // });
+    $('#subjectID').on('change', function () {
+        var subject_id = $(this).val();
+        var class_id = $("#changeClassName").val();
+        $("#analyticCrepFilter").find("#paperID").empty();
+        $("#analyticCrepFilter").find("#paperID").append('<option value="">Select Paper</option>');
+        // paper list
+        $.post(subjectByPapers, {
+            token: token,
+            branch_id: branchID,
+            class_id: class_id,
+            subject_id: subject_id
+        }, function (res) {
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#analyticCrepFilter").find("#paperID").append('<option value="' + val.paper_id + '" data-grade_category="' + val.grade_category + '">' + val.paper_name + '</option>');
+                });
+            }
+        }, 'json');
+    });
     // applyFilter
     // rules validation
     $("#analyticCrepFilter").validate({
@@ -458,12 +458,26 @@ $(function () {
                         UninterestedCount = ((UninterestedCount / total_no_of_days_date_count) * 100);
 
                         // based on order we push
+                        // attitudeChart.series[0].setData([
+                        //     ['smile',smileCount],
+                        //     ['angry',angryCount],
+                        //     ['dizzy',dizzyCount],
+                        //     ['surprise',surpriseCount],
+                        //     ['tired',tiredCount]
+                        // ], true);
+                        // attitudeChart.series[0].setData([
+                        //     ['<i class="far fa-smile" style="font-size:20px;color:#87e680"> smile</i> ', smileCount],
+                        //     ['<i class="far fa-angry" style="font-size:20px;color:#ee4947"> angry</i> ', angryCount],
+                        //     ['<i class="far fa-dizzy" style="font-size:20px;color:#c2bd11"> dizzy</i> ', dizzyCount],
+                        //     ['<i class="far fa-surprise" style="font-size:20px;color:#4960c4"> surprise</i> ', surpriseCount],
+                        //     ['<i class="far fa-tired" style="font-size:20px;color:#ea2522"> tired</i> ', tiredCount]
+                        // ], true);
                         attitudeChart.series[0].setData([
                             ['Engaging', EngagingCount],
                             ['Hyperactive', HyperactiveCount],
                             ['Quiet', QuietCount],
                             ['Sleepy', SleepyCount],
-                            ['Uninterested', UninterestedCount]
+                            ['Uninterested', tiredCount]
                         ], true);
                     } else {
                         $('#attitude_card').hide();

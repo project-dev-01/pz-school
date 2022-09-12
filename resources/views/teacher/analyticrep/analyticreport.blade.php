@@ -59,6 +59,14 @@
                                     </select>
                                 </div>
                             </div>
+                            <!-- <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="paperID">Paper Name</label>
+                                    <select id="paperID" class="form-control" name="paper_id">
+                                        <option value="">Select Paper</option>
+                                    </select>
+                                </div>
+                            </div> -->
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="studentID">Student<span class="text-danger">*</span></label>
@@ -183,32 +191,36 @@
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
-    <div class="row" id="subject_average_card" style="display:none">
-        <div class="col-md-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                            Subject Average
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="col-xl-12">
-                    <!-- Portlet card -->
+
+
+    <div class="card" id="subject_average_card" style="display:none">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <h4 class="navv">Subject Average
+                    <h4>
+            </li>
+        </ul><br>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Portlet card -->
+                <div class="card">
                     <div class="card-body">
                         <div class="card-widgets">
                             <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                            <a data-toggle="collapse" href="#cardCollpase3" role="button" aria-expanded="false" aria-controls="cardCollpase3"><i class="mdi mdi-minus"></i></a>
+                            <a data-toggle="collapse" href="#cardCollpase4" role="button" aria-expanded="false" aria-controls="cardCollpase4"><i class="mdi mdi-minus"></i></a>
                             <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
                         </div>
-                        <div id="cardCollpase3" class="collapse pt-3 show" dir="ltr">
+                        <h4 class="header-title mb-0">Subject Average</h4>
+
+                        <div id="cardCollpase4" class="collapse pt-3 show" dir="ltr">
                             <div id="subject-avg-chart-student" class="apex-charts" data-colors="#f672a7"></div>
                         </div> <!-- collapsed end -->
+
                     </div> <!-- end card-body -->
                 </div> <!-- end card-->
-            </div> <!-- end col-->
-        </div> <!-- end card-->
-    </div> <!-- end col-->
+            </div>
+        </div>
+    </div> <!-- end card body-->
 
     @include('teacher.dashboard.check_list')
 
@@ -228,7 +240,7 @@
     var getSubjectAbgGraphByStudent = "{{ config('constants.api.get_subject_average_by_student') }}";
     var getExamMarksGraphByStudent = "{{ config('constants.api.get_exam_marks_by_student') }}";
 
-
+    var subjectByPapers = "{{ config('constants.api.subject_by_papers_analytics') }}";
 
     // default image test
     var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
