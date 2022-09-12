@@ -5552,19 +5552,19 @@ class ApiController extends BaseController
             //     $semester_id = 0;
             // }
             $student = $con->table('enrolls as en')
-            ->select(
-                'en.student_id',
-                'en.class_id',
-                'en.section_id',
-                'en.session_id',
-                'en.semester_id'
-            )
-            ->join('students as st', 'st.id', '=', 'en.student_id')
-            ->where([
-                ['en.student_id', '=', $request->children_id]
-            ])
-            ->groupBy('en.student_id')
-            ->first();
+                ->select(
+                    'en.student_id',
+                    'en.class_id',
+                    'en.section_id',
+                    'en.session_id',
+                    'en.semester_id'
+                )
+                ->join('students as st', 'st.id', '=', 'en.student_id')
+                ->where([
+                    ['en.student_id', '=', $request->children_id]
+                ])
+                ->groupBy('en.student_id')
+                ->first();
 
             $Timetable = $con->table('timetable_class')->select(
                 'timetable_class.*',
@@ -6450,16 +6450,16 @@ class ApiController extends BaseController
                 ->leftJoin('student_attendances as sa', function ($q) use ($date, $subject_id, $semester_id, $session_id) {
                     $q->on('sa.student_id', '=', 'st.id')
                         ->on('sa.date', '=', DB::raw("'$date'"))
-                        ->on('sa.subject_id', '=', DB::raw("'$subject_id'"));
-                    // ->on('sa.semester_id', '=', DB::raw("'$semester_id'"))
-                    // ->on('sa.session_id', '=', DB::raw("'$session_id'"));
+                        ->on('sa.subject_id', '=', DB::raw("'$subject_id'"))
+                        ->on('sa.semester_id', '=', DB::raw("'$semester_id'"))
+                        ->on('sa.session_id', '=', DB::raw("'$session_id'"));
                 })
                 // if already take attendance for the date
                 ->leftJoin('student_attendances as sapre', function ($q) use ($date, $semester_id, $session_id) {
                     $q->on('sapre.student_id', '=', 'st.id')
                         ->on('sapre.date', '=', DB::raw("'$date'"))
-                        // ->on('sapre.semester_id', '=', DB::raw("'$semester_id'"))
-                        // ->on('sapre.session_id', '=', DB::raw("'$session_id'"))
+                        ->on('sapre.semester_id', '=', DB::raw("'$semester_id'"))
+                        ->on('sapre.session_id', '=', DB::raw("'$session_id'"))
                         ->on('sapre.day_recent_flag', '=', DB::raw("'1'"));
                 })
                 ->where([
@@ -6538,9 +6538,9 @@ class ApiController extends BaseController
                 ->leftJoin('student_attendances as sa', function ($q) use ($date, $subject_id, $semester_id, $session_id) {
                     $q->on('sa.student_id', '=', 'st.id')
                         ->on('sa.date', '=', DB::raw("'$date'"))
-                        ->on('sa.subject_id', '=', DB::raw("'$subject_id'"));
-                    // ->on('sa.semester_id', '=', DB::raw("'$semester_id'"))
-                    // ->on('sa.session_id', '=', DB::raw("'$session_id'"))
+                        ->on('sa.subject_id', '=', DB::raw("'$subject_id'"))
+                        ->on('sa.semester_id', '=', DB::raw("'$semester_id'"))
+                        ->on('sa.session_id', '=', DB::raw("'$session_id'"));
                 })
                 ->where([
                     ['en.class_id', '=', $request->class_id],
@@ -6643,8 +6643,8 @@ class ApiController extends BaseController
                 ['date', '=', $date],
                 ['class_id', '=', $class_id],
                 ['section_id', '=', $section_id],
-                // ['semester_id', '=', $semester_id],
-                // ['session_id', '=', $session_id],
+                ['semester_id', '=', $semester_id],
+                ['session_id', '=', $session_id],
                 ['day_recent_flag', '=', "1"]
             ])->first();
             // update flag
@@ -6653,8 +6653,8 @@ class ApiController extends BaseController
                     ['date', '=', $date],
                     ['class_id', '=', $class_id],
                     ['section_id', '=', $section_id],
-                    // ['semester_id', '=', $semester_id],
-                    // ['session_id', '=', $session_id],
+                    ['semester_id', '=', $semester_id],
+                    ['session_id', '=', $session_id],
                     ['day_recent_flag', '=', "1"]
                 ])->update([
                     'day_recent_flag' => "0",
@@ -6697,8 +6697,8 @@ class ApiController extends BaseController
                         ['class_id', '=', $class_id],
                         ['section_id', '=', $section_id],
                         ['subject_id', '=', $subject_id],
-                        // ['semester_id', '=', $semester_id],
-                        // ['session_id', '=', $session_id],
+                        ['semester_id', '=', $semester_id],
+                        ['session_id', '=', $session_id],
                         ['student_id', '=', $value['student_id']]
                     ])->first();
                     if (isset($row->id)) {
@@ -6784,9 +6784,9 @@ class ApiController extends BaseController
                 ->leftJoin('short_tests as sht', function ($q) use ($date, $subject_id, $semester_id, $session_id) {
                     $q->on('sht.student_id', '=', 'st.id')
                         ->on('sht.date', '=', DB::raw("'$date'"))
-                        ->on('sht.subject_id', '=', DB::raw("'$subject_id'"));
-                    // ->on('sht.semester_id', '=', DB::raw("'$semester_id'"))
-                    // ->on('sht.session_id', '=', DB::raw("'$session_id'"));
+                        ->on('sht.subject_id', '=', DB::raw("'$subject_id'"))
+                        ->on('sht.semester_id', '=', DB::raw("'$semester_id'"))
+                        ->on('sht.session_id', '=', DB::raw("'$session_id'"));
                 })
                 ->where([
                     ['en.class_id', '=', $request->class_id],
@@ -6968,18 +6968,18 @@ class ApiController extends BaseController
                 ['date', '=', $request->date],
                 ['class_id', '=', $request->class_id],
                 ['section_id', '=', $request->section_id],
-                ['subject_id', '=', $request->subject_id]
-                // ['semester_id', '=', $request->semester_id],
-                // ['session_id', '=', $request->session_id]
+                ['subject_id', '=', $request->subject_id],
+                ['semester_id', '=', $request->semester_id],
+                ['session_id', '=', $request->session_id]
             ])->first();
             // dd($checkExist);
             if ($Connection->table('daily_reports')->where([
                 ['date', '=', $request->date],
                 ['class_id', '=', $request->class_id],
                 ['section_id', '=', $request->section_id],
-                ['subject_id', '=', $request->subject_id]
-                // ['semester_id', '=', $request->semester_id],
-                // ['session_id', '=', $request->session_id]
+                ['subject_id', '=', $request->subject_id],
+                ['semester_id', '=', $request->semester_id],
+                ['session_id', '=', $request->session_id]
 
             ])->count() > 0) {
                 $Connection->table('daily_reports')->where('id', $checkExist->id)->update([
@@ -7040,8 +7040,8 @@ class ApiController extends BaseController
                     ['dr.class_id', '=', $request->class_id],
                     ['dr.section_id', '=', $request->section_id],
                     ['dr.subject_id', '=', $request->subject_id],
-                    // ['dr.semester_id', '=', $request->semester_id],
-                    // ['dr.session_id', '=', $request->session_id],
+                    ['dr.semester_id', '=', $request->semester_id],
+                    ['dr.session_id', '=', $request->session_id],
                     ['dr.date', '=', $request->date]
                 ])
                 ->first();
@@ -7177,8 +7177,8 @@ class ApiController extends BaseController
                     ['sa.class_id', '=', $request->class_id],
                     ['sa.section_id', '=', $request->section_id],
                     ['sa.subject_id', '=', $request->subject_id],
-                    // ['sa.semester_id', '=', $request->semester_id],
-                    // ['sa.session_id', '=', $request->session_id],
+                    ['sa.semester_id', '=', $request->semester_id],
+                    ['sa.session_id', '=', $request->session_id],
                     ['sa.date', '=', $request->date]
                 ])
                 // ->whereBetween(DB::raw('date(date)'), [$startDate, $endDate])
@@ -7195,9 +7195,9 @@ class ApiController extends BaseController
                 ->where([
                     ['sa.class_id', '=', $request->class_id],
                     ['sa.section_id', '=', $request->section_id],
-                    ['sa.subject_id', '=', $request->subject_id]
-                    // ['sa.semester_id', '=', $request->semester_id],
-                    // ['sa.session_id', '=', $request->session_id]
+                    ['sa.subject_id', '=', $request->subject_id],
+                    ['sa.semester_id', '=', $request->semester_id],
+                    ['sa.session_id', '=', $request->session_id]
                 ])
                 ->whereBetween(DB::raw('date(date)'), [$startDate, $endDate])
                 ->get();
@@ -7213,10 +7213,10 @@ class ApiController extends BaseController
                 ->where([
                     ['sa.class_id', '=', $request->class_id],
                     ['sa.section_id', '=', $request->section_id],
-                    ['sa.subject_id', '=', $request->subject_id]
-                    // ['sa.semester_id', '=', $request->semester_id],
-                    // ['sa.session_id', '=', $request->session_id]
-                    // ['sa.date', '=', $request->date],
+                    ['sa.subject_id', '=', $request->subject_id],
+                    ['sa.semester_id', '=', $request->semester_id],
+                    ['sa.session_id', '=', $request->session_id],
+                    ['sa.date', '=', $request->date]
                 ])
                 ->whereBetween(DB::raw('date(date)'), [$startDate, $endDate])
                 ->groupBy('sa.student_id')
