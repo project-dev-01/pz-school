@@ -59,19 +59,35 @@
                                     </select>
                                 </div>
                             </div>
-                            <!-- <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="paperID">Paper Name</label>
-                                    <select id="paperID" class="form-control" name="paper_id">
-                                        <option value="">Select Paper</option>
-                                    </select>
-                                </div>
-                            </div> -->
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="studentID">Student<span class="text-danger">*</span></label>
                                     <select id="studentID" class="form-control" name="student_id">
                                         <option value="">Select Student</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="semester_id">Semester</label>
+                                    <select id="semester_id" class="form-control" name="semester_id">
+                                        <option value="0">Select Semester</option>
+                                        @foreach($semester as $sem)
+                                        <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="session_id">Session</label>
+                                    <select id="session_id" class="form-control" name="session_id">
+                                        <option value="0">Select Session</option>
+                                        @foreach($session as $ses)
+                                        <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{$ses['name']}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -239,8 +255,6 @@
     var getShortTestGraphByStudent = "{{ config('constants.api.get_short_test_by_student') }}";
     var getSubjectAbgGraphByStudent = "{{ config('constants.api.get_subject_average_by_student') }}";
     var getExamMarksGraphByStudent = "{{ config('constants.api.get_exam_marks_by_student') }}";
-
-    var subjectByPapers = "{{ config('constants.api.subject_by_papers_analytics') }}";
 
     // default image test
     var defaultImg = "{{ asset('public/images/users/default.jpg') }}";

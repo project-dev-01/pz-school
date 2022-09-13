@@ -142,11 +142,11 @@ $(function () {
             type: 'pie',
             name: 'Attitude',
             data: [
-                ['<i class="far fa-smile" style="font-size:20px;color:#87e680"> smile</i> ', 0],
-                ['<i class="far fa-angry" style="font-size:20px;color:#ee4947"> angry</i> ', 0],
-                ['<i class="far fa-dizzy" style="font-size:20px;color:#c2bd11"> dizzy</i> ', 0,],
-                ['<i class="far fa-surprise" style="font-size:20px;color:#4960c4"> surprise</i>  ', 0],
-                ['<i class="far fa-tired" style="font-size:20px;color:#ea2522"> tired</i> ', 0]
+                ['Engaging', 0],
+                ['Hyperactive', 0],
+                ['Quiet', 0],
+                ['Sleepy', 0],
+                ['Uninterested', 0]
             ],
         }],
         responsive: {
@@ -253,8 +253,8 @@ $(function () {
         $("#analyticCrepFilter").find("#sectionID").append('<option value="">Select Section</option>');
         $("#analyticCrepFilter").find("#subjectID").empty();
         $("#analyticCrepFilter").find("#subjectID").append('<option value="">Select Subject</option>');
-        // $("#analyticCrepFilter").find("#paperID").empty();
-        // $("#analyticCrepFilter").find("#paperID").append('<option value="">Select Paper</option>');
+        $("#analyticCrepFilter").find("#paperID").empty();
+        $("#analyticCrepFilter").find("#paperID").append('<option value="">Select Paper</option>');
         $("#analyticCrepFilter").find("#studentID").empty();
         $("#analyticCrepFilter").find("#studentID").append('<option value="">Select Student</option>');
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
@@ -299,26 +299,6 @@ $(function () {
             }
         }, 'json');
     });
-
-    // $('#subjectID').on('change', function () {
-    //     var subject_id = $(this).val();
-    //     var class_id = $("#changeClassName").val();
-    //     $("#analyticCrepFilter").find("#paperID").empty();
-    //     $("#analyticCrepFilter").find("#paperID").append('<option value="">Select Paper</option>');
-    //     // paper list
-    //     $.post(subjectByPapers, {
-    //         token: token,
-    //         branch_id: branchID,
-    //         class_id: class_id,
-    //         subject_id: subject_id
-    //     }, function (res) {
-    //         if (res.code == 200) {
-    //             $.each(res.data, function (key, val) {
-    //                 $("#analyticCrepFilter").find("#paperID").append('<option value="' + val.paper_id + '" data-grade_category="' + val.grade_category + '">' + val.paper_name + '</option>');
-    //             });
-    //         }
-    //     }, 'json');
-    // });
     // applyFilter
     // rules validation
     $("#analyticCrepFilter").validate({
@@ -341,6 +321,8 @@ $(function () {
             var sectionID = $("#sectionID").val();
             var subjectID = $("#subjectID").val();
             var studentID = $("#studentID").val();
+            var semester_id = $("#semester_id").val();
+            var session_id = $("#session_id").val();
 
             var formData = new FormData();
             formData.append('token', token);
@@ -349,6 +331,8 @@ $(function () {
             formData.append('section_id', sectionID);
             formData.append('subject_id', subjectID);
             formData.append('student_id', studentID);
+            formData.append('semester_id', semester_id);
+            formData.append('session_id', session_id);
             // attendance report chart
             attendanceReport(formData);
             // homework report chart
@@ -483,8 +467,6 @@ $(function () {
             dataType: 'json',
             contentType: false,
             success: function (response) {
-                console.log("shoert test");
-                console.log(response);
                 if (response.code == 200) {
                     var shorttest = response.data;
                     $('#shortTest').empty();
@@ -559,7 +541,7 @@ $(function () {
                         // subject avg chart update series start
                         subjectAvgData.forEach(function (res) {
                             averageData.push(res.average);
-                            categoryData.push(res.exam_date);
+                            categoryData.push(res.subject_name);
                         });
                         $('#subject_average_card').show();
                         // $('#subject_average_card').show();
@@ -595,8 +577,6 @@ $(function () {
             contentType: false,
             success: function (response) {
                 if (response.code == 200) {
-                    console.log("response")
-                    console.log(response)
                     var exam_details = response.data;
                     var labels = [];
                     var examMarks = [];

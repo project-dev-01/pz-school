@@ -20,7 +20,6 @@
             width: 50%;
             position: relative;
             padding-right: 10px;
-            /* Ensures colon does not overlay the text */
         }
 
         .homework-list::after {
@@ -182,77 +181,67 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <div class="col-md-6 font-weight-bold homework-list">Title </div>
-                                                        <div class="col-md-6">{{$work['title']}}</div>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">Title</span>{{$work['title']}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <div class="col-md-6 font-weight-bold homework-list">Status </div>
-                                                        <div class="col-md-6">@if($work['status'] == 1) Completed @else Incomplete @endif</div>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">Status</span>@if($work['status'] == 1) Completed @else Incomplete @endif</p>
                                                     </div>
                                                 </div>
-                                            </div><br />
+                                            </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <div class="col-md-6 font-weight-bold homework-list">Date Of Homework </div>
-                                                        <div class="col-md-6">{{ date('F j , Y', strtotime($work['date_of_homework'])) }}</div>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">Date Of Homework</span>{{ date('F j , Y', strtotime($work['date_of_homework'])) }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <div class="col-md-6 font-weight-bold homework-list">Date Of Submission </div>
-                                                        <div class="col-md-6">{{ date('F j , Y', strtotime($work['date_of_submission'])) }}</div>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">Date Of Submission</span>{{ date('F j , Y', strtotime($work['date_of_submission'])) }}</p>
                                                     </div>
                                                 </div>
-                                            </div><br />
+                                            </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <div class="col-md-6 font-weight-bold homework-list">Evalution Date </div>
-                                                        <div class="col-md-6">@if($work['evaluation_date']){{ date('F j , Y', strtotime($work['evaluation_date'])) }}@endif</div>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">Evalution Date</span>@if($work['evaluation_date']){{ date('F j , Y', strtotime($work['evaluation_date'])) }}@endif</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <div class="col-md-6 font-weight-bold homework-list">Remarks </div>
-                                                        <div class="col-md-6">{{$work['description']}}</div>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">Remarks</span>{{$work['description']}}</p>
                                                     </div>
                                                 </div>
-                                            </div><br />
+                                            </div>
                                             <div class="row">
-
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <div class="col-md-6 font-weight-bold homework-list">Rank Out Of 5 </div>
-                                                        <div class="col-md-6">@if($work['remarks']) {{$work['rank']}} @endif</div>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">Rank Out Of 5 </span>@if($work['remarks']) {{$work['rank']}} @endif</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <div class="col-md-6 font-weight-bold homework-list">Document </div>
-                                                        <div class="col-md-6">
-                                                            <a href="{{asset('public/teacher/homework/')}}/{{$work['document']}}" download>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">Document</span><a href="{{asset('public/teacher/homework/')}}/{{$work['document']}}" download>
                                                                 <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
-                                                            </a>
-                                                        </div>
+                                                            </a></p>
                                                     </div>
                                                 </div>
-                                            </div><br />
+                                            </div>
                                             <hr>
                                             <div class="row">
-                                                <div class="col-md-12 font-weight-bold">Submission Process Here :- </div>
-
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-12 font-weight-bold">Submission Process Here :- </div>
+                                                    </div>
+                                                </div>
                                             </div><br>
                                             <div class="row">
                                                 <input type="hidden" name="homework_id" value="{{$work['id']}}">
                                                 <div class="col-md-6">
-                                                    <div class="col-md-6 font-weight-bold">Note :</div>
-                                                    <div class="col-md-6">
-                                                        <textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="Enter the text..." name="remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
-                                                   @if($work['remarks']) {{$work['remarks']}} @endif</textarea>
-                                                    </div>
+                                                    <p class="col-md-12"><span class="font-weight-semibold">Note </span><textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="Enter the text..." name="remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                                                   @if($work['remarks']) {{$work['remarks']}} @endif</textarea></p>
+
                                                 </div>
 
                                                 @if($work['file'])
@@ -273,7 +262,7 @@
                                                     </div>
                                                 </div>
                                                 @endif
-                                            </div>
+                                            </div><br>
                                             <div class="form-group text-right m-b-0">
                                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
                                                     Submit

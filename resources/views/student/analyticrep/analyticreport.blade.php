@@ -1,6 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Analytic Report')
 @section('content')
+<meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=no">
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -32,6 +33,8 @@
                         <input type="hidden" id="studentID" class="form-control" name="student_id" value="{{ $get_class_section_by_student['student_id'] }}">
                         <input type="hidden" id="changeClassName" class="form-control" name="class_id" value="{{ $get_class_section_by_student['class_id'] }}">
                         <input type="hidden" id="sectionID" class="form-control" name="section_id" value="{{ $get_class_section_by_student['section_id'] }}">
+                        <input type="hidden" id="semester_id" class="form-control" name="semester_id" value="{{ $get_class_section_by_student['semester_id'] }}">
+                        <input type="hidden" id="session_id" class="form-control" name="session_id" value="{{ $get_class_section_by_student['session_id'] }}">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -110,7 +113,7 @@
                 </ul><br>
 
                 <div class="card-body">
-                    <div class="col-lg-12">
+                    <div class="col-xl-12">
                         <div class="" style="text-align:center">
                             <div id="attitude" class="attitude"></div>
                             <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
@@ -162,33 +165,35 @@
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
-    <div class="row" id="subject_average_card" style="display:none">
-        <div class="col-md-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                            Subject Average
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="col-xl-12">
-                    <!-- Portlet card -->
+
+    <div class="card" id="subject_average_card" style="display:none">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <h4 class="navv">Subject Average
+                    <h4>
+            </li>
+        </ul><br>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Portlet card -->
+                <div class="card">
                     <div class="card-body">
                         <div class="card-widgets">
                             <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                            <a data-toggle="collapse" href="#cardCollpase3" role="button" aria-expanded="false" aria-controls="cardCollpase3"><i class="mdi mdi-minus"></i></a>
+                            <a data-toggle="collapse" href="#cardCollpase4" role="button" aria-expanded="false" aria-controls="cardCollpase4"><i class="mdi mdi-minus"></i></a>
                             <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
                         </div>
-                        <div id="cardCollpase3" class="collapse pt-3 show" dir="ltr">
+                        <h4 class="header-title mb-0">Subject Average</h4>
+
+                        <div id="cardCollpase4" class="collapse pt-3 show" dir="ltr">
                             <div id="subject-avg-chart-student" class="apex-charts" data-colors="#f672a7"></div>
                         </div> <!-- collapsed end -->
+
                     </div> <!-- end card-body -->
                 </div> <!-- end card-->
-            </div> <!-- end col-->
-        </div> <!-- end card-->
-    </div> <!-- end col-->
-
+            </div>
+        </div>
+    </div> <!-- end card body-->
     @include('teacher.dashboard.check_list')
 
 </div> <!-- container -->

@@ -4789,35 +4789,6 @@ class ApiController extends BaseController
             return $this->successResponse($examPapers, 'get papers fetch successfully');
         }
     }
-    public function getSubjectByPaperAnalytics(Request $request)
-    {
-
-        $validator = \Validator::make($request->all(), [
-            'branch_id' => 'required',
-            'token' => 'required',
-            'class_id' => 'required',
-            'subject_id' => 'required',
-        ]);
-
-        if (!$validator->passes()) {
-            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-        } else {
-            // create new connection
-            $Connection = $this->createNewConnection($request->branch_id);
-            $examPapers = $Connection->table('exam_papers as exp')
-                ->select(
-                    'exp.id as paper_id',
-                    'exp.paper_name',
-                    'exp.grade_category'
-                )
-                ->where([
-                    ['exp.class_id', $request->class_id],
-                    ['exp.subject_id', $request->subject_id]
-                ])
-                ->get();
-            return $this->successResponse($examPapers, 'get papers fetch successfully');
-        }
-    }
     // Timetable Subject 
     public function timetableSubject(Request $request)
     {
@@ -15052,6 +15023,8 @@ class ApiController extends BaseController
                     ['sa.class_id', '=', $request->class_id],
                     ['sa.section_id', '=', $request->section_id],
                     ['sa.subject_id', '=', $request->subject_id],
+                    ['sa.semester_id', '=', $request->semester_id],
+                    ['sa.session_id', '=', $request->session_id],
                     ['sa.student_id', '=', $request->student_id]
                 ])
                 ->whereMonth('sa.date', $month)
@@ -15177,6 +15150,8 @@ class ApiController extends BaseController
                     ['sa.class_id', '=', $request->class_id],
                     ['sa.section_id', '=', $request->section_id],
                     ['sa.subject_id', '=', $request->subject_id],
+                    ['sa.semester_id', '=', $request->semester_id],
+                    ['sa.session_id', '=', $request->session_id],
                     ['sa.student_id', '=', $request->student_id]
                 ])
                 ->whereMonth('sa.date', $month)
@@ -15217,7 +15192,9 @@ class ApiController extends BaseController
                     ['sht.class_id', '=', $request->class_id],
                     ['sht.section_id', '=', $request->section_id],
                     ['sht.subject_id', '=', $request->subject_id],
-                    ['sht.student_id', '=', $request->student_id]
+                    ['sht.student_id', '=', $request->student_id],
+                    ['sht.semester_id', '=', $request->semester_id],
+                    ['sht.session_id', '=', $request->session_id]
                 ])
                 // ->groupBy('sht.date')
                 ->get();
@@ -15258,57 +15235,102 @@ class ApiController extends BaseController
         } else {
             // create new connection
             // get attendance details query
-            $subject_id = $request->subject_id;
-            $class_id = $request->class_id;
-            $section_id = $request->section_id;
-            $subject_id = $request->subject_id;
             $Connection = $this->createNewConnection($request->branch_id);
 
-
-            $check = $Connection->table('student_subjectdivision')
+            $getExamMarks = $Connection->table('exam_papers as expp')
+                ->select(
+                    DB::raw('SUM(expp.subject_weightage) as total_subject_weightage')
+                )
                 ->where([
-                    ['class_id', '=', $request->class_id],
-                    ['section_id', '=', $request->section_id],
-                    ['subject_id', '=', $request->subject_id]
+                    ['expp.class_id', '=', $request->class_id],
+                    ['expp.subject_id', '=', $request->subject_id]
                 ])
-                ->get()->toArray();
-            if ($check) {
-                $studentdetails = $Connection->table('student_subjectdivision_inst as ssd')->select('ssd.exam_id', 'te.exam_date', DB::raw('round(AVG(ssd.total_score), 2) as average'))
-                    ->leftJoin('timetable_exam as te', function ($join) {
-                        $join->on('te.exam_id', '=', 'ssd.exam_id')
-                            ->on('te.class_id', '=', 'ssd.class_id')
-                            ->on('te.section_id', '=', 'ssd.section_id')
-                            ->on('te.subject_id', '=', 'ssd.subject_id');
-                    })
-                    ->where([
-                        ['ssd.class_id', '=', $request->class_id],
-                        ['ssd.section_id', '=', $request->section_id],
-                        ['ssd.subject_id', '=', $request->subject_id],
-                        ['ssd.student_id', '=', $request->student_id]
-                    ])
-                    ->groupBy('ssd.exam_id')
-                    ->orderBy('te.exam_date', 'ASC')
-                    ->get();
-            } else {
-                $studentdetails = $Connection->table('student_marks as sm')->select('sm.exam_id', 'te.exam_date', DB::raw('round(AVG(sm.score), 2) as average'))
-                    ->leftJoin('timetable_exam as te', function ($join) {
-                        $join->on('te.exam_id', '=', 'sm.exam_id')
-                            ->on('te.class_id', '=', 'sm.class_id')
-                            ->on('te.section_id', '=', 'sm.section_id')
-                            ->on('te.subject_id', '=', 'sm.subject_id');
-                    })
-                    ->where([
-                        ['sm.class_id', '=', $request->class_id],
-                        ['sm.section_id', '=', $request->section_id],
-                        ['sm.subject_id', '=', $request->subject_id],
-                        ['sm.student_id', '=', $request->student_id]
-                    ])
-                    ->groupBy('sm.exam_id')
-                    ->orderBy('te.exam_date', 'ASC')
-                    ->get();
+                ->get();
+            $total_subject_weightage = isset($getExamMarks[0]->total_subject_weightage) ? (int)$getExamMarks[0]->total_subject_weightage : 0;
+            $getStudMarks = $Connection->table('student_marks as sm')
+                ->select(
+                    DB::raw("group_concat(sm.score) as score"),
+                    'expp.subject_weightage',
+                    'sm.exam_id',
+                    'te.exam_date',
+                    'sb.name as subject_name',
+                    'sm.paper_id',
+                    // DB::raw('round(AVG(sm.score), 2) as average'
+                    DB::raw("group_concat(expp.subject_weightage) as subject_weightage")
+                )
+                ->join('subjects as sb', 'sm.subject_id', '=', 'sb.id')
+                ->join('timetable_exam as te', function ($join) {
+                    $join->on('te.exam_id', '=', 'sm.exam_id')
+                        ->on('te.class_id', '=', 'sm.class_id')
+                        ->on('te.section_id', '=', 'sm.section_id')
+                        ->on('te.subject_id', '=', 'sm.subject_id')
+                        ->on('te.semester_id', '=', 'sm.semester_id')
+                        ->on('te.session_id', '=', 'sm.session_id')
+                        ->on('te.paper_id', '=', 'sm.paper_id');
+                })
+                ->join('exam_papers as expp', 'sm.paper_id', '=', 'expp.id')
+                ->where([
+                    ['sm.class_id', '=', $request->class_id],
+                    ['sm.section_id', '=', $request->section_id],
+                    ['sm.subject_id', '=', $request->subject_id],
+                    ['sm.student_id', '=', $request->student_id],
+                    ['sm.semester_id', '=', $request->semester_id],
+                    ['sm.session_id', '=', $request->session_id]
+                ])
+                // here need overall exam by subjects avg marks
+                // ->groupBy('sm.exam_id')
+                ->get();
+            // dd($getStudMarks);
+            $subjectAvg = array();
+            if (!empty($getStudMarks)) {
+                foreach ($getStudMarks as $value) {
+                    if (isset($value->subject_weightage)) {
+                        $object = new \stdClass();
+                        $total_sub_weightage = explode(',', $value->subject_weightage);
+                        $total_score = explode(',', $value->score);
+                        $totalMarks = 0;
+                        $totalNoOfSub = 0;
+                        for ($i = 0; $i < count($total_sub_weightage); $i++) {
+                            $sub_weightage = (int) $total_sub_weightage[$i];
+                            $score = (int) $total_score[$i];
+                            $weightage = ($sub_weightage / $total_subject_weightage);
+                            $marks = ($weightage * $score);
+                            $totalMarks += $marks;
+                            $totalNoOfSub++;
+                        }
+                        $subjectAverage = ($totalMarks / $totalNoOfSub);
+                        $object->average = $subjectAverage;
+                        $object->subject_name = $value->subject_name;
+                        array_push($subjectAvg, $object);
+                    }
+                }
             }
+            // dd($subjectAvg);
 
-            return $this->successResponse($studentdetails, 'Subject average by student fetch successfully');
+            // $studentdetails = $Connection->table('student_marks as sm')
+            //     ->select('sm.exam_id', 'te.exam_date', DB::raw('round(AVG(sm.score), 2) as average'))
+            //     ->leftJoin('timetable_exam as te', function ($join) {
+            //         $join->on('te.exam_id', '=', 'sm.exam_id')
+            //             ->on('te.class_id', '=', 'sm.class_id')
+            //             ->on('te.section_id', '=', 'sm.section_id')
+            //             ->on('te.subject_id', '=', 'sm.subject_id')
+            //             ->on('te.semester_id', '=', 'sm.semester_id')
+            //             ->on('te.session_id', '=', 'sm.session_id')
+            //             ->on('te.paper_id', '=', 'sm.paper_id');
+            //     })
+            //     ->where([
+            //         ['sm.class_id', '=', $request->class_id],
+            //         ['sm.section_id', '=', $request->section_id],
+            //         ['sm.subject_id', '=', $request->subject_id],
+            //         ['sm.student_id', '=', $request->student_id],
+            //         ['sm.semester_id', '=', $request->semester_id],
+            //         ['sm.session_id', '=', $request->session_id]
+            //     ])
+            //     ->groupBy('sm.exam_id')
+            //     ->orderBy('te.exam_date', 'ASC')
+            //     ->get();
+
+            return $this->successResponse($subjectAvg, 'Subject average by student fetch successfully');
         }
     }
     // get exam marks by report graph
@@ -15326,26 +15348,63 @@ class ApiController extends BaseController
         } else {
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
-            $getStudBehaviour = $Connection->table('student_marks as sm')
+
+            $getExamMarks = $Connection->table('exam_papers as expp')
                 ->select(
-                    'sm.score',
+                    DB::raw('SUM(expp.subject_weightage) as total_subject_weightage')
+                )
+                ->where([
+                    ['expp.class_id', '=', $request->class_id],
+                    ['expp.subject_id', '=', $request->subject_id]
+                ])
+                ->get();
+            $total_subject_weightage = isset($getExamMarks[0]->total_subject_weightage) ? (int)$getExamMarks[0]->total_subject_weightage : 0;
+            $getStudMarks = $Connection->table('student_marks as sm')
+                ->select(
+                    DB::raw("group_concat(sm.score) as score"),
                     'ex.name as exam_name',
-                    'sb.name as subject_name'
-                    // DB::raw('group_concat(sm.score) as scores'),
-                    // DB::raw('group_concat(sb.name) as subject_name')
+                    'sb.name as subject_name',
+                    'expp.subject_weightage',
+                    'sm.exam_id',
+                    DB::raw("group_concat(expp.subject_weightage) as subject_weightage")
                 )
                 ->join('subjects as sb', 'sm.subject_id', '=', 'sb.id')
                 ->join('exam as ex', 'sm.exam_id', '=', 'ex.id')
+                ->leftJoin('exam_papers as expp', 'sm.paper_id', '=', 'expp.id')
                 ->where([
                     ['sm.class_id', '=', $request->class_id],
                     ['sm.section_id', '=', $request->section_id],
                     ['sm.subject_id', '=', $request->subject_id],
-                    ['sm.student_id', '=', $request->student_id]
+                    ['sm.student_id', '=', $request->student_id],
+                    ['sm.semester_id', '=', $request->semester_id],
+                    ['sm.session_id', '=', $request->session_id]
                 ])
-                // ->groupBy('sm.exam_id')
+                ->groupBy('sm.exam_id')
                 ->get();
 
-            return $this->successResponse($getStudBehaviour, 'exam result record fetch successfully');
+            $examResults = array();
+            if (!empty($getStudMarks)) {
+                foreach ($getStudMarks as $value) {
+                    $object = new \stdClass();
+                    $total_sub_weightage = explode(',', $value->subject_weightage);
+                    $total_score = explode(',', $value->score);
+                    // dd($total_sub_weightage);
+                    $totalMarks = 0;
+                    for ($i = 0; $i < count($total_sub_weightage); $i++) {
+                        $sub_weightage = (int) $total_sub_weightage[$i];
+                        $score = (int) $total_score[$i];
+                        $weightage = ($sub_weightage / $total_subject_weightage);
+                        $marks = ($weightage * $score);
+                        $totalMarks += $marks;
+                    }
+                    $object->score = $totalMarks;
+                    $object->exam_name = $value->exam_name;
+                    $object->subject_name = $value->subject_name;
+
+                    array_push($examResults, $object);
+                }
+            }
+            return $this->successResponse($examResults, 'exam result record fetch successfully');
         }
     }
     // get student by all subjects
@@ -15399,7 +15458,9 @@ class ApiController extends BaseController
                 ->select(
                     'en.student_id',
                     'en.class_id',
-                    'en.section_id'
+                    'en.section_id',
+                    'en.session_id',
+                    'en.semester_id'
                 )
                 ->where([
                     ['en.student_id', '=', $request->student_id]

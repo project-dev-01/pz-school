@@ -774,9 +774,20 @@ class TeacherController extends Controller
         ];
         // dd(session()->get('ref_user_id'));
         $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        // dd($sem);
         return view('teacher.analyticrep.analyticreport', [
-            'teacher_class' => $response['data']
+            'teacher_class' => $response['data'],
+            'semester' => $semester['data'],
+            'session' => $session['data'],
+            'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+            'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
         ]);
+        // return view('teacher.analyticrep.analyticreport', [
+        //     'teacher_class' => $response['data']
+        // ]);
     }
     function classroomPost(Request $request)
     {
