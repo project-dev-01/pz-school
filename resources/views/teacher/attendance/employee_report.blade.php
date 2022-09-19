@@ -38,6 +38,18 @@
                             <input type="hidden" id="employeeReportEmployee" name="employee" value="{{$employee}}">
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label for="session_id">Session <span class="text-danger">*</span></label>
+                                    <select id="employeeReportSession" class="form-control"  name="session_id">                            
+                                    <option value="">Select Session</option>
+                                    <option value="All">All</option>  
+                                        @foreach($session as $ses)
+                                            <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label for="date">Date<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">

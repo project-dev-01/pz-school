@@ -524,6 +524,7 @@ $(function () {
     $("#employeeAttendanceReport").validate({
         rules: {
             date: "required",
+            session_id: "required",
         }
     });
 
@@ -534,6 +535,7 @@ $(function () {
 
             var reportDate = $("#employeeReportDate").val();
             var employee = $("#employeeReportEmployee").val();
+            var session = $("#employeeReportSession").val();
             // var department = $("#employeeReportDepartment").val();
 
             var date = new Date(reportDate)
@@ -549,6 +551,7 @@ $(function () {
             formData.append('token', token);
             formData.append('branch_id', branchID);
             formData.append('employee', employee);
+            formData.append('session', session);
             // formData.append('department', department);
             formData.append('date', year_month);
 
@@ -581,7 +584,7 @@ $(function () {
                                 '<table id="attnList" class="table table-bordered mb-0">' +
                                 '<thead>' +
                                 '<tr>' +
-                                '<th>Name</th>';
+                                '<th>Session Name</th><th>Name</th>';
                             // '<th>' + get_attendance_list.first_name + '' + get_attendance_list.last_name + '</th>';
                             for (var d = firstDay; d <= lastDay; d.setDate(d.getDate() + 1)) {
                                 // daysOfYear.push(new Date(d));
@@ -599,6 +602,7 @@ $(function () {
                             // add functions tr start
                             get_attendance_list.forEach(function (res) {
                                 attendanceListShow += '<tr>' +
+                                    '<td>' + res.session_name + '</td>'+
                                     '<td class="text-left staffRow">' +
                                     '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light staffDetails" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">' +
                                     '<input type="hidden" value="' + res.staff_id + '">';
@@ -720,6 +724,7 @@ $(function () {
     $("#employeeAttendanceFilter").validate({
         rules: {
             date: "required",
+            session_id: "required",
         }
     });
     // add designation
@@ -730,6 +735,7 @@ $(function () {
 
             var reportDate = $("#employeeDate").val();
             var employee = $("#employee").val();
+            var session_id = $("#session_id").val();
 
 
             var date = new Date(reportDate);
@@ -741,6 +747,7 @@ $(function () {
             formData.append('token', token);
             formData.append('branch_id', branchID);
             formData.append('employee', employee);
+            formData.append('session_id', session_id);
 
             formData.append('firstDay', formatDate(new Date(firstDay)));
             formData.append('lastDay', formatDate(new Date(lastDay)));
@@ -748,6 +755,7 @@ $(function () {
             $("#employee_attendance").hide("slow");
             $("#employee_attendance_body").empty();
             $("#employee_form_employee").val(employee);
+            $("#employee_form_session_id").val(session_id);
 
             $.ajax({
                 url: getEmployeAttendanceList,

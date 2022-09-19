@@ -14502,6 +14502,7 @@ class ApiController extends BaseController
 
             $employee = $request->employee;
             $date = $request->date;
+            $session = $request->session_id;
             $output = array();
             // get data
             $begin = new DateTime($request->firstDay);
@@ -14519,9 +14520,10 @@ class ApiController extends BaseController
                         'sa.hours',
                         'sa.remarks',
                     )
-                    ->leftJoin('staff_attendances as sa', function ($join) use ($date) {
+                    ->leftJoin('staff_attendances as sa', function ($join) use ($date,$session) {
                         $join->on('s.id', '=', 'sa.staff_id')
-                            ->on('sa.date', '=', DB::raw("'$date'"));
+                            ->on('sa.date', '=', DB::raw("'$date'"))
+                            ->where('sa.session_id',$session);
                     })
                     ->where('s.id', $employee)
                     ->first();
@@ -14555,6 +14557,7 @@ class ApiController extends BaseController
             // insert data
             $attendance = $request->attendance;
             $employee = $request->employee;
+            $session_id = $request->session_id;
 
             foreach ($attendance as $att) {
 
@@ -14568,6 +14571,7 @@ class ApiController extends BaseController
                         'hours' => $att['hours'],
                         'remarks' => $att['remarks'],
                         'staff_id' => $employee,
+                        'session_id' => $session_id,
                         'updated_at' => date("Y-m-d H:i:s")
                     ]);
                 } else {
@@ -14581,6 +14585,7 @@ class ApiController extends BaseController
                             'hours' => $att['hours'],
                             'remarks' => $att['remarks'],
                             'staff_id' => $employee,
+                            'session_id' => $session_id,
                             'created_at' => date("Y-m-d H:i:s")
                         ]);
                     }
@@ -14604,6 +14609,7 @@ class ApiController extends BaseController
             'date' => 'required',
             'employee' => 'required',
         ]);
+        // return $request;
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -14611,58 +14617,134 @@ class ApiController extends BaseController
             $date = explode('-', $request->date);
             $employee = $request->employee;
             $department = $request->department;
+            $session = $request->session;
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
             if (!isset($department)) {
                 $dep = $Connection->table('staffs')->select('department_id')->where('id', $employee)->first();
                 $department = $dep->department_id;
             }
-            $getAttendanceList = $Connection->table('staff_attendances as sa')
+
+            
+            if($session=="All") {
+                $sess = $Connection->table('session')->get();
+                // return $sess;
+                $getAttendanceList=[];
+                foreach($sess as $ses) {
+
+                    $list = $Connection->table('staff_attendances as sa')
+                            ->select(
+                                'st.first_name',
+                                'st.last_name',
+                                'sa.staff_id',
+                                'sa.date',
+                                'st.photo',
+
+                                DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
+                                DB::raw('COUNT(CASE WHEN sa.status = "absent" then 1 ELSE NULL END) as "absentCount"'),
+                                DB::raw('COUNT(CASE WHEN sa.status = "late" then 1 ELSE NULL END) as "lateCount"'),
+
+                            )
+                            ->join('staffs as st', 'sa.staff_id', '=', 'st.id')
+                            ->when($employee != "All", function ($q)  use ($employee) {
+                                $q->where('sa.staff_id', $employee);
+                            })
+                            
+                            ->when($employee == "All", function ($q)  use ($department) {
+                                $q->where('st.department_id', $department);
+                            })
+                            // ->when($session, function ($q)  use ($session) {
+                            //     $q->where('sa.session_id', $session);
+                            // })
+                            ->whereMonth('sa.date', $date[0])
+                            ->whereYear('sa.date', $date[1])
+                            ->where('sa.session_id', $ses->id)
+                            ->groupBy('sa.staff_id')
+                            ->get();
+
+                            if(!empty($list)) {
+
+                                foreach($list as $li) {
+                                    $object = new \stdClass();
+                                    $object->first_name = $li->first_name;
+                                    $object->last_name = $li->last_name;
+                                    $object->date = $li->date;
+                                    $object->photo = $li->photo;
+                                    $object->staff_id = $li->staff_id;
+                                    $object->presentCount = $li->presentCount;
+                                    $object->absentCount = $li->absentCount;
+                                    $object->lateCount = $li->lateCount;
+                                    $object->session = $ses->id;
+                                    $object->session_name = $ses->name;
+                                    array_push($getAttendanceList, $object);
+                                }
+                            }
+                }
+                // return $getAttendanceList;
+
+            } else {
+
+                $getAttendanceList = $Connection->table('staff_attendances as sa')
                 ->select(
                     'st.first_name',
                     'st.last_name',
                     'sa.staff_id',
                     'sa.date',
                     'st.photo',
-                    'sa.status',
+                    's.name as session_name',
+    
                     DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
                     DB::raw('COUNT(CASE WHEN sa.status = "absent" then 1 ELSE NULL END) as "absentCount"'),
                     DB::raw('COUNT(CASE WHEN sa.status = "late" then 1 ELSE NULL END) as "lateCount"'),
 
                 )
                 ->join('staffs as st', 'sa.staff_id', '=', 'st.id')
+                ->join('session as s', 'sa.session_id', '=', 's.id')
                 ->when($employee != "All", function ($q)  use ($employee) {
                     $q->where('sa.staff_id', $employee);
                 })
-                ->where('st.department_id', $department)
+                
+                ->when($employee == "All", function ($q)  use ($department) {
+                    $q->where('st.department_id', $department);
+                })
+                // ->when($session, function ($q)  use ($session) {
+                //     $q->where('sa.session_id', $session);
+                // })
                 ->whereMonth('sa.date', $date[0])
                 ->whereYear('sa.date', $date[1])
+                ->where('sa.session_id', $session)
                 ->groupBy('sa.staff_id')
                 ->get();
-            $staffDetails = array();
-            if (!empty($getAttendanceList)) {
-                foreach ($getAttendanceList as $value) {
-                    $object = new \stdClass();
-
-                    $object->first_name = $value->first_name;
-                    $object->last_name = $value->last_name;
-                    $object->staff_id = $value->staff_id;
-                    $object->photo = $value->photo;
-                    $object->presentCount = $value->presentCount;
-                    $object->absentCount = $value->absentCount;
-                    $object->lateCount = $value->lateCount;
-                    $staff_id = $value->staff_id;
-                    $date = $value->date;
-                    $getStaffsAttData = $this->getAttendanceByDateStaff($request, $staff_id, $date);
-                    $object->attendance_details = $getStaffsAttData;
-
-                    array_push($staffDetails, $object);
-                }
             }
+            // return $getAttendanceList;
+                $staffDetails = array();
+                if (!empty($getAttendanceList)) {
+                    foreach ($getAttendanceList as $value) {
+                        $object = new \stdClass();
+
+                        $object->first_name = $value->first_name;
+                        $object->last_name = $value->last_name;
+                        $object->staff_id = $value->staff_id;
+                        $object->photo = $value->photo;
+                        $object->presentCount = $value->presentCount;
+                        $object->absentCount = $value->absentCount;
+                        $object->lateCount = $value->lateCount;
+                        $object->session_name = $value->session_name;
+                        $staff_id = $value->staff_id;
+                        if($session=="All"){
+                            $sess = $value->session;
+                        } else {
+                            $sess = $session;
+                        }
+                        $getStaffsAttData = $this->getAttendanceByDateStaff($request, $staff_id, $sess);
+                        // return $getStaffsAttData;
+                        $object->attendance_details = $getStaffsAttData;
+
+                        array_push($staffDetails, $object);
+                    }
+                }
 
 
-
-            // dd($staffDetails);
             $data = [
                 'staff_details' => $staffDetails,
             ];
@@ -14671,12 +14753,12 @@ class ApiController extends BaseController
         }
     }
 
-    function getAttendanceByDateStaff($request, $staff_id, $date)
+    function getAttendanceByDateStaff($request, $staff_id, $session)
     {
         // create new connection
         $Connection = $this->createNewConnection($request->branch_id);
 
-        $query_date = $date;
+        $query_date = "01-".$request->date;
         // First day of the month.
         $startDate = date('Y-m-01', strtotime($query_date));
         // Last day of the month.
@@ -14695,7 +14777,9 @@ class ApiController extends BaseController
             ->groupBy('sa.date')
             ->orderBy('sa.date', 'asc')
             ->whereNotNull('sa.status')
+            ->where('sa.session_id', $session)
             ->get();
+
         return $staffList;
     }
 
@@ -16091,6 +16175,7 @@ class ApiController extends BaseController
             $hostelBlockDetails = $conn->table('hostel_block as hb')->select('hb.*', DB::raw("GROUP_CONCAT(DISTINCT  s.first_name, ' ', s.last_name) as block_warden"), DB::raw("GROUP_CONCAT(DISTINCT  st.first_name, ' ', st.last_name) as block_leader"))
                 ->leftJoin("staffs as s", DB::raw("FIND_IN_SET(s.id,hb.block_warden)"), ">", DB::raw("'0'"))
                 ->leftJoin("students as st", DB::raw("FIND_IN_SET(st.id,hb.block_leader)"), ">", DB::raw("'0'"))
+                ->groupBy('hb.id')
                 ->get();
             return $this->successResponse($hostelBlockDetails, 'Hostel Block record fetch successfully');
         }
@@ -16253,6 +16338,7 @@ class ApiController extends BaseController
                 ->leftJoin("staffs as s", DB::raw("FIND_IN_SET(s.id,hf.floor_warden)"), ">", DB::raw("'0'"))
                 ->leftJoin("students as st", DB::raw("FIND_IN_SET(st.id,hf.floor_leader)"), ">", DB::raw("'0'"))
                 ->leftJoin('hostel_block as b', 'hf.block_id', '=', 'b.id')
+                ->groupBy('hf.id')
                 ->get();
             return $this->successResponse($hostelFloorDetails, 'Hostel Floor record fetch successfully');
         }

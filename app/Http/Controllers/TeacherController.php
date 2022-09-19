@@ -957,10 +957,12 @@ class TeacherController extends Controller
     public function employeeEntry()
     {
         $employee = session()->get('ref_user_id');
+        $session = Helper::GetMethod(config('constants.api.session'));
         return view(
             'teacher.attendance.employee',
             [
-                'employee' => $employee
+                'employee' => $employee,
+                'session' => $session['data']
             ]
         );
     }
@@ -970,6 +972,7 @@ class TeacherController extends Controller
             'firstDay' => $request->firstDay,
             'lastDay' => $request->lastDay,
             'employee' => $request->employee,
+            'session_id' => $request->session_id,
             'date' => $request->date,
         ];
 
@@ -982,6 +985,7 @@ class TeacherController extends Controller
     {
         $data = [
             'employee' => $request->employee,
+            'session_id' => $request->session_id,
             'attendance' => $request->attendance,
         ];
 
@@ -992,10 +996,12 @@ class TeacherController extends Controller
     public function reportEmployeeAttendance()
     {
         $employee = session()->get('ref_user_id');
+        $session = Helper::GetMethod(config('constants.api.session'));
         return view(
             'teacher.attendance.employee_report',
             [
-                'employee' => $employee
+                'employee' => $employee,
+                'session' => $session['data']
             ]
         );
     }

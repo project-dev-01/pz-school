@@ -35,6 +35,18 @@
                     <form id="employeeAttendanceFilter" method="post" enctype="multipart/form-data" autocomplete="off">
                         <div class="row">
                             <input type="hidden" id="employee" name="employee" value="{{$employee}}">
+                            
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="session_id">Session <span class="text-danger">*</span></label>
+                                    <select id="session_id" class="form-control"  name="session_id">                              
+                                    <option value="">Select Session</option>
+                                        @foreach($session as $ses)
+                                            <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="date">Date<span class="text-danger">*</span></label>
@@ -105,6 +117,7 @@
                         </div>
                         <!-- end row-->
                         <input type="hidden" id="employee_form_employee" name="employee">
+                        <input type="hidden" id="employee_form_session_id" name="session_id">
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
                                 Save

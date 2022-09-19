@@ -54,6 +54,18 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label for="session_id">Session <span class="text-danger">*</span></label>
+                                    <select id="employeeReportSession" class="form-control"  name="session_id">                            
+                                    <option value="">Select Session</option>
+                                    <option value="All">All</option>  
+                                        @foreach($session as $ses)
+                                            <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label for="date">Date<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
@@ -216,6 +228,16 @@
                                                     <th><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i> Present</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i> Absent</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> Late</button></th>
+                                                    <th>
+                                                        <form method="post" action="{{ route('admin.staff_attendance.excel')}}">
+                                                            @csrf
+                                                            <input type="hidden" name="department" id="excelDepartment">
+                                                            <input type="hidden" name="employee" id="excelEmployee">
+                                                            <input type="hidden" name="session" id="excelSession">
+                                                            <input type="hidden" name="date" id="excelDate">
+                                                            <button type="submit" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> Download</button>
+                                                        </form>
+                                                    </th>
                                                 </tr>
                                             </table>
                                         </div>

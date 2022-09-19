@@ -16,6 +16,8 @@ class CreateSessionTable extends Migration
         Schema::create('session', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->time('time_from')->nullable();
+            $table->time('time_to')->nullable();
             $table->timestamps();
         });
     }

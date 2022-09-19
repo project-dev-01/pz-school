@@ -9,6 +9,8 @@ use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Excel;
+Use App\Exports\StaffAttendanceExport;
 
 class AdminController extends Controller
 {
@@ -2081,10 +2083,12 @@ class AdminController extends Controller
     {
 
         $getdepartment = Helper::GetMethod(config('constants.api.department_list'));
+        $session = Helper::GetMethod(config('constants.api.session'));
         return view(
             'admin.attendance.employee',
             [
-                'department' => $getdepartment['data']
+                'department' => $getdepartment['data'],
+                'session' => $session['data']
             ]
         );
     }
@@ -4405,6 +4409,7 @@ class AdminController extends Controller
             'firstDay' => $request->firstDay,
             'lastDay' => $request->lastDay,
             'employee' => $request->employee,
+            'session_id' => $request->session_id,
             'date' => $request->date,
         ];
 
@@ -4417,6 +4422,7 @@ class AdminController extends Controller
     {
         $data = [
             'employee' => $request->employee,
+            'session_id' => $request->session_id,
             'attendance' => $request->attendance,
         ];
 
@@ -4427,11 +4433,14 @@ class AdminController extends Controller
 
     public function reportEmployeeAttendance()
     {
+        
+        $session = Helper::GetMethod(config('constants.api.session'));
         $getdepartment = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.attendance.employee_report',
             [
-                'department' => $getdepartment['data']
+                'department' => $getdepartment['data'],
+                'session' => $session['data']
             ]
         );
     }
@@ -5206,4 +5215,11 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.hostel_group_delete'), $data);
         return $response;
     }
+
+    public function staffAttendanceExcel(Request $request)
+    {
+        return Excel::download(new StaffAttendanceExport(1,$request->employee,$request->session,$request->date,$request->department), 'Staff_Attendance.xlsx');
+    }
+
+    
 }

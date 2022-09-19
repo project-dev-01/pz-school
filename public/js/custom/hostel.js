@@ -105,20 +105,51 @@ $(function () {
         }).on('draw', function () {
         });
     }
+
+        
     // get row
+    // $(document).on('click', '#editHostelBtn', function () {
+    //     $('.editHostel').modal('show');
+        
+    //     $('.editHostel').on('shown.bs.modal', function () {
+    //         $('#watch').focus();
+    //     }); 
+    // });
+
     $(document).on('click', '#editHostelBtn', function () {
         var id = $(this).data('id');
-     
-        $('.editHostel').find('form')[0].reset();   
+
+        $('#watch').focus();
+        $('.editHostel').find('form')[0].reset(); 
+        $('.select2-selection__rendered').html('');  
+        
+        // $('.select2 select2-container select2-container--default').addClass('check');
+        // $('#watchman').attr('data-select2-id','watchman');
         $.post(hostelDetails, { id: id }, function (data) {
             $('.editHostel').find('input[name="id"]').val(data.data.id);
             $('.editHostel').find('input[name="name"]').val(data.data.name);
             $('.editHostel').find('select[name="category"]').val(data.data.category_id);
-            $('.editHostel').find('input[name="watchman"]').val(data.data.watchman);
+            // $('.editHostel').find('input[name="watchman"]').val(data.data.watchman);
+            
+            // $('#watch').focus();
+            var arr = data.data.watchman.split(',');
+            var output = "";
+            $.each(arr, function(index, value) {
+                
+                var name = $("#watchman option[value='"+value+"']").text();
+                output += '<li class="select2-selection__choice" title="'+name+' " data-select2-id="'+value+'"><span class="select2-selection__choice__remove" role="presentation">×</span>'+name+' </li>';
+                
+                // var test = $("#watchman option[value='"+value+"']").attr('selected');
+                console.log('cd',name);
+                
+              });
+              $('.select2-selection__rendered').html(output);
             $('.editHostel').find('input[name="address"]').val(data.data.address);
             $('.editHostel').find('textarea[name="remarks"]').text(data.data.remarks);
             $('.editHostel').modal('show');
+            // $('.editHostel').modal('show');
         }, 'json');
+        $("#watchman").trigger("chosen:updated");
         console.log(id);
     });
     // update Hostel

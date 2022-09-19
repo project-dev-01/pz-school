@@ -114,12 +114,13 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
 // Route::get('login', 'AuthController@login');
 // Route::get('logout', 'AuthController@logout');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
-Route::get('/employee/punchcard/{branch}', [AuthController::class, 'employeePunchCardLogin'])->name('employee.punchcard.login');
+Route::get('/employee/punchcard/{branch}/{session}', [AuthController::class, 'employeePunchCardLogin'])->name('employee.punchcard.login');
 Route::post('/employee/punchcard/', [AuthController::class, 'employeePunchCard'])->name('employee.punchcard');
 Route::post('/punchcarddetails', [AuthController::class, 'punchCardDetails'])->name('employee.punchcarddetails');
 Route::get('/loading', [AuthController::class, 'showLoadingForm'])->name('admin.loading');
 Route::any('/authenticate', [AuthController::class, 'authenticate'])->name('admin.authenticate');
 Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
+Route::post('/logout/punchcard', [AuthController::class, 'logoutPunchcard'])->name('admin.logout.punchcard');
 
 Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgot_password');
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('reset_password');
@@ -134,6 +135,8 @@ Route::get('unread_notifications', [CommonController::class, 'unreadNotification
 
 // admin routes start
 Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin']], function () {
+
+    Route::post('/staff_attendance/excel', [AdminController::class, 'staffAttendanceExcel'])->name('admin.staff_attendance.excel');
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     // student details
     Route::get('/student', [AdminController::class, 'studentIndex'])->name('admin.student.index');

@@ -219,17 +219,63 @@ class AuthController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             $date = Carbon::now()->format('Y-m-d');
             $time = Carbon::now()->format('H:i:s');
-            if ($conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id]])->count() > 0) {
+            if ($conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id],['session_id', '=', $request->session_id]])->count() > 0) {
 
-                $validate = $conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id]])->first();
+               
+                $validate = $conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id],['session_id', '=', $request->session_id]])->first();
                 if ($validate->check_in && !$validate->check_out) {
-                    $success = "Check Out";
+                    $success['check_in'] = "Checked In";
+                    $success['check_out'] = "Check Out";
+                    $success['check_in_status'] = "disabled";
+                    $success['check_out_status'] = "";
+                    $success['check_in_time'] = $validate->check_in;
+                    $success['check_out_time'] = "";
+                } else if (!$validate->check_in && !$validate->check_out) {
+
+                    $start = $conn->table('session')->where('id', '=', $request->session_id)->first();
+                    $session_start = $start->time_from;
+                    // return $session_start;
+                    if($time > $session_start) {
+
+                        $success['check_in'] = "Late Check In";
+                    } else {
+                        $success['check_in'] = "Check In";
+                    }
+                    $success['check_out'] = "Check Out";
+                    $success['check_in_status'] = "";
+                    $success['check_out_status'] = "disabled";
+                    $success['check_in_time'] = "";
+                    $success['check_out_time'] = "";
+                } else if ($validate->check_in && $validate->check_out) {
+                    $success['check_in'] = "Checked In";
+                    $success['check_out'] = "Check Out";
+                    $success['check_in_status'] = "disabled";
+                    $success['check_out_status'] = "disabled";
+                    $success['check_in_time'] = $validate->check_in;
+                    $success['check_out_time'] = $validate->check_out;
+                } else if (!$validate->check_in && $validate->check_out) {
+                    $success['check_in'] = "Not Check In";
+                    $success['check_out'] = "Check Out";
+                    $success['check_in_status'] = "disabled";
+                    $success['check_out_status'] = "disabled";
+                    $success['check_in_time'] = $validate->check_in;
+                    $success['check_out_time'] = $validate->check_out;
                 }
             }else {
-                $success['check_in'] = "Check In";
+
+                // return $request->session_id;
+                $start = $conn->table('session')->where('id', '=', $request->session_id)->first();
+                $session_start = $start->time_from;
+                if($time > $session_start) {
+                    $success['check_in'] = "Late Check In";
+                } else {
+                    $success['check_in'] = "Check In";
+                }
                 $success['check_out'] = "Check Out";
                 $success['check_in_status'] = "";
-                $success['check_out_status'] = "hidden";
+                $success['check_out_status'] = "disabled";
+                $success['check_in_time'] = "";
+                $success['check_out_time'] = "";
             }
             // return $now;
             return $this->successResponse($success, 'Status');
@@ -239,6 +285,7 @@ class AuthController extends BaseController
     // employee punchcard
     public function employeePunchCard(Request $request)
     {
+        // return 1;
         $validator = Validator::make($request->all(), [
             'branch_id' => 'required',
             'id' => 'required',
@@ -259,28 +306,59 @@ class AuthController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             $date = Carbon::now()->format('Y-m-d');
             $time = Carbon::now()->format('H:i:s');
-            if ($conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id]])->count() > 0) {
+            if ($conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id],['session_id', '=', $request->session_id]])->count() > 0) {
 
-                $validate = $conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id]])->first();
+                $validate = $conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id],['session_id', '=', $request->session_id]])->first();
                
-                
-                if ($validate->check_in && !$validate->check_out) {
+                // return $validate;
+                if($request->check_in == 1) {
+                    $check_in = $time;
+
+                    $success['check_in'] = "Checked In";
+                    $success['check_out'] = "Check Out";
+                    $success['check_in_status'] = "true";
+                    $success['check_out_status'] = "";
+                    $success['check_in_time'] = $check_in;
+                    $success['check_out_time'] = "";
+                } else if ($request->check_out == 1) {
                     $check_in = $validate->check_in;
                     $check_out = $time;
-                    $loginTime = strtotime($check_in);
-                    $logoutTime = strtotime($check_out);
-                    $diff = $logoutTime - $loginTime;
-                    $hours = date('H:i', $diff);
-                    $success = "Checked Out";
-                } else if ($validate->check_in && $validate->check_out) {
-                    $check_in = $validate->check_in;
-                    $check_out = $validate->check_out;
-                    $hours = $validate->hours;
-                    $success = "Already Checked Out";
-                }else {
-                    $check_in = $time;
-                    $success = "Checked In";
+                    
+                    if($check_in) {
+
+                        $loginTime = strtotime($check_in);
+                        $logoutTime = strtotime($check_out);
+                        $diff = $logoutTime - $loginTime;
+                        $hours = date('H:i', $diff);
+                        $success['check_in'] = "Checked In";
+                    } else {
+                        $success['check_in'] = "Not Check In";
+                    }
+                    
+                        
+                    $success['check_out'] = "Checked Out";
+                    $success['check_in_status'] = "true";
+                    $success['check_out_status'] = "true";
+                    $success['check_in_time'] = $validate->check_in;
+                    $success['check_out_time'] = $check_out;
                 }
+                // if ($validate->check_in && !$validate->check_out) {
+                //     $check_in = $validate->check_in;
+                //     $check_out = $time;
+                //     $loginTime = strtotime($check_in);
+                //     $logoutTime = strtotime($check_out);
+                //     $diff = $logoutTime - $loginTime;
+                //     $hours = date('H:i', $diff);
+                //     $success = "Checked Out";
+                // } else if ($validate->check_in && $validate->check_out) {
+                //     $check_in = $validate->check_in;
+                //     $check_out = $validate->check_out;
+                //     $hours = $validate->hours;
+                //     $success = "Already Checked Out";
+                // }else {
+                //     $check_in = $time;
+                //     $success = "Checked In";
+                // }
                 // dd($success);
                 // dd($check_out);
                 $query = $conn->table('staff_attendances')->where('id', $validate->id)->update([
@@ -293,14 +371,23 @@ class AuthController extends BaseController
                     'created_at' => date("Y-m-d H:i:s")
                 ]);
             }else {
-                $success = "Checked In";
                 $query = $conn->table('staff_attendances')->insert([
                     'date' => $date,
                     'check_in' => $time,
                     'status' => "present",
                     'staff_id' => $id,
+                    'session_id' => $request->session_id,
                     'created_at' => date("Y-m-d H:i:s")
                 ]);
+
+                
+
+                $success['check_in'] = "Checked In";
+                $success['check_out'] = "Check Out";
+                $success['check_in_status'] = "true";
+                $success['check_out_status'] = "";
+                $success['check_in_time'] = $time;
+                $success['check_out_time'] = "";
             }
             // return $now;
             if (!$query) {

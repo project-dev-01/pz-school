@@ -17,11 +17,12 @@ class CreateStaffAttendancesTable extends Migration
             $table->id();
             $table->integer('staff_id');
             $table->date('date');
-            $table->time('check_in');
-            $table->time('check_out');
-            $table->string('hours');
-            $table->enum('status', ['present', 'absent','excused', 'late']);
-            $table->text('remarks');
+            $table->time('check_in')->nullable();
+            $table->time('check_out')->nullable();
+            $table->string('hours')->nullable();
+            $table->enum('status', ['present', 'absent','excused', 'late'])->nullable();
+            $table->text('remarks')->nullable();
+            $table->integer('session_id')->nullable();
             $table->timestamps();
         });
     }

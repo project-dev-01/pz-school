@@ -1,48 +1,129 @@
-@extends('layouts.admin-layout')
-@section('title','Punch Card')
-@section('content')
-<div class="col-md-6">
-    <div class="">
-        <div class="card-body" style="margin:0px 55px 0px 30px;">
-            <!-- Logo -->
-            <div>
-                <!-- form -->
-                <form id="getOtp" action="{{ route('employee.punchcarddetails') }}" method="post" enctype="multipart/form-data" autocomplete="off">
-                    @csrf
+<!DOCTYPE html>
+<html lang="en">
 
-                    <div class="form-group">
-                        <input class="form-control" type="email" id="email" name="email" value="{{Cookie::get('email')}}"  required placeholder="Enter your email">
-                    </div>
-                    <div class="form-group"  >
-                        <input class="form-control" type="passwarod"  name="password" value="{{Cookie::get('password')}}" required placeholder="Enter your Password">
-                    </div>
-                    <br>
-                    <div class="form-group text-right m-b-0">
-                        <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                            Login
-                        </button>
-                        <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                            Cancel
-                        </button>-->
-                    </div>
-
-                </form>
+<head>
+    <meta charset="utf-8" />
+    <title>PunchCard Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ asset('public/images/favicon.ico') }}">
+    <!-- App css -->
+    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+    <link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+    <link href="{{ asset('public/css/bootstrap-dark.min.css') }}" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
+    <link href="{{ asset('public/css/app-dark.min.css') }}" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
+    <!-- icons -->
+    <link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/custom/login.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
+</head>
 
 
-                <!-- end form-->
-            </div><br><br>
+<body class="loading auth-fluid-pages pb-0">
+    <div class="auth-fluid">
+        <div class="col-md-6 ">
+            <div class="auth-fluid-right text-center teacherlogin">
+                <div class="">
+                    <!--Auth fluid left content -->
+                    <div class="auth-user-testimonial bg">
+                        <p class="mb-3 text-white text">Teaching is the greatest<br> act of optimism</p>
+                    </div> <!-- end auth-user-testimonial-->
+                </div>
+            </div>
 
+        </div>
+        <!-- end Auth fluid right content -->
 
-        </div> <!-- end .card-body -->
-    </div> <!-- end .align-items-center.d-flex.h-100-->
-</div>
+        <!--Auth fluid left content -->
+        <div class="col-md-6 col">
+            <div class="auth-fluid-form-box">
+                <div class="align-items-center d-flex h-100">
+                    <div class="card-body">
 
-@endsection
+                        <!-- Logo -->
+                        <div class="auth-brand text-center text-lg-left">
+                            <div class="auth-logo">
+                                <div class="auth-logo">
+                                    <a href="" class="logo logo-dark">
+                                        <span class="logo-lg">
+                                            <img src="{{ asset('public/images/Suzen-app-logo.png') }}" alt="" height="60px">
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
 
-@section('scripts')
-<script>
-    var sectionByClass = "{{ route('admin.section_by_class') }}";
-</script>
-<!-- <script src="{{ asset('public/js/custom/punchcard.js') }}"></script> -->
+                        <!-- form -->
+                        <div class="form">
+                        <form id="getOtp" action="{{ route('employee.punchcarddetails') }}" method="post" enctype="multipart/form-data" autocomplete="off">
+                                @if ( Session::get('success'))
+                                <div class="alert alert-success">
+                                    {{ Session::get('success') }}
+                                </div>
+                                @endif
+                                @if ( Session::get('error'))
+                                <div class="alert alert-danger">
+                                    {{ Session::get('error') }}
+                                </div>
+                                @endif
+                                @csrf
+                                <h1 class="welcomeback">Welcome back,</h1>
+                                <div class="form-group">
+                                    <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">SMK Kiaramas</span>
+                                </div>
+                                <input class="form-control" type="hidden" name="session" value="{{$session}}">
+                                <div class="form-group">
+                                    <input class="form-control" type="email" id="email" name="email" value="{{Cookie::get('email')}}"  required placeholder="Enter your email">
+                                </div>
+                                <div class="form-group"  >
+                                    <input class="form-control" type="password"  name="password" value="{{Cookie::get('password')}}" required placeholder="Enter your Password">
+                                </div>
+                                <div class="form-group mb-0 text-center">
+                                    <button class="btn btn-block signin" type="submit">Sign In </button>
+                                </div>
 
-@endsection
+                            </form>
+
+                            <!-- end form-->
+
+                            <!-- Footer-->
+                            <footer class="footer">
+                                <p class="text-muted">2020 - <script>
+                                        document.write(new Date().getFullYear())
+                                    </script> &copy; by <a href="javascript: void(0);" class="text-muted">Paxsuzen</a> </p>
+                            </footer>
+
+                        </div> <!-- end .card-body -->
+                    </div> <!-- end .align-items-center.d-flex.h-100-->
+                </div>
+            </div>
+
+            <!-- end auth-fluid-form-box-->
+
+            <!-- Auth fluid right content -->
+        </div>
+    </div>
+    <!-- end auth-fluid-->
+
+    <!-- Vendor js -->
+    <script src="{{ asset('public/js/vendor.min.js') }}"></script>
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+
+    <!-- App js -->
+    <script src="{{ asset('public/js/app.min.js') }}"></script>
+    <!-- <script src="{{ asset('public/js/custom/login.js') }}"></script> -->
+
+</body>
+
+</html>

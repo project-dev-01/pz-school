@@ -180,6 +180,7 @@ return [
         // use datatable
         Yajra\DataTables\DataTablesServiceProvider::class,
         Yajra\DataTables\ButtonsServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
 
     ],
@@ -241,6 +242,7 @@ return [
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         // use DataTables
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'Excel' => \Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];
