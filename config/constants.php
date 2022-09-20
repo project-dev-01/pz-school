@@ -557,7 +557,9 @@ return [
         'employee_punchcard_check' => $url.'/employee/punchcard/check',
         // exam schedule list student,parent
         'exam_timetable_student_parent' => $url.'/exam_timetable/student_parent',
-        'exam_timetable_get_student_parent' => $url.'/exam_timetable/get_student_parent'
+        'exam_timetable_get_student_parent' => $url.'/exam_timetable/get_student_parent',
+        // exam result by class
+        'exam_results_get_subject_by_class' => $url.'/exam_results/get_subject_by_class'
         
     ]
 

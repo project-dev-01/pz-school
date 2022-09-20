@@ -320,7 +320,7 @@ $(function () {
                             }
                         });
                         donutchart(pass, fail, inprogress);
-                        donut_chart.updateSeries([pass, fail, inprogress]); 
+                        donut_chart.updateSeries([pass, fail, inprogress]);
                     } else {
                         $('#graphs_card').hide();
                         $('#donut-chart').hide();
@@ -472,9 +472,6 @@ $(function () {
     $(document).on("change", ".basevalidation", function (e) {
         e.preventDefault();
         var marks_range = $(this).val();
-
-        var fullMark = $("#fullmark").val();
-        var passMark = $("#passmark").val();
         var grade_category = $("#grade_category").val();
         // rank
         //Get all total values, sort and remove duplicates
@@ -564,7 +561,7 @@ $(function () {
         var paper_id = $("#listModePaperID").val();
         var semester_id = $("#listModeSemesterID").val();
         var session_id = $("#listModeSessionID").val();
-        
+
         var formData = new FormData();
         formData.append('token', token);
         formData.append('branch_id', branchID);
@@ -678,7 +675,11 @@ $(function () {
                     "targets": 2,
                     "className": "text-center",
                     "render": function (data, type, row, meta) {
-                        var score = '<input type="text" maxlength="3" class="form-control basevalidation" name="subjectmarks[' + meta.row + '][score]" id="' + row.student_id + '" value="' + (data != null ? data : "") + '">';
+                        var attribue = "";
+                        if (row.status == "absent") {
+                            attribue = "disabled";
+                        }
+                        var score = '<input type="text" maxlength="3" ' + attribue + ' class="form-control basevalidation score' + row.student_id + '" name="subjectmarks[' + meta.row + '][score]" id="' + row.student_id + '" value="' + (data != null ? data : "") + '">';
 
                         return score;
                     }
@@ -703,7 +704,11 @@ $(function () {
                             } else if (data == "Fail") {
                                 passTag = "badge-danger";
                             } else {
-                                passTag = "-";
+                                if (row.status == "absent") {
+                                    passTag = "badge-danger";
+                                } else {
+                                    passTag = "-";
+                                }
                             }
                         }
                         var pass_fail = '<span class="badge badgeLabel' + row.student_id + ' ' + passTag + ' badge-pill lbl_pass_fail' + row.student_id + '">' + (data != "null" ? data : "-") + '</span>' +
@@ -725,7 +730,7 @@ $(function () {
                 {
                     "targets": 6,
                     "render": function (data, type, row, meta) {
-                        var att_status = '<select class="form-control" data-style="btn-outline-success" name="subjectmarks[' + meta.row + '][status]">' +
+                        var att_status = '<select class="form-control attendance_status" id="' + row.student_id + '" data-style="btn-outline-success" name="subjectmarks[' + meta.row + '][status]">' +
                             '<option value="">Choose</option>' +
                             '<option value="present" ' + (row.status == "present" ? "selected" : "selected") + '>Present</option>' +
                             '<option value="absent" ' + (row.status == "absent" ? "selected" : "") + '>Absent</option>' +
@@ -737,8 +742,12 @@ $(function () {
                     "targets": 7,
                     "className": "text-center",
                     "render": function (data, type, row, meta) {
+                        var attribue = "";
+                        if (row.status == "absent") {
+                            attribue = "disabled";
+                        }
                         var memo = '<textarea style="display:none;" maxlength="50" class="addRemarks" data-id="' + row.student_id + '" id="addRemarks' + row.student_id + '" name="subjectmarks[' + meta.row + '][memo]">' + (data !== "null" ? data : "") + '</textarea>' +
-                            '<button type="button" data-id="' + row.student_id + '" class="btn btn-outline-info waves-effect waves-light list-mode-btn" data-toggle="modal" data-target="#stuRemarksPopup" id="editRemarksStudent">Add Remarks</button>';
+                            '<button type="button" ' + attribue + ' data-id="' + row.student_id + '" id="addRemarks' + row.student_id + '" class="btn btn-outline-info waves-effect waves-light list-mode-btn addRemarks' + row.student_id + '" data-toggle="modal" data-target="#stuRemarksPopup" id="editRemarksStudent">Add Remarks</button>';
                         return memo;
 
                     }
@@ -997,5 +1006,81 @@ $(function () {
             return "rgb(" + r + ", " + g + ", " + b + ")";
         }
     }
+    // change student attendance status
+    $(document).on('change', '.attendance_status', function () {
+        // var studenetID = $(this).data('id');
+        let value = $(this).val();
+        let studenetID = $(this).attr("id");
+        console.log(value);
+        console.log("studenetID")
+        console.log(studenetID)
+        if (value == "present") {
+            $('.lbl_grade' + studenetID).text("-");
+            $('.lbl_grade' + studenetID).val("");
+            $('.score' + studenetID).val("");
+            $('.lbl_ranking' + studentID).text("-");
+            $('.lbl_ranking' + studentID).val("");
+            $('#addRemarks' + studenetID).val("");
+            // absent
+            $('.badgeLabel' + studenetID).removeClass('badge-success');
+            $('.badgeLabel' + studenetID).removeClass('badge-danger');
+            // $('.badgeLabel' + studenetID).addClass('badge-danger');
+            $('.lbl_pass_fail' + studenetID).text('-');
+            $('.lbl_pass_fail' + studenetID).val('-');
+            // enable
+            $('.score' + studenetID).prop('disabled', false);
+            $(".addRemarks" + studenetID).prop('disabled', false);
+
+        }
+        if (value == "absent") {
+            $('.lbl_grade' + studenetID).text("-");
+            $('.lbl_grade' + studenetID).val("");
+            $('.score' + studenetID).val("");
+            $('.lbl_ranking' + studentID).text("-");
+            $('.lbl_ranking' + studentID).val("");
+            $('#addRemarks' + studenetID).val("");
+            // absent
+            $('.badgeLabel' + studenetID).removeClass('badge-success');
+            $('.badgeLabel' + studenetID).addClass('badge-danger');
+            $('.lbl_pass_fail' + studenetID).text('Absent');
+            $('.lbl_pass_fail' + studenetID).val('Absent');
+            // disable
+            $('.score' + studenetID).prop('disabled', true);
+            $(".addRemarks" + studenetID).prop('disabled', true);
+
+
+        }
+
+        //Get all total values, sort and remove duplicates
+        let totalList = $(".basevalidation")
+            .map(function () { return $(this).val() })
+            .get()
+            .sort(function (a, b) { return a - b })
+            .reduce(function (a, b) { if (b != a[0]) a.unshift(b); return a }, [])
+
+        //assign rank
+        $(".basevalidation").each(function () {
+            let rankVal = $(this).val();
+            let studentID = $(this).attr('id');
+            let rank = totalList.indexOf(rankVal) + 1;
+            $('.lbl_ranking' + studentID).text(rank);
+            $('.lbl_ranking' + studentID).val(rank);
+
+        })
+        // var attendanceType = $('#attendance' + studenetID).val();
+        // $('#reasons' + studenetID).empty();
+        // $('#reasons' + studenetID).append('<option value="">Choose</option>');
+        // $.post(getAbsentLateExcuse, {
+        //     token: token,
+        //     branch_id: branchID,
+        //     attendance_type: attendanceType
+        // }, function (res) {
+        //     if (res.code == 200) {
+        //         $.each(res.data, function (key, val) {
+        //             $('#reasons' + studenetID).append('<option value="' + val.id + '">' + val.name + '</option>');
+        //         });
+        //     }
+        // }, 'json');
+    });
 
 });
