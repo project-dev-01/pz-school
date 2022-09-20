@@ -126,21 +126,17 @@
     @endsection
     @section('scripts')
     <script>
-        var sectionByClass = "{{ route('admin.section_by_class') }}";
-        var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
+        // var sectionByClass = "{{ route('admin.section_by_class') }}";
+        // var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
+        // var getbyClass_thead = "{{ config('constants.api.tot_grade_master') }}";
+        // var Allexams = "{{ config('constants.api.all_exams_list') }}";
+        // var getbyClassAllstd = "{{ config('constants.api.all_std_list') }}";
+        // var getbySubject = "{{ config('constants.api.tot_grade_calcu_bySubject') }}";
+        // var getbySubjectAllstd = "{{ config('constants.api.all_bysubject_list') }}";
         var examsByclassandsubject = "{{ config('constants.api.exam_by_classSubject') }}";
-
         var getbyClass = "{{ config('constants.api.tot_grade_calcu_byclass') }}";
-        var getbyClass_thead = "{{ config('constants.api.tot_grade_master') }}";
-        var Allexams = "{{ config('constants.api.all_exams_list') }}";
-        var getbyClassAllstd = "{{ config('constants.api.all_std_list') }}";
         var getbySubjectnames = "{{ config('constants.api.exam_results_get_subject_by_class') }}";
-
-        //
-        var getbySubject = "{{ config('constants.api.tot_grade_calcu_bySubject') }}";
         var teacher_id = null;
-        var getbySubjectAllstd = "{{ config('constants.api.all_bysubject_list') }}";
-        //
         // default image test
         var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
     </script>
