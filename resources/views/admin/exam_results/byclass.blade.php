@@ -95,11 +95,11 @@
                             <div id="byclassTableAppend">
 
                             </div>
-                            <!-- <div class="col-md-12">
-                                    <div class="clearfix mt-4">
-                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Download</button>
-                                    </div>
-                                </div> -->
+                            <div class="col-md-12">
+                                <div class="clearfix mt-4">
+                                    <button type="button" class="btn btn-primary-bl waves-effect waves-light float-right exportToExcel">Download</button>
+                                </div>
+                            </div>
                         </div>
                         <!-- end row-->
 
@@ -125,14 +125,9 @@
     </div> -->
     @endsection
     @section('scripts')
+    <script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
+
     <script>
-        // var sectionByClass = "{{ route('admin.section_by_class') }}";
-        // var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
-        // var getbyClass_thead = "{{ config('constants.api.tot_grade_master') }}";
-        // var Allexams = "{{ config('constants.api.all_exams_list') }}";
-        // var getbyClassAllstd = "{{ config('constants.api.all_std_list') }}";
-        // var getbySubject = "{{ config('constants.api.tot_grade_calcu_bySubject') }}";
-        // var getbySubjectAllstd = "{{ config('constants.api.all_bysubject_list') }}";
         var examsByclassandsubject = "{{ config('constants.api.exam_by_classSubject') }}";
         var getbyClass = "{{ config('constants.api.tot_grade_calcu_byclass') }}";
         var getbySubjectnames = "{{ config('constants.api.exam_results_get_subject_by_class') }}";

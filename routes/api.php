@@ -107,10 +107,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('exam-by-teacher-subjects', [ApiController::class, 'examByTeacherSubjects']);
     Route::post('subject-by-papers', [ApiController::class, 'getSubjectByPaper']);
     Route::post('subject-by-exam-names', [ApiController::class, 'getsubjectByAssignTest']);
-    
+
     Route::post('timetable-subject', [ApiController::class, 'timetableSubject']);
-    Route::get('exam-by-classSection', [ApiController::class, 'examByClassSec']);
-    Route::get('tot_grade_calcu_bySubject', [ApiController::class, 'totgradeCalcuBySubject']);
     Route::get('tot_grade_calcu_byStudent', [ApiController::class, 'totgradeCalcuByStudent']);
     Route::get('tot_grade_calcu_byStdsubjectdiv', [ApiController::class, 'totgradecalcubyStudent_subjectdiv']);
     Route::get('tot_grade_calcu_overall', [ApiController::class, 'tot_grade_calcu_overall']);
@@ -223,7 +221,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // Exam Timetable routes for parent,student
     Route::post('exam_timetable/student_parent', [ApiControllerOne::class, 'examScheduleList']);
     Route::post('exam_timetable/get_student_parent', [ApiControllerOne::class, 'getExamTimetableList']);
-    
+
     Route::get('relation/list', [ApiController::class, 'getRelationList']);
     // get roles
     Route::post('roles/list', [ApiController::class, 'getRoles']);
@@ -406,7 +404,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('hostel_room/delete', [ApiController::class, 'deleteHostelRoom']);
     Route::post('vehicle-by-route', [ApiController::class, 'vehicleByRoute']);
     Route::post('room-by-hostel', [ApiController::class, 'roomByHostel']);
-    
+
     Route::post('floor-by-block', [ApiController::class, 'floorByBlock']);
 
     // Hostel Block routes
@@ -592,8 +590,13 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // import timetable details in csv
     Route::post('importcsv/timetable', [ApiControllerOne::class, 'importCsvTimetable']);
     // exam results routes
+    // by class
     Route::post('exam_results/get_subject_by_class', [ApiControllerOne::class, 'getSubjectByClass']);
     Route::post('exam-by-classSubject', [ApiControllerOne::class, 'examByClassSubject']);
     Route::post('tot_grade_calcu_byclass', [ApiControllerOne::class, 'totgradeCalcuByClass']);
+    // by subject
+    Route::post('exam_results/get_class_by_section', [ApiControllerOne::class, 'getClassBySection']);
+    Route::post('exam-by-classSection', [ApiControllerOne::class, 'examByClassSec']);
+    Route::post('tot_grade_calcu_bySubject', [ApiControllerOne::class, 'totgradeCalcuBySubject']);
 
 });

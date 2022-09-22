@@ -1,47 +1,25 @@
 var globel_gradecount = [];
 var reasonChart;
 $(function () {
-    // $('#bysubject_body').hide();
-    $('#bysubject_analysis').hide();
     // change classroom
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
-        console.log(class_id);
-        if (class_id != "All") {
-            console.log('sec');
-            $("#bysubjectfilter").find("#examnames").empty();
-            $("#bysubjectfilter").find("#examnames").append('<option value="">Select Exams</option>');
-           
-            $("#bysubjectfilter").find("#sectionID").empty();
-     
-            $("#bysubjectfilter").find("#sectionID").append('<option value="">Select Section</option>');
-          
-           
-            $.post(sectionByClass, { class_id: class_id }, function (res) {
-                if (res.code == 200) {
-                    $("#section_drp_div").show();
-                    $.each(res.data, function (key, val) {
-                        $("#bysubjectfilter").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
-                    });
-                }
-            }, 'json');
-        }
-        else if (class_id == "All") {
-          
-            $("#bysubjectfilter").find("#examnames").empty();
-            $("#bysubjectfilter").find("#examnames").append('<option value="">Select Exams</option>');           
-            $("#bysubjectfilter").find("#sectionID").empty();
-            $("#bysubjectfilter").find("#sectionID").append('<option value="">Select Section</option>');
-           
-          $.post(Allexams, { token: token, branch_id: branchID }, function (res) {
-                if (res.code == 200) {
-                    $("#section_drp_div").hide();
-                    $.each(res.data, function (key, val) {
-                        $("#bysubjectfilter").find("#examnames").append('<option value="' + val.id + '">' + val.name + '</option>');
-                    });
-                }
-            }, 'json');
-        }
+        $("#bysubjectfilter").find("#examnames").empty();
+        $("#bysubjectfilter").find("#examnames").append('<option value="">Select Exams</option>');
+
+        $("#bysubjectfilter").find("#sectionID").empty();
+
+        $("#bysubjectfilter").find("#sectionID").append('<option value="">Select Section</option>');
+
+
+        $.post(sectionByClass, { token: token, branch_id: branchID, class_id: class_id, teacher_id: teacher_id }, function (res) {
+            if (res.code == 200) {
+                $("#section_drp_div").show();
+                $.each(res.data, function (key, val) {
+                    $("#bysubjectfilter").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                });
+            }
+        }, 'json');
 
     });
     // change section
@@ -56,7 +34,7 @@ $(function () {
         today = yyyy + '/' + mm + '/' + dd;
         $("#bysubjectfilter").find("#examnames").empty();
         $("#bysubjectfilter").find("#examnames").append('<option value="">Select exams</option>');
-        $.get(examsByclassandsection, {
+        $.post(examsByclassandsection, {
             token: token,
             branch_id: branchID,
             class_id: class_id,
@@ -65,8 +43,7 @@ $(function () {
         }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
-                    var marks = JSON.parse(val.marks);
-                    $("#bysubjectfilter").find("#examnames").append('<option value="' + val.id + '" data-full="' + marks.full + '" data-pass="' + marks.pass + '">' + val.name + '</option>');
+                    $("#bysubjectfilter").find("#examnames").append('<option value="' + val.id + '" >' + val.name + '</option>');
                 });
             }
         }, 'json');
@@ -74,8 +51,8 @@ $(function () {
     $("#bysubjectfilter").validate({
         rules: {
             class_id: "required",
-            //  section_id: "required",
-            exam_id: "required"
+            section_id: "required",
+            examnames: "required"
         }
     });
     $('#bysubjectfilter').on('submit', function (e) {
@@ -84,429 +61,199 @@ $(function () {
         if (byclass === true) {
             $("#overlay").fadeIn(300);
             globel_gradecount = [];
-
             var class_id = $("#changeClassName").val();
-            var Selected_classname = $('#changeClassName :selected').text();
             var section_id = $("#sectionID").val();
             var exam_id = $("#examnames").val();
-            if (class_id != "All") {
-                var fmark = $('option:selected', '#examnames').attr('data-full');
-                var pmark = $('option:selected', '#examnames').attr('data-pass');
-                $("#fullmark").val(fmark);
-                $("#passmark").val(pmark);
-                console.log('enterd');
-                // list mode
-                $.get(getbySubject, { token: token, branch_id: branchID, exam_id: exam_id, class_id: class_id, section_id: section_id }, function (response) {
-                   
-                        if (response.code == 200) {
-                            if (response.data.length > 0) {
-                                var datasetnew = response.data;
-                                bysubjectdetails_class(datasetnew);
-                                console.log(globel_gradecount);
-                                $("#bysubject_analysis").show();
-                                $("#bysubject_body").show("slow");
-                               
-                                $("#overlay").fadeOut(300);
-                            } else {
-                                $("#overlay").fadeOut(300);
-                                toastr.info('No records are available');
-                            }
-                        } else {
-                            toastr.error(data.message);
-                        }
-                
-                });
-            }
-            else if (class_id == "All") {
-                $.get(getbySubjectAllstd, { token: token, branch_id: branchID, exam_id: exam_id }, function (response) {
+            // list mode
+            $.post(getbySubject, { token: token, branch_id: branchID, exam_id: exam_id, class_id: class_id, section_id: section_id }, function (response) {
+                if (response.code == 200) {
+                    if (response.data.grade_list_master.length > 0) {
+                        var datasetnew = response.data;
+                        bysubjectdetails_class(datasetnew);
+                        $("#bysubject_body").show("slow");
 
-                    if (response.code == 200) {
-                        console.log(response.data);
-                        if (response.data.length > 0) {
-                            var datasetnew = response.data;
-                            bysubjectdetails_all(datasetnew);
-                            $("#bysubject_analysis").show();
-                            $("#bysubject_body").show("slow");
-                         
-                            $("#overlay").fadeOut(300);
-                        } else {
-                            $("#overlay").fadeOut(300);
-                            toastr.info('No records are available');
-                        }
+                        $("#overlay").fadeOut(300);
                     } else {
-                        toastr.error(data.message);
+                        $("#overlay").fadeOut(300);
+                        toastr.info('No records are available');
                     }
+                } else {
+                    toastr.error(data.message);
+                }
 
-                });
-            }
-
+            });
         };
     });
 
 
+    $(document).on('click', '.exportToExcel', function (e) {
+        // var table = $(this).prev('.table2excel');
+        var table = $('.table2excel');
+        if (table && table.length) {
+            var preserveColors = (table.hasClass('table2excel_with_colors') ? true : false);
+            $(table).table2excel({
+                // exclude: ".noExl",
+                name: "Excel Document Name",
+                filename: "by_subjects" + new Date().toISOString().replace(/[\-\:\.]/g, "") + ".xls",
+                fileext: ".xls",
+                exclude_img: true,
+                exclude_links: true,
+                exclude_inputs: true,
+                preserveColors: preserveColors
+            });
+        }
+    });
+
 });
 
 function bysubjectdetails_class(datasetnew) {
-
     $('#bysubjectTableAppend').empty();
-    var passcount = 0;
-    var failcount = 0;
-    var pass_percentage = 0;
-    var fail_percentage = 0;
     var sno = 0;
-    //var attendance_pass_fail = [];
     var bysubjectAllTable = "";
-    console.log(datasetnew);
-    datasetnew.forEach(function (res) {
-        var subname = res.subject_name;
-        var techname = res.teacher_name;
-        var grade_count_master = res.grad_count_master;
-        globel_gradecount=res.grad_count_master;
-        console.log(subname);
-        var std_count = res.totalstudentcount;
-
-        // std count and names
-        std_count.forEach(function (tot) {
-            //  console.log(tot.totalStudentCount);
-            if (tot.totalStudentCount > 0) {
-                var attendance_con = res.attendance_list;
-                attendance_con.forEach(function (attCondition) {
-
-                    if (attCondition.pass != null && attCondition.fail != null) {
-                        sno++;
-                        bysubjectAllTable += '<tr>' +
-                            '<td class="text-center" rowspan="2">';
-                        bysubjectAllTable += sno +
-                            '</td>';
-                        // console.log(tot.totalStudentCount);
-
-                        bysubjectAllTable += '<td class="text-left" rowspan="2">' +
-                            '<label for="clsname">' + tot.name + '</label>' +
-                            '</td>';
-                        bysubjectAllTable += '<td class="text-center" rowspan="2">' +
-                            '<label for="stdcount"> ' + tot.section_name + '</label>' +
-                            '</td>';
-                        bysubjectAllTable += '<td class="text-center" rowspan="2">' +
-                            '<label for="stdcount"> ' + subname + '</label>' +
-                            '</td>';
-                        bysubjectAllTable += '<td class="text-center" rowspan="2">' +
-                            '<label for="stdcount"> ' + tot.totalStudentCount + '</label>' +
-                            '</td>';
-                        // Attendance present and absent column
-                        var attendance_percentage = [];
-                        var attendance_list = res.attendance_list;
-                        attendance_list.forEach(function (att) {
-                            bysubjectAllTable += '<td class="text-left">' +
-                                '<label for="clsname">' + att.absent + '</label>' +
-                                '</td>';
-                            bysubjectAllTable += '<td class="text-center">' +
-                                '<label for="stdcount"> ' + att.present + '</label>' +
-                                '</td>';
-
-                        });
-                        bysubjectAllTable += '<td class="text-left" rowspan="2">' +
-                            '<label for="clsname">' + techname + '</label>' +
-                            '</td>';
-                        // grade list count
-                        var grade_count_list = res.grade_count_list;
-                        var grade_list_count = grade_count_list.length;
-                     //   globel_gradecount.push(res.grade_count_list);
-                        console.log(grade_list_count);
-                        var gradepercentage = [];
-                        $('#tblbycls > thead  > tr >th').each(function (index, tr) {
-                            var th = $('#tblbycls  thead  > tr >th').eq($(this).index());
-                            var nineindex = grade_count_master;
-                            var endgradeindex = (8 + nineindex);
-
-                            if (index >= 8 && endgradeindex > index) {
-                                var i = 0;
-                                grade_count_list.forEach(function (res) {
-                                    if (res.gname == th.text()) {
-                                        i++;
-                                        bysubjectAllTable += '<td class="text-right">' + res.gradecount + '</td>';
-
-                                        //       console.log('matched' + i);
-                                        // passcount += res.pass;
-                                        // failcount += res.fail;
-                                        var getval = res.gradecount / tot.totalStudentCount
-                                        var gper = getval * 100;
-                                        var gradeper = parseFloat(gper, 10).toFixed(2);
-                                        gradepercentage.push(gradeper);
-                                    }
-                                });
-                                if (i == 0) {
-                                    bysubjectAllTable += '<td class="text-right">0</td>'
-                                    gradepercentage.push(0);
-                                }
-
-                            }
-                        });
-                        //    console.log(attendance_pass_fail.length);
-                        attendance_list.forEach(function (res) {
-                            console.log(' test test');
-                            console.log(res);
-                            passcount = res.pass;
-                            failcount = res.fail;
-                            pass_percentage = (passcount / tot.totalStudentCount) * 100;
-                            fail_percentage = (failcount / tot.totalStudentCount) * 100;
-                            pass_percentage = parseFloat(pass_percentage, 10).toFixed(2);
-                            fail_percentage = parseFloat(fail_percentage, 10).toFixed(2);
-                            bysubjectAllTable += '<td class="text-center">' + passcount + '</td>' +
-                                '<td class="text-center">' + failcount + '</td>' +
-                                '<td class="text-center" rowspan="2">-</td>' +
-                                '<td class="text-center" rowspan="2">' + pass_percentage + '</td>' +
-                                '</tr>';
-
-                            // }
-
-                        });
-
-                        bysubjectAllTable += '<tr>';
-
-                        attendance_list.forEach(function (att_percentage) {
-                            var absent_persentage = att_percentage.absent / tot.totalStudentCount
-                            var ab_per = absent_persentage * 100;
-                            var absent_per = parseFloat(ab_per, 10).toFixed(2);
-                            //
-                            var present_persentage = att_percentage.present / tot.totalStudentCount
-                            var pre_per = present_persentage * 100;
-                            var present_per = parseFloat(pre_per, 10).toFixed(2);
-                            console.log(present_per);
-
-                            bysubjectAllTable += '<td class="text-right">' + absent_per + '</td>' +
-                                '<td class="text-right">' + present_per + '</td>';
-                        });
-                        gradepercentage.forEach(function (response) {
-
-                            bysubjectAllTable += '<td class="text-right">' + response + '</td>'
-                        });
-                        bysubjectAllTable += '<td class="text-right">' + pass_percentage + '</td>' +
-                            '<td class="text-right">' + fail_percentage + '</td>';
-                        bysubjectAllTable += '</tr>';
-                    }
-                    else {
-                        console.log('else print')
+    var headers = datasetnew.headers;
+    var grade_list_master = datasetnew.grade_list_master;
+    bysubjectAllTable += '<div class="table-responsive">' +
+        '<table id="tblbycls" class="table w-100 nowrap table-bordered table-striped table2excel" data-tableName="Test Table 1">' +
+        '<thead>' +
+        '<tr>' +
+        '<th class="align-top" rowspan="2">S.no.</th>' +
+        '<th class="align-top" rowspan="2">Standard</th>' +
+        '<th class="align-top" rowspan="2">Class</th>' +
+        '<th class="align-top" rowspan="2">Subject Name</th>' +
+        '<th class="align-top th-sm - 6 rem" rowspan="2">Tot. Students</th>' +
+        '<th class="align-top" rowspan="2">Absent</th>' +
+        '<th class="align-top" rowspan="2">Present</th>' +
+        '<th class="align-top" rowspan="2">Subject Teacher Name</th>';
+    headers.forEach(function (resp) {
+        bysubjectAllTable += '<th class="text-center">' + resp.grade + '</th>';
+    });
+    bysubjectAllTable += '<th class="align-middle" rowspan="2">PASS</th>' +
+        '<th class="align-middle" rowspan="2">G</th>' +
+        '<th class="align-middle" rowspan="2">Avg. grade of subject</th>' +
+        '<th class="align-middle" rowspan="2">%</th>' +
+        '</tr>';
+    bysubjectAllTable += '<tr>';
+    headers.forEach(function (resp) {
+        bysubjectAllTable += '<td class="text-center">%</td>';
+    });
+    bysubjectAllTable += '</tr></thead><tbody>';
+    grade_list_master.forEach(function (res) {
+        sno++;
+        bysubjectAllTable += '<tr>' +
+            '<td class="text-center" rowspan="2">';
+        bysubjectAllTable += sno +
+            '</td>';
+        bysubjectAllTable += '<td class="text-left" rowspan="2">' +
+            '<label for="clsname">' + res.class_name + '</label>' +
+            '</td>';
+        bysubjectAllTable += '<td class="text-center" rowspan="2">' +
+            '<label for="stdcount"> ' + res.section_name + '</label>' +
+            '</td>';
+        bysubjectAllTable += '<td class="text-left" rowspan="2">' +
+            '<label for="clsname">' + res.subject_name + '</label>' +
+            '</td>';
+        bysubjectAllTable += '<td class="text-left" rowspan="2">' +
+            '<label for="clsname">' + res.totalstudentcount + '</label>' +
+            '</td>';
+        bysubjectAllTable += '<td class="text-left">' +
+            '<label for="clsname">' + res.absent_count + '</label>' +
+            '</td>';
+        bysubjectAllTable += '<td class="text-center">' +
+            '<label for="stdcount">' + res.present_count + '</label>' +
+            '</td>';
+        bysubjectAllTable += '<td class="text-left" rowspan="2">' +
+            '<label for="clsname">' + res.teacher_name + '</label>' +
+            '</td>';
+        headers.forEach(function (resp) {
+            var obj = res.gradecnt;
+            var exists = isKey(resp.grade, obj); // true
+            if (exists) {
+                Object.keys(obj).forEach(key => {
+                    if (resp.grade == key) {
+                        // bysubjectAllTable += '<td class="text-center">' + key, obj[key] + '</td>';
+                        bysubjectAllTable += '<td class="text-center">' + obj[key] + '</td>';
                     }
                 });
+            } else {
+                bysubjectAllTable += '<td class="text-center">0</td>';
             }
         });
-    });
-
-    $("#bysubjectTableAppend").append(bysubjectAllTable);
-}
-function bysubjectdetails_all(datasetnew) {
-
-    $('#bysubjectTableAppend').empty();
-    var passcount = 0;
-    var failcount = 0;
-    var pass_percentage = 0;
-    var fail_percentage = 0;
-    var sno = 0;
-    //var attendance_pass_fail = [];
-    var bysubjectAllTable = "";
-    console.log(datasetnew);
-    datasetnew.forEach(function (res) {
-        var subname = res.subject_name;
-        var techname = res.teacher_name;
-        var grade_count_master = res.grad_count_master;
-        console.log(subname);
-        var std_count = res.totalstudentcount;
-
-        // std count and names
-        std_count.forEach(function (tot) {
-            //  console.log(tot.totalStudentCount);
-            if (tot.totalStudentCount > 0) {
-                var attendance_con = res.attendance_list;
-                attendance_con.forEach(function (attCondition) {
-
-                    if (attCondition.pass != null && attCondition.fail != null) {
-                        sno++;
-                        bysubjectAllTable += '<tr>' +
-                            '<td class="text-center" rowspan="2">';
-                        bysubjectAllTable += sno +
-                            '</td>';
-                        // console.log(tot.totalStudentCount);
-
-                        bysubjectAllTable += '<td class="text-left" rowspan="2">' +
-                            '<label for="clsname">' + tot.name + '</label>' +
-                            '</td>';
-                        bysubjectAllTable += '<td class="text-center" rowspan="2">' +
-                            '<label for="stdcount"> ' + tot.section_name + '</label>' +
-                            '</td>';
-                        bysubjectAllTable += '<td class="text-center" rowspan="2">' +
-                            '<label for="stdcount"> ' + subname + '</label>' +
-                            '</td>';
-                        bysubjectAllTable += '<td class="text-center" rowspan="2">' +
-                            '<label for="stdcount"> ' + tot.totalStudentCount + '</label>' +
-                            '</td>';
-                        // Attendance present and absent column
-                        var attendance_percentage = [];
-                        var attendance_list = res.attendance_list;
-                        attendance_list.forEach(function (att) {
-                            bysubjectAllTable += '<td class="text-left">' +
-                                '<label for="clsname">' + att.absent + '</label>' +
-                                '</td>';
-                            bysubjectAllTable += '<td class="text-center">' +
-                                '<label for="stdcount"> ' + att.present + '</label>' +
-                                '</td>';
-
-                        });
-                        bysubjectAllTable += '<td class="text-left" rowspan="2">' +
-                            '<label for="clsname">' + techname + '</label>' +
-                            '</td>';
-                        // grade list count
-                        var grade_count_list = res.grade_count_list;
-                        var grade_list_count = grade_count_list.length;
-                        console.log(grade_list_count);
-                        var gradepercentage = [];
-                        $('#tblbycls > thead  > tr >th').each(function (index, tr) {
-                            var th = $('#tblbycls  thead  > tr >th').eq($(this).index());
-                            var nineindex = grade_count_master;
-                            var endgradeindex = (8 + nineindex);
-
-                            if (index >= 8 && endgradeindex > index) {
-                                var i = 0;
-                                grade_count_list.forEach(function (res) {
-                                    if (res.gname == th.text()) {
-                                        i++;
-                                        bysubjectAllTable += '<td class="text-right">' + res.gradecount + '</td>';
-                                        //       console.log('matched' + i);
-                                        // passcount += res.pass;
-                                        // failcount += res.fail;
-                                        var getval = res.gradecount / tot.totalStudentCount
-                                        var gper = getval * 100;
-                                        var gradeper = parseFloat(gper, 10).toFixed(2);
-                                        gradepercentage.push(gradeper);
-                                    }
-                                });
-                                if (i == 0) {
-                                    bysubjectAllTable += '<td class="text-right">0</td>'
-                                    gradepercentage.push(0);
-                                }
-
-                            }
-                        });
-                        //    console.log(attendance_pass_fail.length);
-                        attendance_list.forEach(function (res) {
-                            passcount = res.pass;
-                            failcount = res.fail;
-                            pass_percentage = (passcount / tot.totalStudentCount) * 100;
-                            fail_percentage = (failcount / tot.totalStudentCount) * 100;
-                            pass_percentage = parseFloat(pass_percentage, 10).toFixed(2);
-                            fail_percentage = parseFloat(fail_percentage, 10).toFixed(2);
-                            bysubjectAllTable += '<td class="text-center">' + passcount + '</td>' +
-                                '<td class="text-center">' + failcount + '</td>' +
-                                '<td class="text-center" rowspan="2">-</td>' +
-                                '<td class="text-center" rowspan="2">' + pass_percentage + '</td>' +
-                                '</tr>';
-
-                            // }
-
-                        });
-
-                        bysubjectAllTable += '<tr>';
-                        attendance_list.forEach(function (att_percentage) {
-                            var absent_persentage = att_percentage.absent / tot.totalStudentCount
-                            var ab_per = absent_persentage * 100;
-                            var absent_per = parseFloat(ab_per, 10).toFixed(2);
-                            //
-                            var present_persentage = att_percentage.present / tot.totalStudentCount
-                            var pre_per = present_persentage * 100;
-                            var present_per = parseFloat(pre_per, 10).toFixed(2);
-                            console.log(present_per);
-
-                            bysubjectAllTable += '<td class="text-right">' + absent_per + '</td>' +
-                                '<td class="text-right">' + present_per + '</td>';
-                        });
-                        gradepercentage.forEach(function (response) {
-
-                            bysubjectAllTable += '<td class="text-right">' + response + '</td>'
-                        });
-                        bysubjectAllTable += '<td class="text-right">' + pass_percentage + '</td>' +
-                            '<td class="text-right">' + fail_percentage + '</td>';
-                        bysubjectAllTable += '</tr>';
-                    }
-                    else {
-                        console.log('else print')
+        bysubjectAllTable += '<td class="text-center" rowspan="2">' + res.pass_count + '</td>' +
+            '<td class="text-center" rowspan="2">' + res.fail_count + '</td>' +
+            '<td class="text-center" rowspan="2">-</td>' +
+            '<td class="text-center" rowspan="2">' + res.pass_percentage + '</td>';
+        bysubjectAllTable += '</tr>';
+        // show another row percentage
+        bysubjectAllTable += '<tr>';
+        var absentPer = (res.absent_count / res.totalstudentcount) * 100;
+        absentPer = parseFloat(absentPer, 10).toFixed(2);
+        var presentPer = (res.present_count / res.totalstudentcount) * 100;
+        presentPer = parseFloat(presentPer, 10).toFixed(2);
+        bysubjectAllTable += '<td class="text-left">' +
+            '<label for="clsname">' + absentPer + '</label>' +
+            '</td>';
+        bysubjectAllTable += '<td class="text-center">' +
+            '<label for="stdcount">' + presentPer + '</label>' +
+            '</td>';
+        headers.forEach(function (resp) {
+            var obj = res.gradecnt;
+            var exists = isKey(resp.grade, obj); // true
+            if (exists) {
+                Object.keys(obj).forEach(key => {
+                    if (resp.grade == key) {
+                        // bysubjectAllTable += '<td class="text-center">' + key, obj[key] + '</td>';
+                        var gradepercentage = (obj[key] / res.totalstudentcount) * 100;
+                        gradepercentage = parseFloat(gradepercentage, 10).toFixed(2);
+                        bysubjectAllTable += '<td class="text-center">' + gradepercentage + '</td>';
                     }
                 });
+            } else {
+                bysubjectAllTable += '<td class="text-center">0</td>';
             }
         });
+        bysubjectAllTable += '</tr>';
+
     });
 
+    bysubjectAllTable += '</tbody></table>' +
+        '</div>';
     $("#bysubjectTableAppend").append(bysubjectAllTable);
 }
-
+// find matched
+function isKey(key, obj) {
+    var keys = Object.keys(obj).map(function (x) {
+        return x;
+    });
+    return keys.indexOf(key) !== -1;
+}
 // studentDetails
 function byclass_chart(class_id, section_id, exam_id) {
 
     $.post(getgradeBysubject, { token: token, branch_id: branchID, exam_id: exam_id, class_id: class_id, section_id: section_id }, function (response) {
         if (response.code == 200) {
-            console.log('res');
-            console.log(response.data);
 
             var late_details = response.data;
             var stdmarks_grade = late_details.getgradecount_nosubj_studmarks;
             var stdmarks_subjdiv_grade = late_details.getgradecount_nosubj_division;
             // var result= compatrearray(stdmarks_grade,stdmarks_subjdiv_grade);
-            console.log(stdmarks_grade);
             // var array1 = [["A+", 2], ["B1", 1], ["B2", 1], ["C1", 1], ["C2", 1],["D", 1],["E2", 1]];  
             // var array2 = [["A+", 1], ["C1", 3], ["E2", 1]];  
-            var array1 = stdmarks_grade;  
+            var array1 = stdmarks_grade;
             var array2 = stdmarks_subjdiv_grade;
-            var result =  
-                array1.concat(array2)  
-                    .reduce(function (ob, ar) {  
-                        if (!(ar[0] in ob.nums)) {  
-                            ob.nums[ar[0]] = ar  
-                            ob.result.push(ar)  
-                        } else {  
-                            ob.nums[ar[0]][1] += ar[1]  
-                        }  
-                        return ob  
-                    }, { nums: {}, result: [] }).result  
-                    .sort(function (a, b) {  
-                        return new Date(a[0]) - new Date(b[0]);  
-                    });  
-                console.log(result);
-
-
-            //     compare_gradecount=[];
-            // $('#tblbycls > thead  > tr >th').each(function (index, tr) {
-            //     var th = $('#tblbycls  thead  > tr >th').eq($(this).index());
-            //     var nineindex = globel_gradecount;
-            //     var endgradeindex = (8 + nineindex);
-
-            //     if (index >= 8 && endgradeindex > index) {
-            //         var i = 0;
-            //         console.log(th.text()+"aa");
-            //         stdmarks_grade.forEach(function (res) {
-            //             if (res.gname == th.text()) {
-            //                 i++;
-            //                     stdmarks_subjdiv_grade.forEach(function (subjdiv) {
-            //                     if(res.gname==subjdiv.gname)
-            //                     {
-            //                         var gradename;
-            //                         var gradecount=0;
-            //                         gradecount =res.gradecount + subjdiv.gradecount;
-            //                         compare_gradecount.push(res.gname,gradecount);
-            //                     }
-            //                     else{
-            //                         compare_gradecount.push(res.gname,res.gradecount);
-            //                     }
-            //                 });
-                          
-            //             }
-            //         });
-                   
-            //         if (i == 0) {
-                       
-            //         }
-            //         console.log(compare_gradecount);
-
-            //     }
-            // });
-            
+            var result =
+                array1.concat(array2)
+                    .reduce(function (ob, ar) {
+                        if (!(ar[0] in ob.nums)) {
+                            ob.nums[ar[0]] = ar
+                            ob.result.push(ar)
+                        } else {
+                            ob.nums[ar[0]][1] += ar[1]
+                        }
+                        return ob
+                    }, { nums: {}, result: [] }).result
+                    .sort(function (a, b) {
+                        return new Date(a[0]) - new Date(b[0]);
+                    });
             var labels = [];
             var resonsCount = [];
             if (late_details.length > 0) {
@@ -516,7 +263,6 @@ function byclass_chart(class_id, section_id, exam_id) {
                     resonsCount.push(value);
                 });
             }
-            console.log(labels, resonsCount);
             // chart
             renderChart(labels, resonsCount);
 
@@ -558,5 +304,7 @@ function renderChart(labels, resonsCount) {
 
 
 }
+
+
 
 

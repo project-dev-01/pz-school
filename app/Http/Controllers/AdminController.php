@@ -1577,15 +1577,15 @@ class AdminController extends Controller
     }
 
     // Section by Class
-    public function sectionByClass(Request $request)
-    {
-        $data = [
-            'class_id' => $request->class_id,
+    // public function sectionByClass(Request $request)
+    // {
+    //     $data = [
+    //         'class_id' => $request->class_id,
 
-        ];
-        $section = Helper::PostMethod(config('constants.api.section_by_class'), $data);
-        return $section;
-    }
+    //     ];
+    //     $section = Helper::PostMethod(config('constants.api.section_by_class'), $data);
+    //     return $section;
+    // }
     public function examByClassSec(Request $request)
     {
         $data = [

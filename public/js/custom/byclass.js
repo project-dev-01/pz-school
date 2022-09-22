@@ -56,7 +56,6 @@ $(function () {
 
             $("#overlay").fadeIn(300);
             var class_id = $("#changeClassName").val();
-            var Selected_classname = $('#changeClassName :selected').text();
             var subject_id = $("#subjectID").val();
 
             var exam_id = $("#examnames").val();
@@ -89,27 +88,35 @@ $(function () {
 
         };
     });
-
+    $(document).on('click', '.exportToExcel', function (e) {
+        // var table = $(this).prev('.table2excel');
+        var table = $('.table2excel');
+        if (table && table.length) {
+            var preserveColors = (table.hasClass('table2excel_with_colors') ? true : false);
+            $(table).table2excel({
+                // exclude: ".noExl",
+                name: "Excel Document Name",
+                filename: "by_class" + new Date().toISOString().replace(/[\-\:\.]/g, "") + ".xls",
+                fileext: ".xls",
+                exclude_img: true,
+                exclude_links: true,
+                exclude_inputs: true,
+                preserveColors: preserveColors
+            });
+        }
+    });
 });
+
 ///
 function bysubjectdetails(datasetnew) {
 
     $('#byclassTableAppend').empty();
-    var passcount = 0;
-    var failcount = 0;
-    var pass_percentage = 0;
-    var fail_percentage = 0;
     var sno = 0;
-    //var attendance_pass_fail = [];
     var bysubjectAllTable = "";
     var headers = datasetnew.headers;
     var allbysubject = datasetnew.allbysubject;
-    console.log(allbysubject);
-    console.log(headers);
-    // return false;
-    // return false;
     bysubjectAllTable += '<div class="table-responsive">' +
-        '<table id="tblbycls" class="table w-100 nowrap table-bordered table-striped">' +
+        '<table id="tblbycls" class="table w-100 nowrap table-bordered table-striped table2excel">' +
         '<thead>' +
         '<tr>' +
         '<th class="align-top" rowspan="2">S.no.</th>' +
@@ -178,11 +185,11 @@ function bysubjectdetails(datasetnew) {
         '</div>';
 
     $("#byclassTableAppend").append(bysubjectAllTable);
-    // find matched
-    function isKey(key, obj) {
-        var keys = Object.keys(obj).map(function (x) {
-            return x;
-        });
-        return keys.indexOf(key) !== -1;
-    }
+}
+// find matched
+function isKey(key, obj) {
+    var keys = Object.keys(obj).map(function (x) {
+        return x;
+    });
+    return keys.indexOf(key) !== -1;
 }
