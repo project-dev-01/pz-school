@@ -45,7 +45,8 @@
                             </div>
                             <div class="col-md-3" id="section_drp_div">
                                 <div class="form-group">
-                                    <label for="sectionID" id="lblsectionId">Class Name<span class="text-danger">*</span></label>
+                                    <label for="sectionID">Class Name<span class="text-danger">*</span>
+                                    </label>
                                     <select id="sectionID" class="form-control" name="section_id">
                                         <option value="">Select Section</option>
                                     </select>
@@ -89,44 +90,25 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="">
-                                <div class="table-responsive">
-                                    <table class="table w-100 nowrap table-bordered table-striped">
-                                        <thead id="bystudent_header">
+                            <div class="col-sm-12">
+                                <div id="byStudentTableAppend">
 
-                                        </thead>
-                                        <tbody id="bystudent_body">
-
-                                        </tbody>
-                                    </table>
-                                </div> <!-- end table-responsive-->
-                            </div> <!-- end card-box -->
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="clearfix mt-4">
+                                        <button type="button" class="btn btn-primary-bl waves-effect waves-light float-right exportToExcel">Download</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div> <!-- end col-->
                     </div>
                     <!-- end row-->
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card-box">
-
-                                <div class="table-responsive">
-                                    <table class="table w-100 nowrap table-bordered table-striped" id="tbl_bystudent">
-                                        <thead id="bystudent_subdiv_header">
-
-                                        </thead>
-                                        <tbody id="bystudent_subdiv_body">
-
-                                        </tbody>
-                                    </table>
-                                </div> <!-- end table-responsive-->
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col-->
-                    </div>
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
         </div> <!-- end col -->
 
     </div>
-    <div class="row" id="bystudent_analysis">
+    <!-- <div class="row" id="bystudent_analysis">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
@@ -134,26 +116,22 @@
 
                     <div class="mt-4 chartjs-chart">
                         <canvas id="radar-chart-test-bystudent" height="350" data-colors="#39afd1,#a17fe0"></canvas>
-                        <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
                     </div>
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
 </div> <!-- container -->
 
 @endsection
 @section('scripts')
+<script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
 <script>
-    var sectionByClass = "{{ route('admin.section_by_class') }}";
+    var sectionByClass = "{{ config('constants.api.exam_results_get_class_by_section') }}";
     var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
     var getbyStudent = "{{ config('constants.api.tot_grade_calcu_byStudent') }}";
-    var getbyClass_thead = "{{ config('constants.api.tot_grade_master') }}";
-    var Allexams = "{{ config('constants.api.all_exams_list') }}";
-    var getbySubjectAllstd = "{{ config('constants.api.all_bysubject_list') }}";
-    var getgradeBysubject = "{{ config('constants.api.get_grade_bysubject') }}";
-    var getbyStudent_subjectdivision = "{{ config('constants.api.tot_grade_calcu_byStdsubjectdiv') }}";
     // default image test
+    var teacher_id = null;
     var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
 </script>
 <script src="{{ asset('public/js/custom/bystudent.js') }}"></script>

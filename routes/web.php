@@ -293,7 +293,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin']], function () {
     Route::post('subject-by-class', [AdminController::class, 'subjectByClass'])->name('admin.subject_by_class');
 
     // Section By Class Route
-    // Route::post('section-by-class', [AdminController::class, 'sectionByClass'])->name('admin.section_by_class');
+    Route::post('section-by-class', [AdminController::class, 'sectionByClass'])->name('admin.section_by_class');
     Route::get('exam-by-classSection', [AdminController::class, 'examByClassSec'])->name('admin.exam_by_classSection');
 
     // Employee routes

@@ -95,7 +95,7 @@ $(function () {
             var preserveColors = (table.hasClass('table2excel_with_colors') ? true : false);
             $(table).table2excel({
                 // exclude: ".noExl",
-                name: "Excel Document Name",
+                name: "By Class",
                 filename: "by_class" + new Date().toISOString().replace(/[\-\:\.]/g, "") + ".xls",
                 fileext: ".xls",
                 exclude_img: true,

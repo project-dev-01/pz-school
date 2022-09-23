@@ -109,13 +109,11 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('subject-by-exam-names', [ApiController::class, 'getsubjectByAssignTest']);
 
     Route::post('timetable-subject', [ApiController::class, 'timetableSubject']);
-    Route::get('tot_grade_calcu_byStudent', [ApiController::class, 'totgradeCalcuByStudent']);
     Route::get('tot_grade_calcu_byStdsubjectdiv', [ApiController::class, 'totgradecalcubyStudent_subjectdiv']);
     Route::get('tot_grade_calcu_overall', [ApiController::class, 'tot_grade_calcu_overall']);
     Route::get('tot_grade_master', [ApiController::class, 'totgrademaster']);
     Route::post('all_exams_list', [ApiController::class, 'allexamslist']);
     Route::get('all_std_list', [ApiController::class, 'allstdlist']);
-    Route::get('all_bysubject_list', [ApiController::class, 'allbysubjectlist']);
     Route::post('get_grade_bysubject', [ApiController::class, 'getGradebysubject']);
     Route::post('getbyresult', [ApiController::class, 'getbyresult_student']);
     // Event Type routes
@@ -598,5 +596,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('exam_results/get_class_by_section', [ApiControllerOne::class, 'getClassBySection']);
     Route::post('exam-by-classSection', [ApiControllerOne::class, 'examByClassSec']);
     Route::post('tot_grade_calcu_bySubject', [ApiControllerOne::class, 'totgradeCalcuBySubject']);
+    // by student
+    Route::post('tot_grade_calcu_byStudent', [ApiControllerOne::class, 'totgradeCalcuByStudent']);
 
 });

@@ -59,12 +59,10 @@ return [
         'tot_grade_calcu_byclass'=>$url.'/tot_grade_calcu_byclass',
         'tot_grade_calcu_bySubject'=>$url.'/tot_grade_calcu_bySubject',
         'tot_grade_calcu_byStudent'=>$url.'/tot_grade_calcu_byStudent',
-        'tot_grade_calcu_byStdsubjectdiv'=>$url.'/tot_grade_calcu_byStdsubjectdiv',
         'tot_grade_calcu_overall'=>$url.'/tot_grade_calcu_overall',
         'tot_grade_master'=>$url.'/tot_grade_master',
         'all_exams_list'=>$url.'/all_exams_list',
         'all_std_list'=>$url.'/all_std_list',
-        'all_bysubject_list'=>$url.'/all_bysubject_list',
         'get_grade_bysubject'=>$url.'/get_grade_bysubject',
         'get_paper_list'=>$url.'/get_paper_list',
         

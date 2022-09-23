@@ -1,4 +1,3 @@
-var globel_gradecount = [];
 var reasonChart;
 $(function () {
     // change classroom
@@ -60,7 +59,6 @@ $(function () {
         var byclass = $("#bysubjectfilter").valid();
         if (byclass === true) {
             $("#overlay").fadeIn(300);
-            globel_gradecount = [];
             var class_id = $("#changeClassName").val();
             var section_id = $("#sectionID").val();
             var exam_id = $("#examnames").val();
@@ -93,7 +91,7 @@ $(function () {
             var preserveColors = (table.hasClass('table2excel_with_colors') ? true : false);
             $(table).table2excel({
                 // exclude: ".noExl",
-                name: "Excel Document Name",
+                name: "By Subject",
                 filename: "by_subjects" + new Date().toISOString().replace(/[\-\:\.]/g, "") + ".xls",
                 fileext: ".xls",
                 exclude_img: true,
