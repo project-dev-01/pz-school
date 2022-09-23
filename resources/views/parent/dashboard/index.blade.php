@@ -38,6 +38,53 @@
     .pr-2 {
         width: 150px;
     }
+
+    .table td {
+        border-top: none;
+    }
+
+    .homework-list {
+        display: inline-block;
+        position: relative;
+        padding-right: 10px;
+    }
+
+    .homework-list::after {
+        content: ":";
+        position: absolute;
+        right: 10px;
+    }
+
+    .hover1:hover {
+        background-color: #D1E9EF;
+    }
+
+
+    /* Schedule Popup Mediaquery  */
+    @media screen and (min-device-width: 320px) and (max-device-width: 660px) {
+        .popupresponsive {
+            margin: 0px -65px 0px -70px;
+            word-wrap: break-word;
+        }
+    }
+
+    @media screen and (min-device-width: 280px) and (max-device-width: 653px) {
+        .popupresponsive {
+            margin: 0px -78px 0px -78px;
+
+        }
+
+        .eventpopup {
+            margin: 0px -30px 0px -27px;
+        }
+    }
+
+    @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        .popupresponsive {
+            margin: 0px -65px 0px -65px;
+        }
+
+    }
 </style>
 
 <!-- Start Content-->
@@ -247,7 +294,8 @@
                                                         <div class="col-lg-6">
                                                             <div class="d-sm-flex justify-content-between">
                                                                 <div>
-                                                                <img src="{{ asset('public/images/users/12.jpg') }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />                                                                </div>
+                                                                    <img src="{{ asset('public/images/users/12.jpg') }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
+                                                                </div>
                                                                 <div class="mt-3 mt-sm-0">
                                                                     <ul class="list-inline font-13 text-sm-center">
                                                                         <li class="list-inline-item pr-1" id="comments{{ $old['id'] }}">
@@ -332,7 +380,7 @@
                                                     <div class="card-body pb-0" id="task-list-one">
                                                         <!-- task -->
                                                         <div class="row">
-                                                            <div class="col-sm-2">
+                                                            <div class="col-sm-6">
                                                                 <a href="{{ route('parent.homework')}}">{{$homework['subject_name']}} </a>
                                                             </div> <!-- end col -->
                                                             <div class="col-sm-6">
@@ -344,8 +392,8 @@
                                                                         </div> -->
                                                                     <div class="mt-3 mt-sm-0">
                                                                         <ul class="list-inline font-13 text-sm-right">
-                                                                            <li class="list-inline-item">
-                                                                                <span class="badge badge-soft-danger">InComplete</span>
+                                                                            <li class="list-inline-item" style="margin-right: 45px; margin-left:25px;margin-bottom: 10px;">
+                                                                                <span class="badge badge-soft-danger" style="padding:8px 22px;">InComplete</span>
                                                                             </li>
                                                                             <li class="list-inline-item pr-1">
                                                                                 <i class='mdi mdi-calendar-month-outline font-16'></i>
@@ -420,304 +468,319 @@
                     <div class="modal-content">
                         <div class="modal-header py-3 px-4 border-bottom-0 d-block">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h5 class="modal-title">Schedule</h5>
+                            <h5 class="modal-title" style="color: #6FC6CC">Schedule</h5>
                         </div>
                         <div class="modal-body p-4">
                             <form id="addStudentReport">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="col-md-12 font-weight-bold">Standard </div>
-                                    </div>
-                                    <div class="col-1">
-                                        <div class="col-md-12 font-weight-bold">:</div>
-                                    </div>
-                                    <div class="col-7">
+                                <div class="card popupresponsive" style="line-height: 40px; padding: 12px 40px 0px 40px; background-color: #8adfee14; ">
 
-                                        <input type="hidden" id="setCurDate" name="date">
-                                        <input type="hidden" id="ttclassID" name="class_id">
-                                        <input type="hidden" id="ttsemesterID" name="semester_id">
-                                        <input type="hidden" id="ttsessionID" name="session_id">
-                                        <div class="col-md-12" id="standard-name"></div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="col-md-12 font-weight-bold">Section </div>
-                                    </div>
-                                    <div class="col-1">
-                                        <div class="col-md-12 font-weight-bold">:</div>
-                                    </div>
-                                    <div class="col-7">
-                                        <input type="hidden" id="ttSectionID" name="section_id">
-                                        <div class="col-md-12" id="section-name"></div>
-                                    </div>
-
-                                    <div class="col-4">
-                                        <div class="col-md-12 font-weight-bold">Subject Name </div>
-                                    </div>
-                                    <div class="col-1">
-                                        <div class="col-md-12 font-weight-bold">:</div>
-                                    </div>
-                                    <div class="col-7">
-                                        <input type="hidden" id="ttSubjectID" name="subject_id">
-                                        <div class="col-md-12" id="subject-name"></div>
-                                    </div>
-
-                                    <div class="col-4">
-                                        <div class="col-md-12 font-weight-bold">Timing </div>
-                                    </div>
-                                    <div class="col-1">
-                                        <div class="col-md-12 font-weight-bold">:</div>
-                                    </div>
-                                    <div class="col-7">
-                                        <input type="hidden" id="ttDate">
-                                        <div class="col-md-12" id="timing-class"></div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="col-md-12 font-weight-bold">Teacher Name </div>
-                                    </div>
-                                    <div class="col-1">
-                                        <div class="col-md-12 font-weight-bold">:</div>
-                                    </div>
-                                    <div class="col-7">
-                                        <div class="col-md-12" id="teacher-name"></div>
-                                    </div>
                                     <div class="col-12">
-                                        <textarea class="form-control" disabled style="margin: 12px;" placeholder="Enter your notes" id="calNotes" name="student_remarks"></textarea>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div> <!-- end modal-content-->
-                </div> <!-- end modal dialog-->
-            </div>
-
-            <div class="modal fade viewEvent" id="event-modal" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myviewEventModalLabel"> <i class="fas fa-info-circle"></i> Event Details </h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="card-box">
-                                        <div class="table-responsive">
-                                            <table class="table mb-0">
-                                                <tr>
-                                                    <td>Title</td>
-                                                    <td id="title"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Type</td>
-                                                    <td id="type"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Start Date</td>
-                                                    <td id="start_date"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>End Date</td>
-                                                    <td id="end_date"></td>
-                                                </tr>
-                                                <tr id="start_time_row" style="display:none">
-                                                    <td>Start Time</td>
-                                                    <td id="start_time"></td>
-                                                </tr>
-                                                <tr id="end_time_row" style="display:none">
-                                                    <td>End Time</td>
-                                                    <td id="end_time"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Audience</td>
-                                                    <td id="audience"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Description</td>
-                                                    <td id="description"></td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div> <!-- end card-box -->
-                                </div> <!-- end col -->
-                            </div>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-            <!-- end modal-->
-        </div>
-        <!-- end col-12 -->
-    </div> <!-- end row -->
-
-
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">Test Score Analysis
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
-                    <div class="mt-4 chartjs-chart">
-                        <canvas id="radar-chart-test-marks" data-colors="#39afd1,#a17fe0"></canvas>
-                        <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
-                    </div>
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-    </div>
-    <!--General Details -->
-
-    <div class="row">
-        <div class="col-xl-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv"> General Details
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
-                    <form id="stdGeneralDetails" method="post" action="{{ route('parent.studentleave.add') }}">
-                        @csrf
-                        <input type="hidden" name="class_id" id="listModeClassID">
-                        <input type="hidden" name="section_id" id="listModeSectionID" />
-                        <input type="hidden" name="student_id" id="listModestudentID" />
-                        <input type="hidden" name="reasons" id="listModereason" />
-                        <input type="hidden" name="reasonstxt" id="listModereasontext" />
-                        <!--1st row-->
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="changeStdName">Student Name<span class="text-danger">*</span></label>
-                                    <select id="changeStdName" class="form-control" name="changeStdName">
-                                        <option value="">Select Student</option>
-                                        @forelse ($get_std_names_dashboard as $std)
-                                        <option value="{{ $std['id'] }}" data-classid="{{ $std['class_id'] }}" data-sectionid="{{ $std['section_id'] }}" {{ Session::get('student_id') == $std['id'] ? 'selected' : ''}}>{{ $std['name'] }}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="heard">Leave From<span class="text-danger">*</span></label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <span class="far fa-calendar-alt"></span>
+                                        <div class="row hover1">
+                                            <div class="col-6">
+                                                <div class="col-md-12 font-weight-bold homework-list">Standard </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="hidden" id="setCurDate" name="date">
+                                                <input type="hidden" id="ttclassID" name="class_id">
+                                                <input type="hidden" id="ttsemesterID" name="semester_id">
+                                                <input type="hidden" id="ttsessionID" name="session_id">
+                                                <div class="col-md-12" id="standard-name"></div>
                                             </div>
                                         </div>
-                                        <input type="text" autocomplete="off" name="frm_ldate" class="form-control" id="frm_ldate">
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="heard">To<span class="text-danger">*</span></label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <span class="far fa-calendar-alt"></span>
+
+                                    <div class="col-12">
+                                        <div class="row hover1">
+                                            <div class="col-6">
+                                                <div class="col-md-12 font-weight-bold homework-list">Section </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="hidden" id="ttSectionID" name="section_id">
+                                                <div class="col-md-12" id="section-name"></div>
                                             </div>
                                         </div>
-                                        <input type="text" autocomplete="off" name="to_ldate" class="form-control" id="to_ldate">
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--2st row-->
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="changelev">Reason(s)<span class="text-danger">*</span></label>
-                                    <select id="changelevReasons" class="form-control" name="changelevReasons">
-                                        <option value="">Select Student</option>
-                                        @forelse ($get_leave_reasons_dashboard as $res)
-                                        <option value="{{ $res['id'] }}">{{ $res['name'] }}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4" id="remarks_div" style="display:none;">
-                                <div class="form-group">
-                                    <label for="heard">Remarks</label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                        </div>
-                                        <input type="text" name="remarks" class="form-control" id="remarks">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="document">Attachment File</label>
 
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" id="homework_file" class="custom-file-input" name="file">
-                                            <label class="custom-file-label" for="document">Choose file</label>
+
+                                    <div class="col-12">
+                                        <div class="row hover1">
+                                            <div class="col-6">
+                                                <div class="col-md-12 font-weight-bold homework-list">Subject Name </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="hidden" id="ttSubjectID" name="subject_id">
+                                                <div class="col-md-12" id="subject-name"></div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <span id="file_name"></span>
 
+
+                                    <div class="col-12">
+                                        <div class="row hover1">
+                                            <div class="col-6">
+                                                <div class="col-md-12 font-weight-bold homework-list">Timing </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="hidden" id="ttDate">
+                                                <div class="col-md-12" id="timing-class"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="row hover1">
+                                            <div class="col-6">
+                                                <div class="col-md-12 font-weight-bold homework-list">Teacher Name </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="col-md-12" id="teacher-name"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <textarea class="form-control" style="margin: 5px 0px 10px 0px;" placeholder="Enter your notes" id="calNotes" name="student_remarks"></textarea>
+                                    </div>
+
+                                    <div class="col-11 text-right">
+                                        <button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
+                                    </div>
                                 </div>
-                            </div>
                         </div>
-                        <div class="form-group text-right m-b-0">
-                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                Apply
-                            </button>
-                            <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                                    Cancel
-                                </button>-->
-                        </div>
-
-                    </form>
-
-                </div> <!-- end card-body -->
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xl-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">Leave status
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table w-100 nowrap" id="studentleave-table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Student Name</th>
-                                    <th>Leave From</th>
-                                    <th>To From</th>
-                                    <th>Teacher remarks</th>
-                                    <th>Reason</th>
-                                    <th>Document</th>
-                                    <th>Status</th>
-                                    <th>Apply Date</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+                        </form>
                     </div>
+                </div> <!-- end modal-content-->
+            </div> <!-- end modal dialog-->
+        </div>
+
+        <div class="modal fade viewEvent" id="event-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myviewEventModalLabel" style="color: #6FC6CC"> <i class="fas fa-info-circle"></i> Event Details </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-box eventpopup" style="background-color: #8adfee14;">
+                                    <div class="table-responsive">
+                                        <table class="table mb-0">
+                                            <tr>
+                                                <td>Title</td>
+                                                <td id="title"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Type</td>
+                                                <td id="type"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Start Date</td>
+                                                <td id="start_date"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>End Date</td>
+                                                <td id="end_date"></td>
+                                            </tr>
+                                            <tr id="start_time_row" style="display:none">
+                                                <td>Start Time</td>
+                                                <td id="start_time"></td>
+                                            </tr>
+                                            <tr id="end_time_row" style="display:none">
+                                                <td>End Time</td>
+                                                <td id="end_time"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Audience</td>
+                                                <td id="audience"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Description</td>
+                                                <td id="description"></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div> <!-- end card-box -->
+                            </div> <!-- end col -->
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <!-- end modal-->
+    </div>
+    <!-- end col-12 -->
+</div> <!-- end row -->
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <h4 class="navv">Test Score Analysis
+                        <h4>
+                </li>
+            </ul><br>
+            <div class="card-body">
+                <div class="mt-4 chartjs-chart">
+                    <canvas id="radar-chart-test-marks" data-colors="#39afd1,#a17fe0"></canvas>
+                    <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
                 </div>
-            </div>
+            </div> <!-- end card-body-->
         </div> <!-- end card-->
     </div> <!-- end col -->
-    @include('parent.dashboard.check_list')
-    @include('parent.dashboard.exam-schedule')
+</div>
+<!--General Details -->
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <h4 class="navv"> General Details
+                        <h4>
+                </li>
+            </ul><br>
+            <div class="card-body">
+                <form id="stdGeneralDetails" method="post" action="{{ route('parent.studentleave.add') }}">
+                    @csrf
+                    <input type="hidden" name="class_id" id="listModeClassID">
+                    <input type="hidden" name="section_id" id="listModeSectionID" />
+                    <input type="hidden" name="student_id" id="listModestudentID" />
+                    <input type="hidden" name="reasons" id="listModereason" />
+                    <input type="hidden" name="reasonstxt" id="listModereasontext" />
+                    <!--1st row-->
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="changeStdName">Student Name<span class="text-danger">*</span></label>
+                                <select id="changeStdName" class="form-control" name="changeStdName">
+                                    <option value="">Select Student</option>
+                                    @forelse ($get_std_names_dashboard as $std)
+                                    <option value="{{ $std['id'] }}" data-classid="{{ $std['class_id'] }}" data-sectionid="{{ $std['section_id'] }}" {{ Session::get('student_id') == $std['id'] ? 'selected' : ''}}>{{ $std['name'] }}</option>
+                                    @empty
+                                    @endforelse
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="heard">Leave From<span class="text-danger">*</span></label>
+                                <div class="input-group input-group-merge">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <span class="far fa-calendar-alt"></span>
+                                        </div>
+                                    </div>
+                                    <input type="text" autocomplete="off" name="frm_ldate" class="form-control" id="frm_ldate">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="heard">To<span class="text-danger">*</span></label>
+                                <div class="input-group input-group-merge">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <span class="far fa-calendar-alt"></span>
+                                        </div>
+                                    </div>
+                                    <input type="text" autocomplete="off" name="to_ldate" class="form-control" id="to_ldate">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--2st row-->
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="changelev">Reason(s)<span class="text-danger">*</span></label>
+                                <select id="changelevReasons" class="form-control" name="changelevReasons">
+                                    <option value="">Select Student</option>
+                                    @forelse ($get_leave_reasons_dashboard as $res)
+                                    <option value="{{ $res['id'] }}">{{ $res['name'] }}</option>
+                                    @empty
+                                    @endforelse
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4" id="remarks_div" style="display:none;">
+                            <div class="form-group">
+                                <label for="heard">Remarks</label>
+                                <div class="input-group input-group-merge">
+                                    <div class="input-group-prepend">
+                                    </div>
+                                    <input type="text" name="remarks" class="form-control" id="remarks">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="document">Attachment File</label>
+
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" id="homework_file" class="custom-file-input" name="file">
+                                        <label class="custom-file-label" for="document">Choose file</label>
+                                    </div>
+                                </div>
+                                <span id="file_name"></span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group text-right m-b-0">
+                        <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                            Apply
+                        </button>
+                        <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                    Cancel
+                                </button>-->
+                    </div>
+
+                </form>
+
+            </div> <!-- end card-body -->
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <h4 class="navv">Leave status
+                        <h4>
+                </li>
+            </ul><br>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table w-100 nowrap" id="studentleave-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Student Name</th>
+                                <th>Leave From</th>
+                                <th>To From</th>
+                                <th>Teacher remarks</th>
+                                <th>Reason</th>
+                                <th>Document</th>
+                                <th>Status</th>
+                                <th>Apply Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end card-->
+</div> <!-- end col -->
+@include('parent.dashboard.check_list')
+@include('parent.dashboard.exam-schedule')
 
 </div> <!-- container -->
 @endsection

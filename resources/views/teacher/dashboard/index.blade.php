@@ -37,6 +37,51 @@
     .pr-2 {
         width: 150px;
     }
+
+    .table td {
+        border-top: none;
+    }
+
+    .homework-list {
+        display: inline-block;
+        position: relative;
+        padding-right: 10px;
+    }
+
+    .homework-list::after {
+        content: ":";
+        position: absolute;
+        right: 10px;
+    }
+
+    .hover1:hover {
+        background-color: #D1E9EF;
+    }
+
+    @media screen and (min-device-width: 320px) and (max-device-width: 660px) {
+        .popupresponsive {
+            margin: 0px -65px 0px -70px;
+            word-wrap: break-word;
+        }
+    }
+
+    @media screen and (min-device-width: 280px) and (max-device-width: 653px) {
+        .popupresponsive {
+            margin: 0px -78px 0px -78px;
+
+        }
+
+        .eventpopup {
+            margin: 0px -30px 0px -27px;
+        }
+    }
+
+    @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        .popupresponsive {
+            margin: 0px -65px 0px -65px;
+        }
+
+    }
 </style>
 
 <!-- Start Content-->
@@ -279,7 +324,7 @@
                                                         <div class="col-lg-6">
                                                             <div class="d-sm-flex justify-content-between">
                                                                 <div>
-                                                                <img src="{{ asset('public/images/users/12.jpg') }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
+                                                                    <img src="{{ asset('public/images/users/12.jpg') }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                                 </div>
                                                                 <div class="mt-3 mt-sm-0">
                                                                     <ul class="list-inline font-13 text-sm-center">
@@ -365,217 +410,226 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myviewEventModalLabel"> <i class="fas fa-info-circle"></i> Event Details </h4>
+                            <h4 class="modal-title" id="myviewEventModalLabel" style="color: #6FC6CC"> <i class="fas fa-info-circle"></i> Event Details </h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col">
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <tr>
-                                                    <td>Title</td>
-                                                    <td id="title"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Type</td>
-                                                    <td id="type"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Start Date</td>
-                                                    <td id="start_date"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>End Date</td>
-                                                    <td id="end_date"></td>
-                                                </tr>
-                                                <tr id="start_time_row" style="display:none">
-                                                    <td>Start Time</td>
-                                                    <td id="start_time"></td>
-                                                </tr>
-                                                <tr id="end_time_row" style="display:none">
-                                                    <td>End Time</td>
-                                                    <td id="end_time"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Audience</td>
-                                                    <td id="audience"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Description</td>
-                                                    <td id="description"></td>
-                                                </tr>
-                                            </table>
+                                    <div class="card-body eventpopup" style="background-color: #8adfee14;"">
+                                        <div class=" table-responsive">
+                                        <table class="table">
+                                            <tr>
+                                                <td>Title</td>
+                                                <td id="title"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Type</td>
+                                                <td id="type"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Start Date</td>
+                                                <td id="start_date"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>End Date</td>
+                                                <td id="end_date"></td>
+                                            </tr>
+                                            <tr id="start_time_row" style="display:none">
+                                                <td>Start Time</td>
+                                                <td id="start_time"></td>
+                                            </tr>
+                                            <tr id="end_time_row" style="display:none">
+                                                <td>End Time</td>
+                                                <td id="end_time"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Audience</td>
+                                                <td id="audience"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Description</td>
+                                                <td id="description"></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div> <!-- end card-box -->
+                            </div> <!-- end col -->
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <div class="modal fade " id="birthday-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myviewBirthdayModalLabel"> <i class="fas fa-info-circle"></i> Birthday </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-box">
+                                    <div class="table-responsive">
+                                        <p class="text-center"> Happy Birthday <span id="name"></span></p>
+                                    </div>
+                                </div> <!-- end card-box -->
+                            </div> <!-- end col -->
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <div class="modal fade " id="bulk-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myviewBulkModalLabel"> <i class="fas fa-info-circle"></i> Details </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-box">
+                                    <div class="table-responsive">
+                                        <p class="text-center"> Name :<span id="bulk_name"></span></p><br>
+                                    </div>
+                                </div> <!-- end card-box -->
+                            </div> <!-- end col -->
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <!-- Add New Event MODAL -->
+        <div class="modal fade" id="teacher-modal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header py-3 px-4 border-bottom-0 d-block">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h5 class="modal-title" style="color: #6FC6CC">Schedule</h5>
+                    </div>
+                    <div class="modal-body p-4">
+                        <form id="addDailyReport" method="post" action="{{ route('teacher.classroom.add_daily_report') }}" autocomplete="off">
+                            <div class="card popupresponsive" style="line-height: 40px; padding: 12px 40px 0px 40px; background-color: #8adfee14; ">
+
+                                <div class="col-12">
+                                    <div class="row hover1">
+                                        <div class="col-6">
+                                            <div class="col-md-12 font-weight-bold">Standard </div>
                                         </div>
-                                    </div> <!-- end card-box -->
-                                </div> <!-- end col -->
-                            </div>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-
-            <div class="modal fade " id="birthday-modal" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myviewBirthdayModalLabel"> <i class="fas fa-info-circle"></i> Birthday </h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="card-box">
-                                        <div class="table-responsive">
-                                            <p class="text-center"> Happy Birthday <span id="name"></span></p>
+                                        <div class="col-6">
+                                            <input type="hidden" id="setCurDate" name="date">
+                                            <input type="hidden" id="ttclassID" name="class_id">
+                                            <input type="hidden" id="ttsemesterID" name="semester_id">
+                                            <input type="hidden" id="ttsessionID" name="session_id">
+                                            <div class="col-md-12" id="standard-name"></div>
                                         </div>
-                                    </div> <!-- end card-box -->
-                                </div> <!-- end col -->
-                            </div>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-
-            <div class="modal fade " id="bulk-modal" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myviewBulkModalLabel"> <i class="fas fa-info-circle"></i> Details </h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="card-box">
-                                        <div class="table-responsive">
-                                            <p class="text-center"> Name :<span id="bulk_name"></span></p><br>
-                                        </div>
-                                    </div> <!-- end card-box -->
-                                </div> <!-- end col -->
-                            </div>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-            <!-- Add New Event MODAL -->
-            <div class="modal fade" id="teacher-modal" tabindex="-1">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header py-3 px-4 border-bottom-0 d-block">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h5 class="modal-title">Schedule</h5>
-                        </div>
-                        <div class="modal-body p-4">
-                            <form id="addDailyReport" method="post" action="{{ route('teacher.classroom.add_daily_report') }}" autocomplete="off">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="col-md-12 font-weight-bold">Standard </div>
-                                    </div>
-                                    <div class="col-1">
-                                        <div class="col-md-12 font-weight-bold">:</div>
-                                    </div>
-                                    <div class="col-7">
-
-                                        <input type="hidden" id="setCurDate" name="date">
-                                        <input type="hidden" id="ttclassID" name="class_id">
-                                        <input type="hidden" id="ttsemesterID" name="semester_id">
-                                        <input type="hidden" id="ttsessionID" name="session_id">
-                                        <div class="col-md-12" id="standard-name"></div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="col-md-12 font-weight-bold">Section </div>
-                                    </div>
-                                    <div class="col-1">
-                                        <div class="col-md-12 font-weight-bold">:</div>
-                                    </div>
-                                    <div class="col-7">
-                                        <input type="hidden" id="ttSectionID" name="section_id">
-                                        <div class="col-md-12" id="section-name"></div>
-                                    </div>
-
-                                    <div class="col-4">
-                                        <div class="col-md-12 font-weight-bold">Subject Name </div>
-                                    </div>
-                                    <div class="col-1">
-                                        <div class="col-md-12 font-weight-bold">:</div>
-                                    </div>
-                                    <div class="col-7">
-                                        <input type="hidden" id="ttSubjectID" name="subject_id">
-                                        <div class="col-md-12" id="subject-name"></div>
-                                    </div>
-
-                                    <div class="col-4">
-                                        <div class="col-md-12 font-weight-bold">Timing </div>
-                                    </div>
-                                    <div class="col-1">
-                                        <div class="col-md-12 font-weight-bold">:</div>
-                                    </div>
-                                    <div class="col-7">
-                                        <input type="hidden" id="ttDate">
-                                        <div class="col-md-12" id="timing-class"></div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="col-md-12 font-weight-bold">Teacher Name </div>
-                                    </div>
-                                    <div class="col-1">
-                                        <div class="col-md-12 font-weight-bold">:</div>
-                                    </div>
-                                    <div class="col-7">
-                                        <div class="col-md-12" id="teacher-name"></div>
-                                    </div>
-                                    <div class="col-12">
-                                        <!-- <div class="form-group"> -->
-                                        <!-- <label class="control-label font-weight-bold">Notes :</label> -->
-                                        <textarea class="form-control" style="margin: 12px;" placeholder="Enter your notes" id="calNotes" name="daily_report"></textarea>
-                                        <!-- </div> -->
                                     </div>
                                 </div>
-                                <div class="row mt-2">
-                                    <!-- <div class="col-6 text-right">
+
+                                <div class="col-12">
+                                    <div class="row hover1">
+                                        <div class="col-6">
+                                            <div class="col-md-12 font-weight-bold">Section </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="hidden" id="ttSectionID" name="section_id">
+                                            <div class="col-md-12" id="section-name"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="row hover1">
+                                        <div class="col-6">
+                                            <div class="col-md-12 font-weight-bold">Subject Name </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="hidden" id="ttSubjectID" name="subject_id">
+                                            <div class="col-md-12" id="subject-name"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-12">
+                                    <div class="row hover1">
+                                        <div class="col-6">
+                                            <div class="col-md-12 font-weight-bold">Timing </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="hidden" id="ttDate">
+                                            <div class="col-md-12" id="timing-class"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="row hover1">
+                                        <div class="col-6">
+                                            <div class="col-md-12 font-weight-bold">Teacher Name </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="col-md-12" id="teacher-name"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <!-- <div class="form-group"> -->
+                                    <!-- <label class="control-label font-weight-bold">Notes :</label> -->
+                                    <textarea class="form-control" style="margin: 5px 0px 10px 0px;" placeholder="Enter your notes" id="calNotes" name="daily_report"></textarea>
+                                    <!-- </div> -->
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <!-- <div class="col-6 text-right">
                                         <a href="{{ route('teacher.classroom.management')}}"><button type="button" class="btn btn-primary width-xs waves-effect waves-light">Go to Class</button></a>
                                     </div> -->
-                                    <div class="col-6 text-left">
-                                        <button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
-                                    </div>
-                                    <div class="col-6 text-right">
-                                        <!-- <button type="button" class="btn btn-light mr-1" data-dismiss="modal">Close</button> -->
-                                        <button type="button" id="goToClassRoom" class="btn btn-primary width-xs waves-effect waves-light">Go to Classroom</button>
-                                    </div>
+                                <div class="col-6 text-left">
+                                    <button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
                                 </div>
-                            </form>
-                        </div>
-                    </div> <!-- end modal-content-->
-                </div> <!-- end modal dialog-->
-            </div>
-        </div>
-        <!-- end col-12 -->
-    </div> <!-- end row -->
-
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                            Top Scoreres of class
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
-                    <div class="mt-4 chartjs-chart">
-                        <div id="chart-hor-stack-bar-chart" style="min-height: 365px;"></div>
-                        <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
+                                <div class="col-6 text-right">
+                                    <!-- <button type="button" class="btn btn-light mr-1" data-dismiss="modal">Close</button> -->
+                                    <button type="button" id="goToClassRoom" class="btn btn-primary width-xs waves-effect waves-light">Go to Classroom</button>
+                                </div>
+                            </div>
                     </div>
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
+                    </form>
+                </div>
+            </div> <!-- end modal-content-->
+        </div> <!-- end modal dialog-->
     </div>
-    @include('teacher.dashboard.check_list')
-    @include('teacher.dashboard.task')
-    @include('teacher.dashboard.task-show')
-    @include('teacher.dashboard.exam-schedule')
+</div>
+<!-- end col-12 -->
+</div> <!-- end row -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <h4 class="navv">
+                        Top Scoreres of class
+                        <h4>
+                </li>
+            </ul><br>
+            <div class="card-body">
+                <div class="mt-4 chartjs-chart">
+                    <div id="chart-hor-stack-bar-chart" style="min-height: 365px;"></div>
+                    <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
+                </div>
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div> <!-- end col -->
+</div>
+@include('teacher.dashboard.check_list')
+@include('teacher.dashboard.task')
+@include('teacher.dashboard.task-show')
+@include('teacher.dashboard.exam-schedule')
 
 </div> <!-- container -->
 @endsection

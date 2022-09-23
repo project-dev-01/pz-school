@@ -38,6 +38,51 @@
     .pr-2 {
         width: 150px;
     }
+
+    .table td {
+        border-top: none;
+    }
+
+    .homework-list {
+        display: inline-block;
+        position: relative;
+        padding-right: 10px;
+    }
+
+    .homework-list::after {
+        content: ":";
+        position: absolute;
+        right: 10px;
+    }
+
+    .hover1:hover {
+        background-color: #D1E9EF;
+    }
+
+    @media screen and (min-device-width: 320px) and (max-device-width: 660px) {
+        .popupresponsive {
+            margin: 0px -65px 0px -70px;
+            word-wrap: break-word;
+        }
+    }
+
+    @media screen and (min-device-width: 280px) and (max-device-width: 653px) {
+        .popupresponsive {
+            margin: 0px -78px 0px -78px;
+
+        }
+
+        .eventpopup {
+            margin: 0px -30px 0px -27px;
+        }
+    }
+
+    @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        .popupresponsive {
+            margin: 0px -65px 0px -65px;
+        }
+
+    }
 </style>
 
 <!-- Start Content-->
@@ -470,20 +515,15 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myviewEventModalLabel"> <i class="fas fa-info-circle"></i> Event Details </h4>
+                            <h4 class="modal-title" id="myviewEventModalLabel" style="color: #6FC6CC"> <i class="fas fa-info-circle"></i> Event Details </h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col">
-                                    <div class="card-box">
+                                    <div class="card-box eventpopup" style="background-color: #8adfee14;">
                                         <div class="table-responsive">
                                             <table class="table mb-0">
-                                                <style>
-                                                    .table td {
-                                                        border-top: none;
-                                                    }
-                                                </style>
                                                 <tr>
                                                     <td>Title</td>
                                                     <td id="title"></td>

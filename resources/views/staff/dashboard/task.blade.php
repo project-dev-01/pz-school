@@ -3,13 +3,13 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myaddTasksModalLabel">Add</h4>
+                <h4 class="modal-title" id="myaddTasksModalLabel" style="color: #6FC6CC">Add</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
                 <form id="taskAdd" autocomplete="off">
                     @csrf
-                    <div class="form-group">
+                    <div class="form-group" style="background-color: #8adfee14;">
                         <label for="title">Title <span class="text-danger">*</span></label>
                         <input type="text" id="taskTitle" name="title" class="form-control" placeholder="Enter title">
                         <span id="titleError" class="text-danger"></span>

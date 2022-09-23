@@ -711,7 +711,7 @@ $(function () {
                                 }
                             }
                         }
-                        var pass_fail = '<span class="badge badgeLabel' + row.student_id + ' ' + passTag + ' badge-pill lbl_pass_fail' + row.student_id + '">' + (data != "null" ? data : "-") + '</span>' +
+                        var pass_fail = '<span class="badge badgeLabel' + row.student_id + ' ' + passTag + ' badge-pill lbl_pass_fail' + row.student_id + '" style="padding:5px 20px 5px 20px;">' + (data != "null" ? data : "-") + '</span>' +
                             '<input type="hidden" class="lbl_pass_fail' + row.student_id + '" name="subjectmarks[' + meta.row + '][pass_fail]" value="' + row.pass_fail + '">';
                         return pass_fail;
                     }

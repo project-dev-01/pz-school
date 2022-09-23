@@ -38,6 +38,13 @@
     .pr-2 {
         width: 150px;
     }
+
+    @media screen and (min-device-width: 280px) and (max-device-width: 653px) {
+        .eventpopup {
+            margin: 0px -30px 0px -27px;
+        }
+
+    }
 </style>
 
 <!-- Start Content-->
@@ -386,7 +393,7 @@
                                                         <div class="col-lg-6">
                                                             <div class="d-sm-flex justify-content-between">
                                                                 <div>
-                                                                <img src="{{ asset('public/images/users/12.jpg') }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
+                                                                    <img src="{{ asset('public/images/users/12.jpg') }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                                 </div>
                                                                 <div class="mt-3 mt-sm-0">
                                                                     <ul class="list-inline font-13 text-sm-center">
@@ -470,13 +477,13 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myviewEventModalLabel"> <i class="fas fa-info-circle"></i> Event Details </h4>
+                            <h4 class="modal-title" id="myviewEventModalLabel" style="color: #6FC6CC"> <i class="fas fa-info-circle"></i> Event Details </h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col">
-                                    <div class="card-box">
+                                    <div class="card-box eventpopup" style="background-color: #8adfee14;">
                                         <div class="table-responsive">
                                             <table class="table mb-0">
                                                 <style>
