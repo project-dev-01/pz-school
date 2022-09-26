@@ -631,7 +631,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('admin.exam.result')}}" class="nav-link {{ (request()->is('admin/exam*')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.exam.result')}}" class="nav-link {{ (request()->is('exam/result')) ? 'active' : '' }}">
                                                 <span>Individual Result </span>
                                             </a>
                                         </li>
