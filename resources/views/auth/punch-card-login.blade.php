@@ -60,7 +60,7 @@
 
                         <!-- form -->
                         <div class="form">
-                        <form id="getOtp" action="{{ route('employee.punchcarddetails') }}" method="post" enctype="multipart/form-data" autocomplete="off">
+                            <form id="getOtp" action="{{ route('employee.punchcarddetails') }}" method="post" enctype="multipart/form-data" autocomplete="off">
                                 @if ( Session::get('success'))
                                 <div class="alert alert-success">
                                     {{ Session::get('success') }}
@@ -77,11 +77,12 @@
                                     <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">SMK Kiaramas</span>
                                 </div>
                                 <input class="form-control" type="hidden" name="session" value="{{$session}}">
+                                <input class="form-control" type="hidden" name="branch_id" value="{{$branch_id}}">
                                 <div class="form-group">
-                                    <input class="form-control" type="email" id="email" name="email" value="{{Cookie::get('email')}}"  required placeholder="Enter your email">
+                                    <input class="form-control" type="email" id="email" name="email" value="{{Cookie::get('email')}}" required placeholder="Enter your email">
                                 </div>
-                                <div class="form-group"  >
-                                    <input class="form-control" type="password"  name="password" value="{{Cookie::get('password')}}" required placeholder="Enter your Password">
+                                <div class="form-group">
+                                    <input class="form-control" type="password" name="password" value="{{Cookie::get('password')}}" required placeholder="Enter your Password">
                                 </div>
                                 <div class="form-group mb-0 text-center">
                                     <button class="btn btn-block signin" type="submit">Sign In </button>

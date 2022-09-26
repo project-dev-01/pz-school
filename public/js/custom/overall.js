@@ -57,8 +57,8 @@ $(function () {
             $("#passmark").val(pmark);
             $("#card-body-tbl").fadeIn(300);
             $("analysis_graph").fadeIn(300);
-            // list mode
-            $.get(getoverall, { token: token, branch_id: branchID, exam_id: exam_id, class_id: class_id }, function (response) {
+            // get overall
+            $.post(getoverall, { token: token, branch_id: branchID, exam_id: exam_id, class_id: class_id }, function (response) {
 
                 if (response.code == 200) {
                     if (response.data.length > 0) {

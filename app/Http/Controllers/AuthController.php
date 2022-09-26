@@ -33,16 +33,17 @@ class AuthController extends Controller
     {
         return view('auth.loading');
     }
-    
+
     public function employeePunchCardLogin(Request $request, $branch, $session)
     {
-        
+
+        // dd($branch);
         $email = $request->cookie('email');
         $password = $request->cookie('password');
 
         $request['email'] = $email;
         $request['password'] = $password;
-        if($email && $password) {
+        if ($email && $password) {
             $branch_id = $request->cookie('branch_id');
             $user_id = $request->cookie('user_id');
             $data = [
@@ -54,26 +55,33 @@ class AuthController extends Controller
             $response = Http::post(config('constants.api.employee_punchcard_check'), $data);
             $output = $response->json();
             // dd($output);
-            return view('auth.punch-card',
+            return view(
+                'auth.punch-card',
                 [
                     'punchcard' => $output['data'],
                     'session' => $session
                 ]
             );
         } else {
-            return view('auth.punch-card-login')->with('session',$session);
+            return view(
+                'auth.punch-card-login',
+                [
+                    'branch_id' => $branch,
+                    'session' => $session
+                ]
+            )->with('session', $session);
         }
     }
     public function employeePunchCard(Request $request)
     {
-        
+
         $branch = $request->cookie('branch_id');
         $user = $request->cookie('user_id');
         $check_in = $request->check_in;
         $session = $request->session;
         // return $request;
         // dd($request);
-        if($check_in) {
+        if ($check_in) {
 
             $data = [
                 'branch_id' => $branch,
@@ -85,7 +93,7 @@ class AuthController extends Controller
 
         $check_out = $request->check_out;
         // dd($value);
-        if($check_out) {
+        if ($check_out) {
 
             $data = [
                 'branch_id' => $branch,
@@ -96,7 +104,7 @@ class AuthController extends Controller
         }
         // dd($data);
         $response = Http::post(config('constants.api.employee_punchcard'), $data);
-        
+
         // dd($response->json());
         return $response;
     }
@@ -108,9 +116,12 @@ class AuthController extends Controller
         $email = $request->email;
         $password = $request->password;
         $session = $request->session;
-        $check = Http::post(config('constants.api.login'), [
+        $branch_id = $request->branch_id;
+        // dd($branch_id);
+        $check = Http::post(config('constants.api.login_branch'), [
             'email' => $request->email,
             'password' => $request->password,
+            'branch_id' => $branch_id
         ]);
 
         $user_id = "";
@@ -122,10 +133,12 @@ class AuthController extends Controller
                 if ($userDetails['data']['user']['role_id'] != 1) {
                     $branch_id = $userDetails['data']['user']['branch_id'];
                     $user_id = $userDetails['data']['user']['user_id'];
+                    $name = $userDetails['data']['user']['name'];
                     Cookie::queue(Cookie::make('email', $email, $minutes));
                     Cookie::queue(Cookie::make('password', $password, $minutes));
                     Cookie::queue(Cookie::make('branch_id', $branch_id, $minutes));
                     Cookie::queue(Cookie::make('user_id', $user_id, $minutes));
+                    Cookie::queue(Cookie::make('name', $name, $minutes));
                 }
             } else {
                 return redirect()->back()->with('error', 'Access denied please contact admin');
@@ -142,7 +155,8 @@ class AuthController extends Controller
         $response = Http::post(config('constants.api.employee_punchcard_check'), $data);
         $output = $response->json();
         // dd($output);
-        return view('auth.punch-card',
+        return view(
+            'auth.punch-card',
             [
                 'punchcard' => $output['data'],
                 'session' => $session
@@ -150,7 +164,7 @@ class AuthController extends Controller
         );
     }
 
-    
+
 
     public function logoutPunchCard(Request $request)
     {
@@ -158,7 +172,7 @@ class AuthController extends Controller
         Cookie::queue(Cookie::forget('password'));
         Cookie::queue(Cookie::forget('branch_id'));
         Cookie::queue(Cookie::forget('user_id'));
-        return redirect()->route('employee.punchcard.login',['branch'=> $request->cookie('branch_id'), 'session' => 1]);
+        return redirect()->route('employee.punchcard.login', ['branch' => $request->cookie('branch_id'), 'session' => 1]);
     }
 
     public function showLoginFormSA(Request $request)

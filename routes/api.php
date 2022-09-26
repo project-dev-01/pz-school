@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('login', [AuthController::class, 'authenticate']);
+Route::post('login_branch', [AuthController::class, 'authenticateWithBranch']);
 Route::post('reset_password', [AuthController::class, 'resetPassword']);
 Route::post('reset_password_validation', [AuthController::class, 'resetPasswordValidation']);
 
@@ -110,7 +111,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
     Route::post('timetable-subject', [ApiController::class, 'timetableSubject']);
     Route::get('tot_grade_calcu_byStdsubjectdiv', [ApiController::class, 'totgradecalcubyStudent_subjectdiv']);
-    Route::get('tot_grade_calcu_overall', [ApiController::class, 'tot_grade_calcu_overall']);
     Route::get('tot_grade_master', [ApiController::class, 'totgrademaster']);
     Route::post('all_exams_list', [ApiController::class, 'allexamslist']);
     Route::get('all_std_list', [ApiController::class, 'allstdlist']);
@@ -598,5 +598,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('tot_grade_calcu_bySubject', [ApiControllerOne::class, 'totgradeCalcuBySubject']);
     // by student
     Route::post('tot_grade_calcu_byStudent', [ApiControllerOne::class, 'totgradeCalcuByStudent']);
-
+    // by overall
+    Route::post('tot_grade_calcu_overall', [ApiController::class, 'tot_grade_calcu_overall']);
 });

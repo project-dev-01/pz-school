@@ -44,7 +44,7 @@ class AuthController extends BaseController
                 return $this->send400Error('Email and password are wrong.', ['error' => 'Email and password are wrong']);
             }
         } catch (JWTException $e) {
-            return $credentials;
+            // return $credentials;
             return $this->send500Error('Could not create token.', ['error' => 'Could not create token']);
         }
         $user = auth()->user();
@@ -74,7 +74,43 @@ class AuthController extends BaseController
             return $this->send500Error('Your Account Locked, Please Contact Admin', ['error' => 'Your Account Locked, Please Contact Admin']);
         }
     }
+    public function authenticateWithBranch(Request $request)
+    {
+        $credentials = $request->only('email', 'password','branch_id');
+        //valid credential
+        $validator = Validator::make($credentials, [
+            'email' => 'required|email',
+            'password' => 'required|string|min:6|max:50',
+            'branch_id' => 'required'
+        ]);
 
+        //Send failed response if request is not valid
+        if ($validator->fails()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->messages()]);
+        }
+        //Request is validated
+        //Crean token
+        try {
+            if (!$token = JWTAuth::attempt($credentials)) {
+                return $this->send400Error('Email and password are wrong.', ['error' => 'Email and password are wrong']);
+            }
+        } catch (JWTException $e) {
+            // return $credentials;
+            return $this->send500Error('Could not create token.', ['error' => $credentials]);
+        }
+        $user = auth()->user();
+        if ($user->status == 0) {
+            $success['token'] = $token;
+            $success['user'] = $user;
+            $success['role_name'] = $user->role->role_name;
+            $success['subsDetails'] = $user->subsDetails;
+
+            //Token created, return with success response and jwt token
+            return $this->successResponse($success, 'User signed in successfully');
+        } else {
+            return $this->send500Error('Your Account Locked, Please Contact Admin', ['error' => 'Your Account Locked, Please Contact Admin']);
+        }
+    }
     public function logout(Request $request)
     {
         //valid credential
@@ -195,7 +231,7 @@ class AuthController extends BaseController
         }
     }
 
-    
+
     // employee punchcard check
     public function employeePunchCardCheck(Request $request)
     {
@@ -219,10 +255,10 @@ class AuthController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             $date = Carbon::now()->format('Y-m-d');
             $time = Carbon::now()->format('H:i:s');
-            if ($conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id],['session_id', '=', $request->session_id]])->count() > 0) {
+            if ($conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id], ['session_id', '=', $request->session_id]])->count() > 0) {
 
-               
-                $validate = $conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id],['session_id', '=', $request->session_id]])->first();
+
+                $validate = $conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id], ['session_id', '=', $request->session_id]])->first();
                 if ($validate->check_in && !$validate->check_out) {
                     $success['check_in'] = "Checked In";
                     $success['check_out'] = "Check Out";
@@ -235,7 +271,7 @@ class AuthController extends BaseController
                     $start = $conn->table('session')->where('id', '=', $request->session_id)->first();
                     $session_start = $start->time_from;
                     // return $session_start;
-                    if($time > $session_start) {
+                    if ($time > $session_start) {
 
                         $success['check_in'] = "Late Check In";
                     } else {
@@ -261,12 +297,12 @@ class AuthController extends BaseController
                     $success['check_in_time'] = $validate->check_in;
                     $success['check_out_time'] = $validate->check_out;
                 }
-            }else {
+            } else {
 
                 // return $request->session_id;
                 $start = $conn->table('session')->where('id', '=', $request->session_id)->first();
                 $session_start = $start->time_from;
-                if($time > $session_start) {
+                if ($time > $session_start) {
                     $success['check_in'] = "Late Check In";
                 } else {
                     $success['check_in'] = "Check In";
@@ -281,7 +317,7 @@ class AuthController extends BaseController
             return $this->successResponse($success, 'Status');
         }
     }
-    
+
     // employee punchcard
     public function employeePunchCard(Request $request)
     {
@@ -306,12 +342,12 @@ class AuthController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             $date = Carbon::now()->format('Y-m-d');
             $time = Carbon::now()->format('H:i:s');
-            if ($conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id],['session_id', '=', $request->session_id]])->count() > 0) {
+            if ($conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id], ['session_id', '=', $request->session_id]])->count() > 0) {
 
-                $validate = $conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id],['session_id', '=', $request->session_id]])->first();
-               
+                $validate = $conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id], ['session_id', '=', $request->session_id]])->first();
+
                 // return $validate;
-                if($request->check_in == 1) {
+                if ($request->check_in == 1) {
                     $check_in = $time;
 
                     $success['check_in'] = "Checked In";
@@ -323,8 +359,8 @@ class AuthController extends BaseController
                 } else if ($request->check_out == 1) {
                     $check_in = $validate->check_in;
                     $check_out = $time;
-                    
-                    if($check_in) {
+
+                    if ($check_in) {
 
                         $loginTime = strtotime($check_in);
                         $logoutTime = strtotime($check_out);
@@ -334,8 +370,8 @@ class AuthController extends BaseController
                     } else {
                         $success['check_in'] = "Not Check In";
                     }
-                    
-                        
+
+
                     $success['check_out'] = "Checked Out";
                     $success['check_in_status'] = "true";
                     $success['check_out_status'] = "true";
@@ -370,7 +406,7 @@ class AuthController extends BaseController
                     'staff_id' => $id,
                     'created_at' => date("Y-m-d H:i:s")
                 ]);
-            }else {
+            } else {
                 $query = $conn->table('staff_attendances')->insert([
                     'date' => $date,
                     'check_in' => $time,
@@ -380,7 +416,7 @@ class AuthController extends BaseController
                     'created_at' => date("Y-m-d H:i:s")
                 ]);
 
-                
+
 
                 $success['check_in'] = "Checked In";
                 $success['check_out'] = "Check Out";
