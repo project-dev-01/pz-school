@@ -1,7 +1,6 @@
 @include('punch_card_includes.header')
 @yield('css')
 </head>
-
 <body class="loading" data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": false}, "topbar": {"color": "dark"}, "showRightSidebarOnPageLoad": true}'>
     <!-- add spinner  -->
     <!-- <div id="overlay">

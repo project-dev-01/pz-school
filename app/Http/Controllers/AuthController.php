@@ -152,11 +152,9 @@ class AuthController extends Controller
             'id' => $user_id,
             'session_id' => $session
         ];
-        // dd($data);
         $response = Http::post(config('constants.api.employee_punchcard_check'), $data);
         $greetings = Helper::greetingMessage();
         $output = $response->json();
-        // dd($output);
         return view(
             'auth.punch-card',
             [

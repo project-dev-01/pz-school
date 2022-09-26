@@ -79,6 +79,7 @@
                                             <div class="col-8">
                                                 <p class="greetingText">
                                                     {{ $greetings }}
+
                                                 </p>
                                                 <h3 class="greetingName">{{ Cookie::get('name') }}</h3>
                                             </div>

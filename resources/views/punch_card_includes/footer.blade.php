@@ -3,14 +3,11 @@
 <!-- ============================================================== -->
 <!-- End Page content -->
 <!-- ============================================================== -->
-
-
 </div>
 <!-- END wrapper -->
 
 <!-- Vendor js -->
 <script src="{{ asset('public/js/vendor.min.js') }}"></script>
-<!-- init js -->
 <!-- App js-->
 <script src="{{ asset('public/js/app.min.js') }}"></script>
 

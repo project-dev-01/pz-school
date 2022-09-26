@@ -76,7 +76,7 @@ class AuthController extends BaseController
     }
     public function authenticateWithBranch(Request $request)
     {
-        $credentials = $request->only('email', 'password','branch_id');
+        $credentials = $request->only('email', 'password', 'branch_id');
         //valid credential
         $validator = Validator::make($credentials, [
             'email' => 'required|email',
@@ -122,7 +122,6 @@ class AuthController extends BaseController
         if ($validator->fails()) {
             return $this->send422Error('Validation error.', ['error' => $validator->messages()]);
         }
-
         //Request is validated, do logout        
         try {
             JWTAuth::invalidate($request->token);
