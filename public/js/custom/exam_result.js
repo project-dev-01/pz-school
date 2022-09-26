@@ -32,7 +32,7 @@ $(function () {
         today = yyyy + '/' + mm + '/' + dd;
         $("#byexamfilter").find("#examnames").empty();
         $("#byexamfilter").find("#examnames").append('<option value="">Select exams</option>');
-        $.get(examsByclassandsection, {
+        $.post(examsByclassandsection, {
             token: token,
             branch_id: branchID,
             class_id: class_id,
@@ -41,8 +41,7 @@ $(function () {
         }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
-                    var marks = JSON.parse(val.marks);
-                    $("#byexamfilter").find("#examnames").append('<option value="' + val.id + '" data-full="' + marks.full + '" data-pass="' + marks.pass + '">' + val.name + '</option>');
+                    $("#byexamfilter").find("#examnames").append('<option value="' + val.id + '">' + val.name + '</option>');
                 });
             }
         }, 'json');

@@ -1,15 +1,3 @@
-<!-- Footer Start -->
-<footer class="footer">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6">
-                2020 - {{ now()->year }} &copy; by <a href="https://paxsuzen.com">Paxsuzen</a>
-            </div>
-        </div>
-    </div>
-</footer>
-<!-- end Footer -->
-
 </div>
 
 <!-- ============================================================== -->
