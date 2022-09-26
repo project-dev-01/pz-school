@@ -47,6 +47,7 @@ class AuthController extends Controller
         if ($email && $password) {
             $branch_id = $request->cookie('branch_id');
             $user_id = $request->cookie('user_id');
+            $user_name = $request->cookie('user_name');
             $data = [
                 'branch_id' => $branch_id,
                 'id' => $user_id,
@@ -54,13 +55,15 @@ class AuthController extends Controller
             ];
             // dd($data);
             $response = Http::post(config('constants.api.employee_punchcard_check'), $data);
+            $greetings = Helper::greetingMessage();
             $output = $response->json();
-            // dd($output);
             return view(
                 'auth.punch-card',
                 [
                     'punchcard' => $output['data'],
-                    'session' => $session
+                    'session' => $session,
+                    'temp_user_name' => isset($user_name) ? $user_name : '-',
+                    'greetings' => $greetings
                 ]
             );
         } else {
@@ -134,12 +137,30 @@ class AuthController extends Controller
                 if ($userDetails['data']['user']['role_id'] != 1) {
                     $branch_id = $userDetails['data']['user']['branch_id'];
                     $user_id = $userDetails['data']['user']['user_id'];
-                    $name = $userDetails['data']['user']['name'];
+                    $user_name = $userDetails['data']['user']['name'];
+                    // dd($user_name);
                     Cookie::queue(Cookie::make('email', $email, $minutes));
                     Cookie::queue(Cookie::make('password', $password, $minutes));
                     Cookie::queue(Cookie::make('branch_id', $branch_id, $minutes));
                     Cookie::queue(Cookie::make('user_id', $user_id, $minutes));
-                    Cookie::queue(Cookie::make('name', $name, $minutes));
+                    Cookie::queue(Cookie::make('user_name', $user_name, $minutes));
+                    $data = [
+                        'branch_id' => $branch_id,
+                        'id' => $user_id,
+                        'session_id' => $session
+                    ];
+                    $response = Http::post(config('constants.api.employee_punchcard_check'), $data);
+                    $greetings = Helper::greetingMessage();
+                    $output = $response->json();
+                    return view(
+                        'auth.punch-card',
+                        [
+                            'punchcard' => $output['data'],
+                            'temp_user_name' => isset($user_name) ? $user_name : '-',
+                            'session' => $session,
+                            'greetings' => $greetings
+                        ]
+                    );
                 }
             } else {
                 return redirect()->back()->with('error', 'Access denied please contact admin');
@@ -147,22 +168,6 @@ class AuthController extends Controller
         } else {
             return redirect()->back()->with('error', $userDetails['message']);
         }
-        $data = [
-            'branch_id' => $branch_id,
-            'id' => $user_id,
-            'session_id' => $session
-        ];
-        $response = Http::post(config('constants.api.employee_punchcard_check'), $data);
-        $greetings = Helper::greetingMessage();
-        $output = $response->json();
-        return view(
-            'auth.punch-card',
-            [
-                'punchcard' => $output['data'],
-                'session' => $session,
-                'greetings' => $greetings
-            ]
-        );
     }
 
 
@@ -173,6 +178,7 @@ class AuthController extends Controller
         Cookie::queue(Cookie::forget('password'));
         Cookie::queue(Cookie::forget('branch_id'));
         Cookie::queue(Cookie::forget('user_id'));
+        Cookie::queue(Cookie::forget('user_name'));
         return redirect()->route('employee.punchcard.login', ['branch' => $request->cookie('branch_id'), 'session' => 1]);
     }
 

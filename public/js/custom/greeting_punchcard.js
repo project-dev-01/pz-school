@@ -11,7 +11,7 @@ $(function () {
         else {
             clearInterval(myCounter);
             $("#hideGreeting").fadeOut(1500);
-            callGreatting(2);
+            // callGreatting(2);
         }
     }
     // }

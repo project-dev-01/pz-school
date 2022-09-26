@@ -38,7 +38,7 @@
                                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                         <!-- item-->
                                         <div class="dropdown-header noti-title">
-                                            <h6 class="text-overflow m-0">Welcome ! {{Cookie::get('name')}}</h6>
+                                            <h6 class="text-overflow m-0">Welcome ! {{ Cookie::get('user_name') ?Cookie::get('user_name'):$temp_user_name }}</h6>
                                         </div>
                                         <div class="dropdown-divider"></div>
 
@@ -81,7 +81,7 @@
                                                     {{ $greetings }}
 
                                                 </p>
-                                                <h3 class="greetingName">{{ Cookie::get('name') }}</h3>
+                                                <h3 class="greetingName">{{ Cookie::get('user_name') ?Cookie::get('user_name'):$temp_user_name }}</h3>
                                             </div>
                                             <div class="col-4">
                                                 <div class="float-right">
