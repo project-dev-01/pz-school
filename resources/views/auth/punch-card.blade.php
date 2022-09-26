@@ -68,21 +68,21 @@
                             </div>
 
                             <div class="clearfix"></div>
-
+                            <hr>
                             <div class="row" id="hideGreeting">
-                                <div class="col-md-6 col-xl-6">
+                                <div class="col-md-8 col-xl-8">
                                     <div class="widget-rounded-circle card-box">
                                         <div class="card-widgets">
                                             <!-- <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a> -->
                                         </div>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-8">
                                                 <p class="greetingText">
-                                                    Good morning
+                                                    {{ $greetings }}
                                                 </p>
                                                 <h3 class="greetingName">{{ Cookie::get('name') }}</h3>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-4">
                                                 <div class="float-right">
                                                     <div class="greetingCntRing">
                                                         <span id="greetingRingCnt">5</span>
@@ -124,13 +124,13 @@
 
                                     </div>
                                     <div class="form-group text-center m-b-0">
-                                        <button class="btn btn-primary-bl waves-effect waves-light" id="check_in" type="button" {{$punchcard['check_in_status']}}>
+                                        <button class="btn btn-success waves-effect waves-light" id="check_in" type="button" {{$punchcard['check_in_status']}}>
                                             {{$punchcard['check_in']}}
                                         </button>
                                     </div>
 
                                     <div class="form-group text-center m-b-0">
-                                        <button class="btn btn-primary-bl waves-effect waves-light" id="check_out" type="button" {{$punchcard['check_out_status']}}>
+                                        <button class="btn btn-warning waves-effect waves-light" id="check_out" type="button" {{$punchcard['check_out_status']}}>
                                             {{$punchcard['check_out']}}
                                         </button>
                                     </div>

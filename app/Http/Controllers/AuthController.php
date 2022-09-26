@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cookie;
+use App\Helpers\Helper;
 
 class AuthController extends Controller
 {
@@ -153,13 +154,15 @@ class AuthController extends Controller
         ];
         // dd($data);
         $response = Http::post(config('constants.api.employee_punchcard_check'), $data);
+        $greetings = Helper::greetingMessage();
         $output = $response->json();
         // dd($output);
         return view(
             'auth.punch-card',
             [
                 'punchcard' => $output['data'],
-                'session' => $session
+                'session' => $session,
+                'greetings' => $greetings
             ]
         );
     }
