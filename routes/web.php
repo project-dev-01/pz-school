@@ -767,6 +767,8 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['isTeacher']], function ()
     Route::get('attendance/student_entry', [TeacherController::class, 'studentEntry'])->name('teacher.attendance.student_entry');
     Route::get('attendance/exam_entry', [TeacherController::class, 'examEntry'])->name('teacher.attendance.exam_entry');
     Route::get('attendance/list', [TeacherController::class, 'attendanceList'])->name('teacher.attendance.list');
+    Route::post('attendance/excel', [TeacherController::class, 'staffAttendanceExcel'])->name('teacher.attendance.excel');
+    Route::post('student_attendance/excel', [TeacherController::class, 'studentAttendanceExcel'])->name('teacher.student_attendance.excel');
     // Homework routes
     Route::get('homework/index', [TeacherController::class, 'homework'])->name('teacher.homework');
     Route::post('homework/add', [TeacherController::class, 'addHomework'])->name('teacher.homework.add');

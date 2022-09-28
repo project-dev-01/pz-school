@@ -7097,7 +7097,9 @@ class ApiController extends BaseController
                 ->where([
                     ['sa.class_id', '=', $request->class_id],
                     ['sa.section_id', '=', $request->section_id],
-                    ['sa.subject_id', '=', $request->subject_id]
+                    ['sa.subject_id', '=', $request->subject_id],
+                    ['sa.semester_id', '=', $request->semester_id],
+                    ['sa.session_id', '=', $request->session_id]
                 ])
                 ->whereMonth('sa.date', $year_month[0])
                 ->whereYear('sa.date', $year_month[1])
@@ -7117,7 +7119,7 @@ class ApiController extends BaseController
                     $object->lateCount = $value->lateCount;
                     $student_id = $value->student_id;
                     $date = $value->date;
-                    $getStudentsAttData = $this->getAttendanceByDateStudent($request, $student_id, $date);
+                    $getStudentsAttData = $this->getAttendanceByDateStudent($request, $student_id, $date, $request->semester_id, $request->session_id);
                     $object->attendance_details = $getStudentsAttData;
 
                     array_push($studentDetails, $object);
@@ -7139,7 +7141,7 @@ class ApiController extends BaseController
                 ->where([
                     ['sa.class_id', '=', $request->class_id],
                     ['sa.section_id', '=', $request->section_id],
-                    ['sa.subject_id', '=', $request->subject_id]
+                    ['sa.subject_id', '=', $request->subject_id],
                 ])
                 ->whereMonth('sa.date', $year_month[0])
                 ->whereYear('sa.date', $year_month[1])
@@ -7154,7 +7156,7 @@ class ApiController extends BaseController
         }
     }
     // by student ,date
-    function getAttendanceByDateStudent($request, $student_id, $date)
+    function getAttendanceByDateStudent($request, $student_id, $date, $semester, $session)
     {
         // create new connection
         $Connection = $this->createNewConnection($request->branch_id);
@@ -7179,7 +7181,9 @@ class ApiController extends BaseController
                 ['sa.student_id', '=', $student_id],
                 ['sa.class_id', '=', $request->class_id],
                 ['sa.section_id', '=', $request->section_id],
-                ['sa.subject_id', '=', $request->subject_id]
+                ['sa.subject_id', '=', $request->subject_id],
+                ['sa.semester_id', '=', $semester],
+                ['sa.session_id', '=', $session]
             ])
             ->whereBetween(DB::raw('date(date)'), [$startDate, $endDate])
             ->groupBy('sa.date')
@@ -13715,63 +13719,64 @@ class ApiController extends BaseController
             }
 
             
-            if($session=="All") {
-                $sess = $Connection->table('session')->get();
-                // return $sess;
-                $getAttendanceList=[];
-                foreach($sess as $ses) {
+            // if($session=="All") {
+            //     $sess = $Connection->table('session')->get();
+            //     // return $sess;
+            //     $getAttendanceList=[];
+            //     foreach($sess as $ses) {
 
-                    $list = $Connection->table('staff_attendances as sa')
-                            ->select(
-                                'st.first_name',
-                                'st.last_name',
-                                'sa.staff_id',
-                                'sa.date',
-                                'st.photo',
+            //         $list = $Connection->table('staff_attendances as sa')
+            //                 ->select(
+            //                     'st.first_name',
+            //                     'st.last_name',
+            //                     'sa.staff_id',
+            //                     'sa.date',
+            //                     'st.photo',
 
-                                DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
-                                DB::raw('COUNT(CASE WHEN sa.status = "absent" then 1 ELSE NULL END) as "absentCount"'),
-                                DB::raw('COUNT(CASE WHEN sa.status = "late" then 1 ELSE NULL END) as "lateCount"'),
+            //                     DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
+            //                     DB::raw('COUNT(CASE WHEN sa.status = "absent" then 1 ELSE NULL END) as "absentCount"'),
+            //                     DB::raw('COUNT(CASE WHEN sa.status = "late" then 1 ELSE NULL END) as "lateCount"'),
 
-                            )
-                            ->join('staffs as st', 'sa.staff_id', '=', 'st.id')
-                            ->when($employee != "All", function ($q)  use ($employee) {
-                                $q->where('sa.staff_id', $employee);
-                            })
+            //                 )
+            //                 ->join('staffs as st', 'sa.staff_id', '=', 'st.id')
+            //                 ->when($employee != "All", function ($q)  use ($employee) {
+            //                     $q->where('sa.staff_id', $employee);
+            //                 })
                             
-                            ->when($employee == "All", function ($q)  use ($department) {
-                                $q->where('st.department_id', $department);
-                            })
-                            // ->when($session, function ($q)  use ($session) {
-                            //     $q->where('sa.session_id', $session);
-                            // })
-                            ->whereMonth('sa.date', $date[0])
-                            ->whereYear('sa.date', $date[1])
-                            ->where('sa.session_id', $ses->id)
-                            ->groupBy('sa.staff_id')
-                            ->get();
+            //                 ->when($employee == "All", function ($q)  use ($department) {
+            //                     $q->where('st.department_id', $department);
+            //                 })
+            //                 // ->when($session, function ($q)  use ($session) {
+            //                 //     $q->where('sa.session_id', $session);
+            //                 // })
+            //                 ->whereMonth('sa.date', $date[0])
+            //                 ->whereYear('sa.date', $date[1])
+            //                 ->where('sa.session_id', $ses->id)
+            //                 ->groupBy('sa.staff_id')
+            //                 ->orderBy('sa.staff_id')
+            //                 ->get();
 
-                            if(!empty($list)) {
+            //                 if(!empty($list)) {
 
-                                foreach($list as $li) {
-                                    $object = new \stdClass();
-                                    $object->first_name = $li->first_name;
-                                    $object->last_name = $li->last_name;
-                                    $object->date = $li->date;
-                                    $object->photo = $li->photo;
-                                    $object->staff_id = $li->staff_id;
-                                    $object->presentCount = $li->presentCount;
-                                    $object->absentCount = $li->absentCount;
-                                    $object->lateCount = $li->lateCount;
-                                    $object->session = $ses->id;
-                                    $object->session_name = $ses->name;
-                                    array_push($getAttendanceList, $object);
-                                }
-                            }
-                }
-                // return $getAttendanceList;
+            //                     foreach($list as $li) {
+            //                         $object = new \stdClass();
+            //                         $object->first_name = $li->first_name;
+            //                         $object->last_name = $li->last_name;
+            //                         $object->date = $li->date;
+            //                         $object->photo = $li->photo;
+            //                         $object->staff_id = $li->staff_id;
+            //                         $object->presentCount = $li->presentCount;
+            //                         $object->absentCount = $li->absentCount;
+            //                         $object->lateCount = $li->lateCount;
+            //                         $object->session = $ses->id;
+            //                         $object->session_name = $ses->name;
+            //                         array_push($getAttendanceList, $object);
+            //                     }
+            //                 }
+            //     }
+            //     // return $getAttendanceList;
 
-            } else {
+            // } else {
 
                 $getAttendanceList = $Connection->table('staff_attendances as sa')
                 ->select(
@@ -13780,6 +13785,7 @@ class ApiController extends BaseController
                     'sa.staff_id',
                     'sa.date',
                     'st.photo',
+                    's.id as session_id',
                     's.name as session_name',
     
                     DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
@@ -13796,21 +13802,27 @@ class ApiController extends BaseController
                 ->when($employee == "All", function ($q)  use ($department) {
                     $q->where('st.department_id', $department);
                 })
-                // ->when($session, function ($q)  use ($session) {
-                //     $q->where('sa.session_id', $session);
-                // })
+                ->when($session == "All", function ($q){
+                    $q->groupBy('sa.session_id');
+                })
+                
+                ->when($session != "All", function ($q)  use ($session) {
+                    $q->where('sa.session_id', $session);
+                })
                 ->whereMonth('sa.date', $date[0])
                 ->whereYear('sa.date', $date[1])
-                ->where('sa.session_id', $session)
                 ->groupBy('sa.staff_id')
+                ->orderBy('sa.staff_id')
+                ->orderBy('sa.session_id')
                 ->get();
-            }
+            // }
+            // dd($getAttendanceList);
             // return $getAttendanceList;
                 $staffDetails = array();
                 if (!empty($getAttendanceList)) {
                     foreach ($getAttendanceList as $value) {
                         $object = new \stdClass();
-
+// dd($value);
                         $object->first_name = $value->first_name;
                         $object->last_name = $value->last_name;
                         $object->staff_id = $value->staff_id;
@@ -13820,11 +13832,7 @@ class ApiController extends BaseController
                         $object->lateCount = $value->lateCount;
                         $object->session_name = $value->session_name;
                         $staff_id = $value->staff_id;
-                        if($session=="All"){
-                            $sess = $value->session;
-                        } else {
-                            $sess = $session;
-                        }
+                        $sess = $value->session_id;
                         $getStaffsAttData = $this->getAttendanceByDateStaff($request, $staff_id, $sess);
                         // return $getStaffsAttData;
                         $object->attendance_details = $getStaffsAttData;

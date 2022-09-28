@@ -7,6 +7,9 @@ use App\Helpers\Helper;
 use App\Models\Task;
 use PhpParser\Node\Expr\FuncCall;
 use DataTables;
+use Excel;
+Use App\Exports\StaffAttendanceExport;
+Use App\Exports\StudentAttendanceExport;
 
 class TeacherController extends Controller
 {
@@ -416,9 +419,17 @@ class TeacherController extends Controller
         $data = [
             'teacher_id' => session()->get('ref_user_id')
         ];
+        
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         return view('teacher.attendance.index', [
-            'teacher_class' => $response['data']
+            'teacher_class' => $response['data'],
+            'semester' => $semester['data'],
+            'session' => $session['data'],
+            'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+            'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
         ]);
     }
     // by classes
@@ -1005,4 +1016,17 @@ class TeacherController extends Controller
             ]
         );
     }
+
+    public function staffAttendanceExcel(Request $request)
+    {
+        // dd($request);
+        return Excel::download(new StaffAttendanceExport(1,$request->employee,$request->session,$request->date,$request->department), 'Staff_Attendance.xlsx');
+    }
+
+    public function studentAttendanceExcel(Request $request)
+    {
+        // dd($request);
+        return Excel::download(new StudentAttendanceExport(1,$request->class,$request->section,$request->subject,$request->semester,$request->session,$request->date), 'Student_Attendance.xlsx');
+    }
+    
 }

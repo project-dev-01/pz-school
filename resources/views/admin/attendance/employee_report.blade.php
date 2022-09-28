@@ -228,16 +228,6 @@
                                                     <th><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i> Present</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i> Absent</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> Late</button></th>
-                                                    <th>
-                                                        <form method="post" action="{{ route('admin.staff_attendance.excel')}}">
-                                                            @csrf
-                                                            <input type="hidden" name="department" id="excelDepartment">
-                                                            <input type="hidden" name="employee" id="excelEmployee">
-                                                            <input type="hidden" name="session" id="excelSession">
-                                                            <input type="hidden" name="date" id="excelDate">
-                                                            <button type="submit" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> Download</button>
-                                                        </form>
-                                                    </th>
                                                 </tr>
                                             </table>
                                         </div>
@@ -250,11 +240,18 @@
                         </div> <!-- end col-->
                     </div>
                     <!-- end row-->
-                    <!-- <div class="form-group text-right m-b-0">
-                        <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Download
-                        </button>
-                    </div> -->
+                    <div class="form-group text-right m-b-0">
+                        <form method="post" action="{{ route('admin.staff_attendance.excel')}}">
+                            @csrf
+                            <input type="hidden" name="department" id="excelDepartment">
+                            <input type="hidden" name="employee" id="excelEmployee">
+                            <input type="hidden" name="session" id="excelSession">
+                            <input type="hidden" name="date" id="excelDate">
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                Download
+                            </button>
+                        </form>
+                    </div>
 
                 </div> <!-- end card-body -->
             </div> <!-- end card-->

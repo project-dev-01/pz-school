@@ -14,32 +14,36 @@ Use DB;
 // base controller add
 use App\Http\Controllers\Api\BaseController as BaseController;
 
-class StaffAttendanceExport  extends BaseController implements FromCollection, WithHeadings, ShouldAutoSize, WithEvents
+class StudentAttendanceExport  extends BaseController implements FromCollection, WithHeadings, ShouldAutoSize, WithEvents
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     
     protected $branch;
-    protected $staff;
-    protected $session;
+    protected $class;
+    protected $section;
+    protected $subject;
     protected $date;
-    protected $department;
 
-    function __construct($branch,$staff,$session,$date,$department) {
+    function __construct($branch,$class,$section,$subject,$semester,$session,$date) {
         $this->branch = $branch;
-        $this->staff = $staff;
+        $this->class = $class;
+        $this->section = $section;
+        $this->subject = $subject;
+        $this->semester = $semester;
         $this->session = $session;
         $this->date = $date;
-        $this->department = $department;
     }
     public function collection()
     {
         $branch = $this->branch;
-        $staff = $this->staff;
+        $class = $this->class;
+        $section = $this->section;
+        $subject = $this->subject;
+        $semester = $this->semester;
         $session = $this->session;
         $date = $this->date;
-        $department = $this->department;
         $month_year = explode("-", $date);
         $m = $month_year[0];
         $y = $month_year[1];
@@ -66,51 +70,42 @@ class StaffAttendanceExport  extends BaseController implements FromCollection, W
         $attend = \DB::raw($trimdate);
         $Connection = $this->createNewConnection($branch);
 
-        $excel = $Connection->table('staff_attendances as sa')
-                            ->select('st.id',
-                                    'sa.session_id',
-                                    \DB::raw("CONCAT(st.first_name, ' ', st.last_name) as name"),
-                                    $attend,
-                                    DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
-                                    DB::raw('COUNT(CASE WHEN sa.status = "absent" then 1 ELSE NULL END) as "absentCount"'),
-                                    DB::raw('COUNT(CASE WHEN sa.status = "late" then 1 ELSE NULL END) as "lateCount"'
-                            ))
-                        
-                            ->join('staffs as st', 'sa.staff_id', '=', 'st.id')
-                            ->when($staff != "All", function ($q)  use ($staff) {
-                                $q->where('sa.staff_id', $staff);
-                            })
-                            
-                            ->when($staff == "All", function ($q)  use ($department) {
-                                $q->where('st.department_id', $department);
-                            })
-                            ->join('staffs', 'staffs.id', '=','sa.staff_id' )   
-                            ->whereMonth('sa.date', $m)
-                            ->whereYear('sa.date', $y)
-                            ->when($session == "All", function ($q) {
-                                $q->groupBy('sa.session_id');
-                            })
-                            ->when($session != "All", function ($q)  use ($session) {
-                                $q->where('sa.session_id', $session);
-                            })
-                            ->groupBy('sa.staff_id')
-                            ->orderBy('sa.staff_id')
-                            ->orderBy('sa.session_id')
-                            ->get();
+        $excel = $Connection->table('student_attendances as sa')
+                ->select(
+                    'sa.student_id',
+                    \DB::raw("CONCAT(stud.first_name, ' ', stud.last_name) as name"),
+                    $attend,
+                    DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "absent" then 1 ELSE NULL END) as "absentCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "late" then 1 ELSE NULL END) as "lateCount"'),
+
+                )
+                ->join('enrolls as en', 'sa.student_id', '=', 'en.student_id')
+                ->join('students as stud', 'sa.student_id', '=', 'stud.id')
+                ->where([
+                    ['sa.class_id', '=', $class],
+                    ['sa.section_id', '=', $section],
+                    ['sa.subject_id', '=', $subject],
+                    ['sa.semester_id', '=', $semester],
+                    ['sa.session_id', '=', $session]
+                ])
+                ->whereMonth('sa.date', $m)
+                ->whereYear('sa.date', $y)
+                ->groupBy('sa.student_id')
+                ->get();
+
 
         if(!empty($excel)) {
 
             foreach($excel as $key=>$li) {
-                $staff_id = $li->id;
-                $session_id = $li->session_id;
-                $session_name = $Connection->table('session')->select('name')->where('id',$li->session_id)->first();
-
-                $li->session_id = $session_name->name;
+                // dd($li);
+                $student_id = $li->student_id;
                 foreach($tot as $t) {
-                    $in_date = $Connection->table('staff_attendances as sa')
-                                ->where('sa.staff_id', $staff_id)
+                    $in_date = $Connection->table('student_attendances as sa')
+                                ->where('sa.student_id', $student_id)
                                 ->where('sa.date',$t)
-                                ->where('sa.session_id', $session_id)
+                                ->where('sa.semester_id', $semester)
+                                ->where('sa.session_id', $session)
                                 ->first();
                                 if($in_date) {
                                     $li->$t = $in_date->status;
@@ -137,7 +132,7 @@ class StaffAttendanceExport  extends BaseController implements FromCollection, W
         $m = $month_year[0];
         $y = $month_year[1];
 
-        $final = ['Employee Id','Session','Employee Name'];
+        $final = ['Student Id','Student Name'];
 
         
         
@@ -178,7 +173,7 @@ class StaffAttendanceExport  extends BaseController implements FromCollection, W
                 $tot = date('t', strtotime($year.'-'.$month.'-01'));
                 // dd($tot);
                 $num = $event->sheet->getHighestRow();
-                $cellRange = 'A1:AJ1'; // All headers
+                $cellRange = 'A1:AI1'; // All headers
                 $cellRange2 = 'A1:A'.($num+1);
                 $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(12)->setBold(true);
                 $event->sheet->getDelegate()->getStyle($cellRange2)->getFont()->setSize(12)->setBold(true);

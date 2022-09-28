@@ -115,12 +115,15 @@ $(function () {
             class_id: "required",
             section_id: "required",
             subject_id: "required",
-            class_date: "required"
+            class_date: "required",
+            session_id: "required",
+            semester_id: "required"
         }
     });
 
     $('#attendanceFilter').on('submit', function (e) {
         e.preventDefault();
+        console.log('sa')
         var check = $("#attendanceFilter").valid();
         if (check === true) {
 
@@ -128,6 +131,8 @@ $(function () {
             var class_id = $("#changeClassName").val();
             var section_id = $("#sectionID").val();
             var subject_id = $("#subjectID").val();
+            var semester_id = $("#semesterID").val();
+            var session_id = $("#sessionID").val();
 
             var date = new Date(attendanceList)
             var year_month = ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
@@ -138,6 +143,14 @@ $(function () {
             var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
             var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            //excel download
+                    
+            $("#excelSubject").val(subject_id);
+            $("#excelClass").val(class_id);
+            $("#excelSection").val(section_id);
+            $("#excelSemester").val(semester_id);
+            $("#excelSession").val(session_id);
+            $("#excelDate").val(year_month);
 
             var formData = new FormData();
             formData.append('token', token);
@@ -145,6 +158,8 @@ $(function () {
             formData.append('class_id', class_id);
             formData.append('section_id', section_id);
             formData.append('subject_id', subject_id);
+            formData.append('semester_id', semester_id);
+            formData.append('session_id', session_id);
             formData.append('year_month', year_month);
 
             $.ajax({
@@ -546,6 +561,11 @@ $(function () {
             var firstDayTd = new Date(date.getFullYear(), date.getMonth(), 1);
             var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
             var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            
+            //excel download
+            $("#excelEmployee").val(employee);
+            $("#excelSession").val(session);
+            $("#excelDate").val(year_month);
 
             var formData = new FormData();
             formData.append('token', token);
