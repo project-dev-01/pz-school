@@ -66,7 +66,7 @@
                         </div>
 
                         <div class="form-group text-right m-b-0">
-                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
                                 Get
                             </button>
                         </div>
@@ -80,7 +80,7 @@
     <!-- end row -->
 
 
-    <div class="row" id="exam_details_div" style="display: none;">
+    <div class="row" id="exam_details_div">
         <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs">
@@ -94,17 +94,40 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card-box">
-                                <header><b>Student General Details</b></header>
-                                <div id="byStudentGeneralDetails">
-                                </div>
-                                <header><b>Individual Subject</b></header>
-                                <div id="byStudentTableAppend">
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="clearfix mt-4">
-                                        <button type="button" class="btn btn-primary-bl waves-effect waves-light float-right exportToExcel">Download</button>
-                                    </div>
-                                </div>
+                                <div class="table-responsive">
+                                    <header><b>Student General Details</b></header>
+                                    <table class="table table-bordered mb-0" id="tbl_general_details">
+                                        <thead id="tbl_general_details_header"></thead>
+                                    </table>
+                                </div> <!-- end table-responsive-->
+
+
+                                <div class="table-responsive">
+                                    <hr>
+                                    <header><b>Individual Subject</b></header>
+                                    <table class="table table-bordered mb-0" id="tbl_std_subject_marks">
+                                        <thead id="tbl_std_subject_marks_header">
+
+                                        </thead>
+                                        <tbody id="tbl_std_subject_marks_body">
+
+                                        </tbody>
+                                    </table>
+                                </div> <!-- end table-responsive-->
+
+                                <div class="table-responsive" id="tbl_std_subject_marks_division">
+
+                                    <hr>
+                                    <header><b>Subject Division</b></header>
+                                    <table class="table table-bordered mb-0">
+                                        <thead id="tbl_std_subject_marks_division_header">
+
+                                        </thead>
+                                        <tbody id="tbl_std_subject_marks_division_body">
+
+                                        </tbody>
+                                    </table>
+                                </div> <!-- end table-responsive-->
                             </div> <!-- end card-box -->
                         </div> <!-- end col-->
                     </div>
@@ -121,7 +144,6 @@
 
 @endsection
 @section('scripts')
-<script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
 <script>
     var sectionByClass = "{{ config('constants.api.exam_results_get_class_by_section') }}";
 

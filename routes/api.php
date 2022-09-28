@@ -115,7 +115,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('all_exams_list', [ApiController::class, 'allexamslist']);
     Route::get('all_std_list', [ApiController::class, 'allstdlist']);
     Route::post('get_grade_bysubject', [ApiController::class, 'getGradebysubject']);
-    Route::post('getbyresult', [ApiController::class, 'getbyresult_student']);
     // Event Type routes
     Route::post('event_type/add', [ApiController::class, 'addEventType']);
     Route::get('event_type/list', [ApiController::class, 'getEventTypeList']);
@@ -600,4 +599,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('tot_grade_calcu_byStudent', [ApiControllerOne::class, 'totgradeCalcuByStudent']);
     // by overall
     Route::post('tot_grade_calcu_overall', [ApiController::class, 'tot_grade_calcu_overall']);
+    // by individual result
+    Route::post('getbyresult', [ApiControllerOne::class, 'getbyresult_student']);
+
 });

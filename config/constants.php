@@ -56,7 +56,6 @@ return [
         'timetable_subject' => $url.'/timetable-subject',
         'exam_by_classSection'=>$url.'/exam-by-classSection',
         'exam_by_classSubject'=>$url.'/exam-by-classSubject',
-        'student_result'=>$url.'/getbyresult',
         'tot_grade_calcu_byclass'=>$url.'/tot_grade_calcu_byclass',
         'tot_grade_calcu_bySubject'=>$url.'/tot_grade_calcu_bySubject',
         'tot_grade_calcu_byStudent'=>$url.'/tot_grade_calcu_byStudent',
@@ -560,8 +559,9 @@ return [
         // exam result by class
         'exam_results_get_subject_by_class' => $url.'/exam_results/get_subject_by_class',
         // exam results by subjects
-        'exam_results_get_class_by_section' => $url.'/exam_results/get_class_by_section'
-        
+        'exam_results_get_class_by_section' => $url.'/exam_results/get_class_by_section',
+        // exam results by individual
+        'student_result'=>$url.'/getbyresult'
     ]
 
 ];

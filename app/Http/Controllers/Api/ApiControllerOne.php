@@ -1020,8 +1020,8 @@ class ApiControllerOne extends BaseController
                         )
                         ->join('classes as cl', 'en.class_id', '=', 'cl.id')
                         ->join('sections as sc', 'en.section_id', '=', 'sc.id')
-                        ->where('class_id', '=', $request->class_id)
-                        ->where('section_id', '=', $section_id)
+                        ->where('en.class_id', '=', $request->class_id)
+                        ->where('en.section_id', '=', $section_id)
                         ->get();
                     $semester_id = isset($getstudentcount[0]->semester_id) ? $getstudentcount[0]->semester_id : 0;
                     $session_id = isset($getstudentcount[0]->session_id) ? $getstudentcount[0]->session_id : 0;
@@ -1569,8 +1569,8 @@ class ApiControllerOne extends BaseController
                         )
                         ->join('classes as cl', 'en.class_id', '=', 'cl.id')
                         ->join('sections as sc', 'en.section_id', '=', 'sc.id')
-                        ->where('class_id', '=', $class_id)
-                        ->where('section_id', '=', $section_id)
+                        ->where('en.class_id', '=', $class_id)
+                        ->where('en.section_id', '=', $section_id)
                         ->get();
                     // dd($getstudentcount);
                     $semester_id = isset($getstudentcount[0]->semester_id) ? $getstudentcount[0]->semester_id : 0;
@@ -1834,8 +1834,8 @@ class ApiControllerOne extends BaseController
                 ->join('classes as cl', 'en.class_id', '=', 'cl.id')
                 ->join('sections as sc', 'en.section_id', '=', 'sc.id')
                 ->join('students as stud', 'en.student_id', '=', 'stud.id')
-                ->where('class_id', '=', $class_id)
-                ->where('section_id', '=', $section_id)
+                ->where('en.class_id', '=', $class_id)
+                ->where('en.section_id', '=', $section_id)
                 ->get();
             $get_all_subjects = $Connection->table('subject_assigns as sa')
                 ->select(
@@ -1972,149 +1972,274 @@ class ApiControllerOne extends BaseController
             // array_push($allbyStudent, $total_marks);
             // dd($allbyStudent);
             $data = [
-                'headers' => $get_all_subjects,
+                'headers' => isset($get_all_subjects) ? $get_all_subjects : [],
                 'allbyStudent' => $allbyStudent
             ];
             //   dd($allbyStudent);
             return $this->successResponse($data, 'bystudent all Post record fetch successfully');
         }
     }
-    // public function totgradeCalcuByStudent(Request $request)
+    // Individual Result 
+    // public function getbyresult_student(Request $request)
     // {
     //     $validator = \Validator::make($request->all(), [
     //         'branch_id' => 'required',
     //         'token' => 'required',
+    //         'exam_id' => 'required',
     //         'class_id' => 'required',
     //         'section_id' => 'required',
-    //         'exam_id' => 'required'
+    //         'registerno' => 'required'
     //     ]);
+
     //     if (!$validator->passes()) {
     //         return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
     //     } else {
-    //         // create new connection
+    //         // create new connection    
     //         $Connection = $this->createNewConnection($request->branch_id);
-    //         // get data
-    //         $allbyStudent = array();
+    //         // get data   
 
-    //         $total_sujects_teacher = $Connection->table('subject_assigns')
-    //             ->select(
-    //                 'subjects.id as subject_id',
-    //                 'subjects.name as subject_name',
-    //                 'staffs.id as staff_id',
-    //                 DB::raw('CONCAT(staffs.first_name, " ", staffs.last_name) as teacher_name'),
-    //             )
-    //             ->leftJoin('staffs', 'subject_assigns.teacher_id', '=', 'staffs.id')
-    //             ->leftJoin('subjects', 'subject_assigns.subject_id', '=', 'subjects.id')
-    //             ->where('class_id', '=', $request->class_id)
-    //             ->where('section_id', '=', $request->section_id)
-    //             ->get();
-    //         $obj_header = new \stdClass();
-
-    //         $getotal_subject = $Connection->table('student_marks')
-    //             ->select(
-    //                 'subject_id'
-    //             )
-    //             ->where('class_id', '=', $request->class_id)
-    //             ->where('section_id', '=', $request->section_id)
-    //             ->where('exam_id', '=', $request->exam_id)
-    //             ->groupBy('subject_id')
-    //             ->get();
-    //         $subject_count = count($getotal_subject);
-    //         $obj_header->total_subject_count = $subject_count;
-
-    //         $getheaders = $Connection->table('student_marks')
-    //             ->select(
-    //                 DB::raw('group_concat(student_marks.subject_id) as subject_id'),
-    //                 DB::raw('group_concat(subjects.name) as subject_name')
-    //             )
-    //             ->leftJoin('subjects', 'student_marks.subject_id', '=', 'subjects.id')
-
-    //             ->where('class_id', '=', $request->class_id)
-    //             ->where('section_id', '=', $request->section_id)
-    //             ->where('exam_id', '=', $request->exam_id)
-    //             ->groupBy('student_marks.student_id')
+    //         $student_marks_result = array();
+    //         $object = new \stdClass();
+    //         $object_general_details = new \stdClass();
+    //         //  $student_id=$Connection->table("students")->Select('id')->where('register_no','=',$request->registerno);
+    //         $student_id = $Connection->table('students')->Select('id', 'first_name', 'birthday')
+    //             ->where('register_no', '=', $request->registerno)
     //             ->first();
-    //         $obj_header->sub_header = $getheaders;
 
-
-
-    //         array_push($allbyStudent, $obj_header);
-    //         $getexam_total_student = $Connection->table('student_marks')
+    //         $student_marks = $Connection->table("student_marks")
     //             ->select(
-    //                 'students.id as student_id',
     //                 'students.first_name',
-    //                 'students.register_no',
-    //                 'student_marks.score',
-    //                 'student_marks.grade',
-    //                 'student_marks.pass_fail'
+    //                 'students.birthday',
+    //                 'classes.name as class_name',
+    //                 'sections.name as section_name',
+    //                 DB::raw("group_concat(student_marks.subject_id) as subject_id"),
+    //                 DB::raw("group_concat(subjects.name) as subject_names"),
+    //                 //DB::raw("group_concat(student_marks.score,',',student_marks.grade) as scoregrade")
+    //                 DB::raw("group_concat(student_marks.grade) as grade"),
+    //                 DB::raw("sum(grade_marks.grade_point) as gradepoint"),
+    //                 'pass_fail'
+
     //             )
+    //             ->leftJoin('grade_marks', 'student_marks.grade', '=', 'grade_marks.grade')
     //             ->leftJoin('students', 'student_marks.student_id', '=', 'students.id')
-    //             ->where('class_id', '=', $request->class_id)
-    //             ->where('section_id', '=', $request->section_id)
-    //             ->where('exam_id', '=', $request->exam_id)
-    //             //->where('student_id', '=', )
-    //             ->groupBy('students.id')
+    //             ->leftJoin('subjects', 'student_marks.subject_id', '=', 'subjects.id')
+    //             ->leftJoin('classes', 'student_marks.class_id', '=', 'classes.id')
+    //             ->leftJoin('sections', 'student_marks.section_id', '=', 'sections.id')
+    //             ->where([
+    //                 ['student_marks.student_id', $student_id->id],
+    //                 ['student_marks.class_id', $request->class_id],
+    //                 ['student_marks.section_id', $request->section_id],
+    //                 ['student_marks.exam_id', $request->exam_id]
+    //             ])
     //             ->get();
+    //         $object->student_marks_details = $student_marks;
+    //         array_push($student_marks_result, $object);
+    //         //dd($student_marks_result);
+    //         // genral details
+    //         $object_general_details->student_general_details = $student_id;
+    //         array_push($student_marks_result, $object_general_details);
 
-    //         $sno = 0;
-    //         $studentmark_sno = 0;
-    //         $student_subjectdiv = 0;
-    //         foreach ($total_sujects_teacher as $key => $val) {
-    //             $sno++;
-
-    //             $object = new \stdClass();
-    //             $subject_id = $val->subject_id;
-    //             $staff_id = $val->staff_id;
-    //             $subject_name = $val->subject_name;
-    //             $teacher_name = $val->teacher_name;
-
-    //             //   $object->subject_name = $subject_name;
-
-    //             // Not matched subject division table go 2 if 
-
-    //             $studentmark_sno++;
-
-    //             if ($studentmark_sno == 1) {
-
-    //                 foreach ($getexam_total_student as $key => $val) {
-
-    //                     $obj = new \stdClass();
-    //                     $student_id = $val->student_id;
-
-    //                     $getexamgrademarks = $Connection->table('student_marks')
-    //                         ->select(
-    //                             'students.id as student_id',
-    //                             'students.first_name',
-    //                             'students.register_no',
-    //                             // DB::raw('CONCAT(student_marks.score as score)','CONCAT(student_marks.grade as grade)'),
-    //                             DB::raw("group_concat(student_marks.score,',',student_marks.grade) as scoremarks"),
-    //                             DB::raw('group_concat(student_marks.subject_id) as subject_id'),
-    //                             DB::raw('group_concat(subjects.name) as subject_name'),
-    //                             DB::raw('group_concat(student_marks.score) as score'),
-    //                             DB::raw('group_concat(student_marks.grade) as grade'),
-    //                             // DB::raw('GROUP_CONCAT(student_marks.score ',') as s_score'),
-    //                             // DB::raw('GROUP_CONCAT(student_marks.grade ',') as s_grade'),
-    //                             // 'student_marks.score',
-    //                             // 'student_marks.grade',
-    //                             'student_marks.pass_fail'
-    //                         )
-    //                         ->leftJoin('students', 'student_marks.student_id', '=', 'students.id')
-    //                         ->leftJoin('subjects', 'student_marks.subject_id', '=', 'subjects.id')
-
-    //                         ->where('class_id', '=', $request->class_id)
-    //                         ->where('section_id', '=', $request->section_id)
-    //                         ->where('exam_id', '=', $request->exam_id)
-    //                         ->where('student_id', '=', $student_id)
-    //                         ->groupBy('student_marks.student_id')
-    //                         ->get();
-    //                     $obj->both_exam_marksgrade = $getexamgrademarks;
-    //                     $count = count($getexamgrademarks);
-    //                     array_push($allbyStudent, $obj);
-    //                 }
-    //             }
-    //         }
-    //         //   dd($allbyStudent);
-    //         return $this->successResponse($allbyStudent, 'bystudent all Post record fetch successfully');
+    //         return $this->successResponse($student_marks_result, 'student result record fetch successfully');
     //     }
     // }
+    public function getbyresult_student(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+            'exam_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'registerno' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get data
+            $allbyStudent = array();
+            $class_id = $request->class_id;
+            $section_id = $request->section_id;
+            $exam_id = $request->exam_id;
+            $registerno = $request->registerno;
+            $studentDetails = $Connection->table('students as stud')->Select(
+                'stud.id',
+                'en.class_id',
+                'en.section_id',
+                'en.semester_id',
+                'en.session_id',
+                'cl.name as class_name',
+                'sc.name as section_name',
+                DB::raw("CONCAT(stud.first_name, ' ', stud.last_name) as student_name"),
+                'stud.birthday',
+                'stud.register_no'
+            )
+                ->join('enrolls as en', 'en.student_id', '=', 'stud.id')
+                ->join('classes as cl', 'en.class_id', '=', 'cl.id')
+                ->join('sections as sc', 'en.section_id', '=', 'sc.id')
+                ->where('register_no', '=', $registerno)
+                ->first();
+            // dd($studentDetails);
+            if (isset($studentDetails->id)) {
+                $student_id = $studentDetails->id;
+                // class name and section name by total students
+                $getstudentdetails = $Connection->table('enrolls as en')
+                    ->select(
+                        'en.student_id',
+                        'en.semester_id',
+                        'en.session_id',
+                        DB::raw("CONCAT(stud.first_name, ' ', stud.last_name) as student_name")
+                    )
+                    ->join('classes as cl', 'en.class_id', '=', 'cl.id')
+                    ->join('sections as sc', 'en.section_id', '=', 'sc.id')
+                    ->join('students as stud', 'en.student_id', '=', 'stud.id')
+                    ->where([
+                        ['en.class_id', $class_id],
+                        ['en.section_id', $section_id],
+                        ['en.student_id', $student_id]
+                    ])
+                    ->get();
+                $get_all_subjects = $Connection->table('subject_assigns as sa')
+                    ->select(
+                        'sa.class_id',
+                        'sa.section_id',
+                        'sbj.id as subject_id',
+                        'sbj.name as subject_name'
+                    )
+                    ->join('subjects as sbj', 'sa.subject_id', '=', 'sbj.id')
+                    ->where([
+                        ['sa.class_id', $class_id],
+                        ['sa.section_id', $section_id],
+                        ['sa.type', '=', '0'],
+                        ['sbj.exam_exclude', '=', '0']
+                    ])
+                    ->groupBy('sa.subject_id')
+                    ->get();
+                // dd(count($getstudentdetails));
+                // dd($getstudentdetails);
+                // dd($get_all_subjects);
+                if (!empty($getstudentdetails)) {
+                    foreach ($getstudentdetails as $val) {
+                        $student_obj = new \stdClass();
+
+                        $student_id = $val->student_id;
+                        $semester_id = $val->semester_id;
+                        $session_id = $val->session_id;
+                        $student_name = $val->student_name;
+
+                        // add obj
+                        $student_obj->student_id = $student_id;
+                        $student_obj->student_name = $student_name;
+                        $studentArr = [];
+                        // dd($get_all_subjects);
+                        if (!empty($get_all_subjects)) {
+                            foreach ($get_all_subjects as $value) {
+                                $sbj_obj = new \stdClass();
+                                // get subject total weightage
+                                $getExamPaperWeightage = $Connection->table('exam_papers as expp')
+                                    ->select(
+                                        DB::raw('SUM(expp.subject_weightage) as total_subject_weightage'),
+                                        'expp.grade_category'
+                                    )
+                                    ->where([
+                                        ['expp.class_id', '=', $value->class_id],
+                                        ['expp.subject_id', '=', $value->subject_id]
+                                    ])
+                                    ->get();
+                                // dd($getExamPaperWeightage);
+                                $total_subject_weightage = isset($getExamPaperWeightage[0]->total_subject_weightage) ? (int)$getExamPaperWeightage[0]->total_subject_weightage : 0;
+
+                                $getStudMarksDetails = $Connection->table('student_marks as sm')
+                                    ->select(
+                                        'expp.subject_weightage',
+                                        'sb.name as subject_name',
+                                        'sb.id as subject_id',
+                                        'sm.score',
+                                        'sm.paper_id',
+                                        'sm.grade_category'
+                                    )
+                                    ->join('subjects as sb', 'sm.subject_id', '=', 'sb.id')
+                                    ->join('timetable_exam as te', function ($join) {
+                                        $join->on('te.class_id', '=', 'sm.class_id')
+                                            ->on('te.section_id', '=', 'sm.section_id')
+                                            ->on('te.subject_id', '=', 'sm.subject_id')
+                                            ->on('te.semester_id', '=', 'sm.semester_id')
+                                            ->on('te.session_id', '=', 'sm.session_id')
+                                            ->on('te.paper_id', '=', 'sm.paper_id');
+                                    })
+                                    ->join('exam_papers as expp', 'sm.paper_id', '=', 'expp.id')
+                                    ->where([
+                                        ['sm.class_id', '=', $class_id],
+                                        ['sm.section_id', '=', $section_id],
+                                        ['sm.subject_id', '=', $value->subject_id],
+                                        ['sm.exam_id', '=', $exam_id],
+                                        ['sm.semester_id', '=', "2"],
+                                        // ['sm.semester_id', '=', $semester_id],
+                                        ['sm.session_id', '=', $session_id],
+                                        ['sm.student_id', '=', $student_id]
+                                    ])
+                                    ->groupBy('sm.paper_id')
+                                    ->get();
+
+                                $sbj_obj->subject_id = $value->subject_id;
+                                // $sbj_obj->class_id = $class_id;
+                                // $sbj_obj->section_id = $section_id;
+                                // $sbj_obj->exam_id = $exam_id;
+                                // $sbj_obj->semester_id = $semester_id;
+                                // $sbj_obj->session_id = $session_id;
+                                $marks = 0;
+                                $grade_category = 0;
+                                // here you get calculation based on student marks and subject weightage
+                                if (!empty($getStudMarksDetails)) {
+                                    // grade calculations
+                                    foreach ($getStudMarksDetails as $Studmarks) {
+                                        $sub_weightage = (int) $Studmarks->subject_weightage;
+                                        $score = (int) $Studmarks->score;
+                                        $grade_category = $Studmarks->grade_category;
+                                        // foreach for total no of students
+                                        $weightage = ($sub_weightage / $total_subject_weightage);
+                                        // dd($weightage);
+                                        $marks += ($weightage * $score);
+                                        // print_r($marks);
+                                        // print_r($marks);
+
+                                    }
+                                    $mark = (int) $marks;
+                                    // get range grade
+                                    $grade = $Connection->table('grade_marks')
+                                        ->select('grade')
+                                        ->where([
+                                            ['min_mark', '<=', $mark],
+                                            ['max_mark', '>=', $mark],
+                                            ['grade_category', '=', $grade_category]
+                                        ])
+                                        ->first();
+                                    $sbj_obj->marks = $marks != 0 ? number_format($marks) : $marks;
+                                    $sbj_obj->grade = isset($grade->grade) ? $grade->grade : '-';
+                                } else {
+                                    $sbj_obj->marks = "Nill";
+                                    $sbj_obj->grade = "Nill";
+                                }
+                                // dd($sbj_obj);
+                                // echo "<pre>";
+                                // print_r($sbj_obj);
+                                array_push($studentArr, $sbj_obj);
+                            }
+                        }
+                        // exit;
+                        $student_obj->student_class = $studentArr;
+                        array_push($allbyStudent, $student_obj);
+                    }
+                }
+            }
+            $data = [
+                'student_details' => isset($studentDetails) ? $studentDetails : null,
+                'headers' => isset($get_all_subjects) ? $get_all_subjects : [],
+                'allbyStudent' => $allbyStudent
+            ];
+            // dd($data);
+            return $this->successResponse($data, 'bystudent all Post record fetch successfully');
+        }
+    }
 }

@@ -1,6 +1,5 @@
 var reasonChart;
 $(function () {
-    // change classroom
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
         $("#bysubjectfilter").find("#examnames").empty();

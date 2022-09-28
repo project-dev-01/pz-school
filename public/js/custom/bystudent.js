@@ -148,9 +148,13 @@ function bystudentdetails_class(datasetnew) {
             var marksArr = res.student_class;
             // here find index of array
             var index = marksArr.findIndex(x => x.subject_id === subject_id);
-
-            bysubjectAllTable += '<td class="text-center">' + marksArr[index].marks + '</td>';
-            bysubjectAllTable += '<td class="text-center">' + marksArr[index].grade + '</td>';
+            if (index !== -1) {
+                bysubjectAllTable += '<td class="text-center">' + marksArr[index].marks + '</td>';
+                bysubjectAllTable += '<td class="text-center">' + marksArr[index].grade + '</td>';
+            } else {
+                bysubjectAllTable += '<td class="text-center">-</td>';
+                bysubjectAllTable += '<td class="text-center">-</td>';
+            }
         });
         bysubjectAllTable += '</tr>';
 
@@ -160,90 +164,3 @@ function bystudentdetails_class(datasetnew) {
         '</div>';
     $("#byStudentTableAppend").append(bysubjectAllTable);
 }
-// function bystudentdetails_class(datasetnew) {
-//     $('#bystudent_header').empty();
-//     $('#bystudent_body').empty();
-//     var sno = 0;
-//     var sno_bdy = 0;
-//     var sno_bdy_main = 0;
-//     var subject_name_header = "";
-//     var bysubjectAllTable = "";
-//     console.log(datasetnew);
-//     // header start
-//     datasetnew.forEach(function (res) {
-//         sno++;
-//         if (sno === 1) {
-//             console.log(res.total_subject_count);
-//             var headercount = res.total_subject_count * 2;
-//             console.log(headercount);
-//             subject_name_header += '<tr>' +
-//                 '<th class="align-middle" rowspan="3">S.no.</th>' +
-//                 '<th class="align-middle" rowspan="3">Student Name</th>' +
-//                 '<th class="text-center" colspan="' + headercount + '">Subject Name</th>' +
-//                 '</tr>';
-//             subject_name_header += '<tr>';
-//             var subject_headers = res.sub_header;
-//             console.log(subject_headers);
-//             var split_subnam = subject_headers.subject_name;
-//             console.log(split_subnam);
-//             let subject_names = split_subnam.split(',');
-//             console.log(subject_names);
-//             subject_names.forEach(function (sub_name) {
-//                 subject_name_header += '<th colspan="2" class="text-center" data-id="' + sub_name + '">' + sub_name + '</th>';
-//             });
-//             subject_name_header += '</tr>';
-//             subject_name_header += '<tr>';
-//             subject_names.forEach(function (snm) {
-//                 subject_name_header += '  <th class="text-center">Mark</th>' +
-//                     '<th class="text-center">Grade</th>';
-//             });
-
-//         }
-
-//     });
-//     subject_name_header += '</tr>';
-//     $('#bystudent_header').append(subject_name_header);
-
-//     // body tag start
-//     var globel_subjectname;
-//     datasetnew.forEach(function (response) {
-//         //console.log(response);
-//         sno_bdy++;
-
-//         if (sno_bdy > 1) {
-//             var total_subject_count = response.total_subject_count;
-//             //console.log(sno_bdy);
-//             var marks_grade = response.both_exam_marksgrade;
-
-//             //console.log(marks_grade);
-//             // std count and names
-//             marks_grade.forEach(function (mg) {
-//                 //    console.log(mg.student_id);
-//                 //if (mg.student_id > 0) {
-//                 sno_bdy_main++;
-//                 bysubjectAllTable += '<tr>' +
-//                     '<td class="text-center">';
-//                 bysubjectAllTable += sno_bdy_main +
-//                     '</td>';
-//                 bysubjectAllTable += '<td class="text-left">' + mg.first_name + '</td>';
-//                 var split_subnam = mg.scoremarks;
-//                 let arr = split_subnam.split(',');
-//                 //console.log(arr);
-//                 arr.forEach(function (sbnam) {
-//                     //  console.log(sbnam);
-//                     bysubjectAllTable += '<td class="text-center">' + sbnam + '</td>';
-
-//                 });
-//                 // console.log('loop exit');
-//                 // '<td class="align-top">' + mg.score + '</td>' +
-//                 // '<td class="align-top">' + mg.grade + '</td>'+
-
-//                 bysubjectAllTable += '</tr>';
-
-//             });
-//         }
-//     });
-//     $("#bystudent_body").append(bysubjectAllTable);
-// }
-
-

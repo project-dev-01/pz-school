@@ -71,7 +71,7 @@
                             <hr>
                             <div class="row" id="hideGreeting">
                                 <div class="col-md-8 col-xl-8">
-                                    <div class="widget-rounded-circle card-box">
+                                    <div class="widget-rounded-circle card-box" style="box-shadow: 0 1px 4px 0 rgb(0 0 0 / 23%);">
                                         <div class="card-widgets">
                                             <!-- <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a> -->
                                         </div>
@@ -94,7 +94,7 @@
                                     </div> <!-- end widget-rounded-circle-->
                                 </div> <!-- end col-->
                             </div>
-                            <div class="text-center mt-4">
+                            <div class="text-center">
                                 <form id="" action="{{ route('employee.punchcard') }}" method="post" enctype="multipart/form-data" autocomplete="off">
                                     @csrf
 
@@ -107,7 +107,7 @@
                                         <input type="hidden" name="session" id="session" value="{{$session}}">
                                         <div class="card-body">
                                             <div class="table-responsive mt-md mb-md">
-                                                <table class="table table-striped table-bordered table-condensed mb-none">
+                                                <table class="table table-bordered table-condensed mb-none">
                                                     <tbody>
                                                         <tr>
                                                             <th width="25%">Check In Time</th>
@@ -124,16 +124,15 @@
                                         <br>
 
                                     </div>
-                                    <div class="form-group text-center m-b-0">
-                                        <button class="btn btn-success waves-effect waves-light" id="check_in" type="button" {{$punchcard['check_in_status']}}>
-                                            {{$punchcard['check_in']}}
-                                        </button>
-                                    </div>
-
-                                    <div class="form-group text-center m-b-0">
-                                        <button class="btn btn-warning waves-effect waves-light" id="check_out" type="button" {{$punchcard['check_out_status']}}>
-                                            {{$punchcard['check_out']}}
-                                        </button>
+                                    <div class="form-group">
+                                        <div>
+                                            <button class="btn btn-success waves-effect waves-light" id="check_in" type="button" {{$punchcard['check_in_status']}}>
+                                                {{$punchcard['check_in']}}
+                                            </button>
+                                            <button class="btn btn-warning waves-effect waves-light" id="check_out" type="button" {{$punchcard['check_out_status']}}>
+                                                {{$punchcard['check_out']}}
+                                            </button>
+                                        </div>
                                     </div>
                                 </form>
 
@@ -161,6 +160,5 @@
     var punchcard = "{{ route('employee.punchcard') }}";
 </script>
 <script src="{{ asset('public/js/custom/punchcard.js') }}"></script>
-<script src="{{ asset('public/js/custom/greeting_punchcard.js') }}"></script>
 
 @endsection
