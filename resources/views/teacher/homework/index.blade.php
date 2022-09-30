@@ -21,7 +21,7 @@
     </div>
     <!-- end page title -->
 
-    <div class="row">
+    <div class="row" style="margin-top: 20px;">
         <div class="col-xl-12 addHomeworkForm">
             <div class="card">
                 <ul class="nav nav-tabs">
@@ -107,7 +107,7 @@
                                 </div>
                             </div>
                         </div><br>
-                        <div >
+                        <div>
                             <div class="row">
                                 <div class="col-md-4" id="schedule" style="display:none">
                                     <label for="schedule_date">Schedule Date<span class="text-danger">*</span></label>

@@ -100,7 +100,7 @@ class AuthController extends Controller
             ];
         }
         $response = Http::post(config('constants.api.employee_punchcard'), $data);
-        
+
         return $response;
     }
     public function punchCardDetails(Request $request)
@@ -137,7 +137,7 @@ class AuthController extends Controller
                         'session_id' => $session
                     ];
                     $response = Http::post(config('constants.api.employee_punchcard_check'), $data);
-                    
+
                     // dd($response);
                     $greetings = Helper::greetingMessage();
                     $output = $response->json();
@@ -227,38 +227,21 @@ class AuthController extends Controller
                     // $request->session()->put('db_username', $userDetails['data']['subsDetails']['db_username']);
                     // $request->session()->put('db_password', $userDetails['data']['subsDetails']['db_password']);
                 }
-                // $response = [
-                //     'code' => 200,
-                //     'success' => true,
-                //     'message' => "success"
-                // ];
-                // return response()->json($response, 200);
-                // return "dashboard";
                 if ($userDetails['data']['user']['role_id'] == 2) {
-                    // return redirect()->route('admin.dashboard', ['school_name_url' => $school_name_url]);
                     $redirect_route = route('admin.dashboard');
-                    echo "<script>setTimeout(function(){ window.location.href = '" . $redirect_route . "'; }, 3000);</script>";
-                    return view('auth.loading', ['user_name' => $user_name]);
+                    return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
                 } elseif ($userDetails['data']['user']['role_id'] == 3) {
-                    // return redirect()->route('staff.dashboard');
                     $redirect_route = route('staff.dashboard');
-                    echo "<script>setTimeout(function(){ window.location.href = '" . $redirect_route . "'; }, 3000);</script>";
-                    return view('auth.loading', ['user_name' => $user_name]);
+                    return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
                 } elseif ($userDetails['data']['user']['role_id'] == 4) {
-                    // return redirect()->route('teacher.dashboard');
                     $redirect_route = route('teacher.dashboard');
-                    echo "<script>setTimeout(function(){ window.location.href = '" . $redirect_route . "'; }, 3000);</script>";
-                    return view('auth.loading', ['user_name' => $user_name]);
+                    return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
                 } elseif ($userDetails['data']['user']['role_id'] == 5) {
-                    // return redirect()->route('parent.dashboard');
                     $redirect_route = route('parent.dashboard');
-                    echo "<script>setTimeout(function(){ window.location.href = '" . $redirect_route . "'; }, 3000);</script>";
-                    return view('auth.loading', ['user_name' => $user_name]);
+                    return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
                 } elseif ($userDetails['data']['user']['role_id'] == 6) {
-                    // return redirect()->route('student.dashboard');
                     $redirect_route = route('student.dashboard');
-                    echo "<script>setTimeout(function(){ window.location.href = '" . $redirect_route . "'; }, 3000);</script>";
-                    return view('auth.loading', ['user_name' => $user_name]);
+                    return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
                 } else {
                     return redirect()->route('admin.login')->with('error', 'Invalid Credential');
                 }

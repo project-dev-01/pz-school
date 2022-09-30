@@ -41,7 +41,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                 </div>
-                <h4 class="page-title">View Timetable</h4>
+                <h4 class="page-title">Timetable</h4>
             </div>
         </div>
     </div>
@@ -87,11 +87,11 @@
                                                 <b>
                                                     <div style="color:#179614;display:inline-block;padding-right:10px;"><i class="icon-speedometer"></i></div>( {{ $start_time }} - {{$end_time}} )
                                                     <b><br>
-                                                @if(isset($table['class_room']))
-                                                <b>
-                                                    <div style="color:#ff0000;display:inline-block;padding-right:10px;"> <i class="icon-location-pin"></i> </div>{{$table['class_room']}}
-                                                </b><br>
-                                                @endif
+                                                        @if(isset($table['class_room']))
+                                                        <b>
+                                                            <div style="color:#ff0000;display:inline-block;padding-right:10px;"> <i class="icon-location-pin"></i> </div>{{$table['class_room']}}
+                                                        </b><br>
+                                                        @endif
 
                                             </td>
                                             @else
@@ -108,16 +108,16 @@
                                                 <b>
                                                     <div style="color:#179614;display:inline-block;padding-right:10px;"><i class="icon-speedometer"></i></div>( {{ $start_time }} - {{$end_time}} )
                                                     <b><br>
-                                                @if($table['teacher_name'])
-                                                <b>
-                                                    <div style="color:#28dfe9;display:inline-block;padding-right:10px;"> <i class=" fas fa-book-reader"></i></div>{{$table['teacher_name'] }}
-                                                </b><br>
-                                                @endif
-                                                @if($table['class_room'])
-                                                <b>
-                                                    <div style="color:#ff0000;display:inline-block;padding-right:10px;"> <i class="icon-location-pin"></i> </div>{{$table['class_room']}}
-                                                </b><br>
-                                                @endif
+                                                        @if($table['teacher_name'])
+                                                        <b>
+                                                            <div style="color:#28dfe9;display:inline-block;padding-right:10px;"> <i class=" fas fa-book-reader"></i></div>{{$table['teacher_name'] }}
+                                                        </b><br>
+                                                        @endif
+                                                        @if($table['class_room'])
+                                                        <b>
+                                                            <div style="color:#ff0000;display:inline-block;padding-right:10px;"> <i class="icon-location-pin"></i> </div>{{$table['class_room']}}
+                                                        </b><br>
+                                                        @endif
                                             </td>
 
                                             @endif

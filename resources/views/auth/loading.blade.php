@@ -39,6 +39,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <p class="loadsa">{{ $user_name }}</p>
+                <input type="hidden" id="redirect_route" value="{{ $redirect_route }}" />
             </div>
         </div>
 
@@ -55,6 +56,7 @@
     </div>
 
     <script>
+        var redirectUrl = document.getElementById("redirect_route").value;
         /* 
          * (class)Progress<nowValue, minValue, maxValue>
          */
@@ -93,7 +95,6 @@
             startTo(step, time) {
                 if (this.intervalCode !== 0) return;
                 this.intervalCode = setInterval(() => {
-                    console.log("sss")
                     if (this.now + step > this.max) {
                         this.now = this.max;
                         this.syncState();
@@ -125,7 +126,8 @@
         //end to progress after 5s
         setTimeout(() => {
             pb.end()
-        }, 5000)
+            window.location.href = redirectUrl;
+        }, 3000)
     </script>
 
 
