@@ -10,11 +10,11 @@
                 <form id="exam-form" method="post"  action="{{ route('admin.exam.add') }}" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="name"> Name</label>
+                        <label for="name">Name<span class="text-danger">*</span></label>
                         <input type="text"  name="name" class="form-control" placeholder="Enter name">
                     </div>
                     <div class="form-group">
-                        <label for="term_id" class="col-3 col-form-label">Term </label>
+                        <label for="term_id"class="col-3 col-form-label" style="margin: 0px 0px 0px -12px;">Term<span class="text-danger">*</span></label>
                         <select  class="form-control" name="term_id">
                             <option value="">Select Term</option>
                             @foreach($term as $t)

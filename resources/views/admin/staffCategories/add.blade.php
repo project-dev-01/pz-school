@@ -10,7 +10,7 @@
                 <form id="addstaffcategory" method="post"  action="{{ route('admin.staffcategory.add') }}" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Staff Category</label>
+                        <label for="name">Staff Category<span class="text-danger">*</span></label>
                         <input type="text" name="name" class="form-control" placeholder="Enter staff Category">
                     </div>
                     <div class="form-group">

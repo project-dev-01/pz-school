@@ -11,7 +11,7 @@
                     @csrf                   
                  
                     <div class="form-group">
-                        <label for="name"> Category Name</label>
+                        <label for="name"> Category Name<span class="text-danger">*</span></label>
                         <input type="text" id="name" name="name" class="form-control" placeholder="Enter  Category name">
                         <span class="text-danger error-text name_error"></span>
                     </div>

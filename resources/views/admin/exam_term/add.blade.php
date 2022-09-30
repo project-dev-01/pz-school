@@ -10,7 +10,7 @@
                 <form id="exam-term-form" method="post"  action="{{ route('admin.exam_term.add') }}" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Term Name</label>
+                        <label for="name">Term Name<span class="text-danger">*</span></label>
                         <input type="text"  name="name" class="form-control" placeholder="Enter Term name">
                     </div>
                     <div class="form-group">

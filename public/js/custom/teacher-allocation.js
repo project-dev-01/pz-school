@@ -262,7 +262,7 @@ $(function () {
                         passTag = "badge-warning";
                         type = "Alternative";
                     }
-                    var pass_fail = '<span class="badge badgeLabel ' + passTag + ' badge-pill ">' + type + '</span>';
+                    var pass_fail = '<span class="badge badgeLabel ' + passTag + ' badge-pill" style="padding: 6px 6px 6px 6px; margin-left: -10px;">' + type + '</span>';
                     return pass_fail;
                 }
             }

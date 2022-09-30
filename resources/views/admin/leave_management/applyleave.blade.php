@@ -147,7 +147,7 @@
                                 <!--3rd row-->
                                 <br />
                                 <div class="clearfix mt-4">
-                                    <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Apply</button>
+                                    <button type="submit" class="btn btn-primary-bl waves-effect waves-light" style="float:right;">Apply</button>
                                 </div>
                             </form>
 

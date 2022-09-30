@@ -38,7 +38,7 @@
                         <span class="text-danger error-text floor_warden_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="floor_leader">Floor Leader</label>
+                        <label for="floor_leader">Floor Leader<span class="text-danger">*</span></label>
                         <select class="form-control select2-multiple" data-toggle="select2" name="floor_leader[]" multiple="multiple" data-placeholder="Choose ...">
                             <option value="">Select Leader</option>
                             @forelse($leader as $lead)

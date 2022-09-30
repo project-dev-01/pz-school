@@ -10,7 +10,7 @@
                 <form id="addqualify" method="post"  action="{{ route('admin.qualification.add') }}" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Qualification</label>
+                        <label for="name">Qualification<span class="text-danger">*</span></label>
                         <input type="text" name="name" class="form-control" placeholder="Enter Qualificaiton">
                     </div>
                     <div class="form-group">

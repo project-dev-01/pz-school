@@ -191,7 +191,7 @@
                                 </div> <!-- end card-box -->
                             </div> <!-- end col-->
                         </div>
-                        <button type="button" class="btn btn-soft-secondary waves-effect" id="addMore">
+                        <button type="button" class="btn btn-soft-secondary waves-effect" style="color: #fff; border-color: #1abc9c; background-color: #1abc9c;" id="addMore">
                             <i class="fas fa-plus-circle"></i> Add More </button>
                         <!-- end row-->
                         <input type="hidden" id="form_class_id" name="class_id">

@@ -26,7 +26,7 @@
                 <p class="sub-header">
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addEducationModal">Add Education</button>
+                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" style="margin: 0px 0px 0px -15px;" data-toggle="modal" data-target="#addEducationModal">Add</button>
                     </div>
                 </div>
                 </p>

@@ -10,7 +10,7 @@
                 <form id="designation-form" method="post"  action="{{ route('admin.designation.add') }}" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Designation Name</label>
+                        <label for="name">Designation Name<span class="text-danger">*</span></label>
                         <input type="text"  name="name" class="form-control" placeholder="Enter Designation name">
                     </div>
                     <div class="form-group">

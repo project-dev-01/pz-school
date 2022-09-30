@@ -730,7 +730,7 @@
                                                 </div>
                                                 <br>
                                                 <div class="profile">
-                                                    <a class="text-muted mail-subj" href="{{route('admin.student.details',$child['id'])}}" target="_blank">Profile</a>
+                                                    <a class="text-mutedd mail-subj" style="color: #0ABAB5;" href="{{route('admin.student.details',$child['id'])}}" target="_blank">Profile</a>
                                                 </div>
                                             </div>
                                         </div>

@@ -49,7 +49,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="staff">Add Staff</label>
+                                    <label for="staff">Add Staff<span class="text-danger">*</span></label>
                                     <input type="text" id="staff" name="staff" class="form-control" placeholder="Enter Staff Name">
                                     <div id="staff_list"></div>
                                     <span class="text-danger error-text staff_error"></span>
@@ -80,7 +80,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="student">Add Student</label>
+                                    <label for="student">Add Student<span class="text-danger">*</span></label>
                                     <input type="text" id="student" name="student" class="form-control" placeholder="Enter Student Name">
                                     <div id="student_list"></div>
                                     <span class="text-danger error-text student_error"></span>
@@ -113,7 +113,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="parent">Add Parent</label>
+                                    <label for="parent">Add Parent<span class="text-danger">*</span></label>
                                     <input type="text" id="parents" name="parent" class="form-control" placeholder="Enter Parent Name">
                                     <div id="parent_list"></div>
                                     <span class="text-danger error-text parent_error"></span>

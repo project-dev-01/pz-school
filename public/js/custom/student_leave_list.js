@@ -146,7 +146,7 @@ $(function () {
                         if (data == "Pending") {
                             badgeColor = "badge-warning";
                         }
-                        var status = '<span class="badge ' + badgeColor + ' badge-pill">' + data + '</span>';
+                        var status = '<span class="badge ' + badgeColor + ' badge-pill" style="padding: 6px 6px 6px 6px;">' + data + '</span>';
                         return status;
                     }
                 },

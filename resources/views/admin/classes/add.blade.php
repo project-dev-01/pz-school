@@ -14,7 +14,7 @@
                         <input type="text" id="className" name="name" class="form-control" placeholder="Enter class name">
                     </div>
                     <div class="form-group">
-                        <label for="name_numeric">Class Numeric</label>
+                        <label for="name_numeric">Class Numeric<span class="text-danger">*</span></label>
                         <input type="text" id="nameNumeric" name="name_numeric" class="form-control" placeholder="Enter class numeric">
                     </div>
                     <div class="form-group">

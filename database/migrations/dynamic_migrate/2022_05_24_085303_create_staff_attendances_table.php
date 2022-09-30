@@ -23,6 +23,8 @@ class CreateStaffAttendancesTable extends Migration
             $table->enum('status', ['present', 'absent','excused', 'late'])->nullable();
             $table->text('remarks')->nullable();
             $table->integer('session_id')->nullable();
+            $table->string('check_in_location')->nullable();
+            $table->string('check_out_location')->nullable();
             $table->timestamps();
         });
     }
