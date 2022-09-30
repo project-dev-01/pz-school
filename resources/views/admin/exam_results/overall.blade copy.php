@@ -84,13 +84,63 @@
                 <div class="card-body" id="card-body-tbl">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div id="overall_body">
-                            </div>
-                            <div class="col-md-12">
-                                <div class="clearfix mt-4">
-                                    <button type="button" class="btn btn-primary-bl waves-effect waves-light float-right exportToExcel">Download</button>
-                                </div>
-                            </div>
+                            <div class="">
+                                <div class="table-responsive">
+                                    <table class="table w-100 nowrap table-bordered table-striped" id="tab_overall">
+                                        <thead id="overall_header">
+                                            <tr>
+                                                <th class="align-top" rowspan="2">S.no.</th>
+                                                <th class="align-top" rowspan="2">Subject Name</th>
+                                                <th class="align-top th-sm - 6 rem" rowspan="2">Tot. Students</th>
+                                                <th class="align-top" rowspan="2">Absent</th>
+                                                <th class="align-top" rowspan="2">Present</th>
+                                                <th class="align-top" rowspan="2">Class Teacher Name</th>
+                                                @forelse ($allGrades as $val)
+                                                <th class="text-center" data-id="{{$val['id']}}">{{ $val['grade'] }}</th>
+                                                @empty
+                                                <th>0</th>
+                                                @endforelse
+                                                <th class="align-middle" rowspan="2">PASS</th>
+                                                <th class="align-middle" rowspan="2">G</th>
+                                                <th class="align-middle" rowspan="2">Avg. grade of subject</th>
+                                                <th class="align-middle" rowspan="2">%</th>
+                                            </tr>
+                                            <tr>
+                                                @forelse ($allGrades as $val)
+                                                <td class="text-center">%</td>
+                                                @empty
+                                                <th>0</th>
+                                                @endforelse
+                                            </tr>
+
+                                        </thead>
+                                        <tbody id="overall_body">
+                                            <!-- <tr>
+                                   <td class="text-center" rowspan="2">1</td>
+                                   <td class="text-center" rowspan="2">I</td>
+                                   <td class="text-right" rowspan="2">24</td>  
+                                   <td class="text-right" rowspan="2">0</td>
+                                   <td class="text-right" rowspan="2">24</td>
+                                   <td class="text-center" rowspan="2">William</td>
+                                   <td class="text-right">0</td>
+                                   <td class="text-right">10</td>
+                                   <td class="text-right">4</td>
+                                   <td class="text-right">3</td>
+                                   <td class="text-right">1</td>
+                                   <td class="text-right">5</td>
+                                   <td class="text-right">0</td>
+                                   <td class="text-right">0</td>
+                                   <td class="text-right">0</td>
+                                   <td class="text-right">23</td>
+                                   <td class="text-right">1</td>
+                                   <td class="text-right" rowspan="2">2.71</td>
+                                   <td class="text-right" rowspan="2">95.83</td>
+                                </tr> -->
+
+                                        </tbody>
+                                    </table>
+                                </div> <!-- end table-responsive-->
+                            </div> <!-- end card-box -->
                         </div> <!-- end col-->
                     </div>
                     <!-- end row-->
@@ -117,7 +167,6 @@
 
 @endsection
 @section('scripts')
-<script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
 <script>
     var getoverall = "{{ config('constants.api.tot_grade_calcu_overall') }}";
 

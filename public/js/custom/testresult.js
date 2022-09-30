@@ -312,7 +312,7 @@ $(function () {
                             if (res.status == "Pass") {
                                 pass = res.count;
                             }
-                            if (res.status == "Fail") {
+                            if (res.status == "Fail" || res.status == "Absent") {
                                 fail = res.count;
                             }
                             if (res.status == "null" || res.status == "") {
@@ -630,7 +630,7 @@ $(function () {
                     data: 'student_id'
                 },
                 {
-                    data: 'first_name'
+                    data: 'name'
                 },
                 {
                     data: 'score'

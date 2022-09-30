@@ -59,7 +59,6 @@ return [
         'tot_grade_calcu_byclass'=>$url.'/tot_grade_calcu_byclass',
         'tot_grade_calcu_bySubject'=>$url.'/tot_grade_calcu_bySubject',
         'tot_grade_calcu_byStudent'=>$url.'/tot_grade_calcu_byStudent',
-        'tot_grade_calcu_overall'=>$url.'/tot_grade_calcu_overall',
         'tot_grade_master'=>$url.'/tot_grade_master',
         'all_exams_list'=>$url.'/all_exams_list',
         'all_std_list'=>$url.'/all_std_list',
@@ -561,7 +560,10 @@ return [
         // exam results by subjects
         'exam_results_get_class_by_section' => $url.'/exam_results/get_class_by_section',
         // exam results by individual
-        'student_result'=>$url.'/getbyresult'
+        'student_result'=>$url.'/getbyresult',
+        // exam results by overall
+        'tot_grade_calcu_overall'=>$url.'/tot_grade_calcu_overall',
+
     ]
 
 ];

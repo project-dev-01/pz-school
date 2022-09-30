@@ -598,7 +598,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // by student
     Route::post('tot_grade_calcu_byStudent', [ApiControllerOne::class, 'totgradeCalcuByStudent']);
     // by overall
-    Route::post('tot_grade_calcu_overall', [ApiController::class, 'tot_grade_calcu_overall']);
+    Route::post('tot_grade_calcu_overall', [ApiControllerOne::class, 'tot_grade_calcu_overall']);
     // by individual result
     Route::post('getbyresult', [ApiControllerOne::class, 'getbyresult_student']);
 
