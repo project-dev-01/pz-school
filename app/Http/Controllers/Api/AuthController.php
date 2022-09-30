@@ -14,6 +14,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Stevebauman\Location\Facades\Location;
 // base controller add
 use App\Http\Controllers\Api\BaseController as BaseController;
 
@@ -238,19 +239,17 @@ class AuthController extends BaseController
             'branch_id' => 'required',
             'id' => 'required',
         ]);
-
-        //    return $request;
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-
-            // create new connection
 
             $success = [];
             $check_out = NULL;
             $check_in = NULL;
             $hours = NULL;
             $id = $request->id;
+            
+            // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             $date = Carbon::now()->format('Y-m-d');
             $time = Carbon::now()->format('H:i:s');
@@ -258,18 +257,25 @@ class AuthController extends BaseController
 
 
                 $validate = $conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id], ['session_id', '=', $request->session_id]])->first();
+                
+
+                $session = $conn->table('session')->where('id', '=', $request->session_id)->first();
                 if ($validate->check_in && !$validate->check_out) {
+
+                    $session_end = $session->time_to;
+                    if ($time > $session_end) {
+
+                        $success['check_out'] = "Late Check Out";
+                    } else {
+                        $success['check_out'] = "Check Out";
+                    }
                     $success['check_in'] = "Checked In";
-                    $success['check_out'] = "Check Out";
                     $success['check_in_status'] = "disabled";
                     $success['check_out_status'] = "";
                     $success['check_in_time'] = $validate->check_in;
                     $success['check_out_time'] = "";
                 } else if (!$validate->check_in && !$validate->check_out) {
-
-                    $start = $conn->table('session')->where('id', '=', $request->session_id)->first();
-                    $session_start = $start->time_from;
-                    // return $session_start;
+                    $session_start = $session->time_from;
                     if ($time > $session_start) {
 
                         $success['check_in'] = "Late Check In";
@@ -296,9 +302,34 @@ class AuthController extends BaseController
                     $success['check_in_time'] = $validate->check_in;
                     $success['check_out_time'] = $validate->check_out;
                 }
-            } else {
 
-                // return $request->session_id;
+
+                if($validate->check_out) {
+                    $session_end = $session->time_to;
+                    if ($validate->check_out > $session_end) {
+
+                        $success['check_out_color'] = "red";
+                    } else {
+                        $success['check_out_color'] = "";
+                    }
+                } else {
+                    $success['check_out_color'] = "";
+                }
+                if($validate->check_in) {
+                    $session_start = $session->time_from;
+                    if ($validate->check_in > $session_start) {
+
+                        $success['check_in_color'] = "red";
+                    } else {
+                        $success['check_in_color'] = "";
+                    }
+                } else {
+                    $success['check_in_color'] = "";
+                }
+                
+
+                    
+            } else {
                 $start = $conn->table('session')->where('id', '=', $request->session_id)->first();
                 $session_start = $start->time_from;
                 if ($time > $session_start) {
@@ -311,8 +342,9 @@ class AuthController extends BaseController
                 $success['check_out_status'] = "disabled";
                 $success['check_in_time'] = "";
                 $success['check_out_time'] = "";
+                $success['check_out_color'] = "";
+                $success['check_in_color'] = "";
             }
-            // return $now;
             return $this->successResponse($success, 'Status');
         }
     }
@@ -320,32 +352,34 @@ class AuthController extends BaseController
     // employee punchcard
     public function employeePunchCard(Request $request)
     {
-        // return 1;
         $validator = Validator::make($request->all(), [
             'branch_id' => 'required',
             'id' => 'required',
         ]);
-
-        //    return $request;
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
 
             // create new connection
-
             $success = [];
             $check_out = NULL;
             $check_in = NULL;
+            $check_in_location = NULL;
+            $check_out_location = NULL;
             $hours = NULL;
             $id = $request->id;
             $conn = $this->createNewConnection($request->branch_id);
             $date = Carbon::now()->format('Y-m-d');
             $time = Carbon::now()->format('H:i:s');
+
+            $ip = $request->ip();
+            $currentlocation = Location::get($ip);
+            $location = json_encode($currentlocation);
+
             if ($conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id], ['session_id', '=', $request->session_id]])->count() > 0) {
 
                 $validate = $conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id], ['session_id', '=', $request->session_id]])->first();
 
-                // return $validate;
                 if ($request->check_in == 1) {
                     $check_in = $time;
 
@@ -355,8 +389,10 @@ class AuthController extends BaseController
                     $success['check_out_status'] = "";
                     $success['check_in_time'] = $check_in;
                     $success['check_out_time'] = "";
+                    $check_in_location = $location;
                 } else if ($request->check_out == 1) {
                     $check_in = $validate->check_in;
+                    $check_in_location = $validate->check_in_location;
                     $check_out = $time;
 
                     if ($check_in) {
@@ -376,30 +412,17 @@ class AuthController extends BaseController
                     $success['check_out_status'] = "true";
                     $success['check_in_time'] = $validate->check_in;
                     $success['check_out_time'] = $check_out;
+
+                    $check_out_location = $location;
+                    
                 }
-                // if ($validate->check_in && !$validate->check_out) {
-                //     $check_in = $validate->check_in;
-                //     $check_out = $time;
-                //     $loginTime = strtotime($check_in);
-                //     $logoutTime = strtotime($check_out);
-                //     $diff = $logoutTime - $loginTime;
-                //     $hours = date('H:i', $diff);
-                //     $success = "Checked Out";
-                // } else if ($validate->check_in && $validate->check_out) {
-                //     $check_in = $validate->check_in;
-                //     $check_out = $validate->check_out;
-                //     $hours = $validate->hours;
-                //     $success = "Already Checked Out";
-                // }else {
-                //     $check_in = $time;
-                //     $success = "Checked In";
-                // }
-                // dd($success);
-                // dd($check_out);
+
                 $query = $conn->table('staff_attendances')->where('id', $validate->id)->update([
                     'date' => $date,
                     'check_in' => $check_in,
                     'check_out' => $check_out,
+                    'check_in_location' => $check_in_location,
+                    'check_out_location' => $check_out_location,
                     'status' => "present",
                     'hours' => $hours,
                     'staff_id' => $id,
@@ -409,6 +432,7 @@ class AuthController extends BaseController
                 $query = $conn->table('staff_attendances')->insert([
                     'date' => $date,
                     'check_in' => $time,
+                    'check_in_location' => $location,
                     'status' => "present",
                     'staff_id' => $id,
                     'session_id' => $request->session_id,

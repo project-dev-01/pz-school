@@ -13,8 +13,22 @@
         font-family: 'Open Sans';
         font-size: 14px;
         text-align: left;
-        color: #16191D;
+        color: #16191D;   
     }
+	.btn-success.disabled, .btn-success:disabled {
+    color: #fff;
+    background-color: #0ddcb3;
+    border-color: #2dba9e;
+}
+.btn-warning.disabled, .btn-warning:disabled {
+    color: #fff;
+    background-color: #dc9a28;
+    border-color: #d69016;
+}
+.red {
+    color: red;
+}
+   
 </style>
 
 <body class="loading authentication-bg authentication-bg-pattern" style="background-color:#2F2F8F">
@@ -37,12 +51,7 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                         <!-- item-->
-                                        <div class="dropdown-header noti-title">
-                                            <h6 class="text-overflow m-0">Welcome ! {{ Cookie::get('user_name') ?Cookie::get('user_name'):$temp_user_name }}</h6>
-                                        </div>
-                                        <div class="dropdown-divider"></div>
-
-                                        <!-- item-->
+                                       
                                         <a href="javascript:void(0);" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item notify-item">
                                             <i class="fe-log-out"></i>
                                             <span>Logout</span>
@@ -76,32 +85,32 @@
                                             <!-- <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a> -->
                                         </div>
                                         <div class="row">
-                                            <div class="col-8">
+                                            <div class="col-12">
                                                 <p class="greetingText">
                                                     {{ $greetings }}
 
                                                 </p>
                                                 <h3 class="greetingName">{{ Cookie::get('user_name') ?Cookie::get('user_name'):$temp_user_name }}</h3>
                                             </div>
-                                            <div class="col-4">
+                                            <!--<div class="col-4">
                                                 <div class="float-right">
                                                     <div class="greetingCntRing">
                                                         <span id="greetingRingCnt">5</span>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                         </div> <!-- end row-->
                                     </div> <!-- end widget-rounded-circle-->
                                 </div> <!-- end col-->
                             </div>
                             <div class="text-center">
-                                <form id="" action="{{ route('employee.punchcard') }}" method="post" enctype="multipart/form-data" autocomplete="off">
+                                <form autocomplete="off">
                                     @csrf
 
                                     <div class="card">
                                         <ul class="nav nav-tabs">
                                             <li class="nav-item">
-                                                <h4 class="navv"> ( <span class="date"></span> ) - @if($session==1) Morning Session @elseif($session==2) Evening Session @endif</h4>
+                                                <h4 class="navv"> ( <span class="date"></span> ) - <span class="day"></span></h4>
                                             </li>
                                         </ul>
                                         <input type="hidden" name="session" id="session" value="{{$session}}">
@@ -111,11 +120,11 @@
                                                     <tbody>
                                                         <tr>
                                                             <th width="25%">Check In Time</th>
-                                                            <td width="25%" class="check_in_time">{{$punchcard['check_in_time']}}</td>
+                                                            <td width="25%" class="check_in_time {{$punchcard['check_in_color']}}"> @if($punchcard['check_in_time']){{ Carbon\Carbon::parse($punchcard['check_in_time'])->format('H:i') }}@endif</td>
                                                         </tr>
                                                         <tr>
                                                             <th width="25%">Check Out Time</th>
-                                                            <td width="25%" class="check_out_time">{{$punchcard['check_out_time']}}</td>
+                                                            <td width="25%" class="check_out_time {{$punchcard['check_out_color']}}">@if($punchcard['check_out_time']){{ Carbon\Carbon::parse($punchcard['check_out_time'])->format('H:i') }}@endif</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -126,10 +135,10 @@
                                     </div>
                                     <div class="form-group">
                                         <div>
-                                            <button class="btn btn-success waves-effect waves-light" id="check_in" type="button" {{$punchcard['check_in_status']}}>
+                                            <button class="btn btn-success waves-effect waves-light" value="{{$punchcard['check_in']}}" id="check_in" type="button" {{$punchcard['check_in_status']}}>
                                                 {{$punchcard['check_in']}}
                                             </button>
-                                            <button class="btn btn-warning waves-effect waves-light" id="check_out" type="button" {{$punchcard['check_out_status']}}>
+                                            <button class="btn btn-warning waves-effect waves-light" value="{{$punchcard['check_out']}}" id="check_out" type="button" {{$punchcard['check_out_status']}}>
                                                 {{$punchcard['check_out']}}
                                             </button>
                                         </div>

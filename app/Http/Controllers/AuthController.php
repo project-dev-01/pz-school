@@ -37,8 +37,6 @@ class AuthController extends Controller
 
     public function employeePunchCardLogin(Request $request, $branch, $session)
     {
-
-        // dd($branch);
         $email = $request->cookie('email');
         $password = $request->cookie('password');
 
@@ -53,7 +51,6 @@ class AuthController extends Controller
                 'id' => $user_id,
                 'session_id' => $session
             ];
-            // dd($data);
             $response = Http::post(config('constants.api.employee_punchcard_check'), $data);
             $greetings = Helper::greetingMessage();
             $output = $response->json();
@@ -78,13 +75,10 @@ class AuthController extends Controller
     }
     public function employeePunchCard(Request $request)
     {
-
         $branch = $request->cookie('branch_id');
         $user = $request->cookie('user_id');
         $check_in = $request->check_in;
         $session = $request->session;
-        // return $request;
-        // dd($request);
         if ($check_in) {
 
             $data = [
@@ -96,7 +90,6 @@ class AuthController extends Controller
         }
 
         $check_out = $request->check_out;
-        // dd($value);
         if ($check_out) {
 
             $data = [
@@ -106,22 +99,17 @@ class AuthController extends Controller
                 'session_id' => $session
             ];
         }
-        // dd($data);
         $response = Http::post(config('constants.api.employee_punchcard'), $data);
-
-        // dd($response->json());
+        
         return $response;
     }
     public function punchCardDetails(Request $request)
     {
-        #luvupqvyc
-        // dd($request);
         $minutes = 600000;
         $email = $request->email;
         $password = $request->password;
         $session = $request->session;
         $branch_id = $request->branch_id;
-        // dd($branch_id);
         $check = Http::post(config('constants.api.login_branch'), [
             'email' => $request->email,
             'password' => $request->password,
@@ -131,7 +119,6 @@ class AuthController extends Controller
         $user_id = "";
         $branch_id = "";
         $userDetails = $check->json();
-        // dd($userDetails);
         if ($userDetails['code'] == 200) {
             if ($userDetails['data']['subsDetails']) {
                 if ($userDetails['data']['user']['role_id'] != 1) {
@@ -150,8 +137,11 @@ class AuthController extends Controller
                         'session_id' => $session
                     ];
                     $response = Http::post(config('constants.api.employee_punchcard_check'), $data);
+                    
+                    // dd($response);
                     $greetings = Helper::greetingMessage();
                     $output = $response->json();
+
                     return view(
                         'auth.punch-card',
                         [
