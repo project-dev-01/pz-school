@@ -30,6 +30,36 @@ class AuthController extends Controller
         }
         return view('auth.login');
     }
+    public function teacherLoginForm(Request $request)
+    {
+        if (session()->has('role_id')) {
+            $role_id = session()->get('role_id');
+            if ($role_id == 4) {
+                return redirect()->route('teacher.dashboard');
+            }
+        }
+        return view('auth.teacher_login');
+    }
+    public function parentLoginForm(Request $request)
+    {
+        if (session()->has('role_id')) {
+            $role_id = session()->get('role_id');
+            if ($role_id == 5) {
+                return redirect()->route('parent.dashboard');
+            }
+        }
+        return view('auth.parent_login');
+    }
+    public function studentLoginForm(Request $request)
+    {
+        if (session()->has('role_id')) {
+            $role_id = session()->get('role_id');
+            if ($role_id == 6) {
+                return redirect()->route('student.dashboard');
+            }
+        }
+        return view('auth.student_login');
+    }
     public function showLoadingForm(Request $request)
     {
         return view('auth.loading');
@@ -197,50 +227,14 @@ class AuthController extends Controller
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
             if ($userDetails['data']['subsDetails']) {
-                if ($userDetails['data']['user']['role_id'] != 1) {
-                    $request->session()->put('user_id', $userDetails['data']['user']['id']);
-                    $request->session()->put('ref_user_id', $userDetails['data']['user']['user_id']);
-                    $request->session()->put('role_id', $userDetails['data']['user']['role_id']);
-                    $request->session()->put('picture', $userDetails['data']['user']['picture']);
-                    $request->session()->put('token', $userDetails['data']['token']);
-                    $request->session()->put('name', $userDetails['data']['user']['name']);
-                    $request->session()->put('email', $userDetails['data']['user']['email']);
-                    $request->session()->put('role_name', $userDetails['data']['role_name']);
-                    $request->session()->put('branch_id', $userDetails['data']['subsDetails']['id']);
-                    $request->session()->put('school_name', $userDetails['data']['subsDetails']['school_name']);
-                    $request->session()->put('school_logo', $userDetails['data']['subsDetails']['logo']);
-                    // space remove school name
-                    $string = preg_replace('/\s+/', '-', $userDetails['data']['subsDetails']['school_name']);
-                    $request->session()->put('school_name_url', $string);
-                    // greeting session 
-                    $request->session()->put('greetting_id', 1);
-                    // dd($userDetails['data']['StudentID'][0]['id']);
-                    if (isset($userDetails['data']['StudentID'])) {
-                        $request->session()->put('student_id', $userDetails['data']['StudentID'][0]['id']);
-                        $request->session()->put('all_child', $userDetails['data']['StudentID']);
-                    } else {
-                        $request->session()->put('student_id', null);
-                        $request->session()->put('all_child', null);
-                    }
-                    $user_name = $userDetails['data']['user']['name'];
-                    // $request->session()->put('db_name', $userDetails['data']['subsDetails']['db_name']);
-                    // $request->session()->put('db_username', $userDetails['data']['subsDetails']['db_username']);
-                    // $request->session()->put('db_password', $userDetails['data']['subsDetails']['db_password']);
+                if ($userDetails['data']['user']['role_id'] == 2 || $userDetails['data']['user']['role_id'] == 3) {
+                    $user_name = $this->sessionCommon($request, $userDetails);
                 }
                 if ($userDetails['data']['user']['role_id'] == 2) {
                     $redirect_route = route('admin.dashboard');
                     return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
                 } elseif ($userDetails['data']['user']['role_id'] == 3) {
                     $redirect_route = route('staff.dashboard');
-                    return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
-                } elseif ($userDetails['data']['user']['role_id'] == 4) {
-                    $redirect_route = route('teacher.dashboard');
-                    return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
-                } elseif ($userDetails['data']['user']['role_id'] == 5) {
-                    $redirect_route = route('parent.dashboard');
-                    return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
-                } elseif ($userDetails['data']['user']['role_id'] == 6) {
-                    $redirect_route = route('student.dashboard');
                     return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
                 } else {
                     return redirect()->route('admin.login')->with('error', 'Invalid Credential');
@@ -252,6 +246,94 @@ class AuthController extends Controller
             return redirect()->route('admin.login')->with('error', $userDetails['message']);
         }
     }
+    public function authenticateTeacher(Request $request)
+    {
+
+        $response = Http::post(config('constants.api.login'), [
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+
+        $userDetails = $response->json();
+        $user_name = "";
+        $request->session()->regenerate();
+        if ($userDetails['code'] == 200) {
+            if ($userDetails['data']['subsDetails']) {
+                if ($userDetails['data']['user']['role_id'] == 4) {
+                    $user_name = $this->sessionCommon($request, $userDetails);
+                }
+                if ($userDetails['data']['user']['role_id'] == 4) {
+                    $redirect_route = route('teacher.dashboard');
+                    return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
+                } else {
+                    return redirect()->route('teacher.login')->with('error', 'Invalid Credential');
+                }
+            } else {
+                return redirect()->route('teacher.login')->with('error', 'Access denied please contact admin');
+            }
+        } else {
+            return redirect()->route('teacher.login')->with('error', $userDetails['message']);
+        }
+    }
+    public function authenticateParent(Request $request)
+    {
+
+        $response = Http::post(config('constants.api.login'), [
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+
+        $userDetails = $response->json();
+        $user_name = "";
+        $request->session()->regenerate();
+        if ($userDetails['code'] == 200) {
+            if ($userDetails['data']['subsDetails']) {
+                if ($userDetails['data']['user']['role_id'] == 5) {
+                    $user_name = $this->sessionCommon($request, $userDetails);
+                }
+                if ($userDetails['data']['user']['role_id'] == 5) {
+                    $redirect_route = route('parent.dashboard');
+                    return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
+                } else {
+                    return redirect()->route('parent.login')->with('error', 'Invalid Credential');
+                }
+            } else {
+                return redirect()->route('parent.login')->with('error', 'Access denied please contact admin');
+            }
+        } else {
+            return redirect()->route('parent.login')->with('error', $userDetails['message']);
+        }
+    }
+    public function authenticateStudent(Request $request)
+    {
+
+        $response = Http::post(config('constants.api.login'), [
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+
+        $userDetails = $response->json();
+        $user_name = "";
+        $request->session()->regenerate();
+        if ($userDetails['code'] == 200) {
+            if ($userDetails['data']['subsDetails']) {
+                if ($userDetails['data']['user']['role_id'] == 6) {
+                    $user_name = $this->sessionCommon($request, $userDetails);
+                }
+                if ($userDetails['data']['user']['role_id'] == 6) {
+                    $redirect_route = route('student.dashboard');
+                    return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
+                } else {
+                    return redirect()->route('student.login')->with('error', 'Invalid Credential');
+                }
+            } else {
+                return redirect()->route('student.login')->with('error', 'Access denied please contact admin');
+            }
+        } else {
+            return redirect()->route('student.login')->with('error', $userDetails['message']);
+        }
+    }
+
     // authenticate sa
     public function authenticateSA(Request $request)
     {
@@ -304,28 +386,38 @@ class AuthController extends Controller
     }
     public function logout(Request $request)
     {
-        // dd($request);
         if (session()->has('role_id')) {
-            session()->pull('role_id');
-            session()->pull('token');
-            session()->pull('picture');
-            session()->pull('name');
-            session()->pull('email');
-            session()->pull('role_name');
-            session()->pull('user_id');
-            session()->pull('branch_id');
-            session()->pull('ref_user_id');
-            session()->pull('student_id');
-            session()->pull('school_name');
-            session()->pull('school_logo');
-            session()->pull('all_child');
-            // session()->pull('db_name');
-            // session()->pull('db_username');
-            // session()->pull('db_password');
-            $request->session()->flush();
+            $this->logoutCommon($request);
             return redirect()->route('admin.login');
         } else {
             return redirect()->route('admin.login');
+        }
+    }
+    public function logoutTeacher(Request $request)
+    {
+        if (session()->has('role_id')) {
+            $this->logoutCommon($request);
+            return redirect()->route('teacher.login');
+        } else {
+            return redirect()->route('teacher.login');
+        }
+    }
+    public function logoutParent(Request $request)
+    {
+        if (session()->has('role_id')) {
+            $this->logoutCommon($request);
+            return redirect()->route('parent.login');
+        } else {
+            return redirect()->route('parent.login');
+        }
+    }
+    public function logoutStudent(Request $request)
+    {
+        if (session()->has('role_id')) {
+            $this->logoutCommon($request);
+            return redirect()->route('student.login');
+        } else {
+            return redirect()->route('student.login');
         }
     }
     public function forgotPassword(Request $request)
@@ -367,5 +459,53 @@ class AuthController extends Controller
         } else {
             return redirect()->back()->with('error', $userDetails['message']);
         }
+    }
+    // common logout
+    public function logoutCommon($req)
+    {
+        session()->pull('role_id');
+        session()->pull('token');
+        session()->pull('picture');
+        session()->pull('name');
+        session()->pull('email');
+        session()->pull('role_name');
+        session()->pull('user_id');
+        session()->pull('branch_id');
+        session()->pull('ref_user_id');
+        session()->pull('student_id');
+        session()->pull('school_name');
+        session()->pull('school_logo');
+        session()->pull('all_child');
+        $req->session()->flush();
+    }
+    // set session common
+    public function sessionCommon($req, $userDetails)
+    {
+        $req->session()->put('user_id', $userDetails['data']['user']['id']);
+        $req->session()->put('ref_user_id', $userDetails['data']['user']['user_id']);
+        $req->session()->put('role_id', $userDetails['data']['user']['role_id']);
+        $req->session()->put('picture', $userDetails['data']['user']['picture']);
+        $req->session()->put('token', $userDetails['data']['token']);
+        $req->session()->put('name', $userDetails['data']['user']['name']);
+        $req->session()->put('email', $userDetails['data']['user']['email']);
+        $req->session()->put('role_name', $userDetails['data']['role_name']);
+        $req->session()->put('branch_id', $userDetails['data']['subsDetails']['id']);
+        $req->session()->put('school_name', $userDetails['data']['subsDetails']['school_name']);
+        $req->session()->put('school_logo', $userDetails['data']['subsDetails']['logo']);
+        // space remove school name
+        $string = preg_replace('/\s+/', '-', $userDetails['data']['subsDetails']['school_name']);
+        $req->session()->put('school_name_url', $string);
+        // greeting session 
+        $req->session()->put('greetting_id', 1);
+        // dd($userDetails['data']['StudentID'][0]['id']);
+        if (isset($userDetails['data']['StudentID'])) {
+            $req->session()->put('student_id', $userDetails['data']['StudentID'][0]['id']);
+            $req->session()->put('all_child', $userDetails['data']['StudentID']);
+        } else {
+            $req->session()->put('student_id', null);
+            $req->session()->put('all_child', null);
+        }
+        $user_name = $userDetails['data']['user']['name'];
+        return $user_name;
     }
 }

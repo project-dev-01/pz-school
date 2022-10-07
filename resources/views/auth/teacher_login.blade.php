@@ -60,7 +60,7 @@
 
                         <!-- form -->
                         <div class="form">
-                            <form id="LoginAuth" action="{{ route('admin.authenticate') }}" method="post">
+                            <form id="LoginAuth" action="{{ route('teacher.authenticate') }}" method="post">
                                 <h1 class="welcomeback">Welcome back,</h1>
                                 @if ( Session::get('success'))
                                 <div class="alert alert-success">

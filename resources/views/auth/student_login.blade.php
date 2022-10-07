@@ -26,12 +26,12 @@
 
 <body class="loading auth-fluid-pages pb-0">
     <div class="auth-fluid">
-        <div class="col-md-6 ">
-            <div class="auth-fluid-right text-center teacherlogin">
+        <div class="col-md-6 teacherlogin" style="background: url(../public/images/bg-auth-student.jpg);">
+            <div class="auth-fluid-right text-center">
                 <div class="">
                     <!--Auth fluid left content -->
                     <div class="auth-user-testimonial bg">
-                        <p class="mb-3 text-white text">Teaching is the greatest<br> act of optimism</p>
+                        <p class="mb-3 text-white text">Even the greatest were beginners</p>
                     </div> <!-- end auth-user-testimonial-->
                 </div>
             </div>
@@ -60,7 +60,7 @@
 
                         <!-- form -->
                         <div class="form">
-                            <form id="LoginAuth" action="{{ route('admin.authenticate') }}" method="post">
+                            <form id="LoginAuth" action="{{ route('student.authenticate') }}" method="post">
                                 <h1 class="welcomeback">Welcome back,</h1>
                                 @if ( Session::get('success'))
                                 <div class="alert alert-success">
