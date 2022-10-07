@@ -881,6 +881,14 @@ Route::group(['prefix' => 'teacher'], function () {
 
         // Section By Class Route
         Route::post('section-by-class', [TeacherController::class, 'sectionByClass'])->name('teacher.section_by_class');
+
+        // Student List
+        Route::get('student/list', [TeacherController::class, 'studentList'])->name('teacher.student.list');
+        Route::get('student/student-details/{id}', [TeacherController::class, 'getStudentDetails'])->name('teacher.student.details');
+    
+        //Timetable
+        Route::get('timetable/index', [TeacherController::class, 'timetable'])->name('teacher.timetable');
+        Route::post('timetable/timetable-details', [TeacherController::class, 'getTimetable'])->name('teacher.timetable.details');
     });
 });
 // TEACHER CONTROLLER END
