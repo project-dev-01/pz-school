@@ -125,6 +125,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // Event routes
     Route::post('event/add', [ApiController::class, 'addEvent']);
     Route::get('event/list', [ApiController::class, 'getEventList']);
+    Route::get('event/list/student', [ApiController::class, 'getEventListStudent']);
     Route::post('event/event-details', [ApiController::class, 'getEventDetails']);
     Route::post('event/update', [ApiController::class, 'updateEvent']);
     Route::post('event/delete', [ApiController::class, 'deleteEvent']);
@@ -603,4 +604,34 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('getbyresult', [ApiControllerOne::class, 'getbyresult_student']);
     // report card 
     Route::post('get_by_reportcard', [ApiControllerOne::class, 'getreportcard']);
+
+    
+    // absent reason routes
+    Route::post('absent_reason/add', [ApiController::class, 'addAbsentReason']);
+    Route::get('absent_reason/list', [ApiController::class, 'getAbsentReasonList']);
+    Route::post('absent_reason/absent-reason-details', [ApiController::class, 'getAbsentReasonDetails']);
+    Route::post('absent_reason/update', [ApiController::class, 'updateAbsentReason']);
+    Route::post('absent_reason/delete', [ApiController::class, 'deleteAbsentReason']);
+    
+    // late reason routes
+    Route::post('late_reason/add', [ApiController::class, 'addLateReason']);
+    Route::get('late_reason/list', [ApiController::class, 'getLateReasonList']);
+    Route::post('late_reason/late-reason-details', [ApiController::class, 'getLateReasonDetails']);
+    Route::post('late_reason/update', [ApiController::class, 'updateLateReason']);
+    Route::post('late_reason/delete', [ApiController::class, 'deleteLateReason']);
+    
+    // excused reason routes
+    Route::post('excused_reason/add', [ApiController::class, 'addExcusedReason']);
+    Route::get('excused_reason/list', [ApiController::class, 'getExcusedReasonList']);
+    Route::post('excused_reason/excused-reason-details', [ApiController::class, 'getExcusedReasonDetails']);
+    Route::post('excused_reason/update', [ApiController::class, 'updateExcusedReason']);
+    Route::post('excused_reason/delete', [ApiController::class, 'deleteExcusedReason']);
+
+    // semester routes
+    Route::post('semester/add', [ApiController::class, 'addSemester']);
+    Route::get('semester/list', [ApiController::class, 'getSemesterList']);
+    Route::post('semester/semester-details', [ApiController::class, 'getSemesterDetails']);
+    Route::post('semester/update', [ApiController::class, 'updateSemester']);
+    Route::post('semester/delete', [ApiController::class, 'deleteSemester']);
+
 });

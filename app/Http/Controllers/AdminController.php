@@ -5219,5 +5219,240 @@ class AdminController extends Controller
         return Excel::download(new StaffAttendanceExport(1,$request->employee,$request->session,$request->date,$request->department), 'Staff_Attendance.xlsx');
     }
 
+    // index absent Reason
+    public function absentReason()
+    {
+        return view('admin.absent_reason.index');
+    }
+
+    public function addAbsentReason(Request $request)
+    {
+        $data = [
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.absent_reason_add'), $data);
+        return $response;
+    }
+    public function getAbsentReasonList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.absent_reason_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editAbsentReasonBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteAbsentReasonBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getAbsentReasonDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.absent_reason_details'), $data);
+        return $response;
+    }
+    public function updateAbsentReason(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.absent_reason_update'), $data);
+        return $response;
+    }
+    // DELETE User Details
+    public function deleteAbsentReason(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.absent_reason_delete'), $data);
+        return $response;
+    }
+
+    // index late Reason
+    public function lateReason()
+    {
+        return view('admin.late_reason.index');
+    }
+
+    public function addLateReason(Request $request)
+    {
+        $data = [
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.late_reason_add'), $data);
+        return $response;
+    }
+    public function getLateReasonList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.late_reason_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editLateReasonBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteLateReasonBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getLateReasonDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.late_reason_details'), $data);
+        return $response;
+    }
+    public function updateLateReason(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.late_reason_update'), $data);
+        return $response;
+    }
+    // DELETE User Details
+    public function deleteLateReason(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.late_reason_delete'), $data);
+        return $response;
+    }
+
+    
+    // index excused Reason
+    public function excusedReason()
+    {
+        return view('admin.excused_reason.index');
+    }
+
+    public function addExcusedReason(Request $request)
+    {
+        $data = [
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.excused_reason_add'), $data);
+        return $response;
+    }
+    public function getExcusedReasonList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.excused_reason_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editExcusedReasonBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteExcusedReasonBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getExcusedReasonDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.excused_reason_details'), $data);
+        return $response;
+    }
+    public function updateExcusedReason(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.excused_reason_update'), $data);
+        return $response;
+    }
+    // DELETE User Details
+    public function deleteExcusedReason(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.excused_reason_delete'), $data);
+        return $response;
+    }
+
+    // index semester
+    public function semester()
+    {
+        return view('admin.semester.index');
+    }
+
+    public function addSemester(Request $request)
+    {
+        $data = [
+            'name' => $request->name,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'year' => $request->year
+        ];
+        $response = Helper::PostMethod(config('constants.api.semester_add'), $data);
+        return $response;
+    }
+    public function getSemesterList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.semester_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editSemesterBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteSemesterBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getSemesterDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.semester_details'), $data);
+        return $response;
+    }
+    public function updateSemester(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'year' => $request->year
+        ];
+        $response = Helper::PostMethod(config('constants.api.semester_update'), $data);
+        return $response;
+    }
+    // DELETE User Details
+    public function deleteSemester(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.semester_delete'), $data);
+        return $response;
+    }
+
     
 }

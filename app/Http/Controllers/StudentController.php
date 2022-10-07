@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
+use DataTables;
 use App\Models\User;
 use App\Models\Task;
 
@@ -113,7 +114,7 @@ class StudentController extends Controller
         if ($homework['code'] == "200") {
             $response = "";
             if ($homework['data']) {
-                foreach ($homework['data']['homeworks'] as $work) {
+                foreach ($homework['data']['homeworks'] as $key=>$work) {
                     $evaluation_date = (isset($work['evaluation_date'])) ? date('F j , Y', strtotime($work['evaluation_date'])) : "-";
                     if ($work['status'] == 1) {
                         $status = "Completed";
@@ -150,19 +151,19 @@ class StudentController extends Controller
                             </button>
                         </div>';
                     }
-                    $response .= '<form class="submitHomeworkForm" action="' . route('student.homework.submit') . '" method="post"   enctype="multipart/form-data" autocomplete="off">
+                    $response .= '<form class="submitHomeworkForm" id="form'.$key.'" action="' . route('student.homework.submit') . '" method="post"   enctype="multipart/form-data" autocomplete="off">
                     ' . csrf_field() . '
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <p>
                                 <div>
-                                    <a class="list-group-item list-group-item-info btn-block btn-lg" data-toggle="collapse" href="#English" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <a class="list-group-item list-group-item-info btn-block btn-lg" data-toggle="collapse" href="#hw-'.$key.'" role="button" aria-expanded="false" aria-controls="collapseExample">
                                         <i class="fas fa-caret-square-down"></i>' . $work['subject_name'] . ' - ' . date('j F Y', strtotime($work['date_of_homework'])) . ' ' . $top . '
                                     </a>
                                 </div>
                                 </p>
-                                <div class="collapse" id="English">
+                                <div class="collapse" id="hw-'.$key.'">
                                     <div class="card card-body">
                                         <div class="row">
                                             <div class="col-md-4">
@@ -617,5 +618,41 @@ class StudentController extends Controller
                 ]
             );
         }
+    }
+    
+    public function getEventList(Request $request)
+    {
+        $data = [
+            'student_id' => session()->get('ref_user_id')
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.event_list_student'), $data);
+        // dd($response);
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('classname', function ($row) {
+                $audience = $row['audience'];
+                if ($audience == 1) {
+                    return "Everyone";
+                } else if ($audience == 2) {
+                    return "<b>Standard </b>: " . $row['class_name'];
+                } else if ($audience == 3) {
+                    return "<b>Group </b>: " . $row['group_name'];
+                }
+            })
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" data-id="' . $row['id'] . '" id="viewEventBtn"><i class="fe-eye"></i></a>
+                        </div>';
+            })
+            ->rawColumns(['classname', 'publish', 'actions'])
+            ->make(true);
+    }
+    public function getEventDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.event_details'), $data);
+        return $response;
     }
 }

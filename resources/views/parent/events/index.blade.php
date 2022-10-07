@@ -1,5 +1,12 @@
 @extends('layouts.admin-layout')
 @section('title','Event')
+@section('css')
+<link rel="stylesheet" href="{{ asset('public/libs/dropzone/min/dropzone.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/libs/dropify/css/dropify.min.css') }}">
+<style>
+    .datepicker{ z-index:99999 !important; }
+</style>
+@endsection
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -8,81 +15,66 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <!-- <div class="page-title-right">
+                <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item active">List</li>
+                        <!-- <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li> -->
                     </ol>
-                </div> -->
-                <h4 class="page-title">Events</h4>
+                </div>
+                <h4 class="page-title">Event</h4>
             </div>
         </div>
     </div>
     <!-- end page title -->
 
     <div class="row">
-        <div class="col-xl-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                            Event List
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="">
-                                <div class="table-responsive">
-                                    <table class="table w-100 nowrap">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Title</th>
-                                                <th>Type</th>
-                                                <th>Audience</th>
-                                                <th>Start Date</th>
-                                                <th>End Date</th>
-                                                <th>Created By</th>
-                                                <th>Publish</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Volley Ball</td>
-                                                <td>Sports</td>
-                                                <td>All</td>
-                                                <td>26-01-2022</td>
-                                                <td>28-01-2022</td>
-                                                <td>Admin</td>
-                                                <td>Published</td>
-                                                <td>
-                                                    <div class="button-list">
-                                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-toggle="modal" data-id="" data-target="#viewEvent"><i class="fe-eye"></i></a>
-                                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id=""><i class="fe-trash-2"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div> <!-- end table-responsive-->
-
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col-->
+        <div class="col-lg-12">
+            <div class="card-box">
+                <h4 class="header-title">Event</h4>
+                <p class="sub-header">
+                <!-- <div class="form-group pull-right">
+                    <div class="col-xs-2 col-sm-2">
+                        <a type="button" class="btn add-btn btn-rounded waves-effect waves-light" href="{{ route('admin.event.create')}}">Add</a>
                     </div>
-                    <!-- end row-->
-
-                </div> <!-- end card-body -->
-            </div> <!-- end card-->
+                </div> -->
+                </p>
+                
+                <div class="table-responsive">
+                    <table class="table w-100 nowrap" id="event-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Type</th>
+                                <th>Audience</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div> <!-- end card-box -->
         </div> <!-- end col -->
-
     </div>
-    <!-- end row -->
+    <!--- end row -->
     @include('parent.events.view')
 </div>
 <!-- container -->
+
+@endsection
+@section('scripts')
+<script>
+  //event routes
+    var eventList = "{{ route('parent.event.list') }}";
+    var eventDetails = "{{ route('parent.event.details') }}";
+    
+</script>
+<script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>
+<script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>
+<script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
+<script src="{{ asset('public/js/custom/student_event.js') }}"></script>
 
 @endsection

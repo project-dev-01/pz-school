@@ -109,6 +109,7 @@ return [
         'event_delete' => $url.'/event/delete',
         'event_publish' => $url.'/event/publish',
         'branch_by_event' => $url.'/branch-by-event',
+        'event_list_student' => $url.'/event/list/student',
         // Qualifications
         'qualification/index' => $url.'/qualification/index',
         'qualification_add' => $url.'/qualification/add',
@@ -563,6 +564,34 @@ return [
         'student_result'=>$url.'/getbyresult',
         // exam results by overall
         'tot_grade_calcu_overall'=>$url.'/tot_grade_calcu_overall',
+
+        // absent_reason url
+        'absent_reason_add' => $url.'/absent_reason/add',
+        'absent_reason_list' => $url.'/absent_reason/list',
+        'absent_reason_details' => $url.'/absent_reason/absent-reason-details',
+        'absent_reason_update' => $url.'/absent_reason/update',
+        'absent_reason_delete' => $url.'/absent_reason/delete',
+
+        // late_reason url
+        'late_reason_add' => $url.'/late_reason/add',
+        'late_reason_list' => $url.'/late_reason/list',
+        'late_reason_details' => $url.'/late_reason/late-reason-details',
+        'late_reason_update' => $url.'/late_reason/update',
+        'late_reason_delete' => $url.'/late_reason/delete',
+
+        // excused_reason url
+        'excused_reason_add' => $url.'/excused_reason/add',
+        'excused_reason_list' => $url.'/excused_reason/list',
+        'excused_reason_details' => $url.'/excused_reason/excused-reason-details',
+        'excused_reason_update' => $url.'/excused_reason/update',
+        'excused_reason_delete' => $url.'/excused_reason/delete',
+
+        // semester url
+        'semester_add' => $url.'/semester/add',
+        'semester_list' => $url.'/semester/list',
+        'semester_details' => $url.'/semester/semester-details',
+        'semester_update' => $url.'/semester/update',
+        'semester_delete' => $url.'/semester/delete',
 
     ]
 

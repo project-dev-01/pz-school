@@ -1,21 +1,21 @@
 $(function () {
 
-    raceTable();
-    $("#raceForm").validate({
+    excusedReasonTable();
+    $("#excusedReasonForm").validate({
         rules: {
             name: "required"
         }
     });
-    $("#edit-race-form").validate({
+    $("#edit-excused-reason-form").validate({
         rules: {
             name: "required"
         }
     });
-    // add race
-    $('#raceForm').on('submit', function (e) {
+    // add excusedReason
+    $('#excusedReasonForm').on('submit', function (e) {
         e.preventDefault();
-        var raceCheck = $("#raceForm").valid();
-        if (raceCheck === true) {
+        var excusedReasonCheck = $("#excusedReasonForm").valid();
+        if (excusedReasonCheck === true) {
             var form = this;
 
             $.ajax({
@@ -29,9 +29,9 @@ $(function () {
                     // console.log("------")
                     console.log(data)
                     if (data.code == 200) {
-                        $('#race-table').DataTable().ajax.reload(null, false);
-                        $('.addRace').modal('hide');
-                        $('.addRace').find('form')[0].reset();
+                        $('#excused-reason-table').DataTable().ajax.reload(null, false);
+                        $('.addExcusedReason').modal('hide');
+                        $('.addExcusedReason').find('form')[0].reset();
                         toastr.success(data.message);
                     } else {
                         toastr.error(data.message);
@@ -41,9 +41,9 @@ $(function () {
         }
     });
 
-    // get all race table
-    function raceTable() {
-         $('#race-table').DataTable({
+    // get all excused Reason table
+    function excusedReasonTable() {
+         $('#excused-reason-table').DataTable({
             processing: true,
             info: true,
             // dom: 'lBfrtip',
@@ -60,7 +60,7 @@ $(function () {
                     }
                 }
             ],
-            ajax: raceList,
+            ajax: excusedReasonList,
             "pageLength": 5,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
@@ -91,22 +91,22 @@ $(function () {
         });
     }
     // get row
-    $(document).on('click', '#editRaceBtn', function () {
+    $(document).on('click', '#editExcusedReasonBtn', function () {
         var id = $(this).data('id');
      
-        $('.editRace').find('form')[0].reset();   
-        $.post(raceDetails, { id: id }, function (data) {
-            $('.editRace').find('input[name="id"]').val(data.data.id);
-            $('.editRace').find('input[name="name"]').val(data.data.name);
-            $('.editRace').modal('show');
+        $('.editExcusedReason').find('form')[0].reset();   
+        $.post(excusedReasonDetails, { id: id }, function (data) {
+            $('.editExcusedReason').find('input[name="id"]').val(data.data.id);
+            $('.editExcusedReason').find('input[name="name"]').val(data.data.name);
+            $('.editExcusedReason').modal('show');
         }, 'json');
         console.log(id);
     });
     // update Race
-    $('#edit-race-form').on('submit', function (e) {
+    $('#edit-excused-reason-form').on('submit', function (e) {
         e.preventDefault();
-        var edt_raceCheck = $("#edit-race-form").valid();
-        if (edt_raceCheck === true) {
+        var edt_excusedReasonCheck = $("#edit-excused-reason-form").valid();
+        if (edt_excusedReasonCheck === true) {
       
             var form = this;
             $.ajax({
@@ -124,13 +124,13 @@ $(function () {
                     } else {
 
                         if (data.code == 200) {
-                            $('#race-table').DataTable().ajax.reload(null, false);
-                            $('.editRace').modal('hide');
-                            $('.editRace').find('form')[0].reset();
+                            $('#excused-reason-table').DataTable().ajax.reload(null, false);
+                            $('.editExcusedReason').modal('hide');
+                            $('.editExcusedReason').find('form')[0].reset();
                             toastr.success(data.message);
                         } else {
-                            $('.editRace').modal('hide');
-                            $('.editRace').find('form')[0].reset();
+                            $('.editExcusedReason').modal('hide');
+                            $('.editExcusedReason').find('form')[0].reset();
                             toastr.error(data.message);
                         }
                     }
@@ -138,13 +138,13 @@ $(function () {
             });
         }
     });
-    // delete RaceDelete
-    $(document).on('click', '#deleteRaceBtn', function () {
+    // delete ExcusedReasonDelete
+    $(document).on('click', '#deleteExcusedReasonBtn', function () {
         var id = $(this).data('id');
-        var url = raceDelete;
+        var url = excusedReasonDelete;
         swal.fire({
             title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this Race',
+            html: 'You want to <b>delete</b> this Excused Reason',
             showCancelButton: true,
             showCloseButton: true,
             cancelButtonText: 'Cancel',
@@ -159,7 +159,7 @@ $(function () {
                     id: id
                 }, function (data) {
                     if (data.code == 200) {
-                        $('#race-table').DataTable().ajax.reload(null, false);
+                        $('#excused-reason-table').DataTable().ajax.reload(null, false);
                         toastr.success(data.message);
                     } else {
                         toastr.error(data.message);

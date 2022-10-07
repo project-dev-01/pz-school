@@ -256,20 +256,8 @@
                                                         </a>
                                                     </div>
                                                 </div>
-                                                @else
-                                                <div class="col-md-6">
-                                                    <div class="col-md-6 font-weight-bold">Attachment File :</div>
-                                                    <div class="col-md-6">
-                                                        <input type="file" name="file">
-                                                    </div>
-                                                </div>
                                                 @endif
                                             </div><br>
-                                            <div class="form-group text-right m-b-0">
-                                                <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                    Submit
-                                                </button>
-                                            </div>
                                         </div>
                                     </div>
 

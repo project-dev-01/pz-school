@@ -1,21 +1,57 @@
 $(function () {
+    $(document).ready(function () {
+        
+    
+        $("#start_date").datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            autoclose: true,
+        });
+        $("#end_date").datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            autoclose: true,
+        });
 
-    raceTable();
-    $("#raceForm").validate({
+        $("#edit_start_date").datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            autoclose: true,
+        });
+        $("#edit_end_date").datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            autoclose: true,
+        });
+    });
+
+
+    semesterTable();
+    $("#semesterForm").validate({
         rules: {
-            name: "required"
+            name: "required",
+            start_date: "required",
+            end_date: "required",
+            year: "required",
         }
     });
-    $("#edit-race-form").validate({
+    $("#edit-semester-form").validate({
         rules: {
-            name: "required"
+            name: "required",
+            start_date: "required",
+            end_date: "required",
+            year: "required",
         }
     });
-    // add race
-    $('#raceForm').on('submit', function (e) {
+    // add semester
+    $('#semesterForm').on('submit', function (e) {
         e.preventDefault();
-        var raceCheck = $("#raceForm").valid();
-        if (raceCheck === true) {
+        var semesterCheck = $("#semesterForm").valid();
+        if (semesterCheck === true) {
             var form = this;
 
             $.ajax({
@@ -29,9 +65,9 @@ $(function () {
                     // console.log("------")
                     console.log(data)
                     if (data.code == 200) {
-                        $('#race-table').DataTable().ajax.reload(null, false);
-                        $('.addRace').modal('hide');
-                        $('.addRace').find('form')[0].reset();
+                        $('#semester-table').DataTable().ajax.reload(null, false);
+                        $('.addSemester').modal('hide');
+                        $('.addSemester').find('form')[0].reset();
                         toastr.success(data.message);
                     } else {
                         toastr.error(data.message);
@@ -41,9 +77,9 @@ $(function () {
         }
     });
 
-    // get all race table
-    function raceTable() {
-         $('#race-table').DataTable({
+    // get all semester table
+    function semesterTable() {
+         $('#semester-table').DataTable({
             processing: true,
             info: true,
             // dom: 'lBfrtip',
@@ -60,7 +96,7 @@ $(function () {
                     }
                 }
             ],
-            ajax: raceList,
+            ajax: semesterList,
             "pageLength": 5,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
@@ -81,6 +117,18 @@ $(function () {
                     name: 'name'
                 },
                 {
+                    data: 'start_date',
+                    name: 'start_date'
+                },
+                {
+                    data: 'end_date',
+                    name: 'end_date'
+                },
+                {
+                    data: 'year',
+                    name: 'year'
+                },
+                {
                     data: 'actions',
                     name: 'actions',
                     orderable: false,
@@ -91,22 +139,25 @@ $(function () {
         });
     }
     // get row
-    $(document).on('click', '#editRaceBtn', function () {
+    $(document).on('click', '#editSemesterBtn', function () {
         var id = $(this).data('id');
      
-        $('.editRace').find('form')[0].reset();   
-        $.post(raceDetails, { id: id }, function (data) {
-            $('.editRace').find('input[name="id"]').val(data.data.id);
-            $('.editRace').find('input[name="name"]').val(data.data.name);
-            $('.editRace').modal('show');
+        $('.editSemester').find('form')[0].reset();   
+        $.post(semesterDetails, { id: id }, function (data) {
+            $('.editSemester').find('input[name="id"]').val(data.data.id);
+            $('.editSemester').find('input[name="name"]').val(data.data.name);
+            $('.editSemester').find('input[name="start_date"]').val(data.data.start_date);
+            $('.editSemester').find('input[name="end_date"]').val(data.data.end_date);
+            $('.editSemester').find('input[name="year"]').val(data.data.year);
+            $('.editSemester').modal('show');
         }, 'json');
         console.log(id);
     });
-    // update Race
-    $('#edit-race-form').on('submit', function (e) {
+    // update Semester
+    $('#edit-semester-form').on('submit', function (e) {
         e.preventDefault();
-        var edt_raceCheck = $("#edit-race-form").valid();
-        if (edt_raceCheck === true) {
+        var edt_semesterCheck = $("#edit-semester-form").valid();
+        if (edt_semesterCheck === true) {
       
             var form = this;
             $.ajax({
@@ -124,13 +175,13 @@ $(function () {
                     } else {
 
                         if (data.code == 200) {
-                            $('#race-table').DataTable().ajax.reload(null, false);
-                            $('.editRace').modal('hide');
-                            $('.editRace').find('form')[0].reset();
+                            $('#semester-table').DataTable().ajax.reload(null, false);
+                            $('.editSemester').modal('hide');
+                            $('.editSemester').find('form')[0].reset();
                             toastr.success(data.message);
                         } else {
-                            $('.editRace').modal('hide');
-                            $('.editRace').find('form')[0].reset();
+                            $('.editSemester').modal('hide');
+                            $('.editSemester').find('form')[0].reset();
                             toastr.error(data.message);
                         }
                     }
@@ -138,13 +189,13 @@ $(function () {
             });
         }
     });
-    // delete RaceDelete
-    $(document).on('click', '#deleteRaceBtn', function () {
+    // delete SemesterDelete
+    $(document).on('click', '#deleteSemesterBtn', function () {
         var id = $(this).data('id');
-        var url = raceDelete;
+        var url = semesterDelete;
         swal.fire({
             title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this Race',
+            html: 'You want to <b>delete</b> this Semester',
             showCancelButton: true,
             showCloseButton: true,
             cancelButtonText: 'Cancel',
@@ -159,7 +210,7 @@ $(function () {
                     id: id
                 }, function (data) {
                     if (data.code == 200) {
-                        $('#race-table').DataTable().ajax.reload(null, false);
+                        $('#semester-table').DataTable().ajax.reload(null, false);
                         toastr.success(data.message);
                     } else {
                         toastr.error(data.message);

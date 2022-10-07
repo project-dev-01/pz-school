@@ -130,6 +130,17 @@ class TeacherController extends Controller
     }
     public function studentIndex()
     {
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        return view(
+            'teacher.student.student',
+            [
+                'classes' => $getclass['data'],
+                'semester' => $semester['data'],
+                'session' => $session['data'],
+            ]
+        );
         return view('teacher.student.student');
     }
     public function parent()
@@ -1028,5 +1039,172 @@ class TeacherController extends Controller
         // dd($request);
         return Excel::download(new StudentAttendanceExport(1,$request->class,$request->section,$request->subject,$request->semester,$request->session,$request->date), 'Student_Attendance.xlsx');
     }
+
+    public function studentList(Request $request)
+    {
+        $data = [
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "student_name" => $request->student_name,
+            "session_id" => $request->session_id,
+
+        ];
+        $response = Helper::PostMethod(config('constants.api.student_list'), $data);
+        return DataTables::of($response['data'])
+
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $view = route('teacher.student.details', $row['id']);
+                return '<div class="button-list">
+                                 <a href="' . $view . '" class="btn btn-blue waves-effect waves-light" id="viewStudentBtn"><i class="fe-eye"></i></a>
+                         </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+
+    // get Student  details
+    public function getStudentDetails($id)
+    {
+
+        $data = [
+            'id' => $id,
+        ];
+
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $gettransport = Helper::GetMethod(config('constants.api.transport_route_list'));
+        $gethostel = Helper::GetMethod(config('constants.api.hostel_list'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $student = Helper::PostMethod(config('constants.api.student_details'), $data);
+        $parent = Helper::GetMethod(config('constants.api.parent_list'));
+        $religion = Helper::GetMethod(config('constants.api.religion'));
+        $races = Helper::GetMethod(config('constants.api.races'));
+        $relation = Helper::GetMethod(config('constants.api.relation_list'));
+
+        $prev = json_decode($student['data']['student']['previous_details']);
+        $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
+        $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
+        $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
+        return view(
+            'teacher.student.view',
+            [
+                'class' => $getclass['data'],
+                'parent' => $parent['data'],
+                'transport' => $gettransport['data'],
+                'hostel' => $gethostel['data'],
+                'session' => $session['data'],
+                'semester' => $semester['data'],
+                'student' => $student['data']['student'],
+                'section' => $student['data']['section'],
+                'vehicle' => $student['data']['vehicle'],
+                'room' => $student['data']['room'],
+                'religion' => $religion['data'],
+                'races' => $races['data'],
+                'relation' => $relation['data'],
+
+            ]
+        );
+    }
+
+    // index Timetable
+    public function timetable(Request $request)
+    {
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        return view(
+            'teacher.timetable.index',
+            [
+                'class' => $getclass['data'],
+                'semester' => $semester['data'],
+                'session' => $session['data'],
+            ]
+        );
+    }
+
+    // get Timetable
+    public function getTimetable(Request $request)
+    {
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
+        ];
+
+        // dd($data);
+
+        $timetable = Helper::PostMethod(config('constants.api.timetable_list'), $data);
+
+        $days = array(
+            'sunday',
+            'monday',
+            'tuesday',
+            'wednesday',
+            'thursday',
+            'friday',
+            'saturday'
+        );
+
+        if ($timetable['code'] == "200") {
+            $max = $timetable['data']['max'];
+
+            $response = "";
+            foreach ($days as $day) {
+
+                if (!isset($timetable['data']['week'][$day]) && ($day == "saturday" || $day == "sunday")) {
+                } else {
+
+                    $response .= '<tr><td class="center" style="color:#ed1833;">' . strtoupper($day) . '</td>';
+                    $row = 0;
+                    foreach ($timetable['data']['timetable'] as $table) {
+                        if ($table['day'] == $day) {
+                            $start_time = date('H:i', strtotime($table['time_start']));
+                            $end_time = date('H:i', strtotime($table['time_end']));
+                            $response .= '<td>';
+                            if ($table['break'] == "1") {
+                                $response .= '<b><div style="color:#2d28e9;display:inline-block;padding-right:10px;"> <i class="dripicons-bell"></i></div>' . (isset($table['break_type']) ? $table['break_type'] : "") . '</b><br>';
+                                $response .= '<b><div style="color:#179614;display:inline-block;padding-right:10px;"><i class="icon-speedometer"></i></div>(' . $start_time . ' - ' . $end_time . ' )<b><br>';
+                                if (isset($table['hall_no'])) {
+                                    $response .= '<b><div style="color:#ff0000;display:inline-block;padding-right:10px;"> <i class="icon-location-pin"></i> </div>' . $table['hall_no'] . '</b><br>';
+                                }
+                            } else {
+                                if ($table['subject_name']) {
+                                    $subject = $table['subject_name'];
+                                } else {
+                                    $subject = (isset($table['break_type']) ? $table['break_type'] : "");
+                                }
+                                $response .= '<b><div style="color:#2d28e9;display:inline-block;padding-right:10px;"> <i class="icon-book-open"></i></div>' . $subject . '</b><br>';
+                                $response .= '<b><div style="color:#179614;display:inline-block;padding-right:10px;"><i class="icon-speedometer"></i></div>(' . $start_time . ' - ' . $end_time . ' )<b><br>';
+                                if ($table['teacher_name']) {
+                                    $response .= '<b><div style="color:#28dfe9;display:inline-block;padding-right:10px;"> <i class=" fas fa-book-reader"></i></div>' . $table['teacher_name'] . '</b><br>';
+                                }
+                                if (isset($table['hall_no'])) {
+                                    $response .= '<b><div style="color:#ff0000;display:inline-block;padding-right:10px;"> <i class="icon-location-pin"></i> </div>' . $table['hall_no'] . '</b><br>';
+                                }
+                            }
+                            $response .= '</td>';
+                            $row++;
+                        }
+                    }
+                    while ($row < $max) {
+                        $response .= '<td class="center">N/A</td>';
+                        $row++;
+                    }
+                    $response .= '</tr>';
+                }
+            }
+
+            $timetable['timetable'] = $response;
+        }
+        $timetable['class_id'] = $request->class_id;
+        $timetable['section_id'] = $request->section_id;
+        $timetable['semester_id'] = $request->semester_id;
+        $timetable['session_id'] = $request->session_id;
+        return $timetable;
+    }
+
     
 }
