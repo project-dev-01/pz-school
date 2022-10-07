@@ -576,40 +576,41 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('education/education-details', [AdminController::class, 'getEducationDetails'])->name('admin.education.details');
         Route::post('education/update', [AdminController::class, 'updateEducation'])->name('admin.education.update');
         Route::post('education/delete', [AdminController::class, 'deleteEducation'])->name('admin.education.delete');
-
    
-    // Absent Reason routes
-    Route::get('absent_reason/index', [AdminController::class, 'absentReason'])->name('admin.absent_reason');
-    Route::post('absent_reason/add', [AdminController::class, 'addAbsentReason'])->name('admin.absent_reason.add');
-    Route::get('absent_reason/list', [AdminController::class, 'getAbsentReasonList'])->name('admin.absent_reason.list');
-    Route::post('absent_reason/absent-reason-details', [AdminController::class, 'getAbsentReasonDetails'])->name('admin.absent_reason.details');
-    Route::post('absent_reason/update', [AdminController::class, 'updateAbsentReason'])->name('admin.absent_reason.update');
-    Route::post('absent_reason/delete', [AdminController::class, 'deleteAbsentReason'])->name('admin.absent_reason.delete');
+        // Absent Reason routes
+        Route::get('absent_reason/index', [AdminController::class, 'absentReason'])->name('admin.absent_reason');
+        Route::post('absent_reason/add', [AdminController::class, 'addAbsentReason'])->name('admin.absent_reason.add');
+        Route::get('absent_reason/list', [AdminController::class, 'getAbsentReasonList'])->name('admin.absent_reason.list');
+        Route::post('absent_reason/absent-reason-details', [AdminController::class, 'getAbsentReasonDetails'])->name('admin.absent_reason.details');
+        Route::post('absent_reason/update', [AdminController::class, 'updateAbsentReason'])->name('admin.absent_reason.update');
+        Route::post('absent_reason/delete', [AdminController::class, 'deleteAbsentReason'])->name('admin.absent_reason.delete');
 
-    // Late Reason routes
-    Route::get('late_reason/index', [AdminController::class, 'lateReason'])->name('admin.late_reason');
-    Route::post('late_reason/add', [AdminController::class, 'addLateReason'])->name('admin.late_reason.add');
-    Route::get('late_reason/list', [AdminController::class, 'getLateReasonList'])->name('admin.late_reason.list');
-    Route::post('late_reason/late-reason-details', [AdminController::class, 'getLateReasonDetails'])->name('admin.late_reason.details');
-    Route::post('late_reason/update', [AdminController::class, 'updateLateReason'])->name('admin.late_reason.update');
-    Route::post('late_reason/delete', [AdminController::class, 'deleteLateReason'])->name('admin.late_reason.delete');
+        // Late Reason routes
+        Route::get('late_reason/index', [AdminController::class, 'lateReason'])->name('admin.late_reason');
+        Route::post('late_reason/add', [AdminController::class, 'addLateReason'])->name('admin.late_reason.add');
+        Route::get('late_reason/list', [AdminController::class, 'getLateReasonList'])->name('admin.late_reason.list');
+        Route::post('late_reason/late-reason-details', [AdminController::class, 'getLateReasonDetails'])->name('admin.late_reason.details');
+        Route::post('late_reason/update', [AdminController::class, 'updateLateReason'])->name('admin.late_reason.update');
+        Route::post('late_reason/delete', [AdminController::class, 'deleteLateReason'])->name('admin.late_reason.delete');
 
-    // Excused Reason routes
-    Route::get('excused_reason/index', [AdminController::class, 'excusedReason'])->name('admin.excused_reason');
-    Route::post('excused_reason/add', [AdminController::class, 'addExcusedReason'])->name('admin.excused_reason.add');
-    Route::get('excused_reason/list', [AdminController::class, 'getExcusedReasonList'])->name('admin.excused_reason.list');
-    Route::post('excused_reason/excused-reason-details', [AdminController::class, 'getExcusedReasonDetails'])->name('admin.excused_reason.details');
-    Route::post('excused_reason/update', [AdminController::class, 'updateExcusedReason'])->name('admin.excused_reason.update');
-    Route::post('excused_reason/delete', [AdminController::class, 'deleteExcusedReason'])->name('admin.excused_reason.delete');
+        // Excused Reason routes
+        Route::get('excused_reason/index', [AdminController::class, 'excusedReason'])->name('admin.excused_reason');
+        Route::post('excused_reason/add', [AdminController::class, 'addExcusedReason'])->name('admin.excused_reason.add');
+        Route::get('excused_reason/list', [AdminController::class, 'getExcusedReasonList'])->name('admin.excused_reason.list');
+        Route::post('excused_reason/excused-reason-details', [AdminController::class, 'getExcusedReasonDetails'])->name('admin.excused_reason.details');
+        Route::post('excused_reason/update', [AdminController::class, 'updateExcusedReason'])->name('admin.excused_reason.update');
+        Route::post('excused_reason/delete', [AdminController::class, 'deleteExcusedReason'])->name('admin.excused_reason.delete');
 
-    
-    // Semester routes
-    Route::get('semester/index', [AdminController::class, 'semester'])->name('admin.semester');
-    Route::post('semester/add', [AdminController::class, 'addSemester'])->name('admin.semester.add');
-    Route::get('semester/list', [AdminController::class, 'getSemesterList'])->name('admin.semester.list');
-    Route::post('semester/semester-details', [AdminController::class, 'getSemesterDetails'])->name('admin.semester.details');
-    Route::post('semester/update', [AdminController::class, 'updateSemester'])->name('admin.semester.update');
-    Route::post('semester/delete', [AdminController::class, 'deleteSemester'])->name('admin.semester.delete');
+        
+        // Semester routes
+        Route::get('semester/index', [AdminController::class, 'semester'])->name('admin.semester');
+        Route::post('semester/add', [AdminController::class, 'addSemester'])->name('admin.semester.add');
+        Route::get('semester/list', [AdminController::class, 'getSemesterList'])->name('admin.semester.list');
+        Route::post('semester/semester-details', [AdminController::class, 'getSemesterDetails'])->name('admin.semester.details');
+        Route::post('semester/update', [AdminController::class, 'updateSemester'])->name('admin.semester.update');
+        Route::post('semester/delete', [AdminController::class, 'deleteSemester'])->name('admin.semester.delete');
+        
+    });
 });
 // admin routes end
 
