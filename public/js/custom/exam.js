@@ -76,6 +76,10 @@ $(function () {
                 name: 'term_id'
             },
             {
+                data: 'id',
+                name: 'id'
+            },
+            {
                 data: 'remarks',
                 name: 'remarks'
             },

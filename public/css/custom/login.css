@@ -62,7 +62,7 @@
 
 
 
-< !--Auth fluid right content -->.welcomeback {
+.welcomeback {
     font-weight: 800;
     font-size: 30px;
     line-height: 48px;
@@ -144,7 +144,7 @@
 }
 
 
-< !-- Responsive -->@media only screen and (min-device-width: 320px) and (max-device-width: 665px) {
+@media only screen and (min-device-width: 320px) and (max-device-width: 665px) {
     .auth-fluid .auth-fluid-form-box {
         padding: 1px;
     }
@@ -182,7 +182,6 @@
         margin-left: -14px;
         margin-right: 0px;
     }
-}
 }
 
 @media only screen and (min-device-width: 280px) and (max-device-width: 653px) {

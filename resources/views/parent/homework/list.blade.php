@@ -34,7 +34,7 @@
             <div class="card-box">
                 <div class="row">
                     <div class="col-6">
-                        <div class="avatar-sm bg-primary rounded">
+                        <div class="avatar-sm bg-blue rounded">
                             <i class="fe-bar-chart-2 avatar-title font-22 text-white"></i>
                         </div>
                     </div>

@@ -34,6 +34,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
+                                    <th>Grade Category ID</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

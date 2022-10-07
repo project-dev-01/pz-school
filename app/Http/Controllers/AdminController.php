@@ -3115,9 +3115,7 @@ class AdminController extends Controller
             'session_id' => $request->session_id,
             'exam' => $request->exam,
         ];
-
         $response = Helper::PostMethod(config('constants.api.exam_timetable_add'), $data);
-        // dd($response);
         return $response;
     }
 

@@ -380,10 +380,10 @@
                                                     <div class="card-body pb-0" id="task-list-one">
                                                         <!-- task -->
                                                         <div class="row">
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-7">
                                                                 <a href="{{ route('parent.homework')}}">{{$homework['subject_name']}} </a>
                                                             </div> <!-- end col -->
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-5">
                                                                 <div class="d-sm-flex">
                                                                     <!-- <div>
                                                                             <a class="navv dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="{{ route('parent.homework')}}" role="button" aria-haspopup="false" aria-expanded="false">

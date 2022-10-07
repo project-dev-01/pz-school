@@ -8,8 +8,6 @@
         <div class="col-12">
             <div class="page-title-box">
                 <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                    </ol>
                 </div>
                 <h4 class="page-title">Report Card</h4>
             </div>
@@ -18,18 +16,16 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">
+                            Select Ground
+                            <h4>
+                    </li>
+                </ul><br>
                 <div class="card-body">
                     <form id="reportcart_filter" data-parsley-validate="">
                         <div class="row">
-
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="selected_year">Year<span class="text-danger">*</span></label>
-                                    <select id="selected_year" class="yrselectdesc form-control"></select>
-
-                                </div>
-                            </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="examnames">Exam Name<span class="text-danger">*</span></label>
@@ -46,14 +42,9 @@
 
                         </div>
                         <div class="form-group text-right m-b-0">
-
-                            <div class="forum-group">
-                                <label></label>
-                                <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                    Get
-                                </button>
-
-                            </div>
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                Get
+                            </button>
                         </div>
                     </form>
 
@@ -67,7 +58,7 @@
 
     </div>
     <!-- end row -->
-    <div class="row" style="display: none;" id="reportlist">
+    <div class="row" style="display: none;" id="bystudent_bodycontent">
         <div class="col-lg-12">
             <div class="card">
                 <ul class="nav nav-tabs">
@@ -78,86 +69,45 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-12">
+                                <div id="byStudentTableAppend">
 
-                    <div class="form-group">
-                        <p>
-                        <div>
-                            <a class="list-group-item list-group-item-info btn-block btn-lg" data-toggle="collapse" href="#quarterlyExam" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                <i class="fas fa-caret-square-down"></i>&nbsp;<span id="exam_name_header"></span>
-                            </a>
-                        </div>
-                        </p>
-                        <div class="collapse" id="quarterlyExam">
-                            <div class="card card-body">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="">
-                                            <div class="table-responsive">
-                                                <table class="table dt-responsive nowrap w-100">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Subject</th>
-                                                            <th>Score</th>
-                                                            <th>Grade</th>
-                                                            <th>Ranking</th>
-                                                            <th>Status</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="tbl_bdy_reportcard">
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div> <!-- end card-box -->
-                                    </div> <!-- end col -->
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="clearfix mt-4">
+                                        <button type="button" class="btn btn-primary-bl waves-effect waves-light float-right exportToExcel">Download</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> <!-- end col-->
                     </div>
-                </div> <!-- end card-body-->
+                    <!-- end row-->
+                </div> <!-- end card-body -->
             </div> <!-- end card-->
         </div> <!-- end col -->
-    </div>
 
-    <div class="row" style="display: none;" id="reportlist_norecords">
+    </div>
+    <!-- <div class="row" id="bystudent_analysis">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="nav-link">
-                            Report Card List
-                            <h4>
-                    </li>
-                </ul><br>
                 <div class="card-body">
+                    <h4 class="header-title">Student Analysis</h4>
 
-                    <div class="form-group text-center">
-
-
-                        <h4>No records found...</h4>
-
-
-
+                    <div class="mt-4 chartjs-chart">
+                        <canvas id="radar-chart-test-bystudent" height="350" data-colors="#39afd1,#a17fe0"></canvas>
                     </div>
-
-
-
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-    </div>
-
-
-</div> <!-- container -->
-@endsection
-@section('scripts')
-
-
-<script>
-    var getbyreportcard = "{{ config('constants.api.get_by_reportcard') }}";
-    // default image test
-    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
-</script>
-<script src="{{ asset('public/js/custom/year-select.js') }}"></script>
-<script src="{{ asset('public/js/custom/reportcard.js') }}"></script>
-@endsection
+                </div>
+            </div>
+        </div>
+    </div> -->
+    @endsection
+    @section('scripts')
+    <script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
+    <script>
+        var getbyreportcard = "{{ config('constants.api.get_by_reportcard') }}";
+        var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+    </script>
+    <script src="{{ asset('public/js/custom/reportcard.js') }}"></script>
+    @endsection

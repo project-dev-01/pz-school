@@ -327,9 +327,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
     Route::post('timetable/student', [ApiController::class, 'studentTimetable']);
     Route::post('timetable/parent', [ApiController::class, 'parentTimetable']);
-    // report card 
-
-    Route::get('get_by_reportcard', [ApiController::class, 'getreportcard']);
     // Homework routes
     Route::post('homework/add', [ApiController::class, 'addHomework']);
     Route::post('homework/list', [ApiController::class, 'getHomeworkList']);
@@ -586,6 +583,9 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('importcsv/students', [ApiControllerOne::class, 'importCsvStudents']);
     // import timetable details in csv
     Route::post('importcsv/timetable', [ApiControllerOne::class, 'importCsvTimetable']);
+    // import add exam timetable details in csv
+    Route::post('importcsv/exam_timetable', [ApiControllerOne::class, 'addExamTimetable']);
+
     // exam results routes
     // by class
     Route::post('exam_results/get_subject_by_class', [ApiControllerOne::class, 'getSubjectByClass']);
@@ -601,5 +601,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('tot_grade_calcu_overall', [ApiControllerOne::class, 'tot_grade_calcu_overall']);
     // by individual result
     Route::post('getbyresult', [ApiControllerOne::class, 'getbyresult_student']);
-
+    // report card 
+    Route::post('get_by_reportcard', [ApiControllerOne::class, 'getreportcard']);
 });
