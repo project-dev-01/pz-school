@@ -119,13 +119,13 @@ function bystudentdetails_class(datasetnew) {
         '<table id="tblbycls" class="table w-100 nowrap table-bordered table-striped table2excel" data-tableName="Test Table 1">' +
         '<thead>';
     bysubjectAllTable += '<tr>' +
-        '<th class="align-top" rowspan="3">S.no.</th>' +
-        '<th class="align-top" rowspan="3">Student Name</th>' +
-        '<th class="text-center" colspan="' + headercount + '">Subject Name</th>' +
+        '<th class="align-top" rowspan="3" style="padding-top:72px;">S.no.</th>' +
+        '<th class="align-top" rowspan="3" style="padding: 71px 0px 0px 8px;">Student Name</th>' +
+        '<th class="text-center" colspan="' + headercount + '" style="padding: 20px 100px 20px 0px;">Subject Name</th>' +
         '</tr>';
     bysubjectAllTable += '<tr>';
     headers.forEach(function (resp) {
-        bysubjectAllTable += '<th colspan="2" class="text-center">' + resp.subject_name + '</th>';
+        bysubjectAllTable += '<th colspan="2" class="text-center" style="padding:7px 0px 7px 0px;">' + resp.subject_name + '</th>';
     });
     bysubjectAllTable += '</tr>';
     bysubjectAllTable += '<tr>';
@@ -149,11 +149,11 @@ function bystudentdetails_class(datasetnew) {
             // here find index of array
             var index = marksArr.findIndex(x => x.subject_id === subject_id);
             if (index !== -1) {
-                bysubjectAllTable += '<td class="text-center">' + marksArr[index].marks + '</td>';
-                bysubjectAllTable += '<td class="text-center">' + marksArr[index].grade + '</td>';
+                bysubjectAllTable += '<td class="text-center" style="padding:7px 0px 7px 0px;">' + marksArr[index].marks + '</td>';
+                bysubjectAllTable += '<td class="text-center" style="padding:7px 0px 7px 0px;">' + marksArr[index].grade + '</td>';
             } else {
-                bysubjectAllTable += '<td class="text-center">-</td>';
-                bysubjectAllTable += '<td class="text-center">-</td>';
+                bysubjectAllTable += '<td class="text-center" style="padding:7px 0px 7px 0px;">-</td>';
+                bysubjectAllTable += '<td class="text-center" style="padding:7px 0px 7px 0px;">-</td>';
             }
         });
         bysubjectAllTable += '</tr>';

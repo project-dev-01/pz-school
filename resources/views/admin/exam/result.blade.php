@@ -94,15 +94,39 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card-box">
-                                <header><b>Student General Details</b></header>
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <h4 class="navv">
+                                            <header><b>Student General Details</b></header>
+                                            <h4>
+                                    </li>
+                                </ul>
+                                <br>
+                                <!-- <header><b style="line-height:35px;">Student General Details</b></header>-->
                                 <div id="byStudentGeneralDetails">
                                 </div>
-                                <header><b>Individual Subject</b></header>
+                            </div>
+                        </div>
+                        <br>
+
+
+
+                        <div class="col-sm-12">
+                            <div class="card-box">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <h4 class="navv">
+                                            <header><b>Individual Subject</b></header>
+                                            <h4>
+                                    </li>
+                                </ul>
+                                <br>
+                                <!--<header><b style="line-height:35px;">Individual Subject</b></header>-->
                                 <div id="byStudentTableAppend">
                                 </div>
                                 <div class="col-md-12">
                                     <div class="clearfix mt-4">
-                                        <button type="button" class="btn btn-primary-bl waves-effect waves-light float-right exportToExcel">Download</button>
+                                        <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel" style="float:right;">Download</button>
                                     </div>
                                 </div>
                             </div> <!-- end card-box -->

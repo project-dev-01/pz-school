@@ -274,7 +274,7 @@
                                                 <span class="far fa-user"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="first_name" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" name="first_name" placeholder="Ahmad Ali" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -287,7 +287,7 @@
                                                 <span class="far fa-user"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="last_name" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" name="last_name" placeholder="Khan" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -312,7 +312,7 @@
                                                 <span class="fas fa-birthday-cake"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="date_of_birth" id="date_of_birth">
+                                        <input type="text" class="form-control" name="date_of_birth" placeholder="DD/MM/YYYY" id="date_of_birth">
                                     </div>
                                 </div>
                             </div>
@@ -325,7 +325,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="nric">NRIC Number</label>
-                                    <input type="text" class="form-control" name="nric" data-parsley-trigger="change">
+                                    <input type="text" class="form-control" name="nric" placeholder="NRIC Number" data-parsley-trigger="change">
                                 </div>
                             </div>
                         </div>
@@ -349,7 +349,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
-                                    <input type="tel" class="form-control" name="mobile_no" id="mobile_no" data-parsley-trigger="change">
+                                    <input type="tel" class="form-control" name="mobile_no" id="mobile_no" placeholder="Mobile Number" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -393,7 +393,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="occupation">Occupation<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="occupation" data-parsley-trigger="change">
+                                    <input type="text" class="form-control" name="occupation" placeholder="Occupation" data-parsley-trigger="change">
                                 </div>
                             </div>
                         </div>
@@ -407,20 +407,20 @@
                                                 <span class="fas fa-calculator"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="income" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" name="income" placeholder="Income" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="country">Country</label>
-                                    <input type="text" class="form-control" name="country" id="country" data-parsley-trigger="change">
+                                    <input type="text" class="form-control" name="country" id="country" placeholder="Country" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="state">State/Province</label>
-                                    <input type="text" class="form-control" name="state" data-parsley-trigger="change">
+                                    <input type="text" class="form-control" name="state" placeholder="State/Province" data-parsley-trigger="change">
                                 </div>
                             </div>
                         </div>
@@ -428,25 +428,25 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="city">City</label>
-                                    <input type="text" class="form-control" name="city" data-parsley-trigger="change">
+                                    <input type="text" class="form-control" name="city" placeholder="City" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="post_code">Zip/Postal code</label>
-                                    <input type="text" class="form-control" name="post_code" id="postCode">
+                                    <input type="text" class="form-control" name="post_code" id="postCode" placeholder="Zip/Postal code">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="address">Address 1</label>
-                                    <input class="form-control" name="address" id="address">
+                                    <input class="form-control" name="address" id="address" placeholder="Address 1">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="address_2">Address 2</label>
-                                    <input class="form-control" name="address_2" id="address_2">
+                                    <input class="form-control" name="address_2" id="address_2" placeholder="Address 2">
                                 </div>
                             </div>
                         </div>
@@ -471,7 +471,7 @@
                                                 <span class="far fa-envelope-open"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="email" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" name="email" placeholder="xxxxx@gmail.com" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -484,7 +484,7 @@
                                                 <span class="fas fa-unlock"></span>
                                             </div>
                                         </div>
-                                        <input type="password" class="form-control" name="password" id="password" aria-describedby="inputGroupPrepend">
+                                        <input type="password" class="form-control" name="password" id="password" placeholder="********" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -497,7 +497,7 @@
                                                 <span class="fas fa-unlock"></span>
                                             </div>
                                         </div>
-                                        <input type="password" class="form-control" name="confirm_password" aria-describedby="inputGroupPrepend">
+                                        <input type="password" class="form-control" name="confirm_password" placeholder="********" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -535,7 +535,7 @@
                                                 <span class="fab fa-facebook-f"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="facebook_url" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" name="facebook_url" placeholder="Fb.com" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -548,7 +548,7 @@
                                                 <span class="fab fa-twitter"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="twitter_url" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" name="twitter_url" placeholder="Twiter.com" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -561,7 +561,7 @@
                                                 <span class="fab fa-linkedin-in"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="linkedin_url" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" name="linkedin_url" placeholder="Linkedin" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>

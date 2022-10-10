@@ -128,7 +128,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card" id="mark_by_subject_card" style="display:none">
+            <div class="card" id="mark_by_subject_card" style="display:none;">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv"> Marks By Subject
@@ -148,7 +148,7 @@
                         <input type="hidden" name="grade_category" id="grade_category">
                         <div class="col-md-12">
                             <div class="table-responsive">
-                                <div class="card-box">
+                                <div class="card-body">
                                     <!-- <table id="stdmarks" data-toggle="table" data-page-size="7" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable "> -->
                                     <table id="stdmarks" class="table w-100 nowrap">
                                         <thead>
@@ -191,19 +191,21 @@
                 <div class="row">
                     <div class="col-md-12">
                         <!-- Portlet card -->
-                        <div class="card-body">
-                            <div class="card-widgets">
-                                <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                                <a data-toggle="collapse" href="#cardCollpase4" role="button" aria-expanded="false" aria-controls="cardCollpase4"><i class="mdi mdi-minus"></i></a>
-                                <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
-                            </div>
-                            <h4 class="header-title mb-0">Subject Average</h4>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-widgets">
+                                    <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                                    <a data-toggle="collapse" href="#cardCollpase4" role="button" aria-expanded="false" aria-controls="cardCollpase4"><i class="mdi mdi-minus"></i></a>
+                                    <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                                </div>
+                                <h4 class="header-title mb-0">Subject Average</h4>
 
-                            <div id="cardCollpase4" class="collapse pt-3 show" dir="ltr">
-                                <div id="subject-avg-chart" class="apex-charts" data-colors="#f672a7"></div>
-                            </div> <!-- collapsed end -->
+                                <div id="cardCollpase4" class="collapse pt-3 show" dir="ltr">
+                                    <div id="subject-avg-chart" class="apex-charts" data-colors="#f672a7"></div>
+                                </div> <!-- collapsed end -->
 
-                        </div> <!-- end card-body -->
+                            </div> <!-- end card-body -->
+                        </div> <!-- end card-->
                     </div>
                 </div>
             </div> <!-- end card body-->
@@ -256,24 +258,26 @@
                     </li>
                 </ul><br>
                 <div class="row">
-                    <div class="col-lg-12" id="donut-chart" style="display:none">
+                    <div class="col-lg-6" id="donut-chart" style="display:none">
                         <!-- Portlet card -->
-                        <div class="card-body" dir="ltr">
-                            <div class="card-widgets">
-                                <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                                <a data-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
-                                <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
-                            </div>
-                            <h4 class="header-title mb-0">Test Execution Summary</h4>
-
-                            <div id="cardCollpase1" class="collapse pt-3 show">
-                                <div class="text-center">
-
-                                    <div id="donut-chart-test-summary" data-colors="#4fc6e1,#6658dd,#ebeff2" style="height: 270px;" class="morris-chart mt-3"></div>
-
+                        <div class="card">
+                            <div class="card-body" dir="ltr">
+                                <div class="card-widgets">
+                                    <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                                    <a data-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
+                                    <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
                                 </div>
-                            </div> <!-- end collapse-->
-                        </div> <!-- end card-body-->
+                                <h4 class="header-title mb-0">Test Execution Summary</h4>
+
+                                <div id="cardCollpase1" class="collapse pt-3 show">
+                                    <div class="text-center">
+
+                                        <div id="donut-chart-test-summary" data-colors="#4fc6e1,#6658dd,#ebeff2" style="height: 270px;" class="morris-chart mt-3"></div>
+
+                                    </div>
+                                </div> <!-- end collapse-->
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
                     </div> <!-- end col-->
                     <div class="col-lg-6" id="radar-chart" style="display:none">
                         <div class="card">

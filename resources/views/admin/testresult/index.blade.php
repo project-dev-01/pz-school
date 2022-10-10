@@ -128,7 +128,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card" id="mark_by_subject_card" style="display:none">
+            <div class="card" id="mark_by_subject_card" style="display:none;">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv"> Marks By Subject
@@ -150,7 +150,7 @@
                         <input type="hidden" name="grade_category" id="grade_category">
                         <div class="col-md-12">
                             <div class="table-responsive">
-                                <div class="card-box">
+                                <div class="card-body">
                                     <!-- <table id="stdmarks" data-toggle="table" data-page-size="7" data-buttons-class="xs btn-light" data-pagination="true" class="table table-striped table-nowrap custom-table mb-0 datatable "> -->
                                     <!-- <table id="stdmarks" class="table table-centered table-striped dt-responsive nowrap w-100" width="100%"> -->
                                     <table id="stdmarks" class="table w-100 nowrap">

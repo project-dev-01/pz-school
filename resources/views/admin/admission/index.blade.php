@@ -339,7 +339,7 @@
                                 <div class="form-group">
                                     <label for="txt_caste">Race</label>
                                     <select class="form-control" name="txt_race" id="addRace">
-                                        <option value="">Choose race</option>
+                                        <option value="">Choose Race</option>
                                         @forelse($races as $r)
                                         <option value="{{$r['id']}}">{{$r['races_name']}}</option>
                                         @empty
@@ -354,19 +354,19 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="txt_mobile_no">Mobile No<span class="text-danger">*</span></label>
-                                    <input type="tel" class="form-control" name="txt_mobile_no" id="txt_mobile_no" data-parsley-trigger="change">
+                                    <input type="tel" class="form-control" name="txt_mobile_no" id="txt_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="drp_country">Country</label>
-                                    <input type="text" maxlength="50" id="drp_country" class="form-control alloptions" placeholder="country" name="drp_country" data-parsley-trigger="change">
+                                    <input type="text" maxlength="50" id="drp_country" class="form-control alloptions" placeholder="Country" name="drp_country" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="drp_state">State/Province</label>
-                                    <input type="text" maxlength="50" id="drp_state" class="form-control alloptions" placeholder="state" name="drp_state" data-parsley-trigger="change">
+                                    <input type="text" maxlength="50" id="drp_state" class="form-control alloptions" placeholder="State/Province" name="drp_state" data-parsley-trigger="change">
                                 </div>
                             </div>
                         </div>
@@ -374,25 +374,25 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="drp_city">City</label>
-                                    <input type="text" maxlength="50" id="drp_city" class="form-control alloptions" placeholder="city" name="drp_city" data-parsley-trigger="change">
+                                    <input type="text" maxlength="50" id="drp_city" class="form-control alloptions" placeholder="City" name="drp_city" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="drp_post_code">Zip/Postal Code</label>
-                                    <input type="text" maxlength="50" id="drp_post_code" class="form-control alloptions" placeholder="Post Code" name="drp_post_code" data-parsley-trigger="change">
+                                    <input type="text" maxlength="50" id="drp_post_code" class="form-control alloptions" placeholder="Zip/Postal_Code" name="drp_post_code" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="txtarea_paddress">Address 1</label>
-                                    <input type="text" maxlength="255" id="txtarea_paddress" class="form-control alloptions" placeholder="Address" name="txtarea_paddress" data-parsley-trigger="change">
+                                    <input type="text" maxlength="255" id="txtarea_paddress" class="form-control alloptions" placeholder="Address 1" name="txtarea_paddress" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="txtarea_permanent_address">Address 2</label>
-                                    <input type="text" maxlength="255" id="txtarea_permanent_address" class="form-control alloptions" placeholder="Address" name="txtarea_permanent_address" data-parsley-trigger="change">
+                                    <input type="text" maxlength="255" id="txtarea_permanent_address" class="form-control alloptions" placeholder="Address 2" name="txtarea_permanent_address" data-parsley-trigger="change">
                                 </div>
                             </div>
                         </div>
@@ -423,13 +423,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="txt_regiter_no">Register No<span class="text-danger">*</span></label>
-                                    <input type="text" id="txt_regiter_no" class="form-control" name="txt_regiter_no" placeholder="Insert the registration number" data-parsley-trigger="change">
+                                    <input type="text" id="txt_regiter_no" class="form-control" name="txt_regiter_no" placeholder="Registration Number" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="txt_roll_no">Roll<span class="text-danger">*</span></label>
-                                    <input type="text" id="txt_roll_no" class="form-control" name="txt_roll_no" placeholder="Input the roll" data-parsley-trigger="change">
+                                    <label for="txt_roll_no">Roll No<span class="text-danger">*</span></label>
+                                    <input type="text" id="txt_roll_no" class="form-control" name="txt_roll_no" placeholder="Roll No" data-parsley-trigger="change">
                                 </div>
                             </div>
                         </div>
@@ -643,7 +643,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="Passport">Passport Number</label>
-                                        <input type="text" class="form-control" id="father_passport" placeholder="Passport number" readonly>
+                                        <input type="text" class="form-control" id="father_passport" placeholder="Passport Number" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -679,7 +679,7 @@
                                                     <span class="fas fa-phone-volume"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="mobile number" id="father_mobile_no" readonly>
+                                            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="Mobile Number" id="father_mobile_no" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -694,7 +694,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="txt_occupation">Occupation<span class="text-danger">*</span></label>
-                                        <input type="text" maxlength="50" id="father_occupation" class="form-control " placeholder="Manager" placeholder="Occupation" data-parsley-trigger="change" readonly>
+                                        <input type="text" maxlength="50" id="father_occupation" class="form-control " placeholder="Manager" data-parsley-trigger="change" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -708,19 +708,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="country">Country</label>
-                                        <input type="text" class="form-control" id="father_country" placeholder="malaysia" data-parsley-trigger="change" readonly>
+                                        <input type="text" class="form-control" id="father_country" placeholder="Malaysia" data-parsley-trigger="change" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="validationCustomUsername">State/Province</label>
-                                        <input type="text" class="form-control " maxlength="50" id="father_state" placeholder="state" aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control " maxlength="50" id="father_state" placeholder="State" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="validationCustomUsername">City</label>
-                                        <input type="text" class="form-control " maxlength="50" id="father_city" placeholder="city" aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control " maxlength="50" id="father_city" placeholder="City" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -728,7 +728,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="father_post_code">Zip/Postal code</label>
-                                        <input type="text" class="form-control" placeholder="postal code" id="father_post_code" readonly>
+                                        <input type="text" class="form-control" placeholder="Postal Code" id="father_post_code" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -761,7 +761,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="mother_name">Mother Name</label>
-                                    <input type="text" class="form-control" maxlength="50" id="mother_name" placeholder="Aisha mal" aria-describedby="inputGroupPrepend">
+                                    <input type="text" class="form-control" maxlength="50" id="mother_name" placeholder="Aisha Mal" aria-describedby="inputGroupPrepend">
                                     <input type="hidden" name="mother_id" id="mother_id">
                                     <div id="mother_list">
                                     </div>
@@ -784,7 +784,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="heard">Last Name<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" maxlength="50" id="mother_last_name" placeholder="mal" aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control" maxlength="50" id="mother_last_name" placeholder="Mal" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -826,7 +826,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="Passport">Passport Number</label>
-                                        <input type="text" class="form-control" id="mother_passport" placeholder="Passport number" readonly>
+                                        <input type="text" class="form-control" id="mother_passport" placeholder="Passport Number" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -862,7 +862,7 @@
                                                     <span class="fas fa-phone-volume"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="Mobile number" id="mother_mobile_no" readonly>
+                                            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="Mobile Number" id="mother_mobile_no" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -891,7 +891,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="country">Country</label>
-                                        <input type="text" class="form-control" id="mother_country" data-parsley-trigger="change" placeholder="country" readonly>
+                                        <input type="text" class="form-control" id="mother_country" data-parsley-trigger="change" placeholder="Country" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -942,7 +942,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="guardian_name">Guardian Name</label>
-                                    <input type="text" class="form-control" maxlength="50" id="guardian_name" placeholder="Amir shan" aria-describedby="inputGroupPrepend">
+                                    <input type="text" class="form-control" maxlength="50" id="guardian_name" placeholder="Amir Shan" aria-describedby="inputGroupPrepend">
                                     <input type="hidden" name="guardian_id" id="guardian_id">
                                     <div id="guardian_list">
                                     </div>
@@ -1090,13 +1090,13 @@
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="validationCustomUsername">State/Province</label>
-                                        <input type="text" class="form-control" maxlength="50" id="guardian_state" placeholder="state" aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control" maxlength="50" id="guardian_state" placeholder="State" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="validationCustomUsername">City</label>
-                                        <input type="text" class="form-control" maxlength="50" id="guardian_city" placeholder="city" aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control" maxlength="50" id="guardian_city" placeholder="City" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -1199,7 +1199,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="txt_prev_schname">School Name</label>
-                                    <input type="text" maxlength="50" id="txt_prev_schname" placeholder="Schoolname" class="form-control alloptions" name="txt_prev_schname" data-parsley-trigger="change">
+                                    <input type="text" maxlength="50" id="txt_prev_schname" placeholder="School Name" class="form-control alloptions" name="txt_prev_schname" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -1211,7 +1211,7 @@
                         </div>
                         <div class="form-group">
                             <label for="message">Remarks</label>
-                            <textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="Enter the text..." name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                            <textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" data-placeholder="Enter the text..." name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                             </textarea>
                         </div>
                         <div class="form-group text-right m-b-0">

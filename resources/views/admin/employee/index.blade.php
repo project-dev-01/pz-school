@@ -283,7 +283,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="short_name">Short name</label>
-                                    <input type="text" class="form-control" name="short_name" placeholder="aa" id="shortName">
+                                    <input type="text" class="form-control" name="short_name" placeholder="Ali" id="shortName">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -321,7 +321,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="nric_number">NRIC Number</label>
-                                    <input type="text" class="form-control" name="nric_number" placeholder="nric number" id="nricNumber">
+                                    <input type="text" class="form-control" name="nric_number" placeholder="NRIC Number" id="nricNumber">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -343,7 +343,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
-                                    <input type="tel" class="form-control" name="mobile_no" id="mobile_no" data-parsley-trigger="change">
+                                    <input type="tel" class="form-control" name="mobile_no" id="mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -370,33 +370,33 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="state">State/Province</label>
-                                    <input type="text" class="form-control" name="state" id="State" placeholder="state">
+                                    <input type="text" class="form-control" name="state" id="State" placeholder="State">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="city">City</label>
-                                    <input type="text" class="form-control" name="city" id="City" placeholder="city">
+                                    <input type="text" class="form-control" name="city" id="City" placeholder="City">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="post_code">Zip/Postal code</label>
-                                    <input type="text" class="form-control" name="post_code" id="postCode" placeholder="000000">
+                                    <input type="text" class="form-control" name="post_code" id="postCode" placeholder="Zip/Postal code">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="present_address">Address Line 1</label>
-                                    <input class="form-control" name="present_address" id="present_address" placeholder="johor">
+                                    <label for="present_address">Address 1</label>
+                                    <input class="form-control" name="present_address" id="present_address" placeholder="Address 1">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="permanent_address">Address Line 2</label>
-                                    <input class="form-control" name="permanent_address" id="permanent_address" placeholder="johor">
+                                    <label for="permanent_address">Address 2</label>
+                                    <input class="form-control" name="permanent_address" id="permanent_address" placeholder="Address 2">
                                 </div>
                             </div>
                         </div>
@@ -477,7 +477,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="salary_grade">Salary Grade</label>
-                                    <input type="text" class="form-control" name="salary_grade" id="salaryGrade" placeholder="Grade">
+                                    <input type="text" class="form-control" name="salary_grade" id="salaryGrade" placeholder="Salary Grade">
                                 </div>
                             </div>
                         </div>
@@ -540,7 +540,7 @@
                                                 <span class="far fa-envelope-open"></span>
                                             </div>
                                         </div>
-                                        <input type="email" class="form-control" name="email" id="email" placeholder="aa@gmail.com">
+                                        <input type="email" class="form-control" name="email" id="email" placeholder="XXX@gmail.com">
                                     </div>
                                 </div>
                             </div>
@@ -615,7 +615,7 @@
                                                 <span class="fab fa-twitter"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="twitter_url" id="twitter_url" placeholder="twitter.com">
+                                        <input type="text" class="form-control" name="twitter_url" id="twitter_url" placeholder="Twitter.com">
                                     </div>
                                 </div>
                             </div>
@@ -628,7 +628,7 @@
                                                 <span class="fab fa-linkedin-in"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="linkedin_url" id="linkedin_url" placeholder="linked.com">
+                                        <input type="text" class="form-control" name="linkedin_url" id="linkedin_url" placeholder="Linked.com">
                                     </div>
                                 </div>
                             </div>
@@ -653,19 +653,19 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="height">Height</label>
-                                        <input type="text" id="height" class="form-control" name="height" placeholder="150" data-parsley-trigger="change">
+                                        <input type="text" id="height" class="form-control" name="height" placeholder="Height" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="weight">Weight</label>
-                                        <input type="text" id="weight" class="form-control" name="weight" placeholder="60" data-parsley-trigger="change">
+                                        <input type="text" id="weight" class="form-control" name="weight" placeholder="Weight" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="allergy">Allergy</label>
-                                        <input type="text" id="allergy" class="form-control" name="allergy" placeholder="allergy" data-parsley-trigger="change">
+                                        <input type="text" id="allergy" class="form-control" name="allergy" placeholder="Allergy" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -706,7 +706,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="bank_name">Bank Name<span class="text-danger">*</span></label>
-                                        <input type="text" id="bank_name" class="form-control" name="bank_name" placeholder="bank name" data-parsley-trigger="change">
+                                        <input type="text" id="bank_name" class="form-control" name="bank_name" placeholder="Bank Name" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -718,7 +718,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="bank_branch">Bank Branch<span class="text-danger">*</span></label>
-                                        <input type="text" id="bank_branch" class="form-control" name="bank_branch" placeholder="branch name" data-parsley-trigger="change">
+                                        <input type="text" id="bank_branch" class="form-control" name="bank_branch" placeholder="Branch Name" data-parsley-trigger="change">
                                     </div>
                                 </div>
                             </div>
@@ -726,19 +726,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="bank_address">Bank Address<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="bank_address" name="bank_address" placeholder="address" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" id="bank_address" name="bank_address" placeholder="Bank Address" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="ifsc_code">IFSC Code<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="ifsc_code" name="ifsc_code" placeholder="code" aria-describedby="">
+                                        <input type="text" class="form-control" id="ifsc_code" name="ifsc_code" placeholder="IFSC Code" aria-describedby="">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="">Account No<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="account_no" name="account_no" placeholder="acc-no" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" id="account_no" name="account_no" placeholder="Account Number" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
