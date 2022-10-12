@@ -40,6 +40,16 @@ class AuthController extends Controller
         }
         return view('auth.teacher_login');
     }
+    public function staffLoginForm(Request $request)
+    {
+        if (session()->has('role_id')) {
+            $role_id = session()->get('role_id');
+            if ($role_id == 4) {
+                return redirect()->route('staff.dashboard');
+            }
+        }
+        return view('auth.staff_login');
+    }
     public function parentLoginForm(Request $request)
     {
         if (session()->has('role_id')) {
@@ -275,6 +285,35 @@ class AuthController extends Controller
             return redirect()->route('teacher.login')->with('error', $userDetails['message']);
         }
     }
+    public function authenticateStaff(Request $request)
+    {
+
+        $response = Http::post(config('constants.api.login'), [
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+
+        $userDetails = $response->json();
+        $user_name = "";
+        $request->session()->regenerate();
+        if ($userDetails['code'] == 200) {
+            if ($userDetails['data']['subsDetails']) {
+                if ($userDetails['data']['user']['role_id'] == 3) {
+                    $user_name = $this->sessionCommon($request, $userDetails);
+                }
+                if ($userDetails['data']['user']['role_id'] == 3) {
+                    $redirect_route = route('staff.dashboard');
+                    return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
+                } else {
+                    return redirect()->route('staff.login')->with('error', 'Invalid Credential');
+                }
+            } else {
+                return redirect()->route('staff.login')->with('error', 'Access denied please contact admin');
+            }
+        } else {
+            return redirect()->route('staff.login')->with('error', $userDetails['message']);
+        }
+    }
     public function authenticateParent(Request $request)
     {
 
@@ -400,6 +439,15 @@ class AuthController extends Controller
             return redirect()->route('teacher.login');
         } else {
             return redirect()->route('teacher.login');
+        }
+    }
+    public function logoutStaff(Request $request)
+    {
+        if (session()->has('role_id')) {
+            $this->logoutCommon($request);
+            return redirect()->route('staff.login');
+        } else {
+            return redirect()->route('staff.login');
         }
     }
     public function logoutParent(Request $request)

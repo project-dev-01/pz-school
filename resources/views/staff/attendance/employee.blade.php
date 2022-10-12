@@ -21,7 +21,7 @@
     </div>
     <!-- end page title -->
 
-    <div class="row">
+    <div class="row" >
         <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs" >
@@ -32,132 +32,101 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="demo-form" data-parsley-validate="" autocomplete="off">
+                    <form id="employeeAttendanceFilter" method="post" enctype="multipart/form-data" autocomplete="off">
                         <div class="row">
+                            <input type="hidden" id="employee" name="employee" value="{{$employee}}">
+                            
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Role<span class="text-danger">*</span></label>
-                                    <select id="heard" class="form-control" required="">
-                                        <option value="">Teacher</option>
-                                        <option value="press">Student</option>
-                                        <option value="net">Internet</option>
+                                    <label for="session_id">Session <span class="text-danger">*</span></label>
+                                    <select id="session_id" class="form-control"  name="session_id">                              
+                                    <option value="">Select Session</option>
+                                        @foreach($session as $ses)
+                                            <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Date<span class="text-danger">*</span></label>
+                                    <label for="date">Date<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
-                                        <input type="text" class="form-control homeWorkAdd" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
+                                        <input type="text" class="form-control" name="date" id="employeeDate">
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group text-right m-b-0">
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                Filter
+                            </button>
+                            <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                Cancel
+                            </button>-->
+                        </div>
+                    
                     </form>
-                    <div class="form-group text-right m-b-0">
-                        <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Filter
-                        </button>
-                        <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                            Cancel
-                        </button>-->
-                    </div>
-
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
         </div> <!-- end col -->
 
     </div>
     <!-- end row -->
-
-
-    <div class="row">
-        <div class="col-xl-12">
+    <div class="row" id="employee_attendance" style="display:none;">
+        <div class="col-xl-12 addEmployeeAttendanceForm">
             <div class="card">
                 <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Employees List
+                           Employee List
                             <h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card-box">
-                                <div class="row">
-                                    <div class="col-md-8"></div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="heard">Select for Everyone<span class="text-danger">*</span></label>
-                                            <select id="heard" class="form-control" required="">
-                                                <option value="">Present</option>
-                                                <option value="press">Absent</option>
-                                                <option value="net">Holiday</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Staff Id</th>
-                                                <th>Status</th>
-                                                <th>Remarks</th>
+                    <form id="addEmployeeAttendanceForm" method="post" action="{{ route('staff.attendance.employee_add') }}" enctype="multipart/form-data" autocomplete="off">
+                        @csrf
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card-box">
+                                    <div class="table-responsive">
+                                        <table class="table w-100 nowrap" id="timetable_table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Status</th>
+                                                    <th>Check In</th>
+                                                    <th>Check Out</th>
+                                                    <th>Total Hours</th>
+                                                    <th>Remarks</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="employee_attendance_body">
+                                                
+                                            </tbody>
+                                        </table>
 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Dhanush</td>
-                                                <td>23c08f</td>
-                                                <td>
-                                                    <div class="row">
-                                                        <div class="col-md-3"><input type="radio" id="contactChoice1" name="details" value="present">
-                                                            <label for="contactChoice1">Present</label>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <input type="radio" id="contactChoice2" name="details" value="Absent">
-                                                            <label for="contactChoice2">Absent</label>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <input type="radio" id="contactChoice3" name="details" value="Holiday">
-                                                            <label for="contactChoice3">Holiday</label>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <input type="radio" id="contactChoice3" name="details" value="Late">
-                                                            <label for="contactChoice3">Late</label>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td> <input type="remarks" id="query" name="q" class="form-control" placeholder="Remarks"></td>
+                                    </div> <!-- end table-responsive-->
 
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div> <!-- end table-responsive-->
-
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col-->
-                    </div>
-                    <!-- end row-->
-                    <div class="form-group text-right m-b-0">
-                        <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Save
-                        </button>
-                        <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                </div> <!-- end card-box -->
+                            </div> <!-- end col-->
+                        </div>
+                        <!-- end row-->
+                        <input type="hidden" id="employee_form_employee" name="employee">
+                        <input type="hidden" id="employee_form_session_id" name="session_id">
+                        <div class="form-group text-right m-b-0">
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
+                                Save
+                            </button>
+                            <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                             Cancel
                         </button>-->
-                    </div>
+                        </div>
+                    </form>
 
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
@@ -167,5 +136,13 @@
     <!-- end row -->
 
 </div> <!-- container -->
+
+@endsection
+@section('scripts')
+<script>
+    var getEmployeAttendanceList = "{{ route('staff.attendance.employee_list') }}";
+    var employeeByDepartment = "{{ config('constants.api.employee_by_department') }}";
+</script>
+<script src="{{ asset('public/js/custom/teacher_attendance_list.js') }}"></script>
 
 @endsection

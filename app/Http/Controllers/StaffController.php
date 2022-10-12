@@ -17,16 +17,21 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Task;
+use Excel;
+Use App\Exports\StaffAttendanceExport;
 class StaffController extends Controller
 {
     //
     public function index()
     {
         $user_id = session()->get('user_id');
+        
+        $teacher_id = session()->get('ref_user_id');
         $data = [
-            'user_id' => $user_id
+            'user_id' => $user_id,
+            'teacher_id' => $teacher_id
         ];
-        $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_list_dashboard'), $data);
+        $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
         $greetings = Helper::greetingMessage();
         // dd($get_to_do_list_dashboard);
         return view(
@@ -40,11 +45,6 @@ class StaffController extends Controller
     public function settings()
     {
         return view('staff.settings.index');
-    }
-    // LEAVE MANAGEMENT START
-    public function applyleave()
-    {
-        return view('staff.leave_management.applyleave');
     }
     // forum screen pages start
     public function forumIndex()
@@ -1312,10 +1312,6 @@ class StaffController extends Controller
     {
         return view('staff.attendance.student');
     }
-    public function employeeEntry()
-    {
-        return view('staff.attendance.employee');
-    }
     public function examEntry()
     {
         return view('staff.attendance.exam');
@@ -1328,5 +1324,367 @@ class StaffController extends Controller
     {
         return view('staff.task.index');
     }
-    // faq screen pages end
+    // Section by Class
+    public function sectionByClass(Request $request)
+    {
+        $data = [
+            'class_id' => $request->class_id,
+            'teacher_id' => session()->get('ref_user_id')
+        ];
+        $section = Helper::PostMethod(config('constants.api.teacher_section'), $data);
+        return $section;
+    }
+    // index Timetable
+    public function timetable(Request $request)
+    {
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        return view(
+            'staff.timetable.index',
+            [
+                'class' => $getclass['data'],
+                'semester' => $semester['data'],
+                'session' => $session['data'],
+            ]
+        );
+    }
+
+    // get Timetable
+    public function getTimetable(Request $request)
+    {
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
+        ];
+
+        // dd($data);
+
+        $timetable = Helper::PostMethod(config('constants.api.timetable_list'), $data);
+
+        $days = array(
+            'sunday',
+            'monday',
+            'tuesday',
+            'wednesday',
+            'thursday',
+            'friday',
+            'saturday'
+        );
+
+        if ($timetable['code'] == "200") {
+            $max = $timetable['data']['max'];
+
+            $response = "";
+            foreach ($days as $day) {
+
+                if (!isset($timetable['data']['week'][$day]) && ($day == "saturday" || $day == "sunday")) {
+                } else {
+
+                    $response .= '<tr><td class="center" style="color:#ed1833;">' . strtoupper($day) . '</td>';
+                    $row = 0;
+                    foreach ($timetable['data']['timetable'] as $table) {
+                        if ($table['day'] == $day) {
+                            $start_time = date('H:i', strtotime($table['time_start']));
+                            $end_time = date('H:i', strtotime($table['time_end']));
+                            $response .= '<td>';
+                            if ($table['break'] == "1") {
+                                $response .= '<b><div style="color:#2d28e9;display:inline-block;padding-right:10px;"> <i class="dripicons-bell"></i></div>' . (isset($table['break_type']) ? $table['break_type'] : "") . '</b><br>';
+                                $response .= '<b><div style="color:#179614;display:inline-block;padding-right:10px;"><i class="icon-speedometer"></i></div>(' . $start_time . ' - ' . $end_time . ' )<b><br>';
+                                if (isset($table['hall_no'])) {
+                                    $response .= '<b><div style="color:#ff0000;display:inline-block;padding-right:10px;"> <i class="icon-location-pin"></i> </div>' . $table['hall_no'] . '</b><br>';
+                                }
+                            } else {
+                                if ($table['subject_name']) {
+                                    $subject = $table['subject_name'];
+                                } else {
+                                    $subject = (isset($table['break_type']) ? $table['break_type'] : "");
+                                }
+                                $response .= '<b><div style="color:#2d28e9;display:inline-block;padding-right:10px;"> <i class="icon-book-open"></i></div>' . $subject . '</b><br>';
+                                $response .= '<b><div style="color:#179614;display:inline-block;padding-right:10px;"><i class="icon-speedometer"></i></div>(' . $start_time . ' - ' . $end_time . ' )<b><br>';
+                                if ($table['teacher_name']) {
+                                    $response .= '<b><div style="color:#28dfe9;display:inline-block;padding-right:10px;"> <i class=" fas fa-book-reader"></i></div>' . $table['teacher_name'] . '</b><br>';
+                                }
+                                if (isset($table['hall_no'])) {
+                                    $response .= '<b><div style="color:#ff0000;display:inline-block;padding-right:10px;"> <i class="icon-location-pin"></i> </div>' . $table['hall_no'] . '</b><br>';
+                                }
+                            }
+                            $response .= '</td>';
+                            $row++;
+                        }
+                    }
+                    while ($row < $max) {
+                        $response .= '<td class="center">N/A</td>';
+                        $row++;
+                    }
+                    $response .= '</tr>';
+                }
+            }
+
+            $timetable['timetable'] = $response;
+        }
+        $timetable['class_id'] = $request->class_id;
+        $timetable['section_id'] = $request->section_id;
+        $timetable['semester_id'] = $request->semester_id;
+        $timetable['session_id'] = $request->session_id;
+        return $timetable;
+    }
+
+    public function employeeEntry()
+    {
+        $employee = session()->get('ref_user_id');
+        $session = Helper::GetMethod(config('constants.api.session'));
+        return view(
+            'staff.attendance.employee',
+            [
+                'employee' => $employee,
+                'session' => $session['data']
+            ]
+        );
+    }
+    public function getEmployeeAttendanceList(Request $request)
+    {
+        $data = [
+            'firstDay' => $request->firstDay,
+            'lastDay' => $request->lastDay,
+            'employee' => $request->employee,
+            'session_id' => $request->session_id,
+            'date' => $request->date,
+        ];
+
+        $attendance = Helper::GETMethodWithData(config('constants.api.employee_attendance_list'), $data);
+        return $attendance;
+    }
+    
+    // add Employee Attendance 
+    public function addEmployeeAttendance(Request $request)
+    {
+        $data = [
+            'employee' => $request->employee,
+            'session_id' => $request->session_id,
+            'attendance' => $request->attendance,
+        ];
+
+        $attendance = Helper::PostMethod(config('constants.api.employee_attendance_add'), $data);
+        return $attendance;
+    }
+
+    public function reportEmployeeAttendance()
+    {
+        $employee = session()->get('ref_user_id');
+        $session = Helper::GetMethod(config('constants.api.session'));
+        return view(
+            'staff.attendance.employee_report',
+            [
+                'employee' => $employee,
+                'session' => $session['data']
+            ]
+        );
+    }
+    public function applyleave()
+    {
+        $get_leave_types = Helper::GetMethod(config('constants.api.get_leave_types'));
+        $get_leave_reasons = Helper::GetMethod(config('constants.api.get_leave_reasons'));
+        $data = [
+            'staff_id' => session()->get('ref_user_id')
+        ];
+        $leave_taken_history = Helper::PostMethod(config('constants.api.leave_taken_history'), $data);
+
+        return view('staff.leave_management.applyleave', [
+            'get_leave_types' => $get_leave_types['data'],
+            'get_leave_reasons' => $get_leave_reasons['data'],
+            'leave_taken_history' => $leave_taken_history['data'],
+        ]);
+    }
+    // staff leave 
+    public function staffApplyLeave(Request $request)
+    {
+        $file = $request->file('file');
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        } else {
+            $base64 = null;
+            $extension = null;
+        }
+        $status = "Pending";
+        $data = [
+            'staff_id' => session()->get('ref_user_id'),
+            'leave_type' => $request->leave_type,
+            'from_leave' => $request->from_leave,
+            'to_leave' => $request->to_leave,
+            'reason' => $request->reason,
+            'remarks' => $request->remarks,
+            'status' => $status,
+            'document' => $base64,
+            'file_extension' => $extension
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.staff_apply_leave'), $data);
+        return $response;
+    }
+    public function getStaffLeaveList()
+    {
+        $staff_id = [
+            'staff_id' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.staff_leave_history'), $staff_id);
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                if ($row['status'] != "Approve") {
+                    return '<div class="button-list">
+                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile"><i class="fe-edit"></i></a>
+            </div>';
+                } else {
+                    return '-';
+                }
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function allleaves()
+    {
+        return view('staff.leave_management.allleaves');
+    }
+    public function getAllLeaveList(Request $request)
+    {
+        $staff_data = [
+            'staff_id' => $request->staff_id,
+            'leave_status' => $request->leave_status,
+        ];
+        $response = Helper::PostMethod(config('constants.api.leave_approval_history_by_staff'), $staff_data);
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-staff_id="' . $row['staff_id'] . '" id="viewDetails">Details</a>
+                            </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function staffAttendanceExcel(Request $request)
+    {
+        // dd($request);
+        return Excel::download(new StaffAttendanceExport(1,$request->employee,$request->session,$request->date,$request->department), 'Staff_Attendance.xlsx');
+    }
+
+    public function classroomManagement()
+    {
+        $data = [
+            'teacher_id' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        // dd($sem);
+        return view('staff.classroom.management', [
+            'teacher_class' => $response['data'],
+            'semester' => $semester['data'],
+            'session' => $session['data'],
+            'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+            'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+        ]);
+    }
+    function classroomPost(Request $request)
+    {
+        // echo "<pre>";
+        // print_r($request);
+
+        $data = [
+            "attendance" => $request->attendance,
+            "date" => $request->date,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.add_student_attendance'), $data);
+        return $response;
+    }
+    function getShortTest(Request $request)
+    {
+        $data = [
+            "date" => $request->date,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.get_short_test'), $data);
+        return $response;
+    }
+    function addShortTest(Request $request)
+    {
+        // dd($request);
+        $data = [
+            "short_test" => $request->short_test,
+            "date" => $request->date,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.add_short_test'), $data);
+        return $response;
+    }
+    function addDailyReport(Request $request)
+    {
+        $data = [
+            "daily_report" => $request->daily_report,
+            "date" => $request->date,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.add_daily_report'), $data);
+        return $response;
+    }
+    function addDailyReportRemarks(Request $request)
+    {
+        $data = [
+            "daily_report_remarks" => $request->daily_report_remarks,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.add_daily_report_remarks'), $data);
+        return $response;
+    }
+    // student leave update
+    public function getstudentleave_update(Request $request)
+    {
+        $data = [
+            "attendance" => $request->attendance,
+            "date" => $request->date,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.update_student_leave'), $data);
+        return $response;
+    }
+
+
 }

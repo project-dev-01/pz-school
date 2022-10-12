@@ -112,6 +112,10 @@
                     <form id="logout-form" action="{{ route('super_admin.logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
+                    @elseif(Session::get('role_id') == '3')
+                    <form id="logout-form" action="{{ route('staff.logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                     @elseif(Session::get('role_id') == '4')
                     <form id="logout-form" action="{{ route('teacher.logout') }}" method="POST" class="d-none">
                         @csrf

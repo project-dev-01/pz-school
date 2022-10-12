@@ -614,172 +614,213 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 });
 // admin routes end
 
-Route::group(['prefix' => 'staff', 'middleware' => ['isStaff']], function () {
-    Route::get('/dashboard', [StaffController::class, 'index'])->name('staff.dashboard');
-    // Leave Apply
-    Route::get('leave_management/applyleave', [StaffController::class, 'applyleave'])->name('staff.leave_management.applyleave');
+// TEACHER CONTROLLER START
+Route::group(['prefix' => 'staff'], function () {
 
-    // Forum routes
-    Route::get('forum/index', [StaffController::class, 'forumIndex'])->name('staff.forum.index');
-    Route::get('forum/page-single-topic', [StaffController::class, 'forumPageSingleTopic'])->name('staff.forum.page-single-topic');
-    Route::get('forum/page-create-topic', [StaffController::class, 'forumPageCreateTopic'])->name('staff.forum.page-create-topic');
-    Route::get('forum/page-single-user', [StaffController::class, 'forumPageSingleUser'])->name('staff.forum.page-single-user');
-    Route::get('forum/page-single-threads', [StaffController::class, 'forumPageSingleThreads'])->name('staff.forum.page-single-threads');
-    Route::get('forum/page-single-replies', [StaffController::class, 'forumPageSingleReplies'])->name('staff.forum.page-single-replies');
-    Route::get('forum/page-single-followers', [StaffController::class, 'forumPageSingleFollowers'])->name('staff.forum.page-single-followers');
-    Route::get('forum/page-single-categories', [StaffController::class, 'forumPageSingleCategories'])->name('staff.forum.page-single-categories');
-    Route::get('forum/page-categories', [StaffController::class, 'forumPageCategories'])->name('staff.forum.page-categories');
-    Route::get('forum/page-categories-single', [StaffController::class, 'forumPageCategoriesSingle'])->name('staff.forum.page-categories-single');
-    Route::get('forum/page-tabs', [StaffController::class, 'forumPageTabs'])->name('staff.forum.page-tabs');
-    Route::get('forum/page-tabs-guidelines', [StaffController::class, 'forumPageTabGuidelines'])->name('staff.forum.page-tabs-guidelines');
+    Route::get('/login', [AuthController::class, 'staffLoginForm'])->name('staff.login');
+    Route::any('/authenticate', [AuthController::class, 'authenticateStaff'])->name('staff.authenticate');
+    Route::post('/logout', [AuthController::class, 'logoutStaff'])->name('staff.logout');
 
-    Route::post('form/page-create-topic', [StaffController::class, 'createpost'])->name('staff.forum.create-topic');
-    Route::get('forum/page-single-topic-val/{id}/{user_id}', [StaffController::class, 'forumPageSingleTopicwithvalue'])->name('staff.forum.page-single-topic-val');
-    Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [StaffController::class, 'forumPageCategoriesSingle'])->name('staff.forum.page-categories-single-val');
-    Route::post('form/postimage', [StaffController::class, 'imagestore'])->name('staff.forum.image.store');
-    // Settings
-    Route::get('settings', [StaffController::class, 'settings'])->name('staff.settings');
-    // faq        
-    Route::get('faq/index', [StaffController::class, 'faqIndex'])->name('staff.faq.Index');
-    // student details
-    Route::get('/student', [StaffController::class, 'studentIndex'])->name('staff.student.index');
+    Route::group(['middleware' => ['isStaff']], function () {
+        Route::get('/dashboard', [StaffController::class, 'index'])->name('staff.dashboard');
 
-    // section routes
-    Route::get('section/index', [StaffController::class, 'section'])->name('staff.section');
-    Route::post('section/add', [StaffController::class, 'addSection'])->name('staff.section.add');
-    Route::get('section/list', [StaffController::class, 'getSectionList'])->name('staff.section.list');
-    Route::post('section/section-details', [StaffController::class, 'getSectionDetails'])->name('staff.section.details');
-    Route::post('section/update', [StaffController::class, 'updateSectionDetails'])->name('staff.section.update');
-    Route::post('section/delete', [StaffController::class, 'deleteSection'])->name('staff.section.delete');
+        // Forum routes
+        Route::get('forum/index', [StaffController::class, 'forumIndex'])->name('staff.forum.index');
+        Route::get('forum/page-single-topic', [StaffController::class, 'forumPageSingleTopic'])->name('staff.forum.page-single-topic');
+        Route::get('forum/page-create-topic', [StaffController::class, 'forumPageCreateTopic'])->name('staff.forum.page-create-topic');
+        Route::get('forum/page-single-user', [StaffController::class, 'forumPageSingleUser'])->name('staff.forum.page-single-user');
+        Route::get('forum/page-single-threads', [StaffController::class, 'forumPageSingleThreads'])->name('staff.forum.page-single-threads');
+        Route::get('forum/page-single-replies', [StaffController::class, 'forumPageSingleReplies'])->name('staff.forum.page-single-replies');
+        Route::get('forum/page-single-followers', [StaffController::class, 'forumPageSingleFollowers'])->name('staff.forum.page-single-followers');
+        Route::get('forum/page-single-categories', [StaffController::class, 'forumPageSingleCategories'])->name('staff.forum.page-single-categories');
+        Route::get('forum/page-categories', [StaffController::class, 'forumPageCategories'])->name('staff.forum.page-categories');
+        Route::get('forum/page-categories-single', [StaffController::class, 'forumPageCategoriesSingle'])->name('staff.forum.page-categories-single');
+        Route::get('forum/page-tabs', [StaffController::class, 'forumPageTabs'])->name('staff.forum.page-tabs');
+        Route::get('forum/page-tabs-guidelines', [StaffController::class, 'forumPageTabGuidelines'])->name('staff.forum.page-tabs-guidelines');
 
-    Route::get('classes', [StaffController::class, 'classes'])->name('staff.classes');
-    Route::get('classes/add_class', [StaffController::class, 'addClasses'])->name('staff.add_classes');
-    Route::get('classes/list', [StaffController::class, 'getClassList'])->name('staff.classes.list');
-    Route::post('classes/add', [StaffController::class, 'addClass'])->name('staff.classes.add');
-    Route::get('classes/edit/{id}', [StaffController::class, 'editClass'])->name('staff.classes.edit');
-    Route::post('classes/update', [StaffController::class, 'updateClass'])->name('staff.classes.update');
-    Route::post('classes/delete', [StaffController::class, 'deleteClass'])->name('staff.classes.delete');
-    Route::post('classes/class-details', [StaffController::class, 'getClassDetails'])->name('staff.classes.details');
+        Route::post('form/page-create-topic', [StaffController::class, 'createpost'])->name('staff.forum.create-topic');
+        Route::get('forum/page-single-topic-val/{id}/{user_id}', [StaffController::class, 'forumPageSingleTopicwithvalue'])->name('staff.forum.page-single-topic-val');
+        Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [StaffController::class, 'forumPageCategoriesSingle'])->name('staff.forum.page-categories-single-val');
+        Route::post('form/postimage', [StaffController::class, 'imagestore'])->name('staff.forum.image.store');
+        // Settings
+        Route::get('settings', [StaffController::class, 'settings'])->name('staff.settings');
+        // faq        
+        Route::get('faq/index', [StaffController::class, 'faqIndex'])->name('staff.faq.Index');
+        // student details
+        Route::get('/student', [StaffController::class, 'studentIndex'])->name('staff.student.index');
 
+        // section routes
+        Route::get('section/index', [StaffController::class, 'section'])->name('staff.section');
+        Route::post('section/add', [StaffController::class, 'addSection'])->name('staff.section.add');
+        Route::get('section/list', [StaffController::class, 'getSectionList'])->name('staff.section.list');
+        Route::post('section/section-details', [StaffController::class, 'getSectionDetails'])->name('staff.section.details');
+        Route::post('section/update', [StaffController::class, 'updateSectionDetails'])->name('staff.section.update');
+        Route::post('section/delete', [StaffController::class, 'deleteSection'])->name('staff.section.delete');
 
-    // sections allocations routes
-    Route::get('allocate_section/index', [StaffController::class, 'showSectionAllocation'])->name('staff.section_allocation');
-    Route::post('allocate_section/add', [StaffController::class, 'addSectionAllocation'])->name('staff.section_allocation.add');
-    Route::get('allocate_section/list', [StaffController::class, 'getSectionAllocationList'])->name('staff.section_allocation.list');
-    Route::post('allocate_section/section_allocation-details', [StaffController::class, 'getSectionAllocationDetails'])->name('staff.section_allocation.details');
-    Route::post('allocate_section/update', [StaffController::class, 'updateSectionAllocation'])->name('staff.section_allocation.update');
-    Route::post('allocate_section/delete', [StaffController::class, 'deleteSectionAllocation'])->name('staff.section_allocation.delete');
-
-    // assign_teacher routes
-    Route::get('assign_teacher/index', [StaffController::class, 'showTeacherAllocation'])->name('staff.assign_teacher');
-    Route::post('assign_teacher/get_allocation_section', [StaffController::class, 'getAllocationSection'])->name('staff.assign_teacher.get_allocation_section');
-    Route::post('assign_teacher/add', [StaffController::class, 'addTeacherAllocation'])->name('staff.assign_teacher.add');
-    Route::get('assign_teacher/list', [StaffController::class, 'getTeacherAllocationList'])->name('staff.assign_teacher.list');
-    Route::post('assign_teacher/details', [StaffController::class, 'getTeacherAllocationDetails'])->name('staff.assign_teacher.details');
-    Route::post('assign_teacher/update', [StaffController::class, 'updateTeacherAllocation'])->name('staff.assign_teacher.update');
-    Route::post('assign_teacher/delete', [StaffController::class, 'deleteTeacherAllocation'])->name('staff.assign_teacher.delete');
-
-    // Event Type routes
-    Route::get('event_type/index', [StaffController::class, 'eventType'])->name('staff.event_type');
-    Route::get('event_type/list', [StaffController::class, 'getEventTypeList'])->name('staff.event_type.list');
-    Route::post('event_type/add', [StaffController::class, 'addEventType'])->name('staff.event_type.add');
-    Route::post('event_type/event_type-details', [StaffController::class, 'getEventTypeDetails'])->name('staff.event_type.details');
-    Route::post('event_type/update', [StaffController::class, 'updateEventTypeDetails'])->name('staff.event_type.update');
-    Route::post('event_type/delete', [StaffController::class, 'deleteEventType'])->name('staff.event_type.delete');
+        Route::get('classes', [StaffController::class, 'classes'])->name('staff.classes');
+        Route::get('classes/add_class', [StaffController::class, 'addClasses'])->name('staff.add_classes');
+        Route::get('classes/list', [StaffController::class, 'getClassList'])->name('staff.classes.list');
+        Route::post('classes/add', [StaffController::class, 'addClass'])->name('staff.classes.add');
+        Route::get('classes/edit/{id}', [StaffController::class, 'editClass'])->name('staff.classes.edit');
+        Route::post('classes/update', [StaffController::class, 'updateClass'])->name('staff.classes.update');
+        Route::post('classes/delete', [StaffController::class, 'deleteClass'])->name('staff.classes.delete');
+        Route::post('classes/class-details', [StaffController::class, 'getClassDetails'])->name('staff.classes.details');
 
 
-    // Event routes
-    Route::get('event/index', [StaffController::class, 'event'])->name('staff.event');
-    Route::get('event/list', [StaffController::class, 'getEventList'])->name('staff.event.list');
-    Route::post('event/add', [StaffController::class, 'addEvent'])->name('staff.event.add');
-    Route::post('event/event-details', [StaffController::class, 'getEventDetails'])->name('staff.event.details');
-    Route::post('event/delete', [StaffController::class, 'deleteEvent'])->name('staff.event.delete');
-    Route::post('event/event-publish', [StaffController::class, 'publishEvent'])->name('staff.event.publish');
+        // sections allocations routes
+        Route::get('allocate_section/index', [StaffController::class, 'showSectionAllocation'])->name('staff.section_allocation');
+        Route::post('allocate_section/add', [StaffController::class, 'addSectionAllocation'])->name('staff.section_allocation.add');
+        Route::get('allocate_section/list', [StaffController::class, 'getSectionAllocationList'])->name('staff.section_allocation.list');
+        Route::post('allocate_section/section_allocation-details', [StaffController::class, 'getSectionAllocationDetails'])->name('staff.section_allocation.details');
+        Route::post('allocate_section/update', [StaffController::class, 'updateSectionAllocation'])->name('staff.section_allocation.update');
+        Route::post('allocate_section/delete', [StaffController::class, 'deleteSectionAllocation'])->name('staff.section_allocation.delete');
 
-    // Qualifications
-    Route::get('qualification/index', [StaffController::class, 'qualification_view'])->name('staff.qualification');
-    Route::post('qualification/add', [StaffController::class, 'qualification_add'])->name('staff.qualification.add');
-    Route::get('qualification/list', [StaffController::class, 'getqualification_list'])->name('staff.qualification.list');
-    Route::post('qualification/department-details', [StaffController::class, 'getQualificationsDetails'])->name('staff.qualification.details');
-    Route::post('qualification/update', [StaffController::class, 'qualification_update'])->name('staff.qualification.update');
-    Route::post('qualification/delete', [StaffController::class, 'qualification_delete'])->name('staff.qualification.delete');
-    // Staff category
-    Route::get('staffcategory/index', [StaffController::class, 'staffcategories_view'])->name('staff.staffcategory');
-    Route::post('staffcategory/add', [StaffController::class, 'staffcategories_add'])->name('staff.staffcategory.add');
-    Route::get('staffcategory/list', [StaffController::class, 'staffcategories_list'])->name('staff.staffcategory.list');
-    Route::post('staffcategory/staffcategory-details', [StaffController::class, 'getstaffcategoriesDetails'])->name('staff.staffcategory.details');
-    Route::post('staffcategory/update', [StaffController::class, 'staffcategories_edit'])->name('staff.staffcategory.update');
-    Route::post('staffcategory/delete', [StaffController::class, 'staffcategories_delete'])->name('staff.staffcategory.delete');
+        // assign_teacher routes
+        Route::get('assign_teacher/index', [StaffController::class, 'showTeacherAllocation'])->name('staff.assign_teacher');
+        Route::post('assign_teacher/get_allocation_section', [StaffController::class, 'getAllocationSection'])->name('staff.assign_teacher.get_allocation_section');
+        Route::post('assign_teacher/add', [StaffController::class, 'addTeacherAllocation'])->name('staff.assign_teacher.add');
+        Route::get('assign_teacher/list', [StaffController::class, 'getTeacherAllocationList'])->name('staff.assign_teacher.list');
+        Route::post('assign_teacher/details', [StaffController::class, 'getTeacherAllocationDetails'])->name('staff.assign_teacher.details');
+        Route::post('assign_teacher/update', [StaffController::class, 'updateTeacherAllocation'])->name('staff.assign_teacher.update');
+        Route::post('assign_teacher/delete', [StaffController::class, 'deleteTeacherAllocation'])->name('staff.assign_teacher.delete');
 
-    // department routes
-    Route::get('department/index', [StaffController::class, 'Department'])->name('staff.department');
-    Route::post('department/add', [StaffController::class, 'addDepartment'])->name('staff.department.add');
-    Route::get('department/list', [StaffController::class, 'getDepartmentList']);
-    Route::post('department/department-details', [StaffController::class, 'getDepartmentDetails'])->name('staff.department.details');
-    Route::post('department/update', [StaffController::class, 'updateDepartment'])->name('staff.department.update');
-    Route::post('department/delete', [StaffController::class, 'deleteDepartment'])->name('staff.department.delete');
-
-    // designation routes
-    Route::get('designation/index', [StaffController::class, 'Designation'])->name('staff.designation');
-    Route::post('designation/add', [StaffController::class, 'addDesignation'])->name('staff.designation.add');
-    Route::get('designation/list', [StaffController::class, 'getDesignationList']);
-    Route::post('designation/designation-details', [StaffController::class, 'getDesignationDetails'])->name('staff.designation.details');
-    Route::post('designation/update', [StaffController::class, 'updateDesignation'])->name('staff.designation.update');
-    Route::post('designation/delete', [StaffController::class, 'deleteDesignation'])->name('staff.designation.delete');
+        // Event Type routes
+        Route::get('event_type/index', [StaffController::class, 'eventType'])->name('staff.event_type');
+        Route::get('event_type/list', [StaffController::class, 'getEventTypeList'])->name('staff.event_type.list');
+        Route::post('event_type/add', [StaffController::class, 'addEventType'])->name('staff.event_type.add');
+        Route::post('event_type/event_type-details', [StaffController::class, 'getEventTypeDetails'])->name('staff.event_type.details');
+        Route::post('event_type/update', [StaffController::class, 'updateEventTypeDetails'])->name('staff.event_type.update');
+        Route::post('event_type/delete', [StaffController::class, 'deleteEventType'])->name('staff.event_type.delete');
 
 
-    // Employee routes
+        // Event routes
+        Route::get('event/index', [StaffController::class, 'event'])->name('staff.event');
+        Route::get('event/list', [StaffController::class, 'getEventList'])->name('staff.event.list');
+        Route::post('event/add', [StaffController::class, 'addEvent'])->name('staff.event.add');
+        Route::post('event/event-details', [StaffController::class, 'getEventDetails'])->name('staff.event.details');
+        Route::post('event/delete', [StaffController::class, 'deleteEvent'])->name('staff.event.delete');
+        Route::post('event/event-publish', [StaffController::class, 'publishEvent'])->name('staff.event.publish');
 
-    Route::get('employee/employeelist', [StaffController::class, 'listEmployee'])->name('staff.listemployee');
-    Route::get('employee/index', [StaffController::class, 'showEmployee'])->name('staff.employee');
-    Route::post('employee/add', [StaffController::class, 'addEmployee'])->name('staff.employee.add');
-    Route::get('employee/list', [StaffController::class, 'getEmployeeList']);
+        // Qualifications
+        Route::get('qualification/index', [StaffController::class, 'qualification_view'])->name('staff.qualification');
+        Route::post('qualification/add', [StaffController::class, 'qualification_add'])->name('staff.qualification.add');
+        Route::get('qualification/list', [StaffController::class, 'getqualification_list'])->name('staff.qualification.list');
+        Route::post('qualification/department-details', [StaffController::class, 'getQualificationsDetails'])->name('staff.qualification.details');
+        Route::post('qualification/update', [StaffController::class, 'qualification_update'])->name('staff.qualification.update');
+        Route::post('qualification/delete', [StaffController::class, 'qualification_delete'])->name('staff.qualification.delete');
+        // Staff category
+        Route::get('staffcategory/index', [StaffController::class, 'staffcategories_view'])->name('staff.staffcategory');
+        Route::post('staffcategory/add', [StaffController::class, 'staffcategories_add'])->name('staff.staffcategory.add');
+        Route::get('staffcategory/list', [StaffController::class, 'staffcategories_list'])->name('staff.staffcategory.list');
+        Route::post('staffcategory/staffcategory-details', [StaffController::class, 'getstaffcategoriesDetails'])->name('staff.staffcategory.details');
+        Route::post('staffcategory/update', [StaffController::class, 'staffcategories_edit'])->name('staff.staffcategory.update');
+        Route::post('staffcategory/delete', [StaffController::class, 'staffcategories_delete'])->name('staff.staffcategory.delete');
 
-    // static page routes start
+        // department routes
+        Route::get('department/index', [StaffController::class, 'Department'])->name('staff.department');
+        Route::post('department/add', [StaffController::class, 'addDepartment'])->name('staff.department.add');
+        Route::get('department/list', [StaffController::class, 'getDepartmentList']);
+        Route::post('department/department-details', [StaffController::class, 'getDepartmentDetails'])->name('staff.department.details');
+        Route::post('department/update', [StaffController::class, 'updateDepartment'])->name('staff.department.update');
+        Route::post('department/delete', [StaffController::class, 'deleteDepartment'])->name('staff.department.delete');
 
-    // Admission routes
-    Route::get('admission/index', [StaffController::class, 'admission'])->name('staff.admission');
-    Route::get('admission/import', [StaffController::class, 'import'])->name('staff.admission.import');
-
-    // Parent routes
-    Route::get('parent/index', [StaffController::class, 'parent'])->name('staff.parent');
-
-    // Homework routes
-    Route::get('homework/index', [StaffController::class, 'homework'])->name('staff.homework');
-
-    // exam routes
-    Route::get('exam/term', [StaffController::class, 'examIndex'])->name('staff.exam.term');
-    Route::get('exam/hall', [StaffController::class, 'examHall'])->name('staff.exam.hall');
-    Route::get('exam/mark_distribution', [StaffController::class, 'examMarkDistribution'])->name('staff.exam.mark_distribution');
-    Route::get('exam/exam', [StaffController::class, 'exam'])->name('staff.exam.exam');
-
-    // Hostel routes
-    Route::get('hostel/index', [StaffController::class, 'hostel'])->name('staff.hostel');
-    Route::get('hostel/category', [StaffController::class, 'getCategory'])->name('staff.hostel.category');
-    Route::get('hostel/room', [StaffController::class, 'getRoom'])->name('staff.hostel.room');
-
-    // Transport routes
-    Route::get('transport/route', [StaffController::class, 'getRoute'])->name('staff.transport.route');
-    Route::get('transport/vehicle', [StaffController::class, 'getVehicle'])->name('staff.transport.vehicle');
-    Route::get('transport/stoppage', [StaffController::class, 'getstoppage'])->name('staff.transport.stoppage');
-    Route::get('transport/assignvehicle', [StaffController::class, 'assignVehicle'])->name('staff.transport.assignvehicle');
-
-    // Library routes
-    Route::get('library/book', [StaffController::class, 'book'])->name('staff.library.book');
-    Route::get('library/book/category', [StaffController::class, 'bookCategory'])->name('staff.library.bookcategory');
-    Route::get('library/issued_book', [StaffController::class, 'issuedBook'])->name('staff.library.issuedbook');
-    Route::get('library/issue_return', [StaffController::class, 'issueReturn'])->name('staff.library.issuereturn');
-
-    Route::get('classes/add_class', [StaffController::class, 'addClasses'])->name('staff.add_classes');
+        // designation routes
+        Route::get('designation/index', [StaffController::class, 'Designation'])->name('staff.designation');
+        Route::post('designation/add', [StaffController::class, 'addDesignation'])->name('staff.designation.add');
+        Route::get('designation/list', [StaffController::class, 'getDesignationList']);
+        Route::post('designation/designation-details', [StaffController::class, 'getDesignationDetails'])->name('staff.designation.details');
+        Route::post('designation/update', [StaffController::class, 'updateDesignation'])->name('staff.designation.update');
+        Route::post('designation/delete', [StaffController::class, 'deleteDesignation'])->name('staff.designation.delete');
 
 
-    // Attendance routes
-    Route::get('attendance/student_entry', [StaffController::class, 'studentEntry'])->name('staff.attendance.student_entry');
-    Route::get('attendance/employee_entry', [StaffController::class, 'employeeEntry'])->name('staff.attendance.employee_entry');
-    Route::get('attendance/exam_entry', [StaffController::class, 'examEntry'])->name('staff.attendance.exam_entry');
+        // Employee routes
 
-    //Task routes
-    Route::get('task/index', [StaffController::class, 'taskIndex'])->name('staff.task');
+        Route::get('employee/employeelist', [StaffController::class, 'listEmployee'])->name('staff.listemployee');
+        Route::get('employee/index', [StaffController::class, 'showEmployee'])->name('staff.employee');
+        Route::post('employee/add', [StaffController::class, 'addEmployee'])->name('staff.employee.add');
+        Route::get('employee/list', [StaffController::class, 'getEmployeeList']);
+
+        // static page routes start
+
+        // Admission routes
+        Route::get('admission/index', [StaffController::class, 'admission'])->name('staff.admission');
+        Route::get('admission/import', [StaffController::class, 'import'])->name('staff.admission.import');
+
+        // Parent routes
+        Route::get('parent/index', [StaffController::class, 'parent'])->name('staff.parent');
+
+        // Homework routes
+        Route::get('homework/index', [StaffController::class, 'homework'])->name('staff.homework');
+
+        // exam routes
+        Route::get('exam/term', [StaffController::class, 'examIndex'])->name('staff.exam.term');
+        Route::get('exam/hall', [StaffController::class, 'examHall'])->name('staff.exam.hall');
+        Route::get('exam/mark_distribution', [StaffController::class, 'examMarkDistribution'])->name('staff.exam.mark_distribution');
+        Route::get('exam/exam', [StaffController::class, 'exam'])->name('staff.exam.exam');
+
+        // Hostel routes
+        Route::get('hostel/index', [StaffController::class, 'hostel'])->name('staff.hostel');
+        Route::get('hostel/category', [StaffController::class, 'getCategory'])->name('staff.hostel.category');
+        Route::get('hostel/room', [StaffController::class, 'getRoom'])->name('staff.hostel.room');
+
+        // Transport routes
+        Route::get('transport/route', [StaffController::class, 'getRoute'])->name('staff.transport.route');
+        Route::get('transport/vehicle', [StaffController::class, 'getVehicle'])->name('staff.transport.vehicle');
+        Route::get('transport/stoppage', [StaffController::class, 'getstoppage'])->name('staff.transport.stoppage');
+        Route::get('transport/assignvehicle', [StaffController::class, 'assignVehicle'])->name('staff.transport.assignvehicle');
+
+        // Library routes
+        Route::get('library/book', [StaffController::class, 'book'])->name('staff.library.book');
+        Route::get('library/book/category', [StaffController::class, 'bookCategory'])->name('staff.library.bookcategory');
+        Route::get('library/issued_book', [StaffController::class, 'issuedBook'])->name('staff.library.issuedbook');
+        Route::get('library/issue_return', [StaffController::class, 'issueReturn'])->name('staff.library.issuereturn');
+
+        Route::get('classes/add_class', [StaffController::class, 'addClasses'])->name('staff.add_classes');
+
+
+        // Attendance routes
+        Route::get('attendance/student_entry', [StaffController::class, 'studentEntry'])->name('staff.attendance.student_entry');
+        Route::get('attendance/employee_entry', [StaffController::class, 'employeeEntry'])->name('staff.attendance.employee_entry');
+        Route::get('attendance/exam_entry', [StaffController::class, 'examEntry'])->name('staff.attendance.exam_entry');
+
+        //Task routes
+        Route::get('task/index', [StaffController::class, 'taskIndex'])->name('staff.task');
+
+        
+        //Timetable
+        Route::get('timetable/index', [StaffController::class, 'timetable'])->name('staff.timetable');
+        Route::post('timetable/timetable-details', [StaffController::class, 'getTimetable'])->name('staff.timetable.details');
+
+        
+        // Section By Class Route
+        Route::post('section-by-class', [StaffController::class, 'sectionByClass'])->name('staff.section_by_class');
+
+         // Attendance routes
+        Route::get('attendance/employee_entry', [StaffController::class, 'employeeEntry'])->name('staff.attendance.employee_entry');
+        Route::post('attendance/employee_list', [StaffController::class, 'getEmployeeAttendanceList'])->name('staff.attendance.employee_list');
+        Route::post('attendance/employee_add', [StaffController::class, 'addEmployeeAttendance'])->name('staff.attendance.employee_add');
+        Route::get('attendance/employee/report', [StaffController::class, 'reportEmployeeAttendance'])->name('staff.attendance.employee_report');
+        Route::post('attendance/excel', [StaffController::class, 'staffAttendanceExcel'])->name('staff.attendance.excel');
+
+        
+        // Leave Apply
+        Route::get('leave_management/applyleave', [StaffController::class, 'applyleave'])->name('staff.leave_management.applyleave');
+        Route::post('leave_management/applyleave_save', [StaffController::class, 'staffApplyLeave'])->name('staff.leave_management.add');
+        Route::get('leave_management/applyleave_list', [StaffController::class, 'getStaffLeaveList'])->name('staff.leave_management.list');
+        // all leaves
+        Route::get('leave_management/allleaves', [StaffController::class, 'allleaves'])->name('staff.leave_management.allleaves');
+        Route::get('leave_management/leave_approval_history_by_staff', [StaffController::class, 'getAllLeaveList'])->name('staff.leave_management.leave_approval_history_by_staff');
+
+        
+        // class room management    
+        Route::get('classroom/classroom-management', [StaffController::class, 'classroomManagement'])->name('staff.classroom.management');
+        Route::post('classroomAdd', [StaffController::class, 'classroomPost'])->name('staff.classroom.add');
+        Route::post('getShortTest', [StaffController::class, 'getShortTest'])->name('staff.classroom.get_short_test');
+        Route::post('add_short_test', [StaffController::class, 'addShortTest'])->name('staff.classroom.add_short_test');
+        Route::post('add_daily_report', [StaffController::class, 'addDailyReport'])->name('staff.classroom.add_daily_report');
+        Route::post('add_daily_report_remarks', [StaffController::class, 'addDailyReportRemarks'])->name('staff.classroom.add_daily_report_remarks');
+        Route::post('studentleave/update', [StaffController::class, 'getstudentleave_update'])->name('staff.studentleave.update');
+    });
 });
 // TEACHER CONTROLLER START
 Route::group(['prefix' => 'teacher'], function () {
@@ -866,7 +907,7 @@ Route::group(['prefix' => 'teacher'], function () {
         Route::get('exam_results/bystudent', [TeacherController::class, 'bystudent'])->name('teacher.exam_results.bystudent');
         Route::get('exam_results/overall', [TeacherController::class, 'overall'])->name('teacher.exam_results.overall');
         Route::get('exam/result', [TeacherController::class, 'examResult'])->name('teacher.exam.result');
-        Route::post('section-by-class', [AdminController::class, 'sectionByClass'])->name('teacher.section_by_class');
+        // Route::post('section-by-class', [AdminController::class, 'sectionByClass'])->name('teacher.section_by_class');
 
 
         Route::get('analyticrep', [TeacherController::class, 'analytic'])->name('teacher.analyticrep.analyticreport');

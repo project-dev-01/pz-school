@@ -173,7 +173,7 @@ class StudentAttendanceExport  extends BaseController implements FromCollection,
                 $tot = date('t', strtotime($year.'-'.$month.'-01'));
                 // dd($tot);
                 $num = $event->sheet->getHighestRow();
-                $cellRange = 'A1:AI1'; // All headers
+                $cellRange = 'A1:AJ1'; // All headers
                 $cellRange2 = 'A1:A'.($num+1);
                 $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(12)->setBold(true);
                 $event->sheet->getDelegate()->getStyle($cellRange2)->getFont()->setSize(12)->setBold(true);
