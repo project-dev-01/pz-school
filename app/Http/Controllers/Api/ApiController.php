@@ -8816,9 +8816,9 @@ class ApiController extends BaseController
                     })
                     ->where([
                         ['en.class_id', '=', $request->class_id],
-                        ['en.section_id', '=', $request->section_id]
-                        // ['en.semester_id', '=', $request->semester_id],
-                        // ['en.session_id', '=', $request->session_id]
+                        ['en.section_id', '=', $request->section_id],
+                        ['en.semester_id', '=', $request->semester_id],
+                        ['en.session_id', '=', $request->session_id]
                     ])
                     // ->orderBy('sa.score', 'desc')
                     ->orderBy('name', 'asc')
@@ -13960,9 +13960,12 @@ class ApiController extends BaseController
                     'en.class_id',
                     'en.section_id',
                     DB::raw("CONCAT(st.first_name, ' ', st.last_name) as name"),
-                    'st.id as id'
+                    'st.id as id',
+                    'st.register_no',
+                    'st.roll_no',
+                    'st.photo'
                 )
-                ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
+                ->join('students as st', 'st.id', '=', 'en.student_id')
                 ->where([
                     ['en.class_id', '=', $request->class_id],
                     ['en.section_id', '=', $request->section_id]

@@ -605,21 +605,21 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // report card 
     Route::post('get_by_reportcard', [ApiControllerOne::class, 'getreportcard']);
 
-    
+
     // absent reason routes
     Route::post('absent_reason/add', [ApiController::class, 'addAbsentReason']);
     Route::get('absent_reason/list', [ApiController::class, 'getAbsentReasonList']);
     Route::post('absent_reason/absent-reason-details', [ApiController::class, 'getAbsentReasonDetails']);
     Route::post('absent_reason/update', [ApiController::class, 'updateAbsentReason']);
     Route::post('absent_reason/delete', [ApiController::class, 'deleteAbsentReason']);
-    
+
     // late reason routes
     Route::post('late_reason/add', [ApiController::class, 'addLateReason']);
     Route::get('late_reason/list', [ApiController::class, 'getLateReasonList']);
     Route::post('late_reason/late-reason-details', [ApiController::class, 'getLateReasonDetails']);
     Route::post('late_reason/update', [ApiController::class, 'updateLateReason']);
     Route::post('late_reason/delete', [ApiController::class, 'deleteLateReason']);
-    
+
     // excused reason routes
     Route::post('excused_reason/add', [ApiController::class, 'addExcusedReason']);
     Route::get('excused_reason/list', [ApiController::class, 'getExcusedReasonList']);
@@ -633,5 +633,15 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('semester/semester-details', [ApiController::class, 'getSemesterDetails']);
     Route::post('semester/update', [ApiController::class, 'updateSemester']);
     Route::post('semester/delete', [ApiController::class, 'deleteSemester']);
+    // department routes
+    Route::post('academic_year/add', [ApiControllerOne::class, 'academicYearAdd']);
+    Route::get('academic_year/list', [ApiControllerOne::class, 'academicYearList']);
+    Route::post('academic_year/academic_year_details', [ApiControllerOne::class, 'academicYearDetails']);
+    Route::post('academic_year/update', [ApiControllerOne::class, 'updateAcademicYear']);
+    Route::post('academic_year/delete', [ApiControllerOne::class, 'deleteAcademicYear']);
+    // add promotion
+    Route::post('get_student_list/by_class_section_sem_ses', [ApiControllerOne::class, 'getStudListByClassSecSemSess']);
+    Route::post('promotion/add', [ApiControllerOne::class, 'addPromotion']);
+    
 
 });

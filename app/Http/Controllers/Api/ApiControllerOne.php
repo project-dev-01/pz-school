@@ -2546,4 +2546,256 @@ class ApiControllerOne extends BaseController
             return $this->successResponse($data, 'bystudent all Post record fetch successfully');
         }
     }
+    // academic Year Add
+    public function academicYearAdd(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($Connection->table('academic_year')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Year Already Exist', ['error' => 'Year Already Exist']);
+            } else {
+                // insert data
+                $query = $Connection->table('academic_year')->insert([
+                    'name' => $request->name,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Academic year has been successfully saved');
+                }
+            }
+        }
+    }
+    // academic Year List
+    public function academicYearList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get data
+            $Department = $Connection->table('academic_year')->get();
+            return $this->successResponse($Department, 'Academic year record fetch successfully');
+        }
+    }
+    // academic Year Details
+    public function academicYearDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get data
+            $deptDetails = $Connection->table('academic_year')->where('id', $id)->first();
+            return $this->successResponse($deptDetails, 'Academic year row fetch successfully');
+        }
+    }
+    // update academic Year Details
+    public function updateAcademicYear(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($Connection->table('academic_year')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Academic Year Exist', ['error' => 'Academic Year Exist']);
+            } else {
+                // update data
+                $query = $Connection->table('academic_year')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Academic year have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+            }
+        }
+    }
+    // delete academic Year
+    public function deleteAcademicYear(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $staffConn->table('academic_year')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Academic year have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+    // get student list by entrolls
+    public function getStudListByClassSecSemSess(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'session_id' => 'required',
+            'semester_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $Connection = $this->createNewConnection($request->branch_id);
+            $getSubjectMarks = $Connection->table('enrolls as en')
+                ->select(
+                    'en.student_id',
+                    'en.class_id',
+                    'en.section_id',
+                    DB::raw("CONCAT(st.first_name, ' ', st.last_name) as name"),
+                    'st.id as id',
+                    'st.register_no',
+                    'st.roll_no',
+                    'st.photo'
+                )
+                ->join('students as st', 'st.id', '=', 'en.student_id')
+                ->where([
+                    ['en.class_id', '=', $request->class_id],
+                    ['en.section_id', '=', $request->section_id],
+                    ['en.semester_id', '=', $request->semester_id],
+                    ['en.session_id', '=', $request->session_id]
+                ])
+                ->orderBy('st.first_name', 'asc')
+                ->get();
+            return $this->successResponse($getSubjectMarks, 'Students record fetch successfully');
+        }
+    }
+    //add attendance
+    function addPromotion(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'promote_class_id' => 'required',
+            'promote_section_id' => 'required',
+            'promote_semester_id' => 'required',
+            'promote_session_id' => 'required',
+            'promotion' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+
+            $promotion = $request->promotion;
+            if (!empty($promotion)) {
+                foreach ($promotion as $key => $value) {
+                    // dd($value['attendance_id']);
+                    // dd($value);
+                    $student_id = (isset($value['student_id']) ? $value['student_id'] : 0);
+                    $register_no = (isset($value['register_no']) ? $value['register_no'] : 0);
+                    $roll_no = (isset($value['roll_no']) ? $value['roll_no'] : 0);
+
+                    $dataPromote = array(
+                        'student_id' => $student_id,
+                        'class_id' => $request->promote_class_id,
+                        'section_id' => $request->promote_section_id,
+                        'semester_id' => $request->promote_semester_id,
+                        'session_id' => $request->promote_session_id,
+                        'roll' => $roll_no
+                    );
+                    $row = $Connection->table('enrolls')
+                        ->select(
+                            'id',
+                            'class_id',
+                            'section_id',
+                            'roll',
+                            'session_id',
+                            'semester_id'
+                        )->where([
+                            ['student_id', '=', $student_id],
+                            ['class_id', '=', $request->promote_class_id],
+                            ['section_id', '=', $request->promote_section_id],
+                            ['semester_id', '=', $request->promote_semester_id],
+                            ['session_id', '=', $request->promote_session_id]
+                        ])->first();
+                    // if (isset($value['promotion_status'])) {
+                    if (isset($row->id)) {
+                        $dataPromote['updated_at'] = date("Y-m-d H:i:s");
+                        $Connection->table('enrolls')->where('id', $row->id)->update($dataPromote);
+                    } else {
+                        $dataPromote['created_at'] = date("Y-m-d H:i:s");
+                        // $dataPromote['promotion_done'] = 0;
+                        $Connection->table('enrolls')->insert($dataPromote);
+                    }
+                    // } else {
+                    //     $dePromote = array(
+                    //         'student_id' => $student_id,
+                    //         'class_id' => $row->class_id,
+                    //         'section_id' => $row->section_id,
+                    //         'semester_id' => $row->semester_id,
+                    //         'session_id' => $row->session_id,
+                    //         'roll' => $row->roll
+                    //     );
+                    //     if (isset($row->id)) {
+                    //         $dePromote['updated_at'] = date("Y-m-d H:i:s");
+                    //         $Connection->table('enrolls')->where('id', $row->id)->update($dePromote);
+                    //     } else {
+                    //         $dePromote['created_at'] = date("Y-m-d H:i:s");
+                    //         $Connection->table('enrolls')->insert($dePromote);
+                    //     }
+                    // }
+                }
+            }
+            return $this->successResponse([], 'Promotion successfuly.');
+        }
+    }
 }

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Excel;
-Use App\Exports\StaffAttendanceExport;
+use App\Exports\StaffAttendanceExport;
 
 class AdminController extends Controller
 {
@@ -905,6 +905,8 @@ class AdminController extends Controller
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $races = Helper::GetMethod(config('constants.api.races'));
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+
         // dd($gethostel);
         return view(
             'admin.admission.index',
@@ -918,6 +920,7 @@ class AdminController extends Controller
                 'religion' => $religion['data'],
                 'races' => $races['data'],
                 'relation' => $relation['data'],
+                'academic_year_list' => $academic_year_list['data']
             ]
         );
         // return view('admin.admission.index');
@@ -1866,7 +1869,38 @@ class AdminController extends Controller
             ]
         );
     }
-
+    // Promotion
+    public function Promotion(Request $request)
+    {
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        // dd($semester);
+        return view(
+            'admin.promotion.index',
+            [
+                'classes' => $getclass['data'],
+                'session' => $session['data'],
+                'semester' => $semester['data'],
+                'academic_year_list' => $academic_year_list['data'],
+            ]
+        );
+    }
+    function PromotionAdd(Request $request)
+    {
+        $data = [
+            "promotion" => $request->promotion,
+            "promote_class_id" => $request->promote_class_id,
+            "promote_section_id" => $request->promote_section_id,
+            "promote_semester_id" => $request->promote_semester_id,
+            "promote_session_id" => $request->promote_session_id,
+            "year" => $request->year
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.promotion_add'), $data);
+        return $response;
+    }
     // add Timetable
     public function addTimetable(Request $request)
     {
@@ -3610,6 +3644,7 @@ class AdminController extends Controller
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $races = Helper::GetMethod(config('constants.api.races'));
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
 
         $prev = json_decode($student['data']['student']['previous_details']);
         $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
@@ -3631,6 +3666,7 @@ class AdminController extends Controller
                 'religion' => $religion['data'],
                 'races' => $races['data'],
                 'relation' => $relation['data'],
+                'academic_year_list' => $academic_year_list['data']
 
             ]
         );
@@ -4431,7 +4467,7 @@ class AdminController extends Controller
 
     public function reportEmployeeAttendance()
     {
-        
+
         $session = Helper::GetMethod(config('constants.api.session'));
         $getdepartment = Helper::GetMethod(config('constants.api.department_list'));
         return view(
@@ -5216,7 +5252,7 @@ class AdminController extends Controller
 
     public function staffAttendanceExcel(Request $request)
     {
-        return Excel::download(new StaffAttendanceExport(1,$request->employee,$request->session,$request->date,$request->department), 'Staff_Attendance.xlsx');
+        return Excel::download(new StaffAttendanceExport(1, $request->employee, $request->session, $request->date, $request->department), 'Staff_Attendance.xlsx');
     }
 
     // index absent Reason
@@ -5333,7 +5369,7 @@ class AdminController extends Controller
         return $response;
     }
 
-    
+
     // index excused Reason
     public function excusedReason()
     {
@@ -5453,6 +5489,26 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.semester_delete'), $data);
         return $response;
     }
+    // academic year start
+    public function academicYear()
+    {
+        return view('admin.acdemic_year.index');
+    }
+    // get Academic Year List
+    public function getAcademicYearList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.academic_year_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editAcademicBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteAcademicBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
 
-    
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    // academic year end
 }

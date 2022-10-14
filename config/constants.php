@@ -592,6 +592,15 @@ return [
         'semester_details' => $url.'/semester/semester-details',
         'semester_update' => $url.'/semester/update',
         'semester_delete' => $url.'/semester/delete',
+        // academic year url
+        'academic_year_add' => $url.'/academic_year/add',
+        'academic_year_list' => $url.'/academic_year/list',
+        'academic_year_details' => $url.'/academic_year/academic_year_details',
+        'academic_year_update' => $url.'/academic_year/update',
+        'academic_year_delete' => $url.'/academic_year/delete',
+        // add promotion
+        'get_student_by_class_section_sem_ses' => $url.'/get_student_list/by_class_section_sem_ses',
+        'promotion_add' => $url.'/promotion/add',
 
     ]
 

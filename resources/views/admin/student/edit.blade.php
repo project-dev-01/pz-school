@@ -525,12 +525,11 @@
                                             <div class="form-group">
                                                 <label for="btwyears">Academic Year<span class="text-danger">*</span></label>
                                                 <select id="btwyears" class="form-control" name="year">
-                                                    <option {{$student['year'] == "2021-2022" ? "Selected" : "" }}>2021-2022</option>
-                                                    <option {{$student['year'] == "2020-2021" ? "Selected" : "" }}>2020-2021</option>
-                                                    <option {{$student['year'] == "2019-2020" ? "Selected" : "" }}>2019-2020</option>
-                                                    <option {{$student['year'] == "2018-2019" ? "Selected" : "" }}>2018-2019</option>
-                                                    <option {{$student['year'] == "2017-2018" ? "Selected" : "" }}>2017-2018</option>
-                                                    <option {{$student['year'] == "2016-2017" ? "Selected" : "" }}>2016-2017</option>
+                                                    <option value="">Choose Academic Year</option>
+                                                    @forelse($academic_year_list as $r)
+                                                    <option value="{{$r['id']}}" {{$student['year'] == $r['id'] ? "Selected" : "" }}>{{$r['name']}}</option>
+                                                    @empty
+                                                    @endforelse
                                                 </select>
                                             </div>
                                         </div>

@@ -283,6 +283,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('timetable/edit', [AdminController::class, 'editTimetable'])->name('admin.timetable.edit');
         Route::post('timetable/update', [AdminController::class, 'updateTimetable'])->name('admin.timetable.update');
         Route::post('timetable/subject', [AdminController::class, 'getSubject'])->name('admin.timetable.subject');
+        // promotion
+        Route::get('promotion/index', [AdminController::class, 'Promotion'])->name('admin.promotion.index');
+        Route::post('promotion/add', [AdminController::class, 'PromotionAdd'])->name('admin.promotion.add');
 
         // Time Table Bulk
         Route::post('timetable/bulk/add', [AdminController::class, 'addBulkTimetable'])->name('admin.timetable.bulk.add');
@@ -609,7 +612,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('semester/semester-details', [AdminController::class, 'getSemesterDetails'])->name('admin.semester.details');
         Route::post('semester/update', [AdminController::class, 'updateSemester'])->name('admin.semester.update');
         Route::post('semester/delete', [AdminController::class, 'deleteSemester'])->name('admin.semester.delete');
-        
+        // Acdemic year routes
+        Route::get('academic_year', [AdminController::class, 'academicYear'])->name('admin.academic_year');
+        Route::get('academic_year/list', [AdminController::class, 'getAcademicYearList'])->name('admin.academic_year.list');
+
     });
 });
 // admin routes end

@@ -333,60 +333,6 @@ $(function () {
         });
     }
 
-    function callradarchart(formData) {
-
-        $.ajax({
-
-            url: getSubjectDivisionMark,
-            method: "POST",
-            data: formData,
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            success: function (response) {
-                if (response.code == 200) {
-                    var markDetails = response.data.markDetails;
-                    var subdiv = response.data.subjectdivision;
-                    var data = [];
-                    var label = [];
-                    if (subdiv.length > 0) {
-                        subdiv.forEach(function (res) {
-                            label.push(res.subject_division);
-                        });
-
-                        if (markDetails.length > 0) {
-                            markDetails.forEach(function (res) {
-                                var randcol = getRandomColor();
-                                var obj = {};
-                                var avg = [];
-                                obj["label"] = res.exam_name;
-                                obj["backgroundColor"] = hexToRGB(randcol, 0.3);
-                                obj["borderColor"] = randcol;
-                                obj["pointBackgroundColor"] = randcol;
-                                obj["pointBorderColor"] = "#fff";
-                                obj["pointHoverBackgroundColor"] = "#fff";
-                                obj["pointHoverBorderColor"] = randcol;
-                                $.each(res.average, function (key, val) {
-                                    avg.push(val);
-                                });
-                                obj["data"] = avg;
-                                data.push(obj);
-
-                            });
-                            radarChart(label, data);
-                            $('#radar-chart').show();
-                        } else {
-                            $('#radar-chart').hide();
-                        }
-                    }
-
-                } else {
-                    toastr.error(data.message);
-                }
-            }
-        });
-    }
-
     function getRandomColor() {
         var letters = '0123456789ABCDEF';
         var color = '#';

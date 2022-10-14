@@ -372,11 +372,11 @@
 
     var getSubjectMarks = "{{ config('constants.api.get_testresult_marks_subject_vs') }}";
     var getMarks_vs_grade = "{{ config('constants.api.get_marks_vs_grade') }}";
-    // var getsubjectdivision = "{{ config('constants.api.get_subject_division') }}";
+    var getsubjectdivision = "{{ config('constants.api.get_subject_division') }}";
     var getSubjectAverage = "{{ config('constants.api.get_subject_average') }}";
     var getStudentSubjectMark = "{{ config('constants.api.get_student_subject_mark') }}";
     var getStudentGrade = "{{ config('constants.api.get_student_grade') }}";
-    // var getSubjectDivisionMark = "{{ config('constants.api.get_subject_division_mark') }}";
+    var getSubjectDivisionMark = "{{ config('constants.api.get_subject_division_mark') }}";
     var getSubjectMarkStatus = "{{ config('constants.api.get_subject_mark_status') }}";
     var teacherID = null;
     // default image test

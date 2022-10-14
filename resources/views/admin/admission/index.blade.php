@@ -411,12 +411,11 @@
                                 <div class="form-group">
                                     <label for="btwyears">Academic Year<span class="text-danger">*</span></label>
                                     <select id="btwyears" class="form-control" name="year">
-                                        <option>2021-2022</option>
-                                        <option>2020-2021</option>
-                                        <option>2019-2020</option>
-                                        <option>2018-2019</option>
-                                        <option>2017-2018</option>
-                                        <option>2016-2017</option>
+                                        <option value="">Choose Academic Year</option>
+                                        @forelse($academic_year_list as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -578,7 +577,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="father_name">Father Name</label>
-                                    <input type="text" class="form-control" maxlength="50" id="father_name" placeholder="John Leo" aria-describedby="inputGroupPrepend">
+                                    <input type="text" class="form-control" id="father_name" placeholder="John Leo" aria-describedby="inputGroupPrepend">
                                     <input type="hidden" name="father_id" id="father_id">
                                     <div id="father_list">
                                     </div>
@@ -761,7 +760,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="mother_name">Mother Name</label>
-                                    <input type="text" class="form-control" maxlength="50" id="mother_name" placeholder="Aisha Mal" aria-describedby="inputGroupPrepend">
+                                    <input type="text" class="form-control" id="mother_name" placeholder="Aisha Mal" aria-describedby="inputGroupPrepend">
                                     <input type="hidden" name="mother_id" id="mother_id">
                                     <div id="mother_list">
                                     </div>
@@ -942,7 +941,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="guardian_name">Guardian Name</label>
-                                    <input type="text" class="form-control" maxlength="50" id="guardian_name" placeholder="Amir Shan" aria-describedby="inputGroupPrepend">
+                                    <input type="text" class="form-control" id="guardian_name" placeholder="Amir Shan" aria-describedby="inputGroupPrepend">
                                     <input type="hidden" name="guardian_id" id="guardian_id">
                                     <div id="guardian_list">
                                     </div>
