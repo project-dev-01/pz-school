@@ -39,7 +39,7 @@
                                 <div class="form-group">
                                     <label for="attendanceList">Month Year<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge text-center">
-                                        <input type="text" id="attendanceList" class="form-control" name="year_month" data-provide="datepicker" data-date-format="MM yyyy" data-date-min-view-mode="1">
+                                        <input type="text" id="attendanceList" class="form-control" name="year_month" placeholder="DD-MM-YY" data-provide="datepicker" data-date-format="MM yyyy" data-date-min-view-mode="1">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="far fa-calendar-alt"></span>

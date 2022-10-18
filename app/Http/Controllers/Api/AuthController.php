@@ -148,7 +148,7 @@ class AuthController extends BaseController
     public function resetPassword(Request $request)
     {
 
-        $credentials = $request->only('email', 'password', 'password_confirmation');
+        $credentials = $request->only('email');
         $validator = Validator::make($credentials, [
             'email' => 'required|email',
         ]);
@@ -187,14 +187,14 @@ class AuthController extends BaseController
         $user = DB::table('users')->where('email', $email)->select('name', 'email')->first();
 
         //Generate, the password reset link. The token generated is embedded in the link
-        $link = url('schoolcrm/password/reset') . '/' . $token;
+        $link = url('/password/reset') . '/' . $token;
         if ($email) {
             $data = array('link' => $link, 'name' => $user->name);
 
-            Mail::send('auth.mail', $data, function ($message) use ($email) {
-                $message->to('rajesh@aibots.my', 'members')->subject('Password Reset');
-                $message->from('rajesh@aibots.my', 'Password Reset');
-            });
+            // Mail::send('auth.mail', $data, function ($message) use ($email) {
+            //     $message->to('rajesh@aibots.my', 'members')->subject('Password Reset');
+            //     $message->from('rajesh@aibots.my', 'Password Reset');
+            // });
             return true;
         } else {
             return false;

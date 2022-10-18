@@ -642,6 +642,13 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // add promotion
     Route::post('get_student_list/by_class_section_sem_ses', [ApiControllerOne::class, 'getStudListByClassSecSemSess']);
     Route::post('promotion/add', [ApiControllerOne::class, 'addPromotion']);
+
+    // Gloabl Setting routes
+    Route::post('global_setting/add', [ApiController::class, 'addGlobalSetting']);
+    Route::get('global_setting/list', [ApiController::class, 'getGlobalSettingList']);
+    Route::post('global_setting/global_setting-details', [ApiController::class, 'getGlobalSettingDetails']);
+    Route::post('global_setting/update', [ApiController::class, 'updateGlobalSetting']);
+    Route::post('global_setting/delete', [ApiController::class, 'deleteGlobalSetting']);
     
 
 });

@@ -72,7 +72,7 @@
                                             </div>
                                         </div>
 
-                                        <input type="text" class="form-control homeWorkAdd" name="date_of_homework" placeholder="" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control homeWorkAdd" name="date_of_homework" placeholder="DD/MM/YYYY" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -85,7 +85,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control homeWorkAdd" name="date_of_submission" placeholder="" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control homeWorkAdd" name="date_of_submission" placeholder="DD/MM/YYYY" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control homeWorkAdd" name="schedule_date" placeholder="" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control homeWorkAdd" name="schedule_date" placeholder="DD/MM/YYYY" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>

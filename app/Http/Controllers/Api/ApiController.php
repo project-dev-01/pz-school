@@ -16553,4 +16553,144 @@ class ApiController extends BaseController
             }
         }
     }
+
+    
+    // addGlobalSetting
+    public function addGlobalSetting(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'year_id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+
+                // insert data
+                $query = $conn->table('global_settings')->insert([
+                        'year_id' => $request->year_id,
+                        'footer_text' => $request->footer_text,
+                        'timezone' => $request->timezone,
+                        'facebook_url' => $request->facebook_url,
+                        'twitter_url' => $request->twitter_url,
+                        'linkedin_url' => $request->linkedin_url,
+                        'youtube_url' => $request->youtube_url,
+                        'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Global Seeting has been successfully saved');
+                }
+        }
+    }
+    // getGlobalSettingList
+    public function getGlobalSettingList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $leaveTypeDetails = $conn->table('global_settings as g')->select('g.*','ay.name as academic_year')->leftJoin('academic_year as ay', 'g.year_id', '=', 'ay.id')->get();
+            return $this->successResponse($leaveTypeDetails, 'Global Seeting record fetch successfully');
+        }
+    }
+    // get GlobalSetting row details
+    public function getGlobalSettingDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $leaveTypeDetails = $conn->table('global_settings')->where('id', $id)->first();
+            return $this->successResponse($leaveTypeDetails, 'Global Seeting row fetch successfully');
+        }
+    }
+    // update GlobalSetting
+    public function updateGlobalSetting(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'year_id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+
+                // update data
+                $query = $conn->table('global_settings')->where('id', $id)->update([
+                    'year_id' => $request->year_id,
+                    'footer_text' => $request->footer_text,
+                    'timezone' => $request->timezone,
+                    'facebook_url' => $request->facebook_url,
+                    'twitter_url' => $request->twitter_url,
+                    'linkedin_url' => $request->linkedin_url,
+                    'youtube_url' => $request->youtube_url,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Global Seeting Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+        }
+    }
+    // delete GlobalSetting
+    public function deleteGlobalSetting(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('global_settings')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Global Seeting have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
 }

@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Excel;
+use DateTime;
+use DateTimeZone;
 use App\Exports\StaffAttendanceExport;
 
 class AdminController extends Controller
@@ -5511,4 +5513,82 @@ class AdminController extends Controller
             ->make(true);
     }
     // academic year end
+
+    // start Global Setting
+    public function globalSetting()
+    {
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $timezone_identifiers = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
+        return view(
+            'admin.global_setting.index',
+            [
+                'academic_year_list' => $academic_year_list['data'],
+                'timezone' => $timezone_identifiers,
+            ]
+        );
+    }
+
+    public function addGlobalSetting(Request $request)
+    {
+        $data = [
+            'year_id' => $request->year_id,
+            'footer_text' => $request->footer_text,
+            'timezone' => $request->timezone,
+            'facebook_url' => $request->facebook_url,
+            'twitter_url' => $request->twitter_url,
+            'linkedin_url' => $request->linkedin_url,
+            'youtube_url' => $request->youtube_url
+        ];
+        $response = Helper::PostMethod(config('constants.api.global_setting_add'), $data);
+        return $response;
+    }
+    public function getGlobalSettingList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.global_setting_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editGlobalSettingBtn"><i class="fe-edit"></i></a>
+                        </div>';
+            })
+
+            // <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteGlobalSettingBtn"><i class="fe-trash-2"></i></a>
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getGlobalSettingDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.global_setting_details'), $data);
+        return $response;
+    }
+    public function updateGlobalSetting(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'year_id' => $request->year_id,
+            'footer_text' => $request->footer_text,
+            'timezone' => $request->timezone,
+            'facebook_url' => $request->facebook_url,
+            'twitter_url' => $request->twitter_url,
+            'linkedin_url' => $request->linkedin_url,
+            'youtube_url' => $request->youtube_url
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.global_setting_update'), $data);
+        return $response;
+    }
+    public function deleteGlobalSetting(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.global_setting_delete'), $data);
+        return $response;
+    }
+    // end Global Setting
 }

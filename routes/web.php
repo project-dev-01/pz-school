@@ -616,6 +616,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('academic_year', [AdminController::class, 'academicYear'])->name('admin.academic_year');
         Route::get('academic_year/list', [AdminController::class, 'getAcademicYearList'])->name('admin.academic_year.list');
 
+         // Global Setting routes
+         Route::get('global_setting/index', [AdminController::class, 'globalSetting'])->name('admin.global_setting');
+         Route::get('global_setting/list', [AdminController::class, 'getGlobalSettingList'])->name('admin.global_setting.list');
+         Route::post('global_setting/add', [AdminController::class, 'addGlobalSetting'])->name('admin.global_setting.add');
+         Route::post('global_setting/global_setting-details', [AdminController::class, 'getGlobalSettingDetails'])->name('admin.global_setting.details');
+         Route::post('global_setting/update', [AdminController::class, 'updateGlobalSetting'])->name('admin.global_setting.update');
+         Route::post('global_setting/delete', [AdminController::class, 'deleteGlobalSetting'])->name('admin.global_setting.delete');
+
     });
 });
 // admin routes end

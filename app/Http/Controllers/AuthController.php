@@ -481,8 +481,9 @@ class AuthController extends Controller
         ]);
 
         $userDetails = $response->json();
+        // dd($userDetails);
         if ($userDetails['code'] == 200) {
-            return redirect()->back()->with('success', 'A reset link has been sent to your email address.');
+            return view('auth.success');
         } else {
             return redirect()->back()->with('error', $userDetails['message']);
         }
@@ -503,7 +504,7 @@ class AuthController extends Controller
         ]);
         $userDetails = $response->json();
         if ($userDetails['code'] == 200) {
-            return redirect('schoolcrm/login')->with('success', 'Your password has been changed!');
+            return redirect()->route('admin.login')->with('success', 'Your password has been changed!');
         } else {
             return redirect()->back()->with('error', $userDetails['message']);
         }

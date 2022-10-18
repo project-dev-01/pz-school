@@ -80,13 +80,13 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">First name<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="fname" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="fname" maxlength="50" placeholder="Ahmad Ali" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">Last Name<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="lname" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="lname" maxlength="50" placeholder="Muhammad Jaafar" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -103,14 +103,14 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">Age<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" name="sage" id="age" require="">
+                                                <input type="text" class="form-control" name="sage" id="age" require="" placeholder="Eg:3">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">Date of Birth<span class="text-danger">*</span></label>
                                                 <div class="input-group input-group-merge">
-                                                    <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                    <input type="text" class="form-control" id="name" placeholder="DD/MM/YY" aria-describedby="inputGroupPrepend" required>
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
                                                             <span class="far fa-calendar-alt"></span>
@@ -122,7 +122,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">Phone Number<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="phone" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="phone" placeholder="Phone no" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div><br>
@@ -130,18 +130,18 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">Email<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="email" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="email" placeholder="Email id" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">Address<span class="text-danger">*</span></label>
+                                                <label for="heard">Address 1<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="name" placeholder="Address 1" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard"><br></label>
+                                                <label for="heard">Address 2<span class="text-danger">*</span><br></label>
                                                 <input type="text" class="form-control" id="address" placeholder="Address 2" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
@@ -210,13 +210,13 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">School Address<span class="text-danger">*</span></label>
+                                                <label for="heard">School Address1<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="sadd" placeholder="Address 1" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard"><br></label>
+                                                <label for="heard">School Address2<span class="text-danger">*</span><br></label>
                                                 <input type="text" class="form-control" id="sadd2" placeholder="Address 2" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
@@ -270,13 +270,13 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">First Name<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="firstname" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="firstname" placeholder="John" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">Last Name<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="lastname" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="lastname" placeholder="Leo" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div><br>
@@ -284,7 +284,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">Phone Number<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="pnumber" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="pnumber" placeholder="Phone no" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -313,13 +313,13 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">First Name<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="ffname" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="ffname" placeholder="Aisha" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">Last Name<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="llname" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="llname" placeholder="Mal" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div><br>
@@ -327,7 +327,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">Phone Number<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="name" placeholder="Phone no" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -356,19 +356,19 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">Emergency Contact Person<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="ename" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="ename" placeholder="John Leo" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">First Name<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="elname" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="elname" placeholder="John" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">Last Name<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="elname" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="elname" placeholder="Leo" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div> <br>
@@ -376,7 +376,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">Phone Number<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="name" placeholder="Phone no" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div><br>

@@ -602,6 +602,14 @@ return [
         'get_student_by_class_section_sem_ses' => $url.'/get_student_list/by_class_section_sem_ses',
         'promotion_add' => $url.'/promotion/add',
 
+         // global setting url
+         'global_setting_add' => $url.'/global_setting/add',
+         'global_setting_list' => $url.'/global_setting/list',
+         'global_setting_details' => $url.'/global_setting/global_setting-details',
+         'global_setting_update' => $url.'/global_setting/update',
+         'global_setting_delete' => $url.'/global_setting/delete',
+ 
+
     ]
 
 ];
