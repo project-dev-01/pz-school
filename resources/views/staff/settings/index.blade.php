@@ -8,13 +8,13 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <div class="page-title-right">
+                <!--<div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <!-- <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Extras</a></li> -->
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Extras</a></li> 
                         <li class="breadcrumb-item active">Profile</li>
                     </ol>
-                </div>
+                </div>-->
                 <h4 class="page-title">Profile</h4>
             </div>
         </div>
@@ -24,13 +24,19 @@
     <div class="row">
         <div class="col-lg-4 col-xl-4">
             <div class="card-box text-center">
-                <img src="{{asset('public/users/images/default-img.jpg')}}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image">
+                <img src="{{asset('public/users/images/default-img.jpg')}}" class="avatar-lg img-thumbnail admin_picture" alt="profile-image">
                 <!-- <img src="{{ asset('public/images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image"> -->
                 <h4 class="mb-0 user_name">{{ Session::get('role_name') }}</h4>
 
                 <div class="text-left mt-3">
                     <input type="file" name="admin_image" id="admin_image" style="opacity: 0;height:1px;display:none">
-                    <a href="javascript:void(0)" class="btn btn-primary btn-block" id="change_picture_btn"><b>Change picture</b></a>
+                    <ul class="nav nav-pills navtab-bg nav-justified">
+                        <li class="nav-item">
+                            <a href="#change-picture" data-toggle="tab" aria-expanded="false" class="nav-link active" id="change_picture_btn">
+                                <b>Change picture</b>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <!-- <p class="text-muted">@webdesigner</p> -->
 
@@ -69,7 +75,7 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane show active" id="settings">
-                        <form  method="POST" action="#" id="updateProfileInfo">
+                        <form method="POST" action="#" id="updateProfileInfo">
                             <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> Personal Info</h5>
                             <div class="row">
                                 <div class="col-md-6">
@@ -109,17 +115,15 @@
 
                         <!-- comment box -->
                         <form action="#" method="POST" id="changeNewPassword" class="comment-area-box mt-2 mb-3">
-                        <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> Change Password</h5>
+                            <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> Change Password</h5>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">Old Passord</label>
                                         <input type="password" class="form-control" id="oldpassword" name="oldpassword" placeholder="Enter current password">
                                         <span class="text-danger error-text oldpassword_error"></span>
                                     </div>
                                 </div>
-                            </div> <!-- end row -->
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="newpassword">New Password</label>
@@ -128,6 +132,7 @@
                                     </div>
                                 </div>
                             </div> <!-- end row -->
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">

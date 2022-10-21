@@ -2788,7 +2788,8 @@ class ApiControllerOne extends BaseController
             'class_id' => 'required',
             'section_id' => 'required',
             'session_id' => 'required',
-            'semester_id' => 'required'
+            'semester_id' => 'required',
+            'academic_session_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -2811,7 +2812,8 @@ class ApiControllerOne extends BaseController
                     ['en.class_id', '=', $request->class_id],
                     ['en.section_id', '=', $request->section_id],
                     ['en.semester_id', '=', $request->semester_id],
-                    ['en.session_id', '=', $request->session_id]
+                    ['en.session_id', '=', $request->session_id],
+                    ['en.academic_session_id', '=', $request->academic_session_id]
                 ])
                 ->orderBy('st.first_name', 'asc')
                 ->get();
@@ -2824,6 +2826,7 @@ class ApiControllerOne extends BaseController
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
             'branch_id' => 'required',
+            'promote_year' => 'required',
             'promote_class_id' => 'required',
             'promote_section_id' => 'required',
             'promote_semester_id' => 'required',
@@ -2847,6 +2850,7 @@ class ApiControllerOne extends BaseController
 
                     $dataPromote = array(
                         'student_id' => $student_id,
+                        'academic_session_id' => $request->promote_year,
                         'class_id' => $request->promote_class_id,
                         'section_id' => $request->promote_section_id,
                         'semester_id' => $request->promote_semester_id,

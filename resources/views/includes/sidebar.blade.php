@@ -412,11 +412,11 @@
                                     </ul>
                                 </div>
                             </li>
-                            <!-- <li>
+                            <li>
                                 <a href="{{ route('admin.promotion.index')}}" class="nav-link {{ (request()->is('admin/promotion*')) ? 'active' : '' }}">
                                     <span>Promotion</span>
                                 </a>
-                            </li> -->
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -947,7 +947,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.global_setting')}}" target=”_blank” class="nav-link {{ (request()->is('admin/global_setting*')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.global_setting')}}" class="nav-link {{ (request()->is('admin/global_setting*')) ? 'active' : '' }}">
                                     <span> Global Setting </span>
                                 </a>
                             </li>

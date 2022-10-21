@@ -29,6 +29,18 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label for="btwyears">Academic year<span class="text-danger">*</span></label>
+                                    <select id="btwyears" class="form-control" name="year">
+                                        <option value="">Choose Academic Year</option>
+                                        @forelse($academic_year_list as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label for="changeClassName">Standard<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">Select Standard</option>
@@ -84,47 +96,19 @@
     <div class="row" id="show_promotion_details" style="display: none;">
         <div class="col-xl-12">
             <div class="card">
-                <div style="border-bottom: 2px solid blue;">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h4 class="nav-link">
-                                The Next Session Was Transferred To The Student
-                                <h4>
-                        </div>
-
-                    </div> <!-- end row -->
-                </div>
-                <br>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv"> The Next Session Was Transferred To The Student<h4>
+                    </li>
+                </ul><br>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-xl-4">
-                            <div class="card mb-1 shadow-none border">
-                                <div class="p-2">
-                                    <div>
-                                        <p style="color:#0b8397"><b>Instructions:</b></p>
-                                        <ol style="color:#0b8397">
-                                            <li>Your design preferences (Color, style, shapes, Fonts, others) </li>
-                                            <li>Tell me, why is your item different? </li>
-                                            <li>Do you want to bring up a specific feature of your item? If yes, please tell me </li>
-                                            <li>Do you have any preference or specific thing you would like to change or improve on your item page? </li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> <!-- end col -->
-                    </div><br>
                     <!-- end row-->
-
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                        <label class="custom-control-label" for="customCheck1">Carry Forward Due in Next Session</label>
-                    </div><br>
                     <form id="promoteStudentForm" method="post" action="{{ route('admin.promotion.add') }}" autocomplete="off">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="btwyears">Promote to academic year<span class="text-danger">*</span></label>
-                                    <select id="btwyears" class="form-control" name="year">
+                                    <label for="promote_year">Promote to academic year<span class="text-danger">*</span></label>
+                                    <select id="promote_year" class="form-control" name="promote_year">
                                         <option value="">Choose Academic Year</option>
                                         @forelse($academic_year_list as $r)
                                         <option value="{{$r['id']}}">{{$r['name']}}</option>
@@ -156,7 +140,7 @@
 
                         </div>
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="promote_semester_id">Promote to semester<span class="text-danger">*</span></label>
                                     <select id="promote_semester_id" class="form-control" name="promote_semester_id">
@@ -167,7 +151,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="promote_session_id">Promote to session<span class="text-danger">*</span></label>
                                     <select id="promote_session_id" class="form-control" name="promote_session_id">
@@ -178,9 +162,9 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
+                        </div><br>
                         <div class="table-responsive">
-                            <table class="table w-100 nowrap" id="showStudentDetails">
+                            <table class="table table-bordered w-100 nowrap" id="showStudentDetails">
                                 <thead>
                                     <tr>
                                         <th>#</th>

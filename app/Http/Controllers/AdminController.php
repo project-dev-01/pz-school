@@ -1893,6 +1893,7 @@ class AdminController extends Controller
     {
         $data = [
             "promotion" => $request->promotion,
+            "promote_year" => $request->promote_year,
             "promote_class_id" => $request->promote_class_id,
             "promote_section_id" => $request->promote_section_id,
             "promote_semester_id" => $request->promote_semester_id,

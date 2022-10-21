@@ -28,6 +28,7 @@ $(function () {
     // rules validation
     $("#promotionFilter").validate({
         rules: {
+            year: "required",
             class_id: "required",
             section_id: "required",
             session_id: "required",
@@ -44,6 +45,7 @@ $(function () {
             var section_id = $("#sectionID").val();
             var semester_id = $("#semester_id").val();
             var session_id = $("#session_id").val();
+            var btwyears = $("#btwyears").val();
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
@@ -51,6 +53,7 @@ $(function () {
             formData.append('section_id', section_id);
             formData.append('semester_id', semester_id);
             formData.append('session_id', session_id);
+            formData.append('academic_session_id', btwyears);
             $("#overlay").fadeIn(300);
             $.ajax({
                 url: getStudentListByClassSectionUrl,
@@ -86,7 +89,7 @@ $(function () {
     // rules validation
     $("#promoteStudentForm").validate({
         rules: {
-            year: "required",
+            promote_year: "required",
             promote_class_id: "required",
             promote_section_id: "required",
             promote_semester_id: "required",
@@ -123,7 +126,9 @@ $(function () {
 
 // function list mode
 function bindStudents(dataSetNew) {
-
+    // reset form
+    $('#promoteStudentForm')[0].reset();
+    
     listTable = $('#showStudentDetails').DataTable({
         processing: true,
         bDestroy: true,

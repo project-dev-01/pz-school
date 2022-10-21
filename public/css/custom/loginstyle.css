@@ -230,9 +230,10 @@
   text-align: left;
 }
 
-.body {
+.password {
   background: url("../../images/password.jpg");
   background-repeat: no-repeat;
+  width: 100%;
 }
 
 .passfooter {
