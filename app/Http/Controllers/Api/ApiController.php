@@ -701,7 +701,8 @@ class ApiController extends BaseController
             'class_id' => 'required',
             'section_id' => 'required',
             'teacher_id' => 'required',
-            'type' => 'required'
+            'type' => 'required',
+            'academic_session_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -716,6 +717,7 @@ class ApiController extends BaseController
                         [
                             ['section_id', $request->section_id],
                             ['class_id', $request->class_id],
+                            ['academic_session_id', $request->academic_session_id],
                             ['type', '0']
                         ]
                     )
@@ -733,6 +735,7 @@ class ApiController extends BaseController
                     'section_id' => $request->section_id,
                     'teacher_id' => $request->teacher_id,
                     'type' => $request->type,
+                    'academic_session_id' => $request->academic_session_id,
                     'created_at' => date("Y-m-d H:i:s")
                 );
                 // insert data
@@ -769,6 +772,7 @@ class ApiController extends BaseController
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
             'branch_id' => 'required',
+            'academic_session_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -791,6 +795,7 @@ class ApiController extends BaseController
                 ->join('sections as s', 'ta.section_id', '=', 's.id')
                 ->join('staffs as st', 'ta.teacher_id', '=', 'st.id')
                 ->join('classes as c', 'ta.class_id', '=', 'c.id')
+                ->where('ta.academic_session_id',$request->academic_session_id)
                 ->get();
             return $this->successResponse($success, 'Teacher Allocation record fetch successfully');
         }
@@ -828,7 +833,8 @@ class ApiController extends BaseController
             'class_id' => 'required',
             'section_id' => 'required',
             'teacher_id' => 'required',
-            'type' => 'required'
+            'type' => 'required',
+            'academic_session_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -851,6 +857,7 @@ class ApiController extends BaseController
                             ['section_id', $request->section_id],
                             ['class_id', $request->class_id],
                             ['type', $request->type],
+                            ['academic_session_id', $request->academic_session_id],
                             ['id', '!=', $request->id]
                         ]
                     )
@@ -863,6 +870,7 @@ class ApiController extends BaseController
                     'class_id' => $request->class_id,
                     'section_id' => $request->section_id,
                     'teacher_id' => $request->teacher_id,
+                    'academic_session_id' => $request->academic_session_id,
                     'updated_at' => date("Y-m-d H:i:s")
                 );
                 // dd($arrayData);
@@ -1050,7 +1058,8 @@ class ApiController extends BaseController
             'branch_id' => 'required',
             'class_id' => 'required',
             'section_id' => 'required',
-            'subject_id' => 'required'
+            'subject_id' => 'required',
+            'academic_session_id' => 'required'
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -1063,7 +1072,8 @@ class ApiController extends BaseController
                     [
                         ['section_id', $request->section_id],
                         ['class_id', $request->class_id],
-                        ['subject_id', $request->subject_id]
+                        ['subject_id', $request->subject_id],
+                        ['academic_session_id', $request->academic_session_id],
                     ]
                 )
                 ->count();
@@ -1075,6 +1085,7 @@ class ApiController extends BaseController
                     'section_id' => $request->section_id,
                     'subject_id' => $request->subject_id,
                     'teacher_id' => 0,
+                    'academic_session_id' => $request->academic_session_id,
                     'created_at' => date("Y-m-d H:i:s")
                 );
                 // insert data
@@ -1092,7 +1103,8 @@ class ApiController extends BaseController
     public function getClassAssignList(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'branch_id' => 'required'
+            'branch_id' => 'required',
+            'academic_session_id' => 'required'
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -1107,7 +1119,8 @@ class ApiController extends BaseController
                 ->join('classes as c', 'sa.class_id', '=', 'c.id')
                 // ->groupBy('sa.subject_id')
                 ->where([
-                    ['sa.type', '=', '0']
+                    ['sa.type', '=', '0'],
+                    ['academic_session_id', $request->academic_session_id]
                 ])
                 ->get();
             return $this->successResponse($success, 'Section Allocation record fetch successfully');
@@ -1139,7 +1152,8 @@ class ApiController extends BaseController
             'id' => 'required',
             'class_id' => 'required',
             'section_id' => 'required',
-            'subject_id' => 'required'
+            'subject_id' => 'required',
+            'academic_session_id' => 'required'
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -1153,6 +1167,7 @@ class ApiController extends BaseController
                         ['section_id', $request->section_id],
                         ['class_id', $request->class_id],
                         ['subject_id', $request->subject_id],
+                        ['academic_session_id', $request->academic_session_id],
                         ['id', '!=', $request->id]
                     ]
                 )
@@ -1164,6 +1179,7 @@ class ApiController extends BaseController
                     'class_id' =>  $request->class_id,
                     'section_id' => $request->section_id,
                     'subject_id' => $request->subject_id,
+                    'academic_session_id' => $request->academic_session_id,
                     'updated_at' => date("Y-m-d H:i:s")
                 );
                 // update data
@@ -1212,7 +1228,8 @@ class ApiController extends BaseController
             'section_id' => 'required',
             'teacher_id' => 'required',
             'subject_id' => 'required',
-            'type' => 'required'
+            'type' => 'required',
+            'academic_session_id' => 'required'
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -1227,6 +1244,7 @@ class ApiController extends BaseController
                             ['section_id', $request->section_id],
                             ['class_id', $request->class_id],
                             ['subject_id', $request->subject_id],
+                            ['academic_session_id', $request->academic_session_id],
                             // ['teacher_id', '!=', '0'],
                             // ['teacher_id','0'],
                             ['type', $request->type]
@@ -1243,6 +1261,7 @@ class ApiController extends BaseController
                 'section_id' => $request->section_id,
                 'subject_id' => $request->subject_id,
                 'teacher_id' => $request->teacher_id,
+                'academic_session_id' => $request->academic_session_id,
                 'type' => $request->type
             );
             // dd($arraySubject);
@@ -1271,7 +1290,8 @@ class ApiController extends BaseController
     public function getTeacherListSubject(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'branch_id' => 'required'
+            'branch_id' => 'required',
+            'academic_session_id' => 'required'
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -1295,6 +1315,7 @@ class ApiController extends BaseController
                 ->join('staffs as st', 'sa.teacher_id', '=', 'st.id')
                 ->join('subjects as sb', 'sa.subject_id', '=', 'sb.id')
                 ->join('classes as c', 'sa.class_id', '=', 'c.id')
+                ->where('sa.academic_session_id',$request->academic_session_id)
                 ->get();
             return $this->successResponse($success, 'Teacher record fetch successfully');
         }
@@ -1327,7 +1348,8 @@ class ApiController extends BaseController
             'section_id' => 'required',
             'subject_id' => 'required',
             'teacher_id' => 'required',
-            'type' => 'required'
+            'type' => 'required',
+            'academic_session_id' => 'required'
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -1342,6 +1364,7 @@ class ApiController extends BaseController
                             ['section_id', $request->section_id],
                             ['class_id', $request->class_id],
                             ['subject_id', $request->subject_id],
+                            ['academic_session_id', $request->academic_session_id],
                             ['type', $request->type],
                             ['id', '!=', $request->id]
                         ]
@@ -1368,6 +1391,7 @@ class ApiController extends BaseController
                     'subject_id' => $request->subject_id,
                     'teacher_id' => $request->teacher_id,
                     'type' => $request->type,
+                    'academic_session_id' => $request->academic_session_id,
                     'updated_at' => date("Y-m-d H:i:s")
                 );
                 // dd($arraySubject);
@@ -3767,7 +3791,8 @@ class ApiController extends BaseController
             'class_id' => 'required',
             'section_id' => 'required',
             'semester_id' => 'required',
-            'session_id' => 'required'
+            'session_id' => 'required',
+            'academic_session_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -3789,7 +3814,8 @@ class ApiController extends BaseController
                     ['timetable_class.class_id', $request->class_id],
                     ['timetable_class.semester_id', $request->semester_id],
                     ['timetable_class.session_id', $request->session_id],
-                    ['timetable_class.section_id', $request->section_id]
+                    ['timetable_class.section_id', $request->section_id],
+                    ['timetable_class.academic_session_id', $request->academic_session_id]
                 ])
                 ->orderBy('time_start', 'asc')
                 ->orderBy('time_end', 'asc')
@@ -3802,6 +3828,7 @@ class ApiController extends BaseController
                 ->join('staffs as s', 'sa.teacher_id', '=', 's.id')
                 ->where('sa.class_id', $request->class_id)
                 ->where('sa.section_id', $request->section_id)
+                ->where('sa.academic_session_id', $request->academic_session_id)
                 // type zero mean main
                 ->where('sa.type', '=', '0')
                 ->groupBy('sa.teacher_id')
@@ -3810,6 +3837,7 @@ class ApiController extends BaseController
                 ->join('subjects as s', 'sa.subject_id', '=', 's.id')
                 ->where('sa.class_id', $request->class_id)
                 ->where('sa.section_id', $request->section_id)
+                ->where('sa.academic_session_id', $request->academic_session_id)
                 ->where('sa.type', '=', '0')
                 // ->where('sa.exam_exclude', '=', '0')
                 // get teacher 
@@ -3828,6 +3856,7 @@ class ApiController extends BaseController
             'branch_id' => 'required',
             'token' => 'required',
             'class_id' => 'required',
+            'academic_session_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -3848,6 +3877,7 @@ class ApiController extends BaseController
                     ['timetable_bulk.class_id', $request->class_id],
                     ['timetable_bulk.semester_id', $request->semester_id],
                     ['timetable_bulk.session_id', $request->session_id],
+                    ['timetable_bulk.academic_session_id', $request->academic_session_id],
                 ])
                 ->orderBy('time_start', 'asc')
                 ->orderBy('time_end', 'asc')
@@ -3863,6 +3893,7 @@ class ApiController extends BaseController
                 })
                 // type zero mean main
                 ->where('sa.type', '=', '0')
+                ->where('sa.academic_session_id', $request->academic_session_id)
                 ->groupBy('sa.teacher_id')
                 ->get();
             $output['exam_hall'] = $classConn->table('exam_hall')->get();
@@ -3883,6 +3914,7 @@ class ApiController extends BaseController
             'section_id' => 'required',
             'day' => 'required',
             'timetable' => 'required',
+            'academic_session_id' => 'required'
         ]);
 
 
@@ -3899,7 +3931,7 @@ class ApiController extends BaseController
                 ->first();
             // dd($getObjRow);
             $timetable = $request->timetable;
-            $oldest = $staffConn->table('timetable_class')->where([['class_id', $request->class_id], ['section_id', $request->section_id], ['semester_id', $request->semester_id], ['session_id', $request->session_id], ['day', $request->day]])->WhereNull('bulk_id')->get()->toArray();
+            $oldest = $staffConn->table('timetable_class')->where([['class_id', $request->class_id], ['section_id', $request->section_id], ['semester_id', $request->semester_id], ['session_id', $request->session_id], ['day', $request->day], ['academic_session_id', $request->academic_session_id]])->WhereNull('bulk_id')->get()->toArray();
 
             // return $oldest;
             $diff = array_diff(array_column($oldest, 'id'), array_column($timetable, 'id'));
@@ -3975,6 +4007,7 @@ class ApiController extends BaseController
                         'semester_id' => $semester_id,
                         'session_id' => $session_id,
                         'day' => $request['day'],
+                        'academic_session_id' => $request['academic_session_id'],
                         'updated_at' => date("Y-m-d H:i:s")
                     ]);
                     $insertOrUpdateID = $table['id'];
@@ -3995,6 +4028,7 @@ class ApiController extends BaseController
                         'semester_id' => $semester_id,
                         'session_id' => $session_id,
                         'day' => $request['day'],
+                        'academic_session_id' => $request['academic_session_id'],
                         'created_at' => date("Y-m-d H:i:s")
                     ]);
                     $insertOrUpdateID = $query;
@@ -4023,6 +4057,7 @@ class ApiController extends BaseController
             'class_id' => 'required',
             'day' => 'required',
             'timetable' => 'required',
+            'academic_session_id' => 'required'
         ]);
 
 
@@ -4038,7 +4073,7 @@ class ApiController extends BaseController
                 ->where('id', $request->semester_id)
                 ->first();
             $timetable = $request->timetable;
-            $oldest = $staffConn->table('timetable_bulk')->where([['class_id', $request->class_id], ['semester_id', $request->semester_id], ['session_id', $request->session_id], ['day', $request->day]])->get()->toArray();
+            $oldest = $staffConn->table('timetable_bulk')->where([['class_id', $request->class_id], ['semester_id', $request->semester_id], ['session_id', $request->session_id], ['day', $request->day], ['academic_session_id', $request->academic_session_id]])->get()->toArray();
 
             $diff = array_diff(array_column($oldest, 'id'), array_column($timetable, 'id'));
 
@@ -4106,6 +4141,7 @@ class ApiController extends BaseController
                         'semester_id' => $semester_id,
                         'session_id' => $session_id,
                         'day' => $request['day'],
+                        'academic_session_id' => $request['academic_session_id'],
                         'updated_at' => date("Y-m-d H:i:s")
                     ]);
                     $timeTableUpdate = $staffConn->table('timetable_class')->where('bulk_id', $table['id'])->update([
@@ -4116,6 +4152,7 @@ class ApiController extends BaseController
                         'time_start' => $table['time_start'],
                         'time_end' => $table['time_end'],
                         'type' => "All",
+                        'academic_session_id' => $request['academic_session_id'],
                         'updated_at' => date("Y-m-d H:i:s")
                     ]);
 
@@ -4150,6 +4187,7 @@ class ApiController extends BaseController
                         'semester_id' => $semester_id,
                         'session_id' => $session_id,
                         'day' => $request['day'],
+                        'academic_session_id' => $request['academic_session_id'],
                         'created_at' => date("Y-m-d H:i:s")
                     ]);
                     $bulkID = $query;
@@ -4177,6 +4215,7 @@ class ApiController extends BaseController
                                 'day' => $request['day'],
                                 'bulk_id' => $bulkID,
                                 'type' => "All",
+                                'academic_session_id' => $request['academic_session_id'],
                                 'created_at' => date("Y-m-d H:i:s")
                             ]);
                             $request['class_id'] = "$cla->class_id";
@@ -4205,6 +4244,7 @@ class ApiController extends BaseController
             'token' => 'required',
             'class_id' => 'required',
             'section_id' => 'required',
+            'academic_session_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -4228,7 +4268,8 @@ class ApiController extends BaseController
                     ['timetable_class.class_id', $request->class_id],
                     ['timetable_class.semester_id', $request->semester_id],
                     ['timetable_class.session_id', $request->session_id],
-                    ['timetable_class.section_id', $request->section_id]
+                    ['timetable_class.section_id', $request->section_id],
+                    ['timetable_class.academic_session_id', $request->academic_session_id]
                 ])
                 ->orderBy('time_start', 'asc')
                 ->orderBy('time_end', 'asc')
@@ -4260,7 +4301,8 @@ class ApiController extends BaseController
             'token' => 'required',
             'class_id' => 'required',
             'section_id' => 'required',
-            'day' => 'required'
+            'day' => 'required',
+            'academic_session_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -4281,7 +4323,8 @@ class ApiController extends BaseController
                     ['timetable_class.class_id', $request->class_id],
                     ['timetable_class.semester_id', $request->semester_id],
                     ['timetable_class.session_id', $request->session_id],
-                    ['timetable_class.section_id', $request->section_id]
+                    ['timetable_class.section_id', $request->section_id],
+                    ['timetable_class.academic_session_id', $request->academic_session_id]
                 ])
                 ->orderBy('time_start', 'asc')->orderBy('time_end', 'asc')
                 ->get()->toArray();
@@ -4323,12 +4366,14 @@ class ApiController extends BaseController
                     ->join('staffs as s', 'sa.teacher_id', '=', 's.id')
                     ->where('sa.class_id', $request->class_id)
                     ->where('sa.section_id', $request->section_id)
+                    ->where('sa.academic_session_id', $request->academic_session_id)
                     ->groupBy('sa.teacher_id')
                     ->get();
                 $output['subject'] = $con->table('subject_assigns as sa')->select('s.id', 's.name')
                     ->join('subjects as s', 'sa.subject_id', '=', 's.id')
                     ->where('sa.class_id', $request->class_id)
                     ->where('sa.section_id', $request->section_id)
+                    ->where('sa.academic_session_id', $request->academic_session_id)
                     ->get();
                 $output['exam_hall'] = $con->table('exam_hall')->get();
 
@@ -4351,6 +4396,7 @@ class ApiController extends BaseController
             'section_id' => 'required',
             'day' => 'required',
             'timetable' => 'required',
+            'academic_session_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -4372,7 +4418,8 @@ class ApiController extends BaseController
                     ['timetable_class.class_id', $request->class_id],
                     ['timetable_class.semester_id', $request->semester_id],
                     ['timetable_class.session_id', $request->session_id],
-                    ['timetable_class.section_id', $request->section_id]
+                    ['timetable_class.section_id', $request->section_id],
+                    ['timetable_class.academic_session_id', $request->academic_session_id]
                 ])
                 ->WhereNull('bulk_id')
                 ->get()->toArray();
@@ -4437,6 +4484,7 @@ class ApiController extends BaseController
                     'semester_id' => $semester_id,
                     'session_id' => $session_id,
                     'day' => $request['day'],
+                    'academic_session_id' => $request['academic_session_id'],
                     'updated_at' => date("Y-m-d H:i:s")
                 ]);
                 // update calendor
@@ -4541,7 +4589,8 @@ class ApiController extends BaseController
             'branch_id' => 'required',
             'token' => 'required',
             'parent_id' => 'required',
-            'children_id' => 'required'
+            'children_id' => 'required',
+            'academic_session_id' => 'required'
         ]);
 
         // return $request;
@@ -4588,6 +4637,7 @@ class ApiController extends BaseController
                 ->where('timetable_class.section_id', $student->section_id)
                 ->where('timetable_class.session_id', $student->session_id)
                 ->where('timetable_class.semester_id', $student->semester_id)
+                ->where('timetable_class.academic_session_id', $request->academic_session_id)
                 ->orderBy('time_start', 'asc')
                 ->orderBy('time_end', 'asc')
                 ->get()->toArray();
@@ -6766,6 +6816,7 @@ class ApiController extends BaseController
             'branch_id' => 'required',
             'token' => 'required',
             'created_by' => 'required',
+            'academic_session_id' => 'required'
         ]);
 
         // return $request;
@@ -6799,6 +6850,7 @@ class ApiController extends BaseController
                 'description' => $request['description'],
                 'document' => $fileName,
                 'created_by' => $request['created_by'],
+                'academic_session_id' => $request['academic_session_id'],
                 'created_at' => date("Y-m-d H:i:s")
             ]);
 
@@ -6819,7 +6871,8 @@ class ApiController extends BaseController
             'token' => 'required',
             'class_id' => 'required',
             'section_id' => 'required',
-            'subject_id' => 'required'
+            'subject_id' => 'required',
+            'academic_session_id' => 'required'
         ]);
 
         // return 1;
@@ -6837,6 +6890,7 @@ class ApiController extends BaseController
                 ->where('homeworks.class_id', $request->class_id)
                 ->where('homeworks.section_id', $request->section_id)
                 ->where('homeworks.subject_id', $request->subject_id)
+                ->where('homeworks.academic_session_id', $request->academic_session_id)
                 ->groupBy('homeworks.id')
                 ->orderBy('homeworks.created_at', 'desc')
                 ->get();
@@ -7206,6 +7260,7 @@ class ApiController extends BaseController
             'branch_id' => 'required',
             'token' => 'required',
             'student_id' => 'required',
+            'academic_session_id' => 'required',
         ]);
 
         if (!$validator->passes()) {
@@ -7230,12 +7285,14 @@ class ApiController extends BaseController
                 })
                 ->where('homeworks.class_id', $student->class_id)
                 ->where('homeworks.section_id', $student->section_id)
+                ->where('homeworks.academic_session_id', $request->academic_session_id)
                 ->orderBy('homeworks.created_at', 'desc')
                 ->get();
 
             $count = $con->table('homeworks')->select(DB::raw('SUM(homework_evaluation.date <= homeworks.date_of_submission) as ontime'), DB::raw('SUM(homework_evaluation.date > homeworks.date_of_submission) as late'))
                 ->leftJoin('homework_evaluation', 'homeworks.id', '=', 'homework_evaluation.homework_id')
                 ->where('homework_evaluation.student_id', $request->student_id)
+                ->where('homeworks.academic_session_id', $request->academic_session_id)
                 ->first();
             $total = $count->ontime + $count->late;
             $homework['count']['ontime'] = $count->ontime;
@@ -7260,6 +7317,7 @@ class ApiController extends BaseController
             'branch_id' => 'required',
             'token' => 'required',
             'student_id' => 'required',
+            'academic_session_id' => 'required',
         ]);
 
         //    return $request;
@@ -7301,6 +7359,7 @@ class ApiController extends BaseController
             })
                 ->where('homeworks.class_id', $student->class_id)
                 ->where('homeworks.section_id', $student->section_id)
+                ->where('homeworks.academic_session_id', $request->academic_session_id)
                 ->orderBy('homeworks.created_at', 'desc');
 
             $homework['homeworks'] = $query->get();
@@ -7959,6 +8018,7 @@ class ApiController extends BaseController
                         "start" => $start,
                         "end" => $end,
                         "time_table_id" => $insertOrUpdateID,
+                        "academic_session_id" => $request['academic_session_id'],
                         'created_at' => date("Y-m-d H:i:s")
                     ];
                     // return $arrayInsert;

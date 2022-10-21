@@ -29,6 +29,7 @@ class CreateTimetableClassTable extends Migration
             $table->string('day')->nullable();
             $table->integer('bulk_id')->nullable();
             $table->string('type')->nullable();
+            $table->integer('academic_session_id')->default('0');
             $table->timestamps();
         });
     }

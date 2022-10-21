@@ -26,6 +26,7 @@ class CreateHomeworksTable extends Migration
             $table->string('document');
             $table->string('status');
             $table->string('created_by');
+            $table->integer('academic_session_id')->default('0');
             $table->timestamps();
         });
     }

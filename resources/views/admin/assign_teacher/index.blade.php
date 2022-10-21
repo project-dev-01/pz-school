@@ -68,6 +68,7 @@
     var sectionByClassUrl = "{{ config('constants.api.section_by_class') }}";
 
     var assignTeacherList = "{{ route('admin.assign_teacher.list') }}";
+    var academic_session_id = "{{ Session::get('academic_session_id') }}";
 </script>
 <script src="{{ asset('public/js/custom/teacher-allocation.js') }}"></script>
 @endsection

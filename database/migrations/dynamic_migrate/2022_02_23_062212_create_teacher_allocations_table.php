@@ -19,6 +19,7 @@ class CreateTeacherAllocationsTable extends Migration
             $table->integer('section_id');
             $table->integer('teacher_id');
             $table->enum('type', ['0', '1','2']);
+            $table->integer('academic_session_id')->default('0');
             $table->timestamps();
         });
     }

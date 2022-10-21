@@ -24,6 +24,7 @@ class CreateTimetableBulkTable extends Migration
             $table->time('time_start');
             $table->time('time_end');
             $table->string('day');
+            $table->integer('academic_session_id')->default('0');
             $table->timestamps();
         });
     }

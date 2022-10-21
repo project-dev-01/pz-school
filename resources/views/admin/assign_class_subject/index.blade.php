@@ -69,6 +69,7 @@
     var sectionByClassUrl = "{{ config('constants.api.section_by_class') }}";
 
     var classAssignSubList = "{{ route('admin.class_assign_subject.list') }}";
+    var academic_session_id = "{{ Session::get('academic_session_id') }}";
 </script>
 <script src="{{ asset('public/js/custom/assign_class_subject.js') }}"></script>
 @endsection

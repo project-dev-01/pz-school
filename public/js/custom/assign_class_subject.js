@@ -51,6 +51,7 @@ $(function () {
             formData.append('class_id', changeClassName);
             formData.append('section_id', sectionID);
             formData.append('subject_id', assignSubjects);
+            formData.append('academic_session_id', academic_session_id);
 
             $.ajax({
                 url: classAssignAddUrl,
@@ -125,6 +126,7 @@ $(function () {
             formData.append('class_id', changeClassName);
             formData.append('section_id', sectionID);
             formData.append('subject_id', assignSubjects);
+            formData.append('academic_session_id', academic_session_id);
 
             $.ajax({
                 url: classAssignUpdateUrl,

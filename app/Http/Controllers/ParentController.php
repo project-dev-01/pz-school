@@ -236,7 +236,8 @@ class ParentController extends Controller
         // dd($children_id);
         $data = [
             'parent_id' => $parent,
-            'children_id' => $children_id
+            'children_id' => $children_id,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
 
         $days = array(
@@ -501,6 +502,7 @@ class ParentController extends Controller
         $student = session()->get('student_id');
         $data = [
             'student_id' => $student,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
         $homework = Helper::PostMethod(config('constants.api.homework_student'), $data);
 
@@ -525,6 +527,7 @@ class ParentController extends Controller
             'status' => $request->status,
             'subject' => $request->subject,
             'student_id' => $student,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
 
         // dd($data);

@@ -72,6 +72,7 @@
     var getAssignClassSubjUrl = "{{ config('constants.api.get_assign_class_subjects') }}";
 
     var classAssignTeacherSubList = "{{ route('admin.teacher_assign_subject.list') }}";
+    var academic_session_id = "{{ Session::get('academic_session_id') }}";
 </script>
 <script src="{{ asset('public/js/custom/assign_class_subject_teacher.js') }}"></script>
 @endsection

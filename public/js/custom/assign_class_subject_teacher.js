@@ -94,6 +94,7 @@ $(function () {
             formData.append('subject_id', assignSubjects);
             formData.append('teacher_id', assignClassTeacher);
             formData.append('type', subjectType);
+            formData.append('academic_session_id', academic_session_id);
 
             $.ajax({
                 url: classAssignTeacherAddUrl,
@@ -180,6 +181,7 @@ $(function () {
             formData.append('subject_id', assignSubjects);
             formData.append('teacher_id', classTeacher);
             formData.append('type', type);
+            formData.append('academic_session_id', academic_session_id);
 
             $.ajax({
                 url: classAssignTeacherUpdateUrl,

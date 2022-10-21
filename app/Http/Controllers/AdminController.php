@@ -556,8 +556,10 @@ class AdminController extends Controller
 
     public function getTeacherAllocationList(Request $request)
     {
-
-        $response = Helper::GetMethod(config('constants.api.assign_teacher_list'));
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.assign_teacher_list'), $data);
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
@@ -603,8 +605,10 @@ class AdminController extends Controller
     }
     public function ClassAssignSubList(Request $request)
     {
-
-        $response = Helper::GetMethod(config('constants.api.class_assign_list'));
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.class_assign_list'), $data);
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
@@ -630,8 +634,10 @@ class AdminController extends Controller
     }
     public function ClassAssignSubTeacherList(Request $request)
     {
-
-        $response = Helper::GetMethod(config('constants.api.teacher_assign_sub_list'));
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.teacher_assign_sub_list'), $data);
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
@@ -1610,6 +1616,7 @@ class AdminController extends Controller
             'day' => $request->day,
             'semester_id' => $request->semester_id,
             'session_id' => $request->session_id,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
 
         $timetable = Helper::PostMethod(config('constants.api.timetable_subject'), $data);
@@ -1753,6 +1760,7 @@ class AdminController extends Controller
             'day' => $request->day,
             'semester_id' => $request->semester_id,
             'session_id' => $request->session_id,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
 
         $timetable = Helper::PostMethod(config('constants.api.timetable_subject_bulk'), $data);
@@ -1915,6 +1923,7 @@ class AdminController extends Controller
             'session_id' => $request->session_id,
             'day' => $request->day,
             'timetable' => $request->timetable,
+            'academic_session_id' => session()->get('academic_session_id')
 
         ];
         // dd($data);
@@ -1955,6 +1964,7 @@ class AdminController extends Controller
             'session_id' => $request->session_id,
             'day' => $request->day,
             'timetable' => $request->timetable,
+            'academic_session_id' => session()->get('academic_session_id')
 
         ];
         $response = Helper::PostMethod(config('constants.api.timetable_add_bulk'), $data);
@@ -1985,6 +1995,7 @@ class AdminController extends Controller
             'section_id' => $request->section_id,
             'semester_id' => $request->semester_id,
             'session_id' => $request->session_id,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
 
         // dd($data);
@@ -2068,7 +2079,8 @@ class AdminController extends Controller
             'section_id' => $request->section_id,
             'semester_id' => $request->semester_id,
             'session_id' => $request->session_id,
-            'day' => $request->day
+            'day' => $request->day,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
         // dd($data);
         $timetable = Helper::PostMethod(config('constants.api.timetable_edit'), $data);
@@ -2104,6 +2116,7 @@ class AdminController extends Controller
             'session_id' => $request->session_id,
             'day' => $request->day,
             'timetable' => $request->timetable,
+            'academic_session_id' => session()->get('academic_session_id')
 
         ];
         // dd($data);
@@ -2278,6 +2291,7 @@ class AdminController extends Controller
             'file' => $base64,
             'file_extension' => $extension,
             'created_by' => $created_by,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
         $response = Helper::PostMethod(config('constants.api.homework_add'), $data);
         // dd($response);
@@ -2290,6 +2304,7 @@ class AdminController extends Controller
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
             'subject_id' => $request->subject_id,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
 
         $homework = Helper::PostMethod(config('constants.api.homework_list'), $data);
