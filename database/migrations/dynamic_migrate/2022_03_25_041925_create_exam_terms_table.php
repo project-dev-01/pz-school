@@ -16,6 +16,7 @@ class CreateExamTermsTable extends Migration
         Schema::create('exam_term', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('academic_session_id')->default('0');
             $table->timestamps();
         });
     }

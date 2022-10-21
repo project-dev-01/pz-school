@@ -147,6 +147,7 @@ $(function () {
             branch_id: branchID,
             class_id: class_id,
             section_id: section_id,
+            academic_session_id: academic_session_id,
             today: today
         }, function (res) {
             if (res.code == 200) {
@@ -172,6 +173,7 @@ $(function () {
             class_id: class_id,
             teacher_id: teacher_id,
             section_id: section_id,
+            academic_session_id: academic_session_id,
             exam_id: exam_id
         }, function (res) {
             if (res.code == 200) {
@@ -195,6 +197,7 @@ $(function () {
             class_id: class_id,
             section_id: section_id,
             subject_id: subject_id,
+            academic_session_id: academic_session_id,
             exam_id: exam_id
         }, function (res) {
             if (res.code == 200) {
@@ -243,6 +246,7 @@ $(function () {
             formData.append('paper_id', paper_id);
             formData.append('semester_id', semester_id);
             formData.append('session_id', session_id);
+            formData.append('academic_session_id', academic_session_id);
             $("#overlay").fadeIn(300);
             $.ajax({
                 url: getSubjectMarks,
@@ -266,6 +270,7 @@ $(function () {
                             $("#listModeSemesterID").val(semester_id);
                             $("#listModeSessionID").val(session_id);
                         } else {
+                            toastr.error("No data available");
                             $("#mark_by_subject_card").hide();
                         }
                         $("#overlay").fadeOut(300);
@@ -518,6 +523,7 @@ $(function () {
         formData.append('paper_id', paper_id);
         formData.append('semester_id', semester_id);
         formData.append('session_id', session_id);
+        
         $.ajax({
             url: $(form).attr('action'),
             method: $(form).attr('method'),
@@ -752,6 +758,7 @@ $(function () {
         formData.append('paper_id', paper_id);
         formData.append('semester_id', semester_id);
         formData.append('session_id', session_id);
+        formData.append('academic_session_id', academic_session_id);
         $("#studentMarkModal").modal('show');
         // return false;
         callstudentchart(formData);

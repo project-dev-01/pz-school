@@ -412,6 +412,11 @@
                                     </ul>
                                 </div>
                             </li>
+                            <!-- <li>
+                                <a href="{{ route('admin.promotion.index')}}" class="nav-link {{ (request()->is('admin/promotion*')) ? 'active' : '' }}">
+                                    <span>Promotion</span>
+                                </a>
+                            </li> -->
                         </ul>
                     </div>
                 </li>

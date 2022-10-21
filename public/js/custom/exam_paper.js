@@ -63,6 +63,7 @@ $(function () {
             formData.append('grade_category', grade_category);
             formData.append('subject_weightage', subject_weightage);
             formData.append('notes', notes);
+            formData.append('academic_session_id', academic_session_id);
 
             $.ajax({
                 url: examPaperAdd,
@@ -217,6 +218,7 @@ $(function () {
             formData.append('grade_category', grade_category);
             formData.append('subject_weightage', subject_weightage);
             formData.append('notes', notes);
+            formData.append('academic_session_id', academic_session_id);
 
             $.ajax({
                 url: examPaperUpdate,

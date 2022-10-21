@@ -8,7 +8,7 @@ $(function () {
         $("#byclassfilter").find("#subjectID").append('<option value="">Select Subject</option>');
         $("#byclassfilter").find("#examnames").empty();
         $("#byclassfilter").find("#examnames").append('<option value="">Select exams</option>');
-        $.post(getbySubjectnames, { token: token, branch_id: branchID, class_id: class_id, teacher_id: teacher_id }, function (res) {
+        $.post(getbySubjectnames, { token: token, branch_id: branchID, class_id: class_id, teacher_id: teacher_id, academic_session_id: academic_session_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
                     $("#byclassfilter").find("#subjectID").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
@@ -32,7 +32,8 @@ $(function () {
             branch_id: branchID,
             class_id: class_id,
             subject_id: subject_id,
-            today: today
+            today: today,
+            academic_session_id: academic_session_id
         }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -43,6 +44,7 @@ $(function () {
     });
     $("#byclassfilter").validate({
         rules: {
+            year: "required",
             class_id: "required",
             subject_id: "required",
             exam_id: "required"
@@ -55,8 +57,11 @@ $(function () {
         if (byclass === true) {
 
             $("#overlay").fadeIn(300);
+            var year = $("#btwyears").val();
             var class_id = $("#changeClassName").val();
             var subject_id = $("#subjectID").val();
+            var semester_id = $("#semester_id").val();
+            var session_id = $("#session_id").val();
 
             var exam_id = $("#examnames").val();
             // list mode
@@ -65,23 +70,25 @@ $(function () {
                 branch_id: branchID,
                 exam_id: exam_id,
                 class_id: class_id,
-                subject_id: subject_id
+                semester_id: semester_id,
+                session_id: session_id,
+                subject_id: subject_id,
+                academic_year: year
             }, function (response) {
 
                 if (response.code == 200) {
                     if (response.data.allbysubject.length > 0) {
                         var datasetnew = response.data;
                         bysubjectdetails(datasetnew);
-                        $("#byclass_analysis").show();
-                        $("#byclass_bodycontent").show("slow");
-
                         $("#overlay").fadeOut(300);
+                        $("#byclass_bodycontent").show();
                     } else {
                         $("#overlay").fadeOut(300);
                         toastr.info('No records are available');
                     }
                 } else {
                     toastr.error(data.message);
+                    $('#byclass_bodycontent').hide();
                 }
 
             });

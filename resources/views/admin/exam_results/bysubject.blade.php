@@ -31,6 +31,18 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label for="btwyears">Academic year<span class="text-danger">*</span></label>
+                                    <select id="btwyears" class="form-control" name="year">
+                                        <option value="">Select Academic Year</option>
+                                        @forelse($academic_year_list as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label for="changeClassName">Standard<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">Select Class</option>
@@ -48,6 +60,28 @@
                                     <label for="sectionID" id="lblsectionId">Class Name<span class="text-danger">*</span></label>
                                     <select id="sectionID" class="form-control" name="section_id">
                                         <option value="">Select Section</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="semester_id">Semester</label>
+                                    <select id="semester_id" class="form-control" name="semester_id">
+                                        <option value="0">Select Semester</option>
+                                        @foreach($semester as $sem)
+                                        <option value="{{$sem['id']}}">{{$sem['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="session_id">Session</label>
+                                    <select id="session_id" class="form-control" name="session_id">
+                                        <option value="0">Select Session</option>
+                                        @foreach($session as $ses)
+                                        <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -96,7 +130,7 @@
 
                             <div class="col-md-12">
                                 <div class="clearfix mt-4">
-                                    <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel"style="float:right;">Download</button>
+                                    <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel" style="float:right;">Download</button>
                                 </div>
                             </div>
 

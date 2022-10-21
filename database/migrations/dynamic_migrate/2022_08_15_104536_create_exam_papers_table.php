@@ -22,6 +22,7 @@ class CreateExamPapersTable extends Migration
             $table->string('grade_category');
             $table->integer('subject_weightage')->nullable();
             $table->text('notes')->nullable();
+            $table->integer('academic_session_id')->default('0');
             $table->timestamps();
         });
     }

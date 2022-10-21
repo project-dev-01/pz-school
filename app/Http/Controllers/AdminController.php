@@ -2673,6 +2673,7 @@ class AdminController extends Controller
 
         $data = [
             'name' => $request->name,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
         $response = Helper::PostMethod(config('constants.api.exam_term_add'), $data);
         return $response;
@@ -2680,9 +2681,10 @@ class AdminController extends Controller
     // get ExamTerm 
     public function getExamTermList(Request $request)
     {
-
-        $response = Helper::GetMethod(config('constants.api.exam_term_list'));
-
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.exam_term_list'), $data);
         return DataTables::of($response['data'])
 
             ->addIndexColumn()
@@ -2711,7 +2713,8 @@ class AdminController extends Controller
 
         $data = [
             'id' => $request->id,
-            'name' => $request->name
+            'name' => $request->name,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
 
         $response = Helper::PostMethod(config('constants.api.exam_term_update'), $data);
@@ -2819,9 +2822,10 @@ class AdminController extends Controller
     // get Exam 
     public function exam()
     {
-        $term = Helper::GetMethod(config('constants.api.exam_term_list'));
-        // dd($response)
-
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $term = Helper::GETMethodWithData(config('constants.api.exam_term_list'), $data);
         return view('admin.exam.list', ['term' => $term['data']]);
     }
 
@@ -2831,6 +2835,7 @@ class AdminController extends Controller
         $data = [
             'name' => $request->name,
             'term_id' => $request->term_id,
+            'academic_session_id' => session()->get('academic_session_id'),
             'remarks' => $request->remarks
         ];
         $response = Helper::PostMethod(config('constants.api.exam_add'), $data);
@@ -2839,8 +2844,10 @@ class AdminController extends Controller
     // get Exam 
     public function getExamList(Request $request)
     {
-
-        $response = Helper::GetMethod(config('constants.api.exam_list'));
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.exam_list'), $data);
         // dd($response);
         return DataTables::of($response['data'])
             ->addIndexColumn()
@@ -2871,6 +2878,7 @@ class AdminController extends Controller
             'id' => $request->id,
             'name' => $request->name,
             'term_id' => $request->term_id,
+            'academic_session_id' => session()->get('academic_session_id'),
             'remarks' => $request->remarks
         ];
 
@@ -2917,8 +2925,11 @@ class AdminController extends Controller
     }
     public function timeTableSetExamWise()
     {
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
-        $getexam = Helper::GetMethod(config('constants.api.exam_list'));
+        $getexam = Helper::GETMethodWithData(config('constants.api.exam_list'), $data);
 
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
@@ -2944,9 +2955,10 @@ class AdminController extends Controller
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
             'semester_id' => $request->semester_id,
-            'session_id' => $request->session_id
+            'session_id' => $request->session_id,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
-
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.exam_timetable_list'), $data);
         // dd($response);
 
@@ -2988,6 +3000,7 @@ class AdminController extends Controller
             'section_id' => $request->section_id,
             'semester_id' => $request->semester_id,
             'session_id' => $request->session_id,
+            'academic_session_id' => session()->get('academic_session_id'),
             'exam_id' => $request->exam_id,
         ];
         // dd($data);
@@ -3124,7 +3137,7 @@ class AdminController extends Controller
                 }
             } else {
                 $output .= '<tr>
-                                <td colspan="6"> No Data Available</td>
+                                <td colspan="7" class="text-center"> No Data Available</td>
                             </tr>';
             }
 
@@ -3149,6 +3162,7 @@ class AdminController extends Controller
             'exam_id' => $request->exam_id,
             'semester_id' => $request->semester_id,
             'session_id' => $request->session_id,
+            'academic_session_id' => session()->get('academic_session_id'),
             'exam' => $request->exam,
         ];
         $response = Helper::PostMethod(config('constants.api.exam_timetable_add'), $data);
@@ -3163,7 +3177,8 @@ class AdminController extends Controller
             'section_id' => $request->section_id,
             'exam_id' => $request->exam_id,
             'semester_id' => $request->semester_id,
-            'session_id' => $request->session_id
+            'session_id' => $request->session_id,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
         $response = Helper::PostMethod(config('constants.api.exam_timetable_get'), $data);
 
@@ -3217,6 +3232,7 @@ class AdminController extends Controller
             'section_id' => $request->section_id,
             'semester_id' => $request->semester_id,
             'session_id' => $request->session_id,
+            'academic_session_id' => session()->get('academic_session_id'),
             'exam_id' => $request->exam_id
         ];
 
@@ -3449,13 +3465,16 @@ class AdminController extends Controller
     public function byclasss()
     {
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
-        $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
-
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         return view(
             'admin.exam_results.byclass',
             [
                 'classnames' => $getclass['data'],
-                'allGrades' => $allGrades['data']
+                'semester' => $semester['data'],
+                'session' => $session['data'],
+                'academic_year_list' => $academic_year_list['data']
             ]
         );
     }
@@ -3463,40 +3482,53 @@ class AdminController extends Controller
     public function bysubject()
     {
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
-        $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         return view(
             'admin.exam_results.bysubject',
             [
                 'classnames' => $getclass['data'],
-                'allGrades' => $allGrades['data']
+                'semester' => $semester['data'],
+                'session' => $session['data'],
+                'academic_year_list' => $academic_year_list['data']
             ]
         );
     }
     public function bystudent()
     {
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
-        $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         return view(
             'admin.exam_results.bystudent',
             [
                 'classnames' => $getclass['data'],
-                'allGrades' => $allGrades['data']
+                'semester' => $semester['data'],
+                'session' => $session['data'],
+                'academic_year_list' => $academic_year_list['data']
             ]
         );
     }
     public function overall()
     {
-        $data = array();
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
-        $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
         $allexams = Helper::PostMethod(config('constants.api.all_exams_list'), $data);
-
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         return view(
             'admin.exam_results.overall',
             [
                 'classnames' => $getclass['data'],
                 'allexams' => $allexams['data'],
-                'allGrades' => $allGrades['data'],
+                'semester' => $semester['data'],
+                'session' => $session['data'],
+                'academic_year_list' => $academic_year_list['data']
             ]
         );
     }
@@ -3505,11 +3537,16 @@ class AdminController extends Controller
     {
         // data already use this api post so empty var sent
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
-
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         return view(
             'admin.exam.result',
             [
-                'classnames' => $getclass['data']
+                'classnames' => $getclass['data'],
+                'semester' => $semester['data'],
+                'session' => $session['data'],
+                'academic_year_list' => $academic_year_list['data']
             ]
         );
     }
@@ -3544,7 +3581,8 @@ class AdminController extends Controller
             "semester_id" => $request->semester_id,
             "session_id" => $request->session_id,
             "grade_category" => $request->grade_category,
-            "exam_id" => $request->exam_id
+            "exam_id" => $request->exam_id,
+            "academic_session_id" => session()->get('academic_session_id')
         ];
 
         $response = Helper::PostMethod(config('constants.api.add_student_marks'), $data);
@@ -5113,7 +5151,10 @@ class AdminController extends Controller
     // get Exam paper list
     public function getExamPaperList(Request $request)
     {
-        $response = Helper::GetMethod(config('constants.api.exam_paper_list'));
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.exam_paper_list'), $data);
         // dd($response);
         return DataTables::of($response['data'])
             ->addIndexColumn()

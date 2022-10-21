@@ -960,6 +960,7 @@ class ApiControllerOne extends BaseController
         $validator = \Validator::make($request->all(), [
             'branch_id' => 'required',
             'class_id' => 'required',
+            'academic_session_id' => 'required',
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -977,6 +978,7 @@ class ApiControllerOne extends BaseController
                 ->where('sa.type', '=', '0')
                 ->where('sa.teacher_id', '!=', '0')
                 ->where('sb.exam_exclude', '=', '0')
+                ->where('sa.academic_session_id', '=', $request->academic_session_id)
                 ->when($class_id != "All", function ($q)  use ($class_id) {
                     $q->where('sa.class_id', $class_id);
                 })
@@ -995,6 +997,7 @@ class ApiControllerOne extends BaseController
             'token' => 'required',
             'class_id' => 'required',
             'subject_id' => 'required',
+            'academic_session_id' => 'required',
             'today' => 'required'
         ]);
 
@@ -1014,6 +1017,7 @@ class ApiControllerOne extends BaseController
                 )
                 ->leftJoin('exam as ex', 'texm.exam_id', '=', 'ex.id')
                 ->where('texm.exam_date', '<', $today)
+                ->where('texm.academic_session_id', '=', $request->academic_session_id)
                 ->when($class_id != "All", function ($q)  use ($class_id) {
                     $q->where('texm.class_id', $class_id);
                 })
@@ -1030,6 +1034,7 @@ class ApiControllerOne extends BaseController
         $validator = \Validator::make($request->all(), [
             'branch_id' => 'required',
             'token' => 'required',
+            'academic_year' => 'required',
             'class_id' => 'required',
             'subject_id' => 'required',
             'exam_id' => 'required'
@@ -1041,6 +1046,9 @@ class ApiControllerOne extends BaseController
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
             $allbysubject = array();
+            $academic_session_id = $request->academic_year;
+            $semester_id = isset($request->semester_id) ? $request->semester_id : 0;
+            $session_id = isset($request->session_id) ? $request->session_id : 0;
             // get subject total weightage
             $getExamMarks = $Connection->table('exam_papers as expp')
                 ->select(
@@ -1049,7 +1057,8 @@ class ApiControllerOne extends BaseController
                 )
                 ->where([
                     ['expp.class_id', '=', $request->class_id],
-                    ['expp.subject_id', '=', $request->subject_id]
+                    ['expp.subject_id', '=', $request->subject_id],
+                    ['expp.academic_session_id', '=', $academic_session_id]
                 ])
                 ->get();
             $total_subject_weightage = isset($getExamMarks[0]->total_subject_weightage) ? (int)$getExamMarks[0]->total_subject_weightage : 0;
@@ -1069,10 +1078,13 @@ class ApiControllerOne extends BaseController
                 ->where([
                     ['sa.class_id', $request->class_id],
                     ['sa.subject_id', $request->subject_id],
+                    ['sa.academic_session_id', '=', $academic_session_id],
                     ['sa.type', '=', '0'],
                     ['sbj.exam_exclude', '=', '0']
                 ])
                 ->get();
+            // print_r($getTotalSections);
+
             // get all grade details header
             $allGradeDetails = $Connection->table('grade_marks')
                 ->select('grade')
@@ -1101,9 +1113,15 @@ class ApiControllerOne extends BaseController
                         )
                         ->join('classes as cl', 'en.class_id', '=', 'cl.id')
                         ->join('sections as sc', 'en.section_id', '=', 'sc.id')
-                        ->where('en.class_id', '=', $request->class_id)
-                        ->where('en.section_id', '=', $section_id)
+                        ->where([
+                            ['en.class_id', $request->class_id],
+                            ['en.section_id', $section_id],
+                            ['en.academic_session_id', '=', $academic_session_id],
+                            ['en.semester_id', '=', $semester_id],
+                            ['en.session_id', '=', $session_id]
+                        ])
                         ->get();
+                    // dd($getstudentcount);
                     $semester_id = isset($getstudentcount[0]->semester_id) ? $getstudentcount[0]->semester_id : 0;
                     $session_id = isset($getstudentcount[0]->session_id) ? $getstudentcount[0]->session_id : 0;
                     $totalNoOfStudents = isset($getstudentcount[0]->totalStudentCount) ? $getstudentcount[0]->totalStudentCount : 0;
@@ -1127,7 +1145,8 @@ class ApiControllerOne extends BaseController
                                 ->on('te.subject_id', '=', 'sm.subject_id')
                                 ->on('te.semester_id', '=', 'sm.semester_id')
                                 ->on('te.session_id', '=', 'sm.session_id')
-                                ->on('te.paper_id', '=', 'sm.paper_id');
+                                ->on('te.paper_id', '=', 'sm.paper_id')
+                                ->on('te.academic_session_id', '=', 'sm.academic_session_id');
                         })
                         ->join('exam_papers as expp', 'sm.paper_id', '=', 'expp.id')
                         ->where([
@@ -1136,10 +1155,12 @@ class ApiControllerOne extends BaseController
                             ['sm.subject_id', '=', $request->subject_id],
                             ['sm.exam_id', '=', $request->exam_id],
                             ['sm.semester_id', '=', $semester_id],
-                            ['sm.session_id', '=', $session_id]
+                            ['sm.session_id', '=', $session_id],
+                            ['sm.academic_session_id', '=', $academic_session_id]
                         ])
                         ->groupBy('sm.paper_id')
                         ->get();
+                    // dd($request->academic_session_id);
                     // here we get present absent pass fail count
                     $noOfPresentAbsent = $Connection->table('student_marks as sm')
                         ->select(
@@ -1156,7 +1177,8 @@ class ApiControllerOne extends BaseController
                                 ->on('te.subject_id', '=', 'sm.subject_id')
                                 ->on('te.semester_id', '=', 'sm.semester_id')
                                 ->on('te.session_id', '=', 'sm.session_id')
-                                ->on('te.paper_id', '=', 'sm.paper_id');
+                                ->on('te.paper_id', '=', 'sm.paper_id')
+                                ->on('te.academic_session_id', '=', 'sm.academic_session_id');
                         })
                         ->join('exam_papers as expp', 'sm.paper_id', '=', 'expp.id')
                         ->where([
@@ -1165,7 +1187,8 @@ class ApiControllerOne extends BaseController
                             ['sm.subject_id', '=', $request->subject_id],
                             ['sm.exam_id', '=', $request->exam_id],
                             ['sm.semester_id', '=', $semester_id],
-                            ['sm.session_id', '=', $session_id]
+                            ['sm.session_id', '=', $session_id],
+                            ['sm.academic_session_id', '=', $academic_session_id]
                         ])
                         ->groupBy('sm.subject_id')
                         ->groupBy('sm.student_id')
@@ -1268,10 +1291,17 @@ class ApiControllerOne extends BaseController
                         $gradecnt = new \stdClass();
                         $passcnt = new \stdClass();
                     }
-                    $pass_percentage = ($passCnt / $totalNoOfStudents) * 100;
-                    $newobject->pass_percentage = number_format($pass_percentage, 2);
-                    $fail_percentage = ($failCnt / $totalNoOfStudents) * 100;
-                    $newobject->fail_percentage = number_format($fail_percentage, 2);
+                    // dd($passCnt);
+                    if ($totalNoOfStudents > 0) {
+                        $pass_percentage = ($passCnt / $totalNoOfStudents) * 100;
+                        $newobject->pass_percentage = number_format($pass_percentage, 2);
+                        $fail_percentage = ($failCnt / $totalNoOfStudents) * 100;
+                        $newobject->fail_percentage = number_format($fail_percentage, 2);
+                    } else {
+                        $newobject->pass_percentage = 0;
+                        $newobject->fail_percentage = 0;
+                    }
+
                     // get count details
                     $newobject->present_count = $presentCnt;
                     $newobject->absent_count = $absentCnt;
@@ -1329,6 +1359,7 @@ class ApiControllerOne extends BaseController
             'token' => 'required',
             'class_id' => 'required',
             'section_id' => 'required',
+            'academic_session_id' => 'required',
             'today' => 'required'
         ]);
 
@@ -1352,6 +1383,7 @@ class ApiControllerOne extends BaseController
                     $q->where('texm.class_id', $class_id);
                 })
                 ->where('texm.section_id', '=', $section_id)
+                ->where('texm.academic_session_id', '=', $request->academic_session_id)
                 ->groupBy('texm.exam_id')
                 ->get();
             return $this->successResponse($getExamsName, 'Exams  list of Name record fetch successfully');
@@ -1363,6 +1395,7 @@ class ApiControllerOne extends BaseController
         $validator = \Validator::make($request->all(), [
             'branch_id' => 'required',
             'token' => 'required',
+            'academic_year' => 'required',
             'class_id' => 'required',
             'section_id' => 'required',
             'exam_id' => 'required'
@@ -1379,13 +1412,17 @@ class ApiControllerOne extends BaseController
             $newobject = new \stdClass();
             $section_id = $request->section_id;
             $class_id = $request->class_id;
+            $academic_session_id = $request->academic_year;
+            $sem_id = isset($request->semester_id) ? $request->semester_id : 0;
+            $ses_id = isset($request->session_id) ? $request->session_id : 0;
             // get grade category
             $getGradeCategory = $Connection->table('exam_papers as expp')
                 ->select(
                     'expp.grade_category'
                 )
                 ->where([
-                    ['expp.class_id', '=', $request->class_id]
+                    ['expp.class_id', '=', $request->class_id],
+                    ['expp.academic_session_id', '=', $academic_session_id]
                 ])
                 ->groupBy('expp.grade_category')
                 ->get();
@@ -1409,10 +1446,11 @@ class ApiControllerOne extends BaseController
                     'sa.teacher_id',
                     DB::raw("CONCAT(sf.first_name, ' ', sf.last_name) as staff_name")
                 )
-                ->join('subject_assigns as sa', function ($join) use ($section_id) {
+                ->join('subject_assigns as sa', function ($join) use ($section_id, $academic_session_id) {
                     $join->on('sa.class_id', '=', 'expp.class_id')
                         ->on('sa.subject_id', '=', 'expp.subject_id')
-                        ->on('sa.section_id', '=', DB::raw("'$section_id'"));
+                        ->on('sa.section_id', '=', DB::raw("'$section_id'"))
+                        ->on('sa.academic_session_id', '=', DB::raw("'$academic_session_id'"));
                 })
                 ->join('subjects as sbj', 'expp.subject_id', '=', 'sbj.id')
                 ->join('classes as cl', 'sa.class_id', '=', 'cl.id')
@@ -1421,11 +1459,13 @@ class ApiControllerOne extends BaseController
                 ->where([
                     ['expp.class_id', $request->class_id],
                     ['sa.section_id', $section_id],
+                    ['expp.academic_session_id', '=', $academic_session_id],
                     ['sa.type', '=', '0'],
                     ['sbj.exam_exclude', '=', '0']
                 ])
                 ->groupBy('expp.subject_id')
                 ->get();
+            // dd($getExamMarks);
             if (!empty($getExamMarks)) {
                 foreach ($getExamMarks as $marks) {
                     $total_subject_weightage = isset($marks->total_subject_weightage) ? (int)$marks->total_subject_weightage : 0;
@@ -1451,8 +1491,13 @@ class ApiControllerOne extends BaseController
                         )
                         ->join('classes as cl', 'en.class_id', '=', 'cl.id')
                         ->join('sections as sc', 'en.section_id', '=', 'sc.id')
-                        ->where('en.class_id', '=', $class_id)
-                        ->where('en.section_id', '=', $section_id)
+                        ->where([
+                            ['en.class_id', $class_id],
+                            ['en.section_id', $section_id],
+                            ['en.academic_session_id', '=', $academic_session_id],
+                            ['en.semester_id', '=', $sem_id],
+                            ['en.session_id', '=', $ses_id]
+                        ])
                         ->get();
                     // dd($getstudentcount);
                     $semester_id = isset($getstudentcount[0]->semester_id) ? $getstudentcount[0]->semester_id : 0;
@@ -1477,7 +1522,8 @@ class ApiControllerOne extends BaseController
                                 ->on('te.subject_id', '=', 'sm.subject_id')
                                 ->on('te.semester_id', '=', 'sm.semester_id')
                                 ->on('te.session_id', '=', 'sm.session_id')
-                                ->on('te.paper_id', '=', 'sm.paper_id');
+                                ->on('te.paper_id', '=', 'sm.paper_id')
+                                ->on('te.academic_session_id', '=', 'sm.academic_session_id');
                         })
                         ->join('exam_papers as expp', 'sm.paper_id', '=', 'expp.id')
                         ->where([
@@ -1486,7 +1532,8 @@ class ApiControllerOne extends BaseController
                             ['sm.subject_id', '=', $subject_id],
                             ['sm.exam_id', '=', $request->exam_id],
                             ['sm.semester_id', '=', $semester_id],
-                            ['sm.session_id', '=', $session_id]
+                            ['sm.session_id', '=', $session_id],
+                            ['sm.academic_session_id', '=', $academic_session_id]
                         ])
                         ->groupBy('sm.paper_id')
                         ->get();
@@ -1505,7 +1552,8 @@ class ApiControllerOne extends BaseController
                                 ->on('te.subject_id', '=', 'sm.subject_id')
                                 ->on('te.semester_id', '=', 'sm.semester_id')
                                 ->on('te.session_id', '=', 'sm.session_id')
-                                ->on('te.paper_id', '=', 'sm.paper_id');
+                                ->on('te.paper_id', '=', 'sm.paper_id')
+                                ->on('te.academic_session_id', '=', 'sm.academic_session_id');
                         })
                         ->join('exam_papers as expp', 'sm.paper_id', '=', 'expp.id')
                         ->where([
@@ -1514,7 +1562,8 @@ class ApiControllerOne extends BaseController
                             ['sm.subject_id', '=', $subject_id],
                             ['sm.exam_id', '=', $request->exam_id],
                             ['sm.semester_id', '=', $semester_id],
-                            ['sm.session_id', '=', $session_id]
+                            ['sm.session_id', '=', $session_id],
+                            ['sm.academic_session_id', '=', $academic_session_id]
                         ])
                         ->groupBy('sm.subject_id')
                         ->groupBy('sm.student_id')
@@ -1618,10 +1667,15 @@ class ApiControllerOne extends BaseController
                         $gradecnt = new \stdClass();
                         $passcnt = new \stdClass();
                     }
-                    $pass_percentage = ($passCnt / $totalNoOfStudents) * 100;
-                    $newobject->pass_percentage = number_format($pass_percentage, 2);
-                    $fail_percentage = ($failCnt / $totalNoOfStudents) * 100;
-                    $newobject->fail_percentage = number_format($fail_percentage, 2);
+                    if ($totalNoOfStudents > 0) {
+                        $pass_percentage = ($passCnt / $totalNoOfStudents) * 100;
+                        $newobject->pass_percentage = number_format($pass_percentage, 2);
+                        $fail_percentage = ($failCnt / $totalNoOfStudents) * 100;
+                        $newobject->fail_percentage = number_format($fail_percentage, 2);
+                    } else {
+                        $newobject->pass_percentage = 0;
+                        $newobject->fail_percentage = 0;
+                    }
                     // get count details
                     $newobject->present_count = $presentCnt;
                     $newobject->absent_count = $absentCnt;
@@ -1647,7 +1701,9 @@ class ApiControllerOne extends BaseController
             'token' => 'required',
             'class_id' => 'required',
             'section_id' => 'required',
-            'exam_id' => 'required'
+            'exam_id' => 'required',
+            'academic_year' => 'required'
+
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -1658,6 +1714,9 @@ class ApiControllerOne extends BaseController
             $class_id = $request->class_id;
             $section_id = $request->section_id;
             $exam_id = $request->exam_id;
+            $academic_session_id = $request->academic_year;
+            $sem_id = isset($request->semester_id) ? $request->semester_id : 0;
+            $ses_id = isset($request->session_id) ? $request->session_id : 0;
             // class name and section name by total students
             $getstudentdetails = $Connection->table('enrolls as en')
                 ->select(
@@ -1669,8 +1728,13 @@ class ApiControllerOne extends BaseController
                 ->join('classes as cl', 'en.class_id', '=', 'cl.id')
                 ->join('sections as sc', 'en.section_id', '=', 'sc.id')
                 ->join('students as stud', 'en.student_id', '=', 'stud.id')
-                ->where('en.class_id', '=', $class_id)
-                ->where('en.section_id', '=', $section_id)
+                ->where([
+                    ['en.class_id', $class_id],
+                    ['en.section_id', $section_id],
+                    ['en.academic_session_id', '=', $academic_session_id],
+                    ['en.semester_id', '=', $sem_id],
+                    ['en.session_id', '=', $ses_id]
+                ])
                 ->get();
             $get_all_subjects = $Connection->table('subject_assigns as sa')
                 ->select(
@@ -1684,6 +1748,7 @@ class ApiControllerOne extends BaseController
                     ['sa.class_id', $class_id],
                     ['sa.section_id', $section_id],
                     ['sa.type', '=', '0'],
+                    ['sa.academic_session_id', '=', $academic_session_id],
                     ['sbj.exam_exclude', '=', '0']
                 ])
                 ->groupBy('sa.subject_id')
@@ -1712,7 +1777,8 @@ class ApiControllerOne extends BaseController
                                 )
                                 ->where([
                                     ['expp.class_id', '=', $value->class_id],
-                                    ['expp.subject_id', '=', $value->subject_id]
+                                    ['expp.subject_id', '=', $value->subject_id],
+                                    ['expp.academic_session_id', '=', $academic_session_id]
                                 ])
                                 ->get();
                             $total_subject_weightage = isset($getExamPaperWeightage[0]->total_subject_weightage) ? (int)$getExamPaperWeightage[0]->total_subject_weightage : 0;
@@ -1733,7 +1799,8 @@ class ApiControllerOne extends BaseController
                                         ->on('te.subject_id', '=', 'sm.subject_id')
                                         ->on('te.semester_id', '=', 'sm.semester_id')
                                         ->on('te.session_id', '=', 'sm.session_id')
-                                        ->on('te.paper_id', '=', 'sm.paper_id');
+                                        ->on('te.paper_id', '=', 'sm.paper_id')
+                                        ->on('te.academic_session_id', '=', 'sm.academic_session_id');
                                 })
                                 ->join('exam_papers as expp', 'sm.paper_id', '=', 'expp.id')
                                 ->where([
@@ -1743,7 +1810,8 @@ class ApiControllerOne extends BaseController
                                     ['sm.exam_id', '=', $exam_id],
                                     ['sm.semester_id', '=', $semester_id],
                                     ['sm.session_id', '=', $session_id],
-                                    ['sm.student_id', '=', $student_id]
+                                    ['sm.student_id', '=', $student_id],
+                                    ['sm.academic_session_id', '=', $academic_session_id]
                                 ])
                                 ->groupBy('sm.paper_id')
                                 ->get();
@@ -1800,6 +1868,7 @@ class ApiControllerOne extends BaseController
             'exam_id' => 'required',
             'class_id' => 'required',
             'section_id' => 'required',
+            'academic_year' => 'required',
             'registerno' => 'required'
         ]);
         if (!$validator->passes()) {
@@ -1813,6 +1882,9 @@ class ApiControllerOne extends BaseController
             $section_id = $request->section_id;
             $exam_id = $request->exam_id;
             $registerno = $request->registerno;
+            $academic_session_id = $request->academic_year;
+            $sem_id = isset($request->semester_id) ? $request->semester_id : 0;
+            $ses_id = isset($request->session_id) ? $request->session_id : 0;
             $studentDetails = $Connection->table('students as stud')->Select(
                 'stud.id',
                 'en.class_id',
@@ -1828,7 +1900,12 @@ class ApiControllerOne extends BaseController
                 ->join('enrolls as en', 'en.student_id', '=', 'stud.id')
                 ->join('classes as cl', 'en.class_id', '=', 'cl.id')
                 ->join('sections as sc', 'en.section_id', '=', 'sc.id')
-                ->where('register_no', '=', $registerno)
+                ->where([
+                    ['stud.register_no', $registerno],
+                    ['en.academic_session_id', $academic_session_id],
+                    ['en.semester_id', '=', $sem_id],
+                    ['en.session_id', '=', $ses_id]
+                ])
                 ->first();
             if (isset($studentDetails->id)) {
                 $student_id = $studentDetails->id;
@@ -1846,6 +1923,9 @@ class ApiControllerOne extends BaseController
                     ->where([
                         ['en.class_id', $class_id],
                         ['en.section_id', $section_id],
+                        ['en.semester_id', '=', $sem_id],
+                        ['en.session_id', '=', $ses_id],
+                        ['en.academic_session_id', '=', $academic_session_id],
                         ['en.student_id', $student_id]
                     ])
                     ->get();
@@ -1860,6 +1940,7 @@ class ApiControllerOne extends BaseController
                     ->where([
                         ['sa.class_id', $class_id],
                         ['sa.section_id', $section_id],
+                        ['sa.academic_session_id', $academic_session_id],
                         ['sa.type', '=', '0'],
                         ['sbj.exam_exclude', '=', '0']
                     ])
@@ -1889,7 +1970,8 @@ class ApiControllerOne extends BaseController
                                     )
                                     ->where([
                                         ['expp.class_id', '=', $value->class_id],
-                                        ['expp.subject_id', '=', $value->subject_id]
+                                        ['expp.subject_id', '=', $value->subject_id],
+                                        ['expp.academic_session_id', '=', $academic_session_id]
                                     ])
                                     ->get();
                                 $total_subject_weightage = isset($getExamPaperWeightage[0]->total_subject_weightage) ? (int)$getExamPaperWeightage[0]->total_subject_weightage : 0;
@@ -1910,7 +1992,8 @@ class ApiControllerOne extends BaseController
                                             ->on('te.subject_id', '=', 'sm.subject_id')
                                             ->on('te.semester_id', '=', 'sm.semester_id')
                                             ->on('te.session_id', '=', 'sm.session_id')
-                                            ->on('te.paper_id', '=', 'sm.paper_id');
+                                            ->on('te.paper_id', '=', 'sm.paper_id')
+                                            ->on('te.academic_session_id', '=', 'sm.academic_session_id');
                                     })
                                     ->join('exam_papers as expp', 'sm.paper_id', '=', 'expp.id')
                                     ->where([
@@ -1920,6 +2003,7 @@ class ApiControllerOne extends BaseController
                                         ['sm.exam_id', '=', $exam_id],
                                         ['sm.semester_id', '=', $semester_id],
                                         ['sm.session_id', '=', $session_id],
+                                        ['sm.academic_session_id', '=', $academic_session_id],
                                         ['sm.student_id', '=', $student_id]
                                     ])
                                     ->groupBy('sm.paper_id')
@@ -1977,7 +2061,8 @@ class ApiControllerOne extends BaseController
             'branch_id' => 'required',
             'token' => 'required',
             'class_id' => 'required',
-            'exam_id' => 'required'
+            'exam_id' => 'required',
+            'academic_year' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -1988,13 +2073,17 @@ class ApiControllerOne extends BaseController
             // get data     
             $allbysubject = array();
             $exam_id = $request->exam_id;
+            $academic_session_id = $request->academic_year;
+            $sem_id = isset($request->semester_id) ? $request->semester_id : 0;
+            $ses_id = isset($request->session_id) ? $request->session_id : 0;
             // get grade category
             $getGradeCategory = $Connection->table('exam_papers as expp')
                 ->select(
                     'expp.grade_category'
                 )
                 ->where([
-                    ['expp.class_id', '=', $request->class_id]
+                    ['expp.class_id', '=', $request->class_id],
+                    ['expp.academic_session_id', '=', $academic_session_id]
                 ])
                 ->groupBy('expp.grade_category')
                 ->get();
@@ -2016,6 +2105,7 @@ class ApiControllerOne extends BaseController
                 ->join('subjects as sbj', 'sa.subject_id', '=', 'sbj.id')
                 ->where([
                     ['sa.class_id', $request->class_id],
+                    ['sa.academic_session_id', $academic_session_id],
                     ['sa.type', '=', '0'],
                     ['sbj.exam_exclude', '=', '0']
                 ])
@@ -2048,7 +2138,8 @@ class ApiControllerOne extends BaseController
                             )
                             ->where([
                                 ['expp.class_id', '=', $class_id],
-                                ['expp.subject_id', '=', $subject_id]
+                                ['expp.subject_id', '=', $subject_id],
+                                ['expp.academic_session_id', $academic_session_id]
                             ])
                             ->get();
                         $total_subject_weightage = isset($getExamPaperWeightage[0]->total_subject_weightage) ? (int)$getExamPaperWeightage[0]->total_subject_weightage : 0;
@@ -2064,7 +2155,10 @@ class ApiControllerOne extends BaseController
                             ->join('students as stud', 'en.student_id', '=', 'stud.id')
                             ->where([
                                 ['en.class_id', $class_id],
-                                ['en.section_id', $section]
+                                ['en.section_id', $section],
+                                ['en.academic_session_id', '=', $academic_session_id],
+                                ['en.semester_id', '=', $sem_id],
+                                ['en.session_id', '=', $ses_id]
                             ])
                             ->get();
                         $semester_id = isset($studentDetails[0]->semester_id) ? $studentDetails[0]->semester_id : 0;
@@ -2088,7 +2182,8 @@ class ApiControllerOne extends BaseController
                                     ->on('te.subject_id', '=', 'sm.subject_id')
                                     ->on('te.semester_id', '=', 'sm.semester_id')
                                     ->on('te.session_id', '=', 'sm.session_id')
-                                    ->on('te.paper_id', '=', 'sm.paper_id');
+                                    ->on('te.paper_id', '=', 'sm.paper_id')
+                                    ->on('te.academic_session_id', '=', 'sm.academic_session_id');
                             })
                             ->join('exam_papers as expp', 'sm.paper_id', '=', 'expp.id')
                             ->where([
@@ -2097,7 +2192,8 @@ class ApiControllerOne extends BaseController
                                 ['sm.subject_id', '=', $subject_id],
                                 ['sm.exam_id', '=', $exam_id],
                                 ['sm.semester_id', '=', $semester_id],
-                                ['sm.session_id', '=', $session_id]
+                                ['sm.session_id', '=', $session_id],
+                                ['sm.academic_session_id', '=', $academic_session_id]
                             ])
                             ->groupBy('sm.subject_id')
                             ->groupBy('sm.student_id')
@@ -2167,7 +2263,8 @@ class ApiControllerOne extends BaseController
                                             ->on('te.subject_id', '=', 'sm.subject_id')
                                             ->on('te.semester_id', '=', 'sm.semester_id')
                                             ->on('te.session_id', '=', 'sm.session_id')
-                                            ->on('te.paper_id', '=', 'sm.paper_id');
+                                            ->on('te.paper_id', '=', 'sm.paper_id')
+                                            ->on('te.academic_session_id', '=', 'sm.academic_session_id');
                                     })
                                     ->join('exam_papers as expp', 'sm.paper_id', '=', 'expp.id')
                                     ->where([
@@ -2177,7 +2274,8 @@ class ApiControllerOne extends BaseController
                                         ['sm.exam_id', '=', $exam_id],
                                         ['sm.semester_id', '=', $semester_id],
                                         ['sm.session_id', '=', $session_id],
-                                        ['sm.student_id', '=', $student_id]
+                                        ['sm.student_id', '=', $student_id],
+                                        ['sm.academic_session_id', '=', $academic_session_id]
                                     ])
                                     ->groupBy('sm.paper_id')
                                     ->get();
@@ -2227,9 +2325,12 @@ class ApiControllerOne extends BaseController
                     $object->passCnt = $passCnt;
                     $object->failCnt = $failCnt;
                     $object->addAllStudCnt = $addAllStudCnt;
-                    $pass_percentage = ($passCnt / $addAllStudCnt) * 100;
-                    $object->pass_percentage = number_format($pass_percentage, 2);
-
+                    if ($addAllStudCnt > 0) {
+                        $pass_percentage = ($passCnt / $addAllStudCnt) * 100;
+                        $object->pass_percentage = number_format($pass_percentage, 2);
+                    } else {
+                        $object->pass_percentage = 0;
+                    }
                     array_push($allbysubject, $object);
                 }
             }
@@ -2773,7 +2874,6 @@ class ApiControllerOne extends BaseController
                         $Connection->table('enrolls')->where('id', $row->id)->update($dataPromote);
                     } else {
                         $dataPromote['created_at'] = date("Y-m-d H:i:s");
-                        // $dataPromote['promotion_done'] = 0;
                         $Connection->table('enrolls')->insert($dataPromote);
                     }
                     // } else {

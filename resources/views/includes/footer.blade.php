@@ -26,8 +26,8 @@
 
 <script src="{{ asset('public/libs/select2/js/select2.min.js') }}"></script>
 <script src="{{ asset('public/libs/apexcharts/apexcharts.min.js') }}"></script>
-<script src="https://apexcharts.com/samples/assets/irregular-data-series.js"></script>
-<script src="https://apexcharts.com/samples/assets/ohlc.js"></script>
+<!-- <script src="https://apexcharts.com/samples/assets/irregular-data-series.js"></script>
+<script src="https://apexcharts.com/samples/assets/ohlc.js"></script> -->
 
 <!-- init js -->
 <!-- <script src="{{ asset('public/js/pages/apexcharts.init.js') }}"></script> -->
@@ -113,11 +113,16 @@
 
 <!-- <script src="{{ asset('public/js/validation/validation.js') }}"></script> -->
 <!-- test js for datatable download -->
-<script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+<!-- <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script> -->
+<script src="{{ asset('public/buttons-datatables/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/jszip.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/pdfmake.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/vfs_fonts.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/buttons.html5.min.js') }}"></script>
 <!-- Bootstrap Tables js -->
 <script src="{{ asset('public/libs/bootstrap-table/bootstrap-table.min.js') }}"></script>
 <!-- ApexChart  Js-->
@@ -158,7 +163,8 @@
     var branchID = "{{ Session::get('branch_id') }}";
     var userID = "{{ Session::get('user_id') }}";
     var studentID = "{{ Session::get('student_id') }}";
-
+    // academic_session_id
+    var academic_session_id = "{{ Session::get('academic_session_id') }}";
     // branch details
     var branchList = "{{ route('branch.list') }}";
     var branchShow = "{{ route('branch.index') }}";
@@ -204,8 +210,6 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> -->
 <script>
     function sendMarkRequest(id = null) {
-        console.log("id")
-        console.log(id)
         return $.ajax(readNotifications, {
             method: 'POST',
             data: {

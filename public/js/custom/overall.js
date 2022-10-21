@@ -36,7 +36,8 @@ $(function () {
         rules: {
             class_id: "required",
             //  section_id: "required",
-            exam_id: "required"
+            exam_id: "required",
+            year: "required"
         }
     });
     $('#byoverallfilter').on('submit', function (e) {
@@ -48,14 +49,25 @@ $(function () {
             $("#overlay").fadeIn(300);
             var class_id = $("#changeClassName").val();
             var exam_id = $("#examnames").val();
+            var year = $("#btwyears").val();
+            var semester_id = $("#semester_id").val();
+            var session_id = $("#session_id").val();
             // get overall
-            $.post(getoverall, { token: token, branch_id: branchID, exam_id: exam_id, class_id: class_id }, function (response) {
+            $.post(getoverall, {
+                token: token,
+                branch_id: branchID,
+                exam_id: exam_id,
+                class_id: class_id,
+                semester_id: semester_id,
+                session_id: session_id,
+                academic_year: year
+            }, function (response) {
 
                 if (response.code == 200) {
                     if (response.data.allbysubject.length > 0) {
                         var datasetnew = response.data;
                         overall_subject(datasetnew);
-                        $("#body_content").show("slow");
+                        $("#body_content").show();
                         $("#overlay").fadeOut(300);
                     } else {
                         toastr.info('No records are available');
@@ -63,6 +75,7 @@ $(function () {
                     }
                 } else {
                     toastr.error(data.message);
+                    $("#body_content").hide();
                     $("#overlay").fadeOut(300);
                 }
 

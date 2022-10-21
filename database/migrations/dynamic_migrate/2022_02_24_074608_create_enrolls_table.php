@@ -19,10 +19,9 @@ class CreateEnrollsTable extends Migration
             $table->integer('class_id');
             $table->integer('section_id');
             $table->integer('roll');
-            $table->integer('academic_year')->default('0');
+            $table->integer('academic_session_id')->default('0');
             $table->integer('semester_id')->default('0');
             $table->integer('session_id')->default('0');
-            $table->integer('promotion_done')->default('0');
             $table->timestamps();
         });
     }

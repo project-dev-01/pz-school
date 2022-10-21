@@ -35,6 +35,7 @@ $(function () {
             branch_id: branchID,
             class_id: class_id,
             section_id: section_id,
+            academic_session_id: academic_session_id,
             today: today
         }, function (res) {
             if (res.code == 200) {
@@ -46,6 +47,7 @@ $(function () {
     });
     $("#bystudentfilter").validate({
         rules: {
+            year: "required",
             class_id: "required",
             section_id: "required",
             exam_id: "required"
@@ -57,6 +59,9 @@ $(function () {
         if (byclass === true) {
             $("#overlay").fadeIn(300);
             $("#bystudent_body").show("slow");
+            var year = $("#btwyears").val();
+            var semester_id = $("#semester_id").val();
+            var session_id = $("#session_id").val();
             var class_id = $("#changeClassName").val();
             var section_id = $("#sectionID").val();
             var exam_id = $("#examnames").val();
@@ -66,7 +71,10 @@ $(function () {
                 branch_id: branchID,
                 exam_id: exam_id,
                 class_id: class_id,
-                section_id: section_id
+                section_id: section_id,
+                semester_id: semester_id,
+                session_id: session_id,
+                academic_year: year
             }, function (response) {
 
                 if (response.code == 200) {
@@ -77,10 +85,13 @@ $(function () {
                         $("#overlay").fadeOut(300);
                     } else {
                         $("#overlay").fadeOut(300);
+                        $('#bystudent_bodycontent').hide();
                         toastr.info('No records are available');
                     }
                 } else {
                     toastr.error(data.message);
+                    $('#bystudent_bodycontent').hide();
+
                 }
             });
         };

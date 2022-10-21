@@ -18,6 +18,7 @@ class CreateExamTable extends Migration
             $table->string('name');
             $table->integer('term_id');
             $table->text('remarks')->nullable();
+            $table->integer('academic_session_id')->default('0');
             $table->timestamps();
         });
     }

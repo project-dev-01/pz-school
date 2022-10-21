@@ -35,6 +35,7 @@ $(function () {
             branch_id: branchID,
             class_id: class_id,
             section_id: section_id,
+            academic_session_id: academic_session_id,
             today: today
         }, function (res) {
             if (res.code == 200) {
@@ -46,6 +47,7 @@ $(function () {
     });
     $("#byexamfilter").validate({
         rules: {
+            year: "required",
             class_id: "required",
             section_id: "required",
             exam_id: "required",
@@ -64,6 +66,9 @@ $(function () {
             var section_id = $("#sectionID").val();
             var exam_id = $("#examnames").val();
             var registerno = $("#registerno").val();
+            var year = $("#btwyears").val();
+            var semester_id = $("#semester_id").val();
+            var session_id = $("#session_id").val();
             console.log(class_name);
             // list mode            
             var formData = new FormData();
@@ -73,6 +78,9 @@ $(function () {
             formData.append('class_id', class_id);
             formData.append('section_id', section_id);
             formData.append('registerno', registerno);
+            formData.append('academic_year', year);
+            formData.append('semester_id', semester_id);
+            formData.append('session_id', session_id);
 
             $.ajax({
                 url: getbyresult,

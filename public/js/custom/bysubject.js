@@ -37,6 +37,7 @@ $(function () {
             branch_id: branchID,
             class_id: class_id,
             section_id: section_id,
+            academic_session_id: academic_session_id,
             today: today
         }, function (res) {
             if (res.code == 200) {
@@ -48,6 +49,7 @@ $(function () {
     });
     $("#bysubjectfilter").validate({
         rules: {
+            year: "required",
             class_id: "required",
             section_id: "required",
             examnames: "required"
@@ -58,24 +60,36 @@ $(function () {
         var byclass = $("#bysubjectfilter").valid();
         if (byclass === true) {
             $("#overlay").fadeIn(300);
+            var year = $("#btwyears").val();
+            var semester_id = $("#semester_id").val();
+            var session_id = $("#session_id").val();
             var class_id = $("#changeClassName").val();
             var section_id = $("#sectionID").val();
             var exam_id = $("#examnames").val();
             // list mode
-            $.post(getbySubject, { token: token, branch_id: branchID, exam_id: exam_id, class_id: class_id, section_id: section_id }, function (response) {
+            $.post(getbySubject, {
+                token: token,
+                branch_id: branchID,
+                exam_id: exam_id,
+                class_id: class_id,
+                section_id: section_id,
+                semester_id: semester_id,
+                session_id: session_id,
+                academic_year: year
+            }, function (response) {
                 if (response.code == 200) {
                     if (response.data.grade_list_master.length > 0) {
                         var datasetnew = response.data;
                         bysubjectdetails_class(datasetnew);
-                        $("#bysubject_body").show("slow");
-
                         $("#overlay").fadeOut(300);
+                        $("#bysubject_body").show("slow");
                     } else {
                         $("#overlay").fadeOut(300);
                         toastr.info('No records are available');
                     }
                 } else {
                     toastr.error(data.message);
+                    $('#bysubject_body').hide();
                 }
 
             });

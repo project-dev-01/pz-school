@@ -525,6 +525,7 @@ class AuthController extends Controller
         session()->pull('school_name');
         session()->pull('school_logo');
         session()->pull('all_child');
+        session()->pull('academic_session_id');
         $req->session()->flush();
     }
     // set session common
@@ -546,6 +547,8 @@ class AuthController extends Controller
         $req->session()->put('school_name_url', $string);
         // greeting session 
         $req->session()->put('greetting_id', 1);
+        // set academic session id
+        $req->session()->put('academic_session_id', 5);
         // dd($userDetails['data']['StudentID'][0]['id']);
         if (isset($userDetails['data']['StudentID'])) {
             $req->session()->put('student_id', $userDetails['data']['StudentID'][0]['id']);

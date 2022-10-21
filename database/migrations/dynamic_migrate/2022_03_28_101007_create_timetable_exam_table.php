@@ -29,6 +29,7 @@ class CreateTimetableExamTable extends Migration
             $table->string('distributor')->nullable();
             $table->string('distributor_id')->nullable();
             $table->date('exam_date');
+            $table->integer('academic_session_id')->default('0');
             $table->timestamps();
         });
     }
