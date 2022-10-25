@@ -2,6 +2,13 @@
     .table td {
         border-top: none;
     }
+
+    @media screen and (min-device-width: 280px) and (max-device-width: 653px) {
+        .eventpopup {
+            margin: 0px -30px 0px -27px;
+        }
+
+    }
 </style>
 <!-- Center modal content -->
 <div class="modal fade viewEvent" id="viewEvent" tabindex="-1" role="dialog" aria-hidden="true">
@@ -14,7 +21,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col">
-                        <div class="card-box" style="background-color: #8adfee14;">
+                        <div class="card-box eventpopup" style="background-color: #8adfee14;">
                             <div class="table-responsive">
                                 <table class="table mb-0">
                                     <tr>

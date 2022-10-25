@@ -19,15 +19,15 @@
     <link href="{{ asset('public/css/app-dark.min.css') }}" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
     <!-- icons -->
     <link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom/login.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/custom/student_login.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
 </head>
 
 
 <body class="loading auth-fluid-pages pb-0">
     <div class="auth-fluid">
-        <div class="col-md-6 teacherlogin" style="background: url(../public/images/bg-auth-student.jpg);">
-            <div class="auth-fluid-right text-center">
+        <div class="col-md-6">
+            <div class="auth-fluid-right text-center studentlogin">
                 <div class="">
                     <!--Auth fluid left content -->
                     <div class="auth-user-testimonial bg">

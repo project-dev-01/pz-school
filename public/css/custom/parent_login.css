@@ -1,0 +1,206 @@
+.auth-fluid .auth-fluid-form-box {
+    max-width: 100%;
+    border-radius: 0;
+    z-index: 2;
+    background-color: #fff;
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+}
+
+.auth-fluid .auth-fluid-right {
+    padding: 0px;
+    flex: 1;
+    position: relative;
+    color: #fff;
+    background-color: rgba(0, 0, 0, .3);
+    padding: 6rem 3rem;
+}
+
+.col-md-6 {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.card-body {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.bg {
+    backdrop-filter: blur(10px);
+    height: 203px;
+    bottom: 0px;
+    padding: 50px 30px 10px 25px;
+    box-sizing: border-box;
+    background:
+        linear-gradient(54deg, transparent 0%, transparent 70%, #65B4BA 100%),
+        linear-gradient(268deg, transparent 0%, transparent 70%, #D4C224 112%, transparent 11%),
+        linear-gradient(200deg, transparent 0%, transparent 70%, #212166 90%);
+}
+
+.parentlogin {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: row;
+  align-items: stretch;
+  background: url(../../images/bg-auth-parent.jpg);
+  background-size: cover;
+}
+.text {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 55px;
+    letter-spacing: -0.02em;
+    color: #F8FAFC;
+}
+
+.welcomeback {
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 48px;
+    letter-spacing: -0.02em;
+    color: #343556;
+    padding-top: 40px;
+}
+
+.smk {
+    height: 72px;
+    background: #D2EDEF;
+    font-family: 'Open Sans';
+    font-size: 14px;
+    text-align: left;
+    color: #16191D;
+    width: 100%;
+    padding-left: 10px;
+}
+
+.login-email {
+    box-sizing: border-box;
+    border: 1px solid #D3D8DE;
+    border-radius: 8px;
+}
+
+.sign {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #6D7C92;
+}
+
+.forget {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #4F8D91;
+}
+
+.signin {
+    height: 50px;
+    background: #6FC6CC;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    color: #F8FAFC;
+}
+
+.footer {
+    bottom: 15px;
+    padding: 0px 0px 0px 25px;
+    left: 100px;
+    text-align: left;
+    position: absolute;
+    right: 0;
+    background-color: transparent;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    color: #6D7C92;
+}
+
+.welcomeback {
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 48px;
+    letter-spacing: -0.02em;
+    color: #343556;
+    padding-top: 40px;
+}
+
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 665px) {
+    .auth-fluid .auth-fluid-form-box {
+        padding: 1px;
+    }
+
+    .forget {
+        padding: 0px;
+    }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 634px) {
+    .auth-fluid .auth-fluid-form-box {
+        padding: 1px;
+    }
+
+    .forget {
+        padding: 0px;
+    }
+
+    .card-body {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}
+
+@media only screen and (min-device-width: 280px) and (max-device-width: 653px) {
+    .auth-fluid .auth-fluid-form-box {
+        padding: 1px;
+    }
+
+    .forget {
+        padding: 0px;
+    }
+
+    .card-body {
+        margin-left: -14px;
+        margin-right: 0px;
+    }
+}
+
+@media only screen and (min-device-width: 280px) and (max-device-width: 653px) {
+    .auth-fluid .auth-fluid-form-box {
+        padding: 0px;
+    }
+}
+
+@media only screen and (min-device-width: 820px) and (max-device-width: 1180px) {
+    .col {
+        max-width: 100%;
+    }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    .col {
+        max-width: 100%;
+    }
+}
+
+@media only screen and (min-device-width: 280px) and (max-device-width: 653px) {
+    .col {
+        max-width: 100%;
+    }
+}
