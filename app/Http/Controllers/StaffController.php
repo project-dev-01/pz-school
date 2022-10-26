@@ -1358,6 +1358,7 @@ class StaffController extends Controller
             'section_id' => $request->section_id,
             'semester_id' => $request->semester_id,
             'session_id' => $request->session_id,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
 
         // dd($data);
@@ -1608,7 +1609,6 @@ class StaffController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
-        // dd($sem);
         return view('staff.classroom.management', [
             'teacher_class' => $response['data'],
             'semester' => $semester['data'],

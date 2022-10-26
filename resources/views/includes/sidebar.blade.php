@@ -469,6 +469,13 @@
                         </ul>
                     </div>
                 </li>
+                            
+                <li>
+                    <a href="{{ route('admin.attendance.employee_entry')}}" class="nav-link {{ (request()->is('admin/attendance/employee_entry')) ? 'active' : '' }}">
+                        <i class="fas fa-user-clock"></i>
+                        <span> Employee Attendance </span>
+                    </a>
+                </li>
                 <li>
                     <a href="#sidebarAttendance" data-toggle="collapse">
                         <!--<i class="fas fa-chalkboard-teacher"></i>-->
@@ -483,7 +490,7 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span> Attendance </span>
+                        <span> Attendance Report</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarAttendance">
@@ -494,13 +501,13 @@
                                 </a>
                             </li> -->
                             <li>
-                                <a href="{{ route('admin.attendance.employee_entry')}}" class="nav-link {{ (request()->is('admin/attendance/employee_entry')) ? 'active' : '' }}">
-                                    <span> Employee </span>
+                                <a href="{{ route('admin.attendance.student_report')}}" class="nav-link {{ (request()->is('admin/attendance/student_report')) ? 'active' : '' }}">
+                                    <span> Student </span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.attendance.employee_report')}}" class="nav-link {{ (request()->is('admin/attendance/employee/report')) ? 'active' : '' }}">
-                                    <span> Employee Report</span>
+                                    <span> Employee</span>
                                 </a>
                             </li>
                             <!-- <li>

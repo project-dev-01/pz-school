@@ -378,7 +378,6 @@ class AuthController extends BaseController
 
             $ip = $request->ip();
             $ch = $this->get_client_ip();
-            dd($ch);
             $currentlocation = Location::get($ip);
             $location = json_encode($currentlocation);
 

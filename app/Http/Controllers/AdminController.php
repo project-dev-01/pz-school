@@ -13,6 +13,7 @@ use Excel;
 use DateTime;
 use DateTimeZone;
 use App\Exports\StaffAttendanceExport;
+Use App\Exports\StudentAttendanceExport;
 
 class AdminController extends Controller
 {
@@ -5670,4 +5671,25 @@ class AdminController extends Controller
         return $response;
     }
     // end Global Setting
+    public function studentAttendanceReport()
+    {
+        
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        return view('admin.attendance.student_report', [
+            'class' => $getclass['data'],
+            'semester' => $semester['data'],
+            'session' => $session['data'],
+            'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+            'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+        ]);
+    }
+
+    public function studentAttendanceExcel(Request $request)
+    {
+        // dd($request);
+        return Excel::download(new StudentAttendanceExport(1,$request->class,$request->section,$request->subject,$request->semester,$request->session,$request->date), 'Student_Attendance.xlsx');
+    }
 }

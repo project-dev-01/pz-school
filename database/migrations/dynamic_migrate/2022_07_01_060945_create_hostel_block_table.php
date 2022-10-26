@@ -18,7 +18,7 @@ class CreateHostelBlockTable extends Migration
             $table->string('block_name');
             $table->string('block_warden');
             $table->integer('total_floor');
-            $table->integer('block_leader')->nullable();
+            $table->string('block_leader')->nullable();
             $table->timestamps();
         });
     }
