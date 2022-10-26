@@ -2847,7 +2847,10 @@ class ApiControllerOne extends BaseController
                     $student_id = (isset($value['student_id']) ? $value['student_id'] : 0);
                     $register_no = (isset($value['register_no']) ? $value['register_no'] : 0);
                     $roll_no = (isset($value['roll_no']) ? $value['roll_no'] : 0);
-
+                    // here update studentID as promote
+                    $Connection->table('enrolls')
+                        ->where('student_id', '=', $student_id)
+                        ->update(['active_status' => 1]);
                     $dataPromote = array(
                         'student_id' => $student_id,
                         'academic_session_id' => $request->promote_year,
@@ -2855,6 +2858,7 @@ class ApiControllerOne extends BaseController
                         'section_id' => $request->promote_section_id,
                         'semester_id' => $request->promote_semester_id,
                         'session_id' => $request->promote_session_id,
+                        'active_status' => 0,
                         'roll' => $roll_no
                     );
                     $row = $Connection->table('enrolls')

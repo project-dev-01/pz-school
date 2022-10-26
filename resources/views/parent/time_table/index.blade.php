@@ -54,7 +54,7 @@
                     <li class="nav-item">
                         <h4 class="navv">
                             @if($timetable>0)
-                            Class {{ $details['class']['class_name'] }} (Section: {{ $details['section']['section_name'] }})
+                            Class {{ $details['class']['class_name'] }} (Section: {{ $details['section']['section_name'] }}) (Semester: {{ $details['semester']['semester_name'] }}) (Session: {{ $details['session']['session_name'] }})
                             @endif
                         </h4>
 

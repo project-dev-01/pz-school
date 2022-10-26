@@ -204,8 +204,10 @@ class ParentController extends Controller
     }
     public function reportCard()
     {
-        $datas = array();
-        $allexams = Helper::PostMethod(config('constants.api.all_exams_list'), $datas);
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $allexams = Helper::PostMethod(config('constants.api.all_exams_list'), $data);
         return view(
             'parent.report_card.index',
             [
@@ -239,7 +241,7 @@ class ParentController extends Controller
             'children_id' => $children_id,
             'academic_session_id' => session()->get('academic_session_id')
         ];
-
+        // dd($data);
         $days = array(
             'sunday',
             'monday',
@@ -255,10 +257,10 @@ class ParentController extends Controller
             return view(
                 'parent.time_table.index',
                 [
-                    'timetable' => $timetable['data']['timetable'],
-                    'details' => $timetable['data']['details'],
+                    'timetable' => isset($timetable['data']['timetable']) ? $timetable['data']['timetable'] : 0,
+                    'details' => isset($timetable['data']['details']) ? $timetable['data']['details'] : 0,
                     'days' => $days,
-                    'max' => $timetable['data']['max']
+                    'max' => isset($timetable['data']['max']) ? $timetable['data']['max'] : 0
 
                 ]
             );
@@ -536,7 +538,7 @@ class ParentController extends Controller
         if ($homework['code'] == "200") {
             $response = "";
             if ($homework['data']) {
-                foreach ($homework['data']['homeworks']  as $key=>$work) {
+                foreach ($homework['data']['homeworks']  as $key => $work) {
                     if ($work['status'] == 1) {
                         $status = "Completed";
                         $top = "( Completed )";
@@ -560,19 +562,19 @@ class ParentController extends Controller
                     } else {
                         $file = '';
                     }
-                    $response .= '<form class="submitHomeworkForm" id="form'.$key.'" method="post"   enctype="multipart/form-data" autocomplete="off">
+                    $response .= '<form class="submitHomeworkForm" id="form' . $key . '" method="post"   enctype="multipart/form-data" autocomplete="off">
                     ' . csrf_field() . '
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <p>
                                 <div>
-                                    <a class="list-group-item list-group-item-info btn-block btn-lg" data-toggle="collapse" href="#hw-'.$key.'" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <a class="list-group-item list-group-item-info btn-block btn-lg" data-toggle="collapse" href="#hw-' . $key . '" role="button" aria-expanded="false" aria-controls="collapseExample">
                                         <i class="fas fa-caret-square-down"></i>' . $work['subject_name'] . ' - ' . date('j F Y', strtotime($work['date_of_homework'])) . ' ' . $top . '
                                     </a>
                                 </div>
                                 </p>
-                                <div class="collapse" id="hw-'.$key.'">
+                                <div class="collapse" id="hw-' . $key . '">
                                     <div class="card card-body">
                                         <div class="row">
                                             <div class="col-md-4">
@@ -697,7 +699,7 @@ class ParentController extends Controller
             ]
         );
     }
-    
+
     public function getEventList(Request $request)
     {
         $data = [

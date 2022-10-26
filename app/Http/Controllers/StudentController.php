@@ -64,6 +64,7 @@ class StudentController extends Controller
         $student = session()->get('ref_user_id');
         $data = [
             'student_id' => $student,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
         $homework = Helper::PostMethod(config('constants.api.homework_student'), $data);
         return view(
@@ -108,13 +109,14 @@ class StudentController extends Controller
             'status' => $request->status,
             'subject' => $request->subject,
             'student_id' => $student,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
         $homework = Helper::PostMethod(config('constants.api.homework_student_filter'), $data);
         // dd($homework);
         if ($homework['code'] == "200") {
             $response = "";
             if ($homework['data']) {
-                foreach ($homework['data']['homeworks'] as $key=>$work) {
+                foreach ($homework['data']['homeworks'] as $key => $work) {
                     $evaluation_date = (isset($work['evaluation_date'])) ? date('F j , Y', strtotime($work['evaluation_date'])) : "-";
                     if ($work['status'] == 1) {
                         $status = "Completed";
@@ -151,19 +153,19 @@ class StudentController extends Controller
                             </button>
                         </div>';
                     }
-                    $response .= '<form class="submitHomeworkForm" id="form'.$key.'" action="' . route('student.homework.submit') . '" method="post"   enctype="multipart/form-data" autocomplete="off">
+                    $response .= '<form class="submitHomeworkForm" id="form' . $key . '" action="' . route('student.homework.submit') . '" method="post"   enctype="multipart/form-data" autocomplete="off">
                     ' . csrf_field() . '
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <p>
                                 <div>
-                                    <a class="list-group-item list-group-item-info btn-block btn-lg" data-toggle="collapse" href="#hw-'.$key.'" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <a class="list-group-item list-group-item-info btn-block btn-lg" data-toggle="collapse" href="#hw-' . $key . '" role="button" aria-expanded="false" aria-controls="collapseExample">
                                         <i class="fas fa-caret-square-down"></i>' . $work['subject_name'] . ' - ' . date('j F Y', strtotime($work['date_of_homework'])) . ' ' . $top . '
                                     </a>
                                 </div>
                                 </p>
-                                <div class="collapse" id="hw-'.$key.'">
+                                <div class="collapse" id="hw-' . $key . '">
                                     <div class="card card-body">
                                         <div class="row">
                                             <div class="col-md-4">
@@ -327,9 +329,10 @@ class StudentController extends Controller
     // report card
     public function reportCard()
     {
-        $datas = array();
-        $allexams = Helper::PostMethod(config('constants.api.all_exams_list'), $datas);
-        //dd($allexams);
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $allexams = Helper::PostMethod(config('constants.api.all_exams_list'), $data);
         return view(
             'student.report_card.index',
             [
@@ -565,7 +568,8 @@ class StudentController extends Controller
     public function analytic()
     {
         $data = [
-            'student_id' => session()->get('ref_user_id')
+            'student_id' => session()->get('ref_user_id'),
+            'academic_session_id' => session()->get('academic_session_id')
         ];
         $get_student_by_all_subjects = Helper::PostMethod(config('constants.api.get_student_by_all_subjects'), $data);
         $get_class_section_by_student = Helper::PostMethod(config('constants.api.get_class_section_by_student'), $data);
@@ -585,7 +589,8 @@ class StudentController extends Controller
 
         // dd($student);
         $data = [
-            'student_id' => session()->get('ref_user_id')
+            'student_id' => session()->get('ref_user_id'),
+            'academic_session_id' => session()->get('academic_session_id')
         ];
 
         $days = array(
@@ -603,10 +608,10 @@ class StudentController extends Controller
             return view(
                 'student.timetable.index',
                 [
-                    'timetable' => $timetable['data']['timetable'],
-                    'details' => $timetable['data']['details'],
+                    'timetable' => isset($timetable['data']['timetable']) ? $timetable['data']['timetable'] : 0,
+                    'details' => isset($timetable['data']['details']) ? $timetable['data']['details'] : 0,
                     'days' => $days,
-                    'max' => $timetable['data']['max']
+                    'max' => isset($timetable['data']['max']) ? $timetable['data']['max'] : 0
 
                 ]
             );
@@ -619,7 +624,7 @@ class StudentController extends Controller
             );
         }
     }
-    
+
     public function getEventList(Request $request)
     {
         $data = [

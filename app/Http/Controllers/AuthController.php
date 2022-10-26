@@ -548,7 +548,7 @@ class AuthController extends Controller
         // greeting session 
         $req->session()->put('greetting_id', 1);
         // set academic session id
-        $req->session()->put('academic_session_id', 5);
+        $req->session()->put('academic_session_id', $userDetails['data']['academicSession']['year_id']);
         // dd($userDetails['data']['StudentID'][0]['id']);
         if (isset($userDetails['data']['StudentID'])) {
             $req->session()->put('student_id', $userDetails['data']['StudentID'][0]['id']);

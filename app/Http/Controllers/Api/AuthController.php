@@ -30,14 +30,10 @@ class AuthController extends BaseController
             'email' => 'required|email',
             'password' => 'required|string|min:6|max:50'
         ]);
-
-
         //Send failed response if request is not valid
         if ($validator->fails()) {
             return $this->send422Error('Validation error.', ['error' => $validator->messages()]);
         }
-
-
         //Request is validated
         //Crean token
         try {
@@ -68,7 +64,18 @@ class AuthController extends BaseController
                     ->get();
                 $success['StudentID'] = $StudentID;
             }
-
+            if (isset($user->subsDetails->id)) {
+                $branch_id = $user->subsDetails->id;
+                $Connection = $this->createNewConnection($branch_id);
+                $academicSession = $Connection->table('global_settings')
+                    ->select(
+                        'year_id',
+                        'footer_text',
+                        'timezone'
+                    )
+                    ->first();
+                $success['academicSession'] = $academicSession;
+            }
             //Token created, return with success response and jwt token
             return $this->successResponse($success, 'User signed in successfully');
         } else {
@@ -248,7 +255,7 @@ class AuthController extends BaseController
             $check_in = NULL;
             $hours = NULL;
             $id = $request->id;
-            
+
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             $date = Carbon::now()->format('Y-m-d');
@@ -257,7 +264,7 @@ class AuthController extends BaseController
 
 
                 $validate = $conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id], ['session_id', '=', $request->session_id]])->first();
-                
+
 
                 $session = $conn->table('session')->where('id', '=', $request->session_id)->first();
                 if ($validate->check_in && !$validate->check_out) {
@@ -304,7 +311,7 @@ class AuthController extends BaseController
                 }
 
 
-                if($validate->check_out) {
+                if ($validate->check_out) {
                     $session_end = $session->time_to;
                     if ($validate->check_out > $session_end) {
 
@@ -315,7 +322,7 @@ class AuthController extends BaseController
                 } else {
                     $success['check_out_color'] = "";
                 }
-                if($validate->check_in) {
+                if ($validate->check_in) {
                     $session_start = $session->time_from;
                     if ($validate->check_in > $session_start) {
 
@@ -326,9 +333,6 @@ class AuthController extends BaseController
                 } else {
                     $success['check_in_color'] = "";
                 }
-                
-
-                    
             } else {
                 $start = $conn->table('session')->where('id', '=', $request->session_id)->first();
                 $session_start = $start->time_from;
@@ -416,7 +420,6 @@ class AuthController extends BaseController
                     $success['check_out_time'] = $check_out;
 
                     $check_out_location = $location;
-                    
                 }
 
                 $query = $conn->table('staff_attendances')->where('id', $validate->id)->update([
@@ -493,6 +496,5 @@ class AuthController extends BaseController
             $ipaddress = 'UNKNOWN';
 
         return $ipaddress;
-
     }
 }

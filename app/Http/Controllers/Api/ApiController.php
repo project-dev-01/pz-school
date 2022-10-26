@@ -795,7 +795,7 @@ class ApiController extends BaseController
                 ->join('sections as s', 'ta.section_id', '=', 's.id')
                 ->join('staffs as st', 'ta.teacher_id', '=', 'st.id')
                 ->join('classes as c', 'ta.class_id', '=', 'c.id')
-                ->where('ta.academic_session_id',$request->academic_session_id)
+                ->where('ta.academic_session_id', $request->academic_session_id)
                 ->get();
             return $this->successResponse($success, 'Teacher Allocation record fetch successfully');
         }
@@ -1315,7 +1315,7 @@ class ApiController extends BaseController
                 ->join('staffs as st', 'sa.teacher_id', '=', 'st.id')
                 ->join('subjects as sb', 'sa.subject_id', '=', 'sb.id')
                 ->join('classes as c', 'sa.class_id', '=', 'c.id')
-                ->where('sa.academic_session_id',$request->academic_session_id)
+                ->where('sa.academic_session_id', $request->academic_session_id)
                 ->get();
             return $this->successResponse($success, 'Teacher record fetch successfully');
         }
@@ -4509,7 +4509,8 @@ class ApiController extends BaseController
         $validator = \Validator::make($request->all(), [
             'branch_id' => 'required',
             'token' => 'required',
-            'student_id' => 'required'
+            'student_id' => 'required',
+            'academic_session_id' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -4517,8 +4518,6 @@ class ApiController extends BaseController
         } else {
             // create new connection
             $con = $this->createNewConnection($request->branch_id);
-            // get data
-            // $student = $con->table('students')->join('enrolls', 'students.id', '=', 'students.id')->where('students.id', $request->student_id)->first();
             $student = $con->table('enrolls as en')
                 ->select(
                     'en.student_id',
@@ -4529,52 +4528,47 @@ class ApiController extends BaseController
                 )
                 ->join('students as st', 'st.id', '=', 'en.student_id')
                 ->where([
-                    ['en.student_id', '=', $request->student_id]
+                    ['en.student_id', '=', $request->student_id],
+                    ['en.academic_session_id', '=', $request->academic_session_id],
+                    // get active session
+                    ['en.active_status', '=', '0']
                 ])
                 ->groupBy('en.student_id')
                 ->first();
-
-            // dd($student->class_id);
-            // $today = date("Y-m-d");
-            // $semester = $con->table('semester')->where('start_date', '<=', $today)->where('end_date', '>=', $today)->first();
-            // dd($semester);
-            // if (isset($sem)) {
-            //     $semester_id = $semester->id;
-            // } else {
-            //     $semester_id = 0;
-            // }
-
-            //    dd($semester_id);
-
-            $Timetable = $con->table('timetable_class')->select(
-                'timetable_class.*',
-                DB::raw('CONCAT(staffs.first_name, " ", staffs.last_name) as teacher_name'),
-                'subjects.name as subject_name'
-            )
-                ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
-                ->where('timetable_class.class_id', $student->class_id)
-                ->where('timetable_class.section_id', $student->section_id)
-                ->where('timetable_class.session_id', $student->session_id)
-                ->where('timetable_class.semester_id', $student->semester_id)
-                ->orderBy('time_start', 'asc')
-                ->orderBy('time_end', 'asc')
-                ->get()->toArray();
+            $output = [];
+            if (isset($student)) {
+                $Timetable = $con->table('timetable_class')->select(
+                    'timetable_class.*',
+                    DB::raw('CONCAT(staffs.first_name, " ", staffs.last_name) as teacher_name'),
+                    'subjects.name as subject_name'
+                )
+                    ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
+                    ->where('timetable_class.class_id', $student->class_id)
+                    ->where('timetable_class.section_id', $student->section_id)
+                    ->where('timetable_class.session_id', $student->session_id)
+                    ->where('timetable_class.semester_id', $student->semester_id)
+                    ->where('timetable_class.academic_session_id', $request->academic_session_id)
+                    ->orderBy('timetable_class.time_start', 'asc')
+                    ->orderBy('timetable_class.time_end', 'asc')
+                    ->get()->toArray();
 
 
-            if ($Timetable) {
-                $mapfunction = function ($s) {
-                    return $s->day;
-                };
-                $count = array_count_values(array_map($mapfunction, $Timetable));
-                $max = max($count);
+                if ($Timetable) {
+                    $mapfunction = function ($s) {
+                        return $s->day;
+                    };
+                    $count = array_count_values(array_map($mapfunction, $Timetable));
+                    $max = max($count);
 
-                $output['timetable'] = $Timetable;
+                    $output['timetable'] = $Timetable;
 
 
-                $output['max'] = $max;
-                $output['details']['class'] = $con->table('classes')->select('classes.id as class_id', 'classes.name as class_name')->where('id', $student->class_id)->first();
-                $output['details']['section'] = $con->table('sections')->select('sections.id as section_id', 'sections.name as section_name')->where('id', $student->section_id)->first();
-                // return $output;
+                    $output['max'] = $max;
+                    $output['details']['class'] = $con->table('classes')->select('classes.id as class_id', 'classes.name as class_name')->where('id', $student->class_id)->first();
+                    $output['details']['section'] = $con->table('sections')->select('sections.id as section_id', 'sections.name as section_name')->where('id', $student->section_id)->first();
+                    $output['details']['semester'] = $con->table('semester')->select('semester.id as semester_id', 'semester.name as semester_name')->where('id', $student->semester_id)->first();
+                    $output['details']['session'] = $con->table('session')->select('session.id as session_id', 'session.name as session_name')->where('id', $student->session_id)->first();
+                }                // return $output;
                 return $this->successResponse($output, 'Timetable record fetch successfully');
             } else {
                 return $this->send404Error('No Data Found.', ['error' => 'No Data Found']);
@@ -4600,17 +4594,6 @@ class ApiController extends BaseController
         } else {
             // create new connection
             $con = $this->createNewConnection($request->branch_id);
-            // get data
-            // $student = $con->table('students')->join('enrolls', 'students.id', '=', 'students.id')->where('enrolls.student_id', $request->children_id)->first();
-
-            // $today = date("Y-m-d");
-            // $semester = $con->table('semester')->where('start_date', '<=', $today)->where('end_date', '>=', $today)->first();
-
-            // if (isset($sem)) {
-            //     $semester_id = $semester->id;
-            // } else {
-            //     $semester_id = 0;
-            // }
             $student = $con->table('enrolls as en')
                 ->select(
                     'en.student_id',
@@ -4621,39 +4604,46 @@ class ApiController extends BaseController
                 )
                 ->join('students as st', 'st.id', '=', 'en.student_id')
                 ->where([
-                    ['en.student_id', '=', $request->children_id]
+                    ['en.student_id', '=', $request->children_id],
+                    ['en.academic_session_id', '=', $request->academic_session_id],
+                    // get active session
+                    ['en.active_status', '=', '0']
                 ])
                 ->groupBy('en.student_id')
                 ->first();
+            $output = [];
+            if (isset($student)) {
+                $Timetable = $con->table('timetable_class')->select(
+                    'timetable_class.*',
+                    DB::raw('CONCAT(staffs.first_name, " ", staffs.last_name) as teacher_name'),
+                    'subjects.name as subject_name'
+                )
+                    ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')
+                    ->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
+                    ->where('timetable_class.class_id', $student->class_id)
+                    ->where('timetable_class.section_id', $student->section_id)
+                    ->where('timetable_class.session_id', $student->session_id)
+                    ->where('timetable_class.semester_id', $student->semester_id)
+                    ->where('timetable_class.academic_session_id', $request->academic_session_id)
+                    ->orderBy('timetable_class.time_start', 'asc')
+                    ->orderBy('timetable_class.time_end', 'asc')
+                    ->get()->toArray();
 
-            $Timetable = $con->table('timetable_class')->select(
-                'timetable_class.*',
-                DB::raw('CONCAT(staffs.first_name, " ", staffs.last_name) as teacher_name'),
-                'subjects.name as subject_name'
-            )
-                ->leftJoin('staffs', 'timetable_class.teacher_id', '=', 'staffs.id')
-                ->leftJoin('subjects', 'timetable_class.subject_id', '=', 'subjects.id')
-                ->where('timetable_class.class_id', $student->class_id)
-                ->where('timetable_class.section_id', $student->section_id)
-                ->where('timetable_class.session_id', $student->session_id)
-                ->where('timetable_class.semester_id', $student->semester_id)
-                ->where('timetable_class.academic_session_id', $request->academic_session_id)
-                ->orderBy('time_start', 'asc')
-                ->orderBy('time_end', 'asc')
-                ->get()->toArray();
+                // return $Timetable;
+                if ($Timetable) {
+                    $mapfunction = function ($s) {
+                        return $s->day;
+                    };
+                    $count = array_count_values(array_map($mapfunction, $Timetable));
+                    $max = max($count);
 
-            // return $Timetable;
-            if ($Timetable) {
-                $mapfunction = function ($s) {
-                    return $s->day;
-                };
-                $count = array_count_values(array_map($mapfunction, $Timetable));
-                $max = max($count);
-
-                $output['timetable'] = $Timetable;
-                $output['max'] = $max;
-                $output['details']['class'] = $con->table('classes')->select('classes.id as class_id', 'classes.name as class_name')->where('id', $student->class_id)->first();
-                $output['details']['section'] = $con->table('sections')->select('sections.id as section_id', 'sections.name as section_name')->where('id', $student->section_id)->first();
+                    $output['timetable'] = $Timetable;
+                    $output['max'] = $max;
+                    $output['details']['class'] = $con->table('classes')->select('classes.id as class_id', 'classes.name as class_name')->where('id', $student->class_id)->first();
+                    $output['details']['section'] = $con->table('sections')->select('sections.id as section_id', 'sections.name as section_name')->where('id', $student->section_id)->first();
+                    $output['details']['semester'] = $con->table('semester')->select('semester.id as semester_id', 'semester.name as semester_name')->where('id', $student->semester_id)->first();
+                    $output['details']['session'] = $con->table('session')->select('session.id as session_id', 'session.name as session_name')->where('id', $student->session_id)->first();
+                }
 
                 return $this->successResponse($output, 'Timetable record fetch successfully');
             } else {
@@ -10038,6 +10028,7 @@ class ApiController extends BaseController
 
                 $enroll = $conn->table('enrolls')->insert([
                     'student_id' => $studentId,
+                    'academic_session_id' => $request->year,
                     'class_id' => $request->class_id,
                     'section_id' => $request->section_id,
                     'roll' => $request->roll_no,

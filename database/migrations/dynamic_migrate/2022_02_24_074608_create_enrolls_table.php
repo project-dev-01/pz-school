@@ -22,6 +22,7 @@ class CreateEnrollsTable extends Migration
             $table->integer('academic_session_id')->default('0');
             $table->integer('semester_id')->default('0');
             $table->integer('session_id')->default('0');
+            $table->integer('active_status')->default('0');
             $table->timestamps();
         });
     }
