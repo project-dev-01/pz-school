@@ -8,8 +8,8 @@ use App\Models\Task;
 use PhpParser\Node\Expr\FuncCall;
 use DataTables;
 use Excel;
-Use App\Exports\StaffAttendanceExport;
-Use App\Exports\StudentAttendanceExport;
+use App\Exports\StaffAttendanceExport;
+use App\Exports\StudentAttendanceExport;
 
 class TeacherController extends Controller
 {
@@ -430,7 +430,7 @@ class TeacherController extends Controller
         $data = [
             'teacher_id' => session()->get('ref_user_id')
         ];
-        
+
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
@@ -450,13 +450,17 @@ class TeacherController extends Controller
             'teacher_id' => session()->get('ref_user_id')
         ];
         $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
-        $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
 
         return view(
             'teacher.exam_results.byclass',
             [
                 'classnames' => $getclass['data'],
-                'allGrades' => $allGrades['data']
+                'semester' => $semester['data'],
+                'session' => $session['data'],
+                'academic_year_list' => $academic_year_list['data']
             ]
         );
     }
@@ -467,12 +471,16 @@ class TeacherController extends Controller
             'teacher_id' => session()->get('ref_user_id')
         ];
         $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
-        $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         return view(
             'teacher.exam_results.bysubject',
             [
                 'classnames' => $getclass['data'],
-                'allGrades' => $allGrades['data']
+                'semester' => $semester['data'],
+                'session' => $session['data'],
+                'academic_year_list' => $academic_year_list['data']
             ]
         );
     }
@@ -483,12 +491,16 @@ class TeacherController extends Controller
             'teacher_id' => session()->get('ref_user_id')
         ];
         $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
-        $allGrades = Helper::GetMethod(config('constants.api.tot_grade_master'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         return view(
             'teacher.exam_results.bystudent',
             [
                 'classnames' => $getclass['data'],
-                'allGrades' => $allGrades['data']
+                'semester' => $semester['data'],
+                'session' => $session['data'],
+                'academic_year_list' => $academic_year_list['data']
             ]
         );
     }
@@ -1031,13 +1043,13 @@ class TeacherController extends Controller
     public function staffAttendanceExcel(Request $request)
     {
         // dd($request);
-        return Excel::download(new StaffAttendanceExport(1,$request->employee,$request->session,$request->date,$request->department), 'Staff_Attendance.xlsx');
+        return Excel::download(new StaffAttendanceExport(1, $request->employee, $request->session, $request->date, $request->department), 'Staff_Attendance.xlsx');
     }
 
     public function studentAttendanceExcel(Request $request)
     {
         // dd($request);
-        return Excel::download(new StudentAttendanceExport(1,$request->class,$request->section,$request->subject,$request->semester,$request->session,$request->date), 'Student_Attendance.xlsx');
+        return Excel::download(new StudentAttendanceExport(1, $request->class, $request->section, $request->subject, $request->semester, $request->session, $request->date), 'Student_Attendance.xlsx');
     }
 
     public function studentList(Request $request)
@@ -1205,6 +1217,4 @@ class TeacherController extends Controller
         $timetable['session_id'] = $request->session_id;
         return $timetable;
     }
-
-    
 }
