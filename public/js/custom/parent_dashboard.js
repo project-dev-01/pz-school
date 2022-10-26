@@ -214,7 +214,6 @@ $(function () {
     // student leaves details
     $('#changelevReasons').on('change', function () {
         var Reasons = $("#changelevReasons").val();
-        console.log(Reasons);
         if (Reasons == 3) {
             $("#remarks_div").show();
         }
@@ -346,7 +345,7 @@ $(function () {
         console.log(id);
         console.log(document);
         console.log(reissue_file);
-
+        // return false;
         var formData = new FormData();
         formData.append('id', id);
         formData.append('document', document);

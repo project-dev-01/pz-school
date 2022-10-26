@@ -12399,7 +12399,6 @@ class ApiController extends BaseController
         $validator = \Validator::make($request->all(), [
             'branch_id' => 'required',
             'id' => 'required',
-            'document' => 'required',
             'file' => 'required',
             'file_extension' => 'required'
         ]);
@@ -12422,8 +12421,7 @@ class ApiController extends BaseController
                 $suc = file_put_contents($file, $base64);
                 // return $fileName;
                 $path = '/public/teacher/student-leaves/';
-
-                if ($request->document) {
+                if (isset($request->document)) {
                     if (\File::exists(base_path($path . $request->document))) {
                         \File::delete(base_path($path . $request->document));
                     }
@@ -12432,6 +12430,55 @@ class ApiController extends BaseController
                 $fileName = $request->document;
             }
             $query = $staffConn->table('student_leaves')->where('id', $request->id)->update([
+                'document' => $fileName,
+                'status' => "Pending",
+                'updated_at' => date("Y-m-d H:i:s")
+            ]);
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Document submitted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+    // reupload certificates
+    public function reuploadFileStaff(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'id' => 'required',
+            'file' => 'required',
+            'file_extension' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // insert data
+            if (isset($request->file)) {
+                $now = now();
+                $name = strtotime($now);
+                $extension = $request->file_extension;
+                $fileName = $name . "." . $extension;
+
+                $base64 = base64_decode($request->file);
+                $file = base_path() . '/public/admin-documents/leaves/' . $fileName;
+                $suc = file_put_contents($file, $base64);
+                // return $fileName;
+                $path = '/public/admin-documents/leaves/';
+                if (isset($request->document)) {
+                    if (\File::exists(base_path($path . $request->document))) {
+                        \File::delete(base_path($path . $request->document));
+                    }
+                }
+            } else {
+                $fileName = $request->document;
+            }
+            $query = $staffConn->table('staff_leaves')->where('id', $request->id)->update([
                 'document' => $fileName,
                 'status' => "Pending",
                 'updated_at' => date("Y-m-d H:i:s")

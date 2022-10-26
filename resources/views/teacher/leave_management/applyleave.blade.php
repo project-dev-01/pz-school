@@ -207,6 +207,7 @@
 @section('scripts')
 <script>
     var StaffLeaveList = "{{ route('teacher.leave_management.list') }}";
+    var reuploadFileUrl = "{{ route('teacher.reupload_file.add') }}";
 </script>
 <script src="{{ asset('public/js/custom/staff_apply_leave.js') }}"></script>
 @endsection

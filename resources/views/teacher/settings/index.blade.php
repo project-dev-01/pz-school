@@ -30,7 +30,13 @@
 
                 <div class="text-left mt-3">
                     <input type="file" name="admin_image" id="admin_image" style="opacity: 0;height:1px;display:none">
-                    <a href="javascript:void(0)" class="btn btn-primary btn-block" id="change_picture_btn"><b>Change picture</b></a>
+                    <ul class="nav nav-pills navtab-bg nav-justified">
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" class="nav-link active" id="change_picture_btn">
+                                Change picture
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <!-- <p class="text-muted">@webdesigner</p> -->
 

@@ -87,7 +87,7 @@ class TeacherController extends Controller
             ->addColumn('actions', function ($row) {
                 if ($row['status'] != "Approve") {
                     return '<div class="button-list">
-                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile"><i class="fe-edit"></i></a>
+                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">Upload</a>
             </div>';
                 } else {
                     return '-';
@@ -594,6 +594,7 @@ class TeacherController extends Controller
             'file' => $base64,
             'file_extension' => $extension,
             'created_by' => $created_by,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
 
         // dd($data);
@@ -609,6 +610,7 @@ class TeacherController extends Controller
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
             'subject_id' => $request->subject_id,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
 
         $homework = Helper::PostMethod(config('constants.api.homework_list'), $data);
@@ -950,7 +952,8 @@ class TeacherController extends Controller
             "semester_id" => $request->semester_id,
             "session_id" => $request->session_id,
             "grade_category" => $request->grade_category,
-            "exam_id" => $request->exam_id
+            "exam_id" => $request->exam_id,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
 
         $response = Helper::PostMethod(config('constants.api.add_student_marks'), $data);
@@ -999,6 +1002,29 @@ class TeacherController extends Controller
                 'session' => $session['data']
             ]
         );
+    }
+    // reupload file
+    public function reUploadLeaveFile(Request $request)
+    {
+        $file = $request->file('file');
+
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        } else {
+            $base64 = null;
+            $extension = null;
+        }
+        $data = [
+            'id' => $request->id,
+            'document' => $request->document,
+            'file' => $base64,
+            'file_extension' => $extension
+        ];
+        $response = Helper::PostMethod(config('constants.api.staff_leave_reupload_file'), $data);
+        return $response;
     }
     public function getEmployeeAttendanceList(Request $request)
     {
@@ -1144,6 +1170,7 @@ class TeacherController extends Controller
             'section_id' => $request->section_id,
             'semester_id' => $request->semester_id,
             'session_id' => $request->session_id,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
 
         // dd($data);

@@ -607,7 +607,7 @@
 <!-- end col-12 -->
 </div> <!-- end row -->
 
-<div class="row">
+<!-- <div class="row">
     <div class="col-lg-12">
         <div class="card">
             <ul class="nav nav-tabs">
@@ -620,12 +620,11 @@
             <div class="card-body">
                 <div class="mt-4 chartjs-chart">
                     <div id="chart-hor-stack-bar-chart" style="min-height: 365px;"></div>
-                    <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
                 </div>
-            </div> <!-- end card-body-->
-        </div> <!-- end card-->
-    </div> <!-- end col -->
-</div>
+            </div>
+        </div>
+    </div>
+</div> -->
 @include('teacher.dashboard.check_list')
 @include('teacher.dashboard.task')
 @include('teacher.dashboard.task-show')

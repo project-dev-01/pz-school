@@ -1538,7 +1538,7 @@ class StaffController extends Controller
             ->addColumn('actions', function ($row) {
                 if ($row['status'] != "Approve") {
                     return '<div class="button-list">
-                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile"><i class="fe-edit"></i></a>
+                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">Upload</a>
             </div>';
                 } else {
                     return '-';
@@ -1547,6 +1547,29 @@ class StaffController extends Controller
 
             ->rawColumns(['actions'])
             ->make(true);
+    }
+    // reupload file
+    public function reUploadLeaveFile(Request $request)
+    {
+        $file = $request->file('file');
+
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        } else {
+            $base64 = null;
+            $extension = null;
+        }
+        $data = [
+            'id' => $request->id,
+            'document' => $request->document,
+            'file' => $base64,
+            'file_extension' => $extension
+        ];
+        $response = Helper::PostMethod(config('constants.api.staff_leave_reupload_file'), $data);
+        return $response;
     }
     public function allleaves()
     {

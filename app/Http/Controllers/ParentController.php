@@ -119,11 +119,14 @@ class ParentController extends Controller
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
-                return '<div class="button-list">
-                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile"><i class="fe-edit"></i></a>
-                            </div>';
+                if ($row['status'] != "Approve") {
+                    return '<div class="button-list">
+                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">Upload</a>
+            </div>';
+                } else {
+                    return '-';
+                }
             })
-
             ->rawColumns(['actions'])
             ->make(true);
     }

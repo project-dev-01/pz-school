@@ -571,6 +571,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('leave_management/applyleave_list', [AdminController::class, 'getStaffLeaveList'])->name('admin.leave_management.apply_list');
         Route::get('leave_management/assign_leave_approval', [AdminController::class, 'assignLeaveApprover'])->name('admin.leave_management.assign_leave_approver');
         // Route::get('leave_management/get_all_staff_details', [AdminController::class, 'getAllStaffDetails'])->name('admin.leave_management.get_all_staff_details');
+        Route::post('leave_management/reupload_file', [AdminController::class, 'reUploadLeaveFile'])->name('admin.reupload_file.add');
 
         // Education routes
         Route::get('education/index', [AdminController::class, 'education'])->name('admin.education');
@@ -824,6 +825,7 @@ Route::group(['prefix' => 'staff'], function () {
         // all leaves
         Route::get('leave_management/allleaves', [StaffController::class, 'allleaves'])->name('staff.leave_management.allleaves');
         Route::get('leave_management/leave_approval_history_by_staff', [StaffController::class, 'getAllLeaveList'])->name('staff.leave_management.leave_approval_history_by_staff');
+        Route::post('leave_management/reupload_file', [StaffController::class, 'reUploadLeaveFile'])->name('staff.reupload_file.add');
 
         
         // class room management    
@@ -879,6 +881,7 @@ Route::group(['prefix' => 'teacher'], function () {
         // all leaves
         Route::get('leave_management/allleaves', [TeacherController::class, 'allleaves'])->name('teacher.leave_management.allleaves');
         Route::get('leave_management/leave_approval_history_by_staff', [TeacherController::class, 'getAllLeaveList'])->name('teacher.leave_management.leave_approval_history_by_staff');
+        Route::post('leave_management/reupload_file', [TeacherController::class, 'reUploadLeaveFile'])->name('teacher.reupload_file.add');
 
         // Forum routes
         Route::get('forum/index', [TeacherController::class, 'forumIndex'])->name('teacher.forum.index');

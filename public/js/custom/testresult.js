@@ -523,6 +523,7 @@ $(function () {
         formData.append('paper_id', paper_id);
         formData.append('semester_id', semester_id);
         formData.append('session_id', session_id);
+        formData.append('academic_session_id', academic_session_id);
         
         $.ajax({
             url: $(form).attr('action'),

@@ -207,6 +207,7 @@
 @section('scripts')
 <script>
     var StaffLeaveList = "{{ route('admin.leave_management.apply_list') }}";
+    var reuploadFileUrl = "{{ route('admin.reupload_file.add') }}";
 </script>
 <script src="{{ asset('public/js/custom/staff_apply_leave.js') }}"></script>
 @endsection

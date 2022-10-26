@@ -214,10 +214,6 @@ $(function () {
         var reissue_file = $("#reissue_file" + id)[0].files[0];
         // formData.append('file', $('input[type=file]')[0].files[0]);
 
-        console.log(id);
-        console.log(document);
-        console.log(reissue_file);
-
         var formData = new FormData();
         formData.append('id', id);
         formData.append('document', document);

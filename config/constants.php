@@ -416,7 +416,7 @@ return [
         // teacher leave approve
         'teacher_leave_approve'=>$url.'/teacher_leave_approve',
         'leave_reupload_file'=>$url.'/std_leave_apply/reupload_file',
-
+        'staff_leave_reupload_file'=>$url.'/staff_leave_apply/reupload_file',
         // leave type url
         'leave_type_add' => $url.'/leave_type/add',
         'leave_type_list' => $url.'/leave_type/list',

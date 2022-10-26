@@ -163,50 +163,6 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>1</td>
-                                                                <td>Mathematics</td>
-                                                                <td>III</td>
-                                                                <td>A</td>
-                                                                <td>07-04-2018</td>
-                                                                <td>21-04-2018</td>
-                                                                <td>10/0</td>
-                                                                <td>10</td>
-                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default"><i class="fas fa-bars"></i> Copy</a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>2</td>
-                                                                <td>Study of the Environment</td>
-                                                                <td>I</td>
-                                                                <td>B</td>
-                                                                <td>15-08-2020</td>
-                                                                <td>07-09-2020</td>
-                                                                <td>15/0</td>
-                                                                <td>15</td>
-                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default"><i class="fas fa-bars"></i> Copy</a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>3</td>
-                                                                <td>Arts Education</td>
-                                                                <td>II</td>
-                                                                <td>C</td>
-                                                                <td>11-06-2021</td>
-                                                                <td>17-06-2021</td>
-                                                                <td>18/2</td>
-                                                                <td>20</td>
-                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default"><i class="fas fa-bars"></i> Copy</a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>4</td>
-                                                                <td>English</td>
-                                                                <td>VI</td>
-                                                                <td>A</td>
-                                                                <td>04-05-2020</td>
-                                                                <td>19-05-2020</td>
-                                                                <td>25/0</td>
-                                                                <td>25</td>
-                                                                <td><a href="{{ route('super_admin.homework_edit')}}" class="btn btn-circle btn-default"><i class="fas fa-bars"></i> Copy</a></td>
-                                                            </tr>
                                                         </tbody>
                                                     </table>
                                                 </div> <!-- end table-responsive-->
