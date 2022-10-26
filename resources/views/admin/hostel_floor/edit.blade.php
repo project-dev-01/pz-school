@@ -25,7 +25,7 @@
                         </select>
                         <span class="text-danger error-text block_id_error"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group"  id="floor_warden_div">
                         <label for="floor_warden">Floor Warden<span class="text-danger">*</span></label>
                         <select class="form-control select2-multiple" data-toggle="select2" name="floor_warden[]" multiple="multiple" data-placeholder="Choose ...">
                             <option value="">Select Warden</option>
@@ -36,8 +36,8 @@
                         </select>
                         <span class="text-danger error-text floor_warden_error"></span>
                     </div>
-                    <div class="form-group">
-                        <label for="floor_leader">Floor Leader</label>
+                    <div class="form-group" id="floor_leader_div">
+                        <label for="floor_leader" >Floor Leader</label>
                         <select class="form-control select2-multiple" data-toggle="select2" name="floor_leader[]" multiple="multiple" data-placeholder="Choose ...">
                             <option value="">Select Leader</option>
                             @forelse($leader as $lead)

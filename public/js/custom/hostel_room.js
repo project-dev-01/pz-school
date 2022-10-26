@@ -9,7 +9,6 @@ $(function () {
         $("#hostelRoomForm").find("#floor").append('<option value="">Select Floor</option>');
 
         $.post(floorByBlock, { token: token, branch_id: branchID, block_id: block_id }, function (res) {
-            console.log('r',res)
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
                     $("#hostelRoomForm").find("#floor").append('<option value="' + val.id + '">' + val.floor_name + '</option>');
@@ -25,7 +24,6 @@ $(function () {
         $("#edit-hostel-room-form").find("#edit_floor").append('<option value="">Select Floor</option>');
 
         $.post(floorByBlock, { token: token, branch_id: branchID, block_id: block_id }, function (res) {
-            console.log('r',res)
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
                     $("#edit-hostel-room-form").find("#edit_floor").append('<option value="' + val.id + '">' + val.floor_name + '</option>');
@@ -164,8 +162,25 @@ $(function () {
             $('.editHostelRoom').find('input[name="name"]').val(data.data.name);
             $('.editHostelRoom').find('select[name="hostel_id"]').val(data.data.hostel_id);
             $('.editHostelRoom').find('input[name="no_of_beds"]').val(data.data.no_of_beds);
-            $('.editHostelRoom').find('input[name="block"]').val(data.data.block);
-            $('.editHostelRoom').find('input[name="floor"]').val(data.data.floor);
+            $('.editHostelRoom').find('select[name="block"]').val(data.data.block);
+
+            $("#edit-hostel-room-form").find("#edit_floor").empty();
+            $("#edit-hostel-room-form").find("#edit_floor").append('<option value="">Select Floor</option>');
+            var block_id = data.data.block;
+    
+            $.post(floorByBlock, { token: token, branch_id: branchID, block_id: block_id }, function (res) {
+                if (res.code == 200) {
+                    $.each(res.data, function (key, val) {
+                        if(val.id==data.data.floor) {
+                            $("#edit-hostel-room-form").find("#edit_floor").append('<option value="' + val.id + '" selected>' + val.floor_name + '</option>');
+                        } else {
+                            $("#edit-hostel-room-form").find("#edit_floor").append('<option value="' + val.id + '">' + val.floor_name + '</option>');
+                        }
+                    });
+                }
+            }, 'json');
+
+            $('.editHostelRoom').find('select[name="floor"]').val(data.data.floor);
             $('.editHostelRoom').find('input[name="bed_fee"]').val(data.data.bed_fee);
             $('.editHostelRoom').find('textarea[name="remarks"]').text(data.data.remarks);
             $('.editHostelRoom').modal('show');

@@ -9454,6 +9454,7 @@ class ApiController extends BaseController
             $Hostel = $Conn->table('hostel')->select('hostel_category.name as category', 'hostel.*', DB::raw("GROUP_CONCAT(DISTINCT  s.first_name, ' ', s.last_name) as watchman"))
                 ->leftJoin('hostel_category', 'hostel.category_id', '=', 'hostel_category.id')
                 ->leftJoin("staffs as s", DB::raw("FIND_IN_SET(s.id,hostel.watchman)"), ">", DB::raw("'0'"))
+                ->groupBy('hostel.id')
                 ->get();
             return $this->successResponse($Hostel, 'Hostel record fetch successfully');
         }
@@ -9499,11 +9500,15 @@ class ApiController extends BaseController
             if ($conn->table('hostel')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
                 return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
             } else {
+                $watchman = NULL;
+                if (!empty($request->watchman)) {
+                    $watchman =  implode(",", $request->watchman);
+                }
                 // update data
                 $query = $conn->table('hostel')->where('id', $id)->update([
                     'name' => $request->name,
                     'category_id' => $request->category,
-                    'watchman' => $request->watchman,
+                    'watchman' => $watchman,
                     'address' => $request->address,
                     'remarks' => $request->remarks,
                     'updated_at' => date("Y-m-d H:i:s")

@@ -1,12 +1,11 @@
 $(function () {
 
     hostelBlockTable();
-    $("#hostelBlockForm").validate({
-        rules: {
-            block_name: "required",
-            block_warden: "required",
-            total_floor: "required",
-        }
+    $(document).on('click', '#addHostelBlock', function () {
+        
+        console.log('1')
+        $('.select2-selection__rendered').html('<li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="Choose ..." style="width: 424.034px;" aria-controls="select2-block_warden-jy-results" aria-activedescendant="select2-block_warden-jy-result-hnrw-54"></li>');
+        $('#hostelBlockForm').trigger("reset");
     });
     $("#edit-hostel-block-form").validate({
         rules: {
@@ -107,12 +106,39 @@ $(function () {
         $.post(hostelBlockDetails, { id: id }, function (data) {
             $('.editHostelBlock').find('input[name="id"]').val(data.data.id);
             $('.editHostelBlock').find('input[name="block_name"]').val(data.data.block_name);
-            $('.editHostelBlock').find('input[name="block_warden"]').val(data.data.block_warden);
             $('.editHostelBlock').find('input[name="total_floor"]').val(data.data.total_floor);
-            $('.editHostelBlock').find('input[name="block_leader"]').val(data.data.block_leader);
+            var arr = data.data.block_warden.split(',');
+            if(data.data.block_warden) {
+                var arr = data.data.block_warden.split(',');
+            }else {
+                var arr = "";
+            }
+            $('.editHostelBlock').find('select[name="block_warden[]"]').val(arr);
+            var output = "";
+            $.each(arr, function(index, value) {
+                
+                var name = $("#block_warden_div option[value='"+value+"']").text();
+                output += '<li class="select2-selection__choice" title="'+name+' " data-select2-id="'+value+'"><span class="select2-selection__choice__remove" role="presentation">×</span>'+name+' </li>';
+                
+              });
+            $('#block_warden_div .select2-selection__rendered').html(output);
+
+            if(data.data.block_leader) {
+                var arr2 = data.data.block_leader.split(',');
+            }else {
+                var arr2 = "";
+            }
+            $('.editHostelBlock').find('select[name="block_leader[]"]').val(arr2);
+            var output2 = "";
+            $.each(arr2, function(index2, value2) {
+                
+                var name2 = $("#block_leader_div option[value='"+value2+"']").text();
+                output2 += '<li class="select2-selection__choice" title="'+name2+' " data-select2-id="'+value2+'"><span class="select2-selection__choice__remove" role="presentation">×</span>'+name2+' </li>';
+                
+              });
+              $('#block_leader_div .select2-selection__rendered').html(output2);
             $('.editHostelBlock').modal('show');
         }, 'json');
-        console.log(id);
     });
     // update HostelBlock
     $('#edit-hostel-block-form').on('submit', function (e) {

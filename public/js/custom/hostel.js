@@ -1,6 +1,13 @@
 $(function () {
 
     hostelTable();
+    
+    $(document).on('click', '#addHostel', function () {
+        
+        console.log('1')
+        $('.select2-selection__rendered').html('<li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="Choose ..." style="width: 424.034px;" aria-controls="select2-block_warden-jy-results" aria-activedescendant="select2-block_warden-jy-result-hnrw-54"></li>');
+        $('#hostelForm').trigger("reset");
+    });
     $("#hostelForm").validate({
         rules: {
             name: "required",
@@ -129,20 +136,21 @@ $(function () {
             $('.editHostel').find('input[name="id"]').val(data.data.id);
             $('.editHostel').find('input[name="name"]').val(data.data.name);
             $('.editHostel').find('select[name="category"]').val(data.data.category_id);
-            // $('.editHostel').find('input[name="watchman"]').val(data.data.watchman);
             
             // $('#watch').focus();
-            var arr = data.data.watchman.split(',');
+            var arr = data.data.watchman.split(','); 
+            if(data.data.watchman) {
+                var arr = data.data.watchman.split(',');
+            }else {
+                var arr = "";
+            }
+            $('.editHostel').find('select[name="watchman[]"]').val(arr);
             var output = "";
             $.each(arr, function(index, value) {
                 
                 var name = $("#watchman option[value='"+value+"']").text();
                 output += '<li class="select2-selection__choice" title="'+name+' " data-select2-id="'+value+'"><span class="select2-selection__choice__remove" role="presentation">×</span>'+name+' </li>';
-                
-                // var test = $("#watchman option[value='"+value+"']").attr('selected');
-                console.log('cd',name);
-                
-              });
+            });
               $('.select2-selection__rendered').html(output);
             $('.editHostel').find('input[name="address"]').val(data.data.address);
             $('.editHostel').find('textarea[name="remarks"]').text(data.data.remarks);

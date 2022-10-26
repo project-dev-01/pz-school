@@ -15,7 +15,7 @@
                         <input type="text" id="block_name" name="block_name" class="form-control" placeholder="Enter Block Name ">
                         <span class="text-danger error-text block_name_error"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="block_warden_div">
                         <label for="block_warden">Block Warden<span class="text-danger">*</span></label>
                         <select class="form-control select2-multiple" data-toggle="select2" name="block_warden[]" multiple="multiple" data-placeholder="Choose ...">
                             <option value="">Select Warden</option>
@@ -31,7 +31,7 @@
                         <input type="text"  name="total_floor" class="form-control" placeholder="Enter Total Floor">
                         <span class="text-danger error-text total_floor_error"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="block_leader_div">
                         <label for="block_leader">Block Leader</label>
                         <select class="form-control select2-multiple" data-toggle="select2" name="block_leader[]" multiple="multiple" data-placeholder="Choose ...">
                             <option value="">Select Leader</option>
