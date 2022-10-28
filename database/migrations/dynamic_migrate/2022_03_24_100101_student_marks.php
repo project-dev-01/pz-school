@@ -29,7 +29,8 @@ class StudentMarks extends Migration
             $table->string('status')->nullable();
             $table->string('grade');
             $table->string('ranking')->nullable();
-            $table->text('memo')->nullable();   
+            $table->text('memo')->nullable();
+            $table->integer('academic_session_id')->default('0');
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@ use Excel;
 use DateTime;
 use DateTimeZone;
 use App\Exports\StaffAttendanceExport;
-Use App\Exports\StudentAttendanceExport;
+use App\Exports\StudentAttendanceExport;
 
 class AdminController extends Controller
 {
@@ -4655,7 +4655,8 @@ class AdminController extends Controller
             "section_id" => $request->section_id,
             "subject_id" => $request->subject_id,
             "semester_id" => $request->semester_id,
-            "session_id" => $request->session_id
+            "session_id" => $request->session_id,
+            "academic_session_id" => session()->get('academic_session_id')
         ];
         $response = Helper::PostMethod(config('constants.api.get_short_test'), $data);
         return $response;
@@ -4670,7 +4671,8 @@ class AdminController extends Controller
             "section_id" => $request->section_id,
             "subject_id" => $request->subject_id,
             "semester_id" => $request->semester_id,
-            "session_id" => $request->session_id
+            "session_id" => $request->session_id,
+            "academic_session_id" => session()->get('academic_session_id')
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.add_short_test'), $data);
@@ -5673,7 +5675,7 @@ class AdminController extends Controller
     // end Global Setting
     public function studentAttendanceReport()
     {
-        
+
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
@@ -5690,6 +5692,6 @@ class AdminController extends Controller
     public function studentAttendanceExcel(Request $request)
     {
         // dd($request);
-        return Excel::download(new StudentAttendanceExport(1,$request->class,$request->section,$request->subject,$request->semester,$request->session,$request->date), 'Student_Attendance.xlsx');
+        return Excel::download(new StudentAttendanceExport(1, $request->class, $request->section, $request->subject, $request->semester, $request->session, $request->date), 'Student_Attendance.xlsx');
     }
 }

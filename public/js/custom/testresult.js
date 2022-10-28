@@ -454,9 +454,8 @@ $(function () {
         //     $('.lbl_pass_fail' + stuID).text('fail');
         //     $('.lbl_pass_fail' + stuID).val('fail');
         // }
-
+        var incre_class = $(this).attr('id');
         if (marks_range != '') {
-            var incre_class = $(this).attr('id');
             var formData = new FormData();
             formData.append('token', token);
             formData.append('marks_range', marks_range);
@@ -497,6 +496,13 @@ $(function () {
                 }
             });
 
+        } else {
+            console.log("here dt come");
+            console.log(incre_class);
+            $('.lbl_grade' + incre_class).text("");
+            $('.lbl_grade' + incre_class).val("");
+            $('.lbl_pass_fail' + incre_class).text("");
+            $('.lbl_pass_fail' + incre_class).val("");
         }
     });
 
@@ -524,7 +530,7 @@ $(function () {
         formData.append('semester_id', semester_id);
         formData.append('session_id', session_id);
         formData.append('academic_session_id', academic_session_id);
-        
+
         $.ajax({
             url: $(form).attr('action'),
             method: $(form).attr('method'),

@@ -5238,6 +5238,7 @@ class ApiController extends BaseController
                 ->join('subjects as s', 'sa.subject_id', '=', 's.id')
                 ->where([
                     ['sa.type', '=', '0'],
+                    ['s.exam_exclude', '=', '0'],
                     ['sa.class_id', '=', $request->class_id],
                     ['sa.section_id', '=', $request->section_id],
                     ['sa.teacher_id', '=', $request->teacher_id]
@@ -5793,7 +5794,8 @@ class ApiController extends BaseController
             'class_id' => 'required',
             'section_id' => 'required',
             'date' => 'required',
-            'subject_id' => 'required'
+            'subject_id' => 'required',
+            'academic_session_id' => 'required'
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -5804,6 +5806,7 @@ class ApiController extends BaseController
             $subject_id = $request->subject_id;
             $semester_id = $request->semester_id;
             $session_id = $request->session_id;
+            $academic_session_id = $request->academic_session_id;
             $Connection = $this->createNewConnection($request->branch_id);
             // $getTeachersClassName = $Connection->table('enrolls as en')
             //     ->select(
@@ -5831,17 +5834,20 @@ class ApiController extends BaseController
                     'sht.test_name',
                     'st.photo'
                 )
-                ->leftJoin('students as st', 'st.id', '=', 'en.student_id')
-                ->leftJoin('short_tests as sht', function ($q) use ($date, $subject_id, $semester_id, $session_id) {
+                ->join('students as st', 'st.id', '=', 'en.student_id')
+                ->leftJoin('short_tests as sht', function ($q) use ($date, $subject_id, $semester_id, $session_id, $academic_session_id) {
                     $q->on('sht.student_id', '=', 'st.id')
                         ->on('sht.date', '=', DB::raw("'$date'"))
                         ->on('sht.subject_id', '=', DB::raw("'$subject_id'"))
                         ->on('sht.semester_id', '=', DB::raw("'$semester_id'"))
-                        ->on('sht.session_id', '=', DB::raw("'$session_id'"));
+                        ->on('sht.session_id', '=', DB::raw("'$session_id'"))
+                        ->on('sht.academic_session_id', '=', DB::raw("'$academic_session_id'"));
                 })
                 ->where([
                     ['en.class_id', '=', $request->class_id],
-                    ['en.section_id', '=', $request->section_id]
+                    ['en.section_id', '=', $request->section_id],
+                    ['en.active_status', '=', '0'],
+                    ['en.academic_session_id', '=', $academic_session_id]
                     // ['en.semester_id', '=', $request->semester_id],
                     // ['en.session_id', '=', $request->session_id]
                 ])
@@ -5860,7 +5866,8 @@ class ApiController extends BaseController
             'section_id' => 'required',
             'subject_id' => 'required',
             'date' => 'required',
-            'short_test' => 'required',
+            'academic_session_id' => 'required',
+            'short_test' => 'required'
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -5875,6 +5882,7 @@ class ApiController extends BaseController
             $subject_id = $request->subject_id;
             $semester_id = $request->semester_id;
             $session_id = $request->session_id;
+            $academic_session_id = $request->academic_session_id;
             $date = $request->date;
             foreach ($short_test as $key => $value) {
                 // $test_name = (count($value['test_name'][0]) > 0) ? implode(",", $value['test_name'][0]) : "";
@@ -5903,6 +5911,7 @@ class ApiController extends BaseController
                     'subject_id' => $subject_id,
                     'semester_id' => $semester_id,
                     'session_id' => $session_id,
+                    'academic_session_id' => $academic_session_id,
                     'created_at' => date("Y-m-d H:i:s")
                 );
                 // echo $key;
@@ -7066,6 +7075,8 @@ class ApiController extends BaseController
                     ['sa.class_id', '=', $request->class_id],
                     ['sa.section_id', '=', $request->section_id],
                     ['sa.subject_id', '=', $request->subject_id],
+                    ['sa.semester_id', '=', $request->semester_id],
+                    ['sa.session_id', '=', $request->session_id]
                 ])
                 ->whereMonth('sa.date', $year_month[0])
                 ->whereYear('sa.date', $year_month[1])
@@ -14162,7 +14173,8 @@ class ApiController extends BaseController
             'class_id' => 'required',
             'section_id' => 'required',
             'subject_id' => 'required',
-            'student_id' => 'required'
+            'student_id' => 'required',
+            'academic_session_id' => 'required'
         ]);
         $student_id = $request->student_id;
         if (!$validator->passes()) {
@@ -14186,7 +14198,8 @@ class ApiController extends BaseController
             })->where([
                 ['h.class_id', '=', $request->class_id],
                 ['h.section_id', '=', $request->section_id],
-                ['h.subject_id', '=', $request->subject_id]
+                ['h.subject_id', '=', $request->subject_id],
+                ['h.academic_session_id', '=', $request->academic_session_id]
             ])->get();
 
             $complete  = 0;
@@ -14531,7 +14544,8 @@ class ApiController extends BaseController
     {
         $validator = \Validator::make($request->all(), [
             'branch_id' => 'required',
-            'student_id' => 'required'
+            'student_id' => 'required',
+            'academic_session_id' => 'required'
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
@@ -14548,12 +14562,15 @@ class ApiController extends BaseController
                 )
                 ->join('subject_assigns as sa', function ($q) {
                     $q->on('sa.class_id', '=', 'en.class_id')
-                        ->on('sa.section_id', '=', 'en.section_id');
+                        ->on('sa.section_id', '=', 'en.section_id')
+                        ->on('sa.academic_session_id', '=', 'en.academic_session_id');
                 })
                 ->join('subjects as sb', 'sb.id', '=', 'sa.subject_id')
                 ->where([
                     ['en.student_id', '=', $request->student_id],
-                    ['sa.type', '=', '0']
+                    ['sa.type', '=', '0'],
+                    ['en.academic_session_id', '=', $request->academic_session_id],
+                    ['en.active_status', '=', '0']
                 ])
                 ->groupBy('sa.subject_id')
                 ->get();

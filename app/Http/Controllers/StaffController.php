@@ -1643,7 +1643,8 @@ class StaffController extends Controller
             "section_id" => $request->section_id,
             "subject_id" => $request->subject_id,
             "semester_id" => $request->semester_id,
-            "session_id" => $request->session_id
+            "session_id" => $request->session_id,
+            "academic_session_id" => session()->get('academic_session_id')
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.get_short_test'), $data);
@@ -1659,7 +1660,8 @@ class StaffController extends Controller
             "section_id" => $request->section_id,
             "subject_id" => $request->subject_id,
             "semester_id" => $request->semester_id,
-            "session_id" => $request->session_id
+            "session_id" => $request->session_id,
+            "academic_session_id" => session()->get('academic_session_id')
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.add_short_test'), $data);

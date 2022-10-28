@@ -192,7 +192,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <!-- Portlet card -->
-                        <div class="card">
+                        <div class="">
                             <div class="card-body">
                                 <div class="card-widgets">
                                     <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
@@ -259,9 +259,9 @@
                     </li>
                 </ul><br>
                 <div class="row">
-                    <div class="col-lg-6" id="donut-chart" style="display:none">
+                    <div class="col-lg-12" id="donut-chart" style="display:none">
                         <!-- Portlet card -->
-                        <div class="card">
+                        <div class="">
                             <div class="card-body" dir="ltr">
                                 <div class="card-widgets">
                                     <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>

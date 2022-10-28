@@ -688,7 +688,8 @@ class ParentController extends Controller
     public function analytic()
     {
         $data = [
-            'student_id' => session()->get('student_id')
+            'student_id' => session()->get('student_id'),
+            'academic_session_id' => session()->get('academic_session_id')
         ];
         $get_student_by_all_subjects = Helper::PostMethod(config('constants.api.get_student_by_all_subjects'), $data);
         $get_class_section_by_student = Helper::PostMethod(config('constants.api.get_class_section_by_student'), $data);

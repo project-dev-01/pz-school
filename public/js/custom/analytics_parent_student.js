@@ -332,6 +332,7 @@ $(function () {
             formData.append('student_id', studentID);
             formData.append('semester_id', semester_id);
             formData.append('session_id', session_id);
+            formData.append('academic_session_id', academic_session_id);
             // attendance report chart
             attendanceReport(formData);
             // homework report chart

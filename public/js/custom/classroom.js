@@ -31,6 +31,7 @@ $(function () {
                 subjectID: subjectID,
                 semesterID: semesterID,
                 sessionID: sessionID,
+                academic_session_id: academic_session_id,
                 classDate: format_date
             };
             $('#changeClassName').val(classID);
@@ -46,6 +47,7 @@ $(function () {
             formData.append('class_id', classID);
             formData.append('section_id', sectionID);
             formData.append('subject_id', subjectID);
+            formData.append('academic_session_id', academic_session_id);
             formData.append('date', convertDigitIn(format_date));
             // list mode
             listModeAjax(formData, classObj);
@@ -141,7 +143,8 @@ $(function () {
                 subjectID: subjectID,
                 classDate: classDate,
                 semesterID: semesterID,
-                sessionID: sessionID
+                sessionID: sessionID,
+                academic_session_id: academic_session_id
             };
             var formData = new FormData();
             formData.append('token', token);
@@ -151,6 +154,7 @@ $(function () {
             formData.append('subject_id', subjectID);
             formData.append('semester_id', semesterID);
             formData.append('session_id', sessionID);
+            formData.append('academic_session_id', academic_session_id);
             formData.append('date', convertDigitIn(classDate));
 
             // list mode
