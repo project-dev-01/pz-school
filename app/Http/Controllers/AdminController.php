@@ -1706,16 +1706,16 @@ class AdminController extends Controller
                     $response .=  '</td>';
                     $response .=  '<td width="20%" >';
                     $response .=  '<div class="form-group">';
-                    $response .=  '<input class="form-control" required type="time" name="timetable[' . $row . '][time_start]" value="' . $table['time_start'] . '" ' . $bulk . '>';
+                    $response .=  '<input class="form-control time_start_class" required type="time" name="timetable[' . $row . '][time_start]" value="' . $table['time_start'] . '" ' . $bulk . '>';
                     $response .=  '</div></td>';
                     $response .=  '<td width="20%"  >';
                     $response .=  '<div class="form-group">';
-                    $response .=  '<input class="form-control" required type="time" name="timetable[' . $row . '][time_end]"  value="' . $table['time_end'] . '" ' . $bulk . '>';
+                    $response .=  '<input class="form-control time_end_class" required type="time" name="timetable[' . $row . '][time_end]"  value="' . $table['time_end'] . '" ' . $bulk . '>';
                     $response .=  '</div>';
                     $response .=  '</td>';
                     $response .=  '<td width="20%"  >';
                     $response .=  '<div class="form-group">';
-                    $response .=  '<select class="form-control"  name="timetable[' . $row . '][class_room]" ' . $bulk . '>';
+                    $response .=  '<select class="form-control class_room"  name="timetable[' . $row . '][class_room]" ' . $bulk . '>';
                     $response .=  '<option value="">Select Hall</option>';
                     foreach ($hall_list['data'] as $list) {
                         if ($list['id'] == $table['class_room']) {
@@ -2017,6 +2017,11 @@ class AdminController extends Controller
             $max = $timetable['data']['max'];
 
             $response = "";
+            $response .= '<tr><td class="center" style="color:#ed1833;">Day/Period</td>';
+            for( $i = 1 ; $i <= $max ; $i++ ) {
+                $response .= '<td class="centre">'.$i.'</td>';
+            }
+            $response .= '</tr>';
             foreach ($days as $day) {
 
                 if (!isset($timetable['data']['week'][$day]) && ($day == "saturday" || $day == "sunday")) {
@@ -2448,7 +2453,7 @@ class AdminController extends Controller
 									</div>
 									<td>
                                         <i data-feather="file-text" class="icon-dual"></i>
-                                        <span class="ml-2 font-weight-semibold"><a  href="' . asset('student/homework/') . '/' . $work['file'] . '" download class="text-reset">' . $work['file'] . '</a></span>
+                                        <span class="ml-2 font-weight-semibold"><a  href="' . asset('public/student/homework/') . '/' . $work['file'] . '" download class="text-reset">' . $work['file'] . '</a></span>
                                     </td>
                                     <td>' . $work['remarks'] . '</td>
                                     <td>

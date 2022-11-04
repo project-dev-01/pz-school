@@ -56,7 +56,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="date" id="employeeDate">
+                                        <input type="text" class="form-control" name="date" id="employeeDate" placeholder="MM/YY">
                                     </div>
                                 </div>
                             </div>
@@ -102,6 +102,7 @@
                                                     <th>Check In</th>
                                                     <th>Check Out</th>
                                                     <th>Total Hours</th>
+                                                    <th>Reason</th>
                                                     <th>Remarks</th>
                                                 </tr>
                                             </thead>
@@ -142,6 +143,7 @@
 <script>
     var getEmployeAttendanceList = "{{ route('teacher.attendance.employee_list') }}";
     var employeeByDepartment = "{{ config('constants.api.employee_by_department') }}";
+    var getTeacherAbsentExcuse = "{{ config('constants.api.get_teacher_absent_excuse') }}";
 </script>
 <script src="{{ asset('public/js/custom/teacher_attendance_list.js') }}"></script>
 

@@ -107,9 +107,17 @@ class StudentAttendanceExport  extends BaseController implements FromCollection,
                                 ->where('sa.semester_id', $semester)
                                 ->where('sa.session_id', $session)
                                 ->first();
-                                if($in_date) {
-                                    $li->$t = $in_date->status;
-                                }else{
+                                if ($in_date) {
+                                    if ($in_date->status == "present") {
+                                        $li->$t = "P";
+                                    } else if ($in_date->status == "absent") {
+                                        $li->$t = "X";
+                                    } else if ($in_date->status == "late") {
+                                        $li->$t = "L";
+                                    } else {
+                                        $li->$t = 0;
+                                    } 
+                                } else {
                                     $li->$t = 0;
                                 }
                     

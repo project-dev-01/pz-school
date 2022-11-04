@@ -376,10 +376,10 @@ class AuthController extends BaseController
             $date = Carbon::now()->format('Y-m-d');
             $time = Carbon::now()->format('H:i:s');
 
-            $ip = $request->ip();
-            $ch = $this->get_client_ip();
-            $currentlocation = Location::get($ip);
+            $currentlocation['latitude'] = $request->latitude;
+            $currentlocation['longitude'] = $request->longitude;
             $location = json_encode($currentlocation);
+            // dd($currentlocation);
 
             if ($conn->table('staff_attendances')->where([['date', '=', $date], ['staff_id', '=', $request->id], ['session_id', '=', $request->session_id]])->count() > 0) {
 
@@ -401,16 +401,14 @@ class AuthController extends BaseController
                     $check_out = $time;
 
                     if ($check_in) {
+                        $diff_in = new Carbon($check_in);
+                        $diff_out = new Carbon($check_out);
 
-                        $loginTime = strtotime($check_in);
-                        $logoutTime = strtotime($check_out);
-                        $diff = $logoutTime - $loginTime;
-                        $hours = date('H:i', $diff);
+                        $hours = $diff_out->diff($diff_in)->format('%H:%I');
                         $success['check_in'] = "Checked In";
                     } else {
                         $success['check_in'] = "Not Check In";
                     }
-
 
                     $success['check_out'] = "Checked Out";
                     $success['check_in_status'] = "true";

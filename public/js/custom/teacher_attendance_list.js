@@ -58,7 +58,6 @@ $(function () {
     };
     (chart = new ApexCharts(document.querySelector("#late-present-absent"), options)).render();
     // monthly present,late,absent end
-
     $('#classDate').datepicker({
         changeMonth: true,
         changeYear: true,
@@ -69,6 +68,15 @@ $(function () {
         onClose: function (dateText, inst) {
             $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
         }
+    });
+    
+    $("#classDate").focus(function () {
+        $(".ui-datepicker-calendar").hide();
+        $("#ui-datepicker-div").position({
+            my: "center top",
+            at: "center bottom",
+            of: $(this)
+        });
     });
     // change classroom
     $('#changeClassName').on('change', function () {
@@ -123,7 +131,6 @@ $(function () {
 
     $('#attendanceFilter').on('submit', function (e) {
         e.preventDefault();
-        console.log('sa')
         var check = $("#attendanceFilter").valid();
         if (check === true) {
 
@@ -419,7 +426,7 @@ $(function () {
     $(document).on('change', ".status", function (e) {
         e.preventDefault();
         var status = $(this).val();
-        console.log('cv', status)
+
         if (status == "absent") {
             $(this).closest('tr').find('.checkin').val("");
             $(this).closest('tr').find('.checkout').val("");
@@ -428,11 +435,27 @@ $(function () {
             $(this).closest('tr').find('.checkin').prop('readonly', true);
             $(this).closest('tr').find('.checkout').prop('readonly', true);
             $(this).closest('tr').find('.hours').prop('readonly', true);
-        } else {
+            
+        }else {
             $(this).closest('tr').find('.checkin').prop('readonly', false);
             $(this).closest('tr').find('.checkout').prop('readonly', false);
             $(this).closest('tr').find('.hours').prop('readonly', false);
         }
+
+        var reason = $(this).closest('tr').find('.reason');
+        reason.empty();
+        reason.append('<option value="">Select Reason</option>');
+        $.post(getTeacherAbsentExcuse, {
+            token: token,
+            branch_id: branchID,
+            status: status
+        }, function (res) {
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    reason.append('<option value="' + val.id + '">' + val.name + '</option>');
+                });
+            }
+        }, 'json');
     });
 
     $(document).on('change', ".checkin", function (e) {
@@ -523,6 +546,15 @@ $(function () {
             $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
         }
     });
+    
+    $("#employeeDate").focus(function () {
+        $(".ui-datepicker-calendar").hide();
+        $("#ui-datepicker-div").position({
+            my: "center top",
+            at: "center bottom",
+            of: $(this)
+        });
+    });
 
     $('#employeeReportDate').datepicker({
         changeMonth: true,
@@ -534,6 +566,15 @@ $(function () {
         onClose: function (dateText, inst) {
             $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
         }
+    });
+    
+    $("#employeeReportDate").focus(function () {
+        $(".ui-datepicker-calendar").hide();
+        $("#ui-datepicker-div").position({
+            my: "center top",
+            at: "center bottom",
+            of: $(this)
+        });
     });
     // rules validation
     $("#employeeAttendanceReport").validate({
@@ -732,9 +773,30 @@ $(function () {
         }
 
     });
+    // $("#employeeDate").datepicker({
+    //     dateFormat: 'MM yy',
+    //     changeMonth: true,
+    //     changeYear: true,
+    //     showButtonPanel: true,
+
+    //     onClose: function(dateText, inst) {
+    //         var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+    //         var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+    //         $(this).val($.datepicker.formatDate('MM yy', new Date(year, month, 1)));
+    //     }
+    // });
+
+    // $("#employeeDate").focus(function () {
+    //     $(".ui-datepicker-calendar").hide();
+    //     $("#ui-datepicker-div").position({
+    //         my: "center top",
+    //         at: "center bottom",
+    //         of: $(this)
+    //     });
+    // });
 
     $("#employeeDate").datepicker({
-        dateFormat: 'yy-mm-dd',
+        dateFormat: 'MM yy',
         changeMonth: true,
         changeYear: true,
         autoclose: true,
@@ -834,39 +896,33 @@ $(function () {
             row += '<input type="text" name="attendance[' + count + '][date]" class="form-control" value="' + val.date + '">';
             row += '</div>';
             row += '</td>';
-            row += '<td width="20%">';
+            row += '<td width="10%">';
             row += '<div class="form-group">';
             row += '<select  class="form-control status"  name="attendance[' + count + '][status]">';
             row += '<option value="">Select Status</option>';
-            if (val.details.status == "present") {
-                row += '<option value="present" Selected>Present</option>';
-                row += '<option value="absent">Absent</option>';
-                row += '<option value="late">Late</option>';
-            } else if (val.details.status == "absent") {
+            if (val.leave) {
                 row += '<option value="present">Present</option>';
-                row += '<option value="absent" Selected>Absent</option>';
+                row += '<option value="absent" ' + (val.leave.leave_type == "absent" ? "selected" : "") + '>Absent</option>';
                 row += '<option value="late">Late</option>';
+                row += '<option value="excused" ' + (val.leave.leave_type == "excused" ? "selected" : "") + '>Excused</option>';
                 disabled = "readonly";
-            } else if (val.details.status == "late") {
-                row += '<option value="present">Present</option>';
-                row += '<option value="absent">Absent</option>';
-                row += '<option value="late" Selected>Late</option>';
             } else {
-                row += '<option value="present">Present</option>';
-                row += '<option value="absent">Absent</option>';
-                row += '<option value="holiday">Late</option>';
+                row += '<option value="present" ' + (val.details.status == "present" ? "selected" : "") + '>Present</option>';
+                row += '<option value="absent"' + (val.details.status == "absent" ? "selected" : "") + '>Absent</option>';
+                row += '<option value="late"' + (val.details.status == "late" ? "selected" : "") + '>Late</option>';
+                row += '<option value="excused"' + (val.details.status == "excused" ? "selected" : "") + '>Excused</option>';
             }
             row += '</select>';
             row += '</div>';
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
-            row += '<input class="form-control checkin" type="time" name="attendance[' + count + '][check_in]"  value="' + val.details.check_in + '" ' + disabled + '> ';
+            row += '<input class="form-control checkin" type="time" name="attendance[' + count + '][check_in]"  value="' + moment(val.details.check_in, 'HH:mm:ss').format('HH:mm') + '" ' + disabled + '> ';
             row += '</div>';
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
-            row += '<input class="form-control checkout" type="time" name="attendance[' + count + '][check_out]" value="' + val.details.check_out + '" ' + disabled + '>';
+            row += '<input class="form-control checkout" type="time" name="attendance[' + count + '][check_out]" value="' + moment(val.details.check_out, 'HH:mm:ss').format('HH:mm') + '" ' + disabled + '>';
             row += '</div>';
             row += '</td>';
             row += '<td width="10%">';
@@ -878,12 +934,40 @@ $(function () {
             }
             row += '</div>';
             row += '</td>';
-            row += '<td width="20%">';
-            if (val.details.remarks) {
-                row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="' + val.details.remarks + '">';
-            } else {
-                row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="">';
+            row += '<td width="15%">';
+            row += '<div class="form-group">';
+            row += '<select  class="form-control reason"  name="attendance[' + count + '][reason_id]">';
+            row += '<option value="">Select Reasons</option>';
+            if(val.leave) {
+                var reason = val.leave.reason_id;
+                var status = "absent";
+            }else {
+                var reason = val.details.reason_id;
+                var status = val.details.status;
             }
+            if (status=="absent") {
+                $.each(val.absent_reason, function (keys, val_rea) {
+                    row += '<option value="' + val_rea.id + '" ' + (reason == val_rea.id ? "selected" : "") + '>' + val_rea.name + '</option>';
+                });
+            } else if (status=="excused") {
+                $.each(val.excused_reason, function (keys, val_rea) {
+                    row += '<option value="' + val_rea.id + '" ' + (reason == val_rea.id ? "selected" : "") + '>' + val_rea.name + '</option>';
+                });
+            }
+            row += '</select>';
+            row += '</div>';
+            row += '</td>';
+            row += '<td width="15%">';
+            
+            if (val.leave) {
+                row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="' + val.leave.remarks + '">';
+            } else {
+                if (val.details.remarks) {
+                    row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="' + val.details.remarks + '">';
+                } else {
+                    row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="">';
+                }
+            }   
             row += '</td>';
             row += '</tr>';
 
@@ -892,6 +976,5 @@ $(function () {
             $("#employee_attendance_body").append(row);
         });
     }
-
 
 });

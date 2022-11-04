@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Classes')
+@section('title','Grade')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Classes</h4>
+                <h4 class="page-title">Grade</h4>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Class<h4>
+                        <h4 class="navv">Grade<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
@@ -39,9 +39,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Class Name</th>
-                                    <th>Standard ID</th>
-                                    <th>Name Numeric</th>
+                                    <th>Grade Name</th>
+                                    <th>Grade ID</th>
+                                    <th>Grade Numeric</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

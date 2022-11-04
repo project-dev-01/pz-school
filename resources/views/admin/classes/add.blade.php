@@ -3,18 +3,18 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myaddClassModalLabel">Add Class</h4>
+                <h4 class="modal-title" id="myaddClassModalLabel">Add Grade</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
                 <form id="classSubmit" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Class Name<span class="text-danger">*</span></label>
+                        <label for="name">Grade Name<span class="text-danger">*</span></label>
                         <input type="text" id="className" name="name" class="form-control" placeholder="Enter class name">
                     </div>
                     <div class="form-group">
-                        <label for="name_numeric">Class Numeric<span class="text-danger">*</span></label>
+                        <label for="name_numeric">Grade Numeric<span class="text-danger">*</span></label>
                         <input type="text" id="nameNumeric" name="name_numeric" class="form-control" placeholder="Enter class numeric">
                     </div>
                     <div class="form-group">

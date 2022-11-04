@@ -105,7 +105,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="class_date">Date<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="class_date" id="classDate" placeholder="DD/MM/YY">
+                                    <input type="text" class="form-control" name="class_date" id="classDate" placeholder="MM/YY">
                                 </div>
                             </div>
                         </div>
@@ -149,7 +149,7 @@
                                                     <th><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i> Present</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i> Absent</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-ufo"></i> Holiday</button></th>
-                                                    <th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> Latew</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> Late</button></th>
                                                     
                                                 </tr>
                                             </table>

@@ -109,7 +109,7 @@
                                         <div class="form-group">
                                             <label for="changelev">Reason(s)<span class="text-danger">*</span></label>
                                             <select id="changelevReasons" class="form-control" name="changelevReasons">
-                                                <option value="">Select Student</option>
+                                                <option value="">Select Reason</option>
                                                 @forelse ($get_leave_reasons as $res)
                                                 <option value="{{ $res['id'] }}">{{ $res['name'] }}</option>
                                                 @empty

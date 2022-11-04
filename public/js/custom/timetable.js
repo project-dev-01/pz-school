@@ -320,8 +320,8 @@ $(function () {
         console.log(section_id);
         $.post(teacherSubjectUrl, {
             token: token,
-            branch_id: class_id,
-            class_id: branchID,
+            branch_id: branchID,
+            class_id: class_id,
             section_id: section_id,
             teacher_id: teacher_id
         }, function (res) {
@@ -331,6 +331,64 @@ $(function () {
 
             }
         }, 'json');
+    });
+    $(document).on('change', ".time_start_class", function (e) {
+        e.preventDefault();
+        var color = $(this).closest('tr');
+
+        color.find(".class_room option").css('background-color', 'white');
+        var start_time = $(this).closest('tr').find('.time_start_class').val();
+        var end_time = $(this).closest('tr').find('.time_end_class').val();
+            
+        if (start_time && end_time) {
+            var semesterID = $("#semester_id").val();
+            var day = $("#day").val();
+                $.post(classRoomCheck, {
+                    token: token,
+                    branch_id: branchID,
+                    start_time: start_time,
+                    end_time: end_time,
+                    semester_id: semesterID,
+                    day: day
+                }, function (res) {
+                    if (res.code == 200) {
+                        $.each(res.data, function(index, value) {
+                            color.find(".class_room option[value='"+value.class_room+"']").css('background-color', 'red');
+                        });
+                        // $("option[value='myValue']").css('background-color', 'red');
+                    }
+                }, 'json');
+        }
+            
+    });
+    $(document).on('change', ".time_end_class", function (e) {
+        e.preventDefault();
+        var color = $(this).closest('tr');
+            
+        color.find(".class_room option").css('background-color', 'white');
+        var start_time = $(this).closest('tr').find('.time_start_class').val();
+        var end_time = $(this).closest('tr').find('.time_end_class').val();
+            
+        if (start_time && end_time) {
+            var semesterID = $("#semester_id").val();
+            var day = $("#day").val();
+                $.post(classRoomCheck, {
+                    token: token,
+                    branch_id: branchID,
+                    start_time: start_time,
+                    end_time: end_time,
+                    semester_id: semesterID,
+                    day: day
+                }, function (res) {
+                    if (res.code == 200) {
+                        $.each(res.data, function(index, value) {
+                            color.find(".class_room option[value='"+value.class_room+"']").css('background-color', 'red');
+                        });
+                        // $("option[value='myValue']").css('background-color', 'red');
+                    }
+                }, 'json');
+        }
+            
     });
 
 
@@ -403,5 +461,24 @@ $(function () {
         $("#timetable_body").append(row);
         $('.select2-multiple').select2();
     }
+
+    
+    $(document).on('click', '.exportToExcel', function (e) {
+        // var table = $(this).prev('.table2excel');
+        var table = $('.table2excel');
+        if (table && table.length) {
+            var preserveColors = (table.hasClass('table2excel_with_colors') ? true : false);
+            $(table).table2excel({
+                // exclude: ".noExl",
+                name: "Timetable",
+                filename: "timetable" + new Date().toISOString().replace(/[\-\:\.]/g, "") + ".xls",
+                fileext: ".xls",
+                exclude_img: true,
+                exclude_links: true,
+                exclude_inputs: true,
+                preserveColors: preserveColors
+            });
+        }
+    });
 
 });

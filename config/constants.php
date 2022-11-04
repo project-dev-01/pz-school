@@ -487,7 +487,6 @@ return [
          'get_schedule_exam_details_by_teacher' => $url.'/get_schedule_exam_details_by_teacher',
          'get_schedule_exam_details_by_student' => $url.'/get_schedule_exam_details_by_student',
          
-         
         'reset_password' => $url.'/reset_password',
         'reset_password_validation' => $url.'/reset_password_validation',
         // notifications
@@ -502,6 +501,8 @@ return [
         'transport_vehicle_delete' => $url.'/transport_vehicle/delete',
         // get absent late excuse
         'get_absent_late_excuse' => $url.'/get_absent_late_excuse',
+        // get teacher absent  excuse
+        'get_teacher_absent_excuse' => $url.'/get_teacher_absent_excuse',
 
         
         //group calendor url
@@ -609,6 +610,9 @@ return [
          'global_setting_update' => $url.'/global_setting/update',
          'global_setting_delete' => $url.'/global_setting/delete',
  
+         //check class room availablity
+         'class_room_check' => $url.'/class_room_check'
+         
 
     ]
 

@@ -118,6 +118,8 @@ class AuthController extends Controller
         $branch = $request->cookie('branch_id');
         $user = $request->cookie('user_id');
         $check_in = $request->check_in;
+        $latitude = $request->latitude;
+        $longitude = $request->longitude;
         $session = $request->session;
         if ($check_in) {
 
@@ -125,7 +127,9 @@ class AuthController extends Controller
                 'branch_id' => $branch,
                 'id' => $user,
                 'check_in' => $check_in,
-                'session_id' => $session
+                'latitude' => $latitude,
+                'longitude' => $longitude,
+                'session_id' => $session,
             ];
         }
 
@@ -136,9 +140,12 @@ class AuthController extends Controller
                 'branch_id' => $branch,
                 'id' => $user,
                 'check_out' => $check_out,
-                'session_id' => $session
+                'session_id' => $session,
+                'latitude' => $latitude,
+                'longitude' => $longitude,
             ];
         }
+        // dd($data);
         $response = Http::post(config('constants.api.employee_punchcard'), $data);
 
         return $response;

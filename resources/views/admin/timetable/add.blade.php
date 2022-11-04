@@ -169,17 +169,17 @@
                                                     </td>
                                                     <td width="20%">
                                                         <div class="form-group">
-                                                            <input class="form-control" type="time" name="timetable[0][time_start]">
+                                                            <input class="form-control time_start_class" type="time" name="timetable[0][time_start]">
                                                         </div>
                                                     </td>
                                                     <td width="20%">
                                                         <div class="form-group">
-                                                            <input class="form-control" type="time" name="timetable[0][time_end]">
+                                                            <input class="form-control time_end_class" type="time" name="timetable[0][time_end]">
                                                         </div>
                                                     </td>
                                                     <td width="20%">
                                                         <div class="form-group">
-                                                            <select class="form-control" name="timetable[0][class_room]">
+                                                            <select class="form-control class_room" name="timetable[0][class_room]">
                                                                 <option value="">Select Hall</option>
                                                                 @forelse($hall_list as $list)
                                                                 <option value="{{$list['id']}}">{{ $list['hall_no'] }}</option>
@@ -235,6 +235,7 @@
     var subjectByClass = "{{ route('admin.timetable.subject') }}";
     var timetableList = "{{ route('admin.timetable') }}";
     var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";
+    var classRoomCheck = "{{ config('constants.api.class_room_check') }}";
 </script>
 <script src="{{ asset('public/js/custom/timetable.js') }}"></script>
 @endsection

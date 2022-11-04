@@ -15,6 +15,7 @@
 <script src="{{ asset('public/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
 
 <script>
     toastr.options.preventDuplicates = true;

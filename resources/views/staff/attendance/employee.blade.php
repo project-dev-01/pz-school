@@ -56,7 +56,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="date" id="employeeDate">
+                                        <input type="text" class="form-control" name="date" id="employeeDate" placeholder="MM/YY">
                                     </div>
                                 </div>
                             </div>

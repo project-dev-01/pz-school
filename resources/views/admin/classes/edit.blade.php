@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditClassModalLabel">Edit Class</h4>
+                <h4 class="modal-title" id="myeditClassModalLabel">Edit Grade</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -11,11 +11,11 @@
                     @csrf
                     <input type="hidden" id="classID" name="class_id">
                     <div class="form-group">
-                        <label for="name">Class Name</label>
+                        <label for="name">Grade Name</label>
                         <input type="text" id="editclassName" name="name" class="form-control" placeholder="Enter class name">
                     </div>
                     <div class="form-group">
-                        <label for="name_numeric">Class Numeric</label>
+                        <label for="name_numeric">Grade Numeric</label>
                         <input type="text" id="editnameNumeric" name="name_numeric" class="form-control" placeholder="Enter class numeric">
                     </div>
                     <div class="form-group">

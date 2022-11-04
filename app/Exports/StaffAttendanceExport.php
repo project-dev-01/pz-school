@@ -113,7 +113,15 @@ class StaffAttendanceExport  extends BaseController implements FromCollection, W
                                 ->where('sa.session_id', $session_id)
                                 ->first();
                                 if($in_date) {
-                                    $li->$t = $in_date->status;
+                                    if ($in_date->status == "present") {
+                                        $li->$t = "P";
+                                    } else if ($in_date->status == "absent") {
+                                        $li->$t = "X";
+                                    } else if ($in_date->status == "late") {
+                                        $li->$t = "L";
+                                    } else {
+                                        $li->$t = 0;
+                                    } 
                                 }else{
                                     $li->$t = 0;
                                 }

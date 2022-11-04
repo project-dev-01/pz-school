@@ -547,6 +547,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('mark_as_read', [ApiController::class, 'markAsRead']);
     // get absent late excuse classroom
     Route::post('get_absent_late_excuse', [ApiController::class, 'getAbsentLateExcuse']);
+    //get Teacher absent Excuse
+    Route::post('get_teacher_absent_excuse', [ApiController::class, 'getTeacherAbsentExcuse']);
 
 
     // Group routes
@@ -650,6 +652,9 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('global_setting/global_setting-details', [ApiController::class, 'getGlobalSettingDetails']);
     Route::post('global_setting/update', [ApiController::class, 'updateGlobalSetting']);
     Route::post('global_setting/delete', [ApiController::class, 'deleteGlobalSetting']);
+
+    //checking class room 
+    Route::post('class_room_check', [ApiController::class, 'classRoomCheck']);
     
 
 });

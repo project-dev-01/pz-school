@@ -7454,7 +7454,8 @@ class ApiController extends BaseController
                     'c.name as class_name',
                     'sb.subject_color_calendor as color',
                     'sb.name as subject_name',
-                    'sb.name as title',
+                    // 'sb.name as title',
+                    DB::raw('CONCAT(c.name," (",s.name,") " " - ", sb.short_name) as title'),
                     'st.first_name as teacher_name',
                     'dr.report',
                     'ev.id as event_holiday_id'
@@ -12566,7 +12567,7 @@ class ApiController extends BaseController
             // create new connection
             $staffConn = $this->createNewConnection($request->branch_id);
             // get data
-            $reasons = $staffConn->table('reasons')->get();
+            $reasons = $staffConn->table('teacher_absent_reasons')->get();
 
             return $this->successResponse($reasons, 'Reasons record fetch successfully');
         }
@@ -13556,6 +13557,7 @@ class ApiController extends BaseController
                         'sa.check_in',
                         'sa.check_out',
                         'sa.status',
+                        'sa.reason_id',
                         'sa.hours',
                         'sa.remarks',
                     )
@@ -13566,7 +13568,22 @@ class ApiController extends BaseController
                     })
                     ->where('s.id', $employee)
                     ->first();
-                array_push($output, $attendance);
+                    $attendance['absent_reason'] = $Connection->table("teacher_absent_reasons")
+                        ->select('id', 'name')
+                        ->get();
+                    $attendance['excused_reason'] = $Connection->table("teacher_excused_reasons")
+                        ->select('id', 'name')
+                        ->get();
+                    $attendance['leave'] = $Connection->table('staff_leaves as sl')
+                        ->select(
+                            'sl.*',
+                        )
+                        ->whereRaw("from_leave <=  date('$date')")
+                        ->whereRaw("to_leave >=  date('$date')")
+                        ->where('sl.staff_id', $employee)
+                        ->where('sl.status', "Approve")
+                        ->first();
+                    array_push($output, $attendance);
             }
 
             if ($output) {
@@ -13607,6 +13624,7 @@ class ApiController extends BaseController
                         'check_in' => $att['check_in'],
                         'check_out' => $att['check_out'],
                         'status' => $att['status'],
+                        'reason_id' => $att['reason_id'],
                         'hours' => $att['hours'],
                         'remarks' => $att['remarks'],
                         'staff_id' => $employee,
@@ -13621,6 +13639,7 @@ class ApiController extends BaseController
                             'check_in' => $att['check_in'],
                             'check_out' => $att['check_out'],
                             'status' => $att['status'],
+                            'reason_id' => $att['reason_id'],
                             'hours' => $att['hours'],
                             'remarks' => $att['remarks'],
                             'staff_id' => $employee,
@@ -15520,6 +15539,34 @@ class ApiController extends BaseController
             return $this->successResponse($data, 'reasons details fetch successfully');
         }
     }
+    // get teacher absent  excuse 
+    public function getTeacherAbsentExcuse(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'status' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $secConn = $this->createNewConnection($request->branch_id);
+            $data = [];
+            if ($request->status == "absent") {
+                $table_name = 'teacher_absent_reasons';
+            }
+            if ($request->status == "excused") {
+                $table_name = 'teacher_excused_reasons';
+            }
+            if (isset($table_name)) {
+                $data = $secConn->table($table_name)
+                    ->select('id', 'name')
+                    ->get();
+            }
+            return $this->successResponse($data, 'reasons details fetch successfully');
+        }
+    }
+
     // add Group
     public function addGroup(Request $request)
     {
@@ -16848,6 +16895,45 @@ class ApiController extends BaseController
             } else {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             }
+        }
+    }
+
+    function classRoomCheck(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'semester_id' => 'required',
+            'day' => 'required',
+        ]);
+        // return $request;
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $start_time = $request->start_time;
+            $end_time = $request->end_time;
+            $Connection = $this->createNewConnection($request->branch_id);
+            $getClassName = $Connection->table('timetable_class as tc')->select('tc.class_room')
+                ->where([
+                    ['tc.semester_id', '=', $request->semester_id],
+                    ['tc.day', '=', $request->day],
+                ])
+                ->where(function($query) use ($start_time, $end_time){
+                      $query->whereBetween('time_start', [$start_time,$end_time])       
+                            ->orWhereBetween('time_end', [$start_time,$end_time]);
+                    })
+                // ->where("time_start","<", $start_time)
+                // ->where("time_end",">", $start_time)
+                // ->orWhere("time_start","<=", $end_time)
+                // ->orWhere("time_end",">=", $end_time)
+                // ->whereBetween('time_end', [$request->start_time, $request->end_time])
+                // ->whereBetween('time_start', [$request->start_time, $request->end_time])
+                ->whereNotNull('class_room')
+                ->groupBy('class_room')
+                ->get();
+                // dd($getClassName);
+            return $this->successResponse($getClassName, 'Class Name record fetch successfully');
         }
     }
 }

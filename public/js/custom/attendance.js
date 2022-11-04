@@ -12,6 +12,22 @@ $(function () {
             $(this).closest('tr').find('.checkin').prop('readonly', true);
             $(this).closest('tr').find('.checkout').prop('readonly', true);
             $(this).closest('tr').find('.hours').prop('readonly', true);
+            
+
+            var reason = $(this).closest('tr').find('.reason');
+            reason.empty();
+            reason.append('<option value="">Select Reason</option>');
+            $.post(getTeacherAbsentExcuse, {
+                token: token,
+                branch_id: branchID,
+                status: status
+            }, function (res) {
+                if (res.code == 200) {
+                    $.each(res.data, function (key, val) {
+                        reason.append('<option value="' + val.id + '">' + val.name + '</option>');
+                    });
+                }
+            }, 'json');
         } else {
             $(this).closest('tr').find('.checkin').prop('readonly', false);
             $(this).closest('tr').find('.checkout').prop('readonly', false);
@@ -108,6 +124,15 @@ $(function () {
             $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
         }
     });
+    
+    $("#employeeDate").focus(function () {
+        $(".ui-datepicker-calendar").hide();
+        $("#ui-datepicker-div").position({
+            my: "center top",
+            at: "center bottom",
+            of: $(this)
+        });
+    });
 
     $('#employeeReportDate').datepicker({
         changeMonth: true,
@@ -119,6 +144,15 @@ $(function () {
         onClose: function (dateText, inst) {
             $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
         }
+    });
+    
+    $("#employeeReportDate").focus(function () {
+        $(".ui-datepicker-calendar").hide();
+        $("#ui-datepicker-div").position({
+            my: "center top",
+            at: "center bottom",
+            of: $(this)
+        });
     });
     // rules validation
     $("#employeeAttendanceReport").validate({
@@ -411,77 +445,95 @@ $(function () {
     });
 
     function callout(data) {
-        
+
         $.each(data, function (key, val) {
             var row = "";
             var disabled = "";
-            row += '<tr id="row'+count+'"> ';
-            if(val.details.id)
-            {
-                row += '<input type="hidden" name="attendance[' + count + '][id]" value="' + val.details.id +'">';
-            }else{
+            row += '<tr id="row' + count + '"> ';
+            if (val.details.id) {
+                row += '<input type="hidden" name="attendance[' + count + '][id]" value="' + val.details.id + '">';
+            } else {
                 row += '<input type="hidden" name="attendance[' + count + '][id]" value="">';
             }
             row += '<td width="15%">';
             row += '<div class="form-group">';
-            row += '<input type="text" name="attendance[' + count + '][date]" class="form-control" value="' + val.date +'">';
+            row += '<input type="text" name="attendance[' + count + '][date]" class="form-control" value="' + val.date + '">';
             row += '</div>';
             row += '</td>';
-            row += '<td width="20%">';
+            row += '<td width="10%">';
             row += '<div class="form-group">';
             row += '<select  class="form-control status"  name="attendance[' + count + '][status]">';
             row += '<option value="">Select Status</option>';
-            if(val.details.status == "present")
-            {
-                row += '<option value="present" Selected>Present</option>';
-                row += '<option value="absent">Absent</option>';
-                row += '<option value="late">Late</option>';
-            }else if(val.details.status == "absent")
-            {
+            if (val.leave) {
                 row += '<option value="present">Present</option>';
-                row += '<option value="absent" Selected>Absent</option>';
+                row += '<option value="absent" ' + (val.leave.leave_type == "absent" ? "selected" : "") + '>Absent</option>';
                 row += '<option value="late">Late</option>';
+                row += '<option value="excused" ' + (val.leave.leave_type == "excused" ? "selected" : "") + '>Excused</option>';
                 disabled = "readonly";
-            }else if(val.details.status == "late")
-            {
-                row += '<option value="present">Present</option>';
-                row += '<option value="absent">Absent</option>';
-                row += '<option value="late" Selected>Late</option>';
-            }else{
-                row += '<option value="present">Present</option>';
-                row += '<option value="absent">Absent</option>';
-                row += '<option value="holiday">Late</option>';
+            } else {
+                row += '<option value="present" ' + (val.details.status == "present" ? "selected" : "") + '>Present</option>';
+                row += '<option value="absent"' + (val.details.status == "absent" ? "selected" : "") + '>Absent</option>';
+                row += '<option value="late"' + (val.details.status == "late" ? "selected" : "") + '>Late</option>';
+                row += '<option value="excused"' + (val.details.status == "excused" ? "selected" : "") + '>Excused</option>';
             }
             row += '</select>';
             row += '</div>';
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
-            row += '<input class="form-control checkin" type="time" name="attendance[' + count + '][check_in]"  value="' + val.details.check_in + '" ' + disabled + '> ' ;
+            row += '<input class="form-control checkin" type="time" name="attendance[' + count + '][check_in]"  value="' + moment(val.details.check_in, 'HH:mm:ss').format('HH:mm') + '" ' + disabled + '> ';
             row += '</div>';
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
-            row += '<input class="form-control checkout" type="time" name="attendance[' + count + '][check_out]" value="' + val.details.check_out + '" ' + disabled + '>';
+            row += '<input class="form-control checkout" type="time" name="attendance[' + count + '][check_out]" value="' + moment(val.details.check_out, 'HH:mm:ss').format('HH:mm') + '" ' + disabled + '>';
             row += '</div>';
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
-            if(val.details.hours)
-            {
+            if (val.details.hours) {
                 row += '<input type="text" name="attendance[' + count + '][hours]" class="form-control hours" value="' + val.details.hours + '" ' + disabled + ' >';
-            }else{
+            } else {
                 row += '<input type="text" name="attendance[' + count + '][hours]" class="form-control hours" value="" ' + disabled + '>';
             }
             row += '</div>';
             row += '</td>';
-            row += '<td width="20%">'; 
-            if(val.details.remarks)
-            {
-                row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="' + val.details.remarks + '">';
-            }else{
-                row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="">';
+            row += '<td width="15%">';
+            row += '<div class="form-group">';
+            row += '<select  class="form-control reason"  name="attendance[' + count + '][reason_id]">';
+            row += '<option value="">Select Reasons</option>';
+            if(val.leave) {
+                var reason = val.leave.reason_id;
+                var status = "absent";
+            }else {
+                var reason = val.details.reason_id;
+                var status = val.details.status;
             }
+            if (status=="absent") {
+                console.log('ab_rea',val.absent_reason)
+                $.each(val.absent_reason, function (keys, val_rea) {
+                    row += '<option value="' + val_rea.id + '" ' + (reason == val_rea.id ? "selected" : "") + '>' + val_rea.name + '</option>';
+                });
+            } else if (status=="excused") {
+                console.log('ex_rea',val.excused_reason)
+                $.each(val.excused_reason, function (keys, val_rea) {
+                    row += '<option value="' + val_rea.id + '" ' + (reason == val_rea.id ? "selected" : "") + '>' + val_rea.name + '</option>';
+                });
+            }
+            row += '</select>';
+            row += '</div>';
+            row += '</td>';
+            row += '<td width="15%">';
+            
+            if (val.leave) {
+                row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="' + val.leave.remarks + '">';
+            } else {
+                if (val.details.remarks) {
+                    row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="' + val.details.remarks + '">';
+                } else {
+                    row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="">';
+                }
+            }   
             row += '</td>';
             row += '</tr>';
 

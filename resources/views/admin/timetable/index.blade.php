@@ -142,12 +142,16 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="table-responsive">
-                                <table class="table table-bordered dt-responsive">
+                                <table class="table table-bordered dt-responsive table2excel">
                                     <tbody id="timetable">
                                     </tbody>
                                 </table>
-
                             </div> <!-- end table-responsive-->
+                            <div class="col-md-12">
+                                <div class="clearfix mt-4">
+                                    <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel" style="float:right;">Download</button>
+                                </div>
+                            </div>
                         </div> <!-- end col-->
                     </div>
                 </div> <!-- end card-body -->
@@ -200,6 +204,7 @@
 @endsection
 
 @section('scripts')
+<script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
 <script>
     var sectionByClass = "{{ route('admin.section_by_class') }}";
 </script>
