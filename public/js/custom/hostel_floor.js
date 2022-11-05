@@ -2,7 +2,7 @@ $(function () {
 
     hostelFloorTable();
     $(document).on('click', '#addHostelFloor', function () {
-        
+
         console.log('1')
         $('.select2-selection__rendered').html('<li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="Choose ..." style="width: 424.034px;" aria-controls="select2-block_warden-jy-results" aria-activedescendant="select2-block_warden-jy-result-hnrw-54"></li>');
         $('#hostelFloorForm').trigger("reset");
@@ -53,10 +53,10 @@ $(function () {
 
     // get all HostelFloor table
     function hostelFloorTable() {
-         $('#hostel-floor-table').DataTable({
+        $('#hostel-floor-table').DataTable({
             processing: true,
             info: true,
-            bDestroy:true,
+            bDestroy: true,
             dom: 'lBfrtip',
             buttons: [
                 {
@@ -66,10 +66,19 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     }
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Download PDF',
+                    extension: '.pdf',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+
                 }
             ],
             ajax: hostelFloorList,
-            "pageLength": 5,
+            "pageLength": 10,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
                 [5, 10, 25, 50, "All"]
@@ -114,8 +123,8 @@ $(function () {
     // get row
     $(document).on('click', '#editHostelFloorBtn', function () {
         var id = $(this).data('id');
-     
-        $('.editHostelFloor').find('form')[0].reset();   
+
+        $('.editHostelFloor').find('form')[0].reset();
         $.post(hostelFloorDetails, { id: id }, function (data) {
             $('.editHostelFloor').find('input[name="id"]').val(data.data.id);
             $('.editHostelFloor').find('input[name="floor_name"]').val(data.data.floor_name);
@@ -126,22 +135,22 @@ $(function () {
 
             var arr = data.data.floor_warden.split(',');
             var output = "";
-            $.each(arr, function(index, value) {
-                
-                var name = $("#floor_warden_div option[value='"+value+"']").text();
-                output += '<li class="select2-selection__choice" title="'+name+' " data-select2-id="'+value+'"><span class="select2-selection__choice__remove" role="presentation">×</span>'+name+' </li>';
-                
-              });
+            $.each(arr, function (index, value) {
+
+                var name = $("#floor_warden_div option[value='" + value + "']").text();
+                output += '<li class="select2-selection__choice" title="' + name + ' " data-select2-id="' + value + '"><span class="select2-selection__choice__remove" role="presentation">×</span>' + name + ' </li>';
+
+            });
             $('#floor_warden_div .select2-selection__rendered').html(output);
             var arr2 = data.data.floor_leader.split(',');
             var output2 = "";
-            $.each(arr2, function(index2, value2) {
-                
-                var name2 = $("#floor_leader_div option[value='"+value2+"']").text();
-                output2 += '<li class="select2-selection__choice" title="'+name2+' " data-select2-id="'+value2+'"><span class="select2-selection__choice__remove" role="presentation">×</span>'+name2+' </li>';
-                
-              });
-              $('#floor_leader_div .select2-selection__rendered').html(output2);
+            $.each(arr2, function (index2, value2) {
+
+                var name2 = $("#floor_leader_div option[value='" + value2 + "']").text();
+                output2 += '<li class="select2-selection__choice" title="' + name2 + ' " data-select2-id="' + value2 + '"><span class="select2-selection__choice__remove" role="presentation">×</span>' + name2 + ' </li>';
+
+            });
+            $('#floor_leader_div .select2-selection__rendered').html(output2);
             $('.editHostelFloor').modal('show');
         }, 'json');
     });
@@ -150,7 +159,7 @@ $(function () {
         e.preventDefault();
         var edt_hostelCheck = $("#edit-hostel-floor-form").valid();
         if (edt_hostelCheck === true) {
-      
+
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),

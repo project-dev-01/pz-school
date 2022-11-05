@@ -359,6 +359,15 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     }
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Download PDF',
+                    extension: '.pdf',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+
                 }
             ],
             data: dataSetNew,

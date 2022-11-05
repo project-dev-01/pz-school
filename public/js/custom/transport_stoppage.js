@@ -45,10 +45,10 @@ $(function () {
 
     // get all TransportStoppage table
     function transportStoppageTable() {
-         $('#transport-stoppage-table').DataTable({
+        $('#transport-stoppage-table').DataTable({
             processing: true,
             info: true,
-            bDestroy:true,
+            bDestroy: true,
             dom: 'lBfrtip',
             buttons: [
                 {
@@ -58,10 +58,19 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     }
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Download PDF',
+                    extension: '.pdf',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+
                 }
             ],
             ajax: transportStoppageList,
-            "pageLength": 5,
+            "pageLength": 10,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
                 [5, 10, 25, 50, "All"]
@@ -98,8 +107,8 @@ $(function () {
     // get row
     $(document).on('click', '#editTransportStoppageBtn', function () {
         var id = $(this).data('id');
-     
-        $('.editTransportStoppage').find('form')[0].reset();   
+
+        $('.editTransportStoppage').find('form')[0].reset();
         $.post(transportStoppageDetails, { id: id }, function (data) {
             $('.editTransportStoppage').find('input[name="id"]').val(data.data.id);
             $('.editTransportStoppage').find('input[name="stop_position"]').val(data.data.stop_position);
@@ -114,7 +123,7 @@ $(function () {
         e.preventDefault();
         var edt_transportCheck = $("#edit-transport-stoppage-form").valid();
         if (edt_transportCheck === true) {
-      
+
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),

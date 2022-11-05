@@ -14,9 +14,9 @@ $(function () {
             // ],
             info: true,
             // dom: 'lBfrtip',
-            dom:"<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             buttons: [
                 {
                     extend: 'csv',
@@ -25,6 +25,15 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     }
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Download PDF',
+                    extension: '.pdf',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+
                 }
             ],
             "ajax": {
@@ -50,7 +59,7 @@ $(function () {
                 }
             },
 
-            "pageLength": 5,
+            "pageLength": 10,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
                 [5, 10, 25, 50, "All"]
@@ -181,7 +190,7 @@ $(function () {
         formData.append('branch_id', branchID);
         formData.append('leave_id', leave_id);
         formData.append('staff_id', staff_id);
-        
+
         $.ajax({
             url: staffLeaveDetailsShowUrl,
             method: "post",

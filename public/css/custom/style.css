@@ -54,8 +54,8 @@ table>thead>tr>th {
 
 /*table search button*/
 div.dataTables_wrapper div.dataTables_filter input {
-	width: 300px;
-	border-radius: 20px;
+	width: 160px;
+	/*border-radius: 20px;*/
 	font-family: Open Sans;
 
 }
@@ -368,13 +368,13 @@ input:focus {
 .close {
 	color: #1abc9c;
 	opacity: 1.5;
-} 
+}
 
 /*end calender css*/
 button.dt-button {
-	border-radius: 22px;
+	/*border-radius: 22px;*/
 	background: white;
-	color: #4fc6e1;
+	color: #959ba0;
 	border: 1px solid #4fc6e1;
 }
 
@@ -383,7 +383,7 @@ button.dt-button {
 }
 
 div.dt-buttons {
-	display: inherit;
+	display: block;
 }
 
 .icon-dual {
@@ -444,12 +444,18 @@ div.dt-buttons {
 	top: 17px;
 	right: 4px;
 }
-.add-btn
-{
-	width:80px;
+
+.add-btn {
+	width: 80px;
 	color: #fff;
 	border-color: #0ABAB5;
 	background-color: #6FC6CC;
 	border-radius: 60px;
 	text-align: center;
+}
+
+@media (max-width: 767.98px) {
+	div.dt-buttons {
+		margin-bottom: 0.5rem;
+	}
 }

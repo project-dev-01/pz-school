@@ -611,9 +611,13 @@ return [
          'global_setting_delete' => $url.'/global_setting/delete',
  
          //check class room availablity
-         'class_room_check' => $url.'/class_room_check'
-         
-
+         'class_room_check' => $url.'/class_room_check',
+         // relief_assignment
+         'get_all_leave_relief_assignment' => $url.'/get_all_leave_relief_assignment',
+         'get_subjects_by_staff_id_with_date' => $url.'/get_subjects_by_staff_id_with_date',
+         'relief_assignment_other_teacher' => $url.'/relief_assignment_other_teacher',
+         'get_staff_list_by_timeslot' => $url.'/get_staff_list_by_timeslot',
+         'get_calendar_details_timetable' => $url.'/get_calendar_details_timetable'
     ]
 
 ];

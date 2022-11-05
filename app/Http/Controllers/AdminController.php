@@ -2018,8 +2018,8 @@ class AdminController extends Controller
 
             $response = "";
             $response .= '<tr><td class="center" style="color:#ed1833;">Day/Period</td>';
-            for( $i = 1 ; $i <= $max ; $i++ ) {
-                $response .= '<td class="centre">'.$i.'</td>';
+            for ($i = 1; $i <= $max; $i++) {
+                $response .= '<td class="centre">' . $i . '</td>';
             }
             $response .= '</tr>';
             foreach ($days as $day) {
@@ -4425,6 +4425,24 @@ class AdminController extends Controller
             ->rawColumns(['actions'])
             ->make(true);
     }
+    public function getAllLeaveReliefAssignment(Request $request)
+    {
+        $staff_data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.get_all_leave_relief_assignment'), $staff_data);
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-staff_id="' . $row['staff_id'] . '" 
+                                    data-from_date="' . $row['from_leave'] . '" data-to_date="' . $row['to_leave'] . '" id="reliefAssign">Relief Assign</a>
+                            </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
     // reupload file
     public function reUploadLeaveFile(Request $request)
     {
@@ -4502,6 +4520,13 @@ class AdminController extends Controller
     {
         $get_all_staff_details = Helper::GetMethod(config('constants.api.get_all_staff_details'));
         return view('admin.leave_management.assign_leave_approval', [
+            'get_all_staff_details' => $get_all_staff_details['data']
+        ]);
+    }
+    public function reliefAssignment()
+    {
+        $get_all_staff_details = Helper::GetMethod(config('constants.api.get_all_staff_details'));
+        return view('admin.leave_management.relief_assignment', [
             'get_all_staff_details' => $get_all_staff_details['data']
         ]);
     }

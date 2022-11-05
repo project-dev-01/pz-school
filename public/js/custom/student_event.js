@@ -1,17 +1,17 @@
 $(function () {
 
     $(".timepicker").flatpickr({
-        enableTime:!0,
-        noCalendar:!0,
-        dateFormat:"H:i",
-        time_24hr:!0,
-        defaultDate:"08:30"
+        enableTime: !0,
+        noCalendar: !0,
+        dateFormat: "H:i",
+        time_24hr: !0,
+        defaultDate: "08:30"
     });
 
-    
+
     eventTable();
-    
-   
+
+
     function eventTable() {
         $('#event-table').DataTable({
             processing: true,
@@ -25,10 +25,19 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     }
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Download PDF',
+                    extension: '.pdf',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+
                 }
             ],
             ajax: eventList,
-            "pageLength": 5,
+            "pageLength": 10,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
                 [5, 10, 25, 50, "All"]
@@ -75,29 +84,28 @@ $(function () {
             ]
         }).on('draw', function () {
         });
-   }
+    }
 
 
 
-    $(document).on('click','#viewEventBtn', function(){
+    $(document).on('click', '#viewEventBtn', function () {
         var event_id = $(this).data('id');
         $('.viewEvent').find('span.error-text').text('');
-        $.post(eventDetails,{id:event_id}, function(data){
-            console.log('cc',data)
+        $.post(eventDetails, { id: event_id }, function (data) {
+            console.log('cc', data)
             $('.viewEvent').find('.title').text(data.data.title);
             $('.viewEvent').find('.type').text(data.data.type_name);
             $('.viewEvent').find('.start_date').text(data.data.start_date);
             $('.viewEvent').find('.end_date').text(data.data.end_date);
-            if(data.data.audience==1)
-            {
+            if (data.data.audience == 1) {
                 $('.viewEvent').find('.audience').text("Everyone");
-            }else{
-                $('.viewEvent').find('.audience').text("Class "+data.data.classname);
+            } else {
+                $('.viewEvent').find('.audience').text("Class " + data.data.classname);
             }
-            
+
             $('.viewEvent').find('.description').text(data.data.remarks);
             $('.viewEvent').modal('show');
-        },'json');
+        }, 'json');
     });
 
 

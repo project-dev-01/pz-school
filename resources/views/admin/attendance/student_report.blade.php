@@ -43,7 +43,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
+                        <h4 class="navv">
                             Select Ground
                             <h4>
                     </li>
@@ -52,7 +52,7 @@
                 <div class="card-body">
                     <form id="attendanceFilter" autocomplete="off">
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="changeClassName">Standard<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
@@ -64,7 +64,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="sectionID">Class Name<span class="text-danger">*</span></label>
                                     <select id="sectionID" class="form-control" name="section_id">
@@ -72,7 +72,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="subjectID">Subject<span class="text-danger">*</span></label>
                                     <select id="subjectID" class="form-control" name="subject_id">
@@ -80,7 +80,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="semesterID">Semester</label>
                                     <select id="semesterID" class="form-control" name="semester_id">
@@ -91,7 +91,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="sessionID">Session</label>
                                     <select id="sessionID" class="form-control" name="session_id">
@@ -102,7 +102,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="class_date">Date<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="class_date" id="classDate" placeholder="MM/YY">
@@ -131,7 +131,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
+                        <h4 class="navv">
                             Attendance Report
                             <h4>
                     </li>
@@ -150,7 +150,7 @@
                                                     <th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i> Absent</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-ufo"></i> Holiday</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> Late</button></th>
-                                                    
+
                                                 </tr>
                                             </table>
                                         </div>
@@ -164,7 +164,7 @@
                     </div>
                     <!-- end row-->
                     <div class="form-group text-right m-b-0">
-                         <form method="post" action="{{ route('admin.attendance.student_excel')}}">
+                        <form method="post" action="{{ route('admin.attendance.student_excel')}}">
                             @csrf
                             <input type="hidden" name="subject" id="excelSubject">
                             <input type="hidden" name="class" id="excelClass">
@@ -191,7 +191,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
+                        <h4 class="navv">
                             Daily Present and Late Analysis
                             <h4>
                     </li>

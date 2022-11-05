@@ -293,7 +293,7 @@ $(function () {
             session_id: "required"
         }
     });
-    
+
     // get student list
     $('#StudentFilter').on('submit', function (e) {
         e.preventDefault();
@@ -305,9 +305,9 @@ $(function () {
                 info: true,
                 bDestroy: true,
                 // dom: 'lBfrtip',
-                dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
+                dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+                    "<'row'<'col-sm-6'i><'col-sm-6'p>>",
                 buttons: [
                     {
                         extend: 'csv',
@@ -316,6 +316,15 @@ $(function () {
                         exportOptions: {
                             columns: 'th:not(:last-child)'
                         }
+                    },
+                    {
+                        extend: 'pdf',
+                        text: 'Download PDF',
+                        extension: '.pdf',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        }
+
                     }
                 ],
                 serverSide: true,
@@ -373,8 +382,8 @@ $(function () {
                         "className": "table-user",
                         "render": function (data, type, row, meta) {
                             var currentImg = studentImg + '/' + row.photo;
-                        // var existUrl = UrlExists(currentImg);
-                        // console.log(currentImg);
+                            // var existUrl = UrlExists(currentImg);
+                            // console.log(currentImg);
                             var img = (row.photo != null) ? studentImg + '/' + row.photo : defaultImg;
                             var first_name = '<img src="' + img + '" class="mr-2 rounded-circle">' +
                                 '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
@@ -383,7 +392,7 @@ $(function () {
                     },
                 ]
             });
-        }else{
+        } else {
             $("#student").hide("slow");
         }
 
@@ -496,7 +505,7 @@ $(function () {
     });
 
     $("#drp_transport_route").on('change', function (e) {
-        e.preventDefault(); 
+        e.preventDefault();
         var route_id = $(this).val();
         $("#drp_transport_vechicleno").empty();
         $("#drp_transport_vechicleno").append('<option value="">Select Vehicle</option>');
@@ -512,7 +521,7 @@ $(function () {
 
 
     $("#drp_hostelnam").on('change', function (e) {
-        e.preventDefault(); 
+        e.preventDefault();
         var hostel_id = $(this).val();
         $("#drp_roomname").empty();
         $("#drp_roomname").append('<option value="">Select Room</option>');

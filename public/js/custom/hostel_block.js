@@ -57,10 +57,19 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     }
+                },
+				{
+                extend: 'pdf',
+                text: 'Download PDF',
+                extension: '.pdf',
+                exportOptions: {
+                    columns: 'th:not(:last-child)'
                 }
+
+            }
             ],
             ajax: hostelBlockList,
-            "pageLength": 5,
+            "pageLength": 10,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
                 [5, 10, 25, 50, "All"]

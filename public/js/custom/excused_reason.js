@@ -43,13 +43,13 @@ $(function () {
 
     // get all excused Reason table
     function excusedReasonTable() {
-         $('#excused-reason-table').DataTable({
+        $('#excused-reason-table').DataTable({
             processing: true,
             info: true,
             // dom: 'lBfrtip',
-            dom:"<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             buttons: [
                 {
                     extend: 'csv',
@@ -58,10 +58,19 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     }
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Download PDF',
+                    extension: '.pdf',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+
                 }
             ],
             ajax: excusedReasonList,
-            "pageLength": 5,
+            "pageLength": 10,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
                 [5, 10, 25, 50, "All"]
@@ -93,8 +102,8 @@ $(function () {
     // get row
     $(document).on('click', '#editExcusedReasonBtn', function () {
         var id = $(this).data('id');
-     
-        $('.editExcusedReason').find('form')[0].reset();   
+
+        $('.editExcusedReason').find('form')[0].reset();
         $.post(excusedReasonDetails, { id: id }, function (data) {
             $('.editExcusedReason').find('input[name="id"]').val(data.data.id);
             $('.editExcusedReason').find('input[name="name"]').val(data.data.name);
@@ -107,7 +116,7 @@ $(function () {
         e.preventDefault();
         var edt_excusedReasonCheck = $("#edit-excused-reason-form").valid();
         if (edt_excusedReasonCheck === true) {
-      
+
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),

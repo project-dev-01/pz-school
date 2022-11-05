@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use App\Models\User;
 use DateTime;
+// notifications
+use App\Notifications\ReliefAssignment;
+use Illuminate\Support\Facades\Notification;
 
 class ApiControllerOne extends BaseController
 {
@@ -2904,6 +2907,389 @@ class ApiControllerOne extends BaseController
                 }
             }
             return $this->successResponse([], 'Promotion successfuly.');
+        }
+    }
+    // relief assignment
+    public function getAllLeaveReliefAssignment(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'academic_session_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            $leaveDetails = $conn->table('staff_leaves as lev')
+                ->select(
+                    'lev.id',
+                    'lev.staff_id',
+                    DB::raw('CONCAT(stf.first_name, " ", stf.last_name) as name'),
+                    DB::raw('DATE_FORMAT(lev.from_leave, "%d-%m-%Y") as from_leave'),
+                    DB::raw('DATE_FORMAT(lev.to_leave, "%d-%m-%Y") as to_leave'),
+                    DB::raw('DATE_FORMAT(lev.created_at, "%d-%m-%Y") as created_at'),
+                    DB::raw('DATEDIFF(lev.to_leave,lev.from_leave) as date_diff'),
+                    'lt.name as leave_type_name',
+                    'rs.name as reason_name',
+                    'lev.reason_id',
+                    'lev.document',
+                    'lev.status',
+                    'lev.remarks',
+                    'lev.assiner_remarks'
+
+                )
+                ->join('leave_types as lt', 'lev.leave_type', '=', 'lt.id')
+                ->join('staffs as stf', 'lev.staff_id', '=', 'stf.id')
+                ->leftJoin('reasons as rs', 'lev.reason_id', '=', 'rs.id')
+                ->where([
+                    ['lev.academic_session_id', '=', $request->academic_session_id],
+                    // ['lev.status', '=', 'Approve']
+                ])
+                ->orderBy('lev.from_leave', 'desc')
+                ->get();
+            return $this->successResponse($leaveDetails, 'Staff leave details fetch successfully');
+        }
+    }
+    public function getSubjectsByStaffIdWithDate(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'academic_session_id' => 'required',
+            'staff_id' => 'required',
+            'from_date' => 'required',
+            'to_date' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            $from_leave = date('Y-m-d', strtotime($request['from_date']));
+            $to_leave = date('Y-m-d', strtotime($request['to_date']));
+            $leave_teacher = $conn->table('calendors as cl')
+                ->select(
+                    'cl.id',
+                    'cl.start',
+                    'cl.end',
+                    'cl.relief_assignment_id',
+                    'cl.time_table_id',
+                    DB::raw('date(cl.end) as end_date'),
+                    'c.name as class_name',
+                    'sc.name as section_name',
+                    'sbj.name as subject_name',
+                    'acal.teacher_id as assigned_teacher_id',
+                    DB::raw("CONCAT(stf.first_name, ' ', stf.last_name) as teacher_name")
+                )
+                ->join('classes as c', 'cl.class_id', '=', 'c.id')
+                ->join('sections as sc', 'cl.section_id', '=', 'sc.id')
+                ->join('subjects as sbj', 'cl.subject_id', '=', 'sbj.id')
+                ->join('staffs as stf', 'cl.teacher_id', '=', 'stf.id')
+                ->leftJoin('calendors as acal', 'cl.id', '=', 'acal.relief_assignment_id')
+                ->where([
+                    // ['sa.academic_session_id', '=', $request->academic_session_id],
+                    ['cl.teacher_id', '=', $request->staff_id]
+                ])
+                ->whereBetween(DB::raw('date(cl.end)'), [$from_leave, $to_leave])
+                // ->where([
+                //     [DB::raw('date(cl.end)'), '>=', DB::raw('date(ev.start_date)')],
+                //     [DB::raw('date(cl.end)'), '<=', DB::raw('date(ev.end_date)')],
+                //     ['ev.holiday', '=', '0']
+                // ])
+                ->orderBy('cl.start', 'asc')
+                ->get()
+                ->groupBy('end_date');
+            // dd($leave_teacher);
+            $output = [];
+            // dd($leave_teacher);
+
+            if (!empty($leave_teacher)) {
+                foreach ($leave_teacher as $key => $value) {
+                    // print_r($key);
+                    // $object = new \stdClass();
+                    // echo "------";
+                    // print_r($value);
+                    $subjectArr = [];
+                    foreach ($value as $val) {
+                        // $reqData->start = $val->start;
+                        // $reqData->end = $val->end;
+                        // $reqData->academic_session_id = $request->academic_session_id;
+                        $request->request->add(['start' => $val->start]); //add request
+                        $request->request->add(['end' => $val->end]); //add request
+                        $teacherList = $this->getStaffListByTimeslot($request);
+                        $val->teacherList = $teacherList;
+                        array_push($subjectArr, $val);
+                    }
+                    $output[$key] = $subjectArr;
+                    // $object->$key = $subjectArr;
+                    // array_push($output, $object);
+                }
+            }
+            // dd($output);
+            // get teacher details
+            // $output['teacher'] = $conn->table('subject_assigns as sa')->select(
+            //     's.id',
+            //     DB::raw('CONCAT(s.first_name, " ", s.last_name) as name')
+            // )
+            //     ->join('staffs as s', 'sa.teacher_id', '=', 's.id')
+            //     // ->where('sa.class_id', $request->class_id)
+            //     // ->where('sa.section_id', $request->section_id)
+            //     ->where('sa.academic_session_id', $request->academic_session_id)
+            //     // type zero mean main
+            //     ->where('sa.type', '=', '0')
+            //     ->groupBy('sa.teacher_id')
+            //     ->get();
+            return $this->successResponse($output, 'Staff calendor details fetch successfully');
+        }
+    }
+    public function reliefAssignmentOtherTeacher(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'calendar_id' => 'required',
+            'relief_assignment_teacher_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            $getData = $conn->table('calendors as cl')
+                ->select(
+                    'cl.id',
+                    'cl.class_id',
+                    'cl.section_id',
+                    'cl.subject_id',
+                    'cl.sem_id',
+                    'cl.session_id',
+                    'cl.start',
+                    'cl.end',
+                    'cl.time_table_id'
+                )
+                ->where([
+                    ['cl.id', '=', $request->calendar_id]
+                ])
+                ->first();
+            // dd($getData->start);
+            // dd($getData->end);
+            $start_date = date('Y-m-d H:i:s', strtotime($getData->start));
+            // $start_date = date('Y-m-d H:i:s', strtotime('2022-09-02 09:00:00'));
+
+            $end_date = date('Y-m-d H:i:s', strtotime($getData->end) - 1);
+            // $end_date = date('Y-m-d H:i:s', strtotime('2022-09-02 09:00:00'));
+            // dd($start_date);
+            $checkStart = $conn->table('calendors as cl')
+                ->select(
+                    'cl.teacher_id'
+                )
+                ->where('cl.start', '<=', $start_date)
+                ->where('cl.end', '>=', $start_date)
+                ->where('cl.teacher_id', '=', $request->relief_assignment_teacher_id)
+                ->where('cl.teacher_id', '!=', '')
+                ->whereNotNull('cl.relief_assignment_id')
+                ->get()->count();
+            $checkEnd = $conn->table('calendors as cl')
+                ->select(
+                    'cl.teacher_id'
+                )
+                ->where('cl.start', '<=', $end_date)
+                ->where('cl.end', '>=', $end_date)
+                ->where('cl.teacher_id', '=', $request->relief_assignment_teacher_id)
+                ->where('cl.teacher_id', '!=', '')
+                ->whereNotNull('cl.relief_assignment_id')
+                ->get()->count();
+            if (($checkStart > 0) || ($checkEnd > 0)) {
+                return $this->send422Error('There are already staff assigned to this time slot', ['error' => 'There are already staff assigned to this time slot']);
+            } else {
+                // check exist name
+                $alreadyAssign = $conn->table('calendors')
+                    ->select('id', 'start', 'end')
+                    ->where([
+                        ['class_id', '=', $getData->class_id],
+                        ['section_id', '=', $getData->section_id],
+                        ['subject_id', '=', $getData->subject_id],
+                        ['sem_id', '=', $getData->sem_id],
+                        ['session_id', '=', $getData->session_id],
+                        ['start', '=', $getData->start],
+                        ['time_table_id', '=', $getData->time_table_id],
+                        ['end', '=', $getData->end],
+                    ])
+                    ->whereNotNull('relief_assignment_id')
+                    ->first();
+                if (isset($alreadyAssign->id)) {
+                    $updata =  [
+                        "teacher_id" => $request->relief_assignment_teacher_id,
+                        'updated_at' => date("Y-m-d H:i:s")
+                    ];
+                    $query = $conn->table('calendors')->where('id', $alreadyAssign->id)->update($updata);
+                    // send leave notifications
+                    $user = User::where('user_id', $request->relief_assignment_teacher_id)->where([
+                        ['branch_id', '=', $request->branch_id]
+                    ])->where(function ($q) {
+                        $q->where('role_id', 2)
+                            ->orWhere('role_id', 3)
+                            ->orWhere('role_id', 4);
+                    })->get();
+                    $details = [
+                        'branch_id' => $request->branch_id,
+                        'staff_id' => $request->relief_assignment_teacher_id,
+                        'calendar_id' => $alreadyAssign->id
+                    ];
+                    // notifications sent
+                    Notification::send($user, new ReliefAssignment($details));
+                } else {
+                    $data =  [
+                        "title" => "timetable",
+                        "class_id" => $getData->class_id,
+                        "section_id" => $getData->section_id,
+                        "subject_id" => $getData->subject_id,
+                        "sem_id" => $getData->sem_id,
+                        "session_id" => $getData->session_id,
+                        "start" => $getData->start,
+                        "end" => $getData->end,
+                        "time_table_id" => $getData->time_table_id,
+                        "teacher_id" => $request->relief_assignment_teacher_id,
+                        "relief_assignment_id" => $request->calendar_id,
+                        'created_at' => date("Y-m-d H:i:s")
+                    ];
+                    $query = $conn->table('calendors')->insertGetId($data);
+                    // send leave notifications
+                    $user = User::where('user_id', $request->relief_assignment_teacher_id)->where([
+                        ['branch_id', '=', $request->branch_id]
+                    ])->where(function ($q) {
+                        $q->where('role_id', 2)
+                            ->orWhere('role_id', 3)
+                            ->orWhere('role_id', 4);
+                    })->get();
+                    $details = [
+                        'branch_id' => $request->branch_id,
+                        'staff_id' => $request->relief_assignment_teacher_id,
+                        'calendar_id' => $query
+                    ];
+                    // notifications sent
+                    Notification::send($user, new ReliefAssignment($details));
+                }
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Relief Assignment Staff has been successfully saved');
+                }
+            }
+        }
+    }
+    // public function getStaffListByTimeslot(Request $request)
+    public function getStaffListByTimeslot(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'academic_session_id' => 'required',
+            'start' => 'required',
+            'end' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            $start = date('Y-m-d H:i:s', strtotime($request['start']));
+            $end = date('Y-m-d H:i:s', strtotime($request['end']));
+
+            $leave_start = date('Y-m-d', strtotime($request['start']));
+            $leave_end = date('Y-m-d', strtotime($request['end']));
+            // here we get who taken leaves
+            $startLeave = $conn->table('staff_leaves as lev')
+                ->select(
+                    'lev.staff_id as teacher_id'
+                )
+                ->where('lev.from_leave', '<=', $leave_start)
+                ->where('lev.to_leave', '>=', $leave_start)
+                ->where('lev.status', '>=', 'Approve')
+                ->groupBy('lev.staff_id')
+                ->get()->toArray();
+            $endLeave = $conn->table('staff_leaves as lev')
+                ->select(
+                    'lev.staff_id as teacher_id'
+                )
+                ->where('lev.from_leave', '<=', $leave_end)
+                ->where('lev.to_leave', '>=', $leave_end)
+                ->where('lev.status', '>=', 'Approve')
+                ->groupBy('lev.staff_id')
+                ->get()->toArray();
+            $startArray = $conn->table('calendors as cl')
+                ->select(
+                    'cl.teacher_id'
+                )
+                ->where('cl.start', '<=', $start)
+                ->where('cl.end', '>=', $start)
+                ->where('cl.teacher_id', '!=', '')
+                ->whereNull('cl.relief_assignment_id')
+                ->groupBy('cl.teacher_id')
+                ->get()->toArray();
+            $endArray = $conn->table('calendors as cl')
+                ->select(
+                    'cl.teacher_id'
+                )
+                ->where('cl.start', '<=', $end)
+                ->where('cl.end', '>=', $end)
+                ->where('cl.teacher_id', '!=', '')
+                ->whereNull('cl.relief_assignment_id')
+                ->groupBy('cl.teacher_id')
+                ->get()->toArray();
+
+            $result = array_merge($startLeave, $endLeave, $startArray, $endArray);
+            // get all teacherid by unique
+            $result_unique = array_unique($result, SORT_REGULAR);
+            // here we get all that time period available teacher
+            $idTeachers = array_column($result_unique, 'teacher_id');
+            // here we get who is free that time period of teacher
+            $all_available_staff = $conn->table('subject_assigns as sa')
+                ->select(
+                    'stf.id',
+                    // DB::raw('CONCAT(stf.first_name, " ", stf.last_name, "(",sdept.name, ")") as teacher_name'),
+                    DB::raw('CONCAT(stf.first_name, " ", stf.last_name) as teacher_name'),
+                    'sdept.name as department_name'
+                )
+                ->join('staffs as stf', 'sa.teacher_id', '=', 'stf.id')
+                ->leftJoin('staff_departments as sdept', 'stf.department_id', '=', 'sdept.id')
+                ->where([
+                    ['sa.type', '=', '0'],
+                    ['sa.academic_session_id', '=', $request->academic_session_id],
+                ])
+                ->whereNotIn('sa.teacher_id', $idTeachers)
+                ->groupBy('sa.teacher_id')
+                ->get();
+            return $all_available_staff;
+            // return $this->successResponse($all_available_staff, 'Available teacher list');
+        }
+    }
+    public function getCalendarDetailsTimetable(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'calendar_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            $calendors = $conn->table('calendors as cl')
+                ->select(
+                    'cl.start',
+                    'cl.end',
+                    'c.name as class_name',
+                    'sc.name as section_name',
+                    'sbj.name as subject_name'
+                    // DB::raw("CONCAT(stf.first_name, ' ', stf.last_name) as teacher_name")
+                )
+                ->join('classes as c', 'cl.class_id', '=', 'c.id')
+                ->join('sections as sc', 'cl.section_id', '=', 'sc.id')
+                ->join('subjects as sbj', 'cl.subject_id', '=', 'sbj.id')
+                // ->join('staffs as stf', 'cl.teacher_id', '=', 'stf.id')
+                ->where('cl.id', '=', $request->calendar_id)
+                ->first();
+            return $this->successResponse($calendors, 'Available teacher list');
         }
     }
 }

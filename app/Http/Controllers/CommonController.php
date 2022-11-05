@@ -132,9 +132,28 @@ class CommonController extends Controller
                         $from_leave = isset($notification['data']['from_leave']) ? $notification['data']['from_leave'] : '-';
                         $to_leave = isset($notification['data']['to_leave']) ? $notification['data']['to_leave'] : '-';
                         $notificationlist .= '<a href="javascript:void(0);" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
-                        <p class="notify-details">'.ucfirst($name).'</p>
+                        <p class="notify-details">' . ucfirst($name) . '</p>
                         <p class="text-muted mb-0 user-msg">
                             <small>Leave Start from ' . $from_leave . ' to ' . $to_leave . '</small>
+                        </p>
+                    </a>';
+                    }
+                    if ($notification['type'] == "App\Notifications\ReliefAssignment") {
+                        $data = [
+                            'calendar_id' => $notification['data']['calendar_id']
+                        ];
+                        $response = Helper::PostMethod(config('constants.api.get_calendar_details_timetable'), $data);
+                        // dd($response['data']);
+                        // dd($response['data']['class_name']);
+                        $class_name = isset($response['data']['class_name']) ? $response['data']['class_name'] : '-';
+                        $section_name = isset($response['data']['section_name']) ? $response['data']['section_name'] : '-';
+                        $subject_name = isset($response['data']['subject_name']) ? $response['data']['subject_name'] : '-';
+                        $start = isset($response['data']['start']) ? $response['data']['start'] : '-';
+                        $end = isset($response['data']['end']) ? $response['data']['end'] : '-';
+                        $notificationlist .= '<a href="javascript:void(0);" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                        <p class="notify-details">Relief assignment</p>
+                        <p class="text-muted mb-0 user-msg">
+                            <small>A timetable for this standard ' . $class_name . ' and class ' . $section_name . ' for this subject ' . $subject_name . ' and timing is ' . $start . ' to ' . $end . '</small>
                         </p>
                     </a>';
                     }

@@ -45,10 +45,10 @@ $(function () {
 
     // get all TransportAssign table
     function transportAssignTable() {
-         $('#transport-assign-table').DataTable({
+        $('#transport-assign-table').DataTable({
             processing: true,
             info: true,
-            bDestroy:true,
+            bDestroy: true,
             dom: 'lBfrtip',
             buttons: [
                 {
@@ -58,10 +58,19 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     }
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Download PDF',
+                    extension: '.pdf',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+
                 }
             ],
             ajax: transportAssignList,
-            "pageLength": 5,
+            "pageLength": 10,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
                 [5, 10, 25, 50, "All"]
@@ -98,8 +107,8 @@ $(function () {
     // get row
     $(document).on('click', '#editTransportAssignBtn', function () {
         var id = $(this).data('id');
-     
-        $('.editTransportAssign').find('form')[0].reset();   
+
+        $('.editTransportAssign').find('form')[0].reset();
         $.post(transportAssignDetails, { id: id }, function (data) {
             $('.editTransportAssign').find('input[name="id"]').val(data.data.id);
             $('.editTransportAssign').find('input[name="route_id"]').val(data.data.route_id);
@@ -114,7 +123,7 @@ $(function () {
         e.preventDefault();
         var edt_transportCheck = $("#edit-transport-assign-form").valid();
         if (edt_transportCheck === true) {
-      
+
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),

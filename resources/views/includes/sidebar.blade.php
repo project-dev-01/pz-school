@@ -551,6 +551,11 @@
                                     <span> Assign Leave Approval </span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ route('admin.leave_management.relief_assignment')}}" class="nav-link {{ (request()->is('admin/leave_management/relief_assignment')) ? 'active' : '' }}">
+                                    <span> Relief Assignment </span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

@@ -4,7 +4,7 @@ $(function () {
 
     $('#block').on('change', function () {
         var block_id = $(this).val();
-        console.log('b',block_id)
+        console.log('b', block_id)
         $("#hostelRoomForm").find("#floor").empty();
         $("#hostelRoomForm").find("#floor").append('<option value="">Select Floor</option>');
 
@@ -19,7 +19,7 @@ $(function () {
 
     $('#edit_block').on('change', function () {
         var block_id = $(this).val();
-        console.log('b',block_id)
+        console.log('b', block_id)
         $("#edit-hostel-room-form").find("#edit_floor").empty();
         $("#edit-hostel-room-form").find("#edit_floor").append('<option value="">Select Floor</option>');
 
@@ -40,7 +40,7 @@ $(function () {
             no_of_beds: "required",
             block: "required",
             floor: "required",
-            bed_fee : "required"
+            bed_fee: "required"
         }
     });
     $("#edit-hostel-room-form").validate({
@@ -50,7 +50,7 @@ $(function () {
             no_of_beds: "required",
             block: "required",
             floor: "required",
-            bed_fee : "required"
+            bed_fee: "required"
         }
     });
     // add hostelRoom
@@ -85,13 +85,13 @@ $(function () {
 
     // get all hostelRoom table
     function hostelRoomTable() {
-         $('#hostel-room-table').DataTable({
+        $('#hostel-room-table').DataTable({
             processing: true,
             info: true,
             // dom: 'lBfrtip',
-            dom:"<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             buttons: [
                 {
                     extend: 'csv',
@@ -100,10 +100,19 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     }
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Download PDF',
+                    extension: '.pdf',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+
                 }
             ],
             ajax: hostelRoomList,
-            "pageLength": 5,
+            "pageLength": 10,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
                 [5, 10, 25, 50, "All"]
@@ -155,8 +164,8 @@ $(function () {
     // get row
     $(document).on('click', '#editHostelRoomBtn', function () {
         var id = $(this).data('id');
-     
-        $('.editHostelRoom').find('form')[0].reset();   
+
+        $('.editHostelRoom').find('form')[0].reset();
         $.post(hostelRoomDetails, { id: id }, function (data) {
             $('.editHostelRoom').find('input[name="id"]').val(data.data.id);
             $('.editHostelRoom').find('input[name="name"]').val(data.data.name);
@@ -167,11 +176,11 @@ $(function () {
             $("#edit-hostel-room-form").find("#edit_floor").empty();
             $("#edit-hostel-room-form").find("#edit_floor").append('<option value="">Select Floor</option>');
             var block_id = data.data.block;
-    
+
             $.post(floorByBlock, { token: token, branch_id: branchID, block_id: block_id }, function (res) {
                 if (res.code == 200) {
                     $.each(res.data, function (key, val) {
-                        if(val.id==data.data.floor) {
+                        if (val.id == data.data.floor) {
                             $("#edit-hostel-room-form").find("#edit_floor").append('<option value="' + val.id + '" selected>' + val.floor_name + '</option>');
                         } else {
                             $("#edit-hostel-room-form").find("#edit_floor").append('<option value="' + val.id + '">' + val.floor_name + '</option>');
@@ -192,7 +201,7 @@ $(function () {
         e.preventDefault();
         var edt_hostelRoomCheck = $("#edit-hostel-room-form").valid();
         if (edt_hostelRoomCheck === true) {
-      
+
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),

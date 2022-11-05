@@ -655,6 +655,11 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
     //checking class room 
     Route::post('class_room_check', [ApiController::class, 'classRoomCheck']);
-    
-
+    // relief assignment
+    Route::post('get_all_leave_relief_assignment', [ApiControllerOne::class, 'getAllLeaveReliefAssignment']);
+    Route::post('get_subjects_by_staff_id_with_date', [ApiControllerOne::class, 'getSubjectsByStaffIdWithDate']);
+    Route::post('relief_assignment_other_teacher', [ApiControllerOne::class, 'reliefAssignmentOtherTeacher']);
+    Route::post('get_staff_list_by_timeslot', [ApiControllerOne::class, 'getStaffListByTimeslot']);
+    Route::post('get_calendar_details_timetable', [ApiControllerOne::class, 'getCalendarDetailsTimetable']);
+    // Route::post('get_staff_details', [ApiControllerOne::class, 'reliefAssignmentOtherTeacher']);
 });

@@ -51,10 +51,10 @@ $(function () {
 
     // get all TransportVehicle table
     function transportVehicleTable() {
-         $('#transport-vehicle-table').DataTable({
+        $('#transport-vehicle-table').DataTable({
             processing: true,
             info: true,
-            bDestroy:true,
+            bDestroy: true,
             dom: 'lBfrtip',
             buttons: [
                 {
@@ -64,10 +64,19 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     }
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Download PDF',
+                    extension: '.pdf',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+
                 }
             ],
             ajax: transportVehicleList,
-            "pageLength": 5,
+            "pageLength": 10,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
                 [5, 10, 25, 50, "All"]
@@ -116,8 +125,8 @@ $(function () {
     // get row
     $(document).on('click', '#editTransportVehicleBtn', function () {
         var id = $(this).data('id');
-     
-        $('.editTransportVehicle').find('form')[0].reset();   
+
+        $('.editTransportVehicle').find('form')[0].reset();
         $.post(transportVehicleDetails, { id: id }, function (data) {
             $('.editTransportVehicle').find('input[name="id"]').val(data.data.id);
             $('.editTransportVehicle').find('input[name="vehicle_no"]').val(data.data.vehicle_no);
@@ -135,7 +144,7 @@ $(function () {
         e.preventDefault();
         var edt_transportCheck = $("#edit-transport-vehicle-form").valid();
         if (edt_transportCheck === true) {
-      
+
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),

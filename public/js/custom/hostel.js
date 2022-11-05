@@ -1,9 +1,9 @@
 $(function () {
 
     hostelTable();
-    
+
     $(document).on('click', '#addHostel', function () {
-        
+
         console.log('1')
         $('.select2-selection__rendered').html('<li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="Choose ..." style="width: 424.034px;" aria-controls="select2-block_warden-jy-results" aria-activedescendant="select2-block_warden-jy-result-hnrw-54"></li>');
         $('#hostelForm').trigger("reset");
@@ -56,13 +56,13 @@ $(function () {
 
     // get all hostel table
     function hostelTable() {
-         $('#hostel-table').DataTable({
+        $('#hostel-table').DataTable({
             processing: true,
             info: true,
             // dom: 'lBfrtip',
-            dom:"<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             buttons: [
                 {
                     extend: 'csv',
@@ -71,10 +71,19 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     }
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Download PDF',
+                    extension: '.pdf',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+
                 }
             ],
             ajax: hostelList,
-            "pageLength": 5,
+            "pageLength": 10,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
                 [5, 10, 25, 50, "All"]
@@ -85,7 +94,7 @@ $(function () {
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex'
                 }
-               ,
+                ,
                 {
                     data: 'name',
                     name: 'name'
@@ -113,11 +122,11 @@ $(function () {
         });
     }
 
-        
+
     // get row
     // $(document).on('click', '#editHostelBtn', function () {
     //     $('.editHostel').modal('show');
-        
+
     //     $('.editHostel').on('shown.bs.modal', function () {
     //         $('#watch').focus();
     //     }); 
@@ -127,31 +136,31 @@ $(function () {
         var id = $(this).data('id');
 
         $('#watch').focus();
-        $('.editHostel').find('form')[0].reset(); 
-        $('.select2-selection__rendered').html('');  
-        
+        $('.editHostel').find('form')[0].reset();
+        $('.select2-selection__rendered').html('');
+
         // $('.select2 select2-container select2-container--default').addClass('check');
         // $('#watchman').attr('data-select2-id','watchman');
         $.post(hostelDetails, { id: id }, function (data) {
             $('.editHostel').find('input[name="id"]').val(data.data.id);
             $('.editHostel').find('input[name="name"]').val(data.data.name);
             $('.editHostel').find('select[name="category"]').val(data.data.category_id);
-            
+
             // $('#watch').focus();
-            var arr = data.data.watchman.split(','); 
-            if(data.data.watchman) {
+            var arr = data.data.watchman.split(',');
+            if (data.data.watchman) {
                 var arr = data.data.watchman.split(',');
-            }else {
+            } else {
                 var arr = "";
             }
             $('.editHostel').find('select[name="watchman[]"]').val(arr);
             var output = "";
-            $.each(arr, function(index, value) {
-                
-                var name = $("#watchman option[value='"+value+"']").text();
-                output += '<li class="select2-selection__choice" title="'+name+' " data-select2-id="'+value+'"><span class="select2-selection__choice__remove" role="presentation">×</span>'+name+' </li>';
+            $.each(arr, function (index, value) {
+
+                var name = $("#watchman option[value='" + value + "']").text();
+                output += '<li class="select2-selection__choice" title="' + name + ' " data-select2-id="' + value + '"><span class="select2-selection__choice__remove" role="presentation">×</span>' + name + ' </li>';
             });
-              $('.select2-selection__rendered').html(output);
+            $('.select2-selection__rendered').html(output);
             $('.editHostel').find('input[name="address"]').val(data.data.address);
             $('.editHostel').find('textarea[name="remarks"]').text(data.data.remarks);
             $('.editHostel').modal('show');
@@ -165,7 +174,7 @@ $(function () {
         e.preventDefault();
         var edt_hostelCheck = $("#edit-hostel-form").valid();
         if (edt_hostelCheck === true) {
-      
+
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),

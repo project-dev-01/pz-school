@@ -25,6 +25,7 @@ class CreateStaffLeavesTable extends Migration
             $table->string('document')->nullable();
             $table->string('status')->nullable();
             $table->string('assiner_id')->nullable();
+            $table->integer('academic_session_id')->default('0');
             $table->timestamps();
         });
     }

@@ -30,6 +30,7 @@ class CreateCalendorsTable extends Migration
             $table->dateTime('end')->nullable();
             $table->text('description')->nullable();
             $table->integer('login_id')->nullable();
+            $table->integer('relief_assignment_id')->nullable();
             $table->string('task_color')->nullable();
             $table->timestamps();
         });

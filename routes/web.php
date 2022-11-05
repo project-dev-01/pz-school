@@ -572,8 +572,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('leave_management/all_leave_list', [AdminController::class, 'getAllLeaveList'])->name('admin.leave_management.list');
         Route::get('leave_management/applyleave_list', [AdminController::class, 'getStaffLeaveList'])->name('admin.leave_management.apply_list');
         Route::get('leave_management/assign_leave_approval', [AdminController::class, 'assignLeaveApprover'])->name('admin.leave_management.assign_leave_approver');
+        Route::get('leave_management/relief_assignment', [AdminController::class, 'reliefAssignment'])->name('admin.leave_management.relief_assignment');
         // Route::get('leave_management/get_all_staff_details', [AdminController::class, 'getAllStaffDetails'])->name('admin.leave_management.get_all_staff_details');
         Route::post('leave_management/reupload_file', [AdminController::class, 'reUploadLeaveFile'])->name('admin.reupload_file.add');
+        //
+        Route::get('get_all_leave_relief_assignment', [AdminController::class, 'getAllLeaveReliefAssignment'])->name('admin.relief_assignment.list');
 
         // Education routes
         Route::get('education/index', [AdminController::class, 'education'])->name('admin.education');

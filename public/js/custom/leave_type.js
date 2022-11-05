@@ -41,14 +41,14 @@ $(function () {
 
     // get all leaveType table
     function leaveTypeTable() {
-         $('#leave-type-table').DataTable({
+        $('#leave-type-table').DataTable({
             processing: true,
             info: true,
-            bDestroy:true,
+            bDestroy: true,
             // dom: 'lBfrtip',
-            dom:"<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             buttons: [
                 {
                     extend: 'csv',
@@ -57,10 +57,18 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     }
+                }, {
+                    extend: 'pdf',
+                    text: 'Download PDF',
+                    extension: '.pdf',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+
                 }
             ],
             ajax: leaveTypeList,
-            "pageLength": 5,
+            "pageLength": 10,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
                 [5, 10, 25, 50, "All"]
@@ -89,8 +97,8 @@ $(function () {
     // get row
     $(document).on('click', '#editLeaveTypeBtn', function () {
         var id = $(this).data('id');
-     
-        $('.editLeaveType').find('form')[0].reset();   
+
+        $('.editLeaveType').find('form')[0].reset();
         $.post(leaveTypeDetails, { id: id }, function (data) {
             $('.editLeaveType').find('input[name="id"]').val(data.data.id);
             $('.editLeaveType').find('input[name="name"]').val(data.data.name);
@@ -103,7 +111,7 @@ $(function () {
         e.preventDefault();
         var edt_leaveCheck = $("#edit-leave-type-form").valid();
         if (edt_leaveCheck === true) {
-      
+
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),

@@ -40,7 +40,7 @@ $(function () {
         processing: true,
         info: true,
         ajax: designationList,
-        "pageLength": 5,
+        "pageLength": 10,
         "aLengthMenu": [
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"]
