@@ -3027,6 +3027,7 @@ class ApiController extends BaseController
             $id = $request->id;
             // create new connection
             $staffConn = $this->createNewConnection($request->branch_id);
+            $branch_id = $request->branch_id;
             // get data
             $getEmpDetails = $staffConn->table('staffs as s')
                 ->select(
@@ -3085,7 +3086,19 @@ class ApiController extends BaseController
             }
             $empDetails['staff'] = $staffObj;
             $empDetails['bank'] = $staffConn->table('staff_bank_accounts')->where('staff_id', $id)->first();
-            $empDetails['user'] = User::where('user_id', $id)->where('branch_id', $request->branch_id)->first();
+            $staffRoles = array('4', '3', '2');
+            $sql = "";
+            for ($x = 0; $x < count($staffRoles); $x++) {
+                $getRow = User::where('user_id', $id)
+                    ->where('branch_id', $request->branch_id)
+                    ->whereRaw("find_in_set('$staffRoles[$x]',role_id)")
+                    ->first();
+                if (isset($getRow->id)) {
+                    $sql = $getRow;
+                    break;
+                }
+            }
+            $empDetails['user'] = $sql;
             return $this->successResponse($empDetails, 'Employee row fetch successfully');
         }
     }
@@ -13568,22 +13581,22 @@ class ApiController extends BaseController
                     })
                     ->where('s.id', $employee)
                     ->first();
-                    $attendance['absent_reason'] = $Connection->table("teacher_absent_reasons")
-                        ->select('id', 'name')
-                        ->get();
-                    $attendance['excused_reason'] = $Connection->table("teacher_excused_reasons")
-                        ->select('id', 'name')
-                        ->get();
-                    $attendance['leave'] = $Connection->table('staff_leaves as sl')
-                        ->select(
-                            'sl.*',
-                        )
-                        ->whereRaw("from_leave <=  date('$date')")
-                        ->whereRaw("to_leave >=  date('$date')")
-                        ->where('sl.staff_id', $employee)
-                        ->where('sl.status', "Approve")
-                        ->first();
-                    array_push($output, $attendance);
+                $attendance['absent_reason'] = $Connection->table("teacher_absent_reasons")
+                    ->select('id', 'name')
+                    ->get();
+                $attendance['excused_reason'] = $Connection->table("teacher_excused_reasons")
+                    ->select('id', 'name')
+                    ->get();
+                $attendance['leave'] = $Connection->table('staff_leaves as sl')
+                    ->select(
+                        'sl.*',
+                    )
+                    ->whereRaw("from_leave <=  date('$date')")
+                    ->whereRaw("to_leave >=  date('$date')")
+                    ->where('sl.staff_id', $employee)
+                    ->where('sl.status', "Approve")
+                    ->first();
+                array_push($output, $attendance);
             }
 
             if ($output) {
@@ -16919,10 +16932,10 @@ class ApiController extends BaseController
                     ['tc.semester_id', '=', $request->semester_id],
                     ['tc.day', '=', $request->day],
                 ])
-                ->where(function($query) use ($start_time, $end_time){
-                      $query->whereBetween('time_start', [$start_time,$end_time])       
-                            ->orWhereBetween('time_end', [$start_time,$end_time]);
-                    })
+                ->where(function ($query) use ($start_time, $end_time) {
+                    $query->whereBetween('time_start', [$start_time, $end_time])
+                        ->orWhereBetween('time_end', [$start_time, $end_time]);
+                })
                 // ->where("time_start","<", $start_time)
                 // ->where("time_end",">", $start_time)
                 // ->orWhere("time_start","<=", $end_time)
@@ -16932,7 +16945,7 @@ class ApiController extends BaseController
                 ->whereNotNull('class_room')
                 ->groupBy('class_room')
                 ->get();
-                // dd($getClassName);
+            // dd($getClassName);
             return $this->successResponse($getClassName, 'Class Name record fetch successfully');
         }
     }

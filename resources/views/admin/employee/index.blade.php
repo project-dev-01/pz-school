@@ -413,7 +413,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="role_id">Role<span class="text-danger">*</span></label>
-                                    <select class="form-control" name="role_id" id="role_id">
+                                    <select class="form-control select2-multiple" data-toggle="select2" id="role_id" name="role_id" multiple="multiple" data-placeholder="Choose ...">
                                         <option value="">Select Role</option>
                                         @foreach($roles as $r)
                                         <option value="{{$r['id']}}">{{$r['role_name']}}</option>
@@ -777,7 +777,7 @@
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         //preferredCountries: ['cn', 'jp'],
         preventInvalidNumbers: true,
-        utilsScript: "js/utils.js"
+        // utilsScript: "js/utils.js"
     });
 
     $("#Country").countrySelect({
@@ -790,6 +790,7 @@
 
 <script>
     var employeeListShow = "{{ route('admin.listemployee') }}";
+    var employeeList = null;
 </script>
 <script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
 <script src="{{ asset('public/js/custom/employee.js') }}"></script>

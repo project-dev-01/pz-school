@@ -367,17 +367,17 @@
                                     </li>
                                 </ul><br>
                                 <div class="card-body">
-                                    @forelse ($get_homework_list_dashboard as $homework)
-                                    <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
+                                    @forelse ($get_homework_list_dashboard as $key => $homework)
+                                    <div class="row mt-4" data-plugin="dragula" data-containers='["homework-list-show"]'>
                                         <div class="col">
-                                            <a class="text-dark" data-toggle="collapse" href="#hmenv" aria-expanded="false" aria-controls="hmenv">
+                                            <a class="text-dark" data-toggle="collapse" href="#hmenv{{$key}}" aria-expanded="false" aria-controls="hmenv{{$key}}">
                                                 <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> {{$homework['title']}}<span class="text-muted font-14"></span></h5>
                                             </a>
                                             <!-- Right modal -->
                                             <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#right-modal">Rightbar Modal</button> -->
-                                            <div class="collapse show" id="hmenv">
+                                            <div class="collapse" id="hmenv{{$key}}">
                                                 <div class="card mb-0 shadow-none">
-                                                    <div class="card-body pb-0" id="task-list-one">
+                                                    <div class="card-body pb-0" id="homework-list-show">
                                                         <!-- task -->
                                                         <div class="row">
                                                             <div class="col-sm-7">

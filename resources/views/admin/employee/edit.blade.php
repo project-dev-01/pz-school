@@ -423,11 +423,24 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="role_id">Role<span class="text-danger">*</span></label>
-                                    <select class="form-control" name="role_id" id="role_id">
+                                    <!-- <select class="form-control" name="role_id" id="role_id"> -->
+                                    <select class="form-control select2-multiple" data-toggle="select2" id="role_id" name="role_id" multiple="multiple" data-placeholder="Choose ...">
                                         <option value="">Select Role</option>
-                                        @foreach($roles as $r)
-                                        <option value="{{$r['id']}}" {{$role['role_id'] == $r['id'] ? 'Selected':''}}>{{$r['role_name']}}</option>
+                                        @forelse($roles as $r)
+                                        @php
+                                        $selected = "";
+                                        @endphp
+                                        @foreach(explode(',', $role['role_id']) as $info)
+                                        @if($r['id'] == $info)
+                                        @php
+                                        $selected = "Selected";
+                                        @endphp
+                                        @endif
                                         @endforeach
+                                        <option value="{{$r['id']}}" {{ $selected }}>{{$r['role_name']}}</option>
+                                        @empty
+                                        @endforelse
+
                                     </select>
                                 </div>
                             </div>
@@ -815,7 +828,7 @@
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         //preferredCountries: ['cn', 'jp'],
         preventInvalidNumbers: true,
-        utilsScript: "js/utils.js"
+        // utilsScript: "js/utils.js"
     });
 
     $("#Country").countrySelect({
@@ -829,6 +842,7 @@
 
 <script>
     var employeeListShow = "{{ route('admin.listemployee') }}";
+    var employeeList = null;
 </script>
 <script src="{{ asset('public/js/custom/employee.js') }}"></script>
 @endsection

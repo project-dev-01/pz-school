@@ -1312,9 +1312,9 @@ class AdminController extends Controller
     //add employee
     public function addEmployee(Request $request)
     {
-        $status = "0";
-        if ($request->status) {
-            $status = "1";
+        $status = "1";
+        if (isset($request->status) &&  $request->status == "undefined") {
+            $status = "0";
         }
 
         $file = $request->file('photo');
@@ -1380,7 +1380,6 @@ class AdminController extends Controller
             'post_code' => $request->post_code
 
         ];
-        // dd($data);
         $response = Helper::PostMethod(config('constants.api.employee_add'), $data);
         return $response;
     }
@@ -1427,7 +1426,7 @@ class AdminController extends Controller
         $stream_types = Helper::GetMethod(config('constants.api.stream_types'));
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $races = Helper::GetMethod(config('constants.api.races'));
-        // dd($staff);
+        // dd($staff['data']['user']);
         return view(
             'admin.employee.edit',
             [
@@ -1484,9 +1483,9 @@ class AdminController extends Controller
     // update Employee
     public function updateEmployee(Request $request)
     {
-        $status = "0";
-        if ($request->status) {
-            $status = "1";
+        $status = "1";
+        if (isset($request->status) &&  $request->status == "undefined") {
+            $status = "0";
         }
 
         $file = $request->file('photo');

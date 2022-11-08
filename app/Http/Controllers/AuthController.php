@@ -15,7 +15,6 @@ class AuthController extends Controller
     {
         if (session()->has('role_id')) {
             $role_id = session()->get('role_id');
-            $school_name_url = session()->get('school_name_url');
             if ($role_id == 2) {
                 return redirect()->route('admin.dashboard');
             } elseif ($role_id == 3) {
@@ -238,20 +237,20 @@ class AuthController extends Controller
         ]);
 
         $userDetails = $response->json();
-        // dd($userDetails);
         $school_name_url = "";
         $user_name = "";
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
             if ($userDetails['data']['subsDetails']) {
-                if ($userDetails['data']['user']['role_id'] == 2 || $userDetails['data']['user']['role_id'] == 3) {
-                    $user_name = $this->sessionCommon($request, $userDetails);
+                // multiple roles same account
+                $role_ids = explode(",", $userDetails['data']['user']['role_id']);
+                $matchRoleIndex = array_search('2', $role_ids, true);
+                $roleID = $role_ids[$matchRoleIndex];
+                if ($roleID == 2) {
+                    $user_name = $this->sessionCommon($request, $userDetails, $roleID);
                 }
-                if ($userDetails['data']['user']['role_id'] == 2) {
+                if ($roleID == 2) {
                     $redirect_route = route('admin.dashboard');
-                    return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
-                } elseif ($userDetails['data']['user']['role_id'] == 3) {
-                    $redirect_route = route('staff.dashboard');
                     return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
                 } else {
                     return redirect()->route('admin.login')->with('error', 'Invalid Credential');
@@ -276,8 +275,12 @@ class AuthController extends Controller
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
             if ($userDetails['data']['subsDetails']) {
-                if ($userDetails['data']['user']['role_id'] == 4) {
-                    $user_name = $this->sessionCommon($request, $userDetails);
+                // multiple roles same account
+                $role_ids = explode(",", $userDetails['data']['user']['role_id']);
+                $matchRoleIndex = array_search('4', $role_ids, true);
+                $roleID = $role_ids[$matchRoleIndex];
+                if ($roleID == 4) {
+                    $user_name = $this->sessionCommon($request, $userDetails, $roleID);
                 }
                 if ($userDetails['data']['user']['role_id'] == 4) {
                     $redirect_route = route('teacher.dashboard');
@@ -305,8 +308,12 @@ class AuthController extends Controller
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
             if ($userDetails['data']['subsDetails']) {
-                if ($userDetails['data']['user']['role_id'] == 3) {
-                    $user_name = $this->sessionCommon($request, $userDetails);
+                // multiple roles same account
+                $role_ids = explode(",", $userDetails['data']['user']['role_id']);
+                $matchRoleIndex = array_search('3', $role_ids, true);
+                $roleID = $role_ids[$matchRoleIndex];
+                if ($roleID == 3) {
+                    $user_name = $this->sessionCommon($request, $userDetails, $roleID);
                 }
                 if ($userDetails['data']['user']['role_id'] == 3) {
                     $redirect_route = route('staff.dashboard');
@@ -334,8 +341,12 @@ class AuthController extends Controller
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
             if ($userDetails['data']['subsDetails']) {
-                if ($userDetails['data']['user']['role_id'] == 5) {
-                    $user_name = $this->sessionCommon($request, $userDetails);
+                // multiple roles same account
+                $role_ids = explode(",", $userDetails['data']['user']['role_id']);
+                $matchRoleIndex = array_search('5', $role_ids, true);
+                $roleID = $role_ids[$matchRoleIndex];
+                if ($roleID == 5) {
+                    $user_name = $this->sessionCommon($request, $userDetails, $roleID);
                 }
                 if ($userDetails['data']['user']['role_id'] == 5) {
                     $redirect_route = route('parent.dashboard');
@@ -363,8 +374,12 @@ class AuthController extends Controller
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
             if ($userDetails['data']['subsDetails']) {
-                if ($userDetails['data']['user']['role_id'] == 6) {
-                    $user_name = $this->sessionCommon($request, $userDetails);
+                // multiple roles same account
+                $role_ids = explode(",", $userDetails['data']['user']['role_id']);
+                $matchRoleIndex = array_search('6', $role_ids, true);
+                $roleID = $role_ids[$matchRoleIndex];
+                if ($roleID == 6) {
+                    $user_name = $this->sessionCommon($request, $userDetails, $roleID);
                 }
                 if ($userDetails['data']['user']['role_id'] == 6) {
                     $redirect_route = route('student.dashboard');
@@ -536,11 +551,11 @@ class AuthController extends Controller
         $req->session()->flush();
     }
     // set session common
-    public function sessionCommon($req, $userDetails)
+    public function sessionCommon($req, $userDetails, $roleID)
     {
         $req->session()->put('user_id', $userDetails['data']['user']['id']);
         $req->session()->put('ref_user_id', $userDetails['data']['user']['user_id']);
-        $req->session()->put('role_id', $userDetails['data']['user']['role_id']);
+        $req->session()->put('role_id', $roleID);
         $req->session()->put('picture', $userDetails['data']['user']['picture']);
         $req->session()->put('token', $userDetails['data']['token']);
         $req->session()->put('name', $userDetails['data']['user']['name']);

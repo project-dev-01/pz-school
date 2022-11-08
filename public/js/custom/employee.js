@@ -183,7 +183,7 @@ $(function () {
             if ($("#skip_medical_history").prop('checked') == true) {
                 skip_medical_history = 0;
             }
-
+            var status = $('#status:checked').val();
             var formData = new FormData();
             formData.append('role_id', $('#role_id').val());
             formData.append('joining_date', convertDigitIn($('#joiningDate').val()));
@@ -230,7 +230,7 @@ $(function () {
             formData.append('state', $('#State').val());
             formData.append('country', $('#Country').val());
             formData.append('post_code', $('#postCode').val());
-            formData.append('status', $('#status').val());
+            formData.append('status', status);
             // Attach file
             formData.append('photo', $('input[type=file]')[0].files[0]);
 
@@ -323,6 +323,7 @@ $(function () {
             if ($("#skip_medical_history").prop('checked') == true) {
                 skip_medical_history = 0;
             }
+            var status = $('#edit_status:checked').val();
             var formData = new FormData();
             formData.append('id', $('#id').val());
             formData.append('role_id', $('#role_id').val());
@@ -372,7 +373,7 @@ $(function () {
             formData.append('state', $('#State').val());
             formData.append('country', $('#Country').val());
             formData.append('post_code', $('#postCode').val());
-            formData.append('status', $('#edit_status').val());
+            formData.append('status', status);
             // Attach file
             formData.append('photo', $('input[type=file]')[0].files[0]);
 
@@ -409,103 +410,105 @@ $(function () {
     });
 
     // get all designation table for admin
-    var table = $('#employee-table').DataTable({
-        processing: true,
-        info: true,
-        // dom: 'lBfrtip',
-        dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
-            "<'row'<'col-sm-12'tr>>" +
-            "<'row'<'col-sm-6'i><'col-sm-6'p>>",
-        buttons: [
-            {
-                extend: 'csv',
-                text: 'Download CSV',
-                extension: '.csv',
-                exportOptions: {
-                    columns: 'th:not(:last-child)'
-                }
-            },
-            {
-                extend: 'pdf',
-                text: 'Download PDF',
-                extension: '.pdf',
-                exportOptions: {
-                    columns: 'th:not(:last-child)'
-                }
+    if (employeeList) {
+        var table = $('#employee-table').DataTable({
+            processing: true,
+            info: true,
+            // dom: 'lBfrtip',
+            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            buttons: [
+                {
+                    extend: 'csv',
+                    text: 'Download CSV',
+                    extension: '.csv',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Download PDF',
+                    extension: '.pdf',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
 
-            }
-        ],
-        ajax: employeeList,
-        // "paging": false,
-        // "searching": false,
-        // language: {
-        //     searchPlaceholder: "Search..."
-        // },
-        // "ordering": false,
-        "pageLength": 10,
-        "aLengthMenu": [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"]
-        ],
-        columns: [
-            {
-                searchable: false,
-                data: 'DT_RowIndex',
-                name: 'DT_RowIndex'
-            },
-            {
-                data: 'name',
-                name: 'name'
-            },
-            {
-                data: 'id',
-                name: 'id'
-            },
-            {
-                data: 'short_name',
-                name: 'short_name'
-            },
-            {
-                data: 'salary_grade',
-                name: 'salary_grade'
-            },
-            {
-                data: 'stream_type',
-                name: 'stream_type'
-            },
-            {
-                data: 'department_name',
-                name: 'department_name'
-            },
-            {
-                data: 'designation_name',
-                name: 'designation_name'
-            },
-            {
-                data: 'email',
-                name: 'email'
-            },
-            {
-                data: 'actions',
-                name: 'actions',
-                orderable: false,
-                searchable: false
-            },
-        ],
-        columnDefs: [
-            {
-                "targets": 1,
-                "className": "table-user",
-                "render": function (data, type, row, meta) {
-                    var img = (row.photo != null) ? employeeImg + '/' + row.photo : defaultImg;
-                    var first_name = '<img src="' + img + '" class="mr-2 rounded-circle">' +
-                        '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
-                    return first_name;
                 }
-            },
-        ]
-    }).on('draw', function () {
-    });
+            ],
+            ajax: employeeList,
+            // "paging": false,
+            // "searching": false,
+            // language: {
+            //     searchPlaceholder: "Search..."
+            // },
+            // "ordering": false,
+            "pageLength": 10,
+            "aLengthMenu": [
+                [5, 10, 25, 50, -1],
+                [5, 10, 25, 50, "All"]
+            ],
+            columns: [
+                {
+                    searchable: false,
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'id',
+                    name: 'id'
+                },
+                {
+                    data: 'short_name',
+                    name: 'short_name'
+                },
+                {
+                    data: 'salary_grade',
+                    name: 'salary_grade'
+                },
+                {
+                    data: 'stream_type',
+                    name: 'stream_type'
+                },
+                {
+                    data: 'department_name',
+                    name: 'department_name'
+                },
+                {
+                    data: 'designation_name',
+                    name: 'designation_name'
+                },
+                {
+                    data: 'email',
+                    name: 'email'
+                },
+                {
+                    data: 'actions',
+                    name: 'actions',
+                    orderable: false,
+                    searchable: false
+                },
+            ],
+            columnDefs: [
+                {
+                    "targets": 1,
+                    "className": "table-user",
+                    "render": function (data, type, row, meta) {
+                        var img = (row.photo != null) ? employeeImg + '/' + row.photo : defaultImg;
+                        var first_name = '<img src="' + img + '" class="mr-2 rounded-circle">' +
+                            '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
+                        return first_name;
+                    }
+                },
+            ]
+        }).on('draw', function () {
+        });
+    }
 
     // delete Employee
     $(document).on('click', '#deleteEmployeeBtn', function () {
