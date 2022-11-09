@@ -33,7 +33,7 @@ $(function () {
 
             var class_id = $("#changeClassName").val();
             var section_id = $("#sectionID").val();
-
+            $("#overlay").fadeIn(300);
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
@@ -55,12 +55,60 @@ $(function () {
                     } else {
                         toastr.error(response.message);
                     }
+                    $("#overlay").fadeOut(300);
                 }
             });
 
         };
     });
+    // add remarks model
+    $('#stuLeaveRemarksPopup').on('show.bs.modal', e => {
+        $("#student_leave_remarks").focus();
+        var $button = $(e.relatedTarget);
+        var studentlev_tbl_ID = $button.attr('data-id');
+        var studentlevRemarks = $button.closest('td').find('textarea').val();
+        var checknullRemarks = (studentlevRemarks !== "null") ? studentlevRemarks : "";
+        $("#studenet_leave_tbl_id").val(studentlev_tbl_ID);
+        $("#student_leave_remarks").val(checknullRemarks);
+    });
 
+    $('#student_leave_RemarksSave').on('click', function () {
+        var studenetlevtblID = $('#studenet_leave_tbl_id').val();
+        var student_leave_remarks = $('#student_leave_remarks').val();
+        var compain_remarks_tblID = student_leave_remarks;
+        $('#addRemarksStudent' + studenetlevtblID).val(compain_remarks_tblID);
+        $('#stuLeaveRemarksPopup').modal('hide');
+    });
+    $(document).on('click', '#stdLeave', function () {
+        var student_leave_tbl_id = $(this).data('id');
+        var student_leave_approve = $("#leavestatus" + student_leave_tbl_id).val();
+        var teacher_remarks = $("#addRemarksStudent" + student_leave_tbl_id).val();
+        var formData = new FormData();
+        formData.append('token', token);
+        formData.append('branch_id', branchID);
+        formData.append('student_leave_tbl_id', student_leave_tbl_id);
+        formData.append('student_leave_approve', student_leave_approve);
+        formData.append('teacher_remarks', teacher_remarks);
+        $.ajax({
+            url: teacher_leave_remarks_updated,
+            method: "post",
+            data: formData,
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (res) {
+                if (res.code == 200) {
+                    // allStudentLeave();
+                    toastr.success('Leave Updated sucessfully');
+                }
+                else {
+                    toastr.error(res.message);
+
+                }
+            }
+        });
+
+    });
     function allStudentLeave(dataSetNew) {
 
         $('#student-leave-table').DataTable({
@@ -145,27 +193,43 @@ $(function () {
                 {
                     "targets": 6,
                     "render": function (data, type, row, meta) {
-                        var badgeColor = "";
-                        if (data == "Approve") {
-                            badgeColor = "badge-success";
-                        }
-                        if (data == "Reject") {
-                            badgeColor = "badge-danger";
-                        }
-                        if (data == "Pending") {
-                            badgeColor = "badge-warning";
-                        }
-                        var status = '<span class="badge ' + badgeColor + ' badge-pill" style="padding: 6px 6px 6px 6px;">' + data + '</span>';
+                        var status = '<select class="form-control" id="leavestatus' + row.id + '" data-style="btn-outline-success" name="student_leave_upd[' + meta.row + '][status]">' +
+                            '<option value="">Choose</option>' +
+                            '<option value="Approve"  ' + (data == "Approve" ? "selected" : "") + '>Approve</option>' +
+                            '<option value="Reject"  ' + (data == "Reject" ? "selected" : "") + '>Reject</option>' +
+                            '<option value="Pending"  ' + (data == "Pending" ? "selected" : "") + '>Pending</option>'
+                        '</select>';
                         return status;
                     }
                 },
                 {
                     "targets": 8,
                     "render": function (data, type, row, meta) {
-                        var document = '<a href="' + studentDocUrl + '/' + data + '" download ><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
+                        var document = "";
+                        if (data) {
+                            var document = '<a href="' + studentDocUrl + '/' + data + '" download ><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
+                        } else {
+                            document = "-";
+                        }
                         return document;
                     }
-                }
+                },
+                {
+                    "targets": 9,
+                    "render": function (data, type, row, meta) {
+
+                        var addremarks = '<textarea style="display:none;" class="addRemarksStudent" data-id="' + row.id + '" id="addRemarksStudent' + row.id + '" >' + (row.teacher_remarks !== "null" ? row.teacher_remarks : "") + '</textarea>' +
+                            '<button type="button" data-id="' + row.id + '" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#stuLeaveRemarksPopup" id="editLeaveRemarksStudent">Add Remarks</button>';
+                        return addremarks;
+                    }
+                },
+                {
+                    "targets": 10,
+                    "render": function (data, type, row, meta) {
+                        var submitbtn = '<button type="button" class="btn btn-primary-bl waves-effect waves-light levsub" data-id="' + row.id + '" id="stdLeave">Update</button>';
+                        return submitbtn;
+                    }
+                },
             ]
         }).on('draw', function () {
         });

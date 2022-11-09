@@ -562,7 +562,7 @@
                 <li>
                     <a href="{{ route('admin.student_leave.list')}}" class="nav-link {{ (request()->is('admin/student_leave*')) ? 'active' : '' }}">
                         <i class="far fa-user"></i>
-                        <span> Student Leave Details </span>
+                        <span> Student Leaves </span>
                     </a>
                 </li>
                 <li>

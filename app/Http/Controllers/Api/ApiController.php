@@ -5490,6 +5490,7 @@ class ApiController extends BaseController
             // create new connection
             // get attendance details query
             $date = $request->date;
+            $leave_date = date('Y-m-d', strtotime($request->date));
             $subject_id = $request->subject_id;
             $semester_id = $request->semester_id;
             $session_id = $request->session_id;
@@ -5508,6 +5509,7 @@ class ApiController extends BaseController
                     'sa.classroom_behaviour',
                     'sa.reasons',
                     'sapre.status as current_old_att_status',
+                    'stu_lev.id as taken_leave_status',
                     'st.birthday',
                     'st.photo'
                 )
@@ -5526,6 +5528,13 @@ class ApiController extends BaseController
                         ->on('sapre.semester_id', '=', DB::raw("'$semester_id'"))
                         ->on('sapre.session_id', '=', DB::raw("'$session_id'"))
                         ->on('sapre.day_recent_flag', '=', DB::raw("'1'"));
+                })
+                ->leftJoin('student_leaves as stu_lev', function ($q) use ($date) {
+                    $q->on('stu_lev.student_id', '=', 'st.id')
+                        // ->on('stu_lev.date', '=', DB::raw("'$date'"))
+                        ->on('stu_lev.status', '=', DB::raw("'Approve'"))
+                        ->where('stu_lev.from_leave', '<=', $date)
+                        ->where('stu_lev.to_leave', '>=', $date);
                 })
                 ->where([
                     ['en.class_id', '=', $request->class_id],
@@ -5733,8 +5742,16 @@ class ApiController extends BaseController
                 $attStatus = (isset($value['att_status']) ? $value['att_status'] : "");
                 $att_remark = (isset($value['att_remark']) ? $value['att_remark'] : "");
                 $reasons = (isset($value['reasons']) ? $value['reasons'] : "");
-                $student_behaviour = (isset($value['student_behaviour']) ? $value['student_behaviour'] : "");
-                $classroom_behaviour = (isset($value['classroom_behaviour']) ? $value['classroom_behaviour'] : "");
+                $student_behaviour = "";
+                if (isset($value['student_behaviour'])) {
+                    $student_behaviour = implode(',', $value['student_behaviour']);
+                }
+                $classroom_behaviour = "";
+                if (isset($value['classroom_behaviour'])) {
+                    $classroom_behaviour = implode(',', $value['classroom_behaviour']);
+                }
+                // $student_behaviour = (isset($value['student_behaviour']) ? $value['student_behaviour'] : "");
+                // $classroom_behaviour = (isset($value['classroom_behaviour']) ? $value['classroom_behaviour'] : "");
                 // $student_behaviour = $value['student_behaviour'];
                 // $classroom_behaviour = $value['classroom_behaviour'];
                 $arrayAttendance = array(
@@ -12694,9 +12711,9 @@ class ApiController extends BaseController
                     'sc.name as section_name',
 
                 )
-                ->leftJoin('students as std', 'lev.student_id', '=', 'std.id')
-                ->leftJoin('classes as cl', 'lev.class_id', '=', 'cl.id')
-                ->leftJoin('sections as sc', 'lev.section_id', '=', 'sc.id')
+                ->join('students as std', 'lev.student_id', '=', 'std.id')
+                ->join('classes as cl', 'lev.class_id', '=', 'cl.id')
+                ->join('sections as sc', 'lev.section_id', '=', 'sc.id')
                 // ->leftJoin('students as std', 'lev.student_id', '=', 'std.id')
                 ->when($class_id, function ($query, $class_id) {
                     return $query->where('lev.class_id', $class_id);
@@ -12704,7 +12721,7 @@ class ApiController extends BaseController
                 ->when($section_id, function ($query, $section_id) {
                     return $query->where('lev.section_id', $section_id);
                 })
-                ->orderBy('lev.from_leave', 'asc')
+                ->orderBy('lev.from_leave', 'desc')
                 ->get();
             return $this->successResponse($studentDetails, 'Student details fetch successfully');
         }

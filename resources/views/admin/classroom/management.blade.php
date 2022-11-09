@@ -546,8 +546,6 @@
                                                                     <th>Reason</th>
                                                                     <th>Document</th>
                                                                     <th>Status</th>
-                                                                    <th>Remarks</th>
-                                                                    <th>Action</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody id="stdleaves_body"></tbody>

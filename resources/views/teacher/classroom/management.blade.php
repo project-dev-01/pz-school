@@ -546,8 +546,6 @@
                                                                     <th>Reason</th>
                                                                     <th>Document</th>
                                                                     <th>Status</th>
-                                                                    <th>Remarks</th>
-                                                                    <th>Action</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody id="stdleaves_body"></tbody>
@@ -663,7 +661,7 @@
                                                     <div class="row">
                                                         <div class="col-md-3">
                                                             <label for="field" class="font-weight-bold">Short Test<span class="text-danger">*</span></label>
-                                                            <input type="text" id="field" class="form-control shortTestAdd" id="Hours" name="field[]" />
+                                                            <input type="text" id="field" class="form-control shortTestAdd" name="field[]" />
                                                             <span id="shortTestError"></span>
                                                         </div>
                                                         <div class="col-md-3">
