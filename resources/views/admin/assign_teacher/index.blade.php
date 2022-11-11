@@ -24,7 +24,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Section Allocation<h4>
+                        <h4 class="navv">Assign Teacher<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
@@ -38,9 +38,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Class Name</th>
-                                    <th>Section Name</th>
-                                    <th>Teacher Name</th>
+                                    <th>Grade</th>
+                                    <th>Classes</th>
+                                    <th>Teacher</th>
                                     <th>Type</th>
                                     <th>Action</th>
                                 </tr>

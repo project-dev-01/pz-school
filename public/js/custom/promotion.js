@@ -3,7 +3,7 @@ $(function () {
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
         $("#promotionFilter").find("#sectionID").empty();
-        $("#promotionFilter").find("#sectionID").append('<option value="">Select Section</option>');
+        $("#promotionFilter").find("#sectionID").append('<option value="">Select Class</option>');
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -16,7 +16,7 @@ $(function () {
     $('#promoteClassID').on('change', function () {
         var class_id = $(this).val();
         $("#promoteStudentForm").find("#promoteSectionID").empty();
-        $("#promoteStudentForm").find("#promoteSectionID").append('<option value="">Select Section</option>');
+        $("#promoteStudentForm").find("#promoteSectionID").append('<option value="">Select Class</option>');
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {

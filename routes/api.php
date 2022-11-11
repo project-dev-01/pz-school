@@ -662,4 +662,14 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('get_staff_list_by_timeslot', [ApiControllerOne::class, 'getStaffListByTimeslot']);
     Route::post('get_calendar_details_timetable', [ApiControllerOne::class, 'getCalendarDetailsTimetable']);
     // Route::post('get_staff_details', [ApiControllerOne::class, 'reliefAssignmentOtherTeacher']);
+
+    //count
+    Route::get('employee_count', [ApiController::class, 'employeeCount']);
+    Route::get('student_count', [ApiController::class, 'studentCount']);
+    Route::get('parent_count', [ApiController::class, 'parentCount']);
+    Route::get('teacher_count', [ApiController::class, 'teacherCount']);
+
+    
+    Route::post('all_logout', [AuthController::class, 'allLogout']);
+    
 });

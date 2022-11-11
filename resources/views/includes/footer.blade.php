@@ -197,10 +197,11 @@
     // notifications
     var readNotifications = "{{ config('constants.api.mark_as_read') }}";
     var allNotifications = "{{ route('unread_notifications') }}";
+    var allLogout = "{{ route('all_logout') }}";
 </script>
 <!-- custom js  -->
 <script src="{{ asset('public/js/custom/settings.js') }}"></script>
-<script src="{{ asset('public/js/custom/user_list.js') }}"></script>
+<script src="{{ asset('public/js/custom/user1_list.js') }}"></script>
 <script src="{{ asset('public/js/custom/dashboard.js') }}"></script>
 <!-- <script src="{{ asset('public/js/custom/test_result.js') }}"></script> -->
 <!-- <script src="{{ asset('public/js/custom/apex-mixed.js') }}"></script> -->
@@ -226,6 +227,63 @@
         // var sTimeOut = setInterval(function() {
         //     getNotifications();
         // }, 2000);
+
+        var sTimeOut = setInterval(function () {
+            $.ajax({
+                type: 'GET',
+                url: allLogout,
+                success: function(res) {
+                    if(res.code==200) {
+                        if(res.role==1) {
+                        window.location.href = "{{ route('super_admin.login')}}";
+                        }else if(res.role==2) {
+                        window.location.href = "{{ route('admin.login')}}";
+                        }else if(res.role==3) {
+                        window.location.href = "{{ route('staff.login')}}";
+                        }else if(res.role==4) {
+                        window.location.href = "{{ route('teacher.login')}}";
+                        }else if(res.role==5) {
+                        window.location.href = "{{ route('parent.login')}}";
+                        }else if(res.role==6) {
+                        window.location.href = "{{ route('student.login')}}";
+                        }
+                    }   
+                    
+                },
+                error: function(err) {
+                    // console.log("eror")
+                    // console.log(err)
+                }
+            });
+          },8000);
+        // getAllLogout();
+        // function getAllLogout() {
+        //     $.ajax({
+        //         type: 'GET',
+        //         url: allLogout,
+        //         success: function(res) {
+        //             if(res.code==200) {
+        //                 if(res.role==2) {
+        //                 url_name = "{{ route('admin.logout') }}"
+        //                 $.ajax({
+        //                     type: 'post',
+        //                     url: url_name,
+        //                     success: function(ress) {
+                                
+        //                         console.log('out',ress)
+                                
+        //                     },
+        //                 });
+        //             }
+        //         }
+        //         },
+        //         error: function(err) {
+        //             // console.log("eror")
+        //             // console.log(err)
+        //         }
+        //     });
+        // }
+        
         getNotifications();
         function getNotifications() {
             $.ajax({
@@ -241,6 +299,7 @@
                 }
             });
         }
+        
         // martk as to read
         $(document).on('click', '.mark-as-read', function() {
             let request = sendMarkRequest($(this).data('id'));

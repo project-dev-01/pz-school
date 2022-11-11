@@ -639,7 +639,7 @@ class StudentController extends Controller
                 if ($audience == 1) {
                     return "Everyone";
                 } else if ($audience == 2) {
-                    return "<b>Standard </b>: " . $row['class_name'];
+                    return "<b>Grade </b>: " . $row['class_name'];
                 } else if ($audience == 3) {
                     return "<b>Group </b>: " . $row['group_name'];
                 }

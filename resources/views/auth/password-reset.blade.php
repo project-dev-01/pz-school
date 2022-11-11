@@ -62,12 +62,12 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <div class="input-group input-group-merge">
-                                            <input type="email"  class="form-control" name="emaikl" placeholder="Email">
+                                            <input type="email"  class="form-control" name="email" placeholder="Email">
                                         </div>
                                     </div>
                                     <div class="form-group mb-3">
                                         <div class="input-group input-group-merge">
-                                            <input type="password"  class="form-control" name="password_confirmation" placeholder="New password">
+                                            <input type="password"  class="form-control" name="password" placeholder="New password">
                                             <div class="input-group-append" data-password="false">
                                                 <div class="input-group-text">
                                                     <span class="password-eye"></span>

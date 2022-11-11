@@ -194,7 +194,7 @@ $(function () {
         var class_id = $(this).val();
         
         $("#section_id").empty();
-        $("#section_id").append('<option value="">Select Class Name</option>');
+        $("#section_id").append('<option value="">Select Class</option>');
         
         $("#subject_id").empty();
         $("#subject_id").append('<option value="">Select Subject</option>');

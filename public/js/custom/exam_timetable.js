@@ -6,7 +6,7 @@ $(function () {
         console.log("select box", class_id)
 
         $("#section_id").empty();
-        $("#section_id").append('<option value="">Select Class Name</option>');
+        $("#section_id").append('<option value="">Select Class</option>');
         $.post(sectionByClass, { class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -73,7 +73,7 @@ $(function () {
         }, function (res) {
             if (res.code == 200) {
                 var exam_name = "Exam : " + res.data.details.exam_name;
-                var class_section = "Class : " + res.class_section;
+                var class_section = "Grade : " + res.class_section;
                 $("#class-section").html(class_section);
                 $("#exam").html(exam_name);
                 $("#exam-timetable").html(res.table);

@@ -128,6 +128,8 @@ Route::get('/application-form', [CommonController::class, 'showApplicationForm']
 Route::get('/DBMigrationCall', [CommonController::class, 'DBMigrationCall']);
 // notifications
 Route::get('unread_notifications', [CommonController::class, 'unreadNotifications'])->name('unread_notifications');
+// all logout
+Route::get('all_logout', [AuthController::class, 'allLogout'])->name('all_logout');
 // admin routes start
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 

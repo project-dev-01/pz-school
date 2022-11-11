@@ -43,9 +43,9 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="changeClassName">Standard<span class="text-danger">*</span></label>
+                                    <label for="changeClassName">Grade<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
-                                        <option value="">Select Class</option>
+                                        <option value="">Select Grade</option>
                                         <!-- <option value="All">All</option> -->
                                         @forelse ($classnames as $class)
 
@@ -57,10 +57,10 @@
                             </div>
                             <div class="col-md-3" id="section_drp_div">
                                 <div class="form-group">
-                                    <label for="sectionID">Class Name<span class="text-danger">*</span>
+                                    <label for="sectionID">Class<span class="text-danger">*</span>
                                     </label>
                                     <select id="sectionID" class="form-control" name="section_id">
-                                        <option value="">Select Section</option>
+                                        <option value="">Select Class</option>
                                     </select>
                                 </div>
                             </div>

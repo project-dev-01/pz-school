@@ -7,7 +7,7 @@ $(function () {
 
         $("#bysubjectfilter").find("#sectionID").empty();
 
-        $("#bysubjectfilter").find("#sectionID").append('<option value="">Select Section</option>');
+        $("#bysubjectfilter").find("#sectionID").append('<option value="">Select Class</option>');
 
 
         $.post(sectionByClass, { token: token, branch_id: branchID, class_id: class_id, teacher_id: teacher_id }, function (res) {
@@ -128,7 +128,7 @@ function bysubjectdetails_class(datasetnew) {
         '<thead>' +
         '<tr>' +
         '<th class="align-top" rowspan="2">S.no.</th>' +
-        '<th class="align-top" rowspan="2">Standard</th>' +
+        '<th class="align-top" rowspan="2">Grade</th>' +
         '<th class="align-top" rowspan="2">Class</th>' +
         '<th class="align-top" rowspan="2">Subject Name</th>' +
         '<th class="align-top th-sm - 6 rem" rowspan="2">Tot. Students</th>' +

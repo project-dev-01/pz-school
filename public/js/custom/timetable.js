@@ -94,7 +94,7 @@ $(function () {
         var class_id = $(this).val();
 
         $("#section_id").empty();
-        $("#section_id").append('<option value="">Select Class Name</option>');
+        $("#section_id").append('<option value="">Select Class</option>');
         $.post(sectionByClass, { class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -337,6 +337,7 @@ $(function () {
         var color = $(this).closest('tr');
 
         color.find(".class_room option").css('background-color', 'white');
+        color.find(".class_room option").css('color', 'black');
         var start_time = $(this).closest('tr').find('.time_start_class').val();
         var end_time = $(this).closest('tr').find('.time_end_class').val();
             
@@ -354,6 +355,7 @@ $(function () {
                     if (res.code == 200) {
                         $.each(res.data, function(index, value) {
                             color.find(".class_room option[value='"+value.class_room+"']").css('background-color', 'red');
+                            color.find(".class_room option[value='"+value.class_room+"']").css('color', 'white');
                         });
                         // $("option[value='myValue']").css('background-color', 'red');
                     }
@@ -366,6 +368,41 @@ $(function () {
         var color = $(this).closest('tr');
             
         color.find(".class_room option").css('background-color', 'white');
+        color.find(".class_room option").css('color', 'black');
+        var start_time = $(this).closest('tr').find('.time_start_class').val();
+        var end_time = $(this).closest('tr').find('.time_end_class').val();
+            
+        if (start_time && end_time) {
+            var semesterID = $("#semester_id").val();
+            var day = $("#day").val();
+                $.post(classRoomCheck, {
+                    token: token,
+                    branch_id: branchID,
+                    start_time: start_time,
+                    end_time: end_time,
+                    semester_id: semesterID,
+                    day: day
+                }, function (res) {
+                    console.log('da',res)
+                    if (res.code == 200) {
+                        $.each(res.data, function(index, value) {
+                            color.find(".class_room option[value='"+value.class_room+"']").css('background-color', 'red');
+                            color.find(".class_room option[value='"+value.class_room+"']").css('color', 'white');
+
+                            
+                            color.find(".teacher option[value='"+value.teacher+"']").css('background-color', 'red');
+                            color.find(".teacher option[value='"+value.teacher+"']").css('color', 'white');
+                        });
+                        // $("option[value='myValue']").css('background-color', 'red');
+                    }
+                }, 'json');
+        }
+            
+    });
+
+    $(document).on('click', ".select2-selection__rendered", function (e) {
+        e.preventDefault();
+        
         var start_time = $(this).closest('tr').find('.time_start_class').val();
         var end_time = $(this).closest('tr').find('.time_end_class').val();
             
@@ -382,7 +419,15 @@ $(function () {
                 }, function (res) {
                     if (res.code == 200) {
                         $.each(res.data, function(index, value) {
-                            color.find(".class_room option[value='"+value.class_room+"']").css('background-color', 'red');
+
+                            var teacher = value.teacher_id;
+                            $('.select2-results__options li').each(function(){
+                                var id = this.id.substring(this.id.lastIndexOf('-') + 1);
+                                if(teacher==id) {
+                                    $("#"+this.id).css('background-color', 'red');
+                                    $("#"+this.id).css('color', 'white');
+                                }
+                            }); 
                         });
                         // $("option[value='myValue']").css('background-color', 'red');
                     }

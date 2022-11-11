@@ -184,7 +184,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">Standard<span class="text-danger">*</span></label>
+                                                <label for="heard">Grade<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
                                                     <option value="">I</option>
                                                     <option value="press">II</option>

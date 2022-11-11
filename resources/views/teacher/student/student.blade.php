@@ -42,9 +42,9 @@
                             </div>                       
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="class_id">Standard</label>
+                                    <label for="class_id">Grade</label>
                                     <select id="class_id" class="form-control" name="class_id">
-                                        <option value="">Select Standard</option>
+                                        <option value="">Select Grade</option>
                                         @forelse ($classes as $class)
                                             <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
                                         @empty
@@ -54,9 +54,9 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="section_id">Class Name</label>
+                                    <label for="section_id">Class</label>
                                     <select id="section_id" class="form-control" name="section_id">
-                                        <option value="">Select Class Name</option>
+                                        <option value="">Select Class</option>
                                     </select>
                                 </div>
                             </div>

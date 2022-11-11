@@ -143,7 +143,7 @@
                     </div>
                     <div class="col-6">
                         <div class="text-right">
-                            <h3 class="my-1"><span style="color:#3A4265" data-plugin="counterup">0</span></h3>
+                            <h3 class="my-1"><span style="color:#3A4265" data-plugin="counterup">{{$count['teacher_count']}}</span></h3>
                         </div>
                     </div>
                 </div>

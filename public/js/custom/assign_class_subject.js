@@ -14,7 +14,7 @@ $(function () {
     });
     function getSections(class_id, IDnames, section_id) {
         $(IDnames).find("#sectionID").empty();
-        $(IDnames).find("#sectionID").append('<option value="">Select Section</option>');
+        $(IDnames).find("#sectionID").append('<option value="">Select Class</option>');
 
         $.post(sectionByClassUrl, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -159,7 +159,7 @@ $(function () {
         var url = classAssignDeleteUrl;
         swal.fire({
             title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this assign class subject',
+            html: 'You want to <b>delete</b> this Assigned Grade Subject',
             showCancelButton: true,
             showCloseButton: true,
             cancelButtonText: 'Cancel',

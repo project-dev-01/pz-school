@@ -72,7 +72,7 @@ class ApiController extends BaseController
                 if (!$query) {
                     return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
                 } else {
-                    return $this->successResponse($success, 'New Section has been successfully saved');
+                    return $this->successResponse($success, 'New Classes has been successfully saved');
                 }
             }
         }
@@ -91,7 +91,7 @@ class ApiController extends BaseController
             $secConn = $this->createNewConnection($request->branch_id);
             // get data
             $section = $secConn->table('sections')->orderBy('name', 'asc')->get();
-            return $this->successResponse($section, 'Sections record fetch successfully');
+            return $this->successResponse($section, 'Classes record fetch successfully');
         }
     }
     // get section row details
@@ -111,7 +111,7 @@ class ApiController extends BaseController
             $createConnection = $this->createNewConnection($request->branch_id);
             // insert data
             $sectionDetails = $createConnection->table('sections')->where('id', $request->section_id)->first();
-            return $this->successResponse($sectionDetails, 'Section row fetch successfully');
+            return $this->successResponse($sectionDetails, 'Classes row fetch successfully');
         }
     }
     // update section
@@ -142,7 +142,7 @@ class ApiController extends BaseController
                 ]);
                 $success = [];
                 if ($query) {
-                    return $this->successResponse($success, 'Section Details have Been updated');
+                    return $this->successResponse($success, 'Classes Details have Been updated');
                 } else {
                     return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
                 }
@@ -170,7 +170,7 @@ class ApiController extends BaseController
 
             $success = [];
             if ($query) {
-                return $this->successResponse($success, 'Section have been deleted successfully');
+                return $this->successResponse($success, 'Classes have been deleted successfully');
             } else {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             }
@@ -446,7 +446,7 @@ class ApiController extends BaseController
                 if (!$query) {
                     return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
                 } else {
-                    return $this->successResponse($success, 'New Class has been successfully saved');
+                    return $this->successResponse($success, 'New Grade has been successfully saved');
                 }
             }
         }
@@ -467,7 +467,7 @@ class ApiController extends BaseController
             $classConn = $this->createNewConnection($request->branch_id);
             // get data
             $class = $classConn->table('classes')->orderBy('name', 'asc')->get();
-            return $this->successResponse($class, 'Class record fetch successfully');
+            return $this->successResponse($class, 'Grade record fetch successfully');
         }
     }
     // get class row details
@@ -488,7 +488,7 @@ class ApiController extends BaseController
             $createConnection = $this->createNewConnection($request->branch_id);
             // insert data
             $sectionDetails = $createConnection->table('classes')->where('id', $request->class_id)->first();
-            return $this->successResponse($sectionDetails, 'Class row fetch successfully');
+            return $this->successResponse($sectionDetails, 'Grade row fetch successfully');
         }
     }
     // update class
@@ -518,7 +518,7 @@ class ApiController extends BaseController
                 ]);
                 $success = [];
                 if ($query) {
-                    return $this->successResponse($success, 'Class Details have Been updated');
+                    return $this->successResponse($success, 'Grade Details have Been updated');
                 } else {
                     return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
                 }
@@ -546,7 +546,7 @@ class ApiController extends BaseController
 
             $success = [];
             if ($query) {
-                return $this->successResponse($success, 'Class have been deleted successfully');
+                return $this->successResponse($success, 'Grade have been deleted successfully');
             } else {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             }
@@ -16962,8 +16962,81 @@ class ApiController extends BaseController
                 ->whereNotNull('class_room')
                 ->groupBy('class_room')
                 ->get();
-            // dd($getClassName);
             return $this->successResponse($getClassName, 'Class Name record fetch successfully');
+        }
+    }
+
+    // employeeCount
+    public function employeeCount(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // get data
+            
+            $query = $createConnection->table('staffs')->count();
+            return $this->successResponse($query, 'Staff Count has been Fetched Successfully');
+        }
+    }
+    // studentCount
+    public function studentCount(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $createConnection->table('students')->count();
+            return $this->successResponse($query, 'Student Count has been Fetched Successfully');
+        }
+    }
+    // parentCount
+    public function parentCount(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $createConnection->table('parent')->count();
+            return $this->successResponse($query, 'Staff Count has been Fetched Successfully');
+        }
+    }
+    // teacherCount
+    public function teacherCount(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // get data
+            
+            // $empDetails['user'] = User::where('user_id', $id)->where('branch_id', $request->branch_id)->first();
+            $query = User::where('role_id', 4)->where('branch_id', $request->branch_id)->count();
+            return $this->successResponse($query, 'Student Count has been Fetched Successfully');
         }
     }
 }

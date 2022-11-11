@@ -43,9 +43,9 @@
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="class_id">Standard<span class="text-danger">*</span></label>
+                                    <label for="class_id">Grade<span class="text-danger">*</span></label>
                                     <select  class="form-control" name="class_id" id="bulk_class_id">
-                                        <option value="">Select Standard</option>
+                                        <option value="">Select Grade</option>
                                         <option value="All">All</option>
                                         @foreach($class as $cla)
                                         <option value="{{$cla['id']}}">{{$cla['name']}}</option>

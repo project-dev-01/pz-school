@@ -38,10 +38,10 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Class Name</th>
-                                    <th>Section Name</th>
-                                    <th>Subject Name</th>
-                                    <th>Teacher Name</th>
+                                    <th>Grade</th>
+                                    <th>Class</th>
+                                    <th>Subject</th>
+                                    <th>Teacher</th>
                                     <th>Type</th>
                                     <th>Action</th>
                                 </tr>

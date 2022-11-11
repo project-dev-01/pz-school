@@ -5,7 +5,7 @@ $(function () {
         console.log(class_id);
 
         $("#byexamfilter").find("#sectionID").empty();
-        $("#byexamfilter").find("#sectionID").append('<option value="">Select Section</option>');
+        $("#byexamfilter").find("#sectionID").append('<option value="">Select Class</option>');
         $("#byexamfilter").find("#examnames").empty();
         $("#byexamfilter").find("#examnames").append('<option value="">Select Exams</option>');
 

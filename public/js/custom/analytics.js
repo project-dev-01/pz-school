@@ -250,7 +250,7 @@ $(function () {
         // $(".classRoomHideSHow").hide();
         var class_id = $(this).val();
         $("#analyticCrepFilter").find("#sectionID").empty();
-        $("#analyticCrepFilter").find("#sectionID").append('<option value="">Select Section</option>');
+        $("#analyticCrepFilter").find("#sectionID").append('<option value="">Select Class</option>');
         $("#analyticCrepFilter").find("#subjectID").empty();
         $("#analyticCrepFilter").find("#subjectID").append('<option value="">Select Subject</option>');
         $("#analyticCrepFilter").find("#paperID").empty();

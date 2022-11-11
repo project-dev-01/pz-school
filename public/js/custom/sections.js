@@ -166,7 +166,7 @@ $(function () {
         var sid = $(this).data('id');
         swal.fire({
             title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this section',
+            html: 'You want to <b>delete</b> this Class',
             showCancelButton: true,
             showCloseButton: true,
             cancelButtonText: 'Cancel',

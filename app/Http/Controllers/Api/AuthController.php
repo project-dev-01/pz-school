@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
@@ -45,8 +46,12 @@ class AuthController extends BaseController
             return $this->send500Error('Could not create token.', ['error' => 'Could not create token']);
         }
         $user = auth()->user();
+        $code = random_int(100000, 999999);
+        User::where('id', $user->id)->update(['remember_token' => $code]);
+        // Auth::logoutOtherDevices($request->password);
         if ($user->status == 0) {
             $success['token'] = $token;
+            $success['check_token'] = $code;
             $success['user'] = $user;
             $success['role_name'] = $user->role->role_name;
             $success['subsDetails'] = $user->subsDetails;
@@ -76,7 +81,6 @@ class AuthController extends BaseController
                     ->first();
                 $success['academicSession'] = $academicSession;
             }
-            //Token created, return with success response and jwt token
             return $this->successResponse($success, 'User signed in successfully');
         } else {
             return $this->send500Error('Your Account Locked, Please Contact Admin', ['error' => 'Your Account Locked, Please Contact Admin']);
@@ -171,11 +175,11 @@ class AuthController extends BaseController
         }
 
         //Create Password Reset Token
-        DB::table('password_resets')->insert([
-            'email' => $request->email,
-            'token' => Str::random(60),
-            'created_at' => Carbon::now()
-        ]);
+        // DB::table('password_resets')->insert([
+        //     'email' => $request->email,
+        //     'token' => Str::random(60),
+        //     'created_at' => Carbon::now()
+        // ]);
 
         //Get the token just created above
         $tokenData = DB::table('password_resets')->where('email', $request->email)->first();
@@ -195,13 +199,19 @@ class AuthController extends BaseController
 
         //Generate, the password reset link. The token generated is embedded in the link
         $link = url('/password/reset') . '/' . $token;
+        // dd($link);
         if ($email) {
             $data = array('link' => $link, 'name' => $user->name);
 
             // Mail::send('auth.mail', $data, function ($message) use ($email) {
-            //     $message->to('rajesh@aibots.my', 'members')->subject('Password Reset');
-            //     $message->from('rajesh@aibots.my', 'Password Reset');
+            //     $message->to('rajeshsakthi645@gmail.com', 'members')->subject('Password Reset');
+            //     $message->from('rajeshsakthi645@gmail.com', 'Password Reset');
             // });
+            // Mail::send('auth.mail', $data, function($message) use($email) {
+            //     $message->to('rajesh@aibots.my', 'members')->subject
+            //         ('Password Reset');
+            //     $message->from('rajesh@aibots.my','Password Reset');
+            //     }); 
             return true;
         } else {
             return false;
@@ -493,5 +503,31 @@ class AuthController extends BaseController
             $ipaddress = 'UNKNOWN';
 
         return $ipaddress;
+    }     
+    public function allLogout(Request $request)
+    {
+        //valid credential
+        $validator = Validator::make($request->only('token'), [
+            'token' => 'required'
+        ]);
+        //Send failed response if request is not valid
+        if ($validator->fails()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->messages()]);
+        }
+        $user = auth()->user();
+        if($user['remember_token'] != $request->check_token) {
+            //Request is validated, do logout 
+            try {
+                // JWTAuth::invalidate($request->token);
+    
+                $success = [];
+                return $this->successResponse($success, 'User has been logged out successfully');
+            } catch (JWTException $exception) {
+                return $this->send500Error('Sorry, user cannot be logged out', ['error' => 'Could not create token']);
+            }
+        }else {
+            return $this->send500Error('Sorry, user cannot be logged out', ['error' => 'Could not create token']);
+        }       
+        
     }
 }

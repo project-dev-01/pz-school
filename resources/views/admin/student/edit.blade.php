@@ -562,9 +562,9 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="class_id">Standard<span class="text-danger">*</span></label>
+                                                <label for="class_id">Grade<span class="text-danger">*</span></label>
                                                 <select id="class_id" class="form-control" name="class_id">
-                                                    <option value="">Select Standard</option>
+                                                    <option value="">Select Grade</option>
                                                     @foreach($class as $cla)
                                                     <option value="{{$cla['id']}}" {{$student['class_id'] == $cla['id'] ? "Selected" : "" }}>{{$cla['name']}}</option>
                                                     @endforeach
@@ -573,9 +573,9 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="section_id">Class Name<span class="text-danger">*</span></label>
+                                                <label for="section_id">Class<span class="text-danger">*</span></label>
                                                 <select id="section_id" class="form-control" name="section_id">
-                                                    <option value="">Select Class Name</option>
+                                                    <option value="">Select Class</option>
                                                     @foreach($section as $sec)
                                                     <option value="{{$sec['section_id']}}" {{$student['section_id'] == $sec['section_id'] ? "Selected" : "" }}>{{$sec['section_name']}}</option>
                                                     @endforeach

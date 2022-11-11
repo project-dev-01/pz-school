@@ -553,6 +553,7 @@ class AuthController extends Controller
     // set session common
     public function sessionCommon($req, $userDetails, $roleID)
     {
+        $req->session()->put('check_token', $userDetails['data']['check_token']);
         $req->session()->put('user_id', $userDetails['data']['user']['id']);
         $req->session()->put('ref_user_id', $userDetails['data']['user']['user_id']);
         $req->session()->put('role_id', $roleID);
@@ -581,5 +582,21 @@ class AuthController extends Controller
         }
         $user_name = $userDetails['data']['user']['name'];
         return $user_name;
+    }
+    
+    public function allLogout(Request $request)
+    {
+
+        $token = session()->get('check_token');
+        $data = [
+            'check_token' => $token
+        ];
+        $response = Helper::PostMethod(config('constants.api.all_logout'), $data);
+        $role = session()->get('role_id');
+        $response['role'] = $role;
+        if ($response['code'] == 200) {
+            $this->logoutCommon($request);
+        } 
+        return $response;
     }
 }

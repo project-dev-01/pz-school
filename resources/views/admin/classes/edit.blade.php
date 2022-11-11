@@ -12,11 +12,11 @@
                     <input type="hidden" id="classID" name="class_id">
                     <div class="form-group">
                         <label for="name">Grade Name</label>
-                        <input type="text" id="editclassName" name="name" class="form-control" placeholder="Enter class name">
+                        <input type="text" id="editclassName" name="name" class="form-control" placeholder="Enter Grade Name">
                     </div>
                     <div class="form-group">
                         <label for="name_numeric">Grade Numeric</label>
-                        <input type="text" id="editnameNumeric" name="name_numeric" class="form-control" placeholder="Enter class numeric">
+                        <input type="text" id="editnameNumeric" name="name_numeric" class="form-control" placeholder="Enter Grade Numeric">
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>

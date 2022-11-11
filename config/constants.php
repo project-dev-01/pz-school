@@ -617,7 +617,16 @@ return [
          'get_subjects_by_staff_id_with_date' => $url.'/get_subjects_by_staff_id_with_date',
          'relief_assignment_other_teacher' => $url.'/relief_assignment_other_teacher',
          'get_staff_list_by_timeslot' => $url.'/get_staff_list_by_timeslot',
-         'get_calendar_details_timetable' => $url.'/get_calendar_details_timetable'
-    ]
+         'get_calendar_details_timetable' => $url.'/get_calendar_details_timetable',
+
+
+         //count
+         'employee_count' => $url.'/employee_count',
+         'student_count' => $url.'/student_count',
+         'parent_count' => $url.'/parent_count',
+         'teacher_count' => $url.'/teacher_count',
+ 
+         //all logout
+         'all_logout' => $url.'/all_logout',    ]
 
 ];

@@ -39,7 +39,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Standard Name</th>
+                                    <th>Grade</th>
                                     <th>Subject</th>
                                     <th>Grade Category</th>
                                     <th>Paper Name</th>

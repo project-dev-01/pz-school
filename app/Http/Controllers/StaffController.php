@@ -33,12 +33,22 @@ class StaffController extends Controller
         ];
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
         $greetings = Helper::greetingMessage();
+        
+        $employee_count = Helper::GetMethod(config('constants.api.employee_count'));
+        $student_count = Helper::GetMethod(config('constants.api.student_count'));
+        $parent_count = Helper::GetMethod(config('constants.api.parent_count'));
+        $teacher_count = Helper::GetMethod(config('constants.api.teacher_count'));
+        $count['employee_count'] = $employee_count['data'];
+        $count['student_count'] = $student_count['data'];
+        $count['parent_count'] = $parent_count['data'];
+        $count['teacher_count'] = $teacher_count['data'];
         // dd($get_to_do_list_dashboard);
         return view(
             'staff.dashboard.index',
             [
                 'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
-                'greetings' => $greetings
+                'greetings' => $greetings,
+                'count' => $count
             ]
         );
     }

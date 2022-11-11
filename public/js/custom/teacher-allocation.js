@@ -14,7 +14,7 @@ $(function () {
     });
     function getSections(class_id, IDnames, section_id) {
         $(IDnames).find("#sectionID").empty();
-        $(IDnames).find("#sectionID").append('<option value="">Select Section</option>');
+        $(IDnames).find("#sectionID").append('<option value="">Select Class</option>');
 
         $.post(sectionByClassUrl, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
             if (res.code == 200) {

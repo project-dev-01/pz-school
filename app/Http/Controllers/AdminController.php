@@ -269,12 +269,21 @@ class AdminController extends Controller
         ];
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_list_dashboard'), $data);
         $greetings = Helper::greetingMessage();
+        $employee_count = Helper::GetMethod(config('constants.api.employee_count'));
+        $student_count = Helper::GetMethod(config('constants.api.student_count'));
+        $parent_count = Helper::GetMethod(config('constants.api.parent_count'));
+        $teacher_count = Helper::GetMethod(config('constants.api.teacher_count'));
+        $count['employee_count'] = $employee_count['data'];
+        $count['student_count'] = $student_count['data'];
+        $count['parent_count'] = $parent_count['data'];
+        $count['teacher_count'] = $teacher_count['data'];
         //  dd($get_to_do_list_dashboard);
         return view(
             'admin.dashboard.index',
             [
                 'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
-                'greetings' => $greetings
+                'greetings' => $greetings,
+                'count' => $count
             ]
         );
         // return view('admin.dashboard.index');
@@ -811,7 +820,7 @@ class AdminController extends Controller
                 if ($audience == 1) {
                     return "Everyone";
                 } else if ($audience == 2) {
-                    return "<b>Standard </b>: " . $row['class_name'];
+                    return "<b>Grade </b>: " . $row['class_name'];
                 } else if ($audience == 3) {
                     return "<b>Group </b>: " . $row['group_name'];
                 }

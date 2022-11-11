@@ -24,11 +24,14 @@ class TeacherController extends Controller
         ];
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
         $greetings = Helper::greetingMessage();
+        $teacher_count = Helper::GetMethod(config('constants.api.teacher_count'));
+        $count['teacher_count'] = $teacher_count['data'];
         return view(
             'teacher.dashboard.index',
             [
                 'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
-                'greetings' => $greetings
+                'greetings' => $greetings,
+                'count' => $count
             ]
         );
     }

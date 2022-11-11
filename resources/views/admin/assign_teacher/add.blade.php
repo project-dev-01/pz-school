@@ -10,9 +10,9 @@
                 <form id="addAssignTeacherForm" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="changeClassName">Class Name<span class="text-danger">*</span></label>
+                        <label for="changeClassName">Grade<span class="text-danger">*</span></label>
                         <select class="form-control add_class_name" id="changeClassName" name="class_name">
-                            <option value="">Choose Class</option>
+                            <option value="">Choose Grade</option>
                             @forelse($classDetails as $class)
                             <option value="{{$class['id']}}">{{$class['name']}}</option>
                             @empty
@@ -21,15 +21,15 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="sectionID">Section Name<span class="text-danger">*</span></label>
+                        <label for="sectionID">Class<span class="text-danger">*</span></label>
                         <select class="form-control" id="sectionID" name="section_name">
-                            <option value="">Choose Section</option>
+                            <option value="">Choose Class</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="assignClassTeacher">Class Teacher<span class="text-danger">*</span></label>
+                        <label for="assignClassTeacher">Grade Teacher<span class="text-danger">*</span></label>
                         <select class="form-control" id="assignClassTeacher" name="class_teacher">
-                            <option value="">Choose Teacher</option>
+                            <option value="">Choose Grade Teacher</option>
                             @forelse($getAllTeacherList as $teacher)
                             <option value="{{ $teacher['user_id'] }}">{{$teacher['name']}}</option>
                             @empty

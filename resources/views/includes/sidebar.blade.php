@@ -335,7 +335,7 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="#sidebarForClassSec" data-toggle="collapse">
-                                     Grade & Classes <span class="menu-arrow"></span>
+                                     Grades & Classes <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarForClassSec">
                                     <ul class="nav-second-level">
@@ -346,7 +346,7 @@
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.classes')}}" class="nav-link {{ (request()->is('admin/classes*')) ? 'active' : '' }}">
-                                                <span> Grade </span>
+                                                <span> Grades </span>
                                             </a>
                                         </li>
                                         <li>
@@ -356,7 +356,7 @@
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.assign_teacher')}}" class="nav-link {{ (request()->is('admin/assign_teacher*')) ? 'active' : '' }}">
-                                                <span> Assign Class Teacher </span>
+                                                <span> Assign Grade Teacher </span>
                                             </a>
                                         </li>
                                     </ul>
@@ -852,7 +852,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.event')}}" class="nav-link {{ (request()->is('admin/event/*')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.event')}}" class="nav-link {{ (request()->is('admin/event*')) ? 'active' : '' }}">
                                     <span> Events </span>
                                 </a>
                             </li>

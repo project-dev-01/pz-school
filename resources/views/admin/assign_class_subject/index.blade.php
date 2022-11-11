@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Assign Class Subjects')
+@section('title','Assign Grade Subjects')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">List</li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Assign Class Subjects</h4>
+                <h4 class="page-title">Assign Grade Subjects</h4>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Assign Class Subjects<h4>
+                        <h4 class="navv">Assign Grade Subjects<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
@@ -38,9 +38,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Class Name</th>
-                                    <th>Section Name</th>
-                                    <th>Subject Name</th>
+                                    <th>Grade</th>
+                                    <th>Class</th>
+                                    <th>Subject</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

@@ -32,7 +32,7 @@ class ParentController extends Controller
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
         $get_homework_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_homework_list_dashboard'), $data);
         $get_std_names_dashboard = Helper::GETMethodWithData(config('constants.api.get_students_parentdashboard'), $parent_ids);
-        $get_leave_reasons_dashboard = Helper::GetMethod(config('constants.api.get_leave_reasons'));
+        $get_leave_reasons_dashboard = Helper::GetMethod(config('constants.api.absent_reason_list'));
         $greetings = Helper::greetingMessage();
 
         // dd($get_leave_reasons_dashboard);
@@ -718,7 +718,7 @@ class ParentController extends Controller
                 if ($audience == 1) {
                     return "Everyone";
                 } else if ($audience == 2) {
-                    return "<b>Standard </b>: " . $row['class_name'];
+                    return "<b>Grade </b>: " . $row['class_name'];
                 } else if ($audience == 3) {
                     return "<b>Group </b>: " . $row['group_name'];
                 }

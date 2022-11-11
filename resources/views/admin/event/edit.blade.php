@@ -52,7 +52,7 @@
                                     <select class="form-control" id="edit_audience" name="audience">
                                         <option value="">Select</option>
                                         <option value="1" {{$event['audience'] == "1" ? 'Selected':''}}>EveryBody</option>
-                                        <option value="2" {{$event['audience'] == "2" ? 'Selected':''}}>Selected Class</option>
+                                        <option value="2" {{$event['audience'] == "2" ? 'Selected':''}}>Selected Grade</option>
                                         <option value="3" {{$event['audience'] == "3" ? 'Selected':''}}>Selected Group</option>
                                         <!-- <option value="3">Selected Section</option> -->
                                     </select>
@@ -70,7 +70,7 @@
                             
                             <div class="col-md-4" id="edit_class" {{$cla}}>
                                 <div class="form-group">
-                                    <label for="class">Class</label>
+                                    <label for="class">Grade</label>
                                     <select class="form-control select2-multiple" data-toggle="select2"  name="class[]" id="edit_classes" multiple="multiple" data-placeholder="Choose ...">
                                         @forelse($class as $cla)
                                             @php

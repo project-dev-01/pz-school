@@ -25,9 +25,9 @@ $(function () {
     function branchTeacherAllocation(branch_id, Selector, class_id, teacher_id) {
 
         $(Selector).find("#class_name").empty();
-        $(Selector).find("#class_name").append('<option value="">Choose Class</option>');
+        $(Selector).find("#class_name").append('<option value="">Choose Grade</option>');
         $(Selector).find("#section_name").empty();
-        $(Selector).find("#section_name").append('<option value="">Choose Section</option>');
+        $(Selector).find("#section_name").append('<option value="">Choose Class</option>');
         $(Selector).find("#class_teacher").empty();
         $(Selector).find("#class_teacher").append('<option value="">Class Teacher</option>');
         $.post(branchbyAssignTeacher, { branch_id: branch_id, token: token }, function (res) {
@@ -71,7 +71,7 @@ $(function () {
     function sectionAllocation(class_id, Selector, sectionID) {
 
         $(Selector).find("#section_name").empty();
-        $(Selector).find("#section_name").append('<option value="">Choose Section</option>');
+        $(Selector).find("#section_name").append('<option value="">Choose Class</option>');
         $.post(getsectionAllocation, { class_id: class_id, token: token }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {

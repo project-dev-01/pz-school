@@ -83,7 +83,7 @@ $(function () {
         $(".attendanceReport").hide();
         var class_id = $(this).val();
         $("#attendanceFilter").find("#sectionID").empty();
-        $("#attendanceFilter").find("#sectionID").append('<option value="">Select Section</option>');
+        $("#attendanceFilter").find("#sectionID").append('<option value="">Select Class</option>');
         $("#attendanceFilter").find("#subjectID").empty();
         $("#attendanceFilter").find("#subjectID").append('<option value="">Select Subject</option>');
 

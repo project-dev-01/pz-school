@@ -80,7 +80,7 @@ $(function () {
         $(".classRoomHideSHow").hide();
         var class_id = $(this).val();
         $("#classroomFilter").find("#sectionID").empty();
-        $("#classroomFilter").find("#sectionID").append('<option value="">Select Section</option>');
+        $("#classroomFilter").find("#sectionID").append('<option value="">Select Class</option>');
         $("#classroomFilter").find("#subjectID").empty();
         $("#classroomFilter").find("#subjectID").append('<option value="">Select Subject</option>');
 

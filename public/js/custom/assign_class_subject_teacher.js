@@ -17,7 +17,7 @@ $(function () {
         $(IDnames).find("#assignSubjects").empty();
         $(IDnames).find("#assignSubjects").append('<option value="">Choose Subject</option>');
         $(IDnames).find("#sectionID").empty();
-        $(IDnames).find("#sectionID").append('<option value="">Select Section</option>');
+        $(IDnames).find("#sectionID").append('<option value="">Select Class</option>');
 
         $.post(sectionByClassUrl, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
             if (res.code == 200) {

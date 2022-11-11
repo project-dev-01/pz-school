@@ -6,7 +6,7 @@ $(function () {
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
         $("#bystudentfilter").find("#sectionID").empty();
-        $("#bystudentfilter").find("#sectionID").append('<option value="">Select Section</option>');
+        $("#bystudentfilter").find("#sectionID").append('<option value="">Select Class</option>');
         $("#bystudentfilter").find("#examnames").empty();
         $("#bystudentfilter").find("#examnames").append('<option value="">Select Exam</option>');
         $.post(sectionByClass, { token: token, branch_id: branchID, class_id: class_id, teacher_id: teacher_id }, function (res) {

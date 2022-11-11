@@ -52,7 +52,7 @@
                                     <select class="form-control" id="audience" name="audience">
                                         <option value="">Select</option>
                                         <option value="1">EveryBody</option>
-                                        <option value="2">Selected Class</option>
+                                        <option value="2">Selected Grade</option>
                                         <option value="3">Selected Group</option>
                                     </select>
                                     <span class="text-danger error-text audience_error"></span>
@@ -60,7 +60,7 @@
                             </div>
                             <div class="col-md-4" id="class">
                                 <div class="form-group">
-                                    <label for="class">Class</label>
+                                    <label for="class">Grade</label>
                                     <select class="form-control select2-multiple" data-toggle="select2" name="class[]" id="classes" multiple="multiple" data-placeholder="Choose ...">
                                         @foreach($class as $cla)
                                         <option value="{{$cla['id']}}">{{$cla['name']}}</option>

@@ -11,9 +11,9 @@
                     @csrf
                     <input type="hidden" id="assign_class_sub_id" name="assign_class_sub_id">
                     <div class="form-group">
-                        <label for="editchangeClassName">Class Name<span class="text-danger">*</span></label>
+                        <label for="editchangeClassName">Grade<span class="text-danger">*</span></label>
                         <select class="form-control add_class_name" id="editchangeClassName" name="class_name">
-                            <option value="">Choose Class</option>
+                            <option value="">Choose Grade</option>
                             @forelse($classDetails as $class)
                             <option value="{{$class['id']}}">{{$class['name']}}</option>
                             @empty
@@ -22,13 +22,13 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="sectionID">Section Name<span class="text-danger">*</span></label>
+                        <label for="sectionID">Class<span class="text-danger">*</span></label>
                         <select class="form-control" id="sectionID" name="section_name">
-                            <option value="">Choose Section</option>
+                            <option value="">Choose Class</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="assignSubjects">Subjects<span class="text-danger">*</span></label>
+                        <label for="assignSubjects">Subject<span class="text-danger">*</span></label>
                         <select class="form-control" id="assignSubjects" name="subject_id">
                             <option value="">Choose Subject</option>
                             @forelse($getSubjectList as $sub)

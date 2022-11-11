@@ -66,7 +66,7 @@
 		
 		<p>The Page you are looking for not avaible!</p>
 		
-		<a href="{{asset('public//')}}" class="link_404">Go to Home</a>
+		<a href="{{url('/')}}" class="link_404">Go to Home</a>
 	</div>
 		</div>
 		</div>

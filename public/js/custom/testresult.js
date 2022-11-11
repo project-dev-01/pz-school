@@ -109,7 +109,7 @@ $(function () {
         $(".testResultHideSHow").hide();
         var class_id = $(this).val();
         $("#testresultFilter").find("#sectionID").empty();
-        $("#testresultFilter").find("#sectionID").append('<option value="">Select Section</option>');
+        $("#testresultFilter").find("#sectionID").append('<option value="">Select Class</option>');
         $("#testresultFilter").find("#examnames").empty();
         $("#testresultFilter").find("#examnames").append('<option value="">Select Exams</option>');
         $("#testresultFilter").find("#subjectID").empty();

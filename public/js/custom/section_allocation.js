@@ -183,7 +183,7 @@ $(function () {
         var id = $(this).data('id');
         swal.fire({
             title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this section allocation',
+            html: 'You want to <b>delete</b> this Class allocation',
             showCancelButton: true,
             showCloseButton: true,
             cancelButtonText: 'Cancel',

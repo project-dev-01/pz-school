@@ -112,7 +112,7 @@ $(function () {
         var url = classDeleteUrl;
         swal.fire({
             title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this class',
+            html: 'You want to <b>delete</b> this Grade',
             showCancelButton: true,
             showCloseButton: true,
             cancelButtonText: 'Cancel',
