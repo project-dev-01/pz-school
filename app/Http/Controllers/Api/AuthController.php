@@ -24,6 +24,8 @@ class AuthController extends BaseController
 
     public function authenticate(Request $request)
     {
+        $email = $request->only('email');
+        // dd($email);
         $credentials = $request->only('email', 'password');
         //valid credential
         $validator = Validator::make($credentials, [
@@ -34,11 +36,35 @@ class AuthController extends BaseController
         if ($validator->fails()) {
             return $this->send422Error('Validation error.', ['error' => $validator->messages()]);
         }
+        // dd($credentials);
         //Request is validated
         //Crean token
         try {
-            if (!$token = JWTAuth::attempt($credentials)) {
-                return $this->send400Error('Email and password are wrong.', ['error' => 'Email and password are wrong']);
+            $existUser = $this->existUser($request->email);
+            if (!$existUser) {
+                if (!$token = JWTAuth::attempt($credentials)) {
+                    $getUser = User::where('email', $request->email)->first();
+                    $login_attempt = $getUser->login_attempt;
+                    if ($login_attempt <= 2) {
+                        $login_attempt = ($login_attempt + 1);
+                        $user = User::find($getUser->id);
+                        $user->login_attempt = $login_attempt;
+                        if ($login_attempt > 2) {
+                            $user->status = '1';
+                        }
+                        $user->save();
+                        $left = (3 - $login_attempt);
+                        if ($left == 0) {
+                            return $this->send400Error("Your account has been locked because your password is incorrect. Please contact the admin", ["error" => "Your account has been locked because your password is incorrect. Please contact the admin"]);
+                        } else {
+                            return $this->send400Error("The password is incorrect and you only have $left attempts left", ["error" => "The password is incorrect and you only have $left attempts left"]);
+                        }
+                    } else {
+                        return $this->send500Error('Your account has been locked after more than 3 attempts. Please contact the admin', ['error' => 'Your account has been locked after more than 3 attempts. Please contact the admin']);
+                    }
+                }
+            } else {
+                return $this->send500Error('The email given is invalid', ['error' => 'The email given is invalid']);
             }
         } catch (JWTException $e) {
             // return $credentials;
@@ -46,6 +72,11 @@ class AuthController extends BaseController
         }
         $user = auth()->user();
         if ($user->status == 0) {
+            // update left to 0
+            $getUser = User::where('email', $request->email)->first();
+            $user = User::find($getUser->id);
+            $user->login_attempt = 0;
+            $user->save();
             $success['token'] = $token;
             $success['user'] = $user;
             $success['role_name'] = $user->role->role_name;
@@ -79,7 +110,7 @@ class AuthController extends BaseController
             //Token created, return with success response and jwt token
             return $this->successResponse($success, 'User signed in successfully');
         } else {
-            return $this->send500Error('Your Account Locked, Please Contact Admin', ['error' => 'Your Account Locked, Please Contact Admin']);
+            return $this->send500Error('You have been locked out of your account, please contact the admin', ['error' => 'You have been locked out of your account, please contact the admin']);
         }
     }
     public function authenticateWithBranch(Request $request)

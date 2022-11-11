@@ -40,11 +40,6 @@
         <div class="col-12">
             <div class="page-title-box">
                 <div class="page-title-right">
-                    <!--<ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                        <li class="breadcrumb-item active">Wizard</li>
-                    </ol>-->
                 </div>
                 <h4 class="page-title">Schedule List</h4>
             </div>
@@ -112,9 +107,6 @@
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
                                 Filter
                             </button>
-                            <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                                Cancel
-                            </button>-->
                         </div>
                     </form>
                 </div> <!-- end card-body -->
@@ -172,7 +164,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <form id="edit-timetable-form" method="post" action="{{ route('admin.timetable.edit') }}" autocomplete="off">
+                <form id="edit-timetable-form" method="post" action="{{ route('admin.timetable.edit.copy') }}" autocomplete="off">
                     @csrf
                     <input type="hidden" name="class_id" id="edit_class_id">
                     <input type="hidden" name="section_id" id="edit_section_id">

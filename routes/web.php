@@ -283,6 +283,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('timetable/edit', [AdminController::class, 'editTimetable'])->name('admin.timetable.edit');
         Route::post('timetable/update', [AdminController::class, 'updateTimetable'])->name('admin.timetable.update');
         Route::post('timetable/subject', [AdminController::class, 'getSubject'])->name('admin.timetable.subject');
+        // copy timetable
+        Route::get('timetable/copy', [AdminController::class, 'timetableCopy'])->name('admin.timetable.copy');
+        Route::post('timetable/edit/copy', [AdminController::class, 'editTimetableCopy'])->name('admin.timetable.edit.copy');
+        Route::post('timetable/save/copy', [AdminController::class, 'timetableCopySave'])->name('admin.timetable.copy.save');
+
         // promotion
         Route::get('promotion/index', [AdminController::class, 'Promotion'])->name('admin.promotion.index');
         Route::post('promotion/add', [AdminController::class, 'PromotionAdd'])->name('admin.promotion.add');

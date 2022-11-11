@@ -251,7 +251,43 @@ $(function () {
             }
         });
     });
-
+    // update timetable copy
+    // rules validation
+    $("#copyeditTimetableForm").validate({
+        rules: {
+            semester_id: "required",
+            session_id: "required"
+        }
+    });
+    $('#copyeditTimetableForm').on('submit', function (e) {
+        e.preventDefault();
+        var valid = $("#copyeditTimetableForm").valid();
+        console.log("valid");
+        console.log(valid);
+        if (valid === true) {
+            var form = this;
+            $("#overlay").fadeIn(300);
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (data) {
+                    if (data.code == 200) {
+                        // $('.copyeditTimetableForm').find('form')[0].reset();
+                        toastr.success(data.message);
+                        window.location.href = timetableList;
+                        $("#overlay").fadeOut(300);
+                    } else {
+                        toastr.error(data.message);
+                        $("#overlay").fadeOut(300);
+                    }
+                }
+            });
+        }
+    });
     $(document).on('click', "#timetable_body input[type='checkbox']", function () {
 
         var fal = true;
@@ -339,56 +375,56 @@ $(function () {
         color.find(".class_room option").css('background-color', 'white');
         var start_time = $(this).closest('tr').find('.time_start_class').val();
         var end_time = $(this).closest('tr').find('.time_end_class').val();
-            
+
         if (start_time && end_time) {
             var semesterID = $("#semester_id").val();
             var day = $("#day").val();
-                $.post(classRoomCheck, {
-                    token: token,
-                    branch_id: branchID,
-                    start_time: start_time,
-                    end_time: end_time,
-                    semester_id: semesterID,
-                    day: day
-                }, function (res) {
-                    if (res.code == 200) {
-                        $.each(res.data, function(index, value) {
-                            color.find(".class_room option[value='"+value.class_room+"']").css('background-color', 'red');
-                        });
-                        // $("option[value='myValue']").css('background-color', 'red');
-                    }
-                }, 'json');
+            $.post(classRoomCheck, {
+                token: token,
+                branch_id: branchID,
+                start_time: start_time,
+                end_time: end_time,
+                semester_id: semesterID,
+                day: day
+            }, function (res) {
+                if (res.code == 200) {
+                    $.each(res.data, function (index, value) {
+                        color.find(".class_room option[value='" + value.class_room + "']").css('background-color', 'red');
+                    });
+                    // $("option[value='myValue']").css('background-color', 'red');
+                }
+            }, 'json');
         }
-            
+
     });
     $(document).on('change', ".time_end_class", function (e) {
         e.preventDefault();
         var color = $(this).closest('tr');
-            
+
         color.find(".class_room option").css('background-color', 'white');
         var start_time = $(this).closest('tr').find('.time_start_class').val();
         var end_time = $(this).closest('tr').find('.time_end_class').val();
-            
+
         if (start_time && end_time) {
             var semesterID = $("#semester_id").val();
             var day = $("#day").val();
-                $.post(classRoomCheck, {
-                    token: token,
-                    branch_id: branchID,
-                    start_time: start_time,
-                    end_time: end_time,
-                    semester_id: semesterID,
-                    day: day
-                }, function (res) {
-                    if (res.code == 200) {
-                        $.each(res.data, function(index, value) {
-                            color.find(".class_room option[value='"+value.class_room+"']").css('background-color', 'red');
-                        });
-                        // $("option[value='myValue']").css('background-color', 'red');
-                    }
-                }, 'json');
+            $.post(classRoomCheck, {
+                token: token,
+                branch_id: branchID,
+                start_time: start_time,
+                end_time: end_time,
+                semester_id: semesterID,
+                day: day
+            }, function (res) {
+                if (res.code == 200) {
+                    $.each(res.data, function (index, value) {
+                        color.find(".class_room option[value='" + value.class_room + "']").css('background-color', 'red');
+                    });
+                    // $("option[value='myValue']").css('background-color', 'red');
+                }
+            }, 'json');
         }
-            
+
     });
 
 
@@ -462,7 +498,7 @@ $(function () {
         $('.select2-multiple').select2();
     }
 
-    
+
     $(document).on('click', '.exportToExcel', function (e) {
         // var table = $(this).prev('.table2excel');
         var table = $('.table2excel');

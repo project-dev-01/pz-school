@@ -335,7 +335,7 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="#sidebarForClassSec" data-toggle="collapse">
-                                     Grade & Classes <span class="menu-arrow"></span>
+                                    Grade & Classes <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarForClassSec">
                                     <ul class="nav-second-level">
@@ -395,18 +395,23 @@
                                 <div class="collapse" id="sidebartimeTable">
                                     <ul class="nav-second-level">
                                         <li>
-                                            <a href="{{ route('admin.timetable.create')}}" class="nav-link {{ (request()->is('super_admin/timetable*')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.timetable.create')}}" class="nav-link {{ (request()->is('admin/timetable/create')) ? 'active' : '' }}">
                                                 <span>Add Schedule</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('admin.timetable')}}" class="nav-link {{ (request()->is('super_admin/timetable*')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.timetable')}}" class="nav-link {{ (request()->is('admin/timetable')) ? 'active' : '' }}">
                                                 <span> Time Table </span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('admin.timetable.bulk.create')}}" class="nav-link {{ (request()->is('super_admin/timetable*')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.timetable.bulk.create')}}" class="nav-link {{ (request()->is('timetable/bulk/create')) ? 'active' : '' }}">
                                                 <span>Add Bulk Schedule</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.timetable.copy')}}" class="nav-link {{ (request()->is('timetable/copy')) ? 'active' : '' }}">
+                                                <span> Time Table Copy </span>
                                             </a>
                                         </li>
                                     </ul>
@@ -469,7 +474,7 @@
                         </ul>
                     </div>
                 </li>
-                            
+
                 <li>
                     <a href="{{ route('admin.attendance.employee_entry')}}" class="nav-link {{ (request()->is('admin/attendance/employee_entry')) ? 'active' : '' }}">
                         <i class="fas fa-user-clock"></i>

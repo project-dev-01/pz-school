@@ -500,7 +500,7 @@ $(function () {
                     "targets": 4,
                     "width": "20%",
                     "render": function (data, type, row, meta) {
-                        if (row.att_status != "present") {
+                        if (row.att_status != "present" || row.taken_leave_status != "present" || row.current_old_att_status != "present") {
                             onLoadReasons(row, meta);
                         }
                         var reasons = '<select id="reasons' + row.student_id + '" class="form-control list-mode-table" name="attendance[' + meta.row + '][reasons]">' +
@@ -687,7 +687,16 @@ $(function () {
     // onLoadReasons
     function onLoadReasons(row, meta) {
         var studenetID = row.student_id;
-        var attendanceType = row.att_status;
+        var attendanceType = "";
+        if (row.att_status) {
+            attendanceType = row.att_status;
+        } else if (row.current_old_att_status) {
+            attendanceType = row.current_old_att_status;
+        } else if (row.taken_leave_status) {
+            attendanceType = "absent";
+        } else {
+            attendanceType = row.att_status;
+        }
         $('#reasons' + studenetID).empty();
         $('#reasons' + studenetID).append('<option value="">Choose</option>');
         if (attendanceType) {

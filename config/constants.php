@@ -190,6 +190,7 @@ return [
         'timetable_list' => $url.'/timetable/list',
         'timetable_edit' => $url.'/timetable/edit',
         'timetable_update' => $url.'/timetable/update',
+        'timetable_copy' => $url.'/timetable/copy',
 
         'timetable_student' => $url.'/timetable/student',
         'timetable_parent' => $url.'/timetable/parent',

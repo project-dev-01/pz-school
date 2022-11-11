@@ -449,7 +449,15 @@ class AuthController extends Controller
     {
         if (session()->has('role_id')) {
             $this->logoutCommon($request);
-            return redirect()->route('admin.login');
+            if (isset($request->idle_timeout)) {
+                $response = [
+                    'code' => 200,
+                    'redirect_url' => route('admin.login')
+                ];
+                return response()->json($response, 200);
+            } else {
+                return redirect()->route('admin.login');
+            }
         } else {
             return redirect()->route('admin.login');
         }
@@ -458,7 +466,15 @@ class AuthController extends Controller
     {
         if (session()->has('role_id')) {
             $this->logoutCommon($request);
-            return redirect()->route('teacher.login');
+            if (isset($request->idle_timeout)) {
+                $response = [
+                    'code' => 200,
+                    'redirect_url' => route('teacher.login')
+                ];
+                return response()->json($response, 200);
+            } else {
+                return redirect()->route('teacher.login');
+            }
         } else {
             return redirect()->route('teacher.login');
         }
@@ -467,7 +483,15 @@ class AuthController extends Controller
     {
         if (session()->has('role_id')) {
             $this->logoutCommon($request);
-            return redirect()->route('staff.login');
+            if (isset($request->idle_timeout)) {
+                $response = [
+                    'code' => 200,
+                    'redirect_url' => route('staff.login')
+                ];
+                return response()->json($response, 200);
+            } else {
+                return redirect()->route('staff.login');
+            }
         } else {
             return redirect()->route('staff.login');
         }
@@ -476,7 +500,15 @@ class AuthController extends Controller
     {
         if (session()->has('role_id')) {
             $this->logoutCommon($request);
-            return redirect()->route('parent.login');
+            if (isset($request->idle_timeout)) {
+                $response = [
+                    'code' => 200,
+                    'redirect_url' => route('parent.login')
+                ];
+                return response()->json($response, 200);
+            } else {
+                return redirect()->route('parent.login');
+            }
         } else {
             return redirect()->route('parent.login');
         }
@@ -485,7 +517,15 @@ class AuthController extends Controller
     {
         if (session()->has('role_id')) {
             $this->logoutCommon($request);
-            return redirect()->route('student.login');
+            if (isset($request->idle_timeout)) {
+                $response = [
+                    'code' => 200,
+                    'redirect_url' => route('student.login')
+                ];
+                return response()->json($response, 200);
+            } else {
+                return redirect()->route('student.login');
+            }
         } else {
             return redirect()->route('student.login');
         }
