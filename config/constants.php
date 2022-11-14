@@ -1,5 +1,5 @@
 <?php
-$url = "http://localhost/school-management-system/api";
+$url = "http://localhost/sir/api";
 // $url = "https://www.paxsuzen.com/smkkiaramas/api";
 return [
 
@@ -190,6 +190,7 @@ return [
         'timetable_list' => $url.'/timetable/list',
         'timetable_edit' => $url.'/timetable/edit',
         'timetable_update' => $url.'/timetable/update',
+        'timetable_copy' => $url.'/timetable/copy',
 
         'timetable_student' => $url.'/timetable/student',
         'timetable_parent' => $url.'/timetable/parent',

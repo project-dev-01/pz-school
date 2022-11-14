@@ -1389,6 +1389,7 @@ class AdminController extends Controller
             'post_code' => $request->post_code
 
         ];
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.employee_add'), $data);
         return $response;
     }
@@ -1995,6 +1996,21 @@ class AdminController extends Controller
             ]
         );
     }
+    // copy Timetable
+    public function timetableCopy(Request $request)
+    {
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        return view(
+            'admin.timetable_copy.index',
+            [
+                'class' => $getclass['data'],
+                'semester' => $semester['data'],
+                'session' => $session['data'],
+            ]
+        );
+    }
 
     // get Timetable
     public function getTimetable(Request $request)
@@ -2120,6 +2136,47 @@ class AdminController extends Controller
             );
         }
     }
+    // edit Timetable copy
+    public function editTimetableCopy(Request $request)
+    {
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
+            'day' => $request->day,
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        // dd($data);
+        $timetable = Helper::PostMethod(config('constants.api.timetable_edit'), $data);
+        // 
+        // dd($timetable);
+        if ($timetable['code'] == "200") {
+            return view(
+                'admin.timetable_copy.edit',
+                [
+                    'timetable' => $timetable['data']['timetable'],
+                    'details' => $timetable['data']['details'],
+                    'teacher' => $timetable['data']['teacher'],
+                    'subject' => $timetable['data']['subject'],
+                    'hall_list' => $timetable['data']['exam_hall'],
+                    'semester' => $semester['data'],
+                    'session' => $session['data'],
+                ]
+            );
+        } else {
+            return view(
+                'admin.timetable.edit',
+                [
+                    'timetable' => NULL,
+                    'semester' => $semester['data'],
+                    'session' => $session['data'],
+                ]
+            );
+        }
+    }
     public function updateTimetable(Request $request)
     {
 
@@ -2138,7 +2195,23 @@ class AdminController extends Controller
 
         return $timetable;
     }
+    public function timetableCopySave(Request $request)
+    {
 
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
+            'day' => $request->day,
+            'timetable' => $request->timetable,
+            'academic_session_id' => session()->get('academic_session_id')
+
+        ];
+        // dd($data);
+        $timetable = Helper::PostMethod(config('constants.api.timetable_copy'), $data);
+        return $timetable;
+    }
     public function studentEntry()
     {
         return view('admin.attendance.student');

@@ -56,6 +56,31 @@
 <script src="{{ asset('public/libs/@fullcalendar/list/main.min.js') }}"></script>
 <script src="{{ asset('public/libs/@fullcalendar/interaction/main.min.js') }}"></script>
 @endif
+@if(Session::get('role_id') == '1')
+<script>
+    var logoutIdle = "{{ route('super_admin.logout') }}";
+</script>
+@elseif(Session::get('role_id') == '3')
+<script>
+    var logoutIdle = "{{ route('staff.logout') }}";
+</script>
+@elseif(Session::get('role_id') == '4')
+<script>
+    var logoutIdle = "{{ route('teacher.logout') }}";
+</script>
+@elseif(Session::get('role_id') == '5')
+<script>
+    var logoutIdle = "{{ route('parent.logout') }}";
+</script>
+@elseif(Session::get('role_id') == '6')
+<script>
+    var logoutIdle = "{{ route('student.logout') }}";
+</script>
+@else
+<script>
+    var logoutIdle = "{{ route('admin.logout') }}";
+</script>
+@endif
 <script>
     function formatDate(date) {
         var d = new Date(date),
@@ -285,6 +310,7 @@
         // }
         
         getNotifications();
+
         function getNotifications() {
             $.ajax({
                 type: 'GET',
@@ -315,4 +341,32 @@
             })
         });
     });
+</script>
+<script>
+    /*
+     *   this script is for manage the logout of timeout
+     *   if user is inactive for 15 min
+     *   he will be logout : 
+     *
+     * */
+    var timeout;
+    document.onmousemove = function() {
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+            var formData = new FormData();
+            formData.append("idle_timeout", "idle_timeout");
+            $.ajax({
+                cache: false,
+                url: logoutIdle,
+                data: formData,
+                method: "post",
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function(response) {
+                    window.location.href = response.redirect_url;
+                }
+            });
+        }, 60000 * 60);
+    };
 </script>

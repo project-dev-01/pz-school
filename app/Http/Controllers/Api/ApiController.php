@@ -3234,6 +3234,7 @@ class ApiController extends BaseController
                         $user->picture = $fileName;
                         $user->password = bcrypt($request->password);
                         $user->status = $request->status;
+                        $user->role_id = $request->role_id;
                         $updateUser = $user->save();
                     }
                     if (isset($request->role_user_id) && isset($request->email)) {
@@ -3242,6 +3243,7 @@ class ApiController extends BaseController
                         $user->email = $request->email;
                         $user->picture = $fileName;
                         $user->status = $request->status;
+                        $user->role_id = $request->role_id;
                         $updateUser = $user->save();
                     }
                     if (isset($request->old_photo) && empty($request->photo)) {
@@ -3249,6 +3251,7 @@ class ApiController extends BaseController
                         $user->name = (isset($request->first_name) ? $request->first_name : "") . " " . (isset($request->last_name) ? $request->last_name : "");
                         $user->picture = $fileName;
                         $user->status = $request->status;
+                        $user->role_id = $request->role_id;
                         $updateUser = $user->save();
                     }
                     // add bank details
@@ -4058,7 +4061,149 @@ class ApiController extends BaseController
             }
         }
     }
+    // copy Timetable
+    public function copyTimetable(Request $request)
+    {
 
+        // dd($request);
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'day' => 'required',
+            'timetable' => 'required',
+            'academic_session_id' => 'required'
+        ]);
+
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+
+            // calendor data populate
+            $getObjRow = $staffConn->table('semester as s')
+                ->select('start_date', 'end_date')
+                ->where('id', $request->semester_id)
+                ->first();
+            // dd($getObjRow);
+            $timetable = $request->timetable;
+            $oldest = $staffConn->table('timetable_class')->where([['class_id', $request->class_id], ['section_id', $request->section_id], ['semester_id', $request->semester_id], ['session_id', $request->session_id], ['day', $request->day], ['academic_session_id', $request->academic_session_id]])->WhereNull('bulk_id')->get()->toArray();
+
+            // return $oldest;
+            $diff = array_diff(array_column($oldest, 'id'), array_column($timetable, 'id'));
+            // dd($diff);
+            if (isset($diff)) {
+                foreach ($diff as $del) {
+
+                    // $delete =  $staffConn->table('timetable_class')->where('id', $del)->delete();
+                    // // delete calendor data
+                    // $staffConn->table('calendors')->where('time_table_id', $del)->delete();
+                    if ($staffConn->table('timetable_class')->where('id', '=', $del)->count() > 0) {
+                        // record found
+                        // echo "time table" . $del;
+                        $delete =  $staffConn->table('timetable_class')->where('id', $del)->delete();
+                    }
+                    // delete calendor data
+                    if ($staffConn->table('calendors')->where('time_table_id', '=', $del)->count() > 0) {
+                        // record found
+                        // dd($del);
+                        // echo "calendor" . $del;
+                        $staffConn->table('calendors')->where('time_table_id', $del)->delete();
+                    }
+                }
+            }
+
+            // return $timetable;
+
+            foreach ($timetable as $table) {
+
+                // return $table;
+                $session_id = 0;
+                $semester_id = 0;
+
+                $break_type = NULL;
+                $break = 0;
+                $subject_id = 0;
+                $teacher_id = NULL;
+
+
+                if (isset($request['session_id'])) {
+                    $session_id = $request['session_id'];
+                }
+                if (isset($request['semester_id'])) {
+                    $semester_id = $request['semester_id'];
+                }
+                if (isset($table['break_type'])) {
+                    $break_type = $table['break_type'];
+                }
+                if (isset($table['break'])) {
+                    $break = 1;
+                }
+                if (!empty($table['teacher'])) {
+                    $teacher_id =  implode(",", $table['teacher']);
+                }
+                if (isset($table['subject'])) {
+                    $subject_id = $table['subject'];
+                }
+                //  dd($break_type);
+                $insertOrUpdateID = 0;
+                if (isset($table['id'])) {
+                    // echo "<pre>";
+                    // echo $teacher_id;
+                    $query = $staffConn->table('timetable_class')->where('id', $table['id'])->update([
+                        'class_id' => $request['class_id'],
+                        'section_id' => $request['section_id'],
+                        'break' => $break,
+                        'break_type' => $break_type,
+                        'subject_id' => $subject_id,
+                        'teacher_id' => (isset($teacher_id) ? $teacher_id : 0),
+                        'class_room' => $table['class_room'],
+                        'time_start' => $table['time_start'],
+                        'time_end' => $table['time_end'],
+                        'semester_id' => $semester_id,
+                        'session_id' => $session_id,
+                        'day' => $request['day'],
+                        'academic_session_id' => $request['academic_session_id'],
+                        'updated_at' => date("Y-m-d H:i:s")
+                    ]);
+                    $insertOrUpdateID = $table['id'];
+                } else {
+                    // echo "<pre>";
+                    // echo $teacher_id;
+                    // exit;
+                    $query = $staffConn->table('timetable_class')->insertGetId([
+                        'class_id' => $request['class_id'],
+                        'section_id' => $request['section_id'],
+                        'break' => $break,
+                        'break_type' => $break_type,
+                        'subject_id' => $subject_id,
+                        'teacher_id' => (isset($teacher_id) ? $teacher_id : 0),
+                        'class_room' => $table['class_room'],
+                        'time_start' => $table['time_start'],
+                        'time_end' => $table['time_end'],
+                        'semester_id' => $semester_id,
+                        'session_id' => $session_id,
+                        'day' => $request['day'],
+                        'academic_session_id' => $request['academic_session_id'],
+                        'created_at' => date("Y-m-d H:i:s")
+                    ]);
+                    $insertOrUpdateID = $query;
+                }
+                $bulkID = NuLL;
+                // return $break;
+                $this->addCalendorTimetable($request, $table, $getObjRow, $insertOrUpdateID, $bulkID);
+            }
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'TimeTable has been successfully saved');
+            }
+        }
+    }
     // add Bulk Timetable
     public function addBulkTimetable(Request $request)
     {
@@ -16944,7 +17089,7 @@ class ApiController extends BaseController
             $start_time = $request->start_time;
             $end_time = $request->end_time;
             $Connection = $this->createNewConnection($request->branch_id);
-            $getClassName = $Connection->table('timetable_class as tc')->select('tc.class_room')
+            $getClassName = $Connection->table('timetable_class as tc')->select('tc.class_room','teacher_id')
                 ->where([
                     ['tc.semester_id', '=', $request->semester_id],
                     ['tc.day', '=', $request->day],
@@ -16960,7 +17105,7 @@ class ApiController extends BaseController
                 // ->whereBetween('time_end', [$request->start_time, $request->end_time])
                 // ->whereBetween('time_start', [$request->start_time, $request->end_time])
                 ->whereNotNull('class_room')
-                ->groupBy('class_room')
+                // ->groupBy('class_room')
                 ->get();
             return $this->successResponse($getClassName, 'Class Name record fetch successfully');
         }

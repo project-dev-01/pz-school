@@ -251,7 +251,43 @@ $(function () {
             }
         });
     });
-
+    // update timetable copy
+    // rules validation
+    $("#copyeditTimetableForm").validate({
+        rules: {
+            semester_id: "required",
+            session_id: "required"
+        }
+    });
+    $('#copyeditTimetableForm').on('submit', function (e) {
+        e.preventDefault();
+        var valid = $("#copyeditTimetableForm").valid();
+        console.log("valid");
+        console.log(valid);
+        if (valid === true) {
+            var form = this;
+            $("#overlay").fadeIn(300);
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (data) {
+                    if (data.code == 200) {
+                        // $('.copyeditTimetableForm').find('form')[0].reset();
+                        toastr.success(data.message);
+                        window.location.href = timetableList;
+                        $("#overlay").fadeOut(300);
+                    } else {
+                        toastr.error(data.message);
+                        $("#overlay").fadeOut(300);
+                    }
+                }
+            });
+        }
+    });
     $(document).on('click', "#timetable_body input[type='checkbox']", function () {
 
         var fal = true;
@@ -340,7 +376,7 @@ $(function () {
         color.find(".class_room option").css('color', 'black');
         var start_time = $(this).closest('tr').find('.time_start_class').val();
         var end_time = $(this).closest('tr').find('.time_end_class').val();
-            
+
         if (start_time && end_time) {
             var semesterID = $("#semester_id").val();
             var day = $("#day").val();
@@ -361,12 +397,12 @@ $(function () {
                     }
                 }, 'json');
         }
-            
+
     });
     $(document).on('change', ".time_end_class", function (e) {
         e.preventDefault();
         var color = $(this).closest('tr');
-            
+
         color.find(".class_room option").css('background-color', 'white');
         color.find(".class_room option").css('color', 'black');
         var start_time = $(this).closest('tr').find('.time_start_class').val();
@@ -405,7 +441,7 @@ $(function () {
         
         var start_time = $(this).closest('tr').find('.time_start_class').val();
         var end_time = $(this).closest('tr').find('.time_end_class').val();
-            
+
         if (start_time && end_time) {
             var semesterID = $("#semester_id").val();
             var day = $("#day").val();
@@ -433,7 +469,7 @@ $(function () {
                     }
                 }, 'json');
         }
-            
+
     });
 
 
@@ -507,7 +543,7 @@ $(function () {
         $('.select2-multiple').select2();
     }
 
-    
+
     $(document).on('click', '.exportToExcel', function (e) {
         // var table = $(this).prev('.table2excel');
         var table = $('.table2excel');
