@@ -1,79 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link rel="shortcut icon" href="{{ asset('public/images/favicon.ico') }}">
-  <title>404</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
-      
-/*======================
-    404 page
-=======================*/
-
-
-.page_404{ padding:40px 0; background:#fff; font-family: 'Arvo', serif;
-}
-
-.page_404  img{ width:100%;}
-
-.four_zero_four_bg{
- 
- background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
-    height: 400px;
-    background-position: center;
- }
- 
- 
- .four_zero_four_bg h1{
- font-size:80px;
- }
- 
-  .four_zero_four_bg h3{
-			 font-size:80px;
-			 }
-			 
-			 .link_404{			 
-	color: #fff!important;
-    padding: 10px 20px;
-    background: #39ac31;
-    margin: 20px 0;
-    display: inline-block;}
-	.contant_box_404{ margin-top:-50px;}
-  </style>
+	<link rel="shortcut icon" href="{{ asset('public/images/favicon.ico') }}">
+	<title>404</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<link href="{{ asset('public/css/custom/loginstyle.css') }}" rel="stylesheet" type="text/css" />
+	<link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
 </head>
+<style>
+	@media only screen and (min-device-width: 280px) and (max-device-width: 653px) {
+		.errorbackgroundd img {
+			height: 646px;
+			width: 100%;
+			margin-left: 12px;
+		}
+
+		.eopppss {
+			position: absolute;
+			top: 49px;
+			font-weight: 700;
+			font-size: 18px;
+			left: 5px;
+		}
+
+		.errortext {
+			position: absolute;
+			left: 5px;
+			top: 166px;
+			font-size: 7px;
+		}
+	}
+
+	@media only screen and (min-device-width: 320px) and (max-device-width: 660px) {
+		.errorbackgroundd img {
+			height: 646px;
+			width: 100%;
+			margin-left: 47px;
+		}
+
+		.eopppss {
+			position: absolute;
+			top: 49px;
+			font-weight: 700;
+			font-size: 25px;
+			left: 5px;
+		}
+
+		.errortext {
+			position: absolute;
+			left: 5px;
+			top: 166px;
+			font-size: 10px;
+		}
+	}
+
+	@media only screen and (min-device-width: 820px) and (max-device-width: 1180px) {
+		.errorbackgroundd img {
+			height: 646px;
+			width: 100%;
+			margin-left: 60px;
+		}
+
+		.eopppss {
+			left: 65px;
+		}
+
+		.errortext {
+			left: 68px;
+		}
+	}
+
+	@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+		.errorbackgroundd img {
+			height: 646px;
+			width: 100%;
+			margin-left: 60px;
+		}
+
+		.eopppss {
+			left: 65px;
+		}
+
+		.errortext {
+			left: 68px;
+		}
+	}
+</style>
+
 <body>
-  
-<div class="container">
-<section class="page_404">
-	<div class="container">
-		<div class="row">	
-		<div class="col-sm-12 ">
-		<div class="col-sm-10 col-sm-offset-1  text-center">
-		<div class="four_zero_four_bg">
-			<h1 class="text-center ">404</h1>
-		
-		
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="errorbackgroundd img">
+					<img src="{{ asset('public/images/Illustration.jpg') }}">
+					<h1 class="eopppss">Oppps. Something <br>went wrong </h1>
+					<p class="errortext">This page is currently not available. We are working<br> on the problem & appreciate your patience
+						<a href="{{url('/')}}" class="link_404">Go to Home</a>
+				</div>
+			</div>
 		</div>
-		
-		<div class="contant_box_404">
-		<h3 class="h2">
-		Look like you're lost
-		</h3>
-		
-		<p>The Page you are looking for not avaible!</p>
-		
-		<a href="{{url('/')}}" class="link_404">Go to Home</a>
+		<!-- end row -->
 	</div>
-		</div>
-		</div>
-		</div>
-	</div>
-</section>
-</div>
+
+	<!-- Vendor js -->
+	<script src="{{ asset('public/js/vendor.min.js') }}"></script>
+
+	<!-- App js -->
+	<script src="{{ asset('public/js/app.min.js') }}"></script>
 
 </body>
+
 </html>

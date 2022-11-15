@@ -284,62 +284,50 @@
 }
 
 .eoppps {
-  font-family: 'Open Sans';
-  font-style: normal;
   font-weight: 700;
-  font-size: 25px;
+  font-size: 30px;
   line-height: 56px;
-  text-align: center;
   letter-spacing: -0.02em;
   color: #373E48;
 }
 
 .etext {
   height: 56px;
-  font-family: 'Open Sans';
   font-weight: 400;
-  font-size: 11px;
-  line-height: 20px;
+  font-size: 18px;
+  line-height: 28px;
   text-align: center;
   color: #373E48;
 }
 
 .errorbackground {
   position: relative;
-  background: url(../assets/images/close-up-puzzle-background.jpg);
-  height: 497px;
+  background: url(../../images/close-up-puzzle-background.jpg);
+  height: 440px;
 }
 
 .errorbackgroundd img {
-  opacity: 0.6;
-  left: 0;
-  top: 0;
-  height: auto;
-  background: #F4F7FC;
-  display: block;
-  margin: 0 auto 0 auto;
-  width: 100%;
+  height: 650px;
+  margin-left: 425px;
 }
+
 
 .eopppss {
   position: absolute;
-  left: 68px;
-  top: 80px;
-  font-family: 'Open Sans';
+  left: 168px;
+  top: 115px;
   font-weight: 700;
   letter-spacing: -0.02em;
+  font-size: 40px;
+  line-height: 45px;
 }
 
 .errortext {
   position: absolute;
-  width: 430px;
-  height: 56px;
-  left: 68px;
-  top: 179px;
-  font-family: 'Open Sans';
-  font-style: normal;
+  left: 170px;
+  top: 230px;
   font-weight: 500;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 19px;
   color: #373E48;
 }
