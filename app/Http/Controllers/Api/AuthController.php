@@ -72,8 +72,7 @@ class AuthController extends BaseController
             return $this->send500Error('Could not create token.', ['error' => 'Could not create token']);
         }
         $user = auth()->user();
-        $code = random_int(100000, 999999);
-        User::where('id', $user->id)->update(['remember_token' => $code]);
+        User::where('id', $user->id)->update(['remember_token' => $token]);
         // Auth::logoutOtherDevices($request->password);
         if ($user->status == 0) {
             // update left to 0
@@ -82,7 +81,6 @@ class AuthController extends BaseController
             $user->login_attempt = 0;
             $user->save();
             $success['token'] = $token;
-            $success['check_token'] = $code;
             $success['user'] = $user;
             $success['role_name'] = $user->role->role_name;
             $success['subsDetails'] = $user->subsDetails;
@@ -212,11 +210,12 @@ class AuthController extends BaseController
             'created_at' => Carbon::now()
         ]);
 
+        // $user = 
         //Get the token just created above
         $tokenData = DB::table('password_resets')->where('email', $request->email)->first();
 
         if ($this->sendResetEmail($request->email, $tokenData->token)) {
-            return $this->successResponse('success', 'A reset link has been sent to your email address.');
+            return $this->successResponse($user, 'A reset link has been sent to your email address.');
         } else {
             return $this->send500Error('A Network Error occurred. Please try again.', ['error' => 'A Network Error occurred. Please try again.']);
         }
@@ -243,7 +242,7 @@ class AuthController extends BaseController
                     ('Password Reset');
                 $message->from('rajesh@aibots.my','Password Reset');
                 }); 
-            return true;
+            return $user;
         } else {
             return false;
         }
@@ -546,7 +545,7 @@ class AuthController extends BaseController
             return $this->send422Error('Validation error.', ['error' => $validator->messages()]);
         }
         $user = auth()->user();
-        if($user['remember_token'] != $request->check_token) {
+        if($user['remember_token'] != $request->token) {
             //Request is validated, do logout 
             try {
                 // JWTAuth::invalidate($request->token);

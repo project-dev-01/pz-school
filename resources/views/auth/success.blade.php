@@ -19,6 +19,7 @@
 
 		<!-- icons -->
 		<link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('public/css/custom/loginstyle.css') }}" rel="stylesheet" type="text/css" />
 
     </head>
@@ -51,15 +52,20 @@
                                  </div>
                                     
 								<br>
+                                
+                                
+                                <div class="loadingRing">
+                                    <span id="greetingRingCnt">5</span>	 <br>Seconds
+                                </div>
+                                <div class="row" id="hideGreeting">
+                                </div>
 								
-								<div class="ring">
-								<span>3<br>Seconds</span>	 
-								</div>
 
-								 <p style="text-align:center">Ok</p>
+								 <p style="text-align:center">OR</p>
 								 
                                     <div class="form-group mb-0 text-center">
-                                    <a href="{{route('admin.login')}}"><button class="btn btn-block signin">Login Page</button></a>
+                                    <a href="{{$redirect_route}}"><button class="btn btn-block signin">Login Page</button></a>
+                                        <input type="hidden" id="redirect_route" value="{{ $redirect_route }}" />
                                     </div><br>
 									
 									
@@ -99,6 +105,7 @@
 
         <!-- Init js-->
         <script src="{{ asset('public/js/pages/peity.init.js') }}"></script>
+        <script src="{{ asset('public/js/custom/loading.js') }}"></script>
         
     </body>
 </html>

@@ -543,9 +543,25 @@ class AuthController extends Controller
         ]);
 
         $userDetails = $response->json();
-        // dd($userDetails);
         if ($userDetails['code'] == 200) {
-            return view('auth.success');
+        
+            $role_ids = explode(",", $userDetails['data']['role_id']);
+            $role = $role_ids['0'];
+            // dd($role_ids);
+            if($role ==1){
+                $redirect_route = route('super_admin.login');
+            }elseif($role==2){
+                $redirect_route = route('admin.login');
+            }elseif($role==3){
+                $redirect_route = route('staff.login');
+            }elseif($role==4){
+                $redirect_route = route('teacher.login');
+            }elseif($role==5){
+                $redirect_route = route('parent.login');
+            }elseif($role==6){
+                $redirect_route = route('student.login');
+            }
+            return view('auth.success', ['redirect_route' => $redirect_route]);
         } else {
             return redirect()->back()->with('error', $userDetails['message']);
         }
@@ -593,7 +609,6 @@ class AuthController extends Controller
     // set session common
     public function sessionCommon($req, $userDetails, $roleID)
     {
-        $req->session()->put('check_token', $userDetails['data']['check_token']);
         $req->session()->put('user_id', $userDetails['data']['user']['id']);
         $req->session()->put('ref_user_id', $userDetails['data']['user']['user_id']);
         $req->session()->put('role_id', $roleID);
@@ -627,9 +642,9 @@ class AuthController extends Controller
     public function allLogout(Request $request)
     {
 
-        $token = session()->get('check_token');
+        $token = session()->get('token');
         $data = [
-            'check_token' => $token
+            'token' => $token
         ];
         $response = Helper::PostMethod(config('constants.api.all_logout'), $data);
         $role = session()->get('role_id');

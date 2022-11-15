@@ -22,7 +22,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Class Schedule</h4>
+                <h4 class="page-title">Grade Schedule</h4>
             </div>
         </div>
     </div>
@@ -35,7 +35,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link"><i class="far fa-clock"></i>
-                            @if($timetable)Class {{ $details['class']['class_name'] }} (Section: {{ $details['section']['section_name'] }}) - {{ $details['day'] }} - @endif Schedule Edit
+                            @if($timetable)Grade {{ $details['class']['class_name'] }} (Class: {{ $details['section']['section_name'] }}) - {{ $details['day'] }} - @endif Schedule Edit
                         </h4>
                     </li>
                 </ul><br>

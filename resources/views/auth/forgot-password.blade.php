@@ -15,6 +15,11 @@
 		<link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
 
 		<link href="{{ asset('public/css/bootstrap-dark.min.css') }}" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
+
+        <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
+        <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
+
+		<link href="{{ asset('public/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
 		<link href="{{ asset('public/css/app-dark.min.css') }}" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
 
 		<!-- icons -->
@@ -61,10 +66,10 @@
                                         <input class="form-control" type="email" name="email" id="emailaddress" placeholder="Enter your email">
                                     </div><br>
                                     <div class="form-group mb-0 text-center">
-                                        <button class="btn btn-block signin" type="submit">Sent link</button>
+                                        <button class="btn btn-block signin" id="send" type="submit" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Please Wait">Sent link</button>
                                     </div><br>
 									<div class="form-group mb-0 text-center">
-                                        <button class="btn btn-block cancel" type="submit">Cancel</button>
+                                    <a href="{{ url()->previous() }}"><button class="btn btn-block cancel" type="button" >Cancel</button></a>
                                     </div>
 
                                 </form>
@@ -94,8 +99,25 @@
         <!-- Vendor js -->
         <script src="{{ asset('public/js/vendor.min.js') }}"></script>
 
+        <script src="{{ asset('public/bootstrap/js/bootstrap.min.js') }}"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
+
+        <script src="{{ asset('public/bootstrap/js/twitter-bootstrap.min.js') }}"></script>
+
         <!-- App js -->
         <script src="{{ asset('public/js/app.min.js') }}"></script>
         
     </body>
+    
+    <script>
+        $('#send').on('click', function() {
+            console.log('124',12)
+            var $this = $(this);
+            $this.button('loading');
+                setTimeout(function() {
+                $this.button('reset');
+            }, 8000);
+        });
+    </script>
 </html>
