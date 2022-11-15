@@ -37,7 +37,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="title">Homework Title<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="title" placeholder="Enter Title">
+                                    <input type="text" class="form-control" name="title" placeholder="Enter Homework Title">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -79,7 +79,7 @@
                                             </div>
                                         </div>
 
-                                        <input type="text" class="form-control homeWorkAdd" name="date_of_homework" placeholder="" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control homeWorkAdd" name="date_of_homework" placeholder="YYYY-MM-DD" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control homeWorkAdd" name="date_of_submission" placeholder="" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control homeWorkAdd" name="date_of_submission" placeholder="YYYY-MM-DD" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>

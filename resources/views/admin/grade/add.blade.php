@@ -11,7 +11,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="grade">Grade Name<span class="text-danger">*</span></label>
-                        <input type="text" name="grade" class="form-control" placeholder="Enter Grade name">
+                        <input type="text" name="grade" class="form-control" placeholder="Enter Grade Name">
                     </div>
                     <div class="form-group">
                         <label for="grade_point">Grade Point <span class="text-danger">*</span></label>

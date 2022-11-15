@@ -8,11 +8,11 @@
             </div>
             <div class="modal-body">
                 <form id="hostelBlockForm" method="post" action="{{ route('admin.hostel_block.add') }}" autocomplete="off">
-                    @csrf                   
-                 
+                    @csrf
+
                     <div class="form-group">
                         <label for="block_name">Block Name<span class="text-danger">*</span></label>
-                        <input type="text" id="block_name" name="block_name" class="form-control" placeholder="Enter Block Name ">
+                        <input type="text" id="block_name" name="block_name" class="form-control" placeholder="Enter The Block Name">
                         <span class="text-danger error-text block_name_error"></span>
                     </div>
                     <div class="form-group">
@@ -28,7 +28,7 @@
                     </div>
                     <div class="form-group">
                         <label for="total_floor">Total Floor<span class="text-danger">*</span></label>
-                        <input type="text"  name="total_floor" class="form-control" placeholder="Enter Total Floor">
+                        <input type="text" name="total_floor" class="form-control" placeholder="Enter The Total Floor">
                         <span class="text-danger error-text total_floor_error"></span>
                     </div>
                     <div class="form-group">
@@ -44,7 +44,7 @@
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="submit"  class="btn btn-success waves-effect waves-light">Submit</button>
+                        <button type="submit" class="btn btn-success waves-effect waves-light">Submit</button>
                     </div>
                 </form>
             </div>

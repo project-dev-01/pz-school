@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group">
                         <label for="capacity">Capacity</label>
-                        <input type="number" id="sectionCapacity" name="capacity" class="form-control" placeholder="Enter capacity">
+                        <input type="number" id="sectionCapacity" name="capacity" class="form-control" placeholder="Enter Capacity">
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>

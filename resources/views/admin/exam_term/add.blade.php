@@ -7,11 +7,11 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <form id="exam-term-form" method="post"  action="{{ route('admin.exam_term.add') }}" autocomplete="off">
+                <form id="exam-term-form" method="post" action="{{ route('admin.exam_term.add') }}" autocomplete="off">
                     @csrf
                     <div class="form-group">
                         <label for="name">Term Name<span class="text-danger">*</span></label>
-                        <input type="text"  name="name" class="form-control" placeholder="Enter Term name">
+                        <input type="text" name="name" class="form-control" placeholder="Enter Term Name">
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>

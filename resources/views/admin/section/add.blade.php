@@ -11,7 +11,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="name">Name <span class="text-danger">*</span></label>
-                        <input type="text" id="sectionName" name="name" class="form-control" placeholder="Enter name">
+                        <input type="text" id="sectionName" name="name" class="form-control" placeholder="Enter Name">
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>

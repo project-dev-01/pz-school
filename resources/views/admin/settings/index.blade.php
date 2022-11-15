@@ -83,14 +83,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">Name</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="" placeholder="Enter name">
+                                        <input type="text" class="form-control" id="name" name="name" value="" placeholder="Enter The Name">
                                         <span class="text-danger error-text name_error"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="email">Email Address</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="" placeholder="Enter email">
+                                        <input type="email" class="form-control" id="email" name="email" value="" placeholder="Enter The Email">
                                         <span class="text-danger error-text email_error"></span>
                                         <!-- <span class="form-text text-muted"><small>If you want to change email please <a href="javascript: void(0);">click</a> here.</small></span> -->
                                     </div>
@@ -101,7 +101,7 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="address">Address</label>
-                                        <textarea class="form-control" id="address" rows="4" name="address" placeholder="Enter Address..."></textarea>
+                                        <textarea class="form-control" id="address" rows="4" name="address" placeholder="Enter The Address"></textarea>
                                         <span class="text-danger error-text address_error"></span>
                                     </div>
                                 </div> <!-- end col -->
@@ -121,8 +121,8 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="name">Old Passord</label>
-                                        <input type="password" class="form-control" id="oldpassword" name="oldpassword" placeholder="Enter current password">
+                                        <label for="name">Old Password</label>
+                                        <input type="password" class="form-control" id="oldpassword" name="oldpassword" placeholder="Old Password">
                                         <span class="text-danger error-text oldpassword_error"></span>
                                     </div>
                                 </div>
@@ -131,7 +131,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="newpassword">New Password</label>
-                                        <input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="Enter new password">
+                                        <input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="New Password">
                                         <span class="text-danger error-text newpassword_error"></span>
                                     </div>
                                 </div>
@@ -140,7 +140,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="cnewpassword">Confirm New Password</label>
-                                        <input type="password" class="form-control" id="cnewpassword" name="cnewpassword" placeholder="ReEnter new password">
+                                        <input type="password" class="form-control" id="cnewpassword" name="cnewpassword" placeholder="Confirm New Password">
                                         <span class="text-danger error-text cnewpassword_error"></span>
                                     </div>
                                 </div>

@@ -337,7 +337,7 @@ $(function () {
                             d.session_id = $('#session_id').val()
                     }
                 },
-                "pageLength": 5,
+                "pageLength": 10,
                 "aLengthMenu": [
                     [5, 10, 25, 50, -1],
                     [5, 10, 25, 50, "All"]

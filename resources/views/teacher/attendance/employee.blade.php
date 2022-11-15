@@ -21,10 +21,10 @@
     </div>
     <!-- end page title -->
 
-    <div class="row" >
+    <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
                             Select Ground
@@ -35,14 +35,14 @@
                     <form id="employeeAttendanceFilter" method="post" enctype="multipart/form-data" autocomplete="off">
                         <div class="row">
                             <input type="hidden" id="employee" name="employee" value="{{$employee}}">
-                            
+
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="session_id">Session <span class="text-danger">*</span></label>
-                                    <select id="session_id" class="form-control"  name="session_id">                              
-                                    <option value="">Select Session</option>
+                                    <select id="session_id" class="form-control" name="session_id">
+                                        <option value="">Select Session</option>
                                         @foreach($session as $ses)
-                                            <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                        <option value="{{$ses['id']}}">{{$ses['name']}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -56,7 +56,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="date" id="employeeDate" placeholder="MM/YY">
+                                        <input type="text" class="form-control" name="date" placeholder="MM-YYYY" id="employeeDate">
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                                 Cancel
                             </button>-->
                         </div>
-                    
+
                     </form>
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
@@ -80,10 +80,10 @@
     <div class="row" id="employee_attendance" style="display:none;">
         <div class="col-xl-12 addEmployeeAttendanceForm">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                           Employee List
+                            Employee List
                             <h4>
                     </li>
                 </ul><br>
@@ -107,7 +107,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="employee_attendance_body">
-                                                
+
                                             </tbody>
                                         </table>
 

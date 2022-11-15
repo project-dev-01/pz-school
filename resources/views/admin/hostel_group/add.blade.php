@@ -40,7 +40,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="incharge_staff">Incharge Staff</label>
-                                    <select class="form-control"  name="incharge_staff">
+                                    <select class="form-control" name="incharge_staff">
                                         <option value="">Select Incharge Staff</option>
                                         @forelse($staff as $st)
                                         <option value="{{$st['id']}}">{{$st['name']}}</option>
@@ -52,7 +52,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="incharge_student">Incharge Student</label>
-                                    <select class="form-control"  name="incharge_student">
+                                    <select class="form-control" name="incharge_student">
                                         <option value="">Select Incharge Student</option>
                                         @forelse($student as $stu)
                                         <option value="{{$stu['id']}}">{{$stu['name']}}</option>
@@ -64,7 +64,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="student">Student</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" name="student[]" multiple="multiple" data-placeholder="Choose ...">
+                                    <select class="form-control select2-multiple" data-toggle="select2" name="student[]" multiple="multiple" data-placeholder="Choose The Student">
                                         <option value="">Select Student</option>
                                         @forelse($student as $stu)
                                         <option value="{{$stu['id']}}">{{$stu['name']}}</option>
@@ -76,7 +76,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="color"> Color <span class="text-danger">*</span></label>
-                                    <input type="text" id="color" name="color" class="form-control color" value="#4a81d4">
+                                    <input type="text" id="color" name="color" class="form-control color" placeholder="Choose Color" value="#4a81d4">
                                 </div>
                             </div>
                         </div>
@@ -94,12 +94,10 @@
 @endsection
 @section('scripts')
 <script>
-  //HostelGroup routes
+    //HostelGroup routes
     var hostelGroupList = "{{ route('admin.hostel_group.list') }}";
     var hostelGroupDetails = "{{ route('admin.hostel_group.details') }}";
     var hostelGroupDelete = "{{ route('admin.hostel_group.delete') }}";
-    
-    
 </script>
 
 <script src="{{ asset('public/libs/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
@@ -108,4 +106,3 @@
 <script src="{{ asset('public/js/custom/hostel_group.js') }}"></script>
 
 @endsection
-

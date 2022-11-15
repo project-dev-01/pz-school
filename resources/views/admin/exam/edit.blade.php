@@ -12,7 +12,7 @@
                     <input type="hidden" name="id">
                     <div class="form-group">
                         <label for="name"> Name <span class="text-danger">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter name">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name">
                     </div>
                     <div class="form-group">
                         <label for="term_id" class="col-3 col-form-label">Term </label>

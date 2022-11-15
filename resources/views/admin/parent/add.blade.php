@@ -312,7 +312,7 @@
                                                 <span class="fas fa-birthday-cake"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="date_of_birth" placeholder="DD/MM/YYYY" id="date_of_birth">
+                                        <input type="text" class="form-control" name="date_of_birth" placeholder="YYYY-MM-DD" id="date_of_birth">
                                     </div>
                                 </div>
                             </div>
@@ -349,7 +349,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
-                                    <input type="tel" class="form-control" name="mobile_no" id="mobile_no" placeholder="Mobile Number" data-parsley-trigger="change">
+                                    <input type="tel" class="form-control" name="mobile_no" id="mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">

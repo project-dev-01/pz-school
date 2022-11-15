@@ -93,6 +93,7 @@
                                             <div class="form-group">
                                                 <label for="heard">Gender<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
+                                                    <option value="">Choose Gender</option>
                                                     <option value="">Male</option>
                                                     <option value="press">Female</option>
                                                 </select>
@@ -110,7 +111,7 @@
                                             <div class="form-group">
                                                 <label for="heard">Date of Birth<span class="text-danger">*</span></label>
                                                 <div class="input-group input-group-merge">
-                                                    <input type="text" class="form-control" id="name" placeholder="DD/MM/YY" aria-describedby="inputGroupPrepend" required>
+                                                    <input type="text" class="form-control" id="name" placeholder="YYYY-MM-DD" aria-describedby="inputGroupPrepend" required>
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
                                                             <span class="far fa-calendar-alt"></span>
@@ -122,7 +123,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">Phone Number<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="phone" placeholder="Phone no" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="phone" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div><br>
@@ -151,6 +152,7 @@
                                             <div class="form-group">
                                                 <label for="heard">City<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
+                                                    <option value="">Select City</option>
                                                     <option value="">Malaysia</option>
                                                     <option value="press">Singapore</option>
                                                 </select>
@@ -160,6 +162,7 @@
                                             <div class="form-group">
                                                 <label for="heard">State<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
+                                                    <option value="">Select State</option>
                                                     <option value="">Malaysia</option>
                                                     <option value="press">Singapore</option>
                                                 </select>
@@ -168,7 +171,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">Postal Code<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="pin" placeholder="Postal-code" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="pin" placeholder="Postal Code" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div>
@@ -186,6 +189,7 @@
                                             <div class="form-group">
                                                 <label for="heard">Grade<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
+                                                    <option value="">Select Grade</option>
                                                     <option value="">I</option>
                                                     <option value="press">II</option>
                                                 </select>
@@ -195,6 +199,7 @@
                                             <div class="form-group">
                                                 <label for="heard">School Year<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
+                                                    <option value="">Choose School Year</option>
                                                     <option value="">2021-2022</option>
                                                     <option value="press">2022-2023</option>
                                                 </select>
@@ -224,6 +229,7 @@
                                             <div class="form-group">
                                                 <label for="heard">City<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
+                                                    <option value="">Select City</option>
                                                     <option value="">Malaysia</option>
                                                     <option value="press">Singapore</option>
                                                 </select>
@@ -235,6 +241,7 @@
                                             <div class="form-group">
                                                 <label for="heard">State<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
+                                                    <option value="">Select State</option>
                                                     <option value="">Malaysia</option>
                                                     <option value="press">Singapore</option>
                                                 </select>
@@ -243,7 +250,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">Postal Code<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="spin" placeholder="Postal-code" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="spin" placeholder="Postal Code" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div>
@@ -262,6 +269,7 @@
                                             <div class="form-group">
                                                 <label for="heard">Parent /Guardian's Name<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
+                                                    <option value="">Select Parent /Guardian's Name</option>
                                                     <option value="">Parent</option>
                                                     <option value="">Guardian's</option>
                                                 </select>
@@ -284,13 +292,14 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">Phone Number<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="pnumber" placeholder="Phone no" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="pnumber" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">Occupation<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
+                                                    <option value="">Select Occupation</option>
                                                     <option value="">Business</option>
                                                     <option value="">IT/ Software</option>
                                                     <option value="">Civil department</option>
@@ -305,6 +314,7 @@
                                             <div class="form-group">
                                                 <label for="heard">Parent/Guardian's Name - Secondary<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
+                                                    <option value="">Select Parent/Guardian's Name - Secondary</option>
                                                     <option value="">Parent</option>
                                                     <option value="">Guardian's</option>
                                                 </select>
@@ -327,13 +337,14 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">Phone Number<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" placeholder="Phone no" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="name" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">Occupation<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
+                                                    <option value="">Choose Occupation</option>
                                                     <option value="">Business</option>
                                                     <option value="">IT/ Software</option>
                                                     <option value="">Civil department</option>
@@ -376,7 +387,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">Phone Number<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" placeholder="Phone no" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="name" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div><br>

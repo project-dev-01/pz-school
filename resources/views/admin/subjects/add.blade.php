@@ -11,20 +11,20 @@
                     @csrf
                     <div class="form-group">
                         <label for="name">Subject Name<span class="text-danger">*</span></label>
-                        <input type="text" id="subjectName" name="name" class="form-control" placeholder="Enter subject name">
+                        <input type="text" id="subjectName" name="name" class="form-control" placeholder="Enter Subject Name">
                     </div>
                     <div class="form-group">
                         <label for="short_name">Short Name<span class="text-danger">*</span></label>
-                        <input type="text" id="shortName" name="short_name" class="form-control" placeholder="Enter short name">
+                        <input type="text" id="shortName" name="short_name" class="form-control" placeholder="Enter Short Name">
                     </div>
                     <div class="form-group">
                         <label for="subject_code">Subject Code</label>
-                        <input type="text" id="subjectCode" name="subject_code" class="form-control" placeholder="Enter subject code">
+                        <input type="text" id="subjectCode" name="subject_code" class="form-control" placeholder="Enter Subject Code">
                     </div>
                     <div class="form-group">
                         <label for="subjectType">Subject Type 1</label>
                         <select class="form-control" id="subjectType" name="subject_type">
-                            <option value="">Choose Subject type 1</option>
+                            <option value="">Choose Subject Type 1</option>
                             <option value="Optional">Optional</option>
                             <option value="Mandatory">Mandatory</option>
                             <option value="Task">Task</option>

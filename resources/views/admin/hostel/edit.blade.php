@@ -9,16 +9,16 @@
             <div class="modal-body">
                 <form id="edit-hostel-form" method="post" action="{{ route('admin.hostel.update') }}" autocomplete="off">
                     @csrf
-                    <input type="hidden" name="id">           
+                    <input type="hidden" name="id">
                     <div class="form-group">
                         <label for="name">Hostel Name <span class="text-danger">*</span></label>
-                        <input type="text" name="name" class="form-control" placeholder="Enter Hostel name">
+                        <input type="text" name="name" class="form-control" placeholder="Enter The Hostel Name">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="category">Category<span class="text-danger">*</span></label>
                         <select class="form-control" id="category" name="category">
-                            <option value="">Select</option>
+                            <option value="">Select The Category</option>
                             @foreach($category as $cat)
                             <option value="{{$cat['id']}}">{{$cat['name']}}</option>
                             @endforeach
@@ -28,7 +28,7 @@
                     <div id="test"></div>
                     <div class="form-group" id="watchman">
                         <label for="watchman">Warden Name<span class="text-danger">*</span></label>
-                        <select class="form-control select2-multiple" id="watch" data-toggle="select2" name="watchman[]" multiple="multiple" data-placeholder="Choose ...">
+                        <select class="form-control select2-multiple" id="watch" data-toggle="select2" name="watchman[]" multiple="multiple" data-placeholder="Choose The Warden Name">
                             <option value="">Select Warden</option>
                             @forelse($warden as $war)
                             <option value="{{$war['id']}}">{{$war['name']}}</option>
@@ -39,12 +39,12 @@
                     </div>
                     <div class="form-group">
                         <label for="address">Hostel Address<span class="text-danger">*</span></label>
-                        <input type="text"  name="address" id="address" class="form-control" placeholder="Enter Hostel Address">
+                        <input type="text" name="address" id="address" class="form-control" placeholder="Enter Hostel Address">
                         <span class="text-danger error-text address_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="remarks">Remarks</label>
-                        <textarea type="text"  name="remarks" class="form-control" placeholder="Enter Remarks"> </textarea>
+                        <textarea type="text" name="remarks" class="form-control" placeholder="Enter Remarks"> </textarea>
                         <span class="text-danger error-text remarks_error"></span>
                     </div>
                     <div class="form-group">

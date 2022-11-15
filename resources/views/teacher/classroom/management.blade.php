@@ -58,7 +58,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="class_date">Date<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" value="<?php echo date('d-m-Y'); ?>" name="class_date" id="classDate" require="">
+                                    <input type="text" class="form-control value=" <?php echo date('d-m-Y'); ?>" name="class_date" placeholder="DD-MM-YYYY" id="classDate" require="">
                                 </div>
                             </div>
                         </div>

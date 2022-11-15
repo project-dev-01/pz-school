@@ -12,13 +12,13 @@
                     <input type="hidden" name="id">    
                     <div class="form-group">
                         <label for="floor_name">Floor Name<span class="text-danger">*</span></label>
-                        <input type="text" id="floor_name" name="floor_name" class="form-control" placeholder="Enter Floor Name ">
+                        <input type="text" id="floor_name" name="floor_name" class="form-control" placeholder="Enter The Floor Name">
                         <span class="text-danger error-text floor_name_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="block_id">Block</label>
                         <select class="form-control"  name="block_id">
-                            <option value="">Select</option>
+                        <option value="">Select Block</option>
                             @foreach($block as $blo)
                             <option value="{{$blo['id']}}">{{$blo['block_name']}}</option>
                             @endforeach
@@ -49,7 +49,7 @@
                     </div>
                     <div class="form-group">
                         <label for="total_room">Total Room<span class="text-danger">*</span></label>
-                        <input type="text"  name="total_room" class="form-control" placeholder="Enter Total Room">
+                        <input type="text"  name="total_room" class="form-control" placeholder="Enter The Total Room">
                         <span class="text-danger error-text total_room_error"></span>
                     </div>
                     <div class="form-group">

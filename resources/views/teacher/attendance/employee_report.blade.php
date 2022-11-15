@@ -39,11 +39,11 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="session_id">Session <span class="text-danger">*</span></label>
-                                    <select id="employeeReportSession" class="form-control"  name="session_id">                            
-                                    <option value="">Select Session</option>
-                                    <option value="All">All</option>  
+                                    <select id="employeeReportSession" class="form-control" name="session_id">
+                                        <option value="">Select Session</option>
+                                        <option value="All">All</option>
                                         @foreach($session as $ses)
-                                            <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                        <option value="{{$ses['id']}}">{{$ses['name']}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -57,7 +57,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="date" id="employeeReportDate" placeholder="DD/MM/YY">
+                                        <input type="text" class="form-control" name="date" id="employeeReportDate" placeholder="MM-YYYY">
                                     </div>
                                 </div>
                             </div>
@@ -212,7 +212,7 @@
                                                     <th><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i> Present</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i> Absent</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> Late</button></th>
-                                                    
+
                                                 </tr>
                                             </table>
                                         </div>

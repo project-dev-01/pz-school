@@ -320,13 +320,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="Passport">Passport Number</label>
-                                    <input type="text" class="form-control" name="passport" value="{{$employee['passport']}}" id="Passport" placeholder="********">
+                                    <input type="text" class="form-control" name="passport" value="{{$employee['passport']}}" id="Passport" placeholder="Passport Number">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="nric_number">NRIC Number</label>
-                                    <input type="text" class="form-control" name="nric_number" value="{{$employee['nric_number']}}" id="nricNumber" placeholder="00000000">
+                                    <input type="text" class="form-control" name="nric_number" value="{{$employee['nric_number']}}" id="nricNumber" placeholder="NRIC Number">
                                 </div>
                             </div>
 
@@ -339,7 +339,7 @@
                                                 <span class="fas fa-birthday-cake"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="birthday" value="{{$employee['birthday']}}" placeholder="DD/MM/YYYY" id="empDOB">
+                                        <input type="text" class="form-control" name="birthday" value="{{$employee['birthday']}}" placeholder="YYYY-MM-DD" id="empDOB">
                                     </div>
                                 </div>
                             </div>
@@ -353,7 +353,7 @@
                                             <span class="fas fa-phone-volume"></span>
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control" value="{{$employee['mobile_no']}}" placeholder="(xx)-00000-0000" name="mobile_no" id="mobile_no">
+                                    <input type="text" class="form-control" value="{{$employee['mobile_no']}}" placeholder="(XXX)-(XXX)-(XXXX)" name="mobile_no" id="mobile_no">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -372,7 +372,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="country">Country</label>
-                                    <input type="text" value="{{$employee['country']}}" class="form-control" name="country" id="Country" placeholder="malaysia">
+                                    <input type="text" value="{{$employee['country']}}" class="form-control" name="country" id="Country" placeholder="Country">
                                 </div>
                             </div>
                         </div>
@@ -380,19 +380,19 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="state">State/Province</label>
-                                    <input type="text" value="{{$employee['state']}}" class="form-control" name="state" id="State" placeholder="state">
+                                    <input type="text" value="{{$employee['state']}}" class="form-control" name="state" id="State" placeholder="State/Province">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="city">City</label>
-                                    <input type="text" value="{{$employee['city']}}" class="form-control" name="city" id="City" placeholder="city">
+                                    <input type="text" value="{{$employee['city']}}" class="form-control" name="city" id="City" placeholder="City">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="post_code">Zip/Postal code</label>
-                                    <input type="text" value="{{$employee['post_code']}}" class="form-control" name="post_code" id="postCode" placeholder="000000">
+                                    <input type="text" value="{{$employee['post_code']}}" class="form-control" name="post_code" id="postCode" placeholder="Zip/Postal code">
                                 </div>
                             </div>
                         </div>
@@ -400,13 +400,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="present_address">Address 1</label>
-                                    <input class="form-control" name="present_address" id="present_address" value="{{$employee['present_address']}}" placeholder="johor">
+                                    <input class="form-control" name="present_address" id="present_address" value="{{$employee['present_address']}}" placeholder="Address 1">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="permanent_address">Address 2</label>
-                                    <input class="form-control" name="permanent_address" id="permanent_address" value="{{$employee['permanent_address']}}" placeholder="johor">
+                                    <input class="form-control" name="permanent_address" id="permanent_address" value="{{$employee['permanent_address']}}" placeholder="Address 2">
                                 </div>
                             </div>
                         </div>
@@ -424,7 +424,7 @@
                                 <div class="form-group">
                                     <label for="role_id">Role<span class="text-danger">*</span></label>
                                     <!-- <select class="form-control" name="role_id" id="role_id"> -->
-                                    <select class="form-control select2-multiple" data-toggle="select2" id="role_id" name="role_id" multiple="multiple" data-placeholder="Choose ...">
+                                    <select class="form-control select2-multiple" data-toggle="select2" id="role_id" name="role_id" multiple="multiple" data-placeholder="Choose The Role">
                                         <option value="">Select Role</option>
                                         @forelse($roles as $r)
                                         @php
@@ -453,14 +453,14 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" value="{{$employee['joining_date']}}" name="joining_date" id="joiningDate" placeholder="DD/MM/DDDD">
+                                        <input type="text" class="form-control" value="{{$employee['joining_date']}}" name="joining_date" id="joiningDate" placeholder="YYYY-MM-DD">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="designation_id">Designation</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDesignation" name="designation_id[]" multiple="multiple" data-placeholder="Choose ...">
+                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDesignation" name="designation_id[]" multiple="multiple" data-placeholder="Choose The Designation">
                                         <option value="">Select Designation</option>
                                         @forelse($designation as $des)
                                         @php
@@ -485,7 +485,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="department_id">Department</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDepartment" name="department_id" multiple="multiple" data-placeholder="Choose ...">
+                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDepartment" name="department_id" multiple="multiple" data-placeholder="Choose The Department">
                                         <option value="">Select Department</option>
                                         @forelse($department as $dep)
                                         @php
@@ -519,7 +519,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="salary_grade">Salary Grade</label>
-                                    <input type="number" value="{{$employee['salary_grade']}}" class="form-control" name="salary_grade" id="salaryGrade" placeholder="Grade">
+                                    <input type="number" value="{{$employee['salary_grade']}}" class="form-control" name="salary_grade" id="salaryGrade" placeholder="Salary Grade">
                                 </div>
                             </div>
                         </div>
@@ -540,7 +540,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="qualifications">Staff Qualification</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" id="staffQualification" name="staff_qualification_id" multiple="multiple" data-placeholder="Choose ...">
+                                    <select class="form-control select2-multiple" data-toggle="select2" id="staffQualification" name="staff_qualification_id" multiple="multiple" data-placeholder="Choose The Qualification">
                                         <option value="">Select Qualification</option>
                                         @forelse($qualifications as $qua)
                                         @php
@@ -593,7 +593,7 @@
                                                 <span class="far fa-envelope-open"></span>
                                             </div>
                                         </div>
-                                        <input type="email" value="{{$role['email']}}" class="form-control" name="email" id="email" placeholder="aa@gmail.com">
+                                        <input type="email" value="{{$role['email']}}" class="form-control" name="email" id="email" placeholder="xxxxx@gmail.com">
                                     </div>
                                 </div>
                             </div>
@@ -706,19 +706,19 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="height">Height</label>
-                                        <input type="text" id="height" class="form-control" value="{{$employee['height']}}" name="height" placeholder="150" data-parsley-trigger="change">
+                                        <input type="text" id="height" class="form-control" value="{{$employee['height']}}" name="height" placeholder="Height" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="weight">Weight</label>
-                                        <input type="text" id="weight" class="form-control" value="{{$employee['weight']}}" name="weight" placeholder="60" data-parsley-trigger="change">
+                                        <input type="text" id="weight" class="form-control" value="{{$employee['weight']}}" name="weight" placeholder="Weight" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="allergy">Allergy</label>
-                                        <input type="text" id="allergy" class="form-control" value="{{$employee['allergy']}}" name="allergy" placeholder="allergy" data-parsley-trigger="change">
+                                        <input type="text" id="allergy" class="form-control" value="{{$employee['allergy']}}" name="Allergy" placeholder="Allergy" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -759,7 +759,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="bank_name">Bank Name<span class="text-danger">*</span></label>
-                                        <input type="text" id="bank_name" value="{{ isset($bank['bank_name']) ? $bank['bank_name']:' ' }}" class="form-control" name="bank_name" placeholder="bank name" data-parsley-trigger="change">
+                                        <input type="text" id="bank_name" value="{{ isset($bank['bank_name']) ? $bank['bank_name']:' ' }}" class="form-control" name="bank_name" placeholder="Bank Name" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -771,7 +771,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="bank_branch">Bank Branch<span class="text-danger">*</span></label>
-                                        <input type="text" id="bank_branch" value="{{ isset($bank['bank_branch']) ? $bank['bank_branch']:'' }}" class="form-control" name="bank_branch" placeholder="branch name" data-parsley-trigger="change">
+                                        <input type="text" id="bank_branch" value="{{ isset($bank['bank_branch']) ? $bank['bank_branch']:'' }}" class="form-control" name="bank_branch" placeholder="Branch Name" data-parsley-trigger="change">
                                     </div>
                                 </div>
                             </div>
@@ -779,19 +779,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="bank_address">Bank Address<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" value="{{ isset($bank['bank_address']) ? $bank['bank_address']:'' }}" id="bank_address" name="bank_address" placeholder="address" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" value="{{ isset($bank['bank_address']) ? $bank['bank_address']:'' }}" id="bank_address" name="bank_address" placeholder="Bank Address" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="ifsc_code">IFSC Code<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" value="{{ isset($bank['ifsc_code']) ? $bank['ifsc_code']:''}}" id="ifsc_code" name="ifsc_code" placeholder="code" aria-describedby="">
+                                        <input type="text" class="form-control" value="{{ isset($bank['ifsc_code']) ? $bank['ifsc_code']:''}}" id="ifsc_code" name="ifsc_code" placeholder="IFSC Code" aria-describedby="">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="">Account No<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" value="{{ isset($bank['account_no']) ? $bank['account_no']:'' }}" id="account_no" name="account_no" placeholder="acc-no" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" value="{{ isset($bank['account_no']) ? $bank['account_no']:'' }}" id="account_no" name="account_no" placeholder="Account Number" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>

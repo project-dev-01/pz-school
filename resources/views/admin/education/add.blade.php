@@ -8,16 +8,16 @@
             </div>
             <div class="modal-body">
                 <form id="educationForm" method="post" action="{{ route('admin.education.add') }}" autocomplete="off">
-                    @csrf                   
-                 
+                    @csrf
+
                     <div class="form-group">
                         <label for="name">Education Name<span class="text-danger">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Education name">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Education Name">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="submit"  class="btn btn-success waves-effect waves-light">Submit</button>
+                        <button type="submit" class="btn btn-success waves-effect waves-light">Submit</button>
                     </div>
 
                 </form>

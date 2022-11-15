@@ -9,10 +9,10 @@
             <div class="modal-body">
                 <form id="edit-education-form" method="post" action="{{ route('admin.education.update') }}" autocomplete="off">
                     @csrf
-                    <input type="hidden" name="id">           
+                    <input type="hidden" name="id">
                     <div class="form-group">
                         <label for="name">Education Name <span class="text-danger">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Education name">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Education Name">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">

@@ -8,13 +8,6 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <!--<div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <!-- <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Extras</a></li> 
-                        <li class="breadcrumb-item active">Profile</li>
-                    </ol>
-                </div>-->
                 <h4 class="page-title">Profile</h4>
             </div>
         </div>
@@ -24,7 +17,7 @@
     <div class="row">
         <div class="col-lg-4 col-xl-4">
             <div class="card-box text-center">
-                <img src="{{asset('public/users/images/default-img.jpg')}}" class="avatar-lg img-thumbnail admin_picture" alt="profile-image">
+                <img src="{{ Session::get('picture') && asset('public/users/images/'.Session::get('picture')) ? asset('public/users/images/'.Session::get('picture')) : asset('public/images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image">
                 <!-- <img src="{{ asset('public/images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image"> -->
                 <h4 class="mb-0 user_name">{{ Session::get('role_name') }}</h4>
 
@@ -81,14 +74,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">Name</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="" placeholder="Enter name">
+                                        <input type="text" class="form-control" id="name" name="name" value="" placeholder="Enter Name">
                                         <span class="text-danger error-text name_error"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="email">Email Address</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="" placeholder="Enter email">
+                                        <input type="email" class="form-control" id="email" name="email" value="" placeholder="Enter Email">
                                         <span class="text-danger error-text email_error"></span>
                                         <!-- <span class="form-text text-muted"><small>If you want to change email please <a href="javascript: void(0);">click</a> here.</small></span> -->
                                     </div>
@@ -119,15 +112,15 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="name">Old Passord</label>
-                                        <input type="password" class="form-control" id="oldpassword" name="oldpassword" placeholder="Enter current password">
+                                        <label for="name">Old Password</label>
+                                        <input type="password" class="form-control" id="oldpassword" name="oldpassword" placeholder="Old Password">
                                         <span class="text-danger error-text oldpassword_error"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="newpassword">New Password</label>
-                                        <input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="Enter new password">
+                                        <input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="New Password">
                                         <span class="text-danger error-text newpassword_error"></span>
                                     </div>
                                 </div>
@@ -137,7 +130,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="cnewpassword">Confirm New Password</label>
-                                        <input type="password" class="form-control" id="cnewpassword" name="cnewpassword" placeholder="ReEnter new password">
+                                        <input type="password" class="form-control" id="cnewpassword" name="cnewpassword" placeholder="Confirm New Password">
                                         <span class="text-danger error-text cnewpassword_error"></span>
                                     </div>
                                 </div>

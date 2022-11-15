@@ -85,7 +85,7 @@
                                                         <span class="far fa-calendar-alt"></span>
                                                     </div>
                                                 </div>
-                                                <input type="text" autocomplete="off" name="frm_ldate" class="form-control" id="frm_ldate">
+                                                <input type="text" autocomplete="off" name="frm_ldate" class="form-control" placeholder="DD-MM-YYYY" id="frm_ldate">
                                             </div>
                                         </div>
                                     </div>
@@ -98,7 +98,7 @@
                                                         <span class="far fa-calendar-alt"></span>
                                                     </div>
                                                 </div>
-                                                <input type="text" autocomplete="off" name="to_ldate" class="form-control" id="to_ldate">
+                                                <input type="text" autocomplete="off" name="to_ldate" class="form-control" placeholder="DD-MM-YYYY" id="to_ldate">
                                             </div>
                                         </div>
                                     </div>

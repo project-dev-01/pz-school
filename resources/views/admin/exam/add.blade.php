@@ -7,24 +7,24 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <form id="exam-form" method="post"  action="{{ route('admin.exam.add') }}" autocomplete="off">
+                <form id="exam-form" method="post" action="{{ route('admin.exam.add') }}" autocomplete="off">
                     @csrf
                     <div class="form-group">
                         <label for="name">Name<span class="text-danger">*</span></label>
-                        <input type="text"  name="name" class="form-control" placeholder="Enter name">
+                        <input type="text" name="name" class="form-control" placeholder="Enter Name">
                     </div>
                     <div class="form-group">
-                        <label for="term_id"class="col-3 col-form-label" style="margin: 0px 0px 0px -12px;">Term<span class="text-danger">*</span></label>
-                        <select  class="form-control" name="term_id">
+                        <label for="term_id" class="col-3 col-form-label" style="margin: 0px 0px 0px -12px;">Term<span class="text-danger">*</span></label>
+                        <select class="form-control" name="term_id">
                             <option value="">Select Term</option>
                             @foreach($term as $t)
-                                <option value="{{$t['id']}}">{{$t['name']}}</option>
+                            <option value="{{$t['id']}}">{{$t['name']}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="remarks"> Remarks</label>
-                        <textarea type="text"  name="remarks" class="form-control" placeholder="Enter Remarks"></textarea>
+                        <textarea type="text" name="remarks" class="form-control" placeholder="Enter Remarks"></textarea>
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>

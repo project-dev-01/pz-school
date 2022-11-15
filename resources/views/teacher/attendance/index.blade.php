@@ -105,7 +105,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="class_date">Date<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="class_date" id="classDate" placeholder="MM/YY">
+                                    <input type="text" class="form-control" name="class_date" id="classDate" placeholder="MM-YYYY">
                                 </div>
                             </div>
                         </div>
@@ -150,7 +150,7 @@
                                                     <th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i> Absent</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-ufo"></i> Holiday</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> Late</button></th>
-                                                    
+
                                                 </tr>
                                             </table>
                                         </div>
@@ -164,7 +164,7 @@
                     </div>
                     <!-- end row-->
                     <div class="form-group text-right m-b-0">
-                         <form method="post" action="{{ route('teacher.student_attendance.excel')}}">
+                        <form method="post" action="{{ route('teacher.student_attendance.excel')}}">
                             @csrf
                             <input type="hidden" name="subject" id="excelSubject">
                             <input type="hidden" name="class" id="excelClass">

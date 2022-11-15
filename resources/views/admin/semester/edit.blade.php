@@ -9,10 +9,10 @@
             <div class="modal-body">
                 <form id="edit-semester-form" method="post" action="{{ route('admin.semester.update') }}" autocomplete="off">
                     @csrf
-                    <input type="hidden" name="id">           
+                    <input type="hidden" name="id">
                     <div class="form-group">
                         <label for="name">Semester Name <span class="text-danger">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Semester name">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Semester Name">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">

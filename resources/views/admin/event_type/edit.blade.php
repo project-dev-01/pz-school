@@ -9,15 +9,15 @@
             <div class="modal-body">
                 <form id="edit-event-type-form" method="post" action="{{ route('admin.event_type.update') }}" autocomplete="off">
                     @csrf
-                    <input type="hidden" name="id">           
+                    <input type="hidden" name="id">
                     <div class="form-group">
                         <label for="name">Event Type Name <span class="text-danger">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Event Type name">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Event Type Name">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="color"> Color <span class="text-danger">*</span></label>
-                        <input type="text" id="color" name="color" class="form-control color" >
+                        <input type="text" id="color" name="color" class="form-control color" placeholder="Choose Color">
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>

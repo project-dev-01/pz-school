@@ -12,20 +12,20 @@
                     <input type="hidden" id="editsubjectID" name="id">
                     <div class="form-group">
                         <label for="name">Subject Name<span class="text-danger">*</span></label>
-                        <input type="text" id="editsubjectName" name="name" class="form-control" placeholder="Enter subject name">
+                        <input type="text" id="editsubjectName" name="name" class="form-control" placeholder="Enter Subject Name">
                     </div>
                     <div class="form-group">
                         <label for="short_name">Short Name<span class="text-danger">*</span></label>
-                        <input type="text" id="editshortName" name="short_name" class="form-control" placeholder="Enter short name">
+                        <input type="text" id="editshortName" name="short_name" class="form-control" placeholder="Enter Short Name">
                     </div>
                     <div class="form-group">
                         <label for="subject_code">Subject Code</label>
-                        <input type="text" id="editsubjectCode" name="subject_code" class="form-control" placeholder="Enter subject code">
+                        <input type="text" id="editsubjectCode" name="subject_code" class="form-control" placeholder="Enter Subject Code">
                     </div>
                     <div class="form-group">
                         <label for="subjectType">Subject Type 1</label>
                         <select class="form-control" id="editsubjectType" name="subject_type">
-                            <option value="">Choose Subject type 1</option>
+                            <option value="">Choose Subject Type 1</option>
                             <option value="Optional">Optional</option>
                             <option value="Mandatory">Mandatory</option>
                             <option value="Task">Task</option>
@@ -34,14 +34,14 @@
                     <div class="form-group">
                         <label for="subjectType">Subject Type 2</label>
                         <select class="form-control" id="editsubjectTypeTwo" name="subject_type_2">
-                            <option value="">Choose Subject type 2</option>
+                            <option value="">Choose Subject Type 2</option>
                             <option value="Theory">Theory</option>
                             <option value="Practical">Practical</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="editsubjectColor">Subject Color</label>
-                        <input type="text" id="editsubjectColor" name="subject_color_calendor" class="form-control subjectColor">
+                        <input type="text" id="editsubjectColor" name="subject_color_calendor" placeholder="Select Color" class="form-control subjectColor">
                     </div>
                     <div class="form-group">
                         <div class="checkbox checkbox-success form-check-inline">

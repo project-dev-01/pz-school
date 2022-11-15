@@ -415,7 +415,7 @@
                                                             <span class="fas fa-birthday-cake"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" name="date_of_birth" value="{{$parent['date_of_birth']}}" id="date_of_birth" placeholder="DD/MM/YYYY">
+                                                    <input type="text" class="form-control" name="date_of_birth" value="{{$parent['date_of_birth']}}" id="date_of_birth" placeholder="YYYY-MM-DD">
                                                 </div>
                                             </div>
                                         </div>

@@ -320,30 +320,6 @@ $(function () {
 
         layoutModeGrid += '<div class="col-md-3">' +
             '<div class="card">';
-        // if (res.att_status == "present") {
-        //     bgColor = "#60a05b";
-        // } else if (res.att_status == "absent") {
-        //     bgColor = "#de354f";
-        // } else if (res.att_status == "late") {
-        //     bgColor = "#358fde";
-        // } else if (res.att_status == "excused") {
-        //     bgColor = "#696969";
-        // } else if (res.current_old_att_status) {
-        //     bgColor = "#de354f";
-        // } else if (res.taken_leave_status) {
-        //     bgColor = "#de354f";
-        // } else {
-        //     bgColor = "#60a05b";
-        // }
-        // if (res.att_status == "absent") {
-        //     bgColor = "#de354f";
-        // }
-        // if (res.att_status == "late") {
-        //     bgColor = "#358fde";
-        // }
-        // if (res.att_status == "excused") {
-        //     bgColor = "#696969";
-        // }
         var birthday = birthdayDate(res.birthday);
         var bd = "";
         if (birthday == date) {

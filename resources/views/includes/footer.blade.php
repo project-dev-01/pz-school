@@ -253,34 +253,34 @@
         //     getNotifications();
         // }, 2000);
 
-        var sTimeOut = setInterval(function () {
+        var sTimeOut = setInterval(function() {
             $.ajax({
                 type: 'GET',
                 url: allLogout,
                 success: function(res) {
-                    if(res.code==200) {
-                        if(res.role==1) {
-                        window.location.href = "{{ route('super_admin.login')}}";
-                        }else if(res.role==2) {
-                        window.location.href = "{{ route('admin.login')}}";
-                        }else if(res.role==3) {
-                        window.location.href = "{{ route('staff.login')}}";
-                        }else if(res.role==4) {
-                        window.location.href = "{{ route('teacher.login')}}";
-                        }else if(res.role==5) {
-                        window.location.href = "{{ route('parent.login')}}";
-                        }else if(res.role==6) {
-                        window.location.href = "{{ route('student.login')}}";
+                    if (res.code == 200) {
+                        if (res.role == 1) {
+                            window.location.href = "{{ route('super_admin.login')}}";
+                        } else if (res.role == 2) {
+                            window.location.href = "{{ route('admin.login')}}";
+                        } else if (res.role == 3) {
+                            window.location.href = "{{ route('staff.login')}}";
+                        } else if (res.role == 4) {
+                            window.location.href = "{{ route('teacher.login')}}";
+                        } else if (res.role == 5) {
+                            window.location.href = "{{ route('parent.login')}}";
+                        } else if (res.role == 6) {
+                            window.location.href = "{{ route('student.login')}}";
                         }
-                    }   
-                    
+                    }
+
                 },
                 error: function(err) {
                     // console.log("eror")
                     // console.log(err)
                 }
             });
-          },8000);
+        }, 8000);
         // getAllLogout();
         // function getAllLogout() {
         //     $.ajax({
@@ -294,9 +294,9 @@
         //                     type: 'post',
         //                     url: url_name,
         //                     success: function(ress) {
-                                
+
         //                         console.log('out',ress)
-                                
+
         //                     },
         //                 });
         //             }
@@ -308,7 +308,7 @@
         //         }
         //     });
         // }
-        
+
         getNotifications();
 
         function getNotifications() {
@@ -325,7 +325,7 @@
                 }
             });
         }
-        
+
         // martk as to read
         $(document).on('click', '.mark-as-read', function() {
             let request = sendMarkRequest($(this).data('id'));

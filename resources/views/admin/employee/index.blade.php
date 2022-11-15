@@ -333,7 +333,7 @@
                                                 <span class="fas fa-birthday-cake"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="birthday" placeholder="DD/MM/YYYY" id="empDOB">
+                                        <input type="text" class="form-control" name="birthday" placeholder="YYYY-MM-DD" id="empDOB">
                                     </div>
                                 </div>
                             </div>
@@ -362,7 +362,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="country">Country</label>
-                                    <input type="text" class="form-control" placeholder="malaysia" name="country" id="Country">
+                                    <input type="text" class="form-control" placeholder="Country" name="country" id="Country">
                                 </div>
                             </div>
                         </div>
@@ -370,7 +370,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="state">State/Province</label>
-                                    <input type="text" class="form-control" name="state" id="State" placeholder="State">
+                                    <input type="text" class="form-control" name="state" id="State" placeholder="State/Province">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -413,7 +413,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="role_id">Role<span class="text-danger">*</span></label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" id="role_id" name="role_id" multiple="multiple" data-placeholder="Choose ...">
+                                    <select class="form-control select2-multiple" data-toggle="select2" id="role_id" name="role_id" multiple="multiple" data-placeholder="Choose The Role">
                                         <option value="">Select Role</option>
                                         @foreach($roles as $r)
                                         <option value="{{$r['id']}}">{{$r['role_name']}}</option>
@@ -430,14 +430,14 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="joining_date" id="joiningDate" placeholder="DD/MM/DDDD">
+                                        <input type="text" class="form-control" name="joining_date" id="joiningDate" placeholder="YYYY-MM-DD">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="designation_id">Designation</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDesignation" name="designation_id" multiple="multiple" data-placeholder="Choose ...">
+                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDesignation" name="designation_id" multiple="multiple" data-placeholder="Choose The Designation">
                                         <option value="">Select Designation</option>
                                         @if(!empty($emp_designation))
                                         @foreach($emp_designation as $r)
@@ -453,7 +453,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="department_id">Department</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDepartment" name="department_id" multiple="multiple" data-placeholder="Choose ...">
+                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDepartment" name="department_id" multiple="multiple" data-placeholder="Choose The Department">
                                         <option value="">Select Department</option>
                                         @forelse($emp_department as $r)
                                         <option value="{{$r['id']}}">{{$r['name']}}</option>
@@ -498,7 +498,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="qualifications">Staff Qualification</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" id="staffQualification" name="staff_qualification_id" multiple="multiple" data-placeholder="Choose ...">
+                                    <select class="form-control select2-multiple" data-toggle="select2" id="staffQualification" name="staff_qualification_id" multiple="multiple" data-placeholder="Choose The Qualification">
                                         <option value="">Select Qualification</option>
                                         @forelse($qualifications as $r)
                                         <option value="{{$r['id']}}">{{$r['qualification_name']}}</option>
@@ -540,7 +540,7 @@
                                                 <span class="far fa-envelope-open"></span>
                                             </div>
                                         </div>
-                                        <input type="email" class="form-control" name="email" id="email" placeholder="XXX@gmail.com">
+                                        <input type="email" class="form-control" name="email" id="email" placeholder="xxxxx@gmail.com">
                                     </div>
                                 </div>
                             </div>

@@ -4,7 +4,9 @@
 <link rel="stylesheet" href="{{ asset('public/libs/dropzone/min/dropzone.min.css') }}">
 <link rel="stylesheet" href="{{ asset('public/libs/dropify/css/dropify.min.css') }}">
 <style>
-    .datepicker{ z-index:99999 !important; }
+    .datepicker {
+        z-index: 99999 !important;
+    }
 </style>
 @endsection
 @section('content')
@@ -29,34 +31,38 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="card-box">
-                <h4 class="header-title">Event</h4>
-                <p class="sub-header">
-                <div class="form-group pull-right">
-                    <div class="col-xs-2 col-sm-2">
-                        <!-- <a href="{{ route('admin.add_classes')}}" class="btn btn-primary btn-rounded waves-effect waves-light">Add Class</a> -->
-                        <a type="button" class="btn add-btn btn-rounded waves-effect waves-light" href="{{ route('admin.event.create')}}">Add</a>
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">Event
+                            <h4>
+                    </li>
+                </ul>
+                <div class="card-body">
+                    <div class="form-group pull-right">
+                        <div class="col-xs-2 col-sm-2">
+                            <!-- <a href="{{ route('admin.add_classes')}}" class="btn btn-primary btn-rounded waves-effect waves-light">Add Class</a> -->
+                            <a type="button" class="btn add-btn btn-rounded waves-effect waves-light" href="{{ route('admin.event.create')}}">Add</a>
+                        </div>
                     </div>
-                </div>
-                </p>
-                
-                <div class="table-responsive">
-                    <table class="table w-100 nowrap" id="event-table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Title</th>
-                                <th>Type</th>
-                                <th>Audience</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Publish</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table w-100 nowrap" id="event-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Title</th>
+                                    <th>Type</th>
+                                    <th>Audience</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Publish</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div> <!-- end card-box -->
         </div> <!-- end col -->
@@ -70,12 +76,11 @@
 @endsection
 @section('scripts')
 <script>
-  //event routes
+    //event routes
     var eventList = "{{ route('admin.event.list') }}";
     var eventDetails = "{{ route('admin.event.details') }}";
     var eventDelete = "{{ route('admin.event.delete') }}";
     var eventPublish = "{{ route('admin.event.publish') }}";
-    
 </script>
 <script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>
 <script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>

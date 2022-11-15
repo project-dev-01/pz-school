@@ -89,7 +89,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="start_date" id="event_start_date" placeholder="YYYY/MM/DD">
+                                        <input type="text" class="form-control" name="start_date" id="event_start_date" placeholder="YYYY-MM-DD">
                                     </div>
                                     <span class="text-danger error-text start_date_error"></span>
                                 </div>
@@ -103,7 +103,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="end_date" id="event_end_date" placeholder="YYYY/MM/DD">
+                                        <input type="text" class="form-control" name="end_date" id="event_end_date" placeholder="YYYY-MM-DD">
                                     </div>
                                     <span class="text-danger error-text end_date_error"></span>
                                 </div>

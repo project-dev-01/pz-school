@@ -25,12 +25,12 @@
                 </ul>
                 <div class="card-body">
                     <form id="eventEditForm" method="post" action="{{ route('admin.event.update') }}" autocomplete="off">
-                        @csrf<input type="hidden" name="id" value="{{$event['id']}}">   
+                        @csrf<input type="hidden" name="id" value="{{$event['id']}}">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="title">Title<span class="text-danger">*</span></label>
-                                    <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title name" value="{{$event['title']}}">
+                                    <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title Name" value="{{$event['title']}}">
                                     <span class="text-danger error-text title_error"></span>
                                 </div>
                             </div>
@@ -38,9 +38,9 @@
                                 <div class="form-group">
                                     <label for="type">Type<span class="text-danger">*</span></label>
                                     <select class="form-control" id="type" name="type">
-                                        <option value="">Select</option>
+                                        <option value="">Select The Type</option>
                                         @foreach($type as $typ)
-                                        <option value="{{$typ['id']}}"  {{$event['type'] == $typ['id'] ? 'Selected':''}}>{{$typ['name']}}</option>
+                                        <option value="{{$typ['id']}}" {{$event['type'] == $typ['id'] ? 'Selected':''}}>{{$typ['name']}}</option>
                                         @endforeach
                                     </select>
                                     <span class="text-danger error-text type_error"></span>
@@ -50,7 +50,7 @@
                                 <div class="form-group">
                                     <label for="audience">Audience<span class="text-danger">*</span></label>
                                     <select class="form-control" id="edit_audience" name="audience">
-                                        <option value="">Select</option>
+                                        <option value="">Select The Audience</option>
                                         <option value="1" {{$event['audience'] == "1" ? 'Selected':''}}>EveryBody</option>
                                         <option value="2" {{$event['audience'] == "2" ? 'Selected':''}}>Selected Grade</option>
                                         <option value="3" {{$event['audience'] == "3" ? 'Selected':''}}>Selected Group</option>
@@ -61,30 +61,30 @@
                             </div>
                             @php $cla = 'style=display:none'; $gro = 'style=display:none'; @endphp
                             @if($event['audience']==2)
-                                @php $cla = ''; @endphp
+                            @php $cla = ''; @endphp
                             @endif
 
                             @if($event['audience']==3)
-                                @php $gro = ''; @endphp
+                            @php $gro = ''; @endphp
                             @endif
-                            
+
                             <div class="col-md-4" id="edit_class" {{$cla}}>
                                 <div class="form-group">
                                     <label for="class">Grade</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2"  name="class[]" id="edit_classes" multiple="multiple" data-placeholder="Choose ...">
+                                    <select class="form-control select2-multiple" data-toggle="select2" name="class[]" id="edit_classes" multiple="multiple" data-placeholder="Choose ...">
                                         @forelse($class as $cla)
-                                            @php
-                                            $selected = "";
-                                            @endphp
-                                            @foreach(explode(',', $event['selected_list']) as $info)
-                                            @if($cla['id'] == $info)
-                                            @php
-                                            $selected = "Selected";
-                                            @endphp
-                                            @endif
-                                            @endforeach
-                                            <option value="{{$cla['id']}}" {{ $selected }}>{{$cla['name']}}</option>
-                                            @empty
+                                        @php
+                                        $selected = "";
+                                        @endphp
+                                        @foreach(explode(',', $event['selected_list']) as $info)
+                                        @if($cla['id'] == $info)
+                                        @php
+                                        $selected = "Selected";
+                                        @endphp
+                                        @endif
+                                        @endforeach
+                                        <option value="{{$cla['id']}}" {{ $selected }}>{{$cla['name']}}</option>
+                                        @empty
                                         @endforelse
                                     </select>
                                     <span class="text-danger error-text class_error"></span>
@@ -93,20 +93,20 @@
                             <div class="col-md-4" id="edit_group_row" {{$gro}}>
                                 <div class="form-group">
                                     <label for="group">Group</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2"  name="group[]" id="edit_group" multiple="multiple" data-placeholder="Choose ...">
+                                    <select class="form-control select2-multiple" data-toggle="select2" name="group[]" id="edit_group" multiple="multiple" data-placeholder="Choose ...">
                                         @forelse($group as $gro)
-                                            @php
-                                            $selected = "";
-                                            @endphp
-                                            @foreach(explode(',', $event['selected_list']) as $info)
-                                            @if($gro['id'] == $info)
-                                            @php
-                                            $selected = "Selected";
-                                            @endphp
-                                            @endif
-                                            @endforeach
-                                            <option value="{{$gro['id']}}" {{ $selected }}>{{$gro['name']}}</option>
-                                            @empty
+                                        @php
+                                        $selected = "";
+                                        @endphp
+                                        @foreach(explode(',', $event['selected_list']) as $info)
+                                        @if($gro['id'] == $info)
+                                        @php
+                                        $selected = "Selected";
+                                        @endphp
+                                        @endif
+                                        @endforeach
+                                        <option value="{{$gro['id']}}" {{ $selected }}>{{$gro['name']}}</option>
+                                        @empty
                                         @endforelse
                                     </select>
                                     <span class="text-danger error-text group_error"></span>
@@ -121,7 +121,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" placeholder="YYYY/MM/DD" class="form-control" name="start_date" id="edit_event_start_date" value="{{$event['start_date']}}" placeholder="YYYY/MM/DD">
+                                        <input type="text" placeholder="YYYY-MM-DD" class="form-control" name="start_date" id="edit_event_start_date" value="{{$event['start_date']}}">
                                     </div>
                                 </div>
                                 <span class="text-danger error-text start_date_error"></span>
@@ -135,7 +135,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" placeholder="YYYY/MM/DD" class="form-control" name="end_date" id="edit_event_end_date" value="{{$event['end_date']}}">
+                                        <input type="text" placeholder="YYYY-MM-DD" class="form-control" name="end_date" id="edit_event_end_date" value="{{$event['end_date']}}">
                                     </div>
                                     <span class="text-danger error-text end_date_error"></span>
                                 </div>
@@ -151,15 +151,15 @@
                             <div class="col-md-3 time" {{$event['all_day'] == "on" ? 'style=display:none':''}}>
                                 <div class="form-group">
                                     <label>Start Time</label>
-                                    <input type="text"  class="form-control edittimepicker" name="start_time" id="edit_start_time" value="{{$event['end_time']}}">
-                                        <span class="text-danger error-text start_time_error"></span>
+                                    <input type="text" class="form-control edittimepicker" name="start_time" id="edit_start_time" placeholder="00:00" value="{{$event['end_time']}}">
+                                    <span class="text-danger error-text start_time_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-3 time" {{$event['all_day'] == "on" ? 'style=display:none':''}}>
                                 <div class="form-group">
                                     <label>End Time</label>
-                                    <input type="text"  class="form-control edittimepicker" name="end_time" id="edit_end_time" value="{{$event['end_time']}}">
-                                        <span class="text-danger error-text end_time_error"></span>
+                                    <input type="text" class="form-control edittimepicker" name="end_time" id="edit_end_time" placeholder="00:00" value="{{$event['end_time']}}">
+                                    <span class="text-danger error-text end_time_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -175,10 +175,10 @@
                                     <label for="description">Description</label>
                                     <textarea class="form-control" name="description">{{$event['remarks']}}</textarea>
                                     <span class="text-danger error-text description_error"></span>
-                                </div> 
+                                </div>
                             </div>
                         </div>
-                        
+
                         <div class="form-group text-right m-b-0">
                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
                                 Update
@@ -193,9 +193,8 @@
 @endsection
 @section('scripts')
 <script>
-  //event routes
+    //event routes
     var eventList = "{{ route('admin.event') }}";
-    
 </script>
 <script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>
 <script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>
@@ -203,4 +202,3 @@
 <script src="{{ asset('public/js/custom/event.js') }}"></script>
 
 @endsection
-

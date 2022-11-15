@@ -105,7 +105,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="class_date">Date<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="class_date" id="classDate" placeholder="MM/YY">
+                                    <input type="text" class="form-control" name="class_date" id="classDate" placeholder="DD-MM-YYYY">
                                 </div>
                             </div>
                         </div>

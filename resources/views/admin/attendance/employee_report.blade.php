@@ -73,7 +73,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="date" id="employeeReportDate">
+                                        <input type="text" class="form-control" name="date" id="employeeReportDate" placeholder="YYYY-MM-DD">
                                     </div>
                                 </div>
                             </div>

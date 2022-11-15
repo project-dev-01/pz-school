@@ -305,7 +305,7 @@
                                                 <span class="fas fa-birthday-cake"></span>
                                             </div>
                                         </div>
-                                        <input type="text" name="dob" class="form-control" id="dob" placeholder="23 July 2024" aria-describedby="inputGroupPrepend">
+                                        <input type="text" name="dob" class="form-control" id="dob" placeholder="YYYY-MM-DD" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -443,7 +443,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="admission_date" name="admission_date" placeholder="23 July 2024" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" id="admission_date" name="admission_date" placeholder="YYYY-MM-DD" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -622,7 +622,7 @@
                                                     <span class="fas fa-birthday-cake"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" id="father_date_of_birth" readonly>
+                                            <input type="text" class="form-control" placeholder="YYYY-MM-DD" id="father_date_of_birth" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -635,7 +635,7 @@
                                                     <span class="far fa-envelope-open"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" placeholder="XXXX@gmail.com" id="father_email" readonly>
+                                            <input type="text" class="form-control" placeholder="xxxxx@gmail.com" id="father_email" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -678,7 +678,7 @@
                                                     <span class="fas fa-phone-volume"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="Mobile Number" id="father_mobile_no" readonly>
+                                            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="(XXX)-(XXX)-(XXXX)" id="father_mobile_no" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -707,13 +707,13 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="country">Country</label>
-                                        <input type="text" class="form-control" id="father_country" placeholder="Malaysia" data-parsley-trigger="change" readonly>
+                                        <input type="text" class="form-control" id="father_country" placeholder="Country" data-parsley-trigger="change" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="validationCustomUsername">State/Province</label>
-                                        <input type="text" class="form-control " maxlength="50" id="father_state" placeholder="State" aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control " maxlength="50" id="father_state" placeholder="State/Province" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -727,7 +727,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="father_post_code">Zip/Postal code</label>
-                                        <input type="text" class="form-control" placeholder="Postal Code" id="father_post_code" readonly>
+                                        <input type="text" class="form-control" placeholder="Zip/Postal Code" id="father_post_code" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -805,7 +805,7 @@
                                                     <span class="fas fa-birthday-cake"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" id="mother_date_of_birth" placeholder="DD/MM/YYYY" readonly>
+                                            <input type="text" class="form-control" id="mother_date_of_birth" placeholder="YYYY-MM-DD" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -818,7 +818,7 @@
                                                     <span class="far fa-envelope-open"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" placeholder="aaaa@gmail.com" id="mother_email" readonly>
+                                            <input type="text" class="form-control" placeholder="xxxxx@gmail.com" id="mother_email" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -861,7 +861,7 @@
                                                     <span class="fas fa-phone-volume"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="Mobile Number" id="mother_mobile_no" readonly>
+                                            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="(XXX)-(XXX)-(XXXX)" id="mother_mobile_no" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -870,7 +870,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="education">Education</label>
-                                        <input type="text" class="form-control" data-parsley-trigger="change" placeholder="B.sc" id="mother_education" readonly>
+                                        <input type="text" class="form-control" data-parsley-trigger="change" placeholder="B.tech" id="mother_education" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -896,13 +896,13 @@
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="validationCustomUsername">State/Province</label>
-                                        <input type="text" class="form-control" maxlength="50" id="mother_state" placeholder="state" aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control" maxlength="50" id="mother_state" placeholder="State/Province" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="validationCustomUsername">City</label>
-                                        <input type="text" class="form-control" maxlength="50" id="mother_city" placeholder="city" aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control" maxlength"50" id="mother_city" placeholder="City" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -910,7 +910,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="mother_post_code">Zip/Postal code</label>
-                                        <input type="text" class="form-control" id="mother_post_code" placeholder="Postal" readonly>
+                                        <input type="text" class="form-control" id="mother_post_code" placeholder="Zip/Postal code" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -970,13 +970,13 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="heard">First Name<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" maxlength="50" id="guardian_first_name" aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control" maxlength="50" id="guardian_first_name" placeholder="Amir" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="heard">Last Name<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" maxlength="50" id="guardian_last_name" aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control" maxlength="50" id="guardian_last_name" placeholder="Shan" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -998,7 +998,7 @@
                                                     <span class="fas fa-birthday-cake"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" id="guardian_date_of_birth" readonly>
+                                            <input type="text" class="form-control" id="guardian_date_of_birth" placeholder="YYYY-MM-DD" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -1011,14 +1011,14 @@
                                                     <span class="far fa-envelope-open"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" id="guardian_email" readonly>
+                                            <input type="text" class="form-control" id="guardian_email" placeholder="xxxxx@gmail.com" readonly>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="Passport">Passport Number</label>
-                                        <input type="text" class="form-control" id="guardian_passport" readonly>
+                                        <input type="text" class="form-control" id="guardian_passport" placeholder="Passport Number" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -1054,7 +1054,7 @@
                                                     <span class="fas fa-phone-volume"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" id="guardian_mobile_no" readonly>
+                                            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" id="guardian_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -1063,13 +1063,13 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="education">Education</label>
-                                        <input type="text" class="form-control" data-parsley-trigger="change" id="guardian_education" readonly>
+                                        <input type="text" class="form-control" data-parsley-trigger="change" id="guardian_education" placeholder="B.tech" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="txt_occupation">Occupation<span class="text-danger">*</span></label>
-                                        <input type="text" maxlength="50" id="guardian_occupation" class="form-control" placeholder="Occupation" data-parsley-trigger="change" readonly>
+                                        <input type="text" maxlength="50" id="guardian_occupation" class="form-control" placeholder="Engineer" data-parsley-trigger="change" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1210,7 +1210,7 @@
                         </div>
                         <div class="form-group">
                             <label for="message">Remarks</label>
-                            <textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" data-placeholder="Enter the text..." name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                            <textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="Enter The Remarks " name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                             </textarea>
                         </div>
                         <div class="form-group text-right m-b-0">
