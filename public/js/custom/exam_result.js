@@ -159,11 +159,11 @@ function examresult_details(datasetnew) {
         '<td>' + student_details.birthday + '</td>' +
         '</tr>';
     byStudGenDetails += '<tr>' +
-        '<th>Standard</th>' +
+        '<th>Grade</th>' +
         '<td>' + student_details.class_name + '</td>' +
         '</tr>';
     byStudGenDetails += '<tr>' +
-        '<th>Class Name</th>' +
+        '<th>Class</th>' +
         '<td>' + student_details.section_name + '</td>' +
         '</tr>';
     byStudGenDetails += '</thead></table>' +

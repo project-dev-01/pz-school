@@ -71,7 +71,7 @@
                                     <select id="class_id" class="form-control" name="class_id">
                                         <option value="">Select Grade</option>
                                         @foreach($class as $cla)
-                                        <option value="{{$cla['id']}}">{{$cla['name']}}</option>
+                                        <option value="{{$cla['class_id']}}">{{$cla['class_name']}}</option>
                                         @endforeach
                                     </select>
                                 </div>

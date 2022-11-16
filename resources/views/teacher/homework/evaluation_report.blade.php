@@ -67,6 +67,28 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="semester_id">Semester</label>
+                                    <select id="semester_id" class="form-control" name="semester_id">
+                                        <option value="0">Select Semester</option>
+                                        @foreach($semester as $sem)
+                                        <option value="{{$sem['id']}}" >{{$sem['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="session_id">Session</label>
+                                    <select id="session_id" class="form-control" name="session_id">
+                                        <option value="0">Select Session</option>
+                                        @foreach($session as $ses)
+                                        <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
@@ -152,7 +174,7 @@
                                                             <tr>
                                                                 <th>#</th>
                                                                 <th>Subject</th>
-                                                                <th>Standard</th>
+                                                                <th>Grade</th>
                                                                 <th>Class</th>
                                                                 <th>Date of Homework</th>
                                                                 <th>Date of Submission</th>

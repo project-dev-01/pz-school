@@ -133,7 +133,10 @@ class TeacherController extends Controller
     }
     public function studentIndex()
     {
-        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $data = [
+            'teacher_id' => session()->get('ref_user_id')
+        ];
+        $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         return view(
@@ -144,7 +147,6 @@ class TeacherController extends Controller
                 'session' => $session['data'],
             ]
         );
-        return view('teacher.student.student');
     }
     public function parent()
     {
@@ -548,11 +550,15 @@ class TeacherController extends Controller
         $data = [
             'teacher_id' => session()->get('ref_user_id')
         ];
-        $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        $class = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
         return view(
             'teacher.homework.index',
             [
-                'class' => $response['data'],
+                'class' => $class['data'],
+                'session' => $session['data'],
+                'semester' => $semester['data'],
             ]
         );
     }
@@ -562,6 +568,8 @@ class TeacherController extends Controller
             'teacher_id' => session()->get('ref_user_id')
         ];
         $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
 
 
         // dd($response);
@@ -570,6 +578,8 @@ class TeacherController extends Controller
             'teacher.homework.evaluation_report',
             [
                 'class' => $response['data'],
+                'session' => $session['data'],
+                'semester' => $semester['data'],
             ]
         );
     }
@@ -590,6 +600,8 @@ class TeacherController extends Controller
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
             'subject_id' => $request->subject_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
             'date_of_homework' => $request->date_of_homework,
             'date_of_submission' => $request->date_of_submission,
             'schedule_date' => $request->schedule_date,
@@ -613,6 +625,8 @@ class TeacherController extends Controller
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
             'subject_id' => $request->subject_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
             'academic_session_id' => session()->get('academic_session_id')
         ];
 
@@ -1154,7 +1168,11 @@ class TeacherController extends Controller
     // index Timetable
     public function timetable(Request $request)
     {
-        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        
+        $data = [
+            'teacher_id' => session()->get('ref_user_id')
+        ];
+        $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         return view(

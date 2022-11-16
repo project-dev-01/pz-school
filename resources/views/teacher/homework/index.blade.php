@@ -71,6 +71,28 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label for="semester_id">Semester</label>
+                                    <select id="semester_id" class="form-control" name="semester_id">
+                                        <option value="0">Select Semester</option>
+                                        @foreach($semester as $sem)
+                                        <option value="{{$sem['id']}}" >{{$sem['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="session_id">Session</label>
+                                    <select id="session_id" class="form-control" name="session_id">
+                                        <option value="0">Select Session</option>
+                                        @foreach($session as $ses)
+                                        <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label for="date_of_homework">Date Of Homework<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
@@ -96,6 +118,16 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <label for="document">Attachment File<span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" id="homework_file" class="custom-file-input" name="file">
+                                        <label class="custom-file-label" for="document">Choose file</label>
+                                    </div>
+                                </div>
+                                <span id="file_name"></span>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
@@ -109,6 +141,10 @@
                         </div><br>
                         <div>
                             <div class="row">
+                                <div class="col-md-4">
+                                    <label for="description">Description<span class="text-danger">*</span></label>
+                                    <textarea class="form-control" name="description" rows="1" placeholder="Please enter Description"></textarea>
+                                </div>
                                 <div class="col-md-4" id="schedule" style="display:none">
                                     <label for="schedule_date">Schedule Date<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
@@ -119,21 +155,6 @@
                                         </div>
                                         <input type="text" class="form-control homeWorkAdd" name="schedule_date" placeholder="" aria-describedby="inputGroupPrepend">
                                     </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label for="document">Attachment File<span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" id="homework_file" class="custom-file-input" name="file">
-                                            <label class="custom-file-label" for="document">Choose file</label>
-                                        </div>
-                                    </div>
-                                    <span id="file_name"></span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="description">Description<span class="text-danger">*</span></label>
-                                    <textarea class="form-control" name="description" rows="1" placeholder="Please enter Description"></textarea>
                                 </div>
                             </div>
                         </div><br>

@@ -129,7 +129,7 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
-                        console.log('data',200)
+                        // console.log('data',200)
                     if (data.code == 200) {
                         $('.addHomeworkForm').find('form')[0].reset();
                         toastr.success(data.message);

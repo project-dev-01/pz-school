@@ -131,7 +131,7 @@ $(document).ready(function () {
                 if (e.event.extendedProps.audience == "1") {
                     var aud = e.event.extendedProps.class_name;
                 } else if (e.event.extendedProps.audience == "2") {
-                    var aud = "<b>Standard  :</b> " + e.event.extendedProps.class_name;
+                    var aud = "<b>Grade  :</b> " + e.event.extendedProps.class_name;
                 } else if (e.event.extendedProps.audience == "3") {
                     var aud = "<b>Group  :</b> " + e.event.extendedProps.class_name;
                 }

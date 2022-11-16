@@ -26,7 +26,7 @@
                                         <td id="examName"></td>
                                     </tr>
                                     <tr>
-                                        <td>Standard</td>
+                                        <td>Grade</td>
                                         <td id="examStandard"></td>
                                     </tr>
                                     <tr>

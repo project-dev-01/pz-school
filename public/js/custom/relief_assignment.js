@@ -112,7 +112,7 @@ $(function () {
                                 '<thead>' +
                                 '<tr>' +
                                 '<th>S.no</th>' +
-                                '<th>Standard</th>' +
+                                '<th>Grade</th>' +
                                 '<th>Class</th>' +
                                 '<th>Subject Name</th>' +
                                 '<th>Class Start</th>' +
@@ -167,7 +167,7 @@ $(function () {
                             '<thead>' +
                             '<tr>' +
                             '<th>S.no</th>' +
-                            '<th>Standard</th>' +
+                            '<th>Grade</th>' +
                             '<th>Class</th>' +
                             '<th>Subject Name</th>' +
                             '<th>Class Start</th>' +

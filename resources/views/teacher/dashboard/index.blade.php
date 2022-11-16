@@ -519,7 +519,7 @@
                                 <div class="col-12">
                                     <div class="row hover1">
                                         <div class="col-6">
-                                            <div class="col-md-12 font-weight-bold">Standard </div>
+                                            <div class="col-md-12 font-weight-bold">Grade </div>
                                         </div>
                                         <div class="col-6">
                                             <input type="hidden" id="setCurDate" name="date">
@@ -534,7 +534,7 @@
                                 <div class="col-12">
                                     <div class="row hover1">
                                         <div class="col-6">
-                                            <div class="col-md-12 font-weight-bold">Section </div>
+                                            <div class="col-md-12 font-weight-bold">Class </div>
                                         </div>
                                         <div class="col-6">
                                             <input type="hidden" id="ttSectionID" name="section_id">

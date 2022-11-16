@@ -963,10 +963,14 @@ class AdminController extends Controller
     {
 
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
         return view(
             'admin.homework.index',
             [
                 'class' => $getclass['data'],
+                'session' => $session['data'],
+                'semester' => $semester['data'],
             ]
         );
     }
@@ -2346,10 +2350,14 @@ class AdminController extends Controller
     public function evaluationReport()
     {
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
         return view(
             'admin.homework.evaluation_report',
             [
                 'class' => $getclass['data'],
+                'session' => $session['data'],
+                'semester' => $semester['data'],
             ]
         );
     }
@@ -2370,6 +2378,8 @@ class AdminController extends Controller
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
             'subject_id' => $request->subject_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
             'date_of_homework' => $request->date_of_homework,
             'date_of_submission' => $request->date_of_submission,
             'schedule_date' => $request->schedule_date,
@@ -2379,6 +2389,7 @@ class AdminController extends Controller
             'created_by' => $created_by,
             'academic_session_id' => session()->get('academic_session_id')
         ];
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.homework_add'), $data);
         // dd($response);
         return $response;
@@ -2390,6 +2401,8 @@ class AdminController extends Controller
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
             'subject_id' => $request->subject_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
             'academic_session_id' => session()->get('academic_session_id')
         ];
 

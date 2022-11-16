@@ -31,9 +31,9 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="changeClassName">Standard<span class="text-danger">*</span></label>
+                                    <label for="changeClassName">Grade<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
-                                        <option value="">Select Class</option>
+                                        <option value="">Select Grade</option>
                                         @forelse ($classnames as $class)
                                         <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
                                         @empty
@@ -43,9 +43,9 @@
                             </div>
                             <div class="col-md-3" id="section_drp_div">
                                 <div class="form-group">
-                                    <label for="sectionID" id="lblsectionId">Class Name<span class="text-danger">*</span></label>
+                                    <label for="sectionID" id="lblsectionId">Class<span class="text-danger">*</span></label>
                                     <select id="sectionID" class="form-control" name="section_id">
-                                        <option value="">Select Section</option>
+                                        <option value="">Select Class</option>
                                     </select>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
                                 <div class="form-group">
                                     <label for="examnames">Test Name<span class="text-danger">*</span></label>
                                     <select id="examnames" class="form-control" name="exam_id">
-                                        <option value="">Select Exams</option>
+                                        <option value="">Select Test</option>
                                     </select>
                                 </div>
                             </div>

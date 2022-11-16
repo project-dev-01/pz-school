@@ -46,7 +46,7 @@
                                     <select id="class_id" class="form-control" name="class_id">
                                         <option value="">Select Grade</option>
                                         @forelse ($classes as $class)
-                                            <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
+                                            <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
                                         @empty
                                         @endforelse
                                     </select>
