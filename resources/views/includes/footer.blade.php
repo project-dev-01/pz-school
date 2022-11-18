@@ -226,7 +226,7 @@
 </script>
 <!-- custom js  -->
 <script src="{{ asset('public/js/custom/settings.js') }}"></script>
-<script src="{{ asset('public/js/custom/user1_list.js') }}"></script>
+<!-- <script src="{{ asset('public/js/custom/user_list.js') }}"></script> -->
 <script src="{{ asset('public/js/custom/dashboard.js') }}"></script>
 <!-- <script src="{{ asset('public/js/custom/test_result.js') }}"></script> -->
 <!-- <script src="{{ asset('public/js/custom/apex-mixed.js') }}"></script> -->

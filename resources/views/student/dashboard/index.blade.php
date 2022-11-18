@@ -58,6 +58,7 @@
         background-color: #D1E9EF;
     }
 
+    /* Schedule Popup Mediaquery  */
     @media screen and (min-device-width: 320px) and (max-device-width: 660px) {
         .popupresponsive {
             margin: 0px -65px 0px -70px;
@@ -74,13 +75,13 @@
         .eventpopup {
             margin: 0px -30px 0px -27px;
         }
-
     }
 
     @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
         .popupresponsive {
             margin: 0px -65px 0px -65px;
         }
+
     }
 </style>
 
@@ -364,7 +365,6 @@
                                     </li>
                                 </ul><br>
                                 <div class="card-body">
-
                                     @forelse ($get_homework_list_dashboard as $key => $homework)
                                     <div class="row mt-4" data-plugin="dragula" data-containers='["homework-list-show"]'>
                                         <div class="col">
@@ -375,7 +375,7 @@
                                             <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#right-modal">Rightbar Modal</button> -->
                                             <div class="collapse" id="hmenv{{$key}}">
                                                 <div class="card mb-0 shadow-none">
-                                                    <div class="card-body pb-0" id="task-list-one">
+                                                    <div class="card-body pb-0" id="homework-list-show">
                                                         <!-- task -->
                                                         <div class="row">
                                                             <div class="col-sm-7">
@@ -415,7 +415,6 @@
                                     @empty
                                     <p class="text-center">No Homework data available</p>
                                     @endforelse
-
                                 </div> <!-- end card-body -->
                             </div> <!-- end card -->
                         </div> <!-- end col -->
@@ -434,7 +433,8 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div id="student_calendor"></div>
-                        </div>
+                        </div> <!-- end col -->
+
                     </div> <!-- end row -->
                 </div> <!-- end card body-->
             </div> <!-- end card -->
@@ -451,10 +451,11 @@
                         <div class="modal-body p-4">
                             <form id="addStudentReport" method="post" action="{{ route('student.classroom.add_daily_report_remarks') }}" autocomplete="off">
                                 <div class="card popupresponsive" style="line-height: 40px; padding: 12px 40px 0px 40px; background-color: #8adfee14; ">
+
                                     <div class="col-12">
-                                        <div class="row hover1 ">
+                                        <div class="row hover1">
                                             <div class="col-6">
-                                                <div class="col-md-12 font-weight-bold homework-list">Grade </div>
+                                                <div class="col-md-12 font-weight-bold homework-list">Standard </div>
                                             </div>
                                             <div class="col-6">
                                                 <input type="hidden" id="setCurDate" name="date">
@@ -467,9 +468,9 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <div class=" row hover1">
+                                        <div class="row hover1">
                                             <div class="col-6">
-                                                <div class="col-md-12 font-weight-bold homework-list">Class </div>
+                                                <div class="col-md-12 font-weight-bold homework-list">Section </div>
                                             </div>
                                             <div class="col-6">
                                                 <input type="hidden" id="ttSectionID" name="section_id">
@@ -478,8 +479,9 @@
                                         </div>
                                     </div>
 
+
                                     <div class="col-12">
-                                        <div class=" row hover1">
+                                        <div class="row hover1">
                                             <div class="col-6">
                                                 <div class="col-md-12 font-weight-bold homework-list">Subject Name </div>
                                             </div>
@@ -619,12 +621,13 @@
     <!-- end col-12 -->
 </div> <!-- end row -->
 
+
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <h4 class="navv"> Test Score Analysis
+                    <h4 class="navv">Test Score Analysis
                         <h4>
                 </li>
             </ul><br>
@@ -636,7 +639,7 @@
             </div> <!-- end card-body-->
         </div> <!-- end card-->
     </div> <!-- end col -->
-    <div class="col-lg-12">
+    <!-- <div class="col-lg-12">
         <div class="card">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
@@ -647,17 +650,18 @@
             <div class="card-body">
                 <div class="card-widgets">
                     <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                    <a data-toggle="collapse" href="#cardCollpase2" role="button" aria-expanded="false" aria-controls="cardCollpase2"><i class="mdi mdi-minus"></i></a>
+                    <a data-toggle="collapse" href=
+                    "#cardCollpase2" role="button" aria-expanded="false" aria-controls="cardCollpase2"><i class="mdi mdi-minus"></i></a>
                     <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
                 </div>
                 <h4 class="header-title mb-0">Marks by Subject</h4>
 
                 <div id="cardCollpase2" class="collapse pt-3 show" dir="ltr">
                     <div id="apex-line-1" class="apex-charts" data-colors="#9B59B6,#E91E63,#4A6F4B,#f7b84b,#4a81d4"></div>
-                </div> <!-- collapsed end -->
-            </div> <!-- end card-body -->
-        </div> <!-- end card-->
-    </div> <!-- end col-->
+                </div>
+            </div>
+        </div>
+    </div> -->
 </div>
 @include('student.dashboard.check_list')
 @include('student.dashboard.exam-schedule')
@@ -680,7 +684,7 @@
     var getScheduleExamDetailsUrl = "{{ config('constants.api.get_schedule_exam_details_by_student') }}";
 </script>
 <!-- <script src="{{ asset('public/js/custom/student_calendor.js') }}"></script> -->
-<!-- <script src="{{ asset('public/js/custom/student_dashboard.js') }}"></script> -->
+<script src="{{ asset('public/js/custom/student_dashboard.js') }}"></script>
 <!-- <script src="{{ asset('public/js/custom/student_calendor_new.js') }}"></script> -->
 <script src="{{ asset('public/js/custom/student_calendor_new_cal.js') }}"></script>
 <!-- to do list -->

@@ -7074,7 +7074,7 @@ class ApiController extends BaseController
                 ->groupBy('homeworks.id')
                 ->orderBy('homeworks.created_at', 'desc')
                 ->get();
-            $homework['total_students'] =  $con->table('enrolls')->where('class_id', $request->class_id)->where('section_id', $request->section_id)->where('active_status','0')->count();
+            $homework['total_students'] =  $con->table('enrolls')->where('class_id', $request->class_id)->where('section_id', $request->section_id)->where('active_status', '0')->count();
             return $this->successResponse($homework, 'Homework record fetch successfully');
         }
     }
@@ -7381,7 +7381,7 @@ class ApiController extends BaseController
                     $q->on('h.id', '=', 'he.homework_id')
                         ->on('s.id', '=', 'he.student_id');
                 })
-                ->where('e.active_status',"0")
+                ->where('e.active_status', "0")
                 ->where('h.id', $request['homework_id']);
             $homework = $query->get();
 
@@ -7452,7 +7452,7 @@ class ApiController extends BaseController
             // create new connection
             $con = $this->createNewConnection($request->branch_id);
 
-            $student = $con->table('enrolls')->where('student_id', $request->student_id)->where('active_status','0')->first();
+            $student = $con->table('enrolls')->where('student_id', $request->student_id)->where('active_status', '0')->first();
             // get data
             $student_id = $request->student_id;
             $homework['homeworks'] = $con->table('homeworks')->select('homeworks.*', 'sections.name as section_name', 'classes.name as class_name', 'subjects.name as subject_name', 'homeworks.document', 'homework_evaluation.file', 'homework_evaluation.evaluation_date', 'homework_evaluation.remarks', 'homework_evaluation.status', 'homework_evaluation.rank')
@@ -7514,12 +7514,12 @@ class ApiController extends BaseController
             // create new connection
             $con = $this->createNewConnection($request->branch_id);
 
-            $student = $con->table('enrolls')->where('student_id', $request->student_id)->where('active_status','0')->first();
+            $student = $con->table('enrolls')->where('student_id', $request->student_id)->where('active_status', '0')->first();
             // get data
             $student_id = $request->student_id;
             $status = $request->status;
             $subject = $request->subject;
-            
+
 
             $query = $con->table('homeworks')->select('homeworks.*', 'homework_evaluation.evaluation_date', 'sections.name as section_name', 'classes.name as class_name', 'subjects.name as subject_name', 'homeworks.document', 'homework_evaluation.file', 'homework_evaluation.remarks', 'homework_evaluation.status', 'homework_evaluation.rank')
                 ->leftJoin('subjects', 'homeworks.subject_id', '=', 'subjects.id')
@@ -7660,15 +7660,16 @@ class ApiController extends BaseController
                 })
                 ->leftJoin('events as ev', function ($join) {
                     $join->where([
-                        [DB::raw('date(cl.end)'), '>=', DB::raw('date(ev.start_date)')],
-                        [DB::raw('date(cl.end)'), '<=', DB::raw('date(ev.end_date)')],
+                        [DB::raw('date(ev.start_date)'), '<=', DB::raw('date(cl.end)')],
+                        [DB::raw('date(ev.end_date)'), '>=', DB::raw('date(cl.end)')],
                         ['ev.holiday', '=', '0']
                     ]);
                 })
                 ->join('subjects as sb', 'cl.subject_id', '=', 'sb.id')
                 ->whereRaw("find_in_set($request->teacher_id,cl.teacher_id)")
-                ->where('cl.start', '>=', $start)
-                ->where('cl.end', '<=', $end)
+                ->whereRaw('cl.start between "' . $start . '" and "' . $end . '"')
+                ->whereRaw('cl.end between "' . $start . '" and "' . $end . '"')
+                // where null mean holidays can not show
                 ->whereNull('ev.id')
                 ->get();
             return $this->successResponse($success, 'calendor data get successfully');
@@ -7696,8 +7697,7 @@ class ApiController extends BaseController
                 ->select('s.id', 's.first_name as name', 's.birthday')
                 ->whereMonth("s.birthday", $month)
                 ->whereDay("s.birthday", $day)
-                ->where('s.birthday', '>=', $start)
-                ->where('s.birthday', '<=', $endDt)
+                ->whereRaw('s.birthday between "' . $start . '" and "' . $endDt . '"')
                 ->where('id', $request->teacher_id)
                 ->get();
             $success = [];
@@ -7734,8 +7734,7 @@ class ApiController extends BaseController
                 ->select('s.id', 's.first_name as name', 's.birthday')
                 ->whereMonth("s.birthday", $month)
                 ->whereDay("s.birthday", $day)
-                ->where('s.birthday', '>=', $start)
-                ->where('s.birthday', '<=', $end)
+                ->whereRaw('s.birthday between "' . $start . '" and "' . $end . '"')
                 ->get();
             $success = [];
             foreach ($birthday as $birth) {
@@ -7787,8 +7786,8 @@ class ApiController extends BaseController
                 ->whereNull('c.group_id')
                 ->where('e.status', 1)
                 ->where('s.teacher_id', $teacherId)
-                ->where('c.start', '>=', $start)
-                ->where('c.end', '<=', $end)
+                ->whereRaw('c.start between "' . $start . '" and "' . $end . '"')
+                ->whereRaw('c.end between "' . $start . '" and "' . $end . '"')
                 ->groupBy('c.event_id')
                 ->groupBy('c.start')
                 ->get();
@@ -7828,8 +7827,10 @@ class ApiController extends BaseController
                 ->whereNull('c.group_id')
                 ->where('en.student_id', $studentId)
                 ->where('e.status', 1)
-                ->where('c.start', '>=', $start)
-                ->where('c.end', '<=', $end)
+                // ->where('c.start', '>=', $start)
+                // ->where('c.end', '<=', $end)
+                ->whereRaw('c.start between "' . $start . '" and "' . $end . '"')
+                ->whereRaw('c.end between "' . $start . '" and "' . $end . '"')
                 ->groupBy('c.event_id')
                 ->groupBy('c.start')
                 ->get();
@@ -7865,8 +7866,8 @@ class ApiController extends BaseController
                 ->whereNotNull('c.event_id')
                 ->whereNull('c.group_id')
                 ->where('e.status', 1)
-                ->where('c.start', '>=', $start)
-                ->where('c.end', '<=', $end)
+                ->whereRaw('c.start between "' . $start . '" and "' . $end . '"')
+                ->whereRaw('c.end between "' . $start . '" and "' . $end . '"')
                 ->groupBy('c.event_id')
                 ->groupBy('c.start')
                 ->get();
@@ -7917,8 +7918,8 @@ class ApiController extends BaseController
                 ->whereNotNull('c.group_id')
                 ->where('s.id', $teacherId)
                 ->where('e.status', 1)
-                ->where('c.start', '>=', $start)
-                ->where('c.end', '<=', $end)
+                ->whereRaw('c.start between "' . $start . '" and "' . $end . '"')
+                ->whereRaw('c.end between "' . $start . '" and "' . $end . '"')
                 ->groupBy('c.event_id')
                 ->groupBy('c.start')
                 ->get();
@@ -7961,8 +7962,10 @@ class ApiController extends BaseController
                 ->whereNotNull('c.group_id')
                 ->where('en.student_id', $studentId)
                 ->where('e.status', 1)
-                ->where('c.start', '>=', $start)
-                ->where('c.end', '<=', $end)
+                // ->where('c.start', '>=', $start)
+                // ->where('c.end', '<=', $end)
+                ->whereRaw('c.start between "' . $start . '" and "' . $end . '"')
+                ->whereRaw('c.end between "' . $start . '" and "' . $end . '"')
                 ->groupBy('c.event_id')
                 ->groupBy('c.start')
                 ->get();
@@ -7998,8 +8001,8 @@ class ApiController extends BaseController
                 ->leftjoin("groups", \DB::raw("FIND_IN_SET(groups.id,e.selected_list)"), ">", \DB::raw("'0'"))
                 ->whereNotNull('c.group_id')
                 ->where('e.status', 1)
-                ->where('c.start', '>=', $start)
-                ->where('c.end', '<=', $end)
+                ->whereRaw('c.start between "' . $start . '" and "' . $end . '"')
+                ->whereRaw('c.end between "' . $start . '" and "' . $end . '"')
                 ->groupBy('c.event_id')
                 ->groupBy('c.start')
                 ->get();
@@ -8042,8 +8045,10 @@ class ApiController extends BaseController
                 ->where('p.id', $parentId)
                 ->whereNotNull('c.group_id')
                 ->where('e.status', 1)
-                ->where('c.start', '>=', $start)
-                ->where('c.end', '<=', $end)
+                // ->where('c.start', '>=', $start)
+                // ->where('c.end', '<=', $end)
+                ->whereRaw('c.start between "' . $start . '" and "' . $end . '"')
+                ->whereRaw('c.end between "' . $start . '" and "' . $end . '"')
                 ->groupBy('c.event_id')
                 ->groupBy('c.start')
                 ->get();
@@ -8076,7 +8081,7 @@ class ApiController extends BaseController
             $studentID = $request->student_id;
             $start = date('Y-m-d h:i:s', strtotime($request->start));
             $end = date('Y-m-d h:i:s', strtotime($request->end));
-            $student = $Connection->table('enrolls')->where('student_id', $request->student_id)->where('active_status','0')->first();
+            $student = $Connection->table('enrolls')->where('student_id', $request->student_id)->where('active_status', '0')->first();
             $success = $Connection->table('students as stud')
                 ->select(
                     'cl.id',
@@ -8120,14 +8125,15 @@ class ApiController extends BaseController
                 })
                 ->leftJoin('events as ev', function ($join) {
                     $join->where([
-                        [DB::raw('date(cl.end)'), '>=', DB::raw('date(ev.start_date)')],
-                        [DB::raw('date(cl.end)'), '<=', DB::raw('date(ev.end_date)')],
+                        [DB::raw('date(ev.start_date)'), '<=', DB::raw('date(cl.end)')],
+                        [DB::raw('date(ev.end_date)'), '>=', DB::raw('date(cl.end)')],
                         ['ev.holiday', '=', '0']
                     ]);
                 })
                 ->where('stud.id', $request->student_id)
-                ->where('cl.start', '>=', $start)
-                ->where('cl.end', '<=', $end)
+                ->whereRaw('cl.start between "' . $start . '" and "' . $end . '"')
+                ->whereRaw('cl.end between "' . $start . '" and "' . $end . '"')
+
                 ->where('cl.sem_id', $student->semester_id)
                 ->where('cl.session_id', $student->session_id)
                 ->where('cl.academic_session_id', $student->academic_session_id)
@@ -11856,54 +11862,161 @@ class ApiController extends BaseController
     {
         $validator = \Validator::make($request->all(), [
             'branch_id' => 'required',
-            'student_id' => 'required'
+            'student_id' => 'required',
+            'academic_session_id' => 'required'
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
             // create new connection
             $student_id = $request->student_id;
-            $con = $this->createNewConnection($request->branch_id);
-            $student = $con->table('enrolls')->where('student_id', $student_id)->first();
-            // return 1;
-            $data['subjects'] = $con->table('subject_assigns')->select('subjects.name as subject_name')
-                ->join('subjects', 'subject_assigns.subject_id', '=', 'subjects.id')
+            $Connection = $this->createNewConnection($request->branch_id);
+            $student = $Connection->table('enrolls')
+                ->select(
+                    'class_id',
+                    'section_id',
+                    'semester_id',
+                    'session_id'
+                )
                 ->where([
-                    ['subject_assigns.class_id', '=', $student->class_id],
-                    ['subject_assigns.section_id', '=', $student->section_id],
-                    ['subject_assigns.type', '=', '0']
+                    ['student_id', '=', $student_id],
+                    ['academic_session_id', '=', $request->academic_session_id],
+                    ['active_status', '=', '0']
+                ])->first();
+            // here all labels by order
+            $get_all_subjects = $Connection->table('subject_assigns as sa')
+                ->select(
+                    'subj.id as subject_id',
+                    'subj.name as subject_name'
+                )
+                ->join('subjects as subj', 'sa.subject_id', '=', 'subj.id')
+                ->where([
+                    ['sa.class_id', '=', $student->class_id],
+                    ['sa.section_id', '=', $student->section_id],
+                    ['sa.type', '=', '0'],
+                    ['subj.exam_exclude', '=', '0']
                 ])
-                ->orderBy('subject_name')
+                ->orderBy('subj.name')
                 ->get();
+            $class_id = isset($student->class_id) ? $student->class_id : 0;
+            $section_id = isset($student->section_id) ? $student->section_id : 0;
+            $semester_id = isset($student->semester_id) ? $student->semester_id : 0;
+            $session_id = isset($student->session_id) ? $student->session_id : 0;
+            $academic_session_id = isset($request->academic_session_id) ? $request->academic_session_id : 0;
 
+            // here values by order
+            $getAllExams = $Connection->table('exam as ex')
+                ->select(
+                    'ex.id',
+                    'ex.name as exam_name',
+                )
+                ->get();
+            $allbyStudent = array();
+            // dd($get_all_subjects);
+            if (!empty($getAllExams)) {
+                foreach ($getAllExams as $exams) {
+                    // if check timetable availabe or not
+                    if (isset($exams->id)) {
+                        $timeTableAvailable = $Connection->table('timetable_exam as te')
+                            ->select('te.id')
+                            ->where([
+                                ['te.class_id', '=', $class_id],
+                                ['te.section_id', '=', $section_id],
+                                ['te.exam_id', '=', $exams->id],
+                                ['te.semester_id', '=', $semester_id],
+                                ['te.session_id', '=', $session_id],
+                                ['te.academic_session_id', '=', $academic_session_id]
+                            ])
+                            ->get();
+                        // echo count($timeTableAvailable);
+                        // print_r($timeTableAvailable);
+                        if (count($timeTableAvailable) > 0) {
+                            $student_obj = new \stdClass();
+                            // add obj
+                            $student_obj->exam_id = $exams->id;
+                            $student_obj->exam_name = $exams->exam_name;
+                            $examID = $exams->id;
+                            $examName = $exams->exam_name;
+                            $studentArr = [];
+                            foreach ($get_all_subjects as $val) {
+                                $sbj_obj = new \stdClass();
+                                // get subject total weightage
+                                $getExamPaperWeightage = $Connection->table('exam_papers as expp')
+                                    ->select(
+                                        DB::raw('SUM(expp.subject_weightage) as total_subject_weightage'),
+                                        'expp.grade_category'
+                                    )
+                                    ->where([
+                                        ['expp.class_id', '=', $class_id],
+                                        ['expp.subject_id', '=', $val->subject_id]
+                                    ])
+                                    ->get();
+                                // dd($getExamPaperWeightage);
+                                $total_subject_weightage = isset($getExamPaperWeightage[0]->total_subject_weightage) ? (int)$getExamPaperWeightage[0]->total_subject_weightage : 0;
 
-            $sub = $con->table('exam')->select('student_marks.score', 'subjects.name as subject_name', 'student_marks.ranking', 'student_marks.pass_fail', 'student_marks.status', 'student_marks.grade', 'exam.name as exam_name',)
-                ->leftJoin('student_marks', 'exam.id', '=', 'student_marks.exam_id')
-                ->join('subjects', 'student_marks.subject_id', '=', 'subjects.id')
-                ->where('student_marks.class_id', $student->class_id)
-                ->where('student_marks.section_id', $student->section_id)
-                ->where('student_marks.student_id', $student_id)
-                ->orderBy('subject_name')
-                ->get()
-                ->groupBy('exam_name')->toArray();
+                                $getStudMarksDetails = $Connection->table('student_marks as sm')
+                                    ->select(
+                                        'expp.subject_weightage',
+                                        'sb.name as subject_name',
+                                        'sb.id as subject_id',
+                                        'sm.score',
+                                        'sm.paper_id',
+                                        'sm.grade_category'
+                                    )
+                                    ->join('subjects as sb', 'sm.subject_id', '=', 'sb.id')
+                                    ->join('timetable_exam as te', function ($join) {
+                                        $join->on('te.class_id', '=', 'sm.class_id')
+                                            ->on('te.section_id', '=', 'sm.section_id')
+                                            ->on('te.subject_id', '=', 'sm.subject_id')
+                                            ->on('te.semester_id', '=', 'sm.semester_id')
+                                            ->on('te.session_id', '=', 'sm.session_id')
+                                            ->on('te.paper_id', '=', 'sm.paper_id')
+                                            ->on('te.academic_session_id', '=', 'sm.academic_session_id');
+                                    })
+                                    ->join('exam_papers as expp', 'sm.paper_id', '=', 'expp.id')
+                                    ->where([
+                                        ['sm.class_id', '=', $class_id],
+                                        ['sm.section_id', '=', $section_id],
+                                        ['sm.subject_id', '=', $val->subject_id],
+                                        ['sm.exam_id', '=', $examID],
+                                        ['sm.semester_id', '=', $semester_id],
+                                        ['sm.session_id', '=', $session_id],
+                                        ['sm.student_id', '=', $student_id],
+                                        ['sm.academic_session_id', '=', $academic_session_id]
+                                    ])
+                                    ->groupBy('sm.paper_id')
+                                    ->get();
 
-
-            // $sub_div = $con->table('exam')->select('student_subjectdivision_inst.total_score as score', 'subjects.name as subject_name', 'student_subjectdivision_inst.ranking', 'student_subjectdivision_inst.pass_fail', 'student_subjectdivision_inst.status', 'student_subjectdivision_inst.grade', 'exam.name as exam_name',)
-            //     ->leftJoin('student_subjectdivision_inst', 'exam.id', '=', 'student_subjectdivision_inst.exam_id')
-            //     ->join('subjects', 'student_subjectdivision_inst.subject_id', '=', 'subjects.id')
-            //     ->where('student_subjectdivision_inst.class_id', $student->class_id)
-            //     ->where('student_subjectdivision_inst.section_id', $student->section_id)
-            //     ->where('student_subjectdivision_inst.student_id', $student_id)
-            //     ->orderBy('subject_name')
-            //     ->get()
-            //     ->groupBy('exam_name')->toArray();
-
-            // $combined = array();
-            // foreach ($sub as $key => $val) {
-            //     $combined[$key] = array_merge($val, $sub_div[$key]);
-            // }
-
-            $data['marks'] = $sub;
+                                $sbj_obj->subject_id = $val->subject_id;
+                                $marks = 0;
+                                $grade_category = 0;
+                                // here you get calculation based on student marks and subject weightage
+                                if (!empty($getStudMarksDetails)) {
+                                    // grade calculations
+                                    foreach ($getStudMarksDetails as $Studmarks) {
+                                        $sub_weightage = (int) $Studmarks->subject_weightage;
+                                        $score = (int) $Studmarks->score;
+                                        $grade_category = $Studmarks->grade_category;
+                                        $weightage = ($sub_weightage / $total_subject_weightage);
+                                        $marks += ($weightage * $score);
+                                    }
+                                    $mark = (int) $marks;
+                                    $sbj_obj->marks = $marks != 0 ? number_format($marks) : $marks;
+                                } else {
+                                    $sbj_obj->marks = "Nill";
+                                }
+                                array_push($studentArr, $sbj_obj);
+                            }
+                            $student_obj->student_class = $studentArr;
+                            array_push($allbyStudent, $student_obj);
+                        }
+                    }
+                }
+            }
+            $data = [
+                'headers' => isset($get_all_subjects) ? $get_all_subjects : [],
+                'allbyStudent' => $allbyStudent
+            ];
 
             return $this->successResponse($data, 'Test Score List fetch successfully');
         }
@@ -14109,13 +14222,13 @@ class ApiController extends BaseController
             // create new connection
             $secConn = $this->createNewConnection($request->branch_id);
             // get data
-            $start = date('Y-m-d h:i:s', strtotime($request->start));
-            $end = date('Y-m-d h:i:s', strtotime($request->end));
+            $start = date('Y-m-d 00:00:00', strtotime($request->start));
+            $end = date('Y-m-d 00:00:00', strtotime($request->end));
             $section = $secConn->table('calendors')
                 ->select('id', 'title', 'start', 'end', 'description', 'task_color as className')
                 ->where('login_id', '=', $request->login_id)
-                ->where('start', '>=', $start)
-                ->where('end', '<=', $end)
+                ->whereRaw('start between "' . $start . '" and "' . $end . '"')
+                ->whereRaw('end between "' . $start . '" and "' . $end . '"')
                 ->get();
             return $this->successResponse($section, 'calendors tast details fetch successfully');
         }
@@ -14848,8 +14961,7 @@ class ApiController extends BaseController
                 ->join('sections as sc', 'tex.section_id', '=', 'sc.id')
                 ->join('subjects as sbj', 'tex.subject_id', '=', 'sbj.id')
                 ->join('exam as ex', 'tex.exam_id', '=', 'ex.id')
-                ->where('tex.exam_date', '>=', $start)
-                ->where('tex.exam_date', '<=', $end)
+                ->whereRaw('tex.exam_date between "' . $start . '" and "' . $end . '"')
                 // ->where([
                 //     ['en.student_id', '=', $request->student_id]
                 // ])
@@ -14938,10 +15050,9 @@ class ApiController extends BaseController
                 ->join('subjects as sbj', 'tex.subject_id', '=', 'sbj.id')
                 ->join('exam as ex', 'tex.exam_id', '=', 'ex.id')
                 ->where([
-                    ['en.student_id', '=', $request->student_id],
-                    ['tex.exam_date', '>=', $start],
-                    ['tex.exam_date', '<=', $end]
+                    ['en.student_id', '=', $request->student_id]
                 ])
+                ->whereRaw('tex.exam_date between "' . $start . '" and "' . $end . '"')
                 ->get();
             return $this->successResponse($getStudentExamSchedule, 'get schedule exam details record successfully');
         }
@@ -15112,8 +15223,8 @@ class ApiController extends BaseController
                 })
                 ->where('sa.teacher_id', $request->teacher_id)
                 ->where("cl.teacher_id", "0")
-                ->where('cl.start', '>=', $start)
-                ->where('cl.end', '<=', $end)
+                ->whereRaw('cl.start between "' . $start . '" and "' . $end . '"')
+                ->whereRaw('cl.end between "' . $start . '" and "' . $end . '"')
                 ->orWhere("cl.teacher_id", $request->teacher_id)
                 ->whereNotNull('cl.bulk_id')
                 ->groupBy('cl.start')
@@ -15147,8 +15258,8 @@ class ApiController extends BaseController
             $success = $Connection->table('calendors as cl')
                 ->select('cl.id', 'cl.class_id', 'cl.title', 'cl.title as name', 'cl.time_table_id', 'cl.section_id', 'cl.subject_id', 'cl.start', 'cl.event_id', 'cl.end', "cl.teacher_id", "bulk_id")
                 ->where("cl.teacher_id", "0")
-                ->where('cl.start', '>=', $start)
-                ->where('cl.end', '<=', $end)
+                ->whereRaw('cl.start between "' . $start . '" and "' . $end . '"')
+                ->whereRaw('cl.end between "' . $start . '" and "' . $end . '"')
                 ->whereNotNull('cl.bulk_id')
                 ->groupBy('cl.start')
                 ->get();
@@ -15186,8 +15297,8 @@ class ApiController extends BaseController
                         ->on('cl.section_id', '=', 'e.section_id');
                 })
                 ->where('e.student_id', $request->student_id)
-                ->where('cl.start', '>=', $start)
-                ->where('cl.end', '<=', $end)
+                ->whereRaw('cl.start between "' . $start . '" and "' . $end . '"')
+                ->whereRaw('cl.end between "' . $start . '" and "' . $end . '"')
                 ->whereNotNull('cl.bulk_id')
                 ->groupBy('cl.start')
                 ->get();
@@ -17108,7 +17219,7 @@ class ApiController extends BaseController
             $start_time = $request->start_time;
             $end_time = $request->end_time;
             $Connection = $this->createNewConnection($request->branch_id);
-            $getClassName = $Connection->table('timetable_class as tc')->select('tc.class_room','teacher_id')
+            $getClassName = $Connection->table('timetable_class as tc')->select('tc.class_room', 'teacher_id')
                 ->where([
                     ['tc.semester_id', '=', $request->semester_id],
                     ['tc.day', '=', $request->day],
@@ -17144,7 +17255,7 @@ class ApiController extends BaseController
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
             // get data
-            
+
             $query = $createConnection->table('staffs')->count();
             return $this->successResponse($query, 'Staff Count has been Fetched Successfully');
         }
@@ -17197,7 +17308,7 @@ class ApiController extends BaseController
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
             // get data
-            
+
             // $empDetails['user'] = User::where('user_id', $id)->where('branch_id', $request->branch_id)->first();
             $query = User::where('role_id', 4)->where('branch_id', $request->branch_id)->count();
             return $this->successResponse($query, 'Student Count has been Fetched Successfully');

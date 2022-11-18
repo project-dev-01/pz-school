@@ -22,37 +22,44 @@ $(function () {
             token: token,
             branch_id: branchID,
             student_id: studentID,
+            academic_session_id: academic_session_id
         }, function (response) {
             console.log('res', response)
             if (response.code == 200) {
-                var marks = response.data.marks;
-                var subjects = response.data.subjects;
+                // var marks = response.data.marks;
+                // var subjects = response.data.subjects;
+                var subjects = response.data.headers;
+                var marks = response.data.allbyStudent;
                 var data = [];
                 var label = [];
-                console.log(marks);
-                console.log(subjects);
-                if (subjects.length > 0) {
+                // console.log(marks);
+                // console.log(subjects);
+                if (subjects.length > 0 && marks.length) {
                     subjects.forEach(function (res) {
                         label.push(res.subject_name);
-
                     });
                     $.each(marks, function (key, value) {
                         var randcol = getRandomColor();
                         var obj = {};
                         var score = [];
-                        obj["label"] = key;
+                        obj["label"] = value.exam_name;
                         obj["backgroundColor"] = hexToRGB(randcol, 0.3);
                         obj["borderColor"] = randcol;
                         obj["pointBackgroundColor"] = randcol;
                         obj["pointBorderColor"] = "#fff";
                         obj["pointHoverBackgroundColor"] = "#fff";
                         obj["pointHoverBorderColor"] = randcol;
-                        $.each(value, function (key, val) {
-                            score.push(val.score);
+                        $.each(value.student_class, function (keys, val) {
+                            let mark = parseInt(val.marks);
+                            score.push(mark);
                         });
                         obj["data"] = score;
+                        // console.log("---");
+                        // console.log(obj);
                         data.push(obj);
                     });
+                    // console.log(data);
+                    // console.log(label);
                     radarChart(label, data);
                 }
             }
