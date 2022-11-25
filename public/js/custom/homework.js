@@ -261,9 +261,10 @@ $(function () {
     $('.firstModal').on('shown.bs.modal', e => {
         var $button = $(e.relatedTarget);
         var homework_id = $button.attr('data-homework_id');
+        var semester_id = $("#semester_id").val();
+        var session_id = $("#session_id").val();
         $("#homework_id").val(homework_id);
-        $.post(homeworkView, { homework_id: homework_id }, function (res) {
-            console.log('fun',res)
+        $.post(homeworkView, { homework_id: homework_id,semester_id: semester_id,session_id: session_id }, function (res) {
             if (res.code == 200) {
                 $("#homework_modal_table").html(res.table);
                 var complete = res.complete;

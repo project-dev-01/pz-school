@@ -13,6 +13,15 @@ $(function () {
             $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
         }
     });
+    
+    $("#attendanceList").focus(function () {
+        $(".ui-datepicker-calendar").hide();
+        $("#ui-datepicker-div").position({
+            my: "center top",
+            at: "center bottom",
+            of: $(this)
+        });
+    });
 
     // rules validation
     $("#getAttendanceList").validate({
@@ -29,6 +38,7 @@ $(function () {
 
             var attendanceList = $("#attendanceList").val();
             var subject_id = $("#subject_id").val();
+            var student_id = $("#student_id").val();
 
             var date = new Date(attendanceList)
             var year_month = ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
@@ -45,6 +55,7 @@ $(function () {
             formData.append('branch_id', branchID);
             formData.append('year_month', year_month);
             formData.append('ref_user_id', ref_user_id);
+            formData.append('student_id', student_id);
             formData.append('subject_id', subject_id);
 
             $.ajax({

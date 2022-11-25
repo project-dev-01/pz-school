@@ -107,7 +107,8 @@ $(function () {
             teacher_id: ref_user_id,
             class_id: class_id,
             section_id: section_id,
-            class_id: class_id
+            class_id: class_id,
+            academic_session_id: academic_session_id,
         }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -168,6 +169,7 @@ $(function () {
             formData.append('semester_id', semester_id);
             formData.append('session_id', session_id);
             formData.append('year_month', year_month);
+            formData.append('academic_session_id', academic_session_id);
 
             $.ajax({
                 url: getAttendanceListTeacher,

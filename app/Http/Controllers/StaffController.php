@@ -1347,7 +1347,11 @@ class StaffController extends Controller
     // index Timetable
     public function timetable(Request $request)
     {
-        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $data = [
+            'teacher_id' => session()->get('ref_user_id')
+        ];
+        $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        // $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         return view(

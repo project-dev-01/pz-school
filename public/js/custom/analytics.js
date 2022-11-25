@@ -277,7 +277,8 @@ $(function () {
             teacher_id: ref_user_id,
             class_id: class_id,
             section_id: section_id,
-            class_id: class_id
+            class_id: class_id,
+            academic_session_id: academic_session_id,
         }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -290,7 +291,8 @@ $(function () {
             token: token,
             branch_id: branchID,
             class_id: class_id,
-            section_id: section_id
+            section_id: section_id,
+            academic_session_id: academic_session_id,
         }, function (respon) {
             if (respon.code == 200) {
                 $.each(respon.data, function (key, val) {

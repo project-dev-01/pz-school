@@ -61,6 +61,7 @@
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" id="student_id" value="{{$student_id}}" name="student_id">
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
                                 Filter

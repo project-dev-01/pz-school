@@ -1453,7 +1453,8 @@ class ApiController extends BaseController
                 ->where([
                     ['sa.class_id', '=', $request->class_id],
                     ['sa.section_id', '=', $request->section_id],
-                    ['sa.type', '=', '0']
+                    ['sa.type', '=', '0'],
+                    ['sa.academic_session_id', '=', $request->academic_session_id],
                 ])
                 ->get();
             return $this->successResponse($success, 'Get Assign class subjects fetch successfully');
@@ -3640,7 +3641,8 @@ class ApiController extends BaseController
                     ['sa.class_id', $request->class_id],
                     ['sa.section_id', $request->section_id],
                     ['sa.type', '=', '0'],
-                    ['s.exam_exclude', '=', '0']
+                    ['s.exam_exclude', '=', '0'],
+                    ['sa.academic_session_id', $request->academic_session_id],
                 ])
                 // ->groupBy('s.id')
                 ->get();
@@ -5399,7 +5401,8 @@ class ApiController extends BaseController
                     ['s.exam_exclude', '=', '0'],
                     ['sa.class_id', '=', $request->class_id],
                     ['sa.section_id', '=', $request->section_id],
-                    ['sa.teacher_id', '=', $request->teacher_id]
+                    ['sa.teacher_id', '=', $request->teacher_id],
+                    ['sa.academic_session_id', '=', $request->academic_session_id]
                 ])
                 ->groupBy("sa.subject_id")
                 ->get();
@@ -5683,7 +5686,8 @@ class ApiController extends BaseController
                 })
                 ->where([
                     ['en.class_id', '=', $request->class_id],
-                    ['en.section_id', '=', $request->section_id]
+                    ['en.section_id', '=', $request->section_id],
+                    ['en.academic_session_id', '=', $request->academic_session_id]
                     // ['en.semester_id', '=', $request->semester_id],
                     // ['en.session_id', '=', $request->session_id]
                 ])
@@ -7074,7 +7078,15 @@ class ApiController extends BaseController
                 ->groupBy('homeworks.id')
                 ->orderBy('homeworks.created_at', 'desc')
                 ->get();
-            $homework['total_students'] =  $con->table('enrolls')->where('class_id', $request->class_id)->where('section_id', $request->section_id)->where('active_status', '0')->count();
+            $homework['total_students'] =  $con->table('enrolls')
+                                            ->where([
+                                                ['class_id', '=', $request->class_id],
+                                                ['section_id', '=', $request->section_id],
+                                                ['semester_id', '=', $request->semester_id],
+                                                ['session_id', '=', $request->session_id],
+                                                ['academic_session_id', '=', $request->academic_session_id],
+                                                ['active_status', '=', '0'],
+                                            ])->count();
             return $this->successResponse($homework, 'Homework record fetch successfully');
         }
     }
@@ -7109,7 +7121,7 @@ class ApiController extends BaseController
                         ->on('sa.section_id', '=', 'en.section_id');
                 })
                 ->where([
-                    ['stud.parent_id', '=', $request->ref_user_id],
+                    ['stud.id', '=', $request->student_id],
                     ['sa.subject_id', '=', $request->subject_id]
                 ])
                 ->whereMonth('sa.date', $year_month[0])
@@ -7133,7 +7145,7 @@ class ApiController extends BaseController
                         ->on('sa.section_id', '=', 'en.section_id');
                 })
                 ->where([
-                    ['stud.parent_id', '=', $request->ref_user_id],
+                    ['stud.id', '=', $request->student_id],
                     ['sa.subject_id', '=', $request->subject_id]
                 ])
                 ->whereMonth('sa.date', $year_month[0])
@@ -7194,21 +7206,27 @@ class ApiController extends BaseController
             $year_month = explode('-', $request->year_month);
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
-            $getAttendanceList = $Connection->table('student_attendances as sa')
+            $getAttendanceList = $Connection->table('students as stud')
                 ->select(
-                    'stud.first_name',
-                    'stud.last_name',
-                    'sa.student_id',
-                    'sa.date',
-                    'sa.status',
+                            'stud.first_name',
+                            'stud.last_name',
+                            'sa.student_id',
+                            'sa.date',
+                            'sa.status',
                     DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
                     DB::raw('COUNT(CASE WHEN sa.status = "absent" then 1 ELSE NULL END) as "absentCount"'),
                     DB::raw('COUNT(CASE WHEN sa.status = "late" then 1 ELSE NULL END) as "lateCount"'),
-
+                    DB::raw('COUNT(CASE WHEN sa.status = "excused" then 1 ELSE NULL END) as "excusedCount"'),
                 )
-                ->join('enrolls as en', 'sa.student_id', '=', 'en.student_id')
-                ->join('students as stud', 'sa.student_id', '=', 'stud.id')
+                // ->join('enrolls as en', 'en.student_id', '=', 'stud.id')
+                ->leftJoin('student_attendances as sa', 'sa.student_id', '=', 'stud.id')
+                ->join('enrolls as en', function ($join) {
+                    $join->on('stud.id', '=', 'en.student_id')
+                        ->on('sa.class_id', '=', 'en.class_id')
+                        ->on('sa.section_id', '=', 'en.section_id');
+                })
                 ->where([
+                    // ['stud.id', '=', $request->student_id],
                     ['sa.class_id', '=', $request->class_id],
                     ['sa.section_id', '=', $request->section_id],
                     ['sa.subject_id', '=', $request->subject_id],
@@ -7217,7 +7235,7 @@ class ApiController extends BaseController
                 ])
                 ->whereMonth('sa.date', $year_month[0])
                 ->whereYear('sa.date', $year_month[1])
-                ->groupBy('sa.student_id')
+                    ->groupBy('sa.student_id')
                 ->get();
 
             $studentDetails = array();
@@ -7239,7 +7257,6 @@ class ApiController extends BaseController
                     array_push($studentDetails, $object);
                 }
             }
-
             // date wise late present analysis
             $getLatePresentData = $Connection->table('student_attendances as sa')
                 ->select(
@@ -7257,7 +7274,8 @@ class ApiController extends BaseController
                     ['sa.section_id', '=', $request->section_id],
                     ['sa.subject_id', '=', $request->subject_id],
                     ['sa.semester_id', '=', $request->semester_id],
-                    ['sa.session_id', '=', $request->session_id]
+                    ['sa.session_id', '=', $request->session_id],
+                    ['en.active_status', '=', "0"]
                 ])
                 ->whereMonth('sa.date', $year_month[0])
                 ->whereYear('sa.date', $year_month[1])
@@ -7381,7 +7399,10 @@ class ApiController extends BaseController
                     $q->on('h.id', '=', 'he.homework_id')
                         ->on('s.id', '=', 'he.student_id');
                 })
-                ->where('e.active_status', "0")
+                ->where('e.semester_id','=',$request->semester_id)
+                ->where('e.session_id','=',$request->session_id)
+                ->where('e.active_status','=','0')
+                ->where('e.academic_session_id','=',$request->academic_session_id)
                 ->where('h.id', $request['homework_id']);
             $homework = $query->get();
 
@@ -7492,7 +7513,7 @@ class ApiController extends BaseController
                 $homework['count']['late_percentage'] =  round(($count->late / $total) * 100, 2);
             }
 
-            $homework['subjects'] = $con->table('subjects')->select('subjects.id', 'subjects.name')->join('subject_assigns', 'subject_assigns.subject_id', '=', 'subjects.id')->groupBy('subjects.id')->get();
+            // $homework['subjects'] = $con->table('subjects')->select('subjects.id', 'subjects.name')->join('subject_assigns', 'subject_assigns.subject_id', '=', 'subjects.id')->groupBy('subjects.id')->get();
             return $this->successResponse($homework, 'Homework record fetch successfully');
         }
     }
@@ -8617,7 +8638,6 @@ class ApiController extends BaseController
             'academic_session_id' => 'required',
             'token' => 'required',
         ]);
-
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
@@ -10158,15 +10178,11 @@ class ApiController extends BaseController
             'token' => 'required',
         ]);
 
-
-
-
         $previous['school_name'] = $request->school_name;
         $previous['qualification'] = $request->qualification;
         $previous['remarks'] = $request->remarks;
 
         $previous_details = json_encode($previous);
-
 
 
         if (!$validator->passes()) {
@@ -11122,6 +11138,8 @@ class ApiController extends BaseController
                 ->when($name, function ($query, $name) {
                     return $query->where('s.first_name', 'like', '%' . $name . '%')->orWhere('s.last_name', 'like', '%' . $name . '%');
                 })
+                ->where('e.academic_session_id','=',$request->academic_session_id)
+                ->where('e.active_status','=',"0")
                 ->get()->toArray();
 
             return $this->successResponse($student, 'Student record fetch successfully');
@@ -11820,7 +11838,8 @@ class ApiController extends BaseController
                 ->where([
                     ['us.branch_id', '=', $request->branch_id]
                 ])
-                ->whereIn('us.role_id', ['2', '3', '4'])
+                ->whereIn('us.role_id', ['1','2', '3', '4'])
+                ->groupBy('stf.id')
                 ->get();
             // $allTeachers = User::select('name', 'user_id')->where([['role_id', '=', "4"], ['branch_id', '=', $request->branch_id]])->get();
             return $this->successResponse($allTeachers, 'get all record fetch successfully');
@@ -11839,7 +11858,7 @@ class ApiController extends BaseController
             // create new connection
             $student_id = $request->student_id;
             $con = $this->createNewConnection($request->branch_id);
-            $student = $con->table('enrolls')->where('student_id', $student_id)->first();
+            $student = $con->table('enrolls')->where('student_id', $student_id)->where('active_status','=','0')->first();
             // return 1;
 
             $data = $con->table('homeworks')->select('homeworks.title', 'homeworks.date_of_submission', 'subjects.name as subject_name')
@@ -11850,6 +11869,9 @@ class ApiController extends BaseController
                 })
                 ->where('homeworks.class_id', $student->class_id)
                 ->where('homeworks.section_id', $student->section_id)
+                ->where('homeworks.semester_id', $student->semester_id)
+                ->where('homeworks.session_id', $student->session_id)
+                ->where('homeworks.academic_session_id', $request->academic_session_id)
                 ->orderBy('homeworks.date_of_submission', 'desc')
                 ->get();
 
@@ -14439,7 +14461,8 @@ class ApiController extends BaseController
                 ->join('students as st', 'st.id', '=', 'en.student_id')
                 ->where([
                     ['en.class_id', '=', $request->class_id],
-                    ['en.section_id', '=', $request->section_id]
+                    ['en.section_id', '=', $request->section_id],
+                    ['en.academic_session_id', '=', $request->academic_session_id]
                 ])
                 ->orderBy('st.first_name', 'asc')
                 ->get();
@@ -14525,9 +14548,10 @@ class ApiController extends BaseController
                 ['h.class_id', '=', $request->class_id],
                 ['h.section_id', '=', $request->section_id],
                 ['h.subject_id', '=', $request->subject_id],
+                ['h.semester_id', '=', $request->semester_id],
+                ['h.session_id', '=', $request->session_id],
                 ['h.academic_session_id', '=', $request->academic_session_id]
             ])->get();
-
             $complete  = 0;
             $inComplete  = 0;
             $lateSubmission  = 0;
@@ -14546,15 +14570,15 @@ class ApiController extends BaseController
                         if ($submitDate > $date_of_submission) {
                             $lateSubmission++; // late submited
                         } else {
-                            if ($home->correction == "1") {
+                            if ($home->status == "1") {
                                 $complete++;
                             } else {
                                 $inComplete++;
                             }
                         }
                     } else {
-                        if (isset($home->correction)) {
-                            if ($home->correction == "1") {
+                        if (isset($home->status)) {
+                            if ($home->status == "1") {
                                 $complete++; // late submited
                             } else {
                                 $inComplete++;
@@ -14925,7 +14949,9 @@ class ApiController extends BaseController
                     'en.semester_id'
                 )
                 ->where([
-                    ['en.student_id', '=', $request->student_id]
+                    ['en.student_id', '=', $request->student_id],
+                    ['en.academic_session_id', '=', $request->academic_session_id],
+
                 ])
                 ->first();
             return $this->successResponse($getStudentClassSection, 'get class and section record successfully');
@@ -17308,7 +17334,6 @@ class ApiController extends BaseController
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
             // get data
-
             // $empDetails['user'] = User::where('user_id', $id)->where('branch_id', $request->branch_id)->first();
             $query = User::where('role_id', 4)->where('branch_id', $request->branch_id)->count();
             return $this->successResponse($query, 'Student Count has been Fetched Successfully');

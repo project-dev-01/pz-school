@@ -119,7 +119,7 @@
                                         <option value="">Select Subject</option>
                                         <option value="All">All</option>
                                         @foreach($subject as $sub)
-                                        <option value="{{$sub['id']}}">{{$sub['name']}}</option>
+                                        <option value="{{$sub['subject_id']}}">{{$sub['subject_name']}}</option>
                                         @endforeach
                                     </select>
                                 </div>

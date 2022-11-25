@@ -19,6 +19,8 @@ class CreateHomeworksTable extends Migration
             $table->integer('class_id');
             $table->integer('section_id');
             $table->integer('subject_id');
+            $table->integer('semester_id')->nullable();
+            $table->integer('session_id')->nullable();
             $table->date('date_of_homework');
             $table->date('date_of_submission');
             $table->date('schedule_date')->nullable();

@@ -22,7 +22,8 @@ class ParentController extends Controller
 
         $data = [
             'user_id' => $user_id,
-            'student_id' => $student_id
+            'student_id' => $student_id,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
         $parent_ids = [
             'parent_id' => $parent_id,
@@ -34,8 +35,7 @@ class ParentController extends Controller
         $get_std_names_dashboard = Helper::GETMethodWithData(config('constants.api.get_students_parentdashboard'), $parent_ids);
         $get_leave_reasons_dashboard = Helper::GetMethod(config('constants.api.absent_reason_list'));
         $greetings = Helper::greetingMessage();
-
-        // dd($get_leave_reasons_dashboard);
+        // dd($get_homework_list_dashboard);
         return view(
             'parent.dashboard.index',
             [
@@ -147,6 +147,7 @@ class ParentController extends Controller
             'student_id' => session()->get('student_id')
         ];
         $response = Helper::PostMethod(config('constants.api.exam_timetable_student_parent'), $data);
+        // dd($response);
         return view(
             'parent.exam.schedule',
             [
@@ -488,15 +489,18 @@ class ParentController extends Controller
     public function attendance()
     {
         $data = [
-            'student_id' => session()->get('student_id')
+            'student_id' => session()->get('student_id'),
+            'academic_session_id' => session()->get('academic_session_id')
         ];
 
-        $subjects = Helper::PostMethod(config('constants.api.get_child_subjects'), $data);
+        $subjects = Helper::PostMethod(config('constants.api.get_student_by_all_subjects'), $data);
+        // $subjects = Helper::PostMethod(config('constants.api.get_child_subjects'), $data);
         // dd($subjects);
         return view(
             'parent.attendance.index',
             [
-                'subjects' => $subjects['data']
+                'subjects' => $subjects['data'],
+                'student_id' =>  session()->get('student_id')
             ]
         );
     }
@@ -509,14 +513,16 @@ class ParentController extends Controller
             'student_id' => $student,
             'academic_session_id' => session()->get('academic_session_id')
         ];
+        // dd($data);
         $homework = Helper::PostMethod(config('constants.api.homework_student'), $data);
 
-        //  dd($homework);
+        $get_student_by_all_subjects = Helper::PostMethod(config('constants.api.get_student_by_all_subjects'), $data);
+        //  dd($get_student_by_all_subjects);
         return view(
             'parent.homework.list',
             [
                 'homework' => $homework['data']['homeworks'],
-                'subject' => $homework['data']['subjects'],
+                'subject' => $get_student_by_all_subjects['data'],
                 'count' => $homework['data']['count'],
             ]
         );
@@ -694,7 +700,7 @@ class ParentController extends Controller
         $get_student_by_all_subjects = Helper::PostMethod(config('constants.api.get_student_by_all_subjects'), $data);
         $get_class_section_by_student = Helper::PostMethod(config('constants.api.get_class_section_by_student'), $data);
 
-        // dd($get_class_section_by_student['data']['student_id']);
+        // dd($get_class_section_by_student['data']);
         return view(
             'parent.analyticrep.analyticreport',
             [

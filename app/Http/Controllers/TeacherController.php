@@ -673,8 +673,9 @@ class TeacherController extends Controller
     {
         $data = [
             'homework_id' => $request->homework_id,
-            'status' => $request->status,
-            'evaluation' => $request->evaluation,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
 
 
@@ -942,7 +943,8 @@ class TeacherController extends Controller
         $data = [
             'section_id' => $request->section_id,
             'class_id' => $request->class_id,
-            'teacher_id' => session()->get('ref_user_id')
+            'teacher_id' => session()->get('ref_user_id'),
+            "academic_session_id" => session()->get('academic_session_id')
         ];
         // dd($data);
         $subject = Helper::PostMethod(config('constants.api.teacher_subject'), $data);
@@ -1104,6 +1106,7 @@ class TeacherController extends Controller
             "section_id" => $request->section_id,
             "student_name" => $request->student_name,
             "session_id" => $request->session_id,
+            "academic_session_id" => session()->get('academic_session_id')
 
         ];
         $response = Helper::PostMethod(config('constants.api.student_list'), $data);

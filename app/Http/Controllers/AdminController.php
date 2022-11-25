@@ -1595,7 +1595,8 @@ class AdminController extends Controller
     {
         $data = [
             'class_id' => $request->class_id,
-            'section_id' => $request->section_id
+            'section_id' => $request->section_id,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
         $subject = Helper::PostMethod(config('constants.api.subject_by_class'), $data);
         return $subject;
@@ -2452,11 +2453,10 @@ class AdminController extends Controller
     {
         $data = [
             'homework_id' => $request->homework_id,
-            'status' => $request->status,
-            'evaluation' => $request->evaluation,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
-
-
 
         $homework = Helper::PostMethod(config('constants.api.homework_view'), $data);
         // dd($homework);
@@ -3729,6 +3729,7 @@ class AdminController extends Controller
             "section_id" => $request->section_id,
             "student_name" => $request->student_name,
             "session_id" => $request->session_id,
+            "academic_session_id" => session()->get('academic_session_id')
 
         ];
         $response = Helper::PostMethod(config('constants.api.student_list'), $data);

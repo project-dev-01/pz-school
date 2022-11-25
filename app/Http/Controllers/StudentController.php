@@ -17,7 +17,8 @@ class StudentController extends Controller
         $student_id = session()->get('ref_user_id');
         $data = [
             'user_id' => $user_id,
-            'student_id' => $student_id
+            'student_id' => $student_id,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
         $get_homework_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_homework_list_dashboard'), $data);
@@ -67,11 +68,13 @@ class StudentController extends Controller
             'academic_session_id' => session()->get('academic_session_id')
         ];
         $homework = Helper::PostMethod(config('constants.api.homework_student'), $data);
+
+        $get_student_by_all_subjects = Helper::PostMethod(config('constants.api.get_student_by_all_subjects'), $data);
         return view(
             'student.homework.list',
             [
                 'homework' => $homework['data']['homeworks'],
-                'subject' => $homework['data']['subjects'],
+                'subject' => $get_student_by_all_subjects['data'],
                 'count' => $homework['data']['count'],
             ]
         );

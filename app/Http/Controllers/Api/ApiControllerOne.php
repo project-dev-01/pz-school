@@ -841,22 +841,27 @@ class ApiControllerOne extends BaseController
                     'en.class_id',
                     'en.section_id',
                     'en.semester_id',
-                    'en.session_id'
+                    'en.session_id',
+                    'en.academic_session_id'
                 )
                 ->where([
-                    ['en.student_id', '=', $request->student_id]
+                    ['en.student_id', '=', $request->student_id],
+                    ['en.active_status', '=', '0']
                 ])
                 ->first();
+                // return $getStudentDetails;
+                // dd($getStudentDetails);
             $details = $con->table('timetable_exam')->select('exam.name', 'timetable_exam.exam_id')
                 ->leftJoin('exam', 'timetable_exam.exam_id', '=', 'exam.id')
                 ->where([
                     ['class_id', $getStudentDetails->class_id],
                     ['section_id', $getStudentDetails->section_id],
                     ['semester_id', $getStudentDetails->semester_id],
-                    ['session_id', $getStudentDetails->session_id]
+                    ['session_id', $getStudentDetails->session_id],
+                    ['timetable_exam.academic_session_id', $getStudentDetails->academic_session_id]
                 ])
-                ->groupBy('timetable_exam.exam_id')
-                ->orderBy('timetable_exam.exam_date', 'desc')
+                // ->groupBy('timetable_exam.exam_id')
+                // ->orderBy('timetable_exam.exam_date', 'desc')
                 ->get();
             return $this->successResponse($details, 'Exam Timetable record fetch successfully');
         }
@@ -886,10 +891,12 @@ class ApiControllerOne extends BaseController
                     'en.class_id',
                     'en.section_id',
                     'en.semester_id',
-                    'en.session_id'
+                    'en.session_id',
+                    'en.academic_session_id'
                 )
                 ->where([
-                    ['en.student_id', '=', $request->student_id]
+                    ['en.student_id', '=', $request->student_id],
+                    ['en.active_status', '=', '0']
                 ])
                 ->first();
             // dd($getStudentDetails);
@@ -898,6 +905,7 @@ class ApiControllerOne extends BaseController
             $section_id = $getStudentDetails->section_id;
             $session_id = $getStudentDetails->session_id;
             $semester_id = $getStudentDetails->semester_id;
+            $academic_session_id = $getStudentDetails->academic_session_id;
             // dd($session_id);
             $details['exam'] = $con->table('subject_assigns as sa')
                 ->select(
@@ -937,12 +945,13 @@ class ApiControllerOne extends BaseController
                     ['sa.type', '=', '0'],
                     ['sbj.exam_exclude', '=', '0']
                 ])
-                ->leftJoin('timetable_exam as ttex', function ($join) use ($exam_id, $semester_id, $session_id) {
+                ->leftJoin('timetable_exam as ttex', function ($join) use ($exam_id, $semester_id, $session_id, $academic_session_id) {
                     $join->on('sa.class_id', '=', 'ttex.class_id')
                         ->on('sa.section_id', '=', 'ttex.section_id')
                         ->on('sa.subject_id', '=', 'ttex.subject_id')
                         ->on('ttex.semester_id', '=', DB::raw("'$semester_id'"))
                         ->on('ttex.session_id', '=', DB::raw("'$session_id'"))
+                        ->on('ttex.academic_session_id', '=', DB::raw("'$academic_session_id'"))
                         ->on('ttex.paper_id', '=', 'ep.id')
                         ->where('ttex.exam_id', $exam_id);
                 })
@@ -2528,17 +2537,20 @@ class ApiControllerOne extends BaseController
                     'en.student_id',
                     'en.semester_id',
                     'en.session_id',
+                    'en.academic_session_id',
                     DB::raw("CONCAT(stud.first_name, ' ', stud.last_name) as student_name")
                 )
                 ->join('classes as cl', 'en.class_id', '=', 'cl.id')
                 ->join('sections as sc', 'en.section_id', '=', 'sc.id')
                 ->join('students as stud', 'en.student_id', '=', 'stud.id')
                 ->where('en.student_id', '=', $student_id)
+                ->where('en.active_status', '=', '0')
                 ->first();
             $class_id = isset($getstudentdetails->class_id) ? $getstudentdetails->class_id : 0;
             $section_id = isset($getstudentdetails->section_id) ? $getstudentdetails->section_id : 0;
             $semester_id = isset($getstudentdetails->semester_id) ? $getstudentdetails->semester_id : 0;
             $session_id = isset($getstudentdetails->session_id) ? $getstudentdetails->session_id : 0;
+            $academic_session_id = isset($getstudentdetails->academic_session_id) ? $getstudentdetails->academic_session_id : 0;
             $student_name = isset($getstudentdetails->student_name) ? $getstudentdetails->student_name : '-';
             $get_all_subjects = $Connection->table('subject_assigns as sa')
                 ->select(
@@ -2551,6 +2563,7 @@ class ApiControllerOne extends BaseController
                 ->where([
                     ['sa.class_id', $class_id],
                     ['sa.section_id', $section_id],
+                    ['sa.academic_session_id', $academic_session_id],
                     ['sa.type', '=', '0'],
                     ['sbj.exam_exclude', '=', '0']
                 ])
