@@ -593,7 +593,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('education/education-details', [AdminController::class, 'getEducationDetails'])->name('admin.education.details');
         Route::post('education/update', [AdminController::class, 'updateEducation'])->name('admin.education.update');
         Route::post('education/delete', [AdminController::class, 'deleteEducation'])->name('admin.education.delete');
-   
+
         // Absent Reason routes
         Route::get('absent_reason/index', [AdminController::class, 'absentReason'])->name('admin.absent_reason');
         Route::post('absent_reason/add', [AdminController::class, 'addAbsentReason'])->name('admin.absent_reason.add');
@@ -618,7 +618,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('excused_reason/update', [AdminController::class, 'updateExcusedReason'])->name('admin.excused_reason.update');
         Route::post('excused_reason/delete', [AdminController::class, 'deleteExcusedReason'])->name('admin.excused_reason.delete');
 
-        
+
         // Semester routes
         Route::get('semester/index', [AdminController::class, 'semester'])->name('admin.semester');
         Route::post('semester/add', [AdminController::class, 'addSemester'])->name('admin.semester.add');
@@ -630,14 +630,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('academic_year', [AdminController::class, 'academicYear'])->name('admin.academic_year');
         Route::get('academic_year/list', [AdminController::class, 'getAcademicYearList'])->name('admin.academic_year.list');
 
-         // Global Setting routes
-         Route::get('global_setting/index', [AdminController::class, 'globalSetting'])->name('admin.global_setting');
-         Route::get('global_setting/list', [AdminController::class, 'getGlobalSettingList'])->name('admin.global_setting.list');
-         Route::post('global_setting/add', [AdminController::class, 'addGlobalSetting'])->name('admin.global_setting.add');
-         Route::post('global_setting/global_setting-details', [AdminController::class, 'getGlobalSettingDetails'])->name('admin.global_setting.details');
-         Route::post('global_setting/update', [AdminController::class, 'updateGlobalSetting'])->name('admin.global_setting.update');
-         Route::post('global_setting/delete', [AdminController::class, 'deleteGlobalSetting'])->name('admin.global_setting.delete');
-
+        // Global Setting routes
+        Route::get('global_setting/index', [AdminController::class, 'globalSetting'])->name('admin.global_setting');
+        Route::get('global_setting/list', [AdminController::class, 'getGlobalSettingList'])->name('admin.global_setting.list');
+        Route::post('global_setting/add', [AdminController::class, 'addGlobalSetting'])->name('admin.global_setting.add');
+        Route::post('global_setting/global_setting-details', [AdminController::class, 'getGlobalSettingDetails'])->name('admin.global_setting.details');
+        Route::post('global_setting/update', [AdminController::class, 'updateGlobalSetting'])->name('admin.global_setting.update');
+        Route::post('global_setting/delete', [AdminController::class, 'deleteGlobalSetting'])->name('admin.global_setting.delete');
+        // copy acdemic and exam master one page to another page
+        Route::get('acdemic/copy/assign_teacher', [AdminController::class, 'acdemicCopyAssignTeacher'])->name('admin.acdemic.copy.assign_teacher');
     });
 });
 // admin routes end
@@ -814,23 +815,23 @@ Route::group(['prefix' => 'staff'], function () {
         //Task routes
         Route::get('task/index', [StaffController::class, 'taskIndex'])->name('staff.task');
 
-        
+
         //Timetable
         Route::get('timetable/index', [StaffController::class, 'timetable'])->name('staff.timetable');
         Route::post('timetable/timetable-details', [StaffController::class, 'getTimetable'])->name('staff.timetable.details');
 
-        
+
         // Section By Class Route
         Route::post('section-by-class', [StaffController::class, 'sectionByClass'])->name('staff.section_by_class');
 
-         // Attendance routes
+        // Attendance routes
         Route::get('attendance/employee_entry', [StaffController::class, 'employeeEntry'])->name('staff.attendance.employee_entry');
         Route::post('attendance/employee_list', [StaffController::class, 'getEmployeeAttendanceList'])->name('staff.attendance.employee_list');
         Route::post('attendance/employee_add', [StaffController::class, 'addEmployeeAttendance'])->name('staff.attendance.employee_add');
         Route::get('attendance/employee/report', [StaffController::class, 'reportEmployeeAttendance'])->name('staff.attendance.employee_report');
         Route::post('attendance/excel', [StaffController::class, 'staffAttendanceExcel'])->name('staff.attendance.excel');
 
-        
+
         // Leave Apply
         Route::get('leave_management/applyleave', [StaffController::class, 'applyleave'])->name('staff.leave_management.applyleave');
         Route::post('leave_management/applyleave_save', [StaffController::class, 'staffApplyLeave'])->name('staff.leave_management.add');
@@ -840,7 +841,7 @@ Route::group(['prefix' => 'staff'], function () {
         Route::get('leave_management/leave_approval_history_by_staff', [StaffController::class, 'getAllLeaveList'])->name('staff.leave_management.leave_approval_history_by_staff');
         Route::post('leave_management/reupload_file', [StaffController::class, 'reUploadLeaveFile'])->name('staff.reupload_file.add');
 
-        
+
         // class room management    
         Route::get('classroom/classroom-management', [StaffController::class, 'classroomManagement'])->name('staff.classroom.management');
         Route::post('classroomAdd', [StaffController::class, 'classroomPost'])->name('staff.classroom.add');
@@ -956,7 +957,7 @@ Route::group(['prefix' => 'teacher'], function () {
         // Student List
         Route::get('student/list', [TeacherController::class, 'studentList'])->name('teacher.student.list');
         Route::get('student/student-details/{id}', [TeacherController::class, 'getStudentDetails'])->name('teacher.student.details');
-    
+
         //Timetable
         Route::get('timetable/index', [TeacherController::class, 'timetable'])->name('teacher.timetable');
         Route::post('timetable/timetable-details', [TeacherController::class, 'getTimetable'])->name('teacher.timetable.details');
@@ -1060,7 +1061,7 @@ Route::group(['prefix' => 'student'], function () {
         // timetable
         Route::get('timetable', [StudentController::class, 'timetable'])->name('student.timetable');
         Route::post('timetable/timetable-details', [StudentController::class, 'getTimetable'])->name('student.timetable.details');
-    
+
         // Report card
         Route::get('report_card', [StudentController::class, 'reportCard'])->name('student.report_card');
         // Event
@@ -1083,14 +1084,13 @@ Route::group(['prefix' => 'student'], function () {
         Route::get('forum/page-categories-single', [StudentController::class, 'forumPageCategoriesSingle'])->name('student.forum.page-categories-single');
         Route::get('forum/page-tabs', [StudentController::class, 'forumPageTabs'])->name('student.forum.page-tabs');
         Route::get('forum/page-tabs-guidelines', [StudentController::class, 'forumPageTabGuidelines'])->name('student.forum.page-tabs-guidelines');
-    
-    
+
+
         Route::post('form/page-create-topic', [StudentController::class, 'createpost'])->name('student.forum.create-topic');
         Route::get('forum/page-single-topic-val/{id}/{user_id}', [StudentController::class, 'forumPageSingleTopicwithvalue'])->name('student.forum.page-single-topic-val');
         Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [StudentController::class, 'forumPageCategoriesSingle'])->name('student.forum.page-categories-single-val');
         Route::post('form/postimage', [StudentController::class, 'imagestore'])->name('student.forum.image.store');
-    
+
         Route::get('/analyticrep', [StudentController::class, 'analytic'])->name('student.analyticrep.analyticreport');
     });
-    
 });

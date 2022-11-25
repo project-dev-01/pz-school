@@ -187,7 +187,7 @@ $(function () {
                     }
                 }, error: function (err) {
                     $("#overlay").fadeOut(300);
-                    toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
+                    toastr.error(err.responseJSON.err.error ? err.responseJSON.err.error : 'Something went wrong');
                 }
             });
         }

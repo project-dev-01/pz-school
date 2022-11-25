@@ -849,8 +849,8 @@ class ApiControllerOne extends BaseController
                     ['en.active_status', '=', '0']
                 ])
                 ->first();
-                // return $getStudentDetails;
-                // dd($getStudentDetails);
+            // return $getStudentDetails;
+            // dd($getStudentDetails);
             $details = $con->table('timetable_exam')->select('exam.name', 'timetable_exam.exam_id')
                 ->leftJoin('exam', 'timetable_exam.exam_id', '=', 'exam.id')
                 ->where([
@@ -3303,6 +3303,531 @@ class ApiControllerOne extends BaseController
                 ->where('cl.id', '=', $request->calendar_id)
                 ->first();
             return $this->successResponse($calendors, 'Available teacher list');
+        }
+    }
+    // soap category list
+    public function soapCategoryList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            $soapCategory = $conn->table('soap_category')
+                ->select(
+                    'id',
+                    'name',
+                    'soap_type_id'
+                )
+                ->get();
+            return $this->successResponse($soapCategory, 'Soap category list');
+        }
+    }
+    // soap sub category
+    public function soapSubCategory(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'soap_category_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            $soapCategory = $conn->table('soap_sub_category')
+                ->select(
+                    'id',
+                    'name'
+                )
+                ->where('soap_category_id', $request->soap_category_id)
+                ->get();
+            return $this->successResponse($soapCategory, 'Soap sub category list');
+        }
+    }
+    // soap filter by notes
+    public function soapFilterByNotes(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'soap_sub_category_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            $name = $request->name;
+            $soapCategory = $conn->table('soap_notes')
+                ->select(
+                    'id',
+                    'notes'
+                )
+                ->where('soap_sub_category_id', $request->soap_sub_category_id)
+                ->when($name, function ($query, $name) {
+                    return $query->where('notes', 'like', '%' . $name . '%');
+                })
+                ->get();
+            return $this->successResponse($soapCategory, 'Soap notes list');
+        }
+    }
+    // soap add
+    public function soapAdd(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'soap_notes_id' => 'required',
+            'notes' => 'required',
+            'soap_category_id' => 'required',
+            'soap_sub_category_id' => 'required',
+            'referred_by' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            $name = $request->name;
+            $data = [
+                'soap_notes_id' => $request->soap_notes_id,
+                'notes' => $request->notes,
+                'soap_category_id' => $request->soap_category_id,
+                'soap_sub_category_id' => $request->soap_sub_category_id,
+                'referred_by' => $request->referred_by,
+                'date' => date('Y-m-d'),
+                'created_at' => date("Y-m-d H:i:s")
+            ];
+            // insert data
+            $query = $conn->table('soap')->insert($data);
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Added successfully');
+            }
+        }
+    }
+    // soap list
+    public function getSoapList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $soapDetails = $conn->table('soap as sp')
+                ->select(
+                    'sp.id',
+                    'sn.notes as soap_notes',
+                    'sp.referred_by',
+                    'sp.notes',
+                    'sp.date'
+                )
+                ->join('soap_notes as sn', 'sp.soap_notes_id', '=', 'sn.id')
+                ->get();
+            return $this->successResponse($soapDetails, 'Soap record fetch successfully');
+        }
+    }
+    // get soap row details
+    public function getSoapDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $leaveTypeDetails = $conn->table('soap')->where('id', $id)->first();
+            return $this->successResponse($leaveTypeDetails, 'Soap row fetch successfully');
+        }
+    }
+    // update soap
+    public function updateSoap(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'id' => 'required',
+            'notes' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+
+            // update data
+            $updateData = [
+                'notes' => $request->notes,
+                'updated_at' => date("Y-m-d H:i:s")
+            ];
+            $query = $conn->table('soap')->where('id', $id)->update($updateData);
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Soap have Been updated');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+    // delete soap
+    public function deleteSoap(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('soap')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Soap have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+
+    // copy teacher allocations
+    public function acdemicCopyAssignTeacher(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'academic_session_id' => 'required',
+            'copy_academic_session_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // get acdemic data
+            $getAcademicData = $createConnection->table('teacher_allocations')
+                ->where(
+                    [
+                        ['academic_session_id', $request->academic_session_id]
+                    ]
+                )
+                ->get();
+            if (count($getAcademicData) > 0) {
+                foreach ($getAcademicData as $value) {
+                    $old = $createConnection->table('teacher_allocations')
+                        ->where(
+                            [
+                                ['class_id', $value->class_id],
+                                ['section_id', $value->section_id],
+                                ['teacher_id', $value->teacher_id],
+                                ['type', $value->type],
+                                ['academic_session_id', $request->copy_academic_session_id]
+                            ]
+                        )
+                        ->first();
+                    if (isset($old->id)) {
+                        $arrayData = [
+                            'updated_at' => date("Y-m-d H:i:s")
+                        ];
+                        $query = $createConnection->table('teacher_allocations')->where('id', $old->id)->update($arrayData);
+                    } else {
+                        $arrayData = [
+                            'class_id' => $value->class_id,
+                            'section_id' => $value->section_id,
+                            'teacher_id' => $value->teacher_id,
+                            'type' => $value->type,
+                            'academic_session_id' => $request->copy_academic_session_id,
+                            'created_at' => date("Y-m-d H:i:s")
+                        ];
+                        $query = $createConnection->table('teacher_allocations')->insert($arrayData);
+                    }
+                }
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Teacher Allocation has been successfully saved');
+                }
+            } else {
+                return $this->send500Error('No data available', ['error' => 'No data available']);
+            }
+        }
+    }
+    // copy class assign 
+    public function copyClassAssign(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'academic_session_id' => 'required',
+            'copy_academic_session_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // get acdemic data
+            $getAcademicData = $createConnection->table('subject_assigns as sa')
+                ->where([
+                    ['sa.type', '=', '0'],
+                    ['sa.academic_session_id', $request->academic_session_id]
+                ])
+                ->get();
+            if (count($getAcademicData) > 0) {
+                foreach ($getAcademicData as $value) {
+                    $old = $createConnection->table('subject_assigns')
+                        ->where(
+                            [
+                                ['class_id', $value->class_id],
+                                ['section_id', $value->section_id],
+                                ['subject_id', $value->subject_id],
+                                ['type', $value->type],
+                                ['academic_session_id', $request->copy_academic_session_id]
+                            ]
+                        )
+                        ->first();
+                    if (isset($old->id)) {
+                        $arrayData = [
+                            'updated_at' => date("Y-m-d H:i:s")
+                        ];
+                        $query = $createConnection->table('subject_assigns')->where('id', $old->id)->update($arrayData);
+                    } else {
+                        $arrayData = [
+                            'class_id' => $value->class_id,
+                            'section_id' => $value->section_id,
+                            'subject_id' => $value->subject_id,
+                            'teacher_id' => $value->teacher_id,
+                            'type' => $value->type,
+                            'academic_session_id' => $request->copy_academic_session_id,
+                            'created_at' => date("Y-m-d H:i:s")
+                        ];
+                        $query = $createConnection->table('subject_assigns')->insert($arrayData);
+                    }
+                }
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Class assign has been successfully saved');
+                }
+            } else {
+                return $this->send500Error('No data available', ['error' => 'No data available']);
+            }
+        }
+    }
+    // copy subject teacher assign 
+    public function copySubjectTeacherAssign(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'academic_session_id' => 'required',
+            'copy_academic_session_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // get acdemic data
+            $getAcademicData = $createConnection->table('subject_assigns as sa')
+                ->where([
+                    ['sa.teacher_id', '!=', '0'],
+                    ['sa.academic_session_id', $request->academic_session_id]
+                ])
+                ->get();
+            if (count($getAcademicData) > 0) {
+                foreach ($getAcademicData as $value) {
+                    $old = $createConnection->table('subject_assigns')
+                        ->where(
+                            [
+                                ['class_id', $value->class_id],
+                                ['section_id', $value->section_id],
+                                ['subject_id', $value->subject_id],
+                                ['teacher_id', $value->teacher_id],
+                                ['type', $value->type],
+                                ['academic_session_id', $request->copy_academic_session_id]
+                            ]
+                        )
+                        ->first();
+                    if (isset($old->id)) {
+                        $arrayData = [
+                            'updated_at' => date("Y-m-d H:i:s")
+                        ];
+                        $query = $createConnection->table('subject_assigns')->where('id', $old->id)->update($arrayData);
+                    } else {
+                        $arrayData = [
+                            'class_id' => $value->class_id,
+                            'section_id' => $value->section_id,
+                            'subject_id' => $value->subject_id,
+                            'teacher_id' => $value->teacher_id,
+                            'type' => $value->type,
+                            'academic_session_id' => $request->copy_academic_session_id,
+                            'created_at' => date("Y-m-d H:i:s")
+                        ];
+                        $query = $createConnection->table('subject_assigns')->insert($arrayData);
+                    }
+                }
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Teacher assign has been successfully saved');
+                }
+            } else {
+                return $this->send500Error('No data available', ['error' => 'No data available']);
+            }
+        }
+    }
+    // exam master exam setup copy
+    public function copyExamSetup(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'academic_session_id' => 'required',
+            'copy_academic_session_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // get acdemic data
+            $getAcademicData = $createConnection->table('exam')
+                ->where([
+                    ['academic_session_id', $request->academic_session_id]
+                ])
+                ->get();
+            if (count($getAcademicData) > 0) {
+                foreach ($getAcademicData as $value) {
+                    $old = $createConnection->table('exam')
+                        ->where(
+                            [
+                                ['name', $value->name],
+                                ['term_id', $value->term_id],
+                                ['academic_session_id', $request->copy_academic_session_id]
+                            ]
+                        )
+                        ->first();
+                    if (isset($old->id)) {
+                        $arrayData = [
+                            'updated_at' => date("Y-m-d H:i:s")
+                        ];
+                        $query = $createConnection->table('exam')->where('id', $old->id)->update($arrayData);
+                    } else {
+                        $arrayData = [
+                            'name' => $value->name,
+                            'term_id' => $value->term_id,
+                            'remarks' => $value->remarks,
+                            'academic_session_id' => $request->copy_academic_session_id,
+                            'created_at' => date("Y-m-d H:i:s")
+                        ];
+                        $query = $createConnection->table('exam')->insert($arrayData);
+                    }
+                }
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Exam has been successfully saved');
+                }
+            } else {
+                return $this->send500Error('No data available', ['error' => 'No data available']);
+            }
+        }
+    }
+    // exam master exam paper copy
+    public function copyExamPaper(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'academic_session_id' => 'required',
+            'copy_academic_session_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            // get acdemic data
+            $getAcademicData = $createConnection->table('exam_papers')
+                ->where([
+                    ['academic_session_id', $request->academic_session_id]
+                ])
+                ->get();
+            if (count($getAcademicData) > 0) {
+                foreach ($getAcademicData as $value) {
+                    $old = $createConnection->table('exam_papers')
+                        ->where(
+                            [
+                                ['class_id', $value->class_id],
+                                ['subject_id', $value->subject_id],
+                                ['paper_name', $value->paper_name],
+                                ['paper_type', $value->paper_type],
+                                ['grade_category', $value->grade_category],
+                                ['subject_weightage', $value->subject_weightage],
+                                ['notes', $value->notes],
+                                ['academic_session_id', $request->copy_academic_session_id]
+                            ]
+                        )
+                        ->first();
+                    if (isset($old->id)) {
+                        $arrayData = [
+                            'updated_at' => date("Y-m-d H:i:s")
+                        ];
+                        $query = $createConnection->table('exam_papers')->where('id', $old->id)->update($arrayData);
+                    } else {
+                        $arrayData = [
+                            'class_id' => $value->class_id,
+                            'subject_id' => $value->subject_id,
+                            'paper_name' => $value->paper_name,
+                            'paper_type' => $value->paper_type,
+                            'grade_category' => $value->grade_category,
+                            'subject_weightage' => $value->subject_weightage,
+                            'notes' => $value->notes,
+                            'academic_session_id' => $request->copy_academic_session_id,
+                            'created_at' => date("Y-m-d H:i:s")
+                        ];
+                        $query = $createConnection->table('exam_papers')->insert($arrayData);
+                    }
+                }
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Exam paper has been successfully saved');
+                }
+            } else {
+                return $this->send500Error('No data available', ['error' => 'No data available']);
+            }
         }
     }
 }

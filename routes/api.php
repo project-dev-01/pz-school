@@ -670,7 +670,24 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('parent_count', [ApiController::class, 'parentCount']);
     Route::get('teacher_count', [ApiController::class, 'teacherCount']);
 
-    
+
     Route::post('all_logout', [AuthController::class, 'allLogout']);
-    
+    // soap
+    Route::get('soap_category/list', [ApiControllerOne::class, 'soapCategoryList']);
+    Route::post('soap/soap_sub_category', [ApiControllerOne::class, 'soapSubCategory']);
+    Route::post('soap/filter_by_notes', [ApiControllerOne::class, 'soapFilterByNotes']);
+    // soap crud
+    Route::post('soap/add', [ApiControllerOne::class, 'soapAdd']);
+    Route::get('soap/list', [ApiControllerOne::class, 'getSoapList']);
+    Route::post('soap/soap-details', [ApiControllerOne::class, 'getSoapDetails']);
+    Route::post('soap/update', [ApiControllerOne::class, 'updateSoap']);
+    Route::post('soap/delete', [ApiControllerOne::class, 'deleteSoap']);
+
+    // copy academic to next session
+    Route::post('acdemic/copy/assign_teacher', [ApiControllerOne::class, 'acdemicCopyAssignTeacher']);
+    Route::post('acdemic/copy/grade_assign', [ApiControllerOne::class, 'copyClassAssign']);
+    Route::post('acdemic/copy/subject_teacher_assign', [ApiControllerOne::class, 'copySubjectTeacherAssign']);
+    // copy exam master to next session
+    Route::post('exam_master/copy/exam_setup', [ApiControllerOne::class, 'copyExamSetup']);
+    Route::post('exam_master/copy/exam_paper', [ApiControllerOne::class, 'copyExamPaper']);
 });

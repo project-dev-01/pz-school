@@ -1,5 +1,19 @@
 $(function () {
 
+    // change 
+    $('#changeClassName').on('change', function () {
+        var class_id = $(this).val();
+        $("#copyeditTimetableForm").find("#sectionID").empty();
+        $("#copyeditTimetableForm").find("#sectionID").append('<option value="">Select Class</option>');
+
+        $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#copyeditTimetableForm").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                });
+            }
+        }, 'json');
+    });
     // function selectRefresh() {
     //     console.log("sdsd")
     //     $('.main .select2-multiple').select2({
@@ -255,6 +269,9 @@ $(function () {
     // rules validation
     $("#copyeditTimetableForm").validate({
         rules: {
+            year: "required",
+            class_id: "required",
+            section_id: "required",
             semester_id: "required",
             session_id: "required"
         }
@@ -380,22 +397,22 @@ $(function () {
         if (start_time && end_time) {
             var semesterID = $("#semester_id").val();
             var day = $("#day").val();
-                $.post(classRoomCheck, {
-                    token: token,
-                    branch_id: branchID,
-                    start_time: start_time,
-                    end_time: end_time,
-                    semester_id: semesterID,
-                    day: day
-                }, function (res) {
-                    if (res.code == 200) {
-                        $.each(res.data, function(index, value) {
-                            color.find(".class_room option[value='"+value.class_room+"']").css('background-color', 'red');
-                            color.find(".class_room option[value='"+value.class_room+"']").css('color', 'white');
-                        });
-                        // $("option[value='myValue']").css('background-color', 'red');
-                    }
-                }, 'json');
+            $.post(classRoomCheck, {
+                token: token,
+                branch_id: branchID,
+                start_time: start_time,
+                end_time: end_time,
+                semester_id: semesterID,
+                day: day
+            }, function (res) {
+                if (res.code == 200) {
+                    $.each(res.data, function (index, value) {
+                        color.find(".class_room option[value='" + value.class_room + "']").css('background-color', 'red');
+                        color.find(".class_room option[value='" + value.class_room + "']").css('color', 'white');
+                    });
+                    // $("option[value='myValue']").css('background-color', 'red');
+                }
+            }, 'json');
         }
 
     });
@@ -407,67 +424,67 @@ $(function () {
         color.find(".class_room option").css('color', 'black');
         var start_time = $(this).closest('tr').find('.time_start_class').val();
         var end_time = $(this).closest('tr').find('.time_end_class').val();
-            
+
         if (start_time && end_time) {
             var semesterID = $("#semester_id").val();
             var day = $("#day").val();
-                $.post(classRoomCheck, {
-                    token: token,
-                    branch_id: branchID,
-                    start_time: start_time,
-                    end_time: end_time,
-                    semester_id: semesterID,
-                    day: day
-                }, function (res) {
-                    console.log('da',res)
-                    if (res.code == 200) {
-                        $.each(res.data, function(index, value) {
-                            color.find(".class_room option[value='"+value.class_room+"']").css('background-color', 'red');
-                            color.find(".class_room option[value='"+value.class_room+"']").css('color', 'white');
+            $.post(classRoomCheck, {
+                token: token,
+                branch_id: branchID,
+                start_time: start_time,
+                end_time: end_time,
+                semester_id: semesterID,
+                day: day
+            }, function (res) {
+                console.log('da', res)
+                if (res.code == 200) {
+                    $.each(res.data, function (index, value) {
+                        color.find(".class_room option[value='" + value.class_room + "']").css('background-color', 'red');
+                        color.find(".class_room option[value='" + value.class_room + "']").css('color', 'white');
 
-                            
-                            color.find(".teacher option[value='"+value.teacher+"']").css('background-color', 'red');
-                            color.find(".teacher option[value='"+value.teacher+"']").css('color', 'white');
-                        });
-                        // $("option[value='myValue']").css('background-color', 'red');
-                    }
-                }, 'json');
+
+                        color.find(".teacher option[value='" + value.teacher + "']").css('background-color', 'red');
+                        color.find(".teacher option[value='" + value.teacher + "']").css('color', 'white');
+                    });
+                    // $("option[value='myValue']").css('background-color', 'red');
+                }
+            }, 'json');
         }
-            
+
     });
 
     $(document).on('click', ".select2-selection__rendered", function (e) {
         e.preventDefault();
-        
+
         var start_time = $(this).closest('tr').find('.time_start_class').val();
         var end_time = $(this).closest('tr').find('.time_end_class').val();
 
         if (start_time && end_time) {
             var semesterID = $("#semester_id").val();
             var day = $("#day").val();
-                $.post(classRoomCheck, {
-                    token: token,
-                    branch_id: branchID,
-                    start_time: start_time,
-                    end_time: end_time,
-                    semester_id: semesterID,
-                    day: day
-                }, function (res) {
-                    if (res.code == 200) {
-                        $.each(res.data, function(index, value) {
+            $.post(classRoomCheck, {
+                token: token,
+                branch_id: branchID,
+                start_time: start_time,
+                end_time: end_time,
+                semester_id: semesterID,
+                day: day
+            }, function (res) {
+                if (res.code == 200) {
+                    $.each(res.data, function (index, value) {
 
-                            var teacher = value.teacher_id;
-                            $('.select2-results__options li').each(function(){
-                                var id = this.id.substring(this.id.lastIndexOf('-') + 1);
-                                if(teacher==id) {
-                                    $("#"+this.id).css('background-color', 'red');
-                                    $("#"+this.id).css('color', 'white');
-                                }
-                            }); 
+                        var teacher = value.teacher_id;
+                        $('.select2-results__options li').each(function () {
+                            var id = this.id.substring(this.id.lastIndexOf('-') + 1);
+                            if (teacher == id) {
+                                $("#" + this.id).css('background-color', 'red');
+                                $("#" + this.id).css('color', 'white');
+                            }
                         });
-                        // $("option[value='myValue']").css('background-color', 'red');
-                    }
-                }, 'json');
+                    });
+                    // $("option[value='myValue']").css('background-color', 'red');
+                }
+            }, 'json');
         }
 
     });

@@ -335,7 +335,7 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="#sidebarForClassSec" data-toggle="collapse">
-                                     Grades & Classes <span class="menu-arrow"></span>
+                                    Grades & Classes <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarForClassSec">
                                     <ul class="nav-second-level">
@@ -943,6 +943,20 @@
                                         <li>
                                             <a href="{{ route('admin.academic_year')}}" class="nav-link {{ (request()->is('admin/academic_year*')) ? 'active' : '' }}">
                                                 <span>Academic Year </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#sidebarCopyOldData" data-toggle="collapse">
+                                    Copy Academic & Exam Masters <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarCopyOldData">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admin.acdemic.copy.assign_teacher')}}" class="nav-link {{ (request()->is('admin/acdemic/copy/assign_teacher')) ? 'active' : '' }}">
+                                                <span>Copy Assign Teacher </span>
                                             </a>
                                         </li>
                                     </ul>

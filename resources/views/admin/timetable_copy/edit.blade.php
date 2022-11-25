@@ -45,6 +45,39 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label for="btwyears">Academic year<span class="text-danger">*</span></label>
+                                    <select id="btwyears" class="form-control" name="year">
+                                        <option value="">Select Academic Year</option>
+                                        @forelse($academic_year_list as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="changeClassName">Copy To Grade<span class="text-danger">*</span></label>
+                                    <select id="changeClassName" class="form-control" name="class_id">
+                                        <option value="">Select Grade</option>
+                                        <!-- <option value="All">All</option> -->
+                                        @forelse ($classnames as $class)
+                                        <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="sectionID">Copy To Class<span class="text-danger">*</span></label>
+                                    <select id="sectionID" class="form-control" name="section_id">
+                                        <option value="">Select Class</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label for="semester_id">Copy To Semester<span class="text-danger">*</span></label>
                                     <select id="semester_id" class="form-control" name="semester_id">
                                         <option value="">Select Semester</option>
@@ -209,8 +242,8 @@
 					<i class="fas fa-plus-circle"></i> Add More				</button> -->
                         <!-- end row-->
                         @if($timetable)
-                        <input type="hidden" id="form_class_id" name="class_id" value="{{$details['class']['class_id']}}">
-                        <input type="hidden" id="form_section_id" name="section_id" value="{{$details['section']['section_id']}}">
+                        <!-- <input type="hidden" id="form_class_id" name="class_id" value="{{$details['class']['class_id']}}">
+                        <input type="hidden" id="form_section_id" name="section_id" value="{{$details['section']['section_id']}}"> -->
                         <!-- <input type="hidden" id="form_semester_id" name="semester_id" value="{{$details['semester']['semester_id']}}">
                         <input type="hidden" id="form_session_id" name="session_id" value="{{$details['session']['session_id']}}"> -->
                         <input type="hidden" id="form_day" name="day" value="{{$details['day']}}">
@@ -248,6 +281,7 @@
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var subjectByClass = "{{ route('admin.timetable.subject') }}";
     var timetableList = "{{ route('admin.timetable.copy') }}";
+    var teacherSectionUrl = "{{ config('constants.api.section_by_class') }}";
 </script>
 <script src="{{ asset('public/js/custom/timetable.js') }}"></script>
 @endsection

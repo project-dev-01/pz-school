@@ -2156,7 +2156,8 @@ class AdminController extends Controller
         ];
         // dd($data);
         $timetable = Helper::PostMethod(config('constants.api.timetable_edit'), $data);
-        // 
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         // dd($timetable);
         if ($timetable['code'] == "200") {
             return view(
@@ -2169,6 +2170,8 @@ class AdminController extends Controller
                     'hall_list' => $timetable['data']['exam_hall'],
                     'semester' => $semester['data'],
                     'session' => $session['data'],
+                    'academic_year_list' => $academic_year_list['data'],
+                    'classnames' => $getclass['data']
                 ]
             );
         } else {
@@ -2178,6 +2181,8 @@ class AdminController extends Controller
                     'timetable' => NULL,
                     'semester' => $semester['data'],
                     'session' => $session['data'],
+                    'academic_year_list' => $academic_year_list['data'],
+                    'classnames' => $getclass['data']
                 ]
             );
         }
@@ -2210,7 +2215,7 @@ class AdminController extends Controller
             'session_id' => $request->session_id,
             'day' => $request->day,
             'timetable' => $request->timetable,
-            'academic_session_id' => session()->get('academic_session_id')
+            'academic_session_id' => $request->year
 
         ];
         // dd($data);
@@ -5818,5 +5823,17 @@ class AdminController extends Controller
     {
         // dd($request);
         return Excel::download(new StudentAttendanceExport(1, $request->class, $request->section, $request->subject, $request->semester, $request->session, $request->date), 'Student_Attendance.xlsx');
+    }
+    // copy academic
+    public function acdemicCopyAssignTeacher(Request $request)
+    {
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        // dd($semester);
+        return view(
+            'admin.copy_acdemic_exam_module.assign_teacher',
+            [
+                'academic_year_list' => $academic_year_list['data'],
+            ]
+        );
     }
 }

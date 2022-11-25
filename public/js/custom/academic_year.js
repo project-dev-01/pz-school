@@ -24,7 +24,6 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
-                    console.log(data)
                     if (data.code == 200) {
                         $('#academic-year-table').DataTable().ajax.reload(null, false);
                         $('.academicYearModal').modal('hide');

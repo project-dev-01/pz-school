@@ -628,6 +628,14 @@ return [
          'teacher_count' => $url.'/teacher_count',
  
          //all logout
-         'all_logout' => $url.'/all_logout',    ]
+         'all_logout' => $url.'/all_logout',
+         // copy academic to next session
+         'acdemic_copy_assign_teacher' => $url.'/acdemic/copy/assign_teacher',
+         'acdemic_copy_grade_assign' => $url.'/acdemic/copy/grade_assign',
+         'acdemic_copy_subject_teacher_assign' => $url.'/acdemic/copy/subject_teacher_assign',
+         // copy exam master to next session
+         'exam_master_copy_exam_setup' => $url.'/exam_master/copy/exam_setup',
+         'exam_master_copy_exam_paper' => $url.'/exam_master/copy/exam_paper'
+        ]
 
 ];

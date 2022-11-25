@@ -34,7 +34,7 @@ class CreateStaffsTable extends Migration
             $table->string('city');
             $table->string('state');
             $table->string('country');
-            $table->string('post_code');
+            $table->string('post_code')->nullable();
             $table->text('present_address');
             $table->text('permanent_address');
             $table->string('mobile_no');
