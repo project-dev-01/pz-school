@@ -83,9 +83,8 @@
                         </ul>
                     </div>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="{{ route('users.user')}}" class="nav-link {{ (request()->is('super_admin/users*')) ? 'active' : '' }}">
-                        <!--<i data-feather="user" class="icon-dual"></i>-->
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_183_594)">
                                 <path d="M11.985 18.6499C10.3018 18.6499 8.61859 18.6499 6.9337 18.6499C6.75696 18.6497 6.58212 18.6119 6.42004 18.5388C6.29254 18.4786 6.18516 18.3805 6.11157 18.2569C6.03798 18.1333 6.0015 17.9897 6.00676 17.8445C5.99337 17.2943 6.00676 16.7424 6.00676 16.1922C6.00676 15.2966 5.98166 14.3993 6.00676 13.5055C6.05528 12.2489 6.68775 11.3828 7.78033 10.8691C8.0807 10.7294 8.40653 10.6583 8.73571 10.6608C10.9359 10.6608 13.1362 10.6452 15.3364 10.6608C15.9276 10.6752 16.4977 10.8913 16.9587 11.2757C17.4196 11.66 17.7456 12.1911 17.8863 12.7869C17.952 13.0636 17.9863 13.3473 17.9884 13.6322C17.9984 14.9877 17.9884 16.345 17.9884 17.7005C17.9884 18.0736 17.8779 18.3947 17.5349 18.5492C17.3795 18.6152 17.2126 18.6471 17.0447 18.6429C15.3632 18.6533 13.6732 18.6499 11.985 18.6499Z" fill="#C4C7D2" />
@@ -104,7 +103,7 @@
 
                         <span> User List </span>
                     </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="{{ route('super_admin.schoolcrm.app.form')}}" target=”_blank” class="nav-link {{ (request()->is('application-form')) ? 'active' : '' }}">
 
@@ -865,12 +864,6 @@
                     </div>
                 </li>
                 <li>
-                    <a href="{{ route('admin.leave_type')}}" target=”_blank” class="nav-link {{ (request()->is('admin/leave_type*')) ? 'active' : '' }}">
-                        <i class="far fa-comments"></i>
-                        <span> Leave Type </span>
-                    </a>
-                </li>
-                <li>
                     <a href="{{ route('admin.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('admin/forum*')) ? 'active' : '' }}">
                         <!--<i class="far fa-comments"></i>--->
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -943,6 +936,11 @@
                                         <li>
                                             <a href="{{ route('admin.academic_year')}}" class="nav-link {{ (request()->is('admin/academic_year*')) ? 'active' : '' }}">
                                                 <span>Academic Year </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.leave_type')}}" class="nav-link {{ (request()->is('admin/leave_type*')) ? 'active' : '' }}">
+                                                <span>Leave Type </span>
                                             </a>
                                         </li>
                                     </ul>

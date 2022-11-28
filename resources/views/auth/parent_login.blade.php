@@ -62,6 +62,7 @@
                         <div class="form">
                             <form id="LoginAuth" action="{{ route('parent.authenticate') }}" method="post">
                                 <h1 class="welcomeback">Welcome back,</h1>
+                                <input type="hidden" name="branch_id" value="1">
                                 @if ( Session::get('success'))
                                 <div class="alert alert-success">
                                     {{ Session::get('success') }}

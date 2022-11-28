@@ -25,13 +25,12 @@ class AuthController extends BaseController
 
     public function authenticate(Request $request)
     {
-        $email = $request->only('email');
-        // dd($email);
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('email', 'password', 'branch_id');
         //valid credential
         $validator = Validator::make($credentials, [
             'email' => 'required|email',
-            'password' => 'required|string|min:6|max:50'
+            'password' => 'required|string|min:6|max:50',
+            'branch_id' => 'required'
         ]);
         //Send failed response if request is not valid
         if ($validator->fails()) {
@@ -44,24 +43,31 @@ class AuthController extends BaseController
             $existUser = $this->existUser($request->email);
             if (!$existUser) {
                 if (!$token = JWTAuth::attempt($credentials)) {
-                    $getUser = User::where('email', $request->email)->first();
-                    $login_attempt = $getUser->login_attempt;
-                    if ($login_attempt <= 2) {
-                        $login_attempt = ($login_attempt + 1);
-                        $user = User::find($getUser->id);
-                        $user->login_attempt = $login_attempt;
-                        if ($login_attempt > 2) {
-                            $user->status = '1';
-                        }
-                        $user->save();
-                        $left = (3 - $login_attempt);
-                        if ($left == 0) {
-                            return $this->send400Error("Your account has been locked because your password is incorrect. Please contact the admin", ["error" => "Your account has been locked because your password is incorrect. Please contact the admin"]);
+                    $getUser = User::where([['email', '=', $request->email], ['branch_id', '=', $request->branch_id]])->first();
+                    // dd($getUser);
+                    // $getUser = User::where('email', $request->email)->first();
+                    $login_attempt = isset($getUser->login_attempt) ? $getUser->login_attempt : null;
+                    // dd($login_attempt);
+                    if (isset($login_attempt)) {
+                        if ($login_attempt <= 2) {
+                            $login_attempt = ($login_attempt + 1);
+                            $user = User::find($getUser->id);
+                            $user->login_attempt = $login_attempt;
+                            if ($login_attempt > 2) {
+                                $user->status = '1';
+                            }
+                            $user->save();
+                            $left = (3 - $login_attempt);
+                            if ($left == 0) {
+                                return $this->send400Error("Your account has been locked because your password is incorrect. Please contact the admin", ["error" => "Your account has been locked because your password is incorrect. Please contact the admin"]);
+                            } else {
+                                return $this->send400Error("The password is incorrect and you only have $left attempts left", ["error" => "The password is incorrect and you only have $left attempts left"]);
+                            }
                         } else {
-                            return $this->send400Error("The password is incorrect and you only have $left attempts left", ["error" => "The password is incorrect and you only have $left attempts left"]);
+                            return $this->send500Error('Your account has been locked after more than 3 attempts. Please contact the admin', ['error' => 'Your account has been locked after more than 3 attempts. Please contact the admin']);
                         }
                     } else {
-                        return $this->send500Error('Your account has been locked after more than 3 attempts. Please contact the admin', ['error' => 'Your account has been locked after more than 3 attempts. Please contact the admin']);
+                        return $this->send500Error('The invalid credentials', ['error' => 'The invalid credential']);
                     }
                 }
             } else {
@@ -237,11 +243,10 @@ class AuthController extends BaseController
             //     $message->to('rajeshsakthi645@gmail.com', 'members')->subject('Password Reset');
             //     $message->from('rajeshsakthi645@gmail.com', 'Password Reset');
             // });
-            Mail::send('auth.mail', $data, function($message) use($email) {
-                $message->to('rajesh@aibots.my', 'members')->subject
-                    ('Password Reset');
-                $message->from('rajesh@aibots.my','Password Reset');
-                }); 
+            Mail::send('auth.mail', $data, function ($message) use ($email) {
+                $message->to('rajesh@aibots.my', 'members')->subject('Password Reset');
+                $message->from('rajesh@aibots.my', 'Password Reset');
+            });
             return $user;
         } else {
             return false;
@@ -533,7 +538,7 @@ class AuthController extends BaseController
             $ipaddress = 'UNKNOWN';
 
         return $ipaddress;
-    }     
+    }
     public function allLogout(Request $request)
     {
         //valid credential
@@ -545,19 +550,18 @@ class AuthController extends BaseController
             return $this->send422Error('Validation error.', ['error' => $validator->messages()]);
         }
         $user = auth()->user();
-        if($user['remember_token'] != $request->token) {
+        if ($user['remember_token'] != $request->token) {
             //Request is validated, do logout 
             try {
                 // JWTAuth::invalidate($request->token);
-    
+
                 $success = [];
                 return $this->successResponse($success, 'User has been logged out successfully');
             } catch (JWTException $exception) {
                 return $this->send500Error('Sorry, user cannot be logged out', ['error' => 'Could not create token']);
             }
-        }else {
+        } else {
             return $this->send500Error('Sorry, user cannot be logged out', ['error' => 'Could not create token']);
-        }       
-        
+        }
     }
 }

@@ -233,6 +233,7 @@ class AuthController extends Controller
 
         $response = Http::post(config('constants.api.login'), [
             'email' => $request->email,
+            'branch_id' => $request->branch_id,
             'password' => $request->password,
         ]);
 
@@ -267,6 +268,7 @@ class AuthController extends Controller
 
         $response = Http::post(config('constants.api.login'), [
             'email' => $request->email,
+            'branch_id' => $request->branch_id,
             'password' => $request->password,
         ]);
 
@@ -300,6 +302,7 @@ class AuthController extends Controller
 
         $response = Http::post(config('constants.api.login'), [
             'email' => $request->email,
+            'branch_id' => $request->branch_id,
             'password' => $request->password,
         ]);
 
@@ -333,6 +336,7 @@ class AuthController extends Controller
 
         $response = Http::post(config('constants.api.login'), [
             'email' => $request->email,
+            'branch_id' => $request->branch_id,
             'password' => $request->password,
         ]);
 
@@ -366,6 +370,7 @@ class AuthController extends Controller
 
         $response = Http::post(config('constants.api.login'), [
             'email' => $request->email,
+            'branch_id' => $request->branch_id,
             'password' => $request->password,
         ]);
 
@@ -609,6 +614,7 @@ class AuthController extends Controller
     // set session common
     public function sessionCommon($req, $userDetails, $roleID)
     {
+        // dd($userDetails);
         $req->session()->put('user_id', $userDetails['data']['user']['id']);
         $req->session()->put('ref_user_id', $userDetails['data']['user']['user_id']);
         $req->session()->put('role_id', $roleID);
@@ -626,7 +632,11 @@ class AuthController extends Controller
         // greeting session 
         $req->session()->put('greetting_id', 1);
         // set academic session id
-        $req->session()->put('academic_session_id', $userDetails['data']['academicSession']['year_id']);
+        if (isset($userDetails['data']['academicSession'])) {
+            $req->session()->put('academic_session_id', $userDetails['data']['academicSession']['year_id']);
+        } else {
+            $req->session()->put('academic_session_id', 0);
+        }
         // dd($userDetails['data']['StudentID'][0]['id']);
         if (isset($userDetails['data']['StudentID'])) {
             $req->session()->put('student_id', $userDetails['data']['StudentID'][0]['id']);
