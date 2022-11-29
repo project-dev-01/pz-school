@@ -957,6 +957,26 @@
                                                 <span>Copy Assign Teacher </span>
                                             </a>
                                         </li>
+                                        <li>
+                                            <a href="{{ route('admin.acdemic.copy.grade_assign')}}" class="nav-link {{ (request()->is('admin/acdemic/copy/grade_assign')) ? 'active' : '' }}">
+                                                <span>Copy Grade Assign </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.acdemic.copy.subject_teacher_assign')}}" class="nav-link {{ (request()->is('admin/acdemic/copy/subject_teacher_assign')) ? 'active' : '' }}">
+                                                <span>Copy Subject Teacher Assign </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.exam_master.copy.exam_setup')}}" class="nav-link {{ (request()->is('admin/exam_master/copy/exam_setup')) ? 'active' : '' }}">
+                                                <span>Copy Exam Setup </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.exam_master.copy.exam_paper')}}" class="nav-link {{ (request()->is('admin/exam_master/copy/exam_paper')) ? 'active' : '' }}">
+                                                <span>Copy Exam Paper </span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>

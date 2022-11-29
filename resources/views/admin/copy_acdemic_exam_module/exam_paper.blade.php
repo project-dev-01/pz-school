@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Copy Assign Teacher')
+@section('title','Copy Exam Paper')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -10,7 +10,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                 </div>
-                <h4 class="page-title">Copy Assign Teacher</h4>
+                <h4 class="page-title">Copy Exam Paper</h4>
             </div>
         </div>
     </div>
@@ -21,7 +21,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv"> The Next Session Was Copy Assign Teacher<h4>
+                        <h4 class="navv"> The Next Session Was Copy Exam Paper<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -76,7 +76,7 @@
 @endsection
 @section('scripts')
 <script>
-    var copySessionUrl = "{{ config('constants.api.acdemic_copy_assign_teacher') }}";
+    var copySessionUrl = "{{ config('constants.api.exam_master_copy_exam_paper') }}";
 </script>
 <script src="{{ asset('public/js/custom/copy_next_session_aca_exm.js') }}"></script>
 @endsection

@@ -639,6 +639,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('global_setting/delete', [AdminController::class, 'deleteGlobalSetting'])->name('admin.global_setting.delete');
         // copy acdemic and exam master one page to another page
         Route::get('acdemic/copy/assign_teacher', [AdminController::class, 'acdemicCopyAssignTeacher'])->name('admin.acdemic.copy.assign_teacher');
+        Route::get('acdemic/copy/grade_assign', [AdminController::class, 'acdemicCopyGradeAssign'])->name('admin.acdemic.copy.grade_assign');
+        Route::get('acdemic/copy/subject_teacher_assign', [AdminController::class, 'acdemicCopySubjectTeacherAssign'])->name('admin.acdemic.copy.subject_teacher_assign');
+        Route::get('exam_master/copy/exam_setup', [AdminController::class, 'examMasterCopyExamSetup'])->name('admin.exam_master.copy.exam_setup');
+        Route::get('exam_master/copy/exam_paper', [AdminController::class, 'examMasterCopyExamPaper'])->name('admin.exam_master.copy.exam_paper');
     });
 });
 // admin routes end

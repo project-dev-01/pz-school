@@ -5828,9 +5828,48 @@ class AdminController extends Controller
     public function acdemicCopyAssignTeacher(Request $request)
     {
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
-        // dd($semester);
         return view(
             'admin.copy_acdemic_exam_module.assign_teacher',
+            [
+                'academic_year_list' => $academic_year_list['data'],
+            ]
+        );
+    }
+    public function acdemicCopyGradeAssign(Request $request)
+    {
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        return view(
+            'admin.copy_acdemic_exam_module.grade_assign',
+            [
+                'academic_year_list' => $academic_year_list['data'],
+            ]
+        );
+    }
+    public function acdemicCopySubjectTeacherAssign(Request $request)
+    {
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        return view(
+            'admin.copy_acdemic_exam_module.subject_teacher_assign',
+            [
+                'academic_year_list' => $academic_year_list['data'],
+            ]
+        );
+    }
+    public function examMasterCopyExamSetup(Request $request)
+    {
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        return view(
+            'admin.copy_acdemic_exam_module.exam_setup',
+            [
+                'academic_year_list' => $academic_year_list['data'],
+            ]
+        );
+    }
+    public function examMasterCopyExamPaper(Request $request)
+    {
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        return view(
+            'admin.copy_acdemic_exam_module.exam_paper',
             [
                 'academic_year_list' => $academic_year_list['data'],
             ]
