@@ -71,7 +71,8 @@ $(document).ready(function () {
             prev: "Prev",
             next: "Next"
         },
-        defaultView: window.mobilecheck() ? "listMonth" : "dayGridMonth",
+        // defaultView: window.mobilecheck() ? "timeGridWeek" : "dayGridMonth",
+        defaultView: "timeGridWeek",
         displayEventTime: false,
         handleWindowResize: !0,
         // height: (window).height() - 200,

@@ -404,7 +404,7 @@ class AuthController extends Controller
     public function authenticateSA(Request $request)
     {
 
-        $response = Http::post(config('constants.api.login'), [
+        $response = Http::post(config('constants.api.loginSA'), [
             'email' => $request->email,
             'password' => $request->password,
         ]);

@@ -424,6 +424,7 @@ class ApiController extends BaseController
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
             'name' => 'required',
+            'short_name' => 'required',
             'branch_id' => 'required'
         ]);
 
@@ -439,6 +440,7 @@ class ApiController extends BaseController
                 // insert data
                 $query = $createConnection->table('classes')->insert([
                     'name' => $request->name,
+                    'short_name' => $request->short_name,
                     'name_numeric' => $request->name_numeric,
                     'created_at' => date("Y-m-d H:i:s")
                 ]);
@@ -497,6 +499,7 @@ class ApiController extends BaseController
         $validator = \Validator::make($request->all(), [
             'token' => 'required',
             'name' => 'required',
+            'short_name' => 'required',
             'branch_id' => 'required'
         ]);
 
@@ -513,6 +516,7 @@ class ApiController extends BaseController
                 // update data
                 $query = $staffConn->table('classes')->where('id', $class_id)->update([
                     'name' => $request->name,
+                    'short_name' => $request->short_name,
                     'name_numeric' => $request->name_numeric,
                     'updated_at' => date("Y-m-d H:i:s")
                 ]);
@@ -4196,6 +4200,9 @@ class ApiController extends BaseController
                 }
                 $bulkID = NuLL;
                 // return $break;
+                // if(isset($break_type)){
+
+                // }
                 $this->addCalendorTimetable($request, $table, $getObjRow, $insertOrUpdateID, $bulkID);
             }
             $success = [];
@@ -7665,7 +7672,8 @@ class ApiController extends BaseController
                     'sb.subject_color_calendor as color',
                     'sb.name as subject_name',
                     // 'sb.name as title',
-                    DB::raw('CONCAT(c.name," (",s.name,") " " - ", sb.short_name) as title'),
+                    // DB::raw('CONCAT(c.name," (",s.name,") " " - ", sb.short_name) as title'),
+                    DB::raw('CONCAT(c.short_name," (",s.name,") " " - ", sb.short_name) as title'),
                     'st.first_name as teacher_name',
                     'dr.report',
                     'ev.id as event_holiday_id'
@@ -8155,8 +8163,8 @@ class ApiController extends BaseController
                 ->whereRaw('cl.start between "' . $start . '" and "' . $end . '"')
                 ->whereRaw('cl.end between "' . $start . '" and "' . $end . '"')
 
-                ->where('cl.sem_id', $student->semester_id)
-                ->where('cl.session_id', $student->session_id)
+                // ->where('cl.sem_id', $student->semester_id)
+                // ->where('cl.session_id', $student->session_id)
                 ->where('cl.academic_session_id', $student->academic_session_id)
                 ->whereNull('ev.id')
                 // ->groupBy('cl.subject_id')
@@ -8251,8 +8259,7 @@ class ApiController extends BaseController
                 $startDate->modify('+1 day');
             }
         }
-
-        if (isset($row['teacher']) && !isset($row['break'])) {
+        if (isset($row['teacher']) && !isset($row['break']) && isset($bulkID)) {
             while ($startDate <= $endDate) {
                 if ($startDate->format('w') == $day) {
                     $start = $startDate->format('Y-m-d') . " " . $row['time_start'];

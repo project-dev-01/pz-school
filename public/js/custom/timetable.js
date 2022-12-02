@@ -279,8 +279,6 @@ $(function () {
     $('#copyeditTimetableForm').on('submit', function (e) {
         e.preventDefault();
         var valid = $("#copyeditTimetableForm").valid();
-        console.log("valid");
-        console.log(valid);
         if (valid === true) {
             var form = this;
             $("#overlay").fadeIn(300);

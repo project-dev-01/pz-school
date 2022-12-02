@@ -320,7 +320,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         // Settings
         Route::get('settings', [AdminController::class, 'settings'])->name('admin.settings');
         Route::get('settings/logo', [AdminController::class, 'settingsLogo'])->name('admin.settings.logo');
-        Route::post('change-password', [SuperAdminController::class, 'changePassword'])->name('settings.changePassword');
+        Route::post('change-password', [AdminController::class, 'changeNewPassword'])->name('admin.settings.changeNewPassword');
         Route::post('update-profile-info', [SuperAdminController::class, 'updateProfileInfo'])->name('settings.updateProfileInfo');
         Route::post('update-setting-session', [CommonController::class, 'updateSettingSession'])->name('settings.updateSettingSession');
         Route::post('settings-update-logo', [CommonController::class, 'updateSettingSessionLogo'])->name('settings.update.logo');

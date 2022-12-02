@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('login', [AuthController::class, 'authenticate']);
+Route::post('loginSA', [AuthController::class, 'authenticateSA']);
 Route::post('login_branch', [AuthController::class, 'authenticateWithBranch']);
 Route::post('reset_password', [AuthController::class, 'resetPassword']);
 Route::post('reset_password_validation', [AuthController::class, 'resetPasswordValidation']);
@@ -672,8 +673,13 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
 
     Route::post('all_logout', [AuthController::class, 'allLogout']);
-    // soap
+    // soap category
+    Route::post('soap_category/add', [ApiControllerOne::class, 'soapCategoryAdd']);
     Route::get('soap_category/list', [ApiControllerOne::class, 'soapCategoryList']);
+    Route::post('soap_category/row-details', [ApiControllerOne::class, 'soapCategoryRow']);
+    Route::post('soap_category/update', [ApiControllerOne::class, 'updateSoapCategory']);
+    Route::post('soap_category/delete', [ApiControllerOne::class, 'deleteSoapCategory']);
+    // soap
     Route::post('soap/soap_sub_category', [ApiControllerOne::class, 'soapSubCategory']);
     Route::post('soap/filter_by_notes', [ApiControllerOne::class, 'soapFilterByNotes']);
     // soap crud

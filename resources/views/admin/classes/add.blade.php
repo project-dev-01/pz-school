@@ -14,8 +14,12 @@
                         <input type="text" id="className" name="name" class="form-control" placeholder="Enter Grade Name">
                     </div>
                     <div class="form-group">
-                        <label for="name_numeric">Grade Numeric<span class="text-danger">*</span></label>
+                        <label for="name_numeric">Grade Numeric</label>
                         <input type="text" id="nameNumeric" name="name_numeric" class="form-control" placeholder="Enter Grade Numeric">
+                    </div>
+                    <div class="form-group">
+                        <label for="short_name">Short Name<span class="text-danger">*</span></label>
+                        <input type="text" id="short_name" name="short_name" class="form-control" placeholder="Enter Short Name">
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>

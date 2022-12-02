@@ -3,7 +3,8 @@ $(function () {
     // rules validation
     $("#classSubmit").validate({
         rules: {
-            name: "required"
+            name: "required",
+            short_name: "required"
         }
     });
     // add classes
@@ -13,10 +14,12 @@ $(function () {
         if (classValid === true) {
             var className = $("#className").val();
             var nameNumeric = $("#nameNumeric").val();
+            var short_name = $("#short_name").val();
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
             formData.append('name', className);
+            formData.append('short_name', short_name);
             formData.append('name_numeric', nameNumeric);
             $.ajax({
                 url: classesAddUrl,
@@ -55,6 +58,7 @@ $(function () {
         }, function (data) {
             $('.editClassModal').find('input[name="class_id"]').val(data.data.id);
             $('.editClassModal').find('input[name="name"]').val(data.data.name);
+            $('.editClassModal').find('input[name="short_name"]').val(data.data.short_name);
             $('.editClassModal').find('input[name="name_numeric"]').val(data.data.name_numeric);
             $('.editClassModal').modal('show');
         }, 'json');
@@ -63,7 +67,8 @@ $(function () {
     // update class
     $("#classesUpdateForm").validate({
         rules: {
-            name: "required"
+            name: "required",
+            short_name: "required"
         }
     });
     // update class
@@ -74,11 +79,13 @@ $(function () {
             var classID = $("#classID").val();
             var editclassName = $("#editclassName").val();
             var editnameNumeric = $("#editnameNumeric").val();
+            var edit_short_name = $("#edit_short_name").val();
             var formData = new FormData();
             formData.append('class_id', classID);
             formData.append('token', token);
             formData.append('branch_id', branchID);
             formData.append('name', editclassName);
+            formData.append('short_name', edit_short_name);
             formData.append('name_numeric', editnameNumeric);
 
             $.ajax({

@@ -292,6 +292,35 @@ class AdminController extends Controller
     {
         return view('admin.settings.index');
     }
+    // change password
+    public function changeNewPassword(Request $request)
+    {
+        //Validate form
+        $validator = \Validator::make($request->all(), [
+            'old' => "required",
+            'password' => [
+                'required',
+                'min:8',
+                'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+                // 'confirmed'
+            ],
+            'confirmed' => 'required|same:password|min:8'
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $request->id,
+                'oldpassword' => $request->oldpassword,
+                'newpassword' => $request->newpassword,
+                'cnewpassword' => $request->cnewpassword
+            ];
+            // dd($data);
+            $response = Helper::PostMethod(config('constants.api.change_password'), $data);
+            return $response;
+        }
+    }
     public function settingsLogo()
     {
         return view('admin.settings.logo');

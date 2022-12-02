@@ -23,6 +23,42 @@ class AuthController extends BaseController
 {
     //
 
+    public function authenticateSA(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+        //valid credential
+        $validator = Validator::make($credentials, [
+            'email' => 'required|email',
+            'password' => 'required|string|min:6|max:50'
+        ]);
+        //Send failed response if request is not valid
+        if ($validator->fails()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->messages()]);
+        }
+        // dd($credentials);
+        //Request is validated
+        //Crean token
+        try {
+            $existUser = $this->existUser($request->email);
+            if (!$existUser) {
+                if (!$token = JWTAuth::attempt($credentials)) {
+                    return $this->send500Error('The invalid credentials', ['error' => 'The invalid credential']);
+                }
+            } else {
+                return $this->send500Error('The email given is invalid', ['error' => 'The email given is invalid']);
+            }
+        } catch (JWTException $e) {
+            // return $credentials;
+            return $this->send500Error('Could not create token.', ['error' => 'Could not create token']);
+        }
+        // Auth::logoutOtherDevices($request->password);
+        $user = auth()->user();
+        User::where('id', $user->id)->update(['remember_token' => $token]);
+        $success['token'] = $token;
+        $success['user'] = $user;
+        $success['role_name'] = $user->role->role_name;
+        return $this->successResponse($success, 'User signed in successfully');
+    }
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password', 'branch_id');

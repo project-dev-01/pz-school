@@ -249,8 +249,8 @@
 
                                     @forelse ($get_to_do_list_dashboard['today'] as $today)
                                     <div class="collapse show" id="todayTasks">
-                                        <div class="card shadow-none">
-                                            <div class="card-body" id="task-list-one">
+                                        <div class="card mb-0 shadow-none">
+                                            <div class="card-body pb-0" id="task-list-one">
                                                 <!-- task -->
                                                 <div class="row justify-content-sm-between task-item">
                                                     <div class="col-lg-6 mb-2">
@@ -263,8 +263,15 @@
                                                     </div> <!-- end col -->
                                                     <div class="col-lg-6">
                                                         <div class="d-sm-flex justify-content-between">
+                                                            <div>
+                                                                <img src="{{ asset('public/images/users/12.jpg') }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
+                                                            </div>
                                                             <div class="mt-3 mt-sm-0">
-                                                                <ul class="list-inline font-13 text-sm-right">
+                                                                <ul class="list-inline font-13 text-sm-center">
+                                                                    <li class="list-inline-item" id="comments{{ $today['id'] }}">
+                                                                        <i class='mdi mdi-comment-text-multiple-outline font-16 mr-1'></i>
+                                                                        {{$today['total_comments']}}
+                                                                    </li>
                                                                     <li class="list-inline-item pr-1">
                                                                         <i class='mdi mdi-calendar-month-outline font-16 mr-1'></i>
                                                                         <!-- Today 10am -->
@@ -274,10 +281,7 @@
                                                                                 <i class='mdi mdi-tune font-16 mr-1'></i>
                                                                                 3/7
                                                                             </li> -->
-                                                                    <li class="list-inline-item" id="comments{{ $today['id'] }}">
-                                                                        <i class='mdi mdi-comment-text-multiple-outline font-16 mr-1'></i>
-                                                                        {{$today['total_comments']}}
-                                                                    </li>
+
                                                                     <li class="list-inline-item mt-3 mt-sm-0">
                                                                         @if($today['priority'] == "Low")
                                                                         <span class="badge badge-soft-success p-1">{{$today['priority']}}</span>
@@ -311,9 +315,9 @@
                                             </h5>
                                         </a>
                                         @forelse ($get_to_do_list_dashboard['upcoming'] as $upcoming)
-                                        <div class="collapse show" id="upcomingTasks">
-                                            <div class="card shadow-none">
-                                                <div class="card-body" id="task-list-two">
+                                        <div class="collapse" id="upcomingTasks">
+                                            <div class="card mb-0 shadow-none">
+                                                <div class="card-body pb-0" id="task-list-two">
                                                     <!-- task -->
                                                     <div class="row justify-content-sm-between task-item">
                                                         <div class="col-lg-6 mb-2">
@@ -326,11 +330,18 @@
                                                         </div> <!-- end col -->
                                                         <div class="col-lg-6">
                                                             <div class="d-sm-flex justify-content-between">
+                                                                <div>
+                                                                    <img src="{{ asset('public/images/users/12.jpg') }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
+                                                                </div>
 
                                                                 <div class="mt-3 mt-sm-0">
-                                                                    <ul class="list-inline font-13 text-sm-right">
+                                                                    <ul class="list-inline font-13 text-sm-center">
+                                                                        <li class="list-inline-item" id="comments{{ $upcoming['id'] }}">
+                                                                            <i class='mdi mdi-comment-text-multiple-outline font-16 mr-1'></i>
+                                                                            {{$upcoming['total_comments']}}
+                                                                        </li>
                                                                         <li class="list-inline-item pr-1">
-                                                                            <i class='mdi mdi-calendar-month-outline font-16 mr-1'></i>
+                                                                            <i class='mdi mdi-calendar-month-outline font-16'></i>
                                                                             {{ date('j F y g a', strtotime($upcoming['due_date']));}}
 
                                                                         </li>
@@ -338,10 +349,7 @@
                                                                                     <i class='mdi mdi-tune font-16 mr-1'></i>
                                                                                     1/12
                                                                                 </li> -->
-                                                                        <li class="list-inline-item" id="comments{{ $upcoming['id'] }}">
-                                                                            <i class='mdi mdi-comment-text-multiple-outline font-16 mr-1'></i>
-                                                                            {{$upcoming['total_comments']}}
-                                                                        </li>
+
                                                                         <li class="list-inline-item mt-3 mt-sm-0">
                                                                             @if($upcoming['priority'] == "Low")
                                                                             <span class="badge badge-soft-success p-1">{{$upcoming['priority']}}</span>
@@ -377,7 +385,7 @@
                                             </h5>
                                         </a>
                                         @forelse ($get_to_do_list_dashboard['old'] as $old)
-                                        <div class="collapse show" id="pastTasks">
+                                        <div class="collapse" id="pastTasks">
                                             <div class="card mb-0 shadow-none">
                                                 <div class="card-body pb-0" id="task-list-two">
                                                     <!-- task -->
@@ -397,11 +405,11 @@
                                                                 </div>
                                                                 <div class="mt-3 mt-sm-0">
                                                                     <ul class="list-inline font-13 text-sm-center">
-                                                                        <li class="list-inline-item pr-1" id="comments{{ $old['id'] }}">
+                                                                        <li class="list-inline-item" id="comments{{ $old['id'] }}">
                                                                             <i class='mdi mdi-comment-text-multiple-outline font-16'></i>
                                                                             {{$old['total_comments']}}
                                                                         </li>
-                                                                        <li class="list-inline-item pr-2">
+                                                                        <li class="list-inline-item pr-1">
                                                                             <i class='mdi mdi-calendar-month-outline font-16'></i>
                                                                             {{ date('j F y g a', strtotime($old['due_date']));}}
 

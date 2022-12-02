@@ -6,6 +6,7 @@ return [
     'api' => [
         // login url
         'login' => $url.'/login',
+        'loginSA' => $url.'/loginSA',
         'login_branch' => $url.'/login_branch',
         // country,state,cities
         'countries' => $url.'/get-countries',

@@ -116,32 +116,32 @@
                     <div class="tab-pane" id="changePassword">
 
                         <!-- comment box -->
-                        <form action="#" method="POST" id="changeNewPassword" class="comment-area-box mt-2 mb-3">
+                        <form action="{{ route('admin.settings.changeNewPassword') }}" method="POST" id="changeNewPassword" class="comment-area-box mt-2 mb-3">
                             <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> Change Password</h5>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="name">Old Password</label>
-                                        <input type="password" class="form-control" id="oldpassword" name="oldpassword" placeholder="Old Password">
-                                        <span class="text-danger error-text oldpassword_error"></span>
+                                        <label for="old">Old Password</label>
+                                        <input type="password" class="form-control" id="old" name="old" placeholder="Old Password">
+                                        <span class="text-danger error-text old_error"></span>
                                     </div>
                                 </div>
                             </div> <!-- end row -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="newpassword">New Password</label>
-                                        <input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="New Password">
-                                        <span class="text-danger error-text newpassword_error"></span>
+                                        <label for="password">New Password (password atleast 8 characters and contain both numbers & letters/special characters.):</label>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="New Password">
+                                        <span class="text-danger error-text password_error"></span>
                                     </div>
                                 </div>
                             </div> <!-- end row -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="cnewpassword">Confirm New Password</label>
-                                        <input type="password" class="form-control" id="cnewpassword" name="cnewpassword" placeholder="Confirm New Password">
-                                        <span class="text-danger error-text cnewpassword_error"></span>
+                                        <label for="confirmed">Confirm New Password</label>
+                                        <input type="password" class="form-control" id="confirmed" name="confirmed" placeholder="Confirm New Password">
+                                        <span class="text-danger error-text confirmed_error"></span>
                                     </div>
                                 </div>
                             </div> <!-- end row -->
@@ -164,3 +164,6 @@
     <!-- end row-->
 
 </div> <!-- container -->@endsection
+@section('scripts')
+<script src="{{ asset('public/js/custom/admin_settings.js') }}"></script>
+@endsection
