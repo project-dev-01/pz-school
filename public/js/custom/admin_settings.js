@@ -14,34 +14,40 @@ $(function () {
                 $(document).find('span.error-text').text('');
             },
             success: function (data) {
+                console.log("-$$$$-");
+                console.log(data);
                 if (data.status == 0) {
                     $.each(data.error, function (prefix, val) {
                         $('span.' + prefix + '_error').text(val[0]);
                     });
                 } else {
+                    console.log("----");
+                    console.log(data);
+
                     // $('.user_name').each(function () {
                     //     $(this).html($('#updateProfileInfo').find($('input[name="name"]')).val());
                     // });
                     // toastr.success(data.msg);
                     // alert(data.msg);
                     if (data.code == 200) {
+                        console.log(data.code);
                         // $('.user_name').each(function () {
                         //     $(this).html($('#updateProfileInfo').find($('input[name="name"]')).val());
                         // });
                         toastr.success(data.message);
                         location.reload();
-                    } else if (data.code == 422) {
-                        toastr.error(data.data.error);
                     } else {
+                        console.log(data.code);
                         toastr.error(data.message);
                     }
                 }
+            }, error: function (err) {
+                toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
             }
         });
     });
 
     // change password
-
     $('#changeNewPassword').on('submit', function (e) {
         e.preventDefault();
         $.ajax({
@@ -64,18 +70,16 @@ $(function () {
                         $('#changeNewPassword')[0].reset();
                         toastr.success(data.message);
                     } else if (data.code == 422) {
-                        // $('#changeNewPassword')[0].reset();
-                        if (data.data.error.oldpassword) {
-                            toastr.error(data.data.error.oldpassword[0]);
+                        if (data.data.error.old) {
+                            toastr.error(data.data.error.old[0]);
                         }
-                        if (data.data.error.newpassword) {
-                            toastr.error(data.data.error.newpassword[0]);
+                        if (data.data.error.password) {
+                            toastr.error(data.data.error.password[0]);
                         }
-                        if (data.data.error.cnewpassword) {
-                            toastr.error(data.data.error.cnewpassword[0]);
+                        if (data.data.error.confirmed) {
+                            toastr.error(data.data.error.confirmed[0]);
                         }
                     } else {
-                        // $('#changeNewPassword')[0].reset();
                         toastr.error(data.message);
                     }
 
@@ -93,6 +97,8 @@ $(function () {
         var formData = new FormData();
         formData.append('id', userID);
         formData.append('token', token);
+        formData.append('branch_id', branchID);
+        formData.append('staff_id', ref_user_id);
         // Attach file
         formData.append('profile_image', $('input[type=file]')[0].files[0]);
         $.ajax({

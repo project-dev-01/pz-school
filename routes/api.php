@@ -272,10 +272,14 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // stream_types
     Route::get('employee/races', [ApiController::class, 'getRaces']);
     // settings
+    Route::post('settings/staff_profile_info', [ApiController::class, 'getStaffProfileInfo']);
     Route::post('change-profile-picture', [ApiController::class, 'updatePicture']);
     Route::post('settings/logo', [ApiController::class, 'changeLogo']);
     Route::post('change-password', [ApiController::class, 'changePassword']);
     Route::post('update-profile-info', [ApiController::class, 'updateProfileInfo']);
+    // parent settings
+    Route::post('settings/parent_profile_info', [ApiController::class, 'getParentProfileInfo']);
+    Route::post('update-parent-profile-info', [ApiController::class, 'updateParentProfileInfo']);
     // create database_migrate
 
     Route::post('database_migrate', [CommonController::class, 'databaseMigrate']);

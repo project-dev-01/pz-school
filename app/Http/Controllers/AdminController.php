@@ -286,23 +286,60 @@ class AdminController extends Controller
                 'count' => $count
             ]
         );
-        // return view('admin.dashboard.index');
+    }
+    // update te profile
+    public function updateProfileInfo(Request $request)
+    {
+        //Validate form
+        $validator = \Validator::make($request->all(), [
+            'id' => "required",
+            'staff_id' => "required",
+            'first_name' => "required",
+            'email' => "required",
+            'mobile_no' => "required",
+            'present_address' => "required",
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $request->id,
+                'staff_id' => $request->staff_id,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'mobile_no' => $request->mobile_no,
+                'present_address' => $request->present_address
+            ];
+            $response = Helper::PostMethod(config('constants.api.update_profile_info'), $data);
+            return $response;
+        }
     }
     public function settings()
     {
-        return view('admin.settings.index');
+        $data = [
+            'staff_id' => session()->get('ref_user_id')
+        ];
+        $staff_profile_info = Helper::PostMethod(config('constants.api.staff_profile_info'), $data);
+        return view(
+            'admin.settings.index',
+            [
+                'user_details' => $staff_profile_info['data']
+            ]
+        );
     }
     // change password
     public function changeNewPassword(Request $request)
     {
         //Validate form
         $validator = \Validator::make($request->all(), [
+            'id' => "required",
             'old' => "required",
             'password' => [
                 'required',
                 'min:8',
-                'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
-                // 'confirmed'
+                'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
             ],
             'confirmed' => 'required|same:password|min:8'
         ]);
@@ -312,11 +349,10 @@ class AdminController extends Controller
         } else {
             $data = [
                 'id' => $request->id,
-                'oldpassword' => $request->oldpassword,
-                'newpassword' => $request->newpassword,
-                'cnewpassword' => $request->cnewpassword
+                'old' => $request->old,
+                'password' => $request->password,
+                'confirmed' => $request->confirmed
             ];
-            // dd($data);
             $response = Helper::PostMethod(config('constants.api.change_password'), $data);
             return $response;
         }
@@ -330,34 +366,6 @@ class AdminController extends Controller
     {
         return view('admin.classes.index');
     }
-
-    // update profile info
-    public function updateProfileInfo(Request $request)
-    {
-        // dd($request->address);
-
-        $validator = \Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . Auth::user()->id,
-            'address' => 'required',
-        ]);
-        if (!$validator->passes()) {
-            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
-        } else {
-            $query = User::find(Auth::user()->id)->update([
-                'name' => $request->name,
-                'email' => $request->email,
-                'address' => $request->address,
-            ]);
-
-            if (!$query) {
-                return response()->json(['status' => 0, 'msg' => 'Something went wrong.']);
-            } else {
-                return response()->json(['status' => 1, 'msg' => 'Your profile info has been update successfuly.']);
-            }
-        }
-    }
-
     // update profile picture
     public function updatePicture(Request $request)
     {

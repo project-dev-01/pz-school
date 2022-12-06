@@ -132,7 +132,73 @@ class ParentController extends Controller
     }
     public function settings()
     {
-        return view('parent.settings.index');
+        $data = [
+            'parent_id' => session()->get('ref_user_id')
+        ];
+        $staff_profile_info = Helper::PostMethod(config('constants.api.parent_profile_info'), $data);
+        return view(
+            'parent.settings.index',
+            [
+                'user_details' => $staff_profile_info['data']
+            ]
+        );
+    }
+    // change password
+    public function changeNewPassword(Request $request)
+    {
+        //Validate form
+        $validator = \Validator::make($request->all(), [
+            'id' => "required",
+            'old' => "required",
+            'password' => [
+                'required',
+                'min:8',
+                'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
+            ],
+            'confirmed' => 'required|same:password|min:8'
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $request->id,
+                'old' => $request->old,
+                'password' => $request->password,
+                'confirmed' => $request->confirmed
+            ];
+            $response = Helper::PostMethod(config('constants.api.change_password'), $data);
+            return $response;
+        }
+    }
+    // update te profile
+    public function updateProfileInfo(Request $request)
+    {
+        //Validate form
+        $validator = \Validator::make($request->all(), [
+            'id' => "required",
+            'parent_id' => "required",
+            'first_name' => "required",
+            'email' => "required",
+            'mobile_no' => "required",
+            'address' => "required",
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $request->id,
+                'parent_id' => $request->parent_id,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'mobile_no' => $request->mobile_no,
+                'address' => $request->address
+            ];
+            $response = Helper::PostMethod(config('constants.api.update_parent_profile_info'), $data);
+            return $response;
+        }
     }
     // faq screen pages start
 

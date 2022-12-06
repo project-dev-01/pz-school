@@ -205,7 +205,11 @@ return [
           'change_logo' => $url.'/settings/logo',
           'get_user' => $url.'/get_user',
           'change_password' => $url.'/change-password',
+          'staff_profile_info' => $url.'/settings/staff_profile_info',
           'update_profile_info' => $url.'/update-profile-info',
+          'parent_profile_info' => $url.'/settings/parent_profile_info',
+          'update_parent_profile_info' => $url.'/update-parent-profile-info',
+
         // report card 
         'get_by_reportcard' => $url.'/get_by_reportcard',
 

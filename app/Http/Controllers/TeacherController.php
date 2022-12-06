@@ -124,7 +124,73 @@ class TeacherController extends Controller
     }
     public function settings()
     {
-        return view('teacher.settings.index');
+        $data = [
+            'staff_id' => session()->get('ref_user_id')
+        ];
+        $staff_profile_info = Helper::PostMethod(config('constants.api.staff_profile_info'), $data);
+        return view(
+            'teacher.settings.index',
+            [
+                'user_details' => $staff_profile_info['data']
+            ]
+        );
+    }
+    // change password
+    public function changeNewPassword(Request $request)
+    {
+        //Validate form
+        $validator = \Validator::make($request->all(), [
+            'id' => "required",
+            'old' => "required",
+            'password' => [
+                'required',
+                'min:8',
+                'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
+            ],
+            'confirmed' => 'required|same:password|min:8'
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $request->id,
+                'old' => $request->old,
+                'password' => $request->password,
+                'confirmed' => $request->confirmed
+            ];
+            $response = Helper::PostMethod(config('constants.api.change_password'), $data);
+            return $response;
+        }
+    }
+    // update te profile
+    public function updateProfileInfo(Request $request)
+    {
+        //Validate form
+        $validator = \Validator::make($request->all(), [
+            'id' => "required",
+            'staff_id' => "required",
+            'first_name' => "required",
+            'email' => "required",
+            'mobile_no' => "required",
+            'present_address' => "required",
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $request->id,
+                'staff_id' => $request->staff_id,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'mobile_no' => $request->mobile_no,
+                'present_address' => $request->present_address
+            ];
+            $response = Helper::PostMethod(config('constants.api.update_profile_info'), $data);
+            return $response;
+        }
     }
     // static page controller start
     public function admission()
@@ -1171,7 +1237,7 @@ class TeacherController extends Controller
     // index Timetable
     public function timetable(Request $request)
     {
-        
+
         $data = [
             'teacher_id' => session()->get('ref_user_id')
         ];

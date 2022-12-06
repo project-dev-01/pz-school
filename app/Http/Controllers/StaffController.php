@@ -18,14 +18,15 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Task;
 use Excel;
-Use App\Exports\StaffAttendanceExport;
+use App\Exports\StaffAttendanceExport;
+
 class StaffController extends Controller
 {
     //
     public function index()
     {
         $user_id = session()->get('user_id');
-        
+
         $teacher_id = session()->get('ref_user_id');
         $data = [
             'user_id' => $user_id,
@@ -33,7 +34,7 @@ class StaffController extends Controller
         ];
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
         $greetings = Helper::greetingMessage();
-        
+
         $employee_count = Helper::GetMethod(config('constants.api.employee_count'));
         $student_count = Helper::GetMethod(config('constants.api.student_count'));
         $parent_count = Helper::GetMethod(config('constants.api.parent_count'));
@@ -54,7 +55,44 @@ class StaffController extends Controller
     }
     public function settings()
     {
-        return view('staff.settings.index');
+        $data = [
+            'staff_id' => session()->get('ref_user_id')
+        ];
+        $staff_profile_info = Helper::PostMethod(config('constants.api.staff_profile_info'), $data);
+        return view(
+            'staff.settings.index',
+            [
+                'user_details' => $staff_profile_info['data']
+            ]
+        );
+    }
+    // change password
+    public function changeNewPassword(Request $request)
+    {
+        //Validate form
+        $validator = \Validator::make($request->all(), [
+            'id' => "required",
+            'old' => "required",
+            'password' => [
+                'required',
+                'min:8',
+                'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
+            ],
+            'confirmed' => 'required|same:password|min:8'
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $request->id,
+                'old' => $request->old,
+                'password' => $request->password,
+                'confirmed' => $request->confirmed
+            ];
+            $response = Helper::PostMethod(config('constants.api.change_password'), $data);
+            return $response;
+        }
     }
     // forum screen pages start
     public function forumIndex()
@@ -67,9 +105,9 @@ class StaffController extends Controller
         $data = [
             'user_id' => $user_id
         ];
-        
-        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$data); 
-        
+
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'), $data);
+
         //dd($forum_list);
         return view('staff.forum.index', [
             //'forum_list' => $forum_list['data']
@@ -92,9 +130,9 @@ class StaffController extends Controller
             'user_id' => $user_id
         ];
         $category = Helper::GetMethod(config('constants.api.category'));
-        $usernames = Helper::GETMethodWithData(config('constants.api.usernames_autocomplete'),$data);
+        $usernames = Helper::GETMethodWithData(config('constants.api.usernames_autocomplete'), $data);
         //dd($usernames);
-        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$data);
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'), $data);
         // dd($forum_list);
         return view('staff.forum.page-create-topic', [
             'category' => $category['data'],
@@ -105,17 +143,17 @@ class StaffController extends Controller
     }
     public function forumPageSingleUser()
     {
-        $user_id= session()->get('user_id');  
-        $data = [            
+        $user_id = session()->get('user_id');
+        $data = [
             'user_id' => $user_id
         ];
         $forum_post_user_crd = Helper::GETMethodWithData(config('constants.api.forum_post_user_created'), $data);
         $forum_categorypost_user_crd = Helper::GETMethodWithData(config('constants.api.forum_categorypost_user_created'), $data);
         $forum_post_user_allreplies = Helper::GETMethodWithData(config('constants.api.forum_posts_user_repliesall'), $data);
         $forum_userthreadslist = Helper::GETMethodWithData(config('constants.api.forum_userthreadslist'), $data);
-       // dd($forum_threadslist);
+        // dd($forum_threadslist);
         return view('staff.forum.page-single-user', [
-            
+
             // 'forum_post_user_crd' => $forum_post_user_crd['data'],
             // 'forum_categorypost_user_crd' => $forum_categorypost_user_crd['data'],
             // 'forum_post_user_allreplies' => $forum_post_user_allreplies['data'],
@@ -144,11 +182,11 @@ class StaffController extends Controller
     }
     public function forumPageCategories()
     {
-        $user_id= session()->get('user_id');  
-        $data = [            
+        $user_id = session()->get('user_id');
+        $data = [
             'user_id' => $user_id
         ];
-        $listcategoryvs = Helper::GETMethodWithData(config('constants.api.listcategoryvs'),$data);
+        $listcategoryvs = Helper::GETMethodWithData(config('constants.api.listcategoryvs'), $data);
         return view('staff.forum.page-categories', [
             'listcategoryvs' => $listcategoryvs['data']
         ]);
@@ -180,11 +218,11 @@ class StaffController extends Controller
     // forum create post 
     public function createpost(Request $request)
     {
-        $current_user=session()->get('role_id');
+        $current_user = session()->get('role_id');
         //dd($current_user);
-        $rollid_tags=$request->tags;
-        $adminid=2;
-        $tags_add_also_currentroll=$rollid_tags .','.$current_user.','.$adminid;        
+        $rollid_tags = $request->tags;
+        $adminid = 2;
+        $tags_add_also_currentroll = $rollid_tags . ',' . $current_user . ',' . $adminid;
         $data = [
             'user_id' => session()->get('user_id'),
             'user_name' => session()->get('name'),
@@ -211,7 +249,7 @@ class StaffController extends Controller
         $singlepost_repliesData = [
             'created_post_id' => $id,
             'user_id' => $user_id,
-        ]; 
+        ];
         // $user_id = session()->get('user_id');
         // $usdata = [
         //     'user_id' => $user_id
@@ -220,59 +258,57 @@ class StaffController extends Controller
         $usdata = [
             'user_id' => $user_id
         ];
-       
-        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'),$usdata);
+
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'), $usdata);
         $forum_singlepost = Helper::GETMethodWithData(config('constants.api.forum_single_post'), $data);
         $forum_singlepost_replies = Helper::GETMethodWithData(config('constants.api.forum_single_post_replies'), $data);
-       
+
         return view('staff.forum.page-single-topic', [
             'forum_single_post' => !empty($forum_singlepost['data']) ? $forum_singlepost['data'] : $forum_singlepost,
             'forum_singlepost_replies' => $forum_singlepost_replies['data'],
             //'forum_list' => $forum_list['data']
             'forum_list' => !empty($forum_list['data']) ? $forum_list['data'] : []
         ]);
-       
-    
     }
-    
-   public function imagestore(Request $request)
-   {
-    if ($request->hasFile('upload')) {
 
-        //get filename with extension
+    public function imagestore(Request $request)
+    {
+        if ($request->hasFile('upload')) {
 
-        $filenamewithextension = $request->file('upload')->getClientOriginalName();
+            //get filename with extension
 
-        //get filename without extension
+            $filenamewithextension = $request->file('upload')->getClientOriginalName();
 
-        $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        //get file extension
+            //get filename without extension
 
-        $extension = $request->file('upload')->getClientOriginalExtension();
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            //get file extension
 
-
-
-        //filename to store
-
-        $filenametostore = $filename . '_' . time() . '.' . $extension;
+            $extension = $request->file('upload')->getClientOriginalExtension();
 
 
 
-        //upload file
+            //filename to store
 
-        $request->file('upload')->storeAs('public/forumupload', $filenametostore);
+            $filenametostore = $filename . '_' . time() . '.' . $extension;
 
 
 
-        echo json_encode([
+            //upload file
 
-            'default' => asset('storage/forumupload/' . $filenametostore),
+            $request->file('upload')->storeAs('public/forumupload', $filenametostore);
 
-            '500' =>  asset('storage/forumupload/' . $filenametostore)
 
-        ]);
+
+            echo json_encode([
+
+                'default' => asset('storage/forumupload/' . $filenametostore),
+
+                '500' =>  asset('storage/forumupload/' . $filenametostore)
+
+            ]);
+        }
     }
-   }
     // forum screen pages end
 
     // faq screen pages start
@@ -292,30 +328,33 @@ class StaffController extends Controller
         return view('admin.classes.add', ['teacherDetails' => $teacherDetails]);
     }
 
-    // update profile info
+    // update te profile
     public function updateProfileInfo(Request $request)
     {
-        // dd($request->address);
-
+        //Validate form
         $validator = \Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . Auth::user()->id,
-            'address' => 'required',
+            'id' => "required",
+            'staff_id' => "required",
+            'first_name' => "required",
+            'email' => "required",
+            'mobile_no' => "required",
+            'present_address' => "required",
         ]);
+
         if (!$validator->passes()) {
             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
-            $query = User::find(Auth::user()->id)->update([
-                'name' => $request->name,
+            $data = [
+                'id' => $request->id,
+                'staff_id' => $request->staff_id,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
                 'email' => $request->email,
-                'address' => $request->address,
-            ]);
-
-            if (!$query) {
-                return response()->json(['status' => 0, 'msg' => 'Something went wrong.']);
-            } else {
-                return response()->json(['status' => 1, 'msg' => 'Your profile info has been update successfuly.']);
-            }
+                'mobile_no' => $request->mobile_no,
+                'present_address' => $request->present_address
+            ];
+            $response = Helper::PostMethod(config('constants.api.update_profile_info'), $data);
+            return $response;
         }
     }
 
@@ -563,140 +602,140 @@ class StaffController extends Controller
             return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
         }
     }
-     // Qualifications
-     public function qualification_view()
-     {    
-         //dd('resp');
-         return view('staff.qualifications.index');
-     }
-     public function getqualification_list()
-     {      
-         $response = Helper::GetMethod(config('constants.api.qualification_list'));
-       
-         return DataTables::of($response['data'])
-             ->addIndexColumn()
-             ->addColumn('actions', function ($row) {
-                 return '<div class="button-list">
+    // Qualifications
+    public function qualification_view()
+    {
+        //dd('resp');
+        return view('staff.qualifications.index');
+    }
+    public function getqualification_list()
+    {
+        $response = Helper::GetMethod(config('constants.api.qualification_list'));
+
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
                                  <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editqualifyBtn"><i class="fe-edit"></i></a>
                                  <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deletequalifyBtn"><i class="fe-trash-2"></i></a>
                          </div>';
-             })
- 
-             ->rawColumns(['actions'])
-             ->make(true);
-     }
-     public function qualification_add(Request $request)
-     {        
-         $data = [
-             'name' => $request->name
-         ];
-        
-         $response = Helper::PostMethod(config('constants.api.qualification_add'), $data);
-      
-         return $response;     
-     }
-     public function qualification_update(Request $request)
-     {
-         $data = [
-             'id' => $request->id,
-             'name' => $request->name
-         ];
-         $response = Helper::PostMethod(config('constants.api.qualifications_update'), $data);
-         return $response;     
-     }
-     public function qualification_delete(Request $request)
-     {
- 
-         $id = $request->id;
-         $validator = \Validator::make($request->all(), [
-             'id' => 'required',
-         ]);
- 
-         if (!$validator->passes()) {
-             return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
-         } else {
-             $data = [
-                 'id' => $id
-             ];
-             $response = Helper::PostMethod(config('constants.api.qualifications_delete'), $data);
-             return $response;
-         }
-     }
-     public function getQualificationsDetails(Request $request)
-     {
-         $data = [
-             'id' => $request->id,
-         ];
-         $response = Helper::PostMethod(config('constants.api.qualifications_details'), $data);
-         return $response;
-     }
-     // staff categoryes
-     public function staffcategories_view()
-     {
-         return view('staff.staffCategories.index');
-     }
-     public function staffcategories_add(Request $request)
-     {
-       
-         $data = [
-             'name' => $request->name
-         ];
-         $response = Helper::PostMethod(config('constants.api.staffcategory_add'), $data);
-      
-         return $response; 
-     }
-     public function staffcategories_edit(Request $request)
-     {
-       
-         $data = [
-             'id' => $request->id,
-             'name' => $request->name
-         ];
-         $response = Helper::PostMethod(config('constants.api.staffcategory_update'), $data);
-         return $response; 
-     }
-     public function staffcategories_delete(Request $request)
-     {
-         $id = $request->id;
-         $validator = \Validator::make($request->all(), [
-             'id' => 'required',
-         ]);
- 
-         if (!$validator->passes()) {
-             return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
-         } else {
-             $data = [
-                 'id' => $id
-             ];
-             $response = Helper::PostMethod(config('constants.api.staffcategory_delete'), $data);
-             return $response;
-         }
-     }
-     public function staffcategories_list()
-     {      
-         $response = Helper::GetMethod(config('constants.api.staffcategory_list'));
-       
-         return DataTables::of($response['data'])
-             ->addIndexColumn()
-             ->addColumn('actions', function ($row) {
-                 return '<div class="button-list">
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function qualification_add(Request $request)
+    {
+        $data = [
+            'name' => $request->name
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.qualification_add'), $data);
+
+        return $response;
+    }
+    public function qualification_update(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.qualifications_update'), $data);
+        return $response;
+    }
+    public function qualification_delete(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $id
+            ];
+            $response = Helper::PostMethod(config('constants.api.qualifications_delete'), $data);
+            return $response;
+        }
+    }
+    public function getQualificationsDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.qualifications_details'), $data);
+        return $response;
+    }
+    // staff categoryes
+    public function staffcategories_view()
+    {
+        return view('staff.staffCategories.index');
+    }
+    public function staffcategories_add(Request $request)
+    {
+
+        $data = [
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.staffcategory_add'), $data);
+
+        return $response;
+    }
+    public function staffcategories_edit(Request $request)
+    {
+
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.staffcategory_update'), $data);
+        return $response;
+    }
+    public function staffcategories_delete(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $id
+            ];
+            $response = Helper::PostMethod(config('constants.api.staffcategory_delete'), $data);
+            return $response;
+        }
+    }
+    public function staffcategories_list()
+    {
+        $response = Helper::GetMethod(config('constants.api.staffcategory_list'));
+
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
                                  <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editstaffcategoryBtn"><i class="fe-edit"></i></a>
                                  <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deletstaffcategoryBtn"><i class="fe-trash-2"></i></a>
                          </div>';
-             })
- 
-             ->rawColumns(['actions'])
-             ->make(true);
-     }
-     public function getstaffcategoriesDetails(Request $request)
-     {
-         $data = [
-             'id' => $request->id,
-         ];
-         $response = Helper::PostMethod(config('constants.api.staffcategory_details'), $data);
-         return $response;
-     }
-     //staff category end 
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getstaffcategoriesDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.staffcategory_details'), $data);
+        return $response;
+    }
+    //staff category end 
     // get section
     public function section()
     {
@@ -1472,7 +1511,7 @@ class StaffController extends Controller
         $attendance = Helper::GETMethodWithData(config('constants.api.employee_attendance_list'), $data);
         return $attendance;
     }
-    
+
     // add Employee Attendance 
     public function addEmployeeAttendance(Request $request)
     {
@@ -1611,7 +1650,7 @@ class StaffController extends Controller
     public function staffAttendanceExcel(Request $request)
     {
         // dd($request);
-        return Excel::download(new StaffAttendanceExport(1,$request->employee,$request->session,$request->date,$request->department), 'Staff_Attendance.xlsx');
+        return Excel::download(new StaffAttendanceExport(1, $request->employee, $request->session, $request->date, $request->department), 'Staff_Attendance.xlsx');
     }
 
     public function classroomManagement()
@@ -1724,6 +1763,4 @@ class StaffController extends Controller
         $response = Helper::PostMethod(config('constants.api.update_student_leave'), $data);
         return $response;
     }
-
-
 }

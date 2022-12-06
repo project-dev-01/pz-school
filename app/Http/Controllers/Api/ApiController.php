@@ -2894,7 +2894,7 @@ class ApiController extends BaseController
                         $fileName = $name . "." . $extension;
 
                         $base64 = base64_decode($request->photo);
-                        $file = base_path() . '/public/images/staffs/' . $fileName;
+                        $file = base_path() . '/public/users/images/' . $fileName;
                         $picture = file_put_contents($file, $base64);
                     } else {
                         $fileName = null;
@@ -3173,7 +3173,7 @@ class ApiController extends BaseController
                         $fileName = $name . "." . $extension;
 
                         $base64 = base64_decode($request->photo);
-                        $file = base_path() . '/public/images/staffs/' . $fileName;
+                        $file = base_path() . '/public/users/images/' . $fileName;
                         $picture = file_put_contents($file, $base64);
                     } else {
                         $fileName = null;
@@ -4818,13 +4818,76 @@ class ApiController extends BaseController
             }
         }
     }
+    // getStaffInfo
+    public function getStaffProfileInfo(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'staff_id' => 'required'
+        ]);
 
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get data
+            $Details = $Connection->table('staffs')
+                ->where('id', $request->staff_id)
+                ->get();
+            $staffObj = new \stdClass();
+            if (!empty($Details)) {
+                foreach ($Details as $suc) {
+                    $staffObj = $suc;
+                    $staffObj->present_address = Helper::decryptStringData($suc->present_address);
+                    $staffObj->permanent_address = Helper::decryptStringData($suc->permanent_address);
+                    $staffObj->mobile_no = Helper::decryptStringData($suc->mobile_no);
+                    $staffObj->nric_number = Helper::decryptStringData($suc->nric_number);
+                    $staffObj->passport = Helper::decryptStringData($suc->passport);
+                }
+            }
+            return $this->successResponse($staffObj, 'Staff details fetch successfully');
+        }
+    }
+    // parent
+    public function getParentProfileInfo(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'parent_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get data
+            $getparentDetails = $Connection->table('parent')
+                ->where('id', $request->parent_id)
+                ->get();
+            $parentObj = new \stdClass();
+            if (!empty($getparentDetails)) {
+                foreach ($getparentDetails as $suc) {
+                    $parentObj = $suc;
+                    $parentObj->address = Helper::decryptStringData($suc->address);
+                    $parentObj->address_2 = Helper::decryptStringData($suc->address_2);
+                    $parentObj->mobile_no = Helper::decryptStringData($suc->mobile_no);
+                    $parentObj->nric = Helper::decryptStringData($suc->nric);
+                    $parentObj->passport = Helper::decryptStringData($suc->passport);
+                }
+            }
+            return $this->successResponse($parentObj, 'Parent details fetch successfully');
+        }
+    }
     // updatePicture settings
     public function updatePicture(Request $request)
     {
         $validator = \Validator::make($request->all(), [
             'id' => 'required',
             'token' => 'required',
+            'branch_id' => 'required',
+            'staff_id' => 'required',
             'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -4852,6 +4915,9 @@ class ApiController extends BaseController
                 }
                 //Update DB
                 $update = User::find($request->id)->update(['picture' => $new_name]);
+                $Connection = $this->createNewConnection($request->branch_id);
+                // get data
+                $Connection->table('staffs')->where('id', $request->staff_id)->update(['photo' => $new_name]);
                 $data = [
                     "file_name" => $new_name
                 ];
@@ -4913,7 +4979,7 @@ class ApiController extends BaseController
         $dbPass = User::find($request->id)->getAttributes()['password'];
         //Validate form
         $validator = \Validator::make($request->all(), [
-            'oldpassword' => [
+            'old' => [
                 'required', function ($attribute, $value, $fail) use ($dbPass) {
                     if (!\Hash::check($value, $dbPass)) {
                         return $fail(__('The current password is incorrect'));
@@ -4922,24 +4988,23 @@ class ApiController extends BaseController
                 'min:8',
                 'max:30'
             ],
-            'newpassword' => 'required|min:8|max:30',
-            'cnewpassword' => 'required|same:newpassword'
+            'password' => 'required|min:8|max:30',
+            'confirmed' => 'required|same:password'
         ], [
-            'oldpassword.required' => 'Enter your current password',
-            'oldpassword.min' => 'Old password must have atleast 8 characters',
-            'oldpassword.max' => 'Old password must not be greater than 30 characters',
-            'newpassword.required' => 'Enter new password',
-            'newpassword.min' => 'New password must have atleast 8 characters',
-            'newpassword.max' => 'New password must not be greater than 30 characters',
-            'cnewpassword.required' => 'ReEnter your new password',
-            'cnewpassword.same' => 'New password and Confirm new password must match'
+            'old.required' => 'Enter your current password',
+            'old.min' => 'Old password must have atleast 8 characters',
+            'old.max' => 'Old password must not be greater than 30 characters',
+            'password.required' => 'Enter new password',
+            'password.min' => 'New password must have atleast 8 characters',
+            'password.max' => 'New password must not be greater than 30 characters',
+            'confirmed.required' => 'ReEnter your new password',
+            'confirmed.same' => 'New password and Confirm new password must match'
         ]);
 
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-
-            $update = User::find($request->id)->update(['password' => \Hash::make($request->newpassword)]);
+            $update = User::find($request->id)->update(['password' => \Hash::make($request->password)]);
 
             if (!$update) {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong, Failed to update password.']);
@@ -4954,18 +5019,81 @@ class ApiController extends BaseController
     {
 
         $validator = \Validator::make($request->all(), [
-            'name' => 'required',
+            'id' => "required",
+            'staff_id' => "required",
+            'branch_id' => "required",
+            'first_name' => 'required',
             'email' => 'required|email|unique:users,email,' . $request->id,
-            'address' => 'required',
+            'mobile_no' => "required",
+            'present_address' => "required",
         ]);
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $query = User::find($request->id)->update([
-                'name' => $request->name,
+            $first_name = $request->first_name;
+            $last_name = isset($request->last_name) ? $request->last_name : "";
+            $name = $first_name . ' ' . $last_name;
+            $mobile_no = isset($request->mobile_no) ? Crypt::encryptString($request->mobile_no) : "";
+            $present_address = isset($request->present_address) ? Crypt::encryptString($request->present_address) : "";
+            $data = [
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
                 'email' => $request->email,
-                'address' => $request->address,
+                'mobile_no' => $mobile_no,
+                'present_address' => $present_address,
+                'updated_at' => date("Y-m-d H:i:s")
+            ];
+            $query = User::find($request->id)->update([
+                'name' => $name,
+                'email' => $request->email
             ]);
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get data
+            $Connection->table('staffs')->where('id', $request->staff_id)->update($data);
+
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong, Failed to update profile.']);
+            } else {
+                return $this->successResponse([], 'Your profile info has been update successfuly.');
+            }
+        }
+    }
+    // update parent profile info
+    public function updateParentProfileInfo(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => "required",
+            'parent_id' => "required",
+            'branch_id' => "required",
+            'first_name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $request->id,
+            'mobile_no' => "required",
+            'address' => "required",
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $first_name = $request->first_name;
+            $last_name = isset($request->last_name) ? $request->last_name : "";
+            $name = $first_name . ' ' . $last_name;
+            $mobile_no = isset($request->mobile_no) ? Crypt::encryptString($request->mobile_no) : "";
+            $address = isset($request->address) ? Crypt::encryptString($request->address) : "";
+            $data = [
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'mobile_no' => $mobile_no,
+                'address' => $address,
+                'updated_at' => date("Y-m-d H:i:s")
+            ];
+            $query = User::find($request->id)->update([
+                'name' => $name,
+                'email' => $request->email
+            ]);
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get data
+            $Connection->table('parent')->where('id', $request->parent_id)->update($data);
 
             if (!$query) {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong, Failed to update profile.']);

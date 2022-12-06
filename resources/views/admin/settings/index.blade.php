@@ -10,8 +10,6 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <!-- <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Extras</a></li> -->
                         <li class="breadcrumb-item active">Profile</li>
                     </ol>
                 </div>
@@ -25,40 +23,24 @@
         <div class="col-lg-4 col-xl-4">
             <div class="card-box text-center">
                 <img src="{{ Session::get('picture') && asset('public/users/images/'.Session::get('picture')) ? asset('public/users/images/'.Session::get('picture')) : asset('public/images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image">
-
-                <!-- <img src="{{asset('public/users/images/default-img.jpg')}}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image"> -->
-                <!-- <img src="{{ asset('public/images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image"> -->
                 <h4 class="mb-0 user_name">{{ Session::get('role_name') }}</h4>
-
                 <div class="text-left mt-3">
-                    <input type="file" name="admin_image" id="admin_image" style="opacity: 0;height:1px;display:none">
-                    <ul class="nav nav-pills navtab-bg nav-justified">
-                        <li class="nav-item">
-                            <a href="javascript:void(0)" class="nav-link active" id="change_picture_btn">
-                                Change picture
-                            </a>
-                        </li>
-                    </ul>
+                    <form method="post" id="upload_form" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label class="btn btn-block" style="background-color: #0ABAB5; color: #fff;"> <b>Change picture</b>
+                                <input type="file" name="profile_image" id="profile_image" style="opacity: 0;height:1px;display:none" />
+                            </label>
+                        </div>
+                    </form>
                 </div>
-                <!-- <p class="text-muted">@webdesigner</p> -->
-
                 <div class="text-left mt-3">
                     <h4 class="font-13 text-uppercase">About Me :</h4>
-                    <!-- <p class="text-muted font-13 mb-3">
-                        Hi I'm Johnathn Deo,has been the industry's standard dummy text ever since the
-                        1500s, when an unknown printer took a galley of type.
-                    </p> -->
-                    <p class="text-muted mb-2 font-13"><strong>Full Name :</strong> <span class="ml-2 user_name">{{ Session::get('name') }}</span></p>
-
-                    <!-- <p class="text-muted mb-2 font-13"><strong>Mobile :</strong><span class="ml-2">(123)
-                            123 1234</span></p> -->
-
-                    <p class="text-muted mb-2 font-13"><strong>Email :</strong> <span class="ml-2 ">{{ Session::get('email') }}</span></p>
-
-                    <!-- <p class="text-muted mb-1 font-13"><strong>Location :</strong> <span class="ml-2">USA</span></p> -->
+                    <p class="text-muted mb-2 font-13"><strong>Full Name :</strong> <span class="ml-2 user_name"> {{ $user_details['first_name'] }} {{ $user_details['last_name'] }} </span></p>
+                    <p class="text-muted mb-2 font-13"><strong>Email :</strong> <span class="ml-2 "> {{ $user_details['email'] }}</span></p>
+                    <p class="text-muted mb-2 font-13"><strong>Mobile No :</strong> <span class="ml-2 "> {{ $user_details['mobile_no'] }}</span></p>
                 </div>
             </div> <!-- end card-box -->
-
         </div> <!-- end col-->
 
         <div class="col-lg-8 col-xl-8">
@@ -77,32 +59,44 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane show active" id="settings">
-                        <form method="POST" action="#" id="updateProfileInfo">
+                        <form method="POST" action="{{ route('admin.settings.updateProfileInfo') }}" id="updateProfileInfo">
                             <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> Personal Info</h5>
                             <div class="row">
+                                <input type="hidden" name="id" value="{{ Session::get('user_id') }}">
+                                <input type="hidden" name="staff_id" value="{{ Session::get('ref_user_id') }}">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="name">Name</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="" placeholder="Enter The Name">
-                                        <span class="text-danger error-text name_error"></span>
+                                        <label for="first_name">First Name</label>
+                                        <input type="text" class="form-control" id="first_name" name="first_name" value="{{ $user_details['first_name'] }}" placeholder="Enter The First Name">
+                                        <span class="text-danger error-text first_name_error"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="last_name">Last Name</label>
+                                        <input type="text" class="form-control" id="last_name" name="last_name" value="{{ $user_details['last_name'] }}" placeholder="Enter The Last Name">
+                                        <span class="text-danger error-text last_name_error"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="email">Email Address</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="" placeholder="Enter The Email">
+                                        <input type="email" class="form-control" id="email" name="email" value="{{ $user_details['email'] }}" placeholder="Enter The Email">
                                         <span class="text-danger error-text email_error"></span>
-                                        <!-- <span class="form-text text-muted"><small>If you want to change email please <a href="javascript: void(0);">click</a> here.</small></span> -->
                                     </div>
                                 </div>
-                            </div> <!-- end row -->
-
-                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="mobile_no">mobile_no</label>
+                                        <input type="text" class="form-control" id="mobile_no" name="mobile_no" value="{{ $user_details['mobile_no'] }}" placeholder="Enter The Mobile No">
+                                        <span class="text-danger error-text mobile_no_error"></span>
+                                    </div>
+                                </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="address">Address</label>
-                                        <textarea class="form-control" id="address" rows="4" name="address" placeholder="Enter The Address"></textarea>
-                                        <span class="text-danger error-text address_error"></span>
+                                        <label for="present_address">Present Address</label>
+                                        <textarea type="textarea" class="form-control" name="present_address" rows="4" id="present_address">{{ $user_details['present_address']}}</textarea>
+                                        <span class="text-danger error-text present_address_error"></span>
                                     </div>
                                 </div> <!-- end col -->
                             </div> <!-- end row -->
@@ -112,34 +106,33 @@
                         </form>
                     </div>
                     <!-- end settings content-->
-
                     <div class="tab-pane" id="changePassword">
-
                         <!-- comment box -->
                         <form action="{{ route('admin.settings.changeNewPassword') }}" method="POST" id="changeNewPassword" class="comment-area-box mt-2 mb-3">
                             <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> Change Password</h5>
                             <div class="row">
-                                <div class="col-md-6">
+                                <input type="hidden" name="id" value="{{ Session::get('user_id') }}">
+                                <div class="col-md-9">
                                     <div class="form-group">
-                                        <label for="old">Old Password</label>
+                                        <label for="old">Old Password :</label>
                                         <input type="password" class="form-control" id="old" name="old" placeholder="Old Password">
                                         <span class="text-danger error-text old_error"></span>
                                     </div>
                                 </div>
                             </div> <!-- end row -->
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-9">
                                     <div class="form-group">
-                                        <label for="password">New Password (password atleast 8 characters and contain both numbers & letters/special characters.):</label>
+                                        <label for="password">New Password : <span style="color:blue;">(password atleast 8 characters and contain both numbers & letters/special characters.):</span></label>
                                         <input type="password" class="form-control" id="password" name="password" placeholder="New Password">
                                         <span class="text-danger error-text password_error"></span>
                                     </div>
                                 </div>
                             </div> <!-- end row -->
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-9">
                                     <div class="form-group">
-                                        <label for="confirmed">Confirm New Password</label>
+                                        <label for="confirmed">Confirm New Password :</label>
                                         <input type="password" class="form-control" id="confirmed" name="confirmed" placeholder="Confirm New Password">
                                         <span class="text-danger error-text confirmed_error"></span>
                                     </div>
@@ -150,20 +143,21 @@
                             </div>
                         </form>
                         <!-- end comment box -->
-
                     </div>
                     <!-- end changePassword content-->
-
-
-
                 </div> <!-- end tab-content -->
             </div> <!-- end card-box-->
-
         </div> <!-- end col -->
     </div>
     <!-- end row-->
-
-</div> <!-- container -->@endsection
+</div> <!-- container -->
+@endsection
 @section('scripts')
+<script>
+    // settings url
+    var profileUpdateStg = "{{ config('constants.api.change_profile_picture') }}";
+    var updateSettingSession = "{{ route('settings.updateSettingSession') }}";
+    var profilePath = "{{ asset('public/users/images') }}";
+</script>
 <script src="{{ asset('public/js/custom/admin_settings.js') }}"></script>
 @endsection

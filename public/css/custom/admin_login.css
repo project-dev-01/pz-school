@@ -46,7 +46,7 @@
     min-height: 100vh;
     flex-direction: row;
     align-items: stretch;
-    background: url(../../images/login-images/bg-auth.jpg);
+    background: url(../../images/login-images/bg-auth-admin.jpg);
     background-size: cover;
 }
 

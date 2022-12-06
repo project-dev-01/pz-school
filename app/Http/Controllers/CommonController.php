@@ -14,7 +14,7 @@ class CommonController extends Controller
     public function updateSettingSession(Request $request)
     {
         // dd($request);
-        if (session()->has('picture') && $request->picture) {
+        if (session()->has('picture') || $request->picture) {
             session()->pull('picture');
             $request->session()->put('picture', $request->picture);
             return true;

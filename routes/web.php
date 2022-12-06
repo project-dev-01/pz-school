@@ -69,7 +69,7 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::get('settings', [SuperAdminController::class, 'settings'])->name('super_admin.settings');
         Route::post('change-password', [SuperAdminController::class, 'changePassword'])->name('settings.changePassword');
         Route::post('update-profile-info', [SuperAdminController::class, 'updateProfileInfo'])->name('settings.updateProfileInfo');
-        Route::post('update-setting-session', [CommonController::class, 'updateSettingSession'])->name('settings.updateSettingSession');
+        // Route::post('update-setting-session', [CommonController::class, 'updateSettingSession'])->name('settings.updateSettingSession');
 
         // userlist routes
         Route::get('users/user', [SuperAdminController::class, 'users'])->name('users.user');
@@ -131,6 +131,8 @@ Route::get('/DBMigrationCall', [CommonController::class, 'DBMigrationCall']);
 Route::get('unread_notifications', [CommonController::class, 'unreadNotifications'])->name('unread_notifications');
 // all logout
 Route::get('all_logout', [AuthController::class, 'allLogout'])->name('all_logout');
+// update settings session
+Route::post('update-setting-session', [CommonController::class, 'updateSettingSession'])->name('settings.updateSettingSession');
 // admin routes start
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
@@ -319,10 +321,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         // Settings
         Route::get('settings', [AdminController::class, 'settings'])->name('admin.settings');
-        Route::get('settings/logo', [AdminController::class, 'settingsLogo'])->name('admin.settings.logo');
         Route::post('change-password', [AdminController::class, 'changeNewPassword'])->name('admin.settings.changeNewPassword');
-        Route::post('update-profile-info', [SuperAdminController::class, 'updateProfileInfo'])->name('settings.updateProfileInfo');
-        Route::post('update-setting-session', [CommonController::class, 'updateSettingSession'])->name('settings.updateSettingSession');
+        Route::post('update-profile-info', [AdminController::class, 'updateProfileInfo'])->name('admin.settings.updateProfileInfo');
+        Route::get('settings/logo', [AdminController::class, 'settingsLogo'])->name('admin.settings.logo');
         Route::post('settings-update-logo', [CommonController::class, 'updateSettingSessionLogo'])->name('settings.update.logo');
 
         // static page routes start
@@ -677,6 +678,8 @@ Route::group(['prefix' => 'staff'], function () {
         Route::post('form/postimage', [StaffController::class, 'imagestore'])->name('staff.forum.image.store');
         // Settings
         Route::get('settings', [StaffController::class, 'settings'])->name('staff.settings');
+        Route::post('change-password', [StaffController::class, 'changeNewPassword'])->name('staff.settings.changeNewPassword');
+        Route::post('update-profile-info', [StaffController::class, 'updateProfileInfo'])->name('staff.settings.updateProfileInfo');
         // faq        
         Route::get('faq/index', [StaffController::class, 'faqIndex'])->name('staff.faq.Index');
         // student details
@@ -922,7 +925,8 @@ Route::group(['prefix' => 'teacher'], function () {
 
         // Settings
         Route::get('settings', [TeacherController::class, 'settings'])->name('teacher.settings');
-
+        Route::post('change-password', [TeacherController::class, 'changeNewPassword'])->name('teacher.settings.changeNewPassword');
+        Route::post('update-profile-info', [TeacherController::class, 'updateProfileInfo'])->name('teacher.settings.updateProfileInfo');
         // faq        
         Route::get('faq/index', [TeacherController::class, 'faqIndex'])->name('teacher.faq.Index');
         // class room management    
@@ -979,7 +983,9 @@ Route::group(['prefix' => 'parent'], function () {
         Route::get('/dashboard', [ParentController::class, 'index'])->name('parent.dashboard');
 
         // Settings
-        Route::get('settings', [SuperAdminController::class, 'settings'])->name('parent.settings');
+        Route::get('settings', [ParentController::class, 'settings'])->name('parent.settings');
+        Route::post('change-password', [ParentController::class, 'changeNewPassword'])->name('parent.settings.changeNewPassword');
+        Route::post('update-profile-info', [ParentController::class, 'updateProfileInfo'])->name('parent.settings.updateProfileInfo');
         // faq        
         Route::get('faq/index', [ParentController::class, 'faqIndex'])->name('parent.faq.Index');
 
