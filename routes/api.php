@@ -33,6 +33,9 @@ Route::post('employee/punchcard/check', [AuthController::class, 'employeePunchCa
 Route::get('get-countries', [CommonController::class, 'countryList']);
 Route::post('get-states', [CommonController::class, 'getStateByIdList']);
 Route::post('get-cities', [CommonController::class, 'getCityByIdList']);
+// password_expired_link
+Route::post('reset/password_expired_link', [ApiControllerOne::class, 'passwordExpiredLink']);
+Route::post('reset/expire_reset_password', [AuthController::class, 'expireResetPassword']);
 
 Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('logout', [AuthController::class, 'logout']);
@@ -280,6 +283,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // parent settings
     Route::post('settings/parent_profile_info', [ApiController::class, 'getParentProfileInfo']);
     Route::post('update-parent-profile-info', [ApiController::class, 'updateParentProfileInfo']);
+    
     // create database_migrate
 
     Route::post('database_migrate', [CommonController::class, 'databaseMigrate']);

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Password Recovery</title>
+    <title>Password Reset</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
@@ -43,8 +43,8 @@
                                         </span>
                                     </a>
                                 </div><br>
-                                <h3 class="passrecov">Password Recovery</h3>
-                                <p class="text-muted opoos">Opops! Looks like you have forgetten your password. Do not worry because we will help younger back into your account</p>
+                                <h3 class="passrecov">Password Reset</h3>
+                                <p class="text-muted opoos">Opops! Looks like you have reset your password. Do not worry because we will help younger back into your account</p>
                             </div>
                             <form id="LoginAuth" action="{{ route('reset_password') }}" method="post">
                                 <div class="form-group">
@@ -63,7 +63,7 @@
                                 @endif
                                 @csrf
                                 <div class="form-group">
-                                    <input class="form-control" type="email" name="email" id="emailaddress" placeholder="Enter your email">
+                                    <input class="form-control" type="email" name="email" id="emailaddress" required placeholder="Enter your email">
                                 </div><br>
                                 <div class="form-group mb-0 text-center">
                                     <button class="btn btn-block signin" id="send" type="submit" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Please Wait">Sent link</button>
@@ -112,7 +112,7 @@
 
 </body>
 
-<script>
+<!-- <script>
     $('#send').on('click', function() {
         console.log('124', 12)
         var $this = $(this);
@@ -121,6 +121,6 @@
             $this.button('reset');
         }, 8000);
     });
-</script>
+</script> -->
 
 </html>

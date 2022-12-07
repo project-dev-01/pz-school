@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cookie;
 use App\Helpers\Helper;
+use Carbon\Carbon;
+
 
 class AuthController extends Controller
 {
@@ -242,22 +244,29 @@ class AuthController extends Controller
         $user_name = "";
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
-            if ($userDetails['data']['subsDetails']) {
-                // multiple roles same account
-                $role_ids = explode(",", $userDetails['data']['user']['role_id']);
-                $matchRoleIndex = array_search('2', $role_ids, true);
-                $roleID = $role_ids[$matchRoleIndex];
-                if ($roleID == 2) {
-                    $user_name = $this->sessionCommon($request, $userDetails, $roleID);
-                }
-                if ($roleID == 2) {
-                    $redirect_route = route('admin.dashboard');
-                    return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
-                } else {
-                    return redirect()->route('admin.login')->with('error', 'Invalid Credential');
-                }
+            $password_changed_at = $userDetails['data']['user']['password_changed_at'];
+            $created_at = $userDetails['data']['user']['created_at'];
+            $password_changed_at = new Carbon(($password_changed_at) ? $password_changed_at : $created_at);
+            if (Carbon::now()->diffInDays($password_changed_at) >= 1) {
+                return redirect()->route('password.expired')->with('error', 'Your password is expired');
             } else {
-                return redirect()->route('admin.login')->with('error', 'Access denied please contact admin');
+                if ($userDetails['data']['subsDetails']) {
+                    // multiple roles same account
+                    $role_ids = explode(",", $userDetails['data']['user']['role_id']);
+                    $matchRoleIndex = array_search('2', $role_ids, true);
+                    $roleID = $role_ids[$matchRoleIndex];
+                    if ($roleID == 2) {
+                        $user_name = $this->sessionCommon($request, $userDetails, $roleID);
+                    }
+                    if ($roleID == 2) {
+                        $redirect_route = route('admin.dashboard');
+                        return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
+                    } else {
+                        return redirect()->route('admin.login')->with('error', 'Invalid Credential');
+                    }
+                } else {
+                    return redirect()->route('admin.login')->with('error', 'Access denied please contact admin');
+                }
             }
         } else {
             return redirect()->route('admin.login')->with('error', $userDetails['message']);
@@ -539,7 +548,10 @@ class AuthController extends Controller
     {
         return view('auth.forgot-password');
     }
-
+    public function passwordExpired(Request $request)
+    {
+        return view('auth.expired');
+    }
     public function resetPassword(Request $request)
     {
 
@@ -549,21 +561,21 @@ class AuthController extends Controller
 
         $userDetails = $response->json();
         if ($userDetails['code'] == 200) {
-        
+
             $role_ids = explode(",", $userDetails['data']['role_id']);
             $role = $role_ids['0'];
             // dd($role_ids);
-            if($role ==1){
+            if ($role == 1) {
                 $redirect_route = route('super_admin.login');
-            }elseif($role==2){
+            } elseif ($role == 2) {
                 $redirect_route = route('admin.login');
-            }elseif($role==3){
+            } elseif ($role == 3) {
                 $redirect_route = route('staff.login');
-            }elseif($role==4){
+            } elseif ($role == 4) {
                 $redirect_route = route('teacher.login');
-            }elseif($role==5){
+            } elseif ($role == 5) {
                 $redirect_route = route('parent.login');
-            }elseif($role==6){
+            } elseif ($role == 6) {
                 $redirect_route = route('student.login');
             }
             return view('auth.success', ['redirect_route' => $redirect_route]);
@@ -575,6 +587,10 @@ class AuthController extends Controller
     public function passwordrest($token)
     {
         return view('auth.password-reset', ['token' => $token]);
+    }
+    public function passwordExpireReset($token)
+    {
+        return view('auth.password_expire_reset', ['token' => $token]);
     }
 
     public function resetPasswordValidation(Request $request)
@@ -588,6 +604,22 @@ class AuthController extends Controller
         $userDetails = $response->json();
         if ($userDetails['code'] == 200) {
             return redirect()->route('admin.login')->with('success', 'Your password has been changed!');
+        } else {
+            return redirect()->back()->with('error', $userDetails['message']);
+        }
+    }
+    public function resetExpirePassword(Request $request)
+    {
+        $response = Http::post(config('constants.api.reset_expire_reset_password'), [
+            'email' => $request->email,
+            'password' => $request->password,
+            'password_confirmation' => $request->password_confirmation,
+            'token' => $request->token
+        ]);
+        $userDetails = $response->json();
+        if ($userDetails['code'] == 200) {
+            $redirect_route = $userDetails['data'];
+            return redirect()->route($redirect_route)->with('success', 'Your password has been changed!');
         } else {
             return redirect()->back()->with('error', $userDetails['message']);
         }
@@ -609,12 +641,12 @@ class AuthController extends Controller
         session()->pull('school_logo');
         session()->pull('all_child');
         session()->pull('academic_session_id');
+        // session()->pull('password_changed_at');
         $req->session()->flush();
     }
     // set session common
     public function sessionCommon($req, $userDetails, $roleID)
     {
-        // dd($userDetails);
         $req->session()->put('user_id', $userDetails['data']['user']['id']);
         $req->session()->put('ref_user_id', $userDetails['data']['user']['user_id']);
         $req->session()->put('role_id', $roleID);
@@ -626,6 +658,8 @@ class AuthController extends Controller
         $req->session()->put('branch_id', $userDetails['data']['subsDetails']['id']);
         $req->session()->put('school_name', $userDetails['data']['subsDetails']['school_name']);
         $req->session()->put('school_logo', $userDetails['data']['subsDetails']['logo']);
+        // password_changed_at
+        // $req->session()->put('password_changed_at', $userDetails['data']['subsDetails']['password_changed_at']);
         // space remove school name
         $string = preg_replace('/\s+/', '-', $userDetails['data']['subsDetails']['school_name']);
         $req->session()->put('school_name_url', $string);
@@ -648,7 +682,7 @@ class AuthController extends Controller
         $user_name = $userDetails['data']['user']['name'];
         return $user_name;
     }
-    
+
     public function allLogout(Request $request)
     {
 
@@ -661,7 +695,7 @@ class AuthController extends Controller
         $response['role'] = $role;
         if ($response['code'] == 200) {
             $this->logoutCommon($request);
-        } 
+        }
         return $response;
     }
 }

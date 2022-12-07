@@ -133,6 +133,10 @@ Route::get('unread_notifications', [CommonController::class, 'unreadNotification
 Route::get('all_logout', [AuthController::class, 'allLogout'])->name('all_logout');
 // update settings session
 Route::post('update-setting-session', [CommonController::class, 'updateSettingSession'])->name('settings.updateSettingSession');
+// password expired
+Route::get('/password/expired/reset/{token}', [AuthController::class, 'passwordExpireReset'])->name('password.expired.reset');
+Route::get('password/expired', [AuthController::class, 'passwordExpired'])->name('password.expired');
+Route::post('password/post_expired', [AuthController::class, 'resetExpirePassword'])->name('password.post_expired');
 // admin routes start
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 

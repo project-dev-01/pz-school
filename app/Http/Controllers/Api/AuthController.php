@@ -318,7 +318,60 @@ class AuthController extends BaseController
             return $this->send500Error('Invalid token!', ['error' => 'Invalid token!']);
         }
     }
+    public function expireResetPassword(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'email' => 'required|email|exists:users',
+            'token' => 'required',
+            'password' => [
+                'required',
+                'min:8',
+                'max:30',
+                'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
+            ],
+            'password_confirmation' => 'required|same:password|min:8|max:30'
+        ]);
 
+        if ($validator->fails()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->messages()]);
+        }
+
+        $updatePassword = DB::table('password_resets')
+            ->where(['email' => $request->email, 'token' => $request->token, 'password_reminder' => "1"])
+            ->first();
+        //  dd($updatePassword);
+        if ($updatePassword) {
+            $updateData =
+                [
+                    'password' => bcrypt($request->password),
+                    'login_attempt' => "0",
+                    'status' => "0",
+                    'password_changed_at' => date("Y-m-d H:i:s")
+                ];
+            User::where('email', $request->email)
+                ->update($updateData);
+            // DB::table('password_resets')->where(['email' => $request->email, 'password_reminder' => "1"])->delete();
+            $userDetails = User::select('role_id')->where('email', $request->email)->first();
+            $role_id = $userDetails->role_id;
+            if ($role_id == 2) {
+                $redirect_route = 'admin.login';
+            } elseif ($role_id == 3) {
+                $redirect_route = 'staff.login';
+            } elseif ($role_id == 4) {
+                $redirect_route = 'teacher.login';
+            } elseif ($role_id == 5) {
+                $redirect_route = 'parent.login';
+            } elseif ($role_id == 6) {
+                $redirect_route = 'student.login';
+            } else {
+                $redirect_route = 'admin.login';
+            }
+            // $redirect_route = route('admin.dashboard');
+            return $this->successResponse($redirect_route, 'Your password has been changed!');
+        } else {
+            return $this->send500Error('Invalid token!', ['error' => 'Invalid token!']);
+        }
+    }
 
     // employee punchcard check
     public function employeePunchCardCheck(Request $request)
