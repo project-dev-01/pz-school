@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSoapTable extends Migration
+class CreateSoapSubjectTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateSoapTable extends Migration
      */
     public function up()
     {
-        Schema::create('soap', function (Blueprint $table) {
+        Schema::create('soap_subject', function (Blueprint $table) {
             $table->id();
-            $table->integer('soap_notes_id');
-            $table->integer('soap_category_id');
-            $table->integer('soap_sub_category_id');
-            $table->string('referred_by');
-            $table->date('date');
+            $table->string('title');
+            $table->string('header');
+            $table->text('body');
+            $table->integer('soap_type_id');
+            $table->integer('student_id');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateSoapTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('soap');
+        Schema::dropIfExists('soap_subject');
     }
 }

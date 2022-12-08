@@ -5912,4 +5912,332 @@ class AdminController extends Controller
             ]
         );
     }
+
+    // index soap
+    public function soap()
+    {
+        $soap_category_list = Helper::GetMethod(config('constants.api.soap_category_list'));
+        $soap_list = Helper::GetMethod(config('constants.api.soap_list'));
+        $soap_subject_list = Helper::GetMethod(config('constants.api.soap_subject_list'));
+        
+        // dd($soap_subject_list);
+        
+        return view(
+            'admin.soap.index',
+            [
+                'soap_category_list' => $soap_category_list['data'],
+                'soap_list' => $soap_list['data'],
+                'soap_subject_list' => $soap_subject_list['data'],
+            ]
+        );
+    }
+
+    // index Soap Category
+    public function soapCategory()
+    {
+        return view('admin.soap_category.index');
+    }
+
+    public function addSoapCategory(Request $request)
+    {
+        $data = [
+            'name' => $request->name,
+            'soap_type_id' => $request->soap_type_id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.soap_category_add'), $data);
+        return $response;
+    }
+    public function getSoapCategoryList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.soap_category_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('soap_type_id', function ($row) {
+                if($row['soap_type_id']=="1"){
+                    return "Subjective";
+                }elseif($row['soap_type_id']=="2"){
+                    return "Objective";
+                }elseif($row['soap_type_id']=="3"){
+                    return "Assessment";
+                }elseif($row['soap_type_id']=="4"){
+                    return "Plan";
+                }else{
+                    return "";
+                }
+            })
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editSoapCategoryBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteSoapCategoryBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['color', 'actions'])
+            ->make(true);
+    }
+    public function getSoapCategoryDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.soap_category_details'), $data);
+        return $response;
+    }
+    public function updateSoapCategory(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name,
+            'soap_type_id' => $request->soap_type_id,
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.soap_category_update'), $data);
+        return $response;
+    }
+    // DELETE event type Details
+    public function deleteSoapCategory(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.soap_category_delete'), $data);
+        return $response;
+    }
+    
+    // index Soap Category
+    public function soapSubCategory()
+    {
+        return view('admin.soap_sub_category.index');
+    }
+
+    public function addSoapSubCategory(Request $request)
+    {
+        
+        $base64 = "";
+        $extension = "";
+        $file = $request->file('photo');
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        }
+        // dd($data);
+        $data = [
+            'name' => $request->name,
+            'soap_category_id' => $request->soap_category_id,
+            'photo' => $base64,
+            'file_extension' => $extension,
+        ];
+        $response = Helper::PostMethod(config('constants.api.soap_sub_category_add'), $data);
+        return $response;
+    }
+    public function getSoapSubCategoryList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.soap_sub_category_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editSoapSubCategoryBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteSoapSubCategoryBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['color', 'actions'])
+            ->make(true);
+    }
+    public function getSoapSubCategoryDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.soap_sub_category_details'), $data);
+        return $response;
+    }
+    public function updateSoapSubCategory(Request $request)
+    {
+        $base64 = "";
+        $extension = "";
+        $file = $request->file('photo');
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        }
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name,
+            'soap_category_id' => $request->soap_category_id,
+            'photo' => $base64,
+            'old_photo' => $request->old_photo,
+            'file_extension' => $extension,
+        ];
+        $response = Helper::PostMethod(config('constants.api.soap_sub_category_update'), $data);
+        return $response;
+    }
+    // DELETE event type Details
+    public function deleteSoapSubCategory(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.soap_sub_category_delete'), $data);
+        return $response;
+    }
+
+    
+
+    // index Soap Category
+    public function soapNotes()
+    {
+        return view('admin.soap_notes.index');
+    }
+
+    public function addSoapNotes(Request $request)
+    {
+        $data = [
+            'notes' => $request->notes,
+            'soap_category_id' => $request->soap_category_id,
+            'soap_sub_category_id' => $request->soap_sub_category_id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.soap_notes_add'), $data);
+        return $response;
+    }
+    public function getSoapNotesList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.soap_notes_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editSoapNotesBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteSoapNotesBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['color', 'actions'])
+            ->make(true);
+    }
+    public function getSoapNotesDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.soap_notes_details'), $data);
+        return $response;
+    }
+    public function updateSoapNotes(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'notes' => $request->notes,
+            'soap_category_id' => $request->soap_category_id,
+            'soap_sub_category_id' => $request->soap_sub_category_id,
+        ];
+// dd($data);
+        $response = Helper::PostMethod(config('constants.api.soap_notes_update'), $data);
+        return $response;
+    }
+    // DELETE event type Details
+    public function deleteSoapNotes(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.soap_notes_delete'), $data);
+        return $response;
+    }
+
+    public function addSoap(Request $request)
+    {
+        $data = [
+            'notes'=>$request->notes,
+            'referred_by' => "Doc",
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.soap_add'), $data);
+        // dd($response);
+        return $response;
+    }
+    // createEvent 
+    public function createSoapSubject()
+    {
+        // dd($gettype);
+        return view('admin.soap.subject.add');
+    }
+    // edit Event 
+    public function editSoapSubject($id)
+    {
+
+        $data = [
+            'id' => $id,
+        ];
+        $getsoapsubject = Helper::PostMethod(config('constants.api.soap_subject_details'), $data);
+        return view(
+            'admin.soap.subject.edit',
+            [
+                'soapsubject' => $getsoapsubject['data'],
+            ]
+        );
+    }
+
+
+    public function addSoapSubject(Request $request)
+    {
+        $data = [
+            'title' => $request->title,
+            'header' => $request->header,
+            'body' => $request->body,
+            'soap_type_id' => $request->soap_type_id,
+            'student_id' => "1",
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.soap_subject_add'), $data);
+        // dd($response);
+        return $response;
+    }
+
+    public function getSoapSubjectList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.soap_subject_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="' . route('admin.soap_subject.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteSoapSubjectBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+            ->rawColumns(['classname', 'publish', 'actions'])
+            ->make(true);
+    }
+    // Update soap_subject 
+    public function updateSoapSubject(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'title' => $request->title,
+            'header' => $request->header,
+            'body' => $request->body,
+            'soap_type_id' => $request->soap_type_id,
+            'student_id' => $request->student_id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.soap_subject_update'), $data);
+        return $response;
+    }
+    // DELETE soap_subject 
+    public function deleteSoapSubject(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.soap_subject_delete'), $data);
+        return $response;
+    }
 }

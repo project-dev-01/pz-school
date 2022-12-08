@@ -1432,6 +1432,11 @@ class StaffController extends Controller
             $max = $timetable['data']['max'];
 
             $response = "";
+            $response .= '<tr><td class="center" style="color:#ed1833;">Day/Period</td>';
+            for ($i = 1; $i <= $max; $i++) {
+                $response .= '<td class="centre">' . $i . '</td>';
+            }
+            $response .= '</tr>';
             foreach ($days as $day) {
 
                 if (!isset($timetable['data']['week'][$day]) && ($day == "saturday" || $day == "sunday")) {

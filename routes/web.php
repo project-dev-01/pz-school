@@ -648,6 +648,45 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('acdemic/copy/subject_teacher_assign', [AdminController::class, 'acdemicCopySubjectTeacherAssign'])->name('admin.acdemic.copy.subject_teacher_assign');
         Route::get('exam_master/copy/exam_setup', [AdminController::class, 'examMasterCopyExamSetup'])->name('admin.exam_master.copy.exam_setup');
         Route::get('exam_master/copy/exam_paper', [AdminController::class, 'examMasterCopyExamPaper'])->name('admin.exam_master.copy.exam_paper');
+
+        
+        // Soap routes
+        Route::get('soap/index', [AdminController::class, 'soap'])->name('admin.soap');
+        Route::get('soap/list', [AdminController::class, 'getSoapList'])->name('admin.soap.list');
+        Route::post('soap/add', [AdminController::class, 'addSoap'])->name('admin.soap.add');
+
+        // soap_category routes
+        Route::get('soap_category/index', [AdminController::class, 'soapCategory'])->name('admin.soap_category');
+        Route::post('soap_category/add', [AdminController::class, 'addSoapCategory'])->name('admin.soap_category.add');
+        Route::get('soap_category/list', [AdminController::class, 'getSoapCategoryList'])->name('admin.soap_category.list');
+        Route::post('soap_category/soap_category-details', [AdminController::class, 'getSoapCategoryDetails'])->name('admin.soap_category.details');
+        Route::post('soap_category/update', [AdminController::class, 'updateSoapCategory'])->name('admin.soap_category.update');
+        Route::post('soap_category/delete', [AdminController::class, 'deleteSoapCategory'])->name('admin.soap_category.delete');
+
+        // soap_sub_category routes
+        Route::get('soap_sub_category/index', [AdminController::class, 'soapSubCategory'])->name('admin.soap_sub_category');
+        Route::post('soap_sub_category/add', [AdminController::class, 'addSoapSubCategory'])->name('admin.soap_sub_category.add');
+        Route::get('soap_sub_category/list', [AdminController::class, 'getSoapSubCategoryList'])->name('admin.soap_sub_category.list');
+        Route::post('soap_sub_category/soap_sub_category-details', [AdminController::class, 'getSoapSubCategoryDetails'])->name('admin.soap_sub_category.details');
+        Route::post('soap_sub_category/update', [AdminController::class, 'updateSoapSubCategory'])->name('admin.soap_sub_category.update');
+        Route::post('soap_sub_category/delete', [AdminController::class, 'deleteSoapSubCategory'])->name('admin.soap_sub_category.delete');
+
+        // soap_notes routes
+        Route::get('soap_notes/index', [AdminController::class, 'soapNotes'])->name('admin.soap_notes');
+        Route::post('soap_notes/add', [AdminController::class, 'addSoapNotes'])->name('admin.soap_notes.add');
+        Route::get('soap_notes/list', [AdminController::class, 'getSoapNotesList'])->name('admin.soap_notes.list');
+        Route::post('soap_notes/soap_notes-details', [AdminController::class, 'getSoapNotesDetails'])->name('admin.soap_notes.details');
+        Route::post('soap_notes/update', [AdminController::class, 'updateSoapNotes'])->name('admin.soap_notes.update');
+        Route::post('soap_notes/delete', [AdminController::class, 'deleteSoapNotes'])->name('admin.soap_notes.delete');
+
+        
+        // soap_subject routes
+        Route::get('soap_subject/create', [AdminController::class, 'createSoapSubject'])->name('admin.soap_subject.create');
+        Route::post('soap_subject/add', [AdminController::class, 'addSoapSubject'])->name('admin.soap_subject.add');
+        Route::get('soap_subject/list', [AdminController::class, 'getSoapSubjectList'])->name('admin.soap_subject.list');
+        Route::post('soap_subject/edit', [AdminController::class, 'editSoapSubject'])->name('admin.soap_subject.edit');
+        Route::post('soap_subject/update', [AdminController::class, 'updateSoapSubject'])->name('admin.soap_subject.update');
+        Route::post('soap_subject/delete', [AdminController::class, 'deleteSoapSubject'])->name('admin.soap_subject.delete');
     });
 });
 // admin routes end

@@ -642,7 +642,45 @@ return [
          'acdemic_copy_subject_teacher_assign' => $url.'/acdemic/copy/subject_teacher_assign',
          // copy exam master to next session
          'exam_master_copy_exam_setup' => $url.'/exam_master/copy/exam_setup',
-         'exam_master_copy_exam_paper' => $url.'/exam_master/copy/exam_paper'
+         'exam_master_copy_exam_paper' => $url.'/exam_master/copy/exam_paper',
+         
+         'category_list_by_soap_type' => $url.'/soap/category/list',
+         'sub_category_list_by_category' => $url.'/soap/sub_category/list',
+         'notes_list_by_sub_category' => $url.'/soap/filter_by_notes',
+ 
+         //soap url
+         'soap_list' => $url.'/soap/list',
+         'soap_add' => $url.'/soap/add',
+         'soap_delete' => $url.'/soap/delete',
+         
+         // soap category url
+         'soap_category_add' => $url.'/soap_category/add',
+         'soap_category_list' => $url.'/soap_category/list',
+         'soap_category_details' => $url.'/soap_category/soap_category-details',
+         'soap_category_update' => $url.'/soap_category/update',
+         'soap_category_delete' => $url.'/soap_category/delete',
+         
+         // soap sub category url
+         'soap_sub_category_add' => $url.'/soap_sub_category/add',
+         'soap_sub_category_list' => $url.'/soap_sub_category/list',
+         'soap_sub_category_details' => $url.'/soap_sub_category/soap_sub_category-details',
+         'soap_sub_category_update' => $url.'/soap_sub_category/update',
+         'soap_sub_category_delete' => $url.'/soap_sub_category/delete',
+ 
+         // soap notes url
+         'soap_notes_add' => $url.'/soap_notes/add',
+         'soap_notes_list' => $url.'/soap_notes/list',
+         'soap_notes_details' => $url.'/soap_notes/soap_notes-details',
+         'soap_notes_update' => $url.'/soap_notes/update',
+         'soap_notes_delete' => $url.'/soap_notes/delete',
+         
+         // soap subject url
+         'soap_subject_add' => $url.'/soap_subject/add',
+         'soap_subject_list' => $url.'/soap_subject/list',
+         'soap_subject_details' => $url.'/soap_subject/soap_subject-details',
+         'soap_subject_update' => $url.'/soap_subject/update',
+         'soap_subject_delete' => $url.'/soap_subject/delete',
+        
         ]
 
 ];

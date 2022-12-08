@@ -3308,39 +3308,6 @@ class ApiControllerOne extends BaseController
             return $this->successResponse($calendors, 'Available teacher list');
         }
     }
-    // soap category add
-    public function soapCategoryAdd(Request $request)
-    {
-        $validator = \Validator::make($request->all(), [
-            'branch_id' => 'required',
-            'name' => 'required',
-            'soap_type_id' => 'required'
-        ]);
-
-        if (!$validator->passes()) {
-            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-        } else {
-            // create new connection
-            $createConnection = $this->createNewConnection($request->branch_id);
-            // check exist name
-            if ($createConnection->table('soap_category')->where([['name', '=', $request->name], ['soap_type_id', '=',  $request->soap_type_id]])->count() > 0) {
-                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
-            } else {
-                // insert data
-                $query = $createConnection->table('soap_category')->insert([
-                    'name' => $request->name,
-                    'soap_type_id' => $request->soap_type_id,
-                    'created_at' => date("Y-m-d H:i:s")
-                ]);
-                $success = [];
-                if (!$query) {
-                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-                } else {
-                    return $this->successResponse($success, 'Soap Category has been successfully saved');
-                }
-            }
-        }
-    }
     // soap category list
     public function soapCategoryList(Request $request)
     {
@@ -3358,90 +3325,13 @@ class ApiControllerOne extends BaseController
                     'name',
                     'soap_type_id'
                 )
+                ->where('soap_type_id', $request->soap_type_id)
                 ->get();
             return $this->successResponse($soapCategory, 'Soap category list');
         }
     }
-    // soap category row
-    public function soapCategoryRow(Request $request)
-    {
-
-        $validator = \Validator::make($request->all(), [
-            'id' => 'required',
-            'branch_id' => 'required',
-        ]);
-
-        if (!$validator->passes()) {
-            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-        } else {
-            // create new connection
-            $createConnection = $this->createNewConnection($request->branch_id);
-            // get row data
-            $sectionDetails = $createConnection->table('soap_category')->where('id', $request->id)->first();
-            return $this->successResponse($sectionDetails, 'Soap category row fetch successfully');
-        }
-    }
-    // update soap category
-    public function updateSoapCategory(Request $request)
-    {
-
-        $validator = \Validator::make($request->all(), [
-            'name' => 'required',
-            'soap_type_id' => 'required',
-            'id' => 'required',
-            'branch_id' => 'required'
-        ]);
-
-        if (!$validator->passes()) {
-            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-        } else {
-
-            $id = $request->id;
-            // create new connection
-            $Connection = $this->createNewConnection($request->branch_id);
-            // check exist name
-            if ($Connection->table('soap_category')->where([['name', '=', $request->name], ['soap_type_id', '=', $request->soap_type_id], ['id', '!=', $id]])->count() > 0) {
-                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
-            } else {
-                // update data
-                $query = $Connection->table('soap_category')->where('id', $id)->update([
-                    'name' => $request->name,
-                    'soap_type_id' => $request->soap_type_id,
-                    'updated_at' => date("Y-m-d H:i:s")
-                ]);
-                $success = [];
-                if ($query) {
-                    return $this->successResponse($success, 'Soap Category Details have Been updated');
-                } else {
-                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-                }
-            }
-        }
-    }
-    // delete soap category
-    public function deleteSoapCategory(Request $request)
-    {
-        $validator = \Validator::make($request->all(), [
-            'id' => 'required',
-            'branch_id' => 'required'
-        ]);
-
-        if (!$validator->passes()) {
-            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-        } else {
-            // create new connection
-            $createConnection = $this->createNewConnection($request->branch_id);
-            $query = $createConnection->table('soap_category')->where('id', $request->id)->delete();
-            $success = [];
-            if ($query) {
-                return $this->successResponse($success, 'Soap category have been deleted successfully');
-            } else {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-            }
-        }
-    }
     // soap sub category
-    public function soapSubCategory(Request $request)
+    public function soapSubCategoryList(Request $request)
     {
         $validator = \Validator::make($request->all(), [
             'branch_id' => 'required',
@@ -3455,7 +3345,8 @@ class ApiControllerOne extends BaseController
             $soapCategory = $conn->table('soap_sub_category')
                 ->select(
                     'id',
-                    'name'
+                    'name',
+                    'photo'
                 )
                 ->where('soap_category_id', $request->soap_category_id)
                 ->get();
@@ -3493,10 +3384,7 @@ class ApiControllerOne extends BaseController
     {
         $validator = \Validator::make($request->all(), [
             'branch_id' => 'required',
-            'soap_notes_id' => 'required',
             'notes' => 'required',
-            'soap_category_id' => 'required',
-            'soap_sub_category_id' => 'required',
             'referred_by' => 'required'
         ]);
         if (!$validator->passes()) {
@@ -3504,18 +3392,27 @@ class ApiControllerOne extends BaseController
         } else {
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
-            $name = $request->name;
-            $data = [
-                'soap_notes_id' => $request->soap_notes_id,
-                'notes' => $request->notes,
-                'soap_category_id' => $request->soap_category_id,
-                'soap_sub_category_id' => $request->soap_sub_category_id,
-                'referred_by' => $request->referred_by,
-                'date' => date('Y-m-d'),
-                'created_at' => date("Y-m-d H:i:s")
-            ];
-            // insert data
-            $query = $conn->table('soap')->insert($data);
+            $notes = $request->notes;
+            if ($notes) {
+
+                foreach ($notes as $note) {
+                    // return $note;
+                    if (!isset($note['soap_id'])) {
+                        $data = [
+                            'soap_notes_id' => $note['soap_notes_id'],
+                            'soap_category_id' => $note['soap_category_id'],
+                            'soap_sub_category_id' => $note['soap_sub_category_id'],
+                            'referred_by' => $request->referred_by,
+                            'date' => date('Y-m-d'),
+                            'created_at' => date("Y-m-d H:i:s")
+                        ];
+                        // insert data
+                        $query = $conn->table('soap')->insert($data);
+                    }else{
+                        $query = 1;
+                    }
+                }
+            }
             $success = [];
             if (!$query) {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
@@ -3542,8 +3439,9 @@ class ApiControllerOne extends BaseController
                     'sp.id',
                     'sn.notes as soap_notes',
                     'sp.referred_by',
-                    'sp.notes',
-                    'sp.date'
+                    'sp.date',
+                    'sp.soap_category_id',
+                    'sp.soap_sub_category_id',
                 )
                 ->join('soap_notes as sn', 'sp.soap_notes_id', '=', 'sn.id')
                 ->get();
@@ -3988,6 +3886,576 @@ class ApiControllerOne extends BaseController
             return $user;
         } else {
             return false;
+        }
+    }
+    
+
+    
+    // addSoapCategory
+    public function addSoapCategory(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'soap_type_id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+                // insert data
+                $query = $conn->table('soap_category')->insert([
+                    'name' => $request->name,
+                    'soap_type_id' => $request->soap_type_id,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Category has been successfully saved');
+                }
+        }
+    }
+    // getSoapCategoryList
+    public function getSoapCategoryList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $SoapCategoryDetails = $conn->table('soap_category')->get();
+            return $this->successResponse($SoapCategoryDetails, 'Category record fetch successfully');
+        }
+    }
+    // get SoapCategory row details
+    public function getSoapCategoryDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $SoapCategoryDetails = $conn->table('soap_category')->where('id', $id)->first();
+            return $this->successResponse($SoapCategoryDetails, 'Category row fetch successfully');
+        }
+    }
+    // update SoapCategory
+    public function updateSoapCategory(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'soap_type_id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+                // update data
+                $query = $conn->table('soap_category')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'soap_type_id' => $request->soap_type_id,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Category Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+        }
+    }
+    // delete SoapCategory
+    public function deleteSoapCategory(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('soap_category')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Category have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+
+    // addSoapSubCategory
+    public function addSoapSubCategory(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'soap_category_id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+                // insert data
+                if($request->photo) {
+                    $path = '/public/soap/images/';
+
+                    $fileName = 'SCIMG_' . date('Ymd') . uniqid() . '.' .$request->file_extension;
+                    $base64 = base64_decode($request->photo);
+                    $file = base_path() . $path . $fileName;
+                    $suc = file_put_contents($file, $base64);
+                } else{
+                    $fileName = "";
+                }
+                $query = $conn->table('soap_sub_category')->insert([
+                    'name' => $request->name,
+                    'soap_category_id' => $request->soap_category_id,
+                    'photo' => $fileName,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Sub Category has been successfully saved');
+                }
+        }
+    }
+    // getSoapSubCategoryList
+    public function getSoapSubCategoryList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $SoapSubCategoryDetails = $conn->table('soap_sub_category as sc')->select('sc.id','sc.name','c.name as soap_category_id')
+                                        ->leftJoin('soap_category as c', 'sc.soap_category_id', '=', 'c.id')->get();
+            return $this->successResponse($SoapSubCategoryDetails, 'Sub Category record fetch successfully');
+        }
+    }
+    // get SoapSubCategory row details
+    public function getSoapSubCategoryDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $SoapSubCategoryDetails = $conn->table('soap_sub_category as sc')->select('sc.*','c.soap_type_id')
+                                        ->leftJoin('soap_category as c', 'sc.soap_category_id', '=', 'c.id')
+                                        ->where('sc.id', $id)->first();
+            return $this->successResponse($SoapSubCategoryDetails, 'Sub Category row fetch successfully');
+        }
+    }
+    // update SoapSubCategory
+    public function updateSoapSubCategory(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'soap_category_id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+                if($request->photo) {
+                    $path = '/public/soap/images/';
+                    $oldPicture = $conn->table('soap_sub_category')->where('id', $id)->first();
+
+                    // return $oldPicture->photo;
+                    if ($oldPicture->photo != '') {
+                        if (\File::exists(base_path($path . $oldPicture->photo))) {
+                            \File::delete(base_path($path . $oldPicture->photo));
+                        }
+                    }
+                    $fileName = 'SCIMG_' . date('Ymd') . uniqid() . '.' .$request->file_extension;
+                    $base64 = base64_decode($request->photo);
+                    $file = base_path() . $path . $fileName;
+                    $suc = file_put_contents($file, $base64);
+                } else{
+                    if($request->old_photo) {
+                        $fileName = $request->old_photo;
+                    }else{
+                        $fileName = "";
+                    }
+                }
+                // update data
+                $query = $conn->table('soap_sub_category')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'soap_category_id' => $request->soap_category_id,
+                    'photo' => $fileName,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Sub Category Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+        }
+    }
+    // delete SoapSubCategory
+    public function deleteSoapSubCategory(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('soap_sub_category')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Sub Category have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+
+    
+    // addSoapNotes
+    public function addSoapNotes(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'notes' => 'required',
+            'soap_category_id' => 'required',
+            'soap_sub_category_id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+                // insert data
+                $query = $conn->table('soap_notes')->insert([
+                    'notes' => $request->notes,
+                    'soap_category_id' => $request->soap_category_id,
+                    'soap_sub_category_id' => $request->soap_sub_category_id,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Notes has been successfully saved');
+                }
+        }
+    }
+    // getSoapNotesList
+    public function getSoapNotesList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $SoapNotesDetails = $conn->table('soap_notes as n')->select('n.id','n.notes','c.name as soap_category_id', 'sc.name as soap_sub_category_id')
+                                    ->leftJoin('soap_category as c', 'n.soap_category_id', '=', 'c.id')
+                                    ->leftJoin('soap_sub_category as sc', 'n.soap_sub_category_id', '=', 'sc.id')
+                                    ->get();
+            return $this->successResponse($SoapNotesDetails, 'Notes record fetch successfully');
+        }
+    }
+    // get SoapNotes row details
+    public function getSoapNotesDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $SoapNotesDetails = $conn->table('soap_notes as n')->select('n.*','c.soap_type_id')
+            ->leftJoin('soap_category as c', 'n.soap_category_id', '=', 'c.id')->where('n.id', $id)->first();
+            return $this->successResponse($SoapNotesDetails, 'Notes row fetch successfully');
+        }
+    }
+    // update SoapNotes
+    public function updateSoapNotes(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'notes' => 'required',
+            'soap_category_id' => 'required',
+            'soap_sub_category_id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+                // update data
+                $query = $conn->table('soap_notes')->where('id', $id)->update([
+                    'notes' => $request->notes,
+                    'soap_category_id' => $request->soap_category_id,
+                    'soap_sub_category_id' => $request->soap_sub_category_id,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Notes Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+        }
+    }
+    // delete SoapNotes
+    public function deleteSoapNotes(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('soap_notes')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Notes have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+    
+    // addSoapSubject
+    public function addSoapSubject(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'title' => 'required',
+            'header' => 'required',
+            'body' => 'required',
+            'soap_type_id' => 'required',
+            'student_id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+                // insert data
+                $query = $conn->table('soap_subject')->insert([
+                    'title' => $request->title,
+                    'header' => $request->header,
+                    'body' => $request->body,
+                    'soap_type_id' => $request->soap_type_id,
+                    'student_id' => $request->student_id,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Subject has been successfully saved');
+                }
+        }
+    }
+    // getSoapSubjectList
+    public function getSoapSubjectList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $SoapSubjectDetails = $conn->table('soap_subject')->get();
+            return $this->successResponse($SoapSubjectDetails, 'Subject record fetch successfully');
+        }
+    }
+    // get SoapSubject row details
+    public function getSoapSubjectDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $SoapSubjectDetails = $conn->table('soap_subject')->where('id', $id)->first();
+            return $this->successResponse($SoapSubjectDetails, 'Subject row fetch successfully');
+        }
+    }
+    // update SoapSubject
+    public function updateSoapSubject(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'title' => 'required',
+            'header' => 'required',
+            'body' => 'required',
+            'soap_type_id' => 'required',
+            'student_id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+                // update data
+                $query = $conn->table('soap_subject')->where('id', $id)->update([
+                    'title' => $request->title,
+                    'header' => $request->header,
+                    'body' => $request->body,
+                    'soap_type_id' => $request->soap_type_id,
+                    'student_id' => $request->student_id,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Subject Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+        }
+    }
+    // delete SoapSubject
+    public function deleteSoapSubject(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('soap_subject')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Subject have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
         }
     }
 }

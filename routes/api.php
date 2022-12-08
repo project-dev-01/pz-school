@@ -682,14 +682,9 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
 
     Route::post('all_logout', [AuthController::class, 'allLogout']);
-    // soap category
-    Route::post('soap_category/add', [ApiControllerOne::class, 'soapCategoryAdd']);
-    Route::get('soap_category/list', [ApiControllerOne::class, 'soapCategoryList']);
-    Route::post('soap_category/row-details', [ApiControllerOne::class, 'soapCategoryRow']);
-    Route::post('soap_category/update', [ApiControllerOne::class, 'updateSoapCategory']);
-    Route::post('soap_category/delete', [ApiControllerOne::class, 'deleteSoapCategory']);
     // soap
-    Route::post('soap/soap_sub_category', [ApiControllerOne::class, 'soapSubCategory']);
+    Route::post('soap/category/list', [ApiControllerOne::class, 'soapCategoryList']);
+    Route::post('soap/sub_category/list', [ApiControllerOne::class, 'soapSubCategoryList']);
     Route::post('soap/filter_by_notes', [ApiControllerOne::class, 'soapFilterByNotes']);
     // soap crud
     Route::post('soap/add', [ApiControllerOne::class, 'soapAdd']);
@@ -705,4 +700,33 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // copy exam master to next session
     Route::post('exam_master/copy/exam_setup', [ApiControllerOne::class, 'copyExamSetup']);
     Route::post('exam_master/copy/exam_paper', [ApiControllerOne::class, 'copyExamPaper']);
+    
+    // SoapSubject routes
+    Route::post('soap_subject/add', [ApiControllerOne::class, 'addSoapSubject']);
+    Route::get('soap_subject/list', [ApiControllerOne::class, 'getSoapSubjectList']);
+    Route::post('soap_subject/soap_subject-details', [ApiControllerOne::class, 'getSoapSubjectDetails']);
+    Route::post('soap_subject/update', [ApiControllerOne::class, 'updateSoapSubject']);
+    Route::post('soap_subject/delete', [ApiControllerOne::class, 'deleteSoapSubject']);
+
+    
+    // SOAP category crud routes
+    Route::post('soap_category/add', [ApiControllerOne::class, 'addSoapCategory']);
+    Route::get('soap_category/list', [ApiControllerOne::class, 'getSoapCategoryList']);
+    Route::post('soap_category/soap_category-details', [ApiControllerOne::class, 'getSoapCategoryDetails']);
+    Route::post('soap_category/update', [ApiControllerOne::class, 'updateSoapCategory']);
+    Route::post('soap_category/delete', [ApiControllerOne::class, 'deleteSoapCategory']);
+
+    // SOAP sub category crud routes
+    Route::post('soap_sub_category/add', [ApiControllerOne::class, 'addSoapSubCategory']);
+    Route::get('soap_sub_category/list', [ApiControllerOne::class, 'getSoapSubCategoryList']);
+    Route::post('soap_sub_category/soap_sub_category-details', [ApiControllerOne::class, 'getSoapSubCategoryDetails']);
+    Route::post('soap_sub_category/update', [ApiControllerOne::class, 'updateSoapSubCategory']);
+    Route::post('soap_sub_category/delete', [ApiControllerOne::class, 'deleteSoapSubCategory']);
+
+    // SOAP Notes crud routes
+    Route::post('soap_notes/add', [ApiControllerOne::class, 'addSoapNotes']);
+    Route::get('soap_notes/list', [ApiControllerOne::class, 'getSoapNotesList']);
+    Route::post('soap_notes/soap_notes-details', [ApiControllerOne::class, 'getSoapNotesDetails']);
+    Route::post('soap_notes/update', [ApiControllerOne::class, 'updateSoapNotes']);
+    Route::post('soap_notes/delete', [ApiControllerOne::class, 'deleteSoapNotes']);
 });

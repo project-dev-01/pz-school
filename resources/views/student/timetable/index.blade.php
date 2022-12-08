@@ -64,9 +64,15 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="table-responsive">
-                                <table class="table table-bordered mb-0" style="width:max-content;">
+                                <table class="table table-bordered mb-0 table2excel" style="width:max-content;">
                                     <tbody id="timetable">
                                         @if($timetable>0)
+                                        
+                                        <tr><td class="center" style="color:#ed1833;">Day/Period</td>
+                                        @for ($i = 1; $i <= $max; $i++)
+                                            <td class="centre">{{ $i }}</td>
+                                        @endfor
+                                        </tr>
                                         @foreach($days as $day)
                                         @if (!isset($timetable['data']['week'][$day]) && ($day == "saturday" || $day == "sunday"))
                                         @else
@@ -141,6 +147,11 @@
 
                             </div> <!-- end table-responsive-->
                         </div> <!-- end col-->
+                        <div class="col-md-12">
+                            <div class="clearfix mt-4">
+                                <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel" style="float:right;">Download</button>
+                            </div>
+                        </div> 
                     </div>
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
@@ -150,5 +161,12 @@
     <!-- end row -->
 
 </div> <!-- container -->
+
+@endsection
+
+@section('scripts')
+<script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
+</script>
+<script src="{{ asset('public/js/custom/timetable.js') }}"></script>
 
 @endsection
