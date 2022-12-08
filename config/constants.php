@@ -495,6 +495,7 @@ return [
          
         'reset_password' => $url.'/reset_password',
         'reset_password_validation' => $url.'/reset_password_validation',
+        'reset_password_expired_link' => $url.'/reset/password_expired_link',
         'reset_expire_reset_password' => $url.'/reset/expire_reset_password',
         // notifications
         'unread_notifications' => $url.'/unread_notifications',

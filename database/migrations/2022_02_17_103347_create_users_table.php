@@ -18,14 +18,15 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->integer('user_id')->nullable();
             $table->integer('branch_id')->nullable();
-            $table->string('role_id');      
+            $table->string('role_id');
             $table->string('email')->unique();
-            $table->string('picture')->nullable();    
+            $table->string('picture')->nullable();
             $table->enum('status', ['0', '1']);
             $table->timestamp('email_verified_at')->nullable();
             $table->integer('login_attempt')->default('0');
             $table->string('password');
-            $table->text('remember_token'); 
+            $table->text('remember_token');
+            $table->timestamp('password_changed_at')->nullable();
             $table->timestamps();
         });
     }

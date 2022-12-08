@@ -43,7 +43,7 @@
                                     </a>
                                 </div><br>
                                 <h3 class="passrecov">Reset Password</h3>
-                                <p class="text-muted opoos">Dear user from Maahad Tahfiz Al-Quran Darul Saadah Lilbanat. <br>Your old password has been resetted. Kindly input the new password.</p>
+                                <p class="text-muted opoos">Dear user from SMK Kiaramas. <br>Your old password has been resetted. Kindly input the new password.</p>
                             </div>
                             <form id="changeNewPassword" action="{{ route('password.post_expired') }}" method="post">
                                 @if ( Session::get('success'))
@@ -59,7 +59,7 @@
                                 @csrf
                                 <input type="hidden" name="token" value="{{ $token }}">
                                 <div class="form-group">
-                                    <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">Maahad Tahfiz Al-Quran Darul Saadah Lilbanat</span>
+                                    <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">SMK Kiaramas</span>
                                 </div>
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-merge">

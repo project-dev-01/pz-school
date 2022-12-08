@@ -244,12 +244,12 @@ class AuthController extends Controller
         $user_name = "";
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
-            $password_changed_at = $userDetails['data']['user']['password_changed_at'];
-            $created_at = $userDetails['data']['user']['created_at'];
-            $password_changed_at = new Carbon(($password_changed_at) ? $password_changed_at : $created_at);
-            if (Carbon::now()->diffInDays($password_changed_at) >= 1) {
-                return redirect()->route('password.expired')->with('error', 'Your password is expired');
-            } else {
+            // $password_changed_at = $userDetails['data']['user']['password_changed_at'];
+            // $created_at = $userDetails['data']['user']['created_at'];
+            // $password_changed_at = new Carbon(($password_changed_at) ? $password_changed_at : $created_at);
+            // if (Carbon::now()->diffInDays($password_changed_at) >= 1) {
+            //     return redirect()->route('password.expired')->with('error', 'Your password is expired');
+            // } else {
                 if ($userDetails['data']['subsDetails']) {
                     // multiple roles same account
                     $role_ids = explode(",", $userDetails['data']['user']['role_id']);
@@ -267,7 +267,7 @@ class AuthController extends Controller
                 } else {
                     return redirect()->route('admin.login')->with('error', 'Access denied please contact admin');
                 }
-            }
+            // }
         } else {
             return redirect()->route('admin.login')->with('error', $userDetails['message']);
         }

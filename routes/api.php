@@ -34,6 +34,7 @@ Route::get('get-countries', [CommonController::class, 'countryList']);
 Route::post('get-states', [CommonController::class, 'getStateByIdList']);
 Route::post('get-cities', [CommonController::class, 'getCityByIdList']);
 // password_expired_link
+// Route::post('reset/password_expired_link', [ApiControllerOne::class, 'passwordExpiredLink']);
 Route::post('reset/password_expired_link', [ApiControllerOne::class, 'passwordExpiredLink']);
 Route::post('reset/expire_reset_password', [AuthController::class, 'expireResetPassword']);
 

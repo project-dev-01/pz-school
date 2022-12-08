@@ -13,8 +13,14 @@ class Kernel extends ConsoleKernel
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
+    protected $commands = [
+        Commands\ResetExpirePassword::class,
+    ];
+
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('reset_expire_password:cron')
+                 ->everyMinute();
         // $schedule->command('inspire')->hourly();
     }
 

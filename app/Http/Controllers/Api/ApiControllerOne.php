@@ -3946,43 +3946,43 @@ class ApiControllerOne extends BaseController
     // password Expired Link
     public function passwordExpiredLink(Request $request)
     {
-        $validator = \Validator::make($request->all(), [
-            'email' => 'required|email|exists:users'
-        ]);
-        if (!$validator->passes()) {
-            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-        } else {
-            // random string
-            $token = Str::random(64);
-
-            DB::table('password_resets')->insert([
-                'email' => $request->email,
-                'token' => $token,
-                'password_reminder' => "1",
-                'created_at' => Carbon::now()
-            ]);
-
-            // Mail::send('auth.success', ['token' => $token], function ($message) use ($request) {
-            //     $message->to($request->email);
-            //     $message->subject('Reset Password');
-            // });
-            if ($this->sendResetEmail($request->email, $token)) {
-                return $this->successResponse([], 'A reset link has been sent to your email address.');
-            } else {
-                return $this->send500Error('A Network Error occurred. Please try again.', ['error' => 'A Network Error occurred. Please try again.']);
+        //Retrieve the user from the database
+        $url = $request->url;
+        $dateS = Carbon::now()->subDays(75)->format('Y-m-d');
+        $users = DB::table('users')
+            ->select('email')
+            ->where(DB::raw('date(password_changed_at)'), '<=', $dateS)
+            ->where('role_id', '2')
+            ->where('branch_id', $request->branch_id)
+            ->whereNotNull('password_changed_at')
+            ->get()->toArray();
+        // dd($users);
+        if (!empty($users)) {
+            foreach ($users as $details) {
+                $email = $details->email;
+                // random string
+                $token = Str::random(64);
+                DB::table('password_resets')->insert([
+                    'email' => $email,
+                    'token' => $token,
+                    'password_reminder' => "1",
+                    'created_at' => Carbon::now()
+                ]);
+                $this->sendResetEmail($email, $token, $url);
             }
         }
+        return $this->successResponse([], 'A reset link has been sent to your email address.');
     }
-    private function sendResetEmail($email, $token)
+    private function sendResetEmail($email, $token, $url)
     {
         //Retrieve the user from the database
         $user = DB::table('users')->where('email', $email)->select('name', 'email')->first();
         //Generate, the password reset link. The token generated is embedded in the link
-        $link = url('/password/expired/reset') . '/' . $token;
+        $link = $url . '/password/expired/reset' . '/' . $token;
         if ($email) {
             $data = array('link' => $link, 'name' => $user->name);
             Mail::send('auth.reset_expire_pass_mail', $data, function ($message) use ($email) {
-                $message->to('karthik@aibots.my', 'members')->subject('Resetting Expired Password');
+                $message->to($email, 'members')->subject('Resetting Expired Password');
                 $message->from(env('MAIL_FROM_ADDRESS'), 'Password Reset');
             });
             return $user;
