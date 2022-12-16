@@ -58,8 +58,8 @@ $(document).ready(function () {
     var calendar = new FullCalendar.Calendar(calendarEl, {
         plugins: ["bootstrap", "interaction", "dayGrid", "timeGrid", "list"],
         slotDuration: "00:15:00",
-        // minTime: "08:00:00",
-        // maxTime: "19:00:00",
+        minTime: "06:00:00",
+        maxTime: "24:00:00",
         themeSystem: "bootstrap",
         bootstrapFontAwesome: !1,
         buttonText: {

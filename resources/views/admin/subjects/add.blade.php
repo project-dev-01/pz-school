@@ -39,6 +39,10 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="times_per_week">Minimum Times Per Week</label>
+                        <input type="number" id="times_per_week" name="times_per_week" class="form-control times_per_week">
+                    </div>
+                    <div class="form-group">
                         <label for="subjectColor">Subject Color</label>
                         <input type="text" id="subjectColor" name="subject_color_calendor" class="form-control subjectColor" value="#4a81d4">
                     </div>

@@ -20,6 +20,7 @@ $(function () {
             var subjectType = $("#subjectType").val();
             var subjectColor = $("#subjectColor").val();
             var subjectTypeTwo = $("#subjectTypeTwo").val();
+            var times_per_week = $("#times_per_week").val();
             var exam_exclude = 0;
             if ($('#excludeExams').is(':checked')) {
                 //I am checked
@@ -33,6 +34,7 @@ $(function () {
             formData.append('subject_code', subjectCode);
             formData.append('subject_type', subjectType);
             formData.append('subject_type_2', subjectTypeTwo);
+            formData.append('times_per_week', times_per_week);
             formData.append('exam_exclude', exam_exclude);
             formData.append('subject_color', subjectColor);
             $.ajax({
@@ -77,6 +79,7 @@ $(function () {
             $('.editSubjectModel').find('input[name="subject_code"]').val(data.data.subject_code);
             $('.editSubjectModel').find('select[name="subject_type"]').val(data.data.subject_type);
             $('.editSubjectModel').find('select[name="subject_type_2"]').val(data.data.subject_type_2);
+            $('.editSubjectModel').find('input[name="times_per_week"]').val(data.data.times_per_week);
             $('.editSubjectModel').find('input[name="subject_color_calendor"]').val(data.data.subject_color_calendor);
             if (data.data.exam_exclude == "1") {
                 $('.editSubjectModel').find('input[name="exam_exclude"]').prop('checked', true);
@@ -107,6 +110,7 @@ $(function () {
             var editsubjectType = $("#editsubjectType").val();
             var editsubjectColor = $("#editsubjectColor").val();
             var editsubjectTypeTwo = $("#editsubjectTypeTwo").val();
+            var edit_times_per_week = $("#edit_times_per_week").val();
             var exam_exclude = 0;
             if ($('#editexcludeExams').is(':checked')) {
                 //I am checked
@@ -121,6 +125,7 @@ $(function () {
             formData.append('subject_code', editsubjectCode);
             formData.append('subject_type', editsubjectType);
             formData.append('subject_type_2', editsubjectTypeTwo);
+            formData.append('times_per_week', edit_times_per_week);
             formData.append('exam_exclude', exam_exclude);
             formData.append('subject_color', editsubjectColor);
 

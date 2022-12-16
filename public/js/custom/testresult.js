@@ -424,37 +424,8 @@ $(function () {
         e.preventDefault();
         var marks_range = $(this).val();
         var grade_category = $("#grade_category").val();
-        // rank
-        //Get all total values, sort and remove duplicates
-        let totalList = $(".basevalidation")
-            .map(function () { return $(this).val() })
-            .get()
-            .sort(function (a, b) { return a - b })
-            .reduce(function (a, b) { if (b != a[0]) a.unshift(b); return a }, [])
 
-        //assign rank
-        $(".basevalidation").each(function () {
-            let rankVal = $(this).val();
-            let studentID = $(this).attr('id');
-            let rank = totalList.indexOf(rankVal) + 1;
-            $('.lbl_ranking' + studentID).text(rank);
-            $('.lbl_ranking' + studentID).val(rank);
-
-        })
-        // let stuID = $(this).attr('id');
-        // if (parseInt(marks_range) >= parseInt(passMark)) {
-        //     $('.badgeLabel' + stuID).removeClass('badge-danger');
-        //     $('.badgeLabel' + stuID).addClass('badge-success');
-        //     $('.lbl_pass_fail' + stuID).text('pass');
-        //     $('.lbl_pass_fail' + stuID).val('pass');
-
-        // } else {
-        //     $('.badgeLabel' + stuID).removeClass('badge-success');
-        //     $('.badgeLabel' + stuID).addClass('badge-danger');
-        //     $('.lbl_pass_fail' + stuID).text('fail');
-        //     $('.lbl_pass_fail' + stuID).val('fail');
-        // }
-        var incre_class = $(this).attr('id');
+        var studID = $(this).attr('id');
         if (marks_range != '') {
             var formData = new FormData();
             formData.append('token', token);
@@ -469,40 +440,84 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (res) {
-
+                    console.log("---");
+                    console.log(res);
+                    var gradeData = res.data.grade_details;
                     if (res.code == 200) {
-                        $('.lbl_grade' + incre_class).text(res.data[0].grade);
-                        $('.lbl_grade' + incre_class).val(res.data[0].grade);
-                        // $('.lbl_grade' + incre_class).val(res.data[0].status);
-                        if (res.data[0].status == "Pass") {
-                            $('.badgeLabel' + incre_class).removeClass('badge-danger');
-                            $('.badgeLabel' + incre_class).addClass('badge-success');
-                            $('.lbl_pass_fail' + incre_class).text('Pass');
-                            $('.lbl_pass_fail' + incre_class).val('Pass');
+                        var min_val = res.data.min_max_value[0].min_mark;
+                        var max_val = res.data.min_max_value[0].max_mark;
+                        // console.log(min_val);
+                        // console.log(min_val);
+                        // console.log(gradeData);
+                        // console.log(gradeData.length);
+                        if (gradeData.length > 0) {
+                            if (min_val <= marks_range && max_val >= marks_range) {
+                                $('.score' + studID).val(marks_range);
+                                // rank
+                                //Get all total values, sort and remove duplicates
+                                let totalList = $(".basevalidation")
+                                    .map(function () { return $(this).val() })
+                                    .get()
+                                    .sort(function (a, b) { return a - b })
+                                    .reduce(function (a, b) { if (b != a[0]) a.unshift(b); return a }, [])
 
+                                //assign rank
+                                $(".basevalidation").each(function () {
+                                    let rankVal = $(this).val();
+                                    let studentID = $(this).attr('id');
+                                    let rank = totalList.indexOf(rankVal) + 1;
+                                    $('.lbl_ranking' + studentID).text(rank);
+                                    $('.lbl_ranking' + studentID).val(rank);
+
+                                })
+                            } else {
+                                $('.score' + studID).val('');
+                            }
+                            $('.lbl_grade' + studID).text(gradeData[0].grade);
+                            $('.lbl_grade' + studID).val(gradeData[0].grade);
+                            // $('.lbl_grade' + studID).val(gradeData[0].status);
+                            if (gradeData[0].status == "Pass") {
+                                $('.badgeLabel' + studID).removeClass('badge-danger');
+                                $('.badgeLabel' + studID).addClass('badge-success');
+                                $('.lbl_pass_fail' + studID).text('Pass');
+                                $('.lbl_pass_fail' + studID).val('Pass');
+
+                            } else {
+                                $('.badgeLabel' + studID).removeClass('badge-success');
+                                $('.badgeLabel' + studID).addClass('badge-danger');
+                                $('.lbl_pass_fail' + studID).text('Fail');
+                                $('.lbl_pass_fail' + studID).val('Fail');
+                            }
                         } else {
-                            $('.badgeLabel' + incre_class).removeClass('badge-success');
-                            $('.badgeLabel' + incre_class).addClass('badge-danger');
-                            $('.lbl_pass_fail' + incre_class).text('Fail');
-                            $('.lbl_pass_fail' + incre_class).val('Fail');
+                            $('.score' + studID).val("");
+                            $('.lbl_grade' + studID).text("-");
+                            $('.lbl_grade' + studID).val("");
+                            $('.lbl_ranking' + studID).text("-");
+                            $('.lbl_ranking' + studID).val("");
+                            $('#addRemarks' + studID).val("");
+                            // remove class
+                            $('.badgeLabel' + studID).removeClass('badge-success');
+                            $('.badgeLabel' + studID).removeClass('badge-danger');
+                            $('.lbl_pass_fail' + studID).text('-');
+                            $('.lbl_pass_fail' + studID).val('-');
                         }
                     }
                     else {
-                        $('.lbl_grade' + incre_class).text("");
-                        $('.lbl_grade' + incre_class).val("");
-                        $('.lbl_pass_fail' + incre_class).text("");
-                        $('.lbl_pass_fail' + incre_class).val("");
+                        $('.lbl_grade' + studID).text("");
+                        $('.lbl_grade' + studID).val("");
+                        $('.lbl_pass_fail' + studID).text("");
+                        $('.lbl_pass_fail' + studID).val("");
                     }
                 }
             });
 
         } else {
             console.log("here dt come");
-            console.log(incre_class);
-            $('.lbl_grade' + incre_class).text("");
-            $('.lbl_grade' + incre_class).val("");
-            $('.lbl_pass_fail' + incre_class).text("");
-            $('.lbl_pass_fail' + incre_class).val("");
+            console.log(studID);
+            $('.lbl_grade' + studID).text("");
+            $('.lbl_grade' + studID).val("");
+            $('.lbl_pass_fail' + studID).text("");
+            $('.lbl_pass_fail' + studID).val("");
         }
     });
 
@@ -577,15 +592,15 @@ $(function () {
                         columns: 'th:not(:last-child)'
                     }
                 },
-				{
-				 extend: 'pdf',
-                text: 'Download PDF',
-                extension: '.pdf',
-                exportOptions: {
-                    columns: 'th:not(:last-child)'
-                }
+                {
+                    extend: 'pdf',
+                    text: 'Download PDF',
+                    extension: '.pdf',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
 
-            }
+                }
             ],
             data: dataSetNew,
             "pageLength": 10,
@@ -647,7 +662,7 @@ $(function () {
                         if (row.status == "absent") {
                             attribue = "disabled";
                         }
-                        var score = '<input type="text" maxlength="3" ' + attribue + ' class="form-control basevalidation score' + row.student_id + '" name="subjectmarks[' + meta.row + '][score]" id="' + row.student_id + '" value="' + (data != null ? data : "") + '">';
+                        var score = '<input type="number" maxlength="3" ' + attribue + ' class="form-control basevalidation score' + row.student_id + '" name="subjectmarks[' + meta.row + '][score]" id="' + row.student_id + '" value="' + (data != null ? data : "") + '">';
 
                         return score;
                     }
@@ -665,8 +680,8 @@ $(function () {
                     "targets": 4,
                     "className": "text-center",
                     "render": function (data, type, row, meta) {
-                        var passTag = "";
                         if (data) {
+                            var passTag = "";
                             if (data == "Pass") {
                                 passTag = "badge-success";
                             } else if (data == "Fail") {
@@ -678,9 +693,11 @@ $(function () {
                                     passTag = "-";
                                 }
                             }
+                            var pass_fail = '<span class="badge badgeLabel' + row.student_id + ' ' + passTag + ' badge-pill lbl_pass_fail' + row.student_id + '" style="padding:5px 20px 5px 20px;">' + (data != 'null' ? data : "-") + '</span>' +
+                                '<input type="hidden" class="lbl_pass_fail' + row.student_id + '" name="subjectmarks[' + meta.row + '][pass_fail]" value="' + row.pass_fail + '">';
+                        } else {
+                            pass_fail = "-";
                         }
-                        var pass_fail = '<span class="badge badgeLabel' + row.student_id + ' ' + passTag + ' badge-pill lbl_pass_fail' + row.student_id + '" style="padding:5px 20px 5px 20px;">' + (data != "null" ? data : "-") + '</span>' +
-                            '<input type="hidden" class="lbl_pass_fail' + row.student_id + '" name="subjectmarks[' + meta.row + '][pass_fail]" value="' + row.pass_fail + '">';
                         return pass_fail;
                     }
                 },
@@ -689,7 +706,7 @@ $(function () {
                     "className": "text-center",
                     "render": function (data, type, row, meta) {
 
-                        var ranking = '<label for="ranking" class="lbl_ranking' + row.student_id + '">' + (data != "" ? data : "-") + '</label>' +
+                        var ranking = '<label for="ranking" class="lbl_ranking' + row.student_id + '">' + (data != '' ? data : "-") + '</label>' +
                             '<input type="hidden" class="lbl_ranking' + row.student_id + '" name="subjectmarks[' + meta.row + '][ranking]" value="' + row.ranking + '">';
 
                         return ranking;

@@ -945,6 +945,7 @@ class ApiController extends BaseController
                     'subject_color_calendor' => $request->subject_color,
                     'subject_author' => $request->subject_author,
                     'subject_type_2' => $request->subject_type_2,
+                    'times_per_week' => isset($request->times_per_week) ? $request->times_per_week : null,
                     'exam_exclude' => $request->exam_exclude,
                     'created_at' => date("Y-m-d H:i:s")
                 ]);
@@ -1017,6 +1018,7 @@ class ApiController extends BaseController
                     'subject_color_calendor' => $request->subject_color,
                     'subject_author' => $request->subject_author,
                     'subject_type_2' => $request->subject_type_2,
+                    'times_per_week' => isset($request->times_per_week) ? $request->times_per_week : null,
                     'exam_exclude' => $request->exam_exclude,
                     'updated_at' => date("Y-m-d H:i:s")
                 ]);
@@ -9307,13 +9309,17 @@ class ApiController extends BaseController
             // ->where([
             //     ['min_mark', '>=', $marks_range]             
             // ])
-            $success = $Connection->table('grade_marks')
+            $success['grade_details'] = $Connection->table('grade_marks')
                 ->select('grade', 'status')
-                // ->where('min_mark', '<=', $marks_range)
-                // ->where('max_mark', '>=', $marks_range)
                 ->where([
                     ['min_mark', '<=', $marks_range],
                     ['max_mark', '>=', $marks_range],
+                    ['grade_category', '=', $grade_category]
+                ])
+                ->get();
+            $success['min_max_value'] = $Connection->table('grade_marks')
+                ->select(DB::raw('MIN(min_mark) AS min_mark, MAX(max_mark) AS max_mark'))
+                ->where([
                     ['grade_category', '=', $grade_category]
                 ])
                 ->get();
