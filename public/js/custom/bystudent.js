@@ -124,7 +124,6 @@ function bystudentdetails_class(datasetnew) {
     var headers = datasetnew.headers;
     var headercount = datasetnew.headers.length;
     headercount = headercount * 2;
-    console.log(headercount);
     var grade_list_master = datasetnew.allbyStudent;
     bysubjectAllTable += '<div class="table-responsive">' +
         '<table id="tblbycls" class="table w-100 nowrap table-bordered table-striped table2excel" data-tableName="Test Table 1">' +
@@ -133,6 +132,7 @@ function bystudentdetails_class(datasetnew) {
         '<th class="align-top" rowspan="3" style="padding-top:72px;">S.no.</th>' +
         '<th class="align-top" rowspan="3" style="padding: 71px 0px 0px 8px;">Student Name</th>' +
         '<th class="text-center" colspan="' + headercount + '" style="padding: 20px 100px 20px 0px;">Subject Name</th>' +
+        '<th class="align-top" rowspan="3" style="padding: 71px 0px 0px 8px;">GPA</th>' +
         '</tr>';
     bysubjectAllTable += '<tr>';
     headers.forEach(function (resp) {
@@ -167,6 +167,7 @@ function bystudentdetails_class(datasetnew) {
                 bysubjectAllTable += '<td class="text-center" style="padding:7px 0px 7px 0px;">-</td>';
             }
         });
+        bysubjectAllTable += '<td class="text-center">' + res.gpa + '</td>';
         bysubjectAllTable += '</tr>';
 
     });

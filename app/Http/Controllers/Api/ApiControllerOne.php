@@ -1249,6 +1249,8 @@ class ApiControllerOne extends BaseController
                                 $failCnt++;
                             } else if ($pass != 0 && $fail == 0 && $exam_absent != 0) {
                                 $failCnt++;
+                            } else if ($pass == 0 && $fail == 0 && $exam_absent == 0) {
+                                $failCnt++;
                             } else {
                                 $passCnt;
                                 $failCnt;
@@ -1316,7 +1318,39 @@ class ApiControllerOne extends BaseController
                         $newobject->pass_percentage = 0;
                         $newobject->fail_percentage = 0;
                     }
-
+                    // calculate gpa start
+                    $gpa = 0;
+                    $noOfStudGrade = 0;
+                    $pointGrade = null;
+                    foreach ($gradecnt as $gd => $gdcnt) {
+                        $gdPnt = $Connection->table('grade_marks')
+                            ->select('grade_point')
+                            ->where([
+                                ['grade', '=', $gd],
+                                ['grade_category', '=', $grade_category]
+                            ])
+                            ->first();
+                        if (isset($gdPnt->grade_point)) {
+                            $grdPoint = $gdPnt->grade_point;
+                            $mulGradePnt = ($gdcnt * $grdPoint);
+                            $gpa += $mulGradePnt;
+                            $noOfStudGrade += $gdcnt;
+                        }
+                    }
+                    if ($gpa > 0 && $noOfStudGrade > 0) {
+                        $calcGpa = ($gpa / $noOfStudGrade);
+                        $calcGpa = number_format($calcGpa);
+                        $pointByGrade = $Connection->table('grade_marks')
+                            ->select('grade', 'grade_point')
+                            ->where([
+                                ['grade_point', '<=', $calcGpa],
+                                ['grade_point', '>=', $calcGpa],
+                                ['grade_category', '=', $grade_category]
+                            ])
+                            ->first();
+                        $pointGrade = isset($pointByGrade->grade) ? $pointByGrade->grade : null;
+                    }
+                    // calculate gpa end
                     // get count details
                     $newobject->present_count = $presentCnt;
                     $newobject->absent_count = $absentCnt;
@@ -1324,6 +1358,7 @@ class ApiControllerOne extends BaseController
                     $newobject->fail_count = $failCnt;
                     $newobject->gradecnt = $gradecnt;
                     $newobject->passcnt = $passcnt;
+                    $newobject->gpa = isset($pointGrade) ? $pointGrade : '-';
                     array_push($allbysubject, $newobject);
                 }
             }
@@ -1625,6 +1660,8 @@ class ApiControllerOne extends BaseController
                                 $failCnt++;
                             } else if ($pass != 0 && $fail == 0 && $exam_absent != 0) {
                                 $failCnt++;
+                            } else if ($pass == 0 && $fail == 0 && $exam_absent == 0) {
+                                $failCnt++;
                             } else {
                                 $passCnt;
                                 $failCnt;
@@ -1691,6 +1728,39 @@ class ApiControllerOne extends BaseController
                         $newobject->pass_percentage = 0;
                         $newobject->fail_percentage = 0;
                     }
+                    // calculate gpa start
+                    $gpa = 0;
+                    $noOfStudGrade = 0;
+                    $pointGrade = null;
+                    foreach ($gradecnt as $gd => $gdcnt) {
+                        $gdPnt = $Connection->table('grade_marks')
+                            ->select('grade_point')
+                            ->where([
+                                ['grade', '=', $gd],
+                                ['grade_category', '=', $grade_category]
+                            ])
+                            ->first();
+                        if (isset($gdPnt->grade_point)) {
+                            $grdPoint = $gdPnt->grade_point;
+                            $mulGradePnt = ($gdcnt * $grdPoint);
+                            $gpa += $mulGradePnt;
+                            $noOfStudGrade += $gdcnt;
+                        }
+                    }
+                    if ($gpa > 0 && $noOfStudGrade > 0) {
+                        $calcGpa = ($gpa / $noOfStudGrade);
+                        $calcGpa = number_format($calcGpa);
+                        $pointByGrade = $Connection->table('grade_marks')
+                            ->select('grade', 'grade_point')
+                            ->where([
+                                ['grade_point', '<=', $calcGpa],
+                                ['grade_point', '>=', $calcGpa],
+                                ['grade_category', '=', $grade_category]
+                            ])
+                            ->first();
+                        $pointGrade = isset($pointByGrade->grade) ? $pointByGrade->grade : null;
+                    }
+                    // calculate gpa end
                     // get count details
                     $newobject->present_count = $presentCnt;
                     $newobject->absent_count = $absentCnt;
@@ -1698,6 +1768,7 @@ class ApiControllerOne extends BaseController
                     $newobject->fail_count = $failCnt;
                     $newobject->gradecnt = $gradecnt;
                     $newobject->passcnt = $passcnt;
+                    $newobject->gpa = isset($pointGrade) ? $pointGrade : '-';
                     array_push($grade_list_master, $newobject);
                 }
             }
@@ -1797,7 +1868,7 @@ class ApiControllerOne extends BaseController
                                 ])
                                 ->get();
                             $total_subject_weightage = isset($getExamPaperWeightage[0]->total_subject_weightage) ? (int)$getExamPaperWeightage[0]->total_subject_weightage : 0;
-
+                            $grade_category = isset($getExamPaperWeightage[0]->grade_category) ? $getExamPaperWeightage[0]->grade_category : 0;
                             $getStudMarksDetails = $Connection->table('student_marks as sm')
                                 ->select(
                                     'expp.subject_weightage',
@@ -1833,7 +1904,6 @@ class ApiControllerOne extends BaseController
 
                             $sbj_obj->subject_id = $value->subject_id;
                             $marks = 0;
-                            $grade_category = 0;
                             // here you get calculation based on student marks and subject weightage
                             if (!empty($getStudMarksDetails)) {
                                 // grade calculations
@@ -1864,6 +1934,40 @@ class ApiControllerOne extends BaseController
                         }
                     }
                     $student_obj->student_class = $studentArr;
+                    $gradecnt = array_count_values(array_column($studentArr, 'grade'));
+                    // calculate gpa start
+                    $gpa = 0;
+                    $noOfStudGrade = 0;
+                    $pointGrade = null;
+                    foreach ($gradecnt as $gd => $gdcnt) {
+                        $gdPnt = $Connection->table('grade_marks')
+                            ->select('grade_point')
+                            ->where([
+                                ['grade', '=', $gd],
+                                ['grade_category', '=', $grade_category]
+                            ])
+                            ->first();
+                        if (isset($gdPnt->grade_point)) {
+                            $grdPoint = $gdPnt->grade_point;
+                            $mulGradePnt = ($gdcnt * $grdPoint);
+                            $gpa += $mulGradePnt;
+                            $noOfStudGrade += $gdcnt;
+                        }
+                    }
+                    if ($gpa > 0 && $noOfStudGrade > 0) {
+                        $calcGpa = ($gpa / $noOfStudGrade);
+                        $calcGpa = number_format($calcGpa);
+                        $pointByGrade = $Connection->table('grade_marks')
+                            ->select('grade', 'grade_point')
+                            ->where([
+                                ['grade_point', '<=', $calcGpa],
+                                ['grade_point', '>=', $calcGpa],
+                                ['grade_category', '=', $grade_category]
+                            ])
+                            ->first();
+                        $pointGrade = isset($pointByGrade->grade) ? $pointByGrade->grade : null;
+                    }
+                    $student_obj->gpa = $pointGrade;
                     array_push($allbyStudent, $student_obj);
                 }
             }
@@ -1974,6 +2078,7 @@ class ApiControllerOne extends BaseController
                         $student_obj->student_id = $student_id;
                         $student_obj->student_name = $student_name;
                         $studentArr = [];
+                        // dd($get_all_subjects);
                         if (!empty($get_all_subjects)) {
                             foreach ($get_all_subjects as $value) {
                                 $sbj_obj = new \stdClass();
@@ -1990,7 +2095,7 @@ class ApiControllerOne extends BaseController
                                     ])
                                     ->get();
                                 $total_subject_weightage = isset($getExamPaperWeightage[0]->total_subject_weightage) ? (int)$getExamPaperWeightage[0]->total_subject_weightage : 0;
-
+                                $grade_category = isset($getExamPaperWeightage[0]->grade_category) ? $getExamPaperWeightage[0]->grade_category : 0;
                                 $getStudMarksDetails = $Connection->table('student_marks as sm')
                                     ->select(
                                         'expp.subject_weightage',
@@ -2026,7 +2131,6 @@ class ApiControllerOne extends BaseController
 
                                 $sbj_obj->subject_id = $value->subject_id;
                                 $marks = 0;
-                                $grade_category = 0;
                                 // here you get calculation based on student marks and subject weightage
                                 if (!empty($getStudMarksDetails)) {
                                     // grade calculations
@@ -2056,7 +2160,42 @@ class ApiControllerOne extends BaseController
                                 array_push($studentArr, $sbj_obj);
                             }
                         }
+                        // student classs
                         $student_obj->student_class = $studentArr;
+                        $gradecnt = array_count_values(array_column($studentArr, 'grade'));
+                        // calculate gpa start
+                        $gpa = 0;
+                        $noOfStudGrade = 0;
+                        $pointGrade = null;
+                        foreach ($gradecnt as $gd => $gdcnt) {
+                            $gdPnt = $Connection->table('grade_marks')
+                                ->select('grade_point')
+                                ->where([
+                                    ['grade', '=', $gd],
+                                    ['grade_category', '=', $grade_category]
+                                ])
+                                ->first();
+                            if (isset($gdPnt->grade_point)) {
+                                $grdPoint = $gdPnt->grade_point;
+                                $mulGradePnt = ($gdcnt * $grdPoint);
+                                $gpa += $mulGradePnt;
+                                $noOfStudGrade += $gdcnt;
+                            }
+                        }
+                        if ($gpa > 0 && $noOfStudGrade > 0) {
+                            $calcGpa = ($gpa / $noOfStudGrade);
+                            $calcGpa = number_format($calcGpa);
+                            $pointByGrade = $Connection->table('grade_marks')
+                                ->select('grade', 'grade_point')
+                                ->where([
+                                    ['grade_point', '<=', $calcGpa],
+                                    ['grade_point', '>=', $calcGpa],
+                                    ['grade_category', '=', $grade_category]
+                                ])
+                                ->first();
+                            $pointGrade = isset($pointByGrade->grade) ? $pointByGrade->grade : null;
+                        }
+                        $student_obj->gpa = $pointGrade;
                         array_push($allbyStudent, $student_obj);
                     }
                 }
@@ -2251,6 +2390,8 @@ class ApiControllerOne extends BaseController
                                     $failCnt++;
                                 } else if ($pass != 0 && $fail == 0 && $exam_absent != 0) {
                                     $failCnt++;
+                                } else if ($pass == 0 && $fail == 0 && $exam_absent == 0) {
+                                    $failCnt++;
                                 } else {
                                     $passCnt;
                                     $failCnt;
@@ -2334,17 +2475,59 @@ class ApiControllerOne extends BaseController
                         }
                     }
                     $gradecnt = array_count_values(array_column($studentArr, 'grade'));
+                    // print_r($gradecnt);
+                    // calculate gpa start
+                    $gpa = 0;
+                    $noOfStudGrade = 0;
+                    $pointGrade = null;
+                    foreach ($gradecnt as $gd => $gdcnt) {
+                        $gdPnt = $Connection->table('grade_marks')
+                            ->select('grade_point')
+                            ->where([
+                                ['grade', '=', $gd],
+                                ['grade_category', '=', $grade_category]
+                            ])
+                            ->first();
+                        if (isset($gdPnt->grade_point)) {
+                            $grdPoint = $gdPnt->grade_point;
+                            $mulGradePnt = ($gdcnt * $grdPoint);
+                            $gpa += $mulGradePnt;
+                            $noOfStudGrade += $gdcnt;
+                        }
+                    }
+                    // echo "$gpa => $noOfStudGrade\n";
+                    // exit;
+                    if ($gpa > 0 && $noOfStudGrade > 0) {
+                        $calcGpa = ($gpa / $noOfStudGrade);
+                        $calcGpa = number_format($calcGpa);
+                        $pointByGrade = $Connection->table('grade_marks')
+                            ->select('grade', 'grade_point')
+                            ->where([
+                                ['grade_point', '<=', $calcGpa],
+                                ['grade_point', '>=', $calcGpa],
+                                ['grade_category', '=', $grade_category]
+                            ])
+                            ->first();
+                        $pointGrade = isset($pointByGrade->grade) ? $pointByGrade->grade : null;
+                    }
+                    // echo "$pointGrade\n";
+                    // exit;
+                    // calculate gpa end
                     $object->gradecnt = $gradecnt;
                     $object->presentCnt = $presentCnt;
                     $object->absentCnt = $absentCnt;
                     $object->passCnt = $passCnt;
                     $object->failCnt = $failCnt;
                     $object->addAllStudCnt = $addAllStudCnt;
+                    $object->gpa = isset($pointGrade) ? $pointGrade : '-';
                     if ($addAllStudCnt > 0) {
                         $pass_percentage = ($passCnt / $addAllStudCnt) * 100;
                         $object->pass_percentage = number_format($pass_percentage, 2);
+                        $fail_percentage = ($failCnt / $addAllStudCnt) * 100;
+                        $object->fail_percentage = number_format($fail_percentage, 2);
                     } else {
                         $object->pass_percentage = 0;
+                        $object->fail_percentage = 0;
                     }
                     array_push($allbysubject, $object);
                 }
@@ -3408,7 +3591,7 @@ class ApiControllerOne extends BaseController
                         ];
                         // insert data
                         $query = $conn->table('soap')->insert($data);
-                    }else{
+                    } else {
                         $query = 1;
                     }
                 }
@@ -3888,9 +4071,9 @@ class ApiControllerOne extends BaseController
             return false;
         }
     }
-    
 
-    
+
+
     // addSoapCategory
     public function addSoapCategory(Request $request)
     {
@@ -3907,18 +4090,18 @@ class ApiControllerOne extends BaseController
         } else {
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
-                // insert data
-                $query = $conn->table('soap_category')->insert([
-                    'name' => $request->name,
-                    'soap_type_id' => $request->soap_type_id,
-                    'created_at' => date("Y-m-d H:i:s")
-                ]);
-                $success = [];
-                if (!$query) {
-                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-                } else {
-                    return $this->successResponse($success, 'Category has been successfully saved');
-                }
+            // insert data
+            $query = $conn->table('soap_category')->insert([
+                'name' => $request->name,
+                'soap_type_id' => $request->soap_type_id,
+                'created_at' => date("Y-m-d H:i:s")
+            ]);
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Category has been successfully saved');
+            }
         }
     }
     // getSoapCategoryList
@@ -3977,18 +4160,18 @@ class ApiControllerOne extends BaseController
 
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
-                // update data
-                $query = $conn->table('soap_category')->where('id', $id)->update([
-                    'name' => $request->name,
-                    'soap_type_id' => $request->soap_type_id,
-                    'updated_at' => date("Y-m-d H:i:s")
-                ]);
-                $success = [];
-                if ($query) {
-                    return $this->successResponse($success, 'Category Details have Been updated');
-                } else {
-                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-                }
+            // update data
+            $query = $conn->table('soap_category')->where('id', $id)->update([
+                'name' => $request->name,
+                'soap_type_id' => $request->soap_type_id,
+                'updated_at' => date("Y-m-d H:i:s")
+            ]);
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Category Details have Been updated');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
         }
     }
     // delete SoapCategory
@@ -4035,29 +4218,29 @@ class ApiControllerOne extends BaseController
         } else {
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
-                // insert data
-                if($request->photo) {
-                    $path = '/public/soap/images/';
+            // insert data
+            if ($request->photo) {
+                $path = '/public/soap/images/';
 
-                    $fileName = 'SCIMG_' . date('Ymd') . uniqid() . '.' .$request->file_extension;
-                    $base64 = base64_decode($request->photo);
-                    $file = base_path() . $path . $fileName;
-                    $suc = file_put_contents($file, $base64);
-                } else{
-                    $fileName = "";
-                }
-                $query = $conn->table('soap_sub_category')->insert([
-                    'name' => $request->name,
-                    'soap_category_id' => $request->soap_category_id,
-                    'photo' => $fileName,
-                    'created_at' => date("Y-m-d H:i:s")
-                ]);
-                $success = [];
-                if (!$query) {
-                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-                } else {
-                    return $this->successResponse($success, 'Sub Category has been successfully saved');
-                }
+                $fileName = 'SCIMG_' . date('Ymd') . uniqid() . '.' . $request->file_extension;
+                $base64 = base64_decode($request->photo);
+                $file = base_path() . $path . $fileName;
+                $suc = file_put_contents($file, $base64);
+            } else {
+                $fileName = "";
+            }
+            $query = $conn->table('soap_sub_category')->insert([
+                'name' => $request->name,
+                'soap_category_id' => $request->soap_category_id,
+                'photo' => $fileName,
+                'created_at' => date("Y-m-d H:i:s")
+            ]);
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Sub Category has been successfully saved');
+            }
         }
     }
     // getSoapSubCategoryList
@@ -4074,8 +4257,8 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $SoapSubCategoryDetails = $conn->table('soap_sub_category as sc')->select('sc.id','sc.name','c.name as soap_category_id')
-                                        ->leftJoin('soap_category as c', 'sc.soap_category_id', '=', 'c.id')->get();
+            $SoapSubCategoryDetails = $conn->table('soap_sub_category as sc')->select('sc.id', 'sc.name', 'c.name as soap_category_id')
+                ->leftJoin('soap_category as c', 'sc.soap_category_id', '=', 'c.id')->get();
             return $this->successResponse($SoapSubCategoryDetails, 'Sub Category record fetch successfully');
         }
     }
@@ -4096,9 +4279,9 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $SoapSubCategoryDetails = $conn->table('soap_sub_category as sc')->select('sc.*','c.soap_type_id')
-                                        ->leftJoin('soap_category as c', 'sc.soap_category_id', '=', 'c.id')
-                                        ->where('sc.id', $id)->first();
+            $SoapSubCategoryDetails = $conn->table('soap_sub_category as sc')->select('sc.*', 'c.soap_type_id')
+                ->leftJoin('soap_category as c', 'sc.soap_category_id', '=', 'c.id')
+                ->where('sc.id', $id)->first();
             return $this->successResponse($SoapSubCategoryDetails, 'Sub Category row fetch successfully');
         }
     }
@@ -4119,40 +4302,40 @@ class ApiControllerOne extends BaseController
 
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
-                if($request->photo) {
-                    $path = '/public/soap/images/';
-                    $oldPicture = $conn->table('soap_sub_category')->where('id', $id)->first();
+            if ($request->photo) {
+                $path = '/public/soap/images/';
+                $oldPicture = $conn->table('soap_sub_category')->where('id', $id)->first();
 
-                    // return $oldPicture->photo;
-                    if ($oldPicture->photo != '') {
-                        if (\File::exists(base_path($path . $oldPicture->photo))) {
-                            \File::delete(base_path($path . $oldPicture->photo));
-                        }
-                    }
-                    $fileName = 'SCIMG_' . date('Ymd') . uniqid() . '.' .$request->file_extension;
-                    $base64 = base64_decode($request->photo);
-                    $file = base_path() . $path . $fileName;
-                    $suc = file_put_contents($file, $base64);
-                } else{
-                    if($request->old_photo) {
-                        $fileName = $request->old_photo;
-                    }else{
-                        $fileName = "";
+                // return $oldPicture->photo;
+                if ($oldPicture->photo != '') {
+                    if (\File::exists(base_path($path . $oldPicture->photo))) {
+                        \File::delete(base_path($path . $oldPicture->photo));
                     }
                 }
-                // update data
-                $query = $conn->table('soap_sub_category')->where('id', $id)->update([
-                    'name' => $request->name,
-                    'soap_category_id' => $request->soap_category_id,
-                    'photo' => $fileName,
-                    'updated_at' => date("Y-m-d H:i:s")
-                ]);
-                $success = [];
-                if ($query) {
-                    return $this->successResponse($success, 'Sub Category Details have Been updated');
+                $fileName = 'SCIMG_' . date('Ymd') . uniqid() . '.' . $request->file_extension;
+                $base64 = base64_decode($request->photo);
+                $file = base_path() . $path . $fileName;
+                $suc = file_put_contents($file, $base64);
+            } else {
+                if ($request->old_photo) {
+                    $fileName = $request->old_photo;
                 } else {
-                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                    $fileName = "";
                 }
+            }
+            // update data
+            $query = $conn->table('soap_sub_category')->where('id', $id)->update([
+                'name' => $request->name,
+                'soap_category_id' => $request->soap_category_id,
+                'photo' => $fileName,
+                'updated_at' => date("Y-m-d H:i:s")
+            ]);
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Sub Category Details have Been updated');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
         }
     }
     // delete SoapSubCategory
@@ -4183,7 +4366,7 @@ class ApiControllerOne extends BaseController
         }
     }
 
-    
+
     // addSoapNotes
     public function addSoapNotes(Request $request)
     {
@@ -4201,19 +4384,19 @@ class ApiControllerOne extends BaseController
         } else {
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
-                // insert data
-                $query = $conn->table('soap_notes')->insert([
-                    'notes' => $request->notes,
-                    'soap_category_id' => $request->soap_category_id,
-                    'soap_sub_category_id' => $request->soap_sub_category_id,
-                    'created_at' => date("Y-m-d H:i:s")
-                ]);
-                $success = [];
-                if (!$query) {
-                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-                } else {
-                    return $this->successResponse($success, 'Notes has been successfully saved');
-                }
+            // insert data
+            $query = $conn->table('soap_notes')->insert([
+                'notes' => $request->notes,
+                'soap_category_id' => $request->soap_category_id,
+                'soap_sub_category_id' => $request->soap_sub_category_id,
+                'created_at' => date("Y-m-d H:i:s")
+            ]);
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Notes has been successfully saved');
+            }
         }
     }
     // getSoapNotesList
@@ -4230,10 +4413,10 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $SoapNotesDetails = $conn->table('soap_notes as n')->select('n.id','n.notes','c.name as soap_category_id', 'sc.name as soap_sub_category_id')
-                                    ->leftJoin('soap_category as c', 'n.soap_category_id', '=', 'c.id')
-                                    ->leftJoin('soap_sub_category as sc', 'n.soap_sub_category_id', '=', 'sc.id')
-                                    ->get();
+            $SoapNotesDetails = $conn->table('soap_notes as n')->select('n.id', 'n.notes', 'c.name as soap_category_id', 'sc.name as soap_sub_category_id')
+                ->leftJoin('soap_category as c', 'n.soap_category_id', '=', 'c.id')
+                ->leftJoin('soap_sub_category as sc', 'n.soap_sub_category_id', '=', 'sc.id')
+                ->get();
             return $this->successResponse($SoapNotesDetails, 'Notes record fetch successfully');
         }
     }
@@ -4254,8 +4437,8 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $SoapNotesDetails = $conn->table('soap_notes as n')->select('n.*','c.soap_type_id')
-            ->leftJoin('soap_category as c', 'n.soap_category_id', '=', 'c.id')->where('n.id', $id)->first();
+            $SoapNotesDetails = $conn->table('soap_notes as n')->select('n.*', 'c.soap_type_id')
+                ->leftJoin('soap_category as c', 'n.soap_category_id', '=', 'c.id')->where('n.id', $id)->first();
             return $this->successResponse($SoapNotesDetails, 'Notes row fetch successfully');
         }
     }
@@ -4277,19 +4460,19 @@ class ApiControllerOne extends BaseController
 
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
-                // update data
-                $query = $conn->table('soap_notes')->where('id', $id)->update([
-                    'notes' => $request->notes,
-                    'soap_category_id' => $request->soap_category_id,
-                    'soap_sub_category_id' => $request->soap_sub_category_id,
-                    'updated_at' => date("Y-m-d H:i:s")
-                ]);
-                $success = [];
-                if ($query) {
-                    return $this->successResponse($success, 'Notes Details have Been updated');
-                } else {
-                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-                }
+            // update data
+            $query = $conn->table('soap_notes')->where('id', $id)->update([
+                'notes' => $request->notes,
+                'soap_category_id' => $request->soap_category_id,
+                'soap_sub_category_id' => $request->soap_sub_category_id,
+                'updated_at' => date("Y-m-d H:i:s")
+            ]);
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Notes Details have Been updated');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
         }
     }
     // delete SoapNotes
@@ -4319,7 +4502,7 @@ class ApiControllerOne extends BaseController
             }
         }
     }
-    
+
     // addSoapSubject
     public function addSoapSubject(Request $request)
     {
@@ -4338,21 +4521,21 @@ class ApiControllerOne extends BaseController
         } else {
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
-                // insert data
-                $query = $conn->table('soap_subject')->insert([
-                    'title' => $request->title,
-                    'header' => $request->header,
-                    'body' => $request->body,
-                    'soap_type_id' => $request->soap_type_id,
-                    'student_id' => $request->student_id,
-                    'created_at' => date("Y-m-d H:i:s")
-                ]);
-                $success = [];
-                if (!$query) {
-                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-                } else {
-                    return $this->successResponse($success, 'Subject has been successfully saved');
-                }
+            // insert data
+            $query = $conn->table('soap_subject')->insert([
+                'title' => $request->title,
+                'header' => $request->header,
+                'body' => $request->body,
+                'soap_type_id' => $request->soap_type_id,
+                'student_id' => $request->student_id,
+                'created_at' => date("Y-m-d H:i:s")
+            ]);
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Subject has been successfully saved');
+            }
         }
     }
     // getSoapSubjectList
@@ -4414,21 +4597,21 @@ class ApiControllerOne extends BaseController
 
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
-                // update data
-                $query = $conn->table('soap_subject')->where('id', $id)->update([
-                    'title' => $request->title,
-                    'header' => $request->header,
-                    'body' => $request->body,
-                    'soap_type_id' => $request->soap_type_id,
-                    'student_id' => $request->student_id,
-                    'updated_at' => date("Y-m-d H:i:s")
-                ]);
-                $success = [];
-                if ($query) {
-                    return $this->successResponse($success, 'Subject Details have Been updated');
-                } else {
-                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-                }
+            // update data
+            $query = $conn->table('soap_subject')->where('id', $id)->update([
+                'title' => $request->title,
+                'header' => $request->header,
+                'body' => $request->body,
+                'soap_type_id' => $request->soap_type_id,
+                'student_id' => $request->student_id,
+                'updated_at' => date("Y-m-d H:i:s")
+            ]);
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Subject Details have Been updated');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
         }
     }
     // delete SoapSubject
@@ -4456,6 +4639,208 @@ class ApiControllerOne extends BaseController
             } else {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             }
+        }
+    }
+    public function getExamPaperResults(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
+            'exam_id' => 'required',
+            'semester_id' => 'required',
+            'session_id' => 'required',
+            'academic_session_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $exam_id = $request->exam_id;
+            $class_id = $request->class_id;
+            $section_id = $request->section_id;
+            $subject_id = $request->subject_id;
+            $semester_id = $request->semester_id;
+            $session_id = $request->session_id;
+            $academic_session_id = $request->academic_session_id;
+            $Connection = $this->createNewConnection($request->branch_id);
+            $getSubjectMarks = $Connection->table('enrolls as en')
+                ->select(
+                    'en.student_id',
+                    DB::raw('CONCAT(st.first_name, " ", st.last_name) as name'),
+                    DB::raw("group_concat(sa.score ORDER BY sa.paper_id ASC) as score"),
+                    DB::raw("group_concat(exp.subject_weightage ORDER BY sa.paper_id ASC) as subject_weightage"),
+                    DB::raw("group_concat(exp.paper_name ORDER BY sa.paper_id ASC) as paper_name"),
+                    DB::raw("group_concat(sa.ranking ORDER BY sa.paper_id ASC) as ranking"),
+                    DB::raw('SUM(exp.subject_weightage) as total_subject_weightage'),
+                    'sa.pass_fail',
+                    'sa.status',
+                    'sa.paper_id'
+                )
+                ->join('students as st', 'st.id', '=', 'en.student_id')
+                ->leftJoin('student_marks as sa', function ($q) use ($class_id, $section_id, $exam_id, $subject_id, $semester_id, $session_id, $academic_session_id) {
+                    $q->on('sa.student_id', '=', 'st.id')
+                        ->on('sa.exam_id', '=', DB::raw("'$exam_id'"))
+                        ->on('sa.class_id', '=', DB::raw("'$class_id'"))
+                        ->on('sa.section_id', '=', DB::raw("'$section_id'"))
+                        ->on('sa.semester_id', '=', DB::raw("'$semester_id'"))
+                        ->on('sa.session_id', '=', DB::raw("'$session_id'"))
+                        ->on('sa.subject_id', '=', DB::raw("'$subject_id'"))
+                        ->on('sa.academic_session_id', '=', DB::raw("'$academic_session_id'"));
+                })
+                ->join('exam_papers as exp', 'exp.id', '=', 'sa.paper_id')
+                ->where([
+                    ['en.class_id', '=', $request->class_id],
+                    ['en.section_id', '=', $request->section_id],
+                    ['en.semester_id', '=', $request->semester_id],
+                    ['en.session_id', '=', $request->session_id],
+                    ['en.academic_session_id', '=', $academic_session_id]
+                ])
+                ->groupBy('sa.student_id')
+                ->get();
+            $getPaperNames = $Connection->table('enrolls as en')
+                ->select(
+                    'exp.grade_category',
+                    'exp.paper_name'
+                )
+                // ->join('students as st', 'st.id', '=', 'en.student_id')
+                ->leftJoin('student_marks as sa', function ($q) use ($class_id, $section_id, $exam_id, $subject_id, $semester_id, $session_id, $academic_session_id) {
+                    // $q->on('sa.student_id', '=', 'st.id')
+                    $q->on('sa.exam_id', '=', DB::raw("'$exam_id'"))
+                        ->on('sa.class_id', '=', DB::raw("'$class_id'"))
+                        ->on('sa.section_id', '=', DB::raw("'$section_id'"))
+                        ->on('sa.semester_id', '=', DB::raw("'$semester_id'"))
+                        ->on('sa.session_id', '=', DB::raw("'$session_id'"))
+                        ->on('sa.subject_id', '=', DB::raw("'$subject_id'"))
+                        ->on('sa.academic_session_id', '=', DB::raw("'$academic_session_id'"));
+                })
+                ->join('exam_papers as exp', 'exp.id', '=', 'sa.paper_id')
+                ->where([
+                    ['en.class_id', '=', $request->class_id],
+                    ['en.section_id', '=', $request->section_id],
+                    ['en.semester_id', '=', $request->semester_id],
+                    ['en.session_id', '=', $request->session_id],
+                    ['en.academic_session_id', '=', $academic_session_id]
+                ])
+                ->groupBy('exp.id')
+                ->get();
+            $grade_category = isset($getPaperNames[0]->grade_category) ? $getPaperNames[0]->grade_category : 0;
+            $total_marks = [];
+            if (count($getSubjectMarks) > 0) {
+                foreach ($getSubjectMarks as $key => $value) {
+                    $object = new \stdClass();
+                    $total_sub_weightage = explode(',', $value->subject_weightage);
+                    $total_score = explode(',', $value->score);
+                    $total_subject_weightage = $value->total_subject_weightage;
+                    $paperMark = [];
+                    $marks = 0;
+                    // foreach for total no of students
+                    for ($i = 0; $i < count($total_score); $i++) {
+                        $sub_weightage = isset($total_sub_weightage[$i]) ? (int) $total_sub_weightage[$i] : 0;
+                        $score = isset($total_sub_weightage[$i]) ? (int) $total_score[$i] : 0;
+                        $weightage = ($sub_weightage / $total_subject_weightage);
+                        $paperMark[$i] = ($weightage * $score);
+                        $marks += ($weightage * $score);
+                    }
+                    $object->papers = $paperMark;
+                    // grade marks
+                    $grade = $Connection->table('grade_marks')
+                        ->select('grade', 'status')
+                        ->where([
+                            ['min_mark', '<=', $marks],
+                            ['max_mark', '>=', $marks],
+                            ['grade_category', '=', $grade_category]
+                        ])
+                        ->first();
+                    $object->name = $value->name;
+                    $object->toal_marks = $marks;
+                    $object->paper_name = $value->paper_name;
+                    $object->grade = isset($grade->grade) ? $grade->grade : "-";
+                    $object->status = isset($grade->status) ? $grade->status : "-";
+                    array_push($total_marks, $object);
+                }
+            }
+            $data = [
+                'all_paper' => $getPaperNames,
+                'get_subject_paper_marks' => $total_marks
+            ];
+            return $this->successResponse($data, 'paper wise record fetch successfully');
+        }
+    }
+    public function getExamTimetableDown(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+            'exam_id' => 'required',
+            'session_id' => 'required',
+            'semester_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'academic_session_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $con = $this->createNewConnection($request->branch_id);
+            // get data
+            $exam_id = $request->exam_id;
+            $session_id = $request->session_id;
+            $semester_id = $request->semester_id;
+            $academic_session_id = $request->academic_session_id;
+            $details['exam'] = $con->table('subject_assigns as sa')
+                ->select(
+                    'sbj.name as subject_name',
+                    'ep.paper_name as paper_name',
+                    'ttex.exam_date',
+                    'ttex.time_start',
+                    'ttex.time_end',
+                    'eh.hall_no',
+                    'ttex.distributor'
+                )
+                ->join('subjects as sbj', 'sa.subject_id', '=', 'sbj.id')
+                ->join('classes as cl', 'sa.class_id', '=', 'cl.id')
+                ->join('sections as sec', 'sa.section_id', '=', 'sec.id')
+                ->join('exam_papers as ep', function ($join) use ($academic_session_id) {
+                    $join->on('sa.class_id', '=', 'ep.class_id')
+                        ->on('sa.subject_id', '=', 'ep.subject_id')
+                        ->on('sa.academic_session_id', '=', DB::raw("'$academic_session_id'"));
+                })
+                ->leftJoin('timetable_exam as ttex', function ($join) use ($exam_id, $semester_id, $session_id, $academic_session_id) {
+                    $join->on('sa.class_id', '=', 'ttex.class_id')
+                        ->on('sa.section_id', '=', 'ttex.section_id')
+                        ->on('sa.subject_id', '=', 'ttex.subject_id')
+                        ->on('ttex.semester_id', '=', DB::raw("'$semester_id'"))
+                        ->on('ttex.session_id', '=', DB::raw("'$session_id'"))
+                        ->on('ttex.paper_id', '=', 'ep.id')
+                        ->where('ttex.exam_id', $exam_id)
+                        ->where('ttex.academic_session_id', $academic_session_id);
+                })
+                ->leftJoin('exam as ex', 'ttex.exam_id', '=', 'ex.id')
+                ->leftJoin('exam_hall as eh', 'ttex.hall_id', '=', 'eh.id')
+                ->where([
+                    ['sa.class_id', $request->class_id],
+                    ['sa.section_id', $request->section_id],
+                    ['sa.type', '=', '0'],
+                    ['sa.academic_session_id', '=', $academic_session_id],
+                    ['sbj.exam_exclude', '=', '0']
+                ])
+                ->orderBy('sbj.id', 'asc')
+                ->orderBy('ttex.exam_date', 'desc')
+                ->orderBy('sbj.name', 'asc')
+                ->get();
+            // return $details;
+            $exam_name = $con->table('exam')->select('name')->where('id', $exam_id)->first();
+            $class_name = $con->table('classes')->select('name')->where('id', $request->class_id)->first();
+            $section_name = $con->table('sections')->select('name')->where('id', $request->class_id)->first();
+            $details['details']['exam_name'] = $exam_name->name;
+            $details['details']['class_name'] = $class_name->name;
+            $details['details']['section_name'] = $section_name->name;
+            return $this->successResponse($details, 'Exam Timetable record fetch successfully');
         }
     }
 }

@@ -77,6 +77,14 @@ $(function () {
                 $("#class-section").html(class_section);
                 $("#exam").html(exam_name);
                 $("#exam-timetable").html(res.table);
+                // set value
+                $("#downloadExcel").find("#exam_name").val(res.data.details.exam_name);
+                $("#downloadExcel").find("#class_section_name").val(res.class_section);
+                $("#downloadExcel").find("#exam_id").val(exam_id);
+                $("#downloadExcel").find("#class_id").val(class_id);
+                $("#downloadExcel").find("#section_id").val(section_id);
+                $("#downloadExcel").find("#semester_id").val(semester_id);
+                $("#downloadExcel").find("#session_id").val(session_id);
             }
         }, 'json');
     }).on('hidden.bs.modal', function (event) {

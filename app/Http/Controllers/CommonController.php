@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Artisan;
 use DateTime;
 use App\Helpers\Helper;
+use Excel;
+use App\Exports\ExamScheduleDownload;
 
 class CommonController extends Controller
 {
@@ -186,5 +188,9 @@ class CommonController extends Controller
         } else {
             return false;
         }
+    }
+    public function examScheduleDownloadExcel(Request $request)
+    {
+        return Excel::download(new ExamScheduleDownload($request->exam_name,$request->class_section_name,$request->class_id, $request->section_id, $request->exam_id, $request->semester_id, $request->session_id), 'ExamSchedule.xlsx');
     }
 }

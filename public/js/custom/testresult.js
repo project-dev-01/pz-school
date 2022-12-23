@@ -680,24 +680,21 @@ $(function () {
                     "targets": 4,
                     "className": "text-center",
                     "render": function (data, type, row, meta) {
-                        if (data) {
-                            var passTag = "";
-                            if (data == "Pass") {
-                                passTag = "badge-success";
-                            } else if (data == "Fail") {
+                        var passTag = "";
+                        if (data == "Pass") {
+                            passTag = "badge-success";
+                        } else if (data == "Fail") {
+                            passTag = "badge-danger";
+                        } else {
+                            if (row.status == "absent") {
                                 passTag = "badge-danger";
                             } else {
-                                if (row.status == "absent") {
-                                    passTag = "badge-danger";
-                                } else {
-                                    passTag = "-";
-                                }
+                                passTag = "-";
                             }
-                            var pass_fail = '<span class="badge badgeLabel' + row.student_id + ' ' + passTag + ' badge-pill lbl_pass_fail' + row.student_id + '" style="padding:5px 20px 5px 20px;">' + (data != 'null' ? data : "-") + '</span>' +
-                                '<input type="hidden" class="lbl_pass_fail' + row.student_id + '" name="subjectmarks[' + meta.row + '][pass_fail]" value="' + row.pass_fail + '">';
-                        } else {
-                            pass_fail = "-";
                         }
+                        var pass_fail = '<span class="badge badgeLabel' + row.student_id + ' ' + passTag + ' badge-pill lbl_pass_fail' + row.student_id + '" style="padding:5px 20px 5px 20px;">' + (data ? data : "-") + '</span>' +
+                            '<input type="hidden" class="lbl_pass_fail' + row.student_id + '" name="subjectmarks[' + meta.row + '][pass_fail]" value="' + row.pass_fail + '">';
+
                         return pass_fail;
                     }
                 },
@@ -706,7 +703,7 @@ $(function () {
                     "className": "text-center",
                     "render": function (data, type, row, meta) {
 
-                        var ranking = '<label for="ranking" class="lbl_ranking' + row.student_id + '">' + (data != '' ? data : "-") + '</label>' +
+                        var ranking = '<label for="ranking" class="lbl_ranking' + row.student_id + '">' + (data ? data : "-") + '</label>' +
                             '<input type="hidden" class="lbl_ranking' + row.student_id + '" name="subjectmarks[' + meta.row + '][ranking]" value="' + row.ranking + '">';
 
                         return ranking;

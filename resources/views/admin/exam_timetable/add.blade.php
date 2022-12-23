@@ -24,10 +24,25 @@
                             </tr>
                         </thead>
                         <tbody id="exam-timetable">
-                           
+
                         </tbody>
                     </table>
                 </div> <!-- end table-responsive-->
+                <div class="form-group text-right m-b-0">
+                    <form method="post" id="downloadExcel" action="{{ route('admin.exam_schedule_download_excel')}}">
+                        @csrf
+                        <input type="hidden" name="exam_name" id="exam_name">
+                        <input type="hidden" name="class_section_name" id="class_section_name">
+                        <input type="hidden" name="class_id" id="class_id">
+                        <input type="hidden" name="section_id" id="section_id">
+                        <input type="hidden" name="exam_id" id="exam_id">
+                        <input type="hidden" name="semester_id" id="semester_id">
+                        <input type="hidden" name="session_id" id="session_id">
+                        <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                            Download
+                        </button>
+                    </form>
+                </div>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

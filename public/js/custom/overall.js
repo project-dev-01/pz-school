@@ -118,14 +118,13 @@ function overall_subject(datasetnew) {
         '<th class="align-top" rowspan="2">Subject Name</th>' +
         '<th class="align-top th-sm - 6 rem" rowspan="2">Tot. Students</th>' +
         '<th class="align-top" rowspan="2">Absent</th>' +
-        '<th class="align-top" rowspan="2">Present</th>' +
-        '<th class="align-top" rowspan="2">Class Teacher Name</th>';
+        '<th class="align-top" rowspan="2">Present</th>';
     headers.forEach(function (resp) {
         bysubjectAllTable += '<th class="text-center">' + resp.grade + '</th>';
     });
     bysubjectAllTable += '<th class="align-middle" rowspan="2">PASS</th>' +
         '<th class="align-middle" rowspan="2">G</th>' +
-        '<th class="align-middle" rowspan="2">Avg. grade of subject</th>' +
+        '<th class="align-middle" rowspan="2">GPA</th>' +
         '<th class="align-middle" rowspan="2">%</th>' +
         '</tr>';
     bysubjectAllTable += '<tr>';
@@ -151,9 +150,6 @@ function overall_subject(datasetnew) {
         bysubjectAllTable += '<td class="text-center">' +
             '<label for="stdcount">' + res.presentCnt + '</label>' +
             '</td>';
-        bysubjectAllTable += '<td class="text-left" rowspan="2">' +
-            '<label for="clsname">-</label>' +
-            '</td>';
         headers.forEach(function (resp) {
             var obj = res.gradecnt;
             var exists = isKey(resp.grade, obj); // true
@@ -169,9 +165,9 @@ function overall_subject(datasetnew) {
                 bysubjectAllTable += '<td class="text-center">0</td>';
             }
         });
-        bysubjectAllTable += '<td class="text-center" rowspan="2">' + res.passCnt + '</td>' +
-            '<td class="text-center" rowspan="2">' + res.failCnt + '</td>' +
-            '<td class="text-center" rowspan="2">-</td>' +
+        bysubjectAllTable += '<td class="text-center">' + res.passCnt + '</td>' +
+            '<td class="text-center">' + res.failCnt + '</td>' +
+            '<td class="text-center" rowspan="2">' + res.gpa + '</td>' +
             '<td class="text-center" rowspan="2">' + res.pass_percentage + '</td>';
         bysubjectAllTable += '</tr>';
         // show another row percentage
@@ -202,6 +198,8 @@ function overall_subject(datasetnew) {
                 bysubjectAllTable += '<td class="text-center">0</td>';
             }
         });
+        bysubjectAllTable += '<td class="text-center">' + res.pass_percentage + '</td>' +
+            '<td class="text-center">' + res.fail_percentage + '</td>';
         bysubjectAllTable += '</tr>';
 
     });

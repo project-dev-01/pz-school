@@ -9,6 +9,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CommonController;
+use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,7 +31,12 @@ Route::get('/', function () {
     return redirect(route('admin.login'));
 });
 
-
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('route:cache');
+    Artisan::call('config:cache');
+    // return what you want
+});
 // Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 // Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
 // Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -530,6 +536,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         // Test Result Route
         Route::get('test_result', [AdminController::class, 'testResult'])->name('admin.test_result');
+        Route::get('exam_results/paper_wise_result', [AdminController::class, 'paperWiseResult'])->name('admin.paper_wise_result');
 
         Route::post('subjectmarksAdd', [AdminController::class, 'subjectmarks'])->name('admin.subjectmarks.add');
         Route::post('subjectdivisionAdd', [AdminController::class, 'subjectdivisionAdd'])->name('admin.subjectdivision.add');
@@ -687,6 +694,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('soap_subject/edit', [AdminController::class, 'editSoapSubject'])->name('admin.soap_subject.edit');
         Route::post('soap_subject/update', [AdminController::class, 'updateSoapSubject'])->name('admin.soap_subject.update');
         Route::post('soap_subject/delete', [AdminController::class, 'deleteSoapSubject'])->name('admin.soap_subject.delete');
+
+        // scedule download
+        Route::post('scedule/exam_schedule_download_excel', [CommonController::class, 'examScheduleDownloadExcel'])->name('admin.exam_schedule_download_excel');
     });
 });
 // admin routes end

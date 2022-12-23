@@ -331,6 +331,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('get_student_grade', [ApiController::class, 'getStudentGrade']);
     Route::post('get_subject_division_mark', [ApiController::class, 'getSubDivisionMark']);
     Route::post('get_subject_mark_status', [ApiController::class, 'getSubjectMarkStatus']);
+    // get exam paper results
+    Route::post('get_exam_paper_results', [ApiControllerOne::class, 'getExamPaperResults']);
     // classroom management
     Route::post('teacher_class', [ApiController::class, 'getTeachersClassName']);
     Route::post('teacher_section', [ApiController::class, 'getTeachersSectionName']);
@@ -729,4 +731,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('soap_notes/soap_notes-details', [ApiControllerOne::class, 'getSoapNotesDetails']);
     Route::post('soap_notes/update', [ApiControllerOne::class, 'updateSoapNotes']);
     Route::post('soap_notes/delete', [ApiControllerOne::class, 'deleteSoapNotes']);
+    // download csv api
+    Route::post('exam_timetable/list/download', [ApiControllerOne::class, 'getExamTimetableDown']);
+
 });

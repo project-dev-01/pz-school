@@ -673,14 +673,18 @@ return [
          'soap_notes_details' => $url.'/soap_notes/soap_notes-details',
          'soap_notes_update' => $url.'/soap_notes/update',
          'soap_notes_delete' => $url.'/soap_notes/delete',
-         
          // soap subject url
          'soap_subject_add' => $url.'/soap_subject/add',
          'soap_subject_list' => $url.'/soap_subject/list',
          'soap_subject_details' => $url.'/soap_subject/soap_subject-details',
          'soap_subject_update' => $url.'/soap_subject/update',
          'soap_subject_delete' => $url.'/soap_subject/delete',
-        
+          // get exam paper results
+         'get_exam_paper_res' => $url.'/get_exam_paper_results',
+          // download excel
+         'exam_timetable_list_download' => $url.'/exam_timetable/list/download',
+         
+
         ]
 
 ];

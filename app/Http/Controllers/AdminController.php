@@ -262,6 +262,7 @@ class AdminController extends Controller
     //
     public function index()
     {
+        // echo "ff";exit;
         // dd(session('school_name_url'));
         $user_id = session()->get('user_id');
         $data = [
@@ -3725,6 +3726,21 @@ class AdminController extends Controller
             'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
         ]);
     }
+    public function paperWiseResult()
+    {
+
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        return view('admin.testresult.paper_wise_result', [
+            'classes' => $getclass['data'],
+            'semester' => $semester['data'],
+            'session' => $session['data'],
+            'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+            'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+        ]);
+    }
 
     public function subjectmarks(Request $request)
     {
@@ -5842,7 +5858,6 @@ class AdminController extends Controller
     // end Global Setting
     public function studentAttendanceReport()
     {
-
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
@@ -5919,9 +5934,9 @@ class AdminController extends Controller
         $soap_category_list = Helper::GetMethod(config('constants.api.soap_category_list'));
         $soap_list = Helper::GetMethod(config('constants.api.soap_list'));
         $soap_subject_list = Helper::GetMethod(config('constants.api.soap_subject_list'));
-        
+
         // dd($soap_subject_list);
-        
+
         return view(
             'admin.soap.index',
             [
@@ -5953,15 +5968,15 @@ class AdminController extends Controller
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('soap_type_id', function ($row) {
-                if($row['soap_type_id']=="1"){
+                if ($row['soap_type_id'] == "1") {
                     return "Subjective";
-                }elseif($row['soap_type_id']=="2"){
+                } elseif ($row['soap_type_id'] == "2") {
                     return "Objective";
-                }elseif($row['soap_type_id']=="3"){
+                } elseif ($row['soap_type_id'] == "3") {
                     return "Assessment";
-                }elseif($row['soap_type_id']=="4"){
+                } elseif ($row['soap_type_id'] == "4") {
                     return "Plan";
-                }else{
+                } else {
                     return "";
                 }
             })
@@ -6004,7 +6019,7 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.soap_category_delete'), $data);
         return $response;
     }
-    
+
     // index Soap Category
     public function soapSubCategory()
     {
@@ -6013,7 +6028,7 @@ class AdminController extends Controller
 
     public function addSoapSubCategory(Request $request)
     {
-        
+
         $base64 = "";
         $extension = "";
         $file = $request->file('photo');
@@ -6089,7 +6104,7 @@ class AdminController extends Controller
         return $response;
     }
 
-    
+
 
     // index Soap Category
     public function soapNotes()
@@ -6138,7 +6153,7 @@ class AdminController extends Controller
             'soap_category_id' => $request->soap_category_id,
             'soap_sub_category_id' => $request->soap_sub_category_id,
         ];
-// dd($data);
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.soap_notes_update'), $data);
         return $response;
     }
@@ -6156,7 +6171,7 @@ class AdminController extends Controller
     public function addSoap(Request $request)
     {
         $data = [
-            'notes'=>$request->notes,
+            'notes' => $request->notes,
             'referred_by' => "Doc",
         ];
         // dd($data);

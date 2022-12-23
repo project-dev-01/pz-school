@@ -179,15 +179,17 @@ function examresult_details(datasetnew) {
     headers.forEach(function (resps) {
         bysubjectAllTable += '<th>' + resps.subject_name + '</th>';
     });
+    bysubjectAllTable += '<th rowspan="2">GPA</th>';
+
     bysubjectAllTable += '</tr>';
     bysubjectAllTable += '</thead><tbody>';
     grade_list_master.forEach(function (res) {
         sno++;
         bysubjectAllTable += '<tr>' +
-            '<td class="text-center">';
+            '<td class="text-center" rowspan="2">';
         bysubjectAllTable += sno +
             '</td>';
-        bysubjectAllTable += '<td class="text-left">' + res.student_name + '</td>';
+        bysubjectAllTable += '<td class="text-center" rowspan="2">' + res.student_name + '</td>';
         headers.forEach(function (resp) {
             // header subject id
             var subject_id = resp.subject_id;
@@ -197,6 +199,23 @@ function examresult_details(datasetnew) {
             var index = marksArr.findIndex(x => x.subject_id === subject_id);
             if (index !== -1) {
                 bysubjectAllTable += '<td class="text-center">' + marksArr[index].grade + '</td>';
+            } else {
+                bysubjectAllTable += '<td class="text-center">-</td>';
+            }
+        });
+        bysubjectAllTable += '<td class="text-center" rowspan="2">' + res.gpa + '</td>';
+        bysubjectAllTable += '</tr>';
+        // 2nd row
+        bysubjectAllTable += '<tr>';
+        headers.forEach(function (resp) {
+            // header subject id
+            var subject_id = resp.subject_id;
+            //subject array
+            var marksArr = res.student_class;
+            // here find index of array
+            var index = marksArr.findIndex(x => x.subject_id === subject_id);
+            if (index !== -1) {
+                bysubjectAllTable += '<td class="text-center">' + marksArr[index].marks + '</td>';
             } else {
                 bysubjectAllTable += '<td class="text-center">-</td>';
             }

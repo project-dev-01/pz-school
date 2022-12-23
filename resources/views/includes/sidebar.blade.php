@@ -669,6 +669,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('admin.paper_wise_result')}}" class="nav-link {{ (request()->is('admin/exam_results/paper_wise_result')) ? 'active' : '' }}">
+                                    <span> Exam Paper Result </span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="#sidebarResult" data-toggle="collapse">
                                     Exam Results<span class="menu-arrow"></span>
                                 </a>

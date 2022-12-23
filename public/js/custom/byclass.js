@@ -137,7 +137,7 @@ function bysubjectdetails(datasetnew) {
     });
     bysubjectAllTable += '<th class="align-middle" rowspan="2">PASS</th>' +
         '<th class="align-middle" rowspan="2">G</th>' +
-        '<th class="align-middle" rowspan="2">Avg. grade of subject</th>' +
+        '<th class="align-middle" rowspan="2">GPA</th>' +
         '<th class="align-middle" rowspan="2">%</th>' +
         '</tr>';
     bysubjectAllTable += '<tr>';
@@ -148,13 +148,13 @@ function bysubjectdetails(datasetnew) {
     allbysubject.forEach(function (res) {
         sno++;
         bysubjectAllTable += '<tr>' +
-            '<td class="text-center">';
+            '<td class="text-center" rowspan="2">';
         bysubjectAllTable += sno +
             '</td>';
-        bysubjectAllTable += '<td class="text-left">' +
+        bysubjectAllTable += '<td class="text-left" rowspan="2">' +
             '<label for="clsname">' + res.name + "(" + res.section_name + ")" + '</label>' +
             '</td>';
-        bysubjectAllTable += '<td class="text-center">' +
+        bysubjectAllTable += '<td class="text-center" rowspan="2">' +
             '<label for="stdcount"> ' + res.totalstudentcount + '</label>' +
             '</td>';
         bysubjectAllTable += '<td class="text-left">' +
@@ -163,8 +163,39 @@ function bysubjectdetails(datasetnew) {
         bysubjectAllTable += '<td class="text-center">' +
             '<label for="stdcount">' + res.present_count + '</label>' +
             '</td>';
-        bysubjectAllTable += '<td class="text-left">' +
+        bysubjectAllTable += '<td class="text-left" rowspan="2">' +
             '<label for="clsname">' + res.teacher_name + '</label>' +
+            '</td>';
+        headers.forEach(function (resp) {
+            var obj = res.gradecnt;
+            var exists = isKey(resp.grade, obj); // true
+            if (exists) {
+                Object.keys(obj).forEach(key => {
+                    if (resp.grade == key) {
+                        // bysubjectAllTable += '<td class="text-center">' + key, obj[key] + '</td>';
+                        bysubjectAllTable += '<td class="text-center">' + obj[key] + '</td>';
+                    }
+                });
+            } else {
+                bysubjectAllTable += '<td class="text-center">0</td>';
+            }
+        });
+        bysubjectAllTable += '<td class="text-center">' + res.pass_count + '</td>' +
+            '<td class="text-center">' + res.fail_count + '</td>' +
+            '<td class="text-center" rowspan="2">' + res.gpa + '</td>' +
+            '<td class="text-center" rowspan="2">' + res.pass_percentage + '</td>';
+        bysubjectAllTable += '</tr>';
+        // show another row percentage
+        bysubjectAllTable += '<tr>';
+        var absentPer = (res.absent_count / res.totalstudentcount) * 100;
+        absentPer = parseFloat(absentPer, 10).toFixed(2);
+        var presentPer = (res.present_count / res.totalstudentcount) * 100;
+        presentPer = parseFloat(presentPer, 10).toFixed(2);
+        bysubjectAllTable += '<td class="text-left">' +
+            '<label for="clsname">' + absentPer + '</label>' +
+            '</td>';
+        bysubjectAllTable += '<td class="text-center">' +
+            '<label for="stdcount">' + presentPer + '</label>' +
             '</td>';
         headers.forEach(function (resp) {
             var obj = res.gradecnt;
@@ -182,15 +213,12 @@ function bysubjectdetails(datasetnew) {
                 bysubjectAllTable += '<td class="text-center">0</td>';
             }
         });
-        bysubjectAllTable += '<td class="text-center">' + res.pass_count + '</td>' +
-            '<td class="text-center">' + res.fail_count + '</td>' +
-            '<td class="text-center">-</td>' +
-            '<td class="text-center">' + res.pass_percentage + '</td>';
+        bysubjectAllTable += '<td class="text-center">' + res.pass_percentage + '</td>' +
+            '<td class="text-center">' + res.fail_percentage + '</td>';
         bysubjectAllTable += '</tr>';
     });
     bysubjectAllTable += '</tbody></table>' +
         '</div>';
-
     $("#byclassTableAppend").append(bysubjectAllTable);
 }
 // find matched

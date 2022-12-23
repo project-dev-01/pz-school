@@ -140,7 +140,7 @@ function bysubjectdetails_class(datasetnew) {
     });
     bysubjectAllTable += '<th class="align-middle" rowspan="2">PASS</th>' +
         '<th class="align-middle" rowspan="2">G</th>' +
-        '<th class="align-middle" rowspan="2">Avg. grade of subject</th>' +
+        '<th class="align-middle" rowspan="2">GPA</th>' +
         '<th class="align-middle" rowspan="2">%</th>' +
         '</tr>';
     bysubjectAllTable += '<tr>';
@@ -189,9 +189,9 @@ function bysubjectdetails_class(datasetnew) {
                 bysubjectAllTable += '<td class="text-center">0</td>';
             }
         });
-        bysubjectAllTable += '<td class="text-center" rowspan="2">' + res.pass_count + '</td>' +
-            '<td class="text-center" rowspan="2">' + res.fail_count + '</td>' +
-            '<td class="text-center" rowspan="2">-</td>' +
+        bysubjectAllTable += '<td class="text-center">' + res.pass_count + '</td>' +
+            '<td class="text-center">' + res.fail_count + '</td>' +
+            '<td class="text-center" rowspan="2">' + res.gpa + '</td>' +
             '<td class="text-center" rowspan="2">' + res.pass_percentage + '</td>';
         bysubjectAllTable += '</tr>';
         // show another row percentage
@@ -222,10 +222,10 @@ function bysubjectdetails_class(datasetnew) {
                 bysubjectAllTable += '<td class="text-center">0</td>';
             }
         });
+        bysubjectAllTable += '<td class="text-center">' + res.pass_percentage + '</td>' +
+            '<td class="text-center">' + res.fail_percentage + '</td>';
         bysubjectAllTable += '</tr>';
-
     });
-
     bysubjectAllTable += '</tbody></table>' +
         '</div>';
     $("#bysubjectTableAppend").append(bysubjectAllTable);
@@ -237,6 +237,3 @@ function isKey(key, obj) {
     });
     return keys.indexOf(key) !== -1;
 }
-
-
-
