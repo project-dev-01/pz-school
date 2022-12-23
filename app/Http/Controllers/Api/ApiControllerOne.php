@@ -3578,21 +3578,25 @@ class ApiControllerOne extends BaseController
             $notes = $request->notes;
             if ($notes) {
 
-                foreach ($notes as $note) {
+                foreach ($notes as $not) {
                     // return $note;
-                    if (!isset($note['soap_id'])) {
-                        $data = [
-                            'soap_notes_id' => $note['soap_notes_id'],
-                            'soap_category_id' => $note['soap_category_id'],
-                            'soap_sub_category_id' => $note['soap_sub_category_id'],
-                            'referred_by' => $request->referred_by,
-                            'date' => date('Y-m-d'),
-                            'created_at' => date("Y-m-d H:i:s")
-                        ];
-                        // insert data
-                        $query = $conn->table('soap')->insert($data);
-                    } else {
-                        $query = 1;
+                    foreach ($not as $note) {
+
+                        if (!isset($note['soap_id'])) {
+                            $data = [
+                                'soap_notes_id' => $note['soap_notes_id'],
+                                'soap_category_id' => $note['soap_category_id'],
+                                'soap_sub_category_id' => $note['soap_sub_category_id'],
+                                'referred_by' => $request->referred_by,
+                                'student_id' => $request->student_id,
+                                'date' => date('Y-m-d'),
+                                'created_at' => date("Y-m-d H:i:s")
+                            ];
+                            // insert data
+                            $query = $conn->table('soap')->insert($data);
+                        } else {
+                            $query = 1;
+                        }
                     }
                 }
             }
@@ -3608,6 +3612,7 @@ class ApiControllerOne extends BaseController
     public function getSoapList(Request $request)
     {
         $validator = \Validator::make($request->all(), [
+            'token' => 'required',
             'branch_id' => 'required'
         ]);
 
@@ -3617,16 +3622,18 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
+            $student_id = $request->student_id;
             $soapDetails = $conn->table('soap as sp')
                 ->select(
                     'sp.id',
                     'sn.notes as soap_notes',
-                    'sp.referred_by',
                     'sp.date',
                     'sp.soap_category_id',
                     'sp.soap_sub_category_id',
+                    DB::raw('CONCAT(s.first_name, " ", s.last_name) as referred_by'),
                 )
                 ->join('soap_notes as sn', 'sp.soap_notes_id', '=', 'sn.id')
+                ->join('staffs as s', 'sp.referred_by', '=', 's.id')
                 ->get();
             return $this->successResponse($soapDetails, 'Soap record fetch successfully');
         }
@@ -4072,8 +4079,6 @@ class ApiControllerOne extends BaseController
         }
     }
 
-
-
     // addSoapCategory
     public function addSoapCategory(Request $request)
     {
@@ -4512,6 +4517,7 @@ class ApiControllerOne extends BaseController
             'body' => 'required',
             'soap_type_id' => 'required',
             'student_id' => 'required',
+            'referred_by' => 'required',
             'branch_id' => 'required',
             'token' => 'required',
         ]);
@@ -4528,6 +4534,8 @@ class ApiControllerOne extends BaseController
                 'body' => $request->body,
                 'soap_type_id' => $request->soap_type_id,
                 'student_id' => $request->student_id,
+                'referred_by' => $request->referred_by,
+                'date' => date('Y-m-d'),
                 'created_at' => date("Y-m-d H:i:s")
             ]);
             $success = [];
@@ -4552,7 +4560,8 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $SoapSubjectDetails = $conn->table('soap_subject')->get();
+            $SoapSubjectDetails = $conn->table('soap_subject')->select('*', DB::raw('CONCAT(s.first_name, " ", s.last_name) as referred_by'))
+                ->join('staffs as s', 'soap_subject.referred_by', '=', 's.id')->get();
             return $this->successResponse($SoapSubjectDetails, 'Subject record fetch successfully');
         }
     }
@@ -4587,6 +4596,7 @@ class ApiControllerOne extends BaseController
             'body' => 'required',
             'soap_type_id' => 'required',
             'student_id' => 'required',
+            'referred_by' => 'required',
             'branch_id' => 'required',
             'token' => 'required',
         ]);
@@ -4604,6 +4614,8 @@ class ApiControllerOne extends BaseController
                 'body' => $request->body,
                 'soap_type_id' => $request->soap_type_id,
                 'student_id' => $request->student_id,
+                'referred_by' => $request->referred_by,
+                'date' => date('Y-m-d'),
                 'updated_at' => date("Y-m-d H:i:s")
             ]);
             $success = [];
@@ -4841,6 +4853,110 @@ class ApiControllerOne extends BaseController
             $details['details']['class_name'] = $class_name->name;
             $details['details']['section_name'] = $section_name->name;
             return $this->successResponse($details, 'Exam Timetable record fetch successfully');
+        }
+    }// getoldSoapStudentList
+    public function getOldSoapStudentList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $SoapSubjectDetails = $conn->table('soap as sa')
+                ->select('s.id', 's.photo', DB::raw('CONCAT(s.first_name, " ", s.last_name) as name'), 'sections.name as section_name', 'classes.name as class_name', 's.email')
+                ->leftJoin('students as s', 'sa.student_id', '=', 's.id')
+                ->leftJoin('enrolls as e', 's.id', '=', 'e.student_id')
+                ->leftJoin('sections', 'e.section_id', '=', 'sections.id')
+                ->leftJoin('classes', 'e.class_id', '=', 'classes.id')
+                ->where('sa.student_id', '!=', '0')
+                ->where('e.academic_session_id', '=', $request->academic_session_id)
+                ->where('e.active_status', '=', "0")
+                ->groupBy('s.id')
+                ->get();
+            return $this->successResponse($SoapSubjectDetails, 'Student record fetch successfully');
+        }
+    }
+    // student Soap List 
+    public function studentSoapList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $student_id = $request->student_id;
+            $soapDetails['soap'] = $conn->table('soap as sp')
+                ->select(
+                    'sp.id',
+                    'sn.notes as soap_notes',
+                    'sp.date',
+                    'sp.soap_category_id',
+                    'sp.soap_sub_category_id',
+                    DB::raw('CONCAT(s.first_name, " ", s.last_name) as referred_by')
+                )
+                ->join('soap_notes as sn', 'sp.soap_notes_id', '=', 'sn.id')
+                ->join('staffs as s', 'sp.referred_by', '=', 's.id')
+                ->where('sp.student_id', $student_id)
+                ->get();
+            $soapDetails['subject'] =  $conn->table('soap_subject')->select('soap_subject.*', DB::raw('CONCAT(s.first_name, " ", s.last_name) as referred_by'))->join('staffs as s', 'soap_subject.referred_by', '=', 's.id')->where('student_id', $student_id)->get();
+            return $this->successResponse($soapDetails, 'Soap & Subject record fetch successfully');
+        }
+    }
+
+    // getSoapStudentList
+    public function getSoapStudentList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            //         $unassign = Device::select('devices.id','devices.deviceuid','devices.devicecode')
+
+            //    ->whereNotIn('id', function($q){
+            //     $q->select('deviceid')->from('deviceassignments');
+            //     })
+            // ->where('devices.status',1)->get();
+            $class_id = $request->class_id;
+            $session_id = $request->session_id;
+            $section_id = $request->section_id;
+
+            $SoapSubjectDetails = $conn->table('students as s')->select('s.id', 's.photo', 'e.section_id', 'e.class_id', DB::raw('CONCAT(s.first_name, " ", s.last_name) as name'), 'sections.name as section_name', 'classes.name as class_name', 's.email')
+                ->leftJoin('enrolls as e', 's.id', '=', 'e.student_id')
+                ->leftJoin('sections', 'e.section_id', '=', 'sections.id')
+                ->leftJoin('classes', 'e.class_id', '=', 'classes.id')
+                ->whereNotIn('s.id', $conn->table('soap')->pluck('student_id'))
+                ->when($class_id, function ($query, $class_id) {
+                    return $query->where('e.class_id', $class_id);
+                })
+                ->when($session_id, function ($query, $session_id) {
+                    return $query->where('e.session_id', $session_id);
+                })
+                ->when($section_id, function ($query, $section_id) {
+                    return $query->where('e.section_id', $section_id);
+                })
+                ->where('e.academic_session_id', '=', $request->academic_session_id)
+                ->where('e.active_status', '=', "0")
+                ->get();
+            return $this->successResponse($SoapSubjectDetails, 'Student record fetch successfully');
         }
     }
 }

@@ -4,6 +4,8 @@
 <div class="container-fluid">
 
     <!-- start page title -->
+    
+       
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
@@ -19,45 +21,74 @@
         </div>
     </div>
     <!-- end page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">               
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <p class="col-md-12">Name :<span class="font-weight-semibold student_name"></span> </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <p class="col-md-12">Grade :<span class="font-weight-semibold student_class"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <p class="col-md-12">Class :<span class="font-weight-semibold student_section"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                                
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-xl-12">
-            <div class="">
+            <div id="tabs">
                 <!-- <h4 class="header-title mb-4">SOAP</h4>-->
 
                 <ul class="nav nav-pills navtab-bg nav-justified">
                     <li class="nav-item">
-                        <a href="#d1" data-toggle="tab" aria-expanded="false" class="nav-link active">
+                        <a href="#d1" data-toggle="tab"  aria-expanded="false" class="nav-link active">
                             Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#pi1" data-toggle="tab" aria-expanded="true" class="nav-link ">
+                        <a href="#pi1" data-toggle="tab"  data-tab="info" aria-expanded="true" class="nav-link ">
                             Personal Info
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#subjective" data-toggle="tab" aria-expanded="true" class="nav-link">
+                        <a href="#subjective" data-toggle="tab" data-soap-type-id="1" data-tab="subjective" aria-expanded="true" class="nav-link">
                             S-Subjective
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#objective" data-toggle="tab" aria-expanded="true" class="nav-link">
+                        <a href="#objective" data-toggle="tab" data-soap-type-id="2" data-tab="objective" aria-expanded="true" class="nav-link">
                             O-Objective
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#assessment" data-toggle="tab" aria-expanded="true" class="nav-link">
+                        <a href="#assessment" data-toggle="tab" data-soap-type-id="3" data-tab="assessment" aria-expanded="true" class="nav-link">
                             A-Assessment
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#plan" data-toggle="tab" aria-expanded="true" class="nav-link">
+                        <a href="#plan" data-toggle="tab" data-soap-type-id="4" data-tab="plan" aria-expanded="true" class="nav-link">
                             P-Plan
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#l1" data-toggle="tab" aria-expanded="true" class="nav-link">
+                        <a href="#l1" data-toggle="tab"  aria-expanded="true" class="nav-link">
                             logs
                         </a>
                     </li>
@@ -169,59 +200,37 @@
                                             <thead class="thead-light">
                                                 <tr>
                                                     <th>S.no</th>
-                                                    <th colspan="2">Student Profile</th>
+                                                    <th colspan="2">Student Name</th>
+                                                    <th>Email</th>
+                                                    <th>Standard</th>
                                                     <th>Class</th>
-                                                    <th>Date</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        1
-                                                    </td>
-                                                    <td style="width: 36px;">
-                                                        <img src="../assets/images/users/user-2.jpg" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />
-                                                    </td>
-
-                                                    <td>
-                                                        <h5 class="m-0 font-weight-normal">Tomaslau</h5>
-                                                        <p class="mb-0 text-muted"><small>Member Since
-                                                                2017</small></p>
-                                                    </td>
-
-                                                    <td>
-                                                        X
-                                                    </td>
-
-                                                    <td>
-                                                        12/11/2022
-                                                    </td>
-
-                                                </tr>
-
-                                                <tr>
-                                                    <td>
-                                                        1
-                                                    </td>
-                                                    <td style="width: 36px;">
-                                                        <img src="../assets/images/users/user-2.jpg" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />
-                                                    </td>
-
-                                                    <td>
-                                                        <h5 class="m-0 font-weight-normal">Tomaslau</h5>
-                                                        <p class="mb-0 text-muted"><small>Member Since
-                                                                2017</small></p>
-                                                    </td>
-
-                                                    <td>
-                                                        X
-                                                    </td>
-
-                                                    <td>
-                                                        12/11/2022
-                                                    </td>
-
-                                                </tr>
+                                                @foreach($soap_student_list as $key=>$student)
+                                                    <tr class="student-row">
+                                                        @php $key++; @endphp
+                                                        <td>
+                                                            {{$key}}
+                                                        </td>
+                                                        <td style="width: 36px;">
+                                                            <img src="{{ $student['photo'] && asset('public/users/images/'.$student['photo']) ? asset('public/users/images/'.$student['photo']) : asset('public/images/users/default.jpg') }}" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />
+                                                        </td>
+                                                        <td class="stu-name">
+                                                            <h5 class="m-0 font-weight-normal ">{{$student['name']}}</h5>
+                                                        </td>
+                                                        <input type="hidden" class="student" value="{{$student['id']}}">
+                                                        <td>
+                                                            {{$student['email']}}
+                                                        </td>
+                                                        <td class="stu-class">
+                                                            {{$student['class_name']}}
+                                                        </td>
+                                                        <td class="stu-section">
+                                                            {{$student['section_name']}}
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -247,65 +256,58 @@
                                     </div>
 
                                     <h4 class="header-title mb-3">New Records</h4>
+                                    <form id="studentFilter" autocomplete="off" method="post" action="{{ route('admin.student.list') }}" enctype="multipart/form-data">
+                                        <div class="row">                          
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="class_id">Grade</label>
+                                                    <select id="class_id" class="form-control" name="class_id">
+                                                        <option value="">Select Grade</option>
+                                                        @forelse ($class as $clas)
+                                                            <option value="{{ $clas['id'] }}">{{ $clas['name'] }}</option>
+                                                        @empty
+                                                        @endforelse
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="section_id">Class</label>
+                                                    <select id="section_id" class="form-control" name="section_id">
+                                                        <option value="">Select Class</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="session_id">Session</label>
+                                                    <select id="session_id" class="form-control"  name="session_id">                              
+                                                    <option value="">Select Session</option>
+                                                        @foreach($session as $ses)
+                                                            <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group text-right m-b-0">
+                                            <button class="btn btn-primary waves-effect waves-light" type="Save">
+                                                Filter
+                                            </button>
+                                        </div>
+                                    
+                                    </form>
                                     <div class="table-responsive">
                                         <table class="table table-borderless table-hover table-nowrap table-centered m-0">
 
                                             <thead class="thead-light">
                                                 <tr>
                                                     <th>S.no</th>
-                                                    <th colspan="2">Student Profile</th>
-                                                    <th>Class</th>
-                                                    <th>Date</th>
+                                                    <th colspan="2">Student Name</th>
+                                                    <th>Email</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        1
-                                                    </td>
-                                                    <td style="width: 36px;">
-                                                        <img src="../assets/images/users/user-2.jpg" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />
-                                                    </td>
-
-                                                    <td>
-                                                        <h5 class="m-0 font-weight-normal">Tomaslau</h5>
-                                                        <p class="mb-0 text-muted"><small>Member Since
-                                                                2017</small></p>
-                                                    </td>
-
-                                                    <td>
-                                                        X
-                                                    </td>
-
-                                                    <td>
-                                                        12/11/2022
-                                                    </td>
-
-                                                </tr>
-
-                                                <tr>
-                                                    <td>
-                                                        1
-                                                    </td>
-                                                    <td style="width: 36px;">
-                                                        <img src="../assets/images/users/user-2.jpg" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />
-                                                    </td>
-
-                                                    <td>
-                                                        <h5 class="m-0 font-weight-normal">Tomaslau</h5>
-                                                        <p class="mb-0 text-muted"><small>Member Since
-                                                                2017</small></p>
-                                                    </td>
-
-                                                    <td>
-                                                        X
-                                                    </td>
-
-                                                    <td>
-                                                        12/11/2022
-                                                    </td>
-
-                                                </tr>
+                                            <tbody id="student_body">
                                             </tbody>
                                         </table>
                                     </div>
@@ -471,6 +473,7 @@
                                                     </ul>
                                                     <div class="card-body">
                                                         <div class="row">
+                                                            <input type="hidden" name="student_id" id="student_id">
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="">First Name<span class="text-danger">*</span></label>
@@ -548,7 +551,7 @@
                                                                 <div class="form-group">
                                                                     <label for="Passport">Passport
                                                                         Number</label>
-                                                                    <input type="text" maxlength="50" class="form-control alloptions" placeholder="Passport Number" name="txt_passport">
+                                                                    <input type="text" maxlength="50" id="passport" class="form-control alloptions" placeholder="Passport Number" name="txt_passport">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -564,32 +567,23 @@
                                                                 <div class="form-group">
                                                                     <label for="txt_religion">Religion</label>
                                                                     <select class="form-control" name="txt_religion" id="religion">
-                                                                        <option value="">Choose Religion
-                                                                        </option>
-                                                                        <option value="">Islam</option>
-                                                                        <option value="">Hindu</option>
-                                                                        <option value="">Budha</option>
-                                                                        <option value="">Kristian
-                                                                        </option>
-                                                                        <option value="">Sikh</option>
-                                                                        <option value="">Animisme
-                                                                        </option>
-                                                                        <option value="">Taoisme
-                                                                        </option>
-                                                                        <option value="">Confiusme
-                                                                        </option>
+                                                                        <option value="">Choose Religion</option>
+                                                                        @forelse($religion as $r)
+                                                                        <option value="{{$r['id']}}">{{$r['religions_name']}}</option>
+                                                                        @empty
+                                                                        @endforelse
                                                                     </select>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="txt_caste">Race</label>
-                                                                    <select class="form-control" name="txt_race" id="addRace">
-                                                                        <option value="">Choose Race
-                                                                        </option>
-                                                                        <option value="">Melayu</option>
-                                                                        <option value="">Cina</option>
-                                                                        <option value="">India</option>
+                                                                    <select class="form-control" name="txt_race" id="race">
+                                                                        <option value="">Choose Race</option>
+                                                                        @forelse($races as $r)
+                                                                        <option value="{{$r['id']}}">{{$r['races_name']}}</option>
+                                                                        @empty
+                                                                        @endforelse
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -635,7 +629,7 @@
                                                                 <div class="form-group">
                                                                     <label for="txtarea_paddress">Address
                                                                         1</label>
-                                                                    <input type="text" maxlength="255" id="txtarea_paddress" class="form-control alloptions" placeholder="Address 1" name="txtarea_paddress" data-parsley-trigger="change">
+                                                                    <input type="text" maxlength="255" id="txtarea_address" class="form-control alloptions" placeholder="Address 1" name="txtarea_paddress" data-parsley-trigger="change">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
@@ -662,20 +656,11 @@
                                                                     <label for="btwyears">Academic
                                                                         Year<span class="text-danger">*</span></label>
                                                                     <select id="btwyears" class="form-control" name="year">
-                                                                        <option value="">Choose Academic
-                                                                            Year</option>
-                                                                        <option value="">2019-2020
-                                                                        </option>
-                                                                        <option value="">2020-2021
-                                                                        </option>
-                                                                        <option value="">2021-2022
-                                                                        </option>
-                                                                        <option value="">2022-2023
-                                                                        </option>
-                                                                        <option value="">2023-2024
-                                                                        </option>
-                                                                        <option value="">2024-2025
-                                                                        </option>
+                                                                        <option value="">Choose Academic Year</option>
+                                                                        @forelse($academic_year_list as $r)
+                                                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                                                        @empty
+                                                                        @endforelse
 
                                                                     </select>
                                                                 </div>
@@ -713,38 +698,21 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="class_id">Standard<span class="text-danger">*</span></label>
-                                                                    <select id="class_id" class="form-control" name="class_id">
-                                                                        <option value="">Select Standard
-                                                                        </option>
-                                                                        <option value="">PPK 1</option>
-                                                                        <option value="">Tingkatan 1
-                                                                        </option>
-                                                                        <option value="">Tingkatan 2
-                                                                        </option>
-                                                                        <option value="">Tingkatan 3
-                                                                        </option>
-                                                                        <option value="">Tingkatan 4
-                                                                        </option>
-                                                                        <option value="">Tingkatan 5
-                                                                        </option>
-                                                                        <option value="">Tingkatan 6
-                                                                        </option>
+                                                                    <label for="std_class_id">Grade<span class="text-danger">*</span></label>
+                                                                    <select id="std_class_id" class="form-control" name="std_class_id">
+                                                                        <option value="">Select Grade</option>
+                                                                        @foreach($class as $cla)
+                                                                        <option value="{{$cla['id']}}">{{$cla['name']}}</option>
+                                                                        @endforeach
                                                                     </select>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="section_id">Class
+                                                                    <label for="std_section_id">Class
                                                                         Name<span class="text-danger">*</span></label>
-                                                                    <select id="section_id" class="form-control" name="section_id">
-                                                                        <option value="">Select Class
-                                                                            Name</option>
-                                                                        <option value="">K 1</option>
-                                                                        <option value="">K 2</option>
-                                                                        <option value="">K 3</option>
-                                                                        <option value="">K 4</option>
-                                                                        <option value="">K 5</option>
+                                                                    <select id="std_section_id" class="form-control" name="std_section_id">
+                                                                        <option value="">Select Class</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -763,29 +731,23 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="session_id">Session</label>
-                                                                    <select id="session_id" class="form-control" name="session_id">
-                                                                        <option value="0">Select Session
-                                                                        </option>
-                                                                        <option value="0">Morning
-                                                                        </option>
-                                                                        <option value="0">Evening
-                                                                        </option>
+                                                                    <label for="std_session_id">Session</label>
+                                                                    <select id="std_session_id" class="form-control" name="std_session_id">
+                                                                        <option value="0">Select Session</option>
+                                                                        @foreach($session as $ses)
+                                                                        <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                                                        @endforeach
                                                                     </select>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="semester_id">Semester</label>
-                                                                    <select id="semester_id" class="form-control" name="semester_id">
-                                                                        <option value="0">Select
-                                                                            Semester</option>
-                                                                        <option value="1">Semester 1
-                                                                        </option>
-                                                                        <option value="1">Semester 2
-                                                                        </option>
-                                                                        <option value="3">Semester 3
-                                                                        </option>
+                                                                    <label for="std_semester_id">Semester</label>
+                                                                    <select id="std_semester_id" class="form-control" name="std_semester_id">
+                                                                        <option value="0">Select Semester</option>
+                                                                        @foreach($semester as $sem)
+                                                                        <option value="{{$sem['id']}}">{{$sem['name']}}</option>
+                                                                        @endforeach
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -836,12 +798,12 @@
                                                                 <div class="form-group">
                                                                     <label for="relation">Guardian
                                                                         Relation</label>
-                                                                    <select class="form-control" name="relation">
-                                                                        <option value="">Choose Relation
-                                                                        </option>
-                                                                        <option value="">Uncle</option>
-                                                                        <option value="">Father</option>
-                                                                        <option value="">Mother</option>
+                                                                    <select class="form-control" name="relation" id="relation">
+                                                                        <option value="">Choose Relation</option>
+                                                                        @forelse($relation as $r)
+                                                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                                                        @empty
+                                                                        @endforelse
 
                                                                     </select>
                                                                 </div>
@@ -854,14 +816,6 @@
 
 
                                             </div> <!-- end col -->
-                                        </div>
-                                        <div class="form-group text-right m-b-0">
-                                            <button class="btn btn-primary waves-effect waves-light" type="submit">
-                                                Submit
-                                            </button>
-                                            <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                                                Cancel
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -896,14 +850,7 @@
                                     <h4 class="modal-title">Title Details</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                 </div>
-                                <div class="modal-body p-4">
-                                    <h5>Overflowing text to show scroll behavior</h5>
-                                    <p>Cras mattis consectetur purus sit amet fermentum. Cras justo
-                                        odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
-                                        risus, porta ac consectetur ac, vestibulum at eros.</p>
-                                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur
-                                        et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus
-                                        dolor auctor.</p>
+                                <div class="modal-body p-4" id="modal-body">
                                 </div>
                             </div>
                         </div>
@@ -1016,13 +963,24 @@
 
 <script>
     //soapCategory routes
+    var sectionByClass = "{{ route('admin.section_by_class') }}";
     var imageUrl = "{{ asset('public/soap/images/') }}";
     var subCategoryList = "{{ config('constants.api.sub_category_list_by_category') }}";
     var notesList = "{{ config('constants.api.notes_list_by_sub_category') }}";
     var soapDelete = "{{ config('constants.api.soap_delete') }}";
+    var soapSubjectDelete = "{{ route('admin.soap_subject.delete') }}";
+    var studentDetails = "{{ config('constants.api.student_details') }}";
+    var studentSoapList = "{{ config('constants.api.student_soap_list') }}";
+    var url = "{{ URL::to('/') }}";
+    var soapSubjectDetails = "{{ config('constants.api.soap_subject_details') }}";
+    var soapStudentList = "{{ config('constants.api.soap_student_list') }}";
+    var sectionByClassUrl = "{{ config('constants.api.section_by_class') }}";
+    var academic_session_id = "{{ Session::get('academic_session_id') }}";
+    var user_name = "{{ Session::get('name') }}";
     
 </script>
 
 <script src="{{ asset('public/js/custom/soap.js') }}"></script>
+<script src="{{ asset('public/js/custom/soap_subject.js') }}"></script>
 
 @endsection

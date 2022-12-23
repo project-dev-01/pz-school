@@ -683,6 +683,11 @@ return [
          'get_exam_paper_res' => $url.'/get_exam_paper_results',
           // download excel
          'exam_timetable_list_download' => $url.'/exam_timetable/list/download',
+
+         
+         'old_soap_student_list' => $url.'/old_soap_student/list',
+         'soap_student_list' => $url.'/soap_student/list',
+         'student_soap_list' => $url.'/student_soap_list',
          
 
         ]

@@ -5931,18 +5931,42 @@ class AdminController extends Controller
     // index soap
     public function soap()
     {
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
         $soap_category_list = Helper::GetMethod(config('constants.api.soap_category_list'));
         $soap_list = Helper::GetMethod(config('constants.api.soap_list'));
         $soap_subject_list = Helper::GetMethod(config('constants.api.soap_subject_list'));
-
-        // dd($soap_subject_list);
-
+        $soap_student_list = Helper::GETMethodWithData(config('constants.api.old_soap_student_list'), $data);
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $gettransport = Helper::GetMethod(config('constants.api.transport_route_list'));
+        $gethostel = Helper::GetMethod(config('constants.api.hostel_list'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $parent = Helper::GetMethod(config('constants.api.parent_list'));
+        $religion = Helper::GetMethod(config('constants.api.religion'));
+        $races = Helper::GetMethod(config('constants.api.races'));
+        $relation = Helper::GetMethod(config('constants.api.relation_list'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         return view(
             'admin.soap.index',
             [
+                'class' => $getclass['data'],
+                'session' => $session['data'],
                 'soap_category_list' => $soap_category_list['data'],
                 'soap_list' => $soap_list['data'],
                 'soap_subject_list' => $soap_subject_list['data'],
+                'soap_student_list' => $soap_student_list['data'],
+                'class' => $getclass['data'],
+                'transport' => $gettransport['data'],
+                'hostel' => $gethostel['data'],
+                'session' => $session['data'],
+                'semester' => $semester['data'],
+                'parent' => $parent['data'],
+                'religion' => $religion['data'],
+                'races' => $races['data'],
+                'relation' => $relation['data'],
+                'academic_year_list' => $academic_year_list['data']
             ]
         );
     }
@@ -6172,9 +6196,9 @@ class AdminController extends Controller
     {
         $data = [
             'notes' => $request->notes,
-            'referred_by' => "Doc",
+            'referred_by' => session()->get('ref_user_id'),
+            'student_id' => $request->student_id,
         ];
-        // dd($data);
         $response = Helper::PostMethod(config('constants.api.soap_add'), $data);
         // dd($response);
         return $response;
@@ -6209,6 +6233,7 @@ class AdminController extends Controller
             'header' => $request->header,
             'body' => $request->body,
             'soap_type_id' => $request->soap_type_id,
+            'referred_by' => session()->get('ref_user_id'),
             'student_id' => "1",
         ];
         // dd($data);
@@ -6240,7 +6265,8 @@ class AdminController extends Controller
             'header' => $request->header,
             'body' => $request->body,
             'soap_type_id' => $request->soap_type_id,
-            'student_id' => $request->student_id,
+            'referred_by' => session()->get('ref_user_id'),
+            'student_id' => "1",
         ];
         $response = Helper::PostMethod(config('constants.api.soap_subject_update'), $data);
         return $response;

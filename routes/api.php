@@ -734,4 +734,10 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // download csv api
     Route::post('exam_timetable/list/download', [ApiControllerOne::class, 'getExamTimetableDown']);
 
+
+    Route::get('student_soap_list', [ApiControllerOne::class, 'studentSoapList']);
+    
+    Route::get('old_soap_student/list', [ApiControllerOne::class, 'getOldSoapStudentList']);
+    
+    Route::get('soap_student/list', [ApiControllerOne::class, 'getSoapStudentList']);
 });

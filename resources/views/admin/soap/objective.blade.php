@@ -8,6 +8,7 @@
                                             <!--<button type="button" class="btn btn-secondary waves-effect">Close</button>-->
                                             <button type="submit" class="btn btn-info waves-effect waves-light">Save</button>
                                         </div>
+                                        <input type="hidden" class="student_id" name="student_id">
                                         <div class="row">
                                             <div class="col-sm-2 col-xl-2 col-md-2">
                                                 <div class="nav flex-column nav-pills nav-pills-tab" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -44,28 +45,14 @@
                                                                         <div class="table-responsive">
                                                                             <table class="table table-bordered table-nowrap table-hover table-centered m-0">
                                                                                 <thead>
-                                                                                    <tr>
-                                                                                        <th>No</th>
-                                                                                        <th>Subject</th>
-                                                                                        <th>Refered</th>
-                                                                                        <th>Action</th>
-                                                                                    </tr>
+                                                                                    <th>No</th>
+                                                                                    <th>Subject</th>
+                                                                                    <th>Refered By</th>
+                                                                                    <th>Date</th>
+                                                                                    <th>Action</th>
                                                                                 </thead>
 
-                                                                                <tbody id="objective-category-{{ $category['id'] }}">
-                                                                                    @php $key=1; @endphp
-                                                                                    @foreach($soap_list as $list)
-                                                                                        @if($list['soap_category_id'] == $category['id'])
-                                                                                            <tr>
-                                                                                                <td class="count">{{$key}}</td>
-                                                                                                <input type="hidden" class="soap_id" name="notes[{{$key}}][soap_id]" value="{{$list['id']}}"> 
-                                                                                                <td>{{$list['soap_notes']}}</td>
-                                                                                                <td>{{$list['referred_by']}}</td>
-                                                                                                <td> <a href="javascript:void(0);" class="action-icon remove_notes" data-toggle="modal"><i class="mdi mdi-delete"></i></a></td>
-                                                                                            </tr>
-                                                                                            @php $key++; @endphp
-                                                                                        @endif
-                                                                                    @endforeach
+                                                                                <tbody id="objective-category-{{ $category['id'] }}" class="objective-category-table">
                                                                                 </tbody>
                                                                             </table>
                                                                         </div> <!-- end .table-responsive-->
@@ -76,7 +63,7 @@
                                                         </div> <!-- end col --><div class="col-xl-7 col-md-7 col-sm-7">
     <div class="">
         <ul class="nav nav-tabs">
-            <li class="nav-item">
+            <!-- <li class="nav-item"> -->
                 <div class="row">
                     <div class="col-12">
                         <div class="">
@@ -93,7 +80,7 @@
                         </div> <!-- end card-box -->
                     </div><!-- end col-->
                 </div>
-            </li>
+            <!-- </li> -->
         </ul>
 
         <div class="table-responsive">
@@ -101,34 +88,14 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Date</th>
-                        <th>Refered By</th>
                         <th>Title</th>
+                        <th>Refered By</th>
+                        <th>Date</th>
                         <th>Action</th>
                     </tr>
                 </thead>
 
-                <tbody>
-                    
-                    @foreach($soap_subject_list as $list)
-                    
-                        @php $count=1; @endphp
-                        @if($list['soap_type_id']=="2")
-                                <tr>
-                                    <td>{{$count}}</td>
-                                    <td>{{\Carbon\Carbon::parse($list['created_at'])->format('d/m/Y')}}</td>
-                                    <td>Doctor</td>
-                                    <td><button type="button" class="btn btn-blue waves-effect" data-toggle="modal" data-target="#sstt">
-                                            {{$list['title']}}</button>
-                                    </td>
-                                    <td>
-                                        <a href="{{route('admin.soap_subject.edit', $list['id'])}}" class="action-icon"><i class="mdi mdi-square-edit-outline"></i></a>
-                                            <a href="javascript:void(0);" class="action-icon deleteSoapSubjectBtn"  data-id="{{$list['id']}}" ><i class="mdi mdi-delete"></i></a>
-                                    </td>
-                                </tr>
-                            @php $count++; @endphp
-                        @endif
-                    @endforeach
+                <tbody id="objective-subject-table">
                 </tbody>
             </table>
         </div> <!-- end .table-responsive-->

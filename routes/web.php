@@ -660,7 +660,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         // Soap routes
         Route::get('soap/index', [AdminController::class, 'soap'])->name('admin.soap');
         Route::get('soap/list', [AdminController::class, 'getSoapList'])->name('admin.soap.list');
-        Route::post('soap/add', [AdminController::class, 'addSoap'])->name('admin.soap.add');
+        Route::post('soap/add', [AdminController::class, 'addSoap'])->name('admin.soap.add'); 
+        // Route::get('soap/edit/{id}', [AdminController::class, 'editSoap'])->name('admin.soap.edit');
+        // Route::post('soap/delete', [AdminController::class, 'deleteSoap'])->name('admin.soap.delete');
 
         // soap_category routes
         Route::get('soap_category/index', [AdminController::class, 'soapCategory'])->name('admin.soap_category');
@@ -691,7 +693,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('soap_subject/create', [AdminController::class, 'createSoapSubject'])->name('admin.soap_subject.create');
         Route::post('soap_subject/add', [AdminController::class, 'addSoapSubject'])->name('admin.soap_subject.add');
         Route::get('soap_subject/list', [AdminController::class, 'getSoapSubjectList'])->name('admin.soap_subject.list');
-        Route::post('soap_subject/edit', [AdminController::class, 'editSoapSubject'])->name('admin.soap_subject.edit');
+        Route::get('soap_subject/edit/{id}', [AdminController::class, 'editSoapSubject'])->name('admin.soap_subject.edit');
         Route::post('soap_subject/update', [AdminController::class, 'updateSoapSubject'])->name('admin.soap_subject.update');
         Route::post('soap_subject/delete', [AdminController::class, 'deleteSoapSubject'])->name('admin.soap_subject.delete');
 

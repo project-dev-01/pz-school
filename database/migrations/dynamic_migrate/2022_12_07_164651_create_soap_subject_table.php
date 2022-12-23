@@ -19,6 +19,8 @@ class CreateSoapSubjectTable extends Migration
             $table->string('header');
             $table->text('body');
             $table->integer('soap_type_id');
+            $table->date('date');
+            $table->integer('referred_by');
             $table->integer('student_id');
             $table->timestamps();
         });

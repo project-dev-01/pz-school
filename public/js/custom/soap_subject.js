@@ -87,13 +87,14 @@ $(function () {
         // }
     });
 
-    // delete Employee
+    // delete Notes Delete
     $(document).on('click', '.deleteSoapSubjectBtn', function () {
+        var curr = $(this);
         var id = $(this).data('id');
-        var url = soapSubjectDelete;
+        
         swal.fire({
             title: 'Are you sure?',
-            html: 'You want to <b>Delete</b> this Record',
+            html: 'You want to <b>delete</b> this Record',
             showCancelButton: true,
             showCloseButton: true,
             cancelButtonText: 'Cancel',
@@ -104,17 +105,24 @@ $(function () {
             allowOutsideClick: false
         }).then(function (result) {
             if (result.value) {
-                $.post(url, {
-                    id: id
-                }, function (data) {
-                    if (data.code == 200) {
-                        $('#employee-table').DataTable().ajax.reload(null, false);
-                        toastr.success(data.message);
-                    } else {
-                        toastr.error(data.message);
-                    }
-                }, 'json');
+                if (id) {
+                
+                    $.post(soapSubjectDelete, {
+                        id: id,
+                        token: token, 
+                        branch_id: branchID,
+                    }, function (data) {
+                        if (data.code == 200) {
+                            toastr.success(data.message);
+                        } else {
+                            toastr.error(data.message);
+                        }
+                    }, 'json');
+                }
+                curr.parent().parent().remove();
+
             }
         });
     });
+    
 });

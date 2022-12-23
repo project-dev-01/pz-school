@@ -17,6 +17,7 @@ class CreateSoapSubCategoryTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('soap_category_id');
+            $table->string('photo');
             $table->timestamps();
         });
     }

@@ -153,13 +153,14 @@
                         <div class="tab-pane show active" id="home">
                             <div class="container">
                                 <div class="tt-wrapper-inner editSoapSubject">
-                                    <h1 class="tt-title-border">Create New Topic</h1>
+                                    <h1 class="tt-title-border">Edit Topic</h1>
                                     <form id="editSoapSubjectForm" method="post" action="{{ route('admin.soap_subject.update') }}">
                                         @csrf
+                                        <input type="hidden" value="{{$soapsubject['id']}}" name="id">
                                         <div class="form-group">
                                             <label for="title">Topic Title</label>
                                             <div class="tt-value-wrapper">
-                                                <input type="text" name="title" class="form-control" id="title" placeholder="Subject of your topic">
+                                                <input type="text" name="title" class="form-control" id="title" placeholder="Subject of your topic" value="{{$soapsubject['title']}}">
                                                 <span class="tt-value-input"></span>
                                             </div>
                                             <div class="tt-note">Describe your topic well, while keeping
@@ -168,7 +169,7 @@
                                         <div class="form-group">
                                             <label for="header">Topic Header</label>
                                             <div class="tt-value-wrapper">
-                                                <input type="text" name="header" class="form-control" id="header" placeholder="Header of your topic">
+                                                <input type="text" name="header" class="form-control" id="header" placeholder="Header of your topic" value="{{$soapsubject['header']}}">
                                                 <span class="tt-value-input"></span>
                                             </div>
                                             <div class="tt-note">Describe your topic header..</div>
@@ -177,7 +178,7 @@
                                             <h6 class="pt-title">Topic Body</h6>
                                             <div class="pt-row">
                                                 <!-- basic summernote-->
-                                                <textarea class="summernote" name="body"></textarea>
+                                                <textarea class="summernote" name="body">{{$soapsubject['title']}}</textarea>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -187,10 +188,10 @@
                                                     <div class="col-9">
                                                         <select id="soap_type_id" class="form-control" name="soap_type_id">
                                                             <option value="">Select Type</option>
-                                                            <option value="1">S - Subjective</option>
-                                                            <option value="2">O - Objective</option>
-                                                            <option value="3">A - Assessment</option>
-                                                            <option value="4">P - Plan</option>
+                                                            <option value="1" {{$soapsubject['soap_type_id']=="1" ? 'Selected':''}}>S - Subjective</option>
+                                                            <option value="2" {{$soapsubject['soap_type_id']=="2" ? 'Selected':''}}>O - Objective</option>
+                                                            <option value="3" {{$soapsubject['soap_type_id']=="3" ? 'Selected':''}}>A - Assessment</option>
+                                                            <option value="4" {{$soapsubject['soap_type_id']=="4" ? 'Selected':''}}>P - Plan</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -199,7 +200,7 @@
 
                                         <div class="row">
                                             <div class="col-auto ml-md-auto">
-                                                <button type="submit" id="search" class="btn btn-secondary" style="background-color: #2172cd;">Create
+                                                <button type="submit" id="search" class="btn btn-secondary" style="background-color: #2172cd;">Update
                                                     Post</button>
                                             </div>
                                         </div>

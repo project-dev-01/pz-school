@@ -18,8 +18,9 @@ class CreateSoapTable extends Migration
             $table->integer('soap_notes_id');
             $table->integer('soap_category_id');
             $table->integer('soap_sub_category_id');
-            $table->string('referred_by');
+            $table->integer('referred_by');
             $table->date('date');
+            $table->integer('student_id');
             $table->timestamps();
         });
     }
