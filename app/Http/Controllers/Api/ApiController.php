@@ -8939,9 +8939,9 @@ class ApiController extends BaseController
                         'subject_id' => 'required',
                         'time_start' => 'required',
                         'time_end' => 'required',
-                        'hall_id' => 'required',
-                        'distributor_type' => 'required',
-                        'distributor' => 'required',
+                        // 'hall_id' => 'required',
+                        // 'distributor_type' => 'required',
+                        // 'distributor' => 'required',
                         'exam_date' => 'required',
                     ]);
 

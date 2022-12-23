@@ -132,8 +132,8 @@
                                                 <th>Date <span class="text-danger">*</span></th>
                                                 <th>Starting Time <span class="text-danger">*</span></th>
                                                 <th>Ending Time <span class="text-danger">*</span></th>
-                                                <th>Location <span class="text-danger">*</span></th>
-                                                <th>Distributor<span class="text-danger">*</span></th>
+                                                <th>Location</th>
+                                                <th>Distributor</th>
                                                 <!-- <th>Marks<span class="text-danger">*</span></th> -->
 
                                             </tr>

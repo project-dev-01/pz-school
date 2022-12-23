@@ -24,7 +24,7 @@ class CreateTimetableExamTable extends Migration
             $table->string('paper_id')->nullable();
             $table->time('time_start');
             $table->time('time_end');
-            $table->integer('hall_id');
+            $table->integer('hall_id')->nullable();
             $table->string('distributor_type')->nullable();
             $table->string('distributor')->nullable();
             $table->string('distributor_id')->nullable();
