@@ -1,7 +1,6 @@
 $(function () {
     $("#byclass_analysis").hide();
-    // $("#byclass_bodycontent").hide();
-    // change classroom
+    // change class name
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
         $("#byclassfilter").find("#subjectID").empty();
@@ -62,7 +61,6 @@ $(function () {
             var subject_id = $("#subjectID").val();
             var semester_id = $("#semester_id").val();
             var session_id = $("#session_id").val();
-
             var exam_id = $("#examnames").val();
             // list mode
             $.post(getbyClass, {
@@ -80,6 +78,14 @@ $(function () {
                     if (response.data.allbysubject.length > 0) {
                         var datasetnew = response.data;
                         bysubjectdetails(datasetnew);
+                        // download set start
+                        $("#downExamID").val(exam_id);
+                        $("#downClassID").val(class_id);
+                        $("#downSemesterID").val(semester_id);
+                        $("#downSessionID").val(session_id);
+                        $("#downSubjectID").val(subject_id);
+                        $("#downAcademicYear").val(year);
+                        // download set end
                         $("#overlay").fadeOut(300);
                         $("#byclass_bodycontent").show();
                     } else {
@@ -95,6 +101,7 @@ $(function () {
 
         };
     });
+    // export excel
     $(document).on('click', '.exportToExcel', function (e) {
         // var table = $(this).prev('.table2excel');
         var table = $('.table2excel');
@@ -112,6 +119,7 @@ $(function () {
             });
         }
     });
+
 });
 
 ///
@@ -227,4 +235,4 @@ function isKey(key, obj) {
         return x;
     });
     return keys.indexOf(key) !== -1;
-}
+}  

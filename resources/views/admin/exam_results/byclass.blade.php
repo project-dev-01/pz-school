@@ -127,16 +127,26 @@
                         <input type="hidden" name="exam_id" id="listModeexamID">
                         <div class="col-sm-12">
                             <div id="byclassTableAppend">
-
                             </div>
                             <div class="col-md-12">
+                                <div class="clearfix mt-4">
+                                    <form method="post" action="{{ route('admin.exam_results.downbyclass') }}">
+                                        @csrf
+                                        <input type="hidden" name="exam_id" id="downExamID">
+                                        <input type="hidden" name="class_id" id="downClassID">
+                                        <input type="hidden" name="semester_id" id="downSemesterID">
+                                        <input type="hidden" name="session_id" id="downSessionID">
+                                        <input type="hidden" name="subject_id" id="downSubjectID">
+                                        <input type="hidden" name="academic_year" id="downAcademicYear">
+                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">PDF</button>
+                                    </form>
+                                </div>
                                 <div class="clearfix mt-4">
                                     <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel" style="float:right;">Download</button>
                                 </div>
                             </div>
                         </div>
                         <!-- end row-->
-
                     </div> <!-- end card-body -->
                 </div> <!-- end card-->
             </div> <!-- end col -->
@@ -160,12 +170,17 @@
     @endsection
     @section('scripts')
     <script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+
 
     <script>
         var examsByclassandsubject = "{{ config('constants.api.exam_by_classSubject') }}";
         var getbyClass = "{{ config('constants.api.tot_grade_calcu_byclass') }}";
         var getbySubjectnames = "{{ config('constants.api.exam_results_get_subject_by_class') }}";
         var teacher_id = null;
+        var downLoadPdf = "{{ route('admin.exam_results.downbyclass') }}";
         // default image test
         var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
     </script>
