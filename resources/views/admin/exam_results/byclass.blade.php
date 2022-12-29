@@ -170,17 +170,11 @@
     @endsection
     @section('scripts')
     <script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
-
-
     <script>
         var examsByclassandsubject = "{{ config('constants.api.exam_by_classSubject') }}";
         var getbyClass = "{{ config('constants.api.tot_grade_calcu_byclass') }}";
         var getbySubjectnames = "{{ config('constants.api.exam_results_get_subject_by_class') }}";
         var teacher_id = null;
-        var downLoadPdf = "{{ route('admin.exam_results.downbyclass') }}";
         // default image test
         var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
     </script>

@@ -94,6 +94,15 @@ $(function () {
                         if (response.data.allbyStudent.length > 0) {
                             var datasetnew = response.data;
                             examresult_details(datasetnew);
+                            // download set start
+                            $("#downExamID").val(exam_id);
+                            $("#downClassID").val(class_id);
+                            $("#downSectionID").val(section_id);
+                            $("#downRegisterNoID").val(registerno);
+                            $("#downSemesterID").val(semester_id);
+                            $("#downSessionID").val(session_id);
+                            $("#downAcademicYear").val(year);
+                            // download set end
                             $("#overlay").fadeOut(300);
                             $('#exam_details_div').show();
                         } else {
@@ -138,8 +147,6 @@ function examresult_details(datasetnew) {
     var bysubjectAllTable = "";
     var byStudGenDetails = "";
     var headers = datasetnew.headers;
-    var headercount = datasetnew.headers.length;
-    headercount = headercount * 2;
     var grade_list_master = datasetnew.allbyStudent;
     var student_details = datasetnew.student_details;
     // append student details start

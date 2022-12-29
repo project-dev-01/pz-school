@@ -67,6 +67,13 @@ $(function () {
                     if (response.data.allbysubject.length > 0) {
                         var datasetnew = response.data;
                         overall_subject(datasetnew);
+                        // download set start
+                        $("#downExamID").val(exam_id);
+                        $("#downClassID").val(class_id);
+                        $("#downSemesterID").val(semester_id);
+                        $("#downSessionID").val(session_id);
+                        $("#downAcademicYear").val(year);
+                        // download set end
                         $("#body_content").show();
                         $("#overlay").fadeOut(300);
                     } else {

@@ -121,6 +121,17 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="clearfix mt-4">
+                                    <form method="post" action="{{ route('admin.exam_results.downbyoverall') }}">
+                                        @csrf
+                                        <input type="hidden" name="exam_id" id="downExamID">
+                                        <input type="hidden" name="class_id" id="downClassID">
+                                        <input type="hidden" name="semester_id" id="downSemesterID">
+                                        <input type="hidden" name="session_id" id="downSessionID">
+                                        <input type="hidden" name="academic_year" id="downAcademicYear">
+                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">PDF</button>
+                                    </form>
+                                </div>
+                                <div class="clearfix mt-4">
                                     <button type="button" class="btn btn-primary-bl waves-effect waves-light float-right exportToExcel">Download</button>
                                 </div>
                             </div>

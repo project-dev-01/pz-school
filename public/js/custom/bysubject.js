@@ -81,6 +81,14 @@ $(function () {
                     if (response.data.grade_list_master.length > 0) {
                         var datasetnew = response.data;
                         bysubjectdetails_class(datasetnew);
+                        // download set start
+                        $("#downExamID").val(exam_id);
+                        $("#downClassID").val(class_id);
+                        $("#downSemesterID").val(semester_id);
+                        $("#downSessionID").val(session_id);
+                        $("#downSectionID").val(section_id);
+                        $("#downAcademicYear").val(year);
+                        // download set end
                         $("#overlay").fadeOut(300);
                         $("#bysubject_body").show("slow");
                     } else {
