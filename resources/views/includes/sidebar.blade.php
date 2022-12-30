@@ -1330,7 +1330,13 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarMultilevel">
+
                         <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('teacher.paper_wise_result')}}" class="nav-link {{ (request()->is('teacher/exam_results/paper_wise_result')) ? 'active' : '' }}">
+                                    <span> Exam Paper Result </span>
+                                </a>
+                            </li>
                             <li>
                                 <a href="#sidebarResult" data-toggle="collapse">
                                     Exam Results<span class="menu-arrow"></span>

@@ -611,6 +611,23 @@ class TeacherController extends Controller
             ]
         );
     }
+    public function paperWiseResult()
+    {
+        $data = [
+            'teacher_id' => session()->get('ref_user_id')
+        ];
+        $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        return view('teacher.testresult.paper_wise_result', [
+            'classes' => $getclass['data'],
+            'semester' => $semester['data'],
+            'session' => $session['data'],
+            'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+            'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+        ]);
+    }
     public function homework()
     {
         $data = [

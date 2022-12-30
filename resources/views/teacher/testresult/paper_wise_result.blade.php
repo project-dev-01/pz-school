@@ -42,7 +42,7 @@
                                             <select id="changeClassName" class="form-control" name="class_id">
                                                 <option value="">Select Grade</option>
                                                 @forelse ($classes as $class)
-                                                <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
+                                                <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
                                                 @empty
                                                 @endforelse
                                             </select>
@@ -127,7 +127,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="clearfix mt-4">
-                                    <form method="post" action="{{ route('admin.exam_results.downbypaperwise') }}">
+                                    <form method="post" action="{{ route('teacher.exam_results.downbypaperwise') }}">
                                         @csrf
                                         <input type="hidden" name="exam_id" id="downExamID">
                                         <input type="hidden" name="class_id" id="downClassID">
@@ -158,13 +158,12 @@
 @section('scripts')
 <script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
 <script>
-    var teacherSectionUrl = "{{ config('constants.api.section_by_class') }}";
+    var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
     var subjectByExamNames = "{{ config('constants.api.subject_by_exam_names') }}";
-    var examBySubjects = "{{ config('constants.api.exam_by_subjects') }}";
-
+    var examBySubjects = "{{ config('constants.api.exam_by_teacher_subjects') }}";
     var getExamPaperResults = "{{ config('constants.api.get_exam_paper_res') }}";
 
-    var teacherID = null;
+    var teacherID = ref_user_id;
     // default image test
     var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
 </script>

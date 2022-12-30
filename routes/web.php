@@ -932,6 +932,8 @@ Route::group(['prefix' => 'teacher'], function () {
         Route::get('/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
         // Test Result Rotes
         Route::get('test_result', [TeacherController::class, 'testResult'])->name('teacher.test_result');
+        Route::get('exam_results/paper_wise_result', [TeacherController::class, 'paperWiseResult'])->name('teacher.paper_wise_result');
+
         // student details
         Route::get('/student', [TeacherController::class, 'studentIndex'])->name('teacher.student.index');
 
