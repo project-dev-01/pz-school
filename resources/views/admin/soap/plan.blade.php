@@ -8,6 +8,7 @@
                         <button type="submit" class="btn btn-info waves-effect waves-light">Save</button>
                     </div>
                     <input type="hidden" class="student_id" name="student_id">
+                    <input type="hidden"  name="soap_type_id" value="4">
                     <div class="row">
                         <div class="col-sm-2 col-xl-2 col-md-2">
                             <div class="nav flex-column nav-pills nav-pills-tab" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -19,7 +20,7 @@
                                     </button>
                                     <div class="dropdown-menu dropdown-lg dropdown-menu-left">
                                         <div class="p-lg-1">
-                                            <div class="row no-gutters sub_category_list">
+                                            <div class="row no-gutters sub_category_list" style="font-size:12px;">
                                             </div>
                                         </div>
                                     </div>
@@ -53,7 +54,7 @@
                                                         </tr>
                                                     </thead>
 
-                                                    <tbody id="plan-category-{{ $category['id'] }}" class="plan-category-table">
+                                                    <tbody id="plan-category-{{ $category['id'] }}" class="plan-category-table" data-type="4">
                                                         @php $key=1; @endphp
                                                         @foreach($soap_list as $list)
                                                         @if($list['soap_category_id'] == $category['id'])
@@ -78,24 +79,11 @@
                                     <div class="col-xl-7 col-md-7 col-sm-7">
                                         <div class="">
                                             <ul class="nav nav-tabs">
-                                                <!-- <li class="nav-item"> -->
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <div class="">
-                                                                <div class="row">
-                                                                    <div class="col-lg-8">
-                                                                    </div>
-                                                                    <div class="">
-                                                                        <div class="text-lg-right mt-3 mt-lg-0">
-                                                                            <a href="{{ route('admin.soap_subject.create')}}" type="button" class="btn btn-white waves-effect waves-light mr-1"><i class="mdi mdi-plus-circle mr-1"></i>Add</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- end col-->
-                                                                </div> <!-- end row -->
-                                                            </div> <!-- end card-box -->
-                                                        </div><!-- end col-->
+                                                <div class="row">
+                                                    <div class="text-lg-right mt-3 mt-lg-0">
+                                                        <a href="{{ route('admin.soap_subject.create')}}" type="button" class="btn btn-white waves-effect waves-light mr-1"><i class="mdi mdi-plus-circle mr-1"></i>Add</a>
                                                     </div>
-                                                <!-- </li> -->
+                                                </div>
                                             </ul>
 
                                             <div class="table-responsive">

@@ -41,12 +41,25 @@ $(function () {
             }
         }, 'json');
     });
+    $("#old_class_id").on('change', function (e) {
+        e.preventDefault();
+        var class_id = $(this).val();
+        $("#old_section_id").empty();
+        $("#old_section_id").append('<option value="">Select Class</option>');
+        $.post(sectionByClass, { class_id: class_id }, function (res) {
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#old_section_id").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                });
+            }
+        }, 'json');
+    });
 
     $("#tabs ul li a").click(function(e){
+        e.preventDefault();
         var tab = $(this).data('tab');
         var soap_type_id = $(this).data('soap-type-id');
         var student = $("#student_id").val();
-        console.log('stu',student)
         if ( tab == "info" ) {
             $.post(studentDetails, { token: token, branch_id: branchID,id: student }, function (data) {
                     var stu = data.data.student;
@@ -91,6 +104,112 @@ $(function () {
                         }
                     }, 'json');
             }, 'json');
+        } else if ( tab == "log" ) {
+            // soapLogTable();
+            
+            $('#log-table').DataTable({
+                processing: true,
+                info: true,
+                bDestroy: true,
+                // dom: 'lBfrtip',
+                dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+                buttons: [
+                    // {
+                    //     extend: 'csv',
+                    //     text: 'Download CSV',
+                    //     extension: '.csv',
+                    //     exportOptions: {
+                    //         columns: 'th:not(:last-child)'
+                    //     }
+                    // },
+                    // {
+                    //     extend: 'pdf',
+                    //     text: 'Download PDF',
+                    //     extension: '.pdf',
+                    //     exportOptions: {
+                    //         columns: 'th:not(:last-child)'
+                    //     }
+
+                    // }
+                ],
+                serverSide: true,
+                ajax: {
+                    url: soapLogList,
+                    data: function (d) {
+                        d.student_id = $('#student_id').val()
+                    }
+                },
+                "pageLength": 10,
+                "aLengthMenu": [
+                    [5, 10, 25, 50, -1],
+                    [5, 10, 25, 50, "All"]
+                ],
+                columns: [
+                    {
+                        searchable: false,
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex'
+                    },
+                    {
+                        data: 'soap_text',
+                        name: 'soap_text'
+                    },
+                    {
+                        data: 'soap_type',
+                        name: 'soap_type'
+                    },
+                    {
+                        data: 'referred_by',
+                        name: 'referred_by'
+                    },
+                    {
+                        data: 'type',
+                        name: 'type'
+                    },
+                    {
+                        data: 'date',
+                        name: 'date'
+                    },
+                ],
+            });
+            // $.ajax({
+            //     url: soapLogList,
+            //     method: "GET",
+            //     data: {  student_id: student },
+            //     success: function (data) {
+            //         console.log('stu',data.data)
+            //         var output = "";
+            //         if (data.data.length>0) {
+            //             $.each(data.data, function (index, value) {
+            //                 index++;
+            //                 output +=  '<tr>';
+            //                 output +=  '<td >'+index+'</td>';
+            //                 output +=  '<td>'+value.soap_text+'</td>';
+            //                 soap_type = "";
+            //                 if(value.soap_type==1){
+            //                     soap_type = "Subjective";
+            //                 }else if(value.soap_type==2){
+            //                     soap_type = "Objective";
+            //                 }else if(value.soap_type==3){
+            //                     soap_type = "Assessment";
+            //                 }else if(value.soap_type==4){
+            //                     soap_type = "Plan";
+            //                 }
+            //                 output +=  '<td>'+soap_type+'</td>';
+            //                 output +=  '<td>'+value.referred_by+'</td>';
+            //                 output +=  '<td>'+value.type+'</td>';
+            //                 output +=  '<td>'+value.date+'</td>';
+            //                 output +=  '</tr>';
+            //             });
+            //         }else{
+            //             output += '<tr><td colspan="6" class="text-center">No Data Available</td></tr>';
+            //         }
+            //         console.log('out',output)
+            //         $("#log-body").append(output);
+            //     }
+            // });
         } else {
             
             $("."+tab+"-category-table").empty();
@@ -147,25 +266,17 @@ $(function () {
             });
 
         }
-        // stop reload
-        e.preventDefault();
     })
-
-    $('#studentFilter').on('submit', function (e) {
+    $('#oldStudentFilter').on('submit', function (e) {
         e.preventDefault();
-        $("#student_body").empty();
+        $("#old_student_body").empty();
         var form = this;
-        var session_id = $("#session_id").val();
-        var section_id = $("#section_id").val();
-        var class_id = $("#class_id").val();
-        // console.log('1',section_id)
-        
-        // var formData = new FormData();
-        // formData.append('session_id', session_id);
-        // formData.append('class_id', class_id);
-        // formData.append('section_id', section_id);
+        var session_id = $("#old_session_id").val();
+        var section_id = $("#old_section_id").val();
+        var class_id = $("#old_class_id").val();
+
         $.ajax({
-            url: soapStudentList,
+            url: soapOldStudentList,
             method: "GET",
             data: { token: token, branch_id: branchID, session_id: session_id, section_id: section_id, class_id: class_id, academic_session_id: academic_session_id },
             success: function (data) {
@@ -176,24 +287,79 @@ $(function () {
                         output +=  '<tr class="student-row">';
                         output += '<td>'+index+'</td>';
                         output += '<td style="width: 36px;">';
+                        
+                        if (data.photo) {
+                            var src = userImageUrl + "/" + data.photo;
+                        } else {
+                            var src = defaultImg;
+                        }
                         // output += '<img src="'+data.photo+' && asset('public/users/images/''+data.photo+') ? asset('public/users/images/'.$student['photo']) : asset('public/images/users/default.jpg') }}" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />';
-                        output += '</td>';
+                        output += '<img src="'+src+'" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />';output += '</td>';
                         output += '<td class="stu-name">';
                         output += '    <h5 class="m-0 font-weight-normal">'+value.name+'</h5>';
                         output += '</td>';
                         output += '<input type="hidden" class="student" value="'+value.id+'"></input>';
-                        output += '<td style="display:none;" class="stu-class">'+value.class_name+'</td>';
-                        output += '<td style="display:none;" class="stu-section">'+value.section_name+'</td>';
                         output += '<td >';
                         output += value.email;
                         output += '</td>';
+                        output += '<td class="stu-class">'+value.class_name+'</td>';
+                        output += '<td class="stu-section">'+value.section_name+'</td>';
                         output += '</tr>';
                     });
                 } else {
                     output += '<tr><td>No Data Available</td></tr>';
                 }
                 
-                $("#student_body").append(output);
+                $("#old_student_body").append(output);
+            }
+        });
+    });
+
+    $('#newStudentFilter').on('submit', function (e) {
+        e.preventDefault();
+        $("#new_student_body").empty();
+        var form = this;
+        var session_id = $("#session_id").val();
+        var section_id = $("#section_id").val();
+        var class_id = $("#class_id").val();
+
+        $.ajax({
+            url: soapNewStudentList,
+            method: "GET",
+            data: { token: token, branch_id: branchID, session_id: session_id, section_id: section_id, class_id: class_id, academic_session_id: academic_session_id },
+            success: function (data) {
+                var output = "";
+                if (data.data.length>0) {
+                    $.each(data.data, function (index, value) {
+                        index++;
+                        output +=  '<tr class="student-row">';
+                        output += '<td>'+index+'</td>';
+                        output += '<td style="width: 36px;">';
+                        
+                        if (data.photo) {
+                            var src = userImageUrl + "/" + data.photo;
+                        } else {
+                            var src = defaultImg;
+                        }
+                        // output += '<img src="'+data.photo+' && asset('public/users/images/''+data.photo+') ? asset('public/users/images/'.$student['photo']) : asset('public/images/users/default.jpg') }}" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />';
+                        output += '<img src="'+src+'" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />';
+                        output += '</td>';
+                        output += '<td class="stu-name">';
+                        output += '    <h5 class="m-0 font-weight-normal">'+value.name+'</h5>';
+                        output += '</td>';
+                        output += '<input type="hidden" class="student" value="'+value.id+'"></input>';
+                        output += '<td >';
+                        output += value.email;
+                        output += '</td>';
+                        output += '<td class="stu-class">'+value.class_name+'</td>';
+                        output += '<td class="stu-section">'+value.section_name+'</td>';
+                        output += '</tr>';
+                    });
+                } else {
+                    output += '<tr><td>No Data Available</td></tr>';
+                }
+                
+                $("#new_student_body").append(output);
             }
         });
     });
@@ -280,8 +446,11 @@ $(function () {
     // delete Notes Delete
     $(document).on('click', '.remove_notes', function () {
         var curr = $(this);
+        var student = $("#student_id").val();
         var soap_id = $(this).closest('tr').find('.soap_id').val();
-        
+        var soap_type_id = $(this).closest('tbody').data('type'); 
+        console.log('ss',soap_id)
+        // return false;
         swal.fire({
             title: 'Are you sure?',
             html: 'You want to <b>delete</b> this Record',
@@ -299,6 +468,9 @@ $(function () {
                 
                     $.post(soapDelete, {
                         id: soap_id,
+                        student_id: student,
+                        soap_type_id: soap_type_id,
+                        referred_by: user_id,
                         token: token, 
                         branch_id: branchID,
                     }, function (data) {

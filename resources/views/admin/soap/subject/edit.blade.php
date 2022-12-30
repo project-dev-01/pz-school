@@ -1,6 +1,6 @@
 @extends('layouts.admin-layout')
 @section('css')
-        <style>
+<style>
             .nav-tabs .nav-link.active {
 
                 border-color: none;
@@ -23,7 +23,7 @@
             }
 
             .tt-title-border {
-                border-bottom: 1px solid #e2e7ea;
+                border-bottom: 1px solid #E9D528;
                 color: #303344;
                 font-size: 18px;
                 line-height: 26px;
@@ -31,8 +31,13 @@
                 padding: 0 0 23px 0;
                 margin-bottom: 21px;
                 letter-spacing: 0.01em;
+                font-weight:bold;
             }
-
+            .title
+            {
+                font-weight:bold;  
+            }
+            
             .form-default .form-control {
                 background: #e2e7ea;
                 color: #666f74;
@@ -130,22 +135,23 @@
                 background-color: #333333;
                 color: #ffffff;
             }
+            .btn i{
+                color:black;
+            }
+            .note-editable{
+                height:200px;
+            }
+            .pt-editor .pt-title {    
+             padding: 0 0 1px 0; 
+            }
         </style>
-
-    <!-- App css -->
-    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-    <link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
-
-    <!-- icons -->
-    <link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/libs/summernote/summernote-bs4.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/libs/summernote/summernote-bs4.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('title','SOAP')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
     <div class="row">
-        
         <div class="col-xl-12">
             <div class="card" style="margin-top: 25px;">
                 <div class="card-body">
@@ -181,20 +187,16 @@
                                                 <textarea class="summernote" name="body">{{$soapsubject['title']}}</textarea>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="soap_type_id" class="col-3 col-form-label">Soap Type<span class="text-danger">*</span></label>
-                                                    <div class="col-9">
-                                                        <select id="soap_type_id" class="form-control" name="soap_type_id">
-                                                            <option value="">Select Type</option>
-                                                            <option value="1" {{$soapsubject['soap_type_id']=="1" ? 'Selected':''}}>S - Subjective</option>
-                                                            <option value="2" {{$soapsubject['soap_type_id']=="2" ? 'Selected':''}}>O - Objective</option>
-                                                            <option value="3" {{$soapsubject['soap_type_id']=="3" ? 'Selected':''}}>A - Assessment</option>
-                                                            <option value="4" {{$soapsubject['soap_type_id']=="4" ? 'Selected':''}}>P - Plan</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                        <div class="form-group">
+                                            <label for="soap_type_id" class="">Soap Type<span class="text-danger">*</span></label>
+                                            <div class="col-9">
+                                                <select id="soap_type_id" class="col-md-6 form-control" name="soap_type_id">
+                                                    <option value="">Select Type</option>
+                                                    <option value="1" {{$soapsubject['soap_type_id']=="1" ? 'Selected':''}}>S - Subjective</option>
+                                                    <option value="2" {{$soapsubject['soap_type_id']=="2" ? 'Selected':''}}>O - Objective</option>
+                                                    <option value="3" {{$soapsubject['soap_type_id']=="3" ? 'Selected':''}}>A - Assessment</option>
+                                                    <option value="4" {{$soapsubject['soap_type_id']=="4" ? 'Selected':''}}>P - Plan</option>
+                                                </select>
                                             </div>
                                         </div>
 
@@ -226,17 +228,9 @@ $   ('.summernote').summernote();
     var soapIndex = "{{ route('admin.soap') }}";
     var soapDelete = "{{ config('constants.api.soap_delete') }}";
 </script>
+<!-- Summernote js -->
+<script src="{{ asset('public/libs/summernote/summernote-bs4.min.js') }}"></script>
 
-
-
-    <!-- Vendor js -->
-    <script src="{{ asset('public/js/vendor.min.js') }}"></script>
-
-    <!-- Summernote js -->
-    <script src="{{ asset('public/libs/summernote/summernote-bs4.min.js') }}"></script>
-
-    <!-- Init js -->
-    <script src="{{ asset('public/js/pages/form-summernote.init.js') }}"></script>
 <script src="{{ asset('public/js/custom/soap_subject.js') }}"></script>
 
 @endsection

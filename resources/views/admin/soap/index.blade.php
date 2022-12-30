@@ -1,6 +1,14 @@
 @extends('layouts.admin-layout')
 @section('title','SOAP')
 @section('content')
+<style>
+    .navtab-bg .nav-link {
+    background-color: #bec2c6;
+    }
+    .text-truncate {   
+    font-size: 13px;
+    }
+</style>
 <div class="container-fluid">
 
     <!-- start page title -->
@@ -9,13 +17,6 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">UI</a></li>
-                        <li class="breadcrumb-item active">Tabs & Accordions</li>
-                    </ol>
-                </div>
                 <h4 class="page-title">SOAP</h4>
             </div>
         </div>
@@ -28,21 +29,21 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="row">
-                                <p class="col-md-12">Name :<span class="font-weight-semibold student_name"></span> </p>
+                                <p class="col-md-12"><b>Name :<span class="font-weight-semibold student_name"></span></b> </p>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="row">
-                                <p class="col-md-12">Grade :<span class="font-weight-semibold student_class"></span></p>
+                                <p class="col-md-12"><b>Grade :<span class="font-weight-semibold student_class"></span></b></p>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="row">
-                                <p class="col-md-12">Class :<span class="font-weight-semibold student_section"></span></p>
+                                <p class="col-md-12"><b>Class :<span class="font-weight-semibold student_section"></span></b></p>
                             </div>
                         </div>
                     </div>
@@ -88,7 +89,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#l1" data-toggle="tab"  aria-expanded="true" class="nav-link">
+                        <a href="#log" data-toggle="tab"  aria-expanded="true" data-tab="log" class="nav-link">
                             logs
                         </a>
                     </li>
@@ -96,222 +97,165 @@
                 <div class="tab-content">
                     <!-- start Dashboard -->
                     <div class="tab-pane show active" id="d1">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 col-xl-3">
-                                <div class="widget-rounded-circle card-box">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="avatar-lg rounded-circle bg-soft-primary border-primary border">
-                                                <i class="fe-bar-chart font-22 avatar-title text-primary"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="text-right">
-                                                <h3 class="mt-1"><span data-plugin="counterup">58</span>%</h3>
-                                                <p class="text-muted mb-1 text-truncate">Physical Status
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div> <!-- end row-->
-                                </div> <!-- end widget-rounded-circle-->
-                            </div> <!-- end col-->
-
-                            <div class="col-md-6 col-sm-6 col-xl-3">
-                                <div class="widget-rounded-circle card-box">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="avatar-lg rounded-circle bg-soft-success border-success border">
-                                                <i class="fe-bar-chart-2 font-22 avatar-title text-success"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="text-right">
-                                                <h3 class="text-dark mt-1"><span data-plugin="counterup">127</span>%</h3>
-                                                <p class="text-muted mb-1 text-truncate">psychological
-                                                    Status</p>
-                                            </div>
-                                        </div>
-                                    </div> <!-- end row-->
-                                </div> <!-- end widget-rounded-circle-->
-                            </div> <!-- end col-->
-
-                            <div class="col-md-6 col-sm-6 col-xl-3">
-                                <div class="widget-rounded-circle card-box">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="avatar-lg rounded-circle bg-soft-info border-info border">
-                                                <i class="fe-bar-chart-line- font-22 avatar-title text-info"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="text-right">
-                                                <h3 class="text-dark mt-1"><span data-plugin="counterup">0.58</span>%</h3>
-                                                <p class="text-muted mb-1 text-truncate">Normal</p>
-                                            </div>
-                                        </div>
-                                    </div> <!-- end row-->
-                                </div> <!-- end widget-rounded-circle-->
-                            </div> <!-- end col-->
-
-                            <div class="col-md-6 col-sm-6 col-xl-3">
-                                <div class="widget-rounded-circle card-box">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="avatar-lg rounded-circle bg-soft-warning border-warning border">
-                                                <i class="fe-eye font-22 avatar-title text-warning"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="text-right">
-                                                <h3 class="text-dark mt-1"><span data-plugin="counterup">78</span>%</h3>
-                                                <p class="text-muted mb-1 text-truncate">Today's Visits
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div> <!-- end row-->
-                                </div> <!-- end widget-rounded-circle-->
-                            </div> <!-- end col-->
-                        </div>
-                        <!-- end row-->
 
                         <div class="row">
                             <div class="col-xl-6 col-sm-6 col-md-6">
-                                <div class="card-box color">
-                                    <div class="dropdown float-right">
-                                        <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
-                                            <i class="mdi mdi-dots-vertical"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <!-- item-->
-                                            <a href="javascript:void(0);" class="dropdown-item">Edit
-                                                Report</a>
-                                            <!-- item-->
-                                            <a href="javascript:void(0);" class="dropdown-item">Export
-                                                Report</a>
-                                            <!-- item-->
-                                            <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                                <div class="card">
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item">
+                                            <h4 class="navv">Old Records<h4>
+                                        </li>
+                                    </ul><br>
+                                    <div class="card-body">
+                                        <form id="oldStudentFilter" autocomplete="off" enctype="multipart/form-data">
+                                            <div class="row">                          
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="old_class_id">Grade</label>
+                                                        <select id="old_class_id" class="form-control" name="class_id">
+                                                            <option value="">Select Grade</option>
+                                                            @forelse ($class as $clas)
+                                                                <option value="{{ $clas['id'] }}">{{ $clas['name'] }}</option>
+                                                            @empty
+                                                            @endforelse
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="old_section_id">Class</label>
+                                                        <select id="old_section_id" class="form-control" name="section_id">
+                                                            <option value="">Select Class</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="old_session_id">Session</label>
+                                                        <select id="old_session_id" class="form-control"  name="session_id">                              
+                                                        <option value="">Select Session</option>
+                                                            @foreach($session as $ses)
+                                                                <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group text-right m-b-0">
+                                                <button class="btn btn-primary-bl waves-effect waves-light" style="width:80px" type="Save">
+                                                    Filter
+                                                </button>
+                                            </div>
+                                        </form>
+                                        <div class="table-responsive">
+                                            <table class="table table-borderless table-hover table-nowrap table-centered m-0">
+
+                                            <thead class="">
+                                                    <tr>
+                                                        <th>S.no</th>
+                                                        <th colspan="2">Student Name</th>
+                                                        <th>Email</th>
+                                                        <th>Grade</th>
+                                                        <th>Class</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="old_student_body">
+                                                    @foreach($soap_student_list as $key=>$student)
+                                                        <tr class="student-row">
+                                                            @php $key++; @endphp
+                                                            <td>
+                                                                {{$key}}
+                                                            </td>
+                                                            <td style="width: 36px;">
+                                                                <img src="{{ $student['photo'] && asset('public/users/images/'.$student['photo']) ? asset('public/users/images/'.$student['photo']) : asset('public/images/users/default.jpg') }}" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />
+                                                            </td>
+                                                            <td class="stu-name">
+                                                                <h5 class="m-0 font-weight-normal ">{{$student['name']}}</h5>
+                                                            </td>
+                                                            <input type="hidden" class="student" value="{{$student['id']}}">
+                                                            <td>
+                                                                {{$student['email']}}
+                                                            </td>
+                                                            <td class="stu-class">
+                                                                {{$student['class_name']}}
+                                                            </td>
+                                                            <td class="stu-section">
+                                                                {{$student['section_name']}}
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
-
-                                    <h4 class="header-title mb-3">Old Records</h4>
-                                    <div class="table-responsive">
-                                        <table class="table table-borderless table-hover table-nowrap table-centered m-0">
-
-                                            <thead class="thead-light">
-                                                <tr>
-                                                    <th>S.no</th>
-                                                    <th colspan="2">Student Name</th>
-                                                    <th>Email</th>
-                                                    <th>Standard</th>
-                                                    <th>Class</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach($soap_student_list as $key=>$student)
-                                                    <tr class="student-row">
-                                                        @php $key++; @endphp
-                                                        <td>
-                                                            {{$key}}
-                                                        </td>
-                                                        <td style="width: 36px;">
-                                                            <img src="{{ $student['photo'] && asset('public/users/images/'.$student['photo']) ? asset('public/users/images/'.$student['photo']) : asset('public/images/users/default.jpg') }}" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />
-                                                        </td>
-                                                        <td class="stu-name">
-                                                            <h5 class="m-0 font-weight-normal ">{{$student['name']}}</h5>
-                                                        </td>
-                                                        <input type="hidden" class="student" value="{{$student['id']}}">
-                                                        <td>
-                                                            {{$student['email']}}
-                                                        </td>
-                                                        <td class="stu-class">
-                                                            {{$student['class_name']}}
-                                                        </td>
-                                                        <td class="stu-section">
-                                                            {{$student['section_name']}}
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-
                                 </div>
                             </div> <!-- end col -->
                             <div class="col-xl-6 col-sm-6 col-md-6">
-                                <div class="card-box color">
-                                    <div class="dropdown float-right">
-                                        <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
-                                            <i class="mdi mdi-dots-vertical"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <!-- item-->
-                                            <a href="javascript:void(0);" class="dropdown-item">Edit
-                                                Report</a>
-                                            <!-- item-->
-                                            <a href="javascript:void(0);" class="dropdown-item">Export
-                                                Report</a>
-                                            <!-- item-->
-                                            <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                                <div class="card">
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item">
+                                            <h4 class="navv">New Records<h4>
+                                        </li>
+                                    </ul><br>
+                                    <div class="card-body">
+                                        <form id="newStudentFilter" autocomplete="off" enctype="multipart/form-data">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="class_id">Grade</label>
+                                                        <select id="class_id" class="form-control" name="class_id">
+                                                            <option value="">Select Grade</option>
+                                                            @forelse ($class as $clas)
+                                                                <option value="{{ $clas['id'] }}">{{ $clas['name'] }}</option>
+                                                            @empty
+                                                            @endforelse
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="section_id">Class</label>
+                                                        <select id="section_id" class="form-control" name="section_id">
+                                                            <option value="">Select Class</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="session_id">Session</label>
+                                                        <select id="session_id" class="form-control"  name="session_id">                              
+                                                        <option value="">Select Session</option>
+                                                            @foreach($session as $ses)
+                                                                <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group text-right m-b-0">
+                                                <button class="btn btn-primary-bl waves-effect waves-light" style="width:80px" type="Save">
+                                                    Filter
+                                                </button>
+                                            </div>
+                                        
+                                        </form>
+                                        <div class="table-responsive">
+                                            <table class="table table-borderless table-hover table-nowrap table-centered m-0">
+
+                                                <thead class="">
+                                                    <tr>
+                                                        <th>S.no</th>
+                                                        <th colspan="2">Student Name</th>
+                                                        <th>Email</th>
+                                                        <th>Grade</th>
+                                                        <th>Class</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="new_student_body">
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
-
-                                    <h4 class="header-title mb-3">New Records</h4>
-                                    <form id="studentFilter" autocomplete="off" method="post" action="{{ route('admin.student.list') }}" enctype="multipart/form-data">
-                                        <div class="row">                          
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="class_id">Grade</label>
-                                                    <select id="class_id" class="form-control" name="class_id">
-                                                        <option value="">Select Grade</option>
-                                                        @forelse ($class as $clas)
-                                                            <option value="{{ $clas['id'] }}">{{ $clas['name'] }}</option>
-                                                        @empty
-                                                        @endforelse
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="section_id">Class</label>
-                                                    <select id="section_id" class="form-control" name="section_id">
-                                                        <option value="">Select Class</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="session_id">Session</label>
-                                                    <select id="session_id" class="form-control"  name="session_id">                              
-                                                    <option value="">Select Session</option>
-                                                        @foreach($session as $ses)
-                                                            <option value="{{$ses['id']}}">{{$ses['name']}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group text-right m-b-0">
-                                            <button class="btn btn-primary waves-effect waves-light" type="Save">
-                                                Filter
-                                            </button>
-                                        </div>
-                                    
-                                    </form>
-                                    <div class="table-responsive">
-                                        <table class="table table-borderless table-hover table-nowrap table-centered m-0">
-
-                                            <thead class="thead-light">
-                                                <tr>
-                                                    <th>S.no</th>
-                                                    <th colspan="2">Student Name</th>
-                                                    <th>Email</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="student_body">
-                                            </tbody>
-                                        </table>
-                                    </div>
-
                                 </div>
                             </div> <!-- end col -->
                         </div>
@@ -323,90 +267,6 @@
                             <div class="col-12">
                                 <div class="">
                                     <div class="">
-                                        <div class="row">
-                                            <div class="col-md-6 col-xl-3">
-                                                <div class="widget-rounded-circle card-box">
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="avatar-lg rounded-circle bg-soft-primary border-primary border">
-                                                                <i class="fe-bar-chart font-22 avatar-title text-primary" data-toggle="modal" data-target="#personalinfo"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="text-right">
-                                                                <h3 class="mt-1"><span data-plugin="counterup">58</span>%
-                                                                </h3>
-                                                                <p class="text-muted mb-1 text-truncate">
-                                                                    Academic Status</p>
-                                                            </div>
-                                                        </div>
-                                                    </div> <!-- end row-->
-                                                </div> <!-- end widget-rounded-circle-->
-                                            </div> <!-- end col-->
-
-                                            <div class="col-md-6 col-xl-3">
-                                                <div class="widget-rounded-circle card-box">
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="avatar-lg rounded-circle bg-soft-success border-success border">
-                                                                <i class="fe-bar-chart-2 font-22 avatar-title text-success" data-toggle="modal" data-target="#personalinfo"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="text-right">
-                                                                <h3 class="text-dark mt-1"><span data-plugin="counterup">127</span>%
-                                                                </h3>
-                                                                <p class="text-muted mb-1 text-truncate">
-                                                                    Classroom Management Status</p>
-                                                            </div>
-                                                        </div>
-                                                    </div> <!-- end row-->
-                                                </div> <!-- end widget-rounded-circle-->
-                                            </div> <!-- end col-->
-
-                                            <div class="col-md-6 col-xl-3">
-                                                <div class="widget-rounded-circle card-box">
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="avatar-lg rounded-circle bg-soft-info border-info border">
-                                                                <i class="fe-bar-chart-line- font-22 avatar-title text-info" data-toggle="modal" data-target="#personalinfo"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="text-right">
-                                                                <h3 class="text-dark mt-1"><span data-plugin="counterup">0.58</span>%
-                                                                </h3>
-                                                                <p class="text-muted mb-1 text-truncate">
-                                                                    Attendance Report</p>
-                                                            </div>
-                                                        </div>
-                                                    </div> <!-- end row-->
-                                                </div> <!-- end widget-rounded-circle-->
-                                            </div> <!-- end col-->
-
-                                            <div class="col-md-6 col-xl-3">
-                                                <div class="widget-rounded-circle card-box">
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="avatar-lg rounded-circle bg-soft-warning border-warning border">
-                                                                <i class="fe-eye font-22 avatar-title text-warning" data-toggle="modal" data-target="#personalinfo"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="text-right">
-                                                                <h3 class="text-dark mt-1"><span data-plugin="counterup">78</span>%
-                                                                </h3>
-                                                                <p class="text-muted mb-1 text-truncate">
-                                                                    Homework Status</p>
-                                                            </div>
-                                                        </div>
-                                                    </div> <!-- end row-->
-                                                </div> <!-- end widget-rounded-circle-->
-                                            </div> <!-- end col-->
-                                        </div>
-                                        <!-- end row-->
-
-
                                         <!-- Start Personal Info Popup -->
                                         <div class="modal fade viewEvent" id="personalinfo" tabindex="-1" role="dialog" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
@@ -827,17 +687,7 @@
                     @include('admin.soap.objective')
                     @include('admin.soap.assessment')
                     @include('admin.soap.plan')
-                    <div class="tab-pane" id="l1">
-                        <p>Vakal text here dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                            ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis
-                            parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,
-                            pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
-                        <p class="mb-0">Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
-                            arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam
-                            dictum felis eu pede mollis pretium. Integer tincidunt.Cras dapibus. Vivamus
-                            elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
-                            porttitor eu, consequat vitae, eleifend ac, enim.</p>
-                    </div>
+                    @include('admin.soap.log')
 
                     <!--End tab-->
                     <!--start popup-->
@@ -965,6 +815,7 @@
     //soapCategory routes
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var imageUrl = "{{ asset('public/soap/images/') }}";
+    var userImageUrl = "{{ asset('public/user/images/') }}";
     var subCategoryList = "{{ config('constants.api.sub_category_list_by_category') }}";
     var notesList = "{{ config('constants.api.notes_list_by_sub_category') }}";
     var soapDelete = "{{ config('constants.api.soap_delete') }}";
@@ -973,10 +824,14 @@
     var studentSoapList = "{{ config('constants.api.student_soap_list') }}";
     var url = "{{ URL::to('/') }}";
     var soapSubjectDetails = "{{ config('constants.api.soap_subject_details') }}";
-    var soapStudentList = "{{ config('constants.api.soap_student_list') }}";
+    var soapNewStudentList = "{{ config('constants.api.soap_student_list') }}";
+    var soapOldStudentList = "{{ config('constants.api.old_soap_student_list') }}";
     var sectionByClassUrl = "{{ config('constants.api.section_by_class') }}";
     var academic_session_id = "{{ Session::get('academic_session_id') }}";
     var user_name = "{{ Session::get('name') }}";
+    var user_id = "{{ Session::get('ref_user_id') }}";
+    var soapLogList = "{{ route('admin.soap_log.list') }}";
+    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
     
 </script>
 

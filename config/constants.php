@@ -688,6 +688,8 @@ return [
          'old_soap_student_list' => $url.'/old_soap_student/list',
          'soap_student_list' => $url.'/soap_student/list',
          'student_soap_list' => $url.'/student_soap_list',
+
+         'soap_log_list' => $url.'/soap_log/list',
          
 
         ]

@@ -705,6 +705,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('soap_subject/update', [AdminController::class, 'updateSoapSubject'])->name('admin.soap_subject.update');
         Route::post('soap_subject/delete', [AdminController::class, 'deleteSoapSubject'])->name('admin.soap_subject.delete');
 
+        Route::get('soap_log/index', [AdminController::class, 'soapLog'])->name('admin.soap_log');
+        Route::get('soap_log/list', [AdminController::class, 'getSoapLogList'])->name('admin.soap_log.list');
+        // Route::get('student/list', [AdminController::class, 'studentList'])->name('admin.student.list');
         // scedule download
         Route::post('scedule/exam_schedule_download_excel', [CommonController::class, 'examScheduleDownloadExcel'])->name('admin.exam_schedule_download_excel');
     });

@@ -1,4 +1,9 @@
 <div class="tab-pane" id="subjective" data-tab="subjective">
+    <style>
+        .show>.btn-blue.dropdown-toggle {
+    border-color: #3dd0cd; 
+}
+    </style>
     <div class="row">
         <div class="col-xl-12 col-sm-12 col-md-12">
             <div class="card-box">
@@ -8,6 +13,7 @@
                         <button type="submit" class="btn btn-info waves-effect waves-light">Save</button>
                     </div>
                     <input type="hidden" class="student_id" name="student_id">
+                    <input type="hidden"  name="soap_type_id" value="1">
                     <div class="row">
                         <div class="col-sm-2 col-xl-2 col-md-2">
                             <div class="nav flex-column nav-pills nav-pills-tab" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -19,7 +25,7 @@
                                     </button>
                                     <div class="dropdown-menu dropdown-lg dropdown-menu-left">
                                         <div class="p-lg-1">
-                                            <div class="row no-gutters sub_category_list">
+                                            <div class="row no-gutters sub_category_list" style="font-size:12px;">
                                             </div>
                                         </div>
                                     </div>
@@ -53,7 +59,7 @@
                                                         </tr>
                                                     </thead>
 
-                                                    <tbody id="subjective-category-{{ $category['id'] }}" class="subjective-category-table">
+                                                    <tbody id="subjective-category-{{ $category['id'] }}" class="subjective-category-table" data-type="1">
                                                     </tbody>
                                                 </table>
                                             </div> <!-- end .table-responsive-->
@@ -67,19 +73,12 @@
                                             <ul class="nav nav-tabs">
                                                 <!-- <li class="nav-item"> -->
                                                     <div class="row">
-                                                        <div class="col-12">
-                                                            <div class="">
-                                                                <div class="row">
-                                                                    <div class="col-lg-8">
-                                                                    </div>
-                                                                    <div class="">
-                                                                        <div class="text-lg-right mt-3 mt-lg-0">
-                                                                            <a href="{{ route('admin.soap_subject.create')}}" type="button" class="btn btn-white waves-effect waves-light mr-1"><i class="mdi mdi-plus-circle mr-1"></i>Add</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- end col-->
-                                                                </div> <!-- end row -->
-                                                            </div> <!-- end card-box -->
+                                                        <div class="col-12">                                                            
+                                                          <div class="text-lg-right mt-3 mt-lg-0">
+                                                            <a href="{{ route('admin.soap_subject.create')}}" type="button" class="btn btn-white waves-effect waves-light mr-1" style="color:white;background-color:#00800082;border-color:#00800082;">
+                                                                <i class="mdi mdi-plus-circle mr-1"></i>Add</a>
+                                                        </div>
+                                                            <!-- end col-->
                                                         </div><!-- end col-->
                                                     </div>
                                                 <!-- </li> -->

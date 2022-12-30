@@ -6198,7 +6198,9 @@ class AdminController extends Controller
             'notes' => $request->notes,
             'referred_by' => session()->get('ref_user_id'),
             'student_id' => $request->student_id,
+            'soap_type_id' => $request->soap_type_id,
         ];
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.soap_add'), $data);
         // dd($response);
         return $response;
@@ -6280,5 +6282,33 @@ class AdminController extends Controller
 
         $response = Helper::PostMethod(config('constants.api.soap_subject_delete'), $data);
         return $response;
+    }
+    
+
+    public function getSoapLogList(Request $request)
+    {
+        
+        $data = [
+            'student_id' => $request->student_id
+
+        ];
+        $response = Helper::PostMethod(config('constants.api.soap_log_list'), $data);
+        return DataTables::of($response['data'])
+
+            ->addIndexColumn()
+            ->addColumn('soap_type', function ($row) {
+                $soap_type = "";
+                if($row['soap_type']=="1"){
+                    $soap_type = "Subjective";
+                }else if($row['soap_type']=="2"){
+                    $soap_type = "Objective";
+                }else if($row['soap_type']=="3"){
+                    $soap_type = "Assessment";
+                }else if($row['soap_type']=="4"){
+                    $soap_type = "Plan";
+                }
+                return $soap_type;
+            })
+            ->make(true);
     }
 }

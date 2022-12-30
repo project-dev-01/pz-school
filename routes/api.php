@@ -740,4 +740,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('old_soap_student/list', [ApiControllerOne::class, 'getOldSoapStudentList']);
     
     Route::get('soap_student/list', [ApiControllerOne::class, 'getSoapStudentList']);
+
+    
+    Route::post('soap_log/list', [ApiControllerOne::class, 'getSoapLogList']);
+    Route::post('soap_log/add', [ApiControllerOne::class, 'addSoapLog']);
 });

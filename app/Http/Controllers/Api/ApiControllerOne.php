@@ -3581,7 +3581,7 @@ class ApiControllerOne extends BaseController
                 foreach ($notes as $not) {
                     // return $note;
                     foreach ($not as $note) {
-
+                        // dd($request);
                         if (!isset($note['soap_id'])) {
                             $data = [
                                 'soap_notes_id' => $note['soap_notes_id'],
@@ -3594,6 +3594,11 @@ class ApiControllerOne extends BaseController
                             ];
                             // insert data
                             $query = $conn->table('soap')->insert($data);
+                            $type="Added";
+                            $soap_text = $conn->table('soap_notes')->where('id',$note['soap_notes_id'])->first();
+                            // dd($soap_text);
+                            // return $soap_text;
+                            $this->addSoapLog($request, $type, $soap_text);
                         } else {
                             $query = 1;
                         }
@@ -3706,6 +3711,12 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
+            $note = $conn->table('soap')->where('id', $id)->first();
+            $soap_text = $conn->table('soap_notes')->where('id',$note->soap_notes_id)->first();
+            $type="Deleted";
+            
+            // dd($soap_text);
+            $this->addSoapLog($request, $type, $soap_text);
             $query = $conn->table('soap')->where('id', $id)->delete();
 
             $success = [];
@@ -4868,6 +4879,10 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
+            $class_id = $request->class_id;
+            $session_id = $request->session_id;
+            $section_id = $request->section_id;
+
             $SoapSubjectDetails = $conn->table('soap as sa')
                 ->select('s.id', 's.photo', DB::raw('CONCAT(s.first_name, " ", s.last_name) as name'), 'sections.name as section_name', 'classes.name as class_name', 's.email')
                 ->leftJoin('students as s', 'sa.student_id', '=', 's.id')
@@ -4875,6 +4890,15 @@ class ApiControllerOne extends BaseController
                 ->leftJoin('sections', 'e.section_id', '=', 'sections.id')
                 ->leftJoin('classes', 'e.class_id', '=', 'classes.id')
                 ->where('sa.student_id', '!=', '0')
+                ->when($class_id, function ($query, $class_id) {
+                    return $query->where('e.class_id', $class_id);
+                })
+                ->when($session_id, function ($query, $session_id) {
+                    return $query->where('e.session_id', $session_id);
+                })
+                ->when($section_id, function ($query, $section_id) {
+                    return $query->where('e.section_id', $section_id);
+                })
                 ->where('e.academic_session_id', '=', $request->academic_session_id)
                 ->where('e.active_status', '=', "0")
                 ->groupBy('s.id')
@@ -4958,5 +4982,45 @@ class ApiControllerOne extends BaseController
                 ->get();
             return $this->successResponse($SoapSubjectDetails, 'Student record fetch successfully');
         }
+    }
+
+    
+    // getSoapLogList
+    public function getSoapLogList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $SoapLogDetails = $conn->table('soap_logs')->select('soap_logs.*',DB::raw('DATE_FORMAT(soap_logs.created_at,"%d-%m-%Y") as date'),DB::raw('CONCAT(s.first_name, " ", s.last_name) as referred_by'))
+                ->join('staffs as s', 'soap_logs.staff_id', '=', 's.id')
+                ->where('soap_logs.student_id',$request->student_id)->orderBy('created_at', 'DESC')->get();
+            return $this->successResponse($SoapLogDetails, 'Log record fetch successfully');
+        }
+    }
+
+    
+
+    // add Soap Log
+    public function addSoapLog($request, $type, $note)
+    {
+        // dd($note);
+        $conn = $this->createNewConnection($request->branch_id);
+
+        $conn->table('soap_logs')->insert([
+            'student_id' => $request->student_id,
+            'staff_id' => $request->referred_by,
+            'soap_id' => $note->id,
+            'soap_text' => $note->notes,
+            'soap_type' => $request->soap_type_id,
+            'type' => $type,
+            'created_at' => date("Y-m-d H:i:s")
+        ]);
     }
 }
