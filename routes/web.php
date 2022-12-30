@@ -540,6 +540,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('exam_results/downbystudent', [PdfController::class, 'downbystudent'])->name('admin.exam_results.downbystudent');
         Route::post('exam_results/downbyoverall', [PdfController::class, 'downbyoverall'])->name('admin.exam_results.downbyoverall');
         Route::post('exam_results/downbystudentroll', [PdfController::class, 'downbystudentroll'])->name('admin.exam_results.downbystudentroll');
+        Route::post('exam_results/downbypaperwise', [PdfController::class, 'downbypaperwise'])->name('admin.exam_results.downbypaperwise');
 
         // Test Result Route
         Route::get('test_result', [AdminController::class, 'testResult'])->name('admin.test_result');
@@ -1031,6 +1032,12 @@ Route::group(['prefix' => 'teacher'], function () {
         //Timetable
         Route::get('timetable/index', [TeacherController::class, 'timetable'])->name('teacher.timetable');
         Route::post('timetable/timetable-details', [TeacherController::class, 'getTimetable'])->name('teacher.timetable.details');
+        // download pdf
+        Route::post('exam_results/downbyclass', [PdfController::class, 'downbyclass'])->name('teacher.exam_results.downbyclass');
+        Route::post('exam_results/downbysubject', [PdfController::class, 'downbysubject'])->name('teacher.exam_results.downbysubject');
+        Route::post('exam_results/downbystudent', [PdfController::class, 'downbystudent'])->name('teacher.exam_results.downbystudent');
+        Route::post('exam_results/downbypaperwise', [PdfController::class, 'downbypaperwise'])->name('teacher.exam_results.downbypaperwise');
+
     });
 });
 // TEACHER CONTROLLER END

@@ -231,9 +231,6 @@ $(function () {
             var paper_id = $("#paperID").val();
             var semester_id = $("#semester_id").val();
             var session_id = $("#session_id").val();
-
-            // var fmark = $('option:selected', '#examnames').attr('data-full');
-            // var pmark = $('option:selected', '#examnames').attr('data-pass');
             var grade_category = $('option:selected', '#paperID').attr('data-grade_category');
 
             var formData = new FormData();
@@ -579,29 +576,7 @@ $(function () {
             info: true,
             dom: 'lBfrtip',
             paging: false,
-            // dom: 'lBfrtip',
-            // dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
-            //     "<'row'<'col-sm-12'tr>>" +
-            //     "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-            buttons: [
-                {
-                    extend: 'csv',
-                    text: 'Download CSV',
-                    extension: '.csv',
-                    exportOptions: {
-                        columns: 'th:not(:last-child)'
-                    }
-                },
-                {
-                    extend: 'pdf',
-                    text: 'Download PDF',
-                    extension: '.pdf',
-                    exportOptions: {
-                        columns: 'th:not(:last-child)'
-                    }
-
-                }
-            ],
+            buttons: [],
             data: dataSetNew,
             "pageLength": 10,
             "aLengthMenu": [

@@ -103,7 +103,6 @@ $(function () {
     });
     // data bind 
     $('#resultsByPaper').on('submit', function (e) {
-        console.log("fdf");
         e.preventDefault();
         var valid = $("#resultsByPaper").valid();
         if (valid === true) {
@@ -133,12 +132,19 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (response) {
-                    console.log("000");
-                    console.log(response);
                     if (response.code == 200) {
                         if (response.data.get_subject_paper_marks.length > 0) {
                             var datasetnew = response.data;
                             paperwiseresult(datasetnew);
+                            // download set start
+                            $("#downExamID").val(exam_id);
+                            $("#downClassID").val(class_id);
+                            $("#downSectionID").val(section_id);
+                            $("#downSemesterID").val(semester_id);
+                            $("#downSessionID").val(session_id);
+                            $("#downSubjectID").val(subject_id);
+                            $("#downAcademicYear").val(academic_session_id);
+                            // download set end
                             $("#body_content").show();
                             $("#overlay").fadeOut(300);
                         } else {
@@ -152,7 +158,6 @@ $(function () {
                     }
 
                 }, error: function (err) {
-                    console.log(err)
                     $("#body_content").hide();
                     $("#overlay").fadeOut(300);
                     toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');

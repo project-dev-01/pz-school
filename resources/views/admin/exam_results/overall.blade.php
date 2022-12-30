@@ -1,6 +1,15 @@
 @extends('layouts.admin-layout')
 @section('title','Overall')
 @section('content')
+<style>
+    .btn-primary-bl
+
+    {
+        width:100px;
+        margin-bottom:5px;
+    }
+
+</style>
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -128,11 +137,12 @@
                                         <input type="hidden" name="semester_id" id="downSemesterID">
                                         <input type="hidden" name="session_id" id="downSessionID">
                                         <input type="hidden" name="academic_year" id="downAcademicYear">
-                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">PDF</button>
+
+                                        <div class="clearfix float-right">
+                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">PDF</button>
+                                            <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">Download</button>
+                                        </div>
                                     </form>
-                                </div>
-                                <div class="clearfix mt-4">
-                                    <button type="button" class="btn btn-primary-bl waves-effect waves-light float-right exportToExcel">Download</button>
                                 </div>
                             </div>
                         </div> <!-- end col-->

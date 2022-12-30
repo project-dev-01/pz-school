@@ -408,7 +408,6 @@ class PdfController extends Controller
             'academic_year' => $request->academic_year
         ];
         $tot_grade_calcu_byclass = Helper::PostMethod(config('constants.api.tot_grade_calcu_overall'), $data);
-        // dd($tot_grade_calcu_byclass);
         $output = "";
         if ($tot_grade_calcu_byclass['code'] == "200") {
             $headers = $tot_grade_calcu_byclass['data']['headers'];
@@ -530,9 +529,8 @@ class PdfController extends Controller
             $output .= '</main></body></html>';
             $pdf = \App::make('dompdf.wrapper');
             // set size
-            // $customPaper = array(0, 0, 900.00, 567.00);
-            $pdf->setPaper('a4', 'landscape')->setWarnings(false);
-            // $pdf->set_paper($customPaper);
+            $customPaper = array(0, 0, 1200.00, 567.00);
+            $pdf->set_paper($customPaper);
             $pdf->loadHTML($output);
             // filename
             $now = now();
@@ -630,6 +628,58 @@ class PdfController extends Controller
             $now = now();
             $name = strtotime($now);
             $fileName = "byindividualstudent" . $name . ".pdf";
+            return $pdf->download($fileName);
+            // return $pdf->stream();
+        }
+    }
+    public function downbypaperwise(Request $request)
+    {
+        $data = [
+            'exam_id' => $request->exam_id,
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
+            'subject_id' => $request->subject_id,
+            'academic_session_id' => $request->academic_year
+        ];
+        $getExamPaperData = Helper::PostMethod(config('constants.api.get_exam_paper_res'), $data);
+        $output = "";
+        if ($getExamPaperData['code'] == "200") {
+            $headers = $getExamPaperData['data']['all_paper'];
+            $get_subject_paper_marks = $getExamPaperData['data']['get_subject_paper_marks'];
+            $output .= '<div class="table-responsive">
+        <table width="100%" style="border-collapse: collapse; border: 0px;">
+           <thead>
+              <tr>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">S.no.</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">Student Name</th>';
+            foreach ($headers as $val) {
+                $output .=  '<th class="text-center" style="border: 1px solid; padding:12px;">' . $val['paper_name'] . '</th>';
+            }
+            $output .= '<th class="text-center" style="border: 1px solid; padding:12px;">Grade</th>';
+            $output .= '</tr></thead><tbody>';
+            foreach ($get_subject_paper_marks as $key => $res) {
+                $key++;
+                $output .= '<tr>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">' . $key . '</td>
+                 <td class="text-left" style="border: 1px solid; padding:12px;">' . $res['name'] . '</td>';
+                $paperRow = $res['papers'];
+                foreach ($paperRow as $pap) {
+                    $output .=  '<td class="text-center" style="border: 1px solid; padding:12px;">' . number_format($pap, 2) . '</td>';
+                }
+                $output .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['grade'] . '</td>
+                </tr>';
+            }
+            $output .= '</tbody></table></div>';
+            $pdf = \App::make('dompdf.wrapper');
+            // set size
+            $pdf->setPaper('a4', 'landscape')->setWarnings(false);
+            $pdf->loadHTML($output);
+            // filename
+            $now = now();
+            $name = strtotime($now);
+            $fileName = "bypapers" . $name . ".pdf";
             return $pdf->download($fileName);
             // return $pdf->stream();
         }
