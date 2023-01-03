@@ -684,4 +684,62 @@ class PdfController extends Controller
             // return $pdf->stream();
         }
     }
+    public function downbytest_paper(Request $request)
+    {
+        $data = [
+            'exam_id' => $request->exam_id,
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
+            'subject_id' => $request->subject_id,
+            'paper_id' => $request->paper_id,
+            'academic_session_id' => $request->academic_session_id
+        ];
+        $getExamPaperData = Helper::PostMethod(config('constants.api.get_testresult_marks_subject_vs'), $data);
+        $output = "";
+        if ($getExamPaperData['code'] == "200") {
+            $get_subject_marks = $getExamPaperData['data']['get_subject_marks'];
+            $output .= '<div class="table-responsive">
+        <table width="100%" style="border-collapse: collapse; border: 0px;">
+           <thead>
+              <tr>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">S.no.</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">Student Name</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">Score</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">Grade</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">Pass/Fail</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">Ranking</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">Status</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">Memo</th>
+                 ';
+            $output .= '</tr></thead><tbody>';
+            foreach ($get_subject_marks as $key => $res) {
+                $key++;
+                $output .= '<tr>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">' . $key . '</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['name'] . '</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['score'] . '</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['grade'] . '</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['pass_fail'] . '</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['ranking'] . '</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['status'] . '</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">' . ($res['memo'] != "null" ? $res['memo'] : "") . '</td>';
+                $output .= '</tr>';
+            }
+            $output .= '</tbody></table></div>';
+            $pdf = \App::make('dompdf.wrapper');
+            // set size
+            $pdf->setPaper('a4', 'landscape')->setWarnings(false);
+            // $paper_size = array(0, 0, 360, 360);
+            // $pdf->set_paper($paper_size);
+            $pdf->loadHTML($output);
+            // filename
+            $now = now();
+            $name = strtotime($now);
+            $fileName = "martkbypaper" . $name . ".pdf";
+            return $pdf->download($fileName);
+            // return $pdf->stream();
+        }
+    }
 }

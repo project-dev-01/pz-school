@@ -135,6 +135,26 @@
                             <h4>
                     </li>
                 </ul><br>
+                <!-- <div class="col-md-12">
+                    <div class="clearfix mt-4">
+                        <form method="post" action="{{ route('admin.exam_results.downbytest_paper') }}">
+                            @csrf
+                            <input type="hidden" name="exam_id" id="downExamID">
+                            <input type="hidden" name="class_id" id="downClassID">
+                            <input type="hidden" name="section_id" id="downSectionID">
+                            <input type="hidden" name="semester_id" id="downSemesterID">
+                            <input type="hidden" name="session_id" id="downSessionID">
+                            <input type="hidden" name="subject_id" id="downSubjectID">
+                            <input type="hidden" name="paper_id" id="downPaperID">
+                            <input type="hidden" name="grade_category" id="downGradeCategory">
+                            <input type="hidden" name="academic_session_id" id="downAcademicSessionID">
+                            <div class="clearfix">
+                                <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">PDF</button>
+                                <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">Download</button>
+                            </div>
+                        </form>
+                    </div>
+                </div> -->
                 <form id="addstudentmarks" method="post" action="{{ route('admin.subjectmarks.add') }}" autocomplete="off">
                     @csrf
                     <div class="row">

@@ -266,6 +266,17 @@ $(function () {
                             $("#listModePaperID").val(paper_id);
                             $("#listModeSemesterID").val(semester_id);
                             $("#listModeSessionID").val(session_id);
+                            // download start
+                            $("#downClassID").val(class_id);
+                            $("#downSectionID").val(section_id);
+                            $("#downSubjectID").val(subject_id);
+                            $("#downExamID").val(exam_id);
+                            $("#downPaperID").val(paper_id);
+                            $("#downSemesterID").val(semester_id);
+                            $("#downSessionID").val(session_id);
+                            $("#downGradeCategory").val(grade_category);
+                            $("#downAcademicSessionID").val(academic_session_id);
+                            // download end
                         } else {
                             toastr.error("No data available");
                             $("#mark_by_subject_card").hide();
