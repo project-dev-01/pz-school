@@ -60,211 +60,216 @@ $(function () {
         var tab = $(this).data('tab');
         var soap_type_id = $(this).data('soap-type-id');
         var student = $("#student_id").val();
-        if ( tab == "info" ) {
-            $.post(studentDetails, { token: token, branch_id: branchID,id: student }, function (data) {
-                    var stu = data.data.student;
-                    $('#fname').val(stu.first_name);
-                    $('#lname').val(stu.last_name);
-                    $('#gender').val(stu.gender);
-                    $('#blooddgrp').val(stu.blood_group);
-                    $('#dob').val(stu.birthday);
-                    $('#passport').val(stu.passport);
-                    $('#txt_nric').val(stu.nric);
-                    $('#religion').val(stu.religion);
-                    $('#race').val(stu.race);
-                    $('#txt_mobile_no').val(stu.mobile_no);
-                    $('#drp_country').val(stu.country);
-                    $('#drp_state').val(stu.state);
-                    $('#drp_city').val(stu.city);
-                    $('#drp_post_code').val(stu.post_code);
-                    $('#txtarea_address').val(stu.gender);
-                    $('#txtarea_permanent_address').val(stu.permanent_address);
-                    $('#btwyears').val(stu.year);
-                    $('#txt_regiter_no').val(stu.register_no);
-                    $('#txt_roll_no').val(stu.roll_no);
-                    $('#admission_date').val(stu.admission_date);
-                    $('#std_class_id').val(stu.class_id);
-                    $('#std_section_id').val(stu.section_id);
-                    $('#categy').val(stu.categy);
-                    $('#std_session_id').val(stu.session_id);
-                    $('#std_semester_id').val(stu.semester_id);
-                    $('#father_name').val(stu.father_name);
-                    $('#mother_name').val(stu.mother_name);
-                    $('#guardian_name').val(stu.guardian_name);
-                    $('#relation').val(stu.relation);
-
-                    $.post(sectionByClassUrl, { token: token, branch_id: branchID, class_id: stu.class_id }, function (res) {
-                        if (res.code == 200) {
-                            $.each(res.data, function (key, val) {
-                                $("#std_section_id").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
-                            });
-                            if (stu.section_id) {
-                                $('select[name="std_section_id"]').val(stu.section_id);
-                            }
-                        }
-                    }, 'json');
-            }, 'json');
-        } else if ( tab == "log" ) {
-            // soapLogTable();
-            
-            $('#log-table').DataTable({
-                processing: true,
-                info: true,
-                bDestroy: true,
-                // dom: 'lBfrtip',
-                dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-6'i><'col-sm-6'p>>",
-                buttons: [
-                    // {
-                    //     extend: 'csv',
-                    //     text: 'Download CSV',
-                    //     extension: '.csv',
-                    //     exportOptions: {
-                    //         columns: 'th:not(:last-child)'
-                    //     }
-                    // },
-                    // {
-                    //     extend: 'pdf',
-                    //     text: 'Download PDF',
-                    //     extension: '.pdf',
-                    //     exportOptions: {
-                    //         columns: 'th:not(:last-child)'
-                    //     }
-
-                    // }
-                ],
-                serverSide: true,
-                ajax: {
-                    url: soapLogList,
-                    data: function (d) {
-                        d.student_id = $('#student_id').val()
-                    }
-                },
-                "pageLength": 10,
-                "aLengthMenu": [
-                    [5, 10, 25, 50, -1],
-                    [5, 10, 25, 50, "All"]
-                ],
-                columns: [
-                    {
-                        searchable: false,
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex'
-                    },
-                    {
-                        data: 'soap_text',
-                        name: 'soap_text'
-                    },
-                    {
-                        data: 'soap_type',
-                        name: 'soap_type'
-                    },
-                    {
-                        data: 'referred_by',
-                        name: 'referred_by'
-                    },
-                    {
-                        data: 'type',
-                        name: 'type'
-                    },
-                    {
-                        data: 'date',
-                        name: 'date'
-                    },
-                ],
-            });
-            // $.ajax({
-            //     url: soapLogList,
-            //     method: "GET",
-            //     data: {  student_id: student },
-            //     success: function (data) {
-            //         console.log('stu',data.data)
-            //         var output = "";
-            //         if (data.data.length>0) {
-            //             $.each(data.data, function (index, value) {
-            //                 index++;
-            //                 output +=  '<tr>';
-            //                 output +=  '<td >'+index+'</td>';
-            //                 output +=  '<td>'+value.soap_text+'</td>';
-            //                 soap_type = "";
-            //                 if(value.soap_type==1){
-            //                     soap_type = "Subjective";
-            //                 }else if(value.soap_type==2){
-            //                     soap_type = "Objective";
-            //                 }else if(value.soap_type==3){
-            //                     soap_type = "Assessment";
-            //                 }else if(value.soap_type==4){
-            //                     soap_type = "Plan";
-            //                 }
-            //                 output +=  '<td>'+soap_type+'</td>';
-            //                 output +=  '<td>'+value.referred_by+'</td>';
-            //                 output +=  '<td>'+value.type+'</td>';
-            //                 output +=  '<td>'+value.date+'</td>';
-            //                 output +=  '</tr>';
-            //             });
-            //         }else{
-            //             output += '<tr><td colspan="6" class="text-center">No Data Available</td></tr>';
-            //         }
-            //         console.log('out',output)
-            //         $("#log-body").append(output);
-            //     }
-            // });
-        } else {
-            
-            $("."+tab+"-category-table").empty();
-            $("#"+tab+"-subject-table").empty();
-            $.ajax({
-                url: studentSoapList,
-                method: "GET",
-                data: { token: token, branch_id: branchID, student_id: student },
-                success: function (data) {
-                    if (data.data.soap) {
-                        $.each(data.data.soap, function (index, value) {
-                            var output = "";
-                            var table = tab+'-category-'+value.soap_category_id;
-                            var count = $('#'+tab+'-category-'+value.soap_category_id+' tr:last').find('.count').text();
-                            if(!count) {
-                                count = 0;
-                            }
-                            count++;
-                            output +=  '<tr>';
-                            output +=  '<td class="count">'+count+'</td>';
-                            output +=  '<input type="hidden" class="soap_id" name="notes['+value.soap_category_id+']['+count+'][soap_id]" value="'+value.id+'">';
-                            output +=  '<td>'+value.soap_notes+'</td>';
-                            output +=  '<td>'+value.referred_by+'</td>';
-                            output +=  '<td>'+value.date+'</td>';
-                            output +=  '<td> <a href="javascript:void(0);" class="action-icon remove_notes" data-toggle="modal"><i class="mdi mdi-delete"></i></a></td>';
-                            output +=  '</tr>';
-                            $("#"+table).append(output);
-                        });
-                    }
-                    if (data.data.subject) {
-                        $.each(data.data.subject, function (index, value) {
-                            if(value.soap_type_id==soap_type_id) {
-                                var result = "";
-                                var table_name = tab+'-subject-table';
-                                var ind = $('#'+table_name+' tr:last').find('.count').text();
-                                if(!ind) {
-                                    ind = 0;
+        if(student) {
+            if ( tab == "info" ) {
+                $.post(studentDetails, { token: token, branch_id: branchID,id: student }, function (data) {
+                        var stu = data.data.student;
+                        $('#fname').val(stu.first_name);
+                        $('#lname').val(stu.last_name);
+                        $('#gender').val(stu.gender);
+                        $('#blooddgrp').val(stu.blood_group);
+                        $('#dob').val(stu.birthday);
+                        $('#passport').val(stu.passport);
+                        $('#txt_nric').val(stu.nric);
+                        $('#religion').val(stu.religion);
+                        $('#race').val(stu.race);
+                        $('#txt_mobile_no').val(stu.mobile_no);
+                        $('#drp_country').val(stu.country);
+                        $('#drp_state').val(stu.state);
+                        $('#drp_city').val(stu.city);
+                        $('#drp_post_code').val(stu.post_code);
+                        $('#txtarea_address').val(stu.gender);
+                        $('#txtarea_permanent_address').val(stu.permanent_address);
+                        $('#btwyears').val(stu.year);
+                        $('#txt_regiter_no').val(stu.register_no);
+                        $('#txt_roll_no').val(stu.roll_no);
+                        $('#admission_date').val(stu.admission_date);
+                        $('#std_class_id').val(stu.class_id);
+                        $('#std_section_id').val(stu.section_id);
+                        $('#categy').val(stu.categy);
+                        $('#std_session_id').val(stu.session_id);
+                        $('#std_semester_id').val(stu.semester_id);
+                        $('#father_name').val(stu.father_name);
+                        $('#mother_name').val(stu.mother_name);
+                        $('#guardian_name').val(stu.guardian_name);
+                        $('#relation').val(stu.relation);
+    
+                        $.post(sectionByClassUrl, { token: token, branch_id: branchID, class_id: stu.class_id }, function (res) {
+                            if (res.code == 200) {
+                                $.each(res.data, function (key, val) {
+                                    $("#std_section_id").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                                });
+                                if (stu.section_id) {
+                                    $('select[name="std_section_id"]').val(stu.section_id);
                                 }
-                                ind++;
-                                result +=  '<tr>';
-                                result +=  '<td class="count">'+ind+'</td>';
-                                result +=  '<td><button type="button" class="btn btn-blue waves-effect subject_modal" data-toggle="modal" data-id="'+value.id+'" data-target="#sstt">'+value.title+'</button></td>';
-                                result +=  '<td>'+value.referred_by+'</td>';
-                                result +=  '<td>'+value.date+'</td>';
-                                result +=  '<td><a href="'+url+'/admin/soap_subject/edit/'+value.id+'" class="action-icon"><i class="mdi mdi-square-edit-outline"></i></a>';
-                                result +=  '<a href="javascript:void(0);" class="action-icon deleteSoapSubjectBtn"  data-id="'+value.id+'" ><i class="mdi mdi-delete"></i></a>';
-                                result +=  '</td>';
-                                result +=  '</tr>';
-                                $("#"+table_name).append(result);
                             }
-                        });
+                        }, 'json');
+                }, 'json');
+            } else if ( tab == "log" ) {
+                // soapLogTable();
+                
+                $('#log-table').DataTable({
+                    processing: true,
+                    info: true,
+                    bDestroy: true,
+                    // dom: 'lBfrtip',
+                    dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+                    buttons: [
+                        // {
+                        //     extend: 'csv',
+                        //     text: 'Download CSV',
+                        //     extension: '.csv',
+                        //     exportOptions: {
+                        //         columns: 'th:not(:last-child)'
+                        //     }
+                        // },
+                        // {
+                        //     extend: 'pdf',
+                        //     text: 'Download PDF',
+                        //     extension: '.pdf',
+                        //     exportOptions: {
+                        //         columns: 'th:not(:last-child)'
+                        //     }
+    
+                        // }
+                    ],
+                    serverSide: true,
+                    ajax: {
+                        url: soapLogList,
+                        data: function (d) {
+                            d.student_id = $('#student_id').val()
+                        }
+                    },
+                    "pageLength": 10,
+                    "aLengthMenu": [
+                        [5, 10, 25, 50, -1],
+                        [5, 10, 25, 50, "All"]
+                    ],
+                    columns: [
+                        {
+                            searchable: false,
+                            data: 'DT_RowIndex',
+                            name: 'DT_RowIndex'
+                        },
+                        {
+                            data: 'soap_text',
+                            name: 'soap_text'
+                        },
+                        {
+                            data: 'soap_type',
+                            name: 'soap_type'
+                        },
+                        {
+                            data: 'referred_by',
+                            name: 'referred_by'
+                        },
+                        {
+                            data: 'type',
+                            name: 'type'
+                        },
+                        {
+                            data: 'date',
+                            name: 'date'
+                        },
+                    ],
+                });
+                // $.ajax({
+                //     url: soapLogList,
+                //     method: "GET",
+                //     data: {  student_id: student },
+                //     success: function (data) {
+                //         console.log('stu',data.data)
+                //         var output = "";
+                //         if (data.data.length>0) {
+                //             $.each(data.data, function (index, value) {
+                //                 index++;
+                //                 output +=  '<tr>';
+                //                 output +=  '<td >'+index+'</td>';
+                //                 output +=  '<td>'+value.soap_text+'</td>';
+                //                 soap_type = "";
+                //                 if(value.soap_type==1){
+                //                     soap_type = "Subjective";
+                //                 }else if(value.soap_type==2){
+                //                     soap_type = "Objective";
+                //                 }else if(value.soap_type==3){
+                //                     soap_type = "Assessment";
+                //                 }else if(value.soap_type==4){
+                //                     soap_type = "Plan";
+                //                 }
+                //                 output +=  '<td>'+soap_type+'</td>';
+                //                 output +=  '<td>'+value.referred_by+'</td>';
+                //                 output +=  '<td>'+value.type+'</td>';
+                //                 output +=  '<td>'+value.date+'</td>';
+                //                 output +=  '</tr>';
+                //             });
+                //         }else{
+                //             output += '<tr><td colspan="6" class="text-center">No Data Available</td></tr>';
+                //         }
+                //         console.log('out',output)
+                //         $("#log-body").append(output);
+                //     }
+                // });
+            } else {
+                
+                console.log('123')
+                $("."+tab+"-category-table").empty();
+                $("#"+tab+"-subject-table").empty();
+                $.ajax({
+                    url: studentSoapList,
+                    method: "GET",
+                    data: { token: token, branch_id: branchID, student_id: student },
+                    success: function (data) {
+                        if (data.data.soap) {
+                            $.each(data.data.soap, function (index, value) {
+                                var output = "";
+                                var table = tab+'-category-'+value.soap_category_id;
+                                var count = $('#'+tab+'-category-'+value.soap_category_id+' tr:last').find('.count').text();
+                                if(!count) {
+                                    count = 0;
+                                }
+                                count++;
+                                output +=  '<tr>';
+                                output +=  '<td class="count">'+count+'</td>';
+                                output +=  '<input type="hidden" class="soap_id" name="notes['+value.soap_category_id+']['+count+'][soap_id]" value="'+value.id+'">';
+                                output +=  '<td>'+value.soap_notes+'</td>';
+                                output +=  '<td>'+value.referred_by+'</td>';
+                                output +=  '<td>'+value.date+'</td>';
+                                output +=  '<td> <a href="javascript:void(0);" class="action-icon remove_notes" data-toggle="modal"><i class="mdi mdi-delete"></i></a></td>';
+                                output +=  '</tr>';
+                                $("#"+table).append(output);
+                            });
+                        }
+                        if (data.data.subject) {
+                            $.each(data.data.subject, function (index, value) {
+                                if(value.soap_type_id==soap_type_id) {
+                                    var result = "";
+                                    var table_name = tab+'-subject-table';
+                                    var ind = $('#'+table_name+' tr:last').find('.count').text();
+                                    if(!ind) {
+                                        ind = 0;
+                                    }
+                                    ind++;
+                                    result +=  '<tr>';
+                                    result +=  '<td class="count">'+ind+'</td>';
+                                    result +=  '<td><button type="button" class="btn btn-blue waves-effect subject_modal" data-toggle="modal" data-id="'+value.id+'" data-target="#sstt">'+value.title+'</button></td>';
+                                    result +=  '<td>'+value.referred_by+'</td>';
+                                    result +=  '<td>'+value.date+'</td>';
+                                    result +=  '<td><a href="'+url+'/admin/soap_subject/edit/'+value.id+'" class="action-icon"><i class="mdi mdi-square-edit-outline"></i></a>';
+                                    result +=  '<a href="javascript:void(0);" class="action-icon deleteSoapSubjectBtn"  data-id="'+value.id+'" ><i class="mdi mdi-delete"></i></a>';
+                                    result +=  '</td>';
+                                    result +=  '</tr>';
+                                    $("#"+table_name).append(result);
+                                }
+                            });
+                        }
                     }
-                }
-            });
-
+                });
+    
+            }
+        } else {
+            toastr.error("Please Select Student");
         }
     })
     $('#oldStudentFilter').on('submit', function (e) {
@@ -375,7 +380,12 @@ $(function () {
                 row += ' <div class="col"><a class="dropdown-icon-item" href="#" data-toggle="modal"  data-target="#fh"><span>No Data Available</span></a></div>';
             } else { 
                 $.each(data.data, function (index, value) {
-                    var img = imageUrl + "/" + value.photo;
+                    if (value.photo) {
+                        var img = imageUrl + "/" + value.photo;
+                    } else {
+                        var img = defaultImg;
+                    }
+                    
                     row += ' <div class="col-3"><a class="dropdown-icon-item sub_category" href="#" data-toggle="modal" data-sub-category="'+value.id+'" data-category="'+soap_category_id+'" data-target="#notes-modal"><img src="'+img+'" alt="slack"><span>'+value.name+'</span></a></div>';
                 });
             }

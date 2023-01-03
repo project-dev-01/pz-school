@@ -6236,7 +6236,7 @@ class AdminController extends Controller
             'body' => $request->body,
             'soap_type_id' => $request->soap_type_id,
             'referred_by' => session()->get('ref_user_id'),
-            'student_id' => "1",
+            'student_id' => $request->student_id,
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.soap_subject_add'), $data);

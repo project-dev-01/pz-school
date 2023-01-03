@@ -1,24 +1,23 @@
 $(function () {
     // rules validation
-    // $("#addSoapSubjectForm").validate({
-    //     rules: {
-    //         title: "required",
-    //         header: "required",
-    //         body: "required",
-    //         soap_type_id: "required",
-    //     }
-    // });
+    $("#addSoapSubjectForm").validate({
+        rules: {
+            title: "required",
+            header: "required",
+            body: "required",
+            soap_type_id: "required",
+        }
+    });
     // save SoapSubject
     $('#addSoapSubjectForm').on('submit', function (e) {
         e.preventDefault();
-        console.log('123')
-        // var SoapSubjectCheck = $("#addSoapSubjectForm").valid();
-        // if (SoapSubjectCheck === true) {
+        var SoapSubjectCheck = $("#addSoapSubjectForm").valid();
+        if (SoapSubjectCheck === true) {
             // $("#overlay").fadeIn(300);
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),
-                method: $(form).attr('method'),
+                method: $(form).attr('method'),     
                 data: new FormData(form),
                 processData: false,
                 dataType: 'json',
@@ -40,24 +39,24 @@ $(function () {
                     toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
                 }
             });
-        // }
+        }
     });
 
     // rules validation
-    // $("#editSoapSubjectForm").validate({
-    //     rules: {
-    //         title: "required",
-    //         header: "required",
-    //         body: "required",
-    //         soap_type_id: "required",
-    //     }
+    $("#editSoapSubjectForm").validate({
+        rules: {
+            title: "required",
+            header: "required",
+            body: "required",
+            soap_type_id: "required",
+        }
 
-    // });
+    });
     // edit SoapSubject
     $('#editSoapSubjectForm').on('submit', function (e) {
         e.preventDefault();
-        // var SoapSubjectCheck = $("#editSoapSubjectForm").valid();
-        // if (SoapSubjectCheck === true) {
+        var SoapSubjectCheck = $("#editSoapSubjectForm").valid();
+        if (SoapSubjectCheck === true) {
             $("#overlay").fadeIn(300);
             var form = this;
             $.ajax({
@@ -84,7 +83,7 @@ $(function () {
                     toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
                 }
             });
-        // }
+        }
     });
 
     // delete Notes Delete

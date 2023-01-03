@@ -160,11 +160,16 @@
                         <div class="tab-pane show active" id="home">
                             <div class="container">
                                 <div class="tt-wrapper-inner addSoapSubject">
+                                    <div class="row">
+                                        <div class="col-auto ml-md-auto">
+                                            <a href="{{ url()->previous() }}" type="button" class="btn btn-secondary">Back</a>
+                                        </div>
+                                    </div>
                                     <h1 class="tt-title-border">Create New Topic</h1>
                                     <form id="addSoapSubjectForm" method="post" action="{{ route('admin.soap_subject.add') }}">
                                         @csrf
                                         <div class="form-group">
-                                            <label for="title">Topic Title</label>
+                                            <label for="title">Topic Title<span class="text-danger">*</span></label>
                                             <div class="tt-value-wrapper">
                                                 <input type="text" name="title" class="form-control" id="title" placeholder="Subject of your topic">
                                                 <span class="tt-value-input"></span>
@@ -173,7 +178,7 @@
                                                 the subject as short as possible.</div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="header">Topic Header</label>
+                                            <label for="header">Topic Header<span class="text-danger">*</span></label>
                                             <div class="tt-value-wrapper">
                                                 <input type="text" name="header" class="form-control" id="header" placeholder="Header of your topic">
                                                 <span class="tt-value-input"></span>
@@ -181,7 +186,7 @@
                                             <div class="tt-note">Describe your topic header..</div>
                                         </div>
                                         <div class="pt-editor">
-                                            <h6 class="pt-title">Topic Body</h6>
+                                            <label class="pt-title" for="body">Topic Header<span class="text-danger">*</span></label>
                                             <div class="pt-row">
                                                 <!-- basic summernote-->
                                                 <textarea class="summernote" name="body"></textarea>

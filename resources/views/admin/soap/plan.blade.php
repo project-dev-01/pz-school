@@ -55,19 +55,6 @@
                                                     </thead>
 
                                                     <tbody id="plan-category-{{ $category['id'] }}" class="plan-category-table" data-type="4">
-                                                        @php $key=1; @endphp
-                                                        @foreach($soap_list as $list)
-                                                        @if($list['soap_category_id'] == $category['id'])
-                                                        <tr>
-                                                            <td class="count">{{$key}}</td>
-                                                            <input type="hidden" class="soap_id" name="notes[{{$key}}][soap_id]" value="{{$list['id']}}">
-                                                            <td>{{$list['soap_notes']}}</td>
-                                                            <td>{{$list['referred_by']}}</td>
-                                                            <td> <a href="javascript:void(0);" class="action-icon remove_notes" data-toggle="modal"><i class="mdi mdi-delete"></i></a></td>
-                                                        </tr>
-                                                        @php $key++; @endphp
-                                                        @endif
-                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div> <!-- end .table-responsive-->
@@ -79,11 +66,17 @@
                                     <div class="col-xl-7 col-md-7 col-sm-7">
                                         <div class="">
                                             <ul class="nav nav-tabs">
-                                                <div class="row">
-                                                    <div class="text-lg-right mt-3 mt-lg-0">
-                                                        <a href="{{ route('admin.soap_subject.create')}}" type="button" class="btn btn-white waves-effect waves-light mr-1"><i class="mdi mdi-plus-circle mr-1"></i>Add</a>
+                                                <!-- <li class="nav-item"> -->
+                                                    <div class="row">
+                                                        <div class="col-12">                                                            
+                                                          <div class="text-lg-right mt-3 mt-lg-0">
+                                                            <a href="{{ route('admin.soap_subject.create')}}" type="button" class="btn btn-white waves-effect waves-light mr-1" style="color:white;background-color:#00800082;border-color:#00800082;">
+                                                                <i class="mdi mdi-plus-circle mr-1"></i>Add</a>
+                                                        </div>
+                                                            <!-- end col-->
+                                                        </div><!-- end col-->
                                                     </div>
-                                                </div>
+                                                <!-- </li> -->
                                             </ul>
 
                                             <div class="table-responsive">
