@@ -3,16 +3,16 @@ $(function () {
     $(document).on('change', ".status", function (e) {
         e.preventDefault();
         var status = $(this).val();
-        console.log('cv',status)
-        if ( status == "absent" ) {
+        console.log('cv', status)
+        if (status == "absent") {
             $(this).closest('tr').find('.checkin').val("");
             $(this).closest('tr').find('.checkout').val("");
             $(this).closest('tr').find('.hours').val("");
-            
+
             $(this).closest('tr').find('.checkin').prop('readonly', true);
             $(this).closest('tr').find('.checkout').prop('readonly', true);
             $(this).closest('tr').find('.hours').prop('readonly', true);
-            
+
 
             var reason = $(this).closest('tr').find('.reason');
             reason.empty();
@@ -39,10 +39,10 @@ $(function () {
         e.preventDefault();
         var checkin = $(this).val();
         var checkout = $(this).closest('tr').find('.checkout').val();
-        
-        if(checkout){
-            var valuein  = moment.duration(checkin, 'HH:mm');
-            var valueout  = moment.duration(checkout, 'HH:mm');
+
+        if (checkout) {
+            var valuein = moment.duration(checkin, 'HH:mm');
+            var valueout = moment.duration(checkout, 'HH:mm');
             if (valuein < valueout) {
                 var difference = valueout.subtract(valuein);
 
@@ -53,7 +53,7 @@ $(function () {
                 $(this).closest('tr').find('.hours').val("");
                 alert('Check In Value Must be Lesser Than Check Out')
             }
-            
+
         }
     });
 
@@ -61,27 +61,26 @@ $(function () {
         e.preventDefault();
         var checkout = $(this).val();
         var checkin = $(this).closest('tr').find('.checkin').val();
-        
-        if(checkin){
-            var valuein  = moment.duration(checkin, 'HH:mm');
-            var valueout  = moment.duration(checkout, 'HH:mm');
-            if(valuein < valueout)
-            {
+
+        if (checkin) {
+            var valuein = moment.duration(checkin, 'HH:mm');
+            var valueout = moment.duration(checkout, 'HH:mm');
+            if (valuein < valueout) {
                 var difference = valueout.subtract(valuein);
 
                 var hours = ("0" + difference.hours()).slice(-2) + ":" + ("0" + difference.minutes()).slice(-2);
                 $(this).closest('tr').find('.hours').val(hours);
-            }else{
+            } else {
                 $(this).closest('tr').find('.checkout').val("");
                 $(this).closest('tr').find('.hours').val("");
                 alert('Check Out Value Must be Greater Than Check In')
             }
-            
+
         }
     });
 
     $("#department").on('change', function (e) {
-        e.preventDefault(); 
+        e.preventDefault();
         var department = $(this).val();
         $("#employee").empty();
         $("#employee").append('<option value="">Select Employee</option>');
@@ -95,7 +94,7 @@ $(function () {
     });
 
     $("#employeeReportDepartment").on('change', function (e) {
-        e.preventDefault(); 
+        e.preventDefault();
         var department = $(this).val();
         $("#employeeReportEmployee").empty();
         $("#employeeReportEmployee").append('<option value="">Select Employee</option>');
@@ -124,7 +123,7 @@ $(function () {
             $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
         }
     });
-    
+
     $("#employeeDate").focus(function () {
         $(".ui-datepicker-calendar").hide();
         $("#ui-datepicker-div").position({
@@ -145,7 +144,7 @@ $(function () {
             $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
         }
     });
-    
+
     $("#employeeReportDate").focus(function () {
         $(".ui-datepicker-calendar").hide();
         $("#ui-datepicker-div").position({
@@ -173,7 +172,7 @@ $(function () {
             var employee = $("#employeeReportEmployee").val();
             var department = $("#employeeReportDepartment").val();
             var session = $("#employeeReportSession").val();
-            
+
             var date = new Date(reportDate)
             var year_month = ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
 
@@ -184,11 +183,11 @@ $(function () {
             var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
             //excel download
-        
-                $("#excelEmployee").val(employee);
-                $("#excelDepartment").val(department);
-                $("#excelSession").val(session);
-                $("#excelDate").val(year_month);
+
+            $("#excelEmployee").val(employee);
+            $("#excelDepartment").val(department);
+            $("#excelSession").val(session);
+            $("#excelDate").val(year_month);
 
             var formData = new FormData();
             formData.append('token', token);
@@ -214,7 +213,11 @@ $(function () {
 
                         var get_attendance_list = response.data.staff_details;
                         // var late_present_graph = response.data.late_present_graph;
-
+                        // pdf download
+                        $("#downExcelEmployee").val(employee);
+                        $("#downExcelSession").val(session);
+                        $("#downExcelDepartment").val(department);
+                        $("#downExcelDate").val(year_month);
 
                         $("#employeeAttendanceReportListShow").empty();
                         var attendanceListShow = "";
@@ -245,17 +248,17 @@ $(function () {
                             // add functions tr start
                             get_attendance_list.forEach(function (res) {
                                 attendanceListShow += '<tr>' +
-                                    '<td>' + res.session_name + '</td>'+
+                                    '<td>' + res.session_name + '</td>' +
                                     '<td class="text-left staffRow">' +
                                     '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light staffDetails" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">' +
                                     '<input type="hidden" value="' + res.staff_id + '">';
-                                    // '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">' +
-                                    if(res.photo) {
-                                        attendanceListShow +=  '<img src="' + staffImg + '/' +res.photo + '" alt="user-image" class="rounded-circle">';
-                                    }else{
-                                        attendanceListShow +=  '<img src="' + defaultImg + '" alt="user-image" class="rounded-circle">';
-                                    }
-                                attendanceListShow +=  '</a>' + res.first_name + ' ' + res.last_name + '</td>';
+                                // '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">' +
+                                if (res.photo) {
+                                    attendanceListShow += '<img src="' + staffImg + '/' + res.photo + '" alt="user-image" class="rounded-circle">';
+                                } else {
+                                    attendanceListShow += '<img src="' + defaultImg + '" alt="user-image" class="rounded-circle">';
+                                }
+                                attendanceListShow += '</a>' + res.first_name + ' ' + res.last_name + '</td>';
                                 var attendance_details = res.attendance_details;
 
                                 for (var s = firstDayTd; s <= lastDay; s.setDate(s.getDate() + 1)) {
@@ -295,7 +298,7 @@ $(function () {
                                     '<td>' + res.absentCount + '</td>' +
                                     '<td>' + res.lateCount + '</td>' +
                                     '</tr>';
-                                
+
                                 widgetpresent += res.presentCount;
                                 widgetabsent += res.absentCount;
                                 widgetlate += res.lateCount;
@@ -381,20 +384,20 @@ $(function () {
             var employee = $("#employee").val();
             var department = $("#department").val();
             var session_id = $("#session_id").val();
-            
+
 
             var date = new Date(reportDate);
 
             var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
             var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-            
+
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
             formData.append('employee', employee);
             formData.append('department', department);
             formData.append('session_id', session_id);
-            
+
             formData.append('firstDay', formatDate(new Date(firstDay)));
             formData.append('lastDay', formatDate(new Date(lastDay)));
 
@@ -502,20 +505,20 @@ $(function () {
             row += '<div class="form-group">';
             row += '<select  class="form-control reason"  name="attendance[' + count + '][reason_id]">';
             row += '<option value="">Select Reasons</option>';
-            if(val.leave) {
+            if (val.leave) {
                 var reason = val.leave.reason_id;
                 var status = "absent";
-            }else {
+            } else {
                 var reason = val.details.reason_id;
                 var status = val.details.status;
             }
-            if (status=="absent") {
-                console.log('ab_rea',val.absent_reason)
+            if (status == "absent") {
+                console.log('ab_rea', val.absent_reason)
                 $.each(val.absent_reason, function (keys, val_rea) {
                     row += '<option value="' + val_rea.id + '" ' + (reason == val_rea.id ? "selected" : "") + '>' + val_rea.name + '</option>';
                 });
-            } else if (status=="excused") {
-                console.log('ex_rea',val.excused_reason)
+            } else if (status == "excused") {
+                console.log('ex_rea', val.excused_reason)
                 $.each(val.excused_reason, function (keys, val_rea) {
                     row += '<option value="' + val_rea.id + '" ' + (reason == val_rea.id ? "selected" : "") + '>' + val_rea.name + '</option>';
                 });
@@ -524,7 +527,7 @@ $(function () {
             row += '</div>';
             row += '</td>';
             row += '<td width="15%">';
-            
+
             if (val.leave) {
                 row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="' + val.leave.remarks + '">';
             } else {
@@ -533,7 +536,7 @@ $(function () {
                 } else {
                     row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="">';
                 }
-            }   
+            }
             row += '</td>';
             row += '</tr>';
 
