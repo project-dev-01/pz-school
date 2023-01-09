@@ -6236,8 +6236,9 @@ class AdminController extends Controller
             'body' => $request->body,
             'soap_type_id' => $request->soap_type_id,
             'referred_by' => session()->get('ref_user_id'),
-            'student_id' => $request->student_id,
+            'student_id' => session()->get('soap_student_id'),
         ];
+        // dd(session()->get('soap_student_id'));
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.soap_subject_add'), $data);
         // dd($response);
@@ -6268,7 +6269,7 @@ class AdminController extends Controller
             'body' => $request->body,
             'soap_type_id' => $request->soap_type_id,
             'referred_by' => session()->get('ref_user_id'),
-            'student_id' => "1",
+            'student_id' => session()->get('soap_student_id')
         ];
         $response = Helper::PostMethod(config('constants.api.soap_subject_update'), $data);
         return $response;
@@ -6293,6 +6294,7 @@ class AdminController extends Controller
 
         ];
         $response = Helper::PostMethod(config('constants.api.soap_log_list'), $data);
+        // dd($response);
         return DataTables::of($response['data'])
 
             ->addIndexColumn()

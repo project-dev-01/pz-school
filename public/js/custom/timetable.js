@@ -231,6 +231,13 @@ $(function () {
                         $("#edit-modal").attr("data-session_id", data.session_id);
                         $("#timetablerow").show("slow");
                         $("#timetable").html(data.timetable);
+                        // download set start
+                        $("#downClassID").val(data.class_id);
+                        $("#downSectionID").val(data.section_id);
+                        $("#downSemesterID").val(data.semester_id);
+                        $("#downSessionID").val(data.session_id);
+                        $("#downAcademicYear").val(academic_session_id);
+                        // download set end
                     } else {
                         $("#timetablerow").hide("slow");
                         toastr.error(data.message);

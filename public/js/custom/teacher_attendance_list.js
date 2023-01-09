@@ -159,6 +159,13 @@ $(function () {
             $("#excelSemester").val(semester_id);
             $("#excelSession").val(session_id);
             $("#excelDate").val(year_month);
+            // pdf download
+            $("#downExcelSubject").val(subject_id);
+            $("#downExcelClass").val(class_id);
+            $("#downExcelSection").val(section_id);
+            $("#downExcelSemester").val(semester_id);
+            $("#downExcelSession").val(session_id);
+            $("#downExcelDate").val(year_month);
 
             var formData = new FormData();
             formData.append('token', token);

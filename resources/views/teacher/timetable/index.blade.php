@@ -150,7 +150,18 @@
                         </div>
                         <div class="col-md-12">
                             <div class="clearfix mt-4">
-                                <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel" style="float:right;">Download</button>
+                                <form method="post" action="{{ route('teacher.timetable.pdf') }}">
+                                    @csrf
+                                    <input type="hidden" name="class_id" id="downClassID">
+                                    <input type="hidden" name="section_id" id="downSectionID">
+                                    <input type="hidden" name="semester_id" id="downSemesterID">
+                                    <input type="hidden" name="session_id" id="downSessionID">
+                                    <input type="hidden" name="academic_year" id="downAcademicYear">
+                                    <div class="clearfix float-right">
+                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">PDF</button>
+                                        <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel" style="float:right;">Download</button>
+                                    </div>
+                                </form>
                             </div>
                         </div> <!-- end col-->
                     </div>

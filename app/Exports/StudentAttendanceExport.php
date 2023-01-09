@@ -25,6 +25,8 @@ class StudentAttendanceExport  extends BaseController implements FromCollection,
     protected $section;
     protected $subject;
     protected $date;
+    protected $semester;
+    protected $session;
 
     function __construct($branch,$class,$section,$subject,$semester,$session,$date) {
         $this->branch = $branch;

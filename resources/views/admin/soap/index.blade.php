@@ -832,6 +832,7 @@
     var user_id = "{{ Session::get('ref_user_id') }}";
     var soapLogList = "{{ route('admin.soap_log.list') }}";
     var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+    var soapStudentIDUrl = "{{ route('admin.settings.soap_student_id') }}";
     
 </script>
 

@@ -164,6 +164,18 @@
                     </div>
                     <!-- end row-->
                     <div class="form-group text-right m-b-0">
+                        <!-- <form method="post" action="{{ route('admin.attendance.student_pdf')}}">
+                            @csrf
+                            <input type="hidden" name="subject_id" id="downExcelSubject">
+                            <input type="hidden" name="class_id" id="downExcelClass">
+                            <input type="hidden" name="section_id" id="downExcelSection">
+                            <input type="hidden" name="semester" id="downExcelSemester">
+                            <input type="hidden" name="session" id="downExcelSession">
+                            <input type="hidden" name="year_month" id="downExcelDate">
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                PDF
+                            </button>
+                        </form> -->
                         <form method="post" action="{{ route('admin.attendance.student_excel')}}">
                             @csrf
                             <input type="hidden" name="subject" id="excelSubject">
@@ -172,7 +184,7 @@
                             <input type="hidden" name="semester" id="excelSemester">
                             <input type="hidden" name="session" id="excelSession">
                             <input type="hidden" name="date" id="excelDate">
-                            <button class="btn btn-primary-bl waves-effect waves-light" type="subit">
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
                                 Download
                             </button>
                         </form>

@@ -542,7 +542,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('exam_results/downbystudentroll', [PdfController::class, 'downbystudentroll'])->name('admin.exam_results.downbystudentroll');
         Route::post('exam_results/downbypaperwise', [PdfController::class, 'downbypaperwise'])->name('admin.exam_results.downbypaperwise');
         Route::post('exam_results/downbytest_paper', [PdfController::class, 'downbytest_paper'])->name('admin.exam_results.downbytest_paper');
-
+        Route::post('timetable/pdf', [PdfController::class, 'timetable_pdf'])->name('admin.timetable.pdf');
+        Route::post('attendance/student_pdf', [PdfController::class, 'attendance_student_pdf'])->name('admin.attendance.student_pdf');
         // Test Result Route
         Route::get('test_result', [AdminController::class, 'testResult'])->name('admin.test_result');
         Route::get('exam_results/paper_wise_result', [AdminController::class, 'paperWiseResult'])->name('admin.paper_wise_result');
@@ -664,7 +665,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('acdemic/copy/subject_teacher_assign', [AdminController::class, 'acdemicCopySubjectTeacherAssign'])->name('admin.acdemic.copy.subject_teacher_assign');
         Route::get('exam_master/copy/exam_setup', [AdminController::class, 'examMasterCopyExamSetup'])->name('admin.exam_master.copy.exam_setup');
         Route::get('exam_master/copy/exam_paper', [AdminController::class, 'examMasterCopyExamPaper'])->name('admin.exam_master.copy.exam_paper');
-
+        Route::post('timetable/pdf', [PdfController::class, 'timetable_pdf'])->name('admin.timetable.pdf');
         
         // Soap routes
         Route::get('soap/index', [AdminController::class, 'soap'])->name('admin.soap');
@@ -709,6 +710,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('soap_log/index', [AdminController::class, 'soapLog'])->name('admin.soap_log');
         Route::get('soap_log/list', [AdminController::class, 'getSoapLogList'])->name('admin.soap_log.list');
         // Route::get('student/list', [AdminController::class, 'studentList'])->name('admin.student.list');
+        Route::post('soap_student_id', [CommonController::class, 'soapStudentID'])->name('admin.settings.soap_student_id');
         // scedule download
         Route::post('scedule/exam_schedule_download_excel', [CommonController::class, 'examScheduleDownloadExcel'])->name('admin.exam_schedule_download_excel');
     });
@@ -924,6 +926,8 @@ Route::group(['prefix' => 'staff'], function () {
         Route::post('add_daily_report', [StaffController::class, 'addDailyReport'])->name('staff.classroom.add_daily_report');
         Route::post('add_daily_report_remarks', [StaffController::class, 'addDailyReportRemarks'])->name('staff.classroom.add_daily_report_remarks');
         Route::post('studentleave/update', [StaffController::class, 'getstudentleave_update'])->name('staff.studentleave.update');
+        // download pdf
+        Route::post('timetable/pdf', [PdfController::class, 'timetable_pdf'])->name('staff.timetable.pdf');
     });
 });
 // TEACHER CONTROLLER START
@@ -1043,7 +1047,7 @@ Route::group(['prefix' => 'teacher'], function () {
         Route::post('exam_results/downbysubject', [PdfController::class, 'downbysubject'])->name('teacher.exam_results.downbysubject');
         Route::post('exam_results/downbystudent', [PdfController::class, 'downbystudent'])->name('teacher.exam_results.downbystudent');
         Route::post('exam_results/downbypaperwise', [PdfController::class, 'downbypaperwise'])->name('teacher.exam_results.downbypaperwise');
-
+        Route::post('timetable/pdf', [PdfController::class, 'timetable_pdf'])->name('teacher.timetable.pdf');
     });
 });
 // TEACHER CONTROLLER END

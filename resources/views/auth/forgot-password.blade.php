@@ -28,7 +28,56 @@
 
 </head>
 
-<body class="body bg">
+<style>
+    @media only screen and (min-device-width: 280px) and (max-device-width: 653px) {
+        .card {
+            width: 137%;
+        }
+
+        .passrecov {
+            font-weight: 800;
+            font-size: 25px;
+            line-height: 48px;
+            letter-spacing: -0.02em;
+            color: #343556;
+        }
+
+        .opoos {
+            padding: 0px 89px 0px 0px;
+            line-height: 15px;
+        }
+    }
+
+    @media only screen and (min-device-width: 320px) and (max-device-width: 614px) {
+        .card {
+            width: 115%;
+        }
+
+        .opoos {
+            padding: 0px 14px 0px 0px;
+        }
+    }
+
+    @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+        .card {
+            width: 100%;
+        }
+    }
+
+    @media only screen and (min-device-width: 360px) and (max-device-width: 740px) {
+        .card {
+            width: 100%;
+        }
+    }
+
+    @media only screen and (min-device-width: 412px) and (max-device-width: 915px) {
+        .card {
+            width: 100%;
+        }
+    }
+</style>
+
+<body class="body password">
     <div class="account-pages mt-5 mb-5">
         <div class="container">
             <div class="row justify-content-center">
@@ -114,7 +163,6 @@
 
 <script>
     $('#send').on('click', function() {
-        console.log('124', 12)
         var $this = $(this);
         $this.button('loading');
         setTimeout(function() {

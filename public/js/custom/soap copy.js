@@ -125,58 +125,50 @@ $(function () {
                 }, 'json');
             } else if (tab == "log") {
                 // soapLogTable();
-                console.log("dsfhdshfh");
+                console.log("log");
+                $.ajax({
+                    url: soapLogList,
+                    method: "GET",
+                    success: function (data) {
+                        console.log('data', data)
+                    }
+                });
                 $('#log-table').DataTable({
-                    processing: true,
-                    info: true,
+                    // processing: true,
+                    // order: [[0, 'asc']],
                     bDestroy: true,
-                    // dom: 'lBfrtip',
-                    dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+                    processing: true,
+                    autoWidth: true,
+                    dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-4'><'col-sm-4'f>>" +
                         "<'row'<'col-sm-12'tr>>" +
-                        "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+                        "<'row'<'col-sm-5'i><'col-sm-7'p>>",
                     buttons: [],
-                    // serverSide: true,
-                    // ajax: {
-                    //     url: soapLogList,
-                    //     // data: function (d) {
-                    //     //     console.log("sds")
-                    //     //     console.log(d.student_id);
-                    //     //     d.student_id = $('#student_id').val()
-                    //     // }
-                    //     type: "post",
-                    //     data:{
-                    //         student_id : $('#student_id').val()
-                    //     },
-                    // },
+                    oLanguage: {
+                        sProcessing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
+                    },
                     "ajax": {
                         url: soapLogList,
                         cache: false,
                         dataType: "json",
+                        // data: { month:getSelectedMonth },
+
+                        // data: formData,
                         data: {
-                            student_id: $('#student_id').val()
+                            student_id : $('#student_id').val()
                         },
                         type: "get",
                         // contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
                         // processData: true, // NEEDED, DON'T OMIT THIS
-                        // headers: {
-                        //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        // },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
                         "dataSrc": function (json) {
                             console.log("topPerformance json");
                             console.log(json);
                             // $("#mydata").val(json.recordsTotal);
                             return json.data;
-                        },
-                        error: function (error) {
-                            console.log("error")
-                            console.log(error)
                         }
                     },
-                    "pageLength": 10,
-                    "aLengthMenu": [
-                        [5, 10, 25, 50, -1],
-                        [5, 10, 25, 50, "All"]
-                    ],
                     columns: [
                         {
                             searchable: false,
@@ -203,8 +195,79 @@ $(function () {
                             data: 'date',
                             name: 'date'
                         },
+
                     ],
                 });
+                // $('#log-table').DataTable({
+                //     processing: true,
+                //     info: true,
+                //     bDestroy: true,
+                //     dom: 'lBfrtip',
+                //     // dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+                //     //     "<'row'<'col-sm-12'tr>>" +
+                //     //     "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+                //     buttons: [
+                //         // {
+                //         //     extend: 'csv',
+                //         //     text: 'Download CSV',
+                //         //     extension: '.csv',
+                //         //     exportOptions: {
+                //         //         columns: 'th:not(:last-child)'
+                //         //     }
+                //         // },
+                //         // {
+                //         //     extend: 'pdf',
+                //         //     text: 'Download PDF',
+                //         //     extension: '.pdf',
+                //         //     exportOptions: {
+                //         //         columns: 'th:not(:last-child)'
+                //         //     }
+
+                //         // }
+                //     ],
+                //     serverSide: true,
+                //     ajax: {
+                //         url: soapLogList,
+                //         data: function (d) {
+                //             console.log("---");
+                //             console.log(d);
+                //             d.student_id = $('#student_id').val()
+                //         }
+                //     },
+                //     "pageLength": 10,
+                //     "aLengthMenu": [
+                //         [5, 10, 25, 50, -1],
+                //         [5, 10, 25, 50, "All"]
+                //     ],
+                //     columns: [
+                //         {
+                //             searchable: false,
+                //             data: 'DT_RowIndex',
+                //             name: 'DT_RowIndex'
+                //         },
+                //         {
+                //             data: 'soap_text',
+                //             name: 'soap_text'
+                //         },
+                //         {
+                //             data: 'soap_type',
+                //             name: 'soap_type'
+                //         },
+                //         {
+                //             data: 'referred_by',
+                //             name: 'referred_by'
+                //         },
+                //         {
+                //             data: 'type',
+                //             name: 'type'
+                //         },
+                //         {
+                //             data: 'date',
+                //             name: 'date'
+                //         },
+                //     ],
+                // });
+
                 // $.ajax({
                 //     url: soapLogList,
                 //     method: "GET",

@@ -742,4 +742,196 @@ class PdfController extends Controller
             // return $pdf->stream();
         }
     }
+    public function timetable_pdf(Request $request)
+    {
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+
+
+        $timetable = Helper::PostMethod(config('constants.api.timetable_list'), $data);
+        // dd($timetable);
+        $days = array(
+            'sunday',
+            'monday',
+            'tuesday',
+            'wednesday',
+            'thursday',
+            'friday',
+            'saturday'
+        );
+
+        if ($timetable['code'] == "200") {
+            $max = $timetable['data']['max'];
+
+            $response = "";
+            $response .= '<div class="table-responsive">
+        <table width="100%" style="border-collapse: collapse; border: 0px;">';
+            $response .= '<tr><td class="center" style="border: 1px solid; padding:12px;">Day/Period</td>';
+            for ($i = 1; $i <= $max; $i++) {
+                $response .= '<td class="centre" style="border: 1px solid; padding:12px;">' . $i . '</td>';
+            }
+            $response .= '</tr>';
+            foreach ($days as $day) {
+
+                if (!isset($timetable['data']['week'][$day]) && ($day == "saturday" || $day == "sunday")) {
+                } else {
+
+                    $response .= '<tr><td class="center" style="border: 1px solid; padding:12px;">' . strtoupper($day) . '</td>';
+                    $row = 0;
+                    foreach ($timetable['data']['timetable'] as $table) {
+                        if ($table['day'] == $day) {
+                            $start_time = date('H:i', strtotime($table['time_start']));
+                            $end_time = date('H:i', strtotime($table['time_end']));
+                            $response .= '<td style="border: 1px solid; padding:12px;">';
+                            if ($table['break'] == "1") {
+                                $response .= '<b>' . (isset($table['break_type']) ? $table['break_type'] : "") . '</b><br>';
+                                $response .= '<b>(' . $start_time . ' - ' . $end_time . ' )<b><br>';
+                                if (isset($table['hall_no'])) {
+                                    $response .= '<b>' . $table['hall_no'] . '</b><br>';
+                                }
+                            } else {
+                                if ($table['subject_name']) {
+                                    $subject = $table['subject_name'];
+                                } else {
+                                    $subject = (isset($table['break_type']) ? $table['break_type'] : "");
+                                }
+                                $response .= '<b>' . $subject . '</b><br>';
+                                $response .= '<b>(' . $start_time . ' - ' . $end_time . ' )<b><br>';
+                                if ($table['teacher_name']) {
+                                    $response .= '<b>' . $table['teacher_name'] . '</b><br>';
+                                }
+                                if (isset($table['hall_no'])) {
+                                    $response .= '<b>' . $table['hall_no'] . '</b><br>';
+                                }
+                            }
+                            $response .= '</td>';
+                            $row++;
+                        }
+                    }
+                    while ($row < $max) {
+                        $response .= '<td class="center" style="border: 1px solid; padding:12px;">N/A</td>';
+                        $row++;
+                    }
+                    $response .= '</tr>';
+                }
+            }
+            $response .= '</table></div>';
+
+            $response;
+        }
+        // dd($response);
+        $pdf = \App::make('dompdf.wrapper');
+        // set size
+        $customPaper = array(0, 0, 2880.00, 1620.00);
+        $pdf->set_paper($customPaper);
+        // $paper_size = array(0, 0, 360, 360);
+        // $pdf->set_paper($paper_size);
+        $pdf->loadHTML($response);
+        // filename
+        $now = now();
+        $name = strtotime($now);
+        $fileName = "timetable" . $name . ".pdf";
+        return $pdf->download($fileName);
+    }
+    public function attendance_student_pdf(Request $request)
+    {
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'subject_id' => $request->subject_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
+            'year_month' => $request->year_month,
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $get_attendance_list_teacher = Helper::PostMethod(config('constants.api.get_attendance_list_teacher'), $data);
+        dd($get_attendance_list_teacher);
+        $days = array(
+            'sunday',
+            'monday',
+            'tuesday',
+            'wednesday',
+            'thursday',
+            'friday',
+            'saturday'
+        );
+
+        if ($timetable['code'] == "200") {
+            $max = $timetable['data']['max'];
+
+            $response = "";
+            $response .= '<div class="table-responsive">
+        <table width="100%" style="border-collapse: collapse; border: 0px;">';
+            $response .= '<tr><td class="center" style="border: 1px solid; padding:12px;">Day/Period</td>';
+            for ($i = 1; $i <= $max; $i++) {
+                $response .= '<td class="centre" style="border: 1px solid; padding:12px;">' . $i . '</td>';
+            }
+            $response .= '</tr>';
+            foreach ($days as $day) {
+
+                if (!isset($timetable['data']['week'][$day]) && ($day == "saturday" || $day == "sunday")) {
+                } else {
+
+                    $response .= '<tr><td class="center" style="border: 1px solid; padding:12px;">' . strtoupper($day) . '</td>';
+                    $row = 0;
+                    foreach ($timetable['data']['timetable'] as $table) {
+                        if ($table['day'] == $day) {
+                            $start_time = date('H:i', strtotime($table['time_start']));
+                            $end_time = date('H:i', strtotime($table['time_end']));
+                            $response .= '<td style="border: 1px solid; padding:12px;">';
+                            if ($table['break'] == "1") {
+                                $response .= '<b>' . (isset($table['break_type']) ? $table['break_type'] : "") . '</b><br>';
+                                $response .= '<b>(' . $start_time . ' - ' . $end_time . ' )<b><br>';
+                                if (isset($table['hall_no'])) {
+                                    $response .= '<b>' . $table['hall_no'] . '</b><br>';
+                                }
+                            } else {
+                                if ($table['subject_name']) {
+                                    $subject = $table['subject_name'];
+                                } else {
+                                    $subject = (isset($table['break_type']) ? $table['break_type'] : "");
+                                }
+                                $response .= '<b>' . $subject . '</b><br>';
+                                $response .= '<b>(' . $start_time . ' - ' . $end_time . ' )<b><br>';
+                                if ($table['teacher_name']) {
+                                    $response .= '<b>' . $table['teacher_name'] . '</b><br>';
+                                }
+                                if (isset($table['hall_no'])) {
+                                    $response .= '<b>' . $table['hall_no'] . '</b><br>';
+                                }
+                            }
+                            $response .= '</td>';
+                            $row++;
+                        }
+                    }
+                    while ($row < $max) {
+                        $response .= '<td class="center" style="border: 1px solid; padding:12px;">N/A</td>';
+                        $row++;
+                    }
+                    $response .= '</tr>';
+                }
+            }
+            $response .= '</table></div>';
+
+            $response;
+        }
+        // dd($response);
+        $pdf = \App::make('dompdf.wrapper');
+        // set size
+        $customPaper = array(0, 0, 2880.00, 1620.00);
+        $pdf->set_paper($customPaper);
+        // $paper_size = array(0, 0, 360, 360);
+        // $pdf->set_paper($paper_size);
+        $pdf->loadHTML($response);
+        // filename
+        $now = now();
+        $name = strtotime($now);
+        $fileName = "timetable" . $name . ".pdf";
+        return $pdf->download($fileName);
+    }
 }

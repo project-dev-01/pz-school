@@ -193,4 +193,15 @@ class CommonController extends Controller
     {
         return Excel::download(new ExamScheduleDownload($request->exam_name,$request->class_section_name,$request->class_id, $request->section_id, $request->exam_id, $request->semester_id, $request->session_id), 'ExamSchedule.xlsx');
     }
+    public function soapStudentID(Request $request)
+    {
+        // dd($request);
+        if (session()->has('soap_student_id') || $request->soap_student_id) {
+            session()->pull('soap_student_id');
+            $request->session()->put('soap_student_id', $request->soap_student_id);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
