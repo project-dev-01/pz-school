@@ -160,7 +160,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="old_student_body">
-                                                    @foreach($soap_student_list as $key=>$student)
+                                                    @forelse($soap_student_list as $key=>$student)
                                                         <tr class="student-row">
                                                             @php $key++; @endphp
                                                             <td>
@@ -183,7 +183,11 @@
                                                                 {{$student['section_name']}}
                                                             </td>
                                                         </tr>
-                                                    @endforeach
+                                                    @empty
+                                                        <tr >
+                                                            <td colspan="6" class="text-center">No Data Available</td>
+                                                        </tr>
+                                                    @endforelse
                                                 </tbody>
                                             </table>
                                         </div>
@@ -252,6 +256,9 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="new_student_body">
+                                                    <tr >
+                                                        <td colspan="6" class="text-center">No Data Available</td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -343,7 +350,7 @@
                                                                                 <span class="fas fa-user-graduate"></span>
                                                                             </div>
                                                                         </div>
-                                                                        <input type="text" name="fname" class="form-control alloptions" maxlength="50" id="fname" placeholder="Ahmad Ali" aria-describedby="inputGroupPrepend">
+                                                                        <input type="text" name="fname" class="form-control alloptions" maxlength="50" id="fname" placeholder="Ahmad Ali" aria-describedby="inputGroupPrepend" readonly>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -356,14 +363,14 @@
                                                                                 <span class="fas fa-user-graduate"></span>
                                                                             </div>
                                                                         </div>
-                                                                        <input type="text" name="lname" class="form-control alloptions" maxlength="50" id="lname" placeholder="Muhammad Jaafar" aria-describedby="inputGroupPrepend">
+                                                                        <input type="text" name="lname" class="form-control alloptions" maxlength="50" id="lname" placeholder="Muhammad Jaafar" aria-describedby="inputGroupPrepend" readonly>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="gender">Gender</label>
-                                                                    <select id="gender" name="gender" class="form-control">
+                                                                    <select id="gender" name="gender" class="form-control" disabled>
                                                                         <option value="">Select Gender
                                                                         </option>
                                                                         <option value="Male">Male
@@ -379,7 +386,7 @@
                                                                 <div class="form-group">
                                                                     <label for="blooddgrp">Blood
                                                                         Group</label>
-                                                                    <select id="blooddgrp" name="blooddgrp" class="form-control">
+                                                                    <select id="blooddgrp" name="blooddgrp" class="form-control" disabled>
                                                                         <option value="">Pick Blood Type
                                                                         </option>
                                                                         <option>O+</option>
@@ -403,7 +410,7 @@
                                                                                 <span class="fas fa-birthday-cake"></span>
                                                                             </div>
                                                                         </div>
-                                                                        <input type="text" name="dob" class="form-control" id="dob" placeholder="DD-MM-YYYY" aria-describedby="inputGroupPrepend">
+                                                                        <input type="text" name="dob" class="form-control" id="dob" placeholder="DD-MM-YYYY" aria-describedby="inputGroupPrepend" readonly>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -411,7 +418,7 @@
                                                                 <div class="form-group">
                                                                     <label for="Passport">Passport
                                                                         Number</label>
-                                                                    <input type="text" maxlength="50" id="passport" class="form-control alloptions" placeholder="Passport Number" name="txt_passport">
+                                                                    <input type="text" maxlength="50" id="passport" class="form-control alloptions" placeholder="Passport Number" name="txt_passport" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -420,13 +427,13 @@
                                                                 <div class="form-group">
                                                                     <label for="txt_nric">NRIC
                                                                         Number</label>
-                                                                    <input type="text" maxlength="50" id="txt_nric" class="form-control alloptions" placeholder="Identifaction Number" name="txt_nric" data-parsley-trigger="change">
+                                                                    <input type="text" maxlength="50" id="txt_nric" class="form-control alloptions" placeholder="Identifaction Number" name="txt_nric" data-parsley-trigger="change" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="txt_religion">Religion</label>
-                                                                    <select class="form-control" name="txt_religion" id="religion">
+                                                                    <select class="form-control" name="txt_religion" id="religion" disabled>
                                                                         <option value="">Choose Religion</option>
                                                                         @forelse($religion as $r)
                                                                         <option value="{{$r['id']}}">{{$r['religions_name']}}</option>
@@ -438,7 +445,7 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="txt_caste">Race</label>
-                                                                    <select class="form-control" name="txt_race" id="race">
+                                                                    <select class="form-control" name="txt_race" id="race" disabled>
                                                                         <option value="">Choose Race</option>
                                                                         @forelse($races as $r)
                                                                         <option value="{{$r['id']}}">{{$r['races_name']}}</option>
@@ -455,19 +462,19 @@
                                                                 <div class="form-group">
                                                                     <label for="txt_mobile_no">Mobile
                                                                         No<span class="text-danger">*</span></label>
-                                                                    <input type="tel" class="form-control" name="txt_mobile_no" id="txt_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" data-parsley-trigger="change">
+                                                                    <input type="tel" class="form-control" name="txt_mobile_no" id="txt_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" data-parsley-trigger="change" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="drp_country">Country</label>
-                                                                    <input type="text" maxlength="50" id="drp_country" class="form-control alloptions" placeholder="Country" name="drp_country" data-parsley-trigger="change">
+                                                                    <input type="text" maxlength="50" id="drp_country" class="form-control alloptions" placeholder="Country" name="drp_country" data-parsley-trigger="change" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="drp_state">State/Province</label>
-                                                                    <input type="text" maxlength="50" id="drp_state" class="form-control alloptions" placeholder="State/Province" name="drp_state" data-parsley-trigger="change">
+                                                                    <input type="text" maxlength="50" id="drp_state" class="form-control alloptions" placeholder="State/Province" name="drp_state" data-parsley-trigger="change" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -475,28 +482,28 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="drp_city">City</label>
-                                                                    <input type="text" maxlength="50" id="drp_city" class="form-control alloptions" placeholder="City" name="drp_city" data-parsley-trigger="change">
+                                                                    <input type="text" maxlength="50" id="drp_city" class="form-control alloptions" placeholder="City" name="drp_city" data-parsley-trigger="change" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="drp_post_code">Zip/Postal
                                                                         Code</label>
-                                                                    <input type="text" maxlength="50" id="drp_post_code" class="form-control alloptions" placeholder="Zip/Postal_Code" name="drp_post_code" data-parsley-trigger="change">
+                                                                    <input type="text" maxlength="50" id="drp_post_code" class="form-control alloptions" placeholder="Zip/Postal_Code" name="drp_post_code" data-parsley-trigger="change" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="txtarea_paddress">Address
                                                                         1</label>
-                                                                    <input type="text" maxlength="255" id="txtarea_address" class="form-control alloptions" placeholder="Address 1" name="txtarea_paddress" data-parsley-trigger="change">
+                                                                    <input type="text" maxlength="255" id="txtarea_address" class="form-control alloptions" placeholder="Address 1" name="txtarea_paddress" data-parsley-trigger="change" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="txtarea_permanent_address">Address
                                                                         2</label>
-                                                                    <input type="text" maxlength="255" id="txtarea_permanent_address" class="form-control alloptions" placeholder="Address 2" name="txtarea_permanent_address" data-parsley-trigger="change">
+                                                                    <input type="text" maxlength="255" id="txtarea_permanent_address" class="form-control alloptions" placeholder="Address 2" name="txtarea_permanent_address" data-parsley-trigger="change" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -515,7 +522,7 @@
                                                                 <div class="form-group">
                                                                     <label for="btwyears">Academic
                                                                         Year<span class="text-danger">*</span></label>
-                                                                    <select id="btwyears" class="form-control" name="year">
+                                                                    <select id="btwyears" class="form-control" name="year" disabled>
                                                                         <option value="">Choose Academic Year</option>
                                                                         @forelse($academic_year_list as $r)
                                                                         <option value="{{$r['id']}}">{{$r['name']}}</option>
@@ -529,14 +536,14 @@
                                                                 <div class="form-group">
                                                                     <label for="txt_regiter_no">Register
                                                                         No<span class="text-danger">*</span></label>
-                                                                    <input type="text" id="txt_regiter_no" class="form-control" name="txt_regiter_no" placeholder="Registration Number" data-parsley-trigger="change">
+                                                                    <input type="text" id="txt_regiter_no" class="form-control" name="txt_regiter_no" placeholder="Registration Number" data-parsley-trigger="change" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="txt_roll_no">Roll
                                                                         No<span class="text-danger">*</span></label>
-                                                                    <input type="text" id="txt_roll_no" class="form-control" name="txt_roll_no" placeholder="Roll No" data-parsley-trigger="change">
+                                                                    <input type="text" id="txt_roll_no" class="form-control" name="txt_roll_no" placeholder="Roll No" data-parsley-trigger="change" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -552,14 +559,14 @@
                                                                                 <span class="far fa-calendar-alt"></span>
                                                                             </div>
                                                                         </div>
-                                                                        <input type="text" class="form-control" id="admission_date" name="admission_date" placeholder="DD-MM-YYYY" aria-describedby="inputGroupPrepend">
+                                                                        <input type="text" class="form-control" id="admission_date" name="admission_date" placeholder="DD-MM-YYYY" aria-describedby="inputGroupPrepend" readonly>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="std_class_id">Grade<span class="text-danger">*</span></label>
-                                                                    <select id="std_class_id" class="form-control" name="std_class_id">
+                                                                    <select id="std_class_id" class="form-control" name="std_class_id" disabled>
                                                                         <option value="">Select Grade</option>
                                                                         @foreach($class as $cla)
                                                                         <option value="{{$cla['id']}}">{{$cla['name']}}</option>
@@ -571,7 +578,7 @@
                                                                 <div class="form-group">
                                                                     <label for="std_section_id">Class
                                                                         Name<span class="text-danger">*</span></label>
-                                                                    <select id="std_section_id" class="form-control" name="std_section_id">
+                                                                    <select id="std_section_id" class="form-control" name="std_section_id" disabled>
                                                                         <option value="">Select Class</option>
                                                                     </select>
                                                                 </div>
@@ -581,7 +588,7 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="categy">Category<span class="text-danger">*</span></label>
-                                                                    <select id="categy" name="categy" class="form-control">
+                                                                    <select id="categy" name="categy" class="form-control" disabled>
                                                                         <option value="">Choose the
                                                                             Category</option>
                                                                         <option value="1">One</option>
@@ -592,7 +599,7 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="std_session_id">Session</label>
-                                                                    <select id="std_session_id" class="form-control" name="std_session_id">
+                                                                    <select id="std_session_id" class="form-control" name="std_session_id" disabled>
                                                                         <option value="0">Select Session</option>
                                                                         @foreach($session as $ses)
                                                                         <option value="{{$ses['id']}}">{{$ses['name']}}</option>
@@ -603,7 +610,7 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="std_semester_id">Semester</label>
-                                                                    <select id="std_semester_id" class="form-control" name="std_semester_id">
+                                                                    <select id="std_semester_id" class="form-control" name="std_semester_id" disabled>
                                                                         <option value="0">Select Semester</option>
                                                                         @foreach($semester as $sem)
                                                                         <option value="{{$sem['id']}}">{{$sem['name']}}</option>
@@ -627,7 +634,7 @@
                                                                 <div class="form-group">
                                                                     <label for="father_name">Father
                                                                         Name</label>
-                                                                    <input type="text" class="form-control" id="father_name" placeholder="John Leo" aria-describedby="inputGroupPrepend">
+                                                                    <input type="text" class="form-control" id="father_name" placeholder="John Leo" aria-describedby="inputGroupPrepend" readonly>
                                                                     <input type="hidden" name="father_id" id="father_id">
                                                                     <div id="father_list">
                                                                     </div>
@@ -637,7 +644,7 @@
                                                                 <div class="form-group">
                                                                     <label for="mother_name">Mother
                                                                         Name</label>
-                                                                    <input type="text" class="form-control" id="mother_name" placeholder="Aisha Mal" aria-describedby="inputGroupPrepend">
+                                                                    <input type="text" class="form-control" id="mother_name" placeholder="Aisha Mal" aria-describedby="inputGroupPrepend" readonly>
                                                                     <input type="hidden" name="mother_id" id="mother_id">
                                                                     <div id="mother_list">
                                                                     </div>
@@ -648,7 +655,7 @@
                                                                 <div class="form-group">
                                                                     <label for="guardian_name">Guardian
                                                                         Name</label>
-                                                                    <input type="text" class="form-control" id="guardian_name" placeholder="Amir Shan" aria-describedby="inputGroupPrepend">
+                                                                    <input type="text" class="form-control" id="guardian_name" placeholder="Amir Shan" aria-describedby="inputGroupPrepend" readonly>
                                                                     <input type="hidden" name="guardian_id" id="guardian_id">
                                                                     <div id="guardian_list">
                                                                     </div>
@@ -658,7 +665,7 @@
                                                                 <div class="form-group">
                                                                     <label for="relation">Guardian
                                                                         Relation</label>
-                                                                    <select class="form-control" name="relation" id="relation">
+                                                                    <select class="form-control" name="relation" id="relation" disabled>
                                                                         <option value="">Choose Relation</option>
                                                                         @forelse($relation as $r)
                                                                         <option value="{{$r['id']}}">{{$r['name']}}</option>

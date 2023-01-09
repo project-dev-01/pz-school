@@ -60,6 +60,9 @@
                                                     </thead>
 
                                                     <tbody id="subjective-category-{{ $category['id'] }}" class="subjective-category-table" data-type="1">
+                                                        <tr >
+                                                            <td colspan="5" class="text-center">No Data Available</td>
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div> <!-- end .table-responsive-->
@@ -96,6 +99,9 @@
                                                     </thead>
 
                                                     <tbody id="subjective-subject-table">
+                                                        <tr >
+                                                            <td colspan="5" class="text-center">No Data Available</td>
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div> <!-- end .table-responsive-->

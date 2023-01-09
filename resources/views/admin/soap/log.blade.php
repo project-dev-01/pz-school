@@ -27,6 +27,9 @@
                                         </thead>
 
                                         <tbody id="log-body">
+                                            <tr >
+                                                <td colspan="6" class="text-center">No Data Available</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div> <!-- end .table-responsive-->

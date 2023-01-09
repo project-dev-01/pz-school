@@ -55,6 +55,9 @@
                                                     </thead>
 
                                                     <tbody id="plan-category-{{ $category['id'] }}" class="plan-category-table" data-type="4">
+                                                        <tr >
+                                                            <td colspan="5" class="text-center">No Data Available</td>
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div> <!-- end .table-responsive-->
@@ -92,6 +95,9 @@
                                                     </thead>
 
                                                     <tbody id="plan-subject-table">
+                                                        <tr >
+                                                            <td colspan="5" class="text-center">No Data Available</td>
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div> <!-- end .table-responsive-->

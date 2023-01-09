@@ -251,10 +251,12 @@ $(function () {
                     method: "GET",
                     data: { token: token, branch_id: branchID, student_id: student },
                     success: function (data) {
-                        if (data.data.soap) {
+                        $("." + tab + "-category-table").append('<tr ><td colspan="5" class="text-center">No Data Available</td></tr>'); 
+                        if (data.data.soap.length > 0) {
                             $.each(data.data.soap, function (index, value) {
                                 var output = "";
                                 var table = tab + '-category-' + value.soap_category_id;
+                                $("#" + table).empty();
                                 var count = $('#' + tab + '-category-' + value.soap_category_id + ' tr:last').find('.count').text();
                                 if (!count) {
                                     count = 0;
@@ -271,7 +273,7 @@ $(function () {
                                 $("#" + table).append(output);
                             });
                         }
-                        if (data.data.subject) {
+                        if (data.data.subject.length > 0) {
                             $.each(data.data.subject, function (index, value) {
                                 if (value.soap_type_id == soap_type_id) {
                                     var result = "";
@@ -293,6 +295,8 @@ $(function () {
                                     $("#" + table_name).append(result);
                                 }
                             });
+                        } else {
+                            $("#" + tab + "-subject-table").append('<tr ><td colspan="5" class="text-center">No Data Available</td></tr>'); 
                         }
                     }
                 });

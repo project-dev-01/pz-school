@@ -56,6 +56,9 @@
                                                                                 </thead>
 
                                                                                 <tbody id="assessment-category-{{ $category['id'] }}" class="assessment-category-table" data-type="3">
+                                                                                    <tr >
+                                                                                        <td colspan="5" class="text-center">No Data Available</td>
+                                                                                    </tr>
                                                                                 </tbody>
                                                                             </table>
                                                                         </div> <!-- end .table-responsive-->
@@ -92,6 +95,9 @@
                 </thead>
 
                 <tbody id="assessment-subject-table">
+                    <tr >
+                        <td colspan="5" class="text-center">No Data Available</td>
+                    </tr>
                 </tbody>
             </table>
         </div> <!-- end .table-responsive-->
