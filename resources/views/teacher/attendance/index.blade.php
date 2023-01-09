@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Student Attendance')
+@section('title','Student Attendance Report')
 @section('content')
 <style>
     @media only screen and (min-device-width: 320px) and (max-device-width: 660px) {
@@ -32,7 +32,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title"> Attendance List</h4>
+                <h4 class="page-title"> Attendance Report</h4>
             </div>
         </div>
     </div>
@@ -43,7 +43,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
+                        <h4 class="navv">
                             Select Ground
                             <h4>
                     </li>
@@ -52,7 +52,7 @@
                 <div class="card-body">
                     <form id="attendanceFilter" autocomplete="off">
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="changeClassName">Grade<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
@@ -64,7 +64,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="sectionID">Class<span class="text-danger">*</span></label>
                                     <select id="sectionID" class="form-control" name="section_id">
@@ -72,7 +72,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="subjectID">Subject<span class="text-danger">*</span></label>
                                     <select id="subjectID" class="form-control" name="subject_id">
@@ -80,7 +80,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="semesterID">Semester</label>
                                     <select id="semesterID" class="form-control" name="semester_id">
@@ -91,7 +91,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="sessionID">Session</label>
                                     <select id="sessionID" class="form-control" name="session_id">
@@ -102,10 +102,10 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="class_date">Date<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="class_date" id="classDate" placeholder="MM-YYYY">
+                                    <input type="text" class="form-control" name="class_date" id="classDate" placeholder="YYYY-MM-DD">
                                 </div>
                             </div>
                         </div>
@@ -131,7 +131,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
+                        <h4 class="navv">
                             Attendance Report
                             <h4>
                     </li>
@@ -164,6 +164,18 @@
                     </div>
                     <!-- end row-->
                     <div class="form-group text-right m-b-0">
+                        <form method="post" action="{{ route('teacher.attendance.student_pdf')}}">
+                            @csrf
+                            <input type="hidden" name="subject_id" id="downExcelSubject">
+                            <input type="hidden" name="class_id" id="downExcelClass">
+                            <input type="hidden" name="section_id" id="downExcelSection">
+                            <input type="hidden" name="semester_id" id="downExcelSemester">
+                            <input type="hidden" name="session_id" id="downExcelSession">
+                            <input type="hidden" name="year_month" id="downExcelDate">
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                PDF
+                            </button>
+                        </form>
                         <form method="post" action="{{ route('teacher.student_attendance.excel')}}">
                             @csrf
                             <input type="hidden" name="subject" id="excelSubject">
@@ -172,7 +184,7 @@
                             <input type="hidden" name="semester" id="excelSemester">
                             <input type="hidden" name="session" id="excelSession">
                             <input type="hidden" name="date" id="excelDate">
-                            <button class="btn btn-primary-bl waves-effect waves-light" type="subit">
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
                                 Download
                             </button>
                         </form>
@@ -191,7 +203,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">
+                        <h4 class="navv">
                             Daily Present and Late Analysis
                             <h4>
                     </li>

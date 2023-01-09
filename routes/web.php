@@ -32,7 +32,7 @@ Route::get('/', function () {
     return redirect(route('admin.login'));
 });
 
-Route::get('/clear-cache', function() {
+Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
     Artisan::call('route:cache');
     Artisan::call('config:cache');
@@ -667,11 +667,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('exam_master/copy/exam_setup', [AdminController::class, 'examMasterCopyExamSetup'])->name('admin.exam_master.copy.exam_setup');
         Route::get('exam_master/copy/exam_paper', [AdminController::class, 'examMasterCopyExamPaper'])->name('admin.exam_master.copy.exam_paper');
         Route::post('timetable/pdf', [PdfController::class, 'timetable_pdf'])->name('admin.timetable.pdf');
-        
+
         // Soap routes
         Route::get('soap/index', [AdminController::class, 'soap'])->name('admin.soap');
         Route::get('soap/list', [AdminController::class, 'getSoapList'])->name('admin.soap.list');
-        Route::post('soap/add', [AdminController::class, 'addSoap'])->name('admin.soap.add'); 
+        Route::post('soap/add', [AdminController::class, 'addSoap'])->name('admin.soap.add');
         // Route::get('soap/edit/{id}', [AdminController::class, 'editSoap'])->name('admin.soap.edit');
         // Route::post('soap/delete', [AdminController::class, 'deleteSoap'])->name('admin.soap.delete');
 
@@ -699,7 +699,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('soap_notes/update', [AdminController::class, 'updateSoapNotes'])->name('admin.soap_notes.update');
         Route::post('soap_notes/delete', [AdminController::class, 'deleteSoapNotes'])->name('admin.soap_notes.delete');
 
-        
+
         // soap_subject routes
         Route::get('soap_subject/create', [AdminController::class, 'createSoapSubject'])->name('admin.soap_subject.create');
         Route::post('soap_subject/add', [AdminController::class, 'addSoapSubject'])->name('admin.soap_subject.add');
@@ -929,6 +929,7 @@ Route::group(['prefix' => 'staff'], function () {
         Route::post('studentleave/update', [StaffController::class, 'getstudentleave_update'])->name('staff.studentleave.update');
         // download pdf
         Route::post('timetable/pdf', [PdfController::class, 'timetable_pdf'])->name('staff.timetable.pdf');
+        Route::post('attendance/employee_pdf', [PdfController::class, 'attendance_employee_pdf'])->name('staff.attendance.employee_pdf');
     });
 });
 // TEACHER CONTROLLER START
@@ -1049,6 +1050,8 @@ Route::group(['prefix' => 'teacher'], function () {
         Route::post('exam_results/downbystudent', [PdfController::class, 'downbystudent'])->name('teacher.exam_results.downbystudent');
         Route::post('exam_results/downbypaperwise', [PdfController::class, 'downbypaperwise'])->name('teacher.exam_results.downbypaperwise');
         Route::post('timetable/pdf', [PdfController::class, 'timetable_pdf'])->name('teacher.timetable.pdf');
+        Route::post('attendance/student_pdf', [PdfController::class, 'attendance_student_pdf'])->name('teacher.attendance.student_pdf');
+        Route::post('attendance/employee_pdf', [PdfController::class, 'attendance_employee_pdf'])->name('teacher.attendance.employee_pdf');
     });
 });
 // TEACHER CONTROLLER END

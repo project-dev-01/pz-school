@@ -226,6 +226,16 @@
                     </div>
                     <!-- end row-->
                     <div class="form-group text-right m-b-0">
+                        <form method="post" action="{{ route('teacher.attendance.employee_pdf')}}">
+                            @csrf
+                            <input type="hidden" name="employee" id="downExcelEmployee">
+                            <input type="hidden" name="session" id="downExcelSession">
+                            <input type="hidden" name="department" id="downExcelDepartment">
+                            <input type="hidden" name="date" id="downExcelDate">
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                PDF
+                            </button>
+                        </form>
                         <form method="post" action="{{ route('teacher.attendance.excel')}}">
                             @csrf
                             <input type="hidden" name="department" id="excelDepartment">

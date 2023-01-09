@@ -69,7 +69,7 @@ $(function () {
             $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
         }
     });
-    
+
     $("#classDate").focus(function () {
         $(".ui-datepicker-calendar").hide();
         $("#ui-datepicker-div").position({
@@ -152,7 +152,7 @@ $(function () {
 
             var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
             //excel download
-                    
+
             $("#excelSubject").val(subject_id);
             $("#excelClass").val(class_id);
             $("#excelSection").val(section_id);
@@ -444,8 +444,8 @@ $(function () {
             $(this).closest('tr').find('.checkin').prop('readonly', true);
             $(this).closest('tr').find('.checkout').prop('readonly', true);
             $(this).closest('tr').find('.hours').prop('readonly', true);
-            
-        }else {
+
+        } else {
             $(this).closest('tr').find('.checkin').prop('readonly', false);
             $(this).closest('tr').find('.checkout').prop('readonly', false);
             $(this).closest('tr').find('.hours').prop('readonly', false);
@@ -555,7 +555,7 @@ $(function () {
             $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
         }
     });
-    
+
     $("#employeeDate").focus(function () {
         $(".ui-datepicker-calendar").hide();
         $("#ui-datepicker-div").position({
@@ -576,7 +576,7 @@ $(function () {
             $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
         }
     });
-    
+
     $("#employeeReportDate").focus(function () {
         $(".ui-datepicker-calendar").hide();
         $("#ui-datepicker-div").position({
@@ -611,7 +611,7 @@ $(function () {
             var firstDayTd = new Date(date.getFullYear(), date.getMonth(), 1);
             var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
             var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            
+
             //excel download
             $("#excelEmployee").val(employee);
             $("#excelSession").val(session);
@@ -641,7 +641,10 @@ $(function () {
 
                         var get_attendance_list = response.data.staff_details;
                         // var late_present_graph = response.data.late_present_graph;
-
+                        // pdf download
+                        $("#downExcelEmployee").val(employee);
+                        $("#downExcelSession").val(session);
+                        $("#downExcelDate").val(year_month);
 
                         $("#employeeAttendanceReportListShow").empty(attendanceListShow);
                         var attendanceListShow = "";
@@ -672,7 +675,7 @@ $(function () {
                             // add functions tr start
                             get_attendance_list.forEach(function (res) {
                                 attendanceListShow += '<tr>' +
-                                    '<td>' + res.session_name + '</td>'+
+                                    '<td>' + res.session_name + '</td>' +
                                     '<td class="text-left staffRow">' +
                                     '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light staffDetails" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">' +
                                     '<input type="hidden" value="' + res.staff_id + '">';
@@ -947,18 +950,18 @@ $(function () {
             row += '<div class="form-group">';
             row += '<select  class="form-control reason"  name="attendance[' + count + '][reason_id]">';
             row += '<option value="">Select Reasons</option>';
-            if(val.leave) {
+            if (val.leave) {
                 var reason = val.leave.reason_id;
                 var status = "absent";
-            }else {
+            } else {
                 var reason = val.details.reason_id;
                 var status = val.details.status;
             }
-            if (status=="absent") {
+            if (status == "absent") {
                 $.each(val.absent_reason, function (keys, val_rea) {
                     row += '<option value="' + val_rea.id + '" ' + (reason == val_rea.id ? "selected" : "") + '>' + val_rea.name + '</option>';
                 });
-            } else if (status=="excused") {
+            } else if (status == "excused") {
                 $.each(val.excused_reason, function (keys, val_rea) {
                     row += '<option value="' + val_rea.id + '" ' + (reason == val_rea.id ? "selected" : "") + '>' + val_rea.name + '</option>';
                 });
@@ -967,7 +970,7 @@ $(function () {
             row += '</div>';
             row += '</td>';
             row += '<td width="15%">';
-            
+
             if (val.leave) {
                 row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="' + val.leave.remarks + '">';
             } else {
@@ -976,7 +979,7 @@ $(function () {
                 } else {
                     row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="">';
                 }
-            }   
+            }
             row += '</td>';
             row += '</tr>';
 
