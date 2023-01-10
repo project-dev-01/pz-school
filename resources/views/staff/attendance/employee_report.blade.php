@@ -1,6 +1,13 @@
 @extends('layouts.admin-layout')
 @section('title','Employee Attendance Report ')
 @section('content')
+<style>
+    .btn-primary-bl {
+        width: 100px;
+        margin-bottom: 5px;
+        margin-right: 5px;
+    }
+</style>
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -226,24 +233,29 @@
                     </div>
                     <!-- end row-->
                     <div class="form-group text-right m-b-0">
-                        <form method="post" action="{{ route('staff.attendance.employee_pdf')}}">
-                            @csrf
-                            <input type="hidden" name="employee" id="downExcelEmployee">
-                            <input type="hidden" name="session" id="downExcelSession">
-                            <input type="hidden" name="date" id="downExcelDate">
-                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                PDF
-                            </button>
-                        </form>
+
                         <form method="post" action="{{ route('staff.attendance.excel')}}">
                             @csrf
                             <input type="hidden" name="department" id="excelDepartment">
                             <input type="hidden" name="employee" id="excelEmployee">
                             <input type="hidden" name="session" id="excelSession">
                             <input type="hidden" name="date" id="excelDate">
-                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                Download
-                            </button>
+                            <div class="clearfix float-right">
+                                <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                    Download
+                                </button>
+                            </div>
+                        </form>
+                        <form method="post" action="{{ route('staff.attendance.employee_pdf')}}">
+                            @csrf
+                            <input type="hidden" name="employee" id="downExcelEmployee">
+                            <input type="hidden" name="session" id="downExcelSession">
+                            <input type="hidden" name="date" id="downExcelDate">
+                            <div class="clearfix float-right">
+                                <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                    PDF
+                                </button>
+                            </div>
                         </form>
                     </div>
 

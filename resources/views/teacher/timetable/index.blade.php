@@ -31,6 +31,12 @@
         }
 
     }
+
+    .btn-primary-bl {
+        width: 100px;
+        margin-bottom: 5px;
+        margin-right: 5px;
+    }
 </style>
 <!-- Start Content-->
 <div class="container-fluid">
@@ -159,7 +165,7 @@
                                     <input type="hidden" name="academic_year" id="downAcademicYear">
                                     <div class="clearfix float-right">
                                         <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">PDF</button>
-                                        <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel" style="float:right;">Download</button>
+                                        <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">Download</button>
                                     </div>
                                 </form>
                             </div>
