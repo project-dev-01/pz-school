@@ -5058,4 +5058,34 @@ class ApiControllerOne extends BaseController
             }
         }
     }
+    // get Student Details
+    public function getStudentDetails(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'academic_session_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            $studentData = $createConnection->table('enrolls as en')
+                ->select(
+                    'st.id',
+                    DB::raw('CONCAT(st.first_name, " ", st.last_name) as name')
+                )
+                ->join('students as st', 'st.id', '=', 'en.student_id')
+                ->where([
+                    ['en.class_id', '=', $request->class_id],
+                    ['en.section_id', '=', $request->section_id],
+                    ['en.active_status', '=', '0'],
+                    ['en.academic_session_id', '=', $request->academic_session_id]
+                ])
+                ->get();
+            return $this->successResponse($studentData, 'students data fetch successfully');
+        }
+    }
 }

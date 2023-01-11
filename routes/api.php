@@ -746,5 +746,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('soap_log/add', [ApiControllerOne::class, 'addSoapLog']);
     // add fees
     Route::post('fees/yearly/add', [ApiControllerOne::class, 'feesYearlyAdd']);
+    Route::post('get_student_details', [ApiControllerOne::class, 'getStudentDetails']);
 
 });
