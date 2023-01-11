@@ -1,7 +1,42 @@
 @extends('layouts.forum-layout')
 @section('content')
+<link href="{{ asset('public/css/custom/common.css') }}" rel="stylesheet" type="text/css" />
+<!-- <link href="{{ asset('public/css/custom/Responsive.css') }}" rel="stylesheet" type="text/css" /> -->
+<link href="{{ asset('public/css/custom/style.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
+
+<style>
+    .nav-tabs {
+        background-color: white;
+    }
+
+    .form-default .form-control {
+        background: none;
+        color: #1b2023;
+        font-size: 16px;
+        line-height: 25px;
+        border: none;
+        border-radius: 2px;
+        border: 1px solid #929fa7;
+    }
+
+    .tt-button-icon {
+        background-color: none;
+        border-radius: 2px;
+        border: 2px solid #e2e7ea;
+        display: block;
+        padding-top: 28px;
+        padding-bottom: 19px;
+        -webkit-transition: border 0.2s linear;
+        transition: border 0.2s linear;
+    }
+
+    .tt-button-icon {
+        background-color: none;
+    }
+</style>
 <main id="tt-pageContent">
-    <div class="container">
+    <div class="container card" style="background:white;">
         <div class="tt-wrapper-inner" id="createpostForumreset">
             <h1 class="tt-title-border">
                 Create New Topic
@@ -94,8 +129,8 @@
                 </div>
                 <div class="pt-editor">
                     <h6 class="pt-title">Topic Body</h6>
-                    <div class="pt-row">
-                        <div class="col-left">
+                    <div class="">
+                        <div class="">
                             <ul class="pt-edit-btn">
                                 <li><button type="button" class="btn-icon">
                                         <svg class="tt-icon">
@@ -167,7 +202,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <textarea name="tpbody" id="tpbody" class="form-control" rows="5" placeholder="Lets get started"></textarea>
+                        <textarea name="tpbody" id="tpbody" class="form-control" rows="5" placeholder="Lets get started" style="height:20px"></textarea>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
@@ -187,15 +222,14 @@
                         </div>
                         <div class="col-md-8" style="width: 800px;margin:0 auto;">
                             <div class="form-group">
-                                 <label for="inputTopic">User</label>
+                                <label for="inputTopic" class="col-3 col-form-label">User</label>
                                 <select name="states[]" id="selectedusers" class="form-control js-example-basic-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ...">>
-                                    
                                     <option value=""></option>
-                                        @if(!empty($usernames))
-                                        @foreach($usernames as $c)
-                                        <option value="{{$c['id']}}">{{$c['name']}}</option>
-                                        @endforeach
-                                        @endif
+                                    @if(!empty($usernames))
+                                    @foreach($usernames as $c)
+                                    <option value="{{$c['id']}}">{{$c['name']}}</option>
+                                    @endforeach
+                                    @endif
 
                                 </select>
                                 <input type="hidden" id="tags" name="tags">
@@ -348,13 +382,12 @@
 @section('scripts')
 <script src="{{ asset('public/js/custom/forum-createpost.js') }}"></script>
 <script>
-    
     function SimpleUploadAdapterPlugin(editor) {
-    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-        // Configure the URL to the upload script in your back-end here!
-        return new MyUploadAdapter(loader);
-    };
-}
+        editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+            // Configure the URL to the upload script in your back-end here!
+            return new MyUploadAdapter(loader);
+        };
+    }
 
     var myEditor;
 
@@ -371,107 +404,105 @@
         .catch(err => {
             console.error(err.stack);
         });
-
 </script>
 <script>
-class MyUploadAdapter {
-    // ...
-    constructor(loader) {
-        // The file loader instance to use during the upload.
-        this.loader = loader;
-    }
-    // Starts the upload process.
-    upload() {
-        return this.loader.file
-            .then(file => new Promise((resolve, reject) => {
-                this._initRequest();
-                this._initListeners(resolve, reject, file);
-                this._sendRequest(file);
-            }));
-    }
-
-    // Aborts the upload process.
-    abort() {
-        if (this.xhr) {
-            this.xhr.abort();
+    class MyUploadAdapter {
+        // ...
+        constructor(loader) {
+            // The file loader instance to use during the upload.
+            this.loader = loader;
         }
-    }
-    // Initializes the XMLHttpRequest object using the URL passed to the constructor.
-    _initRequest() {
-        const xhr = this.xhr = new XMLHttpRequest();
+        // Starts the upload process.
+        upload() {
+            return this.loader.file
+                .then(file => new Promise((resolve, reject) => {
+                    this._initRequest();
+                    this._initListeners(resolve, reject, file);
+                    this._sendRequest(file);
+                }));
+        }
 
-        // Note that your request may look different. It is up to you and your editor
-        // integration to choose the right communication channel. This example uses
-        // a POST request with JSON as a data structure but your configuration
-        // could be different.
-        xhr.open('POST', "{{ route('admin.forum.image.store') }}", true);
-        xhr.setRequestHeader('x-csrf-token', '{{csrf_token()}}');
-        xhr.responseType = 'json';
-    }
-
-    // Initializes XMLHttpRequest listeners.
-    _initListeners(resolve, reject, file) {
-        const xhr = this.xhr;
-        const loader = this.loader;
-        const genericErrorText = `Couldn't upload file: ${ file.name }.`;
-
-        xhr.addEventListener('error', () => reject(genericErrorText));
-        xhr.addEventListener('abort', () => reject());
-        xhr.addEventListener('load', () => {
-            const response = xhr.response;
-
-            // This example assumes the XHR server's "response" object will come with
-            // an "error" which has its own "message" that can be passed to reject()
-            // in the upload promise.
-            //
-            // Your integration may handle upload errors in a different way so make sure
-            // it is done properly. The reject() function must be called when the upload fails.
-            if (!response || response.error) {
-                return reject(response && response.error ? response.error.message : genericErrorText);
+        // Aborts the upload process.
+        abort() {
+            if (this.xhr) {
+                this.xhr.abort();
             }
+        }
+        // Initializes the XMLHttpRequest object using the URL passed to the constructor.
+        _initRequest() {
+            const xhr = this.xhr = new XMLHttpRequest();
 
-            // If the upload is successful, resolve the upload promise with an object containing
-            // at least the "default" URL, pointing to the image on the server.
-            // This URL will be used to display the image in the content. Learn more in the
-            // UploadAdapter#upload documentation.
-            resolve( response
-            );
-        });
+            // Note that your request may look different. It is up to you and your editor
+            // integration to choose the right communication channel. This example uses
+            // a POST request with JSON as a data structure but your configuration
+            // could be different.
+            xhr.open('POST', "{{ route('admin.forum.image.store') }}", true);
+            xhr.setRequestHeader('x-csrf-token', '{{csrf_token()}}');
+            xhr.responseType = 'json';
+        }
 
-        // Upload progress when it is supported. The file loader has the #uploadTotal and #uploaded
-        // properties which are used e.g. to display the upload progress bar in the editor
-        // user interface.
-        if (xhr.upload) {
-            xhr.upload.addEventListener('progress', evt => {
-                if (evt.lengthComputable) {
-                    loader.uploadTotal = evt.total;
-                    loader.uploaded = evt.loaded;
+        // Initializes XMLHttpRequest listeners.
+        _initListeners(resolve, reject, file) {
+            const xhr = this.xhr;
+            const loader = this.loader;
+            const genericErrorText = `Couldn't upload file: ${ file.name }.`;
+
+            xhr.addEventListener('error', () => reject(genericErrorText));
+            xhr.addEventListener('abort', () => reject());
+            xhr.addEventListener('load', () => {
+                const response = xhr.response;
+
+                // This example assumes the XHR server's "response" object will come with
+                // an "error" which has its own "message" that can be passed to reject()
+                // in the upload promise.
+                //
+                // Your integration may handle upload errors in a different way so make sure
+                // it is done properly. The reject() function must be called when the upload fails.
+                if (!response || response.error) {
+                    return reject(response && response.error ? response.error.message : genericErrorText);
                 }
+
+                // If the upload is successful, resolve the upload promise with an object containing
+                // at least the "default" URL, pointing to the image on the server.
+                // This URL will be used to display the image in the content. Learn more in the
+                // UploadAdapter#upload documentation.
+                resolve(response);
             });
+
+            // Upload progress when it is supported. The file loader has the #uploadTotal and #uploaded
+            // properties which are used e.g. to display the upload progress bar in the editor
+            // user interface.
+            if (xhr.upload) {
+                xhr.upload.addEventListener('progress', evt => {
+                    if (evt.lengthComputable) {
+                        loader.uploadTotal = evt.total;
+                        loader.uploaded = evt.loaded;
+                    }
+                });
+            }
+        }
+        // Prepares the data and sends the request.
+        _sendRequest(file) {
+            // Prepare the form data.
+            const data = new FormData();
+            data.append('upload', file);
+            // Important note: This is the right place to implement security mechanisms
+            // like authentication and CSRF protection. For instance, you can use
+            // XMLHttpRequest.setRequestHeader() to set the request headers containing
+            // the CSRF token generated earlier by your application.
+            // Send the request.
+            this.xhr.send(data);
         }
     }
-    // Prepares the data and sends the request.
-    _sendRequest(file) {
-        // Prepare the form data.
-        const data = new FormData();
-        data.append('upload', file);
-        // Important note: This is the right place to implement security mechanisms
-        // like authentication and CSRF protection. For instance, you can use
-        // XMLHttpRequest.setRequestHeader() to set the request headers containing
-        // the CSRF token generated earlier by your application.
-        // Send the request.
-        this.xhr.send(data);
-    }
-}
 </script>
 <script>
-    document.querySelectorAll( 'oembed[url]' ).forEach( element => {
+    document.querySelectorAll('oembed[url]').forEach(element => {
         // Create the <a href="..." class="embedly-card"></a> element that Embedly uses
         // to discover the media.
-        const anchor = document.createElement( 'a' );
-        anchor.setAttribute( 'href', element.getAttribute( 'url' ) );
+        const anchor = document.createElement('a');
+        anchor.setAttribute('href', element.getAttribute('url'));
         anchor.className = 'embedly-card';
-        element.appendChild( anchor );
-    } );
+        element.appendChild(anchor);
+    });
 </script>
 @endsection

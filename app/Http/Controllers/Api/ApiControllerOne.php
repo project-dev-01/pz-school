@@ -3594,8 +3594,8 @@ class ApiControllerOne extends BaseController
                             ];
                             // insert data
                             $query = $conn->table('soap')->insert($data);
-                            $type="Added";
-                            $soap_text = $conn->table('soap_notes')->where('id',$note['soap_notes_id'])->first();
+                            $type = "Added";
+                            $soap_text = $conn->table('soap_notes')->where('id', $note['soap_notes_id'])->first();
                             // dd($soap_text);
                             // return $soap_text;
                             $this->addSoapLog($request, $type, $soap_text);
@@ -3712,9 +3712,9 @@ class ApiControllerOne extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             // get data
             $note = $conn->table('soap')->where('id', $id)->first();
-            $soap_text = $conn->table('soap_notes')->where('id',$note->soap_notes_id)->first();
-            $type="Deleted";
-            
+            $soap_text = $conn->table('soap_notes')->where('id', $note->soap_notes_id)->first();
+            $type = "Deleted";
+
             // dd($soap_text);
             $this->addSoapLog($request, $type, $soap_text);
             $query = $conn->table('soap')->where('id', $id)->delete();
@@ -4865,7 +4865,7 @@ class ApiControllerOne extends BaseController
             $details['details']['section_name'] = $section_name->name;
             return $this->successResponse($details, 'Exam Timetable record fetch successfully');
         }
-    }// getoldSoapStudentList
+    } // getoldSoapStudentList
     public function getOldSoapStudentList(Request $request)
     {
         $validator = \Validator::make($request->all(), [
@@ -4984,7 +4984,7 @@ class ApiControllerOne extends BaseController
         }
     }
 
-    
+
     // getSoapLogList
     public function getSoapLogList(Request $request)
     {
@@ -4998,14 +4998,14 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $SoapLogDetails = $conn->table('soap_logs')->select('soap_logs.*',DB::raw('DATE_FORMAT(soap_logs.created_at,"%d-%m-%Y") as date'),DB::raw('CONCAT(s.first_name, " ", s.last_name) as referred_by'))
+            $SoapLogDetails = $conn->table('soap_logs')->select('soap_logs.*', DB::raw('DATE_FORMAT(soap_logs.created_at,"%d-%m-%Y") as date'), DB::raw('CONCAT(s.first_name, " ", s.last_name) as referred_by'))
                 ->join('staffs as s', 'soap_logs.staff_id', '=', 's.id')
-                ->where('soap_logs.student_id',$request->student_id)->orderBy('created_at', 'DESC')->get();
+                ->where('soap_logs.student_id', $request->student_id)->orderBy('created_at', 'DESC')->get();
             return $this->successResponse($SoapLogDetails, 'Log record fetch successfully');
         }
     }
 
-    
+
 
     // add Soap Log
     public function addSoapLog($request, $type, $note)
@@ -5022,5 +5022,40 @@ class ApiControllerOne extends BaseController
             'type' => $type,
             'created_at' => date("Y-m-d H:i:s")
         ]);
+    }
+    public function feesYearlyAdd(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'fees_type' => 'required',
+            'student_id' => 'required',
+            'date' => 'required',
+            'payment_status' => 'required',
+            'collect_by' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $staffConn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            // insert data
+            $query = $staffConn->table('fees_yearly')->insert([
+                'fees_type' => $request->fees_type,
+                'student_id' => $request->student_id,
+                'date' => $request->date,
+                'payment_status' => $request->payment_status,
+                'collect_by' => $request->collect_by,
+                'created_at' => date("Y-m-d H:i:s")
+            ]);
+            $success = [];
+            if (!$query) {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            } else {
+                return $this->successResponse($success, 'Yearly fees has been successfully saved');
+            }
+        }
     }
 }
