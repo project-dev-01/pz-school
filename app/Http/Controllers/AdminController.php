@@ -6313,4 +6313,200 @@ class AdminController extends Controller
             })
             ->make(true);
     }
+
+    // index Payment Item
+    public function paymentItem()
+    {
+        return view('admin.payment_item.index');
+    }
+
+    public function addPaymentItem(Request $request)
+    {
+        $data = [
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.payment_item_add'), $data);
+        return $response;
+    }
+    public function getPaymentItemList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.payment_item_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editPaymentItemBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deletePaymentItemBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getPaymentItemDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.payment_item_details'), $data);
+        return $response;
+    }
+    public function updatePaymentItem(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.payment_item_update'), $data);
+        return $response;
+    }
+    // DELETE Payment Item Delete
+    public function deletePaymentItem(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.payment_item_delete'), $data);
+        return $response;
+    }
+
+    // index Payment Status
+    public function paymentStatus()
+    {
+        return view('admin.payment_status.index');
+    }
+
+    public function addPaymentStatus(Request $request)
+    {
+        $data = [
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.payment_status_add'), $data);
+        return $response;
+    }
+    public function getPaymentStatusList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.payment_status_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editPaymentStatusBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deletePaymentStatusBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getPaymentStatusDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.payment_status_details'), $data);
+        return $response;
+    }
+    public function updatePaymentStatus(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.payment_status_update'), $data);
+        return $response;
+    }
+    // DELETE Payment Status Delete
+    public function deletePaymentStatus(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.payment_status_delete'), $data);
+        return $response;
+    }
+
+    // index FeesType
+    public function feesType()
+    {
+        return view('admin.fees_type.index');
+    }
+
+    public function addFeesType(Request $request)
+    {
+        $data = [
+            'name' => $request->name
+        ];
+        $response = Helper::PostMethod(config('constants.api.fees_type_add'), $data);
+        return $response;
+    }
+    public function getFeesTypeList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.fees_type_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editFeesTypeBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteFeesTypeBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getFeesTypeDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.fees_type_details'), $data);
+        return $response;
+    }
+    public function updateFeesType(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.fees_type_update'), $data);
+        return $response;
+    }
+    // DELETE Payment Status Delete
+    public function deleteFeesType(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.fees_type_delete'), $data);
+        return $response;
+    }
+
+    // index Fees
+    public function fees()
+    {
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $payment_item = Helper::GetMethod(config('constants.api.payment_item_list'));
+        $payment_status = Helper::GetMethod(config('constants.api.payment_status_list'));
+        return view(
+            'admin.fees.index',
+            [
+                'classnames' => $getclass['data'],
+                'semester' => $semester['data'],
+                'session' => $session['data'],
+                'academic_year_list' => $academic_year_list['data'],
+                'payment_item' => $payment_item['data'],
+                'payment_status' => $payment_status['data']
+            ]
+        );
+    }
 }

@@ -714,6 +714,33 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('soap_student_id', [CommonController::class, 'soapStudentID'])->name('admin.settings.soap_student_id');
         // scedule download
         Route::post('scedule/exam_schedule_download_excel', [CommonController::class, 'examScheduleDownloadExcel'])->name('admin.exam_schedule_download_excel');
+
+        // PaymentItem routes
+        Route::get('payment_item/index', [AdminController::class, 'paymentItem'])->name('admin.payment_item');
+        Route::get('payment_item/list', [AdminController::class, 'getPaymentItemList'])->name('admin.payment_item.list');
+        Route::post('payment_item/add', [AdminController::class, 'addPaymentItem'])->name('admin.payment_item.add');
+        Route::post('payment_item/payment_item-details', [AdminController::class, 'getPaymentItemDetails'])->name('admin.payment_item.details');
+        Route::post('payment_item/update', [AdminController::class, 'updatePaymentItem'])->name('admin.payment_item.update');
+        Route::post('payment_item/delete', [AdminController::class, 'deletePaymentItem'])->name('admin.payment_item.delete');
+
+        // PaymentStatus routes
+        Route::get('payment_status/index', [AdminController::class, 'paymentStatus'])->name('admin.payment_status');
+        Route::get('payment_status/list', [AdminController::class, 'getPaymentStatusList'])->name('admin.payment_status.list');
+        Route::post('payment_status/add', [AdminController::class, 'addPaymentStatus'])->name('admin.payment_status.add');
+        Route::post('payment_status/payment_status-details', [AdminController::class, 'getPaymentStatusDetails'])->name('admin.payment_status.details');
+        Route::post('payment_status/update', [AdminController::class, 'updatePaymentStatus'])->name('admin.payment_status.update');
+        Route::post('payment_status/delete', [AdminController::class, 'deletePaymentStatus'])->name('admin.payment_status.delete');
+
+        // FeesType routes
+        Route::get('fees_type/index', [AdminController::class, 'feesType'])->name('admin.fees_type');
+        Route::get('fees_type/list', [AdminController::class, 'getFeesTypeList'])->name('admin.fees_type.list');
+        Route::post('fees_type/add', [AdminController::class, 'addFeesType'])->name('admin.fees_type.add');
+        Route::post('fees_type/fees_type-details', [AdminController::class, 'getFeesTypeDetails'])->name('admin.fees_type.details');
+        Route::post('fees_type/update', [AdminController::class, 'updateFeesType'])->name('admin.fees_type.update');
+        Route::post('fees_type/delete', [AdminController::class, 'deleteFeesType'])->name('admin.fees_type.delete');
+
+        // Fees routes
+        Route::get('fees/index', [AdminController::class, 'fees'])->name('admin.fees');
     });
 });
 // admin routes end

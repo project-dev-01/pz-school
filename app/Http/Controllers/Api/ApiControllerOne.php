@@ -5088,4 +5088,408 @@ class ApiControllerOne extends BaseController
             return $this->successResponse($studentData, 'students data fetch successfully');
         }
     }
+    
+    // addPaymentItem
+    public function addPaymentItem(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('payment_item')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // insert data
+                $query = $conn->table('payment_item')->insert([
+                    'name' => $request->name,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Payment Item has been successfully saved');
+                }
+            }
+        }
+    }
+    // getPaymentItemList
+    public function getPaymentItemList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $PaymentItemDetails = $conn->table('payment_item')->get();
+            return $this->successResponse($PaymentItemDetails, 'Payment Item record fetch successfully');
+        }
+    }
+    // get PaymentItem row details
+    public function getPaymentItemDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $PaymentItemDetails = $conn->table('payment_item')->where('id', $id)->first();
+            return $this->successResponse($PaymentItemDetails, 'Payment Item row fetch successfully');
+        }
+    }
+    // update PaymentItem
+    public function updatePaymentItem(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('payment_item')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // update data
+                $query = $conn->table('payment_item')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Payment Item Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+            }
+        }
+    }
+    // delete PaymentItem
+    public function deletePaymentItem(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('payment_item')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Payment Item have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+
+    
+
+    // addPaymentStatus
+    public function addPaymentStatus(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('payment_status')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // insert data
+                $query = $conn->table('payment_status')->insert([
+                    'name' => $request->name,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Payment Status has been successfully saved');
+                }
+            }
+        }
+    }
+    // getPaymentStatusList
+    public function getPaymentStatusList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $PaymentStatusDetails = $conn->table('payment_status')->get();
+            return $this->successResponse($PaymentStatusDetails, 'Payment Status record fetch successfully');
+        }
+    }
+    // get PaymentStatus row details
+    public function getPaymentStatusDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $PaymentStatusDetails = $conn->table('payment_status')->where('id', $id)->first();
+            return $this->successResponse($PaymentStatusDetails, 'Payment Status row fetch successfully');
+        }
+    }
+    // update PaymentStatus
+    public function updatePaymentStatus(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('payment_status')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // update data
+                $query = $conn->table('payment_status')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Payment Status Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+            }
+        }
+    }
+    // delete PaymentStatus
+    public function deletePaymentStatus(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('payment_status')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Payment Status have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
+
+    // addFeesType
+    public function addFeesType(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('fees_type')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // insert data
+                $query = $conn->table('fees_type')->insert([
+                    'name' => $request->name,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Fees Type has been successfully saved');
+                }
+            }
+        }
+    }
+    // getFeesTypeList
+    public function getFeesTypeList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $FeesTypeDetails = $conn->table('fees_type')->get();
+            return $this->successResponse($FeesTypeDetails, 'Fees Type record fetch successfully');
+        }
+    }
+    // get FeesType row details
+    public function getFeesTypeDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $FeesTypeDetails = $conn->table('fees_type')->where('id', $id)->first();
+            return $this->successResponse($FeesTypeDetails, 'Fees Type row fetch successfully');
+        }
+    }
+    // update FeesType
+    public function updateFeesType(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('fees_type')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // update data
+                $query = $conn->table('fees_type')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Fees Type Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+            }
+        }
+    }
+    // delete FeesType
+    public function deleteFeesType(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('fees_type')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Fees Type have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
 }
