@@ -713,6 +713,13 @@ return [
         'fees_type_update' => $url.'/fees_type/update',
         'fees_type_delete' => $url.'/fees_type/delete',
 
+        // fees group url
+        'fees_group_add' => $url.'/fees_group/add',
+        'fees_group_list' => $url.'/fees_group/list',
+        'fees_group_details' => $url.'/fees_group/fees_group-details',
+        'fees_group_update' => $url.'/fees_group/update',
+        'fees_group_delete' => $url.'/fees_group/delete',
+
         
         'get_student_details' => $url.'/get_student_details',
 

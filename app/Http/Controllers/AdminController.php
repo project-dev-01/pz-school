@@ -6509,4 +6509,90 @@ class AdminController extends Controller
             ]
         );
     }
+
+    // index FeesGroup
+    public function feesGroup()
+    {
+        return view('admin.fees_group.index');
+    }
+
+    public function createFeesGroup()
+    {
+        $fees_type = Helper::GetMethod(config('constants.api.fees_type_list'));
+        // dd($fees_type);
+        return view('admin.fees_group.add',
+        [
+            'fees_type' => $fees_type['data'],
+        ]);
+    }
+
+    public function addFeesGroup(Request $request)
+    {
+        $data = [
+            'name' => $request->name,
+            'description' => $request->description,
+            'fees' => $request->fees
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.fees_group_add'), $data);
+        // dd($response);
+        return $response;
+    }
+    public function editFeesGroup($id)
+    {
+        $data = [
+            'id' => $id,
+        ]; 
+        // $fees_type = Helper::GetMethod(config('constants.api.fees_type_list'));
+        $fees_group = Helper::PostMethod(config('constants.api.fees_group_details'), $data);
+        // dd($fees_group['data']['fees_group_details']);
+        // foreach($fees_type['data'] as $type) {
+        //     if($fees_group['data']['fees_group_details']['fees_type_id']==$type['id']) {
+        //         dd($fees_group['data']['fees_group_details']);
+        //     }
+        // }
+        return view('admin.fees_group.edit',
+        [
+            'fees_type' => $fees_group['data']['fees_type'],
+            'fees_group' => $fees_group['data']['fees_group'],
+        ]);
+    }
+    public function getFeesGroupList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.fees_group_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="' . route('admin.fees_group.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteFeesGroupBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function updateFeesGroup(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name,
+            'description' => $request->description,
+            'fees' => $request->fees
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.fees_group_update'), $data);
+        // dd($response);
+        return $response;
+    }
+    // DELETE Payment Status Delete
+    public function deleteFeesGroup(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.fees_group_delete'), $data);
+        return $response;
+    }
 }

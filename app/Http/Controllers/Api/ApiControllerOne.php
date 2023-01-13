@@ -5492,4 +5492,182 @@ class ApiControllerOne extends BaseController
             }
         }
     }
+    
+    // addFeesGroup
+    public function addFeesGroup(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('fees_group')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // insert data
+                $query = $conn->table('fees_group')->insertGetId([
+                    'name' => $request->name,
+                    'description' => $request->description,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                
+                // return $query;
+                $fees = $request->fees;
+                foreach ($fees as $fee) {
+                    if (isset($fee['fees_type_id'])){
+                        $conn->table('fees_group_details')->insert([
+                            'fees_group_id' => $query,
+                            'fees_type_id' => $fee['fees_type_id'],
+                            'due_date' =>$fee['due_date'],
+                            'amount' =>$fee['amount'],
+                            'created_at' => date("Y-m-d H:i:s")
+                        ]);
+                    }
+                    
+                }
+                // return $query;
+                $success = [];
+                if (!$query) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Fees Group has been successfully saved');
+                }
+            }
+        }
+    }
+    // getFeesGroupList
+    public function getFeesGroupList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $FeesGroupDetails = $conn->table('fees_group')->get();
+            return $this->successResponse($FeesGroupDetails, 'Fees Group record fetch successfully');
+        }
+    }
+    // get FeesGroup row details
+    public function getFeesGroupDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $FeesGroupDetails['fees_type'] = $conn->table('fees_type as ft')->select('ft.name','ft.id as fees_type_id','fg.id','fg.fees_group_id','fg.amount','fg.due_date')->leftJoin('fees_group_details as fg', 'fg.fees_type_id', '=', 'ft.id')->orderBy('ft.id')->get();
+            $FeesGroupDetails['fees_group'] = $conn->table('fees_group')->where('id', $id)->first();
+            // $FeesGroupDetails['fees_group_details'] = $conn->table('fees_group_details')->where('fees_group_id', $id)->get();
+            return $this->successResponse($FeesGroupDetails, 'Fees Group row fetch successfully');
+        }
+    }
+    // update FeesGroup
+    public function updateFeesGroup(Request $request)
+    {
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+        // return $id;
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // check exist name
+            if ($conn->table('fees_group')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // update data
+                $query = $conn->table('fees_group')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'description' => $request->description,
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+                // return $query;
+                $fees = $request->fees;
+                // return $request;
+                foreach ($fees as $fee) {
+                    if (isset($fee['fees_type_id'])){
+                        if($fee['fees_group_details_id']){
+                            $conn->table('fees_group_details')->where('id', $fee['fees_group_details_id'])->update([
+                                'due_date' =>$fee['due_date'],
+                                'amount' =>$fee['amount'],
+                                'created_at' => date("Y-m-d H:i:s")
+                            ]);
+                        }else{
+                            $conn->table('fees_group_details')->insert([
+                                'fees_group_id' => $id,
+                                'fees_type_id' => $fee['fees_type_id'],
+                                'due_date' =>$fee['due_date'],
+                                'amount' =>$fee['amount'],
+                                'created_at' => date("Y-m-d H:i:s")
+                            ]);
+                        }
+                        
+                    }
+                    
+                }
+                $success = [];
+                if ($query) {
+                    return $this->successResponse($success, 'Fees Group Details have Been updated');
+                } else {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                }
+            }
+        }
+    }
+    // delete FeesGroup
+    public function deleteFeesGroup(Request $request)
+    {
+
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $query = $conn->table('fees_group')->where('id', $id)->delete();
+
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Fees Group have been deleted successfully');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
+        }
+    }
 }

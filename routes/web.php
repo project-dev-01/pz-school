@@ -741,6 +741,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         // Fees routes
         Route::get('fees/index', [AdminController::class, 'fees'])->name('admin.fees');
+
+        // FeesGroup routes
+        Route::get('fees_group/index', [AdminController::class, 'feesGroup'])->name('admin.fees_group');
+        Route::get('fees_group/create', [AdminController::class, 'createFeesGroup'])->name('admin.fees_group.create');
+        Route::get('fees_group/list', [AdminController::class, 'getFeesGroupList'])->name('admin.fees_group.list');
+        Route::post('fees_group/add', [AdminController::class, 'addFeesGroup'])->name('admin.fees_group.add');
+        Route::get('fees_group/edit/{id}', [AdminController::class, 'editFeesGroup'])->name('admin.fees_group.edit');
+        Route::post('fees_group/update', [AdminController::class, 'updateFeesGroup'])->name('admin.fees_group.update');
+        Route::post('fees_group/delete', [AdminController::class, 'deleteFeesGroup'])->name('admin.fees_group.delete');
     });
 });
 // admin routes end

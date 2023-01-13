@@ -954,7 +954,12 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.fees')}}" class="nav-link {{ (request()->is('admin/fees*')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.fees_group')}}" class="nav-link {{ (request()->is('admin/fees_group*')) ? 'active' : '' }}">
+                                    <span>Fees Group </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.fees')}}" class="nav-link {{ (request()->is('admin/fees/*')) ? 'active' : '' }}">
                                     <span>Fees </span>
                                 </a>
                             </li>

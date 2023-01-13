@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditPaymentStatusModalLabel">Edit Stream Type</h4>
+                <h4 class="modal-title" id="myeditPaymentStatusModalLabel">Edit Payment Status</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
