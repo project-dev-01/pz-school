@@ -1527,6 +1527,7 @@ class StaffController extends Controller
         ];
 
         $attendance = Helper::PostMethod(config('constants.api.employee_attendance_add'), $data);
+        dd($attendance);
         return $attendance;
     }
 

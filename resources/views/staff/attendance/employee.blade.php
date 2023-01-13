@@ -102,6 +102,7 @@
                                                     <th>Check In</th>
                                                     <th>Check Out</th>
                                                     <th>Total Hours</th>
+                                                    <th>Reason</th>
                                                     <th>Remarks</th>
                                                 </tr>
                                             </thead>

@@ -64,53 +64,12 @@
                                     </select>
                                 </div>
                             </div>
-                        <!-- <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="btwyears">Academic Year<span class="text-danger">*</span></label>
-                                <select id="btwyears" class="form-control" name="year">
-                                    <option value="">Choose Academic Year</option>
-                                    <option value="">2017-2018</option>
-                                    <option value="">2018-2019</option>
-                                    <option value="">2019-2020</option>
-                                    <option value="">2020-2021</option>
-                                    <option value="">2021-2022</option>
-                                    <option value="">2022-2023</option>
-
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="student Name">Grade<span class="text-danger">*</span></label>
-                                <select id="student Name" class="form-control" name="class_id">
-                                    <option value="">Select Grade</option>
-                                    <option value="">Tingkatan 1</option>
-                                    <option value="">Tingkatan 2</option>
-                                    <option value="">Tingkatan 3</option>
-                                    <option value="">Tingkatan 4</option>
-                                    <option value="">Tingkatan 5</option>
-                                    <option value="">Tingkatan 6</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="student Name">Class<span class="text-danger">*</span></label>
-                                <select id="student Name" class="form-control" name="class_id">
-                                    <option value="">Select Class</option>
-                                    <option value="">Unggul</option>
-                                    <option value="">Wawasan</option>
-                                    <option value="">Iltizam</option>
-                                    <option value="">Cemerlang</option>
-                                </select>
-                            </div>
-                        </div> -->
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="student_id">Student Name<span class="text-danger">*</span></label>
+                                <label for="student_id">Student<span class="text-danger">*</span></label>
                                 <select id="student_id" class="form-control" name="student_id">
-                                    <option value="">Select Student Name</option>
+                                    <option value="">Select Student</option>
                                 </select>
                             </div>
                         </div>

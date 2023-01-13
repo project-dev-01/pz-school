@@ -893,8 +893,9 @@ $(function () {
     });
 
     function callout(data) {
-
+        console.log('123',data)
         $.each(data, function (key, val) {
+            console.log('12s',val)
             var row = "";
             var disabled = "";
             row += '<tr id="row' + count + '"> ';
