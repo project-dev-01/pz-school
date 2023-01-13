@@ -855,7 +855,7 @@ class ApiControllerOne extends BaseController
             // return $getStudentDetails;
             // dd($getStudentDetails);
             $details = $con->table('timetable_exam')->select('exam.name', 'timetable_exam.exam_id')
-                ->leftJoin('exam', 'timetable_exam.exam_id', '=', 'exam.id')
+                ->join('exam', 'timetable_exam.exam_id', '=', 'exam.id')
                 ->where([
                     ['class_id', $getStudentDetails->class_id],
                     ['section_id', $getStudentDetails->section_id],
@@ -863,8 +863,8 @@ class ApiControllerOne extends BaseController
                     ['session_id', $getStudentDetails->session_id],
                     ['timetable_exam.academic_session_id', $getStudentDetails->academic_session_id]
                 ])
-                // ->groupBy('timetable_exam.exam_id')
-                // ->orderBy('timetable_exam.exam_date', 'desc')
+                ->groupBy('timetable_exam.exam_id')
+                ->orderBy('timetable_exam.exam_date', 'desc')
                 ->get();
             return $this->successResponse($details, 'Exam Timetable record fetch successfully');
         }
@@ -5088,7 +5088,7 @@ class ApiControllerOne extends BaseController
             return $this->successResponse($studentData, 'students data fetch successfully');
         }
     }
-    
+
     // addPaymentItem
     public function addPaymentItem(Request $request)
     {
@@ -5223,7 +5223,7 @@ class ApiControllerOne extends BaseController
         }
     }
 
-    
+
 
     // addPaymentStatus
     public function addPaymentStatus(Request $request)
@@ -5492,7 +5492,7 @@ class ApiControllerOne extends BaseController
             }
         }
     }
-    
+
     // addFeesGroup
     public function addFeesGroup(Request $request)
     {
@@ -5518,20 +5518,19 @@ class ApiControllerOne extends BaseController
                     'description' => $request->description,
                     'created_at' => date("Y-m-d H:i:s")
                 ]);
-                
+
                 // return $query;
                 $fees = $request->fees;
                 foreach ($fees as $fee) {
-                    if (isset($fee['fees_type_id'])){
+                    if (isset($fee['fees_type_id'])) {
                         $conn->table('fees_group_details')->insert([
                             'fees_group_id' => $query,
                             'fees_type_id' => $fee['fees_type_id'],
-                            'due_date' =>$fee['due_date'],
-                            'amount' =>$fee['amount'],
+                            'due_date' => $fee['due_date'],
+                            'amount' => $fee['amount'],
                             'created_at' => date("Y-m-d H:i:s")
                         ]);
                     }
-                    
                 }
                 // return $query;
                 $success = [];
@@ -5578,7 +5577,7 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $FeesGroupDetails['fees_type'] = $conn->table('fees_type as ft')->select('ft.name','ft.id as fees_type_id','fg.id','fg.fees_group_id','fg.amount','fg.due_date')->leftJoin('fees_group_details as fg', 'fg.fees_type_id', '=', 'ft.id')->orderBy('ft.id')->get();
+            $FeesGroupDetails['fees_type'] = $conn->table('fees_type as ft')->select('ft.name', 'ft.id as fees_type_id', 'fg.id', 'fg.fees_group_id', 'fg.amount', 'fg.due_date')->leftJoin('fees_group_details as fg', 'fg.fees_type_id', '=', 'ft.id')->orderBy('ft.id')->get();
             $FeesGroupDetails['fees_group'] = $conn->table('fees_group')->where('id', $id)->first();
             // $FeesGroupDetails['fees_group_details'] = $conn->table('fees_group_details')->where('fees_group_id', $id)->get();
             return $this->successResponse($FeesGroupDetails, 'Fees Group row fetch successfully');
@@ -5614,25 +5613,23 @@ class ApiControllerOne extends BaseController
                 $fees = $request->fees;
                 // return $request;
                 foreach ($fees as $fee) {
-                    if (isset($fee['fees_type_id'])){
-                        if($fee['fees_group_details_id']){
+                    if (isset($fee['fees_type_id'])) {
+                        if ($fee['fees_group_details_id']) {
                             $conn->table('fees_group_details')->where('id', $fee['fees_group_details_id'])->update([
-                                'due_date' =>$fee['due_date'],
-                                'amount' =>$fee['amount'],
+                                'due_date' => $fee['due_date'],
+                                'amount' => $fee['amount'],
                                 'created_at' => date("Y-m-d H:i:s")
                             ]);
-                        }else{
+                        } else {
                             $conn->table('fees_group_details')->insert([
                                 'fees_group_id' => $id,
                                 'fees_type_id' => $fee['fees_type_id'],
-                                'due_date' =>$fee['due_date'],
-                                'amount' =>$fee['amount'],
+                                'due_date' => $fee['due_date'],
+                                'amount' => $fee['amount'],
                                 'created_at' => date("Y-m-d H:i:s")
                             ]);
                         }
-                        
                     }
-                    
                 }
                 $success = [];
                 if ($query) {
@@ -5668,6 +5665,98 @@ class ApiControllerOne extends BaseController
             } else {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             }
+        }
+    }
+    public function feesAllocation(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'student_operations' => 'required',
+            'group_id' => 'required',
+            'academic_session_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $student_array = $request->student_operations;
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            foreach ($student_array as $value) {
+                $arrayData = array(
+                    'student_id' => $value,
+                    'group_id' => $request->group_id,
+                    'academic_session_id' => $request->academic_session_id
+                );
+                $examResultexist = $Connection->table('fees_allocation')
+                    ->where($arrayData)
+                    ->count();
+                if ($examResultexist == 0) {
+                    $Connection->table('fees_allocation')->insert($arrayData);
+                }
+            }
+            if (!empty($student_array)) {
+                $Connection->table('fees_allocation')
+                    ->where('group_id', $request->group_id)
+                    ->where('academic_session_id', $request->academic_session_id)
+                    ->whereNotIn('student_id', $student_array)
+                    ->delete();
+            }
+            return $this->successResponse([], 'Fess allocated successfully');
+        }
+    }
+    // get fees allocated students
+    public function feesAllocatedStudents(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'fees_group_id' => 'required',
+            'academic_session_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $fees_group_id = $request->fees_group_id;
+            $academic_session_id = $request->academic_session_id;
+            $section_id = $request->section_id;
+
+            $studentData = $conn->table('enrolls as en')
+                ->select(
+                    'st.id',
+                    'st.photo',
+                    'st.gender',
+                    'st.register_no',
+                    'st.email',
+                    'fa.id as allocation_id',
+                    DB::raw('CONCAT(st.first_name, " ", st.last_name) as name')
+                )
+                ->leftJoin('students as st', 'en.student_id', '=', 'st.id')
+                ->leftJoin('fees_allocation as fa', function ($join) use ($fees_group_id, $academic_session_id) {
+                    $join->on('fa.student_id', '=', 'en.student_id')
+                        ->on('fa.group_id', '=', DB::raw("'$fees_group_id'"))
+                        ->on('fa.academic_session_id', '=', DB::raw("'$academic_session_id'"));
+                })
+                ->where([
+                    ['en.class_id', '=', $request->class_id],
+                    ['en.section_id', '=', $request->section_id],
+                    ['en.active_status', '=', '0'],
+                    ['en.academic_session_id', '=', $request->academic_session_id]
+                ])
+                // ->when($section_id != "All", function ($q)  use ($section_id) {
+                //     $q->where('en.section_id', $section_id);
+                // })
+                ->orderBy('st.id', 'ASC')
+                ->get();
+            return $this->successResponse($studentData, 'Fees Type row fetch successfully');
         }
     }
 }

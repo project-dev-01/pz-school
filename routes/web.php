@@ -750,6 +750,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('fees_group/edit/{id}', [AdminController::class, 'editFeesGroup'])->name('admin.fees_group.edit');
         Route::post('fees_group/update', [AdminController::class, 'updateFeesGroup'])->name('admin.fees_group.update');
         Route::post('fees_group/delete', [AdminController::class, 'deleteFeesGroup'])->name('admin.fees_group.delete');
+
+        // fees allocation
+        Route::get('fees/fees_allocation', [AdminController::class, 'feesAllocation'])->name('admin.fees_allocation');
     });
 });
 // admin routes end

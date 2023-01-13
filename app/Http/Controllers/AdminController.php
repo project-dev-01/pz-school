@@ -6284,11 +6284,11 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.soap_subject_delete'), $data);
         return $response;
     }
-    
+
 
     public function getSoapLogList(Request $request)
     {
-        
+
         $data = [
             'student_id' => $request->student_id
 
@@ -6300,13 +6300,13 @@ class AdminController extends Controller
             ->addIndexColumn()
             ->addColumn('soap_type', function ($row) {
                 $soap_type = "";
-                if($row['soap_type']=="1"){
+                if ($row['soap_type'] == "1") {
                     $soap_type = "Subjective";
-                }else if($row['soap_type']=="2"){
+                } else if ($row['soap_type'] == "2") {
                     $soap_type = "Objective";
-                }else if($row['soap_type']=="3"){
+                } else if ($row['soap_type'] == "3") {
                     $soap_type = "Assessment";
-                }else if($row['soap_type']=="4"){
+                } else if ($row['soap_type'] == "4") {
                     $soap_type = "Plan";
                 }
                 return $soap_type;
@@ -6509,7 +6509,19 @@ class AdminController extends Controller
             ]
         );
     }
-
+    // index Fees
+    public function feesAllocation()
+    {
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $fees_group_list = Helper::GetMethod(config('constants.api.fees_group_list'));
+        return view(
+            'admin.fees.fees_allocation',
+            [
+                'classnames' => $getclass['data'],
+                'fees_group_list' => $fees_group_list['data']
+            ]
+        );
+    }
     // index FeesGroup
     public function feesGroup()
     {
@@ -6520,10 +6532,12 @@ class AdminController extends Controller
     {
         $fees_type = Helper::GetMethod(config('constants.api.fees_type_list'));
         // dd($fees_type);
-        return view('admin.fees_group.add',
-        [
-            'fees_type' => $fees_type['data'],
-        ]);
+        return view(
+            'admin.fees_group.add',
+            [
+                'fees_type' => $fees_type['data'],
+            ]
+        );
     }
 
     public function addFeesGroup(Request $request)
@@ -6542,7 +6556,7 @@ class AdminController extends Controller
     {
         $data = [
             'id' => $id,
-        ]; 
+        ];
         // $fees_type = Helper::GetMethod(config('constants.api.fees_type_list'));
         $fees_group = Helper::PostMethod(config('constants.api.fees_group_details'), $data);
         // dd($fees_group['data']['fees_group_details']);
@@ -6551,11 +6565,13 @@ class AdminController extends Controller
         //         dd($fees_group['data']['fees_group_details']);
         //     }
         // }
-        return view('admin.fees_group.edit',
-        [
-            'fees_type' => $fees_group['data']['fees_type'],
-            'fees_group' => $fees_group['data']['fees_group'],
-        ]);
+        return view(
+            'admin.fees_group.edit',
+            [
+                'fees_type' => $fees_group['data']['fees_type'],
+                'fees_group' => $fees_group['data']['fees_group'],
+            ]
+        );
     }
     public function getFeesGroupList(Request $request)
     {
