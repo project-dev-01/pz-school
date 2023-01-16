@@ -753,6 +753,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         // fees allocation
         Route::get('fees/fees_allocation', [AdminController::class, 'feesAllocation'])->name('admin.fees_allocation');
+        Route::post('fees/add_fees_allocation', [AdminController::class, 'addFeesAllocation'])->name('admin.fees.add_fees_allocation');
+
     });
 });
 // admin routes end

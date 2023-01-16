@@ -5759,4 +5759,74 @@ class ApiControllerOne extends BaseController
             return $this->successResponse($studentData, 'Fees Type row fetch successfully');
         }
     }
+    // get fees
+    public function getFeesAllocatedStudents(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'academic_session_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $branchID = $request->branch_id;
+            $academic_session_id = $request->academic_session_id;
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $studentData = $conn->table('fees_allocation as fa')
+                ->select(
+                    'en.student_id',
+                    'en.roll',
+                    'st.gender',
+                    'st.register_no',
+                    'st.email',
+                    'cl.name as class_name',
+                    'sc.name as section_name',
+                    'fa.id as allocation_id',
+                    DB::raw('CONCAT(st.first_name, " ", st.last_name) as name')
+                )
+                ->join('enrolls as en', 'en.student_id', '=', 'fa.student_id')
+                ->leftJoin('students as st', 'en.student_id', '=', 'st.id')
+                ->leftJoin('classes as cl', 'en.class_id', '=', 'cl.id')
+                ->leftJoin('sections as sc', 'en.section_id', '=', 'sc.id')
+                ->where([
+                    ['en.class_id', '=', $request->class_id],
+                    ['en.section_id', '=', $request->section_id],
+                    ['en.active_status', '=', '0'],
+                    ['en.academic_session_id', '=', $request->academic_session_id]
+                ])
+                // ->when($section_id != "All", function ($q)  use ($section_id) {
+                //     $q->where('en.section_id', $section_id);
+                // })
+                ->orderBy('st.id', 'ASC')
+                ->get()->toArray();
+            if (!empty($studentData)) {
+                foreach ($studentData as $key => $value) {
+                    $studentData[$key]->feegroup = $this->getfeeGroup($value->student_id, $branchID, $academic_session_id);
+                }
+            }
+            return $this->successResponse($studentData, 'get student details fetch successfully');
+        }
+    }
+    public function getfeeGroup($studentID, $branchID, $academic_session_id)
+    {
+        // create new connection
+        $conn = $this->createNewConnection($branchID);
+        // get data
+        $studentData = $conn->table('fees_allocation as fa')
+            ->select('g.name')
+            ->join('fees_group as g', 'g.id', '=', 'fa.group_id')
+            ->where([
+                ['fa.student_id', '=', $studentID],
+                ['fa.academic_session_id', '=', $academic_session_id]
+            ])
+            ->get()->toArray();
+        return $studentData;
+        // dd($studentData);
+    }
 }

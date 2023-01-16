@@ -959,12 +959,12 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.fees_allocation')}}" class="nav-link {{ (request()->is('admin/fees_allocation')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.fees_allocation')}}" class="nav-link {{ (request()->is('admin/fees/fees_allocation')) ? 'active' : '' }}">
                                     <span>Fees Allocation </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.fees')}}" class="nav-link {{ (request()->is('admin/fees/*')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.fees')}}" class="nav-link {{ (request()->is('admin/fees/index')) ? 'active' : '' }}">
                                     <span>Fees </span>
                                 </a>
                             </li>

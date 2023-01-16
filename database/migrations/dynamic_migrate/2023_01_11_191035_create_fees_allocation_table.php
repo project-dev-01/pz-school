@@ -18,7 +18,6 @@ class CreateFeesAllocationTable extends Migration
             $table->integer('student_id');
             $table->integer('group_id');
             $table->integer('academic_session_id');
-            $table->integer('fees_type');
             $table->timestamps();
         });
     }

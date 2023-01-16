@@ -28,9 +28,9 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <div class="row">
-                        
-                    <div class="col-md-3">
+                    <form id="filterFeesAllocation" autocomplete="off">
+                        <div class="row">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="btwyears">Academic year<span class="text-danger">*</span></label>
                                     <select id="btwyears" class="form-control" name="year">
@@ -56,7 +56,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3" id="section_drp_div">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="section_id">Class<span class="text-danger">*</span></label>
                                     <select id="section_id" class="form-control" name="section_id">
@@ -65,48 +65,49 @@
                                 </div>
                             </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="student_id">Student<span class="text-danger">*</span></label>
-                                <select id="student_id" class="form-control" name="student_id">
-                                    <option value="">Select Student</option>
-                                </select>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="student_id">Student</label>
+                                    <select id="student_id" class="form-control" name="student_id">
+                                        <option value="">Select Student</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="payment_item">Payment Item<span class="text-danger">*</span></label>
-                                <select id="payment_item" class="form-control" name="payment_item">
-                                    
-                                    <option value="">Select Payment Item</option>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="payment_item">Payment Item</label>
+                                    <select id="payment_item" class="form-control" name="payment_item">
+                                        <option value="">Select Payment Item</option>
                                         @forelse ($payment_item as $item)
-
                                         <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
                                         @empty
                                         @endforelse
-                                </select>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="payment_status">Payment Status<span class="text-danger">*</span></label>
-                                <select id="payment_status" class="form-control" name="payment_status">
-                                    <option value="">Select Payment Status</option>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="payment_status">Payment Status</label>
+                                    <select id="payment_status" class="form-control" name="payment_status">
+                                        <option value="">Select Payment Status</option>
                                         @forelse ($payment_status as $status)
 
                                         <option value="{{ $status['id'] }}">{{ $status['name'] }}</option>
                                         @empty
                                         @endforelse
-                                </select>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group text-right m-b-0">
-                        <button class="btn btn-primary waves-effect waves-light" type="Save">
-                            Filter
-                        </button>
-                    </div>
+                        <div>
+                            <div class="form-group text-right m-b-0">
+                                <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                    Filter
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -1967,7 +1968,7 @@
 <script>
     document
         .getElementById('target')
-        .addEventListener('change', function () {
+        .addEventListener('change', function() {
             'use strict';
             var vis = document.querySelector('.vis'),
                 target = document.getElementById(this.value);
@@ -1978,11 +1979,11 @@
                 target.className = 'vis';
             }
         });
-</script>	
+</script>
 <script>
     document
         .getElementById('targett')
-        .addEventListener('change', function () {
+        .addEventListener('change', function() {
             'use strict';
             var vis = document.querySelector('.vis'),
                 target = document.getElementById(this.value);
@@ -1993,11 +1994,11 @@
                 target.className = 'vis';
             }
         });
-</script>				
+</script>
 <script>
     document
         .getElementById('targettt')
-        .addEventListener('change', function () {
+        .addEventListener('change', function() {
             'use strict';
             var vis = document.querySelector('.vis'),
                 target = document.getElementById(this.value);
@@ -2008,54 +2009,54 @@
                 target.className = 'vis';
             }
         });
-</script>				
-    <script>
-        $(function () {
-            $(document).on('change', '#semester1', function () {
-                if ($(this).prop('checked') == false) {
-                    $('.inputDateFld1').prop('disabled', true);
-                    $('.dropDwn1').prop('disabled', true);
-                } else {
-                    $('.inputDateFld1').prop('disabled', false);
-                    $('.dropDwn1').prop('disabled', false);
-                }
+</script>
+<script>
+    $(function() {
+        $(document).on('change', '#semester1', function() {
+            if ($(this).prop('checked') == false) {
+                $('.inputDateFld1').prop('disabled', true);
+                $('.dropDwn1').prop('disabled', true);
+            } else {
+                $('.inputDateFld1').prop('disabled', false);
+                $('.dropDwn1').prop('disabled', false);
+            }
 
-            });
         });
-    </script>
-    <script>
-        $(function () {
-            $(document).on('change', '#semester2', function () {
-                if ($(this).prop('checked') == false) {
-                    $('.inputDateFld2').prop('disabled', true);
-                    $('.dropDwn2').prop('disabled', true);
-                } else {
-                    $('.inputDateFld2').prop('disabled', false);
-                    $('.dropDwn2').prop('disabled', false);
-                }
+    });
+</script>
+<script>
+    $(function() {
+        $(document).on('change', '#semester2', function() {
+            if ($(this).prop('checked') == false) {
+                $('.inputDateFld2').prop('disabled', true);
+                $('.dropDwn2').prop('disabled', true);
+            } else {
+                $('.inputDateFld2').prop('disabled', false);
+                $('.dropDwn2').prop('disabled', false);
+            }
 
-            });
         });
-    </script>
-    <script>
-        $(function () {
-            $(document).on('change', '#semester3', function () {
-                if ($(this).prop('checked') == false) {
-                    $('.inputDateFld3').prop('disabled', true);
-                    $('.dropDwn3').prop('disabled', true);
-                } else {
-                    $('.inputDateFld3').prop('disabled', false);
-                    $('.dropDwn3').prop('disabled', false);
-                }
+    });
+</script>
+<script>
+    $(function() {
+        $(document).on('change', '#semester3', function() {
+            if ($(this).prop('checked') == false) {
+                $('.inputDateFld3').prop('disabled', true);
+                $('.dropDwn3').prop('disabled', true);
+            } else {
+                $('.inputDateFld3').prop('disabled', false);
+                $('.dropDwn3').prop('disabled', false);
+            }
 
-            });
         });
-    </script>
-        
-    <script>
-        var sectionByClass = "{{ config('constants.api.section_by_class') }}";
-        var getStudentList = "{{ config('constants.api.get_student_details') }}";
-    </script>
+    });
+</script>
+
+<script>
+    var sectionByClass = "{{ config('constants.api.section_by_class') }}";
+    var getStudentList = "{{ config('constants.api.get_student_details') }}";
+</script>
 
 <script src="{{ asset('public/js/custom/fees.js') }}"></script>
 
