@@ -724,6 +724,7 @@ return [
         'get_student_details' => $url.'/get_student_details',
         'add_fees_allocation' => $url.'/fees/fees_allocation',
         'fees_allocated_students' => $url.'/fees/fees_allocated_students',
+        'get_fees_allocated_students' => $url.'/fees/get_fees_allocated_students',
 
         ]
 

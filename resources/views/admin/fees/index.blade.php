@@ -115,7 +115,37 @@
     <!-- End Student Details -->
 
     <!-- Student Fees Details List-->
-    <div class="row">
+    <div class="row getFessStudentsHideShow" style="display: none;">
+        <div class="col-xl-12 col-sm-12 col-md-12">
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">Student Fees Allocation<h4>
+                    </li>
+                </ul><br>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="getFessStudents" class="table dt-responsive nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Grade</th>
+                                    <th>Class</th>
+                                    <th>Student Name</th>
+                                    <th>Fees Group</th>
+                                    <th>Payment Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div> <!-- end card-box -->
+            </div> <!-- end col -->
+        </div>
+    </div>
+    <!-- <div class="row">
         <div class="col-xl-12 col-sm-12 col-md-12">
             <div class="card">
                 <ul class="nav nav-tabs">
@@ -185,10 +215,10 @@
                             </tbody>
                         </table>
                     </div>
-                </div> <!-- end card-box -->
-            </div> <!-- end col -->
+                </div>
+            </div>
         </div>
-    </div>
+    </div> -->
     <!-- End Student Fees Details List-->
 
     <div class="modal" id="viewModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -2056,6 +2086,10 @@
 <script>
     var sectionByClass = "{{ config('constants.api.section_by_class') }}";
     var getStudentList = "{{ config('constants.api.get_student_details') }}";
+    var getFeesAllocatedStudents = "{{ config('constants.api.get_fees_allocated_students') }}";
+    // default image test
+    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+    var studentImg = "{{ asset('public/users/images/') }}";
 </script>
 
 <script src="{{ asset('public/js/custom/fees.js') }}"></script>
