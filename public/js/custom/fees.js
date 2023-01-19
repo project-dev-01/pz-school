@@ -4,9 +4,9 @@ $(function () {
         e.preventDefault();
         $(".payment_clear").hide();
         var cd = $(this).val();
-        
-        $(".payment_"+cd).show();
-        console.log('cd',cd)
+
+        $(".payment_" + cd).show();
+        console.log('cd', cd)
     });
     $("#btwyears").on('change', function (e) {
         e.preventDefault();
@@ -66,6 +66,7 @@ $(function () {
             var classID = $("#class_id").val();
             var sectionID = $("#section_id").val();
             var year = $("#btwyears").val();
+            var student_id = $("#student_id").val();
 
             var formData = new FormData();
             formData.append('token', token);
@@ -73,6 +74,7 @@ $(function () {
             formData.append('class_id', classID);
             formData.append('section_id', sectionID);
             formData.append('academic_session_id', year);
+            formData.append('student_id', student_id);
             $("#overlay").fadeIn(300);
             $.ajax({
                 url: getFeesAllocatedStudents,
@@ -166,8 +168,7 @@ $(function () {
                     "render": function (data, type, row, meta) {
                         var fsGroup = "";
                         data.forEach(function (day) {
-                            fsGroup += "- " + day['name'];
-
+                            fsGroup += "- " + day['name'] + "<br>";
                         })
                         return fsGroup;
                     }
@@ -182,9 +183,10 @@ $(function () {
                 {
                     "targets": 6,
                     "render": function (data, type, row, meta) {
+                        editFeesPageUrl = editFeesPageUrl.replace(':id', row.student_id);
                         var action = '<div class="button-list">' +
-                            '<a href = "javascript:void(0)" class="btn btn-blue btn-sm waves-effect waves-light"> <i class="fe-edit"></i></a>' +
-                            '<a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteFeesGroupBtn"><i class="fe-trash-2"></i></a>' +
+                            '<a href = "' + editFeesPageUrl + '" class="btn btn-blue btn-sm waves-effect waves-light"> <i class="fe-edit"></i></a>' +
+                            '<a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' + row.student_id + '" id="deleteFeesGroupBtn"><i class="fe-trash-2"></i></a>' +
                             '</div>';
                         return action;
                     }

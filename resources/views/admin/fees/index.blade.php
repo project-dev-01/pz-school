@@ -2090,6 +2090,8 @@
     // default image test
     var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
     var studentImg = "{{ asset('public/users/images/') }}";
+    var editFeesPageUrl = '{{ route("admin.fees.edit", ":id") }}';
+    
 </script>
 
 <script src="{{ asset('public/js/custom/fees.js') }}"></script>

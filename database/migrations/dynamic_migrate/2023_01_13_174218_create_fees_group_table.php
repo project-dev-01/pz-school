@@ -16,7 +16,7 @@ class CreateFeesGroupTable extends Migration
         Schema::create('fees_group', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->txt('description')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

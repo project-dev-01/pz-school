@@ -6513,7 +6513,7 @@ class AdminController extends Controller
     public function editFees($id)
     {
         $data = [
-            'student_id' => "1",
+            'student_id' => $id,
         ];
         $payment_item = Helper::GetMethod(config('constants.api.payment_item_list'));
         $payment_status = Helper::GetMethod(config('constants.api.payment_status_list'));
