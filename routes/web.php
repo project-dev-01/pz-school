@@ -741,6 +741,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         // Fees routes
         Route::get('fees/index', [AdminController::class, 'fees'])->name('admin.fees');
+        Route::get('fees/edit/{id}', [AdminController::class, 'editFees'])->name('admin.fees.edit');
 
         // FeesGroup routes
         Route::get('fees_group/index', [AdminController::class, 'feesGroup'])->name('admin.fees_group');

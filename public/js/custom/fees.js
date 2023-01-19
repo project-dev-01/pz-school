@@ -1,5 +1,13 @@
 $(function () {
 
+    $(".payment_item").on('change', function (e) {
+        e.preventDefault();
+        $(".payment_clear").hide();
+        var cd = $(this).val();
+        
+        $(".payment_"+cd).show();
+        console.log('cd',cd)
+    });
     $("#btwyears").on('change', function (e) {
         e.preventDefault();
         $('#class_id').val("");

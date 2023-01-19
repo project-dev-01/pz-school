@@ -192,8 +192,8 @@
                                     </td>
                                     <td>
                                         <div class="button-list">
-                                            <a href="#" data-toggle="modal" data-target="#viewModal" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
-                                            <a href="#" class="btn btn-danger waves-effect waves-light"><i class="fe-trash-2"></i></a>
+                                            <a href="{{ route('admin.fees.edit',1) }}" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
+                                            <a href="{{ route('admin.fees.edit',1) }}" class="btn btn-danger waves-effect waves-light"><i class="fe-trash-2"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -207,8 +207,8 @@
                                     </td>
                                     <td>
                                         <div class="button-list">
-                                            <a href="#" data-toggle="modal" data-target="#viewModal" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
-                                            <a href="#" class="btn btn-danger waves-effect waves-light"><i class="fe-trash-2"></i></a>
+                                            <a href="{{ route('admin.fees.edit',1) }}"class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
+                                            <a href="{{ route('admin.fees.edit',1) }}" class="btn btn-danger waves-effect waves-light"><i class="fe-trash-2"></i></a>
                                         </div>
                                     </td>
                                 </tr>

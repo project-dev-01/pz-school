@@ -80,7 +80,8 @@
                             </table>
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                            
+                            <a href="{{ route('admin.fees_group') }}" class="btn btn-light">Back</a>
                             <button type="submit" class="btn btn-success waves-effect waves-light">Submit</button>
                         </div>
 

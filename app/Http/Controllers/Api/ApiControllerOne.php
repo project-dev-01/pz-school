@@ -5577,7 +5577,17 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $FeesGroupDetails['fees_type'] = $conn->table('fees_type as ft')->select('ft.name', 'ft.id as fees_type_id', 'fg.id', 'fg.fees_group_id', 'fg.amount', 'fg.due_date')->leftJoin('fees_group_details as fg', 'fg.fees_type_id', '=', 'ft.id')->orderBy('ft.id')->get();
+            $FeesGroupDetails['fees_type'] = $conn->table('fees_type as ft')
+            ->select('ft.name', 'ft.id as fees_type_id', 'fg.id', 'fg.fees_group_id', 'fg.amount', 'fg.due_date')
+            // ->leftJoin('fees_group_details as fg', 'fg.fees_type_id', '=', 'ft.id')
+            
+            
+            ->leftjoin('fees_group_details as fg', function($join) use ($id) {
+                $join->on('fg.fees_type_id','=','ft.id');
+                $join->where('fg.fees_group_id', $id);
+            })
+            ->orderBy('ft.id')
+            ->get();
             $FeesGroupDetails['fees_group'] = $conn->table('fees_group')->where('id', $id)->first();
             // $FeesGroupDetails['fees_group_details'] = $conn->table('fees_group_details')->where('fees_group_id', $id)->get();
             return $this->successResponse($FeesGroupDetails, 'Fees Group row fetch successfully');
@@ -5828,5 +5838,88 @@ class ApiControllerOne extends BaseController
             ->get()->toArray();
         return $studentData;
         // dd($studentData);
+    }
+    // get Fees row details
+    public function getFeesDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'student_id' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $id = $request->id;
+            // create new connection
+            $branchID = $request->branch_id;
+            $academic_session_id = 5;
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $FeesDetails['student'] = $conn->table('students as st')
+                ->select(
+                    'en.student_id',
+                    'en.roll',
+                    'st.gender',
+                    'st.register_no',
+                    'st.email',
+                    'st.mobile_no',
+                    'cl.name as class_name',
+                    'sc.name as section_name',
+                    DB::raw('CONCAT(st.first_name, " ", st.last_name) as name'),
+                    DB::raw('CONCAT(p.first_name, " ", p.last_name) as parent_name'),
+                    'ay.name as academic_year'
+                )
+                ->join('enrolls as en', 'en.student_id', '=', 'st.id')
+                ->join('academic_year as ay', 'en.academic_session_id', '=', 'ay.id')
+                ->leftjoin('parent as p', function($join){
+                    $join->on('st.father_id','=','p.id');
+                    $join->orOn('st.mother_id','=','p.id');
+                    $join->orOn('st.guardian_id','=','p.id');
+                })
+                // ->leftJoin('parent as p', 'st.father_id', '=', 'p.id')
+                ->leftJoin('classes as cl', 'en.class_id', '=', 'cl.id')
+                ->leftJoin('sections as sc', 'en.section_id', '=', 'sc.id')
+                ->where([
+                    ['en.student_id', '=', $request->student_id],
+                    ['en.active_status', '=', '0'],
+                ])
+                // ->when($section_id != "All", function ($q)  use ($section_id) {
+                //     $q->where('en.section_id', $section_id);
+                // })
+                ->orderBy('st.id', 'ASC')
+                ->first();
+            $FeesDetails['fees'] = $conn->table('fees_allocation as fa')
+            // ->select('fa.id as allocation_id','fg.name as group_name')
+            ->select(
+                'ft.name as fees_name',
+                'fg.name as group_name',
+                'ft.id as fees_type_id',
+                'fa.id as allocation_id',
+                'fph.id as invoice_id',
+                'fph.collect_by',
+                'fph.amount',
+                'fph.date',
+                )
+            ->leftJoin('fees_group as fg', 'fa.group_id', '=', 'fg.id')
+            ->leftJoin('fees_group_details as fgd', 'fa.group_id', '=', 'fgd.fees_group_id')
+            ->leftJoin('fees_type as ft', 'fgd.fees_type_id', '=', 'ft.id')
+            
+            ->leftjoin('fees_payment_history as fph', function($join){
+                $join->on('ft.id','=','fph.fees_type_id');
+                $join->on('fa.id','=','fph.allocation_id');
+            })
+            // ->leftJoin('fees_payment_history as fph', 'ft.id', '=', 'fph.fees_type_id')
+            ->where('fa.student_id',$request->student_id)
+            ->get();
+            // if (!empty($studentData)) {
+            //     foreach ($studentData as $key => $value) {
+            //         $studentData[$key]->feegroup = $this->getfeeGroup($value->student_id, $branchID, $academic_session_id);
+            //     }
+            // }
+            return $this->successResponse($FeesDetails, 'Fees row fetch successfully');
+        }
     }
 }

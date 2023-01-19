@@ -6509,6 +6509,25 @@ class AdminController extends Controller
             ]
         );
     }
+    
+    public function editFees($id)
+    {
+        $data = [
+            'student_id' => "1",
+        ];
+        $payment_item = Helper::GetMethod(config('constants.api.payment_item_list'));
+        $payment_status = Helper::GetMethod(config('constants.api.payment_status_list'));
+        $fees = Helper::PostMethod(config('constants.api.fees_details'), $data);
+        return view(
+            'admin.fees.edit',
+            [
+                'student' => $fees['data']['student'],
+                'fees' => $fees['data']['fees'],
+                'payment_item' => $payment_item['data'],
+                'payment_status' => $payment_status['data']
+            ]
+        );
+    }
     // index Fees
     public function feesAllocation()
     {
