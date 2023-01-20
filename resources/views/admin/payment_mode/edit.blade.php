@@ -1,18 +1,18 @@
 <!-- Center modal content -->
-<div class="modal fade editPaymentItem" id="editPaymentItemModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade editPaymentMode" id="editPaymentModeModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditPaymentItemModalLabel">Edit Payment Item</h4>
+                <h4 class="modal-title" id="myeditPaymentModeModalLabel">Edit Payment Mode</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <form id="edit-payment-item-form" method="post" action="{{ route('admin.payment_item.update') }}" autocomplete="off">
+                <form id="edit-payment-mode-form" method="post" action="{{ route('admin.payment_mode.update') }}" autocomplete="off">
                     @csrf
                     <input type="hidden" name="id">           
                     <div class="form-group">
-                        <label for="name">Payment Item Name <span class="text-danger">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Payment Item Name">
+                        <label for="name">Payment Mode Name <span class="text-danger">*</span></label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Payment Mode Name">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">

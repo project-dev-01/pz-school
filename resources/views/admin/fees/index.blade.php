@@ -76,11 +76,11 @@
 
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="payment_item">Payment Item</label>
-                                    <select id="payment_item" class="form-control" name="payment_item">
-                                        <option value="">Select Payment Item</option>
-                                        @forelse ($payment_item as $item)
-                                        <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                    <label for="fees_type">Fees Type</label>
+                                    <select id="fees_type" class="form-control" name="fees_type">
+                                        <option value="">Select Fees Type</option>
+                                        @forelse ($fees_type as $fee)
+                                        <option value="{{ $fee['id'] }}">{{ $fee['name'] }}</option>
                                         @empty
                                         @endforelse
                                     </select>

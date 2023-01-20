@@ -691,12 +691,12 @@ return [
 
          'soap_log_list' => $url.'/soap_log/list',
          
-        // payment item url
-        'payment_item_add' => $url.'/payment_item/add',
-        'payment_item_list' => $url.'/payment_item/list',
-        'payment_item_details' => $url.'/payment_item/payment_item-details',
-        'payment_item_update' => $url.'/payment_item/update',
-        'payment_item_delete' => $url.'/payment_item/delete',
+        // payment mode url
+        'payment_mode_add' => $url.'/payment_mode/add',
+        'payment_mode_list' => $url.'/payment_mode/list',
+        'payment_mode_details' => $url.'/payment_mode/payment_mode-details',
+        'payment_mode_update' => $url.'/payment_mode/update',
+        'payment_mode_delete' => $url.'/payment_mode/delete',
         
          
         // payment status url
@@ -727,6 +727,7 @@ return [
         'get_fees_allocated_students' => $url.'/fees/get_fees_allocated_students',
         'fees_details' => $url.'/fees/fees-details',
         'fees_delete' => $url.'/fees/delete',
+        'fees_update' => $url.'/fees/update',
 
         ]
 

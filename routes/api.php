@@ -748,12 +748,12 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('fees/yearly/add', [ApiControllerOne::class, 'feesYearlyAdd']);
     Route::post('get_student_details', [ApiControllerOne::class, 'getStudentDetails']);
     
-    // Payment Item routes
-    Route::post('payment_item/add', [ApiControllerOne::class, 'addPaymentItem']);
-    Route::get('payment_item/list', [ApiControllerOne::class, 'getPaymentItemList']);
-    Route::post('payment_item/payment_item-details', [ApiControllerOne::class, 'getPaymentItemDetails']);
-    Route::post('payment_item/update', [ApiControllerOne::class, 'updatePaymentItem']);
-    Route::post('payment_item/delete', [ApiControllerOne::class, 'deletePaymentItem']);
+    // Payment Mode routes
+    Route::post('payment_mode/add', [ApiControllerOne::class, 'addPaymentMode']);
+    Route::get('payment_mode/list', [ApiControllerOne::class, 'getPaymentModeList']);
+    Route::post('payment_mode/payment_mode-details', [ApiControllerOne::class, 'getPaymentModeDetails']);
+    Route::post('payment_mode/update', [ApiControllerOne::class, 'updatePaymentMode']);
+    Route::post('payment_mode/delete', [ApiControllerOne::class, 'deletePaymentMode']);
 
     // Payment Status routes
     Route::post('payment_status/add', [ApiControllerOne::class, 'addPaymentStatus']);
@@ -775,6 +775,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('fees/get_fees_allocated_students', [ApiControllerOne::class, 'getFeesAllocatedStudents']);
     Route::post('fees/fees-details', [ApiControllerOne::class, 'getFeesDetails']);
     Route::post('fees/delete', [ApiControllerOne::class, 'deleteFeesDetails']);
+    Route::post('fees/update', [ApiControllerOne::class, 'updateFees']);
     // FeesGroup routes
     Route::post('fees_group/add', [ApiControllerOne::class, 'addFeesGroup']);
     Route::get('fees_group/list', [ApiControllerOne::class, 'getFeesGroupList']);

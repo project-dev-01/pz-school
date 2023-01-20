@@ -1,12 +1,12 @@
 $(function () {
 
-    $(".payment_item").on('change', function (e) {
+    $(".payment_mode").on('change', function (e) {
         e.preventDefault();
         $(".payment_clear").hide();
         var cd = $(this).val();
-
-        $(".payment_" + cd).show();
-        console.log('cd', cd)
+        
+        $(".payment_"+cd).show();
+        console.log('cd',cd)
     });
     $("#btwyears").on('change', function (e) {
         e.preventDefault();
@@ -15,7 +15,7 @@ $(function () {
         $("#section_id").append('<option value="">Select Class</option>');
         $("#student_id").empty();
         $("#student_id").append('<option value="">Select Student</option>');
-        $('#payment_item').val("");
+        $('#fees_type').val("");
         $('#payment_status').val("");
     });
 
@@ -250,4 +250,32 @@ $(function () {
             }
         });
     });
+
+    
+    // edit Fees Form
+    $('#editFeesForm').on('submit', function (e) {
+       e.preventDefault();
+       var form = this;
+
+       $.ajax({
+           url: $(form).attr('action'),
+           method: $(form).attr('method'),
+           data: new FormData(form),
+           processData: false,
+           dataType: 'json',
+           contentType: false,
+           success: function (data) {
+               // console.log("------")
+               console.log(data)
+               if (data.code == 200) {
+                   // $('#fees-type-table').DataTable().ajax.reload(null, false);
+                   // $('.addFeesType').modal('hide');
+                   // $('.addFeesType').find('form')[0].reset();
+                   toastr.success(data.message);
+               } else {
+                   toastr.error(data.message);
+               }
+           }
+       });
+   });
 });

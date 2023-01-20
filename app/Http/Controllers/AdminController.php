@@ -6314,61 +6314,61 @@ class AdminController extends Controller
             ->make(true);
     }
 
-    // index Payment Item
-    public function paymentItem()
+    // index Payment Mode
+    public function paymentMode()
     {
-        return view('admin.payment_item.index');
+        return view('admin.payment_mode.index');
     }
 
-    public function addPaymentItem(Request $request)
+    public function addPaymentMode(Request $request)
     {
         $data = [
             'name' => $request->name
         ];
-        $response = Helper::PostMethod(config('constants.api.payment_item_add'), $data);
+        $response = Helper::PostMethod(config('constants.api.payment_mode_add'), $data);
         return $response;
     }
-    public function getPaymentItemList(Request $request)
+    public function getPaymentModeList(Request $request)
     {
-        $response = Helper::GetMethod(config('constants.api.payment_item_list'));
+        $response = Helper::GetMethod(config('constants.api.payment_mode_list'));
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
-                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editPaymentItemBtn"><i class="fe-edit"></i></a>
-                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deletePaymentItemBtn"><i class="fe-trash-2"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editPaymentModeBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deletePaymentModeBtn"><i class="fe-trash-2"></i></a>
                         </div>';
             })
 
             ->rawColumns(['actions'])
             ->make(true);
     }
-    public function getPaymentItemDetails(Request $request)
+    public function getPaymentModeDetails(Request $request)
     {
         $data = [
             'id' => $request->id,
         ];
-        $response = Helper::PostMethod(config('constants.api.payment_item_details'), $data);
+        $response = Helper::PostMethod(config('constants.api.payment_mode_details'), $data);
         return $response;
     }
-    public function updatePaymentItem(Request $request)
+    public function updatePaymentMode(Request $request)
     {
         $data = [
             'id' => $request->id,
             'name' => $request->name
         ];
 
-        $response = Helper::PostMethod(config('constants.api.payment_item_update'), $data);
+        $response = Helper::PostMethod(config('constants.api.payment_mode_update'), $data);
         return $response;
     }
-    // DELETE Payment Item Delete
-    public function deletePaymentItem(Request $request)
+    // DELETE Payment Mode Delete
+    public function deletePaymentMode(Request $request)
     {
         $data = [
             'id' => $request->id
         ];
 
-        $response = Helper::PostMethod(config('constants.api.payment_item_delete'), $data);
+        $response = Helper::PostMethod(config('constants.api.payment_mode_delete'), $data);
         return $response;
     }
 
@@ -6495,7 +6495,7 @@ class AdminController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
-        $payment_item = Helper::GetMethod(config('constants.api.payment_item_list'));
+        $fees_type = Helper::GetMethod(config('constants.api.fees_type_list'));
         $payment_status = Helper::GetMethod(config('constants.api.payment_status_list'));
         return view(
             'admin.fees.index',
@@ -6504,7 +6504,7 @@ class AdminController extends Controller
                 'semester' => $semester['data'],
                 'session' => $session['data'],
                 'academic_year_list' => $academic_year_list['data'],
-                'payment_item' => $payment_item['data'],
+                'fees_type' => $fees_type['data'],
                 'payment_status' => $payment_status['data']
             ]
         );
@@ -6515,18 +6515,34 @@ class AdminController extends Controller
         $data = [
             'student_id' => $id,
         ];
-        $payment_item = Helper::GetMethod(config('constants.api.payment_item_list'));
+        $payment_mode = Helper::GetMethod(config('constants.api.payment_mode_list'));
         $payment_status = Helper::GetMethod(config('constants.api.payment_status_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
         $fees = Helper::PostMethod(config('constants.api.fees_details'), $data);
+        $month = [["name"=>'January','id'=>1],["name"=>'February','id'=>2],["name"=>'March','id'=>3],["name"=>'April','id'=>4],["name"=>'May','id'=>5],["name"=>'June','id'=>6],["name"=>'July','id'=>7],["name"=>'August','id'=>8],["name"=>'September','id'=>9],["name"=>'October','id'=>10],["name"=>'November','id'=>11],["name"=>'December','id'=>12]];
+        // dd($month);
         return view(
             'admin.fees.edit',
             [
                 'student' => $fees['data']['student'],
                 'fees' => $fees['data']['fees'],
-                'payment_item' => $payment_item['data'],
-                'payment_status' => $payment_status['data']
+                'semester' => $semester['data'],
+                'payment_mode' => $payment_mode['data'],
+                'payment_status' => $payment_status['data'],
+                'month' => $month
             ]
         );
+    }
+    public function updateFees(Request $request)
+    {
+        $data = [
+            'id' => $request
+        ];
+
+        dd($data);
+        $response = Helper::PostMethod(config('constants.api.fees_update'), $data);
+        dd($response);
+        return $response;
     }
     // index Fees
     public function feesAllocation()

@@ -715,13 +715,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         // scedule download
         Route::post('scedule/exam_schedule_download_excel', [CommonController::class, 'examScheduleDownloadExcel'])->name('admin.exam_schedule_download_excel');
 
-        // PaymentItem routes
-        Route::get('payment_item/index', [AdminController::class, 'paymentItem'])->name('admin.payment_item');
-        Route::get('payment_item/list', [AdminController::class, 'getPaymentItemList'])->name('admin.payment_item.list');
-        Route::post('payment_item/add', [AdminController::class, 'addPaymentItem'])->name('admin.payment_item.add');
-        Route::post('payment_item/payment_item-details', [AdminController::class, 'getPaymentItemDetails'])->name('admin.payment_item.details');
-        Route::post('payment_item/update', [AdminController::class, 'updatePaymentItem'])->name('admin.payment_item.update');
-        Route::post('payment_item/delete', [AdminController::class, 'deletePaymentItem'])->name('admin.payment_item.delete');
+        // PaymentMode routes
+        Route::get('payment_mode/index', [AdminController::class, 'paymentMode'])->name('admin.payment_mode');
+        Route::get('payment_mode/list', [AdminController::class, 'getPaymentModeList'])->name('admin.payment_mode.list');
+        Route::post('payment_mode/add', [AdminController::class, 'addPaymentMode'])->name('admin.payment_mode.add');
+        Route::post('payment_mode/payment_mode-details', [AdminController::class, 'getPaymentModeDetails'])->name('admin.payment_mode.details');
+        Route::post('payment_mode/update', [AdminController::class, 'updatePaymentMode'])->name('admin.payment_mode.update');
+        Route::post('payment_mode/delete', [AdminController::class, 'deletePaymentMode'])->name('admin.payment_mode.delete');
 
         // PaymentStatus routes
         Route::get('payment_status/index', [AdminController::class, 'paymentStatus'])->name('admin.payment_status');
@@ -742,6 +742,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         // Fees routes
         Route::get('fees/index', [AdminController::class, 'fees'])->name('admin.fees');
         Route::get('fees/edit/{id}', [AdminController::class, 'editFees'])->name('admin.fees.edit');
+        Route::post('fees/update', [AdminController::class, 'updateFees'])->name('admin.fees.update');
 
         // FeesGroup routes
         Route::get('fees_group/index', [AdminController::class, 'feesGroup'])->name('admin.fees_group');

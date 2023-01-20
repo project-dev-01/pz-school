@@ -1,20 +1,20 @@
 $(function () {
 
-    paymentItemTable();
-    $("#paymentItemForm").validate({
+    paymentModeTable();
+    $("#paymentModeForm").validate({
         rules: {
             name: "required"
         }
     });
-    $("#edit-payment-item-form").validate({
+    $("#edit-payment-mode-form").validate({
         rules: {
             name: "required"
         }
     });
-    // add paymentItem
-    $('#paymentItemForm').on('submit', function (e) {
+    // add paymentMode
+    $('#paymentModeForm').on('submit', function (e) {
         e.preventDefault();
-        var paymentCheck = $("#paymentItemForm").valid();
+        var paymentCheck = $("#paymentModeForm").valid();
         if (paymentCheck === true) {
             var form = this;
 
@@ -29,9 +29,9 @@ $(function () {
                     // console.log("------")
                     console.log(data)
                     if (data.code == 200) {
-                        $('#payment-item-table').DataTable().ajax.reload(null, false);
-                        $('.addPaymentItem').modal('hide');
-                        $('.addPaymentItem').find('form')[0].reset();
+                        $('#payment-mode-table').DataTable().ajax.reload(null, false);
+                        $('.addPaymentMode').modal('hide');
+                        $('.addPaymentMode').find('form')[0].reset();
                         toastr.success(data.message);
                     } else {
                         toastr.error(data.message);
@@ -41,9 +41,9 @@ $(function () {
         }
     });
 
-    // get all PaymentItem table
-    function paymentItemTable() {
-        $('#payment-item-table').DataTable({
+    // get all PaymentMode table
+    function paymentModeTable() {
+        $('#payment-mode-table').DataTable({
             processing: true,
             info: true,
             // dom: 'lBfrtip',
@@ -69,7 +69,7 @@ $(function () {
 
                 }
             ],
-            ajax: paymentItemList,
+            ajax: paymentModeList,
             "pageLength": 10,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
@@ -97,21 +97,21 @@ $(function () {
         });
     }
     // get row
-    $(document).on('click', '#editPaymentItemBtn', function () {
+    $(document).on('click', '#editPaymentModeBtn', function () {
         var id = $(this).data('id');
 
-        $('.editPaymentItem').find('form')[0].reset();
-        $.post(paymentItemDetails, { id: id }, function (data) {
-            $('.editPaymentItem').find('input[name="id"]').val(data.data.id);
-            $('.editPaymentItem').find('input[name="name"]').val(data.data.name);
-            $('.editPaymentItem').modal('show');
+        $('.editPaymentMode').find('form')[0].reset();
+        $.post(paymentModeDetails, { id: id }, function (data) {
+            $('.editPaymentMode').find('input[name="id"]').val(data.data.id);
+            $('.editPaymentMode').find('input[name="name"]').val(data.data.name);
+            $('.editPaymentMode').modal('show');
         }, 'json');
         console.log(id);
     });
     // update paymentType
-    $('#edit-payment-item-form').on('submit', function (e) {
+    $('#edit-payment-mode-form').on('submit', function (e) {
         e.preventDefault();
-        var edt_paymentCheck = $("#edit-payment-item-form").valid();
+        var edt_paymentCheck = $("#edit-payment-mode-form").valid();
         if (edt_paymentCheck === true) {
 
             var form = this;
@@ -130,13 +130,13 @@ $(function () {
                     } else {
 
                         if (data.code == 200) {
-                            $('#payment-item-table').DataTable().ajax.reload(null, false);
-                            $('.editPaymentItem').modal('hide');
-                            $('.editPaymentItem').find('form')[0].reset();
+                            $('#payment-mode-table').DataTable().ajax.reload(null, false);
+                            $('.editPaymentMode').modal('hide');
+                            $('.editPaymentMode').find('form')[0].reset();
                             toastr.success(data.message);
                         } else {
-                            $('.editPaymentItem').modal('hide');
-                            $('.editPaymentItem').find('form')[0].reset();
+                            $('.editPaymentMode').modal('hide');
+                            $('.editPaymentMode').find('form')[0].reset();
                             toastr.error(data.message);
                         }
                     }
@@ -144,13 +144,13 @@ $(function () {
             });
         }
     });
-    // delete PaymentItemDelete
-    $(document).on('click', '#deletePaymentItemBtn', function () {
+    // delete PaymentModeDelete
+    $(document).on('click', '#deletePaymentModeBtn', function () {
         var id = $(this).data('id');
-        var url = paymentItemDelete;
+        var url = paymentModeDelete;
         swal.fire({
             title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this Payment Item',
+            html: 'You want to <b>delete</b> this Payment Mode',
             showCancelButton: true,
             showCloseButton: true,
             cancelButtonText: 'Cancel',
@@ -165,7 +165,7 @@ $(function () {
                     id: id
                 }, function (data) {
                     if (data.code == 200) {
-                        $('#payment-item-table').DataTable().ajax.reload(null, false);
+                        $('#payment-mode-table').DataTable().ajax.reload(null, false);
                         toastr.success(data.message);
                     } else {
                         toastr.error(data.message);

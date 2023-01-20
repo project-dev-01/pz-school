@@ -939,8 +939,8 @@
                     <div class="collapse" id="sidebarFees">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('admin.payment_item')}}" class="nav-link {{ (request()->is('admin/payment_item*')) ? 'active' : '' }}">
-                                    <span>Payment Item </span>
+                                <a href="{{ route('admin.payment_mode')}}" class="nav-link {{ (request()->is('admin/payment_mode*')) ? 'active' : '' }}">
+                                    <span>Payment Mode </span>
                                 </a>
                             </li>
                             <li>

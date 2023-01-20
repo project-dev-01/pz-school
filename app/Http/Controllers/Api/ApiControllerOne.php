@@ -5088,8 +5088,8 @@ class ApiControllerOne extends BaseController
         }
     }
 
-    // addPaymentItem
-    public function addPaymentItem(Request $request)
+    // addPaymentMode
+    public function addPaymentMode(Request $request)
     {
 
         $validator = \Validator::make($request->all(), [
@@ -5104,11 +5104,11 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // check exist name
-            if ($conn->table('payment_item')->where('name', '=', $request->name)->count() > 0) {
+            if ($conn->table('payment_mode')->where('name', '=', $request->name)->count() > 0) {
                 return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
             } else {
                 // insert data
-                $query = $conn->table('payment_item')->insert([
+                $query = $conn->table('payment_mode')->insert([
                     'name' => $request->name,
                     'created_at' => date("Y-m-d H:i:s")
                 ]);
@@ -5116,13 +5116,13 @@ class ApiControllerOne extends BaseController
                 if (!$query) {
                     return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
                 } else {
-                    return $this->successResponse($success, 'Payment Item has been successfully saved');
+                    return $this->successResponse($success, 'Payment Mode has been successfully saved');
                 }
             }
         }
     }
-    // getPaymentItemList
-    public function getPaymentItemList(Request $request)
+    // getPaymentModeList
+    public function getPaymentModeList(Request $request)
     {
         $validator = \Validator::make($request->all(), [
             'branch_id' => 'required',
@@ -5135,12 +5135,12 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $PaymentItemDetails = $conn->table('payment_item')->get();
-            return $this->successResponse($PaymentItemDetails, 'Payment Item record fetch successfully');
+            $PaymentModeDetails = $conn->table('payment_mode')->get();
+            return $this->successResponse($PaymentModeDetails, 'Payment Mode record fetch successfully');
         }
     }
-    // get PaymentItem row details
-    public function getPaymentItemDetails(Request $request)
+    // get PaymentMode row details
+    public function getPaymentModeDetails(Request $request)
     {
 
         $validator = \Validator::make($request->all(), [
@@ -5156,12 +5156,12 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $PaymentItemDetails = $conn->table('payment_item')->where('id', $id)->first();
-            return $this->successResponse($PaymentItemDetails, 'Payment Item row fetch successfully');
+            $PaymentModeDetails = $conn->table('payment_mode')->where('id', $id)->first();
+            return $this->successResponse($PaymentModeDetails, 'Payment Mode row fetch successfully');
         }
     }
-    // update PaymentItem
-    public function updatePaymentItem(Request $request)
+    // update PaymentMode
+    public function updatePaymentMode(Request $request)
     {
         $id = $request->id;
         $validator = \Validator::make($request->all(), [
@@ -5177,25 +5177,25 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // check exist name
-            if ($conn->table('payment_item')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
+            if ($conn->table('payment_mode')->where([['name', '=', $request->name], ['id', '!=', $id]])->count() > 0) {
                 return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
             } else {
                 // update data
-                $query = $conn->table('payment_item')->where('id', $id)->update([
+                $query = $conn->table('payment_mode')->where('id', $id)->update([
                     'name' => $request->name,
                     'updated_at' => date("Y-m-d H:i:s")
                 ]);
                 $success = [];
                 if ($query) {
-                    return $this->successResponse($success, 'Payment Item Details have Been updated');
+                    return $this->successResponse($success, 'Payment Mode Details have Been updated');
                 } else {
                     return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
                 }
             }
         }
     }
-    // delete PaymentItem
-    public function deletePaymentItem(Request $request)
+    // delete PaymentMode
+    public function deletePaymentMode(Request $request)
     {
 
         $id = $request->id;
@@ -5211,17 +5211,16 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $query = $conn->table('payment_item')->where('id', $id)->delete();
+            $query = $conn->table('payment_mode')->where('id', $id)->delete();
 
             $success = [];
             if ($query) {
-                return $this->successResponse($success, 'Payment Item have been deleted successfully');
+                return $this->successResponse($success, 'Payment Mode have been deleted successfully');
             } else {
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             }
         }
     }
-
 
 
     // addPaymentStatus
@@ -6001,6 +6000,25 @@ class ApiControllerOne extends BaseController
             //     }
             // }
             return $this->successResponse($FeesDetails, 'Fees row fetch successfully');
+        }
+    }
+    
+    // update Fees
+    public function updateFees(Request $request)
+    {
+        return $request;
+        $id = $request->id;
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+        // return $id;
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+
         }
     }
 }
