@@ -2091,7 +2091,7 @@
     var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
     var studentImg = "{{ asset('public/users/images/') }}";
     var editFeesPageUrl = '{{ route("admin.fees.edit", ":id") }}';
-    
+    var feesDelete = '{{ route("admin.fees.fees_delete") }}';
 </script>
 
 <script src="{{ asset('public/js/custom/fees.js') }}"></script>

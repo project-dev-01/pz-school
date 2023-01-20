@@ -75,32 +75,34 @@ $(function () {
             formData.append('section_id', sectionID);
             formData.append('academic_session_id', year);
             formData.append('student_id', student_id);
-            $("#overlay").fadeIn(300);
-            $.ajax({
-                url: getFeesAllocatedStudents,
-                method: "post",
-                data: formData,
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                success: function (response) {
-                    if (response.code == 200) {
-                        var dataSetNew = response.data;
-                        $(".getFessStudentsHideShow").show("slow");
-                        // set group id
-                        // $("#getFessStudentsGroupID").val(groupID);
-                        getFess(dataSetNew);
-                        $("#overlay").fadeOut(300);
-                    } else {
-                        toastr.error(response.message);
-                        $("#overlay").fadeOut(300);
-                    }
-                }
-            });
+            loadTable(formData);
 
         }
     });
-
+    function loadTable(formData) {
+        $("#overlay").fadeIn(300);
+        $.ajax({
+            url: getFeesAllocatedStudents,
+            method: "post",
+            data: formData,
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (response) {
+                if (response.code == 200) {
+                    var dataSetNew = response.data;
+                    $(".getFessStudentsHideShow").show("slow");
+                    // set group id
+                    // $("#getFessStudentsGroupID").val(groupID);
+                    getFess(dataSetNew);
+                    $("#overlay").fadeOut(300);
+                } else {
+                    toastr.error(response.message);
+                    $("#overlay").fadeOut(300);
+                }
+            }
+        });
+    }
     function getFess(dataSetNew) {
         $('#getFessStudents').DataTable().clear().destroy();
         $('#getFessStudents td').empty();
@@ -135,7 +137,7 @@ $(function () {
                     data: 'feegroup'
                 },
                 {
-                    data: 'allocation_id'
+                    data: 'status'
                 },
                 {
                     data: 'email'
@@ -176,7 +178,15 @@ $(function () {
                 {
                     "targets": 5,
                     "render": function (data, type, row, meta) {
-                        var status = '<div class="badge label-table badge-warning">Pending</div>';
+                        var status = ""
+                        if (data == 'unpaid') {
+                            status = 'badge-danger';
+                        } else if (data == 'paid') {
+                            status = 'badge-success';
+                        } else if (data == 'partly') {
+                            status = 'badge-warning';
+                        }
+                        var status = '<div class="badge label-table ' + status + '">' + data + '</div>';
                         return status;
                     }
                 },
@@ -186,7 +196,7 @@ $(function () {
                         editFeesPageUrl = editFeesPageUrl.replace(':id', row.student_id);
                         var action = '<div class="button-list">' +
                             '<a href = "' + editFeesPageUrl + '" class="btn btn-blue btn-sm waves-effect waves-light"> <i class="fe-edit"></i></a>' +
-                            '<a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' + row.student_id + '" id="deleteFeesGroupBtn"><i class="fe-trash-2"></i></a>' +
+                            '<a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' + row.student_id + '" id="deleteFeesBtn"><i class="fe-trash-2"></i></a>' +
                             '</div>';
                         return action;
                     }
@@ -196,4 +206,48 @@ $(function () {
         }).on('draw', function () {
         });
     }
+
+    // delete DesignationDelete
+    $(document).on('click', '#deleteFeesBtn', function () {
+        var id = $(this).data('id');
+        var url = feesDelete;
+        swal.fire({
+            title: 'Are you sure?',
+            html: 'You want to <b>delete</b> this fees',
+            showCancelButton: true,
+            showCloseButton: true,
+            cancelButtonText: 'Cancel',
+            confirmButtonText: 'Yes, Delete',
+            cancelButtonColor: '#d33',
+            confirmButtonColor: '#556ee6',
+            width: 400,
+            allowOutsideClick: false
+        }).then(function (result) {
+            if (result.value) {
+                $.post(url, {
+                    id: id
+                }, function (data) {
+                    if (data.code == 200) {
+                        toastr.success(data.message);
+                        // $('#getFessStudents').DataTable().ajax.reload(null, false);
+                        var classID = $("#class_id").val();
+                        var sectionID = $("#section_id").val();
+                        var year = $("#btwyears").val();
+                        var student_id = $("#student_id").val();
+
+                        var formData = new FormData();
+                        formData.append('token', token);
+                        formData.append('branch_id', branchID);
+                        formData.append('class_id', classID);
+                        formData.append('section_id', sectionID);
+                        formData.append('academic_session_id', year);
+                        formData.append('student_id', student_id);
+                        loadTable(formData);
+                    } else {
+                        toastr.error(data.message);
+                    }
+                }, 'json');
+            }
+        });
+    });
 });

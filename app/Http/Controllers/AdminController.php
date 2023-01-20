@@ -6641,4 +6641,13 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.add_fees_allocation'), $data);
         return $response;
     }
+    public function feesDelete(Request $request)
+    {
+        $data = [
+            'student_id' => $request->id,
+            'academic_session_id' => session()->get('academic_session_id'),
+        ];
+        $response = Helper::PostMethod(config('constants.api.fees_delete'), $data);
+        return $response;
+    }
 }

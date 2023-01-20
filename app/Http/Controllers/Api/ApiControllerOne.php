@@ -5819,7 +5819,10 @@ class ApiControllerOne extends BaseController
             // dd($studentData);
             if (!empty($studentData)) {
                 foreach ($studentData as $key => $value) {
-                    // $invoiceSts = $this->getInvoiceStatus($value->student_id, $branchID, $academic_session_id);
+                    // paid details
+                    $invoiceSts = $this->getInvoiceStatus($value->student_id, $branchID, $academic_session_id);
+                    $studentData[$key]->status = $invoiceSts['status'];
+                    // getfeesGroup details
                     $studentData[$key]->feegroup = $this->getfeeGroup($value->student_id, $branchID, $academic_session_id);
                 }
             }
@@ -5828,9 +5831,9 @@ class ApiControllerOne extends BaseController
     }
     public function getInvoiceStatus($studentID, $branchID, $academic_session_id)
     {
-        // dd($studentID);
+        $status = "";
         $conn = $this->createNewConnection($branchID);
-        $feesAllocation = $conn->table('fees_allocation as fa')
+        $balance = $conn->table('fees_allocation as fa')
             ->select(
                 DB::raw('SUM(fgd.amount) as total'),
                 DB::raw('MIN(fa.id) as inv_no')
@@ -5842,35 +5845,64 @@ class ApiControllerOne extends BaseController
                 ['fa.academic_session_id', '=', $academic_session_id]
             ])
             ->get()->toArray();
-        dd($feesAllocation);
-        // $status = "";
-        // $sql = "SELECT 
-        // SUM(fee_groups_details.amount) as total, min(fee_allocation.id) as inv_no 
-        // FROM fee_allocation 
-        // LEFT JOIN fee_groups_details ON
-        // fee_groups_details.fee_groups_id = fee_allocation.group_id 
-        // LEFT JOIN fees_type ON fees_type.id = fee_groups_details.fee_type_id 
-        // WHERE fee_allocation.student_id = " . $this->db->escape($studentID) . " 
-        // AND fee_allocation.session_id = " . $this->db->escape(get_session_id());
-        // $balance = $this->db->query($sql)->row_array();
-        // $invNo = str_pad($balance['inv_no'], 4, '0', STR_PAD_LEFT);
-        // // print_r($balance);
-        // // exit;
-        // $sql = "SELECT IFNULL(SUM(fee_payment_history.amount), 0) as amount, IFNULL(SUM(fee_payment_history.discount), 0) as discount, IFNULL(SUM(fee_payment_history.fine), 0) as fine FROM
-        // fee_payment_history LEFT JOIN fee_allocation ON fee_payment_history.allocation_id = fee_allocation.id WHERE
-        // fee_allocation.student_id = " . $this->db->escape($studentID) . " AND fee_allocation.session_id = " . $this->db->escape(get_session_id());
-        // $paid = $this->db->query($sql)->row_array();
-        // print_r($balance);
-        // print_r($paid);
-        // // exit;
-        // if ($paid['amount'] == 0) {
-        //     $status = 'unpaid';
-        // } elseif ($balance['total'] == ($paid['amount'] + $paid['discount'])) {
-        //     $status = 'total';
-        // } elseif ($paid['amount'] > 1) {
-        //     $status = 'partly';
-        // }
-        // return array('status' => $status, 'invoice_no' => $invNo);
+        $invNo = str_pad($balance['0']->inv_no, 4, '0', STR_PAD_LEFT);
+        $paid = $conn->table('fees_payment_history as fph')
+            ->select(
+                DB::raw('IFNULL(SUM(fph.amount), 0) as amount'),
+                DB::raw('IFNULL(SUM(fph.discount), 0) as discount'),
+                DB::raw('IFNULL(SUM(fph.fine), 0) as fine')
+            )
+            ->leftJoin('fees_allocation as fa', 'fph.allocation_id', '=', 'fa.id')
+            ->where([
+                ['fa.student_id', '=', $studentID],
+                ['fa.academic_session_id', '=', $academic_session_id]
+            ])
+            ->get()->toArray();
+        if ($paid['0']->amount == 0) {
+            $status = 'unpaid';
+        } elseif ($balance['0']->total == ($paid['0']->amount + $paid['0']->discount)) {
+            $status = 'paid';
+        } elseif ($paid['0']->amount > 1) {
+            $status = 'partly';
+        }
+        return array('status' => $status, 'invoice_no' => $invNo);
+    }
+    function deleteFeesDetails(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'student_id' => 'required',
+            'academic_session_id' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $studentID =  $request->student_id;
+            $conn = $this->createNewConnection($request->branch_id);
+            $result = $conn->table('fees_allocation as fa')
+                ->select(
+                    'fa.id',
+                    'fa.student_id'
+                )
+                ->where([
+                    ['fa.student_id', '=', $studentID],
+                    ['fa.academic_session_id', '=', $request->academic_session_id]
+                ])
+                ->get()->toArray();
+            if (!empty($result)) {
+                foreach ($result as $key => $value) {
+                    $conn->table('fees_payment_history')
+                        ->where('allocation_id', $value->id)
+                        ->delete();
+                }
+            }
+            $conn->table('fees_allocation')
+                ->where('student_id', $studentID)
+                ->delete();
+            return $this->successResponse([], 'Fess deleted successfully');
+        }
     }
     public function getfeeGroup($studentID, $branchID, $academic_session_id)
     {
