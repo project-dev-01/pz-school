@@ -6536,10 +6536,11 @@ class AdminController extends Controller
     public function updateFees(Request $request)
     {
         $data = [
-            'id' => $request
+            'payment_mode' => $request->payment_mode,
+            'fees' => $request->fees[$request->payment_mode]
         ];
 
-        dd($data);
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.fees_update'), $data);
         dd($response);
         return $response;

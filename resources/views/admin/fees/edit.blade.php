@@ -188,13 +188,13 @@
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
                                                                             <label for="student Name">Date<span class="text-danger">*</span></label>
-                                                                            <input type="text" id="humanfd-datepicker" name="fee[1][date]" class="form-control" placeholder="MM/DD/YYYY">
+                                                                            <input type="text"  name="fees[1][date]" class="form-control date-picker" placeholder="MM/DD/YYYY">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
                                                                             <label for="payment_status">Payment Status</label>
-                                                                            <select  class="form-control" name="fee[1][payment_status]">
+                                                                            <select  class="form-control" name="fees[1][payment_status]">
                                                                                 <option value="">Select Payment Status</option>
                                                                                 @forelse ($payment_status as $status)
 
@@ -216,7 +216,7 @@
                                                     </div>
                                                 </div>
 
-                                                <!--  Start Student Fee Semester -->
+                                                <!--  Start Student Fees Semester -->
                                                 <div class="payment_2 payment_clear" style="display:none;">
                                                     <div class="row">
                                                         <div class="col-12">
@@ -241,14 +241,15 @@
                                                                                 <tbody>
                                                                                     @foreach($semester as $sem)
                                                                                     <tr>
-                                                                                        <td><input type="checkbox"  name="fee[2][{{$sem['id']}}][status]"/>
+                                                                                        <td><input type="checkbox"   name="fees[2][{{$sem['id']}}][status]">
+                                                                                        <input type="hidden" value="{{$sem['id']}}" name="fees[2][{{$sem['id']}}][semester]">
                                                                                         </td>
-                                                                                        <td><input type="text"  class="form-control inputDateFld1" data-provide="datepicker" placeholder="MM/DD/YYYY" name="fee[2][{{$sem['id']}}][date]">
+                                                                                        <td><input type="text"  class="form-control date-picker" placeholder="MM/DD/YYYY" name="fees[2][{{$sem['id']}}][date]">
                                                                                         </td>
                                                                                         <td>{{$sem['name']}}
                                                                                         </td>
                                                                                         <td>
-                                                                                            <select class="form-control dropDwn1" name="fee[2][{{$sem['id']}}][payment_status]" >
+                                                                                            <select class="form-control dropDwn1" name="fees[2][{{$sem['id']}}][payment_status]" >
                                                                                                 <option value="">Choose Payment Status</option>
                                                                                                     @forelse ($payment_status as $status)
                                                                                                         <option value="{{ $status['id'] }}">{{ $status['name'] }}</option>
@@ -272,9 +273,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!--  End Student Fee Semester -->
+                                                <!--  End Student Fees Semester -->
 
-                                                <!--  Start Student Fee Monthly -->
+                                                <!--  Start Student Fees Monthly -->
                                                 <div class="payment_3 payment_clear" style="display:none;">
                                                     <div class="row">
                                                         <div class="col-12">
@@ -299,13 +300,14 @@
                                                                                 <tbody>
                                                                                     @foreach($month as $mon)
                                                                                     <tr>
-                                                                                        <td><input type="checkbox" value="{{$mon['id']}}" name="fee[3][{{$mon['id']}}][status]">
+                                                                                        <td><input type="checkbox" name="fees[3][{{$mon['id']}}][status]">
+                                                                                        <input type="hidden" value="{{$mon['id']}}" name="fees[3][{{$mon['id']}}][month]">
                                                                                         </td>
-                                                                                        <td><input type="text" class="form-control" data-provide="datepicker" placeholder="MM/DD/YYYY" name="fee[3][{{$mon['id']}}][date]">
+                                                                                        <td><input type="text" class="form-control date-picker"  placeholder="MM/DD/YYYY" name="fees[3][{{$mon['id']}}][date]">
                                                                                         </td>
                                                                                         <td>{{$mon['name']}}
                                                                                         </td>
-                                                                                        <td><select class="form-control" name="fee[3][{{$mon['id']}}][payment_status]">
+                                                                                        <td><select class="form-control" name="fees[3][{{$mon['id']}}][payment_status]">
                                                                                                 <option value="">Choose Payment Status</option>
                                                                                                 @forelse ($payment_status as $status)
                                                                                                         <option value="{{ $status['id'] }}">{{ $status['name'] }}</option>

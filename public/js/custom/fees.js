@@ -1,5 +1,10 @@
 $(function () {
-
+    $(".date-picker").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+    });
     $(".payment_mode").on('change', function (e) {
         e.preventDefault();
         $(".payment_clear").hide();
@@ -251,7 +256,7 @@ $(function () {
         });
     });
 
-    
+
     // edit Fees Form
     $('#editFeesForm').on('submit', function (e) {
        e.preventDefault();

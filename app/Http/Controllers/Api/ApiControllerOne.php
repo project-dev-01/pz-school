@@ -6006,10 +6006,9 @@ class ApiControllerOne extends BaseController
     // update Fees
     public function updateFees(Request $request)
     {
-        return $request;
         $id = $request->id;
         $validator = \Validator::make($request->all(), [
-            'name' => 'required',
+            // 'name' => 'required',
             'branch_id' => 'required',
             'token' => 'required',
         ]);
@@ -6018,7 +6017,77 @@ class ApiControllerOne extends BaseController
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
 
+            
+            // return $request;
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            $fees = $request->fees;
+            if($request->payment_mode=="1") {
+                $conn->table('fees_payment_history')->insert([
+                    'allocation_id' => "1",
+                    'fees_type_id' => "4",
+                    'payment_mode_id' => $request->payment_mode,
+                    'payment_status_id' => $fees['payment_status'],
+                    'collect_by' => "123",
+                    'amount' => "20000",
+                    'discount' => "200",
+                    'fine' => "600",
+                    'pay_via' => "Mas",
+                    'remarks' => "la",
+                    'date' => $fees['date'],
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
+                
+            } else if($request->payment_mode=="2"){
+                foreach ($fees as $fee) {
+                    if (isset($fee['status'])) {
+                        $conn->table('fees_payment_history')->insert([
+                            'allocation_id' => "1",
+                            'fees_type_id' => "4",
+                            'payment_mode_id' => $request->payment_mode,
+                            'payment_status_id' => $fee['payment_status'],
+                            'collect_by' => "123",
+                            'amount' => "20000",
+                            'discount' => "200",
+                            'fine' => "600",
+                            'pay_via' => "Mas",
+                            'remarks' => "la",
+                            'semester' => $fee['semester'],
+                            'date' => $fee['date'],
+                            'created_at' => date("Y-m-d H:i:s")
+                        ]);
+                    }
+                }
+            } else if($request->payment_mode=="3"){
+                foreach ($fees as $fee) {
+                    // return $fee;
+                    if (isset($fee['status'])) {
+                        $query = $conn->table('fees_payment_history')->insert([
+                            'allocation_id' => "1",
+                            'fees_type_id' => "4",
+                            'payment_mode_id' => $request->payment_mode,
+                            'payment_status_id' => $fee['payment_status'],
+                            'collect_by' => "123",
+                            'amount' => "20000",
+                            'discount' => "200",
+                            'fine' => "600",
+                            'pay_via' => "Mas",
+                            'remarks' => "la",
+                            'monthly' => $fee['month'],
+                            'date' => $fee['date'],
+                            'created_at' => date("Y-m-d H:i:s")
+                        ]);
+                    }
+                }
 
+            }
+            $query=1;
+            $success = [];
+            if ($query) {
+                return $this->successResponse($success, 'Fees Group Details have Been updated');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+            }
         }
     }
 }
