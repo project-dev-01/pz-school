@@ -2041,46 +2041,46 @@
         });
 </script>
 <script>
-    $(function() {
-        $(document).on('change', '#semester1', function() {
-            if ($(this).prop('checked') == false) {
-                $('.inputDateFld1').prop('disabled', true);
-                $('.dropDwn1').prop('disabled', true);
-            } else {
-                $('.inputDateFld1').prop('disabled', false);
-                $('.dropDwn1').prop('disabled', false);
-            }
+    // $(function() {
+    //     $(document).on('change', '#semester1', function() {
+    //         if ($(this).prop('checked') == false) {
+    //             $('.inputDateFld1').prop('disabled', true);
+    //             $('.dropDwn1').prop('disabled', true);
+    //         } else {
+    //             $('.inputDateFld1').prop('disabled', false);
+    //             $('.dropDwn1').prop('disabled', false);
+    //         }
 
-        });
-    });
+    //     });
+    // });
 </script>
 <script>
-    $(function() {
-        $(document).on('change', '#semester2', function() {
-            if ($(this).prop('checked') == false) {
-                $('.inputDateFld2').prop('disabled', true);
-                $('.dropDwn2').prop('disabled', true);
-            } else {
-                $('.inputDateFld2').prop('disabled', false);
-                $('.dropDwn2').prop('disabled', false);
-            }
+    // $(function() {
+    //     $(document).on('change', '#semester2', function() {
+    //         if ($(this).prop('checked') == false) {
+    //             $('.inputDateFld2').prop('disabled', true);
+    //             $('.dropDwn2').prop('disabled', true);
+    //         } else {
+    //             $('.inputDateFld2').prop('disabled', false);
+    //             $('.dropDwn2').prop('disabled', false);
+    //         }
 
-        });
-    });
+    //     });
+    // });
 </script>
 <script>
-    $(function() {
-        $(document).on('change', '#semester3', function() {
-            if ($(this).prop('checked') == false) {
-                $('.inputDateFld3').prop('disabled', true);
-                $('.dropDwn3').prop('disabled', true);
-            } else {
-                $('.inputDateFld3').prop('disabled', false);
-                $('.dropDwn3').prop('disabled', false);
-            }
+    // $(function() {
+    //     $(document).on('change', '#semester3', function() {
+    //         if ($(this).prop('checked') == false) {
+    //             $('.inputDateFld3').prop('disabled', true);
+    //             $('.dropDwn3').prop('disabled', true);
+    //         } else {
+    //             $('.inputDateFld3').prop('disabled', false);
+    //             $('.dropDwn3').prop('disabled', false);
+    //         }
 
-        });
-    });
+    //     });
+    // });
 </script>
 
 <script>

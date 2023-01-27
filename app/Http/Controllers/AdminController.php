@@ -6509,23 +6509,27 @@ class AdminController extends Controller
             ]
         );
     }
-    
+
     public function editFees($id)
     {
         $data = [
             'student_id' => $id,
+            "academic_session_id" => session()->get('academic_session_id')
         ];
         $payment_mode = Helper::GetMethod(config('constants.api.payment_mode_list'));
         $payment_status = Helper::GetMethod(config('constants.api.payment_status_list'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $fees = Helper::PostMethod(config('constants.api.fees_details'), $data);
-        $month = [["name"=>'January','id'=>1],["name"=>'February','id'=>2],["name"=>'March','id'=>3],["name"=>'April','id'=>4],["name"=>'May','id'=>5],["name"=>'June','id'=>6],["name"=>'July','id'=>7],["name"=>'August','id'=>8],["name"=>'September','id'=>9],["name"=>'October','id'=>10],["name"=>'November','id'=>11],["name"=>'December','id'=>12]];
-        // dd($month);
+        $student_fees_history = Helper::PostMethod(config('constants.api.student_fees_history'), $data);
+        $month = [["name" => 'January', 'id' => 1], ["name" => 'February', 'id' => 2], ["name" => 'March', 'id' => 3], ["name" => 'April', 'id' => 4], ["name" => 'May', 'id' => 5], ["name" => 'June', 'id' => 6], ["name" => 'July', 'id' => 7], ["name" => 'August', 'id' => 8], ["name" => 'September', 'id' => 9], ["name" => 'October', 'id' => 10], ["name" => 'November', 'id' => 11], ["name" => 'December', 'id' => 12]];
+        // dd($fees);
         return view(
             'admin.fees.edit',
             [
+                'student_id' => $id,
                 'student' => $fees['data']['student'],
                 'fees' => $fees['data']['fees'],
+                'student_fees_history' => $student_fees_history['data'],
                 'semester' => $semester['data'],
                 'payment_mode' => $payment_mode['data'],
                 'payment_status' => $payment_status['data'],
@@ -6536,13 +6540,15 @@ class AdminController extends Controller
     public function updateFees(Request $request)
     {
         $data = [
+            'student_id' => $request->student_id,
+            'collect_by' => session()->get('ref_user_id'),
+            'fees_type' => $request->fees_type,
+            'allocation_id' => $request->allocation_id,
             'payment_mode' => $request->payment_mode,
             'fees' => $request->fees[$request->payment_mode]
         ];
-
-        // dd($data);
         $response = Helper::PostMethod(config('constants.api.fees_update'), $data);
-        dd($response);
+        // dd($response);
         return $response;
     }
     // index Fees

@@ -15,6 +15,7 @@ class CreateFeesPaymentHistoryTable extends Migration
     {
         Schema::create('fees_payment_history', function (Blueprint $table) {
             $table->id();
+            $table->integer('student_id');
             $table->integer('allocation_id');
             $table->integer('fees_type_id');
             $table->string('monthly')->nullable();
@@ -28,6 +29,7 @@ class CreateFeesPaymentHistoryTable extends Migration
             $table->string('pay_via')->nullable();
             $table->text('remarks')->nullable();
             $table->date('date');
+            $table->integer('academic_session_id')->default('0');
             $table->timestamps();
         });
     }

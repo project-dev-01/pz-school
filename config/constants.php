@@ -723,11 +723,13 @@ return [
         
         'get_student_details' => $url.'/get_student_details',
         'add_fees_allocation' => $url.'/fees/fees_allocation',
+        'student_fees_history' => $url.'/fees/student_fees_history',
         'fees_allocated_students' => $url.'/fees/fees_allocated_students',
         'get_fees_allocated_students' => $url.'/fees/get_fees_allocated_students',
         'fees_details' => $url.'/fees/fees-details',
         'fees_delete' => $url.'/fees/delete',
         'fees_update' => $url.'/fees/update',
+        'change_payment_mode' => $url.'/fees/change_payment_mode'
 
         ]
 
