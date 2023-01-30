@@ -40,6 +40,11 @@
 
     .table td {
         border-top: none;
+        text-align: center;
+    }
+
+    .table th {
+        text-align: center;
     }
 
     .homework-list {
@@ -613,7 +618,7 @@
     </div>
 </div>
 <!-- end col-12 -->
-</div> <!-- end row -->
+
 
 <!-- <div class="row">
     <div class="col-lg-12">
@@ -633,6 +638,398 @@
         </div>
     </div>
 </div> -->
+<div class="row">
+    <div class="col-xl-12 col-md-12">
+        <div class="card">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <h4 class="navv">Student marks Semester Wise
+                        <h4>
+                </li>
+            </ul><br>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Student Name<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Sheelu</option>
+                                <option value="">Veena</option>
+                                <option value="">Jesy</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Grade<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Tingatan 1</option>
+                                <option value="">Tingatan 1</option>
+                                <option value="">Tingatan 1</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Acedamic Year<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">2020-2021</option>
+                                <option value="">2021-2022</option>
+                                <option value="">2022-2023</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered w-100 nowrap" id="">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">#</th>
+                                <th rowspan="2">Sudent Name</th>
+                                <th rowspan="2">Grade</th>
+                                <th rowspan="2">Total Subject</th>
+                                <th rowspan="2">Total Marks</th>
+                                <th colspan="4">Semester Marks</th>
+                                <th rowspan="2">Remarks</th>
+                            </tr>
+                            <tr>
+
+                                <th>Semester 1</th>
+                                <th>Semester 2</th>
+                                <th>Semester 3</th>
+                                <th>Semester 4</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#</td>
+                                <td>Shasha</td>
+                                <td>Tingatan 1</td>
+                                <td>5</td>
+                                <td>500</td>
+                                <td>395</td>
+                                <td>492</td>
+                                <td>489</td>
+                                <td>498</td>
+                                <th>Good</th>
+                            </tr>
+                            <tr>
+                                <td>#</td>
+                                <td>sheelu</td>
+                                <td>Tingatan 1</td>
+                                <td>6</td>
+                                <td>600</td>
+                                <td>595</td>
+                                <td>492</td>
+                                <td>589</td>
+                                <td>598</td>
+                                <th>Good</th>
+                            </tr>
+                            <tr>
+                                <td>#</td>
+                                <td>veena</td>
+                                <td>Tingatan 1</td>
+                                <td>7</td>
+                                <td>600</td>
+                                <td>395</td>
+                                <td>392</td>
+                                <td>389</td>
+                                <td>398</td>
+                                <th>Work hard</th>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end card-->
+</div> <!-- end col -->
+<div class="row">
+    <div class="col-xl-12 col-md-12">
+        <div class="card">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <h4 class="navv">Student marks Subject Wise
+                        <h4>
+                </li>
+            </ul><br>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Student Name<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Sheelu</option>
+                                <option value="">Veena</option>
+                                <option value="">Jesy</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Grade<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Tingatan 1</option>
+                                <option value="">Tingatan 1</option>
+                                <option value="">Tingatan 1</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Acedamic Year<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">2020-2021</option>
+                                <option value="">2021-2022</option>
+                                <option value="">2022-2023</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered w-100 nowrap" id="">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">#</th>
+                                <th rowspan="2">Sudent Name</th>
+                                <th rowspan="2">Grade</th>
+                                <th rowspan="2">Total Subject</th>
+                                <th rowspan="2">Total Marks</th>
+                                <th colspan="4">Subject Marks</th>
+                                <th rowspan="2">Remarks</th>
+                            </tr>
+                            <tr>
+
+                                <th>English</th>
+                                <th>Maths</th>
+                                <th>Csc</th>
+                                <th>DS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#</td>
+                                <td>Shasha</td>
+                                <td>Tingatan 1</td>
+                                <td>5</td>
+                                <td>500</td>
+                                <td>95</td>
+                                <td>92</td>
+                                <td>89</td>
+                                <td>98</td>
+                                <th>Good</th>
+                            </tr>
+                            <tr>
+                                <td>#</td>
+                                <td>sheelu</td>
+                                <td>Tingatan 1</td>
+                                <td>6</td>
+                                <td>600</td>
+                                <td>95</td>
+                                <td>92</td>
+                                <td>89</td>
+                                <td>98</td>
+                                <th>Good</th>
+                            </tr>
+                            <tr>
+                                <td>#</td>
+                                <td>veena</td>
+                                <td>Tingatan 1</td>
+                                <td>7</td>
+                                <td>600</td>
+                                <td>95</td>
+                                <td>92</td>
+                                <td>89</td>
+                                <td>98</td>
+                                <th>Work hard</th>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end card-->
+</div> <!-- end col -->
+
+
+<div class="row">
+    <div class="col-xl-12 col-md-12">
+        <div class="card">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <h4 class="navv"> Student Top 10 Ranking</h4>
+                </li>
+            </ul><br>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Semester<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Semester 1</option>
+                                <option value="">Semester 2</option>
+                                <option value="">Semester 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Grade<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Tingatan 1</option>
+                                <option value="">Tingatan 1</option>
+                                <option value="">Tingatan 1</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Acedamic Year<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">2020-2021</option>
+                                <option value="">2021-2022</option>
+                                <option value="">2022-2023</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered w-100 nowrap" id="">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Student Name</th>
+                                <th>Grade</th>
+                                <th>Total Marks</th>
+                                <th>Marks</th>
+                                <th>Rank</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#</td>
+                                <td>Mohamad</td>
+                                <td>Tingatan 1</td>
+                                <td>500</td>
+                                <td>480</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>#</td>
+                                <td>Jhon</td>
+                                <td>Tingatan 1</td>
+                                <td>500</td>
+                                <td>480</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>#</td>
+                                <td>Jhony</td>
+                                <td>Tingatan 1</td>
+                                <td>500</td>
+                                <td>480</td>
+                                <td>3</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end card-->
+</div> <!-- end col -->
+</div> <!-- end row -->
+<div class="row">
+    <div class="col-xl-12 col-md-12">
+        <div class="card">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <h4 class="navv"> Student Bottom 10 Ranking</h4>
+                </li>
+            </ul><br>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Semester<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Semester 1</option>
+                                <option value="">Semester 2</option>
+                                <option value="">Semester 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Grade<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Tingatan 1</option>
+                                <option value="">Tingatan 1</option>
+                                <option value="">Tingatan 1</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Acedamic Year<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">2020-2021</option>
+                                <option value="">2021-2022</option>
+                                <option value="">2022-2023</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered w-100 nowrap" id="">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Student Name</th>
+                                <th>Grade</th>
+                                <th>Total Marks</th>
+                                <th>Marks</th>
+                                <th>Rank</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#</td>
+                                <td>Mohamad</td>
+                                <td>Tingatan 1</td>
+                                <td>500</td>
+                                <td>480</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>#</td>
+                                <td>Jhon</td>
+                                <td>Tingatan 1</td>
+                                <td>500</td>
+                                <td>480</td>
+                                <td>22</td>
+                            </tr>
+                            <tr>
+                                <td>#</td>
+                                <td>Jhony</td>
+                                <td>Tingatan 1</td>
+                                <td>500</td>
+                                <td>480</td>
+                                <td>33</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end card-->
+</div> <!-- end col -->
+</div> <!-- end row -->
+
+
 @include('teacher.dashboard.check_list')
 @include('teacher.dashboard.task')
 @include('teacher.dashboard.task-show')

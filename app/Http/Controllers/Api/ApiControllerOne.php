@@ -5816,11 +5816,40 @@ class ApiControllerOne extends BaseController
                 ->orderBy('st.id', 'ASC')
                 ->get()->toArray();
             // dd($studentData);
+            $arrData = [];
             if (!empty($studentData)) {
                 foreach ($studentData as $key => $value) {
                     // paid details
                     $invoiceSts = $this->getInvoiceStatus($value->student_id, $branchID, $academic_session_id);
+                    // filter by invoice status
+                    // if (isset($request->payment_status)) {
+                    //     echo "---" . $invoiceSts['payment_status_id'];
+                    //     echo "---" . $request->payment_status . '\n';
+                    //     if ($invoiceSts['payment_status_id'] == $request->payment_status) {
+                    //         // $arrData = $studentData;
+                    //         $arrData[$key]->student_id = $value->student_id;
+                    //         $arrData[$key]->email = $value->email;
+                    //         $arrData[$key]->class_name = $value->class_name;
+                    //         $arrData[$key]->section_name = $value->section_name;
+                    //         $arrData[$key]->name = $value->name;
+
+                    //         $arrData[$key]->status = $invoiceSts['status'];
+                    //         $arrData[$key]->feegroup = $this->getfeeGroup($value->student_id, $branchID, $academic_session_id);
+                    //     }
+                    // } else {
+                    //     $arrData[$key]->student_id = $value->student_id;
+                    //     $arrData[$key]->email = $value->email;
+                    //     $arrData[$key]->class_name = $value->class_name;
+                    //     $arrData[$key]->section_name = $value->section_name;
+                    //     $arrData[$key]->name = $value->name;
+
+                    //     $arrData[$key]->status = $invoiceSts['status'];
+                    //     $arrData[$key]->feegroup = $this->getfeeGroup($value->student_id, $branchID, $academic_session_id);
+                    // }
+
                     $studentData[$key]->status = $invoiceSts['status'];
+
+                    // dd($studentData[$key]->status);
                     // getfeesGroup details
                     $studentData[$key]->feegroup = $this->getfeeGroup($value->student_id, $branchID, $academic_session_id);
                 }
@@ -5831,6 +5860,7 @@ class ApiControllerOne extends BaseController
     public function getInvoiceStatus($studentID, $branchID, $academic_session_id)
     {
         $status = "";
+        $payment_status_id = "";
         $conn = $this->createNewConnection($branchID);
         $balance = $conn->table('fees_allocation as fa')
             ->select(
@@ -5860,12 +5890,15 @@ class ApiControllerOne extends BaseController
         $paid_amount = round($paid['0']->amount);
         if ($paid['0']->amount == 0) {
             $status = 'unpaid';
+            $payment_status_id = 2;
         } elseif ($balance['0']->total == ($paid_amount + $paid['0']->discount)) {
             $status = 'paid';
+            $payment_status_id = 1;
         } elseif ($paid['0']->amount > 1) {
             $status = 'partly';
+            $payment_status_id = 3;
         }
-        return array('status' => $status, 'invoice_no' => $invNo);
+        return array('status' => $status, 'payment_status_id' => $payment_status_id, 'invoice_no' => $invNo);
     }
     function deleteFeesDetails(Request $request)
     {

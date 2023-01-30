@@ -671,6 +671,289 @@
         </div>
     </div> -->
 </div>
+<div class="row">
+    <div class="col-xl-12 col-md-12">
+        <div class="card">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <h4 class="navv">Semesterwise Ranking class & Subject</h4>
+                </li>
+            </ul><br>
+            <div class="card-body">
+                <div class="row form-inline">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Semester </label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Semester 1</option>
+                                <option value="">Semester 2</option>
+                                <option value="">Semester 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for=""><b> Over all class Position : 5th Rank</b></label>
+                        </div>
+                    </div>
+                </div><br>
+                <div class="table-responsive">
+                    <table class="table table-bordered w-100 nowrap" id="">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Subject</th>
+                                <th>Marks</th>
+                                <th>Subject Position</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#</td>
+                                <td>English</td>
+                                <td>85</td>
+                                <td>2 nd Position</td>
+                            </tr>
+                            <tr>
+                                <td>#</td>
+                                <td>Maths</td>
+                                <td>92</td>
+                                <td>7th Position</td>
+                            </tr>
+                            <tr>
+                                <td>#</td>
+                                <td>Csc</td>
+                                <td>85</td>
+                                <td>3rd Position</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end card-->
+</div> <!-- end col -->
+
+<div class="row">
+    <div class="col-xl-12 col-md-12">
+        <div class="card">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <h4 class="navv">Semester Wise Exam Marks
+                        <h4>
+                </li>
+            </ul><br>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered w-100 nowrap" id="">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">#</th>
+                                <th rowspan="2">Subjects</th>
+                                <th colspan="4">Semester Marks</th>
+                                <th rowspan="2">Remarks</th>
+                            </tr>
+                            <tr>
+
+                                <th>Semester 1</th>
+                                <th>Semester 2</th>
+                                <th>Semester 3</th>
+                                <th>Semester 4</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#</td>
+                                <td>Tamil</td>
+                                <td>95</td>
+                                <td>92</td>
+                                <td>89</td>
+                                <td>98</td>
+                                <th>Good</th>
+                            </tr>
+                            <tr>
+                                <td>#</td>
+                                <td>English</td>
+                                <td>95</td>
+                                <td>92</td>
+                                <td>89</td>
+                                <td>98</td>
+                                <th>Good</th>
+                            </tr>
+                            <tr>
+                                <td>#</td>
+                                <td>Maths</td>
+                                <td>95</td>
+                                <td>92</td>
+                                <td>89</td>
+                                <td>98</td>
+                                <th>Good</th>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end card-->
+</div> <!-- end col -->
+<div class="row">
+    <div class="col-xl-12 col-md-12">
+        <!-- Portlet card -->
+        <div class="card">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <h4 class="navv"> Ranking in Class & Subject
+                        <h4>
+                </li>
+            </ul><br>
+            <div class="card-body" dir="ltr">
+                <div class="card-widgets">
+                    <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                    <a data-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
+                    <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                </div>
+                <h4 class="header-title mb-0">Each subject Position in class</h4>
+
+                <div id="cardCollpase1" class="collapse pt-3 show">
+                    <div class="text-center">
+                        <div class="mt-3 chartjs-chart">
+                            <canvas id="marksChart" height="150"></canvas>
+                        </div>
+                    </div>
+                </div> <!-- end collapse-->
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+</div>
+
+
+<div class="row">
+    <div class="col-xl-12 col-md-12">
+        <div class="card">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <h4 class="navv"> Marks Status & Subject Status
+                        <h4>
+                </li>
+            </ul><br>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Semester<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Semester 1</option>
+                                <option value="">Semester 2</option>
+                                <option value="">Semester 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Mark Status<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Low Marks</option>
+                                <option value="">Highest Marks</option>
+                                <option value="">Average Marks</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Subject Status<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Weak Subject</option>
+                                <option value="">Strong Subject</option>
+                                <option value="">Average Subject</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered w-100 nowrap" id="">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Subject</th>
+                                <th>Marks</th>
+                                <th>Marks Status</th>
+                                <th>Subject Status</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#</td>
+                                <td>Csc</td>
+                                <td>65</td>
+                                <td><span class="badge badge-danger">Low Marks</span></td>
+                                <td><span class="badge badge-danger">Weak Subject</span></td>
+                                <td>Work hard</td>
+                            </tr>
+                            <tr>
+                                <td>#</td>
+                                <td>Maths</td>
+                                <td>85</td>
+                                <td><span class="badge badge-success">Highest Mark</span></td>
+                                <td><span class="badge badge-success">Strong Subject</span></td>
+                                <td>Good</td>
+                            </tr>
+                            <tr>
+                                <td>#</td>
+                                <td>Tamil</td>
+                                <td>75</td>
+                                <td><span class="badge badge-warning">Average Marks</span></td>
+                                <td><span class="badge badge-warning">Average Subject</span></td>
+                                <td>Good but work hard</td>
+                            </tr>
+                            <tr>
+                                <td>#</td>
+                                <td>English</td>
+                                <td>71</td>
+                                <td><span class="badge badge-warning">Average Marks</span></td>
+                                <td><span class="badge badge-warning">Average Subject</span></td>
+                                <td>Good but work hard</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end card-->
+</div> <!-- end col -->
+
+<div class="row">
+    <div class="col-xl-12 col-md-12">
+        <!-- Portlet card -->
+        <div class="card">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <h4 class="navv"> Marks & Subject Status
+                        <h4>
+                </li>
+            </ul><br>
+            <div class="card-body" dir="ltr">
+                <div class="card-widgets">
+                    <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                    <a data-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
+                    <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                </div>
+                <h4 class="header-title mb-0">Low and Highest Marks in subject</h4>
+
+                <div id="cardCollpase1" class="collapse pt-3 show">
+                    <div class="text-center">
+                        <div class="mt-3 chartjs-chart">
+                            <canvas id="markssubject" height="150"></canvas>
+                        </div>
+                    </div>
+                </div> <!-- end collapse-->
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+</div>
 @include('student.dashboard.check_list')
 @include('student.dashboard.exam-schedule')
 </div> <!-- container -->
@@ -698,5 +981,47 @@
 <!-- to do list -->
 <script src="{{ asset('public/js/custom/admin/dashboard.js') }}"></script>
 <script src="{{ asset('public/js/custom/greeting.js') }}"></script>
+<script>
+    var marksCanvas = document.getElementById("marksChart");
+    var marksData = {
+        labels: ["English", "Tamil", "Maths", "Science", "Csc"],
+        datasets: [{
+            label: "Subject Position",
+            backgroundColor: "rgba(200,0,0,0.2)",
+            data: [85, 75, 92, 80, 85]
+        }, {
+            label: "Semester,",
+            backgroundColor: "rgba(0,0,200,0.2)",
+            data: [95, 85, 75, 65, 55]
+        }]
+    };
+    var radarChart = new Chart(marksCanvas, {
+        type: 'radar',
+        data: marksData
+    });
+</script>
+<script>
+    var marksCanvas = document.getElementById("markssubject");
+    var marksData = {
+        labels: ["English", "Tamil", "Maths", "Science", "Csc"],
+        datasets: [{
+                label: "Low Marks Status",
+                backgroundColor: "rgba(247, 119, 133, 0.8)",
+                data: [65, 65, 78, 67]
+            },
+            {
+                label: "Subject Status",
+                backgroundColor: "rgba(111, 247, 82, 0.8)",
+                data: [55, 55, 43, 12]
+            }
+        ]
+    };
+    var radarChart = new Chart(marksCanvas, {
+        type: 'radar',
+        data: marksData
+    });
+</script>
+
+
 
 @endsection

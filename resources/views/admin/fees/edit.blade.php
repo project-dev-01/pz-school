@@ -25,7 +25,7 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-4">
-                                <label class="mb-4">Academic Year : <span class="text-muted mr-2">{{$student['academic_year']}}</span></label>
+                                <label class="mb-4">Student Name : <span class="text-muted mr-2">{{$student['name']}}</span></label>
                             </div>
                             <div class="col-md-4">
                                 <label class="mb-4">Grade : <span class="text-muted mr-2">{{$student['class_name']}}</span></label>
@@ -38,20 +38,20 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-4">
-                                <label class="mb-4">Student Name : <span class="text-muted mr-2">{{$student['name']}}</span></label>
+                                <label class="mb-4">Academic Year : <span class="text-muted mr-2">{{$student['academic_year']}}</span></label>
                             </div>
                             <div class="col-md-4">
-                                <label class="mb-4">Parent Name : <span class="text-muted mr-2">{{$student['parent_name']}}</span></label>
+                                <label class="mb-4">Email : <span class="text-muted mr-2">{{$student['email']}}</span></label>
                             </div>
                             <div class="col-md-4">
-                                <label class="mb-4">Phone No : <span class="text-muted mr-2"></span></label>
+                                <label class="mb-4">Parent Phone No : <span class="text-muted mr-2"></span></label>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-4">
-                                <label class="mb-4">Email : <span class="text-muted mr-2">{{$student['email']}}</span></label>
+                                <label class="mb-4">Parent Name : <span class="text-muted mr-2">{{$student['parent_name']}}</span></label>
                             </div>
                         </div>
                     </div>
@@ -170,7 +170,7 @@
                         <input type="hidden" value="{{ $student_id }}" name="student_id" id="studentID" class="form-control">
                         <input type="hidden" value="{{ $student['academic_id'] }}" name="academic_year" id="academicYear" class="form-control">
                         <div class="col-md-5">
-                            <div class="form-group">
+                            <div class="form-group" style="margin: 25px 6px;">
                                 <label for="payment_mode">Payment Mode</label>
                                 <select id="payment_mode{{$fee['fees_type_id']}}" class="form-control payment_mode" name="payment_mode">
                                     <option value="">Select Payment Mode</option>
@@ -185,29 +185,31 @@
                             <div class="">
                                 <div class="col-12">
                                     <div class="card">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="amount">Amount<span class="text-danger">*</span></label>
-                                                    <input type="text" id="yearAmt" name="fees[1][amount]" readonly class="fees_amount_1 form-control">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="amount">Amount<span class="text-danger">*</span></label>
+                                                        <input type="text" id="yearAmt" name="fees[1][amount]" readonly class="fees_amount_1 form-control">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="student Name">Date<span class="text-danger">*</span></label>
-                                                    <input type="text" id="yearDate" name="fees[1][date]" class="form-control date-picker" placeholder="MM/DD/YYYY">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="student Name">Date<span class="text-danger">*</span></label>
+                                                        <input type="text" id="yearDate" name="fees[1][date]" class="form-control date-picker" placeholder="MM/DD/YYYY">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="payment_status">Payment Status</label>
-                                                    <select class="form-control"  id="yearPaySts" name="fees[1][payment_status]">
-                                                        <option value="">Select Payment Status</option>
-                                                        @forelse ($payment_status as $status)
-                                                        <option value="{{ $status['id'] }}">{{ $status['name'] }}</option>
-                                                        @empty
-                                                        @endforelse
-                                                    </select>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="payment_status">Payment Status</label>
+                                                        <select class="form-control" id="yearPaySts" name="fees[1][payment_status]">
+                                                            <option value="">Select Payment Status</option>
+                                                            @forelse ($payment_status as $status)
+                                                            <option value="{{ $status['id'] }}">{{ $status['name'] }}</option>
+                                                            @empty
+                                                            @endforelse
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

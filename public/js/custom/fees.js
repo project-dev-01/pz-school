@@ -164,6 +164,7 @@ $(function () {
             var sectionID = $("#section_id").val();
             var year = $("#btwyears").val();
             var student_id = $("#student_id").val();
+            var payment_status = $("#payment_status").val();
 
             var formData = new FormData();
             formData.append('token', token);
@@ -172,6 +173,7 @@ $(function () {
             formData.append('section_id', sectionID);
             formData.append('academic_session_id', year);
             formData.append('student_id', student_id);
+            formData.append('payment_status', payment_status);
             loadTable(formData);
 
         }
