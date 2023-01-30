@@ -5784,6 +5784,12 @@ class ApiControllerOne extends BaseController
             // create new connection
             $branchID = $request->branch_id;
             $academic_session_id = $request->academic_session_id;
+            $feesGroupId = null;
+            if ($request->fees_type) {
+                $feesDet = explode('|', $request->fees_type);
+                $feesGroupId = $feesDet[0];
+            }
+            // $fees_type = isset($request->fees_type) ? $request->fees_type : null;
             $conn = $this->createNewConnection($request->branch_id);
             $student_id = $request->student_id;
             // get data
@@ -5812,49 +5818,45 @@ class ApiControllerOne extends BaseController
                 ->when($student_id, function ($q)  use ($student_id) {
                     $q->where('en.student_id', $student_id);
                 })
+                ->when($feesGroupId, function ($q)  use ($feesGroupId) {
+                    $q->where('fa.group_id', $feesGroupId);
+                })
                 ->groupBy('fa.student_id')
                 ->orderBy('st.id', 'ASC')
                 ->get()->toArray();
-            // dd($studentData);
             $arrData = [];
             if (!empty($studentData)) {
+                $i = 0;
                 foreach ($studentData as $key => $value) {
+                    $object = new \stdClass();
                     // paid details
                     $invoiceSts = $this->getInvoiceStatus($value->student_id, $branchID, $academic_session_id);
                     // filter by invoice status
-                    // if (isset($request->payment_status)) {
-                    //     echo "---" . $invoiceSts['payment_status_id'];
-                    //     echo "---" . $request->payment_status . '\n';
-                    //     if ($invoiceSts['payment_status_id'] == $request->payment_status) {
-                    //         // $arrData = $studentData;
-                    //         $arrData[$key]->student_id = $value->student_id;
-                    //         $arrData[$key]->email = $value->email;
-                    //         $arrData[$key]->class_name = $value->class_name;
-                    //         $arrData[$key]->section_name = $value->section_name;
-                    //         $arrData[$key]->name = $value->name;
-
-                    //         $arrData[$key]->status = $invoiceSts['status'];
-                    //         $arrData[$key]->feegroup = $this->getfeeGroup($value->student_id, $branchID, $academic_session_id);
-                    //     }
-                    // } else {
-                    //     $arrData[$key]->student_id = $value->student_id;
-                    //     $arrData[$key]->email = $value->email;
-                    //     $arrData[$key]->class_name = $value->class_name;
-                    //     $arrData[$key]->section_name = $value->section_name;
-                    //     $arrData[$key]->name = $value->name;
-
-                    //     $arrData[$key]->status = $invoiceSts['status'];
-                    //     $arrData[$key]->feegroup = $this->getfeeGroup($value->student_id, $branchID, $academic_session_id);
-                    // }
-
-                    $studentData[$key]->status = $invoiceSts['status'];
-
-                    // dd($studentData[$key]->status);
-                    // getfeesGroup details
-                    $studentData[$key]->feegroup = $this->getfeeGroup($value->student_id, $branchID, $academic_session_id);
+                    if (isset($request->payment_status)) {
+                        if ($invoiceSts['payment_status_id'] == $request->payment_status) {
+                            $object->student_id = $value->student_id;
+                            $object->email = $value->email;
+                            $object->class_name = $value->class_name;
+                            $object->section_name = $value->section_name;
+                            $object->name = $value->name;
+                            $object->status = $invoiceSts['status'];
+                            $object->feegroup = $this->getfeeGroup($value->student_id, $branchID, $academic_session_id);
+                            array_push($arrData, $object);
+                        }
+                    } else {
+                        $object->student_id = $value->student_id;
+                        $object->email = $value->email;
+                        $object->class_name = $value->class_name;
+                        $object->section_name = $value->section_name;
+                        $object->name = $value->name;
+                        $object->status = $invoiceSts['status'];
+                        $object->feegroup = $this->getfeeGroup($value->student_id, $branchID, $academic_session_id);
+                        array_push($arrData, $object);
+                    }
+                    $i++;
                 }
             }
-            return $this->successResponse($studentData, 'get student details fetch successfully');
+            return $this->successResponse($arrData, 'get student details fetch successfully');
         }
     }
     public function getInvoiceStatus($studentID, $branchID, $academic_session_id)
@@ -6296,6 +6298,59 @@ class ApiControllerOne extends BaseController
                 // ->orderBy('st.id', 'ASC')
                 ->get();
             return $this->successResponse($studentData, 'Fees paid fetch successfully');
+        }
+    }
+    // fees Type Group
+    public function feesTypeGroup(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'academic_session_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            $branchID = $request->branch_id;
+            // get data
+            // $typeID = (isset($request->type_id) ? $request->type_id : 0);
+            $html = "";
+            $result = $conn->table('fees_group')
+                ->where([
+                    ['academic_session_id', '=', $request->academic_session_id]
+                ])
+                ->get();
+            if (count($result)) {
+                $html .= "<option value=''>Select</option>";
+                foreach ($result as $row) {
+                    $html .= '<optgroup label="' . $row->name . '">';
+                    $resultdetails = $conn->table('fees_group_details as fgd')
+                        ->select(
+                            'fgd.id',
+                            'fgd.fees_group_id',
+                            'fgd.fees_type_id',
+                            'fgd.amount',
+                            'ft.name as fees_type_name'
+                        )
+                        ->join('fees_type as ft', 'fgd.fees_type_id', '=', 'ft.id')
+                        ->where([
+                            ['fees_group_id', '=', $row->id]
+                        ])
+                        ->get();
+                    foreach ($resultdetails as $t) {
+                        // dd($t);
+                        // $sel = ($t->fees_group_id . "|" . $t->fees_type_id == $typeID ? 'selected' : '');
+                        $html .= '<option value="' . $t->fees_group_id . "|" . $t->fees_type_id . '">' . $t->fees_type_name . '</option>';
+                    }
+                    $html .= '</optgroup>';
+                }
+            } else {
+                $html .= '<option value="">no_information_available</option>';
+            }
+            return $this->successResponse($html, 'Fees type fetch successfully');
         }
     }
 }

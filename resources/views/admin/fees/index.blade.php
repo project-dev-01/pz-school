@@ -78,11 +78,7 @@
                                 <div class="form-group">
                                     <label for="fees_type">Fees Type</label>
                                     <select id="fees_type" class="form-control" name="fees_type">
-                                        <option value="">Select Fees Type</option>
-                                        @forelse ($fees_type as $fee)
-                                        <option value="{{ $fee['id'] }}">{{ $fee['name'] }}</option>
-                                        @empty
-                                        @endforelse
+                                       
                                     </select>
                                 </div>
                             </div>
@@ -92,7 +88,6 @@
                                     <select id="payment_status" class="form-control" name="payment_status">
                                         <option value="">Select Payment Status</option>
                                         @forelse ($payment_status as $status)
-
                                         <option value="{{ $status['id'] }}">{{ $status['name'] }}</option>
                                         @empty
                                         @endforelse
@@ -2087,6 +2082,7 @@
     var sectionByClass = "{{ config('constants.api.section_by_class') }}";
     var getStudentList = "{{ config('constants.api.get_student_details') }}";
     var getFeesAllocatedStudents = "{{ config('constants.api.get_fees_allocated_students') }}";
+    var feesTypeGroupUrl = "{{ config('constants.api.fees_type_group') }}";
     // default image test
     var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
     var studentImg = "{{ asset('public/users/images/') }}";

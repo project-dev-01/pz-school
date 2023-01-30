@@ -17,6 +17,7 @@ class CreateFeesGroupTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->integer('academic_session_id')->default('0');
             $table->timestamps();
         });
     }

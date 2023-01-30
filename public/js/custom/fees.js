@@ -165,6 +165,7 @@ $(function () {
             var year = $("#btwyears").val();
             var student_id = $("#student_id").val();
             var payment_status = $("#payment_status").val();
+            var fees_type = $("#fees_type").val();
 
             var formData = new FormData();
             formData.append('token', token);
@@ -174,6 +175,7 @@ $(function () {
             formData.append('academic_session_id', year);
             formData.append('student_id', student_id);
             formData.append('payment_status', payment_status);
+            formData.append('fees_type', fees_type);
             loadTable(formData);
 
         }
@@ -413,4 +415,27 @@ $(function () {
         }
 
     });
+    getFeesTypeByBranch();
+    function getFeesTypeByBranch() {
+        var formData = new FormData();
+        formData.append('token', token);
+        formData.append('branch_id', branchID);
+        formData.append('academic_session_id', academic_session_id);
+        $.ajax({
+            url: feesTypeGroupUrl,
+            method: "post",
+            data: formData,
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (res) {
+                $('#fees_type').html(res.data);
+                if (res.code == 200) {
+                    $('#fees_type').html(res.data);
+                } else {
+                    $('#fees_type').html(res.data);
+                }
+            }
+        });
+    }
 });

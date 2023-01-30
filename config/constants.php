@@ -719,7 +719,7 @@ return [
         'fees_group_details' => $url.'/fees_group/fees_group-details',
         'fees_group_update' => $url.'/fees_group/update',
         'fees_group_delete' => $url.'/fees_group/delete',
-
+        'fees_type_group' => $url.'/fees/fees_type_group',
         
         'get_student_details' => $url.'/get_student_details',
         'add_fees_allocation' => $url.'/fees/fees_allocation',
@@ -730,7 +730,6 @@ return [
         'fees_delete' => $url.'/fees/delete',
         'fees_update' => $url.'/fees/update',
         'change_payment_mode' => $url.'/fees/change_payment_mode'
-
         ]
 
 ];
