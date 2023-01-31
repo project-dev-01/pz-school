@@ -369,6 +369,8 @@
 @section('scripts')
 <script>
     var changePaymentModeUrl = "{{ config('constants.api.change_payment_mode') }}";
+    var activeTabDetails = "{{ config('constants.api.fee_active_tab_details') }}";
 </script>
-<script src="{{ asset('public/js/custom/fees.js') }}"></script>
+<!-- <script src="{{ asset('public/js/custom/fees.js') }}"></script> -->
+<script src="{{ asset('public/js/custom/fees_edit.js') }}"></script>
 @endsection

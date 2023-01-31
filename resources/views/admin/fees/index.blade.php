@@ -2004,6 +2004,7 @@
                 target.className = 'vis';
             }
         });
+        
 </script>
 <script>
     document

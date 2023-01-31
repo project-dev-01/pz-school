@@ -729,7 +729,8 @@ return [
         'fees_details' => $url.'/fees/fees-details',
         'fees_delete' => $url.'/fees/delete',
         'fees_update' => $url.'/fees/update',
-        'change_payment_mode' => $url.'/fees/change_payment_mode'
+        'change_payment_mode' => $url.'/fees/change_payment_mode',
+        'fee_active_tab_details' => $url.'/fees/active_tab_details'
         ]
 
 ];

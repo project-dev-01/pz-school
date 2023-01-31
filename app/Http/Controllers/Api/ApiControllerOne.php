@@ -5499,6 +5499,7 @@ class ApiControllerOne extends BaseController
             'name' => 'required',
             'branch_id' => 'required',
             'token' => 'required',
+            'academic_session_id' => 'required',
         ]);
 
         if (!$validator->passes()) {
@@ -5514,6 +5515,7 @@ class ApiControllerOne extends BaseController
                 $query = $conn->table('fees_group')->insertGetId([
                     'name' => $request->name,
                     'description' => $request->description,
+                    'academic_session_id' => $request->academic_session_id,
                     'created_at' => date("Y-m-d H:i:s")
                 ]);
 
@@ -5554,7 +5556,7 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $FeesGroupDetails = $conn->table('fees_group')->get();
+            $FeesGroupDetails = $conn->table('fees_group')->where('academic_session_id', $request->academic_session_id)->get();
             return $this->successResponse($FeesGroupDetails, 'Fees Group record fetch successfully');
         }
     }
@@ -5599,6 +5601,7 @@ class ApiControllerOne extends BaseController
             'name' => 'required',
             'branch_id' => 'required',
             'token' => 'required',
+            'academic_session_id' => 'required',
         ]);
         // return $id;
         if (!$validator->passes()) {
@@ -5615,6 +5618,7 @@ class ApiControllerOne extends BaseController
                 $query = $conn->table('fees_group')->where('id', $id)->update([
                     'name' => $request->name,
                     'description' => $request->description,
+                    'academic_session_id' => $request->academic_session_id,
                     'updated_at' => date("Y-m-d H:i:s")
                 ]);
                 // return $query;
@@ -6351,6 +6355,52 @@ class ApiControllerOne extends BaseController
                 $html .= '<option value="">no_information_available</option>';
             }
             return $this->successResponse($html, 'Fees type fetch successfully');
+        }
+    }
+    // get active tab fee details
+    public function feesActiveTabDetails(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'student_id' => 'required',
+            'fees_type' => 'required',
+            'allocation_id' => 'required',
+            'academic_session_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get data
+            $studentData = $conn->table('fees_payment_history as fph')
+                ->select(
+                    'fph.id',
+                    'fph.student_id',
+                    'fph.allocation_id',
+                    'fph.fees_type_id',
+                    'fph.monthly',
+                    'fph.semester',
+                    'fph.yearly',
+                    'fph.payment_mode_id',
+                    'fph.payment_status_id',
+                    'fph.collect_by',
+                    'fph.amount',
+                    'fph.discount',
+                    'fph.fine',
+                    'fph.pay_via',
+                    'fph.remarks',
+                    'fph.date'
+                )
+                ->where([
+                    ['fph.student_id', '=', $request->student_id],
+                    ['fph.allocation_id', '=', $request->allocation_id],
+                    ['fph.fees_type_id', '=', $request->fees_type],
+                ])
+                ->get();
+            return $this->successResponse($studentData, 'Fees paid fetch successfully');
         }
     }
 }

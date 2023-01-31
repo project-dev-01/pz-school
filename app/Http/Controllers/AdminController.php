@@ -6587,7 +6587,8 @@ class AdminController extends Controller
         $data = [
             'name' => $request->name,
             'description' => $request->description,
-            'fees' => $request->fees
+            'fees' => $request->fees,
+            "academic_session_id" => session()->get('academic_session_id')
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.fees_group_add'), $data);
@@ -6617,7 +6618,11 @@ class AdminController extends Controller
     }
     public function getFeesGroupList(Request $request)
     {
-        $response = Helper::GetMethod(config('constants.api.fees_group_list'));
+        
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.fees_group_list'), $data);
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
@@ -6636,7 +6641,8 @@ class AdminController extends Controller
             'id' => $request->id,
             'name' => $request->name,
             'description' => $request->description,
-            'fees' => $request->fees
+            'fees' => $request->fees,
+            "academic_session_id" => session()->get('academic_session_id')
         ];
 
         $response = Helper::PostMethod(config('constants.api.fees_group_update'), $data);
