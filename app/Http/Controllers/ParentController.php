@@ -35,7 +35,13 @@ class ParentController extends Controller
         $get_std_names_dashboard = Helper::GETMethodWithData(config('constants.api.get_students_parentdashboard'), $parent_ids);
         $get_leave_reasons_dashboard = Helper::GetMethod(config('constants.api.absent_reason_list'));
         $greetings = Helper::greetingMessage();
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
         // dd($get_homework_list_dashboard);
+        $exam_by_student = Helper::GETMethodWithData(config('constants.api.exam_by_student'), $data);
+        
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        // dd($exam_by_student);
         return view(
             'parent.dashboard.index',
             [
@@ -43,7 +49,12 @@ class ParentController extends Controller
                 'get_homework_list_dashboard' => $get_homework_list_dashboard['data'],
                 'get_std_names_dashboard' => $get_std_names_dashboard['data'],
                 'get_leave_reasons_dashboard' => $get_leave_reasons_dashboard['data'],
-                'greetings' => $greetings
+                'semester' => $semester['data'],
+                'session' => $session['data'],
+                'greetings' => $greetings,
+                'exams' => $exam_by_student['data'],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : "",
             ]
         );
     }

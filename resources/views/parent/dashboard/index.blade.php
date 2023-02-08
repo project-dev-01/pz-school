@@ -795,26 +795,48 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <div class="row form-inline">
-                        <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label for="">Semester </label>
-                                <select id="" class="form-control" name="">
-                                    <option value="">Semester 1</option>
-                                    <option value="">Semester 2</option>
-                                    <option value="">Semester 3</option>
+                                <label for="semester_id">Semester</label>
+                                <select id="sr_semester_id" class="form-control" name="semester_id">
+                                    <option value="0">Select Semester</option>
+                                    @foreach($semester as $sem)
+                                    <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label for=""><b> Over all class Position : 5th Rank</b></label>
+                                <label for="session_id">Session</label>
+                                <select id="sr_session_id" class="form-control" name="session_id">
+                                    <option value="0">Select Session</option>
+                                    @foreach($session as $ses)
+                                    <option value="{{$ses['id']}}" {{'1' == $ses['id'] ? 'selected' : ''}}>{{$ses['name']}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="examnames">Test Name<span class="text-danger">*</span></label>
+                                <select id="sr_examnames" class="form-control" name="examnames">
+                                    <option value="">Select Exams</option>
+                                    @foreach($exams as $exam)
+                                    <option value="{{$exam['id']}}">{{$exam['name']}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-inline">
+                            <div class="form-group">
+                                <label for=""><b> Rank : <span id="class_rank"></span> <br>Total :  <span id="class_total"></span></b></label>
                             </div>
                         </div>
                     </div><br>
                     <div class="table-responsive">
-                        <table class="table table-bordered w-100 nowrap" id="">
+                        <table class="table table-bordered w-100 nowrap">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -823,25 +845,7 @@
                                     <th>Subject Position</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>#</td>
-                                    <td>English</td>
-                                    <td>85</td>
-                                    <td>2 nd Position</td>
-                                </tr>
-                                <tr>
-                                    <td>#</td>
-                                    <td>Maths</td>
-                                    <td>92</td>
-                                    <td>7th Position</td>
-                                </tr>
-                                <tr>
-                                    <td>#</td>
-                                    <td>Csc</td>
-                                    <td>85</td>
-                                    <td>3rd Position</td>
-                                </tr>
+                            <tbody id="student_rank_body">
 
                             </tbody>
                         </table>
@@ -915,7 +919,7 @@
         </div> <!-- end card-->
     </div> <!-- end col -->
     <div class="row">
-        <div class="col-xl-12 col-md-12">
+        <div class="col-xl-6 col-md-6">
             <!-- Portlet card -->
             <div class="card">
                 <ul class="nav nav-tabs">
@@ -925,26 +929,19 @@
                     </li>
                 </ul><br>
                 <div class="card-body" dir="ltr">
-                    <div class="card-widgets">
-                        <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                        <a data-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
-                        <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
-                    </div>
-                    <h4 class="header-title mb-0">Each exam marks in class</h4>
-
-                    <div id="cardCollpase1" class="collapse pt-3 show">
+                    <div id="cardCollpase1" class="collapse pt-1 show">
                         <div class="text-center">
-                            <div class="mt-3 chartjs-chart">
-                                <canvas id="allExamSubjectScoresChart" height="150"></canvas>
+                            <div class="mt-0 chartjs-chart">
+                                <!--<canvas id="allExamSubjectScoresChart" height="150"></canvas>-->
+                                 <canvas id="radar-chart-example" height="350" data-colors="#39afd1,#a17fe0"></canvas>
                             </div>
                         </div>
                     </div> <!-- end collapse-->
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col-->
-    </div>
-    <div class="row">
-        <div class="col-xl-12 col-md-12">
+   
+        <div class="col-xl-6 col-md-6">
             <!-- Portlet card -->
             <div class="card">
                 <ul class="nav nav-tabs">
@@ -954,17 +951,11 @@
                     </li>
                 </ul><br>
                 <div class="card-body" dir="ltr">
-                    <div class="card-widgets">
-                        <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                        <a data-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
-                        <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
-                    </div>
-                    <h4 class="header-title mb-0">Each exam rank in class</h4>
-
-                    <div id="cardCollpase1" class="collapse pt-3 show">
+                    <div id="cardCollpase1" class="collapse pt-1 show">
                         <div class="text-center">
-                            <div class="mt-3 chartjs-chart">
-                                <canvas id="allExamSubjectRankChart" height="150"></canvas>
+                            <div class="mt-0 chartjs-chart">
+                                <!--<canvas id="allExamSubjectRankChart" height="150"></canvas>-->
+                                  <canvas id="radar-chart-example1" height="350" data-colors="#f1556c,#02a8b5"></canvas>
                             </div>
                         </div>
                     </div> <!-- end collapse-->
@@ -1127,7 +1118,8 @@
     var allExamSubjectScores = "{{ config('constants.api.all_exam_subject_scores') }}";
     // all exam subject ranks
     var allExamSubjectRanks = "{{ config('constants.api.all_exam_subject_ranks') }}";
-    // leave apply
+    
+    var getMarksByStudent = "{{ config('constants.api.get_marks_by_student') }}";
 </script>
 <!-- to do list -->
 <script src="{{ asset('public/js/custom/parent_dashboard.js') }}"></script>
@@ -1144,6 +1136,7 @@
 <script src="{{ asset('public/js/pages/dashboard-1.init.js') }}"></script>
 <script src="{{ asset('public/js/pages/dashboard-4.init.js') }}"></script>
 <script src="{{ asset('public/libs/chart.js/Chart.bundle.min.js') }}"></script>
+<script src="{{ asset('public/js/pages/chartjs.init.js') }}"></script>
 
 <!-- <script>
     var marksCanvas = document.getElementById("marksChart");

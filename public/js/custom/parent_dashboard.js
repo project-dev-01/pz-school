@@ -13,6 +13,54 @@ $(function () {
         autoclose: true,
         minDate: 0
     });
+    $('#sr_examnames').on('change', function () {
+        
+        var session_id = $("#sr_session_id").val();
+        var semester_id = $("#sr_semester_id").val();
+        var exam_id = $(this).val();
+        if(exam_id) {
+            
+            $.post(getMarksByStudent, { token: token, branch_id: branchID, session_id: session_id, semester_id: semester_id, exam_id: exam_id, student_id: studentID, academic_session_id: academic_session_id }, function (res) {
+                console.log('124',res)
+                if (res.code == 200) {
+                    var datasetnew = res.data;
+                    bystudentdetails(datasetnew);
+                }
+            }, 'json');
+        }else{
+            $('#class_rank').empty();
+            $('#class_total').empty();
+            $('#student_rank_body').empty();
+        }
+
+    });
+    
+    function bystudentdetails(datasetnew) {
+        $('#student_rank_body').empty();
+        var sno = 0;
+        var bySubject = "";
+        var subjects = datasetnew.details;
+        var rank = datasetnew.rank.rank;
+        var total = datasetnew.rank.mark;
+        $("#class_total").text(total);
+        $("#class_rank").text(rank);
+        console.log('1s',datasetnew)
+        // <tr>
+        //                             <td>#</td>
+        //                             <td>English</td>
+        //                             <td>85</td>
+        //                             <td>2 nd Position</td>
+        //                         </tr>
+        subjects.forEach(function (res) {
+            sno++;
+            bySubject += '<tr><td>'+sno+'</td>';
+            bySubject += '<td>'+res.subject_name+'</td>';
+            bySubject += '<td>'+res.mark+'</td>';
+            bySubject += '<td>'+res.rank+'</td>';
+            bySubject += '</tr>';
+        });
+        $("#student_rank_body").append(bySubject);
+    }
     StudentLeave_tabel();
     // Test Score Analysis radar chart start
     var radar;
