@@ -149,6 +149,7 @@ $(function () {
                             $("#overlay").fadeOut(300);
                         } else {
                             toastr.info('No records are available');
+                            $("#body_content").hide();
                             $("#overlay").fadeOut(300);
                         }
                     } else {

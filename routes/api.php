@@ -284,7 +284,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // parent settings
     Route::post('settings/parent_profile_info', [ApiController::class, 'getParentProfileInfo']);
     Route::post('update-parent-profile-info', [ApiController::class, 'updateParentProfileInfo']);
-    
+
     // create database_migrate
 
     Route::post('database_migrate', [CommonController::class, 'databaseMigrate']);
@@ -702,7 +702,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // copy exam master to next session
     Route::post('exam_master/copy/exam_setup', [ApiControllerOne::class, 'copyExamSetup']);
     Route::post('exam_master/copy/exam_paper', [ApiControllerOne::class, 'copyExamPaper']);
-    
+
     // SoapSubject routes
     Route::post('soap_subject/add', [ApiControllerOne::class, 'addSoapSubject']);
     Route::get('soap_subject/list', [ApiControllerOne::class, 'getSoapSubjectList']);
@@ -710,7 +710,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('soap_subject/update', [ApiControllerOne::class, 'updateSoapSubject']);
     Route::post('soap_subject/delete', [ApiControllerOne::class, 'deleteSoapSubject']);
 
-    
+
     // SOAP category crud routes
     Route::post('soap_category/add', [ApiControllerOne::class, 'addSoapCategory']);
     Route::get('soap_category/list', [ApiControllerOne::class, 'getSoapCategoryList']);
@@ -736,18 +736,18 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
 
     Route::get('student_soap_list', [ApiControllerOne::class, 'studentSoapList']);
-    
+
     Route::get('old_soap_student/list', [ApiControllerOne::class, 'getOldSoapStudentList']);
-    
+
     Route::get('soap_student/list', [ApiControllerOne::class, 'getSoapStudentList']);
 
-    
+
     Route::post('soap_log/list', [ApiControllerOne::class, 'getSoapLogList']);
     Route::post('soap_log/add', [ApiControllerOne::class, 'addSoapLog']);
     // add fees
     Route::post('fees/yearly/add', [ApiControllerOne::class, 'feesYearlyAdd']);
     Route::post('get_student_details', [ApiControllerOne::class, 'getStudentDetails']);
-    
+
     // Payment Mode routes
     Route::post('payment_mode/add', [ApiControllerOne::class, 'addPaymentMode']);
     Route::get('payment_mode/list', [ApiControllerOne::class, 'getPaymentModeList']);
@@ -786,4 +786,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('fees_group/fees_group-details', [ApiControllerOne::class, 'getFeesGroupDetails']);
     Route::post('fees_group/update', [ApiControllerOne::class, 'updateFeesGroup']);
     Route::post('fees_group/delete', [ApiControllerOne::class, 'deleteFeesGroup']);
+    // ranking_ln_class_grade
+    Route::post('ranking_ln_class_grade', [ApiControllerOne::class, 'rankingInClassGrade']);
+    Route::post('all_exam_subject_scores', [ApiControllerOne::class, 'allExamSubjectScores']);
+    Route::post('all_exam_subject_ranks', [ApiControllerOne::class, 'allExamSubjectRanks']);
 });

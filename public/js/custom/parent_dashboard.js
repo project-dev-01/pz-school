@@ -13,11 +13,14 @@ $(function () {
         autoclose: true,
         minDate: 0
     });
-    var radar;
     StudentLeave_tabel();
-    callradarchart();
-    function callradarchart() {
-
+    // Test Score Analysis radar chart start
+    var radar;
+    var radarSubjectScore;
+    var radarSubjectRank;
+    callRadarChart();
+    function callRadarChart() {
+        // test score analysis chart
         $.post(getTestScore, {
             token: token,
             branch_id: branchID,
@@ -60,38 +63,148 @@ $(function () {
                     });
                     // console.log(data);
                     // console.log(label);
-                    radarChart(label, data);
+                    testScoreAnalysisChart(label, data);
+                }
+            }
+        }, 'json');
+        // all exam subject scores
+        $.post(allExamSubjectScores, {
+            token: token,
+            branch_id: branchID,
+            student_id: studentID,
+            academic_session_id: academic_session_id
+        }, function (response) {
+            console.log('score', response)
+            if (response.code == 200) {
+                var scores = response.data;
+                var data = [];
+                var label = [];
+                if (scores.length > 0) {
+                    let labelCount = 0;
+                    $.each(scores, function (key, value) {
+                        console.log("-----");
+                        console.log(value.exam_marks);
+                        console.log("exam_name " + value.exam_name);
+                        var randcol = getRandomColor();
+                        var obj = {};
+                        var score = [];
+                        obj["label"] = value.exam_name;
+                        obj["backgroundColor"] = hexToRGB(randcol, 0.3);
+                        obj["borderColor"] = randcol;
+                        obj["pointBackgroundColor"] = randcol;
+                        obj["pointBorderColor"] = "#fff";
+                        obj["pointHoverBackgroundColor"] = "#fff";
+                        obj["pointHoverBorderColor"] = randcol;
+                        $.each(value.exam_marks, function (keys, val) {
+                            let mark = parseInt(val.mark);
+                            score.push(mark);
+                            if (labelCount == 0) {
+                                label.push(val.subject_name);
+                            }
+                        });
+                        obj["data"] = score;
+                        data.push(obj);
+                        labelCount++;
+                    });
+                    allExamSubjectScoresChart(label, data);
+                }
+            }
+        }, 'json');
+        // all exam subject ranks
+        $.post(allExamSubjectRanks, {
+            token: token,
+            branch_id: branchID,
+            student_id: studentID,
+            academic_session_id: academic_session_id
+        }, function (response) {
+            console.log('rank', response)
+            if (response.code == 200) {
+                var all_rank = response.data;
+                var data = [];
+                var label = [];
+                if (all_rank.length > 0) {
+                    let labelCount = 0;
+                    $.each(all_rank, function (key, value) {
+                        var randcol = getRandomColor();
+                        var obj = {};
+                        var ranks = [];
+                        obj["label"] = value.exam_name;
+                        obj["backgroundColor"] = hexToRGB(randcol, 0.3);
+                        obj["borderColor"] = randcol;
+                        obj["pointBackgroundColor"] = randcol;
+                        obj["pointBorderColor"] = "#fff";
+                        obj["pointHoverBackgroundColor"] = "#fff";
+                        obj["pointHoverBorderColor"] = randcol;
+                        $.each(value.exam_rank, function (keys, val) {
+                            let rank = parseInt(val.rank.rank);
+                            ranks.push(rank);
+                            if (labelCount == 0) {
+                                label.push(val.subject_name);
+                            }
+                        });
+                        obj["data"] = ranks;
+                        data.push(obj);
+                        labelCount++;
+                    });
+                    allExamSubjectRankChart(label, data);
                 }
             }
         }, 'json');
     }
-    // var labelsss = [];
-    // var objss = [];
-    // radarChart();
-    function radarChart(labels, obj) {
-
+    function testScoreAnalysisChart(labels, obj) {
         if (radar) {
             radar.data.labels = labels;
             radar.data.datasets = obj;
             radar.update();
         } else {
             var ctx = document.getElementById("radar-chart-test-marks").getContext('2d');
-            var defaultColors = ["#1abc9c", "#f1556c", "#4a81d4", "#e3eaef"];
-            // var colors = dataColors ? dataColors.split(",") : defaultColors.concat();
-
             radar = new Chart(ctx, {
                 type: 'radar',
                 data: {
-
                     labels: labels,
-                    // labels: labels,
                     datasets: obj
                 },
             });
         }
-
     }
-
+    // Test Score Analysis end
+    // all exam subject scores start
+    function allExamSubjectScoresChart(labels, obj) {
+        if (radarSubjectScore) {
+            radarSubjectScore.data.labels = labels;
+            radarSubjectScore.data.datasets = obj;
+            radarSubjectScore.update();
+        } else {
+            var ctx = document.getElementById("allExamSubjectScoresChart").getContext('2d');
+            radarSubjectScore = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: labels,
+                    datasets: obj
+                },
+            });
+        }
+    }
+    // all exam subject scores end
+    // all exam subject ranks start
+    function allExamSubjectRankChart(labels, obj) {
+        if (radarSubjectRank) {
+            radarSubjectRank.data.labels = labels;
+            radarSubjectRank.data.datasets = obj;
+            radarSubjectRank.update();
+        } else {
+            var ctx = document.getElementById("allExamSubjectRankChart").getContext('2d');
+            radarSubjectRank = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: labels,
+                    datasets: obj
+                },
+            });
+        }
+    }
+    // all_exam_subject_ranks
+    // all exam subject ranks start
     function getRandomColor() {
         var letters = '0123456789ABCDEF';
         var color = '#';
@@ -239,9 +352,9 @@ $(function () {
             bDestroy: true,
             info: true,
             // dom: 'lBfrtip',
-            dom:"<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             buttons: [
                 {
                     extend: 'csv',

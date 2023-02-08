@@ -620,173 +620,173 @@
         <!-- end modal-->
     </div>
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <h4 class="navv">Test Score Analysis
-                        <h4>
-                </li>
-            </ul><br>
-            <div class="card-body">
-                <div class="mt-4 chartjs-chart">
-                    <canvas id="radar-chart-test-marks" data-colors="#39afd1,#a17fe0"></canvas>
-                    <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
-                </div>
-            </div> <!-- end card-body-->
-        </div> <!-- end card-->
-    </div> <!-- end col -->
-</div>
-<!--General Details -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">Test Score Analysis
+                            <h4>
+                    </li>
+                </ul><br>
+                <div class="card-body">
+                    <div class="mt-4 chartjs-chart">
+                        <canvas id="radar-chart-test-marks" data-colors="#39afd1,#a17fe0"></canvas>
+                        <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
+                    </div>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+    <!--General Details -->
 
-<div class="row">
-    <div class="col-xl-12">
-        <div class="card">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <h4 class="navv"> General Details
-                        <h4>
-                </li>
-            </ul><br>
-            <div class="card-body">
-                <form id="stdGeneralDetails" method="post" action="{{ route('parent.studentleave.add') }}">
-                    @csrf
-                    <input type="hidden" name="class_id" id="listModeClassID">
-                    <input type="hidden" name="section_id" id="listModeSectionID" />
-                    <input type="hidden" name="student_id" id="listModestudentID" />
-                    <input type="hidden" name="reasons" id="listModereason" />
-                    <input type="hidden" name="reasonstxt" id="listModereasontext" />
-                    <!--1st row-->
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="changeStdName">Student Name<span class="text-danger">*</span></label>
-                                <select id="changeStdName" class="form-control" name="changeStdName">
-                                    <option value="">Select Student</option>
-                                    @forelse ($get_std_names_dashboard as $std)
-                                    <option value="{{ $std['id'] }}" data-classid="{{ $std['class_id'] }}" data-sectionid="{{ $std['section_id'] }}" {{ Session::get('student_id') == $std['id'] ? 'selected' : ''}}>{{ $std['name'] }}</option>
-                                    @empty
-                                    @endforelse
-                                </select>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv"> General Details
+                            <h4>
+                    </li>
+                </ul><br>
+                <div class="card-body">
+                    <form id="stdGeneralDetails" method="post" action="{{ route('parent.studentleave.add') }}">
+                        @csrf
+                        <input type="hidden" name="class_id" id="listModeClassID">
+                        <input type="hidden" name="section_id" id="listModeSectionID" />
+                        <input type="hidden" name="student_id" id="listModestudentID" />
+                        <input type="hidden" name="reasons" id="listModereason" />
+                        <input type="hidden" name="reasonstxt" id="listModereasontext" />
+                        <!--1st row-->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="changeStdName">Student Name<span class="text-danger">*</span></label>
+                                    <select id="changeStdName" class="form-control" name="changeStdName">
+                                        <option value="">Select Student</option>
+                                        @forelse ($get_std_names_dashboard as $std)
+                                        <option value="{{ $std['id'] }}" data-classid="{{ $std['class_id'] }}" data-sectionid="{{ $std['section_id'] }}" {{ Session::get('student_id') == $std['id'] ? 'selected' : ''}}>{{ $std['name'] }}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="heard">Leave From<span class="text-danger">*</span></label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="far fa-calendar-alt"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" autocomplete="off" name="frm_ldate" class="form-control" id="frm_ldate" placeholder="DD-MM-YYYY">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="heard">To<span class="text-danger">*</span></label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="far fa-calendar-alt"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" autocomplete="off" name="to_ldate" class="form-control" id="to_ldate" placeholder="DD-MM-YYYY">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="heard">Leave From<span class="text-danger">*</span></label>
-                                <div class="input-group input-group-merge">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <span class="far fa-calendar-alt"></span>
+                        <!--2st row-->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="changelev">Reason(s)<span class="text-danger">*</span></label>
+                                    <select id="changelevReasons" class="form-control" name="changelevReasons">
+                                        <option value="">Select Student</option>
+                                        @forelse ($get_leave_reasons_dashboard as $res)
+                                        <option value="{{ $res['id'] }}">{{ $res['name'] }}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4" id="remarks_div" style="display:none;">
+                                <div class="form-group">
+                                    <label for="heard">Remarks</label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input type="text" name="remarks" class="form-control" id="remarks">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="document">Attachment File</label>
+
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" id="homework_file" class="custom-file-input" name="file">
+                                            <label class="custom-file-label" for="document">Choose file</label>
                                         </div>
                                     </div>
-                                    <input type="text" autocomplete="off" name="frm_ldate" class="form-control" id="frm_ldate" placeholder="DD-MM-YYYY">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="heard">To<span class="text-danger">*</span></label>
-                                <div class="input-group input-group-merge">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <span class="far fa-calendar-alt"></span>
-                                        </div>
-                                    </div>
-                                    <input type="text" autocomplete="off" name="to_ldate" class="form-control" id="to_ldate" placeholder="DD-MM-YYYY">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--2st row-->
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="changelev">Reason(s)<span class="text-danger">*</span></label>
-                                <select id="changelevReasons" class="form-control" name="changelevReasons">
-                                    <option value="">Select Student</option>
-                                    @forelse ($get_leave_reasons_dashboard as $res)
-                                    <option value="{{ $res['id'] }}">{{ $res['name'] }}</option>
-                                    @empty
-                                    @endforelse
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4" id="remarks_div" style="display:none;">
-                            <div class="form-group">
-                                <label for="heard">Remarks</label>
-                                <div class="input-group input-group-merge">
-                                    <div class="input-group-prepend">
-                                    </div>
-                                    <input type="text" name="remarks" class="form-control" id="remarks">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="document">Attachment File</label>
+                                    <span id="file_name"></span>
 
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" id="homework_file" class="custom-file-input" name="file">
-                                        <label class="custom-file-label" for="document">Choose file</label>
-                                    </div>
                                 </div>
-                                <span id="file_name"></span>
-
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group text-right m-b-0">
-                        <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                            Apply
-                        </button>
-                        <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                        <div class="form-group text-right m-b-0">
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                Apply
+                            </button>
+                            <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                     Cancel
                                 </button>-->
-                    </div>
+                        </div>
 
-                </form>
+                    </form>
 
-            </div> <!-- end card-body -->
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-xl-12">
-        <div class="card">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <h4 class="navv">Leave status
-                        <h4>
-                </li>
-            </ul><br>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table w-100 nowrap" id="studentleave-table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Student Name</th>
-                                <th>Leave From</th>
-                                <th>To From</th>
-                                <th>Teacher remarks</th>
-                                <th>Reason</th>
-                                <th>Document</th>
-                                <th>Status</th>
-                                <th>Apply Date</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
+                </div> <!-- end card-body -->
             </div>
         </div>
-    </div> <!-- end card-->
-</div> <!-- end col -->
-<div class="row">
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">Leave status
+                            <h4>
+                    </li>
+                </ul><br>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table w-100 nowrap" id="studentleave-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Student Name</th>
+                                    <th>Leave From</th>
+                                    <th>To From</th>
+                                    <th>Teacher remarks</th>
+                                    <th>Reason</th>
+                                    <th>Document</th>
+                                    <th>Status</th>
+                                    <th>Apply Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end card-->
+    </div> <!-- end col -->
+    <div class="row">
         <div class="col-xl-12 col-md-12">
             <div class="card">
                 <ul class="nav nav-tabs">
@@ -920,7 +920,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv"> Ranking in Class & Subject
+                        <h4 class="navv"> Marks in class each exam
                             <h4>
                     </li>
                 </ul><br>
@@ -930,12 +930,12 @@
                         <a data-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
                         <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
                     </div>
-                    <h4 class="header-title mb-0">Each subject Position in class</h4>
+                    <h4 class="header-title mb-0">Each exam marks in class</h4>
 
                     <div id="cardCollpase1" class="collapse pt-3 show">
                         <div class="text-center">
                             <div class="mt-3 chartjs-chart">
-                                <canvas id="marksChart" height="150"></canvas>
+                                <canvas id="allExamSubjectScoresChart" height="150"></canvas>
                             </div>
                         </div>
                     </div> <!-- end collapse-->
@@ -943,7 +943,35 @@
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
+    <div class="row">
+        <div class="col-xl-12 col-md-12">
+            <!-- Portlet card -->
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv"> Rank in class each exam
+                            <h4>
+                    </li>
+                </ul><br>
+                <div class="card-body" dir="ltr">
+                    <div class="card-widgets">
+                        <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                        <a data-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
+                        <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                    </div>
+                    <h4 class="header-title mb-0">Each exam rank in class</h4>
 
+                    <div id="cardCollpase1" class="collapse pt-3 show">
+                        <div class="text-center">
+                            <div class="mt-3 chartjs-chart">
+                                <canvas id="allExamSubjectRankChart" height="150"></canvas>
+                            </div>
+                        </div>
+                    </div> <!-- end collapse-->
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col-->
+    </div>
 
     <div class="row">
         <div class="col-xl-12 col-md-12">
@@ -1069,9 +1097,9 @@
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
-    
-@include('parent.dashboard.check_list')
-@include('parent.dashboard.exam-schedule')
+
+    @include('parent.dashboard.check_list')
+    @include('parent.dashboard.exam-schedule')
 
 </div> <!-- container -->
 @endsection
@@ -1095,7 +1123,10 @@
     // general details get student names
     var stutdentleaveList = "{{ route('parent.student_leave.list') }}";
     var reuploadFileUrl = "{{ route('parent.reupload_file.add') }}";
-
+    // all exam subject scores
+    var allExamSubjectScores = "{{ config('constants.api.all_exam_subject_scores') }}";
+    // all exam subject ranks
+    var allExamSubjectRanks = "{{ config('constants.api.all_exam_subject_ranks') }}";
     // leave apply
 </script>
 <!-- to do list -->
@@ -1114,7 +1145,7 @@
 <script src="{{ asset('public/js/pages/dashboard-4.init.js') }}"></script>
 <script src="{{ asset('public/libs/chart.js/Chart.bundle.min.js') }}"></script>
 
-<script>
+<!-- <script>
     var marksCanvas = document.getElementById("marksChart");
     var marksData = {
         labels: ["English", "Tamil", "Maths", "Science", "Csc"],
@@ -1132,7 +1163,7 @@
         type: 'radar',
         data: marksData
     });
-</script>
+</script> -->
 <script>
     var marksCanvas = document.getElementById("markssubject");
     var marksData = {

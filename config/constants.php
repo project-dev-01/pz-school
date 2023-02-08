@@ -730,7 +730,10 @@ return [
         'fees_delete' => $url.'/fees/delete',
         'fees_update' => $url.'/fees/update',
         'change_payment_mode' => $url.'/fees/change_payment_mode',
-        'fee_active_tab_details' => $url.'/fees/active_tab_details'
+        'fee_active_tab_details' => $url.'/fees/active_tab_details',
+        // add score rank modules
+        'all_exam_subject_scores' => $url.'/all_exam_subject_scores',
+        'all_exam_subject_ranks' => $url.'/all_exam_subject_ranks'
         ]
 
 ];
