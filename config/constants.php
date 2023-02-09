@@ -734,9 +734,9 @@ return [
         // add score rank modules
         'all_exam_subject_scores' => $url.'/all_exam_subject_scores',
         'all_exam_subject_ranks' => $url.'/all_exam_subject_ranks',
-        
-        'exam_by_student'=>$url.'/exam-by-student',
-        'get_marks_by_student'=>$url.'/get-marks-by-student',
+        'exam_subject_mark_high_low_avg' => $url.'/exam_subject_mark_high_low_avg',
+        'exam_by_student'=> $url.'/exam-by-student',
+        'get_marks_by_student'=> $url.'/get-marks-by-student',
         ]
 
 ];

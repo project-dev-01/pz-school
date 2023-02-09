@@ -790,7 +790,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('ranking_ln_class_grade', [ApiControllerOne::class, 'rankingInClassGrade']);
     Route::post('all_exam_subject_scores', [ApiControllerOne::class, 'allExamSubjectScores']);
     Route::post('all_exam_subject_ranks', [ApiControllerOne::class, 'allExamSubjectRanks']);
-
+    Route::post('exam_subject_mark_high_low_avg', [ApiControllerOne::class, 'examMarksByHighAvgLow']);
     Route::get('exam-by-student', [ApiControllerOne::class, 'examByStudent']);
     Route::post('get-marks-by-student', [ApiControllerOne::class, 'getMarksByStudent']);
 });

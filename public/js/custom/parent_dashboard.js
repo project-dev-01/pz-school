@@ -14,27 +14,27 @@ $(function () {
         minDate: 0
     });
     $('#sr_examnames').on('change', function () {
-        
+
         var session_id = $("#sr_session_id").val();
         var semester_id = $("#sr_semester_id").val();
         var exam_id = $(this).val();
-        if(exam_id) {
-            
+        if (exam_id) {
+
             $.post(getMarksByStudent, { token: token, branch_id: branchID, session_id: session_id, semester_id: semester_id, exam_id: exam_id, student_id: studentID, academic_session_id: academic_session_id }, function (res) {
-                console.log('124',res)
+                console.log('124', res)
                 if (res.code == 200) {
                     var datasetnew = res.data;
                     bystudentdetails(datasetnew);
                 }
             }, 'json');
-        }else{
+        } else {
             $('#class_rank').empty();
             $('#class_total').empty();
             $('#student_rank_body').empty();
         }
 
     });
-    
+
     function bystudentdetails(datasetnew) {
         $('#student_rank_body').empty();
         var sno = 0;
@@ -44,7 +44,7 @@ $(function () {
         var total = datasetnew.rank.mark;
         $("#class_total").text(total);
         $("#class_rank").text(rank);
-        console.log('1s',datasetnew)
+        console.log('1s', datasetnew)
         // <tr>
         //                             <td>#</td>
         //                             <td>English</td>
@@ -53,10 +53,10 @@ $(function () {
         //                         </tr>
         subjects.forEach(function (res) {
             sno++;
-            bySubject += '<tr><td>'+sno+'</td>';
-            bySubject += '<td>'+res.subject_name+'</td>';
-            bySubject += '<td>'+res.mark+'</td>';
-            bySubject += '<td>'+res.rank+'</td>';
+            bySubject += '<tr><td>' + sno + '</td>';
+            bySubject += '<td>' + res.subject_name + '</td>';
+            bySubject += '<td>' + res.mark + '</td>';
+            bySubject += '<td>' + res.rank + '</td>';
             bySubject += '</tr>';
         });
         $("#student_rank_body").append(bySubject);
@@ -66,6 +66,7 @@ $(function () {
     var radar;
     var radarSubjectScore;
     var radarSubjectRank;
+    var radarSubjectAvgHighLow;
     callRadarChart();
     function callRadarChart() {
         // test score analysis chart
@@ -75,7 +76,6 @@ $(function () {
             student_id: studentID,
             academic_session_id: academic_session_id
         }, function (response) {
-            console.log('res', response)
             if (response.code == 200) {
                 // var marks = response.data.marks;
                 // var subjects = response.data.subjects;
@@ -83,8 +83,6 @@ $(function () {
                 var marks = response.data.allbyStudent;
                 var data = [];
                 var label = [];
-                // console.log(marks);
-                // console.log(subjects);
                 if (subjects.length > 0 && marks.length) {
                     subjects.forEach(function (res) {
                         label.push(res.subject_name);
@@ -105,12 +103,8 @@ $(function () {
                             score.push(mark);
                         });
                         obj["data"] = score;
-                        // console.log("---");
-                        // console.log(obj);
                         data.push(obj);
                     });
-                    // console.log(data);
-                    // console.log(label);
                     testScoreAnalysisChart(label, data);
                 }
             }
@@ -122,7 +116,6 @@ $(function () {
             student_id: studentID,
             academic_session_id: academic_session_id
         }, function (response) {
-            console.log('score', response)
             if (response.code == 200) {
                 var scores = response.data;
                 var data = [];
@@ -130,9 +123,6 @@ $(function () {
                 if (scores.length > 0) {
                     let labelCount = 0;
                     $.each(scores, function (key, value) {
-                        console.log("-----");
-                        console.log(value.exam_marks);
-                        console.log("exam_name " + value.exam_name);
                         var randcol = getRandomColor();
                         var obj = {};
                         var score = [];
@@ -165,7 +155,6 @@ $(function () {
             student_id: studentID,
             academic_session_id: academic_session_id
         }, function (response) {
-            console.log('rank', response)
             if (response.code == 200) {
                 var all_rank = response.data;
                 var data = [];
@@ -195,6 +184,62 @@ $(function () {
                         labelCount++;
                     });
                     allExamSubjectRankChart(label, data);
+                }
+            }
+        }, 'json');
+        // exam subject mark High Low Avg
+        $.post(examSubjectMarkHighLowAvg, {
+            token: token,
+            branch_id: branchID,
+            student_id: studentID,
+            academic_session_id: academic_session_id,
+            exam_id: '3'
+        }, function (response) {
+            if (response.code == 200) {
+                var highLowAvg = response.data;
+                var alllabel = ['my', 'highest', 'average', 'lowest'];
+                var data = [];
+                var label = [];
+                var marks = [];
+                var max_marks = [];
+                var min_marks = [];
+                var avg_marks = [];
+                if (highLowAvg.length > 0) {
+                    $.each(highLowAvg, function (key, value) {
+                        let mark = parseInt(value.mark);
+                        let max = parseInt(value.max);
+                        let min = parseInt(value.min);
+                        let avg = parseInt(value.avg);
+                        marks.push(mark);
+                        max_marks.push(max);
+                        min_marks.push(min);
+                        avg_marks.push(avg);
+                        label.push(value.subject_name);
+                    });
+                    $.each(alllabel, function (key, value) {
+                        var obj = {};
+                        var randcol = getRandomColor();
+                        obj["label"] = value;
+                        obj["backgroundColor"] = hexToRGB(randcol, 0.3);
+                        obj["borderColor"] = randcol;
+                        obj["pointBackgroundColor"] = randcol;
+                        obj["pointBorderColor"] = "#fff";
+                        obj["pointHoverBackgroundColor"] = "#fff";
+                        obj["pointHoverBorderColor"] = randcol;
+                        if (value == "my") {
+                            obj["data"] = marks;
+                        } else if (value == "highest") {
+                            obj["data"] = max_marks;
+                        } else if (value == "average") {
+                            obj["data"] = avg_marks;
+                        } else if (value == "lowest") {
+                            obj["data"] = min_marks;
+                        } else {
+                            obj["data"] = [];
+                        }
+                        data.push(obj);
+                    });
+                    subjectMarkHighLowAvg(label, data);
                 }
             }
         }, 'json');
@@ -252,7 +297,24 @@ $(function () {
         }
     }
     // all_exam_subject_ranks
-    // all exam subject ranks start
+    // exam  subject mark high low avg start
+    function subjectMarkHighLowAvg(labels, obj) {
+        if (radarSubjectAvgHighLow) {
+            radarSubjectAvgHighLow.data.labels = labels;
+            radarSubjectAvgHighLow.data.datasets = obj;
+            radarSubjectAvgHighLow.update();
+        } else {
+            var ctx = document.getElementById("examSubjectMarkHighLowAvg").getContext('2d');
+            radarSubjectAvgHighLow = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: labels,
+                    datasets: obj
+                },
+            });
+        }
+    }
+    // exam  subject mark high low avg end
     function getRandomColor() {
         var letters = '0123456789ABCDEF';
         var color = '#';
@@ -509,10 +571,6 @@ $(function () {
 
         var reissue_file = $("#reissue_file" + id)[0].files[0];
         // formData.append('file', $('input[type=file]')[0].files[0]);
-
-        console.log(id);
-        console.log(document);
-        console.log(reissue_file);
         // return false;
         var formData = new FormData();
         formData.append('id', id);

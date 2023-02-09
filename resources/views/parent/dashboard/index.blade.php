@@ -831,7 +831,7 @@
                         </div>
                         <div class="col-md-3 form-inline">
                             <div class="form-group">
-                                <label for=""><b> Rank : <span id="class_rank"></span> <br>Total :  <span id="class_total"></span></b></label>
+                                <label for=""><b> Rank : <span id="class_rank"></span> <br>Total : <span id="class_total"></span></b></label>
                             </div>
                         </div>
                     </div><br>
@@ -919,7 +919,7 @@
         </div> <!-- end card-->
     </div> <!-- end col -->
     <div class="row">
-        <div class="col-xl-6 col-md-6">
+        <div class="col-xl-12 col-md-12">
             <!-- Portlet card -->
             <div class="card">
                 <ul class="nav nav-tabs">
@@ -929,19 +929,26 @@
                     </li>
                 </ul><br>
                 <div class="card-body" dir="ltr">
-                    <div id="cardCollpase1" class="collapse pt-1 show">
+                    <div class="card-widgets">
+                        <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                        <a data-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
+                        <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                    </div>
+                    <h4 class="header-title mb-0">Each exam marks in class</h4>
+
+                    <div id="cardCollpase1" class="collapse pt-3 show">
                         <div class="text-center">
-                            <div class="mt-0 chartjs-chart">
-                                <!--<canvas id="allExamSubjectScoresChart" height="150"></canvas>-->
-                                 <canvas id="radar-chart-example" height="350" data-colors="#39afd1,#a17fe0"></canvas>
+                            <div class="mt-3 chartjs-chart">
+                                <canvas id="allExamSubjectScoresChart" height="150"></canvas>
                             </div>
                         </div>
                     </div> <!-- end collapse-->
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col-->
-   
-        <div class="col-xl-6 col-md-6">
+    </div>
+    <div class="row">
+        <div class="col-xl-12 col-md-12">
             <!-- Portlet card -->
             <div class="card">
                 <ul class="nav nav-tabs">
@@ -951,11 +958,17 @@
                     </li>
                 </ul><br>
                 <div class="card-body" dir="ltr">
-                    <div id="cardCollpase1" class="collapse pt-1 show">
+                    <div class="card-widgets">
+                        <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                        <a data-toggle="collapse" href="#cardCollpase2" role="button" aria-expanded="false" aria-controls="cardCollpase2"><i class="mdi mdi-minus"></i></a>
+                        <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                    </div>
+                    <h4 class="header-title mb-0">Each exam rank in class</h4>
+
+                    <div id="cardCollpase2" class="collapse pt-3 show">
                         <div class="text-center">
-                            <div class="mt-0 chartjs-chart">
-                                <!--<canvas id="allExamSubjectRankChart" height="150"></canvas>-->
-                                  <canvas id="radar-chart-example1" height="350" data-colors="#f1556c,#02a8b5"></canvas>
+                            <div class="mt-3 chartjs-chart">
+                                <canvas id="allExamSubjectRankChart" height="150"></canvas>
                             </div>
                         </div>
                     </div> <!-- end collapse-->
@@ -963,124 +976,28 @@
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
-
-    <div class="row">
-        <div class="col-xl-12 col-md-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv"> Marks Status & Subject Status
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="">Semester<span class="text-danger">*</span></label>
-                                <select id="" class="form-control" name="">
-                                    <option value="">Semester 1</option>
-                                    <option value="">Semester 2</option>
-                                    <option value="">Semester 3</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="">Mark Status<span class="text-danger">*</span></label>
-                                <select id="" class="form-control" name="">
-                                    <option value="">Low Marks</option>
-                                    <option value="">Highest Marks</option>
-                                    <option value="">Average Marks</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="">Subject Status<span class="text-danger">*</span></label>
-                                <select id="" class="form-control" name="">
-                                    <option value="">Weak Subject</option>
-                                    <option value="">Strong Subject</option>
-                                    <option value="">Average Subject</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-bordered w-100 nowrap" id="">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Subject</th>
-                                    <th>Marks</th>
-                                    <th>Marks Status</th>
-                                    <th>Subject Status</th>
-                                    <th>Remarks</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>#</td>
-                                    <td>Csc</td>
-                                    <td>65</td>
-                                    <td><span class="badge badge-danger">Low Marks</span></td>
-                                    <td><span class="badge badge-danger">Weak Subject</span></td>
-                                    <td>Work hard</td>
-                                </tr>
-                                <tr>
-                                    <td>#</td>
-                                    <td>Maths</td>
-                                    <td>85</td>
-                                    <td><span class="badge badge-success">Highest Mark</span></td>
-                                    <td><span class="badge badge-success">Strong Subject</span></td>
-                                    <td>Good</td>
-                                </tr>
-                                <tr>
-                                    <td>#</td>
-                                    <td>Tamil</td>
-                                    <td>75</td>
-                                    <td><span class="badge badge-warning">Average Marks</span></td>
-                                    <td><span class="badge badge-warning">Average Subject</span></td>
-                                    <td>Good but work hard</td>
-                                </tr>
-                                <tr>
-                                    <td>#</td>
-                                    <td>English</td>
-                                    <td>71</td>
-                                    <td><span class="badge badge-warning">Average Marks</span></td>
-                                    <td><span class="badge badge-warning">Average Subject</span></td>
-                                    <td>Good but work hard</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- end card-->
-    </div> <!-- end col -->
-
     <div class="row">
         <div class="col-xl-12 col-md-12">
             <!-- Portlet card -->
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv"> Marks & Subject Status
+                        <h4 class="navv"> Score in class
                             <h4>
                     </li>
                 </ul><br>
                 <div class="card-body" dir="ltr">
                     <div class="card-widgets">
                         <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                        <a data-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
+                        <a data-toggle="collapse" href="#cardCollpase2" role="button" aria-expanded="false" aria-controls="cardCollpase2"><i class="mdi mdi-minus"></i></a>
                         <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
                     </div>
-                    <h4 class="header-title mb-0">Low and Highest Marks in subject</h4>
+                    <h4 class="header-title mb-0">Score in class</h4>
 
-                    <div id="cardCollpase1" class="collapse pt-3 show">
+                    <div id="cardCollpase2" class="collapse pt-3 show">
                         <div class="text-center">
                             <div class="mt-3 chartjs-chart">
-                                <canvas id="markssubject" height="150"></canvas>
+                                <canvas id="examSubjectMarkHighLowAvg" height="150"></canvas>
                             </div>
                         </div>
                     </div> <!-- end collapse-->
@@ -1088,7 +1005,6 @@
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
-
     @include('parent.dashboard.check_list')
     @include('parent.dashboard.exam-schedule')
 
@@ -1118,8 +1034,11 @@
     var allExamSubjectScores = "{{ config('constants.api.all_exam_subject_scores') }}";
     // all exam subject ranks
     var allExamSubjectRanks = "{{ config('constants.api.all_exam_subject_ranks') }}";
-    
+
     var getMarksByStudent = "{{ config('constants.api.get_marks_by_student') }}";
+    // exam subject mark high low avg
+    var examSubjectMarkHighLowAvg = "{{ config('constants.api.exam_subject_mark_high_low_avg') }}";
+    // leave apply
 </script>
 <!-- to do list -->
 <script src="{{ asset('public/js/custom/parent_dashboard.js') }}"></script>
