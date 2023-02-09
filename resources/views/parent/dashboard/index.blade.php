@@ -871,15 +871,15 @@
                                 <tr>
                                     <th rowspan="2">#</th>
                                     <th rowspan="2">Subjects</th>
-                                    <th colspan="4">Semester Marks</th>
+                                    <th colspan="4">Exam Marks</th>
                                     <th rowspan="2">Remarks</th>
                                 </tr>
                                 <tr>
 
-                                    <th>Semester 1</th>
-                                    <th>Semester 2</th>
-                                    <th>Semester 3</th>
-                                    <th>Semester 4</th>
+                                    <th>Exam 1</th>
+                                    <th>Exam 2</th>
+                                    <th>Exam 3</th>
+                                    <th>Exam 4</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -934,7 +934,7 @@
                         <a data-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
                         <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
                     </div>
-                    <h4 class="header-title mb-0">Each exam marks in class</h4>
+                    <h4 class="header-title mb-0"></h4>
 
                     <div id="cardCollpase1" class="collapse pt-3 show">
                         <div class="text-center">
@@ -963,7 +963,7 @@
                         <a data-toggle="collapse" href="#cardCollpase2" role="button" aria-expanded="false" aria-controls="cardCollpase2"><i class="mdi mdi-minus"></i></a>
                         <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
                     </div>
-                    <h4 class="header-title mb-0">Each exam rank in class</h4>
+                    <h4 class="header-title mb-0"></h4>
 
                     <div id="cardCollpase2" class="collapse pt-3 show">
                         <div class="text-center">
@@ -986,13 +986,25 @@
                             <h4>
                     </li>
                 </ul><br>
+
                 <div class="card-body" dir="ltr">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="examID">Test Name<span class="text-danger">*</span></label>
+                            <select id="scoreExamID" class="form-control" name="examID">
+                                <option value="">Select Exams</option>
+                                @foreach($exams as $exam)
+                                <option value="{{$exam['id']}}">{{$exam['name']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     <div class="card-widgets">
                         <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
                         <a data-toggle="collapse" href="#cardCollpase2" role="button" aria-expanded="false" aria-controls="cardCollpase2"><i class="mdi mdi-minus"></i></a>
                         <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
                     </div>
-                    <h4 class="header-title mb-0">Score in class</h4>
+                    <h4 class="header-title mb-0"></h4>
 
                     <div id="cardCollpase2" class="collapse pt-3 show">
                         <div class="text-center">

@@ -187,62 +187,6 @@ $(function () {
                 }
             }
         }, 'json');
-        // exam subject mark High Low Avg
-        $.post(examSubjectMarkHighLowAvg, {
-            token: token,
-            branch_id: branchID,
-            student_id: studentID,
-            academic_session_id: academic_session_id,
-            exam_id: '3'
-        }, function (response) {
-            if (response.code == 200) {
-                var highLowAvg = response.data;
-                var alllabel = ['my', 'highest', 'average', 'lowest'];
-                var data = [];
-                var label = [];
-                var marks = [];
-                var max_marks = [];
-                var min_marks = [];
-                var avg_marks = [];
-                if (highLowAvg.length > 0) {
-                    $.each(highLowAvg, function (key, value) {
-                        let mark = parseInt(value.mark);
-                        let max = parseInt(value.max);
-                        let min = parseInt(value.min);
-                        let avg = parseInt(value.avg);
-                        marks.push(mark);
-                        max_marks.push(max);
-                        min_marks.push(min);
-                        avg_marks.push(avg);
-                        label.push(value.subject_name);
-                    });
-                    $.each(alllabel, function (key, value) {
-                        var obj = {};
-                        var randcol = getRandomColor();
-                        obj["label"] = value;
-                        obj["backgroundColor"] = hexToRGB(randcol, 0.3);
-                        obj["borderColor"] = randcol;
-                        obj["pointBackgroundColor"] = randcol;
-                        obj["pointBorderColor"] = "#fff";
-                        obj["pointHoverBackgroundColor"] = "#fff";
-                        obj["pointHoverBorderColor"] = randcol;
-                        if (value == "my") {
-                            obj["data"] = marks;
-                        } else if (value == "highest") {
-                            obj["data"] = max_marks;
-                        } else if (value == "average") {
-                            obj["data"] = avg_marks;
-                        } else if (value == "lowest") {
-                            obj["data"] = min_marks;
-                        } else {
-                            obj["data"] = [];
-                        }
-                        data.push(obj);
-                    });
-                    subjectMarkHighLowAvg(label, data);
-                }
-            }
-        }, 'json');
     }
     function testScoreAnalysisChart(labels, obj) {
         if (radar) {
@@ -298,6 +242,68 @@ $(function () {
     }
     // all_exam_subject_ranks
     // exam  subject mark high low avg start
+    $('#scoreExamID').on('change', function () {
+        var exam_id = $(this).val();
+        if (exam_id) {
+            // exam subject mark High Low Avg
+            $.post(examSubjectMarkHighLowAvg, {
+                token: token,
+                branch_id: branchID,
+                student_id: studentID,
+                academic_session_id: academic_session_id,
+                exam_id: exam_id
+            }, function (response) {
+                if (response.code == 200) {
+                    var highLowAvg = response.data;
+                    var alllabel = ['my', 'highest', 'average', 'lowest'];
+                    var data = [];
+                    var label = [];
+                    var marks = [];
+                    var max_marks = [];
+                    var min_marks = [];
+                    var avg_marks = [];
+                    if (highLowAvg.length > 0) {
+                        $.each(highLowAvg, function (key, value) {
+                            let mark = parseInt(value.mark);
+                            let max = parseInt(value.max);
+                            let min = parseInt(value.min);
+                            let avg = parseInt(value.avg);
+                            marks.push(mark);
+                            max_marks.push(max);
+                            min_marks.push(min);
+                            avg_marks.push(avg);
+                            label.push(value.subject_name);
+                        });
+                        $.each(alllabel, function (key, value) {
+                            var obj = {};
+                            var randcol = getRandomColor();
+                            obj["label"] = value;
+                            obj["backgroundColor"] = hexToRGB(randcol, 0.3);
+                            obj["borderColor"] = randcol;
+                            obj["pointBackgroundColor"] = randcol;
+                            obj["pointBorderColor"] = "#fff";
+                            obj["pointHoverBackgroundColor"] = "#fff";
+                            obj["pointHoverBorderColor"] = randcol;
+                            if (value == "my") {
+                                obj["data"] = marks;
+                            } else if (value == "highest") {
+                                obj["data"] = max_marks;
+                            } else if (value == "average") {
+                                obj["data"] = avg_marks;
+                            } else if (value == "lowest") {
+                                obj["data"] = min_marks;
+                            } else {
+                                obj["data"] = [];
+                            }
+                            data.push(obj);
+                        });
+                        subjectMarkHighLowAvg(label, data);
+                    }
+                }
+            }, 'json');
+        }
+
+    });
     function subjectMarkHighLowAvg(labels, obj) {
         if (radarSubjectAvgHighLow) {
             radarSubjectAvgHighLow.data.labels = labels;
