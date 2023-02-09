@@ -649,33 +649,43 @@
             </ul><br>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="">Student Name<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
-                                <option value="">Sheelu</option>
-                                <option value="">Veena</option>
-                                <option value="">Jesy</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="">Grade<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
-                                <option value="">Tingatan 1</option>
-                                <option value="">Tingatan 1</option>
-                                <option value="">Tingatan 1</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="">Acedamic Year<span class="text-danger">*</span></label>
                             <select id="" class="form-control" name="">
-                                <option value="">2020-2021</option>
+                                <option value="">Choose Year</option>
                                 <option value="">2021-2022</option>
                                 <option value="">2022-2023</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Grade<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Choose Grade</option>
+                                <option value="">Tingatan1</option>
+                                <option value="">Tingatan2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Class<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Choose Class</option>
+                                <option value="">class 1</option>
+                                <option value="">class 1</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Student Name<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Choose Student</option>
+                                <option value="">Sheelu</option>
+                                <option value="">Veena</option>
                             </select>
                         </div>
                     </div>
@@ -684,58 +694,58 @@
                     <table class="table table-bordered w-100 nowrap" id="">
                         <thead>
                             <tr>
-                                <th rowspan="2">#</th>
-                                <th rowspan="2">Sudent Name</th>
-                                <th rowspan="2">Grade</th>
-                                <th rowspan="2">Total Subject</th>
-                                <th rowspan="2">Total Marks</th>
-                                <th colspan="4">Semester Marks</th>
-                                <th rowspan="2">Remarks</th>
+                                <th>Semester</th>
+                                <th>Sudent Name</th>
+                                <th>Grade</th>
+                                <th>Exam Name</th>
+                                <th>Total Marks</th>
+                                <th>Exam Marks</th>
+                                <th>Remarks</th>
                             </tr>
-                            <tr>
 
-                                <th>Semester 1</th>
-                                <th>Semester 2</th>
-                                <th>Semester 3</th>
-                                <th>Semester 4</th>
-                            </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>#</td>
+                                <th rowspan="3" style="background:#E9D528;vertical-align: middle;">Semester 1</th>
                                 <td>Shasha</td>
                                 <td>Tingatan 1</td>
-                                <td>5</td>
-                                <td>500</td>
-                                <td>395</td>
-                                <td>492</td>
-                                <td>489</td>
-                                <td>498</td>
+                                <td>Penilaian Sumatif 1</td>
+                                <td>300</td>
+                                <td>250</td>
                                 <th>Good</th>
                             </tr>
                             <tr>
-                                <td>#</td>
-                                <td>sheelu</td>
-                                <td>Tingatan 1</td>
-                                <td>6</td>
-                                <td>600</td>
-                                <td>595</td>
-                                <td>492</td>
-                                <td>589</td>
-                                <td>598</td>
+                                <td>Shailu</td>
+                                <td>Tingatan 2</td>
+                                <td>Penilaian Sumatif 2</td>
+                                <td>300</td>
+                                <td>240</td>
                                 <th>Good</th>
                             </tr>
-                            <tr>
-                                <td>#</td>
-                                <td>veena</td>
+                            <tr style="border-bottom: 2px solid #fcefd9;">
+                                <td>Priya</td>
                                 <td>Tingatan 1</td>
-                                <td>7</td>
-                                <td>600</td>
-                                <td>395</td>
-                                <td>392</td>
-                                <td>389</td>
-                                <td>398</td>
-                                <th>Work hard</th>
+                                <td>Penilaian Sumatif 1</td>
+                                <td>300</td>
+                                <td>150</td>
+                                <th>Work Hard</th>
+                            </tr>
+                            <tr>
+                                <th rowspan="2" style="background:#E9D528;vertical-align: middle;">Semester 2</th>
+                                <td>Sri</td>
+                                <td>Tingatan 1</td>
+                                <td>Penilaian Sumatif 3</td>
+                                <td>200</td>
+                                <td>120</td>
+                                <th>Good</th>
+                            </tr>
+                            <tr style="border-bottom: 2px solid #fcefd9;">
+                                <td>Moonu</td>
+                                <td>Tingatan 1</td>
+                                <td>Penilaian Sumatif 3</td>
+                                <td>200</td>
+                                <td>170</td>
+                                <th>Good</th>
                             </tr>
                         </tbody>
 
@@ -756,47 +766,59 @@
             </ul><br>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="">Student Name<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
-                                <option value="">Sheelu</option>
-                                <option value="">Veena</option>
-                                <option value="">Jesy</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="">Grade<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
-                                <option value="">Tingatan 1</option>
-                                <option value="">Tingatan 1</option>
-                                <option value="">Tingatan 1</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="">Acedamic Year<span class="text-danger">*</span></label>
                             <select id="" class="form-control" name="">
-                                <option value="">2020-2021</option>
+                                <option value="">Choose Year</option>
                                 <option value="">2021-2022</option>
                                 <option value="">2022-2023</option>
                             </select>
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Grade<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Choose Grade</option>
+                                <option value="">Tingatan1</option>
+                                <option value="">Tingatan2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Class<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Choose Class</option>
+                                <option value="">class 1</option>
+                                <option value="">class 1</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Student Name<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Choose Student</option>
+                                <option value="">Sheelu</option>
+                                <option value="">Veena</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="table-responsive">
+
                     <table class="table table-bordered w-100 nowrap" id="">
                         <thead>
                             <tr>
-                                <th rowspan="2">#</th>
+                                <th rowspan="2">Semester</th>
                                 <th rowspan="2">Sudent Name</th>
                                 <th rowspan="2">Grade</th>
+                                <th rowspan="2">Exam Name</th>
                                 <th rowspan="2">Total Subject</th>
                                 <th rowspan="2">Total Marks</th>
-                                <th colspan="4">Subject Marks</th>
+                                <th colspan="9">Subject Marks</th>
                                 <th rowspan="2">Remarks</th>
                             </tr>
                             <tr>
@@ -805,44 +827,146 @@
                                 <th>Maths</th>
                                 <th>Csc</th>
                                 <th>DS</th>
+                                <th>DM</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>#</td>
+                                <th rowspan="2" style="background:#E9D528;vertical-align: middle;">Semester 1</th>
                                 <td>Shasha</td>
                                 <td>Tingatan 1</td>
+                                <td>Unggul 1</td>
                                 <td>5</td>
                                 <td>500</td>
                                 <td>95</td>
                                 <td>92</td>
                                 <td>89</td>
                                 <td>98</td>
+                                <td>98</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <th>Good</th>
                             </tr>
-                            <tr>
-                                <td>#</td>
+                            <tr style="border-bottom: 2px solid #fcefd9;">
                                 <td>sheelu</td>
                                 <td>Tingatan 1</td>
-                                <td>6</td>
-                                <td>600</td>
+                                <td>Unggul 1</td>
+                                <td>5</td>
+                                <td>500</td>
                                 <td>95</td>
                                 <td>92</td>
                                 <td>89</td>
                                 <td>98</td>
+                                <td>98</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <th>Good</th>
                             </tr>
                             <tr>
-                                <td>#</td>
+                                <th colspan="6"></th>
+
+                                <th>English</th>
+                                <th>Maths</th>
+                                <th>Csc</th>
+                                <th>DS</th>
+                                <th>DM</th>
+                                <th>CC</th>
+                                <th>Mc</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <th rowspan="2" style="background:#E9D528;vertical-align: middle;">Semester 2</th>
                                 <td>veena</td>
                                 <td>Tingatan 1</td>
+                                <td>Unggul 1</td>
                                 <td>7</td>
-                                <td>600</td>
+                                <td>700</td>
                                 <td>95</td>
                                 <td>92</td>
                                 <td>89</td>
                                 <td>98</td>
+                                <td>98</td>
+                                <td>95</td>
+                                <td>85</td>
+                                <td></td>
+                                <td></td>
                                 <th>Work hard</th>
+                            </tr>
+                            <tr style="border-bottom: 2px solid #fcefd9;">
+                                <td>sheelu</td>
+                                <td>Tingatan 1</td>
+                                <td>Unggul 1</td>
+                                <td>7</td>
+                                <td>700</td>
+                                <td>95</td>
+                                <td>92</td>
+                                <td>89</td>
+                                <td>98</td>
+                                <td>98</td>
+                                <td>85</td>
+                                <td>64</td>
+                                <td></td>
+                                <td></td>
+                                <th>Good</th>
+                            </tr>
+                            <tr>
+                                <th colspan="6"></th>
+
+                                <th>English</th>
+                                <th>Maths</th>
+                                <th>Csc</th>
+                                <th>DS</th>
+                                <th>DM</th>
+                                <th>CC</th>
+                                <th>Mc</th>
+                                <th>CC</th>
+                                <th>Mc</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <th rowspan="2" style="background:#E9D528;vertical-align: middle;">Semester 3</th>
+                                <td>veena</td>
+                                <td>Tingatan 1</td>
+                                <td>Unggul 1</td>
+                                <td>7</td>
+                                <td>700</td>
+                                <td>95</td>
+                                <td>92</td>
+                                <td>89</td>
+                                <td>98</td>
+                                <td>98</td>
+                                <td>95</td>
+                                <td>85</td>
+                                <td>95</td>
+                                <td>85</td>
+                                <th>Work hard</th>
+                            </tr>
+                            <tr style="border-bottom: 2px solid #fcefd9;">
+                                <td>sheelu</td>
+                                <td>Tingatan 1</td>
+                                <td>Unggul 1</td>
+                                <td>7</td>
+                                <td>700</td>
+                                <td>95</td>
+                                <td>92</td>
+                                <td>89</td>
+                                <td>98</td>
+                                <td>98</td>
+                                <td>85</td>
+                                <td>64</td>
+                                <td>85</td>
+                                <td>64</td>
+                                <th>Good</th>
                             </tr>
                         </tbody>
 
@@ -864,33 +988,66 @@
             </ul><br>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Semester<span class="text-danger">*</span></label>
+                            <label for="">Academic year<span class="text-danger">*</span></label>
                             <select id="" class="form-control" name="">
-                                <option value="">Semester 1</option>
-                                <option value="">Semester 2</option>
-                                <option value="">Semester 3</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="">Grade<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
-                                <option value="">Tingatan 1</option>
-                                <option value="">Tingatan 1</option>
-                                <option value="">Tingatan 1</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="">Acedamic Year<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
+                                <option value="">Select Academic year</option>
                                 <option value="">2020-2021</option>
                                 <option value="">2021-2022</option>
                                 <option value="">2022-2023</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Grade<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Select Grade</option>
+                                <option value="">Tingatan 1</option>
+                                <option value="">Tingatan 2</option>
+                                <option value="">Tingatan 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Class<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Select Class</option>
+                                <option value="1">Unggul</option>
+                                <option value="2">Wawasan</option>
+                                <option value="3">Iltizam</option>
+                                <option value="4">Gemilang</option>
+                                <option value="5">Cemerlang</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Semester<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="s">
+                                <option value="0">Select Semester</option>
+                                <option value="1">Semester 1</option>
+                                <option value="2">Semester 2</option>
+                                <option value="3">Semester 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Student Name<span class="text-danger">*</span></label>
+                            <select id="" class="form-control valid" name="">
+                                <option value="0">Select Session</option>
+                                <option value="1" selected="">Morning</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Exam Name<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Select Exams</option>
                             </select>
                         </div>
                     </div>
@@ -951,36 +1108,70 @@
             </ul><br>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Semester<span class="text-danger">*</span></label>
+                            <label for="">Academic year<span class="text-danger">*</span></label>
                             <select id="" class="form-control" name="">
-                                <option value="">Semester 1</option>
-                                <option value="">Semester 2</option>
-                                <option value="">Semester 3</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="">Grade<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
-                                <option value="">Tingatan 1</option>
-                                <option value="">Tingatan 1</option>
-                                <option value="">Tingatan 1</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="">Acedamic Year<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
+                                <option value="">Select Academic year</option>
                                 <option value="">2020-2021</option>
                                 <option value="">2021-2022</option>
                                 <option value="">2022-2023</option>
                             </select>
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Grade<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Select Grade</option>
+                                <option value="">Tingatan 1</option>
+                                <option value="">Tingatan 2</option>
+                                <option value="">Tingatan 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Class<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Select Class</option>
+                                <option value="1">Unggul</option>
+                                <option value="2">Wawasan</option>
+                                <option value="3">Iltizam</option>
+                                <option value="4">Gemilang</option>
+                                <option value="5">Cemerlang</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Semester<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="s">
+                                <option value="0">Select Semester</option>
+                                <option value="1">Semester 1</option>
+                                <option value="2">Semester 2</option>
+                                <option value="3">Semester 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Student Name<span class="text-danger">*</span></label>
+                            <select id="" class="form-control valid" name="">
+                                <option value="0">Select Session</option>
+                                <option value="1" selected="">Morning</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Exam Name<span class="text-danger">*</span></label>
+                            <select id="" class="form-control" name="">
+                                <option value="">Select Exams</option>
+                            </select>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered w-100 nowrap" id="">
