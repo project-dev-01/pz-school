@@ -44,21 +44,18 @@ $(function () {
         var total = datasetnew.rank.mark;
         $("#class_total").text(total);
         $("#class_rank").text(rank);
-        console.log('1s', datasetnew)
-        // <tr>
-        //                             <td>#</td>
-        //                             <td>English</td>
-        //                             <td>85</td>
-        //                             <td>2 nd Position</td>
-        //                         </tr>
-        subjects.forEach(function (res) {
-            sno++;
-            bySubject += '<tr><td>' + sno + '</td>';
-            bySubject += '<td>' + res.subject_name + '</td>';
-            bySubject += '<td>' + res.mark + '</td>';
-            bySubject += '<td>' + res.rank + '</td>';
-            bySubject += '</tr>';
-        });
+        if (subjects.length > 0) {
+            subjects.forEach(function (res) {
+                sno++;
+                bySubject += '<tr><td>' + sno + '</td>';
+                bySubject += '<td>' + res.subject_name + '</td>';
+                bySubject += '<td>' + res.mark + '</td>';
+                bySubject += '<td>' + res.rank + '</td>';
+                bySubject += '</tr>';
+            });
+        } else {
+            bySubject += '<tr><td colspan="4">No data available</td></tr>';
+        }
         $("#student_rank_body").append(bySubject);
     }
     StudentLeave_tabel();

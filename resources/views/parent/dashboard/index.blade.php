@@ -854,7 +854,6 @@
             </div>
         </div> <!-- end card-->
     </div> <!-- end col -->
-
     <div class="row">
         <div class="col-xl-12 col-md-12">
             <div class="card">
@@ -870,46 +869,41 @@
                             <thead>
                                 <tr>
                                     <th rowspan="2">#</th>
-                                    <th rowspan="2">Subjects</th>
-                                    <th colspan="4">Exam Marks</th>
-                                    <th rowspan="2">Remarks</th>
+                                    <th rowspan="2">Exam Name</th>
+                                    @forelse ($all_exam_subject_scores as $ddkey => $scores)
+                                    @php
+                                    $countsub = count($scores['exam_marks']);
+                                    @endphp
+                                    @if($ddkey =='0')
+                                    <th colspan="{{$countsub}}">Subjects</th>
+                                    @endif
+                                    @empty
+                                    @endforelse
                                 </tr>
                                 <tr>
-
-                                    <th>Exam 1</th>
-                                    <th>Exam 2</th>
-                                    <th>Exam 3</th>
-                                    <th>Exam 4</th>
+                                    @forelse ($all_exam_subject_scores as $skey => $scores)
+                                    @forelse ($scores['exam_marks'] as $key => $marks)
+                                    @if($skey =='0')
+                                    <th>{{ $marks['subject_name'] }}</th>
+                                    @endif
+                                    @empty
+                                    @endforelse
+                                    @empty
+                                    @endforelse
                                 </tr>
                             </thead>
                             <tbody>
+                                @forelse ($all_exam_subject_scores as $scrkey => $scores)
                                 <tr>
-                                    <td>#</td>
-                                    <td>Tamil</td>
-                                    <td>95</td>
-                                    <td>92</td>
-                                    <td>89</td>
-                                    <td>98</td>
-                                    <th>Good</th>
+                                    <td>{{ $scrkey+1 }}</td>
+                                    <td>{{ $scores['exam_name'] }}</td>
+                                    @forelse ($scores['exam_marks'] as $marks)
+                                    <td>{{ $marks['mark'] }}</td>
+                                    @empty
+                                    @endforelse
                                 </tr>
-                                <tr>
-                                    <td>#</td>
-                                    <td>English</td>
-                                    <td>95</td>
-                                    <td>92</td>
-                                    <td>89</td>
-                                    <td>98</td>
-                                    <th>Good</th>
-                                </tr>
-                                <tr>
-                                    <td>#</td>
-                                    <td>Maths</td>
-                                    <td>95</td>
-                                    <td>92</td>
-                                    <td>89</td>
-                                    <td>98</td>
-                                    <th>Good</th>
-                                </tr>
+                                @empty
+                                @endforelse
                             </tbody>
 
                         </table>
@@ -924,99 +918,101 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv"> Marks in class each exam
+                        <h4 class="navv"> Exam Marks Status
                             <h4>
                     </li>
                 </ul><br>
-                <div class="card-body" dir="ltr">
-                    <div class="card-widgets">
-                        <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                        <a data-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
-                        <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
-                    </div>
-                    <h4 class="header-title mb-0"></h4>
+                <div class="card-body">
+                    <ul class="nav nav-tab nav-bordered float-right">
+                        <li class="nav-item">
+                            <a href="#mcex" data-toggle="tab" aria-expanded="true" class="nav-link active">
+                                <b style="font-size:12px">Marks in class each exam</b>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#rcex" data-toggle="tab" aria-expanded="false" class="nav-link">
+                                <b style="font-size:12px">Rank in class each exam</b>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#score-class" data-toggle="tab" aria-expanded="false" class="nav-link">
+                                <b style="font-size:12px">Score in class</b>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane show active" id="mcex">
+                            <div class="card-body" dir="ltr">
+                                <div class="card-widgets">
+                                    <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                                    <a data-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
+                                    <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                                </div>
+                                <h4 class="header-title mb-0"></h4>
 
-                    <div id="cardCollpase1" class="collapse pt-3 show">
-                        <div class="text-center">
-                            <div class="mt-3 chartjs-chart">
-                                <canvas id="allExamSubjectScoresChart" height="150"></canvas>
-                            </div>
+                                <div id="cardCollpase1" class="collapse pt-3 show">
+                                    <div class="text-center">
+                                        <div class="mt-3 chartjs-chart">
+                                            <canvas id="allExamSubjectScoresChart" height="150"></canvas>
+                                        </div>
+                                    </div>
+                                </div> <!-- end collapse-->
+                            </div> <!-- end card-body-->
                         </div>
-                    </div> <!-- end collapse-->
-                </div> <!-- end card-body-->
+                        <div class="tab-pane" id="rcex">
+                            <div class="card-body" dir="ltr">
+                                <div class="card-widgets">
+                                    <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                                    <a data-toggle="collapse" href="#cardCollpase2" role="button" aria-expanded="false" aria-controls="cardCollpase2"><i class="mdi mdi-minus"></i></a>
+                                    <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                                </div>
+                                <h4 class="header-title mb-0"></h4>
+
+                                <div id="cardCollpase2" class="collapse pt-3 show">
+                                    <div class="text-center">
+                                        <div class="mt-3 chartjs-chart">
+                                            <canvas id="allExamSubjectRankChart" height="150"></canvas>
+                                        </div>
+                                    </div>
+                                </div> <!-- end collapse-->
+                            </div> <!-- end card-body-->
+                        </div>
+                        <div class="tab-pane" id="score-class">
+                            <div class="card-body" dir="ltr">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="examID">Test Name<span class="text-danger">*</span></label>
+                                        <select id="scoreExamID" class="form-control" name="examID">
+                                            <option value="">Select Exams</option>
+                                            @foreach($exams as $exam)
+                                            <option value="{{$exam['id']}}">{{$exam['name']}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="card-widgets">
+                                    <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                                    <a data-toggle="collapse" href="#cardCollpase2" role="button" aria-expanded="false" aria-controls="cardCollpase2"><i class="mdi mdi-minus"></i></a>
+                                    <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                                </div>
+                                <h4 class="header-title mb-0"></h4>
+
+                                <div id="cardCollpase2" class="collapse pt-3 show">
+                                    <div class="text-center">
+                                        <div class="mt-3 chartjs-chart">
+                                            <canvas id="examSubjectMarkHighLowAvg" height="150"></canvas>
+                                        </div>
+                                    </div>
+                                </div> <!-- end collapse-->
+                            </div> <!-- end card-body-->
+                        </div>
+                    </div>
+                </div> <!-- end card-box-->
+
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
-    <div class="row">
-        <div class="col-xl-12 col-md-12">
-            <!-- Portlet card -->
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv"> Rank in class each exam
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body" dir="ltr">
-                    <div class="card-widgets">
-                        <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                        <a data-toggle="collapse" href="#cardCollpase2" role="button" aria-expanded="false" aria-controls="cardCollpase2"><i class="mdi mdi-minus"></i></a>
-                        <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
-                    </div>
-                    <h4 class="header-title mb-0"></h4>
 
-                    <div id="cardCollpase2" class="collapse pt-3 show">
-                        <div class="text-center">
-                            <div class="mt-3 chartjs-chart">
-                                <canvas id="allExamSubjectRankChart" height="150"></canvas>
-                            </div>
-                        </div>
-                    </div> <!-- end collapse-->
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col-->
-    </div>
-    <div class="row">
-        <div class="col-xl-12 col-md-12">
-            <!-- Portlet card -->
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv"> Score in class
-                            <h4>
-                    </li>
-                </ul><br>
-
-                <div class="card-body" dir="ltr">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="examID">Test Name<span class="text-danger">*</span></label>
-                            <select id="scoreExamID" class="form-control" name="examID">
-                                <option value="">Select Exams</option>
-                                @foreach($exams as $exam)
-                                <option value="{{$exam['id']}}">{{$exam['name']}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="card-widgets">
-                        <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                        <a data-toggle="collapse" href="#cardCollpase2" role="button" aria-expanded="false" aria-controls="cardCollpase2"><i class="mdi mdi-minus"></i></a>
-                        <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
-                    </div>
-                    <h4 class="header-title mb-0"></h4>
-
-                    <div id="cardCollpase2" class="collapse pt-3 show">
-                        <div class="text-center">
-                            <div class="mt-3 chartjs-chart">
-                                <canvas id="examSubjectMarkHighLowAvg" height="150"></canvas>
-                            </div>
-                        </div>
-                    </div> <!-- end collapse-->
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col-->
-    </div>
     @include('parent.dashboard.check_list')
     @include('parent.dashboard.exam-schedule')
 
@@ -1062,53 +1058,4 @@
 <!-- <script src="{{ asset('public/js/custom/student_calendor_new.js') }}"></script> -->
 <script src="{{ asset('public/js/custom/parent_calendor_new_cal.js') }}"></script>
 <script src="{{ asset('public/js/custom/greeting.js') }}"></script>
-<!-- add new module script -->
-<script src="{{ asset('public/js/pages/dashboard-3.init.js') }}"></script>
-<script src="{{ asset('public/js/pages/dashboard-1.init.js') }}"></script>
-<script src="{{ asset('public/js/pages/dashboard-4.init.js') }}"></script>
-<script src="{{ asset('public/libs/chart.js/Chart.bundle.min.js') }}"></script>
-<script src="{{ asset('public/js/pages/chartjs.init.js') }}"></script>
-
-<!-- <script>
-    var marksCanvas = document.getElementById("marksChart");
-    var marksData = {
-        labels: ["English", "Tamil", "Maths", "Science", "Csc"],
-        datasets: [{
-            label: "Subject Position",
-            backgroundColor: "rgba(200,0,0,0.2)",
-            data: [85, 75, 92, 80, 85]
-        }, {
-            label: "Semester,",
-            backgroundColor: "rgba(0,0,200,0.2)",
-            data: [95, 85, 75, 65, 55]
-        }]
-    };
-    var radarChart = new Chart(marksCanvas, {
-        type: 'radar',
-        data: marksData
-    });
-</script> -->
-<script>
-    var marksCanvas = document.getElementById("markssubject");
-    var marksData = {
-        labels: ["English", "Tamil", "Maths", "Science", "Csc"],
-        datasets: [{
-                label: "Low Marks Status",
-                backgroundColor: "rgba(247, 119, 133, 0.8)",
-                data: [65, 65, 78, 67]
-            },
-            {
-                label: "Subject Status",
-                backgroundColor: "rgba(111, 247, 82, 0.8)",
-                data: [55, 55, 43, 12]
-            }
-        ]
-    };
-    var radarChart = new Chart(marksCanvas, {
-        type: 'radar',
-        data: marksData
-    });
-</script>
-
-
 @endsection

@@ -23,15 +23,78 @@ class StudentController extends Controller
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
         $get_homework_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_homework_list_dashboard'), $data);
         $greetings = Helper::greetingMessage();
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        // dd($get_homework_list_dashboard);
+        $exam_by_student = Helper::GETMethodWithData(config('constants.api.exam_by_student'), $data);
+        $all_exam_subject_scores = Helper::PostMethod(config('constants.api.all_exam_subject_scores'), $data);
+        
+        
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'student.dashboard.index',
             [
                 'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
                 'get_homework_list_dashboard' => $get_homework_list_dashboard['data'],
-                'greetings' => $greetings
+                'greetings' => $greetings,
+                'all_exam_subject_scores' => $all_exam_subject_scores['data'],
+                'semester' => $semester['data'],
+                'session' => $session['data'],
+                'exams' => $exam_by_student['data'],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : "",
             ]
         );
     }
+    // public function index(Request $request)
+    // {
+    //     // $request->session()->put('children_id', "1");
+
+    //     $user_id = session()->get('user_id');
+    //     $student_id = session()->get('student_id');
+    //     $parent_id = session()->get('ref_user_id');
+
+    //     $data = [
+    //         'user_id' => $user_id,
+    //         'student_id' => $student_id,
+    //         'academic_session_id' => session()->get('academic_session_id')
+    //     ];
+    //     $parent_ids = [
+    //         'parent_id' => $parent_id,
+    //     ];
+    //     // dd($data);
+
+    //     $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
+    //     $get_homework_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_homework_list_dashboard'), $data);
+    //     $get_std_names_dashboard = Helper::GETMethodWithData(config('constants.api.get_students_parentdashboard'), $parent_ids);
+    //     $get_leave_reasons_dashboard = Helper::GetMethod(config('constants.api.absent_reason_list'));
+    //     $greetings = Helper::greetingMessage();
+    //     $semester = Helper::GetMethod(config('constants.api.semester'));
+    //     $session = Helper::GetMethod(config('constants.api.session'));
+    //     // dd($get_homework_list_dashboard);
+    //     $exam_by_student = Helper::GETMethodWithData(config('constants.api.exam_by_student'), $data);
+    //     $all_exam_subject_scores = Helper::PostMethod(config('constants.api.all_exam_subject_scores'), $data);
+        
+        
+    //     $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+    //     // dd($all_exam_subject_scores['data']);
+    //     return view(
+    //         'parent.dashboard.index',
+    //         [
+    //             'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
+    //             'get_homework_list_dashboard' => $get_homework_list_dashboard['data'],
+    //             'get_std_names_dashboard' => $get_std_names_dashboard['data'],
+    //             'get_leave_reasons_dashboard' => $get_leave_reasons_dashboard['data'],
+    //             'all_exam_subject_scores' => $all_exam_subject_scores['data'],
+    //             'semester' => $semester['data'],
+    //             'session' => $session['data'],
+    //             'greetings' => $greetings,
+    //             'exams' => $exam_by_student['data'],
+    //             'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+    //             'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : "",
+    //         ]
+    //     );
+    // }
     function addDailyReportRemarks(Request $request)
     {
         $data = [

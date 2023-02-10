@@ -40,6 +40,11 @@
 
     .table td {
         border-top: none;
+        text-align: center;
+    }
+
+    .table th {
+        text-align: center;
     }
 
     .homework-list {
@@ -57,6 +62,7 @@
     .hover1:hover {
         background-color: #D1E9EF;
     }
+
 
     /* Schedule Popup Mediaquery  */
     @media screen and (min-device-width: 320px) and (max-device-width: 660px) {
@@ -165,7 +171,6 @@
                                                             <div>
                                                                 <img src="{{ asset('public/images/users/12.jpg') }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                             </div>
-
                                                             <div class="mt-3 mt-sm-0">
                                                                 <ul class="list-inline font-13 text-sm-center">
                                                                     <li class="list-inline-item" id="comments{{ $today['id'] }}">
@@ -248,7 +253,6 @@
                                                                                     <i class='mdi mdi-tune font-16 mr-1'></i>
                                                                                     1/12
                                                                                 </li> -->
-
                                                                         <li class="list-inline-item mt-3 mt-sm-0">
                                                                             @if($upcoming['priority'] == "Low")
                                                                             <span class="badge badge-soft-success p-1">{{$upcoming['priority']}}</span>
@@ -452,7 +456,7 @@
             <div class="modal fade" id="student-modal" tabindex="-1">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
-                        <div class="modal-header py-3 px-4 border-bottom-1 d-block">
+                        <div class="modal-header py-3 px-4 border-bottom-0 d-block">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h5 class="modal-title" style="color: #6FC6CC">Schedule</h5>
                         </div>
@@ -676,30 +680,52 @@
         <div class="card">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <h4 class="navv">Semesterwise Ranking class & Subject</h4>
+                    <h4 class="navv"> Student Ranking class & Subject</h4>
                 </li>
             </ul><br>
             <div class="card-body">
-                <div class="row form-inline">
-                    <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Semester </label>
-                            <select id="" class="form-control" name="">
-                                <option value="">Semester 1</option>
-                                <option value="">Semester 2</option>
-                                <option value="">Semester 3</option>
+                            <label for="semester_id">Semester</label>
+                            <select id="sr_semester_id" class="form-control" name="semester_id">
+                                <option value="0">Select Semester</option>
+                                @foreach($semester as $sem)
+                                <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
-                            <label for=""><b> Over all class Position : 5th Rank</b></label>
+                            <label for="session_id">Session</label>
+                            <select id="sr_session_id" class="form-control" name="session_id">
+                                <option value="0">Select Session</option>
+                                @foreach($session as $ses)
+                                <option value="{{$ses['id']}}" {{'1' == $ses['id'] ? 'selected' : ''}}>{{$ses['name']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="examnames">Test Name<span class="text-danger">*</span></label>
+                            <select id="sr_examnames" class="form-control" name="examnames">
+                                <option value="">Select Exams</option>
+                                @foreach($exams as $exam)
+                                <option value="{{$exam['id']}}">{{$exam['name']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 form-inline">
+                        <div class="form-group">
+                            <label for=""><b> Rank : <span id="class_rank"></span> <br>Total : <span id="class_total"></span></b></label>
                         </div>
                     </div>
                 </div><br>
                 <div class="table-responsive">
-                    <table class="table table-bordered w-100 nowrap" id="">
+                    <table class="table table-bordered w-100 nowrap">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -708,25 +734,7 @@
                                 <th>Subject Position</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>#</td>
-                                <td>English</td>
-                                <td>85</td>
-                                <td>2 nd Position</td>
-                            </tr>
-                            <tr>
-                                <td>#</td>
-                                <td>Maths</td>
-                                <td>92</td>
-                                <td>7th Position</td>
-                            </tr>
-                            <tr>
-                                <td>#</td>
-                                <td>Csc</td>
-                                <td>85</td>
-                                <td>3rd Position</td>
-                            </tr>
+                        <tbody id="student_rank_body">
 
                         </tbody>
                     </table>
@@ -735,7 +743,6 @@
         </div>
     </div> <!-- end card-->
 </div> <!-- end col -->
-
 <div class="row">
     <div class="col-xl-12 col-md-12">
         <div class="card">
@@ -751,46 +758,41 @@
                         <thead>
                             <tr>
                                 <th rowspan="2">#</th>
-                                <th rowspan="2">Subjects</th>
-                                <th colspan="4">Semester Marks</th>
-                                <th rowspan="2">Remarks</th>
+                                <th rowspan="2">Exam Name</th>
+                                @forelse ($all_exam_subject_scores as $ddkey => $scores)
+                                @php
+                                $countsub = count($scores['exam_marks']);
+                                @endphp
+                                @if($ddkey =='0')
+                                <th colspan="{{$countsub}}">Subjects</th>
+                                @endif
+                                @empty
+                                @endforelse
                             </tr>
                             <tr>
-
-                                <th>Semester 1</th>
-                                <th>Semester 2</th>
-                                <th>Semester 3</th>
-                                <th>Semester 4</th>
+                                @forelse ($all_exam_subject_scores as $skey => $scores)
+                                @forelse ($scores['exam_marks'] as $key => $marks)
+                                @if($skey =='0')
+                                <th>{{ $marks['subject_name'] }}</th>
+                                @endif
+                                @empty
+                                @endforelse
+                                @empty
+                                @endforelse
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse ($all_exam_subject_scores as $scrkey => $scores)
                             <tr>
-                                <td>#</td>
-                                <td>Tamil</td>
-                                <td>95</td>
-                                <td>92</td>
-                                <td>89</td>
-                                <td>98</td>
-                                <th>Good</th>
+                                <td>{{ $scrkey+1 }}</td>
+                                <td>{{ $scores['exam_name'] }}</td>
+                                @forelse ($scores['exam_marks'] as $marks)
+                                <td>{{ $marks['mark'] }}</td>
+                                @empty
+                                @endforelse
                             </tr>
-                            <tr>
-                                <td>#</td>
-                                <td>English</td>
-                                <td>95</td>
-                                <td>92</td>
-                                <td>89</td>
-                                <td>98</td>
-                                <th>Good</th>
-                            </tr>
-                            <tr>
-                                <td>#</td>
-                                <td>Maths</td>
-                                <td>95</td>
-                                <td>92</td>
-                                <td>89</td>
-                                <td>98</td>
-                                <th>Good</th>
-                            </tr>
+                            @empty
+                            @endforelse
                         </tbody>
 
                     </table>
@@ -805,152 +807,97 @@
         <div class="card">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <h4 class="navv"> Ranking in Class & Subject
-                        <h4>
-                </li>
-            </ul><br>
-            <div class="card-body" dir="ltr">
-                <div class="card-widgets">
-                    <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                    <a data-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
-                    <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
-                </div>
-                <h4 class="header-title mb-0">Each subject Position in class</h4>
-
-                <div id="cardCollpase1" class="collapse pt-3 show">
-                    <div class="text-center">
-                        <div class="mt-3 chartjs-chart">
-                            <canvas id="marksChart" height="150"></canvas>
-                        </div>
-                    </div>
-                </div> <!-- end collapse-->
-            </div> <!-- end card-body-->
-        </div> <!-- end card-->
-    </div> <!-- end col-->
-</div>
-
-
-<div class="row">
-    <div class="col-xl-12 col-md-12">
-        <div class="card">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <h4 class="navv"> Marks Status & Subject Status
+                    <h4 class="navv"> Exam Marks Status
                         <h4>
                 </li>
             </ul><br>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="">Semester<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
-                                <option value="">Semester 1</option>
-                                <option value="">Semester 2</option>
-                                <option value="">Semester 3</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="">Mark Status<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
-                                <option value="">Low Marks</option>
-                                <option value="">Highest Marks</option>
-                                <option value="">Average Marks</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="">Subject Status<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
-                                <option value="">Weak Subject</option>
-                                <option value="">Strong Subject</option>
-                                <option value="">Average Subject</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-bordered w-100 nowrap" id="">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Subject</th>
-                                <th>Marks</th>
-                                <th>Marks Status</th>
-                                <th>Subject Status</th>
-                                <th>Remarks</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>#</td>
-                                <td>Csc</td>
-                                <td>65</td>
-                                <td><span class="badge badge-danger">Low Marks</span></td>
-                                <td><span class="badge badge-danger">Weak Subject</span></td>
-                                <td>Work hard</td>
-                            </tr>
-                            <tr>
-                                <td>#</td>
-                                <td>Maths</td>
-                                <td>85</td>
-                                <td><span class="badge badge-success">Highest Mark</span></td>
-                                <td><span class="badge badge-success">Strong Subject</span></td>
-                                <td>Good</td>
-                            </tr>
-                            <tr>
-                                <td>#</td>
-                                <td>Tamil</td>
-                                <td>75</td>
-                                <td><span class="badge badge-warning">Average Marks</span></td>
-                                <td><span class="badge badge-warning">Average Subject</span></td>
-                                <td>Good but work hard</td>
-                            </tr>
-                            <tr>
-                                <td>#</td>
-                                <td>English</td>
-                                <td>71</td>
-                                <td><span class="badge badge-warning">Average Marks</span></td>
-                                <td><span class="badge badge-warning">Average Subject</span></td>
-                                <td>Good but work hard</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div> <!-- end card-->
-</div> <!-- end col -->
+                <ul class="nav nav-tab nav-bordered float-right">
+                    <li class="nav-item">
+                        <a href="#mcex" data-toggle="tab" aria-expanded="true" class="nav-link active">
+                            <b style="font-size:12px">Marks in class each exam</b>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#rcex" data-toggle="tab" aria-expanded="false" class="nav-link">
+                            <b style="font-size:12px">Rank in class each exam</b>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#score-class" data-toggle="tab" aria-expanded="false" class="nav-link">
+                            <b style="font-size:12px">Score in class</b>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane show active" id="mcex">
+                        <div class="card-body" dir="ltr">
+                            <div class="card-widgets">
+                                <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                                <a data-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
+                                <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                            </div>
+                            <h4 class="header-title mb-0"></h4>
 
-<div class="row">
-    <div class="col-xl-12 col-md-12">
-        <!-- Portlet card -->
-        <div class="card">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <h4 class="navv"> Marks & Subject Status
-                        <h4>
-                </li>
-            </ul><br>
-            <div class="card-body" dir="ltr">
-                <div class="card-widgets">
-                    <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                    <a data-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
-                    <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
-                </div>
-                <h4 class="header-title mb-0">Low and Highest Marks in subject</h4>
-
-                <div id="cardCollpase1" class="collapse pt-3 show">
-                    <div class="text-center">
-                        <div class="mt-3 chartjs-chart">
-                            <canvas id="markssubject" height="150"></canvas>
-                        </div>
+                            <div id="cardCollpase1" class="collapse pt-3 show">
+                                <div class="text-center">
+                                    <div class="mt-3 chartjs-chart">
+                                        <canvas id="allExamSubjectScoresChart" height="150"></canvas>
+                                    </div>
+                                </div>
+                            </div> <!-- end collapse-->
+                        </div> <!-- end card-body-->
                     </div>
-                </div> <!-- end collapse-->
-            </div> <!-- end card-body-->
+                    <div class="tab-pane" id="rcex">
+                        <div class="card-body" dir="ltr">
+                            <div class="card-widgets">
+                                <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                                <a data-toggle="collapse" href="#cardCollpase2" role="button" aria-expanded="false" aria-controls="cardCollpase2"><i class="mdi mdi-minus"></i></a>
+                                <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                            </div>
+                            <h4 class="header-title mb-0"></h4>
+
+                            <div id="cardCollpase2" class="collapse pt-3 show">
+                                <div class="text-center">
+                                    <div class="mt-3 chartjs-chart">
+                                        <canvas id="allExamSubjectRankChart" height="150"></canvas>
+                                    </div>
+                                </div>
+                            </div> <!-- end collapse-->
+                        </div> <!-- end card-body-->
+                    </div>
+                    <div class="tab-pane" id="score-class">
+                        <div class="card-body" dir="ltr">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="examID">Test Name<span class="text-danger">*</span></label>
+                                    <select id="scoreExamID" class="form-control" name="examID">
+                                        <option value="">Select Exams</option>
+                                        @foreach($exams as $exam)
+                                        <option value="{{$exam['id']}}">{{$exam['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card-widgets">
+                                <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                                <a data-toggle="collapse" href="#cardCollpase2" role="button" aria-expanded="false" aria-controls="cardCollpase2"><i class="mdi mdi-minus"></i></a>
+                                <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                            </div>
+                            <h4 class="header-title mb-0"></h4>
+
+                            <div id="cardCollpase2" class="collapse pt-3 show">
+                                <div class="text-center">
+                                    <div class="mt-3 chartjs-chart">
+                                        <canvas id="examSubjectMarkHighLowAvg" height="150"></canvas>
+                                    </div>
+                                </div>
+                            </div> <!-- end collapse-->
+                        </div> <!-- end card-body-->
+                    </div>
+                </div>
+            </div> <!-- end card-box-->
+
         </div> <!-- end card-->
     </div> <!-- end col-->
 </div>
@@ -973,6 +920,15 @@
 
     var UserName = "{{ Session::get('name') }}";
     var getScheduleExamDetailsUrl = "{{ config('constants.api.get_schedule_exam_details_by_student') }}";
+    // all exam subject scores
+    var allExamSubjectScores = "{{ config('constants.api.all_exam_subject_scores') }}";
+    // all exam subject ranks
+    var allExamSubjectRanks = "{{ config('constants.api.all_exam_subject_ranks') }}";
+
+    var getMarksByStudent = "{{ config('constants.api.get_marks_by_student') }}";
+    // exam subject mark high low avg
+    var examSubjectMarkHighLowAvg = "{{ config('constants.api.exam_subject_mark_high_low_avg') }}";
+    // leave apply
 </script>
 <!-- <script src="{{ asset('public/js/custom/student_calendor.js') }}"></script> -->
 <script src="{{ asset('public/js/custom/student_dashboard.js') }}"></script>
@@ -981,47 +937,6 @@
 <!-- to do list -->
 <script src="{{ asset('public/js/custom/admin/dashboard.js') }}"></script>
 <script src="{{ asset('public/js/custom/greeting.js') }}"></script>
-<script>
-    var marksCanvas = document.getElementById("marksChart");
-    var marksData = {
-        labels: ["English", "Tamil", "Maths", "Science", "Csc"],
-        datasets: [{
-            label: "Subject Position",
-            backgroundColor: "rgba(200,0,0,0.2)",
-            data: [85, 75, 92, 80, 85]
-        }, {
-            label: "Semester,",
-            backgroundColor: "rgba(0,0,200,0.2)",
-            data: [95, 85, 75, 65, 55]
-        }]
-    };
-    var radarChart = new Chart(marksCanvas, {
-        type: 'radar',
-        data: marksData
-    });
-</script>
-<script>
-    var marksCanvas = document.getElementById("markssubject");
-    var marksData = {
-        labels: ["English", "Tamil", "Maths", "Science", "Csc"],
-        datasets: [{
-                label: "Low Marks Status",
-                backgroundColor: "rgba(247, 119, 133, 0.8)",
-                data: [65, 65, 78, 67]
-            },
-            {
-                label: "Subject Status",
-                backgroundColor: "rgba(111, 247, 82, 0.8)",
-                data: [55, 55, 43, 12]
-            }
-        ]
-    };
-    var radarChart = new Chart(marksCanvas, {
-        type: 'radar',
-        data: marksData
-    });
-</script>
-
 
 
 @endsection

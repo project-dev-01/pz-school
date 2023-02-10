@@ -39,9 +39,11 @@ class ParentController extends Controller
         $session = Helper::GetMethod(config('constants.api.session'));
         // dd($get_homework_list_dashboard);
         $exam_by_student = Helper::GETMethodWithData(config('constants.api.exam_by_student'), $data);
+        $all_exam_subject_scores = Helper::PostMethod(config('constants.api.all_exam_subject_scores'), $data);
+        
         
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
-        // dd($exam_by_student);
+        // dd($all_exam_subject_scores['data']);
         return view(
             'parent.dashboard.index',
             [
@@ -49,6 +51,7 @@ class ParentController extends Controller
                 'get_homework_list_dashboard' => $get_homework_list_dashboard['data'],
                 'get_std_names_dashboard' => $get_std_names_dashboard['data'],
                 'get_leave_reasons_dashboard' => $get_leave_reasons_dashboard['data'],
+                'all_exam_subject_scores' => $all_exam_subject_scores['data'],
                 'semester' => $semester['data'],
                 'session' => $session['data'],
                 'greetings' => $greetings,
