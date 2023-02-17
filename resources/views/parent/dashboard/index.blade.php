@@ -619,25 +619,8 @@
         </div><!-- /.modal -->
         <!-- end modal-->
     </div>
-
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">Test Score Analysis
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
-                    <div class="mt-4 chartjs-chart">
-                        <canvas id="radar-chart-test-marks" data-colors="#39afd1,#a17fe0"></canvas>
-                        <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
-                    </div>
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-    </div>
+    
+    
     <!--General Details -->
 
     <div class="row">
@@ -799,7 +782,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="semester_id">Semester</label>
-                                <select id="sr_semester_id" class="form-control" name="semester_id">
+                                <select id="sr_semester_id" class="form-control studentRank" name="semester_id">
                                     <option value="0">Select Semester</option>
                                     @foreach($semester as $sem)
                                     <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
@@ -810,7 +793,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="session_id">Session</label>
-                                <select id="sr_session_id" class="form-control" name="session_id">
+                                <select id="sr_session_id" class="form-control studentRank" name="session_id">
                                     <option value="0">Select Session</option>
                                     @foreach($session as $ses)
                                     <option value="{{$ses['id']}}" {{'1' == $ses['id'] ? 'selected' : ''}}>{{$ses['name']}}</option>
@@ -821,7 +804,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="examnames">Test Name<span class="text-danger">*</span></label>
-                                <select id="sr_examnames" class="form-control" name="examnames">
+                                <select id="sr_examnames" class="form-control studentRank" name="examnames">
                                     <option value="">Select Exams</option>
                                     @foreach($exams as $exam)
                                     <option value="{{$exam['id']}}">{{$exam['name']}}</option>
@@ -831,7 +814,7 @@
                         </div>
                         <div class="col-md-3 form-inline">
                             <div class="form-group">
-                                <label for=""><b> Rank : <span id="class_rank"></span> <br>Total : <span id="class_total"></span></b></label>
+                                <label for=""><b> Class Rank : <span id="class_rank"></span> <br>Total Marks: <span id="class_total"></span></b></label>
                             </div>
                         </div>
                     </div><br>

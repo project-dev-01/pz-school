@@ -793,4 +793,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('exam_subject_mark_high_low_avg', [ApiControllerOne::class, 'examMarksByHighAvgLow']);
     Route::get('exam-by-student', [ApiControllerOne::class, 'examByStudent']);
     Route::post('get-marks-by-student', [ApiControllerOne::class, 'getMarksByStudent']);
+    
+    Route::post('get-ten-student', [ApiControllerOne::class, 'getTenStudent']);
 });

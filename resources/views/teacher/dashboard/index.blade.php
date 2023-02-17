@@ -638,7 +638,7 @@
         </div>
     </div>
 </div> -->
-<div class="row">
+<!-- <div class="row">
     <div class="col-xl-12 col-md-12">
         <div class="card">
             <ul class="nav nav-tabs">
@@ -753,9 +753,9 @@
                 </div>
             </div>
         </div>
-    </div> <!-- end card-->
-</div> <!-- end col -->
-<div class="row">
+    </div> 
+</div>  -->
+<!-- <div class="row">
     <div class="col-xl-12 col-md-12">
         <div class="card">
             <ul class="nav nav-tabs">
@@ -974,10 +974,336 @@
                 </div>
             </div>
         </div>
+    </div> 
+</div>  -->
+<div class="row">
+    <div class="col-xl-12 col-md-12">
+        <div class="card">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <h4 class="navv"> Student Ranking class & Subject</h4>
+                </li>
+            </ul><br>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="sr_btwyears">Academic year<span class="text-danger">*</span></label>
+                            <select id="sr_btwyears" class="form-control studentRank" name="year">
+                                <option value="">Select Academic Year</option>
+                                @forelse($academic_year_list as $r)
+                                <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                @empty
+                                @endforelse
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="sr_class_id">Grade<span class="text-danger">*</span></label>
+                            <select id="sr_class_id" class="form-control" name="class_id">
+                                <option value="">Select Grade</option>
+                                @forelse ($classes as $class)
+                                <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
+                                @empty
+                                @endforelse
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="sr_section_id">Class<span class="text-danger">*</span></label>
+                            <select id="sr_section_id" class="form-control " name="section_id">
+                                <option value="">Select Class</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="sr_student_id">Student<span class="text-danger">*</span></label>
+                            <select id="sr_student_id" class="form-control studentRank" name="student_id">
+                                <option value="">Select Student</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="sr_examnames">Test Name<span class="text-danger">*</span></label>
+                            <select id="sr_examnames" class="form-control studentRank" name="examnames">
+                                <option value="">Select Exams</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="sr_semester_id">Semester</label>
+                            <select id="sr_semester_id" class="form-control studentRank" name="semester_id">
+                                <option value="0">Select Semester</option>
+                                @foreach($semester as $sem)
+                                <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="sr_session_id">Session</label>
+                            <select id="sr_session_id" class="form-control studentRank" name="session_id">
+                                <option value="0">Select Session</option>
+                                @foreach($session as $ses)
+                                <option value="{{$ses['id']}}" {{'1' == $ses['id'] ? 'selected' : ''}}>{{$ses['name']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 form-inline">
+                        <div class="form-group">
+                            <label for=""><b> Class Rank : <span id="class_rank"></span> <br>Total Marks: <span id="class_total"></span></b></label>
+                        </div>
+                    </div>
+                </div><br>
+                <div class="table-responsive">
+                    <table class="table table-bordered w-100 nowrap">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Subject</th>
+                                <th>Marks</th>
+                                <th>Subject Position</th>
+                            </tr>
+                        </thead>
+                        <tbody id="student_rank_body">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div> <!-- end card-->
 </div> <!-- end col -->
 
+<div class="row">
+    <div class="col-xl-12 col-md-12">
+        <div class="card">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <h4 class="navv">Semester Wise Exam Marks
+                        <h4>
+                </li>
+            </ul><br>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="st_btwyears">Academic year<span class="text-danger">*</span></label>
+                            <select id="st_btwyears" class="form-control studentSemester" name="year">
+                                <option value="">Select Academic Year</option>
+                                @forelse($academic_year_list as $r)
+                                <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                @empty
+                                @endforelse
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="st_class_id">Grade<span class="text-danger">*</span></label>
+                            <select id="st_class_id" class="form-control" name="class_id">
+                                <option value="">Select Grade</option>
+                                @forelse ($classes as $class)
+                                <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
+                                @empty
+                                @endforelse
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="st_section_id">Class<span class="text-danger">*</span></label>
+                            <select id="st_section_id" class="form-control " name="section_id">
+                                <option value="">Select Class</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="st_student_id">Student<span class="text-danger">*</span></label>
+                            <select id="st_student_id" class="form-control studentSemester" name="student_id">
+                                <option value="">Select Student</option>
+                            </select>
+                        </div>
+                    </div>
+                </div><br>
+                <div class="table-responsive">
+                    <table class="table table-bordered w-100 nowrap" >
+                        
+                        <thead id="st_semester_wise_head">
+                        </thead>
+                        <tbody id="st_semester_wise_body">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end card-->
+</div> <!-- end col -->
+<div class="row">
+    <div class="col-xl-12 col-md-12">
+        <!-- Portlet card -->
+        <div class="card">
+            
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <h4 class="navv"> Exam Marks Status
+                        <h4>
+                </li>
+            </ul><br>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="ems_btwyears">Academic year<span class="text-danger">*</span></label>
+                            <select id="ems_btwyears" class="form-control examMarkStatus" name="year">
+                                <option value="">Select Academic Year</option>
+                                @forelse($academic_year_list as $r)
+                                <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                @empty
+                                @endforelse
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="ems_class_id">Grade<span class="text-danger">*</span></label>
+                            <select id="ems_class_id" class="form-control" name="class_id">
+                                <option value="">Select Grade</option>
+                                @forelse ($classes as $class)
+                                <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
+                                @empty
+                                @endforelse
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="ems_section_id">Class<span class="text-danger">*</span></label>
+                            <select id="ems_section_id" class="form-control " name="section_id">
+                                <option value="">Select Class</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="ems_student_id">Student<span class="text-danger">*</span></label>
+                            <select id="ems_student_id" class="form-control examMarkStatus" name="student_id">
+                                <option value="">Select Student</option>
+                            </select>
+                        </div>
+                    </div>
+                </div><br>
+                <ul class="nav nav-tab nav-bordered float-right">
+                    <li class="nav-item">
+                        <a href="#mcex" data-toggle="tab" aria-expanded="true" class="nav-link active">
+                            <b style="font-size:12px">Marks in class each exam</b>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#rcex" data-toggle="tab" aria-expanded="false" class="nav-link">
+                            <b style="font-size:12px">Rank in class each exam</b>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#score-class" data-toggle="tab" aria-expanded="false" class="nav-link">
+                            <b style="font-size:12px">Score in class</b>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane show active" id="mcex">
+                        <div class="card-body" dir="ltr">
+                            <div class="card-widgets">
+                                <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                                <a data-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
+                                <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                            </div>
+                            <h4 class="header-title mb-0"></h4>
 
+                            <div id="cardCollpase1" class="collapse pt-3 show">
+                                <div class="text-center">
+                                    <div class="mt-3 chartjs-chart">
+                                        <canvas id="allExamSubjectScoresChart" height="150"></canvas>
+                                    </div>
+                                </div>
+                            </div> <!-- end collapse-->
+                        </div> <!-- end card-body-->
+                    </div>
+                    <div class="tab-pane" id="rcex">
+                        <div class="card-body" dir="ltr">
+                            <div class="card-widgets">
+                                <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                                <a data-toggle="collapse" href="#cardCollpase2" role="button" aria-expanded="false" aria-controls="cardCollpase2"><i class="mdi mdi-minus"></i></a>
+                                <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                            </div>
+                            <h4 class="header-title mb-0"></h4>
+
+                            <div id="cardCollpase2" class="collapse pt-3 show">
+                                <div class="text-center">
+                                    <div class="mt-3 chartjs-chart">
+                                        <canvas id="allExamSubjectRankChart" height="150"></canvas>
+                                    </div>
+                                </div>
+                            </div> <!-- end collapse-->
+                        </div> <!-- end card-body-->
+                    </div>
+                    <div class="tab-pane" id="score-class">
+                        <div class="card-body" dir="ltr">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="examID">Test Name<span class="text-danger">*</span></label>
+                                    <select id="scoreExamID" class="form-control" name="examID">
+                                        <option value="">Select Exams</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card-widgets">
+                                <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                                <a data-toggle="collapse" href="#cardCollpase2" role="button" aria-expanded="false" aria-controls="cardCollpase2"><i class="mdi mdi-minus"></i></a>
+                                <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                            </div>
+                            <h4 class="header-title mb-0"></h4>
+
+                            <div id="cardCollpase2" class="collapse pt-3 show">
+                                <div class="text-center">
+                                    <div class="mt-3 chartjs-chart">
+                                        <canvas id="examSubjectMarkHighLowAvg" height="150"></canvas>
+                                    </div>
+                                </div>
+                            </div> <!-- end collapse-->
+                        </div> <!-- end card-body-->
+                    </div>
+                </div>
+            </div> <!-- end card-box-->
+
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+</div>
+<!-- <div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <h4 class="navv">Test Score Analysis
+                        <h4>
+                </li>
+            </ul><br>
+            <div class="card-body">
+                <div class="mt-4 chartjs-chart">
+                    <canvas id="radar-chart-test-marks" data-colors="#39afd1,#a17fe0"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
 <div class="row">
     <div class="col-xl-12 col-md-12">
         <div class="card">
@@ -990,105 +1316,79 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Academic year<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
-                                <option value="">Select Academic year</option>
-                                <option value="">2020-2021</option>
-                                <option value="">2021-2022</option>
-                                <option value="">2022-2023</option>
+                            <label for="st10_btwyears">Academic year<span class="text-danger">*</span></label>
+                            <select id="st10_btwyears" class="form-control studentTop" name="year">
+                                <option value="">Select Academic Year</option>
+                                @forelse($academic_year_list as $r)
+                                <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                @empty
+                                @endforelse
                             </select>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Grade<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
+                            <label for="st10_class_id">Grade<span class="text-danger">*</span></label>
+                            <select id="st10_class_id" class="form-control" name="class_id">
                                 <option value="">Select Grade</option>
-                                <option value="">Tingatan 1</option>
-                                <option value="">Tingatan 2</option>
-                                <option value="">Tingatan 3</option>
+                                @forelse ($classes as $class)
+                                <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
+                                @empty
+                                @endforelse
                             </select>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Class<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
+                            <label for="st10_section_id">Class<span class="text-danger">*</span></label>
+                            <select id="st10_section_id" class="form-control " name="section_id">
                                 <option value="">Select Class</option>
-                                <option value="1">Unggul</option>
-                                <option value="2">Wawasan</option>
-                                <option value="3">Iltizam</option>
-                                <option value="4">Gemilang</option>
-                                <option value="5">Cemerlang</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Semester<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="s">
+                            <label for="st10_semester_id">Semester</label>
+                            <select id="st10_semester_id" class="form-control studentTop" name="semester_id">
                                 <option value="0">Select Semester</option>
-                                <option value="1">Semester 1</option>
-                                <option value="2">Semester 2</option>
-                                <option value="3">Semester 3</option>
+                                @foreach($semester as $sem)
+                                <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Student Name<span class="text-danger">*</span></label>
-                            <select id="" class="form-control valid" name="">
+                            <label for="st10_session_id">Session</label>
+                            <select id="st10_session_id" class="form-control studentTop" name="session_id">
                                 <option value="0">Select Session</option>
-                                <option value="1" selected="">Morning</option>
+                                @foreach($session as $ses)
+                                <option value="{{$ses['id']}}" {{'1' == $ses['id'] ? 'selected' : ''}}>{{$ses['name']}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Exam Name<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
+                            <label for="st10_examnames">Test Name<span class="text-danger">*</span></label>
+                            <select id="st10_examnames" class="form-control studentTop" name="examnames">
                                 <option value="">Select Exams</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered w-100 nowrap" id="">
+                    <table class="table table-bordered w-100 nowrap">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Student Name</th>
-                                <th>Grade</th>
                                 <th>Total Marks</th>
                                 <th>Marks</th>
                                 <th>Rank</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>#</td>
-                                <td>Mohamad</td>
-                                <td>Tingatan 1</td>
-                                <td>500</td>
-                                <td>480</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>#</td>
-                                <td>Jhon</td>
-                                <td>Tingatan 1</td>
-                                <td>500</td>
-                                <td>480</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>#</td>
-                                <td>Jhony</td>
-                                <td>Tingatan 1</td>
-                                <td>500</td>
-                                <td>480</td>
-                                <td>3</td>
-                            </tr>
+                        <tbody id="top_student_table">
 
                         </tbody>
                     </table>
@@ -1110,63 +1410,62 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Academic year<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
-                                <option value="">Select Academic year</option>
-                                <option value="">2020-2021</option>
-                                <option value="">2021-2022</option>
-                                <option value="">2022-2023</option>
+                            <label for="sb10_btwyears">Academic year<span class="text-danger">*</span></label>
+                            <select id="sb10_btwyears" class="form-control studentBottom" name="year">
+                                <option value="">Select Academic Year</option>
+                                @forelse($academic_year_list as $r)
+                                <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                @empty
+                                @endforelse
                             </select>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Grade<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
+                            <label for="sb10_class_id">Grade<span class="text-danger">*</span></label>
+                            <select id="sb10_class_id" class="form-control" name="class_id">
                                 <option value="">Select Grade</option>
-                                <option value="">Tingatan 1</option>
-                                <option value="">Tingatan 2</option>
-                                <option value="">Tingatan 3</option>
+                                @forelse ($classes as $class)
+                                <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
+                                @empty
+                                @endforelse
                             </select>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Class<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
+                            <label for="sb10_section_id">Class<span class="text-danger">*</span></label>
+                            <select id="sb10_section_id" class="form-control " name="section_id">
                                 <option value="">Select Class</option>
-                                <option value="1">Unggul</option>
-                                <option value="2">Wawasan</option>
-                                <option value="3">Iltizam</option>
-                                <option value="4">Gemilang</option>
-                                <option value="5">Cemerlang</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Semester<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="s">
+                            <label for="sb10_semester_id">Semester</label>
+                            <select id="sb10_semester_id" class="form-control studentBottom" name="semester_id">
                                 <option value="0">Select Semester</option>
-                                <option value="1">Semester 1</option>
-                                <option value="2">Semester 2</option>
-                                <option value="3">Semester 3</option>
+                                @foreach($semester as $sem)
+                                <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Student Name<span class="text-danger">*</span></label>
-                            <select id="" class="form-control valid" name="">
+                            <label for="sb10_session_id">Session</label>
+                            <select id="sb10_session_id" class="form-control studentBottom" name="session_id">
                                 <option value="0">Select Session</option>
-                                <option value="1" selected="">Morning</option>
+                                @foreach($session as $ses)
+                                <option value="{{$ses['id']}}" {{'1' == $ses['id'] ? 'selected' : ''}}>{{$ses['name']}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Exam Name<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
+                            <label for="sb10_examnames">Test Name<span class="text-danger">*</span></label>
+                            <select id="sb10_examnames" class="form-control studentBottom" name="examnames">
                                 <option value="">Select Exams</option>
                             </select>
                         </div>
@@ -1174,42 +1473,17 @@
 
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered w-100 nowrap" id="">
+                    <table class="table table-bordered w-100 nowrap">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Student Name</th>
-                                <th>Grade</th>
                                 <th>Total Marks</th>
                                 <th>Marks</th>
                                 <th>Rank</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>#</td>
-                                <td>Mohamad</td>
-                                <td>Tingatan 1</td>
-                                <td>500</td>
-                                <td>480</td>
-                                <td>11</td>
-                            </tr>
-                            <tr>
-                                <td>#</td>
-                                <td>Jhon</td>
-                                <td>Tingatan 1</td>
-                                <td>500</td>
-                                <td>480</td>
-                                <td>22</td>
-                            </tr>
-                            <tr>
-                                <td>#</td>
-                                <td>Jhony</td>
-                                <td>Tingatan 1</td>
-                                <td>500</td>
-                                <td>480</td>
-                                <td>33</td>
-                            </tr>
+                        <tbody id="bottom_student_table">
 
                         </tbody>
                     </table>
@@ -1250,6 +1524,27 @@
     var calendorAddTaskCalendor = "{{ config('constants.api.calendor_add_task_calendor') }}";
     var calendorListTaskCalendor = "{{ config('constants.api.calendor_list_task_calendor') }}";
     var calendorDeleteTaskCalendor = "{{ config('constants.api.calendor_delete_task_calendor') }}";
+
+    
+    var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
+    var subjectByExamNames = "{{ config('constants.api.subject_by_exam_names') }}";
+
+    var getMarksByStudent = "{{ config('constants.api.get_marks_by_student') }}";
+
+    var getTenStudent = "{{ config('constants.api.get_ten_student') }}";
+    var getStudentList = "{{ config('constants.api.get_student_details') }}";
+    var all_exam_subject_scores = "{{ config('constants.api.all_exam_subject_scores') }}";
+
+    
+    var getTestScore = "{{ config('constants.api.get_test_score_dashboard') }}";
+    // all exam subject scores
+    var allExamSubjectScores = "{{ config('constants.api.all_exam_subject_scores') }}";
+    // all exam subject ranks
+    var allExamSubjectRanks = "{{ config('constants.api.all_exam_subject_ranks') }}";
+    var examByStudent = "{{ config('constants.api.exam_by_student') }}";
+    var examSubjectMarkHighLowAvg = "{{ config('constants.api.exam_subject_mark_high_low_avg') }}";
+    
+    
 </script>
 <!-- to calendor  -->
 <!-- <script src="{{ asset('public/js/custom/teacher_calendor.js') }}"></script> -->
@@ -1257,6 +1552,7 @@
 <script src="{{ asset('public/js/custom/teacher_calendor_new_cal.js') }}"></script>
 
 <!-- to do list -->
+<script src="{{ asset('public/js/custom/teacher_dashboard.js') }}"></script>
 <script src="{{ asset('public/js/custom/admin/dashboard.js') }}"></script>
 <script src="{{ asset('public/js/custom/greeting.js') }}"></script>
 

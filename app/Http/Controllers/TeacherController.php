@@ -20,18 +20,29 @@ class TeacherController extends Controller
         $teacher_id = session()->get('ref_user_id');
         $data = [
             'user_id' => $user_id,
-            'teacher_id' => $teacher_id
+            'teacher_id' => $teacher_id,
         ];
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
         $greetings = Helper::greetingMessage();
         $teacher_count = Helper::GetMethod(config('constants.api.teacher_count'));
         $count['teacher_count'] = $teacher_count['data'];
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         return view(
             'teacher.dashboard.index',
             [
+                'classes' => $getclass['data'],
                 'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
                 'greetings' => $greetings,
-                'count' => $count
+                'count' => $count,
+                'semester' => $semester['data'],
+                'session' => $session['data'],
+                'academic_year_list' => $academic_year_list['data'],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : "",
             ]
         );
     }

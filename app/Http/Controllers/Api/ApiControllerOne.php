@@ -6468,8 +6468,20 @@ class ApiControllerOne extends BaseController
                     ['en.active_status', '=', '0']
                 ])
                 ->first();
-            $student_class_id = isset($getStudentDetails->class_id) ? $getStudentDetails->class_id : 0;
-            $student_section_id = isset($getStudentDetails->section_id) ? $getStudentDetails->section_id : 0;
+                
+                if($request->class_id) {
+
+                    $student_class_id = $request->class_id;
+                }else {
+                    $student_class_id = isset($getStudentDetails->class_id) ? $getStudentDetails->class_id : 0;
+                }
+                if($request->section_id) {
+                    $student_section_id = $request->section_id;
+                }else {
+                    $student_section_id = isset($getStudentDetails->section_id) ? $getStudentDetails->section_id : 0;
+                }
+            // $student_class_id = isset($getStudentDetails->class_id) ? $getStudentDetails->class_id : 0;
+            // $student_section_id = isset($getStudentDetails->section_id) ? $getStudentDetails->section_id : 0;
             $student_semester_id = isset($getStudentDetails->semester_id) ? $getStudentDetails->semester_id : 0;
             $student_session_id = isset($getStudentDetails->session_id) ? $getStudentDetails->session_id : 0;
             // here we get all academic exams
@@ -6993,6 +7005,7 @@ class ApiControllerOne extends BaseController
             return $this->successResponse($getExamsName, 'Exams  list of Name record fetch successfully');
         }
     }
+    
     // student marks 
     public function getMarksByStudent(Request $request)
     {
@@ -7031,10 +7044,16 @@ class ApiControllerOne extends BaseController
                 ])
                 ->first();
             // dd($getStudentDetails);
-            $class_id = isset($getStudentDetails->class_id) ? $getStudentDetails->class_id : 0;
-            $student_section_id = isset($getStudentDetails->section_id) ? $getStudentDetails->section_id : 0;
-            $student_semester_id = isset($getStudentDetails->semester_id) ? $getStudentDetails->semester_id : 0;
-            $student_session_id = isset($getStudentDetails->session_id) ? $getStudentDetails->session_id : 0;
+            if($request->class_id && $request->section_id) {
+
+                $class_id = $request->class_id;
+                $student_section_id = $request->section_id;
+            }else {
+                $class_id = isset($getStudentDetails->class_id) ? $getStudentDetails->class_id : 0;
+                $student_section_id = isset($getStudentDetails->section_id) ? $getStudentDetails->section_id : 0;
+            }
+            $student_semester_id = isset($request->semester_id) ? $request->semester_id : 0;
+            $student_session_id = isset($request->session_id) ? $request->session_id : 0;
             // $student_semester_id = isset($request->semester_id) ? $request->semester_id : 0;
             // $student_session_id = isset($request->session_id) ? $request->session_id : 0;
 
@@ -7047,8 +7066,8 @@ class ApiControllerOne extends BaseController
                 )
                 ->join('subjects as sbj', 'sa.subject_id', '=', 'sbj.id')
                 ->where([
-                    ['sa.class_id', $getStudentDetails->class_id],
-                    ['sa.section_id', $getStudentDetails->section_id],
+                    ['sa.class_id', $class_id],
+                    ['sa.section_id', $student_section_id],
                     ['sa.academic_session_id', $academic_session_id],
                     ['sa.type', '=', '0'],
                     ['sbj.exam_exclude', '=', '0']
@@ -7059,6 +7078,7 @@ class ApiControllerOne extends BaseController
             $allSections = isset($total_sujects_teacher[0]->all_section_id) ? explode(',', $total_sujects_teacher[0]->all_section_id) : [];
 
             $total_marks = [];
+            $rank = '';
             if (!empty($total_sujects_teacher)) {
                 foreach ($total_sujects_teacher as $skey => $val) {
                     $studentArr = [];
@@ -7203,14 +7223,26 @@ class ApiControllerOne extends BaseController
                         $studentAr = $this->calculate_rank($studentArr);
                         $key = array_search($student_id, array_column($studentAr, 'student_id'));
                     }
-                    $object->mark = $studentArr[$key]->mark;
-                    $object->rank = $studentArr[$key]->rank;
+                    if($studentArr){
+                        $object->mark = $studentArr[$key]->mark;
+                        $object->rank = $studentArr[$key]->rank;
+                    }else{
+                        $object->mark = 0;
+                        $object->rank = 0;
+                    }
                     array_push($allbysubject, $object);
                 }
                 $class_rank = collect($total_marks)->sortByDesc('mark')->all();
-                $student_rank = $this->calculate_overall_rank($class_rank);
+                // dd($class_rank);
+                if($class_rank){
+
+                    $student_rank = $this->calculate_overall_rank($class_rank);
+                }
                 // dd($student_rank);
-                $rank = $student_rank[$student_id];
+                if(isset($student_rank[$student_id])){
+
+                    $rank = $student_rank[$student_id];
+                }
             }
 
             $data = [
@@ -7223,17 +7255,283 @@ class ApiControllerOne extends BaseController
     }
     public function calculate_overall_rank($marks): array
     {
-        $rank = 1;
+        $last_mark = 0;
+        $rank = 0;
+        // dd($marks);
         foreach ($marks as $key => $mark) {
             // if($mark['fail']>0){
 
             //     $marks[$key]['rank'] = "";
             // }else{
-
-            $marks[$key]['rank'] = $rank;
-            $rank++;
+                    if($mark['mark']!=$last_mark){
+                        $rank++;
+                    }
+                    $last_mark = $mark['mark'];
+                    $marks[$key]['rank'] = $rank;
+            // dd($last_mark);
             // }
         }
         return $marks;
+    }
+
+    // top 10 student marks 
+    public function getTenStudent(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+            'academic_session_id' => 'required',
+            'exam_id' => 'required',
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $Connection = $this->createNewConnection($request->branch_id);
+            // get data     
+            $academic_session_id = $request->academic_session_id;
+            $exam_id = $request->exam_id;
+            $class_id = $request->class_id;
+            $student_section_id = $request->section_id;
+            $student_semester_id = isset($request->semester_id) ? $request->semester_id : 0;
+            $student_session_id = isset($request->session_id) ? $request->session_id : 0;
+
+            // get total recent subject teacher
+            $total_sujects_teacher = $Connection->table('subject_assigns as sa')
+                ->select(
+                    DB::raw("group_concat(sa.section_id) as all_section_id"),
+                    'sbj.id as subject_id',
+                    'sbj.name as subject_name'
+                )
+                ->join('subjects as sbj', 'sa.subject_id', '=', 'sbj.id')
+                ->where([
+                    ['sa.class_id', $class_id],
+                    ['sa.section_id', $student_section_id],
+                    ['sa.academic_session_id', $academic_session_id],
+                    ['sa.type', '=', '0'],
+                    ['sbj.exam_exclude', '=', '0']
+                ])
+                ->groupBy('sa.subject_id')
+                ->get();
+            // dd($total_sujects_teacher);
+            $allSections = isset($total_sujects_teacher[0]->all_section_id) ? explode(',', $total_sujects_teacher[0]->all_section_id) : [];
+
+            $total_marks = [];
+            $rank = '';
+            if (!empty($total_sujects_teacher)) {
+                foreach ($total_sujects_teacher as $skey => $val) {
+                    $studentArr = [];
+                    $object = new \stdClass();
+                    // $all_section_id = explode(',', $val->all_section_id);
+                    $subject_id = $val->subject_id;
+                    $subject_name = $val->subject_name;
+
+                    // $object->class_id = $class_id;
+                    $object->subject_id = $subject_id;
+                    $object->subject_name = $subject_name;
+                    // all section list
+                    // get subject total weightage
+                    $getExamPaperWeightage = $Connection->table('exam_papers as expp')
+                        ->select(
+                            DB::raw('SUM(expp.subject_weightage) as total_subject_weightage'),
+                            'expp.grade_category'
+                        )
+                        ->where([
+                            ['expp.class_id', '=', $class_id],
+                            ['expp.subject_id', '=', $subject_id],
+                            ['expp.academic_session_id', $academic_session_id]
+                        ])
+                        ->get();
+                    // dd($class_id);
+                    $total_subject_weightage = isset($getExamPaperWeightage[0]->total_subject_weightage) ? (int)$getExamPaperWeightage[0]->total_subject_weightage : 0;
+                    // get last exam
+                    // $getLastExam = $Connection->table('timetable_exam as texm')
+                    //     ->select(
+                    //         'texm.exam_id'
+                    //     )
+                    //     ->where([
+                    //         ['texm.exam_id', '=', $exam_id],
+                    //         ['texm.class_id', '=', $class_id],
+                    //         ['texm.section_id', '=', $student_section_id],
+                    //         ['texm.subject_id', '=', $subject_id],
+                    //         ['texm.semester_id', '=', $student_semester_id],
+                    //         ['texm.session_id', '=', $student_session_id],
+                    //         ['texm.academic_session_id', '=', $academic_session_id]
+                    //     ])
+                    //     ->orderBy('texm.exam_date', 'desc')
+                    //     ->first();
+                    $getLastExam = new \stdClass();
+                    $getLastExam->exam_id = $exam_id;
+                    // dd($getLastExam);
+
+
+                    // $exam_id = isset($getLastExam->exam_id) ? $getLastExam->exam_id : 0;
+                    foreach ($allSections as $key => $section) {
+                        $studentDetails = $Connection->table('enrolls as en')
+                            ->select(
+                                'en.student_id',
+                                'en.semester_id',
+                                'en.session_id',
+                                DB::raw('CONCAT(stu.first_name, " ", stu.last_name) as student_name'),
+                            )
+                            ->join('students as stu', 'en.student_id', '=', 'stu.id')
+                            ->where([
+                                ['en.class_id', $class_id],
+                                ['en.section_id', $section],
+                                ['en.academic_session_id', '=', $academic_session_id],
+                                ['en.semester_id', '=', $student_semester_id],
+                                ['en.session_id', '=', $student_session_id]
+                            ])
+                            ->get();
+                        $semester_id = isset($studentDetails[0]->semester_id) ? $studentDetails[0]->semester_id : 0;
+                        $session_id = isset($studentDetails[0]->session_id) ? $studentDetails[0]->session_id : 0;
+                        if (!empty($studentDetails)) {
+                            foreach ($studentDetails as $student) {
+                                $sbj_obj = new \stdClass();
+
+                                $studentID = $student->student_id;
+                                $studentName = $student->student_name;
+                                // $total_marks['student_id'] = $studentID;
+                                $sbj_obj->student_id = $studentID;
+                                $sbj_obj->class_id = $class_id;
+                                $sbj_obj->class_id = $class_id;
+                                $sbj_obj->section_id = $section;
+                                $sbj_obj->student_name = $studentName;
+                                $getStudMarksDetails = $Connection->table('student_marks as sm')
+                                    ->select(
+                                        'expp.subject_weightage',
+                                        'sb.name as subject_name',
+                                        'sb.id as subject_id',
+                                        'sm.score',
+                                        'sm.paper_id',
+                                        'sm.grade_category',
+                                    )
+                                    ->join('subjects as sb', 'sm.subject_id', '=', 'sb.id')
+                                    ->join('exam_papers as expp', 'sm.paper_id', '=', 'expp.id')
+                                    ->where([
+                                        ['sm.class_id', '=', $class_id],
+                                        ['sm.section_id', '=', $section],
+                                        ['sm.subject_id', '=', $subject_id],
+                                        ['sm.exam_id', '=', $exam_id],
+                                        ['sm.semester_id', '=', $semester_id],
+                                        ['sm.session_id', '=', $session_id],
+                                        ['sm.student_id', '=', $studentID],
+                                        ['sm.academic_session_id', '=', $academic_session_id]
+                                    ])
+                                    ->groupBy('sm.paper_id')
+                                    ->get();
+                                $marks = 0;
+                                $$total_subject_weightage = 0;
+                                $fail = 0;
+                                // // here you get calculation based on student marks and subject weightage
+                                if (!empty($getStudMarksDetails)) {
+                                    // grade calculations
+                                    foreach ($getStudMarksDetails as $Studmarks) {
+                                        $sub_weightage = (int) $Studmarks->subject_weightage;
+                                        $score = (int) $Studmarks->score;
+                                        $grade_category = $Studmarks->grade_category;
+                                        // foreach for total no of students
+                                        $weightage = ($sub_weightage / $total_subject_weightage);
+                                        $marks += ($weightage * $score);
+                                    }
+                                    $mark = (int) $marks;
+                                    if ($skey == 0) {
+
+                                        $total_marks[$studentID]['mark'] = $mark;
+                                        $total_marks[$studentID]['total_mark'] = $total_subject_weightage;
+                                        if ($mark == 0) {
+                                            $fail++;
+                                        }
+                                        $total_marks[$studentID]['fail'] = $fail;
+                                    } else {
+                                        $total_marks[$studentID]['mark'] += $mark;
+                                        $total_marks[$studentID]['total_mark'] += $total_subject_weightage;
+                                        if ($mark == 0) {
+                                            $fail++;
+                                        }
+                                        $total_marks[$studentID]['fail'] += $fail;
+                                    }
+                                    $sbj_obj->mark = $mark != 0 ? number_format($mark) : $mark;
+                                } else {
+                                    $sbj_obj->mark = "Nill";
+                                    $sbj_obj->total_subject_weightage = "Nill";
+                                }
+                                array_push($studentArr, $sbj_obj);
+                            }
+                        }
+
+                        // sort by mark score
+                        array_multisort(
+                            array_column($studentArr, 'mark'),
+                            SORT_DESC,
+                            $studentArr
+                        );
+                        $studentAr = $this->calculate_rank($studentArr);
+                        // dd($studentArr);
+                        // $key = array_search($student_id, array_column($studentAr, 'student_id'));
+                    }
+                    
+                }
+                $class_rank = collect($total_marks)->sortByDesc('mark')->all();
+                // dd($class_rank);
+                if($class_rank){
+
+                    $student_rank = $this->calculate_overall_rank($class_rank);
+                }
+
+                // foreach($student_rank as $stu=>$student){
+                //     dd($studentArr[$stu]);
+                //     $studentArr[$stu]->mark = $student['mark'];
+                //     $studentArr[$stu]->rank = $student['rank'];
+                // }
+                
+                // dd($stu);
+                foreach($studentArr as $stud){
+                    $stud->mark = $student_rank[$stud->student_id]['mark'];
+                    $stud->rank = $student_rank[$stud->student_id]['rank'];
+                    $stud->total_mark = $student_rank[$stud->student_id]['total_mark'];
+                    
+                }
+
+                if($request->type=="top"){
+
+                
+                    array_multisort(
+                        array_column($studentArr, 'rank'),
+                        SORT_ASC,
+                        $studentArr
+                    );
+                }else if($request->type=="bottom"){
+
+                
+                    array_multisort(
+                        array_column($studentArr, 'rank'),
+                        SORT_DESC,
+                        $studentArr
+                    );
+                }
+                // dd($studentArr);
+                // if($studentArr){
+                    //     $object->mark = $studentArr[$key]->mark;
+                    //     $object->rank = $studentArr[$key]->rank;
+                    // }else{
+                    //     $object->mark = 0;
+                    //     $object->rank = 0;
+                    // }
+                    // array_push($allbysubject, $object);
+                // dd($student_rank);
+                
+                // if(isset($student_rank[$student_id])){
+
+                //     $rank = $student_rank[$student_id];
+                // }
+            }
+
+            $data = [
+                'details' => $studentArr,
+            ];
+
+            return $this->successResponse($data, 'All student grade and classes row fetch successfully');
+        }
     }
 }

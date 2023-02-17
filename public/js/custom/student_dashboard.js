@@ -1,9 +1,9 @@
 $(function () {
-    $('#sr_examnames').on('change', function () {
+    $('.studentRank').on('change', function () {
 
         var session_id = $("#sr_session_id").val();
         var semester_id = $("#sr_semester_id").val();
-        var exam_id = $(this).val();
+        var exam_id = $("#sr_examnames").val();
         if (exam_id) {
 
             $.post(getMarksByStudent, { token: token, branch_id: branchID, session_id: session_id, semester_id: semester_id, exam_id: exam_id, student_id: ref_user_id, academic_session_id: academic_session_id }, function (res) {
@@ -23,6 +23,8 @@ $(function () {
 
     function bystudentdetails(datasetnew) {
         $('#student_rank_body').empty();
+        $('#class_rank').empty();
+        $('#class_total').empty();
         var sno = 0;
         var bySubject = "";
         var subjects = datasetnew.details;

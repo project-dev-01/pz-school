@@ -688,7 +688,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="semester_id">Semester</label>
-                            <select id="sr_semester_id" class="form-control" name="semester_id">
+                            <select id="sr_semester_id" class="form-control studentRank" name="semester_id">
                                 <option value="0">Select Semester</option>
                                 @foreach($semester as $sem)
                                 <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
@@ -699,7 +699,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="session_id">Session</label>
-                            <select id="sr_session_id" class="form-control" name="session_id">
+                            <select id="sr_session_id" class="form-control studentRank" name="session_id">
                                 <option value="0">Select Session</option>
                                 @foreach($session as $ses)
                                 <option value="{{$ses['id']}}" {{'1' == $ses['id'] ? 'selected' : ''}}>{{$ses['name']}}</option>
@@ -710,7 +710,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="examnames">Test Name<span class="text-danger">*</span></label>
-                            <select id="sr_examnames" class="form-control" name="examnames">
+                            <select id="sr_examnames" class="form-control studentRank" name="examnames">
                                 <option value="">Select Exams</option>
                                 @foreach($exams as $exam)
                                 <option value="{{$exam['id']}}">{{$exam['name']}}</option>
@@ -720,7 +720,7 @@
                     </div>
                     <div class="col-md-3 form-inline">
                         <div class="form-group">
-                            <label for=""><b> Rank : <span id="class_rank"></span> <br>Total : <span id="class_total"></span></b></label>
+                            <label for=""><b> Class Rank : <span id="class_rank"></span> <br>Total Marks: <span id="class_total"></span></b></label>
                         </div>
                     </div>
                 </div><br>
