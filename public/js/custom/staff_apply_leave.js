@@ -60,9 +60,9 @@ $(function () {
             // formData.append('file', file);
             formData.append('file', $('input[type=file]')[0].files[0]);
             // Display the key/value pairs
-            for (var pair of formData.entries()) {
-                console.log(pair[0] + ', ' + pair[1]);
-            }
+            // for (var pair of formData.entries()) {
+            //     console.log(pair[0] + ', ' + pair[1]);
+            // }
             // return false;
             //
             $.ajax({
@@ -79,6 +79,8 @@ $(function () {
                         toastr.success('Leave apply sucessfully');
                         $('#staffLeaveApply')[0].reset();
                         $("#remarks_div").hide();
+                        // $('#file_name').text("");
+                        $("#file_name").html("");
                     } else {
                         toastr.error(response.message);
                         $("#remarks_div").hide();
@@ -88,15 +90,20 @@ $(function () {
         };
     });
     // change leave reasons
-    $('#changelevReasons').on('change', function () {
-        var Reasons = $("#changelevReasons").val();
-        console.log(Reasons);
-        if (Reasons == 3) {
-            $("#remarks_div").show();
-        }
-        else {
-            $("#remarks_div").hide();
-        }
+    // $('#changelevReasons').on('change', function () {
+    //     var Reasons = $("#changelevReasons").val();
+    //     console.log(Reasons);
+    //     if (Reasons == 3) {
+    //         $("#remarks_div").show();
+    //     }
+    //     else {
+    //         $("#remarks_div").hide();
+    //     }
+    // });
+    $('#homework_file').change(function () {
+        // var i = $(this).prev('label').clone();
+        var file = $('#homework_file')[0].files[0].name;
+        $('#file_name').html(file);
     });
     $(".datepick").datepicker({
         dateFormat: 'yy-mm-dd'
@@ -184,15 +191,15 @@ $(function () {
             {
                 "targets": 6,
                 "render": function (data, type, row, meta) {
-                    if (row.status != "Approve") {
-                        var fileUpload = '<div>' +
+                    var document = "";
+                    if (data) {
+                        var document = '<a href="' + StaffDocUrl + '/' + data + '" download ><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
+                    } else {
+                        document = '<div>' +
                             '<input type="file" id="reissue_file' + row.id + '" name="file">' +
                             '</div>';
-                    } else {
-                        fileUpload = "<p style='text-align: center;''>-</p>";
                     }
-
-                    return fileUpload;
+                    return document;
                 }
             },
             {
@@ -212,6 +219,20 @@ $(function () {
                     return status;
                 }
             },
+            // {
+            //     "targets": 8,
+            //     "render": function (data, type, row, meta) {
+            //         if (row.status != "Approve") {
+            //             var fileUpload = '<div>' +
+            //                 '<input type="file" id="reissue_file' + row.id + '" name="file">' +
+            //                 '</div>';
+            //         } else {
+            //             fileUpload = "<p style='text-align: center;''>-</p>";
+            //         }
+
+            //         return fileUpload;
+            //     }
+            // }
         ]
     }).on('draw', function () {
     });

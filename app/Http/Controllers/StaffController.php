@@ -1596,7 +1596,9 @@ class StaffController extends Controller
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
-                if ($row['status'] != "Approve") {
+                // if ($row['status'] != "Approve") {
+                // if ($row['document'] != "Approve") {
+                if (is_null($row['document'])) {
                     return '<div class="button-list">
                     <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">Upload</a>
             </div>';

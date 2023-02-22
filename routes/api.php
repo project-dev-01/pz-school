@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Api\ApiControllerOne;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CommonController;
+use App\Http\Controllers\Api\ChatController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -795,4 +796,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('get-marks-by-student', [ApiControllerOne::class, 'getMarksByStudent']);
     
     Route::post('get-ten-student', [ApiControllerOne::class, 'getTenStudent']);
+    // chat conversations start
+    Route::get('chat/get_teacher_list', [ChatController::class, 'chatGetTeacherList']);
+    // chat conversations end
 });

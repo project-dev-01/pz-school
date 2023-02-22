@@ -1803,6 +1803,7 @@ class ApiControllerOne extends BaseController
             $academic_session_id = $request->academic_year;
             $sem_id = isset($request->semester_id) ? $request->semester_id : 0;
             $ses_id = isset($request->session_id) ? $request->session_id : 0;
+            $student_id = isset($request->student_id) ? $request->student_id : null;
             // class name and section name by total students
             $getstudentdetails = $Connection->table('enrolls as en')
                 ->select(
@@ -1821,6 +1822,9 @@ class ApiControllerOne extends BaseController
                     ['en.semester_id', '=', $sem_id],
                     ['en.session_id', '=', $ses_id]
                 ])
+                ->when($student_id, function ($q)  use ($student_id) {
+                    $q->where('en.student_id', $student_id);
+                })
                 ->get();
             $get_all_subjects = $Connection->table('subject_assigns as sa')
                 ->select(

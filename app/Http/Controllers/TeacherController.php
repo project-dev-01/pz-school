@@ -96,10 +96,12 @@ class TeacherController extends Controller
             'staff_id' => session()->get('ref_user_id')
         ];
         $response = Helper::PostMethod(config('constants.api.staff_leave_history'), $staff_id);
+        // dd($response);
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
-                if ($row['status'] != "Approve") {
+                // if ($row['document'] != "Approve") {
+                if (is_null($row['document'])) {
                     return '<div class="button-list">
                     <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">Upload</a>
             </div>';

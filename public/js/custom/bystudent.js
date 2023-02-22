@@ -3,12 +3,32 @@ $(function () {
     // $('#bystudent_bodycontent').hide();
     // $('#bystudent_analysis').hide();
     // change classroom
+    // $('#btwyears').on('change', function () {
+    //     var class_id = $(this).val();
+    //     $("#bystudentfilter").find("#sectionID").empty();
+    //     $("#bystudentfilter").find("#sectionID").append('<option value="">Select Class</option>');
+    //     $("#bystudentfilter").find("#examnames").empty();
+    //     $("#bystudentfilter").find("#examnames").append('<option value="">Select Exam</option>');
+    //     $("#bystudentfilter").find("#student_id").empty();
+    //     $("#bystudentfilter").find("#student_id").append('<option value="">Select Student</option>');
+    //     $.post(sectionByClass, { token: token, branch_id: branchID, class_id: class_id, teacher_id: teacher_id }, function (res) {
+    //         if (res.code == 200) {
+    //             $.each(res.data, function (key, val) {
+    //                 $("#bystudentfilter").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+    //             });
+    //         }
+    //     }, 'json');
+
+    // });
+    // change classroom
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
         $("#bystudentfilter").find("#sectionID").empty();
         $("#bystudentfilter").find("#sectionID").append('<option value="">Select Class</option>');
         $("#bystudentfilter").find("#examnames").empty();
         $("#bystudentfilter").find("#examnames").append('<option value="">Select Exam</option>');
+        $("#bystudentfilter").find("#student_id").empty();
+        $("#bystudentfilter").find("#student_id").append('<option value="">Select Student</option>');
         $.post(sectionByClass, { token: token, branch_id: branchID, class_id: class_id, teacher_id: teacher_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -16,7 +36,6 @@ $(function () {
                 });
             }
         }, 'json');
-
     });
     // change section
     $('#sectionID').on('change', function () {
@@ -30,6 +49,10 @@ $(function () {
         today = yyyy + '/' + mm + '/' + dd;
         $("#bystudentfilter").find("#examnames").empty();
         $("#bystudentfilter").find("#examnames").append('<option value="">Select exams</option>');
+        $("#bystudentfilter").find("#student_id").empty();
+        $("#bystudentfilter").find("#student_id").append('<option value="">Select Student</option>');
+        $("#bystudentfilter").find("#student_id").empty();
+        $("#bystudentfilter").find("#student_id").append('<option value="">Select Student</option>');
         $.post(examsByclassandsection, {
             token: token,
             branch_id: branchID,
@@ -44,7 +67,22 @@ $(function () {
                 });
             }
         }, 'json');
+        var year = $("#btwyears").val();
+        getbyStudentDetails(year, class_id, section_id);
     });
+    function getbyStudentDetails(year, class_id, section_id){
+        // var year = $("#btwyears").val();
+        $("#student_id").empty();
+        $("#student_id").append('<option value="">Select Student</option>');
+        $.post(getStudentList, { token: token, branch_id: branchID, class_id: class_id, academic_session_id: year, section_id: section_id }, function (res) {
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#student_id").append('<option value="' + val.id + '">' + val.name + '</option>');
+                });
+            }
+        }, 'json');
+    }
+
     $("#bystudentfilter").validate({
         rules: {
             year: "required",
@@ -65,6 +103,7 @@ $(function () {
             var class_id = $("#changeClassName").val();
             var section_id = $("#sectionID").val();
             var exam_id = $("#examnames").val();
+            var student_id = $("#student_id").val();
 
             $.post(getbyStudent, {
                 token: token,
@@ -74,7 +113,8 @@ $(function () {
                 section_id: section_id,
                 semester_id: semester_id,
                 session_id: session_id,
-                academic_year: year
+                academic_year: year,
+                student_id: student_id,
             }, function (response) {
 
                 if (response.code == 200) {

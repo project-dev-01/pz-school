@@ -47,7 +47,7 @@
                                 </table>
                             </div>
                         </div> <!-- end row -->
-                        <!--General Details -->
+                        <!--Leave Application -->
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                     <div class="card">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="navv"> General Details
+                                <h4 class="navv"> Leave Application
                                     <h4>
                             </li>
                         </ul><br>
@@ -207,6 +207,7 @@
 @section('scripts')
 <script>
     var StaffLeaveList = "{{ route('teacher.leave_management.list') }}";
+    var StaffDocUrl = "{{ asset('public/admin-documents/leaves/') }}";
     var reuploadFileUrl = "{{ route('teacher.reupload_file.add') }}";
 </script>
 <script src="{{ asset('public/js/custom/staff_apply_leave.js') }}"></script>

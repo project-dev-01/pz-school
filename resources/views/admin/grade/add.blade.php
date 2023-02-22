@@ -33,10 +33,6 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="grade_point">Grade Point <span class="text-danger">*</span></label>
-                        <input type="text" name="grade_point" class="form-control" placeholder="Enter Grade Point">
-                    </div>
-                    <div class="form-group">
                         <label for="grade_category">Grade Category<span class="text-danger">*</span></label>
                         <select class="form-control" name="grade_category">
                             <option value="">Select Grade Category</option>

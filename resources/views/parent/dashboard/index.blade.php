@@ -628,7 +628,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv"> General Details
+                        <h4 class="navv"> Leave Application
                             <h4>
                     </li>
                 </ul><br>

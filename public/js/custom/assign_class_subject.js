@@ -1,5 +1,20 @@
 $(function () {
 
+    // change classroom
+    $('#changeClassName').on('change', function () {
+        $(".classRoomHideSHow").hide();
+        var class_id = $(this).val();
+        $("#assignClassSubFilter").find("#sectionID").empty();
+        $("#assignClassSubFilter").find("#sectionID").append('<option value="">Select Class</option>');
+        $.post(sectionByClassUrl, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#assignClassSubFilter").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                });
+            }
+        }, 'json');
+    });
+
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
         var IDnames = "#addAssignClassSubject";
@@ -188,63 +203,163 @@ $(function () {
     });
 
     //GET ALL 
-    var table = $('#class-assign-subjects-table').DataTable({
-        processing: true,
-        info: true,
-        // dom: 'lBfrtip',
-        dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
-            "<'row'<'col-sm-12'tr>>" +
-            "<'row'<'col-sm-6'i><'col-sm-6'p>>",
-        buttons: [
-            {
-                extend: 'csv',
-                text: 'Download CSV',
-                extension: '.csv',
-                exportOptions: {
-                    columns: 'th:not(:last-child)'
-                }
-            },
-            {
-                extend: 'pdf',
-                text: 'Download PDF',
-                extension: '.pdf',
-                exportOptions: {
-                    columns: 'th:not(:last-child)'
-                }
+    // var table = $('#class-assign-subjects-table').DataTable({
+    //     processing: true,
+    //     info: true,
+    //     // dom: 'lBfrtip',
+    //     dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+    //         "<'row'<'col-sm-12'tr>>" +
+    //         "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+    //     buttons: [
+    //         {
+    //             extend: 'csv',
+    //             text: 'Download CSV',
+    //             extension: '.csv',
+    //             exportOptions: {
+    //                 columns: 'th:not(:last-child)'
+    //             }
+    //         },
+    //         {
+    //             extend: 'pdf',
+    //             text: 'Download PDF',
+    //             extension: '.pdf',
+    //             exportOptions: {
+    //                 columns: 'th:not(:last-child)'
+    //             }
 
-            }
-        ],
-        ajax: classAssignSubList,
-        "pageLength": 10,
-        "aLengthMenu": [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"]
-        ],
-        columns: [
-            {
-                searchable: false,
-                data: 'DT_RowIndex',
-                name: 'DT_RowIndex'
-            },
-            {
-                data: 'class_name',
-                name: 'class_name'
-            },
-            {
-                data: 'section_name',
-                name: 'section_name'
-            },
-            {
-                data: 'subject_name',
-                name: 'subject_name'
-            },
-            {
-                data: 'actions',
-                name: 'actions',
-                orderable: false,
-                searchable: false
-            },
-        ]
-    }).on('draw', function () {
+    //         }
+    //     ],
+    //     ajax: classAssignSubList,
+    //     "pageLength": 10,
+    //     "aLengthMenu": [
+    //         [5, 10, 25, 50, -1],
+    //         [5, 10, 25, 50, "All"]
+    //     ],
+    //     columns: [
+    //         {
+    //             searchable: false,
+    //             data: 'DT_RowIndex',
+    //             name: 'DT_RowIndex'
+    //         },
+    //         {
+    //             data: 'class_name',
+    //             name: 'class_name'
+    //         },
+    //         {
+    //             data: 'section_name',
+    //             name: 'section_name'
+    //         },
+    //         {
+    //             data: 'subject_name',
+    //             name: 'subject_name'
+    //         },
+    //         {
+    //             data: 'actions',
+    //             name: 'actions',
+    //             orderable: false,
+    //             searchable: false
+    //         },
+    //     ]
+    // }).on('draw', function () {
+    // });
+    // all Leave Filter
+    $('#assignClassSubFilter').on('submit', function (e) {
+        e.preventDefault();
+        var class_id = $("#changeClassName").val();
+        var section_id = $("#sectionID").val();
+        AllLeaveListShow(class_id, section_id);
     });
+    AllLeaveListShow(class_id = null, section_id = null);
+    // get all leave list
+    function AllLeaveListShow(class_id, section_id) {
+        $('#class-assign-subjects-table').DataTable({
+            processing: true,
+            bDestroy: true,
+            // dom: 'Bfrtip',
+            // buttons: [
+            //     'copyHtml5',
+            //     'excelHtml5',
+            //     'csvHtml5',
+            //     'pdfHtml5'
+            // ],
+            info: true,
+            // dom: 'lBfrtip',
+            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            buttons: [
+                {
+                    extend: 'csv',
+                    text: 'Download CSV',
+                    extension: '.csv',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Download PDF',
+                    extension: '.pdf',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+
+                }
+            ],
+            "ajax": {
+                url: classAssignSubList,
+                cache: false,
+                dataType: "json",
+                // data: { month:getSelectedMonth },
+                // data: formData,
+                data: { class_id: class_id, section_id: section_id },
+                type: "GET",
+                // contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+                // processData: true, // NEEDED, DON'T OMIT THIS
+                // headers: {
+                // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                // },
+                "dataSrc": function (json) {
+                    return json.data;
+                },
+                error: function (error) {
+                    // console.log("error")
+                    // console.log(error)
+                    // noDataAvailable(error);
+                }
+            },
+
+            "pageLength": 10,
+            "aLengthMenu": [
+                [5, 10, 25, 50, -1],
+                [5, 10, 25, 50, "All"]
+            ],
+            columns: [
+                {
+                    searchable: false,
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'class_name',
+                    name: 'class_name'
+                },
+                {
+                    data: 'section_name',
+                    name: 'section_name'
+                },
+                {
+                    data: 'subject_name',
+                    name: 'subject_name'
+                },
+                {
+                    data: 'actions',
+                    name: 'actions',
+                    orderable: false,
+                    searchable: false
+                },
+            ]
+        }).on('draw', function () {
+        });
+    }
 });

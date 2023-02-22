@@ -146,7 +146,7 @@
                         <ul class="nav nav-tabs" >
                             <li class="nav-item">
                                 <h4 class="nav-link">
-                                    <span data-feather="folder" class="icon-dual" id="span-parent"></span> General Details
+                                    <span data-feather="folder" class="icon-dual" id="span-parent"></span> Leave Application
                                     <h4>
                             </li>
                         </ul><br>

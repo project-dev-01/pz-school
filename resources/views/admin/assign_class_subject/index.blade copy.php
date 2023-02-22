@@ -28,29 +28,34 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="assignClassSubFilter" autocomplete="off">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="changeClassName">Grade<span class="text-danger">*</span></label>
-                                    <select id="changeClassName" class="form-control" name="class_id">
-                                        <option value="">Select Grade</option>
-                                        @forelse ($classDetails as $cla)
-                                        <option value="{{ $cla['id'] }}">{{ $cla['name'] }}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="student Name">Grade<span class="text-danger">*</span></label>
+                                <select id="student Name" class="form-control" name="class_id">
+                                    <option value="">Select Grade</option>
+                                    <option value="">Tingkatan 1</option>
+                                    <option value="">Tingkatan 2</option>
+                                    <option value="">Tingkatan 3</option>
+                                    <option value="">Tingkatan 4</option>
+                                    <option value="">Tingkatan 5</option>
+                                    <option value="">Tingkatan 6</option>
+                                </select>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="sectionID">Class<span class="text-danger">*</span></label>
-                                    <select id="sectionID" class="form-control" name="section_id">
-                                        <option value="">Select Class</option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="student Name">Class<span class="text-danger">*</span></label>
+                                <select id="student Name" class="form-control" name="class_id">
+                                    <option value="">Select Class</option>
+                                    <option value="">Unggul</option>
+                                    <option value="">Wawasan</option>
+                                    <option value="">Iltizam</option>
+                                    <option value="">Cemerlang</option>
+                                </select>
                             </div>
-                            <!-- <div class="col-md-3">
+                        </div>
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="student Name">Subject<span class="text-danger">*</span></label>
                                 <select id="student Name" class="form-control" name="class_id">
@@ -59,16 +64,14 @@
                                     <option value="">Pendidikan Jasmani & Pendidikan Kesihatan</option>
                                 </select>
                             </div>
-                        </div> -->
                         </div>
-                        <div>
-                            <div class="form-group text-right m-b-0">
-                                <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                    Filter
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
+
+                    <div class="form-group text-right m-b-0">
+                        <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
+                            Filter
+                        </button>
+                    </div>
                 </div>
             </div>
 

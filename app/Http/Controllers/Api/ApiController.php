@@ -1115,6 +1115,8 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
+            $class_id = $request->class_id;
+            $section_id = $request->section_id;
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
             $success = $createConnection->table('subject_assigns as sa')
@@ -1123,11 +1125,16 @@ class ApiController extends BaseController
                 // ->leftJoin('staffs as st', 'sa.teacher_id', '=', 'st.id')
                 ->join('subjects as sb', 'sa.subject_id', '=', 'sb.id')
                 ->join('classes as c', 'sa.class_id', '=', 'c.id')
-                // ->groupBy('sa.subject_id')
                 ->where([
                     ['sa.type', '=', '0'],
                     ['sa.academic_session_id', $request->academic_session_id]
                 ])
+                ->when($class_id, function ($q)  use ($class_id) {
+                    $q->where('sa.class_id', $class_id);
+                })
+                ->when($section_id, function ($q)  use ($section_id) {
+                    $q->where('sa.section_id', $section_id);
+                })
                 ->get();
             return $this->successResponse($success, 'Section Allocation record fetch successfully');
         }
@@ -8431,7 +8438,18 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $semester = $conn->table('semester')->get();
+            $semester = $conn->table('semester as sm')
+                ->select(
+                    'sm.id',
+                    // 'sm.name',
+                    'sm.start_date',
+                    'sm.end_date',
+                    'sm.year',
+                    // DB::raw('DATE_FORMAT(forum_post_replies.created_at, "%b %e %Y") as date')
+                    // DB::raw("CONCAT(sm.name,'-','(',DATE_FORMAT(sm.start_date, '%b %Y'),'-', DATE_FORMAT(sm.end_date, '%b %Y'),')') as name")
+                    DB::raw("CONCAT(sm.name,'-','(',DATE_FORMAT(sm.start_date, '%b'),'-', DATE_FORMAT(sm.end_date, '%b'),')') as name")
+                )
+                ->get();
             return $this->successResponse($semester, 'Semester record fetch successfully');
         }
     }
@@ -13643,7 +13661,6 @@ class ApiController extends BaseController
                 } else {
                     $fileName = null;
                 }
-                $fileName = null;
                 $data = [
                     'staff_id' => $request['staff_id'],
                     'from_leave' => $from_leave,
@@ -13737,14 +13754,15 @@ class ApiController extends BaseController
                 ->join('leave_types as lt', 'lev.leave_type', '=', 'lt.id')
                 ->leftJoin('staffs as stf', 'lev.staff_id', '=', 'stf.id')
                 ->leftJoin('staffs as appr', 'lev.assiner_id', '=', 'appr.id')
-                ->leftJoin('reasons as rs', 'lev.reason_id', '=', 'rs.id')
+                // ->leftJoin('reasons as rs', 'lev.reason_id', '=', 'rs.id')
+                ->leftJoin('teacher_absent_reasons as rs', 'lev.reason_id', '=', 'rs.id')
                 ->when($staff_id, function ($query, $staff_id) {
                     return $query->where('lev.staff_id', '=', $staff_id);
                 })
                 ->when($leave_status != "All", function ($ins)  use ($leave_status) {
                     $ins->where('lev.status', $leave_status);
                 })
-                ->orderBy('lev.from_leave', 'asc')
+                ->orderBy('lev.from_leave', 'desc')
                 ->get();
             return $this->successResponse($leaveDetails, 'Staff leave details fetch successfully');
         }
@@ -13894,7 +13912,8 @@ class ApiController extends BaseController
                 ->join('staffs as stf', 'alp.staff_id', '=', 'stf.id')
                 ->join('staff_leaves as lev', 'alp.staff_id', '=', 'lev.staff_id')
                 ->join('leave_types as lt', 'lev.leave_type', '=', 'lt.id')
-                ->join('reasons as rs', 'lev.reason_id', '=', 'rs.id')
+                // ->join('reasons as rs', 'lev.reason_id', '=', 'rs.id')
+                ->leftJoin('teacher_absent_reasons as rs', 'lev.reason_id', '=', 'rs.id')
                 ->where('alp.assigner_staff_id', '=', $staff_id)
                 ->when($leave_status != "All", function ($ins)  use ($leave_status) {
                     $ins->where('lev.status', $leave_status);
@@ -13939,7 +13958,8 @@ class ApiController extends BaseController
                 )
                 ->join('leave_types as lt', 'lev.leave_type', '=', 'lt.id')
                 ->join('staffs as stf', 'lev.staff_id', '=', 'stf.id')
-                ->join('reasons as rs', 'lev.reason_id', '=', 'rs.id')
+                // ->join('reasons as rs', 'lev.reason_id', '=', 'rs.id')
+                ->leftJoin('teacher_absent_reasons as rs', 'lev.reason_id', '=', 'rs.id')
                 ->where('lev.id', '=', $leave_id)
                 ->first();
             $leaveDetails['leave_type_details'] = $conn->table('staff_leaves as lev')

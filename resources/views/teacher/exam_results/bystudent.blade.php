@@ -100,6 +100,14 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="student_id">Student</label>
+                                    <select id="student_id" class="form-control" name="student_id">
+                                        <option value="">Select Student</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
@@ -185,6 +193,7 @@
     // default image test
     var teacher_id = "{{ Session::get('ref_user_id') }}";
     var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+    var getStudentList = "{{ config('constants.api.get_student_details') }}";
 </script>
 <script src="{{ asset('public/js/custom/bystudent.js') }}"></script>
 @endsection

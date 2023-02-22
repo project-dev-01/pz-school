@@ -654,8 +654,11 @@ class AdminController extends Controller
     public function ClassAssignSubList(Request $request)
     {
         $data = [
-            'academic_session_id' => session()->get('academic_session_id')
+            'academic_session_id' => session()->get('academic_session_id'),
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id
         ];
+        // dd($data);
         $response = Helper::GETMethodWithData(config('constants.api.class_assign_list'), $data);
         return DataTables::of($response['data'])
             ->addIndexColumn()
@@ -4628,7 +4631,9 @@ class AdminController extends Controller
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
-                if ($row['status'] != "Approve") {
+                // if ($row['status'] != "Approve") {
+                // if ($row['document'] != "Approve") {
+                if (is_null($row['document'])) {
                     return '<div class="button-list">
                     <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">Upload</i></a>
             </div>';
@@ -6618,7 +6623,7 @@ class AdminController extends Controller
     }
     public function getFeesGroupList(Request $request)
     {
-        
+
         $data = [
             'academic_session_id' => session()->get('academic_session_id')
         ];

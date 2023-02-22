@@ -48,7 +48,7 @@
                                 </table>
                             </div>
                         </div> <!-- end row -->
-                        <!--General Details -->
+                        <!--Leave Application -->
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
                                 <h4 class="nav-link">
-                                    General Details
+                                    Leave Application
                                     <h4>
                             </li>
                         </ul><br>
@@ -111,7 +111,7 @@
                                         <div class="form-group">
                                             <label for="changelev">Reason(s)<span class="text-danger">*</span></label>
                                             <select id="changelevReasons" class="form-control" name="changelevReasons">
-                                                <option value="">Select Student</option>
+                                                <option value="">Select Option</option>
                                                 @forelse ($get_leave_reasons as $res)
                                                 <option value="{{ $res['id'] }}">{{ $res['name'] }}</option>
                                                 @empty
@@ -206,6 +206,7 @@
 @endsection
 @section('scripts')
 <script>
+    var StaffDocUrl = "{{ asset('public/admin-documents/leaves/') }}";
     var StaffLeaveList = "{{ route('admin.leave_management.apply_list') }}";
     var reuploadFileUrl = "{{ route('admin.reupload_file.add') }}";
 </script>
