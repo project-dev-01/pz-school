@@ -18,7 +18,7 @@ class GradeMarks extends Migration
             $table->integer('min_mark');
             $table->integer('max_mark');
             $table->string('grade');
-            $table->string('grade_point')->nullable();
+            $table->integer('grade_point');
             $table->integer('grade_category');
             $table->string('notes')->nullable();
             $table->string('status');

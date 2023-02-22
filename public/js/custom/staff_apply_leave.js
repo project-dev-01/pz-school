@@ -78,12 +78,12 @@ $(function () {
                         $('#staff-leave-list').DataTable().ajax.reload(null, false);
                         toastr.success('Leave apply sucessfully');
                         $('#staffLeaveApply')[0].reset();
-                        $("#remarks_div").hide();
+                        // $("#remarks_div").hide();
                         // $('#file_name').text("");
                         $("#file_name").html("");
                     } else {
                         toastr.error(response.message);
-                        $("#remarks_div").hide();
+                        // $("#remarks_div").hide();
                     }
                 }
             });
@@ -193,7 +193,7 @@ $(function () {
                 "render": function (data, type, row, meta) {
                     var document = "";
                     if (data) {
-                        var document = '<a href="' + StaffDocUrl + '/' + data + '" download ><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
+                        document = '<a href="' + StaffDocUrl + '/' + data + '" download ><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
                     } else {
                         document = '<div>' +
                             '<input type="file" id="reissue_file' + row.id + '" name="file">' +

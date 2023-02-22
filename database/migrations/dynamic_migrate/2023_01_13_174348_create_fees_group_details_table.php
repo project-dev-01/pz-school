@@ -17,7 +17,7 @@ class CreateFeesGroupDetailsTable extends Migration
             $table->id();
             $table->integer('fees_group_id');
             $table->integer('fees_type_id');
-            $table->string('amount');
+            $table->decimal('amount', $precision = 10, $scale = 0);
             $table->date('due_date');
             $table->timestamps();
         });

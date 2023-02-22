@@ -4284,7 +4284,7 @@ class ApiController extends BaseController
 
                 $break_type = NULL;
                 $break = 0;
-                $teacher_id = NULL;
+                $teacher_id = 0;
 
 
                 if (isset($request['session_id'])) {

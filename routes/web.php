@@ -1022,6 +1022,8 @@ Route::group(['prefix' => 'teacher'], function () {
         Route::get('leave_management/allleaves', [TeacherController::class, 'allleaves'])->name('teacher.leave_management.allleaves');
         Route::get('leave_management/leave_approval_history_by_staff', [TeacherController::class, 'getAllLeaveList'])->name('teacher.leave_management.leave_approval_history_by_staff');
         Route::post('leave_management/reupload_file', [TeacherController::class, 'reUploadLeaveFile'])->name('teacher.reupload_file.add');
+        // admin student_leave list
+        Route::get('student-leave/list', [TeacherController::class, 'studentLeaveShow'])->name('teacher.student_leave.list');
 
         // Forum routes
         Route::get('forum/index', [TeacherController::class, 'forumIndex'])->name('teacher.forum.index');
@@ -1172,6 +1174,7 @@ Route::group(['prefix' => 'parent'], function () {
         Route::post('std_leave_apply/reupload_file', [ParentController::class, 'reUploadLeaveFile'])->name('parent.reupload_file.add');
         // update child session
         Route::post('navbar-update-child_id', [CommonController::class, 'updateStudentID'])->name('navbar.update.child_id');
+        Route::get('/student_leaves', [ParentController::class, 'studentLeaves'])->name('parent.student_leaves');
     });
 });
 

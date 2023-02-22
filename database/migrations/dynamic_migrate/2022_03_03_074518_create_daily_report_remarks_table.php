@@ -16,6 +16,7 @@ class CreateDailyReportRemarksTable extends Migration
         Schema::create('daily_report_remarks', function (Blueprint $table) {
             $table->id();
             $table->integer('student_id');
+            $table->date('date');
             $table->integer('class_id');
             $table->integer('section_id');
             $table->integer('subject_id');

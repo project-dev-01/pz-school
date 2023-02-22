@@ -29,9 +29,10 @@ class CreateCalendorsTable extends Migration
             $table->dateTime('start')->nullable();
             $table->dateTime('end')->nullable();
             $table->text('description')->nullable();
+            $table->string('task_color')->nullable();
             $table->integer('login_id')->nullable();
             $table->integer('relief_assignment_id')->nullable();
-            $table->string('task_color')->nullable();
+            $table->integer('academic_session_id')->default('0');
             $table->timestamps();
         });
     }

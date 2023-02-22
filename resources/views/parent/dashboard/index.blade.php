@@ -695,16 +695,6 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4" id="remarks_div" style="display:none;">
-                                <div class="form-group">
-                                    <label for="heard">Remarks</label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                        </div>
-                                        <input type="text" name="remarks" class="form-control" id="remarks">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="document">Attachment File</label>
@@ -1030,6 +1020,7 @@
     // exam subject mark high low avg
     var examSubjectMarkHighLowAvg = "{{ config('constants.api.exam_subject_mark_high_low_avg') }}";
     // leave apply
+    var StudentDocUrl = "{{ asset('public/teacher/student-leaves/') }}";
 </script>
 <!-- to do list -->
 <script src="{{ asset('public/js/custom/parent_dashboard.js') }}"></script>

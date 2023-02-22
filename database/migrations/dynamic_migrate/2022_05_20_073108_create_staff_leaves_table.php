@@ -21,10 +21,10 @@ class CreateStaffLeavesTable extends Migration
             $table->integer('leave_type');
             $table->string('reason_id')->nullable();
             $table->text('assiner_remarks')->nullable();
+            $table->integer('assiner_id')->nullable();
             $table->text('remarks')->nullable();
             $table->string('document')->nullable();
             $table->string('status')->nullable();
-            $table->string('assiner_id')->nullable();
             $table->integer('academic_session_id')->default('0');
             $table->timestamps();
         });

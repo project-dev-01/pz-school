@@ -7538,4 +7538,95 @@ class ApiControllerOne extends BaseController
             return $this->successResponse($data, 'All student grade and classes row fetch successfully');
         }
     }
+    // get class teacher grades 
+    public function classTeacherClass(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'academic_session_id' => 'required',
+            'teacher_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            $success = $createConnection->table('teacher_allocations as ta')
+                ->select(
+                    'c.id',
+                    'c.name'
+                )
+                ->join('classes as c', 'ta.class_id', '=', 'c.id')
+                ->where('ta.academic_session_id', $request->academic_session_id)
+                ->where('ta.teacher_id', $request->teacher_id)
+                ->get();
+            return $this->successResponse($success, 'Class teacher record fetch successfully');
+        }
+    }
+    public function classTeacherSections(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'token' => 'required',
+            'branch_id' => 'required',
+            'academic_session_id' => 'required',
+            'teacher_id' => 'required',
+            'class_id' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $createConnection = $this->createNewConnection($request->branch_id);
+            $success = $createConnection->table('teacher_allocations as ta')
+                ->select(
+                    's.id as section_id',
+                    's.name as section_name'
+                )
+                ->join('sections as s', 'ta.section_id', '=', 's.id')
+                ->where('ta.academic_session_id', $request->academic_session_id)
+                ->where('ta.class_id', $request->class_id)
+                ->where('ta.teacher_id', $request->teacher_id)
+                ->get();
+            return $this->successResponse($success, 'Class teacher section record fetch successfully');
+        }
+    }
+    // // get class teacher grades 
+    // public function classTeacherGrades(Request $request)
+    // {
+
+    //     $validator = \Validator::make($request->all(), [
+    //         'token' => 'required',
+    //         'branch_id' => 'required',
+    //         'academic_session_id' => 'required'
+    //     ]);
+
+    //     if (!$validator->passes()) {
+    //         return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+    //     } else {
+    //         // create new connection
+    //         $createConnection = $this->createNewConnection($request->branch_id);
+    //         $success = $createConnection->table('teacher_allocations as ta')
+    //             ->select(
+    //                 'ta.id',
+    //                 'ta.class_id',
+    //                 'ta.section_id',
+    //                 'ta.teacher_id',
+    //                 'ta.type',
+    //                 's.name as section_name',
+    //                 'c.name as class_name',
+    //                 DB::raw("CONCAT(st.first_name, ' ', st.last_name) as teacher_name")
+    //             )
+    //             ->join('sections as s', 'ta.section_id', '=', 's.id')
+    //             ->join('staffs as st', 'ta.teacher_id', '=', 'st.id')
+    //             ->join('classes as c', 'ta.class_id', '=', 'c.id')
+    //             ->where('ta.academic_session_id', $request->academic_session_id)
+    //             ->get();
+    //         return $this->successResponse($success, 'Teacher Allocation record fetch successfully');
+    //     }
+    // }
 }

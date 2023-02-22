@@ -17,6 +17,7 @@ class CreateTimetableBulkTable extends Migration
             $table->id();
             $table->string('class_id');
             $table->string('break');
+            $table->string('break_type')->nullable();
             $table->string('teacher_id')->nullable();
             $table->integer('semester_id')->nullable();
             $table->integer('session_id')->nullable();

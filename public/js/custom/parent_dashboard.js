@@ -436,26 +436,31 @@ $(function () {
                         // $("#message").val('');
                         // $("#post_ldate").val('');
                         // $("#remarks").val();
-                        $("#remarks_div").hide();
+                        $("#file_name").html("");
                     } else {
                         toastr.error(response.message);
-                        $("#remarks_div").hide();
                     }
                 }
             });
         };
     });
     // student leaves details
-    $('#changelevReasons').on('change', function () {
-        var Reasons = $("#changelevReasons").val();
-        if (Reasons == 3) {
-            $("#remarks_div").show();
-        }
-        else {
-            $("#remarks_div").hide();
-        }
+    // $('#changelevReasons').on('change', function () {
+    //     var Reasons = $("#changelevReasons").val();
+    //     if (Reasons == 3) {
+    //         $("#remarks_div").show();
+    //     }
+    //     else {
+    //         $("#remarks_div").hide();
+    //     }
 
+    // });
+    $('#homework_file').change(function () {
+        // var i = $(this).prev('label').clone();
+        var file = $('#homework_file')[0].files[0].name;
+        $('#file_name').html(file);
     });
+
     $(".datepick").datepicker({
         dateFormat: 'yy-mm-dd'
     });
@@ -533,18 +538,44 @@ $(function () {
                 },
             ],
             columnDefs: [
+                // {
+                //     "targets": 6,
+                //     "render": function (data, type, row, meta) {
+                //         if (row.status != "Approve") {
+                //             var fileUpload = '<div>' +
+                //                 '<input type="file" id="reissue_file' + row.id + '" name="file">' +
+                //                 '</div>';
+                //         } else {
+                //             fileUpload = "<p style='text-align: center;''>-</p>";
+                //         }
+
+                //         return fileUpload;
+                //     }
+                // },
+                {
+                    "targets": 4,
+                    "render": function (data, type, row, meta) {
+                        var document = "";
+                        if (data && data != "null") {
+                            document = data;
+                        } else {
+                            document = '';
+                        }
+                        return document;
+                    }
+                },
                 {
                     "targets": 6,
                     "render": function (data, type, row, meta) {
-                        if (row.status != "Approve") {
-                            var fileUpload = '<div>' +
+                        var document = "";
+                        if (data) {
+                            document = '<a href="' + StudentDocUrl + '/' + data + '" download ><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
+                        } else {
+                            document = '<div>' +
                                 '<input type="file" id="reissue_file' + row.id + '" name="file">' +
                                 '</div>';
-                        } else {
-                            fileUpload = "<p style='text-align: center;''>-</p>";
                         }
-
-                        return fileUpload;
+                        return document;
                     }
                 },
                 {
@@ -564,6 +595,17 @@ $(function () {
                         return status;
                     }
                 },
+                {
+                    "targets": 9,
+                    "render": function (data, type, row, meta) {
+                        if (row.document) {
+                            return '-';
+                        } else {
+                            return '<div class="button-list"><a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' + row.id + '"  data-document="' + row.document + '" id="updateIssueFile">Upload</a></div>';
+                        }
+                    }
+                },
+
             ]
         }).on('draw', function () {
         });
@@ -589,7 +631,8 @@ $(function () {
             contentType: false,
             success: function (res) {
                 if (res.code == 200) {
-                    $('#studentleave-table').DataTable().ajax.reload(null, false);
+                    // $('#studentleave-table').DataTable().ajax.reload(null, false);
+                    StudentLeave_tabel();
                     toastr.success(res.message);
                 }
                 else {

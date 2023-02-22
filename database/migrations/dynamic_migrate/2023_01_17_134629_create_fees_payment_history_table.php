@@ -22,6 +22,7 @@ class CreateFeesPaymentHistoryTable extends Migration
             $table->string('semester')->nullable();
             $table->string('yearly')->nullable();
             $table->integer('payment_mode_id');
+            $table->integer('payment_status_id');
             $table->string('collect_by');
             $table->decimal('amount', $precision = 18, $scale = 2);
             $table->decimal('discount', $precision = 18, $scale = 2);

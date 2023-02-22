@@ -797,6 +797,9 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     
     Route::post('get-ten-student', [ApiControllerOne::class, 'getTenStudent']);
     // chat conversations start
-    Route::get('chat/get_teacher_list', [ChatController::class, 'chatGetTeacherList']);
+    // Route::get('chat/get_teacher_list', [ChatController::class, 'chatGetTeacherList']);
     // chat conversations end
+    Route::post('class_teacher_classes', [ApiControllerOne::class, 'classTeacherClass']);
+    Route::post('class_teacher_sections', [ApiControllerOne::class, 'classTeacherSections']);
+
 });

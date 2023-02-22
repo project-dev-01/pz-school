@@ -23,6 +23,7 @@ class CreateSubjectsTable extends Migration
             $table->string('times_per_week')->nullable();
             $table->string('subject_color_calendor')->nullable();
             $table->tinyInteger('exam_exclude');
+            $table->string('subject_author')->nullable();
             $table->timestamps();
         });
     }

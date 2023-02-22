@@ -1323,6 +1323,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('teacher.student_leave.list')}}" class="nav-link {{ (request()->is('teacher/student_leave*')) ? 'active' : '' }}">
+                        <i class="far fa-user"></i>
+                        <span> Student Leaves </span>
+                    </a>
+                </li>
+                <li>
                     <a href="#sidebarAttendance" data-toggle="collapse">
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_59_2184)">
@@ -1573,6 +1579,12 @@
                             </li>
                         </ul>
                     </div>
+                </li>
+                <li>
+                    <a href="{{ route('parent.student_leaves')}}" class="nav-link {{ (request()->is('parent/student_leaves*')) ? 'active' : '' }}">
+                        <i class="far fa-user"></i>
+                        <span> Leave Application </span>
+                    </a>
                 </li>
                 <li>
                     <a href="{{ route('parent.timetable.index')}}" class="nav-link {{ (request()->is('parent/timetable*')) ? 'active' : '' }}">

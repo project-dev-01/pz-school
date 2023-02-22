@@ -22,6 +22,8 @@ class CreateStaffsTable extends Migration
             $table->string('short_name')->nullable();
             $table->string('department_id');
             $table->string('designation_id');
+            $table->string('staff_qualification_id')->nullable(); 
+            $table->string('stream_type_id')->nullable();
             $table->string('joining_date');
             $table->date('birthday');
             $table->string('gender');
@@ -48,8 +50,6 @@ class CreateStaffsTable extends Migration
             $table->string('staff_position')->nullable();
             $table->string('nric_number')->nullable();
             $table->string('passport')->nullable();
-            $table->string('staff_qualification_id')->nullable();    
-            $table->string('stream_type_id')->nullable();
             $table->enum('status', ['0', '1']);
             $table->timestamps();
         });

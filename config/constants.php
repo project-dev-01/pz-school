@@ -738,6 +738,9 @@ return [
         'exam_by_student'=> $url.'/exam-by-student',
         'get_marks_by_student'=> $url.'/get-marks-by-student',
         'get_ten_student'=> $url.'/get-ten-student',
+
+        'class_teacher_classes'=> $url.'/class_teacher_classes',
+        'class_teacher_sections'=> $url.'/class_teacher_sections'
         
         ]
 

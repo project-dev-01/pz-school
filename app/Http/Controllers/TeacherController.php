@@ -113,6 +113,18 @@ class TeacherController extends Controller
             ->rawColumns(['actions'])
             ->make(true);
     }
+    public function studentLeaveShow()
+    {
+        
+        $staff_data = [
+            'teacher_id' => session()->get('ref_user_id'),
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $getclass = Helper::PostMethod(config('constants.api.class_teacher_classes'), $staff_data);
+        return view('teacher.student_leave.index', [
+            'classes' => $getclass['data']
+        ]);
+    }
     public function allleaves()
     {
         return view('teacher.leave_management.allleaves');
