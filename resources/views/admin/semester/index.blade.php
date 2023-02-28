@@ -1,6 +1,11 @@
 @extends('layouts.admin-layout')
 @section('title','Semester')
 @section('content')
+<style>
+    .datepicker {
+      z-index: 1600 !important; /* has to be larger than 1050 */
+    }
+</style>
 <!-- Start Content-->
 <div class="container-fluid">
 

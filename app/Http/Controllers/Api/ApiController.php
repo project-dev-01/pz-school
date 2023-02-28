@@ -10475,7 +10475,7 @@ class ApiController extends BaseController
             'register_no' => 'required',
             'roll_no' => 'required',
             'admission_date' => 'required',
-            'category_id' => 'required',
+            // 'category_id' => 'required',
             'first_name' => 'required',
             'mobile_no' => 'required',
             'email' => 'required',
@@ -11165,7 +11165,7 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-
+            $main_db = config('constants.main_db');
             // // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
             $checkExist = $Connection->table('read_to_do_list')->where([
@@ -11214,7 +11214,7 @@ class ApiController extends BaseController
                     'us.name'
                 )
                 // change superadmin db here
-                ->leftJoin('school-management-system.users as us', 'us.id', '=', 'tdlc.user_id')
+                ->leftJoin('' . $main_db . '.users as us', 'us.id', '=', 'tdlc.user_id')
                 // ->leftJoin('paxsuzen_pz-school.users as us', 'us.id', '=', 'tdlc.user_id')
                 ->where([
                     ['tdlc.to_do_list_id', '=', $request->to_do_list_id]
@@ -11467,7 +11467,7 @@ class ApiController extends BaseController
             'register_no' => 'required',
             'roll_no' => 'required',
             'admission_date' => 'required',
-            'category_id' => 'required',
+            // 'category_id' => 'required',
             'first_name' => 'required',
             'mobile_no' => 'required',
             'email' => 'required',
@@ -12130,6 +12130,7 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
+            $main_db = config('constants.main_db');
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get all teachers
@@ -12142,8 +12143,8 @@ class ApiController extends BaseController
                     'us.email',
                     'rol.role_name'
                 )
-                ->join('school-management-system.users as us', 'stf.id', '=', 'us.user_id')
-                ->join('school-management-system.roles as rol', 'rol.id', '=', 'us.role_id')
+                ->join('' . $main_db . '.users as us', 'stf.id', '=', 'us.user_id')
+                ->join('' . $main_db . '.roles as rol', 'rol.id', '=', 'us.role_id')
                 // ->join('paxsuzen_pz-school.users as us', 'stf.id', '=', 'us.user_id')
                 // ->join('paxsuzen_pz-school.roles as rol', 'rol.id', '=', 'us.role_id')
                 ->where([
@@ -13957,6 +13958,7 @@ class ApiController extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
+            $main_db = config('constants.main_db');
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
@@ -13970,7 +13972,7 @@ class ApiController extends BaseController
                     DB::raw("GROUP_CONCAT(sdp.name) as department_name"),
                     DB::raw("CONCAT(stf.first_name, ' ', stf.last_name) as name")
                 )
-                ->join('school-management-system.users as us', 'stf.id', '=', 'us.user_id')
+                ->join('' . $main_db . '.users as us', 'stf.id', '=', 'us.user_id')
                 // ->join('paxsuzen_pz-school.users as us', 'stf.id', '=', 'us.user_id')
                 ->join("staff_departments as sdp", DB::raw("FIND_IN_SET(sdp.id,stf.department_id)"), ">", DB::raw("'0'"))
                 ->leftJoin("assign_leave_approval as ala", 'ala.staff_id', '=', 'stf.id')
@@ -14542,6 +14544,57 @@ class ApiController extends BaseController
                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             } else {
                 return $this->successResponse($success, 'New Task has been successfully saved');
+            }
+        }
+    }
+    // calendorEditRow
+    public function calendorEditRow(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'calendor_id' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $secConn = $this->createNewConnection($request->branch_id);
+            // get data
+            $section = $secConn->table('calendors')
+                ->select('id', 'title', 'start', 'end', 'description')
+                ->where('id', '=', $request->calendor_id)
+                ->first();
+            return $this->successResponse($section, 'calendors tast row details fetch successfully');
+        }
+    }
+    // calendorUpdateRow
+    public function calendorUpdateRow(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'calendor_id' => 'required',
+            'title' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // update data
+            $query = $conn->table('calendors')->where('id', $request->calendor_id)->update([
+                'title' => $request->title,
+                'description' => $request->description,
+                'updated_at' => date("Y-m-d H:i:s")
+            ]);
+            // get insert row
+            $success = $conn->table('calendors')
+                ->select('id', 'title', 'start', 'end', 'description', 'task_color as className')
+                ->where('id', $request->calendor_id)->first();
+
+            if ($query) {
+                return $this->successResponse($success, 'Tast have Been updated');
+            } else {
+                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
             }
         }
     }

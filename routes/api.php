@@ -534,6 +534,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // add-task-calendor
     Route::post('calendor/add-task-calendor', [ApiController::class, 'calendorAddTask']);
     Route::get('calendor/list-task-calendor', [ApiController::class, 'calendorListTask']);
+    Route::get('calendor/edit-task-calendor', [ApiController::class, 'calendorEditRow']);
+    Route::post('calendor/update-task-calendor', [ApiController::class, 'calendorUpdateRow']);
     Route::post('calendor/delete-task-calendor', [ApiController::class, 'calendorDeleteTask']);
 
     // Education routes
@@ -800,7 +802,10 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     
     Route::post('get-ten-student', [ApiControllerOne::class, 'getTenStudent']);
     // chat conversations start
-    // Route::get('chat/get_teacher_list', [ChatController::class, 'chatGetTeacherList']);
+    Route::get('chat/get_teacher_list', [ChatController::class, 'chatGetTeacherList']);
+    Route::get('chat/get_parent_list', [ChatController::class, 'chatGetParentList']);
+    Route::get('chat/get_teacher_assign_parent_list', [ChatController::class, 'chatGetTeacherAssignParentList']);
+    Route::get('chat/sent_messages', [ChatController::class, 'chatSentMessage']);
     // chat conversations end
     Route::post('class_teacher_classes', [ApiControllerOne::class, 'classTeacherClass']);
     Route::post('class_teacher_sections', [ApiControllerOne::class, 'classTeacherSections']);

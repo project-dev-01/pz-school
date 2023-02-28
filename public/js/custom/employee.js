@@ -6,6 +6,7 @@ $(function () {
         changeMonth: true,
         changeYear: true,
         autoclose: true,
+        yearRange: "-100:+50", // last hundred years
     });
     // emp DOB
     $("#empDOB").datepicker({
@@ -13,7 +14,8 @@ $(function () {
         changeMonth: true,
         changeYear: true,
         autoclose: true,
-
+        yearRange: "-100:+50", // last hundred year
+        maxDate: 0
     });
     //
     function selectRefresh() {

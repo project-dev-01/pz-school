@@ -16,25 +16,25 @@
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="text">Start Date<span class="text-danger">*</span></label>
+                        <label for="start_date">Start Date<span class="text-danger">*</span></label>
                         <div class="input-group input-group-merge">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <span class="far fa-calendar-alt"></span>
                                 </div>
                             </div>
-                            <input type="text" class="form-control" id="start_date" name="start_date" aria-describedby="inputGroupPrepend">
+                            <input type="text" class="form-control datepicker" id="start_date" name="start_date" aria-describedby="inputGroupPrepend">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="text">End Date<span class="text-danger">*</span></label>
+                        <label for="end_date">End Date<span class="text-danger">*</span></label>
                         <div class="input-group input-group-merge">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <span class="far fa-calendar-alt"></span>
                                 </div>
                             </div>
-                            <input type="text" class="form-control" id="end_date" name="end_date" aria-describedby="inputGroupPrepend">
+                            <input type="text" class="form-control datepicker" id="end_date" name="end_date" aria-describedby="inputGroupPrepend">
                         </div>
                     </div>
                     <div class="form-group">

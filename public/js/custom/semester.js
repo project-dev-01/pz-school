@@ -1,32 +1,53 @@
 $(function () {
     $(document).ready(function () {
-        
-    
-        $("#start_date").datepicker({
-            dateFormat: 'yy-mm-dd',
-            changeMonth: true,
-            changeYear: true,
-            autoclose: true,
-        });
-        $("#end_date").datepicker({
-            dateFormat: 'yy-mm-dd',
-            changeMonth: true,
-            changeYear: true,
-            autoclose: true,
+
+        $('#addSemesterModal').on('shown.bs.modal', function () {
+            // $('.input-group.date').datepicker({
+            //     format: "dd/mm/yyyy",
+            //     startDate: "01-01-2015",
+            //     endDate: "01-01-2020",
+            //     todayBtn: "linked",
+            //     autoclose: true,
+            //     todayHighlight: true,
+            //     container: '#addSemesterModal modal-body'
+            // });
+            $("#start_date").datepicker({
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true,
+                autoclose: true,
+                yearRange: "-100:+50", // last hundred years
+                container: '#addSemesterModal modal-body'
+            });
+            $("#end_date").datepicker({
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true,
+                autoclose: true,
+                yearRange: "-100:+50", // last hundred years
+                container: '#addSemesterModal modal-body'
+            });
         });
 
-        $("#edit_start_date").datepicker({
-            dateFormat: 'yy-mm-dd',
-            changeMonth: true,
-            changeYear: true,
-            autoclose: true,
+        $('#editSemesterModal').on('shown.bs.modal', function () {
+            $("#edit_start_date").datepicker({
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true,
+                autoclose: true,
+                yearRange: "-100:+50", // last hundred years
+                container: '#editSemesterModal modal-body'
+            });
+            $("#edit_end_date").datepicker({
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true,
+                autoclose: true,
+                yearRange: "-100:+50", // last hundred years
+                container: '#editSemesterModal modal-body'
+            });
         });
-        $("#edit_end_date").datepicker({
-            dateFormat: 'yy-mm-dd',
-            changeMonth: true,
-            changeYear: true,
-            autoclose: true,
-        });
+
     });
 
 
@@ -79,13 +100,13 @@ $(function () {
 
     // get all semester table
     function semesterTable() {
-         $('#semester-table').DataTable({
+        $('#semester-table').DataTable({
             processing: true,
             info: true,
             // dom: 'lBfrtip',
-            dom:"<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             buttons: [
                 {
                     extend: 'csv',
@@ -141,8 +162,8 @@ $(function () {
     // get row
     $(document).on('click', '#editSemesterBtn', function () {
         var id = $(this).data('id');
-     
-        $('.editSemester').find('form')[0].reset();   
+
+        $('.editSemester').find('form')[0].reset();
         $.post(semesterDetails, { id: id }, function (data) {
             $('.editSemester').find('input[name="id"]').val(data.data.id);
             $('.editSemester').find('input[name="name"]').val(data.data.name);
@@ -158,7 +179,7 @@ $(function () {
         e.preventDefault();
         var edt_semesterCheck = $("#edit-semester-form").valid();
         if (edt_semesterCheck === true) {
-      
+
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),

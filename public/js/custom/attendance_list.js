@@ -8,7 +8,7 @@ $(function () {
         showButtonPanel: true,
         dateFormat: 'MM yy',
         // autoclose: true,
-
+        yearRange: "-100:+50", // last hundred years
         onClose: function (dateText, inst) {
             $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
         }
@@ -212,7 +212,7 @@ $(function () {
         showButtonPanel: true,
         dateFormat: 'MM yy',
         // autoclose: true,
-
+        yearRange: "-100:+50", // last hundred years
         onClose: function (dateText, inst) {
             $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
         }

@@ -16,6 +16,11 @@ class LeaveApply extends Notification
      *
      * @return void
      */
+    protected $branch_id;
+    protected $from_leave;
+    protected $to_leave;
+    protected $name;
+
     public function __construct($data, $branch_id, $name)
     {
         //

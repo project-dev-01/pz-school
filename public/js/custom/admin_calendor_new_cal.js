@@ -34,6 +34,7 @@ $(document).ready(function () {
         },
         // events: t,
         editable: !0,
+        // editable: true,
         droppable: !0,
         eventLimit: !0,
         selectable: !0,
@@ -86,8 +87,11 @@ $(document).ready(function () {
             // var title = prompt('Event Title:');
             $('#addTasksModal').modal('toggle');
             $('.addTasks').find('form')[0].reset();
-            var start_dt = moment(e.start).format('DD-MM-YYYY dddd hh:mm A');
-            var subonesec = moment(e.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
+            var start_dt = moment(e.start).format('DD-MM-YYYY');
+            // var start_dt = moment(e.start).format('DD-MM-YYYY dddd hh:mm A');
+            var subonesec = moment(e.end).subtract(1, 'seconds').format('DD-MM-YYYY');
+            // var subonesec = moment(e.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
+
             // var end_dt = moment(e.end).format('DD-MM-YYYY dddd hh:mm A');
             $("#startDate").html(start_dt);
             $("#endDate").html(subonesec);
@@ -120,7 +124,7 @@ $(document).ready(function () {
                             var newData = response.data;
                             $('#addTasksModal').modal('hide')
                             $('.addTasks').find('form')[0].reset();
-                            var eventObject = {
+                            let eventObject = {
                                 id: newData.id,
                                 title: newData.title,
                                 start: newData.start,
@@ -140,7 +144,6 @@ $(document).ready(function () {
 
 
         },
-        // editable: true,
         eventClick: function (e) {
             //
             if (e.event.extendedProps.event_id) {
@@ -196,8 +199,10 @@ $(document).ready(function () {
                 $("#examSubject").html(e.event.extendedProps.subject_name);
                 $("#examTiming").html(tConvert(time_start) + ' - ' + tConvert(time_end));
             } else {
-                var start_dt = moment(e.event.start).format('DD-MM-YYYY dddd hh:mm A');
-                var subonesec = moment(e.event.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
+                var start_dt = moment(e.event.start).format('DD-MM-YYYY');
+                // var start_dt = moment(e.event.start).format('DD-MM-YYYY dddd hh:mm A');
+                var subonesec = moment(e.event.end).subtract(1, 'seconds').format('DD-MM-YYYY');
+                // var subonesec = moment(e.event.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
 
                 $('#showTasksModal').modal('toggle');
                 $("#calendorID").val(e.event.id);
@@ -207,8 +212,7 @@ $(document).ready(function () {
                 $("#taskShowDesc").html(e.event.extendedProps.description);
             }
             // delete
-            $('#deleteEventBtn').click(function () {
-                // $(document).on('click', '#deleteEventBtn', function () {
+            $("#deleteEventBtn").unbind().click(function () {
                 var id = $("#calendorID").val();
                 swal.fire({
                     title: 'Are you sure?',
@@ -247,6 +251,45 @@ $(document).ready(function () {
                     }
                 });
             });
+            // update
+            $("#updateCalBtn").unbind().click(function () {
+                e.event.remove();
+                let calendor_id = $("#updateTasksModal").find("#calendorID").val();
+                let title = $("#updateTasksModal").find("#taskTitle").val();
+                let description = $("#updateTasksModal").find("#taskDescription").val();
+                if (title) {
+                    $.ajax({
+                        url: calendorUpdateTaskCalendor,
+                        type: "POST",
+                        dataType: 'json',
+                        data: {
+                            token: token,
+                            branch_id: branchID,
+                            title: title,
+                            calendor_id: calendor_id,
+                            description: description
+                        },
+                        success: function (response) {
+                            var datas = response.data;
+                            $('#updateTasksModal').modal('hide')
+                            $('#taskUpdate')[0].reset();
+                            let obj = {
+                                id: datas.id,
+                                title: datas.title,
+                                start: datas.start,
+                                end: datas.end,
+                                description: datas.description,
+                                className: datas.className
+                            };
+                            calendar.addEvent(obj);
+                        }
+                    });
+                } else {
+                    $('#titleError').html("Enter title here");
+                }
+                calendar.unselect();
+
+            });
         }
     });
 
@@ -255,6 +298,44 @@ $(document).ready(function () {
     $("#addTasksModal").on("hidden.bs.modal", function () {
         $('#saveBtn').unbind();
     });
+    // unbind model
+    // $("#updateTasksModal").on("hidden.bs.modal", function () {
+    //     $('#updateCalBtn').unbind();
+    // });
+    $('#editEventBtn').click(function () {
+        $('#taskUpdate')[0].reset();
+        // $(document).on('click', '#deleteEventBtn', function () {
+        // var id = $("#calendorID").val();
+        $('#showTasksModal').modal('hide');
+        $('#updateTasksModal').modal('show');
+        var calendor_id = $("#calendorID").val();
+        $.ajax({
+            url: calendorEditTaskCalendor,
+            type: "GET",
+            dataType: 'json',
+            data: {
+                token: token,
+                branch_id: branchID,
+                calendor_id: calendor_id
+            },
+            success: function (response) {
+                if (response.code == 200) {
+                    var start_dt = moment(response.data.start).format('DD-MM-YYYY');
+                    var subonesec = moment(response.data.end).subtract(1, 'seconds').format('DD-MM-YYYY');
+                    $("#updateTasksModal").find("#calendorID").val(response.data.id);
+                    $("#updateTasksModal").find("#taskTitle").val(response.data.title);
+                    $("#updateTasksModal").find("#taskDescription").val(response.data.description);
+                    $("#updateTasksModal").find("#startDate").html(start_dt);
+                    $("#updateTasksModal").find("#endDate").html(subonesec);
+                } else {
+                    toastr.error(response.message);
+                }
+            }, error: function (err) {
+                toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
+            }
+        });
+    });
+
 
     function tConvert(time) {
         // Check correct time format and split into components

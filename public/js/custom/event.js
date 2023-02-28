@@ -35,12 +35,14 @@ $(function () {
         changeMonth: true,
         changeYear: true,
         autoclose: true,
+        yearRange: "-100:+50", // last hundred years
     });
     $("#event_end_date").datepicker({
         dateFormat: 'yy-mm-dd',
         changeMonth: true,
         changeYear: true,
         autoclose: true,
+        yearRange: "-100:+50", // last hundred years
     });
 
     $('#event_start_date').change(function () {
@@ -55,12 +57,14 @@ $(function () {
         changeMonth: true,
         changeYear: true,
         autoclose: true,
+        yearRange: "-100:+50", // last hundred years
     });
     $("#edit_event_end_date").datepicker({
         dateFormat: 'yy-mm-dd',
         changeMonth: true,
         changeYear: true,
         autoclose: true,
+        yearRange: "-100:+50", // last hundred years
     });
 
 

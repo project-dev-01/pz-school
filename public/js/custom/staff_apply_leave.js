@@ -4,6 +4,7 @@ $(function () {
         changeMonth: true,
         changeYear: true,
         autoclose: true,
+        yearRange: "-100:+50", // last hundred years
         minDate: 0
     });
     $("#to_ldate").datepicker({
@@ -11,6 +12,7 @@ $(function () {
         changeMonth: true,
         changeYear: true,
         autoclose: true,
+        yearRange: "-100:+50", // last hundred years
         minDate: 0
     });
     // StudentLeave_tabel();
@@ -106,7 +108,11 @@ $(function () {
         $('#file_name').html(file);
     });
     $(".datepick").datepicker({
-        dateFormat: 'yy-mm-dd'
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-100:+50", // last hundred years
     });
     // get student leave apply
     $('#staff-leave-list').DataTable({

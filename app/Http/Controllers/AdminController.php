@@ -6608,8 +6608,14 @@ class AdminController extends Controller
     // index Fees
     public function feesAllocation()
     {
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $fees_group_list = Helper::GETMethodWithData(config('constants.api.fees_group_list'), $data);
+
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
-        $fees_group_list = Helper::GetMethod(config('constants.api.fees_group_list'));
+        // $fees_group_list = Helper::GetMethod(config('constants.api.fees_group_list'));
+        // dd($fees_group_list);
         return view(
             'admin.fees.fees_allocation',
             [

@@ -18,7 +18,7 @@ class CreateTransportRouteTable extends Migration
             $table->string('name');
             $table->string('start_place');
             $table->string('stop_place');
-            $table->text('remarks');
+            $table->text('remarks')->nullable();
             $table->timestamps();
         });
     }

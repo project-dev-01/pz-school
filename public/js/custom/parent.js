@@ -7,6 +7,8 @@ $(function () {
         changeMonth: true,
         changeYear: true,
         autoclose: true,
+        yearRange: "-100:+50", // last hundred years
+        maxDate: 0
     });
     $("#addparent").validate({
         rules: {

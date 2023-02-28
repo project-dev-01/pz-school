@@ -16,6 +16,10 @@ class ReliefAssignment extends Notification
      *
      * @return void
      */
+    protected $branch_id;
+    protected $staff_id;
+    protected $calendar_id;
+
     public function __construct($data)
     {
         //

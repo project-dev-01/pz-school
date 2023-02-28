@@ -586,7 +586,7 @@
 
                                     <div class="row">
 
-                                        <div class="col-md-4">
+                                        <!-- <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="">Category<span class="text-danger">*</span></label>
                                                 <select id="categy" name="categy" class="form-control">
@@ -595,7 +595,7 @@
                                                     <option value="2" {{$student['category_id'] == 2 ? "Selected" : "" }}>Two</option>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="session_id">Session</label>

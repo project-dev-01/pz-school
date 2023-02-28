@@ -2,7 +2,7 @@
 $url = "http://localhost/school-management-system/api";
 // $url = "https://www.paxsuzen.com/smkkiaramas/api"; 
 return [
-
+    'main_db'=>'school-management-system',
     'api' => [
         // login url
         'login' => $url.'/login',

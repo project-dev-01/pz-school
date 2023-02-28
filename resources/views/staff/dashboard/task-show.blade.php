@@ -9,7 +9,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col">
-                        <div class="card-box: style=" background-color: #8adfee14;">
+                        <div class="card-box" style="background-color: #8adfee14;">
                             <div class="table-responsive">
                                 <table class="table mb-0">
                                     <tr>
@@ -33,6 +33,9 @@
                             </div>
                             <br>
                             <div class="form-group text-right m-b-0">
+                                <button class="btn btn-primary" id="editEventBtn" type="button">
+                                    Edit
+                                </button>
                                 <button class="btn btn-danger" id="deleteEventBtn" type="button">
                                     Delete
                                 </button>

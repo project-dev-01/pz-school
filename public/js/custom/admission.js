@@ -5,19 +5,22 @@ $(function () {
         changeMonth: true,
         changeYear: true,
         autoclose: true,
+        yearRange: "-100:+50", // last hundred years
     });
     $("#dob").datepicker({
         dateFormat: 'yy-mm-dd',
         changeMonth: true,
         changeYear: true,
         autoclose: true,
+        yearRange: "-100:+50", // last hundred years
+        maxDate: 0
     });
     // rules validation
     $("#addadmission").validate({
         rules: {
             
             parent_id: "required",
-            btwyears: "required",
+            year: "required",
             txt_regiter_no: "required",
             txt_emailid: {
                 required: true,
@@ -26,7 +29,9 @@ $(function () {
             txt_roll_no: "required",
             admission_date: "required",
             classnames: "required",
-            categy: "required",
+            class_id: "required",
+            section_id: "required",
+            // categy: "required",
             fname: "required",
             txt_mobile_no: "required",
             present_address: "required",
@@ -61,6 +66,8 @@ $(function () {
                     } else {
                         toastr.error(data.message);
                     }
+                }, error: function (err) {
+                    toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
                 }
             });
         }

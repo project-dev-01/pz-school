@@ -1,5 +1,6 @@
 @extends('layouts.admin-layout')
 @section('title','Dashboard')
+
 @section('content')
 <link href="{{ asset('public/css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
@@ -1499,6 +1500,7 @@
 @include('teacher.dashboard.task')
 @include('teacher.dashboard.task-show')
 @include('teacher.dashboard.exam-schedule')
+@include('admin.dashboard.taskupdate')
 
 </div> <!-- container -->
 @endsection
@@ -1523,6 +1525,8 @@
     // task all url
     var calendorAddTaskCalendor = "{{ config('constants.api.calendor_add_task_calendor') }}";
     var calendorListTaskCalendor = "{{ config('constants.api.calendor_list_task_calendor') }}";
+    var calendorEditTaskCalendor = "{{ config('constants.api.calendor_edit_task_calendor') }}";
+    var calendorUpdateTaskCalendor = "{{ config('constants.api.calendor_update_task_calendor') }}";
     var calendorDeleteTaskCalendor = "{{ config('constants.api.calendor_delete_task_calendor') }}";
 
     

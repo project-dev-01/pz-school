@@ -468,7 +468,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="categy">Category<span class="text-danger">*</span></label>
                                     <select id="categy" name="categy" class="form-control">
@@ -477,7 +477,7 @@
                                         <option value="2">Two</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="session_id">Session</label>

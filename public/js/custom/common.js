@@ -19,13 +19,25 @@ $(function () {
 
     // addDatePicker
     $("#leaveFrom").datepicker({
-        dateFormat: 'dd-mm-yy'
+        dateFormat: 'dd-mm-yy',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-100:+50", // last hundred years
     });
     $("#leaveTo").datepicker({
-        dateFormat: 'dd-mm-yy'
+        dateFormat: 'dd-mm-yy',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-100:+50", // last hundred years
     });
     $("#postingDate").datepicker({
-        dateFormat: 'dd-mm-yy'
+        dateFormat: 'dd-mm-yy',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-100:+50", // last hundred years
     });
     //
     function formatDate(date) {

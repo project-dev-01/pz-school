@@ -23,7 +23,7 @@
                                     <span class="far fa-calendar-alt"></span>
                                 </div>
                             </div>
-                            <input type="text" class="form-control" id="edit_start_date" name="start_date" aria-describedby="inputGroupPrepend">
+                            <input type="text" class="form-control datepicker" id="edit_start_date" name="start_date" aria-describedby="inputGroupPrepend">
                         </div>
                     </div>
                     <div class="form-group">
@@ -34,7 +34,7 @@
                                     <span class="far fa-calendar-alt"></span>
                                 </div>
                             </div>
-                            <input type="text" class="form-control" id="edit_end_date" name="end_date" aria-describedby="inputGroupPrepend">
+                            <input type="text" class="form-control datepicker" id="edit_end_date" name="end_date" aria-describedby="inputGroupPrepend">
                         </div>
                     </div>
                     <div class="form-group">

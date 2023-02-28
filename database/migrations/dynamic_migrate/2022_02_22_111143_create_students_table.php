@@ -41,7 +41,7 @@ class CreateStudentsTable extends Migration
             $table->string('city')->nullable();
             $table->string('post_code')->nullable();
             $table->text('mobile_no');
-            $table->integer('category_id');
+            $table->integer('category_id')->nullable();
             $table->string('email');
             $table->integer('route_id')->nullable();
             $table->integer('vehicle_id')->nullable();

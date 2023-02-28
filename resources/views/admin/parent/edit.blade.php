@@ -383,7 +383,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
-                                                <label for="last_name">Last Name<span class="text-danger">*</span></label>
+                                                <label for="last_name">Last Name</label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">

@@ -1,6 +1,14 @@
 
 $(function () {
 
+    $(".homeWorkAdd").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-100:+50", // last hundred years
+    });
+
     $("#evaluationFilterForm").validate({
         rules: {
             class_id:"required",
@@ -100,6 +108,7 @@ $(function () {
      // rules validation
      $("#addHomeworkForm").validate({
         rules: {
+            title: "required",
             class_id: "required",
             section_id: "required",
             subject_id: "required",

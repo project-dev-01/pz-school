@@ -21,7 +21,7 @@ $(function () {
         // $('#myModal').modal('hide');
     });
 
-    $(".homeWorkAdd").datepicker({
-        dateFormat: 'yy-mm-dd'
-    });
+    // $(".homeWorkAdd").datepicker({
+    //     dateFormat: 'yy-mm-dd'
+    // });
 });

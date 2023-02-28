@@ -39,47 +39,9 @@
         width: 150px;
     }
 
-    .table td {
-        border-top: none;
-    }
-
-    .homework-list {
-        display: inline-block;
-        position: relative;
-        padding-right: 10px;
-    }
-
-    .homework-list::after {
-        content: ":";
-        position: absolute;
-        right: 10px;
-    }
-
-    .hover1:hover {
-        background-color: #D1E9EF;
-    }
-
-    @media screen and (min-device-width: 320px) and (max-device-width: 660px) {
-        .popupresponsive {
-            margin: 0px -65px 0px -70px;
-            word-wrap: break-word;
-        }
-    }
-
     @media screen and (min-device-width: 280px) and (max-device-width: 653px) {
-        .popupresponsive {
-            margin: 0px -78px 0px -78px;
-
-        }
-
         .eventpopup {
             margin: 0px -30px 0px -27px;
-        }
-    }
-
-    @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-        .popupresponsive {
-            margin: 0px -65px 0px -65px;
         }
 
     }
@@ -379,7 +341,7 @@
                                                                             {{$upcoming['total_comments']}}
                                                                         </li>
                                                                         <li class="list-inline-item pr-1">
-                                                                            <i class='mdi mdi-calendar-month-outline font-16 mr-1'></i>
+                                                                            <i class='mdi mdi-calendar-month-outline font-16'></i>
                                                                             {{ date('j F y g a', strtotime($upcoming['due_date']));}}
 
                                                                         </li>
@@ -532,6 +494,11 @@
                                     <div class="card-box eventpopup" style="background-color: #8adfee14;">
                                         <div class="table-responsive">
                                             <table class="table mb-0">
+                                                <style>
+                                                    .table td {
+                                                        border-top: none;
+                                                    }
+                                                </style>
                                                 <tr>
                                                     <td>Title</td>
                                                     <td id="title"></td>
@@ -622,6 +589,7 @@
     @include('admin.dashboard.task')
     @include('admin.dashboard.task-show')
     @include('admin.dashboard.exam-schedule')
+    @include('admin.dashboard.taskupdate')
 
 </div> <!-- container -->
 @endsection
@@ -641,6 +609,8 @@
     // task all url
     var calendorAddTaskCalendor = "{{ config('constants.api.calendor_add_task_calendor') }}";
     var calendorListTaskCalendor = "{{ config('constants.api.calendor_list_task_calendor') }}";
+    var calendorEditTaskCalendor = "{{ config('constants.api.calendor_edit_task_calendor') }}";
+    var calendorUpdateTaskCalendor = "{{ config('constants.api.calendor_update_task_calendor') }}";
     var calendorDeleteTaskCalendor = "{{ config('constants.api.calendor_delete_task_calendor') }}";
 </script>
 <!-- <script src="{{ asset('public/js/custom/admin_calendor.js') }}"></script> -->
