@@ -41,7 +41,7 @@
             <h1 class="tt-title-border">
                 Create New Topic
             </h1>
-            <form class="form-default form-create-topic" id="createpostForum" method="post" action="{{ route('admin.forum.create-topic') }}">
+            <form class="form-default form-create-topic" id="createpostForum" method="post" action="{{ route('admin.forum.create-topic') }}" autocomplete="off">
                 @csrf
                 <div class="form-group">
                     <label for="inputTopicTitle">Topic Title</label>
@@ -223,16 +223,14 @@
                         <div class="col-md-8" style="width: 800px;margin:0 auto;">
                             <div class="form-group">
                                 <label for="inputTopic" class="col-3 col-form-label">User</label>
-                                <select name="states[]" id="selectedusers" class="form-control js-example-basic-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ...">>
+                                <select name="tags[]" id="selectedusers" class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ...">>
                                     <option value=""></option>
-                                    @if(!empty($usernames))
                                     @foreach($usernames as $c)
                                     <option value="{{$c['id']}}">{{$c['name']}}</option>
                                     @endforeach
-                                    @endif
 
                                 </select>
-                                <input type="hidden" id="tags" name="tags">
+                                <!-- <input type="hidden" id="tags" name="tags"> -->
                                 <!-- <input type="text" id="inputTopicTags" placeholder="" autocomplete="off" class="form-control input-lg" />
                                 <input type="text" name="inputTopicTags" autocomplete="off" class="form-control" id="inputTopicTags" placeholder="Use comma to separate tags"> -->
 
@@ -292,6 +290,7 @@
                 <div class="tt-col-value hide-mobile">Replies</div>
                 <div class="tt-col-value hide-mobile">Views</div>
                 <div class="tt-col-value">Activity</div>
+                <div class="tt-col-value">Action</div>
             </div>
 
             @if(!empty($forum_list))
@@ -299,87 +298,93 @@
             $randomcolor = 1;
             @endphp
             @foreach($forum_list as $value)
-            @php
-            if($randomcolor==9)
-            {
-            $randomcolor = 1;
-            }
-            @endphp
-            <div class="tt-item">
-                <div class="tt-col-avatar">
-                    <!-- <svg class="tt-icon">
-                        <use xlink:href="#icon-ava-n"></use>
-                    </svg>-->
-                    <img src="{{ asset('public/images/users/default.jpg') }}" class="mr-2 rounded-circle" height="40" />
-                    {{ $value['user_name'] }}
-                </div>
-                <div class="tt-col-description">
-                    <h6 class="tt-title">
-                        <a href="{{route('admin.forum.page-single-topic-val',[$value['id'],$value['user_id']])}}">
-                            {{ $value['topic_title'] }}
-                        </a>
-                    </h6>
-                    <div class="row align-items-center no-gutters hide-desktope">
-                        <div class="col-auto">
-                            <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color05 tt-badge"></span></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-auto ml-auto show-mobile">
-                            <div class="tt-value">1d</div>
+            @if($value['user_id']==$user_id)
+
+                @php
+                if($randomcolor==9)
+                {
+                $randomcolor = 1;
+                }
+                @endphp
+                <div class="tt-item">
+                    <div class="tt-col-avatar">
+                        <!-- <svg class="tt-icon">
+                            <use xlink:href="#icon-ava-n"></use>
+                        </svg>-->
+                        <img src="{{ asset('public/images/users/default.jpg') }}" class="mr-2 rounded-circle" height="40" />
+                        {{ $value['user_name'] }}
+                    </div>
+                    <div class="tt-col-description">
+                        <h6 class="tt-title">
+                            <a href="{{route('admin.forum.page-single-topic-val',[$value['id'],$value['user_id']])}}">
+                                {{ $value['topic_title'] }}
+                            </a>
+                        </h6>
+                        <div class="row align-items-center no-gutters hide-desktope">
+                            <div class="col-auto">
+                                <ul class="tt-list-badge">
+                                    <li class="show-mobile"><a href="#"><span class="tt-color05 tt-badge"></span></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-auto ml-auto show-mobile">
+                                <div class="tt-value">1d</div>
+                            </div>
                         </div>
                     </div>
+                    <div class="tt-col-category"><span class="tt-color0{{$randomcolor}} tt-badge">{{$value['category_names'] }}</span></div>
+                    <div class="tt-col-value hide-mobile">
+                        @if($value['likes']=== null)
+                        0
+                        @else
+                        {{$value['likes']}}
+                        @endif
+                    </div>
+                    <div class="tt-col-value hide-mobile">
+                        @if($value['replies']=== null)
+                        0
+                        @else
+                        {{$value['replies']}}
+                        @endif
+                    </div>
+                    <div class="tt-col-value hide-mobile">
+                        @if($value['views']=== null)
+                        0
+                        @else
+                        {{$value['views']}}
+                        @endif
+                    </div>
+                    <div class="tt-col-value hide-mobile">
+                        @php
+                        echo App\Http\Controllers\CommonController::get_timeago(strtotime($value['created_at']));
+                        @endphp
+                        @if($value['activity']=== null)
+                        0
+                        @else
+                        {{$value['activity']}}
+                        @endif
+                    </div>
+                    <div class="tt-col-value">
+                            <a href="{{route('admin.forum.page-edit-topic', $value['id'])}}" class="btn btn-blue btn-sm waves-effect waves-light"><span class="tt-color03 tt-badge">Edit</span></a>
+                            <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="{{$value['id']}}" id="deletePostBtn"><span class="tt-color08 tt-badge">Delete</span></a>
+                    </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color0{{$randomcolor}} tt-badge">{{$value['category_names'] }}</span></div>
-                <div class="tt-col-value hide-mobile">
-                    @if($value['likes']=== null)
-                    0
-                    @else
-                    {{$value['likes']}}
-                    @endif
-                </div>
-                <div class="tt-col-value hide-mobile">
-                    @if($value['replies']=== null)
-                    0
-                    @else
-                    {{$value['replies']}}
-                    @endif
-                </div>
-                <div class="tt-col-value hide-mobile">
-                    @if($value['views']=== null)
-                    0
-                    @else
-                    {{$value['views']}}
-                    @endif
-                </div>
-                <div class="tt-col-value hide-mobile">
-                    @php
-                    echo App\Http\Controllers\CommonController::get_timeago(strtotime($value['created_at']));
-                    @endphp
-                    @if($value['activity']=== null)
-                    0
-                    @else
-                    {{$value['activity']}}
-                    @endif
-                </div>
-            </div>
-            @php
-            $randomcolor++;
-            @endphp
+                @php
+                $randomcolor++;
+                @endphp
+            @endif
             @endforeach
             @endif
-            <div class="tt-row-btn">
-                <button type="button" class="btn-icon js-topiclist-showmore">
-                    <svg class="tt-icon">
-                        <use xlink:href="#icon-load_lore_icon"></use>
-                    </svg>
-                </button>
-            </div>
         </div>
     </div>
 </main>
 @endsection
 @section('scripts')
+<script>
+    var indexPost = "{{ route('admin.forum.page-create-topic') }}";
+    var deletePost = "{{ config('constants.api.forum_delete') }}";
+</script>
+
+<script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
 <script src="{{ asset('public/js/custom/forum-createpost.js') }}"></script>
 <script>
     function SimpleUploadAdapterPlugin(editor) {

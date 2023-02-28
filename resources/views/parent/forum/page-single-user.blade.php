@@ -107,13 +107,13 @@
                         @endphp
                         @endforeach
                         @endif
-                        <div class="tt-row-btn">
+                        <!-- <div class="tt-row-btn">
                             <button type="button" class="btn-icon js-topiclist-showmore">
                                 <svg class="tt-icon">
                                     <use xlink:href="#icon-load_lore_icon"></use>
                                 </svg>
                             </button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="tab-pane tt-indent-none" id="tt-tab-02" role="tabpanel">
@@ -185,13 +185,13 @@
                         @endphp
                         @endforeach
                         @endif
-                        <div class="tt-row-btn">
+                        <!-- <div class="tt-row-btn">
                             <button type="button" class="btn-icon js-topiclist-showmore">
                                 <svg class="tt-icon">
                                     <use xlink:href="#icon-load_lore_icon"></use>
                                 </svg>
                             </button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="tab-pane tt-indent-none" id="tt-tab-03" role="tabpanel">
@@ -252,13 +252,13 @@
                         @endphp
                         @endforeach
                         @endif
-                        <div class="tt-row-btn">
+                        <!-- <div class="tt-row-btn">
                             <button type="button" class="btn-icon js-topiclist-showmore">
                                 <svg class="tt-icon">
                                     <use xlink:href="#icon-load_lore_icon"></use>
                                 </svg>
                             </button>
-                        </div>
+                        </div> -->
                     </div>
 
                 </div>
@@ -312,7 +312,7 @@
                                 @endphp
                                 @endforeach
                                 @endif
-                                <div class="col-12">
+                                <!-- <div class="col-12">
                                     <div class="tt-row-btn">
                                         <button type="button" class="btn-icon js-topiclist-showmore">
                                             <svg class="tt-icon">
@@ -320,7 +320,7 @@
                                             </svg>
                                         </button>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

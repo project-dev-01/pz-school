@@ -309,6 +309,11 @@
                                     <span>Employee List</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ route('admin.employee_master.import')}}" class="nav-link {{ (request()->is('admin/employee_master/import')) ? 'active' : '' }}">
+                                    <span>Import Master</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

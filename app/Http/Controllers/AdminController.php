@@ -39,22 +39,46 @@ class AdminController extends Controller
     }
     public function forumPageCreateTopic()
     {
+        $id = session()->get('user_id');
+        // $data = [
+        //     'user_id' => $user_id
+        // ];
+        $user_id = session()->get('role_id');
+        $data = [
+            'user_id' => $user_id,
+        ];
+        $category = Helper::GetMethod(config('constants.api.category'));
+        $usernames = Helper::GETMethodWithData(config('constants.api.usernames_autocomplete'), $data);
+        // dd($usernames);
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'), $data);
+        return view('admin.forum.page-create-topic', [
+            'category' => $category['data'],
+            //'forum_list' => $forum_list['data'],
+            'forum_list' => !empty($forum_list['data']) ? $forum_list['data'] : [],
+            'usernames' => $usernames['data'],
+            'user_id' => $id
+        ]);
+    }
+    public function forumPageEditTopic($id)
+    {
         // $user_id = session()->get('user_id');
         // $data = [
         //     'user_id' => $user_id
         // ];
         $user_id = session()->get('role_id');
         $data = [
-            'user_id' => $user_id
+            'user_id' => $user_id,
+            'id'=>$id
         ];
         $category = Helper::GetMethod(config('constants.api.category'));
         $usernames = Helper::GETMethodWithData(config('constants.api.usernames_autocomplete'), $data);
         // dd($usernames);
+        $forum_edit = Helper::GETMethodWithData(config('constants.api.forum_edit'), $data);
         $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'), $data);
-        // dd($forum_list);
-        return view('admin.forum.page-create-topic', [
+        // dd($forum_edit);
+        return view('admin.forum.page-edit-topic', [
             'category' => $category['data'],
-            //'forum_list' => $forum_list['data'],
+            'forum_edit' => !empty($forum_edit['data']) ? $forum_edit['data'] : [],
             'forum_list' => !empty($forum_list['data']) ? $forum_list['data'] : [],
             'usernames' => $usernames['data']
         ]);
@@ -130,10 +154,11 @@ class AdminController extends Controller
     // forum create post 
     public function createpost(Request $request)
     {
-        $current_user = session()->get('role_id');
-        $rollid_tags = $request->tags;
+        
+        $tags = implode(",", $request->tags);
         $adminid = 2;
-        $tags_add_also_currentroll = $rollid_tags . ',' . $current_user . ',' . $adminid;
+        $rollid_tags = $adminid . ',' . $tags;
+        // dd($rollid_tags);
         $data = [
             'user_id' => session()->get('user_id'),
             'user_name' => session()->get('name'),
@@ -142,11 +167,34 @@ class AdminController extends Controller
             'types' => $request->topictype,
             'body_content' => $request->tpbody,
             'category' => $request->category,
-            'tags' => $tags_add_also_currentroll,
-            'imagesorvideos' => $request->inputTopicTitle,
+            'tags' => $rollid_tags,
+            // 'imagesorvideos' => $request->inputTopicTitle,
             'threads_status' => 2
         ];
         $response = Helper::PostMethod(config('constants.api.forum_cpost'), $data);
+        return $response;
+    }
+    // forum update post 
+    public function updatepost(Request $request)
+    {
+        $tags = implode(",", $request->tags);
+        $adminid = 2;
+        $rollid_tags = $adminid . ',' . $tags;
+        $data = [
+            'id'=> $request->id,
+            'user_id' => session()->get('user_id'),
+            'user_name' => session()->get('name'),
+            'topic_title' => $request->inputTopicTitle,
+            'topic_header' => $request->inputTopicHeader,
+            'types' => $request->topictype,
+            'body_content' => $request->tpbody,
+            'category' => $request->category,
+            'tags' => $rollid_tags,
+            // 'imagesorvideos' => $request->inputTopicTitle,
+            'threads_status' => 2
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.forum_updatepost'), $data);
         return $response;
     }
     // Forum single topic with value pass
@@ -209,12 +257,13 @@ class AdminController extends Controller
             $request->file('upload')->storeAs('public/forumupload', $filenametostore);
 
 
+            // dd($filenametostore);
 
             echo json_encode([
 
-                'default' => asset('storage/forumupload/' . $filenametostore),
+                'default' => asset('storage/app/public/forumupload/' . $filenametostore),
 
-                '500' =>  asset('storage/forumupload/' . $filenametostore)
+                '500' =>  asset('storage/app/public/forumupload/' . $filenametostore)
 
             ]);
         }
@@ -250,9 +299,9 @@ class AdminController extends Controller
 
             echo json_encode([
 
-                'default' => asset('storage/forumupload/' . $filenametostore),
+                'default' => asset('storage/app/public/forumupload/' . $filenametostore),
 
-                '500' =>  asset('storage/forumupload/' . $filenametostore)
+                '500' =>  asset('storage/app/public/forumupload/' . $filenametostore)
 
             ]);
         }
@@ -6684,4 +6733,48 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.fees_delete'), $data);
         return $response;
     }
+    public function employeeMasterImport(Request $request)
+    {
+        return view('admin.import.employee_master');
+    }
+
+    public function employeeMasterImportAdd(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'file' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return back()->with(['errors' => $validator->errors()->toArray()['file']]);
+        } else {
+            $file = $request->file('file');
+            $filename = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $tempPath = $file->getRealPath();
+            $fileSize = $file->getSize();
+            $mimeType = $file->getMimeType();
+            $base64 = base64_encode(file_get_contents($request->file('file')));
+            
+            $data = [
+                'file' => $base64,
+                'fileName' =>$filename,
+                'extension' =>$extension,
+                'tempPath' =>$tempPath,
+                'fileSize' =>$fileSize,
+                'mimeType' =>$mimeType,
+            ];
+            // dd($data);
+            $response = Helper::PostMethod(config('constants.api.import_employee_master'), $data);
+            // dd($response);
+            if($response['code']==200){
+
+                return redirect()->route('admin.employee_master.import')->with('success',' Employee Master Imported Successfully');
+
+            }else{
+                return redirect()->route('admin.employee_master.import')->with('errors',$response['data']);
+            }
+        }
+    }
+    
 }

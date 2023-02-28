@@ -170,13 +170,13 @@
                             <div class="tt-col-value-large hide-mobile"></div>
                             <div class="tt-col-value-large hide-mobile">4 Jan,19</div>
                         </div>                      
-                        <div class="tt-row-btn">
+                        <!-- <div class="tt-row-btn">
                             <button type="button" class="btn-icon js-topiclist-showmore">
                                 <svg class="tt-icon">
                                     <use xlink:href="#icon-load_lore_icon"></use>
                                 </svg>
                             </button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="tab-pane tt-indent-none" id="tt-tab-02" role="tabpanel">
@@ -281,13 +281,13 @@
                             <div class="tt-col-value hide-mobile">2h</div>
                         </div>                                
                                             
-                        <div class="tt-row-btn">
+                        <!-- <div class="tt-row-btn">
                             <button type="button" class="btn-icon js-topiclist-showmore">
                                 <svg class="tt-icon">
                                     <use xlink:href="#icon-load_lore_icon"></use>
                                 </svg>
                             </button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="tab-pane tt-indent-none" id="tt-tab-03" role="tabpanel">
@@ -405,13 +405,13 @@
                             <div class="tt-col-category"><a href="#"><span class="tt-color05 tt-badge">Childcare & Training</span></a></div>
                             <div class="tt-col-value-large hide-mobile">5 Jan,19</div>
                         </div>                     
-                        <div class="tt-row-btn">
+                        <!-- <div class="tt-row-btn">
                             <button type="button" class="btn-icon js-topiclist-showmore">
                                 <svg class="tt-icon">
                                     <use xlink:href="#icon-load_lore_icon"></use>
                                 </svg>
                             </button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="tab-pane tt-indent-none" id="tt-tab-04" role="tabpanel">
@@ -834,7 +834,7 @@
                         </div>
                     </div>
                 </div>                               
-                                <div class="col-12">
+                                <!-- <div class="col-12">
                                     <div class="tt-row-btn">
                                         <button type="button" class="btn-icon js-topiclist-showmore">
                                             <svg class="tt-icon">
@@ -842,7 +842,7 @@
                                             </svg>
                                         </button>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

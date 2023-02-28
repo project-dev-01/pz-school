@@ -214,8 +214,11 @@ return [
         'get_by_reportcard' => $url.'/get_by_reportcard',
 
         // forum url
-        'forum_cpost' => $url.'/forum/createpost',   
-        'forum_list' => $url.'/forum/list',
+        'forum_cpost' => $url.'/forum/createpost',
+        'forum_updatepost' => $url.'/forum/updatepost',   
+        'forum_list' => $url.'/forum/list',   
+        'forum_edit' => $url.'/forum/edit',
+        'forum_delete' => $url.'/forum/delete',
         'forum_threadslist'=>$url.'/forum/threadslist',
         'forum_userthreadslist'=>$url.'/forum/userthreadslist',
         'listcategoryvs'=>$url.'/forum/listcategory',
@@ -740,7 +743,10 @@ return [
         'get_ten_student'=> $url.'/get-ten-student',
 
         'class_teacher_classes'=> $url.'/class_teacher_classes',
-        'class_teacher_sections'=> $url.'/class_teacher_sections'
+        'class_teacher_sections'=> $url.'/class_teacher_sections',
+
+        
+        'import_employee_master'=> $url.'/importcsv/employee/master',
         
         ]
 

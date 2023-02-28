@@ -78,13 +78,13 @@
             <div class="text-justify">  No records found..</div>
             @endif
 
-            <div class="tt-row-btn">
+            <!-- <div class="tt-row-btn">
                 <button type="button" class="btn-icon js-topiclist-showmore">
                     <svg class="tt-icon">
                         <use xlink:href="#icon-load_lore_icon"></use>
                     </svg>
                 </button>
-            </div>
+            </div> -->
         </div>
     </div>
 </main>

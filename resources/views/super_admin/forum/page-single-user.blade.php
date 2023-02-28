@@ -108,12 +108,12 @@
                         @endforeach
                         @endif
                         <div class="tt-row-btn">
-                            <button type="button" class="btn-icon js-topiclist-showmore">
+                            <!-- <button type="button" class="btn-icon js-topiclist-showmore">
                                 <svg class="tt-icon">
                                     <use xlink:href="#icon-load_lore_icon"></use>
                                 </svg>
                             </button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="tab-pane tt-indent-none" id="tt-tab-02" role="tabpanel">
@@ -180,12 +180,12 @@
                         @endforeach
                         @endif
                         <div class="tt-row-btn">
-                            <button type="button" class="btn-icon js-topiclist-showmore">
+                            <!-- <button type="button" class="btn-icon js-topiclist-showmore">
                                 <svg class="tt-icon">
                                     <use xlink:href="#icon-load_lore_icon"></use>
                                 </svg>
                             </button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="tab-pane tt-indent-none" id="tt-tab-03" role="tabpanel">
@@ -247,12 +247,12 @@
                         @endforeach
                         @endif
                         <div class="tt-row-btn">
-                            <button type="button" class="btn-icon js-topiclist-showmore">
+                            <!-- <button type="button" class="btn-icon js-topiclist-showmore">
                                 <svg class="tt-icon">
                                     <use xlink:href="#icon-load_lore_icon"></use>
                                 </svg>
                             </button>
-                        </div>
+                        </div> -->
                     </div>
 
                 </div>

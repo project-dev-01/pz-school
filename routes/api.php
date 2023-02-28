@@ -294,6 +294,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('get-dbnames', [CommonController::class, 'dbnameslist']);
     Route::post('get-branchid', [ApiController::class, 'schoolvsbranchid']);
     Route::get('forum/list', [ApiController::class, 'postList']);
+    Route::get('forum/edit', [ApiController::class, 'postEdit']);
+    Route::post('forum/delete', [ApiController::class, 'postDelete']);
     Route::get('forum/threadslist', [ApiController::class, 'ThreadspostList']);
     Route::get('forum/userthreadslist', [ApiController::class, 'userThreadspostList']);
     Route::get('forum/listcategory', [ApiController::class, 'postListCategory']);
@@ -306,6 +308,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('forum/singlepost/replies', [ApiController::class, 'singlePostReplies']);
     Route::get('forum/post/allreplies', [ApiController::class, 'PostAllReplies']);
     Route::post('forum/createpost', [ApiController::class, 'forumcreatepost']);
+    Route::post('forum/updatepost', [ApiController::class, 'forumupdatepost']);
     Route::post('forum-likecout', [ApiController::class, 'likescountadded']);
     Route::post('forum-discout', [ApiController::class, 'dislikescountadded']);
     Route::post('forum-heartcout', [ApiController::class, 'heartcountadded']);
@@ -802,4 +805,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('class_teacher_classes', [ApiControllerOne::class, 'classTeacherClass']);
     Route::post('class_teacher_sections', [ApiControllerOne::class, 'classTeacherSections']);
 
+    
+    // import Employee Master details in csv
+    Route::post('importcsv/employee/master', [ApiControllerOne::class, 'importCsvEmployeeMaster']);
 });

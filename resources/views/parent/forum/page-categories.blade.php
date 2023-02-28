@@ -68,7 +68,7 @@
                 @endphp
                 @endforeach
                 @endif
-                <div class="col-12">
+                <!-- <div class="col-12">
                     <div class="tt-row-btn">
                         <button type="button" class="btn-icon js-topiclist-showmore">
                             <svg class="tt-icon">
@@ -76,7 +76,7 @@
                             </svg>
                         </button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

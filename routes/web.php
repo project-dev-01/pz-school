@@ -214,7 +214,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('group/list', [AdminController::class, 'getGroupList'])->name('admin.group.list');
         Route::post('group/add', [AdminController::class, 'addGroup'])->name('admin.group.add');
         Route::post('group/group-details', [AdminController::class, 'getGroupDetails'])->name('admin.group.details');
-        Route::post('even/update', [AdminController::class, 'updateGroup'])->name('admin.group.update');
+        Route::post('group/update', [AdminController::class, 'updateGroup'])->name('admin.group.update');
         Route::post('group/delete', [AdminController::class, 'deleteGroup'])->name('admin.group.delete');
 
         // Hostel Group routes
@@ -471,6 +471,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('forum/index', [AdminController::class, 'forumIndex'])->name('admin.forum.index');
         Route::get('forum/page-single-topic', [AdminController::class, 'forumPageSingleTopic'])->name('admin.forum.page-single-topic');
         Route::get('forum/page-create-topic', [AdminController::class, 'forumPageCreateTopic'])->name('admin.forum.page-create-topic');
+        Route::get('forum/page-edit-topic/{id}', [AdminController::class, 'forumPageEditTopic'])->name('admin.forum.page-edit-topic');
         Route::get('forum/page-single-user', [AdminController::class, 'forumPageSingleUser'])->name('admin.forum.page-single-user');
         Route::get('forum/page-single-threads', [AdminController::class, 'forumPageSingleThreads'])->name('admin.forum.page-single-threads');
         Route::get('forum/page-single-replies', [AdminController::class, 'forumPageSingleReplies'])->name('admin.forum.page-single-replies');
@@ -516,6 +517,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         // Route::get('settings', [AdminController::class, 'settings'])->name('admin.settings');
 
         Route::post('form/page-create-topic', [AdminController::class, 'createpost'])->name('admin.forum.create-topic');
+        Route::post('form/page-update-topic', [AdminController::class, 'updatepost'])->name('admin.forum.update-topic');
         Route::get('forum/page-single-topic-val/{id}/{user_id}', [AdminController::class, 'forumPageSingleTopicwithvalue'])->name('admin.forum.page-single-topic-val');
         Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [AdminController::class, 'forumPageCategoriesSingle'])->name('admin.forum.page-categories-single-val');
         Route::post('form/postimage', [AdminController::class, 'imagestore'])->name('admin.forum.image.store');
@@ -758,6 +760,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('fees/add_fees_allocation', [AdminController::class, 'addFeesAllocation'])->name('admin.fees.add_fees_allocation');
         Route::post('fees/fees_delete', [AdminController::class, 'feesDelete'])->name('admin.fees.fees_delete');
 
+        
+        // employee master import routes
+        Route::get('employee/master/import', [AdminController::class, 'employeeMasterImport'])->name('admin.employee_master.import');
+        Route::post('employee/master/import/add', [AdminController::class, 'employeeMasterImportAdd'])->name('admin.employee_master.import.add');
     });
 });
 // admin routes end

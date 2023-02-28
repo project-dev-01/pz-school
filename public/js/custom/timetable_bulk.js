@@ -15,7 +15,7 @@ $(function () {
     // add timetable
     $('#addTimetableForm').on('submit', function (e) {
         e.preventDefault();
-        $("#overlay").fadeIn(300);
+        // $("#overlay").fadeIn(300);
         var form = this;
         $.ajax({
             url: $(form).attr('action'),

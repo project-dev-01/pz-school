@@ -1,4 +1,6 @@
 $(function () {
+    
+    $('.select2-multiple-plus').select2();
     var selectedtopic;
     $("#createpostForum").validate({
         rules: {
@@ -30,6 +32,46 @@ $(function () {
                         toastr.success(data.message);
                         $('#createpostForum')[0].reset();
                         location.reload();
+                    } else {
+                        toastr.error(data.message);
+                    }
+                }
+            });
+        }
+    });
+
+    $("#updatepostForum").validate({
+        rules: {
+            inputTopicTitle: "required",
+            inputTopicHeader: "required",
+            tpbody: "required",
+            category: "required"
+        }
+    });
+    // update post forum
+    $("#updatepostForum").on('submit', function (e) {
+        e.preventDefault();
+        console.log('hellosss');
+        var cpostCheck = $("#updatepostForum").valid();
+        if (cpostCheck === true) {
+            var form = this;
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (data) {
+                    // console.log("------")
+                    console.log(data)
+                    if (data.code == 200) {
+
+                        toastr.success(data.message);
+                        $('#updatepostForum')[0].reset();
+                        setTimeout(function () {
+                            window.location.href = indexPost;
+                        }, 1000);
                     } else {
                         toastr.error(data.message);
                     }
@@ -126,5 +168,41 @@ $(function () {
         //   });
 
     });
+
+    // delete form
+    $(document).on('click', '#deletePostBtn', function () {
+        var id = $(this).data('id');
+        var url = deletePost;
+        swal.fire({
+            title: 'Are you sure?',
+            html: 'You want to <b>delete</b> this Post',
+            showCancelButton: true,
+            showCloseButton: true,
+            cancelButtonText: 'Cancel',
+            confirmButtonText: 'Yes, Delete',
+            cancelButtonColor: '#d33',
+            confirmButtonColor: '#556ee6',
+            width: 400,
+            allowOutsideClick: false
+        }).then(function (result) {
+            if (result.value) {
+                $.post(url, {
+                    id: id,
+                    token: token,
+                }, function (data) {
+                    if (data.code == 200) {
+                        toastr.success(data.message);
+                        setTimeout(function () {
+                            window.location.href = indexPost;
+                        }, 1000);
+                    } else {
+                        toastr.error(data.message);
+                    }
+                }, 'json');
+            }
+        });
+    });
+   
+
 
 });
