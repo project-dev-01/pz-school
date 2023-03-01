@@ -93,7 +93,6 @@ class AdminController extends Controller
         $forum_categorypost_user_crd = Helper::GETMethodWithData(config('constants.api.forum_categorypost_user_created'), $data);
         $forum_post_user_allreplies = Helper::GETMethodWithData(config('constants.api.forum_posts_user_repliesall'), $data);
         $forum_threadslist = Helper::GetMethod(config('constants.api.forum_threadslist'));
-        // dd($forum_threadslist);
         return view('admin.forum.page-single-user', [
             // 'forum_post_user_crd' => $forum_post_user_crd['data'],
             // 'forum_categorypost_user_crd' => $forum_categorypost_user_crd['data'],
@@ -124,7 +123,7 @@ class AdminController extends Controller
     public function forumPageCategories()
     {
         $adminlistcategoryvs = Helper::GetMethod(config('constants.api.adminlistcategoryvs'));
-        // dd($listcategoryvs);      
+         
         return view('admin.forum.page-categories', [
             'adminlistcategoryvs' => $adminlistcategoryvs['data']
         ]);

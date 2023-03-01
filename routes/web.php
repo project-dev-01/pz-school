@@ -91,6 +91,7 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::get('forum/rolls-chooseforum', [SuperAdminController::class, 'superadminrollchoose'])->name('super_admin.forum.rolls-chooseforum');
         Route::get('forum/page-single-topic', [SuperAdminController::class, 'forumPageSingleTopic'])->name('super_admin.forum.page-single-topic');
         Route::get('forum/page-create-topic', [SuperAdminController::class, 'forumPageCreateTopic'])->name('super_admin.forum.page-create-topic');
+        Route::get('forum/page-edit-topic/{id}', [SuperAdminController::class, 'forumPageEditTopic'])->name('super_admin.forum.page-edit-topic');
         Route::get('forum/page-single-user', [SuperAdminController::class, 'forumPageSingleUser'])->name('super_admin.forum.page-single-user');
         Route::get('forum/page-single-threads', [SuperAdminController::class, 'forumPageSingleThreads'])->name('super_admin.forum.page-single-threads');
         Route::get('forum/page-single-replies', [SuperAdminController::class, 'forumPageSingleReplies'])->name('super_admin.forum.page-single-replies');
@@ -102,6 +103,7 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::get('forum/page-tabs-guidelines', [SuperAdminController::class, 'forumPageTabGuidelines'])->name('super_admin.forum.page-tabs-guidelines');
 
         Route::post('form/page-create-topic', [SuperAdminController::class, 'createpost'])->name('super_admin.forum.create-topic');
+        Route::post('form/page-update-topic', [SuperAdminController::class, 'updatepost'])->name('super_admin.forum.update-topic');
         Route::get('forum/page-single-topic-val/{id}/{user_id}', [SuperAdminController::class, 'forumPageSingleTopicwithvalue'])->name('super_admin.forum.page-single-topic-val');
         Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [SuperAdminController::class, 'forumPageCategoriesSingle'])->name('super_admin.forum.page-categories-single-val');
         Route::get('forum/selecteddb', [SuperAdminController::class, 'dbvsgetbranchid'])->name('super_admin.forum.selecteddbname');
@@ -782,6 +784,7 @@ Route::group(['prefix' => 'staff'], function () {
         Route::get('forum/index', [StaffController::class, 'forumIndex'])->name('staff.forum.index');
         Route::get('forum/page-single-topic', [StaffController::class, 'forumPageSingleTopic'])->name('staff.forum.page-single-topic');
         Route::get('forum/page-create-topic', [StaffController::class, 'forumPageCreateTopic'])->name('staff.forum.page-create-topic');
+        Route::get('forum/page-edit-topic/{id}', [StaffController::class, 'forumPageEditTopic'])->name('staff.forum.page-edit-topic');
         Route::get('forum/page-single-user', [StaffController::class, 'forumPageSingleUser'])->name('staff.forum.page-single-user');
         Route::get('forum/page-single-threads', [StaffController::class, 'forumPageSingleThreads'])->name('staff.forum.page-single-threads');
         Route::get('forum/page-single-replies', [StaffController::class, 'forumPageSingleReplies'])->name('staff.forum.page-single-replies');
@@ -793,6 +796,7 @@ Route::group(['prefix' => 'staff'], function () {
         Route::get('forum/page-tabs-guidelines', [StaffController::class, 'forumPageTabGuidelines'])->name('staff.forum.page-tabs-guidelines');
 
         Route::post('form/page-create-topic', [StaffController::class, 'createpost'])->name('staff.forum.create-topic');
+        Route::post('form/page-update-topic', [StaffController::class, 'updatepost'])->name('staff.forum.update-topic');
         Route::get('forum/page-single-topic-val/{id}/{user_id}', [StaffController::class, 'forumPageSingleTopicwithvalue'])->name('staff.forum.page-single-topic-val');
         Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [StaffController::class, 'forumPageCategoriesSingle'])->name('staff.forum.page-categories-single-val');
         Route::post('form/postimage', [StaffController::class, 'imagestore'])->name('staff.forum.image.store');
@@ -1035,6 +1039,7 @@ Route::group(['prefix' => 'teacher'], function () {
         Route::get('forum/index', [TeacherController::class, 'forumIndex'])->name('teacher.forum.index');
         Route::get('forum/page-single-topic', [TeacherController::class, 'forumPageSingleTopic'])->name('teacher.forum.page-single-topic');
         Route::get('forum/page-create-topic', [TeacherController::class, 'forumPageCreateTopic'])->name('teacher.forum.page-create-topic');
+        Route::get('forum/page-edit-topic/{id}', [TeacherController::class, 'forumPageEditTopic'])->name('teacher.forum.page-edit-topic');
         Route::get('forum/page-single-user', [TeacherController::class, 'forumPageSingleUser'])->name('teacher.forum.page-single-user');
         Route::get('forum/page-single-threads', [TeacherController::class, 'forumPageSingleThreads'])->name('teacher.forum.page-single-threads');
         Route::get('forum/page-single-replies', [TeacherController::class, 'forumPageSingleReplies'])->name('teacher.forum.page-single-replies');
@@ -1046,6 +1051,7 @@ Route::group(['prefix' => 'teacher'], function () {
         Route::get('forum/page-tabs-guidelines', [TeacherController::class, 'forumPageTabGuidelines'])->name('teacher.forum.page-tabs-guidelines');
 
         Route::post('form/page-create-topic', [TeacherController::class, 'createpost'])->name('teacher.forum.create-topic');
+        Route::post('form/page-update-topic', [TeacherController::class, 'updatepost'])->name('teacher.forum.update-topic');
         Route::get('forum/page-single-topic-val/{id}/{user_id}', [TeacherController::class, 'forumPageSingleTopicwithvalue'])->name('teacher.forum.page-single-topic-val');
         Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [TeacherController::class, 'forumPageCategoriesSingle'])->name('teacher.forum.page-categories-single-val');
         Route::post('form/postimage', [TeacherController::class, 'imagestore'])->name('teacher.forum.image.store');
@@ -1147,6 +1153,7 @@ Route::group(['prefix' => 'parent'], function () {
         Route::get('forum/index', [ParentController::class, 'forumIndex'])->name('parent.forum.index');
         Route::get('forum/page-single-topic', [ParentController::class, 'forumPageSingleTopic'])->name('parent.forum.page-single-topic');
         Route::get('forum/page-create-topic', [ParentController::class, 'forumPageCreateTopic'])->name('parent.forum.page-create-topic');
+        Route::get('forum/page-edit-topic/{id}', [ParentController::class, 'forumPageEditTopic'])->name('parent.forum.page-edit-topic');
         Route::get('forum/page-single-user', [ParentController::class, 'forumPageSingleUser'])->name('parent.forum.page-single-user');
         Route::get('forum/page-single-threads', [ParentController::class, 'forumPageSingleThreads'])->name('parent.forum.page-single-threads');
         Route::get('forum/page-single-replies', [ParentController::class, 'forumPageSingleReplies'])->name('parent.forum.page-single-replies');
@@ -1158,6 +1165,7 @@ Route::group(['prefix' => 'parent'], function () {
         Route::get('forum/page-tabs-guidelines', [ParentController::class, 'forumPageTabGuidelines'])->name('parent.forum.page-tabs-guidelines');
 
         Route::post('form/page-create-topic', [ParentController::class, 'createpost'])->name('parent.forum.create-topic');
+        Route::post('form/page-update-topic', [ParentController::class, 'updatepost'])->name('parent.forum.update-topic');
         Route::get('forum/page-single-topic-val/{id}/{user_id}', [ParentController::class, 'forumPageSingleTopicwithvalue'])->name('parent.forum.page-single-topic-val');
         Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [ParentController::class, 'forumPageCategoriesSingle'])->name('parent.forum.page-categories-single-val');
         Route::post('form/postimage', [ParentController::class, 'imagestore'])->name('parent.forum.image.store');
@@ -1221,6 +1229,7 @@ Route::group(['prefix' => 'student'], function () {
         Route::get('forum/index', [StudentController::class, 'forumIndex'])->name('student.forum.index');
         Route::get('forum/page-single-topic', [StudentController::class, 'forumPageSingleTopic'])->name('student.forum.page-single-topic');
         Route::get('forum/page-create-topic', [StudentController::class, 'forumPageCreateTopic'])->name('student.forum.page-create-topic');
+        Route::get('forum/page-edit-topic/{id}', [StudentController::class, 'forumPageEditTopic'])->name('student.forum.page-edit-topic');
         Route::get('forum/page-single-user', [StudentController::class, 'forumPageSingleUser'])->name('student.forum.page-single-user');
         Route::get('forum/page-single-threads', [StudentController::class, 'forumPageSingleThreads'])->name('student.forum.page-single-threads');
         Route::get('forum/page-single-replies', [StudentController::class, 'forumPageSingleReplies'])->name('student.forum.page-single-replies');
@@ -1233,6 +1242,7 @@ Route::group(['prefix' => 'student'], function () {
 
 
         Route::post('form/page-create-topic', [StudentController::class, 'createpost'])->name('student.forum.create-topic');
+        Route::post('form/page-update-topic', [StudentController::class, 'updatepost'])->name('student.forum.update-topic');
         Route::get('forum/page-single-topic-val/{id}/{user_id}', [StudentController::class, 'forumPageSingleTopicwithvalue'])->name('student.forum.page-single-topic-val');
         Route::get('forum/page-categories-single-val/{categId}/{user_id}/{category_names}', [StudentController::class, 'forumPageCategoriesSingle'])->name('student.forum.page-categories-single-val');
         Route::post('form/postimage', [StudentController::class, 'imagestore'])->name('student.forum.image.store');

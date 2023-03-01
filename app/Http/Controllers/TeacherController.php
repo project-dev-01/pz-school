@@ -278,7 +278,7 @@ class TeacherController extends Controller
     }
     public function forumPageCreateTopic()
     {
-        // $user_id = session()->get('user_id');
+        $id = session()->get('user_id');
         // $data = [
         //     'user_id' => $user_id
         // ];
@@ -294,6 +294,31 @@ class TeacherController extends Controller
         return view('teacher.forum.page-create-topic', [
             'category' => $category['data'],
             //'forum_list' => $forum_list['data'],
+            'forum_list' => !empty($forum_list['data']) ? $forum_list['data'] : [],
+            'usernames' => $usernames['data'],
+            'user_id' => $id
+        ]);
+    }
+    public function forumPageEditTopic($id)
+    {
+        // $user_id = session()->get('user_id');
+        // $data = [
+        //     'user_id' => $user_id
+        // ];
+        $user_id = session()->get('role_id');
+        $data = [
+            'user_id' => $user_id,
+            'id'=>$id
+        ];
+        $category = Helper::GetMethod(config('constants.api.category'));
+        $usernames = Helper::GETMethodWithData(config('constants.api.usernames_autocomplete'), $data);
+        // dd($usernames);
+        $forum_edit = Helper::GETMethodWithData(config('constants.api.forum_edit'), $data);
+        $forum_list = Helper::GETMethodWithData(config('constants.api.forum_list'), $data);
+        // dd($forum_edit);
+        return view('teacher.forum.page-edit-topic', [
+            'category' => $category['data'],
+            'forum_edit' => !empty($forum_edit['data']) ? $forum_edit['data'] : [],
             'forum_list' => !empty($forum_list['data']) ? $forum_list['data'] : [],
             'usernames' => $usernames['data']
         ]);
@@ -338,7 +363,7 @@ class TeacherController extends Controller
     }
     public function forumPageCategories()
     {
-        $user_id = session()->get('user_id');
+        $user_id = session()->get('role_id');
         $data = [
             'user_id' => $user_id
         ];
@@ -374,8 +399,9 @@ class TeacherController extends Controller
     // forum create post 
     public function createpost(Request $request)
     {
+        
         $current_user = session()->get('role_id');
-        $rollid_tags = $request->tags;
+        $rollid_tags = implode(",", $request->tags);
         $adminid = 2;
         $tags_add_also_currentroll = $rollid_tags . ',' . $current_user . ',' . $adminid;
         $data = [
@@ -387,10 +413,34 @@ class TeacherController extends Controller
             'body_content' => $request->tpbody,
             'category' => $request->category,
             'tags' => $tags_add_also_currentroll,
-            'imagesorvideos' => $request->inputTopicTitle,
+            // 'imagesorvideos' => $request->inputTopicTitle,
             'threads_status' => 1
         ];
         $response = Helper::PostMethod(config('constants.api.forum_cpost'), $data);
+        return $response;
+    }
+    // forum update post 
+    public function updatepost(Request $request)
+    {
+        $current_user = session()->get('role_id');
+        $rollid_tags = implode(",", $request->tags);
+        $adminid = 2;
+        $tags_add_also_currentroll = $rollid_tags . ',' . $current_user . ',' . $adminid;
+        $data = [
+            'id'=> $request->id,
+            'user_id' => session()->get('user_id'),
+            'user_name' => session()->get('name'),
+            'topic_title' => $request->inputTopicTitle,
+            'topic_header' => $request->inputTopicHeader,
+            'types' => $request->topictype,
+            'body_content' => $request->tpbody,
+            'category' => $request->category,
+            'tags' => $tags_add_also_currentroll,
+            // 'imagesorvideos' => $request->inputTopicTitle,
+            'threads_status' => 2
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.forum_updatepost'), $data);
         return $response;
     }
     // Forum single topic with value pass
@@ -455,9 +505,9 @@ class TeacherController extends Controller
 
             echo json_encode([
 
-                'default' => asset('storage/forumupload/' . $filenametostore),
+                'default' => asset('storage/app/public/forumupload/' . $filenametostore),
 
-                '500' =>  asset('storage/forumupload/' . $filenametostore)
+                '500' =>  asset('storage/app/public/forumupload/' . $filenametostore)
 
             ]);
         }
