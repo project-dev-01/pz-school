@@ -25,10 +25,10 @@
                 <div class="card-body">
 
                     <div class="media mb-3">
-                        <img src="{{ asset('public/images/users/user-1.jpg') }}" class="mr-2 rounded-circle" height="42" alt="Brandon Smith">
+                        <img src="{{ asset('public/images/users/user-1.jpg') }}" class="mr-2 rounded-circle" height="42" >
                         <div class="media-body">
                             <h5 class="mt-0 mb-0 font-15">
-                                <a href="javascript: void(0);" class="text-reset">Geneva McKnight</a>(Teacher)
+                                <a href="javascript: void(0);" class="text-reset">{{$name}}</a>({{$role}})
                             </h5>
                             <p class="mt-1 mb-0 text-muted font-14">
                                 <small class="mdi mdi-circle text-success"></small> Online
@@ -52,15 +52,12 @@
 
                     <h6 class="font-13 text-muted text-uppercase">Group Chats</h6>
                     <div class="p-2">
+                        @foreach($group_list as $group)
                         <a href="javascript: void(0);" class="text-reset mb-2 d-block">
                             <i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
-                            <span class="mb-0 mt-1">Grade A Group</span>
+                            <span class="mb-0 mt-1">{{$group['name']}} Group</span>
                         </a>
-
-                        <a href="javascript: void(0);" class="text-reset mb-2 d-block">
-                            <i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-warning"></i>
-                            <span class="mb-0 mt-1">Office Group</span>
-                        </a>
+                        @endforeach
                     </div>
 
                     <h6 class="font-13 text-muted text-uppercase mb-2">Parent Contacts</h6>
@@ -69,52 +66,49 @@
                     <div class="row">
                         <div class="col">
                             <div data-simplebar style="max-height: 375px">
+                                @foreach($parent_list as $parent)
                                 <a href="javascript:void(0);" class="text-body">
                                     <div class="media p-2">
-                                        <img src="{{ asset('public/images/users/user-2.jpg') }}" class="mr-2 rounded-circle" height="42" alt="Brandon Smith" />
+                                        <img src="{{ $parent['photo'] && asset('public/users/images/'.$parent['photo']) ? asset('public/users/images/'.$parent['photo']) : asset('public/images/users/default.jpg') }}" class="mr-2 rounded-circle" height="42"/>
                                         <div class="media-body">
                                             <h5 class="mt-0 mb-0 font-14">
-                                                <span class="float-right text-muted font-weight-normal font-12">4:30am</span>
-                                                Brandon Smith
+                                                <span class="float-right text-muted font-weight-normal font-12"></span>
+                                                {{$parent['name']}}
                                             </h5>
-                                            <p class="mt-1 mb-0 text-muted font-14">
-                                                <span class="w-25 float-right text-right"><span class="badge badge-soft-danger">3</span></span>
-                                                <span class="w-75">What academic standard do you use?</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <a href="javascript:void(0);" class="text-body">
-                                    <div class="media p-2">
-                                        <img src="{{ asset('public/images/users/user-5.jpg') }}" class="mr-2 rounded-circle" height="42" alt="James Z" />
-                                        <div class="media-body">
-                                            <h5 class="mt-0 mb-0 font-14">
-                                                <span class="float-right text-muted font-weight-normal font-12">5:30am</span>
-                                                James Z
-                                            </h5>
-                                            <p class="mt-1 mb-0 text-muted font-14">
-                                                <span class="w-75">Do you focus on strength and weakness</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <a href="javascript:void(0);" class="text-body">
-                                    <div class="media p-2">
-                                        <img src="{{ asset('public/images/users/user-7.jpg') }}" class="mr-2 rounded-circle" height="42" alt="Maria C" />
-                                        <div class="media-body">
-                                            <h5 class="mt-0 mb-0 font-14">
-                                                <span class="float-right text-muted font-weight-normal font-12">Thu</span>
-                                                Maria C
-                                            </h5>
-                                            <p class="mt-1 mb-0 text-muted font-14">
+                                            <!-- <p class="mt-1 mb-0 text-muted font-14">
                                                 <span class="w-25 float-right text-right"><span class="badge badge-soft-danger">2</span></span>
                                                 <span class="w-75">Thanks</span>
-                                            </p>
+                                            </p> -->
                                         </div>
                                     </div>
                                 </a>
+                                @endforeach
+                            </div> <!-- end slimscroll-->
+                        </div> <!-- End col -->
+                    </div>
+                    <h6 class="font-13 text-muted text-uppercase mb-2">Teacher Contacts</h6>
+
+                    <!-- users -->
+                    <div class="row">
+                        <div class="col">
+                            <div data-simplebar style="max-height: 375px">
+                                @foreach($teacher_list as $teacher)
+                                <a href="javascript:void(0);" class="text-body">
+                                    <div class="media p-2">
+                                        <img src="{{ $teacher['photo'] && asset('public/users/images/'.$teacher['photo']) ? asset('public/users/images/'.$teacher['photo']) : asset('public/images/users/default.jpg') }}" class="mr-2 rounded-circle" height="42" alt="Maria C" />
+                                        <div class="media-body">
+                                            <h5 class="mt-0 mb-0 font-14">
+                                                <span class="float-right text-muted font-weight-normal font-12"></span>
+                                                {{$teacher['name']}}
+                                            </h5>
+                                            <!-- <p class="mt-1 mb-0 text-muted font-14">
+                                                <span class="w-25 float-right text-right"><span class="badge badge-soft-danger">2</span></span>
+                                                <span class="w-75">Thanks</span>
+                                            </p> -->
+                                        </div>
+                                    </div>
+                                </a>
+                                @endforeach
                             </div> <!-- end slimscroll-->
                         </div> <!-- End col -->
                     </div>

@@ -20,15 +20,15 @@ class ParentController extends Controller
         $student_id = session()->get('student_id');
         $parent_id = session()->get('ref_user_id');
 
+        // dd($student_id);
         $data = [
             'user_id' => $user_id,
-            'student_id' => $student_id,
+            'student_id' => isset($student_id) ? $student_id : 0,
             'academic_session_id' => session()->get('academic_session_id')
         ];
         $parent_ids = [
             'parent_id' => $parent_id,
         ];
-        // dd($data);
 
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
         $get_homework_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_homework_list_dashboard'), $data);
@@ -37,7 +37,7 @@ class ParentController extends Controller
         $greetings = Helper::greetingMessage();
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
-        // dd($get_homework_list_dashboard);
+        // dd($get_to_do_list_dashboard);
         $exam_by_student = Helper::GETMethodWithData(config('constants.api.exam_by_student'), $data);
         $all_exam_subject_scores = Helper::PostMethod(config('constants.api.all_exam_subject_scores'), $data);
         
@@ -223,8 +223,9 @@ class ParentController extends Controller
 
     public function examSchedule()
     {
+        $student_id = session()->get('student_id');
         $data = [
-            'student_id' => session()->get('student_id')
+            'student_id' => isset($student_id) ? $student_id : 0,
         ];
         $response = Helper::PostMethod(config('constants.api.exam_timetable_student_parent'), $data);
         // dd($response);
@@ -337,25 +338,16 @@ class ParentController extends Controller
         );
 
         $timetable = Helper::PostMethod(config('constants.api.timetable_parent'), $data);
-        if ($timetable['code'] == "200") {
-            return view(
-                'parent.time_table.index',
-                [
-                    'timetable' => isset($timetable['data']['timetable']) ? $timetable['data']['timetable'] : 0,
-                    'details' => isset($timetable['data']['details']) ? $timetable['data']['details'] : 0,
-                    'days' => $days,
-                    'max' => isset($timetable['data']['max']) ? $timetable['data']['max'] : 0
+        return view(
+            'parent.time_table.index',
+            [
+                'timetable' => isset($timetable['data']['timetable']) ? $timetable['data']['timetable'] : 0,
+                'details' => isset($timetable['data']['details']) ? $timetable['data']['details'] : 0,
+                'days' => $days,
+                'max' => isset($timetable['data']['max']) ? $timetable['data']['max'] : 0
 
-                ]
-            );
-        } else {
-            return view(
-                'parent.time_table.index',
-                [
-                    'timetable' => "",
-                ]
-            );
-        }
+            ]
+        );
     }
     // forum screen pages start
     public function forumIndex()
@@ -614,8 +606,9 @@ class ParentController extends Controller
     //attendance
     public function attendance()
     {
+        $student_id = session()->get('student_id');
         $data = [
-            'student_id' => session()->get('student_id'),
+            'student_id' => isset($student_id) ? $student_id : 0,
             'academic_session_id' => session()->get('academic_session_id')
         ];
 
@@ -634,16 +627,17 @@ class ParentController extends Controller
     // Home work screen pages start
     public function homeworklist()
     {
-        $student = session()->get('student_id');
+        $student_id = session()->get('student_id');
         $data = [
-            'student_id' => $student,
+            'student_id' => isset($student_id) ? $student_id : 0,
             'academic_session_id' => session()->get('academic_session_id')
         ];
         // dd($data);
         $homework = Helper::PostMethod(config('constants.api.homework_student'), $data);
-
         $get_student_by_all_subjects = Helper::PostMethod(config('constants.api.get_student_by_all_subjects'), $data);
-        //  dd($get_student_by_all_subjects);
+        
+
+        // dd($get_student_by_all_subjects);
         return view(
             'parent.homework.list',
             [
@@ -819,14 +813,15 @@ class ParentController extends Controller
     }
     public function analytic()
     {
+        $student_id = session()->get('student_id');
         $data = [
-            'student_id' => session()->get('student_id'),
+            'student_id' => isset($student_id) ? $student_id : 0,
             'academic_session_id' => session()->get('academic_session_id')
         ];
         $get_student_by_all_subjects = Helper::PostMethod(config('constants.api.get_student_by_all_subjects'), $data);
         $get_class_section_by_student = Helper::PostMethod(config('constants.api.get_class_section_by_student'), $data);
 
-        // dd($get_class_section_by_student['data']);
+        // dd($get_class_section_by_student);
         return view(
             'parent.analyticrep.analyticreport',
             [

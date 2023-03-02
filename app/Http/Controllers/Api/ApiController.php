@@ -1871,7 +1871,10 @@ class ApiController extends BaseController
             // get data
             $studentId = $request->student_id;
             $enroll = $conn->table('enrolls')->where('student_id', $studentId)->first();
-            $eventDetails = $conn->table('events')
+            $eventDetails = [];
+            if($enroll){
+
+                $eventDetails = $conn->table('events')
                 ->select("events.*", DB::raw("GROUP_CONCAT(DISTINCT  classes.name) as class_name"), 'event_types.name as type', DB::raw("GROUP_CONCAT(DISTINCT  groups.name) as group_name"))
                 ->leftjoin("classes", \DB::raw("FIND_IN_SET(classes.id,events.selected_list)"), ">", \DB::raw("'0'"))
                 ->leftjoin("groups", \DB::raw("FIND_IN_SET(groups.id,events.selected_list)"), ">", \DB::raw("'0'"))
@@ -1881,6 +1884,7 @@ class ApiController extends BaseController
                 ->groupBy("events.id")
                 ->orderBy('events.id', 'desc')
                 ->get()->toArray();
+            }
             // dd($eventDetails);
             return $this->successResponse($eventDetails, 'Event record fetch successfully');
         }
@@ -7772,7 +7776,11 @@ class ApiController extends BaseController
             $student = $con->table('enrolls')->where('student_id', $request->student_id)->where('active_status', '0')->first();
             // get data
             $student_id = $request->student_id;
-            $homework['homeworks'] = $con->table('homeworks')->select('homeworks.*', 'sections.name as section_name', 'classes.name as class_name', 'subjects.name as subject_name', 'homeworks.document', 'homework_evaluation.file', 'homework_evaluation.evaluation_date', 'homework_evaluation.remarks', 'homework_evaluation.status', 'homework_evaluation.rank')
+            $homework = [];
+            $homework['homeworks'] = Null;
+            $homework['count'] = NULL;
+            if($student_id) {
+                $homework['homeworks'] = $con->table('homeworks')->select('homeworks.*', 'sections.name as section_name', 'classes.name as class_name', 'subjects.name as subject_name', 'homeworks.document', 'homework_evaluation.file', 'homework_evaluation.evaluation_date', 'homework_evaluation.remarks', 'homework_evaluation.status', 'homework_evaluation.rank')
                 ->leftJoin('subjects', 'homeworks.subject_id', '=', 'subjects.id')
                 ->leftJoin('sections', 'homeworks.section_id', '=', 'sections.id')
                 ->leftJoin('classes', 'homeworks.class_id', '=', 'classes.id')
@@ -7808,6 +7816,8 @@ class ApiController extends BaseController
                 $homework['count']['ontime_percentage'] = round(($count->ontime / $total) * 100, 2);
                 $homework['count']['late_percentage'] =  round(($count->late / $total) * 100, 2);
             }
+            }
+            
 
             // $homework['subjects'] = $con->table('subjects')->select('subjects.id', 'subjects.name')->join('subject_assigns', 'subject_assigns.subject_id', '=', 'subjects.id')->groupBy('subjects.id')->get();
             return $this->successResponse($homework, 'Homework record fetch successfully');
@@ -10523,6 +10533,7 @@ class ApiController extends BaseController
                 $current_address = isset($request->current_address) ? Crypt::encryptString($request->current_address) : "";
                 $permanent_address = isset($request->permanent_address) ? Crypt::encryptString($request->permanent_address) : "";
 
+                // return $request;
                 $studentId = $conn->table('students')->insertGetId([
                     'year' => $request->year,
                     'father_id' => $request->father_id,
@@ -10560,7 +10571,7 @@ class ApiController extends BaseController
                     'status' => $request->status,
                     'created_at' => date("Y-m-d H:i:s")
                 ]);
-
+                // return $studentId;
                 $session_id = 0;
                 if (isset($request->session_id)) {
                     $session_id = $request->session_id;
@@ -10582,33 +10593,34 @@ class ApiController extends BaseController
 
 
                 $studentName = $request->first_name . ' ' . $request->last_name;
+
+                $success = [];
+    
+                if (!$studentId) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong add Student']);
+                } else {
+                    // add User
+                    $user = new User();
+                    $user->name = $studentName;
+                    $user->user_id = $studentId;
+                    $user->role_id = "6";
+                    $user->branch_id = $request->branch_id;
+                    $user->email = $request->email;
+                    $user->status = $request->status;
+                    $user->password = bcrypt($request->password);
+                    $query = $user->save();
+    
+                    // return $user->id;
+                    $success = [];
+                    if (!$query) {
+                        return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                    } else {
+                        return $this->successResponse($success, 'Student has been successfully saved');
+                    }
+                }
             }
 
             // return $request;
-            $success = [];
-
-            if (!$studentId) {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong add Student']);
-            } else {
-                // add User
-                $user = new User();
-                $user->name = $studentName;
-                $user->user_id = $studentId;
-                $user->role_id = "6";
-                $user->branch_id = $request->branch_id;
-                $user->email = $request->email;
-                $user->status = $request->status;
-                $user->password = bcrypt($request->password);
-                $query = $user->save();
-
-                // return $user->id;
-                $success = [];
-                if (!$query) {
-                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-                } else {
-                    return $this->successResponse($success, 'Student has been successfully saved');
-                }
-            }
         }
     }
     // get Teacher list 
@@ -11449,7 +11461,7 @@ class ApiController extends BaseController
                 ->when($name, function ($query, $name) {
                     return $query->where('s.first_name', 'like', '%' . $name . '%')->orWhere('s.last_name', 'like', '%' . $name . '%');
                 })
-                ->where('e.academic_session_id', '=', $request->academic_session_id)
+                // ->where('e.academic_session_id', '=', $request->academic_session_id)
                 ->where('e.active_status', '=', "0")
                 ->get()->toArray();
 
@@ -11663,6 +11675,7 @@ class ApiController extends BaseController
                 ->select(
                     's.*',
                     DB::raw("CONCAT(s.first_name, ' ', s.last_name) as name"),
+                    'e.academic_session_id as year',
                     'c.name as class_name',
                     'sec.name as section_name',
                     'e.class_id',
@@ -11706,7 +11719,7 @@ class ApiController extends BaseController
                 ->where('hostel_room.hostel_id', $hostel_id)
                 ->get();
 
-            return $this->successResponse($studentDetail, 'Designation row fetch successfully');
+            return $this->successResponse($studentDetail, 'Student record fetch successfully');
         }
     }
 
@@ -11849,7 +11862,7 @@ class ApiController extends BaseController
                     $query->branch_id = $request->branch_id;
                     $query->email = $request->email;
                     $query->status = $request->status;
-                    $query->password = bcrypt($request->parent_password);
+                    $query->password = bcrypt($request->password);
                     $query->save();
                 }
 
@@ -12171,9 +12184,11 @@ class ApiController extends BaseController
             $student_id = $request->student_id;
             $con = $this->createNewConnection($request->branch_id);
             $student = $con->table('enrolls')->where('student_id', $student_id)->where('active_status', '=', '0')->first();
-            // return 1;
+            
 
-            $data = $con->table('homeworks')->select('homeworks.title', 'homeworks.date_of_submission', 'subjects.name as subject_name')
+            $data = [];
+            if($student) {
+                $data = $con->table('homeworks')->select('homeworks.title', 'homeworks.date_of_submission', 'subjects.name as subject_name')
                 ->leftJoin('subjects', 'homeworks.subject_id', '=', 'subjects.id')
                 ->leftJoin('homework_evaluation', 'homeworks.id', '=', 'homework_evaluation.homework_id')
                 ->whereNotIn('homeworks.id', function ($q) use ($student_id) {
@@ -12186,7 +12201,8 @@ class ApiController extends BaseController
                 ->where('homeworks.academic_session_id', $request->academic_session_id)
                 ->orderBy('homeworks.date_of_submission', 'desc')
                 ->get();
-
+            }
+            // return $data;
             return $this->successResponse($data, 'Student Pending Homework List fetch successfully');
         }
     }
@@ -15268,7 +15284,10 @@ class ApiController extends BaseController
         } else {
             // create new connection
             $Connection = $this->createNewConnection($request->branch_id);
-            $getStudentAllSubjects = $Connection->table('enrolls as en')
+            $getStudentAllSubjects = [];
+            if($request->student_id){
+
+                $getStudentAllSubjects = $Connection->table('enrolls as en')
                 ->select(
                     // 'en.student_id',
                     // 'en.class_id',
@@ -15290,6 +15309,7 @@ class ApiController extends BaseController
                 ])
                 ->groupBy('sa.subject_id')
                 ->get();
+            }
 
             return $this->successResponse($getStudentAllSubjects, 'get all subjects fetch successfully');
         }

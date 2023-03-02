@@ -43,7 +43,8 @@ class ChatController extends BaseController
                     // 'us.role_id',
                     // 'us.user_id',
                     'us.email',
-                    'rol.role_name'
+                    'rol.role_name',
+                    'stf.photo'
                 )
                 ->join('' . $main_db . '.users as us', 'stf.id', '=', 'us.user_id')
                 ->join('' . $main_db . '.roles as rol', 'rol.id', '=', 'us.role_id')
@@ -52,7 +53,7 @@ class ChatController extends BaseController
                 ])
                 ->whereIn('us.role_id', ['4'])
                 ->groupBy('stf.id')
-                ->get();
+                ->limit(10)->get();
             return $this->successResponse($allTeachers, 'get all teacher record fetch successfully');
         }
     }
@@ -73,9 +74,9 @@ class ChatController extends BaseController
             $allTeachers = $conn->table('parent as prnt')
                 ->select(
                     'prnt.id',
-                    DB::raw("CONCAT(prnt.first_name, ' ', prnt.last_name) as name")
-                )
-                ->get();
+                    DB::raw("CONCAT(prnt.first_name, ' ', prnt.last_name) as name"),
+                    'prnt.photo'
+                )->limit(10)->get();
             return $this->successResponse($allTeachers, 'get all teacher record fetch successfully');
         }
     }
@@ -156,6 +157,34 @@ class ChatController extends BaseController
             } else {
                 return $this->successResponse($success, 'Message sent successfully');
             }
+        }
+    }
+    
+    // get all Groups
+    public function chatGetGroupList(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'token' => 'required',
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // get all teachers
+            $staff = $request->staff_id;
+            $allTeachers = [];
+            $query = $conn->table('groups as gs')
+                ->select(
+                    'gs.id',
+                    'gs.name'
+                );
+                if (isset($staff)) {
+                    $allTeachers = $query->whereRaw("find_in_set($staff,gs.staff)")->get();
+                }
+            return $this->successResponse($allTeachers, 'get all Group record fetch successfully');
         }
     }
 }

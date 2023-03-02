@@ -3666,7 +3666,7 @@ class AdminController extends Controller
 
         ];
 
-        // dd($extension);
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.admission_add'), $data);
         // dd($response);
         return $response;
@@ -3842,6 +3842,7 @@ class AdminController extends Controller
 
         ];
         $response = Helper::PostMethod(config('constants.api.student_list'), $data);
+        // dd($response);
         return DataTables::of($response['data'])
 
             ->addIndexColumn()
@@ -3915,6 +3916,7 @@ class AdminController extends Controller
         $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
         $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
         $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
+        // dd($student);
         return view(
             'admin.student.edit',
             [

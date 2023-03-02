@@ -1139,7 +1139,7 @@
                                     <label for="drp_transport_route">Transport Route</label>
 
                                     <select id="drp_transport_route" name="drp_transport_route" class="form-control">
-                                        <option value="">Select Transport</option>
+                                        <option value="0">Select Transport</option>
                                         @foreach($transport as $trans)
                                         <option value="{{$trans['id']}}">{{$trans['name']}}</option>
                                         @endforeach

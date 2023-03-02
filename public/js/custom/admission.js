@@ -73,7 +73,9 @@ $(function () {
         }
     });
 
-    $('#guardian_name').keyup(function(){ 
+    // $("#class_id").on('change', function (e) {
+        // $("#users").bind("keydown change", function()
+    $('#guardian_name').bind("keydown change", function() {
         var name = $(this).val();
         if(name != '')
         {

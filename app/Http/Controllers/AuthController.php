@@ -671,9 +671,8 @@ class AuthController extends Controller
         } else {
             $req->session()->put('academic_session_id', 0);
         }
-        // dd($userDetails['data']['StudentID'][0]['id']);
         if (isset($userDetails['data']['StudentID'])) {
-            $req->session()->put('student_id', $userDetails['data']['StudentID'][0]['id']);
+            $req->session()->put('student_id', isset($userDetails['data']['StudentID'][0]['id']) ? $userDetails['data']['StudentID'][0]['id'] : 0);
             $req->session()->put('all_child', $userDetails['data']['StudentID']);
         } else {
             $req->session()->put('student_id', null);

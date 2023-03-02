@@ -854,7 +854,10 @@ class ApiControllerOne extends BaseController
                 ->first();
             // return $getStudentDetails;
             // dd($getStudentDetails);
-            $details = $con->table('timetable_exam')->select('exam.name', 'timetable_exam.exam_id')
+            $details = [];
+            if($getStudentDetails){
+
+                $details = $con->table('timetable_exam')->select('exam.name', 'timetable_exam.exam_id')
                 ->join('exam', 'timetable_exam.exam_id', '=', 'exam.id')
                 ->where([
                     ['class_id', $getStudentDetails->class_id],
@@ -866,6 +869,7 @@ class ApiControllerOne extends BaseController
                 ->groupBy('timetable_exam.exam_id')
                 ->orderBy('timetable_exam.exam_date', 'desc')
                 ->get();
+            }
             return $this->successResponse($details, 'Exam Timetable record fetch successfully');
         }
     }
@@ -6989,23 +6993,27 @@ class ApiControllerOne extends BaseController
                 ])
                 ->groupBy('en.student_id')
                 ->first();
-            $class_id = $student->class_id;
-            $section_id = $student->section_id;
-            $getExamsName = $Connection->table('timetable_exam as texm')
-                ->select(
-                    'texm.exam_id as id',
-                    'ex.name as name',
-                    'texm.exam_date'
-                )
-                ->leftJoin('exam as ex', 'texm.exam_id', '=', 'ex.id')
-                ->where('texm.exam_date', '<', $today)
-                ->when($class_id != "All", function ($q)  use ($class_id) {
-                    $q->where('texm.class_id', $class_id);
-                })
-                ->where('texm.section_id', '=', $section_id)
-                ->where('texm.academic_session_id', '=', $request->academic_session_id)
-                ->groupBy('texm.exam_id')
-                ->get();
+                $getExamsName = [];
+                if ($student) {
+                    $class_id = $student->class_id;
+                    $section_id = $student->section_id;
+                    $getExamsName = $Connection->table('timetable_exam as texm')
+                        ->select(
+                            'texm.exam_id as id',
+                            'ex.name as name',
+                            'texm.exam_date'
+                        )
+                        ->leftJoin('exam as ex', 'texm.exam_id', '=', 'ex.id')
+                        ->where('texm.exam_date', '<', $today)
+                        ->when($class_id != "All", function ($q)  use ($class_id) {
+                            $q->where('texm.class_id', $class_id);
+                        })
+                        ->where('texm.section_id', '=', $section_id)
+                        ->where('texm.academic_session_id', '=', $request->academic_session_id)
+                        ->groupBy('texm.exam_id')
+                        ->get();
+                }
+            
             return $this->successResponse($getExamsName, 'Exams  list of Name record fetch successfully');
         }
     }

@@ -40,16 +40,16 @@
                     </div>
                     <div class="col-6">
                         <div class="text-right">
-                            <h3 class="my-1"><span data-plugin="counterup">{{$count['ontime']}}</span></h3>
+                            <h3 class="my-1"><span data-plugin="counterup">@if($count){{$count['ontime']}}@endif</span></h3>
                             <p class="text-muted mb-1 text-truncate">On Time Submission</p>
                         </div>
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h6 class="text-uppercase">Target <span class="float-right">{{$count['ontime_percentage']}}%</span></h6>
+                    <h6 class="text-uppercase">Target <span class="float-right">@if($count){{$count['ontime_percentage']}}@endif%</span></h6>
                     <div class="progress progress-sm m-0">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="{{$count['ontime_percentage']}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$count['ontime_percentage']}}%">
-                            <span class="sr-only">{{$count['ontime_percentage']}}% Complete</span>
+                        <div class="progress-bar" role="progressbar" aria-valuenow="@if($count){{$count['ontime_percentage']}}@endif" aria-valuemin="0" aria-valuemax="100" @if($count)style="width: {{$count['ontime_percentage']}}%"@endif>
+                            <span class="sr-only">@if($count){{$count['ontime_percentage']}}@endif% Complete</span>
                         </div>
                     </div>
                 </div>
@@ -66,16 +66,16 @@
                     </div>
                     <div class="col-6">
                         <div class="text-right">
-                            <h3 class="my-1"><span data-plugin="counterup">{{$count['late']}}</span></h3>
+                            <h3 class="my-1"><span data-plugin="counterup">@if($count){{$count['late']}}@endif</span></h3>
                             <p class="text-muted mb-1 text-truncate">Late Submission </p>
                         </div>
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h6 class="text-uppercase">Target <span class="float-right">{{$count['late_percentage']}}%</span></h6>
+                    <h6 class="text-uppercase">Target <span class="float-right">@if($count){{$count['late_percentage']}}@endif%</span></h6>
                     <div class="progress progress-sm m-0">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="{{$count['late_percentage']}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$count['late_percentage']}}%">
-                            <span class="sr-only">{{$count['late_percentage']}}% Complete</span>
+                        <div class="progress-bar" role="progressbar" aria-valuenow="@if($count){{$count['late_percentage']}}@endif" aria-valuemin="0" aria-valuemax="100" @if($count)style="width: {{$count['late_percentage']}}%"@endif>
+                            <span class="sr-only">@if($count){{$count['late_percentage']}}@endif% Complete</span>
                         </div>
                     </div>
                 </div>
@@ -161,10 +161,11 @@
                     <li class="nav-item">
                         <h4 class="nav-link" id="title">
                             HomeWork List (All Subjects)
-                            <h4>
+                        <h4>
                     </li>
                 </ul><br>
                 <div class="card-body" id="homework_list">
+                    @if($homework)
                     @foreach($homework as $key=>$work)
                     <form class="submitHomeworkForm" id="form{{$key}}" method="post" enctype="multipart/form-data" autocomplete="off">
                         @csrf
@@ -267,6 +268,7 @@
 
                     </form>
                     @endforeach
+                    @endif
                     <div class="form-group text-right m-b-0">
 
                     </div>

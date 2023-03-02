@@ -804,6 +804,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // chat conversations start
     Route::get('chat/get_teacher_list', [ChatController::class, 'chatGetTeacherList']);
     Route::get('chat/get_parent_list', [ChatController::class, 'chatGetParentList']);
+    Route::get('chat/get_group_list', [ChatController::class, 'chatGetGroupList']);
     Route::get('chat/get_teacher_assign_parent_list', [ChatController::class, 'chatGetTeacherAssignParentList']);
     Route::get('chat/sent_messages', [ChatController::class, 'chatSentMessage']);
     // chat conversations end

@@ -30,11 +30,13 @@
                 </ul><br>
                 <div class="card-body">
                     <form id="analyticCrepFilter" autocomplete="off">
+                        @if($get_class_section_by_student)
                         <input type="hidden" id="studentID" class="form-control" name="student_id" value="{{ $get_class_section_by_student['student_id'] }}">
                         <input type="hidden" id="changeClassName" class="form-control" name="class_id" value="{{ $get_class_section_by_student['class_id'] }}">
                         <input type="hidden" id="sectionID" class="form-control" name="section_id" value="{{ $get_class_section_by_student['section_id'] }}">
                         <input type="hidden" id="semester_id" class="form-control" name="semester_id" value="{{ $get_class_section_by_student['semester_id'] }}">
                         <input type="hidden" id="session_id" class="form-control" name="session_id" value="{{ $get_class_section_by_student['session_id'] }}">
+                        @endif
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">

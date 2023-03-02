@@ -563,7 +563,21 @@ class TeacherController extends Controller
     }
     public function chatShow()
     {
-        return view('teacher.chat.index');
+        $data = [
+            'staff_id' => session()->get('ref_user_id')
+        ];
+        $group_list = Helper::GETMethodWithData(config('constants.api.chat_group_list'), $data);
+        $parent_list = Helper::GetMethod(config('constants.api.chat_parent_list'));
+        $teacher_list = Helper::GetMethod(config('constants.api.chat_teacher_list'));
+        // dd($teacher_list);
+        return view('teacher.chat.index', [
+            'teacher_list' => $teacher_list['data'],
+            'parent_list' => $parent_list['data'],
+            'group_list' => $group_list['data'],
+            'name' => session()->get('name'),
+            'role' => "Teacher",
+        ]);
+        return view('teacher..index');
     }
     public function taskIndex()
     {
