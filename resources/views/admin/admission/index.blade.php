@@ -354,7 +354,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="txt_mobile_no">Mobile No<span class="text-danger">*</span></label>
-                                    <input type="tel" class="form-control" name="txt_mobile_no" id="txt_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" data-parsley-trigger="change">
+                                    <input type="text" class="form-control number_validation" name="txt_mobile_no" id="txt_mobile_no"  placeholder="(XXX)-(XXX)-(XXXX)" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -480,9 +480,9 @@
                             </div> -->
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="session_id">Session</label>
+                                    <label for="session_id">Session <span class="text-danger">*</span></label>
                                     <select id="session_id" class="form-control" name="session_id">
-                                        <option value="0">Select Session</option>
+                                        <option value="">Select Session</option>
                                         @foreach($session as $ses)
                                         <option value="{{$ses['id']}}">{{$ses['name']}}</option>
                                         @endforeach
@@ -678,7 +678,7 @@
                                                     <span class="fas fa-phone-volume"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="(XXX)-(XXX)-(XXXX)" id="father_mobile_no" readonly>
+                                            <input type="number" class="form-control" aria-describedby="inputGroupPrepend" placeholder="(XXX)-(XXX)-(XXXX)" id="father_mobile_no" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -861,7 +861,7 @@
                                                     <span class="fas fa-phone-volume"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="(XXX)-(XXX)-(XXXX)" id="mother_mobile_no" readonly>
+                                            <input type="number" class="form-control" aria-describedby="inputGroupPrepend" placeholder="(XXX)-(XXX)-(XXXX)" id="mother_mobile_no" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -1054,7 +1054,7 @@
                                                     <span class="fas fa-phone-volume"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" id="guardian_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" readonly>
+                                            <input type="number" class="form-control" aria-describedby="inputGroupPrepend" id="guardian_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" readonly>
                                         </div>
                                     </div>
                                 </div>

@@ -3666,7 +3666,7 @@ class AdminController extends Controller
 
         ];
 
-        // dd($data);
+        dd($data);
         $response = Helper::PostMethod(config('constants.api.admission_add'), $data);
         // dd($response);
         return $response;

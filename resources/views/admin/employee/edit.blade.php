@@ -347,14 +347,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <label for="mobile_no">Mobile No</label>
-                                <div class="input-group input-group-merge">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-phone-volume"></span>
-                                        </div>
-                                    </div>
-                                    <input type="text" class="form-control" value="{{$employee['mobile_no']}}" placeholder="(XXX)-(XXX)-(XXXX)" name="mobile_no" id="mobile_no">
-                                </div>
+                                <input type="text" class="form-control number_validation" value="{{$employee['mobile_no']}}" placeholder="(XXX)-(XXX)-(XXXX)" name="mobile_no" id="mobile_no">   
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">

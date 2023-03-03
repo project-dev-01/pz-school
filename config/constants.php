@@ -751,6 +751,8 @@ return [
         'chat_teacher_list'=> $url.'/chat/get_teacher_list',
         'chat_group_list'=> $url.'/chat/get_group_list',
         
+        
+        'faq_email'=> $url.'/faq/email',
         ]
 
 ];

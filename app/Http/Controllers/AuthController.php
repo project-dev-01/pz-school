@@ -686,8 +686,10 @@ class AuthController extends Controller
     {
 
         $token = session()->get('token');
+        $id = session()->get('user_id');
         $data = [
-            'token' => $token
+            'token' => $token,
+            'id' => $id
         ];
         $response = Helper::PostMethod(config('constants.api.all_logout'), $data);
         $role = session()->get('role_id');

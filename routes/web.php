@@ -321,7 +321,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         // Section By Class Route
         Route::post('section-by-class', [AdminController::class, 'sectionByClass'])->name('admin.section_by_class');
         Route::get('exam-by-classSection', [AdminController::class, 'examByClassSec'])->name('admin.exam_by_classSection');
-
         // Employee routes
 
         Route::get('employee/employeelist', [AdminController::class, 'listEmployee'])->name('admin.listemployee');

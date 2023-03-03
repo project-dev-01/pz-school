@@ -606,11 +606,6 @@
                                                 <span>Exam Term</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="{{ route('admin.exam_hall')}}" class="nav-link {{ (request()->is('admin/exam_hall/index')) ? 'active' : '' }}">
-                                                <span>Exam Hall</span>
-                                            </a>
-                                        </li>
                                         <!-- <li>
                                             <a href="{{ route('admin.exam.mark_distribution')}}" class="nav-link {{ (request()->is('admin/exam/mark_distribution')) ? 'active' : '' }}">
                                                 <span>Distribution</span>
@@ -861,12 +856,12 @@
                     <div class="collapse" id="sidebarEvents">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('admin.event_type')}}" class="nav-link {{ (request()->is('admin/event_type*')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.event_type')}}" class="nav-link {{ (request()->is('admin/event_type/*')) ? 'active' : '' }}">
                                     <span> Event Type </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.event')}}" class="nav-link {{ (request()->is('admin/event*')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.event')}}" class="nav-link {{ (request()->is('admin/event/*')) ? 'active' : '' }}">
                                     <span> Events </span>
                                 </a>
                             </li>
@@ -1045,6 +1040,11 @@
                                         <li>
                                             <a href="{{ route('admin.stream_type')}}" class="nav-link {{ (request()->is('admin/stream_type*')) ? 'active' : '' }}">
                                                 <span>Stream Type </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.exam_hall')}}" class="nav-link {{ (request()->is('admin/exam_hall/index')) ? 'active' : '' }}">
+                                                <span>Location</span>
                                             </a>
                                         </li>
                                     </ul>

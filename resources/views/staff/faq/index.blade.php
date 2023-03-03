@@ -27,7 +27,7 @@
                         <i class="h1 mdi mdi-comment-multiple-outline text-muted"></i>
                         <h3 class="mb-3">Frequently Asked Questions</h3>
                         <p class="text-muted"> Have questions? Look no further. Our Frequently Asked Questions (FAQ) make it easy for you to find answers to your most pressing inquiries<br> into the School of Education. If you can't find your answer here, please feel free to contact us or use our site search to find the information you need.</p>
-                        <button type="button" class="btn btn-success waves-effect waves-light mt-2 mr-1" data-toggle="modal" data-target="#bs-example-modal-lg"><i class="mdi mdi-email-outline mr-1"></i>Email us your question</button>
+                        <button type="button" class="btn btn-success waves-effect waves-light mt-2 mr-1" data-toggle="modal" data-target="#faq-mail"><i class="mdi mdi-email-outline mr-1"></i>Email us your question</button>
                     </div>
                 </div><!-- end col -->
             </div><!-- end row -->
@@ -104,7 +104,8 @@
 
 </div> <!-- container -->
 
-<div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="faq-mail" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -115,17 +116,17 @@
             <div class="modal-body" style="margin-top: -76px;">
 
                 <div class="mt-4">
-                    <form>
+                    <form id="sendFaqMail" method="post" enctype="multipart/form-data" autocomplete="off">
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Enter Your Email">
+                            <input type="email" name="email" id="email" class="form-control" placeholder="Enter Your Email">
                         </div>
 
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Subject">
+                            <input type="text" name="subject" id="subject"  class="form-control" placeholder="Subject">
                         </div>
                         <div class="form-group">
                             <div class="summernote">
-                                <textarea class="form-control" id="student_remarks" rows="5" placeholder="Questions type here " name="student_remarks"></textarea>
+                                <textarea class="form-control"   id="remarks" rows="5" placeholder="Questions type here " name="remarks"></textarea>
                             </div>
                         </div>
 
@@ -143,4 +144,13 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+@endsection
+@section('scripts')
+
+<script>
+    var faqEmail = "{{ config('constants.api.faq_email') }}";
+</script>
+
+<script src="{{ asset('public/js/custom/faq.js') }}"></script>
+
 @endsection

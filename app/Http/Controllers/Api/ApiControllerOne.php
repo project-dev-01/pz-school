@@ -7760,4 +7760,30 @@ class ApiControllerOne extends BaseController
             }
         }
     }
+    public function faqEmail(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'email' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+
+            // return $request;
+            $email = $request->email;
+            // dd($link);
+            if ($email) {
+                $data = array('subject' => $request->subject,'remarks' => $request->remarks, 'email' => $email);
+                Mail::send('auth.faq_mail', $data, function ($message) use ($request) {
+                    $message->to('rajesh@aibots.my', 'members')->subject('FAQ');
+                    $message->from('rajesh@aibots.my', 'Password Reset');
+                });
+                // return $mail;
+                return $this->successResponse([], 'Mail Sended Successfully');
+            }
+        }
+    }
+    
 }

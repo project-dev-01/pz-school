@@ -17,9 +17,9 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('type');
-            $table->longText('remarks');
+            $table->longText('remarks')->nullable();
             $table->longText('audience');
-            $table->longText('selected_list');
+            $table->longText('selected_list')->nullable();
             $table->date('start_date');
             $table->date('end_date');
             $table->time('start_time')->nullable();

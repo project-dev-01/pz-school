@@ -90,16 +90,43 @@
                     </div>
 
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    @if(Session::get('role_id') == '1')
+                    <a href="{{ route('super_admin.settings')}}" class="dropdown-item notify-item">
                         <i class="fe-user"></i>
                         <span>My Account</span>
                     </a>
+                    @elseif(Session::get('role_id') == '3')
+                    <a href="{{ route('staff.settings')}}" class="dropdown-item notify-item">
+                        <i class="fe-user"></i>
+                        <span>My Account</span>
+                    </a>
+                    @elseif(Session::get('role_id') == '4')
+                    <a href="{{ route('teacher.settings')}}" class="dropdown-item notify-item">
+                        <i class="fe-user"></i>
+                        <span>My Account</span>
+                    </a>
+                    @elseif(Session::get('role_id') == '5')
+                    <a href="{{ route('parent.settings')}}" class="dropdown-item notify-item">
+                        <i class="fe-user"></i>
+                        <span>My Account</span>
+                    </a>
+                    @elseif(Session::get('role_id') == '6')
+                    <a href="{{ route('student.settings')}}" class="dropdown-item notify-item">
+                        <i class="fe-user"></i>
+                        <span>My Account</span>
+                    </a>
+                    @else
+                    <a href="{{ route('admin.settings')}}" class="dropdown-item notify-item">
+                        <i class="fe-user"></i>
+                        <span>My Account</span>
+                    </a>
+                    @endif
 
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <i class="fe-settings"></i>
                         <span>Settings</span>
-                    </a>
+                    </a> -->
 
                     <div class="dropdown-divider"></div>
 

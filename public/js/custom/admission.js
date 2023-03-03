@@ -1,4 +1,13 @@
 $(function () {
+    $(".number_validation").keypress(function(){
+        console.log(123)
+        var regex = new RegExp("^[0-9-+]");
+        var key = String.fromCharCode(event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
 
     $("#admission_date").datepicker({
         dateFormat: 'yy-mm-dd',
@@ -18,7 +27,7 @@ $(function () {
     // rules validation
     $("#addadmission").validate({
         rules: {
-            
+            session_id:"required",
             parent_id: "required",
             year: "required",
             txt_regiter_no: "required",

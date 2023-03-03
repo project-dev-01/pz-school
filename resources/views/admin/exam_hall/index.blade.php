@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Exam Hall')
+@section('title','Location')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Exam Hall List</h4>
+                <h4 class="page-title">Location</h4>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">Exam Hall List<h4>
+                        <h4 class="nav-link">Location<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
@@ -41,7 +41,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Hall No</th>
+                                    <th>Location Name</th>
                                     <th>No Of Seats</th>
                                     <th>Action</th>
                                 </tr>

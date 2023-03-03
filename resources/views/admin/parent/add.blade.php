@@ -349,7 +349,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
-                                    <input type="tel" class="form-control" name="mobile_no" id="mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" data-parsley-trigger="change">
+                                    <input type="text" class="form-control number_validation" name="mobile_no" id="mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">

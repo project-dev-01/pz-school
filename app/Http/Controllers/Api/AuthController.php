@@ -638,7 +638,8 @@ class AuthController extends BaseController
         if ($validator->fails()) {
             return $this->send422Error('Validation error.', ['error' => $validator->messages()]);
         }
-        $user = auth()->user();
+        // $user = auth()->user();
+        $user = User::where('id', $request->id)->first();
         if ($user['remember_token'] != $request->token) {
             //Request is validated, do logout 
             try {

@@ -814,4 +814,5 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     
     // import Employee Master details in csv
     Route::post('importcsv/employee/master', [ApiControllerOne::class, 'importCsvEmployeeMaster']);
+    Route::post('faq/email', [ApiControllerOne::class, 'faqEmail']);
 });

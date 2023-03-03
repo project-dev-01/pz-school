@@ -469,7 +469,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
-                                                <input type="tel" class="form-control" name="txt_mobile_no" id="txt_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" value="{{$student['mobile_no']}}" data-parsley-trigger="change">
+                                                <input type="text" class="form-control number_validation" name="txt_mobile_no" id="txt_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" value="{{$student['mobile_no']}}" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -598,9 +598,9 @@
                                         </div> -->
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="session_id">Session</label>
+                                                <label for="session_id">Session<span class="text-danger">*</span></label>
                                                 <select id="session_id" class="form-control" name="session_id">
-                                                    <option value="0">Select Session</option>
+                                                    <option value="">Select Session</option>
                                                     @foreach($session as $ses)
                                                     <option value="{{$ses['id']}}" {{$student['session_id'] == $ses['id'] ? "Selected" : "" }}>{{$ses['name']}}</option>
                                                     @endforeach

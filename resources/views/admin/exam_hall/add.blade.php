@@ -3,15 +3,15 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myaddExamHallModalLabel">Add Exam Hall</h4>
+                <h4 class="modal-title" id="myaddExamHallModalLabel">Add Location</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
                 <form id="exam-hall-form" method="post"  action="{{ route('admin.exam_hall.add') }}" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="hall_no">Hall Number<span class="text-danger">*</span></label>
-                        <input type="text"  name="hall_no" class="form-control" placeholder="Enter Hall Number">
+                        <label for="hall_no">Location Name<span class="text-danger">*</span></label>
+                        <input type="text"  name="hall_no" class="form-control" placeholder="Enter Location Name">
                     </div>
                     <div class="form-group">
                         <label for="no_of_seats">No of Seats<span class="text-danger">*</span></label>

@@ -1,5 +1,14 @@
 $(function () {
 
+    $(".number_validation").keypress(function(){
+        console.log(123)
+        var regex = new RegExp("^[0-9-+]");
+        var key = String.fromCharCode(event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
     $("#student").hide();
     var father_id = $("#father_id").val();
     if (father_id) {
@@ -418,6 +427,7 @@ $(function () {
 
     $("#editadmission").validate({
         rules: {
+            session_id:"required",
             year: "required",
             txt_regiter_no: "required",
             txt_emailid: {

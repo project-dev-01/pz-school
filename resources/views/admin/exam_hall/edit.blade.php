@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditExamHallModalLabel">Edit Exam Hall</h4>
+                <h4 class="modal-title" id="myeditExamHallModalLabel">Edit Location</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -11,8 +11,8 @@
                     @csrf
                     <input type="hidden" name="id">
                     <div class="form-group">
-                        <label for="hall_no">Hall Number</label>
-                        <input type="text"  name="hall_no" class="form-control" placeholder="Enter Hall Number">
+                        <label for="hall_no">Location Name</label>
+                        <input type="text"  name="hall_no" class="form-control" placeholder="Enter Location Name">
                     </div>
                     <div class="form-group">
                         <label for="no_of_seats">No of Seats</label>
