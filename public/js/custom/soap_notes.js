@@ -38,6 +38,8 @@ $(function () {
 
         $(IDnames).find(category_id).empty();
         $(IDnames).find(category_id).append('<option value="">Choose Category</option>');
+        $(IDnames).find("#soap_sub_category_id").empty();
+        $(IDnames).find("#soap_sub_category_id").append('<option value="">Choose Sub Category</option>');
 
         $.post(categoryList, { token: token, branch_id: branchID, soap_type_id: soap_type_id }, function (res) {
             if (res.code == 200) {
@@ -66,7 +68,7 @@ $(function () {
     function getSubCategory(soap_category_id, IDnames, sub_category_id) {
 
         $(IDnames).find("#soap_sub_category_id").empty();
-        $(IDnames).find("#soap_sub_category_id").append('<option value="">Choose Category</option>');
+        $(IDnames).find("#soap_sub_category_id").append('<option value="">Choose Sub Category</option>');
 
         $.post(subCategoryList, { token: token, branch_id: branchID, soap_category_id: soap_category_id }, function (res) {
             if (res.code == 200) {

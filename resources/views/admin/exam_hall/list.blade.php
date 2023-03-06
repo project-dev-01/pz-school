@@ -42,7 +42,6 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Location Name</th>
-                                    <th>Location ID</th>
                                     <th>No Of Seats</th>
                                     <th>Action</th>
                                 </tr>

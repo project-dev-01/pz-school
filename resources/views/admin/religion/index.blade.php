@@ -38,7 +38,6 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Religion ID</th>
                                     <th>Religion Name</th>
                                     <th>Action</th>
                                 </tr>

@@ -50,7 +50,6 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Staff ID</th>
                                     <th>Short Name</th>
                                     <th>Grade</th>
                                     <th>Stream Type</th>

@@ -43,7 +43,6 @@
                                     <th>#</th>
                                     <th>Subject Name</th>
                                     <th>Short Name</th>
-                                    <th>Subject ID</th>
                                     <th>Subject Code</th>
                                     <th>Subject Type</th>
                                     <th>Action</th>

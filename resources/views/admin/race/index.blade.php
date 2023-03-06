@@ -38,7 +38,6 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Race ID</th>
                                     <th>Race Name</th>
                                     <th>Action</th>
                                 </tr>

@@ -236,10 +236,6 @@ $(function () {
                 name: 'short_name'
             },
             {
-                data: 'id',
-                name: 'id'
-            },
-            {
                 data: 'subject_code',
                 name: 'subject_code'
             },

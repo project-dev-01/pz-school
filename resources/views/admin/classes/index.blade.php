@@ -40,7 +40,6 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Grade Name</th>
-                                    <th>Grade ID</th>
                                     <th>Grade Numeric</th>
                                     <th>Action</th>
                                 </tr>

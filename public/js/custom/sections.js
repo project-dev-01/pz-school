@@ -90,10 +90,6 @@ $(function () {
                 name: 'name'
             },
             {
-                data: 'id',
-                name: 'id'
-            },
-            {
                 data: 'actions',
                 name: 'actions',
                 orderable: false,

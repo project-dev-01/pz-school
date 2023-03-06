@@ -38,7 +38,6 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Reason ID</th>
                                     <th>Reason Name</th>
                                     <th>Action</th>
                                 </tr>

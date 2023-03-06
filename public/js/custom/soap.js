@@ -13,6 +13,11 @@ $(function () {
     $(document).on('click', '.student-row', function (e) {
         e.preventDefault();
         // return false;
+        
+        $(".student-row").css('background', 'white');
+        if (this.style.background == "" || this.style.background == "white") {
+            $(this).css('background', '#0ABAB5');
+        }
         var name = $(this).closest('tr').find('.stu-name').text();
         var class_name = $(this).closest('tr').find('.stu-class').text();
         var section = $(this).closest('tr').find('.stu-section').text();
@@ -454,8 +459,6 @@ $(function () {
 
     $(document).on('click', '.notes_data', function (e) {
         e.preventDefault();
-        // $("#notes-body").empty();
-        console.log('rt', this)
         var soap_category_id = $('#notes-category-id').val();
         var soap_sub_category_id = $("#notes-sub-category-id").val();
         var data = $(this).closest('tr').find('.notes').text();
@@ -464,7 +467,9 @@ $(function () {
         var tab = $(".tab-content").find(".active").data('tab');
 
         var count = $('#' + tab + '-category-' + soap_category_id + ' tr:last').find('.count').text();
+        
         if (!count) {
+            $("#" + tab + "-category-" + soap_category_id).empty();
             count = 0;
         }
         count++;

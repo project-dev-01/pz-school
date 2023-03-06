@@ -42,7 +42,6 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Term</th>
-                                    <th>Exam Setup ID</th>
                                     <th>Remarks</th>
                                     <th>Action</th>
                                 </tr>

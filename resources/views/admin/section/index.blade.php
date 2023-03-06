@@ -40,7 +40,6 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Class ID</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

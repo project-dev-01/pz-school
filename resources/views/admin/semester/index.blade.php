@@ -43,7 +43,6 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Semester ID</th>
                                     <th>Semester Name</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>

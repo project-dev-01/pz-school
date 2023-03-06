@@ -144,10 +144,6 @@ $(function () {
                 name: 'paper_name'
             },
             {
-                data: 'id',
-                name: 'id'
-            },
-            {
                 data: 'paper_type_name',
                 name: 'paper_type_name'
             },

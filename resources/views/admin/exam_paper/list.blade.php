@@ -43,7 +43,6 @@
                                     <th>Subject</th>
                                     <th>Grade Category</th>
                                     <th>Paper Name</th>
-                                    <th>Paper ID</th>
                                     <th>Paper Type</th>
                                     <th>Subject Weightage</th>
                                     <th>Action</th>

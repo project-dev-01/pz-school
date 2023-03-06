@@ -34,7 +34,6 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Academic Year</th>
-                                    <th>Academic ID</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

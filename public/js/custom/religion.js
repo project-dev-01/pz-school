@@ -82,10 +82,6 @@ $(function () {
                     name: 'DT_RowIndex'
                 },
                 {
-                    data: 'id',
-                    name: 'id'
-                },
-                {
                     data: 'name',
                     name: 'name'
                 },
