@@ -510,8 +510,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('faq/index', [AdminController::class, 'faqIndex'])->name('admin.faq.index');
         //Task routes
         Route::get('task/index', [AdminController::class, 'taskIndex'])->name('admin.task');
+        Route::get('task/create', [AdminController::class, 'createTask'])->name('admin.task.create');
         Route::post('task/add', [AdminController::class, 'addToDoList'])->name('admin.task.add');
         Route::get('task/get', [AdminController::class, 'getToDoList'])->name('admin.task.get');
+        Route::get('task/edit/{id}', [AdminController::class, 'editToDoList'])->name('admin.task.edit');
 
         // static page routes end
         // Settings

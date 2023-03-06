@@ -19,7 +19,7 @@ class CreateToDoListsTable extends Migration
             $table->dateTime('due_date')->nullable();
             $table->string('assign_to');
             $table->string('priority');
-            $table->text('check_list');
+            $table->text('check_list')->nullable();
             $table->text('task_description');
             $table->string('file');
             $table->string('mark_as_complete');

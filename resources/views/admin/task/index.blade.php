@@ -1,7 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','To Do List')
 @section('css')
-<style>
+<!-- <style>
     /* checklist css start  */
     li>p {
         display: inline-block;
@@ -59,7 +59,7 @@
     .select2-container--default .select2-selection--multiple .select2-selection__choice {
         background-color: blue !important;
     }
-</style>
+</style> -->
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -90,7 +90,8 @@
                 </ul><br>
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addToDoTask">Add</button>
+                        <!-- <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addToDoTask">Add</button> -->
+                        <a type="button" class="btn add-btn btn-rounded waves-effect waves-light" href="{{ route('admin.task.create')}}">Add</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -115,18 +116,15 @@
         </div>
     </div>
     <!--- end row -->
-    @include('admin.task.add')
 </div>
 <!-- container -->
 @endsection
 @section('scripts')
 <script>
-    var toDoListURL = "{{ route('admin.task.add') }}";
     var gettoDoListURL = "{{ route('admin.task.get') }}";
     var getToDORowURL = "{{ config('constants.api.get_to_do_row') }}";
     var deleteToDoList = "{{ config('constants.api.delete_to_do_list') }}";
 </script>
-<script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
 <script src="{{ asset('public/js/custom/to-do-list.js') }}"></script>
 
 @endsection

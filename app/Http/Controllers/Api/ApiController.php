@@ -10946,7 +10946,7 @@ class ApiController extends BaseController
             'due_date' => 'required',
             'assign_to' => 'required',
             'priority' => 'required',
-            'check_list' => 'required',
+            // 'check_list' => 'required',
             'task_description' => 'required'
         ]);
 
@@ -11021,8 +11021,8 @@ class ApiController extends BaseController
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
             // insert data
-            $sectionDetails = $createConnection->table('to_do_lists')->where('id', $request->id)->get();
-            return $this->successResponse($sectionDetails, 'to Do Lists row fetch successfully');
+            $toDoRow = $createConnection->table('to_do_lists')->where('id', $request->id)->get();
+            return $this->successResponse($toDoRow, 'to Do Lists row fetch successfully');
         }
     }
     // deleteToDoList

@@ -68,7 +68,7 @@ class AdminController extends Controller
         $user_id = session()->get('role_id');
         $data = [
             'user_id' => $user_id,
-            'id'=>$id
+            'id' => $id
         ];
         $category = Helper::GetMethod(config('constants.api.category'));
         $usernames = Helper::GETMethodWithData(config('constants.api.usernames_autocomplete'), $data);
@@ -123,7 +123,7 @@ class AdminController extends Controller
     public function forumPageCategories()
     {
         $adminlistcategoryvs = Helper::GetMethod(config('constants.api.adminlistcategoryvs'));
-         
+
         return view('admin.forum.page-categories', [
             'adminlistcategoryvs' => $adminlistcategoryvs['data']
         ]);
@@ -153,7 +153,7 @@ class AdminController extends Controller
     // forum create post 
     public function createpost(Request $request)
     {
-        
+
         $tags = implode(",", $request->tags);
         $adminid = 2;
         $rollid_tags = $adminid . ',' . $tags;
@@ -180,7 +180,7 @@ class AdminController extends Controller
         $adminid = 2;
         $rollid_tags = $adminid . ',' . $tags;
         $data = [
-            'id'=> $request->id,
+            'id' => $request->id,
             'user_id' => session()->get('user_id'),
             'user_name' => session()->get('name'),
             'topic_title' => $request->inputTopicTitle,
@@ -2353,11 +2353,23 @@ class AdminController extends Controller
     public function taskIndex()
     {
 
+        // $allocate_section_list = Helper::GetMethod(config('constants.api.allocate_section_list'));
+        // return view(
+        //     'admin.task.index',
+        //     [
+        //         'allocate_section_list' => $allocate_section_list['data'],
+        //     ]
+        // );
+        return view('admin.task.index');
+    }
+    // create task 
+    public function createTask()
+    {
         $allocate_section_list = Helper::GetMethod(config('constants.api.allocate_section_list'));
         return view(
-            'admin.task.index',
+            'admin.task.add',
             [
-                'allocate_section_list' => $allocate_section_list['data'],
+                'allocate_section_list' => $allocate_section_list['data']
             ]
         );
     }
@@ -2431,16 +2443,37 @@ class AdminController extends Controller
     public function getToDoList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.get_to_do_list'));
+        // dd($response['data']);
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
+                // return '<div class="button-list">
+                //                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteToDoListBtn"><i class="fe-trash-2"></i></a>
+                //         </div>';
                 return '<div class="button-list">
-                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteToDoListBtn"><i class="fe-trash-2"></i></a>
-                        </div>';
+                            <a href="' . route('admin.task.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
+                            <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteToDoListBtn"><i class="fe-trash-2"></i></a>
+                         </div>';
             })
 
             ->rawColumns(['actions'])
             ->make(true);
+    }
+    // edit to do list
+    public function editToDoList(Request $request, $id)
+    {
+        $res = [
+            'id' => $id,
+        ];
+        $taskRow = Helper::PostMethod(config('constants.api.get_to_do_row'), $res);
+        $allocate_section_list = Helper::GetMethod(config('constants.api.allocate_section_list'));
+        return view(
+            'admin.task.edit',
+            [
+                'to_do_row' => $taskRow['data'],
+                'allocate_section_list' => $allocate_section_list['data']
+            ]
+        );
     }
     public function evaluationReport()
     {
@@ -3666,7 +3699,7 @@ class AdminController extends Controller
 
         ];
 
-        dd($data);
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.admission_add'), $data);
         // dd($response);
         return $response;
@@ -6767,26 +6800,24 @@ class AdminController extends Controller
             $fileSize = $file->getSize();
             $mimeType = $file->getMimeType();
             $base64 = base64_encode(file_get_contents($request->file('file')));
-            
+
             $data = [
                 'file' => $base64,
-                'fileName' =>$filename,
-                'extension' =>$extension,
-                'tempPath' =>$tempPath,
-                'fileSize' =>$fileSize,
-                'mimeType' =>$mimeType,
+                'fileName' => $filename,
+                'extension' => $extension,
+                'tempPath' => $tempPath,
+                'fileSize' => $fileSize,
+                'mimeType' => $mimeType,
             ];
             // dd($data);
             $response = Helper::PostMethod(config('constants.api.import_employee_master'), $data);
             // dd($response);
-            if($response['code']==200){
+            if ($response['code'] == 200) {
 
-                return redirect()->route('admin.employee_master.import')->with('success',' Employee Master Imported Successfully');
-
-            }else{
-                return redirect()->route('admin.employee_master.import')->with('errors',$response['data']);
+                return redirect()->route('admin.employee_master.import')->with('success', ' Employee Master Imported Successfully');
+            } else {
+                return redirect()->route('admin.employee_master.import')->with('errors', $response['data']);
             }
         }
     }
-    
 }
